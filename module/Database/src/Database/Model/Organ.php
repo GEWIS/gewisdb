@@ -54,7 +54,7 @@ class Organ implements ResourceInterface
     /**
      * Members in this organ.
      *
-     * @ORM\ManyToMany(targetEntity="Database\Model\Member", inversedBy="organs")
+     * @ORM\ManyToMany(targetEntity="Member", inversedBy="organs")
      * @ORM\JoinTable(name="MemberOrgan",
      *      inverseJoinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")})
      */

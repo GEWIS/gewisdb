@@ -60,7 +60,7 @@ class Member
     /**
      * Organs this member is in.
      *
-     * @ORM\ManyToMany(targetEntity="Database\Model\Organ", mappedBy="members")
+     * @ORM\ManyToMany(targetEntity="Organ", mappedBy="members")
      */
     protected $organs;
 

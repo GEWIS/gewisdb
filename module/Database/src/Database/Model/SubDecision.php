@@ -31,7 +31,7 @@ class SubDecision
     /**
      * Decision.
      *
-     * @ORM\ManyToOne(targetEntity="Database\Model\Decision")
+     * @ORM\ManyToOne(targetEntity="Decision")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number"),
@@ -98,7 +98,7 @@ class SubDecision
      * subdecision. But the opposite does not have to hold. r_number might be
      * null, thus then there only would be a reference to a decision.
      *
-     * @ORM\ManyToOne(targetEntity="Database\Model\Decision")
+     * @ORM\ManyToOne(targetEntity="Decision")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
@@ -114,7 +114,7 @@ class SubDecision
      * We use this to reference to other subdecisions. This can be to revoke
      * them, or to reference a created organ.
      *
-     * @ORM\ManyToOne(targetEntity="Database\Model\SubDecision")
+     * @ORM\ManyToOne(targetEntity="SubDecision")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
@@ -171,7 +171,7 @@ class SubDecision
     /**
      * Member for which this subdecision is applicable
      *
-     * @ORM\ManyToOne(targetEntity="Database\Model\Member")
+     * @ORM\ManyToOne(targetEntity="Member")
      * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
     protected $member;
