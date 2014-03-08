@@ -51,6 +51,13 @@ class Meeting
         self::TYPE_VIRT
     );
 
+    /**
+     * Get all allowed meeting types.
+     */
+    public static function getTypes()
+    {
+        return self::$types;
+    }
 
     /**
      * Get the meeting type.

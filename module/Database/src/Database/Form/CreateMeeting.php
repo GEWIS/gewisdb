@@ -5,6 +5,8 @@ namespace Database\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
+use Database\Model\Meeting;
+
 class CreateMeeting extends Form
 {
 
@@ -55,24 +57,36 @@ class CreateMeeting extends Form
 
     protected function initFilters()
     {
-        /*
         $filter = new InputFilter();
 
         $filter->add(array(
-            'name' => 'course',
+            'name' => 'type',
             'required' => true,
             'validators' => array(
                 array(
-                    'name' => 'string_length',
+                    'name' => 'in_array',
                     'options' => array(
-                        'min' => 5,
-                        'max' => 6
+                        'haystack' => Meeting::getTypes()
                     )
-                ),
-                array('name' => 'alnum')
-            ),
-            'filters' => array(
-                array('name' => 'string_to_upper')
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'number',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'digits'
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'number',
+            'required' => true,
+            'validators' => array(
+                array('name' => 'digits')
             )
         ));
 
@@ -84,26 +98,6 @@ class CreateMeeting extends Form
             )
         ));
 
-        $filter->add(array(
-            'name' => 'notes',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'File\Extension',
-                    'options' => array(
-                        'extension' => 'pdf'
-                    )
-                ),
-                array(
-                    'name' => 'File\MimeType',
-                    'options' => array(
-                        'mimeType' => 'application/pdf'
-                    )
-                )
-            )
-        ));
-
         $this->setInputFilter($filter);
-         */
     }
 }

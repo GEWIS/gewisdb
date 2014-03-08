@@ -22,6 +22,13 @@ class DatabaseController extends AbstractActionController
     public function createAction()
     {
         $service = $this->getMeetingService();
+        $request = $this->getRequest();
+
+        if ($request->isPost() && $service->createMeeting($request->getPost())) {
+            return new ViewModel(array(
+                'succes' => true
+            ));
+        }
 
         return new ViewModel(array(
             'form' => $service->getCreateMeetingForm()
