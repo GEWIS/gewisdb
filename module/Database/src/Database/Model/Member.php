@@ -58,13 +58,64 @@ class Member
     protected $firstName;
 
     /**
-     * Organs this member is in.
+     * Sex of the member.
      *
-     * @ORM\ManyToMany(targetEntity="Organ", mappedBy="members")
+     * Either one of:
+     * - M
+     * - F
+     *
+     * @todo Create constants and enforce in setter
+     *
+     * @ORM\Column(type="string")
      */
-    protected $organs;
+    protected $sex;
 
-    // TODO: Much, MUCH more fields
+    /**
+     * Generation.
+     *
+     * This is the year that this member became a GEWIS member. This is not
+     * a academic year, but rather a calendar year.
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $generation;
+
+    /**
+     * Member type.
+     *
+     * This can be one of the following, as defined by the GEWIS statuten:
+     *
+     * - ordinary
+     * - prolonged
+     * - external
+     * - extraordinary
+     * - honorary
+     *
+     * You can find the GEWIS Statuten here:
+     *
+     * http://gewis.nl/vereniging/statuten/statuten.php
+     *
+     * Zie artikel 7 lid 1 en 2.
+     *
+     * @todo Create constants and enforce in setter
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $type;
+
+    /**
+     * Expiration date of membership.
+     *
+     * @ORM\Column(type="date")
+     */
+    protected $expiration;
+
+    /**
+     * Member birth date.
+     *
+     * @ORM\Column(type="date")
+     */
+    protected $birth;
 
     /**
      * Get the membership number.
@@ -174,5 +225,109 @@ class Member
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+    }
+
+    /**
+     * Get the member's sex.
+     *
+     * @return string
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    /**
+     * Set the member's sex.
+     *
+     * @todo enforce correct values
+     *
+     * @param string $sex
+     */
+    public function setSex($sex)
+    {
+        $this->sex = $sex;
+    }
+
+    /**
+     * Get the generation.
+     *
+     * @return string
+     */
+    public function getGeneration()
+    {
+        return $this->generation;
+    }
+
+    /**
+     * Set the generation.
+     *
+     * @param string $generation
+     */
+    public function setGeneration($generation)
+    {
+        $this->generation = $generation;
+    }
+
+    /**
+     * Get the member type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the member type.
+     *
+     * @todo Enforce this
+     *
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get the expiration date.
+     *
+     * @return \DateTime
+     */
+    public function getExpiration()
+    {
+        return $this->expiration;
+    }
+
+    /**
+     * Set the expiration date.
+     *
+     * @param \DateTime $date
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * Get the birth date.
+     *
+     * @return \DateTime
+     */
+    public function getBirth()
+    {
+        return $this->birth;
+    }
+
+    /**
+     * Set the birthdate.
+     *
+     * @param \DateTime $birth
+     */
+    public function setBirth(\DateTime $birth)
+    {
+        $this->birth = $birth;
     }
 }
