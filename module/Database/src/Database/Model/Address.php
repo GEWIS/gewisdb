@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Address
 {
 
+    const TYPE_HOME = 'home';
+    const TYPE_STUDENT = 'student'; // student room
+    const TYPE_MAIL = 'mail'; // mailing address
+
     /**
      * Member.
      *
@@ -30,12 +34,19 @@ class Address
      * - student (Student's home)
      * - mail (Where GEWIS mail should go to)
      *
-     * @todo enforce this with constants and setter
-     *
      * @ORM\Id
      * @ORM\Column(type="string")
      */
     protected $type;
+
+    /**
+     * Available types.
+     */
+    protected static $types = array(
+        self::TYPE_HOME,
+        self::TYPE_STUDENT,
+        self::TYPE_MAIL,
+    );
 
     /**
      * Country.
@@ -115,12 +126,15 @@ class Address
     /**
      * Set the type.
      *
-     * @todo enforce correct types.
-     *
      * @param string $type
+     *
+     * @throws \InvalidArgumentException When the type is incorrect
      */
     public function setType($type)
     {
+        if (!in_array($type, self::$types)) {
+            throw new \InvalidArgumentException("Non-existing type.");
+        }
         $this->type = $type;
     }
 
