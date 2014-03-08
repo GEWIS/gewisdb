@@ -15,6 +15,12 @@ class Member
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
 
+    const TYPE_ORDINARY = 'ordinary';
+    const TYPE_PROLONGED = 'prolonged';
+    const TYPE_EXTERNAL = 'external';
+    const TYPE_EXTRAORDINARY = 'extraordinary';
+    const TYPE_HONORARY = 'honorary';
+
     /**
      * The user
      *
@@ -106,11 +112,20 @@ class Member
      *
      * Zie artikel 7 lid 1 en 2.
      *
-     * @todo Create constants and enforce in setter
-     *
      * @ORM\Column(type="string")
      */
     protected $type;
+
+    /**
+     * Available member types.
+     */
+    protected static $types = array(
+        self::TYPE_ORDINARY,
+        self::TYPE_PROLONGED,
+        self::TYPE_EXTERNAL,
+        self::TYPE_EXTRAORDINARY,
+        self::TYPE_HONORARY
+    );
 
     /**
      * Expiration date of membership.
@@ -294,12 +309,15 @@ class Member
     /**
      * Set the member type.
      *
-     * @todo Enforce this
-     *
      * @param string $type
+     *
+     * @throws \InvalidArgumentException When the type is incorrect.
      */
     public function setType($type)
     {
+        if (!in_array($type, self::$types)) {
+            throw new \InvalidArgumentException("Nonexisting type given.");
+        }
         $this->type = $type;
     }
 
