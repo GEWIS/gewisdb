@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Member
 {
 
+    const GENDER_MALE = 'm';
+    const GENDER_FEMALE = 'f';
+
     /**
      * The user
      *
@@ -58,17 +61,23 @@ class Member
     protected $firstName;
 
     /**
-     * Sex of the member.
+     * Gender of the member.
      *
      * Either one of:
-     * - M
-     * - F
-     *
-     * @todo Create constants and enforce in setter
+     * - m
+     * - f
      *
      * @ORM\Column(type="string")
      */
-    protected $sex;
+    protected $gener;
+
+    /**
+     * Available genders.
+     */
+    protected static $genders = array(
+        self::GENDER_MALE,
+        self::GENDER_FEMALE
+    );
 
     /**
      * Generation.
@@ -228,25 +237,28 @@ class Member
     }
 
     /**
-     * Get the member's sex.
+     * Get the member's gender.
      *
      * @return string
      */
-    public function getSex()
+    public function getGender()
     {
-        return $this->sex;
+        return $this->gender;
     }
 
     /**
-     * Set the member's sex.
+     * Set the member's gender.
      *
-     * @todo enforce correct values
+     * @param string $gender
      *
-     * @param string $sex
+     * @throws \InvalidArgumentException when the gender does not have correct value
      */
-    public function setSex($sex)
+    public function setGender($gender)
     {
-        $this->sex = $sex;
+        if (!in_array($gender, self::$genders)) {
+            throw new \InvalidArgumentException("Invalid gender value");
+        }
+        $this->gender = $gender;
     }
 
     /**
