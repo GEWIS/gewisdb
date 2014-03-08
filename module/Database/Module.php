@@ -39,6 +39,9 @@ class Module
     public function getServiceConfig()
     {
         return array(
+            'invokables' => array(
+                'database_form_createmeeting' => 'Database\Form\CreateMeeting'
+            ),
             'factories' => array(
                 // fake 'alias' for entity manager, because doctrine uses an abstract factory
                 // and aliases don't work with abstract factories
