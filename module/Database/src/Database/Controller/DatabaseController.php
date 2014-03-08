@@ -21,8 +21,20 @@ class DatabaseController extends AbstractActionController
      */
     public function createAction()
     {
+        $service = $this->getMeetingService();
+
         return new ViewModel(array(
-            'form' => $this->getServiceLocator()->get('database_form_createmeeting')
+            'form' => $service->getCreateMeetingForm()
         ));
+    }
+
+    /**
+     * Get the meeting service.
+     *
+     * @return \Database\Service\Meeting
+     */
+    public function getMeetingService()
+    {
+        return $this->getServiceLocator()->get('database_service_meeting');
     }
 }

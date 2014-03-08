@@ -40,7 +40,8 @@ class Module
     {
         return array(
             'invokables' => array(
-                'database_form_createmeeting' => 'Database\Form\CreateMeeting'
+                'database_form_createmeeting' => 'Database\Form\CreateMeeting',
+                'database_service_meeting' => 'Database\Service\Meeting'
             ),
             'factories' => array(
                 // fake 'alias' for entity manager, because doctrine uses an abstract factory
