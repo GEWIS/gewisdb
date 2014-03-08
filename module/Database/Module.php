@@ -40,10 +40,25 @@ class Module
     {
         return array(
             'invokables' => array(
-                'database_form_createmeeting' => 'Database\Form\CreateMeeting',
                 'database_service_meeting' => 'Database\Service\Meeting'
             ),
             'factories' => array(
+                'database_form_createmeeting' => function ($sm) {
+                    $form = new \Database\Form\CreateMeeting();
+                    $form->setHydrator($sm->get('database_hydrator_meeting'));
+                    return $form;
+                },
+                'database_hydrator_meeting' => function ($sm) {
+                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                        $sm->get('database_doctrine_em'),
+                        'Database\Model\Meeting'
+                    );
+                },
+                'database_mapper_meeting' => function ($sm) {
+                    return new \Database\Mapper\Meeting(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
                 // fake 'alias' for entity manager, because doctrine uses an abstract factory
                 // and aliases don't work with abstract factories
                 'database_doctrine_em' => function ($sm) {
