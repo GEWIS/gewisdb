@@ -15,4 +15,12 @@ class DatabaseController extends AbstractActionController
     {
         return new ViewModel(array());
     }
+
+    /**
+     * Create a new meeting.
+     */
+    public function createAction()
+    {
+        return new ViewModel(array());
+    }
 }
