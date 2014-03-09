@@ -10,10 +10,16 @@ class DatabaseController extends AbstractActionController
 
     /**
      * Index action.
+     *
+     * Shows all meetings.
      */
     public function indexAction()
     {
-        return new ViewModel(array());
+        $service = $this->getMeetingService();
+
+        return new ViewModel(array(
+            'meetings' => $service->getAllMeetings()
+        ));
     }
 
     /**

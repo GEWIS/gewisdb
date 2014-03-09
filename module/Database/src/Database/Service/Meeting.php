@@ -10,6 +10,20 @@ class Meeting extends AbstractService
 {
 
     /**
+     * Get all meetings.
+     *
+     * @todo pagination
+     *
+     * @return array All meetings.
+     */
+    public function getAllMeetings()
+    {
+        $mapper = $this->getMeetingMapper();
+
+        return $mapper->findAll();
+    }
+
+    /**
      * Create a meeting.
      *
      * @param array $data Meeting creation data.

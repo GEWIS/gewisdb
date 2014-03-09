@@ -40,6 +40,16 @@ class Meeting
     }
 
     /**
+     * Find all meetings.
+     *
+     * @return array All meetings.
+     */
+    public function findAll()
+    {
+        return $this->getRepository()->findAll();
+    }
+
+    /**
      * Persist a meeting model.
      *
      * @param MeetingModel $meeting Meeting to persist.

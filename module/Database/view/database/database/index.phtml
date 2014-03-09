@@ -1,1 +1,34 @@
-Database manager.
+<?php
+use Database\Model\Meeting;
+function showType($type)
+{
+    switch ($type) {
+    case Meeting::TYPE_BV:
+        return 'BV';
+    case Meeting::TYPE_AV:
+        return 'AV';
+    case Meeting::TYPE_VV:
+        return 'VV';
+    case Meeting::TYPE_VIRT:
+        return 'Virt';
+    }
+}
+?>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Type</th>
+        <th>Vergadernummer</th>
+        <th>Datum</th>
+    </tr>
+    </thead>
+    <tbody>
+<?php foreach ($meetings as $meeting): ?>
+    <tr>
+        <td><?= showType($meeting->getType()) ?></td>
+        <td><?= $meeting->getNumber() ?></td>
+        <td><?= $meeting->getDate()->format('l j F Y') ?></td>
+    </tr>
+<?php endforeach; ?>
+    </tbody>
+</table>
