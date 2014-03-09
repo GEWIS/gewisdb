@@ -39,8 +39,7 @@ class Meeting extends AbstractService
             return false;
         }
 
-
-        // TODO: create meeting
+        $mapper->persist($meeting);
 
         return true;
     }
