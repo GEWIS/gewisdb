@@ -31,7 +31,11 @@ class Meeting extends AbstractService
 
         if ($mapper->isManaged($meeting)) {
             // meeting is already in the database
-            // TODO: set error message
+            $form->setMessages(array(
+                'number' => array(
+                    'Deze vergadering bestaat al'
+                )
+            ));
             return false;
         }
 
