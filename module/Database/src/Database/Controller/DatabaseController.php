@@ -26,7 +26,7 @@ class DatabaseController extends AbstractActionController
 
         if ($request->isPost() && $service->createMeeting($request->getPost())) {
             return new ViewModel(array(
-                'succes' => true
+                'success' => true
             ));
         }
 

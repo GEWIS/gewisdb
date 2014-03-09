@@ -4,6 +4,7 @@ namespace Database\Mapper;
 
 use Database\Model\Meeting as MeetingModel;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\UnitOfWork;
 
 class Meeting
 {
@@ -24,6 +25,18 @@ class Meeting
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
+    }
+
+    /**
+     * Check if a model is managed.
+     *
+     * @param MeetingModel $meeting
+     *
+     * @return boolean if managed
+     */
+    public function isManaged(MeetingModel $meeting)
+    {
+        return $this->em->getUnitOfWork()->isInIdentityMap($meeting);
     }
 
     /**
