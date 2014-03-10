@@ -24,10 +24,11 @@ function showType($type)
     </thead>
     <tbody>
 <?php foreach ($meetings as $meeting): ?>
+<?php $url = $this->url('meeting/view', array('type' => $meeting->getType(), 'number' => $meeting->getNumber())) ?>
     <tr>
-        <td><?= showType($meeting->getType()) ?></td>
-        <td><?= $meeting->getNumber() ?></td>
-        <td><?= $meeting->getDate()->format('l j F Y') ?></td>
+        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= showType($meeting->getType()) ?></a></td>
+        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getNumber() ?></a></td>
+        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getDate()->format('l j F Y') ?></a></td>
     </tr>
 <?php endforeach; ?>
     </tbody>
