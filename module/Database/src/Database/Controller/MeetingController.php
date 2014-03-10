@@ -61,7 +61,9 @@ class MeetingController extends AbstractActionController
      */
     public function decisionAction()
     {
-        return new ViewModel(array());
+        return new ViewModel(array(
+            'budgetform' => $this->getMeetingService()->getBudgetForm()
+        ));
     }
 
     /**

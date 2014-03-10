@@ -40,7 +40,8 @@ class Module
     {
         return array(
             'invokables' => array(
-                'database_service_meeting' => 'Database\Service\Meeting'
+                'database_service_meeting' => 'Database\Service\Meeting',
+                'database_form_budget' => 'Database\Form\Budget'
             ),
             'factories' => array(
                 'database_form_createmeeting' => function ($sm) {

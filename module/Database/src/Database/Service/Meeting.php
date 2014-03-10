@@ -82,6 +82,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get budget form.
+     *
+     * @return \Database\Form\Budget
+     */
+    public function getBudgetForm()
+    {
+        return $this->getServiceManager()->get('database_form_budget');
+    }
+
+    /**
      * Get the meeting mapper.
      *
      * @return \Database\Mapper\Meeting
