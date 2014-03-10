@@ -2,13 +2,13 @@
 return array(
     'router' => array(
         'routes' => array(
-            'database' => array(
+            'meeting' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/database',
+                    'route'    => '/meeting',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Database',
+                        'controller'    => 'Meeting',
                         'action'        => 'index',
                     ),
                 ),
@@ -29,7 +29,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Database\Controller\Database' => 'Database\Controller\DatabaseController'
+            'Database\Controller\Meeting' => 'Database\Controller\MeetingController'
         )
     ),
     'view_manager' => array(
