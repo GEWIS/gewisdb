@@ -15,7 +15,7 @@ class Decision
     /**
      * Meeting.
      *
-     * @ORM\ManyToOne(targetEntity="Meeting")
+     * @ORM\ManyToOne(targetEntity="Meeting", inversedBy="decisions")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="meeting_type", referencedColumnName="type"),
      *  @ORM\JoinColumn(name="meeting_number", referencedColumnName="number"),

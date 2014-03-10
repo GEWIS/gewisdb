@@ -3,6 +3,7 @@
 namespace Database\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Meeting model.
@@ -40,6 +41,13 @@ class Meeting
     protected $date;
 
     /**
+     * Decisions.
+     *
+     * @ORM\OneToMany(targetEntity="Decision", mappedBy="meeting")
+     */
+    protected $decisions;
+
+    /**
      * Allowed meeting types.
      *
      * @var array
@@ -57,6 +65,14 @@ class Meeting
     public static function getTypes()
     {
         return self::$types;
+    }
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->decisions = new ArrayCollection();
     }
 
     /**
@@ -120,5 +136,37 @@ class Meeting
     public function setDate(\DateTime $date)
     {
         $this->date = $date;
+    }
+
+    /**
+     * Get the decisions.
+     *
+     * @return array
+     */
+    public function getDecisions()
+    {
+        return $this->decisions;
+    }
+
+    /**
+     * Add a decision.
+     *
+     * @param Decision $decision
+     */
+    public function addDecision(Decision $decision)
+    {
+        $this->decisions[] = $decision;
+    }
+
+    /**
+     * Add multiple decisions.
+     *
+     * @param array $decisions
+     */
+    public function addDecisions($decisions)
+    {
+        foreach ($decisions as $decision) {
+            $this->addDecision($decision);
+        }
     }
 }
