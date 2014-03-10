@@ -21,11 +21,13 @@ function showType($type)
 
 <ul>
 <?php foreach ($meeting->getDecisions() as $decision): ?>
-    <li>Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?></li>
+    <li>
+        Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:
+        <ul>
+        <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
+            <li><?= $subdecision->getContent() ?></li>
+        <?php endforeach; ?>
+        </ul>
+    </li>
 <?php endforeach; ?>
 </ul>
-
-<?php
-var_dump($type);
-var_dump($number);
-\Doctrine\Common\Util\Debug::dump($meeting, 5, false);
