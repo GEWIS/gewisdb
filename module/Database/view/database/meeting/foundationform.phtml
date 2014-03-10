@@ -34,7 +34,26 @@ $element->setAttribute('placeholder', 'Afkorting');
 <div class="form-group">
 <?php
 $element = $form->get('members');
+
+$fs = $element->getTemplateElement();
+// render template element
+ob_start();
 ?>
+    <div class="form-inline" style="margin-bottom: 5px;">
+    <?php foreach ($fs->getIterator() as $el): ?>
+        <div class="form-group">
+        <?php
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formInput($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+    <?php endforeach; ?>
+        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+    </div>
+<?php $tpl = trim(ob_get_clean()); ?>
+<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>"></span>
 <?php foreach ($element->getIterator() as $fs): ?>
     <div class="form-inline" style="margin-bottom: 5px;">
     <?php foreach ($fs->getIterator() as $el): ?>
@@ -56,7 +75,7 @@ $element = $form->get('members');
 <?php
 $submit = $form->get('submit');
 $submit->setLabel('Submit');
-$submit->setAttribute('class', 'btn btn-default');
+$submit->setAttribute('class', 'btn btn-primary');
 ?>
 <?= $this->formButton($submit) ?>
 
