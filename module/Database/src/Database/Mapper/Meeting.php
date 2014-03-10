@@ -61,11 +61,12 @@ class Meeting
     {
         $qb = $this->em->createQueryBuilder();
 
-        $qb->select('m, d')
+        $qb->select('m, d, s')
             ->from('Database\Model\Meeting', 'm')
             ->where('m.type = :type')
             ->andWhere('m.number = :number')
-            ->leftJoin('m.decisions', 'd');
+            ->leftJoin('m.decisions', 'd')
+            ->leftJoin('d.subdecisions', 's');
 
         $qb->setParameter(':type', $type);
         $qb->setParameter(':number', $number);
