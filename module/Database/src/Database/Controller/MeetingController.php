@@ -42,6 +42,17 @@ class MeetingController extends AbstractActionController
     }
 
     /**
+     * View a meeting.
+     */
+    public function viewAction()
+    {
+        return new ViewModel(array(
+            'type' => $this->params()->fromRoute('type'),
+            'number' => $this->params()->fromRoute('number')
+        ));
+    }
+
+    /**
      * Get the meeting service.
      *
      * @return \Database\Service\Meeting

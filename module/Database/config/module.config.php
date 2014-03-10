@@ -14,10 +14,23 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'view' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/:type/:number',
+                            'constraints' => array(
+                                'type' => 'av|bv|vv|virt',
+                                'number' => '[0-9]*'
+                            ),
+                            'defaults' => array(
+                                'action' => 'view'
+                            )
+                        )
+                    ),
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '[/:action]',
+                            'route'    => '/:action',
                             'constraints' => array(
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
