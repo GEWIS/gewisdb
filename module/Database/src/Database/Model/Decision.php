@@ -147,4 +147,36 @@ class Decision
     {
         return $this->number;
     }
+
+    /**
+     * Get the subdecisions.
+     *
+     * @return array
+     */
+    public function getSubdecisions()
+    {
+        return $this->subdecisions;
+    }
+
+    /**
+     * Add a subdecision.
+     *
+     * @param SubDecision $decision
+     */
+    public function addSubdecision(SubDecision $subdecision)
+    {
+        $this->subdecisions[] = $subdecision;
+    }
+
+    /**
+     * Add multiple subdecisions.
+     *
+     * @param array $subdecisions
+     */
+    public function addSubdecisions($subdecisions)
+    {
+        foreach ($subdecisions as $subdecision) {
+            $this->addSubdecision($subdecision);
+        }
+    }
 }
