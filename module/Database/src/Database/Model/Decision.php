@@ -60,6 +60,13 @@ class Decision
     protected $number;
 
     /**
+     * Subdecisions
+     *
+     * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision")
+     */
+    protected $subdecisions;
+
+    /**
      * Set the meeting.
      *
      * @param Meeting $meeting

@@ -31,7 +31,7 @@ class SubDecision
     /**
      * Decision.
      *
-     * @ORM\ManyToOne(targetEntity="Decision")
+     * @ORM\ManyToOne(targetEntity="Decision", inversedBy="subdecisions")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number"),
