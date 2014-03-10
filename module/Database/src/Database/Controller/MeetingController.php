@@ -57,6 +57,14 @@ class MeetingController extends AbstractActionController
     }
 
     /**
+     * Decision action.
+     */
+    public function decisionAction()
+    {
+        return new ViewModel(array());
+    }
+
+    /**
      * Get the meeting service.
      *
      * @return \Database\Service\Meeting
