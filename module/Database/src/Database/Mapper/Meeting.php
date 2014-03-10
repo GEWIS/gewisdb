@@ -66,7 +66,10 @@ class Meeting
             ->where('m.type = :type')
             ->andWhere('m.number = :number')
             ->leftJoin('m.decisions', 'd')
-            ->leftJoin('d.subdecisions', 's');
+            ->leftJoin('d.subdecisions', 's')
+            ->orderBy('d.point')
+            ->addOrderBy('d.number')
+            ->addOrderBy('s.number');
 
         $qb->setParameter(':type', $type);
         $qb->setParameter(':number', $number);
