@@ -1,3 +1,14 @@
+<script>
+     function add_member() {
+         var currentCount = $('#members').children().length;
+         var template = $('#members-template').data('template');
+         template = template.replace(/__index__/g, currentCount);
+
+         $('#members').append(template);
+
+         return false;
+     }
+</script>
 <?php
 $form = $this->form;
 $form->prepare();
@@ -31,7 +42,8 @@ $element->setAttribute('placeholder', 'Afkorting');
     <?= $this->formElementErrors($element) ?>
 </div>
 
-<div class="form-group">
+<div class="form-group" id="members">
+<strong>Leden</strong>
 <?php
 $element = $form->get('members');
 
@@ -53,7 +65,7 @@ ob_start();
         <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
 <?php $tpl = trim(ob_get_clean()); ?>
-<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>"></span>
+<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="members-template"></span>
 <?php foreach ($element->getIterator() as $fs): ?>
     <div class="form-inline" style="margin-bottom: 5px;">
     <?php foreach ($fs->getIterator() as $el): ?>
@@ -69,8 +81,9 @@ ob_start();
         <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
 <?php endforeach; ?>
-    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg toe</button>
 </div>
+<button type="button" class="btn btn-success" onclick="add_member()"><span class="glyphicon glyphicon-plus"></span> Voeg toe</button>
+<br><br>
 
 <?php
 $submit = $form->get('submit');
