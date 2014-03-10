@@ -14,11 +14,13 @@
 <div class="tab-content">
     <div class="tab-pane active" id="begroting">
     <?= $this->partial('database/meeting/budgetform', array(
-    'form' => $budgetform
+        'form' => $budgetform
     )); ?>
     </div>
     <div class="tab-pane" id="oprichting">
-        Oprichting
+    <?= $this->partial('database/meeting/foundationform', array(
+        'form' => $foundationform
+    )); ?>
     </div>
     <div class="tab-pane" id="opheffing">
         Opheffing

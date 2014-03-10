@@ -82,6 +82,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get foundation form.
+     *
+     * @return \Database\Form\Foundation
+     */
+    public function getFoundationForm()
+    {
+        return $this->getServiceManager()->get('database_form_foundation');
+    }
+
+    /**
      * Get budget form.
      *
      * @return \Database\Form\Budget

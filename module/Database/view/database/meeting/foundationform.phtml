@@ -1,0 +1,63 @@
+<?php
+$form = $this->form;
+$form->prepare();
+
+$form->setAttribute('action', $this->url('meeting/default', array('action' => 'decision')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+<?php
+$element = $form->get('name');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', 'Naam');
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('abbr');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', 'Afkorting');
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('members');
+?>
+<?php foreach ($element->getIterator() as $fs): ?>
+    <div class="form-inline" style="margin-bottom: 5px;">
+    <?php foreach ($fs->getIterator() as $el): ?>
+        <div class="form-group">
+        <?php
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formInput($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+    <?php endforeach; ?>
+        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+    </div>
+<?php endforeach; ?>
+    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg toe</button>
+</div>
+
+<?php
+$submit = $form->get('submit');
+$submit->setLabel('Submit');
+$submit->setAttribute('class', 'btn btn-default');
+?>
+<?= $this->formButton($submit) ?>
+
+<?= $this->form()->closeTag(); ?>
