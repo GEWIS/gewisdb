@@ -10,6 +10,19 @@ class Meeting extends AbstractService
 {
 
     /**
+     * Get a meeting.
+     *
+     * @param string $type
+     * @param int $number
+     *
+     * @return MeetingModel
+     */
+    public function getMeeting($type, $number)
+    {
+        return $this->getMeetingMapper()->find($type, $number);
+    }
+
+    /**
      * Get all meetings.
      *
      * @todo pagination

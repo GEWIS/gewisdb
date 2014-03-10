@@ -48,7 +48,11 @@ class MeetingController extends AbstractActionController
     {
         return new ViewModel(array(
             'type' => $this->params()->fromRoute('type'),
-            'number' => $this->params()->fromRoute('number')
+            'number' => $this->params()->fromRoute('number'),
+            'meeting' => $this->getMeetingService()->getMeeting(
+                $this->params()->fromRoute('type'),
+                $this->params()->fromRoute('number')
+            )
         ));
     }
 
