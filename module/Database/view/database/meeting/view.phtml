@@ -1,4 +1,31 @@
 <?php
+use Database\Model\Meeting;
+function showType($type)
+{
+    switch ($type) {
+    case Meeting::TYPE_BV:
+        return 'BV';
+    case Meeting::TYPE_AV:
+        return 'AV';
+    case Meeting::TYPE_VV:
+        return 'VV';
+    case Meeting::TYPE_VIRT:
+        return 'Virt';
+    }
+}
+?>
+    <h1><?= showType($meeting->getType()) ?> <?= $meeting->getNumber() ?>
+    <small><?= $meeting->getDate()->format('l j F Y') ?></small></h1>
+
+<h2>Besluiten</h2>
+
+<ul>
+<?php foreach ($meeting->getDecisions() as $decision): ?>
+    <li>Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?></li>
+<?php endforeach; ?>
+</ul>
+
+<?php
 var_dump($type);
 var_dump($number);
-var_dump($meeting);
+\Doctrine\Common\Util\Debug::dump($meeting, 5, false);
