@@ -12,6 +12,9 @@
         $(ele).parent().remove();
     }
 </script>
+<p>
+Let op! Hiermee kunnen functies niet gewisseld worden!
+</p>
 <?php
 $form = $this->form;
 $form->prepare();
@@ -46,20 +49,20 @@ ob_start();
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
         <?php
+        $el = $fs->get('type');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formSelect($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <div class="form-group">
+        <?php
         $el = $fs->get('name');
         $el->setAttribute('class', 'form-control');
         $el->setAttribute('placeholder', $el->getLabel());
         ?>
         <?= $this->formInput($el) ?>
-        <?= $this->formElementErrors($el) ?>
-        </div>
-        <div class="form-group">
-        <?php
-        $el = $fs->get('function');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formSelect($el) ?>
         <?= $this->formElementErrors($el) ?>
         </div>
         <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
@@ -70,20 +73,20 @@ ob_start();
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
         <?php
+        $el = $fs->get('type');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formSelect($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <div class="form-group">
+        <?php
         $el = $fs->get('name');
         $el->setAttribute('class', 'form-control');
         $el->setAttribute('placeholder', $el->getLabel());
         ?>
         <?= $this->formInput($el) ?>
-        <?= $this->formElementErrors($el) ?>
-        </div>
-        <div class="form-group">
-        <?php
-        $el = $fs->get('function');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formSelect($el) ?>
         <?= $this->formElementErrors($el) ?>
         </div>
         <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
