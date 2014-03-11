@@ -38,11 +38,35 @@ return array(
                     ),
                 ),
             ),
+            'member' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/member',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'Member',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:action',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'Database\Controller\Meeting' => 'Database\Controller\MeetingController'
+            'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
+            'Database\Controller\Member' => 'Database\Controller\MemberController'
         )
     ),
     'view_manager' => array(
