@@ -1,13 +1,16 @@
 <script>
+    var count = 2;
      function add_member() {
-         var currentCount = $('#members').children().length;
          var template = $('#members-template').data('template');
-         template = template.replace(/__index__/g, currentCount);
+         template = template.replace(/__index__/g, count++);
 
          $('#members').append(template);
 
          return false;
      }
+    function remove_member(ele) {
+        $(ele).parent().remove();
+    }
 </script>
 <?php
 $form = $this->form;
@@ -20,6 +23,14 @@ $form->setAttribute('role', 'form');
 
 echo $this->form()->openTag($form);
 ?>
+<div class="form-group">
+<?php
+$element = $form->get('type');
+$element->setLabelAttributes(array('class' => 'radio-inline'));
+?>
+    <?= $this->formRadio($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
 <div class="form-group">
 <?php
 $element = $form->get('name');
@@ -52,33 +63,49 @@ $fs = $element->getTemplateElement();
 ob_start();
 ?>
     <div class="form-inline" style="margin-bottom: 5px;">
-    <?php foreach ($fs->getIterator() as $el): ?>
         <div class="form-group">
         <?php
+        $el = $fs->get('name');
         $el->setAttribute('class', 'form-control');
         $el->setAttribute('placeholder', $el->getLabel());
         ?>
         <?= $this->formInput($el) ?>
         <?= $this->formElementErrors($el) ?>
         </div>
-    <?php endforeach; ?>
-        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+        <div class="form-group">
+        <?php
+        $el = $fs->get('function');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formSelect($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <button type="button" class="btn btn-danger" onclick="remove_member(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
 <?php $tpl = trim(ob_get_clean()); ?>
 <span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="members-template"></span>
 <?php foreach ($element->getIterator() as $fs): ?>
     <div class="form-inline" style="margin-bottom: 5px;">
-    <?php foreach ($fs->getIterator() as $el): ?>
         <div class="form-group">
         <?php
+        $el = $fs->get('name');
         $el->setAttribute('class', 'form-control');
         $el->setAttribute('placeholder', $el->getLabel());
         ?>
         <?= $this->formInput($el) ?>
         <?= $this->formElementErrors($el) ?>
         </div>
-    <?php endforeach; ?>
-        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+        <div class="form-group">
+        <?php
+        $el = $fs->get('function');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formSelect($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <button type="button" class="btn btn-danger" onclick="remove_member(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
 <?php endforeach; ?>
 </div>
@@ -87,7 +114,7 @@ ob_start();
 
 <?php
 $submit = $form->get('submit');
-$submit->setLabel('Submit');
+$submit->setLabel('Richt op');
 $submit->setAttribute('class', 'btn btn-primary');
 ?>
 <?= $this->formButton($submit) ?>

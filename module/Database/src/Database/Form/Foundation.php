@@ -13,6 +13,18 @@ class Foundation extends Form
         parent::__construct();
 
         $this->add(array(
+            'name' => 'type',
+            'type' => 'radio',
+            'options' => array(
+                'label' => 'Type',
+                'value_options' => array(
+                    'commissie' => 'Commissie',
+                    'dispuut' => 'Dispuut'
+                )
+            )
+        ));
+
+        $this->add(array(
             'name' => 'name',
             'type' => 'text',
             'options' => array(
@@ -45,7 +57,7 @@ class Foundation extends Form
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => 'Verzend'
+                'value' => 'Richt op'
             )
         ));
 

@@ -21,9 +21,14 @@ class Member extends Fieldset
 
         $this->add(array(
             'name' => 'function',
-            'type' => 'text',
+            'type' => 'select',
             'options' => array(
-                'label' => 'Functie'
+                'label' => 'Functie',
+                'value_options' => array(
+                    'lid' => 'Lid',
+                    'vz' => 'Voorzitter',
+                    'secr' => 'Secretaris'
+                )
             )
         ));
     }
