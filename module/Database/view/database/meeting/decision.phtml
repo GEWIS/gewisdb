@@ -28,7 +28,9 @@
     )); ?>
     </div>
     <div class="tab-pane" id="installatie">
-        Installatie / Decharge
+    <?= $this->partial('database/meeting/installform', array(
+        'form' => $installform
+    )); ?>
     </div>
     <div class="tab-pane" id="functiewissel">
         Functiewissel

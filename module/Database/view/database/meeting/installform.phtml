@@ -1,0 +1,103 @@
+<script>
+    var count = 1;
+     function add_member_install() {
+         var template = $('#members-template-install').data('template');
+         template = template.replace(/__index__/g, count++);
+
+         $('#members-install').append(template);
+
+         return false;
+     }
+    function remove_member_install(ele) {
+        $(ele).parent().remove();
+    }
+</script>
+<?php
+$form = $this->form;
+$form->prepare();
+
+$form->setAttribute('action', $this->url('meeting/default', array('action' => 'decision')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+<?php
+$element = $form->get('name');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', 'Orgaan');
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group" id="members-install">
+<strong>Te installeren leden</strong>
+<?php
+$element = $form->get('members');
+
+$fs = $element->getTemplateElement();
+// render template element
+ob_start();
+?>
+    <div class="form-inline" style="margin-bottom: 5px;">
+        <div class="form-group">
+        <?php
+        $el = $fs->get('name');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formInput($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <div class="form-group">
+        <?php
+        $el = $fs->get('function');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formSelect($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+    </div>
+<?php $tpl = trim(ob_get_clean()); ?>
+<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="members-template-install"></span>
+<?php foreach ($element->getIterator() as $fs): ?>
+    <div class="form-inline" style="margin-bottom: 5px;">
+        <div class="form-group">
+        <?php
+        $el = $fs->get('name');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formInput($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <div class="form-group">
+        <?php
+        $el = $fs->get('function');
+        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('placeholder', $el->getLabel());
+        ?>
+        <?= $this->formSelect($el) ?>
+        <?= $this->formElementErrors($el) ?>
+        </div>
+        <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+    </div>
+<?php endforeach; ?>
+</div>
+<button type="button" class="btn btn-success" onclick="add_member_install()"><span class="glyphicon glyphicon-plus"></span> Voeg toe</button>
+<br><br>
+
+<?php
+$submit = $form->get('submit');
+$submit->setLabel('Installeer leden');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+
+<?= $this->form()->closeTag(); ?>

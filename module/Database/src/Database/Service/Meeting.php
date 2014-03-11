@@ -82,6 +82,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get install form.
+     *
+     * @return \Database\Form\Install
+     */
+    public function getInstallForm()
+    {
+        return $this->getServiceManager()->get('database_form_install');
+    }
+
+    /**
      * Get abolish form.
      *
      * @return \Database\Form\Abolish
