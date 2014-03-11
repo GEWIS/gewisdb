@@ -23,7 +23,9 @@
     )); ?>
     </div>
     <div class="tab-pane" id="opheffing">
-        Opheffing
+    <?= $this->partial('database/meeting/abolishform', array(
+        'form' => $abolishform
+    )); ?>
     </div>
     <div class="tab-pane" id="installatie">
         Installatie / Decharge

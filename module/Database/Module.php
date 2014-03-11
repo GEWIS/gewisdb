@@ -42,6 +42,7 @@ class Module
             'invokables' => array(
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_form_budget' => 'Database\Form\Budget',
+                'database_form_abolish' => 'Database\Form\Abolish',
                 'database_form_foundation' => 'Database\Form\Foundation'
             ),
             'factories' => array(

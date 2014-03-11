@@ -82,6 +82,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get abolish form.
+     *
+     * @return \Database\Form\Abolish
+     */
+    public function getAbolishForm()
+    {
+        return $this->getServiceManager()->get('database_form_abolish');
+    }
+
+    /**
      * Get foundation form.
      *
      * @return \Database\Form\Foundation
