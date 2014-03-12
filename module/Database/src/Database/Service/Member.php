@@ -14,6 +14,16 @@ class Member extends AbstractService
      */
     public function search($query)
     {
-        // TODO: implementation
+        return $this->getMemberMapper()->search($query);
+    }
+
+    /**
+     * Get the member mapper.
+     *
+     * @return \Database\Mapper\Member
+     */
+    public function getMemberMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_member');
     }
 }

@@ -59,6 +59,11 @@ class Module
                         'Database\Model\Meeting'
                     );
                 },
+                'database_mapper_member' => function ($sm) {
+                    return new \Database\Mapper\Member(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
                 'database_mapper_meeting' => function ($sm) {
                     return new \Database\Mapper\Meeting(
                         $sm->get('database_doctrine_em')

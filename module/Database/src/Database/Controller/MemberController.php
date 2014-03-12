@@ -4,6 +4,9 @@ namespace Database\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
+
+use Database\Model\Member;
 
 class MemberController extends AbstractActionController
 {
@@ -17,9 +20,17 @@ class MemberController extends AbstractActionController
     {
         $service = $this->getMemberService();
 
-        // TODO: implementation
+        $query = $this->params()->fromQuery('q');
 
-        return new ViewModel(array());
+        $res = $service->search($query);
+
+        $res = array_map(function ($member) {
+            return $member->toArray();
+        }, $res);
+
+        return new JsonModel(array(
+            'json' => $res
+        ));
     }
 
     /**

@@ -26,8 +26,6 @@ class Member
      *
      * @ORM\Id
      * @ORM\Column(type="integer", name="lidnr")
-     * @ORM\OneToOne(targetEntity="User\Model\User")
-     * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
     protected $lidnr;
 
@@ -359,5 +357,22 @@ class Member
     public function setBirth(\DateTime $birth)
     {
         $this->birth = $birth;
+    }
+
+    /**
+     * Convert to array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'lidnr' => $this->getLidnr(),
+            'email' => $this->getEmail(),
+            'lastName' => $this->getLastName(),
+            'middleName' => $this->getMiddleName(),
+            'initials' => $this->getInitials(),
+            'firstName' => $this->getFirstName()
+        );
     }
 }
