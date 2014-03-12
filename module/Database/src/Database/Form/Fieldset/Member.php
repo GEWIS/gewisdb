@@ -11,12 +11,20 @@ class Member extends Fieldset
     {
         parent::__construct('member');
 
+        // is only there for fun, will only be used as source for 'lidnr' autocomplete
+        // which uses AJAX to find members
         $this->add(array(
             'name' => 'name',
             'type' => 'text',
             'options' => array(
                 'label' => 'Lid'
             )
+        ));
+
+        // actual way to find the member
+        $this->add(array(
+            'name' => 'lidnr',
+            'type' => 'hidden',
         ));
 
         $this->add(array(

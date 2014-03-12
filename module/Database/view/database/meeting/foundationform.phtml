@@ -14,12 +14,19 @@
                         var name = member.firstName + ' ' + member.middleName + ' ' + member.lastName;
                         name += ' (' + member.lidnr + ')';
 
-                        ret.push(name);
+                        ret.push({
+                            label: name,
+                            value: name,
+                            id: member.lidnr
+                        });
                     });
 
                     // show data
                     response(ret);
                 });
+            },
+            select: function (event, ui) {
+                $(event.target).parent().find("input.member-lidnr").val(ui.item.id);
             }
         });
     }
@@ -91,22 +98,28 @@ ob_start();
 ?>
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
-        <?php
-        $el = $fs->get('name');
-        $el->setAttribute('class', 'form-control member-autocomplete');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formInput($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('name');
+            $el->setAttribute('class', 'form-control member-autocomplete');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formInput($el) ?>
+            <?php
+            // hidden element for actual membership number
+            $el = $fs->get('lidnr');
+            $el->setAttribute('class', 'member-lidnr');
+            ?>
+            <?= $this->formHidden($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <div class="form-group">
-        <?php
-        $el = $fs->get('function');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formSelect($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('function');
+            $el->setAttribute('class', 'form-control');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formSelect($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <button type="button" class="btn btn-danger" onclick="remove_member(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
@@ -115,22 +128,28 @@ ob_start();
 <?php foreach ($element->getIterator() as $fs): ?>
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
-        <?php
-        $el = $fs->get('name');
-        $el->setAttribute('class', 'form-control member-autocomplete');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formInput($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('name');
+            $el->setAttribute('class', 'form-control member-autocomplete');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formInput($el) ?>
+            <?php
+            // hidden element for actual membership number
+            $el = $fs->get('lidnr');
+            $el->setAttribute('class', 'member-lidnr');
+            ?>
+            <?= $this->formHidden($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <div class="form-group">
-        <?php
-        $el = $fs->get('function');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formSelect($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('function');
+            $el->setAttribute('class', 'form-control');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formSelect($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <button type="button" class="btn btn-danger" onclick="remove_member(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
