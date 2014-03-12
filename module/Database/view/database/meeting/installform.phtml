@@ -1,16 +1,50 @@
 <script>
+    function enable_autocomplete_install() {
+        $('#members-install .member-autocomplete').autocomplete({
+            source: function (rq, response) {
+                // make an AJAX request
+                $.ajax({
+                    dataType: 'json',
+                    url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + rq.term,
+                    context: document.body
+                }).done(function(data) {
+                    var ret = [];
+                    $.each(data.json, function (idx, member) {
+                        // assemble member name and add to list
+                        var name = member.firstName + ' ' + member.middleName + ' ' + member.lastName;
+                        name += ' (' + member.lidnr + ')';
+
+                        ret.push({
+                            label: name,
+                            value: name,
+                            id: member.lidnr
+                        });
+                    });
+
+                    // show data
+                    response(ret);
+                });
+            },
+            select: function (event, ui) {
+                $(event.target).parent().find("input.member-lidnr").val(ui.item.id);
+            }
+        });
+    }
     var count = 1;
-     function add_member_install() {
-         var template = $('#members-template-install').data('template');
-         template = template.replace(/__index__/g, count++);
+    function add_member_install() {
+        var template = $('#members-template-install').data('template');
+        template = template.replace(/__index__/g, count++);
 
-         $('#members-install').append(template);
+        $('#members-install').append(template);
 
-         return false;
-     }
+        enable_autocomplete_install();
+    }
     function remove_member_install(ele) {
         $(ele).parent().remove();
     }
+    $(document).ready(function(){
+        enable_autocomplete_install();
+    });
 </script>
 <p>
 Let op! Hiermee kunnen functies niet gewisseld worden!
@@ -48,22 +82,28 @@ ob_start();
 ?>
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
-        <?php
-        $el = $fs->get('type');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formSelect($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('type');
+            $el->setAttribute('class', 'form-control');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formSelect($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <div class="form-group">
-        <?php
-        $el = $fs->get('name');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formInput($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('name');
+            $el->setAttribute('class', 'form-control member-autocomplete');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formInput($el) ?>
+            <?php
+            // hidden element for actual membership number
+            $el = $fs->get('lidnr');
+            $el->setAttribute('class', 'member-lidnr');
+            ?>
+            <?= $this->formHidden($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
@@ -72,22 +112,28 @@ ob_start();
 <?php foreach ($element->getIterator() as $fs): ?>
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
-        <?php
-        $el = $fs->get('type');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formSelect($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('type');
+            $el->setAttribute('class', 'form-control');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formSelect($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <div class="form-group">
-        <?php
-        $el = $fs->get('name');
-        $el->setAttribute('class', 'form-control');
-        $el->setAttribute('placeholder', $el->getLabel());
-        ?>
-        <?= $this->formInput($el) ?>
-        <?= $this->formElementErrors($el) ?>
+            <?php
+            $el = $fs->get('name');
+            $el->setAttribute('class', 'form-control member-autocomplete');
+            $el->setAttribute('placeholder', $el->getLabel());
+            ?>
+            <?= $this->formInput($el) ?>
+            <?php
+            // hidden element for actual membership number
+            $el = $fs->get('lidnr');
+            $el->setAttribute('class', 'member-lidnr');
+            ?>
+            <?= $this->formHidden($el) ?>
+            <?= $this->formElementErrors($el) ?>
         </div>
         <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
     </div>
