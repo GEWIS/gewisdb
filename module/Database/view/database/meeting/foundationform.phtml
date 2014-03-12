@@ -1,16 +1,43 @@
 <script>
+    function enable_autocomplete() {
+        $('#members .member-autocomplete').autocomplete({
+            source: function (rq, response) {
+                // make an AJAX request
+                $.ajax({
+                    dataType: 'json',
+                    url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + rq.term,
+                    context: document.body
+                }).done(function(data) {
+                    var ret = [];
+                    $.each(data.json, function (idx, member) {
+                        // assemble member name and add to list
+                        var name = member.firstName + ' ' + member.middleName + ' ' + member.lastName;
+                        name += ' (' + member.lidnr + ')';
+
+                        ret.push(name);
+                    });
+
+                    // show data
+                    response(ret);
+                });
+            }
+        });
+    }
     var count = 2;
-     function add_member() {
-         var template = $('#members-template').data('template');
-         template = template.replace(/__index__/g, count++);
+    function add_member() {
+        var template = $('#members-template').data('template');
+        template = template.replace(/__index__/g, count++);
 
-         $('#members').append(template);
+        $('#members').append(template);
 
-         return false;
-     }
+        enable_autocomplete();
+    }
     function remove_member(ele) {
         $(ele).parent().remove();
     }
+    $(document).ready(function(){
+        enable_autocomplete();
+    });
 </script>
 <?php
 $form = $this->form;
@@ -66,7 +93,7 @@ ob_start();
         <div class="form-group">
         <?php
         $el = $fs->get('name');
-        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('class', 'form-control member-autocomplete');
         $el->setAttribute('placeholder', $el->getLabel());
         ?>
         <?= $this->formInput($el) ?>
@@ -90,7 +117,7 @@ ob_start();
         <div class="form-group">
         <?php
         $el = $fs->get('name');
-        $el->setAttribute('class', 'form-control');
+        $el->setAttribute('class', 'form-control member-autocomplete');
         $el->setAttribute('placeholder', $el->getLabel());
         ?>
         <?= $this->formInput($el) ?>
