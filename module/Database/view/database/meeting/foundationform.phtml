@@ -1,6 +1,8 @@
 <script>
     function enable_autocomplete() {
         $('#members .member-autocomplete').autocomplete({
+            minLength: 2, // at least two chars before request
+            delay: 0, // no delay before request
             source: function (rq, response) {
                 // make an AJAX request
                 $.ajax({
