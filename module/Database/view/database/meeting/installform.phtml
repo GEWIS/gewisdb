@@ -55,7 +55,7 @@ Let op! Hiermee kunnen functies niet gewisseld worden!
 $form = $this->form;
 $form->prepare();
 
-$form->setAttribute('action', $this->url('meeting/default', array('action' => 'decision')));
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'install')));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');

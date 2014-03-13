@@ -52,7 +52,7 @@
 $form = $this->form;
 $form->prepare();
 
-$form->setAttribute('action', $this->url('meeting/default', array('action' => 'decision')));
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'foundation')));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
