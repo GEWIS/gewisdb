@@ -161,7 +161,7 @@ class Budget extends Form
 
         $filter->add(array(
             'name' => 'organ',
-            'required' => true,
+            'required' => false,
             'validators' => array(
                 array(
                     'name' => 'string_length',
