@@ -71,9 +71,9 @@ class Member
      * - m
      * - f
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",length=1)
      */
-    protected $gener;
+    protected $gender;
 
     /**
      * Available genders.
