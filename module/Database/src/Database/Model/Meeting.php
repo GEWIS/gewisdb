@@ -48,23 +48,16 @@ class Meeting
     protected $decisions;
 
     /**
-     * Allowed meeting types.
-     *
-     * @var array
-     */
-    protected static $types = array(
-        self::TYPE_BV,
-        self::TYPE_AV,
-        self::TYPE_VV,
-        self::TYPE_VIRT
-    );
-
-    /**
      * Get all allowed meeting types.
      */
     public static function getTypes()
     {
-        return self::$types;
+        return array(
+            self::TYPE_BV,
+            self::TYPE_AV,
+            self::TYPE_VV,
+            self::TYPE_VIRT
+        );
     }
 
     /**
@@ -102,7 +95,7 @@ class Meeting
      */
     public function setType($type)
     {
-        if (!in_array($type, self::$types)) {
+        if (!in_array($type, self::getTypes())) {
             throw new \InvalidArgumentException("Invalid meeting type given.");
         }
         $this->type = $type;

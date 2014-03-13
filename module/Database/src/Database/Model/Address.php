@@ -40,15 +40,6 @@ class Address
     protected $type;
 
     /**
-     * Available types.
-     */
-    protected static $types = array(
-        self::TYPE_HOME,
-        self::TYPE_STUDENT,
-        self::TYPE_MAIL,
-    );
-
-    /**
      * Country.
      *
      * By default, netherlands.
@@ -94,6 +85,20 @@ class Address
 
 
     /**
+     * Get available address types.
+     *
+     * @return array
+     */
+    public static function getTypes()
+    {
+        return array(
+            self::TYPE_HOME,
+            self::TYPE_STUDENT,
+            self::TYPE_MAIL,
+        );
+    }
+
+    /**
      * Get the member.
      *
      * @return Member
@@ -132,7 +137,7 @@ class Address
      */
     public function setType($type)
     {
-        if (!in_array($type, self::$types)) {
+        if (!in_array($type, self::getTypes())) {
             throw new \InvalidArgumentException("Non-existing type.");
         }
         $this->type = $type;

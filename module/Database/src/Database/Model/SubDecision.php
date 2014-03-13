@@ -157,18 +157,6 @@ class SubDecision
     protected $function;
 
     /**
-     * Possible function types.
-     */
-    protected static $functions = array(
-        self::FUNC_CHAIRMAN,
-        self::FUNC_SECRETARY,
-        self::FUNC_TREASURER,
-        self::FUNC_VICE_CHAIRMAN,
-        self::FUNC_PR_OFFICER,
-        self::FUNC_EDUCATION_OFFICER
-    );
-
-    /**
      * Member for which this subdecision is applicable
      *
      * @ORM\ManyToOne(targetEntity="Member")
@@ -200,20 +188,42 @@ class SubDecision
      */
     protected $type;
 
-    /**
-     * Possible types.
-     */
-    protected static $types = array(
-        self::TYPE_FOUNDATION,
-        self::TYPE_ABROGATION,
-        self::TYPE_INSTALLATION,
-        self::TYPE_DISCHARGE,
-        self::TYPE_RELEASE,
-        self::TYPE_BUDGET,
-        self::TYPE_RECKONING,
-        self::TYPE_OTHER
-    );
 
+    /**
+     * Get available functions.
+     *
+     * @return array
+     */
+    public static function getFunctions()
+    {
+        return array(
+            self::FUNC_CHAIRMAN,
+            self::FUNC_SECRETARY,
+            self::FUNC_TREASURER,
+            self::FUNC_VICE_CHAIRMAN,
+            self::FUNC_PR_OFFICER,
+            self::FUNC_EDUCATION_OFFICER
+        );
+    }
+
+    /**
+     * Get available types.
+     *
+     * @return array
+     */
+    public static function getTypes()
+    {
+        return array(
+            self::TYPE_FOUNDATION,
+            self::TYPE_ABROGATION,
+            self::TYPE_INSTALLATION,
+            self::TYPE_DISCHARGE,
+            self::TYPE_RELEASE,
+            self::TYPE_BUDGET,
+            self::TYPE_RECKONING,
+            self::TYPE_OTHER
+        );
+    }
 
     /**
      * Get the decision.
@@ -398,7 +408,7 @@ class SubDecision
      */
     public function setFunction($function)
     {
-        if (!in_array($function, self::$functions)) {
+        if (!in_array($function, self::getFunctions())) {
             throw \IllegalArgumentException("Nonexisting function given.");
         }
         $this->function = $function;
@@ -463,7 +473,7 @@ class SubDecision
      */
     public function setType($type)
     {
-        if (!in_array($type, self::$types)) {
+        if (!in_array($type, self::getTypes())) {
             throw \IllegalArgumentException("Nonexisting type given.");
         }
         $this->type = $type;
