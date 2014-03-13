@@ -76,14 +76,6 @@ class Member
     protected $gender;
 
     /**
-     * Available genders.
-     */
-    protected static $genders = array(
-        self::GENDER_MALE,
-        self::GENDER_FEMALE
-    );
-
-    /**
      * Generation.
      *
      * This is the year that this member became a GEWIS member. This is not
@@ -115,17 +107,6 @@ class Member
     protected $type;
 
     /**
-     * Available member types.
-     */
-    protected static $types = array(
-        self::TYPE_ORDINARY,
-        self::TYPE_PROLONGED,
-        self::TYPE_EXTERNAL,
-        self::TYPE_EXTRAORDINARY,
-        self::TYPE_HONORARY
-    );
-
-    /**
      * Expiration date of membership.
      *
      * @ORM\Column(type="date")
@@ -138,6 +119,35 @@ class Member
      * @ORM\Column(type="date")
      */
     protected $birth;
+
+    /**
+     * Static method to get available genders.
+     *
+     * @return array
+     */
+    protected static function getGenders()
+    {
+        return array(
+            self::GENDER_MALE,
+            self::GENDER_FEMALE
+        );
+    }
+
+    /**
+     * Static method to get available member types.
+     *
+     * @return array
+     */
+    protected static function getTypes()
+    {
+        return array(
+            self::TYPE_ORDINARY,
+            self::TYPE_PROLONGED,
+            self::TYPE_EXTERNAL,
+            self::TYPE_EXTRAORDINARY,
+            self::TYPE_HONORARY
+        );
+    }
 
     /**
      * Get the membership number.
@@ -268,7 +278,7 @@ class Member
      */
     public function setGender($gender)
     {
-        if (!in_array($gender, self::$genders)) {
+        if (!in_array($gender, self::getGenders())) {
             throw new \InvalidArgumentException("Invalid gender value");
         }
         $this->gender = $gender;
@@ -313,7 +323,7 @@ class Member
      */
     public function setType($type)
     {
-        if (!in_array($type, self::$types)) {
+        if (!in_array($type, self::getTypes())) {
             throw new \InvalidArgumentException("Nonexisting type given.");
         }
         $this->type = $type;
