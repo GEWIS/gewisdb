@@ -40,6 +40,7 @@ class Budget extends Form
             )
         ));
 
+        // TODO: make this a member
         $this->add(array(
             'name' => 'author',
             'type' => 'text',
@@ -56,6 +57,7 @@ class Budget extends Form
             )
         ));
 
+        // TODO: auto completion of organs
         $this->add(array(
             'name' => 'organ',
             'type' => 'text',
@@ -90,6 +92,102 @@ class Budget extends Form
     protected function initFilters()
     {
         $filter = new InputFilter();
+
+        $filter->add(array(
+            'name' => 'type',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'in_array',
+                    'options' => array(
+                        'haystack' => array(
+                            'budget',
+                            'reckoning'
+                        )
+                    )
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'name',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'string_length',
+                    'options' => array(
+                        'min' => 3,
+                        'max' => 255
+                    )
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'date',
+            'required' => true,
+            'validators' => array(
+                array('name' => 'date')
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'author',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'string_length',
+                    'options' => array(
+                        'min' => 3,
+                        'max' => 255
+                    )
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'version',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'string_length',
+                    'options' => array(
+                        'min' => 1,
+                        'max' => 32
+                    )
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'organ',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'string_length',
+                    'options' => array(
+                        'min' => 1,
+                        'max' => 64
+                    )
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'approve',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'in_array',
+                    'options' => array(
+                        'haystack' => array(
+                            'approve',
+                            'disapprove'
+                        )
+                    )
+                )
+            )
+        ));
 
         $this->setInputFilter($filter);
     }
