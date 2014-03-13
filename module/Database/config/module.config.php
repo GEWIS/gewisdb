@@ -14,6 +14,30 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'decision' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/decision',
+                            'defaults' => array(
+                                'action' => 'decision'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'form' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/:form',
+                                    'constraints' => array(
+                                        'form' => '[a-zA-Z][a-zA-Z0-9_-]*'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'decisionform'
+                                    )
+                                )
+                            )
+                        )
+                    ),
                     'view' => array(
                         'type' => 'Segment',
                         'options' => array(

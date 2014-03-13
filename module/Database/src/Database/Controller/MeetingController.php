@@ -70,6 +70,24 @@ class MeetingController extends AbstractActionController
     }
 
     /**
+     * Decision form action.
+     */
+    public function decisionformAction()
+    {
+        switch ($this->params()->fromRoute('form')) {
+        case 'budget':
+            break;
+        case 'foundation':
+            break;
+        case 'abolish':
+            break;
+        case 'install':
+            break;
+        }
+        return new ViewModel(array());
+    }
+
+    /**
      * Get the meeting service.
      *
      * @return \Database\Service\Meeting
