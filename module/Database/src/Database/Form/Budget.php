@@ -4,6 +4,7 @@ namespace Database\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
+use Database\Model\SubDecision;
 
 class Budget extends Form
 {
@@ -18,8 +19,8 @@ class Budget extends Form
             'options' => array(
                 'label' => 'Begroting / Afrekening',
                 'value_options' => array(
-                    'budget' => 'Begroting',
-                    'reckoning' => 'Afrekening'
+                    SubDecision::TYPE_BUDGET => 'Begroting',
+                    SubDecision::TYPE_RECKONING => 'Afrekening'
                 )
             )
         ));
@@ -79,6 +80,18 @@ class Budget extends Form
         ));
 
         $this->add(array(
+            'name' => 'changes',
+            'type' => 'radio',
+            'options' => array(
+                'label' => 'Wijzigingen',
+                'value_options' => array(
+                    'yes' => 'Met wijzigingen',
+                    'no' => 'Zonder wijzigingen'
+                )
+            )
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
@@ -101,8 +114,8 @@ class Budget extends Form
                     'name' => 'in_array',
                     'options' => array(
                         'haystack' => array(
-                            'budget',
-                            'reckoning'
+                            SubDecision::TYPE_BUDGET,
+                            SubDecision::TYPE_RECKONING
                         )
                     )
                 )
@@ -183,6 +196,22 @@ class Budget extends Form
                         'haystack' => array(
                             'approve',
                             'disapprove'
+                        )
+                    )
+                )
+            )
+        ));
+
+        $filter->add(array(
+            'name' => 'changes',
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'in_array',
+                    'options' => array(
+                        'haystack' => array(
+                            'yes',
+                            'no'
                         )
                     )
                 )

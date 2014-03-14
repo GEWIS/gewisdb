@@ -84,6 +84,15 @@ $element->setLabelAttributes(array('class' => 'radio-inline'));
     <?= $this->formElementErrors($element) ?>
 </div>
 
+<div class="form-group">
+<?php
+$element = $form->get('changes');
+$element->setLabelAttributes(array('class' => 'radio-inline'));
+?>
+    <?= $this->formRadio($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
 
 <?php
 $submit = $form->get('submit');
