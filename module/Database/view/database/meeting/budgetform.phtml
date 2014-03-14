@@ -1,3 +1,38 @@
+<script>
+$(document).ready(function () {
+    $('#budget-author').autocomplete({
+            minLength: 2, // at least two chars before request
+            delay: 0, // no delay before request
+            source: function (rq, response) {
+                // make an AJAX request
+                $.ajax({
+                    dataType: 'json',
+                    url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + rq.term,
+                    context: document.body
+                }).done(function(data) {
+                    var ret = [];
+                    $.each(data.json, function (idx, member) {
+                        // assemble member name and add to list
+                        var name = member.firstName + ' ' + member.middleName + ' ' + member.lastName;
+                        name += ' (' + member.lidnr + ')';
+
+                        ret.push({
+                            label: name,
+                            value: name,
+                            id: member.lidnr
+                        });
+                    });
+
+                    // show data
+                    response(ret);
+                });
+            },
+            select: function (event, ui) {
+                $(event.target).parent().find("input.member-lidnr").val(ui.item.id);
+            }
+        });
+});
+</script>
 <?php
 $form = $this->form;
 $form->prepare();
@@ -49,6 +84,7 @@ $fs = $form->get('author');
 <?php
 $el = $fs->get('name');
 $el->setAttribute('class', 'form-control member-autocomplete');
+$el->setAttribute('id', 'budget-author');
 $el->setAttribute('placeholder', $el->getLabel());
 ?>
     <?= $this->formLabel($fs) ?>
