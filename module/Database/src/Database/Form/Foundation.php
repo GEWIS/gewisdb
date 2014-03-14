@@ -48,7 +48,7 @@ class Foundation extends Form
                 'count' => 2,
                 'should_create_template' => true,
                 'target_element' => array(
-                    'type' => 'Database\Form\Fieldset\Member'
+                    'type' => 'Database\Form\Fieldset\MemberFunction'
                 )
             )
         ));

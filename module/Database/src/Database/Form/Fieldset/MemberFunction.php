@@ -2,7 +2,7 @@
 
 namespace Database\Form\Fieldset;
 
-class MemberInstall extends Member
+class MemberFunction extends Member
 {
 
     public function __construct()
@@ -10,13 +10,14 @@ class MemberInstall extends Member
         parent::__construct();
 
         $this->add(array(
-            'name' => 'type',
+            'name' => 'function',
             'type' => 'select',
             'options' => array(
-                'label' => 'Installatie / Decharge',
+                'label' => 'Functie',
                 'value_options' => array(
-                    'install' => 'Installeer',
-                    'discharge' => 'Dechargeer',
+                    'lid' => 'Lid',
+                    'vz' => 'Voorzitter',
+                    'secr' => 'Secretaris'
                 )
             )
         ));

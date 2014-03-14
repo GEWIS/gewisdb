@@ -26,18 +26,5 @@ class Member extends Fieldset
             'name' => 'lidnr',
             'type' => 'hidden',
         ));
-
-        $this->add(array(
-            'name' => 'function',
-            'type' => 'select',
-            'options' => array(
-                'label' => 'Functie',
-                'value_options' => array(
-                    'lid' => 'Lid',
-                    'vz' => 'Voorzitter',
-                    'secr' => 'Secretaris'
-                )
-            )
-        ));
     }
 }
