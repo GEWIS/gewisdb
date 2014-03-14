@@ -42,15 +42,24 @@ $element->setAttribute('placeholder', 'Datum begroting / afrekening');
     <?= $this->formElementErrors($element) ?>
 </div>
 
+<?php
+$fs = $form->get('author');
+?>
 <div class="form-group">
 <?php
-$element = $form->get('author');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Auteur');
+$el = $fs->get('name');
+$el->setAttribute('class', 'form-control member-autocomplete');
+$el->setAttribute('placeholder', $el->getLabel());
 ?>
-    <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <?= $this->formLabel($fs) ?>
+    <?= $this->formInput($el) ?>
+    <?php
+    // hidden element for actual membership number
+    $el = $fs->get('lidnr');
+    $el->setAttribute('class', 'member-lidnr');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?= $this->formElementErrors($el) ?>
 </div>
 
 <div class="form-group">
