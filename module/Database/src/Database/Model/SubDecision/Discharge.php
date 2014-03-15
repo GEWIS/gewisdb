@@ -4,12 +4,10 @@ namespace Database\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Database\Model\SubDecision;
-
 /**
- *
+ * Discharge from organ.
  * @ORM\Entity
  */
-class Discharge extends SubDecision
+class Discharge extends Installation
 {
 }
