@@ -22,7 +22,7 @@ return array(
                                 'action' => 'decision'
                             )
                         ),
-                        'may_terminate' => true,
+                        'may_terminate' => false,
                         'child_routes' => array(
                             'form' => array(
                                 'type' => 'Segment',
@@ -33,6 +33,18 @@ return array(
                                     ),
                                     'defaults' => array(
                                         'action' => 'decisionform'
+                                    )
+                                )
+                            ),
+                            'create' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/:type/:number/:point/:decision',
+                                    'constraints' => array(
+                                        'type' => 'av|bv|vv|virt',
+                                        'number' => '[0-9]*',
+                                        'point' => '[0-9]*',
+                                        'decision' => '[0-9]*'
                                     )
                                 )
                             )
@@ -50,16 +62,7 @@ return array(
                                 'action' => 'view'
                             )
                         )
-                    ),
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/:action',
-                            'constraints' => array(
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
+                    )
                 ),
             ),
             'member' => array(
