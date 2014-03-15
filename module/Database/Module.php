@@ -66,7 +66,9 @@ class Module
                     return $fieldset;
                 },
                 'database_hydrator_budget' => function ($sm) {
-                    return new \Database\Hydrator\Budget();
+                    $hydrator = new \Database\Hydrator\Budget();
+                    $hydrator->setMeetingHydrator($sm->get('database_hydrator_meeting'));
+                    return $hydrator;
                 },
                 'database_hydrator_member' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
