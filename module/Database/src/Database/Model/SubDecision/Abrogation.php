@@ -13,4 +13,16 @@ use Database\Model\SubDecision;
  */
 class Abrogation extends SubDecision
 {
+
+    /**
+     * Get the content.
+     *
+     * @todo implement this
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return 'TODO';
+    }
 }

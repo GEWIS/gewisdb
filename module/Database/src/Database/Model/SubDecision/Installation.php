@@ -107,4 +107,16 @@ class Installation extends SubDecision
     {
         $this->member = $member;
     }
+
+    /**
+     * Get the content.
+     *
+     * @todo implement this
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return 'TODO';
+    }
 }

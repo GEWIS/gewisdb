@@ -176,4 +176,16 @@ class Budget extends SubDecision
     {
         $this->changes = $changes;
     }
+
+    /**
+     * Get the content.
+     *
+     * @todo implement this
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return 'TODO';
+    }
 }

@@ -67,4 +67,16 @@ class Foundation extends SubDecision
     {
         $this->name = $name;
     }
+
+    /**
+     * Get the content.
+     *
+     * @todo implement this
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return 'TODO';
+    }
 }
