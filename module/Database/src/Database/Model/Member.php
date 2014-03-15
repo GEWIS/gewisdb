@@ -260,6 +260,23 @@ class Member
     }
 
     /**
+     * Assemble the member's full name.
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        $name = $this->getFirstName() . ' ';
+
+        $middle = $this->getMiddleName();
+        if (!empty($middle)) {
+            $name .= $middle . ' ';
+        }
+
+        return $name . $this->getLastName();
+    }
+
+    /**
      * Get the member's gender.
      *
      * @return string
@@ -379,6 +396,7 @@ class Member
         return array(
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
+            'fullName' => $this->getFullName(),
             'lastName' => $this->getLastName(),
             'middleName' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
