@@ -11,15 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({
- *  "foundation"="SubDecision\Foundation",
- *  "abrogation"="SubDecision\Abrogation",
- *  "installation"="SubDecision\Installation",
- *  "discharge"="SubDecision\Discharge",
- *  "release"="SubDecision\Release",
- *  "budget"="SubDecision\Budget",
- *  "reckoning"="SubDecision\Reckoning",
- *  "other"="SubDecision\Other"
- * )
+ *  "foundation"="Database\Model\SubDecision\Foundation",
+ *  "abrogation"="Database\Model\SubDecision\Abrogation",
+ *  "installation"="Database\Model\SubDecision\Installation",
+ *  "discharge"="Database\Model\SubDecision\Discharge",
+ *  "release"="Database\Model\SubDecision\Release",
+ *  "budget"="Database\Model\SubDecision\Budget",
+ *  "reckoning"="Database\Model\SubDecision\Reckoning",
+ *  "other"="Database\Model\SubDecision\Other"
+ * })
  */
 class SubDecision
 {
