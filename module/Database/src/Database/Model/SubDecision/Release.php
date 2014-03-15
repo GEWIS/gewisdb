@@ -10,6 +10,6 @@ use Database\Model\SubDecision;
  *
  * @ORM\Entity
  */
-class Release extends SubDecision
+class Release extends Installation
 {
 }

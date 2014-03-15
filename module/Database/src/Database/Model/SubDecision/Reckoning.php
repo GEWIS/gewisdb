@@ -10,6 +10,6 @@ use Database\Model\SubDecision;
  *
  * @ORM\Entity
  */
-class Reckoning extends SubDecision
+class Reckoning extends Budget
 {
 }

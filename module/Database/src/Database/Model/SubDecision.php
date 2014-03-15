@@ -122,14 +122,6 @@ class SubDecision
     protected $reference;
 
     /**
-     * Member for which this subdecision is applicable
-     *
-     * @ORM\ManyToOne(targetEntity="Member")
-     * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
-     */
-    protected $member;
-
-    /**
      * Textual content for the decision.
      *
      * @ORM\Column(type="string")
@@ -260,26 +252,6 @@ class SubDecision
     public function setReference(SubDecision $reference)
     {
         $this->reference = $reference;
-    }
-
-    /**
-     * Get the member.
-     *
-     * @return Member
-     */
-    public function getMember()
-    {
-        return $this->member;
-    }
-
-    /**
-     * Set the member.
-     *
-     * @param Member $member
-     */
-    public function setMember(Member $member)
-    {
-        $this->member = $member;
     }
 
     /**

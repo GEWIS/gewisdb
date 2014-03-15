@@ -5,6 +5,7 @@ namespace Database\Model\SubDecision;
 use Doctrine\ORM\Mapping as ORM;
 
 use Database\Model\SubDecision;
+use Database\Model\Member;
 
 /**
  * Installation into organ.
@@ -37,6 +38,13 @@ class Installation extends SubDecision
      */
     protected $function;
 
+    /**
+     * Member.
+     *
+     * @ORM\ManyToOne(targetEntity="Database\Model\Member")
+     * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
+     */
+    protected $member;
 
     /**
      * Get available functions.
@@ -78,5 +86,25 @@ class Installation extends SubDecision
             throw \IllegalArgumentException("Nonexisting function given.");
         }
         $this->function = $function;
+    }
+
+    /**
+     * Get the member.
+     *
+     * @return Member
+     */
+    public function getMember()
+    {
+        return $this->member;
+    }
+
+    /**
+     * Set the member.
+     *
+     * @param Member $member
+     */
+    public function setMember(Member $member)
+    {
+        $this->member = $member;
     }
 }
