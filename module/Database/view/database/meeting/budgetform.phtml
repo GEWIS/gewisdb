@@ -13,8 +13,7 @@ $(document).ready(function () {
                     var ret = [];
                     $.each(data.json, function (idx, member) {
                         // assemble member name and add to list
-                        var name = member.firstName + ' ' + member.middleName + ' ' + member.lastName;
-                        name += ' (' + member.lidnr + ')';
+                        var name = member.fullName + ' (' + member.lidnr + ')';
 
                         ret.push({
                             label: name,
