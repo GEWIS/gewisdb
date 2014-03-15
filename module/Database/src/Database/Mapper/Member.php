@@ -49,6 +49,18 @@ class Member
     }
 
     /**
+     * Find a member (by lidnr)
+     *
+     * @param int $lidnr
+     *
+     * @return MemberModel
+     */
+    public function find($lidnr)
+    {
+        return $this->getRepository()->find($lidnr);
+    }
+
+    /**
      * Persist a member model.
      *
      * @param MemberModel $member Member to persist.
