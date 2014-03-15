@@ -41,10 +41,9 @@ class Budget extends Form
             )
         ));
 
-        // TODO: make this a member
         $this->add(array(
             'name' => 'author',
-            'type' => 'text',
+            'type' => 'Database\Form\Fieldset\Member',
             'options' => array(
                 'label' => 'Auteur'
             )
@@ -144,19 +143,7 @@ class Budget extends Form
             )
         ));
 
-        $filter->add(array(
-            'name' => 'author',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'string_length',
-                    'options' => array(
-                        'min' => 3,
-                        'max' => 255
-                    )
-                )
-            )
-        ));
+        // TODO: update author check
 
         $filter->add(array(
             'name' => 'version',
