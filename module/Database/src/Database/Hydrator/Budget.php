@@ -2,11 +2,10 @@
 
 namespace Database\Hydrator;
 
-use Zend\Stdlib\Hydrator\HydratorInterface;
 use Database\Model\Decision;
 use Database\Model\SubDecision;
 
-class Budget implements HydratorInterface
+class Budget extends AbstractDecision
 {
 
     const BUDGET_TEMPLATE = 'De %TYPE% %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVE%%CHANGES%.';
@@ -23,10 +22,7 @@ class Budget implements HydratorInterface
      */
     public function hydrate(array $data, $object)
     {
-        if (!$object instanceof Decision) {
-            throw new \InvalidArgumentException("Object is not an instance of Database\Model\SubDecision.");
-        }
-
+        $decision = parent::hydrate($data, $object);
         var_dump($data);
 
         $subdecision = new SubDecision();
@@ -62,20 +58,5 @@ class Budget implements HydratorInterface
         $object->addSubDecision($subdecision);
 
         return $object;
-    }
-
-    /**
-     * Extraction.
-     *
-     * Not implemented.
-     *
-     * @return array
-     */
-    public function extract($object)
-    {
-        if (!$object instanceof Decision) {
-            throw new \InvalidArgumentException("Object is not an instance of Database\Model\SubDecision.");
-        }
-        return array();
     }
 }
