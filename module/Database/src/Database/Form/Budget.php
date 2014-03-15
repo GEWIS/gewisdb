@@ -9,7 +9,7 @@ use Database\Model\SubDecision;
 class Budget extends Form
 {
 
-    public function __construct()
+    public function __construct(Fieldset\Member $member)
     {
         parent::__construct();
 
@@ -41,13 +41,9 @@ class Budget extends Form
             )
         ));
 
-        $this->add(array(
-            'name' => 'author',
-            'type' => 'Database\Form\Fieldset\Member',
-            'options' => array(
-                'label' => 'Auteur'
-            )
-        ));
+        $member->setName('author');
+        $member->setLabel('Auteur');
+        $this->add($member);
 
         $this->add(array(
             'name' => 'version',

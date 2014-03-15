@@ -42,7 +42,6 @@ class Module
             'invokables' => array(
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
-                'database_form_budget' => 'Database\Form\Budget',
                 'database_form_abolish' => 'Database\Form\Abolish',
                 'database_form_install' => 'Database\Form\Install',
                 'database_form_foundation' => 'Database\Form\Foundation'
@@ -53,10 +52,25 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_meeting'));
                     return $form;
                 },
+                'database_form_budget' => function ($sm) {
+                    return new \Database\Form\Budget(
+                        $sm->get('database_form_fieldset_member')
+                    );
+                },
+                'database_form_fieldset_member' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\Member();
+                    $fieldset->setHydrator($sm->get('database_hydrator_member'));
+                    $fieldset->setObject(new \Database\Model\Member());
+                    return $fieldset;
+                },
+                'database_hydrator_member' => function ($sm) {
+                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
                 'database_hydrator_meeting' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
-                        $sm->get('database_doctrine_em'),
-                        'Database\Model\Meeting'
+                        $sm->get('database_doctrine_em')
                     );
                 },
                 'database_mapper_member' => function ($sm) {

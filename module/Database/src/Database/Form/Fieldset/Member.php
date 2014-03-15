@@ -3,8 +3,9 @@
 namespace Database\Form\Fieldset;
 
 use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
 
-class Member extends Fieldset
+class Member extends Fieldset implements InputFilterProviderInterface
 {
 
     public function __construct()
@@ -26,5 +27,17 @@ class Member extends Fieldset
             'name' => 'lidnr',
             'type' => 'hidden',
         ));
+    }
+
+    public function getInputFilterSpecification()
+    {
+        return array(
+            'lidnr' => array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'digits')
+                )
+            )
+        );
     }
 }
