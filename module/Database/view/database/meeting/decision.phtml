@@ -1,4 +1,22 @@
-<h1>Toevoegen besluit</h1>
+<?php
+use Database\Model\Meeting;
+function showType($type)
+{
+    switch ($type) {
+    case Meeting::TYPE_BV:
+        return 'BV';
+    case Meeting::TYPE_AV:
+        return 'AV';
+    case Meeting::TYPE_VV:
+        return 'VV';
+    case Meeting::TYPE_VIRT:
+        return 'Virt';
+    }
+}
+?>
+<h1>Toevoegen besluit <?= showType($meeting->getType()) . ' ' ?>
+<?= $meeting->getNumber() ?>.<?= $point ?>.<?= $decision ?>
+</h1>
 
 <ul class="nav nav-pills" id="decision-tabs">
     <li class="active"><a href="#begroting" data-toggle="tab">Begroting / Afrekening</a></li>

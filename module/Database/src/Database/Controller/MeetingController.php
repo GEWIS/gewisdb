@@ -61,7 +61,20 @@ class MeetingController extends AbstractActionController
      */
     public function decisionAction()
     {
+        $type = $this->params()->fromRoute('type');
+        $number = $this->params()->fromRoute('number');
+        $point = $this->params()->fromRoute('point');
+        $decision = $this->params()->fromRoute('decision');
+        $meeting = $this->getMeetingService()
+                        ->getMeeting($type, $number);
+        $budgetform = $this->getMeetingService()->getBudgetForm();
+
+        $budgetform->setDecisionData($meeting, $point, $decision);
+
         return new ViewModel(array(
+            'meeting' => $meeting,
+            'point' => $point,
+            'decision' => $decision,
             'budgetform' => $this->getMeetingService()->getBudgetForm(),
             'foundationform' => $this->getMeetingService()->getFoundationForm(),
             'abolishform' => $this->getMeetingService()->getAbolishForm(),

@@ -2,11 +2,10 @@
 
 namespace Database\Form;
 
-use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Database\Model\SubDecision;
 
-class Budget extends Form
+class Budget extends AbstractDecision
 {
 
     public function __construct(Fieldset\Member $member)
