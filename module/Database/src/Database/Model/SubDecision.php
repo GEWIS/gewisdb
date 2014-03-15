@@ -242,6 +242,7 @@ class SubDecision
      */
     public function setDecision(Decision $decision)
     {
+        $decision->addSubdecision($this);
         $this->meeting_type = $decision->getMeetingType();
         $this->meeting_number = $decision->getMeetingNumber();
         $this->decision_point = $decision->getPoint();

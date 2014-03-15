@@ -55,7 +55,7 @@ class Budget extends AbstractDecision
 
         $subdecision->setContent($content);
 
-        $object->addSubDecision($subdecision);
+        $subdecision->setDecision($object);
 
         return $object;
     }

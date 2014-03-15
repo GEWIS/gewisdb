@@ -73,6 +73,7 @@ class Decision
      */
     public function setMeeting(Meeting $meeting)
     {
+        $meeting->addDecision($this);
         $this->meeting_type = $meeting->getType();
         $this->meeting_number = $meeting->getType();
         $this->meeting = $meeting;
