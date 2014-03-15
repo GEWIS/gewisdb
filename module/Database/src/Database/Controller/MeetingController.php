@@ -65,22 +65,43 @@ class MeetingController extends AbstractActionController
         $number = $this->params()->fromRoute('number');
         $point = $this->params()->fromRoute('point');
         $decision = $this->params()->fromRoute('decision');
+
         $meeting = $this->getMeetingService()
                         ->getMeeting($type, $number);
-        $budgetform = $this->getMeetingService()->getBudgetForm();
-
-        $budgetform->setDecisionData($meeting, $point, $decision);
 
         return new ViewModel(array(
             'meeting' => $meeting,
             'point' => $point,
             'decision' => $decision,
-            'budgetform' => $this->getMeetingService()->getBudgetForm(),
-            'foundationform' => $this->getMeetingService()->getFoundationForm(),
-            'abolishform' => $this->getMeetingService()->getAbolishForm(),
-            'installform' => $this->getMeetingService()->getInstallForm(),
+            'forms' => $this->getDecisionForms($meeting, $point, $decision)
         ));
     }
+
+    /**
+     * Get all forms for a decision action.
+     *
+     * @param Meeting $meeting
+     * @param int $point
+     * @param int $decision
+     *
+     * @return array
+     */
+    protected function getDecisionForms($meeting, $point, $decision)
+    {
+        $forms = array(
+            'budget' => $this->getMeetingService()->getBudgetForm(),
+            'foundation' => $this->getMeetingService()->getFoundationForm(),
+            'abolish' => $this->getMeetingService()->getAbolishForm(),
+            'install' => $this->getMeetingService()->getInstallForm(),
+        );
+
+        foreach ($forms as $form) {
+            $form->setDecisionData($meeting, $point, $decision);
+        }
+
+        return $forms;
+    }
+
 
     /**
      * Decision form action.

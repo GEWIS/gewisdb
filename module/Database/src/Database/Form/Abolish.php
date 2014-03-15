@@ -2,10 +2,9 @@
 
 namespace Database\Form;
 
-use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-class Abolish extends Form
+class Abolish extends AbstractDecision
 {
 
     public function __construct()

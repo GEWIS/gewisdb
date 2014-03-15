@@ -2,10 +2,9 @@
 
 namespace Database\Form;
 
-use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-class Foundation extends Form
+class Foundation extends AbstractDecision
 {
 
     public function __construct()

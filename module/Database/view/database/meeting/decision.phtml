@@ -32,22 +32,22 @@ function showType($type)
 <div class="tab-content">
     <div class="tab-pane active" id="begroting">
     <?= $this->partial('database/meeting/budgetform', array(
-        'form' => $budgetform
+        'form' => $forms['budget']
     )); ?>
     </div>
     <div class="tab-pane" id="oprichting">
     <?= $this->partial('database/meeting/foundationform', array(
-        'form' => $foundationform
+        'form' => $forms['foundation']
     )); ?>
     </div>
     <div class="tab-pane" id="opheffing">
     <?= $this->partial('database/meeting/abolishform', array(
-        'form' => $abolishform
+        'form' => $forms['abolish']
     )); ?>
     </div>
     <div class="tab-pane" id="installatie">
     <?= $this->partial('database/meeting/installform', array(
-        'form' => $installform
+        'form' => $forms['install']
     )); ?>
     </div>
     <div class="tab-pane" id="functiewissel">
