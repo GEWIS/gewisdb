@@ -8,6 +8,18 @@ use Doctrine\ORM\Mapping as ORM;
  * SubDecision model.
  *
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
+ *  "foundation"="SubDecision\Foundation",
+ *  "abrogation"="SubDecision\Abrogation",
+ *  "installation"="SubDecision\Installation",
+ *  "discharge"="SubDecision\Discharge",
+ *  "release"="SubDecision\Release",
+ *  "budget"="SubDecision\Budget",
+ *  "reckoning"="SubDecision\Reckoning",
+ *  "other"="SubDecision\Other"
+ * )
  */
 class SubDecision
 {
@@ -18,15 +30,6 @@ class SubDecision
     const FUNC_VICE_CHAIRMAN = 'vice-chairman';
     const FUNC_PR_OFFICER = 'pr-officer';
     const FUNC_EDUCATION_OFFICER = 'education-officer';
-
-    const TYPE_FOUNDATION = 'foundation'; // creation of organ
-    const TYPE_ABROGATION = 'abrogation';
-    const TYPE_INSTALLATION = 'installation';
-    const TYPE_DISCHARGE = 'discharge';
-    const TYPE_RELEASE = 'release';
-    const TYPE_BUDGET = 'budget';
-    const TYPE_RECKONING = 'reckoning';
-    const TYPE_OTHER = 'other';
 
     /**
      * Decision.
@@ -171,23 +174,6 @@ class SubDecision
      */
     protected $content;
 
-    /**
-     * Type of the decision.
-     *
-     * Can only be one of:
-     * - foundation (of organ)
-     * - abrogation (of organ)
-     * - installation (member in organ)
-     * - discharge (member in organ)
-     * - releasing (member of function, is not a discharge (yet)!)
-     * - budget
-     * - reckoning
-     * - other
-     *
-     * @ORM\Column(type="string")
-     */
-    protected $type;
-
 
     /**
      * Get available functions.
@@ -203,25 +189,6 @@ class SubDecision
             self::FUNC_VICE_CHAIRMAN,
             self::FUNC_PR_OFFICER,
             self::FUNC_EDUCATION_OFFICER
-        );
-    }
-
-    /**
-     * Get available types.
-     *
-     * @return array
-     */
-    public static function getTypes()
-    {
-        return array(
-            self::TYPE_FOUNDATION,
-            self::TYPE_ABROGATION,
-            self::TYPE_INSTALLATION,
-            self::TYPE_DISCHARGE,
-            self::TYPE_RELEASE,
-            self::TYPE_BUDGET,
-            self::TYPE_RECKONING,
-            self::TYPE_OTHER
         );
     }
 
@@ -453,30 +420,5 @@ class SubDecision
     public function setContent($content)
     {
         $this->content = $content;
-    }
-
-    /**
-     * Get the type.
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set the type.
-     *
-     * @param string $type
-     *
-     * @throws \IllegalArgumentException when a nonexisting function is given.
-     */
-    public function setType($type)
-    {
-        if (!in_array($type, self::getTypes())) {
-            throw \IllegalArgumentException("Nonexisting type given.");
-        }
-        $this->type = $type;
     }
 }
