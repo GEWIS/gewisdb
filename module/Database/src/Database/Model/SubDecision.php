@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *  "other"="Database\Model\SubDecision\Other"
  * })
  */
-class SubDecision
+abstract class SubDecision
 {
 
     /**
@@ -84,13 +84,6 @@ class SubDecision
      * @ORM\Column(type="integer")
      */
     protected $number;
-
-    /**
-     * Textual content for the decision.
-     *
-     * @ORM\Column(type="string")
-     */
-    protected $content;
 
 
     /**
@@ -183,18 +176,5 @@ class SubDecision
      *
      * @return string
      */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Set the content.
-     *
-     * @param string $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
+    public abstract function getContent();
 }
