@@ -83,7 +83,7 @@ class Meeting
      *
      * @param MeetingModel $meeting Meeting to persist.
      */
-    public function persist(MeetingModel $meeting)
+    public function persist($meeting)
     {
         $this->em->persist($meeting);
         $this->em->flush();

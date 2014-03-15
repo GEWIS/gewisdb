@@ -43,7 +43,7 @@ class Meeting
     /**
      * Decisions.
      *
-     * @ORM\OneToMany(targetEntity="Decision", mappedBy="meeting")
+     * @ORM\OneToMany(targetEntity="Decision", mappedBy="meeting", cascade={"persist"})
      */
     protected $decisions;
 

@@ -62,7 +62,7 @@ class Decision
     /**
      * Subdecisions
      *
-     * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision")
+     * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision", cascade={"persist"})
      */
     protected $subdecisions;
 
@@ -75,7 +75,7 @@ class Decision
     {
         $meeting->addDecision($this);
         $this->meeting_type = $meeting->getType();
-        $this->meeting_number = $meeting->getType();
+        $this->meeting_number = $meeting->getNumber();
         $this->meeting = $meeting;
     }
 

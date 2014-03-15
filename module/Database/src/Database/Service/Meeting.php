@@ -60,9 +60,12 @@ class Meeting extends AbstractService
             return;
         }
 
-        $data = $form->getData();
+        $decision = $form->getData();
 
-        var_dump($data);
+        var_dump($decision);
+
+        // simply persist through the meeting mapper
+        $this->getMeetingMapper()->persist($decision->getMeeting());
     }
 
     /**

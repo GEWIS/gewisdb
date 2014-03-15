@@ -27,7 +27,9 @@ class Budget extends AbstractDecision
 
         $subdecision = new SubDecision();
 
+        $subdecision->setNumber(1);
         $subdecision->setMember($data['author']);
+        $subdecision->setType($data['type']);
         $date = new \DateTime($data['date']);
 
         $content = self::BUDGET_TEMPLATE;
