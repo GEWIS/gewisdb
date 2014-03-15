@@ -5,6 +5,10 @@ namespace Database\Service;
 use Application\Service\AbstractService;
 
 use Database\Model\Meeting as MeetingModel;
+use Database\Model\Decision;
+use Database\Model\SubDecision;
+
+use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 
 class Meeting extends AbstractService
 {
@@ -34,6 +38,31 @@ class Meeting extends AbstractService
         $mapper = $this->getMeetingMapper();
 
         return $mapper->findAll();
+    }
+
+    /**
+     * Budget decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function budgetDecision($data)
+    {
+        $form = $this->getBudgetForm();
+
+        $form->setData($data);
+
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            var_dump('not valid');
+            return;
+        }
+
+        $data = $form->getData();
+
+        var_dump($data);
     }
 
     /**

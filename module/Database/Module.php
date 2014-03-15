@@ -53,15 +53,20 @@ class Module
                     return $form;
                 },
                 'database_form_budget' => function ($sm) {
-                    return new \Database\Form\Budget(
+                    $form = new \Database\Form\Budget(
                         $sm->get('database_form_fieldset_member')
                     );
+                    $form->setHydrator($sm->get('database_hydrator_budget'));
+                    return $form;
                 },
                 'database_form_fieldset_member' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\Member();
                     $fieldset->setHydrator($sm->get('database_hydrator_member'));
                     $fieldset->setObject(new \Database\Model\Member());
                     return $fieldset;
+                },
+                'database_hydrator_budget' => function ($sm) {
+                    return new \Database\Hydrator\Budget();
                 },
                 'database_hydrator_member' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
