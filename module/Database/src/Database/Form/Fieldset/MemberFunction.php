@@ -17,9 +17,38 @@ class MemberFunction extends Member
                 'value_options' => array(
                     'lid' => 'Lid',
                     'vz' => 'Voorzitter',
-                    'secr' => 'Secretaris'
+                    'secr' => 'Secretaris',
+                    'pm' => 'Penningmeester',
+                    'vvz' => 'Vice-Voorzitter',
+                    'prf' => 'PR-Functionaris',
+                    'oc' => 'Onderwijscommisaris'
                 )
             )
         ));
+    }
+
+    public function getInputFilterSpecification()
+    {
+        $spec = parent::getInputFilterSpecification();
+        $spec['function'] = array(
+            'required' => true,
+            'validators' => array(
+                array(
+                    'name' => 'in_array',
+                    'options' => array(
+                        'haystack' => array(
+                            'lid',
+                            'vz',
+                            'secr',
+                            'pm',
+                            'vvz',
+                            'prf',
+                            'oc'
+                        )
+                    )
+                )
+            )
+        );
+        return $spec;
     }
 }
