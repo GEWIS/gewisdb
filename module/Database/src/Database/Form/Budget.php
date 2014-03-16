@@ -18,8 +18,8 @@ class Budget extends AbstractDecision
             'options' => array(
                 'label' => 'Begroting / Afrekening',
                 'value_options' => array(
-                    SubDecision::TYPE_BUDGET => 'Begroting',
-                    SubDecision::TYPE_RECKONING => 'Afrekening'
+                    'budget' => 'Begroting',
+                    'reckoning' => 'Afrekening'
                 )
             )
         ));
@@ -108,8 +108,8 @@ class Budget extends AbstractDecision
                     'name' => 'in_array',
                     'options' => array(
                         'haystack' => array(
-                            SubDecision::TYPE_BUDGET,
-                            SubDecision::TYPE_RECKONING
+                            'budget',
+                            'reckoning'
                         )
                     )
                 )

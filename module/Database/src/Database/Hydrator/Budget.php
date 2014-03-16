@@ -3,7 +3,8 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision;
-use Database\Model\SubDecision;
+use Database\Model\SubDecision\Budget as BudgetDecision;
+use Database\Model\SubDecision\Reckoning as ReckoningDecision;
 
 class Budget extends AbstractDecision
 {
@@ -25,37 +26,22 @@ class Budget extends AbstractDecision
         $object = parent::hydrate($data, $object);
         var_dump($data);
 
-        $subdecision = new SubDecision();
+        if ($data['type'] == 'budget') {
+            $subdecision = new BudgetDecision();
+        } else {
+            $subdecision = new ReckoningDecision();
+        }
 
         $subdecision->setNumber(1);
-        $subdecision->setMember($data['author']);
-        $subdecision->setType($data['type']);
+
         $date = new \DateTime($data['date']);
+        $subdecision->setDate($date);
 
-        $content = self::BUDGET_TEMPLATE;
-
-        if ($data['type'] == SubDecision::TYPE_BUDGET) {
-            $content = str_replace('%TYPE%', 'begroting', $content);
-        } else {
-            $content = str_replace('%TYPE%', 'afrekening', $content);
-        }
-
-        $content = str_replace('%NAME%', $data['name'], $content);
-        $content = str_replace('%AUTHOR%', $data['author']->getFullName(), $content);
-        $content = str_replace('%VERSION%', $data['version'], $content);
-        $content = str_replace('%DATE%', $date->format('d F Y'), $content);
-
-        if ($data['approve'] == 'approve') {
-            $content = str_replace('%APPROVE%', 'goedgekeurd', $content);
-
-            if ($data['changes'] == 'yes') {
-                $content = str_replace('%CHANGES%', ' met genoemde wijzigingen', $content);
-            }
-        } else {
-            $content = str_replace('%APPROVE%', 'afgekeurd', $content);
-        }
-
-        $subdecision->setContent($content);
+        $subdecision->setName($data['name']);
+        $subdecision->setAuthor($data['author']);
+        $subdecision->setVersion($data['version']);
+        $subdecision->setApproval($data['approve'] == 'aprove');
+        $subdecision->setChanges($data['changes'] == 'yes');
 
         $subdecision->setDecision($object);
 
