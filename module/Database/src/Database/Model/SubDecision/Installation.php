@@ -47,6 +47,21 @@ class Installation extends SubDecision
     protected $member;
 
     /**
+     * Reference to foundation of organ.
+     *
+     * @ORM\ManyToOne(targetEntity="Foundation")
+     * @ORM\JoinColumns({
+     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
+     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
+     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
+     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
+     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
+     * })
+     */
+    protected $foundation;
+
+
+    /**
      * Get available functions.
      *
      * @return array
@@ -106,6 +121,26 @@ class Installation extends SubDecision
     public function setMember(Member $member)
     {
         $this->member = $member;
+    }
+
+    /**
+     * Get organ foundation.
+     *
+     * @return Foundation
+     */
+    public function getFoundation()
+    {
+        return $this->foundation;
+    }
+
+    /**
+     * Set organ foundation.
+     *
+     * @param Foundation $foundation
+     */
+    public function setFoundation($foundation)
+    {
+        $this->foundation = $foundation;
     }
 
     /**
