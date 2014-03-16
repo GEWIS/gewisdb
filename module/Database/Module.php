@@ -42,6 +42,7 @@ class Module
             'invokables' => array(
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
+                'database_hydrator_budget' => 'Database\Hydrator\Budget'
             ),
             'factories' => array(
                 'database_form_createmeeting' => function ($sm) {
@@ -86,11 +87,6 @@ class Module
                     $fieldset->setHydrator($sm->get('database_hydrator_member'));
                     $fieldset->setObject(new \Database\Model\Member());
                     return $fieldset;
-                },
-                'database_hydrator_budget' => function ($sm) {
-                    $hydrator = new \Database\Hydrator\Budget();
-                    $hydrator->setMeetingHydrator($sm->get('database_hydrator_meeting'));
-                    return $hydrator;
                 },
                 'database_hydrator_member' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(

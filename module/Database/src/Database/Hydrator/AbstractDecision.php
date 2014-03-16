@@ -11,13 +11,6 @@ abstract class AbstractDecision implements HydratorInterface
 {
 
     /**
-     * Meeting hydrator.
-     *
-     * @var HydratorInterface
-     */
-    protected $meetingHydrator;
-
-    /**
      * Decision hydration
      *
      * @param array $data
@@ -32,8 +25,7 @@ abstract class AbstractDecision implements HydratorInterface
         if (!$object instanceof Decision) {
             throw new \InvalidArgumentException("Object is not an instance of Database\Model\Decision.");
         }
-        $meeting = $this->hydrateMeeting($data['meeting_type'], $data['meeting_number']);
-        $object->setMeeting($meeting);
+        $object->setMeeting($data['meeting']);
         $object->setPoint($data['point']);
         $object->setNumber($data['decision']);
         return $object;
@@ -52,42 +44,5 @@ abstract class AbstractDecision implements HydratorInterface
             throw new \InvalidArgumentException("Object is not an instance of Database\Model\Decision.");
         }
         return array();
-    }
-
-    /**
-     * Hydrate a meeting.
-     *
-     * @param int $type
-     * @param int $number
-     *
-     * @return Meeting
-     */
-    protected function hydrateMeeting($type, $number)
-    {
-        return $this->getMeetingHydrator()
-            ->hydrate(array(
-                'type' => $type,
-                'number' => $number
-            ), new Meeting());
-    }
-
-    /**
-     * Set meeting hydrator.
-     *
-     * @param HydratorInterface $meetingHydrator
-     */
-    public function setMeetingHydrator(HydratorInterface $meetingHydrator)
-    {
-        $this->meetingHydrator = $meetingHydrator;
-    }
-
-    /**
-     * Get meeting hydrator.
-     *
-     * @return HydratorInterface
-     */
-    public function getMeetingHydrator()
-    {
-        return $this->meetingHydrator;
     }
 }
