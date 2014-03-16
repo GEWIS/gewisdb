@@ -9,8 +9,6 @@ use Database\Model\SubDecision\Reckoning as ReckoningDecision;
 class Budget extends AbstractDecision
 {
 
-    const BUDGET_TEMPLATE = 'De %TYPE% %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVE%%CHANGES%.';
-
     /**
      * Budget hydration
      *
@@ -40,7 +38,7 @@ class Budget extends AbstractDecision
         $subdecision->setName($data['name']);
         $subdecision->setAuthor($data['author']);
         $subdecision->setVersion($data['version']);
-        $subdecision->setApproval($data['approve'] == 'aprove');
+        $subdecision->setApproval($data['approve'] == 'approve');
         $subdecision->setChanges($data['changes'] == 'yes');
 
         $subdecision->setDecision($object);

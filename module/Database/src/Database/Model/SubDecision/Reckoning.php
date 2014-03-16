@@ -12,4 +12,13 @@ use Database\Model\SubDecision;
  */
 class Reckoning extends Budget
 {
+    /**
+     * Decision template
+     *
+     * @return string
+     */
+    protected function getTemplate()
+    {
+        return 'De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+    }
 }

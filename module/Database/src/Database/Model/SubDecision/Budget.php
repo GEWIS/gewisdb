@@ -218,12 +218,36 @@ class Budget extends SubDecision
     /**
      * Get the content.
      *
-     * @todo implement this
-     *
      * @return string
      */
     public function getContent()
     {
-        return 'TODO';
+        $template = $this->getTemplate();
+        $template = str_replace('%NAME%', $this->getName(), $template);
+        $template = str_replace('%AUTHOR%', $this->getAuthor()->getFullName(), $template);
+        $template = str_replace('%VERSION%', $this->getVersion(), $template);
+        $template = str_replace('%DATE%', $this->getDate()->format('d F Y'), $template);
+        if ($this->getApproval()) {
+            $template = str_replace('%APPROVAL%', 'goedgekeurd', $template);
+            if ($this->getChanges()) {
+                $template = str_replace('%CHANGES%', ' met genoemde wijzigingen', $template);
+            } else {
+                $template = str_replace('%CHANGES%', '', $template);
+            }
+        } else {
+            $template = str_replace('%APPROVAL%', 'afgekeurd', $template);
+            $template = str_replace('%CHANGES%', '', $template);
+        }
+        return $template;
+    }
+
+    /**
+     * Decision template
+     *
+     * @return string
+     */
+    protected function getTemplate()
+    {
+        return 'De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
     }
 }
