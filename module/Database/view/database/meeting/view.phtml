@@ -1,3 +1,17 @@
+<?php
+// determine last decision of each point
+$map = array();
+foreach ($meeting->getDecisions() as $decision) {
+    $point = $decision->getPoint();
+    if (!isset($map[$point]) || $map[$point] < $decision->getNumber()) {
+        $map[$point] = $decision->getNumber();
+    }
+}
+$mapjs = array();
+foreach ($map as $point => $num) {
+    $mapjs[] = '"' . $point . '": ' . $num;
+}
+?>
 <script>
 $(document).ready(function () {
     $('#createdecision').click(function () {
@@ -10,6 +24,15 @@ $(document).ready(function () {
         url = url.replace('__point__', $('#create_point').val());
         url = url.replace('__decision__', $('#create_decision').val());
         location.href = url;
+    });
+    var map = {<?= implode(", ", $mapjs) ?>};
+    $('#create_point').keyup(function (e) {
+        var val = $(e.target).val();
+        if (val in map) {
+            $('#create_decision').val(map[val] + 1);
+        } else {
+            $('#create_decision').val('');
+        }
     });
 });
 </script>
