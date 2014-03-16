@@ -1,0 +1,13 @@
+<?php if (isset($form)): ?>
+<?php
+switch ($type) {
+case 'budget':
+    echo $this->partial('database/meeting/budgetform', array(
+        'form' => $form
+    ));
+    break;
+}
+?>
+<?php else: ?>
+<?php var_dump($decision); ?>
+<?php endif; ?>

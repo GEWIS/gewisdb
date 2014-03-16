@@ -113,7 +113,9 @@ class MeetingController extends AbstractActionController
         }
         switch ($this->params()->fromRoute('form')) {
         case 'budget':
-            $this->getMeetingService()->budgetDecision($this->getRequest()->getPost());
+            return new ViewModel(
+                $this->getMeetingService()->budgetDecision($this->getRequest()->getPost())
+            );
             break;
         case 'foundation':
             break;

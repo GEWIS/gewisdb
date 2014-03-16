@@ -56,16 +56,22 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            var_dump('not valid');
+            return array(
+                'type' => 'budget',
+                'form' => $form
+            );
             return;
         }
 
         $decision = $form->getData();
 
-        var_dump($decision);
-
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
+
+        return array(
+            'type' => 'budget',
+            'decision' => $decision
+        );
     }
 
     /**

@@ -22,7 +22,6 @@ class Budget extends AbstractDecision
     public function hydrate(array $data, $object)
     {
         $object = parent::hydrate($data, $object);
-        var_dump($data);
 
         if ($data['type'] == 'budget') {
             $subdecision = new BudgetDecision();
