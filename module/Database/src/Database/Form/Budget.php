@@ -67,8 +67,8 @@ class Budget extends AbstractDecision
             'options' => array(
                 'label' => 'Goedkeuren / Afkeuren',
                 'value_options' => array(
-                    'approve' => 'Goedkeuren',
-                    'disapprove' => 'Afkeuren'
+                    'true' => 'Goedkeuren',
+                    'false' => 'Afkeuren'
                 )
             )
         ));
@@ -79,8 +79,8 @@ class Budget extends AbstractDecision
             'options' => array(
                 'label' => 'Wijzigingen',
                 'value_options' => array(
-                    'yes' => 'Met wijzigingen',
-                    'no' => 'Zonder wijzigingen'
+                    'true' => 'Met wijzigingen',
+                    'false' => 'Zonder wijzigingen'
                 )
             )
         ));
@@ -176,9 +176,17 @@ class Budget extends AbstractDecision
                     'name' => 'in_array',
                     'options' => array(
                         'haystack' => array(
-                            'approve',
-                            'disapprove'
+                            'true',
+                            'false'
                         )
+                    )
+                )
+            ),
+            'filters' => array(
+                array(
+                    'name' => 'boolean',
+                    'options' => array(
+                        'type' => \Zend\Filter\Boolean::TYPE_FALSE_STRING
                     )
                 )
             )
@@ -192,9 +200,17 @@ class Budget extends AbstractDecision
                     'name' => 'in_array',
                     'options' => array(
                         'haystack' => array(
-                            'yes',
-                            'no'
+                            'true',
+                            'false'
                         )
+                    )
+                )
+            ),
+            'filters' => array(
+                array(
+                    'name' => 'boolean',
+                    'options' => array(
+                        'type' => \Zend\Filter\Boolean::TYPE_FALSE_STRING
                     )
                 )
             )
