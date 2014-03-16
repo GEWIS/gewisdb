@@ -1,3 +1,18 @@
+<script>
+$(document).ready(function () {
+    $('#createdecision').click(function () {
+        var url = "<?= $this->url('meeting/decision/create', array(
+            'type' => $meeting->getType(),
+            'number' => $meeting->getNumber(),
+            'point' => '__point__',
+            'decision' => '__decision__'
+        )) ?>";
+        url = url.replace('__point__', $('#create_point').val());
+        url = url.replace('__decision__', $('#create_decision').val());
+        location.href = url;
+    });
+});
+</script>
 <?php
 use Database\Model\Meeting;
 function showType($type)
@@ -36,15 +51,15 @@ function showType($type)
 
 <form role="form" class="form-inline">
 <div class="form-group">
-    <input type="text" class="form-control" placeholder="Punt">
+    <label class="sr-only" for="point">Punt</label>
+    <input type="text" class="form-control" name="point" id="create_point" placeholder="Punt">
 </div>
 <div class="form-group">
-    <input type="text" class="form-control" placeholder="Besluitnummer">
+    <label class="sr-only" for="decision">Punt</label>
+    <input type="text" class="form-control" name="decision" id="create_decision" placeholder="Besluitnummer">
 </div>
-<button type="button" class="btn btn-success">
+<button type="button" class="btn btn-success" id="createdecision">
     <span class="glyphicon glyphicon-plus"></span>
     Voeg toe
 </button>
 </form>
-
-
