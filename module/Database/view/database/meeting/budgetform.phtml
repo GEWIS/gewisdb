@@ -44,8 +44,11 @@ $form->setAttribute('role', 'form');
 echo $this->form()->openTag($form);
 ?>
 <?php /* first do hidden elements */ ?>
-<?= $this->formHidden($form->get('meeting_type')) ?>
-<?= $this->formHidden($form->get('meeting_number')) ?>
+<?php
+$fs = $form->get('meeting')
+?>
+<?= $this->formHidden($fs->get('type')) ?>
+<?= $this->formHidden($fs->get('number')) ?>
 <?= $this->formHidden($form->get('point')) ?>
 <?= $this->formHidden($form->get('decision')) ?>
 <div class="form-group">

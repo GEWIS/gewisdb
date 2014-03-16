@@ -9,19 +9,12 @@ use Database\Model\Meeting;
 abstract class AbstractDecision extends Form
 {
 
-    public function __construct()
+    public function __construct(Fieldset\Meeting $meeting)
     {
         parent::__construct();
 
-        $this->add(array(
-            'name' => 'meeting_type',
-            'type' => 'hidden'
-        ));
-
-        $this->add(array(
-            'name' => 'meeting_number',
-            'type' => 'hidden'
-        ));
+        $meeting->setName('meeting');
+        $this->add($meeting);
 
         $this->add(array(
             'name' => 'point',
@@ -45,8 +38,7 @@ abstract class AbstractDecision extends Form
      */
     public function setDecisionData(Meeting $meeting, $point, $decision)
     {
-        $this->get('meeting_type')->setValue($meeting->getType());
-        $this->get('meeting_number')->setValue($meeting->getNumber());
+        $this->get('meeting')->setMeetingData($meeting);
         $this->get('point')->setValue($point);
         $this->get('decision')->setValue($decision);
     }

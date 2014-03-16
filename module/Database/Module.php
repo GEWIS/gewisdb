@@ -42,9 +42,6 @@ class Module
             'invokables' => array(
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
-                'database_form_abolish' => 'Database\Form\Abolish',
-                'database_form_install' => 'Database\Form\Install',
-                'database_form_foundation' => 'Database\Form\Foundation'
             ),
             'factories' => array(
                 'database_form_createmeeting' => function ($sm) {
@@ -54,10 +51,35 @@ class Module
                 },
                 'database_form_budget' => function ($sm) {
                     $form = new \Database\Form\Budget(
+                        $sm->get('database_form_fieldset_meeting'),
                         $sm->get('database_form_fieldset_member')
                     );
                     $form->setHydrator($sm->get('database_hydrator_budget'));
                     return $form;
+                },
+                'database_form_install' => function ($sm) {
+                    $form = new \Database\Form\Install(
+                        $sm->get('database_form_fieldset_meeting')
+                    );
+                    return $form;
+                },
+                'database_form_abolish' => function ($sm) {
+                    $form = new \Database\Form\Abolish(
+                        $sm->get('database_form_fieldset_meeting')
+                    );
+                    return $form;
+                },
+                'database_form_foundation' => function ($sm) {
+                    $form = new \Database\Form\Foundation(
+                        $sm->get('database_form_fieldset_meeting')
+                    );
+                    return $form;
+                },
+                'database_form_fieldset_meeting' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\Meeting();
+                    $fieldset->setHydrator($sm->get('database_hydrator_meeting'));
+                    $fieldset->setObject(new \Database\Model\Meeting());
+                    return $fieldset;
                 },
                 'database_form_fieldset_member' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\Member();

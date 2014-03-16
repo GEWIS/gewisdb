@@ -8,9 +8,9 @@ use Database\Model\SubDecision;
 class Budget extends AbstractDecision
 {
 
-    public function __construct(Fieldset\Member $member)
+    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
     {
-        parent::__construct();
+        parent::__construct($meeting);
 
         $this->add(array(
             'name' => 'type',

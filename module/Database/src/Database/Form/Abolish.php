@@ -7,9 +7,9 @@ use Zend\InputFilter\InputFilter;
 class Abolish extends AbstractDecision
 {
 
-    public function __construct()
+    public function __construct(Fieldset\Meeting $meeting)
     {
-        parent::__construct();
+        parent::__construct($meeting);
 
         $this->add(array(
             'name' => 'name',
