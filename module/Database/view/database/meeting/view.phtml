@@ -21,6 +21,10 @@ $(document).ready(function () {
             'point' => '__point__',
             'decision' => '__decision__'
         )) ?>";
+        if ($('#create_point').val() == '' || $('#create_decision').val() == '') {
+            alert('Please fill in a valid point and decision number');
+            return;
+        }
         url = url.replace('__point__', $('#create_point').val());
         url = url.replace('__decision__', $('#create_decision').val());
         location.href = url;
