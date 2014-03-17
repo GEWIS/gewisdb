@@ -15,6 +15,7 @@ class Foundation extends SubDecision
 {
 
     const ORGAN_TYPE_COMMITTEE = 'committee';
+    const ORGAN_TYPE_AV_COMMITTEE = 'avc';
     const ORGAN_TYPE_FRATERNITY = 'fraternity';
 
     /**
@@ -48,6 +49,7 @@ class Foundation extends SubDecision
     {
         return array(
             self::ORGAN_TYPE_COMMITTEE,
+            self::ORGAN_TYPE_AV_COMMITTEE,
             self::ORGAN_TYPE_FRATERNITY
         );
     }
