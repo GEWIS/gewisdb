@@ -13,20 +13,44 @@ use Database\Model\SubDecision;
  */
 class Foundation extends SubDecision
 {
+
+    const ORGAN_TYPE_COMMITTEE = 'committee';
+    const ORGAN_TYPE_FRATERNITY = 'fraternity';
+
     /**
      * Abbreviation (only for when organs are created)
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
     protected $abbr;
 
     /**
      * Name (only for when organs are created)
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
     protected $name;
 
+    /**
+     * Type of the organ.
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $organType;
+
+
+    /**
+     * Get available organ types.
+     *
+     * @return array
+     */
+    public function getOrganTypes()
+    {
+        return array(
+            self::ORGAN_TYPE_COMMITTEE,
+            self::ORGAN_TYPE_FRATERNITY
+        );
+    }
 
     /**
      * Get the abbreviation.
@@ -66,6 +90,31 @@ class Foundation extends SubDecision
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * Get the type.
+     *
+     * @return string
+     */
+    public function getOrganType()
+    {
+        return $this->organType;
+    }
+
+    /**
+     * Set the type.
+     *
+     * @param string $organType
+     *
+     * @throws \InvalidArgumentException if the type is wrong
+     */
+    public function setOrganType($organType)
+    {
+        if (!in_array($organType, self::getOrganTypes())) {
+            throw new \InvalidArgumentException("Given type does not exist.");
+        }
+        $this->organType = $organType;
     }
 
     /**
