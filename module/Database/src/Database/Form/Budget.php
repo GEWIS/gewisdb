@@ -69,7 +69,9 @@ class Budget extends AbstractDecision
                 'value_options' => array(
                     'true' => 'Goedkeuren',
                     'false' => 'Afkeuren'
-                )
+                ),
+                // forward compatability with ZF 2.3, doesn't actually do anything right now
+                'disable_inarray_validator' => true
             )
         ));
 
@@ -81,7 +83,9 @@ class Budget extends AbstractDecision
                 'value_options' => array(
                     'true' => 'Met wijzigingen',
                     'false' => 'Zonder wijzigingen'
-                )
+                ),
+                // forward compatability with ZF 2.3, doesn't actually do anything right now
+                'disable_inarray_validator' => true
             )
         ));
 
@@ -170,18 +174,9 @@ class Budget extends AbstractDecision
 
         $filter->add(array(
             'name' => 'approve',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'in_array',
-                    'options' => array(
-                        'haystack' => array(
-                            'true',
-                            'false'
-                        )
-                    )
-                )
-            ),
+            'required' => false,
+            'allow_empty' => true,
+            'fallback_value' => false,
             'filters' => array(
                 array(
                     'name' => 'boolean',
@@ -194,18 +189,9 @@ class Budget extends AbstractDecision
 
         $filter->add(array(
             'name' => 'changes',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'in_array',
-                    'options' => array(
-                        'haystack' => array(
-                            'true',
-                            'false'
-                        )
-                    )
-                )
-            ),
+            'required' => false,
+            'allow_empty' => true,
+            'fallback_value' => false,
             'filters' => array(
                 array(
                     'name' => 'boolean',

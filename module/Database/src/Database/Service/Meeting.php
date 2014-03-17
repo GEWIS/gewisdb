@@ -51,6 +51,20 @@ class Meeting extends AbstractService
     {
         $form = $this->getBudgetForm();
 
+        // use hack to make sure we do not have validators for these fields
+        $approveChain = $form->getInputFilter()->get('approve')->getValidatorChain();
+        $refObj = new \ReflectionObject($approveChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setAccessible(true);
+        $refProp->setValue($approveChain, array());
+
+        $changesChain = $form->getInputFilter()->get('changes')->getValidatorChain();
+        $refObj = new \ReflectionObject($changesChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setAccessible(true);
+        $refProp->setValue($changesChain, array());
+
+
         $form->setData($data);
 
         $form->bind(new Decision());
