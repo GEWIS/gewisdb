@@ -17,3 +17,7 @@ Installation
   directory.
 - Run `./vendor/bin/doctrine-module orm:schema-tool:create` to populate the
   database.
+- Create a `.htpasswd` file, and add a user to it (`htpasswd -c .htpasswd
+  <user>`)
+- Copy `public/.htaccess.dist` to `public/.htaccess` and configure the path to
+  the `.htpasswd` file (the `AuthUserFile` directive).
