@@ -62,6 +62,15 @@ return array(
                                 'action' => 'view'
                             )
                         )
+                    ),
+                    'create' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/create',
+                            'defaults' => array(
+                                'action' => 'create'
+                            )
+                        )
                     )
                 ),
             ),
