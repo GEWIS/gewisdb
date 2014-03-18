@@ -58,6 +58,11 @@ return array(
             'Zend\Log\LoggerAbstractServiceFactory',
         )
     ),
+    // however counter-intuitive it is, leaving this in makes sure we do not
+    // need the intl extension
+    'translator' => array(
+        'locale' => 'nl_NL'
+    ),
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
