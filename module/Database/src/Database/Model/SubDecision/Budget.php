@@ -226,7 +226,7 @@ class Budget extends SubDecision
         $template = str_replace('%NAME%', $this->getName(), $template);
         $template = str_replace('%AUTHOR%', $this->getAuthor()->getFullName(), $template);
         $template = str_replace('%VERSION%', $this->getVersion(), $template);
-        $template = str_replace('%DATE%', $this->getDate()->format('d F Y'), $template);
+        $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
         if ($this->getApproval()) {
             $template = str_replace('%APPROVAL%', 'goedgekeurd', $template);
             if ($this->getChanges()) {
@@ -239,6 +239,28 @@ class Budget extends SubDecision
             $template = str_replace('%CHANGES%', '', $template);
         }
         return $template;
+    }
+
+    /**
+     * Format the date.
+     *
+     * returns the localized version of $date->format('d F Y')
+     *
+     * @param DateTime $date
+     *
+     * @return string Formatted date
+     */
+    protected function formatDate(\DateTime $date)
+    {
+        $formatter = new \IntlDateFormatter(
+            'nl_NL', // yes, hardcoded :D
+            \IntlDateFormatter::NONE,
+            \IntlDateFormatter::NONE,
+            \date_default_timezone_get(),
+            null,
+            'd MMMM Y'
+        );
+        return $formatter->format($date);
     }
 
     /**
