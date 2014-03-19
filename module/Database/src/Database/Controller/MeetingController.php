@@ -93,6 +93,7 @@ class MeetingController extends AbstractActionController
             'foundation' => $this->getMeetingService()->getFoundationForm(),
             'abolish' => $this->getMeetingService()->getAbolishForm(),
             'install' => $this->getMeetingService()->getInstallForm(),
+            'other' => $this->getMeetingService()->getOtherForm()
         );
 
         foreach ($forms as $form) {

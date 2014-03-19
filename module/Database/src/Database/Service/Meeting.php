@@ -178,6 +178,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get other form.
+     *
+     * @return \Database\Form\Other
+     */
+    public function getOtherForm()
+    {
+        return $this->getServiceManager()->get('database_form_other');
+    }
+
+    /**
      * Get the meeting mapper.
      *
      * @return \Database\Mapper\Meeting

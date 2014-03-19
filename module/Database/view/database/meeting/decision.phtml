@@ -55,6 +55,8 @@ function showType($type)
         interface for changing functions.
     </div>
     <div class="tab-pane" id="overig">
-        Overig
+    <?= $this->partial('database/meeting/otherform', array(
+        'form' => $forms['other']
+    )); ?>
     </div>
 </div>
