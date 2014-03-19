@@ -50,6 +50,12 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_meeting'));
                     return $form;
                 },
+                'database_form_other' => function ($sm) {
+                    $form = new \Database\Form\Other(
+                        $sm->get('database_form_fieldset_meeting')
+                    );
+                    return $form;
+                },
                 'database_form_budget' => function ($sm) {
                     $form = new \Database\Form\Budget(
                         $sm->get('database_form_fieldset_meeting'),
