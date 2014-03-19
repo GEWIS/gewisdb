@@ -80,7 +80,9 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'budget',
@@ -118,7 +120,9 @@ class Meeting extends AbstractService
             return false;
         }
 
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('meeting' => $meeting));
         $mapper->persist($meeting);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('meeting' => $meeting));
 
         return true;
     }
