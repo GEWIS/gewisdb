@@ -57,7 +57,12 @@ function showType($type)
 }
 ?>
     <h1><?= showType($meeting->getType()) ?> <?= $meeting->getNumber() ?>
-    <small><?= $meeting->getDate()->format('l j F Y') ?></small></h1>
+    <small><?= $this->dateFormat(
+        $meeting->getDate(),
+        \IntlDateFormatter::FULL,
+        \IntlDateFormatter::NONE,
+        'nl_NL'
+    ) ?></small></h1>
 
 <h2>Besluiten</h2>
 

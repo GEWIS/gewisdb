@@ -28,7 +28,12 @@ function showType($type)
     <tr>
         <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= showType($meeting->getType()) ?></a></td>
         <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getNumber() ?></a></td>
-        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getDate()->format('l j F Y') ?></a></td>
+        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $this->dateFormat(
+            $meeting->getDate(),
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::NONE,
+            'nl_NL'
+        ) ?></a></td>
     </tr>
 <?php endforeach; ?>
     </tbody>
