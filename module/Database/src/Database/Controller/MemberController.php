@@ -12,6 +12,14 @@ class MemberController extends AbstractActionController
 {
 
     /**
+     * Index action.
+     */
+    public function indexAction()
+    {
+        return new ViewModel(array());
+    }
+
+    /**
      * Search action.
      *
      * Searches for members.
