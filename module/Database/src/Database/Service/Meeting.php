@@ -52,19 +52,26 @@ class Meeting extends AbstractService
         $form = $this->getOtherForm();
 
         $form->setData($data);
+        $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            var_dump('not valid');
             return array(
                 'type' => 'other',
                 'form' => $form
             );
         }
 
-        var_dump($form->getData());
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+
         return array(
             'type' => 'other',
-            'form' => $form
+            'decision' => $decision
         );
     }
 

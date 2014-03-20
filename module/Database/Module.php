@@ -42,7 +42,8 @@ class Module
             'invokables' => array(
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
-                'database_hydrator_budget' => 'Database\Hydrator\Budget'
+                'database_hydrator_budget' => 'Database\Hydrator\Budget',
+                'database_hydrator_other' => 'Database\Hydrator\Other'
             ),
             'factories' => array(
                 'database_form_createmeeting' => function ($sm) {
@@ -54,6 +55,7 @@ class Module
                     $form = new \Database\Form\Other(
                         $sm->get('database_form_fieldset_meeting')
                     );
+                    $form->setHydrator($sm->get('database_hydrator_other'));
                     return $form;
                 },
                 'database_form_budget' => function ($sm) {
@@ -119,6 +121,10 @@ class Module
                 'database_doctrine_em' => function ($sm) {
                     return $sm->get('doctrine.entitymanager.orm_default');
                 }
+            ),
+            'shared' => array(
+                // every form should get a different meeting fieldset
+                'database_form_fieldset_meeting' => false
             )
         );
     }
