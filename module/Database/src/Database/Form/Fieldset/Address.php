@@ -52,7 +52,7 @@ class Address extends Fieldset
         ));
 
         $this->add(array(
-            'name' => 'City',
+            'name' => 'city',
             'type' => 'text',
             'options' => array(
                 'label' => 'Stad'

@@ -84,6 +84,154 @@ $element->setAttribute('placeholder', $element->getLabel());
     <?= $this->formElementErrors($element) ?>
 </div>
 
+<fieldset>
+<label>Thuisadres</label>
+<?php
+$fs = $form->get('home_address');
+?>
+<?= $this->formHidden($fs->get('type')) ?>
+
+<div class="form-group">
+<?php
+$element = $fs->get('country');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('street');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('number');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('postalCode');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('city');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('phone');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+</fieldset>
+
+<fieldset>
+<label>Adres kamer</label>
+<?php
+$fs = $form->get('student_address');
+?>
+<?= $this->formHidden($fs->get('type')) ?>
+
+<div class="form-group">
+<?php
+$element = $fs->get('country');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('street');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('number');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('postalCode');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('city');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $fs->get('phone');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+</fieldset>
+
 <?php
 $submit = $form->get('submit');
 $submit->setLabel($submit->getValue());
