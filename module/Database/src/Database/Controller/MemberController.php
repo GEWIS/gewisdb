@@ -20,6 +20,16 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Subscribe action.
+     */
+    public function subscribeAction()
+    {
+        return new ViewModel(array(
+            'form' => $this->getMemberService()->getMemberForm()
+        ));
+    }
+
+    /**
      * Search action.
      *
      * Searches for members.

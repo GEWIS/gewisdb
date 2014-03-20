@@ -18,6 +18,16 @@ class Member extends AbstractService
     }
 
     /**
+     * Get the member form.
+     *
+     * @return \Database\Form\Member
+     */
+    public function getMemberForm()
+    {
+        return $this->getServiceManager()->get('database_form_member');
+    }
+
+    /**
      * Get the member mapper.
      *
      * @return \Database\Mapper\Member

@@ -43,7 +43,8 @@ class Module
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
-                'database_hydrator_other' => 'Database\Hydrator\Other'
+                'database_hydrator_other' => 'Database\Hydrator\Other',
+                'database_form_member' => 'Database\Form\Member'
             ),
             'factories' => array(
                 'database_form_createmeeting' => function ($sm) {
