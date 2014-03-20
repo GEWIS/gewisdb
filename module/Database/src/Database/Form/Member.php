@@ -5,10 +5,12 @@ namespace Database\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
+use Database\Model\Address;
+
 class Member extends Form
 {
 
-    public function __construct()
+    public function __construct(Fieldset\Address $address)
     {
         parent::__construct();
 
@@ -71,6 +73,17 @@ class Member extends Form
                 'label' => 'Geboortedatum'
             )
         ));
+
+
+        $home = clone $address;
+        $home->setName('home_address');
+        $home->get('type')->setValue(Address::TYPE_HOME);
+        $this->add($home);
+
+        $student = clone $address;
+        $student->setName('student_address');
+        $home->get('type')->setValue(Address::TYPE_STUDENT);
+        $this->add($student);
 
         // TODO: accepteer voorwaarden
 

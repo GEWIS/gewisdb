@@ -44,9 +44,13 @@ class Module
                 'database_service_member' => 'Database\Service\Member',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
-                'database_form_member' => 'Database\Form\Member'
             ),
             'factories' => array(
+                'database_form_member' => function ($sm) {
+                    return new \Database\Form\Member(
+                        $sm->get('database_form_fieldset_address')
+                    );
+                },
                 'database_form_createmeeting' => function ($sm) {
                     $form = new \Database\Form\CreateMeeting();
                     $form->setHydrator($sm->get('database_hydrator_meeting'));
@@ -96,6 +100,9 @@ class Module
                     $fieldset->setHydrator($sm->get('database_hydrator_member'));
                     $fieldset->setObject(new \Database\Model\Member());
                     return $fieldset;
+                },
+                'database_form_fieldset_address' => function ($sm) {
+                    return new \Database\Form\Fieldset\Address();
                 },
                 'database_hydrator_member' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(

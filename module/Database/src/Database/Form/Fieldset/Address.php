@@ -69,4 +69,13 @@ class Address extends Fieldset
 
         // TODO: filters
     }
+
+    /**
+     * Specification for input filters.
+     */
+    public function getInputFilterSpecification()
+    {
+        // TODO: add filter specification
+        return array();
+    }
 }
