@@ -71,5 +71,15 @@ class Member extends Form
                 'label' => 'Geboortedatum'
             )
         ));
+
+        // TODO: accepteer voorwaarden
+
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'submit',
+            'attributes' => array(
+                'value' => 'Schrijf in'
+            )
+        ));
     }
 }
