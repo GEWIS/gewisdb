@@ -1,0 +1,45 @@
+<script>
+$(document).ready(function () {
+    $('#member-search').keyup(function (e) {
+        term = $(e.target).val();
+        if (term.length >= 1) {
+            $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + term,
+                context: document.body
+            }).done(function (data) {
+                var table = '';
+                $.each(data.json, function (idx, member) {
+                    console.log(member);
+                    table += '<tr>';
+                    table += '<td>' + member.lidnr + '</td>';
+                    table += '<td>' + member.fullName + '</td>';
+                    table += '<td>' + member.email + '</td>';
+                    table += '</tr>';
+                });
+                $('#members-result tbody').html(table);
+            });
+        } else {
+            $('#members-result tbody').html('');
+        }
+    });
+});
+</script>
+<form role="form">
+    <div class="form-group">
+        <label for="">Zoeken op lid</label>
+        <input type="text" class="form-control" placeholder="Zoek" id="member-search">
+    </div>
+</form>
+
+<table class="table table-hover" id="members-result">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Naam</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
