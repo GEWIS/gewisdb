@@ -41,6 +41,34 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Other decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function otherDecision($data)
+    {
+        $form = $this->getOtherForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            var_dump('not valid');
+            return array(
+                'type' => 'other',
+                'form' => $form
+            );
+        }
+
+        var_dump($form->getData());
+        return array(
+            'type' => 'other',
+            'form' => $form
+        );
+    }
+
+    /**
      * Budget decision.
      *
      * @param array $data
@@ -74,7 +102,6 @@ class Meeting extends AbstractService
                 'type' => 'budget',
                 'form' => $form
             );
-            return;
         }
 
         $decision = $form->getData();

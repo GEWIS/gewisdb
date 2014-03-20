@@ -112,10 +112,13 @@ class MeetingController extends AbstractActionController
         if (!$this->getRequest()->isPost()) {
             $this->redirect()->toRoute('meeting/decision');
         }
+
+        $service = $this->getMeetingService();
+
         switch ($this->params()->fromRoute('form')) {
         case 'budget':
             return new ViewModel(
-                $this->getMeetingService()->budgetDecision($this->getRequest()->getPost())
+                $service->budgetDecision($this->getRequest()->getPost())
             );
             break;
         case 'foundation':
@@ -123,6 +126,11 @@ class MeetingController extends AbstractActionController
         case 'abolish':
             break;
         case 'install':
+            break;
+        case 'other':
+            return new ViewModel(
+                $service->otherDecision($this->getRequest()->getPost())
+            );
             break;
         default:
             $this->redirect()->toRoute('meeting/decision');
