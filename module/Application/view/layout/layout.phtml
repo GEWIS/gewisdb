@@ -53,8 +53,8 @@ function getIsActive($view, array $condition)
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li<?= getIsActive($this, array('application')) ?>><a href="<?php echo $this->url('home') ?>">Home</a></li>
                         <li<?= getIsActive($this, array('database', 'meeting')) ?>><a href="<?= $this->url('meeting') ?>">Vergaderingen</a></li>
+                        <li<?= getIsActive($this, array('database', 'member')) ?>><a href="<?= $this->url('member') ?>">Leden</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
