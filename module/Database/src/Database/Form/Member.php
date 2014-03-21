@@ -4,10 +4,11 @@ namespace Database\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
 
 use Database\Model\Address;
 
-class Member extends Form
+class Member extends Form implements InputFilterProviderInterface
 {
 
     public function __construct(Fieldset\Address $address)
@@ -85,8 +86,6 @@ class Member extends Form
         $home->get('type')->setValue(Address::TYPE_STUDENT);
         $this->add($student);
 
-        // TODO: accepteer voorwaarden
-
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
@@ -94,5 +93,62 @@ class Member extends Form
                 'value' => 'Schrijf in'
             )
         ));
+    }
+
+    /**
+     * Specification of input filter.
+     */
+    public function getInputFilterSpecification()
+    {
+        return array(
+            'lastName' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 2,
+                            'max' => 32
+                        )
+                    )
+                )
+            ),
+            'middleName' => array(
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 2,
+                            'max' => 32
+                        )
+                    )
+                )
+            ),
+            'initials' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 1,
+                            'max' => 16
+                        )
+                    )
+                )
+            ),
+            'firstName' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 2,
+                            'max' => 32
+                        )
+                    )
+                )
+            ),
+        );
     }
 }
