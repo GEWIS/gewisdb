@@ -24,6 +24,19 @@ class MemberController extends AbstractActionController
      */
     public function subscribeAction()
     {
+        $request = $this->getRequest();
+        $service = $this->getMemberService();
+
+        if ($request->isPost()) {
+            $member = $service->subscribe($request->getPost());
+
+            if (null !== $member) {
+                return new ViewModel(array(
+                    'member' => $member
+                ));
+            }
+        }
+
         return new ViewModel(array(
             'form' => $this->getMemberService()->getMemberForm()
         ));

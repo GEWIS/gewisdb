@@ -4,8 +4,30 @@ namespace Database\Service;
 
 use Application\Service\AbstractService;
 
+use Database\Model\Member as MemberModel;
+
 class Member extends AbstractService
 {
+
+    /**
+     * Subscribe a member.
+     *
+     * @param array $data
+     *
+     * @return Member member, null if failed.
+     */
+    public function subscribe($data)
+    {
+        $form = $this->getMemberForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        return null;
+    }
 
     /**
      * Search for a member.
