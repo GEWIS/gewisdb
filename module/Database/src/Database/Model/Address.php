@@ -20,7 +20,7 @@ class Address
      * Member.
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Member")
+     * @ORM\ManyToOne(targetEntity="Member", inversedBy="addresses"))
      * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
     protected $member;

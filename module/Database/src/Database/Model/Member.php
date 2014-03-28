@@ -3,6 +3,7 @@
 namespace Database\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Member model.
@@ -121,6 +122,13 @@ class Member
     protected $birth;
 
     /**
+     * Addresses of this member.
+     *
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="member")
+     */
+    protected $addresses;
+
+    /**
      * Static method to get available genders.
      *
      * @return array
@@ -147,6 +155,15 @@ class Member
             self::TYPE_EXTRAORDINARY,
             self::TYPE_HONORARY
         );
+    }
+
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->addresses = new ArrayCollection();
     }
 
     /**
@@ -402,5 +419,25 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName()
         );
+    }
+
+    /**
+     * Set the home address.
+     *
+     * @param Address $address
+     */
+    public function setHomeAddress(Address $address)
+    {
+        $this->addresses[] = $address;
+    }
+
+    /**
+     * Set the student address.
+     *
+     * @param Address $address
+     */
+    public function setStudentAddress(Address $address)
+    {
+        $this->addresses[] = $address;
     }
 }
