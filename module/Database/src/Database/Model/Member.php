@@ -26,6 +26,7 @@ class Member
      * The user
      *
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer", name="lidnr")
      */
     protected $lidnr;
