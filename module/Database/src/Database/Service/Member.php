@@ -28,6 +28,21 @@ class Member extends AbstractService
             return null;
         }
 
+        // set some extra data
+        $member = $form->getData();
+
+        // generation is the current year
+        $member->setGeneration((int) date('Y'));
+
+        // by default, we only add ordinary members
+        $member->setType(MemberModel::TYPE_ORDINARY);
+
+        // expiration date is in 5 years.
+        $date = new \DateTime();
+        $date->add(new \DateInterval('P5Y'));
+        $date->setTime(0, 0);
+        $member->setExpiration($date);
+
         return null;
     }
 

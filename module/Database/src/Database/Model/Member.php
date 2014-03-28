@@ -376,11 +376,11 @@ class Member
     /**
      * Set the expiration date.
      *
-     * @param \DateTime $date
+     * @param \DateTime $expiration
      */
-    public function setDate(\DateTime $date)
+    public function setExpiration(\DateTime $expiration)
     {
-        $this->date = $date;
+        $this->expiration = $expiration;
     }
 
     /**
