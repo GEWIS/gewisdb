@@ -125,7 +125,7 @@ class Member
     /**
      * Addresses of this member.
      *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="member")
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist"})
      */
     protected $addresses;
 

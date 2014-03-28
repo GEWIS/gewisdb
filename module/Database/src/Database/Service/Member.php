@@ -43,7 +43,9 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setExpiration($date);
 
-        return null;
+        $this->getMemberMapper()->persist($member);
+
+        return $member;
     }
 
     /**
