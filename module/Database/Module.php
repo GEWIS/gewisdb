@@ -102,9 +102,17 @@ class Module
                     return $fieldset;
                 },
                 'database_form_fieldset_address' => function ($sm) {
-                    return new \Database\Form\Fieldset\Address();
+                    $fs = new \Database\Form\Fieldset\Address();
+                    $fs->setHydrator($sm->get('database_hydrator_address'));
+                    $fs->setObject(new \Database\Model\Address());
+                    return $fs;
                 },
                 'database_hydrator_member' => function ($sm) {
+                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_hydrator_address' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );

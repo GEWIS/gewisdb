@@ -204,6 +204,16 @@ class Address
     }
 
     /**
+     * Set the postal code.
+     *
+     * @param string $postalCode
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+    }
+
+    /**
      * Get the postal code.
      *
      * @return string
