@@ -1,3 +1,4 @@
+<?php if (isset($form)): ?>
 <?php
 $form->prepare();
 
@@ -240,3 +241,6 @@ $submit->setAttribute('class', 'btn btn-primary');
 <?= $this->formButton($submit) ?>
 
 <?= $this->form()->closeTag() ?>
+<?php else: ?>
+Lid met lidnummer <?= $member->getLidnr() ?> is toegevoegd.
+<?php endif; ?>
