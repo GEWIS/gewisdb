@@ -43,7 +43,9 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setExpiration($date);
 
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
