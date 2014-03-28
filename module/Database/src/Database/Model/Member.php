@@ -423,13 +423,53 @@ class Member
     }
 
     /**
+     * Get all addresses.
+     *
+     * @return ArrayCollection all addresses
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    /**
+     * Clear all addresses.
+     */
+    public function clearAddresses()
+    {
+        $this->addresses = new ArrayCollection();
+    }
+
+    /**
+     * Add multiple addresses.
+     *
+     * @param array $addresses
+     */
+    public function addAddresses($addresses) {
+        foreach ($addresses as $address) {
+            $this->addAddress($address);
+        }
+    }
+
+    /**
+     * Add an address.
+     *
+     * @param Address $address
+     */
+    public function addAddress(Address $address)
+    {
+        $address->setMember($this);
+        $this->addresses[] = $address;
+    }
+
+    /**
      * Set the home address.
      *
      * @param Address $address
      */
     public function setHomeAddress(Address $address)
     {
-        $this->addresses[] = $address;
+        $this->addAddress($address);
     }
 
     /**
@@ -439,6 +479,6 @@ class Member
      */
     public function setStudentAddress(Address $address)
     {
-        $this->addresses[] = $address;
+        $this->addAddress($address);
     }
 }
