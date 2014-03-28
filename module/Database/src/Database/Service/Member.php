@@ -20,6 +20,8 @@ class Member extends AbstractService
     {
         $form = $this->getMemberForm();
 
+        $form->bind(new MemberModel());
+
         $form->setData($data);
 
         if (!$form->isValid()) {

@@ -47,9 +47,11 @@ class Module
             ),
             'factories' => array(
                 'database_form_member' => function ($sm) {
-                    return new \Database\Form\Member(
+                    $form = new \Database\Form\Member(
                         $sm->get('database_form_fieldset_address')
                     );
+                    $form->setHydrator($sm->get('database_hydrator_member'));
+                    return $form;
                 },
                 'database_form_createmeeting' => function ($sm) {
                     $form = new \Database\Form\CreateMeeting();
