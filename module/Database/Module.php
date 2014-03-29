@@ -108,6 +108,8 @@ class Module
                     $fieldset = new \Database\Form\Fieldset\MemberFunction(
                         $sm->get('database_form_fieldset_member')
                     );
+                    $fieldset->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+                    $fieldset->setObject(new \stdClass());
                     return $fieldset;
                 },
                 'database_form_fieldset_address' => function ($sm) {
