@@ -105,7 +105,9 @@ class Module
                     return $fieldset;
                 },
                 'database_form_fieldset_memberfunction' => function ($sm) {
-                    $fieldset = new \Database\Form\Fieldset\MemberFunction();
+                    $fieldset = new \Database\Form\Fieldset\MemberFunction(
+                        $sm->get('database_form_fieldset_member')
+                    );
                     return $fieldset;
                 },
                 'database_form_fieldset_address' => function ($sm) {
@@ -147,7 +149,8 @@ class Module
             ),
             'shared' => array(
                 // every form should get a different meeting fieldset
-                'database_form_fieldset_meeting' => false
+                'database_form_fieldset_meeting' => false,
+                'database_form_fieldset_member' => false,
             )
         );
     }

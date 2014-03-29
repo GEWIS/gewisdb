@@ -2,12 +2,16 @@
 
 namespace Database\Form\Fieldset;
 
-class MemberFunction extends Member
+use Zend\Form\Fieldset;
+
+class MemberFunction extends Fieldset
 {
 
-    public function __construct()
+    public function __construct(Member $member)
     {
-        parent::__construct();
+        parent::__construct('member_function');
+
+        $this->add($member);
 
         $this->add(array(
             'name' => 'function',
@@ -29,26 +33,6 @@ class MemberFunction extends Member
 
     public function getInputFilterSpecification()
     {
-        $spec = parent::getInputFilterSpecification();
-        $spec['function'] = array(
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'in_array',
-                    'options' => array(
-                        'haystack' => array(
-                            'lid',
-                            'vz',
-                            'secr',
-                            'pm',
-                            'vvz',
-                            'prf',
-                            'oc'
-                        )
-                    )
-                )
-            )
-        );
-        return $spec;
+        return array();
     }
 }

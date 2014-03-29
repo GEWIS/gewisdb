@@ -102,20 +102,21 @@ $element->setAttribute('placeholder', 'Afkorting');
 $element = $form->get('members');
 
 $fs = $element->getTemplateElement();
+$mfs = $fs->get('member');
 // render template element
 ob_start();
 ?>
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
             <?php
-            $el = $fs->get('name');
+            $el = $mfs->get('name');
             $el->setAttribute('class', 'form-control member-autocomplete');
             $el->setAttribute('placeholder', $el->getLabel());
             ?>
             <?= $this->formInput($el) ?>
             <?php
             // hidden element for actual membership number
-            $el = $fs->get('lidnr');
+            $el = $mfs->get('lidnr');
             $el->setAttribute('class', 'member-lidnr');
             ?>
             <?= $this->formHidden($el) ?>
@@ -135,17 +136,18 @@ ob_start();
 <?php $tpl = trim(ob_get_clean()); ?>
 <span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="members-template"></span>
 <?php foreach ($element->getIterator() as $fs): ?>
+    <?php $mfs = $fs->get('member'); ?>
     <div class="form-inline" style="margin-bottom: 5px;">
         <div class="form-group">
             <?php
-            $el = $fs->get('name');
+            $el = $mfs->get('name');
             $el->setAttribute('class', 'form-control member-autocomplete');
             $el->setAttribute('placeholder', $el->getLabel());
             ?>
             <?= $this->formInput($el) ?>
             <?php
             // hidden element for actual membership number
-            $el = $fs->get('lidnr');
+            $el = $mfs->get('lidnr');
             $el->setAttribute('class', 'member-lidnr');
             ?>
             <?= $this->formHidden($el) ?>
