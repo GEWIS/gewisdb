@@ -148,12 +148,47 @@ class Installation extends SubDecision
     /**
      * Get the content.
      *
-     * @todo implement this
+     * Fixes Bor's greatest frustration
      *
      * @return string
      */
     public function getContent()
     {
-        return 'TODO';
+        $member = $this->getMember()->getFullName();
+        $text = $member . ' wordt gëinstalleerd als ' . $this->getDutchFunction();
+        $text .= ' in ' . $this->getFoundation()->getAbbr() . '.';
+        return $text;
+    }
+
+    /**
+     * Function to dutch name.
+     *
+     * @return string
+     */
+    protected function getDutchFunction()
+    {
+        switch ($this->getFunction()) {
+        case self::FUNC_MEMBER:
+            return 'lid';
+            break;
+        case self::FUNC_CHAIRMAN:
+            return 'voorzitter';
+            break;
+        case self::FUNC_SECRETARY:
+            return 'secretaris';
+            break;
+        case self::FUNC_TREASURER:
+            return 'penningmeester';
+            break;
+        case self::FUNC_VICE_CHAIRMAN:
+            return 'vice-voorzitter';
+            break;
+        case self::FUNC_PR_OFFICER:
+            return 'pr-functionaris';
+            break;
+        case self::FUNC_EDUCATION_OFFICER:
+            return 'onderwijscommissaris';
+            break;
+        }
     }
 }
