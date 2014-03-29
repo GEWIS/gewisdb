@@ -122,12 +122,25 @@ class Foundation extends SubDecision
     /**
      * Get the content.
      *
-     * @todo implement this
-     *
      * @return string
      */
     public function getContent()
     {
-        return 'TODO';
+        switch ($this->getOrganType()) {
+        case self::ORGAN_TYPE_COMMITTEE:
+            $text = 'Commissie ';
+            break;
+        case self::ORGAN_TYPE_AV_COMMITTEE:
+            $text = 'AV-commissie ';
+            break;
+        case self::ORGAN_TYPE_FRATERNITY:
+            $text = 'Dispuut ';
+            break;
+        }
+        $text .= $this->getName();
+        $text .= ' met afkorting ';
+        $text .= $this->getAbbr();
+        $text .= ' wordt opgericht.';
+        return $text;
     }
 }

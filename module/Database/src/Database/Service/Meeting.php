@@ -103,7 +103,6 @@ class Meeting extends AbstractService
         $this->getMeetingMapper()->persist($decision->getMeeting());
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
-
         return array(
             'type' => 'foundation',
             'decision' => $decision
