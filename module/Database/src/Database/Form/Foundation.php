@@ -3,8 +3,10 @@
 namespace Database\Form;
 
 use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
 
 class Foundation extends AbstractDecision
+    implements InputFilterProviderInterface
 {
 
     public function __construct(Fieldset\Meeting $meeting)
@@ -59,15 +61,38 @@ class Foundation extends AbstractDecision
                 'value' => 'Richt op'
             )
         ));
-
-        $this->initFilters();
-
     }
 
-    protected function initFilters()
+    /**
+     * Specification of input filter.
+     */
+    public function getInputFilterSpecification()
     {
-        $filter = new InputFilter();
-
-        $this->setInputFilter($filter);
+        return array(
+            'name' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 2,
+                            'max' => 32
+                        )
+                    )
+                )
+            ),
+            'abbr' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 2,
+                            'max' => 32
+                        )
+                    )
+                )
+            )
+        );
     }
 }
