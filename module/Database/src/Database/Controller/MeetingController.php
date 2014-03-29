@@ -122,6 +122,9 @@ class MeetingController extends AbstractActionController
             );
             break;
         case 'foundation':
+            return new ViewModel(
+                $service->foundationDecision($this->getRequest()->getPost())
+            );
             break;
         case 'abolish':
             break;

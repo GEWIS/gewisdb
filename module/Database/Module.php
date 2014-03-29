@@ -87,7 +87,8 @@ class Module
                 },
                 'database_form_foundation' => function ($sm) {
                     $form = new \Database\Form\Foundation(
-                        $sm->get('database_form_fieldset_meeting')
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_memberfunction')
                     );
                     return $form;
                 },
@@ -101,6 +102,10 @@ class Module
                     $fieldset = new \Database\Form\Fieldset\Member();
                     $fieldset->setHydrator($sm->get('database_hydrator_member'));
                     $fieldset->setObject(new \Database\Model\Member());
+                    return $fieldset;
+                },
+                'database_form_fieldset_memberfunction' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\MemberFunction();
                     return $fieldset;
                 },
                 'database_form_fieldset_address' => function ($sm) {

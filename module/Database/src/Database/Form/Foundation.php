@@ -9,7 +9,7 @@ class Foundation extends AbstractDecision
     implements InputFilterProviderInterface
 {
 
-    public function __construct(Fieldset\Meeting $meeting)
+    public function __construct(Fieldset\Meeting $meeting, Fieldset\MemberFunction $function)
     {
         parent::__construct($meeting);
 
@@ -48,9 +48,7 @@ class Foundation extends AbstractDecision
                 'label' => 'Members',
                 'count' => 2,
                 'should_create_template' => true,
-                'target_element' => array(
-                    'type' => 'Database\Form\Fieldset\MemberFunction'
-                )
+                'target_element' => $function
             )
         ));
 

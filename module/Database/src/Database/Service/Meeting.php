@@ -76,6 +76,41 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Foundation decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function foundationDecision($data)
+    {
+        $form = $this->getFoundationForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            return array(
+                'type' => 'foundation',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+
+        return array(
+            'type' => 'foundation',
+            'decision' => $decision
+        );
+    }
+
+    /**
      * Budget decision.
      *
      * @param array $data
