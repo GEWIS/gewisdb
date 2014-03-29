@@ -19,13 +19,13 @@ class MemberFunction extends Fieldset
             'options' => array(
                 'label' => 'Functie',
                 'value_options' => array(
-                    'lid' => 'Lid',
-                    'vz' => 'Voorzitter',
-                    'secr' => 'Secretaris',
-                    'pm' => 'Penningmeester',
-                    'vvz' => 'Vice-Voorzitter',
-                    'prf' => 'PR-Functionaris',
-                    'oc' => 'Onderwijscommisaris'
+                    'member' => 'Lid',
+                    'chairman' => 'Voorzitter',
+                    'secretary' => 'Secretaris',
+                    'treasurer' => 'Penningmeester',
+                    'vice-chairman' => 'Vice-Voorzitter',
+                    'pr-officer' => 'PR-Functionaris',
+                    'education-officer' => 'Onderwijscommisaris'
                 )
             )
         ));

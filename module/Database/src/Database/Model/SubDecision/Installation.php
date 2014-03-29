@@ -14,6 +14,7 @@ use Database\Model\Member;
  */
 class Installation extends SubDecision
 {
+    const FUNC_MEMBER = 'member';
     const FUNC_CHAIRMAN = 'chairman';
     const FUNC_SECRETARY = 'secretary';
     const FUNC_TREASURER = 'treasurer';
@@ -34,7 +35,7 @@ class Installation extends SubDecision
      *
      * @todo Determine values of this for historical reasons
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
     protected $function;
 
@@ -69,6 +70,7 @@ class Installation extends SubDecision
     public static function getFunctions()
     {
         return array(
+            self::FUNC_MEMBER,
             self::FUNC_CHAIRMAN,
             self::FUNC_SECRETARY,
             self::FUNC_TREASURER,
@@ -98,7 +100,7 @@ class Installation extends SubDecision
     public function setFunction($function)
     {
         if (!in_array($function, self::getFunctions())) {
-            throw \IllegalArgumentException("Nonexisting function given.");
+            throw new \InvalidArgumentException("Nonexisting function '$function' given.");
         }
         $this->function = $function;
     }
@@ -138,7 +140,7 @@ class Installation extends SubDecision
      *
      * @param Foundation $foundation
      */
-    public function setFoundation($foundation)
+    public function setFoundation(Foundation $foundation)
     {
         $this->foundation = $foundation;
     }

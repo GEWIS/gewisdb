@@ -43,6 +43,7 @@ class Module
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
+                'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
             ),
             'factories' => array(
@@ -90,6 +91,7 @@ class Module
                         $sm->get('database_form_fieldset_meeting'),
                         $sm->get('database_form_fieldset_memberfunction')
                     );
+                    $form->setHydrator($sm->get('database_hydrator_foundation'));
                     return $form;
                 },
                 'database_form_fieldset_meeting' => function ($sm) {

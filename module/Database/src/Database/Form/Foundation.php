@@ -19,8 +19,9 @@ class Foundation extends AbstractDecision
             'options' => array(
                 'label' => 'Type',
                 'value_options' => array(
-                    'commissie' => 'Commissie',
-                    'dispuut' => 'Dispuut'
+                    'committee' => 'Commissie',
+                    'avc' => 'AV-Commissie',
+                    'fraternity' => 'Dispuut'
                 )
             )
         ));
