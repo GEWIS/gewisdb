@@ -66,6 +66,7 @@ function showType($type)
 
 <h2>Besluiten</h2>
 
+<?php if (count($meeting->getDecisions()) > 0): ?>
 <ul>
 <?php foreach ($meeting->getDecisions() as $decision): ?>
     <li>
@@ -78,6 +79,9 @@ function showType($type)
     </li>
 <?php endforeach; ?>
 </ul>
+<?php else: ?>
+Deze vergadering heeft (nog) geen besluiten.
+<?php endif; ?>
 
 <h2>Besluit toevoegen</h2>
 
