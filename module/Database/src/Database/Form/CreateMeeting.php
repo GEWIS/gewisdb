@@ -76,8 +76,12 @@ class CreateMeeting extends Form
             'name' => 'number',
             'required' => true,
             'validators' => array(
+                array('name' => 'digits'),
                 array(
-                    'name' => 'digits'
+                    'name' => 'LessThan',
+                    'options' => array(
+                        'max' => 100000
+                    )
                 )
             )
         ));
