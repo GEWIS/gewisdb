@@ -42,11 +42,20 @@ class Meeting
     /**
      * Find all meetings.
      *
+     * Also counts all decision per meeting.
+     *
      * @return array All meetings.
      */
     public function findAll()
     {
-        return $this->getRepository()->findAll();
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('m, COUNT(d)')
+            ->from('Database\Model\Meeting', 'm')
+            ->leftJoin('m.decisions', 'd')
+            ->groupBy('m');
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
