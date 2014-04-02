@@ -143,4 +143,26 @@ class Foundation extends SubDecision
         $text .= ' wordt opgericht.';
         return $text;
     }
+
+    /**
+     * Get an array with all information.
+     *
+     * Mostly usefull for usage with JSON.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $decision = $this->getDecision();
+        return array(
+            'meeting_type' => $decision->getMeeting()->getType(),
+            'meeting_number' => $decision->getMeeting()->getNumber(),
+            'decision_point' => $decision->getPoint(),
+            'decision_number' => $decision->getNumber(),
+            'subdecision_number' => $this->getNumber(),
+            'abbr' => $this->getAbbr(),
+            'name' => $this->getName(),
+            'organtype' => $this->getOrganType()
+        );
+    }
 }

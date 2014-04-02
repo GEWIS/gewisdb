@@ -31,9 +31,7 @@ class OrganController extends AbstractActionController
         $res = $service->organSearch($query);
 
         $res = array_map(function ($organ) {
-            return array(
-                'name' => $organ->getName()
-            );
+            return $organ->toArray();
         }, $res);
 
         return new JsonModel(array(

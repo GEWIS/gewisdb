@@ -98,10 +98,12 @@ class Meeting
     {
         $qb = $this->em->createQueryBuilder();
 
-        $qb->select('o')
+        $qb->select('o, d, m')
             ->from('Database\Model\SubDecision\Foundation', 'o')
             ->where('LOWER(o.name) LIKE :name')
-            ->orWhere('LOWER(o.abbr) LIKE :name');
+            ->orWhere('LOWER(o.abbr) LIKE :name')
+            ->join('o.decision', 'd')
+            ->join('d.meeting', 'm');
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
