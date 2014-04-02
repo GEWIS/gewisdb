@@ -88,6 +88,27 @@ class Meeting
     }
 
     /**
+     * Search for organ decisions.
+     *
+     * @param string $query
+     *
+     * @return array Organs
+     */
+    public function organSearch($query)
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('o')
+            ->from('Database\Model\SubDecision\Foundation', 'o')
+            ->where('LOWER(o.name) LIKE :name')
+            ->orWhere('LOWER(o.abbr) LIKE :name');
+
+        $qb->setParameter(':name', '%' . strtolower($query) . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Persist a meeting model.
      *
      * @param MeetingModel $meeting Meeting to persist.

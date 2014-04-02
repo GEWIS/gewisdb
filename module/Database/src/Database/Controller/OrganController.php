@@ -4,20 +4,41 @@ namespace Database\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 
 class OrganController extends AbstractActionController
 {
 
     /**
      * Index action, for organ search.
-     *
-     * Shows all meetings.
      */
     public function indexAction()
     {
+        return new ViewModel(array());
+    }
+
+    /**
+     * Search action.
+     *
+     * Uses JSON to search for members.
+     */
+    public function searchAction()
+    {
         $service = $this->getMeetingService();
 
-        return new ViewModel(array());
+        $query = $this->params()->fromQuery('q');
+
+        $res = $service->organSearch($query);
+
+        $res = array_map(function ($organ) {
+            return array(
+                'name' => $organ->getName()
+            );
+        }, $res);
+
+        return new JsonModel(array(
+            'json' => $res
+        ));
     }
 
     /**

@@ -196,6 +196,18 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Search for organs by name.
+     *
+     * @param string $query
+     *
+     * @return array organ (decisions)
+     */
+    public function organSearch($query)
+    {
+        return $this->getMeetingMapper()->organSearch($query);
+    }
+
+    /**
      * Get the create meeting form.
      *
      * @return \Database\Form\CreateMeeting
