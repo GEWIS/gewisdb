@@ -1,3 +1,44 @@
+<script>
+$(document).ready(function () {
+    $('#abolish-organ').autocomplete({
+            minLength: 2, // at least two chars before request
+            delay: 0, // no delay before request
+            source: function (rq, response) {
+                // make an AJAX request
+                $.ajax({
+                    dataType: 'json',
+                    url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + rq.term,
+                    context: document.body
+                }).done(function(data) {
+                    console.log(data);
+                    var ret = [];
+                    $.each(data.json, function (idx, organ) {
+                        // assemble organ info and add to list
+                        var decision = organ.meeting_type + ' '
+                                     + organ.meeting_number + '.'
+                                     + organ.decision_point + '.'
+                                     + organ.decision_number;
+
+                        var name = organ.abbr + ' (' + organ.name + ', ' + decision + ')';
+
+                        ret.push({
+                            label: name,
+                            value: name,
+                            id: decision
+                        });
+                    });
+
+                    // show data
+                    response(ret);
+                });
+            },
+            select: function (event, ui) {
+                console.log($(event.target).parent());
+                $(event.target).parent().find("input.organ-decision").val(ui.item.id);
+            }
+        });
+});
+</script>
 <?php
 $form = $this->form;
 $form->prepare();
@@ -21,11 +62,13 @@ $fs = $form->get('meeting')
 <?php
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
+$element->setAttribute('id', 'abolish-organ');
 $element->setAttribute('placeholder', 'Orgaan');
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
     <?= $this->formElementErrors($element) ?>
+    <input type="hidden" class="organ-decision">
 </div>
 
 <?php
