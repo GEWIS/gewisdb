@@ -74,6 +74,29 @@ return array(
                     )
                 ),
             ),
+            'organ' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/organ',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'Organ',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:action',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
             'member' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -102,7 +125,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
-            'Database\Controller\Member' => 'Database\Controller\MemberController'
+            'Database\Controller\Member' => 'Database\Controller\MemberController',
+            'Database\Controller\Organ' => 'Database\Controller\OrganController'
         )
     ),
     'view_manager' => array(
