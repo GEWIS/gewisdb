@@ -156,7 +156,7 @@ class Installation extends SubDecision
     {
         $member = $this->getMember()->getFullName();
         $text = $member . ' wordt gëinstalleerd als ' . $this->getDutchFunction();
-        $text .= ' in ' . $this->getFoundation()->getAbbr() . '.';
+        $text .= ' van ' . $this->getFoundation()->getAbbr() . '.';
         return $text;
     }
 

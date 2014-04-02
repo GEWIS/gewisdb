@@ -58,6 +58,18 @@ class Abrogation extends SubDecision
      */
     public function getContent()
     {
-        return 'TODO';
+        // <type> <abbr> wordt opgeheven.
+        switch ($this->getFoundation()->getOrganType()) {
+        case Foundation::ORGAN_TYPE_COMMITTEE:
+            $text = 'Commissie ';
+            break;
+        case Foundation::ORGAN_TYPE_AV_COMMITTEE:
+            $text = 'AV-commissie ';
+            break;
+        case Foundation::ORGAN_TYPE_FRATERNITY:
+            $text = 'Dispuut ';
+            break;
+        }
+        return $text . $this->getFoundation()->getAbbr() . ' wordt opgeheven.';
     }
 }
