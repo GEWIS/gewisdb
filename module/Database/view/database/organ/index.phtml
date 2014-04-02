@@ -1,1 +1,49 @@
-Organ search.
+<script>
+$(document).ready(function () {
+    $('#organ-search').keyup(function (e) {
+        term = $(e.target).val();
+        if (term.length >= 1) {
+            $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + term,
+                context: document.body
+            }).done(function (data) {
+                var table = '';
+                $.each(data.json, function (idx, organ) {
+                    console.log(organ);
+                    var decision = organ.meeting_type + ' '
+                                 + organ.meeting_number + '.'
+                                 + organ.decision_point + '.'
+                                 + organ.decision_number;
+                    table += '<tr>';
+                    table += '<td>' + organ.abbr + '</td>';
+                    table += '<td>' + organ.name + '</td>';
+                    table += '<td>' + decision + '</td>';
+                    table += '</tr>';
+                });
+                $('#organ-result tbody').html(table);
+            });
+        } else {
+            $('#organ-result tbody').html('');
+        }
+    });
+});
+</script>
+<form role="form">
+    <div class="form-group">
+        <label for="">Zoeken naar organen</label>
+        <input type="text" class="form-control" placeholder="Zoek" id="organ-search" autofocus>
+    </div>
+</form>
+
+<table class="table table-hover" id="organ-result">
+    <thead>
+    <tr>
+        <th>Afkorting</th>
+        <th>Naam</th>
+        <th>Besluit</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
