@@ -4,6 +4,8 @@ namespace Database\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 use Database\Model\SubDecision;
 
 /**
@@ -39,6 +41,21 @@ class Foundation extends SubDecision
      */
     protected $organType;
 
+    /**
+     * References from other subdecisions to this organ.
+     *
+     * @ORM\OneToMany(targetEntity="FoundationReference",mappedBy="foundation")
+     */
+    protected $references;
+
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->references = new ArrayCollection();
+    }
 
     /**
      * Get available organ types.
