@@ -18,7 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  *  "release"="Database\Model\SubDecision\Release",
  *  "budget"="Database\Model\SubDecision\Budget",
  *  "reckoning"="Database\Model\SubDecision\Reckoning",
- *  "other"="Database\Model\SubDecision\Other"
+ *  "other"="Database\Model\SubDecision\Other",
+ *  "foundationreference"="Database\Model\SubDecision\FoundationReference"
  * })
  */
 abstract class SubDecision

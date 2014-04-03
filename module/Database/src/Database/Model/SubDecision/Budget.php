@@ -11,7 +11,7 @@ use Database\Model\Member;
  *
  * @ORM\Entity
  */
-class Budget extends SubDecision
+class Budget extends FoundationReference
 {
 
     /**
@@ -58,24 +58,7 @@ class Budget extends SubDecision
     protected $changes;
 
     /**
-     * Reference to foundation of organ.
      *
-     * This corresponds to the organ of which this budget / reckoning is. This
-     * field can be empty, because it might occur that members hand in budgets
-     * and/or reckonings that are not tied to organs.
-     *
-     * @ORM\ManyToOne(targetEntity="Foundation")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
-     * })
-     */
-    protected $foundation;
-
-    /**
      * Get the author.
      *
      * @return Member
@@ -193,26 +176,6 @@ class Budget extends SubDecision
     public function setChanges($changes)
     {
         $this->changes = $changes;
-    }
-
-    /**
-     * Get organ foundation.
-     *
-     * @return Foundation
-     */
-    public function getFoundation()
-    {
-        return $this->foundation;
-    }
-
-    /**
-     * Set organ foundation.
-     *
-     * @param Foundation $foundation
-     */
-    public function setFoundation($foundation)
-    {
-        $this->foundation = $foundation;
     }
 
     /**
