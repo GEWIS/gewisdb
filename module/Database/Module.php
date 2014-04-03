@@ -135,6 +135,11 @@ class Module
                         $sm->get('database_doctrine_em')
                     );
                 },
+                'database_mapper_organ' => function ($sm) {
+                    return new \Database\Mapper\Organ(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
                 'database_mapper_member' => function ($sm) {
                     return new \Database\Mapper\Member(
                         $sm->get('database_doctrine_em')

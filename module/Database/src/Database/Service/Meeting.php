@@ -204,7 +204,7 @@ class Meeting extends AbstractService
      */
     public function organSearch($query)
     {
-        return $this->getMeetingMapper()->organSearch($query);
+        return $this->getOrganMapper()->organSearch($query);
     }
 
     /**
@@ -275,5 +275,15 @@ class Meeting extends AbstractService
     public function getMeetingMapper()
     {
         return $this->getServiceManager()->get('database_mapper_meeting');
+    }
+
+    /**
+     * Get the organ mapper.
+     *
+     * @return \Database\Mapper\Organ
+     */
+    public function getOrganMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_organ');
     }
 }
