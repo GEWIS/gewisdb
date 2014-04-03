@@ -131,7 +131,7 @@ class Installation extends FoundationReference
      *
      * @return string
      */
-    protected function getDutchFunction()
+    public function getDutchFunction()
     {
         switch ($this->getFunction()) {
         case self::FUNC_MEMBER:

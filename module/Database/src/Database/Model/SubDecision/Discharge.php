@@ -55,12 +55,16 @@ class Discharge extends SubDecision
     /**
      * Get the content.
      *
-     * @todo Implement this.
-     *
      * @return string
      */
     public function getContent()
     {
-        return 'TODO';
+        $member = $this->getInstallation()->getMember()->getFullName();
+        $function = $this->getInstallation()->getDutchFunction();
+        $organ = $this->getInstallation()->getFoundation()->getAbbr();
+
+        $text = $member . ' wordt gedechargeerd als ' . $function;
+        $text .= ' van ' . $organ;
+        return $text;
     }
 }
