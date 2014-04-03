@@ -53,12 +53,25 @@ class Organ
             ->leftJoin('o.references', 'r')
             ->andWhere('r INSTANCE OF Database\Model\SubDecision\Installation');
 
+        $qbn = $this->em->createQueryBuilder();
+        $qbn->select('d')
+            ->from('Database\Model\SubDecision\Discharge', 'd')
+            ->join('d.installation', 'x')
+            ->where('x.meeting_type = r.meeting_type')
+            ->andWhere('x.meeting_number = r.meeting_number')
+            ->andWhere('x.decision_point = r.decision_point')
+            ->andWhere('x.decision_number = r.decision_number')
+            ->andWhere('x.number = r.number');
+
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbn->getDql())
+        ));
+
         $qb->setParameter(':type', $type);
         $qb->setParameter(':meeting_number', $meetingNumber);
         $qb->setParameter(':decision_point', $decisionPoint);
         $qb->setParameter(':decision_number', $decisionNumber);
         $qb->setParameter(':number', $subdecisionNumber);
-
 
         return $qb->getQuery()->getSingleResult();
     }
@@ -95,7 +108,8 @@ class Organ
             ->where('x.meeting_type = o.meeting_type')
             ->andWhere('x.meeting_number = o.meeting_number')
             ->andWhere('x.decision_point = o.decision_point')
-            ->andWhere('x.decision_number = o.decision_number');
+            ->andWhere('x.decision_number = o.decision_number')
+            ->andWhere('x.number = o.number');
         // add the subexpression
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists(
