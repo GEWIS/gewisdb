@@ -22,7 +22,17 @@ class OrganController extends AbstractActionController
      */
     public function viewAction()
     {
-        var_dump($this);
+        $service = $this->getMeetingService();
+
+        return new ViewModel(array(
+            'foundation' => $service->findFoundation(
+                $this->params()->fromRoute('type'),
+                $this->params()->fromRoute('number'),
+                $this->params()->fromRoute('point'),
+                $this->params()->fromRoute('decision'),
+                $this->params()->fromRoute('subdecision')
+            )
+        ));
     }
 
     /**

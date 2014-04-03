@@ -208,6 +208,25 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get the foundation of an organ.
+     *
+     * @param string $type
+     * @param string $meetingNumber
+     * @param string $decisionPoint
+     * @param string $decisionNumber
+     * @param string $subdecisionNumber
+     *
+     * @return \Database\Model\SubDecision\Foundation
+     */
+    public function findFoundation($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
+    {
+        return $this->getOrganMapper()->find(
+            $type, $meetingNumber, $decisionPoint,
+            $decisionNumber, $subdecisionNumber
+        );
+    }
+
+    /**
      * Get the create meeting form.
      *
      * @return \Database\Form\CreateMeeting

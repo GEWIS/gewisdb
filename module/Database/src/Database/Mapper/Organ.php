@@ -29,6 +29,28 @@ class Organ
     }
 
     /**
+     * Find method.
+     *
+     * @param string $type
+     * @param string $meetingNumber
+     * @param string $decisionPoint
+     * @param string $decisionNumber
+     * @param string $subdecisionNumber
+     *
+     * @return Foundation
+     */
+    public function find($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
+    {
+        return $this->getRepository()->find(array(
+            'meeting_type' => $type,
+            'meeting_number' => $meetingNumber,
+            'decision_point' => $decisionPoint,
+            'decision_number' => $decisionNumber,
+            'number' => $subdecisionNumber
+        ));
+    }
+
+    /**
      * Search for organ decisions.
      *
      * This is a really complicated query, we might want to create a
