@@ -47,7 +47,7 @@ abstract class FoundationReference extends SubDecision
      *
      * @param Foundation $foundation
      */
-    public function setFoundation($foundation)
+    public function setFoundation(Foundation $foundation)
     {
         $this->foundation = $foundation;
     }
