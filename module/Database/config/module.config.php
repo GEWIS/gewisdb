@@ -95,6 +95,22 @@ return array(
                             ),
                         ),
                     ),
+                    'view' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/:type/:number/:point/:decision/:subdecision',
+                            'defaults' => array(
+                                'action' => 'view'
+                            ),
+                            'constraints' => array(
+                                'type' => 'av|bv|vv|virt',
+                                'number' => '[0-9]*',
+                                'point' => '[0-9]*',
+                                'decision' => '[0-9]*',
+                                'subdecision' => '[0-9]*'
+                            )
+                        )
+                    )
                 ),
             ),
             'member' => array(

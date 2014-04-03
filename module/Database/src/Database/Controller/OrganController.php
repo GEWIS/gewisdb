@@ -18,6 +18,14 @@ class OrganController extends AbstractActionController
     }
 
     /**
+     * View an organ.
+     */
+    public function viewAction()
+    {
+        var_dump($this);
+    }
+
+    /**
      * Search action.
      *
      * Uses JSON to search for members.

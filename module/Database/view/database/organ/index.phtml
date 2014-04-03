@@ -1,4 +1,11 @@
 <script>
+var urlTemplate = '<?= $this->url('organ/view', array(
+    'type' => '__type__',
+    'number' => '__number__',
+    'point' => '__point__',
+    'decision' => '__decision__',
+    'subdecision' => '__subdecision__'
+)) ?>';
 $(document).ready(function () {
     $('#organ-search').keyup(function (e) {
         term = $(e.target).val();
@@ -10,15 +17,24 @@ $(document).ready(function () {
             }).done(function (data) {
                 var table = '';
                 $.each(data.json, function (idx, organ) {
-                    console.log(organ);
+                    // create URL
+                    var url = urlTemplate.replace('__type__', organ.meeting_type);
+                    url = url.replace('__number__', organ.meeting_number);
+                    url = url.replace('__point__', organ.decision_point);
+                    url = url.replace('__decision__', organ.decision_number);
+                    url = url.replace('__subdecision__', organ.subdecision_number);
+
+                    var link = '<a href="' + url + '" ';
+                    link += 'style="display:block;height:100%;width:100%;">';
+
                     var decision = organ.meeting_type + ' '
                                  + organ.meeting_number + '.'
                                  + organ.decision_point + '.'
                                  + organ.decision_number;
                     table += '<tr>';
-                    table += '<td>' + organ.abbr + '</td>';
-                    table += '<td>' + organ.name + '</td>';
-                    table += '<td>' + decision + '</td>';
+                    table += '<td>' + link + organ.abbr + '</a></td>';
+                    table += '<td>' + link + organ.name + '</a></td>';
+                    table += '<td>' + link + decision + '</a></td>';
                     table += '</tr>';
                 });
                 $('#organ-result tbody').html(table);
