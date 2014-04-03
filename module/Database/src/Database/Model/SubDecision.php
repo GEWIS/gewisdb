@@ -15,7 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
  *  "abrogation"="Database\Model\SubDecision\Abrogation",
  *  "installation"="Database\Model\SubDecision\Installation",
  *  "discharge"="Database\Model\SubDecision\Discharge",
- *  "release"="Database\Model\SubDecision\Release",
  *  "budget"="Database\Model\SubDecision\Budget",
  *  "reckoning"="Database\Model\SubDecision\Reckoning",
  *  "other"="Database\Model\SubDecision\Other",
