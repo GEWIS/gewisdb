@@ -41,13 +41,25 @@ class Organ
      */
     public function find($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
     {
-        return $this->getRepository()->find(array(
-            'meeting_type' => $type,
-            'meeting_number' => $meetingNumber,
-            'decision_point' => $decisionPoint,
-            'decision_number' => $decisionNumber,
-            'number' => $subdecisionNumber
-        ));
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('o', 'r')
+            ->from('Database\Model\SubDecision\Foundation', 'o')
+            ->where('o.meeting_type = :type')
+            ->andWhere('o.meeting_number = :meeting_number')
+            ->andWhere('o.decision_point = :decision_point')
+            ->andWhere('o.decision_number = :decision_number')
+            ->andWhere('o.number = :number')
+            ->leftJoin('o.references', 'r');
+
+        $qb->setParameter(':type', $type);
+        $qb->setParameter(':meeting_number', $meetingNumber);
+        $qb->setParameter(':decision_point', $decisionPoint);
+        $qb->setParameter(':decision_number', $decisionNumber);
+        $qb->setParameter(':number', $subdecisionNumber);
+
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
