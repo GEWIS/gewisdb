@@ -137,6 +137,16 @@ class Foundation extends SubDecision
     }
 
     /**
+     * Get the references.
+     *
+     * @return array of references
+     */
+    public function getReferences()
+    {
+        return $this->references;
+    }
+
+    /**
      * Get the content.
      *
      * @return string

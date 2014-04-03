@@ -50,7 +50,8 @@ class Organ
             ->andWhere('o.decision_point = :decision_point')
             ->andWhere('o.decision_number = :decision_number')
             ->andWhere('o.number = :number')
-            ->leftJoin('o.references', 'r');
+            ->leftJoin('o.references', 'r')
+            ->andWhere('r INSTANCE OF Database\Model\SubDecision\Installation');
 
         $qb->setParameter(':type', $type);
         $qb->setParameter(':meeting_number', $meetingNumber);
@@ -59,7 +60,7 @@ class Organ
         $qb->setParameter(':number', $subdecisionNumber);
 
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getSingleResult();
     }
 
     /**
