@@ -36,6 +36,37 @@ class OrganController extends AbstractActionController
     }
 
     /**
+     * Get organ info.
+     */
+    public function infoAction()
+    {
+        $service = $this->getMeetingService();
+
+        $foundation = $service->findFoundation(
+            $this->params()->fromRoute('type'),
+            $this->params()->fromRoute('number'),
+            $this->params()->fromRoute('point'),
+            $this->params()->fromRoute('decision'),
+            $this->params()->fromRoute('subdecision')
+        );
+        $data = $foundation->toArray();
+        $data['members'] = array();
+
+        foreach ($foundation->getReferences() as $reference) {
+            if ($reference instanceof \Database\Model\SubDecision\Installation) {
+                $data['members'][] = array(
+                    'function' => $reference->getFunction(),
+                    'member' => $reference->getMember()->toArray()
+                );
+            }
+        }
+
+        return new JsonModel(array(
+            'json' => $data
+        ));
+    }
+
+    /**
      * Search action.
      *
      * Uses JSON to search for members.
