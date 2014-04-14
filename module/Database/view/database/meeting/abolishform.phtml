@@ -1,4 +1,19 @@
 <script>
+var urlTemplate = '<?= $this->url('organ/info', array(
+    'type' => '__type__',
+    'number' => '__number__',
+    'point' => '__point__',
+    'decision' => '__decision__',
+    'subdecision' => '__subdecision__'
+)) ?>';
+function getUrl(type, meeting, point, decision, subdecision)
+{
+    url = urlTemplate.replace('__type__', type);
+    url = url.replace('__number__', meeting);
+    url = url.replace('__point__', point);
+    url = url.replace('__decision__', decision);
+    return url.replace('__subdecision__', subdecision);
+}
 $(document).ready(function () {
     $('#abolish-organ').autocomplete({
             minLength: 2, // at least two chars before request
@@ -10,7 +25,6 @@ $(document).ready(function () {
                     url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + rq.term,
                     context: document.body
                 }).done(function(data) {
-                    console.log(data);
                     var ret = [];
                     $.each(data.json, function (idx, organ) {
                         // assemble organ info and add to list
@@ -24,7 +38,7 @@ $(document).ready(function () {
                         ret.push({
                             label: name,
                             value: name,
-                            id: decision
+                            id: organ
                         });
                     });
 
@@ -33,8 +47,19 @@ $(document).ready(function () {
                 });
             },
             select: function (event, ui) {
-                console.log($(event.target).parent());
-                $(event.target).parent().find("input.organ-decision").val(ui.item.id);
+                $.ajax({
+                    dataType: 'json',
+                    url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
+                    context: document.body
+                }).done(function(data) {
+                    console.log(data.json);
+                    $('#div-members-abolish').show();
+                    var content = '';
+                    $.each(data.json.members, function(idx, install) {
+                        content += '<li>' + install.member.fullName + ' (' + install.function + ')</li>';
+                    });
+                    $('#members-abolish').html(content);
+                });
             }
         });
 });
@@ -69,6 +94,12 @@ $element->setAttribute('placeholder', 'Orgaan');
     <?= $this->formInput($element) ?>
     <?= $this->formElementErrors($element) ?>
     <input type="hidden" class="organ-decision">
+</div>
+
+<div style="display: none;" id="div-members-abolish">
+    <strong>In het op te heffen orgaan zitten de volgende leden:</strong>
+    <ul id="members-abolish">
+    </ul>
 </div>
 
 <?php
