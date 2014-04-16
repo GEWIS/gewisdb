@@ -76,6 +76,42 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Abolish decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function abolishDecision($data)
+    {
+        $form = $this->getAbolishForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid() || true) {
+            return array(
+                'type' => 'abolish',
+                'form' => $form
+            );
+        }
+
+        // TODO: implement decision creation
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'foundation',
+            'decision' => $decision
+        );
+    }
+
+    /**
      * Foundation decision.
      *
      * @param array $data
@@ -221,8 +257,6 @@ class Meeting extends AbstractService
     public function findFoundation($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
     {
         return $this->getOrganMapper()->find(
-            $type, $meetingNumber, $decisionPoint,
-            $decisionNumber, $subdecisionNumber
         );
     }
 
