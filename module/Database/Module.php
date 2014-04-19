@@ -84,7 +84,7 @@ class Module
                 'database_form_abolish' => function ($sm) {
                     $form = new \Database\Form\Abolish(
                         $sm->get('database_form_fieldset_meeting'),
-                        $sm->get('database_form_fieldset_subdecision')
+                        $sm->get('database_form_fieldset_subdecision_foundation')
                     );
                     $form->setHydrator($sm->get('database_hydrator_abolish'));
                     return $form;
@@ -97,10 +97,10 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_foundation'));
                     return $form;
                 },
-                'database_form_fieldset_subdecision' => function ($sm) {
+                'database_form_fieldset_subdecision_foundation' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
-                    $fieldset->setObject(new \Database\Model\SubDecision());
+                    $fieldset->setObject(new \Database\Model\SubDecision\Foundation());
                     return $fieldset;
                 },
                 'database_form_fieldset_meeting' => function ($sm) {

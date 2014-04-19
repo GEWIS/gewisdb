@@ -83,6 +83,14 @@ $fs = $form->get('meeting')
 <?= $this->formHidden($fs->get('number')) ?>
 <?= $this->formHidden($form->get('point')) ?>
 <?= $this->formHidden($form->get('decision')) ?>
+<?php
+$fs = $form->get('subdecision');
+?>
+<?= $this->formHidden($fs->get('meeting_type')) ?>
+<?= $this->formHidden($fs->get('meeting_number')) ?>
+<?= $this->formHidden($fs->get('decision_point')) ?>
+<?= $this->formHidden($fs->get('decision_number')) ?>
+<?= $this->formHidden($fs->get('number')) ?>
 <div class="form-group">
 <?php
 $element = $form->get('name');
