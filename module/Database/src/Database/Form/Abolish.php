@@ -7,7 +7,7 @@ use Zend\InputFilter\InputFilter;
 class Abolish extends AbstractDecision
 {
 
-    public function __construct(Fieldset\Meeting $meeting)
+    public function __construct(Fieldset\Meeting $meeting, Fieldset\SubDecision $subdecision)
     {
         parent::__construct($meeting);
 
@@ -26,6 +26,8 @@ class Abolish extends AbstractDecision
                 'value' => 'Hef orgaan op'
             )
         ));
+
+        $this->add($subdecision);
 
         $this->initFilters();
     }

@@ -83,7 +83,8 @@ class Module
                 },
                 'database_form_abolish' => function ($sm) {
                     $form = new \Database\Form\Abolish(
-                        $sm->get('database_form_fieldset_meeting')
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_subdecision')
                     );
                     $form->setHydrator($sm->get('database_hydrator_abolish'));
                     return $form;
@@ -95,6 +96,12 @@ class Module
                     );
                     $form->setHydrator($sm->get('database_hydrator_foundation'));
                     return $form;
+                },
+                'database_form_fieldset_subdecision' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\SubDecision();
+                    $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
+                    $fieldset->setObject(new \Database\Model\SubDecision());
+                    return $fieldset;
                 },
                 'database_form_fieldset_meeting' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\Meeting();
@@ -133,6 +140,11 @@ class Module
                     );
                 },
                 'database_hydrator_meeting' => function ($sm) {
+                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_hydrator_subdecision' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );
