@@ -20,7 +20,7 @@ class Discharge extends SubDecision
     /**
      * Reference to the installation of a member.
      *
-     * @ORM\ManyToOne(targetEntity="Installation")
+     * @ORM\OneToOne(targetEntity="Installation",inversedBy="discharge")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),

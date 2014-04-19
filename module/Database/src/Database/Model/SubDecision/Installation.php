@@ -47,6 +47,13 @@ class Installation extends FoundationReference
      */
     protected $member;
 
+    /**
+     * Discharges.
+     *
+     * @ORM\OneToOne(targetEntity="Discharge",mappedBy="installation")
+     */
+    protected $discharge;
+
 
     /**
      * Get available functions.
@@ -124,6 +131,16 @@ class Installation extends FoundationReference
         $text = $member . ' wordt gëinstalleerd als ' . $this->getDutchFunction();
         $text .= ' van ' . $this->getFoundation()->getAbbr() . '.';
         return $text;
+    }
+
+    /**
+     * Get the discharge, if it exists
+     *
+     * @return Discharge
+     */
+    public function getDischarge()
+    {
+        return $this->discharge;
     }
 
     /**
