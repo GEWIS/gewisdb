@@ -257,6 +257,7 @@ class Meeting extends AbstractService
     public function findFoundation($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
     {
         return $this->getOrganMapper()->find(
+            $type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber
         );
     }
 

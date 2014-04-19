@@ -53,12 +53,15 @@ $(document).ready(function () {
                     context: document.body
                 }).done(function(data) {
                     console.log(data.json);
+                    // show all members
                     $('#div-members-abolish').show();
                     var content = '';
                     $.each(data.json.members, function(idx, install) {
                         content += '<li>' + install.member.fullName + ' (' + install.function + ')</li>';
                     });
                     $('#members-abolish').html(content);
+
+                    // set subdecision for foundation
                 });
             }
         });
@@ -86,11 +89,31 @@ $fs = $form->get('meeting')
 <?php
 $fs = $form->get('subdecision');
 ?>
-<?= $this->formHidden($fs->get('meeting_type')) ?>
-<?= $this->formHidden($fs->get('meeting_number')) ?>
-<?= $this->formHidden($fs->get('decision_point')) ?>
-<?= $this->formHidden($fs->get('decision_number')) ?>
-<?= $this->formHidden($fs->get('number')) ?>
+<?php
+$element = $fs->get('meeting_type');
+$element->setAttribute('id', 'abolish-meeting-type');
+?>
+<?= $this->formHidden($element) ?>
+<?php
+$element = $fs->get('meeting_number');
+$element->setAttribute('id', 'abolish-meeting-number');
+?>
+<?= $this->formHidden($element) ?>
+<?php
+$element = $fs->get('decision_point');
+$element->setAttribute('id', 'abolish-decision-point');
+?>
+<?= $this->formHidden($element) ?>
+<?php
+$element = $fs->get('decision_number');
+$element->setAttribute('id', 'abolish-decision-number');
+?>
+<?= $this->formHidden($element) ?>
+<?php
+$element = $fs->get('number');
+$element->setAttribute('id', 'abolish-number');
+?>
+<?= $this->formHidden($element) ?>
 <div class="form-group">
 <?php
 $element = $form->get('name');
