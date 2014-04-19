@@ -4,6 +4,10 @@ namespace Database\Hydrator;
 
 use Database\Model\Decision;
 
+use Database\Model\SubDecision\Installation;
+use Database\Model\SubDecision\Discharge;
+use Database\Model\SubDecision\Abrogation;
+
 class Abolish extends AbstractDecision
 {
 
@@ -21,7 +25,28 @@ class Abolish extends AbstractDecision
     {
         $object = parent::hydrate($data, $object);
 
-        var_dump($data);
+        // determine who to discharge
+        $members = array();
+
+        // check installations and discharges
+        foreach ($data['subdecision']->getReferences() as $ref) {
+            if ($ref instanceof Installation && null === $ref->getDischarge()) {
+                $members[] = $ref;
+            }
+        }
+
+        // discharge in reverse order
+        $members = array_reverse($members);
+
+        foreach ($members as $installation) {
+            $discharge = new Discharge();
+            $discharge->setInstallation($installation);
+            $discharge->setDecision($object);
+        }
+
+        $abrog = new Abrogation();
+        $abrog->setFoundation($data['subdecision']);
+        $abrog->setDecision($object);
 
         return $object;
     }
