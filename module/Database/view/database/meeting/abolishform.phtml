@@ -61,7 +61,11 @@ $(document).ready(function () {
                     });
                     $('#members-abolish').html(content);
 
-                    // set subdecision for foundation
+                    $('#abolish-meeting-type').val(ui.item.id.meeting_type);
+                    $('#abolish-meeting-number').val(ui.item.id.meeting_number);
+                    $('#abolish-decision-point').val(ui.item.id.decision_point);
+                    $('#abolish-decision-number').val(ui.item.id.decision_number);
+                    $('#abolish-number').val(ui.item.id.subdecision_number);
                 });
             }
         });
