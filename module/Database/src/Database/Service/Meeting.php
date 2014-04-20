@@ -89,14 +89,12 @@ class Meeting extends AbstractService
         $form->setData($data);
         $form->bind(new Decision());
 
-        if (!$form->isValid() || true) {
+        if (!$form->isValid()) {
             return array(
                 'type' => 'abolish',
                 'form' => $form
             );
         }
-
-        // TODO: implement decision creation
 
         $decision = $form->getData();
 

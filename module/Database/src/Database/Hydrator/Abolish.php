@@ -38,14 +38,18 @@ class Abolish extends AbstractDecision
         // discharge in reverse order
         $members = array_reverse($members);
 
+        $num = 1;
+
         foreach ($members as $installation) {
             $discharge = new Discharge();
             $discharge->setInstallation($installation);
+            $discharge->setNumber($num++);
             $discharge->setDecision($object);
         }
 
         $abrog = new Abrogation();
         $abrog->setFoundation($data['subdecision']);
+        $abrog->setNumber($num++);
         $abrog->setDecision($object);
 
         return $object;
