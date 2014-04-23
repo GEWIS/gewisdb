@@ -6,7 +6,7 @@ use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 use Database\Model\SubDecision as SubDecisionModel;
-use Database\Model\Meeting;
+use Database\Model\Meeting as MeetingModel;
 
 class SubDecision extends Fieldset
     implements InputFilterProviderInterface
@@ -54,7 +54,7 @@ class SubDecision extends Fieldset
                     array(
                         'name' => 'in_array',
                         'options' => array(
-                            'haystack' => Meeting::getTypes()
+                            'haystack' => MeetingModel::getTypes()
                         )
                     )
                 )
