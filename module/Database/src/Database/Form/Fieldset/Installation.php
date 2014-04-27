@@ -2,15 +2,20 @@
 
 namespace Database\Form\Fieldset;
 
+use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
+
 use Database\Model\SubDecision\Installation as InstallationModel;
 
-class Installation extends Member
+class Installation extends Fieldset implements InputFilterProviderInterface
 {
 
-    public function __construct()
+    public function __construct(Member $member)
     {
-        $this->setName('installation');
-        $this->remove('name');
+        parent::__construct('installation');
+
+        $member->remove('name');
+        $this->add($member);
 
         $this->add(array(
             'name' => 'function',
@@ -20,18 +25,18 @@ class Installation extends Member
 
     public function getInputFilterSpecification()
     {
-        $spec = parent::getInputFilterSpecification();
-        $spec['function'] = array(
-            'required' => rue,
-            'validators' => array(
-                array(
-                    'name' => 'in_array',
-                    'options' => array(
-                        'haystack' => InstallationModel::getFunctions()
+        return array(
+            'function' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'in_array',
+                        'options' => array(
+                            'haystack' => InstallationModel::getFunctions()
+                        )
                     )
                 )
             )
         );
-        return $spec;
     }
 }

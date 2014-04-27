@@ -109,6 +109,14 @@ class Module
                     $fieldset->setObject(new \Database\Model\SubDecision\Discharge());
                     return $fieldset;
                 },
+                'database_form_fieldset_installation' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\Installation(
+                        $sm->get('database_form_fieldset_member')
+                    );
+                    $fieldset->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+                    $fieldset->setObject(new \stdClass());
+                    return $fieldset;
+                },
                 'database_form_fieldset_meeting' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\Meeting();
                     $fieldset->setHydrator($sm->get('database_hydrator_meeting'));
