@@ -77,7 +77,9 @@ class Module
                 },
                 'database_form_install' => function ($sm) {
                     $form = new \Database\Form\Install(
-                        $sm->get('database_form_fieldset_meeting')
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_installation'),
+                        $sm->get('database_form_fieldset_subdecision_discharge')
                     );
                     return $form;
                 },

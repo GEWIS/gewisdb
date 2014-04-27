@@ -7,7 +7,8 @@ use Zend\InputFilter\InputFilter;
 class Install extends AbstractDecision
 {
 
-    public function __construct(Fieldset\Meeting $meeting)
+    public function __construct(Fieldset\Meeting $meeting,
+        Fieldset\Installation $install, Fieldset\SubDecision $discharge)
     {
         parent::__construct($meeting);
 
@@ -19,18 +20,27 @@ class Install extends AbstractDecision
             )
         ));
 
-        //$this->add(array(
-            //'name' => 'members',
-            //'type' => 'collection',
-            //'options' => array(
-                //'label' => 'Members',
-                //'count' => 1,
-                //'should_create_template' => true,
-                //'target_element' => array(
-                    //'type' => 'Database\Form\Fieldset\MemberInstall'
-                //)
-            //)
-        //));
+        $this->add(array(
+            'name' => 'installations',
+            'type' => 'collection',
+            'options' => array(
+                'label' => 'Installations',
+                'count' => 1,
+                'should_create_template' => true,
+                'target_element' => $install
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'discharges',
+            'type' => 'collection',
+            'options' => array(
+                'label' => 'Members',
+                'count' => 1,
+                'should_create_template' => true,
+                'target_element' => $discharge
+            )
+        ));
 
         $this->add(array(
             'name' => 'submit',
