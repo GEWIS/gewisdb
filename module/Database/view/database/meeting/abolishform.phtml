@@ -52,7 +52,6 @@ $(document).ready(function () {
                     url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
                     context: document.body
                 }).done(function(data) {
-                    console.log(data.json);
                     // show all members
                     $('#div-members-abolish').show();
                     var content = '';
