@@ -8,7 +8,8 @@ class Install extends AbstractDecision
 {
 
     public function __construct(Fieldset\Meeting $meeting,
-        Fieldset\Installation $install, Fieldset\SubDecision $discharge)
+        Fieldset\Installation $install, Fieldset\SubDecision $discharge,
+        Fieldset\SubDecision $foundation)
     {
         parent::__construct($meeting);
 
@@ -19,6 +20,8 @@ class Install extends AbstractDecision
                 'label' => 'Orgaan',
             )
         ));
+
+        $this->add($foundation);
 
         $this->add(array(
             'name' => 'installations',
