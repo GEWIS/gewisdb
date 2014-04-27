@@ -55,6 +55,11 @@ class OrganController extends AbstractActionController
         foreach ($foundation->getReferences() as $reference) {
             if ($reference instanceof \Database\Model\SubDecision\Installation) {
                 $data['members'][] = array(
+                    'meeting_type' => $reference->getDecision()->getMeeting()->getType(),
+                    'meeting_number' => $reference->getDecision()->getMeeting()->getNumber(),
+                    'decision_point' => $reference->getDecision()->getPoint(),
+                    'decision_number' => $reference->getDecision()->getNumber(),
+                    'subdecision_number' => $reference->getNumber(),
                     'function' => $reference->getFunction(),
                     'member' => $reference->getMember()->toArray()
                 );
