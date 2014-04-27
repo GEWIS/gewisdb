@@ -52,16 +52,17 @@ $(document).ready(function () {
                     url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
                     context: document.body
                 }).done(function(data) {
-                    console.log(data.json);
                     var content = '';
                     var content2 = '';
                     $.each(data.json.members, function(idx, install) {
                         var toAdd = '<tr data-lidnr="' + install.member.lidnr + '">'
-                            + '<td>' + install.member.fullName + '</td>'
-                            + '<td>' + install.function + '</td>';
+                            + '<td class="name">' + install.member.fullName + '</td>'
+                            + '<td class="function">' + install.function + '</td>';
                         content += toAdd + '</tr>';
-                        toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">Dechargeer</button></td>';
-                        toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">Geef functie</button></td>';
+                        toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">'
+                            + '<span class="glyphicon glyphicon-remove"></span> Dechargeer</button></td>';
+                        toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
+                            + '<span class="glyphicon glyphicon-arrow-up"></span> Geef functie</button></td>';
                         content2 += toAdd + '</tr>';
                     });
                     $('#members-install').html(content);
@@ -70,9 +71,15 @@ $(document).ready(function () {
 
                     $('#install-members-hide').show();
 
-                    $('button.discharge').click(function()
+                    $('button.discharge').click(function(e)
                     {
-                        $('#install-modal-decharge').modal();
+                        var element = $(e.target).parent().parent();
+                        var name = element.find('.name').html();
+                        var func = element.find('.function').html();
+                        $('#install-modal-discharge div.modal-body span.name').html(name);
+                        $('#install-modal-discharge div.modal-body span.function').html(func);
+                        $('#install-modal-discharge').attr('data-lidnr', element.attr('data-lidnr'));
+                        $('#install-modal-discharge').modal();
                     });
                 });
             }
@@ -159,7 +166,7 @@ $submit->setAttribute('class', 'btn btn-primary');
 
 <?= $this->form()->closeTag(); ?>
 <?php /* Modals that might be used */ ?>
-<div id="install-modal-decharge" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="install-model-discharge-label" aria-hidden="true">
+<div id="install-modal-discharge" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="install-model-discharge-label" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -167,11 +174,11 @@ $submit->setAttribute('class', 'btn btn-primary');
         <h4 class="modal-title" id="install-model-discharge-label">Dechargeer lid</h4>
       </div>
       <div class="modal-body">
-        Dechargeer een lid :D
+        Dechargeer <span class="name"></span> als <span class="function"></span>?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
+        <button type="button" class="btn btn-primary">Ja</button>
       </div>
     </div>
   </div>
