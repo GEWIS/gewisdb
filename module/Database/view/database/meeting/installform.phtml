@@ -1,24 +1,44 @@
 <script>
-    function enable_autocomplete_install() {
-        $('#members-install .member-autocomplete').autocomplete({
+var urlTemplate = '<?= $this->url('organ/info', array(
+    'type' => '__type__',
+    'number' => '__number__',
+    'point' => '__point__',
+    'decision' => '__decision__',
+    'subdecision' => '__subdecision__'
+)) ?>';
+function getUrl(type, meeting, point, decision, subdecision)
+{
+    url = urlTemplate.replace('__type__', type);
+    url = url.replace('__number__', meeting);
+    url = url.replace('__point__', point);
+    url = url.replace('__decision__', decision);
+    return url.replace('__subdecision__', subdecision);
+}
+$(document).ready(function () {
+    $('#install-organ').autocomplete({
             minLength: 2, // at least two chars before request
             delay: 0, // no delay before request
             source: function (rq, response) {
                 // make an AJAX request
                 $.ajax({
                     dataType: 'json',
-                    url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + rq.term,
+                    url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + rq.term,
                     context: document.body
                 }).done(function(data) {
                     var ret = [];
-                    $.each(data.json, function (idx, member) {
-                        // assemble member name and add to list
-                        var name = member.fullName + ' (' + member.lidnr + ')';
+                    $.each(data.json, function (idx, organ) {
+                        // assemble organ info and add to list
+                        var decision = organ.meeting_type + ' '
+                                     + organ.meeting_number + '.'
+                                     + organ.decision_point + '.'
+                                     + organ.decision_number;
+
+                        var name = organ.abbr + ' (' + organ.name + ', ' + decision + ')';
 
                         ret.push({
                             label: name,
                             value: name,
-                            id: member.lidnr
+                            id: organ
                         });
                     });
 
@@ -27,25 +47,16 @@
                 });
             },
             select: function (event, ui) {
-                $(event.target).parent().find("input.member-lidnr").val(ui.item.id);
+                $.ajax({
+                    dataType: 'json',
+                    url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
+                    context: document.body
+                }).done(function(data) {
+                    console.log(data.json);
+                });
             }
         });
-    }
-    var count = 1;
-    function add_member_install() {
-        var template = $('#members-template-install').data('template');
-        template = template.replace(/__index__/g, count++);
-
-        $('#members-install').append(template);
-
-        enable_autocomplete_install();
-    }
-    function remove_member_install(ele) {
-        $(ele).parent().remove();
-    }
-    $(document).ready(function(){
-        enable_autocomplete_install();
-    });
+});
 </script>
 <?php
 $form = $this->form;
@@ -71,6 +82,7 @@ $fs = $form->get('meeting')
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', 'Orgaan');
+$element->setAttribute('id', 'install-organ');
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
