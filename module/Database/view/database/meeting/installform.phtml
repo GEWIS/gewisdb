@@ -81,6 +81,15 @@ $(document).ready(function () {
                         $('#install-modal-discharge').attr('data-lidnr', element.attr('data-lidnr'));
                         $('#install-modal-discharge').modal();
                     });
+
+                    $('button.functionchange').click(function(e)
+                    {
+                        var element = $(e.target).parent().parent();
+                        var name = element.find('.name').html();
+                        $('#install-modal-function div.modal-body span.name').html(name);
+                        $('#install-modal-function').attr('data-lidnr', element.attr('data-lidnr'));
+                        $('#install-modal-function').modal();
+                    });
                 });
             }
         });
@@ -155,6 +164,8 @@ $element->setAttribute('id', 'install-organ');
         </div>
     </div>
 </div>
+<br />
+<br />
 </div>
 
 <?php
@@ -166,7 +177,7 @@ $submit->setAttribute('class', 'btn btn-primary');
 
 <?= $this->form()->closeTag(); ?>
 <?php /* Modals that might be used */ ?>
-<div id="install-modal-discharge" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="install-model-discharge-label" aria-hidden="true">
+<div id="install-modal-discharge" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="install-model-discharge-label" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -175,6 +186,30 @@ $submit->setAttribute('class', 'btn btn-primary');
       </div>
       <div class="modal-body">
         Dechargeer <span class="name"></span> als <span class="function"></span>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
+        <button type="button" class="btn btn-primary">Ja</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="install-modal-function" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="install-model-function-label" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="install-model-function-label">Geef functie aan lid</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="function">Functie van <span class="name"></span></label>
+            <select name="function" class="form-control">
+                <option value="voorzitter">voorzitter</option>
+                <option value="secretaris">secretaris</option>
+            </select>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
