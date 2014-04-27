@@ -53,6 +53,22 @@ $(document).ready(function () {
                     context: document.body
                 }).done(function(data) {
                     console.log(data.json);
+                    var content = '';
+                    var content2 = '';
+                    $.each(data.json.members, function(idx, install) {
+                        var toAdd = '<tr data-lidnr="' + install.member.lidnr + '">'
+                            + '<td>' + install.member.fullName + '</td>'
+                            + '<td>' + install.function + '</td>';
+                        content += toAdd + '</tr>';
+                        toAdd += '<td><button type="button" class="btn btn-danger btn-xs">Dechargeer</button></td>';
+                        toAdd += '<td><button type="button" class="btn btn-warning btn-xs">Geef functie</button></td>';
+                        content2 += toAdd + '</tr>';
+                    });
+                    $('#members-install').html(content);
+                    $('#members-result').html(content2);
+                    $('#install-changes').html('');
+
+                    $('#install-members-hide').show();
                 });
             }
         });
@@ -89,9 +105,49 @@ $element->setAttribute('id', 'install-organ');
     <?= $this->formElementErrors($element) ?>
 </div>
 
+<div id="install-members-hide" style="display: none;">
+<div class="row">
+    <div class="col-md-6">
+        <h2>Huidige Leden</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Functie</th>
+                </tr>
+            </thead>
+            <tbody id="members-install">
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Resultaat</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Functie</th>
+                    <th>Dechargeer</th>
+                    <th>Geef functie</th>
+                </tr>
+            </thead>
+            <tbody id="members-result">
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Wijzigingen</h2>
+        <div id="install-changes">
+        </div>
+    </div>
+</div>
+</div>
+
 <?php
 $submit = $form->get('submit');
-$submit->setLabel('Installeer leden');
+$submit->setLabel('Maak wijzigingen');
 $submit->setAttribute('class', 'btn btn-primary');
 ?>
 <?= $this->formButton($submit) ?>
