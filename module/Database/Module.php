@@ -103,6 +103,12 @@ class Module
                     $fieldset->setObject(new \Database\Model\SubDecision\Foundation());
                     return $fieldset;
                 },
+                'database_form_fieldset_subdecision_discharge' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\SubDecision();
+                    $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
+                    $fieldset->setObject(new \Database\Model\SubDecision\Discharge());
+                    return $fieldset;
+                },
                 'database_form_fieldset_meeting' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\Meeting();
                     $fieldset->setHydrator($sm->get('database_hydrator_meeting'));
