@@ -19,35 +19,25 @@ class Install extends AbstractDecision
             )
         ));
 
-        $this->add(array(
-            'name' => 'members',
-            'type' => 'collection',
-            'options' => array(
-                'label' => 'Members',
-                'count' => 1,
-                'should_create_template' => true,
-                'target_element' => array(
-                    'type' => 'Database\Form\Fieldset\MemberInstall'
-                )
-            )
-        ));
+        //$this->add(array(
+            //'name' => 'members',
+            //'type' => 'collection',
+            //'options' => array(
+                //'label' => 'Members',
+                //'count' => 1,
+                //'should_create_template' => true,
+                //'target_element' => array(
+                    //'type' => 'Database\Form\Fieldset\MemberInstall'
+                //)
+            //)
+        //));
 
         $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => 'Installeer leden'
+                'value' => 'Maak wijzigingen'
             )
         ));
-
-        $this->initFilters();
-
-    }
-
-    protected function initFilters()
-    {
-        $filter = new InputFilter();
-
-        $this->setInputFilter($filter);
     }
 }

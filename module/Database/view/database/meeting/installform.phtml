@@ -47,9 +47,6 @@
         enable_autocomplete_install();
     });
 </script>
-<p>
-Let op! Hiermee kunnen functies niet gewisseld worden!
-</p>
 <?php
 $form = $this->form;
 $form->prepare();
@@ -79,77 +76,6 @@ $element->setAttribute('placeholder', 'Orgaan');
     <?= $this->formInput($element) ?>
     <?= $this->formElementErrors($element) ?>
 </div>
-
-<div class="form-group" id="members-install">
-<strong>Te installeren leden</strong>
-<?php
-$element = $form->get('members');
-
-$fs = $element->getTemplateElement();
-// render template element
-ob_start();
-?>
-    <div class="form-inline" style="margin-bottom: 5px;">
-        <div class="form-group">
-            <?php
-            $el = $fs->get('type');
-            $el->setAttribute('class', 'form-control');
-            $el->setAttribute('placeholder', $el->getLabel());
-            ?>
-            <?= $this->formSelect($el) ?>
-            <?= $this->formElementErrors($el) ?>
-        </div>
-        <div class="form-group">
-            <?php
-            $el = $fs->get('name');
-            $el->setAttribute('class', 'form-control member-autocomplete');
-            $el->setAttribute('placeholder', $el->getLabel());
-            ?>
-            <?= $this->formInput($el) ?>
-            <?php
-            // hidden element for actual membership number
-            $el = $fs->get('lidnr');
-            $el->setAttribute('class', 'member-lidnr');
-            ?>
-            <?= $this->formHidden($el) ?>
-            <?= $this->formElementErrors($el) ?>
-        </div>
-        <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
-    </div>
-<?php $tpl = trim(ob_get_clean()); ?>
-<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="members-template-install"></span>
-<?php foreach ($element->getIterator() as $fs): ?>
-    <div class="form-inline" style="margin-bottom: 5px;">
-        <div class="form-group">
-            <?php
-            $el = $fs->get('type');
-            $el->setAttribute('class', 'form-control');
-            $el->setAttribute('placeholder', $el->getLabel());
-            ?>
-            <?= $this->formSelect($el) ?>
-            <?= $this->formElementErrors($el) ?>
-        </div>
-        <div class="form-group">
-            <?php
-            $el = $fs->get('name');
-            $el->setAttribute('class', 'form-control member-autocomplete');
-            $el->setAttribute('placeholder', $el->getLabel());
-            ?>
-            <?= $this->formInput($el) ?>
-            <?php
-            // hidden element for actual membership number
-            $el = $fs->get('lidnr');
-            $el->setAttribute('class', 'member-lidnr');
-            ?>
-            <?= $this->formHidden($el) ?>
-            <?= $this->formElementErrors($el) ?>
-        </div>
-        <button type="button" class="btn btn-danger" onclick="remove_member_install(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
-    </div>
-<?php endforeach; ?>
-</div>
-<button type="button" class="btn btn-success" onclick="add_member_install()"><span class="glyphicon glyphicon-plus"></span> Voeg toe</button>
-<br><br>
 
 <?php
 $submit = $form->get('submit');
