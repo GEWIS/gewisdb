@@ -16,83 +16,118 @@ function getUrl(type, meeting, point, decision, subdecision)
 }
 $(document).ready(function () {
     $('#install-organ').autocomplete({
-            minLength: 2, // at least two chars before request
-            delay: 0, // no delay before request
-            source: function (rq, response) {
-                // make an AJAX request
-                $.ajax({
-                    dataType: 'json',
-                    url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + rq.term,
-                    context: document.body
-                }).done(function(data) {
-                    var ret = [];
-                    $.each(data.json, function (idx, organ) {
-                        // assemble organ info and add to list
-                        var decision = organ.meeting_type + ' '
-                                     + organ.meeting_number + '.'
-                                     + organ.decision_point + '.'
-                                     + organ.decision_number;
+        minLength: 2, // at least two chars before request
+        delay: 0, // no delay before request
+        source: function (rq, response) {
+            // make an AJAX request
+            $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + rq.term,
+                context: document.body
+            }).done(function(data) {
+                var ret = [];
+                $.each(data.json, function (idx, organ) {
+                    // assemble organ info and add to list
+                    var decision = organ.meeting_type + ' '
+                                 + organ.meeting_number + '.'
+                                 + organ.decision_point + '.'
+                                 + organ.decision_number;
 
-                        var name = organ.abbr + ' (' + organ.name + ', ' + decision + ')';
+                    var name = organ.abbr + ' (' + organ.name + ', ' + decision + ')';
 
-                        ret.push({
-                            label: name,
-                            value: name,
-                            id: organ
-                        });
-                    });
-
-                    // show data
-                    response(ret);
-                });
-            },
-            select: function (event, ui) {
-                $.ajax({
-                    dataType: 'json',
-                    url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
-                    context: document.body
-                }).done(function(data) {
-                    var content = '';
-                    var content2 = '';
-                    $.each(data.json.members, function(idx, install) {
-                        var toAdd = '<tr data-lidnr="' + install.member.lidnr + '">'
-                            + '<td class="name">' + install.member.fullName + '</td>'
-                            + '<td class="function">' + install.function + '</td>';
-                        content += toAdd + '</tr>';
-                        toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">'
-                            + '<span class="glyphicon glyphicon-remove"></span> Dechargeer</button></td>';
-                        toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
-                            + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
-                        content2 += toAdd + '</tr>';
-                    });
-                    $('#members-install').html(content);
-                    $('#members-result').html(content2);
-                    $('#install-changes').html('');
-
-                    $('#install-members-hide').show();
-
-                    $('button.discharge').click(function(e)
-                    {
-                        var element = $(e.target).parent().parent();
-                        var name = element.find('.name').html();
-                        var func = element.find('.function').html();
-                        $('#install-modal-discharge div.modal-body span.name').html(name);
-                        $('#install-modal-discharge div.modal-body span.function').html(func);
-                        $('#install-modal-discharge').attr('data-lidnr', element.attr('data-lidnr'));
-                        $('#install-modal-discharge').modal();
-                    });
-
-                    $('button.functionchange').click(function(e)
-                    {
-                        var element = $(e.target).parent().parent();
-                        var name = element.find('.name').html();
-                        $('#install-modal-function div.modal-body span.name').html(name);
-                        $('#install-modal-function').attr('data-lidnr', element.attr('data-lidnr'));
-                        $('#install-modal-function').modal();
+                    ret.push({
+                        label: name,
+                        value: name,
+                        id: organ
                     });
                 });
-            }
-        });
+
+                // show data
+                response(ret);
+            });
+        },
+        select: function (event, ui) {
+            $.ajax({
+                dataType: 'json',
+                url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
+                context: document.body
+            }).done(function(data) {
+                var content = '';
+                var content2 = '';
+                $.each(data.json.members, function(idx, install) {
+                    var toAdd = '<tr data-lidnr="' + install.member.lidnr + '">'
+                        + '<td class="name">' + install.member.fullName + '</td>'
+                        + '<td class="function">' + install.function + '</td>';
+                    content += toAdd + '</tr>';
+                    toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">'
+                        + '<span class="glyphicon glyphicon-remove"></span> Dechargeer</button></td>';
+                    toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
+                        + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
+                    content2 += toAdd + '</tr>';
+                });
+                $('#members-install').html(content);
+                $('#members-result').html(content2);
+                $('#install-changes').html('');
+
+                $('#install-members-hide').show();
+
+                $('button.discharge').click(function(e)
+                {
+                    var element = $(e.target).parent().parent();
+                    var name = element.find('.name').html();
+                    var func = element.find('.function').html();
+                    $('#install-modal-discharge div.modal-body span.name').html(name);
+                    $('#install-modal-discharge div.modal-body span.function').html(func);
+                    $('#install-modal-discharge').attr('data-lidnr', element.attr('data-lidnr'));
+                    $('#install-modal-discharge').modal();
+                });
+
+                $('button.functionchange').click(function(e)
+                {
+                    var element = $(e.target).parent().parent();
+                    var name = element.find('.name').html();
+                    $('#install-modal-function div.modal-body span.name').html(name);
+                    $('#install-modal-function').attr('data-lidnr', element.attr('data-lidnr'));
+                    $('#install-modal-function').modal();
+                });
+            });
+        }
+    });
+    $('#install-member').autocomplete({
+        minLength: 2, // at least two chars before request
+        delay: 0, // no delay before request
+        source: function (rq, response) {
+            // make an AJAX request
+            $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + rq.term,
+                context: document.body
+            }).done(function(data) {
+                var ret = [];
+                $.each(data.json, function (idx, member) {
+                    // assemble member name and add to list
+                    var name = member.fullName + ' (' + member.lidnr + ')';
+
+                    ret.push({
+                        label: name,
+                        value: name,
+                        id: member.lidnr
+                    });
+                });
+
+                // show data
+                response(ret);
+            });
+        },
+        select: function (event, ui) {
+            $('#install-member-lidnr').val(ui.item.id);
+        }
+    });
+
+    $('#install-member-btn').click(function(e)
+    {
+        console.log($('#install-member-lidnr').val());
+    });
 });
 </script>
 <?php
@@ -168,8 +203,9 @@ $element->setAttribute('id', 'install-organ');
         <div class="form-group">
             <input type="text" id="install-member" class="form-control" placeholder="Lid" />
             <input type="hidden" id="install-member-lidnr" />
+            <input type="hidden" id="install-member-name" />
         </div>
-        <button type="button" class="btn btn-success">
+        <button type="button" class="btn btn-success" id="install-member-btn">
             <span class="glyphicon glyphicon-plus"></span>
             Voeg lid toe
         </button>
