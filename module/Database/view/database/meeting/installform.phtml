@@ -62,7 +62,7 @@ $(document).ready(function () {
                         toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">'
                             + '<span class="glyphicon glyphicon-remove"></span> Dechargeer</button></td>';
                         toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
-                            + '<span class="glyphicon glyphicon-arrow-up"></span> Geef functie</button></td>';
+                            + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
                         content2 += toAdd + '</tr>';
                     });
                     $('#members-install').html(content);
@@ -206,8 +206,12 @@ $submit->setAttribute('class', 'btn btn-primary');
         <div class="form-group">
             <label for="function">Functie van <span class="name"></span></label>
             <select name="function" class="form-control">
-                <option value="voorzitter">voorzitter</option>
-                <option value="secretaris">secretaris</option>
+                <option value="voorzitter">chairman</option>
+                <option value="secretaris">secretary</option>
+                <option value="secretaris">treasurer</option>
+                <option value="secretaris">vice-chairman</option>
+                <option value="secretaris">pr-officer</option>
+                <option value="secretaris">education-officer</option>
             </select>
         </div>
       </div>
