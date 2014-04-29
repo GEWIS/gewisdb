@@ -158,10 +158,21 @@ $element->setAttribute('id', 'install-organ');
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h2>Wijzigingen</h2>
         <div id="install-changes">
         </div>
+    </div>
+    <div class="col-md-6 form-inline">
+        <h2>Nieuw lid toevoegen</h2>
+        <div class="form-group">
+            <input type="text" id="install-member" class="form-control" placeholder="Lid" />
+            <input type="hidden" id="install-member-lidnr" />
+        </div>
+        <button type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span>
+            Voeg lid toe
+        </button>
     </div>
 </div>
 <br />
@@ -208,10 +219,10 @@ $submit->setAttribute('class', 'btn btn-primary');
             <select name="function" class="form-control">
                 <option value="voorzitter">chairman</option>
                 <option value="secretaris">secretary</option>
-                <option value="secretaris">treasurer</option>
-                <option value="secretaris">vice-chairman</option>
-                <option value="secretaris">pr-officer</option>
-                <option value="secretaris">education-officer</option>
+                <option value="treasurer">treasurer</option>
+                <option value="vice-chairman">vice-chairman</option>
+                <option value="pr-officer">pr-officer</option>
+                <option value="education-officer">education-officer</option>
             </select>
         </div>
       </div>
