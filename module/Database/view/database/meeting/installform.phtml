@@ -198,6 +198,27 @@ $element->setAttribute('id', 'install-organ');
     <div class="col-md-6">
         <h2>Wijzigingen</h2>
         <div id="install-changes">
+<?php
+$element = $form->get('installations');
+$fs = $element->getTemplateElement();
+$mfs = $fs->get('member');
+// render template element
+ob_start();
+?>
+    <?php
+    $el = $fs->get('function');
+    $el->setAttribute('class', 'install-function');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $mfs->get('lidnr');
+    $el->setAttribute('class', 'member-lidnr');
+    ?>
+    <?= $this->formHidden($el) ?>
+<?php
+$tpl = trim(ob_get_clean());
+?>
+            <span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="install-template"></span>
         </div>
     </div>
     <div class="col-md-6 form-inline">
@@ -215,7 +236,6 @@ $element->setAttribute('id', 'install-organ');
 </div>
 <br />
 <br />
-</div>
 
 <?php
 $submit = $form->get('submit');
@@ -223,6 +243,9 @@ $submit->setLabel('Bevestig wijzigingen');
 $submit->setAttribute('class', 'btn btn-primary');
 ?>
 <?= $this->formButton($submit) ?>
+
+</div>
+
 
 <?= $this->form()->closeTag(); ?>
 <?php /* Modals that might be used */ ?>
