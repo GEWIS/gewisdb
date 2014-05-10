@@ -144,9 +144,22 @@ $(document).ready(function () {
             + '<td class="name">' + name + '</td>'
             + '<td class="function">' + func + '</td>';
         toAdd += '<td></td>';
-        toAdd += '<td></td>';
+        toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
+            + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
         toAdd += '</tr>';
-        $('#members-result').append($(toAdd));
+
+        toAdd = $(toAdd);
+        $('#members-result').append(toAdd);
+
+        // also add ability to give a function, using the function modal
+        toAdd.find('button.functionchange').click(function(e)
+        {
+            var element = $(e.target).parent().parent();
+            var name = element.find('.name').html();
+            $('#install-modal-function div.modal-body span.name').html(name);
+            $('#install-modal-function').attr('data-lidnr', element.attr('data-lidnr'));
+            $('#install-modal-function').modal();
+        });
     }
     $('#install-member-btn').click(function(e)
     {
