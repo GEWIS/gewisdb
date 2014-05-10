@@ -127,27 +127,26 @@ $(document).ready(function () {
     });
 
     var instcount = 0;
-    function getInstallTemplate(func, lidnr, name) {
+    function createInstallation(func, lidnr, name) {
         var template = $('#install-template').data('template');
         template = template.replace(/__index__/g, instcount++);
         template = template.replace(/__function__/g, func);
         template = template.replace(/__lidnr__/g, lidnr);
         template = template.replace(/__name__/g, name);
-        return template;
+        $('#install-changes').append($(template));
     }
     $('#install-member-btn').click(function(e)
     {
         var lidnr = $('#install-member-lidnr').val();
         var name = $('#install-member-name').val();
-        $('#install-changes').append($(getInstallTemplate('member', lidnr, name)));
+        createInstallation('member', lidnr, name);
     });
     $('#install-modal-yes').click(function(e)
     {
         var lidnr = $('#install-modal-function').data('lidnr');
         var name = $('#install-modal-function div.form-group span.name').text();
         var func = $('#install-modal-function div.form-group select').val();
-        console.log(func);
-        $('#install-changes').append($(getInstallTemplate(func, lidnr, name)));
+        createInstallation(func, lidnr, name);
         $('#install-modal-function').modal('hide');
     });
 });
