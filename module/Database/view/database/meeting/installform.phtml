@@ -55,7 +55,17 @@ $(document).ready(function () {
                 var content = '';
                 var content2 = '';
                 $.each(data.json.members, function(idx, install) {
-                    var toAdd = '<tr data-lidnr="' + install.member.lidnr + '">'
+                    var decNum = install.meeting_type + '-' + install.meeting_number
+                        + '-' + install.decision_point + '-' + install.decision_number
+                        + '-' + install.subdecision_number;
+                    var toAdd = '<tr data-lidnr="' + install.member.lidnr + '"'
+                        + ' data-meeting-type="' + install.meeting_type + '"'
+                        + ' data-meeting-number="' + install.meeting_number + '"'
+                        + ' data-decision-point="' + install.decision_point + '"'
+                        + ' data-decision-number="' + install.decision_number + '"'
+                        + ' data-subdecision-number="' + install.subdecision_number + '"'
+                        + ' id="dec-' + decNum + '"'
+                        + '>'
                         + '<td class="name">' + install.member.fullName + '</td>'
                         + '<td class="function">' + install.function + '</td>';
                     content += toAdd + '</tr>';
@@ -78,7 +88,11 @@ $(document).ready(function () {
                     var func = element.find('.function').html();
                     $('#install-modal-discharge div.modal-body span.name').html(name);
                     $('#install-modal-discharge div.modal-body span.function').html(func);
-                    $('#install-modal-discharge').attr('data-lidnr', element.attr('data-lidnr'));
+                    $('#install-modal-discharge').attr('data-meeting-type', element.attr('data-meeting-type'));
+                    $('#install-modal-discharge').attr('data-meeting-number', element.attr('data-meeting-number'));
+                    $('#install-modal-discharge').attr('data-decision-point', element.attr('data-decision-point'));
+                    $('#install-modal-discharge').attr('data-decision-number', element.attr('data-decision-number'));
+                    $('#install-modal-discharge').attr('data-subdecision-number', element.attr('data-subdecision-number'));
                     $('#install-modal-discharge').modal();
                 });
 
