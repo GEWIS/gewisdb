@@ -257,6 +257,7 @@ $element->setAttribute('id', 'install-organ');
     <div class="col-md-6">
         <h2>Wijzigingen</h2>
 <?php
+// installation element template
 $element = $form->get('installations');
 $fs = $element->getTemplateElement();
 $mfs = $fs->get('member');
@@ -282,6 +283,45 @@ ob_start();
 $tpl = trim(ob_get_clean());
 ?>
 <span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="install-template"></span>
+<?php
+// discharge element template
+$element = $form->get('discharges');
+$fs = $element->getTemplateElement();
+// render template element
+ob_start();
+?>
+<div class="organ-discharge">
+    __name__ wordt gedechargeerd als __function__.
+    <?php
+    $el = $fs->get('meeting_type');
+    $el->setValue('__meeting_type__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('meeting_number');
+    $el->setValue('__meeting_number__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('decision_point');
+    $el->setValue('__decision_point__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('decision_number');
+    $el->setValue('__decision_number__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('number');
+    $el->setValue('__number__');
+    ?>
+    <?= $this->formHidden($el) ?>
+</div>
+<?php
+$tpl = trim(ob_get_clean());
+?>
+<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="discharge-template"></span>
         <div id="install-changes">
         </div>
     </div>
