@@ -64,7 +64,7 @@ $(document).ready(function () {
                         + ' data-decision-point="' + install.decision_point + '"'
                         + ' data-decision-number="' + install.decision_number + '"'
                         + ' data-subdecision-number="' + install.subdecision_number + '"'
-                        + ' id="dec-' + decNum + '"'
+                        + ' class="dec-' + decNum + '"'
                         + '>'
                         + '<td class="name">' + install.member.fullName + '</td>'
                         + '<td class="function">' + install.function + '</td>';
@@ -88,12 +88,13 @@ $(document).ready(function () {
                     var func = element.find('.function').html();
                     $('#install-modal-discharge div.modal-body span.name').html(name);
                     $('#install-modal-discharge div.modal-body span.function').html(func);
-                    $('#install-modal-discharge').attr('data-meeting-type', element.attr('data-meeting-type'));
-                    $('#install-modal-discharge').attr('data-meeting-number', element.attr('data-meeting-number'));
-                    $('#install-modal-discharge').attr('data-decision-point', element.attr('data-decision-point'));
-                    $('#install-modal-discharge').attr('data-decision-number', element.attr('data-decision-number'));
-                    $('#install-modal-discharge').attr('data-subdecision-number', element.attr('data-subdecision-number'));
-                    $('#install-modal-discharge').modal();
+                    var modal = $('#install-modal-discharge');
+                    modal.data('meeting-type', element.data('meeting-type'));
+                    modal.data('meeting-number', element.data('meeting-number'));
+                    modal.data('decision-point', element.data('decision-point'));
+                    modal.data('decision-number', element.data('decision-number'));
+                    modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.modal();
                 });
 
                 $('button.functionchange').click(function(e)
@@ -188,6 +189,42 @@ $(document).ready(function () {
         var func = $('#install-modal-function div.form-group select').val();
         createInstallation(func, lidnr, name);
         $('#install-modal-function').modal('hide');
+    });
+
+    var discount = 0;
+
+    // discharge modal stuff
+    $('#discharge-modal-yes').click(function(e)
+    {
+        var modal = $('#install-modal-discharge');
+        var meeting_type = modal.data('meeting-type');
+        var meeting_number = modal.data('meeting-number');
+        var decision_point = modal.data('decision-point');
+        var decision_number = modal.data('decision-number');
+        var subdecision_number = modal.data('subdecision-number');
+        var name = $('#install-modal-discharge div.modal-body span.name').text();
+        var func = $('#install-modal-discharge div.modal-body span.function').text();
+
+        // create the discharge, and add to all changes
+        var template = $('#discharge-template').data('template');
+        template = template.replace(/__index__/g, discount++);
+        template = template.replace(/__function__/g, func);
+        template = template.replace(/__name__/g, name);
+
+        template = template.replace(/__meeting_type__/g, meeting_type);
+        template = template.replace(/__meeting_number__/g, meeting_number);
+        template = template.replace(/__decision_point__/g, decision_point);
+        template = template.replace(/__decision_number__/g, decision_number);
+        template = template.replace(/__number__/g, subdecision_number);
+        $('#install-changes').append($(template));
+
+        var select = '.dec-' + meeting_type + '-' + meeting_number
+            + '-' + decision_point + '-' + decision_number
+            + '-' + subdecision_number;
+        $('#members-result').find(select).remove();
+
+        // dismiss the dialog
+        modal.modal('hide');
     });
 });
 </script>
@@ -365,7 +402,7 @@ $submit->setAttribute('class', 'btn btn-primary');
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
-        <button type="button" class="btn btn-primary">Ja</button>
+        <button type="button" class="btn btn-primary" id="discharge-modal-yes">Ja</button>
       </div>
     </div>
   </div>
