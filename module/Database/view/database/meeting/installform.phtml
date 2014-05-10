@@ -141,6 +141,15 @@ $(document).ready(function () {
         var name = $('#install-member-name').val();
         $('#install-changes').append($(getInstallTemplate('member', lidnr, name)));
     });
+    $('#install-modal-yes').click(function(e)
+    {
+        var lidnr = $('#install-modal-function').data('lidnr');
+        var name = $('#install-modal-function div.form-group span.name').text();
+        var func = $('#install-modal-function div.form-group select').val();
+        console.log(func);
+        $('#install-changes').append($(getInstallTemplate(func, lidnr, name)));
+        $('#install-modal-function').modal('hide');
+    });
 });
 </script>
 <?php
@@ -294,8 +303,8 @@ $submit->setAttribute('class', 'btn btn-primary');
         <div class="form-group">
             <label for="function">Functie van <span class="name"></span></label>
             <select name="function" class="form-control">
-                <option value="voorzitter">chairman</option>
-                <option value="secretaris">secretary</option>
+                <option value="chairman">chairman</option>
+                <option value="secretary">secretary</option>
                 <option value="treasurer">treasurer</option>
                 <option value="vice-chairman">vice-chairman</option>
                 <option value="pr-officer">pr-officer</option>
@@ -305,7 +314,7 @@ $submit->setAttribute('class', 'btn btn-primary');
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
-        <button type="button" class="btn btn-primary">Ja</button>
+        <button type="button" class="btn btn-primary" id="install-modal-yes">Ja</button>
       </div>
     </div>
   </div>
