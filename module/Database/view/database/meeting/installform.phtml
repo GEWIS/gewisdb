@@ -126,9 +126,17 @@ $(document).ready(function () {
         }
     });
 
+    var instcount = 0;
+    function getInstallTemplate() {
+        var template = $('#install-template').data('template');
+        template = template.replace(/__index__/g, instcount++);
+        return template;
+    }
     $('#install-member-btn').click(function(e)
     {
         console.log($('#install-member-lidnr').val());
+        console.log($('#install-member-name').val());
+        console.log(getInstallTemplate());
     });
 });
 </script>
@@ -197,7 +205,6 @@ $element->setAttribute('id', 'install-organ');
 <div class="row">
     <div class="col-md-6">
         <h2>Wijzigingen</h2>
-        <div id="install-changes">
 <?php
 $element = $form->get('installations');
 $fs = $element->getTemplateElement();
@@ -218,7 +225,8 @@ ob_start();
 <?php
 $tpl = trim(ob_get_clean());
 ?>
-            <span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="install-template"></span>
+<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="install-template"></span>
+        <div id="install-changes">
         </div>
     </div>
     <div class="col-md-6 form-inline">
