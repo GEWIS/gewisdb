@@ -127,13 +127,26 @@ $(document).ready(function () {
     });
 
     var instcount = 0;
+    /**
+     * Create an installation.
+     */
     function createInstallation(func, lidnr, name) {
+        // initialize the form data
         var template = $('#install-template').data('template');
         template = template.replace(/__index__/g, instcount++);
         template = template.replace(/__function__/g, func);
         template = template.replace(/__lidnr__/g, lidnr);
         template = template.replace(/__name__/g, name);
         $('#install-changes').append($(template));
+
+        // add to 'result'
+        var toAdd = '<tr data-lidnr="' + lidnr + '">'
+            + '<td class="name">' + name + '</td>'
+            + '<td class="function">' + func + '</td>';
+        toAdd += '<td></td>';
+        toAdd += '<td></td>';
+        toAdd += '</tr>';
+        $('#members-result').append($(toAdd));
     }
     $('#install-member-btn').click(function(e)
     {
