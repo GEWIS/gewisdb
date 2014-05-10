@@ -127,16 +127,18 @@ $(document).ready(function () {
     });
 
     var instcount = 0;
-    function getInstallTemplate() {
+    function getInstallTemplate(func, lidnr) {
         var template = $('#install-template').data('template');
         template = template.replace(/__index__/g, instcount++);
+        template = template.replace(/__function__/g, func);
+        template = template.replace(/__lidnr__/g, lidnr);
         return template;
     }
     $('#install-member-btn').click(function(e)
     {
-        console.log($('#install-member-lidnr').val());
-        console.log($('#install-member-name').val());
-        console.log(getInstallTemplate());
+        var lidnr = $('#install-member-lidnr').val();
+        //console.log($('#install-member-name').val());
+        $('#install-changes').append($(getInstallTemplate('member', lidnr)));
     });
 });
 </script>
@@ -215,11 +217,13 @@ ob_start();
     <?php
     $el = $fs->get('function');
     $el->setAttribute('class', 'install-function');
+    $el->setValue('__function__');
     ?>
     <?= $this->formHidden($el) ?>
     <?php
     $el = $mfs->get('lidnr');
     $el->setAttribute('class', 'member-lidnr');
+    $el->setValue('__lidnr__');
     ?>
     <?= $this->formHidden($el) ?>
 <?php
