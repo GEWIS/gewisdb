@@ -127,18 +127,19 @@ $(document).ready(function () {
     });
 
     var instcount = 0;
-    function getInstallTemplate(func, lidnr) {
+    function getInstallTemplate(func, lidnr, name) {
         var template = $('#install-template').data('template');
         template = template.replace(/__index__/g, instcount++);
         template = template.replace(/__function__/g, func);
         template = template.replace(/__lidnr__/g, lidnr);
+        template = template.replace(/__name__/g, name);
         return template;
     }
     $('#install-member-btn').click(function(e)
     {
         var lidnr = $('#install-member-lidnr').val();
-        //console.log($('#install-member-name').val());
-        $('#install-changes').append($(getInstallTemplate('member', lidnr)));
+        var name = $('#install-member-name').val();
+        $('#install-changes').append($(getInstallTemplate('member', lidnr, name)));
     });
 });
 </script>
@@ -214,6 +215,8 @@ $mfs = $fs->get('member');
 // render template element
 ob_start();
 ?>
+<div class="organ-installation">
+    __name__ wordt ge&iuml;nstalleerd als __function__.
     <?php
     $el = $fs->get('function');
     $el->setAttribute('class', 'install-function');
@@ -226,6 +229,7 @@ ob_start();
     $el->setValue('__lidnr__');
     ?>
     <?= $this->formHidden($el) ?>
+</div>
 <?php
 $tpl = trim(ob_get_clean());
 ?>
