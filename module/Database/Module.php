@@ -6,6 +6,17 @@ class Module
 {
 
     /**
+     * Bootstrap event.
+     */
+    public function onBootstrap($e)
+    {
+        $sm = $e->getApplication()->getServiceManager();
+
+        // register event logging
+        $sm->get('database_service_event')->register();
+    }
+
+    /**
      * Get the autoloader configuration.
      *
      * @return array Autoloader config
