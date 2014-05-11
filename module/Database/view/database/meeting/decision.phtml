@@ -23,7 +23,6 @@ function showType($type)
     <li><a href="#oprichting" data-toggle="tab">Oprichting</a></li>
     <li><a href="#opheffing" data-toggle="tab">Opheffing</a></li>
     <li><a href="#installatie" data-toggle="tab">Installatie / Decharge</a></li>
-    <li><a href="#functiewissel" data-toggle="tab">Functiewissel</a></li>
     <li><a href="#overig" data-toggle="tab">Overig</a></li>
 </ul>
 
@@ -49,10 +48,6 @@ function showType($type)
     <?= $this->partial('database/meeting/installform', array(
         'form' => $forms['install']
     )); ?>
-    </div>
-    <div class="tab-pane" id="functiewissel">
-        Here: use AJAX to get the members of the committee. Then make nice
-        interface for changing functions.
     </div>
     <div class="tab-pane" id="overig">
     <?= $this->partial('database/meeting/otherform', array(
