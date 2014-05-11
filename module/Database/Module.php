@@ -193,6 +193,7 @@ class Module
                 // every form should get a different meeting fieldset
                 'database_form_fieldset_meeting' => false,
                 'database_form_fieldset_member' => false,
+                'database_form_fieldset_subdecision_foundation' => false,
             )
         );
     }

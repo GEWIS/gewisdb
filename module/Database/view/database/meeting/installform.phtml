@@ -54,6 +54,7 @@ $(document).ready(function () {
             }).done(function(data) {
                 var content = '';
                 var content2 = '';
+                // set the data for all current members
                 $.each(data.json.members, function(idx, install) {
                     var decNum = install.meeting_type + '-' + install.meeting_number
                         + '-' + install.decision_point + '-' + install.decision_number
@@ -79,8 +80,17 @@ $(document).ready(function () {
                 $('#members-result').html(content2);
                 $('#install-changes').html('');
 
+                // set foundation of organ
+                $('#install-foundation-meeting-type').val(data.json.meeting_type);
+                $('#install-foundation-meeting-name').val(data.json.meeting_number);
+                $('#install-foundation-decision-point').val(data.json.decision_point);
+                $('#install-foundation-decision-number').val(data.json.decision_number);
+                $('#install-foundation-subdecision-number').val(data.json.subdecision_number);
+
+                // show the rest of the form
                 $('#install-members-hide').show();
 
+                // enable member change events
                 $('button.discharge').click(function(e)
                 {
                     var element = $(e.target).parent().parent();
@@ -240,8 +250,8 @@ $form->setAttribute('role', 'form');
 
 echo $this->form()->openTag($form);
 ?>
-<?php /* first do hidden elements */ ?>
 <?php
+// default hidden elements for the meeting and decision reference
 $fs = $form->get('meeting')
 ?>
 <?= $this->formHidden($fs->get('type')) ?>
@@ -250,6 +260,7 @@ $fs = $form->get('meeting')
 <?= $this->formHidden($form->get('decision')) ?>
 <div class="form-group">
 <?php
+// organ search box
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', 'Orgaan');
@@ -259,6 +270,20 @@ $element->setAttribute('id', 'install-organ');
     <?= $this->formInput($element) ?>
     <?= $this->formElementErrors($element) ?>
 </div>
+<?php
+// hidden elements for form foundation
+$fs = $form->get('subdecision');
+$fs->get('meeting_type')->setAttribute('id', 'install-foundation-meeting-type');
+$fs->get('meeting_number')->setAttribute('id', 'install-foundation-meeting-name');
+$fs->get('decision_point')->setAttribute('id', 'install-foundation-decision-point');
+$fs->get('decision_number')->setAttribute('id', 'install-foundation-decision-number');
+$fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
+?>
+<?= $this->formHidden($fs->get('meeting_type')) ?>
+<?= $this->formHidden($fs->get('meeting_number')) ?>
+<?= $this->formHidden($fs->get('decision_point')) ?>
+<?= $this->formHidden($fs->get('decision_number')) ?>
+<?= $this->formHidden($fs->get('number')) ?>
 
 <div id="install-members-hide" style="display: none;">
 <div class="row">
