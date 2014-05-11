@@ -42,6 +42,7 @@ class Module
             'invokables' => array(
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
+                'database_service_event' => 'Database\Service\Event',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
                 'database_hydrator_abolish' => 'Database\Hydrator\Abolish',
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
@@ -170,6 +171,11 @@ class Module
                 },
                 'database_mapper_organ' => function ($sm) {
                     return new \Database\Mapper\Organ(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_mapper_event' => function ($sm) {
+                    return new \Database\Mapper\Event(
                         $sm->get('database_doctrine_em')
                     );
                 },
