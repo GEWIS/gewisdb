@@ -112,7 +112,7 @@ $(document).ready(function () {
                     var element = $(e.target).parent().parent();
                     var name = element.find('.name').html();
                     $('#install-modal-function div.modal-body span.name').html(name);
-                    $('#install-modal-function').attr('data-lidnr', element.attr('data-lidnr'));
+                    $('#install-modal-function').data('lidnr', element.data('lidnr'));
                     $('#install-modal-function').modal();
                 });
             });
@@ -151,14 +151,15 @@ $(document).ready(function () {
         }
     });
 
-    var instcount = 0;
+    // count for subdecision numbers
+    var count = 0;
     /**
      * Create an installation.
      */
     function createInstallation(func, lidnr, name) {
         // initialize the form data
         var template = $('#install-template').data('template');
-        template = template.replace(/__index__/g, instcount++);
+        template = template.replace(/__index__/g, count++);
         template = template.replace(/__function__/g, func);
         template = template.replace(/__lidnr__/g, lidnr);
         template = template.replace(/__name__/g, name);
@@ -182,7 +183,7 @@ $(document).ready(function () {
             var element = $(e.target).parent().parent();
             var name = element.find('.name').html();
             $('#install-modal-function div.modal-body span.name').html(name);
-            $('#install-modal-function').attr('data-lidnr', element.attr('data-lidnr'));
+            $('#install-modal-function').data('lidnr', element.data('lidnr'));
             $('#install-modal-function').modal();
         });
     }
@@ -202,8 +203,6 @@ $(document).ready(function () {
         $('#install-modal-function').modal('hide');
     });
 
-    var discount = 0;
-
     // discharge modal stuff
     $('#discharge-modal-yes').click(function(e)
     {
@@ -218,7 +217,7 @@ $(document).ready(function () {
 
         // create the discharge, and add to all changes
         var template = $('#discharge-template').data('template');
-        template = template.replace(/__index__/g, discount++);
+        template = template.replace(/__index__/g, count++);
         template = template.replace(/__function__/g, func);
         template = template.replace(/__name__/g, name);
 

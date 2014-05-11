@@ -124,8 +124,6 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            var_dump($data);
-            var_dump($form->getMessages());
             return array(
                 'type' => 'install',
                 'form' => $form
@@ -134,9 +132,10 @@ class Meeting extends AbstractService
 
         $decision = $form->getData();
 
-        var_dump($decision);
-
-        return;
+        return array(
+            'type' => 'install',
+            'decision' => $decision
+        );
 
         // simply persist through the meeting mapper
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
@@ -144,7 +143,7 @@ class Meeting extends AbstractService
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
-            'type' => 'foundation',
+            'type' => 'install',
             'decision' => $decision
         );
     }

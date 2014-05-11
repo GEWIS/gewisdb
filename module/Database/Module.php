@@ -111,7 +111,7 @@ class Module
                 'database_form_fieldset_subdecision_discharge' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
-                    $fieldset->setObject(new \Database\Model\SubDecision\Discharge());
+                    $fieldset->setObject(new \Database\Model\SubDecision\Installation());
                     return $fieldset;
                 },
                 'database_form_fieldset_installation' => function ($sm) {

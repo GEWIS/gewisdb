@@ -3,7 +3,8 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision;
-use Database\Model\SubDecision\Installation as InstallationDecision;
+use Database\Model\SubDecision\Installation;
+use Database\Model\SubDecision\Discharge;
 
 class Install extends AbstractDecision
 {
@@ -22,7 +23,34 @@ class Install extends AbstractDecision
     {
         $decision = parent::hydrate($data, $decision);
 
-        var_dump($data);
+        // data contains:
+        // - meeting
+        // - foundation
+        // - installations
+        // - discharges
+
+        $foundation = $data['subdecision'];
+
+        $num = 1;
+
+        // first add discharges
+        foreach ($data['discharges'] as $install) {
+            $discharge = new Discharge();
+            $discharge->setInstallation($install);
+            $discharge->setNumber($num++);
+            $discharge->setDecision($decision);
+        }
+
+        // then add installations
+
+        foreach ($data['installations'] as $install) {
+            $installation = new Installation();
+            $installation->setNumber($num++);
+            $installation->setFoundation($foundation);
+            $installation->setFunction($install->function);
+            $installation->setMember($install->member);
+            $installation->setDecision($decision);
+        }
 
         return $decision;
     }

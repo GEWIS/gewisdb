@@ -64,7 +64,7 @@ class Discharge extends SubDecision
         $organ = $this->getInstallation()->getFoundation()->getAbbr();
 
         $text = $member . ' wordt gedechargeerd als ' . $function;
-        $text .= ' van ' . $organ;
+        $text .= ' van ' . $organ . '.';
         return $text;
     }
 }
