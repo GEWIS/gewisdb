@@ -110,6 +110,46 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Install decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function installDecision($data)
+    {
+        $form = $this->getInstallForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            var_dump($data);
+            var_dump($form->getMessages());
+            return array(
+                'type' => 'install',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        var_dump($decision);
+
+        return;
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'foundation',
+            'decision' => $decision
+        );
+    }
+
+    /**
      * Foundation decision.
      *
      * @param array $data

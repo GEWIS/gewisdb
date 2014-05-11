@@ -45,6 +45,7 @@ class Module
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
                 'database_hydrator_abolish' => 'Database\Hydrator\Abolish',
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
+                'database_hydrator_install' => 'Database\Hydrator\Install',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
             ),
             'factories' => array(
@@ -82,6 +83,7 @@ class Module
                         $sm->get('database_form_fieldset_subdecision_discharge'),
                         $sm->get('database_form_fieldset_subdecision_foundation')
                     );
+                    $form->setHydrator($sm->get('database_hydrator_install'));
                     return $form;
                 },
                 'database_form_abolish' => function ($sm) {

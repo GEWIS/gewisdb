@@ -132,6 +132,9 @@ class MeetingController extends AbstractActionController
             );
             break;
         case 'install':
+            return new ViewModel(
+                $service->installDecision($this->getRequest()->getPost())
+            );
             break;
         case 'other':
             return new ViewModel(
