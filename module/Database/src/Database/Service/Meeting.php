@@ -132,11 +132,6 @@ class Meeting extends AbstractService
 
         $decision = $form->getData();
 
-        return array(
-            'type' => 'install',
-            'decision' => $decision
-        );
-
         // simply persist through the meeting mapper
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
