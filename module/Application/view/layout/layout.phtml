@@ -70,6 +70,7 @@ function getIsActive($view, array $condition)
                         <li<?= getIsActive($this, array('database', 'meeting')) ?>><a href="<?= $this->url('meeting') ?>">Vergaderingen en Besluiten</a></li>
                         <li<?= getIsActive($this, array('database', 'organ')) ?>><a href="<?= $this->url('organ') ?>">Organen</a></li>
                         <li<?= getIsActive($this, array('database', 'member')) ?>><a href="<?= $this->url('member') ?>">Leden</a></li>
+                        <li<?= getIsActive($this, array('database', 'export')) ?>><a href="<?= $this->url('export') ?>">Export</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

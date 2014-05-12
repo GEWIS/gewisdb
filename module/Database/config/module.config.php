@@ -152,13 +152,37 @@ return array(
                     ),
                 ),
             ),
+            'export' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/export',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'Export',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:action',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
             'Database\Controller\Member' => 'Database\Controller\MemberController',
-            'Database\Controller\Organ' => 'Database\Controller\OrganController'
+            'Database\Controller\Organ' => 'Database\Controller\OrganController',
+            'Database\Controller\Export' => 'Database\Controller\ExportController'
         )
     ),
     'view_manager' => array(
