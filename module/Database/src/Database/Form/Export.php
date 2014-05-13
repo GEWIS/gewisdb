@@ -27,6 +27,14 @@ class Export extends Form
                 'value_options' => $this->getValueOptions($service)
             )
         ));
+
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'submit',
+            'attributes' => array(
+                'value' => 'Exporteer'
+            )
+        ));
     }
 
     protected function getValueOptions(MeetingService $service)
