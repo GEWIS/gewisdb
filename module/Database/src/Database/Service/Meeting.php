@@ -41,6 +41,53 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Find decisions by meetings.
+     *
+     * @param array $meetings
+     *
+     * @return array Of decisions.
+     */
+    public function getDecisionsByMeetings($meetings)
+    {
+        $mapper = $this->getMeetingMapper();
+
+        return $mapper->findDecisionsByMeetings($meetings);
+    }
+
+    /**
+     * Export decisions.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function export($data)
+    {
+        $form = $this->getExportForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            var_dump('booh');
+            return null;
+        }
+
+        // extract the meetings
+        $data = $form->getData();
+        $meetings = array();
+        foreach ($data['meetings'] as $meeting) {
+            $meeting = explode('-', $meeting);
+            $meetings[] = array(
+                'type' => $meeting[0],
+                'number' => $meeting[1]
+            );
+        }
+
+        // find meeting data
+        return $this->getDecisionsByMeetings($meetings);
+    }
+
+    /**
      * Other decision.
      *
      * @param array $data

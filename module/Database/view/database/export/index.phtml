@@ -1,16 +1,38 @@
+<?php
+function showDecisionNumber($decision)
+{
+    $ret = strtoupper($decision->getMeeting()->getType());
+    $ret .= ' ' . $decision->getMeeting()->getNumber();
+    $ret .= '.' . $decision->getPoint();
+    $ret .= '.' . $decision->getNumber();
+    return $ret;
+}
+?>
+<?php if (isset($data)): ?>
+<pre style="height: 32em; overflow: scroll"><code>
+<?php foreach ($data as $decision): ?>
+<strong>Besluit <?= showDecisionNumber($decision) ?>:</strong>
+<?php foreach ($decision->getSubdecisions() as $subdecision): ?>
+<?= $subdecision->getContent() ?>
+<?php endforeach; ?>
+
+
+<?php endforeach; ?>
+</code></pre>
+<?php else: ?>
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('export'));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+?>
 <h1>Exporteren besluiten</h2>
 <div class="container">
     <div class="col-md-3">
-        <?php
-        $form->prepare();
-
-        $form->setAttribute('action', $this->url('export'));
-        $form->setAttribute('method', 'post');
-
-        $form->setAttribute('role', 'form');
-
-        echo $this->form()->openTag($form);
-        ?>
         <div class="form-group">
         <?php
         $element = $form->get('meetings');
@@ -21,7 +43,6 @@
             <?= $this->formSelect($element) ?>
             <?= $this->formElementErrors($element) ?>
         </div>
-        <?= $this->form()->closeTag() ?>
     </div>
     <div class="col-md-9">
         <br />
@@ -59,3 +80,5 @@
         <?= $this->formButton($submit) ?>
     </div>
 </div>
+<?= $this->form()->closeTag() ?>
+<?php endif; ?>

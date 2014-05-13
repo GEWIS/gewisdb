@@ -60,6 +60,41 @@ class Meeting
     }
 
     /**
+     * Find decisions by given meetings.
+     *
+     * @param array $meetings
+     *
+     * @return array All decisions.
+     */
+    public function findDecisionsByMeetings($meetings)
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('d, s')
+            ->from('Database\Model\Decision', 'd')
+            ->join('d.meeting', 'm')
+            ->leftJoin('d.subdecisions', 's')
+            ->orderBy('m.type', 'ASC')
+            ->addOrderBy('m.number', 'ASC')
+            ->addOrderBy('d.point', 'ASC')
+            ->addOrderBy('d.number', 'ASC')
+            ->addOrderBy('s.number', 'ASC');
+
+        $num = 0;
+        foreach ($meetings as $meeting) {
+            $qb->orWhere($qb->expr()->andX(
+                $qb->expr()->eq('m.type', ':type' . $num),
+                $qb->expr()->eq('m.number', ':number' . $num)
+            ));
+            $qb->setParameter(':type' . $num, $meeting['type']);
+            $qb->setParameter(':number' . $num, $meeting['number']);
+            $num++;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Find a meeting with all decisions.
      *
      * @param string $type
