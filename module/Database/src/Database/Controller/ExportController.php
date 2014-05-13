@@ -13,6 +13,11 @@ class ExportController extends AbstractActionController
      */
     public function indexAction()
     {
+        $service = $this->getMeetingService();
+
+        return new ViewModel(array(
+            'form' => $service->getExportForm()
+        ));
     }
 
     /**

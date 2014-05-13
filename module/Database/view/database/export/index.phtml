@@ -1,1 +1,28 @@
-Export stuff.
+<h1>Exporteren besluiten</h2>
+<div class="container">
+    <div class="col-md-3">
+    <?php
+    $form->prepare();
+
+    $form->setAttribute('action', $this->url('export'));
+    $form->setAttribute('method', 'post');
+
+    $form->setAttribute('role', 'form');
+
+    echo $this->form()->openTag($form);
+    ?>
+    <div class="form-group">
+    <?php
+    $element = $form->get('meetings');
+    $element->setAttribute('class', 'form-control');
+    $element->setAttribute('size', 32);
+    ?>
+        <?= $this->formLabel($element) ?>
+        <?= $this->formSelect($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+    <?= $this->form()->closeTag() ?>
+    </div>
+    <div class="col-md-9">
+    </div>
+</div>

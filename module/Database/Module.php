@@ -61,6 +61,11 @@ class Module
                 'database_hydrator_other' => 'Database\Hydrator\Other',
             ),
             'factories' => array(
+                'database_form_export' => function ($sm) {
+                    return new \Database\Form\Export(
+                        $sm->get('database_service_meeting')
+                    );
+                },
                 'database_form_member' => function ($sm) {
                     $form = new \Database\Form\Member(
                         $sm->get('database_form_fieldset_address')

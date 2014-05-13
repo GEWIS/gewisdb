@@ -354,6 +354,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get the export form.
+     *
+     * @return \Database\Form\Export
+     */
+    public function getExportForm()
+    {
+        return $this->getServiceManager()->get('database_form_export');
+    }
+
+    /**
      * Get the meeting mapper.
      *
      * @return \Database\Mapper\Meeting

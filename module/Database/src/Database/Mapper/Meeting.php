@@ -53,7 +53,8 @@ class Meeting
         $qb->select('m, COUNT(d)')
             ->from('Database\Model\Meeting', 'm')
             ->leftJoin('m.decisions', 'd')
-            ->groupBy('m');
+            ->groupBy('m')
+            ->orderBy('m.date', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
