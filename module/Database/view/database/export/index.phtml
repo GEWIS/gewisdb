@@ -7,17 +7,62 @@ function showDecisionNumber($decision)
     $ret .= '.' . $decision->getNumber();
     return $ret;
 }
-?>
-<?php if (isset($data)): ?>
-<pre style="height: 32em; overflow: scroll"><code>
-<?php foreach ($data as $decision): ?>
+function determineCategory($decision)
+{
+    $subdecisions = $decision->getSubdecisions();
+    $class = get_class($subdecisions[0]);
+    $class = explode('\\', $class);
+    $type = $class[count($class) - 1];
+
+    switch (strtolower($type)) {
+    case 'budget':
+    case 'reckoning':
+        return 'budget';
+        break;
+    case 'foundation':
+    case 'abrogation':
+    case 'installation':
+    case 'discharge':
+        return 'install';
+        break;
+    default:
+        return 'other';
+    }
+}
+// to show a single category
+function showCategory($decisions)
+{ ?>
+<?php foreach ($decisions as $decision): ?>
+
 <strong>Besluit <?= showDecisionNumber($decision) ?>:</strong>
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-<?= $subdecision->getContent() ?>
+<?= $subdecision->getContent() . ' ' ?>
 <?php endforeach; ?>
 
-
 <?php endforeach; ?>
+<?php } // function showCategory
+?>
+<?php if (isset($data)): ?>
+<?php
+$categories = array(
+    'budget' => array(),
+    'install' => array(),
+    'other' => array()
+);
+// first we do some preprocessing, by putting everything in categories
+foreach ($data as $decision) {
+    $categories[determineCategory($decision)][] = $decision;
+}
+?>
+<pre style="height: 32em; overflow: scroll"><code>
+<h2>Begrotingen en Afrekeningen</h2>
+<?php showCategory($categories['budget']) ?>
+
+<h2>Installaties en Decharges</h2>
+<?php showCategory($categories['install']) ?>
+
+<h2>Overige besluiten</h2>
+<?php showCategory($categories['other']) ?>
 </code></pre>
 <?php else: ?>
 <?php
