@@ -1,0 +1,52 @@
+\documentclass[a4paper, twoside, 11pt]{article}
+\usepackage[dutch]{babel}
+\usepackage{a4wide}
+\usepackage{lineno}
+
+\hyphenation{GEWIS}
+\setlength\parindent{0pt}
+\addtolength\topmargin{-1cm}
+\addtolength\textheight{3cm}
+
+\newcommand\besluit[3]{%
+\textbf{#1 (#2):}\nopagebreak\\#3%
+}
+
+\begin{document}
+\modulolinenumbers[5]
+\linenumbers
+\small
+
+\begin{center}
+\begin{Huge}
+\textbf{GEWIS BV-Besluitenlijst}\\[0.5cm]
+\end{Huge}
+\begin{huge}
+van \emph{10-09-2013}\\
+tot \emph{01-07-2014}\\[0.25cm]
+\end{huge}
+\begin{normalsize}
+\emph{versie 0.1}\\[0.25cm]
+\end{normalsize}
+\begin{large}
+\underline{AV-stuk 137.3.1}\\
+\end{large}
+\end{center}
+
+\section*{Legenda}
+\begin{tabular}{ll}
+x & y\\
+\end{tabular}
+
+<?= $decisions ?>
+
+<?php /*
+\section*{Begrotingen en Afrekeningen}
+
+\section*{Installaties en Decharges}
+
+\section*{Overig}
+
+\besluit{1188.8.1}{11-09-2013}{De begroting FLUP van Ylona Meeuwenberg, v1.1 van 09-10-2013 wordt goedgekeurd met genoemde wijzigingen.}\\\\
+*/ ?>
+\end{document}

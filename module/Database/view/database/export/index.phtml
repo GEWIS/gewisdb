@@ -34,10 +34,11 @@ function showCategory($decisions)
 { ?>
 <?php foreach ($decisions as $decision): ?>
 
-<strong>Besluit <?= showDecisionNumber($decision) ?>:</strong>
-<?php foreach ($decision->getSubdecisions() as $subdecision): ?>
+<strong>\besluit{<?= showDecisionNumber($decision) ?>}{<?php
+echo $decision->getMeeting()->getDate()->format('d-m-Y');
+?>}{</strong><?php foreach ($decision->getSubdecisions() as $subdecision): ?>
 <?= $subdecision->getContent() . ' ' ?>
-<?php endforeach; ?>
+<?php endforeach; ?>}
 
 <?php endforeach; ?>
 <?php } // function showCategory
@@ -53,17 +54,24 @@ $categories = array(
 foreach ($data as $decision) {
     $categories[determineCategory($decision)][] = $decision;
 }
+ob_start();
 ?>
-<pre style="height: 32em; overflow: scroll"><code>
-<h2>Begrotingen en Afrekeningen</h2>
+<h2>\subsection*{Begrotingen en Afrekeningen}</h2>
 <?php showCategory($categories['budget']) ?>
 
-<h2>Installaties en Decharges</h2>
+<h2>\subsection*{Installaties en Decharges}</h2>
 <?php showCategory($categories['install']) ?>
 
-<h2>Overige besluiten</h2>
+<h2>\subsection*{Overige besluiten}</h2>
 <?php showCategory($categories['other']) ?>
-</code></pre>
+<?php
+$decisionList = ob_get_clean();
+?>
+<pre style="height: 32em; overflow: scroll"><code><?php
+echo $this->partial('database/export/latex.phtml', array(
+    'decisions' => $decisionList
+));
+?></code></pre>
 <?php else: ?>
 <?php
 $form->prepare();
