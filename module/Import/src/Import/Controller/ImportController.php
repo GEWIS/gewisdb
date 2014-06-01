@@ -17,43 +17,7 @@ class ImportController extends AbstractActionController
     {
         $console = $this->getConsole();
 
-        /*
-         * Read database connection info.
-         */
-
-        echo "Enter database information:\n";
-
-        echo "Database name: ";
-        $db = $console->readLine();
-
-        echo "Database host [localhost]: ";
-        $host = $console->readLine();
-        if (empty($host)) {
-            $host = 'localhost';
-        }
-
-        echo "Database username: ";
-        $username = $console->readLine();
-
-        echo "Database password: ";
-        // BEWARE: ugly hack to hide password entry
-        system('stty -echo');
-        $password = $console->readLine();
-        system('stty echo');
-        echo "\n";
-
-        /*
-         * Open database connection.
-         */
-        $info = array(
-            'dbname' => $db,
-            'user' => $username,
-            'password' => $password,
-            'host' => $host,
-            'driver' => 'pdo_pgsql'
-        );
-
-        $conn = DriverManager::getConnection($info, new Configuration());
+        $conn = $this->getServiceLocator()->get('doctrine.connection.orm_import');
     }
 
     /**

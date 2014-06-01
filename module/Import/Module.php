@@ -41,6 +41,7 @@ class Module
             'invokables' => array(
             ),
             'factories' => array(
+                'doctrine.connection.orm_import' => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_import')
             )
         );
     }
