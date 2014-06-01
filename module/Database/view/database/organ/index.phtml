@@ -6,8 +6,10 @@ var urlTemplate = '<?= $this->url('organ/view', array(
     'decision' => '__decision__',
     'subdecision' => '__subdecision__'
 )) ?>';
+var last = 0;
 $(document).ready(function () {
     $('#organ-search').keyup(function (e) {
+        var curnum = ++last;
         term = $(e.target).val();
         if (term.length >= 1) {
             $.ajax({
@@ -15,6 +17,10 @@ $(document).ready(function () {
                 url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + term,
                 context: document.body
             }).done(function (data) {
+                if (curnum != last) {
+                    // discard the result
+                    return;
+                }
                 var table = '';
                 $.each(data.json, function (idx, organ) {
                     // create URL
