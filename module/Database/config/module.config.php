@@ -56,7 +56,7 @@ return array(
                             'route' => '/:type/:number',
                             'constraints' => array(
                                 'type' => 'av|bv|vv|virt',
-                                'number' => '[0-9]*'
+                                'number' => '\-?[0-9]*'
                             ),
                             'defaults' => array(
                                 'action' => 'view'
