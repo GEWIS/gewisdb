@@ -30,13 +30,15 @@ class ImportController extends AbstractActionController
         $stmt->execute();
 
         // statement to get all decisions
-        $dStmt = $db->prepare("SELECT b.* FROM besluit AS b
+        $dStmt = $db->prepare("SELECT b.*, s.*, bs.*, b.inhoud as b_inhoud FROM besluit AS b
+            INNER JOIN subbesluit AS s ON (s.vergadertypeid = b.vergadertypeid AND s.vergadernr = b.vergadernr AND s.puntnr = b.puntnr AND s.besluitnr = b.besluitnr)
+            INNER JOIN besluittype AS bs ON (s.besluittypeid = bs.besluittypeid)
             WHERE b.vergadertypeid = :type AND b.vergadernr = :nr
-            ORDER BY puntnr ASC, besluitnr ASC");
+            ORDER BY b.puntnr ASC, b.besluitnr ASC");
 
         while (($vergadering = $stmt->fetch()) != null) {
-            echo $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " ( " . $vergadering['datum'] . "):\n";
-            echo "-----------------------------------------\n";
+            //echo $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " ( " . $vergadering['datum'] . "):\n";
+            //echo "-----------------------------------------\n";
 
             $dStmt->execute(array(
                 'type' => $vergadering['vergadertypeid'],
@@ -49,10 +51,28 @@ class ImportController extends AbstractActionController
                 continue;
             }
 
-            var_dump($rows);
+            $punt = -1;
+            $besluit = -1;
 
-            echo "-----------------------------------------\n";
-            sleep(2);
+            foreach ($rows as $row) {
+                if ($row['puntnr'] != $punt || $row['besluitnr'] != $besluit) {
+                    $console->readChar();
+                    echo "Besluit " . $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . '.' . $row['puntnr'] . '.' . $row['besluitnr'] . "\n";
+                    $punt = $row['puntnr'];
+                    $besluit = $row['besluitnr'];
+                    echo $row['b_inhoud'] . "\n";
+                }
+                echo $row['subbesluitnr'] . ': ' . $row['inhoud'] . "\n";
+                echo "\tType:\t\t{$row['besluittype']}\n";
+                echo "\tLid:\t\t{$row['lidnummer']}\n";
+                echo "\tFunctie:\t<TODO>\n";
+                echo "\tOrgaan:\t\t<TODO>\n";
+            }
+            $console->readChar();
+
+            // TODO: interface to build new decision from this
+
+            //echo "-----------------------------------------\n";
         }
     }
 
