@@ -27,15 +27,23 @@ class Query
 
 
     /**
+     * Prepare and execute the next meeting query.
+     */
+    protected function prepareMeeting()
+    {
+        $this->mStmt = $this->getConnection()->prepare("SELECT v.*, t.* FROM vergadering AS v
+            INNER JOIN vergadertype AS t ON (v.vergadertypeid = t.vergadertypeid)
+            ORDER BY v.datum");
+        $this->mStmt->execute();
+    }
+
+    /**
      * Fetch the next meeting.
      */
     public function fetchMeeting()
     {
         if (null === $this->mStmt) {
-            $this->mStmt = $this->getConnection()->prepare("SELECT v.*, t.* FROM vergadering AS v
-                INNER JOIN vergadertype AS t ON (v.vergadertypeid = t.vergadertypeid)
-                ORDER BY v.datum");
-            $this->mStmt->execute();
+            $this->prepareMeeting();
         }
 
         return $this->mStmt->fetch();
