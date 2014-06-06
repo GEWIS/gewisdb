@@ -21,15 +21,6 @@ class ImportController extends AbstractActionController
 
         $query = $this->getServiceLocator()->get('import_database_query');
 
-        // statement to get all decisions
-        $dStmt = $db->prepare("SELECT b.*, s.*, bs.*, f.*, o.*, b.inhoud as b_inhoud FROM besluit AS b
-            INNER JOIN subbesluit AS s ON (s.vergadertypeid = b.vergadertypeid AND s.vergadernr = b.vergadernr AND s.puntnr = b.puntnr AND s.besluitnr = b.besluitnr)
-            INNER JOIN besluittype AS bs ON (s.besluittypeid = bs.besluittypeid)
-            LEFT JOIN functie AS f ON (f.functieid = s.functieid)
-            LEFT JOIN orgaan AS o ON (o.orgaanid = s.orgaanid)
-            WHERE b.vergadertypeid = :type AND b.vergadernr = :nr
-            ORDER BY b.puntnr ASC, b.besluitnr ASC");
-
         while (($vergadering = $query->fetchMeeting()) != null) {
             $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
             echo "Voeg vergadering $verg toe? [Y/n] ";
@@ -37,12 +28,7 @@ class ImportController extends AbstractActionController
             echo "$char\n";
             //echo "-----------------------------------------\n";
 
-            $dStmt->execute(array(
-                'type' => $vergadering['vergadertypeid'],
-                'nr' => $vergadering['vergadernr']
-            ));
-
-            $rows = $dStmt->fetchAll();
+            $rows = $query->fetchDecisions($vergadering['vergadertypeid'], $vergadering['vergadernr']);
 
             if (empty($rows)) {
                 continue;
