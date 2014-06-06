@@ -42,7 +42,7 @@ class Module
             ),
             'factories' => array(
                 'doctrine.connection.orm_import' => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_import'),
-                'import_database_queries' => function ($sm) {
+                'import_database_query' => function ($sm) {
                     $queries = new \Import\Database\Query();
                     $queries->setConnection($sm->get('doctrine.connection.orm_import'));
                     return $queries;

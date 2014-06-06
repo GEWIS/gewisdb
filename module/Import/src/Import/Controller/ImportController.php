@@ -19,10 +19,7 @@ class ImportController extends AbstractActionController
 
         $db = $this->getServiceLocator()->get('doctrine.connection.orm_import');
 
-        $stmt = $db->prepare("SELECT v.*, t.* FROM vergadering AS v
-            INNER JOIN vergadertype AS t ON (v.vergadertypeid = t.vergadertypeid)
-            ORDER BY v.datum");
-        $stmt->execute();
+        $query = $this->getServiceLocator()->get('import_database_query');
 
         // statement to get all decisions
         $dStmt = $db->prepare("SELECT b.*, s.*, bs.*, f.*, o.*, b.inhoud as b_inhoud FROM besluit AS b
@@ -33,7 +30,7 @@ class ImportController extends AbstractActionController
             WHERE b.vergadertypeid = :type AND b.vergadernr = :nr
             ORDER BY b.puntnr ASC, b.besluitnr ASC");
 
-        while (($vergadering = $stmt->fetch()) != null) {
+        while (($vergadering = $query->fetchMeeting()) != null) {
             $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
             echo "Voeg vergadering $verg toe? [Y/n] ";
             $char = $console->readChar();
