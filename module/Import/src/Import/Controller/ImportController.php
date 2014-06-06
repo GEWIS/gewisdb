@@ -19,25 +19,25 @@ class ImportController extends AbstractActionController
 
         $db = $this->getServiceLocator()->get('doctrine.connection.orm_import');
 
-        // TODO: save this somewhere
-        $lastDate = '1900-01-01';
-
         $stmt = $db->prepare("SELECT v.*, t.* FROM vergadering AS v
             INNER JOIN vergadertype AS t ON (v.vergadertypeid = t.vergadertypeid)
-            WHERE v.datum >= ?
             ORDER BY v.datum");
-        $stmt->bindParam(1, $lastDate);
         $stmt->execute();
 
         // statement to get all decisions
-        $dStmt = $db->prepare("SELECT b.*, s.*, bs.*, b.inhoud as b_inhoud FROM besluit AS b
+        $dStmt = $db->prepare("SELECT b.*, s.*, bs.*, f.*, o.*, b.inhoud as b_inhoud FROM besluit AS b
             INNER JOIN subbesluit AS s ON (s.vergadertypeid = b.vergadertypeid AND s.vergadernr = b.vergadernr AND s.puntnr = b.puntnr AND s.besluitnr = b.besluitnr)
             INNER JOIN besluittype AS bs ON (s.besluittypeid = bs.besluittypeid)
+            LEFT JOIN functie AS f ON (f.functieid = s.functieid)
+            LEFT JOIN orgaan AS o ON (o.orgaanid = s.orgaanid)
             WHERE b.vergadertypeid = :type AND b.vergadernr = :nr
             ORDER BY b.puntnr ASC, b.besluitnr ASC");
 
         while (($vergadering = $stmt->fetch()) != null) {
-            //echo $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " ( " . $vergadering['datum'] . "):\n";
+            $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
+            echo "Voeg vergadering $verg toe? [Y/n] ";
+            $char = $console->readChar();
+            echo "$char\n";
             //echo "-----------------------------------------\n";
 
             $dStmt->execute(array(
@@ -56,7 +56,6 @@ class ImportController extends AbstractActionController
 
             foreach ($rows as $row) {
                 if ($row['puntnr'] != $punt || $row['besluitnr'] != $besluit) {
-                    $console->readChar();
                     echo "Besluit " . $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . '.' . $row['puntnr'] . '.' . $row['besluitnr'] . "\n";
                     $punt = $row['puntnr'];
                     $besluit = $row['besluitnr'];
@@ -65,10 +64,12 @@ class ImportController extends AbstractActionController
                 echo $row['subbesluitnr'] . ': ' . $row['inhoud'] . "\n";
                 echo "\tType:\t\t{$row['besluittype']}\n";
                 echo "\tLid:\t\t{$row['lidnummer']}\n";
-                echo "\tFunctie:\t<TODO>\n";
-                echo "\tOrgaan:\t\t<TODO>\n";
+                echo "\tFunctie:\t{$row['functie']}\n";
+                echo "\tOrgaan:\t\t{$row['orgaanafk']}\n";
+                echo "\n";
+                $console->readChar();
+
             }
-            $console->readChar();
 
             // TODO: interface to build new decision from this
 
