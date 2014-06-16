@@ -59,6 +59,20 @@ class Query
     }
 
     /**
+     * Fetch the next meeting.
+     *
+     * @return array
+     */
+    public function fetchAllMeetings()
+    {
+        if (null === $this->mStmt) {
+            $this->prepareMeeting();
+        }
+
+        return $this->mStmt->fetchAll();
+    }
+
+    /**
      * Prepare the decisions query.
      */
     protected function prepareDecisions()

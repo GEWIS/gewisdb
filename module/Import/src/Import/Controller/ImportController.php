@@ -18,10 +18,12 @@ class ImportController extends AbstractActionController
         $console = $this->getConsole();
 
         $db = $this->getServiceLocator()->get('doctrine.connection.orm_import');
-
+        $meetingService = $this->getServiceLocator()->get('import_service_meeting');
         $query = $this->getServiceLocator()->get('import_database_query');
 
-        while (($vergadering = $query->fetchMeeting()) != null) {
+        $meetings = $meetingService->getMeetings();
+
+        foreach ($meetings as $vergadering)  {
             $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
             echo "Voeg vergadering $verg toe? [Y/n] ";
             $char = $console->readChar();

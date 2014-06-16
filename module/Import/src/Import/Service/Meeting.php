@@ -8,6 +8,14 @@ class Meeting extends AbstractService
 {
 
     /**
+     * Get all meetings.
+     */
+    public function getMeetings()
+    {
+        return $this->getQuery()->fetchAllMeetings();
+    }
+
+    /**
      * Get the query object.
      */
     public function getQuery()
