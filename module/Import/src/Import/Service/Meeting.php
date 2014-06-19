@@ -16,6 +16,19 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get all decisions from a meeting.
+     *
+     * @param array $meeting
+     *
+     * @return array decisions
+     */
+    public function getMeetingDecisions($meeting)
+    {
+        return $this->getQuery()->fetchDecisions(
+            $meeting['vergadertypeid'], $meeting['vergadernr']);
+    }
+
+    /**
      * Get the query object.
      */
     public function getQuery()

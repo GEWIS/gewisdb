@@ -27,10 +27,13 @@ class ImportController extends AbstractActionController
             $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
             echo "Voeg vergadering $verg toe? [Y/n] ";
             $char = $console->readChar();
-            echo "$char\n";
-            //echo "-----------------------------------------\n";
+            echo "\n\n";
 
-            $rows = $query->fetchDecisions($vergadering['vergadertypeid'], $vergadering['vergadernr']);
+            if (strtolower($char) == 'n') {
+                continue;
+            }
+
+            $rows = $meetingService->getMeetingDecisions($vergadering);
 
             if (empty($rows)) {
                 continue;
