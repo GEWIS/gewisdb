@@ -19,7 +19,6 @@ class ImportController extends AbstractActionController
 
         $db = $this->getServiceLocator()->get('doctrine.connection.orm_import');
         $meetingService = $this->getServiceLocator()->get('import_service_meeting');
-        $query = $this->getServiceLocator()->get('import_database_query');
 
         $meetings = $meetingService->getMeetings();
 
