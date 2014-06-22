@@ -39,6 +39,13 @@ class Query
      */
     protected $sStmt;
 
+    /**
+     * Members statement.
+     *
+     * @var <don't care>
+     */
+    protected $memStmt;
+
 
     /**
      * Prepare and execute the next meeting query.
@@ -150,6 +157,33 @@ class Query
         ));
 
         return $this->sStmt->fetchAll();
+    }
+
+    /**
+     * Prepare the Members query.
+     */
+    protected function prepareMembers()
+    {
+        $this->memStmt = $this->getConnection()->prepare("SELECT m.*, l.*
+            FROM gewis_lid AS m
+            INNER JOIN lidsoort AS l ON (m.lidsoortid = l.lidsoortid)
+            ORDER BY m.lidnummer ASC");
+    }
+
+    /**
+     * Fetch all members.
+     *
+     * @return array
+     */
+    public function fetchMembers()
+    {
+        if (null === $this->memStmt) {
+            $this->prepareMembers();
+        }
+
+        $this->memStmt->execute();
+
+        return $this->memStmt->fetchAll();
     }
 
     public function setConnection(Connection $conn)
