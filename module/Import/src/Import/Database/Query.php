@@ -123,7 +123,7 @@ class Query
             LEFT JOIN orgaan AS o ON (o.orgaanid = s.orgaanid)
             WHERE s.vergadertypeid = :type AND s.vergadernr = :nr
                 AND s.puntnr = :puntnr AND s.besluitnr = :besluitnr
-            ORDER BY s.puntnr ASC, s.besluitnr ASC");
+            ORDER BY s.puntnr ASC, s.besluitnr ASC, s.subbesluitnr ASC");
     }
 
     /**
