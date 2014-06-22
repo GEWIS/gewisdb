@@ -63,6 +63,54 @@ class Member extends AbstractService
             break;
         }
 
+        // import addresses
+        if (!empty($data['hstraat'])) {
+            $home = new Address();
+            $home->setType(Address::TYPE_HOME);
+
+            // no other ones
+            $home->setCountry('Nederland');
+
+            // separate the street and the number + suffix
+            if (preg_match('/^(.*) ([0-9]+[a-zA-Z]*)$/i', trim($data['hstraat']), $matches)) {
+                $home->setStreet($matches[1]);
+                $home->setNumber($matches[2]);
+            } else {
+                // we don't have anything better than this
+                $home->setStreet($data['hstraat']);
+                $home->setNumber(0);
+            }
+
+            $home->setPostalCode($data['hpostcode']);
+            $home->setCity($data['hplaats']);
+            $home->setPhone($data['htelefoon']);
+
+            $member->addAddress($home);
+        }
+        if (!empty($data['kstraat'])) {
+            $student = new Address();
+            $student->setType(Address::TYPE_STUDENT);
+
+            // no other countries
+            $student->setCountry('Nederland');
+
+            // separate the street and the number + suffix
+            if (preg_match('/^(.*) ([0-9]+[a-zA-Z]*)$/i', trim($data['kstraat']), $matches)) {
+                $student->setStreet($matches[1]);
+                $student->setNumber($matches[2]);
+            } else {
+                // we don't have anything better than this
+                $student->setStreet($data['kstraat']);
+                $student->setNumber(0);
+            }
+
+            $student->setPostalCode($data['kpostcode']);
+            $student->setCity($data['kplaats']);
+            $student->setPhone($data['ktelefoon']);
+
+            $member->addAddress($student);
+        }
+
         var_dump($member);
     }
 
