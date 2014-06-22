@@ -178,6 +178,10 @@ class Meeting extends AbstractService
         if (!empty($subdecision['orgaanafk'])) {
             // TODO: search for organ in current database
             // and interactively check if it is the correct one
+            $organ = $this->searchOrgan($subdecision['orgaanafk']);
+            if (!empty($organ)) {
+                $model->setFoundation($organ);
+            }
         }
 
         // TODO: extract version, date, approval and changes
@@ -228,6 +232,20 @@ class Meeting extends AbstractService
     }
 
     /**
+     * (Interactively) search for an organ.
+     *
+     * @param string $query
+     *
+     * @return Database\Model\SubDecision\Foundation
+     */
+    protected function searchOrgan($query)
+    {
+        $result = $this->getOrganMapper()->organSearch($query, true);
+
+        var_dump($result);
+    }
+
+    /**
      * Find a member.
      *
      * @param string $lidnr
@@ -237,6 +255,16 @@ class Meeting extends AbstractService
     protected function findMember($lidnr)
     {
         return $this->getMemberMapper()->find($lidnr);
+    }
+
+    /**
+     * Get the organ mapper.
+     *
+     * @return Database\Mapper\Organ
+     */
+    public function getOrganMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_organ');
     }
 
     /**
