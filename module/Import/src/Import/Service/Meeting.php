@@ -77,13 +77,6 @@ class Meeting extends AbstractService
         $subdecisions = $this->getSubdecisions($decision);
 
         foreach ($subdecisions as $subdecision) {
-            echo $subdecision['subbesluitnr'] . ': ' . $subdecision['inhoud'] . "\n";
-            echo "\tType:\t\t{$subdecision['besluittype']}\n";
-            echo "\tLid:\t\t{$subdecision['lidnummer']}\n";
-            echo "\tFunctie:\t{$subdecision['functie']}\n";
-            echo "\tOrgaan:\t\t{$subdecision['orgaanafk']}\n";
-            echo "\n";
-
             // let the code get handled by the specific decision
             switch (strtolower($subdecision['besluittype'])) {
             case 'installatie':
@@ -117,12 +110,28 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Display a subdecision.
+     *
+     * @param array $subdecision
+     */
+    protected function displaySubdecision($subdecision)
+    {
+        echo $subdecision['subbesluitnr'] . ': ' . $subdecision['inhoud'] . "\n";
+        echo "\tType:\t\t{$subdecision['besluittype']}\n";
+        echo "\tLid:\t\t{$subdecision['lidnummer']}\n";
+        echo "\tFunctie:\t{$subdecision['functie']}\n";
+        echo "\tOrgaan:\t\t{$subdecision['orgaanafk']}\n";
+        echo "\n";
+    }
+
+    /**
      * Installation decision.
      *
      * @param array $subdecision
      */
     protected function installationDecision($subdecision)
     {
+        $this->displaySubdecision($subdecision);
         // TODO: implement this
     }
 
