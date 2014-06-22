@@ -27,8 +27,6 @@ class Member extends AbstractService
      */
     public function import($data)
     {
-        var_dump($data);
-
         $member = new MemberModel();
 
         $member->setLidnr($data['lidnummer']);
@@ -111,7 +109,7 @@ class Member extends AbstractService
             $member->addAddress($student);
         }
 
-        var_dump($member);
+        echo 'Imported ' . $member->getFullName() . ' (' . $member->getLidnr() . ")\n";
     }
 
     /**
