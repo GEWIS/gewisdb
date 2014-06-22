@@ -123,9 +123,12 @@ class Query
      */
     protected function prepareSubdecisions()
     {
-        $this->sStmt = $this->getConnection()->prepare("SELECT s.*, bs.*, f.*, o.*
+        $this->sStmt = $this->getConnection()->prepare("SELECT s.*, bs.*, f.*, o.*, v.*, vt.*
             FROM subbesluit AS s
             INNER JOIN besluittype AS bs ON (s.besluittypeid = bs.besluittypeid)
+            INNER JOIN vergadering AS v ON (v.vergadertypeid = s.vergadertypeid
+                AND v.vergadernr = s.vergadernr)
+            INNER JOIN vergadertype AS vt ON (vt.vergadertypeid = v.vergadertypeid)
             LEFT JOIN functie AS f ON (f.functieid = s.functieid)
             LEFT JOIN orgaan AS o ON (o.orgaanid = s.orgaanid)
             WHERE s.vergadertypeid = :type AND s.vergadernr = :nr

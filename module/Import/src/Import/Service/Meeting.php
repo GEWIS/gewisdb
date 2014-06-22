@@ -191,13 +191,23 @@ class Meeting extends AbstractService
         echo "\nHet is niet mogelijk om de volgende informatie automatisch uit het besluit te halen. Hence, vul deze correct in.\n";
         echo "(leeglaten indien onbeschikbaar)\n\n";
 
-        echo "Versienummer: ";
-        $model->setVersion(trim($console->readLine()));
+        echo "Naam: ";
+        $model->setName(trim($console->readLine()));
 
-        echo "Datum van *begroting* [YYYY-MM-DD]: ";
+        echo "Versienummer: ";
+        $version = trim($console->readLine());
+        if (empty($version)) {
+            $version = 'onbekend';
+        }
+        $model->setVersion($version);
+
+        echo "Datum van *begroting/afrekening* [YYYY-MM-DD]: ";
         $date = trim($console->readLine());
-        if (!empty($date)) {
-            $model->setDate($date);
+        if (empty($date)) {
+            // use the meeting date
+            $model->setDate(new \DateTime($subdecision['datum']));
+        } else {
+            $model->setDate(new \DateTime($date));
         }
 
         echo "Goedgekeurd [Y/n]: ";
@@ -272,7 +282,7 @@ class Meeting extends AbstractService
         foreach ($results as $key => $foundation) {
             echo "\t$key) " . $foundation->getAbbr() . "\n";
         }
-        echo "\nWelke van deze organen is het genoemde orgaan ($query)?";
+        echo "\nWelke van deze organen is het genoemde orgaan ($query)? ";
 
         $num = (int) trim($this->getConsole()->readLine());
 

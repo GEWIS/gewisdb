@@ -186,7 +186,11 @@ class Budget extends FoundationReference
     {
         $template = $this->getTemplate();
         $template = str_replace('%NAME%', $this->getName(), $template);
-        $template = str_replace('%AUTHOR%', $this->getAuthor()->getFullName(), $template);
+        if (null === $this->getAuthor()) {
+            $template = str_replace('%AUTHOR%', 'onbekend', $template);
+        } else {
+            $template = str_replace('%AUTHOR%', $this->getAuthor()->getFullName(), $template);
+        }
         $template = str_replace('%VERSION%', $this->getVersion(), $template);
         $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
         if ($this->getApproval()) {
