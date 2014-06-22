@@ -176,7 +176,7 @@ class Meeting extends AbstractService
         }
 
         if (!empty($subdecision['orgaanafk'])) {
-            // TODO: search for organ in current database
+            // search for organ in current database
             // and interactively check if it is the correct one
             $organ = $this->searchOrgan($subdecision['orgaanafk']);
             if (!empty($organ)) {
@@ -240,9 +240,21 @@ class Meeting extends AbstractService
      */
     protected function searchOrgan($query)
     {
-        $result = $this->getOrganMapper()->organSearch($query, true);
+        $results = $this->getOrganMapper()->organSearch($query, true);
 
-        var_dump($result);
+        if (empty($results)) {
+            return;
+        }
+
+        echo "\n";
+        foreach ($results as $key => $foundation) {
+            echo "\t$key) " . $foundation->getAbbr() . "\n";
+        }
+        echo "\nWelke van deze organen is het genoemde orgaan ($query)?";
+
+        $num = (int) trim($this->getConsole()->readLine());
+
+        return $results[$num];
     }
 
     /**
