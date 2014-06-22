@@ -224,16 +224,6 @@ class Address
     }
 
     /**
-     * Set the postal code.
-     *
-     * @param string $code
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-    }
-
-    /**
      * Get the city.
      *
      * @return string
