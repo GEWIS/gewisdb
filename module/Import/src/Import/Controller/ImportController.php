@@ -32,35 +32,7 @@ class ImportController extends AbstractActionController
                 continue;
             }
 
-            $rows = $meetingService->getMeetingDecisions($vergadering);
-
-            if (empty($rows)) {
-                continue;
-            }
-
-            $punt = -1;
-            $besluit = -1;
-
-            foreach ($rows as $row) {
-                if ($row['puntnr'] != $punt || $row['besluitnr'] != $besluit) {
-                    echo "Besluit " . $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . '.' . $row['puntnr'] . '.' . $row['besluitnr'] . "\n";
-                    $punt = $row['puntnr'];
-                    $besluit = $row['besluitnr'];
-                    echo $row['b_inhoud'] . "\n";
-                }
-                echo $row['subbesluitnr'] . ': ' . $row['inhoud'] . "\n";
-                echo "\tType:\t\t{$row['besluittype']}\n";
-                echo "\tLid:\t\t{$row['lidnummer']}\n";
-                echo "\tFunctie:\t{$row['functie']}\n";
-                echo "\tOrgaan:\t\t{$row['orgaanafk']}\n";
-                echo "\n";
-                $console->readChar();
-
-            }
-
-            // TODO: interface to build new decision from this
-
-            //echo "-----------------------------------------\n";
+            $meetingService->importMeeting($vergadering);
         }
     }
 
