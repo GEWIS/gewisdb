@@ -45,7 +45,7 @@ class ImportController extends AbstractActionController
         $members = $memberService->getMembers();
 
         foreach ($members as $member) {
-            var_dump($member);
+            $memberService->import($member);
             $this->getConsole()->readChar();
         }
     }

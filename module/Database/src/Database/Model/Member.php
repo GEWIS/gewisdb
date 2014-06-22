@@ -228,6 +228,16 @@ class Member
     }
 
     /**
+     * Set the lidnr.
+     *
+     * @param string $lidnr
+     */
+    public function setLidnr($lidnr)
+    {
+        $this->lidnr = $lidnr;
+    }
+
+    /**
      * Set the member's email address.
      *
      * @param string $email
