@@ -131,7 +131,6 @@ class Meeting extends AbstractService
      */
     protected function installationDecision($subdecision)
     {
-        $this->displaySubdecision($subdecision);
         // TODO: implement this
     }
 
@@ -149,10 +148,33 @@ class Meeting extends AbstractService
      * Budget decision.
      *
      * @param array $subdecision
+     * @param string $type
      */
-    protected function budgetDecision($subdecision)
+    protected function budgetDecision($subdecision, $type = 'budget')
     {
-        // TODO: implement this
+        $this->displaySubdecision($subdecision);
+
+        if (empty($subdecision['lidnummer'])) {
+            echo "Er kon geen lidnummer in de metadata gevonden worden\n";
+            echo "Als er wel een lid vernoemd wordt, geef het lidnummer: ";
+            $subdecision['lidnummer'] = $this->getConsole()->readLine();
+
+            if (!empty($line)) {
+                echo '[' . $line . ']';
+            }
+        }
+        if (!empty($subdecision['lidnummer'])) {
+            // TODO: retrieve the member
+        }
+
+        if (!empty($subdecision['orgaanafk'])) {
+            // TODO: search for organ in current database
+            // and interactively check if it is the correct one
+        }
+
+        // TODO: extract version, date, approval and changes
+
+        $this->getConsole()->readChar();
     }
 
     /**
@@ -162,7 +184,7 @@ class Meeting extends AbstractService
      */
     protected function reckoningDecision($subdecision)
     {
-        // TODO: implement this
+        $this->budgetDecision($subdecision, 'reckoning');
     }
 
     /**

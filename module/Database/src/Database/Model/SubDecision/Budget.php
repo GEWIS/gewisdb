@@ -58,7 +58,6 @@ class Budget extends FoundationReference
     protected $changes;
 
     /**
-     *
      * Get the author.
      *
      * @return Member
