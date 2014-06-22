@@ -40,9 +40,9 @@ class ImportController extends AbstractActionController
      */
     public function membersAction()
     {
-        $query = $this->getServiceLocator()->get('import_database_query');
+        $memberService = $this->getServiceLocator()->get('import_service_member');
 
-        $members = $query->fetchMembers();
+        $members = $memberService->getMembers();
 
         foreach ($members as $member) {
             var_dump($member);
