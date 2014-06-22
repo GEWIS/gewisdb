@@ -29,6 +29,20 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get all subdecisions for a decision.
+     *
+     * @param array $decision
+     *
+     * @return array decisions
+     */
+    public function getSubdecisions($decision)
+    {
+        return $this->getQuery()->fetchSubdecisions(
+            $decision['vergadertypeid'], $decision['vergadernr'],
+            $decision['puntnr'], $decision['besluitnr']);
+    }
+
+    /**
      * Import a meeting.
      *
      * @param array $meeting
@@ -37,9 +51,12 @@ class Meeting extends AbstractService
     {
         $console = $this->getConsole();
 
-        $rows = $this->getMeetingDecisions($meeting);
+        $decisions = $this->getMeetingDecisions($meeting);
 
-        var_dump($rows);
+        foreach ($decisions as $decision) {
+            var_dump($this->getSubdecisions($decision));
+            $console->readChar();
+        }
 
         /*
         $punt = -1;

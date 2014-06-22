@@ -32,6 +32,13 @@ class Query
      */
     protected $dStmt;
 
+    /**
+     * Subdecision statement.
+     *
+     * @var <don't care>
+     */
+    protected $sStmt;
+
 
     /**
      * Prepare and execute the next meeting query.
@@ -104,6 +111,46 @@ class Query
         return $this->dStmt->fetchAll();
     }
 
+    /**
+     * Prepare the subdecisions query.
+     */
+    protected function prepareSubdecisions()
+    {
+        $this->sStmt = $this->getConnection()->prepare("SELECT s.*, bs.*, f.*, o.*
+            FROM subbesluit AS s
+            INNER JOIN besluittype AS bs ON (s.besluittypeid = bs.besluittypeid)
+            LEFT JOIN functie AS f ON (f.functieid = s.functieid)
+            LEFT JOIN orgaan AS o ON (o.orgaanid = s.orgaanid)
+            WHERE s.vergadertypeid = :type AND s.vergadernr = :nr
+                AND s.puntnr = :puntnr AND s.besluitnr = :besluitnr
+            ORDER BY s.puntnr ASC, s.besluitnr ASC");
+    }
+
+    /**
+     * Fetch all decisions and subdecisions in a meeting.
+     *
+     * @param string $type
+     * @param string $nr
+     * @param string $puntnr
+     * @param string $besluitnr
+     *
+     * @return array
+     */
+    public function fetchSubdecisions($type, $nr, $puntnr, $besluitnr)
+    {
+        if (null === $this->sStmt) {
+            $this->prepareSubdecisions();
+        }
+
+        $this->sStmt->execute(array(
+            'type' => $type,
+            'nr' => $nr,
+            'puntnr' => $puntnr,
+            'besluitnr' => $besluitnr
+        ));
+
+        return $this->sStmt->fetchAll();
+    }
 
     public function setConnection(Connection $conn)
     {
