@@ -122,6 +122,11 @@ class Member extends AbstractService
         $em = $this->getServiceManager()->get('database_doctrine_em');
         $em->persist($member);
 
+        // prevent lidnr automatic generation
+
+        $metadata = $em->getClassMetaData(get_class($member));
+        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+
         echo 'Imported ' . $member->getFullName() . ' (' . $member->getLidnr() . ")\n";
     }
 
