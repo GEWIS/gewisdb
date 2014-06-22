@@ -83,6 +83,27 @@ class Meeting extends AbstractService
             echo "\tFunctie:\t{$subdecision['functie']}\n";
             echo "\tOrgaan:\t\t{$subdecision['orgaanafk']}\n";
             echo "\n";
+
+            switch (strtolower($subdecision['besluittype'])) {
+            case 'installatie':
+                break;
+            case 'decharge':
+                break;
+            case 'begroting':
+                break;
+            case 'afrekening':
+                break;
+            case 'oprichting':
+                break;
+            case 'opheffen':
+                break;
+            case 'overige':
+                break;
+            default:
+                var_dump(strtolower($subdecision['besluittype']));
+                break;
+            }
+
             $this->getConsole()->readChar();
         }
     }
