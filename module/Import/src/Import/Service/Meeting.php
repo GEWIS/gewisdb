@@ -4,6 +4,8 @@ namespace Import\Service;
 
 use Application\Service\AbstractService;
 
+use Database\Model\SubDecision;
+
 class Meeting extends AbstractService
 {
 
@@ -61,7 +63,7 @@ class Meeting extends AbstractService
             echo "----\n";
 
             $this->importDecision($decision);
-            $this->getConsole()->readChar();
+            //$this->getConsole()->readChar();
 
             echo "----\n";
         }
@@ -105,7 +107,7 @@ class Meeting extends AbstractService
                 break;
             }
 
-            $this->getConsole()->readChar();
+            //$this->getConsole()->readChar();
         }
     }
 
@@ -154,17 +156,23 @@ class Meeting extends AbstractService
     {
         $this->displaySubdecision($subdecision);
 
+        if ($type == 'budget') {
+            $model = new SubDecision\Budget();
+        } else {
+            $model = new SubDecision\Reckoning();
+        }
+
         if (empty($subdecision['lidnummer'])) {
             echo "Er kon geen lidnummer in de metadata gevonden worden\n";
             echo "Als er wel een lid vernoemd wordt, geef het lidnummer: ";
             $subdecision['lidnummer'] = $this->getConsole()->readLine();
-
-            if (!empty($line)) {
-                echo '[' . $line . ']';
-            }
         }
         if (!empty($subdecision['lidnummer'])) {
-            // TODO: retrieve the member
+            // find member and add to subdecision
+            $member = $this->findMember($subdecision['lidnummer']);
+            if (!empty($member)) {
+                $model->setAuthor($member);
+            }
         }
 
         if (!empty($subdecision['orgaanafk'])) {
@@ -173,6 +181,8 @@ class Meeting extends AbstractService
         }
 
         // TODO: extract version, date, approval and changes
+
+        var_dump($model);
 
         $this->getConsole()->readChar();
     }
@@ -215,6 +225,28 @@ class Meeting extends AbstractService
     protected function otherDecision($subdecision)
     {
         // TODO: implement this
+    }
+
+    /**
+     * Find a member.
+     *
+     * @param string $lidnr
+     *
+     * @return Database\Model\Member
+     */
+    protected function findMember($lidnr)
+    {
+        return $this->getMemberMapper()->find($lidnr);
+    }
+
+    /**
+     * Get the member mapper.
+     *
+     * @return Database\Mapper\Member
+     */
+    public function getMemberMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_member');
     }
 
     /**

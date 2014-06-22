@@ -86,10 +86,11 @@ class Organ
      * automatically process changes.
      *
      * @param string $query
+     * @param boolean $includeAbrogated
      *
      * @return array Organs
      */
-    public function organSearch($query)
+    public function organSearch($query, $includeAbrogated = false)
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -100,22 +101,24 @@ class Organ
             ->join('o.decision', 'd')
             ->join('d.meeting', 'm');
 
-        // we want to leave out organs that have been abrogated
-        $qbn = $this->em->createQueryBuilder();
-        $qbn->select('a')
-            ->from('Database\Model\SubDecision\Abrogation', 'a')
-            ->join('a.foundation', 'x')
-            ->where('x.meeting_type = o.meeting_type')
-            ->andWhere('x.meeting_number = o.meeting_number')
-            ->andWhere('x.decision_point = o.decision_point')
-            ->andWhere('x.decision_number = o.decision_number')
-            ->andWhere('x.number = o.number');
-        // add the subexpression
-        $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists(
-                $qbn->getDql()
-            )
-        ));
+        if (!$includeAbrogated) {
+            // we want to leave out organs that have been abrogated
+            $qbn = $this->em->createQueryBuilder();
+            $qbn->select('a')
+                ->from('Database\Model\SubDecision\Abrogation', 'a')
+                ->join('a.foundation', 'x')
+                ->where('x.meeting_type = o.meeting_type')
+                ->andWhere('x.meeting_number = o.meeting_number')
+                ->andWhere('x.decision_point = o.decision_point')
+                ->andWhere('x.decision_number = o.decision_number')
+                ->andWhere('x.number = o.number');
+            // add the subexpression
+            $qb->andWhere($qb->expr()->not(
+                $qb->expr()->exists(
+                    $qbn->getDql()
+                )
+            ));
+        }
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
