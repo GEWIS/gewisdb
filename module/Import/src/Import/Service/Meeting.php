@@ -84,20 +84,28 @@ class Meeting extends AbstractService
             echo "\tOrgaan:\t\t{$subdecision['orgaanafk']}\n";
             echo "\n";
 
+            // let the code get handled by the specific decision
             switch (strtolower($subdecision['besluittype'])) {
             case 'installatie':
+                $this->installationDecision($subdecision);
                 break;
             case 'decharge':
+                $this->dischargeDecision($subdecision);
                 break;
             case 'begroting':
+                $this->budgetDecision($subdecision);
                 break;
             case 'afrekening':
+                $this->reckoningDecision($subdecision);
                 break;
             case 'oprichting':
+                $this->foundationDecision($subdecision);
                 break;
             case 'opheffen':
+                $this->abrogationDecision($subdecision);
                 break;
             case 'overige':
+                $this->otherDecision($subdecision);
                 break;
             default:
                 var_dump(strtolower($subdecision['besluittype']));
@@ -106,6 +114,76 @@ class Meeting extends AbstractService
 
             $this->getConsole()->readChar();
         }
+    }
+
+    /**
+     * Installation decision.
+     *
+     * @param array $subdecision
+     */
+    protected function installationDecision($subdecision)
+    {
+        // TODO: implement this
+    }
+
+    /**
+     * Discharge decision.
+     *
+     * @param array $subdecision
+     */
+    protected function dischargeDecision($subdecision)
+    {
+        // TODO: implement this
+    }
+
+    /**
+     * Budget decision.
+     *
+     * @param array $subdecision
+     */
+    protected function budgetDecision($subdecision)
+    {
+        // TODO: implement this
+    }
+
+    /**
+     * Reckoning decision.
+     *
+     * @param array $subdecision
+     */
+    protected function reckoningDecision($subdecision)
+    {
+        // TODO: implement this
+    }
+
+    /**
+     * Foundation decision.
+     *
+     * @param array $subdecision
+     */
+    protected function foundationDecision($subdecision)
+    {
+        // TODO: implement this
+    }
+
+    /**
+     * Abrogation decision.
+     *
+     * @param array $subdecision
+     */
+    protected function abrogationDecision($subdecision)
+    {
+        // TODO: implement this
+    }
+
+    /**
+     * Other decision.
+     *
+     * @param array $subdecision
+     */
+    protected function otherDecision($subdecision)
+    {
+        // TODO: implement this
     }
 
     /**
