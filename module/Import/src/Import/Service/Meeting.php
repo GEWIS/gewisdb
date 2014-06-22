@@ -184,9 +184,31 @@ class Meeting extends AbstractService
             }
         }
 
-        // TODO: extract version, date, approval and changes
+        // extract version, date, approval and changes
 
-        var_dump($model);
+        $console = $this->getConsole();
+
+        echo "\nHet is niet mogelijk om de volgende informatie automatisch uit het besluit te halen. Hence, vul deze correct in.\n";
+        echo "(leeglaten indien onbeschikbaar)\n\n";
+
+        echo "Versienummer: ";
+        $model->setVersion(trim($console->readLine()));
+
+        echo "Datum van *begroting* [YYYY-MM-DD]: ";
+        $date = trim($console->readLine());
+        if (!empty($date)) {
+            $model->setDate($date);
+        }
+
+        echo "Goedgekeurd [Y/n]: ";
+        $model->setApproval(strtolower(trim($console->readLine())) != 'n');
+
+        echo "Met wijzigingen [y/N]: ";
+        $model->setChanges(strtolower(trim($console->readLine())) == 'y');
+
+        echo "\n";
+
+        echo $model->getContent() . "\n";
 
         $this->getConsole()->readChar();
     }
