@@ -49,35 +49,42 @@ class Meeting extends AbstractService
      */
     public function importMeeting($meeting)
     {
-        $console = $this->getConsole();
-
         $decisions = $this->getMeetingDecisions($meeting);
 
         foreach ($decisions as $decision) {
-            var_dump($this->getSubdecisions($decision));
-            $console->readChar();
+            echo "Besluit " . $meeting['vergaderafk'] . ' ' . $meeting['vergadernr']
+                . '.' . $decision['puntnr'] . '.' . $decision['besluitnr'] . "\n";
+
+            $punt = $decision['puntnr'];
+            $besluit = $decision['besluitnr'];
+            echo $decision['inhoud'] . "\n";
+            echo "----\n";
+
+            $this->importDecision($decision);
+            $this->getConsole()->readChar();
+
+            echo "----\n";
         }
+    }
 
-        /*
-        $punt = -1;
-        $besluit = -1;
+    /**
+     * Import a decision.
+     *
+     * @param array $decision
+     */
+    protected function importDecision($decision)
+    {
+        $subdecisions = $this->getSubdecisions($decision);
 
-        foreach ($rows as $row) {
-            if ($row['puntnr'] != $punt || $row['besluitnr'] != $besluit) {
-                echo "Besluit " . $meeting['vergaderafk'] . ' ' . $meeting['vergadernr'] . '.' . $row['puntnr'] . '.' . $row['besluitnr'] . "\n";
-                $punt = $row['puntnr'];
-                $besluit = $row['besluitnr'];
-                echo $row['b_inhoud'] . "\n";
-            }
-            echo $row['subbesluitnr'] . ': ' . $row['inhoud'] . "\n";
-            echo "\tType:\t\t{$row['besluittype']}\n";
-            echo "\tLid:\t\t{$row['lidnummer']}\n";
-            echo "\tFunctie:\t{$row['functie']}\n";
-            echo "\tOrgaan:\t\t{$row['orgaanafk']}\n";
+        foreach ($subdecisions as $subdecision) {
+            echo $subdecision['subbesluitnr'] . ': ' . $subdecision['inhoud'] . "\n";
+            echo "\tType:\t\t{$subdecision['besluittype']}\n";
+            echo "\tLid:\t\t{$subdecision['lidnummer']}\n";
+            echo "\tFunctie:\t{$subdecision['functie']}\n";
+            echo "\tOrgaan:\t\t{$subdecision['orgaanafk']}\n";
             echo "\n";
-            $console->readChar();
+            $this->getConsole()->readChar();
         }
-         */
     }
 
     /**
