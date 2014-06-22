@@ -47,6 +47,9 @@ class ImportController extends AbstractActionController
         foreach ($members as $member) {
             $memberService->import($member);
         }
+
+        // and finalize the import
+        $memberService->flush();
     }
 
     /**

@@ -29,6 +29,16 @@ class Member extends AbstractService
     {
         $member = new MemberModel();
 
+        $keys = array('e_mail', 'achternaam', 'tussen', 'voorlet', 'voornaam',
+            'hstraat', 'hpostcode', 'hplaats', 'htelefoon',
+            'kstraat', 'kpostcode', 'kplaats', 'ktelefoon'
+        );
+        foreach ($keys as $key) {
+            if (empty($data[$key])) {
+                $data[$key] = '';
+            }
+        }
+
         $member->setLidnr($data['lidnummer']);
         $member->setEmail($data['e_mail']);
         $member->setLastName($data['achternaam']);
@@ -109,7 +119,19 @@ class Member extends AbstractService
             $member->addAddress($student);
         }
 
+        $em = $this->getServiceManager()->get('database_doctrine_em');
+        $em->persist($member);
+
         echo 'Imported ' . $member->getFullName() . ' (' . $member->getLidnr() . ")\n";
+    }
+
+    /**
+     * Flush the entity manager.
+     */
+    public function flush()
+    {
+        $em = $this->getServiceManager()->get('database_doctrine_em');
+        $em->flush();
     }
 
     /**
