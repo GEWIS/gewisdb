@@ -77,11 +77,7 @@ class Query
      */
     protected function prepareDecisions()
     {
-        $this->dStmt = $this->getConnection()->prepare("SELECT b.*, s.*, bs.*, f.*, o.*, b.inhoud as b_inhoud FROM besluit AS b
-            INNER JOIN subbesluit AS s ON (s.vergadertypeid = b.vergadertypeid AND s.vergadernr = b.vergadernr AND s.puntnr = b.puntnr AND s.besluitnr = b.besluitnr)
-            INNER JOIN besluittype AS bs ON (s.besluittypeid = bs.besluittypeid)
-            LEFT JOIN functie AS f ON (f.functieid = s.functieid)
-            LEFT JOIN orgaan AS o ON (o.orgaanid = s.orgaanid)
+        $this->dStmt = $this->getConnection()->prepare("SELECT b.*  FROM besluit AS b
             WHERE b.vergadertypeid = :type AND b.vergadernr = :nr
             ORDER BY b.puntnr ASC, b.besluitnr ASC");
     }

@@ -39,10 +39,9 @@ class Meeting extends AbstractService
 
         $rows = $this->getMeetingDecisions($meeting);
 
-        if (empty($rows)) {
-            continue;
-        }
+        var_dump($rows);
 
+        /*
         $punt = -1;
         $besluit = -1;
 
@@ -61,6 +60,7 @@ class Meeting extends AbstractService
             echo "\n";
             $console->readChar();
         }
+         */
     }
 
     /**
