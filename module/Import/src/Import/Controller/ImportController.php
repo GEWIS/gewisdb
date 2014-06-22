@@ -17,7 +17,6 @@ class ImportController extends AbstractActionController
     {
         $console = $this->getConsole();
 
-        $db = $this->getServiceLocator()->get('doctrine.connection.orm_import');
         $meetingService = $this->getServiceLocator()->get('import_service_meeting');
 
         $meetings = $meetingService->getMeetings();
@@ -34,6 +33,14 @@ class ImportController extends AbstractActionController
 
             $meetingService->importMeeting($vergadering);
         }
+    }
+
+    /**
+     * Member import action.
+     */
+    public function membersAction()
+    {
+        $query = $this->getServiceLocator()->get('import_database_query');
     }
 
     /**

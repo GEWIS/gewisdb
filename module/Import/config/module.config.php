@@ -8,6 +8,15 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+                'import_members' => array(
+                    'options' => array(
+                        'route' => 'import members',
+                        'defaults' => array(
+                            'controller' => 'Import\Controller\Import',
+                            'action' => 'members'
+                        )
+                    )
+                ),
                 'import' => array(
                     'options' => array(
                         'route' => 'import',
