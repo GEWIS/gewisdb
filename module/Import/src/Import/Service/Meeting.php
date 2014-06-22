@@ -88,10 +88,10 @@ class Meeting extends AbstractService
                 $this->dischargeDecision($subdecision);
                 break;
             case 'begroting':
-                $this->budgetDecision($subdecision);
+                $model = $this->budgetDecision($subdecision);
                 break;
             case 'afrekening':
-                $this->reckoningDecision($subdecision);
+                $model = $this->reckoningDecision($subdecision);
                 break;
             case 'oprichting':
                 $this->foundationDecision($subdecision);
@@ -162,6 +162,9 @@ class Meeting extends AbstractService
             $model = new SubDecision\Reckoning();
         }
 
+        echo "\nHet is niet mogelijk om de volgende informatie automatisch uit het besluit te halen. Hence, vul deze correct in.\n";
+        echo "(leeglaten indien onbeschikbaar)\n\n";
+
         if (empty($subdecision['lidnummer'])) {
             echo "Er kon geen lidnummer in de metadata gevonden worden\n";
             echo "Als er wel een lid vernoemd wordt, geef het lidnummer: ";
@@ -188,8 +191,7 @@ class Meeting extends AbstractService
 
         $console = $this->getConsole();
 
-        echo "\nHet is niet mogelijk om de volgende informatie automatisch uit het besluit te halen. Hence, vul deze correct in.\n";
-        echo "(leeglaten indien onbeschikbaar)\n\n";
+        echo "\n";
 
         echo "Naam: ";
         $model->setName(trim($console->readLine()));
@@ -220,7 +222,7 @@ class Meeting extends AbstractService
 
         echo $model->getContent() . "\n";
 
-        $this->getConsole()->readChar();
+        return $model;
     }
 
     /**
