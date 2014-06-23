@@ -270,10 +270,26 @@ class Meeting extends AbstractService
      */
     protected function foundationDecision($subdecision)
     {
-        // TODO: implement this
-        var_dump($subdecision);
-        $this->displaySubdecision($subdecision);
+        $foundation = new SubDecision\Foundation();
+
+        $foundation->setName($subdecision['orgaannaam']);
+        $foundation->setAbbr($subdecision['orgaanafk']);
+
+        switch (strtolower($subdecision['orgaantype'])) {
+        case 'av-commissie':
+            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AV_COMMITTEE);
+            break;
+        case 'dispuut':
+            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_FRATERNITY);
+            break;
+        case 'bv-commissie':
+        default:
+            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_COMMITTEE);
+            break;
+        }
+
         $this->getConsole()->readChar();
+        return $foundation;
     }
 
     /**
