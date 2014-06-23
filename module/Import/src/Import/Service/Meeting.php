@@ -12,6 +12,13 @@ class Meeting extends AbstractService
 {
 
     /**
+     * Previous found foundation decision.
+     *
+     * @var SubDecision\Foundation
+     */
+    protected $prevFoundation;
+
+    /**
      * Get all meetings.
      */
     public function getMeetings()
@@ -61,6 +68,7 @@ class Meeting extends AbstractService
 
         $newMeeting->setType(strtolower($meeting['vergaderafk']));
         $newMeeting->setNumber((int) $meeting['vergadernr']);
+        $newMeeting->setDate(new \DateTime($meeting['datum']));
 
         foreach ($decisions as $decision) {
             echo "Besluit " . $meeting['vergaderafk'] . ' ' . $meeting['vergadernr']
@@ -76,6 +84,7 @@ class Meeting extends AbstractService
         }
 
         // TODO: persist
+        $this->getMeetingMapper()->persist($newMeeting);
         return $newMeeting;
     }
 
@@ -288,7 +297,9 @@ class Meeting extends AbstractService
             break;
         }
 
-        $this->getConsole()->readChar();
+        // for if it is abrogated in the next subdecision
+        $this->prevFoundation = $foundation;
+
         return $foundation;
     }
 
@@ -299,7 +310,29 @@ class Meeting extends AbstractService
      */
     protected function abrogationDecision($subdecision)
     {
-        // TODO: implement this
+        $this->displaySubdecision($subdecision);
+
+        $foundation = $this->searchOrgan($subdecision['orgaanafk']);
+
+        // special handling code for decisions where the organ gets created
+        // and abrogated within the same decision (also called hacks)
+        if (empty($foundation) && !empty($this->prevFoundation) && $this->prevFoundation->getAbbr() == $subdecision['orgaanafk']) {
+            $foundation = $this->prevFoundation;
+        }
+        if (empty($foundation)) {
+            echo "Warning: no abrogation decision made, since the organ has not been founded.";
+            $this->getConsole()->readChar();
+            return;
+        }
+
+        $abrogation = new SubDecision\Abrogation();
+
+        $abrogation->setFoundation($foundation);
+
+        echo $abrogation->getContent();
+        $this->getConsole()->readChar();
+
+        return $abrogation;
     }
 
     /**
@@ -424,6 +457,16 @@ class Meeting extends AbstractService
     public function getOrganMapper()
     {
         return $this->getServiceManager()->get('database_mapper_organ');
+    }
+
+    /**
+     * Get the meeting mapper.
+     *
+     * @return Database\Mapper\Meeting
+     */
+    public function getMeetingMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_meeting');
     }
 
     /**
