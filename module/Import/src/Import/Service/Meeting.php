@@ -287,7 +287,12 @@ class Meeting extends AbstractService
      */
     protected function otherDecision($subdecision)
     {
-        // TODO: implement this
+        // simply get the content and we're done
+        $other = new SubDecision\Other();
+
+        $other->setContent($subdecision['inhoud']);
+
+        return $other;
     }
 
     /**
