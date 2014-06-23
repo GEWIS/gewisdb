@@ -172,11 +172,19 @@ class Meeting extends AbstractService
 
         $install = new SubDecision\Installation();
 
-        $install->setMember($this->searchMember($subdecision['lidnummer']));
-        $install->setFoundation($this->searchOrgan($subdecision['orgaanafk']));
+        $member = $this->searchMember($subdecision['lidnummer']);
+        if (empty($member)) {
+            return null;
+        }
+        $install->setMember($member);
+        $organ = $this->searchOrgan($subdecision['orgaanafk']);
+        if (empty($organ)) {
+            return null;
+        }
+        $install->setFoundation($organ);
         $install->setFunction($this->findFunction($subdecision['functie']));
 
-        echo $install->getContent();
+        echo $install->getContent() . "\n";
 
         return $install;
     }
@@ -188,7 +196,41 @@ class Meeting extends AbstractService
      */
     protected function dischargeDecision($subdecision)
     {
-        // TODO: implement this
+        $this->displaySubdecision($subdecision);
+
+        $foundation = $this->searchOrgan($subdecision['orgaanafk']);
+
+        if (empty($foundation)) {
+            return null;
+        }
+
+        $candidates = array();
+
+        foreach ($foundation->getReferences() as $reference) {
+            if ($reference instanceof SubDecision\Installation) {
+                if ($reference->getMember()->getLidnr() == $subdecision['lidnummer']) {
+                    $candidates[] = $reference;
+                }
+            }
+        }
+
+        echo "\nSelecteer de installatie:\n\n";
+
+        foreach ($candidates as $key => $candidate) {
+            echo "\t$key) " . $candidate->getFunction() . " " . $candidate->getMember()->getFullName() . " (" . $candidate->getMember()->getLidnr() . ")\n";
+        }
+
+        $num = (int) trim($this->getConsole()->readLine());
+
+        $installation = $candidates[$num];
+
+        $discharge = new SubDecision\Discharge();
+
+        $discharge->setInstallation($installation);
+
+        echo $discharge->getContent() . "\n";
+
+        return $discharge;
     }
 
     /**
