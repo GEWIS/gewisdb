@@ -158,7 +158,17 @@ class Meeting extends AbstractService
      */
     protected function installationDecision($subdecision)
     {
-        // TODO: implement this
+        $this->displaySubdecision($subdecision);
+
+        $install = new SubDecision\Installation();
+
+        $install->setMember($this->searchMember($subdecision['lidnummer']));
+        $install->setFoundation($this->searchOrgan($subdecision['orgaanafk']));
+        $install->setFunction($this->findFunction($subdecision['functie']));
+
+        echo $install->getContent();
+
+        return $install;
     }
 
     /**
@@ -288,6 +298,47 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get the correct function.
+     *
+     * @param string $function
+     *
+     * @return correct function name
+     */
+    protected function findFunction($function)
+    {
+        switch (strtolower($function)) {
+        case 'voorzitter':
+            return SubDecision\Installation::FUNC_CHAIRMAN;
+            break;
+        case 'secretaris':
+            return SubDecision\Installation::FUNC_SECRETARY;
+            break;
+        case 'penningmeester':
+            return SubDecision\Installation::FUNC_TREASURER;
+            break;
+        case 'vice-voorzitter':
+            return SubDecision\Installation::FUNC_VICE_CHAIRMAN;
+            break;
+        case 'pr-functionaris':
+            return SubDecision\Installation::FUNC_PR_OFFICER;
+            break;
+        case 'onderwijs commissaris':
+            return SubDecision\Installation::FUNC_EDUCATION_OFFICER;
+            break;
+        case 'lid':
+            return SubDecision\Installation::FUNC_MEMBER;
+            break;
+        // TODO: determine what to do with these
+        case 'inkoper':
+            return SubDecision\Installation::FUNC_MEMBER;
+            break;
+        case 'tafelvoetbalcoordinator':
+            return SubDecision\Installation::FUNC_MEMBER;
+            break;
+        }
+    }
+
+    /**
      * (Interactively) search for a user.
      *
      * @param string $lidnr
@@ -326,7 +377,7 @@ class Meeting extends AbstractService
         foreach ($results as $key => $foundation) {
             echo "\t$key) " . $foundation->getAbbr() . "\n";
         }
-        echo "\nWelke van deze organen is het genoemde orgaan ($query)? ";
+        echo "\nWelke van deze organen is het genoemde orgaan? ";
 
         $num = (int) trim($this->getConsole()->readLine());
 
