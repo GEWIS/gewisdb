@@ -99,6 +99,7 @@ class Meeting extends AbstractService
         $newDecision->setMeeting($newMeeting);
 
         foreach ($subdecisions as $subdecision) {
+            $model = null;
             // let the code get handled by the specific decision
             switch (strtolower($subdecision['besluittype'])) {
             case 'installatie':
@@ -270,6 +271,9 @@ class Meeting extends AbstractService
     protected function foundationDecision($subdecision)
     {
         // TODO: implement this
+        var_dump($subdecision);
+        $this->displaySubdecision($subdecision);
+        $this->getConsole()->readChar();
     }
 
     /**
