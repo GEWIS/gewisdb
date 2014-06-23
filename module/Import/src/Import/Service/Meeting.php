@@ -190,17 +190,9 @@ class Meeting extends AbstractService
         echo "\nHet is niet mogelijk om de volgende informatie automatisch uit het besluit te halen. Hence, vul deze correct in.\n";
         echo "(leeglaten indien onbeschikbaar)\n\n";
 
-        if (empty($subdecision['lidnummer'])) {
-            echo "Er kon geen lidnummer in de metadata gevonden worden\n";
-            echo "Als er wel een lid vernoemd wordt, geef het lidnummer: ";
-            $subdecision['lidnummer'] = $this->getConsole()->readLine();
-        }
-        if (!empty($subdecision['lidnummer'])) {
-            // find member and add to subdecision
-            $member = $this->findMember($subdecision['lidnummer']);
-            if (!empty($member)) {
-                $model->setAuthor($member);
-            }
+        $member = $this->searchMember($subdecision['lidnummer']);
+        if (!empty($member)) {
+            $model->setAuthor($member);
         }
 
         if (!empty($subdecision['orgaanafk'])) {
@@ -293,6 +285,26 @@ class Meeting extends AbstractService
         $other->setContent($subdecision['inhoud']);
 
         return $other;
+    }
+
+    /**
+     * (Interactively) search for a user.
+     *
+     * @param string $lidnr
+     *
+     * @return Database\Model\Member
+     */
+    protected function searchMember($lidnr)
+    {
+        if (empty($lidnr)) {
+            echo "Er kon geen lidnummer in de metadata gevonden worden\n";
+            echo "Als er wel een lid vernoemd wordt, geef het lidnummer: ";
+            $lidnr = $this->getConsole()->readLine();
+        }
+        if (!empty($lidnr)) {
+            // find member and add to subdecision
+            return $this->findMember($lidnr);
+        }
     }
 
     /**
