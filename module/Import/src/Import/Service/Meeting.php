@@ -468,9 +468,19 @@ class Meeting extends AbstractService
             return;
         }
 
+        // see if we find a perfect match
+        if (count($results) == 1) {
+            return $results[0];
+        }
+        foreach ($results as $foundation) {
+            if ($foundation->getAbbr() == $query) {
+                return $foundation;
+            }
+        }
+
         echo "\n";
         foreach ($results as $key => $foundation) {
-            echo "\t$key) " . $foundation->getAbbr() . "\n";
+            echo "\t$key) " . $foundation->getName() . ' (' . $foundation->getAbbr() . ")\n";
         }
         echo "\nWelke van deze organen is het genoemde orgaan? ";
 
