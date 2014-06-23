@@ -214,6 +214,10 @@ class Meeting extends AbstractService
             }
         }
 
+        if (empty($candidates)) {
+            return null;
+        }
+
         echo "\nSelecteer de installatie:\n\n";
 
         foreach ($candidates as $key => $candidate) {
