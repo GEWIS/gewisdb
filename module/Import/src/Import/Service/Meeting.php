@@ -5,6 +5,8 @@ namespace Import\Service;
 use Application\Service\AbstractService;
 
 use Database\Model\SubDecision;
+use Database\Model\Decision;
+use Database\Model\Meeting as MeetingModel;
 
 class Meeting extends AbstractService
 {
@@ -48,10 +50,17 @@ class Meeting extends AbstractService
      * Import a meeting.
      *
      * @param array $meeting
+     *
+     * @return MeetingModel
      */
     public function importMeeting($meeting)
     {
         $decisions = $this->getMeetingDecisions($meeting);
+
+        $newMeeting = new MeetingModel();
+
+        $newMeeting->setType(strtolower($meeting['vergaderafk']));
+        $newMeeting->setNumber((int) $meeting['vergadernr']);
 
         foreach ($decisions as $decision) {
             echo "Besluit " . $meeting['vergaderafk'] . ' ' . $meeting['vergadernr']
@@ -60,32 +69,43 @@ class Meeting extends AbstractService
             $punt = $decision['puntnr'];
             $besluit = $decision['besluitnr'];
             echo $decision['inhoud'] . "\n";
-            echo "----\n";
+            echo "------------------------------------------------------------------------------\n";
 
-            $this->importDecision($decision);
-            //$this->getConsole()->readChar();
-
-            echo "----\n";
+            $model = $this->importDecision($decision, $newMeeting);
+            echo "\n";
         }
+
+        // TODO: persist
+        return $newMeeting;
     }
 
     /**
      * Import a decision.
      *
      * @param array $decision
+     * @param MeetingModel $newMeeting
+     *
+     * @return Decision
      */
-    protected function importDecision($decision)
+    protected function importDecision($decision, $newMeeting)
     {
         $subdecisions = $this->getSubdecisions($decision);
+
+        $newDecision = new Decision();
+
+        $newDecision->setPoint($decision['puntnr']);
+        $newDecision->setNumber($decision['besluitnr']);
+
+        $newDecision->setMeeting($newMeeting);
 
         foreach ($subdecisions as $subdecision) {
             // let the code get handled by the specific decision
             switch (strtolower($subdecision['besluittype'])) {
             case 'installatie':
-                $this->installationDecision($subdecision);
+                $model = $this->installationDecision($subdecision);
                 break;
             case 'decharge':
-                $this->dischargeDecision($subdecision);
+                $model = $this->dischargeDecision($subdecision);
                 break;
             case 'begroting':
                 $model = $this->budgetDecision($subdecision);
@@ -94,21 +114,26 @@ class Meeting extends AbstractService
                 $model = $this->reckoningDecision($subdecision);
                 break;
             case 'oprichting':
-                $this->foundationDecision($subdecision);
+                $model = $this->foundationDecision($subdecision);
                 break;
             case 'opheffen':
-                $this->abrogationDecision($subdecision);
+                $model = $this->abrogationDecision($subdecision);
                 break;
             case 'overige':
-                $this->otherDecision($subdecision);
+                $model = $this->otherDecision($subdecision);
                 break;
             default:
                 var_dump(strtolower($subdecision['besluittype']));
                 break;
             }
 
-            //$this->getConsole()->readChar();
+            if ($model instanceof SubDecision) {
+                $model->setDecision($newDecision);
+                $model->setNumber($subdecision['subbesluitnr']);
+            }
         }
+
+        return $newDecision;
     }
 
     /**
