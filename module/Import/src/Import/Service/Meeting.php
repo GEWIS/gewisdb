@@ -62,6 +62,12 @@ class Meeting extends AbstractService
      */
     public function importMeeting($meeting)
     {
+        // check if the meeting already exists
+        if (null !== $this->getMeetingMapper()->find(strtolower($meeting['vergaderafk']), (int) $meeting['vergadernr'])) {
+            // meeting already exists in database
+            return;
+        }
+
         $decisions = $this->getMeetingDecisions($meeting);
 
         $newMeeting = new MeetingModel();
