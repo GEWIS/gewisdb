@@ -19,6 +19,13 @@ class Meeting extends AbstractService
     protected $prevFoundation;
 
     /**
+     * Foundations that have just been added.
+     *
+     * @var array of SubDecision\Foundation
+     */
+    protected $addedFoundations = array();
+
+    /**
      * Get all meetings.
      */
     public function getMeetings()
@@ -353,6 +360,7 @@ class Meeting extends AbstractService
 
         // for if it is abrogated in the next subdecision
         $this->prevFoundation = $foundation;
+        $this->addedFoundations[] = $foundation;
 
         return $foundation;
     }
@@ -466,6 +474,24 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Find an added foundation.
+     *
+     * @param string $query
+     *
+     * @return array of Database\Model\SubDecision\Foundation
+     */
+    protected function findAddedFoundation($query)
+    {
+        $found = array();
+        foreach ($this->addedFoundations as $foundation) {
+            if ($foundation->getAbbr() == $query || $foundation->getName() == $query) {
+                $found[] = $foundation;
+            }
+        }
+        return $found;
+    }
+
+    /**
      * (Interactively) search for an organ.
      *
      * @param string $query
@@ -477,7 +503,12 @@ class Meeting extends AbstractService
         $results = $this->getOrganMapper()->organSearch($query, true);
 
         if (empty($results)) {
-            return;
+            // try to find in local storage
+            $results = $this->findAddedFoundation($query);
+
+            if (empty($results)) {
+                return;
+            }
         }
 
         // see if we find a perfect match
