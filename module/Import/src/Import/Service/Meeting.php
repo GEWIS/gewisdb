@@ -180,12 +180,14 @@ class Meeting extends AbstractService
 
         $member = $this->searchMember($subdecision['lidnummer']);
         if (empty($member)) {
+            echo "Geen lid gevonden. Subbesluit niet toegevoegd.\n\n";
             return null;
         }
         $install->setMember($member);
         $organ = $this->searchOrgan($subdecision['orgaanafk']);
         if (empty($organ)) {
             return null;
+            echo "Geen orgaan gevonden. Subbesluit niet toegevoegd.\n\n";
         }
         $install->setFoundation($organ);
         $install->setFunction($this->findFunction($subdecision['functie']));

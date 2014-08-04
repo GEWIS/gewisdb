@@ -24,12 +24,12 @@ class ImportController extends AbstractActionController
         foreach ($meetings as $vergadering)  {
             $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
             echo "Voeg vergadering $verg toe? [Y/n] ";
-            //$char = $console->readChar();
+            $char = $console->readChar();
             echo "\n\n";
 
-            //if (strtolower($char) == 'n') {
-                //continue;
-            //}
+            if (strtolower($char) == 'n') {
+                continue;
+            }
 
             $meetingService->importMeeting($vergadering);
         }
