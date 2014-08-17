@@ -2,10 +2,11 @@
 /**
  * Hack to force everyone to subscribe.
  */
-/*echo '<pre>';
-var_dump($_SERVER);
-echo '</pre>';*/
-$_SERVER['REQUEST_URI'] = '/~secr/database/inschrijven/member/subscribe';
+if (isset($_SERVER['REDIRECT_BASE']) && !empty($_SERVER['REDIRECT_BASE'])) {
+    $_SERVER['REQUEST_URI'] = $_SERVER['REDIRECT_BASE'] . 'member/subscribe';
+} else {
+    $_SERVER['REQUEST_URI'] = $_SERVER['REQUEST_URI'] . 'member/subscribe';
+}
 
 /**
  * This makes our life easier when dealing with paths. Everything is relative
