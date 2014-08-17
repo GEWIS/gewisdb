@@ -54,6 +54,7 @@ function getIsActive($view, array $condition)
     }
     return ' class="active"';
 }
+if (getIsActive($this, array('database', 'member', 'subscribe')) == '') {
 ?>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
@@ -75,6 +76,7 @@ function getIsActive($view, array $condition)
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
+<?php } ?>
         <div class="container">
             <?php echo $this->content; ?>
             <hr>
