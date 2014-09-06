@@ -68,7 +68,6 @@ class Meeting extends AbstractService
         $form->setData($data);
 
         if (!$form->isValid()) {
-            var_dump('booh');
             return null;
         }
 
@@ -85,6 +84,31 @@ class Meeting extends AbstractService
 
         // find meeting data
         return $this->getDecisionsByMeetings($meetings);
+    }
+
+    /**
+     * Delete a decision.
+     *
+     * @param array $data
+     * @param string $type
+     * @param int $number
+     * @param int $point
+     * @param int $decision
+     *
+     * @return boolean
+     */
+    public function deleteDecision($data, $type, $number, $point, $decision)
+    {
+        $form = $this->getDeleteDecisionForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        // TODO: delete
+        return true;
     }
 
     /**

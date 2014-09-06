@@ -158,6 +158,20 @@ class MeetingController extends AbstractActionController
         $point = $this->params()->fromRoute('point');
         $decision = $this->params()->fromRoute('decision');
 
+        $service = $this->getMeetingService();
+
+        if ($this->getRequest()->isPost()) {
+            if ($service->deleteDecision($this->getRequest()->getPost(),
+                    $type, $number, $point, $decision)
+            ) {
+                return new ViewModel(array(
+                    'type' => $type,
+                    'number' => $number,
+                    'point' => $point,
+                    'decision' => $decision
+                ));
+            }
+        }
         return new ViewModel(array(
             'form' => $this->getMeetingService()->getDeleteDecisionForm(),
             'type' => $type,
