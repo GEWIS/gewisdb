@@ -70,7 +70,13 @@ function showType($type)
 <ul>
 <?php foreach ($meeting->getDecisions() as $decision): ?>
     <li>
-        Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:
+        Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:<br />
+        <a href="<?= $this->url('meeting/decision/delete', array(
+            'type' => $meeting->getType(),
+            'number' => $meeting->getNumber(),
+            'point' => $decision->getPoint(),
+            'decision' => $decision->getNumber()
+        )) ?>" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder besluit</a>
         <ul>
         <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
             <li><?= $subdecision->getContent() ?></li>

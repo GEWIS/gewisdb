@@ -149,6 +149,14 @@ class MeetingController extends AbstractActionController
     }
 
     /**
+     * Delete a decision.
+     */
+    public function deleteAction()
+    {
+        return new ViewModel(array());
+    }
+
+    /**
      * Get the meeting service.
      *
      * @return \Database\Service\Meeting
