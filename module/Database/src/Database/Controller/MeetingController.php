@@ -153,7 +153,18 @@ class MeetingController extends AbstractActionController
      */
     public function deleteAction()
     {
-        return new ViewModel(array());
+        $type = $this->params()->fromRoute('type');
+        $number = $this->params()->fromRoute('number');
+        $point = $this->params()->fromRoute('point');
+        $decision = $this->params()->fromRoute('decision');
+
+        return new ViewModel(array(
+            'form' => $this->getMeetingService()->getDeleteDecisionForm(),
+            'type' => $type,
+            'number' => $number,
+            'point' => $point,
+            'decision' => $decision
+        ));
     }
 
     /**

@@ -351,6 +351,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get the delete decision form.
+     *
+     * @return \Database\Form\DeleteDecision
+     */
+    public function getDeleteDecisionForm()
+    {
+        return $this->getServiceManager()->get('database_form_deletedecision');
+    }
+
+    /**
      * Get install form.
      *
      * @return \Database\Form\Install

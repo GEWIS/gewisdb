@@ -103,6 +103,11 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_install'));
                     return $form;
                 },
+                'database_form_deletedecision' => function ($sm) {
+                    $form = new \Database\Form\DeleteDecision();
+                    $form->setHydrator($sm->get('database_hydrator_abolish'));
+                    return $form;
+                },
                 'database_form_abolish' => function ($sm) {
                     $form = new \Database\Form\Abolish(
                         $sm->get('database_form_fieldset_meeting'),

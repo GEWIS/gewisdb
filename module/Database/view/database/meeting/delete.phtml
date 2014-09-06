@@ -1,1 +1,51 @@
-Todo: delete form.
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('meeting/decision/delete', array(
+    'type' => $type,
+    'number' => $number,
+    'point' => $point,
+    'decision' => $decision
+)));
+$form->setAttribute('method', 'post');
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+use Database\Model\Meeting;
+function showType($type)
+{
+    switch ($type) {
+    case Meeting::TYPE_BV:
+        return 'BV';
+    case Meeting::TYPE_AV:
+        return 'AV';
+    case Meeting::TYPE_VV:
+        return 'VV';
+    case Meeting::TYPE_VIRT:
+        return 'Virt';
+    }
+}
+?>
+
+<p>
+Weet je zeker dat besluit
+<?= showType($type) . " $number.$point.$decision " ?>
+verwijderd moet worden?
+</p>
+<div class="form-group">
+<?php
+$submit = $form->get('submit_yes');
+$submit->setLabel('Ja');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+&nbsp;&nbsp;&nbsp;
+<?php
+$submit = $form->get('submit_no');
+$submit->setLabel('Nee');
+$submit->setAttribute('class', 'btn btn-default');
+?>
+<?= $this->formButton($submit) ?>
+</div>
+
+<?= $this->form()->closeTag(); ?>
