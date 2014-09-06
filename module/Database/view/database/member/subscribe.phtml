@@ -9,6 +9,21 @@ $form->setAttribute('role', 'form');
 ?>
 <?= $this->form()->openTag($form) ?>
 
+<div class="container">
+<div class="col-md-9">
+<h1>Inschrijving Studievereniging GEWIS</h1>
+<p>
+Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro.
+</p>
+</div>
+<div class="col-md-3">
+<img src="http://gewis.nl/sws/themes/new/gewis-rond.png" />
+</div>
+</div>
+<br />
+<br />
+<br />
+
 <div class="form-group">
 <?php
 $element = $form->get('lastName');
@@ -85,8 +100,8 @@ $element->setAttribute('placeholder', $element->getLabel());
     <?= $this->formElementErrors($element) ?>
 </div>
 
+<h3>Thuisadres (adres van je ouders)</h3>
 <fieldset>
-<label>Thuisadres</label>
 <?php
 $fs = $form->get('homeAddress');
 ?>
@@ -160,7 +175,7 @@ $element->setAttribute('placeholder', $element->getLabel());
 </fieldset>
 
 <fieldset>
-<label>Adres kamer</label>
+<h3>Studieadres (adres kamer)</h3>
 <?php
 $fs = $form->get('studentAddress');
 ?>
