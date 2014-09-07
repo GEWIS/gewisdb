@@ -171,6 +171,8 @@ class MeetingController extends AbstractActionController
                     'decision' => $decision
                 ));
             }
+            // Not deleted
+            // TODO: redirect back to meeting
         }
         return new ViewModel(array(
             'form' => $this->getMeetingService()->getDeleteDecisionForm(),

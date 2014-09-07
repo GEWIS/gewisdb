@@ -1,4 +1,8 @@
 <?php
+use Database\Model\Meeting;
+if (!isset($form)): ?>
+Besluit verwijderd.
+<?php else:
 $form->prepare();
 
 $form->setAttribute('action', $this->url('meeting/decision/delete', array(
@@ -11,7 +15,6 @@ $form->setAttribute('method', 'post');
 $form->setAttribute('role', 'form');
 
 echo $this->form()->openTag($form);
-use Database\Model\Meeting;
 function showType($type)
 {
     switch ($type) {
@@ -49,3 +52,4 @@ $submit->setAttribute('class', 'btn btn-default');
 </div>
 
 <?= $this->form()->closeTag(); ?>
+<?php endif; ?>

@@ -107,7 +107,10 @@ class Meeting extends AbstractService
             return false;
         }
 
-        // TODO: delete
+        $mapper = $this->getMeetingMapper();
+
+        $mapper->deleteDecision($type, $number, $point, $decision);
+
         return true;
     }
 

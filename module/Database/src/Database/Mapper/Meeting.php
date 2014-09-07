@@ -124,6 +124,54 @@ class Meeting
     }
 
     /**
+     * Delete a decision.
+     *
+     * @param string $type
+     * @param int $number
+     * @param int $point
+     * @param int $decision
+     *
+     * @return \Database\Model\Decision
+     */
+    public function findDecision($type, $number, $point, $decision)
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('d, s')
+            ->from('Database\Model\Decision', 'd')
+            ->where('d.meeting_type = :type')
+            ->andWhere('d.meeting_number = :number')
+            ->andWhere('d.point = :point')
+            ->andWhere('d.number = :decision')
+            ->leftJoin('d.subdecisions', 's')
+            ->orderBy('s.number');
+
+        $qb->setParameter(':type', $type);
+        $qb->setParameter(':number', $number);
+        $qb->setParameter(':point', $point);
+        $qb->setParameter(':decision', $decision);
+
+        $res = $qb->getQuery()->getResult();
+        return empty($res) ? null : $res[0];
+    }
+
+    /**
+     * Delete a decision.
+     *
+     * @param string $type
+     * @param int $number
+     * @param int $point
+     * @param int $decision
+     */
+    public function deleteDecision($type, $number, $point, $decision)
+    {
+        $decision = $this->findDecision($type, $number, $point, $decision);
+
+        $this->em->remove($decision);
+        $this->em->flush();
+    }
+
+    /**
      * Persist a meeting model.
      *
      * @param MeetingModel $meeting Meeting to persist.

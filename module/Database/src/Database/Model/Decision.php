@@ -62,7 +62,7 @@ class Decision
     /**
      * Subdecisions
      *
-     * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision", cascade={"persist", "remove"})
      */
     protected $subdecisions;
 
