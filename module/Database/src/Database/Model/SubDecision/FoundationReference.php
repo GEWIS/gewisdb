@@ -20,7 +20,7 @@ abstract class FoundationReference extends SubDecision
     /**
      * Reference to foundation of organ.
      *
-     * @ORM\ManyToOne(targetEntity="Foundation",inversedBy="references")
+     * @ORM\ManyToOne(targetEntity="Foundation",inversedBy="references",cascade={"persist"})
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
