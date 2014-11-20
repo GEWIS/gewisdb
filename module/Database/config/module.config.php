@@ -190,6 +190,29 @@ return array(
                     ),
                 ),
             ),
+            'settings' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/settings',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'Settings',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:action',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
@@ -197,7 +220,8 @@ return array(
             'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
             'Database\Controller\Member' => 'Database\Controller\MemberController',
             'Database\Controller\Organ' => 'Database\Controller\OrganController',
-            'Database\Controller\Export' => 'Database\Controller\ExportController'
+            'Database\Controller\Export' => 'Database\Controller\ExportController',
+            'Database\Controller\Settings' => 'Database\Controller\SettingsController',
         )
     ),
     'view_manager' => array(
