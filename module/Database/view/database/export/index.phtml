@@ -69,7 +69,7 @@ ob_start();
 <?php
 $decisionList = ob_get_clean();
 ?>
-<pre style="height: 32em; overflow: scroll"><code><?php
+<pre style="height: 80vh; overflow: scroll"><code><?php
 echo $this->partial('database/export/latex.phtml', array(
     'decisions' => $decisionList
 ));
