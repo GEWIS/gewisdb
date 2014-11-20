@@ -97,7 +97,7 @@ class Module
                 'database_form_installationfunction' => function ($sm) {
                     $form = new \Database\Form\InstallationFunction(
                     );
-                    $form->setHydrator($sm->get('database_hydrator_install'));
+                    $form->setHydrator($sm->get('database_hydrator_member'));
                     return $form;
                 },
                 'database_form_install' => function ($sm) {

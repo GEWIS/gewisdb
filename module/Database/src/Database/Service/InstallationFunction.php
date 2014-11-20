@@ -4,6 +4,8 @@ namespace Database\Service;
 
 use Application\Service\AbstractService;
 
+use Database\Model\InstallationFunction as FunctionModel;
+
 class InstallationFunction extends AbstractService
 {
 
@@ -15,6 +17,33 @@ class InstallationFunction extends AbstractService
     public function getAllFunctions()
     {
         return $this->getFunctionMapper()->findAll();
+    }
+
+    /**
+     * Add a function.
+     *
+     * @param $data POST data.
+     *
+     * @return boolean if succeeded
+     */
+    public function addFunction($data)
+    {
+        $form = $this->getFunctionForm();
+
+        $form->setData($data);
+        $form->bind(new FunctionModel());
+
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        $function = $form->getData();
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('function' => $function));
+        $this->getFunctionMapper()->persist($function);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('function' => $function));
+
+        return true;
     }
 
     /**
