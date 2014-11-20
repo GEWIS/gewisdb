@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *  "budget"="Database\Model\SubDecision\Budget",
  *  "reckoning"="Database\Model\SubDecision\Reckoning",
  *  "other"="Database\Model\SubDecision\Other",
+ *  "destroy"="Database\Model\SubDecision\Destroy",
  *  "foundationreference"="Database\Model\SubDecision\FoundationReference"
  * })
  */

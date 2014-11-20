@@ -60,11 +60,18 @@ class Decision
     protected $number;
 
     /**
-     * Subdecisions
+     * Subdecisions.
      *
      * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision", cascade={"persist", "remove"})
      */
     protected $subdecisions;
+
+    /**
+     * Destroyed by.
+     *
+     * @ORM\OneToOne(targetEntity="\Database\Model\SubDecision\Destroy", mappedBy="target")
+     */
+    protected $destroyedby;
 
     /**
      * Set the meeting.
