@@ -423,32 +423,31 @@ class Meeting extends AbstractService
     {
         switch (strtolower($function)) {
         case 'voorzitter':
-            return SubDecision\Installation::FUNC_CHAIRMAN;
+            return 'Voorzitter';
             break;
         case 'secretaris':
-            return SubDecision\Installation::FUNC_SECRETARY;
+            return 'Secretaris';
             break;
         case 'penningmeester':
-            return SubDecision\Installation::FUNC_TREASURER;
+            return 'Penningmeester';
             break;
         case 'vice-voorzitter':
-            return SubDecision\Installation::FUNC_VICE_CHAIRMAN;
+            return 'Vice-Voorzitter';
             break;
         case 'pr-functionaris':
-            return SubDecision\Installation::FUNC_PR_OFFICER;
+            return 'PR-Functionaris';
             break;
         case 'onderwijs commissaris':
-            return SubDecision\Installation::FUNC_EDUCATION_OFFICER;
+            return 'Onderwijscommissaris';
             break;
         case 'lid':
-            return SubDecision\Installation::FUNC_MEMBER;
+            return 'Lid';
             break;
-        // TODO: determine what to do with these
         case 'inkoper':
-            return SubDecision\Installation::FUNC_MEMBER;
+            return 'Inkoper';
             break;
         case 'tafelvoetbalcoordinator':
-            return SubDecision\Installation::FUNC_MEMBER;
+            return 'Tafelvoetbalcoordinator';
             break;
         }
     }
