@@ -60,7 +60,7 @@ class Discharge extends SubDecision
     public function getContent()
     {
         $member = $this->getInstallation()->getMember()->getFullName();
-        $function = $this->getInstallation()->getDutchFunction();
+        $function = $this->getInstallation()->getFunction();
         $organ = $this->getInstallation()->getFoundation()->getAbbr();
 
         $text = $member . ' wordt gedechargeerd als ' . $function;
