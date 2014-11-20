@@ -30,9 +30,9 @@ class Installation extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'in_array',
+                        'name' => 'string_length',
                         'options' => array(
-                            'haystack' => InstallationModel::getFunctions()
+                            'min' => 2
                         )
                     )
                 )
