@@ -25,16 +25,6 @@ class Installation extends FoundationReference
     /**
      * Function given.
      *
-     * Can only be one of:
-     * - chairman
-     * - secretary
-     * - treasurer
-     * - vice-chairman
-     * - pr-officer
-     * - education-officer
-     *
-     * @todo Determine values of this for historical reasons
-     *
      * @ORM\Column(type="string")
      */
     protected $function;
@@ -56,24 +46,6 @@ class Installation extends FoundationReference
 
 
     /**
-     * Get available functions.
-     *
-     * @return array
-     */
-    public static function getFunctions()
-    {
-        return array(
-            self::FUNC_MEMBER,
-            self::FUNC_CHAIRMAN,
-            self::FUNC_SECRETARY,
-            self::FUNC_TREASURER,
-            self::FUNC_VICE_CHAIRMAN,
-            self::FUNC_PR_OFFICER,
-            self::FUNC_EDUCATION_OFFICER
-        );
-    }
-
-    /**
      * Get the function.
      *
      * @return string
@@ -87,14 +59,9 @@ class Installation extends FoundationReference
      * Set the function.
      *
      * @param string $function
-     *
-     * @throws \IllegalArgumentException when a nonexisting function is given.
      */
     public function setFunction($function)
     {
-        if (!in_array($function, self::getFunctions())) {
-            throw new \InvalidArgumentException("Nonexisting function '$function' given.");
-        }
         $this->function = $function;
     }
 
