@@ -73,6 +73,9 @@ if (getIsActive($this, array('database', 'member', 'subscribe')) == '') {
                         <li<?= getIsActive($this, array('database', 'member')) ?>><a href="<?= $this->url('member') ?>">Leden</a></li>
                         <li<?= getIsActive($this, array('database', 'export')) ?>><a href="<?= $this->url('export') ?>">Export</a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li<?= getIsActive($this, array('database', 'settings')) ?>><a href="<?= $this->url('settings') ?>">Settings</a></li>
+                    </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
