@@ -443,14 +443,12 @@ $submit->setAttribute('class', 'btn btn-primary');
       <div class="modal-body">
         <div class="form-group">
             <label for="function">Functie van <span class="name"></span></label>
-            <select name="function" class="form-control">
-                <option value="chairman">chairman</option>
-                <option value="secretary">secretary</option>
-                <option value="treasurer">treasurer</option>
-                <option value="vice-chairman">vice-chairman</option>
-                <option value="pr-officer">pr-officer</option>
-                <option value="education-officer">education-officer</option>
-            </select>
+            <?php
+            $element = $memberfunction->get('function');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', 'Functienaam');
+            ?>
+            <?= $this->formSelect($element) ?>
         </div>
       </div>
       <div class="modal-footer">

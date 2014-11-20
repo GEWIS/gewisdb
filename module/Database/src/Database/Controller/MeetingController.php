@@ -73,7 +73,8 @@ class MeetingController extends AbstractActionController
             'meeting' => $meeting,
             'point' => $point,
             'decision' => $decision,
-            'forms' => $this->getDecisionForms($meeting, $point, $decision)
+            'forms' => $this->getDecisionForms($meeting, $point, $decision),
+            'memberfunction' => $this->getServiceLocator()->get('database_form_fieldset_memberfunction')
         ));
     }
 

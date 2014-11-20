@@ -46,7 +46,8 @@ function showType($type)
     </div>
     <div class="tab-pane" id="installatie">
     <?= $this->partial('database/meeting/installform', array(
-        'form' => $forms['install']
+        'form' => $forms['install'],
+        'memberfunction' => $memberfunction
     )); ?>
     </div>
     <div class="tab-pane" id="overig">
