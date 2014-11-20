@@ -52,7 +52,9 @@ $categories = array(
 );
 // first we do some preprocessing, by putting everything in categories
 foreach ($data as $decision) {
-    $categories[determineCategory($decision)][] = $decision;
+    if (count($decision->getSubdecisions()) > 0) {
+        $categories[determineCategory($decision)][] = $decision;
+    }
 }
 ob_start();
 ?>
