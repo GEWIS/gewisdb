@@ -18,6 +18,16 @@ class InstallationFunction extends AbstractService
     }
 
     /**
+     * Get the function form.
+     *
+     * @return \Database\Form\InstallationFunction
+     */
+    public function getFunctionForm()
+    {
+        return $this->getServiceManager()->get('database_form_installationfunction');
+    }
+
+    /**
      * Get the installation function mapper.
      *
      * @return \Database\Mapper\InstallationFunction

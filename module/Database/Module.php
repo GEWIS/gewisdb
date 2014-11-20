@@ -94,6 +94,12 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_budget'));
                     return $form;
                 },
+                'database_form_installationfunction' => function ($sm) {
+                    $form = new \Database\Form\InstallationFunction(
+                    );
+                    $form->setHydrator($sm->get('database_hydrator_install'));
+                    return $form;
+                },
                 'database_form_install' => function ($sm) {
                     $form = new \Database\Form\Install(
                         $sm->get('database_form_fieldset_meeting'),

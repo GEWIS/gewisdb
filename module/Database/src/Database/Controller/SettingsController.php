@@ -24,7 +24,8 @@ class SettingsController extends AbstractActionController
     public function functionAction()
     {
         return new ViewModel(array(
-            'functions' => $this->getFunctionService()->getAllFunctions()
+            'functions' => $this->getFunctionService()->getAllFunctions(),
+            'form' => $this->getFunctionService()->getFunctionForm()
         ));
     }
 
