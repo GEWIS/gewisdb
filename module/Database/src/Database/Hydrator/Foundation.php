@@ -37,11 +37,11 @@ class Foundation extends AbstractDecision
         foreach ($data['members'] as $install) {
             // if an installation has a different function than 'member'
             // also add a member installation
-            if ($install->function != 'member') {
+            if ($install->function != 'Lid') {
                 $installation = new InstallationDecision();
                 $installation->setNumber($num++);
                 $installation->setFoundation($foundation);
-                $installation->setFunction('member');
+                $installation->setFunction('Lid');
                 $installation->setMember($install->member);
                 $installation->setDecision($decision);
             }

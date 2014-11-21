@@ -166,7 +166,18 @@ class Module
                 'database_form_fieldset_memberfunction' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\MemberFunction(
                         $sm->get('database_form_fieldset_member'),
-                        $sm->get('database_service_installationfunction')
+                        $sm->get('database_service_installationfunction'),
+                        true
+                    );
+                    $fieldset->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+                    $fieldset->setObject(new \stdClass());
+                    return $fieldset;
+                },
+                'database_form_fieldset_memberfunction_nomember' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\MemberFunction(
+                        $sm->get('database_form_fieldset_member'),
+                        $sm->get('database_service_installationfunction'),
+                        false
                     );
                     $fieldset->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
                     $fieldset->setObject(new \stdClass());

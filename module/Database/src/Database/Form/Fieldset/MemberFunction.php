@@ -9,7 +9,7 @@ use Database\Service\InstallationFunction as FunctionService;
 class MemberFunction extends Fieldset
 {
 
-    public function __construct(Member $member, FunctionService $service)
+    public function __construct(Member $member, FunctionService $service, $withmember = false)
     {
         parent::__construct('member_function');
 
@@ -20,14 +20,18 @@ class MemberFunction extends Fieldset
             'type' => 'select',
             'options' => array(
                 'label' => 'Functie',
-                'value_options' => $this->getValueOptions($service)
+                'value_options' => $this->getValueOptions($service, $withmember)
             )
         ));
     }
 
-    protected function getValueOptions(FunctionService $service)
+    protected function getValueOptions(FunctionService $service, $withmember)
     {
         $array = array();
+
+        if ($withmember) {
+            $array['Lid'] = 'Lid';
+        }
 
         foreach ($service->getAllFunctions() as $function) {
             $array[$function->getName()] = $function->getName();
