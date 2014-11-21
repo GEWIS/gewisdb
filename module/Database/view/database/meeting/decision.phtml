@@ -23,6 +23,7 @@ function showType($type)
     <li><a href="#oprichting" data-toggle="tab">Oprichting</a></li>
     <li><a href="#opheffing" data-toggle="tab">Opheffing</a></li>
     <li><a href="#installatie" data-toggle="tab">Installatie / Decharge</a></li>
+    <li><a href="#vernietig" data-toggle="tab">Vernietig besluit</a></li>
     <li><a href="#overig" data-toggle="tab">Overig</a></li>
 </ul>
 
@@ -48,6 +49,11 @@ function showType($type)
     <?= $this->partial('database/meeting/installform', array(
         'form' => $forms['install'],
         'memberfunction' => $memberfunction
+    )); ?>
+    </div>
+    <div class="tab-pane" id="vernietig">
+    <?= $this->partial('database/meeting/destroyform', array(
+        'form' => $forms['destroy'],
     )); ?>
     </div>
     <div class="tab-pane" id="overig">

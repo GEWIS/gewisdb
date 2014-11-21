@@ -93,6 +93,7 @@ class MeetingController extends AbstractActionController
             'budget' => $this->getMeetingService()->getBudgetForm(),
             'foundation' => $this->getMeetingService()->getFoundationForm(),
             'abolish' => $this->getMeetingService()->getAbolishForm(),
+            'destroy' => $this->getMeetingService()->getDestroyForm(),
             'install' => $this->getMeetingService()->getInstallForm(),
             'other' => $this->getMeetingService()->getOtherForm()
         );

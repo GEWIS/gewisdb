@@ -408,6 +408,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get the destroy form.
+     *
+     * @return \Database\Form\Destroy
+     */
+    public function getDestroyForm()
+    {
+        return $this->getServiceManager()->get('database_form_destroy');
+    }
+
+    /**
      * Get foundation form.
      *
      * @return \Database\Form\Foundation

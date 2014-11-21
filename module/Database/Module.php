@@ -123,6 +123,14 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_abolish'));
                     return $form;
                 },
+                'database_form_destroy' => function ($sm) {
+                    $form = new \Database\Form\Destroy(
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_decision')
+                    );
+                    //$form->setHydrator($sm->get('database_hydrator_abolish'));
+                    return $form;
+                },
                 'database_form_foundation' => function ($sm) {
                     $form = new \Database\Form\Foundation(
                         $sm->get('database_form_fieldset_meeting'),
@@ -141,6 +149,12 @@ class Module
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
                     $fieldset->setObject(new \Database\Model\SubDecision\Installation());
+                    return $fieldset;
+                },
+                'database_form_fieldset_decision' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\Decision();
+                    $fieldset->setHydrator($sm->get('database_hydrator_decision'));
+                    $fieldset->setObject(new \Database\Model\SubDecision\Foundation());
                     return $fieldset;
                 },
                 'database_form_fieldset_installation' => function ($sm) {
@@ -205,6 +219,11 @@ class Module
                     );
                 },
                 'database_hydrator_subdecision' => function ($sm) {
+                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_hydrator_decision' => function ($sm) {
                     return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );

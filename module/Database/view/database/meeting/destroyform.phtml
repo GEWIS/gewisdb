@@ -1,0 +1,62 @@
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'destroy')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+?>
+<?php /* first do hidden elements */ ?>
+<?php
+$fs = $form->get('meeting')
+?>
+<?= $this->formHidden($fs->get('type')) ?>
+<?= $this->formHidden($fs->get('number')) ?>
+<?= $this->formHidden($form->get('point')) ?>
+<?= $this->formHidden($form->get('decision')) ?>
+<?php
+$fs = $form->get('decision');
+?>
+<?php
+$element = $fs->get('meeting_type');
+$element->setAttribute('id', 'destroy-meeting-type');
+?>
+<?= $this->formHidden($element) ?>
+<?php
+$element = $fs->get('meeting_number');
+$element->setAttribute('id', 'destroy-meeting-number');
+?>
+<?= $this->formHidden($element) ?>
+<?php
+$element = $fs->get('point');
+$element->setAttribute('id', 'destroy-decision-point');
+?>
+<?= $this->formHidden($element) ?>
+<?php
+$element = $fs->get('number');
+$element->setAttribute('id', 'destroy-number');
+?>
+<?= $this->formHidden($element) ?>
+<div class="form-group">
+<?php
+$element = $form->get('name');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('id', 'destroy-organ');
+$element->setAttribute('placeholder', 'Besluit');
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+    <input type="hidden" class="organ-decision">
+</div>
+
+<?php
+$submit = $form->get('submit');
+$submit->setLabel('Vernietig besluit');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+
+<?= $this->form()->closeTag(); ?>
