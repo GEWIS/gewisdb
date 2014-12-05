@@ -6,7 +6,8 @@ $(document).ready(function() {
         source: function(rq, response) {
             $.ajax({
                 dataType: 'json',
-                url: '<?= $this->url('meeting/search') ?>',
+                url: '<?= $this->url('meeting/search') ?>?q=' + rq.term,
+                context: document.body
             }).done(function(data) {
                 var ret = [];
                 $.each(data.json, function(idx, decision) {
