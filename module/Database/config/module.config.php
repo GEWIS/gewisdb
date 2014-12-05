@@ -41,7 +41,7 @@ return array(
                                 'options' => array(
                                     'route' => '/:type/:number/:point/:decision',
                                     'constraints' => array(
-                                        'type' => 'av|bv|vv|virt',
+                                        'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*'
@@ -53,7 +53,7 @@ return array(
                                 'options' => array(
                                     'route' => '/delete/:type/:number/:point/:decision',
                                     'constraints' => array(
-                                        'type' => 'av|bv|vv|virt',
+                                        'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*'
@@ -70,7 +70,7 @@ return array(
                         'options' => array(
                             'route' => '/:type/:number',
                             'constraints' => array(
-                                'type' => 'av|bv|vv|virt',
+                                'type' => 'AV|BV|VV|Virt',
                                 'number' => '\-?[0-9]*'
                             ),
                             'defaults' => array(
@@ -127,7 +127,7 @@ return array(
                                 'action' => 'info'
                             ),
                             'constraints' => array(
-                                'type' => 'av|bv|vv|virt',
+                                'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
@@ -143,7 +143,7 @@ return array(
                                 'action' => 'view'
                             ),
                             'constraints' => array(
-                                'type' => 'av|bv|vv|virt',
+                                'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',

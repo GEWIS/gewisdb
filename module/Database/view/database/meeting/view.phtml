@@ -42,21 +42,8 @@ $(document).ready(function () {
 </script>
 <?php
 use Database\Model\Meeting;
-function showType($type)
-{
-    switch ($type) {
-    case Meeting::TYPE_BV:
-        return 'BV';
-    case Meeting::TYPE_AV:
-        return 'AV';
-    case Meeting::TYPE_VV:
-        return 'VV';
-    case Meeting::TYPE_VIRT:
-        return 'Virt';
-    }
-}
 ?>
-    <h1><?= showType($meeting->getType()) ?> <?= $meeting->getNumber() ?>
+    <h1><?= $meeting->getType() ?> <?= $meeting->getNumber() ?>
     <small><?= $this->dateFormat(
         $meeting->getDate(),
         \IntlDateFormatter::FULL,
