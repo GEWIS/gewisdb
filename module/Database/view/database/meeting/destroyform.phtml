@@ -13,6 +13,7 @@ $(document).ready(function() {
                 $.each(data.json, function(idx, decision) {
                     var num = decision.meeting_type + " " + decision.meeting_number;
                     num += "." + decision.decision_point + "." + decision.decision_number;
+                    decision.num = num;
                     var content = decision.content;
                     if (content.length > 100) {
                         content = content.substring(0, 100) + "...";
@@ -35,6 +36,9 @@ $(document).ready(function() {
             $('#destroy-meeting-number').val(decision.meeting_number);
             $('#destroy-decision-point').val(decision.decision_point);
             $('#destroy-number').val(decision.decision_number);
+            $('.destroy-decision-num').text(decision.num);
+            $('.destroy-decision-content').text(decision.content);
+            $('.destroy-decision-display').show();
         }
     });
 });
@@ -91,8 +95,11 @@ $element->setAttribute('placeholder', 'Besluit');
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
     <?= $this->formElementErrors($element) ?>
-    <input type="hidden" class="destroy-decision">
 </div>
+
+<p class="destroy-decision-display" style="display: none;">
+<strong>Besluit</strong> <strong class="destroy-decision-num"></strong>: <span class="destroy-decision-content"></span>
+</p>
 
 <?php
 $submit = $form->get('submit');
