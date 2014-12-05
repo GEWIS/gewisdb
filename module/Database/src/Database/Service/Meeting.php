@@ -87,6 +87,40 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Destroy decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function destroyDecision($data)
+    {
+        $form = $this->getDestroyForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            return array(
+                'type' => 'destroy',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'destroy',
+            'decision' => $decision
+        );
+    }
+
+    /**
      * Delete a decision.
      *
      * @param array $data

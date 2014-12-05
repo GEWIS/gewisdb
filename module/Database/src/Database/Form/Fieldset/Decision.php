@@ -14,7 +14,7 @@ class Decision extends Fieldset
 
     public function __construct()
     {
-        parent::__construct('decision');
+        parent::__construct('fdecision');
 
         $this->add(array(
             'name' => 'meeting_type',

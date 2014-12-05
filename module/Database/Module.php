@@ -60,6 +60,7 @@ class Module
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
                 'database_hydrator_install' => 'Database\Hydrator\Install',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
+                'database_hydrator_destroy' => 'Database\Hydrator\Destroy'
             ),
             'factories' => array(
                 'database_form_export' => function ($sm) {
@@ -128,7 +129,7 @@ class Module
                         $sm->get('database_form_fieldset_meeting'),
                         $sm->get('database_form_fieldset_decision')
                     );
-                    //$form->setHydrator($sm->get('database_hydrator_abolish'));
+                    $form->setHydrator($sm->get('database_hydrator_destroy'));
                     return $form;
                 },
                 'database_form_foundation' => function ($sm) {
@@ -154,7 +155,7 @@ class Module
                 'database_form_fieldset_decision' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\Decision();
                     $fieldset->setHydrator($sm->get('database_hydrator_decision'));
-                    $fieldset->setObject(new \Database\Model\SubDecision\Foundation());
+                    $fieldset->setObject(new \Database\Model\Decision());
                     return $fieldset;
                 },
                 'database_form_fieldset_installation' => function ($sm) {
