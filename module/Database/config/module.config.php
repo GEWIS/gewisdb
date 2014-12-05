@@ -86,6 +86,15 @@ return array(
                                 'action' => 'create'
                             )
                         )
+                    ),
+                    'search' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/search',
+                            'defaults' => array(
+                                'action' => 'search'
+                            )
+                        )
                     )
                 ),
             ),

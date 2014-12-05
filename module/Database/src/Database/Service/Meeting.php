@@ -350,6 +350,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Search for decisions by name.
+     * @param string $query
+     * @return array Decisions
+     */
+    public function decisionSearch($query)
+    {
+        return $this->getMeetingMapper()->searchDecision($query);
+    }
+
+    /**
      * Get the foundation of an organ.
      *
      * @param string $type

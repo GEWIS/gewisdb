@@ -4,6 +4,7 @@ namespace Database\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 
 class MeetingController extends AbstractActionController
 {
@@ -182,6 +183,28 @@ class MeetingController extends AbstractActionController
             'number' => $number,
             'point' => $point,
             'decision' => $decision
+        ));
+    }
+
+    /**
+     * Search action.
+     *
+     * Uses JSON to search for decisions.
+     */
+    public function searchAction()
+    {
+        $service = $this->getMeetingService();
+
+        $query = $this->params()->fromQuery('q');
+
+        $res = $service->decisionSearch($query);
+
+        $res = array_map(function ($decision) {
+            return $decision->toArray();
+        }, $res);
+
+        return new JsonModel(array(
+            'json' => $res
         ));
     }
 

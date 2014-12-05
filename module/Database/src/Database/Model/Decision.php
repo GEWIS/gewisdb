@@ -187,4 +187,25 @@ class Decision
             $this->addSubdecision($subdecision);
         }
     }
+
+    /**
+     * Transform into an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $content = array();
+        foreach ($this->getSubdecisions() as $subdecision) {
+            $content[] = $subdecision->getContent();
+        }
+        $content = implode(' ', $content);
+        return array(
+            'meeting_type' => $this->getMeeting()->getType(),
+            'meeting_number' => $this->getMeeting()->getNumber(),
+            'decision_point' => $this->getPoint(),
+            'decision_number' => $this->getNumber(),
+            'content' => $content
+        );
+    }
 }

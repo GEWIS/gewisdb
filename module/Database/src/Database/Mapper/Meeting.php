@@ -156,6 +156,42 @@ class Meeting
     }
 
     /**
+     * Search for a decision.
+     *
+     * @param string $query
+     *
+     * @return array of decisions.
+     */
+    public function searchDecision($query)
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $fields = array();
+        $fields[] = 'LOWER(d.meeting_type)';
+        $fields[] = "' '";
+        $fields[] = 'd.meeting_number';
+        $fields[] = "'.'";
+        $fields[] = 'd.point';
+        $fields[] = "'.'";
+        $fields[] = 'd.number';
+        $fields[] = "' '";
+        $fields = implode(', ', $fields);
+        $fields = "CONCAT($fields)";
+
+
+        $qb->select('d, s, m')
+            ->from('Database\Model\Decision', 'd')
+            ->where("$fields LIKE :search")
+            ->leftJoin('d.subdecisions', 's')
+            ->innerJoin('d.meeting', 'm')
+            ->orderBy('s.number');
+
+        $qb->setParameter(':search', '%' . strtolower($query) . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Delete a decision.
      *
      * @param string $type
