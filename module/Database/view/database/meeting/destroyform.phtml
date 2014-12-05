@@ -1,3 +1,40 @@
+<script>
+$(document).ready(function() {
+    $('#destroy-decision').autocomplete({
+        minLength: 2,
+        delay: 0,
+        source: function(rq, response) {
+            $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('meeting/search') ?>',
+            }).done(function(data) {
+                var ret = [];
+                $.each(data.json, function(idx, decision) {
+                    var num = decision.meeting_type + " " + decision.meeting_number;
+                    num += "." + decision.decision_point + "." + decision.decision_number;
+                    var content = decision.content;
+                    if (content.length > 100) {
+                        content = content.substring(0, 100) + "...";
+                    }
+                    var result = num + " " + content;
+
+                    ret.push({
+                        label: result,
+                        value: num,
+                        id: num
+                    });
+                })
+
+                response(ret);
+            });
+        },
+        select: function(event, ui) {
+            // todo
+        }
+    });
+});
+
+</script>
 <?php
 $form->prepare();
 
@@ -43,13 +80,13 @@ $element->setAttribute('id', 'destroy-number');
 <?php
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('id', 'destroy-organ');
+$element->setAttribute('id', 'destroy-decision');
 $element->setAttribute('placeholder', 'Besluit');
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
     <?= $this->formElementErrors($element) ?>
-    <input type="hidden" class="organ-decision">
+    <input type="hidden" class="destroy-decision">
 </div>
 
 <?php
