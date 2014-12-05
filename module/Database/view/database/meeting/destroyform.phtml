@@ -22,7 +22,7 @@ $(document).ready(function() {
                     ret.push({
                         label: result,
                         value: num,
-                        id: num
+                        id: decision
                     });
                 })
 
@@ -30,7 +30,11 @@ $(document).ready(function() {
             });
         },
         select: function(event, ui) {
-            // todo
+            var decision = ui.item.id;
+            $('#destroy-meeting-type').val(decision.meeting_type);
+            $('#destroy-meeting-number').val(decision.meeting_number);
+            $('#destroy-decision-point').val(decision.decision_point);
+            $('#destroy-number').val(decision.decision_number);
         }
     });
 });
