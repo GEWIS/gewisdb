@@ -130,6 +130,20 @@ class Organ
             ->join('o.decision', 'd')
             ->join('d.meeting', 'm');
 
+        // destroyed foundation decisions
+        $qbd = $this->em->createQueryBuilder();
+        $qbd->select('b')
+            ->from('Database\Model\SubDecision\Destroy', 'b')
+            ->join('b.target', 'y')
+            ->where('y.meeting_type = o.meeting_type')
+            ->andWhere('y.meeting_number = o.meeting_number')
+            ->andWhere('y.point = o.decision_point')
+            ->andWhere('y.number = o.decision_number');
+
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbd->getDql())
+        ));
+
         if (!$includeAbrogated) {
             // we want to leave out organs that have been abrogated
             $qbn = $this->em->createQueryBuilder();
@@ -141,6 +155,21 @@ class Organ
                 ->andWhere('x.decision_point = o.decision_point')
                 ->andWhere('x.decision_number = o.decision_number')
                 ->andWhere('x.number = o.number');
+
+            // leave out destroyed abrogation decisions
+            $qbnd = $this->em->createQueryBuilder();
+            $qbnd->select('c')
+                ->from('Database\Model\SubDecision\Destroy', 'c')
+                ->join('c.target', 'z')
+                ->where('z.meeting_type = a.meeting_type')
+                ->andWhere('z.meeting_number = a.meeting_number')
+                ->andWhere('z.point = a.decision_point')
+                ->andWhere('z.number = a.decision_number');
+
+            $qbn->andWhere($qbn->expr()->not(
+                $qbn->expr()->exists($qbnd->getDql())
+            ));
+
             // add the subexpression
             $qb->andWhere($qb->expr()->not(
                 $qb->expr()->exists(
