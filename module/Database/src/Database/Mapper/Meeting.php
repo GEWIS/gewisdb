@@ -195,6 +195,7 @@ class Meeting
                 ->from('Database\Model\SubDecision\Destroy', 'a')
                 ->join('a.target', 'x')
                 ->where('x.meeting_type = d.meeting_type')
+                ->andWhere('x.meeting_number = d.meeting_number')
                 ->andWhere('x.point = d.point')
                 ->andWhere('x.number = d.number');
             $qb->andWhere($qb->expr()->not(
