@@ -124,7 +124,7 @@ class Meeting
     }
 
     /**
-     * Delete a decision.
+     * Find a decision.
      *
      * @param string $type
      * @param int $number
@@ -159,10 +159,12 @@ class Meeting
      * Search for a decision.
      *
      * @param string $query
+     * @param bool $includeDestroyed If destroyed decisions should be returned
+     *        (default: false)
      *
      * @return array of decisions.
      */
-    public function searchDecision($query)
+    public function searchDecision($query, $includeDestroyed = false)
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -185,6 +187,22 @@ class Meeting
             ->leftJoin('d.subdecisions', 's')
             ->innerJoin('d.meeting', 'm')
             ->orderBy('s.number');
+
+        if (!$includeDestroyed) {
+            // we want to leave out decisions that have been destroyed
+            $qbn = $this->em->createQueryBuilder();
+            $qbn->select('a')
+                ->from('Database\Model\SubDecision\Destroy', 'a')
+                ->join('a.target', 'x')
+                ->where('x.meeting_type = d.meeting_type')
+                ->andWhere('x.point = d.point')
+                ->andWhere('x.number = d.number');
+            $qb->andWhere($qb->expr()->not(
+                $qb->expr()->exists(
+                    $qbn->getDql()
+                )
+            ));
+        }
 
         $qb->setParameter(':search', '%' . strtolower($query) . '%');
 
