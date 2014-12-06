@@ -215,7 +215,8 @@ class Module
                     );
                 },
                 'database_hydrator_meeting' => function ($sm) {
-                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                    // uses 'fixed' DoctrineObject
+                    return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );
                 },
