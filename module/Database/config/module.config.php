@@ -222,6 +222,17 @@ return array(
                     ),
                 ),
             ),
+            'query' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/query',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'Query',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
@@ -230,6 +241,7 @@ return array(
             'Database\Controller\Member' => 'Database\Controller\MemberController',
             'Database\Controller\Organ' => 'Database\Controller\OrganController',
             'Database\Controller\Export' => 'Database\Controller\ExportController',
+            'Database\Controller\Query' => 'Database\Controller\QueryController',
             'Database\Controller\Settings' => 'Database\Controller\SettingsController',
         )
     ),

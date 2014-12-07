@@ -1,0 +1,24 @@
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('export'));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+?>
+<?php
+$element = $form->get('query');
+$element->setAttribute('class', 'form-control');
+?>
+<?= $this->formLabel($element); ?>
+<?= $this->formTextarea($element) ?>
+<?= $this->formElementErrors($element) ?>
+
+<?php
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+<?= $this->form()->closeTag() ?>

@@ -54,13 +54,15 @@ class Module
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
                 'database_service_event' => 'Database\Service\Event',
+                'database_service_query' => 'Database\Service\Query',
                 'database_service_installationfunction' => 'Database\Service\InstallationFunction',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
                 'database_hydrator_abolish' => 'Database\Hydrator\Abolish',
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
                 'database_hydrator_install' => 'Database\Hydrator\Install',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
-                'database_hydrator_destroy' => 'Database\Hydrator\Destroy'
+                'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
+                'database_form_query' => 'Database\Form\Query'
             ),
             'factories' => array(
                 'database_form_export' => function ($sm) {
@@ -96,8 +98,7 @@ class Module
                     return $form;
                 },
                 'database_form_installationfunction' => function ($sm) {
-                    $form = new \Database\Form\InstallationFunction(
-                    );
+                    $form = new \Database\Form\InstallationFunction();
                     $form->setHydrator($sm->get('database_hydrator_member'));
                     return $form;
                 },
