@@ -57,7 +57,17 @@ use Database\Model\Meeting;
 <ul>
 <?php foreach ($meeting->getDecisions() as $decision): ?>
     <li>
-        Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:<br />
+        Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:
+        <?php if ($decision->isDestroyed()): ?>
+        <?php
+        $dec = $decision->getDestroyedBy()->getDecision();
+        $mt = $dec->getMeeting();
+        ?>
+        <strong>
+        (Vernietigd door Besluit <?= "{$mt->getType()} {$mt->getNumber()}.{$dec->getPoint()}.{$dec->getNumber()}" ?>)
+        </strong>
+        <?php endif; ?>
+        <br />
         <a href="<?= $this->url('meeting/decision/delete', array(
             'type' => $meeting->getType(),
             'number' => $meeting->getNumber(),

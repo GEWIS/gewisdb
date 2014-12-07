@@ -106,12 +106,13 @@ class Meeting
     {
         $qb = $this->em->createQueryBuilder();
 
-        $qb->select('m, d, s')
+        $qb->select('m, d, s, db')
             ->from('Database\Model\Meeting', 'm')
             ->where('m.type = :type')
             ->andWhere('m.number = :number')
             ->leftJoin('m.decisions', 'd')
             ->leftJoin('d.subdecisions', 's')
+            ->leftJoin('d.destroyedby', 'db')
             ->orderBy('d.point')
             ->addOrderBy('d.number')
             ->addOrderBy('s.number');
