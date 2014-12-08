@@ -5,6 +5,7 @@ namespace Database\Service;
 use Application\Service\AbstractService;
 
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\Query\QueryException;
 
 class Query extends AbstractService
 {
@@ -35,8 +36,16 @@ class Query extends AbstractService
          * TODO: properly put this in a mapper.....
          */
         $em = $this->getServiceManager()->get('database_doctrine_em');
-        $query = $em->createQuery($data['query']);
-        return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
+        try {
+            $query = $em->createQuery($data['query']);
+            return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
+        } catch (QueryException $e) {
+            $form->get('query')
+                ->setMessages(array(
+                    $e->getMessage()
+                ));
+            return null;
+        }
     }
 
     /**

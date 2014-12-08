@@ -14,8 +14,8 @@ $element = $form->get('query');
 $element->setAttribute('class', 'form-control');
 ?>
 <?= $this->formLabel($element); ?>
-<?= $this->formTextarea($element) ?>
 <?= $this->formElementErrors($element) ?>
+<?= $this->formTextarea($element) ?>
 </div>
 
 <?php
@@ -51,7 +51,6 @@ $submit->setAttribute('class', 'btn btn-primary');
     <?php endforeach; ?>
     </tbody>
 </table>
-<?php var_dump($result); ?>
 <?php else: ?>
     De query gaf geen resultaten.
 <?php endif; ?>
