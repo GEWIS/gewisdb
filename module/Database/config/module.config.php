@@ -263,6 +263,13 @@ return array(
             'orm_default' => array(
                 'drivers' => array(
                     'Database\Model' => 'database_entities'
+                ),
+            )
+        ),
+        'configuration' => array(
+            'orm_default' => array(
+                'entity_namespaces' => array(
+                    'db' => 'Database\Model'
                 )
             )
         )

@@ -15,6 +15,17 @@ class QueryController extends AbstractActionController
     {
         $service = $this->getQueryService();
 
+        if ($this->getRequest()->isPost()) {
+            $result = $service->execute($this->getRequest()->getPost());
+
+            if (null !== $result) {
+                return new ViewModel(array(
+                    'form' => $service->getQueryForm(),
+                    'result' => $result
+                ));
+            }
+        }
+
         return new ViewModel(array(
             'form' => $service->getQueryForm()
         ));
