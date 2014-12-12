@@ -40,7 +40,7 @@ class QueryController extends AbstractActionController
         $service = $this->getQueryService();
 
         if ($this->getRequest()->isPost()) {
-            $result = $service->execute($this->getRequest()->getPost());
+            $result = $service->export($this->getRequest()->getPost());
 
             if (null !== $result) {
                 // TODO: show result

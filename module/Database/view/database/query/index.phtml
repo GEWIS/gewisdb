@@ -42,6 +42,8 @@ $exportform->setAttribute('method', 'post');
 $exportform->setAttribute('role', 'form');
 $exportform->setAttribute('class', 'form-inline');
 
+$exportform->get('query')->setValue($form->get('query')->getValue());
+
 echo $this->form()->openTag($exportform);
 ?>
             <?= $this->formHidden($exportform->get('query')) ?>
