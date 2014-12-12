@@ -27,7 +27,39 @@ $submit->setAttribute('class', 'btn btn-primary');
 
 <?php if (isset($result)): ?>
 <hr />
-<h2>Query result</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Query result</h2>
+    </div>
+    <div class="col-md-6">
+        <br />
+<?php
+$exportform->prepare();
+
+$exportform->setAttribute('action', $this->url('query/default', array('action' => 'export')));
+$exportform->setAttribute('method', 'post');
+
+$exportform->setAttribute('role', 'form');
+$exportform->setAttribute('class', 'form-inline');
+
+echo $this->form()->openTag($exportform);
+?>
+            <?= $this->formHidden($exportform->get('query')) ?>
+            <div class="form-group">
+<?php
+$element = $exportform->get('type');
+$element->setAttribute('class', 'form-control')
+?>
+<?= $this->formElement($element) ?>
+            </div>
+<?php
+$submit = $exportform->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+<?= $this->form()->closeTag() ?>
+    </div>
+</div>
 <?php if (count($result) > 0): ?>
 <table class="table table-hover table-condensed">
     <thead>

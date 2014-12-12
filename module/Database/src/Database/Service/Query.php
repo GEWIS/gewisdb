@@ -49,11 +49,60 @@ class Query extends AbstractService
     }
 
     /**
+     * Export a query.
+     * @param array $data
+     * @return mixed result
+     */
+    public function export($data)
+    {
+        $form = $this->getQueryExportForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $data = $form->getData();
+
+        // TODO: transform to correct result
+
+        /**
+         * Yes, I know, this is ugly. I should actually make a mapper for this
+         * etc. etc. etc. But yes, I'm lazy. So I'm typing a bunch of text
+         * instead, to make up it. And yes, probably it would have been better
+         * to have made the mapper anyway. Still, I'm lazy.
+         *
+         * TODO: properly put this in a mapper.....
+         */
+        $em = $this->getServiceManager()->get('database_doctrine_em');
+        try {
+            $query = $em->createQuery($data['query']);
+            return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
+        } catch (QueryException $e) {
+            $form->get('query')
+                ->setMessages(array(
+                    $e->getMessage()
+                ));
+            return null;
+        }
+    }
+
+    /**
      * Get the query form.
      * @return \Database\Form\Query
      */
     public function getQueryForm()
     {
         return $this->getServiceManager()->get('database_form_query');
+    }
+
+    /**
+     * Get the query form.
+     * @return \Database\Form\QueryExport
+     */
+    public function getQueryExportForm()
+    {
+        return $this->getServiceManager()->get('database_form_queryexport');
     }
 }

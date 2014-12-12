@@ -62,7 +62,8 @@ class Module
                 'database_hydrator_install' => 'Database\Hydrator\Install',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
                 'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
-                'database_form_query' => 'Database\Form\Query'
+                'database_form_query' => 'Database\Form\Query',
+                'database_form_queryexport' => 'Database\Form\QueryExport',
             ),
             'factories' => array(
                 'database_form_export' => function ($sm) {

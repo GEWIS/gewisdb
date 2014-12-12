@@ -21,6 +21,7 @@ class QueryController extends AbstractActionController
             if (null !== $result) {
                 return new ViewModel(array(
                     'form' => $service->getQueryForm(),
+                    'exportform' => $service->getQueryExportForm(),
                     'result' => $result
                 ));
             }
@@ -29,6 +30,23 @@ class QueryController extends AbstractActionController
         return new ViewModel(array(
             'form' => $service->getQueryForm()
         ));
+    }
+
+    /**
+     * Export action.
+     */
+    public function exportAction()
+    {
+        $service = $this->getQueryService();
+
+        if ($this->getRequest()->isPost()) {
+            $result = $service->execute($this->getRequest()->getPost());
+
+            if (null !== $result) {
+                // TODO: show result
+            }
+        }
+        return $this->redirect()->toRoute('query');
     }
 
     /**
