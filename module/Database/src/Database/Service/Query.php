@@ -65,8 +65,6 @@ class Query extends AbstractService
 
         $data = $form->getData();
 
-        // TODO: transform to correct result
-
         /**
          * Yes, I know, this is ugly. I should actually make a mapper for this
          * etc. etc. etc. But yes, I'm lazy. So I'm typing a bunch of text
@@ -78,13 +76,30 @@ class Query extends AbstractService
         $em = $this->getServiceManager()->get('database_doctrine_em');
         try {
             $query = $em->createQuery($data['query']);
-            return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
+            $result = $query->getResult(AbstractQuery::HYDRATE_SCALAR);
         } catch (QueryException $e) {
             $form->get('query')
                 ->setMessages(array(
                     $e->getMessage()
                 ));
             return null;
+        }
+
+        switch ($data['type']) {
+        case 'csvex':
+            $str = "";
+            foreach ($result as $row) {
+                $row = array_map(function($val) {
+                    if ($val instanceof \DateTime) {
+                        return '"' . $val->format('Y-m-d H:i:s') . '"';
+                    } else {
+                        return '"' . $val . '"';
+                    }
+                }, $row);
+                $str .= implode(',', $row) . "\n";
+            }
+            return $str;
+            break;
         }
     }
 
