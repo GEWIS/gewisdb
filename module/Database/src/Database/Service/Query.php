@@ -13,11 +13,16 @@ class Query extends AbstractService
     /**
      * Execute a query.
      * @param array $data
+     * @param boolean $export False by default
      * @return mixed result
      */
-    public function execute($data)
+    public function execute($data, $export = false)
     {
-        $form = $this->getQueryForm();
+        if ($export) {
+            $form = $this->getQueryExportForm();
+        } else {
+            $form = $this->getQueryForm();
+        }
 
         $form->setData($data);
 
@@ -45,61 +50,6 @@ class Query extends AbstractService
                     $e->getMessage()
                 ));
             return null;
-        }
-    }
-
-    /**
-     * Export a query.
-     * @param array $data
-     * @return mixed result
-     */
-    public function export($data)
-    {
-        $form = $this->getQueryExportForm();
-
-        $form->setData($data);
-
-        if (!$form->isValid()) {
-            return null;
-        }
-
-        $data = $form->getData();
-
-        /**
-         * Yes, I know, this is ugly. I should actually make a mapper for this
-         * etc. etc. etc. But yes, I'm lazy. So I'm typing a bunch of text
-         * instead, to make up it. And yes, probably it would have been better
-         * to have made the mapper anyway. Still, I'm lazy.
-         *
-         * TODO: properly put this in a mapper.....
-         */
-        $em = $this->getServiceManager()->get('database_doctrine_em');
-        try {
-            $query = $em->createQuery($data['query']);
-            $result = $query->getResult(AbstractQuery::HYDRATE_SCALAR);
-        } catch (QueryException $e) {
-            $form->get('query')
-                ->setMessages(array(
-                    $e->getMessage()
-                ));
-            return null;
-        }
-
-        switch ($data['type']) {
-        case 'csvex':
-            $str = "";
-            foreach ($result as $row) {
-                $row = array_map(function($val) {
-                    if ($val instanceof \DateTime) {
-                        return '"' . $val->format('Y-m-d H:i:s') . '"';
-                    } else {
-                        return '"' . $val . '"';
-                    }
-                }, $row);
-                $str .= implode(',', $row) . "\n";
-            }
-            return $str;
-            break;
         }
     }
 

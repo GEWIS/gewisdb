@@ -40,10 +40,15 @@ class QueryController extends AbstractActionController
         $service = $this->getQueryService();
 
         if ($this->getRequest()->isPost()) {
-            $result = $service->export($this->getRequest()->getPost());
+            $result = $service->execute($this->getRequest()->getPost(), true);
 
             if (null !== $result) {
-                // TODO: show result
+                $vm = new ViewModel(array(
+                    'result' => $result
+                ));
+                $vm->setTemplate('database/query/export');
+                $vm->setTerminal(true);
+                return $vm;
             }
         }
         return $this->redirect()->toRoute('query');

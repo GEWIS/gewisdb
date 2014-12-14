@@ -15,7 +15,7 @@ class QueryExport extends Query
             'type' => 'select',
             'options' => array(
                 'value_options' => array(
-                    'csvex' => 'CSV voor Excel'
+                    'csv' => 'CSV'
                 )
             )
         ));

@@ -1,0 +1,28 @@
+<?php
+$new = array();
+// preprocessing, render the DateTime objects
+foreach ($result as $row) {
+    $row = array_map(function($el) {
+        if ($el instanceof \DateTime) {
+            return $el->format('Y-m-d H:i:s');
+        } else {
+            return $el;
+        }
+    }, $row);
+    $new[] = $row;
+}
+
+// temporarily write csv to memory
+$mem = fopen('php://memory', 'w');
+
+foreach ($new as $line) {
+    fputcsv($mem, $line, ',');
+}
+
+rewind($mem);
+
+// send correct download headers
+header('Content-Type: application/csv');
+header('Content-Disposition: attachement; filename="query.csv"');
+
+fpassthru($mem);
