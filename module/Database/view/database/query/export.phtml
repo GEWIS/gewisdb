@@ -15,8 +15,10 @@ foreach ($result as $row) {
 // temporarily write csv to memory
 $mem = fopen('php://memory', 'w');
 
+fwrite($mem, "sep=;\n");
+
 foreach ($new as $line) {
-    fputcsv($mem, $line, ',');
+    fputcsv($mem, $line, ';');
 }
 
 rewind($mem);
