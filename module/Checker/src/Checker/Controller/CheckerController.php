@@ -16,6 +16,8 @@ class CheckerController extends AbstractActionController {
      */
     public function indexAction()
     {
-        \Zend\Debug\Debug::dump('test');
+        $service = $this->getServiceLocator()->get('checker_service_checker');
+        $service->check();
+
     }
 }

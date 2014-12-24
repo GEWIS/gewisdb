@@ -38,6 +38,17 @@ class Module
     public function getServiceConfig()
     {
         return array(
+            'invokables' => array(
+                'checker_service_checker' => 'Checker\Service\Checker',
+                'checker_service_organ' => 'Checker\Service\Organ'
+            ),
+            'factories' => array(
+                'checker_mapper_organ' => function ($sm) {
+                    return new \Checker\Mapper\Organ(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+            )
         );
     }
 }
