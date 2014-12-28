@@ -11,6 +11,16 @@ class Query extends AbstractService
 {
 
     /**
+     * Get all saved queries.
+     *
+     * @return array of SavedQuery's
+     */
+    public function getSavedQueries()
+    {
+        return $this->getQueryMapper()->findAll();
+    }
+
+    /**
      * Execute a query.
      * @param array $data
      * @param boolean $export False by default
@@ -51,6 +61,16 @@ class Query extends AbstractService
                 ));
             return null;
         }
+    }
+
+    /**
+     * Get the saved query mapper.
+     *
+     * @return \Database\Mapper\SavedQuery
+     */
+    public function getQueryMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_savedquery');
     }
 
     /**
