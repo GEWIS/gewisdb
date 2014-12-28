@@ -257,6 +257,11 @@ class Module
                         $sm->get('database_doctrine_em')
                     );
                 },
+                'database_mapper_savedquery' => function ($sm) {
+                    return new \Database\Mapper\savedquery(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
                 // fake 'alias' for entity manager, because doctrine uses an abstract factory
                 // and aliases don't work with abstract factories
                 'database_doctrine_em' => function ($sm) {
