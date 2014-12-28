@@ -1,4 +1,18 @@
 <?php
+// add codemirror
+$this->headLink()->appendStylesheet($this->basePath() . '/css/codemirror.css');
+$this->headScript()->appendFile($this->basePath() . '/js/codemirror-compressed.js');
+?>
+<script>
+$(document).ready(function() {
+    var editor = CodeMirror.fromTextArea($('#query-editor')[0], {
+        mode: 'text/x-sql',
+        lineNumbers: true
+    });
+});
+</script>
+<?php
+
 $form->prepare();
 
 $form->setAttribute('action', $this->url('query'));
@@ -12,6 +26,7 @@ echo $this->form()->openTag($form);
 <?php
 $element = $form->get('query');
 $element->setAttribute('class', 'form-control');
+$element->setAttribute('id', 'query-editor');
 ?>
 <?= $this->formLabel($element); ?>
 <?= $this->formElementErrors($element) ?>
