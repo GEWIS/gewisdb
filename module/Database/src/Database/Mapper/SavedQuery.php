@@ -57,7 +57,7 @@ class SavedQuery
      */
     public function getRepository()
     {
-        return $this->em->getRepository('Database\Model\QueryModel');
+        return $this->em->getRepository('Database\Model\SavedQuery');
     }
 
 }

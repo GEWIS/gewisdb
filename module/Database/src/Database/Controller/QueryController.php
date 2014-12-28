@@ -28,7 +28,8 @@ class QueryController extends AbstractActionController
         }
 
         return new ViewModel(array(
-            'form' => $service->getQueryForm()
+            'form' => $service->getQueryForm(),
+            'saved' => $service->getSavedQueries()
         ));
     }
 

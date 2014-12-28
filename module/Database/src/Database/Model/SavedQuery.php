@@ -31,7 +31,7 @@ class SavedQuery
     /**
      * The Saved Query.
      *
-     * @ORM\Column(type="text')
+     * @ORM\Column(type="text")
      */
     protected $query;
 

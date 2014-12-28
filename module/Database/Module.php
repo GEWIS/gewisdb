@@ -258,7 +258,7 @@ class Module
                     );
                 },
                 'database_mapper_savedquery' => function ($sm) {
-                    return new \Database\Mapper\savedquery(
+                    return new \Database\Mapper\SavedQuery(
                         $sm->get('database_doctrine_em')
                     );
                 },
