@@ -26,10 +26,10 @@ class Query extends Form
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => 'Execute'
+                'value' => 'Uitvoeren'
             )
         ));
-        $this->get('submit')->setLabel('Execute');
+        $this->get('submit')->setLabel('Uitvoeren');
     }
 
     /**

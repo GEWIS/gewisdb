@@ -7,6 +7,8 @@ use Application\Service\AbstractService;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query\QueryException;
 
+use Database\Model\SavedQuery;
+
 class Query extends AbstractService
 {
 
@@ -18,6 +20,28 @@ class Query extends AbstractService
     public function getSavedQueries()
     {
         return $this->getQueryMapper()->findAll();
+    }
+
+    /**
+     * Save a query.
+     * @param array $data
+     * @return mixed result
+     */
+    public function save($data)
+    {
+        $form = $this->getSavedQueryForm();
+
+        $form->bind(new SavedQuery());
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $data = $form->getData();
+
+        var_dump($data);
     }
 
     /**
@@ -80,6 +104,15 @@ class Query extends AbstractService
     public function getQueryForm()
     {
         return $this->getServiceManager()->get('database_form_query');
+    }
+
+    /**
+     * Get the query form.
+     * @return \Database\Form\SavedQuery
+     */
+    public function getSavedQueryForm()
+    {
+        return $this->getServiceManager()->get('database_form_querysave');
     }
 
     /**

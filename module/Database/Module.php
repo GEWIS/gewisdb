@@ -71,6 +71,11 @@ class Module
                         $sm->get('database_service_meeting')
                     );
                 },
+                'database_form_querysave' => function ($sm) {
+                    $form = new \Database\Form\QuerySave();
+                    $form->setHydrator($sm->get('database_hydrator_meeting'));
+                    return $form;
+                },
                 'database_form_member' => function ($sm) {
                     $form = new \Database\Form\Member(
                         $sm->get('database_form_fieldset_address')

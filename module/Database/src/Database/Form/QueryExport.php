@@ -21,6 +21,6 @@ class QueryExport extends Query
         ));
 
         $this->get('submit')->setAttribute('value', 'export');
-        $this->get('submit')->setLabel('Export');
+        $this->get('submit')->setLabel('Exporteer');
     }
 }

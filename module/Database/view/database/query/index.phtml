@@ -11,6 +11,7 @@ $(document).ready(function() {
     });
 });
 </script>
+<div class="row">
 <?php
 
 $form->prepare();
@@ -22,6 +23,7 @@ $form->setAttribute('role', 'form');
 
 echo $this->form()->openTag($form);
 ?>
+<div class="col-md-9">
 <div class="form-group">
 <?php
 $element = $form->get('query');
@@ -38,13 +40,32 @@ $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 ?>
 <?= $this->formButton($submit) ?>
-<?= $this->form()->closeTag() ?>
 
+
+<div class="pull-right form-inline">
+    <?php /* These are part of the QuerySave form */ ?>
+        <div class="form-group">
+        <input type="text" class="form-control input-small" name="name" placeholder="Naam">
+        </div>
+    <button class="btn btn-success" name="submit_save" type="submit"><span class="glyphicon glyphicon-plus"></span> Opslaan</button>
+</div>
+</div>
+<div class="col-md-3">
+<h3>Opgeslagen queries</h3>
+<ul>
+<?php foreach ($saved as $query): ?>
+    <li><?= $query->getName() ?></li>
+<?php endforeach; ?>
+</ul>
+
+</div>
+<?= $this->form()->closeTag() ?>
+</div>
 <?php if (isset($result)): ?>
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <h2>Query result</h2>
+        <h2>Query resultaat</h2>
     </div>
     <div class="col-md-6">
         <br />
