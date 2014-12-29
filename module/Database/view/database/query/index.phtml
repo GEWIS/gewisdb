@@ -54,7 +54,7 @@ $submit->setAttribute('class', 'btn btn-primary');
 <h3>Opgeslagen queries</h3>
 <ul>
 <?php foreach ($saved as $query): ?>
-    <li><?= $query->getName() ?></li>
+    <li><a href="<?= $this->url('query/show', array('query' => $query->getId())) ?>"><?= $query->getName() ?></a></li>
 <?php endforeach; ?>
 </ul>
 

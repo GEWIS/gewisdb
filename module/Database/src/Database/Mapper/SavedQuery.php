@@ -42,8 +42,18 @@ class SavedQuery
     }
 
     /**
+     * Find.
+     * @param string $id
+     * @return QueryModel
+     */
+    public function find($id)
+    {
+        return $this->getRepository()->find($id);
+    }
+
+    /**
      * Find all.
-     * @return array of FunctionModel's
+     * @return array of QueryModel's
      */
     public function findAll()
     {

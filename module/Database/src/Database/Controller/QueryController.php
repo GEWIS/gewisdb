@@ -39,6 +39,23 @@ class QueryController extends AbstractActionController
     }
 
     /**
+     * Show a saved query.
+     */
+    public function showAction()
+    {
+        $service = $this->getQueryService();
+
+        $viewmodel = new Viewmodel(array(
+            'form' => $service->getQueryForm(),
+            'saved' => $service->getSavedQueries(),
+            'exportform' => $service->getQueryExportForm(),
+            'result' => $service->executeSaved($this->params()->fromRoute('query'))
+        ));
+        $viewmodel->setTemplate('database/query/index');
+        return $viewmodel;
+    }
+
+    /**
      * Export action.
      */
     public function exportAction()

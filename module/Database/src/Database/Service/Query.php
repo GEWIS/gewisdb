@@ -19,7 +19,7 @@ class Query extends AbstractService
      */
     public function getSavedQueries()
     {
-        return $this->getQueryMapper()->findAll();
+        return $this->getSavedQueryMapper()->findAll();
     }
 
     /**
@@ -41,7 +41,23 @@ class Query extends AbstractService
 
         $data = $form->getData();
 
-        var_dump($data);
+        $mapper = $this->getSavedQueryMapper();
+
+        $mapper->persist($data);
+    }
+
+    /**
+     * Execute a saved query.
+     * @param string $id Query number to execute
+     * @return mixed result
+     */
+    public function executeSaved($id)
+    {
+        $query = $this->getSavedQueryMapper()->find($id);
+
+        return $this->execute(array(
+            'query' => $query->getQuery()
+        ));
     }
 
     /**
@@ -92,7 +108,7 @@ class Query extends AbstractService
      *
      * @return \Database\Mapper\SavedQuery
      */
-    public function getQueryMapper()
+    public function getSavedQueryMapper()
     {
         return $this->getServiceManager()->get('database_mapper_savedquery');
     }
