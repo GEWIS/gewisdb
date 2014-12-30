@@ -61,6 +61,6 @@ class Organ
             ->setParameter('meeting_number', $meetingNr);
 
         // TODO: Minus deleted organs
-        return $qb->getQuery()->getResult();d\Debug\Debug::dump($deletedOrgans);
+        return $qb->getQuery()->getResult();
     }
 }

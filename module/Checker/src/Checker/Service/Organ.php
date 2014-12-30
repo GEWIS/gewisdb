@@ -10,8 +10,19 @@ class Organ extends AbstractService
      */
     public function getAllOrgans($meeting) {
         $mapper = $this->getServiceManager()->get('checker_mapper_organ');
-        $createdOrgans = $mapper->getAllOrgansCreated($meeting);
-        $deletedOrgans = $mapper->getAllOrgansDeleted($meeting);
+        $createdOrgans = $this->transform($mapper->getAllOrgansCreated($meeting));
+        $deletedOrgans = $this->transform($mapper->getAllOrgansDeleted($meeting));
         return array_diff($createdOrgans, $deletedOrgans);
+    }
+
+    /**
+     * Extract the names of all organs
+     * @param array $a
+     */
+    private function transform(array &$a) {
+        foreach ($a as $key => &$value) {
+            $value = $value['name'];
+        }
+        return $a;
     }
 }

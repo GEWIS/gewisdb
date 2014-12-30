@@ -40,7 +40,8 @@ class Module
         return array(
             'invokables' => array(
                 'checker_service_checker' => 'Checker\Service\Checker',
-                'checker_service_organ' => 'Checker\Service\Organ'
+                'checker_service_organ' => 'Checker\Service\Organ',
+                'checker_service_installation' => 'Checker\Service\Installation'
             ),
             'factories' => array(
                 'checker_mapper_organ' => function ($sm) {
@@ -48,6 +49,11 @@ class Module
                         $sm->get('database_doctrine_em')
                     );
                 },
+                'checker_mapper_installation' => function ($sm) {
+                    return new \Checker\Mapper\Installation(
+                        $sm->get('database_doctrine_em')
+                    );
+                }
             )
         );
     }

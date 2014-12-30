@@ -12,7 +12,8 @@ use Application\Service\AbstractService;
 class Checker extends AbstractService {
 
     public function check() {
-        $this->checkMembersInNotExistingOrgans(2);
+        $messages = $this->checkMembersInNotExistingOrgans(2);
+        \Zend\Debug\Debug::dump($messages);
     }
 
     /**
@@ -24,8 +25,20 @@ class Checker extends AbstractService {
      */
     public function checkMembersInNotExistingOrgans($meeting)
     {
+        $errors = [];
         $organService = $this->getServiceManager()->get('checker_service_organ');
+        $installationService = $this->getServiceManager()->get('checker_service_installation');
         $organs = $organService->getAllOrgans($meeting);
-        \Zend\Debug\Debug::dump($organs);
+        $installations = $installationService->getAllMembers($meeting);
+
+        foreach ($installations as $installation) {
+            $organName = $installation->getFoundation()->toArray()['name'];
+            if (!in_array($organName, $organs,true)) {
+                $errors[] = 'Member ' . $installation->getMember()->toArray()['fullName'] .
+                    ' ('. $installation->getMember()->toArray()['lidnr'] . ')'
+                    . ' is still installed in ' . $organName . ' which does not exist anymore';
+            }
+        }
+        return $errors;
     }
 } 
