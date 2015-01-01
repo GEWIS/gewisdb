@@ -112,7 +112,7 @@ $submit->setAttribute('class', 'btn btn-primary');
         <tr>
         <?php foreach ($row as $col): ?>
             <?php if ($col instanceof \DateTime): ?>
-            <td><?= $col->format('Y-m-d H:i:s') ?></td>
+            <td><?= $col->format('Y-m-d') ?></td>
             <?php else: ?>
             <td><?= $col ?></td>
             <?php endif; ?>

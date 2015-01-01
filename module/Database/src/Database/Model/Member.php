@@ -130,6 +130,13 @@ class Member
     protected $addresses;
 
     /**
+     * Installations of this member.
+     *
+     * @ORM\OneToMany(targetEntity="Database\Model\SubDecision\Installation",mappedBy="member")
+     */
+    protected $installations;
+
+    /**
      * Static method to get available genders.
      *
      * @return array
