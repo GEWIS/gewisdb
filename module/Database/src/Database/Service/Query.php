@@ -83,6 +83,21 @@ class Query extends AbstractService
         $data = $form->getData();
 
         /**
+         * Yay. Making more excuses. I should create an InputFilter for this.
+         * However, I'm too lazy again.
+         *
+         * TODO: make an InputFilter for this
+         */
+        $q = '';
+        $arr = explode("\n", $data['query']);
+        foreach ($arr as $line) {
+            if (!preg_match('/^-- /i', $line)) {
+                $q .= $line . "\n";
+            }
+        }
+        $data['query'] = $q;
+
+        /**
          * Yes, I know, this is ugly. I should actually make a mapper for this
          * etc. etc. etc. But yes, I'm lazy. So I'm typing a bunch of text
          * instead, to make up it. And yes, probably it would have been better
