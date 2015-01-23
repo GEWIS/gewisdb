@@ -37,11 +37,10 @@ class Member extends AbstractService
         // by default, we only add ordinary members
         $member->setType(MemberModel::TYPE_ORDINARY);
 
-        // expiration date is in 5 years.
+        // changed on date
         $date = new \DateTime();
-        $date->add(new \DateInterval('P5Y'));
         $date->setTime(0, 0);
-        $member->setExpiration($date);
+        $member->setChangedOn($date);
 
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
