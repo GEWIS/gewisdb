@@ -1,0 +1,72 @@
+<?php
+use Database\Model\Member;
+?>
+<h1><?= $member->getFullName() ?></h1>
+<div class="row">
+<div class="col-md-6">
+    <table class="table table-bordered">
+        <tr>
+            <td>Lidnummer</td>
+            <td><?= $member->getLidnr() ?></td>
+        </tr>
+        <tr>
+            <td>Voorletters</td>
+            <td><?= $member->getInitials() ?></td>
+        </tr>
+        <tr>
+            <td>Voornaam</td>
+            <td><?= $member->getFirstName() ?></td>
+        </tr>
+        <tr>
+            <td>Tussenvoegsels</td>
+            <td><?= $member->getMiddleName() ?></td>
+        </tr>
+        <tr>
+            <td>Achternaam</td>
+            <td><?= $member->getLastName() ?></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><?= $member->getEmail() ?></td>
+        </tr>
+        <tr>
+            <td>Geboortedatum</td>
+            <td><?= $member->getBirth()->format('l j F Y') ?></td>
+        </tr>
+        <tr>
+            <td>Generatie</td>
+            <td><?= $member->getGeneration() ?></td>
+        </tr>
+        <tr>
+            <td>Type lid</td>
+            <td><?php
+switch ($member->getType()) {
+case Member::TYPE_ORDINARY:
+    echo 'Gewoon';
+    break;
+case Member::TYPE_PROLONGED:
+    echo 'Verlengd';
+    break;
+case Member::TYPE_EXTERNAL:
+    echo 'Extern';
+    break;
+case Member::TYPE_EXTRAORDINARY:
+    echo 'Buitengewoon';
+    break;
+case Member::TYPE_HONORARY:
+    echo 'Erelid';
+    break;
+}
+?></td>
+        </tr>
+        <tr>
+            <td>Laatste wijziging lidmaatshap</td>
+            <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
+        </tr>
+        <tr>
+            <td>Verloopdatum lidmaatschap</td>
+            <td><?= $member->getExpiration()->format('l j F Y') ?></td>
+        </tr>
+    </table>
+</div>
+</div>

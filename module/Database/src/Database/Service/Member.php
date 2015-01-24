@@ -50,6 +50,18 @@ class Member extends AbstractService
     }
 
     /**
+     * Get member info.
+     *
+     * @param int $id
+     *
+     * @return MemberModel
+     */
+    public function getMember($id)
+    {
+        return $this->getMemberMapper()->find($id);
+    }
+
+    /**
      * Search for a member.
      *
      * @param string $query

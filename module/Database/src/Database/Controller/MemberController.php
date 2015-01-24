@@ -65,6 +65,20 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Show action.
+     *
+     * Shows member information.
+     */
+    public function showAction()
+    {
+        $service = $this->getMemberService();
+
+        return new ViewModel(array(
+            'member' => $service->getMember($this->params()->fromRoute('id'))
+        ));
+    }
+
+    /**
      * Get the member service.
      *
      * @return \Database\Service\Member
