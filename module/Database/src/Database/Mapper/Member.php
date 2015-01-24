@@ -49,7 +49,9 @@ class Member
     }
 
     /**
-     * Find a member (by lidnr)
+     * Find a member (by lidnr).
+     *
+     * And calculate memberships.
      *
      * @param int $lidnr
      *
@@ -57,7 +59,60 @@ class Member
      */
     public function find($lidnr)
     {
-        return $this->getRepository()->find($lidnr);
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('m, r')
+            ->from('Database\Model\Member', 'm')
+            ->where('m.lidnr = :lidnr')
+            ->leftJoin('m.installations', 'r')
+            ->andWhere('r.function = \'Lid\'');
+
+        // discharges
+        $qbn = $this->em->createQueryBuilder();
+        $qbn->select('d')
+            ->from('Database\Model\SubDecision\Discharge', 'd')
+            ->join('d.installation', 'x')
+            ->where('x.meeting_type = r.meeting_type')
+            ->andWhere('x.meeting_number = r.meeting_number')
+            ->andWhere('x.decision_point = r.decision_point')
+            ->andWhere('x.decision_number = r.decision_number')
+            ->andWhere('x.number = r.number');
+
+        // destroyed discharge decisions
+        $qbnd = $this->em->createQueryBuilder();
+        $qbnd->select('b')
+            ->from('Database\Model\SubDecision\Destroy', 'b')
+            ->join('b.target', 'z')
+            ->where('z.meeting_type = d.meeting_type')
+            ->andWhere('z.meeting_number = d.meeting_number')
+            ->andWhere('z.point = d.decision_point')
+            ->andWhere('z.number = d.decision_number');
+
+        $qbn->andWhere($qbn->expr()->not(
+            $qbn->expr()->exists($qbnd->getDql())
+        ));
+
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbn->getDql())
+        ));
+
+        // destroyed installation decisions
+        $qbd = $this->em->createQueryBuilder();
+        $qbd->select('a')
+            ->from('Database\Model\SubDecision\Destroy', 'a')
+            ->join('a.target', 'y')
+            ->where('y.meeting_type = r.meeting_type')
+            ->andWhere('y.meeting_number = r.meeting_number')
+            ->andWhere('y.point = r.decision_point')
+            ->andWhere('y.number = r.decision_number');
+
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbd->getDql())
+        ));
+
+        $qb->setParameter(':lidnr', $lidnr);
+
+        return $qb->getQuery()->getSingleResult();
     }
 
     /**

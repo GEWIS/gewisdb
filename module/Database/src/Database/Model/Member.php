@@ -451,6 +451,16 @@ class Member
     }
 
     /**
+     * Get the installations.
+     *
+     * @return ArrayCollection
+     */
+    public function getInstallations()
+    {
+        return $this->installations;
+    }
+
+    /**
      * Convert to array.
      *
      * @return array
