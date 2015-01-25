@@ -175,6 +175,30 @@ return array(
                             'defaults' => array(
                                 'action' => 'show'
                             )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'address' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/edit/address/:type',
+                                    'constraints' => array(
+                                        'type' => 'home|student|mail'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'editAddress'
+                                    ),
+                                )
+                            ),
+                            'edit' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/edit',
+                                    'defaults' => array(
+                                        'action' => 'edit'
+                                    )
+                                )
+                            )
                         )
                     ),
                     'default' => array(

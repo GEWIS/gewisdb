@@ -69,6 +69,9 @@ case Member::TYPE_HONORARY:
             <td><?= $member->getExpiration()->format('l j F Y') ?></td>
         </tr>
     </table>
+    <a href="<?= $this->url('member/show/edit', array(
+    'id' => $member->getLidnr()
+)) ?>" class="btn btn-primary">Wijzig gegevens</a>
 </div>
 <div class="col-md-6">
 <h3>Adressen</h3>
@@ -85,7 +88,10 @@ case Address::TYPE_MAIL:
     echo 'Postadres';
     break;
 }
-?></h4>
+?> <a href="<?= $this->url('member/show/address', array(
+    'id' => $member->getLidnr(),
+    'type' => $address->getType()
+)) ?>" class="btn btn-primary btn-sm">Wijzig</a></h4>
 <table class="table table-bordered">
     <tr>
         <th>Land</th>
