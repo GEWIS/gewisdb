@@ -30,12 +30,9 @@
 <script>
 $(document).ready(function() {
     if (!Modernizr.inputtypes.date) {
-        $('input[type=date]').datepicker();
-        $('input[type=date]').datepicker(
-            'option',
-            'dateFormat',
-            'yy-mm-dd'
-        );
+        $('input[type=date]').datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
     }
 });
 </script>
