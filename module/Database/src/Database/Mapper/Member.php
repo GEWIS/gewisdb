@@ -65,7 +65,7 @@ class Member
             ->from('Database\Model\Member', 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.installations', 'r')
-            ->andWhere('r.function = \'Lid\'');
+            ->andWhere('(r.function = \'Lid\' OR r.function IS NULL)');
 
         // discharges
         $qbn = $this->em->createQueryBuilder();
