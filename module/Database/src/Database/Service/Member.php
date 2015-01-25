@@ -74,11 +74,19 @@ class Member extends AbstractService
     /**
      * Get the member edit form.
      *
-     * @return \Database\Form\MemberEdit
+     * @param int $lidnr
+     *
+     * @return array Array with \Database\Form\MemberEdit and MemberModel
      */
-    public function getMemberEditForm()
+    public function getMemberEditForm($lidnr)
     {
-        return $this->getServiceManager()->get('database_form_memberedit');
+        $form = $this->getServiceManager()->get('database_form_memberedit');
+        $member = $this->getMember($lidnr);
+        $form->bind($member);
+        return array(
+            'member' => $member,
+            'form' => $form
+        );
     }
 
     /**

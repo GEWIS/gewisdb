@@ -87,14 +87,9 @@ class MemberController extends AbstractActionController
     {
         $service = $this->getMemberService();
 
-        $member = $service->getMember($this->params()->fromRoute('id'));
-        $form = $service->getMemberEditForm();
-        $form->bind($member);
+        $data = $service->getMemberEditForm($this->params()->fromRoute('id'));
 
-        return new ViewModel(array(
-            'member' => $member,
-            'form' => $form
-        ));
+        return new ViewModel($data);
     }
 
     /**

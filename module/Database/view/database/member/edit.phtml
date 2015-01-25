@@ -4,7 +4,7 @@
 <?php
 $form->prepare();
 
-$form->setAttribute('action', $this->url('member/default', array('action' => 'subscribe')));
+$form->setAttribute('action', $this->url('member/show/edit', array('id' => $member->getLidnr())));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
