@@ -178,18 +178,6 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
-                            'address' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                    'route' => '/edit/address/:type',
-                                    'constraints' => array(
-                                        'type' => 'home|student|mail'
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'editAddress'
-                                    ),
-                                )
-                            ),
                             'edit' => array(
                                 'type' => 'Literal',
                                 'options' => array(
@@ -197,6 +185,30 @@ return array(
                                     'defaults' => array(
                                         'action' => 'edit'
                                     )
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'address' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '/address/:type',
+                                            'constraints' => array(
+                                                'type' => 'home|student|mail'
+                                            ),
+                                            'defaults' => array(
+                                                'action' => 'editAddress'
+                                            ),
+                                        )
+                                    ),
+                                    'membership' => array(
+                                        'type' => 'Literal',
+                                        'options' => array(
+                                            'route' => '/membership',
+                                            'defaults' => array(
+                                                'action' => 'membership'
+                                            )
+                                        )
+                                    ),
                                 )
                             )
                         )

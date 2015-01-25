@@ -58,7 +58,9 @@ case Member::TYPE_HONORARY:
     echo 'Erelid';
     break;
 }
-?></td>
+?> <a href="<?= $this->url('member/show/edit/membership', array(
+    'id' => $member->getLidnr()
+)) ?>" class="btn btn-primary btn-xs">Wijzig</a></td>
         </tr>
         <tr>
             <th>Laatste wijziging lidmaatshap</th>
@@ -88,7 +90,7 @@ case Address::TYPE_MAIL:
     echo 'Postadres';
     break;
 }
-?> <a href="<?= $this->url('member/show/address', array(
+?> <a href="<?= $this->url('member/show/edit/address', array(
     'id' => $member->getLidnr(),
     'type' => $address->getType()
 )) ?>" class="btn btn-primary btn-sm">Wijzig</a></h4>
