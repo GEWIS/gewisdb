@@ -83,6 +83,11 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_member'));
                     return $form;
                 },
+                'database_form_memberedit' => function ($sm) {
+                    $form = new \Database\Form\MemberEdit();
+                    $form->setHydrator($sm->get('database_hydrator_member'));
+                    return $form;
+                },
                 'database_form_createmeeting' => function ($sm) {
                     $form = new \Database\Form\CreateMeeting();
                     $form->setHydrator($sm->get('database_hydrator_meeting'));

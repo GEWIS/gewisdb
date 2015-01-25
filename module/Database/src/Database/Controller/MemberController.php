@@ -79,6 +79,25 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Edit action.
+     *
+     * Edit member information.
+     */
+    public function editAction()
+    {
+        $service = $this->getMemberService();
+
+        $member = $service->getMember($this->params()->fromRoute('id'));
+        $form = $service->getMemberEditForm();
+        $form->bind($member);
+
+        return new ViewModel(array(
+            'member' => $member,
+            'form' => $form
+        ));
+    }
+
+    /**
      * Get the member service.
      *
      * @return \Database\Service\Member

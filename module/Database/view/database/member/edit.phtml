@@ -1,0 +1,117 @@
+<h1>Wijzigen gegevens <?= $member->getFullName() ?></h1>
+<div class="row">
+<div class="col-md-6">
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('member/default', array('action' => 'subscribe')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('class', 'form-horizontal');
+?>
+    <?= $this->form()->openTag($form) ?>
+
+<?php
+$element = $form->get('lastName');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="form-group">
+        <label for="lastName" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
+        <div class="col-sm-8">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$element = $form->get('middleName');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="form-group">
+        <label for="lastName" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
+        <div class="col-sm-8">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$element = $form->get('initials');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="form-group">
+        <label for="lastName" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
+        <div class="col-sm-8">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$element = $form->get('firstName');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="form-group">
+        <label for="lastName" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
+        <div class="col-sm-8">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$element = $form->get('gender');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array('class' => 'radio-inline'));
+?>
+    <div class="form-group">
+        <label for="lastName" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
+        <div class="col-sm-8">
+            <?= $this->formRadio($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$element = $form->get('email');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="form-group">
+        <label for="lastName" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
+        <div class="col-sm-8">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$element = $form->get('birth');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="form-group">
+        <label for="lastName" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
+        <div class="col-sm-8">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$submit = $form->get('submit');
+$submit->setLabel($submit->getValue());
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+
+    <?= $this->form()->closeTag() ?>
+</div>
+<div class="col-md-6">
+</div>
+</div>
