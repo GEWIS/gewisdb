@@ -2,9 +2,9 @@
 use Database\Model\Member;
 use Database\Model\Address;
 ?>
-<h1><?= $member->getFullName() ?></h1>
 <div class="row">
 <div class="col-md-6">
+    <h1><?= $member->getFullName() ?></h1>
     <table class="table table-bordered">
         <tr>
             <th>Lidnummer</th>
@@ -105,10 +105,16 @@ case Address::TYPE_MAIL:
     </tr>
 </table>
 <?php endforeach ?>
-<h3>Lidmaaptschap commissies en disputen</h3>
+<h3>Lidmaatschap commissies en disputen</h3>
 <ul>
 <?php foreach ($member->getInstallations() as $install): ?>
-    <li><?= $install->getFoundation()->getAbbr() ?></li>
+    <li><a href="<?= $this->url('organ/view', array(
+    'type' => $install->getFoundation()->getDecision()->getMeeting()->getType(),
+    'number' => $install->getFoundation()->getDecision()->getMeeting()->getNumber(),
+    'point' => $install->getFoundation()->getDecision()->getPoint(),
+    'decision' => $install->getFoundation()->getDecision()->getNumber(),
+    'subdecision' => $install->getFoundation()->getNumber()
+)) ?>"><?= $install->getFoundation()->getAbbr() ?></a></li>
 <?php endforeach; ?>
 </ul>
 </div>
