@@ -12,10 +12,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Meeting
 {
-    const TYPE_BV = 'bv'; // bestuursvergadering
-    const TYPE_AV = 'av'; // algemene leden vergadering
-    const TYPE_VV = 'vv'; // voorzitters vergadering
-    const TYPE_VIRT = 'virt'; // virtual meeting
+    const TYPE_BV = 'BV'; // bestuursvergadering
+    const TYPE_AV = 'AV'; // algemene leden vergadering
+    const TYPE_VV = 'VV'; // voorzitters vergadering
+    const TYPE_VIRT = 'Virt'; // virtual meeting
 
     /**
      * Meeting type.

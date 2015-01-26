@@ -1,0 +1,45 @@
+<?php if (isset($success) && $success): ?>
+Wijzigingen lidmaatschapstype <a href="<?= $this->url('member/show', array(
+    'id' => $member->getLidnr()
+)) ?>"><?= $member->getFullName() ?></a> opgeslagen!
+<?php else: ?>
+<h1>Wijzig lidmaatschapstype <?= $member->getFullName() ?></h1>
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('member/show/edit/membership', array('id' => $member->getLidnr())));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('class', 'form-horizontal');
+?>
+<?= $this->form()->openTag($form) ?>
+<?php
+$element = $form->get('type');
+$element->setAttribute('placeholder', $element->getLabel());
+//$element->setLabelAttributes(array('class' => 'radio-inline'));
+?>
+    <div class="form-group">
+        <label for="<?= $element->getName() ?>" class="control-label col-sm-2"><?= $element->getLabel() ?></label>
+        <div class="col-sm-10">
+        <?php foreach ($element->getValueOptions() as $option => $text): ?>
+            <div class="radio">
+                <label>
+                <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
+                    <?= $text ?>
+                </label>
+            </div>
+        <?php endforeach ?>
+        <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
+$submit = $form->get('submit');
+$submit->setLabel($submit->getValue());
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+
+<?= $this->form()->closeTag() ?>
+<?php endif ?>

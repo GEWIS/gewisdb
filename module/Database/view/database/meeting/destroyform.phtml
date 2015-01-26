@@ -1,3 +1,49 @@
+<script>
+$(document).ready(function() {
+    $('#destroy-decision').autocomplete({
+        minLength: 2,
+        delay: 0,
+        source: function(rq, response) {
+            $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('meeting/search') ?>?q=' + rq.term,
+                context: document.body
+            }).done(function(data) {
+                var ret = [];
+                $.each(data.json, function(idx, decision) {
+                    var num = decision.meeting_type + " " + decision.meeting_number;
+                    num += "." + decision.decision_point + "." + decision.decision_number;
+                    decision.num = num;
+                    var content = decision.content;
+                    if (content.length > 100) {
+                        content = content.substring(0, 100) + "...";
+                    }
+                    var result = num + " " + content;
+
+                    ret.push({
+                        label: result,
+                        value: num,
+                        id: decision
+                    });
+                })
+
+                response(ret);
+            });
+        },
+        select: function(event, ui) {
+            var decision = ui.item.id;
+            $('#destroy-meeting-type').val(decision.meeting_type);
+            $('#destroy-meeting-number').val(decision.meeting_number);
+            $('#destroy-decision-point').val(decision.decision_point);
+            $('#destroy-number').val(decision.decision_number);
+            $('.destroy-decision-num').text(decision.num);
+            $('.destroy-decision-content').text(decision.content);
+            $('.destroy-decision-display').show();
+        }
+    });
+});
+
+</script>
 <?php
 $form->prepare();
 
@@ -17,7 +63,7 @@ $fs = $form->get('meeting')
 <?= $this->formHidden($form->get('point')) ?>
 <?= $this->formHidden($form->get('decision')) ?>
 <?php
-$fs = $form->get('decision');
+$fs = $form->get('fdecision');
 ?>
 <?php
 $element = $fs->get('meeting_type');
@@ -43,14 +89,17 @@ $element->setAttribute('id', 'destroy-number');
 <?php
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('id', 'destroy-organ');
+$element->setAttribute('id', 'destroy-decision');
 $element->setAttribute('placeholder', 'Besluit');
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
     <?= $this->formElementErrors($element) ?>
-    <input type="hidden" class="organ-decision">
 </div>
+
+<p class="destroy-decision-display" style="display: none;">
+<strong>Besluit</strong> <strong class="destroy-decision-num"></strong>: <span class="destroy-decision-content"></span>
+</p>
 
 <?php
 $submit = $form->get('submit');

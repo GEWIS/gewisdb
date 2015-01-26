@@ -30,12 +30,9 @@
 <script>
 $(document).ready(function() {
     if (!Modernizr.inputtypes.date) {
-        $('input[type=date]').datepicker();
-        $('input[type=date]').datepicker(
-            'option',
-            'dateFormat',
-            'yy-mm-dd'
-        );
+        $('input[type=date]').datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
     }
 });
 </script>
@@ -72,6 +69,7 @@ if (getIsActive($this, array('database', 'member', 'subscribe')) == '') {
                         <li<?= getIsActive($this, array('database', 'organ')) ?>><a href="<?= $this->url('organ') ?>">Organen</a></li>
                         <li<?= getIsActive($this, array('database', 'member')) ?>><a href="<?= $this->url('member') ?>">Leden</a></li>
                         <li<?= getIsActive($this, array('database', 'export')) ?>><a href="<?= $this->url('export') ?>">Export</a></li>
+                        <li<?= getIsActive($this, array('database', 'query')) ?>><a href="<?= $this->url('query') ?>">Query</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li<?= getIsActive($this, array('database', 'settings')) ?>><a href="<?= $this->url('settings') ?>">Settings</a></li>

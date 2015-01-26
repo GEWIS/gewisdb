@@ -65,6 +65,93 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Show action.
+     *
+     * Shows member information.
+     */
+    public function showAction()
+    {
+        $service = $this->getMemberService();
+
+        return new ViewModel(array(
+            'member' => $service->getMember($this->params()->fromRoute('id'))
+        ));
+    }
+
+    /**
+     * Edit action.
+     *
+     * Edit member information.
+     */
+    public function editAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+
+        if ($this->getRequest()->isPost()) {
+            $member = $service->edit($this->getRequest()->getPost(), $lidnr);
+            if (null !== $member) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'member' => $member
+                ));
+            }
+        }
+
+        return new ViewModel($service->getMemberEditForm($lidnr));
+    }
+
+    /**
+     * Membership action.
+     *
+     * Update / renew membership.
+     */
+    public function membershipAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+
+        if ($this->getRequest()->isPost()) {
+            $member = $service->membership($this->getRequest()->getPost(), $lidnr);
+            if (null !== $member) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'member' => $member
+                ));
+            }
+        }
+
+        return new ViewModel($service->getMemberTypeForm($lidnr));
+    }
+
+    /**
+     * Edit address action.
+     *
+     * Edit a member's address.
+     */
+    public function editAddressAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+        $type = $this->params()->fromRoute('type');
+
+        if ($this->getRequest()->isPost()) {
+            $address = $service->editAddress($this->getRequest()->getPost(), $lidnr, $type);
+            if (null !== $address) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'address' => $address
+                ));
+            }
+        }
+
+        return new ViewModel($service->getAddressForm($lidnr, $type));
+    }
+
+    /**
      * Get the member service.
      *
      * @return \Database\Service\Member

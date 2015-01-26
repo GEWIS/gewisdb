@@ -9,7 +9,7 @@
     ],
     "homepage": "http://gewis.nl/",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4.0",
         "ext-intl": "*",
         "zendframework/zendframework": "2.3.*",
         "doctrine/doctrine-orm-module": "0.*",

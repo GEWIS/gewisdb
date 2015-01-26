@@ -1,0 +1,140 @@
+<?php
+use Database\Model\Member;
+use Database\Model\Address;
+?>
+<div class="row">
+<div class="col-md-6">
+    <h1><?= $member->getFullName() ?></h1>
+    <table class="table table-bordered">
+        <tr>
+            <th>Lidnummer</th>
+            <td><?= $member->getLidnr() ?></td>
+        </tr>
+        <tr>
+            <th>Voorletters</th>
+            <td><?= $member->getInitials() ?></td>
+        </tr>
+        <tr>
+            <th>Voornaam</th>
+            <td><?= $member->getFirstName() ?></td>
+        </tr>
+        <tr>
+            <th>Tussenvoegsels</th>
+            <td><?= $member->getMiddleName() ?></td>
+        </tr>
+        <tr>
+            <th>Achternaam</th>
+            <td><?= $member->getLastName() ?></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><?= $member->getEmail() ?></td>
+        </tr>
+        <tr>
+            <th>Geboortedatum</th>
+            <td><?= $member->getBirth()->format('l j F Y') ?></td>
+        </tr>
+        <tr>
+            <th>Generatie</th>
+            <td><?= $member->getGeneration() ?></td>
+        </tr>
+        <tr>
+            <th>Type lid</th>
+            <td><?php
+switch ($member->getType()) {
+case Member::TYPE_ORDINARY:
+    echo 'Gewoon';
+    break;
+case Member::TYPE_PROLONGED:
+    echo 'Verlengd';
+    break;
+case Member::TYPE_EXTERNAL:
+    echo 'Extern';
+    break;
+case Member::TYPE_EXTRAORDINARY:
+    echo 'Buitengewoon';
+    break;
+case Member::TYPE_HONORARY:
+    echo 'Erelid';
+    break;
+}
+?> <a href="<?= $this->url('member/show/edit/membership', array(
+    'id' => $member->getLidnr()
+)) ?>" class="btn btn-primary btn-xs">Wijzig / vernieuw</a></td>
+        </tr>
+        <tr>
+            <th>Laatste wijziging lidmaatshap</th>
+            <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
+        </tr>
+        <tr>
+            <th>Verloopdatum lidmaatschap</th>
+            <td><?= $member->getExpiration()->format('l j F Y') ?></td>
+        </tr>
+    </table>
+    <a href="<?= $this->url('member/show/edit', array(
+    'id' => $member->getLidnr()
+)) ?>" class="btn btn-primary">Wijzig gegevens</a>
+</div>
+<div class="col-md-6">
+<h3>Adressen</h3>
+<?php $addresses = array() ?>
+<?php foreach ($member->getAddresses() as $address): ?>
+<?php $addresses[$address->getType()] = $address ?>
+<h4><?php
+switch ($address->getType()) {
+case Address::TYPE_HOME:
+    echo 'Thuisadres (ouders)';
+    break;
+case Address::TYPE_STUDENT:
+    echo 'Kameradres';
+    break;
+case Address::TYPE_MAIL:
+    echo 'Postadres';
+    break;
+}
+?> <a href="<?= $this->url('member/show/edit/address', array(
+    'id' => $member->getLidnr(),
+    'type' => $address->getType()
+)) ?>" class="btn btn-primary btn-sm">Wijzig</a> <a href="#" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Verwijder</a></h4>
+<table class="table table-bordered">
+    <tr>
+        <th>Land</th>
+        <td><?= $address->getCountry() ?></td>
+    </tr>
+    <tr>
+        <th>Straat en huisnummer</th>
+        <td><?= $address->getStreet() ?> <?= $address->getNumber() ?></td>
+    </tr>
+    <tr>
+        <th>Woonplaats en Postcode</th>
+        <td><?= $address->getCity() ?> <?= $address->getPostalCode() ?></td>
+    </tr>
+    <tr>
+        <th>Telefoonnummer</th>
+        <td><?= $address->getPhone() ?></td>
+    </tr>
+</table>
+<?php endforeach ?>
+<?php if (!isset($addresses[Address::TYPE_HOME])): ?>
+<a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg thuisadres toe</a>
+<?php endif ?>
+<?php if (!isset($addresses[Address::TYPE_STUDENT])): ?>
+<a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg kameradres toe</a>
+<?php endif ?>
+<?php if (!isset($addresses[Address::TYPE_MAIL])): ?>
+<a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg postadres toe</a>
+<?php endif ?>
+<h3>Lidmaatschap commissies en disputen</h3>
+<ul>
+<?php foreach ($member->getInstallations() as $install): ?>
+    <li><a href="<?= $this->url('organ/view', array(
+    'type' => $install->getFoundation()->getDecision()->getMeeting()->getType(),
+    'number' => $install->getFoundation()->getDecision()->getMeeting()->getNumber(),
+    'point' => $install->getFoundation()->getDecision()->getPoint(),
+    'decision' => $install->getFoundation()->getDecision()->getNumber(),
+    'subdecision' => $install->getFoundation()->getNumber()
+)) ?>"><?= $install->getFoundation()->getAbbr() ?></a></li>
+<?php endforeach; ?>
+</ul>
+</div>
+</div>

@@ -20,10 +20,10 @@ class CreateMeeting extends Form
             'options' => array(
                 'label' => 'Vergadertype',
                 'value_options' => array(
-                    'bv' => 'BV (Bestuursvergadering)',
-                    'av' => 'AV (Algemene Ledenvergadering)',
-                    'vv' => 'VV (Voorzittersvergadering)',
-                    'virt' => 'Virt (Virtuele vergadering)'
+                    'BV' => 'BV (Bestuursvergadering)',
+                    'AV' => 'AV (Algemene Ledenvergadering)',
+                    'VV' => 'VV (Voorzittersvergadering)',
+                    'Virt' => 'Virt (Virtuele vergadering)'
                 )
             )
         ));

@@ -189,6 +189,28 @@ class Decision
     }
 
     /**
+     * Get the subdecision by which this decision is destroyed.
+     *
+     * Or null, if it wasn't destroyed.
+     *
+     * @return SubDecision\Destroy
+     */
+    public function getDestroyedBy()
+    {
+        return $this->destroyedby;
+    }
+
+    /**
+     * Check if this decision is destroyed by another decision.
+     *
+     * @return boolean
+     */
+    public function isDestroyed()
+    {
+        return null !== $this->destroyedby;
+    }
+
+    /**
      * Transform into an array.
      *
      * @return array

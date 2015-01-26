@@ -109,11 +109,11 @@ class Member
     protected $type;
 
     /**
-     * Expiration date of membership.
+     * Last changed date of membership.
      *
      * @ORM\Column(type="date")
      */
-    protected $expiration;
+    protected $changedOn;
 
     /**
      * Member birth date.
@@ -128,6 +128,13 @@ class Member
      * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist"})
      */
     protected $addresses;
+
+    /**
+     * Installations of this member.
+     *
+     * @ORM\OneToMany(targetEntity="Database\Model\SubDecision\Installation",mappedBy="member")
+     */
+    protected $installations;
 
     /**
      * Static method to get available genders.
@@ -377,21 +384,30 @@ class Member
     /**
      * Get the expiration date.
      *
+     * The information comes from the statuten and HR.
+     *
      * @return \DateTime
      */
     public function getExpiration()
     {
-        return $this->expiration;
-    }
-
-    /**
-     * Set the expiration date.
-     *
-     * @param \DateTime $expiration
-     */
-    public function setExpiration(\DateTime $expiration)
-    {
-        $this->expiration = $expiration;
+        $exp = clone $this->getChangedOn();
+        switch ($this->getType()) {
+        case self::TYPE_ORDINARY:
+            // 6 years
+            $exp->add(new \DateInterval('P6Y'));
+            break;
+        case self::TYPE_PROLONGED:
+        case self::TYPE_EXTERNAL:
+        case self::TYPE_EXTRAORDINARY:
+            $exp->add(new \DateInterval('P1Y'));
+            // 1 year
+            break;
+        case self::TYPE_HONORARY:
+            // infinity (1000 is close enough, right?)
+            $exp->add(new \DateInterval('P1000Y'));
+            break;
+        }
+        return $exp;
     }
 
     /**
@@ -412,6 +428,36 @@ class Member
     public function setBirth(\DateTime $birth)
     {
         $this->birth = $birth;
+    }
+
+    /**
+     * Get the date of the last membership change.
+     *
+     * @return \DateTime
+     */
+    public function getChangedOn()
+    {
+        return $this->changedOn;
+    }
+
+    /**
+     * Set the date of the last membership change.
+     *
+     * @param \DateTime $changedOn
+     */
+    public function setChangedOn($changedOn)
+    {
+        $this->changedOn = $changedOn;
+    }
+
+    /**
+     * Get the installations.
+     *
+     * @return ArrayCollection
+     */
+    public function getInstallations()
+    {
+        return $this->installations;
     }
 
     /**

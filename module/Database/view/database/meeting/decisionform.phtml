@@ -1,18 +1,5 @@
 <?php
 use Database\Model\Meeting;
-function showType($type)
-{
-    switch ($type) {
-    case Meeting::TYPE_BV:
-        return 'BV';
-    case Meeting::TYPE_AV:
-        return 'AV';
-    case Meeting::TYPE_VV:
-        return 'VV';
-    case Meeting::TYPE_VIRT:
-        return 'Virt';
-    }
-}
 ?>
 <?php if (isset($form)): ?>
 <?php
@@ -32,7 +19,7 @@ case 'other':
 <?php else: ?>
 <?php
 $meeting = $decision->getMeeting();
-$decisionNum = showType($meeting->getType()) . ' ' . $meeting->getNumber() . '.' . $decision->getPoint() . '.' . $decision->getNumber();
+$decisionNum = $meeting->getType() . ' ' . $meeting->getNumber() . '.' . $decision->getPoint() . '.' . $decision->getNumber();
 ?>
 <h2>Besluit <?= $decisionNum ?> luidt als volgt:</h1>
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>

@@ -113,7 +113,7 @@ class MeetingController extends AbstractActionController
     public function decisionformAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->redirect()->toRoute('meeting/decision');
+            return $this->redirect()->toRoute('meeting');
         }
 
         $service = $this->getMeetingService();
@@ -139,13 +139,18 @@ class MeetingController extends AbstractActionController
                 $service->installDecision($this->getRequest()->getPost())
             );
             break;
+        case 'destroy':
+            return new ViewModel(
+                $service->destroyDecision($this->getRequest()->getPost())
+            );
+            break;
         case 'other':
             return new ViewModel(
                 $service->otherDecision($this->getRequest()->getPost())
             );
             break;
         default:
-            $this->redirect()->toRoute('meeting/decision');
+            return $this->redirect()->toRoute('meeting');
             break;
         }
         return new ViewModel(array());

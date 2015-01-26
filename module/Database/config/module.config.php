@@ -41,7 +41,7 @@ return array(
                                 'options' => array(
                                     'route' => '/:type/:number/:point/:decision',
                                     'constraints' => array(
-                                        'type' => 'av|bv|vv|virt',
+                                        'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*'
@@ -53,7 +53,7 @@ return array(
                                 'options' => array(
                                     'route' => '/delete/:type/:number/:point/:decision',
                                     'constraints' => array(
-                                        'type' => 'av|bv|vv|virt',
+                                        'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*'
@@ -70,7 +70,7 @@ return array(
                         'options' => array(
                             'route' => '/:type/:number',
                             'constraints' => array(
-                                'type' => 'av|bv|vv|virt',
+                                'type' => 'AV|BV|VV|Virt',
                                 'number' => '\-?[0-9]*'
                             ),
                             'defaults' => array(
@@ -127,7 +127,7 @@ return array(
                                 'action' => 'info'
                             ),
                             'constraints' => array(
-                                'type' => 'av|bv|vv|virt',
+                                'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
@@ -143,7 +143,7 @@ return array(
                                 'action' => 'view'
                             ),
                             'constraints' => array(
-                                'type' => 'av|bv|vv|virt',
+                                'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
@@ -165,6 +165,54 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'show' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'show'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'edit' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/edit',
+                                    'defaults' => array(
+                                        'action' => 'edit'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'address' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '/address/:type',
+                                            'constraints' => array(
+                                                'type' => 'home|student|mail'
+                                            ),
+                                            'defaults' => array(
+                                                'action' => 'editAddress'
+                                            ),
+                                        )
+                                    ),
+                                    'membership' => array(
+                                        'type' => 'Literal',
+                                        'options' => array(
+                                            'route' => '/membership',
+                                            'defaults' => array(
+                                                'action' => 'membership'
+                                            )
+                                        )
+                                    ),
+                                )
+                            )
+                        )
+                    ),
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -222,6 +270,41 @@ return array(
                     ),
                 ),
             ),
+            'query' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/query',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'Query',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'show' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/show/:query',
+                            'constraints' => array(
+                                'query' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'show'
+                            )
+                        )
+                    ),
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:action',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
@@ -230,6 +313,7 @@ return array(
             'Database\Controller\Member' => 'Database\Controller\MemberController',
             'Database\Controller\Organ' => 'Database\Controller\OrganController',
             'Database\Controller\Export' => 'Database\Controller\ExportController',
+            'Database\Controller\Query' => 'Database\Controller\QueryController',
             'Database\Controller\Settings' => 'Database\Controller\SettingsController',
         )
     ),
@@ -251,6 +335,13 @@ return array(
             'orm_default' => array(
                 'drivers' => array(
                     'Database\Model' => 'database_entities'
+                ),
+            )
+        ),
+        'configuration' => array(
+            'orm_default' => array(
+                'entity_namespaces' => array(
+                    'db' => 'Database\Model'
                 )
             )
         )

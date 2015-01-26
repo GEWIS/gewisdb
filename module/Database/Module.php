@@ -54,12 +54,16 @@ class Module
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
                 'database_service_event' => 'Database\Service\Event',
+                'database_service_query' => 'Database\Service\Query',
                 'database_service_installationfunction' => 'Database\Service\InstallationFunction',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
                 'database_hydrator_abolish' => 'Database\Hydrator\Abolish',
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
                 'database_hydrator_install' => 'Database\Hydrator\Install',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
+                'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
+                'database_form_query' => 'Database\Form\Query',
+                'database_form_queryexport' => 'Database\Form\QueryExport',
             ),
             'factories' => array(
                 'database_form_export' => function ($sm) {
@@ -67,10 +71,30 @@ class Module
                         $sm->get('database_service_meeting')
                     );
                 },
+                'database_form_querysave' => function ($sm) {
+                    $form = new \Database\Form\QuerySave();
+                    $form->setHydrator($sm->get('database_hydrator_meeting'));
+                    return $form;
+                },
+                'database_form_address' => function ($sm) {
+                    $form = new \Database\Form\Address();
+                    $form->setHydrator($sm->get('database_hydrator_address'));
+                    return $form;
+                },
                 'database_form_member' => function ($sm) {
                     $form = new \Database\Form\Member(
                         $sm->get('database_form_fieldset_address')
                     );
+                    $form->setHydrator($sm->get('database_hydrator_member'));
+                    return $form;
+                },
+                'database_form_memberedit' => function ($sm) {
+                    $form = new \Database\Form\MemberEdit();
+                    $form->setHydrator($sm->get('database_hydrator_member'));
+                    return $form;
+                },
+                'database_form_membertype' => function ($sm) {
+                    $form = new \Database\Form\MemberType();
                     $form->setHydrator($sm->get('database_hydrator_member'));
                     return $form;
                 },
@@ -95,8 +119,7 @@ class Module
                     return $form;
                 },
                 'database_form_installationfunction' => function ($sm) {
-                    $form = new \Database\Form\InstallationFunction(
-                    );
+                    $form = new \Database\Form\InstallationFunction();
                     $form->setHydrator($sm->get('database_hydrator_member'));
                     return $form;
                 },
@@ -128,7 +151,7 @@ class Module
                         $sm->get('database_form_fieldset_meeting'),
                         $sm->get('database_form_fieldset_decision')
                     );
-                    //$form->setHydrator($sm->get('database_hydrator_abolish'));
+                    $form->setHydrator($sm->get('database_hydrator_destroy'));
                     return $form;
                 },
                 'database_form_foundation' => function ($sm) {
@@ -154,7 +177,7 @@ class Module
                 'database_form_fieldset_decision' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\Decision();
                     $fieldset->setHydrator($sm->get('database_hydrator_decision'));
-                    $fieldset->setObject(new \Database\Model\SubDecision\Foundation());
+                    $fieldset->setObject(new \Database\Model\Decision());
                     return $fieldset;
                 },
                 'database_form_fieldset_installation' => function ($sm) {
@@ -214,7 +237,8 @@ class Module
                     );
                 },
                 'database_hydrator_meeting' => function ($sm) {
-                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                    // uses 'fixed' DoctrineObject
+                    return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );
                 },
@@ -250,6 +274,11 @@ class Module
                 },
                 'database_mapper_installationfunction' => function ($sm) {
                     return new \Database\Mapper\InstallationFunction(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_mapper_savedquery' => function ($sm) {
+                    return new \Database\Mapper\SavedQuery(
                         $sm->get('database_doctrine_em')
                     );
                 },
