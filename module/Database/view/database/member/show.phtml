@@ -77,7 +77,9 @@ case Member::TYPE_HONORARY:
 </div>
 <div class="col-md-6">
 <h3>Adressen</h3>
+<?php $addresses = array() ?>
 <?php foreach ($member->getAddresses() as $address): ?>
+<?php $addresses[$address->getType()] = $address ?>
 <h4><?php
 switch ($address->getType()) {
 case Address::TYPE_HOME:
@@ -93,7 +95,7 @@ case Address::TYPE_MAIL:
 ?> <a href="<?= $this->url('member/show/edit/address', array(
     'id' => $member->getLidnr(),
     'type' => $address->getType()
-)) ?>" class="btn btn-primary btn-sm">Wijzig</a></h4>
+)) ?>" class="btn btn-primary btn-sm">Wijzig</a> <a href="#" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Verwijder</a></h4>
 <table class="table table-bordered">
     <tr>
         <th>Land</th>
@@ -113,6 +115,15 @@ case Address::TYPE_MAIL:
     </tr>
 </table>
 <?php endforeach ?>
+<?php if (!isset($addresses[Address::TYPE_HOME])): ?>
+<a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg thuisadres toe</a>
+<?php endif ?>
+<?php if (!isset($addresses[Address::TYPE_STUDENT])): ?>
+<a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg kameradres toe</a>
+<?php endif ?>
+<?php if (!isset($addresses[Address::TYPE_MAIL])): ?>
+<a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg postadres toe</a>
+<?php endif ?>
 <h3>Lidmaatschap commissies en disputen</h3>
 <ul>
 <?php foreach ($member->getInstallations() as $install): ?>
