@@ -127,6 +127,21 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Edit address action.
+     *
+     * Edit a member's address.
+     */
+    public function editAddressAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+        $type = $this->params()->fromRoute('type');
+
+        return new ViewModel($service->getAddressForm($lidnr, $type));
+    }
+
+    /**
      * Get the member service.
      *
      * @return \Database\Service\Member

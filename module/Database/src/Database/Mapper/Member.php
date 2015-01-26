@@ -2,6 +2,7 @@
 
 namespace Database\Mapper;
 
+use Database\Model\Address;
 use Database\Model\Member as MemberModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
@@ -46,6 +47,30 @@ class Member
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Find a member address.
+     *
+     * @param int $lidnr
+     * @param string $type Address type
+     *
+     * @return Address
+     */
+    public function findMemberAddress($lidnr, $type)
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('a, m')
+            ->from('Database\Model\Address', 'a')
+            ->innerJoin('a.member', 'm')
+            ->where('m.lidnr = :lidnr')
+            ->andWhere('a.type = :type');
+
+        $qb->setParameter(':lidnr', $lidnr);
+        $qb->setParameter(':type', $type);
+
+        return $qb->getQuery()->getSingleResult();
     }
 
     /**

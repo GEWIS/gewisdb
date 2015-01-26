@@ -1,0 +1,124 @@
+<h2>Wijzig adres van <?= $address->getMember()->getFullName() ?></h2>
+<br>
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('member/show/edit/address', array(
+    'id' => $address->getMember()->getLidnr(),
+    'type' => $address->getType()
+)));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('class', 'form-horizontal');
+?>
+<?= $this->form()->openTag($form) ?>
+
+<div class="form-group">
+<?php
+$element = $form->get('country');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-md-2 control-label'
+));
+?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-md-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('street');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-md-2 control-label'
+));
+?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-md-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('number');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-md-2 control-label'
+));
+?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-md-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('postalCode');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-md-2 control-label'
+));
+?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-md-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('city');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-md-2 control-label'
+));
+?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-md-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('phone');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
+?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php
+        $submit = $form->get('submit');
+        $submit->setLabel($submit->getValue());
+        $submit->setAttribute('class', 'btn btn-primary');
+        ?>
+        <?= $this->formButton($submit) ?>
+    </div>
+</div>
+
+<?= $this->form()->closeTag() ?>

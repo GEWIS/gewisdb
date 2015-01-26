@@ -76,6 +76,11 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_meeting'));
                     return $form;
                 },
+                'database_form_address' => function ($sm) {
+                    $form = new \Database\Form\Address();
+                    $form->setHydrator($sm->get('database_hydrator_address'));
+                    return $form;
+                },
                 'database_form_member' => function ($sm) {
                     $form = new \Database\Form\Member(
                         $sm->get('database_form_fieldset_address')
