@@ -228,12 +228,12 @@ class Module
                     return $fs;
                 },
                 'database_hydrator_member' => function ($sm) {
-                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                    return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );
                 },
                 'database_hydrator_address' => function ($sm) {
-                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                    return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );
                 },
@@ -244,12 +244,12 @@ class Module
                     );
                 },
                 'database_hydrator_subdecision' => function ($sm) {
-                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                    return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );
                 },
                 'database_hydrator_decision' => function ($sm) {
-                    return new \DoctrineModule\Stdlib\Hydrator\DoctrineObject(
+                    return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
                     );
                 },
