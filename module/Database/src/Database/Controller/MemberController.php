@@ -164,11 +164,11 @@ class MemberController extends AbstractActionController
         $type = $this->params()->fromRoute('type');
 
         if ($this->getRequest()->isPost()) {
-            $address = $service->removeAddress($this->getRequest()->getPost(), $lidnr, $type);
-            if (null !== $address) {
+            $member = $service->removeAddress($this->getRequest()->getPost(), $lidnr, $type);
+            if (null !== $member) {
                 return new ViewModel(array(
                     'success' => true,
-                    'address' => $address
+                    'member' => $member
                 ));
             }
         }

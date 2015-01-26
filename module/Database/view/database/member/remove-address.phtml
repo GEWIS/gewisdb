@@ -1,7 +1,9 @@
 <?php
 use Database\Model\Address;
 if (!isset($form)): ?>
-Adres verwijderd.
+Adres van <a href="<?= $this->url('member/show', array(
+    'id' => $member->getLidnr()
+)) ?>"><?= $member->getFullName() ?></a> verwijderd.</h2>
 <?php else:
 $form->prepare();
 

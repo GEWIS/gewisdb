@@ -163,6 +163,17 @@ class Member
     }
 
     /**
+     * Remove an address.
+     *
+     * @param Address $address Address to remove.
+     */
+    public function removeAddress(Address $address)
+    {
+        $this->em->remove($address);
+        $this->em->flush();
+    }
+
+    /**
      * Get the repository for this mapper.
      *
      * @return Doctrine\ORM\EntityRepository
