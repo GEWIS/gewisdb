@@ -4,6 +4,7 @@ namespace Database\Service;
 
 use Application\Service\AbstractService;
 
+use Database\Model\Address;
 use Database\Model\Member as MemberModel;
 
 class Member extends AbstractService
@@ -128,6 +129,34 @@ class Member extends AbstractService
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
+    }
+
+    /**
+     * Edit address.
+     *
+     * @param array $data
+     * @param int $lidnr
+     * @param string $type Address to edit
+     *
+     * @return Address
+     */
+    public function editAddress($data, $lidnr, $type)
+    {
+        $form = $this->getAddressForm($lidnr, $type)['form'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $address = $form->getData();
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        $this->getMemberMapper()->persistAddress($address);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+
+        return $address;
     }
 
     /**

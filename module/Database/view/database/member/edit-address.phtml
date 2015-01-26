@@ -1,3 +1,8 @@
+<?php if (isset($success) && $success): ?>
+Adres van <a href="<?= $this->url('member/show', array(
+    'id' => $address->getMember()->getLidnr()
+)) ?>"><?= $address->getMember()->getFullName() ?></a> gewijzigd.</h2>
+<?php else: ?>
 <h2>Wijzig adres van <?= $address->getMember()->getFullName() ?></h2>
 <br>
 <?php
@@ -122,3 +127,4 @@ $element->setLabelAttributes(array(
 </div>
 
 <?= $this->form()->closeTag() ?>
+<?php endif ?>

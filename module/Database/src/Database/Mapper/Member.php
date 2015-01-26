@@ -152,6 +152,17 @@ class Member
     }
 
     /**
+     * Persist an address.
+     *
+     * @param Address $address Address to persist.
+     */
+    public function persistAddress(Address $address)
+    {
+        $this->em->persist($address);
+        $this->em->flush();
+    }
+
+    /**
      * Get the repository for this mapper.
      *
      * @return Doctrine\ORM\EntityRepository
