@@ -12,7 +12,7 @@ use Application\Service\AbstractService;
 class Checker extends AbstractService {
 
     public function check() {
-        $messages = $this->checkMembersInNotExistingOrgans(2);
+        $messages = $this->checkMembersHaveRoleButNotInOrgan(2);
         \Zend\Debug\Debug::dump($messages);
     }
 
@@ -22,6 +22,7 @@ class Checker extends AbstractService {
      * Or if there is a member in the organ if the decision to create an organ
      * is nulled
      * @param int $meeting After which meeting do we do the validation
+     * @return array Array of errors that may have occured.
      */
     public function checkMembersInNotExistingOrgans($meeting)
     {
@@ -29,7 +30,7 @@ class Checker extends AbstractService {
         $organService = $this->getServiceManager()->get('checker_service_organ');
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $organs = $organService->getAllOrgans($meeting);
-        $installations = $installationService->getAllMembers($meeting);
+        $installations = $installationService->getAllInstallations($meeting);
 
         foreach ($installations as $installation) {
             $organName = $installation->getFoundation()->toArray()['name'];
@@ -41,4 +42,32 @@ class Checker extends AbstractService {
         }
         return $errors;
     }
+
+    /**
+     * Checks if members still have a role in an organ (e.g. they are treasurer)
+     * but they are not a member of the organ anymore
+     * @param $meeting Meeting for which to check
+     */
+    public function checkMembersHaveRoleButNotInOrgan($meeting)
+    {
+        $errors = [];
+        $installationService = $this->getServiceManager()->get('checker_service_installation');
+        $membersArray = $installationService->getCurrentRolesPerOrgan($meeting);
+
+        foreach ($membersArray as $organsMembers) {
+            foreach ($organsMembers as $memberRoles) {
+                if (!isset($memberRoles['Lid'])) {
+                    foreach ($memberRoles as $role => $installation) {
+                        $errors[] = 'Member ' . $installation->getMember()->toArray()['fullName'] .
+                            ' ('. $installation->getMember()->toArray()['lidnr'] . ')'
+                            . ' has a special role as ' . $role . ' in  '
+                            . $installation->getFoundation()->toArray()['name'] . '  but is not a member anymore';
+                    }
+                }
+            }
+        }
+        return $errors;
+
+    }
+
 } 

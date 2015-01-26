@@ -2,13 +2,16 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
+use \Zend\Stdlib\ArrayUtils;
 
 class Installation extends AbstractService
 {
     /**
      * Fetch all the existing organs after the meeting.
+     * @param $meeting
+     * @return array of \Database\Model\SubDecision\Installation
      */
-    public function getAllMembers($meeting) {
+    public function getAllInstallations($meeting) {
         $mapper = $this->getServiceManager()->get('checker_mapper_installation');
         $createdMembers = $mapper->getAllInstallationsInstalled($meeting);
         $deletedMembers = $mapper->getAllInstallationsDischarged($meeting);
@@ -29,6 +32,35 @@ class Installation extends AbstractService
 
         return $members;
     }
+
+    /**
+     * Returns the different roles for each user in each organ
+     * @param $meeting
+     * @return array \Database\Model\SubDecision\Installation in the form:
+     * [
+     *      'organName' => [
+     *          'memberId' => [
+     *              'function' => Installation
+     *          ]
+     *      ]
+     * ]
+     */
+    public function getCurrentRolesPerOrgan($meeting) {
+        $installations = $this->getAllInstallations($meeting);
+
+        $roles = [];
+
+        foreach ($installations as $installation) {
+            $memberId = $installation->getMember()->getLidNr();
+            $function = $installation->getFunction();
+            $organName = $installation->getFoundation()->getAbbr();
+
+            $roles[$organName][$memberId][$function] = $installation;
+
+        }
+        return $roles;
+    }
+
 
     private function getHash(\Database\Model\SubDecision $d) {
         return $d->getMeetingType() . $d->getMeetingNumber() . $d-> getDecisionPoint() . $d->getNumber();
