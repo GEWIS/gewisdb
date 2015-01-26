@@ -166,11 +166,13 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $address = $service->addAddress($this->getRequest()->getPost(), $lidnr, $type);
             if (null !== $address) {
-                return new ViewModel(array(
+                $vm = new ViewModel(array(
                     'success' => true,
                     'add' => true,
                     'address' => $address
                 ));
+                $vm->setTemplate('database/member/edit-address');
+                return $vm;
             }
         }
 

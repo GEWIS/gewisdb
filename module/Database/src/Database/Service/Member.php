@@ -160,6 +160,34 @@ class Member extends AbstractService
     }
 
     /**
+     * Add address.
+     *
+     * @param array $data
+     * @param int $lidnr
+     * @param string $type Type of the address to add
+     *
+     * @return Address
+     */
+    public function addAddress($data, $lidnr, $type)
+    {
+        $form = $this->getAddressForm($lidnr, $type, true)['form'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $address = $form->getData();
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        $this->getMemberMapper()->persistAddress($address);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+
+        return $address;
+    }
+
+    /**
      * Remove address.
      *
      * @param array $data
