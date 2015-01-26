@@ -1,17 +1,49 @@
+<?php
+use Database\Model\Address;
+$type = '';
+switch ($address->getType()) {
+case Address::TYPE_HOME:
+    $type = 'thuisadres';
+    break;
+case Address::TYPE_STUDENT:
+    $type = 'kameradres';
+    break;
+case Address::TYPE_MAIL:
+    $type = 'postadres';
+    break;
+}
+?>
 <?php if (isset($success) && $success): ?>
+<?php if (isset($add) && $add): ?>
+Adres van <a href="<?= $this->url('member/show', array(
+    'id' => $address->getMember()->getLidnr()
+)) ?>"><?= $address->getMember()->getFullName() ?></a> opgeslagen.</h2>
+<?php else: ?>
 Adres van <a href="<?= $this->url('member/show', array(
     'id' => $address->getMember()->getLidnr()
 )) ?>"><?= $address->getMember()->getFullName() ?></a> gewijzigd.</h2>
+<?php endif ?>
 <?php else: ?>
-<h2>Wijzig adres van <?= $address->getMember()->getFullName() ?></h2>
+<?php if (isset($add) && $add): ?>
+<h2>Voeg <?= $type ?> van <?= $address->getMember()->getFullName() ?> toe</h2>
+<?php else: ?>
+<h2>Wijzig <?= $type ?> van <?= $address->getMember()->getFullName() ?></h2>
+<?php endif ?>
 <br>
 <?php
 $form->prepare();
 
-$form->setAttribute('action', $this->url('member/show/edit/address', array(
-    'id' => $address->getMember()->getLidnr(),
-    'type' => $address->getType()
-)));
+if (isset($add) && $add) {
+    $form->setAttribute('action', $this->url('member/show/add-address', array(
+        'id' => $address->getMember()->getLidnr(),
+        'type' => $address->getType()
+    )));
+} else {
+    $form->setAttribute('action', $this->url('member/show/edit/address', array(
+        'id' => $address->getMember()->getLidnr(),
+        'type' => $address->getType()
+    )));
+}
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');

@@ -230,13 +230,20 @@ class Member extends AbstractService
      *
      * @param int $lidnr
      * @param string $type address type
+     * @param boolean $create
      *
      * @return \Database\Form\Address
      */
-    public function getAddressForm($lidnr, $type)
+    public function getAddressForm($lidnr, $type, $create = false)
     {
         // find the address
-        $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
+        if ($create) {
+            $address = new Address();
+            $address->setMember($this->getMemberMapper()->find($lidnr));
+            $address->setType($type);
+        } else {
+            $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
+        }
         $form = $this->getServiceManager()->get('database_form_address');
         $form->bind($address);
         return array(
