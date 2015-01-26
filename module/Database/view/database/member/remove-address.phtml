@@ -1,0 +1,50 @@
+<?php
+use Database\Model\Address;
+if (!isset($form)): ?>
+Adres verwijderd.
+<?php else:
+$form->prepare();
+
+$form->setAttribute('action', $this->url('member/show/remove-address', array(
+    'id' => $address->getMember()->getLidnr(),
+    'type' => $address->getType()
+)));
+$form->setAttribute('method', 'post');
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+?>
+
+<p>
+Weet je zeker dat je het <?php
+switch ($address->getType()) {
+case Address::TYPE_HOME:
+    echo 'thuisadres';
+    break;
+case Address::TYPE_STUDENT:
+    echo 'kameradres';
+    break;
+case Address::TYPE_MAIL:
+    echo 'postadres';
+    break;
+}
+?> van <?= $address->getMember()->getFullName() ?> wilt verwijderen?
+</p>
+<div class="form-group">
+<?php
+$submit = $form->get('submit_yes');
+$submit->setLabel('Ja');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+&nbsp;&nbsp;&nbsp;
+<?php
+$submit = $form->get('submit_no');
+$submit->setLabel('Nee');
+$submit->setAttribute('class', 'btn btn-default');
+?>
+<?= $this->formButton($submit) ?>
+</div>
+
+<?= $this->form()->closeTag(); ?>
+<?php endif; ?>

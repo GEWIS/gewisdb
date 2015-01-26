@@ -216,6 +216,25 @@ class Member extends AbstractService
     }
 
     /**
+     * Get the delete address form.
+     *
+     * @param int $lidnr
+     * @param string $type address type
+     *
+     * @return \Database\Form\Address
+     */
+    public function getDeleteAddressForm($lidnr, $type)
+    {
+        // find the address
+        $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
+        $form = $this->getServiceManager()->get('database_form_deleteaddress');
+        return array(
+            'form' => $form,
+            'address' => $address
+        );
+    }
+
+    /**
      * Get the member form.
      *
      * @return \Database\Form\Member

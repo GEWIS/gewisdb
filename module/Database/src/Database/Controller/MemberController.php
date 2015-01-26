@@ -152,6 +152,31 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Remove address action.
+     *
+     * Remove a member's address.
+     */
+    public function removeAddressAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+        $type = $this->params()->fromRoute('type');
+
+        if ($this->getRequest()->isPost()) {
+            $address = $service->removeAddress($this->getRequest()->getPost(), $lidnr, $type);
+            if (null !== $address) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'address' => $address
+                ));
+            }
+        }
+
+        return new ViewModel($service->getDeleteAddressForm($lidnr, $type));
+    }
+
+    /**
      * Get the member service.
      *
      * @return \Database\Service\Member

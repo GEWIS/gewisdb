@@ -64,6 +64,7 @@ class Module
                 'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
                 'database_form_query' => 'Database\Form\Query',
                 'database_form_queryexport' => 'Database\Form\QueryExport',
+                'database_form_deleteaddress' => 'Database\Form\DeleteAddress',
             ),
             'factories' => array(
                 'database_form_export' => function ($sm) {
