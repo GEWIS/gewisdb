@@ -41,7 +41,8 @@ class Module
             'invokables' => array(
                 'checker_service_checker' => 'Checker\Service\Checker',
                 'checker_service_organ' => 'Checker\Service\Organ',
-                'checker_service_installation' => 'Checker\Service\Installation'
+                'checker_service_installation' => 'Checker\Service\Installation',
+                'checker_service_budget' => 'Checker\Service\Budget'
             ),
             'factories' => array(
                 'checker_mapper_organ' => function ($sm) {
@@ -51,6 +52,11 @@ class Module
                 },
                 'checker_mapper_installation' => function ($sm) {
                     return new \Checker\Mapper\Installation(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'checker_mapper_budget' => function ($sm) {
+                    return new \Checker\Mapper\Budget(
                         $sm->get('database_doctrine_em')
                     );
                 }

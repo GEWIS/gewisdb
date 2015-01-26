@@ -12,7 +12,7 @@ use Application\Service\AbstractService;
 class Checker extends AbstractService {
 
     public function check() {
-        $messages = $this->checkMembersHaveRoleButNotInOrgan(2);
+        $messages = $this->checkBudgetOrganExists(3);
         \Zend\Debug\Debug::dump($messages);
     }
 
@@ -46,7 +46,8 @@ class Checker extends AbstractService {
     /**
      * Checks if members still have a role in an organ (e.g. they are treasurer)
      * but they are not a member of the organ anymore
-     * @param $meeting Meeting for which to check
+     * @param int $meeting After which meeting do we do the validation
+     * @return array Array of errors that may have occured.
      */
     public function checkMembersHaveRoleButNotInOrgan($meeting)
     {
@@ -67,7 +68,28 @@ class Checker extends AbstractService {
             }
         }
         return $errors;
+    }
 
+    /**
+     * Checks all budgets are for a valid organ (an organ that still exists)
+     *
+     * @param int $meeting After which meeting do we do the validation
+     * @return array Array of errors that may have occured.
+     */
+    public function checkBudgetOrganExists($meeting) {
+        $errors = [];
+        $organService = $this->getServiceManager()->get('checker_service_organ');
+        $budgetService = $this->getServiceManager()->get('checker_service_budget');
+
+        $organs = $organService->getAllOrgans($meeting);
+        $budgets = $budgetService->getAllBudgets($meeting);
+
+        foreach ($budgets as $budget) {
+            $foundation = $budget->getFoundation();
+            \Zend\Debug\Debug::dump($foundation);
+        }
+
+        return $errors;
     }
 
 } 
