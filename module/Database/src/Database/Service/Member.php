@@ -117,6 +117,24 @@ class Member extends AbstractService
     }
 
     /**
+     * Get the member type form.
+     *
+     * @param int $lidnr
+     *
+     * @return array Array with \Database\Form\MemberType and MemberModel
+     */
+    public function getMemberTypeForm($lidnr)
+    {
+        $form = $this->getServiceManager()->get('database_form_membertype');
+        $member = $this->getMember($lidnr);
+        $form->bind($member);
+        return array(
+            'member' => $member,
+            'form' => $form
+        );
+    }
+
+    /**
      * Get the member form.
      *
      * @return \Database\Form\Member

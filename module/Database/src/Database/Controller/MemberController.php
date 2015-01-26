@@ -103,6 +103,20 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Membership action.
+     *
+     * Update / renew membership.
+     */
+    public function membershipAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+
+        return new ViewModel($service->getMemberTypeForm($lidnr));
+    }
+
+    /**
      * Get the member service.
      *
      * @return \Database\Service\Member
