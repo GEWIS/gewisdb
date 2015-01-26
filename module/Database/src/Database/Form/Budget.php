@@ -10,6 +10,7 @@ class Budget extends AbstractDecision
 
     public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
     {
+
         parent::__construct($meeting);
 
         $this->add(array(
@@ -172,34 +173,21 @@ class Budget extends AbstractDecision
             )
         ));
 
+        // Boolean values have no filter. The form will make sure that it will be casted to true or false
+        // And because of the filters the filter is unable to detect if a value is set. 
         $filter->add(array(
             'name' => 'approve',
-            'required' => false,
-            'allow_empty' => true,
+            'required' => true,
+            'allow_empty' => false,
             'fallback_value' => false,
-            'filters' => array(
-                array(
-                    'name' => 'boolean',
-                    'options' => array(
-                        'type' => \Zend\Filter\Boolean::TYPE_FALSE_STRING
-                    )
-                )
-            )
+
         ));
 
         $filter->add(array(
             'name' => 'changes',
-            'required' => false,
-            'allow_empty' => true,
+            'required' => true,
+            'allow_empty' => false,
             'fallback_value' => false,
-            'filters' => array(
-                array(
-                    'name' => 'boolean',
-                    'options' => array(
-                        'type' => \Zend\Filter\Boolean::TYPE_FALSE_STRING
-                    )
-                )
-            )
         ));
 
         $this->setInputFilter($filter);
