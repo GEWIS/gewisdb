@@ -1,8 +1,13 @@
+<?php if (isset($success) && $success): ?>
+Wijzigingen lidmaatschapstype <a href="<?= $this->url('member/show', array(
+    'id' => $member->getLidnr()
+)) ?>"><?= $member->getFullName() ?></a> opgeslagen!
+<?php else: ?>
 <h1>Wijzig lidmaatschapstype <?= $member->getFullName() ?></h1>
 <?php
 $form->prepare();
 
-$form->setAttribute('action', $this->url('member/show/edit', array('id' => $member->getLidnr())));
+$form->setAttribute('action', $this->url('member/show/edit/membership', array('id' => $member->getLidnr())));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
@@ -37,3 +42,4 @@ $submit->setAttribute('class', 'btn btn-primary');
 <?= $this->formButton($submit) ?>
 
 <?= $this->form()->closeTag() ?>
+<?php endif ?>

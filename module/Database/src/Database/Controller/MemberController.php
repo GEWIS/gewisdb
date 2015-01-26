@@ -113,6 +113,16 @@ class MemberController extends AbstractActionController
 
         $lidnr = $this->params()->fromRoute('id');
 
+        if ($this->getRequest()->isPost()) {
+            $member = $service->membership($this->getRequest()->getPost(), $lidnr);
+            if (null !== $member) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'member' => $member
+                ));
+            }
+        }
+
         return new ViewModel($service->getMemberTypeForm($lidnr));
     }
 

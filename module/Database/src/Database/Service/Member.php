@@ -99,6 +99,38 @@ class Member extends AbstractService
     }
 
     /**
+     * Edit membership.
+     *
+     * @param array $data
+     * @param int $lidnr member to edit
+     *
+     * @return MemberModel
+     */
+    public function membership($data, $lidnr)
+    {
+        $form = $this->getMemberTypeForm($lidnr)['form'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $member = $form->getData();
+
+        // update changed on date
+        $date = new \DateTime();
+        $date->setTime(0, 0);
+        $member->setChangedOn($date);
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getMemberMapper()->persist($member);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+
+        return $member;
+    }
+
+    /**
      * Get the member edit form.
      *
      * @param int $lidnr
