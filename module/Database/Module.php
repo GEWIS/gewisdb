@@ -114,7 +114,8 @@ class Module
                 'database_form_budget' => function ($sm) {
                     $form = new \Database\Form\Budget(
                         $sm->get('database_form_fieldset_meeting'),
-                        $sm->get('database_form_fieldset_member')
+                        $sm->get('database_form_fieldset_member'),
+                        $sm->get('Doctrine\Orm\EntityManager')->getRepository('Database\Model\SubDecision\Foundation')
                     );
                     $form->setHydrator($sm->get('database_hydrator_budget'));
                     return $form;
