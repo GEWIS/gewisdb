@@ -39,11 +39,12 @@ class Organ
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('f.name')
-            ->where('f.meeting_number <= :meeting_number')
+            ->where('m.date <= :meeting_date')
             ->from('Database\Model\SubDecision\Foundation', 'f')
-            ->setParameter('meeting_number', $meeting->getNumber());
-
-        // TODO: minus deleted organs
+            ->innerJoin('f.decision', 'd')
+            ->innerJoin('d.meeting', 'm')
+            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
+        // TODO: minus deleted organ creations
         return $qb->getQuery()->getResult();
     }
 
@@ -54,13 +55,17 @@ class Organ
     public function getAllOrgansDeleted(\Database\Model\Meeting $meeting)
     {
         $qb = $this->em->createQueryBuilder();
-        $qb->select('f.name')
-            ->where('a.meeting_number <= :meeting_number')
-            ->from('Database\Model\SubDecision\Abrogation', 'a')
-            ->innerJoin('Database\Model\SubDecision\Foundation', 'f')
-            ->setParameter('meeting_number', $meeting->getNumber());
 
-        // TODO: Minus deleted organs
+
+        $qb->select('f.name')
+            ->where('m.date <= :meeting_date')
+            ->from('Database\Model\SubDecision\Abrogation', 'a')
+            ->innerjoin('a.foundation', 'f')
+            ->innerJoin('a.decision', 'd')
+            ->innerJoin('d.meeting', 'm')
+            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
+
+        // TODO: Minus deleted organ deletions
         return $qb->getQuery()->getResult();
     }
 }

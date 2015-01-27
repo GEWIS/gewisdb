@@ -32,9 +32,11 @@ class Installation {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('d')
-            ->where('d.meeting_number <= :meeting_number')
+            ->where('m.date <= :meeting_date')
             ->from('Database\Model\SubDecision\Discharge', 'd')
-            ->setParameter('meeting_number', $meeting->getNumber());
+            ->innerJoin('d.decision', 'dec')
+            ->innerJoin('dec.meeting', 'm')
+            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
         // TODO: minus deleted decision
         return $qb->getQuery()->getResult();
@@ -44,9 +46,11 @@ class Installation {
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('i')
-            ->where('i.meeting_number <= :meeting_number')
+            ->where('m.date <= :meeting_date')
             ->from('Database\Model\SubDecision\Installation', 'i')
-            ->setParameter('meeting_number', $meeting->getNumber());
+            ->innerJoin('i.decision', 'd')
+            ->innerJoin('d.meeting', 'm')
+            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
         // TODO: minus deleted decision
         return $qb->getQuery()->getResult();
