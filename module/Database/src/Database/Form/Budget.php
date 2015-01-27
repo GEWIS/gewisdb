@@ -8,10 +8,17 @@ use Database\Model\SubDecision;
 class Budget extends AbstractDecision
 {
 
-    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
+    /**
+     * @var \Doctrine\Orm\EntityRepository Foundation Repository needed to check if an organ exists
+     */
+    private $foundationRepository;
+
+    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member, \Doctrine\Orm\EntityRepository $foundationRepository)
     {
 
         parent::__construct($meeting);
+
+        $this->foundationRepository = $foundationRepository;
 
         $this->add(array(
             'name' => 'type',
@@ -163,11 +170,22 @@ class Budget extends AbstractDecision
             'name' => 'organ',
             'required' => false,
             'validators' => array(
+
                 array(
                     'name' => 'string_length',
                     'options' => array(
                         'min' => 1,
                         'max' => 64
+                    )
+                ),
+                array(
+                    'name' => 'DoctrineModule\Validator\ObjectExists',
+                    'options' => array(
+                        'object_repository' => $this->foundationRepository,
+                        'fields' => 'name',
+                        'messages' => array(
+                            'noObjectFound' => 'Orgaan bestaat niet'
+                        )
                     )
                 )
             )
