@@ -144,6 +144,17 @@ class Member
     protected $installations;
 
     /**
+     * Memberships of mailing lists.
+     *
+     * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
+     * @ORM\JoinTable(name="members_mailinglists",
+     *      joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
+     * )
+     */
+    protected $lists;
+
+    /**
      * Static method to get available genders.
      *
      * @return array
@@ -179,6 +190,8 @@ class Member
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
+        $this->installations = new ArrayCollection();
+        $this->lists = new ArrayCollection();
     }
 
     /**
@@ -543,6 +556,41 @@ class Member
     {
         $address->setMember($this);
         $this->addresses[] = $address;
+    }
+
+    /**
+     * Get mailing list subscriptions.
+     *
+     * @return ArrayCollection
+     */
+    public function getLists()
+    {
+        return $this->lists;
+    }
+
+    /**
+     * Add a mailing list subscription.
+     *
+     * Note that this is the owning side.
+     *
+     * @param MailingList $list
+     */
+    public function addList(MailingList $list)
+    {
+        $list->addMember($this);
+        $this->lists[] = $list;
+    }
+
+    /**
+     * Add multiple mailing lists.
+     *
+     * @param array $lists
+     */
+    public function addLists($lists)
+    {
+        foreach ($lists as $list) {
+            $this->addList($list);
+        }
     }
 
     /**
