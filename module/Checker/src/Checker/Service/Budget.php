@@ -17,7 +17,7 @@ class Budget extends AbstractService {
      * @param $meeting
      * @return mixed budgets
      */
-    public function getAllBudgets($meeting)
+    public function getAllBudgets(\Database\Model\Meeting $meeting)
     {
         $mapper = $this->getServiceManager()->get('checker_mapper_budget');
         return $mapper->getAllBudgets($meeting);

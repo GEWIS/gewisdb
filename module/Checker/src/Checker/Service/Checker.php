@@ -11,9 +11,39 @@ use Application\Service\AbstractService;
 
 class Checker extends AbstractService {
 
+    /**
+     * Does a full check on each meeting, checking that after each meeting no database violation occur
+     */
     public function check() {
-        $messages = $this->checkBudgetOrganExists(3);
-        \Zend\Debug\Debug::dump($messages);
+        $meetingService = $this->getServiceManager()->get('checker_service_meeting');
+        $meetings = $meetingService->getAllMeetings();
+
+
+        foreach ($meetings as $meeting) {
+            $errors = array_merge(
+                //$this->checkBudgetOrganExists($meeting),
+                $this->checkMembersHaveRoleButNotInOrgan($meeting),
+                $this->checkMembersInNotExistingOrgans($meeting)
+            );
+
+            $this->handleErrors($meeting, $errors);
+        }
+
+    }
+
+    /**
+     * Makes sure that the errors are handled correctly
+     * @param \Database\Model\Meeting $meeting Meeting for which this errors hold
+     * @param array $errors
+     */
+    private function handleErrors(\Database\Model\Meeting $meeting, array $errors)
+    {
+        // At this moment only write to output.
+        echo 'Errors after meeting ' . $meeting->getNumber() . ' hold at ' . $meeting->getDate()->format('Y-m-d') . "\n";
+        foreach ($errors as $error) {
+            echo $error . "\n";
+        }
+        echo "\n";
     }
 
     /**
@@ -24,7 +54,7 @@ class Checker extends AbstractService {
      * @param int $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersInNotExistingOrgans($meeting)
+    public function checkMembersInNotExistingOrgans(\Database\Model\Meeting $meeting)
     {
         $errors = [];
         $organService = $this->getServiceManager()->get('checker_service_organ');
@@ -49,7 +79,7 @@ class Checker extends AbstractService {
      * @param int $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersHaveRoleButNotInOrgan($meeting)
+    public function checkMembersHaveRoleButNotInOrgan(\Database\Model\Meeting $meeting)
     {
         $errors = [];
         $installationService = $this->getServiceManager()->get('checker_service_installation');
@@ -76,7 +106,7 @@ class Checker extends AbstractService {
      * @param int $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkBudgetOrganExists($meeting) {
+    public function checkBudgetOrganExists(\Database\Model\Meeting $meeting) {
         $errors = [];
         $organService = $this->getServiceManager()->get('checker_service_organ');
         $budgetService = $this->getServiceManager()->get('checker_service_budget');

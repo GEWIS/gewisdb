@@ -11,8 +11,9 @@ class Installation extends AbstractService
      * @param $meeting
      * @return array of \Database\Model\SubDecision\Installation
      */
-    public function getAllInstallations($meeting) {
+    public function getAllInstallations(\Database\Model\Meeting $meeting) {
         $mapper = $this->getServiceManager()->get('checker_mapper_installation');
+
         $createdMembers = $mapper->getAllInstallationsInstalled($meeting);
         $deletedMembers = $mapper->getAllInstallationsDischarged($meeting);
 
@@ -45,7 +46,7 @@ class Installation extends AbstractService
      *      ]
      * ]
      */
-    public function getCurrentRolesPerOrgan($meeting) {
+    public function getCurrentRolesPerOrgan(\Database\Model\Meeting $meeting) {
         $installations = $this->getAllInstallations($meeting);
 
         $roles = [];

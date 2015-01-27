@@ -34,14 +34,14 @@ class Organ
      * Returns an array of all organs created.
      * @return array
      */
-    public function getAllOrgansCreated($meetingNr)
+    public function getAllOrgansCreated(\Database\Model\Meeting $meeting)
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('f.name')
             ->where('f.meeting_number <= :meeting_number')
             ->from('Database\Model\SubDecision\Foundation', 'f')
-            ->setParameter('meeting_number', $meetingNr);
+            ->setParameter('meeting_number', $meeting->getNumber());
 
         // TODO: minus deleted organs
         return $qb->getQuery()->getResult();
@@ -51,14 +51,14 @@ class Organ
      * Returns an array of all organs
      * @return array
      */
-    public function getAllOrgansDeleted($meetingNr)
+    public function getAllOrgansDeleted(\Database\Model\Meeting $meeting)
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('f.name')
             ->where('a.meeting_number <= :meeting_number')
             ->from('Database\Model\SubDecision\Abrogation', 'a')
             ->innerJoin('Database\Model\SubDecision\Foundation', 'f')
-            ->setParameter('meeting_number', $meetingNr);
+            ->setParameter('meeting_number', $meeting->getNumber());
 
         // TODO: Minus deleted organs
         return $qb->getQuery()->getResult();

@@ -8,7 +8,7 @@ class Organ extends AbstractService
     /**
      * Fetch all the existing organs after the meeting.
      */
-    public function getAllOrgans($meeting) {
+    public function getAllOrgans(\Database\Model\Meeting $meeting) {
         $mapper = $this->getServiceManager()->get('checker_mapper_organ');
         $createdOrgans = $this->transform($mapper->getAllOrgansCreated($meeting));
         $deletedOrgans = $this->transform($mapper->getAllOrgansDeleted($meeting));

@@ -26,7 +26,7 @@ class Installation {
     }
 
 
-    public function getAllInstallationsDischarged($meetingNr)
+    public function getAllInstallationsDischarged(\Database\Model\Meeting $meeting)
     {
 
         $qb = $this->em->createQueryBuilder();
@@ -34,19 +34,19 @@ class Installation {
         $qb->select('d')
             ->where('d.meeting_number <= :meeting_number')
             ->from('Database\Model\SubDecision\Discharge', 'd')
-            ->setParameter('meeting_number', $meetingNr);
+            ->setParameter('meeting_number', $meeting->getNumber());
 
         // TODO: minus deleted decision
         return $qb->getQuery()->getResult();
     }
 
-    public function getAllInstallationsInstalled($meetingNr)
+    public function getAllInstallationsInstalled(\Database\Model\Meeting $meeting)
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('i')
             ->where('i.meeting_number <= :meeting_number')
             ->from('Database\Model\SubDecision\Installation', 'i')
-            ->setParameter('meeting_number', $meetingNr);
+            ->setParameter('meeting_number', $meeting->getNumber());
 
         // TODO: minus deleted decision
         return $qb->getQuery()->getResult();

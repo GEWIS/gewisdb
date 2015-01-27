@@ -42,7 +42,8 @@ class Module
                 'checker_service_checker' => 'Checker\Service\Checker',
                 'checker_service_organ' => 'Checker\Service\Organ',
                 'checker_service_installation' => 'Checker\Service\Installation',
-                'checker_service_budget' => 'Checker\Service\Budget'
+                'checker_service_budget' => 'Checker\Service\Budget',
+                'checker_service_meeting' => 'Checker\Service\Meeting'
             ),
             'factories' => array(
                 'checker_mapper_organ' => function ($sm) {
