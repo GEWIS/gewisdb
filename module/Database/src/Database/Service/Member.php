@@ -160,6 +160,64 @@ class Member extends AbstractService
     }
 
     /**
+     * Add address.
+     *
+     * @param array $data
+     * @param int $lidnr
+     * @param string $type Type of the address to add
+     *
+     * @return Address
+     */
+    public function addAddress($data, $lidnr, $type)
+    {
+        $form = $this->getAddressForm($lidnr, $type, true)['form'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $address = $form->getData();
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        $this->getMemberMapper()->persistAddress($address);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+
+        return $address;
+    }
+
+    /**
+     * Remove address.
+     *
+     * @param array $data
+     * @param int $lidnr
+     * @param string $type Address to remove
+     *
+     * @return MemberModel
+     */
+    public function removeAddress($data, $lidnr, $type)
+    {
+        $formData = $this->getDeleteAddressForm($lidnr, $type);
+        $form = $formData['form'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $address = $formData['address'];
+        $member = $address->getMember();
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        $this->getMemberMapper()->removeAddress($address);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+
+        return $member;
+    }
+
+    /**
      * Get the member edit form.
      *
      * @param int $lidnr
@@ -200,15 +258,41 @@ class Member extends AbstractService
      *
      * @param int $lidnr
      * @param string $type address type
+     * @param boolean $create
      *
      * @return \Database\Form\Address
      */
-    public function getAddressForm($lidnr, $type)
+    public function getAddressForm($lidnr, $type, $create = false)
+    {
+        // find the address
+        if ($create) {
+            $address = new Address();
+            $address->setMember($this->getMemberMapper()->find($lidnr));
+            $address->setType($type);
+        } else {
+            $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
+        }
+        $form = $this->getServiceManager()->get('database_form_address');
+        $form->bind($address);
+        return array(
+            'form' => $form,
+            'address' => $address
+        );
+    }
+
+    /**
+     * Get the delete address form.
+     *
+     * @param int $lidnr
+     * @param string $type address type
+     *
+     * @return \Database\Form\Address
+     */
+    public function getDeleteAddressForm($lidnr, $type)
     {
         // find the address
         $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
-        $form = $this->getServiceManager()->get('database_form_address');
-        $form->bind($address);
+        $form = $this->getServiceManager()->get('database_form_deleteaddress');
         return array(
             'form' => $form,
             'address' => $address

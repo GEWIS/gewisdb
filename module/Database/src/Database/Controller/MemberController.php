@@ -152,6 +152,62 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Add address action.
+     *
+     * Add a member's address.
+     */
+    public function addAddressAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+        $type = $this->params()->fromRoute('type');
+
+        if ($this->getRequest()->isPost()) {
+            $address = $service->addAddress($this->getRequest()->getPost(), $lidnr, $type);
+            if (null !== $address) {
+                $vm = new ViewModel(array(
+                    'success' => true,
+                    'add' => true,
+                    'address' => $address
+                ));
+                $vm->setTemplate('database/member/edit-address');
+                return $vm;
+            }
+        }
+
+        $vm = new ViewModel($service->getAddressForm($lidnr, $type, true));
+        $vm->setTemplate('database/member/edit-address');
+        $vm->add = true;
+        return $vm;
+    }
+
+    /**
+     * Remove address action.
+     *
+     * Remove a member's address.
+     */
+    public function removeAddressAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+        $type = $this->params()->fromRoute('type');
+
+        if ($this->getRequest()->isPost()) {
+            $member = $service->removeAddress($this->getRequest()->getPost(), $lidnr, $type);
+            if (null !== $member) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'member' => $member
+                ));
+            }
+        }
+
+        return new ViewModel($service->getDeleteAddressForm($lidnr, $type));
+    }
+
+    /**
      * Get the member service.
      *
      * @return \Database\Service\Member

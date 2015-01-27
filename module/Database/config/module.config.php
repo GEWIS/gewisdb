@@ -210,7 +210,31 @@ return array(
                                         )
                                     ),
                                 )
-                            )
+                            ),
+                            'remove-address' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/remove/address/:type',
+                                    'constraints' => array(
+                                        'type' => 'home|student|mail'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'removeAddress'
+                                    ),
+                                )
+                            ),
+                            'add-address' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/add/address/:type',
+                                    'constraints' => array(
+                                        'type' => 'home|student|mail'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'addAddress'
+                                    ),
+                                )
+                            ),
                         )
                     ),
                     'default' => array(

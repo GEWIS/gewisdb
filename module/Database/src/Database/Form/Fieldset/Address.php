@@ -77,7 +77,6 @@ class Address extends Fieldset
      */
     public function getInputFilterSpecification()
     {
-        // TODO: add filter specification
         return array(
             'type' => array(
                 'required' => true,

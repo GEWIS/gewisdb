@@ -8,9 +8,17 @@ use Database\Model\SubDecision;
 class Budget extends AbstractDecision
 {
 
-    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
+    /**
+     * @var \Doctrine\Orm\EntityRepository Foundation Repository needed to check if an organ exists
+     */
+    private $foundationRepository;
+
+    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member, \Doctrine\Orm\EntityRepository $foundationRepository)
     {
+
         parent::__construct($meeting);
+
+        $this->foundationRepository = $foundationRepository;
 
         $this->add(array(
             'name' => 'type',
@@ -162,44 +170,42 @@ class Budget extends AbstractDecision
             'name' => 'organ',
             'required' => false,
             'validators' => array(
+
                 array(
                     'name' => 'string_length',
                     'options' => array(
                         'min' => 1,
                         'max' => 64
                     )
+                ),
+                array(
+                    'name' => 'DoctrineModule\Validator\ObjectExists',
+                    'options' => array(
+                        'object_repository' => $this->foundationRepository,
+                        'fields' => 'name',
+                        'messages' => array(
+                            'noObjectFound' => 'Orgaan bestaat niet'
+                        )
+                    )
                 )
             )
         ));
 
+        // Boolean values have no filter. The form will make sure that it will be casted to true or false
+        // And because of the filters the filter is unable to detect if a value is set. 
         $filter->add(array(
             'name' => 'approve',
-            'required' => false,
-            'allow_empty' => true,
+            'required' => true,
+            'allow_empty' => false,
             'fallback_value' => false,
-            'filters' => array(
-                array(
-                    'name' => 'boolean',
-                    'options' => array(
-                        'type' => \Zend\Filter\Boolean::TYPE_FALSE_STRING
-                    )
-                )
-            )
+
         ));
 
         $filter->add(array(
             'name' => 'changes',
-            'required' => false,
-            'allow_empty' => true,
+            'required' => true,
+            'allow_empty' => false,
             'fallback_value' => false,
-            'filters' => array(
-                array(
-                    'name' => 'boolean',
-                    'options' => array(
-                        'type' => \Zend\Filter\Boolean::TYPE_FALSE_STRING
-                    )
-                )
-            )
         ));
 
         $this->setInputFilter($filter);
