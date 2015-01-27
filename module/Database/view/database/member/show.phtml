@@ -39,6 +39,10 @@ use Database\Model\Address;
             <td><?= $member->getGeneration() ?></td>
         </tr>
         <tr>
+            <th>Betaald (hoe veel)</th>
+            <td><?= $member->getPaid() ?></td>
+        </tr>
+        <tr>
             <th>Type lid</th>
             <td><?php
 switch ($member->getType()) {

@@ -74,6 +74,14 @@ class MemberEdit extends Form implements InputFilterProviderInterface
         ));
 
         $this->add(array(
+            'name' => 'paid',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Betaald (hoe veel)'
+            )
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
@@ -136,6 +144,12 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                     )
                 )
             ),
+            'paid' => array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'digits')
+                )
+            )
         );
     }
 }
