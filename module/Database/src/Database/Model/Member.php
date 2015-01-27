@@ -123,6 +123,13 @@ class Member
     protected $birth;
 
     /**
+     * How much the member has paid for membership. 0 by default.
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $paid = 0;
+
+    /**
      * Addresses of this member.
      *
      * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist"})
@@ -448,6 +455,26 @@ class Member
     public function setChangedOn($changedOn)
     {
         $this->changedOn = $changedOn;
+    }
+
+    /**
+     * Get how much has been paid.
+     *
+     * @return int
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+
+    /**
+     * Set how much has been paid.
+     *
+     * @param int $paid
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
     }
 
     /**
