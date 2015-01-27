@@ -56,6 +56,7 @@ class Module
                 'database_service_event' => 'Database\Service\Event',
                 'database_service_query' => 'Database\Service\Query',
                 'database_service_installationfunction' => 'Database\Service\InstallationFunction',
+                'database_service_mailinglist' => 'Database\Service\MailingList',
                 'database_hydrator_abolish' => 'Database\Hydrator\Abolish',
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
                 'database_hydrator_install' => 'Database\Hydrator\Install',
@@ -280,6 +281,11 @@ class Module
                 },
                 'database_mapper_installationfunction' => function ($sm) {
                     return new \Database\Mapper\InstallationFunction(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_mapper_mailinglist' => function ($sm) {
+                    return new \Database\Mapper\MailingList(
                         $sm->get('database_doctrine_em')
                     );
                 },

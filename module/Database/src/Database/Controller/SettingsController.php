@@ -33,6 +33,26 @@ class SettingsController extends AbstractActionController
     }
 
     /**
+     * Mailing list action
+     */
+    public function listAction()
+    {
+        return new ViewModel(array(
+            'lists' => $this->getListService()->getAllLists()
+        ));
+    }
+
+    /**
+     * Get the list service.
+     *
+     * @return \Database\Service\MailingList
+     */
+    public function getListService()
+    {
+        return $this->getServiceLocator()->get('database_service_mailinglist');
+    }
+
+    /**
      * Get the function service.
      *
      * @return \Database\Service\Function

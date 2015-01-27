@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-6">
+        <h2>Huidige mailing lijsten</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($lists as $list): ?>
+                <tr>
+                    <td><?= $list->getName() ?></td>
+                    <td><?= $list->getDescription() ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Voeg mailing list doe</h2>
+        TODO: form
+    </div>
+</div>
