@@ -60,7 +60,7 @@ class Member extends AbstractService
                 // TODO 'betaald' => 'TODO',
                 // TODO 'lidsoortid' => 'TODO',
                 'verloopdatum' => $member->getExpiration()->format('Y-m-d'),
-                'geboortedatum' => $member->getExpiration()->format('Y-m-d'),
+                'geboortedatum' => $member->getBirth()->format('Y-m-d'),
                 // thuis
                 'hstraat' => $haddr['straat'],
                 'hpostcode' => $haddr['postcode'],
@@ -80,20 +80,14 @@ class Member extends AbstractService
                 // TODO 'babbel' => 'TODO',
             );
 
-            $this->saveMember($data);
-        }
-    }
-
-    /**
-     * Save an old member.
-     *
-     * @param $data Data to save
-     */
-    public function saveMember($data)
-    {
-        // first check if it is an existing member
-        if ($this->getQuery()->checkMemberExists($data['lidnummer'])) {
-            echo "Lid " . $data['lidnummer'] . " bestaat al.\n";
+            // first check if it is an existing member
+            if ($this->getQuery()->checkMemberExists($member->getLidnr())) {
+                $this->getQuery()->updateMember($data);
+                //echo "Lid " . $member->getFullName() . " is geupdate.\n";
+            } else {
+                echo "Nog niet bestaand: " . $member->getFullName() . "\n";
+                $this->getQuery()->createMember($data);
+            }
         }
     }
 

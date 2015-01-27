@@ -24,6 +24,46 @@ class Member
 
 
     /**
+     * Update a member.
+     *
+     * @param array $data member data to update
+     */
+    public function updateMember($data)
+    {
+        $sql = "UPDATE gewis_lid SET ";
+        $cols = array();
+        foreach ($data as $key => $val) {
+            if ($key != 'lidnummer') {
+                $cols[] = $key . ' = :' . $key;
+            }
+        }
+        $sql .= implode(', ', $cols);
+        $sql .= ' WHERE lidnummer = :lidnummer';
+
+        $stmt = $this->getConnection()->prepare($sql);
+
+        $stmt->execute($data);
+    }
+
+    /**
+     * Create a member.
+     *
+     * @param array $data Member data to create
+     */
+    public function createMember($data)
+    {
+        $sql = "INSERT INTO gewis_lid (";
+        $sql .= implode(', ', array_keys($data));
+        $sql .= ") VALUES (:";
+        $sql .= implode(', :', array_keys($data));
+        $sql .= ")";
+
+        $stmt = $this->getConnection()->prepare($sql);
+
+        $stmt->execute($data);
+    }
+
+    /**
      * Prepare the member exists statement.
      */
     public function getExistsStmt()
@@ -35,7 +75,6 @@ class Member
         }
         return $this->existsStmt;
     }
-
 
     /**
      * Check if the member exists.
