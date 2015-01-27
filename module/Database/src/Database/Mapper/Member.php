@@ -74,6 +74,16 @@ class Member
     }
 
     /**
+     * Find all members.
+     *
+     * @return array of members
+     */
+    public function findAll()
+    {
+        return $this->getRepository()->findAll();
+    }
+
+    /**
      * Find a member (by lidnr).
      *
      * And calculate memberships.

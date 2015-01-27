@@ -39,8 +39,14 @@ class Module
     {
         return array(
             'invokables' => array(
+                'export_service_member' => 'Export\Service\Member'
             ),
             'factories' => array(
+                'export_query_member' => function ($sm) {
+                    $q = new \Export\Query\Member();
+                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    return $q;
+                }
             )
         );
     }
