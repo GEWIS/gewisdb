@@ -96,10 +96,11 @@ class Member
     {
         $qb = $this->em->createQueryBuilder();
 
-        $qb->select('m, r')
+        $qb->select('m, r, l')
             ->from('Database\Model\Member', 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.installations', 'r')
+            ->leftJoin('m.lists', 'l')
             ->andWhere('(r.function = \'Lid\' OR r.function IS NULL)');
 
         // discharges

@@ -103,6 +103,16 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Lists action.
+     *
+     * Update list membership.
+     */
+    public function listsAction()
+    {
+        return new ViewModel(array());
+    }
+
+    /**
      * Membership action.
      *
      * Update / renew membership.
