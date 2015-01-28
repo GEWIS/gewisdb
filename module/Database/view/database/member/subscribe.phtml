@@ -6,33 +6,41 @@ $form->setAttribute('action', $this->url('member/default', array('action' => 'su
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
+$form->setAttribute('class', 'form-horizontal');
 ?>
 <?= $this->form()->openTag($form) ?>
 
-<div class="container">
+<div class="jumbotron">
+<div class="row">
+<div class="col-md-3">
+<img src="<?= $this->basePath() ?>/img/gewis.png" />
+</div>
 <div class="col-md-9">
-<h1>Inschrijving Studievereniging GEWIS</h1>
+<h1>Inschrijving Studievereniging <span class="gewis-red">GEWIS</span></h1>
 <p>
-Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro.
+Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van GEWIS. 
+Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro.
 </p>
 </div>
-<div class="col-md-3">
-<img src="http://gewis.nl/sws/themes/new/gewis-rond.png" />
 </div>
 </div>
-<br />
-<br />
-<br />
+
+<div class="row">
 
 <div class="form-group">
 <?php
 $element = $form->get('lastName');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -40,10 +48,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $form->get('middleName');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -51,10 +64,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $form->get('initials');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -62,20 +80,36 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $form->get('firstName');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
 <?php
 $element = $form->get('gender');
-$element->setLabelAttributes(array('class' => 'radio-inline'));
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
-    <strong><?= $element->getLabel() ?></strong><br>
-    <?= $this->formRadio($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?php foreach ($element->getValueOptions() as $option => $text): ?>
+            <div class="radio">
+                <label>
+                <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
+                    <?= $text ?>
+                </label>
+            </div>
+        <?php endforeach ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -83,10 +117,15 @@ $element->setLabelAttributes(array('class' => 'radio-inline'));
 $element = $form->get('email');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -94,10 +133,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $form->get('birth');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <h3>Thuisadres (adres van je ouders)</h3>
@@ -112,10 +156,15 @@ $fs = $form->get('homeAddress');
 $element = $fs->get('country');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -123,10 +172,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('street');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -134,10 +188,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('number');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -145,10 +204,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('postalCode');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -156,10 +220,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('city');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -167,10 +236,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('phone');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 </fieldset>
 
@@ -186,10 +260,15 @@ $fs = $form->get('studentAddress');
 $element = $fs->get('country');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -197,10 +276,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('street');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -208,10 +292,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('number');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -219,10 +308,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('postalCode');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -230,10 +324,15 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('city');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 
 <div class="form-group">
@@ -241,21 +340,31 @@ $element->setAttribute('placeholder', $element->getLabel());
 $element = $fs->get('phone');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
 ?>
     <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
 </div>
 </fieldset>
 
-<?php
-$submit = $form->get('submit');
-$submit->setLabel($submit->getValue());
-$submit->setAttribute('class', 'btn btn-primary');
-?>
-<?= $this->formButton($submit) ?>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php
+        $submit = $form->get('submit');
+        $submit->setLabel($submit->getValue());
+        $submit->setAttribute('class', 'btn btn-primary');
+        ?>
+        <?= $this->formButton($submit) ?>
+    </div>
+</div>
 
 <?= $this->form()->closeTag() ?>
+</div>
 <?php else: ?>
 Lid met lidnummer <?= $member->getLidnr() ?> is toegevoegd.
 <?php endif; ?>
