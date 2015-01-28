@@ -36,12 +36,12 @@ class Member extends AbstractService
 
             foreach ($member->getAddresses() as $address) {
                 if ($address->getType() == Address::TYPE_HOME) {
-                    $haddr['straat'] = $address->getStreet();
+                    $haddr['straat'] = $address->getStreet() . ' ' . $address->getNumber();
                     $haddr['postcode'] = $address->getPostalCode();
                     $haddr['plaats'] = $address->getCity();
                     $haddr['telefoon'] = $address->getPhone();
                 } else if ($address->getType() == Address::TYPE_STUDENT) {
-                    $kaddr['straat'] = $address->getStreet();
+                    $kaddr['straat'] = $address->getStreet() . ' ' . $address->getNumber();
                     $kaddr['postcode'] = $address->getPostalCode();
                     $kaddr['plaats'] = $address->getCity();
                     $kaddr['telefoon'] = $address->getPhone();
