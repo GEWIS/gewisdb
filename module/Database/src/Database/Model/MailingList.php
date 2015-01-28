@@ -36,6 +36,15 @@ class MailingList
     protected $onForm;
 
     /**
+     * If members should be subscribed by default.
+     *
+     * (when it is on the form, that means that the checkbox is checked by default)
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $default;
+
+    /**
      * Mailing list members.
      *
      * @ORM\ManyToMany(targetEntity="Member", mappedBy="lists")
@@ -109,6 +118,26 @@ class MailingList
     public function setOnForm($onForm)
     {
         $this->onForm = $onForm;
+    }
+
+    /**
+     * Get if it is a default list.
+     *
+     * @return boolean
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * Set if it is a default list.
+     *
+     * @param boolean $default
+     */
+    public function setDefault($default)
+    {
+        $this->default = $default;
     }
 
     /**
