@@ -6,6 +6,8 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th>Form</th>
+                    <th>Std</th>
                 </tr>
             </thead>
             <tbody>
@@ -13,6 +15,8 @@
                 <tr>
                     <td><?= $list->getName() ?></td>
                     <td><?= $list->getDescription() ?></td>
+                    <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>
+                    <td><span class="glyphicon glyphicon-<?= $list->getDefaultSub() ? 'ok' : 'remove' ?>"></span></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
