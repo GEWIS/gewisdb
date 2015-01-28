@@ -6,6 +6,7 @@ use Application\Service\AbstractService;
 
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
+use Database\Model\MailingList;
 
 class Member extends AbstractService
 {
@@ -220,6 +221,46 @@ class Member extends AbstractService
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
         $this->getMemberMapper()->removeAddress($address);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+
+        return $member;
+    }
+
+    /**
+     * Subscribe member to mailing lists.
+     *
+     * @param array $data
+     * @param int $lidnr
+     *
+     * @return MemberModel
+     */
+    public function subscribeLists($data, $lidnr)
+    {
+        $formData = $this->getListForm($lidnr);
+        $form = $formData['form'];
+        $lists = $formData['lists'];
+        $member = $formData['member'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $data = $form->getData();
+
+        $member->clearLists();
+
+        foreach ($lists as $list) {
+            $name = 'list-' . $list->getName();
+            if (isset($data[$name]) && $data[$name]) {
+                $member->addList($list);
+            }
+        }
+
+        // simply persist through member
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getMemberMapper()->persist($member);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }

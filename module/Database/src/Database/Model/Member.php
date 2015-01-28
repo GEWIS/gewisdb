@@ -594,6 +594,14 @@ class Member
     }
 
     /**
+     * Clear the lists.
+     */
+    public function clearLists()
+    {
+        $this->lists = new ArrayCollection();
+    }
+
+    /**
      * Set the home address.
      *
      * @param Address $address

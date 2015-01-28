@@ -1,8 +1,15 @@
+<?php if (isset($success) && $success): ?>
+Aanmeldingen mailing lists van <a href="<?= $this->url('member/show', array(
+    'id' => $member->getLidnr()
+)) ?>"><?= $member->getFullName() ?></a> opgeslagen.</h2>
+<?php else: ?>
 <h1>Wijzig mailing list inschrijvingen van <?= $member->getFullName() ?></h1>
 <?php
 $form->prepare();
 
-$form->setAttribute('action', $this->url('settings/default', array('action' => 'list')));
+$form->setAttribute('action', $this->url('member/show/edit/lists', array(
+    'id' => $member->getLidnr()
+)));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
@@ -39,3 +46,4 @@ $element->setAttribute('placeholder', $element->getLabel());
     </div>
 </div>
 <?= $this->form()->closeTag() ?>
+<?php endif ?>
