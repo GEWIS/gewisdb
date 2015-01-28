@@ -57,8 +57,8 @@ class Member extends AbstractService
                 'gesl' => $member->getGender() == MemberModel::GENDER_MALE ? '1': '0',
                 'generatie' => $member->getGeneration(),
                 'e_mail' => $member->getEmail(),
-                // TODO 'betaald' => 'TODO',
-                // TODO 'lidsoortid' => 'TODO',
+                'betaald' => $member->getPaid(),
+                'lidsoortid' => null,
                 'verloopdatum' => $member->getExpiration()->format('Y-m-d'),
                 'geboortedatum' => $member->getBirth()->format('Y-m-d'),
                 // thuis
@@ -71,14 +71,25 @@ class Member extends AbstractService
                 'kpostcode' => $kaddr['postcode'],
                 'kplaats' => $kaddr['plaats'],
                 'ktelefoon' => $kaddr['telefoon'],
-                // mail settings
-                // TODO 'direct' => 'TODO',
-                // TODO 'plijst' => 'TODO',
-                // TODO 'winlijst' => 'TODO',
-                // TODO 'gewislijst' => 'TODO',
-                // TODO 'vacature' => 'TODO',
-                // TODO 'babbel' => 'TODO',
             );
+
+            switch ($member->getType()) {
+            case MemberModel::TYPE_ORDINARY:
+                $data['lidsoortid'] = 1;
+                break;
+            case MemberModel::TYPE_PROLONGED:
+                $data['lidsoortid'] = 2;
+                break;
+            case MemberModel::TYPE_EXTERNAL:
+                $data['lidsoortid'] = 3;
+                break;
+            case MemberModel::TYPE_EXTRAORDINARY:
+                $data['lidsoortid'] = 4;
+                break;
+            case MemberModel::TYPE_HONORARY:
+                $data['lidsoortid'] = 5;
+                break;
+            }
 
             // first check if it is an existing member
             if ($this->getQuery()->checkMemberExists($member->getLidnr())) {
