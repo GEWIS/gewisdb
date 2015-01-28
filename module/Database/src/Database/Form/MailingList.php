@@ -40,7 +40,7 @@ class MailingList extends Form
         $this->get('onForm')->setChecked(true);
 
         $this->add(array(
-            'name' => 'default',
+            'name' => 'defaultSub',
             'type' => 'checkbox',
             'options' => array(
                 'label' => 'Standaard ingeschreven'

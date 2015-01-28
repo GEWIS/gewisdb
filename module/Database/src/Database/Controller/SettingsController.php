@@ -37,6 +37,9 @@ class SettingsController extends AbstractActionController
      */
     public function listAction()
     {
+        if ($this->getRequest()->isPost()) {
+            $this->getListService()->addList($this->getRequest()->getPost());
+        }
         return new ViewModel(array(
             'lists' => $this->getListService()->getAllLists(),
             'form' => $this->getListService()->getListForm()

@@ -42,7 +42,7 @@ class MailingList
      *
      * @ORM\Column(type="boolean")
      */
-    protected $default;
+    protected $defaultSub;
 
     /**
      * Mailing list members.
@@ -65,7 +65,7 @@ class MailingList
      *
      * @return string
      */
-    public function getname()
+    public function getName()
     {
         return $this->name;
     }
@@ -125,9 +125,9 @@ class MailingList
      *
      * @return boolean
      */
-    public function getDefault()
+    public function getDefaultSub()
     {
-        return $this->default;
+        return $this->defaultSub;
     }
 
     /**
@@ -135,9 +135,9 @@ class MailingList
      *
      * @param boolean $default
      */
-    public function setDefault($default)
+    public function setDefaultSub($default)
     {
-        $this->default = $default;
+        $this->defaultSub = $default;
     }
 
     /**
