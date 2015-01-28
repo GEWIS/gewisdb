@@ -31,7 +31,8 @@ class Member extends AbstractService
 
         $keys = array('e_mail', 'achternaam', 'tussen', 'voorlet', 'voornaam',
             'hstraat', 'hpostcode', 'hplaats', 'htelefoon',
-            'kstraat', 'kpostcode', 'kplaats', 'ktelefoon', 'betaald'
+            'kstraat', 'kpostcode', 'kplaats', 'ktelefoon', 'betaald',
+            'direct', 'plijst', 'winlijst', 'gewislijst', 'vacature', 'babbel'
         );
         foreach ($keys as $key) {
             if (empty($data[$key])) {
@@ -132,7 +133,44 @@ class Member extends AbstractService
             $member->addAddress($student);
         }
 
-        $prePerst = $member->getLidnr();
+        // import mailing list subscriptions
+        $mlService = $this->getServiceManager()->get('database_service_mailinglist');
+        if ($data['direct']) {
+            $list = $mlService->getList('direct');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['plijst']) {
+            $list = $mlService->getList('p-lijst');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['winlijst']) {
+            $list = $mlService->getList('win-lijst');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['gewislijst']) {
+            $list = $mlService->getList('gewis-lijst');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['vacature']) {
+            $list = $mlService->getList('vacature-l');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['babbel']) {
+            $list = $mlService->getList('babbel');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
 
         $em = $this->getServiceManager()->get('database_doctrine_em');
 

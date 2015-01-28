@@ -51,6 +51,18 @@ class MailingList
     }
 
     /**
+     * Find a list.
+     *
+     * @param string $name
+     *
+     * @return ListModel
+     */
+    public function find($name)
+    {
+        return $this->getRepository()->find($name);
+    }
+
+    /**
      * Get the repository for this mapper.
      *
      * @return Doctrine\ORM\EntityRepository

@@ -20,6 +20,18 @@ class MailingList extends AbstractService
     }
 
     /**
+     * Get a list.
+     *
+     * @param string $name
+     *
+     * @return ListModel
+     */
+    public function getList($name)
+    {
+        return $this->getListMapper()->find($name);
+    }
+
+    /**
      * Add a list.
      *
      * @param $data POST data.
