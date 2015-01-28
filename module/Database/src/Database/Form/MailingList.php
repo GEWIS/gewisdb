@@ -24,7 +24,7 @@ class MailingList extends Form
 
         $this->add(array(
             'name' => 'description',
-            'type' => 'text',
+            'type' => 'textarea',
             'options' => array(
                 'label' => 'Beschrijving'
             )
@@ -34,10 +34,10 @@ class MailingList extends Form
             'name' => 'onForm',
             'type' => 'checkbox',
             'options' => array(
-                'label' => 'Op inschrijfformulier',
-                'checked' => true
+                'label' => 'Op inschrijfformulier'
             )
         ));
+        $this->get('onForm')->setChecked(true);
 
         $this->add(array(
             'name' => 'default',

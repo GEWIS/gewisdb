@@ -38,7 +38,8 @@ class SettingsController extends AbstractActionController
     public function listAction()
     {
         return new ViewModel(array(
-            'lists' => $this->getListService()->getAllLists()
+            'lists' => $this->getListService()->getAllLists(),
+            'form' => $this->getListService()->getListForm()
         ));
     }
 

@@ -120,6 +120,11 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_budget'));
                     return $form;
                 },
+                'database_form_mailinglist' => function ($sm) {
+                    $form = new \Database\Form\MailingList();
+                    $form->setHydrator($sm->get('database_hydrator_member'));
+                    return $form;
+                },
                 'database_form_installationfunction' => function ($sm) {
                     $form = new \Database\Form\InstallationFunction();
                     $form->setHydrator($sm->get('database_hydrator_member'));
