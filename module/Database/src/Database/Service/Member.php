@@ -11,6 +11,13 @@ class Member extends AbstractService
 {
 
     /**
+     * List form.
+     *
+     * @var \Database\Form\MemberLists
+     */
+    protected $listForm;
+
+    /**
      * Subscribe a member.
      *
      * @param array $data
@@ -250,6 +257,29 @@ class Member extends AbstractService
         return array(
             'member' => $member,
             'form' => $form
+        );
+    }
+
+    /**
+     * Get the list edit form.
+     *
+     * @param int $lidnr
+     *
+     * @return \Database\Form\MemberLists
+     */
+    public function getListForm($lidnr)
+    {
+        $member = $this->getMember($lidnr);
+        $lists = $this->getServiceManager()->get('database_service_mailinglist')->getAllLists();
+
+        if (null === $this->listForm) {
+            $this->listForm = new \Database\Form\MemberLists($member, $lists);
+        }
+
+        return array(
+            'form' => $this->listForm,
+            'member' => $member,
+            'lists' => $lists
         );
     }
 

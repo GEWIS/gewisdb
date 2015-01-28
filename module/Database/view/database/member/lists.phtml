@@ -1,1 +1,41 @@
-Mailing list editor.
+<h1>Wijzig mailing list inschrijvingen van <?= $member->getFullName() ?></h1>
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('settings/default', array('action' => 'list')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('class', 'form-horizontal');
+?>
+<?= $this->form()->openTag($form) ?>
+
+<?php foreach ($lists as $list): ?>
+<div class="form-group">
+<?php
+$element = $form->get('list-' . $list->getName());
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="col-sm-12">
+        <div class="checkbox">
+            <label>
+                <?= $this->formCheckbox($element) ?>
+                <?= $element->getLabel() ?>
+            </label>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+</div>
+<?php endforeach ?>
+
+<div class="form-group">
+    <div class="col-sm-12">
+        <?php
+        $submit = $form->get('submit');
+        $submit->setLabel($submit->getValue());
+        $submit->setAttribute('class', 'btn btn-primary');
+        ?>
+        <?= $this->formButton($submit) ?>
+    </div>
+</div>
+<?= $this->form()->closeTag() ?>

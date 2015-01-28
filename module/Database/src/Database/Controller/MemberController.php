@@ -109,7 +109,11 @@ class MemberController extends AbstractActionController
      */
     public function listsAction()
     {
-        return new ViewModel(array());
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+
+        return new ViewModel($service->getListForm($lidnr));
     }
 
     /**
