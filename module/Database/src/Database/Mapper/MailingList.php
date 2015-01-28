@@ -43,11 +43,35 @@ class MailingList
 
     /**
      * Find all.
+     *
      * @return array of ListModel's
      */
     public function findAll()
     {
         return $this->getRepository()->findAll();
+    }
+
+    /**
+     * Find all mailing lists that are on the subscription form.
+     *
+     * @return array of ListModel's
+     */
+    public function findAllOnForm()
+    {
+        return $this->getRepository()->findBy(array('onForm' => true));
+    }
+
+    /**
+     * Find all default
+     *
+     * @return array of ListModel's
+     */
+    public function findDefault()
+    {
+        return $this->getRepository()->findBy(array(
+            'defaultSub' => true,
+            'onForm' => false
+        ));
     }
 
     /**

@@ -87,6 +87,7 @@ class Module
                         $sm->get('database_form_fieldset_address')
                     );
                     $form->setHydrator($sm->get('database_hydrator_member'));
+                    $form->setLists($sm->get('database_mapper_mailinglist')->findAllOnForm());
                     return $form;
                 },
                 'database_form_memberedit' => function ($sm) {

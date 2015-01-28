@@ -352,6 +352,56 @@ $element->setLabelAttributes(array(
 </div>
 </fieldset>
 
+<h3>Mailinglijsten</h3>
+<p>
+Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor mededelingen
+en activiteiten van de studievereniging. Daarnaast zijn er verschillende
+optionele mailinglijsten.
+Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze
+inschrijvingen kunnen op een later tijdstip veranderd worden.
+</p>
+
+<?php foreach ($form->getLists() as $list): ?>
+<div class="form-group">
+    <?php
+    $element = $form->get('list-' . $list->getName());
+    $element->setAttribute('placeholder', $element->getLabel());
+    ?>
+    <div class="col-sm-offset-1 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <?= $this->formCheckbox($element) ?>
+                <?= $element->getLabel() ?>
+            </label>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+</div>
+<?php endforeach ?>
+
+<h3>Akkoordverklaring</h3>
+
+<a href="https://gewis.nl/vereniging/statuten/index.php">Statuten en HR</a>
+
+<div class="form-group">
+<?php
+$element = $form->get('agreed');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+    <div class="col-sm-offset-1 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <?= $this->formCheckbox($element) ?>
+Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
+ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten en
+HR gelezen.
+                <?= $element->getLabel() ?>
+            </label>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+</div>
+
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         <?php

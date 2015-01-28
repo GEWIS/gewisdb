@@ -27,6 +27,8 @@ class Member extends AbstractService
      */
     public function subscribe($data)
     {
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+
         $form = $this->getMemberForm();
 
         $form->bind(new MemberModel());
@@ -51,7 +53,18 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        // check mailing lists
+        foreach ($form->getLists() as $list) {
+            if ($form->get('list-' . $list->getName())->isChecked()) {
+                $member->addList($list);
+            }
+        }
+        // subscribe to default mailing lists not on the form
+        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
+        foreach ($mailingMapper->findDefault() as $list) {
+            $member->addList($list);
+        }
+
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 

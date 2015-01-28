@@ -11,6 +11,11 @@ use Database\Model\Address;
 class Member extends Form implements InputFilterProviderInterface
 {
 
+    /**
+     * Lists
+     */
+    protected $lists;
+
     public function __construct(Fieldset\Address $address)
     {
         parent::__construct();
@@ -87,12 +92,49 @@ class Member extends Form implements InputFilterProviderInterface
         $this->add($student);
 
         $this->add(array(
+            'name' => 'agreed',
+            'type' => 'checkbox'
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
                 'value' => 'Schrijf in'
             )
         ));
+    }
+
+    /**
+     * Set the mailing lists.
+     *
+     * @param array $lists Array of mailing lists
+     */
+    public function setLists($lists)
+    {
+        $this->lists = $lists;
+        foreach ($this->lists as $list) {
+            $this->add(array(
+                'name' => 'list-' . $list->getName(),
+                'type' => 'checkbox',
+                'options' => array(
+                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription()
+                )
+            ));
+            if ($list->getDefaultSub()) {
+                $this->get('list-' . $list->getName())->setChecked(true);
+            }
+        }
+    }
+
+    /**
+     * Get the mailing lists.
+     *
+     * @return array of mailing lists
+     */
+    public function getLists()
+    {
+        return $this->lists;
     }
 
     /**
@@ -149,6 +191,20 @@ class Member extends Form implements InputFilterProviderInterface
                     )
                 )
             ),
+            'agreed' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'identical',
+                        'options' => array(
+                            'token' => '1',
+                            'messages' => array(
+                                'notSame' => 'Je moet de voorwaarden accepteren!'
+                            )
+                        )
+                    )
+                )
+            )
         );
     }
 }
