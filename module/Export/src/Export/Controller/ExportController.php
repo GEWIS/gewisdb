@@ -17,7 +17,17 @@ class ExportController extends AbstractActionController
         $console = $this->getConsole();
 
         $this->getMemberService()->export();
-        // TODO: export meetings and decisions
+        $this->getMeetingService()->export();
+    }
+
+    /**
+     * Get the meeting service.
+     *
+     * @return Export\Service\Meeting
+     */
+    public function getMeetingService()
+    {
+        return $this->getServiceLocator()->get('export_service_meeting');
     }
 
     /**

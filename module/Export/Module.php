@@ -39,14 +39,20 @@ class Module
     {
         return array(
             'invokables' => array(
-                'export_service_member' => 'Export\Service\Member'
+                'export_service_member' => 'Export\Service\Member',
+                'export_service_meeting' => 'Export\Service\Meeting',
             ),
             'factories' => array(
+                'export_query_meeting' => function ($sm) {
+                    $q = new \Export\Query\Meeting();
+                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    return $q;
+                },
                 'export_query_member' => function ($sm) {
                     $q = new \Export\Query\Member();
                     $q->setConnection($sm->get('doctrine.connection.orm_import'));
                     return $q;
-                }
+                },
             )
         );
     }

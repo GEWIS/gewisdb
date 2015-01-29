@@ -18,8 +18,6 @@ class Member extends AbstractService
         $mapper = $this->getMemberMapper();
 
         foreach ($mapper->findAll() as $member) {
-            //echo "Exporting " . $member->getFullName() . "\n";
-            // TODO: export member
 
             $haddr = array(
                 'straat' => '',
