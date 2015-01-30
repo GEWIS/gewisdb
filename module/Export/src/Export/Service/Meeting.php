@@ -16,9 +16,31 @@ class Meeting extends AbstractService
     {
         $mapper = $this->getMeetingMapper();
 
+        $types = array(
+            'bv' => 1,
+            'av' => 2,
+            'vv' => 3,
+            'virt' => 4
+        );
+
         foreach ($mapper->findAll(false) as $meeting) {
             echo 'Exporting ' . $meeting->getType() . ' ' . $meeting->getNumber() . "\n";
-            // TODO export $meeting to the old database
+
+            $type = $types[strtolower($meeting->getType())];
+
+            if ($this->getQuery()->checkMeetingExists($type, $meeting->getNumber())) {
+                echo 'Already exists';
+            } else {
+                // add to DB
+                // Y-m-d
+                $data = array(
+                    'vergadertypeid' => $type,
+                    'vergadernr' => $meeting->getNumber(),
+                    'datum' => $meeting->getDate()->format('Y-m-d')
+                );
+
+                $this->getQuery()->createMeeting($data);
+            }
         }
     }
 
