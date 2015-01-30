@@ -24,29 +24,6 @@ class Organ
 
 
     /**
-     * Update a organ.
-     *
-     * @param array $data organ data to update
-     */
-    public function updateOrgan($data)
-    {
-        $sql = "UPDATE orgaan SET ";
-        $cols = array();
-        foreach ($data as $key => $val) {
-            if ($key != 'vergadertypeid' && $key != 'vergadernr') {
-                $cols[] = $key . ' = :' . $key;
-            }
-        }
-        $sql .= implode(', ', $cols);
-        $sql .= ' WHERE vergadertypeid = :vergadertypeid
-                    AND vergadernr = :vergadernr';
-
-        $stmt = $this->getConnection()->prepare($sql);
-
-        $stmt->execute($data);
-    }
-
-    /**
      * Create a organ.
      *
      * @param array $data Organ data to create
@@ -101,7 +78,12 @@ class Organ
             'jaar' => $year
         ));
 
-        return count($stmt->fetchAll()) == 1;
+        $res = $stmt->fetchAll();
+
+        if (count($res) == 1) {
+            return $res[0]['orgaanid'];
+        }
+        return null;
     }
 
     public function setConnection(Connection $conn)

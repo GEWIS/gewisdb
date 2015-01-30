@@ -36,12 +36,10 @@ class Organ extends AbstractService
                 'orgaannaam' => $organ->getName()
             );
 
-            $exists = $this->getQuery()->checkOrganExists($type, $organ->getAbbr(),
+            $id = $this->getQuery()->checkOrganExists($type, $organ->getAbbr(),
                 $organ->getName(), $year);
-            if ($exists) {
-                echo "Exists\n";
-            } else {
-                echo "Doesn't exist yet\n";
+            if ($id != null) {
+                $this->getQuery()->createOrgan($data);
             }
         }
     }
