@@ -41,7 +41,15 @@ class Meeting extends AbstractService
                 $this->getQuery()->createMeeting($data);
             }
 
-            // TODO: decisions
+            // export this meeting's decisions
+            foreach ($meeting->getDecisions() as $decision) {
+                echo "{$meeting->getType()} {$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}\n";
+                if ($this->getDecisionQuery()->checkDecisionExists($type, $meeting->getNumber(), $decision->getPoint(), $decision->getNumber())) {
+                    echo "exists\n";
+                } else {
+                    // create
+                }
+            }
         }
     }
 
@@ -53,6 +61,14 @@ class Meeting extends AbstractService
     public function getMeetingMapper()
     {
         return $this->getServiceManager()->get('database_mapper_meeting');
+    }
+
+    /**
+     * Get the decision query object.
+     */
+    public function getDecisionQuery()
+    {
+        return $this->getServiceManager()->get('export_query_decision');
     }
 
     /**
