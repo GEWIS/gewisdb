@@ -6,6 +6,8 @@ use Application\Service\AbstractService;
 
 use Database\Model\Meeting as MeetingModel;
 
+use Database\Model\SubDecision;
+
 class Meeting extends AbstractService
 {
 
@@ -74,6 +76,55 @@ class Meeting extends AbstractService
         } else {
             $this->getDecisionQuery()->createDecision($data);
         }
+        foreach ($decision->getSubdecisions() as $subdecision) {
+            $this->exportSubdecision($subdecision, $type);
+        }
+    }
+
+    /**
+     * Export a subdecision.
+     *
+     * @param \Database\Model\SubDecision $subdecision
+     * @param int $type
+     */
+    protected function exportSubdecision($subdecision, $type)
+    {
+        $data = array(
+            'vergadertypeid' => $type,
+            'vergadernr' => $subdecision->getDecision()->getMeeting()->getNumber(),
+            'puntnr' => $subdecision->getDecision()->getPoint(),
+            'besluitnr' => $subdecision->getDecision()->getNumber(),
+            'subbesluitnr' => $subdecision->getNumber(),
+            'inhoud' => $subdecision->getContent()
+        );
+
+        /*
+         * 1    Installatie     Het installeren van een GEWIS-lid in een GEWIS-or...
+         * 2    Decharge        Het dechargeren van een GEWIS-lid uit een orgaan.
+         * 3    Oprichting      Het oprichten van een orgaan.
+         * 4    Opheffen        Het opheffen van een orgaan.
+         * 5    Begroting       Besluiten met betrekking tot een begroting van ee...
+         * 6    Afrekening      Besluiten met betrekking tot een afrekening van e...
+         * 7    Overige         Besluiten die niet tot een categorie behoren.
+         */
+
+        if ($subdecision instanceof SubDecision\Installation) {
+            $data['besluittypeid'] = 1;
+        } else if ($subdecision instanceof SubDecision\Discharge) {
+            $data['besluittypeid'] = 2;
+        } else if ($subdecision instanceof SubDecision\Foundation) {
+            $data['besluittypeid'] = 3;
+        } else if ($subdecision instanceof SubDecision\Abrogation) {
+            $data['besluittypeid'] = 4;
+        } else if ($subdecision instanceof SubDecision\Reckoning) {
+            $data['besluittypeid'] = 6;
+        } else if ($subdecision instanceof SubDecision\Budget) {
+            $data['besluittypeid'] = 5;
+        } else if ($subdecision instanceof SubDecision\Other) {
+            $data['besluittypeid'] = 7;
+        }
+
+        var_dump($data);
     }
 
     /**
