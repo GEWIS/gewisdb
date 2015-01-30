@@ -43,11 +43,21 @@ class Meeting extends AbstractService
 
             // export this meeting's decisions
             foreach ($meeting->getDecisions() as $decision) {
-                echo "{$meeting->getType()} {$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}\n";
+                $decData = $data;
+                unset($decData['datum']);
+                $decData['puntnr'] = $decision->getPoint();
+                $decData['besluitnr'] = $decision->getNumber();
+
+                // gather content from the subdecisions
+                $decData['inhoud'] = array();
+                foreach ($decision->getSubdecisions() as $subdecision) {
+                    $decData['inhoud'][] = $subdecision->getContent();
+                }
+                $decData['inhoud'] = implode($decData['inhoud']);
                 if ($this->getDecisionQuery()->checkDecisionExists($type, $meeting->getNumber(), $decision->getPoint(), $decision->getNumber())) {
-                    echo "exists\n";
+                    $this->getDecisionQuery()->updateDecision($decData);
                 } else {
-                    // create
+                    $this->getDecisionQuery()->createDecision($decData);
                 }
             }
         }

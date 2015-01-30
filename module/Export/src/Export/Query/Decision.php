@@ -24,6 +24,49 @@ class Decision
 
 
     /**
+     * Update a decision.
+     *
+     * @param array $data decision data to update
+     */
+    public function updateDecision($data)
+    {
+        $sql = "UPDATE besluit SET ";
+        $cols = array();
+        foreach ($data as $key => $val) {
+            if ($key != 'vergadertypeid' && $key != 'vergadernr' && $key != 'puntnr' && $key != 'besluitnr') {
+                $cols[] = $key . ' = :' . $key;
+            }
+        }
+        $sql .= implode(', ', $cols);
+        $sql .= ' WHERE vergadertypeid = :vergadertypeid
+                    AND vergadernr = :vergadernr
+                    AND puntnr = :puntnr
+                    AND besluitnr = :besluitnr';
+
+        $stmt = $this->getConnection()->prepare($sql);
+
+        $stmt->execute($data);
+    }
+
+    /**
+     * Create a decision.
+     *
+     * @param array $data Decision data to create
+     */
+    public function createDecision($data)
+    {
+        $sql = "INSERT INTO besluit (";
+        $sql .= implode(', ', array_keys($data));
+        $sql .= ") VALUES (:";
+        $sql .= implode(', :', array_keys($data));
+        $sql .= ")";
+
+        $stmt = $this->getConnection()->prepare($sql);
+
+        $stmt->execute($data);
+    }
+
+    /**
      * Prepare the decision exists statement.
      */
     public function getExistsStmt()

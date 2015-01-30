@@ -33,7 +33,7 @@ class Meeting
         $sql = "UPDATE vergadering SET ";
         $cols = array();
         foreach ($data as $key => $val) {
-            if ($key != 'vergadertypeid' || $key != 'vergadernr') {
+            if ($key != 'vergadertypeid' && $key != 'vergadernr') {
                 $cols[] = $key . ' = :' . $key;
             }
         }
