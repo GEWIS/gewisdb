@@ -24,6 +24,29 @@ class Meeting
 
 
     /**
+     * Update a meeting.
+     *
+     * @param array $data meeting data to update
+     */
+    public function updateMeeting($data)
+    {
+        $sql = "UPDATE vergadering SET ";
+        $cols = array();
+        foreach ($data as $key => $val) {
+            if ($key != 'vergadertypeid' || $key != 'vergadernr') {
+                $cols[] = $key . ' = :' . $key;
+            }
+        }
+        $sql .= implode(', ', $cols);
+        $sql .= ' WHERE vergadertypeid = :vergadertypeid
+                    AND vergadernr = :vergadernr';
+
+        $stmt = $this->getConnection()->prepare($sql);
+
+        $stmt->execute($data);
+    }
+
+    /**
      * Create a meeting.
      *
      * @param array $data Meeting data to create

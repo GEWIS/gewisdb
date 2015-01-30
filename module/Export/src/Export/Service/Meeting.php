@@ -24,23 +24,24 @@ class Meeting extends AbstractService
         );
 
         foreach ($mapper->findAll(false) as $meeting) {
-            echo 'Exporting ' . $meeting->getType() . ' ' . $meeting->getNumber() . "\n";
 
             $type = $types[strtolower($meeting->getType())];
 
-            if ($this->getQuery()->checkMeetingExists($type, $meeting->getNumber())) {
-                echo "Already exists\n";
-            } else {
-                // add to DB
-                // Y-m-d
-                $data = array(
-                    'vergadertypeid' => $type,
-                    'vergadernr' => $meeting->getNumber(),
-                    'datum' => $meeting->getDate()->format('Y-m-d')
-                );
+            $data = array(
+                'vergadertypeid' => $type,
+                'vergadernr' => $meeting->getNumber(),
+                'datum' => $meeting->getDate()->format('Y-m-d')
+            );
 
+            // update the meeting
+            if ($this->getQuery()->checkMeetingExists($type, $meeting->getNumber())) {
+                $this->getQuery()->updateMeeting($data);
+            } else {
+                echo 'New meeting ' . $meeting->getType() . ' ' . $meeting->getNumber() . "\n";
                 $this->getQuery()->createMeeting($data);
             }
+
+            // TODO: decisions
         }
     }
 
