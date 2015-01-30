@@ -24,6 +24,24 @@ class Meeting
 
 
     /**
+     * Create a meeting.
+     *
+     * @param array $data Meeting data to create
+     */
+    public function createMeeting($data)
+    {
+        $sql = "INSERT INTO vergadering (";
+        $sql .= implode(', ', array_keys($data));
+        $sql .= ") VALUES (:";
+        $sql .= implode(', :', array_keys($data));
+        $sql .= ")";
+
+        $stmt = $this->getConnection()->prepare($sql);
+
+        $stmt->execute($data);
+    }
+
+    /**
      * Prepare the meeting exists statement.
      */
     public function getExistsStmt()

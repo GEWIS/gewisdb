@@ -29,7 +29,7 @@ class Meeting extends AbstractService
             $type = $types[strtolower($meeting->getType())];
 
             if ($this->getQuery()->checkMeetingExists($type, $meeting->getNumber())) {
-                echo 'Already exists';
+                echo "Already exists\n";
             } else {
                 // add to DB
                 // Y-m-d
