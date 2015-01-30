@@ -43,7 +43,7 @@ class Meeting extends AbstractService
 
             // export this meeting's decisions
             foreach ($meeting->getDecisions() as $decision) {
-                $this->exportDecision($meeting, $decision, $data);
+                $this->exportDecision($decision, $data);
             }
         }
     }
@@ -51,12 +51,12 @@ class Meeting extends AbstractService
     /**
      * Export a decision.
      *
-     * @param \Database\Model\Meeting $meeting
      * @param \Database\Model\Decision $decision
      * @param array $meetingData
      */
-    protected function exportDecision($meeting, $decision, $meetingData)
+    protected function exportDecision($decision, $meetingData)
     {
+        $meeting = $decision->getMeeting();
         $data = $meetingData;
         $type = $data['vergadertypeid'];
         unset($data['datum']);
