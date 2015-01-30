@@ -41,6 +41,7 @@ class Module
             'invokables' => array(
                 'export_service_member' => 'Export\Service\Member',
                 'export_service_meeting' => 'Export\Service\Meeting',
+                'export_service_organ' => 'Export\Service\Organ',
             ),
             'factories' => array(
                 'export_query_meeting' => function ($sm) {
@@ -55,6 +56,11 @@ class Module
                 },
                 'export_query_decision' => function ($sm) {
                     $q = new \Export\Query\Decision();
+                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    return $q;
+                },
+                'export_query_organ' => function ($sm) {
+                    $q = new \Export\Query\Organ();
                     $q->setConnection($sm->get('doctrine.connection.orm_import'));
                     return $q;
                 },

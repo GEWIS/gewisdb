@@ -17,6 +17,7 @@ class ExportController extends AbstractActionController
         $console = $this->getConsole();
 
         //$this->getMemberService()->export();
+        $this->getOrganService()->export();
         $this->getMeetingService()->export();
     }
 
@@ -38,6 +39,16 @@ class ExportController extends AbstractActionController
     public function getMemberService()
     {
         return $this->getServiceLocator()->get('export_service_member');
+    }
+
+    /**
+     * Get the organ service.
+     *
+     * @return Export\Service\Organ
+     */
+    public function getOrganService()
+    {
+        return $this->getServiceLocator()->get('export_service_organ');
     }
 
     /**

@@ -123,8 +123,6 @@ class Meeting extends AbstractService
         } else if ($subdecision instanceof SubDecision\Other) {
             $data['besluittypeid'] = 7;
         }
-
-        var_dump($data);
     }
 
     /**
