@@ -27,8 +27,17 @@ class Organ extends AbstractService
                 $type = 5;
                 break;
             }
-            $exists = $this->getQuery()->checkOrganExists($type, $organ->getAbbr(), $organ->getName(),
-                $organ->getDecision()->getMeeting()->getDate()->format('Y'));
+            $year = $organ->getDecision()->getMeeting()->getDate()->format('Y');
+
+            $data = array(
+                'orgaantypeid' => $type,
+                'jaartal' => $year,
+                'orgaanafk' => $organ->getAbbr(),
+                'orgaannaam' => $organ->getName()
+            );
+
+            $exists = $this->getQuery()->checkOrganExists($type, $organ->getAbbr(),
+                $organ->getName(), $year);
             if ($exists) {
                 echo "Exists\n";
             } else {
