@@ -43,23 +43,36 @@ class Meeting extends AbstractService
 
             // export this meeting's decisions
             foreach ($meeting->getDecisions() as $decision) {
-                $decData = $data;
-                unset($decData['datum']);
-                $decData['puntnr'] = $decision->getPoint();
-                $decData['besluitnr'] = $decision->getNumber();
-
-                // gather content from the subdecisions
-                $decData['inhoud'] = array();
-                foreach ($decision->getSubdecisions() as $subdecision) {
-                    $decData['inhoud'][] = $subdecision->getContent();
-                }
-                $decData['inhoud'] = implode($decData['inhoud']);
-                if ($this->getDecisionQuery()->checkDecisionExists($type, $meeting->getNumber(), $decision->getPoint(), $decision->getNumber())) {
-                    $this->getDecisionQuery()->updateDecision($decData);
-                } else {
-                    $this->getDecisionQuery()->createDecision($decData);
-                }
+                $this->exportDecision($meeting, $decision, $data);
             }
+        }
+    }
+
+    /**
+     * Export a decision.
+     *
+     * @param \Database\Model\Meeting $meeting
+     * @param \Database\Model\Decision $decision
+     * @param array $meetingData
+     */
+    protected function exportDecision($meeting, $decision, $meetingData)
+    {
+        $data = $meetingData;
+        $type = $data['vergadertypeid'];
+        unset($data['datum']);
+        $data['puntnr'] = $decision->getPoint();
+        $data['besluitnr'] = $decision->getNumber();
+
+        // gather content from the subdecisions
+        $data['inhoud'] = array();
+        foreach ($decision->getSubdecisions() as $subdecision) {
+            $data['inhoud'][] = $subdecision->getContent();
+        }
+        $data['inhoud'] = implode($data['inhoud']);
+        if ($this->getDecisionQuery()->checkDecisionExists($type, $meeting->getNumber(), $decision->getPoint(), $decision->getNumber())) {
+            $this->getDecisionQuery()->updateDecision($data);
+        } else {
+            $this->getDecisionQuery()->createDecision($data);
         }
     }
 
