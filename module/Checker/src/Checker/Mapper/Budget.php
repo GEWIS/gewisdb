@@ -30,19 +30,21 @@ class Budget {
     }
 
     /**
-     * Returns all budgets that have been created  before meeting $meeting
+     * Returns all budgets that have been created at meeting $meeting
      * @param $meeting
      */
-    public function getAllBudgets($meeting)
+    public function getAllBudgets(\Database\Model\Meeting $meeting)
     {
-            $qb = $this->em->createQueryBuilder();
+        $qb = $this->em->createQueryBuilder();
 
-            $qb->select('b')
-                ->where('b.meeting_number <= :meeting_number')
-                ->from('Database\Model\SubDecision\Budget', 'b')
-                ->setParameter('meeting_number', $meeting);
+        $qb->select('b')
+            ->where('m.date = :meeting_date')
+            ->from('Database\Model\SubDecision\Budget', 'b')
+            ->innerJoin('b.decision', 'dec')
+            ->innerJoin('dec.meeting', 'm')
+            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-            // TODO: minus deleted budgets
-            return $qb->getQuery()->getResult();
+        // TODO: minus deleted decision
+        return $qb->getQuery()->getResult();
     }
 } 

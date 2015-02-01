@@ -21,7 +21,7 @@ class Checker extends AbstractService {
 
         foreach ($meetings as $meeting) {
             $errors = array_merge(
-                //$this->checkBudgetOrganExists($meeting),
+                $this->checkBudgetOrganExists($meeting),
                 $this->checkMembersHaveRoleButNotInOrgan($meeting),
                 $this->checkMembersInNotExistingOrgans($meeting)
             );
@@ -33,6 +33,7 @@ class Checker extends AbstractService {
 
     /**
      * Makes sure that the errors are handled correctly
+     *
      * @param \Database\Model\Meeting $meeting Meeting for which this errors hold
      * @param array $errors
      */
@@ -51,6 +52,7 @@ class Checker extends AbstractService {
      * This can happen if there is still a member in the organ after it gets disbanded
      * Or if there is a member in the organ if the decision to create an organ
      * is nulled
+     *
      * @param int $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
@@ -67,7 +69,7 @@ class Checker extends AbstractService {
             if (!in_array($organName, $organs,true)) {
                 $errors[] = 'Member ' . $installation->getMember()->toArray()['fullName'] .
                     ' ('. $installation->getMember()->toArray()['lidnr'] . ')'
-                    . ' is still installed in ' . $organName . ' which does not exist anymore';
+                    . ' is still installed as '. $installation->getFunction() . ' in ' . $organName . ' which does not exist anymore';
             }
         }
         return $errors;
@@ -76,6 +78,7 @@ class Checker extends AbstractService {
     /**
      * Checks if members still have a role in an organ (e.g. they are treasurer)
      * but they are not a member of the organ anymore
+     *
      * @param int $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
@@ -116,7 +119,11 @@ class Checker extends AbstractService {
 
         foreach ($budgets as $budget) {
             $foundation = $budget->getFoundation();
-            \Zend\Debug\Debug::dump($foundation);
+
+            if (!is_null($foundation) && !in_array($foundation->getName(), $organs)) {
+                $errors[] = 'Budget from ' . $foundation->getName() . ' has been created. However '
+                    . $foundation->getName() . ' does not exist';
+            }
         }
 
         return $errors;
