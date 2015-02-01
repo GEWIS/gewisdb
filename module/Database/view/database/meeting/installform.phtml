@@ -148,6 +148,7 @@ $(document).ready(function () {
         select: function (event, ui) {
             $('#install-member-lidnr').val(ui.item.id);
             $('#install-member-name').val(ui.item.name);
+            $('#install-member-btn').prop('disabled', false);
         }
     });
 
@@ -193,6 +194,7 @@ $(document).ready(function () {
         var name = $('#install-member-name').val();
         createInstallation('Lid', lidnr, name);
         $('#install-member').val('');
+        $('#install-member-btn').prop('disabled', true);
     });
     $('#install-modal-yes').click(function(e)
     {
@@ -394,7 +396,7 @@ $tpl = trim(ob_get_clean());
             <input type="hidden" id="install-member-lidnr" />
             <input type="hidden" id="install-member-name" />
         </div>
-        <button type="button" class="btn btn-success" id="install-member-btn">
+        <button type="button" class="btn btn-success" id="install-member-btn" disabled>
             <span class="glyphicon glyphicon-plus"></span>
             Voeg lid toe
         </button>
