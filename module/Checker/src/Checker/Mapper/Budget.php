@@ -39,10 +39,12 @@ class Budget {
 
         $qb->select('b')
             ->where('m.date = :meeting_date')
+            ->andWhere('m.type = :meeting_type')
             ->from('Database\Model\SubDecision\Budget', 'b')
             ->innerJoin('b.decision', 'dec')
             ->innerJoin('dec.meeting', 'm')
-            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
+            ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'))
+            ->setParameter('meeting_type', $meeting->getType());
 
         // TODO: minus deleted decision
         return $qb->getQuery()->getResult();

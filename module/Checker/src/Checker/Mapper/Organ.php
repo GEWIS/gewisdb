@@ -68,4 +68,26 @@ class Organ
         // TODO: Minus deleted organ deletions
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Returns all the organs created at a meeting
+     *
+     * @param \Database\Model\Meeting The meeting the organ is created at
+     * @return array
+     */
+    public function getOrgansCreatedAtMeeting(\Database\Model\Meeting $meeting)
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('f')
+            ->where('m.number = :meeting_number')
+            ->andWhere('m.type = :meeting_type')
+            ->from('Database\Model\SubDecision\Foundation', 'f')
+            ->innerJoin('f.decision', 'd')
+            ->innerJoin('d.meeting', 'm')
+            ->setParameter('meeting_number', $meeting->getNumber())
+            ->setParameter('meeting_type', $meeting->getType());
+        // TODO: minus deleted organ creations
+        return $qb->getQuery()->getResult();
+    }
 }

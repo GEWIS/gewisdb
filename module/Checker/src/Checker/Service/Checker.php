@@ -8,6 +8,8 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
+use \Database\Model\SubDecision\Foundation;
+use \Database\Model\Meeting;
 
 class Checker extends AbstractService {
 
@@ -18,17 +20,16 @@ class Checker extends AbstractService {
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meetings = $meetingService->getAllMeetings();
 
-
         foreach ($meetings as $meeting) {
             $errors = array_merge(
                 $this->checkBudgetOrganExists($meeting),
                 $this->checkMembersHaveRoleButNotInOrgan($meeting),
-                $this->checkMembersInNotExistingOrgans($meeting)
+                $this->checkMembersInNotExistingOrgans($meeting),
+                $this->checkOrganMeetingType($meeting)
             );
 
             $this->handleErrors($meeting, $errors);
         }
-
     }
 
     /**
@@ -40,7 +41,9 @@ class Checker extends AbstractService {
     private function handleErrors(\Database\Model\Meeting $meeting, array $errors)
     {
         // At this moment only write to output.
-        echo 'Errors after meeting ' . $meeting->getNumber() . ' hold at ' . $meeting->getDate()->format('Y-m-d') . "\n";
+        echo 'Errors after meeting ' . $meeting->getNumber() . ' hold at '
+            . $meeting->getDate()->format('Y-m-d') . "\n";
+
         foreach ($errors as $error) {
             echo $error . "\n";
         }
@@ -53,7 +56,7 @@ class Checker extends AbstractService {
      * Or if there is a member in the organ if the decision to create an organ
      * is nulled
      *
-     * @param int $meeting After which meeting do we do the validation
+     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
     public function checkMembersInNotExistingOrgans(\Database\Model\Meeting $meeting)
@@ -69,7 +72,8 @@ class Checker extends AbstractService {
             if (!in_array($organName, $organs,true)) {
                 $errors[] = 'Member ' . $installation->getMember()->toArray()['fullName'] .
                     ' ('. $installation->getMember()->toArray()['lidnr'] . ')'
-                    . ' is still installed as '. $installation->getFunction() . ' in ' . $organName . ' which does not exist anymore';
+                    . ' is still installed as '. $installation->getFunction() . ' in '
+                    . $organName . ' which does not exist anymore';
             }
         }
         return $errors;
@@ -79,7 +83,7 @@ class Checker extends AbstractService {
      * Checks if members still have a role in an organ (e.g. they are treasurer)
      * but they are not a member of the organ anymore
      *
-     * @param int $meeting After which meeting do we do the validation
+     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
     public function checkMembersHaveRoleButNotInOrgan(\Database\Model\Meeting $meeting)
@@ -106,7 +110,7 @@ class Checker extends AbstractService {
     /**
      * Checks all budgets are for a valid organ (an organ that still exists)
      *
-     * @param int $meeting After which meeting do we do the validation
+     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
     public function checkBudgetOrganExists(\Database\Model\Meeting $meeting) {
@@ -126,6 +130,35 @@ class Checker extends AbstractService {
             }
         }
 
+        return $errors;
+    }
+
+    /**
+     * Checks all Organ creation, and check if they are created at the the correct Meeting
+     * e.g. AVCommissies are only created at an AV
+     *
+     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @return array Array of errors that may have occured.
+     */
+    public function checkOrganMeetingType(\Database\Model\Meeting $meeting) {
+        $errors = [];
+        $organService =  $organService = $this->getServiceManager()->get('checker_service_organ');
+        $organs = $organService->getOrgansCreatedAtMeeting($meeting);
+
+        foreach ($organs as $organ) {
+            $organType = $organ->getOrganType();
+            $meetingType = $organ->getDecision()->getMeeting()->getType();
+
+            // The meeting type and organ type match iff: The meeting type is not VV, or
+            // if either both organtype and meetingtype is AV, or they are both not. So
+            // it is wrong if only one of them has a meetingtype of AV
+            if (
+                $meetingType === Meeting::TYPE_VV ||
+                ($organType ===  Foundation::ORGAN_TYPE_AV_COMMITTEE ^ $meetingType === Meeting::TYPE_AV)
+            ) {
+                $errors[] = "Organ of type " . $organType . ' can not be created in a meeting of type ' . $meetingType;
+            }
+        }
         return $errors;
     }
 
