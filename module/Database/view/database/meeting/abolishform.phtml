@@ -16,7 +16,7 @@ function getUrl(type, meeting, point, decision, subdecision)
 }
 $(document).ready(function () {
     $('#abolish-organ').autocomplete({
-            minLength: 2, // at least two chars before request
+            minLength: 1, // at least two chars before request
             delay: 0, // no delay before request
             source: function (rq, response) {
                 // make an AJAX request
@@ -65,6 +65,7 @@ $(document).ready(function () {
                     $('#abolish-decision-point').val(ui.item.id.decision_point);
                     $('#abolish-decision-number').val(ui.item.id.decision_number);
                     $('#abolish-number').val(ui.item.id.subdecision_number);
+                    $('#abolish-button').prop('disabled', false);
                 });
             }
         });
@@ -140,6 +141,8 @@ $element->setAttribute('placeholder', 'Orgaan');
 $submit = $form->get('submit');
 $submit->setLabel('Hef orgaan op');
 $submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('id', 'abolish-button');
+$submit->setAttribute('disabled', 'disabled');
 ?>
 <?= $this->formButton($submit) ?>
 
