@@ -31,8 +31,10 @@ class Organ
     }
 
     /**
-     * Returns an array of all organs created.
-     * @return array
+     * Returns an array of names of all organs created before or during $meeting
+     *
+     * @param \Database\Model\Meeting $meeting Meeting to check for
+     * @return array string
      */
     public function getAllOrgansCreated(\Database\Model\Meeting $meeting)
     {
@@ -49,8 +51,10 @@ class Organ
     }
 
     /**
-     * Returns an array of all organs
-     * @return array
+     * Returns an array of all names of organs discharged before or during $meeting
+     *
+     * @param \Database\Model\Meeting $meeting Meeting to check for
+     * @return array string
      */
     public function getAllOrgansDeleted(\Database\Model\Meeting $meeting)
     {
@@ -73,7 +77,7 @@ class Organ
      * Returns all the organs created at a meeting
      *
      * @param \Database\Model\Meeting The meeting the organ is created at
-     * @return array
+     * @return array \Database\Model\SubDecision\Foundation
      */
     public function getOrgansCreatedAtMeeting(\Database\Model\Meeting $meeting)
     {

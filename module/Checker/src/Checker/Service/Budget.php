@@ -13,9 +13,10 @@ use Application\Service\AbstractService;
 class Budget extends AbstractService {
 
     /**
-     * Returns an array of all budgets that have been approved
-     * @param $meeting
-     * @return mixed budgets
+     * Returns all budgets thar are created at $meeting
+     *
+     * @param \Database\Model\Meeting $meeting
+     * @return array \Database\Model\Subdecision\Budget Array of all budgets created at $meeting
      */
     public function getAllBudgets(\Database\Model\Meeting $meeting)
     {

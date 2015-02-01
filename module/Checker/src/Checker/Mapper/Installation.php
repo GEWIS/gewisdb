@@ -26,6 +26,12 @@ class Installation {
     }
 
 
+    /**
+     * Returns an array of all installations that are discharged again before or during $meeting
+     *
+     * @param \Database\Model\Meeting $meeting Meeting for which to check
+     * @return array \Database\Model\SubDecision\Installation
+     */
     public function getAllInstallationsDischarged(\Database\Model\Meeting $meeting)
     {
 
@@ -42,6 +48,12 @@ class Installation {
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Returns an array of all installations that have bbeen done before or during $meeting
+     *
+     * @param \Database\Model\Meeting meeting Meeting for which to check
+     * @return array \Database\Model\SubDecision\Installation
+     */
     public function getAllInstallationsInstalled(\Database\Model\Meeting $meeting)
     {
         $qb = $this->em->createQueryBuilder();

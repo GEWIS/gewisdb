@@ -6,7 +6,10 @@ use Application\Service\AbstractService;
 class Organ extends AbstractService
 {
     /**
-     * Fetch all the existing organs after the meeting.
+     * Get the names of all the organs after $meeting
+     *
+     * @param \Database\Model\Meeting $meeting
+     * @return array string
      */
     public function getAllOrgans(\Database\Model\Meeting $meeting) {
         $mapper = $this->getServiceManager()->get('checker_mapper_organ');
@@ -22,7 +25,8 @@ class Organ extends AbstractService
 
     /**
      * Extract the names of all organs
-     * @param array $a
+     * @param array $a Array to extract the names from
+     * @return array string
      */
     private function transform(array &$a) {
         foreach ($a as $key => &$value) {

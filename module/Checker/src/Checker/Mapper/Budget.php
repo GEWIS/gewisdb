@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefan
- * Date: 26-1-15
- * Time: 16:01
- */
 
 namespace Checker\Mapper;
 
@@ -30,8 +24,10 @@ class Budget {
     }
 
     /**
-     * Returns all budgets that have been created at meeting $meeting
-     * @param $meeting
+     * Returns all budgets thar are created at $meeting
+     *
+     * @param \Database\Model\Meeting $meeting
+     * @return array \Database\Model\Subdecision\Budget Array of all budgets created at $meeting
      */
     public function getAllBudgets(\Database\Model\Meeting $meeting)
     {

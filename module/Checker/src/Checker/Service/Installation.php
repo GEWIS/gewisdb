@@ -7,9 +7,10 @@ use \Zend\Stdlib\ArrayUtils;
 class Installation extends AbstractService
 {
     /**
-     * Fetch all the existing organs after the meeting.
-     * @param $meeting
-     * @return array of \Database\Model\SubDecision\Installation
+     * Fetch all the existing organs after $meeting
+     *
+     * @param \Database\Model\Meeting $meeting
+     * @return array \Database\Model\SubDecision\Installation
      */
     public function getAllInstallations(\Database\Model\Meeting $meeting) {
         $mapper = $this->getServiceManager()->get('checker_mapper_installation');
@@ -62,7 +63,12 @@ class Installation extends AbstractService
         return $roles;
     }
 
-
+    /**
+     * Returns a unique hash for a subdecision (Needed for matching subdecisions)
+     *
+     * @param \Database\Model\SubDecision $d Decision to hash for
+     * @return string Unique hash for $d
+     */
     private function getHash(\Database\Model\SubDecision $d) {
         return $d->getMeetingType() . $d->getMeetingNumber() . $d-> getDecisionPoint() . $d->getNumber();
     }
