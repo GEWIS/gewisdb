@@ -209,6 +209,15 @@ return array(
                                             )
                                         )
                                     ),
+                                    'lists' => array(
+                                        'type' => 'Literal',
+                                        'options' => array(
+                                            'route' => '/lists',
+                                            'defaults' => array(
+                                                'action' => 'lists'
+                                            )
+                                        )
+                                    )
                                 )
                             ),
                             'remove-address' => array(

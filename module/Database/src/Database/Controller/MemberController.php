@@ -103,6 +103,30 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Lists action.
+     *
+     * Update list membership.
+     */
+    public function listsAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+
+        if ($this->getRequest()->isPost()) {
+            $member = $service->subscribeLists($this->getRequest()->getPost(), $lidnr);
+            if (null !== $member) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'member' => $member
+                ));
+            }
+        }
+
+        return new ViewModel($service->getListForm($lidnr));
+    }
+
+    /**
      * Membership action.
      *
      * Update / renew membership.

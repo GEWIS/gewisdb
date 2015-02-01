@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-md-6">
+        <h2>Huidige mailing lijsten</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Form</th>
+                    <th>Std</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($lists as $list): ?>
+                <tr>
+                    <td><?= $list->getName() ?></td>
+                    <td><?= $list->getDescription() ?></td>
+                    <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>
+                    <td><span class="glyphicon glyphicon-<?= $list->getDefaultSub() ? 'ok' : 'remove' ?>"></span></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Voeg mailing list doe</h2>
+<?php
+$form->prepare();
+
+$form->setAttribute('action', $this->url('settings/default', array('action' => 'list')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('class', 'form-horizontal');
+?>
+        <?= $this->form()->openTag($form) ?>
+        <p>
+            Let er op, dat als je hier een mailing list aanmaakt, dat deze
+            (met dezelfde naam!) ook moet bestaan in mailman.
+        </p>
+
+        <div class="form-group">
+        <?php
+        $element = $form->get('name');
+        $element->setAttribute('class', 'form-control');
+        $element->setAttribute('placeholder', $element->getLabel());
+        $element->setLabelAttributes(array(
+            'class' => 'col-sm-4 control-label'
+        ));
+        ?>
+            <?= $this->formLabel($element) ?>
+            <div class="col-sm-8">
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+        <?php
+        $element = $form->get('description');
+        $element->setAttribute('class', 'form-control');
+        $element->setAttribute('placeholder', $element->getLabel());
+        $element->setLabelAttributes(array(
+            'class' => 'col-sm-4 control-label'
+        ));
+        ?>
+            <?= $this->formLabel($element) ?>
+            <div class="col-sm-8">
+                <?= $this->formTextarea($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+        <?php
+        $element = $form->get('onForm');
+        $element->setAttribute('placeholder', $element->getLabel());
+        ?>
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+        <?php
+        $element = $form->get('defaultSub');
+        $element->setAttribute('placeholder', $element->getLabel());
+        ?>
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <?php
+                $submit = $form->get('submit');
+                $submit->setLabel($submit->getValue());
+                $submit->setAttribute('class', 'btn btn-primary');
+                ?>
+                <?= $this->formButton($submit) ?>
+            </div>
+        </div>
+
+        <?= $this->form()->closeTag() ?>
+    </div>
+</div>

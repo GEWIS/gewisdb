@@ -6,9 +6,17 @@ use Application\Service\AbstractService;
 
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
+use Database\Model\MailingList;
 
 class Member extends AbstractService
 {
+
+    /**
+     * List form.
+     *
+     * @var \Database\Form\MemberLists
+     */
+    protected $listForm;
 
     /**
      * Subscribe a member.
@@ -19,6 +27,8 @@ class Member extends AbstractService
      */
     public function subscribe($data)
     {
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+
         $form = $this->getMemberForm();
 
         $form->bind(new MemberModel());
@@ -43,7 +53,18 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        // check mailing lists
+        foreach ($form->getLists() as $list) {
+            if ($form->get('list-' . $list->getName())->isChecked()) {
+                $member->addList($list);
+            }
+        }
+        // subscribe to default mailing lists not on the form
+        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
+        foreach ($mailingMapper->findDefault() as $list) {
+            $member->addList($list);
+        }
+
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
@@ -218,6 +239,46 @@ class Member extends AbstractService
     }
 
     /**
+     * Subscribe member to mailing lists.
+     *
+     * @param array $data
+     * @param int $lidnr
+     *
+     * @return MemberModel
+     */
+    public function subscribeLists($data, $lidnr)
+    {
+        $formData = $this->getListForm($lidnr);
+        $form = $formData['form'];
+        $lists = $formData['lists'];
+        $member = $formData['member'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $data = $form->getData();
+
+        $member->clearLists();
+
+        foreach ($lists as $list) {
+            $name = 'list-' . $list->getName();
+            if (isset($data[$name]) && $data[$name]) {
+                $member->addList($list);
+            }
+        }
+
+        // simply persist through member
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getMemberMapper()->persist($member);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+
+        return $member;
+    }
+
+    /**
      * Get the member edit form.
      *
      * @param int $lidnr
@@ -250,6 +311,29 @@ class Member extends AbstractService
         return array(
             'member' => $member,
             'form' => $form
+        );
+    }
+
+    /**
+     * Get the list edit form.
+     *
+     * @param int $lidnr
+     *
+     * @return \Database\Form\MemberLists
+     */
+    public function getListForm($lidnr)
+    {
+        $member = $this->getMember($lidnr);
+        $lists = $this->getServiceManager()->get('database_service_mailinglist')->getAllLists();
+
+        if (null === $this->listForm) {
+            $this->listForm = new \Database\Form\MemberLists($member, $lists);
+        }
+
+        return array(
+            'form' => $this->listForm,
+            'member' => $member,
+            'lists' => $lists
         );
     }
 

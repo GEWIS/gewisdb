@@ -63,6 +63,7 @@ class Decision
      * Subdecisions.
      *
      * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"number"="ASC"})
      */
     protected $subdecisions;
 

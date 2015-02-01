@@ -29,6 +29,16 @@ class Organ
     }
 
     /**
+     * Find all organs.
+     *
+     * @return array Foundations
+     */
+    public function findAll()
+    {
+        return $this->getRepository()->findAll();
+    }
+
+    /**
      * Find an organ. Also calculate which are it's current members.
      *
      * @param string $type

@@ -31,7 +31,8 @@ class Member extends AbstractService
 
         $keys = array('e_mail', 'achternaam', 'tussen', 'voorlet', 'voornaam',
             'hstraat', 'hpostcode', 'hplaats', 'htelefoon',
-            'kstraat', 'kpostcode', 'kplaats', 'ktelefoon'
+            'kstraat', 'kpostcode', 'kplaats', 'ktelefoon', 'betaald',
+            'direct', 'plijst', 'winlijst', 'gewislijst', 'vacature', 'babbel'
         );
         foreach ($keys as $key) {
             if (empty($data[$key])) {
@@ -45,6 +46,10 @@ class Member extends AbstractService
         $member->setMiddleName($data['tussen']);
         $member->setInitials($data['voorlet']);
         $member->setFirstName($data['voornaam']);
+        if (!is_numeric($data['betaald'])) {
+            $data['betaald'] = 0;
+        }
+        $member->setPaid($data['betaald']);
 
         $gender = $data['gesl'] ? MemberModel::GENDER_MALE : MemberModel::GENDER_FEMALE;
         $member->setGender($gender);
@@ -128,13 +133,53 @@ class Member extends AbstractService
             $member->addAddress($student);
         }
 
-        $em = $this->getServiceManager()->get('database_doctrine_em');
-        $em->persist($member);
+        // import mailing list subscriptions
+        $mlService = $this->getServiceManager()->get('database_service_mailinglist');
+        if ($data['direct']) {
+            $list = $mlService->getList('direct');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['plijst']) {
+            $list = $mlService->getList('p-lijst');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['winlijst']) {
+            $list = $mlService->getList('win-lijst');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['gewislijst']) {
+            $list = $mlService->getList('gewis-lijst');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['vacature']) {
+            $list = $mlService->getList('vacature-l');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
+        if ($data['babbel']) {
+            $list = $mlService->getList('babbel');
+            if (null !== $list) {
+                $member->addList($list);
+            }
+        }
 
-        // prevent lidnr automatic generation
+        $em = $this->getServiceManager()->get('database_doctrine_em');
 
         $metadata = $em->getClassMetaData(get_class($member));
         $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+
+        $em->persist($member);
+
+        // prevent lidnr automatic generation
 
         echo 'Imported ' . $member->getFullName() . ' (' . $member->getLidnr() . ")\n";
     }

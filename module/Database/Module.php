@@ -56,6 +56,7 @@ class Module
                 'database_service_event' => 'Database\Service\Event',
                 'database_service_query' => 'Database\Service\Query',
                 'database_service_installationfunction' => 'Database\Service\InstallationFunction',
+                'database_service_mailinglist' => 'Database\Service\MailingList',
                 'database_hydrator_abolish' => 'Database\Hydrator\Abolish',
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
                 'database_hydrator_install' => 'Database\Hydrator\Install',
@@ -86,6 +87,7 @@ class Module
                         $sm->get('database_form_fieldset_address')
                     );
                     $form->setHydrator($sm->get('database_hydrator_member'));
+                    $form->setLists($sm->get('database_mapper_mailinglist')->findAllOnForm());
                     return $form;
                 },
                 'database_form_memberedit' => function ($sm) {
@@ -117,6 +119,11 @@ class Module
                         $sm->get('Doctrine\Orm\EntityManager')->getRepository('Database\Model\SubDecision\Foundation')
                     );
                     $form->setHydrator($sm->get('database_hydrator_budget'));
+                    return $form;
+                },
+                'database_form_mailinglist' => function ($sm) {
+                    $form = new \Database\Form\MailingList();
+                    $form->setHydrator($sm->get('database_hydrator_member'));
                     return $form;
                 },
                 'database_form_installationfunction' => function ($sm) {
@@ -280,6 +287,11 @@ class Module
                 },
                 'database_mapper_installationfunction' => function ($sm) {
                     return new \Database\Mapper\InstallationFunction(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_mapper_mailinglist' => function ($sm) {
+                    return new \Database\Mapper\MailingList(
                         $sm->get('database_doctrine_em')
                     );
                 },
