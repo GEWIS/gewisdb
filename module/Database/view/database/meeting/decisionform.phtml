@@ -9,6 +9,11 @@ case 'budget':
         'form' => $form
     ));
     break;
+case 'foundation':
+    echo $this->partial('database/meeting/foundationform', array(
+        'form' => $form
+    ));
+    break;
 case 'other':
     echo $this->partial('database/meeting/otherform', array(
         'form' => $form
