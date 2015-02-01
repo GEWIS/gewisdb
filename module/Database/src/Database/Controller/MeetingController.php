@@ -5,6 +5,7 @@ namespace Database\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class MeetingController extends AbstractActionController
 {
@@ -169,6 +170,7 @@ class MeetingController extends AbstractActionController
         $service = $this->getMeetingService();
 
         if ($this->getRequest()->isPost()) {
+            try {
             if ($service->deleteDecision($this->getRequest()->getPost(),
                     $type, $number, $point, $decision)
             ) {
@@ -177,6 +179,12 @@ class MeetingController extends AbstractActionController
                     'number' => $number,
                     'point' => $point,
                     'decision' => $decision
+                ));
+            }
+            } catch (ForeignKeyConstraintViolationException $e) {
+                return new ViewModel(array(
+                    'error' => true,
+                    'exception' => $e
                 ));
             }
             // Not deleted

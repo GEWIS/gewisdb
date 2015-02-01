@@ -1,6 +1,11 @@
 <?php
 use Database\Model\Meeting;
-if (!isset($form)): ?>
+?>
+<?php if (isset($error) && $error): ?>
+<h1>Besluit kan niet verwijderd worden</h1>
+Er bestaan nog besluiten die naar dit besluit verwijzen.
+<?php else: ?>
+<?php if (!isset($form)): ?>
 Besluit verwijderd.
 <?php else:
 $form->prepare();
@@ -39,4 +44,5 @@ $submit->setAttribute('class', 'btn btn-default');
 </div>
 
 <?= $this->form()->closeTag(); ?>
-<?php endif; ?>
+<?php endif ?>
+<?php endif ?>
