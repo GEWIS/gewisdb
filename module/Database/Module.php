@@ -62,6 +62,7 @@ class Module
                 'database_hydrator_install' => 'Database\Hydrator\Install',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
                 'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
+                'database_hydrator_budget' => 'Database\Hydrator\Budget',
                 'database_form_query' => 'Database\Form\Query',
                 'database_form_queryexport' => 'Database\Form\QueryExport',
                 'database_form_deleteaddress' => 'Database\Form\DeleteAddress',
@@ -115,8 +116,7 @@ class Module
                 'database_form_budget' => function ($sm) {
                     $form = new \Database\Form\Budget(
                         $sm->get('database_form_fieldset_meeting'),
-                        $sm->get('database_form_fieldset_member'),
-                        $sm->get('Doctrine\Orm\EntityManager')->getRepository('Database\Model\SubDecision\Foundation')
+                        $sm->get('database_form_fieldset_member')
                     );
                     $form->setHydrator($sm->get('database_hydrator_budget'));
                     return $form;
@@ -258,11 +258,6 @@ class Module
                 'database_hydrator_decision' => function ($sm) {
                     return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
-                    );
-                },
-                'database_hydrator_budget' => function ($sm) {
-                    return new \Database\Hydrator\Budget(
-                        $sm->get('database_service_meeting')
                     );
                 },
                 'database_mapper_organ' => function ($sm) {
