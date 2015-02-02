@@ -55,6 +55,23 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Check if the decision exists.
+     *
+     * @param string $type
+     * @param int $number
+     * @param int $point
+     * @param int $decision
+     *
+     * @return boolean
+     */
+    public function decisionExists($type, $number, $point, $decision)
+    {
+        $mapper = $this->getMeetingMapper();
+
+        return null !== $mapper->findDecision($type, $number, $point, $decision);
+    }
+
+    /**
      * Export decisions.
      *
      * @param array $data

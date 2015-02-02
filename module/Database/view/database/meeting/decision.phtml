@@ -1,6 +1,9 @@
 <?php
 use Database\Model\Meeting;
 ?>
+<?php if (isset($error) && $error): ?>
+<h1>Dit besluit bestaat al</h1>
+<?php else: ?>
 <h1>Toevoegen besluit <?= $meeting->getType() . ' ' ?>
 <?= $meeting->getNumber() ?>.<?= $point ?>.<?= $decision ?>
 </h1>
@@ -49,3 +52,4 @@ use Database\Model\Meeting;
     )); ?>
     </div>
 </div>
+<?php endif ?>

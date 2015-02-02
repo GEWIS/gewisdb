@@ -71,6 +71,15 @@ class MeetingController extends AbstractActionController
         $meeting = $this->getMeetingService()
                         ->getMeeting($type, $number);
 
+        if ($this->getMeetingService()->decisionExists($type, $number, $point, $decision)) {
+            return new ViewModel(array(
+                'meeting' => $meeting,
+                'point' => $point,
+                'decision' => $decision,
+                'error' => true
+            ));
+        }
+
         return new ViewModel(array(
             'meeting' => $meeting,
             'point' => $point,
