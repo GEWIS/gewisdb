@@ -16,7 +16,7 @@ function getUrl(type, meeting, point, decision, subdecision)
 }
 $(document).ready(function () {
     $('#install-organ').autocomplete({
-        minLength: 2, // at least two chars before request
+        minLength: 1, // at least one char before request
         delay: 0, // no delay before request
         source: function (rq, response) {
             // make an AJAX request
@@ -89,6 +89,7 @@ $(document).ready(function () {
 
                 // show the rest of the form
                 $('#install-members-hide').show();
+                $('#install-submit-decision').prop('disabled', false);
 
                 // enable member change events
                 $('button.discharge').click(function(e)
@@ -409,6 +410,8 @@ $tpl = trim(ob_get_clean());
 $submit = $form->get('submit');
 $submit->setLabel('Bevestig wijzigingen');
 $submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('id', 'install-submit-decision');
+$submit->setAttribute('disabled', 'disabled');
 ?>
 <?= $this->formButton($submit) ?>
 
