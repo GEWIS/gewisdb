@@ -96,6 +96,15 @@ class Meeting extends AbstractService
             'besluitnr' => $subdecision->getDecision()->getNumber(),
             'subbesluitnr' => $subdecision->getNumber(),
             'inhoud' => $subdecision->getContent()
+            /*
+             * Other fields:
+             * - functieid
+             * - orgaanid
+             * - lidnummer
+             */
+            // other fields:
+            // functieid
+            //
         );
 
         /*
@@ -110,19 +119,34 @@ class Meeting extends AbstractService
 
         if ($subdecision instanceof SubDecision\Installation) {
             $data['besluittypeid'] = 1;
+            // organ (orgaanid)
+            // function (functieid)
+            // member (lidnummer)
         } else if ($subdecision instanceof SubDecision\Discharge) {
             $data['besluittypeid'] = 2;
+            // organ (orgaanid)
+            // function (functieid)
+            // member (lidnummer)
         } else if ($subdecision instanceof SubDecision\Foundation) {
             $data['besluittypeid'] = 3;
+            // organ (orgaanid)
         } else if ($subdecision instanceof SubDecision\Abrogation) {
             $data['besluittypeid'] = 4;
+            // organ (orgaanid)
         } else if ($subdecision instanceof SubDecision\Reckoning) {
             $data['besluittypeid'] = 6;
+            // member (lidnummer)
+            $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
         } else if ($subdecision instanceof SubDecision\Budget) {
             $data['besluittypeid'] = 5;
+            // member (lidnummer)
+            $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
         } else if ($subdecision instanceof SubDecision\Other) {
             $data['besluittypeid'] = 7;
+            // nothing special
         }
+
+        // TODO: destroyed decisions
     }
 
     /**
@@ -133,6 +157,14 @@ class Meeting extends AbstractService
     public function getMeetingMapper()
     {
         return $this->getServiceManager()->get('database_mapper_meeting');
+    }
+
+    /**
+     * Get the organ query object.
+     */
+    public function getOrganQuery()
+    {
+        return $this->getServiceManager()->get('export_query_organ');
     }
 
     /**
