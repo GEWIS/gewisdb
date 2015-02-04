@@ -216,4 +216,4 @@ msgstr "Birth date"
 
 #: module/Database/src/Database/Form/Member.php:104
 msgid "Schrijf in"
-msgstr "Subscription date"
+msgstr "Send"
