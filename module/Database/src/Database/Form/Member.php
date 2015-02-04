@@ -17,9 +17,15 @@ class Member extends Form implements InputFilterProviderInterface
      */
     protected $lists;
 
+    /**
+     * Translator.
+     */
+    protected $translator;
+
     public function __construct(Fieldset\Address $address, Translator $translator)
     {
         parent::__construct();
+        $this->translator = $translator;
 
         $this->add(array(
             'name' => 'lastName',
@@ -115,11 +121,15 @@ class Member extends Form implements InputFilterProviderInterface
     {
         $this->lists = $lists;
         foreach ($this->lists as $list) {
+            $desc = $list->getNlDescription();
+            if ($this->translator->getLocale() == 'en') {
+                $desc = $list->getEnDescription();
+            }
             $this->add(array(
                 'name' => 'list-' . $list->getName(),
                 'type' => 'checkbox',
                 'options' => array(
-                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription()
+                    'label' => '<strong>' . $list->getName() . '</strong> ' . $desc
                 )
             ));
             if ($list->getDefaultSub()) {
@@ -200,7 +210,7 @@ class Member extends Form implements InputFilterProviderInterface
                         'options' => array(
                             'token' => '1',
                             'messages' => array(
-                                'notSame' => 'Je moet de voorwaarden accepteren!'
+                                'notSame' => $this->translator->translate('Je moet de voorwaarden accepteren!')
                             )
                         )
                     )
