@@ -1,3 +1,58 @@
+#: module/Database/view/database/member/subscribe.phtml:19
+msgid "Inschrijving Studievereniging <span class=\"gewis-red\">GEWIS</span>"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:21
+msgid ""
+"Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van "
+"GEWIS.\n"
+"Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro."
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:147
+msgid "Thuisadres (adres van je ouders)"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:252
+msgid "Studieadres (adres kamer)"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:355
+msgid "Mailinglijsten"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:357
+msgid ""
+"Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
+"mededelingen\n"
+"en activiteiten van de studievereniging. Daarnaast zijn er verschillende\n"
+"optionele mailinglijsten.\n"
+"Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze\n"
+"inschrijvingen kunnen op een later tijdstip veranderd worden."
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:382
+msgid "Akkoordverklaring"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:384
+msgid "Statuten en HR"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:395
+msgid ""
+"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
+"en\n"
+"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten "
+"en\n"
+"HR gelezen."
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:419
+#, php-format
+msgid "Lid met lidnummer %1$s is toegevoegd."
+msgstr ""
+
 #: module/Application/view/error/404.phtml:1
 msgid "A 404 error occurred"
 msgstr ""
@@ -70,4 +125,68 @@ msgstr ""
 
 #: module/Application/view/error/index.phtml:1
 msgid "An error occurred"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:28
+msgid "Land"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:37
+msgid "Straat"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:45
+msgid "Huisnummer"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:53
+msgid "Postcode"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:61
+msgid "Stad"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:69
+msgid "Telefoonnummer"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:28
+msgid "Achternaam"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:36
+msgid "Tussenvoegsels"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:44
+msgid "Voorletter(s)"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:52
+msgid "Voornaam"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:60
+msgid "Geslacht"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:62
+msgid "Man"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:63
+msgid "Vrouw"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:72
+msgid "Email-adres"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:80
+msgid "Geboortedatum"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:104
+msgid "Schrijf in"
 msgstr ""

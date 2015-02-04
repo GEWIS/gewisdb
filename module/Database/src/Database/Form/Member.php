@@ -59,8 +59,8 @@ class Member extends Form implements InputFilterProviderInterface
             'options' => array(
                 'label' => $translator->translate('Geslacht'),
                 'value_options' => array(
-                    'm' => 'Man',
-                    'f' => 'Vrouw'
+                    'm' => $translator->translate('Man'),
+                    'f' => $translator->translate('Vrouw')
                 )
             )
         ));
