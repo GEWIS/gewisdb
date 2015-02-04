@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-04 16:58+0100\n"
+"POT-Creation-Date: 2015-02-04 20:58+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: \n"
@@ -178,42 +178,46 @@ msgstr "City"
 msgid "Telefoonnummer"
 msgstr "Phone number"
 
-#: module/Database/src/Database/Form/Member.php:28
+#: module/Database/src/Database/Form/Member.php:34
 msgid "Achternaam"
 msgstr "Last name"
 
-#: module/Database/src/Database/Form/Member.php:36
+#: module/Database/src/Database/Form/Member.php:42
 msgid "Tussenvoegsels"
 msgstr "Middle name"
 
-#: module/Database/src/Database/Form/Member.php:44
+#: module/Database/src/Database/Form/Member.php:50
 msgid "Voorletter(s)"
 msgstr "Initials"
 
-#: module/Database/src/Database/Form/Member.php:52
+#: module/Database/src/Database/Form/Member.php:58
 msgid "Voornaam"
 msgstr "First name"
 
-#: module/Database/src/Database/Form/Member.php:60
+#: module/Database/src/Database/Form/Member.php:66
 msgid "Geslacht"
 msgstr "Gender"
 
-#: module/Database/src/Database/Form/Member.php:62
+#: module/Database/src/Database/Form/Member.php:68
 msgid "Man"
 msgstr "Male"
 
-#: module/Database/src/Database/Form/Member.php:63
+#: module/Database/src/Database/Form/Member.php:69
 msgid "Vrouw"
 msgstr "Female"
 
-#: module/Database/src/Database/Form/Member.php:72
+#: module/Database/src/Database/Form/Member.php:78
 msgid "Email-adres"
 msgstr "Email address"
 
-#: module/Database/src/Database/Form/Member.php:80
+#: module/Database/src/Database/Form/Member.php:86
 msgid "Geboortedatum"
 msgstr "Birth date"
 
-#: module/Database/src/Database/Form/Member.php:104
+#: module/Database/src/Database/Form/Member.php:110
 msgid "Schrijf in"
 msgstr "Send"
+
+#: module/Database/src/Database/Form/Member.php:213
+msgid "Je moet de voorwaarden accepteren!"
+msgstr "You have to accept the code of conduct."
