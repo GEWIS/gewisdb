@@ -4,6 +4,7 @@ namespace Database\Form\Fieldset;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\I18n\Translator\TranslatorInterface as Translator;
 
 use Database\Model\Address as AddressModel;
 
@@ -11,7 +12,7 @@ class Address extends Fieldset
     implements InputFilterProviderInterface
 {
 
-    public function __construct()
+    public function __construct(Translator $translator)
     {
         parent::__construct('address');
 
@@ -33,7 +34,7 @@ class Address extends Fieldset
             'name' => 'street',
             'type' => 'text',
             'options' => array(
-                'label' => 'Straat'
+                'label' => $translator->translate('Straat')
             )
         ));
 
@@ -41,7 +42,7 @@ class Address extends Fieldset
             'name' => 'number',
             'type' => 'text',
             'options' => array(
-                'label' => 'Huisnummer'
+                'label' => $translator->translate('Huisnummer')
             )
         ));
 
@@ -49,7 +50,7 @@ class Address extends Fieldset
             'name' => 'postalCode',
             'type' => 'text',
             'options' => array(
-                'label' => 'Postcode'
+                'label' => $translator->translate('Postcode')
             )
         ));
 
@@ -57,7 +58,7 @@ class Address extends Fieldset
             'name' => 'city',
             'type' => 'text',
             'options' => array(
-                'label' => 'Stad'
+                'label' => $translator->translate('Stad')
             )
         ));
 
@@ -65,7 +66,7 @@ class Address extends Fieldset
             'name' => 'phone',
             'type' => 'text',
             'options' => array(
-                'label' => 'Telefoonnummer'
+                'label' => $translator->translate('Telefoonnummer')
             )
         ));
 

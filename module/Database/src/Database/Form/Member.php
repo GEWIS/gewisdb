@@ -5,6 +5,7 @@ namespace Database\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\I18n\Translator\TranslatorInterface as Translator;
 
 use Database\Model\Address;
 
@@ -16,7 +17,7 @@ class Member extends Form implements InputFilterProviderInterface
      */
     protected $lists;
 
-    public function __construct(Fieldset\Address $address)
+    public function __construct(Fieldset\Address $address, Translator $translator)
     {
         parent::__construct();
 
@@ -24,7 +25,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'lastName',
             'type' => 'text',
             'options' => array(
-                'label' => 'Achternaam'
+                'label' => $translator->translate('Achternaam')
             )
         ));
 
@@ -32,7 +33,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'middleName',
             'type' => 'text',
             'options' => array(
-                'label' => 'Tussenvoegsels'
+                'label' => $translator->translate('Tussenvoegsels')
             )
         ));
 
@@ -40,7 +41,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'initials',
             'type' => 'text',
             'options' => array(
-                'label' => 'Voorletter(s)'
+                'label' => $translator->translate('Voorletter(s)')
             )
         ));
 
@@ -48,7 +49,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'firstName',
             'type' => 'text',
             'options' => array(
-                'label' => 'Voornaam'
+                'label' => $translator->translate('Voornaam')
             )
         ));
 
@@ -56,7 +57,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'gender',
             'type' => 'radio',
             'options' => array(
-                'label' => 'Geslacht',
+                'label' => $translator->translate('Geslacht'),
                 'value_options' => array(
                     'm' => 'Man',
                     'f' => 'Vrouw'
@@ -68,7 +69,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'email',
             'type' => 'email',
             'options' => array(
-                'label' => 'Email-adres'
+                'label' => $translator->translate('Email-adres')
             )
         ));
 
@@ -76,7 +77,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'birth',
             'type' => 'date',
             'options' => array(
-                'label' => 'Geboortedatum'
+                'label' => $translator->translate('Geboortedatum')
             )
         ));
 
@@ -100,7 +101,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => 'Schrijf in'
+                'value' => $translator->translate('Schrijf in')
             )
         ));
     }

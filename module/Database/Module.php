@@ -85,7 +85,8 @@ class Module
                 },
                 'database_form_member' => function ($sm) {
                     $form = new \Database\Form\Member(
-                        $sm->get('database_form_fieldset_address')
+                        $sm->get('database_form_fieldset_address'),
+                        $sm->get('translator')
                     );
                     $form->setHydrator($sm->get('database_hydrator_member'));
                     $form->setLists($sm->get('database_mapper_mailinglist')->findAllOnForm());
@@ -229,7 +230,7 @@ class Module
                     return $fieldset;
                 },
                 'database_form_fieldset_address' => function ($sm) {
-                    $fs = new \Database\Form\Fieldset\Address();
+                    $fs = new \Database\Form\Fieldset\Address($sm->get('translator'));
                     $fs->setHydrator($sm->get('database_hydrator_address'));
                     $fs->setObject(new \Database\Model\Address());
                     return $fs;
