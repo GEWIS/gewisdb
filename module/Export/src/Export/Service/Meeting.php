@@ -147,6 +147,14 @@ class Meeting extends AbstractService
         }
 
         // TODO: destroyed decisions
+        $query = $this->getSubdecisionQuery();
+
+        if ($query->checkSubdecisionExists($type, $data['vergadernr'], $data['puntnr'],
+            $data['besluitnr'], $data['subbesluitnr'])) {
+            $query->updateSubdecision($data);
+        } else {
+            $query->createSubdecision($data);
+        }
     }
 
     /**
@@ -165,6 +173,14 @@ class Meeting extends AbstractService
     public function getOrganQuery()
     {
         return $this->getServiceManager()->get('export_query_organ');
+    }
+
+    /**
+     * Get the subdecision query object.
+     */
+    public function getSubdecisionQuery()
+    {
+        return $this->getServiceManager()->get('export_query_subdecision');
     }
 
     /**
