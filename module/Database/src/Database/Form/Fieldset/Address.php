@@ -25,7 +25,7 @@ class Address extends Fieldset
             'name' => 'country',
             'type' => 'text',
             'options' => array(
-                'label' => 'Land',
+                'label' => $translator->translate('Land'),
                 'value' => 'netherlands'
             )
         ));
