@@ -56,12 +56,29 @@ return array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
+        ),
+        'aliases' => array(
+            'translator' => 'MvcTranslator'
         )
     ),
     // however counter-intuitive it is, leaving this in makes sure we do not
     // need the intl extension
     'translator' => array(
-        'locale' => 'nl_NL'
+        'locale' => 'nl',
+        'translation_file_patterns' => array(
+            array(
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern'  => '%s.mo'
+            ),
+            // Zend\Validate translation
+            array(
+                'type' => 'phparray',
+                'base_dir' => 'vendor/zendframework/zendframework/resources/languages/',
+                'pattern' => '%s/Zend_Validate.php',
+                'text_domain' => 'validate'
+            )
+        )
     ),
     'controllers' => array(
         'invokables' => array(
