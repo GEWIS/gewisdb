@@ -20,6 +20,21 @@ return array(
                     ),
                 ),
             ),
+            'lang' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/lang/:lang',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action' => 'lang',
+                        'lang' => 'nl'
+                    ),
+                    'constraints' => array(
+                        'lang' => '[a-zA-Z_]{2,5}'
+                    )
+                )
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
