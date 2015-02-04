@@ -1,11 +1,12 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <h2>Huidige mailing lijsten</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>Naam</th>
+                    <th>Beschrijving (Nederlands)</th>
+                    <th>Beschrijving (Engels)</th>
                     <th>Form</th>
                     <th>Std</th>
                 </tr>
@@ -14,7 +15,8 @@
             <?php foreach ($lists as $list): ?>
                 <tr>
                     <td><?= $list->getName() ?></td>
-                    <td><?= $list->getDescription() ?></td>
+                    <td><?= $list->getNlDescription() ?></td>
+                    <td><?= $list->getEnDescription() ?></td>
                     <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>
                     <td><span class="glyphicon glyphicon-<?= $list->getDefaultSub() ? 'ok' : 'remove' ?>"></span></td>
                 </tr>
@@ -22,7 +24,9 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-6">
+</div>
+<div class="row">
+    <div class="col-md-12">
         <h2>Voeg mailing list doe</h2>
 <?php
 $form->prepare();
@@ -45,11 +49,11 @@ $form->setAttribute('class', 'form-horizontal');
         $element->setAttribute('class', 'form-control');
         $element->setAttribute('placeholder', $element->getLabel());
         $element->setLabelAttributes(array(
-            'class' => 'col-sm-4 control-label'
+            'class' => 'col-sm-2 control-label'
         ));
         ?>
             <?= $this->formLabel($element) ?>
-            <div class="col-sm-8">
+            <div class="col-sm-10">
                 <?= $this->formInput($element) ?>
                 <?= $this->formElementErrors($element) ?>
             </div>
@@ -61,11 +65,27 @@ $form->setAttribute('class', 'form-horizontal');
         $element->setAttribute('class', 'form-control');
         $element->setAttribute('placeholder', $element->getLabel());
         $element->setLabelAttributes(array(
-            'class' => 'col-sm-4 control-label'
+            'class' => 'col-sm-2 control-label'
         ));
         ?>
             <?= $this->formLabel($element) ?>
-            <div class="col-sm-8">
+            <div class="col-sm-10">
+                <?= $this->formTextarea($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+        <?php
+        $element = $form->get('enDescription');
+        $element->setAttribute('class', 'form-control');
+        $element->setAttribute('placeholder', $element->getLabel());
+        $element->setLabelAttributes(array(
+            'class' => 'col-sm-2 control-label'
+        ));
+        ?>
+            <?= $this->formLabel($element) ?>
+            <div class="col-sm-10">
                 <?= $this->formTextarea($element) ?>
                 <?= $this->formElementErrors($element) ?>
             </div>
@@ -76,7 +96,7 @@ $form->setAttribute('class', 'form-horizontal');
         $element = $form->get('onForm');
         $element->setAttribute('placeholder', $element->getLabel());
         ?>
-            <div class="col-sm-offset-4 col-sm-8">
+            <div class="col-sm-offset-2 col-sm-10">
                 <div class="checkbox">
                     <label>
                         <?= $this->formCheckbox($element) ?>
@@ -92,7 +112,7 @@ $form->setAttribute('class', 'form-horizontal');
         $element = $form->get('defaultSub');
         $element->setAttribute('placeholder', $element->getLabel());
         ?>
-            <div class="col-sm-offset-4 col-sm-8">
+            <div class="col-sm-offset-2 col-sm-10">
                 <div class="checkbox">
                     <label>
                         <?= $this->formCheckbox($element) ?>
@@ -104,7 +124,7 @@ $form->setAttribute('class', 'form-horizontal');
         </div>
 
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-8">
+            <div class="col-sm-offset-2 col-sm-10">
                 <?php
                 $submit = $form->get('submit');
                 $submit->setLabel($submit->getValue());

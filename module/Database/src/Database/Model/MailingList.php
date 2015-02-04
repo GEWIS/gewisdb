@@ -22,11 +22,18 @@ class MailingList
     protected $name;
 
     /**
-     * Description of the mailing list.
+     * Dutch description of the mailing list.
      *
      * @ORM\Column(type="text")
      */
-    protected $description;
+    protected $nl_description;
+
+    /**
+     * English description of the mailing list.
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $en_description;
 
     /**
      * If the mailing list should be on the form.
@@ -81,13 +88,53 @@ class MailingList
     }
 
     /**
+     * Get the english description.
+     *
+     * @return string
+     */
+    public function getEnDescription()
+    {
+        return $this->en_description;
+    }
+
+    /**
+     * Set the english description.
+     *
+     * @param string $description
+     */
+    public function setEnDescription($description)
+    {
+        $this->en_description = $description;
+    }
+
+    /**
+     * Get the dutch description.
+     *
+     * @return string
+     */
+    public function getNlDescription()
+    {
+        return $this->nl_description;
+    }
+
+    /**
+     * Set the dutch description.
+     *
+     * @param string $description
+     */
+    public function setNlDescription($description)
+    {
+        $this->nl_description = $description;
+    }
+
+    /**
      * Get the description.
      *
      * @return string
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->getNlDescription();
     }
 
     /**
@@ -97,7 +144,7 @@ class MailingList
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->setNlDescription($description);
     }
 
     /**
