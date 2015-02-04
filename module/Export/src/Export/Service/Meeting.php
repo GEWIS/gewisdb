@@ -119,27 +119,31 @@ class Meeting extends AbstractService
 
         if ($subdecision instanceof SubDecision\Installation) {
             $data['besluittypeid'] = 1;
-            // organ (orgaanid)
-            // function (functieid)
-            // member (lidnummer)
+
+            $data['functieid'] = $this->getFunctionId($subdecision);
+            $data['orgaanid'] = $this->getOrganId($subdecision->getFoundation());
+            $data['lidnummer'] = $subdecision->getMember()->getLidnr();
         } else if ($subdecision instanceof SubDecision\Discharge) {
             $data['besluittypeid'] = 2;
-            // organ (orgaanid)
-            // function (functieid)
-            // member (lidnummer)
+
+            $data['functieid'] = $this->getFunctionId($subdecision->getInstallation());
+            $data['orgaanid'] = $this->getOrganId($subdecision->getInstallation()->getFoundation());
+            $data['lidnummer'] = $subdecision->getInstallation()->getMember()->getLidnr();
         } else if ($subdecision instanceof SubDecision\Foundation) {
             $data['besluittypeid'] = 3;
-            // organ (orgaanid)
+
+            $data['orgaanid'] = $this->getOrganId($subdecision);
         } else if ($subdecision instanceof SubDecision\Abrogation) {
             $data['besluittypeid'] = 4;
-            // organ (orgaanid)
+
+            $data['orgaanid'] = $this->getOrganId($subdecision->getFoundation());
         } else if ($subdecision instanceof SubDecision\Reckoning) {
             $data['besluittypeid'] = 6;
-            // member (lidnummer)
+
             $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
         } else if ($subdecision instanceof SubDecision\Budget) {
             $data['besluittypeid'] = 5;
-            // member (lidnummer)
+
             $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
         } else if ($subdecision instanceof SubDecision\Other) {
             $data['besluittypeid'] = 7;
@@ -147,6 +151,7 @@ class Meeting extends AbstractService
         }
 
         // TODO: destroyed decisions
+
         $query = $this->getSubdecisionQuery();
 
         if ($query->checkSubdecisionExists($type, $data['vergadernr'], $data['puntnr'],
@@ -155,6 +160,45 @@ class Meeting extends AbstractService
         } else {
             $query->createSubdecision($data);
         }
+    }
+
+    /**
+     * Obtain a functieid from an installation.
+     */
+    public function getFunctionId(SubDecision\Installation $install)
+    {
+        $query = $this->getOrganQuery();
+
+        return $query->getFunctionId($install->getFunction());
+    }
+
+    /**
+     * Obtain organid from a Foundation decision.
+     *
+     * @param SubDecision\Foundation $foundation
+     *
+     * @return int the Organ ID
+     */
+    public function getOrganId(SubDecision\Foundation $organ)
+    {
+        $query = $this->getOrganQuery();
+
+        // first determine all parameters
+        switch ($organ->getOrganType()) {
+        case SubDecision\Foundation::ORGAN_TYPE_COMMITTEE:
+            $type = 2;
+            break;
+        case SubDecision\Foundation::ORGAN_TYPE_AV_COMMITTEE:
+            $type = 1;
+            break;
+        case SubDecision\Foundation::ORGAN_TYPE_FRATERNITY:
+            $type = 5;
+            break;
+        }
+        $year = $organ->getDecision()->getMeeting()->getDate()->format('Y');
+
+        return $query->checkOrganExists($type, $organ->getAbbr(),
+            $organ->getName(), $year);
     }
 
     /**

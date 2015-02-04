@@ -86,6 +86,39 @@ class Organ
         return null;
     }
 
+    /**
+     * Get a function id from a name.
+     *
+     * @param string $name
+     *
+     * @return int Function ID
+     */
+    public function getFunctionId($name)
+    {
+        $name = strtolower($name);
+        // find a corresponding function ID
+        // otherwise, default to 'lid'
+        $sql = "SELECT functieid FROM functie
+            WHERE LOWER(functie) = :functie";
+        $stmt = $this->getConnection()->prepare($sql);
+
+        $stmt->execute(array(
+            'functie' => $name
+        ));
+        $res = $stmt->fetchAll();
+
+        if (count($res) == 1) {
+            return $res[0]['functieid'];
+        }
+        // no results, so use 'lid'
+        $stmt->execute(array(
+            'functie' => 'lid'
+        ));
+        $res = $stmt->fetchAll();
+
+        return $res[0]['functieid'];
+    }
+
     public function setConnection(Connection $conn)
     {
         $this->conn = $conn;
