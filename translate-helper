@@ -1,0 +1,31 @@
+#!/bin/bash
+dir="$PWD"
+cd `dirname $0`
+
+# parse php files
+find ./module -iname "*.phtml" | xargs xgettext \
+    --language=PHP \
+    --keyword=translate \
+    --output=./module/Application/language/gewisdb.pot \
+    --force-po \
+    --package-name=GEWISdb \
+    --package-version=`git describe --dirty` \
+    --copyright-holder=GEWIS \
+
+find ./module -iname "*.php" | xargs xgettext \
+    --language=PHP \
+    --keyword=translate \
+    --output=./module/Application/language/gewisdb.pot \
+    --force-po \
+    --package-name=GEWISdb \
+    --package-version=`git describe --dirty` \
+    --copyright-holder=GEWIS \
+    --join-existing \
+
+cd ./module/Application/language/
+
+# merge translation files
+msgmerge -U nl.po gewisdb.pot
+msgmerge -U en.po gewisdb.pot
+
+cd $dir
