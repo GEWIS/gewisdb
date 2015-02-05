@@ -171,6 +171,14 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_foundation'));
                     return $form;
                 },
+                'database_form_board_install' => function ($sm) {
+                    $form = new \Database\Form\Board\Install(
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_member')
+                    );
+                    // TODO hydrator
+                    return $form;
+                },
                 'database_form_fieldset_subdecision_foundation' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));

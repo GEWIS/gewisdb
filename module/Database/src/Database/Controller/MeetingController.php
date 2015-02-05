@@ -106,7 +106,8 @@ class MeetingController extends AbstractActionController
             'abolish' => $this->getMeetingService()->getAbolishForm(),
             'destroy' => $this->getMeetingService()->getDestroyForm(),
             'install' => $this->getMeetingService()->getInstallForm(),
-            'other' => $this->getMeetingService()->getOtherForm()
+            'other' => $this->getMeetingService()->getOtherForm(),
+            'board_install' => $this->getMeetingService()->getBoardInstallForm()
         );
 
         foreach ($forms as $form) {

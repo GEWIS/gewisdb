@@ -449,6 +449,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get the board install form.
+     *
+     * @return \Database\Form\Board\Install
+     */
+    public function getBoardInstallForm()
+    {
+        return $this->getServiceManager()->get('database_form_board_install');
+    }
+
+    /**
      * Get install form.
      *
      * @return \Database\Form\Install
