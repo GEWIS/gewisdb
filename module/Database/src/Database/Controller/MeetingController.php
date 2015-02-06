@@ -32,10 +32,14 @@ class MeetingController extends AbstractActionController
         $service = $this->getMeetingService();
         $request = $this->getRequest();
 
-        if ($request->isPost() && $service->createMeeting($request->getPost())) {
-            return new ViewModel(array(
-                'success' => true
-            ));
+        if ($request->isPost()) {
+            $meeting = $service->createMeeting($request->getPost());
+            if (null !== $meeting) {
+                return $this->redirect()->toRoute('meeting/view', array(
+                    'type' => $meeting->getType(),
+                    'number' => $meeting->getNumber()
+                ));
+            }
         }
 
         return new ViewModel(array(

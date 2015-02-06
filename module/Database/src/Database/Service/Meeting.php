@@ -356,7 +356,7 @@ class Meeting extends AbstractService
      *
      * @param array $data Meeting creation data.
      *
-     * @return boolean If creation was succesfull
+     * @return MeetingModel or null if creation was succesfull
      */
     public function createMeeting($data)
     {
@@ -365,7 +365,7 @@ class Meeting extends AbstractService
         $form->setData($data);
 
         if (!$form->isValid()) {
-            return false;
+            return null;
         }
 
         $meeting = $form->getData();
@@ -378,14 +378,14 @@ class Meeting extends AbstractService
                     'Deze vergadering bestaat al'
                 )
             ));
-            return false;
+            return null;
         }
 
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('meeting' => $meeting));
         $mapper->persist($meeting);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('meeting' => $meeting));
 
-        return true;
+        return $meeting;
     }
 
     /**
