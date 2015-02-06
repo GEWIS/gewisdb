@@ -44,7 +44,8 @@ class Export extends Form
         foreach ($service->getAllMeetings() as $meeting) {
             $meeting = $meeting[0];
             $id = $meeting->getType() . '-' . $meeting->getNumber();
-            $options[$id] = strtoupper($meeting->getType()) . ' ' . $meeting->getNumber();
+            $options[$id] = strtoupper($meeting->getType()) . ' ' . $meeting->getNumber()
+                          . '   (' . $meeting->getDate()->format('j F Y') . ')';
         }
 
         return $options;
