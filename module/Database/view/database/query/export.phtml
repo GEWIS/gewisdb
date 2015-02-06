@@ -4,7 +4,7 @@ $new = array();
 foreach ($result as $row) {
     $row = array_map(function($el) {
         if ($el instanceof \DateTime) {
-            return $el->format('Y-m-d H:i:s');
+            return $el->format('Y-m-d');
         } else {
             return $el;
         }
@@ -17,7 +17,12 @@ $mem = fopen('php://memory', 'w');
 
 fwrite($mem, "sep=;\n");
 
+$first = true;
 foreach ($new as $line) {
+    if ($first) {
+        $first = false;
+        fputcsv($mem, array_keys($line), ';');
+    }
     fputcsv($mem, $line, ';');
 }
 
