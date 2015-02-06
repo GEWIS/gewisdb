@@ -41,7 +41,7 @@ case Member::GENDER_FEMALE:
         </tr>
         <tr>
             <th>Email</th>
-            <td><?= $member->getEmail() ?></td>
+            <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
         </tr>
         <tr>
             <th>Geboortedatum</th>
