@@ -42,6 +42,17 @@ class MailingList
     }
 
     /**
+     * Remove a list.
+     *
+     * @param ListModel $list
+     */
+    public function remove(ListModel $list)
+    {
+        $this->em->remove($list);
+        $this->em->flush();
+    }
+
+    /**
      * Find all.
      *
      * @return array of ListModel's

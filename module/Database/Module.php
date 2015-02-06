@@ -66,6 +66,7 @@ class Module
                 'database_form_query' => 'Database\Form\Query',
                 'database_form_queryexport' => 'Database\Form\QueryExport',
                 'database_form_deleteaddress' => 'Database\Form\DeleteAddress',
+                'database_form_deletelist' => 'Database\Form\DeleteList',
             ),
             'factories' => array(
                 'database_form_export' => function ($sm) {

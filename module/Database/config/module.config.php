@@ -292,6 +292,18 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'list-delete' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/list/delete/:name',
+                            'constraints' => array(
+                                'name' => '[a-zA-Z0-9_-]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'deleteList'
+                            )
+                        )
+                    ),
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(

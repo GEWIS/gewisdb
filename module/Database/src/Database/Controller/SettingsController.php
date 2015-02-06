@@ -47,6 +47,33 @@ class SettingsController extends AbstractActionController
     }
 
     /**
+     * List deletion action
+     */
+    public function deleteListAction()
+    {
+        $service = $this->getListService();
+        $name = $this->params()->fromRoute('name');
+
+        if ($this->getRequest()->isPost()) {
+            if ($service->delete($name, $this->getRequest()->getPost())) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'name' => $name
+                ));
+            } else {
+                // redirect back
+                return $this->redirect()->toRoute('settings/default', array(
+                    'action' => 'list'
+                ));
+            }
+        }
+        return new ViewModel(array(
+            'form' => $this->getListService()->getDeleteListForm(),
+            'name' => $name
+        ));
+    }
+
+    /**
      * Get the list service.
      *
      * @return \Database\Service\MailingList

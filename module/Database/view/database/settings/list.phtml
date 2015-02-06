@@ -9,6 +9,7 @@
                     <th>Beschrijving (Engels)</th>
                     <th>Form</th>
                     <th>Std</th>
+                    <th>Verwijder</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,9 @@
                     <td><?= $list->getEnDescription() ?></td>
                     <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>
                     <td><span class="glyphicon glyphicon-<?= $list->getDefaultSub() ? 'ok' : 'remove' ?>"></span></td>
+                    <td><a href="<?= $this->url('settings/list-delete', array(
+                        'name' => $list->getName()
+                    )) ?>" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder</a></td>
                 </tr>
             <?php endforeach ?>
             </tbody>

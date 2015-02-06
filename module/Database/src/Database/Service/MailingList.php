@@ -59,6 +59,43 @@ class MailingList extends AbstractService
     }
 
     /**
+     * Delete a list.
+     *
+     * @param string $name Name of the list to delete
+     * @param array $data Form data
+     *
+     * @return boolean If deleted
+     */
+    public function delete($name, $data)
+    {
+        $form = $this->getDeleteListForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        $list = $this->getList($name);
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
+        $this->getListMapper()->remove($list);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
+
+        return true;
+    }
+
+    /**
+     * Get the delete list form.
+     *
+     * @return \Database\Form\DeleteList
+     */
+    public function getDeleteListForm()
+    {
+        return $this->getServiceManager()->get('database_form_deletelist');
+    }
+
+    /**
      * Get the list form.
      *
      * @return \Database\Form\MailingList
