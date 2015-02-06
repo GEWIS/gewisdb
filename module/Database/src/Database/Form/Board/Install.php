@@ -30,7 +30,7 @@ class Install extends AbstractDecision
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => 'Installeer als bestuurder'
+                'value' => 'Installeer bestuurder'
             )
         ));
     }
