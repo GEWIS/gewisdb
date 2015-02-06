@@ -59,12 +59,16 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<?php
-$submit = $form->get('submit');
-$submit->setLabel('Submit');
-$submit->setAttribute('class', 'btn btn-primary');
-?>
-<?= $this->formButton($submit) ?>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php
+        $submit = $form->get('submit');
+        $submit->setLabel('Submit');
+        $submit->setAttribute('class', 'btn btn-primary');
+        ?>
+        <?= $this->formButton($submit) ?>
+    </div>
+</div>
 
 <?= $this->form()->closeTag(); ?>
 <?php endif; ?>
