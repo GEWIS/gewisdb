@@ -235,6 +235,40 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Board install decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function boardInstallDecision($data)
+    {
+        $form = $this->getBoardInstallForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            return array(
+                'type' => 'board_install',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'board_install',
+            'decision' => $decision
+        );
+    }
+
+    /**
      * Install decision.
      *
      * @param array $data

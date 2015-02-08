@@ -63,6 +63,7 @@ class Module
                 'database_hydrator_other' => 'Database\Hydrator\Other',
                 'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
+                'database_hydrator_board_install' => 'Database\Hydrator\Board\Install',
                 'database_form_query' => 'Database\Form\Query',
                 'database_form_queryexport' => 'Database\Form\QueryExport',
                 'database_form_deleteaddress' => 'Database\Form\DeleteAddress',
@@ -177,7 +178,7 @@ class Module
                         $sm->get('database_form_fieldset_meeting'),
                         $sm->get('database_form_fieldset_member')
                     );
-                    // TODO hydrator
+                    $form->setHydrator($sm->get('database_hydrator_board_install'));
                     return $form;
                 },
                 'database_form_fieldset_subdecision_foundation' => function ($sm) {

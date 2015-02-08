@@ -27,6 +27,14 @@ class Install extends AbstractDecision
         ));
 
         $this->add(array(
+            'name' => 'date',
+            'type' => 'date',
+            'options' => array(
+                'label' => 'Van kracht per',
+            )
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
@@ -53,6 +61,9 @@ class Install extends AbstractDecision
                     )
                 )
             ),
+            'date' => array(
+                'required' => true
+            )
         );
     }
 }

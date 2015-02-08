@@ -159,6 +159,11 @@ class MeetingController extends AbstractActionController
                 $service->destroyDecision($this->getRequest()->getPost())
             );
             break;
+        case 'board_install':
+            return new ViewModel(
+                $service->boardInstallDecision($this->getRequest()->getPost())
+            );
+            break;
         case 'other':
             return new ViewModel(
                 $service->otherDecision($this->getRequest()->getPost())
