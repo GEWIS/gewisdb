@@ -10,6 +10,7 @@ namespace Checker\Service;
 use Application\Service\AbstractService;
 use \Database\Model\SubDecision\Foundation;
 use \Database\Model\Meeting;
+use \Checker\Model\Error;
 
 class Checker extends AbstractService {
 
@@ -70,10 +71,7 @@ class Checker extends AbstractService {
         foreach ($installations as $installation) {
             $organName = $installation->getFoundation()->toArray()['name'];
             if (!in_array($organName, $organs,true)) {
-                $errors[] = 'Member ' . $installation->getMember()->toArray()['fullName'] .
-                    ' ('. $installation->getMember()->toArray()['lidnr'] . ')'
-                    . ' is still installed as '. $installation->getFunction() . ' in '
-                    . $organName . ' which does not exist anymore';
+                $errors[] = Error\MembersInNonExistingOrgan($installation);
             }
         }
         return $errors;
@@ -96,10 +94,7 @@ class Checker extends AbstractService {
             foreach ($organsMembers as $memberRoles) {
                 if (!isset($memberRoles['Lid'])) {
                     foreach ($memberRoles as $role => $installation) {
-                        $errors[] = 'Member ' . $installation->getMember()->toArray()['fullName'] .
-                            ' ('. $installation->getMember()->toArray()['lidnr'] . ')'
-                            . ' has a special role as ' . $role . ' in  '
-                            . $installation->getFoundation()->toArray()['name'] . '  but is not a member anymore';
+                        $errors[] = Error\MemberHasRoleButNotInOrgan($meeting, $installation, $role);
                     }
                 }
             }
@@ -125,8 +120,7 @@ class Checker extends AbstractService {
             $foundation = $budget->getFoundation();
 
             if (!is_null($foundation) && !in_array($foundation->getName(), $organs)) {
-                $errors[] = 'Budget from ' . $foundation->getName() . ' has been created. However '
-                    . $foundation->getName() . ' does not exist';
+                $errors[] = new Error\BudgetOrganDoesNotExist($budget);
             }
         }
 
@@ -156,7 +150,7 @@ class Checker extends AbstractService {
                 $meetingType === Meeting::TYPE_VV ||
                 ($organType ===  Foundation::ORGAN_TYPE_AV_COMMITTEE ^ $meetingType === Meeting::TYPE_AV)
             ) {
-                $errors[] = "Organ of type " . $organType . ' can not be created in a meeting of type ' . $meetingType;
+                $errors[] = new Error\OrganMeetingType($organ);
             }
         }
         return $errors;
