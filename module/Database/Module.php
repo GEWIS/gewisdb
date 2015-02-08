@@ -64,6 +64,7 @@ class Module
                 'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
                 'database_hydrator_budget' => 'Database\Hydrator\Budget',
                 'database_hydrator_board_install' => 'Database\Hydrator\Board\Install',
+                'database_hydrator_board_discharge' => 'Database\Hydrator\Board\Discharge',
                 'database_form_query' => 'Database\Form\Query',
                 'database_form_queryexport' => 'Database\Form\QueryExport',
                 'database_form_deleteaddress' => 'Database\Form\DeleteAddress',
@@ -187,7 +188,7 @@ class Module
                         $sm->get('database_form_fieldset_subdecision_board_install'),
                         $sm->get('database_service_meeting')
                     );
-                    //$form->setHydrator($sm->get('database_hydrator_board_discharge'));
+                    $form->setHydrator($sm->get('database_hydrator_board_discharge'));
                     return $form;
                 },
                 'database_form_fieldset_subdecision_foundation' => function ($sm) {
