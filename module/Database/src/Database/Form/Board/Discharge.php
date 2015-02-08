@@ -23,14 +23,6 @@ class Discharge extends AbstractDecision
         $this->add($installation);
 
         $this->add(array(
-            'name' => 'date',
-            'type' => 'date',
-            'options' => array(
-                'label' => 'Van kracht per',
-            )
-        ));
-
-        $this->add(array(
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
@@ -55,9 +47,6 @@ class Discharge extends AbstractDecision
     public function getInputFilterSpecification()
     {
         return array(
-            'date' => array(
-                'required' => true
-            )
         );
     }
 }

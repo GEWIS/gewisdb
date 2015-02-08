@@ -15,21 +15,21 @@ foreach ($installs as $key => $install) {
 <script>
 $(document).ready(function() {
     var discharges = <?= json_encode($arrInstalls); ?>;
-    $('.board-discharge-slot').change(function() {
+    $('.board-release-slot').change(function() {
         var data = discharges[$('.board-discharge-slot:checked').val()];
-        $('#install-board-meeting-type').val(data['meeting_type']);
-        $('#install-board-meeting-number').val(data['meeting_number']);
-        $('#install-board-decision-point').val(data['decision_point']);
-        $('#install-board-decision-number').val(data['decision_number']);
-        $('#install-board-subdecision-number').val(data['subdecision_number']);
-        $('#board-discharge-submit').prop('disabled', false);
+        $('#release-install-board-meeting-type').val(data['meeting_type']);
+        $('#release-install-board-meeting-number').val(data['meeting_number']);
+        $('#release-install-board-decision-point').val(data['decision_point']);
+        $('#release-install-board-decision-number').val(data['decision_number']);
+        $('#release-install-board-subdecision-number').val(data['subdecision_number']);
+        $('#board-release-submit').prop('disabled', false);
     });
 });
 </script>
 <?php
 $form->prepare();
 
-$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'board_discharge')));
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'board_release')));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
@@ -48,11 +48,11 @@ $fs = $form->get('meeting')
 <div class="form-group">
 <?php
 $fs = $form->get('subdecision');
-$fs->get('meeting_type')->setAttribute('id', 'install-board-meeting-type');
-$fs->get('meeting_number')->setAttribute('id', 'install-board-meeting-number');
-$fs->get('decision_point')->setAttribute('id', 'install-board-decision-point');
-$fs->get('decision_number')->setAttribute('id', 'install-board-decision-number');
-$fs->get('number')->setAttribute('id', 'install-board-subdecision-number');
+$fs->get('meeting_type')->setAttribute('id', 'release-install-board-meeting-type');
+$fs->get('meeting_number')->setAttribute('id', 'release-install-board-meeting-number');
+$fs->get('decision_point')->setAttribute('id', 'release-install-board-decision-point');
+$fs->get('decision_number')->setAttribute('id', 'release-install-board-decision-number');
+$fs->get('number')->setAttribute('id', 'release-install-board-subdecision-number');
 ?>
 <?= $this->formHidden($fs->get('meeting_type')) ?>
 <?= $this->formHidden($fs->get('meeting_number')) ?>
@@ -66,11 +66,27 @@ $fs->get('number')->setAttribute('id', 'install-board-subdecision-number');
 <?php foreach ($installs as $key => $install): ?>
     <div class="radio">
         <label>
-            <input type="radio" name="board-discharge-slot" class="board-discharge-slot" value="<?= $key ?>">
+            <input type="radio" name="board-release-slot" class="board-release-slot" value="<?= $key ?>">
             <?= $install->getMember()->getFullName() ?> als <?= $install->getFunction() ?><br />
         </label>
     </div>
 <?php endforeach ?>
+    </div>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('date');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-md-2 control-label'
+));
+?>
+    <?= $this->formLabel($element) ?>
+    <div class="col-md-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
     </div>
 </div>
 
@@ -80,7 +96,7 @@ $fs->get('number')->setAttribute('id', 'install-board-subdecision-number');
         $submit = $form->get('submit');
         $submit->setLabel($submit->getValue());
         $submit->setAttribute('class', 'btn btn-primary');
-        $submit->setAttribute('id', 'board-discharge-submit');
+        $submit->setAttribute('id', 'board-release-submit');
         $submit->setAttribute('disabled', 'disabled');
         ?>
         <?= $this->formButton($submit) ?>

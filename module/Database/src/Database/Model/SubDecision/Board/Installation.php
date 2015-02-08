@@ -44,8 +44,18 @@ class Installation extends SubDecision
     protected $date;
 
     /**
-     * @todo corresponding discharge
+     * Discharge.
+     *
+     * @ORM\OneToOne(targetEntity="Discharge",mappedBy="installation")
      */
+    protected $discharge;
+
+    /**
+     * Release.
+     *
+     * @ORM\OneToOne(targetEntity="Release",mappedBy="installation")
+     */
+    protected $release;
 
 
     /**

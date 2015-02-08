@@ -61,7 +61,9 @@ use Database\Model\Meeting;
             )); ?>
             </div>
             <div class="tab-pane" id="board-ontheven">
-                ontheven uit functie
+            <?= $this->partial('database/meeting/board/releaseform', array(
+                'form' => $forms['board_release']
+            )); ?>
             </div>
             <div class="tab-pane" id="board-decharge">
             <?= $this->partial('database/meeting/board/dischargeform', array(

@@ -313,6 +313,40 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Board release decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function boardReleaseDecision($data)
+    {
+        $form = $this->getBoardReleaseForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            return array(
+                'type' => 'board_release',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'board_release',
+            'decision' => $decision
+        );
+    }
+
+    /**
      * Install decision.
      *
      * @param array $data
@@ -537,7 +571,17 @@ class Meeting extends AbstractService
     }
 
     /**
-     * Get the board install form.
+     * Get the board release form.
+     *
+     * @return \Database\Form\Board\Release
+     */
+    public function getBoardReleaseForm()
+    {
+        return $this->getServiceManager()->get('database_form_board_release');
+    }
+
+    /**
+     * Get the board release form.
      *
      * @return \Database\Form\Board\Discharge
      */

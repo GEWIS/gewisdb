@@ -2,15 +2,15 @@
 
 namespace Database\Hydrator\Board;
 
-use Database\Model\SubDecision\Board\Discharge as BoardDischarge;
+use Database\Model\SubDecision\Board\Release as BoardRelease;
 use Database\Model\Decision;
 use Database\Hydrator\AbstractDecision;
 
-class Discharge extends AbstractDecision
+class Release extends AbstractDecision
 {
 
     /**
-     * Board discharge hydration
+     * Board release hydration
      *
      * @param array $data
      * @param Decision $decision
@@ -28,12 +28,13 @@ class Discharge extends AbstractDecision
         // - installation decision
         // - date
 
-        $discharge = new BoardDischarge();
+        $release = new BoardRelease();
 
-        $discharge->setNumber(1);
-        $discharge->setInstallation($data['subdecision']);
+        $release->setNumber(1);
+        $release->setInstallation($data['subdecision']);
+        $release->setDate(new \DateTime($data['date']));
 
-        $discharge->setDecision($decision);
+        $release->setDecision($decision);
 
         return $decision;
     }
