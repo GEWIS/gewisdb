@@ -14,6 +14,26 @@ case 'foundation':
         'form' => $form
     ));
     break;
+case 'destroy':
+    echo $this->partial('database/meeting/destroyform', array(
+        'form' => $form
+    ));
+    break;
+case 'board_install':
+    echo $this->partial('database/meeting/board/installform', array(
+        'form' => $form
+    ));
+    break;
+case 'board_discharge':
+    echo $this->partial('database/meeting/board/dischargeform', array(
+        'form' => $form
+    ));
+    break;
+case 'board_release':
+    echo $this->partial('database/meeting/board/releaseform', array(
+        'form' => $form
+    ));
+    break;
 case 'other':
     echo $this->partial('database/meeting/otherform', array(
         'form' => $form

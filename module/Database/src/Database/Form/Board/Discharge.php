@@ -20,7 +20,7 @@ class Discharge extends AbstractDecision
         parent::__construct($meeting);
         $this->service = $service;
 
-        $this->add($installation);
+        $this->add(clone $installation);
 
         $this->add(array(
             'name' => 'submit',
