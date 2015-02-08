@@ -145,6 +145,18 @@ class Meeting extends AbstractService
             $data['besluittypeid'] = 5;
 
             $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
+        } else if ($subdecision instanceof SubDecision\Board\Installation) {
+            $data['besluittypeid'] = 7;
+
+            $data['lidnummer'] = $subdecision->getMember()->getLidnr();
+        } else if ($subdecision instanceof SubDecision\Board\Release) {
+            $data['besluittypeid'] = 7;
+
+            $data['lidnummer'] = $subdecision->getInstallation()->getMember()->getLidnr();
+        } else if ($subdecision instanceof SubDecision\Board\Discharge) {
+            $data['besluittypeid'] = 7;
+
+            $data['lidnummer'] = $subdecision->getInstallation()->getMember()->getLidnr();
         } else if ($subdecision instanceof SubDecision\Other) {
             $data['besluittypeid'] = 7;
             // nothing special
