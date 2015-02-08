@@ -111,7 +111,8 @@ class MeetingController extends AbstractActionController
             'destroy' => $this->getMeetingService()->getDestroyForm(),
             'install' => $this->getMeetingService()->getInstallForm(),
             'other' => $this->getMeetingService()->getOtherForm(),
-            'board_install' => $this->getMeetingService()->getBoardInstallForm()
+            'board_install' => $this->getMeetingService()->getBoardInstallForm(),
+            'board_discharge' => $this->getMeetingService()->getBoardDischargeForm(),
         );
 
         foreach ($forms as $form) {
@@ -162,6 +163,11 @@ class MeetingController extends AbstractActionController
         case 'board_install':
             return new ViewModel(
                 $service->boardInstallDecision($this->getRequest()->getPost())
+            );
+            break;
+        case 'board_discharge':
+            return new ViewModel(
+                $service->boardDischargeDecision($this->getRequest()->getPost())
             );
             break;
         case 'other':

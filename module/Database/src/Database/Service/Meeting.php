@@ -72,6 +72,16 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Get the current board installations.
+     *
+     * @return array
+     */
+    public function getCurrentBoard()
+    {
+        return $this->getMeetingMapper()->findCurrentBoard();
+    }
+
+    /**
      * Export decisions.
      *
      * @param array $data
@@ -490,6 +500,16 @@ class Meeting extends AbstractService
     public function getBoardInstallForm()
     {
         return $this->getServiceManager()->get('database_form_board_install');
+    }
+
+    /**
+     * Get the board install form.
+     *
+     * @return \Database\Form\Board\Discharge
+     */
+    public function getBoardDischargeForm()
+    {
+        return $this->getServiceManager()->get('database_form_board_discharge');
     }
 
     /**

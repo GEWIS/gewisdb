@@ -181,6 +181,15 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_board_install'));
                     return $form;
                 },
+                'database_form_board_discharge' => function ($sm) {
+                    $form = new \Database\Form\Board\Discharge(
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_subdecision_board_install'),
+                        $sm->get('database_service_meeting')
+                    );
+                    //$form->setHydrator($sm->get('database_hydrator_board_discharge'));
+                    return $form;
+                },
                 'database_form_fieldset_subdecision_foundation' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
@@ -191,6 +200,12 @@ class Module
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
                     $fieldset->setObject(new \Database\Model\SubDecision\Installation());
+                    return $fieldset;
+                },
+                'database_form_fieldset_subdecision_board_install' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\SubDecision();
+                    $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
+                    $fieldset->setObject(new \Database\Model\SubDecision\Board\Installation());
                     return $fieldset;
                 },
                 'database_form_fieldset_decision' => function ($sm) {

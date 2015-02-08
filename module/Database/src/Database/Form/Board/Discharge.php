@@ -4,17 +4,31 @@ namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset;
+use Database\Service\Meeting as MeetingService;
 
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class Install extends AbstractDecision
+class Discharge extends AbstractDecision
     implements InputFilterProviderInterface
 {
 
-    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
+    protected $service;
+
+    public function __construct(Fieldset\Meeting $meeting, Fieldset\SubDecision $installation, MeetingService $service)
     {
         parent::__construct($meeting);
+        $this->service = $service;
+
+        $this->add($installation);
+
+        $this->add(array(
+            'name' => 'date',
+            'type' => 'date',
+            'options' => array(
+                'label' => 'Van kracht per',
+            )
+        ));
 
         $this->add(array(
             'name' => 'submit',
@@ -26,11 +40,24 @@ class Install extends AbstractDecision
     }
 
     /**
+     * Get the meeting service.
+     *
+     * @return MeetingService
+     */
+    public function getMeetingService()
+    {
+        return $this->service;
+    }
+
+    /**
      * Specification of input filter.
      */
     public function getInputFilterSpecification()
     {
         return array(
+            'date' => array(
+                'required' => true
+            )
         );
     }
 }
