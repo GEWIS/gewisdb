@@ -160,9 +160,15 @@ class Meeting extends AbstractService
         } else if ($subdecision instanceof SubDecision\Other) {
             $data['besluittypeid'] = 7;
             // nothing special
+        } else if ($subdecision instanceof SubDecision\Destroy){
+            $data['besluittypeid'] = 7;
+            // nothing special
         }
 
-        // TODO: destroyed decisions
+        // destroyed decisions
+        if (null !== $subdecision->getDecision()->getDestroyedBy()) {
+            $data['vernietigd'] = true;
+        }
 
         $query = $this->getSubdecisionQuery();
 
