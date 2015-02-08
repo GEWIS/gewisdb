@@ -20,7 +20,7 @@ class BudgetOrganDoesNotExist extends \Checker\Model\Error
     public function __construct(
         \Database\Model\SubDecision\Budget $budget
     ) {
-        parent::__construct($budget, $budget->getDecision()->getMeeting());
+        parent::__construct($budget->getDecision()->getMeeting(), $budget);
     }
 
     /**

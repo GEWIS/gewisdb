@@ -16,7 +16,7 @@ class OrganMeetingType extends \Checker\Model\Error {
     public function __construct(
         \Database\Model\SubDecision\Foundation $foundation
     ) {
-        parent::__construct($foundation, $foundation->getDecision()->getMeeting());
+        parent::__construct($foundation->getDecision()->getMeeting(), $foundation);
         $this->organType = $foundation->getOrganType();
         $this->meetingType = $foundation->getMeetingType();
     }
@@ -25,15 +25,18 @@ class OrganMeetingType extends \Checker\Model\Error {
     /**
      * @return string Type of organ that was created
      */
-    public function getOrganType() {
-        return $this->foundation->getOrganType();
+    public function getOrganType()
+    {
+        return $this->getSubDecision()->getOrganType();
     }
 
     /**
      * @return string Type of meeting that this organ was created
      */
-    public function getMeetingType() {
-        return $this->getMeetingType();
+    public function getMeetingType()
+    {
+
+        return $this->getSubDecision()->getDecision()->getMeeting()->getType();
     }
 
     public function asText() {

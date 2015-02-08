@@ -39,7 +39,7 @@ class MemberInNonExistingOrgan extends Error
      */
     public function getFoundation()
     {
-        return $this->getSubDecision()->getInstallation();
+        return $this->getSubDecision()->getFoundation();
     }
 
 

@@ -41,7 +41,7 @@ abstract class Error {
         \Database\Model\SubDecision $subDecision
     ) {
         $this->meeting = $meeting;
-        $this->subdecision = $subDecision;
+        $this->subDecision = $subDecision;
     }
 
 

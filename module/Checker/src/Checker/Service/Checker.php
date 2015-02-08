@@ -46,7 +46,7 @@ class Checker extends AbstractService {
             . $meeting->getDate()->format('Y-m-d') . "\n";
 
         foreach ($errors as $error) {
-            echo $error . "\n";
+            echo $error->asText() . "\n";
         }
         echo "\n";
     }

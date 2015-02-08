@@ -4,7 +4,7 @@ namespace Checker\Model\Error;
 
 use Checker\Model\Error;
 
-class MembersHaveRoleButNotInOrgan extends Error
+class MemberHasRoleButNotInOrgan extends Error
 {
     /**
      * @var Role that the member has in the organ
@@ -46,7 +46,7 @@ class MembersHaveRoleButNotInOrgan extends Error
      */
     public function getFoundation()
     {
-        return $this->getSubDecision()->getInstallation();
+        return $this->getSubDecision()->getFoundation();
     }
 
     public function asText() {
