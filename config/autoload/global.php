@@ -13,4 +13,15 @@
 
 return array(
     // ...
+
+    /**
+     * Email configuration.
+     */
+    'email' => array(
+        'transport' => 'File',
+        'options' => array(
+            'path' => 'data/mail/'
+        ),
+        'from' => 'web@gewis.nl'
+    ),
 );

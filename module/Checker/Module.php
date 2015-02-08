@@ -60,6 +60,15 @@ class Module
                     return new \Checker\Mapper\Budget(
                         $sm->get('database_doctrine_em')
                     );
+                },
+                'checker_mail_transport' => function ($sm) {
+                    $config = $sm->get('config');
+                    $config = $config['email'];
+                    $class = '\Zend\Mail\Transport\\' . $config['transport'];
+                    $optionsClass = '\Zend\Mail\Transport\\' . $config['transport'] . 'Options';
+                    $transport = new $class();
+                    $transport->setOptions(new $optionsClass($config['options']));
+                    return $transport;
                 }
             )
         );

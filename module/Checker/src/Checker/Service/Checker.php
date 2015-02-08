@@ -11,6 +11,7 @@ use Application\Service\AbstractService;
 use \Database\Model\SubDecision\Foundation;
 use \Database\Model\Meeting;
 use \Checker\Model\Error;
+use Zend\Mail\Message;
 
 class Checker extends AbstractService {
 
@@ -21,6 +22,7 @@ class Checker extends AbstractService {
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meetings = $meetingService->getAllMeetings();
 
+        $message = '';
         foreach ($meetings as $meeting) {
             $errors = array_merge(
                 $this->checkBudgetOrganExists($meeting),
@@ -29,8 +31,10 @@ class Checker extends AbstractService {
                 $this->checkOrganMeetingType($meeting)
             );
 
-            $this->handleErrors($meeting, $errors);
+            $message .= $this->handleErrors($meeting, $errors);
         }
+
+        $this->sendMail($message);
     }
 
     /**
@@ -42,13 +46,35 @@ class Checker extends AbstractService {
     private function handleErrors(\Database\Model\Meeting $meeting, array $errors)
     {
         // At this moment only write to output.
-        echo 'Errors after meeting ' . $meeting->getNumber() . ' hold at '
+        $body =  'Errors after meeting ' . $meeting->getNumber() . ' hold at '
             . $meeting->getDate()->format('Y-m-d') . "\n";
 
         foreach ($errors as $error) {
-            echo $error->asText() . "\n";
+            $body.= $error->asText() . "\n";
         }
-        echo "\n";
+
+        $body .= "\n";
+        return $body;
+
+    }
+
+    /**
+     * Send a mail with the detected errors to the secretary
+     *
+     * @param $body
+     */
+    private function sendMail($body)
+    {
+        $transport = $this->getServiceManager()->get('checker_mail_transport');
+
+        $message = new Message();
+        $message->addTo('secr@gewis.nl')
+            ->setSubject('Database Checker Report')
+            ->setBody($body);
+
+        echo $body;
+
+        $transport->send($message);
     }
 
     /**
@@ -136,7 +162,7 @@ class Checker extends AbstractService {
      */
     public function checkOrganMeetingType(\Database\Model\Meeting $meeting) {
         $errors = [];
-        $organService =  $organService = $this->getServiceManager()->get('checker_service_organ');
+        $organService = $this->getServiceManager()->get('checker_service_organ');
         $organs = $organService->getOrgansCreatedAtMeeting($meeting);
 
         foreach ($organs as $organ) {
