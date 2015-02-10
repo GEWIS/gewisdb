@@ -15,11 +15,6 @@ use Zend\Session\Container as SessionContainer;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
-    {
-        return new ViewModel();
-    }
-
     public function langAction()
     {
         $session = new SessionContainer('lang');
