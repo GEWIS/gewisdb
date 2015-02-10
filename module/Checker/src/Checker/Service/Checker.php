@@ -97,7 +97,14 @@ class Checker extends AbstractService {
         foreach ($installations as $installation) {
             $organName = $installation->getFoundation()->toArray()['name'];
             if (!in_array($organName, $organs,true)) {
-                $errors[] = Error\MembersInNonExistingOrgan($installation);
+                $errors[] = new Error\MembersInNonExistingOrgan($installation);
+            }
+
+            // Check if the members are still member of GEWIS
+            $member = $installation->getMember();
+
+            if ($member->getExpiration() < $meeting->getDate()) {
+                $errors[] = new Error\MemberExpiredButStillInOrgan($meeting, $installation);
             }
         }
         return $errors;
@@ -120,7 +127,7 @@ class Checker extends AbstractService {
             foreach ($organsMembers as $memberRoles) {
                 if (!isset($memberRoles['Lid'])) {
                     foreach ($memberRoles as $role => $installation) {
-                        $errors[] = Error\MemberHasRoleButNotInOrgan($meeting, $installation, $role);
+                        $errors[] = new Error\MemberHasRoleButNotInOrgan($meeting, $installation, $role);
                     }
                 }
             }

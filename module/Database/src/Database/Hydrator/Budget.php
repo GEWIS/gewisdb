@@ -36,7 +36,7 @@ class Budget extends AbstractDecision
         } else {
             $subdecision = new ReckoningDecision();
         }
-        //\Zend\Debug\Debug::dump($data);
+        
         $subdecision->setNumber(1);
 
         $date = new \DateTime($data['date']);
