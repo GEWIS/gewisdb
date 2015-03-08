@@ -19,6 +19,7 @@ class Checker extends AbstractService {
      * Does a full check on each meeting, checking that after each meeting no database violation occur
      */
     public function check() {
+
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meetings = $meetingService->getAllMeetings();
 

@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
 
 
-class Installation {
+class Installation
+{
     /**
      * Doctrine entity manager.
      *
@@ -67,6 +68,5 @@ class Installation {
         // TODO: minus deleted decision
         return $qb->getQuery()->getResult();
     }
-
 
 }

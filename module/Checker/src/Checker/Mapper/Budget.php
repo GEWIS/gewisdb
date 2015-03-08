@@ -5,13 +5,14 @@ namespace Checker\Mapper;
 use Doctrine\ORM\EntityManager;
 
 class Budget {
+    use Filter;
+
     /**
      * Doctrine entity manager.
      *
      * @var EntityManager
      */
     protected $em;
-
 
     /**
      * Constructor
@@ -43,6 +44,6 @@ class Budget {
             ->setParameter('meeting_type', $meeting->getType());
 
         // TODO: minus deleted decision
-        return $qb->getQuery()->getResult();
+        return $this->filterDeleted($qb->getQuery()->getResult());
     }
 } 

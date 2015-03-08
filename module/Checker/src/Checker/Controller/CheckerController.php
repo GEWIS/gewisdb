@@ -18,6 +18,5 @@ class CheckerController extends AbstractActionController {
     {
         $service = $this->getServiceLocator()->get('checker_service_checker');
         $service->check();
-
     }
 }
