@@ -11,7 +11,7 @@ use Doctrine\ORM\UnitOfWork;
  */
 class Organ
 {
-
+    use Filter;
     /**
      * Doctrine entity manager.
      *
@@ -40,14 +40,19 @@ class Organ
     {
         $qb = $this->em->createQueryBuilder();
 
-        $qb->select('f.name')
+        $qb->select('f')
             ->where('m.date <= :meeting_date')
             ->from('Database\Model\SubDecision\Foundation', 'f')
             ->innerJoin('f.decision', 'd')
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
-        // TODO: minus deleted organ creations
-        return $qb->getQuery()->getResult();
+
+        $organs = $this->filterDeleted($qb->getQuery()->getResult());
+        $organNames = array_map(function ($organ) {
+            return $organ->getName();
+        }, $organs);
+
+        return $organNames;
     }
 
     /**
@@ -61,7 +66,7 @@ class Organ
         $qb = $this->em->createQueryBuilder();
 
 
-        $qb->select('f.name')
+        $qb->select('a')
             ->where('m.date <= :meeting_date')
             ->from('Database\Model\SubDecision\Abrogation', 'a')
             ->innerjoin('a.foundation', 'f')
@@ -69,8 +74,12 @@ class Organ
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        // TODO: Minus deleted organ deletions
-        return $qb->getQuery()->getResult();
+        $abrogations =  $this->filterDeleted($qb->getQuery()->getResult());
+        $organNames = array_map(function ($abrogation) {
+            return $abrogation->getFoundation()->getName();
+        }, $abrogations);
+
+        return $organNames;
     }
 
     /**
@@ -91,7 +100,7 @@ class Organ
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_number', $meeting->getNumber())
             ->setParameter('meeting_type', $meeting->getType());
-        // TODO: minus deleted organ creations
-        return $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($qb->getQuery()->getResult());
     }
 }

@@ -8,6 +8,7 @@ use Doctrine\ORM\UnitOfWork;
 
 class Installation
 {
+    use Filter;
     /**
      * Doctrine entity manager.
      *
@@ -45,8 +46,7 @@ class Installation
             ->innerJoin('dec.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        // TODO: minus deleted decision
-        return $qb->getQuery()->getResult();
+        return $this->filterDeleted($qb->getQuery()->getResult());
     }
 
     /**
@@ -65,8 +65,7 @@ class Installation
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        // TODO: minus deleted decision
-        return $qb->getQuery()->getResult();
+        return $this->filterDeleted($qb->getQuery()->getResult());
     }
 
 }

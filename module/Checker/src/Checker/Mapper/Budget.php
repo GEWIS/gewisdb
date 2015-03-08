@@ -43,7 +43,6 @@ class Budget {
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'))
             ->setParameter('meeting_type', $meeting->getType());
 
-        // TODO: minus deleted decision
         return $this->filterDeleted($qb->getQuery()->getResult());
     }
 } 
