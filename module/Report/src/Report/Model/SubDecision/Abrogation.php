@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Model\SubDecision;
+namespace Report\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Database\Model\SubDecision;
+use Report\Model\SubDecision;
 
 /**
  * Abrogation of an organ.

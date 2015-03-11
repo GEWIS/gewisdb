@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Model\SubDecision\Board;
+namespace Report\Model\SubDecision\Board;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Database\Model\SubDecision;
-use Database\Model\Member;
+use Report\Model\SubDecision;
+use Report\Model\Member;
 
 /**
  * Installation as board member.
@@ -31,7 +31,7 @@ class Installation extends SubDecision
      *
      * @todo Inversed relation
      *
-     * @ORM\ManyToOne(targetEntity="Database\Model\Member")
+     * @ORM\ManyToOne(targetEntity="Report\Model\Member")
      * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
     protected $member;

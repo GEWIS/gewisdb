@@ -25,7 +25,7 @@ class Installation extends FoundationReference
     /**
      * Member.
      *
-     * @ORM\ManyToOne(targetEntity="Database\Model\Member",inversedBy="installations")
+     * @ORM\ManyToOne(targetEntity="Report\Model\Member",inversedBy="installations")
      * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
     protected $member;

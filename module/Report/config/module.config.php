@@ -6,9 +6,6 @@ return array(
         )
     ),
     'doctrine' => array(
-        'connection' => array(
-            'orm_report' => array(),
-        ),
         'configuration' => array(
             'orm_report' => array(
                 'metadata_cache' => 'array',
@@ -30,7 +27,7 @@ return array(
                     __DIR__ . '/../src/Report/Model'
                 )
             ),
-            'orm_driver' => array(
+            'orm_report' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\DriverChain',
                 'drivers' => array(
                     'Report\Model' => 'Report_Driver'
@@ -42,7 +39,7 @@ return array(
                 'connection' => 'orm_report',
                 'configuration' => 'orm_report'
             )
-        )
+        ),
         'eventmanager' => array(
             'orm_report' => array()
         ),

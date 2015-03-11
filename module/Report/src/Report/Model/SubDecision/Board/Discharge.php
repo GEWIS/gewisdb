@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Model\SubDecision\Board;
+namespace Report\Model\SubDecision\Board;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Database\Model\SubDecision;
+use Report\Model\SubDecision;
 
 /**
  * Discharge from board position.
