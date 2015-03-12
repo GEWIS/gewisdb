@@ -162,6 +162,20 @@ class Member
     protected $lists;
 
     /**
+     * Organ memberships.
+     *
+     * @ORM\OneToMany(targetEntity="OrganMember", mappedBy="member")
+     */
+     protected $organInstallations;
+
+    /**
+     * Board memberships.
+     *
+     * @ORM\OneToMany(targetEntity="BoardMember", mappedBy="member")
+     */
+     protected $boardInstallations;
+
+    /**
      * Static method to get available genders.
      *
      * @return array
@@ -198,6 +212,8 @@ class Member
     {
         $this->addresses = new ArrayCollection();
         $this->installations = new ArrayCollection();
+        $this->organInstallations = new ArrayCollection();
+        $this->boardInstallations = new ArrayCollection();
         $this->lists = new ArrayCollection();
     }
 

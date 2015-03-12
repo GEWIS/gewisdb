@@ -18,7 +18,7 @@ class OrganMember
      * Organ id.
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Organ")
+     * @ORM\ManyToOne(targetEntity="Organ",inversedBy="members")
      */
     protected $organ;
 
@@ -26,10 +26,10 @@ class OrganMember
      * Member lidnr.
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Member")
+     * @ORM\ManyToOne(targetEntity="Member",inversedBy="organInstallations")
      * @ORM\JoinColumn(name="lidnr",referencedColumnName="lidnr")
      */
-    protected $lidnr;
+    protected $member;
 
     /**
      * Function.

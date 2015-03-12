@@ -18,10 +18,10 @@ class BoardMember
      * Member lidnr.
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Member")
+     * @ORM\ManyToOne(targetEntity="Member",inversedBy="boardInstallations")
      * @ORM\JoinColumn(name="lidnr",referencedColumnName="lidnr")
      */
-    protected $lidnr;
+    protected $member;
 
     /**
      * Function.

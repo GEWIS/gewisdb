@@ -75,4 +75,19 @@ class Organ
      * @ORM\Column(type="date")
      */
     protected $abrogationDate;
+
+    /**
+     * Reference to members.
+     *
+     * @ORM\OneToMany(targetEntity="OrganMember",mappedBy="organ")
+     */
+    protected $members;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->members = new ArrayCollection();
+    }
 }
