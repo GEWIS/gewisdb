@@ -2,7 +2,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            //'Export\Controller\Export' => 'Export\Controller\ExportController'
+            'Report\Controller\Report' => 'Report\Controller\ReportController'
         )
     ),
     'doctrine' => array(
@@ -53,15 +53,15 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
-                //'export_old' => array(
-                    //'options' => array(
-                        //'route' => 'export old',
-                        //'defaults' => array(
-                            //'controller' => 'Export\Controller\Export',
-                            //'action' => 'old'
-                        //)
-                    //)
-                //)
+                'generate_reportdb' => array(
+                    'options' => array(
+                        'route' => 'generate reportdb',
+                        'defaults' => array(
+                            'controller' => 'Report\Controller\Report',
+                            'action' => 'generate'
+                        )
+                    )
+                )
             )
         )
     )
