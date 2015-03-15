@@ -45,6 +45,14 @@
     }
     $(document).ready(function(){
         enable_autocomplete();
+
+        $('#foundation-form').submit(function(event) {
+            $('#members').find('.member-lidnr').each(function(idx, el) {
+                if ($(el).val() == '') {
+                    $(el).parent().parent().remove();
+                }
+            });
+        });
     });
 </script>
 <?php
@@ -55,6 +63,7 @@ $form->setAttribute('action', $this->url('meeting/decision/form', array('form' =
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
+$form->setAttribute('id', 'foundation-form');
 
 echo $this->form()->openTag($form);
 ?>
@@ -173,6 +182,7 @@ ob_start();
 $submit = $form->get('submit');
 $submit->setLabel('Richt op');
 $submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('id', 'foundation-submit');
 ?>
 <?= $this->formButton($submit) ?>
 

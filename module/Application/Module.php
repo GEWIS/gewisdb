@@ -11,6 +11,8 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Container as SessionContainer;
+use Zend\Validator\AbstractValidator;
 
 class Module
 {
@@ -19,6 +21,21 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        // add translator
+        $translator = $e->getApplication()->getServiceManager()->get('translator');
+        $translator->setLocale($this->determineLocale($e));
+
+        AbstractValidator::setDefaultTranslator($translator, 'validate');
+    }
+
+    protected function determineLocale(MvcEvent $e)
+    {
+        $session = new SessionContainer('lang');
+        if (!isset($session->lang)) {
+            $session->lang = 'nl';
+        }
+        return $session->lang;
     }
 
     public function getConfig()

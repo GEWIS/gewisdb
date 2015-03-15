@@ -14,13 +14,6 @@ use Database\Model\Member;
  */
 class Installation extends FoundationReference
 {
-    const FUNC_MEMBER = 'member';
-    const FUNC_CHAIRMAN = 'chairman';
-    const FUNC_SECRETARY = 'secretary';
-    const FUNC_TREASURER = 'treasurer';
-    const FUNC_VICE_CHAIRMAN = 'vice-chairman';
-    const FUNC_PR_OFFICER = 'pr-officer';
-    const FUNC_EDUCATION_OFFICER = 'education-officer';
 
     /**
      * Function given.

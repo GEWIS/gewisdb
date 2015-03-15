@@ -11,7 +11,27 @@ return array(
                     'password' => 'password',
                     'dbname'   => 'database',
                 )
-            )
+            ),
+            'orm_import' => array(
+                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => array(
+                    'host'     => 'localhost',
+                    'port'     => '5432',
+                    'user'     => 'username',
+                    'password' => 'password',
+                    'dbname'   => 'database',
+                )
+            ),
+            'orm_report' => array(
+                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => array(
+                    'host'     => 'localhost',
+                    'port'     => '5432',
+                    'user'     => 'username',
+                    'password' => 'password',
+                    'dbname'   => 'database',
+                )
+            ),
         )
     )
 );

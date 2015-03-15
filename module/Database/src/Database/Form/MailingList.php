@@ -26,7 +26,15 @@ class MailingList extends Form
             'name' => 'description',
             'type' => 'textarea',
             'options' => array(
-                'label' => 'Beschrijving'
+                'label' => 'Beschrijving (nederlands)'
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'enDescription',
+            'type' => 'textarea',
+            'options' => array(
+                'label' => 'Beschrijving (engels)'
             )
         ));
 
@@ -84,7 +92,18 @@ class MailingList extends Form
                         )
                     )
                 )
-            )
+            ),
+            'enDescription' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 10
+                        )
+                    )
+                )
+            ),
         );
     }
 }

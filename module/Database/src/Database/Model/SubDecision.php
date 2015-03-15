@@ -19,6 +19,9 @@ use Doctrine\ORM\Mapping as ORM;
  *  "reckoning"="Database\Model\SubDecision\Reckoning",
  *  "other"="Database\Model\SubDecision\Other",
  *  "destroy"="Database\Model\SubDecision\Destroy",
+ *  "board_installation"="Database\Model\SubDecision\Board\Installation",
+ *  "board_release"="Database\Model\SubDecision\Board\Release",
+ *  "board_discharge"="Database\Model\SubDecision\Board\Discharge",
  *  "foundationreference"="Database\Model\SubDecision\FoundationReference"
  * })
  */

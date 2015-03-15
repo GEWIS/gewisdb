@@ -62,9 +62,14 @@ class Module
                 'database_hydrator_install' => 'Database\Hydrator\Install',
                 'database_hydrator_other' => 'Database\Hydrator\Other',
                 'database_hydrator_destroy' => 'Database\Hydrator\Destroy',
+                'database_hydrator_budget' => 'Database\Hydrator\Budget',
+                'database_hydrator_board_install' => 'Database\Hydrator\Board\Install',
+                'database_hydrator_board_discharge' => 'Database\Hydrator\Board\Discharge',
+                'database_hydrator_board_release' => 'Database\Hydrator\Board\Release',
                 'database_form_query' => 'Database\Form\Query',
                 'database_form_queryexport' => 'Database\Form\QueryExport',
                 'database_form_deleteaddress' => 'Database\Form\DeleteAddress',
+                'database_form_deletelist' => 'Database\Form\DeleteList',
             ),
             'factories' => array(
                 'database_form_export' => function ($sm) {
@@ -84,7 +89,8 @@ class Module
                 },
                 'database_form_member' => function ($sm) {
                     $form = new \Database\Form\Member(
-                        $sm->get('database_form_fieldset_address')
+                        $sm->get('database_form_fieldset_address'),
+                        $sm->get('translator')
                     );
                     $form->setHydrator($sm->get('database_hydrator_member'));
                     $form->setLists($sm->get('database_mapper_mailinglist')->findAllOnForm());
@@ -115,8 +121,7 @@ class Module
                 'database_form_budget' => function ($sm) {
                     $form = new \Database\Form\Budget(
                         $sm->get('database_form_fieldset_meeting'),
-                        $sm->get('database_form_fieldset_member'),
-                        $sm->get('Doctrine\Orm\EntityManager')->getRepository('Database\Model\SubDecision\Foundation')
+                        $sm->get('database_form_fieldset_member')
                     );
                     $form->setHydrator($sm->get('database_hydrator_budget'));
                     return $form;
@@ -170,6 +175,32 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_foundation'));
                     return $form;
                 },
+                'database_form_board_install' => function ($sm) {
+                    $form = new \Database\Form\Board\Install(
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_member')
+                    );
+                    $form->setHydrator($sm->get('database_hydrator_board_install'));
+                    return $form;
+                },
+                'database_form_board_release' => function ($sm) {
+                    $form = new \Database\Form\Board\Release(
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_subdecision_board_install'),
+                        $sm->get('database_service_meeting')
+                    );
+                    $form->setHydrator($sm->get('database_hydrator_board_release'));
+                    return $form;
+                },
+                'database_form_board_discharge' => function ($sm) {
+                    $form = new \Database\Form\Board\Discharge(
+                        $sm->get('database_form_fieldset_meeting'),
+                        $sm->get('database_form_fieldset_subdecision_board_install'),
+                        $sm->get('database_service_meeting')
+                    );
+                    $form->setHydrator($sm->get('database_hydrator_board_discharge'));
+                    return $form;
+                },
                 'database_form_fieldset_subdecision_foundation' => function ($sm) {
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
@@ -180,6 +211,12 @@ class Module
                     $fieldset = new \Database\Form\Fieldset\SubDecision();
                     $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
                     $fieldset->setObject(new \Database\Model\SubDecision\Installation());
+                    return $fieldset;
+                },
+                'database_form_fieldset_subdecision_board_install' => function ($sm) {
+                    $fieldset = new \Database\Form\Fieldset\SubDecision();
+                    $fieldset->setHydrator($sm->get('database_hydrator_subdecision'));
+                    $fieldset->setObject(new \Database\Model\SubDecision\Board\Installation());
                     return $fieldset;
                 },
                 'database_form_fieldset_decision' => function ($sm) {
@@ -229,7 +266,7 @@ class Module
                     return $fieldset;
                 },
                 'database_form_fieldset_address' => function ($sm) {
-                    $fs = new \Database\Form\Fieldset\Address();
+                    $fs = new \Database\Form\Fieldset\Address($sm->get('translator'));
                     $fs->setHydrator($sm->get('database_hydrator_address'));
                     $fs->setObject(new \Database\Model\Address());
                     return $fs;
@@ -258,11 +295,6 @@ class Module
                 'database_hydrator_decision' => function ($sm) {
                     return new \Application\Doctrine\Hydrator\DoctrineObject(
                         $sm->get('database_doctrine_em')
-                    );
-                },
-                'database_hydrator_budget' => function ($sm) {
-                    return new \Database\Hydrator\Budget(
-                        $sm->get('database_service_meeting')
                     );
                 },
                 'database_mapper_organ' => function ($sm) {

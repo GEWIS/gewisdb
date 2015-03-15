@@ -9,8 +9,8 @@ return array(
         'Database',
         'Import',
         'Checker',
-        'Export'
-
+        'Export',
+        'Report'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

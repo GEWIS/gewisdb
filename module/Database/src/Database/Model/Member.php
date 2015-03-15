@@ -514,7 +514,9 @@ class Member
             'lastName' => $this->getLastName(),
             'middleName' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
-            'firstName' => $this->getFirstName()
+            'firstName' => $this->getFirstName(),
+            'generation' => $this->getGeneration(),
+            'expiration' => $this->getExpiration()->format('l j F Y')
         );
     }
 

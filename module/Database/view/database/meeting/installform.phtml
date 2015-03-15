@@ -16,7 +16,7 @@ function getUrl(type, meeting, point, decision, subdecision)
 }
 $(document).ready(function () {
     $('#install-organ').autocomplete({
-        minLength: 2, // at least two chars before request
+        minLength: 1, // at least one char before request
         delay: 0, // no delay before request
         source: function (rq, response) {
             // make an AJAX request
@@ -89,6 +89,8 @@ $(document).ready(function () {
 
                 // show the rest of the form
                 $('#install-members-hide').show();
+                $('#install-submit-decision').prop('disabled', false);
+                $('#install-organ').prop('disabled', true);
 
                 // enable member change events
                 $('button.discharge').click(function(e)
@@ -148,6 +150,7 @@ $(document).ready(function () {
         select: function (event, ui) {
             $('#install-member-lidnr').val(ui.item.id);
             $('#install-member-name').val(ui.item.name);
+            $('#install-member-btn').prop('disabled', false);
         }
     });
 
@@ -193,6 +196,7 @@ $(document).ready(function () {
         var name = $('#install-member-name').val();
         createInstallation('Lid', lidnr, name);
         $('#install-member').val('');
+        $('#install-member-btn').prop('disabled', true);
     });
     $('#install-modal-yes').click(function(e)
     {
@@ -394,7 +398,7 @@ $tpl = trim(ob_get_clean());
             <input type="hidden" id="install-member-lidnr" />
             <input type="hidden" id="install-member-name" />
         </div>
-        <button type="button" class="btn btn-success" id="install-member-btn">
+        <button type="button" class="btn btn-success" id="install-member-btn" disabled>
             <span class="glyphicon glyphicon-plus"></span>
             Voeg lid toe
         </button>
@@ -407,6 +411,8 @@ $tpl = trim(ob_get_clean());
 $submit = $form->get('submit');
 $submit->setLabel('Bevestig wijzigingen');
 $submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('id', 'install-submit-decision');
+$submit->setAttribute('disabled', 'disabled');
 ?>
 <?= $this->formButton($submit) ?>
 

@@ -5,6 +5,7 @@ namespace Database\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\I18n\Translator\TranslatorInterface as Translator;
 
 use Database\Model\Address;
 
@@ -16,15 +17,21 @@ class Member extends Form implements InputFilterProviderInterface
      */
     protected $lists;
 
-    public function __construct(Fieldset\Address $address)
+    /**
+     * Translator.
+     */
+    protected $translator;
+
+    public function __construct(Fieldset\Address $address, Translator $translator)
     {
         parent::__construct();
+        $this->translator = $translator;
 
         $this->add(array(
             'name' => 'lastName',
             'type' => 'text',
             'options' => array(
-                'label' => 'Achternaam'
+                'label' => $translator->translate('Achternaam')
             )
         ));
 
@@ -32,7 +39,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'middleName',
             'type' => 'text',
             'options' => array(
-                'label' => 'Tussenvoegsels'
+                'label' => $translator->translate('Tussenvoegsels')
             )
         ));
 
@@ -40,7 +47,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'initials',
             'type' => 'text',
             'options' => array(
-                'label' => 'Voorletter(s)'
+                'label' => $translator->translate('Voorletter(s)')
             )
         ));
 
@@ -48,7 +55,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'firstName',
             'type' => 'text',
             'options' => array(
-                'label' => 'Voornaam'
+                'label' => $translator->translate('Voornaam')
             )
         ));
 
@@ -56,10 +63,10 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'gender',
             'type' => 'radio',
             'options' => array(
-                'label' => 'Geslacht',
+                'label' => $translator->translate('Geslacht'),
                 'value_options' => array(
-                    'm' => 'Man',
-                    'f' => 'Vrouw'
+                    'm' => $translator->translate('Man'),
+                    'f' => $translator->translate('Vrouw')
                 )
             )
         ));
@@ -68,7 +75,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'email',
             'type' => 'email',
             'options' => array(
-                'label' => 'Email-adres'
+                'label' => $translator->translate('Email-adres')
             )
         ));
 
@@ -76,7 +83,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'birth',
             'type' => 'date',
             'options' => array(
-                'label' => 'Geboortedatum'
+                'label' => $translator->translate('Geboortedatum')
             )
         ));
 
@@ -100,7 +107,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => 'Schrijf in'
+                'value' => $translator->translate('Schrijf in')
             )
         ));
     }
@@ -114,11 +121,15 @@ class Member extends Form implements InputFilterProviderInterface
     {
         $this->lists = $lists;
         foreach ($this->lists as $list) {
+            $desc = $list->getNlDescription();
+            if ($this->translator->getLocale() == 'en') {
+                $desc = $list->getEnDescription();
+            }
             $this->add(array(
                 'name' => 'list-' . $list->getName(),
                 'type' => 'checkbox',
                 'options' => array(
-                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription()
+                    'label' => '<strong>' . $list->getName() . '</strong> ' . $desc
                 )
             ));
             if ($list->getDefaultSub()) {
@@ -199,7 +210,7 @@ class Member extends Form implements InputFilterProviderInterface
                         'options' => array(
                             'token' => '1',
                             'messages' => array(
-                                'notSame' => 'Je moet de voorwaarden accepteren!'
+                                'notSame' => $this->translator->translate('Je moet de voorwaarden accepteren!')
                             )
                         )
                     )

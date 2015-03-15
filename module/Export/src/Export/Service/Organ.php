@@ -38,7 +38,7 @@ class Organ extends AbstractService
 
             $id = $this->getQuery()->checkOrganExists($type, $organ->getAbbr(),
                 $organ->getName(), $year);
-            if ($id != null) {
+            if (null === $id) {
                 $this->getQuery()->createOrgan($data);
             }
         }

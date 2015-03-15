@@ -39,6 +39,7 @@ $(document).ready(function() {
             $('.destroy-decision-num').text(decision.num);
             $('.destroy-decision-content').text(decision.content);
             $('.destroy-decision-display').show();
+            $('#destroy-decision-button').prop('disabled', false);
         }
     });
 });
@@ -105,6 +106,8 @@ $element->setAttribute('placeholder', 'Besluit');
 $submit = $form->get('submit');
 $submit->setLabel('Vernietig besluit');
 $submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('id', 'destroy-decision-button');
+$submit->setAttribute('disabled', 'disabled');
 ?>
 <?= $this->formButton($submit) ?>
 

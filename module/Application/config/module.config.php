@@ -10,15 +10,20 @@
 return array(
     'router' => array(
         'routes' => array(
-            'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+            'lang' => array(
+                'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/',
+                    'route' => '/lang/:lang',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action' => 'lang',
+                        'lang' => 'nl'
                     ),
-                ),
+                    'constraints' => array(
+                        'lang' => '[a-zA-Z_]{2,5}'
+                    )
+                )
             ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
@@ -56,12 +61,29 @@ return array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
+        ),
+        'aliases' => array(
+            'translator' => 'MvcTranslator'
         )
     ),
     // however counter-intuitive it is, leaving this in makes sure we do not
     // need the intl extension
     'translator' => array(
-        'locale' => 'nl_NL'
+        'locale' => 'nl',
+        'translation_file_patterns' => array(
+            array(
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern'  => '%s.mo'
+            ),
+            // Zend\Validate translation
+            array(
+                'type' => 'phparray',
+                'base_dir' => 'vendor/zendframework/zendframework/resources/languages/',
+                'pattern' => '%s/Zend_Validate.php',
+                'text_domain' => 'validate'
+            )
+        )
     ),
     'controllers' => array(
         'invokables' => array(

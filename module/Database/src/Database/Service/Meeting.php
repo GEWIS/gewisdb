@@ -55,6 +55,33 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Check if the decision exists.
+     *
+     * @param string $type
+     * @param int $number
+     * @param int $point
+     * @param int $decision
+     *
+     * @return boolean
+     */
+    public function decisionExists($type, $number, $point, $decision)
+    {
+        $mapper = $this->getMeetingMapper();
+
+        return null !== $mapper->findDecision($type, $number, $point, $decision);
+    }
+
+    /**
+     * Get the current board installations.
+     *
+     * @return array
+     */
+    public function getCurrentBoard()
+    {
+        return $this->getMeetingMapper()->findCurrentBoard();
+    }
+
+    /**
      * Export decisions.
      *
      * @param array $data
@@ -218,6 +245,108 @@ class Meeting extends AbstractService
     }
 
     /**
+     * Board install decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function boardInstallDecision($data)
+    {
+        $form = $this->getBoardInstallForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            return array(
+                'type' => 'board_install',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'board_install',
+            'decision' => $decision
+        );
+    }
+
+    /**
+     * Board discharge decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function boardDischargeDecision($data)
+    {
+        $form = $this->getBoardDischargeForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            return array(
+                'type' => 'board_discharge',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'board_discharge',
+            'decision' => $decision
+        );
+    }
+
+    /**
+     * Board release decision.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function boardReleaseDecision($data)
+    {
+        $form = $this->getBoardReleaseForm();
+
+        $form->setData($data);
+        $form->bind(new Decision());
+
+        if (!$form->isValid()) {
+            return array(
+                'type' => 'board_release',
+                'form' => $form
+            );
+        }
+
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+
+        return array(
+            'type' => 'board_release',
+            'decision' => $decision
+        );
+    }
+
+    /**
      * Install decision.
      *
      * @param array $data
@@ -339,7 +468,7 @@ class Meeting extends AbstractService
      *
      * @param array $data Meeting creation data.
      *
-     * @return boolean If creation was succesfull
+     * @return MeetingModel or null if creation was succesfull
      */
     public function createMeeting($data)
     {
@@ -348,7 +477,7 @@ class Meeting extends AbstractService
         $form->setData($data);
 
         if (!$form->isValid()) {
-            return false;
+            return null;
         }
 
         $meeting = $form->getData();
@@ -361,14 +490,14 @@ class Meeting extends AbstractService
                     'Deze vergadering bestaat al'
                 )
             ));
-            return false;
+            return null;
         }
 
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('meeting' => $meeting));
         $mapper->persist($meeting);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('meeting' => $meeting));
 
-        return true;
+        return $meeting;
     }
 
     /**
@@ -429,6 +558,36 @@ class Meeting extends AbstractService
     public function getDeleteDecisionForm()
     {
         return $this->getServiceManager()->get('database_form_deletedecision');
+    }
+
+    /**
+     * Get the board install form.
+     *
+     * @return \Database\Form\Board\Install
+     */
+    public function getBoardInstallForm()
+    {
+        return $this->getServiceManager()->get('database_form_board_install');
+    }
+
+    /**
+     * Get the board release form.
+     *
+     * @return \Database\Form\Board\Release
+     */
+    public function getBoardReleaseForm()
+    {
+        return $this->getServiceManager()->get('database_form_board_release');
+    }
+
+    /**
+     * Get the board release form.
+     *
+     * @return \Database\Form\Board\Discharge
+     */
+    public function getBoardDischargeForm()
+    {
+        return $this->getServiceManager()->get('database_form_board_discharge');
     }
 
     /**

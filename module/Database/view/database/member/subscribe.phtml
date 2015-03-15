@@ -16,10 +16,10 @@ $form->setAttribute('class', 'form-horizontal');
 <img src="<?= $this->basePath() ?>/img/gewis.png" />
 </div>
 <div class="col-md-9">
-<h1>Inschrijving Studievereniging <span class="gewis-red">GEWIS</span></h1>
+<h1><?= $this->translate('Inschrijving Studievereniging <span class="gewis-red">GEWIS</span>') ?></h1>
 <p>
-Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van GEWIS. 
-Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro.
+<?= $this->translate('Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van GEWIS.
+Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro.') ?>
 </p>
 </div>
 </div>
@@ -144,7 +144,7 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<h3>Thuisadres (adres van je ouders)</h3>
+<h3><?= $this->translate('Thuisadres (adres van je ouders)') ?></h3>
 <fieldset>
 <?php
 $fs = $form->get('homeAddress');
@@ -249,7 +249,7 @@ $element->setLabelAttributes(array(
 </fieldset>
 
 <fieldset>
-<h3>Studieadres (adres kamer)</h3>
+<h3><?= $this->translate('Studieadres (adres kamer)') ?></h3>
 <?php
 $fs = $form->get('studentAddress');
 ?>
@@ -352,13 +352,13 @@ $element->setLabelAttributes(array(
 </div>
 </fieldset>
 
-<h3>Mailinglijsten</h3>
+<h3><?= $this->translate('Mailinglijsten') ?></h3>
 <p>
-Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor mededelingen
+<?= $this->translate('Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor mededelingen
 en activiteiten van de studievereniging. Daarnaast zijn er verschillende
 optionele mailinglijsten.
 Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze
-inschrijvingen kunnen op een later tijdstip veranderd worden.
+inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 </p>
 
 <?php foreach ($form->getLists() as $list): ?>
@@ -379,9 +379,9 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.
 </div>
 <?php endforeach ?>
 
-<h3>Akkoordverklaring</h3>
+<h3><?= $this->translate('Akkoordverklaring') ?></h3>
 
-<a href="https://gewis.nl/vereniging/statuten/index.php">Statuten en HR</a>
+<a href="https://gewis.nl/vereniging/statuten/index.php"><?= $this->translate('Statuten en HR') ?></a>
 
 <div class="form-group">
 <?php
@@ -392,9 +392,9 @@ $element->setAttribute('placeholder', $element->getLabel());
         <div class="checkbox">
             <label>
                 <?= $this->formCheckbox($element) ?>
-Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
+<?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
 ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten en
-HR gelezen.
+HR gelezen.') ?>
                 <?= $element->getLabel() ?>
             </label>
             <?= $this->formElementErrors($element) ?>
@@ -416,5 +416,5 @@ HR gelezen.
 <?= $this->form()->closeTag() ?>
 </div>
 <?php else: ?>
-Lid met lidnummer <?= $member->getLidnr() ?> is toegevoegd.
+<?= sprintf($this->translate('Lid met lidnummer %1$s is toegevoegd.'), $member->getLidnr()) ?>
 <?php endif; ?>

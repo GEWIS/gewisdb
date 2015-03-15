@@ -11,7 +11,7 @@ use Database\Model\Member;
  *
  * @ORM\Entity
  */
-class Budget extends FoundationReference
+class Budget extends SubDecision
 {
 
     /**

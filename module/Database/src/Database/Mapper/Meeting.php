@@ -217,6 +217,38 @@ class Meeting
     }
 
     /**
+     * Find current board members.
+     *
+     * @return array of board members
+     */
+    public function findCurrentBoard()
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('i, m')
+            ->from('Database\Model\SubDecision\Board\Installation', 'i')
+            ->join('i.member', 'm');
+
+        $qbn = $this->em->createQueryBuilder();
+        // remove discharges
+        $qbn->select('d')
+            ->from('Database\Model\SubDecision\Board\Discharge', 'd')
+            ->join('d.installation', 'x')
+            ->where('x.meeting_type = i.meeting_type')
+            ->andWhere('x.meeting_number = i.meeting_number')
+            ->andWhere('x.decision_point = i.decision_point')
+            ->andWhere('x.decision_number = i.decision_number')
+            ->andWhere('x.number = i.number');
+
+        // TODO: destroyed decisions (both ways!)
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbn->getDql())
+        ));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Delete a decision.
      *
      * @param string $type

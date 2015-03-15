@@ -2,6 +2,17 @@
 return array(
     'router' => array(
         'routes' => array(
+            'home' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'meeting' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -292,6 +303,18 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'list-delete' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/list/delete/:name',
+                            'constraints' => array(
+                                'name' => '[a-zA-Z0-9_-]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'deleteList'
+                            )
+                        )
+                    ),
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -348,6 +371,7 @@ return array(
             'Database\Controller\Export' => 'Database\Controller\ExportController',
             'Database\Controller\Query' => 'Database\Controller\QueryController',
             'Database\Controller\Settings' => 'Database\Controller\SettingsController',
+            'Database\Controller\Index' => 'Database\Controller\IndexController',
         )
     ),
     'view_manager' => array(

@@ -8,17 +8,10 @@ use Database\Model\SubDecision;
 class Budget extends AbstractDecision
 {
 
-    /**
-     * @var \Doctrine\Orm\EntityRepository Foundation Repository needed to check if an organ exists
-     */
-    private $foundationRepository;
-
-    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member, \Doctrine\Orm\EntityRepository $foundationRepository)
+    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
     {
 
         parent::__construct($meeting);
-
-        $this->foundationRepository = $foundationRepository;
 
         $this->add(array(
             'name' => 'type',
@@ -57,15 +50,6 @@ class Budget extends AbstractDecision
             'type' => 'text',
             'options' => array(
                 'label' => 'Versie'
-            )
-        ));
-
-        // TODO: auto completion of organs
-        $this->add(array(
-            'name' => 'organ',
-            'type' => 'text',
-            'options' => array(
-                'label' => 'Orgaan (optioneel)'
             )
         ));
 
@@ -161,31 +145,6 @@ class Budget extends AbstractDecision
                     'options' => array(
                         'min' => 1,
                         'max' => 32
-                    )
-                )
-            )
-        ));
-
-        $filter->add(array(
-            'name' => 'organ',
-            'required' => false,
-            'validators' => array(
-
-                array(
-                    'name' => 'string_length',
-                    'options' => array(
-                        'min' => 1,
-                        'max' => 64
-                    )
-                ),
-                array(
-                    'name' => 'DoctrineModule\Validator\ObjectExists',
-                    'options' => array(
-                        'object_repository' => $this->foundationRepository,
-                        'fields' => 'name',
-                        'messages' => array(
-                            'noObjectFound' => 'Orgaan bestaat niet'
-                        )
                     )
                 )
             )

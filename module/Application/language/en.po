@@ -1,0 +1,223 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-04 20:58+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.3\n"
+
+#: module/Database/view/database/member/subscribe.phtml:19
+msgid "Inschrijving Studievereniging <span class=\"gewis-red\">GEWIS</span>"
+msgstr "Subscription Study Association <span class=\"gewis-red\">GEWIS</span>"
+
+#: module/Database/view/database/member/subscribe.phtml:21
+msgid ""
+"Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van "
+"GEWIS.\n"
+"Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro."
+msgstr ""
+"Welcome! With this form, you can apply for membership of GEWIS.\n"
+"Membership is valid during your entire study and has a one-time 15 euro "
+"membership fee."
+
+#: module/Database/view/database/member/subscribe.phtml:147
+msgid "Thuisadres (adres van je ouders)"
+msgstr "Home Address (address of your parents)"
+
+#: module/Database/view/database/member/subscribe.phtml:252
+msgid "Studieadres (adres kamer)"
+msgstr "Study address (address in the Netherlands)"
+
+#: module/Database/view/database/member/subscribe.phtml:355
+msgid "Mailinglijsten"
+msgstr "Mailing lists"
+
+#: module/Database/view/database/member/subscribe.phtml:357
+msgid ""
+"Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
+"mededelingen\n"
+"en activiteiten van de studievereniging. Daarnaast zijn er verschillende\n"
+"optionele mailinglijsten.\n"
+"Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze\n"
+"inschrijvingen kunnen op een later tijdstip veranderd worden."
+msgstr ""
+"As GEWIS-member, you will automatically be signed up for the GEWIS-list. "
+"This is a mailing list for\n"
+"official messages about GEWIS and its activities. On top of that there are "
+"several other mailing lists you can\n"
+"subscribe to. You can sign up for the following mailing lists, these can be "
+"changed at any moment."
+
+#: module/Database/view/database/member/subscribe.phtml:382
+msgid "Akkoordverklaring"
+msgstr "Signature"
+
+#: module/Database/view/database/member/subscribe.phtml:384
+msgid "Statuten en HR"
+msgstr "Articles of the association and the code of conduct"
+
+#: module/Database/view/database/member/subscribe.phtml:395
+msgid ""
+"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
+"en\n"
+"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten "
+"en\n"
+"HR gelezen."
+msgstr ""
+"I hereby declare to have filled the enitere form truthfully and agree to "
+"become a member of Studievereniging GEWIS. I have read and agree to be bound "
+"by the articles of association and the code of conduct."
+
+#: module/Database/view/database/member/subscribe.phtml:419
+#, php-format
+msgid "Lid met lidnummer %1$s is toegevoegd."
+msgstr "Member with membership number %1$s has been added."
+
+#: module/Application/view/error/404.phtml:1
+msgid "A 404 error occurred"
+msgstr "A 404 error occurred"
+
+#: module/Application/view/error/404.phtml:10
+msgid "The requested controller was unable to dispatch the request."
+msgstr "The requested controller was unable to dispatch the request."
+
+#: module/Application/view/error/404.phtml:13
+msgid ""
+"The requested controller could not be mapped to an existing controller class."
+msgstr ""
+"The requested controller could not be mapped to an existing controller class."
+
+#: module/Application/view/error/404.phtml:16
+msgid "The requested controller was not dispatchable."
+msgstr "The requested controller was not dispatchable."
+
+#: module/Application/view/error/404.phtml:19
+msgid "The requested URL could not be matched by routing."
+msgstr "The requested URL could not be matched by routing."
+
+#: module/Application/view/error/404.phtml:22
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr "We cannot determine at this time why a 404 was generated."
+
+#: module/Application/view/error/404.phtml:34
+msgid "Controller"
+msgstr "Controller"
+
+#: module/Application/view/error/404.phtml:41
+#, php-format
+msgid "resolves to %s"
+msgstr "resolves to %s"
+
+#: module/Application/view/error/404.phtml:53
+#: module/Application/view/error/index.phtml:8
+msgid "Additional information"
+msgstr "Additional information"
+
+#: module/Application/view/error/404.phtml:56
+#: module/Application/view/error/404.phtml:80
+#: module/Application/view/error/index.phtml:11
+#: module/Application/view/error/index.phtml:35
+msgid "File"
+msgstr "File"
+
+#: module/Application/view/error/404.phtml:60
+#: module/Application/view/error/404.phtml:84
+#: module/Application/view/error/index.phtml:15
+#: module/Application/view/error/index.phtml:39
+msgid "Message"
+msgstr "Message"
+
+#: module/Application/view/error/404.phtml:64
+#: module/Application/view/error/404.phtml:88
+#: module/Application/view/error/index.phtml:19
+#: module/Application/view/error/index.phtml:43
+msgid "Stack trace"
+msgstr "Stack trace"
+
+#: module/Application/view/error/404.phtml:74
+#: module/Application/view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr "Previous exceptions"
+
+#: module/Application/view/error/404.phtml:103
+#: module/Application/view/error/index.phtml:58
+msgid "No Exception available"
+msgstr "No Exception available"
+
+#: module/Application/view/error/index.phtml:1
+msgid "An error occurred"
+msgstr "An error occurred"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:28
+msgid "Land"
+msgstr "Country"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:37
+msgid "Straat"
+msgstr "Street"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:45
+msgid "Huisnummer"
+msgstr "House number"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:53
+msgid "Postcode"
+msgstr "Postal Code"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:61
+msgid "Stad"
+msgstr "City"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:69
+msgid "Telefoonnummer"
+msgstr "Phone number"
+
+#: module/Database/src/Database/Form/Member.php:34
+msgid "Achternaam"
+msgstr "Last name"
+
+#: module/Database/src/Database/Form/Member.php:42
+msgid "Tussenvoegsels"
+msgstr "Middle name"
+
+#: module/Database/src/Database/Form/Member.php:50
+msgid "Voorletter(s)"
+msgstr "Initials"
+
+#: module/Database/src/Database/Form/Member.php:58
+msgid "Voornaam"
+msgstr "First name"
+
+#: module/Database/src/Database/Form/Member.php:66
+msgid "Geslacht"
+msgstr "Gender"
+
+#: module/Database/src/Database/Form/Member.php:68
+msgid "Man"
+msgstr "Male"
+
+#: module/Database/src/Database/Form/Member.php:69
+msgid "Vrouw"
+msgstr "Female"
+
+#: module/Database/src/Database/Form/Member.php:78
+msgid "Email-adres"
+msgstr "Email address"
+
+#: module/Database/src/Database/Form/Member.php:86
+msgid "Geboortedatum"
+msgstr "Birth date"
+
+#: module/Database/src/Database/Form/Member.php:110
+msgid "Schrijf in"
+msgstr "Send"
+
+#: module/Database/src/Database/Form/Member.php:213
+msgid "Je moet de voorwaarden accepteren!"
+msgstr "You have to accept the code of conduct."

@@ -54,6 +54,11 @@ class Module
                     $q->setConnection($sm->get('doctrine.connection.orm_import'));
                     return $q;
                 },
+                'export_query_subdecision' => function ($sm) {
+                    $q = new \Export\Query\SubDecision();
+                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    return $q;
+                },
                 'export_query_decision' => function ($sm) {
                     $q = new \Export\Query\Decision();
                     $q->setConnection($sm->get('doctrine.connection.orm_import'));

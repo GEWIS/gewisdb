@@ -27,8 +27,21 @@ use Database\Model\Address;
             <td><?= $member->getLastName() ?></td>
         </tr>
         <tr>
+            <th>Geslacht</th>
+            <td><?php
+switch ($member->getGender()) {
+case Member::GENDER_MALE:
+    echo 'Man';
+    break;
+case Member::GENDER_FEMALE:
+    echo 'Vrouw';
+    break;
+}
+?></td>
+        </tr>
+        <tr>
             <th>Email</th>
-            <td><?= $member->getEmail() ?></td>
+            <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
         </tr>
         <tr>
             <th>Geboortedatum</th>

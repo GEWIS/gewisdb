@@ -5,6 +5,7 @@ namespace Database\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class MeetingController extends AbstractActionController
 {
@@ -31,10 +32,14 @@ class MeetingController extends AbstractActionController
         $service = $this->getMeetingService();
         $request = $this->getRequest();
 
-        if ($request->isPost() && $service->createMeeting($request->getPost())) {
-            return new ViewModel(array(
-                'success' => true
-            ));
+        if ($request->isPost()) {
+            $meeting = $service->createMeeting($request->getPost());
+            if (null !== $meeting) {
+                return $this->redirect()->toRoute('meeting/view', array(
+                    'type' => $meeting->getType(),
+                    'number' => $meeting->getNumber()
+                ));
+            }
         }
 
         return new ViewModel(array(
@@ -70,6 +75,15 @@ class MeetingController extends AbstractActionController
         $meeting = $this->getMeetingService()
                         ->getMeeting($type, $number);
 
+        if ($this->getMeetingService()->decisionExists($type, $number, $point, $decision)) {
+            return new ViewModel(array(
+                'meeting' => $meeting,
+                'point' => $point,
+                'decision' => $decision,
+                'error' => true
+            ));
+        }
+
         return new ViewModel(array(
             'meeting' => $meeting,
             'point' => $point,
@@ -96,7 +110,10 @@ class MeetingController extends AbstractActionController
             'abolish' => $this->getMeetingService()->getAbolishForm(),
             'destroy' => $this->getMeetingService()->getDestroyForm(),
             'install' => $this->getMeetingService()->getInstallForm(),
-            'other' => $this->getMeetingService()->getOtherForm()
+            'other' => $this->getMeetingService()->getOtherForm(),
+            'board_install' => $this->getMeetingService()->getBoardInstallForm(),
+            'board_release' => $this->getMeetingService()->getBoardReleaseForm(),
+            'board_discharge' => $this->getMeetingService()->getBoardDischargeForm(),
         );
 
         foreach ($forms as $form) {
@@ -144,6 +161,21 @@ class MeetingController extends AbstractActionController
                 $service->destroyDecision($this->getRequest()->getPost())
             );
             break;
+        case 'board_install':
+            return new ViewModel(
+                $service->boardInstallDecision($this->getRequest()->getPost())
+            );
+            break;
+        case 'board_release':
+            return new ViewModel(
+                $service->boardReleaseDecision($this->getRequest()->getPost())
+            );
+            break;
+        case 'board_discharge':
+            return new ViewModel(
+                $service->boardDischargeDecision($this->getRequest()->getPost())
+            );
+            break;
         case 'other':
             return new ViewModel(
                 $service->otherDecision($this->getRequest()->getPost())
@@ -169,6 +201,7 @@ class MeetingController extends AbstractActionController
         $service = $this->getMeetingService();
 
         if ($this->getRequest()->isPost()) {
+            try {
             if ($service->deleteDecision($this->getRequest()->getPost(),
                     $type, $number, $point, $decision)
             ) {
@@ -177,6 +210,12 @@ class MeetingController extends AbstractActionController
                     'number' => $number,
                     'point' => $point,
                     'decision' => $decision
+                ));
+            }
+            } catch (ForeignKeyConstraintViolationException $e) {
+                return new ViewModel(array(
+                    'error' => true,
+                    'exception' => $e
                 ));
             }
             // Not deleted

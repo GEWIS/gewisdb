@@ -10,7 +10,7 @@ class Install extends AbstractDecision
 {
 
     /**
-     * Budget hydration
+     * Install hydration
      *
      * @param array $data
      * @param Decision $decision
