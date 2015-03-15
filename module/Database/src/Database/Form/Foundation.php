@@ -91,6 +91,9 @@ class Foundation extends AbstractDecision
                         )
                     )
                 )
+            ),
+            'members' => array(
+                'required' => true
             )
         );
     }
