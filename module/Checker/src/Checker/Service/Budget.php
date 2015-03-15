@@ -10,7 +10,8 @@ namespace Checker\Service;
 
 use Application\Service\AbstractService;
 
-class Budget extends AbstractService {
+class Budget extends AbstractService
+{
 
     /**
      * Returns all budgets thar are created at $meeting
@@ -23,4 +24,4 @@ class Budget extends AbstractService {
         $mapper = $this->getServiceManager()->get('checker_mapper_budget');
         return $mapper->getAllBudgets($meeting);
     }
-} 
+}

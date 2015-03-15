@@ -9,14 +9,16 @@ namespace Checker\Model;
  *
  * @package Checker\Model
  */
-abstract class Error {
+abstract class Error
+{
 
     /**
      * @var \Database\Model\Meeting Meeting for which the error is detected
      */
     protected $meeting;
 
-    public function getMeeting() {
+    public function getMeeting()
+    {
         return $this->meeting;
     }
 
@@ -26,7 +28,8 @@ abstract class Error {
      */
     protected $subDecision;
 
-    public function getSubDecision() {
+    public function getSubDecision()
+    {
         return $this->subDecision;
     }
 
@@ -48,5 +51,5 @@ abstract class Error {
     /**
      * Return a textual representation of the Error
      */
-    abstract function asText();
-} 
+    abstract public function asText();
+}

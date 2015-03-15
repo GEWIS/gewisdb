@@ -11,14 +11,16 @@ class Organ extends AbstractService
      * @param \Database\Model\Meeting $meeting
      * @return array string
      */
-    public function getAllOrgans(\Database\Model\Meeting $meeting) {
+    public function getAllOrgans(\Database\Model\Meeting $meeting)
+    {
         $mapper = $this->getServiceManager()->get('checker_mapper_organ');
         $createdOrgans = $mapper->getAllOrgansCreated($meeting);
         $deletedOrgans = $mapper->getAllOrgansDeleted($meeting);
         return array_diff($createdOrgans, $deletedOrgans);
     }
 
-    public function getOrgansCreatedAtMeeting(\Database\Model\Meeting $meeting) {
+    public function getOrgansCreatedAtMeeting(\Database\Model\Meeting $meeting)
+    {
         $mapper = $this->getServiceManager()->get('checker_mapper_organ');
         return $mapper->getOrgansCreatedAtMeeting($meeting);
     }

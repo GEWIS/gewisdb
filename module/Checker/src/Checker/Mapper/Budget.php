@@ -4,7 +4,8 @@ namespace Checker\Mapper;
 
 use Doctrine\ORM\EntityManager;
 
-class Budget {
+class Budget
+{
     use Filter;
 
     /**
@@ -45,4 +46,4 @@ class Budget {
 
         return $this->filterDeleted($qb->getQuery()->getResult());
     }
-} 
+}

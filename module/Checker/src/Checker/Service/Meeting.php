@@ -15,8 +15,11 @@ class Meeting extends AbstractService
         $databaseServiceMeeting = $this->getServiceManager()->get('database_service_meeting');
         $meetings = $databaseServiceMeeting->getAllMeetings();
         // Filters out unneeded information
-        return array_map(function ($object) { return $object[0]; }, $meetings);
+        return array_map(
+            function ($object) {
+                return $object[0];
+            },
+            $meetings
+        );
     }
-
-
 }

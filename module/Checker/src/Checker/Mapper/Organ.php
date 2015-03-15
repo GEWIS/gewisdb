@@ -48,9 +48,12 @@ class Organ
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
         $organs = $this->filterDeleted($qb->getQuery()->getResult());
-        $organNames = array_map(function ($organ) {
-            return $organ->getName();
-        }, $organs);
+        $organNames = array_map(
+            function ($organ) {
+                return $organ->getName();
+            },
+            $organs
+        );
 
         return $organNames;
     }
@@ -75,9 +78,12 @@ class Organ
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
         $abrogations =  $this->filterDeleted($qb->getQuery()->getResult());
-        $organNames = array_map(function ($abrogation) {
-            return $abrogation->getFoundation()->getName();
-        }, $abrogations);
+        $organNames = array_map(
+            function ($abrogation) {
+                return $abrogation->getFoundation()->getName();
+            },
+            $abrogations
+        );
 
         return $organNames;
     }

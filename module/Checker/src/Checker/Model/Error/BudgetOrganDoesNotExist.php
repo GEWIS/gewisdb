@@ -38,4 +38,4 @@ class BudgetOrganDoesNotExist extends \Checker\Model\Error
         return 'Budget from ' . $this->getFoundation()->getName() . ' has been created. However '
         . $this->getFoundation()->getName() . ' does not exist';
     }
-} 
+}

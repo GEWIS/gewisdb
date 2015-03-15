@@ -39,8 +39,9 @@ class MemberExpiredButStillInOrgan extends Error
         return $this->getSubDecision()->getFoundation();
     }
 
-    public function asText() {
+    public function asText()
+    {
         return 'Member ' . $this->getMember()->getFullName() . ' is member of ' . $this->getOrgan()->getName()
         . ' however ' . $this->getMember()->getFullName() . ' is not a member of GEWIS anymore';
     }
-} 
+}

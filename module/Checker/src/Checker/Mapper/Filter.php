@@ -9,7 +9,8 @@
 namespace Checker\Mapper;
 
 
-trait Filter {
+trait Filter
+{
 
     /**
      * Filters an array of subdecisions to find decisions that are still valid
@@ -17,7 +18,8 @@ trait Filter {
      * @param array $deleted array to be filtered by reference
      * @return array $deleted array after it was filtered
      */
-    public function filterDeleted(array &$subDecisions) {
+    public function filterDeleted(array &$subDecisions)
+    {
         $deleted = $this->getDeleted();
 
         foreach ($subDecisions as $key => $dec) {
@@ -34,7 +36,7 @@ trait Filter {
      *
      * @return Array of Database\Model\SubDecision
      */
-    protected  function getDeleted()
+    protected function getDeleted()
     {
         // use static to only make sure that the variable has only be set once
         static $deleted;
@@ -66,7 +68,8 @@ trait Filter {
      * @param \Database\Model\SubDecision\Destroy $d Destroy decision
      * @return bool is the destroy decision not destroyed?
      */
-    protected  function isValid(\Database\Model\SubDecision\Destroy $d) {
+    protected function isValid(\Database\Model\SubDecision\Destroy $d)
+    {
         // Get the decision
         $decision = $d->getDecision();
 
@@ -81,4 +84,4 @@ trait Filter {
         return !$this->isValid($destroy);
 
     }
-} 
+}

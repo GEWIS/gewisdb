@@ -5,7 +5,6 @@ use Database\Model\Event as EventModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
 
-
 class Installation
 {
     use Filter;
@@ -67,5 +66,4 @@ class Installation
 
         return $this->filterDeleted($qb->getQuery()->getResult());
     }
-
 }

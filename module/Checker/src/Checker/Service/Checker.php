@@ -13,13 +13,13 @@ use \Database\Model\Meeting;
 use \Checker\Model\Error;
 use Zend\Mail\Message;
 
-class Checker extends AbstractService {
-
+class Checker extends AbstractService
+{
     /**
      * Does a full check on each meeting, checking that after each meeting no database violation occur
      */
-    public function check() {
-
+    public function check()
+    {
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meetings = $meetingService->getAllMeetings();
 
@@ -98,7 +98,7 @@ class Checker extends AbstractService {
 
         foreach ($installations as $installation) {
             $organName = $installation->getFoundation()->toArray()['name'];
-            if (!in_array($organName, $organs,true)) {
+            if (!in_array($organName, $organs, true)) {
                 $errors[] = new Error\MembersInNonExistingOrgan($installation);
             }
         }
@@ -159,7 +159,8 @@ class Checker extends AbstractService {
      * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkBudgetOrganExists(\Database\Model\Meeting $meeting) {
+    public function checkBudgetOrganExists(\Database\Model\Meeting $meeting)
+    {
         $errors = [];
         $organService = $this->getServiceManager()->get('checker_service_organ');
         $budgetService = $this->getServiceManager()->get('checker_service_budget');
@@ -185,7 +186,8 @@ class Checker extends AbstractService {
      * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkOrganMeetingType(\Database\Model\Meeting $meeting) {
+    public function checkOrganMeetingType(\Database\Model\Meeting $meeting)
+    {
         $errors = [];
         $organService = $this->getServiceManager()->get('checker_service_organ');
         $organs = $organService->getOrgansCreatedAtMeeting($meeting);
@@ -197,8 +199,7 @@ class Checker extends AbstractService {
             // The meeting type and organ type match iff: The meeting type is not VV, or
             // if either both organtype and meetingtype is AV, or they are both not. So
             // it is wrong if only one of them has a meetingtype of AV
-            if (
-                $meetingType === Meeting::TYPE_VV ||
+            if ($meetingType === Meeting::TYPE_VV ||
                 ($organType ===  Foundation::ORGAN_TYPE_AV_COMMITTEE ^ $meetingType === Meeting::TYPE_AV)
             ) {
                 $errors[] = new Error\OrganMeetingType($organ);
@@ -206,5 +207,4 @@ class Checker extends AbstractService {
         }
         return $errors;
     }
-
-} 
+}

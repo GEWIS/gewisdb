@@ -11,8 +11,8 @@ namespace Checker\Model\Error;
  *
  * @package Checker\Model\Error
  */
-class OrganMeetingType extends \Checker\Model\Error {
-
+class OrganMeetingType extends \Checker\Model\Error
+{
     public function __construct(
         \Database\Model\SubDecision\Foundation $foundation
     ) {
@@ -20,7 +20,6 @@ class OrganMeetingType extends \Checker\Model\Error {
         $this->organType = $foundation->getOrganType();
         $this->meetingType = $foundation->getMeetingType();
     }
-
 
     /**
      * @return string Type of organ that was created
@@ -35,11 +34,14 @@ class OrganMeetingType extends \Checker\Model\Error {
      */
     public function getMeetingType()
     {
-
         return $this->getSubDecision()->getDecision()->getMeeting()->getType();
     }
 
-    public function asText() {
-        return "Organ of type " . $this->getOrganType() . ' can not be created in a meeting of type ' . $this->getMeetingType();
+    public function asText()
+    {
+        return "Organ of type "
+            . $this->getOrganType()
+            . ' can not be created in a meeting of type '
+            . $this->getMeetingType();
     }
-} 
+}

@@ -12,7 +12,8 @@ class Installation extends AbstractService
      * @param \Database\Model\Meeting $meeting
      * @return array \Database\Model\SubDecision\Installation
      */
-    public function getAllInstallations(\Database\Model\Meeting $meeting) {
+    public function getAllInstallations(\Database\Model\Meeting $meeting)
+    {
         $mapper = $this->getServiceManager()->get('checker_mapper_installation');
 
         $createdMembers = $mapper->getAllInstallationsInstalled($meeting);
@@ -23,8 +24,7 @@ class Installation extends AbstractService
             $members[$this->getHash($cm)] = $cm;
         }
 
-        foreach ($deletedMembers as $dm)
-        {
+        foreach ($deletedMembers as $dm) {
             $creation = $dm->getInstallation();
             $hash = $this->getHash($creation);
             if (isset($members[$hash])) {
@@ -47,7 +47,8 @@ class Installation extends AbstractService
      *      ]
      * ]
      */
-    public function getCurrentRolesPerOrgan(\Database\Model\Meeting $meeting) {
+    public function getCurrentRolesPerOrgan(\Database\Model\Meeting $meeting)
+    {
         $installations = $this->getAllInstallations($meeting);
 
         $roles = [];
@@ -69,7 +70,8 @@ class Installation extends AbstractService
      * @param \Database\Model\SubDecision $d Decision to hash for
      * @return string Unique hash for $d
      */
-    private function getHash(\Database\Model\SubDecision $d) {
+    private function getHash(\Database\Model\SubDecision $d)
+    {
         return $d->getMeetingType() . $d->getMeetingNumber() . $d-> getDecisionPoint() . $d->getNumber();
     }
 }

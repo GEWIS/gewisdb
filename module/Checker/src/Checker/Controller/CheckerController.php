@@ -9,7 +9,8 @@ namespace Checker\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
-class CheckerController extends AbstractActionController {
+class CheckerController extends AbstractActionController
+{
 
     /**
      * Index action.
