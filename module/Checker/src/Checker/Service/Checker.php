@@ -29,6 +29,7 @@ class Checker extends AbstractService {
                 $this->checkBudgetOrganExists($meeting),
                 $this->checkMembersHaveRoleButNotInOrgan($meeting),
                 $this->checkMembersInNotExistingOrgans($meeting),
+                $this->checkMembersExpiredButStillInOrgan($meeting),
                 $this->checkOrganMeetingType($meeting)
             );
 
@@ -100,7 +101,23 @@ class Checker extends AbstractService {
             if (!in_array($organName, $organs,true)) {
                 $errors[] = new Error\MembersInNonExistingOrgan($installation);
             }
+        }
+        return $errors;
+    }
 
+    /**
+     * Checks if there are members that have expired, but are still in an oran
+     *
+     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @return array Array of errors that may have occured.
+     */
+    public function checkMembersExpiredButStillInOrgan(\Database\Model\Meeting $meeting)
+    {
+        $errors = [];
+        $installationService = $this->getServiceManager()->get('checker_service_installation');
+        $installations = $installationService->getAllInstallations($meeting);
+
+        foreach ($installations as $installation) {
             // Check if the members are still member of GEWIS
             $member = $installation->getMember();
 

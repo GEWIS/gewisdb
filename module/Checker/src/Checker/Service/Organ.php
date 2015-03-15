@@ -22,5 +22,4 @@ class Organ extends AbstractService
         $mapper = $this->getServiceManager()->get('checker_mapper_organ');
         return $mapper->getOrgansCreatedAtMeeting($meeting);
     }
-    
 }
