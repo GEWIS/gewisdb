@@ -14,7 +14,20 @@ class ReportController extends AbstractActionController
     {
         $console = $this->getConsole();
 
-        echo "generating report database\n";
+        echo "generating members table\n";
+        $this->getMemberService()->generate();
+
+        echo "generating meetings and decision tables\n";
+    }
+
+    /**
+     * Get the member service.
+     *
+     * @return Report\Service\Member
+     */
+    public function getMemberService()
+    {
+        return $this->getServiceLocator()->get('report_service_member');
     }
 
     /**

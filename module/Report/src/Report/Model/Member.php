@@ -26,7 +26,6 @@ class Member
      * The user
      *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer", name="lidnr")
      */
     protected $lidnr;
@@ -617,25 +616,5 @@ class Member
     public function clearLists()
     {
         $this->lists = new ArrayCollection();
-    }
-
-    /**
-     * Set the home address.
-     *
-     * @param Address $address
-     */
-    public function setHomeAddress(Address $address)
-    {
-        $this->addAddress($address);
-    }
-
-    /**
-     * Set the student address.
-     *
-     * @param Address $address
-     */
-    public function setStudentAddress(Address $address)
-    {
-        $this->addAddress($address);
     }
 }

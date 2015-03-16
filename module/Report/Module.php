@@ -67,6 +67,7 @@ class Module
     {
         return array(
             'invokables' => array(
+                'report_service_member' => 'Report\Service\Member'
             ),
             'factories' => array(
                 'doctrine.connection.orm_report' => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_report'),
@@ -78,7 +79,7 @@ class Module
                 'doctrine.sql_logger_collector.orm_report' => new \DoctrineORMModule\Service\SQLLoggerCollectorFactory('orm_report'),
                 'DoctrineORMModule\Form\Annotation\AnnotationBuilder' => function($sm) {
                     return new \DoctrineORMModule\Form\Annotation\AnnotationBuilder($sl->get('doctrine.entitymanager.orm_report'));
-                }
+                },
             )
         );
     }
