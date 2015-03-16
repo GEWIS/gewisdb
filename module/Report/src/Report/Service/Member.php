@@ -21,6 +21,7 @@ class Member extends AbstractService
 
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $repo = $em->getRepository('Report\Model\Member');
+        $addrRepo = $em->getRepository('Report\Model\Address');
 
         foreach ($mapper->findAll() as $member) {
             // first try to find an existing member
@@ -45,6 +46,25 @@ class Member extends AbstractService
             $reportMember->setPaid($member->getPaid());
 
             // go through addresses
+            foreach ($member->getAddresses() as $address) {
+                $reportAddress = $addrRepo->find(array(
+                    'member' => $reportMember->getLidnr(),
+                    'type' => $address->getType()
+                ));
+                if (null == $reportAddress) {
+                    $reportAddress = new ReportAddress();
+                }
+                $reportAddress->setType($address->getType());
+                $reportAddress->setCountry($address->getCountry());
+                $reportAddress->setStreet($address->getStreet());
+                $reportAddress->setNumber($address->getNumber());
+                $reportAddress->setPostalCode($address->getPostalCode());
+                $reportAddress->setCity($address->getCity());
+                $reportAddress->setPhone($address->getPhone());
+                $reportMember->addAddress($reportAddress);
+                $em->persist($reportAddress);
+            }
+
             $em->persist($reportMember);
         }
         $em->flush();
