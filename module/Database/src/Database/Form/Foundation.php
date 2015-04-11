@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use Database\Form\Fieldset\CollectionWithErrors;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
@@ -42,16 +43,16 @@ class Foundation extends AbstractDecision
             )
         ));
 
-        $this->add(array(
-            'name' => 'members',
-            'type' => 'collection',
-            'options' => array(
-                'label' => 'Members',
-                'count' => 2,
-                'should_create_template' => true,
-                'target_element' => $function
-            )
+        // Is this possible with a factory?
+        $members = new CollectionWithErrors();
+        $members->setName('members');
+        $members->setOptions(array(
+            'label' => 'Members',
+            'count' => 2,
+            'should_create_template' => true,
+            'target_element' => $function
         ));
+        $this->add($members);
 
         $this->add(array(
             'name' => 'submit',
@@ -93,7 +94,12 @@ class Foundation extends AbstractDecision
                 )
             ),
             'members' => array(
-                'required' => true
+                'continue_if_empty' => true,
+                'validators' => [
+                    [
+                        'name' => 'notEmpty',
+                    ]
+                ]
             )
         );
     }

@@ -401,6 +401,7 @@ class Meeting extends AbstractService
             );
         }
 
+
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
