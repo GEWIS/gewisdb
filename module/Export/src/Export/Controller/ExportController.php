@@ -16,7 +16,7 @@ class ExportController extends AbstractActionController
     {
         $console = $this->getConsole();
 
-        //$this->getMemberService()->export();
+        $this->getMemberService()->export();
         $this->getOrganService()->export();
         $this->getMeetingService()->export();
     }

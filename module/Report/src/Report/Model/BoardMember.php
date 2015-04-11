@@ -51,7 +51,7 @@ class BoardMember
      *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
      * })
      */
-    protected $installation;
+    protected $installationDec;
 
     /**
      * Discharge date.
