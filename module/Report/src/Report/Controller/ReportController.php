@@ -18,6 +18,10 @@ class ReportController extends AbstractActionController
         $this->getMemberService()->generate();
 
         echo "generating meetings and decision tables\n";
+        $this->getMeetingService()->generate();
+
+        echo "generating organ tables\n";
+        $this->getOrganService()->generate();
     }
 
     /**
@@ -28,6 +32,26 @@ class ReportController extends AbstractActionController
     public function getMemberService()
     {
         return $this->getServiceLocator()->get('report_service_member');
+    }
+
+    /**
+     * Get the meeting service.
+     *
+     * @return Report\Service\Meeting
+     */
+    public function getMeetingService()
+    {
+        return $this->getServiceLocator()->get('report_service_meeting');
+    }
+
+    /**
+     * Get the organ service.
+     *
+     * @return Report\Service\Organ
+     */
+    public function getOrganService()
+    {
+        return $this->getServiceLocator()->get('report_service_organ');
     }
 
     /**

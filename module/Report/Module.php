@@ -67,7 +67,9 @@ class Module
     {
         return array(
             'invokables' => array(
-                'report_service_member' => 'Report\Service\Member'
+                'report_service_member' => 'Report\Service\Member',
+                'report_service_meeting' => 'Report\Service\Meeting',
+                'report_service_organ' => 'Report\Service\Organ',
             ),
             'factories' => array(
                 'doctrine.connection.orm_report' => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_report'),
