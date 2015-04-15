@@ -27,7 +27,7 @@ class Member extends AbstractService
             // first try to find an existing member
             $reportMember = $repo->find($member->getLidnr());
 
-            if ($reportMember == null) {
+            if ($reportMember === null) {
                 $reportMember = new ReportMember();
             }
 
@@ -51,7 +51,7 @@ class Member extends AbstractService
                     'member' => $reportMember->getLidnr(),
                     'type' => $address->getType()
                 ));
-                if (null == $reportAddress) {
+                if (null === $reportAddress) {
                     $reportAddress = new ReportAddress();
                 }
                 $reportAddress->setType($address->getType());

@@ -60,6 +60,15 @@ class Decision
     protected $number;
 
     /**
+     * Content.
+     *
+     * Generated from subdecisions.
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $content;
+
+    /**
      * Subdecisions.
      *
      * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision", cascade={"persist", "remove"})
@@ -158,6 +167,26 @@ class Decision
     }
 
     /**
+     * Get decision content.
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set decision content.
+     *
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
      * Get the subdecisions.
      *
      * @return array
@@ -209,26 +238,5 @@ class Decision
     public function isDestroyed()
     {
         return null !== $this->destroyedby;
-    }
-
-    /**
-     * Transform into an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $content = array();
-        foreach ($this->getSubdecisions() as $subdecision) {
-            $content[] = $subdecision->getContent();
-        }
-        $content = implode(' ', $content);
-        return array(
-            'meeting_type' => $this->getMeeting()->getType(),
-            'meeting_number' => $this->getMeeting()->getNumber(),
-            'decision_point' => $this->getPoint(),
-            'decision_number' => $this->getNumber(),
-            'content' => $content
-        );
     }
 }

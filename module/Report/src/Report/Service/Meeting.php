@@ -5,6 +5,7 @@ namespace Report\Service;
 use Application\Service\AbstractService;
 
 use Report\Model\Meeting as ReportMeeting;
+use Report\Model\Decision as ReportDecision;
 
 class Meeting extends AbstractService
 {
@@ -19,6 +20,7 @@ class Meeting extends AbstractService
         // simply export every meeting
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $repo = $em->getRepository('Report\Model\Meeting');
+        $decRepo = $em->getRepository('Report\Model\Decision');
 
         foreach ($mapper->findAll() as $meeting) {
             $meeting = $meeting[0];
@@ -28,7 +30,7 @@ class Meeting extends AbstractService
                 'number' => $meeting->getNumber()
             ));
 
-            if ($reportMeeting == null) {
+            if ($reportMeeting === null) {
                 $reportMeeting = new ReportMeeting();
             }
 
@@ -37,7 +39,24 @@ class Meeting extends AbstractService
             $reportMeeting->setDate($meeting->getDate());
 
             foreach ($meeting->getDecisions() as $decision) {
-                var_dump($decision);
+                // see if decision exists
+                $reportDecision = $decRepo->find(array(
+                    'meeting_type' => $decision->getMeeting()->getType(),
+                    'meeting_number' => $decision->getMeeting()->getNumber(),
+                    'point' => $decision->getPoint(),
+                    'number' => $decision->getNumber()
+                ));
+                if (null === $reportDecision) {
+                    $reportDecision = new ReportDecision();
+                    $reportDecision->setMeeting($reportMeeting);
+                }
+                $reportDecision->setPoint($decision->getPoint());
+                $reportDecision->setNumber($decision->getNumber());
+                $reportDecision->setContent("");
+
+                // TODO: subdecisions and content
+
+                $em->persist($reportDecision);
             }
 
             $em->persist($reportMeeting);
