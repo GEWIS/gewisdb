@@ -48,6 +48,13 @@ class Foundation extends SubDecision
      */
     protected $references;
 
+    /**
+     * Organ entry for this organ.
+     *
+     * @ORM\OneToOne(targetEntity="Report\Model\Organ",mappedBy="foundation")
+     */
+    protected $organ;
+
 
     /**
      * Constructor.
@@ -144,6 +151,16 @@ class Foundation extends SubDecision
     public function getReferences()
     {
         return $this->references;
+    }
+
+    /**
+     * Get the referenced organ.
+     *
+     * @return Report\Model\Organ
+     */
+    public function getOrgan()
+    {
+        return $this->organ;
     }
 
     /**
