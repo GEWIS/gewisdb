@@ -73,7 +73,7 @@ class Organ
     /**
      * Abrogation date.
      *
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     protected $abrogationDate;
 
@@ -227,7 +227,7 @@ class Organ
      *
      * @param DateTime $abrogationDate
      */
-    public function setAbrogationDate($abrogationDate)
+    public function setAbrogationDate(\DateTime $abrogationDate)
     {
         $this->abrogationDate = $abrogationDate;
     }

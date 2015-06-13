@@ -5,6 +5,9 @@ namespace Report\Service;
 use Application\Service\AbstractService;
 
 use Report\Model\Organ as ReportOrgan;
+use Report\Model\OrganMember;
+use Report\Model\SubDecision\Abrogation;
+use Report\Model\SubDecision\Installation;
 
 class Organ extends AbstractService
 {
@@ -18,31 +21,47 @@ class Organ extends AbstractService
         $foundationRepo = $em->getRepository('Report\Model\SubDecision\Foundation');
         $repo = $em->getRepository('Report\Model\Organ');
 
-        $organs = $foundationRepo->findAll();
-        foreach ($organs as $organ) {
+        $foundations = $foundationRepo->findAll();
+        foreach ($foundations as $foundation) {
             // see if there already is an organ
-            $repOrgan = $organ->getOrgan();
+            $repOrgan = $foundation->getOrgan();
             if (null === $repOrgan) {
                 $repOrgan = new ReportOrgan();
-                $repOrgan->setFoundation($organ);
+                $repOrgan->setFoundation($foundation);
             }
-            $repOrgan->setAbbr($organ->getAbbr());
-            $repOrgan->setName($organ->getName());
-            $repOrgan->setType($organ->getOrganType());
-            $repOrgan->setFoundationDate($organ->getDecision()->getMeeting()->getDate());
-            var_dump($repOrgan);
-        }
-        // find all organs
-        // - assign ID
-        // - Set basic info
-        // - get foundation date
-        // - if abrogated, set abrogation date
+            $repOrgan->setAbbr($foundation->getAbbr());
+            $repOrgan->setName($foundation->getName());
+            $repOrgan->setType($foundation->getOrganType());
+            $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
 
-        // then, for every organ
-        // - find members
-        //   - assign installation
-        //   - find installation date
-        //   - find discharge date
+            // get the abrogation date and find organ members
+            foreach ($foundation->getReferences() as $ref) {
+                if ($ref instanceof Abrogation) {
+                    $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
+                }
+                if ($ref instanceof Installation) {
+                    // get full reference
+                    $organMember = $ref->getOrganMember();
+                    if (null === $organMember) {
+                        $organMember = new OrganMember();
+                        // set the ID stuff
+                        $organMember->setOrgan($repOrgan);
+                        $organMember->setMember($ref->getMember());
+                        $organMember->setFunction($ref->getFunction());
+                        $organMember->setInstallDate($ref->getDecision()->getMeeting()->getDate());
+                    }
+                    $organMember->setInstallation($ref);
+                    $discharge = $ref->getDischarge();
+                    if (null !== $discharge) {
+                        $organMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
+                    }
+
+                    $em->persist($organMember);
+                }
+            }
+            $em->persist($repOrgan);
+        }
+        $em->flush();
     }
 
     /**

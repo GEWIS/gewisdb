@@ -37,6 +37,13 @@ class Installation extends FoundationReference
      */
     protected $discharge;
 
+    /**
+     * The organmember reference.
+     *
+     * @ORM\OneToOne(targetEntity="Report\Model\OrganMember",mappedBy="installation")
+     */
+    protected $organMember;
+
 
     /**
      * Get the function.
@@ -86,5 +93,13 @@ class Installation extends FoundationReference
     public function getDischarge()
     {
         return $this->discharge;
+    }
+
+    /**
+     * Get the organ member reference.
+     */
+    public function getOrganMember()
+    {
+        return $this->organMember;
     }
 }

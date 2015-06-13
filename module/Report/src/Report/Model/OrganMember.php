@@ -4,6 +4,8 @@ namespace Report\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Report\Model\SubDecision\Installation;
+
 /**
  * Organ member entity.
  *
@@ -15,17 +17,24 @@ class OrganMember
 {
 
     /**
-     * Organ id.
+     * Id.
      *
      * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * Organ.
+     *
      * @ORM\ManyToOne(targetEntity="Organ",inversedBy="members")
      */
     protected $organ;
 
     /**
-     * Member lidnr.
+     * Member.
      *
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Member",inversedBy="organInstallations")
      * @ORM\JoinColumn(name="lidnr",referencedColumnName="lidnr")
      */
@@ -34,7 +43,6 @@ class OrganMember
     /**
      * Function.
      *
-     * @ORM\Id
      * @ORM\Column(type="string")
      */
     protected $function;
@@ -42,7 +50,6 @@ class OrganMember
     /**
      * Installation date.
      *
-     * @ORM\Id
      * @ORM\Column(type="date")
      */
     protected $installDate;
@@ -50,7 +57,7 @@ class OrganMember
     /**
      * Installation.
      *
-     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Installation")
+     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Installation",inversedBy="organMember")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
@@ -64,7 +71,128 @@ class OrganMember
     /**
      * Discharge date.
      *
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     protected $dischargeDate;
+
+
+    /**
+     * Set the organ.
+     *
+     * @param Organ $organ
+     */
+    public function setOrgan(Organ $organ)
+    {
+        $this->organ = $organ;
+    }
+
+    /**
+     * Get the organ.
+     *
+     * @return Organ
+     */
+    public function getOrgan()
+    {
+        return $this->organ;
+    }
+
+    /**
+     * Set the member.
+     *
+     * @param Member $member
+     */
+    public function setMember(Member $member)
+    {
+        $this->member = $member;
+    }
+
+    /**
+     * Get the member.
+     *
+     * @return Member
+     */
+    public function getMember()
+    {
+        return $this->member;
+    }
+
+    /**
+     * Set the function
+     *
+     * @param string $function
+     */
+    public function setFunction($function)
+    {
+        $this->function = $function;
+    }
+
+    /**
+     * Get the function
+     *
+     * @return string
+     */
+    public function getFunction()
+    {
+        return $this->function;
+    }
+
+    /**
+     * Set the installation date.
+     *
+     * @param \DateTime $installDate
+     */
+    public function setInstallDate(\DateTime $installDate)
+    {
+        $this->installDate = $installDate;
+    }
+
+    /**
+     * Get the installation date.
+     *
+     * @return \DateTime
+     */
+    public function getInstallDate()
+    {
+        return $this->installDate;
+    }
+
+    /**
+     * Set the installation.
+     *
+     * @param Installation $installation
+     */
+    public function setInstallation($installation)
+    {
+        $this->installation = $installation;
+    }
+
+    /**
+     * Get the installation.
+     *
+     * @return Installation
+     */
+    public function getInstallation()
+    {
+        return $this->installation;
+    }
+
+    /**
+     * Set the discharge date.
+     *
+     * @param \DateTime $dischargeDate
+     */
+    public function setDischargeDate(\DateTime $dischargeDate)
+    {
+        $this->dischargeDate = $dischargeDate;
+    }
+
+    /**
+     * Get the discharge date.
+     *
+     * @return \DateTime
+     */
+    public function getDischargeDate()
+    {
+        return $this->dischargeDate;
+    }
 }
