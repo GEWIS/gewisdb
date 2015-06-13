@@ -194,7 +194,7 @@ class MailingList
      */
     public function getMembers()
     {
-        return $this->name;
+        return $this->members;
     }
 
     /**

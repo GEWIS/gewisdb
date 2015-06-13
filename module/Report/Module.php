@@ -71,6 +71,7 @@ class Module
                 'report_service_meeting' => 'Report\Service\Meeting',
                 'report_service_organ' => 'Report\Service\Organ',
                 'report_service_board' => 'Report\Service\Board',
+                'report_service_misc' => 'Report\Service\Misc',
             ),
             'factories' => array(
                 'doctrine.connection.orm_report' => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_report'),
