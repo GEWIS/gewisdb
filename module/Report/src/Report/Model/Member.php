@@ -15,6 +15,7 @@ class Member
 
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
+    const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
     const TYPE_PROLONGED = 'prolonged';
@@ -183,7 +184,8 @@ class Member
     {
         return array(
             self::GENDER_MALE,
-            self::GENDER_FEMALE
+            self::GENDER_FEMALE,
+            self::GENDER_OTHER
         );
     }
 
