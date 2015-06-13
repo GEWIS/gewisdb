@@ -4,6 +4,8 @@ namespace Report\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Report\Model\SubDecision\Board\Installation;
+
 /**
  * Board member entity.
  *
@@ -15,9 +17,17 @@ class BoardMember
 {
 
     /**
-     * Member lidnr.
+     * Id.
      *
      * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * Member lidnr.
+     *
      * @ORM\ManyToOne(targetEntity="Member",inversedBy="boardInstallations")
      * @ORM\JoinColumn(name="lidnr",referencedColumnName="lidnr")
      */
@@ -26,7 +36,6 @@ class BoardMember
     /**
      * Function.
      *
-     * @ORM\Id
      * @ORM\Column(type="string")
      */
     protected $function;
@@ -34,7 +43,6 @@ class BoardMember
     /**
      * Installation date.
      *
-     * @ORM\Id
      * @ORM\Column(type="date")
      */
     protected $installDate;
@@ -42,7 +50,7 @@ class BoardMember
     /**
      * Installation.
      *
-     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Board\Installation")
+     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Board\Installation", inversedBy="boardMember")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
      *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
@@ -56,7 +64,119 @@ class BoardMember
     /**
      * Discharge date.
      *
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     protected $dischargeDate;
+
+
+    /**
+     * Get the ID.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get the member.
+     *
+     * @return \Report\Model\Member
+     */
+    public function getMember()
+    {
+        return $this->member;
+    }
+
+    /**
+     * Set the member.
+     *
+     * @param \Report\Model\Member $member
+     */
+    public function setMember($member)
+    {
+        $this->member = $member;
+    }
+
+    /**
+     * Get the function.
+     *
+     * @return string
+     */
+    public function getFunction()
+    {
+        return $this->function;
+    }
+
+    /**
+     * Set the function.
+     *
+     * @param string $function
+     */
+    public function setFunction($function)
+    {
+        $this->function = $function;
+    }
+
+    /**
+     * Get the installation date.
+     *
+     * @return \DateTime
+     */
+    public function getInstallDate()
+    {
+        return $this->installDate;
+    }
+
+    /**
+     * Set the installation date.
+     *
+     * @param \DateTime $installDate
+     */
+    public function setInstallDate($installDate)
+    {
+        $this->installDate = $installDate;
+    }
+
+    /**
+     * Get the installation decision.
+     *
+     * @return Installation
+     */
+    public function getInstallationDec()
+    {
+        return $this->installationDec;
+    }
+
+    /**
+     * Set the installation decision.
+     *
+     * @param Installation $installationDec
+     */
+    public function setInstallationDec(Installation $installationDec)
+    {
+        $this->installationDec = $installationDec;
+    }
+
+    /**
+     * Get the discharge date.
+     *
+     * @return \DateTime
+     */
+    public function getDischargeDate()
+    {
+        return $this->dischargeDate;
+    }
+
+    /**
+     * Set the discharge date.
+     *
+     * @param \DateTime $dischargeDate
+     */
+    public function setDischargeDate($dischargeDate)
+    {
+        $this->dischargeDate = $dischargeDate;
+    }
+
 }

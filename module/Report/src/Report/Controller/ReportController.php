@@ -22,6 +22,9 @@ class ReportController extends AbstractActionController
 
         echo "generating organ tables\n";
         $this->getOrganService()->generate();
+
+        echo "generating board tables\n";
+        $this->getBoardService()->generate();
     }
 
     /**
@@ -52,6 +55,16 @@ class ReportController extends AbstractActionController
     public function getOrganService()
     {
         return $this->getServiceLocator()->get('report_service_organ');
+    }
+
+    /**
+     * Get the board service.
+     *
+     * @return Report\Service\Board
+     */
+    public function getBoardService()
+    {
+        return $this->getServiceLocator()->get('report_service_board');
     }
 
     /**

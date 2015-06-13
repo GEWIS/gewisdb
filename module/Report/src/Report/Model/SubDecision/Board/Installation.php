@@ -57,6 +57,13 @@ class Installation extends SubDecision
      */
     protected $release;
 
+    /**
+     * Board member reference.
+     *
+     * @ORM\OneToOne(targetEntity="Report\Model\BoardMember", mappedBy="installationDec")
+     */
+    protected $boardMember;
+
 
     /**
      * Get the function.
@@ -118,4 +125,33 @@ class Installation extends SubDecision
         $this->date = $date;
     }
 
+    /**
+     * Get the discharge.
+     *
+     * @return Discharge
+     */
+    public function getDischarge()
+    {
+        return $this->discharge;
+    }
+
+    /**
+     * Get the release.
+     *
+     * @return Release
+     */
+    public function getRelease()
+    {
+        return $this->release;
+    }
+
+    /**
+     * Get the board member decision.
+     *
+     * @return BoardMember
+     */
+    public function getBoardMember()
+    {
+        return $this->boardMember;
+    }
 }
