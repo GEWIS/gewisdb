@@ -142,11 +142,11 @@ class Query extends AbstractService
      */
     public function getEntities()
     {
-        $entityManager = $this->getServiceManager()->get('database_doctrine_em');
+        $entityManager = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $classes = array();
         $metas = $entityManager->getMetadataFactory()->getAllMetadata();
         foreach ($metas as $meta) {
-            $classes[] = $meta->getName();
+            $classes[] = preg_replace('/^Report\\\\Model\\\\/', 'db:', $meta->getName());
         }
         return $classes;
     }
