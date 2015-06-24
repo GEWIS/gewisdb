@@ -213,7 +213,7 @@ return array(
                                     ),
                                     'membership' => array(
                                         'type' => 'Literal',
-                                        'options    ' => array(
+                                        'options' => array(
                                             'route' => '/membership',
                                             'defaults' => array(
                                                 'action' => 'membership'

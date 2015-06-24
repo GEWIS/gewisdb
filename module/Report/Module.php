@@ -10,29 +10,6 @@ class Module
 {
 
     /**
-     * Init.
-     */
-    public function init(ModuleManagerInterface $manager)
-    {
-        $events = $manager->getEventManager();
-
-        $events->getSharedManager()->attach('doctrine', 'loadCli.post', array($this, 'initializeDoctrineConsole'), -100);
-    }
-
-    /**
-     * Initialize doctrine console.
-     */
-    public function initializeDoctrineConsole(EventInterface $event) {
-//        $cli = $event->getTarget();
-//        $sm = $event->getParam('ServiceManager');
-//
-//        $em = $sm->get('doctrine.entitymanager.orm_report');
-//        $helperSet = $cli->getHelperSet();
-//        $helperSet->set(new ConnectionHelper($em->getConnection()), 'db');
-//        $helperSet->set(new EntityManagerHelper($em), 'em');
-    }
-
-    /**
      * Get the autoloader configuration.
      *
      * @return array Autoloader config
