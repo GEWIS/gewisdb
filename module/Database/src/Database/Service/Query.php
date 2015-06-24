@@ -6,6 +6,7 @@ use Application\Service\AbstractService;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query\QueryException;
+use Doctrine\Common\Persistence\Mapping\MappingException;
 
 use Database\Model\SavedQuery;
 
@@ -105,11 +106,17 @@ class Query extends AbstractService
          *
          * TODO: properly put this in a mapper.....
          */
-        $em = $this->getServiceManager()->get('database_doctrine_em');
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         try {
             $query = $em->createQuery($data['query']);
             return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
         } catch (QueryException $e) {
+            $form->get('query')
+                ->setMessages(array(
+                    $e->getMessage()
+                ));
+            return null;
+        } catch (MappingException $e) {
             $form->get('query')
                 ->setMessages(array(
                     $e->getMessage()

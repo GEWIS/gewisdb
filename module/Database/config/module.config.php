@@ -398,7 +398,7 @@ return array(
         'configuration' => array(
             'orm_default' => array(
                 'entity_namespaces' => array(
-                    'db' => 'Database\Model'
+                    'dborig' => 'Database\Model'
                 )
             )
         )
