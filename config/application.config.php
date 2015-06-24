@@ -8,6 +8,7 @@ return array(
         'Application',
         'Database',
         'Import',
+        'Checker',
         'Export',
         'Report'
     ),
