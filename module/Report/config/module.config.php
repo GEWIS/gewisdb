@@ -16,7 +16,10 @@ return array(
                 'generate_proxies' => true,
                 'proxy_dir' => 'data/DoctrineORMModule/Proxy',
                 'proxy_namespace' => 'DoctrineORMModule\Proxy',
-                'filters' => array()
+                'filters' => array(),
+                'entity_namespaces' => array(
+                    'db' => 'Database\Model'
+                )
             )
         ),
         'driver' => array(

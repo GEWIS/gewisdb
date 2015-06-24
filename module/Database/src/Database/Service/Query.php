@@ -105,7 +105,7 @@ class Query extends AbstractService
          *
          * TODO: properly put this in a mapper.....
          */
-        $em = $this->getServiceManager()->get('database_doctrine_em');
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         try {
             $query = $em->createQuery($data['query']);
             return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
