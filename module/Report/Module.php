@@ -23,13 +23,13 @@ class Module
      * Initialize doctrine console.
      */
     public function initializeDoctrineConsole(EventInterface $event) {
-        $cli = $event->getTarget();
-        $sm = $event->getParam('ServiceManager');
-
-        $em = $sm->get('doctrine.entitymanager.orm_report');
-        $helperSet = $cli->getHelperSet();
-        $helperSet->set(new ConnectionHelper($em->getConnection()), 'db');
-        $helperSet->set(new EntityManagerHelper($em), 'em');
+//        $cli = $event->getTarget();
+//        $sm = $event->getParam('ServiceManager');
+//
+//        $em = $sm->get('doctrine.entitymanager.orm_report');
+//        $helperSet = $cli->getHelperSet();
+//        $helperSet->set(new ConnectionHelper($em->getConnection()), 'db');
+//        $helperSet->set(new EntityManagerHelper($em), 'em');
     }
 
     /**
