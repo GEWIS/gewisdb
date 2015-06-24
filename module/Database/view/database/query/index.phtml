@@ -56,8 +56,18 @@ $submit->setAttribute('class', 'btn btn-primary');
 <?php foreach ($saved as $query): ?>
     <li><a href="<?= $this->url('query/show', array('query' => $query->getId())) ?>"><?= $query->getName() ?></a></li>
 <?php endforeach; ?>
+
 </ul>
 
+    Een overzicht van alle mogelijkheden van DQL kan gevonden worden in de
+    <a href="http://doctrine-orm.readthedocs.org/en/latest/reference/dql-doctrine-query-language.html">DQL documentaties</a>.
+
+    Alle entities in deze database:
+    <ul>
+    <?php foreach ($entities as $entity): ?>
+        <li><?= $entity;?></li>
+    <?php endforeach;?>
+    </ul>
 </div>
 <?= $this->form()->closeTag() ?>
 </div>
