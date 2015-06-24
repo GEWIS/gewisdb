@@ -12,4 +12,10 @@
  */
 
 return array(
+    /**
+     * Email adres where the results of the checker is send to
+     */
+    'checker' => [
+        'report_mail' => 'mail@example.org',
+    ]
 );

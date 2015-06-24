@@ -67,15 +67,15 @@ class Checker extends AbstractService
      */
     private function sendMail($body)
     {
-        $transport = $this->getServiceManager()->get('checker_mail_transport');
-
+        $config = $meetingService = $this->getServiceManager()->get('config');
         $message = new Message();
-        $message->addTo('secr@gewis.nl')
+        $message->addTo($config['checker']['report_mail'])
             ->setSubject('Database Checker Report')
             ->setBody($body);
 
         echo $body;
 
+        $transport = $this->getServiceManager()->get('checker_mail_transport');
         $transport->send($message);
     }
 
