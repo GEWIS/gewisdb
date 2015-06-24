@@ -27,14 +27,16 @@ class QueryController extends AbstractActionController
                     'form' => $service->getQueryForm(),
                     'exportform' => $service->getQueryExportForm(),
                     'result' => $result,
-                    'saved' => $service->getSavedQueries()
+                    'saved' => $service->getSavedQueries(),
+                    'entities' => $service->getEntities()
                 ));
             }
         }
 
         return new ViewModel(array(
             'form' => $service->getQueryForm(),
-            'saved' => $service->getSavedQueries()
+            'saved' => $service->getSavedQueries(),
+            'entities' => $service->getEntities()
         ));
     }
 
@@ -49,7 +51,8 @@ class QueryController extends AbstractActionController
             'form' => $service->getQueryForm(),
             'saved' => $service->getSavedQueries(),
             'exportform' => $service->getQueryExportForm(),
-            'result' => $service->executeSaved($this->params()->fromRoute('query'))
+            'result' => $service->executeSaved($this->params()->fromRoute('query')),
+            'entities' => $service->getEntities()
         ));
         $viewmodel->setTemplate('database/query/index');
         return $viewmodel;

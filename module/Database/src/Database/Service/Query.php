@@ -129,6 +129,22 @@ class Query extends AbstractService
     }
 
     /**
+     * Get all entities that are present in the database
+     *
+     * @return array Array of all entities
+     */
+    public function getEntities()
+    {
+        $entityManager = $this->getServiceManager()->get('database_doctrine_em');
+        $classes = array();
+        $metas = $entityManager->getMetadataFactory()->getAllMetadata();
+        foreach ($metas as $meta) {
+            $classes[] = $meta->getName();
+        }
+        return $classes;
+    }
+
+    /**
      * Get the query form.
      * @return \Database\Form\Query
      */
