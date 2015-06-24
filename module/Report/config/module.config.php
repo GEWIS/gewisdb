@@ -18,7 +18,7 @@ return array(
                 'proxy_namespace' => 'DoctrineORMModule\Proxy',
                 'filters' => array(),
                 'entity_namespaces' => array(
-                    'db' => 'Database\Model'
+                    'db' => 'Report\Model'
                 )
             )
         ),
