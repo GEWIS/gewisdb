@@ -1,9 +1,9 @@
 <script>
 var urlTemplate = '<?= $this->url('member/show', array('id' => '__LIDNR__')) ?>';
 $(document).ready(function () {
-    $('#member-search').keyup(function (e) {
-        term = $(e.target).val();
-        if (term.length >= 1) {
+    var searchMember = function (term) {
+        // When no term is set, all the member should be shown
+        if (term.length >= 0) {
             $.ajax({
                 dataType: 'json',
                 url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + term,
@@ -27,7 +27,13 @@ $(document).ready(function () {
         } else {
             $('#members-result tbody').html('');
         }
+    };
+
+    $('#member-search').keyup(function (e) {
+        term = $(e.target).val();
+        searchMember(term)
     });
+    searchMember('');
 });
 </script>
 <form role="form">

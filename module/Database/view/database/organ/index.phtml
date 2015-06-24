@@ -8,20 +8,14 @@ var urlTemplate = '<?= $this->url('organ/view', array(
 )) ?>';
 var last = 0;
 $(document).ready(function () {
-    $('#organ-search').keyup(function (e) {
-        var curnum = ++last;
-        term = $(e.target).val();
-        if (term.length >= 1) {
+    var searchOrgan = function(term) {
+        if (term.length >= 0) {
             $.ajax({
                 dataType: 'json',
                 url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + term,
                 context: document.body
             }).done(function (data) {
-                if (curnum != last) {
-                    // discard the result
-                    return;
-                }
-                var table = '';
+                    var table = '';
                 $.each(data.json, function (idx, organ) {
                     // create URL
                     var url = urlTemplate.replace('__type__', organ.meeting_type);
@@ -34,9 +28,9 @@ $(document).ready(function () {
                     link += 'style="display:block;height:100%;width:100%;">';
 
                     var decision = organ.meeting_type + ' '
-                                 + organ.meeting_number + '.'
-                                 + organ.decision_point + '.'
-                                 + organ.decision_number;
+                        + organ.meeting_number + '.'
+                        + organ.decision_point + '.'
+                        + organ.decision_number;
                     table += '<tr>';
                     table += '<td>' + link + organ.abbr + '</a></td>';
                     table += '<td>' + link + organ.name + '</a></td>';
@@ -48,7 +42,14 @@ $(document).ready(function () {
         } else {
             $('#organ-result tbody').html('');
         }
+    };
+
+    $('#organ-search').keyup(function (e) {
+        var curnum = ++last;
+        term = $(e.target).val();
+        searchOrgan(term);
     });
+    searchOrgan('');
 });
 </script>
 <form role="form">
