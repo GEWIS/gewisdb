@@ -45,6 +45,8 @@ class Query extends AbstractService
         $mapper = $this->getSavedQueryMapper();
 
         $mapper->persist($data);
+
+        return $data;
     }
 
     /**

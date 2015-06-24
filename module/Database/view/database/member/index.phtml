@@ -1,7 +1,7 @@
 <script>
 var urlTemplate = '<?= $this->url('member/show', array('id' => '__LIDNR__')) ?>';
 $(document).ready(function () {
-    var maxResults = 1;
+    var maxResults = 32;
     var footer = $("#members-result tfoot");
     var searchMember = function (term) {
         // When no term is set, all the member should be shown

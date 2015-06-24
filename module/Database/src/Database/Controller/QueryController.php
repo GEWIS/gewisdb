@@ -18,17 +18,22 @@ class QueryController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
             if (isset($post['submit_save'])) {
-                $service->save($post);
+                $query = $service->save($post);
             }
             $result = $service->execute($post);
 
-            if (null !== $result) {
+
+            if (!is_null($result) && count($result) > 0) {
                 return new ViewModel(array(
                     'form' => $service->getQueryForm(),
                     'exportform' => $service->getQueryExportForm(),
                     'result' => $result,
                     'saved' => $service->getSavedQueries(),
                     'entities' => $service->getEntities()
+                ));
+            } else if (isset($query)) {
+                return $this->redirect()->toRoute('query/show', array(
+                    'query' => $query->getId()
                 ));
             }
         }
