@@ -26,7 +26,6 @@ class Checker extends AbstractService
         $message = '';
         foreach ($meetings as $meeting) {
             $errors = array_merge(
-                $this->checkBudgetOrganExists($meeting),
                 $this->checkMembersHaveRoleButNotInOrgan($meeting),
                 $this->checkMembersInNotExistingOrgans($meeting),
                 $this->checkMembersExpiredButStillInOrgan($meeting),
@@ -150,32 +149,6 @@ class Checker extends AbstractService
                 }
             }
         }
-        return $errors;
-    }
-
-    /**
-     * Checks all budgets are for a valid organ (an organ that still exists)
-     *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
-     * @return array Array of errors that may have occured.
-     */
-    public function checkBudgetOrganExists(\Database\Model\Meeting $meeting)
-    {
-        $errors = [];
-        $organService = $this->getServiceManager()->get('checker_service_organ');
-        $budgetService = $this->getServiceManager()->get('checker_service_budget');
-
-        $organs = $organService->getAllOrgans($meeting);
-        $budgets = $budgetService->getAllBudgets($meeting);
-
-        foreach ($budgets as $budget) {
-            $foundation = $budget->getFoundation();
-
-            if (!is_null($foundation) && !in_array($foundation->getName(), $organs)) {
-                $errors[] = new Error\BudgetOrganDoesNotExist($budget);
-            }
-        }
-
         return $errors;
     }
 
