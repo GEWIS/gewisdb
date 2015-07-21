@@ -12,10 +12,11 @@
  */
 
 return array(
-    /**
-     * Email adres where the results of the checker is send to
-     */
     'checker' => [
-        'report_mail' => 'mail@example.org',
+        //Email adres where the results of the checker is send to
+        'report_mail' => 'secr@gewis.nl',
+
+        //Date after which the checker is going to check. Mainly needed because old db is too fucked up
+        'start_date' => '2008-01-01' // Y-m-d
     ]
 );
