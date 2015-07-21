@@ -21,7 +21,8 @@ class Checker extends AbstractService
     public function check()
     {
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
-        $meetings = $meetingService->getAllMeetings();
+        $config = $this->getServiceManager()->get('config');
+        $meetings = $meetingService->getAllMeetings(new \DateTime($config['checker']['start_date']));
 
         $message = '';
         foreach ($meetings as $meeting) {
@@ -44,6 +45,7 @@ class Checker extends AbstractService
      *
      * @param \Database\Model\Meeting $meeting Meeting for which this errors hold
      * @param array $errors
+     * @return string
      */
     private function handleErrors(\Database\Model\Meeting $meeting, array $errors)
     {
@@ -67,7 +69,7 @@ class Checker extends AbstractService
      */
     private function sendMail($body)
     {
-        $config = $meetingService = $this->getServiceManager()->get('config');
+        $config = $this->getServiceManager()->get('config');
         $message = new Message();
         $message->addTo($config['checker']['report_mail'])
             ->setSubject('Database Checker Report')
