@@ -431,13 +431,13 @@ class Meeting extends AbstractService
         $refObj = new \ReflectionObject($approveChain);
         $refProp = $refObj->getProperty('validators');
         $refProp->setAccessible(true);
-        $refProp->setValue($approveChain, array());
+        $refProp->setValue($approveChain, new \Zend\Stdlib\PriorityQueue());
 
         $changesChain = $form->getInputFilter()->get('changes')->getValidatorChain();
         $refObj = new \ReflectionObject($changesChain);
         $refProp = $refObj->getProperty('validators');
         $refProp->setAccessible(true);
-        $refProp->setValue($changesChain, array());
+        $refProp->setValue($changesChain, new \Zend\Stdlib\PriorityQueue());
 
 
         $form->setData($data);
