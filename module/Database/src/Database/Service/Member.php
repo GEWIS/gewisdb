@@ -80,7 +80,17 @@ class Member extends AbstractService
      */
     public function getMember($id)
     {
-        return $this->getMemberMapper()->find($id);
+        try {
+            return array(
+                'member' => $this->getMemberMapper()->find($id),
+                'simple' => false
+            );
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return array(
+                'member' => $this->getMemberMapper()->findSimple($id),
+                'simple' => true
+            );
+        }
     }
 
     /**
