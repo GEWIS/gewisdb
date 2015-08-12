@@ -63,11 +63,37 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'gender',
             'type' => 'radio',
             'options' => array(
-                'label' => $translator->translate('Geslacht'),
                 'value_options' => array(
                     'm' => $translator->translate('Man'),
                     'f' => $translator->translate('Vrouw'),
                     'o' => $translator->translate('Anders'),
+                ),
+                'label' => $translator->translate('Geslacht'),
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'tuenumber',
+            'type' => 'number',
+            'options' => array(
+                'label' => $translator->translate('TU/e nummer')
+            )
+        ));
+
+        $this->add(array(
+            'name' => 'study',
+            'type' => 'select',
+            'options' => array(
+                'label' => $translator->translate('Studie'),
+                'value_options' => array(
+                    'Web Science',
+                    'Software Science',
+                    'Technische Wiskunde',
+                    'Industrial Applied Mathematics',
+                    'Computer Science and Engineering',
+                    'Business Information Systems',
+                    'Embedded Systems',
+                    'Science Education and Communication'
                 )
             )
         ));
