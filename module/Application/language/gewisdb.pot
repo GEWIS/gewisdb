@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v0.0.1-dev-55-gf9a63b0-dirty\n"
+"Project-Id-Version: GEWISdb v0.0.1-dev-104-g53a3ef8-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 22:36+0200\n"
+"POT-Creation-Date: 2015-08-12 15:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: module/Database/view/database/member/subscribe.phtml:19
+#: module/Database/view/database/member/subscribe.phtml:23
 msgid "Inschrijving Studievereniging <span class=\"gewis-red\">GEWIS</span>"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:21
+#: module/Database/view/database/member/subscribe.phtml:25
 msgid ""
 "Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van "
 "GEWIS.\n"
 "Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:147
+#: module/Database/view/database/member/subscribe.phtml:182
 msgid "Thuisadres (adres van je ouders)"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:252
+#: module/Database/view/database/member/subscribe.phtml:287
 msgid "Studieadres (adres kamer)"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:355
+#: module/Database/view/database/member/subscribe.phtml:390
 msgid "Mailinglijsten"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:357
+#: module/Database/view/database/member/subscribe.phtml:392
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
 "mededelingen\n"
@@ -50,15 +50,15 @@ msgid ""
 "inschrijvingen kunnen op een later tijdstip veranderd worden."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:382
+#: module/Database/view/database/member/subscribe.phtml:417
 msgid "Akkoordverklaring"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:384
+#: module/Database/view/database/member/subscribe.phtml:419
 msgid "Statuten en HR"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:395
+#: module/Database/view/database/member/subscribe.phtml:430
 msgid ""
 "Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
 "en\n"
@@ -67,9 +67,12 @@ msgid ""
 "HR gelezen."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:419
-#, php-format
-msgid "Lid met lidnummer %1$s is toegevoegd."
+#: module/Database/view/database/member/subscribe.phtml:454
+msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:455
+msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
 msgstr ""
 
 #: module/Application/view/error/404.phtml:1
@@ -186,34 +189,42 @@ msgstr ""
 msgid "Voornaam"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:66
-msgid "Geslacht"
-msgstr ""
-
-#: module/Database/src/Database/Form/Member.php:68
+#: module/Database/src/Database/Form/Member.php:67
 msgid "Man"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:69
+#: module/Database/src/Database/Form/Member.php:68
 msgid "Vrouw"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:70
+#: module/Database/src/Database/Form/Member.php:69
 msgid "Anders"
 msgstr ""
 
+#: module/Database/src/Database/Form/Member.php:71
+msgid "Geslacht"
+msgstr ""
+
 #: module/Database/src/Database/Form/Member.php:79
-msgid "Email-adres"
+msgid "TU/e nummer"
 msgstr ""
 
 #: module/Database/src/Database/Form/Member.php:87
+msgid "Studie"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:105
+msgid "Email-adres"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:113
 msgid "Geboortedatum"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:111
+#: module/Database/src/Database/Form/Member.php:137
 msgid "Schrijf in"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:214
+#: module/Database/src/Database/Form/Member.php:240
 msgid "Je moet de voorwaarden accepteren!"
 msgstr ""
