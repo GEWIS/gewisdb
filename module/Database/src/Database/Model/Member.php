@@ -89,6 +89,20 @@ class Member
     protected $generation;
 
     /**
+     * TU/e registration number.
+     *
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    protected $tuenumber;
+
+    /**
+     * Study of the member.
+     *
+     * @ORM\Column(type="string",nullable=true)
+     */
+    protected $study;
+
+    /**
      * Member type.
      *
      * This can be one of the following, as defined by the GEWIS statuten:
@@ -376,6 +390,46 @@ class Member
     public function setGeneration($generation)
     {
         $this->generation = $generation;
+    }
+
+    /**
+     * Get the TU/e registration number.
+     *
+     * @return int
+     */
+    public function getTuenumber()
+    {
+        return $this->tuenumber;
+    }
+
+    /**
+     * Set the TU/e registration number.
+     *
+     * @param int $tuenumber
+     */
+    public function setTuenumber($tuenumber)
+    {
+        $this->tuenumber = $tuenumber;
+    }
+
+    /**
+     * Get the study.
+     *
+     * @return string
+     */
+    public function getStudy()
+    {
+        return $this->study;
+    }
+
+    /**
+     * Set the study.
+     *
+     * @param string $study
+     */
+    public function setStudy($study)
+    {
+        $this->study = $study;
     }
 
     /**
