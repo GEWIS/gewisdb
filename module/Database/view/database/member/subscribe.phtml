@@ -283,7 +283,9 @@ $element->setLabelAttributes(array(
 </div>
 </fieldset>
 
-<fieldset>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".study-address" aria-expanded="true" aria-controls="study-address">
+<?= $this->translate('Ik heb geen kamer') ?></button>
+<fieldset class="study-address in">
 <h3><?= $this->translate('Studieadres (adres kamer)') ?></h3>
 <?php
 $fs = $form->get('studentAddress');
