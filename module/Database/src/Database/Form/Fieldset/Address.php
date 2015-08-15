@@ -25,10 +25,10 @@ class Address extends Fieldset
             'name' => 'country',
             'type' => 'text',
             'options' => array(
-                'label' => $translator->translate('Land'),
-                'value' => 'netherlands'
-            )
+                'label' => $translator->translate('Land')
+            ),
         ));
+        $this->get('country')->setValue('netherlands');
 
         $this->add(array(
             'name' => 'street',
