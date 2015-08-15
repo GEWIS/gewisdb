@@ -98,7 +98,17 @@ class Member extends AbstractService
      */
     public function getMember($id)
     {
-        return $this->getMemberMapper()->find($id);
+        try {
+            return array(
+                'member' => $this->getMemberMapper()->find($id),
+                'simple' => false
+            );
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return array(
+                'member' => $this->getMemberMapper()->findSimple($id),
+                'simple' => true
+            );
+        }
     }
 
     /**
@@ -307,9 +317,9 @@ class Member extends AbstractService
     {
         $form = $this->getServiceManager()->get('database_form_memberedit');
         $member = $this->getMember($lidnr);
-        $form->bind($member);
+        $form->bind($member['member']);
         return array(
-            'member' => $member,
+            'member' => $member['member'],
             'form' => $form
         );
     }
@@ -325,9 +335,9 @@ class Member extends AbstractService
     {
         $form = $this->getServiceManager()->get('database_form_membertype');
         $member = $this->getMember($lidnr);
-        $form->bind($member);
+        $form->bind($member['member']);
         return array(
-            'member' => $member,
+            'member' => $member['member'],
             'form' => $form
         );
     }
@@ -342,6 +352,7 @@ class Member extends AbstractService
     public function getListForm($lidnr)
     {
         $member = $this->getMember($lidnr);
+        $member = $member['member'];
         $lists = $this->getServiceManager()->get('database_service_mailinglist')->getAllLists();
 
         if (null === $this->listForm) {
