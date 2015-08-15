@@ -426,11 +426,11 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 
 <a href="https://gewis.nl/vereniging/statuten/index.php"><?= $this->translate('Statuten en HR') ?></a>
 
-<div class="form-group">
 <?php
 $element = $form->get('agreed');
 $element->setAttribute('placeholder', $element->getLabel());
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <div class="col-sm-offset-1 col-sm-8">
         <div class="checkbox">
             <label>
