@@ -137,6 +137,12 @@ class Member extends Form implements InputFilterProviderInterface
                 'value' => $translator->translate('Schrijf in')
             )
         ));
+
+        $this->setValidationGroup(array(
+            'lastName', 'middleName', 'initials', 'firstName',
+            'gender', 'tuenumber', 'study', 'email', 'birth',
+            'homeAddress', 'studentAddress' => array(), 'agreed'
+        ));
     }
 
     /**
@@ -241,6 +247,12 @@ class Member extends Form implements InputFilterProviderInterface
                             )
                         )
                     )
+                )
+            ),
+            'tuenumber' => array(
+                'required' => false,
+                'validators' => array(
+                    array('name' => 'digits')
                 )
             )
         );

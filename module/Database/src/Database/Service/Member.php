@@ -33,6 +33,20 @@ class Member extends AbstractService
 
         $form->bind(new MemberModel());
 
+        if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
+            $form->setValidationGroup(array(
+                'lastName', 'middleName', 'initials', 'firstName',
+                'gender', 'tuenumber', 'study', 'email', 'birth',
+                'homeAddress', 'studentAddress', 'agreed'
+            ));
+        } else {
+            $form->setValidationGroup(array(
+                'lastName', 'middleName', 'initials', 'firstName',
+                'gender', 'tuenumber', 'study', 'email', 'birth',
+                'homeAddress', 'agreed'
+            ));
+        }
+
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -41,6 +55,10 @@ class Member extends AbstractService
 
         // set some extra data
         $member = $form->getData();
+
+        if (!is_numeric($member->getTuenumber())) {
+            $member->setTuenumber(0);
+        }
 
         // generation is the current year
         $member->setGeneration((int) date('Y'));
