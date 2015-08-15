@@ -234,7 +234,7 @@ class Member extends Form implements InputFilterProviderInterface
                     array(
                         'name' => 'string_length',
                         'options' => array(
-                            'min' => 2,
+                            'min' => 1,
                             'max' => 32
                         )
                     )

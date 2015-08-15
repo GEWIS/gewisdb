@@ -111,7 +111,7 @@ class Address extends Fieldset
                     array(
                         'name' => 'string_length',
                         'options' => array(
-                            'min' => 2,
+                            'min' => 1,
                             'max' => 32
                         )
                     )
@@ -146,13 +146,12 @@ class Address extends Fieldset
                     array(
                         'name' => 'string_length',
                         'options' => array(
-                            'min' => 2,
+                            'min' => 1,
                             'max' => 32
                         )
                     )
                 )
             )
-            // TODO: phone number validation
         );
     }
 }
