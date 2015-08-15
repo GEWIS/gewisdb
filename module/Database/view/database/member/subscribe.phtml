@@ -31,7 +31,12 @@ Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro.') ?>
 
 <div class="row">
 
-<div class="form-group">
+<?php if (count($form->getMessages()) > 0): ?>
+<div class="alert alert-danger" role="alert">
+<?= $this->translate('Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!') ?>
+</div>
+<?php endif ?>
+
 <?php
 $element = $form->get('lastName');
 $element->setAttribute('class', 'form-control');
@@ -40,6 +45,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -47,7 +53,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('middleName');
 $element->setAttribute('class', 'form-control');
@@ -56,6 +61,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -63,7 +69,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('initials');
 $element->setAttribute('class', 'form-control');
@@ -72,6 +77,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -79,7 +85,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('firstName');
 $element->setAttribute('class', 'form-control');
@@ -88,6 +93,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -95,13 +101,13 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('gender');
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?php foreach ($element->getValueOptions() as $option => $text): ?>
@@ -116,7 +122,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('tuenumber');
 $element->setAttribute('class', 'form-control');
@@ -125,6 +130,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -132,7 +138,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('study');
 $element->setAttribute('class', 'form-control');
@@ -140,6 +145,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formSelect($element) ?>
@@ -147,7 +153,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('email');
 $element->setAttribute('class', 'form-control');
@@ -156,6 +161,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -163,7 +169,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $form->get('birth');
 $element->setAttribute('class', 'form-control');
@@ -172,6 +177,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -186,7 +192,6 @@ $fs = $form->get('homeAddress');
 ?>
 <?= $this->formHidden($fs->get('type')) ?>
 
-<div class="form-group">
 <?php
 $element = $fs->get('country');
 $element->setAttribute('class', 'form-control');
@@ -195,6 +200,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -202,7 +208,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('street');
 $element->setAttribute('class', 'form-control');
@@ -211,6 +216,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -218,7 +224,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('number');
 $element->setAttribute('class', 'form-control');
@@ -227,6 +232,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -234,7 +240,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('postalCode');
 $element->setAttribute('class', 'form-control');
@@ -243,6 +248,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -250,7 +256,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('city');
 $element->setAttribute('class', 'form-control');
@@ -259,6 +264,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -266,7 +272,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('phone');
 $element->setAttribute('class', 'form-control');
@@ -275,6 +280,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -292,7 +298,6 @@ $fs = $form->get('studentAddress');
 ?>
 <?= $this->formHidden($fs->get('type')) ?>
 
-<div class="form-group">
 <?php
 $element = $fs->get('country');
 $element->setAttribute('class', 'form-control');
@@ -301,6 +306,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -308,7 +314,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('street');
 $element->setAttribute('class', 'form-control');
@@ -317,6 +322,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -324,7 +330,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('number');
 $element->setAttribute('class', 'form-control');
@@ -333,6 +338,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -340,7 +346,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('postalCode');
 $element->setAttribute('class', 'form-control');
@@ -349,6 +354,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -356,7 +362,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('city');
 $element->setAttribute('class', 'form-control');
@@ -365,6 +370,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
@@ -372,7 +378,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<div class="form-group">
 <?php
 $element = $fs->get('phone');
 $element->setAttribute('class', 'form-control');
@@ -381,6 +386,7 @@ $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
 ?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
