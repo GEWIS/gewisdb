@@ -86,15 +86,26 @@ class Member extends Form implements InputFilterProviderInterface
             'options' => array(
                 'label' => $translator->translate('Studie'),
                 'value_options' => array(
-                    'Web Science',
-                    'Software Science',
-                    'Technische Wiskunde',
-                    'Industrial Applied Mathematics',
-                    'Computer Science and Engineering',
-                    'Business Information Systems',
-                    'Embedded Systems',
-                    'Science Education and Communication'
-                )
+                    'bachelor' => array(
+                        'label' => 'Bachelor',
+                        'options' => array(
+                            'Bachelor Web Science' => 'Web Science',
+                            'Bachelor Software Science' => 'Software Science',
+                            'Bachelor Industrial Applied Mathematics' => 'Industrial Applied Mathematics'
+                        )
+                    ),
+                    'master' => array(
+                        'label' => 'Master',
+                        'options' => array(
+                            'Master Industrial Applied Mathematics' => 'Industrial Applied Mathematics',
+                            'Master Computer Science and Engineering' => 'Computer Science and Engineering',
+                            'Master Business Information Systems' => 'Business Information Systems',
+                            'Master Embedded Systems' => 'Embedded Systems',
+                            'Master Science Education and Communication' => 'Science Education and Communication'
+                        )
+                    )
+                ),
+                'empty_option' => $translator->translate('Selecteer een studie')
             )
         ));
 
@@ -136,12 +147,6 @@ class Member extends Form implements InputFilterProviderInterface
             'attributes' => array(
                 'value' => $translator->translate('Schrijf in')
             )
-        ));
-
-        $this->setValidationGroup(array(
-            'lastName', 'middleName', 'initials', 'firstName',
-            'gender', 'tuenumber', 'study', 'email', 'birth',
-            'homeAddress', 'studentAddress' => array(), 'agreed'
         ));
     }
 
