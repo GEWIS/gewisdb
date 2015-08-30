@@ -48,6 +48,12 @@ class Member
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
+        // also allow searching for membership numbers
+        if (is_numeric($query)) {
+            $qb->orWhere("m.lidnr = :nr");
+            $qb->setParameter(':nr', $query);
+        }
+
         return $qb->getQuery()->getResult();
     }
 
