@@ -168,9 +168,15 @@ class Member extends AbstractService
 
         $member = $form->getData();
 
-        // update changed on date
+        // update changed on date, always changes the previous first of july
         $date = new \DateTime();
         $date->setTime(0, 0);
+        if ($date->format('m') >= 7) {
+            $year = $date->format('Y');
+        } else {
+            $year = $date->format('Y') - 1;
+        }
+        $date->setDate($year, 7, 1);
         $member->setChangedOn($date);
 
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
