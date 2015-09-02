@@ -50,4 +50,6 @@ $decisionNum = $meeting->getType() . ' ' . $meeting->getNumber() . '.' . $decisi
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
     <?= $subdecision->getContent() ?>
 <?php endforeach; ?>
+<br />
+    <a href="<?= $this->url('meeting/view', array('type' => $meeting->getType(), 'number' => $meeting->getNumber())) ?>">Terug naar <?= $meeting->getType() ?> <?= $meeting->getNumber() ?></a>
 <?php endif; ?>

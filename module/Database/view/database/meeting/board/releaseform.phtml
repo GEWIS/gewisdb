@@ -14,9 +14,9 @@ foreach ($installs as $key => $install) {
 ?>
 <script>
 $(document).ready(function() {
-    var discharges = <?= json_encode($arrInstalls); ?>;
+    var releases = <?= json_encode($arrInstalls); ?>;
     $('.board-release-slot').change(function() {
-        var data = discharges[$('.board-discharge-slot:checked').val()];
+        var data = releases[$('.board-release-slot:checked').val()];
         $('#release-install-board-meeting-type').val(data['meeting_type']);
         $('#release-install-board-meeting-number').val(data['meeting_number']);
         $('#release-install-board-decision-point').val(data['decision_point']);

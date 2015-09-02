@@ -48,7 +48,7 @@ class Meeting
      *
      * @return array All meetings.
      */
-    public function findAll($count = true)
+    public function findAll($count = true, $asc = false)
     {
         if ($count) {
             $qb = $this->em->createQueryBuilder();
@@ -56,8 +56,12 @@ class Meeting
             $qb->select('m, COUNT(d)')
                 ->from('Database\Model\Meeting', 'm')
                 ->leftJoin('m.decisions', 'd')
-                ->groupBy('m')
-                ->orderBy('m.date', 'DESC');
+                ->groupBy('m');
+            if ($asc) {
+                $qb->orderBy('m.date', 'ASC');
+            } else {
+                $qb->orderBy('m.date', 'DESC');
+            }
 
             return $qb->getQuery()->getResult();
         }
