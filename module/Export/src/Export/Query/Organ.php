@@ -50,9 +50,7 @@ class Organ
             $this->existsStmt = $this->getConnection()->prepare("
                 SELECT o.orgaanid FROM orgaan AS o
                 WHERE o.orgaantypeid = :type
-                    AND o.orgaanafk = :afk
-                    AND o.orgaannaam = :naam
-                    AND o.jaartal = :jaar");
+                    AND o.orgaanafk = :afk");
         }
         return $this->existsStmt;
     }
@@ -73,9 +71,7 @@ class Organ
 
         $stmt->execute(array(
             'type' => $type,
-            'afk' => $abbr,
-            'naam' => $name,
-            'jaar' => $year
+            'afk' => $abbr
         ));
 
         $res = $stmt->fetchAll();

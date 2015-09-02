@@ -140,11 +140,15 @@ class Meeting extends AbstractService
         } else if ($subdecision instanceof SubDecision\Reckoning) {
             $data['besluittypeid'] = 6;
 
-            $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
+            if (null !== $subdecision->getAuthor()) {
+                $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
+            }
         } else if ($subdecision instanceof SubDecision\Budget) {
             $data['besluittypeid'] = 5;
 
-            $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
+            if (null !== $subdecision->getAuthor()) {
+                $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
+            }
         } else if ($subdecision instanceof SubDecision\Board\Installation) {
             $data['besluittypeid'] = 7;
 
