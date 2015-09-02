@@ -8,6 +8,8 @@ use Database\Model\SubDecision;
 use Database\Model\Decision;
 use Database\Model\Meeting as MeetingModel;
 
+use Doctrine\ORM\NoResultException;
+
 class Meeting extends AbstractService
 {
 
@@ -70,7 +72,7 @@ class Meeting extends AbstractService
     public function importMeeting($meeting)
     {
         // check if the meeting already exists
-        if (null !== $this->getMeetingMapper()->find(strtolower($meeting['vergaderafk']), (int) $meeting['vergadernr'])) {
+        if (null !== $this->getMeetingMapper()->find($meeting['vergaderafk'], (int) $meeting['vergadernr'])) {
             // meeting already exists in database
             return;
         }
@@ -79,7 +81,7 @@ class Meeting extends AbstractService
 
         $newMeeting = new MeetingModel();
 
-        $newMeeting->setType(strtolower($meeting['vergaderafk']));
+        $newMeeting->setType($meeting['vergaderafk']);
         $newMeeting->setNumber((int) $meeting['vergadernr']);
         $newMeeting->setDate(new \DateTime($meeting['datum']));
 
@@ -153,7 +155,14 @@ class Meeting extends AbstractService
             if ($model instanceof SubDecision) {
                 $model->setDecision($newDecision);
                 $model->setNumber($subdecision['subbesluitnr']);
+            } elseif (strtolower($subdecision['besluittype']) != 'decharge') {
+                var_dump(get_class($model));
+                exit("Wrong class for some reason???\n");
             }
+        }
+
+        if (count($newDecision->getSubdecisions()) == 0) {
+            exit("No subdecisions. Must be something wrong.");
         }
 
         return $newDecision;
@@ -279,10 +288,10 @@ class Meeting extends AbstractService
         if (!empty($subdecision['orgaanafk'])) {
             // search for organ in current database
             // and interactively check if it is the correct one
-            $organ = $this->searchOrgan($subdecision['orgaanafk']);
-            if (!empty($organ)) {
-                $model->setFoundation($organ);
-            }
+            //$organ = $this->searchOrgan($subdecision['orgaanafk']);
+            //if (!empty($organ)) {
+                //$model->setFoundation($organ);
+            //}
         }
 
         // extract version, date, approval and changes
@@ -330,7 +339,7 @@ class Meeting extends AbstractService
      */
     protected function reckoningDecision($subdecision)
     {
-        $this->budgetDecision($subdecision, 'reckoning');
+        return $this->budgetDecision($subdecision, 'reckoning');
     }
 
     /**
@@ -461,14 +470,19 @@ class Meeting extends AbstractService
      */
     protected function searchMember($lidnr)
     {
-        if (empty($lidnr)) {
+        try {
+            return $this->findMember($lidnr);
+        } catch (NoResultException $e) {
             echo "Er kon geen lidnummer in de metadata gevonden worden\n";
             echo "Als er wel een lid vernoemd wordt, geef het lidnummer: ";
-            $lidnr = $this->getConsole()->readLine();
-        }
-        if (!empty($lidnr)) {
-            // find member and add to subdecision
-            return $this->findMember($lidnr);
+            try {
+                $lidnr = trim($this->getConsole()->readLine());
+                if (empty($lidnr))
+                    return null;
+                return $this->findMember($lidnr);
+            } catch (NoResultException $e) {
+                return null;
+            }
         }
     }
 
@@ -540,7 +554,7 @@ class Meeting extends AbstractService
      */
     protected function findMember($lidnr)
     {
-        return $this->getMemberMapper()->find($lidnr);
+        return $this->getMemberMapper()->simpleFind($lidnr);
     }
 
     /**
