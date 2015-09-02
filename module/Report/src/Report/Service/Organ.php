@@ -47,7 +47,10 @@ class Organ extends AbstractService
                         // set the ID stuff
                         $organMember->setOrgan($repOrgan);
                         $organMember->setMember($ref->getMember());
-                        $organMember->setFunction($ref->getFunction());
+                        $function = $ref->getFunction();
+                        if (null === $function)
+                            $function = 'Lid';
+                        $organMember->setFunction($function);
                         $organMember->setInstallDate($ref->getDecision()->getMeeting()->getDate());
                     }
                     $organMember->setInstallation($ref);

@@ -26,7 +26,7 @@ class Meeting extends AbstractService
         $decRepo = $em->getRepository('Report\Model\Decision');
         $subdecRepo = $em->getRepository('Report\Model\SubDecision');
 
-        foreach ($mapper->findAll() as $meeting) {
+        foreach ($mapper->findAll(true, true) as $meeting) {
             $meeting = $meeting[0];
 
             $reportMeeting = $repo->find(array(
@@ -110,7 +110,9 @@ class Meeting extends AbstractService
                         $reportSubDecision->setOrganType($subdecision->getOrganType());
                     } else if ($subdecision instanceof SubDecision\Reckoning || $subdecision instanceof SubDecision\Budget) {
                         // budget and reckoning
-                        $reportSubDecision->setAuthor($this->findMember($subdecision->getAuthor()));
+                        if (null !== $subdecision->getAuthor()) {
+                            $reportSubDecision->setAuthor($this->findMember($subdecision->getAuthor()));
+                        }
                         $reportSubDecision->setName($subdecision->getName());
                         $reportSubDecision->setVersion($subdecision->getVersion());
                         $reportSubDecision->setDate($subdecision->getDate());
@@ -157,17 +159,25 @@ class Meeting extends AbstractService
                     // Other decisions don't need special handling
 
                     // for any decision, make sure the content is filled
-                    $reportSubDecision->setContent($subdecision->getContent());
+                    $cnt = $subdecision->getContent();
+                    if (null === $cnt) {
+                        $cnt = '';
+                    }
+                    $reportSubDecision->setContent($cnt);
                     $content[] = $subdecision->getContent();
                     $em->persist($reportSubDecision);
                 }
 
+                if (empty($content)) {
+                    $content[] = '';
+                }
                 $reportDecision->setContent(implode(' ', $content));
 
                 $em->persist($reportDecision);
             }
 
             $em->persist($reportMeeting);
+            $em->flush();
         }
         $em->flush();
     }
