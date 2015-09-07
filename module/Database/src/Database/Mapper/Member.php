@@ -44,6 +44,7 @@ class Member
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
             ->setMaxResults(32)
+            ->orderBy('m.lidnr', 'DESC')
             ->setFirstResult(0);
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
