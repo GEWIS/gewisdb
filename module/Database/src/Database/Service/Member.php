@@ -295,14 +295,34 @@ class Member extends AbstractService
 
         $data = $form->getData();
 
+        $currentLists = $member->getLists();
         $member->clearLists();
-
+        $listArr = [];
+        
         foreach ($lists as $list) {
             $name = 'list-' . $list->getName();
             if (isset($data[$name]) && $data[$name]) {
+                if(!$currentLists->contains($list)) {
+                    // Add the member to the mailinglist
+                    $command = "/usr/sbin/add_members";
+                    $arguments = "-r- -n -N " . $list;
+                    $this->runProcess($command, $arguments, $member->getEmail());
+                }
+                $listArr[] = $list->getName();
                 $member->addList($list);
             }
         }
+        
+        $currentLists->map(
+            function($entry) use ($listArr){
+                if(!in_array($entry->getName(), $listArr)){
+                    // Delete member from the mailinglist
+                    $command = "/usr/sbin/remove_members";
+                    $arguments = "-f- -n -N " . $list;
+                    $this->runProcess($command, $arguments, $member->getEmail());
+                }
+            }
+        );
 
         // simply persist through member
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
@@ -436,5 +456,46 @@ class Member extends AbstractService
     public function getMemberMapper()
     {
         return $this->getServiceManager()->get('database_mapper_member');
+    }
+
+    /**
+     * Execute a command and send some info over Standard In
+     *
+     * @return array containing the stdOut response and the responseCode
+     */
+    private function runProcess($process, $stdIn)
+    {
+
+        if(!is_executable($process))
+            return false;
+
+        $descriptorspec = array(
+                0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+                1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+                );
+
+        $process = proc_open($process, $descriptorspec, $pipes);
+
+        if (is_resource($process)) {
+            // $pipes now looks like this:
+            // 0 => writeable handle connected to child stdin
+            // 1 => readable handle connected to child stdout
+            // Any error output will be appended to /tmp/error-output.txt
+
+            fwrite($pipes[0], $stdIn."\n");
+            fclose($pipes[0]);
+
+            $stdOut = stream_get_contents($pipes[1]);
+            fclose($pipes[1]);
+
+            // It is important that you close any pipes before calling
+            // proc_close in order to avoid a deadlock
+            $return_value = proc_close($process);
+
+            return [
+                "stdOut" => $stdOut,
+                "returnCode" => $return_value,
+            ];
+        }
     }
 }
