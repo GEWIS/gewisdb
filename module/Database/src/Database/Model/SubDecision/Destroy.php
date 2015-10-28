@@ -69,9 +69,13 @@ class Destroy extends SubDecision
     {
         $target = $this->getTarget();
         $meet = $this->getTarget()->getMeeting();
+        $content = array();
+        foreach ($target->getSubdecisions() as $sub) {
+            $content[] = $sub->getContent();
+        }
         $text = "Besluit " . $meet->getType() . " " . $meet->getNumber()
             . "." . $target->getPoint() . "." . $target->getNumber()
-            . " wordt vernietigd.";
+            . " wordt nietig verklaard. Het besluit luidde: \"" . implode(' ', $content) . '"';
         return $text;
     }
 }
