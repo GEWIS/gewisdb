@@ -52,7 +52,8 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 'label' => 'Geslacht',
                 'value_options' => array(
                     'm' => 'Man',
-                    'f' => 'Vrouw'
+                    'f' => 'Vrouw',
+                    'o' => 'Anders'
                 )
             )
         ));
