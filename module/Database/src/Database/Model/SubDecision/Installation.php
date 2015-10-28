@@ -88,7 +88,7 @@ class Installation extends FoundationReference
     public function getContent()
     {
         $member = $this->getMember()->getFullName();
-        $text = $member . ' wordt gëinstalleerd als ' . $this->getFunction();
+        $text = $member . ' wordt geïnstalleerd als ' . $this->getFunction();
         $text .= ' van ' . $this->getFoundation()->getAbbr() . '.';
         return $text;
     }
