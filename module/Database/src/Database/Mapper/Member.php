@@ -75,7 +75,7 @@ class Member
             ->innerJoin('a.member', 'm')
             ->where('m.lidnr = :lidnr')
             ->andWhere('a.type = :type')
-            ->orderBy(m.lidnr, 'DESC');
+            ->orderBy('m.lidnr', 'DESC');
 
         $qb->setParameter(':lidnr', $lidnr);
         $qb->setParameter(':type', $type);
@@ -178,7 +178,7 @@ class Member
             ->from('Database\Model\Member', 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.lists', 'l')
-            ->orderBy(m.lidnr, 'DESC');
+            ->orderBy('m.lidnr', 'DESC');
 
 
         $qb->setParameter(':lidnr', $lidnr);
