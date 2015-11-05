@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.5\n"
 
 #: module/Database/view/database/member/subscribe.phtml:23
 msgid "Inschrijving Studievereniging <span class=\"gewis-red\">GEWIS</span>"
@@ -216,7 +216,7 @@ msgstr "Female"
 
 #: module/Database/src/Database/Form/Member.php:69
 msgid "Anders"
-msgstr "Other"
+msgstr "Not specified"
 
 #: module/Database/src/Database/Form/Member.php:71
 msgid "Geslacht"
