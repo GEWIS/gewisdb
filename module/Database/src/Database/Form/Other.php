@@ -42,8 +42,7 @@ class Other extends AbstractDecision
                 array(
                     'name' => 'string_length',
                     'options' => array(
-                        'min' => 3,
-                        'max' => 255
+                        'min' => 3
                     )
                 )
             )
