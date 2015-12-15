@@ -34,8 +34,24 @@ class Organ extends AbstractService
             $repOrgan->setType($foundation->getOrganType());
             $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
 
+            /**
+             * Also find all related subdecisions.
+             *
+             * Types of subdecisions that can be related to an organ:
+             * - foundation
+             * - abrogation
+             * - installation
+             * - discharge
+             */
+            $related = [];
+
+            $repOrgan->addSubdecision($foundation);
+
             // get the abrogation date and find organ members
             foreach ($foundation->getReferences() as $ref) {
+                // first add as related subdecision
+                $repOrgan->addSubdecision($ref);
+
                 if ($ref instanceof Abrogation) {
                     $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
                 }
@@ -57,6 +73,9 @@ class Organ extends AbstractService
                     $discharge = $ref->getDischarge();
                     if (null !== $discharge) {
                         $organMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
+
+                        // also add discharge as related
+                        $repOrgan->addSubdecision($discharge);
                     }
 
                     $em->persist($organMember);

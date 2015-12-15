@@ -106,6 +106,7 @@ class Organ
     public function __construct()
     {
         $this->members = new ArrayCollection();
+        $this->subdecisions = new ArrayCollection();
     }
 
     /**
@@ -256,5 +257,29 @@ class Organ
     public function getMembers()
     {
         return $this->members;
+    }
+
+    /**
+     * Add multiple subdecisions.
+     *
+     * @param array $subdecisions
+     */
+    public function addSubdecisions($subdecisions)
+    {
+        foreach ($subdecisions as $subdecision) {
+            $this->addSubdecision($subdecision);
+        }
+    }
+
+    /**
+     * Add a subdecision.
+     *
+     * @param SubDecision $subdecision
+     */
+    public function addSubdecision(SubDecision $subdecision)
+    {
+        if (!$this->subdecisions->contains($subdecision)) {
+            $this->subdecisions[] = $subdecision;
+        }
     }
 }
