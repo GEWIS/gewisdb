@@ -85,6 +85,22 @@ class Organ
     protected $members;
 
     /**
+     * Reference to subdecisions.
+     *
+     * @ORM\ManyToMany(targetEntity="SubDecision")
+     * @ORM\JoinTable(name="organs_subdecisions",
+     *      joinColumns={@ORM\JoinColumn(name="organ_id", referencedColumnName="id")},
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type"),
+     *          @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number"),
+     *          @ORM\JoinColumn(name="decision_point", referencedColumnName="decision_point"),
+     *          @ORM\JoinColumn(name="decision_number", referencedColumnName="decision_number"),
+     *          @ORM\JoinColumn(name="subdecision_number", referencedColumnName="number")
+     *      })
+     */
+    protected $subdecisions;
+
+    /**
      * Constructor.
      */
     public function __construct()
