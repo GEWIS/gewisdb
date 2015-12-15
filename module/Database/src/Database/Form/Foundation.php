@@ -76,11 +76,12 @@ class Foundation extends AbstractDecision
                         'name' => 'string_length',
                         'options' => array(
                             'min' => 2,
-                            'max' => 32
+                            'max' => 128
                         )
                     )
                 )
             ),
+
             'abbr' => array(
                 'required' => true,
                 'validators' => array(
@@ -93,6 +94,7 @@ class Foundation extends AbstractDecision
                     )
                 )
             ),
+
             'members' => array(
                 'continue_if_empty' => true,
                 'validators' => [
