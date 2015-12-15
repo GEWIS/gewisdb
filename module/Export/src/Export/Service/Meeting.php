@@ -70,7 +70,7 @@ class Meeting extends AbstractService
         foreach ($decision->getSubdecisions() as $subdecision) {
             $data['inhoud'][] = $subdecision->getContent();
         }
-        $data['inhoud'] = implode($data['inhoud']);
+        $data['inhoud'] = implode(' ', $data['inhoud']);
         if ($this->getDecisionQuery()->checkDecisionExists($type, $meeting->getNumber(), $decision->getPoint(), $decision->getNumber())) {
             $this->getDecisionQuery()->updateDecision($data);
         } else {
