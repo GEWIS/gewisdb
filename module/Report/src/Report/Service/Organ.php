@@ -21,7 +21,13 @@ class Organ extends AbstractService
         $foundationRepo = $em->getRepository('Report\Model\SubDecision\Foundation');
         $repo = $em->getRepository('Report\Model\Organ');
 
-        $foundations = $foundationRepo->findAll();
+        $foundations = $foundationRepo->findBy([], [
+            'meeting_type' => 'DESC',
+            'meeting_number' => 'ASC',
+            'decision_point' => 'ASC',
+            'decision_number' => 'ASC'
+        ]);
+
         foreach ($foundations as $foundation) {
             // see if there already is an organ
             $repOrgan = $foundation->getOrgan();
