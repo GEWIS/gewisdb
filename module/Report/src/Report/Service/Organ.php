@@ -25,7 +25,8 @@ class Organ extends AbstractService
             'meeting_type' => 'DESC',
             'meeting_number' => 'ASC',
             'decision_point' => 'ASC',
-            'decision_number' => 'ASC'
+            'decision_number' => 'ASC',
+            'number' => 'ASC'
         ]);
 
         foreach ($foundations as $foundation) {
