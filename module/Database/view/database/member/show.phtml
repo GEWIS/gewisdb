@@ -90,6 +90,10 @@ case Member::TYPE_HONORARY:
             <th>Verloopdatum lidmaatschap</th>
             <td><?= $member->getExpiration()->format('l j F Y') ?></td>
         </tr>
+        <tr>
+            <th>Wil supremum ontvangen</th>
+            <td><?= $member->getSupremum() ? 'Ja' : 'Nee' ?></td>
+        </tr>
     </table>
     <a href="<?= $this->url('member/show/edit', array(
     'id' => $member->getLidnr()
