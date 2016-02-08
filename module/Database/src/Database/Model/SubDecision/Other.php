@@ -17,7 +17,7 @@ class Other extends SubDecision
     /**
      * Textual content for the decision.
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected $content;
 
