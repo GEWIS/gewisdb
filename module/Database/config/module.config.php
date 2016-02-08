@@ -255,6 +255,15 @@ return array(
                                     ),
                                 )
                             ),
+                            'supremum' => array(
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/supremum',
+                                    'defaults' => [
+                                        'action' => 'toggleSupremum'
+                                    ]
+                                ]
+                            )
                         )
                     ),
                     'default' => array(

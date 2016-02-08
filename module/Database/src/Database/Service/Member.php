@@ -112,6 +112,21 @@ class Member extends AbstractService
     }
 
     /**
+     * Toggle if a member receives the supremum.
+     *
+     * @param int $id
+     */
+    public function toggleSupremum($id)
+    {
+        $member = $this->getMember($id);
+        $member = $member['member'];
+
+        $member->setSupremum(!$member->getSupremum());
+
+        $this->getMemberMapper()->persist($member);
+    }
+
+    /**
      * Search for a member.
      *
      * @param string $query
