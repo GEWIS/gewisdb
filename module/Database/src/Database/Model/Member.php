@@ -145,6 +145,13 @@ class Member
     protected $paid = 0;
 
     /**
+     * If the member receives a 'supremum'
+     *
+     * @ORM\Column(type="boolean",options={"default":true})
+     */
+    protected $supremum;
+
+    /**
      * Addresses of this member.
      *
      * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist"})
@@ -544,6 +551,26 @@ class Member
     public function setPaid($paid)
     {
         $this->paid = $paid;
+    }
+
+    /**
+     * Get if the member wants a supremum.
+     *
+     * @return boolean
+     */
+    public function getSupremum()
+    {
+        return $this->supremum;
+    }
+
+    /**
+     * Set if the member wants a supremum.
+     *
+     * @param boolean $supremum
+     */
+    public function setSupremum($supremum)
+    {
+        $this->supremum = $supremum;
     }
 
     /**
