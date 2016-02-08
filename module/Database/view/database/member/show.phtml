@@ -92,7 +92,7 @@ case Member::TYPE_HONORARY:
         </tr>
         <tr>
             <th>Wil supremum ontvangen</th>
-            <td><?= $member->getSupremum() ? 'Ja' : 'Nee' ?></td>
+            <td><?= $member->getSupremum() ? 'Ja' : 'Nee' ?> <a href="<?= $this->url('member/show/supremum', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Toggle supremum</a></td>
         </tr>
     </table>
     <a href="<?= $this->url('member/show/edit', array(
