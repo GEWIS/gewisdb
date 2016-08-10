@@ -5,31 +5,31 @@ return array(
             'orm_default' => array(
                 'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
                 'params' => array(
-                    'host'     => 'localhost',
+                    'host'     => 'postgres',
                     'port'     => '5432',
-                    'user'     => 'username',
-                    'password' => 'password',
-                    'dbname'   => 'database',
+                    'user'     => 'gewisdb',
+                    'password' => 'gewisdb',
+                    'dbname'   => 'gewisdb',
                 )
             ),
             'orm_import' => array(
                 'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
                 'params' => array(
-                    'host'     => 'localhost',
+                    'host'     => 'postgres',
                     'port'     => '5432',
-                    'user'     => 'username',
-                    'password' => 'password',
-                    'dbname'   => 'database',
+                    'user'     => 'gewisdb',
+                    'password' => 'gewisdb',
+                    'dbname'   => 'gewis_old',
                 )
             ),
             'orm_report' => array(
                 'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
                 'params' => array(
-                    'host'     => 'localhost',
+                    'host'     => 'postgres',
                     'port'     => '5432',
-                    'user'     => 'username',
-                    'password' => 'password',
-                    'dbname'   => 'database',
+                    'user'     => 'gewisdb',
+                    'password' => 'gewisdb',
+                    'dbname'   => 'gewisdb_report',
                 )
             ),
         )
