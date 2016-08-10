@@ -85,6 +85,10 @@ class Organ extends AbstractService
                         $repOrgan->addSubdecision($discharge);
                     }
 
+                    if ($repOrgan->getAbrogationDate() !== null && $organMember->getDischargeDate() === null) {
+                        $organMember->setDischargeDate($repOrgan->getAbrogationDate());
+                    }
+
                     $em->persist($organMember);
                 }
             }
