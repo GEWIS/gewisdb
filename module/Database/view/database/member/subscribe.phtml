@@ -22,8 +22,17 @@ $form->setAttribute('class', 'form-horizontal');
 <div class="col-md-9">
 <h1><?= $this->translate('Inschrijving Studievereniging <span class="gewis-red">GEWIS</span>') ?></h1>
 <p>
-<?= $this->translate('Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van GEWIS.
-Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro.') ?>
+<?= $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
+lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost
+eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging
+verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') ?>
+</p>
+<p>
+Naam: GEWIS<br>
+Adres: Den Dolech 2<br>
+Postcode: 5600 MB<br>
+Plaats: Eindhoven<br>
+Land: Nederland
 </p>
 </div>
 </div>
@@ -171,6 +180,22 @@ $element->setLabelAttributes(array(
 
 <?php
 $element = $form->get('birth');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<?php
+$element = $form->get('iban');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
@@ -424,7 +449,7 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 
 <h3><?= $this->translate('Akkoordverklaring') ?></h3>
 
-<a href="https://gewis.nl/vereniging/statuten/index.php"><?= $this->translate('Statuten en HR') ?></a>
+<a href="https://gewis.nl/vereniging/statuten/"><?= $this->translate('Statuten en HR') ?></a>
 
 <?php
 $element = $form->get('agreed');
@@ -438,6 +463,27 @@ $element->setAttribute('placeholder', $element->getLabel());
 <?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
 ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten en
 HR gelezen.') ?>
+                <?= $element->getLabel() ?>
+            </label>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+</div>
+
+<?php
+$element = $form->get('agreediban');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <div class="col-sm-offset-1 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <?= $this->formCheckbox($element) ?>
+<?= $this->translate('Ik geef hierbij GEmeenschap Wiskunde en Informatica
+(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar uw bank om
+een bedrag van &euro;15,-, geheten vijftien euro, van uw rekening af te schrijven en
+aan uw bank om eenmalig een bedrag van uw rekening af te schrijven
+overeenkomstig de opdracht van GEWIS.') ?>
                 <?= $element->getLabel() ?>
             </label>
             <?= $this->formElementErrors($element) ?>
@@ -523,6 +569,10 @@ case Member::GENDER_OTHER:
             <td><?= $member->getGeneration() ?></td>
         </tr>
         <tr>
+            <th>IBAN</th>
+            <td><?= $member->getIban() ?></td>
+        </tr>
+        <tr>
             <th>Betaald (hoe veel)</th>
             <td><?= $member->getPaid() ?></td>
         </tr>
@@ -601,6 +651,22 @@ case Address::TYPE_MAIL:
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
+<div class="visible-print">
+<table class="table table-bordered">
+    <tr>
+        <td>
+    Ik, <?= $member->getFullName() ?>, geef hierbij GEmeenschap Wiskunde en
+Informatica (GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar
+uw bank om een bedrag van €15,-, geheten vijftien euro, van uw rekening af te
+schrijven en aan uw bank om eenmalig een bedrag van uw rekening af te schrijven
+overeenkomstig de opdracht van GEWIS.
+        </td>
+    </tr>
+    <tr>
+        <th>Handtekening<br><br><br><br><br><br></th>
+    </tr>
+</table>
+</div>
 </div>
 </div>
 <?php endif ?>

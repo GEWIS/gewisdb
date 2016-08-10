@@ -145,6 +145,13 @@ class Member
     protected $paid = 0;
 
     /**
+     * Iban number.
+     *
+     * @ORM\Column(type="string",nullable=true)
+     */
+    protected $iban;
+
+    /**
      * If the member receives a 'supremum'
      *
      * @ORM\Column(type="boolean",options={"default":true})
@@ -551,6 +558,26 @@ class Member
     public function setPaid($paid)
     {
         $this->paid = $paid;
+    }
+
+    /**
+     * Get the IBAN.
+     *
+     * @return string
+     */
+    public function getIban()
+    {
+        return $this->iban;
+    }
+
+    /**
+     * Set the IBAN.
+     *
+     * @param string $iban
+     */
+    public function setIban($iban)
+    {
+        $this->iban = $iban;
     }
 
     /**

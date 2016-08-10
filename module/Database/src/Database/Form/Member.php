@@ -136,6 +136,19 @@ class Member extends Form implements InputFilterProviderInterface
         $student->get('type')->setValue(Address::TYPE_STUDENT);
         $this->add($student);
 
+        $this->add([
+            'name' => 'iban',
+            'type' => 'text',
+            'options' => [
+                'label' => $translator->translate('IBAN')
+            ]
+        ]);
+
+        $this->add(array(
+            'name' => 'agreediban',
+            'type' => 'checkbox'
+        ));
+
         $this->add(array(
             'name' => 'agreed',
             'type' => 'checkbox'
@@ -240,6 +253,14 @@ class Member extends Form implements InputFilterProviderInterface
                     )
                 )
             ),
+            'iban' => [
+                'validators' => [
+                    ['name' => 'iban']
+                ],
+                'filters' => [
+                    ['name' => 'alnum']
+                ]
+            ],
             'agreed' => array(
                 'required' => true,
                 'validators' => array(

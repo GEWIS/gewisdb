@@ -37,13 +37,13 @@ class Member extends AbstractService
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'homeAddress', 'studentAddress', 'agreed'
+                'homeAddress', 'studentAddress', 'agreed', 'iban'
             ));
         } else {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'homeAddress', 'agreed'
+                'homeAddress', 'agreed', 'iban'
             ));
         }
 
@@ -65,6 +65,8 @@ class Member extends AbstractService
 
         // by default, we only add ordinary members
         $member->setType(MemberModel::TYPE_ORDINARY);
+
+        $member->setSupremum(false);
 
         // changed on date
         $date = new \DateTime();

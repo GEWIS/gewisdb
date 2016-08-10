@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR GEWIS
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the GEWISdb package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v0.0.1-dev-115-gaa7f514-dirty\n"
+"Project-Id-Version: GEWISdb \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-15 16:38+0200\n"
+"POT-Creation-Date: 2016-08-10 14:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,32 +23,34 @@ msgstr ""
 
 #: module/Database/view/database/member/subscribe.phtml:25
 msgid ""
-"Welkom! Met dit formulier kun je inschrijven voor een lidmaatschap van "
-"GEWIS.\n"
-"Het lidmaatschap is geldig zo lang je studeert en kost eenmalig 15 euro."
+"Welkom! Met dit formulier kun je je inschrijven voor een\n"
+"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
+"kost\n"
+"eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging\n"
+"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:36
+#: module/Database/view/database/member/subscribe.phtml:45
 msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:188
+#: module/Database/view/database/member/subscribe.phtml:213
 msgid "Thuisadres (adres van je ouders)"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:293
+#: module/Database/view/database/member/subscribe.phtml:318
 msgid "Ik heb geen kamer"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:295
+#: module/Database/view/database/member/subscribe.phtml:320
 msgid "Studieadres (adres kamer)"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:398
+#: module/Database/view/database/member/subscribe.phtml:423
 msgid "Mailinglijsten"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:400
+#: module/Database/view/database/member/subscribe.phtml:425
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
 "mededelingen\n"
@@ -58,15 +60,15 @@ msgid ""
 "inschrijvingen kunnen op een later tijdstip veranderd worden."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:425
+#: module/Database/view/database/member/subscribe.phtml:450
 msgid "Akkoordverklaring"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:427
+#: module/Database/view/database/member/subscribe.phtml:452
 msgid "Statuten en HR"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:438
+#: module/Database/view/database/member/subscribe.phtml:463
 msgid ""
 "Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
 "en\n"
@@ -75,12 +77,63 @@ msgid ""
 "HR gelezen."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:462
+#: module/Database/view/database/member/subscribe.phtml:482
+msgid ""
+"Ik geef hierbij GEmeenschap Wiskunde en Informatica\n"
+"(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar uw bank "
+"om\n"
+"een bedrag van &euro;15,-, geheten vijftien euro, van uw rekening af te "
+"schrijven en\n"
+"aan uw bank om eenmalig een bedrag van uw rekening af te schrijven\n"
+"overeenkomstig de opdracht van GEWIS."
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:508
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:463
+#: module/Database/view/database/member/subscribe.phtml:509
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:1
+msgid "An error occurred"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:8
+#: module/Application/view/error/404.phtml:53
+msgid "Additional information"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:11
+#: module/Application/view/error/index.phtml:35
+#: module/Application/view/error/404.phtml:56
+#: module/Application/view/error/404.phtml:80
+msgid "File"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:15
+#: module/Application/view/error/index.phtml:39
+#: module/Application/view/error/404.phtml:60
+#: module/Application/view/error/404.phtml:84
+msgid "Message"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:19
+#: module/Application/view/error/index.phtml:43
+#: module/Application/view/error/404.phtml:64
+#: module/Application/view/error/404.phtml:88
+msgid "Stack trace"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:29
+#: module/Application/view/error/404.phtml:74
+msgid "Previous exceptions"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:58
+#: module/Application/view/error/404.phtml:103
+msgid "No Exception available"
 msgstr ""
 
 #: module/Application/view/error/404.phtml:1
@@ -115,70 +168,6 @@ msgstr ""
 #: module/Application/view/error/404.phtml:41
 #, php-format
 msgid "resolves to %s"
-msgstr ""
-
-#: module/Application/view/error/404.phtml:53
-#: module/Application/view/error/index.phtml:8
-msgid "Additional information"
-msgstr ""
-
-#: module/Application/view/error/404.phtml:56
-#: module/Application/view/error/404.phtml:80
-#: module/Application/view/error/index.phtml:11
-#: module/Application/view/error/index.phtml:35
-msgid "File"
-msgstr ""
-
-#: module/Application/view/error/404.phtml:60
-#: module/Application/view/error/404.phtml:84
-#: module/Application/view/error/index.phtml:15
-#: module/Application/view/error/index.phtml:39
-msgid "Message"
-msgstr ""
-
-#: module/Application/view/error/404.phtml:64
-#: module/Application/view/error/404.phtml:88
-#: module/Application/view/error/index.phtml:19
-#: module/Application/view/error/index.phtml:43
-msgid "Stack trace"
-msgstr ""
-
-#: module/Application/view/error/404.phtml:74
-#: module/Application/view/error/index.phtml:29
-msgid "Previous exceptions"
-msgstr ""
-
-#: module/Application/view/error/404.phtml:103
-#: module/Application/view/error/index.phtml:58
-msgid "No Exception available"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:1
-msgid "An error occurred"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:28
-msgid "Land"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:37
-msgid "Straat"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:45
-msgid "Huisnummer"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:53
-msgid "Postcode"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:61
-msgid "Stad"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:69
-msgid "Telefoonnummer"
 msgstr ""
 
 #: module/Database/src/Database/Form/Member.php:34
@@ -233,10 +222,38 @@ msgstr ""
 msgid "Geboortedatum"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:148
+#: module/Database/src/Database/Form/Member.php:143
+msgid "IBAN"
+msgstr ""
+
+#: module/Database/src/Database/Form/Member.php:161
 msgid "Schrijf in"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:251
+#: module/Database/src/Database/Form/Member.php:272
 msgid "Je moet de voorwaarden accepteren!"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:28
+msgid "Land"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:37
+msgid "Straat"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:45
+msgid "Huisnummer"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:53
+msgid "Postcode"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:61
+msgid "Stad"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:69
+msgid "Telefoonnummer"
 msgstr ""
