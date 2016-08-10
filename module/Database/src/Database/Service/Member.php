@@ -56,6 +56,14 @@ class Member extends AbstractService
         // set some extra data
         $member = $form->getData();
 
+        // find if there is an earlier member with the same email or name
+        if ($this->getMemberMapper()->hasMemberWith($member->getEmail())) {
+            $form->get('email')->setMessages([
+                'There already is a member with this email address.'
+            ]);
+            return null;
+        }
+
         if (!is_numeric($member->getTuenumber())) {
             $member->setTuenumber(0);
         }

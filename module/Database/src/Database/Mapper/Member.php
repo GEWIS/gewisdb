@@ -29,6 +29,27 @@ class Member
     }
 
     /**
+     * See if we can find a member with the same email.
+     *
+     * @param string $email
+     *
+     * @return boolean
+     */
+    public function hasMemberWith($email)
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('m')
+            ->from('Database\Model\Member', 'm')
+            ->where("m.email = :email")
+            ->setMaxResults(1);
+
+        $qb->setParameter(':email', $email);
+
+        return $qb->getQuery()->getResult() !== null;
+    }
+
+    /**
      * Search for a member.
      *
      * @param string $query
