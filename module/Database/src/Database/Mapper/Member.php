@@ -46,7 +46,8 @@ class Member
 
         $qb->setParameter(':email', $email);
 
-        return $qb->getQuery()->getResult() !== null;
+        $ret = $qb->getQuery()->getResult();
+        return $ret !== null && count($ret) > 0;
     }
 
     /**
