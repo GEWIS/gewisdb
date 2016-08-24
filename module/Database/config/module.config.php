@@ -13,6 +13,17 @@ return array(
                     ),
                 ),
             ),
+            'address' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/address',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller' => 'Address',
+                        'action' => 'index'
+                    ]
+                ]
+            ],
             'meeting' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -380,6 +391,7 @@ return array(
             'Database\Controller\Export' => 'Database\Controller\ExportController',
             'Database\Controller\Query' => 'Database\Controller\QueryController',
             'Database\Controller\Settings' => 'Database\Controller\SettingsController',
+            'Database\Controller\Address' => 'Database\Controller\AddressController',
             'Database\Controller\Index' => 'Database\Controller\IndexController',
         )
     ),
