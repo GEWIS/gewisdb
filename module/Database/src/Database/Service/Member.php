@@ -444,6 +444,16 @@ class Member extends AbstractService
     }
 
     /**
+     * Get address export form.
+     *
+     * @return \Database\Form\AddressExport
+     */
+    public function getAddressExportForm()
+    {
+        return $this->getServiceManager()->get('database_form_addressexport');
+    }
+
+    /**
      * Get the member form.
      *
      * @return \Database\Form\Member

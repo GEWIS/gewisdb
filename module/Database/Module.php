@@ -72,6 +72,9 @@ class Module
                 'database_form_deletelist' => 'Database\Form\DeleteList',
             ),
             'factories' => array(
+                'database_form_addressexport' => function ($sm) {
+                    return new \Database\Form\AddressExport();
+                },
                 'database_form_export' => function ($sm) {
                     return new \Database\Form\Export(
                         $sm->get('database_service_meeting')

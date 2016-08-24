@@ -9,6 +9,13 @@ class AddressController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel([
+            'form' => $this->getMemberService()->getAddressExportForm()
+        ]);
+    }
+
+    public function getMemberService()
+    {
+        return $this->getServiceLocator()->get('database_service_member');
     }
 }
