@@ -74,8 +74,6 @@ class Member extends AbstractService
         // by default, we only add ordinary members
         $member->setType(MemberModel::TYPE_ORDINARY);
 
-        $member->setSupremum(false);
-
         // changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
@@ -125,13 +123,14 @@ class Member extends AbstractService
      * Toggle if a member receives the supremum.
      *
      * @param int $id
+     * @param string $value
      */
-    public function toggleSupremum($id)
+    public function setSupremum($id, $value)
     {
         $member = $this->getMember($id);
         $member = $member['member'];
 
-        $member->setSupremum(!$member->getSupremum());
+        $member->setSupremum($value);
 
         $this->getMemberMapper()->persist($member);
     }

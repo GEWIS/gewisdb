@@ -92,15 +92,20 @@ case Member::TYPE_HONORARY:
         </tr>
         <tr>
             <th>Wil supremum ontvangen</th>
-            <td><?= $member->getSupremum() ? 'Ja' : 'Nee' ?> <a href="<?= $this->url('member/show/supremum', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Toggle supremum</a></td>
-        </tr>
-    </table>
-    <a href="<?= $this->url('member/show/edit', array(
-    'id' => $member->getLidnr()
-)) ?>" class="btn btn-primary">Wijzig gegevens</a>
-<h3>Lidmaatschap commissies en disputen</h3>
-<?php if ($simple): ?>
-Geen huidig lid van commissies en disputen
+            <td>
+                <?= $member->getSupremum() ?>
+                <a href="<?= $this->url('member/show/supremum/optin', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Optin</a>
+                <a href="<?= $this->url('member/show/supremum/optout', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Optout</a>
+                <a href="<?= $this->url('member/show/supremum', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Reset</a>
+            </td>
+            </tr>
+        </table>
+        <a href="<?= $this->url('member/show/edit', array(
+        'id' => $member->getLidnr()
+    )) ?>" class="btn btn-primary">Wijzig gegevens</a>
+    <h3>Lidmaatschap commissies en disputen</h3>
+    <?php if ($simple): ?>
+    Geen huidig lid van commissies en disputen
 <?php else: ?>
 <ul>
 <?php foreach ($member->getInstallations() as $install): ?>

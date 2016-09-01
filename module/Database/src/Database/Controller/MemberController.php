@@ -81,11 +81,11 @@ class MemberController extends AbstractActionController
      *
      * Toggles if a member wants a supremum
      */
-    public function toggleSupremumAction()
+    public function setSupremumAction()
     {
         $service = $this->getMemberService();
 
-        $service->toggleSupremum($this->params()->fromRoute('id'));
+        $service->setSupremum($this->params()->fromRoute('id'), $this->params()->fromRoute('value'));
 
         return $this->redirect()->toRoute('member/show', [
             'id' => $this->params()->fromRoute('id')

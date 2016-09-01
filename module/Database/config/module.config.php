@@ -271,8 +271,30 @@ return array(
                                 'options' => [
                                     'route' => '/supremum',
                                     'defaults' => [
-                                        'action' => 'toggleSupremum'
+                                        'action' => 'setSupremum',
+                                        'value' => ''
                                     ]
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'optin' => [
+                                        'type' => 'Literal',
+                                        'options' => [
+                                            'route' => '/optin',
+                                            'defaults' => [
+                                                'value' => 'optin'
+                                            ]
+                                        ]
+                                    ],
+                                    'optout' => [
+                                        'type' => 'Literal',
+                                        'options' => [
+                                            'route' => '/optout',
+                                            'defaults' => [
+                                                'value' => 'optout'
+                                            ]
+                                        ]
+                                    ],
                                 ]
                             )
                         )

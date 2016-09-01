@@ -154,7 +154,7 @@ class Member
     /**
      * If the member receives a 'supremum'
      *
-     * @ORM\Column(type="boolean",options={"default":true})
+     * @ORM\Column(type="string",options={"default":"optin"})
      */
     protected $supremum;
 
@@ -583,7 +583,7 @@ class Member
     /**
      * Get if the member wants a supremum.
      *
-     * @return boolean
+     * @return string
      */
     public function getSupremum()
     {
@@ -593,7 +593,7 @@ class Member
     /**
      * Set if the member wants a supremum.
      *
-     * @param boolean $supremum
+     * @param string $supremum
      */
     public function setSupremum($supremum)
     {
