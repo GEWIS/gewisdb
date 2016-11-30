@@ -137,6 +137,20 @@ class Member
     protected $paid = 0;
 
     /**
+     * Iban number.
+     *
+     * @ORM\Column(type="string",nullable=true)
+     */
+    protected $iban;
+
+    /**
+     * If the member receives a 'supremum'
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $supremum;
+
+    /**
      * Addresses of this member.
      *
      * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist"})
@@ -505,6 +519,46 @@ class Member
     public function setPaid($paid)
     {
         $this->paid = $paid;
+    }
+
+    /**
+     * Get the IBAN.
+     *
+     * @return string
+     */
+    public function getIban()
+    {
+        return $this->iban;
+    }
+
+    /**
+     * Set the IBAN.
+     *
+     * @param string $iban
+     */
+    public function setIban($iban)
+    {
+        $this->iban = $iban;
+    }
+
+    /**
+     * Get if the member wants a supremum.
+     *
+     * @return string
+     */
+    public function getSupremum()
+    {
+        return $this->supremum;
+    }
+
+    /**
+     * Set if the member wants a supremum.
+     *
+     * @param string $supremum
+     */
+    public function setSupremum($supremum)
+    {
+        $this->supremum = $supremum;
     }
 
     /**

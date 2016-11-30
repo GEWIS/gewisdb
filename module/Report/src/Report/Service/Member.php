@@ -44,6 +44,8 @@ class Member extends AbstractService
             $reportMember->setBirth($member->getBirth());
             $reportMember->setChangedOn($member->getChangedOn());
             $reportMember->setPaid($member->getPaid());
+            $reportMember->setIban($member->getIban());
+            $reportMember->setSupremum($member->getSupremum());
 
             // go through addresses
             foreach ($member->getAddresses() as $address) {
