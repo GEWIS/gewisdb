@@ -22,6 +22,9 @@ return array(
         'options' => array(
             'path' => 'data/mail/'
         ),
-        'from' => 'web@gewis.nl'
+        'from' => 'secr@gewis.nl',
+        'to' => [
+            'report_error' => 'databaseisstuk@gewis.nl'
+        ]
     ),
 );

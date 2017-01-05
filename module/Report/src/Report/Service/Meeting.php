@@ -6,9 +6,13 @@ use Application\Service\AbstractService;
 
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision;
+use Database\Model\Decision;
 
 use Report\Model\Meeting as ReportMeeting;
 use Report\Model\Decision as ReportDecision;
+
+use Zend\Mail\Transport\TransportInterface;
+use Zend\Mail\Message;
 
 class Meeting extends AbstractService
 {
@@ -177,6 +181,8 @@ class Meeting extends AbstractService
                     $em->persist($reportDecision);
                 } catch (\Exception $e) {
                     // send email, something went wrong
+                    $this->sendDecisionExceptionMail($e, $decision);
+                    continue;
                 }
             }
 
@@ -198,6 +204,55 @@ class Meeting extends AbstractService
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $repo = $em->getRepository('Report\Model\Member');
         return $repo->find($member->getLidnr());
+    }
+
+    /**
+     * Send an email about that something went wrong.
+     *
+     * @param Exception $e
+     * @param Decision $decision
+     */
+    public function sendDecisionExceptionMail(\Exception $e, Decision $decision)
+    {
+        $config = $this->getServiceManager()->get('config');
+        $config = $config['email'];
+
+        $meeting = $decision->getMeeting();
+        $body = <<<BODYTEXT
+Hallo Belangrijke Database Mensen,
+
+Ik ben een fout tegen gekomen tijdens het processen:
+
+{$e->getMessage()}
+
+Dit gebeurde tijdens het processen van besluit {$meeting->getType()} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
+
+Met vriendelijke groet,
+
+De GEWIS Database
+
+PS: extra info over de fout:
+
+{$e->getTraceAsString()}
+BODYTEXT;
+
+        $message = new Message();
+        $message->setBody($body);
+        $message->setFrom($config['from']);
+        $message->addTo($config['to']['report_error']);
+        $message->setSubject('Database fout');
+
+        $this->getMailTransport()->send($message);
+    }
+
+    /**
+     * Get the mail transport.
+     *
+     * @return TransportInterface
+     */
+    public function getMailTransport()
+    {
+        return $this->getServiceManager()->get('database_mail_transport');
     }
 
     /**

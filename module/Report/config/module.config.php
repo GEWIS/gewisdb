@@ -67,5 +67,7 @@ return array(
                 )
             )
         )
-    )
+    ),
+    'mail' => [
+    ]
 );

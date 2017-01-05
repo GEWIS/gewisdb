@@ -335,6 +335,15 @@ class Module
                         $sm->get('database_doctrine_em')
                     );
                 },
+                'database_mail_transport' => function ($sm) {
+                    $config = $sm->get('config');
+                    $config = $config['email'];
+                    $class = '\Zend\Mail\Transport\\' . $config['transport'];
+                    $optionsClass = '\Zend\Mail\Transport\\' . $config['transport'] . 'Options';
+                    $transport = new $class();
+                    $transport->setOptions(new $optionsClass($config['options']));
+                    return $transport;
+                },
                 // fake 'alias' for entity manager, because doctrine uses an abstract factory
                 // and aliases don't work with abstract factories
                 'database_doctrine_em' => function ($sm) {
