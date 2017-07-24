@@ -31,15 +31,7 @@ class Organ extends AbstractService
 
         foreach ($foundations as $foundation) {
             // see if there already is an organ
-            $repOrgan = $foundation->getOrgan();
-            if (null === $repOrgan) {
-                $repOrgan = new ReportOrgan();
-                $repOrgan->setFoundation($foundation);
-            }
-            $repOrgan->setAbbr($foundation->getAbbr());
-            $repOrgan->setName($foundation->getName());
-            $repOrgan->setType($foundation->getOrganType());
-            $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
+            $repOrgan = $this->generateFoundation($foundation);
 
             /**
              * Also find all related subdecisions.
@@ -95,6 +87,37 @@ class Organ extends AbstractService
             $em->persist($repOrgan);
         }
         $em->flush();
+    }
+
+    public function generatFoundation($foundation)
+    {
+        // see if there already is an organ
+        $repOrgan = $foundation->getOrgan();
+        if (null === $repOrgan) {
+            $repOrgan = new ReportOrgan();
+            $repOrgan->setFoundation($foundation);
+        }
+        $repOrgan->setAbbr($foundation->getAbbr());
+        $repOrgan->setName($foundation->getName());
+        $repOrgan->setType($foundation->getOrganType());
+        $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
+
+        return $repOrgan;
+    }
+
+    public function generateAbrogation($installation)
+    {
+
+    }
+
+    public function generateInstallation($installation)
+    {
+
+    }
+
+    public function generateDischarge($discharge)
+    {
+
     }
 
     /**
