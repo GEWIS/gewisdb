@@ -134,13 +134,6 @@ class Meeting extends AbstractService
             'number' => $subdecision->getNumber()
         ));
         if (null === $reportSubDecision) {
-            var_dump(array(
-                'meeting_type' => $subdecision->getMeetingType(),
-                'meeting_number' => $subdecision->getMeetingnumber(),
-                'decision_point' => $subdecision->getDecisionPoint(),
-                'decision_number' => $subdecision->getDecisionNumber(),
-                'number' => $subdecision->getNumber()
-            ));
             // determine type and create
             $class = get_class($subdecision);
             $class = preg_replace('/^Database/', 'Report', $class);
@@ -255,6 +248,7 @@ class Meeting extends AbstractService
         $reportSubDecision->setContent($cnt);
         $content[] = $subdecision->getContent();
         $em->persist($reportSubDecision);
+        return $reportSubDecision;
     }
     /**
      * Obtain the correct member, given a database member.

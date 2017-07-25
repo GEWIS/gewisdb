@@ -21,7 +21,7 @@ class DatabaseUpdateListener
 
     public function postUpdate($eventArgs)
     {
-        echo '<br>' .get_class($eventArgs) .' call '.get_class($eventArgs->getEntity()) . '<br>';
+       // echo '<br>' .get_class($eventArgs) .' call '.get_class($eventArgs->getEntity()) . '<br>';
         $entity = $eventArgs->getEntity();
         switch (true) {
             case $entity instanceof \Database\Model\Address:
@@ -41,8 +41,8 @@ class DatabaseUpdateListener
                 break;
 
             case $entity instanceof \Database\Model\SubDecision:
-                $this->getMeetingService()->generateSubDecision($entity);
-                $this->processOrganUpdates($entity);
+                $subdecision = $this->getMeetingService()->generateSubDecision($entity);
+                $this->processOrganUpdates($subdecision);
                 break;
 
         }
@@ -52,23 +52,28 @@ class DatabaseUpdateListener
 
     public function processOrganUpdates($entity)
     {
+      //  echo '<br>processOrganUpdates call '.get_class($entity) . '<br>';
         switch (true) {
-            case $entity instanceof \Database\Model\SubDecision\Foundation:
+            case $entity instanceof \Report\Model\SubDecision\Foundation:
+                echo "foundation";
                 $this->getOrganService()->generateFoundation($entity);
                 break;
 
-            case $entity instanceof \Database\Model\SubDecision\Abrogation:
+            case $entity instanceof \Report\Model\SubDecision\Abrogation:
                 $this->getOrganService()->generateAbrogation($entity);
                 break;
 
-            case $entity instanceof \Database\Model\SubDecision\Installation:
+            case $entity instanceof \Report\Model\SubDecision\Installation:
                 $this->getOrganService()->generateInstallation($entity);
                 break;
 
-            case $entity instanceof \Database\Model\SubDecision\Discharge:
+            case $entity instanceof \Report\Model\SubDecision\Discharge:
                 $this->getOrganService()->generateDischarge($entity);
                 break;
         }
+
+        $em = $this->sm->get('doctrine.entitymanager.orm_report');
+        $em->persist($entity);
     }
 
     /**
@@ -98,7 +103,7 @@ class DatabaseUpdateListener
      */
     public function getOrganService()
     {
-        return $this->getServiceLocator()->get('report_service_organ');
+        return $this->sm->get('report_service_organ');
     }
 
     /**
@@ -108,6 +113,6 @@ class DatabaseUpdateListener
      */
     public function getBoardService()
     {
-        return $this->getServiceLocator()->get('report_service_board');
+        return $this->sm->get('report_service_board');
     }
 }
