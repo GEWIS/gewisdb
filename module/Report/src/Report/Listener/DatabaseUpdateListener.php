@@ -21,7 +21,6 @@ class DatabaseUpdateListener
 
     public function postUpdate($eventArgs)
     {
-       // echo '<br>' .get_class($eventArgs) .' call '.get_class($eventArgs->getEntity()) . '<br>';
         $entity = $eventArgs->getEntity();
         switch (true) {
             case $entity instanceof \Database\Model\Address:
@@ -52,7 +51,6 @@ class DatabaseUpdateListener
 
     public function processOrganUpdates($entity)
     {
-      //  echo '<br>processOrganUpdates call '.get_class($entity) . '<br>';
         switch (true) {
             case $entity instanceof \Report\Model\SubDecision\Foundation:
                 echo "foundation";
