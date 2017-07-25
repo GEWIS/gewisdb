@@ -1,6 +1,7 @@
 <?php
 namespace Database;
 
+use Report\Listener\DatabaseDeletionListener;
 use Report\Listener\DatabaseUpdateListener;
 
 class Module
@@ -19,6 +20,7 @@ class Module
         $dem = $em->getEventManager();
         $dem->addEventListener([\Doctrine\ORM\Events::postPersist], new DatabaseUpdateListener($sm));
         $dem->addEventListener([\Doctrine\ORM\Events::postUpdate], new DatabaseUpdateListener($sm));
+        $dem->addEventListener([\Doctrine\ORM\Events::preRemove], new DatabaseDeletionListener($sm));
     }
 
     /**

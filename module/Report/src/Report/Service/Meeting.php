@@ -250,6 +250,18 @@ class Meeting extends AbstractService
         $em->persist($reportSubDecision);
         return $reportSubDecision;
     }
+
+    public function deleteDecision($decision)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $reportDecision = $em->getRepository('Report\Model\Decision')->find(array(
+            'meeting_type' => $decision->getMeeting()->getType(),
+            'meeting_number' => $decision->getMeeting()->getNumber(),
+            'point' => $decision->getPoint(),
+            'number' => $decision->getNumber()
+        ));
+        $em->remove($reportDecision);
+    }
     /**
      * Obtain the correct member, given a database member.
      *

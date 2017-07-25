@@ -90,6 +90,26 @@ class Member extends AbstractService
         $em->persist($reportAddress);
     }
 
+    public function deleteMember($member)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $repo = $em->getRepository('Report\Model\Member');
+        // first try to find an existing member
+        $reportMember = $repo->find($member->getLidnr());
+        $em->remove($reportMember);
+    }
+
+    public function deleteAddress($address)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $repo = $em->getRepository('Report\Model\Address');
+        // first try to find an existing member
+        $reportAddress = $repo->find(array(
+            'member' => $address->getMember()->getLidnr(),
+            'type' => $address->getType()
+        ));
+        $em->remove($reportAddress);
+    }
     /**
      * Get the member mapper.
      *

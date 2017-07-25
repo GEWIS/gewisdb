@@ -153,7 +153,7 @@ class Member
     /**
      * Addresses of this member.
      *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist", "remove"})
      */
     protected $addresses;
 
