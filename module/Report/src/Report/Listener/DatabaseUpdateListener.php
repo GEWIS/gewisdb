@@ -21,6 +21,7 @@ class DatabaseUpdateListener
 
     public function postUpdate($eventArgs)
     {
+        $em = $this->sm->get('doctrine.entitymanager.orm_report');
         $entity = $eventArgs->getEntity();
         switch (true) {
             case $entity instanceof \Database\Model\Address:
@@ -42,10 +43,10 @@ class DatabaseUpdateListener
             case $entity instanceof \Database\Model\SubDecision:
                 $subdecision = $this->getMeetingService()->generateSubDecision($entity);
                 $this->processOrganUpdates($subdecision);
+                $em->persist($subdecision);
                 break;
 
         }
-        $em = $this->sm->get('doctrine.entitymanager.orm_report');
         $em->flush();
     }
 
@@ -53,7 +54,6 @@ class DatabaseUpdateListener
     {
         switch (true) {
             case $entity instanceof \Report\Model\SubDecision\Foundation:
-                echo "foundation";
                 $this->getOrganService()->generateFoundation($entity);
                 break;
 
@@ -69,9 +69,6 @@ class DatabaseUpdateListener
                 $this->getOrganService()->generateDischarge($entity);
                 break;
         }
-
-        $em = $this->sm->get('doctrine.entitymanager.orm_report');
-        $em->persist($entity);
     }
 
     /**
