@@ -85,12 +85,6 @@ class Meeting extends AbstractService
             'number' => $decision->getNumber()
         ));
         if (null === $reportDecision) {
-            var_dump(array(
-                'meeting_type' => $decision->getMeeting()->getType(),
-                'meeting_number' => $decision->getMeeting()->getNumber(),
-                'point' => $decision->getPoint(),
-                'number' => $decision->getNumber()
-            ));
             $reportDecision = new ReportDecision();
             $reportDecision->setMeeting($reportMeeting);
         }

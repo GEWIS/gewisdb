@@ -64,6 +64,15 @@ return array(
                             'action' => 'generate'
                         )
                     )
+                ),
+                'generate_reportdb_full' => array(
+                    'options' => array(
+                        'route' => 'generate reportdb full',
+                        'defaults' => array(
+                            'controller' => 'Report\Controller\Report',
+                            'action' => 'generateAll'
+                        )
+                    )
                 )
             )
         )
