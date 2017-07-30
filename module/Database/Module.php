@@ -57,6 +57,7 @@ class Module
                 'database_service_query' => 'Database\Service\Query',
                 'database_service_installationfunction' => 'Database\Service\InstallationFunction',
                 'database_service_mailinglist' => 'Database\Service\MailingList',
+                'database_service_update' => 'Database\Service\Update',
                 'database_hydrator_abolish' => 'Database\Hydrator\Abolish',
                 'database_hydrator_foundation' => 'Database\Hydrator\Foundation',
                 'database_hydrator_install' => 'Database\Hydrator\Install',
@@ -329,6 +330,11 @@ class Module
                 },
                 'database_mapper_savedquery' => function ($sm) {
                     return new \Database\Mapper\SavedQuery(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'database_mapper_update' => function ($sm) {
+                    return new \Database\Mapper\Update(
                         $sm->get('database_doctrine_em')
                     );
                 },

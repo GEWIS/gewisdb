@@ -370,6 +370,43 @@ return array(
                     ),
                 ),
             ),
+            'api' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/api',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'API',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'update-member' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/update/member/:lidnr',
+                            'constraints' => array(
+                                'lidnr' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'updateMember'
+                            )
+                        )
+                    ),
+                    'update-mailing-lists' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/update/mailing-lists/:lidnr',
+                            'constraints' => array(
+                                'lidnr'     => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'action' => 'updateMailingLists'
+                            )
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
@@ -381,6 +418,7 @@ return array(
             'Database\Controller\Query' => 'Database\Controller\QueryController',
             'Database\Controller\Settings' => 'Database\Controller\SettingsController',
             'Database\Controller\Index' => 'Database\Controller\IndexController',
+            'Database\Controller\API' => 'Database\Controller\APIController',
         )
     ),
     'view_manager' => array(

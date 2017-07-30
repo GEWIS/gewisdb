@@ -23,6 +23,8 @@ class Member
     const TYPE_EXTRAORDINARY = 'extraordinary';
     const TYPE_HONORARY = 'honorary';
 
+    const USER_UPDATEABLE_PROPERTIES = ['supremum'];
+
     /**
      * The user
      *
@@ -704,5 +706,19 @@ class Member
     public function setStudentAddress(Address $address)
     {
         $this->addAddress($address);
+    }
+
+    /**
+     * Process and update supplied by a user
+     *
+     * @param array $data
+     */
+    public function applyUserUpdate($data)
+    {
+        foreach ($data as $key => $value) {
+            if (in_array($key, self::USER_UPDATEABLE_PROPERTIES)) {
+                $this->{$key} = $value;
+            }
+        }
     }
 }
