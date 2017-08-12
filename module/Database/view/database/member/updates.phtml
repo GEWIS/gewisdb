@@ -1,3 +1,4 @@
+<?php $escaper = new Zend\Escaper\Escaper('utf-8'); ?>
 <h1>Update verzoeken</h1>
 <?php foreach ($updates as $update): ?>
     <table class="table table-bordered  ">
@@ -16,31 +17,31 @@
         </thead>
         <tbody>
         <?php if ($update->getFirstName() !== null): ?>
-            <tr><td>Voornaam</td><td><?= $update->getFirstName() ?></td></tr>
+            <tr><td>Voornaam</td><td><?= $escaper->escapeHtml($escaper->escapeHtml($update->getFirstName())) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getMiddleName() !== null): ?>
-            <tr><td>Tussenvoegsel</td><td><?= $update->getMiddleName() ?></td></tr>
+            <tr><td>Tussenvoegsel</td><td><?= $escaper->escapeHtml($update->getMiddleName()) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getLastName() !== null): ?>
-            <tr><td>Achternaam</td><td><?= $update->getLastName() ?></td></tr>
+            <tr><td>Achternaam</td><td><?= $escaper->escapeHtml($update->getLastName()) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getInitials() !== null): ?>
-            <tr><td>Initialen</td><td><?= $update->getInitials() ?></td></tr>
+            <tr><td>Initialen</td><td><?= $escaper->escapeHtml($update->getInitials()) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getBirth() !== null): ?>
-            <tr><td>Geboortedatum</td><td><?= $update->getBirth() ?></td></tr>
+            <tr><td>Geboortedatum</td><td><?= $escaper->escapeHtml($update->getBirth()) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getEmail() !== null): ?>
-            <tr><td>Email</td><td><?= $update->getEmail() ?></td></tr>
+            <tr><td>Email</td><td><?= $escaper->escapeHtml($update->getEmail()) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getGeneration() !== null): ?>
-            <tr><td>Generatie</td><td><?= $update->getGeneration() ?></td></tr>
+            <tr><td>Generatie</td><td><?= $escaper->escapeHtml($update->getGeneration()) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getTuenumber() !== null): ?>
-            <tr><td>Student nummer</td><td><?= $update->getTuenumber() ?></td></tr>
+            <tr><td>Student nummer</td><td><?= $escaper->escapeHtml($update->getTuenumber()) ?></td></tr>
         <?php endif; ?>
         <?php if ($update->getStudy() !== null): ?>
-            <tr><td>Studie</td><td><?= $update->getStudy() ?></td></tr>
+            <tr><td>Studie</td><td><?= $escaper->escapeHtml($update->getStudy()) ?></td></tr>
         <?php endif; ?>
         </tbody>
     </table>
