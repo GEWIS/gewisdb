@@ -721,4 +721,14 @@ class Member
             }
         }
     }
+
+    public function applyUpdate(MemberUpdate $update)
+    {
+        foreach($update->toArray() as $key => $value)
+        {
+            if ($value !== null) {
+                $this->{$key} = $value;
+            }
+        }
+    }
 }

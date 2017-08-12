@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 
 use Database\Model\Member;
+use Zend\View\View;
 
 class MemberController extends AbstractActionController
 {
@@ -243,6 +244,46 @@ class MemberController extends AbstractActionController
         }
 
         return new ViewModel($service->getDeleteAddressForm($lidnr, $type));
+    }
+
+    /**
+     * Show all pending member updates
+     */
+    public function updatesAction()
+    {
+        return new ViewModel(['updates' => $this->getUpdateService()->getPendingMemberUpdates()]);
+    }
+
+    /**
+     * Approve a pending member update
+     */
+    public function approveUpdateAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $this->getUpdateService()->approveMemberUpdate($this->params('lidnr'));
+            $this->redirect()->toRoute('member/updates');
+        }
+    }
+
+    /**
+     * Reject a member update
+     */
+    public function rejectUpdateAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $this->getUpdateService()->rejectMemberUpdate($this->params('lidnr'));
+            $this->redirect()->toRoute('member/updates');
+        }
+    }
+
+    /**
+     * Get the update service.
+     *
+     * @return \Database\Service\Update
+     */
+    public function getUpdateService()
+    {
+        return $this->getServiceLocator()->get('database_service_update');
     }
 
     /**

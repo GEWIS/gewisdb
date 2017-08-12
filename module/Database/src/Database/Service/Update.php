@@ -8,7 +8,7 @@ use Database\Model\MemberUpdate;
 class Update extends AbstractService
 {
 
-    public function storeUpdateRequest($lidnr, $data)
+    public function storeMemberUpdateRequest($lidnr, $data)
     {
         $member = $this->getMemberMapper()->findSimple($lidnr);
         // Update everything which can be updated directly
@@ -18,9 +18,35 @@ class Update extends AbstractService
         if ($update === null) {
             $update = new MemberUpdate();
         }
-        $update->loadData($lidnr, $data);
+        if ($update->loadData($lidnr, $data)) {
+            $this->getUpdateMapper()->persist($update);
+        }
+    }
 
-        $this->getUpdateMapper()->persist($update);
+    public function getPendingMemberUpdates()
+    {
+        return $this->getUpdateMapper()->getMemberUpdates();
+    }
+
+    public function approveMemberUpdate($lidnr)
+    {
+        $member = $this->getMemberMapper()->findSimple($lidnr);
+        $update = $this->getUpdateMapper()->findMemberUpdate($lidnr);
+        if ($member === null || $update === null) {
+            return false;
+        }
+        $member->applyUpdate($update);
+        $this->getUpdateMapper()->persist($member);
+        $this->getUpdateMapper()->remove($update);
+    }
+
+    public function rejectMemberUpdate($lidnr)
+    {
+        $update = $this->getUpdateMapper()->findMemberUpdate($lidnr);
+        if ($update === null) {
+            return false;
+        }
+        $this->getUpdateMapper()->remove($update);
     }
 
     /**

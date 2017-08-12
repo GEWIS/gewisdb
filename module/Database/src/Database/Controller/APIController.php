@@ -13,7 +13,7 @@ class APIController extends AbstractActionController
     {
         $update = Json::decode ($this->getRequest()->getContent(), Json::TYPE_ARRAY);
         $updateService = $this->getServiceLocator()->get('database_service_update');
-        $updateService->storeUpdateRequest($this->params('lidnr'), $update);
+        $updateService->storeMemberUpdateRequest($this->params('lidnr'), $update);
         return new JsonModel(['success' => true]);
     }
 }

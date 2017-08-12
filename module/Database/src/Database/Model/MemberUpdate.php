@@ -89,16 +89,21 @@ class MemberUpdate
      *
      * @param integer $lidnr
      * @param array $data
+     * @return boolean indicating whether any data was loaded.
      */
     public function loadData($lidnr, $data)
     {
         $this->lidnr = $lidnr;
+        $count = 0;
         foreach ($data as $key => $value)
         {
             if (property_exists($this, $key)) {
                 $this->{$key} = $value;
+                $count++;
             }
         }
+
+        return $count > 0;
     }
 
     /**
@@ -299,5 +304,10 @@ class MemberUpdate
     public function setBirth(\DateTime $birth)
     {
         $this->birth = $birth;
+    }
+
+    public function toArray()
+    {
+        return get_object_vars($this);
     }
 }

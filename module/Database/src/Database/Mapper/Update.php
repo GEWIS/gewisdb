@@ -37,6 +37,17 @@ class Update
     {
         return $this->em->getRepository('Database\Model\MemberUpdate')->findOneBy(['lidnr' => $lidnr]);
     }
+
+    /**
+     * Get all member updates
+     *
+     * @return array
+     */
+    public function getMemberUpdates()
+    {
+        return $this->em->getRepository('Database\Model\MemberUpdate')->findAll();
+    }
+
     /**
      * Persist an update model.
      *

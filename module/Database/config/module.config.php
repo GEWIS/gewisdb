@@ -266,6 +266,43 @@ return array(
                             )
                         )
                     ),
+                    'updates' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/updates',
+                            'defaults' => array(
+                                'controller'    => 'Member',
+                                'action'        => 'updates',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'approve' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/approve/:lidnr',
+                                    'constraints' => array(
+                                        'lidnr' => '[0-9]+',
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'approveUpdate'
+                                    )
+                                )
+                            ),
+                            'reject' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/reject/:lidnr',
+                                    'constraints' => array(
+                                        'lidnr' => '[0-9]+',
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'rejectUpdate'
+                                    )
+                                )
+                            ),
+                        ),
+                    ),
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
