@@ -46,6 +46,10 @@ class DatabaseUpdateListener
                 $em->persist($subdecision);
                 break;
 
+            case $entity instanceof \Database\Model\MailingList:
+                $this->getMiscService()->generateList($entity);
+                break;
+
         }
         $em->flush();
     }
@@ -109,5 +113,15 @@ class DatabaseUpdateListener
     public function getBoardService()
     {
         return $this->sm->get('report_service_board');
+    }
+
+    /**
+     * Get the misc service.
+     *
+     * @return \Report\Service\Misc
+     */
+    public function getMiscService()
+    {
+        return $this->sm->get('report_service_misc');
     }
 }

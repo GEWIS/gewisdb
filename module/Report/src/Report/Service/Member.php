@@ -8,6 +8,7 @@ use Database\Model\Member as DbMember;
 use Database\Model\Address as DbAddress;
 use Report\Model\Member as ReportMember;
 use Report\Model\Address as ReportAddress;
+use Zend\Cache\Exception\LogicException;
 
 class Member extends AbstractService
 {
@@ -59,7 +60,33 @@ class Member extends AbstractService
             $this->generateAddress($address, $reportMember);
         }
 
+        // process mailing lists
+        $this->generateLists($member, $reportMember);
         $em->persist($reportMember);
+    }
+
+    public function generateLists($member, $reportMember)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $reportListRepo = $em->getRepository('Report\Model\MailingList');
+
+        foreach ($member->getLists() as $list) {
+            $reportList = $reportListRepo->find($list->getName());
+
+            if (null === $reportList) {
+                throw new LogicException('mailing list missing from reportdb');
+            }
+
+            // check if in the list
+            $func = function ($carry, $lst) use ($reportList) {
+                return $carry || ($lst->getName() == $reportList->getName());
+            };
+            if (!array_reduce($reportMember->getLists()->toArray(), $func, false)) {
+                $reportMember->addList($reportList);
+            }
+
+            $em->persist($reportList);
+        }
     }
 
     public function generateAddress($address, $reportMember = null)
