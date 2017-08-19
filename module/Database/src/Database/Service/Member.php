@@ -33,6 +33,8 @@ class Member extends AbstractService
 
         $form->bind(new MemberModel());
 
+        $noiban = false;
+
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
@@ -46,6 +48,10 @@ class Member extends AbstractService
                 'homeAddress', 'agreed', 'iban'
             ));
         }
+        if ($data['iban'] == 'noiban') {
+            $noiban = true;
+            $data['iban'] = 'NL20INGB0001234567';
+        }
 
         $form->setData($data);
 
@@ -55,6 +61,10 @@ class Member extends AbstractService
 
         // set some extra data
         $member = $form->getData();
+
+        if ($noiban) {
+            $member->setIban(null);
+        }
 
         // find if there is an earlier member with the same email or name
         if ($this->getMemberMapper()->hasMemberWith($member->getEmail())) {
