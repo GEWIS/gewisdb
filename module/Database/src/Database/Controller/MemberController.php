@@ -77,6 +77,18 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Print action.
+     *
+     * Prints member information.
+     */
+    public function printAction()
+    {
+        $service = $this->getMemberService();
+
+        return new ViewModel($service->getMember($this->params()->fromRoute('id')));
+    }
+
+    /**
      * Toggle supremum action.
      *
      * Toggles if a member wants a supremum
