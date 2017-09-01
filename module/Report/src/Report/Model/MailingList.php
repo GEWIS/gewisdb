@@ -206,4 +206,14 @@ class MailingList
     {
         $this->members[] = $member;
     }
+
+    /**
+     * Remove a member.
+     *
+     * @param Member $member
+     */
+    public function removeMember(Member $member)
+    {
+        $this->members->removeElement($member);
+    }
 }

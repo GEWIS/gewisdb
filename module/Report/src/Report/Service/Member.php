@@ -70,21 +70,39 @@ class Member extends AbstractService
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $reportListRepo = $em->getRepository('Report\Model\MailingList');
 
-        foreach ($member->getLists() as $list) {
-            $reportList = $reportListRepo->find($list->getName());
+        $reportLists = array_map(function ($list) {
+            return $list->getName();
+        },
+            $reportMember->getLists()->toArray()
+        );
+
+        $lists = array_map(function ($list) {
+            return $list->getName();
+        },
+            $member->getLists()->toArray()
+        );
+
+        foreach (array_diff($lists, $reportLists) as $list) {
+            $reportList = $reportListRepo->find($list);
 
             if (null === $reportList) {
                 throw new LogicException('mailing list missing from reportdb');
             }
 
-            // check if in the list
-            $func = function ($carry, $lst) use ($reportList) {
-                return $carry || ($lst->getName() == $reportList->getName());
-            };
-            if (!array_reduce($reportMember->getLists()->toArray(), $func, false)) {
-                $reportMember->addList($reportList);
+            $reportMember->addList($reportList);
+            $this->addToMailmanList($member, $list);
+            $em->persist($reportList);
+        }
+
+        foreach (array_diff($reportLists, $lists) as $list) {
+            $reportList = $reportListRepo->find($list);
+
+            if (null === $reportList) {
+                throw new LogicException('mailing list missing from reportdb');
             }
 
+            $reportMember->removeList($reportList);
+            $this->removeFromMailmanList($member, $list);
             $em->persist($reportList);
         }
     }
@@ -137,6 +155,17 @@ class Member extends AbstractService
         ));
         $em->remove($reportAddress);
     }
+
+    public function addToMailmanList($member, $listName)
+    {
+        // TODO
+    }
+
+    public function removeFromMailmanList($member, $listName)
+    {
+       // TODO
+    }
+
     /**
      * Get the member mapper.
      *
