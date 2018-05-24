@@ -1,3 +1,6 @@
+<?php if ($success): ?>
+Het lid is verwijderd.
+<?php elseif ($canRemove): ?>
 <h1><?= $member->getFullname() ?></h1>
 Weet je zeker dat lid <?= $member->getFullname() ?> verwijdert dient te worden?
 
@@ -5,3 +8,20 @@ Weet je zeker dat lid <?= $member->getFullname() ?> verwijdert dient te worden?
     <button class="btn btn-primary" name="delete" value="1">Ja</button>
     <button class="btn btn-default" name="delete" value="0">Nee</button>
 </form>
+<?php else: ?>
+<h1><?= $member->getFullname() ?></h1>
+<p>Lid <?= $member->getFullname() ?> kan niet verwijderd worden.</p>
+<p>
+    Dit komt omdat <?= $member->getFullname() ?> lid is (geweest) van commissies en/of disputen,
+    en mogelijk ook begrotingen op zijn naam heeft staan.
+</p>
+<p>
+    Hierdoor kan dit lid niet verwijderd worden. Volgens de AVG hebben we hierbij een wettelijke
+    grondslag om de naam van dit lid te behouden in onze database. De overige gegevens kunnen
+    wel verwijderd worden.
+</p>
+<p>
+    Wil je deze gegevens verwijderen?
+</p>
+TODO: form
+<?php endif ?>

@@ -145,7 +145,11 @@ class MemberController extends AbstractActionController
             // do delete
         }
 
-        return new ViewModel(['success' => false, 'member' => $member['member']]);
+        return new ViewModel([
+            'success' => false,
+            'member' => $member['member'],
+            'canRemove' => $service->canRemove($lidnr)
+        ]);
     }
 
     /**

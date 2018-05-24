@@ -101,8 +101,11 @@ case Member::TYPE_HONORARY:
             </tr>
         </table>
         <a href="<?= $this->url('member/show/edit', array(
-        'id' => $member->getLidnr()
-    )) ?>" class="btn btn-primary">Wijzig gegevens</a>
+            'id' => $member->getLidnr()
+        )) ?>" class="btn btn-primary">Wijzig gegevens</a>
+        <a href="<?= $this->url('member/show/delete', array(
+            'id' => $member->getLidnr()
+        )) ?>" class="btn btn-danger">Verwijder lid</a>
     <h3>Lidmaatschap commissies en disputen</h3>
     <?php if ($simple): ?>
     Geen huidig lid van commissies en disputen

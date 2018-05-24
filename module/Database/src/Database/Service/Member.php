@@ -156,6 +156,16 @@ class Member extends AbstractService
     }
 
     /**
+     * Check if we can easily remove a member.
+     *
+     * @param int $lidnr
+     */
+    public function canRemove($lidnr)
+    {
+        return $this->getMemberMapper()->canRemove($lidnr);
+    }
+
+    /**
      * Edit a member.
      *
      * @param array $data

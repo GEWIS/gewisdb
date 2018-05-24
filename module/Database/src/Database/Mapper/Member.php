@@ -209,6 +209,45 @@ class Member
     }
 
     /**
+     * Check if we can fully remove a member.
+     * @param int $lidnr
+     * @return boolean
+     */
+    public function canRemove($lidnr)
+    {
+        $member = $this->findSimple($lidnr);
+
+        // check if the member is included in budgets
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('b')
+            ->from('Database\Model\SubDecision\Budget', 'b')
+            ->where('b.author = :member');
+        $qb->setParameter('member', $member);
+
+        $results = $qb->getQuery()->getResult();
+        if (!empty($results)) {
+            return false;
+        }
+
+        // check if the member has been installed
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('i')
+            ->from('Database\Model\SubDecision\Installation', 'i')
+            ->where('i.member = :member');
+        $qb->setParameter('member', $member);
+
+        $results = $qb->getQuery()->getResult();
+        if (!empty($results)) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /**
      * Persist a member model.
      *
      * @param MemberModel $member Member to persist.
