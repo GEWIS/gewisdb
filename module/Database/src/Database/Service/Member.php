@@ -175,7 +175,32 @@ class Member extends AbstractService
         if ($this->canRemove($member)) {
             return $this->getMemberMapper()->remove($member);
         }
-        // TODO: clear the member, instead of removal
+        $this->clear($member);
+    }
+
+    /**
+     * Clear a member.
+     *
+     * @param Member $member
+     */
+    public function clear(MemberModel $member)
+    {
+        foreach ($member->getAddresses() as $address) {
+            $this->getMemberMapper()->removeAddress($address);
+        }
+        $member->setEmail('');
+        $member->setGender(MemberModel::GENDER_OTHER);
+        $member->setGeneration(0);
+        $member->setTuenumber(null);
+        $member->setStudy(null);
+        $member->setChangedOn(new \DateTime());
+        $member->setBirth(new \DateTime('0001-01-01 00:00:00'));
+        $member->setPaid(0);
+        $member->setIban(null);
+        $member->setSupremum('optout');
+        $member->clearLists();
+
+        $this->getMemberMapper()->persist($member);
     }
 
     /**
