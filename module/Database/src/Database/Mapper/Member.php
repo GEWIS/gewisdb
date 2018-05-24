@@ -210,13 +210,11 @@ class Member
 
     /**
      * Check if we can fully remove a member.
-     * @param int $lidnr
+     * @param MemberModel $member
      * @return boolean
      */
-    public function canRemove($lidnr)
+    public function canRemove(MemberModel $member)
     {
-        $member = $this->findSimple($lidnr);
-
         // check if the member is included in budgets
         $qb = $this->em->createQueryBuilder();
 
@@ -255,6 +253,17 @@ class Member
     public function persist(MemberModel $member)
     {
         $this->em->persist($member);
+        $this->em->flush();
+    }
+
+    /**
+     * Remove a member.
+     *
+     * @param MemberModel $member Member to remove
+     */
+    public function remove(MemberModel $member)
+    {
+        $this->em->remove($member);
         $this->em->flush();
     }
 

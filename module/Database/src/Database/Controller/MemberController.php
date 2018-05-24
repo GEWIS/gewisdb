@@ -136,19 +136,21 @@ class MemberController extends AbstractActionController
     public function deleteAction()
     {
         $service = $this->getMemberService();
-
         $lidnr = $this->params()->fromRoute('id');
-
         $member = $service->getMember($lidnr);
+        $member = $member['member'];
 
         if ($this->getRequest()->isPost()) {
-            // do delete
+            $service->remove($member);
+            return new ViewModel([
+                'success' => true,
+            ]);
         }
 
         return new ViewModel([
             'success' => false,
-            'member' => $member['member'],
-            'canRemove' => $service->canRemove($lidnr)
+            'member' => $member,
+            'canRemove' => $service->canRemove($member)
         ]);
     }
 

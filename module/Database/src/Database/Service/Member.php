@@ -160,9 +160,22 @@ class Member extends AbstractService
      *
      * @param int $lidnr
      */
-    public function canRemove($lidnr)
+    public function canRemove(MemberModel $member)
     {
-        return $this->getMemberMapper()->canRemove($lidnr);
+        return $this->getMemberMapper()->canRemove($member);
+    }
+
+    /**
+     * Remove a member.
+     *
+     * @param Member $member
+     */
+    public function remove(MemberModel $member)
+    {
+        if ($this->canRemove($member)) {
+            return $this->getMemberMapper()->remove($member);
+        }
+        // TODO: clear the member, instead of removal
     }
 
     /**
