@@ -89,13 +89,13 @@ class Organ
      *
      * @ORM\ManyToMany(targetEntity="SubDecision")
      * @ORM\JoinTable(name="organs_subdecisions",
-     *      joinColumns={@ORM\JoinColumn(name="organ_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="organ_id", onDelete="cascade", referencedColumnName="id")},
      *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type"),
-     *          @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number"),
-     *          @ORM\JoinColumn(name="decision_point", referencedColumnName="decision_point"),
-     *          @ORM\JoinColumn(name="decision_number", referencedColumnName="decision_number"),
-     *          @ORM\JoinColumn(name="subdecision_number", referencedColumnName="number")
+     *          @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type", onDelete="cascade"),
+     *          @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number", onDelete="cascade"),
+     *          @ORM\JoinColumn(name="decision_point", referencedColumnName="decision_point", onDelete="cascade"),
+     *          @ORM\JoinColumn(name="decision_number", referencedColumnName="decision_number", onDelete="cascade"),
+     *          @ORM\JoinColumn(name="subdecision_number", referencedColumnName="number", onDelete="cascade")
      *      })
      */
     protected $subdecisions;

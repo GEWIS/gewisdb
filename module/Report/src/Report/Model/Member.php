@@ -153,7 +153,7 @@ class Member
     /**
      * Addresses of this member.
      *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist", "remove"})
      */
     protected $addresses;
 
@@ -652,6 +652,19 @@ class Member
     {
         $list->addMember($this);
         $this->lists[] = $list;
+    }
+
+    /**
+     * Remove a mailing list subscription.
+     *
+     * Note that this is the owning side.
+     *
+     * @param MailingList $list
+     */
+    public function removeList(MailingList $list)
+    {
+        $list->removeMember($this);
+        $this->lists->removeElement($list);
     }
 
     /**
