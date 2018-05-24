@@ -89,7 +89,7 @@ class Member extends Form implements InputFilterProviderInterface
                     'bachelor' => array(
                         'label' => 'Bachelor',
                         'options' => array(
-                            'Bachelor Computer Science' => 'Computer Science',
+                            'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
                             'Bachelor Industrial Applied Mathematics' => 'Industrial Applied Mathematics'
                         )
                     ),
