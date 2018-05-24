@@ -125,11 +125,6 @@ class Member extends Form implements InputFilterProviderInterface
         ));
 
 
-        $home = clone $address;
-        $home->setName('homeAddress');
-        $home->get('type')->setValue(Address::TYPE_HOME);
-        $this->add($home);
-
         $student = clone $address;
         $student->setName('studentAddress');
         $student->get('type')->setValue(Address::TYPE_STUDENT);
