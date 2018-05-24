@@ -1,0 +1,7 @@
+<h1><?= $member->getFullname() ?></h1>
+Weet je zeker dat lid <?= $member->getFullname() ?> verwijdert dient te worden?
+
+<form action="<?= $this->url('member/show/delete', ['id' => $member->getLidnr()])?>" method="post">
+    <button class="btn btn-primary" name="delete" value="1">Ja</button>
+    <button class="btn btn-default" name="delete" value="0">Nee</button>
+</form>

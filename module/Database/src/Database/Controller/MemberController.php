@@ -129,6 +129,26 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Delete action.
+     *
+     * Delete a member.
+     */
+    public function deleteAction()
+    {
+        $service = $this->getMemberService();
+
+        $lidnr = $this->params()->fromRoute('id');
+
+        $member = $service->getMember($lidnr);
+
+        if ($this->getRequest()->isPost()) {
+            // do delete
+        }
+
+        return new ViewModel(['success' => false, 'member' => $member['member']]);
+    }
+
+    /**
      * Lists action.
      *
      * Update list membership.
