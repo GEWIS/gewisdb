@@ -468,7 +468,7 @@ class Member extends AbstractService
         // find the address
         if ($create) {
             $address = new Address();
-            $address->setMember($this->getMemberMapper()->find($lidnr));
+            $address->setMember($this->getMemberMapper()->findSimple($lidnr));
             $address->setType($type);
         } else {
             $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);

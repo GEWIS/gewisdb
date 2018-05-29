@@ -120,7 +120,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'birth',
             'type' => 'date',
             'options' => array(
-                'label' => $translator->translate('Geboortedatum')
+                'label' => $translator->translate('Geboortedatum') . ' (YYYY-MM-DD)'
             )
         ));
 
