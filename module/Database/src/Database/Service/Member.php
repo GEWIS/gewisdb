@@ -37,13 +37,13 @@ class Member extends AbstractService
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'homeAddress', 'studentAddress', 'agreed', 'iban'
+                'studentAddress', 'agreed', 'iban'
             ));
         } else {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'homeAddress', 'agreed', 'iban'
+                'agreed', 'iban'
             ));
         }
 
