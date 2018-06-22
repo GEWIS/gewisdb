@@ -94,6 +94,7 @@ class Meeting extends AbstractService
 
         foreach ($decision->getSubdecisions() as $subdecision) {
             $this->generateSubDecision($subdecision, $reportDecision);
+            $content[] = $subdecision->getContent();
         }
 
         if (empty($content)) {
@@ -240,7 +241,6 @@ class Meeting extends AbstractService
             $cnt = '';
         }
         $reportSubDecision->setContent($cnt);
-        $content[] = $subdecision->getContent();
         $em->persist($reportSubDecision);
         return $reportSubDecision;
     }
