@@ -89,8 +89,7 @@ class Member extends Form implements InputFilterProviderInterface
                     'bachelor' => array(
                         'label' => 'Bachelor',
                         'options' => array(
-                            'Bachelor Web Science' => 'Web Science',
-                            'Bachelor Software Science' => 'Software Science',
+                            'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
                             'Bachelor Industrial Applied Mathematics' => 'Industrial Applied Mathematics'
                         )
                     ),
@@ -121,15 +120,10 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'birth',
             'type' => 'date',
             'options' => array(
-                'label' => $translator->translate('Geboortedatum')
+                'label' => $translator->translate('Geboortedatum') . ' (YYYY-MM-DD)'
             )
         ));
 
-
-        $home = clone $address;
-        $home->setName('homeAddress');
-        $home->get('type')->setValue(Address::TYPE_HOME);
-        $this->add($home);
 
         $student = clone $address;
         $student->setName('studentAddress');

@@ -19,7 +19,6 @@ class Organ extends AbstractService
     {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $foundationRepo = $em->getRepository('Report\Model\SubDecision\Foundation');
-        $repo = $em->getRepository('Report\Model\Organ');
 
         $foundations = $foundationRepo->findBy([], [
             'meeting_type' => 'DESC',
@@ -31,15 +30,7 @@ class Organ extends AbstractService
 
         foreach ($foundations as $foundation) {
             // see if there already is an organ
-            $repOrgan = $foundation->getOrgan();
-            if (null === $repOrgan) {
-                $repOrgan = new ReportOrgan();
-                $repOrgan->setFoundation($foundation);
-            }
-            $repOrgan->setAbbr($foundation->getAbbr());
-            $repOrgan->setName($foundation->getName());
-            $repOrgan->setType($foundation->getOrganType());
-            $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
+            $repOrgan = $this->generateFoundation($foundation);
 
             /**
              * Also find all related subdecisions.
@@ -60,36 +51,10 @@ class Organ extends AbstractService
                 $repOrgan->addSubdecision($ref);
 
                 if ($ref instanceof Abrogation) {
-                    $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
+                    $this->generateAbrogation($ref);
                 }
                 if ($ref instanceof Installation) {
-                    // get full reference
-                    $organMember = $ref->getOrganMember();
-                    if (null === $organMember) {
-                        $organMember = new OrganMember();
-                        // set the ID stuff
-                        $organMember->setOrgan($repOrgan);
-                        $organMember->setMember($ref->getMember());
-                        $function = $ref->getFunction();
-                        if (null === $function)
-                            $function = 'Lid';
-                        $organMember->setFunction($function);
-                        $organMember->setInstallDate($ref->getDecision()->getMeeting()->getDate());
-                    }
-                    $organMember->setInstallation($ref);
-                    $discharge = $ref->getDischarge();
-                    if (null !== $discharge) {
-                        $organMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
-
-                        // also add discharge as related
-                        $repOrgan->addSubdecision($discharge);
-                    }
-
-                    if ($repOrgan->getAbrogationDate() !== null && $organMember->getDischargeDate() === null) {
-                        $organMember->setDischargeDate($repOrgan->getAbrogationDate());
-                    }
-
-                    $em->persist($organMember);
+                    $this->generateInstallation($ref);
                 }
             }
             $em->persist($repOrgan);
@@ -97,11 +62,83 @@ class Organ extends AbstractService
         $em->flush();
     }
 
-    /**
-     * Get the console object.
-     */
-    public function getConsole()
+    public function generateFoundation($foundation)
     {
-        return $this->getServiceManager()->get('console');
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        // see if there already is an organ
+        $repOrgan = $foundation->getOrgan();
+        if (null === $repOrgan) {
+            $repOrgan = new ReportOrgan();
+            $repOrgan->setFoundation($foundation);
+        }
+        $repOrgan->setAbbr($foundation->getAbbr());
+        $repOrgan->setName($foundation->getName());
+        $repOrgan->setType($foundation->getOrganType());
+        $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
+        $em->persist($repOrgan);
+        return $repOrgan;
     }
+
+    public function generateAbrogation($ref)
+    {
+        $repOrgan = $ref->getFoundation()->getOrgan();
+        $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
+    }
+
+    public function generateInstallation($ref)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $repo = $em->getRepository('Report\Model\Organ');
+        // get full reference
+        $organMember = $ref->getOrganMember();
+        $repOrgan = $ref->getFoundation()->getOrgan();
+        if ($repOrgan === null) {
+            // Grabbing the organ from the foundation doesn't work when it has not been saved yet
+            $repOrgan = $repo->findOneBy([
+                'foundation' => $ref->getFoundation()
+            ]);
+            if ($repOrgan === null) {
+                throw new \LogicException('Installation without Organ');
+            }
+        }
+
+        if (null === $organMember) {
+            $organMember = new OrganMember();
+            // set the ID stuff
+            $organMember->setOrgan($repOrgan);
+            $organMember->setMember($ref->getMember());
+            $function = $ref->getFunction();
+            if (null === $function)
+                $function = 'Lid';
+            $organMember->setFunction($function);
+            $organMember->setInstallDate($ref->getDecision()->getMeeting()->getDate());
+        }
+        $organMember->setInstallation($ref);
+        $discharge = $ref->getDischarge();
+        if (null !== $discharge) {
+            $organMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
+
+            // also add discharge as related
+            $repOrgan->addSubdecision($discharge);
+        }
+
+        if ($repOrgan->getAbrogationDate() !== null && $organMember->getDischargeDate() === null) {
+            $organMember->setDischargeDate($repOrgan->getAbrogationDate());
+        }
+
+        $em->persist($organMember);
+    }
+
+    public function generateDischarge($ref)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $organMember = $ref->getInstallation()->getOrganMember();
+        if ($organMember === null) {
+            throw new \LogicException('Discharge without OrganMember');
+        }
+
+        $organMember->setDischargeDate($ref->getDecision()->getMeeting()->getDate());
+        $em->persist($organMember);
+    }
+
 }

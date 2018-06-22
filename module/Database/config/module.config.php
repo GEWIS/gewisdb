@@ -242,6 +242,24 @@ return array(
                                     )
                                 )
                             ),
+                            'delete' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/delete',
+                                    'defaults' => array(
+                                        'action' => 'delete'
+                                    )
+                                )
+                            ),
+                            'print' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/print',
+                                    'defaults' => array(
+                                        'action' => 'print'
+                                    )
+                                )
+                            ),
                             'remove-address' => array(
                                 'type' => 'Segment',
                                 'options' => array(

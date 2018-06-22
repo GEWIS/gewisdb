@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-10 21:47+0200\n"
+"POT-Creation-Date: 2018-05-24 09:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.0.7\n"
 
 #: module/Database/view/database/member/subscribe.phtml:23
 msgid "Inschrijving Studievereniging <span class=\"gewis-red\">GEWIS</span>"
@@ -79,13 +79,25 @@ msgid ""
 "en\n"
 "ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten "
 "en\n"
-"HR gelezen."
+"HR gelezen.\n"
+"\n"
+"Ik geef hierbij GEmeenschap Wiskunde en Informatica (GEWIS) toestemming tot "
+"het verwerken van mijn\n"
+"persoonsgegevens. Binnen twee jaar na afloop van mijn lidmaatschap worden "
+"mijn gegevens automatisch\n"
+"verwijderd, tenzij ik expliciete toestemming geef dit niet te doen."
 msgstr ""
-"I hereby declare to have filled the enitere form truthfully and agree to "
-"become a member of Studievereniging GEWIS. I have read and agree to be bound "
-"by the articles of association and the code of conduct."
+"I hereby declare to have filled the enitere form truthfully and agree to \n"
+"become a member of Studievereniging GEWIS. I have read and agree to be "
+"bound \n"
+"by the articles of association and the code of conduct.\n"
+"\n"
+"I hereby give GEmeenschap Wiskunde en Informatica (GEWIS) permission to "
+"process my personal data. Within two years of the end of my membership all "
+"the data will be removed automatically, unless I explicitly give permission "
+"not to do so."
 
-#: module/Database/view/database/member/subscribe.phtml:482
+#: module/Database/view/database/member/subscribe.phtml:486
 msgid ""
 "Ik geef hierbij GEmeenschap Wiskunde en Informatica\n"
 "(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar mijn "
@@ -100,54 +112,16 @@ msgstr ""
 "named fifteen euro, to amortize from my account and my bank to send a one-"
 "time amount from my account in accordance with the command of GEWIS."
 
-#: module/Database/view/database/member/subscribe.phtml:508
+#: module/Database/view/database/member/subscribe.phtml:512
+#: module/Database/view/database/member/print.phtml:5
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr "Congratulations! You are registered as a member of GEWIS"
 
-#: module/Database/view/database/member/subscribe.phtml:509
+#: module/Database/view/database/member/subscribe.phtml:513
+#: module/Database/view/database/member/print.phtml:6
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
 msgstr ""
 "<br>Your registration becomes final after you've paid your membership fee"
-
-#: module/Application/view/error/index.phtml:1
-msgid "An error occurred"
-msgstr "An error occurred"
-
-#: module/Application/view/error/index.phtml:8
-#: module/Application/view/error/404.phtml:53
-msgid "Additional information"
-msgstr "Additional information"
-
-#: module/Application/view/error/index.phtml:11
-#: module/Application/view/error/index.phtml:35
-#: module/Application/view/error/404.phtml:56
-#: module/Application/view/error/404.phtml:80
-msgid "File"
-msgstr "File"
-
-#: module/Application/view/error/index.phtml:15
-#: module/Application/view/error/index.phtml:39
-#: module/Application/view/error/404.phtml:60
-#: module/Application/view/error/404.phtml:84
-msgid "Message"
-msgstr "Message"
-
-#: module/Application/view/error/index.phtml:19
-#: module/Application/view/error/index.phtml:43
-#: module/Application/view/error/404.phtml:64
-#: module/Application/view/error/404.phtml:88
-msgid "Stack trace"
-msgstr "Stack trace"
-
-#: module/Application/view/error/index.phtml:29
-#: module/Application/view/error/404.phtml:74
-msgid "Previous exceptions"
-msgstr "Previous exceptions"
-
-#: module/Application/view/error/index.phtml:58
-#: module/Application/view/error/404.phtml:103
-msgid "No Exception available"
-msgstr "No Exception available"
 
 #: module/Application/view/error/404.phtml:1
 msgid "A 404 error occurred"
@@ -183,6 +157,70 @@ msgstr "Controller"
 #, php-format
 msgid "resolves to %s"
 msgstr "resolves to %s"
+
+#: module/Application/view/error/404.phtml:53
+#: module/Application/view/error/index.phtml:8
+msgid "Additional information"
+msgstr "Additional information"
+
+#: module/Application/view/error/404.phtml:56
+#: module/Application/view/error/404.phtml:80
+#: module/Application/view/error/index.phtml:11
+#: module/Application/view/error/index.phtml:35
+msgid "File"
+msgstr "File"
+
+#: module/Application/view/error/404.phtml:60
+#: module/Application/view/error/404.phtml:84
+#: module/Application/view/error/index.phtml:15
+#: module/Application/view/error/index.phtml:39
+msgid "Message"
+msgstr "Message"
+
+#: module/Application/view/error/404.phtml:64
+#: module/Application/view/error/404.phtml:88
+#: module/Application/view/error/index.phtml:19
+#: module/Application/view/error/index.phtml:43
+msgid "Stack trace"
+msgstr "Stack trace"
+
+#: module/Application/view/error/404.phtml:74
+#: module/Application/view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr "Previous exceptions"
+
+#: module/Application/view/error/404.phtml:103
+#: module/Application/view/error/index.phtml:58
+msgid "No Exception available"
+msgstr "No Exception available"
+
+#: module/Application/view/error/index.phtml:1
+msgid "An error occurred"
+msgstr "An error occurred"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:28
+msgid "Land"
+msgstr "Country"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:37
+msgid "Straat"
+msgstr "Street"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:45
+msgid "Huisnummer"
+msgstr "House number"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:53
+msgid "Postcode"
+msgstr "Postal Code"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:61
+msgid "Stad"
+msgstr "City"
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:69
+msgid "Telefoonnummer"
+msgstr "Phone number"
 
 #: module/Database/src/Database/Form/Member.php:34
 msgid "Achternaam"
@@ -224,53 +262,40 @@ msgstr "TU/e registration number"
 msgid "Studie"
 msgstr "Study Program"
 
-#: module/Database/src/Database/Form/Member.php:108
+#: module/Database/src/Database/Form/Member.php:107
 msgid "Selecteer een studie"
 msgstr "Select a study program"
 
-#: module/Database/src/Database/Form/Member.php:116
+#: module/Database/src/Database/Form/Member.php:115
 msgid "Email-adres"
 msgstr "Email address"
 
-#: module/Database/src/Database/Form/Member.php:124
+#: module/Database/src/Database/Form/Member.php:123
 msgid "Geboortedatum"
 msgstr "Birth date"
 
-#: module/Database/src/Database/Form/Member.php:143
+#: module/Database/src/Database/Form/Member.php:142
 msgid "IBAN"
 msgstr "IBAN"
 
-#: module/Database/src/Database/Form/Member.php:161
+#: module/Database/src/Database/Form/Member.php:160
 msgid "Schrijf in"
 msgstr "Send"
 
-#: module/Database/src/Database/Form/Member.php:272
+#: module/Database/src/Database/Form/Member.php:271
 msgid "Je moet de voorwaarden accepteren!"
-msgstr "You have to accept the code of conduct."
+msgstr "You have to accept the code of conduct!"
 
-#: module/Database/src/Database/Form/Fieldset/Address.php:28
-msgid "Land"
-msgstr "Country"
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:37
-msgid "Straat"
-msgstr "Street"
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:45
-msgid "Huisnummer"
-msgstr "House number"
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:53
-msgid "Postcode"
-msgstr "Postal Code"
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:61
-msgid "Stad"
-msgstr "City"
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:69
-msgid "Telefoonnummer"
-msgstr "Phone number"
+#~ msgid ""
+#~ "Ik verklaar hierbij het formulier geheel naar waarheid te hebben "
+#~ "ingevuld, en\n"
+#~ "ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de "
+#~ "statuten en\n"
+#~ "HR gelezen."
+#~ msgstr ""
+#~ "I hereby declare to have filled the enitere form truthfully and agree to "
+#~ "become a member of Studievereniging GEWIS. I have read and agree to be "
+#~ "bound by the articles of association and the code of conduct."
 
 #~ msgid "Lid met lidnummer %1$s is toegevoegd."
 #~ msgstr "Member with membership number %1$s has been added."

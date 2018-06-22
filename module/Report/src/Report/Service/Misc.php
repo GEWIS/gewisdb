@@ -17,39 +17,45 @@ class Misc extends AbstractService
         // mailing lists
         $listMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\MailingList');
-        $memberRepo = $em->getRepository('Report\Model\Member');
+
 
         foreach ($listMapper->findAll() as $list) {
-            $reportList = $repo->find($list->getName());
-
-            if (null === $reportList) {
-                $reportList = new ReportList();
-                $reportList->setName($list->getName());
-            }
-
-            $reportList->setEnDescription($list->getEnDescription());
-            $reportList->setNlDescription($list->getNlDescription());
-            $reportList->setOnForm($list->getOnForm());
-            $reportList->setDefaultSub($list->getDefaultSub());
-
-            // list memberships
-            foreach ($list->getMembers() as $member) {
-                $reportMember = $memberRepo->find($member->getLidnr());
-                // check if in the list
-                $func = function ($carry, $lst) use ($reportList) {
-                    return $carry || ($lst->getName() == $reportList->getName());
-                };
-                if (!array_reduce($reportMember->getLists()->toArray(), $func, false)) {
-                    $reportMember->addList($reportList);
-                }
-            }
-
-            $em->persist($reportList);
+            $this->generateList($list);
         }
         $em->flush();
     }
 
+    public function generateList($list)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $repo = $em->getRepository('Report\Model\MailingList');
+        $memberRepo = $em->getRepository('Report\Model\Member');
+        $reportList = $repo->find($list->getName());
+
+        if (null === $reportList) {
+            $reportList = new ReportList();
+            $reportList->setName($list->getName());
+        }
+
+        $reportList->setEnDescription($list->getEnDescription());
+        $reportList->setNlDescription($list->getNlDescription());
+        $reportList->setOnForm($list->getOnForm());
+        $reportList->setDefaultSub($list->getDefaultSub());
+
+        // list memberships
+        foreach ($list->getMembers() as $member) {
+            $reportMember = $memberRepo->find($member->getLidnr());
+            // check if in the list
+            $func = function ($carry, $lst) use ($reportList) {
+                return $carry || ($lst->getName() == $reportList->getName());
+            };
+            if (!array_reduce($reportMember->getLists()->toArray(), $func, false)) {
+                $reportMember->addList($reportList);
+            }
+        }
+
+        $em->persist($reportList);
+    }
     /**
      * Get the console object.
      */

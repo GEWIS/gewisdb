@@ -210,114 +210,9 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<h3><?= $this->translate('Thuisadres (adres van je ouders)') ?></h3>
-<fieldset>
-<?php
-$fs = $form->get('homeAddress');
-?>
-<?= $this->formHidden($fs->get('type')) ?>
 
-<?php
-$element = $fs->get('country');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('street');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('number');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('postalCode');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('city');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('phone');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-</fieldset>
-
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".study-address" aria-expanded="true" aria-controls="study-address">
-<?= $this->translate('Ik heb geen kamer') ?></button>
 <fieldset class="study-address in">
-<h3><?= $this->translate('Studieadres (adres kamer)') ?></h3>
+<h3><?= $this->translate('Adres') ?></h3>
 <?php
 $fs = $form->get('studentAddress');
 ?>
@@ -462,7 +357,11 @@ $element->setAttribute('placeholder', $element->getLabel());
                 <?= $this->formCheckbox($element) ?>
 <?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
 ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten en
-HR gelezen.') ?>
+HR gelezen.
+
+Ik geef hierbij GEmeenschap Wiskunde en Informatica (GEWIS) toestemming tot het verwerken van mijn
+persoonsgegevens. Binnen twee jaar na afloop van mijn lidmaatschap worden mijn gegevens automatisch
+verwijderd, tenzij ik expliciete toestemming geef dit niet te doen.') ?>
                 <?= $element->getLabel() ?>
             </label>
             <?= $this->formElementErrors($element) ?>
@@ -507,7 +406,7 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
 <?php else: ?>
     <h1 class="hidden-print"><?= $this->translate('Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS') ?>
         <small><?= $this->translate('Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!') ?></small></h1>
-    <h2 class="hidden-print">Hier nogmaals je gegevens ter controle <small>Print ook deze pagina</small></h2>
+    <h2 class="hidden-print">Hier nogmaals je gegevens ter controle</h2>
 <div class="row">
 <div class="col-md-6">
     <h1><?= $member->getFullName() ?></h1>

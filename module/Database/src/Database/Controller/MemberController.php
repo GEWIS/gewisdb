@@ -77,6 +77,18 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Print action.
+     *
+     * Prints member information.
+     */
+    public function printAction()
+    {
+        $service = $this->getMemberService();
+
+        return new ViewModel($service->getMember($this->params()->fromRoute('id')));
+    }
+
+    /**
      * Toggle supremum action.
      *
      * Toggles if a member wants a supremum
@@ -114,6 +126,32 @@ class MemberController extends AbstractActionController
         }
 
         return new ViewModel($service->getMemberEditForm($lidnr));
+    }
+
+    /**
+     * Delete action.
+     *
+     * Delete a member.
+     */
+    public function deleteAction()
+    {
+        $service = $this->getMemberService();
+        $lidnr = $this->params()->fromRoute('id');
+        $member = $service->getMember($lidnr);
+        $member = $member['member'];
+
+        if ($this->getRequest()->isPost()) {
+            $service->remove($member);
+            return new ViewModel([
+                'success' => true,
+            ]);
+        }
+
+        return new ViewModel([
+            'success' => false,
+            'member' => $member,
+            'canRemove' => $service->canRemove($member)
+        ]);
     }
 
     /**

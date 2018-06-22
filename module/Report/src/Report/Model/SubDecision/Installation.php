@@ -33,14 +33,14 @@ class Installation extends FoundationReference
     /**
      * Discharges.
      *
-     * @ORM\OneToOne(targetEntity="Discharge",mappedBy="installation")
+     * @ORM\OneToOne(targetEntity="Discharge",mappedBy="installation", cascade="remove")
      */
     protected $discharge;
 
     /**
      * The organmember reference.
      *
-     * @ORM\OneToOne(targetEntity="Report\Model\OrganMember",mappedBy="installation")
+     * @ORM\OneToOne(targetEntity="Report\Model\OrganMember",mappedBy="installation", cascade="remove")
      */
     protected $organMember;
 

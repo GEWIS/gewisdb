@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GEWISdb \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-10 21:47+0200\n"
+"POT-Creation-Date: 2018-05-24 09:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,10 +74,16 @@ msgid ""
 "en\n"
 "ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten "
 "en\n"
-"HR gelezen."
+"HR gelezen.\n"
+"\n"
+"Ik geef hierbij GEmeenschap Wiskunde en Informatica (GEWIS) toestemming tot "
+"het verwerken van mijn\n"
+"persoonsgegevens. Binnen twee jaar na afloop van mijn lidmaatschap worden "
+"mijn gegevens automatisch\n"
+"verwijderd, tenzij ik expliciete toestemming geef dit niet te doen."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:482
+#: module/Database/view/database/member/subscribe.phtml:486
 msgid ""
 "Ik geef hierbij GEmeenschap Wiskunde en Informatica\n"
 "(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar mijn "
@@ -88,52 +94,14 @@ msgid ""
 "schrijven overeenkomstig de opdracht van GEWIS."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:508
+#: module/Database/view/database/member/subscribe.phtml:512
+#: module/Database/view/database/member/print.phtml:5
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:509
+#: module/Database/view/database/member/subscribe.phtml:513
+#: module/Database/view/database/member/print.phtml:6
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:1
-msgid "An error occurred"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:8
-#: module/Application/view/error/404.phtml:53
-msgid "Additional information"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:11
-#: module/Application/view/error/index.phtml:35
-#: module/Application/view/error/404.phtml:56
-#: module/Application/view/error/404.phtml:80
-msgid "File"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:15
-#: module/Application/view/error/index.phtml:39
-#: module/Application/view/error/404.phtml:60
-#: module/Application/view/error/404.phtml:84
-msgid "Message"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:19
-#: module/Application/view/error/index.phtml:43
-#: module/Application/view/error/404.phtml:64
-#: module/Application/view/error/404.phtml:88
-msgid "Stack trace"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:29
-#: module/Application/view/error/404.phtml:74
-msgid "Previous exceptions"
-msgstr ""
-
-#: module/Application/view/error/index.phtml:58
-#: module/Application/view/error/404.phtml:103
-msgid "No Exception available"
 msgstr ""
 
 #: module/Application/view/error/404.phtml:1
@@ -168,6 +136,70 @@ msgstr ""
 #: module/Application/view/error/404.phtml:41
 #, php-format
 msgid "resolves to %s"
+msgstr ""
+
+#: module/Application/view/error/404.phtml:53
+#: module/Application/view/error/index.phtml:8
+msgid "Additional information"
+msgstr ""
+
+#: module/Application/view/error/404.phtml:56
+#: module/Application/view/error/404.phtml:80
+#: module/Application/view/error/index.phtml:11
+#: module/Application/view/error/index.phtml:35
+msgid "File"
+msgstr ""
+
+#: module/Application/view/error/404.phtml:60
+#: module/Application/view/error/404.phtml:84
+#: module/Application/view/error/index.phtml:15
+#: module/Application/view/error/index.phtml:39
+msgid "Message"
+msgstr ""
+
+#: module/Application/view/error/404.phtml:64
+#: module/Application/view/error/404.phtml:88
+#: module/Application/view/error/index.phtml:19
+#: module/Application/view/error/index.phtml:43
+msgid "Stack trace"
+msgstr ""
+
+#: module/Application/view/error/404.phtml:74
+#: module/Application/view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr ""
+
+#: module/Application/view/error/404.phtml:103
+#: module/Application/view/error/index.phtml:58
+msgid "No Exception available"
+msgstr ""
+
+#: module/Application/view/error/index.phtml:1
+msgid "An error occurred"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:28
+msgid "Land"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:37
+msgid "Straat"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:45
+msgid "Huisnummer"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:53
+msgid "Postcode"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:61
+msgid "Stad"
+msgstr ""
+
+#: module/Database/src/Database/Form/Fieldset/Address.php:69
+msgid "Telefoonnummer"
 msgstr ""
 
 #: module/Database/src/Database/Form/Member.php:34
@@ -210,50 +242,26 @@ msgstr ""
 msgid "Studie"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:108
+#: module/Database/src/Database/Form/Member.php:107
 msgid "Selecteer een studie"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:116
+#: module/Database/src/Database/Form/Member.php:115
 msgid "Email-adres"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:124
+#: module/Database/src/Database/Form/Member.php:123
 msgid "Geboortedatum"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:143
+#: module/Database/src/Database/Form/Member.php:142
 msgid "IBAN"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:161
+#: module/Database/src/Database/Form/Member.php:160
 msgid "Schrijf in"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:272
+#: module/Database/src/Database/Form/Member.php:271
 msgid "Je moet de voorwaarden accepteren!"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:28
-msgid "Land"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:37
-msgid "Straat"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:45
-msgid "Huisnummer"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:53
-msgid "Postcode"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:61
-msgid "Stad"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:69
-msgid "Telefoonnummer"
 msgstr ""

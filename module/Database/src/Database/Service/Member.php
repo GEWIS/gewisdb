@@ -33,6 +33,8 @@ class Member extends AbstractService
 
         $form->bind(new MemberModel());
 
+        $noiban = false;
+
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
@@ -46,6 +48,10 @@ class Member extends AbstractService
                 'agreed', 'iban'
             ));
         }
+        if ($data['iban'] == 'noiban') {
+            $noiban = true;
+            $data['iban'] = 'NL20INGB0001234567';
+        }
 
         $form->setData($data);
 
@@ -55,6 +61,10 @@ class Member extends AbstractService
 
         // set some extra data
         $member = $form->getData();
+
+        if ($noiban) {
+            $member->setIban(null);
+        }
 
         // find if there is an earlier member with the same email or name
         if ($this->getMemberMapper()->hasMemberWith($member->getEmail())) {
@@ -143,6 +153,54 @@ class Member extends AbstractService
     public function search($query)
     {
         return $this->getMemberMapper()->search($query);
+    }
+
+    /**
+     * Check if we can easily remove a member.
+     *
+     * @param int $lidnr
+     */
+    public function canRemove(MemberModel $member)
+    {
+        return $this->getMemberMapper()->canRemove($member);
+    }
+
+    /**
+     * Remove a member.
+     *
+     * @param Member $member
+     */
+    public function remove(MemberModel $member)
+    {
+        if ($this->canRemove($member)) {
+            return $this->getMemberMapper()->remove($member);
+        }
+        $this->clear($member);
+    }
+
+    /**
+     * Clear a member.
+     *
+     * @param Member $member
+     */
+    public function clear(MemberModel $member)
+    {
+        foreach ($member->getAddresses() as $address) {
+            $this->getMemberMapper()->removeAddress($address);
+        }
+        $member->setEmail('');
+        $member->setGender(MemberModel::GENDER_OTHER);
+        $member->setGeneration(0);
+        $member->setTuenumber(null);
+        $member->setStudy(null);
+        $member->setChangedOn(new \DateTime());
+        $member->setBirth(new \DateTime('0001-01-01 00:00:00'));
+        $member->setPaid(0);
+        $member->setIban(null);
+        $member->setSupremum('optout');
+        $member->clearLists();
+
+        $this->getMemberMapper()->persist($member);
     }
 
     /**
@@ -410,7 +468,7 @@ class Member extends AbstractService
         // find the address
         if ($create) {
             $address = new Address();
-            $address->setMember($this->getMemberMapper()->find($lidnr));
+            $address->setMember($this->getMemberMapper()->findSimple($lidnr));
             $address->setType($type);
         } else {
             $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);

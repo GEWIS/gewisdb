@@ -2,6 +2,9 @@
 use Database\Model\Member;
 use Database\Model\Address;
 ?>
+    <h1 class="hidden-print"><?= $this->translate('Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS') ?>
+        <small><?= $this->translate('Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!') ?></small></h1>
+    <h2 class="hidden-print">Hier nogmaals je gegevens ter controle <small>Print ook deze pagina</small></h2>
 <div class="row">
 <div class="col-md-6">
     <h1><?= $member->getFullName() ?></h1>
@@ -43,6 +46,14 @@ case Member::GENDER_OTHER:
 ?></td>
         </tr>
         <tr>
+            <th>TU/e nummer</th>
+            <td><?= $member->getTuenumber() ?></td>
+        </tr>
+        <tr>
+            <th>Studie</th>
+            <td><?= $member->getStudy() ?></td>
+        </tr>
+        <tr>
             <th>Email</th>
             <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
         </tr>
@@ -53,6 +64,10 @@ case Member::GENDER_OTHER:
         <tr>
             <th>Generatie</th>
             <td><?= $member->getGeneration() ?></td>
+        </tr>
+        <tr>
+            <th>IBAN</th>
+            <td><?= $member->getIban() ?></td>
         </tr>
         <tr>
             <th>Betaald (hoe veel)</th>
@@ -78,9 +93,7 @@ case Member::TYPE_HONORARY:
     echo 'Erelid';
     break;
 }
-?> <a href="<?= $this->url('member/show/edit/membership', array(
-    'id' => $member->getLidnr()
-)) ?>" class="btn btn-primary btn-xs">Wijzig / vernieuw</a></td>
+?></td>
         </tr>
         <tr>
             <th>Laatste wijziging lidmaatshap</th>
@@ -90,38 +103,7 @@ case Member::TYPE_HONORARY:
             <th>Verloopdatum lidmaatschap</th>
             <td><?= $member->getExpiration()->format('l j F Y') ?></td>
         </tr>
-        <tr>
-            <th>Wil supremum ontvangen</th>
-            <td>
-                <?= $member->getSupremum() ?>
-                <a href="<?= $this->url('member/show/supremum/optin', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Optin</a>
-                <a href="<?= $this->url('member/show/supremum/optout', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Optout</a>
-                <a href="<?= $this->url('member/show/supremum', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Reset</a>
-            </td>
-            </tr>
-        </table>
-        <a href="<?= $this->url('member/show/edit', array(
-            'id' => $member->getLidnr()
-        )) ?>" class="btn btn-primary">Wijzig gegevens</a>
-        <a href="<?= $this->url('member/show/delete', array(
-            'id' => $member->getLidnr()
-        )) ?>" class="btn btn-danger">Verwijder lid</a>
-    <h3>Lidmaatschap commissies en disputen</h3>
-    <?php if ($simple): ?>
-    Geen huidig lid van commissies en disputen
-<?php else: ?>
-<ul>
-<?php foreach ($member->getInstallations() as $install): ?>
-    <li><a href="<?= $this->url('organ/view', array(
-    'type' => $install->getFoundation()->getDecision()->getMeeting()->getType(),
-    'number' => $install->getFoundation()->getDecision()->getMeeting()->getNumber(),
-    'point' => $install->getFoundation()->getDecision()->getPoint(),
-    'decision' => $install->getFoundation()->getDecision()->getNumber(),
-    'subdecision' => $install->getFoundation()->getNumber()
-)) ?>"><?= $install->getFoundation()->getAbbr() ?></a></li>
-<?php endforeach; ?>
-</ul>
-<?php endif ?>
+    </table>
 </div>
 <div class="col-md-6">
 <h3>Adressen</h3>
@@ -140,13 +122,7 @@ case Address::TYPE_MAIL:
     echo 'Postadres';
     break;
 }
-?> <a href="<?= $this->url('member/show/edit/address', array(
-    'id' => $member->getLidnr(),
-    'type' => $address->getType()
-)) ?>" class="btn btn-primary btn-sm">Wijzig</a> <a href="<?= $this->url('member/show/remove-address', array(
-    'id' => $member->getLidnr(),
-    'type' => $address->getType()
-)) ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Verwijder</a></h4>
+?></h4>
 <table class="table table-bordered">
     <tr>
         <th>Land</th>
@@ -166,32 +142,27 @@ case Address::TYPE_MAIL:
     </tr>
 </table>
 <?php endforeach ?>
-<?php if (!isset($addresses[Address::TYPE_HOME])): ?>
-<a href="<?= $this->url('member/show/add-address', array(
-    'id' => $member->getLidnr(),
-    'type' => Address::TYPE_HOME
-)) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg thuisadres toe</a>
-<?php endif ?>
-<?php if (!isset($addresses[Address::TYPE_STUDENT])): ?>
-<a href="<?= $this->url('member/show/add-address', array(
-    'id' => $member->getLidnr(),
-    'type' => Address::TYPE_STUDENT
-)) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg kameradres toe</a>
-<?php endif ?>
-<?php if (!isset($addresses[Address::TYPE_MAIL])): ?>
-<a href="<?= $this->url('member/show/add-address', array(
-    'id' => $member->getLidnr(),
-    'type' => Address::TYPE_MAIL
-)) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Voeg postadres toe</a>
-<?php endif ?>
 <h3>Aangemelde mailing lists</h3>
 <ul>
 <?php foreach ($member->getLists() as $list): ?>
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
-<a href="<?= $this->url('member/show/edit/lists', array(
-    'id' => $member->getLidnr()
-)) ?>" class="btn btn-primary">Wijzig aanmeldingen mailing lists</a>
+<div class="visible-print">
+<table class="table table-bordered">
+    <tr>
+        <td>
+    Ik, <?= $member->getFullName() ?>, geef hierbij GEmeenschap Wiskunde en
+Informatica (GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar
+mijn bank om een bedrag van &euro;15,-, geheten vijftien euro, van mijn rekening af
+te schrijven en aan mijn bank om eenmalig een bedrag van mijn rekening af te
+schrijven overeenkomstig de opdracht van GEWIS.
+        </td>
+    </tr>
+    <tr>
+        <th>Handtekening<br><br><br><br><br><br></th>
+    </tr>
+</table>
+</div>
 </div>
 </div>
