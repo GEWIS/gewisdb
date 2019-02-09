@@ -9,6 +9,8 @@ use Database\Model\Address as DbAddress;
 use Report\Model\Member as ReportMember;
 use Report\Model\Address as ReportAddress;
 use Zend\Cache\Exception\LogicException;
+use Zend\ProgressBar\Adapter\Console;
+use Zend\ProgressBar\ProgressBar;
 
 class Member extends AbstractService
 {
@@ -22,18 +24,21 @@ class Member extends AbstractService
 
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
 
+        $memberCollection = $mapper->findAll();
+
+        $adapter = new Console();
+        $progress = new ProgressBar($adapter, 0, count($memberCollection));
+
         $num = 0;
         foreach ($mapper->findAll() as $member) {
             if ($num++ % 20 == 0) {
-                echo "Flushing for number $num\n";
+                $progress->update($num);
                 $em->flush();
                 $em->clear();
             }
             $this->generateMember($member);
         }
-        echo "Next: Flush\n";
         $em->flush();
-        echo "Done Flush\n";
     }
 
     public function generateMember($member)
