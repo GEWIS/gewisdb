@@ -22,10 +22,18 @@ class Member extends AbstractService
 
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
 
+        $num = 0;
         foreach ($mapper->findAll() as $member) {
+            if ($num++ % 20 == 0) {
+                echo "Flushing for number $num\n";
+                $em->flush();
+                $em->clear();
+            }
             $this->generateMember($member);
         }
+        echo "Next: Flush\n";
         $em->flush();
+        echo "Done Flush\n";
     }
 
     public function generateMember($member)

@@ -6,6 +6,7 @@ use Application\Service\AbstractService;
 
 use Report\Model\Organ as ReportOrgan;
 use Report\Model\OrganMember;
+use Report\Model\SubDecision;
 use Report\Model\SubDecision\Abrogation;
 use Report\Model\SubDecision\Installation;
 
@@ -29,6 +30,7 @@ class Organ extends AbstractService
         ]);
 
         foreach ($foundations as $foundation) {
+            echo "Creating organ {$foundation->getAbbr()}\n";
             // see if there already is an organ
             $repOrgan = $this->generateFoundation($foundation);
 
@@ -41,8 +43,6 @@ class Organ extends AbstractService
              * - installation
              * - discharge
              */
-            $related = [];
-
             $repOrgan->addSubdecision($foundation);
 
             // get the abrogation date and find organ members
@@ -58,6 +58,7 @@ class Organ extends AbstractService
                 }
             }
             $em->persist($repOrgan);
+            $em->flush();
         }
         $em->flush();
     }
@@ -76,12 +77,24 @@ class Organ extends AbstractService
         $repOrgan->setType($foundation->getOrganType());
         $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
         $em->persist($repOrgan);
+        $em->flush();
         return $repOrgan;
     }
 
     public function generateAbrogation($ref)
     {
         $repOrgan = $ref->getFoundation()->getOrgan();
+        if ($repOrgan === null) {
+            // Grabbing the organ from the foundation doesn't work when it has not been saved yet
+            $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+            $repo = $em->getRepository('Report\Model\Organ');
+            $repOrgan = $repo->findOneBy([
+                'foundation' => $ref->getFoundation()
+            ]);
+            if ($repOrgan === null) {
+                throw new \LogicException('Abrogation without Organ');
+            }
+        }
         $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
     }
 

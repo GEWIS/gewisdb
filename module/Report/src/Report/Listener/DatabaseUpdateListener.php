@@ -8,6 +8,18 @@ use Zend\ServiceManager\ServiceManager;
  */
 class DatabaseUpdateListener
 {
+    protected static $isflushing = false;
+
+    protected static function safeFlush($func)
+    {
+        if (self::$isflushing) {
+            return;
+        }
+        self::$isflushing = true;
+        $func();
+        self::$isflushing = false;
+    }
+
     protected $sm;
     public function __construct(ServiceManager $sm)
     {
@@ -50,8 +62,13 @@ class DatabaseUpdateListener
                 $this->getMiscService()->generateList($entity);
                 break;
 
+            default:
+                return;
+
         }
-        $em->flush();
+        self::safeFlush(function () use ($em) {
+            $em->flush();
+        });
     }
 
     public function processOrganUpdates($entity)

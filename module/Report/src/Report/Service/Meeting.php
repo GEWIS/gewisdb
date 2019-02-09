@@ -28,7 +28,9 @@ class Meeting extends AbstractService
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         foreach ($mapper->findAll(true, true) as $meeting) {
             $this->generateMeeting($meeting[0]);
+            echo "Flushing meeting {$meeting[0]->getType()} {$meeting[0]->getNumber()}\n";
             $em->flush();
+            $em->clear();
         }
         $em->flush();
     }
