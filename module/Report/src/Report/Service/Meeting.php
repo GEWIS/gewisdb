@@ -13,6 +13,8 @@ use Report\Model\Decision as ReportDecision;
 
 use Zend\Mail\Transport\TransportInterface;
 use Zend\Mail\Message;
+use Zend\ProgressBar\Adapter\Console;
+use Zend\ProgressBar\ProgressBar;
 
 class Meeting extends AbstractService
 {
@@ -26,9 +28,16 @@ class Meeting extends AbstractService
 
         // simply export every meeting
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        foreach ($mapper->findAll(true, true) as $meeting) {
+
+        $meetings = $mapper->findAll(true, true);
+
+        $adapter = new Console();
+        $progress = new ProgressBar($adapter, 0, count($meetings));
+
+        $num = 0;
+        foreach ($meetings as $meeting) {
             $this->generateMeeting($meeting[0]);
-            echo "Flushing meeting {$meeting[0]->getType()} {$meeting[0]->getNumber()}\n";
+            $progress->update(++$num);
             $em->flush();
             $em->clear();
         }
