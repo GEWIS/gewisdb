@@ -32,13 +32,15 @@ class Member extends AbstractService
         $num = 0;
         foreach ($mapper->findAll() as $member) {
             if ($num++ % 20 == 0) {
-                $progress->update($num);
                 $em->flush();
                 $em->clear();
+                $progress->update($num);
             }
             $this->generateMember($member);
         }
         $em->flush();
+        $em->clear();
+        $progress->finish();
     }
 
     public function generateMember($member)

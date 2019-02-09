@@ -9,6 +9,8 @@ use Report\Model\OrganMember;
 use Report\Model\SubDecision;
 use Report\Model\SubDecision\Abrogation;
 use Report\Model\SubDecision\Installation;
+use Zend\ProgressBar\Adapter\Console;
+use Zend\ProgressBar\ProgressBar;
 
 class Organ extends AbstractService
 {
@@ -29,8 +31,11 @@ class Organ extends AbstractService
             'number' => 'ASC'
         ]);
 
+        $adapter = new Console();
+        $progress = new ProgressBar($adapter, 0, count($foundations));
+
+        $num = 0;
         foreach ($foundations as $foundation) {
-            echo "Creating organ {$foundation->getAbbr()}\n";
             // see if there already is an organ
             $repOrgan = $this->generateFoundation($foundation);
 
@@ -59,8 +64,10 @@ class Organ extends AbstractService
             }
             $em->persist($repOrgan);
             $em->flush();
+            $progress->update(++$num);
         }
         $em->flush();
+        $progress->finish();
     }
 
     public function generateFoundation($foundation)

@@ -37,11 +37,12 @@ class Meeting extends AbstractService
         $num = 0;
         foreach ($meetings as $meeting) {
             $this->generateMeeting($meeting[0]);
-            $progress->update(++$num);
             $em->flush();
             $em->clear();
+            $progress->update(++$num);
         }
         $em->flush();
+        $progress->finish();
     }
 
     public function generateMeeting($meeting)
