@@ -42,18 +42,6 @@ class Misc extends AbstractService
         $reportList->setOnForm($list->getOnForm());
         $reportList->setDefaultSub($list->getDefaultSub());
 
-        // list memberships
-        foreach ($list->getMembers() as $member) {
-            $reportMember = $memberRepo->find($member->getLidnr());
-            // check if in the list
-            $func = function ($carry, $lst) use ($reportList) {
-                return $carry || ($lst->getName() == $reportList->getName());
-            };
-            if (!array_reduce($reportMember->getLists()->toArray(), $func, false)) {
-                $reportMember->addList($reportList);
-            }
-        }
-
         $em->persist($reportList);
     }
     /**

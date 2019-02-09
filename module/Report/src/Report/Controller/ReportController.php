@@ -12,17 +12,18 @@ class ReportController extends AbstractActionController
      */
     public function generateAction()
     {
-        $console = $this->getConsole();
+        echo "generating misc tables\n";
+        $this->getMiscService()->generate();
 
         echo "generating board tables\n";
         $this->getBoardService()->generate();
-
-        echo "generating misc tables\n";
-        $this->getMiscService()->generate();
     }
 
     public function generateAllAction()
     {
+        echo "generating mailing list tables\n";
+        $this->getMiscService()->generate();
+
         echo "generating members table\n";
         $this->getMemberService()->generate();
 
@@ -31,6 +32,9 @@ class ReportController extends AbstractActionController
 
         echo "generating organ tables\n";
         $this->getOrganService()->generate();
+
+        echo "generating board tables\n";
+        $this->getBoardService()->generate();
     }
 
     /**
