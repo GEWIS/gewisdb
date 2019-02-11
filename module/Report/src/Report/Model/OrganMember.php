@@ -179,9 +179,9 @@ class OrganMember
     /**
      * Set the discharge date.
      *
-     * @param \DateTime $dischargeDate
+     * @param \DateTime|null $dischargeDate
      */
-    public function setDischargeDate(\DateTime $dischargeDate)
+    public function setDischargeDate($dischargeDate)
     {
         $this->dischargeDate = $dischargeDate;
     }

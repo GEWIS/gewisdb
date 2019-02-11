@@ -266,8 +266,40 @@ class Meeting extends AbstractService
             'point' => $decision->getPoint(),
             'number' => $decision->getNumber()
         ));
+        foreach (array_reverse($reportDecision->getSubdecisions()->toArray()) as $subDecision) {
+            $this->deleteSubDecision($subDecision);
+        }
         $em->remove($reportDecision);
     }
+
+    public function deleteSubDecision($subDecision)
+    {
+        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        switch (true) {
+            case $subDecision instanceof \Report\Model\SubDecision\Destroy:
+                throw new \Exception('Deletion of destroy decisions not implemented');
+                break;
+            case $subDecision instanceof \Report\Model\SubDecision\Discharge:
+                $installation = $subDecision->getInstallation();
+                $installation->clearDischarge();
+                $organMember = $subDecision->getInstallation()->getOrganMember();
+                if ($organMember !== null) {
+                    $organMember->setDischargeDate(null);}
+                break;
+            case $subDecision instanceof \Report\Model\SubDecision\Foundation:
+                $organ = $subDecision->getOrgan();
+                $em->remove($organ);
+                break;
+            case $subDecision instanceof \Report\Model\SubDecision\Installation:
+                $organMember = $subDecision->getOrganMember();
+                if ($organMember !== null) {
+                    $em->remove($organMember);
+                }
+                break;
+        }
+        $em->remove($subDecision);
+    }
+
     /**
      * Obtain the correct member, given a database member.
      *
