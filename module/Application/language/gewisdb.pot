@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb \n"
+"Project-Id-Version: GEWISdb 8223e0c-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-24 09:48+0200\n"
+"POT-Creation-Date: 2019-08-17 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,27 +30,38 @@ msgid ""
 "verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
 msgstr ""
 
+#: module/Database/view/database/member/subscribe.phtml:31
+msgid "Naam"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:32
+#: module/Database/view/database/member/subscribe.phtml:215
+msgid "Adres"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:33
+#: module/Database/src/Database/Form/Fieldset/Address.php:53
+msgid "Postcode"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:34
+msgid "Plaats"
+msgstr ""
+
+#: module/Database/view/database/member/subscribe.phtml:35
+#: module/Database/src/Database/Form/Fieldset/Address.php:28
+msgid "Land"
+msgstr ""
+
 #: module/Database/view/database/member/subscribe.phtml:45
 msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:213
-msgid "Thuisadres (adres van je ouders)"
-msgstr ""
-
 #: module/Database/view/database/member/subscribe.phtml:318
-msgid "Ik heb geen kamer"
-msgstr ""
-
-#: module/Database/view/database/member/subscribe.phtml:320
-msgid "Studieadres (adres kamer)"
-msgstr ""
-
-#: module/Database/view/database/member/subscribe.phtml:423
 msgid "Mailinglijsten"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:425
+#: module/Database/view/database/member/subscribe.phtml:320
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
 "mededelingen\n"
@@ -60,15 +71,15 @@ msgid ""
 "inschrijvingen kunnen op een later tijdstip veranderd worden."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:450
+#: module/Database/view/database/member/subscribe.phtml:345
 msgid "Akkoordverklaring"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:452
+#: module/Database/view/database/member/subscribe.phtml:347
 msgid "Statuten en HR"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:463
+#: module/Database/view/database/member/subscribe.phtml:358
 msgid ""
 "Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
 "en\n"
@@ -83,7 +94,7 @@ msgid ""
 "verwijderd, tenzij ik expliciete toestemming geef dit niet te doen."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:486
+#: module/Database/view/database/member/subscribe.phtml:381
 msgid ""
 "Ik geef hierbij GEmeenschap Wiskunde en Informatica\n"
 "(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar mijn "
@@ -94,12 +105,12 @@ msgid ""
 "schrijven overeenkomstig de opdracht van GEWIS."
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:512
+#: module/Database/view/database/member/subscribe.phtml:407
 #: module/Database/view/database/member/print.phtml:5
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr ""
 
-#: module/Database/view/database/member/subscribe.phtml:513
+#: module/Database/view/database/member/subscribe.phtml:408
 #: module/Database/view/database/member/print.phtml:6
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
 msgstr ""
@@ -178,20 +189,12 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
-#: module/Database/src/Database/Form/Fieldset/Address.php:28
-msgid "Land"
-msgstr ""
-
 #: module/Database/src/Database/Form/Fieldset/Address.php:37
 msgid "Straat"
 msgstr ""
 
 #: module/Database/src/Database/Form/Fieldset/Address.php:45
 msgid "Huisnummer"
-msgstr ""
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:53
-msgid "Postcode"
 msgstr ""
 
 #: module/Database/src/Database/Form/Fieldset/Address.php:61
@@ -254,14 +257,14 @@ msgstr ""
 msgid "Geboortedatum"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:142
+#: module/Database/src/Database/Form/Member.php:137
 msgid "IBAN"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:160
+#: module/Database/src/Database/Form/Member.php:155
 msgid "Schrijf in"
 msgstr ""
 
-#: module/Database/src/Database/Form/Member.php:271
+#: module/Database/src/Database/Form/Member.php:266
 msgid "Je moet de voorwaarden accepteren!"
 msgstr ""

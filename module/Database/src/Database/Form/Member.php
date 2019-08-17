@@ -90,15 +90,16 @@ class Member extends Form implements InputFilterProviderInterface
                         'label' => 'Bachelor',
                         'options' => array(
                             'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Bachelor Industrial Applied Mathematics' => 'Industrial Applied Mathematics'
+                            'Bachelor Applied Mathematics' => 'Applied Mathematics'
                         )
                     ),
                     'master' => array(
                         'label' => 'Master',
                         'options' => array(
-                            'Master Industrial Applied Mathematics' => 'Industrial Applied Mathematics',
+                            'Master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
                             'Master Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Master Business Information Systems' => 'Business Information Systems',
+                            'Master Data Science in Engineering' => 'Data Science in Engineering',
+                            'Master Information Security Technology' => 'Information Security Technology',
                             'Master Embedded Systems' => 'Embedded Systems',
                             'Master Science Education and Communication' => 'Science Education and Communication'
                         )
@@ -120,7 +121,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'birth',
             'type' => 'date',
             'options' => array(
-                'label' => $translator->translate('Geboortedatum') . ' (YYYY-MM-DD)'
+                'label' => $translator->translate('Geboortedatum')
             )
         ));
 

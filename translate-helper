@@ -9,7 +9,7 @@ find ./module -iname "*.phtml" | xargs xgettext \
     --output=./module/Application/language/gewisdb.pot \
     --force-po \
     --package-name=GEWISdb \
-    --package-version=`git describe --dirty` \
+    --package-version=`git describe --dirty --always` \
     --copyright-holder=GEWIS \
 
 find ./module -iname "*.php" | xargs xgettext \
@@ -18,7 +18,7 @@ find ./module -iname "*.php" | xargs xgettext \
     --output=./module/Application/language/gewisdb.pot \
     --force-po \
     --package-name=GEWISdb \
-    --package-version=`git describe --dirty` \
+    --package-version=`git describe --dirty --always` \
     --copyright-holder=GEWIS \
     --join-existing \
 
