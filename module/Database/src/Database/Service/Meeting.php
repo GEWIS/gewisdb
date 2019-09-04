@@ -453,6 +453,16 @@ class Meeting extends AbstractService
 
         $decision = $form->getData();
 
+        foreach ($decision->getSubdecisions() as $sub) {
+            // use hack to make sure approval and changes are booleans
+            if ($sub->getApproval() === 'false') {
+                $sub->setApproval(false);
+            }
+            if ($sub->getChanges() === 'false') {
+                $sub->setChanges(false);
+            }
+        }
+
         // simply persist through the meeting mapper
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
