@@ -10,7 +10,8 @@ return array(
         'Import',
         'Checker',
         'Export',
-        'Report'
+        'Report',
+        'Api'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
