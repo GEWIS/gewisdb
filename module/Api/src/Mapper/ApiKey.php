@@ -37,12 +37,31 @@ class ApiKey
     }
 
     /**
+     * Find an API key by id.
+     * @return ApiKeyModel
+     */
+    public function find($id)
+    {
+        return $this->getRepository()->find($id);
+    }
+
+    /**
      * Persist.
      * @param ApiKeyModel $apikey
      */
-    public function persist(ApiKeyModel $apiKey)
+    public function persist(ApiKeyModel $apikey)
     {
-        $this->em->persist($apiKey);
+        $this->em->persist($apikey);
+        $this->em->flush();
+    }
+
+    /**
+     * Remove.
+     * @param ApiKeyModel $apikey
+     */
+    public function remove(ApiKeyModel $apikey)
+    {
+        $this->em->remove($apikey);
         $this->em->flush();
     }
 

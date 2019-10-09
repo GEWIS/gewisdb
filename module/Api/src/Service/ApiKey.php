@@ -66,6 +66,17 @@ class ApiKey
     }
 
     /**
+     * Delete an API key.
+     * @param int $id
+     */
+    public function delete($id)
+    {
+        $key = $this->mapper->find($id);
+
+        $this->mapper->remove($key);
+    }
+
+    /**
      * Get the API key form.
      * @return ApiKeyForm
      */

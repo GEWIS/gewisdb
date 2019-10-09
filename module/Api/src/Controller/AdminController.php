@@ -31,14 +31,24 @@ class AdminController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $result = $this->service->create($this->getRequest()->getPost());
             if ($result !== null) {
-                return new ViewModel([
-                    'key' => $result
-                ]);
+                return $this->redirect()->toRoute('settings/api');
             }
         }
 
         return new ViewModel([
             'form' => $this->service->getApiKeyForm()
         ]);
+    }
+
+    public function deleteAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            return $this->redirect()->toRoute('settings/api');
+        }
+        $id = $this->params()->fromRoute('id');
+
+        $this->service->delete($id);
+
+        return $this->redirect()->toRoute('settings/api');
     }
 }

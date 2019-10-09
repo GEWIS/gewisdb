@@ -2,10 +2,11 @@
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>#</th>
       <th>Name</th>
       <th>Secret</th>
       <th>Webhook</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,11 @@
       <td><?= $key->getName() ?></td>
       <td><?= $key->getSecret() ?></td>
       <td><?= $key->getWebhook() ?></td>
+      <td>
+        <form method="post" action="<?= $this->url('settings/api/delete', ['id' => $key->getId()]) ?>">
+          <button class="btn btn-danger btn-xs" type="submit">Delete</button>
+        </form>
+      </td>
     </tr>
     <?php endforeach ?>
   </tbody>

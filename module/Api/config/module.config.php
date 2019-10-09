@@ -41,6 +41,18 @@ return [
                                         'action' => 'create'
                                     ]
                                 ]
+                            ],
+                            'delete' => [
+                                'type' => 'segment',
+                                'options' => [
+                                    'route' => '/delete/:id',
+                                    'defaults' => [
+                                        'action' => 'delete',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
+                                    ],
+                                ]
                             ]
                         ]
                     ]
