@@ -1,1 +1,21 @@
-<?php var_dump($keys) ?>
+<h1>API Keys</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Secret</th>
+      <th>Webhook</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($keys as $key): ?>
+    <tr>
+      <td><?= $key->getId() ?></td>
+      <td><?= $key->getName() ?></td>
+      <td><?= $key->getSecret() ?></td>
+      <td><?= $key->getWebhook() ?></td>
+    </tr>
+    <?php endforeach ?>
+  </tbody>
+<table>

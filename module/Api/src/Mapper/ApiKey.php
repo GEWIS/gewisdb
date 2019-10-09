@@ -37,6 +37,16 @@ class ApiKey
     }
 
     /**
+     * Persist.
+     * @param ApiKeyModel $apikey
+     */
+    public function persist(ApiKeyModel $apiKey)
+    {
+        $this->em->persist($apiKey);
+        $this->em->flush();
+    }
+
+    /**
      * Get the repository for this mapper.
      * @return Doctrine\ORM\EntityRepository
      */
