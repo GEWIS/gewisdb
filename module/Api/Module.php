@@ -13,18 +13,4 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
-
-    /**
-     * Get service configuration.
-     *
-     * @return array Service configuration
-     */
-    public function getServiceConfig()
-    {
-        return array(
-            'invokables' => [],
-            'factories' => [],
-            'shared' => []
-        );
-    }
 }

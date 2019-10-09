@@ -1,4 +1,9 @@
 <?php
+use Api\Controller\AdminController;
+use Api\Controller\Factory\AdminControllerFactory;
+use Api\Service\ApiKey as ApiKeyService;
+use Api\Mapper\ApiKey as ApiKeyMapper;
+
 return [
     'router' => [
         'routes' => [
@@ -34,7 +39,9 @@ return [
     'controllers' => [
         'invokables' => [
             'Api\Controller\Index' => \Api\Controller\IndexController::class,
-            \Api\Controller\AdminController::class => \Api\Controller\AdminController::class,
+        ],
+        'factories' => [
+            AdminController::class => AdminControllerFactory::class,
         ]
     ],
     'view_manager' => [
@@ -43,6 +50,12 @@ return [
         ],
         'strategies' => [
             'ViewJsonStrategy'
+        ]
+    ],
+    'service_manager' => [
+        'factories' => [
+            ApiKeyService::class => \Api\Service\Factory\ApiKeyFactory::class,
+            ApiKeyMapper::class => \Api\Mapper\Factory\ApiKeyFactory::class,
         ]
     ],
     'doctrine' => [

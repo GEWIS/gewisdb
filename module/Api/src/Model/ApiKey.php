@@ -27,10 +27,16 @@ class ApiKey
     protected $name;
 
     /**
-     * Key
+     * Secret
      * @ORM\Column(type="string")
      */
-    protected $key;
+    protected $secret;
+
+    /**
+     * Webhook URL
+     * @ORM\Column(type="string")
+     */
+    protected $webhook;
 
 
     /**
@@ -61,20 +67,38 @@ class ApiKey
     }
 
     /**
-     * Get the key.
+     * Get the secret.
      * @return string
      */
-    public function getKey()
+    public function getSecret()
     {
-        return $this->key;
+        return $this->secret;
     }
 
     /**
-     * Set the key.
-     * @param string $key
+     * Set the secret.
+     * @param string $secret
      */
-    public function setKey($key)
+    public function setSecret($secret)
     {
-        $this->key = $key;
+        $this->secret = $secret;
+    }
+
+    /**
+     * Get the webhook.
+     * @return string
+     */
+    public function getWebhook()
+    {
+        return $this->webhook;
+    }
+
+    /**
+     * Set the webhook.
+     * @param string $webhook
+     */
+    public function setWebhook($webhook)
+    {
+        $this->webhook = $webhook;
     }
 }
