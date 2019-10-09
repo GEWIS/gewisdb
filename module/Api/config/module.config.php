@@ -13,11 +13,28 @@ return [
                     ],
                 ],
             ],
+            // settings route is already defined in the database module
+            'settings' => [
+                'child_routes' => [
+                    'api' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/api',
+                            'defaults' => [
+                                '__NAMESPACE__' => '',
+                                'controller' => \Api\Controller\AdminController::class,
+                                'action' => 'index'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ],
     ],
     'controllers' => [
         'invokables' => [
             'Api\Controller\Index' => \Api\Controller\IndexController::class,
+            \Api\Controller\AdminController::class => \Api\Controller\AdminController::class,
         ]
     ],
     'view_manager' => [
