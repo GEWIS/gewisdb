@@ -25,4 +25,20 @@ class AdminController extends AbstractActionController
             'keys' => $this->service->findAll()
         ]);
     }
+
+    public function createAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $result = $this->service->create($this->getRequest()->getPost());
+            if ($result !== null) {
+                return new ViewModel([
+                    'key' => $result
+                ]);
+            }
+        }
+
+        return new ViewModel([
+            'form' => $this->service->getApiKeyForm()
+        ]);
+    }
 }

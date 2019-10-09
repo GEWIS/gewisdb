@@ -4,6 +4,7 @@ namespace Api\Service;
 
 use Api\Mapper\ApiKey as ApiKeyMapper;
 use Api\Model\ApiKey as ApiKeyModel;
+use Api\Form\ApiKey as ApiKeyForm;
 use Zend\Math\Rand;
 
 class ApiKey
@@ -15,13 +16,20 @@ class ApiKey
     protected $mapper;
 
     /**
+     * @var ApiKeyForm
+     */
+    protected $apiKeyForm;
+
+    /**
      * Constructor.
      *
      * @param ApiKeyMapper $mapper
+     * @param ApiKeyForm $apiKeyForm
      */
-    public function __construct(ApiKeyMapper $mapper)
+    public function __construct(ApiKeyMapper $mapper, ApiKeyForm $apiKeyForm)
     {
         $this->mapper = $mapper;
+        $this->apiKeyForm = $apiKeyForm;
     }
 
     /**
@@ -35,16 +43,34 @@ class ApiKey
 
     /**
      * Create an API key.
-     * @param string $name
-     * @param string $webhook
+     * @param array $data
+     * @return ApiKeyModel|null
      */
-    public function create($name, $webhook)
+    public function create($data)
     {
-        $key = new ApiKeyModel();
-        $key->setName($name);
+        $form = $this->getApiKeyForm();
+
+        $form->bind(new ApiKeyModel());
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $key = $form->getData();
+        // generate random key
         $key->setSecret(Rand::getString(42));
-        $key->setWebhook($webhook);
 
         $this->mapper->persist($key);
+        return $key;
+    }
+
+    /**
+     * Get the API key form.
+     * @return ApiKeyForm
+     */
+    public function getApiKeyForm()
+    {
+        return $this->apiKeyForm;
     }
 }

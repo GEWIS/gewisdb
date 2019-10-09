@@ -30,6 +30,18 @@ return [
                                 'controller' => \Api\Controller\AdminController::class,
                                 'action' => 'index'
                             ]
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'create' => [
+                                'type' => 'literal',
+                                'options' => [
+                                    'route' => '/create',
+                                    'defaults' => [
+                                        'action' => 'create'
+                                    ]
+                                ]
+                            ]
                         ]
                     ]
                 ]
