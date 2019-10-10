@@ -20,11 +20,11 @@ class User
     protected $id;
 
     /**
-     * Username.
+     * Login.
      *
      * @ORM\Column(type="string")
      */
-    protected $name;
+    protected $login;
 
     /**
      * Member's password.
@@ -45,17 +45,17 @@ class User
     /**
      * @return string
      */
-    public function getName()
+    public function getLogin()
     {
-        return $this->name;
+        return $this->login;
     }
 
     /**
-     * @param string $name
+     * @param string $login
      */
-    public function setName($name)
+    public function setLogin($login)
     {
-        $this->name = $name;
+        $this->login = $login;
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 use User\Controller\UserController;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use User\Mapper\UserMapper;
+use User\Mapper\Factory\UserMapperFactory;
 
 return [
     'router' => [
@@ -17,9 +19,14 @@ return [
             ]
         ]
     ],
+    'service_manager' => [
+        'factories' => [
+            UserMapper::class => UserMapperFactory::class,
+        ]
+    ],
     'controllers' => [
         'invokables' => [
-            UserController::class => UserController::class
+            UserController::class => UserController::class,
         ]
     ],
     'view_manager' => [
