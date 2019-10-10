@@ -4,7 +4,6 @@ namespace Api\Mapper;
 
 use Api\Model\ApiKey as ApiKeyModel;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
 
 class ApiKey
 {
