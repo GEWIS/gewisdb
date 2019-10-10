@@ -3,6 +3,8 @@ use User\Controller\UserController;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use User\Mapper\UserMapper;
 use User\Mapper\Factory\UserMapperFactory;
+use User\Service\UserService;
+use User\Service\Factory\UserServiceFactory;
 
 return [
     'router' => [
@@ -21,6 +23,7 @@ return [
     ],
     'service_manager' => [
         'factories' => [
+            UserService::class => UserServiceFactory::class,
             UserMapper::class => UserMapperFactory::class,
         ]
     ],
