@@ -5,6 +5,7 @@ use User\Mapper\UserMapper;
 use User\Mapper\Factory\UserMapperFactory;
 use User\Service\UserService;
 use User\Service\Factory\UserServiceFactory;
+use User\Controller\Factory\UserControllerFactory;
 
 return [
     'router' => [
@@ -28,8 +29,8 @@ return [
         ]
     ],
     'controllers' => [
-        'invokables' => [
-            UserController::class => UserController::class,
+        'factories' => [
+            UserController::class => UserControllerFactory::class,
         ]
     ],
     'view_manager' => [
