@@ -27,7 +27,9 @@ class SettingsController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel([]);
+        return new ViewModel([
+            'users' => $this->service->findAll()
+        ]);
     }
 
     /**

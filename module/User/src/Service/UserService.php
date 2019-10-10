@@ -67,6 +67,15 @@ class UserService
     }
 
     /**
+     * Get all users.
+     * @return User[]
+     */
+    public function findAll()
+    {
+        return $this->mapper->findAll();
+    }
+
+    /**
      * Get the create form.
      * @return UserCreate
      */

@@ -1,4 +1,23 @@
 <h1>User list</h1>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Login</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($users as $user): ?>
+    <tr>
+      <td><?= $user->getId() ?>
+      <td><?= $user->getLogin() ?>
+      <td>TODO: link to edit/delete</td>
+    </tr>
+    <?php endforeach ?>
+  </tbody>
+</table>
+
 <a href="<?= $this->url('settings/user/default', ['action' => 'create']); ?>" class="btn btn-success">
      <span class="glyphicon glyphicon-plus"></span> Maak nieuwe gebruiker</a>

@@ -23,6 +23,14 @@ class UserMapper
     }
 
     /**
+     * @return User[]
+     */
+    public function findAll()
+    {
+        return $this->getRepository()->findAll();
+    }
+
+    /**
      * @param string $login
      * @return User
      */
