@@ -1,9 +1,9 @@
-FROM php:5.4-fpm
+FROM php:5.6-fpm
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libpng12-dev \
+        libpng-dev \
         libxml2-dev \
         libicu-dev \
         g++ \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-ext-install calendar
 
-RUN pecl install -o -f xdebug-2.4.1 && rm -rf /tmp/pear
+RUN pecl install -o -f xdebug-2.5.5 && rm -rf /tmp/pear
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
