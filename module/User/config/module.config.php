@@ -1,9 +1,10 @@
 <?php
 use User\Controller\UserController;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
     'router' => [
-        'routers' => [
+        'routes' => [
             'user' => [
                 'type' => 'literal',
                 'options' => [
@@ -19,6 +20,25 @@ return [
     'controllers' => [
         'invokables' => [
             UserController::class => UserController::class
+        ]
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
+            'user' => __DIR__ . '/../view/'
+        ]
+    ],
+    'doctrine' => [
+        'driver' => [
+            'user_entities' => [
+                'class' => AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../src/Model/']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    'User\Model' => 'user_entities'
+                ]
+            ]
         ]
     ]
 ];

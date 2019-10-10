@@ -13,7 +13,6 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
-        var_dump("Whatever.");
-        exit;
+        return new ViewModel([]);
     }
 }
