@@ -6,6 +6,8 @@ use User\Mapper\Factory\UserMapperFactory;
 use User\Service\UserService;
 use User\Service\Factory\UserServiceFactory;
 use User\Controller\Factory\UserControllerFactory;
+use User\Controller\SettingsController;
+use User\Controller\Factory\SettingsControllerFactory;
 
 return [
     'router' => [
@@ -17,6 +19,31 @@ return [
                     'defaults' => [
                         'controller' => UserController::class,
                         'action' => 'index'
+                    ]
+                ]
+            ],
+            // settings route is already defined in the database module
+            'settings' => [
+                'child_routes' => [
+                    'user' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/user',
+                            'defaults' => [
+                                '__NAMESPACE__' => '',
+                                'controller' => SettingsController::class,
+                                'action' => 'index'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'default' => [
+                                'type' => 'segment',
+                                'options' => [
+                                    'route' => '/:action',
+                                ]
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -31,6 +58,7 @@ return [
     'controllers' => [
         'factories' => [
             UserController::class => UserControllerFactory::class,
+            SettingsController::class => SettingsControllerFactory::class,
         ]
     ],
     'view_manager' => [

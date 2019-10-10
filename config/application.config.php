@@ -5,13 +5,13 @@ return array(
         'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
-        'User',
         'Application',
         'Database',
         'Import',
         'Checker',
         'Export',
-        'Report'
+        'Report',
+        'User',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
