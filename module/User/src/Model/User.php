@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Member model.
  *
  * @ORM\Entity
+ * @ORM\Table(name="users")
  */
 class User
 {

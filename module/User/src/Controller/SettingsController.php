@@ -37,6 +37,14 @@ class SettingsController extends AbstractActionController
     {
         $form = $this->service->getCreateForm();
 
+        if ($this->getRequest()->isPost()) {
+            $result = $this->service->create($this->getRequest()->getPost());
+
+            if ($result) {
+                return $this->redirect()->toRoute('settings/user');
+            }
+        }
+
         return new ViewModel([
             'form' => $form
         ]);

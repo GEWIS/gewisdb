@@ -52,6 +52,12 @@ class UserCreate extends Form implements InputFilterProviderInterface
                             'min' => 3,
                             'max' => 32
                         ]
+                    ],
+                    [
+                        'name' => 'regex',
+                        'options' => [
+                            'pattern' => '/^[a-zA-Z0-9]*$/'
+                        ]
                     ]
                 ]
             ],
