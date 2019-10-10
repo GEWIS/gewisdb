@@ -29,4 +29,12 @@ class SettingsController extends AbstractActionController
     {
         return new ViewModel([]);
     }
+
+    /**
+     * Create a user.
+     */
+    public function createAction()
+    {
+        return new ViewModel([]);
+    }
 }
