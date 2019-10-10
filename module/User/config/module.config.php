@@ -8,6 +8,7 @@ use User\Service\Factory\UserServiceFactory;
 use User\Controller\Factory\UserControllerFactory;
 use User\Controller\SettingsController;
 use User\Controller\Factory\SettingsControllerFactory;
+use User\Form\UserCreate;
 
 return [
     'router' => [
@@ -53,7 +54,10 @@ return [
         'factories' => [
             UserService::class => UserServiceFactory::class,
             UserMapper::class => UserMapperFactory::class,
-        ]
+        ],
+        'invokables' => [
+            UserCreate::class => UserCreate::class,
+        ],
     ],
     'controllers' => [
         'factories' => [

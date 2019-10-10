@@ -35,6 +35,10 @@ class SettingsController extends AbstractActionController
      */
     public function createAction()
     {
-        return new ViewModel([]);
+        $form = $this->service->getCreateForm();
+
+        return new ViewModel([
+            'form' => $form
+        ]);
     }
 }

@@ -27,7 +27,7 @@ class User
     protected $login;
 
     /**
-     * Member's password.
+     * User password.
      *
      * @ORM\Column(type="string")
      */
