@@ -7,6 +7,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use User\Service\UserService;
 use User\Mapper\UserMapper;
 use User\Form\UserCreate;
+use User\Form\Login;
 use Zend\Crypt\Password\Bcrypt;
 
 class UserServiceFactory implements FactoryInterface
@@ -20,6 +21,7 @@ class UserServiceFactory implements FactoryInterface
         return new UserService(
             $sm->get(UserMapper::class),
             $sm->get(UserCreate::class),
+            $sm->get(Login::class),
             $bcrypt
         );
     }

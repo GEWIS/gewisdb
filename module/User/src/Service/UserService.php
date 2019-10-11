@@ -6,6 +6,7 @@ use User\Mapper\UserMapper;
 use User\Form\UserCreate;
 use User\Model\User;
 use Zend\Crypt\Password\PasswordInterface;
+use User\Form\Login;
 
 class UserService
 {
@@ -21,6 +22,11 @@ class UserService
     protected $createForm;
 
     /**
+     * @var Login
+     */
+    protected $loginForm;
+
+    /**
      * @var PasswordInterface
      */
     protected $crypt;
@@ -33,11 +39,13 @@ class UserService
     public function __construct(
         UserMapper $mapper,
         UserCreate $createForm,
+        Login $loginForm,
         PasswordInterface $crypt
     ) {
         $this->mapper = $mapper;
         $this->createForm = $createForm;
         $this->crypt = $crypt;
+        $this->loginForm = $loginForm;
     }
 
     /**
@@ -82,5 +90,14 @@ class UserService
     public function getCreateForm()
     {
         return $this->createForm;
+    }
+
+    /**
+     * Get the login form.
+     * @return Login
+     */
+    public function getLoginForm()
+    {
+        return $this->loginForm;
     }
 }

@@ -9,6 +9,7 @@ use User\Controller\Factory\UserControllerFactory;
 use User\Controller\SettingsController;
 use User\Controller\Factory\SettingsControllerFactory;
 use User\Form\UserCreate;
+use User\Form\Login;
 
 return [
     'router' => [
@@ -57,6 +58,7 @@ return [
         ],
         'invokables' => [
             UserCreate::class => UserCreate::class,
+            Login::class => Login::class,
         ],
     ],
     'controllers' => [

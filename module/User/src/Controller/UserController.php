@@ -27,6 +27,8 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel([]);
+        return new ViewModel([
+            'form' => $this->service->getLoginForm()
+        ]);
     }
 }
