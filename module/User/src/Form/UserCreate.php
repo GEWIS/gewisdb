@@ -24,7 +24,15 @@ class UserCreate extends Form implements InputFilterProviderInterface
             'name' => 'password',
             'type' => 'password',
             'options' => [
-                'label' => 'Password'
+                'label' => 'Wachtwoord'
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'password_verify',
+            'type' => 'password',
+            'options' => [
+                'label' => 'Controleer wachtwoord'
             ]
         ]);
 
@@ -68,6 +76,17 @@ class UserCreate extends Form implements InputFilterProviderInterface
                         'name' => 'string_length',
                         'options' => [
                             'min' => 10
+                        ]
+                    ]
+                ]
+            ],
+            'password_verify' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'identical',
+                        'options' => [
+                            'token' => 'password'
                         ]
                     ]
                 ]
