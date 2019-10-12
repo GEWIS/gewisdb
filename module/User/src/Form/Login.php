@@ -63,14 +63,6 @@ class Login extends Form implements InputFilterProviderInterface
             ],
             'password' => [
                 'required' => true,
-                'validators' => [
-                    [
-                        'name' => 'string_length',
-                        'options' => [
-                            'min' => 10
-                        ]
-                    ]
-                ]
             ]
         ];
     }

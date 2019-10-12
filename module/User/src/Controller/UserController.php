@@ -27,6 +27,12 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
+        if ($this->getRequest()->isPost()) {
+            $result = $this->service->login($this->getRequest()->getPost());
+            if ($result) {
+                return $this->redirect()->toRoute('root');
+            }
+        }
         return new ViewModel([
             'form' => $this->service->getLoginForm()
         ]);

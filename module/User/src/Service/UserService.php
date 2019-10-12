@@ -51,6 +51,7 @@ class UserService
     /**
      * Create a user.
      * @param array $data
+     * @return bool
      */
     public function create($data)
     {
@@ -72,6 +73,33 @@ class UserService
         $this->mapper->persist($user);
 
         return true;
+    }
+
+    /**
+     * Log a user in.
+     * @param array $data
+     * @return bool
+     */
+    public function login($data)
+    {
+        $form = $this->getLoginForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        $data = $form->getData();
+        $user = $this->mapper->findByLogin($data['login'])[0];
+
+        if (!$this->crypt->verify($data['password'], $user->getPassword())) {
+            return false;
+        }
+
+        // TODO: persist login
+
+        return false;
     }
 
     /**
