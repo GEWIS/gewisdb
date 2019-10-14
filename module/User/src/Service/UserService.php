@@ -7,6 +7,7 @@ use User\Form\UserCreate;
 use User\Model\User;
 use Zend\Crypt\Password\PasswordInterface;
 use User\Form\Login;
+use Zend\Authentication\AuthenticationService;
 
 class UserService
 {
@@ -31,6 +32,11 @@ class UserService
      */
     protected $crypt;
 
+    /**
+     * @var AuthenticationService
+     */
+    protected $authService;
+
 
     /**
      * @param UserMapper $mapper
@@ -40,12 +46,14 @@ class UserService
         UserMapper $mapper,
         UserCreate $createForm,
         Login $loginForm,
-        PasswordInterface $crypt
+        PasswordInterface $crypt,
+        AuthenticationService $authService
     ) {
         $this->mapper = $mapper;
         $this->createForm = $createForm;
         $this->crypt = $crypt;
         $this->loginForm = $loginForm;
+        $this->authService = $authService;
     }
 
     /**

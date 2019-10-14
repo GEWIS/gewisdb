@@ -9,6 +9,7 @@ use User\Mapper\UserMapper;
 use User\Form\UserCreate;
 use User\Form\Login;
 use Zend\Crypt\Password\Bcrypt;
+use Zend\Authentication\AuthenticationService;
 
 class UserServiceFactory implements FactoryInterface
 {
@@ -22,7 +23,8 @@ class UserServiceFactory implements FactoryInterface
             $sm->get(UserMapper::class),
             $sm->get(UserCreate::class),
             $sm->get(Login::class),
-            $bcrypt
+            $bcrypt,
+            new AuthenticationService()
         );
     }
 }
