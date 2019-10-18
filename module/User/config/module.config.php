@@ -27,6 +27,15 @@ return [
                         'controller' => UserController::class,
                         'action' => 'index'
                     ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'default' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/:action'
+                        ]
+                    ]
                 ]
             ],
             // settings route is already defined in the database module

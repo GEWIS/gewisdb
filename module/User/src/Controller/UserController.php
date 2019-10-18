@@ -37,4 +37,13 @@ class UserController extends AbstractActionController
             'form' => $this->service->getLoginForm()
         ]);
     }
+
+    /**
+     * User logout action
+     */
+    public function logoutAction()
+    {
+        $this->service->logout();
+        return $this->redirect()->toRoute('user');
+    }
 }

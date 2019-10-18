@@ -110,6 +110,14 @@ class UserService
     }
 
     /**
+     * Log a user out.
+     */
+    public function logout()
+    {
+        $this->authService->clearIdentity();
+    }
+
+    /**
      * Get all users.
      * @return User[]
      */
