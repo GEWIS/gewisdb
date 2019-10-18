@@ -8,23 +8,20 @@ use User\Service\UserService;
 use User\Mapper\UserMapper;
 use User\Form\UserCreate;
 use User\Form\Login;
-use Zend\Crypt\Password\Bcrypt;
 use Zend\Authentication\AuthenticationService;
+use Zend\Crypt\Password\PasswordInterface;
 
 class UserServiceFactory implements FactoryInterface
 {
 
     public function createService(ServiceLocatorInterface $sm)
     {
-        $bcrypt = new Bcrypt([
-            'cost' => 12
-        ]);
         return new UserService(
             $sm->get(UserMapper::class),
             $sm->get(UserCreate::class),
             $sm->get(Login::class),
-            $bcrypt,
-            new AuthenticationService()
+            $sm->get(PasswordInterface::class),
+            $sm->get(AuthenticationService::class)
         );
     }
 }

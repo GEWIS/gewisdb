@@ -99,15 +99,14 @@ class UserService
         }
 
         $data = $form->getData();
-        $user = $this->mapper->findByLogin($data['login'])[0];
 
-        if (!$this->crypt->verify($data['password'], $user->getPassword())) {
-            return false;
-        }
+        $adapter = $this->authService->getAdapter();
+        $adapter->setIdentity($data['login']);
+        $adapter->setCredential($data['password']);
 
-        // TODO: persist login
+        $result = $this->authService->authenticate();
 
-        return false;
+        return $result->isValid();
     }
 
     /**

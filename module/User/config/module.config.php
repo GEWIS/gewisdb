@@ -10,6 +10,11 @@ use User\Controller\SettingsController;
 use User\Controller\Factory\SettingsControllerFactory;
 use User\Form\UserCreate;
 use User\Form\Login;
+use Zend\Crypt\Password\PasswordInterface;
+use User\Factory\PasswordFactory;
+use User\Model\User;
+use Zend\Authentication\AuthenticationService;
+use User\Service\Factory\AuthenticationServiceFactory;
 
 return [
     'router' => [
@@ -55,6 +60,8 @@ return [
         'factories' => [
             UserService::class => UserServiceFactory::class,
             UserMapper::class => UserMapperFactory::class,
+            PasswordInterface::class => PasswordFactory::class,
+            AuthenticationService::class => AuthenticationServiceFactory::class,
         ],
         'invokables' => [
             UserCreate::class => UserCreate::class,
@@ -83,6 +90,14 @@ return [
                 'drivers' => [
                     'User\Model' => 'user_entities'
                 ]
+            ]
+        ],
+        'authentication' => [
+            'orm_default' => [
+                'object_manager' => 'database_doctrine_em',
+                'identity_class' => User::class,
+                'identity_property' => 'login',
+                'credential_property' => 'password'
             ]
         ]
     ]
