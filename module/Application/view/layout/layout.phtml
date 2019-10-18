@@ -64,6 +64,7 @@ function getIsActive($view, array $condition)
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>">GEWIS Database</a>
                 </div>
                 <div class="collapse navbar-collapse">
+                    <?php if ($this->identity() !== null): ?>
                     <ul class="nav navbar-nav">
                         <li<?= getIsActive($this, array('database', 'meeting')) ?>><a href="<?= $this->url('meeting') ?>">Vergaderingen en Besluiten</a></li>
                         <li<?= getIsActive($this, array('database', 'organ')) ?>><a href="<?= $this->url('organ') ?>">Organen</a></li>
@@ -74,7 +75,9 @@ function getIsActive($view, array $condition)
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li<?= getIsActive($this, array('database', 'settings')) ?>><a href="<?= $this->url('settings') ?>">Settings</a></li>
+                        <li<?= getIsActive($this, array('user', 'user')) ?>><a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">Uitloggen</a></li>
                     </ul>
+                    <?php endif ?>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
