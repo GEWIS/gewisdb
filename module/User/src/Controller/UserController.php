@@ -30,7 +30,7 @@ class UserController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $result = $this->service->login($this->getRequest()->getPost());
             if ($result) {
-                return $this->redirect()->toRoute('root');
+                return $this->redirect()->toRoute('home');
             }
         }
         return new ViewModel([
