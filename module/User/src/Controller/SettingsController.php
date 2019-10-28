@@ -58,8 +58,16 @@ class SettingsController extends AbstractActionController
     public function editAction()
     {
         $form = $this->service->getEditForm();
+        $id = $this->params()->fromRoute('id');
+        $user = $this->service->find($id);
 
-        $user = $this->service->find($this->params()->fromRoute('id'));
+        if ($this->getRequest()->isPost()) {
+            $result = $this->service->edit($user, $this->getRequest()->getPost());
+
+            if ($result) {
+                return $this->redirect()->toRoute('settings/user');
+            }
+        }
 
         return new ViewModel([
             'form' => $form,

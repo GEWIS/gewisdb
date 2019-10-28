@@ -92,6 +92,31 @@ class UserService
     }
 
     /**
+     * Edit a user
+     * @param User $user
+     * @return bool
+     */
+    public function edit(User $user, $data)
+    {
+        $form = $this->getEditForm();
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        $data = $form->getData();
+        $password = $this->crypt->create($data['password']);
+
+        $user->setPassword($password);
+
+        $this->mapper->persist($user);
+
+        return true;
+    }
+
+    /**
      * Log a user in.
      * @param array $data
      * @return bool

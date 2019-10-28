@@ -14,9 +14,9 @@
       <td><?= $user->getId() ?>
       <td><?= $user->getLogin() ?>
       <td>
-          <a class="btn btn-primary btn-xs" href="<?= $this->url('settings/user/edit', ['id' => $user->getId()]) ?>">
-             Wijzig / Verwijder
-          </a>
+        <a class="btn btn-primary btn-xs" href="<?= $this->url('settings/user/edit', ['id' => $user->getId()]) ?>">
+          Wijzig / Verwijder
+        </a>
       </td>
     </tr>
     <?php endforeach ?>

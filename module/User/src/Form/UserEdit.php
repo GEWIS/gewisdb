@@ -32,7 +32,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Maak gebruiker aan'
+                'value' => 'Wijzig gebruiker'
             ]
         ]);
     }
