@@ -66,4 +66,12 @@ class SettingsController extends AbstractActionController
             'user' => $user
         ]);
     }
+
+    /**
+     * Remove a user.
+     */
+    public function removeAction()
+    {
+        // TODO: verify if method is post, and delete
+    }
 }

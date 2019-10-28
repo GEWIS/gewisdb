@@ -7,7 +7,7 @@ $form->setAttribute('role', 'form');
 $form->setAttribute('class', 'form-horizontal');
 ?>
 <div class="row">
-    <h2>Change password for user <?= $user->getLogin() ?></h2>
+    <h2>Wijzig wachtwoord voor gebruiker <?= $user->getLogin() ?></h2>
     <?= $this->form()->openTag($form) ?>
 
     <?php
@@ -50,4 +50,12 @@ $form->setAttribute('class', 'form-horizontal');
     </div>
 
     <?= $this->form()->closeTag() ?>
+</div>
+<div class="row">
+    <h2>Verwijder gebruiker <?= $user->getLogin() ?></h2>
+<form method="post" action="<?= $this->url('settings/user/delete', ['id' => $user->getId()]) ?>">
+    <div class="col-sm-offset-2 col-sm-10">
+    <button class="btn btn-danger">Verwijder gebruiker</button>
+    </div>
+</form>
 </div>

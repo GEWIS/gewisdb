@@ -68,7 +68,16 @@ return [
                                         'action' => 'edit'
                                     ]
                                 ]
-                            ]
+                            ],
+                            'delete' => [
+                                'type' => 'segment',
+                                'options' => [
+                                    'route' => '/delete/:id',
+                                    'defaults' => [
+                                        'action' => 'remove'
+                                    ]
+                                ]
+                            ],
                         ]
                     ]
                 ]

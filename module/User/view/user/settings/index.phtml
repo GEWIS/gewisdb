@@ -1,11 +1,11 @@
-<h1>User list</h1>
+<h1>Gebruikerslijst</h1>
 
 <table class="table">
   <thead>
     <tr>
       <th>#</th>
       <th>Login</th>
-      <th>Edit</th>
+      <th>Wijzig / verwijder</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +15,7 @@
       <td><?= $user->getLogin() ?>
       <td>
           <a class="btn btn-primary btn-xs" href="<?= $this->url('settings/user/edit', ['id' => $user->getId()]) ?>">
-             Edit
+             Wijzig / Verwijder
           </a>
       </td>
     </tr>
