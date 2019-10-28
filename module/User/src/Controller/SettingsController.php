@@ -51,4 +51,19 @@ class SettingsController extends AbstractActionController
             'form' => $form
         ]);
     }
+
+    /**
+     * Edit a user.
+     */
+    public function editAction()
+    {
+        $form = $this->service->getEditForm();
+
+        $user = $this->service->find($this->params()->fromRoute('id'));
+
+        return new ViewModel([
+            'form' => $form,
+            'user' => $user
+        ]);
+    }
 }

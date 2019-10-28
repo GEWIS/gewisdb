@@ -8,6 +8,7 @@ use User\Model\User;
 use Zend\Crypt\Password\PasswordInterface;
 use User\Form\Login;
 use Zend\Authentication\AuthenticationService;
+use User\Form\UserEdit;
 
 class UserService
 {
@@ -21,6 +22,11 @@ class UserService
      * @var UserCreate
      */
     protected $createForm;
+
+    /**
+     * @var UserEdit
+     */
+    protected $editForm;
 
     /**
      * @var Login
@@ -46,13 +52,15 @@ class UserService
         UserMapper $mapper,
         UserCreate $createForm,
         Login $loginForm,
+        UserEdit $editForm,
         PasswordInterface $crypt,
         AuthenticationService $authService
     ) {
         $this->mapper = $mapper;
         $this->createForm = $createForm;
-        $this->crypt = $crypt;
         $this->loginForm = $loginForm;
+        $this->editForm = $editForm;
+        $this->crypt = $crypt;
         $this->authService = $authService;
     }
 
@@ -127,12 +135,31 @@ class UserService
     }
 
     /**
+     * Get a User by ID.
+     * @param int $id
+     * @return User
+     */
+    public function find($id)
+    {
+        return $this->mapper->find($id);
+    }
+
+    /**
      * Get the create form.
      * @return UserCreate
      */
     public function getCreateForm()
     {
         return $this->createForm;
+    }
+
+    /**
+     * Get the edit form.
+     * @return UserEdit
+     */
+    public function getEditForm()
+    {
+        return $this->editForm;
     }
 
     /**

@@ -40,6 +40,15 @@ class UserMapper
     }
 
     /**
+     * @param int $id
+     * @return User
+     */
+    public function find($id)
+    {
+        return $this->getRepository()->find($id);
+    }
+
+    /**
      * @param User $user
      */
     public function persist(User $user)

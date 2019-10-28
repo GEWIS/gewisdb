@@ -13,7 +13,11 @@
     <tr>
       <td><?= $user->getId() ?>
       <td><?= $user->getLogin() ?>
-      <td>TODO: link to edit/delete</td>
+      <td>
+          <a class="btn btn-primary btn-xs" href="<?= $this->url('settings/user/edit', ['id' => $user->getId()]) ?>">
+             Edit
+          </a>
+      </td>
     </tr>
     <?php endforeach ?>
   </tbody>

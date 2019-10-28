@@ -15,6 +15,7 @@ use User\Factory\PasswordFactory;
 use User\Model\User;
 use Zend\Authentication\AuthenticationService;
 use User\Service\Factory\AuthenticationServiceFactory;
+use User\Form\UserEdit;
 
 return [
     'router' => [
@@ -58,6 +59,15 @@ return [
                                 'options' => [
                                     'route' => '/:action',
                                 ]
+                            ],
+                            'edit' => [
+                                'type' => 'segment',
+                                'options' => [
+                                    'route' => '/edit/:id',
+                                    'defaults' => [
+                                        'action' => 'edit'
+                                    ]
+                                ]
                             ]
                         ]
                     ]
@@ -74,6 +84,7 @@ return [
         ],
         'invokables' => [
             UserCreate::class => UserCreate::class,
+            UserEdit::class => UserEdit::class,
             Login::class => Login::class,
         ],
     ],

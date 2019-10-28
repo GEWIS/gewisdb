@@ -10,6 +10,7 @@ use User\Form\UserCreate;
 use User\Form\Login;
 use Zend\Authentication\AuthenticationService;
 use Zend\Crypt\Password\PasswordInterface;
+use User\Form\UserEdit;
 
 class UserServiceFactory implements FactoryInterface
 {
@@ -20,6 +21,7 @@ class UserServiceFactory implements FactoryInterface
             $sm->get(UserMapper::class),
             $sm->get(UserCreate::class),
             $sm->get(Login::class),
+            $sm->get(UserEdit::class),
             $sm->get(PasswordInterface::class),
             $sm->get(AuthenticationService::class)
         );

@@ -1,0 +1,53 @@
+<?php
+$form->prepare();
+$form->setAttribute('action', $this->url('settings/user/default', ['action' => 'create']));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('class', 'form-horizontal');
+?>
+<div class="row">
+    <h2>Change password for user <?= $user->getLogin() ?></h2>
+    <?= $this->form()->openTag($form) ?>
+
+    <?php
+    $element = $form->get('password');
+    $element->setAttribute('class', 'form-control');
+    $element->setAttribute('placeholder', $element->getLabel());
+    ?>
+    <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+        <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
+            <?= $element->getLabel() ?>
+        </label>
+        <div class="col-sm-10">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+    <?php
+    $element = $form->get('password_verify');
+    $element->setAttribute('class', 'form-control');
+    $element->setAttribute('placeholder', $element->getLabel());
+    ?>
+    <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+        <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
+            <?= $element->getLabel() ?>
+        </label>
+        <div class="col-sm-10">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+    <?php
+    $submit = $form->get('submit');
+    $submit->setLabel($submit->getValue());
+    $submit->setAttribute('class', 'btn btn-primary');
+    ?>
+    <div class="col-sm-offset-2 col-sm-10">
+        <?= $this->formButton($submit) ?>
+    </div>
+
+    <?= $this->form()->closeTag() ?>
+</div>
