@@ -58,6 +58,15 @@ class UserMapper
     }
 
     /**
+     * @param User $user
+     */
+    public function remove(User $user)
+    {
+        $this->em->remove($user);
+        $this->em->flush();
+    }
+
+    /**
      * @return \Doctrine\ORM\EntityRepository
      */
     public function getRepository()

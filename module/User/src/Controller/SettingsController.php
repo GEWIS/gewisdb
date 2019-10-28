@@ -80,6 +80,11 @@ class SettingsController extends AbstractActionController
      */
     public function removeAction()
     {
-        // TODO: verify if method is post, and delete
+        $user = $this->service->find($this->params()->fromRoute('id'));
+        if ($this->getRequest()->isPost()) {
+            $this->service->remove($user);
+        }
+        $this->redirect()->toRoute('settings/user');
     }
+
 }

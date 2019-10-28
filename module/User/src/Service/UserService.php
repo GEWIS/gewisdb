@@ -117,6 +117,15 @@ class UserService
     }
 
     /**
+     * Remove a user
+     * @param int $id
+     */
+    public function remove($id)
+    {
+        $this->mapper->remove($this->find($id));
+    }
+
+    /**
      * Log a user in.
      * @param array $data
      * @return bool
