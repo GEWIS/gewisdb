@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use DateTime;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -274,6 +275,17 @@ class Member extends Form implements InputFilterProviderInterface
                 'required' => false,
                 'validators' => array(
                     array('name' => 'digits')
+                )
+            ),
+            'birth' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'greater_than',
+                        'options' => array(
+                            'min' => (new DateTime())->sub(new \DateInterval('P8Y'))
+                        )
+                    )
                 )
             )
         );
