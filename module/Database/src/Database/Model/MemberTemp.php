@@ -176,7 +176,7 @@ class MemberTemp
      * Memberships of mailing lists.
      *
      * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
-     * @ORM\JoinTable(name="members_mailinglists",
+     * @ORM\JoinTable(name="members_temp_mailinglists",
      *      joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
      * )
