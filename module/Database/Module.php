@@ -322,6 +322,11 @@ class Module
                         $sm->get('database_doctrine_em')
                     );
                 },
+                'database_mapper_member_temp' => function ($sm) {
+                    return new \Database\Mapper\MemberTemp(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
                 'database_mapper_meeting' => function ($sm) {
                     return new \Database\Mapper\Meeting(
                         $sm->get('database_doctrine_em')

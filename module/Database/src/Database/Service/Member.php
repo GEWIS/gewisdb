@@ -6,6 +6,7 @@ use Application\Service\AbstractService;
 
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
+use Database\Model\MemberTemp as MemberTempModel;
 use Database\Model\MailingList;
 
 class Member extends AbstractService
@@ -23,7 +24,7 @@ class Member extends AbstractService
      *
      * @param array $data
      *
-     * @return Member member, null if failed.
+     * @return MemberTempModel member, null if failed.
      */
     public function subscribe($data)
     {
@@ -31,7 +32,7 @@ class Member extends AbstractService
 
         $form = $this->getMemberForm();
 
-        $form->bind(new MemberModel());
+        $form->bind(new MemberTempModel());
 
         $noiban = false;
 
@@ -60,44 +61,89 @@ class Member extends AbstractService
         }
 
         // set some extra data
-        $member = $form->getData();
+        $memberTemp = $form->getData();
 
         if ($noiban) {
-            $member->setIban(null);
+            $memberTemp->setIban(null);
         }
 
         // find if there is an earlier member with the same email or name
-        if ($this->getMemberMapper()->hasMemberWith($member->getEmail())) {
+        if ($this->getMemberMapper()->hasMemberWith($memberTemp->getEmail())) {
             $form->get('email')->setMessages([
                 'There already is a member with this email address.'
             ]);
             return null;
         }
 
-        if (!is_numeric($member->getTuenumber())) {
-            $member->setTuenumber(0);
+        if (!is_numeric($memberTemp->getTuenumber())) {
+            $memberTemp->setTuenumber(0);
         }
 
         // generation is the current year
-        $member->setGeneration((int) date('Y'));
+        $memberTemp->setGeneration((int) date('Y'));
 
         // by default, we only add ordinary members
-        $member->setType(MemberModel::TYPE_ORDINARY);
+        $memberTemp->setType(MemberModel::TYPE_ORDINARY);
+
+        // changed on date
+        $date = new \DateTime();
+        $date->setTime(0, 0);
+        $memberTemp->setChangedOn($date);
+
+        // check mailing lists
+        foreach ($form->getLists() as $list) {
+            if ($form->get('list-' . $list->getName())->isChecked()) {
+                $memberTemp->addList($list);
+            }
+        }
+        // subscribe to default mailing lists not on the form
+        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
+        foreach ($mailingMapper->findDefault() as $list) {
+            $memberTemp->addList($list);
+        }
+
+        $this->getMemberTempMapper()->persist($memberTemp);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $memberTemp));
+
+        return $this->finalizeSubscription($memberTemp);
+    }
+
+    /**
+     * @param MemberTempModel $memberTemp
+     * @return MemberModel
+     */
+    public function finalizeSubscription($memberTemp)
+    {
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+
+        $form = $this->getMemberForm();
+
+        $form->bind(new MemberModel());
+
+        $form->setData($memberTemp->toArray());
+
+        $member = $form->getData();
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $member->setGender($memberTemp->getGender());
+        $member->setStudy($memberTemp->getStudy());
+        $member->setBirth($memberTemp->getBirth());
+        $member->addAddresses($memberTemp->getAddresses());
+        $member->setIban($memberTemp->getIban());
+        $member->setTuenumber($memberTemp->getTuenumber());
+        $member->setGeneration($memberTemp->getGeneration());
+        $member->setType($memberTemp->getType());
 
         // changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        // check mailing lists
-        foreach ($form->getLists() as $list) {
-            if ($form->get('list-' . $list->getName())->isChecked()) {
-                $member->addList($list);
-            }
-        }
-        // subscribe to default mailing lists not on the form
-        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
-        foreach ($mailingMapper->findDefault() as $list) {
+        // add mailing lists
+        foreach ($memberTemp->getLists() as $list) {
             $member->addList($list);
         }
 
@@ -528,5 +574,15 @@ class Member extends AbstractService
     public function getMemberMapper()
     {
         return $this->getServiceManager()->get('database_mapper_member');
+    }
+
+    /**
+     * Get the member mapper.
+     *
+     * @return \Database\Mapper\Member
+     */
+    public function getMemberTempMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_member_temp');
     }
 }
