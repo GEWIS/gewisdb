@@ -20,7 +20,9 @@ $form->setAttribute('class', 'form-horizontal');
 <img src="<?= $this->basePath() ?>/img/gewis.png" />
 </div>
 <div class="col-md-9">
-<h1><?= $this->translate('Inschrijving Studievereniging <span class="gewis-red">GEWIS</span>') ?></h1>
+<h1><?= implode(' ', array($this->translate('Inschrijving Studievereniging'),
+        '<span class="gewis-red">GEWIS</span>',
+        'SEPA-machtiging')) ?></h1>
 <p>
 <?= $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
 lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost
@@ -28,7 +30,7 @@ eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging
 verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') ?>
 </p>
 <p>
-<?= $this->translate('Naam') ?>: GEWIS<br>
+<?= $this->translate('Naam') ?>: Gemeenschap van Wiskunde en Informatica Studenten<br>
 <?= $this->translate('Adres') ?>: Den Dolech 2<br>
 <?= $this->translate('Postcode') ?>: 5600 MB<br>
 <?= $this->translate('Plaats') ?>: Eindhoven<br>
@@ -412,139 +414,139 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
     <h1><?= $member->getFullName() ?></h1>
     <table class="table table-bordered">
         <tr>
-            <th>Lidnummer</th>
+            <th><?= $this->translate('Lidnummer') ?></th>
             <td><?= $member->getLidnr() ?></td>
         </tr>
         <tr>
-            <th>Voorletters</th>
+            <th><?= $this->translate('Voorletters') ?>/th>
             <td><?= $member->getInitials() ?></td>
         </tr>
         <tr>
-            <th>Voornaam</th>
+            <th><?= $this->translate('Voornaam') ?></th>
             <td><?= $member->getFirstName() ?></td>
         </tr>
         <tr>
-            <th>Tussenvoegsels</th>
+            <th><?= $this->translate('Tussenvoegsels') ?></th>
             <td><?= $member->getMiddleName() ?></td>
         </tr>
         <tr>
-            <th>Achternaam</th>
+            <th><?= $this->translate('Achternaam') ?></th>
             <td><?= $member->getLastName() ?></td>
         </tr>
         <tr>
-            <th>Geslacht</th>
+            <th><?= $this->translate('Geslacht') ?></th>
             <td><?php
 switch ($member->getGender()) {
 case Member::GENDER_MALE:
-    echo 'Man';
+    echo $this->translate('Man');
     break;
 case Member::GENDER_FEMALE:
-    echo 'Vrouw';
+    echo $this->translate('Vrouw');
     break;
 case Member::GENDER_OTHER:
-    echo 'Anders';
+    echo $this->translate('Anders');
     break;
 }
 ?></td>
         </tr>
         <tr>
-            <th>TU/e nummer</th>
+            <th><?= $this->translate('TU/e nummer') ?></th>
             <td><?= $member->getTuenumber() ?></td>
         </tr>
         <tr>
-            <th>Studie</th>
+            <th><?= $this->translate('Studie') ?></th>
             <td><?= $member->getStudy() ?></td>
         </tr>
         <tr>
-            <th>Email</th>
+            <th><?= $this->translate('Email') ?></th>
             <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
         </tr>
         <tr>
-            <th>Geboortedatum</th>
+            <th><?= $this->translate('Geboortedatum') ?></th>
             <td><?= $member->getBirth()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th>Generatie</th>
+            <th><?= $this->translate('Generatie') ?></th>
             <td><?= $member->getGeneration() ?></td>
         </tr>
         <tr>
-            <th>IBAN</th>
+            <th><?= $this->translate('IBAN') ?></th>
             <td><?= $member->getIban() ?></td>
         </tr>
         <tr>
-            <th>Betaald (hoe veel)</th>
+            <th><?= $this->translate('Betaald (hoe veel)') ?></th>
             <td><?= $member->getPaid() ?></td>
         </tr>
         <tr>
-            <th>Type lid</th>
+            <th><?= $this->translate('Type lid') ?></th>
             <td><?php
 switch ($member->getType()) {
 case Member::TYPE_ORDINARY:
-    echo 'Gewoon';
+    echo $this->translate('Gewoon');
     break;
 case Member::TYPE_PROLONGED:
-    echo 'Verlengd';
+    echo $this->translate('Verlengd');
     break;
 case Member::TYPE_EXTERNAL:
-    echo 'Extern';
+    echo $this->translate('Extern');
     break;
 case Member::TYPE_EXTRAORDINARY:
-    echo 'Buitengewoon';
+    echo $this->translate('Buitengewoon');
     break;
 case Member::TYPE_HONORARY:
-    echo 'Erelid';
+    echo $this->translate('Erelid');
     break;
 }
 ?></td>
         </tr>
         <tr>
-            <th>Laatste wijziging lidmaatshap</th>
+            <th><?= $this->translate('Laatste wijziging lidmaatshap') ?></th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th>Verloopdatum lidmaatschap</th>
+            <th><?= $this->translate('Verloopdatum lidmaatschap') ?></th>
             <td><?= $member->getExpiration()->format('l j F Y') ?></td>
         </tr>
     </table>
 </div>
 <div class="col-md-6">
-<h3>Adressen</h3>
+<h3><?= $this->translate('Adressen') ?></h3>
 <?php $addresses = array() ?>
 <?php foreach ($member->getAddresses() as $address): ?>
 <?php $addresses[$address->getType()] = $address ?>
 <h4><?php
 switch ($address->getType()) {
 case Address::TYPE_HOME:
-    echo 'Thuisadres (ouders)';
+    echo $this->translate('Thuisadres (ouders)');
     break;
 case Address::TYPE_STUDENT:
-    echo 'Kameradres';
+    echo $this->translate('Kameradres');
     break;
 case Address::TYPE_MAIL:
-    echo 'Postadres';
+    echo $this->translate('Postadres');
     break;
 }
 ?></h4>
 <table class="table table-bordered">
     <tr>
-        <th>Land</th>
+        <th><?= $this->translate('Land') ?></th>
         <td><?= $address->getCountry() ?></td>
     </tr>
     <tr>
-        <th>Straat en huisnummer</th>
+        <th><?= $this->translate('Straat en huisnummer') ?></th>
         <td><?= $address->getStreet() ?> <?= $address->getNumber() ?></td>
     </tr>
     <tr>
-        <th>Woonplaats en Postcode</th>
+        <th><?= $this->translate('Woonplaats en Postcode') ?></th>
         <td><?= $address->getCity() ?> <?= $address->getPostalCode() ?></td>
     </tr>
     <tr>
-        <th>Telefoonnummer</th>
+        <th><?= $this->translate('Telefoonnummer') ?></th>
         <td><?= $address->getPhone() ?></td>
     </tr>
 </table>
 <?php endforeach ?>
-<h3>Aangemelde mailing lists</h3>
+<h3><?= $this->translate('Aangemelde mailing lists') ?></h3>
 <ul>
 <?php foreach ($member->getLists() as $list): ?>
     <li><?= $list->getName() ?></li>
@@ -554,15 +556,23 @@ case Address::TYPE_MAIL:
 <table class="table table-bordered">
     <tr>
         <td>
-    Ik, <?= $member->getFullName() ?>, geef hierbij GEmeenschap Wiskunde en
-Informatica (GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar
-mijn bank om een bedrag van &euro;15,-, geheten vijftien euro, van mijn rekening af
-te schrijven en aan mijn bank om eenmalig een bedrag van mijn rekening af te
-schrijven overeenkomstig de opdracht van GEWIS.
+            <?php if($address->getCountry() == 'netherlands'): ?>
+                Door ondertekening van dit formulier geeft u toestemming aan de Gemeenschap van Wiskunde en Informatica Studenten
+                om eenmalig een incassoopdracht te sturen naar uw bank om een bedrag van &euro;15,-, geheten vijftien euro, van uw rekening af te schrijven
+                en uw bank om eenmalig een bedrag van uw rekening af te schrijven overeenkomstig de opdracht van <?= $member->getFullName() ?>.
+                Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen acht weken na afschrijving contact op met uw bank.
+                Vraag uw bank naar de voorwaarden.
+            <?php else: ?>
+                By signing this mandate form, you authorise the Association of Mathematics and Computer Science Students (in Dutch: Gemeenschap van Wiskunde en Informatica Studenten)
+                to send instructions to your bank to debit your account and your bank to debit your account in accordance with the instructions from <?= $member->getFullName() ?>.
+                As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.
+                The amount debited from your account is &euro;15,-, or fifteen euro in words.
+            <?php endif ?>
         </td>
     </tr>
     <tr>
-        <th>Handtekening<br><br><br><br><br><br></th>
+        <th><?= $this->translate('Plaats en datum van ondertekening') ?><br><br><br><br><br><br></th>
+        <th> $this->translate('Handtekening') ?><br><br><br><br><br><br></th>
     </tr>
 </table>
 </div>
