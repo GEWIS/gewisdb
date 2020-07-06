@@ -3,12 +3,14 @@
 namespace Database\Form;
 
 use DateTime;
+use DateInterval;
+use Exception;
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\I18n\Translator\TranslatorInterface as Translator;
 
 use Database\Model\Address;
+use Zend\Validator\Callback;
 
 class Member extends Form implements InputFilterProviderInterface
 {
@@ -281,13 +283,42 @@ class Member extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'greater_than',
-                        'options' => array(
-                            'min' => (new DateTime())->sub(new \DateInterval('P8Y'))
-                        )
+                        'name' => 'callback',
+                        'options' => [
+                            'messages' => array(
+                                Callback::INVALID_VALUE => $this->translator->translate('Weet je zeker dat je jonger bent dan 8 jaar?')
+                            ),
+                            'callback' => function ($value, $context = []) {
+                                return $this->isOldEnough($value, $context);
+                            }
+                        ]
                     )
                 )
             )
         );
+    }
+
+    /**
+     * Check if a certain date is longer than 8 years ago
+     * False if younger than 8
+     *
+     * @param $value
+     * @param array $context
+     * @return bool
+     */
+    public function isOldEnough($value, $context = [])
+    {
+        try {
+            $back_then = (new DateTime())->sub(new DateInterval('P8Y'));
+
+            return $this->toDateTime($value) < $back_then;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function toDateTime($value, $format = 'Y-m-d')
+    {
+        return DateTime::createFromFormat($format, $value);
     }
 }
