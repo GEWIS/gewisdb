@@ -166,13 +166,6 @@ class MemberTemp
     protected $addresses;
 
     /**
-     * Installations of this member.
-     *
-     * @ORM\OneToMany(targetEntity="Database\Model\SubDecision\Installation",mappedBy="member")
-     */
-    protected $installations;
-
-    /**
      * Memberships of mailing lists.
      *
      * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
@@ -220,7 +213,6 @@ class MemberTemp
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
-        $this->installations = new ArrayCollection();
         $this->lists = new ArrayCollection();
     }
 
@@ -598,16 +590,6 @@ class MemberTemp
     public function setSupremum($supremum)
     {
         $this->supremum = $supremum;
-    }
-
-    /**
-     * Get the installations.
-     *
-     * @return ArrayCollection
-     */
-    public function getInstallations()
-    {
-        return $this->installations;
     }
 
     /**
