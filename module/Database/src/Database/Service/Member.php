@@ -90,6 +90,10 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $memberTemp->setChangedOn($date);
 
+        // store the address
+        $address = $form->get('studentAddress')->getObject();
+        $memberTemp->setAddress($address);
+
         // check mailing lists
         foreach ($form->getLists() as $list) {
             if ($form->get('list-' . $list->getName())->isChecked()) {
@@ -105,7 +109,7 @@ class Member extends AbstractService
         $this->getMemberTempMapper()->persist($memberTemp);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $memberTemp));
 
-        return $this->finalizeSubscription($memberTemp);
+        return $memberTemp;
     }
 
     /**
@@ -122,11 +126,11 @@ class Member extends AbstractService
 
         $form->setData($memberTemp->toArray());
 
-        $member = $form->getData();
-
         if (!$form->isValid()) {
             return null;
         }
+
+        $member = $form->getData();
 
         $member->setGender($memberTemp->getGender());
         $member->setStudy($memberTemp->getStudy());

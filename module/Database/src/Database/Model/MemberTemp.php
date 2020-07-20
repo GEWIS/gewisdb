@@ -159,11 +159,48 @@ class MemberTemp
     protected $supremum;
 
     /**
-     * Addresses of this member.
+     * Country.
      *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist","remove"})
+     * By default, netherlands.
+     *
+     * @ORM\Column(type="string")
      */
-    protected $addresses;
+    protected $country = 'netherlands';
+
+    /**
+     * Street.
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $street;
+
+    /**
+     * House number (+ suffix)
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $number;
+
+    /**
+     * Postal code.
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $postalCode;
+
+    /**
+     * City.
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $city;
+
+    /**
+     * Phone number.
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $phone;
 
     /**
      * Memberships of mailing lists.
@@ -615,30 +652,19 @@ class MemberTemp
     /**
      * Get all addresses.
      *
-     * @return ArrayCollection all addresses
+     * @return array all addresses
      */
     public function getAddresses()
     {
-        return $this->addresses;
-    }
-
-    /**
-     * Clear all addresses.
-     */
-    public function clearAddresses()
-    {
-        $this->addresses = new ArrayCollection();
-    }
-
-    /**
-     * Add multiple addresses.
-     *
-     * @param array $addresses
-     */
-    public function addAddresses($addresses) {
-        foreach ($addresses as $address) {
-            $this->addAddress($address);
-        }
+        $address = new Address();
+        $address->setType(Address::TYPE_STUDENT);
+        $address->setCountry($this->country);
+        $address->setStreet($this->street);
+        $address->setNumber($this->number);
+        $address->setPostalCode($this->postalCode);
+        $address->setCity($this->city);
+        $address->setPhone($this->phone);
+        return [$address];
     }
 
     /**
@@ -646,10 +672,15 @@ class MemberTemp
      *
      * @param Address $address
      */
-    public function addAddress(Address $address)
+    public function setAddress(Address $address)
     {
-        $address->setMember($this);
         $this->addresses[] = $address;
+        $this->country = $address->getCountry();
+        $this->street = $address->getStreet();
+        $this->number = $address->getNumber();
+        $this->postalCode = $address->getPostalCode();
+        $this->city = $address->getCity();
+        $this->phone = $address->getPhone();
     }
 
     /**
@@ -693,25 +724,5 @@ class MemberTemp
     public function clearLists()
     {
         $this->lists = new ArrayCollection();
-    }
-
-    /**
-     * Set the home address.
-     *
-     * @param Address $address
-     */
-    public function setHomeAddress(Address $address)
-    {
-        $this->addAddress($address);
-    }
-
-    /**
-     * Set the student address.
-     *
-     * @param Address $address
-     */
-    public function setStudentAddress(Address $address)
-    {
-        $this->addAddress($address);
     }
 }
