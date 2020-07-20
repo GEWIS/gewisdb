@@ -114,7 +114,7 @@ class Member extends AbstractService
 
     /**
      * @param MemberTempModel $memberTemp
-     * @return MemberModel
+     * @return MemberModel|null
      */
     public function finalizeSubscription($memberTemp)
     {
@@ -124,7 +124,18 @@ class Member extends AbstractService
 
         $form->bind(new MemberModel());
 
-        $form->setData($memberTemp->toArray());
+        // Fill in the address in the form again
+        $data = $memberTemp->toArray();
+        unset($data['lidnr']);
+        $form->setData($data);
+//        $addressFieldset = $form->get('studentAddress');
+//        $address = $memberTemp->getAddresses()[0];
+//        $addressFieldset->get('country')->setValue($address->getCountry());
+//        $addressFieldset->get('street')->setValue($address->getStreet());
+//        $addressFieldset->get('number')->setValue($address->getNumber());
+//        $addressFieldset->get('postalCode')->setValue($address->getPostalCode());
+//        $addressFieldset->get('city')->setValue($address->getCity());
+//        $addressFieldset->get('phone')->setValue($address->getPhone());
 
         if (!$form->isValid()) {
             return null;
@@ -132,11 +143,12 @@ class Member extends AbstractService
 
         $member = $form->getData();
 
-        $member->setGender($memberTemp->getGender());
-        $member->setStudy($memberTemp->getStudy());
-        $member->setBirth($memberTemp->getBirth());
-        $member->addAddresses($memberTemp->getAddresses());
-        $member->setIban($memberTemp->getIban());
+        // Copy all remaining information
+//        $member->setGender($memberTemp->getGender());
+//        $member->setStudy($memberTemp->getStudy());
+//        $member->setBirth($memberTemp->getBirth());
+//        $member->addAddresses($memberTemp->getAddresses());
+//        $member->setIban($memberTemp->getIban());
         $member->setTuenumber($memberTemp->getTuenumber());
         $member->setGeneration($memberTemp->getGeneration());
         $member->setType($memberTemp->getType());
@@ -180,6 +192,28 @@ class Member extends AbstractService
     }
 
     /**
+     * Get temporary member info.
+     *
+     * @param int $id
+     *
+     * @return MemberTempModel
+     */
+    public function getMemberTemp($id)
+    {
+        try {
+            return array(
+                'member' => $this->getMemberTempMapper()->find($id),
+                'simple' => false
+            );
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return array(
+                'member' => $this->getMemberTempMapper()->findSimple($id),
+                'simple' => true
+            );
+        }
+    }
+
+    /**
      * Toggle if a member receives the supremum.
      *
      * @param int $id
@@ -206,9 +240,19 @@ class Member extends AbstractService
     }
 
     /**
+     * Search for a temporary member.
+     *
+     * @param string $query
+     */
+    public function searchTemp($query)
+    {
+        return $this->getMemberTempMapper()->search($query);
+    }
+
+    /**
      * Check if we can easily remove a member.
      *
-     * @param int $lidnr
+     * @param MemberModel $member
      */
     public function canRemove(MemberModel $member)
     {
@@ -218,7 +262,7 @@ class Member extends AbstractService
     /**
      * Remove a member.
      *
-     * @param Member $member
+     * @param MemberModel $member
      */
     public function remove(MemberModel $member)
     {
@@ -226,6 +270,16 @@ class Member extends AbstractService
             return $this->getMemberMapper()->remove($member);
         }
         $this->clear($member);
+    }
+
+    /**
+     * Remove a member.
+     *
+     * @param MemberTempModel $member
+     */
+    public function removeTemp(MemberTempModel $member)
+    {
+         $this->getMemberTempMapper()->remove($member);
     }
 
     /**
@@ -583,7 +637,7 @@ class Member extends AbstractService
     /**
      * Get the member mapper.
      *
-     * @return \Database\Mapper\Member
+     * @return \Database\Mapper\MemberTemp
      */
     public function getMemberTempMapper()
     {

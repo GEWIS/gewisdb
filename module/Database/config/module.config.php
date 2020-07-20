@@ -328,6 +328,62 @@ return array(
                     ),
                 ),
             ),
+            'memberTemp' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/memberTemp',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'Member',
+                        'action'        => 'indexTemp',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'show' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'showTemp'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'delete' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/delete',
+                                    'defaults' => array(
+                                        'action' => 'deleteTemp'
+                                    )
+                                )
+                            ),
+                            'finalize' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/finalize',
+                                    'defaults' => array(
+                                        'action' => 'finalize'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:action',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
             'export' => array(
                 'type'    => 'Literal',
                 'options' => array(

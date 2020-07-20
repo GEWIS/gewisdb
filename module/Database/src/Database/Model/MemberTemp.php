@@ -152,13 +152,6 @@ class MemberTemp
     protected $iban;
 
     /**
-     * If the member receives a 'supremum'
-     *
-     * @ORM\Column(type="string",nullable=true)
-     */
-    protected $supremum;
-
-    /**
      * Country.
      *
      * By default, netherlands.
@@ -636,7 +629,7 @@ class MemberTemp
      */
     public function toArray()
     {
-        return array(
+        $array = array(
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -645,8 +638,18 @@ class MemberTemp
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
-            'expiration' => $this->getExpiration()->format('l j F Y')
+            'expiration' => $this->getExpiration()->format('l j F Y'),
+            'gender' => $this->getGender(),
+            'study' => $this->getStudy(),
+            'birth' => $this->getBirth()->format('Y-m-d'),
+            'iban' => $this->getIban(),
+            'studentAddress' => $this->getAddresses()['studentAddress']->toArray(),
+            'agreediban' => 1,
+            'agreed' => '1'
         );
+        $array['studentAddress']['type'] = Address::TYPE_STUDENT;
+
+        return $array;
     }
 
     /**
@@ -664,7 +667,9 @@ class MemberTemp
         $address->setPostalCode($this->postalCode);
         $address->setCity($this->city);
         $address->setPhone($this->phone);
-        return [$address];
+        return array(
+            'studentAddress' => $address
+        );
     }
 
     /**

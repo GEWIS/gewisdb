@@ -2,7 +2,6 @@
 
 namespace Database\Mapper;
 
-use Database\Model\Address;
 use Database\Model\MemberTemp as MemberTempModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
@@ -81,31 +80,6 @@ class MemberTemp
     }
 
     /**
-     * Find a member address.
-     *
-     * @param int $lidnr
-     * @param string $type Address type
-     *
-     * @return Address
-     */
-    public function findMemberAddress($lidnr, $type)
-    {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('a, m')
-            ->from('Database\Model\Address', 'a')
-            ->innerJoin('a.member', 'm')
-            ->where('m.lidnr = :lidnr')
-            ->andWhere('a.type = :type')
-            ->orderBy('m.lidnr', 'DESC');
-
-        $qb->setParameter(':lidnr', $lidnr);
-        $qb->setParameter(':type', $type);
-
-        return $qb->getQuery()->getSingleResult();
-    }
-
-    /**
      * Find all members.
      *
      * @return array of members
@@ -128,55 +102,10 @@ class MemberTemp
     {
         $qb = $this->em->createQueryBuilder();
 
-        $qb->select('m, r, l')
+        $qb->select('m, l')
             ->from('Database\Model\MemberTemp', 'm')
             ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.installations', 'r')
-            ->leftJoin('m.lists', 'l')
-            ->andWhere('(r.function = \'Lid\' OR r.function IS NULL)');
-
-        // discharges
-        $qbn = $this->em->createQueryBuilder();
-        $qbn->select('d')
-            ->from('Database\Model\SubDecision\Discharge', 'd')
-            ->join('d.installation', 'x')
-            ->where('x.meeting_type = r.meeting_type')
-            ->andWhere('x.meeting_number = r.meeting_number')
-            ->andWhere('x.decision_point = r.decision_point')
-            ->andWhere('x.decision_number = r.decision_number')
-            ->andWhere('x.number = r.number');
-
-        // destroyed discharge decisions
-        $qbnd = $this->em->createQueryBuilder();
-        $qbnd->select('b')
-            ->from('Database\Model\SubDecision\Destroy', 'b')
-            ->join('b.target', 'z')
-            ->where('z.meeting_type = d.meeting_type')
-            ->andWhere('z.meeting_number = d.meeting_number')
-            ->andWhere('z.point = d.decision_point')
-            ->andWhere('z.number = d.decision_number');
-
-        $qbn->andWhere($qbn->expr()->not(
-            $qbn->expr()->exists($qbnd->getDql())
-        ));
-
-        $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbn->getDql())
-        ));
-
-        // destroyed installation decisions
-        $qbd = $this->em->createQueryBuilder();
-        $qbd->select('a')
-            ->from('Database\Model\SubDecision\Destroy', 'a')
-            ->join('a.target', 'y')
-            ->where('y.meeting_type = r.meeting_type')
-            ->andWhere('y.meeting_number = r.meeting_number')
-            ->andWhere('y.point = r.decision_point')
-            ->andWhere('y.number = r.decision_number');
-
-        $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbd->getDql())
-        ));
+            ->leftJoin('m.lists', 'l');
 
         $qb->setParameter(':lidnr', $lidnr);
 
@@ -209,43 +138,6 @@ class MemberTemp
     }
 
     /**
-     * Check if we can fully remove a member.
-     * @param MemberTempModel $member
-     * @return boolean
-     */
-    public function canRemove(MemberTempModel $member)
-    {
-        // check if the member is included in budgets
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('b')
-            ->from('Database\Model\SubDecision\Budget', 'b')
-            ->where('b.author = :member');
-        $qb->setParameter('member', $member);
-
-        $results = $qb->getQuery()->getResult();
-        if (!empty($results)) {
-            return false;
-        }
-
-        // check if the member has been installed
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('i')
-            ->from('Database\Model\SubDecision\Installation', 'i')
-            ->where('i.member = :member');
-        $qb->setParameter('member', $member);
-
-        $results = $qb->getQuery()->getResult();
-        if (!empty($results)) {
-            return false;
-        }
-
-        return true;
-    }
-
-
-    /**
      * Persist a member model.
      *
      * @param MemberTempModel $member Member to persist.
@@ -264,28 +156,6 @@ class MemberTemp
     public function remove(MemberTempModel $member)
     {
         $this->em->remove($member);
-        $this->em->flush();
-    }
-
-    /**
-     * Persist an address.
-     *
-     * @param Address $address Address to persist.
-     */
-    public function persistAddress(Address $address)
-    {
-        $this->em->persist($address);
-        $this->em->flush();
-    }
-
-    /**
-     * Remove an address.
-     *
-     * @param Address $address Address to remove.
-     */
-    public function removeAddress(Address $address)
-    {
-        $this->em->remove($address);
         $this->em->flush();
     }
 

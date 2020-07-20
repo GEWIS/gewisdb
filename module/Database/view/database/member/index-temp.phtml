@@ -1,0 +1,73 @@
+<script>
+var urlTemplate = '<?= $this->url('memberTemp/show', array('id' => '__LIDNR__')) ?>';
+$(document).ready(function () {
+    var maxResults = 32;
+    var footer = $("#members-result tfoot");
+    var searchMember = function (term) {
+        // When no term is set, all the member should be shown
+        if (term.length >= 0) {
+            $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('member/default', array('action' => 'searchTemp')) ?>?q=' + term,
+                context: document.body
+            }).done(function (data) {
+                var table = '';
+                $.each(data.json, function (idx, member) {
+                    var link = '';
+                    link += '<a style="display: block; width: 100%; height: 100%;" href="' + urlTemplate.replace('__LIDNR__', member.lidnr) + '">'
+                    table += '<tr>';
+                    table += '<td>' + link + member.lidnr + '</a></td>';
+                    table += '<td>' + link + member.fullName + '</a></td>';
+                    table += '<td>' + link + member.email + '</a></td>';
+                    table += '<td>' + link + member.generation + '</a></td>';
+                    table += '<td>' + link + member.expiration + '</a></td>';
+                    table += '</tr>';
+                });
+                $('#members-result tbody').html(table);
+
+                if (data.json.length >= maxResults) {
+                    footer.show();
+                } else {
+                    footer.hide();
+                }
+            });
+        } else {
+            $('#members-result tbody').html('');
+        }
+    };
+
+    $('#member-search').keyup(function (e) {
+        term = $(e.target).val();
+        searchMember(term)
+    });
+    searchMember('');
+    footer.hide();
+});
+</script>
+<form role="form">
+    <div class="form-group">
+        <label for="">Zoeken op lid</label>
+        <input type="text" class="form-control" placeholder="Zoek" id="member-search" autofocus>
+    </div>
+</form>
+
+<table class="table table-hover" id="members-result">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Naam</th>
+        <th>Email</th>
+        <th>Generatie</th>
+        <th>Verloopdatum</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4"> Er zijn teveel resultaten om weer te geven. Probeer te filteren om andere resultaten te zien.</td>
+    </tr>
+    </tfoot>
+</table>
+
+<a href="<?= $this->url('member/default', array('action' => 'subscribe')) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Schrijf lid in</a>

@@ -262,4 +262,21 @@ class Address
     {
         $this->phone = $phone;
     }
+
+    /**
+     * Convert to array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'country' => $this->getCountry(),
+            'street' => $this->getStreet(),
+            'number' => $this->getNumber(),
+            'city' => $this->getCity(),
+            'postalCode' => $this->getPostalCode(),
+            'phone' => $this->getPhone()
+        );
+    }
 }
