@@ -4,6 +4,9 @@ use Database\Model\Address;
 ?>
 <?php if (isset($form)): ?>
 <?php
+$this->inlineScript()->appendFile($this->basePath() . '/js/signature_pad.min.js');
+$this->inlineScript()->appendFile($this->basePath() . '/js/subscribe.app.js');
+
 $form->prepare();
 
 $form->setAttribute('action', $this->url('member/default', array('action' => 'subscribe')));
@@ -11,6 +14,7 @@ $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
 $form->setAttribute('class', 'form-horizontal');
+$form->setAttribute('id', 'form-subscribe');
 ?>
 <?= $this->form()->openTag($form) ?>
 
@@ -200,6 +204,7 @@ $element->setLabelAttributes(array(
 $element = $form->get('iban');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-input');
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
@@ -344,6 +349,15 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 </div>
 <?php endforeach ?>
 
+<h3><?= $this->translate('Handtekening SEPA incasso') ?></h3>
+<p>
+<?= $this->translate('Voor het automatische SEPA incasso hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
+</p>
+<canvas id="signature-canvas"><?= $this->translate('Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
+<br>
+<button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
+<?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+
 <h3><?= $this->translate('Akkoordverklaring') ?></h3>
 
 <a href="https://gewis.nl/vereniging/statuten/"><?= $this->translate('Statuten en HR') ?></a>
@@ -374,6 +388,7 @@ verwijderd, tenzij ik expliciete toestemming geef dit niet te doen.') ?>
 <?php
 $element = $form->get('agreediban');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-agreement');
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <div class="col-sm-offset-1 col-sm-8">
@@ -398,6 +413,7 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
         $submit = $form->get('submit');
         $submit->setLabel($submit->getValue());
         $submit->setAttribute('class', 'btn btn-primary');
+        $submit->setAttribute('id', 'subscription-submit');
         ?>
         <?= $this->formButton($submit) ?>
     </div>
@@ -552,6 +568,8 @@ case Address::TYPE_MAIL:
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
+<h3><?= $this->translate('Handtekening SEPA incasso') ?></h3>
+<img src="<?= $this->fileUrl($member->getSignature()) ?>" height="100" width="300" />
 <div class="visible-print">
 <table class="table table-bordered">
     <tr>

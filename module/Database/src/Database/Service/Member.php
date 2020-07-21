@@ -40,13 +40,13 @@ class Member extends AbstractService
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'studentAddress', 'agreed', 'iban'
+                'studentAddress', 'agreed', 'iban', 'signature'
             ));
         } else {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'agreed', 'iban'
+                'agreed', 'iban', 'signature'
             ));
         }
         if ($data['iban'] == 'noiban') {
@@ -104,6 +104,13 @@ class Member extends AbstractService
         $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
         foreach ($mailingMapper->findDefault() as $list) {
             $memberTemp->addList($list);
+        }
+
+        // handle signature
+        $signature = $form->get('signature')->getValue();
+        if (!is_null($signature)) {
+            $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
+            $memberTemp->setSignature($path);
         }
 
         $this->getMemberTempMapper()->persist($memberTemp);
@@ -642,5 +649,15 @@ class Member extends AbstractService
     public function getMemberTempMapper()
     {
         return $this->getServiceManager()->get('database_mapper_member_temp');
+    }
+
+    /**
+     * Gets the storage service.
+     *
+     * @return \Application\Service\FileStorage
+     */
+    public function getFileStorageService()
+    {
+        return $this->getServiceManager()->get('application_service_storage');
     }
 }
