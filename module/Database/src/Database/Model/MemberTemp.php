@@ -207,6 +207,13 @@ class MemberTemp
     protected $lists;
 
     /**
+     * The signature image URL.
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $signature;
+
+    /**
      * Static method to get available genders.
      *
      * @return array
@@ -620,6 +627,26 @@ class MemberTemp
     public function setSupremum($supremum)
     {
         $this->supremum = $supremum;
+    }
+
+    /**
+     * Get the signature image URL.
+     *
+     * @return string
+     */
+    public function getSignature()
+    {
+        return $this->signature;
+    }
+
+    /**
+     * Set the signature image URL.
+     *
+     * @param string $signature
+     */
+    public function setSignature($signature)
+    {
+        $this->signature = $signature;
     }
 
     /**

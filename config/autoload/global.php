@@ -27,4 +27,9 @@ return array(
             'report_error' => 'databaseisstuk@gewis.nl'
         ]
     ),
+    'storage' => array(
+        'storage_dir' => 'public/data',
+        'public_dir' => 'data',
+        'dir_mode' => 0777,
+    ),
 );
