@@ -229,15 +229,9 @@ class MemberController extends AbstractActionController
         $lidnr = $this->params()->fromRoute('id');
         $member = $service->getMemberTemp($lidnr);
         $member = $member['member'];
-
-        if ($this->getRequest()->isPost()) {
-            $service->removeTemp($member);
-            return $this->redirect()->toRoute('memberTemp');
-        }
-
-        return $this->redirect()->toRoute('memberTemp/show', [
-            'id' => $this->params()->fromRoute('id')
-        ]);
+        
+        $service->removeTemp($member);
+        return $this->redirect()->toRoute('memberTemp');
     }
 
     /**
