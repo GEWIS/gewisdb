@@ -28,6 +28,7 @@ class Member extends AbstractService
      */
     public function subscribe($data)
     {
+        //TODO: Should I keep/modify this event trigger?
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
         $form = $this->getMemberForm();
@@ -114,6 +115,7 @@ class Member extends AbstractService
         }
 
         $this->getMemberTempMapper()->persist($memberTemp);
+        //TODO: Should I keep/modify this event trigger?
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $memberTemp));
 
         return $memberTemp;
@@ -125,6 +127,7 @@ class Member extends AbstractService
      */
     public function finalizeSubscription($memberTemp)
     {
+        //TODO: Should I keep/modify this event trigger?
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
         $form = $this->getMemberForm();
@@ -157,7 +160,11 @@ class Member extends AbstractService
             $member->addList($list);
         }
 
+        // Remove memberTemp model
+        $this->removeTemp($memberTemp);
+
         $this->getMemberMapper()->persist($member);
+        //TODO: Should I keep/modify this event trigger?
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
@@ -273,7 +280,9 @@ class Member extends AbstractService
      */
     public function removeTemp(MemberTempModel $member)
     {
-         $this->getMemberTempMapper()->remove($member);
+        // First destroy the signiture file
+        $this->getFileStorageService()->removeFile($member->getSignature());
+        $this->getMemberTempMapper()->remove($member);
     }
 
     /**
