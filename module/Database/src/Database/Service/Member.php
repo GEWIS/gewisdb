@@ -7,7 +7,12 @@ use Application\Service\AbstractService;
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
 use Database\Model\MemberTemp as MemberTempModel;
-use Database\Model\MailingList;
+use Zend\Mail\Transport\TransportInterface;
+use Zend\Mime\Mime;
+use Zend\View\Model\ViewModel;
+use Zend\Mail\Message;
+use Zend\Mime\Part as MimePart;
+use Zend\Mime\Message as MimeMessage;
 
 class Member extends AbstractService
 {
@@ -119,6 +124,51 @@ class Member extends AbstractService
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $memberTemp));
 
         return $memberTemp;
+    }
+
+    /**
+     * Send an email about the newly subscribed member to the new member and the secretary
+     *
+     * @param MemberTempModel $member
+     */
+    public function sendMemberSubscriptionEmail(MemberTempModel $member)
+    {
+        $config = $this->getServiceManager()->get('config');
+        $config = $config['email'];
+
+        $renderer = $this->getRenderer();
+        $model = new ViewModel(array(
+            'member' => $member
+        ));
+        $model->setTemplate('database/member/subscribe');
+        $body = $renderer->render($model);
+
+        $html = new MimePart($body);
+        $html->type = "text/html";
+
+        // Include signiture as image attachment
+        $image = new MimePart(fopen($this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(), 'r'));
+        $image->type = 'image/png';
+        $image->filename = 'signiture.png';
+        $image->disposition = Mime::DISPOSITION_ATTACHMENT;
+        $image->encoding = Mime::ENCODING_BASE64;
+
+        $mimeMessage = new MimeMessage();
+        $mimeMessage->setParts([$html, $image]);
+
+        $message = new Message();
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']);
+        $message->addTo($config['to']['subscription']);
+        $message->setSubject('New member subscription: ' . $member->getFullName());
+        $this->getMailTransport()->send($message);
+
+        $message = new Message();
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']);
+        $message->addTo($member->getEmail());
+        $message->setSubject('GEWIS Subscription');
+        $this->getMailTransport()->send($message);
     }
 
     /**
@@ -655,5 +705,25 @@ class Member extends AbstractService
     public function getFileStorageService()
     {
         return $this->getServiceManager()->get('application_service_storage');
+    }
+
+    /**
+     * Get the renderer for the email.
+     *
+     * @return PhpRenderer
+     */
+    public function getRenderer()
+    {
+        return $this->sm->get('view_manager')->getRenderer();
+    }
+
+    /**
+     * Get the mail transport.
+     *
+     * @return TransportInterface
+     */
+    public function getMailTransport()
+    {
+        return $this->getServiceManager()->get('database_mail_transport');
     }
 }
