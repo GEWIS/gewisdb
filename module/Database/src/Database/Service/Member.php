@@ -135,14 +135,6 @@ class Member extends AbstractService
         $data = $memberTemp->toArray();
         unset($data['lidnr']);
         $form->setData($data);
-//        $addressFieldset = $form->get('studentAddress');
-//        $address = $memberTemp->getAddresses()[0];
-//        $addressFieldset->get('country')->setValue($address->getCountry());
-//        $addressFieldset->get('street')->setValue($address->getStreet());
-//        $addressFieldset->get('number')->setValue($address->getNumber());
-//        $addressFieldset->get('postalCode')->setValue($address->getPostalCode());
-//        $addressFieldset->get('city')->setValue($address->getCity());
-//        $addressFieldset->get('phone')->setValue($address->getPhone());
 
         if (!$form->isValid()) {
             return null;
@@ -151,11 +143,6 @@ class Member extends AbstractService
         $member = $form->getData();
 
         // Copy all remaining information
-//        $member->setGender($memberTemp->getGender());
-//        $member->setStudy($memberTemp->getStudy());
-//        $member->setBirth($memberTemp->getBirth());
-//        $member->addAddresses($memberTemp->getAddresses());
-//        $member->setIban($memberTemp->getIban());
         $member->setTuenumber($memberTemp->getTuenumber());
         $member->setGeneration($memberTemp->getGeneration());
         $member->setType($memberTemp->getType());

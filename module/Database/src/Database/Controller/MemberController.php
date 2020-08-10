@@ -136,7 +136,7 @@ class MemberController extends AbstractActionController
         }
 
         return $this->redirect()->toRoute('member/show', [
-            'id' => $result->getId()
+            'id' => $result->getLidnr()
         ]);
     }
 
@@ -229,7 +229,7 @@ class MemberController extends AbstractActionController
         $lidnr = $this->params()->fromRoute('id');
         $member = $service->getMemberTemp($lidnr);
         $member = $member['member'];
-        
+
         $service->removeTemp($member);
         return $this->redirect()->toRoute('memberTemp');
     }
