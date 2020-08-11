@@ -113,31 +113,6 @@ class MemberTemp
     }
 
     /**
-     * Find a member (by lidnr).
-     *
-     * Do not calculate memberships.
-     *
-     * @param int $lidnr
-     *
-     * @return MemberTempModel
-     */
-    public function findSimple($lidnr)
-    {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('m, l')
-            ->from('Database\Model\MemberTemp', 'm')
-            ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.lists', 'l')
-            ->orderBy('m.lidnr', 'DESC');
-
-
-        $qb->setParameter(':lidnr', $lidnr);
-
-        return $qb->getQuery()->getSingleResult();
-    }
-
-    /**
      * Persist a member model.
      *
      * @param MemberTempModel $member Member to persist.
