@@ -144,10 +144,10 @@ class Member extends AbstractService
         $html = new MimePart($body);
         $html->type = "text/html";
 
-        // Include signiture as image attachment
+        // Include signature as image attachment
         $image = new MimePart(fopen($this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(), 'r'));
         $image->type = 'image/png';
-        $image->filename = 'signiture.png';
+        $image->filename = 'signature.png';
         $image->disposition = Mime::DISPOSITION_ATTACHMENT;
         $image->encoding = Mime::ENCODING_BASE64;
 
