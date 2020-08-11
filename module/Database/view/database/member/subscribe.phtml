@@ -568,8 +568,6 @@ case Address::TYPE_MAIL:
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
-<h3><?= $this->translate('Handtekening SEPA incasso') ?></h3>
-<img src="<?= $this->fileUrl($member->getSignature()) ?>" height="100" width="300" />
 <div class="visible-print">
 <table class="table table-bordered">
     <tr>
@@ -589,8 +587,8 @@ case Address::TYPE_MAIL:
         </td>
     </tr>
     <tr>
-        <th><?= $this->translate('Plaats en datum van ondertekening') ?><br><br><br><br><br><br></th>
-        <th><?= $this->translate('Handtekening') ?><br><br><br><br><br><br></th>
+        <th><?= $this->translate('Plaats en datum van ondertekening') ?><br><?= $member->getAddresses()['studentAddress']->getCity() ?><br><?= $member->getChangedOn()->format('F j, Y') ?><br><br><br><br></th>
+        <th><?= $this->translate('Handtekening') ?><br><img src="<?= $this->fileUrl($member->getSignature()) ?>" height="100" width="300" /><br><br><br><br><br></th>
     </tr>
 </table>
 </div>
