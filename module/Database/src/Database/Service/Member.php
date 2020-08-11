@@ -6,7 +6,7 @@ use Application\Service\AbstractService;
 
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
-use Database\Model\MemberTemp as MemberTempModel;
+use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Zend\Mail\Transport\TransportInterface;
 use Zend\Mime\Mime;
 use Zend\View\Model\ViewModel;
@@ -29,7 +29,7 @@ class Member extends AbstractService
      *
      * @param array $data
      *
-     * @return MemberTempModel member, null if failed.
+     * @return ProspectiveMemberModel member, null if failed.
      */
     public function subscribe($data)
     {
@@ -37,7 +37,7 @@ class Member extends AbstractService
 
         $form = $this->getMemberForm();
 
-        $form->bind(new MemberTempModel());
+        $form->bind(new ProspectiveMemberModel());
 
         $noiban = false;
 
@@ -66,70 +66,70 @@ class Member extends AbstractService
         }
 
         // set some extra data
-        $memberTemp = $form->getData();
+        $prospectiveMember = $form->getData();
 
         if ($noiban) {
-            $memberTemp->setIban(null);
+            $prospectiveMember->setIban(null);
         }
 
         // find if there is an earlier member with the same email or name
-        if ($this->getMemberMapper()->hasMemberWith($memberTemp->getEmail())) {
+        if ($this->getMemberMapper()->hasMemberWith($prospectiveMember->getEmail())) {
             $form->get('email')->setMessages([
                 'There already is a member with this email address.'
             ]);
             return null;
         }
 
-        if (!is_numeric($memberTemp->getTuenumber())) {
-            $memberTemp->setTuenumber(0);
+        if (!is_numeric($prospectiveMember->getTuenumber())) {
+            $prospectiveMember->setTuenumber(0);
         }
 
         // generation is the current year
-        $memberTemp->setGeneration((int) date('Y'));
+        $prospectiveMember->setGeneration((int) date('Y'));
 
         // by default, we only add ordinary members
-        $memberTemp->setType(MemberModel::TYPE_ORDINARY);
+        $prospectiveMember->setType(MemberModel::TYPE_ORDINARY);
 
         // changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
-        $memberTemp->setChangedOn($date);
+        $prospectiveMember->setChangedOn($date);
 
         // store the address
         $address = $form->get('studentAddress')->getObject();
-        $memberTemp->setAddress($address);
+        $prospectiveMember->setAddress($address);
 
         // check mailing lists
         foreach ($form->getLists() as $list) {
             if ($form->get('list-' . $list->getName())->isChecked()) {
-                $memberTemp->addList($list);
+                $prospectiveMember->addList($list);
             }
         }
         // subscribe to default mailing lists not on the form
         $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
         foreach ($mailingMapper->findDefault() as $list) {
-            $memberTemp->addList($list);
+            $prospectiveMember->addList($list);
         }
 
         // handle signature
         $signature = $form->get('signature')->getValue();
         if (!is_null($signature)) {
             $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
-            $memberTemp->setSignature($path);
+            $prospectiveMember->setSignature($path);
         }
 
-        $this->getMemberTempMapper()->persist($memberTemp);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $memberTemp));
+        $this->getProspectiveMemberMapper()->persist($prospectiveMember);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $prospectiveMember));
 
-        return $memberTemp;
+        return $prospectiveMember;
     }
 
     /**
      * Send an email about the newly subscribed member to the new member and the secretary
      *
-     * @param MemberTempModel $member
+     * @param ProspectiveMemberModel $member
      */
-    public function sendMemberSubscriptionEmail(MemberTempModel $member)
+    public function sendMemberSubscriptionEmail(ProspectiveMemberModel $member)
     {
         $config = $this->getServiceManager()->get('config');
         $config = $config['email'];
@@ -170,10 +170,10 @@ class Member extends AbstractService
     }
 
     /**
-     * @param MemberTempModel $memberTemp
+     * @param ProspectiveMemberModel $prospectiveMember
      * @return MemberModel|null
      */
-    public function finalizeSubscription($memberTemp)
+    public function finalizeSubscription($prospectiveMember)
     {
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
@@ -182,7 +182,7 @@ class Member extends AbstractService
         $form->bind(new MemberModel());
 
         // Fill in the address in the form again
-        $data = $memberTemp->toArray();
+        $data = $prospectiveMember->toArray();
         unset($data['lidnr']);
         $form->setData($data);
 
@@ -193,9 +193,9 @@ class Member extends AbstractService
         $member = $form->getData();
 
         // Copy all remaining information
-        $member->setTuenumber($memberTemp->getTuenumber());
-        $member->setGeneration($memberTemp->getGeneration());
-        $member->setType($memberTemp->getType());
+        $member->setTuenumber($prospectiveMember->getTuenumber());
+        $member->setGeneration($prospectiveMember->getGeneration());
+        $member->setType($prospectiveMember->getType());
 
         // changed on date
         $date = new \DateTime();
@@ -203,12 +203,12 @@ class Member extends AbstractService
         $member->setChangedOn($date);
 
         // add mailing lists
-        foreach ($memberTemp->getLists() as $list) {
+        foreach ($prospectiveMember->getLists() as $list) {
             $member->addList($list);
         }
 
-        // Remove memberTemp model
-        $this->removeTemp($memberTemp);
+        // Remove prospectiveMember model
+        $this->removeProspective($prospectiveMember);
 
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
@@ -239,16 +239,16 @@ class Member extends AbstractService
     }
 
     /**
-     * Get temporary member info.
+     * Get prospective member info.
      *
      * @param int $id
      *
-     * @return MemberTempModel
+     * @return ProspectiveMemberModel
      */
-    public function getMemberTemp($id)
+    public function getProspectiveMember($id)
     {
         return array(
-            'member' => $this->getMemberTempMapper()->find($id)
+            'member' => $this->getProspectiveMemberMapper()->find($id)
         );
     }
 
@@ -279,13 +279,13 @@ class Member extends AbstractService
     }
 
     /**
-     * Search for a temporary member.
+     * Search for a prospective member.
      *
      * @param string $query
      */
-    public function searchTemp($query)
+    public function searchProspective($query)
     {
-        return $this->getMemberTempMapper()->search($query);
+        return $this->getProspectiveMemberMapper()->search($query);
     }
 
     /**
@@ -314,13 +314,13 @@ class Member extends AbstractService
     /**
      * Remove a member.
      *
-     * @param MemberTempModel $member
+     * @param ProspectiveMemberModel $member
      */
-    public function removeTemp(MemberTempModel $member)
+    public function removeProspective(ProspectiveMemberModel $member)
     {
         // First destroy the signiture file
         $this->getFileStorageService()->removeFile($member->getSignature());
-        $this->getMemberTempMapper()->remove($member);
+        $this->getProspectiveMemberMapper()->remove($member);
     }
 
     /**
@@ -678,11 +678,11 @@ class Member extends AbstractService
     /**
      * Get the member mapper.
      *
-     * @return \Database\Mapper\MemberTemp
+     * @return \Database\Mapper\ProspectiveMember
      */
-    public function getMemberTempMapper()
+    public function getProspectiveMemberMapper()
     {
-        return $this->getServiceManager()->get('database_mapper_member_temp');
+        return $this->getServiceManager()->get('database_mapper_prospective_member');
     }
 
     /**

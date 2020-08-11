@@ -328,14 +328,14 @@ return array(
                     ),
                 ),
             ),
-            'memberTemp' => array(
+            'prospective-member' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/memberTemp',
+                    'route'    => '/prospective-member',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Member',
-                        'action'        => 'indexTemp',
+                        'controller'    => 'ProspectiveMember',
+                        'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
@@ -348,7 +348,7 @@ return array(
                                 'id' => '[0-9]+'
                             ),
                             'defaults' => array(
-                                'action' => 'showTemp'
+                                'action' => 'show'
                             )
                         ),
                         'may_terminate' => true,
@@ -358,7 +358,7 @@ return array(
                                 'options' => array(
                                     'route' => '/delete',
                                     'defaults' => array(
-                                        'action' => 'deleteTemp'
+                                        'action' => 'delete'
                                     )
                                 )
                             ),
@@ -482,6 +482,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
+            'Database\Controller\ProspectiveMember' => 'Database\Controller\ProspectiveMemberController',
             'Database\Controller\Member' => 'Database\Controller\MemberController',
             'Database\Controller\Organ' => 'Database\Controller\OrganController',
             'Database\Controller\Export' => 'Database\Controller\ExportController',

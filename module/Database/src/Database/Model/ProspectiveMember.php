@@ -6,11 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * MemberTemp model.
+ * ProspectiveMember model.
  *
  * @ORM\Entity
  */
-class MemberTemp
+class ProspectiveMember
 {
 
     const GENDER_MALE = 'm';
@@ -199,7 +199,7 @@ class MemberTemp
      * Memberships of mailing lists.
      *
      * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
-     * @ORM\JoinTable(name="members_temp_mailinglists",
+     * @ORM\JoinTable(name="prospective_members_mailinglists",
      *      joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
      * )

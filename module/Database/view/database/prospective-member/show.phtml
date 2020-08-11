@@ -89,10 +89,10 @@ case Member::TYPE_HONORARY:
             <td><?= $member->getExpiration()->format('l j F Y') ?></td>
         </tr>
         </table>
-        <a href="<?= $this->url('memberTemp/show/finalize', array(
+        <a href="<?= $this->url('prospective-member/show/finalize', array(
             'id' => $member->getLidnr()
         )) ?>" class="btn btn-primary">Approve membership</a>
-        <a href="<?= $this->url('memberTemp/show/delete', array(
+        <a href="<?= $this->url('prospective-member/show/delete', array(
             'id' => $member->getLidnr()
         )) ?>" class="btn btn-danger">Verwijder lid</a>
 </div>

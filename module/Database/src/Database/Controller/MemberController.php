@@ -20,14 +20,6 @@ class MemberController extends AbstractActionController
     }
 
     /**
-     * Index temporary action.
-     */
-    public function indexTempAction()
-    {
-        return new ViewModel(array());
-    }
-
-    /**
      * Subscribe action.
      */
     public function subscribeAction()
@@ -74,28 +66,6 @@ class MemberController extends AbstractActionController
     }
 
     /**
-     * Search action.
-     *
-     * Searches for temporary members.
-     */
-    public function searchTempAction()
-    {
-        $service = $this->getMemberService();
-
-        $query = $this->params()->fromQuery('q');
-
-        $res = $service->searchTemp($query);
-
-        $res = array_map(function ($member) {
-            return $member->toArray();
-        }, $res);
-
-        return new JsonModel(array(
-            'json' => $res
-        ));
-    }
-
-    /**
      * Show action.
      *
      * Shows member information.
@@ -105,40 +75,6 @@ class MemberController extends AbstractActionController
         $service = $this->getMemberService();
 
         return new ViewModel($service->getMember($this->params()->fromRoute('id')));
-    }
-
-    /**
-     * Show action.
-     *
-     * Shows temporary member information.
-     */
-    public function showTempAction()
-    {
-        $service = $this->getMemberService();
-
-        return new ViewModel($service->getMemberTemp($this->params()->fromRoute('id')));
-    }
-
-    /**
-     * Show action.
-     *
-     * Shows temporary member information.
-     */
-    public function finalizeAction()
-    {
-        $service = $this->getMemberService();
-        $memberTemp = $service->getMemberTemp($this->params()->fromRoute('id'))['member'];
-        $result = $service->finalizeSubscription($memberTemp);
-        if (is_null($result)) {
-            // TODO: Fails silently currently
-            return $this->redirect()->toRoute('memberTemp/show', [
-                'id' => $this->params()->fromRoute('id')
-            ]);
-        }
-
-        return $this->redirect()->toRoute('member/show', [
-            'id' => $result->getLidnr()
-        ]);
     }
 
     /**
@@ -217,22 +153,6 @@ class MemberController extends AbstractActionController
             'member' => $member,
             'canRemove' => $service->canRemove($member)
         ]);
-    }
-
-    /**
-     * Delete action.
-     *
-     * Delete a temporary member.
-     */
-    public function deleteTempAction()
-    {
-        $service = $this->getMemberService();
-        $lidnr = $this->params()->fromRoute('id');
-        $member = $service->getMemberTemp($lidnr);
-        $member = $member['member'];
-
-        $service->removeTemp($member);
-        return $this->redirect()->toRoute('memberTemp');
     }
 
     /**

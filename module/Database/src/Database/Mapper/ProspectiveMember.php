@@ -2,11 +2,11 @@
 
 namespace Database\Mapper;
 
-use Database\Model\MemberTemp as MemberTempModel;
+use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
 
-class MemberTemp
+class ProspectiveMember
 {
 
     /**
@@ -39,7 +39,7 @@ class MemberTemp
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
-            ->from('Database\Model\MemberTemp', 'm')
+            ->from('Database\Model\ProspectiveMember', 'm')
             ->where("m.email = :email")
             ->setMaxResults(1);
 
@@ -54,14 +54,14 @@ class MemberTemp
      *
      * @param string $query
      *
-     * @return MemberTempModel
+     * @return ProspectiveMemberModel
      */
     public function search($query)
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
-            ->from('Database\Model\MemberTemp', 'm')
+            ->from('Database\Model\ProspectiveMember', 'm')
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
             ->setMaxResults(32)
@@ -96,14 +96,14 @@ class MemberTemp
      *
      * @param int $lidnr
      *
-     * @return MemberTempModel
+     * @return ProspectiveMemberModel
      */
     public function find($lidnr)
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m, l')
-            ->from('Database\Model\MemberTemp', 'm')
+            ->from('Database\Model\ProspectiveMember', 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.lists', 'l');
 
@@ -115,9 +115,9 @@ class MemberTemp
     /**
      * Persist a member model.
      *
-     * @param MemberTempModel $member Member to persist.
+     * @param ProspectiveMemberModel $member Member to persist.
      */
-    public function persist(MemberTempModel $member)
+    public function persist(ProspectiveMemberModel $member)
     {
         $this->em->persist($member);
         $this->em->flush();
@@ -126,9 +126,9 @@ class MemberTemp
     /**
      * Remove a member.
      *
-     * @param MemberTempModel $member Member to remove
+     * @param ProspectiveMemberModel $member Member to remove
      */
-    public function remove(MemberTempModel $member)
+    public function remove(ProspectiveMemberModel $member)
     {
         $this->em->remove($member);
         $this->em->flush();
@@ -141,7 +141,7 @@ class MemberTemp
      */
     public function getRepository()
     {
-        return $this->em->getRepository('Database\Model\MemberTemp');
+        return $this->em->getRepository('Database\Model\ProspectiveMember');
     }
 
 }
