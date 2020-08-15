@@ -683,7 +683,7 @@ class ProspectiveMember
      */
     public function getMandateCharacteristic()
     {
-        return "subscription" . $this->changedOn->format('Y') . $this->getLidnr();
+        return $this->changedOn->format('Y') . "subscription" . $this->getLidnr();
     }
 
     /**
@@ -771,7 +771,6 @@ class ProspectiveMember
      */
     public function addList(MailingList $list)
     {
-        $list->addMember($this);
         $this->lists[] = $list;
     }
 
