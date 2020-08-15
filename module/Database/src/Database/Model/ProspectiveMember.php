@@ -677,6 +677,16 @@ class ProspectiveMember
     }
 
     /**
+     * Returns the characteristic of the mandate. Is unique for each form entry
+     *
+     * @return string
+     */
+    public function getMandateCharacteristic()
+    {
+        return "subscription" . $this->changedOn->format('Y') . $this->getLidnr();
+    }
+
+    /**
      * Convert to array.
      *
      * @return array

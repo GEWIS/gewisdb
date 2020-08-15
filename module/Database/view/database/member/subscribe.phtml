@@ -34,6 +34,9 @@ eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging
 verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') ?>
 </p>
 <p>
+    <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
+</p>
+<p>
 <?= $this->translate('Naam') ?>: Gemeenschap van Wiskunde en Informatica Studenten<br>
 <?= $this->translate('Adres') ?>: Den Dolech 2<br>
 <?= $this->translate('Postcode') ?>: 5600 MB<br>
@@ -589,6 +592,13 @@ case Address::TYPE_MAIL:
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
+<p>
+    <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
+</p>
+
+<p>
+    <?= $this->translate('Kenmerk van de machtiging') ?>: <?= $member->getMandateCharacteristic() ?>
+</p>
 <div class="visible-print">
 <table class="table table-bordered">
     <tr>
