@@ -214,6 +214,13 @@ class ProspectiveMember
     protected $signature;
 
     /**
+     * The signature location
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $signatureLocation;
+
+    /**
      * Static method to get available genders.
      *
      * @return array
@@ -647,6 +654,26 @@ class ProspectiveMember
     public function setSignature($signature)
     {
         $this->signature = $signature;
+    }
+
+    /**
+     * Get the signature location
+     *
+     * @return string
+     */
+    public function getSignatureLocation()
+    {
+        return $this->signature;
+    }
+
+    /**
+     * Set the signature location
+     *
+     * @param string $signatureLocation
+     */
+    public function setSignatureLocation($signatureLocation)
+    {
+        $this->signatureLocation = $signatureLocation;
     }
 
     /**

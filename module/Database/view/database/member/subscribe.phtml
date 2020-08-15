@@ -358,6 +358,22 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
 <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
 
+<?php
+$element = $form->get('signatureLocation');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
 <h3><?= $this->translate('Akkoordverklaring') ?></h3>
 
 <a href="https://gewis.nl/vereniging/statuten/"><?= $this->translate('Statuten en HR') ?></a>
@@ -587,7 +603,7 @@ case Address::TYPE_MAIL:
         </td>
     </tr>
     <tr>
-        <th><?= $this->translate('Plaats en datum van ondertekening') ?><br><?= $member->getAddresses()['studentAddress']->getCity() ?><br><?= $member->getChangedOn()->format('F j, Y') ?><br><br><br><br></th>
+        <th><?= $this->translate('Plaats en datum van ondertekening') ?><br><?= $member->getSignatureLocation() ?><br><?= $member->getChangedOn()->format('F j, Y') ?><br><br><br><br></th>
         <th><?= $this->translate('Handtekening') ?><br><img src="<?= $this->fileUrl($member->getSignature()) ?>" height="100" width="300" /><br><br><br><br><br></th>
     </tr>
 </table>

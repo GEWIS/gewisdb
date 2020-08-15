@@ -45,13 +45,13 @@ class Member extends AbstractService
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'studentAddress', 'agreed', 'iban', 'signature'
+                'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         } else {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'agreed', 'iban', 'signature'
+                'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         }
         if ($data['iban'] == 'noiban') {
