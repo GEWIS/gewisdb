@@ -31,6 +31,6 @@ return array(
     'storage' => array(
         'storage_dir' => 'public/data',
         'public_dir' => 'data',
-        'dir_mode' => 0777,
+        'dir_mode' => 0660,
     ),
 );
