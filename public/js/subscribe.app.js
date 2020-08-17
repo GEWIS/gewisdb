@@ -4,6 +4,7 @@ var inputSignature = document.getElementById("signature-canvas-data");
 var ibanInput = document.getElementById("iban-input");
 var ibanCheckbox = document.getElementById("iban-agreement");
 var form = document.getElementById("form-subscribe");
+var signatureFormGroup = document.getElementById("signature-form-group");
 var canvas = document.getElementById("signature-canvas");
 var signaturePad = new SignaturePad(canvas, {
     'throttle': 32,
@@ -14,16 +15,16 @@ var signaturePad = new SignaturePad(canvas, {
 });
 
 function resizeCanvas() {
-  var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+    var ratio =  Math.max(window.devicePixelRatio || 1, 1);
 
-  canvas.width = canvas.offsetWidth * ratio;
-  canvas.height = canvas.offsetHeight * ratio;
-  canvas.getContext("2d").scale(ratio, ratio);
+    canvas.width = Math.min(signatureFormGroup.offsetWidth * ratio, 300);
+    canvas.height = Math.min(signatureFormGroup.offsetHeight * ratio, 150);
 
-  signaturePad.clear();
+    inputSignature.value = "";
+    signaturePad.clear();
 }
 
-window.onresize = resizeCanvas;
+window.onorientationchange = resizeCanvas;
 resizeCanvas();
 
 clearButton.addEventListener("click", function (event) {
