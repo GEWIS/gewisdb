@@ -164,11 +164,6 @@ class Member extends Form implements InputFilterProviderInterface
         ));
 
         $this->add(array(
-            'name' => 'agreedfaculty',
-            'type' => 'checkbox'
-        ));
-
-        $this->add(array(
             'name' => 'agreed',
             'type' => 'checkbox'
         ));
