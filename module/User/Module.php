@@ -29,6 +29,10 @@ class Module
                 return;
             }
 
+            if ($match->getMatchedRouteName() === 'member/default' && $match->getParam('action') === 'subscribe') {
+                return;
+            }
+
             if ($match->getMatchedRouteName() !== 'user') {
                 $response = $e->getResponse();
                 $response->getHeaders()->addHeaderLine('Location', '/user');
