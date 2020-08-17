@@ -106,15 +106,15 @@ msgstr ""
 
 #: module/Database/view/database/member/subscribe.phtml:357
 msgid "Handtekening eenmalige SEPA-machtiging"
-msgstr "Signature one-time SEPA-debit"
+msgstr "Signature one-time SEPA-authorization"
 
 #: module/Database/view/database/member/subscribe.phtml:359
 msgid ""
 "Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
 "nodig. Deze kan je hieronder in het vakje tekenen."
 msgstr ""
-"For the automatic one-time SEPA-debit we require your signature. You can "
-"enter it in the square below."
+"For the automatic one-time SEPA-authorization we require your signature. You "
+"can enter it in the square below."
 
 #: module/Database/view/database/member/subscribe.phtml:361
 msgid ""
