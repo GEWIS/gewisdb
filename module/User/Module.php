@@ -33,6 +33,10 @@ class Module
                 return;
             }
 
+            if ($match->getMatchedRouteName() === 'lang' && ($match->getParam('lang') === 'nl' || $match->getParam('lang') === 'en')) {
+                return;
+            }
+
             if ($match->getMatchedRouteName() !== 'user') {
                 $response = $e->getResponse();
                 $response->getHeaders()->addHeaderLine('Location', '/user');
