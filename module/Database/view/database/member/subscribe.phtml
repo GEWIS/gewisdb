@@ -445,8 +445,8 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
         <br>
         <small><?= $this->translate('Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!') ?></small></h1>
     <div class="alert alert-info">
-        Liked the introduction week? GEWIS also organizes a follow-up weekend after the introduction week: the FLUP!
-        uring the FLUP you get to know even more fellow students and GEWIS as an association through fun activities and a BBQ.
+        Liked the introduction week? GEWIS also organizes a follow-up day after the introduction week: the FLUP!
+        During the FLUP you get to know even more fellow students and GEWIS as an association through fun activities and a BBQ.
         This event will take place on Saturday, September 12. Tickets can be bought on <a href="https://gewis.nl/FLUP">https://gewis.nl/FLUP</a> for €3.
     </div>
     <h2 class="hidden-print">Hier nogmaals je gegevens ter controle</h2>
@@ -454,10 +454,6 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
 <div class="col-md-6">
     <h1><?= $member->getFullName() ?></h1>
     <table class="table table-bordered">
-        <tr>
-            <th><?= $this->translate('Lidnummer') ?></th>
-            <td><?= $member->getLidnr() ?></td>
-        </tr>
         <tr>
             <th><?= $this->translate('Voorletters') ?>/th>
             <td><?= $member->getInitials() ?></td>
