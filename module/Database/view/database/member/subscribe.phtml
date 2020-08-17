@@ -361,10 +361,14 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 <p>
 <?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
 </p>
-<canvas id="signature-canvas"><?= $this->translate('Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
-<br>
-<button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
-<?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+<div class="form-group" id="signature-form-group">
+    <div class="col-sm-12">
+        <canvas id="signature-canvas"><?= $this->translate('Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
+        <br>
+        <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
+        <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+    </div>
+</div>
 
 <?php
 $element = $form->get('signatureLocation');
