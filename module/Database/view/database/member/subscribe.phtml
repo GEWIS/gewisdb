@@ -29,7 +29,7 @@ $form->setAttribute('id', 'form-subscribe');
 <h1><?= implode(' ',
         array('<span class="gewis-red">GEWIS</span>',
         $this->translate('Inschrijving'),
-        'SEPA-machtiging')) ?></h1>
+        $this->translate('SEPA-machtiging'))) ?></h1>
 <p>
 <?= $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
 lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost
@@ -156,7 +156,7 @@ $element->setLabelAttributes(array(
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
-        <p><?= $this->translate('This is the identification number you have received from the TU/e after enrolling for a degree programme.') ?></p>
+        <p><?= $this->translate('This is the identification number you have received from the TU/e after enrolling for a degree programme.') ?></p>g
         <?= $this->formElementErrors($element) ?>
     </div>
 </div>
