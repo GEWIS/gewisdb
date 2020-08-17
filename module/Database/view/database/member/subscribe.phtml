@@ -4,6 +4,8 @@ use Database\Model\Address;
 ?>
 <?php if (isset($form)): ?>
 <?php
+$this->headTitle()->prepend("GEWIS Enrollment");
+
 $this->inlineScript()->appendFile($this->basePath() . '/js/signature_pad.min.js');
 $this->inlineScript()->appendFile($this->basePath() . '/js/subscribe.app.js');
 
