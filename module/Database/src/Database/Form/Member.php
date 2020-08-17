@@ -140,6 +140,19 @@ class Member extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add(array(
+            'name' => 'signature',
+            'type' => 'hidden'
+        ));
+
+        $this->add(array(
+            'name' => 'signatureLocation',
+            'type' => 'text',
+            'options' => array(
+                'label' => $translator->translate('Plaats van ondertekening')
+            )
+        ));
+
+        $this->add(array(
             'name' => 'agreediban',
             'type' => 'checkbox'
         ));

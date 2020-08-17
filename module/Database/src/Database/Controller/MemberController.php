@@ -31,6 +31,7 @@ class MemberController extends AbstractActionController
             $member = $service->subscribe($request->getPost());
 
             if (null !== $member) {
+                $service->sendMemberSubscriptionEmail($member);
                 return new ViewModel(array(
                     'member' => $member
                 ));
