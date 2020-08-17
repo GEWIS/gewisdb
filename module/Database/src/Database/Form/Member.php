@@ -103,7 +103,13 @@ class Member extends Form implements InputFilterProviderInterface
                             'Master Embedded Systems' => 'Embedded Systems',
                             'Master Science Education and Communication' => 'Science Education and Communication'
                         )
-                    )
+                    ),
+                    'other' => array(
+                        'label' => 'Other',
+                        'options' => array(
+                            'Other' => 'Other'
+                        )
+                    ),
                 ),
                 'empty_option' => $translator->translate('Selecteer een studie')
             )
@@ -154,6 +160,11 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add(array(
             'name' => 'agreediban',
+            'type' => 'checkbox'
+        ));
+
+        $this->add(array(
+            'name' => 'agreedfaculty',
             'type' => 'checkbox'
         ));
 
