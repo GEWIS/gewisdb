@@ -156,6 +156,7 @@ $element->setLabelAttributes(array(
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
+        <p><?= $this->translate('This is the identification number you have received from the TU/e after enrolling for a degree programme.') ?></p>
         <?= $this->formElementErrors($element) ?>
     </div>
 </div>
@@ -168,7 +169,7 @@ $element->setLabelAttributes(array(
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?><p data-toggle="tooltip" title="<? $this->translate("This is the identification number you have received from the TU/e after enrolling for a degree programme.") ?>>?</p>
+    <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formSelect($element) ?>
         <?= $this->formElementErrors($element) ?>
