@@ -183,7 +183,20 @@ class Member extends AbstractService
 
         // Fill in the address in the form again
         $data = $prospectiveMember->toArray();
+
+        // add list data to the form
+        foreach ($form->getLists() as $list) {
+            $result = '0';
+            foreach ($prospectiveMember->getLists() as $l) {
+                if ($list->getName() == $l->getName()) {
+                    $result = '1';
+                }
+            }
+            $data['list-' . $list->getName()] = $result;
+        }
+
         unset($data['lidnr']);
+
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -203,14 +216,21 @@ class Member extends AbstractService
         $member->setChangedOn($date);
 
         // add mailing lists
-        foreach ($prospectiveMember->getLists() as $list) {
+        foreach ($form->getLists() as $list) {
+            if ($form->get('list-' . $list->getName())->isChecked()) {
+                $member->addList($list);
+            }
+        }
+        // subscribe to default mailing lists not on the form
+        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
+        foreach ($mailingMapper->findDefault() as $list) {
             $member->addList($list);
         }
 
         // Remove prospectiveMember model
-        $this->removeProspective($prospectiveMember);
-
         $this->getMemberMapper()->persist($member);
+
+        $this->removeProspective($prospectiveMember);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
