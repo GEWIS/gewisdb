@@ -22,6 +22,11 @@ class Module
                 return;
             }
 
+            if ($e->getResponse() instanceof \Zend\Console\Response) {
+                // console route, always fine
+                return;
+            }
+
             $match = $e->getRouteMatch();
 
             if ($match === null) {
