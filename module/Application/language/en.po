@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-17 22:02+0200\n"
+"POT-Creation-Date: 2020-08-23 20:38+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: \n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 
 #: module/Database/view/database/member/print.phtml:5
-#: module/Database/view/database/member/subscribe.phtml:453
+#: module/Database/view/database/member/subscribe.phtml:454
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr "Congratulations! You are registered as a member of GEWIS"
 
 #: module/Database/view/database/member/print.phtml:6
-#: module/Database/view/database/member/subscribe.phtml:455
+#: module/Database/view/database/member/subscribe.phtml:456
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
 msgstr "Your registration becomes final after you've paid your membership fee!"
 
@@ -44,7 +44,7 @@ msgstr ""
 "authorization for GEWIS. The address details of GEWIS are as follows:"
 
 #: module/Database/view/database/member/subscribe.phtml:40
-#: module/Database/view/database/member/subscribe.phtml:602
+#: module/Database/view/database/member/subscribe.phtml:603
 msgid "Incassant-ID"
 msgstr "Collector-ID"
 
@@ -53,7 +53,7 @@ msgid "Naam"
 msgstr "Name"
 
 #: module/Database/view/database/member/subscribe.phtml:44
-#: module/Database/view/database/member/subscribe.phtml:230
+#: module/Database/view/database/member/subscribe.phtml:231
 msgid "Adres"
 msgstr "Address"
 
@@ -67,7 +67,7 @@ msgid "Plaats"
 msgstr "City"
 
 #: module/Database/view/database/member/subscribe.phtml:47
-#: module/Database/view/database/member/subscribe.phtml:578
+#: module/Database/view/database/member/subscribe.phtml:579
 #: module/Database/src/Database/Form/Fieldset/Address.php:28
 msgid "Land"
 msgstr "Country"
@@ -88,11 +88,16 @@ msgstr ""
 "This is the identification number you have received from the TU/e after "
 "enrolling for a degree programme."
 
-#: module/Database/view/database/member/subscribe.phtml:333
+#: module/Database/view/database/member/subscribe.phtml:224
+#, php-format
+msgid "Contact %s for any questions about your payment."
+msgstr "Contact %s for any questions about your payment."
+
+#: module/Database/view/database/member/subscribe.phtml:334
 msgid "Mailinglijsten"
 msgstr "Mailing lists"
 
-#: module/Database/view/database/member/subscribe.phtml:335
+#: module/Database/view/database/member/subscribe.phtml:336
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
 "mededelingen\n"
@@ -108,11 +113,11 @@ msgstr ""
 "subscribe to. You can sign up for the following mailing lists. These "
 "subscriptions can be withdrawn at any moment."
 
-#: module/Database/view/database/member/subscribe.phtml:360
+#: module/Database/view/database/member/subscribe.phtml:361
 msgid "Handtekening eenmalige SEPA-machtiging"
 msgstr "Signature one-time SEPA-authorization"
 
-#: module/Database/view/database/member/subscribe.phtml:362
+#: module/Database/view/database/member/subscribe.phtml:363
 msgid ""
 "Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
 "nodig. Deze kan je hieronder in het vakje tekenen."
@@ -120,7 +125,7 @@ msgstr ""
 "For the automatic one-time SEPA-authorization we require your signature. You "
 "can enter it in the square below."
 
-#: module/Database/view/database/member/subscribe.phtml:366
+#: module/Database/view/database/member/subscribe.phtml:367
 msgid ""
 "Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een "
 "moderne browser, zoals Firefox."
@@ -128,19 +133,19 @@ msgstr ""
 "Your internet browser does not support digital signatures. Use a modern "
 "browser such as Firefox."
 
-#: module/Database/view/database/member/subscribe.phtml:368
+#: module/Database/view/database/member/subscribe.phtml:369
 msgid "Verwijder handtekening"
 msgstr "Remove signature"
 
-#: module/Database/view/database/member/subscribe.phtml:389
+#: module/Database/view/database/member/subscribe.phtml:390
 msgid "Akkoordverklaring"
 msgstr "Signature"
 
-#: module/Database/view/database/member/subscribe.phtml:391
+#: module/Database/view/database/member/subscribe.phtml:392
 msgid "Statuten en HR"
 msgstr "Articles of the association and the code of conduct"
 
-#: module/Database/view/database/member/subscribe.phtml:402
+#: module/Database/view/database/member/subscribe.phtml:403
 msgid ""
 "Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
 "en\n"
@@ -164,7 +169,7 @@ msgstr ""
 "the data will be removed automatically, unless I explicitly give permission "
 "not to do so."
 
-#: module/Database/view/database/member/subscribe.phtml:426
+#: module/Database/view/database/member/subscribe.phtml:427
 msgid ""
 "Ik geef hierbij GEmeenschap Wiskunde en Informatica\n"
 "(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar mijn "
@@ -179,152 +184,152 @@ msgstr ""
 "named fifteen euro, to amortize from my account and my bank to send a one-"
 "time amount from my account in accordance with the command of GEWIS."
 
-#: module/Database/view/database/member/subscribe.phtml:467
+#: module/Database/view/database/member/subscribe.phtml:468
 msgid "Voorletters"
 msgstr "Initials"
 
-#: module/Database/view/database/member/subscribe.phtml:471
+#: module/Database/view/database/member/subscribe.phtml:472
 #: module/Database/src/Database/Form/Member.php:58
 msgid "Voornaam"
 msgstr "First name"
 
-#: module/Database/view/database/member/subscribe.phtml:475
+#: module/Database/view/database/member/subscribe.phtml:476
 #: module/Database/src/Database/Form/Member.php:42
 msgid "Tussenvoegsels"
 msgstr "Last Name Preposition"
 
-#: module/Database/view/database/member/subscribe.phtml:479
+#: module/Database/view/database/member/subscribe.phtml:480
 #: module/Database/src/Database/Form/Member.php:34
 msgid "Achternaam"
 msgstr "Last name"
 
-#: module/Database/view/database/member/subscribe.phtml:483
+#: module/Database/view/database/member/subscribe.phtml:484
 #: module/Database/src/Database/Form/Member.php:71
 msgid "Geslacht"
 msgstr "Gender"
 
-#: module/Database/view/database/member/subscribe.phtml:487
+#: module/Database/view/database/member/subscribe.phtml:488
 #: module/Database/src/Database/Form/Member.php:67
 msgid "Man"
 msgstr "Male"
 
-#: module/Database/view/database/member/subscribe.phtml:490
+#: module/Database/view/database/member/subscribe.phtml:491
 #: module/Database/src/Database/Form/Member.php:68
 msgid "Vrouw"
 msgstr "Female"
 
-#: module/Database/view/database/member/subscribe.phtml:493
+#: module/Database/view/database/member/subscribe.phtml:494
 #: module/Database/src/Database/Form/Member.php:69
 msgid "Anders"
 msgstr "Not specified"
 
-#: module/Database/view/database/member/subscribe.phtml:499
+#: module/Database/view/database/member/subscribe.phtml:500
 #: module/Database/src/Database/Form/Member.php:79
 msgid "TU/e nummer"
 msgstr "TU/e registration number"
 
-#: module/Database/view/database/member/subscribe.phtml:503
+#: module/Database/view/database/member/subscribe.phtml:504
 #: module/Database/src/Database/Form/Member.php:87
 msgid "Studie"
 msgstr "Study Program"
 
-#: module/Database/view/database/member/subscribe.phtml:507
+#: module/Database/view/database/member/subscribe.phtml:508
 msgid "Email"
 msgstr "Email"
 
-#: module/Database/view/database/member/subscribe.phtml:511
+#: module/Database/view/database/member/subscribe.phtml:512
 #: module/Database/src/Database/Form/Member.php:130
 msgid "Geboortedatum"
 msgstr "Birth date"
 
-#: module/Database/view/database/member/subscribe.phtml:515
+#: module/Database/view/database/member/subscribe.phtml:516
 msgid "Generatie"
 msgstr "Generation"
 
-#: module/Database/view/database/member/subscribe.phtml:519
+#: module/Database/view/database/member/subscribe.phtml:520
 #: module/Database/src/Database/Form/Member.php:144
 msgid "IBAN"
 msgstr "IBAN"
 
-#: module/Database/view/database/member/subscribe.phtml:523
+#: module/Database/view/database/member/subscribe.phtml:524
 msgid "Betaald (hoe veel)"
 msgstr "Paid (how much)"
 
-#: module/Database/view/database/member/subscribe.phtml:527
+#: module/Database/view/database/member/subscribe.phtml:528
 msgid "Type lid"
 msgstr "Member type"
 
-#: module/Database/view/database/member/subscribe.phtml:531
+#: module/Database/view/database/member/subscribe.phtml:532
 msgid "Gewoon"
 msgstr "Normal"
 
-#: module/Database/view/database/member/subscribe.phtml:534
+#: module/Database/view/database/member/subscribe.phtml:535
 msgid "Verlengd"
 msgstr "Prolonged"
 
-#: module/Database/view/database/member/subscribe.phtml:537
+#: module/Database/view/database/member/subscribe.phtml:538
 msgid "Extern"
 msgstr "External"
 
-#: module/Database/view/database/member/subscribe.phtml:540
+#: module/Database/view/database/member/subscribe.phtml:541
 msgid "Buitengewoon"
 msgstr "Extraordinary"
 
-#: module/Database/view/database/member/subscribe.phtml:543
+#: module/Database/view/database/member/subscribe.phtml:544
 #, fuzzy
 msgid "Erelid"
 msgstr "Honorary"
 
-#: module/Database/view/database/member/subscribe.phtml:549
+#: module/Database/view/database/member/subscribe.phtml:550
 msgid "Laatste wijziging lidmaatshap"
 msgstr "Last change of membership"
 
-#: module/Database/view/database/member/subscribe.phtml:553
+#: module/Database/view/database/member/subscribe.phtml:554
 msgid "Verloopdatum lidmaatschap"
 msgstr "Expiration date of membership"
 
-#: module/Database/view/database/member/subscribe.phtml:559
+#: module/Database/view/database/member/subscribe.phtml:560
 msgid "Adressen"
 msgstr "Addresses"
 
-#: module/Database/view/database/member/subscribe.phtml:566
+#: module/Database/view/database/member/subscribe.phtml:567
 msgid "Thuisadres (ouders)"
 msgstr "Home Address (address of your parents)"
 
-#: module/Database/view/database/member/subscribe.phtml:569
+#: module/Database/view/database/member/subscribe.phtml:570
 msgid "Kameradres"
 msgstr "Student room address"
 
-#: module/Database/view/database/member/subscribe.phtml:572
+#: module/Database/view/database/member/subscribe.phtml:573
 msgid "Postadres"
 msgstr "Postal Address"
 
-#: module/Database/view/database/member/subscribe.phtml:582
+#: module/Database/view/database/member/subscribe.phtml:583
 msgid "Straat en huisnummer"
 msgstr "Street and house number"
 
-#: module/Database/view/database/member/subscribe.phtml:586
+#: module/Database/view/database/member/subscribe.phtml:587
 msgid "Woonplaats en Postcode"
 msgstr "City and postal code"
 
-#: module/Database/view/database/member/subscribe.phtml:590
+#: module/Database/view/database/member/subscribe.phtml:591
 #: module/Database/src/Database/Form/Fieldset/Address.php:69
 msgid "Telefoonnummer"
 msgstr "Phone number"
 
-#: module/Database/view/database/member/subscribe.phtml:595
+#: module/Database/view/database/member/subscribe.phtml:596
 msgid "Aangemelde mailing lists"
 msgstr "Subscribed mailing lists"
 
-#: module/Database/view/database/member/subscribe.phtml:606
+#: module/Database/view/database/member/subscribe.phtml:607
 msgid "Kenmerk van de machtiging"
 msgstr "Characteristic of the mandate"
 
-#: module/Database/view/database/member/subscribe.phtml:627
+#: module/Database/view/database/member/subscribe.phtml:628
 msgid "Plaats en datum van ondertekening"
 msgstr "Place and date of signing"
 
-#: module/Database/view/database/member/subscribe.phtml:628
+#: module/Database/view/database/member/subscribe.phtml:629
 msgid "Handtekening"
 msgstr "Signature"
 
@@ -419,11 +424,11 @@ msgstr "Email address"
 msgid "Plaats van ondertekening"
 msgstr "Place of signature"
 
-#: module/Database/src/Database/Form/Member.php:180
+#: module/Database/src/Database/Form/Member.php:175
 msgid "Schrijf in"
 msgstr "Send"
 
-#: module/Database/src/Database/Form/Member.php:291
+#: module/Database/src/Database/Form/Member.php:286
 msgid "Je moet de voorwaarden accepteren!"
 msgstr "You have to accept the code of conduct!"
 

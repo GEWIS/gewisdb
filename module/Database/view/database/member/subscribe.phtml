@@ -221,6 +221,7 @@ $element->setLabelAttributes(array(
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
+        <p><?= sprintf($this->translate('Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
         <?= $this->formElementErrors($element) ?>
     </div>
 </div>
