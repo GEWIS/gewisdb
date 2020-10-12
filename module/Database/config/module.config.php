@@ -328,6 +328,62 @@ return array(
                     ),
                 ),
             ),
+            'prospective-member' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/prospective-member',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Database\Controller',
+                        'controller'    => 'ProspectiveMember',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'show' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'show'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'delete' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/delete',
+                                    'defaults' => array(
+                                        'action' => 'delete'
+                                    )
+                                )
+                            ),
+                            'finalize' => array(
+                                'type' => 'Literal',
+                                'options' => array(
+                                    'route' => '/finalize',
+                                    'defaults' => array(
+                                        'action' => 'finalize'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:action',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
             'export' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -426,6 +482,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
+            'Database\Controller\ProspectiveMember' => 'Database\Controller\ProspectiveMemberController',
             'Database\Controller\Member' => 'Database\Controller\MemberController',
             'Database\Controller\Organ' => 'Database\Controller\OrganController',
             'Database\Controller\Export' => 'Database\Controller\ExportController',

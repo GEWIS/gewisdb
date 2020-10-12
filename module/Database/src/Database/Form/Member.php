@@ -103,7 +103,13 @@ class Member extends Form implements InputFilterProviderInterface
                             'Master Embedded Systems' => 'Embedded Systems',
                             'Master Science Education and Communication' => 'Science Education and Communication'
                         )
-                    )
+                    ),
+                    'other' => array(
+                        'label' => 'Other',
+                        'options' => array(
+                            'Other' => 'Other'
+                        )
+                    ),
                 ),
                 'empty_option' => $translator->translate('Selecteer een studie')
             )
@@ -138,6 +144,19 @@ class Member extends Form implements InputFilterProviderInterface
                 'label' => $translator->translate('IBAN')
             ]
         ]);
+
+        $this->add(array(
+            'name' => 'signature',
+            'type' => 'hidden'
+        ));
+
+        $this->add(array(
+            'name' => 'signatureLocation',
+            'type' => 'text',
+            'options' => array(
+                'label' => $translator->translate('Plaats van ondertekening')
+            )
+        ));
 
         $this->add(array(
             'name' => 'agreediban',

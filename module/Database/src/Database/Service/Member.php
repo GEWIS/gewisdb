@@ -6,7 +6,13 @@ use Application\Service\AbstractService;
 
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
-use Database\Model\MailingList;
+use Database\Model\ProspectiveMember as ProspectiveMemberModel;
+use Zend\Mail\Transport\TransportInterface;
+use Zend\Mime\Mime;
+use Zend\View\Model\ViewModel;
+use Zend\Mail\Message;
+use Zend\Mime\Part as MimePart;
+use Zend\Mime\Message as MimeMessage;
 
 class Member extends AbstractService
 {
@@ -23,7 +29,7 @@ class Member extends AbstractService
      *
      * @param array $data
      *
-     * @return Member member, null if failed.
+     * @return ProspectiveMemberModel member, null if failed.
      */
     public function subscribe($data)
     {
@@ -31,7 +37,7 @@ class Member extends AbstractService
 
         $form = $this->getMemberForm();
 
-        $form->bind(new MemberModel());
+        $form->bind(new ProspectiveMemberModel());
 
         $noiban = false;
 
@@ -39,13 +45,13 @@ class Member extends AbstractService
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'studentAddress', 'agreed', 'iban'
+                'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         } else {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tuenumber', 'study', 'email', 'birth',
-                'agreed', 'iban'
+                'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         }
         if ($data['iban'] == 'noiban') {
@@ -60,36 +66,156 @@ class Member extends AbstractService
         }
 
         // set some extra data
-        $member = $form->getData();
+        $prospectiveMember = $form->getData();
 
         if ($noiban) {
-            $member->setIban(null);
+            $prospectiveMember->setIban(null);
         }
 
         // find if there is an earlier member with the same email or name
-        if ($this->getMemberMapper()->hasMemberWith($member->getEmail())) {
+        if ($this->getMemberMapper()->hasMemberWith($prospectiveMember->getEmail())) {
             $form->get('email')->setMessages([
                 'There already is a member with this email address.'
             ]);
             return null;
         }
 
-        if (!is_numeric($member->getTuenumber())) {
-            $member->setTuenumber(0);
+        if (!is_numeric($prospectiveMember->getTuenumber())) {
+            $prospectiveMember->setTuenumber(0);
         }
 
         // generation is the current year
-        $member->setGeneration((int) date('Y'));
+        $prospectiveMember->setGeneration((int) date('Y'));
 
         // by default, we only add ordinary members
-        $member->setType(MemberModel::TYPE_ORDINARY);
+        $prospectiveMember->setType(MemberModel::TYPE_ORDINARY);
+
+        // changed on date
+        $date = new \DateTime();
+        $date->setTime(0, 0);
+        $prospectiveMember->setChangedOn($date);
+
+        // store the address
+        $address = $form->get('studentAddress')->getObject();
+        $prospectiveMember->setAddress($address);
+
+        // check mailing lists
+        foreach ($form->getLists() as $list) {
+            if ($form->get('list-' . $list->getName())->isChecked()) {
+                $prospectiveMember->addList($list);
+            }
+        }
+        // subscribe to default mailing lists not on the form
+        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
+        foreach ($mailingMapper->findDefault() as $list) {
+            $prospectiveMember->addList($list);
+        }
+
+        // handle signature
+        $signature = $form->get('signature')->getValue();
+        if (!is_null($signature)) {
+            $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
+            $prospectiveMember->setSignature($path);
+        }
+
+        $this->getProspectiveMemberMapper()->persist($prospectiveMember);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $prospectiveMember));
+
+        return $prospectiveMember;
+    }
+
+    /**
+     * Send an email about the newly subscribed member to the new member and the secretary
+     *
+     * @param ProspectiveMemberModel $member
+     */
+    public function sendMemberSubscriptionEmail(ProspectiveMemberModel $member)
+    {
+        $config = $this->getServiceManager()->get('config');
+        $config = $config['email'];
+
+        $renderer = $this->getRenderer();
+        $model = new ViewModel(array(
+            'member' => $member
+        ));
+        $model->setTemplate('database/member/subscribe');
+        $body = $renderer->render($model);
+
+        $html = new MimePart($body);
+        $html->type = "text/html";
+
+        // Include signature as image attachment
+        $image = new MimePart(fopen($this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(), 'r'));
+        $image->type = 'image/png';
+        $image->filename = 'signature.png';
+        $image->disposition = Mime::DISPOSITION_ATTACHMENT;
+        $image->encoding = Mime::ENCODING_BASE64;
+
+        $mimeMessage = new MimeMessage();
+        $mimeMessage->setParts([$html, $image]);
+
+        $message = new Message();
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']);
+        $message->addTo($config['to']['subscription']);
+        $message->setSubject('New member subscription: ' . $member->getFullName());
+        $this->getMailTransport()->send($message);
+
+        $message = new Message();
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']);
+        $message->addTo($member->getEmail());
+        $message->setSubject('GEWIS Subscription');
+        $this->getMailTransport()->send($message);
+    }
+
+    /**
+     * @param ProspectiveMemberModel $prospectiveMember
+     * @return MemberModel|null
+     */
+    public function finalizeSubscription($prospectiveMember)
+    {
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+
+        $form = $this->getMemberForm();
+
+        $form->bind(new MemberModel());
+
+        // Fill in the address in the form again
+        $data = $prospectiveMember->toArray();
+
+        // add list data to the form
+        foreach ($form->getLists() as $list) {
+            $result = '0';
+            foreach ($prospectiveMember->getLists() as $l) {
+                if ($list->getName() == $l->getName()) {
+                    $result = '1';
+                }
+            }
+            $data['list-' . $list->getName()] = $result;
+        }
+
+        unset($data['lidnr']);
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        $member = $form->getData();
+
+        // Copy all remaining information
+        $member->setTuenumber($prospectiveMember->getTuenumber());
+        $member->setGeneration($prospectiveMember->getGeneration());
+        $member->setType($prospectiveMember->getType());
 
         // changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        // check mailing lists
+        // add mailing lists
         foreach ($form->getLists() as $list) {
             if ($form->get('list-' . $list->getName())->isChecked()) {
                 $member->addList($list);
@@ -101,7 +227,10 @@ class Member extends AbstractService
             $member->addList($list);
         }
 
+        // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
+
+        $this->removeProspective($prospectiveMember);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
@@ -127,6 +256,20 @@ class Member extends AbstractService
                 'simple' => true
             );
         }
+    }
+
+    /**
+     * Get prospective member info.
+     *
+     * @param int $id
+     *
+     * @return ProspectiveMemberModel
+     */
+    public function getProspectiveMember($id)
+    {
+        return array(
+            'member' => $this->getProspectiveMemberMapper()->find($id)
+        );
     }
 
     /**
@@ -156,9 +299,19 @@ class Member extends AbstractService
     }
 
     /**
+     * Search for a prospective member.
+     *
+     * @param string $query
+     */
+    public function searchProspective($query)
+    {
+        return $this->getProspectiveMemberMapper()->search($query);
+    }
+
+    /**
      * Check if we can easily remove a member.
      *
-     * @param int $lidnr
+     * @param MemberModel $member
      */
     public function canRemove(MemberModel $member)
     {
@@ -168,7 +321,7 @@ class Member extends AbstractService
     /**
      * Remove a member.
      *
-     * @param Member $member
+     * @param MemberModel $member
      */
     public function remove(MemberModel $member)
     {
@@ -176,6 +329,18 @@ class Member extends AbstractService
             return $this->getMemberMapper()->remove($member);
         }
         $this->clear($member);
+    }
+
+    /**
+     * Remove a member.
+     *
+     * @param ProspectiveMemberModel $member
+     */
+    public function removeProspective(ProspectiveMemberModel $member)
+    {
+        // First destroy the signiture file
+        $this->getFileStorageService()->removeFile($member->getSignature());
+        $this->getProspectiveMemberMapper()->remove($member);
     }
 
     /**
@@ -528,5 +693,45 @@ class Member extends AbstractService
     public function getMemberMapper()
     {
         return $this->getServiceManager()->get('database_mapper_member');
+    }
+
+    /**
+     * Get the member mapper.
+     *
+     * @return \Database\Mapper\ProspectiveMember
+     */
+    public function getProspectiveMemberMapper()
+    {
+        return $this->getServiceManager()->get('database_mapper_prospective_member');
+    }
+
+    /**
+     * Gets the storage service.
+     *
+     * @return \Application\Service\FileStorage
+     */
+    public function getFileStorageService()
+    {
+        return $this->getServiceManager()->get('application_service_storage');
+    }
+
+    /**
+     * Get the renderer for the email.
+     *
+     * @return PhpRenderer
+     */
+    public function getRenderer()
+    {
+        return $this->sm->get('view_manager')->getRenderer();
+    }
+
+    /**
+     * Get the mail transport.
+     *
+     * @return TransportInterface
+     */
+    public function getMailTransport()
+    {
+        return $this->getServiceManager()->get('database_mail_transport');
     }
 }

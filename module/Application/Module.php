@@ -53,4 +53,37 @@ class Module
             ),
         );
     }
+
+    /**
+     * Get service configuration.
+     *
+     * @return array Service configuration
+     */
+    public function getServiceConfig()
+    {
+        return [
+            'invokables' => [
+                'application_service_storage' => 'Application\Service\FileStorage',
+            ],
+        ];
+    }
+
+    /**
+     * Get view helper configuration.
+     *
+     * @return array
+     */
+    public function getViewHelperConfig()
+    {
+        return [
+            'factories' => [
+                'fileUrl' => function ($sm) {
+                    $locator = $sm->getServiceLocator();
+                    $helper = new \Application\View\Helper\FileUrl();
+                    $helper->setServiceLocator($locator);
+                    return $helper;
+                },
+            ]
+        ];
+    }
 }

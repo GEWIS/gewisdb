@@ -4,6 +4,11 @@ use Database\Model\Address;
 ?>
 <?php if (isset($form)): ?>
 <?php
+$this->headTitle()->prepend("GEWIS Enrollment");
+
+$this->inlineScript()->appendFile($this->basePath() . '/js/signature_pad.min.js');
+$this->inlineScript()->appendFile($this->basePath() . '/js/subscribe.app.js');
+
 $form->prepare();
 
 $form->setAttribute('action', $this->url('member/default', array('action' => 'subscribe')));
@@ -11,6 +16,7 @@ $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
 $form->setAttribute('class', 'form-horizontal');
+$form->setAttribute('id', 'form-subscribe');
 ?>
 <?= $this->form()->openTag($form) ?>
 
@@ -20,7 +26,10 @@ $form->setAttribute('class', 'form-horizontal');
 <img src="<?= $this->basePath() ?>/img/gewis.png" />
 </div>
 <div class="col-md-9">
-<h1><?= $this->translate('Inschrijving Studievereniging <span class="gewis-red">GEWIS</span>') ?></h1>
+<h1><?= implode(' ',
+        array('<span class="gewis-red">GEWIS</span>',
+        $this->translate('Inschrijving'),
+        $this->translate('SEPA-machtiging'))) ?></h1>
 <p>
 <?= $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
 lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost
@@ -28,11 +37,15 @@ eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging
 verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') ?>
 </p>
 <p>
-<?= $this->translate('Naam') ?>: GEWIS<br>
+    <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
+</p>
+<p>
+<?= $this->translate('Naam') ?>: Gemeenschap van Wiskunde en Informatica Studenten<br>
 <?= $this->translate('Adres') ?>: Den Dolech 2<br>
 <?= $this->translate('Postcode') ?>: 5600 MB<br>
 <?= $this->translate('Plaats') ?>: Eindhoven<br>
-<?= $this->translate('Land') ?>: Nederland
+<?= $this->translate('Land') ?>: Nederland<br>
+<?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>
 </p>
 </div>
 </div>
@@ -143,6 +156,7 @@ $element->setLabelAttributes(array(
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
+        <p><?= $this->translate('This is the identification number you have received from the TU/e after enrolling for a degree programme.') ?></p>
         <?= $this->formElementErrors($element) ?>
     </div>
 </div>
@@ -198,6 +212,7 @@ $element->setLabelAttributes(array(
 $element = $form->get('iban');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-input');
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
@@ -206,6 +221,7 @@ $element->setLabelAttributes(array(
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
+        <p><?= sprintf($this->translate('Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
         <?= $this->formElementErrors($element) ?>
     </div>
 </div>
@@ -342,6 +358,35 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 </div>
 <?php endforeach ?>
 
+<h3><?= $this->translate('Handtekening eenmalige SEPA-machtiging') ?></h3>
+<p>
+<?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
+</p>
+<div class="form-group" id="signature-form-group">
+    <div class="col-sm-12">
+        <canvas id="signature-canvas"><?= $this->translate('Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
+        <br>
+        <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
+        <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+    </div>
+</div>
+
+<?php
+$element = $form->get('signatureLocation');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
 <h3><?= $this->translate('Akkoordverklaring') ?></h3>
 
 <a href="https://gewis.nl/vereniging/statuten/"><?= $this->translate('Statuten en HR') ?></a>
@@ -372,6 +417,7 @@ verwijderd, tenzij ik expliciete toestemming geef dit niet te doen.') ?>
 <?php
 $element = $form->get('agreediban');
 $element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-agreement');
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
     <div class="col-sm-offset-1 col-sm-8">
@@ -396,6 +442,7 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
         $submit = $form->get('submit');
         $submit->setLabel($submit->getValue());
         $submit->setAttribute('class', 'btn btn-primary');
+        $submit->setAttribute('id', 'subscription-submit');
         ?>
         <?= $this->formButton($submit) ?>
     </div>
@@ -405,164 +452,181 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
 </div>
 <?php else: ?>
     <h1 class="hidden-print"><?= $this->translate('Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS') ?>
+        <br>
         <small><?= $this->translate('Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!') ?></small></h1>
+    <div class="alert alert-info">
+        Liked the introduction week? GEWIS also organizes a follow-up day after the introduction week: the FLUP!
+        During the FLUP you get to know even more fellow students and GEWIS as an association through fun activities and a BBQ.
+        This event will take place on Saturday, September 12. Tickets can be bought on <a href="https://gewis.nl/FLUP">https://gewis.nl/FLUP</a> for &euro;3,-.
+    </div>
     <h2 class="hidden-print">Hier nogmaals je gegevens ter controle</h2>
 <div class="row">
 <div class="col-md-6">
     <h1><?= $member->getFullName() ?></h1>
     <table class="table table-bordered">
         <tr>
-            <th>Lidnummer</th>
-            <td><?= $member->getLidnr() ?></td>
-        </tr>
-        <tr>
-            <th>Voorletters</th>
+            <th><?= $this->translate('Voorletters') ?></th>
             <td><?= $member->getInitials() ?></td>
         </tr>
         <tr>
-            <th>Voornaam</th>
+            <th><?= $this->translate('Voornaam') ?></th>
             <td><?= $member->getFirstName() ?></td>
         </tr>
         <tr>
-            <th>Tussenvoegsels</th>
+            <th><?= $this->translate('Tussenvoegsels') ?></th>
             <td><?= $member->getMiddleName() ?></td>
         </tr>
         <tr>
-            <th>Achternaam</th>
+            <th><?= $this->translate('Achternaam') ?></th>
             <td><?= $member->getLastName() ?></td>
         </tr>
         <tr>
-            <th>Geslacht</th>
+            <th><?= $this->translate('Geslacht') ?></th>
             <td><?php
 switch ($member->getGender()) {
 case Member::GENDER_MALE:
-    echo 'Man';
+    echo $this->translate('Man');
     break;
 case Member::GENDER_FEMALE:
-    echo 'Vrouw';
+    echo $this->translate('Vrouw');
     break;
 case Member::GENDER_OTHER:
-    echo 'Anders';
+    echo $this->translate('Anders');
     break;
 }
 ?></td>
         </tr>
         <tr>
-            <th>TU/e nummer</th>
+            <th><?= $this->translate('TU/e nummer') ?></th>
             <td><?= $member->getTuenumber() ?></td>
         </tr>
         <tr>
-            <th>Studie</th>
+            <th><?= $this->translate('Studie') ?></th>
             <td><?= $member->getStudy() ?></td>
         </tr>
         <tr>
-            <th>Email</th>
+            <th><?= $this->translate('Email') ?></th>
             <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
         </tr>
         <tr>
-            <th>Geboortedatum</th>
+            <th><?= $this->translate('Geboortedatum') ?></th>
             <td><?= $member->getBirth()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th>Generatie</th>
+            <th><?= $this->translate('Generatie') ?></th>
             <td><?= $member->getGeneration() ?></td>
         </tr>
         <tr>
-            <th>IBAN</th>
+            <th><?= $this->translate('IBAN') ?></th>
             <td><?= $member->getIban() ?></td>
         </tr>
         <tr>
-            <th>Betaald (hoe veel)</th>
+            <th><?= $this->translate('Betaald (hoe veel)') ?></th>
             <td><?= $member->getPaid() ?></td>
         </tr>
         <tr>
-            <th>Type lid</th>
+            <th><?= $this->translate('Type lid') ?></th>
             <td><?php
 switch ($member->getType()) {
 case Member::TYPE_ORDINARY:
-    echo 'Gewoon';
+    echo $this->translate('Gewoon');
     break;
 case Member::TYPE_PROLONGED:
-    echo 'Verlengd';
+    echo $this->translate('Verlengd');
     break;
 case Member::TYPE_EXTERNAL:
-    echo 'Extern';
+    echo $this->translate('Extern');
     break;
 case Member::TYPE_EXTRAORDINARY:
-    echo 'Buitengewoon';
+    echo $this->translate('Buitengewoon');
     break;
 case Member::TYPE_HONORARY:
-    echo 'Erelid';
+    echo $this->translate('Erelid');
     break;
 }
 ?></td>
         </tr>
         <tr>
-            <th>Laatste wijziging lidmaatshap</th>
+            <th><?= $this->translate('Laatste wijziging lidmaatshap') ?></th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th>Verloopdatum lidmaatschap</th>
+            <th><?= $this->translate('Verloopdatum lidmaatschap') ?></th>
             <td><?= $member->getExpiration()->format('l j F Y') ?></td>
         </tr>
     </table>
 </div>
 <div class="col-md-6">
-<h3>Adressen</h3>
+<h3><?= $this->translate('Adressen') ?></h3>
 <?php $addresses = array() ?>
 <?php foreach ($member->getAddresses() as $address): ?>
 <?php $addresses[$address->getType()] = $address ?>
 <h4><?php
 switch ($address->getType()) {
 case Address::TYPE_HOME:
-    echo 'Thuisadres (ouders)';
+    echo $this->translate('Thuisadres (ouders)');
     break;
 case Address::TYPE_STUDENT:
-    echo 'Kameradres';
+    echo $this->translate('Kameradres');
     break;
 case Address::TYPE_MAIL:
-    echo 'Postadres';
+    echo $this->translate('Postadres');
     break;
 }
 ?></h4>
 <table class="table table-bordered">
     <tr>
-        <th>Land</th>
+        <th><?= $this->translate('Land') ?></th>
         <td><?= $address->getCountry() ?></td>
     </tr>
     <tr>
-        <th>Straat en huisnummer</th>
+        <th><?= $this->translate('Straat en huisnummer') ?></th>
         <td><?= $address->getStreet() ?> <?= $address->getNumber() ?></td>
     </tr>
     <tr>
-        <th>Woonplaats en Postcode</th>
+        <th><?= $this->translate('Woonplaats en Postcode') ?></th>
         <td><?= $address->getCity() ?> <?= $address->getPostalCode() ?></td>
     </tr>
     <tr>
-        <th>Telefoonnummer</th>
+        <th><?= $this->translate('Telefoonnummer') ?></th>
         <td><?= $address->getPhone() ?></td>
     </tr>
 </table>
 <?php endforeach ?>
-<h3>Aangemelde mailing lists</h3>
+<h3><?= $this->translate('Aangemelde mailing lists') ?></h3>
 <ul>
 <?php foreach ($member->getLists() as $list): ?>
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
+<p>
+    <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
+</p>
+
+<p>
+    <?= $this->translate('Kenmerk van de machtiging') ?>: <?= $member->getMandateCharacteristic() ?>
+</p>
 <div class="visible-print">
 <table class="table table-bordered">
     <tr>
         <td>
-    Ik, <?= $member->getFullName() ?>, geef hierbij GEmeenschap Wiskunde en
-Informatica (GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar
-mijn bank om een bedrag van &euro;15,-, geheten vijftien euro, van mijn rekening af
-te schrijven en aan mijn bank om eenmalig een bedrag van mijn rekening af te
-schrijven overeenkomstig de opdracht van GEWIS.
+            <?php if($address->getCountry() == 'netherlands'): ?>
+                Door ondertekening van dit formulier geeft u toestemming aan de Gemeenschap van Wiskunde en Informatica Studenten
+                om eenmalig een incassoopdracht te sturen naar uw bank om een bedrag van &euro;15,-, geheten vijftien euro, van uw rekening af te schrijven
+                en uw bank om eenmalig een bedrag van uw rekening af te schrijven overeenkomstig de opdracht van <?= $member->getFullName() ?>.
+                Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen acht weken na afschrijving contact op met uw bank.
+                Vraag uw bank naar de voorwaarden.
+            <?php else: ?>
+                By signing this mandate form, you authorise the Association of Mathematics and Computer Science Students (in Dutch: Gemeenschap van Wiskunde en Informatica Studenten)
+                to send instructions to your bank to debit your account and your bank to debit your account in accordance with the instructions from <?= $member->getFullName() ?>.
+                As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.
+                The amount debited from your account is &euro;15,-, or fifteen euro in words.
+            <?php endif ?>
         </td>
     </tr>
     <tr>
-        <th>Handtekening<br><br><br><br><br><br></th>
+        <th><?= $this->translate('Plaats en datum van ondertekening') ?><br><?= $member->getSignatureLocation() ?><br><?= $member->getChangedOn()->format('F j, Y') ?><br><br><br><br></th>
+        <th><?= $this->translate('Handtekening') ?><br><img src="<?= $this->fileUrl($member->getSignature()) ?>" height="100" width="300" /><br><br><br><br><br></th>
     </tr>
 </table>
 </div>

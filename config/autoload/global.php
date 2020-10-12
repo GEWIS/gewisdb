@@ -24,7 +24,13 @@ return array(
         ),
         'from' => 'secr@gewis.nl',
         'to' => [
-            'report_error' => 'databaseisstuk@gewis.nl'
+            'report_error' => 'databaseisstuk@gewis.nl',
+            'subscription' => 'secr@gewis.nl'
         ]
+    ),
+    'storage' => array(
+        'storage_dir' => 'public/data',
+        'public_dir' => 'data',
+        'dir_mode' => 0770,
     ),
 );
