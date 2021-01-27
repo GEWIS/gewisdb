@@ -361,7 +361,15 @@ class Meeting extends AbstractService
         case 'dispuut':
             $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_FRATERNITY);
             break;
-        case 'bv-commissie':
+        case 'av-werkgroep':
+            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AVW);
+            break;
+        case 'kkk':
+            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_KKK);
+            break;
+        case 'rva':
+            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_RVA);
+            break;
         default:
             $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_COMMITTEE);
             break;

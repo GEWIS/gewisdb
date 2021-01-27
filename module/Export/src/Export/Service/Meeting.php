@@ -210,7 +210,10 @@ class Meeting extends AbstractService
         case SubDecision\Foundation::ORGAN_TYPE_COMMITTEE:
             $type = 2;
             break;
-        case SubDecision\Foundation::ORGAN_TYPE_AV_COMMITTEE:
+        case SubDecision\Foundation::ORGAN_TYPE_AV_COMMITTEE
+            || SubDecision\Foundation::ORGAN_TYPE_KKK
+            || SubDecision\Foundation::ORGAN_TYPE_RVA
+            || SubDecision\Foundation::ORGAN_TYPE_AVW:
             $type = 1;
             break;
         case SubDecision\Foundation::ORGAN_TYPE_FRATERNITY:
