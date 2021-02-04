@@ -25,7 +25,7 @@ class Foundation extends AbstractDecision
                     'avw' => 'AV-Werkgroep',
                     'kkk' => 'KKK',
                     'fraternity' => 'Dispuut',
-                    'RvA' => 'RvA'
+                    'rva' => 'RvA'
                 )
             )
         ));
