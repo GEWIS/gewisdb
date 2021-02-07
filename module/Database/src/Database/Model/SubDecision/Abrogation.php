@@ -28,7 +28,7 @@ class Abrogation extends FoundationReference
         case Foundation::ORGAN_TYPE_COMMITTEE:
             $text = 'Commissie ';
             break;
-        case Foundation::ORGAN_TYPE_AV_COMMITTEE:
+        case Foundation::ORGAN_TYPE_AVC:
             $text = 'AV-commissie ';
             break;
         case Foundation::ORGAN_TYPE_FRATERNITY:

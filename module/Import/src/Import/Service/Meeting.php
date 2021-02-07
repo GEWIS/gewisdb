@@ -356,7 +356,7 @@ class Meeting extends AbstractService
 
         switch (strtolower($subdecision['orgaantype'])) {
         case 'av-commissie':
-            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AV_COMMITTEE);
+            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AVC);
             break;
         case 'dispuut':
             $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_FRATERNITY);
