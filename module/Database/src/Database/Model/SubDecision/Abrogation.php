@@ -28,11 +28,20 @@ class Abrogation extends FoundationReference
         case Foundation::ORGAN_TYPE_COMMITTEE:
             $text = 'Commissie ';
             break;
-        case Foundation::ORGAN_TYPE_AV_COMMITTEE:
+        case Foundation::ORGAN_TYPE_AVC:
             $text = 'AV-commissie ';
             break;
         case Foundation::ORGAN_TYPE_FRATERNITY:
             $text = 'Dispuut ';
+            break;
+        case Foundation::ORGAN_TYPE_KKK:
+            $text = 'KKK ';
+            break;
+        case Foundation::ORGAN_TYPE_AVW:
+            $text = 'AV-werkgroep ';
+            break;
+        case Foundation::ORGAN_TYPE_RVA:
+            $text = 'RvA ';
             break;
         }
         return $text . $this->getFoundation()->getAbbr() . ' wordt opgeheven.';

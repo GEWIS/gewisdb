@@ -20,7 +20,10 @@ class Organ extends AbstractService
             case Foundation::ORGAN_TYPE_COMMITTEE:
                 $type = 2;
                 break;
-            case Foundation::ORGAN_TYPE_AV_COMMITTEE:
+            case Foundation::ORGAN_TYPE_AVC:
+            case Foundation::ORGAN_TYPE_KKK:
+            case Foundation::ORGAN_TYPE_RVA:
+            case Foundation::ORGAN_TYPE_AVW:
                 $type = 1;
                 break;
             case Foundation::ORGAN_TYPE_FRATERNITY:
