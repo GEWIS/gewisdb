@@ -15,8 +15,10 @@ Installation
   there.
 - Give the webserver's user read and write permissions to the `data/`
   directory.
-- Run `./vendor/bin/doctrine-module orm:schema-tool:create` to populate the
+- Run `./db orm:schema-tool:create` to populate the
   database.
+- Create a new database with the name `gewisdb_report`
+- Run `EM_ALIAS=orm_report ./db orm:schema-tool:create`
 - Create a `.htpasswd` file, and add a user to it (`htpasswd -c .htpasswd
   <user>`)
 - Copy `public/.htaccess.dist` to `public/.htaccess` and configure the path to

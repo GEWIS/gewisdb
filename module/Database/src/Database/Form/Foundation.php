@@ -22,7 +22,10 @@ class Foundation extends AbstractDecision
                 'value_options' => array(
                     'committee' => 'Commissie',
                     'avc' => 'AV-Commissie',
-                    'fraternity' => 'Dispuut'
+                    'avw' => 'AV-Werkgroep',
+                    'kkk' => 'KKK',
+                    'fraternity' => 'Dispuut',
+                    'rva' => 'RvA'
                 )
             )
         ));

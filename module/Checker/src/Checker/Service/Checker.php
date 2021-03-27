@@ -173,7 +173,7 @@ class Checker extends AbstractService
             // if either both organtype and meetingtype is AV, or they are both not. So
             // it is wrong if only one of them has a meetingtype of AV
             if ($meetingType === Meeting::TYPE_VV ||
-                ($organType ===  Foundation::ORGAN_TYPE_AV_COMMITTEE ^ $meetingType === Meeting::TYPE_AV)
+                ($organType ===  Foundation::ORGAN_TYPE_AVC ^ $meetingType === Meeting::TYPE_AV)
             ) {
                 $errors[] = new Error\OrganMeetingType($organ);
             }

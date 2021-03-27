@@ -25,6 +25,7 @@ services:
             - .postgres/dev:/var/lib/postgresql/data
         environment:
             POSTGRES_PASSWORD: gewisdb
+            POSTGRES_USER: gewisdb
         networks:
             - gewisdb
 
