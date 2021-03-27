@@ -460,6 +460,9 @@ class Meeting extends AbstractService
         case 'lid':
             return 'Lid';
             break;
+        case 'inactief lid':
+            return 'Inactief Lid';
+            break;
         case 'inkoper':
             return 'Inkoper';
             break;
