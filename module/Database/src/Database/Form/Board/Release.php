@@ -34,7 +34,7 @@ class Release extends AbstractDecision
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => array(
-                'value' => 'Dechargeer bestuurder'
+                'value' => 'Bestuurder ontheven'
             )
         ));
     }
