@@ -165,20 +165,6 @@ class Member
     protected $installations;
 
     /**
-     * TU/e student number.
-     *
-     * @ORM\Column(type="string",nullable=true)
-     */
-    protected $tuenumber;
-
-    /**
-     * Study of the member.
-     *
-     * @ORM\Column(type="string",nullable=true)
-     */
-    protected $study;
-
-    /**
      * Memberships of mailing lists.
      *
      * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
@@ -586,46 +572,6 @@ class Member
     }
 
     /**
-     * Get the TU/e student number.
-     *
-     * @return string
-     */
-    public function getTuenumber()
-    {
-        return $this->tuenumber;
-    }
-
-    /**
-     * Set the TU/e number.
-     *
-     * @param string $tuenumber
-     */
-    public function setTuenumber($tuenumber)
-    {
-        $this->tuenumber = $tuenumber;
-    }
-
-    /**
-     * Get the study of the member.
-     *
-     * @return string
-     */
-    public function getStudy()
-    {
-        return $this->study;
-    }
-
-    /**
-     * Set the study of the member.
-     *
-     * @param string $study
-     */
-    public function setStudy($study)
-    {
-        $this->study = $study;
-    }
-
-    /**
      * Convert to array.
      *
      * @return array
@@ -641,9 +587,7 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
-            'expiration' => $this->getExpiration()->format('l j F Y'),
-            'tuenumber' => $this->getTuenumber(),
-            'study' => $this->getStudy()
+            'expiration' => $this->getExpiration()->format('l j F Y')
         );
     }
 
