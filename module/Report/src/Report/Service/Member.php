@@ -69,6 +69,8 @@ class Member extends AbstractService
         $reportMember->setPaid($member->getPaid());
         $reportMember->setIban($member->getIban());
         $reportMember->setSupremum($member->getSupremum());
+        $reportMember->setTuenumber($member->getTuenumber());
+        $reportMember->setStudy($member->getStudy());
 
         // go through addresses
         foreach ($member->getAddresses() as $address) {
