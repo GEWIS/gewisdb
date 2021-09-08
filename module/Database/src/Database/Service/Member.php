@@ -197,6 +197,13 @@ class Member extends AbstractService
 
         unset($data['lidnr']);
 
+        // Temporary IBAN to pass the form validator.
+        $noiban = false;
+        if ($data['iban'] == null) {
+            $noiban = true;
+            $data['iban'] = 'NL20INGB0001234567';
+        }
+
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -204,6 +211,11 @@ class Member extends AbstractService
         }
 
         $member = $form->getData();
+
+        // Remove temporary IBAN.
+        if ($noiban) {
+            $member->setIban(null);
+        }
 
         // Copy all remaining information
         $member->setTuenumber($prospectiveMember->getTuenumber());
