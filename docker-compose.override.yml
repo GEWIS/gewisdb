@@ -1,10 +1,32 @@
 version: '3'
 services:
-    # Uncomment for a development setup with mounted codebase:
-    # web:
-    #     build: docker
-    #     volumes:
-    #         - .:/code
+  web:
+#     Uncomment for a development setup with mounted codebase:
+#      build: docker
+#      volumes:
+#      - .:/code
+    environment:
+      CHECKER_REPORT_MAIL: "mail@example.org"
+      DOCTRINE_DEFAULT_HOST: "postgres"
+      DOCTRINE_DEFAULT_PORT: "5432"
+      DOCTRINE_DEFAULT_USER: "gewisdb"
+      DOCTRINE_DEFAULT_PASSWORD: "gewisdb"
+      DOCTRINE_DEFAULT_DATABASE: "gewisdb"
+      DOCTRINE_IMPORT_HOST: "postgres"
+      DOCTRINE_IMPORT_PORT: "5432"
+      DOCTRINE_IMPORT_USER: "gewisdb"
+      DOCTRINE_IMPORT_PASSWORD: "gewisdb"
+      DOCTRINE_IMPORT_DATABASE: "gewisdb_old"
+      DOCTRINE_REPORT_HOST: "postgres"
+      DOCTRINE_REPORT_PORT: "5432"
+      DOCTRINE_REPORT_USER: "gewisdb"
+      DOCTRINE_REPORT_PASSWORD: "gewisdb"
+      DOCTRINE_REPORT_DATABASE: "gewisdb_report"
+      EMAIL_TRANSPORT: "File"
+      EMAIL_OPTIONS: "{\"path:\" \"data/mail/\"}"
+      EMAIL_FROM: "secr@gewis.nl"
+      EMAIL_TO_REPORT_ERROR: "databaseisstuk@gewis.nl"
+      EMAIL_TO_SUBSCRIPTION: "secr@gewis.nl"
   nginx:
     ports:
       - "80:80"

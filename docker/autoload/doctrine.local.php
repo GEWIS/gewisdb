@@ -1,0 +1,37 @@
+<?php
+return array(
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => array(
+                    'host'     => getenv('DOCTRINE_DEFAULT_HOST'),
+                    'port'     => getenv('DOCTRINE_DEFAULT_PORT'),
+                    'user'     => getenv('DOCTRINE_DEFAULT_USER'),
+                    'password' => getenv('DOCTRINE_DEFAULT_PASSWORD'),
+                    'dbname'   => getenv('DOCTRINE_DEFAULT_DATABASE'),
+                )
+            ),
+            'orm_import' => array(
+                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => array(
+                    'host'     => getenv('DOCTRINE_IMPORT_HOST'),
+                    'port'     => getenv('DOCTRINE_IMPORT_PORT'),
+                    'user'     => getenv('DOCTRINE_IMPORT_USER'),
+                    'password' => getenv('DOCTRINE_IMPORT_PASSWORD'),
+                    'dbname'   => getenv('DOCTRINE_IMPORT_DATABASE'),
+                )
+            ),
+            'orm_report' => array(
+                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => array(
+                  'host'     => getenv('DOCTRINE_REPORT_HOST'),
+                  'port'     => getenv('DOCTRINE_REPORT_PORT'),
+                  'user'     => getenv('DOCTRINE_REPORT_USER'),
+                  'password' => getenv('DOCTRINE_REPORT_PASSWORD'),
+                  'dbname'   => getenv('DOCTRINE_REPORT_DATABASE'),
+                )
+            ),
+        )
+    )
+);

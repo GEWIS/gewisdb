@@ -35,6 +35,7 @@ RUN composer install --no-scripts --optimize-autoloader --no-dev
 
 # Install application.
 COPY . .
+COPY ./docker/autoload/* ./config/autoload/
 
 VOLUME ["/code/data", "/public"]
 CMD cp -r /code/public /public && php-fpm
