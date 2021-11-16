@@ -12,16 +12,15 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Member
 {
-
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
     const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
-    const TYPE_PROLONGED = 'prolonged';
     const TYPE_EXTERNAL = 'external';
-    const TYPE_EXTRAORDINARY = 'extraordinary';
     const TYPE_HONORARY = 'honorary';
+    const TYPE_DONATOR = 'donator';
+    const TYPE_GRADUATED = 'graduated';
 
     /**
      * The user
@@ -180,14 +179,14 @@ class Member
      *
      * @ORM\OneToMany(targetEntity="OrganMember", mappedBy="member")
      */
-     protected $organInstallations;
+    protected $organInstallations;
 
     /**
      * Board memberships.
      *
      * @ORM\OneToMany(targetEntity="BoardMember", mappedBy="member")
      */
-     protected $boardInstallations;
+    protected $boardInstallations;
 
     /**
      * Static method to get available genders.
@@ -212,10 +211,10 @@ class Member
     {
         return array(
             self::TYPE_ORDINARY,
-            self::TYPE_PROLONGED,
             self::TYPE_EXTERNAL,
-            self::TYPE_EXTRAORDINARY,
-            self::TYPE_HONORARY
+            self::TYPE_HONORARY,
+            self::TYPE_DONATOR,
+            self::TYPE_GRADUATED,
         );
     }
 
@@ -614,7 +613,8 @@ class Member
      *
      * @param array $addresses
      */
-    public function addAddresses($addresses) {
+    public function addAddresses($addresses)
+    {
         foreach ($addresses as $address) {
             $this->addAddress($address);
         }

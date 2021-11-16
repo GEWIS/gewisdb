@@ -1,6 +1,7 @@
 <?php
 use Database\Model\Member;
 use Database\Model\Address;
+
 ?>
 <div class="row">
 <div class="col-md-6">
@@ -65,17 +66,17 @@ switch ($member->getType()) {
 case Member::TYPE_ORDINARY:
     echo 'Gewoon';
     break;
-case Member::TYPE_PROLONGED:
-    echo 'Verlengd';
-    break;
 case Member::TYPE_EXTERNAL:
     echo 'Extern';
     break;
-case Member::TYPE_EXTRAORDINARY:
-    echo 'Buitengewoon';
-    break;
 case Member::TYPE_HONORARY:
     echo 'Erelid';
+    break;
+case Member::TYPE_DONATOR:
+    echo 'Donateur';
+    break;
+case Member::TYPE_GRADUATED:
+    echo 'Afgestudeerd';
     break;
 }
 ?></td>

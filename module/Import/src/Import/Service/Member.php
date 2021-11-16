@@ -66,7 +66,7 @@ class Member extends AbstractService
             $changed->sub(new \DateInterval('P6Y'));
             break;
         case 'geprolongeerd lid':
-            $member->setType(MemberModel::TYPE_PROLONGED);
+            $member->setType(MemberModel::TYPE_EXTERNAL);
             $changed->sub(new \DateInterval('P1Y'));
             break;
         case 'extern lid':
@@ -74,7 +74,7 @@ class Member extends AbstractService
             $changed->sub(new \DateInterval('P1Y'));
             break;
         case 'buitengewoon lid':
-            $member->setType(MemberModel::TYPE_EXTRAORDINARY);
+            $member->setType(MemberModel::TYPE_EXTERNAL);
             $changed->sub(new \DateInterval('P1Y'));
             break;
         case 'erelid':

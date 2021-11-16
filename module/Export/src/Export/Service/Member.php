@@ -18,7 +18,6 @@ class Member extends AbstractService
         $mapper = $this->getMemberMapper();
 
         foreach ($mapper->findAll() as $member) {
-
             $haddr = array(
                 'straat' => '',
                 'postcode' => '',
@@ -38,7 +37,7 @@ class Member extends AbstractService
                     $haddr['postcode'] = $address->getPostalCode();
                     $haddr['plaats'] = $address->getCity();
                     $haddr['telefoon'] = $address->getPhone();
-                } else if ($address->getType() == Address::TYPE_STUDENT) {
+                } elseif ($address->getType() == Address::TYPE_STUDENT) {
                     $kaddr['straat'] = $address->getStreet() . ' ' . $address->getNumber();
                     $kaddr['postcode'] = $address->getPostalCode();
                     $kaddr['plaats'] = $address->getCity();
@@ -75,16 +74,16 @@ class Member extends AbstractService
             case MemberModel::TYPE_ORDINARY:
                 $data['lidsoortid'] = 1;
                 break;
-            case MemberModel::TYPE_PROLONGED:
+            case MemberModel::TYPE_EXTERNAL:
                 $data['lidsoortid'] = 2;
                 break;
-            case MemberModel::TYPE_EXTERNAL:
+            case MemberModel::TYPE_HONORARY:
                 $data['lidsoortid'] = 3;
                 break;
-            case MemberModel::TYPE_EXTRAORDINARY:
+            case MemberModel::TYPE_DONATOR:
                 $data['lidsoortid'] = 4;
                 break;
-            case MemberModel::TYPE_HONORARY:
+            case MemberModel::TYPE_GRADUATED:
                 $data['lidsoortid'] = 5;
                 break;
             }
@@ -92,7 +91,7 @@ class Member extends AbstractService
             // first check if it is an existing member
             if ($this->getQuery()->checkMemberExists($member->getLidnr())) {
                 $this->getQuery()->updateMember($data);
-                //echo "Lid " . $member->getFullName() . " is geupdate.\n";
+            //echo "Lid " . $member->getFullName() . " is geupdate.\n";
             } else {
                 echo "Nog niet bestaand: " . $member->getFullName() . "\n";
                 $this->getQuery()->createMember($data);

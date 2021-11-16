@@ -12,16 +12,15 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ProspectiveMember
 {
-
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
     const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
-    const TYPE_PROLONGED = 'prolonged';
     const TYPE_EXTERNAL = 'external';
-    const TYPE_EXTRAORDINARY = 'extraordinary';
     const TYPE_HONORARY = 'honorary';
+    const TYPE_DONATOR = 'donator';
+    const TYPE_GRADUATED = 'graduated';
 
     /**
      * The user
@@ -243,10 +242,10 @@ class ProspectiveMember
     {
         return array(
             self::TYPE_ORDINARY,
-            self::TYPE_PROLONGED,
             self::TYPE_EXTERNAL,
-            self::TYPE_EXTRAORDINARY,
-            self::TYPE_HONORARY
+            self::TYPE_HONORARY,
+            self::TYPE_DONATOR,
+            self::TYPE_GRADUATED,
         );
     }
 
@@ -522,9 +521,9 @@ class ProspectiveMember
             // 6 years
             $exp->add(new \DateInterval('P6Y'));
             break;
-        case self::TYPE_PROLONGED:
         case self::TYPE_EXTERNAL:
-        case self::TYPE_EXTRAORDINARY:
+        case self::TYPE_DONATOR:
+        case self::TYPE_GRADUATED:
             $exp->add(new \DateInterval('P1Y'));
             // 1 year
             break;

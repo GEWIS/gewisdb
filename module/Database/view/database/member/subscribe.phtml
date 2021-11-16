@@ -1,6 +1,7 @@
 <?php
 use Database\Model\Member;
 use Database\Model\Address;
+
 ?>
 <?php if (isset($form)): ?>
 <?php
@@ -26,10 +27,12 @@ $form->setAttribute('id', 'form-subscribe');
 <img src="<?= $this->basePath() ?>/img/gewis.png" />
 </div>
 <div class="col-md-9">
-<h1><?= implode(' ',
-        array('<span class="gewis-red">GEWIS</span>',
+<h1><?= implode(
+    ' ',
+    array('<span class="gewis-red">GEWIS</span>',
         $this->translate('Inschrijving'),
-        $this->translate('SEPA-machtiging'))) ?></h1>
+        $this->translate('SEPA-machtiging'))
+) ?></h1>
 <p>
 <?= $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
 lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost
@@ -532,17 +535,17 @@ switch ($member->getType()) {
 case Member::TYPE_ORDINARY:
     echo $this->translate('Gewoon');
     break;
-case Member::TYPE_PROLONGED:
-    echo $this->translate('Verlengd');
-    break;
 case Member::TYPE_EXTERNAL:
     echo $this->translate('Extern');
     break;
-case Member::TYPE_EXTRAORDINARY:
-    echo $this->translate('Buitengewoon');
-    break;
 case Member::TYPE_HONORARY:
     echo $this->translate('Erelid');
+    break;
+case Member::TYPE_DONATOR:
+    echo $this->translate('Donateur');
+    break;
+case Member::TYPE_GRADUATED:
+    echo $this->translate('Afgestudeerd');
     break;
 }
 ?></td>
@@ -611,7 +614,7 @@ case Address::TYPE_MAIL:
 <table class="table table-bordered">
     <tr>
         <td>
-            <?php if($address->getCountry() == 'netherlands'): ?>
+            <?php if ($address->getCountry() == 'netherlands'): ?>
                 Door ondertekening van dit formulier geeft u toestemming aan de Gemeenschap van Wiskunde en Informatica Studenten
                 om eenmalig een incassoopdracht te sturen naar uw bank om een bedrag van &euro;15,-, geheten vijftien euro, van uw rekening af te schrijven
                 en uw bank om eenmalig een bedrag van uw rekening af te schrijven overeenkomstig de opdracht van <?= $member->getFullName() ?>.

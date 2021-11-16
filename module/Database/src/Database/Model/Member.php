@@ -12,16 +12,15 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Member
 {
-
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
     const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
-    const TYPE_PROLONGED = 'prolonged';
     const TYPE_EXTERNAL = 'external';
-    const TYPE_EXTRAORDINARY = 'extraordinary';
     const TYPE_HONORARY = 'honorary';
+    const TYPE_DONATOR = 'donator';
+    const TYPE_GRADUATED = 'graduated';
 
     /**
      * The user
@@ -108,14 +107,14 @@ class Member
      * This can be one of the following, as defined by the GEWIS statuten:
      *
      * - ordinary
-     * - prolonged
      * - external
-     * - extraordinary
      * - honorary
+     * - donator
+     * - graduated
      *
      * You can find the GEWIS Statuten here:
      *
-     * http://gewis.nl/vereniging/statuten/statuten.php
+     * https://gewis.nl/vereniging/statuten/statuten
      *
      * Zie artikel 7 lid 1 en 2.
      *
@@ -206,10 +205,10 @@ class Member
     {
         return array(
             self::TYPE_ORDINARY,
-            self::TYPE_PROLONGED,
             self::TYPE_EXTERNAL,
-            self::TYPE_EXTRAORDINARY,
-            self::TYPE_HONORARY
+            self::TYPE_HONORARY,
+            self::TYPE_DONATOR,
+            self::TYPE_GRADUATED,
         );
     }
 
@@ -486,9 +485,9 @@ class Member
             // 6 years
             $exp->add(new \DateInterval('P6Y'));
             break;
-        case self::TYPE_PROLONGED:
         case self::TYPE_EXTERNAL:
-        case self::TYPE_EXTRAORDINARY:
+        case self::TYPE_DONATOR:
+        case self::TYPE_GRADUATED:
             $exp->add(new \DateInterval('P1Y'));
             // 1 year
             break;
@@ -653,7 +652,8 @@ class Member
      *
      * @param array $addresses
      */
-    public function addAddresses($addresses) {
+    public function addAddresses($addresses)
+    {
         foreach ($addresses as $address) {
             $this->addAddress($address);
         }
