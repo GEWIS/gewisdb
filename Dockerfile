@@ -29,4 +29,12 @@ RUN apt-get update && apt-get install -y \
 # Configure PHP.
 COPY ./docker/php.ini /usr/local/etc/php/conf.d/default.ini
 
-RUN pecl install -o -f xdebug-2.5.5 && rm -rf /tmp/pear
+# Install dependencies.
+COPY ./composer.json ./composer.lock ./
+RUN composer install --no-scripts --optimize-autoloader --no-dev
+
+# Install application.
+COPY . .
+
+VOLUME ["/code/data", "/public"]
+CMD cp -r /code/public /public && php-fpm

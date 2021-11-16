@@ -1,5 +1,10 @@
-version: '2'
+version: '3'
 services:
+    # Uncomment for a development setup with mounted codebase:
+    # web:
+    #     build: docker
+    #     volumes:
+    #         - .:/code
   nginx:
     ports:
       - "80:80"
