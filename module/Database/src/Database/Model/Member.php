@@ -18,9 +18,8 @@ class Member
     const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
-    const TYPE_PROLONGED = 'prolonged';
     const TYPE_EXTERNAL = 'external';
-    const TYPE_EXTRAORDINARY = 'extraordinary';
+    const TYPE_GRADUATE = 'graduate';
     const TYPE_HONORARY = 'honorary';
 
     /**
@@ -108,16 +107,13 @@ class Member
      * This can be one of the following, as defined by the GEWIS statuten:
      *
      * - ordinary
-     * - prolonged
      * - external
-     * - extraordinary
+     * - graduate
      * - honorary
      *
-     * You can find the GEWIS Statuten here:
+     * You can find the GEWIS statuten here: https://gewis.nl/vereniging/statuten/statuten.
      *
-     * http://gewis.nl/vereniging/statuten/statuten.php
-     *
-     * Zie artikel 7 lid 1 en 2.
+     * See artikel 7.
      *
      * @ORM\Column(type="string")
      */
@@ -206,9 +202,8 @@ class Member
     {
         return array(
             self::TYPE_ORDINARY,
-            self::TYPE_PROLONGED,
             self::TYPE_EXTERNAL,
-            self::TYPE_EXTRAORDINARY,
+            self::TYPE_GRADUATE,
             self::TYPE_HONORARY
         );
     }
@@ -482,20 +477,16 @@ class Member
     {
         $exp = clone $this->getChangedOn();
         switch ($this->getType()) {
-        case self::TYPE_ORDINARY:
-            // 6 years
-            $exp->add(new \DateInterval('P6Y'));
-            break;
-        case self::TYPE_PROLONGED:
-        case self::TYPE_EXTERNAL:
-        case self::TYPE_EXTRAORDINARY:
-            $exp->add(new \DateInterval('P1Y'));
-            // 1 year
-            break;
-        case self::TYPE_HONORARY:
-            // infinity (1000 is close enough, right?)
-            $exp->add(new \DateInterval('P1000Y'));
-            break;
+            case self::TYPE_ORDINARY:
+            case self::TYPE_EXTERNAL:
+            case self::TYPE_GRADUATE:
+                $exp->add(new \DateInterval('P1Y'));
+                // 1 year
+                break;
+            case self::TYPE_HONORARY:
+                // infinity (1000 is close enough, right?)
+                $exp->add(new \DateInterval('P1000Y'));
+                break;
         }
         return $exp;
     }

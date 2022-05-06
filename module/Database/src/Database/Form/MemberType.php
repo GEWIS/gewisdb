@@ -21,11 +21,10 @@ class MemberType extends Form implements InputFilterProviderInterface
             'options' => array(
                 'label' => 'Lidmaatschapstype',
                 'value_options' => array(
-                    Member::TYPE_ORDINARY => 'Gewoon - Ingeschreven bij faculteit W&I',
-                    Member::TYPE_PROLONGED => 'Geprolongeerd - Verlengd ingeschreven bij faculteit W&I',
-                    Member::TYPE_EXTERNAL => 'Extern - Was gewoon lid, maar is niet meer ingeschreven bij W&I',
-                    Member::TYPE_EXTRAORDINARY => 'Buitengewoon - Speciaal toegelaten door bestuur',
-                    Member::TYPE_HONORARY => 'Erelid'
+                    Member::TYPE_ORDINARY => 'Gewoon lid - Ingeschreven bij faculteit M&CS',
+                    Member::TYPE_EXTERNAL => 'Extern lid - Speciaal toegelaten door het bestuur',
+                    Member::TYPE_GRADUATE => 'Afgestudeerde - Was lid en is speciaal toegelaten door het bestuur',
+                    Member::TYPE_HONORARY => 'Erelid - Speciaal benoemd door de ALV'
                 )
             )
         ));

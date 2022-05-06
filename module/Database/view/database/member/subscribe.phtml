@@ -529,21 +529,18 @@ case Member::GENDER_OTHER:
             <th><?= $this->translate('Type lid') ?></th>
             <td><?php
 switch ($member->getType()) {
-case Member::TYPE_ORDINARY:
-    echo $this->translate('Gewoon');
-    break;
-case Member::TYPE_PROLONGED:
-    echo $this->translate('Verlengd');
-    break;
-case Member::TYPE_EXTERNAL:
-    echo $this->translate('Extern');
-    break;
-case Member::TYPE_EXTRAORDINARY:
-    echo $this->translate('Buitengewoon');
-    break;
-case Member::TYPE_HONORARY:
-    echo $this->translate('Erelid');
-    break;
+    case Member::TYPE_ORDINARY:
+        echo $this->translate('Gewoon');
+        break;
+    case Member::TYPE_EXTERNAL:
+        echo $this->translate('Extern');
+        break;
+    case Member::TYPE_GRADUATE:
+        echo $this->translate('Afgestudeerde');
+        break;
+    case Member::TYPE_HONORARY:
+        echo $this->translate('Erelid');
+        break;
 }
 ?></td>
         </tr>

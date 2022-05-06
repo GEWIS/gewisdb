@@ -62,21 +62,18 @@ case Member::GENDER_OTHER:
             <th>Type lid</th>
             <td><?php
 switch ($member->getType()) {
-case Member::TYPE_ORDINARY:
-    echo 'Gewoon';
-    break;
-case Member::TYPE_PROLONGED:
-    echo 'Verlengd';
-    break;
-case Member::TYPE_EXTERNAL:
-    echo 'Extern';
-    break;
-case Member::TYPE_EXTRAORDINARY:
-    echo 'Buitengewoon';
-    break;
-case Member::TYPE_HONORARY:
-    echo 'Erelid';
-    break;
+    case Member::TYPE_ORDINARY:
+        echo 'Gewoon';
+        break;
+    case Member::TYPE_EXTERNAL:
+        echo 'Extern';
+        break;
+    case Member::TYPE_GRADUATE:
+        echo 'Afgestudeerde';
+        break;
+    case Member::TYPE_HONORARY:
+        echo 'Erelid';
+        break;
 }
 ?></td>
         </tr>
