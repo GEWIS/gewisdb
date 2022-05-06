@@ -112,6 +112,15 @@ class Member
     protected $changedOn;
 
     /**
+     * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
+     * date onwards they are "graduate". If `null`, the expiration is rolling and will be the end of the current
+     * association year.
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $membershipEndsOn;
+
+    /**
      * Member birth date.
      *
      * @ORM\Column(type="date")
@@ -119,7 +128,7 @@ class Member
     protected $birth;
 
     /**
-     * Member expiration date.
+     * Get the date on which the member's membership will expire and has to be renewed.
      *
      * @ORM\Column(type="date")
      */
@@ -497,6 +506,26 @@ class Member
     }
 
     /**
+     * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @return \DateTime|null
+     */
+    public function getMembershipEndsOn()
+    {
+        return $this->membershipEndsOn;
+    }
+
+    /**
+     * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @param \DateTime|null $membershipEndsOn
+     */
+    public function setMembershipEndsOn($membershipEndsOn)
+    {
+        $this->membershipEndsOn = $membershipEndsOn;
+    }
+
+    /**
      * Get how much has been paid.
      *
      * @return int
@@ -582,6 +611,7 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
+            'memberShipEndsOn' => (null !== $this->getMembershipEndsOn()) ? $this->getMembershipEndsOn()->format('l j F Y') : null,
             'expiration' => $this->getExpiration()->format('l j F Y')
         );
     }

@@ -97,8 +97,13 @@ switch ($member->getType()) {
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th>Verloopdatum lidmaatschap</th>
-            <td><?= $member->getExpiration()->format('l j F Y') ?></td>
+            <th>Verloopdatum lidmaatschap (hernieuwt op)</th>
+            <td>
+                <?= sprintf('%s (%s)',
+                    (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : 'N.v.t.',
+                    $member->getExpiration()->format('l j F Y')
+                )?>
+            </td>
         </tr>
     </table>
 </div>

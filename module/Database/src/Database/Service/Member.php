@@ -400,6 +400,11 @@ class Member extends AbstractService
 
         $member = $form->getData();
 
+        // update changed on date
+        $date = new \DateTime();
+        $date->setTime(0, 0);
+        $member->setChangedOn($date);
+
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
@@ -427,16 +432,28 @@ class Member extends AbstractService
 
         $member = $form->getData();
 
-        // update changed on date, always changes the previous first of july
+        // update changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
-        if ($date->format('m') >= 7) {
-            $year = $date->format('Y');
-        } else {
-            $year = $date->format('Y') - 1;
-        }
-        $date->setDate($year, 7, 1);
         $member->setChangedOn($date);
+
+        if (MemberModel::TYPE_GRADUATE === $member->getType()) {
+            // At the end of the current association year.
+            $exp = new \DateTime();
+            $exp->setTime(0, 0);
+
+            if ($exp->format('m') >= 7) {
+                $year = (int) $exp->format('Y') + 1;
+            } else {
+                $year = $exp->format('Y');
+            }
+            $exp->setDate($year, 7, 1);
+
+            $member->setMembershipEndsOn($exp);
+        } else {
+            // Reset the member's membership expiration.
+            $member->setMembershipEndsOn(null);
+        }
 
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);

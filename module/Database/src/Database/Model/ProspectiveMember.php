@@ -127,6 +127,15 @@ class ProspectiveMember
     protected $changedOn;
 
     /**
+     * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
+     * date onwards they are "graduate". If `null`, the expiration is rolling and will be the end of the current
+     * association year.
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $membershipEndsOn;
+
+    /**
      * Member birth date.
      *
      * @ORM\Column(type="date")
@@ -503,27 +512,52 @@ class ProspectiveMember
     }
 
     /**
-     * Get the expiration date.
+     * Get the date on which the member's membership will expire and has to be renewed.
      *
      * The information comes from the statuten and HR.
      *
-     * @return \DateTime
+     * @return \DateTime|null
+     * @throws \Exception
      */
     public function getExpiration()
     {
-        $exp = clone $this->getChangedOn();
+        // At the end of the current association year (unless...).
+        $exp = new \DateTime();
+        $exp->setTime(0, 0);
+
+        if ($exp->format('m') >= 7) {
+            $year = (int) $exp->format('Y') + 1;
+        } else {
+            $year = $exp->format('Y');
+        }
+
         switch ($this->getType()) {
             case self::TYPE_ORDINARY:
             case self::TYPE_EXTERNAL:
+                // No changes needed.
+                break;
             case self::TYPE_GRADUATE:
-                $exp->add(new \DateInterval('P1Y'));
-                // 1 year
+                if (null === $this->getMembershipEndsOn()) {
+                    throw new \Exception('Graduates must have a `membershipEndsOn` set.');
+                }
+
+                // If the membership ends within this association year, set expiration to an additional year. This
+                // accounts for expiration of their original membership and their new one.
+                $membershipEndsOn = $this->getMembershipEndsOn();
+                if ($membershipEndsOn->format('Y') >= $year) {
+                    $year += 1;
+                }
+
                 break;
             case self::TYPE_HONORARY:
                 // infinity (1000 is close enough, right?)
-                $exp->add(new \DateInterval('P1000Y'));
+                $year += 1000;
                 break;
         }
+
+        // At the end of the current association year.
+        $exp->setDate($year, 7, 1);
+
         return $exp;
     }
 
@@ -565,6 +599,26 @@ class ProspectiveMember
     public function setChangedOn($changedOn)
     {
         $this->changedOn = $changedOn;
+    }
+
+    /**
+     * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @return \DateTime|null
+     */
+    public function getMembershipEndsOn()
+    {
+        return $this->membershipEndsOn;
+    }
+
+    /**
+     * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @param \DateTime|null $membershipEndsOn
+     */
+    public function setMembershipEndsOn($membershipEndsOn)
+    {
+        $this->membershipEndsOn = $membershipEndsOn;
     }
 
     /**

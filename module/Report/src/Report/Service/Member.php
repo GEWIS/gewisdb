@@ -63,6 +63,7 @@ class Member extends AbstractService
         $reportMember->setGender($member->getGender());
         $reportMember->setGeneration($member->getGeneration());
         $reportMember->setType($member->getType());
+        $reportMember->setMembershipEndsOn($member->getMembershipEndsOn());
         $reportMember->setExpiration($member->getExpiration());
         $reportMember->setBirth($member->getBirth());
         $reportMember->setChangedOn($member->getChangedOn());

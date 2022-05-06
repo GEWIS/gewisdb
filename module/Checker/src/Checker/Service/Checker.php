@@ -120,8 +120,10 @@ class Checker extends AbstractService
             // Check if the members are still member of GEWIS
             $member = $installation->getMember();
 
-            if ($member->getExpiration() < $meeting->getDate()) {
-                $errors[] = new Error\MemberExpiredButStillInOrgan($meeting, $installation);
+            if (null !== ($membershipEndsOn = $member->getMembershipEndsOn())) {
+                if ($membershipEndsOn < $meeting->getDate()) {
+                    $errors[] = new Error\MemberExpiredButStillInOrgan($meeting, $installation);
+                }
             }
         }
         return $errors;
