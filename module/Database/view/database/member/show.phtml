@@ -43,6 +43,10 @@ case Member::GENDER_OTHER:
 ?></td>
         </tr>
         <tr>
+            <th>TU/e nummer</th>
+            <td><?= $member->getTuenumber() ?></td>
+        </tr>
+        <tr>
             <th>Email</th>
             <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
         </tr>

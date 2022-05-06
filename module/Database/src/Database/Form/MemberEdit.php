@@ -59,6 +59,14 @@ class MemberEdit extends Form implements InputFilterProviderInterface
         ));
 
         $this->add(array(
+            'name' => 'tuenumber',
+            'type' => 'number',
+            'options' => array(
+                'label' => 'TU/e nummer'
+            )
+        ));
+
+        $this->add(array(
             'name' => 'email',
             'type' => 'email',
             'options' => array(
@@ -147,6 +155,12 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             ),
             'paid' => array(
                 'required' => true,
+                'validators' => array(
+                    array('name' => 'digits')
+                )
+            ),
+            'tuenumber' => array(
+                'required' => false,
                 'validators' => array(
                     array('name' => 'digits')
                 )
