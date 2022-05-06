@@ -65,6 +65,34 @@ class Installation extends AbstractService
     }
 
     /**
+     * Get all members who are currently installed in an organ.
+     *
+     * @param \Database\Model\Meeting|null $meeting
+     *
+     * @return array
+     */
+    public function getActiveMembers($meeting)
+    {
+        if (null === $meeting) {
+            return [];
+        }
+
+        $installations = $this->getAllInstallations($meeting);
+
+        $members = [];
+        foreach ($installations as $installation) {
+            $member = $installation->getMember()->getLidnr();
+
+            // Doing checks against the keys is a lot faster, and we do not need a lot of information.
+            if (!array_key_exists($member, $members)) {
+                $members[$member] = '';
+            }
+        }
+
+        return $members;
+    }
+
+    /**
      * Returns a unique hash for a subdecision (Needed for matching subdecisions)
      *
      * @param \Database\Model\SubDecision $d Decision to hash for

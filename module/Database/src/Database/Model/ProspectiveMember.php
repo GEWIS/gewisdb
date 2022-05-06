@@ -133,7 +133,7 @@ class ProspectiveMember
      *
      * @ORM\Column(type="date", nullable=true)
      */
-    protected $membershipEndsOn;
+    protected $membershipEndsOn = null;
 
     /**
      * Member birth date.

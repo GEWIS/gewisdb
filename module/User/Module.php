@@ -53,11 +53,14 @@ class Module
         }, -100);
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
-            if (!$authService->hasIdentity()) {
-                $response = $e->getResponse();
-                $response->getHeaders()->addHeaderLine('Location', '/user');
-                $response->setStatusCode(302);
-                return $response;
+            // Check if not a console route, as the console has no headers.
+            if (!($e->getResponse() instanceof \Zend\Console\Response)) {
+                if (!$authService->hasIdentity()) {
+                    $response = $e->getResponse();
+                    $response->getHeaders()->addHeaderLine('Location', '/user');
+                    $response->setStatusCode(302);
+                    return $response;
+                }
             }
         });
 

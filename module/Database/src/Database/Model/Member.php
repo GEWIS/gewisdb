@@ -133,7 +133,14 @@ class Member
      *
      * @ORM\Column(type="date", nullable=true)
      */
-    protected $membershipEndsOn;
+    protected $membershipEndsOn = null;
+
+    /**
+     * Last date membership status was checked.
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $lastCheckedOn = null;
 
     /**
      * Member birth date.
@@ -578,6 +585,26 @@ class Member
     public function setMembershipEndsOn($membershipEndsOn)
     {
         $this->membershipEndsOn = $membershipEndsOn;
+    }
+
+    /**
+     * Get the date of when the membership status was last checked.
+     *
+     * @return \DateTime
+     */
+    public function getLastCheckedOn()
+    {
+        return $this->lastCheckedOn;
+    }
+
+    /**
+     * Set the date of when the membership status was last checked.
+     *
+     * @param \DateTime $lastCheckedOn
+     */
+    public function setLastCheckedOn($lastCheckedOn)
+    {
+        $this->lastCheckedOn = $lastCheckedOn;
     }
 
     /**

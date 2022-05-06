@@ -11,6 +11,10 @@ use Application\Service\AbstractService;
 use \Database\Model\SubDecision\Foundation;
 use \Database\Model\Meeting;
 use \Checker\Model\Error;
+use Zend\Http\Client;
+use Zend\Http\Client\Adapter\Curl;
+use Zend\Http\Request;
+use Zend\Json\Json;
 use Zend\Mail\Message;
 
 class Checker extends AbstractService
@@ -32,7 +36,7 @@ class Checker extends AbstractService
                 $this->checkOrganMeetingType($meeting)
             );
 
-            $message .= $this->handleErrors($meeting, $errors);
+            $message .= $this->handleMeetingErrors($meeting, $errors);
         }
 
         $this->sendMail($message);
@@ -44,7 +48,7 @@ class Checker extends AbstractService
      * @param \Database\Model\Meeting $meeting Meeting for which this errors hold
      * @param array $errors
      */
-    private function handleErrors(\Database\Model\Meeting $meeting, array $errors)
+    private function handleMeetingErrors(\Database\Model\Meeting $meeting, array $errors)
     {
         // At this moment only write to output.
         $body =  'Errors after meeting ' . $meeting->getNumber() . ' hold at '
@@ -66,13 +70,11 @@ class Checker extends AbstractService
      */
     private function sendMail($body)
     {
-        $config = $meetingService = $this->getServiceManager()->get('config');
+        $config = $this->getServiceManager()->get('config');
         $message = new Message();
         $message->addTo($config['checker']['report_mail'])
             ->setSubject('Database Checker Report')
             ->setBody($body);
-
-        echo $body;
 
         $transport = $this->getServiceManager()->get('checker_mail_transport');
         $transport->send($message);
@@ -181,5 +183,145 @@ class Checker extends AbstractService
             }
         }
         return $errors;
+    }
+
+    /**
+     * Checks members whose membership status and type may require changes.
+     *
+     * @return void
+     */
+    public function checkMemberships()
+    {
+        $memberService = $this->getServiceManager()->get('checker_service_member');
+
+        $this->checkAtTUe($memberService->getMembersToCheck());
+        $this->checkProperMembershipType();
+    }
+
+    /**
+     * Checks that "ordinary" members are still enrolled at the TU/e. If not, their membership should expire at the end
+     * of the current association year. This does not actually update their membership type, as that is still valid for
+     * the remainder of the current association year.
+     *
+     * @return void
+     */
+    private function checkAtTUe(array $members)
+    {
+        $memberService = $this->getServiceManager()->get('checker_service_member');
+        $config = $this->getServiceManager()->get('config')['checker']['membership_api'];
+
+        $client = new Client();
+        $client->setAdapter(Curl::class)
+            ->setEncType('application/json');
+
+        $request = new Request();
+        $request->setMethod(Request::METHOD_GET)
+            ->getHeaders()->addHeaders([
+                'Authorization' => 'Bearer ' . $config['key'],
+            ]);
+
+        // Determine the date of (potential) expiration of a member's membership outside the foreach to make sure we
+        // only do it once.
+        $exp = new \DateTime();
+        $exp->setTime(0, 0);
+
+        if ($exp->format('m') >= 7) {
+            $year = (int) $exp->format('Y') + 1;
+        } else {
+            $year = $exp->format('Y');
+        }
+
+        $exp->setDate($year, 7, 1);
+
+        // Check each member that needs to be checked.
+        /** @var \Database\Model\Member $member */
+        foreach ($members as $member) {
+            $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+            $request->setUri($config['endpoint'] . $member->getTuenumber());
+            $response = $client->send($request);
+
+            // Check if the request was successful. If something else happens than 200 or 404 that may have broken the
+            // request, assume that the member is still in the TU/e student administration database but do not update
+            // membership status.
+            if (200 === $response->getStatusCode()) {
+                try {
+                    $responseContent = Json::decode($response->getBody(), Json::TYPE_ARRAY);
+
+                    // Check that we have a proper response.
+                    if (array_key_exists('registrations', $responseContent)) {
+                        // Check if the member is still registered for a study in the department of Mathematics and Computer
+                        // Science & Engineering. If not, update membership type to "graduate" and set date of expiration.
+                        if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
+                            $member->setChangedOn(new \DateTime());
+                            $member->setMembershipEndsOn($exp);
+                        }
+
+                        $member->setLastCheckedOn(new \DateTime());
+                    }
+                } catch (\RuntimeException $e) {
+                    // The request could not be decoded :/
+                }
+            } else if (404 === $response->getStatusCode()) {
+                // The member cannot be found in the TU/e student administration database.
+                $member->setChangedOn(new \DateTime());
+                $member->setMembershipEndsOn($exp);
+                $member->setLastCheckedOn(new \DateTime());
+            }
+
+            $memberService->getMemberMapper()->persist($member);
+            $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        }
+    }
+
+    /**
+     * Makes sure that members whose membership has end date are actually converted to "graduate" when their membership
+     * has ended.
+     *
+     * @return void
+     */
+    private function checkProperMembershipType()
+    {
+        $memberService = $this->getServiceManager()->get('checker_service_member');
+        $members = $memberService->getEndingMembershipsWithNormalTypes();
+
+        $meetingService = $this->getServiceManager()->get('checker_service_meeting');
+        $lastMeeting = $meetingService->getLastMeeting();
+
+        $installationService = $this->getServiceManager()->get('checker_service_installation');
+        $activeMembers = $installationService->getActiveMembers($lastMeeting);
+
+        $now = (new \DateTime())->setTime(0, 0);
+
+        /** @var \Database\Model\Member $member */
+        foreach ($members as $member) {
+            if ($member->getMembershipEndsOn() <= $now) {
+                $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+
+                if (array_key_exists($member->getLidnr(), $activeMembers)) {
+                    $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
+
+                    // External memberships should run till the end of the current association year.
+                    $exp = new \DateTime();
+                    $exp->setTime(0, 0);
+
+                    if ($exp->format('m') >= 7) {
+                        $year = (int) $exp->format('Y') + 1;
+                    } else {
+                        $year = $exp->format('Y');
+                    }
+                    $exp->setDate($year, 7, 1);
+
+                    $member->setMembershipEndsOn($exp);
+                } else {
+                    // We only have to change the membership type for graduates.
+                    $member->setType(\Database\Model\Member::TYPE_GRADUATE);
+                }
+
+                $member->setChangedOn(new \DateTime());
+
+                $memberService->getMemberMapper()->persist($member);
+                $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            }
+        }
     }
 }

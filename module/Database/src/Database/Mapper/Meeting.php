@@ -69,6 +69,23 @@ class Meeting
     }
 
     /**
+     * Find the last meeting.
+     *
+     * @return MeetingModel|null
+     */
+    public function findLast()
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('m')
+            ->from('Database\Model\Meeting', 'm')
+            ->leftJoin('m.decisions', 'd')
+            ->orderBy('m.date', 'DESC')
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
      * Find decisions by given meetings.
      *
      * @param array $meetings
