@@ -512,7 +512,8 @@ class ProspectiveMember
     }
 
     /**
-     * Get the date on which the member's membership will expire and has to be renewed.
+     * Get the date on which the membership of the member is set to expire and will therefore have to be renewed, which
+     * happens either automatically or has to be done manually.
      *
      * The information comes from the statuten and HR.
      *
