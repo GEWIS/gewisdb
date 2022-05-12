@@ -59,10 +59,10 @@ class MemberEdit extends Form implements InputFilterProviderInterface
         ));
 
         $this->add(array(
-            'name' => 'tuenumber',
-            'type' => 'number',
+            'name' => 'tueUsername',
+            'type' => 'text',
             'options' => array(
-                'label' => 'TU/e nummer'
+                'label' => 'TU/e-gebruikersnaam'
             )
         ));
 
@@ -159,10 +159,21 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                     array('name' => 'digits')
                 )
             ),
-            'tuenumber' => array(
+            'tueUsername' => array(
                 'required' => false,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array(
+                        'name' => 'regex',
+                        'options' => array(
+                            'pattern' => '/^(s\d{6}|\d{8})$/',
+                            'messages' => array(
+                                'regexNotMatch' => 'Een TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.'
+                            )
+                        )
+                    )
+                ),
+                'filters' => array(
+                    array('name' => 'tonull')
                 )
             )
         );

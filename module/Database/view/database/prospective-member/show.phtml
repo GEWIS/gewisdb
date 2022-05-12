@@ -43,8 +43,8 @@ case Member::GENDER_OTHER:
 ?></td>
         </tr>
         <tr>
-            <th>TU/e nummer</th>
-            <td><?= $member->getTuenumber() ?></td>
+            <th>TU/e-gebruikersnaam</th>
+            <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : $member->getTueUsername() ?></td>
         </tr>
         <tr>
             <th>Email</th>

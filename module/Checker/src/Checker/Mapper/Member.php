@@ -42,7 +42,7 @@ class Member
         $qb->select('m')
             ->from('Database\Model\Member', 'm')
             ->where('m.type = \'ordinary\'')
-            ->andWhere('m.tuenumber IS NOT NULL')
+            ->andWhere('m.tueUsername IS NOT NULL')
             ->andWhere('m.membershipEndsOn IS NULL')
             ->andWhere('m.lastCheckedOn IS NULL OR m.lastCheckedOn < CURRENT_DATE()')
             ->orderBy('m.lastCheckedOn', 'ASC')

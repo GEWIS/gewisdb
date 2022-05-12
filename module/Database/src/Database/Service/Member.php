@@ -44,13 +44,13 @@ class Member extends AbstractService
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tuenumber', 'study', 'email', 'birth',
+                'gender', 'tueUsername', 'study', 'email', 'birth',
                 'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         } else {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tuenumber', 'study', 'email', 'birth',
+                'gender', 'tueUsername', 'study', 'email', 'birth',
                 'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         }
@@ -78,10 +78,6 @@ class Member extends AbstractService
                 'There already is a member with this email address.'
             ]);
             return null;
-        }
-
-        if (!is_numeric($prospectiveMember->getTuenumber())) {
-            $prospectiveMember->setTuenumber(0);
         }
 
         // generation is the current year
@@ -218,7 +214,7 @@ class Member extends AbstractService
         }
 
         // Copy all remaining information
-        $member->setTuenumber($prospectiveMember->getTuenumber());
+        $member->setTueUsername($prospectiveMember->getTueUsername());
         $member->setGeneration($prospectiveMember->getGeneration());
         $member->setType($prospectiveMember->getType());
 
@@ -368,7 +364,7 @@ class Member extends AbstractService
         $member->setEmail('');
         $member->setGender(MemberModel::GENDER_OTHER);
         $member->setGeneration(0);
-        $member->setTuenumber(null);
+        $member->setTueUsername(null);
         $member->setStudy(null);
         $member->setChangedOn(new \DateTime());
         $member->setBirth(new \DateTime('0001-01-01 00:00:00'));

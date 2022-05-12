@@ -237,7 +237,7 @@ class Checker extends AbstractService
         /** @var \Database\Model\Member $member */
         foreach ($members as $member) {
             $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
-            $request->setUri($config['endpoint'] . $member->getTuenumber());
+            $request->setUri($config['endpoint'] . $member->getTueUsername());
             $response = $client->send($request);
 
             // Check if the request was successful. If something else happens than 200 or 404 that may have broken the
@@ -250,7 +250,7 @@ class Checker extends AbstractService
                     // Check that we have a proper response.
                     if (array_key_exists('registrations', $responseContent)) {
                         // Check if the member is still registered for a study in the department of Mathematics and Computer
-                        // Science & Engineering. If not, update membership type to "graduate" and set date of expiration.
+                        // Science & Engineering. If not, set date of expiration.
                         if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
                             $member->setChangedOn(new \DateTime());
                             $member->setMembershipEndsOn($exp);

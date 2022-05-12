@@ -88,11 +88,11 @@ class ProspectiveMember
     protected $generation;
 
     /**
-     * TU/e registration number.
+     * TU/e username.
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $tuenumber;
+    protected $tueUsername;
 
     /**
      * Study of the member.
@@ -447,23 +447,23 @@ class ProspectiveMember
     }
 
     /**
-     * Get the TU/e registration number.
+     * Get the TU/e username.
      *
-     * @return int
+     * @return string|null
      */
-    public function getTuenumber()
+    public function getTueUsername()
     {
-        return $this->tuenumber;
+        return $this->tueUsername;
     }
 
     /**
-     * Set the TU/e registration number.
+     * Set the TU/e username.
      *
-     * @param int $tuenumber
+     * @param string|null $tueUsername
      */
-    public function setTuenumber($tuenumber)
+    public function setTueUsername($tueUsername)
     {
-        $this->tuenumber = $tuenumber;
+        $this->tueUsername = $tueUsername;
     }
 
     /**
