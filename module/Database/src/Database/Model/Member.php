@@ -128,12 +128,20 @@ class Member
 
     /**
      * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
-     * date onwards they are "graduate". If `null`, the expiration is rolling and will be the end of the current
-     * association year.
+     * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
+     * still meets the requirements as set forth in the bylaws and internal regulations.
      *
      * @ORM\Column(type="date", nullable=true)
      */
     protected $membershipEndsOn = null;
+
+    /**
+     * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
+     * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
+     *
+     * @ORM\Column(type="date")
+     */
+    protected $expiration;
 
     /**
      * Last date membership status was checked.
@@ -483,49 +491,25 @@ class Member
     }
 
     /**
-     * Get the date on which the membership of the member is set to expire and will therefore have to be renewed, which
-     * happens either automatically or has to be done manually.
+     * Get the expiration date.
      *
-     * The information comes from the statuten and HR.
-     *
-     * @return \DateTime|null
-     * @throws \Exception
+     * @return \DateTime
      */
     public function getExpiration()
     {
-        // At the end of the current association year (unless...).
-        $exp = new \DateTime();
-        $exp->setTime(0, 0);
+        return $this->expiration;
+    }
 
-        if ($exp->format('m') >= 7) {
-            $year = (int) $exp->format('Y') + 1;
-        } else {
-            $year = $exp->format('Y');
-        }
-
-        switch ($this->getType()) {
-            case self::TYPE_ORDINARY:
-            case self::TYPE_EXTERNAL:
-            case self::TYPE_GRADUATE:
-                // If the membership ends within this association year, set expiration to an additional year. This
-                // accounts for expiration of their original membership and their new one.
-                if (null !== ($membershipEndsOn = $this->getMembershipEndsOn())) {
-                    if ($membershipEndsOn->format('Y') >= $year) {
-                        $year += 1;
-                    }
-                }
-
-                break;
-            case self::TYPE_HONORARY:
-                // infinity (1000 is close enough, right?)
-                $year += 1000;
-                break;
-        }
-
-        // At the end of the current association year.
-        $exp->setDate($year, 7, 1);
-
-        return $exp;
+    /**
+     * Set the expiration date.
+     *
+     * @param \DateTime $expiration
+     *
+     * @return void
+     */
+    public function setExpiration(\DateTime $expiration)
+    {
+        $this->expiration = $expiration;
     }
 
     /**

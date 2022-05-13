@@ -256,6 +256,10 @@ class Checker extends AbstractService
                             $member->setMembershipEndsOn($exp);
                         }
 
+                        // TODO: If the member is still studying at the TU/e, just not the M&CS department, they should
+                        // TODO: become an `external` member. However, there is currently no way to store this
+                        // TODO: information and preventing these members from becoming `graduate`.
+
                         $member->setLastCheckedOn(new \DateTime());
                     }
                 } catch (\RuntimeException $e) {
@@ -297,20 +301,21 @@ class Checker extends AbstractService
             if ($member->getMembershipEndsOn() <= $now) {
                 $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
+                // Determine the next expiration date (always the end of the next association year).
+                $exp = clone $now;
+
+                if ($exp->format('m') >= 7) {
+                    $year = (int) $exp->format('Y') + 2;
+                } else {
+                    $year = (int) $exp->format('Y') + 1;
+                }
+                $exp->setDate($year, 7, 1);
+
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
                     $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
 
-                    // External memberships should run till the end of the current association year.
-                    $exp = new \DateTime();
-                    $exp->setTime(0, 0);
-
-                    if ($exp->format('m') >= 7) {
-                        $year = (int) $exp->format('Y') + 1;
-                    } else {
-                        $year = $exp->format('Y');
-                    }
-                    $exp->setDate($year, 7, 1);
-
+                    // External memberships should run till the end of the next association year (which is actually the
+                    // same date as the expiration).
                     $member->setMembershipEndsOn($exp);
                 } else {
                     // We only have to change the membership type for graduates.
@@ -318,6 +323,7 @@ class Checker extends AbstractService
                 }
 
                 $member->setChangedOn(new \DateTime());
+                $member->setExpiration($exp);
 
                 $memberService->getMemberMapper()->persist($member);
                 $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));

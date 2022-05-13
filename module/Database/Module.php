@@ -111,6 +111,9 @@ class Module
                     $form->setHydrator($sm->get('database_hydrator_member'));
                     return $form;
                 },
+                'database_form_memberexpiration' => function ($sm) {
+                    return new \Database\Form\MemberExpiration();
+                },
                 'database_form_membertype' => function ($sm) {
                     $form = new \Database\Form\MemberType();
                     $form->setHydrator($sm->get('database_hydrator_member'));

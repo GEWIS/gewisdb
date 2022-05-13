@@ -94,6 +94,9 @@ switch ($member->getType()) {
                     (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : 'N.v.t.',
                     $member->getExpiration()->format('l j F Y')
                 )?>
+                <?php if (Member::TYPE_EXTERNAL === $member->getType() || Member::TYPE_GRADUATE === $member->getType()): ?>
+                    <a href="<?= $this->url('member/show/edit/expiration', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs">Verleng</a>
+                <?php endif; ?>
             </td>
         </tr>
         <tr>

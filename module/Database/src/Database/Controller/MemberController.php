@@ -204,6 +204,30 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * Expiration action.
+     *
+     * Extend the duration of the membership.
+     */
+    public function expirationAction()
+    {
+        $lidnr = $this->params()->fromRoute('id');
+        $service = $this->getMemberService();
+
+        if ($this->getRequest()->isPost()) {
+            $member = $service->expiration($this->getRequest()->getPost(), $lidnr);
+
+            if (null !== $member) {
+                return new ViewModel(array(
+                    'success' => true,
+                    'member' => $member
+                ));
+            }
+        }
+
+        return new ViewModel($service->getMemberExpirationForm($lidnr));
+    }
+
+    /**
      * Edit address action.
      *
      * Edit a member's address.

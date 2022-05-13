@@ -113,8 +113,8 @@ class Member
 
     /**
      * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
-     * date onwards they are "graduate". If `null`, the expiration is rolling and will be the end of the current
-     * association year.
+     * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
+     * still meets the requirements as set forth in the bylaws and internal regulations.
      *
      * @ORM\Column(type="date", nullable=true)
      */
@@ -129,7 +129,7 @@ class Member
 
     /**
      * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
-     * happens either automatically or has to be done manually.
+     * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
      *
      * @ORM\Column(type="date")
      */
@@ -445,10 +445,7 @@ class Member
     }
 
     /**
-     * Get the date on which the membership of the member is set to expire and will therefore have to be renewed, which
-     * happens either automatically or has to be done manually.
-     *
-     * The information comes from the statuten and HR.
+     * Get the expiration date.
      *
      * @return \DateTime
      */

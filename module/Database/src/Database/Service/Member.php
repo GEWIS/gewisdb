@@ -36,7 +36,6 @@ class Member extends AbstractService
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
         $form = $this->getMemberForm();
-
         $form->bind(new ProspectiveMemberModel());
 
         $noiban = false;
@@ -66,6 +65,7 @@ class Member extends AbstractService
         }
 
         // set some extra data
+        /** @var ProspectiveMemberModel $prospectiveMember */
         $prospectiveMember = $form->getData();
 
         if ($noiban) {
@@ -90,6 +90,18 @@ class Member extends AbstractService
         $date = new \DateTime();
         $date->setTime(0, 0);
         $prospectiveMember->setChangedOn($date);
+
+        // set expiration of membership, always at the end of the current association year.
+        $expiration = clone $date;
+
+        if ($expiration->format('m') >= 7) {
+            $year = (int) $expiration->format('Y') + 1;
+        } else {
+            $year = (int) $expiration->format('Y');
+        }
+
+        $expiration->setDate($year, 7, 1);
+        $prospectiveMember->setExpiration($expiration);
 
         // store the address
         $address = $form->get('studentAddress')->getObject();
@@ -174,7 +186,6 @@ class Member extends AbstractService
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
         $form = $this->getMemberForm();
-
         $form->bind(new MemberModel());
 
         // Fill in the address in the form again
@@ -206,6 +217,7 @@ class Member extends AbstractService
             return null;
         }
 
+        /** @var MemberModel $member */
         $member = $form->getData();
 
         // Remove temporary IBAN.
@@ -217,6 +229,7 @@ class Member extends AbstractService
         $member->setTueUsername($prospectiveMember->getTueUsername());
         $member->setGeneration($prospectiveMember->getGeneration());
         $member->setType($prospectiveMember->getType());
+        $member->setExpiration($prospectiveMember->getExpiration());
 
         // changed on date
         $date = new \DateTime();
@@ -361,13 +374,18 @@ class Member extends AbstractService
         foreach ($member->getAddresses() as $address) {
             $this->getMemberMapper()->removeAddress($address);
         }
+
+        $date = new \DateTime('0001-01-01 00:00:00');
+
         $member->setEmail('');
         $member->setGender(MemberModel::GENDER_OTHER);
         $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(null);
         $member->setChangedOn(new \DateTime());
-        $member->setBirth(new \DateTime('0001-01-01 00:00:00'));
+        $member->setMembershipEndsOn($date);
+        $member->setExpiration($date);
+        $member->setBirth($date);
         $member->setPaid(0);
         $member->setIban(null);
         $member->setSupremum('optout');
@@ -414,18 +432,18 @@ class Member extends AbstractService
      * @param array $data
      * @param int $lidnr member to edit
      *
-     * @return MemberModel
+     * @return MemberModel|null
      */
     public function membership($data, $lidnr)
     {
         $form = $this->getMemberTypeForm($lidnr)['form'];
-
         $form->setData($data);
 
         if (!$form->isValid()) {
             return null;
         }
 
+        /** @var MemberModel $member */
         $member = $form->getData();
 
         // update changed on date
@@ -433,25 +451,72 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        if (MemberModel::TYPE_GRADUATE === $member->getType()) {
-            // At the end of the current association year.
-            $exp = new \DateTime();
-            $exp->setTime(0, 0);
+        // update expiration and 'membership ends on' date
+        // TODO: Figure out what exactly to do (retroactively, direct, or future).
+        $expiration = clone $date;
 
-            if ($exp->format('m') >= 7) {
-                $year = (int) $exp->format('Y') + 1;
-            } else {
-                $year = $exp->format('Y');
-            }
-            $exp->setDate($year, 7, 1);
-
-            $member->setMembershipEndsOn($exp);
+        if ($expiration->format('m') >= 7) {
+            $year = (int) $expiration->format('Y') + 1;
         } else {
-            // Reset the member's membership expiration.
-            $member->setMembershipEndsOn(null);
+            $year = (int) $expiration->format('Y');
+        }
+
+        switch ($member->getType()) {
+            case MemberModel::TYPE_ORDINARY:
+            case MemberModel::TYPE_EXTERNAL:
+                $member->setMembershipEndsOn(null);
+                break;
+            case MemberModel::TYPE_GRADUATE:
+                $membershipEndsOn = clone $expiration;
+                $membershipEndsOn->setDate($year - 1, 7, 1);
+                $member->setMembershipEndsOn($membershipEndsOn);
+                break;
+            case MemberModel::TYPE_HONORARY:
+                $member->setMembershipEndsOn(null);
+                // infinity (1000 is close enough, right?)
+                $year += 1000;
+                break;
+        }
+
+        // At the end of the current association year.
+        $expiration->setDate($year, 7, 1);
+        $member->setExpiration($expiration);
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getMemberMapper()->persist($member);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+
+        return $member;
+    }
+
+    /**
+     * @param array $data
+     * @param int $lidnr
+     *
+     * @return MemberModel|null
+     */
+    public function expiration($data, $lidnr)
+    {
+        $form = $this->getMemberExpirationForm($lidnr);
+        // List packing is not allowed in PHP 5.6, so it has to be done like this.
+        $member = $form['member'];
+        $form = $form['form'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
         }
 
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+
+        // Make new expiration from previous expiration, but always make sure it is the end of the association year.
+        $newExpiration = clone $member->getExpiration();
+        $year = (int) $newExpiration->format('Y') + 1;
+        $newExpiration->setDate($year, 7, 1);
+
+        $member->setExpiration($newExpiration);
+
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
@@ -599,6 +664,21 @@ class Member extends AbstractService
         return array(
             'member' => $member['member'],
             'form' => $form
+        );
+    }
+
+    /**
+     * Get the member expiration form.
+     *
+     * @param int $lidnr
+     *
+     * @return array
+     */
+    public function getMemberExpirationForm($lidnr)
+    {
+        return array(
+            'form' => $this->getServiceManager()->get('database_form_memberexpiration'),
+            'member' => $this->getMember($lidnr)['member']
         );
     }
 
