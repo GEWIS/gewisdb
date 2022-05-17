@@ -450,14 +450,14 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        // update expiration and 'membership ends on' date
-        // TODO: Figure out what exactly to do (retroactively, direct, or future).
+        // update expiration and 'membership ends on' date (should become effective at the end of the current
+        // association year).
         $expiration = clone $date;
 
         if ($expiration->format('m') >= 7) {
-            $year = (int) $expiration->format('Y') + 1;
+            $year = (int) $expiration->format('Y') + 2;
         } else {
-            $year = (int) $expiration->format('Y');
+            $year = (int) $expiration->format('Y') + 1;
         }
 
         switch ($member->getType()) {
