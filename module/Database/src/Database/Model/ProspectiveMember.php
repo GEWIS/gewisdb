@@ -78,16 +78,6 @@ class ProspectiveMember
     protected $gender;
 
     /**
-     * Generation.
-     *
-     * This is the year that this member became a GEWIS member. This is not
-     * a academic year, but rather a calendar year.
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $generation;
-
-    /**
      * TU/e username.
      *
      * @ORM\Column(type="string", nullable=true)
@@ -125,23 +115,6 @@ class ProspectiveMember
      * @ORM\Column(type="date")
      */
     protected $changedOn;
-
-    /**
-     * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
-     * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
-     * still meets the requirements as set forth in the bylaws and internal regulations.
-     *
-     * @ORM\Column(type="date", nullable=true)
-     */
-    protected $membershipEndsOn = null;
-
-    /**
-     * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
-     * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
-     *
-     * @ORM\Column(type="date")
-     */
-    protected $expiration;
 
     /**
      * Member birth date.
@@ -435,26 +408,6 @@ class ProspectiveMember
     }
 
     /**
-     * Get the generation.
-     *
-     * @return string
-     */
-    public function getGeneration()
-    {
-        return $this->generation;
-    }
-
-    /**
-     * Set the generation.
-     *
-     * @param string $generation
-     */
-    public function setGeneration($generation)
-    {
-        $this->generation = $generation;
-    }
-
-    /**
      * Get the TU/e username.
      *
      * @return string|null
@@ -520,28 +473,6 @@ class ProspectiveMember
     }
 
     /**
-     * Get the expiration date.
-     *
-     * @return \DateTime
-     */
-    public function getExpiration()
-    {
-        return $this->expiration;
-    }
-
-    /**
-     * Set the expiration date.
-     *
-     * @param \DateTime $expiration
-     *
-     * @return void
-     */
-    public function setExpiration(\DateTime $expiration)
-    {
-        $this->expiration = $expiration;
-    }
-
-    /**
      * Get the birth date.
      *
      * @return \DateTime
@@ -579,26 +510,6 @@ class ProspectiveMember
     public function setChangedOn($changedOn)
     {
         $this->changedOn = $changedOn;
-    }
-
-    /**
-     * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
-     *
-     * @return \DateTime|null
-     */
-    public function getMembershipEndsOn()
-    {
-        return $this->membershipEndsOn;
-    }
-
-    /**
-     * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
-     *
-     * @param \DateTime|null $membershipEndsOn
-     */
-    public function setMembershipEndsOn($membershipEndsOn)
-    {
-        $this->membershipEndsOn = $membershipEndsOn;
     }
 
     /**
@@ -726,8 +637,6 @@ class ProspectiveMember
             'middleName' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
-            'generation' => $this->getGeneration(),
-            'expiration' => $this->getExpiration()->format('l j F Y'),
             'gender' => $this->getGender(),
             'study' => $this->getStudy(),
             'birth' => $this->getBirth()->format('Y-m-d'),

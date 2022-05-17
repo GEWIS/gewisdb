@@ -80,9 +80,6 @@ class Member extends AbstractService
             return null;
         }
 
-        // generation is the current year
-        $prospectiveMember->setGeneration((int) date('Y'));
-
         // by default, we only add ordinary members
         $prospectiveMember->setType(MemberModel::TYPE_ORDINARY);
 
@@ -90,18 +87,6 @@ class Member extends AbstractService
         $date = new \DateTime();
         $date->setTime(0, 0);
         $prospectiveMember->setChangedOn($date);
-
-        // set expiration of membership, always at the end of the current association year.
-        $expiration = clone $date;
-
-        if ($expiration->format('m') >= 7) {
-            $year = (int) $expiration->format('Y') + 1;
-        } else {
-            $year = (int) $expiration->format('Y');
-        }
-
-        $expiration->setDate($year, 7, 1);
-        $prospectiveMember->setExpiration($expiration);
 
         // store the address
         $address = $form->get('studentAddress')->getObject();
@@ -227,14 +212,28 @@ class Member extends AbstractService
 
         // Copy all remaining information
         $member->setTueUsername($prospectiveMember->getTueUsername());
-        $member->setGeneration($prospectiveMember->getGeneration());
         $member->setType($prospectiveMember->getType());
-        $member->setExpiration($prospectiveMember->getExpiration());
 
         // changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
         $member->setChangedOn($date);
+
+        // set generation (first year of the current association year) and expiration of the membership (always at the
+        // end of the current association year).
+        $expiration = clone $date;
+
+        if ($expiration->format('m') >= 7) {
+            $generationYear = (int) $expiration->format('Y');
+            $expirationYear = (int) $expiration->format('Y') + 1;
+        } else {
+            $generationYear = (int) $expiration->format('Y') - 1;
+            $expirationYear = (int) $expiration->format('Y');
+        }
+
+        $expiration->setDate($expirationYear, 7, 1);
+        $member->setExpiration($expiration);
+        $member->setGeneration($generationYear);
 
         // add mailing lists
         foreach ($form->getLists() as $list) {

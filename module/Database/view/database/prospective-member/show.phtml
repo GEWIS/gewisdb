@@ -55,10 +55,6 @@ case Member::GENDER_OTHER:
             <td><?= $member->getBirth()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th>Generatie</th>
-            <td><?= $member->getGeneration() ?></td>
-        </tr>
-        <tr>
             <th>Betaald (hoe veel)</th>
             <td><?= $member->getPaid() ?></td>
         </tr>
@@ -84,15 +80,6 @@ switch ($member->getType()) {
         <tr>
             <th>Laatste wijziging lidmaatshap</th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
-        </tr>
-        <tr>
-            <th>Verloopdatum lidmaatschap (hernieuwt op)</th>
-            <td>
-                <?= sprintf('%s (%s)',
-                    (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : 'N.v.t.',
-                    $member->getExpiration()->format('l j F Y')
-                )?>
-            </td>
         </tr>
         </table>
         <a href="<?= $this->url('prospective-member/show/finalize', array(
