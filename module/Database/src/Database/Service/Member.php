@@ -163,12 +163,17 @@ class Member extends AbstractService
     }
 
     /**
+     * @param array $membershipData
      * @param ProspectiveMemberModel $prospectiveMember
+     *
      * @return MemberModel|null
      */
-    public function finalizeSubscription($prospectiveMember)
+    public function finalizeSubscription($membershipData, $prospectiveMember)
     {
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+        // If no membership type has been submitted it does not make sense to do anything else.
+        if (!isset($membershipData['type'])) {
+            return null;
+        }
 
         $form = $this->getMemberForm();
         $form->bind(new MemberModel());
@@ -202,6 +207,8 @@ class Member extends AbstractService
             return null;
         }
 
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+
         /** @var MemberModel $member */
         $member = $form->getData();
 
@@ -219,8 +226,9 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        // set generation (first year of the current association year) and expiration of the membership (always at the
-        // end of the current association year).
+        // set generation (first year of the current association year), membership type and associated expiration of
+        // said membership (always at the end of the current association year).
+        $member->setType($membershipData['type']);
         $expiration = clone $date;
 
         if ($expiration->format('m') >= 7) {
@@ -229,6 +237,25 @@ class Member extends AbstractService
         } else {
             $generationYear = (int) $expiration->format('Y') - 1;
             $expirationYear = (int) $expiration->format('Y');
+        }
+
+        switch ($member->getType()) {
+            case MemberModel::TYPE_ORDINARY:
+            case MemberModel::TYPE_EXTERNAL:
+                $member->setMembershipEndsOn(null);
+                break;
+            case MemberModel::TYPE_GRADUATE:
+                // This is a weird situation, as such define the expiration of the membership to be super early. Actual
+                // value will have to be edited manually.
+                $membershipEndsOn = clone $expiration;
+                $membershipEndsOn->setDate(1, 1, 1);
+                $member->setMembershipEndsOn($membershipEndsOn);
+                break;
+            case MemberModel::TYPE_HONORARY:
+                $member->setMembershipEndsOn(null);
+                // infinity (1000 is close enough, right?)
+                $expirationYear += 1000;
+                break;
         }
 
         $expiration->setDate($expirationYear, 7, 1);
@@ -288,7 +315,8 @@ class Member extends AbstractService
     public function getProspectiveMember($id)
     {
         return array(
-            'member' => $this->getProspectiveMemberMapper()->find($id)
+            'member' => $this->getProspectiveMemberMapper()->find($id),
+            'form' => $this->getServiceManager()->get('database_form_membertype')
         );
     }
 
