@@ -19,8 +19,6 @@
                         table += '<td>' + link + member.lidnr + '</a></td>';
                         table += '<td>' + link + member.fullName + '</a></td>';
                         table += '<td>' + link + member.email + '</a></td>';
-                        table += '<td>' + link + member.generation + '</a></td>';
-                        table += '<td>' + link + member.expiration + '</a></td>';
                         table += '</tr>';
                     });
                     $('#members-result tbody').html(table);
@@ -57,15 +55,13 @@
         <th>#</th>
         <th>Naam</th>
         <th>Email</th>
-        <th>Generatie</th>
-        <th>Verloopdatum</th>
     </tr>
     </thead>
     <tbody>
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="4"> Er zijn teveel resultaten om weer te geven. Probeer te filteren om andere resultaten te zien.</td>
+        <td colspan="3"> Er zijn teveel resultaten om weer te geven. Probeer te filteren om andere resultaten te zien.</td>
     </tr>
     </tfoot>
 </table>
