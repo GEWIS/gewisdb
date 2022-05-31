@@ -127,6 +127,14 @@ class Member
     protected $changedOn;
 
     /**
+     * Keeps track of whether a student is still studying (either at the Department of Mathematics and Computer Science,
+     * the TU/e in general, or another institution).
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $isStudying;
+
+    /**
      * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
      * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
      * still meets the requirements as set forth in the bylaws and internal regulations.
@@ -550,6 +558,26 @@ class Member
     public function setChangedOn($changedOn)
     {
         $this->changedOn = $changedOn;
+    }
+
+    /**
+     * Get whether the member is still studying.
+     *
+     * @return \bool
+     */
+    public function getIsStudying()
+    {
+        return $this->isStudying;
+    }
+
+    /**
+     * Set whether the member is still studying.
+     *
+     * @param bool $isStudying
+     */
+    public function setIsStudying($isStudying)
+    {
+        $this->isStudying = $isStudying;
     }
 
     /**

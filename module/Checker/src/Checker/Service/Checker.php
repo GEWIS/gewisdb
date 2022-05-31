@@ -249,16 +249,20 @@ class Checker extends AbstractService
 
                     // Check that we have a proper response.
                     if (array_key_exists('registrations', $responseContent)) {
-                        // Check if the member is still registered for a study in the department of Mathematics and Computer
-                        // Science & Engineering. If not, set date of expiration.
-                        if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
+                        if (empty($responseContent['registrations'])) {
+                            // The member is no longer studying at the TU/e.
                             $member->setChangedOn(new \DateTime());
-                            $member->setMembershipEndsOn($exp);
+                            $member->setIsStudying(false);
+                        } else {
+                            // The member is still studying at the TU/e. Determine whether the member is a student at
+                            // the Department of Mathematics and Computer Science or another department. If the member
+                            // is still a student at the M&CS department don't change anything, otherwise, set date of
+                            // expiration.
+                            if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
+                                $member->setChangedOn(new \DateTime());
+                                $member->setMembershipEndsOn($exp);
+                            }
                         }
-
-                        // TODO: If the member is still studying at the TU/e, just not the M&CS department, they should
-                        // TODO: become an `external` member. However, there is currently no way to store this
-                        // TODO: information and preventing these members from becoming `graduate`.
 
                         $member->setLastCheckedOn(new \DateTime());
                     }
@@ -318,8 +322,13 @@ class Checker extends AbstractService
                     // same date as the expiration).
                     $member->setMembershipEndsOn($exp);
                 } else {
-                    // We only have to change the membership type for graduates.
-                    $member->setType(\Database\Model\Member::TYPE_GRADUATE);
+                    // We only have to change the membership type for external or graduates depending on whether the
+                    // member is still studying.
+                    if ($member->getIsStudying()) {
+                        $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
+                    } else {
+                        $member->setType(\Database\Model\Member::TYPE_GRADUATE);
+                    }
                 }
 
                 $member->setChangedOn(new \DateTime());
