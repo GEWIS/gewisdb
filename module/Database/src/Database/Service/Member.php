@@ -463,15 +463,26 @@ class Member extends AbstractService
      */
     public function membership($data, $lidnr)
     {
-        $form = $this->getMemberTypeForm($lidnr)['form'];
+        $form = $this->getMemberTypeForm($lidnr);
+        // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
+        /** @var MemberModel $member */
+        $member = $form['member'];
+        $form = $form['form'];
+
+        // It is not possible to have another membership type after being an honorary member and there does not exist a
+        // good transition to a different membership type (because of the dates/expiration etc.).
+        if (MemberModel::TYPE_HONORARY === $member->getType()) {
+            throw new \RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
+        }
+
         $form->setData($data);
 
         if (!$form->isValid()) {
             return null;
         }
 
-        /** @var MemberModel $member */
-        $member = $form->getData();
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $data = $form->getData();
 
         // update changed on date
         $date = new \DateTime();
@@ -488,7 +499,7 @@ class Member extends AbstractService
             $year = (int) $expiration->format('Y') + 1;
         }
 
-        switch ($member->getType()) {
+        switch ($data['type']) {
             case MemberModel::TYPE_ORDINARY:
             case MemberModel::TYPE_EXTERNAL:
                 $member->setMembershipEndsOn(null);
@@ -499,9 +510,11 @@ class Member extends AbstractService
                 $member->setMembershipEndsOn($membershipEndsOn);
                 break;
             case MemberModel::TYPE_HONORARY:
-                $member->setMembershipEndsOn(null);
                 // infinity (1000 is close enough, right?)
                 $year += 1000;
+                $member->setMembershipEndsOn(null);
+                // Directly apply the honorary membership type.
+                $member->setType(MemberModel::TYPE_HONORARY);
                 break;
         }
 
@@ -509,7 +522,6 @@ class Member extends AbstractService
         $expiration->setDate($year, 7, 1);
         $member->setExpiration($expiration);
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
@@ -525,7 +537,7 @@ class Member extends AbstractService
     public function expiration($data, $lidnr)
     {
         $form = $this->getMemberExpirationForm($lidnr);
-        // List packing is not allowed in PHP 5.6, so it has to be done like this.
+        // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
         $member = $form['member'];
         $form = $form['form'];
 
@@ -718,12 +730,9 @@ class Member extends AbstractService
      */
     public function getMemberTypeForm($lidnr)
     {
-        $form = $this->getServiceManager()->get('database_form_membertype');
-        $member = $this->getMember($lidnr);
-        $form->bind($member['member']);
         return array(
-            'member' => $member['member'],
-            'form' => $form
+            'member' => $this->getMember($lidnr)['member'],
+            'form' => $this->getServiceManager()->get('database_form_membertype')
         );
     }
 
