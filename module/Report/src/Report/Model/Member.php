@@ -610,7 +610,7 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
-            'memberShipEndsOn' => (null !== $this->getMembershipEndsOn()) ? $this->getMembershipEndsOn()->format('l j F Y') : null,
+            'membershipEndsOn' => (null !== $this->getMembershipEndsOn()) ? $this->getMembershipEndsOn()->format('l j F Y') : null,
             'expiration' => $this->getExpiration()->format('l j F Y')
         );
     }
