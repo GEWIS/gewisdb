@@ -59,18 +59,20 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function finalizeAction()
     {
-        $service = $this->getMemberService();
-        $prospectiveMember = $service->getProspectiveMember($this->params()->fromRoute('id'))['member'];
-        $result = $service->finalizeSubscription($prospectiveMember);
-        if (is_null($result)) {
-            // TODO: Fails silently currently
-            return $this->redirect()->toRoute('prospective-member/show', [
-                'id' => $this->params()->fromRoute('id')
-            ]);
+        if ($this->getRequest()->isPost()) {
+            $service = $this->getMemberService();
+            $prospectiveMember = $service->getProspectiveMember($this->params()->fromRoute('id'))['member'];
+            $result = $service->finalizeSubscription($this->getRequest()->getPost()->toArray(), $prospectiveMember);
+
+            if (null !== $result) {
+                return $this->redirect()->toRoute('member/show', [
+                    'id' => $result->getLidnr()
+                ]);
+            }
         }
 
-        return $this->redirect()->toRoute('member/show', [
-            'id' => $result->getLidnr()
+        return $this->redirect()->toRoute('prospective-member/show', [
+            'id' => $this->params()->fromRoute('id')
         ]);
     }
 

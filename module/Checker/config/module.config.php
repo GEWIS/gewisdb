@@ -17,6 +17,15 @@ return array(
                         )
                     )
                 ),
+                'check_memberships' => array(
+                    'options' => array(
+                        'route' => 'check memberships',
+                        'defaults' => array(
+                            'controller' => 'Checker\Controller\Checker',
+                            'action' => 'checkMemberships'
+                        )
+                    )
+                ),
             )
         )
     )

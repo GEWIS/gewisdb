@@ -17,6 +17,12 @@ return [
      */
     'checker' => [
         'report_mail' => 'mail@example.org',
+        'membership_api' => [
+            'endpoint' => 'https://tue-lookup.gewis.nl/user/',
+            'key' => 'c2VjcmV0',
+            'max_total_requests' => 200,
+            'max_manual_requests' => 20
+        ],
     ],
 
 

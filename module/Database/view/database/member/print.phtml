@@ -46,8 +46,8 @@ case Member::GENDER_OTHER:
 ?></td>
         </tr>
         <tr>
-            <th>TU/e nummer</th>
-            <td><?= $member->getTuenumber() ?></td>
+            <th>TU/e-gebruikersnaam</th>
+            <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : $member->getTueUsername() ?></td>
         </tr>
         <tr>
             <th>Studie</th>
@@ -77,21 +77,18 @@ case Member::GENDER_OTHER:
             <th>Type lid</th>
             <td><?php
 switch ($member->getType()) {
-case Member::TYPE_ORDINARY:
-    echo 'Gewoon';
-    break;
-case Member::TYPE_PROLONGED:
-    echo 'Verlengd';
-    break;
-case Member::TYPE_EXTERNAL:
-    echo 'Extern';
-    break;
-case Member::TYPE_EXTRAORDINARY:
-    echo 'Buitengewoon';
-    break;
-case Member::TYPE_HONORARY:
-    echo 'Erelid';
-    break;
+    case Member::TYPE_ORDINARY:
+        echo 'Gewoon';
+        break;
+    case Member::TYPE_EXTERNAL:
+        echo 'Extern';
+        break;
+    case Member::TYPE_GRADUATE:
+        echo 'Afgestudeerde';
+        break;
+    case Member::TYPE_HONORARY:
+        echo 'Erelid';
+        break;
 }
 ?></td>
         </tr>
@@ -100,8 +97,13 @@ case Member::TYPE_HONORARY:
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th>Verloopdatum lidmaatschap</th>
-            <td><?= $member->getExpiration()->format('l j F Y') ?></td>
+            <th>Verloopdatum lidmaatschap (hernieuwt op)</th>
+            <td>
+                <?= sprintf('%s (%s)',
+                    (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : 'N.v.t.',
+                    $member->getExpiration()->format('l j F Y')
+                )?>
+            </td>
         </tr>
     </table>
 </div>

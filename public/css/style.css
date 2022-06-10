@@ -40,3 +40,8 @@ canvas#signature-canvas {
     border: 0.125rem solid #333333;
     border-radius: 0.25rem;
 }
+
+.label-required::after {
+    content:" *";
+    color:#D40026
+}

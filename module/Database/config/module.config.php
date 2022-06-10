@@ -239,6 +239,15 @@ return array(
                                                 'action' => 'lists'
                                             )
                                         )
+                                    ),
+                                    'expiration' => array(
+                                        'type' => 'Literal',
+                                        'options' => array(
+                                            'route' => '/expiration',
+                                            'defaults' => array(
+                                                'action' => 'expiration'
+                                            )
+                                        )
                                     )
                                 )
                             ),

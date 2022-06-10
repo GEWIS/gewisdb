@@ -59,6 +59,14 @@ class MemberEdit extends Form implements InputFilterProviderInterface
         ));
 
         $this->add(array(
+            'name' => 'tueUsername',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'TU/e-gebruikersnaam'
+            )
+        ));
+
+        $this->add(array(
             'name' => 'email',
             'type' => 'email',
             'options' => array(
@@ -149,6 +157,23 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array('name' => 'digits')
+                )
+            ),
+            'tueUsername' => array(
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'regex',
+                        'options' => array(
+                            'pattern' => '/^(s\d{6}|\d{8})$/',
+                            'messages' => array(
+                                'regexNotMatch' => 'Een TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.'
+                            )
+                        )
+                    )
+                ),
+                'filters' => array(
+                    array('name' => 'tonull')
                 )
             )
         );

@@ -145,7 +145,7 @@ $element->setLabelAttributes(array(
 </div>
 
 <?php
-$element = $form->get('tuenumber');
+$element = $form->get('tueUsername');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
@@ -498,8 +498,10 @@ case Member::GENDER_OTHER:
 ?></td>
         </tr>
         <tr>
-            <th><?= $this->translate('TU/e nummer') ?></th>
-            <td><?= $member->getTuenumber() ?></td>
+            <th><?= $this->translate('TU/e-gebruikersnaam') ?></th>
+            <td>
+                <?= (null === $member->getTueUsername()) ? $this->translate('Onbekend') : $member->getTueUsername() ?>
+            </td>
         </tr>
         <tr>
             <th><?= $this->translate('Studie') ?></th>
@@ -514,10 +516,6 @@ case Member::GENDER_OTHER:
             <td><?= $member->getBirth()->format('l j F Y') ?></td>
         </tr>
         <tr>
-            <th><?= $this->translate('Generatie') ?></th>
-            <td><?= $member->getGeneration() ?></td>
-        </tr>
-        <tr>
             <th><?= $this->translate('IBAN') ?></th>
             <td><?= $member->getIban() ?></td>
         </tr>
@@ -529,31 +527,24 @@ case Member::GENDER_OTHER:
             <th><?= $this->translate('Type lid') ?></th>
             <td><?php
 switch ($member->getType()) {
-case Member::TYPE_ORDINARY:
-    echo $this->translate('Gewoon');
-    break;
-case Member::TYPE_PROLONGED:
-    echo $this->translate('Verlengd');
-    break;
-case Member::TYPE_EXTERNAL:
-    echo $this->translate('Extern');
-    break;
-case Member::TYPE_EXTRAORDINARY:
-    echo $this->translate('Buitengewoon');
-    break;
-case Member::TYPE_HONORARY:
-    echo $this->translate('Erelid');
-    break;
+    case Member::TYPE_ORDINARY:
+        echo $this->translate('Gewoon');
+        break;
+    case Member::TYPE_EXTERNAL:
+        echo $this->translate('Extern');
+        break;
+    case Member::TYPE_GRADUATE:
+        echo $this->translate('Afgestudeerde');
+        break;
+    case Member::TYPE_HONORARY:
+        echo $this->translate('Erelid');
+        break;
 }
 ?></td>
         </tr>
         <tr>
             <th><?= $this->translate('Laatste wijziging lidmaatshap') ?></th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Verloopdatum lidmaatschap') ?></th>
-            <td><?= $member->getExpiration()->format('l j F Y') ?></td>
         </tr>
     </table>
 </div>

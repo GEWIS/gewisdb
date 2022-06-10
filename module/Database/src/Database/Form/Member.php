@@ -73,10 +73,10 @@ class Member extends Form implements InputFilterProviderInterface
         ));
 
         $this->add(array(
-            'name' => 'tuenumber',
-            'type' => 'number',
+            'name' => 'tueUsername',
+            'type' => 'text',
             'options' => array(
-                'label' => $translator->translate('TU/e nummer')
+                'label' => $translator->translate('TU/e-gebruikersnaam')
             )
         ));
 
@@ -289,10 +289,21 @@ class Member extends Form implements InputFilterProviderInterface
                     )
                 )
             ),
-            'tuenumber' => array(
+            'tueUsername' => array(
                 'required' => false,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array(
+                        'name' => 'regex',
+                        'options' => array(
+                            'pattern' => '/^(s\d{6}|\d{8})$/',
+                            'messages' => array(
+                                'regexNotMatch' => $this->translator->translate('Je TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.')
+                            )
+                        )
+                    )
+                ),
+                'filters' => array(
+                    array('name' => 'tonull')
                 )
             )
         );

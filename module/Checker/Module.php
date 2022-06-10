@@ -43,7 +43,8 @@ class Module
                 'checker_service_organ' => 'Checker\Service\Organ',
                 'checker_service_installation' => 'Checker\Service\Installation',
                 'checker_service_budget' => 'Checker\Service\Budget',
-                'checker_service_meeting' => 'Checker\Service\Meeting'
+                'checker_service_meeting' => 'Checker\Service\Meeting',
+                'checker_service_member' => 'Checker\Service\Member'
             ),
             'factories' => array(
                 'checker_mapper_organ' => function ($sm) {
@@ -58,6 +59,11 @@ class Module
                 },
                 'checker_mapper_budget' => function ($sm) {
                     return new \Checker\Mapper\Budget(
+                        $sm->get('database_doctrine_em')
+                    );
+                },
+                'checker_mapper_member' => function ($sm) {
+                    return new \Checker\Mapper\Member(
                         $sm->get('database_doctrine_em')
                     );
                 },

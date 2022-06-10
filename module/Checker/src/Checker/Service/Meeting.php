@@ -22,4 +22,15 @@ class Meeting extends AbstractService
             $meetings
         );
     }
+
+    /**
+     * @return \Database\Model\Meeting|null
+     */
+    public function getLastMeeting()
+    {
+        $databaseServiceMeeting = $this->getServiceManager()->get('database_service_meeting');
+        $meetingMapper = $databaseServiceMeeting->getMeetingMapper();
+
+        return $meetingMapper->findLast();
+    }
 }

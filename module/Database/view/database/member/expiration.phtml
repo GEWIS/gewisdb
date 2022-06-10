@@ -1,0 +1,43 @@
+<?php if (isset($success) && $success): ?>
+    <p>
+        Nieuwe verloopdatum lidmaatschap (<?= $member->getExpiration()->format('l j F Y') ?>) voor <a href="<?= $this->url('member/show', array(
+            'id' => $member->getLidnr()
+        )) ?>"><?= $member->getFullName() ?></a> is opgeslagen!
+    </p>
+<?php else: ?>
+    <h1>Verleng lidmaatschap <?= $member->getFullName() ?></h1>
+    <?php
+    $newExpiration = clone $member->getExpiration();
+    $year = (int) $newExpiration->format('Y') + 1;
+    $newExpiration->setDate($year, 7, 1);
+    ?>
+    <p>
+        Weet je zeker dat je het lidmaatschap van <?= $member->getFullName() ?> wilt verlengen van
+        <?= $member->getExpiration()->format('l j F Y') ?> naar <?= $newExpiration->format('l j F Y') ?>?
+    </p>
+    <?php
+    $form->prepare();
+
+    $form->setAttribute('action', $this->url('member/show/edit/expiration', array('id' => $member->getLidnr())));
+    $form->setAttribute('method', 'post');
+
+    $form->setAttribute('role', 'form');
+    $form->setAttribute('class', 'form-horizontal');
+    ?>
+    <?= $this->form()->openTag($form) ?>
+    <div class="form-group">
+        <?php
+        $submit = $form->get('submit_yes');
+        $submit->setLabel('Ja')
+            ->setAttribute('class', 'btn btn-primary');
+        ?>
+        <?= $this->formButton($submit) ?>
+        <?php
+        $submit = $form->get('submit_no');
+        $submit->setLabel('Nee')
+            ->setAttribute('class', 'btn btn-default');
+        ?>
+        <?= $this->formButton($submit) ?>
+    </div>
+    <?= $this->form()->closeTag() ?>
+<?php endif ?>

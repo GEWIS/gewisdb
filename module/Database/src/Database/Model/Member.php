@@ -18,9 +18,8 @@ class Member
     const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
-    const TYPE_PROLONGED = 'prolonged';
     const TYPE_EXTERNAL = 'external';
-    const TYPE_EXTRAORDINARY = 'extraordinary';
+    const TYPE_GRADUATE = 'graduate';
     const TYPE_HONORARY = 'honorary';
 
     /**
@@ -89,11 +88,11 @@ class Member
     protected $generation;
 
     /**
-     * TU/e registration number.
+     * TU/e username.
      *
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $tuenumber;
+    protected $tueUsername;
 
     /**
      * Study of the member.
@@ -108,16 +107,13 @@ class Member
      * This can be one of the following, as defined by the GEWIS statuten:
      *
      * - ordinary
-     * - prolonged
      * - external
-     * - extraordinary
+     * - graduate
      * - honorary
      *
-     * You can find the GEWIS Statuten here:
+     * You can find the GEWIS statuten here: https://gewis.nl/vereniging/statuten/statuten.
      *
-     * http://gewis.nl/vereniging/statuten/statuten.php
-     *
-     * Zie artikel 7 lid 1 en 2.
+     * See artikel 7.
      *
      * @ORM\Column(type="string")
      */
@@ -129,6 +125,38 @@ class Member
      * @ORM\Column(type="date")
      */
     protected $changedOn;
+
+    /**
+     * Keeps track of whether a student is still studying (either at the Department of Mathematics and Computer Science,
+     * the TU/e in general, or another institution).
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $isStudying;
+
+    /**
+     * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
+     * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
+     * still meets the requirements as set forth in the bylaws and internal regulations.
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $membershipEndsOn = null;
+
+    /**
+     * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
+     * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
+     *
+     * @ORM\Column(type="date")
+     */
+    protected $expiration;
+
+    /**
+     * Last date membership status was checked.
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $lastCheckedOn = null;
 
     /**
      * Member birth date.
@@ -206,9 +234,8 @@ class Member
     {
         return array(
             self::TYPE_ORDINARY,
-            self::TYPE_PROLONGED,
             self::TYPE_EXTERNAL,
-            self::TYPE_EXTRAORDINARY,
+            self::TYPE_GRADUATE,
             self::TYPE_HONORARY
         );
     }
@@ -407,23 +434,23 @@ class Member
     }
 
     /**
-     * Get the TU/e registration number.
+     * Get the TU/e username.
      *
-     * @return int
+     * @return string|null
      */
-    public function getTuenumber()
+    public function getTueUsername()
     {
-        return $this->tuenumber;
+        return $this->tueUsername;
     }
 
     /**
-     * Set the TU/e registration number.
+     * Set the TU/e username.
      *
-     * @param int $tuenumber
+     * @param string|null $tueUsername
      */
-    public function setTuenumber($tuenumber)
+    public function setTueUsername($tueUsername)
     {
-        $this->tuenumber = $tuenumber;
+        $this->tueUsername = $tueUsername;
     }
 
     /**
@@ -474,30 +501,23 @@ class Member
     /**
      * Get the expiration date.
      *
-     * The information comes from the statuten and HR.
-     *
      * @return \DateTime
      */
     public function getExpiration()
     {
-        $exp = clone $this->getChangedOn();
-        switch ($this->getType()) {
-        case self::TYPE_ORDINARY:
-            // 6 years
-            $exp->add(new \DateInterval('P6Y'));
-            break;
-        case self::TYPE_PROLONGED:
-        case self::TYPE_EXTERNAL:
-        case self::TYPE_EXTRAORDINARY:
-            $exp->add(new \DateInterval('P1Y'));
-            // 1 year
-            break;
-        case self::TYPE_HONORARY:
-            // infinity (1000 is close enough, right?)
-            $exp->add(new \DateInterval('P1000Y'));
-            break;
-        }
-        return $exp;
+        return $this->expiration;
+    }
+
+    /**
+     * Set the expiration date.
+     *
+     * @param \DateTime $expiration
+     *
+     * @return void
+     */
+    public function setExpiration(\DateTime $expiration)
+    {
+        $this->expiration = $expiration;
     }
 
     /**
@@ -538,6 +558,66 @@ class Member
     public function setChangedOn($changedOn)
     {
         $this->changedOn = $changedOn;
+    }
+
+    /**
+     * Get whether the member is still studying.
+     *
+     * @return \bool
+     */
+    public function getIsStudying()
+    {
+        return $this->isStudying;
+    }
+
+    /**
+     * Set whether the member is still studying.
+     *
+     * @param bool $isStudying
+     */
+    public function setIsStudying($isStudying)
+    {
+        $this->isStudying = $isStudying;
+    }
+
+    /**
+     * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @return \DateTime|null
+     */
+    public function getMembershipEndsOn()
+    {
+        return $this->membershipEndsOn;
+    }
+
+    /**
+     * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @param \DateTime|null $membershipEndsOn
+     */
+    public function setMembershipEndsOn($membershipEndsOn)
+    {
+        $this->membershipEndsOn = $membershipEndsOn;
+    }
+
+    /**
+     * Get the date of when the membership status was last checked.
+     *
+     * @return \DateTime
+     */
+    public function getLastCheckedOn()
+    {
+        return $this->lastCheckedOn;
+    }
+
+    /**
+     * Set the date of when the membership status was last checked.
+     *
+     * @param \DateTime $lastCheckedOn
+     */
+    public function setLastCheckedOn($lastCheckedOn)
+    {
+        $this->lastCheckedOn = $lastCheckedOn;
     }
 
     /**

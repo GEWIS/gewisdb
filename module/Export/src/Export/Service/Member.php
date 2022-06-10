@@ -72,21 +72,18 @@ class Member extends AbstractService
             );
 
             switch ($member->getType()) {
-            case MemberModel::TYPE_ORDINARY:
-                $data['lidsoortid'] = 1;
-                break;
-            case MemberModel::TYPE_PROLONGED:
-                $data['lidsoortid'] = 2;
-                break;
-            case MemberModel::TYPE_EXTERNAL:
-                $data['lidsoortid'] = 3;
-                break;
-            case MemberModel::TYPE_EXTRAORDINARY:
-                $data['lidsoortid'] = 4;
-                break;
-            case MemberModel::TYPE_HONORARY:
-                $data['lidsoortid'] = 5;
-                break;
+                case MemberModel::TYPE_ORDINARY:
+                    $data['lidsoortid'] = 1;
+                    break;
+                case MemberModel::TYPE_EXTERNAL:
+                    $data['lidsoortid'] = 2;
+                    break;
+                case MemberModel::TYPE_GRADUATE:
+                    $data['lidsoortid'] = 3;
+                    break;
+                case MemberModel::TYPE_HONORARY:
+                    $data['lidsoortid'] = 4;
+                    break;
             }
 
             // first check if it is an existing member

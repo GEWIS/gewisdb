@@ -18,9 +18,8 @@ class ProspectiveMember
     const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
-    const TYPE_PROLONGED = 'prolonged';
     const TYPE_EXTERNAL = 'external';
-    const TYPE_EXTRAORDINARY = 'extraordinary';
+    const TYPE_GRADUATE = 'graduate';
     const TYPE_HONORARY = 'honorary';
 
     /**
@@ -79,21 +78,11 @@ class ProspectiveMember
     protected $gender;
 
     /**
-     * Generation.
+     * TU/e username.
      *
-     * This is the year that this member became a GEWIS member. This is not
-     * a academic year, but rather a calendar year.
-     *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $generation;
-
-    /**
-     * TU/e registration number.
-     *
-     * @ORM\Column(type="integer",nullable=true)
-     */
-    protected $tuenumber;
+    protected $tueUsername;
 
     /**
      * Study of the member.
@@ -108,16 +97,13 @@ class ProspectiveMember
      * This can be one of the following, as defined by the GEWIS statuten:
      *
      * - ordinary
-     * - prolonged
      * - external
-     * - extraordinary
+     * - graduate
      * - honorary
      *
-     * You can find the GEWIS Statuten here:
+     * You can find the GEWIS statuten here: https://gewis.nl/vereniging/statuten/statuten.
      *
-     * http://gewis.nl/vereniging/statuten/statuten.php
-     *
-     * Zie artikel 7 lid 1 en 2.
+     * See artikel 7.
      *
      * @ORM\Column(type="string")
      */
@@ -243,9 +229,8 @@ class ProspectiveMember
     {
         return array(
             self::TYPE_ORDINARY,
-            self::TYPE_PROLONGED,
             self::TYPE_EXTERNAL,
-            self::TYPE_EXTRAORDINARY,
+            self::TYPE_GRADUATE,
             self::TYPE_HONORARY
         );
     }
@@ -423,43 +408,23 @@ class ProspectiveMember
     }
 
     /**
-     * Get the generation.
+     * Get the TU/e username.
      *
-     * @return string
+     * @return string|null
      */
-    public function getGeneration()
+    public function getTueUsername()
     {
-        return $this->generation;
+        return $this->tueUsername;
     }
 
     /**
-     * Set the generation.
+     * Set the TU/e username.
      *
-     * @param string $generation
+     * @param string|null $tueUsername
      */
-    public function setGeneration($generation)
+    public function setTueUsername($tueUsername)
     {
-        $this->generation = $generation;
-    }
-
-    /**
-     * Get the TU/e registration number.
-     *
-     * @return int
-     */
-    public function getTuenumber()
-    {
-        return $this->tuenumber;
-    }
-
-    /**
-     * Set the TU/e registration number.
-     *
-     * @param int $tuenumber
-     */
-    public function setTuenumber($tuenumber)
-    {
-        $this->tuenumber = $tuenumber;
+        $this->tueUsername = $tueUsername;
     }
 
     /**
@@ -505,35 +470,6 @@ class ProspectiveMember
             throw new \InvalidArgumentException("Nonexisting type given.");
         }
         $this->type = $type;
-    }
-
-    /**
-     * Get the expiration date.
-     *
-     * The information comes from the statuten and HR.
-     *
-     * @return \DateTime
-     */
-    public function getExpiration()
-    {
-        $exp = clone $this->getChangedOn();
-        switch ($this->getType()) {
-        case self::TYPE_ORDINARY:
-            // 6 years
-            $exp->add(new \DateInterval('P6Y'));
-            break;
-        case self::TYPE_PROLONGED:
-        case self::TYPE_EXTERNAL:
-        case self::TYPE_EXTRAORDINARY:
-            $exp->add(new \DateInterval('P1Y'));
-            // 1 year
-            break;
-        case self::TYPE_HONORARY:
-            // infinity (1000 is close enough, right?)
-            $exp->add(new \DateInterval('P1000Y'));
-            break;
-        }
-        return $exp;
     }
 
     /**
@@ -701,8 +637,6 @@ class ProspectiveMember
             'middleName' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
-            'generation' => $this->getGeneration(),
-            'expiration' => $this->getExpiration()->format('l j F Y'),
             'gender' => $this->getGender(),
             'study' => $this->getStudy(),
             'birth' => $this->getBirth()->format('Y-m-d'),

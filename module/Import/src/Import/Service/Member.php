@@ -61,26 +61,20 @@ class Member extends AbstractService
         $changed = new \DateTime($data['verloopdatum']);
 
         switch (strtolower($data['lidsoort'])) {
-        case 'basis lid':
-            $member->setType(MemberModel::TYPE_ORDINARY);
-            $changed->sub(new \DateInterval('P6Y'));
-            break;
-        case 'geprolongeerd lid':
-            $member->setType(MemberModel::TYPE_PROLONGED);
-            $changed->sub(new \DateInterval('P1Y'));
-            break;
-        case 'extern lid':
-            $member->setType(MemberModel::TYPE_EXTERNAL);
-            $changed->sub(new \DateInterval('P1Y'));
-            break;
-        case 'buitengewoon lid':
-            $member->setType(MemberModel::TYPE_EXTRAORDINARY);
-            $changed->sub(new \DateInterval('P1Y'));
-            break;
-        case 'erelid':
-            $member->setType(MemberModel::TYPE_HONORARY);
-            $changed = new \DateTime();
-            break;
+            case 'basis lid':
+            case 'geprolongeerd lid':
+            case 'extern lid':
+                $member->setType(MemberModel::TYPE_ORDINARY);
+                $changed->sub(new \DateInterval('P1Y'));
+                break;
+            case 'buitengewoon lid':
+                $member->setType(MemberModel::TYPE_EXTERNAL);
+                $changed->sub(new \DateInterval('P1Y'));
+                break;
+            case 'erelid':
+                $member->setType(MemberModel::TYPE_HONORARY);
+                $changed = new \DateTime();
+                break;
         }
 
         $member->setChangedOn($changed);

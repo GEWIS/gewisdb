@@ -36,7 +36,6 @@ class Member extends AbstractService
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
         $form = $this->getMemberForm();
-
         $form->bind(new ProspectiveMemberModel());
 
         $noiban = false;
@@ -44,13 +43,13 @@ class Member extends AbstractService
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tuenumber', 'study', 'email', 'birth',
+                'gender', 'tueUsername', 'study', 'email', 'birth',
                 'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         } else {
             $form->setValidationGroup(array(
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tuenumber', 'study', 'email', 'birth',
+                'gender', 'tueUsername', 'study', 'email', 'birth',
                 'agreed', 'iban', 'signature', 'signatureLocation'
             ));
         }
@@ -66,6 +65,7 @@ class Member extends AbstractService
         }
 
         // set some extra data
+        /** @var ProspectiveMemberModel $prospectiveMember */
         $prospectiveMember = $form->getData();
 
         if ($noiban) {
@@ -79,13 +79,6 @@ class Member extends AbstractService
             ]);
             return null;
         }
-
-        if (!is_numeric($prospectiveMember->getTuenumber())) {
-            $prospectiveMember->setTuenumber(0);
-        }
-
-        // generation is the current year
-        $prospectiveMember->setGeneration((int) date('Y'));
 
         // by default, we only add ordinary members
         $prospectiveMember->setType(MemberModel::TYPE_ORDINARY);
@@ -170,15 +163,19 @@ class Member extends AbstractService
     }
 
     /**
+     * @param array $membershipData
      * @param ProspectiveMemberModel $prospectiveMember
+     *
      * @return MemberModel|null
      */
-    public function finalizeSubscription($prospectiveMember)
+    public function finalizeSubscription($membershipData, $prospectiveMember)
     {
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+        // If no membership type has been submitted it does not make sense to do anything else.
+        if (!isset($membershipData['type'])) {
+            return null;
+        }
 
         $form = $this->getMemberForm();
-
         $form->bind(new MemberModel());
 
         // Fill in the address in the form again
@@ -210,6 +207,9 @@ class Member extends AbstractService
             return null;
         }
 
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+
+        /** @var MemberModel $member */
         $member = $form->getData();
 
         // Remove temporary IBAN.
@@ -218,14 +218,55 @@ class Member extends AbstractService
         }
 
         // Copy all remaining information
-        $member->setTuenumber($prospectiveMember->getTuenumber());
-        $member->setGeneration($prospectiveMember->getGeneration());
+        $member->setTueUsername($prospectiveMember->getTueUsername());
         $member->setType($prospectiveMember->getType());
 
         // changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
         $member->setChangedOn($date);
+
+        // set generation (first year of the current association year), membership type and associated expiration of
+        // said membership (always at the end of the current association year).
+        $member->setType($membershipData['type']);
+        $expiration = clone $date;
+
+        if ($expiration->format('m') >= 7) {
+            $generationYear = (int) $expiration->format('Y');
+            $expirationYear = (int) $expiration->format('Y') + 1;
+        } else {
+            $generationYear = (int) $expiration->format('Y') - 1;
+            $expirationYear = (int) $expiration->format('Y');
+        }
+
+        switch ($member->getType()) {
+            case MemberModel::TYPE_ORDINARY:
+                $member->setIsStudying(true);
+                $member->setMembershipEndsOn(null);
+                break;
+            case MemberModel::TYPE_EXTERNAL:
+                $member->setIsStudying(true);
+                $member->setMembershipEndsOn($expiration);
+                break;
+            case MemberModel::TYPE_GRADUATE:
+                $member->setIsStudying(false);
+                // This is a weird situation, as such define the expiration of the membership to be super early. Actual
+                // value will have to be edited manually.
+                $membershipEndsOn = clone $expiration;
+                $membershipEndsOn->setDate(1, 1, 1);
+                $member->setMembershipEndsOn($membershipEndsOn);
+                break;
+            case MemberModel::TYPE_HONORARY:
+                $member->setIsStudying(false);
+                $member->setMembershipEndsOn(null);
+                // infinity (1000 is close enough, right?)
+                $expirationYear += 1000;
+                break;
+        }
+
+        $expiration->setDate($expirationYear, 7, 1);
+        $member->setExpiration($expiration);
+        $member->setGeneration($generationYear);
 
         // add mailing lists
         foreach ($form->getLists() as $list) {
@@ -280,7 +321,8 @@ class Member extends AbstractService
     public function getProspectiveMember($id)
     {
         return array(
-            'member' => $this->getProspectiveMemberMapper()->find($id)
+            'member' => $this->getProspectiveMemberMapper()->find($id),
+            'form' => $this->getServiceManager()->get('database_form_membertype')
         );
     }
 
@@ -365,13 +407,18 @@ class Member extends AbstractService
         foreach ($member->getAddresses() as $address) {
             $this->getMemberMapper()->removeAddress($address);
         }
+
+        $date = new \DateTime('0001-01-01 00:00:00');
+
         $member->setEmail('');
         $member->setGender(MemberModel::GENDER_OTHER);
         $member->setGeneration(0);
-        $member->setTuenumber(null);
+        $member->setTueUsername(null);
         $member->setStudy(null);
         $member->setChangedOn(new \DateTime());
-        $member->setBirth(new \DateTime('0001-01-01 00:00:00'));
+        $member->setMembershipEndsOn($date);
+        $member->setExpiration($date);
+        $member->setBirth($date);
         $member->setPaid(0);
         $member->setIban(null);
         $member->setSupremum('optout');
@@ -400,6 +447,11 @@ class Member extends AbstractService
 
         $member = $form->getData();
 
+        // update changed on date
+        $date = new \DateTime();
+        $date->setTime(0, 0);
+        $member->setChangedOn($date);
+
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
@@ -413,11 +465,21 @@ class Member extends AbstractService
      * @param array $data
      * @param int $lidnr member to edit
      *
-     * @return MemberModel
+     * @return MemberModel|null
      */
     public function membership($data, $lidnr)
     {
-        $form = $this->getMemberTypeForm($lidnr)['form'];
+        $form = $this->getMemberTypeForm($lidnr);
+        // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
+        /** @var MemberModel $member */
+        $member = $form['member'];
+        $form = $form['form'];
+
+        // It is not possible to have another membership type after being an honorary member and there does not exist a
+        // good transition to a different membership type (because of the dates/expiration etc.).
+        if (MemberModel::TYPE_HONORARY === $member->getType()) {
+            throw new \RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
+        }
 
         $form->setData($data);
 
@@ -425,20 +487,91 @@ class Member extends AbstractService
             return null;
         }
 
-        $member = $form->getData();
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $data = $form->getData();
 
-        // update changed on date, always changes the previous first of july
+        // update changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
-        if ($date->format('m') >= 7) {
-            $year = $date->format('Y');
-        } else {
-            $year = $date->format('Y') - 1;
-        }
-        $date->setDate($year, 7, 1);
         $member->setChangedOn($date);
 
+        // update expiration and 'membership ends on' date (should become effective at the end of the current
+        // association year).
+        $expiration = clone $date;
+
+        if ($expiration->format('m') >= 7) {
+            $year = (int) $expiration->format('Y') + 2;
+        } else {
+            $year = (int) $expiration->format('Y') + 1;
+        }
+
+        switch ($data['type']) {
+            case MemberModel::TYPE_ORDINARY:
+                $member->setIsStudying(true);
+                $member->setMembershipEndsOn(null);
+                $member->setType(MemberModel::TYPE_ORDINARY);
+                $year -= 1;
+                break;
+            case MemberModel::TYPE_EXTERNAL:
+                $member->setIsStudying(true);
+                $membershipEndsOn = clone $expiration;
+                $membershipEndsOn->setDate($year - 1, 7, 1);
+                $member->setMembershipEndsOn($membershipEndsOn);
+                break;
+            case MemberModel::TYPE_GRADUATE:
+                $member->setIsStudying(false);
+                $membershipEndsOn = clone $expiration;
+                $membershipEndsOn->setDate($year - 1, 7, 1);
+                $member->setMembershipEndsOn($membershipEndsOn);
+                break;
+            case MemberModel::TYPE_HONORARY:
+                $member->setIsStudying(false);
+                // infinity (1000 is close enough, right?)
+                $year += 1000;
+                $member->setMembershipEndsOn(null);
+                // Directly apply the honorary membership type.
+                $member->setType(MemberModel::TYPE_HONORARY);
+                break;
+        }
+
+        // At the end of the current association year.
+        $expiration->setDate($year, 7, 1);
+        $member->setExpiration($expiration);
+
+        $this->getMemberMapper()->persist($member);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+
+        return $member;
+    }
+
+    /**
+     * @param array $data
+     * @param int $lidnr
+     *
+     * @return MemberModel|null
+     */
+    public function expiration($data, $lidnr)
+    {
+        $form = $this->getMemberExpirationForm($lidnr);
+        // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
+        $member = $form['member'];
+        $form = $form['form'];
+
+        $form->setData($data);
+
+        if (!$form->isValid()) {
+            return null;
+        }
+
         $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+
+        // Make new expiration from previous expiration, but always make sure it is the end of the association year.
+        $newExpiration = clone $member->getExpiration();
+        $year = (int) $newExpiration->format('Y') + 1;
+        $newExpiration->setDate($year, 7, 1);
+
+        $member->setExpiration($newExpiration);
+
         $this->getMemberMapper()->persist($member);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
@@ -590,6 +723,21 @@ class Member extends AbstractService
     }
 
     /**
+     * Get the member expiration form.
+     *
+     * @param int $lidnr
+     *
+     * @return array
+     */
+    public function getMemberExpirationForm($lidnr)
+    {
+        return array(
+            'form' => $this->getServiceManager()->get('database_form_memberexpiration'),
+            'member' => $this->getMember($lidnr)['member']
+        );
+    }
+
+    /**
      * Get the member type form.
      *
      * @param int $lidnr
@@ -598,12 +746,9 @@ class Member extends AbstractService
      */
     public function getMemberTypeForm($lidnr)
     {
-        $form = $this->getServiceManager()->get('database_form_membertype');
-        $member = $this->getMember($lidnr);
-        $form->bind($member['member']);
         return array(
-            'member' => $member['member'],
-            'form' => $form
+            'member' => $this->getMember($lidnr)['member'],
+            'form' => $this->getServiceManager()->get('database_form_membertype')
         );
     }
 

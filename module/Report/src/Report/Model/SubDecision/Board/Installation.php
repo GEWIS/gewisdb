@@ -26,8 +26,8 @@ class Installation extends SubDecision
      * Member.
      *
      * Note that only members that are older than 18 years can be board members.
-     * Also, honorary, external and extraordinary members cannot be board members.
-     * (See the Statuten, Art. 13 Lid 2.
+     * Also, honorary members cannot be board members.
+     * (See the Statuten, Art. 13A Lid 2.
      *
      * @todo Inversed relation
      *

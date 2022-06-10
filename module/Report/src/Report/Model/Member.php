@@ -18,9 +18,8 @@ class Member
     const GENDER_OTHER = 'o';
 
     const TYPE_ORDINARY = 'ordinary';
-    const TYPE_PROLONGED = 'prolonged';
     const TYPE_EXTERNAL = 'external';
-    const TYPE_EXTRAORDINARY = 'extraordinary';
+    const TYPE_GRADUATE = 'graduate';
     const TYPE_HONORARY = 'honorary';
 
     /**
@@ -93,16 +92,13 @@ class Member
      * This can be one of the following, as defined by the GEWIS statuten:
      *
      * - ordinary
-     * - prolonged
      * - external
-     * - extraordinary
+     * - graduate
      * - honorary
      *
-     * You can find the GEWIS Statuten here:
+     * You can find the GEWIS statuten here: https://gewis.nl/vereniging/statuten/statuten.
      *
-     * http://gewis.nl/vereniging/statuten/statuten.php
-     *
-     * Zie artikel 7 lid 1 en 2.
+     * See artikel 7.
      *
      * @ORM\Column(type="string")
      */
@@ -116,6 +112,15 @@ class Member
     protected $changedOn;
 
     /**
+     * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
+     * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
+     * still meets the requirements as set forth in the bylaws and internal regulations.
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $membershipEndsOn;
+
+    /**
      * Member birth date.
      *
      * @ORM\Column(type="date")
@@ -123,7 +128,8 @@ class Member
     protected $birth;
 
     /**
-     * Member expiration date.
+     * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
+     * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
      *
      * @ORM\Column(type="date")
      */
@@ -212,9 +218,8 @@ class Member
     {
         return array(
             self::TYPE_ORDINARY,
-            self::TYPE_PROLONGED,
             self::TYPE_EXTERNAL,
-            self::TYPE_EXTRAORDINARY,
+            self::TYPE_GRADUATE,
             self::TYPE_HONORARY
         );
     }
@@ -442,8 +447,6 @@ class Member
     /**
      * Get the expiration date.
      *
-     * The information comes from the statuten and HR.
-     *
      * @return \DateTime
      */
     public function getExpiration()
@@ -499,6 +502,26 @@ class Member
     public function setChangedOn($changedOn)
     {
         $this->changedOn = $changedOn;
+    }
+
+    /**
+     * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @return \DateTime|null
+     */
+    public function getMembershipEndsOn()
+    {
+        return $this->membershipEndsOn;
+    }
+
+    /**
+     * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     *
+     * @param \DateTime|null $membershipEndsOn
+     */
+    public function setMembershipEndsOn($membershipEndsOn)
+    {
+        $this->membershipEndsOn = $membershipEndsOn;
     }
 
     /**
@@ -587,6 +610,7 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
+            'membershipEndsOn' => (null !== $this->getMembershipEndsOn()) ? $this->getMembershipEndsOn()->format('l j F Y') : null,
             'expiration' => $this->getExpiration()->format('l j F Y')
         );
     }
