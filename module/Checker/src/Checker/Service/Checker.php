@@ -253,6 +253,7 @@ class Checker extends AbstractService
                             // The member is no longer studying at the TU/e.
                             $member->setChangedOn(new \DateTime());
                             $member->setIsStudying(false);
+                            $member->setMembershipEndsOn($exp);
                         } else {
                             // The member is still studying at the TU/e. Determine whether the member is a student at
                             // the Department of Mathematics and Computer Science or another department. If the member
