@@ -241,11 +241,15 @@ class Member extends AbstractService
 
         switch ($member->getType()) {
             case MemberModel::TYPE_ORDINARY:
-            case MemberModel::TYPE_EXTERNAL:
                 $member->setIsStudying(true);
                 $member->setMembershipEndsOn(null);
                 break;
+            case MemberModel::TYPE_EXTERNAL:
+                $member->setIsStudying(true);
+                $member->setMembershipEndsOn($expiration);
+                break;
             case MemberModel::TYPE_GRADUATE:
+                $member->setIsStudying(false);
                 // This is a weird situation, as such define the expiration of the membership to be super early. Actual
                 // value will have to be edited manually.
                 $membershipEndsOn = clone $expiration;
@@ -253,6 +257,7 @@ class Member extends AbstractService
                 $member->setMembershipEndsOn($membershipEndsOn);
                 break;
             case MemberModel::TYPE_HONORARY:
+                $member->setIsStudying(false);
                 $member->setMembershipEndsOn(null);
                 // infinity (1000 is close enough, right?)
                 $expirationYear += 1000;
@@ -502,9 +507,16 @@ class Member extends AbstractService
 
         switch ($data['type']) {
             case MemberModel::TYPE_ORDINARY:
-            case MemberModel::TYPE_EXTERNAL:
                 $member->setIsStudying(true);
                 $member->setMembershipEndsOn(null);
+                $member->setType(MemberModel::TYPE_ORDINARY);
+                $year -= 1;
+                break;
+            case MemberModel::TYPE_EXTERNAL:
+                $member->setIsStudying(true);
+                $membershipEndsOn = clone $expiration;
+                $membershipEndsOn->setDate($year - 1, 7, 1);
+                $member->setMembershipEndsOn($membershipEndsOn);
                 break;
             case MemberModel::TYPE_GRADUATE:
                 $member->setIsStudying(false);

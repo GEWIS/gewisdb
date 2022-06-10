@@ -272,6 +272,7 @@ class Checker extends AbstractService
             } else if (404 === $response->getStatusCode()) {
                 // The member cannot be found in the TU/e student administration database.
                 $member->setChangedOn(new \DateTime());
+                $member->setIsStudying(false);
                 $member->setMembershipEndsOn($exp);
                 $member->setLastCheckedOn(new \DateTime());
             }
@@ -326,6 +327,10 @@ class Checker extends AbstractService
                     // member is still studying.
                     if ($member->getIsStudying()) {
                         $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
+
+                        // External memberships should run till the end of the next association year (which is actually
+                        // the same date as the expiration).
+                        $member->setMembershipEndsOn($exp);
                     } else {
                         $member->setType(\Database\Model\Member::TYPE_GRADUATE);
                     }
