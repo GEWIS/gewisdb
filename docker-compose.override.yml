@@ -1,44 +1,41 @@
-version: '3'
+version: '3.5'
+
 services:
-  web:
-#     Uncomment for a development setup with mounted codebase:
-#      build: docker
-#      volumes:
-#      - .:/code
-    environment:
-      CHECKER_REPORT_MAIL: "mail@example.org"
-      CHECKER_MEMBERSHIP_API_ENDPOINT: "https://tue-lookup.gewis.nl/user/"
-      CHECKER_MEMBERSHIP_API_KEY: "c2VjcmV0"
-      CHECKER_MEMBERSHIP_API_MAX_TOTAL_REQUESTS: 200
-      CHECKER_MEMBERSHIP_API_MAX_MANUAL_REQUESTS: 20
-      DOCTRINE_DEFAULT_HOST: "postgres"
-      DOCTRINE_DEFAULT_PORT: "5432"
-      DOCTRINE_DEFAULT_USER: "gewisdb"
-      DOCTRINE_DEFAULT_PASSWORD: "gewisdb"
-      DOCTRINE_DEFAULT_DATABASE: "gewisdb"
-      DOCTRINE_IMPORT_HOST: "postgres"
-      DOCTRINE_IMPORT_PORT: "5432"
-      DOCTRINE_IMPORT_USER: "gewisdb"
-      DOCTRINE_IMPORT_PASSWORD: "gewisdb"
-      DOCTRINE_IMPORT_DATABASE: "gewisdb_old"
-      DOCTRINE_REPORT_HOST: "postgres"
-      DOCTRINE_REPORT_PORT: "5432"
-      DOCTRINE_REPORT_USER: "gewisdb"
-      DOCTRINE_REPORT_PASSWORD: "gewisdb"
-      DOCTRINE_REPORT_DATABASE: "gewisdb_report"
-      EMAIL_TRANSPORT: "File"
-      EMAIL_OPTIONS: "{\"path:\" \"data/mail/\"}"
-      EMAIL_FROM: "secr@gewis.nl"
-      EMAIL_TO_REPORT_ERROR: "databaseisstuk@gewis.nl"
-      EMAIL_TO_SUBSCRIPTION: "secr@gewis.nl"
-  nginx:
-    ports:
-      - "80:80"
-  admin:
-    image: dockage/phppgadmin:latest
-    ports:
-      - "8000:80"
-    environment:
-      PHP_PG_ADMIN_SERVER_HOST: postgres
-    networks:
-      - gewisdb
+    postgres:
+        image: postgres:9.6-alpine
+        env_file:
+            - .env
+        volumes:
+            - gewisdb_postgres:/var/lib/postgres:rw
+        networks:
+            - gewisdb_network
+        ports:
+            - "5432:5432"
+        restart: unless-stopped
+    myadmin:
+        image: dockage/phppgadmin:latest
+        env_file:
+            - .env
+        depends_on:
+            - postgres
+        networks:
+            - gewisdb_network
+        ports:
+            - "8080:80"
+        restart: unless-stopped
+    nginx:
+        build: docker/nginx
+        ports:
+            - "80:9200"
+            - "81:9201"
+            - "82:9202"
+    web:
+        image: web.docker-registry.gewis.nl/gewisdb_web:development
+        build:
+            dockerfile: docker/web/development/Dockerfile
+            context: .
+        depends_on:
+            - postgres
+
+volumes:
+    gewisdb_postgres:
