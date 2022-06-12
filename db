@@ -10,7 +10,7 @@ if (php_sapi_name() != 'cli') {
 chdir(__DIR__);
 
 // setup autoloading
-require 'init_autoloader.php';
+require 'bootstrap.php';
 
 // run application
 $application = Zend\Mvc\Application::init(require 'config/application.config.php');

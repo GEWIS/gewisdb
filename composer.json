@@ -9,12 +9,60 @@
     ],
     "homepage": "http://gewis.nl/",
     "require": {
-        "php": ">=5.4.0",
+        "php": "^5.6.0",
         "ext-intl": "*",
-        "zendframework/zendframework": "2.4.*",
-        "doctrine/doctrine-orm-module": "0.*",
-        "zendframework/zend-developer-tools": "~1.0.0"
+        "ext-pdo_pgsql": "*",
+        "ext-pgsql": "*",
+        "ext-zend-opcache": "*",
+        "ext-zip": "^1.12.0",
+        "zendframework/zend-authentication": "^2.4.13",
+        "zendframework/zend-config": "^2.4.13",
+        "zendframework/zend-console": "^2.4.13",
+        "zendframework/zend-crypt": "^2.4.13",
+        "zendframework/zend-eventmanager": "^2.4.13",
+        "zendframework/zend-form": "^2.4.13",
+        "zendframework/zend-http": "^2.4.13",
+        "zendframework/zend-i18n": "^2.4.13",
+        "zendframework/zend-log": "^2.4.13",
+        "zendframework/zend-inputfilter": "^2.4.13",
+        "zendframework/zend-mail": "^2.4.13",
+        "zendframework/zend-mime": "^2.4.13",
+        "zendframework/zend-modulemanager": "^2.4.13",
+        "zendframework/zend-mvc": "^2.4.13",
+        "zendframework/zend-progressbar": "^2.4.13",
+        "zendframework/zend-session": "^2.4.13",
+        "zendframework/zend-serializer": "^2.4.13",
+        "zendframework/zend-servicemanager": "^2.4.13",
+        "zendframework/zend-view": "^2.4.13",
+        "doctrine/common": "^2.7.3",
+        "doctrine/dbal": "^2.5.13",
+        "doctrine/orm": "^2.5.14",
+        "doctrine/doctrine-orm-module": "^0.10.0",
+        "cweagans/composer-patches": "^1.7.2"
     },
+    "require-dev": {
+        "ext-pdo_mysql": "*",
+        "zendframework/zend-developer-tools": "^1.0.0",
+        "squizlabs/php_codesniffer": "^3.6.2",
+        "friendsofphp/php-cs-fixer": "^2.19.3"
+    },
+    "config": {
+        "preferred-install": {
+            "doctrine/orm": "source",
+            "*": "dist"
+        },
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "laminas/laminas-dependency-plugin": true,
+            "cweagans/composer-patches": true,
+            "laminas/laminas-component-installer": true,
+            "phpstan/extension-installer": true,
+            "icanhazstring/composer-unused": true
+        },
+        "discard-changes" : true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "User\\": "module/User/src"
