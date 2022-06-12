@@ -3,14 +3,12 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision;
-
 use Database\Model\SubDecision\Installation;
 use Database\Model\SubDecision\Discharge;
 use Database\Model\SubDecision\Abrogation;
 
 class Abolish extends AbstractDecision
 {
-
     /**
      * abolish hydration
      *

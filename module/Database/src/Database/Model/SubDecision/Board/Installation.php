@@ -3,7 +3,6 @@
 namespace Database\Model\SubDecision\Board;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
 use Database\Model\Member;
 
@@ -14,7 +13,6 @@ use Database\Model\Member;
  */
 class Installation extends SubDecision
 {
-
     /**
      * Function in the board.
      *

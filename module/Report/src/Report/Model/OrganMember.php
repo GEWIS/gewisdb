@@ -3,7 +3,6 @@
 namespace Report\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Report\Model\SubDecision\Installation;
 
 /**
@@ -15,7 +14,6 @@ use Report\Model\SubDecision\Installation;
  */
 class OrganMember
 {
-
     /**
      * Id.
      *

@@ -4,12 +4,10 @@ namespace Database\Form\Fieldset;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
-
 use Database\Model\SubDecision\Installation as InstallationModel;
 
 class Installation extends Fieldset implements InputFilterProviderInterface
 {
-
     public function __construct(Member $member)
     {
         parent::__construct('installation');

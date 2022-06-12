@@ -3,7 +3,6 @@
 namespace Database\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
 use Database\Model\Decision;
 
@@ -25,7 +24,6 @@ use Database\Model\Decision;
  */
 class Destroy extends SubDecision
 {
-
     /**
      * Reference to the destruction of a decision.
      *

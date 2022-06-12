@@ -8,7 +8,6 @@ use Database\Model\SubDecision\Installation as InstallationDecision;
 
 class Foundation extends AbstractDecision
 {
-
     /**
      * Budget hydration
      *

@@ -6,7 +6,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class ExportController extends AbstractActionController
 {
-
     /**
      * Export to the old database.
      *

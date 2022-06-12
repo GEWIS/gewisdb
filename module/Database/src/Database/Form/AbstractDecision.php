@@ -3,12 +3,10 @@
 namespace Database\Form;
 
 use Zend\Form\Form;
-
 use Database\Model\Meeting;
 
 abstract class AbstractDecision extends Form
 {
-
     public function __construct(Fieldset\Meeting $meeting)
     {
         parent::__construct();

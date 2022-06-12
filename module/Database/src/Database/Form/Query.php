@@ -6,10 +6,8 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class Query extends Form
-    implements InputFilterProviderInterface
+class Query extends Form implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct();

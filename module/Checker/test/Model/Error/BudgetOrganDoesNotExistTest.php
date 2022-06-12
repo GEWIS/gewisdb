@@ -1,12 +1,14 @@
 <?php
+
 namespace CheckerTest\Model\Error;
 
-use \Checker\Model\Error\BudgetOrganDoesNotExist as BudgetOrganDoesNotExistError;
+use Checker\Model\Error\BudgetOrganDoesNotExist as BudgetOrganDoesNotExistError;
 use Database\Model\SubDecision\Budget;
 
 class BudgetOrganDoesNotExistTest extends \CheckerTest\Model\Error
 {
-    protected function create() {
+    protected function create()
+    {
         $budget = new Budget();
         $budget->setDecision($this->getDecision());
         $budget->setFoundation($this->getFoundation());
@@ -19,4 +21,4 @@ class BudgetOrganDoesNotExistTest extends \CheckerTest\Model\Error
         $error = $this->create();
         $this->assertInstanceOf('Database\Model\SubDecision\Foundation', $error->getFoundation());
     }
-} 
+}

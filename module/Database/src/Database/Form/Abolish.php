@@ -6,7 +6,6 @@ use Zend\InputFilter\InputFilter;
 
 class Abolish extends AbstractDecision
 {
-
     public function __construct(Fieldset\Meeting $meeting, Fieldset\SubDecision $subdecision)
     {
         parent::__construct($meeting);

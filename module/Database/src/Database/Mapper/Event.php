@@ -11,7 +11,6 @@ use Doctrine\ORM\UnitOfWork;
  */
 class Event
 {
-
     /**
      * Doctrine entity manager.
      *
@@ -50,5 +49,4 @@ class Event
     {
         return $this->em->getRepository('Database\Model\Event');
     }
-
 }

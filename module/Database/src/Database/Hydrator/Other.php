@@ -7,7 +7,6 @@ use Database\Model\SubDecision\Other as OtherDecision;
 
 class Other extends AbstractDecision
 {
-
     /**
      * Budget hydration
      *

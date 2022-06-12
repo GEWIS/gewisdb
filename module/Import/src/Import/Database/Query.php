@@ -10,7 +10,6 @@ use Doctrine\DBAL\Connection;
  */
 class Query
 {
-
     /**
      * Connection.
      *

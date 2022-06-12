@@ -3,7 +3,6 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Member as DbMember;
 use Database\Model\Address as DbAddress;
 use Report\Model\Member as ReportMember;
@@ -14,7 +13,6 @@ use Zend\ProgressBar\ProgressBar;
 
 class Member extends AbstractService
 {
-
     /**
      * Export members.
      */
@@ -89,14 +87,12 @@ class Member extends AbstractService
         $reportLists = array_map(function ($list) {
             return $list->getName();
         },
-            $reportMember->getLists()->toArray()
-        );
+            $reportMember->getLists()->toArray());
 
         $lists = array_map(function ($list) {
             return $list->getName();
         },
-            $member->getLists()->toArray()
-        );
+            $member->getLists()->toArray());
 
         foreach (array_diff($lists, $reportLists) as $list) {
             $reportList = $reportListRepo->find($list);

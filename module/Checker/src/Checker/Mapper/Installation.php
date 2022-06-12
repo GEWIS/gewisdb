@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Mapper;
 
 use Database\Model\Event as EventModel;
@@ -8,6 +9,7 @@ use Doctrine\ORM\UnitOfWork;
 class Installation
 {
     use Filter;
+
     /**
      * Doctrine entity manager.
      *

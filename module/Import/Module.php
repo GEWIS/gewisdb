@@ -1,9 +1,9 @@
 <?php
+
 namespace Import;
 
 class Module
 {
-
     /**
      * Get the autoloader configuration.
      *

@@ -3,14 +3,11 @@
 namespace Export\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Meeting as MeetingModel;
-
 use Database\Model\SubDecision;
 
 class Meeting extends AbstractService
 {
-
     /**
      * Export meetings.
      */
@@ -26,7 +23,6 @@ class Meeting extends AbstractService
         );
 
         foreach ($mapper->findAll(false) as $meeting) {
-
             $type = $types[strtolower($meeting->getType())];
 
             $data = array(
@@ -123,48 +119,48 @@ class Meeting extends AbstractService
             $data['functieid'] = $this->getFunctionId($subdecision);
             $data['orgaanid'] = $this->getOrganId($subdecision->getFoundation());
             $data['lidnummer'] = $subdecision->getMember()->getLidnr();
-        } else if ($subdecision instanceof SubDecision\Discharge) {
+        } elseif ($subdecision instanceof SubDecision\Discharge) {
             $data['besluittypeid'] = 2;
 
             $data['functieid'] = $this->getFunctionId($subdecision->getInstallation());
             $data['orgaanid'] = $this->getOrganId($subdecision->getInstallation()->getFoundation());
             $data['lidnummer'] = $subdecision->getInstallation()->getMember()->getLidnr();
-        } else if ($subdecision instanceof SubDecision\Foundation) {
+        } elseif ($subdecision instanceof SubDecision\Foundation) {
             $data['besluittypeid'] = 3;
 
             $data['orgaanid'] = $this->getOrganId($subdecision);
-        } else if ($subdecision instanceof SubDecision\Abrogation) {
+        } elseif ($subdecision instanceof SubDecision\Abrogation) {
             $data['besluittypeid'] = 4;
 
             $data['orgaanid'] = $this->getOrganId($subdecision->getFoundation());
-        } else if ($subdecision instanceof SubDecision\Reckoning) {
+        } elseif ($subdecision instanceof SubDecision\Reckoning) {
             $data['besluittypeid'] = 6;
 
             if (null !== $subdecision->getAuthor()) {
                 $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
             }
-        } else if ($subdecision instanceof SubDecision\Budget) {
+        } elseif ($subdecision instanceof SubDecision\Budget) {
             $data['besluittypeid'] = 5;
 
             if (null !== $subdecision->getAuthor()) {
                 $data['lidnummer'] = $subdecision->getAuthor()->getLidnr();
             }
-        } else if ($subdecision instanceof SubDecision\Board\Installation) {
+        } elseif ($subdecision instanceof SubDecision\Board\Installation) {
             $data['besluittypeid'] = 7;
 
             $data['lidnummer'] = $subdecision->getMember()->getLidnr();
-        } else if ($subdecision instanceof SubDecision\Board\Release) {
+        } elseif ($subdecision instanceof SubDecision\Board\Release) {
             $data['besluittypeid'] = 7;
 
             $data['lidnummer'] = $subdecision->getInstallation()->getMember()->getLidnr();
-        } else if ($subdecision instanceof SubDecision\Board\Discharge) {
+        } elseif ($subdecision instanceof SubDecision\Board\Discharge) {
             $data['besluittypeid'] = 7;
 
             $data['lidnummer'] = $subdecision->getInstallation()->getMember()->getLidnr();
-        } else if ($subdecision instanceof SubDecision\Other) {
+        } elseif ($subdecision instanceof SubDecision\Other) {
             $data['besluittypeid'] = 7;
             // nothing special
-        } else if ($subdecision instanceof SubDecision\Destroy){
+        } elseif ($subdecision instanceof SubDecision\Destroy) {
             $data['besluittypeid'] = 7;
             // nothing special
         }
@@ -176,8 +172,15 @@ class Meeting extends AbstractService
 
         $query = $this->getSubdecisionQuery();
 
-        if ($query->checkSubdecisionExists($type, $data['vergadernr'], $data['puntnr'],
-            $data['besluitnr'], $data['subbesluitnr'])) {
+        if (
+            $query->checkSubdecisionExists(
+                $type,
+                $data['vergadernr'],
+                $data['puntnr'],
+                $data['besluitnr'],
+                $data['subbesluitnr']
+            )
+        ) {
             $query->updateSubdecision($data);
         } else {
             $query->createSubdecision($data);
@@ -207,23 +210,27 @@ class Meeting extends AbstractService
 
         // first determine all parameters
         switch ($organ->getOrganType()) {
-        case SubDecision\Foundation::ORGAN_TYPE_COMMITTEE:
-            $type = 2;
-            break;
-        case SubDecision\Foundation::ORGAN_TYPE_AVC:
-        case SubDecision\Foundation::ORGAN_TYPE_KKK:
-        case SubDecision\Foundation::ORGAN_TYPE_RVA:
-        case SubDecision\Foundation::ORGAN_TYPE_AVW:
-            $type = 1;
-            break;
-        case SubDecision\Foundation::ORGAN_TYPE_FRATERNITY:
-            $type = 5;
-            break;
+            case SubDecision\Foundation::ORGAN_TYPE_COMMITTEE:
+                $type = 2;
+                break;
+            case SubDecision\Foundation::ORGAN_TYPE_AVC:
+            case SubDecision\Foundation::ORGAN_TYPE_KKK:
+            case SubDecision\Foundation::ORGAN_TYPE_RVA:
+            case SubDecision\Foundation::ORGAN_TYPE_AVW:
+                $type = 1;
+                break;
+            case SubDecision\Foundation::ORGAN_TYPE_FRATERNITY:
+                $type = 5;
+                break;
         }
         $year = $organ->getDecision()->getMeeting()->getDate()->format('Y');
 
-        return $query->checkOrganExists($type, $organ->getAbbr(),
-            $organ->getName(), $year);
+        return $query->checkOrganExists(
+            $type,
+            $organ->getAbbr(),
+            $organ->getName(),
+            $year
+        );
     }
 
     /**

@@ -7,7 +7,6 @@ use Database\Model\SubDecision;
 
 class Other extends AbstractDecision
 {
-
     public function __construct(Fieldset\Meeting $meeting)
     {
         parent::__construct($meeting);

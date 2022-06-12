@@ -7,7 +7,6 @@ use Zend\InputFilter\InputFilterProviderInterface;
 
 class Member extends Fieldset implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct('member');

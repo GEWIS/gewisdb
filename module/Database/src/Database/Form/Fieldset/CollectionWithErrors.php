@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: stefan
@@ -7,7 +8,6 @@
  */
 
 namespace Database\Form\Fieldset;
-
 
 use Zend\Form\Element\Collection;
 
@@ -26,7 +26,8 @@ class CollectionWithErrors extends Collection
      * @param array|\Traversable $messages
      * @return $this|\Zend\Form\Element|\Zend\Form\ElementInterface|\Zend\Form\FieldsetInterface
      */
-    public function setMessages($messages) {
+    public function setMessages($messages)
+    {
         // Get the correct parent class
         $collection = get_parent_class($this);
         // this is the one that has got the problem
@@ -45,7 +46,8 @@ class CollectionWithErrors extends Collection
      *
      * @return array Messages set on this ellement
      */
-    public function getMessages() {
+    public function getMessages()
+    {
         // Get the correct parent class
         $collection = get_parent_class($this);
         // this is the one that has got the problem
@@ -57,4 +59,4 @@ class CollectionWithErrors extends Collection
         $reflectionMethod = new \ReflectionMethod($element, 'getMessages');
         return $reflectionMethod->invoke($this);
     }
-} 
+}

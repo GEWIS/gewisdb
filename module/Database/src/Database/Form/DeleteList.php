@@ -8,7 +8,6 @@ use Zend\InputFilter\InputFilterProviderInterface;
 
 class DeleteList extends Form implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct();

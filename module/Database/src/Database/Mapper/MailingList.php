@@ -11,7 +11,6 @@ use Doctrine\ORM\UnitOfWork;
  */
 class MailingList
 {
-
     /**
      * Doctrine entity manager.
      *
@@ -106,5 +105,4 @@ class MailingList
     {
         return $this->em->getRepository('Database\Model\MailingList');
     }
-
 }

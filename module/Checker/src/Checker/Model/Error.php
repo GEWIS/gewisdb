@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Model;
 
 /**
@@ -11,7 +12,6 @@ namespace Checker\Model;
  */
 abstract class Error
 {
-
     /**
      * @var \Database\Model\Meeting Meeting for which the error is detected
      */

@@ -3,7 +3,6 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Report\Model\Organ as ReportOrgan;
 use Report\Model\OrganMember;
 use Report\Model\SubDecision;
@@ -14,7 +13,6 @@ use Zend\ProgressBar\ProgressBar;
 
 class Organ extends AbstractService
 {
-
     /**
      * Export organ info.
      */
@@ -128,8 +126,9 @@ class Organ extends AbstractService
             $organMember->setOrgan($repOrgan);
             $organMember->setMember($ref->getMember());
             $function = $ref->getFunction();
-            if (null === $function)
+            if (null === $function) {
                 $function = 'Lid';
+            }
             $organMember->setFunction($function);
             $organMember->setInstallDate($ref->getDecision()->getMeeting()->getDate());
         }
@@ -160,5 +159,4 @@ class Organ extends AbstractService
         $organMember->setDischargeDate($ref->getDecision()->getMeeting()->getDate());
         $em->persist($organMember);
     }
-
 }

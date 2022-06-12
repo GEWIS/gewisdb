@@ -6,12 +6,10 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\I18n\Translator\TranslatorInterface as Translator;
-
 use Database\Model\Address;
 
 class Member extends Form implements InputFilterProviderInterface
 {
-
     /**
      * Lists
      */

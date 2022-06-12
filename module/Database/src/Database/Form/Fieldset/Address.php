@@ -5,13 +5,10 @@ namespace Database\Form\Fieldset;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\I18n\Translator\TranslatorInterface as Translator;
-
 use Database\Model\Address as AddressModel;
 
-class Address extends Fieldset
-    implements InputFilterProviderInterface
+class Address extends Fieldset implements InputFilterProviderInterface
 {
-
     public function __construct(Translator $translator)
     {
         parent::__construct('address');

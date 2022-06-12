@@ -3,13 +3,11 @@
 namespace Import\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Member as MemberModel;
 use Database\Model\Address;
 
 class Member extends AbstractService
 {
-
     /**
      * Get members.
      *

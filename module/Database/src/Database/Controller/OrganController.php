@@ -8,7 +8,6 @@ use Zend\View\Model\JsonModel;
 
 class OrganController extends AbstractActionController
 {
-
     /**
      * Index action, for organ search.
      */

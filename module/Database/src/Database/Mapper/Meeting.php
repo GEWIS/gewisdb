@@ -8,7 +8,6 @@ use Doctrine\ORM\UnitOfWork;
 
 class Meeting
 {
-
     /**
      * Doctrine entity manager.
      *
@@ -305,5 +304,4 @@ class Meeting
     {
         return $this->em->getRepository('Database\Model\Meeting');
     }
-
 }

@@ -11,7 +11,6 @@ use Doctrine\ORM\UnitOfWork;
  */
 class InstallationFunction
 {
-
     /**
      * Doctrine entity manager.
      *
@@ -59,5 +58,4 @@ class InstallationFunction
     {
         return $this->em->getRepository('Database\Model\InstallationFunction');
     }
-
 }

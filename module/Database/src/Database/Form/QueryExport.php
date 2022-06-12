@@ -2,10 +2,8 @@
 
 namespace Database\Form;
 
-
 class QueryExport extends Query
 {
-
     public function __construct()
     {
         parent::__construct();

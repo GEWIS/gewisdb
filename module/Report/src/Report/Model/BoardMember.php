@@ -3,7 +3,6 @@
 namespace Report\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Report\Model\SubDecision\Board\Installation;
 
 /**
@@ -15,7 +14,6 @@ use Report\Model\SubDecision\Board\Installation;
  */
 class BoardMember
 {
-
     /**
      * Id.
      *
@@ -178,5 +176,4 @@ class BoardMember
     {
         $this->dischargeDate = $dischargeDate;
     }
-
 }

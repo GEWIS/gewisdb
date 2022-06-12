@@ -11,7 +11,6 @@ use Doctrine\ORM\UnitOfWork;
  */
 class SavedQuery
 {
-
     /**
      * Doctrine entity manager.
      *
@@ -69,5 +68,4 @@ class SavedQuery
     {
         return $this->em->getRepository('Database\Model\SavedQuery');
     }
-
 }

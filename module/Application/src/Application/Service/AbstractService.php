@@ -8,12 +8,10 @@ use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 
-abstract class AbstractService
-    implements
+abstract class AbstractService implements
     ServiceManagerAwareInterface,
     EventManagerAwareInterface
 {
-
     /**
      * Event manager
      *

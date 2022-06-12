@@ -1,4 +1,5 @@
 <?php
+
 namespace Database;
 
 use Report\Listener\DatabaseDeletionListener;
@@ -6,7 +7,6 @@ use Report\Listener\DatabaseUpdateListener;
 
 class Module
 {
-
     /**
      * Bootstrap event.
      */

@@ -8,7 +8,6 @@ use Database\Hydrator\AbstractDecision;
 
 class Discharge extends AbstractDecision
 {
-
     /**
      * Board discharge hydration
      *

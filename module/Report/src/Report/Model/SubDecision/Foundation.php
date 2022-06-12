@@ -3,9 +3,7 @@
 namespace Report\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Report\Model\SubDecision;
 
 /**
@@ -15,7 +13,6 @@ use Report\Model\SubDecision;
  */
 class Foundation extends SubDecision
 {
-
     const ORGAN_TYPE_COMMITTEE = 'committee';
     const ORGAN_TYPE_AVC = 'avc';
     const ORGAN_TYPE_FRATERNITY = 'fraternity';

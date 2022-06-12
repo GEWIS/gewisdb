@@ -9,7 +9,6 @@ use Doctrine\ORM\UnitOfWork;
 
 class Member
 {
-
     /**
      * Doctrine entity manager.
      *
@@ -298,5 +297,4 @@ class Member
     {
         return $this->em->getRepository('Database\Model\Member');
     }
-
 }

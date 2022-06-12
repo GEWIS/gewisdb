@@ -1,9 +1,9 @@
 <?php
+
 namespace Export;
 
 class Module
 {
-
     /**
      * Get the autoloader configuration.
      *

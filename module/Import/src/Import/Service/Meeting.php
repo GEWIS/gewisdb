@@ -3,16 +3,13 @@
 namespace Import\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\SubDecision;
 use Database\Model\Decision;
 use Database\Model\Meeting as MeetingModel;
-
 use Doctrine\ORM\NoResultException;
 
 class Meeting extends AbstractService
 {
-
     /**
      * Previous found foundation decision.
      *
@@ -45,7 +42,9 @@ class Meeting extends AbstractService
     public function getMeetingDecisions($meeting)
     {
         return $this->getQuery()->fetchDecisions(
-            $meeting['vergadertypeid'], $meeting['vergadernr']);
+            $meeting['vergadertypeid'],
+            $meeting['vergadernr']
+        );
     }
 
     /**
@@ -58,8 +57,11 @@ class Meeting extends AbstractService
     public function getSubdecisions($decision)
     {
         return $this->getQuery()->fetchSubdecisions(
-            $decision['vergadertypeid'], $decision['vergadernr'],
-            $decision['puntnr'], $decision['besluitnr']);
+            $decision['vergadertypeid'],
+            $decision['vergadernr'],
+            $decision['puntnr'],
+            $decision['besluitnr']
+        );
     }
 
     /**
@@ -126,30 +128,30 @@ class Meeting extends AbstractService
             $model = null;
             // let the code get handled by the specific decision
             switch (strtolower($subdecision['besluittype'])) {
-            case 'installatie':
-                $model = $this->installationDecision($subdecision);
-                break;
-            case 'decharge':
-                $model = $this->dischargeDecision($subdecision);
-                break;
-            case 'begroting':
-                $model = $this->budgetDecision($subdecision);
-                break;
-            case 'afrekening':
-                $model = $this->reckoningDecision($subdecision);
-                break;
-            case 'oprichting':
-                $model = $this->foundationDecision($subdecision);
-                break;
-            case 'opheffen':
-                $model = $this->abrogationDecision($subdecision);
-                break;
-            case 'overige':
-                $model = $this->otherDecision($subdecision);
-                break;
-            default:
-                var_dump(strtolower($subdecision['besluittype']));
-                break;
+                case 'installatie':
+                    $model = $this->installationDecision($subdecision);
+                    break;
+                case 'decharge':
+                    $model = $this->dischargeDecision($subdecision);
+                    break;
+                case 'begroting':
+                    $model = $this->budgetDecision($subdecision);
+                    break;
+                case 'afrekening':
+                    $model = $this->reckoningDecision($subdecision);
+                    break;
+                case 'oprichting':
+                    $model = $this->foundationDecision($subdecision);
+                    break;
+                case 'opheffen':
+                    $model = $this->abrogationDecision($subdecision);
+                    break;
+                case 'overige':
+                    $model = $this->otherDecision($subdecision);
+                    break;
+                default:
+                    var_dump(strtolower($subdecision['besluittype']));
+                    break;
             }
 
             if ($model instanceof SubDecision) {
@@ -355,24 +357,24 @@ class Meeting extends AbstractService
         $foundation->setAbbr($subdecision['orgaanafk']);
 
         switch (strtolower($subdecision['orgaantype'])) {
-        case 'av-commissie':
-            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AVC);
-            break;
-        case 'dispuut':
-            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_FRATERNITY);
-            break;
-        case 'av-werkgroep':
-            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AVW);
-            break;
-        case 'kkk':
-            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_KKK);
-            break;
-        case 'rva':
-            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_RVA);
-            break;
-        default:
-            $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_COMMITTEE);
-            break;
+            case 'av-commissie':
+                $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AVC);
+                break;
+            case 'dispuut':
+                $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_FRATERNITY);
+                break;
+            case 'av-werkgroep':
+                $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_AVW);
+                break;
+            case 'kkk':
+                $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_KKK);
+                break;
+            case 'rva':
+                $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_RVA);
+                break;
+            default:
+                $foundation->setOrganType(SubDecision\Foundation::ORGAN_TYPE_COMMITTEE);
+                break;
         }
 
         // for if it is abrogated in the next subdecision
@@ -439,32 +441,32 @@ class Meeting extends AbstractService
     protected function findFunction($function)
     {
         switch (strtolower($function)) {
-        case 'voorzitter':
-            return 'Voorzitter';
+            case 'voorzitter':
+                return 'Voorzitter';
             break;
-        case 'secretaris':
-            return 'Secretaris';
+            case 'secretaris':
+                return 'Secretaris';
             break;
-        case 'penningmeester':
-            return 'Penningmeester';
+            case 'penningmeester':
+                return 'Penningmeester';
             break;
-        case 'vice-voorzitter':
-            return 'Vice-Voorzitter';
+            case 'vice-voorzitter':
+                return 'Vice-Voorzitter';
             break;
-        case 'pr-functionaris':
-            return 'PR-Functionaris';
+            case 'pr-functionaris':
+                return 'PR-Functionaris';
             break;
-        case 'onderwijs commissaris':
-            return 'Onderwijscommissaris';
+            case 'onderwijs commissaris':
+                return 'Onderwijscommissaris';
             break;
-        case 'lid':
-            return 'Lid';
+            case 'lid':
+                return 'Lid';
             break;
-        case 'inkoper':
-            return 'Inkoper';
+            case 'inkoper':
+                return 'Inkoper';
             break;
-        case 'tafelvoetbalcoordinator':
-            return 'Tafelvoetbalcoordinator';
+            case 'tafelvoetbalcoordinator':
+                return 'Tafelvoetbalcoordinator';
             break;
         }
     }
@@ -485,8 +487,9 @@ class Meeting extends AbstractService
             echo "Als er wel een lid vernoemd wordt, geef het lidnummer: ";
             try {
                 $lidnr = trim($this->getConsole()->readLine());
-                if (empty($lidnr))
+                if (empty($lidnr)) {
                     return null;
+                }
                 return $this->findMember($lidnr);
             } catch (NoResultException $e) {
                 return null;

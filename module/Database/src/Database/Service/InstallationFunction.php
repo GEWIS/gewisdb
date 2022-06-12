@@ -3,12 +3,10 @@
 namespace Database\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\InstallationFunction as FunctionModel;
 
 class InstallationFunction extends AbstractService
 {
-
     /**
      * Get all functions.
      *

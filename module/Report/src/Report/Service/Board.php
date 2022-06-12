@@ -3,13 +3,11 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Report\Model\SubDecision\Board\Installation;
 use Report\Model\BoardMember;
 
 class Board extends AbstractService
 {
-
     /**
      * Export board info.
      */

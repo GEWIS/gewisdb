@@ -12,7 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ProspectiveMember
 {
-
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
     const GENDER_OTHER = 'o';

@@ -9,7 +9,6 @@ use Doctrine\DBAL\Connection;
  */
 class SubDecision
 {
-
     /**
      * Connection.
      *

@@ -9,7 +9,6 @@ use Database\Model\Meeting;
 
 abstract class AbstractDecision implements HydratorInterface
 {
-
     /**
      * Decision hydration
      *

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Application\Doctrine\Hydrator;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as ToFix;
@@ -10,7 +9,6 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as ToFix;
  */
 class DoctrineObject extends ToFix
 {
-
     /**
      * This function tries, given an array of data, to convert it to an object if the given array contains
      * an identifier for the object. This is useful in a context of updating existing entities, without ugly

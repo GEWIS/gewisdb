@@ -3,13 +3,11 @@
 namespace Database\Mapper;
 
 use Database\Model\SubDecision\Foundation;
-
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
 
 class Organ
 {
-
     /**
      * Doctrine entity manager.
      *
@@ -202,5 +200,4 @@ class Organ
     {
         return $this->em->getRepository('Database\Model\SubDecision\Foundation');
     }
-
 }

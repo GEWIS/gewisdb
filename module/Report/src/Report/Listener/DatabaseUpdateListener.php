@@ -1,4 +1,5 @@
 <?php
+
 namespace Report\Listener;
 
 use Zend\ServiceManager\ServiceManager;
@@ -64,7 +65,6 @@ class DatabaseUpdateListener
 
             default:
                 return;
-
         }
         self::safeFlush(function () use ($em) {
             $em->flush();

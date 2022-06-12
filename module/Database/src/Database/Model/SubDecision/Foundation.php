@@ -3,9 +3,7 @@
 namespace Database\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Database\Model\SubDecision;
 
 /**
@@ -15,7 +13,6 @@ use Database\Model\SubDecision;
  */
 class Foundation extends SubDecision
 {
-
     const ORGAN_TYPE_COMMITTEE = 'committee';
     const ORGAN_TYPE_AVC = 'avc';
     const ORGAN_TYPE_FRATERNITY = 'fraternity';
@@ -160,24 +157,24 @@ class Foundation extends SubDecision
     public function getContent()
     {
         switch ($this->getOrganType()) {
-        case self::ORGAN_TYPE_COMMITTEE:
-            $text = 'Commissie ';
-            break;
-        case self::ORGAN_TYPE_AVC:
-            $text = 'AV-commissie ';
-            break;
-        case self::ORGAN_TYPE_FRATERNITY:
-            $text = 'Dispuut ';
-            break;
-        case self::ORGAN_TYPE_KKK:
-            $text = 'KKK ';
-            break;
-        case self::ORGAN_TYPE_AVW:
-            $text = 'AV-werkgroep ';
-            break;
-        case self::ORGAN_TYPE_RVA:
-            $text = 'RvA ';
-            break;
+            case self::ORGAN_TYPE_COMMITTEE:
+                $text = 'Commissie ';
+                break;
+            case self::ORGAN_TYPE_AVC:
+                $text = 'AV-commissie ';
+                break;
+            case self::ORGAN_TYPE_FRATERNITY:
+                $text = 'Dispuut ';
+                break;
+            case self::ORGAN_TYPE_KKK:
+                $text = 'KKK ';
+                break;
+            case self::ORGAN_TYPE_AVW:
+                $text = 'AV-werkgroep ';
+                break;
+            case self::ORGAN_TYPE_RVA:
+                $text = 'RvA ';
+                break;
         }
         $text .= $this->getName();
         $text .= ' met afkorting ';

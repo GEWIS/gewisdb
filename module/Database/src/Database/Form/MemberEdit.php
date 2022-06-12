@@ -8,7 +8,6 @@ use Zend\InputFilter\InputFilterProviderInterface;
 
 class MemberEdit extends Form implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct();

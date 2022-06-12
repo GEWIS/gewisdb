@@ -4,12 +4,10 @@ namespace Database\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
 use Database\Model\Member;
 
 class SettingsController extends AbstractActionController
 {
-
     /**
      * Index action.
      */

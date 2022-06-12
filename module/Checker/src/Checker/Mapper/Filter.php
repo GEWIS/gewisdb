@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: stefan
@@ -8,10 +9,8 @@
 
 namespace Checker\Mapper;
 
-
 trait Filter
 {
-
     /**
      * Filters an array of subdecisions to find decisions that are still valid
      *
@@ -82,6 +81,5 @@ trait Filter
 
         // else it is valid iff the destroyed by is not valid
         return !$this->isValid($destroy);
-
     }
 }

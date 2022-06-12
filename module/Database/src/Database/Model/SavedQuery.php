@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SavedQuery
 {
-
     /**
      * The query ID.
      *

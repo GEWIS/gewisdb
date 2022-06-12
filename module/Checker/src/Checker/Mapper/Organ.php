@@ -12,6 +12,7 @@ use Doctrine\ORM\UnitOfWork;
 class Organ
 {
     use Filter;
+
     /**
      * Doctrine entity manager.
      *

@@ -12,7 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Member
 {
-
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
     const GENDER_OTHER = 'o';
@@ -733,7 +732,8 @@ class Member
      *
      * @param array $addresses
      */
-    public function addAddresses($addresses) {
+    public function addAddresses($addresses)
+    {
         foreach ($addresses as $address) {
             $this->addAddress($address);
         }

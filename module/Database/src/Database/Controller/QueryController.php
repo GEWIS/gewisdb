@@ -7,7 +7,6 @@ use Zend\View\Model\ViewModel;
 
 class QueryController extends AbstractActionController
 {
-
     /**
      * Index action.
      */
@@ -31,7 +30,7 @@ class QueryController extends AbstractActionController
                     'saved' => $service->getSavedQueries(),
                     'entities' => $service->getEntities()
                 ));
-            } else if (isset($query)) {
+            } elseif (isset($query)) {
                 return $this->redirect()->toRoute('query/show', array(
                     'query' => $query->getId()
                 ));

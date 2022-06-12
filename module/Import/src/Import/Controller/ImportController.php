@@ -3,13 +3,11 @@
 namespace Import\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 
 class ImportController extends AbstractActionController
 {
-
     /**
      * Import action.
      */
@@ -21,7 +19,7 @@ class ImportController extends AbstractActionController
 
         $meetings = $meetingService->getMeetings();
 
-        foreach ($meetings as $vergadering)  {
+        foreach ($meetings as $vergadering) {
             $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
             echo "Voeg vergadering $verg toe? [Y/n] ";
             $char = $console->readChar();

@@ -3,13 +3,11 @@
 namespace Export\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Member as MemberModel;
 use Database\Model\Address;
 
 class Member extends AbstractService
 {
-
     /**
      * Export members.
      */
@@ -18,7 +16,6 @@ class Member extends AbstractService
         $mapper = $this->getMemberMapper();
 
         foreach ($mapper->findAll() as $member) {
-
             $haddr = array(
                 'straat' => '',
                 'postcode' => '',
@@ -38,7 +35,7 @@ class Member extends AbstractService
                     $haddr['postcode'] = $address->getPostalCode();
                     $haddr['plaats'] = $address->getCity();
                     $haddr['telefoon'] = $address->getPhone();
-                } else if ($address->getType() == Address::TYPE_STUDENT) {
+                } elseif ($address->getType() == Address::TYPE_STUDENT) {
                     $kaddr['straat'] = $address->getStreet() . ' ' . $address->getNumber();
                     $kaddr['postcode'] = $address->getPostalCode();
                     $kaddr['plaats'] = $address->getCity();
@@ -52,7 +49,7 @@ class Member extends AbstractService
                 'tussen' => $member->getMiddleName(),
                 'voorlet' => $member->getInitials(),
                 'voornaam' => $member->getFirstName(),
-                'gesl' => $member->getGender() == MemberModel::GENDER_MALE ? '1': '0',
+                'gesl' => $member->getGender() == MemberModel::GENDER_MALE ? '1' : '0',
                 'generatie' => $member->getGeneration(),
                 'e_mail' => $member->getEmail(),
                 'betaald' => $member->getPaid(),

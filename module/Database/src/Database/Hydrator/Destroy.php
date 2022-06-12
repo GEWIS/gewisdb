@@ -3,12 +3,10 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision;
-
 use Database\Model\SubDecision\Destroy as DestroyDecision;
 
 class Destroy extends AbstractDecision
 {
-
     /**
      * abolish hydration
      *

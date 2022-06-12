@@ -9,7 +9,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class MeetingController extends AbstractActionController
 {
-
     /**
      * Index action.
      *
@@ -136,53 +135,53 @@ class MeetingController extends AbstractActionController
         $service = $this->getMeetingService();
 
         switch ($this->params()->fromRoute('form')) {
-        case 'budget':
-            return new ViewModel(
-                $service->budgetDecision($this->getRequest()->getPost())
-            );
+            case 'budget':
+                return new ViewModel(
+                    $service->budgetDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'foundation':
-            return new ViewModel(
-                $service->foundationDecision($this->getRequest()->getPost())
-            );
+            case 'foundation':
+                return new ViewModel(
+                    $service->foundationDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'abolish':
-            return new ViewModel(
-                $service->abolishDecision($this->getRequest()->getPost())
-            );
+            case 'abolish':
+                return new ViewModel(
+                    $service->abolishDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'install':
-            return new ViewModel(
-                $service->installDecision($this->getRequest()->getPost())
-            );
+            case 'install':
+                return new ViewModel(
+                    $service->installDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'destroy':
-            return new ViewModel(
-                $service->destroyDecision($this->getRequest()->getPost())
-            );
+            case 'destroy':
+                return new ViewModel(
+                    $service->destroyDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'board_install':
-            return new ViewModel(
-                $service->boardInstallDecision($this->getRequest()->getPost())
-            );
+            case 'board_install':
+                return new ViewModel(
+                    $service->boardInstallDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'board_release':
-            return new ViewModel(
-                $service->boardReleaseDecision($this->getRequest()->getPost())
-            );
+            case 'board_release':
+                return new ViewModel(
+                    $service->boardReleaseDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'board_discharge':
-            return new ViewModel(
-                $service->boardDischargeDecision($this->getRequest()->getPost())
-            );
+            case 'board_discharge':
+                return new ViewModel(
+                    $service->boardDischargeDecision($this->getRequest()->getPost())
+                );
             break;
-        case 'other':
-            return new ViewModel(
-                $service->otherDecision($this->getRequest()->getPost())
-            );
+            case 'other':
+                return new ViewModel(
+                    $service->otherDecision($this->getRequest()->getPost())
+                );
             break;
-        default:
-            return $this->redirect()->toRoute('meeting');
+            default:
+                return $this->redirect()->toRoute('meeting');
             break;
         }
         return new ViewModel(array());
@@ -202,16 +201,22 @@ class MeetingController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             try {
-            if ($service->deleteDecision($this->getRequest()->getPost(),
-                    $type, $number, $point, $decision)
-            ) {
-                return new ViewModel(array(
+                if (
+                    $service->deleteDecision(
+                        $this->getRequest()->getPost(),
+                        $type,
+                        $number,
+                        $point,
+                        $decision
+                    )
+                ) {
+                    return new ViewModel(array(
                     'type' => $type,
                     'number' => $number,
                     'point' => $point,
                     'decision' => $decision
-                ));
-            }
+                    ));
+                }
             } catch (ForeignKeyConstraintViolationException $e) {
                 return new ViewModel(array(
                     'error' => true,

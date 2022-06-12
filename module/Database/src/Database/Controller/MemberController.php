@@ -5,12 +5,10 @@ namespace Database\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
-
 use Database\Model\Member;
 
 class MemberController extends AbstractActionController
 {
-
     /**
      * Index action.
      */

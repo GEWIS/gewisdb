@@ -5,13 +5,10 @@ namespace Database\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
-
 use Database\Service\Meeting as MeetingService;
 
-class Export extends Form
-    implements InputFilterProviderInterface
+class Export extends Form implements InputFilterProviderInterface
 {
-
     public function __construct(MeetingService $service)
     {
         parent::__construct();

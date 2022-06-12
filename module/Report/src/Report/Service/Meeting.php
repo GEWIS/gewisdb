@@ -3,14 +3,11 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision;
 use Database\Model\Decision;
-
 use Report\Model\Meeting as ReportMeeting;
 use Report\Model\Decision as ReportDecision;
-
 use Zend\Mail\Transport\TransportInterface;
 use Zend\Mail\Message;
 use Zend\ProgressBar\Adapter\Console;
@@ -18,7 +15,6 @@ use Zend\ProgressBar\ProgressBar;
 
 class Meeting extends AbstractService
 {
-
     /**
      * Export meetings.
      */
@@ -115,10 +111,10 @@ class Meeting extends AbstractService
         $reportDecision->setContent(implode(' ', $content));
 
         $em->persist($reportDecision);
-
     }
 
-    public function generateSubDecision($subdecision, $reportDecision = null) {
+    public function generateSubDecision($subdecision, $reportDecision = null)
+    {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $decRepo = $em->getRepository('Report\Model\Decision');
         $subdecRepo = $em->getRepository('Report\Model\SubDecision');
@@ -284,7 +280,8 @@ class Meeting extends AbstractService
                 $installation->clearDischarge();
                 $organMember = $subDecision->getInstallation()->getOrganMember();
                 if ($organMember !== null) {
-                    $organMember->setDischargeDate(null);}
+                    $organMember->setDischargeDate(null);
+                }
                 break;
             case $subDecision instanceof \Report\Model\SubDecision\Foundation:
                 $organ = $subDecision->getOrgan();
