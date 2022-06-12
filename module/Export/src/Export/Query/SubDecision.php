@@ -30,7 +30,7 @@ class SubDecision
     public function updateSubdecision($data)
     {
         $sql = "UPDATE subbesluit SET ";
-        $cols = array();
+        $cols = [];
         foreach ($data as $key => $val) {
             if ($key != 'vergadertypeid' && $key != 'vergadernr' && $key != 'puntnr' && $key != 'besluitnr' && $key != 'subbesluitnr') {
                 $cols[] = $key . ' = :' . $key;
@@ -98,13 +98,13 @@ class SubDecision
     {
         $stmt = $this->getExistsStmt();
 
-        $stmt->execute(array(
+        $stmt->execute([
             'type' => $type,
             'meetingnumber' => $meetingnumber,
             'point' => $point,
             'decnumber' => $decnumber,
             'number' => $number
-        ));
+        ]);
 
         return count($stmt->fetchAll()) == 1;
     }

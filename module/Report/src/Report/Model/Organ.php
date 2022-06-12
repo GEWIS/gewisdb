@@ -14,12 +14,12 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Organ
 {
-    const ORGAN_TYPE_COMMITTEE = 'committee';
-    const ORGAN_TYPE_AVC = 'avc';
-    const ORGAN_TYPE_FRATERNITY = 'fraternity';
-    const ORGAN_TYPE_KKK = 'kkk';
-    const ORGAN_TYPE_AVW = 'avw';
-    const ORGAN_TYPE_RVA = 'rva';
+    public const ORGAN_TYPE_COMMITTEE = 'committee';
+    public const ORGAN_TYPE_AVC = 'avc';
+    public const ORGAN_TYPE_FRATERNITY = 'fraternity';
+    public const ORGAN_TYPE_KKK = 'kkk';
+    public const ORGAN_TYPE_AVW = 'avw';
+    public const ORGAN_TYPE_RVA = 'rva';
 
     /**
      * Id.
@@ -54,13 +54,13 @@ class Organ
     /**
      * Reference to foundation of organ.
      *
-     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Foundation",inversedBy="organ")
+     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Foundation", inversedBy="organ")
      * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
+     *     @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
+     *     @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
+     *     @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
+     *     @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
+     *     @ORM\JoinColumn(name="r_number", referencedColumnName="number")
      * })
      */
     protected $foundation;
@@ -82,7 +82,7 @@ class Organ
     /**
      * Reference to members.
      *
-     * @ORM\OneToMany(targetEntity="OrganMember",mappedBy="organ")
+     * @ORM\OneToMany(targetEntity="OrganMember", mappedBy="organ")
      */
     protected $members;
 
@@ -91,14 +91,14 @@ class Organ
      *
      * @ORM\ManyToMany(targetEntity="SubDecision")
      * @ORM\JoinTable(name="organs_subdecisions",
-     *      joinColumns={@ORM\JoinColumn(name="organ_id", onDelete="cascade", referencedColumnName="id")},
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="decision_point", referencedColumnName="decision_point", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="decision_number", referencedColumnName="decision_number", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="subdecision_number", referencedColumnName="number", onDelete="cascade")
-     *      })
+     *     joinColumns={@ORM\JoinColumn(name="organ_id", onDelete="cascade", referencedColumnName="id")},
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type", onDelete="cascade"),
+     *         @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number", onDelete="cascade"),
+     *         @ORM\JoinColumn(name="decision_point", referencedColumnName="decision_point", onDelete="cascade"),
+     *         @ORM\JoinColumn(name="decision_number", referencedColumnName="decision_number", onDelete="cascade"),
+     *         @ORM\JoinColumn(name="subdecision_number", referencedColumnName="number", onDelete="cascade")
+     *     })
      */
     protected $subdecisions;
 

@@ -46,10 +46,10 @@ class Meeting extends AbstractService
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $repo = $em->getRepository('Report\Model\Meeting');
 
-        $reportMeeting = $repo->find(array(
+        $reportMeeting = $repo->find([
             'type' => $meeting->getType(),
             'number' => $meeting->getNumber()
-        ));
+        ]);
 
         if ($reportMeeting === null) {
             $reportMeeting = new ReportMeeting();
@@ -86,19 +86,19 @@ class Meeting extends AbstractService
             }
         }
         // see if decision exists
-        $reportDecision = $decRepo->find(array(
+        $reportDecision = $decRepo->find([
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'point' => $decision->getPoint(),
             'number' => $decision->getNumber()
-        ));
+        ]);
         if (null === $reportDecision) {
             $reportDecision = new ReportDecision();
             $reportDecision->setMeeting($reportMeeting);
         }
         $reportDecision->setPoint($decision->getPoint());
         $reportDecision->setNumber($decision->getNumber());
-        $content = array();
+        $content = [];
 
         foreach ($decision->getSubdecisions() as $subdecision) {
             $this->generateSubDecision($subdecision, $reportDecision);
@@ -119,23 +119,23 @@ class Meeting extends AbstractService
         $decRepo = $em->getRepository('Report\Model\Decision');
         $subdecRepo = $em->getRepository('Report\Model\SubDecision');
         if ($reportDecision === null) {
-            $reportDecision = $decRepo->find(array(
+            $reportDecision = $decRepo->find([
                 'meeting_type' => $subdecision->getMeetingType(),
                 'meeting_number' => $subdecision->getMeetingNumber(),
                 'point' => $subdecision->getDecisionPoint(),
                 'number' => $subdecision->getDecisionNumber()
-            ));
+            ]);
             if ($reportDecision === null) {
                 throw new \LogicException('Decision without meeting');
             }
         }
-        $reportSubDecision = $subdecRepo->find(array(
+        $reportSubDecision = $subdecRepo->find([
             'meeting_type' => $subdecision->getMeetingType(),
             'meeting_number' => $subdecision->getMeetingNumber(),
             'decision_point' => $subdecision->getDecisionPoint(),
             'decision_number' => $subdecision->getDecisionNumber(),
             'number' => $subdecision->getNumber()
-        ));
+        ]);
         if (null === $reportSubDecision) {
             // determine type and create
             $class = get_class($subdecision);
@@ -147,13 +147,13 @@ class Meeting extends AbstractService
 
         if ($subdecision instanceof SubDecision\FoundationReference) {
             $ref = $subdecision->getFoundation();
-            $foundation = $subdecRepo->find(array(
+            $foundation = $subdecRepo->find([
                 'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                 'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $ref->getDecision()->getPoint(),
                 'decision_number' => $ref->getDecision()->getNumber(),
                 'number' => $ref->getNumber()
-            ));
+            ]);
             $reportSubDecision->setFoundation($foundation);
         }
 
@@ -166,13 +166,13 @@ class Meeting extends AbstractService
             if ($subdecision instanceof SubDecision\Discharge) {
                 // discharge
                 $ref = $subdecision->getInstallation();
-                $installation = $subdecRepo->find(array(
+                $installation = $subdecRepo->find([
                     'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                     'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                     'decision_point' => $ref->getDecision()->getPoint(),
                     'decision_number' => $ref->getDecision()->getNumber(),
                     'number' => $ref->getNumber()
-                ));
+                ]);
                 $reportSubDecision->setInstallation($installation);
             } else {
                 if ($subdecision instanceof SubDecision\Foundation) {
@@ -201,35 +201,35 @@ class Meeting extends AbstractService
                             if ($subdecision instanceof SubDecision\Board\Release) {
                                 // board release
                                 $ref = $subdecision->getInstallation();
-                                $installation = $subdecRepo->find(array(
+                                $installation = $subdecRepo->find([
                                     'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                                     'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                                     'decision_point' => $ref->getDecision()->getPoint(),
                                     'decision_number' => $ref->getDecision()->getNumber(),
                                     'number' => $ref->getNumber()
-                                ));
+                                ]);
                                 $reportSubDecision->setInstallation($installation);
                                 $reportSubDecision->setDate($subdecision->getDate());
                             } else {
                                 if ($subdecision instanceof SubDecision\Board\Discharge) {
                                     $ref = $subdecision->getInstallation();
-                                    $installation = $subdecRepo->find(array(
+                                    $installation = $subdecRepo->find([
                                         'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                                         'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                                         'decision_point' => $ref->getDecision()->getPoint(),
                                         'decision_number' => $ref->getDecision()->getNumber(),
                                         'number' => $ref->getNumber()
-                                    ));
+                                    ]);
                                     $reportSubDecision->setInstallation($installation);
                                 } else {
                                     if ($subdecision instanceof SubDecision\Destroy) {
                                         $ref = $subdecision->getTarget();
-                                        $target = $decRepo->find(array(
+                                        $target = $decRepo->find([
                                             'meeting_type' => $ref->getMeeting()->getType(),
                                             'meeting_number' => $ref->getMeeting()->getNumber(),
                                             'point' => $ref->getPoint(),
                                             'number' => $ref->getNumber()
-                                        ));
+                                        ]);
                                         $reportSubDecision->setTarget($target);
                                     }
                                 }
@@ -256,12 +256,12 @@ class Meeting extends AbstractService
     public function deleteDecision($decision)
     {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $reportDecision = $em->getRepository('Report\Model\Decision')->find(array(
+        $reportDecision = $em->getRepository('Report\Model\Decision')->find([
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'point' => $decision->getPoint(),
             'number' => $decision->getNumber()
-        ));
+        ]);
         foreach (array_reverse($reportDecision->getSubdecisions()->toArray()) as $subDecision) {
             $this->deleteSubDecision($subDecision);
         }

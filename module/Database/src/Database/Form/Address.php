@@ -13,62 +13,62 @@ class Address extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'country',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Land',
                 'value' => 'netherlands'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'street',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Straat'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Huisnummer'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'postalCode',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Postcode'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'city',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Stad'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'phone',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Telefoonnummer'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Wijzig adres'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -76,70 +76,70 @@ class Address extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'country' => array(
+        return [
+            'country' => [
                 'required' => true,
-                'filters' => array(
-                    array('name' => 'string_to_lower')
-                ),
-                'validators' => array(
-                    array(
+                'filters' => [
+                    ['name' => 'string_to_lower']
+                ],
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'street' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'street' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'number' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'number' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'regex',
-                        'options' => array(
+                        'options' => [
                             'pattern' => '/^[0-9]+[a-zA-Z]*/'
-                        )
-                    )
-                )
-            ),
-            'postalCode' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'postalCode' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 16
-                        )
-                    )
-                )
-            ),
-            'city' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'city' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            )
+                        ]
+                    ]
+                ]
+            ]
             // TODO: phone number validation
-        );
+        ];
     }
 }

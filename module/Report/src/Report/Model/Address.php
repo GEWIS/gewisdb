@@ -11,9 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Address
 {
-    const TYPE_HOME = 'home';
-    const TYPE_STUDENT = 'student'; // student room
-    const TYPE_MAIL = 'mail'; // mailing address
+    public const TYPE_HOME = 'home';
+    public const TYPE_STUDENT = 'student'; // student room
+    public const TYPE_MAIL = 'mail'; // mailing address
 
     /**
      * Member.
@@ -90,11 +90,11 @@ class Address
      */
     public static function getTypes()
     {
-        return array(
+        return [
             self::TYPE_HOME,
             self::TYPE_STUDENT,
             self::TYPE_MAIL,
-        );
+        ];
     }
 
     /**

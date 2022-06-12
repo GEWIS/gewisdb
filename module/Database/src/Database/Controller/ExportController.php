@@ -18,14 +18,14 @@ class ExportController extends AbstractActionController
             $data = $service->export($this->getRequest()->getPost());
 
             if (null !== $data) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'data' => $data
-                ));
+                ]);
             }
         }
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $service->getExportForm()
-        ));
+        ]);
     }
 
     /**

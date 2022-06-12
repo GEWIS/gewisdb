@@ -12,10 +12,10 @@ class Event extends AbstractService
     /**
      * Services that are to be logged.
      */
-    protected $services = array(
+    protected $services = [
         'Database\Service\Member',
         'Database\Service\Meeting'
-    );
+    ];
 
     /**
      * Register the logging event.
@@ -23,7 +23,7 @@ class Event extends AbstractService
     public function register()
     {
         $em = StaticEventManager::getInstance();
-        $em->attach($this->services, '*', array($this, 'log'));
+        $em->attach($this->services, '*', [$this, 'log']);
     }
 
     /**

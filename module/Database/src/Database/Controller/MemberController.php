@@ -14,7 +14,7 @@ class MemberController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel(array());
+        return new ViewModel([]);
     }
 
     /**
@@ -30,15 +30,15 @@ class MemberController extends AbstractActionController
 
             if (null !== $member) {
                 $service->sendMemberSubscriptionEmail($member);
-                return new ViewModel(array(
+                return new ViewModel([
                     'member' => $member
-                ));
+                ]);
             }
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $this->getMemberService()->getMemberForm()
-        ));
+        ]);
     }
 
     /**
@@ -58,9 +58,9 @@ class MemberController extends AbstractActionController
             return $member->toArray();
         }, $res);
 
-        return new JsonModel(array(
+        return new JsonModel([
             'json' => $res
-        ));
+        ]);
     }
 
     /**
@@ -117,10 +117,10 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $member = $service->edit($this->getRequest()->getPost(), $lidnr);
             if (null !== $member) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
                     'member' => $member
-                ));
+                ]);
             }
         }
 
@@ -167,10 +167,10 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $member = $service->subscribeLists($this->getRequest()->getPost(), $lidnr);
             if (null !== $member) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
                     'member' => $member
-                ));
+                ]);
             }
         }
 
@@ -191,10 +191,10 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $member = $service->membership($this->getRequest()->getPost(), $lidnr);
             if (null !== $member) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
                     'member' => $member
-                ));
+                ]);
             }
         }
 
@@ -215,10 +215,10 @@ class MemberController extends AbstractActionController
             $member = $service->expiration($this->getRequest()->getPost(), $lidnr);
 
             if (null !== $member) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
                     'member' => $member
-                ));
+                ]);
             }
         }
 
@@ -240,10 +240,10 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $address = $service->editAddress($this->getRequest()->getPost(), $lidnr, $type);
             if (null !== $address) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
                     'address' => $address
-                ));
+                ]);
             }
         }
 
@@ -265,11 +265,11 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $address = $service->addAddress($this->getRequest()->getPost(), $lidnr, $type);
             if (null !== $address) {
-                $vm = new ViewModel(array(
+                $vm = new ViewModel([
                     'success' => true,
                     'add' => true,
                     'address' => $address
-                ));
+                ]);
                 $vm->setTemplate('database/member/edit-address');
                 return $vm;
             }
@@ -296,10 +296,10 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $member = $service->removeAddress($this->getRequest()->getPost(), $lidnr, $type);
             if (null !== $member) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
                     'member' => $member
-                ));
+                ]);
             }
         }
 

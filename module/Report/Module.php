@@ -16,13 +16,13 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                )
-            )
-        );
+                ]
+            ]
+        ];
     }
 
     /**
@@ -42,15 +42,15 @@ class Module
      */
     public function getServiceConfig()
     {
-        return array(
-            'invokables' => array(
+        return [
+            'invokables' => [
                 'report_service_member' => 'Report\Service\Member',
                 'report_service_meeting' => 'Report\Service\Meeting',
                 'report_service_organ' => 'Report\Service\Organ',
                 'report_service_board' => 'Report\Service\Board',
                 'report_service_misc' => 'Report\Service\Misc',
-            ),
-            'factories' => array(
+            ],
+            'factories' => [
                 'doctrine.connection.orm_report' => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_report'),
                 'doctrine.configuration.orm_report' => new \DoctrineORMModule\Service\ConfigurationFactory('orm_report'),
                 'doctrine.entitymanager.orm_report' => new \DoctrineORMModule\Service\EntityManagerFactory('orm_report'),
@@ -61,7 +61,7 @@ class Module
                 'DoctrineORMModule\Form\Annotation\AnnotationBuilder' => function ($sm) {
                     return new \DoctrineORMModule\Form\Annotation\AnnotationBuilder($sl->get('doctrine.entitymanager.orm_report'));
                 },
-            )
-        );
+            ]
+        ];
     }
 }

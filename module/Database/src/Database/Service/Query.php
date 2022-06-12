@@ -55,9 +55,9 @@ class Query extends AbstractService
     {
         $query = $this->getSavedQueryMapper()->find($id);
 
-        return $this->execute(array(
+        return $this->execute([
             'query' => $query->getQuery()
-        ));
+        ]);
     }
 
     /**
@@ -111,15 +111,15 @@ class Query extends AbstractService
             return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
         } catch (QueryException $e) {
             $form->get('query')
-                ->setMessages(array(
+                ->setMessages([
                     $e->getMessage()
-                ));
+                ]);
             return null;
         } catch (MappingException $e) {
             $form->get('query')
-                ->setMessages(array(
+                ->setMessages([
                     $e->getMessage()
-                ));
+                ]);
             return null;
         }
     }
@@ -142,7 +142,7 @@ class Query extends AbstractService
     public function getEntities()
     {
         $entityManager = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $classes = array();
+        $classes = [];
         $metas = $entityManager->getMetadataFactory()->getAllMetadata();
         foreach ($metas as $meta) {
             $classes[] = preg_replace('/^Report\\\\Model\\\\/', 'db:', $meta->getName());

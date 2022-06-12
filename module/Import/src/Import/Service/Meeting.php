@@ -22,7 +22,7 @@ class Meeting extends AbstractService
      *
      * @var array of SubDecision\Foundation
      */
-    protected $addedFoundations = array();
+    protected $addedFoundations = [];
 
     /**
      * Get all meetings.
@@ -230,7 +230,7 @@ class Meeting extends AbstractService
             return null;
         }
 
-        $candidates = array();
+        $candidates = [];
 
         foreach ($foundation->getReferences() as $reference) {
             if ($reference instanceof SubDecision\Installation) {
@@ -506,7 +506,7 @@ class Meeting extends AbstractService
      */
     protected function findAddedFoundation($query)
     {
-        $found = array();
+        $found = [];
         foreach ($this->addedFoundations as $foundation) {
             if ($foundation->getAbbr() == $query || $foundation->getName() == $query) {
                 $found[] = $foundation;

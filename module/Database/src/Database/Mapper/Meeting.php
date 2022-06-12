@@ -194,7 +194,7 @@ class Meeting
     {
         $qb = $this->em->createQueryBuilder();
 
-        $fields = array();
+        $fields = [];
         $fields[] = 'LOWER(d.meeting_type)';
         $fields[] = "' '";
         $fields[] = 'd.meeting_number';

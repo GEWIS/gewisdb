@@ -11,21 +11,21 @@ class Other extends AbstractDecision
     {
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'content',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Besluit',
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Verzend'
-            )
-        ));
+            ]
+        ]);
 
         $this->initFilters();
     }
@@ -34,18 +34,18 @@ class Other extends AbstractDecision
     {
         $filter = new InputFilter();
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'content',
             'required' => true,
-            'validators' => array(
-                array(
+            'validators' => [
+                [
                     'name' => 'string_length',
-                    'options' => array(
+                    'options' => [
                         'min' => 3
-                    )
-                )
-            )
-        ));
+                    ]
+                ]
+            ]
+        ]);
 
         $this->setInputFilter($filter);
     }

@@ -30,7 +30,7 @@ class Member
     public function updateMember($data)
     {
         $sql = "UPDATE gewis_lid SET ";
-        $cols = array();
+        $cols = [];
         foreach ($data as $key => $val) {
             if ($key != 'lidnummer') {
                 $cols[] = $key . ' = :' . $key;
@@ -86,9 +86,9 @@ class Member
     {
         $stmt = $this->getExistsStmt();
 
-        $stmt->execute(array(
+        $stmt->execute([
             'lidnr' => $lidnr
-        ));
+        ]);
 
         return count($stmt->fetchAll()) == 1;
     }

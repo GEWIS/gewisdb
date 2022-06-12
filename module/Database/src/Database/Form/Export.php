@@ -13,30 +13,30 @@ class Export extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'meetings',
             'type' => 'select',
-            'attributes' => array(
+            'attributes' => [
                 'multiple' => 'multiple'
-            ),
-            'options' => array(
+            ],
+            'options' => [
                 'label' => 'Vergaderingen',
                 'value_options' => $this->getValueOptions($service)
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Exporteer'
-            )
-        ));
+            ]
+        ]);
     }
 
     protected function getValueOptions(MeetingService $service)
     {
-        $options = array();
+        $options = [];
 
         foreach ($service->getAllMeetings() as $meeting) {
             $meeting = $meeting[0];
@@ -53,7 +53,7 @@ class Export extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-        );
+        return [
+        ];
     }
 }

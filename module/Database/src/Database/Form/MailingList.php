@@ -12,54 +12,54 @@ class MailingList extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Naam'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'description',
             'type' => 'textarea',
-            'options' => array(
+            'options' => [
                 'label' => 'Beschrijving (nederlands)'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'enDescription',
             'type' => 'textarea',
-            'options' => array(
+            'options' => [
                 'label' => 'Beschrijving (engels)'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'onForm',
             'type' => 'checkbox',
-            'options' => array(
+            'options' => [
                 'label' => 'Op inschrijfformulier'
-            )
-        ));
+            ]
+        ]);
         $this->get('onForm')->setChecked(true);
 
-        $this->add(array(
+        $this->add([
             'name' => 'defaultSub',
             'type' => 'checkbox',
-            'options' => array(
+            'options' => [
                 'label' => 'Standaard ingeschreven'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Voeg lijst toe'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -67,41 +67,41 @@ class MailingList extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'name' => array(
+        return [
+            'name' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 64
-                        )
-                    )
-                )
-            ),
-            'description' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'description' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 10
-                        )
-                    )
-                )
-            ),
-            'enDescription' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'enDescription' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 10
-                        )
-                    )
-                )
-            ),
-        );
+                        ]
+                    ]
+                ]
+            ],
+        ];
     }
 }

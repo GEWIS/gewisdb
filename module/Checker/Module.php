@@ -11,13 +11,13 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                )
-            )
-        );
+                ]
+            ]
+        ];
     }
 
     /**
@@ -37,16 +37,16 @@ class Module
      */
     public function getServiceConfig()
     {
-        return array(
-            'invokables' => array(
+        return [
+            'invokables' => [
                 'checker_service_checker' => 'Checker\Service\Checker',
                 'checker_service_organ' => 'Checker\Service\Organ',
                 'checker_service_installation' => 'Checker\Service\Installation',
                 'checker_service_budget' => 'Checker\Service\Budget',
                 'checker_service_meeting' => 'Checker\Service\Meeting',
                 'checker_service_member' => 'Checker\Service\Member'
-            ),
-            'factories' => array(
+            ],
+            'factories' => [
                 'checker_mapper_organ' => function ($sm) {
                     return new \Checker\Mapper\Organ(
                         $sm->get('database_doctrine_em')
@@ -76,7 +76,7 @@ class Module
                     $transport->setOptions(new $optionsClass($config['options']));
                     return $transport;
                 }
-            )
-        );
+            ]
+        ];
     }
 }

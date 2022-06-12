@@ -22,7 +22,7 @@ class DoctrineObject extends ToFix
     {
         $metadata         = $this->metadata;
         $identifierNames  = $metadata->getIdentifierFieldNames($object);
-        $identifierValues = array();
+        $identifierValues = [];
 
         if (empty($identifierNames)) {
             return $object;

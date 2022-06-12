@@ -11,13 +11,13 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                )
-            )
-        );
+                ]
+            ]
+        ];
     }
 
     /**
@@ -37,13 +37,13 @@ class Module
      */
     public function getServiceConfig()
     {
-        return array(
-            'invokables' => array(
+        return [
+            'invokables' => [
                 'export_service_member' => 'Export\Service\Member',
                 'export_service_meeting' => 'Export\Service\Meeting',
                 'export_service_organ' => 'Export\Service\Organ',
-            ),
-            'factories' => array(
+            ],
+            'factories' => [
                 'export_query_meeting' => function ($sm) {
                     $q = new \Export\Query\Meeting();
                     $q->setConnection($sm->get('doctrine.connection.orm_import'));
@@ -69,7 +69,7 @@ class Module
                     $q->setConnection($sm->get('doctrine.connection.orm_import'));
                     return $q;
                 },
-            )
-        );
+            ]
+        ];
     }
 }

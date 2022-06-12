@@ -16,18 +16,18 @@ class Member extends AbstractService
         $mapper = $this->getMemberMapper();
 
         foreach ($mapper->findAll() as $member) {
-            $haddr = array(
+            $haddr = [
                 'straat' => '',
                 'postcode' => '',
                 'plaats' => '',
                 'telefoon' => ''
-            );
-            $kaddr = array(
+            ];
+            $kaddr = [
                 'straat' => '',
                 'postcode' => '',
                 'plaats' => '',
                 'telefoon' => ''
-            );
+            ];
 
             foreach ($member->getAddresses() as $address) {
                 if ($address->getType() == Address::TYPE_HOME) {
@@ -43,7 +43,7 @@ class Member extends AbstractService
                 }
             }
 
-            $data = array(
+            $data = [
                 'lidnummer' => $member->getLidnr(),
                 'achternaam' => $member->getLastName(),
                 'tussen' => $member->getMiddleName(),
@@ -66,7 +66,7 @@ class Member extends AbstractService
                 'kpostcode' => $kaddr['postcode'],
                 'kplaats' => $kaddr['plaats'],
                 'ktelefoon' => $kaddr['telefoon'],
-            );
+            ];
 
             switch ($member->getType()) {
                 case MemberModel::TYPE_ORDINARY:
@@ -86,7 +86,7 @@ class Member extends AbstractService
             // first check if it is an existing member
             if ($this->getQuery()->checkMemberExists($member->getLidnr())) {
                 $this->getQuery()->updateMember($data);
-                //echo "Lid " . $member->getFullName() . " is geupdate.\n";
+            //echo "Lid " . $member->getFullName() . " is geupdate.\n";
             } else {
                 echo "Nog niet bestaand: " . $member->getFullName() . "\n";
                 $this->getQuery()->createMember($data);

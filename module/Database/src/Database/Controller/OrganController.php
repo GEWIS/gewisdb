@@ -13,7 +13,7 @@ class OrganController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel(array());
+        return new ViewModel([]);
     }
 
     /**
@@ -23,7 +23,7 @@ class OrganController extends AbstractActionController
     {
         $service = $this->getMeetingService();
 
-        return new ViewModel(array(
+        return new ViewModel([
             'foundation' => $service->findFoundation(
                 $this->params()->fromRoute('type'),
                 $this->params()->fromRoute('number'),
@@ -31,7 +31,7 @@ class OrganController extends AbstractActionController
                 $this->params()->fromRoute('decision'),
                 $this->params()->fromRoute('subdecision')
             )
-        ));
+        ]);
     }
 
     /**
@@ -49,11 +49,11 @@ class OrganController extends AbstractActionController
             $this->params()->fromRoute('subdecision')
         );
         $data = $foundation->toArray();
-        $data['members'] = array();
+        $data['members'] = [];
 
         foreach ($foundation->getReferences() as $reference) {
             if ($reference instanceof \Database\Model\SubDecision\Installation) {
-                $data['members'][] = array(
+                $data['members'][] = [
                     'meeting_type' => $reference->getDecision()->getMeeting()->getType(),
                     'meeting_number' => $reference->getDecision()->getMeeting()->getNumber(),
                     'decision_point' => $reference->getDecision()->getPoint(),
@@ -61,13 +61,13 @@ class OrganController extends AbstractActionController
                     'subdecision_number' => $reference->getNumber(),
                     'function' => $reference->getFunction(),
                     'member' => $reference->getMember()->toArray()
-                );
+                ];
             }
         }
 
-        return new JsonModel(array(
+        return new JsonModel([
             'json' => $data
-        ));
+        ]);
     }
 
     /**
@@ -87,9 +87,9 @@ class OrganController extends AbstractActionController
             return $organ->toArray();
         }, $res);
 
-        return new JsonModel(array(
+        return new JsonModel([
             'json' => $res
-        ));
+        ]);
     }
 
     /**

@@ -16,8 +16,8 @@ class Decision
      *
      * @ORM\ManyToOne(targetEntity="Meeting", inversedBy="decisions")
      * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="meeting_type", referencedColumnName="type"),
-     *  @ORM\JoinColumn(name="meeting_number", referencedColumnName="number"),
+     *     @ORM\JoinColumn(name="meeting_type", referencedColumnName="type"),
+     *     @ORM\JoinColumn(name="meeting_number", referencedColumnName="number"),
      * })
      */
     protected $meeting;
@@ -62,7 +62,7 @@ class Decision
      * Subdecisions.
      *
      * @ORM\OneToMany(targetEntity="SubDecision", mappedBy="decision", cascade={"persist", "remove"})
-     * @ORM\OrderBy({"number"="ASC"})
+     * @ORM\OrderBy({"number": "ASC"})
      */
     protected $subdecisions;
 
@@ -217,17 +217,17 @@ class Decision
      */
     public function toArray()
     {
-        $content = array();
+        $content = [];
         foreach ($this->getSubdecisions() as $subdecision) {
             $content[] = $subdecision->getContent();
         }
         $content = implode(' ', $content);
-        return array(
+        return [
             'meeting_type' => $this->getMeeting()->getType(),
             'meeting_number' => $this->getMeeting()->getNumber(),
             'decision_point' => $this->getPoint(),
             'decision_number' => $this->getNumber(),
             'content' => $content
-        );
+        ];
     }
 }

@@ -12,21 +12,21 @@ class InstallationFunction extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Functienaam'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Maak functie'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -34,7 +34,7 @@ class InstallationFunction extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-        );
+        return [
+        ];
     }
 }

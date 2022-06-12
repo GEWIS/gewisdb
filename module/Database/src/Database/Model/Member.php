@@ -12,14 +12,14 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Member
 {
-    const GENDER_MALE = 'm';
-    const GENDER_FEMALE = 'f';
-    const GENDER_OTHER = 'o';
+    public const GENDER_MALE = 'm';
+    public const GENDER_FEMALE = 'f';
+    public const GENDER_OTHER = 'o';
 
-    const TYPE_ORDINARY = 'ordinary';
-    const TYPE_EXTERNAL = 'external';
-    const TYPE_GRADUATE = 'graduate';
-    const TYPE_HONORARY = 'honorary';
+    public const TYPE_ORDINARY = 'ordinary';
+    public const TYPE_EXTERNAL = 'external';
+    public const TYPE_GRADUATE = 'graduate';
+    public const TYPE_HONORARY = 'honorary';
 
     /**
      * The user
@@ -72,7 +72,7 @@ class Member
      * - m
      * - f
      *
-     * @ORM\Column(type="string",length=1)
+     * @ORM\Column(type="string", length=1)
      */
     protected $gender;
 
@@ -96,7 +96,7 @@ class Member
     /**
      * Study of the member.
      *
-     * @ORM\Column(type="string",nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $study;
 
@@ -174,28 +174,28 @@ class Member
     /**
      * Iban number.
      *
-     * @ORM\Column(type="string",nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $iban;
 
     /**
      * If the member receives a 'supremum'
      *
-     * @ORM\Column(type="string",nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $supremum;
 
     /**
      * Addresses of this member.
      *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="member", cascade={"persist", "remove"})
      */
     protected $addresses;
 
     /**
      * Installations of this member.
      *
-     * @ORM\OneToMany(targetEntity="Database\Model\SubDecision\Installation",mappedBy="member")
+     * @ORM\OneToMany(targetEntity="Database\Model\SubDecision\Installation", mappedBy="member")
      */
     protected $installations;
 
@@ -204,8 +204,8 @@ class Member
      *
      * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
      * @ORM\JoinTable(name="members_mailinglists",
-     *      joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
+     *     joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
      * )
      */
     protected $lists;
@@ -217,11 +217,11 @@ class Member
      */
     protected static function getGenders()
     {
-        return array(
+        return [
             self::GENDER_MALE,
             self::GENDER_FEMALE,
             self::GENDER_OTHER
-        );
+        ];
     }
 
     /**
@@ -231,12 +231,12 @@ class Member
      */
     protected static function getTypes()
     {
-        return array(
+        return [
             self::TYPE_ORDINARY,
             self::TYPE_EXTERNAL,
             self::TYPE_GRADUATE,
             self::TYPE_HONORARY
-        );
+        ];
     }
 
 
@@ -696,7 +696,7 @@ class Member
      */
     public function toArray()
     {
-        return array(
+        return [
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -706,7 +706,7 @@ class Member
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
             'expiration' => $this->getExpiration()->format('l j F Y')
-        );
+        ];
     }
 
     /**

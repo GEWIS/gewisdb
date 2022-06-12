@@ -15,29 +15,29 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add(clone $member);
 
-        $this->add(array(
+        $this->add([
             'name' => 'function',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Functie',
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'date',
             'type' => 'date',
-            'options' => array(
+            'options' => [
                 'label' => 'Van kracht per',
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Installeer bestuurder'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -45,22 +45,22 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'function' => array(
+        return [
+            'function' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'date' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'date' => [
                 'required' => true
-            )
-        );
+            ]
+        ];
     }
 }

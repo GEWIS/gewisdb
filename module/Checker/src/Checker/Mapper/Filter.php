@@ -47,7 +47,7 @@ trait Filter
             $deletions = $qb->getQuery()->getResult();
 
             // check for all decisions if they are valid
-            $deleted = array();
+            $deleted = [];
             foreach ($deletions as $key => $del) {
                 if ($this->isValid($del)) {
                     // if they are valid, add all the affected subdecisions

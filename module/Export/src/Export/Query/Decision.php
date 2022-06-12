@@ -30,7 +30,7 @@ class Decision
     public function updateDecision($data)
     {
         $sql = "UPDATE besluit SET ";
-        $cols = array();
+        $cols = [];
         foreach ($data as $key => $val) {
             if ($key != 'vergadertypeid' && $key != 'vergadernr' && $key != 'puntnr' && $key != 'besluitnr') {
                 $cols[] = $key . ' = :' . $key;
@@ -95,12 +95,12 @@ class Decision
     {
         $stmt = $this->getExistsStmt();
 
-        $stmt->execute(array(
+        $stmt->execute([
             'type' => $type,
             'meetingnumber' => $meetingnumber,
             'point' => $point,
             'number' => $number
-        ));
+        ]);
 
         return count($stmt->fetchAll()) == 1;
     }

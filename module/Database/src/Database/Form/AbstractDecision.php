@@ -14,15 +14,15 @@ abstract class AbstractDecision extends Form
         $meeting->setName('meeting');
         $this->add($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'point',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'decision',
             'type' => 'hidden'
-        ));
+        ]);
 
         // TODO: filters
     }

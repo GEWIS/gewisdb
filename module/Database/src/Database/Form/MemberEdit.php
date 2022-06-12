@@ -12,90 +12,90 @@ class MemberEdit extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'lastName',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Achternaam'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'middleName',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Tussenvoegsels'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'initials',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Voorletter(s)'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'firstName',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Voornaam'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'gender',
             'type' => 'radio',
-            'options' => array(
+            'options' => [
                 'label' => 'Geslacht',
-                'value_options' => array(
+                'value_options' => [
                     'm' => 'Man',
                     'f' => 'Vrouw',
                     'o' => 'Anders'
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'tueUsername',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'TU/e-gebruikersnaam'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'email',
             'type' => 'email',
-            'options' => array(
+            'options' => [
                 'label' => 'Email-adres'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'birth',
             'type' => 'date',
-            'options' => array(
+            'options' => [
                 'label' => 'Geboortedatum'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'paid',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Betaald (hoe veel)'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Wijzig gegevens'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -103,78 +103,78 @@ class MemberEdit extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'lastName' => array(
+        return [
+            'lastName' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'middleName' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'middleName' => [
                 'required' => false,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'initials' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'initials' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
                             'max' => 16
-                        )
-                    )
-                )
-            ),
-            'firstName' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'firstName' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'paid' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'paid' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => 'digits')
-                )
-            ),
-            'tueUsername' => array(
+                'validators' => [
+                    ['name' => 'digits']
+                ]
+            ],
+            'tueUsername' => [
                 'required' => false,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'regex',
-                        'options' => array(
+                        'options' => [
                             'pattern' => '/^(s\d{6}|\d{8})$/',
-                            'messages' => array(
+                            'messages' => [
                                 'regexNotMatch' => 'Een TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.'
-                            )
-                        )
-                    )
-                ),
-                'filters' => array(
-                    array('name' => 'tonull')
-                )
-            )
-        );
+                            ]
+                        ]
+                    ]
+                ],
+                'filters' => [
+                    ['name' => 'tonull']
+                ]
+            ]
+        ];
     }
 }

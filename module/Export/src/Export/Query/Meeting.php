@@ -30,7 +30,7 @@ class Meeting
     public function updateMeeting($data)
     {
         $sql = "UPDATE vergadering SET ";
-        $cols = array();
+        $cols = [];
         foreach ($data as $key => $val) {
             if ($key != 'vergadertypeid' && $key != 'vergadernr') {
                 $cols[] = $key . ' = :' . $key;
@@ -89,10 +89,10 @@ class Meeting
     {
         $stmt = $this->getExistsStmt();
 
-        $stmt->execute(array(
+        $stmt->execute([
             'type' => $type,
             'number' => $number
-        ));
+        ]);
 
         return count($stmt->fetchAll()) == 1;
     }

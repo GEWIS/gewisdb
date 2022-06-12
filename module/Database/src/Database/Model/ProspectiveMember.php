@@ -12,14 +12,14 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ProspectiveMember
 {
-    const GENDER_MALE = 'm';
-    const GENDER_FEMALE = 'f';
-    const GENDER_OTHER = 'o';
+    public const GENDER_MALE = 'm';
+    public const GENDER_FEMALE = 'f';
+    public const GENDER_OTHER = 'o';
 
-    const TYPE_ORDINARY = 'ordinary';
-    const TYPE_EXTERNAL = 'external';
-    const TYPE_GRADUATE = 'graduate';
-    const TYPE_HONORARY = 'honorary';
+    public const TYPE_ORDINARY = 'ordinary';
+    public const TYPE_EXTERNAL = 'external';
+    public const TYPE_GRADUATE = 'graduate';
+    public const TYPE_HONORARY = 'honorary';
 
     /**
      * The user
@@ -72,7 +72,7 @@ class ProspectiveMember
      * - m
      * - f
      *
-     * @ORM\Column(type="string",length=1)
+     * @ORM\Column(type="string", length=1)
      */
     protected $gender;
 
@@ -86,7 +86,7 @@ class ProspectiveMember
     /**
      * Study of the member.
      *
-     * @ORM\Column(type="string",nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $study;
 
@@ -132,7 +132,7 @@ class ProspectiveMember
     /**
      * Iban number.
      *
-     * @ORM\Column(type="string",nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $iban;
 
@@ -185,8 +185,8 @@ class ProspectiveMember
      *
      * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
      * @ORM\JoinTable(name="prospective_members_mailinglists",
-     *      joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
+     *     joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
      * )
      */
     protected $lists;
@@ -212,11 +212,11 @@ class ProspectiveMember
      */
     protected static function getGenders()
     {
-        return array(
+        return [
             self::GENDER_MALE,
             self::GENDER_FEMALE,
             self::GENDER_OTHER
-        );
+        ];
     }
 
     /**
@@ -226,12 +226,12 @@ class ProspectiveMember
      */
     protected static function getTypes()
     {
-        return array(
+        return [
             self::TYPE_ORDINARY,
             self::TYPE_EXTERNAL,
             self::TYPE_GRADUATE,
             self::TYPE_HONORARY
-        );
+        ];
     }
 
 
@@ -628,7 +628,7 @@ class ProspectiveMember
      */
     public function toArray()
     {
-        $array = array(
+        $array = [
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -643,7 +643,7 @@ class ProspectiveMember
             'studentAddress' => $this->getAddresses()['studentAddress']->toArray(),
             'agreediban' => 1,
             'agreed' => '1'
-        );
+        ];
         $array['studentAddress']['type'] = Address::TYPE_STUDENT;
 
         return $array;
@@ -664,9 +664,9 @@ class ProspectiveMember
         $address->setPostalCode($this->postalCode);
         $address->setCity($this->city);
         $address->setPhone($this->phone);
-        return array(
+        return [
             'studentAddress' => $address
-        );
+        ];
     }
 
     /**

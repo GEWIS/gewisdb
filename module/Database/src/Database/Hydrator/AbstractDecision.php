@@ -42,6 +42,6 @@ abstract class AbstractDecision implements HydratorInterface
         if (!$object instanceof Decision) {
             throw new \InvalidArgumentException("Object is not an instance of Database\Model\Decision.");
         }
-        return array();
+        return [];
     }
 }

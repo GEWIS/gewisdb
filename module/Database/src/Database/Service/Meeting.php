@@ -97,13 +97,13 @@ class Meeting extends AbstractService
 
         // extract the meetings
         $data = $form->getData();
-        $meetings = array();
+        $meetings = [];
         foreach ($data['meetings'] as $meeting) {
             $meeting = explode('-', $meeting);
-            $meetings[] = array(
+            $meetings[] = [
                 'type' => $meeting[0],
                 'number' => $meeting[1]
-            );
+            ];
         }
 
         // find meeting data
@@ -125,23 +125,23 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'destroy',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'destroy',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -187,24 +187,24 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'other',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
 
-        return array(
+        return [
             'type' => 'other',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -222,23 +222,23 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'abolish',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'foundation',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -256,23 +256,23 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'board_install',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'board_install',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -290,23 +290,23 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'board_discharge',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'board_discharge',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -324,23 +324,23 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'board_release',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'board_release',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -358,23 +358,23 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'install',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'install',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -392,24 +392,24 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'foundation',
                 'form' => $form
-            );
+            ];
         }
 
 
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'foundation',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -442,10 +442,10 @@ class Meeting extends AbstractService
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'budget',
                 'form' => $form
-            );
+            ];
         }
 
         $decision = $form->getData();
@@ -461,14 +461,14 @@ class Meeting extends AbstractService
         }
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['decision' => $decision]);
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['decision' => $decision]);
 
-        return array(
+        return [
             'type' => 'budget',
             'decision' => $decision
-        );
+        ];
     }
 
     /**
@@ -493,17 +493,17 @@ class Meeting extends AbstractService
 
         if ($mapper->isManaged($meeting)) {
             // meeting is already in the database
-            $form->setMessages(array(
-                'number' => array(
+            $form->setMessages([
+                'number' => [
                     'Deze vergadering bestaat al'
-                )
-            ));
+                ]
+            ]);
             return null;
         }
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('meeting' => $meeting));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['meeting' => $meeting]);
         $mapper->persist($meeting);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('meeting' => $meeting));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['meeting' => $meeting]);
 
         return $meeting;
     }

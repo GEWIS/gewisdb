@@ -12,43 +12,43 @@ class CreateMeeting extends Form
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'select',
-            'options' => array(
+            'options' => [
                 'label' => 'Vergadertype',
-                'value_options' => array(
+                'value_options' => [
                     'BV' => 'BV (Bestuursvergadering)',
                     'AV' => 'AV (Algemene Ledenvergadering)',
                     'VV' => 'VV (Voorzittersvergadering)',
                     'Virt' => 'Virt (Virtuele vergadering)'
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Vergadernummer'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'date',
             'type' => 'date',
-            'options' => array(
+            'options' => [
                 'label' => 'Vergaderdatum'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Verzend'
-            )
-        ));
+            ]
+        ]);
 
         $this->initFilters();
     }
@@ -57,48 +57,48 @@ class CreateMeeting extends Form
     {
         $filter = new InputFilter();
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'type',
             'required' => true,
-            'validators' => array(
-                array(
+            'validators' => [
+                [
                     'name' => 'in_array',
-                    'options' => array(
+                    'options' => [
                         'haystack' => Meeting::getTypes()
-                    )
-                )
-            )
-        ));
+                    ]
+                ]
+            ]
+        ]);
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'number',
             'required' => true,
-            'validators' => array(
-                array('name' => 'digits'),
-                array(
+            'validators' => [
+                ['name' => 'digits'],
+                [
                     'name' => 'LessThan',
-                    'options' => array(
+                    'options' => [
                         'max' => 100000
-                    )
-                )
-            )
-        ));
+                    ]
+                ]
+            ]
+        ]);
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'number',
             'required' => true,
-            'validators' => array(
-                array('name' => 'digits')
-            )
-        ));
+            'validators' => [
+                ['name' => 'digits']
+            ]
+        ]);
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'date',
             'required' => true,
-            'validators' => array(
-                array('name' => 'date')
-            )
-        ));
+            'validators' => [
+                ['name' => 'date']
+            ]
+        ]);
 
         $this->setInputFilter($filter);
     }

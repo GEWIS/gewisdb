@@ -17,13 +17,13 @@ class AddressExport extends Form implements InputFilterProviderInterface
             'type' => 'checkbox'
         ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Exporteer'
-            )
-        ));
+            ]
+        ]);
 
         $this->get('submit')->setAttribute('value', 'Exporteer');
         $this->get('submit')->setLabel('Exporteer');

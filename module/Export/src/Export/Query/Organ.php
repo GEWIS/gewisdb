@@ -68,10 +68,10 @@ class Organ
     {
         $stmt = $this->getExistsStmt();
 
-        $stmt->execute(array(
+        $stmt->execute([
             'type' => $type,
             'afk' => $abbr
-        ));
+        ]);
 
         $res = $stmt->fetchAll();
 
@@ -97,18 +97,18 @@ class Organ
             WHERE LOWER(functie) = :functie";
         $stmt = $this->getConnection()->prepare($sql);
 
-        $stmt->execute(array(
+        $stmt->execute([
             'functie' => $name
-        ));
+        ]);
         $res = $stmt->fetchAll();
 
         if (count($res) == 1) {
             return $res[0]['functieid'];
         }
         // no results, so use 'lid'
-        $stmt->execute(array(
+        $stmt->execute([
             'functie' => 'lid'
-        ));
+        ]);
         $res = $stmt->fetchAll();
 
         return $res[0]['functieid'];

@@ -1,33 +1,33 @@
 <?php
 
-return array(
-    'controllers' => array(
-        'invokables' => array(
+return [
+    'controllers' => [
+        'invokables' => [
             'Checker\Controller\Checker' => 'Checker\Controller\CheckerController'
-        )
-    ),
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'check' => array(
-                    'options' => array(
+        ]
+    ],
+    'console' => [
+        'router' => [
+            'routes' => [
+                'check' => [
+                    'options' => [
                         'route' => 'check database',
-                        'defaults' => array(
+                        'defaults' => [
                             'controller' => 'Checker\Controller\Checker',
                             'action' => 'index'
-                        )
-                    )
-                ),
-                'check_memberships' => array(
-                    'options' => array(
+                        ]
+                    ]
+                ],
+                'check_memberships' => [
+                    'options' => [
                         'route' => 'check memberships',
-                        'defaults' => array(
+                        'defaults' => [
                             'controller' => 'Checker\Controller\Checker',
                             'action' => 'checkMemberships'
-                        )
-                    )
-                ),
-            )
-        )
-    )
-);
+                        ]
+                    ]
+                ],
+            ]
+        ]
+    ]
+];

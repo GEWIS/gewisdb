@@ -11,21 +11,21 @@ class DeleteDecision extends Form
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit_yes',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Ja'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit_no',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Nee'
-            )
-        ));
+            ]
+        ]);
 
         $this->initFilters();
     }
@@ -36,10 +36,10 @@ class DeleteDecision extends Form
 
         // this filter makes sure that the form is only valid when the user
         // has clicked yes
-        $filter->add(array(
+        $filter->add([
             'name' => 'submit_yes',
             'required' => true
-        ));
+        ]);
 
         $this->setInputFilter($filter);
     }

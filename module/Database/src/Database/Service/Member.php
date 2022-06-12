@@ -39,17 +39,17 @@ class Member extends AbstractService
         $noiban = false;
 
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
-            $form->setValidationGroup(array(
+            $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tueUsername', 'study', 'email', 'birth',
                 'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation'
-            ));
+            ]);
         } else {
-            $form->setValidationGroup(array(
+            $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tueUsername', 'study', 'email', 'birth',
                 'agreed', 'iban', 'signature', 'signatureLocation'
-            ));
+            ]);
         }
         if ($data['iban'] == 'noiban') {
             $noiban = true;
@@ -110,7 +110,7 @@ class Member extends AbstractService
         }
 
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $prospectiveMember));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $prospectiveMember]);
 
         return $prospectiveMember;
     }
@@ -126,9 +126,9 @@ class Member extends AbstractService
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
-        $model = new ViewModel(array(
+        $model = new ViewModel([
             'member' => $member
-        ));
+        ]);
         $model->setTemplate('database/member/subscribe');
         $body = $renderer->render($model);
 
@@ -282,7 +282,7 @@ class Member extends AbstractService
         $this->getMemberMapper()->persist($member);
 
         $this->removeProspective($prospectiveMember);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $member]);
 
         return $member;
     }
@@ -297,15 +297,15 @@ class Member extends AbstractService
     public function getMember($id)
     {
         try {
-            return array(
+            return [
                 'member' => $this->getMemberMapper()->find($id),
                 'simple' => false
-            );
+            ];
         } catch (\Doctrine\ORM\NoResultException $e) {
-            return array(
+            return [
                 'member' => $this->getMemberMapper()->findSimple($id),
                 'simple' => true
-            );
+            ];
         }
     }
 
@@ -318,10 +318,10 @@ class Member extends AbstractService
      */
     public function getProspectiveMember($id)
     {
-        return array(
+        return [
             'member' => $this->getProspectiveMemberMapper()->find($id),
             'form' => $this->getServiceManager()->get('database_form_membertype')
-        );
+        ];
     }
 
     /**
@@ -450,9 +450,9 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['member' => $member]);
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $member]);
 
         return $member;
     }
@@ -485,7 +485,7 @@ class Member extends AbstractService
             return null;
         }
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['member' => $member]);
         $data = $form->getData();
 
         // update changed on date
@@ -537,7 +537,7 @@ class Member extends AbstractService
         $member->setExpiration($expiration);
 
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $member]);
 
         return $member;
     }
@@ -561,7 +561,7 @@ class Member extends AbstractService
             return null;
         }
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['member' => $member]);
 
         // Make new expiration from previous expiration, but always make sure it is the end of the association year.
         $newExpiration = clone $member->getExpiration();
@@ -571,7 +571,7 @@ class Member extends AbstractService
         $member->setExpiration($newExpiration);
 
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $member]);
 
         return $member;
     }
@@ -597,9 +597,9 @@ class Member extends AbstractService
 
         $address = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['address' => $address]);
         $this->getMemberMapper()->persistAddress($address);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['address' => $address]);
 
         return $address;
     }
@@ -625,9 +625,9 @@ class Member extends AbstractService
 
         $address = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['address' => $address]);
         $this->getMemberMapper()->persistAddress($address);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['address' => $address]);
 
         return $address;
     }
@@ -655,9 +655,9 @@ class Member extends AbstractService
         $address = $formData['address'];
         $member = $address->getMember();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['address' => $address]);
         $this->getMemberMapper()->removeAddress($address);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['address' => $address]);
 
         return $member;
     }
@@ -695,9 +695,9 @@ class Member extends AbstractService
         }
 
         // simply persist through member
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['member' => $member]);
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $member]);
 
         return $member;
     }
@@ -714,10 +714,10 @@ class Member extends AbstractService
         $form = $this->getServiceManager()->get('database_form_memberedit');
         $member = $this->getMember($lidnr);
         $form->bind($member['member']);
-        return array(
+        return [
             'member' => $member['member'],
             'form' => $form
-        );
+        ];
     }
 
     /**
@@ -729,10 +729,10 @@ class Member extends AbstractService
      */
     public function getMemberExpirationForm($lidnr)
     {
-        return array(
+        return [
             'form' => $this->getServiceManager()->get('database_form_memberexpiration'),
             'member' => $this->getMember($lidnr)['member']
-        );
+        ];
     }
 
     /**
@@ -744,10 +744,10 @@ class Member extends AbstractService
      */
     public function getMemberTypeForm($lidnr)
     {
-        return array(
+        return [
             'member' => $this->getMember($lidnr)['member'],
             'form' => $this->getServiceManager()->get('database_form_membertype')
-        );
+        ];
     }
 
     /**
@@ -767,11 +767,11 @@ class Member extends AbstractService
             $this->listForm = new \Database\Form\MemberLists($member, $lists);
         }
 
-        return array(
+        return [
             'form' => $this->listForm,
             'member' => $member,
             'lists' => $lists
-        );
+        ];
     }
 
     /**
@@ -795,10 +795,10 @@ class Member extends AbstractService
         }
         $form = $this->getServiceManager()->get('database_form_address');
         $form->bind($address);
-        return array(
+        return [
             'form' => $form,
             'address' => $address
-        );
+        ];
     }
 
     /**
@@ -814,10 +814,10 @@ class Member extends AbstractService
         // find the address
         $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
         $form = $this->getServiceManager()->get('database_form_deleteaddress');
-        return array(
+        return [
             'form' => $form,
             'address' => $address
-        );
+        ];
     }
 
     /**

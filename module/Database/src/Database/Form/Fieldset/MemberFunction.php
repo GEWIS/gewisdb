@@ -13,19 +13,19 @@ class MemberFunction extends Fieldset
 
         $this->add($member);
 
-        $this->add(array(
+        $this->add([
             'name' => 'function',
             'type' => 'select',
-            'options' => array(
+            'options' => [
                 'label' => 'Functie',
                 'value_options' => $this->getValueOptions($service, $withmember)
-            )
-        ));
+            ]
+        ]);
     }
 
     protected function getValueOptions(FunctionService $service, $withmember)
     {
-        $array = array();
+        $array = [];
 
         if ($withmember) {
             $array['Lid'] = 'Lid';
@@ -40,6 +40,6 @@ class MemberFunction extends Fieldset
 
     public function getInputFilterSpecification()
     {
-        return array();
+        return [];
     }
 }

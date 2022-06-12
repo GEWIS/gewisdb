@@ -238,7 +238,7 @@ class Checker extends AbstractService
         // Check each member that needs to be checked.
         /** @var \Database\Model\Member $member */
         foreach ($members as $member) {
-            $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+            $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['member' => $member]);
             $request->setUri($config['endpoint'] . $member->getTueUsername());
             $response = $client->send($request);
 
@@ -281,7 +281,7 @@ class Checker extends AbstractService
             }
 
             $memberService->getMemberMapper()->persist($member);
-            $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $member]);
         }
     }
 
@@ -307,7 +307,7 @@ class Checker extends AbstractService
         /** @var \Database\Model\Member $member */
         foreach ($members as $member) {
             if ($member->getMembershipEndsOn() <= $now) {
-                $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+                $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, ['member' => $member]);
 
                 // Determine the next expiration date (always the end of the next association year).
                 $exp = clone $now;
@@ -343,7 +343,7 @@ class Checker extends AbstractService
                 $member->setExpiration($exp);
 
                 $memberService->getMemberMapper()->persist($member);
-                $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+                $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['member' => $member]);
             }
         }
     }

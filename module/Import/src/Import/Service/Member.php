@@ -27,11 +27,11 @@ class Member extends AbstractService
     {
         $member = new MemberModel();
 
-        $keys = array('e_mail', 'achternaam', 'tussen', 'voorlet', 'voornaam',
+        $keys = ['e_mail', 'achternaam', 'tussen', 'voorlet', 'voornaam',
             'hstraat', 'hpostcode', 'hplaats', 'htelefoon',
             'kstraat', 'kpostcode', 'kplaats', 'ktelefoon', 'betaald',
             'direct', 'plijst', 'winlijst', 'gewislijst', 'vacature', 'babbel'
-        );
+        ];
         foreach ($keys as $key) {
             if (empty($data[$key])) {
                 $data[$key] = '';

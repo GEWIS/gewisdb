@@ -18,13 +18,13 @@ abstract class FoundationReference extends SubDecision
     /**
      * Reference to foundation of organ.
      *
-     * @ORM\ManyToOne(targetEntity="Foundation",inversedBy="references",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Foundation", inversedBy="references", cascade={"persist"})
      * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number", onDelete="cascade")
+     *     @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type", onDelete="cascade"),
+     *     @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number", onDelete="cascade"),
+     *     @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point", onDelete="cascade"),
+     *     @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number", onDelete="cascade"),
+     *     @ORM\JoinColumn(name="r_number", referencedColumnName="number", onDelete="cascade")
      * })
      */
     protected $foundation;

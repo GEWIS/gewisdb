@@ -19,13 +19,13 @@ class Discharge extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add(clone $installation);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Dechargeer bestuurder'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -43,7 +43,7 @@ class Discharge extends AbstractDecision implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-        );
+        return [
+        ];
     }
 }

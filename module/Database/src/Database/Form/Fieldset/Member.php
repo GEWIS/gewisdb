@@ -13,30 +13,30 @@ class Member extends Fieldset implements InputFilterProviderInterface
 
         // is only there for fun, will only be used as source for 'lidnr' autocomplete
         // which uses AJAX to find members
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Lid'
-            )
-        ));
+            ]
+        ]);
 
         // actual way to find the member
-        $this->add(array(
+        $this->add([
             'name' => 'lidnr',
             'type' => 'hidden',
-        ));
+        ]);
     }
 
     public function getInputFilterSpecification()
     {
-        return array(
-            'lidnr' => array(
+        return [
+            'lidnr' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => 'digits')
-                )
-            )
-        );
+                'validators' => [
+                    ['name' => 'digits']
+                ]
+            ]
+        ];
     }
 }

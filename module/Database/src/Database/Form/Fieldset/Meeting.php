@@ -12,15 +12,15 @@ class Meeting extends Fieldset
     {
         parent::__construct('meeting');
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'hidden'
-        ));
+        ]);
 
         // TODO: filters
     }

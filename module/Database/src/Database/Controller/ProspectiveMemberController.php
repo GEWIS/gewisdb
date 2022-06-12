@@ -14,7 +14,7 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel(array());
+        return new ViewModel([]);
     }
 
     /**
@@ -34,9 +34,9 @@ class ProspectiveMemberController extends AbstractActionController
             return $member->toArray();
         }, $res);
 
-        return new JsonModel(array(
+        return new JsonModel([
             'json' => $res
-        ));
+        ]);
     }
 
     /**

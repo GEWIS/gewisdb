@@ -12,29 +12,29 @@ class DeleteAddress extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit_yes',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Ja'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit_no',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Nee'
-            )
-        ));
+            ]
+        ]);
     }
 
     public function getInputFilterSpecification()
     {
-        return array(
-            'submit_yes' => array(
+        return [
+            'submit_yes' => [
                 'required' => true
-            )
-        );
+            ]
+        ];
     }
 }

@@ -9,84 +9,83 @@ class Budget extends AbstractDecision
 {
     public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
     {
-
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'select',
-            'options' => array(
+            'options' => [
                 'label' => 'Begroting / Afrekening',
-                'value_options' => array(
+                'value_options' => [
                     'budget' => 'Begroting',
                     'reckoning' => 'Afrekening'
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Naam',
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'date',
             'type' => 'date',
-            'options' => array(
+            'options' => [
                 'label' => 'Datum begroting / afrekening'
-            )
-        ));
+            ]
+        ]);
 
         $member->setName('author');
         $member->setLabel('Auteur');
         $this->add($member);
 
-        $this->add(array(
+        $this->add([
             'name' => 'version',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Versie'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'approve',
             'type' => 'radio',
-            'options' => array(
+            'options' => [
                 'label' => 'Goedkeuren / Afkeuren',
-                'value_options' => array(
+                'value_options' => [
                     'true' => 'Goedkeuren',
                     'false' => 'Afkeuren'
-                ),
+                ],
                 // forward compatability with ZF 2.3, doesn't actually do anything right now
                 'disable_inarray_validator' => true
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'changes',
             'type' => 'radio',
-            'options' => array(
+            'options' => [
                 'label' => 'Wijzigingen',
-                'value_options' => array(
+                'value_options' => [
                     'true' => 'Met wijzigingen',
                     'false' => 'Zonder wijzigingen'
-                ),
+                ],
                 // forward compatability with ZF 2.3, doesn't actually do anything right now
                 'disable_inarray_validator' => true
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Verzend'
-            )
-        ));
+            ]
+        ]);
 
         $this->initFilters();
     }
@@ -95,76 +94,76 @@ class Budget extends AbstractDecision
     {
         $filter = new InputFilter();
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'type',
             'required' => true,
-            'validators' => array(
-                array(
+            'validators' => [
+                [
                     'name' => 'in_array',
-                    'options' => array(
-                        'haystack' => array(
+                    'options' => [
+                        'haystack' => [
                             'budget',
                             'reckoning'
-                        )
-                    )
-                )
-            )
-        ));
+                        ]
+                    ]
+                ]
+            ]
+        ]);
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'name',
             'required' => true,
-            'validators' => array(
-                array(
+            'validators' => [
+                [
                     'name' => 'string_length',
-                    'options' => array(
+                    'options' => [
                         'min' => 3,
                         'max' => 255
-                    )
-                )
-            )
-        ));
+                    ]
+                ]
+            ]
+        ]);
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'date',
             'required' => true,
-            'validators' => array(
-                array('name' => 'date')
-            )
-        ));
+            'validators' => [
+                ['name' => 'date']
+            ]
+        ]);
 
         // TODO: update author check
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'version',
             'required' => true,
-            'validators' => array(
-                array(
+            'validators' => [
+                [
                     'name' => 'string_length',
-                    'options' => array(
+                    'options' => [
                         'min' => 1,
                         'max' => 32
-                    )
-                )
-            )
-        ));
+                    ]
+                ]
+            ]
+        ]);
 
         // Boolean values have no filter. The form will make sure that it will be casted to true or false
         // And because of the filters the filter is unable to detect if a value is set.
-        $filter->add(array(
+        $filter->add([
             'name' => 'approve',
             'required' => true,
             'allow_empty' => false,
             'fallback_value' => false,
 
-        ));
+        ]);
 
-        $filter->add(array(
+        $filter->add([
             'name' => 'changes',
             'required' => true,
             'allow_empty' => false,
             'fallback_value' => false,
-        ));
+        ]);
 
         $this->setInputFilter($filter);
     }

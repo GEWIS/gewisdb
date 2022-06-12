@@ -13,30 +13,30 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('subdecision');
 
-        $this->add(array(
+        $this->add([
             'name' => 'meeting_type',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'meeting_number',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'decision_point',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'decision_number',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'hidden'
-        ));
+        ]);
     }
 
     /**
@@ -44,42 +44,42 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'meeting_type' => array(
+        return [
+            'meeting_type' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'in_array',
-                        'options' => array(
+                        'options' => [
                             'haystack' => MeetingModel::getTypes()
-                        )
-                    )
-                )
-            ),
-            'meeting_number' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'meeting_number' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => 'digits')
-                )
-            ),
-            'decision_point' => array(
+                'validators' => [
+                    ['name' => 'digits']
+                ]
+            ],
+            'decision_point' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => 'digits')
-                )
-            ),
-            'decision_number' => array(
+                'validators' => [
+                    ['name' => 'digits']
+                ]
+            ],
+            'decision_number' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => 'digits')
-                )
-            ),
-            'number' => array(
+                'validators' => [
+                    ['name' => 'digits']
+                ]
+            ],
+            'number' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => 'digits')
-                )
-            ),
-        );
+                'validators' => [
+                    ['name' => 'digits']
+                ]
+            ],
+        ];
     }
 }

@@ -37,9 +37,9 @@ class InstallationFunction extends AbstractService
 
         $function = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('function' => $function));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', ['function' => $function]);
         $this->getFunctionMapper()->persist($function);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('function' => $function));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', ['function' => $function]);
 
         return true;
     }

@@ -15,21 +15,21 @@ class Meeting extends AbstractService
     {
         $mapper = $this->getMeetingMapper();
 
-        $types = array(
+        $types = [
             'bv' => 1,
             'av' => 2,
             'vv' => 3,
             'virt' => 4
-        );
+        ];
 
         foreach ($mapper->findAll(false) as $meeting) {
             $type = $types[strtolower($meeting->getType())];
 
-            $data = array(
+            $data = [
                 'vergadertypeid' => $type,
                 'vergadernr' => $meeting->getNumber(),
                 'datum' => $meeting->getDate()->format('Y-m-d')
-            );
+            ];
 
             // update the meeting
             if ($this->getQuery()->checkMeetingExists($type, $meeting->getNumber())) {
@@ -62,7 +62,7 @@ class Meeting extends AbstractService
         $data['besluitnr'] = $decision->getNumber();
 
         // gather content from the subdecisions
-        $data['inhoud'] = array();
+        $data['inhoud'] = [];
         foreach ($decision->getSubdecisions() as $subdecision) {
             $data['inhoud'][] = $subdecision->getContent();
         }
@@ -85,7 +85,7 @@ class Meeting extends AbstractService
      */
     protected function exportSubdecision($subdecision, $type)
     {
-        $data = array(
+        $data = [
             'vergadertypeid' => $type,
             'vergadernr' => $subdecision->getDecision()->getMeeting()->getNumber(),
             'puntnr' => $subdecision->getDecision()->getPoint(),
@@ -101,7 +101,7 @@ class Meeting extends AbstractService
             // other fields:
             // functieid
             //
-        );
+        ];
 
         /*
          * 1    Installatie     Het installeren van een GEWIS-lid in een GEWIS-or...
@@ -159,7 +159,7 @@ class Meeting extends AbstractService
             $data['lidnummer'] = $subdecision->getInstallation()->getMember()->getLidnr();
         } elseif ($subdecision instanceof SubDecision\Other) {
             $data['besluittypeid'] = 7;
-            // nothing special
+        // nothing special
         } elseif ($subdecision instanceof SubDecision\Destroy) {
             $data['besluittypeid'] = 7;
             // nothing special

@@ -12,26 +12,26 @@
  * file.
  */
 
-return array(
+return [
     // ...
 
     /**
      * Email configuration.
      */
-    'email' => array(
+    'email' => [
         'transport' => 'File',
-        'options' => array(
+        'options' => [
             'path' => 'data/mail/'
-        ),
+        ],
         'from' => 'secr@gewis.nl',
         'to' => [
             'report_error' => 'databaseisstuk@gewis.nl',
             'subscription' => 'secr@gewis.nl'
         ]
-    ),
-    'storage' => array(
+    ],
+    'storage' => [
         'storage_dir' => 'public/data',
         'public_dir' => 'data',
         'dir_mode' => 0770,
-    ),
-);
+    ],
+];

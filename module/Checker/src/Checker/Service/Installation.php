@@ -20,7 +20,7 @@ class Installation extends AbstractService
         $createdMembers = $mapper->getAllInstallationsInstalled($meeting);
         $deletedMembers = $mapper->getAllInstallationsDischarged($meeting);
 
-        $members = array();
+        $members = [];
         foreach ($createdMembers as $cm) {
             $members[$this->getHash($cm)] = $cm;
         }

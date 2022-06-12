@@ -23,25 +23,25 @@ class QueryController extends AbstractActionController
 
 
             if (!is_null($result) && count($result) > 0) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'form' => $service->getQueryForm(),
                     'exportform' => $service->getQueryExportForm(),
                     'result' => $result,
                     'saved' => $service->getSavedQueries(),
                     'entities' => $service->getEntities()
-                ));
+                ]);
             } elseif (isset($query)) {
-                return $this->redirect()->toRoute('query/show', array(
+                return $this->redirect()->toRoute('query/show', [
                     'query' => $query->getId()
-                ));
+                ]);
             }
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $service->getQueryForm(),
             'saved' => $service->getSavedQueries(),
             'entities' => $service->getEntities()
-        ));
+        ]);
     }
 
     /**
@@ -51,13 +51,13 @@ class QueryController extends AbstractActionController
     {
         $service = $this->getQueryService();
 
-        $viewmodel = new Viewmodel(array(
+        $viewmodel = new Viewmodel([
             'form' => $service->getQueryForm(),
             'saved' => $service->getSavedQueries(),
             'exportform' => $service->getQueryExportForm(),
             'result' => $service->executeSaved($this->params()->fromRoute('query')),
             'entities' => $service->getEntities()
-        ));
+        ]);
         $viewmodel->setTemplate('database/query/index');
         return $viewmodel;
     }
@@ -73,9 +73,9 @@ class QueryController extends AbstractActionController
             $result = $service->execute($this->getRequest()->getPost(), true);
 
             if (null !== $result) {
-                $vm = new ViewModel(array(
+                $vm = new ViewModel([
                     'result' => $result
-                ));
+                ]);
                 $vm->setTemplate('database/query/export');
                 $vm->setTerminal(true);
                 return $vm;

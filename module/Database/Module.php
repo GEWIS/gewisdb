@@ -30,13 +30,13 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                )
-            )
-        );
+                ]
+            ]
+        ];
     }
 
     /**
@@ -56,8 +56,8 @@ class Module
      */
     public function getServiceConfig()
     {
-        return array(
-            'invokables' => array(
+        return [
+            'invokables' => [
                 'database_service_meeting' => 'Database\Service\Meeting',
                 'database_service_member' => 'Database\Service\Member',
                 'database_service_event' => 'Database\Service\Event',
@@ -77,8 +77,8 @@ class Module
                 'database_form_queryexport' => 'Database\Form\QueryExport',
                 'database_form_deleteaddress' => 'Database\Form\DeleteAddress',
                 'database_form_deletelist' => 'Database\Form\DeleteList',
-            ),
-            'factories' => array(
+            ],
+            'factories' => [
                 'database_form_addressexport' => function ($sm) {
                     return new \Database\Form\AddressExport();
                 },
@@ -364,13 +364,13 @@ class Module
                 'database_doctrine_em' => function ($sm) {
                     return $sm->get('doctrine.entitymanager.orm_default');
                 }
-            ),
-            'shared' => array(
+            ],
+            'shared' => [
                 // every form should get a different meeting fieldset
                 'database_form_fieldset_meeting' => false,
                 'database_form_fieldset_member' => false,
                 'database_form_fieldset_subdecision_foundation' => false,
-            )
-        );
+            ]
+        ];
     }
 }

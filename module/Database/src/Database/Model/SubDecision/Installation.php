@@ -23,7 +23,7 @@ class Installation extends FoundationReference
     /**
      * Member.
      *
-     * @ORM\ManyToOne(targetEntity="Database\Model\Member",inversedBy="installations")
+     * @ORM\ManyToOne(targetEntity="Database\Model\Member", inversedBy="installations")
      * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
     protected $member;
@@ -31,7 +31,7 @@ class Installation extends FoundationReference
     /**
      * Discharges.
      *
-     * @ORM\OneToOne(targetEntity="Discharge",mappedBy="installation")
+     * @ORM\OneToOne(targetEntity="Discharge", mappedBy="installation")
      */
     protected $discharge;
 

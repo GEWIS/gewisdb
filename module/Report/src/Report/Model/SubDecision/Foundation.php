@@ -13,12 +13,12 @@ use Report\Model\SubDecision;
  */
 class Foundation extends SubDecision
 {
-    const ORGAN_TYPE_COMMITTEE = 'committee';
-    const ORGAN_TYPE_AVC = 'avc';
-    const ORGAN_TYPE_FRATERNITY = 'fraternity';
-    const ORGAN_TYPE_KKK = 'kkk';
-    const ORGAN_TYPE_AVW = 'avw';
-    const ORGAN_TYPE_RVA = 'rva';
+    public const ORGAN_TYPE_COMMITTEE = 'committee';
+    public const ORGAN_TYPE_AVC = 'avc';
+    public const ORGAN_TYPE_FRATERNITY = 'fraternity';
+    public const ORGAN_TYPE_KKK = 'kkk';
+    public const ORGAN_TYPE_AVW = 'avw';
+    public const ORGAN_TYPE_RVA = 'rva';
 
     /**
      * Abbreviation (only for when organs are created)
@@ -44,14 +44,14 @@ class Foundation extends SubDecision
     /**
      * References from other subdecisions to this organ.
      *
-     * @ORM\OneToMany(targetEntity="FoundationReference",mappedBy="foundation", cascade="remove")
+     * @ORM\OneToMany(targetEntity="FoundationReference", mappedBy="foundation", cascade="remove")
      */
     protected $references;
 
     /**
      * Organ entry for this organ.
      *
-     * @ORM\OneToOne(targetEntity="Report\Model\Organ",mappedBy="foundation", cascade="remove")
+     * @ORM\OneToOne(targetEntity="Report\Model\Organ", mappedBy="foundation", cascade="remove")
      */
     protected $organ;
 
@@ -71,14 +71,14 @@ class Foundation extends SubDecision
      */
     public function getOrganTypes()
     {
-        return array(
+        return [
             self::ORGAN_TYPE_COMMITTEE,
             self::ORGAN_TYPE_AVC,
             self::ORGAN_TYPE_FRATERNITY,
             self::ORGAN_TYPE_KKK,
             self::ORGAN_TYPE_AVW,
             self::ORGAN_TYPE_RVA
-        );
+        ];
     }
 
     /**
@@ -176,7 +176,7 @@ class Foundation extends SubDecision
     public function toArray()
     {
         $decision = $this->getDecision();
-        return array(
+        return [
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'decision_point' => $decision->getPoint(),
@@ -185,6 +185,6 @@ class Foundation extends SubDecision
             'abbr' => $this->getAbbr(),
             'name' => $this->getName(),
             'organtype' => $this->getOrganType()
-        );
+        ];
     }
 }

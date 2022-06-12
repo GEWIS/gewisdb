@@ -1,14 +1,14 @@
 <?php
 
-return array(
-    'controllers' => array(
-        'invokables' => array(
+return [
+    'controllers' => [
+        'invokables' => [
             'Report\Controller\Report' => 'Report\Controller\ReportController'
-        )
-    ),
-    'doctrine' => array(
-        'configuration' => array(
-            'orm_report' => array(
+        ]
+    ],
+    'doctrine' => [
+        'configuration' => [
+            'orm_report' => [
                 'metadata_cache' => 'array',
                 'query_cache' => 'array',
                 'result_cache' => 'array',
@@ -17,67 +17,67 @@ return array(
                 'generate_proxies' => true,
                 'proxy_dir' => 'data/DoctrineORMModule/Proxy',
                 'proxy_namespace' => 'DoctrineORMModule\Proxy',
-                'filters' => array(),
-                'entity_namespaces' => array(
+                'filters' => [],
+                'entity_namespaces' => [
                     'db' => 'Report\Model'
-                )
-            )
-        ),
-        'driver' => array(
-            'Report_Driver' => array(
+                ]
+            ]
+        ],
+        'driver' => [
+            'Report_Driver' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => array(
+                'paths' => [
                     __DIR__ . '/../src/Report/Model'
-                )
-            ),
-            'orm_report' => array(
+                ]
+            ],
+            'orm_report' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\DriverChain',
-                'drivers' => array(
+                'drivers' => [
                     'Report\Model' => 'Report_Driver'
-                )
-            )
-        ),
-        'entitymanager' => array(
-            'orm_report' => array(
+                ]
+            ]
+        ],
+        'entitymanager' => [
+            'orm_report' => [
                 'connection' => 'orm_report',
                 'configuration' => 'orm_report'
-            )
-        ),
-        'eventmanager' => array(
-            'orm_report' => array()
-        ),
-        'sql_logger_collector' => array(
-            'orm_report' => array()
-        ),
-        'entity_resolver' => array(
-            'orm_report' => array()
-        )
-    ),
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'generate_reportdb' => array(
-                    'options' => array(
+            ]
+        ],
+        'eventmanager' => [
+            'orm_report' => []
+        ],
+        'sql_logger_collector' => [
+            'orm_report' => []
+        ],
+        'entity_resolver' => [
+            'orm_report' => []
+        ]
+    ],
+    'console' => [
+        'router' => [
+            'routes' => [
+                'generate_reportdb' => [
+                    'options' => [
                         'route' => 'generate reportdb',
-                        'defaults' => array(
+                        'defaults' => [
                             'controller' => 'Report\Controller\Report',
                             'action' => 'generate'
-                        )
-                    )
-                ),
-                'generate_reportdb_full' => array(
-                    'options' => array(
+                        ]
+                    ]
+                ],
+                'generate_reportdb_full' => [
+                    'options' => [
                         'route' => 'generate reportdb full',
-                        'defaults' => array(
+                        'defaults' => [
                             'controller' => 'Report\Controller\Report',
                             'action' => 'generateAll'
-                        )
-                    )
-                )
-            )
-        )
-    ),
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
     'mail' => [
     ]
-);
+];

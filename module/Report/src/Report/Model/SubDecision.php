@@ -11,18 +11,18 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({
- *  "foundation"="Report\Model\SubDecision\Foundation",
- *  "abrogation"="Report\Model\SubDecision\Abrogation",
- *  "installation"="Report\Model\SubDecision\Installation",
- *  "discharge"="Report\Model\SubDecision\Discharge",
- *  "budget"="Report\Model\SubDecision\Budget",
- *  "reckoning"="Report\Model\SubDecision\Reckoning",
- *  "other"="Report\Model\SubDecision\Other",
- *  "destroy"="Report\Model\SubDecision\Destroy",
- *  "board_installation"="Report\Model\SubDecision\Board\Installation",
- *  "board_release"="Report\Model\SubDecision\Board\Release",
- *  "board_discharge"="Report\Model\SubDecision\Board\Discharge",
- *  "foundationreference"="Report\Model\SubDecision\FoundationReference"
+ *     "foundation": "Report\Model\SubDecision\Foundation",
+ *     "abrogation": "Report\Model\SubDecision\Abrogation",
+ *     "installation": "Report\Model\SubDecision\Installation",
+ *     "discharge": "Report\Model\SubDecision\Discharge",
+ *     "budget": "Report\Model\SubDecision\Budget",
+ *     "reckoning": "Report\Model\SubDecision\Reckoning",
+ *     "other": "Report\Model\SubDecision\Other",
+ *     "destroy": "Report\Model\SubDecision\Destroy",
+ *     "board_installation": "Report\Model\SubDecision\Board\Installation",
+ *     "board_release": "Report\Model\SubDecision\Board\Release",
+ *     "board_discharge": "Report\Model\SubDecision\Board\Discharge",
+ *     "foundationreference": "Report\Model\SubDecision\FoundationReference"
  * })
  */
 abstract class SubDecision
@@ -32,10 +32,10 @@ abstract class SubDecision
      *
      * @ORM\ManyToOne(targetEntity="Decision", inversedBy="subdecisions")
      * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="decision_point", referencedColumnName="point"),
-     *  @ORM\JoinColumn(name="decision_number", referencedColumnName="number"),
+     *     @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type"),
+     *     @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number"),
+     *     @ORM\JoinColumn(name="decision_point", referencedColumnName="point"),
+     *     @ORM\JoinColumn(name="decision_number", referencedColumnName="number"),
      * })
      */
     protected $decision;

@@ -8,21 +8,21 @@ class QuerySave extends Query
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Naam'
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit_save',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Opslaan'
-            )
-        ));
+            ]
+        ]);
 
         $this->get('submit_save')->setLabel('Opslaan');
     }

@@ -1,33 +1,33 @@
 <?php
 
-return array(
-    'controllers' => array(
-        'invokables' => array(
+return [
+    'controllers' => [
+        'invokables' => [
             'Import\Controller\Import' => 'Import\Controller\ImportController'
-        )
-    ),
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'import_members' => array(
-                    'options' => array(
+        ]
+    ],
+    'console' => [
+        'router' => [
+            'routes' => [
+                'import_members' => [
+                    'options' => [
                         'route' => 'import members',
-                        'defaults' => array(
+                        'defaults' => [
                             'controller' => 'Import\Controller\Import',
                             'action' => 'members'
-                        )
-                    )
-                ),
-                'import' => array(
-                    'options' => array(
+                        ]
+                    ]
+                ],
+                'import' => [
+                    'options' => [
                         'route' => 'import',
-                        'defaults' => array(
+                        'defaults' => [
                             'controller' => 'Import\Controller\Import',
                             'action' => 'import'
-                        )
-                    )
-                )
-            )
-        )
-    )
-);
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+];

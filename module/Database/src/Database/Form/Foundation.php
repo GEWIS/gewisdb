@@ -12,56 +12,56 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
     {
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'radio',
-            'options' => array(
+            'options' => [
                 'label' => 'Type',
-                'value_options' => array(
+                'value_options' => [
                     'committee' => 'Commissie',
                     'avc' => 'AV-Commissie',
                     'avw' => 'AV-Werkgroep',
                     'kkk' => 'KKK',
                     'fraternity' => 'Dispuut',
                     'rva' => 'RvA'
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Naam',
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'abbr',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Afkorting'
-            )
-        ));
+            ]
+        ]);
 
         // Is this possible with a factory?
         $members = new CollectionWithErrors();
         $members->setName('members');
-        $members->setOptions(array(
+        $members->setOptions([
             'label' => 'Members',
             'count' => 2,
             'should_create_template' => true,
             'target_element' => $function
-        ));
+        ]);
         $this->add($members);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Richt op'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -69,41 +69,41 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'name' => array(
+        return [
+            'name' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 128
-                        )
-                    )
-                )
-            ),
+                        ]
+                    ]
+                ]
+            ],
 
-            'abbr' => array(
+            'abbr' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
+                        ]
+                    ]
+                ]
+            ],
 
-            'members' => array(
+            'members' => [
                 'continue_if_empty' => true,
                 'validators' => [
                     [
                         'name' => 'notEmpty',
                     ]
                 ]
-            )
-        );
+            ]
+        ];
     }
 }

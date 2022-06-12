@@ -109,10 +109,10 @@ class Query
             $this->prepareDecisions();
         }
 
-        $this->dStmt->execute(array(
+        $this->dStmt->execute([
             'type' => $type,
             'nr' => $nr
-        ));
+        ]);
 
         return $this->dStmt->fetchAll();
     }
@@ -152,12 +152,12 @@ class Query
             $this->prepareSubdecisions();
         }
 
-        $this->sStmt->execute(array(
+        $this->sStmt->execute([
             'type' => $type,
             'nr' => $nr,
             'puntnr' => $puntnr,
             'besluitnr' => $besluitnr
-        ));
+        ]);
 
         return $this->sStmt->fetchAll();
     }

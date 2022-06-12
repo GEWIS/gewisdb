@@ -84,15 +84,19 @@ class Member extends AbstractService
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $reportListRepo = $em->getRepository('Report\Model\MailingList');
 
-        $reportLists = array_map(function ($list) {
-            return $list->getName();
-        },
-            $reportMember->getLists()->toArray());
+        $reportLists = array_map(
+            function ($list) {
+                return $list->getName();
+            },
+            $reportMember->getLists()->toArray()
+        );
 
-        $lists = array_map(function ($list) {
-            return $list->getName();
-        },
-            $member->getLists()->toArray());
+        $lists = array_map(
+            function ($list) {
+                return $list->getName();
+            },
+            $member->getLists()->toArray()
+        );
 
         foreach (array_diff($lists, $reportLists) as $list) {
             $reportList = $reportListRepo->find($list);
@@ -129,10 +133,10 @@ class Member extends AbstractService
                 throw new \LogicException('Address without member');
             }
         }
-        $reportAddress = $addrRepo->find(array(
+        $reportAddress = $addrRepo->find([
             'member' => $reportMember->getLidnr(),
             'type' => $address->getType()
-        ));
+        ]);
         if (null === $reportAddress) {
             $reportAddress = new ReportAddress();
         }
@@ -161,10 +165,10 @@ class Member extends AbstractService
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $repo = $em->getRepository('Report\Model\Address');
         // first try to find an existing member
-        $reportAddress = $repo->find(array(
+        $reportAddress = $repo->find([
             'member' => $address->getMember()->getLidnr(),
             'type' => $address->getType()
-        ));
+        ]);
         $em->remove($reportAddress);
     }
 
@@ -175,7 +179,7 @@ class Member extends AbstractService
 
     public function removeFromMailmanList($member, $listName)
     {
-       // TODO
+        // TODO
     }
 
     /**

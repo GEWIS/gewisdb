@@ -1,19 +1,19 @@
 <?php
 
-return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
+return [
+    'router' => [
+        'routes' => [
+            'home' => [
                 'type' => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller' => 'Index',
                         'action'     => 'index',
-                    ),
-                ),
-            ),
+                    ],
+                ],
+            ],
             'address' => [
                 'type' => 'Literal',
                 'options' => [
@@ -25,276 +25,276 @@ return array(
                     ]
                 ]
             ],
-            'meeting' => array(
+            'meeting' => [
                 'type'    => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/meeting',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller'    => 'Meeting',
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'decision' => array(
+                'child_routes' => [
+                    'decision' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/decision',
-                            'defaults' => array(
+                            'defaults' => [
                                 'action' => 'decision'
-                            )
-                        ),
+                            ]
+                        ],
                         'may_terminate' => false,
-                        'child_routes' => array(
-                            'form' => array(
+                        'child_routes' => [
+                            'form' => [
                                 'type' => 'Segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/:form',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'form' => '[a-zA-Z][a-zA-Z0-9_-]*'
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'action' => 'decisionform'
-                                    )
-                                )
-                            ),
-                            'create' => array(
+                                    ]
+                                ]
+                            ],
+                            'create' => [
                                 'type' => 'Segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/:type/:number/:point/:decision',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*'
-                                    )
-                                )
-                            ),
-                            'delete' => array(
+                                    ]
+                                ]
+                            ],
+                            'delete' => [
                                 'type' => 'Segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/delete/:type/:number/:point/:decision',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*'
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'action' => 'delete'
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    'view' => array(
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'view' => [
                         'type' => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/:type/:number',
-                            'constraints' => array(
+                            'constraints' => [
                                 'type' => 'AV|BV|VV|Virt',
                                 'number' => '\-?[0-9]*'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'action' => 'view'
-                            )
-                        )
-                    ),
-                    'create' => array(
+                            ]
+                        ]
+                    ],
+                    'create' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/create',
-                            'defaults' => array(
+                            'defaults' => [
                                 'action' => 'create'
-                            )
-                        )
-                    ),
-                    'search' => array(
+                            ]
+                        ]
+                    ],
+                    'search' => [
                         'type' => 'Literal',
-                        'options' => array(
+                        'options' => [
                             'route' => '/search',
-                            'defaults' => array(
+                            'defaults' => [
                                 'action' => 'search'
-                            )
-                        )
-                    )
-                ),
-            ),
-            'organ' => array(
+                            ]
+                        ]
+                    ]
+                ],
+            ],
+            'organ' => [
                 'type'    => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/organ',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller'    => 'Organ',
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
+                'child_routes' => [
+                    'default' => [
                         'type'    => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                    'info' => array(
+                            ],
+                        ],
+                    ],
+                    'info' => [
                         'type' => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/info/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => array(
+                            'defaults' => [
                                 'action' => 'info'
-                            ),
-                            'constraints' => array(
+                            ],
+                            'constraints' => [
                                 'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
                                 'subdecision' => '[0-9]*'
-                            )
-                        )
-                    ),
-                    'view' => array(
+                            ]
+                        ]
+                    ],
+                    'view' => [
                         'type' => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => array(
+                            'defaults' => [
                                 'action' => 'view'
-                            ),
-                            'constraints' => array(
+                            ],
+                            'constraints' => [
                                 'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
                                 'subdecision' => '[0-9]*'
-                            )
-                        )
-                    )
-                ),
-            ),
-            'member' => array(
+                            ]
+                        ]
+                    ]
+                ],
+            ],
+            'member' => [
                 'type'    => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/member',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller'    => 'Member',
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'show' => array(
+                'child_routes' => [
+                    'show' => [
                         'type' => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'action' => 'show'
-                            )
-                        ),
+                            ]
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'edit' => array(
+                        'child_routes' => [
+                            'edit' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/edit',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'action' => 'edit'
-                                    )
-                                ),
+                                    ]
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'address' => array(
+                                'child_routes' => [
+                                    'address' => [
                                         'type' => 'Segment',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/address/:type',
-                                            'constraints' => array(
+                                            'constraints' => [
                                                 'type' => 'home|student|mail'
-                                            ),
-                                            'defaults' => array(
+                                            ],
+                                            'defaults' => [
                                                 'action' => 'editAddress'
-                                            ),
-                                        )
-                                    ),
-                                    'membership' => array(
+                                            ],
+                                        ]
+                                    ],
+                                    'membership' => [
                                         'type' => 'Literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/membership',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'action' => 'membership'
-                                            )
-                                        )
-                                    ),
-                                    'lists' => array(
+                                            ]
+                                        ]
+                                    ],
+                                    'lists' => [
                                         'type' => 'Literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/lists',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'action' => 'lists'
-                                            )
-                                        )
-                                    ),
-                                    'expiration' => array(
+                                            ]
+                                        ]
+                                    ],
+                                    'expiration' => [
                                         'type' => 'Literal',
-                                        'options' => array(
+                                        'options' => [
                                             'route' => '/expiration',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'action' => 'expiration'
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            'delete' => array(
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            'delete' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/delete',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'action' => 'delete'
-                                    )
-                                )
-                            ),
-                            'print' => array(
+                                    ]
+                                ]
+                            ],
+                            'print' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/print',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'action' => 'print'
-                                    )
-                                )
-                            ),
-                            'remove-address' => array(
+                                    ]
+                                ]
+                            ],
+                            'remove-address' => [
                                 'type' => 'Segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/remove/address/:type',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'type' => 'home|student|mail'
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'action' => 'removeAddress'
-                                    ),
-                                )
-                            ),
-                            'add-address' => array(
+                                    ],
+                                ]
+                            ],
+                            'add-address' => [
                                 'type' => 'Segment',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/add/address/:type',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'type' => 'home|student|mail'
-                                    ),
-                                    'defaults' => array(
+                                    ],
+                                    'defaults' => [
                                         'action' => 'addAddress'
-                                    ),
-                                )
-                            ),
-                            'supremum' => array(
+                                    ],
+                                ]
+                            ],
+                            'supremum' => [
                                 'type' => 'Literal',
                                 'options' => [
                                     'route' => '/supremum',
@@ -324,173 +324,173 @@ return array(
                                         ]
                                     ],
                                 ]
-                            )
-                        )
-                    ),
-                    'default' => array(
+                            ]
+                        ]
+                    ],
+                    'default' => [
                         'type'    => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'prospective-member' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'prospective-member' => [
                 'type'    => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/prospective-member',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller'    => 'ProspectiveMember',
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'show' => array(
+                'child_routes' => [
+                    'show' => [
                         'type' => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'action' => 'show'
-                            )
-                        ),
+                            ]
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'delete' => array(
+                        'child_routes' => [
+                            'delete' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/delete',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'action' => 'delete'
-                                    )
-                                )
-                            ),
-                            'finalize' => array(
+                                    ]
+                                ]
+                            ],
+                            'finalize' => [
                                 'type' => 'Literal',
-                                'options' => array(
+                                'options' => [
                                     'route' => '/finalize',
-                                    'defaults' => array(
+                                    'defaults' => [
                                         'action' => 'finalize'
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    'default' => array(
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
+                    'default' => [
                         'type'    => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'export' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'export' => [
                 'type'    => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/export',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller'    => 'Export',
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
+                'child_routes' => [
+                    'default' => [
                         'type'    => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'settings' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'settings' => [
                 'type'    => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/settings',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller'    => 'Settings',
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'list-delete' => array(
+                'child_routes' => [
+                    'list-delete' => [
                         'type' => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/list/delete/:name',
-                            'constraints' => array(
+                            'constraints' => [
                                 'name' => '[a-zA-Z0-9_-]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'action' => 'deleteList'
-                            )
-                        )
-                    ),
-                    'default' => array(
+                            ]
+                        ]
+                    ],
+                    'default' => [
                         'type'    => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'query' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'query' => [
                 'type'    => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/query',
-                    'defaults' => array(
+                    'defaults' => [
                         '__NAMESPACE__' => 'Database\Controller',
                         'controller'    => 'Query',
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'show' => array(
+                'child_routes' => [
+                    'show' => [
                         'type' => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route' => '/show/:query',
-                            'constraints' => array(
+                            'constraints' => [
                                 'query' => '[0-9]+'
-                            ),
-                            'defaults' => array(
+                            ],
+                            'defaults' => [
                                 'action' => 'show'
-                            )
-                        )
-                    ),
-                    'default' => array(
+                            ]
+                        ]
+                    ],
+                    'default' => [
                         'type'    => 'Segment',
-                        'options' => array(
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'controllers' => [
+        'invokables' => [
             'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
             'Database\Controller\ProspectiveMember' => 'Database\Controller\ProspectiveMemberController',
             'Database\Controller\Member' => 'Database\Controller\MemberController',
@@ -500,35 +500,35 @@ return array(
             'Database\Controller\Settings' => 'Database\Controller\SettingsController',
             'Database\Controller\Address' => 'Database\Controller\AddressController',
             'Database\Controller\Index' => 'Database\Controller\IndexController',
-        )
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
+        ]
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
             'database' => __DIR__ . '/../view/'
-        ),
-        'strategies' => array(
+        ],
+        'strategies' => [
             'ViewJsonStrategy'
-        )
-    ),
-    'doctrine' => array(
-        'driver' => array(
-            'database_entities' => array(
+        ]
+    ],
+    'doctrine' => [
+        'driver' => [
+            'database_entities' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/Database/Model/')
-            ),
-            'orm_default' => array(
-                'drivers' => array(
+                'paths' => [__DIR__ . '/../src/Database/Model/']
+            ],
+            'orm_default' => [
+                'drivers' => [
                     'Database\Model' => 'database_entities'
-                ),
-            )
-        ),
-        'configuration' => array(
-            'orm_default' => array(
-                'entity_namespaces' => array(
+                ],
+            ]
+        ],
+        'configuration' => [
+            'orm_default' => [
+                'entity_namespaces' => [
                     'dborig' => 'Database\Model'
-                )
-            )
-        )
-    )
-);
+                ]
+            ]
+        ]
+    ]
+];

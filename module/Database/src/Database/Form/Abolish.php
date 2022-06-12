@@ -10,21 +10,21 @@ class Abolish extends AbstractDecision
     {
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Orgaan',
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => 'Hef orgaan op'
-            )
-        ));
+            ]
+        ]);
 
         $this->add($subdecision);
 

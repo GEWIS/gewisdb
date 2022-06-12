@@ -18,9 +18,9 @@ class MeetingController extends AbstractActionController
     {
         $service = $this->getMeetingService();
 
-        return new ViewModel(array(
+        return new ViewModel([
             'meetings' => $service->getAllMeetings()
-        ));
+        ]);
     }
 
     /**
@@ -34,16 +34,16 @@ class MeetingController extends AbstractActionController
         if ($request->isPost()) {
             $meeting = $service->createMeeting($request->getPost());
             if (null !== $meeting) {
-                return $this->redirect()->toRoute('meeting/view', array(
+                return $this->redirect()->toRoute('meeting/view', [
                     'type' => $meeting->getType(),
                     'number' => $meeting->getNumber()
-                ));
+                ]);
             }
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $service->getCreateMeetingForm()
-        ));
+        ]);
     }
 
     /**
@@ -51,14 +51,14 @@ class MeetingController extends AbstractActionController
      */
     public function viewAction()
     {
-        return new ViewModel(array(
+        return new ViewModel([
             'type' => $this->params()->fromRoute('type'),
             'number' => $this->params()->fromRoute('number'),
             'meeting' => $this->getMeetingService()->getMeeting(
                 $this->params()->fromRoute('type'),
                 $this->params()->fromRoute('number')
             )
-        ));
+        ]);
     }
 
     /**
@@ -75,21 +75,21 @@ class MeetingController extends AbstractActionController
                         ->getMeeting($type, $number);
 
         if ($this->getMeetingService()->decisionExists($type, $number, $point, $decision)) {
-            return new ViewModel(array(
+            return new ViewModel([
                 'meeting' => $meeting,
                 'point' => $point,
                 'decision' => $decision,
                 'error' => true
-            ));
+            ]);
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'meeting' => $meeting,
             'point' => $point,
             'decision' => $decision,
             'forms' => $this->getDecisionForms($meeting, $point, $decision),
             'memberfunction' => $this->getServiceLocator()->get('database_form_fieldset_memberfunction_nomember')
-        ));
+        ]);
     }
 
     /**
@@ -103,7 +103,7 @@ class MeetingController extends AbstractActionController
      */
     protected function getDecisionForms($meeting, $point, $decision)
     {
-        $forms = array(
+        $forms = [
             'budget' => $this->getMeetingService()->getBudgetForm(),
             'foundation' => $this->getMeetingService()->getFoundationForm(),
             'abolish' => $this->getMeetingService()->getAbolishForm(),
@@ -113,7 +113,7 @@ class MeetingController extends AbstractActionController
             'board_install' => $this->getMeetingService()->getBoardInstallForm(),
             'board_release' => $this->getMeetingService()->getBoardReleaseForm(),
             'board_discharge' => $this->getMeetingService()->getBoardDischargeForm(),
-        );
+        ];
 
         foreach ($forms as $form) {
             $form->setDecisionData($meeting, $point, $decision);
@@ -184,7 +184,7 @@ class MeetingController extends AbstractActionController
                 return $this->redirect()->toRoute('meeting');
             break;
         }
-        return new ViewModel(array());
+        return new ViewModel([]);
     }
 
     /**
@@ -210,29 +210,29 @@ class MeetingController extends AbstractActionController
                         $decision
                     )
                 ) {
-                    return new ViewModel(array(
+                    return new ViewModel([
                     'type' => $type,
                     'number' => $number,
                     'point' => $point,
                     'decision' => $decision
-                    ));
+                    ]);
                 }
             } catch (ForeignKeyConstraintViolationException $e) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'error' => true,
                     'exception' => $e
-                ));
+                ]);
             }
             // Not deleted
             // TODO: redirect back to meeting
         }
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $this->getMeetingService()->getDeleteDecisionForm(),
             'type' => $type,
             'number' => $number,
             'point' => $point,
             'decision' => $decision
-        ));
+        ]);
     }
 
     /**
@@ -252,9 +252,9 @@ class MeetingController extends AbstractActionController
             return $decision->toArray();
         }, $res);
 
-        return new JsonModel(array(
+        return new JsonModel([
             'json' => $res
-        ));
+        ]);
     }
 
     /**

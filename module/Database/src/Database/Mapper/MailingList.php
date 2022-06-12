@@ -68,7 +68,7 @@ class MailingList
      */
     public function findAllOnForm()
     {
-        return $this->getRepository()->findBy(array('onForm' => true));
+        return $this->getRepository()->findBy(['onForm' => true]);
     }
 
     /**
@@ -78,10 +78,10 @@ class MailingList
      */
     public function findDefault()
     {
-        return $this->getRepository()->findBy(array(
+        return $this->getRepository()->findBy([
             'defaultSub' => true,
             'onForm' => false
-        ));
+        ]);
     }
 
     /**

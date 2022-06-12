@@ -13,7 +13,7 @@ class SettingsController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel(array());
+        return new ViewModel([]);
     }
 
     /**
@@ -24,10 +24,10 @@ class SettingsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $this->getFunctionService()->addFunction($this->getRequest()->getPost());
         }
-        return new ViewModel(array(
+        return new ViewModel([
             'functions' => $this->getFunctionService()->getAllFunctions(),
             'form' => $this->getFunctionService()->getFunctionForm()
-        ));
+        ]);
     }
 
     /**
@@ -38,10 +38,10 @@ class SettingsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $this->getListService()->addList($this->getRequest()->getPost());
         }
-        return new ViewModel(array(
+        return new ViewModel([
             'lists' => $this->getListService()->getAllLists(),
             'form' => $this->getListService()->getListForm()
-        ));
+        ]);
     }
 
     /**
@@ -54,21 +54,21 @@ class SettingsController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             if ($service->delete($name, $this->getRequest()->getPost())) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
                     'name' => $name
-                ));
+                ]);
             } else {
                 // redirect back
-                return $this->redirect()->toRoute('settings/default', array(
+                return $this->redirect()->toRoute('settings/default', [
                     'action' => 'list'
-                ));
+                ]);
             }
         }
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $this->getListService()->getDeleteListForm(),
             'name' => $name
-        ));
+        ]);
     }
 
     /**

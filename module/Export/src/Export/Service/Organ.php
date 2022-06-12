@@ -30,12 +30,12 @@ class Organ extends AbstractService
             }
             $year = $organ->getDecision()->getMeeting()->getDate()->format('Y');
 
-            $data = array(
+            $data = [
                 'orgaantypeid' => $type,
                 'jaartal' => $year,
                 'orgaanafk' => $organ->getAbbr(),
                 'orgaannaam' => $organ->getName()
-            );
+            ];
 
             $id = $this->getQuery()->checkOrganExists(
                 $type,

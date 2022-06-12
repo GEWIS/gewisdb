@@ -34,10 +34,10 @@ abstract class AbstractService implements
      */
     public function setEventManager(EventManagerInterface $eventManager)
     {
-        $eventManager->setIdentifiers(array(
+        $eventManager->setIdentifiers([
             __CLASS__,
             get_called_class()
-        ));
+        ]);
         $this->eventManager = $eventManager;
     }
 

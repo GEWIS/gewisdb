@@ -13,59 +13,59 @@ class Address extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('address');
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'country',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Land')
-            ),
-        ));
+            ],
+        ]);
         $this->get('country')->setValue('netherlands');
 
-        $this->add(array(
+        $this->add([
             'name' => 'street',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Straat')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Huisnummer')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'postalCode',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Postcode')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'city',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Stad')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'phone',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Telefoonnummer')
-            )
-        ));
+            ]
+        ]);
 
         // TODO: filters
     }
@@ -75,80 +75,80 @@ class Address extends Fieldset implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'type' => array(
+        return [
+            'type' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'in_array',
-                        'options' => array(
+                        'options' => [
                             'haystack' => AddressModel::getTypes()
-                        )
-                    )
-                )
-            ),
-            'country' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'country' => [
                 'required' => true,
-                'filters' => array(
-                    array('name' => 'string_to_lower')
-                ),
-                'validators' => array(
-                    array(
+                'filters' => [
+                    ['name' => 'string_to_lower']
+                ],
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'street' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'street' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'number' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'number' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'regex',
-                        'options' => array(
+                        'options' => [
                             'pattern' => '/^[0-9]+[a-zA-Z]*/'
-                        )
-                    )
-                )
-            ),
-            'postalCode' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'postalCode' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 16
-                        )
-                    )
-                )
-            ),
-            'city' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'city' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
                             'max' => 32
-                        )
-                    )
-                )
-            )
-        );
+                        ]
+                    ]
+                ]
+            ]
+        ];
     }
 }

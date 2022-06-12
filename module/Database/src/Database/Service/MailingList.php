@@ -49,9 +49,9 @@ class MailingList extends AbstractService
 
         $list = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', ['list' => $list]);
         $this->getListMapper()->persist($list);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', ['list' => $list]);
 
         return true;
     }
@@ -76,9 +76,9 @@ class MailingList extends AbstractService
 
         $list = $this->getList($name);
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', ['list' => $list]);
         $this->getListMapper()->remove($list);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', ['list' => $list]);
 
         return true;
     }

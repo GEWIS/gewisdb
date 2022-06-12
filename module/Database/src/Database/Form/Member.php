@@ -25,109 +25,109 @@ class Member extends Form implements InputFilterProviderInterface
         parent::__construct();
         $this->translator = $translator;
 
-        $this->add(array(
+        $this->add([
             'name' => 'lastName',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Achternaam')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'middleName',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Tussenvoegsels')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'initials',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Voorletter(s)')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'firstName',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Voornaam')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'gender',
             'type' => 'radio',
-            'options' => array(
-                'value_options' => array(
+            'options' => [
+                'value_options' => [
                     'm' => $translator->translate('Man'),
                     'f' => $translator->translate('Vrouw'),
                     'o' => $translator->translate('Anders'),
-                ),
+                ],
                 'label' => $translator->translate('Geslacht'),
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'tueUsername',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('TU/e-gebruikersnaam')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'study',
             'type' => 'select',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Studie'),
-                'value_options' => array(
-                    'bachelor' => array(
+                'value_options' => [
+                    'bachelor' => [
                         'label' => 'Bachelor',
-                        'options' => array(
+                        'options' => [
                             'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
                             'Bachelor Applied Mathematics' => 'Applied Mathematics'
-                        )
-                    ),
-                    'master' => array(
+                        ]
+                    ],
+                    'master' => [
                         'label' => 'Master',
-                        'options' => array(
+                        'options' => [
                             'Master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
                             'Master Computer Science and Engineering' => 'Computer Science and Engineering',
                             'Master Data Science in Engineering' => 'Data Science in Engineering',
                             'Master Information Security Technology' => 'Information Security Technology',
                             'Master Embedded Systems' => 'Embedded Systems',
                             'Master Science Education and Communication' => 'Science Education and Communication'
-                        )
-                    ),
-                    'other' => array(
+                        ]
+                    ],
+                    'other' => [
                         'label' => 'Other',
-                        'options' => array(
+                        'options' => [
                             'Other' => 'Other'
-                        )
-                    ),
-                ),
+                        ]
+                    ],
+                ],
                 'empty_option' => $translator->translate('Selecteer een studie')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'email',
             'type' => 'email',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Email-adres')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'birth',
             'type' => 'date',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Geboortedatum')
-            )
-        ));
+            ]
+        ]);
 
 
         $student = clone $address;
@@ -143,36 +143,36 @@ class Member extends Form implements InputFilterProviderInterface
             ]
         ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'signature',
             'type' => 'hidden'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'signatureLocation',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => $translator->translate('Plaats van ondertekening')
-            )
-        ));
+            ]
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'agreediban',
             'type' => 'checkbox'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'agreed',
             'type' => 'checkbox'
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
+            'attributes' => [
                 'value' => $translator->translate('Schrijf in')
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -188,13 +188,13 @@ class Member extends Form implements InputFilterProviderInterface
             if ($this->translator->getLocale() == 'en') {
                 $desc = $list->getEnDescription();
             }
-            $this->add(array(
+            $this->add([
                 'name' => 'list-' . $list->getName(),
                 'type' => 'checkbox',
-                'options' => array(
+                'options' => [
                     'label' => '<strong>' . $list->getName() . '</strong> ' . $desc
-                )
-            ));
+                ]
+            ]);
             if ($list->getDefaultSub()) {
                 $this->get('list-' . $list->getName())->setChecked(true);
             }
@@ -216,55 +216,55 @@ class Member extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification()
     {
-        return array(
-            'lastName' => array(
+        return [
+            'lastName' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'middleName' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'middleName' => [
                 'required' => false,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
-            'initials' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'initials' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
                             'max' => 16
-                        )
-                    )
-                )
-            ),
-            'firstName' => array(
+                        ]
+                    ]
+                ]
+            ],
+            'firstName' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'string_length',
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
                             'max' => 32
-                        )
-                    )
-                )
-            ),
+                        ]
+                    ]
+                ]
+            ],
             'iban' => [
                 'validators' => [
                     ['name' => 'iban']
@@ -273,37 +273,37 @@ class Member extends Form implements InputFilterProviderInterface
                     ['name' => 'alnum']
                 ]
             ],
-            'agreed' => array(
+            'agreed' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'identical',
-                        'options' => array(
+                        'options' => [
                             'token' => '1',
-                            'messages' => array(
+                            'messages' => [
                                 'notSame' => $this->translator->translate('Je moet de voorwaarden accepteren!')
-                            )
-                        )
-                    )
-                )
-            ),
-            'tueUsername' => array(
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'tueUsername' => [
                 'required' => false,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => 'regex',
-                        'options' => array(
+                        'options' => [
                             'pattern' => '/^(s\d{6}|\d{8})$/',
-                            'messages' => array(
+                            'messages' => [
                                 'regexNotMatch' => $this->translator->translate('Je TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.')
-                            )
-                        )
-                    )
-                ),
-                'filters' => array(
-                    array('name' => 'tonull')
-                )
-            )
-        );
+                            ]
+                        ]
+                    ]
+                ],
+                'filters' => [
+                    ['name' => 'tonull']
+                ]
+            ]
+        ];
     }
 }

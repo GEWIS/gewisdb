@@ -37,7 +37,6 @@ class Installation
      */
     public function getAllInstallationsDischarged(\Database\Model\Meeting $meeting)
     {
-
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('d')
