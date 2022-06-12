@@ -1,4 +1,4 @@
-FROM php:5.6-fpm as gewisdb_web_development
+FROM php:7.1-fpm as gewisdb_web_development
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -43,7 +43,7 @@ RUN docker-php-ext-configure \
 RUN pecl install imagick \
     && docker-php-ext-enable imagick
 
-RUN git clone -b XDEBUG_2_5_5 https://github.com/xdebug/xdebug.git /root/xdebug \
+RUN git clone -b 2.9.8 https://github.com/xdebug/xdebug.git /root/xdebug \
     && cd /root/xdebug && ./rebuild.sh
 
 RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
