@@ -30,12 +30,16 @@ return [
      * Email configuration.
      */
     'email' => [
-        'transport' => getenv('EMAIL_TRANSPORT'),
-        'options' => json_decode(getenv('EMAIL_OPTIONS'), true),
-        'from' => getenv('EMAIL_FROM'),
+        'transport' => 'Smtp',
+        'options' => [
+            'name' => 'gewis.nl',
+            'host' => 'postfix',
+            'port' => '25'
+        ],
+        'from' => 'secr@gewis.nl',
         'to' => [
-            'report_error' => getenv('EMAIL_TO_REPORT_ERROR'),
-            'subscription' => getenv('EMAIL_TO_SUBSCRIPTION')
+            'report_error' => 'databaseisstuk@gewis.nl',
+            'subscription' => 'secr@gewis.nl',
         ]
     ]
 ];
