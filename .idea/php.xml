@@ -147,7 +147,6 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
       <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
       <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
       <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
@@ -159,11 +158,8 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
       <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
-      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-test" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache-storage-adapter-filesystem" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-server" />
@@ -194,18 +190,7 @@
       <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
       <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-log" />
-      <path value="$PROJECT_DIR$/vendor/openlss/lib-array2xml" />
-      <path value="$PROJECT_DIR$/vendor/felixfbecker/advanced-json-rpc" />
-      <path value="$PROJECT_DIR$/vendor/felixfbecker/language-server-protocol" />
-      <path value="$PROJECT_DIR$/vendor/vimeo/psalm" />
-      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
-      <path value="$PROJECT_DIR$/vendor/netresearch/jsonmapper" />
-      <path value="$PROJECT_DIR$/vendor/amphp/byte-stream" />
-      <path value="$PROJECT_DIR$/vendor/amphp/amp" />
-      <path value="$PROJECT_DIR$/vendor/psalm/plugin-phpunit" />
-      <path value="$PROJECT_DIR$/vendor/weirdan/doctrine-psalm-plugin" />
       <path value="$PROJECT_DIR$/vendor/bnf/phpstan-psr-container" />
-      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan-phpunit" />
       <path value="$PROJECT_DIR$/vendor/lctrs/psalm-psr-container-plugin" />
       <path value="$PROJECT_DIR$/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-math" />
@@ -253,6 +238,11 @@
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
       <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
       <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

@@ -4,13 +4,10 @@
     xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="./bootstrap.php"
     colors="true">
-    <coverage processUncoveredFiles="true" pathCoverage="true">
-        <include>
-        </include>
-    </coverage>
 
     <testsuites>
         <testsuite name="gewisdb">
+            <directory>./module/Checker/test/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

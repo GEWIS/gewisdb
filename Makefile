@@ -95,19 +95,19 @@ phpstanpr:
 
 psalm: loadenv
 		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --no-cache --no-diff
+		@vendor/bin/psalm --no-cache
 
 psalmall: loadenv
 		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --no-cache --ignore-baseline --no-diff
+		@vendor/bin/psalm --no-cache --ignore-baseline
 
 psalmdiff: loadenv
 		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --no-cache --show-info=true --diff
+		@vendor/bin/psalm --no-cache --show-info=true
 
 psalmbaseline: loadenv
 		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
-		@vendor/bin/psalm --set-baseline=psalm/psalm-baseline.xml --no-cache --no-diff
+		@vendor/bin/psalm --set-baseline=psalm/psalm-baseline.xml --no-cache
 
 psalmfix: loadenv
 		@echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml

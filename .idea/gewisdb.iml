@@ -13,6 +13,13 @@
       <sourceFolder url="file://$MODULE_DIR$/module/Frontpage/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/module/Photo/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/module/User/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Application/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Checker/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Checker/test" isTestSource="true" packagePrefix="CheckerTest\" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Database/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Export/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Import/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Report/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
@@ -80,6 +87,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/squizlabs/php_codesniffer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofphp/php-cs-fixer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/reflection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-token-stream" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
