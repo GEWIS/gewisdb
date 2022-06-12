@@ -3,15 +3,13 @@ includes:
     - phpstan/phpstan-baseline-pr.neon
 
 parameters:
-    level: 6
+    level: 1
     treatPhpDocTypesAsCertain: true
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
     reportUnmatchedIgnoredErrors: false
     bootstrapFiles:
         - bootstrap.php
-    laminasframework:
-       serviceManagerLoader: phpstan/phpstan-sm.php
     doctrine:
         objectManagerLoader: phpstan/phpstan-om.php
     paths:
@@ -24,5 +22,7 @@ parameters:
         - module/Import/src
         - module/Report/src
         - module/User/src
+        - module/Checker/test
         - public/index.php
+        - inschrijven/index.php
     tmpDir: data/cache/phpstan

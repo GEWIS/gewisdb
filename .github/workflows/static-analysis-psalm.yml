@@ -17,7 +17,6 @@ jobs:
                     POSTGRES_USER: gewisdb
                 ports:
                     - 5432:5432
-                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
         steps:
             -   name: Checkout head branch
@@ -26,7 +25,7 @@ jobs:
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '8.1'
+                    php-version: '7.1'
                     extensions: calendar, curl, exif, gd, intl, opcache, pgsql, pdo_mysql, pdo_pgsql, zip, imagick, memcached, xdebug
 
             -   name: Get Composer cache directory

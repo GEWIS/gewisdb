@@ -6,6 +6,9 @@
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     errorBaseline="psalm/psalm-baseline.xml"
+    totallyTyped="false"
+    useDocblockTypes="true"
+    useDocblockPropertyTypes="true"
 >
     <projectFiles>
         <directory name="config"/>
@@ -17,7 +20,9 @@
         <directory name="module/Import/src"/>
         <directory name="module/Report/src"/>
         <directory name="module/User/src"/>
+        <directory name="module/Checker/test"/>
         <file name="public/index.php"/>
+        <file name="inschrijven/index.php"/>
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
@@ -33,7 +38,6 @@
         <MissingClosureReturnType errorLevel="suppress" />
         <MissingConstructor errorLevel="suppress" />
         <PropertyNotSetInConstructor errorLevel="suppress" />
-        <NonInvariantDocblockPropertyType errorLevel="suppress" />
         <DocblockTypeContradiction errorLevel="suppress" />
         <DeprecatedClass errorLevel="suppress" />
         <UndefinedThisPropertyAssignment errorLevel="suppress" />
@@ -59,7 +63,6 @@
         <NullableReturnStatement errorLevel="info" />
     </issueHandlers>
     <plugins>
-        <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin"/>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
