@@ -237,6 +237,9 @@ class Checker extends AbstractService
         /** @var \Database\Model\Member $member */
         foreach ($members as $member) {
             $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+
+            echo "Performing request for member " . $member->getLidnr() . PHP_EOL;
+
             $request->setUri($config['endpoint'] . $member->getTueUsername());
             $response = $client->send($request);
 
@@ -244,22 +247,27 @@ class Checker extends AbstractService
             // request, assume that the member is still in the TU/e student administration database but do not update
             // membership status.
             if (200 === $response->getStatusCode()) {
+                echo "Received good response" . PHP_EOL;
                 try {
                     $responseContent = Json::decode($response->getBody(), Json::TYPE_ARRAY);
 
                     // Check that we have a proper response.
                     if (array_key_exists('registrations', $responseContent)) {
+                        echo "Response is valid" . PHP_EOL;
                         if (empty($responseContent['registrations'])) {
+                            echo "Member is no longer studying at the TU/e" . PHP_EOL;
                             // The member is no longer studying at the TU/e.
                             $member->setChangedOn(new \DateTime());
                             $member->setIsStudying(false);
                             $member->setMembershipEndsOn($exp);
                         } else {
+                            echo "Member is still studying at the TU/e" . PHP_EOL;
                             // The member is still studying at the TU/e. Determine whether the member is a student at
                             // the Department of Mathematics and Computer Science or another department. If the member
                             // is still a student at the M&CS department don't change anything, otherwise, set date of
                             // expiration.
                             if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
+                                echo "Member is still studying but not at the department of MCS" . PHP_EOL;
                                 $member->setChangedOn(new \DateTime());
                                 $member->setMembershipEndsOn($exp);
                             }
@@ -268,15 +276,21 @@ class Checker extends AbstractService
                         $member->setLastCheckedOn(new \DateTime());
                     }
                 } catch (\RuntimeException $e) {
+                    echo "JSON is malformed or something else went wrong" . PHP_EOL;
                     // The request could not be decoded :/
                 }
             } else if (404 === $response->getStatusCode()) {
+                echo "Member is no longer known at the TU/e" . PHP_EOL;
                 // The member cannot be found in the TU/e student administration database.
                 $member->setChangedOn(new \DateTime());
                 $member->setIsStudying(false);
                 $member->setMembershipEndsOn($exp);
                 $member->setLastCheckedOn(new \DateTime());
+            } else {
+                echo "Request failed with status code " . $response->getStatusCode() . PHP_EOL;
             }
+
+            echo "Request handled" . PHP_EOL;
 
             $memberService->getMemberMapper()->persist($member);
             $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
