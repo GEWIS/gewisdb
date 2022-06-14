@@ -18,7 +18,7 @@ $(document).ready(function () {
                     table += '<tr>';
                     table += '<td>' + link + member.lidnr + '</a></td>';
                     table += '<td>' + link + member.fullName + '</a></td>';
-                    table += '<td>' + link + member.email + '</a></td>';
+                    table += '<td>' + link + ((null == member.email) ? 'Onbekend' : member.email) + '</a></td>';
                     table += '<td>' + link + member.generation + '</a></td>';
                     table += '<td>' + link + member.expiration + '</a></td>';
                     table += '</tr>';
