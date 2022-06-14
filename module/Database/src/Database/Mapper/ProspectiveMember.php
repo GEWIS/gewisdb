@@ -40,7 +40,7 @@ class ProspectiveMember
 
         $qb->select('m')
             ->from('Database\Model\ProspectiveMember', 'm')
-            ->where("m.email = :email")
+            ->where("LOWER(m.email) = LOWER(:email)")
             ->setMaxResults(1);
 
         $qb->setParameter(':email', $email);

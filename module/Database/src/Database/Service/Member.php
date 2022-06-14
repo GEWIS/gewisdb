@@ -73,7 +73,10 @@ class Member extends AbstractService
         }
 
         // find if there is an earlier member with the same email or name
-        if ($this->getMemberMapper()->hasMemberWith($prospectiveMember->getEmail())) {
+        if (
+            $this->getMemberMapper()->hasMemberWith($prospectiveMember->getEmail())
+            || $this->getProspectiveMemberMapper()->hasMemberWith($prospectiveMember->getEmail())
+        ) {
             $form->get('email')->setMessages([
                 'There already is a member with this email address.'
             ]);
