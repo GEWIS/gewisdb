@@ -34,7 +34,7 @@ class Member
     /**
      * Member's email address.
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $email;
 
@@ -264,7 +264,7 @@ class Member
     /**
      * Get the member's email address.
      *
-     * @return string
+     * @return string|null
      */
     public function getEmail()
     {
@@ -324,7 +324,7 @@ class Member
     /**
      * Set the member's email address.
      *
-     * @param string $email
+     * @param string|null $email
      */
     public function setEmail($email)
     {
