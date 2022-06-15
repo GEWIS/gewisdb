@@ -48,7 +48,11 @@ case Member::GENDER_OTHER:
         </tr>
         <tr>
             <th>Email</th>
-            <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
+            <?php if (null !== ($emailAddress = $member->getEmail())): ?>
+                <td><a href="mailto:<?= $emailAddress ?>"><?= $emailAddress ?></a></td>
+            <?php else: ?>
+                <td>Onbekend</td>
+            <?php endif; ?>
         </tr>
         <tr>
             <th>Geboortedatum</th>

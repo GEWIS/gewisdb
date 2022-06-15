@@ -41,7 +41,7 @@ class Member
 
         $qb->select('m')
             ->from('Database\Model\Member', 'm')
-            ->where("m.email = :email")
+            ->where("LOWER(m.email) = LOWER(:email)")
             ->setMaxResults(1);
 
         $qb->setParameter(':email', $email);

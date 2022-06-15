@@ -175,6 +175,17 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 'filters' => array(
                     array('name' => 'tonull')
                 )
+            ),
+            'email' => array(
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'emailaddress',
+                    )
+                ),
+                'filters' => array(
+                    array('name' => 'tonull')
+                )
             )
         );
     }
