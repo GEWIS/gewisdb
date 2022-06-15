@@ -30,6 +30,7 @@
         "zendframework/zend-modulemanager": "^2.4.13",
         "zendframework/zend-mvc": "^2.4.13",
         "zendframework/zend-progressbar": "^2.4.13",
+        "zendframework/zend-router": "^2.4.13",
         "zendframework/zend-session": "^2.4.13",
         "zendframework/zend-serializer": "^2.4.13",
         "zendframework/zend-servicemanager": "^2.4.13",
