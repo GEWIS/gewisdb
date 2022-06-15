@@ -32,7 +32,7 @@ return [
     'email' => [
         'transport' => 'Smtp',
         'options' => [
-            'name' => 'gewis.nl',
+            'name' => 'database.gewis.nl',
             'host' => 'postfix',
             'port' => '25'
         ],

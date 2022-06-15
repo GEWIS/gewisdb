@@ -78,7 +78,7 @@ RUN chmod 0775 ./docker-entrypoint.sh
 
 COPY --chown=www-data:www-data . /code
 
-ENV PHP_IDE_CONFIG="serverName=gewis.nl"
+ENV PHP_IDE_CONFIG="serverName=database.gewis.nl"
 
 RUN php composer.phar dump-autoload
 
