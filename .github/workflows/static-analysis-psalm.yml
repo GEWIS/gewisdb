@@ -8,16 +8,6 @@ jobs:
         name: Psalm
         runs-on: ubuntu-latest
 
-        # Create a Postgres service.
-        services:
-            postgres:
-                image: postgres
-                env:
-                    POSTGRES_PASSWORD: gewisdb
-                    POSTGRES_USER: gewisdb
-                ports:
-                    - 5432:5432
-
         steps:
             -   name: Checkout head branch
                 uses: actions/checkout@v2
@@ -58,15 +48,7 @@ jobs:
                 uses: c-py/action-dotenv-to-setenv@v3
                 with:
                     env-file: .env.dist
-
-            -   name: Create database
-                env:
-                    DOCKER_DB_HOST: 127.0.0.1
-                run: ./orm orm:schema-tool:update --force
-
             -   name: Generate Psalm Baseline
-                env:
-                    DOCKER_DB_HOST: 127.0.0.1
                 run: |
                     echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline.xml
                     echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
@@ -85,13 +67,6 @@ jobs:
                 with:
                     env-file: .env.dist
 
-            -   name: Create database
-                env:
-                    DOCKER_DB_HOST: 127.0.0.1
-                run: ./orm orm:schema-tool:update --force
-
             -   name: Run Psalm
-                env:
-                    DOCKER_DB_HOST: 127.0.0.1
                 run: |
                     vendor/bin/psalm  --no-diff --no-cache --no-progress --output-format=github
