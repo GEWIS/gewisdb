@@ -38,6 +38,7 @@
         "doctrine/dbal": "^2.5.13",
         "doctrine/orm": "^2.5.14",
         "doctrine/doctrine-orm-module": "^0.10.0",
+        "monolog/monolog": "^1.27",
         "cweagans/composer-patches": "^1.7.2"
     },
     "require-dev": {
