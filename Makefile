@@ -143,9 +143,9 @@ updatecomposer:
 
 updatedocker:
 		@docker-compose pull
-		@docker build --pull --no-cache -t web.docker-registry.gewis.nl/gewisdb_web:production -f docker/web/production/Dockerfile .
-		@docker build --pull --no-cache -t web.docker-registry.gewis.nl/gewisdb_web:development -f docker/web/development/Dockerfile .
-		@docker build --pull --no-cache -t web.docker-registry.gewis.nl/gewisdb_nginx:latest -f docker/nginx/Dockerfile docker/nginx
+		@docker build --pull --no-cache -t abc-db.docker-registry.gewis.nl/gewisdb_web:production -f docker/web/production/Dockerfile .
+		@docker build --pull --no-cache -t abc-db.docker-registry.gewis.nl/gewisdb_web:development -f docker/web/development/Dockerfile .
+		@docker build --pull --no-cache -t abc-db.docker-registry.gewis.nl/gewisdb_nginx:latest -f docker/nginx/Dockerfile docker/nginx
 
 all: build login push
 
@@ -166,16 +166,16 @@ builddev: buildwebdev buildnginx
 buildweb: buildwebprod buildwebdev
 
 buildwebprod:
-		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" -t web.docker-registry.gewis.nl/gewisdb_web:production -f docker/web/production/Dockerfile .
+		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" -t abc-db.docker-registry.gewis.nl/gewisdb_web:production -f docker/web/production/Dockerfile .
 
 buildwebdev:
-		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" -t web.docker-registry.gewis.nl/gewisdb_web:development -f docker/web/development/Dockerfile .
+		@docker build --build-arg GIT_COMMIT="$(LAST_WEB_COMMIT)" -t abc-db.docker-registry.gewis.nl/gewisdb_web:development -f docker/web/development/Dockerfile .
 
 buildnginx:
-		@docker build -t web.docker-registry.gewis.nl/gewisdb_nginx:latest -f docker/nginx/Dockerfile docker/nginx
+		@docker build -t abc-db.docker-registry.gewis.nl/gewisdb_nginx:latest -f docker/nginx/Dockerfile docker/nginx
 
 login:
-		@docker login web.docker-registry.gewis.nl
+		@docker login abc-db.docker-registry.gewis.nl
 
 push: pushweb pushnginx
 
@@ -186,10 +186,10 @@ pushdev: pushwebdev pushnginx
 pushweb: pushwebprod pushwebdev
 
 pushwebprod:
-		@docker push web.docker-registry.gewis.nl/gewisdb_web:production
+		@docker push abc-db.docker-registry.gewis.nl/gewisdb_web:production
 
 pushwebdev:
-		@docker push web.docker-registry.gewis.nl/gewisdb_web:development
+		@docker push abc-db.docker-registry.gewis.nl/gewisdb_web:development
 
 pushnginx:
-		@docker push web.docker-registry.gewis.nl/gewisdb_nginx:latest
+		@docker push abc-db.docker-registry.gewis.nl/gewisdb_nginx:latest
