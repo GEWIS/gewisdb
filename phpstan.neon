@@ -24,5 +24,4 @@ parameters:
         - module/User/src
         - module/Checker/test
         - public/index.php
-        - inschrijven/index.php
     tmpDir: data/cache/phpstan

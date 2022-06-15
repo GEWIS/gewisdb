@@ -9,7 +9,6 @@ class BudgetOrganDoesNotExistTest extends \CheckerTest\Model\Error
     protected function create() {
         $budget = new Budget();
         $budget->setDecision($this->getDecision());
-        $budget->setFoundation($this->getFoundation());
 
         return new BudgetOrganDoesNotExistError($budget);
     }
@@ -17,6 +16,5 @@ class BudgetOrganDoesNotExistTest extends \CheckerTest\Model\Error
     public function testGetFoundation()
     {
         $error = $this->create();
-        $this->assertInstanceOf('Database\Model\SubDecision\Foundation', $error->getFoundation());
     }
-} 
+}

@@ -22,7 +22,6 @@
         <directory name="module/User/src"/>
         <directory name="module/Checker/test"/>
         <file name="public/index.php"/>
-        <file name="inschrijven/index.php"/>
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>

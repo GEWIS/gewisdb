@@ -23,19 +23,8 @@ class BudgetOrganDoesNotExist extends \Checker\Model\Error
         parent::__construct($budget->getDecision()->getMeeting(), $budget);
     }
 
-    /**
-     * Return the foundation where this budget belongs to
-     *
-     * @return \Database\Model\SubDecision\Foundation
-     */
-    public function getFoundation()
-    {
-        return $this->getSubDecision()->getFoundation();
-    }
-
     public function asText()
     {
-        return 'Budget from ' . $this->getFoundation()->getName() . ' has been created. However '
-        . $this->getFoundation()->getName() . ' does not exist';
+        return 'Budget from foundation has been created. However foundation does not exist';
     }
 }
