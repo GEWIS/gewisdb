@@ -19,4 +19,5 @@ else
     php composer.phar dump-autoload -o
 fi
 ./orm orm:generate-proxies
+/bin/sh -c "EM_ALIAS=orm_report ./orm orm:generate-proxies"
 rm -Rf /code/data/cache/*
