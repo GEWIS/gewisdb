@@ -3,15 +3,12 @@
 namespace Database\Service;
 
 use Application\Service\AbstractService;
-
 use Zend\EventManager\StaticEventManager;
 use Zend\EventManager\Event as EmEvent;
-
 use Database\Model\Event as EventModel;
 
 class Event extends AbstractService
 {
-
     /**
      * Services that are to be logged.
      */

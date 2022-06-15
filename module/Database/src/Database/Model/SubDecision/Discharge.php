@@ -2,9 +2,8 @@
 
 namespace Database\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Discharge from organ.
@@ -16,7 +15,6 @@ use Database\Model\SubDecision;
  */
 class Discharge extends SubDecision
 {
-
     /**
      * Reference to the installation of a member.
      *
@@ -30,7 +28,6 @@ class Discharge extends SubDecision
      * })
      */
     protected $installation;
-
 
     /**
      * Get installation.

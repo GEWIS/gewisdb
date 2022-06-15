@@ -1,4 +1,5 @@
 <?php
+
 namespace User;
 
 use Zend\Authentication\AuthenticationService;
@@ -7,7 +8,6 @@ use Zend\Authentication\Storage\Session as SessionStorage;
 
 class Module
 {
-
     /**
      * On bootstrap.
      */
@@ -17,7 +17,7 @@ class Module
         $eventManager = $event->getApplication()->getEventManager();
         $authService = $sm->get(AuthenticationService::class);
         $authService->setStorage(new SessionStorage('gewisdb'));
-        
+
         $eventManager->attach(MvcEvent::EVENT_ROUTE, function ($e) use ($authService) {
             if ($authService->hasIdentity()) {
                 // user is logged in, just continue
@@ -36,11 +36,17 @@ class Module
                 return;
             }
 
-            if ($match->getMatchedRouteName() === 'member/default' && $match->getParam('action') === 'subscribe') {
+            if (
+                $match->getMatchedRouteName() === 'member/default'
+                && $match->getParam('action') === 'subscribe'
+            ) {
                 return;
             }
 
-            if ($match->getMatchedRouteName() === 'lang' && ($match->getParam('lang') === 'nl' || $match->getParam('lang') === 'en')) {
+            if (
+                $match->getMatchedRouteName() === 'lang'
+                && ($match->getParam('lang') === 'nl' || $match->getParam('lang') === 'en')
+            ) {
                 return;
             }
 
@@ -63,7 +69,6 @@ class Module
                 }
             }
         });
-
     }
 
     /**

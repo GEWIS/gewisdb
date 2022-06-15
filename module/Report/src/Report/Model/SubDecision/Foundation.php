@@ -3,9 +3,7 @@
 namespace Report\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Report\Model\SubDecision;
 
 /**
@@ -15,13 +13,12 @@ use Report\Model\SubDecision;
  */
 class Foundation extends SubDecision
 {
-
-    const ORGAN_TYPE_COMMITTEE = 'committee';
-    const ORGAN_TYPE_AVC = 'avc';
-    const ORGAN_TYPE_FRATERNITY = 'fraternity';
-    const ORGAN_TYPE_KKK = 'kkk';
-    const ORGAN_TYPE_AVW = 'avw';
-    const ORGAN_TYPE_RVA = 'rva';
+    public const ORGAN_TYPE_COMMITTEE = 'committee';
+    public const ORGAN_TYPE_AVC = 'avc';
+    public const ORGAN_TYPE_FRATERNITY = 'fraternity';
+    public const ORGAN_TYPE_KKK = 'kkk';
+    public const ORGAN_TYPE_AVW = 'avw';
+    public const ORGAN_TYPE_RVA = 'rva';
 
     /**
      * Abbreviation (only for when organs are created)

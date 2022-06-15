@@ -7,7 +7,6 @@ use Zend\View\Model\ViewModel;
 
 class QueryController extends AbstractActionController
 {
-
     /**
      * Index action.
      */
@@ -17,11 +16,12 @@ class QueryController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
+
             if (isset($post['submit_save'])) {
                 $query = $service->save($post);
             }
-            $result = $service->execute($post);
 
+            $result = $service->execute($post);
 
             if (!is_null($result) && count($result) > 0) {
                 return new ViewModel(array(
@@ -31,7 +31,7 @@ class QueryController extends AbstractActionController
                     'saved' => $service->getSavedQueries(),
                     'entities' => $service->getEntities()
                 ));
-            } else if (isset($query)) {
+            } elseif (isset($query)) {
                 return $this->redirect()->toRoute('query/show', array(
                     'query' => $query->getId()
                 ));
@@ -59,7 +59,9 @@ class QueryController extends AbstractActionController
             'result' => $service->executeSaved($this->params()->fromRoute('query')),
             'entities' => $service->getEntities()
         ));
+
         $viewmodel->setTemplate('database/query/index');
+
         return $viewmodel;
     }
 
@@ -77,8 +79,10 @@ class QueryController extends AbstractActionController
                 $vm = new ViewModel(array(
                     'result' => $result
                 ));
+
                 $vm->setTemplate('database/query/export');
                 $vm->setTerminal(true);
+
                 return $vm;
             }
         }

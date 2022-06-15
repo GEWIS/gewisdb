@@ -8,14 +8,12 @@ use Doctrine\ORM\UnitOfWork;
 
 class Meeting
 {
-
     /**
      * Doctrine entity manager.
      *
      * @var EntityManager
      */
     protected $em;
-
 
     /**
      * Constructor
@@ -305,5 +303,4 @@ class Meeting
     {
         return $this->em->getRepository('Database\Model\Meeting');
     }
-
 }

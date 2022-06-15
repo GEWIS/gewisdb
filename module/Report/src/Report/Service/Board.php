@@ -3,13 +3,11 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Report\Model\SubDecision\Board\Installation;
 use Report\Model\BoardMember;
 
 class Board extends AbstractService
 {
-
     /**
      * Export board info.
      */
@@ -21,19 +19,24 @@ class Board extends AbstractService
         $installs = $repo->findAll();
         foreach ($installs as $install) {
             $boardMember = $install->getBoardMember();
+
             if (null === $boardMember) {
                 $boardMember = new BoardMember();
                 $boardMember->setInstallationDec($install);
             }
+
             $boardMember->setMember($install->getMember());
             $boardMember->setFunction($install->getFunction());
             $boardMember->setInstallDate($install->getDecision()->getMeeting()->getDate());
             $discharge = $install->getDischarge();
+
             if (null !== $discharge) {
                 $boardMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
             }
+
             $em->persist($boardMember);
         }
+
         $em->flush();
     }
 

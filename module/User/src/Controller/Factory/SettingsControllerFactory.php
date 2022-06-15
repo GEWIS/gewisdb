@@ -9,7 +9,6 @@ use User\Controller\SettingsController;
 
 class SettingsControllerFactory implements FactoryInterface
 {
-
     public function createService(ServiceLocatorInterface $sl)
     {
         $sm = $sl->getServiceLocator();

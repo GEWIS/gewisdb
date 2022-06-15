@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefan
- * Date: 8-2-15
- * Time: 11:40
- */
 
 namespace Checker\Model\Error;
 
@@ -17,9 +11,8 @@ namespace Checker\Model\Error;
  */
 class BudgetOrganDoesNotExist extends \Checker\Model\Error
 {
-    public function __construct(
-        \Database\Model\SubDecision\Budget $budget
-    ) {
+    public function __construct(\Database\Model\SubDecision\Budget $budget)
+    {
         parent::__construct($budget->getDecision()->getMeeting(), $budget);
     }
 

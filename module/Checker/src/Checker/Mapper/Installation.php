@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Mapper;
 
 use Database\Model\Event as EventModel;
@@ -8,13 +9,13 @@ use Doctrine\ORM\UnitOfWork;
 class Installation
 {
     use Filter;
+
     /**
      * Doctrine entity manager.
      *
      * @var EntityManager
      */
     protected $em;
-
 
     /**
      * Constructor
@@ -25,7 +26,6 @@ class Installation
     {
         $this->em = $em;
     }
-
 
     /**
      * Returns an array of all installations that are discharged again before or during $meeting

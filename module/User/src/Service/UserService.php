@@ -12,7 +12,6 @@ use User\Form\UserEdit;
 
 class UserService
 {
-
     /**
      * @var UserMapper
      */

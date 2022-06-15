@@ -27,7 +27,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class SubDecision
 {
-
     /**
      * Decision.
      *
@@ -180,5 +179,5 @@ abstract class SubDecision
      *
      * @return string
      */
-    public abstract function getContent();
+    abstract public function getContent();
 }

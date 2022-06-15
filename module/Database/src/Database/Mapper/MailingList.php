@@ -11,14 +11,12 @@ use Doctrine\ORM\UnitOfWork;
  */
 class MailingList
 {
-
     /**
      * Doctrine entity manager.
      *
      * @var EntityManager
      */
     protected $em;
-
 
     /**
      * Constructor
@@ -106,5 +104,4 @@ class MailingList
     {
         return $this->em->getRepository('Database\Model\MailingList');
     }
-
 }

@@ -9,7 +9,6 @@ use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 
 class Budget extends AbstractDecision
 {
-
     /**
      * Budget hydration
      *

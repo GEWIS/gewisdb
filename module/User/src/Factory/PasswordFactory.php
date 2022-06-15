@@ -8,7 +8,6 @@ use Zend\Crypt\Password\Bcrypt;
 
 class PasswordFactory implements FactoryInterface
 {
-
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         return new Bcrypt([

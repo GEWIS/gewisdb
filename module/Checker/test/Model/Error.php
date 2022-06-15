@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefan
- * Date: 8-2-15
- * Time: 12:43
- */
 
 namespace CheckerTest\Model;
-
 
 use Database\Model\Decision;
 use Database\Model\Meeting;
@@ -16,9 +9,8 @@ use Database\Model\SubDecision\Foundation;
 
 abstract class Error extends \PHPUnit_Framework_TestCase
 {
-
     // Create a new error
-    protected abstract function create();
+    abstract protected function create();
 
     public function getMeeting()
     {

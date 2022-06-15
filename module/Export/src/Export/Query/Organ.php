@@ -9,7 +9,6 @@ use Doctrine\DBAL\Connection;
  */
 class Organ
 {
-
     /**
      * Connection.
      *
@@ -21,7 +20,6 @@ class Organ
      * Organ exists statement.
      */
     protected $existsStmt;
-
 
     /**
      * Create a organ.

@@ -2,10 +2,9 @@
 
 namespace Database\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
 use Database\Model\Decision;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Destroying a decision.
@@ -25,7 +24,6 @@ use Database\Model\Decision;
  */
 class Destroy extends SubDecision
 {
-
     /**
      * Reference to the destruction of a decision.
      *
@@ -38,7 +36,6 @@ class Destroy extends SubDecision
      * })
      */
     protected $target;
-
 
     /**
      * Get the target.

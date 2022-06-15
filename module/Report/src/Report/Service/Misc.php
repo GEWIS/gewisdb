@@ -3,12 +3,10 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Report\Model\MailingList as ReportList;
 
 class Misc extends AbstractService
 {
-
     /**
      * Export misc info.
      */
@@ -18,10 +16,10 @@ class Misc extends AbstractService
         $listMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
 
-
         foreach ($listMapper->findAll() as $list) {
             $this->generateList($list);
         }
+
         $em->flush();
     }
 

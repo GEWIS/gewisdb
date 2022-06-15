@@ -8,7 +8,6 @@ use User\Service\UserService;
 
 class UserController extends AbstractActionController
 {
-
     /**
      * @var UserService
      */

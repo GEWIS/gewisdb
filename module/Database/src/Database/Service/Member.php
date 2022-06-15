@@ -3,7 +3,6 @@
 namespace Database\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
@@ -16,7 +15,6 @@ use Zend\Mime\Message as MimeMessage;
 
 class Member extends AbstractService
 {
-
     /**
      * List form.
      *

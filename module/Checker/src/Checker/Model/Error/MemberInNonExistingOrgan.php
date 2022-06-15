@@ -1,6 +1,6 @@
 <?php
-namespace Checker\Model\Error;
 
+namespace Checker\Model\Error;
 
 use Checker\Model\Error;
 
@@ -20,7 +20,6 @@ class MemberInNonExistingOrgan extends Error
     ) {
         parent::__construct($meeting, $installation);
     }
-
 
     /**
      * Return the member that is in a non existing organ
@@ -42,12 +41,11 @@ class MemberInNonExistingOrgan extends Error
         return $this->getSubDecision()->getFoundation();
     }
 
-
     public function asText()
     {
         return 'Member ' . $this->getMember()->getFullName()
-            .    ' ('. $this->getMember()->getLidNr() . ')'
-            . ' is still installed as '. $this->getSubDecision()->getFunction() . ' in '
+            .    ' (' . $this->getMember()->getLidNr() . ')'
+            . ' is still installed as ' . $this->getSubDecision()->getFunction() . ' in '
             . $this->getFoundation()->getName() . ' which does not exist anymore';
     }
 }

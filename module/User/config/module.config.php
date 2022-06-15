@@ -1,4 +1,5 @@
 <?php
+
 use User\Controller\UserController;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use User\Mapper\UserMapper;

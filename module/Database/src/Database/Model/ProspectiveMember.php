@@ -12,15 +12,14 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ProspectiveMember
 {
+    public const GENDER_MALE = 'm';
+    public const GENDER_FEMALE = 'f';
+    public const GENDER_OTHER = 'o';
 
-    const GENDER_MALE = 'm';
-    const GENDER_FEMALE = 'f';
-    const GENDER_OTHER = 'o';
-
-    const TYPE_ORDINARY = 'ordinary';
-    const TYPE_EXTERNAL = 'external';
-    const TYPE_GRADUATE = 'graduate';
-    const TYPE_HONORARY = 'honorary';
+    public const TYPE_ORDINARY = 'ordinary';
+    public const TYPE_EXTERNAL = 'external';
+    public const TYPE_GRADUATE = 'graduate';
+    public const TYPE_HONORARY = 'honorary';
 
     /**
      * The user

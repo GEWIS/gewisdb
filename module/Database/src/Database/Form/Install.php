@@ -6,11 +6,12 @@ use Zend\InputFilter\InputFilter;
 
 class Install extends AbstractDecision
 {
-
-    public function __construct(Fieldset\Meeting $meeting,
-        Fieldset\Installation $install, Fieldset\SubDecision $discharge,
-        Fieldset\SubDecision $foundation)
-    {
+    public function __construct(
+        Fieldset\Meeting $meeting,
+        Fieldset\Installation $install,
+        Fieldset\SubDecision $discharge,
+        Fieldset\SubDecision $foundation
+    ) {
         parent::__construct($meeting);
 
         $this->add(array(

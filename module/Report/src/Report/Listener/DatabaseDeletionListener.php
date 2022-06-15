@@ -1,4 +1,5 @@
 <?php
+
 namespace Report\Listener;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;

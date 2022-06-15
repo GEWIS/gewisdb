@@ -11,14 +11,12 @@ use Doctrine\ORM\UnitOfWork;
  */
 class Event
 {
-
     /**
      * Doctrine entity manager.
      *
      * @var EntityManager
      */
     protected $em;
-
 
     /**
      * Constructor
@@ -50,5 +48,4 @@ class Event
     {
         return $this->em->getRepository('Database\Model\Event');
     }
-
 }

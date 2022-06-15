@@ -6,7 +6,6 @@ use Application\Service\AbstractService;
 
 class Member extends AbstractService
 {
-
     /**
      * Fetch some members whose membership status should be checked.
      *

@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
@@ -9,6 +10,7 @@ class MemberHasRoleButNotInOrgan extends Error
      * @var Role that the member has in the organ
      */
     private $role;
+
     public function getRole()
     {
         return $this->role;
@@ -51,7 +53,7 @@ class MemberHasRoleButNotInOrgan extends Error
     public function asText()
     {
         return 'Member ' . $this->getMember()->getFullName() .
-        ' ('. $this->getMember()->getLidNr() . ')'
+        ' (' . $this->getMember()->getLidNr() . ')'
         . ' has a special role as ' . $this->getRole() . ' in  '
         . $this->getFoundation()->getName() . '  but is not a member anymore';
     }

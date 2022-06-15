@@ -14,7 +14,6 @@ use User\Form\UserEdit;
 
 class UserServiceFactory implements FactoryInterface
 {
-
     public function createService(ServiceLocatorInterface $sm)
     {
         return new UserService(

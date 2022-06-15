@@ -7,7 +7,6 @@ use Zend\InputFilter\InputFilter;
 
 class DeleteDecision extends Form
 {
-
     public function __construct()
     {
         parent::__construct();

@@ -12,13 +12,13 @@ use Doctrine\ORM\UnitOfWork;
 class Organ
 {
     use Filter;
+
     /**
      * Doctrine entity manager.
      *
      * @var EntityManager
      */
     protected $em;
-
 
     /**
      * Constructor

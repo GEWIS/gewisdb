@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
-
     /**
      * The event ID.
      *

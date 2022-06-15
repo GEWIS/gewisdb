@@ -8,7 +8,6 @@ use Zend\Crypt\Password\PasswordInterface;
 
 class AuthenticationServiceFactory implements FactoryInterface
 {
-
     public function createService(ServiceLocatorInterface $sm)
     {
         $service = $sm->get('doctrine.authenticationservice.orm_default');
@@ -16,7 +15,7 @@ class AuthenticationServiceFactory implements FactoryInterface
 
         $service->getAdapter()
             ->getOptions()
-            ->setCredentialCallable(function($identity, $credential) use ($passwordVerify) {
+            ->setCredentialCallable(function ($identity, $credential) use ($passwordVerify) {
                 return $passwordVerify->verify($credential, $identity->getPassword());
             });
 

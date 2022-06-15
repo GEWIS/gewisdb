@@ -2,14 +2,12 @@
 
 namespace Database\Controller;
 
+use Database\Model\Member;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Database\Model\Member;
-
 class SettingsController extends AbstractActionController
 {
-
     /**
      * Index action.
      */
@@ -26,6 +24,7 @@ class SettingsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $this->getFunctionService()->addFunction($this->getRequest()->getPost());
         }
+
         return new ViewModel(array(
             'functions' => $this->getFunctionService()->getAllFunctions(),
             'form' => $this->getFunctionService()->getFunctionForm()
@@ -40,6 +39,7 @@ class SettingsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $this->getListService()->addList($this->getRequest()->getPost());
         }
+
         return new ViewModel(array(
             'lists' => $this->getListService()->getAllLists(),
             'form' => $this->getListService()->getListForm()

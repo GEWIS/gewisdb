@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefan
- * Date: 22-12-14
- * Time: 18:07
- */
+
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
-use \Database\Model\SubDecision\Foundation;
-use \Database\Model\Meeting;
-use \Checker\Model\Error;
+use Database\Model\SubDecision\Foundation;
+use Database\Model\Meeting;
+use Checker\Model\Error;
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request;
@@ -55,12 +50,12 @@ class Checker extends AbstractService
             . $meeting->getDate()->format('Y-m-d') . "\n";
 
         foreach ($errors as $error) {
-            $body.= $error->asText() . "\n";
+            $body .= $error->asText() . "\n";
         }
 
         $body .= "\n";
-        return $body;
 
+        return $body;
     }
 
     /**
@@ -176,7 +171,8 @@ class Checker extends AbstractService
             // The meeting type and organ type match iff: The meeting type is not VV, or
             // if either both organtype and meetingtype is AV, or they are both not. So
             // it is wrong if only one of them has a meetingtype of AV
-            if ($meetingType === Meeting::TYPE_VV ||
+            if (
+                $meetingType === Meeting::TYPE_VV ||
                 ($organType ===  Foundation::ORGAN_TYPE_AVC ^ $meetingType === Meeting::TYPE_AV)
             ) {
                 $errors[] = new Error\OrganMeetingType($organ);
@@ -279,7 +275,7 @@ class Checker extends AbstractService
                     echo "JSON is malformed or something else went wrong" . PHP_EOL;
                     // The request could not be decoded :/
                 }
-            } else if (404 === $response->getStatusCode()) {
+            } elseif (404 === $response->getStatusCode()) {
                 echo "Member is no longer known at the TU/e" . PHP_EOL;
                 // The member cannot be found in the TU/e student administration database.
                 $member->setChangedOn(new \DateTime());

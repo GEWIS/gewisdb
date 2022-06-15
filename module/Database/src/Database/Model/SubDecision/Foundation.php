@@ -2,11 +2,9 @@
 
 namespace Database\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-
-use Doctrine\Common\Collections\ArrayCollection;
-
 use Database\Model\SubDecision;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Foundation of an organ.
@@ -15,13 +13,12 @@ use Database\Model\SubDecision;
  */
 class Foundation extends SubDecision
 {
-
-    const ORGAN_TYPE_COMMITTEE = 'committee';
-    const ORGAN_TYPE_AVC = 'avc';
-    const ORGAN_TYPE_FRATERNITY = 'fraternity';
-    const ORGAN_TYPE_KKK = 'kkk';
-    const ORGAN_TYPE_AVW = 'avw';
-    const ORGAN_TYPE_RVA = 'rva';
+    public const ORGAN_TYPE_COMMITTEE = 'committee';
+    public const ORGAN_TYPE_AVC = 'avc';
+    public const ORGAN_TYPE_FRATERNITY = 'fraternity';
+    public const ORGAN_TYPE_KKK = 'kkk';
+    public const ORGAN_TYPE_AVW = 'avw';
+    public const ORGAN_TYPE_RVA = 'rva';
 
     /**
      * Abbreviation (only for when organs are created)
@@ -50,7 +47,6 @@ class Foundation extends SubDecision
      * @ORM\OneToMany(targetEntity="FoundationReference",mappedBy="foundation")
      */
     protected $references;
-
 
     /**
      * Constructor.
@@ -160,29 +156,31 @@ class Foundation extends SubDecision
     public function getContent()
     {
         switch ($this->getOrganType()) {
-        case self::ORGAN_TYPE_COMMITTEE:
-            $text = 'Commissie ';
-            break;
-        case self::ORGAN_TYPE_AVC:
-            $text = 'AV-commissie ';
-            break;
-        case self::ORGAN_TYPE_FRATERNITY:
-            $text = 'Dispuut ';
-            break;
-        case self::ORGAN_TYPE_KKK:
-            $text = 'KKK ';
-            break;
-        case self::ORGAN_TYPE_AVW:
-            $text = 'AV-werkgroep ';
-            break;
-        case self::ORGAN_TYPE_RVA:
-            $text = 'RvA ';
-            break;
+            case self::ORGAN_TYPE_COMMITTEE:
+                $text = 'Commissie ';
+                break;
+            case self::ORGAN_TYPE_AVC:
+                $text = 'AV-commissie ';
+                break;
+            case self::ORGAN_TYPE_FRATERNITY:
+                $text = 'Dispuut ';
+                break;
+            case self::ORGAN_TYPE_KKK:
+                $text = 'KKK ';
+                break;
+            case self::ORGAN_TYPE_AVW:
+                $text = 'AV-werkgroep ';
+                break;
+            case self::ORGAN_TYPE_RVA:
+                $text = 'RvA ';
+                break;
         }
+
         $text .= $this->getName();
         $text .= ' met afkorting ';
         $text .= $this->getAbbr();
         $text .= ' wordt opgericht.';
+
         return $text;
     }
 

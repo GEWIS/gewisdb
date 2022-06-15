@@ -8,14 +8,12 @@ use Doctrine\ORM\UnitOfWork;
 
 class ProspectiveMember
 {
-
     /**
      * Doctrine entity manager.
      *
      * @var EntityManager
      */
     protected $em;
-
 
     /**
      * Constructor
@@ -143,5 +141,4 @@ class ProspectiveMember
     {
         return $this->em->getRepository('Database\Model\ProspectiveMember');
     }
-
 }

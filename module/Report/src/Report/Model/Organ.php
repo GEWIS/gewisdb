@@ -8,19 +8,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Organ entity.
  *
- * Note that this entity is derived from the decisions themself.
+ * Note that this entity is derived from the decisions themselves.
  *
  * @ORM\Entity
  */
 class Organ
 {
-
-    const ORGAN_TYPE_COMMITTEE = 'committee';
-    const ORGAN_TYPE_AVC = 'avc';
-    const ORGAN_TYPE_FRATERNITY = 'fraternity';
-    const ORGAN_TYPE_KKK = 'kkk';
-    const ORGAN_TYPE_AVW = 'avw';
-    const ORGAN_TYPE_RVA = 'rva';
+    public const ORGAN_TYPE_COMMITTEE = 'committee';
+    public const ORGAN_TYPE_AVC = 'avc';
+    public const ORGAN_TYPE_FRATERNITY = 'fraternity';
+    public const ORGAN_TYPE_KKK = 'kkk';
+    public const ORGAN_TYPE_AVW = 'avw';
+    public const ORGAN_TYPE_RVA = 'rva';
 
     /**
      * Id.

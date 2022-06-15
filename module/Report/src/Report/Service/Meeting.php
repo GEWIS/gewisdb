@@ -3,14 +3,11 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision;
 use Database\Model\Decision;
-
 use Report\Model\Meeting as ReportMeeting;
 use Report\Model\Decision as ReportDecision;
-
 use Zend\Mail\Transport\TransportInterface;
 use Zend\Mail\Message;
 use Zend\ProgressBar\Adapter\Console;
@@ -18,7 +15,6 @@ use Zend\ProgressBar\ProgressBar;
 
 class Meeting extends AbstractService
 {
-
     /**
      * Export meetings.
      */
@@ -41,6 +37,7 @@ class Meeting extends AbstractService
             $em->clear();
             $progress->update(++$num);
         }
+
         $em->flush();
         $progress->finish();
     }
@@ -80,15 +77,18 @@ class Meeting extends AbstractService
     {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $decRepo = $em->getRepository('Report\Model\Decision');
+
         if ($reportMeeting === null) {
             $reportMeeting = $em->getRepository('Report\Model\Meeting')->find([
                 'type' => $decision->getMeeting()->getType(),
                 'number' => $decision->getMeeting()->getNumber()
             ]);
+
             if ($reportMeeting === null) {
                 throw new \LogicException('Decision without meeting');
             }
         }
+
         // see if decision exists
         $reportDecision = $decRepo->find(array(
             'meeting_type' => $decision->getMeeting()->getType(),
@@ -96,10 +96,12 @@ class Meeting extends AbstractService
             'point' => $decision->getPoint(),
             'number' => $decision->getNumber()
         ));
+
         if (null === $reportDecision) {
             $reportDecision = new ReportDecision();
             $reportDecision->setMeeting($reportMeeting);
         }
+
         $reportDecision->setPoint($decision->getPoint());
         $reportDecision->setNumber($decision->getNumber());
         $content = array();
@@ -112,16 +114,18 @@ class Meeting extends AbstractService
         if (empty($content)) {
             $content[] = '';
         }
+
         $reportDecision->setContent(implode(' ', $content));
 
         $em->persist($reportDecision);
-
     }
 
-    public function generateSubDecision($subdecision, $reportDecision = null) {
+    public function generateSubDecision($subdecision, $reportDecision = null)
+    {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $decRepo = $em->getRepository('Report\Model\Decision');
         $subdecRepo = $em->getRepository('Report\Model\SubDecision');
+
         if ($reportDecision === null) {
             $reportDecision = $decRepo->find(array(
                 'meeting_type' => $subdecision->getMeetingType(),
@@ -129,10 +133,12 @@ class Meeting extends AbstractService
                 'point' => $subdecision->getDecisionPoint(),
                 'number' => $subdecision->getDecisionNumber()
             ));
+
             if ($reportDecision === null) {
                 throw new \LogicException('Decision without meeting');
             }
         }
+
         $reportSubDecision = $subdecRepo->find(array(
             'meeting_type' => $subdecision->getMeetingType(),
             'meeting_number' => $subdecision->getMeetingNumber(),
@@ -140,6 +146,7 @@ class Meeting extends AbstractService
             'decision_number' => $subdecision->getDecisionNumber(),
             'number' => $subdecision->getNumber()
         ));
+
         if (null === $reportSubDecision) {
             // determine type and create
             $class = get_class($subdecision);
@@ -158,6 +165,7 @@ class Meeting extends AbstractService
                 'decision_number' => $ref->getDecision()->getNumber(),
                 'number' => $ref->getNumber()
             ));
+
             $reportSubDecision->setFoundation($foundation);
         }
 
@@ -249,11 +257,14 @@ class Meeting extends AbstractService
 
         // for any decision, make sure the content is filled
         $cnt = $subdecision->getContent();
+
         if (null === $cnt) {
             $cnt = '';
         }
+
         $reportSubDecision->setContent($cnt);
         $em->persist($reportSubDecision);
+
         return $reportSubDecision;
     }
 
@@ -266,15 +277,18 @@ class Meeting extends AbstractService
             'point' => $decision->getPoint(),
             'number' => $decision->getNumber()
         ));
+
         foreach (array_reverse($reportDecision->getSubdecisions()->toArray()) as $subDecision) {
             $this->deleteSubDecision($subDecision);
         }
+
         $em->remove($reportDecision);
     }
 
     public function deleteSubDecision($subDecision)
     {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+
         switch (true) {
             case $subDecision instanceof \Report\Model\SubDecision\Destroy:
                 throw new \Exception('Deletion of destroy decisions not implemented');
@@ -283,8 +297,11 @@ class Meeting extends AbstractService
                 $installation = $subDecision->getInstallation();
                 $installation->clearDischarge();
                 $organMember = $subDecision->getInstallation()->getOrganMember();
+
                 if ($organMember !== null) {
-                    $organMember->setDischargeDate(null);}
+                    $organMember->setDischargeDate(null);
+                }
+
                 break;
             case $subDecision instanceof \Report\Model\SubDecision\Foundation:
                 $organ = $subDecision->getOrgan();
@@ -292,11 +309,14 @@ class Meeting extends AbstractService
                 break;
             case $subDecision instanceof \Report\Model\SubDecision\Installation:
                 $organMember = $subDecision->getOrganMember();
+
                 if ($organMember !== null) {
                     $em->remove($organMember);
                 }
+
                 break;
         }
+
         $em->remove($subDecision);
     }
 

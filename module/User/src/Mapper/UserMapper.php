@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManager;
 
 class UserMapper
 {
-
     /**
      * @var EntityManager
      */

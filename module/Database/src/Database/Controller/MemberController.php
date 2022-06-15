@@ -2,15 +2,13 @@
 
 namespace Database\Controller;
 
+use Database\Model\Member;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 
-use Database\Model\Member;
-
 class MemberController extends AbstractActionController
 {
-
     /**
      * Index action.
      */
@@ -51,9 +49,7 @@ class MemberController extends AbstractActionController
     public function searchAction()
     {
         $service = $this->getMemberService();
-
         $query = $this->params()->fromQuery('q');
-
         $res = $service->search($query);
 
         $res = array_map(function ($member) {
@@ -168,6 +164,7 @@ class MemberController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $member = $service->subscribeLists($this->getRequest()->getPost(), $lidnr);
+
             if (null !== $member) {
                 return new ViewModel(array(
                     'success' => true,
@@ -192,6 +189,7 @@ class MemberController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $member = $service->membership($this->getRequest()->getPost(), $lidnr);
+
             if (null !== $member) {
                 return new ViewModel(array(
                     'success' => true,
@@ -241,6 +239,7 @@ class MemberController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $address = $service->editAddress($this->getRequest()->getPost(), $lidnr, $type);
+
             if (null !== $address) {
                 return new ViewModel(array(
                     'success' => true,
@@ -266,13 +265,16 @@ class MemberController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $address = $service->addAddress($this->getRequest()->getPost(), $lidnr, $type);
+
             if (null !== $address) {
                 $vm = new ViewModel(array(
                     'success' => true,
                     'add' => true,
                     'address' => $address
                 ));
+
                 $vm->setTemplate('database/member/edit-address');
+
                 return $vm;
             }
         }
@@ -280,6 +282,7 @@ class MemberController extends AbstractActionController
         $vm = new ViewModel($service->getAddressForm($lidnr, $type, true));
         $vm->setTemplate('database/member/edit-address');
         $vm->add = true;
+
         return $vm;
     }
 
@@ -297,6 +300,7 @@ class MemberController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $member = $service->removeAddress($this->getRequest()->getPost(), $lidnr, $type);
+
             if (null !== $member) {
                 return new ViewModel(array(
                     'success' => true,

@@ -6,7 +6,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class ReportController extends AbstractActionController
 {
-
     /**
      * Generate reporting database.
      */

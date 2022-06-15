@@ -2,14 +2,12 @@
 
 namespace Database\Form\Fieldset;
 
+use Database\Model\Meeting as MeetingModel;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-use Database\Model\Meeting as MeetingModel;
-
 class Meeting extends Fieldset
 {
-
     public function __construct()
     {
         parent::__construct('meeting');

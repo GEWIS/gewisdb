@@ -2,12 +2,11 @@
 
 namespace Database\Form;
 
-use Zend\InputFilter\InputFilter;
 use Database\Model\SubDecision;
+use Zend\InputFilter\InputFilter;
 
 class Other extends AbstractDecision
 {
-
     public function __construct(Fieldset\Meeting $meeting)
     {
         parent::__construct($meeting);

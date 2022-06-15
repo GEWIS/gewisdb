@@ -1,8 +1,9 @@
 <?php
+
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
-use \Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ArrayUtils;
 
 class Installation extends AbstractService
 {
@@ -59,8 +60,8 @@ class Installation extends AbstractService
             $organName = $installation->getFoundation()->getAbbr();
 
             $roles[$organName][$memberId][$function] = $installation;
-
         }
+
         return $roles;
     }
 

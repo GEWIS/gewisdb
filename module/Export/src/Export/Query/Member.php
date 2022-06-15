@@ -9,7 +9,6 @@ use Doctrine\DBAL\Connection;
  */
 class Member
 {
-
     /**
      * Connection.
      *
@@ -21,7 +20,6 @@ class Member
      * Member exists statement.
      */
     protected $existsStmt;
-
 
     /**
      * Update a member.

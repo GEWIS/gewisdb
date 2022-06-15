@@ -1,9 +1,9 @@
 <?php
+
 namespace Checker;
 
 class Module
 {
-
     /**
      * Get the autoloader configuration.
      *

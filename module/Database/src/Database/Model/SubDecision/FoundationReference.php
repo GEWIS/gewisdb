@@ -2,9 +2,8 @@
 
 namespace Database\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Reference to organ foundation.
@@ -16,7 +15,6 @@ use Database\Model\SubDecision;
  */
 abstract class FoundationReference extends SubDecision
 {
-
     /**
      * Reference to foundation of organ.
      *
