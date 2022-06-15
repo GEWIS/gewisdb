@@ -44,7 +44,7 @@ docker/nginx/
 docker/matomo
 Dockerfile
 docker-compose.*
-gewisweb-vagrant/
+gewisdb-vagrant/
 nbproject
 node_modules/
 public/css/gewis-theme.css

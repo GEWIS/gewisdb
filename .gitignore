@@ -12,7 +12,7 @@ nbproject
 .settings
 coverage/
 vendor/
-gewisweb-vagrant/
+gewisdb-vagrant/
 node_modules/
 .sass-cache/
 .scannerwork/
