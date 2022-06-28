@@ -8,9 +8,13 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
-use \Database\Model\SubDecision\Foundation;
-use \Database\Model\Meeting;
-use \Checker\Model\Error;
+use Checker\Service\Installation as InstallationService;
+use Checker\Service\Meeting as MeetingService;
+use Checker\Service\Member as MemberService;
+use Checker\Service\Organ as OrganService;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\Meeting as MeetingModel;
+use Checker\Model\Error;
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request;
@@ -24,6 +28,7 @@ class Checker extends AbstractService
      */
     public function check()
     {
+        /** @var MeetingService $meetingService */
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meetings = $meetingService->getAllMeetings();
 
@@ -48,6 +53,7 @@ class Checker extends AbstractService
      */
     public function checkDischarges()
     {
+        /** @var MeetingService $meetingService */
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meeting = $meetingService->getLastMeeting();
 
@@ -59,10 +65,10 @@ class Checker extends AbstractService
     /**
      * Makes sure that the errors are handled correctly
      *
-     * @param \Database\Model\Meeting $meeting Meeting for which this errors hold
+     * @param MeetingModel $meeting Meeting for which this errors hold
      * @param array $errors
      */
-    private function handleMeetingErrors(\Database\Model\Meeting $meeting, array $errors)
+    private function handleMeetingErrors(MeetingModel $meeting, array $errors)
     {
         // At this moment only write to output.
         $body =  'Errors after meeting ' . $meeting->getNumber() . ' hold at '
@@ -100,13 +106,15 @@ class Checker extends AbstractService
      * Or if there is a member in the organ if the decision to create an organ
      * is nulled
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @param MeetingModel $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersInNotExistingOrgans(\Database\Model\Meeting $meeting)
+    public function checkMembersInNotExistingOrgans(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var OrganService $organService */
         $organService = $this->getServiceManager()->get('checker_service_organ');
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $organs = $organService->getAllOrgans($meeting);
         $installations = $installationService->getAllInstallations($meeting);
@@ -125,12 +133,13 @@ class Checker extends AbstractService
     /**
      * Checks if there are members that have expired, but are still in an oran
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @param MeetingModel $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersExpiredButStillInOrgan(\Database\Model\Meeting $meeting)
+    public function checkMembersExpiredButStillInOrgan(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $installations = $installationService->getAllInstallations($meeting);
 
@@ -151,12 +160,13 @@ class Checker extends AbstractService
      * Checks if members still have a role in an organ (e.g. they are treasurer)
      * but they are not a member of the organ anymore
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @param MeetingModel $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersHaveRoleButNotInOrgan(\Database\Model\Meeting $meeting)
+    public function checkMembersHaveRoleButNotInOrgan(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $membersArray = $installationService->getCurrentRolesPerOrgan($meeting);
 
@@ -176,12 +186,13 @@ class Checker extends AbstractService
      * Checks all Organ creation, and check if they are created at the the correct Meeting
      * e.g. AVCommissies are only created at an AV
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @param MeetingModel $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkOrganMeetingType(\Database\Model\Meeting $meeting)
+    public function checkOrganMeetingType(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var OrganService $organService */
         $organService = $this->getServiceManager()->get('checker_service_organ');
         $organs = $organService->getOrgansCreatedAtMeeting($meeting);
 
@@ -192,8 +203,8 @@ class Checker extends AbstractService
             // The meeting type and organ type match iff: The meeting type is not VV, or
             // if either both organtype and meetingtype is AV, or they are both not. So
             // it is wrong if only one of them has a meetingtype of AV
-            if ($meetingType === Meeting::TYPE_VV ||
-                ($organType ===  Foundation::ORGAN_TYPE_AVC ^ $meetingType === Meeting::TYPE_AV)
+            if ($meetingType === MeetingModel::TYPE_VV ||
+                ($organType ===  FoundationModel::ORGAN_TYPE_AVC ^ $meetingType === MeetingModel::TYPE_AV)
             ) {
                 $errors[] = new Error\OrganMeetingType($organ);
             }
@@ -208,6 +219,7 @@ class Checker extends AbstractService
      */
     public function checkMemberships()
     {
+        /** @var MemberService $memberService */
         $memberService = $this->getServiceManager()->get('checker_service_member');
 
         $this->checkAtTUe($memberService->getMembersToCheck());
@@ -223,6 +235,7 @@ class Checker extends AbstractService
      */
     private function checkAtTUe(array $members)
     {
+        /** @var MemberService $memberService */
         $memberService = $this->getServiceManager()->get('checker_service_member');
         $config = $this->getServiceManager()->get('config')['checker']['membership_api'];
 
@@ -321,12 +334,15 @@ class Checker extends AbstractService
      */
     private function checkProperMembershipType()
     {
+        /** @var MemberService $memberService */
         $memberService = $this->getServiceManager()->get('checker_service_member');
         $members = $memberService->getEndingMembershipsWithNormalTypes();
 
+        /** @var MeetingService $meetingService */
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $lastMeeting = $meetingService->getLastMeeting();
 
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $activeMembers = $installationService->getActiveMembers($lastMeeting);
 
