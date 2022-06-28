@@ -15,10 +15,10 @@ trait Filter
     /**
      * Filters an array of subdecisions to find decisions that are still valid
      *
-     * @param array $deleted array to be filtered by reference
+     * @param array $subDecisions array to be filtered by reference
      * @return array $deleted array after it was filtered
      */
-    public function filterDeleted(array &$subDecisions)
+    public function filterDeleted(array $subDecisions)
     {
         $deleted = $this->getDeleted();
 
@@ -34,7 +34,7 @@ trait Filter
     /**
      * Return an array of all subdecisions that are deleted
      *
-     * @return Array of Database\Model\SubDecision
+     * @return array of Database\Model\SubDecision
      */
     protected function getDeleted()
     {

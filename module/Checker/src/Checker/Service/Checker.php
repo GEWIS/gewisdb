@@ -36,7 +36,7 @@ class Checker extends AbstractService
         foreach ($meetings as $meeting) {
             $errors = array_merge(
                 $this->checkMembersHaveRoleButNotInOrgan($meeting),
-                $this->checkMembersInNotExistingOrgans($meeting),
+                $this->checkMembersInNonExistingOrgans($meeting),
                 $this->checkMembersExpiredButStillInOrgan($meeting),
                 $this->checkOrganMeetingType($meeting)
             );
@@ -57,7 +57,7 @@ class Checker extends AbstractService
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meeting = $meetingService->getLastMeeting();
 
-        $message = $this->handleMeetingErrors($meeting, $this->checkMembersInNotExistingOrgans($meeting));
+        $message = $this->handleMeetingErrors($meeting, $this->checkMembersInNonExistingOrgans($meeting));
 
         $this->sendMail($message);
     }
@@ -101,28 +101,29 @@ class Checker extends AbstractService
     }
 
     /**
-     * Checks if there are members in non existing organs.
+     * Checks if there are members in non-existing organs.
      * This can happen if there is still a member in the organ after it gets disbanded
      * Or if there is a member in the organ if the decision to create an organ
      * is nulled
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
-     * @return array Array of errors that may have occured.
+     * @return array Array of errors that may have occurred.
      */
-    public function checkMembersInNotExistingOrgans(MeetingModel $meeting)
+    public function checkMembersInNonExistingOrgans(MeetingModel $meeting)
     {
         $errors = [];
         /** @var OrganService $organService */
         $organService = $this->getServiceManager()->get('checker_service_organ');
         /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
+
         $organs = $organService->getAllOrgans($meeting);
         $installations = $installationService->getAllInstallations($meeting);
 
         foreach ($installations as $installation) {
-            $organName = $installation->getFoundation()->toArray()['name'];
+            $installationToOrganFoundation = $organService->getHash($installation->getFoundation());
 
-            if (!in_array($organName, $organs, true)) {
+            if (!in_array($installationToOrganFoundation, $organs, true)) {
                 $errors[] = new Error\MemberInNonExistingOrgan($meeting, $installation);
             }
         }
