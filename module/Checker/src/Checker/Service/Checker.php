@@ -43,6 +43,20 @@ class Checker extends AbstractService
     }
 
     /**
+     * Does a full check on the last meeting (and all previous meetings) to determine if there are members who are
+     * currently installed in an organ that was abrogated (i.e. they were never discharged).
+     */
+    public function checkDischarges()
+    {
+        $meetingService = $this->getServiceManager()->get('checker_service_meeting');
+        $meeting = $meetingService->getLastMeeting();
+
+        $message = $this->handleMeetingErrors($meeting, $this->checkMembersInNotExistingOrgans($meeting));
+
+        $this->sendMail($message);
+    }
+
+    /**
      * Makes sure that the errors are handled correctly
      *
      * @param \Database\Model\Meeting $meeting Meeting for which this errors hold
@@ -99,10 +113,12 @@ class Checker extends AbstractService
 
         foreach ($installations as $installation) {
             $organName = $installation->getFoundation()->toArray()['name'];
+
             if (!in_array($organName, $organs, true)) {
-                $errors[] = new Error\MembersInNonExistingOrgan($installation);
+                $errors[] = new Error\MemberInNonExistingOrgan($meeting, $installation);
             }
         }
+
         return $errors;
     }
 

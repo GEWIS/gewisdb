@@ -26,6 +26,15 @@ return array(
                         )
                     )
                 ),
+                'check_discharges' => array(
+                    'options' => array(
+                        'route' => 'check discharges',
+                        'defaults' => array(
+                            'controller' => 'Checker\Controller\Checker',
+                            'action' => 'checkDischarges'
+                        )
+                    )
+                ),
             )
         )
     )

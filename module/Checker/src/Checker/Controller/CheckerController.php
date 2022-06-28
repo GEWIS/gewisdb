@@ -26,4 +26,10 @@ class CheckerController extends AbstractActionController
         $service = $this->getServiceLocator()->get('checker_service_checker');
         $service->checkMemberships();
     }
+
+    public function checkDischargesAction()
+    {
+        $service = $this->getServiceLocator()->get('checker_service_checker');
+        $service->checkDischarges();
+    }
 }
