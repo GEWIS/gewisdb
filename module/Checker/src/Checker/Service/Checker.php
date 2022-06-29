@@ -8,6 +8,7 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
+use Checker\Model\Error;
 use Checker\Service\Installation as InstallationService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
@@ -15,7 +16,7 @@ use Checker\Service\Organ as OrganService;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\Meeting as MeetingModel;
-use Checker\Model\Error;
+use DateTime;
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request;
@@ -254,16 +255,7 @@ class Checker extends AbstractService
 
         // Determine the date of (potential) expiration of a member's membership outside the foreach to make sure we
         // only do it once.
-        $exp = new \DateTime();
-        $exp->setTime(0, 0);
-
-        if ($exp->format('m') >= 7) {
-            $year = (int) $exp->format('Y') + 1;
-        } else {
-            $year = $exp->format('Y');
-        }
-
-        $exp->setDate($year, 7, 1);
+        $exp = $this->getExpiration(new DateTime());
 
         // Check each member that needs to be checked.
         /** @var MemberModel $member */
@@ -289,7 +281,7 @@ class Checker extends AbstractService
                         if (empty($responseContent['registrations'])) {
                             echo "Member is no longer studying at the TU/e" . PHP_EOL;
                             // The member is no longer studying at the TU/e.
-                            $member->setChangedOn(new \DateTime());
+                            $member->setChangedOn(new DateTime());
                             $member->setIsStudying(false);
                             $member->setMembershipEndsOn($exp);
                         } else {
@@ -300,12 +292,12 @@ class Checker extends AbstractService
                             // expiration.
                             if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
                                 echo "Member is still studying but not at the department of MCS" . PHP_EOL;
-                                $member->setChangedOn(new \DateTime());
+                                $member->setChangedOn(new DateTime());
                                 $member->setMembershipEndsOn($exp);
                             }
                         }
 
-                        $member->setLastCheckedOn(new \DateTime());
+                        $member->setLastCheckedOn(new DateTime());
                     }
                 } catch (\RuntimeException $e) {
                     echo "JSON is malformed or something else went wrong" . PHP_EOL;
@@ -314,10 +306,10 @@ class Checker extends AbstractService
             } else if (404 === $response->getStatusCode()) {
                 echo "Member is no longer known at the TU/e" . PHP_EOL;
                 // The member cannot be found in the TU/e student administration database.
-                $member->setChangedOn(new \DateTime());
+                $member->setChangedOn(new DateTime());
                 $member->setIsStudying(false);
                 $member->setMembershipEndsOn($exp);
-                $member->setLastCheckedOn(new \DateTime());
+                $member->setLastCheckedOn(new DateTime());
             } else {
                 echo "Request failed with status code " . $response->getStatusCode() . PHP_EOL;
             }
@@ -350,7 +342,8 @@ class Checker extends AbstractService
         $activeMembers = $installationService->getActiveMembers($lastMeeting);
 
         echo "" . count($members) . " members have an ending membership" . PHP_EOL;
-        $now = (new \DateTime())->setTime(0, 0);
+        $now = (new DateTime())->setTime(0, 0);
+        $exp = $this->getExpiration($now);
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
@@ -358,16 +351,6 @@ class Checker extends AbstractService
 
             if ($member->getMembershipEndsOn() <= $now) {
                 $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
-
-                // Determine the next expiration date (always the end of the next association year).
-                $exp = clone $now;
-
-                if ($exp->format('m') >= 7) {
-                    $year = (int) $exp->format('Y') + 1;
-                } else {
-                    $year = (int) $exp->format('Y');
-                }
-                $exp->setDate($year, 7, 1);
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
                     echo "Currently an active member, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
@@ -395,7 +378,7 @@ class Checker extends AbstractService
 
                 echo "Extending expiration to " . $exp->format('Y-m-d') . PHP_EOL;
 
-                $member->setChangedOn(new \DateTime());
+                $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
                 $memberService->getMemberMapper()->persist($member);
@@ -420,15 +403,8 @@ class Checker extends AbstractService
         echo "" . count($members) . " members have an expiring membership" . PHP_EOL;
 
         // Determine the next expiration date (always the end of the next association year).
-        $now = (new \DateTime())->setTime(0, 0);
-        $exp = clone $now;
-
-        if ($exp->format('m') >= 7) {
-            $year = (int) $exp->format('Y') + 1;
-        } else {
-            $year = (int) $exp->format('Y');
-        }
-        $exp->setDate($year, 7, 1);
+        $now = (new DateTime())->setTime(0, 0);
+        $exp = $this->getExpiration($now);
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
@@ -438,7 +414,7 @@ class Checker extends AbstractService
                 echo "Extending to " . $exp->format('Y-m-d') . PHP_EOL;
                 $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
-                $member->setChangedOn(new \DateTime());
+                $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
                 $memberService->getMemberMapper()->persist($member);
@@ -447,5 +423,28 @@ class Checker extends AbstractService
                 echo "Not yet expiring, so not extending" . PHP_EOL;
             }
         }
+    }
+
+    /**
+     * Determine the next expiration date (always the end of the next association year).
+     *
+     * @param DateTime $now
+     *
+     * @return DateTime
+     */
+    private function getExpiration(DateTime $now)
+    {
+        $exp = clone $now;
+        $exp->setTime(0, 0);
+
+        if ($exp->format('m') >= 7) {
+            $year = (int) $exp->format('Y') + 1;
+        } else {
+            $year = (int) $exp->format('Y');
+        }
+
+        $exp->setDate($year, 7, 1);
+
+        return $exp;
     }
 }
