@@ -226,6 +226,7 @@ class Checker extends AbstractService
 
         $this->checkAtTUe($memberService->getMembersToCheck());
         $this->checkProperMembershipType();
+        $this->checkNormalExpiration();
     }
 
     /**
@@ -359,9 +360,9 @@ class Checker extends AbstractService
                 $exp = clone $now;
 
                 if ($exp->format('m') >= 7) {
-                    $year = (int) $exp->format('Y') + 2;
-                } else {
                     $year = (int) $exp->format('Y') + 1;
+                } else {
+                    $year = (int) $exp->format('Y');
                 }
                 $exp->setDate($year, 7, 1);
 
@@ -384,6 +385,42 @@ class Checker extends AbstractService
                         $member->setType(MemberModel::TYPE_GRADUATE);
                     }
                 }
+
+                $member->setChangedOn(new \DateTime());
+                $member->setExpiration($exp);
+
+                $memberService->getMemberMapper()->persist($member);
+                $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            }
+        }
+    }
+
+    /**
+     * Make sure that ordinary members have their membership expiration automatically extended if they are eligible.
+     *
+     * @return void
+     */
+    private function checkNormalExpiration()
+    {
+        /** @var MemberService $memberService */
+        $memberService = $this->getServiceManager()->get('checker_service_member');
+        $members = $memberService->getExpiringMembershipsWithNormalTypes();
+
+        // Determine the next expiration date (always the end of the next association year).
+        $now = (new \DateTime())->setTime(0, 0);
+        $exp = clone $now;
+
+        if ($exp->format('m') >= 7) {
+            $year = (int) $exp->format('Y') + 1;
+        } else {
+            $year = (int) $exp->format('Y');
+        }
+        $exp->setDate($year, 7, 1);
+
+        /** @var MemberModel $member */
+        foreach ($members as $member) {
+            if ($member->getExpiration() <= $now) {
+                $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
                 $member->setChangedOn(new \DateTime());
                 $member->setExpiration($exp);
