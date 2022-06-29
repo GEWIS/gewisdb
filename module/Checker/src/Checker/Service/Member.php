@@ -36,6 +36,19 @@ class Member extends AbstractService
     }
 
     /**
+     * Get members who require an adjustment to just their membership expiration.
+     *
+     * @return array
+     */
+    public function getExpiringMembershipsWithNormalTypes()
+    {
+        /** @var MemberMapper $memberMapper */
+        $memberMapper = $this->getServiceManager()->get('checker_mapper_member');
+
+        return $memberMapper->getExpiringMembershipsWithNormalTypes();
+    }
+
+    /**
      * @return MemberMapper
      */
     public function getMemberMapper()
