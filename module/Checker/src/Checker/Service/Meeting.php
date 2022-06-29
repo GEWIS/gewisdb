@@ -2,6 +2,7 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
+use Database\Service\Meeting as MeetingService;
 
 class Meeting extends AbstractService
 {
@@ -12,6 +13,7 @@ class Meeting extends AbstractService
      */
     public function getAllMeetings()
     {
+        /** @var MeetingService $databaseServiceMeeting */
         $databaseServiceMeeting = $this->getServiceManager()->get('database_service_meeting');
         $meetings = $databaseServiceMeeting->getAllMeetings();
         // Filters out unneeded information
@@ -28,6 +30,7 @@ class Meeting extends AbstractService
      */
     public function getLastMeeting()
     {
+        /** @var MeetingService $databaseServiceMeeting */
         $databaseServiceMeeting = $this->getServiceManager()->get('database_service_meeting');
         $meetingMapper = $databaseServiceMeeting->getMeetingMapper();
 

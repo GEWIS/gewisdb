@@ -8,6 +8,10 @@
 
 namespace Checker\Model\Error;
 
+use Checker\Model\Error;
+use Database\Model\SubDecision\Budget as BudgetModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+
 /**
  * Class BudgetOrganDoesNotExist
  *
@@ -15,18 +19,16 @@ namespace Checker\Model\Error;
  *
  * @package Checker\Model\Error
  */
-class BudgetOrganDoesNotExist extends \Checker\Model\Error
+class BudgetOrganDoesNotExist extends Error
 {
-    public function __construct(
-        \Database\Model\SubDecision\Budget $budget
-    ) {
+    public function __construct(BudgetModel $budget) {
         parent::__construct($budget->getDecision()->getMeeting(), $budget);
     }
 
     /**
      * Return the foundation where this budget belongs to
      *
-     * @return \Database\Model\SubDecision\Foundation
+     * @return FoundationModel
      */
     public function getFoundation()
     {

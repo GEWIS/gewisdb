@@ -3,6 +3,7 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
+use Checker\Mapper\Member as MemberMapper;
 
 class Member extends AbstractService
 {
@@ -14,6 +15,7 @@ class Member extends AbstractService
      */
     public function getMembersToCheck()
     {
+        /** @var MemberMapper $memberMapper */
         $memberMapper = $this->getServiceManager()->get('checker_mapper_member');
         $config = $this->getServiceManager()->get('config')['checker']['membership_api'];
 
@@ -27,13 +29,14 @@ class Member extends AbstractService
      */
     public function getEndingMembershipsWithNormalTypes()
     {
+        /** @var MemberMapper $memberMapper */
         $memberMapper = $this->getServiceManager()->get('checker_mapper_member');
 
         return $memberMapper->getEndingMembershipsWithNormalTypes();
     }
 
     /**
-     * @return \Checker\Mapper\Member
+     * @return MemberMapper
      */
     public function getMemberMapper()
     {
