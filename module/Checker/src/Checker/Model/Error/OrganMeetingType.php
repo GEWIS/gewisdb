@@ -1,6 +1,9 @@
 <?php
 namespace Checker\Model\Error;
 
+use Checker\Model\Error;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+
 /**
  * Class OrganMeetingType
  *
@@ -11,14 +14,10 @@ namespace Checker\Model\Error;
  *
  * @package Checker\Model\Error
  */
-class OrganMeetingType extends \Checker\Model\Error
+class OrganMeetingType extends Error
 {
-    public function __construct(
-        \Database\Model\SubDecision\Foundation $foundation
-    ) {
+    public function __construct(FoundationModel $foundation) {
         parent::__construct($foundation->getDecision()->getMeeting(), $foundation);
-        $this->organType = $foundation->getOrganType();
-        $this->meetingType = $foundation->getMeetingType();
     }
 
     /**
@@ -41,7 +40,7 @@ class OrganMeetingType extends \Checker\Model\Error
     {
         return "Organ of type "
             . $this->getOrganType()
-            . ' can not be created in a meeting of type '
+            . ' cannot be created in a meeting of type '
             . $this->getMeetingType();
     }
 }

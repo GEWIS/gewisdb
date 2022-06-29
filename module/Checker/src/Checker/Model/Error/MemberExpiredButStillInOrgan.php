@@ -9,22 +9,26 @@
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
 
 class MemberExpiredButStillInOrgan extends Error
 {
     /**
-     * @param \Database\Model\Meeting $meeting
-     * @param \Database\Model\SubDecision\Installation $installation
+     * @param MeetingModel $meeting
+     * @param InstallationModel $installation
      */
     public function __construct(
-        \Database\Model\Meeting $meeting,
-        \Database\Model\SubDecision\Installation $installation
+        MeetingModel $meeting,
+        InstallationModel $installation
     ) {
         parent::__construct($meeting, $installation);
     }
 
     /**
-     * @return \Database\Model\Member Member that is not member of GEWIS anymore
+     * @return MemberModel Member that is not member of GEWIS anymore
      */
     public function getMember()
     {
@@ -32,7 +36,7 @@ class MemberExpiredButStillInOrgan extends Error
     }
 
     /**
-     * @return \Database\Model\Organ Organ that the member is still a member of
+     * @return FoundationModel Organ that the member is still a member of
      */
     public function getOrgan()
     {
