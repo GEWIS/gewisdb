@@ -349,10 +349,13 @@ class Checker extends AbstractService
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $activeMembers = $installationService->getActiveMembers($lastMeeting);
 
+        echo "" . count($members) . " members have an ending membership" . PHP_EOL;
         $now = (new \DateTime())->setTime(0, 0);
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
+            echo "Determining new membership type for " . $member->getLidnr() . " (ends on " . $member->getMembershipEndsOn()->format('Y-m-d'). " and expiring on " . $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+
             if ($member->getMembershipEndsOn() <= $now) {
                 $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
@@ -367,30 +370,38 @@ class Checker extends AbstractService
                 $exp->setDate($year, 7, 1);
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
+                    echo "Currently an active member, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
                     $member->setType(MemberModel::TYPE_EXTERNAL);
 
                     // External memberships should run till the end of the next association year (which is actually the
                     // same date as the expiration).
                     $member->setMembershipEndsOn($exp);
                 } else {
+                    echo "Not an active member" . PHP_EOL;
                     // We only have to change the membership type for external or graduates depending on whether the
                     // member is still studying.
                     if ($member->getIsStudying()) {
+                        echo "But is studying, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
                         $member->setType(MemberModel::TYPE_EXTERNAL);
 
                         // External memberships should run till the end of the next association year (which is actually
                         // the same date as the expiration).
                         $member->setMembershipEndsOn($exp);
                     } else {
+                        echo "Nor studying, so becoming GRADUATE. Not extending membership" . PHP_EOL;
                         $member->setType(MemberModel::TYPE_GRADUATE);
                     }
                 }
+
+                echo "Extending expiration to " . $exp->format('Y-m-d') . PHP_EOL;
 
                 $member->setChangedOn(new \DateTime());
                 $member->setExpiration($exp);
 
                 $memberService->getMemberMapper()->persist($member);
                 $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            } else {
+                echo "Membership is not yet expiring, so changing nothing" . PHP_EOL;
             }
         }
     }
@@ -406,6 +417,8 @@ class Checker extends AbstractService
         $memberService = $this->getServiceManager()->get('checker_service_member');
         $members = $memberService->getExpiringMembershipsWithNormalTypes();
 
+        echo "" . count($members) . " members have an expiring membership" . PHP_EOL;
+
         // Determine the next expiration date (always the end of the next association year).
         $now = (new \DateTime())->setTime(0, 0);
         $exp = clone $now;
@@ -419,7 +432,10 @@ class Checker extends AbstractService
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
+            echo "Determining new expiration for " . $member->getLidnr() . " (expiring on " . $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+
             if ($member->getExpiration() <= $now) {
+                echo "Extending to " . $exp->format('Y-m-d') . PHP_EOL;
                 $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
                 $member->setChangedOn(new \DateTime());
@@ -427,6 +443,8 @@ class Checker extends AbstractService
 
                 $memberService->getMemberMapper()->persist($member);
                 $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            } else {
+                echo "Not yet expiring, so not extending" . PHP_EOL;
             }
         }
     }
