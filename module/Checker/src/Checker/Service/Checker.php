@@ -12,6 +12,7 @@ use Checker\Service\Installation as InstallationService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
 use Checker\Service\Organ as OrganService;
+use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\Meeting as MeetingModel;
 use Checker\Model\Error;
@@ -264,7 +265,7 @@ class Checker extends AbstractService
         $exp->setDate($year, 7, 1);
 
         // Check each member that needs to be checked.
-        /** @var \Database\Model\Member $member */
+        /** @var MemberModel $member */
         foreach ($members as $member) {
             $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
@@ -349,7 +350,7 @@ class Checker extends AbstractService
 
         $now = (new \DateTime())->setTime(0, 0);
 
-        /** @var \Database\Model\Member $member */
+        /** @var MemberModel $member */
         foreach ($members as $member) {
             if ($member->getMembershipEndsOn() <= $now) {
                 $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
@@ -365,7 +366,7 @@ class Checker extends AbstractService
                 $exp->setDate($year, 7, 1);
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
-                    $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
+                    $member->setType(MemberModel::TYPE_EXTERNAL);
 
                     // External memberships should run till the end of the next association year (which is actually the
                     // same date as the expiration).
@@ -374,13 +375,13 @@ class Checker extends AbstractService
                     // We only have to change the membership type for external or graduates depending on whether the
                     // member is still studying.
                     if ($member->getIsStudying()) {
-                        $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
+                        $member->setType(MemberModel::TYPE_EXTERNAL);
 
                         // External memberships should run till the end of the next association year (which is actually
                         // the same date as the expiration).
                         $member->setMembershipEndsOn($exp);
                     } else {
-                        $member->setType(\Database\Model\Member::TYPE_GRADUATE);
+                        $member->setType(MemberModel::TYPE_GRADUATE);
                     }
                 }
 

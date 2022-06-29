@@ -8,6 +8,7 @@
 
 namespace Checker\Mapper;
 
+use Database\Model\SubDecision\Destroy as DestroyModel;
 
 trait Filter
 {
@@ -65,10 +66,11 @@ trait Filter
     /**
      * Checks if a destroy decision is still valid (i,e. is not destroyed
      *
-     * @param \Database\Model\SubDecision\Destroy $d Destroy decision
+     * @param DestroyModel $d Destroy decision
+     *
      * @return bool is the destroy decision not destroyed?
      */
-    protected function isValid(\Database\Model\SubDecision\Destroy $d)
+    protected function isValid(DestroyModel $d)
     {
         // Get the decision
         $decision = $d->getDecision();
