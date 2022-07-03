@@ -25,13 +25,16 @@ class Board extends AbstractService
                 $boardMember = new BoardMember();
                 $boardMember->setInstallationDec($install);
             }
+
             $boardMember->setMember($install->getMember());
             $boardMember->setFunction($install->getFunction());
-            $boardMember->setInstallDate($install->getDecision()->getMeeting()->getDate());
+            $boardMember->setInstallDate($install->getDate());
+
             $discharge = $install->getDischarge();
             if (null !== $discharge) {
                 $boardMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
             }
+
             $em->persist($boardMember);
         }
         $em->flush();
