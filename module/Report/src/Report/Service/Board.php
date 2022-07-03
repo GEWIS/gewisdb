@@ -30,6 +30,11 @@ class Board extends AbstractService
             $boardMember->setFunction($install->getFunction());
             $boardMember->setInstallDate($install->getDate());
 
+            $release = $install->getRelease();
+            if (null !== $release) {
+                $boardMember->setReleaseDate($release->getDate());
+            }
+            
             $discharge = $install->getDischarge();
             if (null !== $discharge) {
                 $boardMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
