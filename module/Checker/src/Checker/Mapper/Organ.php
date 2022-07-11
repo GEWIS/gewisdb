@@ -3,6 +3,7 @@
 namespace Checker\Mapper;
 
 use Database\Model\Event as EventModel;
+use Database\Model\Meeting as MeetingModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
 
@@ -33,10 +34,10 @@ class Organ
     /**
      * Returns an array of names of all organs created before or during $meeting
      *
-     * @param \Database\Model\Meeting $meeting Meeting to check for
-     * @return array string
+     * @param MeetingModel $meeting Meeting to check for
+     * @return array
      */
-    public function getAllOrgansCreated(\Database\Model\Meeting $meeting)
+    public function getAllOrganFoundations(MeetingModel $meeting)
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -47,24 +48,16 @@ class Organ
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        $organs = $this->filterDeleted($qb->getQuery()->getResult());
-        $organNames = array_map(
-            function ($organ) {
-                return $organ->getName();
-            },
-            $organs
-        );
-
-        return $organNames;
+        return $this->filterDeleted($qb->getQuery()->getResult());
     }
 
     /**
      * Returns an array of all names of organs discharged before or during $meeting
      *
-     * @param \Database\Model\Meeting $meeting Meeting to check for
-     * @return array string
+     * @param MeetingModel $meeting Meeting to check for
+     * @return array
      */
-    public function getAllOrgansDeleted(\Database\Model\Meeting $meeting)
+    public function getAllOrganAbrogations(MeetingModel $meeting)
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -77,24 +70,16 @@ class Organ
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        $abrogations =  $this->filterDeleted($qb->getQuery()->getResult());
-        $organNames = array_map(
-            function ($abrogation) {
-                return $abrogation->getFoundation()->getName();
-            },
-            $abrogations
-        );
-
-        return $organNames;
+        return $this->filterDeleted($qb->getQuery()->getResult());
     }
 
     /**
      * Returns all the organs created at a meeting
      *
-     * @param \Database\Model\Meeting The meeting the organ is created at
+     * @param MeetingModel $meeting The meeting the organ is created at
      * @return array \Database\Model\SubDecision\Foundation
      */
-    public function getOrgansCreatedAtMeeting(\Database\Model\Meeting $meeting)
+    public function getOrgansCreatedAtMeeting(MeetingModel $meeting)
     {
         $qb = $this->em->createQueryBuilder();
 

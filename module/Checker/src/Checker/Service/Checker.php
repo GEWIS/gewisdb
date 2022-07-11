@@ -3,9 +3,15 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
-use Database\Model\SubDecision\Foundation;
-use Database\Model\Meeting;
 use Checker\Model\Error;
+use Checker\Service\Installation as InstallationService;
+use Checker\Service\Meeting as MeetingService;
+use Checker\Service\Member as MemberService;
+use Checker\Service\Organ as OrganService;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\Meeting as MeetingModel;
+use DateTime;
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request;
@@ -19,6 +25,7 @@ class Checker extends AbstractService
      */
     public function check()
     {
+        /** @var MeetingService $meetingService */
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $meetings = $meetingService->getAllMeetings();
 
@@ -26,7 +33,7 @@ class Checker extends AbstractService
         foreach ($meetings as $meeting) {
             $errors = array_merge(
                 $this->checkMembersHaveRoleButNotInOrgan($meeting),
-                $this->checkMembersInNotExistingOrgans($meeting),
+                $this->checkMembersInNonExistingOrgans($meeting),
                 $this->checkMembersExpiredButStillInOrgan($meeting),
                 $this->checkOrganMeetingType($meeting)
             );
@@ -38,12 +45,27 @@ class Checker extends AbstractService
     }
 
     /**
+     * Does a full check on the last meeting (and all previous meetings) to determine if there are members who are
+     * currently installed in an organ that was abrogated (i.e. they were never discharged).
+     */
+    public function checkDischarges()
+    {
+        /** @var MeetingService $meetingService */
+        $meetingService = $this->getServiceManager()->get('checker_service_meeting');
+        $meeting = $meetingService->getLastMeeting();
+
+        $message = $this->handleMeetingErrors($meeting, $this->checkMembersInNonExistingOrgans($meeting));
+
+        $this->sendMail($message);
+    }
+
+    /**
      * Makes sure that the errors are handled correctly
      *
-     * @param \Database\Model\Meeting $meeting Meeting for which this errors hold
+     * @param MeetingModel $meeting Meeting for which this errors hold
      * @param array $errors
      */
-    private function handleMeetingErrors(\Database\Model\Meeting $meeting, array $errors)
+    private function handleMeetingErrors(MeetingModel $meeting, array $errors)
     {
         // At this moment only write to output.
         $body =  'Errors after meeting ' . $meeting->getNumber() . ' hold at '
@@ -76,40 +98,46 @@ class Checker extends AbstractService
     }
 
     /**
-     * Checks if there are members in non existing organs.
+     * Checks if there are members in non-existing organs.
      * This can happen if there is still a member in the organ after it gets disbanded
      * Or if there is a member in the organ if the decision to create an organ
      * is nulled
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
-     * @return array Array of errors that may have occured.
+     * @param MeetingModel $meeting After which meeting do we do the validation
+     * @return array Array of errors that may have occurred.
      */
-    public function checkMembersInNotExistingOrgans(\Database\Model\Meeting $meeting)
+    public function checkMembersInNonExistingOrgans(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var OrganService $organService */
         $organService = $this->getServiceManager()->get('checker_service_organ');
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
+
         $organs = $organService->getAllOrgans($meeting);
         $installations = $installationService->getAllInstallations($meeting);
 
         foreach ($installations as $installation) {
-            $organName = $installation->getFoundation()->toArray()['name'];
-            if (!in_array($organName, $organs, true)) {
-                $errors[] = new Error\MembersInNonExistingOrgan($installation);
+            $installationToOrganFoundation = $organService->getHash($installation->getFoundation());
+
+            if (!in_array($installationToOrganFoundation, $organs, true)) {
+                $errors[] = new Error\MemberInNonExistingOrgan($meeting, $installation);
             }
         }
+
         return $errors;
     }
 
     /**
      * Checks if there are members that have expired, but are still in an oran
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @param MeetingModel $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersExpiredButStillInOrgan(\Database\Model\Meeting $meeting)
+    public function checkMembersExpiredButStillInOrgan(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $installations = $installationService->getAllInstallations($meeting);
 
@@ -130,12 +158,13 @@ class Checker extends AbstractService
      * Checks if members still have a role in an organ (e.g. they are treasurer)
      * but they are not a member of the organ anymore
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @param MeetingModel $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersHaveRoleButNotInOrgan(\Database\Model\Meeting $meeting)
+    public function checkMembersHaveRoleButNotInOrgan(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $membersArray = $installationService->getCurrentRolesPerOrgan($meeting);
 
@@ -155,12 +184,13 @@ class Checker extends AbstractService
      * Checks all Organ creation, and check if they are created at the the correct Meeting
      * e.g. AVCommissies are only created at an AV
      *
-     * @param \Database\Model\Meeting $meeting After which meeting do we do the validation
+     * @param MeetingModel $meeting After which meeting do we do the validation
      * @return array Array of errors that may have occured.
      */
-    public function checkOrganMeetingType(\Database\Model\Meeting $meeting)
+    public function checkOrganMeetingType(MeetingModel $meeting)
     {
         $errors = [];
+        /** @var OrganService $organService */
         $organService = $this->getServiceManager()->get('checker_service_organ');
         $organs = $organService->getOrgansCreatedAtMeeting($meeting);
 
@@ -172,8 +202,8 @@ class Checker extends AbstractService
             // if either both organtype and meetingtype is AV, or they are both not. So
             // it is wrong if only one of them has a meetingtype of AV
             if (
-                $meetingType === Meeting::TYPE_VV ||
-                ($organType ===  Foundation::ORGAN_TYPE_AVC ^ $meetingType === Meeting::TYPE_AV)
+                $meetingType === MeetingModel::TYPE_VV ||
+                ($organType ===  FoundationModel::ORGAN_TYPE_AVC ^ $meetingType === MeetingModel::TYPE_AV)
             ) {
                 $errors[] = new Error\OrganMeetingType($organ);
             }
@@ -188,10 +218,12 @@ class Checker extends AbstractService
      */
     public function checkMemberships()
     {
+        /** @var MemberService $memberService */
         $memberService = $this->getServiceManager()->get('checker_service_member');
 
         $this->checkAtTUe($memberService->getMembersToCheck());
         $this->checkProperMembershipType();
+        $this->checkNormalExpiration();
     }
 
     /**
@@ -203,6 +235,7 @@ class Checker extends AbstractService
      */
     private function checkAtTUe(array $members)
     {
+        /** @var MemberService $memberService */
         $memberService = $this->getServiceManager()->get('checker_service_member');
         $config = $this->getServiceManager()->get('config')['checker']['membership_api'];
 
@@ -218,19 +251,10 @@ class Checker extends AbstractService
 
         // Determine the date of (potential) expiration of a member's membership outside the foreach to make sure we
         // only do it once.
-        $exp = new \DateTime();
-        $exp->setTime(0, 0);
-
-        if ($exp->format('m') >= 7) {
-            $year = (int) $exp->format('Y') + 1;
-        } else {
-            $year = $exp->format('Y');
-        }
-
-        $exp->setDate($year, 7, 1);
+        $exp = $this->getExpiration(new DateTime());
 
         // Check each member that needs to be checked.
-        /** @var \Database\Model\Member $member */
+        /** @var MemberModel $member */
         foreach ($members as $member) {
             $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
@@ -253,7 +277,7 @@ class Checker extends AbstractService
                         if (empty($responseContent['registrations'])) {
                             echo "Member is no longer studying at the TU/e" . PHP_EOL;
                             // The member is no longer studying at the TU/e.
-                            $member->setChangedOn(new \DateTime());
+                            $member->setChangedOn(new DateTime());
                             $member->setIsStudying(false);
                             $member->setMembershipEndsOn($exp);
                         } else {
@@ -264,12 +288,12 @@ class Checker extends AbstractService
                             // expiration.
                             if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
                                 echo "Member is still studying but not at the department of MCS" . PHP_EOL;
-                                $member->setChangedOn(new \DateTime());
+                                $member->setChangedOn(new DateTime());
                                 $member->setMembershipEndsOn($exp);
                             }
                         }
 
-                        $member->setLastCheckedOn(new \DateTime());
+                        $member->setLastCheckedOn(new DateTime());
                     }
                 } catch (\RuntimeException $e) {
                     echo "JSON is malformed or something else went wrong" . PHP_EOL;
@@ -278,10 +302,10 @@ class Checker extends AbstractService
             } elseif (404 === $response->getStatusCode()) {
                 echo "Member is no longer known at the TU/e" . PHP_EOL;
                 // The member cannot be found in the TU/e student administration database.
-                $member->setChangedOn(new \DateTime());
+                $member->setChangedOn(new DateTime());
                 $member->setIsStudying(false);
                 $member->setMembershipEndsOn($exp);
-                $member->setLastCheckedOn(new \DateTime());
+                $member->setLastCheckedOn(new DateTime());
             } else {
                 echo "Request failed with status code " . $response->getStatusCode() . PHP_EOL;
             }
@@ -301,58 +325,123 @@ class Checker extends AbstractService
      */
     private function checkProperMembershipType()
     {
+        /** @var MemberService $memberService */
         $memberService = $this->getServiceManager()->get('checker_service_member');
         $members = $memberService->getEndingMembershipsWithNormalTypes();
 
+        /** @var MeetingService $meetingService */
         $meetingService = $this->getServiceManager()->get('checker_service_meeting');
         $lastMeeting = $meetingService->getLastMeeting();
 
+        /** @var InstallationService $installationService */
         $installationService = $this->getServiceManager()->get('checker_service_installation');
         $activeMembers = $installationService->getActiveMembers($lastMeeting);
 
-        $now = (new \DateTime())->setTime(0, 0);
+        echo "" . count($members) . " members have an upcoming ending and expiring membership" . PHP_EOL;
+        $now = (new DateTime())->setTime(0, 0);
+        $exp = $this->getExpiration($now);
 
-        /** @var \Database\Model\Member $member */
+        /** @var MemberModel $member */
         foreach ($members as $member) {
+            echo "Determining new membership type for " . $member->getLidnr() . " (ends on " . $member->getMembershipEndsOn()->format('Y-m-d') . " and expiring on " . $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+
             if ($member->getMembershipEndsOn() <= $now) {
+                echo "Membership has ended and expired" . PHP_EOL;
                 $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
-                // Determine the next expiration date (always the end of the next association year).
-                $exp = clone $now;
-
-                if ($exp->format('m') >= 7) {
-                    $year = (int) $exp->format('Y') + 2;
-                } else {
-                    $year = (int) $exp->format('Y') + 1;
-                }
-                $exp->setDate($year, 7, 1);
-
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
-                    $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
+                    echo "Currently an active member, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
+                    $member->setType(MemberModel::TYPE_EXTERNAL);
 
                     // External memberships should run till the end of the next association year (which is actually the
                     // same date as the expiration).
                     $member->setMembershipEndsOn($exp);
                 } else {
+                    echo "Not an active member" . PHP_EOL;
                     // We only have to change the membership type for external or graduates depending on whether the
                     // member is still studying.
                     if ($member->getIsStudying()) {
-                        $member->setType(\Database\Model\Member::TYPE_EXTERNAL);
+                        echo "But is studying, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
+                        $member->setType(MemberModel::TYPE_EXTERNAL);
 
                         // External memberships should run till the end of the next association year (which is actually
                         // the same date as the expiration).
                         $member->setMembershipEndsOn($exp);
                     } else {
-                        $member->setType(\Database\Model\Member::TYPE_GRADUATE);
+                        echo "Nor studying, so becoming GRADUATE. Not extending membership" . PHP_EOL;
+                        $member->setType(MemberModel::TYPE_GRADUATE);
                     }
                 }
 
-                $member->setChangedOn(new \DateTime());
+                echo "Extending expiration to " . $exp->format('Y-m-d') . PHP_EOL;
+
+                $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
                 $memberService->getMemberMapper()->persist($member);
                 $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            } else {
+                echo "Membership has not yet ended and expired, so changing nothing" . PHP_EOL;
             }
         }
+    }
+
+    /**
+     * Make sure that ordinary members have their membership expiration automatically extended if they are eligible.
+     *
+     * @return void
+     */
+    private function checkNormalExpiration()
+    {
+        /** @var MemberService $memberService */
+        $memberService = $this->getServiceManager()->get('checker_service_member');
+        $members = $memberService->getExpiringMembershipsWithNormalTypes();
+
+        echo "" . count($members) . " members have an upcoming expiring membership" . PHP_EOL;
+
+        // Determine the next expiration date (always the end of the next association year).
+        $now = (new DateTime())->setTime(0, 0);
+        $exp = $this->getExpiration($now);
+
+        /** @var MemberModel $member */
+        foreach ($members as $member) {
+            echo "Determining new expiration for " . $member->getLidnr() . " (expiring on " . $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+
+            if ($member->getExpiration() <= $now) {
+                echo "Expired, thus extending to " . $exp->format('Y-m-d') . PHP_EOL;
+                $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+
+                $member->setChangedOn(new DateTime());
+                $member->setExpiration($exp);
+
+                $memberService->getMemberMapper()->persist($member);
+                $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            } else {
+                echo "Not yet expired, so not extending" . PHP_EOL;
+            }
+        }
+    }
+
+    /**
+     * Determine the next expiration date (always the end of the next association year).
+     *
+     * @param DateTime $now
+     *
+     * @return DateTime
+     */
+    private function getExpiration(DateTime $now)
+    {
+        $exp = clone $now;
+        $exp->setTime(0, 0);
+
+        if ($exp->format('m') >= 7) {
+            $year = (int) $exp->format('Y') + 1;
+        } else {
+            $year = (int) $exp->format('Y');
+        }
+
+        $exp->setDate($year, 7, 1);
+
+        return $exp;
     }
 }

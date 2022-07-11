@@ -83,6 +83,26 @@ class Member
     }
 
     /**
+     * Get a list of members whose membership is set to expire, but should automatically be renewed.
+     *
+     * @return array
+     */
+    public function getExpiringMembershipsWithNormalTypes()
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('m')
+            ->from('Database\Model\Member', 'm')
+            ->where('m.type = \'ordinary\'')
+            ->andWhere('m.membershipEndsOn IS NULL')
+            ->andWhere('m.expiration <= :endOfCurrentAssociationYear');
+
+        $qb->setParameter('endOfCurrentAssociationYear', $this->getEndOfCurrentAssociationYear());
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @return \DateTime
      */
     private function getEndOfCurrentAssociationYear()

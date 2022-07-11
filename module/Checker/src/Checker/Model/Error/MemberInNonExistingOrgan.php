@@ -3,6 +3,10 @@
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
 
 /**
  * Class MemberInNonExistingOrgan
@@ -15,8 +19,8 @@ use Checker\Model\Error;
 class MemberInNonExistingOrgan extends Error
 {
     public function __construct(
-        \Database\Model\Meeting $meeting,
-        \Database\Model\SubDecision\Installation $installation
+        MeetingModel $meeting,
+        InstallationModel $installation
     ) {
         parent::__construct($meeting, $installation);
     }
@@ -24,7 +28,7 @@ class MemberInNonExistingOrgan extends Error
     /**
      * Return the member that is in a non existing organ
      *
-     * @return \Database\Model\Member
+     * @return MemberModel
      */
     public function getMember()
     {
@@ -34,7 +38,7 @@ class MemberInNonExistingOrgan extends Error
     /**
      * Get the organ that does not exist anymore
      *
-     * @return \Database\Model\SubDecision\Installation
+     * @return FoundationModel
      */
     public function getFoundation()
     {

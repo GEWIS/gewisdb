@@ -2,6 +2,9 @@
 
 namespace Checker\Model;
 
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision as SubDecisionModel;
+
 /**
  * Class Error
  *
@@ -13,21 +16,27 @@ namespace Checker\Model;
 abstract class Error
 {
     /**
-     * @var \Database\Model\Meeting Meeting for which the error is detected
+     * @var MeetingModel Meeting for which the error is detected
      */
     protected $meeting;
 
+    /**
+     * @return MeetingModel
+     */
     public function getMeeting()
     {
         return $this->meeting;
     }
 
     /**
-     * @var \Database\Model\SubDecision Decision that caused the error
+     * @var SubDecisionModel Decision that caused the error
      * Note that this does not necessarily have to made made during $meeting
      */
     protected $subDecision;
 
+    /**
+     * @return SubDecisionModel
+     */
     public function getSubDecision()
     {
         return $this->subDecision;
@@ -36,12 +45,12 @@ abstract class Error
     /**
      * Create a new desciption
      *
-     * @param \Database\Model\Meeting $meeting Meeting for which the error is detected
-     * @param \Database\Model\SubDecision $subDecision DEcision that caused the error
+     * @param MeetingModel $meeting Meeting for which the error is detected
+     * @param SubDecisionModel $subDecision DEcision that caused the error
      */
     public function __construct(
-        \Database\Model\Meeting $meeting,
-        \Database\Model\SubDecision $subDecision
+        MeetingModel $meeting,
+        SubDecisionModel $subDecision
     ) {
         $this->meeting = $meeting;
         $this->subDecision = $subDecision;

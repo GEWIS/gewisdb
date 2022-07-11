@@ -3,6 +3,7 @@
 namespace Checker\Mapper;
 
 use Database\Model\Event as EventModel;
+use Database\Model\Meeting as MeetingModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
 
@@ -30,10 +31,11 @@ class Installation
     /**
      * Returns an array of all installations that are discharged again before or during $meeting
      *
-     * @param \Database\Model\Meeting $meeting Meeting for which to check
+     * @param MeetingModel $meeting Meeting for which to check
+     *
      * @return array \Database\Model\SubDecision\Installation
      */
-    public function getAllInstallationsDischarged(\Database\Model\Meeting $meeting)
+    public function getAllInstallationsDischarged(MeetingModel $meeting)
     {
 
         $qb = $this->em->createQueryBuilder();
@@ -51,10 +53,11 @@ class Installation
     /**
      * Returns an array of all installations that have bbeen done before or during $meeting
      *
-     * @param \Database\Model\Meeting meeting Meeting for which to check
+     * @param MeetingModel $meeting Meeting for which to check
+     *
      * @return array \Database\Model\SubDecision\Installation
      */
-    public function getAllInstallationsInstalled(\Database\Model\Meeting $meeting)
+    public function getAllInstallationsInstalled(MeetingModel $meeting)
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('i')

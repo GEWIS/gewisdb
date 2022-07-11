@@ -60,6 +60,13 @@ class BoardMember
     protected $installationDec;
 
     /**
+     * Release date.
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $releaseDate;
+
+    /**
      * Discharge date.
      *
      * @ORM\Column(type="date", nullable=true)
@@ -155,6 +162,26 @@ class BoardMember
     public function setInstallationDec(Installation $installationDec)
     {
         $this->installationDec = $installationDec;
+    }
+
+    /**
+     * Get the release date.
+     *
+     * @return \DateTime
+     */
+    public function getReleaseDate()
+    {
+        return $this->releaseDate;
+    }
+
+    /**
+     * Set the release date.
+     *
+     * @param \DateTime $releaseDate
+     */
+    public function setReleaseDate($releaseDate)
+    {
+        $this->releaseDate = $releaseDate;
     }
 
     /**

@@ -3,27 +3,34 @@
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
 
 class MemberHasRoleButNotInOrgan extends Error
 {
     /**
-     * @var Role that the member has in the organ
+     * @var string Role that the member has in the organ
      */
     private $role;
 
+    /**
+     * @return string
+     */
     public function getRole()
     {
         return $this->role;
     }
 
     /**
-     * @param \Database\Model\Meeting $meeting
-     * @param \Database\Model\SubDecision\Installation $installation
-     * @param $role The role that the member still has
+     * @param MeetingModel $meeting
+     * @param InstallationModel $installation
+     * @param $role string The role that the member still has
      */
     public function __construct(
-        \Database\Model\Meeting $meeting,
-        \Database\Model\SubDecision\Installation $installation,
+        MeetingModel $meeting,
+        InstallationModel $installation,
         $role
     ) {
         parent::__construct($meeting, $installation);
@@ -33,7 +40,7 @@ class MemberHasRoleButNotInOrgan extends Error
     /**
      * Return the member that is in a non existing organ
      *
-     * @return \Database\Model\Member
+     * @return MemberModel
      */
     public function getMember()
     {
@@ -43,7 +50,7 @@ class MemberHasRoleButNotInOrgan extends Error
     /**
      * Get the organ that does not exist anymore
      *
-     * @return \Database\Model\SubDecision\Installation
+     * @return FoundationModel
      */
     public function getFoundation()
     {

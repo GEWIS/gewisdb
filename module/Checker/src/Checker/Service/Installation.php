@@ -3,18 +3,22 @@
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
-use Zend\Stdlib\ArrayUtils;
+use Checker\Mapper\Installation as InstallationMapper;
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
 
 class Installation extends AbstractService
 {
     /**
      * Fetch all the existing organs after $meeting
      *
-     * @param \Database\Model\Meeting $meeting
+     * @param MeetingModel $meeting
+     *
      * @return array \Database\Model\SubDecision\Installation
      */
-    public function getAllInstallations(\Database\Model\Meeting $meeting)
+    public function getAllInstallations(MeetingModel $meeting)
     {
+        /** @var InstallationMapper $mapper */
         $mapper = $this->getServiceManager()->get('checker_mapper_installation');
 
         $createdMembers = $mapper->getAllInstallationsInstalled($meeting);
@@ -28,6 +32,7 @@ class Installation extends AbstractService
         foreach ($deletedMembers as $dm) {
             $creation = $dm->getInstallation();
             $hash = $this->getHash($creation);
+
             if (isset($members[$hash])) {
                 unset($members[$hash]);
             }
@@ -38,7 +43,7 @@ class Installation extends AbstractService
 
     /**
      * Returns the different roles for each user in each organ
-     * @param $meeting
+     * @param MeetingModel $meeting
      * @return array \Database\Model\SubDecision\Installation in the form:
      * [
      *      'organName' => [
@@ -48,7 +53,7 @@ class Installation extends AbstractService
      *      ]
      * ]
      */
-    public function getCurrentRolesPerOrgan(\Database\Model\Meeting $meeting)
+    public function getCurrentRolesPerOrgan(MeetingModel $meeting)
     {
         $installations = $this->getAllInstallations($meeting);
 
@@ -68,7 +73,7 @@ class Installation extends AbstractService
     /**
      * Get all members who are currently installed in an organ.
      *
-     * @param \Database\Model\Meeting|null $meeting
+     * @param MeetingModel|null $meeting
      *
      * @return array
      */
@@ -96,11 +101,18 @@ class Installation extends AbstractService
     /**
      * Returns a unique hash for a subdecision (Needed for matching subdecisions)
      *
-     * @param \Database\Model\SubDecision $d Decision to hash for
+     * @param InstallationModel $installation Decision to hash for
      * @return string Unique hash for $d
      */
-    private function getHash(\Database\Model\SubDecision $d)
+    private function getHash(InstallationModel $installation)
     {
-        return $d->getMeetingType() . $d->getMeetingNumber() . $d-> getDecisionPoint() . $d->getNumber();
+        return sprintf(
+            '%s%d%d%d%d',
+            $installation->getMeetingType(),
+            $installation->getMeetingNumber(),
+            $installation->getDecisionPoint(),
+            $installation->getDecisionNumber(),
+            $installation->getNumber()
+        );
     }
 }
