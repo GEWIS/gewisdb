@@ -4,49 +4,30 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         cron \
         git \
-        ghostscript \
         libcurl4-openssl-dev \
-        libfreetype6-dev \
         libicu-dev \
-        libjpeg62-turbo-dev \
-        libmagickwand-dev \
-        libpng-dev \
         libpq-dev \
         libsqlite3-dev \
         libzip-dev \
         nano \
-        poppler-utils \
-        rsync \
-        ssh \
-        sshpass \
         unzip \
         zip \
     && apt-get upgrade -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-configure \
-        gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        calendar \
-        curl \
-        exif \
-        gd \
-        intl \
-        opcache \
-        pgsql \
-        pdo \
-        pdo_mysql \
-        pdo_pgsql \
-        pdo_sqlite \
-        zip
-
-RUN pecl install imagick \
-    && docker-php-ext-enable imagick
+RUN docker-php-ext-install \
+    calendar \
+    curl \
+    intl \
+    opcache \
+    pgsql \
+    pdo \
+    pdo_pgsql \
+    pdo_sqlite \
+    zip
 
 RUN git clone -b 2.9.8 https://github.com/xdebug/xdebug.git /root/xdebug \
     && cd /root/xdebug && ./rebuild.sh
-
-RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 
 WORKDIR /code
 

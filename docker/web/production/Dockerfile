@@ -4,41 +4,22 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         cron \
         git \
-        ghostscript \
         libcurl4-openssl-dev \
-        libfreetype6-dev \
         libicu-dev \
-        libjpeg62-turbo-dev \
-        libmagickwand-dev \
-        libpng-dev \
         libpq-dev \
         libzip-dev \
-        poppler-utils \
-        rsync \
-        ssh \
-        sshpass \
         unzip \
     && apt-get upgrade -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-configure \
-        gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        calendar \
-        curl \
-        exif \
-        gd \
-        intl \
-        opcache \
-        pgsql \
-        pdo_mysql \
-        pdo_pgsql \
-        zip
-
-RUN pecl install -o imagick \
-    && docker-php-ext-enable imagick
-
-RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
+RUN docker-php-ext-install \
+    calendar \
+    curl \
+    intl \
+    opcache \
+    pgsql \
+    pdo_pgsql \
+    zip
 
 FROM php-target as gewisdb_web_production
 WORKDIR /code
