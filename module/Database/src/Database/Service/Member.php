@@ -12,6 +12,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Mail\Message;
 use Zend\Mime\Part as MimePart;
 use Zend\Mime\Message as MimeMessage;
+use Zend\View\Renderer\PhpRenderer;
 
 class Member extends AbstractService
 {
@@ -880,7 +881,7 @@ class Member extends AbstractService
      */
     public function getRenderer()
     {
-        return $this->sm->get('view_manager')->getRenderer();
+        return $this->sm->get('ViewRenderer');
     }
 
     /**

@@ -517,7 +517,7 @@ case Member::GENDER_OTHER:
         </tr>
         <tr>
             <th><?= $this->translate('IBAN') ?></th>
-            <td><?= $member->getIban() ?></td>
+            <td><?= $member->getIban() ?? $this->translate('Onbekend') ?></td>
         </tr>
         <tr>
             <th><?= $this->translate('Betaald (hoe veel)') ?></th>
