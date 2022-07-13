@@ -71,15 +71,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Application\\": "module/Application/src",
             "Checker\\": "module/Checker/src",
             "Database\\": "module/Database/src",
             "Export\\": "module/Export/src",
             "Import\\": "module/Import/src",
-            "Report\\": "module/Report/src"
-        },
-        "psr-4": {
+            "Report\\": "module/Report/src",
             "User\\": "module/User/src"
         }
     },

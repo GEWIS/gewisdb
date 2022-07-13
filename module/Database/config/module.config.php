@@ -1,5 +1,7 @@
 <?php
 
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+
 return array(
     'router' => array(
         'routes' => array(
@@ -513,9 +515,9 @@ return array(
     'doctrine' => array(
         'driver' => array(
             'database_entities' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'class' => AnnotationDriver::class,
                 'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/Database/Model/')
+                'paths' => array(__DIR__ . '/../src/Model/')
             ),
             'orm_default' => array(
                 'drivers' => array(

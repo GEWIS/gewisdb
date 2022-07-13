@@ -1,5 +1,7 @@
 <?php
 
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -25,10 +27,10 @@ return array(
         ),
         'driver' => array(
             'Report_Driver' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'class' => AnnotationDriver::class,
                 'cache' => 'array',
                 'paths' => array(
-                    __DIR__ . '/../src/Report/Model'
+                    __DIR__ . '/../src/Model'
                 )
             ),
             'orm_report' => array(

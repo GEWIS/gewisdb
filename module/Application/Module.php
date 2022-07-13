@@ -57,20 +57,14 @@ class Module
         return $session->lang;
     }
 
-    public function getConfig()
+    /**
+     * Get the configuration for this module.
+     *
+     * @return array Module configuration
+     */
+    public function getConfig(): array
     {
         return include __DIR__ . '/config/module.config.php';
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
     }
 
     /**
