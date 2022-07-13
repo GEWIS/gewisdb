@@ -7,7 +7,6 @@ use Zend\View\Model\ViewModel;
 
 class ExportController extends AbstractActionController
 {
-
     /**
      * Index action.
      */

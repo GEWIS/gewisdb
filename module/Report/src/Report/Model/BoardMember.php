@@ -3,19 +3,17 @@
 namespace Report\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Report\Model\SubDecision\Board\Installation;
 
 /**
  * Board member entity.
  *
- * Note that this entity is derived from the decisions themself.
+ * Note that this entity is derived from the decisions themselves.
  *
  * @ORM\Entity
  */
 class BoardMember
 {
-
     /**
      * Id.
      *
@@ -205,5 +203,4 @@ class BoardMember
     {
         $this->dischargeDate = $dischargeDate;
     }
-
 }

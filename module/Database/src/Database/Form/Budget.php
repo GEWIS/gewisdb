@@ -2,15 +2,13 @@
 
 namespace Database\Form;
 
-use Zend\InputFilter\InputFilter;
 use Database\Model\SubDecision;
+use Zend\InputFilter\InputFilter;
 
 class Budget extends AbstractDecision
 {
-
     public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
     {
-
         parent::__construct($meeting);
 
         $this->add(array(
@@ -151,7 +149,7 @@ class Budget extends AbstractDecision
         ));
 
         // Boolean values have no filter. The form will make sure that it will be casted to true or false
-        // And because of the filters the filter is unable to detect if a value is set. 
+        // And because of the filters the filter is unable to detect if a value is set.
         $filter->add(array(
             'name' => 'approve',
             'required' => true,

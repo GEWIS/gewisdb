@@ -9,7 +9,6 @@ use Doctrine\DBAL\Connection;
  */
 class SubDecision
 {
-
     /**
      * Connection.
      *
@@ -21,7 +20,6 @@ class SubDecision
      * Decision exists statement.
      */
     protected $existsStmt;
-
 
     /**
      * Update a subdecision.

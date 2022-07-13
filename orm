@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+if (php_sapi_name() != 'cli') {
+    throw new RuntimeException("This script can only be called from the command line.");
+}
+
+// make sure we are in the correct directory
+chdir(__DIR__);
+
+require 'bootstrap.php';
+
+use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
+
+$application = ConsoleRunner::getApplication();
+
+/* @var $cli \Symfony\Component\Console\Application */
+$cli = $application->getServiceManager()->get('doctrine.cli');
+
+// If we've overridden the entity manager via env var, inject the new one
+$entityManagerName = getenv('EM_ALIAS') ?: 'orm_default';
+$entityManagerName = "doctrine.entitymanager.". $entityManagerName;
+if ( $application->getServiceManager()->has($entityManagerName) ) {
+    $emHelper = new EntityManagerHelper($application->getServiceManager()->get($entityManagerName));
+    $cli->getHelperSet()->set($emHelper, 'em');
+}
+
+exit($application->run());

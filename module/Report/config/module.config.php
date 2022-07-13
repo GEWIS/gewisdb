@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -77,6 +78,5 @@ return array(
             )
         )
     ),
-    'mail' => [
-    ]
+    'mail' => []
 );

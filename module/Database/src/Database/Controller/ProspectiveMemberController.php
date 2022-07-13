@@ -2,11 +2,10 @@
 
 namespace Database\Controller;
 
+use Database\Model\Member;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
-
-use Database\Model\Member;
 
 class ProspectiveMemberController extends AbstractActionController
 {
@@ -26,9 +25,7 @@ class ProspectiveMemberController extends AbstractActionController
     public function searchAction()
     {
         $service = $this->getMemberService();
-
         $query = $this->params()->fromQuery('q');
-
         $res = $service->searchProspective($query);
 
         $res = array_map(function ($member) {

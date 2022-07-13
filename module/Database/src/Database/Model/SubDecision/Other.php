@@ -2,9 +2,8 @@
 
 namespace Database\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Entity for undefined decisions.
@@ -13,14 +12,12 @@ use Database\Model\SubDecision;
  */
 class Other extends SubDecision
 {
-
     /**
      * Textual content for the decision.
      *
      * @ORM\Column(type="text")
      */
     protected $content;
-
 
     /**
      * Get the content.

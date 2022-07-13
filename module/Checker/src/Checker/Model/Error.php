@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Model;
 
 use Database\Model\Meeting as MeetingModel;
@@ -14,7 +15,6 @@ use Database\Model\SubDecision as SubDecisionModel;
  */
 abstract class Error
 {
-
     /**
      * @var MeetingModel Meeting for which the error is detected
      */

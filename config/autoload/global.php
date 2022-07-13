@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Global Configuration Override
  *
@@ -33,4 +34,12 @@ return array(
         'public_dir' => 'data',
         'dir_mode' => 0770,
     ),
+    /*
+     * Settings for Monolog logger
+     */
+    'logging' => [
+        'logfile_path' => 'data/logs/gewisdb.log',
+        'max_rotate_file_count' => 10,
+        'minimal_log_level' => 'INFO',
+    ],
 );

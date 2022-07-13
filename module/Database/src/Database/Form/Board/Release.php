@@ -5,14 +5,11 @@ namespace Database\Form\Board;
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset;
 use Database\Service\Meeting as MeetingService;
-
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class Release extends AbstractDecision
-    implements InputFilterProviderInterface
+class Release extends AbstractDecision implements InputFilterProviderInterface
 {
-
     protected $service;
 
     public function __construct(Fieldset\Meeting $meeting, Fieldset\SubDecision $installation, MeetingService $service)

@@ -1,4 +1,5 @@
 <?php
+
 namespace Report;
 
 use Zend\ModuleManager\ModuleManagerInterface;
@@ -8,7 +9,6 @@ use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 
 class Module
 {
-
     /**
      * Get the autoloader configuration.
      *
@@ -58,8 +58,8 @@ class Module
                 'doctrine.eventmanager.orm_report' => new \DoctrineModule\Service\EventManagerFactory('orm_report'),
                 'doctrine.entity_resolver.orm_report' => new \DoctrineORMModule\Service\EntityResolverFactory('orm_report'),
                 'doctrine.sql_logger_collector.orm_report' => new \DoctrineORMModule\Service\SQLLoggerCollectorFactory('orm_report'),
-                'DoctrineORMModule\Form\Annotation\AnnotationBuilder' => function($sm) {
-                    return new \DoctrineORMModule\Form\Annotation\AnnotationBuilder($sl->get('doctrine.entitymanager.orm_report'));
+                'DoctrineORMModule\Form\Annotation\AnnotationBuilder' => function ($sm) {
+                    return new \DoctrineORMModule\Form\Annotation\AnnotationBuilder($sm->get('doctrine.entitymanager.orm_report'));
                 },
             )
         );

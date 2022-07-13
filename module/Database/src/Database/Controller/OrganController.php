@@ -8,7 +8,6 @@ use Zend\View\Model\JsonModel;
 
 class OrganController extends AbstractActionController
 {
-
     /**
      * Index action, for organ search.
      */
@@ -79,9 +78,7 @@ class OrganController extends AbstractActionController
     public function searchAction()
     {
         $service = $this->getMeetingService();
-
         $query = $this->params()->fromQuery('q');
-
         $res = $service->organSearch($query);
 
         $res = array_map(function ($organ) {

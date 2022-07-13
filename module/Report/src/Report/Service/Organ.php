@@ -3,7 +3,6 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Report\Model\Organ as ReportOrgan;
 use Report\Model\OrganMember;
 use Report\Model\SubDecision;
@@ -14,7 +13,6 @@ use Zend\ProgressBar\ProgressBar;
 
 class Organ extends AbstractService
 {
-
     /**
      * Export organ info.
      */
@@ -58,14 +56,17 @@ class Organ extends AbstractService
                 if ($ref instanceof Abrogation) {
                     $this->generateAbrogation($ref);
                 }
+
                 if ($ref instanceof Installation) {
                     $this->generateInstallation($ref);
                 }
             }
+
             $em->persist($repOrgan);
             $em->flush();
             $progress->update(++$num);
         }
+
         $em->flush();
         $progress->finish();
     }
@@ -75,22 +76,26 @@ class Organ extends AbstractService
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         // see if there already is an organ
         $repOrgan = $foundation->getOrgan();
+
         if (null === $repOrgan) {
             $repOrgan = new ReportOrgan();
             $repOrgan->setFoundation($foundation);
         }
+
         $repOrgan->setAbbr($foundation->getAbbr());
         $repOrgan->setName($foundation->getName());
         $repOrgan->setType($foundation->getOrganType());
         $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
         $em->persist($repOrgan);
         $em->flush();
+
         return $repOrgan;
     }
 
     public function generateAbrogation($ref)
     {
         $repOrgan = $ref->getFoundation()->getOrgan();
+
         if ($repOrgan === null) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
             $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
@@ -98,10 +103,12 @@ class Organ extends AbstractService
             $repOrgan = $repo->findOneBy([
                 'foundation' => $ref->getFoundation()
             ]);
+
             if ($repOrgan === null) {
                 throw new \LogicException('Abrogation without Organ');
             }
         }
+
         $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
     }
 
@@ -112,11 +119,13 @@ class Organ extends AbstractService
         // get full reference
         $organMember = $ref->getOrganMember();
         $repOrgan = $ref->getFoundation()->getOrgan();
+
         if ($repOrgan === null) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
             $repOrgan = $repo->findOneBy([
                 'foundation' => $ref->getFoundation()
             ]);
+
             if ($repOrgan === null) {
                 throw new \LogicException('Installation without Organ');
             }
@@ -128,13 +137,18 @@ class Organ extends AbstractService
             $organMember->setOrgan($repOrgan);
             $organMember->setMember($ref->getMember());
             $function = $ref->getFunction();
-            if (null === $function)
+
+            if (null === $function) {
                 $function = 'Lid';
+            }
+
             $organMember->setFunction($function);
             $organMember->setInstallDate($ref->getDecision()->getMeeting()->getDate());
         }
+
         $organMember->setInstallation($ref);
         $discharge = $ref->getDischarge();
+
         if (null !== $discharge) {
             $organMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
 
@@ -153,6 +167,7 @@ class Organ extends AbstractService
     {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $organMember = $ref->getInstallation()->getOrganMember();
+
         if ($organMember === null) {
             throw new \LogicException('Discharge without OrganMember');
         }
@@ -160,5 +175,4 @@ class Organ extends AbstractService
         $organMember->setDischargeDate($ref->getDecision()->getMeeting()->getDate());
         $em->persist($organMember);
     }
-
 }

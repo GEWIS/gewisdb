@@ -3,12 +3,10 @@
 namespace Database\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\MailingList as ListModel;
 
 class MailingList extends AbstractService
 {
-
     /**
      * Get all lists.
      *

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefan
- * Date: 8-2-15
- * Time: 11:40
- */
 
 namespace Checker\Model\Error;
 
@@ -21,7 +15,8 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
  */
 class BudgetOrganDoesNotExist extends Error
 {
-    public function __construct(BudgetModel $budget) {
+    public function __construct(BudgetModel $budget)
+    {
         parent::__construct($budget->getDecision()->getMeeting(), $budget);
     }
 
@@ -30,12 +25,12 @@ class BudgetOrganDoesNotExist extends Error
      *
      * @return FoundationModel
      */
-    public function getFoundation()
+    public function getFoundation(): FoundationModel
     {
         return $this->getSubDecision()->getFoundation();
     }
 
-    public function asText()
+    public function asText(): string
     {
         return 'Budget from ' . $this->getFoundation()->getName() . ' has been created. However '
         . $this->getFoundation()->getName() . ' does not exist';

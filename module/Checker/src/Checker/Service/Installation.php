@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Service;
 
 use Application\Service\AbstractService;
@@ -64,8 +65,8 @@ class Installation extends AbstractService
             $organName = $installation->getFoundation()->getAbbr();
 
             $roles[$organName][$memberId][$function] = $installation;
-
         }
+
         return $roles;
     }
 

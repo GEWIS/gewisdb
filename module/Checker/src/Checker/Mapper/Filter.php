@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefan
- * Date: 8-3-15
- * Time: 14:28
- */
 
 namespace Checker\Mapper;
 
@@ -12,7 +6,6 @@ use Database\Model\SubDecision\Destroy as DestroyModel;
 
 trait Filter
 {
-
     /**
      * Filters an array of subdecisions to find decisions that are still valid
      *
@@ -62,7 +55,6 @@ trait Filter
         return $deleted;
     }
 
-
     /**
      * Checks if a destroy decision is still valid (i,e. is not destroyed
      *
@@ -84,6 +76,5 @@ trait Filter
 
         // else it is valid iff the destroyed by is not valid
         return !$this->isValid($destroy);
-
     }
 }

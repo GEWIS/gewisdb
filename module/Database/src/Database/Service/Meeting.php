@@ -3,16 +3,13 @@
 namespace Database\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\Decision;
 use Database\Model\SubDecision;
-
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 
 class Meeting extends AbstractService
 {
-
     /**
      * Get a meeting.
      *
@@ -547,7 +544,11 @@ class Meeting extends AbstractService
     public function findFoundation($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
     {
         return $this->getOrganMapper()->find(
-            $type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber
+            $type,
+            $meetingNumber,
+            $decisionPoint,
+            $decisionNumber,
+            $subdecisionNumber
         );
     }
 

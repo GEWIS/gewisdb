@@ -6,10 +6,8 @@ use Database\Form\Fieldset\CollectionWithErrors;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class Foundation extends AbstractDecision
-    implements InputFilterProviderInterface
+class Foundation extends AbstractDecision implements InputFilterProviderInterface
 {
-
     public function __construct(Fieldset\Meeting $meeting, Fieldset\MemberFunction $function)
     {
         parent::__construct($meeting);

@@ -8,7 +8,6 @@ use User\Service\UserService;
 
 class SettingsController extends AbstractActionController
 {
-
     /**
      * @var UserService
      */
@@ -86,5 +85,4 @@ class SettingsController extends AbstractActionController
         }
         $this->redirect()->toRoute('settings/user');
     }
-
 }

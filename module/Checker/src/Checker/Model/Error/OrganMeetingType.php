@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
@@ -16,14 +17,15 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
  */
 class OrganMeetingType extends Error
 {
-    public function __construct(FoundationModel $foundation) {
+    public function __construct(FoundationModel $foundation)
+    {
         parent::__construct($foundation->getDecision()->getMeeting(), $foundation);
     }
 
     /**
      * @return string Type of organ that was created
      */
-    public function getOrganType()
+    public function getOrganType(): string
     {
         return $this->getSubDecision()->getOrganType();
     }
@@ -31,12 +33,12 @@ class OrganMeetingType extends Error
     /**
      * @return string Type of meeting that this organ was created
      */
-    public function getMeetingType()
+    public function getMeetingType(): string
     {
         return $this->getSubDecision()->getDecision()->getMeeting()->getType();
     }
 
-    public function asText()
+    public function asText(): string
     {
         return "Organ of type "
             . $this->getOrganType()

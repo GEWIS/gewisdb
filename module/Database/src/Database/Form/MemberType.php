@@ -2,15 +2,13 @@
 
 namespace Database\Form;
 
+use Database\Model\Member;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-use Database\Model\Member;
-
 class MemberType extends Form implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct();

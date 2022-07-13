@@ -4,14 +4,11 @@ namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset;
-
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class Install extends AbstractDecision
-    implements InputFilterProviderInterface
+class Install extends AbstractDecision implements InputFilterProviderInterface
 {
-
     public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
     {
         parent::__construct($meeting);

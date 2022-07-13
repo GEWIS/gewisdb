@@ -9,7 +9,6 @@ use Doctrine\DBAL\Connection;
  */
 class Meeting
 {
-
     /**
      * Connection.
      *
@@ -21,7 +20,6 @@ class Meeting
      * Meeting exists statement.
      */
     protected $existsStmt;
-
 
     /**
      * Update a meeting.

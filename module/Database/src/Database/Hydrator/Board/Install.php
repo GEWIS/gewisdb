@@ -8,7 +8,6 @@ use Database\Hydrator\AbstractDecision;
 
 class Install extends AbstractDecision
 {
-
     /**
      * Board install hydration
      *

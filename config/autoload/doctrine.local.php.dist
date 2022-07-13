@@ -1,9 +1,10 @@
 <?php
+
 return array(
     'doctrine' => array(
         'connection' => array(
             'orm_default' => array(
-                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
                 'params' => array(
                     'host'     => 'postgres',
                     'port'     => '5432',
@@ -13,7 +14,7 @@ return array(
                 )
             ),
             'orm_import' => array(
-                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
                 'params' => array(
                     'host'     => 'postgres',
                     'port'     => '5432',
@@ -23,7 +24,7 @@ return array(
                 )
             ),
             'orm_report' => array(
-                'driverClass' =>'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
                 'params' => array(
                     'host'     => 'postgres',
                     'port'     => '5432',

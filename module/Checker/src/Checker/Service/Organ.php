@@ -1,4 +1,5 @@
 <?php
+
 namespace Checker\Service;
 
 use Application\Service\AbstractService;

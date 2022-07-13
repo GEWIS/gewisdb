@@ -10,7 +10,6 @@ use Doctrine\DBAL\Connection;
  */
 class Query
 {
-
     /**
      * Connection.
      *
@@ -45,7 +44,6 @@ class Query
      * @var <don't care>
      */
     protected $memStmt;
-
 
     /**
      * Prepare and execute the next meeting query.

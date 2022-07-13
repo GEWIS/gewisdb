@@ -3,25 +3,21 @@
 namespace Import\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 
 class ImportController extends AbstractActionController
 {
-
     /**
      * Import action.
      */
     public function importAction()
     {
         $console = $this->getConsole();
-
         $meetingService = $this->getServiceLocator()->get('import_service_meeting');
-
         $meetings = $meetingService->getMeetings();
 
-        foreach ($meetings as $vergadering)  {
+        foreach ($meetings as $vergadering) {
             $verg = $vergadering['vergaderafk'] . ' ' . $vergadering['vergadernr'] . " (" . $vergadering['datum'] . ")";
             echo "Voeg vergadering $verg toe? [Y/n] ";
             $char = $console->readChar();
@@ -41,7 +37,6 @@ class ImportController extends AbstractActionController
     public function membersAction()
     {
         $memberService = $this->getServiceLocator()->get('import_service_member');
-
         $members = $memberService->getMembers();
 
         foreach ($members as $member) {

@@ -8,7 +8,6 @@ use Database\Model\SubDecision\Discharge;
 
 class Install extends AbstractDecision
 {
-
     /**
      * Install hydration
      *

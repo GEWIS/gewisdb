@@ -3,7 +3,6 @@
 namespace Report\Model\SubDecision;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Report\Model\SubDecision;
 use Report\Model\Member;
 
@@ -14,7 +13,6 @@ use Report\Model\Member;
  */
 class Installation extends FoundationReference
 {
-
     /**
      * Function given.
      *

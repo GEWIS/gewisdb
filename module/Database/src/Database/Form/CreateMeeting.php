@@ -2,14 +2,12 @@
 
 namespace Database\Form;
 
+use Database\Model\Meeting;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-use Database\Model\Meeting;
-
 class CreateMeeting extends Form
 {
-
     public function __construct()
     {
         parent::__construct();

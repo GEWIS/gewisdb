@@ -1,0 +1,54 @@
+FROM php:7.1-fpm as php-target
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        cron \
+        git \
+        libcurl4-openssl-dev \
+        libicu-dev \
+        libpq-dev \
+        libzip-dev \
+        unzip \
+    && apt-get upgrade -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install \
+    calendar \
+    curl \
+    intl \
+    opcache \
+    pgsql \
+    pdo_pgsql \
+    zip
+
+FROM php-target as gewisdb_web_production
+WORKDIR /code
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php \
+    && php -r "unlink('composer-setup.php');"
+
+COPY ./composer.json ./composer.lock ./
+RUN php composer.phar install -o --no-dev
+
+COPY --chown=www-data:www-data ./docker/web/production/php.ini /usr/local/etc/php/conf.d/default.ini
+COPY --chown=www-data:www-data ./docker/web/production/php-fpm.conf /usr/local/etc/php-fpm.d/php-fpm.conf
+COPY --chown=www-data:www-data ./config/autoload/local.production.php.dist ./config/autoload/local.php
+COPY --chown=www-data:www-data ./config/autoload/doctrine.local.production.php.dist ./config/autoload/doctrine.local.php
+
+COPY --chown=www-data:www-data ./docker/web/production/crontab /etc/cron.d/crontab
+RUN chmod 0644 /etc/cron.d/crontab && crontab /etc/cron.d/crontab
+
+COPY --chown=www-data:www-data ./docker/web/production/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod 0775 ./docker-entrypoint.sh
+
+COPY --chown=www-data:www-data . /code
+
+RUN php composer.phar dump-autoload -a --no-dev
+
+ARG GIT_COMMIT
+ENV GIT_COMMIT=${GIT_COMMIT}
+
+VOLUME ["/code/data", "/code/public"]
+
+ENTRYPOINT ["/bin/sh", "/code/docker-entrypoint.sh"]

@@ -9,7 +9,6 @@ use User\Service\UserService;
 
 class UserControllerFactory implements FactoryInterface
 {
-
     public function createService(ServiceLocatorInterface $sl)
     {
         $sm = $sl->getServiceLocator();

@@ -2,13 +2,11 @@
 
 namespace Database\Form\Fieldset;
 
-use Zend\Form\Fieldset;
-
 use Database\Service\InstallationFunction as FunctionService;
+use Zend\Form\Fieldset;
 
 class MemberFunction extends Fieldset
 {
-
     public function __construct(Member $member, FunctionService $service, $withmember = false)
     {
         parent::__construct('member_function');

@@ -7,7 +7,6 @@ use Checker\Mapper\Member as MemberMapper;
 
 class Member extends AbstractService
 {
-
     /**
      * Fetch some members whose membership status should be checked.
      *

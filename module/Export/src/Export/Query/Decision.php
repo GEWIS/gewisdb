@@ -9,7 +9,6 @@ use Doctrine\DBAL\Connection;
  */
 class Decision
 {
-
     /**
      * Connection.
      *
@@ -21,7 +20,6 @@ class Decision
      * Decision exists statement.
      */
     protected $existsStmt;
-
 
     /**
      * Update a decision.

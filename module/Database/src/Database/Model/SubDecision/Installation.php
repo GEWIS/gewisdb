@@ -2,10 +2,9 @@
 
 namespace Database\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
 use Database\Model\Member;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Installation into organ.
@@ -14,7 +13,6 @@ use Database\Model\Member;
  */
 class Installation extends FoundationReference
 {
-
     /**
      * Function given.
      *

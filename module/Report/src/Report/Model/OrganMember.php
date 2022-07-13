@@ -3,19 +3,17 @@
 namespace Report\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Report\Model\SubDecision\Installation;
 
 /**
  * Organ member entity.
  *
- * Note that this entity is derived from the decisions themself.
+ * Note that this entity is derived from the decisions themselves.
  *
  * @ORM\Entity
  */
 class OrganMember
 {
-
     /**
      * Id.
      *

@@ -1,6 +1,6 @@
 <?php
-namespace Checker\Model\Error;
 
+namespace Checker\Model\Error;
 
 use Checker\Model\Error;
 use Database\Model\Meeting as MeetingModel;
@@ -45,12 +45,11 @@ class MemberInNonExistingOrgan extends Error
         return $this->getSubDecision()->getFoundation();
     }
 
-
     public function asText()
     {
         return 'Member ' . $this->getMember()->getFullName()
-            .    ' ('. $this->getMember()->getLidNr() . ')'
-            . ' is still installed as '. $this->getSubDecision()->getFunction() . ' in '
+            .    ' (' . $this->getMember()->getLidNr() . ')'
+            . ' is still installed as ' . $this->getSubDecision()->getFunction() . ' in '
             . $this->getFoundation()->getName() . ' which does not exist anymore';
     }
 }

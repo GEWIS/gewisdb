@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SavedQuery
 {
-
     /**
      * The query ID.
      *
@@ -34,7 +33,6 @@ class SavedQuery
      * @ORM\Column(type="text")
      */
     protected $query;
-
 
     /**
      * Get the ID.

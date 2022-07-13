@@ -8,7 +8,6 @@ use Database\Hydrator\AbstractDecision;
 
 class Release extends AbstractDecision
 {
-
     /**
      * Board release hydration
      *

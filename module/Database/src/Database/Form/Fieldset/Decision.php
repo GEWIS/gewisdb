@@ -2,16 +2,13 @@
 
 namespace Database\Form\Fieldset;
 
+use Database\Model\Decision as DecisionModel;
+use Database\Model\Meeting as MeetingModel;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-use Database\Model\Decision as DecisionModel;
-use Database\Model\Meeting as MeetingModel;
-
-class Decision extends Fieldset
-    implements InputFilterProviderInterface
+class Decision extends Fieldset implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct('fdecision');

@@ -1,38 +1,68 @@
-version: '3'
-services:
-    web:
-        image: ghcr.io/gewis/gewisdb:latest
-        volumes:
-            - public:/code/public
-            - data:/code/data
-        networks:
-            - gewisdb
+version: '3.5'
 
+services:
     nginx:
-        image: nginx:alpine
-        volumes:
-            - public:/code/public
-            - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+        image: abc-db.docker-registry.gewis.nl/gewisdb_nginx:latest
+        env_file:
+            - .env
+        #        environment:
+        #            - NGINX_REQUIRE_AUTH=
         depends_on:
             - web
-        networks:
-            - gewisdb
-
-    postgres:
-        image: postgres:9.6-alpine
         volumes:
-            - postgres:/var/lib/postgresql/data
-        environment:
-            POSTGRES_PASSWORD: gewisdb
-            POSTGRES_USER: gewisdb
+            - gewisdb_public:/code/public:ro
+            - gewisdb_logs:/etc/nginx/logs:rw
         networks:
-            - gewisdb
-
-networks:
-    gewisdb:
-        driver: bridge
+            - gewisdb_network
+        ports:
+            - "9200:9200"
+            - "9201:9201"
+            - "9202:9202"
+        restart: unless-stopped
+    web:
+        image: abc-db.docker-registry.gewis.nl/gewisdb_web:production
+        env_file:
+            - .env
+#        environment:
+#            - APP_ENV=
+#            - COOKIE_DOMAIN=
+#            - DOCKER_GOOGLE_API_KEY=
+#            - DOCKER_GOOGLE_CALENDAR_KEY=
+#            - DOCKER_DB_HOST=
+#            - DOCKER_DB_PORT=
+#            - DOCKER_DB_USERNAME=
+#            - DOCKER_DB_PASSWORD=
+#            - DOCKER_DB_DATABASE=
+#            - SSH_USERNAME=
+#            - SSH_PASSWORD=
+#            - SSH_REMOTE=
+        depends_on:
+            - postfix
+        volumes:
+            - gewisdb_data:/code/data:rw
+            - gewisdb_public:/code/public:rw
+        networks:
+            - gewisdb_network
+        restart: unless-stopped
+    postfix:
+        image: juanluisbaptiste/postfix
+        env_file:
+            - .env
+#        environment:
+#            - SMTP_SERVER=
+#            - SMTP_PORT=
+#            - SMTP_USERNAME=
+#            - SMTP_PASSWORD=
+#            - SERVER_HOSTNAME=
+        networks:
+            - gewisdb_network
+        restart: unless-stopped
+        stop_grace_period: 60s
 
 volumes:
-    public:
-    data:
-    postgres:
+    gewisdb_data:
+    gewisdb_public:
+    gewisdb_logs:
+
+networks:
+    gewisdb_network:

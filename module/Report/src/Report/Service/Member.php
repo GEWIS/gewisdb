@@ -3,7 +3,6 @@
 namespace Report\Service;
 
 use Application\Service\AbstractService;
-
 use Database\Model\Member as DbMember;
 use Database\Model\Address as DbAddress;
 use Report\Model\Member as ReportMember;
@@ -14,14 +13,12 @@ use Zend\ProgressBar\ProgressBar;
 
 class Member extends AbstractService
 {
-
     /**
      * Export members.
      */
     public function generate()
     {
         $mapper = $this->getMemberMapper();
-
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
 
         $memberCollection = $mapper->findAll();
@@ -30,14 +27,16 @@ class Member extends AbstractService
         $progress = new ProgressBar($adapter, 0, count($memberCollection));
 
         $num = 0;
-        foreach ($mapper->findAll() as $member) {
+        foreach ($memberCollection as $member) {
             if ($num++ % 20 == 0) {
                 $em->flush();
                 $em->clear();
                 $progress->update($num);
             }
+
             $this->generateMember($member);
         }
+
         $em->flush();
         $em->clear();
         $progress->finish();
@@ -88,15 +87,10 @@ class Member extends AbstractService
 
         $reportLists = array_map(function ($list) {
             return $list->getName();
-        },
-            $reportMember->getLists()->toArray()
-        );
-
+        }, $reportMember->getLists()->toArray());
         $lists = array_map(function ($list) {
             return $list->getName();
-        },
-            $member->getLists()->toArray()
-        );
+        }, $member->getLists()->toArray());
 
         foreach (array_diff($lists, $reportLists) as $list) {
             $reportList = $reportListRepo->find($list);
@@ -127,19 +121,23 @@ class Member extends AbstractService
     {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $addrRepo = $em->getRepository('Report\Model\Address');
+
         if ($reportMember === null) {
             $reportMember = $em->getRepository('Report\Model\Member')->find($address->getMember()->getLidnr());
             if ($reportMember === null) {
                 throw new \LogicException('Address without member');
             }
         }
+
         $reportAddress = $addrRepo->find(array(
             'member' => $reportMember->getLidnr(),
             'type' => $address->getType()
         ));
+
         if (null === $reportAddress) {
             $reportAddress = new ReportAddress();
         }
+
         $reportAddress->setType($address->getType());
         $reportAddress->setCountry($address->getCountry());
         $reportAddress->setStreet($address->getStreet());
@@ -164,11 +162,13 @@ class Member extends AbstractService
     {
         $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $repo = $em->getRepository('Report\Model\Address');
+
         // first try to find an existing member
         $reportAddress = $repo->find(array(
             'member' => $address->getMember()->getLidnr(),
             'type' => $address->getType()
         ));
+
         $em->remove($reportAddress);
     }
 

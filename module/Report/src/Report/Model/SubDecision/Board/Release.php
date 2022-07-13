@@ -3,7 +3,6 @@
 namespace Report\Model\SubDecision\Board;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Report\Model\SubDecision;
 
 /**
@@ -16,7 +15,6 @@ use Report\Model\SubDecision;
  */
 class Release extends SubDecision
 {
-
     /**
      * Reference to the installation of a member.
      *
@@ -116,6 +114,7 @@ class Release extends SubDecision
             null,
             'd MMMM Y'
         );
+
         return $formatter->format($date);
     }
 }

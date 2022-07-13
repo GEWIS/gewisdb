@@ -1,14 +1,9 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Application;
 
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Logger;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container as SessionContainer;
@@ -26,7 +21,31 @@ class Module
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale($this->determineLocale($e));
 
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'logError']);
+        $eventManager->attach(MvCEvent::EVENT_RENDER_ERROR, [$this, 'logError']);
+
         AbstractValidator::setDefaultTranslator($translator, 'validate');
+    }
+
+    /**
+     * @param MvcEvent $e
+     */
+    public function logError($e)
+    {
+        $container = $e->getApplication()->getServiceManager();
+        $logger = $container->get('logger');
+
+        if ('error-router-no-match' === $e->getError()) {
+            // not an interesting error
+            return;
+        }
+        if ('error-exception' === $e->getError()) {
+            $logger->error($e->getParam('exception'));
+
+            return;
+        }
+
+        $logger->error($e->getError());
     }
 
     protected function determineLocale(MvcEvent $e)
@@ -64,6 +83,21 @@ class Module
         return [
             'invokables' => [
                 'application_service_storage' => 'Application\Service\FileStorage',
+            ],
+            'factories' => [
+                'logger' => function ($sm) {
+                    $logger = new Logger('gewisdb');
+                    $config = $sm->get('config')['logging'];
+
+                    $handler = new RotatingFileHandler(
+                        $config['logfile_path'],
+                        $config['max_rotate_file_count'],
+                        $config['minimal_log_level']
+                    );
+                    $logger->pushHandler($handler);
+
+                    return $logger;
+                },
             ],
         ];
     }

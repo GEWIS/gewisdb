@@ -2,10 +2,9 @@
 
 namespace Database\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-
 use Database\Model\SubDecision;
 use Database\Model\Member;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  *
@@ -13,7 +12,6 @@ use Database\Model\Member;
  */
 class Budget extends SubDecision
 {
-
     /**
      * Budget author.
      *

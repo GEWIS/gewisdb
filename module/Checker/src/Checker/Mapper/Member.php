@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManager;
  */
 class Member
 {
-
     /**
      * Doctrine entity manager.
      *

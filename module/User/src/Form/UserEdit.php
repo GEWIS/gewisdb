@@ -7,7 +7,6 @@ use Zend\InputFilter\InputFilterProviderInterface;
 
 class UserEdit extends Form implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct();

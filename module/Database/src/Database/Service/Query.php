@@ -3,16 +3,13 @@
 namespace Database\Service;
 
 use Application\Service\AbstractService;
-
+use Database\Model\SavedQuery;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\Common\Persistence\Mapping\MappingException;
 
-use Database\Model\SavedQuery;
-
 class Query extends AbstractService
 {
-
     /**
      * Get all saved queries.
      *

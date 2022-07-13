@@ -1,0 +1,27 @@
+includes:
+    - phpstan/phpstan-baseline.neon
+    - phpstan/phpstan-baseline-pr.neon
+
+parameters:
+    level: 1
+    treatPhpDocTypesAsCertain: true
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: false
+    bootstrapFiles:
+        - bootstrap.php
+    doctrine:
+        objectManagerLoader: phpstan/phpstan-om.php
+    paths:
+        - config
+        - bootstrap.php
+        - module/Application/src
+        - module/Checker/src
+        - module/Database/src
+        - module/Export/src
+        - module/Import/src
+        - module/Report/src
+        - module/User/src
+        - module/Checker/test
+        - public/index.php
+    tmpDir: data/cache/phpstan

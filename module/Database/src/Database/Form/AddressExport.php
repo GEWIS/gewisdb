@@ -6,10 +6,8 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class AddressExport extends Form
-    implements InputFilterProviderInterface
+class AddressExport extends Form implements InputFilterProviderInterface
 {
-
     public function __construct()
     {
         parent::__construct();
