@@ -1,9 +1,11 @@
 <?php
 
+use Import\Controller\ImportController;
+
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Import\Controller\Import' => 'Import\Controller\ImportController'
+            ImportController::class => ImportController::class,
         )
     ),
     'console' => array(
@@ -13,7 +15,7 @@ return array(
                     'options' => array(
                         'route' => 'import members',
                         'defaults' => array(
-                            'controller' => 'Import\Controller\Import',
+                            'controller' => ImportController::class,
                             'action' => 'members'
                         )
                     )
@@ -22,7 +24,7 @@ return array(
                     'options' => array(
                         'route' => 'import',
                         'defaults' => array(
-                            'controller' => 'Import\Controller\Import',
+                            'controller' => ImportController::class,
                             'action' => 'import'
                         )
                     )

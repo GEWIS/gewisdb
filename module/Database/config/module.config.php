@@ -1,46 +1,54 @@
 <?php
 
+use Database\Controller\AddressController;
+use Database\Controller\ExportController;
+use Database\Controller\IndexController;
+use Database\Controller\MeetingController;
+use Database\Controller\MemberController;
+use Database\Controller\OrganController;
+use Database\Controller\ProspectiveMemberController;
+use Database\Controller\QueryController;
+use Database\Controller\SettingsController;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Zend\Mvc\Router\Http\Literal;
+use Zend\Mvc\Router\Http\Segment;
 
 return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Literal',
+                'type' => Literal::class,
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller' => 'Index',
+                        'controller' => IndexController::class,
                         'action'     => 'index',
                     ),
                 ),
             ),
             'address' => [
-                'type' => 'Literal',
+                'type' => Literal::class,
                 'options' => [
                     'route' => '/address',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller' => 'Address',
+                        'controller' => AddressController::class,
                         'action' => 'index'
                     ]
                 ]
             ],
             'meeting' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/meeting',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Meeting',
+                        'controller'    => MeetingController::class,
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'decision' => array(
-                        'type' => 'Literal',
+                        'type' => Literal::class,
                         'options' => array(
                             'route' => '/decision',
                             'defaults' => array(
@@ -50,7 +58,7 @@ return array(
                         'may_terminate' => false,
                         'child_routes' => array(
                             'form' => array(
-                                'type' => 'Segment',
+                                'type' => Segment::class,
                                 'options' => array(
                                     'route' => '/:form',
                                     'constraints' => array(
@@ -62,7 +70,7 @@ return array(
                                 )
                             ),
                             'create' => array(
-                                'type' => 'Segment',
+                                'type' => Segment::class,
                                 'options' => array(
                                     'route' => '/:type/:number/:point/:decision',
                                     'constraints' => array(
@@ -74,7 +82,7 @@ return array(
                                 )
                             ),
                             'delete' => array(
-                                'type' => 'Segment',
+                                'type' => Segment::class,
                                 'options' => array(
                                     'route' => '/delete/:type/:number/:point/:decision',
                                     'constraints' => array(
@@ -91,7 +99,7 @@ return array(
                         )
                     ),
                     'view' => array(
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => array(
                             'route' => '/:type/:number',
                             'constraints' => array(
@@ -104,7 +112,7 @@ return array(
                         )
                     ),
                     'create' => array(
-                        'type' => 'Literal',
+                        'type' => Literal::class,
                         'options' => array(
                             'route' => '/create',
                             'defaults' => array(
@@ -113,7 +121,7 @@ return array(
                         )
                     ),
                     'search' => array(
-                        'type' => 'Literal',
+                        'type' => Literal::class,
                         'options' => array(
                             'route' => '/search',
                             'defaults' => array(
@@ -124,19 +132,18 @@ return array(
                 ),
             ),
             'organ' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/organ',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Organ',
+                        'controller'    => OrganController::class,
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type'    => Segment::class,
                         'options' => array(
                             'route'    => '/:action',
                             'constraints' => array(
@@ -145,7 +152,7 @@ return array(
                         ),
                     ),
                     'info' => array(
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => array(
                             'route' => '/info/:type/:number/:point/:decision/:subdecision',
                             'defaults' => array(
@@ -161,7 +168,7 @@ return array(
                         )
                     ),
                     'view' => array(
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => array(
                             'route' => '/:type/:number/:point/:decision/:subdecision',
                             'defaults' => array(
@@ -179,19 +186,18 @@ return array(
                 ),
             ),
             'member' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/member',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Member',
+                        'controller'    => MemberController::class,
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'show' => array(
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => array(
                             'route' => '/:id',
                             'constraints' => array(
@@ -204,7 +210,7 @@ return array(
                         'may_terminate' => true,
                         'child_routes' => array(
                             'edit' => array(
-                                'type' => 'Literal',
+                                'type' => Literal::class,
                                 'options' => array(
                                     'route' => '/edit',
                                     'defaults' => array(
@@ -214,7 +220,7 @@ return array(
                                 'may_terminate' => true,
                                 'child_routes' => array(
                                     'address' => array(
-                                        'type' => 'Segment',
+                                        'type' => Segment::class,
                                         'options' => array(
                                             'route' => '/address/:type',
                                             'constraints' => array(
@@ -226,7 +232,7 @@ return array(
                                         )
                                     ),
                                     'membership' => array(
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => array(
                                             'route' => '/membership',
                                             'defaults' => array(
@@ -235,7 +241,7 @@ return array(
                                         )
                                     ),
                                     'lists' => array(
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => array(
                                             'route' => '/lists',
                                             'defaults' => array(
@@ -244,7 +250,7 @@ return array(
                                         )
                                     ),
                                     'expiration' => array(
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => array(
                                             'route' => '/expiration',
                                             'defaults' => array(
@@ -255,7 +261,7 @@ return array(
                                 )
                             ),
                             'delete' => array(
-                                'type' => 'Literal',
+                                'type' => Literal::class,
                                 'options' => array(
                                     'route' => '/delete',
                                     'defaults' => array(
@@ -264,7 +270,7 @@ return array(
                                 )
                             ),
                             'print' => array(
-                                'type' => 'Literal',
+                                'type' => Literal::class,
                                 'options' => array(
                                     'route' => '/print',
                                     'defaults' => array(
@@ -273,7 +279,7 @@ return array(
                                 )
                             ),
                             'remove-address' => array(
-                                'type' => 'Segment',
+                                'type' => Segment::class,
                                 'options' => array(
                                     'route' => '/remove/address/:type',
                                     'constraints' => array(
@@ -285,7 +291,7 @@ return array(
                                 )
                             ),
                             'add-address' => array(
-                                'type' => 'Segment',
+                                'type' => Segment::class,
                                 'options' => array(
                                     'route' => '/add/address/:type',
                                     'constraints' => array(
@@ -297,7 +303,7 @@ return array(
                                 )
                             ),
                             'supremum' => array(
-                                'type' => 'Literal',
+                                'type' => Literal::class,
                                 'options' => [
                                     'route' => '/supremum',
                                     'defaults' => [
@@ -308,7 +314,7 @@ return array(
                                 'may_terminate' => true,
                                 'child_routes' => [
                                     'optin' => [
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => '/optin',
                                             'defaults' => [
@@ -317,7 +323,7 @@ return array(
                                         ]
                                     ],
                                     'optout' => [
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => '/optout',
                                             'defaults' => [
@@ -330,7 +336,7 @@ return array(
                         )
                     ),
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type'    => Segment::class,
                         'options' => array(
                             'route'    => '/:action',
                             'constraints' => array(
@@ -341,19 +347,18 @@ return array(
                 ),
             ),
             'prospective-member' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/prospective-member',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'ProspectiveMember',
+                        'controller'    => ProspectiveMemberController::class,
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'show' => array(
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => array(
                             'route' => '/:id',
                             'constraints' => array(
@@ -366,7 +371,7 @@ return array(
                         'may_terminate' => true,
                         'child_routes' => array(
                             'delete' => array(
-                                'type' => 'Literal',
+                                'type' => Literal::class,
                                 'options' => array(
                                     'route' => '/delete',
                                     'defaults' => array(
@@ -375,7 +380,7 @@ return array(
                                 )
                             ),
                             'finalize' => array(
-                                'type' => 'Literal',
+                                'type' => Literal::class,
                                 'options' => array(
                                     'route' => '/finalize',
                                     'defaults' => array(
@@ -386,7 +391,7 @@ return array(
                         )
                     ),
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type'    => Segment::class,
                         'options' => array(
                             'route'    => '/:action',
                             'constraints' => array(
@@ -397,19 +402,18 @@ return array(
                 ),
             ),
             'export' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/export',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Export',
+                        'controller'    => ExportController::class,
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type'    => Segment::class,
                         'options' => array(
                             'route'    => '/:action',
                             'constraints' => array(
@@ -420,19 +424,18 @@ return array(
                 ),
             ),
             'settings' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/settings',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Settings',
+                        'controller'    => SettingsController::class,
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'list-delete' => array(
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => array(
                             'route' => '/list/delete/:name',
                             'constraints' => array(
@@ -444,7 +447,7 @@ return array(
                         )
                     ),
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type'    => Segment::class,
                         'options' => array(
                             'route'    => '/:action',
                             'constraints' => array(
@@ -455,19 +458,18 @@ return array(
                 ),
             ),
             'query' => array(
-                'type'    => 'Literal',
+                'type'    => Literal::class,
                 'options' => array(
                     'route'    => '/query',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Query',
+                        'controller'    => QueryController::class,
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'show' => array(
-                        'type' => 'Segment',
+                        'type' => Segment::class,
                         'options' => array(
                             'route' => '/show/:query',
                             'constraints' => array(
@@ -479,7 +481,7 @@ return array(
                         )
                     ),
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type'    => Segment::class,
                         'options' => array(
                             'route'    => '/:action',
                             'constraints' => array(
@@ -493,15 +495,15 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
-            'Database\Controller\ProspectiveMember' => 'Database\Controller\ProspectiveMemberController',
-            'Database\Controller\Member' => 'Database\Controller\MemberController',
-            'Database\Controller\Organ' => 'Database\Controller\OrganController',
-            'Database\Controller\Export' => 'Database\Controller\ExportController',
-            'Database\Controller\Query' => 'Database\Controller\QueryController',
-            'Database\Controller\Settings' => 'Database\Controller\SettingsController',
-            'Database\Controller\Address' => 'Database\Controller\AddressController',
-            'Database\Controller\Index' => 'Database\Controller\IndexController',
+            MeetingController::class => MeetingController::class,
+            ProspectiveMemberController::class => ProspectiveMemberController::class,
+            MemberController::class => MemberController::class,
+            OrganController::class => OrganController::class,
+            ExportController::class => ExportController::class,
+            QueryController::class => QueryController::class,
+            SettingsController::class => SettingsController::class,
+            AddressController::class => AddressController::class,
+            IndexController::class => IndexController::class,
         )
     ),
     'view_manager' => array(

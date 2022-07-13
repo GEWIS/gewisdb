@@ -1,11 +1,13 @@
 <?php
 
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Mapping\Driver\DriverChain;
+use Report\Controller\ReportController;
 
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Report\Controller\Report' => 'Report\Controller\ReportController'
+            ReportController::class => ReportController::class,
         )
     ),
     'doctrine' => array(
@@ -34,7 +36,7 @@ return array(
                 )
             ),
             'orm_report' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\DriverChain',
+                'class' => DriverChain::class,
                 'drivers' => array(
                     'Report\Model' => 'Report_Driver'
                 )
@@ -63,7 +65,7 @@ return array(
                     'options' => array(
                         'route' => 'generate reportdb',
                         'defaults' => array(
-                            'controller' => 'Report\Controller\Report',
+                            'controller' => ReportController::class,
                             'action' => 'generate'
                         )
                     )
@@ -72,7 +74,7 @@ return array(
                     'options' => array(
                         'route' => 'generate reportdb full',
                         'defaults' => array(
-                            'controller' => 'Report\Controller\Report',
+                            'controller' => ReportController::class,
                             'action' => 'generateAll'
                         )
                     )

@@ -1,9 +1,11 @@
 <?php
 
+use Export\Controller\ExportController;
+
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Export\Controller\Export' => 'Export\Controller\ExportController'
+            ExportController::class => ExportController::class,
         )
     ),
     'console' => array(
@@ -13,7 +15,7 @@ return array(
                     'options' => array(
                         'route' => 'export old',
                         'defaults' => array(
-                            'controller' => 'Export\Controller\Export',
+                            'controller' => ExportController::class,
                             'action' => 'old'
                         )
                     )

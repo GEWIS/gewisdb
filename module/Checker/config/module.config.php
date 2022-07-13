@@ -1,9 +1,11 @@
 <?php
 
+use Checker\Controller\CheckerController;
+
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Checker\Controller\Checker' => 'Checker\Controller\CheckerController'
+            CheckerController::class => CheckerController::class
         )
     ),
     'console' => array(
@@ -13,7 +15,7 @@ return array(
                     'options' => array(
                         'route' => 'check database',
                         'defaults' => array(
-                            'controller' => 'Checker\Controller\Checker',
+                            'controller' => CheckerController::class,
                             'action' => 'index'
                         )
                     )
@@ -22,7 +24,7 @@ return array(
                     'options' => array(
                         'route' => 'check memberships',
                         'defaults' => array(
-                            'controller' => 'Checker\Controller\Checker',
+                            'controller' => CheckerController::class,
                             'action' => 'checkMemberships'
                         )
                     )
@@ -31,7 +33,7 @@ return array(
                     'options' => array(
                         'route' => 'check discharges',
                         'defaults' => array(
-                            'controller' => 'Checker\Controller\Checker',
+                            'controller' => CheckerController::class,
                             'action' => 'checkDischarges'
                         )
                     )

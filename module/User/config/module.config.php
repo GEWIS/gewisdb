@@ -17,12 +17,14 @@ use User\Model\User;
 use Zend\Authentication\AuthenticationService;
 use User\Service\Factory\AuthenticationServiceFactory;
 use User\Form\UserEdit;
+use Zend\Mvc\Router\Http\Literal;
+use Zend\Mvc\Router\Http\Segment;
 
 return [
     'router' => [
         'routes' => [
             'user' => [
-                'type' => 'literal',
+                'type' => Literal::class,
                 'options' => [
                     'route' => '/user',
                     'defaults' => [
@@ -33,7 +35,7 @@ return [
                 'may_terminate' => true,
                 'child_routes' => [
                     'default' => [
-                        'type' => 'segment',
+                        'type' => Segment::class,
                         'options' => [
                             'route' => '/:action'
                         ]
@@ -44,11 +46,10 @@ return [
             'settings' => [
                 'child_routes' => [
                     'user' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/user',
                             'defaults' => [
-                                '__NAMESPACE__' => '',
                                 'controller' => SettingsController::class,
                                 'action' => 'index'
                             ]
@@ -56,13 +57,13 @@ return [
                         'may_terminate' => true,
                         'child_routes' => [
                             'default' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '/:action',
                                 ]
                             ],
                             'edit' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '/edit/:id',
                                     'defaults' => [
@@ -71,7 +72,7 @@ return [
                                 ]
                             ],
                             'delete' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '/delete/:id',
                                     'defaults' => [
