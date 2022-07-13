@@ -2,9 +2,11 @@
 
 namespace Database\Form;
 
+use Zend\Filter\StringToLower;
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Regex;
+use Zend\Validator\StringLength;
 
 class Address extends Form implements InputFilterProviderInterface
 {
@@ -73,17 +75,17 @@ class Address extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'country' => array(
                 'required' => true,
                 'filters' => array(
-                    array('name' => 'string_to_lower')
+                    array('name' => StringToLower::class)
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -95,7 +97,7 @@ class Address extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -107,7 +109,7 @@ class Address extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'regex',
+                        'name' => Regex::class,
                         'options' => array(
                             'pattern' => '/^[0-9]+[a-zA-Z]*/'
                         )
@@ -118,7 +120,7 @@ class Address extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 16
@@ -130,7 +132,7 @@ class Address extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32

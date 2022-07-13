@@ -2,11 +2,37 @@
 
 namespace Database\Service;
 
-use Application\Service\AbstractService;
+use Database\Form\DeleteList as DeleteListForm;
+use Database\Form\MailingList as MailingListForm;
+use Database\Mapper\MailingList as MailingListMapper;
 use Database\Model\MailingList as ListModel;
 
-class MailingList extends AbstractService
+class MailingList
 {
+    /** @var DeleteListForm $deleteListForm */
+    private $deleteListForm;
+
+    /** @var MailingListForm $mailingListForm */
+    private $mailingListForm;
+
+    /** @var MailingListMapper $mailingListMapper */
+    private $mailingListMapper;
+
+    /**
+     * @param DeleteListForm $deleteListForm
+     * @param MailingListForm $mailingListForm
+     * @param MailingListMapper $mailingListMapper
+     */
+    public function __construct(
+        DeleteListForm $deleteListForm,
+        MailingListForm $mailingListForm,
+        MailingListMapper $mailingListMapper
+    ) {
+        $this->deleteListForm = $deleteListForm;
+        $this->mailingListForm = $mailingListForm;
+        $this->mailingListMapper = $mailingListMapper;
+    }
+
     /**
      * Get all lists.
      *
@@ -49,9 +75,11 @@ class MailingList extends AbstractService
 
         $list = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
         $this->getListMapper()->persist($list);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
 
         return true;
     }
@@ -76,9 +104,11 @@ class MailingList extends AbstractService
 
         $list = $this->getList($name);
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
         $this->getListMapper()->remove($list);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
 
         return true;
     }
@@ -86,30 +116,30 @@ class MailingList extends AbstractService
     /**
      * Get the delete list form.
      *
-     * @return \Database\Form\DeleteList
+     * @return DeleteListForm
      */
-    public function getDeleteListForm()
+    public function getDeleteListForm(): DeleteListForm
     {
-        return $this->getServiceManager()->get('database_form_deletelist');
+        return $this->deleteListForm;
     }
 
     /**
      * Get the list form.
      *
-     * @return \Database\Form\MailingList
+     * @return MailingListForm
      */
-    public function getListForm()
+    public function getListForm(): MailingListForm
     {
-        return $this->getServiceManager()->get('database_form_mailinglist');
+        return $this->mailingListForm;
     }
 
     /**
      * Get the list mapper.
      *
-     * @return \Database\Mapper\MailingList
+     * @return MailingListMapper
      */
-    public function getListMapper()
+    public function getListMapper(): MailingListMapper
     {
-        return $this->getServiceManager()->get('database_mapper_mailinglist');
+        return $this->mailingListMapper;
     }
 }

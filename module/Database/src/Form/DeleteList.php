@@ -3,7 +3,6 @@
 namespace Database\Form;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 class DeleteList extends Form implements InputFilterProviderInterface
@@ -29,12 +28,12 @@ class DeleteList extends Form implements InputFilterProviderInterface
         ));
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
-        return array(
-            'submit_yes' => array(
-                'required' => true
-            )
-        );
+        return [
+            'submit_yes' => [
+                'required' => true,
+            ],
+        ];
     }
 }

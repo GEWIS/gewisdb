@@ -6,12 +6,16 @@ use Zend\View\Helper\AbstractHelper;
 
 class FileUrl extends AbstractHelper
 {
+    /** @var array $config */
+    protected $config;
+
     /**
-     * Service locator
-     *
-     * @var \Zend\ServiceManager\ServiceLocatorInterface
+     * @param array $config
      */
-    protected $locator;
+    public function __construct(array $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * Get the file URL.
@@ -20,30 +24,8 @@ class FileUrl extends AbstractHelper
      *
      * @return string
      */
-    public function __invoke($path)
+    public function __invoke(string $path): string
     {
-        $config = $this->getServiceLocator()->get('config');
-        $basedir = $config['storage']['public_dir'];
-        return $this->getView()->basePath() . '/' .  $basedir . '/' . $path;
-    }
-
-    /**
-     * Get the service locator.
-     *
-     * @return \Zend\ServiceManager\ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->locator;
-    }
-
-    /**
-     * Set the service locator
-     *
-     * @param \Zend\ServiceManager\ServiceLocatorInterface
-     */
-    public function setServiceLocator($locator)
-    {
-        $this->locator = $locator;
+        return $this->getView()->basePath() . '/' . $this->config['storage']['public_dir'] . '/' . $path;
     }
 }

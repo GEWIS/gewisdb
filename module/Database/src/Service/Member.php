@@ -2,10 +2,23 @@
 
 namespace Database\Service;
 
-use Application\Service\AbstractService;
+use Application\Service\FileStorage as FileStorageService;
+use Database\Form\Address as AddressForm;
+use Database\Form\AddressExport as AddressExportForm;
+use Database\Form\DeleteAddress as DeleteAddressForm;
+use Database\Form\Member as MemberForm;
+use Database\Form\MemberEdit as MemberEditForm;
+use Database\Form\MemberExpiration as MemberExpirationForm;
+use Database\Form\MemberLists as MemberListsForm;
+use Database\Form\MemberType as MemberTypeForm;
+use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\Member as MemberMapper;
+use Database\Mapper\ProspectiveMember;
+use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
+use Database\Service\MailingList as MailingListService;
 use Zend\Mail\Transport\TransportInterface;
 use Zend\Mime\Mime;
 use Zend\View\Model\ViewModel;
@@ -14,14 +27,85 @@ use Zend\Mime\Part as MimePart;
 use Zend\Mime\Message as MimeMessage;
 use Zend\View\Renderer\PhpRenderer;
 
-class Member extends AbstractService
+class Member
 {
-    /**
-     * List form.
-     *
-     * @var \Database\Form\MemberLists
-     */
-    protected $listForm;
+    /** @var AddressForm $addressForm */
+    private $addressForm;
+
+    /** @var AddressExportForm $addressExportForm */
+    private $addressExportForm;
+
+    /** @var DeleteAddressForm $deleteAddressForm */
+    private $deleteAddressForm;
+
+    /** @var MemberForm $memberForm */
+    private $memberForm;
+
+    /** @var MemberEditForm $memberEditForm */
+    private $memberEditForm;
+
+    /** @var MemberExpirationForm $memberExpirationForm */
+    private $memberExpirationForm;
+
+    /** @var MemberTypeForm $memberTypeForm */
+    private $memberTypeForm;
+
+    /** @var MailingListMapper $mailingListMapper */
+    private $mailingListMapper;
+
+    /** @var MemberMapper $memberMapper */
+    private $memberMapper;
+
+    /** @var ProspectiveMemberMapper $prospectiveMemberMapper */
+    private $prospectiveMemberMapper;
+
+    /** @var FileStorageService $fileStorageService */
+    private $fileStorageService;
+
+    /** @var MailingListService $mailingListService */
+    private $mailingListService;
+
+    /** @var PhpRenderer $viewRenderer */
+    private $viewRenderer;
+
+    private $mailTransport;
+
+    /** @var array $config */
+    private $config;
+
+    public function __construct(
+        AddressForm $addressForm,
+        AddressExportForm $addressExportForm,
+        DeleteAddressForm $deleteAddressForm,
+        MemberForm $memberForm,
+        MemberEditForm $memberEditForm,
+        MemberExpirationForm $memberExpirationForm,
+        MemberTypeForm $memberTypeForm,
+        MailingListMapper $mailingListMapper,
+        MemberMapper $memberMapper,
+        ProspectiveMemberMapper $prospectiveMemberMapper,
+        FileStorageService $fileStorageService,
+        MailingListService $mailingListService,
+        PhpRenderer $viewRenderer,
+        $mailTransport,
+        array $config
+    ) {
+        $this->addressForm = $addressForm;
+        $this->addressExportForm = $addressExportForm;
+        $this->deleteAddressForm = $deleteAddressForm;
+        $this->memberForm = $memberForm;
+        $this->memberEditForm = $memberEditForm;
+        $this->memberExpirationForm = $memberExpirationForm;
+        $this->memberTypeForm = $memberTypeForm;
+        $this->mailingListMapper = $mailingListMapper;
+        $this->memberMapper = $memberMapper;
+        $this->prospectiveMemberMapper = $prospectiveMemberMapper;
+        $this->fileStorageService = $fileStorageService;
+        $this->mailingListService =  $mailingListService;
+        $this->viewRenderer = $viewRenderer;
+        $this->mailTransport = $mailTransport;
+        $this->config = $config;
+    }
 
     /**
      * Subscribe a member.
@@ -32,7 +116,8 @@ class Member extends AbstractService
      */
     public function subscribe($data)
     {
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
@@ -101,7 +186,7 @@ class Member extends AbstractService
             }
         }
         // subscribe to default mailing lists not on the form
-        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
+        $mailingMapper = $this->mailingListMapper;
         foreach ($mailingMapper->findDefault() as $list) {
             $prospectiveMember->addList($list);
         }
@@ -114,7 +199,8 @@ class Member extends AbstractService
         }
 
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $prospectiveMember));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $prospectiveMember));
 
         return $prospectiveMember;
     }
@@ -126,7 +212,7 @@ class Member extends AbstractService
      */
     public function sendMemberSubscriptionEmail(ProspectiveMemberModel $member)
     {
-        $config = $this->getServiceManager()->get('config');
+        $config = $this->config;
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
@@ -209,7 +295,8 @@ class Member extends AbstractService
             return null;
         }
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
 
         /** @var MemberModel $member */
         $member = $form->getData();
@@ -277,7 +364,7 @@ class Member extends AbstractService
             }
         }
         // subscribe to default mailing lists not on the form
-        $mailingMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
+        $mailingMapper = $this->mailingListMapper;
         foreach ($mailingMapper->findDefault() as $list) {
             $member->addList($list);
         }
@@ -286,7 +373,8 @@ class Member extends AbstractService
         $this->getMemberMapper()->persist($member);
 
         $this->removeProspective($prospectiveMember);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -318,13 +406,13 @@ class Member extends AbstractService
      *
      * @param int $id
      *
-     * @return ProspectiveMemberModel
+     * @return array
      */
     public function getProspectiveMember($id)
     {
         return array(
             'member' => $this->getProspectiveMemberMapper()->find($id),
-            'form' => $this->getServiceManager()->get('database_form_membertype')
+            'form' => $this->memberTypeForm,
         );
     }
 
@@ -454,9 +542,11 @@ class Member extends AbstractService
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -489,7 +579,8 @@ class Member extends AbstractService
             return null;
         }
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $data = $form->getData();
 
         // update changed on date
@@ -541,7 +632,8 @@ class Member extends AbstractService
         $member->setExpiration($expiration);
 
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -565,7 +657,8 @@ class Member extends AbstractService
             return null;
         }
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
         // Make new expiration from previous expiration, but always make sure it is the end of the association year.
         $newExpiration = clone $member->getExpiration();
@@ -575,7 +668,8 @@ class Member extends AbstractService
         $member->setExpiration($newExpiration);
 
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -601,9 +695,11 @@ class Member extends AbstractService
 
         $address = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
         $this->getMemberMapper()->persistAddress($address);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
 
         return $address;
     }
@@ -629,9 +725,11 @@ class Member extends AbstractService
 
         $address = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
         $this->getMemberMapper()->persistAddress($address);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
 
         return $address;
     }
@@ -659,9 +757,11 @@ class Member extends AbstractService
         $address = $formData['address'];
         $member = $address->getMember();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
         $this->getMemberMapper()->removeAddress($address);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
 
         return $member;
     }
@@ -699,9 +799,11 @@ class Member extends AbstractService
         }
 
         // simply persist through member
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -715,7 +817,7 @@ class Member extends AbstractService
      */
     public function getMemberEditForm($lidnr)
     {
-        $form = $this->getServiceManager()->get('database_form_memberedit');
+        $form = $this->memberEditForm;
         $member = $this->getMember($lidnr);
         $form->bind($member['member']);
         return array(
@@ -734,7 +836,7 @@ class Member extends AbstractService
     public function getMemberExpirationForm($lidnr)
     {
         return array(
-            'form' => $this->getServiceManager()->get('database_form_memberexpiration'),
+            'form' => $this->memberExpirationForm,
             'member' => $this->getMember($lidnr)['member']
         );
     }
@@ -750,7 +852,7 @@ class Member extends AbstractService
     {
         return array(
             'member' => $this->getMember($lidnr)['member'],
-            'form' => $this->getServiceManager()->get('database_form_membertype')
+            'form' => $this->memberTypeForm,
         );
     }
 
@@ -759,20 +861,16 @@ class Member extends AbstractService
      *
      * @param int $lidnr
      *
-     * @return \Database\Form\MemberLists
+     * @return array
      */
     public function getListForm($lidnr)
     {
         $member = $this->getMember($lidnr);
         $member = $member['member'];
-        $lists = $this->getServiceManager()->get('database_service_mailinglist')->getAllLists();
-
-        if (null === $this->listForm) {
-            $this->listForm = new \Database\Form\MemberLists($member, $lists);
-        }
+        $lists = $this->mailingListService->getAllLists();
 
         return array(
-            'form' => $this->listForm,
+            'form' => new MemberListsForm($member, $lists),
             'member' => $member,
             'lists' => $lists
         );
@@ -785,7 +883,7 @@ class Member extends AbstractService
      * @param string $type address type
      * @param boolean $create
      *
-     * @return \Database\Form\Address
+     * @return AddressForm
      */
     public function getAddressForm($lidnr, $type, $create = false)
     {
@@ -797,7 +895,7 @@ class Member extends AbstractService
         } else {
             $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
         }
-        $form = $this->getServiceManager()->get('database_form_address');
+        $form = $this->addressForm;
         $form->bind($address);
         return array(
             'form' => $form,
@@ -811,67 +909,65 @@ class Member extends AbstractService
      * @param int $lidnr
      * @param string $type address type
      *
-     * @return \Database\Form\Address
+     * @return AddressForm
      */
     public function getDeleteAddressForm($lidnr, $type)
     {
         // find the address
-        $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
-        $form = $this->getServiceManager()->get('database_form_deleteaddress');
         return array(
-            'form' => $form,
-            'address' => $address
+            'form' => $this->deleteAddressForm,
+            'address' => $this->getMemberMapper()->findMemberAddress($lidnr, $type)
         );
     }
 
     /**
      * Get address export form.
      *
-     * @return \Database\Form\AddressExport
+     * @return AddressExportForm
      */
     public function getAddressExportForm()
     {
-        return $this->getServiceManager()->get('database_form_addressexport');
+        return $this->addressExportForm;
     }
 
     /**
      * Get the member form.
      *
-     * @return \Database\Form\Member
+     * @return MemberForm
      */
-    public function getMemberForm()
+    public function getMemberForm(): MemberForm
     {
-        return $this->getServiceManager()->get('database_form_member');
+        return $this->memberForm;
     }
 
     /**
      * Get the member mapper.
      *
-     * @return \Database\Mapper\Member
+     * @return MemberMapper
      */
-    public function getMemberMapper()
+    public function getMemberMapper(): MemberMapper
     {
-        return $this->getServiceManager()->get('database_mapper_member');
+        return $this->memberMapper;
     }
 
     /**
      * Get the member mapper.
      *
-     * @return \Database\Mapper\ProspectiveMember
+     * @return ProspectiveMemberMapper
      */
-    public function getProspectiveMemberMapper()
+    public function getProspectiveMemberMapper(): ProspectiveMemberMapper
     {
-        return $this->getServiceManager()->get('database_mapper_prospective_member');
+        return $this->prospectiveMemberMapper;
     }
 
     /**
      * Gets the storage service.
      *
-     * @return \Application\Service\FileStorage
+     * @return FileStorageService
      */
-    public function getFileStorageService()
+    public function getFileStorageService(): FileStorageService
     {
-        return $this->getServiceManager()->get('application_service_storage');
+        return $this->fileStorageService;
     }
 
     /**
@@ -879,9 +975,9 @@ class Member extends AbstractService
      *
      * @return PhpRenderer
      */
-    public function getRenderer()
+    public function getRenderer(): PhpRenderer
     {
-        return $this->sm->get('ViewRenderer');
+        return $this->viewRenderer;
     }
 
     /**
@@ -889,8 +985,8 @@ class Member extends AbstractService
      *
      * @return TransportInterface
      */
-    public function getMailTransport()
+    public function getMailTransport(): TransportInterface
     {
-        return $this->getServiceManager()->get('database_mail_transport');
+        return $this->mailTransport;
     }
 }

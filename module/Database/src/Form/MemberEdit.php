@@ -2,9 +2,14 @@
 
 namespace Database\Form;
 
+use Zend\Filter\ToNull;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Digits;
+use Zend\Validator\EmailAddress;
+use Zend\Validator\Regex;
+use Zend\Validator\StringLength;
 
 class MemberEdit extends Form implements InputFilterProviderInterface
 {
@@ -101,14 +106,14 @@ class MemberEdit extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'lastName' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -120,7 +125,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 'required' => false,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -132,7 +137,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 1,
                             'max' => 16
@@ -144,7 +149,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -155,14 +160,14 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'paid' => array(
                 'required' => true,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array('name' => Digits::class)
                 )
             ),
             'tueUsername' => array(
                 'required' => false,
                 'validators' => array(
                     array(
-                        'name' => 'regex',
+                        'name' => Regex::class,
                         'options' => array(
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => array(
@@ -172,18 +177,18 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                     )
                 ),
                 'filters' => array(
-                    array('name' => 'tonull')
+                    array('name' => ToNull::class)
                 )
             ),
             'email' => array(
                 'required' => false,
                 'validators' => array(
                     array(
-                        'name' => 'emailaddress',
+                        'name' => EmailAddress::class,
                     )
                 ),
                 'filters' => array(
-                    array('name' => 'tonull')
+                    array('name' => ToNull::class)
                 )
             )
         );

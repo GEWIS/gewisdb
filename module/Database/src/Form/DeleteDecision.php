@@ -3,9 +3,9 @@
 namespace Database\Form;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
 
-class DeleteDecision extends Form
+class DeleteDecision extends Form implements InputFilterProviderInterface
 {
     public function __construct()
     {
@@ -26,21 +26,14 @@ class DeleteDecision extends Form
                 'value' => 'Nee'
             )
         ));
-
-        $this->initFilters();
     }
 
-    protected function initFilters()
+    public function getInputFilterSpecification(): array
     {
-        $filter = new InputFilter();
-
-        // this filter makes sure that the form is only valid when the user
-        // has clicked yes
-        $filter->add(array(
-            'name' => 'submit_yes',
-            'required' => true
-        ));
-
-        $this->setInputFilter($filter);
+        return [
+            'submit_yes' => [
+                'required' => true,
+            ],
+        ];
     }
 }

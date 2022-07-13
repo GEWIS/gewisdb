@@ -2,6 +2,8 @@
 
 namespace Database\Controller;
 
+use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
+use Database\Service\Meeting as MeetingService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
@@ -9,6 +11,24 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 class MeetingController extends AbstractActionController
 {
+    /** @var MeetingService $meetingService */
+    private $meetingService;
+
+    /** @var MemberFunctionFieldset $memberFunctionFieldset */
+    private $memberFunctionFieldset;
+
+    /**
+     * @param MeetingService $meetingService
+     * @param MemberFunctionFieldset $memberFunctionFieldset
+     */
+    public function __construct(
+        MeetingService $meetingService,
+        MemberFunctionFieldset $memberFunctionFieldset
+    ) {
+        $this->meetingService = $meetingService;
+        $this->memberFunctionFieldset = $memberFunctionFieldset;
+    }
+
     /**
      * Index action.
      *
@@ -16,10 +36,8 @@ class MeetingController extends AbstractActionController
      */
     public function indexAction()
     {
-        $service = $this->getMeetingService();
-
         return new ViewModel(array(
-            'meetings' => $service->getAllMeetings()
+            'meetings' => $this->meetingService->getAllMeetings()
         ));
     }
 
@@ -28,11 +46,10 @@ class MeetingController extends AbstractActionController
      */
     public function createAction()
     {
-        $service = $this->getMeetingService();
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $meeting = $service->createMeeting($request->getPost());
+            $meeting = $this->meetingService->createMeeting($request->getPost());
             if (null !== $meeting) {
                 return $this->redirect()->toRoute('meeting/view', array(
                     'type' => $meeting->getType(),
@@ -42,7 +59,7 @@ class MeetingController extends AbstractActionController
         }
 
         return new ViewModel(array(
-            'form' => $service->getCreateMeetingForm()
+            'form' => $this->meetingService->getCreateMeetingForm()
         ));
     }
 
@@ -54,7 +71,7 @@ class MeetingController extends AbstractActionController
         return new ViewModel(array(
             'type' => $this->params()->fromRoute('type'),
             'number' => $this->params()->fromRoute('number'),
-            'meeting' => $this->getMeetingService()->getMeeting(
+            'meeting' => $this->meetingService->getMeeting(
                 $this->params()->fromRoute('type'),
                 $this->params()->fromRoute('number')
             )
@@ -71,10 +88,9 @@ class MeetingController extends AbstractActionController
         $point = $this->params()->fromRoute('point');
         $decision = $this->params()->fromRoute('decision');
 
-        $meeting = $this->getMeetingService()
-                        ->getMeeting($type, $number);
+        $meeting = $this->meetingService->getMeeting($type, $number);
 
-        if ($this->getMeetingService()->decisionExists($type, $number, $point, $decision)) {
+        if ($this->meetingService->decisionExists($type, $number, $point, $decision)) {
             return new ViewModel(array(
                 'meeting' => $meeting,
                 'point' => $point,
@@ -88,7 +104,8 @@ class MeetingController extends AbstractActionController
             'point' => $point,
             'decision' => $decision,
             'forms' => $this->getDecisionForms($meeting, $point, $decision),
-            'memberfunction' => $this->getServiceLocator()->get('database_form_fieldset_memberfunction_nomember')
+            'installs' => $this->meetingService->getCurrentBoard(),
+            'memberfunction' => $this->memberFunctionFieldset,
         ));
     }
 
@@ -104,15 +121,15 @@ class MeetingController extends AbstractActionController
     protected function getDecisionForms($meeting, $point, $decision)
     {
         $forms = array(
-            'budget' => $this->getMeetingService()->getBudgetForm(),
-            'foundation' => $this->getMeetingService()->getFoundationForm(),
-            'abolish' => $this->getMeetingService()->getAbolishForm(),
-            'destroy' => $this->getMeetingService()->getDestroyForm(),
-            'install' => $this->getMeetingService()->getInstallForm(),
-            'other' => $this->getMeetingService()->getOtherForm(),
-            'board_install' => $this->getMeetingService()->getBoardInstallForm(),
-            'board_release' => $this->getMeetingService()->getBoardReleaseForm(),
-            'board_discharge' => $this->getMeetingService()->getBoardDischargeForm(),
+            'budget' => $this->meetingService->getBudgetForm(),
+            'foundation' => $this->meetingService->getFoundationForm(),
+            'abolish' => $this->meetingService->getAbolishForm(),
+            'destroy' => $this->meetingService->getDestroyForm(),
+            'install' => $this->meetingService->getInstallForm(),
+            'other' => $this->meetingService->getOtherForm(),
+            'board_install' => $this->meetingService->getBoardInstallForm(),
+            'board_release' => $this->meetingService->getBoardReleaseForm(),
+            'board_discharge' => $this->meetingService->getBoardDischargeForm(),
         );
 
         foreach ($forms as $form) {
@@ -132,52 +149,50 @@ class MeetingController extends AbstractActionController
             return $this->redirect()->toRoute('meeting');
         }
 
-        $service = $this->getMeetingService();
-
         switch ($this->params()->fromRoute('form')) {
             case 'budget':
                 return new ViewModel(
-                    $service->budgetDecision($this->getRequest()->getPost())
+                    $this->meetingService->budgetDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'foundation':
                 return new ViewModel(
-                    $service->foundationDecision($this->getRequest()->getPost())
+                    $this->meetingService->foundationDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'abolish':
                 return new ViewModel(
-                    $service->abolishDecision($this->getRequest()->getPost())
+                    $this->meetingService->abolishDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'install':
                 return new ViewModel(
-                    $service->installDecision($this->getRequest()->getPost())
+                    $this->meetingService->installDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'destroy':
                 return new ViewModel(
-                    $service->destroyDecision($this->getRequest()->getPost())
+                    $this->meetingService->destroyDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'board_install':
                 return new ViewModel(
-                    $service->boardInstallDecision($this->getRequest()->getPost())
+                    $this->meetingService->boardInstallDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'board_release':
                 return new ViewModel(
-                    $service->boardReleaseDecision($this->getRequest()->getPost())
+                    $this->meetingService->boardReleaseDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'board_discharge':
                 return new ViewModel(
-                    $service->boardDischargeDecision($this->getRequest()->getPost())
+                    $this->meetingService->boardDischargeDecision($this->getRequest()->getPost())
                 );
                 break;
             case 'other':
                 return new ViewModel(
-                    $service->otherDecision($this->getRequest()->getPost())
+                    $this->meetingService->otherDecision($this->getRequest()->getPost())
                 );
                 break;
             default:
@@ -198,12 +213,10 @@ class MeetingController extends AbstractActionController
         $point = $this->params()->fromRoute('point');
         $decision = $this->params()->fromRoute('decision');
 
-        $service = $this->getMeetingService();
-
         if ($this->getRequest()->isPost()) {
             try {
                 if (
-                    $service->deleteDecision(
+                    $this->meetingService->deleteDecision(
                         $this->getRequest()->getPost(),
                         $type,
                         $number,
@@ -227,8 +240,9 @@ class MeetingController extends AbstractActionController
             // Not deleted
             // TODO: redirect back to meeting
         }
+
         return new ViewModel(array(
-            'form' => $this->getMeetingService()->getDeleteDecisionForm(),
+            'form' => $this->meetingService->getDeleteDecisionForm(),
             'type' => $type,
             'number' => $number,
             'point' => $point,
@@ -243,11 +257,8 @@ class MeetingController extends AbstractActionController
      */
     public function searchAction()
     {
-        $service = $this->getMeetingService();
-
         $query = $this->params()->fromQuery('q');
-
-        $res = $service->decisionSearch($query);
+        $res = $this->meetingService->decisionSearch($query);
 
         $res = array_map(function ($decision) {
             return $decision->toArray();
@@ -256,15 +267,5 @@ class MeetingController extends AbstractActionController
         return new JsonModel(array(
             'json' => $res
         ));
-    }
-
-    /**
-     * Get the meeting service.
-     *
-     * @return \Database\Service\Meeting
-     */
-    public function getMeetingService()
-    {
-        return $this->getServiceLocator()->get('database_service_meeting');
     }
 }

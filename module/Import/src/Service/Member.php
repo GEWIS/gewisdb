@@ -2,11 +2,10 @@
 
 namespace Import\Service;
 
-use Application\Service\AbstractService;
 use Database\Model\Member as MemberModel;
 use Database\Model\Address;
 
-class Member extends AbstractService
+class Member
 {
     /**
      * Get members.
@@ -126,7 +125,7 @@ class Member extends AbstractService
         }
 
         // import mailing list subscriptions
-        $mlService = $this->getServiceManager()->get('database_service_mailinglist');
+        $mlService = $this->getServiceManager()->get(MailingListService::class);
         if ($data['direct']) {
             $list = $mlService->getList('direct');
             if (null !== $list) {

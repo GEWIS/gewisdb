@@ -2,11 +2,10 @@
 
 namespace Export\Service;
 
-use Application\Service\AbstractService;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\SubDecision;
 
-class Meeting extends AbstractService
+class Meeting
 {
     /**
      * Export meetings.
@@ -242,7 +241,7 @@ class Meeting extends AbstractService
      */
     public function getMeetingMapper()
     {
-        return $this->getServiceManager()->get('database_mapper_meeting');
+        return $this->getServiceManager()->get(MeetingMapper::class);
     }
 
     /**

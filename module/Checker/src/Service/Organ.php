@@ -2,38 +2,42 @@
 
 namespace Checker\Service;
 
-use Application\Service\AbstractService;
 use Checker\Mapper\Organ as OrganMapper;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\SubDecision\Abrogation as AbrogationModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 
-class Organ extends AbstractService
+class Organ
 {
+    /** @var OrganMapper $organMapper */
+    private $organMapper;
+
+    public function __construct(OrganMapper $organMapper)
+    {
+        $this->organMapper = $organMapper;
+    }
+
     /**
      * Get the names of all the organs after $meeting
      *
      * @param MeetingModel $meeting
+     *
      * @return array string
      */
-    public function getAllOrgans(MeetingModel $meeting)
+    public function getAllOrgans(MeetingModel $meeting): array
     {
-        /** @var OrganMapper $mapper */
-        $mapper = $this->getServiceManager()->get('checker_mapper_organ');
-        $organFoundations = $mapper->getAllOrganFoundations($meeting);
-        $organAbrogations = $mapper->getAllOrganAbrogations($meeting);
+        $organFoundations = $this->organMapper->getAllOrganFoundations($meeting);
+        $organAbrogations = $this->organMapper->getAllOrganAbrogations($meeting);
 
         $hashedOrganFoundations = array_map(
-        /** @var FoundationModel $organ */
-            function ($organ) {
+            function (FoundationModel $organ) {
                 return $this->getHash($organ);
             },
             $organFoundations
         );
 
         $hashedOrganAbrogations = array_map(
-            /** @var AbrogationModel $organ */
-            function ($organ) {
+            function (AbrogationModel $organ) {
                 return $this->getHash($organ->getFoundation());
             },
             $organAbrogations
@@ -42,12 +46,9 @@ class Organ extends AbstractService
         return array_diff($hashedOrganFoundations, $hashedOrganAbrogations);
     }
 
-    public function getOrgansCreatedAtMeeting(MeetingModel $meeting)
+    public function getOrgansCreatedAtMeeting(MeetingModel $meeting): array
     {
-        /** @var OrganMapper $mapper */
-        $mapper = $this->getServiceManager()->get('checker_mapper_organ');
-
-        return $mapper->getOrgansCreatedAtMeeting($meeting);
+        return $this->organMapper->getOrgansCreatedAtMeeting($meeting);
     }
 
     /**
@@ -55,7 +56,7 @@ class Organ extends AbstractService
      *
      * @return string
      */
-    public function getHash(FoundationModel $foundation)
+    public function getHash(FoundationModel $foundation): string
     {
         return sprintf(
             '%s%d%d%d%d',

@@ -4,6 +4,8 @@ namespace User\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Identical;
+use Zend\Validator\StringLength;
 
 class UserEdit extends Form implements InputFilterProviderInterface
 {
@@ -39,14 +41,14 @@ class UserEdit extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [
             'password' => [
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => [
                             'min' => 10
                         ]
@@ -57,7 +59,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => 'identical',
+                        'name' => Identical::class,
                         'options' => [
                             'token' => 'password'
                         ]

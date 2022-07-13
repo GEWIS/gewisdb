@@ -4,8 +4,8 @@ namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\StringLength;
 
 class Install extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -43,14 +43,14 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'function' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32

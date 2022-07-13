@@ -2,14 +2,13 @@
 
 namespace Database\Form;
 
-use Database\Service\Meeting as MeetingService;
+use Database\Mapper\Meeting as MeetingMapper;
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 class Export extends Form implements InputFilterProviderInterface
 {
-    public function __construct(MeetingService $service)
+    public function __construct(MeetingMapper $meetingMapper)
     {
         parent::__construct();
 
@@ -21,7 +20,7 @@ class Export extends Form implements InputFilterProviderInterface
             ),
             'options' => array(
                 'label' => 'Vergaderingen',
-                'value_options' => $this->getValueOptions($service)
+                'value_options' => $this->getValueOptions($meetingMapper)
             )
         ));
 
@@ -34,11 +33,11 @@ class Export extends Form implements InputFilterProviderInterface
         ));
     }
 
-    protected function getValueOptions(MeetingService $service)
+    protected function getValueOptions(MeetingMapper $meetingMapper)
     {
         $options = array();
 
-        foreach ($service->getAllMeetings() as $meeting) {
+        foreach ($meetingMapper->findAll() as $meeting) {
             $meeting = $meeting[0];
             $id = $meeting->getType() . '-' . $meeting->getNumber();
             $options[$id] = strtoupper($meeting->getType()) . ' ' . $meeting->getNumber()
@@ -51,9 +50,8 @@ class Export extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
-        return array(
-        );
+        return [];
     }
 }

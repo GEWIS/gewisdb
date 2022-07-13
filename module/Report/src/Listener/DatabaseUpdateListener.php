@@ -2,16 +2,48 @@
 
 namespace Report\Listener;
 
-use Zend\ServiceManager\ServiceManager;
+use Doctrine\ORM\EntityManager;
+use Report\Service\Meeting as MeetingService;
+use Report\Service\Member as MemberService;
+use Report\Service\Misc as MiscService;
+use Report\Service\Organ as OrganService;
 
 /**
  * Doctrine event listener intended to automatically update reportdb.
  */
 class DatabaseUpdateListener
 {
-    protected $sm;
+    /** @var MeetingService $meetingService */
+    private $meetingService;
 
+    /** @var MemberService $memberService */
+    private $memberService;
+
+    /** @var MiscService $miscService */
+    private $miscService;
+
+    /** @var OrganService $organService */
+    private $organService;
+
+    /** @var EntityManager */
+    private $emReport;
+
+    /** @var bool $isflushing */
     protected static $isflushing = false;
+
+    public function __construct(
+        MeetingService $meetingService,
+        MemberService $memberService,
+        MiscService $miscService,
+        OrganService $organService,
+        EntityManager $emReport
+    ) {
+        $this->meetingService = $meetingService;
+        $this->memberService = $memberService;
+        $this->miscService = $miscService;
+        $this->organService = $organService;
+        $this->emReport = $emReport;
+    }
 
     protected static function safeFlush($func)
     {
@@ -23,11 +55,6 @@ class DatabaseUpdateListener
         self::$isflushing = false;
     }
 
-    public function __construct(ServiceManager $sm)
-    {
-        $this->sm = $sm;
-    }
-
     public function postPersist($eventArgs)
     {
         $this->postUpdate($eventArgs);
@@ -35,38 +62,39 @@ class DatabaseUpdateListener
 
     public function postUpdate($eventArgs)
     {
-        $em = $this->sm->get('doctrine.entitymanager.orm_report');
         $entity = $eventArgs->getEntity();
         switch (true) {
             case $entity instanceof \Database\Model\Address:
-                $this->getMemberService()->generateAddress($entity);
+                $this->memberService->generateAddress($entity);
                 break;
 
             case $entity instanceof \Database\Model\Member:
-                $this->getMemberService()->generateMember($entity);
+                $this->memberService->generateMember($entity);
                 break;
 
             case $entity instanceof \Database\Model\Meeting:
-                $this->getMeetingService()->generateMeeting($entity);
+                $this->meetingService->generateMeeting($entity);
                 break;
 
             case $entity instanceof \Database\Model\Decision:
-                $this->getMeetingService()->generateDecision($entity);
+                $this->meetingService->generateDecision($entity);
                 break;
 
             case $entity instanceof \Database\Model\SubDecision:
-                $subdecision = $this->getMeetingService()->generateSubDecision($entity);
+                $subdecision = $this->meetingService->generateSubDecision($entity);
                 $this->processOrganUpdates($subdecision);
-                $em->persist($subdecision);
+                $this->emReport->persist($subdecision);
                 break;
 
             case $entity instanceof \Database\Model\MailingList:
-                $this->getMiscService()->generateList($entity);
+                $this->miscService->generateList($entity);
                 break;
 
             default:
                 return;
         }
+
+        $em = $this->emReport;
 
         self::safeFlush(function () use ($em) {
             $em->flush();
@@ -77,70 +105,20 @@ class DatabaseUpdateListener
     {
         switch (true) {
             case $entity instanceof \Report\Model\SubDecision\Foundation:
-                $this->getOrganService()->generateFoundation($entity);
+                $this->organService->generateFoundation($entity);
                 break;
 
             case $entity instanceof \Report\Model\SubDecision\Abrogation:
-                $this->getOrganService()->generateAbrogation($entity);
+                $this->organService->generateAbrogation($entity);
                 break;
 
             case $entity instanceof \Report\Model\SubDecision\Installation:
-                $this->getOrganService()->generateInstallation($entity);
+                $this->organService->generateInstallation($entity);
                 break;
 
             case $entity instanceof \Report\Model\SubDecision\Discharge:
-                $this->getOrganService()->generateDischarge($entity);
+                $this->organService->generateDischarge($entity);
                 break;
         }
-    }
-
-    /**
-     * Get the member service.
-     *
-     * @return \Report\Service\Member
-     */
-    public function getMemberService()
-    {
-        return $this->sm->get('report_service_member');
-    }
-
-    /**
-     * Get the meeting service.
-     *
-     * @return \Report\Service\Meeting
-     */
-    public function getMeetingService()
-    {
-        return $this->sm->get('report_service_meeting');
-    }
-
-    /**
-     * Get the organ service.
-     *
-     * @return \Report\Service\Organ
-     */
-    public function getOrganService()
-    {
-        return $this->sm->get('report_service_organ');
-    }
-
-    /**
-     * Get the board service.
-     *
-     * @return \Report\Service\Board
-     */
-    public function getBoardService()
-    {
-        return $this->sm->get('report_service_board');
-    }
-
-    /**
-     * Get the misc service.
-     *
-     * @return \Report\Service\Misc
-     */
-    public function getMiscService()
-    {
-        return $this->sm->get('report_service_misc');
     }
 }

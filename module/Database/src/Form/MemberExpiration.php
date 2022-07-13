@@ -28,7 +28,7 @@ class MemberExpiration extends Form implements InputFilterProviderInterface
         ));
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'submit_yes' => array(

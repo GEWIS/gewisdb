@@ -4,6 +4,7 @@ namespace Database\Form\Fieldset;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Digits;
 
 class Member extends Fieldset implements InputFilterProviderInterface
 {
@@ -28,13 +29,13 @@ class Member extends Fieldset implements InputFilterProviderInterface
         ));
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'lidnr' => array(
                 'required' => true,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array('name' => Digits::class)
                 )
             )
         );

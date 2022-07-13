@@ -2,9 +2,9 @@
 
 namespace Database\Form;
 
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
 
-class Destroy extends AbstractDecision
+class Destroy extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(Fieldset\Meeting $meeting, Fieldset\Decision $decision)
     {
@@ -27,14 +27,10 @@ class Destroy extends AbstractDecision
         ));
 
         $this->add($decision);
-
-        $this->initFilters();
     }
 
-    protected function initFilters()
+    public function getInputFilterSpecification(): array
     {
-        $filter = new InputFilter();
-
-        $this->setInputFilter($filter);
+        return [];
     }
 }

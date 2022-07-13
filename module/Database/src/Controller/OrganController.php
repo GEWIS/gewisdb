@@ -2,12 +2,24 @@
 
 namespace Database\Controller;
 
+use Database\Service\Meeting as MeetingService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 
 class OrganController extends AbstractActionController
 {
+    /** @var MeetingService $meetingService */
+    private $meetingService;
+
+    /**
+     * @param MeetingService $meetingService
+     */
+    public function __construct(MeetingService $meetingService)
+    {
+        $this->meetingService = $meetingService;
+    }
+
     /**
      * Index action, for organ search.
      */
@@ -21,10 +33,8 @@ class OrganController extends AbstractActionController
      */
     public function viewAction()
     {
-        $service = $this->getMeetingService();
-
         return new ViewModel(array(
-            'foundation' => $service->findFoundation(
+            'foundation' => $this->meetingService->findFoundation(
                 $this->params()->fromRoute('type'),
                 $this->params()->fromRoute('number'),
                 $this->params()->fromRoute('point'),
@@ -39,9 +49,7 @@ class OrganController extends AbstractActionController
      */
     public function infoAction()
     {
-        $service = $this->getMeetingService();
-
-        $foundation = $service->findFoundation(
+        $foundation = $this->meetingService->findFoundation(
             $this->params()->fromRoute('type'),
             $this->params()->fromRoute('number'),
             $this->params()->fromRoute('point'),
@@ -77,9 +85,8 @@ class OrganController extends AbstractActionController
      */
     public function searchAction()
     {
-        $service = $this->getMeetingService();
         $query = $this->params()->fromQuery('q');
-        $res = $service->organSearch($query);
+        $res = $this->meetingService->organSearch($query);
 
         $res = array_map(function ($organ) {
             return $organ->toArray();
@@ -88,15 +95,5 @@ class OrganController extends AbstractActionController
         return new JsonModel(array(
             'json' => $res
         ));
-    }
-
-    /**
-     * Get the meeting service.
-     *
-     * @return \Database\Service\Meeting
-     */
-    public function getMeetingService()
-    {
-        return $this->getServiceLocator()->get('database_service_meeting');
     }
 }

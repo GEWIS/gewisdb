@@ -2,14 +2,54 @@
 
 namespace Database\Service;
 
-use Application\Service\AbstractService;
-use Database\Model\SavedQuery;
+use Database\Form\Query as QueryForm;
+use Database\Form\QueryExport as QueryExportForm;
+use Database\Form\QuerySave as QuerySaveForm;
+use Database\Mapper\SavedQuery as SavedQueryMapper;
+use Database\Model\SavedQuery as SavedQueryModel;
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\Common\Persistence\Mapping\MappingException;
 
-class Query extends AbstractService
+class Query
 {
+    /** @var QueryForm $queryForm */
+    private $queryForm;
+
+    /** @var QueryExportForm $queryExportForm */
+    private $queryExportForm;
+
+    /** @var QuerySaveForm $querySaveForm */
+    private $querySaveForm;
+
+    /** @var SavedQueryMapper $savedQueryMapper */
+    private $savedQueryMapper;
+
+    /** @var EntityManager */
+    private $emReport;
+
+    /**
+     * @param QueryForm $queryForm
+     * @param QueryExportForm $queryExportForm
+     * @param QuerySaveForm $querySaveForm
+     * @param SavedQueryMapper $savedQueryMapper
+     * @param EntityManager $emReport
+     */
+    public function __construct(
+        QueryForm $queryForm,
+        QueryExportForm $queryExportForm,
+        QuerySaveForm $querySaveForm,
+        SavedQueryMapper $savedQueryMapper,
+        EntityManager $emReport
+    ) {
+        $this->queryForm = $queryForm;
+        $this->queryExportForm = $queryExportForm;
+        $this->querySaveForm = $querySaveForm;
+        $this->savedQueryMapper = $savedQueryMapper;
+        $this->emReport = $emReport;
+    }
+
     /**
      * Get all saved queries.
      *
@@ -27,9 +67,9 @@ class Query extends AbstractService
      */
     public function save($data)
     {
-        $form = $this->getSavedQueryForm();
+        $form = $this->getQuerySaveForm();
 
-        $form->bind(new SavedQuery());
+        $form->bind(new SavedQueryModel());
 
         $form->setData($data);
 
@@ -105,7 +145,7 @@ class Query extends AbstractService
          *
          * TODO: properly put this in a mapper.....
          */
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $em = $this->emReport;
         try {
             $query = $em->createQuery($data['query']);
             return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
@@ -127,11 +167,11 @@ class Query extends AbstractService
     /**
      * Get the saved query mapper.
      *
-     * @return \Database\Mapper\SavedQuery
+     * @return SavedQueryMapper
      */
-    public function getSavedQueryMapper()
+    public function getSavedQueryMapper(): SavedQueryMapper
     {
-        return $this->getServiceManager()->get('database_mapper_savedquery');
+        return $this->savedQueryMapper;
     }
 
     /**
@@ -141,7 +181,7 @@ class Query extends AbstractService
      */
     public function getEntities()
     {
-        $entityManager = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
+        $entityManager = $this->emReport;
         $classes = array();
         $metas = $entityManager->getMetadataFactory()->getAllMetadata();
         foreach ($metas as $meta) {
@@ -152,28 +192,28 @@ class Query extends AbstractService
 
     /**
      * Get the query form.
-     * @return \Database\Form\Query
+     * @return QueryForm
      */
-    public function getQueryForm()
+    public function getQueryForm(): QueryForm
     {
-        return $this->getServiceManager()->get('database_form_query');
+        return $this->queryForm;
     }
 
     /**
      * Get the query form.
-     * @return \Database\Form\SavedQuery
+     * @return QuerySaveForm
      */
-    public function getSavedQueryForm()
+    public function getQuerySaveForm(): QuerySaveForm
     {
-        return $this->getServiceManager()->get('database_form_querysave');
+        return $this->querySaveForm;
     }
 
     /**
      * Get the query form.
-     * @return \Database\Form\QueryExport
+     * @return QueryExportForm
      */
-    public function getQueryExportForm()
+    public function getQueryExportForm(): QueryExportForm
     {
-        return $this->getServiceManager()->get('database_form_queryexport');
+        return $this->queryExportForm;
     }
 }

@@ -17,8 +17,8 @@ use User\Model\User;
 use Zend\Authentication\AuthenticationService;
 use User\Service\Factory\AuthenticationServiceFactory;
 use User\Form\UserEdit;
-use Zend\Mvc\Router\Http\Literal;
-use Zend\Mvc\Router\Http\Segment;
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 
 return [
     'router' => [

@@ -2,14 +2,118 @@
 
 namespace Database\Service;
 
-use Application\Service\AbstractService;
+use Database\Form\Abolish as AbolishForm;
+use Database\Form\Board\Discharge as BoardDischargeForm;
+use Database\Form\Board\Install as BoardInstallForm;
+use Database\Form\Board\Release as BoardReleaseForm;
+use Database\Form\Budget as BudgetForm;
+use Database\Form\CreateMeeting as CreateMeetingForm;
+use Database\Form\DeleteDecision as DeleteDecisionForm;
+use Database\Form\Destroy as DestroyForm;
+use Database\Form\Export as ExportForm;
+use Database\Form\Foundation as FoundationForm;
+use Database\Form\Install as InstallForm;
+use Database\Form\Other as OtherForm;
+use Database\Mapper\Meeting as MeetingMapper;
+use Database\Mapper\Organ as OrganMapper;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\Decision;
-use Database\Model\SubDecision;
-use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use ReflectionObject;
+use Zend\Stdlib\PriorityQueue;
 
-class Meeting extends AbstractService
+class Meeting
 {
+    /** @var AbolishForm $abolishForm */
+    private $abolishForm;
+
+    /** @var BoardDischargeForm $boardDischargeForm */
+    private $boardDischargeForm;
+
+    /** @var BoardInstallForm $boardInstallForm */
+    private $boardInstallForm;
+
+    /** @var BoardReleaseForm $boardReleaseForm */
+    private $boardReleaseForm;
+
+    /** @var BudgetForm $budgetForm */
+    private $budgetForm;
+
+    /** @var CreateMeetingForm $createMeetingForm */
+    private $createMeetingForm;
+
+    /** @var DeleteDecisionForm $deleteDecisionForm */
+    private $deleteDecisionForm;
+
+    /** @var DestroyForm $destroyForm */
+    private $destroyForm;
+
+    /** @var ExportForm $exportForm */
+    private $exportForm;
+
+    /** @var FoundationForm $foundationForm */
+    private $foundationForm;
+
+    /** @var InstallForm $installForm */
+    private $installForm;
+
+    /** @var OtherForm $otherForm */
+    private $otherForm;
+
+    /** @var MeetingMapper $meetingMapper */
+    private $meetingMapper;
+
+    /** @var OrganMapper $organMapper */
+    private $organMapper;
+
+    /**
+     * @param AbolishForm $abolishForm
+     * @param BoardDischargeForm $boardDischargeForm
+     * @param BoardInstallForm $boardInstallForm
+     * @param BoardReleaseForm $boardReleaseForm
+     * @param BudgetForm $budgetForm
+     * @param CreateMeetingForm $createMeetingForm
+     * @param DeleteDecisionForm $deleteDecisionForm
+     * @param DestroyForm $destroyForm
+     * @param ExportForm $exportForm
+     * @param FoundationForm $foundationForm
+     * @param InstallForm $installForm
+     * @param OtherForm $otherForm
+     * @param MeetingMapper $meetingMapper
+     * @param OrganMapper $organMapper
+     */
+    public function __construct(
+        AbolishForm $abolishForm,
+        BoardDischargeForm $boardDischargeForm,
+        BoardInstallForm $boardInstallForm,
+        BoardReleaseForm $boardReleaseForm,
+        BudgetForm $budgetForm,
+        CreateMeetingForm $createMeetingForm,
+        DeleteDecisionForm $deleteDecisionForm,
+        DestroyForm $destroyForm,
+        ExportForm $exportForm,
+        FoundationForm $foundationForm,
+        InstallForm $installForm,
+        OtherForm $otherForm,
+        MeetingMapper $meetingMapper,
+        OrganMapper $organMapper
+    ) {
+        $this->abolishForm = $abolishForm;
+        $this->boardDischargeForm = $boardDischargeForm;
+        $this->boardInstallForm = $boardInstallForm;
+        $this->boardReleaseForm = $boardReleaseForm;
+        $this->budgetForm = $budgetForm;
+        $this->createMeetingForm = $createMeetingForm;
+        $this->deleteDecisionForm = $deleteDecisionForm;
+        $this->destroyForm = $destroyForm;
+        $this->exportForm = $exportForm;
+        $this->foundationForm = $foundationForm;
+        $this->installForm = $installForm;
+        $this->otherForm = $otherForm;
+        $this->meetingMapper = $meetingMapper;
+        $this->organMapper = $organMapper;
+    }
+
     /**
      * Get a meeting.
      *
@@ -32,9 +136,7 @@ class Meeting extends AbstractService
      */
     public function getAllMeetings()
     {
-        $mapper = $this->getMeetingMapper();
-
-        return $mapper->findAll();
+        return $this->getMeetingMapper()->findAll();
     }
 
     /**
@@ -134,9 +236,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'destroy',
@@ -196,9 +300,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
 
         return array(
@@ -231,9 +337,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'foundation',
@@ -265,9 +373,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'board_install',
@@ -292,6 +402,7 @@ class Meeting extends AbstractService
         if (!$form->isValid()) {
             return array(
                 'type' => 'board_discharge',
+                'installs' => $this->getCurrentBoard(),
                 'form' => $form
             );
         }
@@ -299,9 +410,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'board_discharge',
@@ -326,6 +439,7 @@ class Meeting extends AbstractService
         if (!$form->isValid()) {
             return array(
                 'type' => 'board_release',
+                'installs' => $this->getCurrentBoard(),
                 'form' => $form
             );
         }
@@ -333,9 +447,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'board_release',
@@ -367,9 +483,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'install',
@@ -402,9 +520,11 @@ class Meeting extends AbstractService
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'foundation',
@@ -425,16 +545,16 @@ class Meeting extends AbstractService
 
         // use hack to make sure we do not have validators for these fields
         $approveChain = $form->getInputFilter()->get('approve')->getValidatorChain();
-        $refObj = new \ReflectionObject($approveChain);
+        $refObj = new ReflectionObject($approveChain);
         $refProp = $refObj->getProperty('validators');
         $refProp->setAccessible(true);
-        $refProp->setValue($approveChain, new \Zend\Stdlib\PriorityQueue());
+        $refProp->setValue($approveChain, new PriorityQueue());
 
         $changesChain = $form->getInputFilter()->get('changes')->getValidatorChain();
-        $refObj = new \ReflectionObject($changesChain);
+        $refObj = new ReflectionObject($changesChain);
         $refProp = $refObj->getProperty('validators');
         $refProp->setAccessible(true);
-        $refProp->setValue($changesChain, new \Zend\Stdlib\PriorityQueue());
+        $refProp->setValue($changesChain, new PriorityQueue());
 
 
         $form->setData($data);
@@ -461,9 +581,11 @@ class Meeting extends AbstractService
         }
 
         // simply persist through the meeting mapper
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'budget',
@@ -501,9 +623,11 @@ class Meeting extends AbstractService
             return null;
         }
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('meeting' => $meeting));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('meeting' => $meeting));
         $mapper->persist($meeting);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('meeting' => $meeting));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('meeting' => $meeting));
 
         return $meeting;
     }
@@ -539,7 +663,7 @@ class Meeting extends AbstractService
      * @param string $decisionNumber
      * @param string $subdecisionNumber
      *
-     * @return \Database\Model\SubDecision\Foundation
+     * @return FoundationModel
      */
     public function findFoundation($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
     {
@@ -555,140 +679,140 @@ class Meeting extends AbstractService
     /**
      * Get the create meeting form.
      *
-     * @return \Database\Form\CreateMeeting
+     * @return CreateMeetingForm
      */
-    public function getCreateMeetingForm()
+    public function getCreateMeetingForm(): CreateMeetingForm
     {
-        return $this->getServiceManager()->get('database_form_createmeeting');
+        return $this->createMeetingForm;
     }
 
     /**
      * Get the delete decision form.
      *
-     * @return \Database\Form\DeleteDecision
+     * @return DeleteDecisionForm
      */
-    public function getDeleteDecisionForm()
+    public function getDeleteDecisionForm(): DeleteDecisionForm
     {
-        return $this->getServiceManager()->get('database_form_deletedecision');
+        return $this->deleteDecisionForm;
     }
 
     /**
      * Get the board install form.
      *
-     * @return \Database\Form\Board\Install
+     * @return BoardInstallForm
      */
-    public function getBoardInstallForm()
+    public function getBoardInstallForm(): BoardInstallForm
     {
-        return $this->getServiceManager()->get('database_form_board_install');
+        return $this->boardInstallForm;
     }
 
     /**
      * Get the board release form.
      *
-     * @return \Database\Form\Board\Release
+     * @return BoardReleaseForm
      */
-    public function getBoardReleaseForm()
+    public function getBoardReleaseForm(): BoardReleaseForm
     {
-        return $this->getServiceManager()->get('database_form_board_release');
+        return $this->boardReleaseForm;
     }
 
     /**
      * Get the board release form.
      *
-     * @return \Database\Form\Board\Discharge
+     * @return BoardDischargeForm
      */
-    public function getBoardDischargeForm()
+    public function getBoardDischargeForm(): BoardDischargeForm
     {
-        return $this->getServiceManager()->get('database_form_board_discharge');
+        return $this->boardDischargeForm;
     }
 
     /**
      * Get install form.
      *
-     * @return \Database\Form\Install
+     * @return InstallForm
      */
-    public function getInstallForm()
+    public function getInstallForm(): InstallForm
     {
-        return $this->getServiceManager()->get('database_form_install');
+        return $this->installForm;
     }
 
     /**
      * Get abolish form.
      *
-     * @return \Database\Form\Abolish
+     * @return AbolishForm
      */
-    public function getAbolishForm()
+    public function getAbolishForm(): AbolishForm
     {
-        return $this->getServiceManager()->get('database_form_abolish');
+        return $this->abolishForm;
     }
 
     /**
      * Get the destroy form.
      *
-     * @return \Database\Form\Destroy
+     * @return DestroyForm
      */
-    public function getDestroyForm()
+    public function getDestroyForm(): DestroyForm
     {
-        return $this->getServiceManager()->get('database_form_destroy');
+        return $this->destroyForm;
     }
 
     /**
      * Get foundation form.
      *
-     * @return \Database\Form\Foundation
+     * @return FoundationForm
      */
-    public function getFoundationForm()
+    public function getFoundationForm(): FoundationForm
     {
-        return $this->getServiceManager()->get('database_form_foundation');
+        return $this->foundationForm;
     }
 
     /**
      * Get budget form.
      *
-     * @return \Database\Form\Budget
+     * @return BudgetForm
      */
-    public function getBudgetForm()
+    public function getBudgetForm(): BudgetForm
     {
-        return $this->getServiceManager()->get('database_form_budget');
+        return $this->budgetForm;
     }
 
     /**
      * Get other form.
      *
-     * @return \Database\Form\Other
+     * @return OtherForm
      */
-    public function getOtherForm()
+    public function getOtherForm(): OtherForm
     {
-        return $this->getServiceManager()->get('database_form_other');
+        return $this->otherForm;
     }
 
     /**
      * Get the export form.
      *
-     * @return \Database\Form\Export
+     * @return ExportForm
      */
-    public function getExportForm()
+    public function getExportForm(): ExportForm
     {
-        return $this->getServiceManager()->get('database_form_export');
+        return $this->exportForm;
     }
 
     /**
      * Get the meeting mapper.
      *
-     * @return \Database\Mapper\Meeting
+     * @return MeetingMapper
      */
-    public function getMeetingMapper()
+    public function getMeetingMapper(): MeetingMapper
     {
-        return $this->getServiceManager()->get('database_mapper_meeting');
+        return $this->meetingMapper;
     }
 
     /**
      * Get the organ mapper.
      *
-     * @return \Database\Mapper\Organ
+     * @return OrganMapper
      */
-    public function getOrganMapper()
+    public function getOrganMapper(): OrganMapper
     {
-        return $this->getServiceManager()->get('database_mapper_organ');
+        return $this->organMapper;
     }
 }

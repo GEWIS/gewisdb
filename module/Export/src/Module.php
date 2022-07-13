@@ -2,6 +2,8 @@
 
 namespace Export;
 
+use Interop\Container\ContainerInterface;
+
 class Module
 {
     /**
@@ -11,7 +13,7 @@ class Module
      */
     public function getConfig(): array
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__ . '/../config/module.config.php';
     }
 
     /**
@@ -28,29 +30,29 @@ class Module
                 'export_service_organ' => 'Export\Service\Organ',
             ),
             'factories' => array(
-                'export_query_meeting' => function ($sm) {
+                'export_query_meeting' => function (ContainerInterface $container) {
                     $q = new \Export\Query\Meeting();
-                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    $q->setConnection($container->get('doctrine.connection.orm_import'));
                     return $q;
                 },
-                'export_query_member' => function ($sm) {
+                'export_query_member' => function (ContainerInterface $container) {
                     $q = new \Export\Query\Member();
-                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    $q->setConnection($container->get('doctrine.connection.orm_import'));
                     return $q;
                 },
-                'export_query_subdecision' => function ($sm) {
+                'export_query_subdecision' => function (ContainerInterface $container) {
                     $q = new \Export\Query\SubDecision();
-                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    $q->setConnection($container->get('doctrine.connection.orm_import'));
                     return $q;
                 },
-                'export_query_decision' => function ($sm) {
+                'export_query_decision' => function (ContainerInterface $container) {
                     $q = new \Export\Query\Decision();
-                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    $q->setConnection($container->get('doctrine.connection.orm_import'));
                     return $q;
                 },
-                'export_query_organ' => function ($sm) {
+                'export_query_organ' => function (ContainerInterface $container) {
                     $q = new \Export\Query\Organ();
-                    $q->setConnection($sm->get('doctrine.connection.orm_import'));
+                    $q->setConnection($container->get('doctrine.connection.orm_import'));
                     return $q;
                 },
             )

@@ -62,12 +62,14 @@ use Database\Model\Meeting;
             </div>
             <div class="tab-pane" id="board-ontheven">
             <?= $this->partial('database/meeting/board/releaseform', array(
-                'form' => $forms['board_release']
+                'form' => $forms['board_release'],
+                'installs' => $installs
             )); ?>
             </div>
             <div class="tab-pane" id="board-decharge">
             <?= $this->partial('database/meeting/board/dischargeform', array(
-                'form' => $forms['board_discharge']
+                'form' => $forms['board_discharge'],
+                'installs' => $installs
             )); ?>
             </div>
         </div>

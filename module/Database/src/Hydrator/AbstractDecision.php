@@ -2,10 +2,8 @@
 
 namespace Database\Hydrator;
 
-use Zend\Stdlib\Hydrator\HydratorInterface;
-use Database\Model\Decision;
-use Database\Model\SubDecision;
-use Database\Model\Meeting;
+use Zend\Hydrator\HydratorInterface;
+use Database\Model\Decision as DecisionModel;
 
 abstract class AbstractDecision implements HydratorInterface
 {
@@ -13,20 +11,22 @@ abstract class AbstractDecision implements HydratorInterface
      * Decision hydration
      *
      * @param array $data
-     * @param Decision $object
+     * @param DecisionModel $object
      *
-     * @return Decision
+     * @return DecisionModel
      *
      * @throws \InvalidArgumentException when $object is not a Decision
      */
     public function hydrate(array $data, $object)
     {
-        if (!$object instanceof Decision) {
+        if (!$object instanceof DecisionModel) {
             throw new \InvalidArgumentException("Object is not an instance of Database\Model\Decision.");
         }
+
         $object->setMeeting($data['meeting']);
         $object->setPoint($data['point']);
         $object->setNumber($data['decision']);
+
         return $object;
     }
 
@@ -39,9 +39,10 @@ abstract class AbstractDecision implements HydratorInterface
      */
     public function extract($object)
     {
-        if (!$object instanceof Decision) {
+        if (!$object instanceof DecisionModel) {
             throw new \InvalidArgumentException("Object is not an instance of Database\Model\Decision.");
         }
+
         return array();
     }
 }

@@ -3,9 +3,10 @@
 namespace Database\Form;
 
 use Database\Model\SubDecision;
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\StringLength;
 
-class Other extends AbstractDecision
+class Other extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(Fieldset\Meeting $meeting)
     {
@@ -26,27 +27,22 @@ class Other extends AbstractDecision
                 'value' => 'Verzend'
             )
         ));
-
-        $this->initFilters();
     }
 
-    protected function initFilters()
+    public function getInputFilterSpecification(): array
     {
-        $filter = new InputFilter();
-
-        $filter->add(array(
-            'name' => 'content',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'string_length',
-                    'options' => array(
-                        'min' => 3
+        return [
+            'content' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => StringLength::class,
+                        'options' => array(
+                            'min' => 3
+                        )
                     )
                 )
-            )
-        ));
-
-        $this->setInputFilter($filter);
+            ),
+        ];
     }
 }

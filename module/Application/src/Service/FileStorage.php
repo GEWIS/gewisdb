@@ -2,8 +2,19 @@
 
 namespace Application\Service;
 
-class FileStorage extends AbstractService
+class FileStorage
 {
+    /** @var array $config */
+    private $config;
+
+    /**
+     * @param array $config
+     */
+    public function __construct(array $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * Generates CFS paths.
      *
@@ -11,7 +22,7 @@ class FileStorage extends AbstractService
      *
      * @return string The path at which the image should be saved
      */
-    public function generateStoragePath($data)
+    public function generateStoragePath(string $data): string
     {
         $config = $this->getConfig();
         $hash = sha1_file($data);
@@ -35,7 +46,7 @@ class FileStorage extends AbstractService
      * @return string The CFS path at which the file was stored
      * @throws \Exception
      */
-    public function storeUploadedData($data, $extension)
+    public function storeUploadedData(string $data, string $extension): string
     {
         $config = $this->getConfig();
         $storagePath = $this->generateStoragePath($data) . '.' . $extension;
@@ -60,16 +71,16 @@ class FileStorage extends AbstractService
      *
      * @return bool indicating if removing the file was successful.
      */
-    public function removeFile($path)
+    public function removeFile(string $path): bool
     {
         $config = $this->getConfig();
         $fullPath = $config['storage_dir'] . '/' . $path;
 
         if (file_exists($fullPath)) {
             return unlink($fullPath);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -77,10 +88,8 @@ class FileStorage extends AbstractService
      *
      * @return array containing the config for the module
      */
-    public function getConfig()
+    public function getConfig(): array
     {
-        $config = $this->getServiceManager()->get('config');
-
-        return $config['storage'];
+        return $this->config['storage'];
     }
 }

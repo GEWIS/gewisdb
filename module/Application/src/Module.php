@@ -2,6 +2,10 @@
 
 namespace Application;
 
+use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
+use Application\Service\FileStorage as FileStorageService;
+use Application\View\Helper\FileUrl;
+use Interop\Container\ContainerInterface;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Zend\Mvc\ModuleRouteListener;
@@ -64,7 +68,7 @@ class Module
      */
     public function getConfig(): array
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__ . '/../config/module.config.php';
     }
 
     /**
@@ -72,16 +76,14 @@ class Module
      *
      * @return array Service configuration
      */
-    public function getServiceConfig()
+    public function getServiceConfig(): array
     {
         return [
-            'invokables' => [
-                'application_service_storage' => 'Application\Service\FileStorage',
-            ],
             'factories' => [
-                'logger' => function ($sm) {
+                FileStorageService::class => FileStorageServiceFactory::class,
+                'logger' => function (ContainerInterface $container) {
                     $logger = new Logger('gewisdb');
-                    $config = $sm->get('config')['logging'];
+                    $config = $container->get('config')['logging'];
 
                     $handler = new RotatingFileHandler(
                         $config['logfile_path'],
@@ -101,15 +103,12 @@ class Module
      *
      * @return array
      */
-    public function getViewHelperConfig()
+    public function getViewHelperConfig(): array
     {
         return [
             'factories' => [
-                'fileUrl' => function ($sm) {
-                    $locator = $sm->getServiceLocator();
-                    $helper = new \Application\View\Helper\FileUrl();
-                    $helper->setServiceLocator($locator);
-                    return $helper;
+                'fileUrl' => function (ContainerInterface $container) {
+                    return new FileUrl($container->get('config'));
                 },
             ]
         ];

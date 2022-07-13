@@ -3,8 +3,9 @@
 namespace Database\Form;
 
 use Database\Form\Fieldset\CollectionWithErrors;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\NotEmpty;
+use Zend\Validator\StringLength;
 
 class Foundation extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -45,15 +46,17 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
         ));
 
         // Is this possible with a factory?
-        $members = new CollectionWithErrors();
-        $members->setName('members');
-        $members->setOptions(array(
-            'label' => 'Members',
-            'count' => 2,
-            'should_create_template' => true,
-            'target_element' => $function
+        $this->add(array(
+            'name' => 'members',
+            'type' => CollectionWithErrors::class,
+            'options' => [
+                'label' => 'Members',
+                'count' => 2,
+                'allow_add' => true,
+                'should_create_template' => true,
+                'target_element' => $function,
+            ],
         ));
-        $this->add($members);
 
         $this->add(array(
             'name' => 'submit',
@@ -67,14 +70,14 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'name' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 128
@@ -87,7 +90,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -100,7 +103,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
                 'continue_if_empty' => true,
                 'validators' => [
                     [
-                        'name' => 'notEmpty',
+                        'name' => NotEmpty::class,
                     ]
                 ]
             )

@@ -38,7 +38,7 @@ class MemberFunction extends Fieldset
         return $array;
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array();
     }

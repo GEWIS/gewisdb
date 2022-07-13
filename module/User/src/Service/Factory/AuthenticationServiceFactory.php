@@ -2,16 +2,26 @@
 
 namespace User\Service\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\Crypt\Password\PasswordInterface;
 
 class AuthenticationServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $sm)
-    {
-        $service = $sm->get('doctrine.authenticationservice.orm_default');
-        $passwordVerify = $sm->get(PasswordInterface::class);
+    /**
+     * @param ContainerInterface $container
+     * @param $requestedName
+     * @param array|null $options
+     *
+     * @return mixed|object
+     */
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ) {
+        $service = $container->get('doctrine.authenticationservice.orm_default');
+        $passwordVerify = $container->get(PasswordInterface::class);
 
         $service->getAdapter()
             ->getOptions()

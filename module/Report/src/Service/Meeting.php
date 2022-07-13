@@ -2,10 +2,11 @@
 
 namespace Report\Service;
 
-use Application\Service\AbstractService;
+use Database\Mapper\Meeting as MeetingMapper;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision;
 use Database\Model\Decision;
+use Doctrine\ORM\EntityManager;
 use Report\Model\Meeting as ReportMeeting;
 use Report\Model\Decision as ReportDecision;
 use Zend\Mail\Transport\TransportInterface;
@@ -13,19 +14,44 @@ use Zend\Mail\Message;
 use Zend\ProgressBar\Adapter\Console;
 use Zend\ProgressBar\ProgressBar;
 
-class Meeting extends AbstractService
+class Meeting
 {
+    /** @var MeetingMapper $meetingMapper */
+    private $meetingMapper;
+
+    /** @var EntityManager $emReport */
+    private $emReport;
+
+    /** @var array $config */
+    private $config;
+
+    private $mailTransport;
+
+    /**
+     * @param MeetingMapper $meetingMapper
+     * @param EntityManager $emReport
+     * @param array $config
+     * @param $mailTransport
+     */
+    public function __construct(
+        MeetingMapper $meetingMapper,
+        EntityManager $emReport,
+        array $config,
+        $mailTransport
+    ) {
+        $this->meetingMapper = $meetingMapper;
+        $this->emReport = $emReport;
+        $this->config = $config;
+        $this->mailTransport = $mailTransport;
+    }
+
     /**
      * Export meetings.
      */
     public function generate()
     {
-        $mapper = $this->getMeetingMapper();
-
         // simply export every meeting
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-
-        $meetings = $mapper->findAll(true, true);
+        $meetings = $this->meetingMapper->findAll(true, true);
 
         $adapter = new Console();
         $progress = new ProgressBar($adapter, 0, count($meetings));
@@ -33,19 +59,18 @@ class Meeting extends AbstractService
         $num = 0;
         foreach ($meetings as $meeting) {
             $this->generateMeeting($meeting[0]);
-            $em->flush();
-            $em->clear();
+            $this->emReport->flush();
+            $this->emReport->clear();
             $progress->update(++$num);
         }
 
-        $em->flush();
+        $this->emReport->flush();
         $progress->finish();
     }
 
     public function generateMeeting($meeting)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\Meeting');
+        $repo = $this->emReport->getRepository('Report\Model\Meeting');
 
         $reportMeeting = $repo->find(array(
             'type' => $meeting->getType(),
@@ -70,16 +95,15 @@ class Meeting extends AbstractService
             }
         }
 
-        $em->persist($reportMeeting);
+        $this->emReport->persist($reportMeeting);
     }
 
     public function generateDecision($decision, $reportMeeting = null)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $decRepo = $em->getRepository('Report\Model\Decision');
+        $decRepo = $this->emReport->getRepository('Report\Model\Decision');
 
         if ($reportMeeting === null) {
-            $reportMeeting = $em->getRepository('Report\Model\Meeting')->find([
+            $reportMeeting = $this->emReport->getRepository('Report\Model\Meeting')->find([
                 'type' => $decision->getMeeting()->getType(),
                 'number' => $decision->getMeeting()->getNumber()
             ]);
@@ -117,14 +141,13 @@ class Meeting extends AbstractService
 
         $reportDecision->setContent(implode(' ', $content));
 
-        $em->persist($reportDecision);
+        $this->emReport->persist($reportDecision);
     }
 
     public function generateSubDecision($subdecision, $reportDecision = null)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $decRepo = $em->getRepository('Report\Model\Decision');
-        $subdecRepo = $em->getRepository('Report\Model\SubDecision');
+        $decRepo = $this->emReport->getRepository('Report\Model\Decision');
+        $subdecRepo = $this->emReport->getRepository('Report\Model\SubDecision');
 
         if ($reportDecision === null) {
             $reportDecision = $decRepo->find(array(
@@ -263,15 +286,14 @@ class Meeting extends AbstractService
         }
 
         $reportSubDecision->setContent($cnt);
-        $em->persist($reportSubDecision);
+        $this->emReport->persist($reportSubDecision);
 
         return $reportSubDecision;
     }
 
     public function deleteDecision($decision)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $reportDecision = $em->getRepository('Report\Model\Decision')->find(array(
+        $reportDecision = $this->emReport->getRepository('Report\Model\Decision')->find(array(
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'point' => $decision->getPoint(),
@@ -282,13 +304,11 @@ class Meeting extends AbstractService
             $this->deleteSubDecision($subDecision);
         }
 
-        $em->remove($reportDecision);
+        $this->emReport->remove($reportDecision);
     }
 
     public function deleteSubDecision($subDecision)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-
         switch (true) {
             case $subDecision instanceof \Report\Model\SubDecision\Destroy:
                 throw new \Exception('Deletion of destroy decisions not implemented');
@@ -305,19 +325,19 @@ class Meeting extends AbstractService
                 break;
             case $subDecision instanceof \Report\Model\SubDecision\Foundation:
                 $organ = $subDecision->getOrgan();
-                $em->remove($organ);
+                $this->emReport->remove($organ);
                 break;
             case $subDecision instanceof \Report\Model\SubDecision\Installation:
                 $organMember = $subDecision->getOrganMember();
 
                 if ($organMember !== null) {
-                    $em->remove($organMember);
+                    $this->emReport->remove($organMember);
                 }
 
                 break;
         }
 
-        $em->remove($subDecision);
+        $this->emReport->remove($subDecision);
     }
 
     /**
@@ -329,8 +349,7 @@ class Meeting extends AbstractService
      */
     public function findMember(MemberModel $member)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\Member');
+        $repo = $this->emReport->getRepository('Report\Model\Member');
 
         return $repo->find($member->getLidnr());
     }
@@ -343,8 +362,7 @@ class Meeting extends AbstractService
      */
     public function sendDecisionExceptionMail(\Exception $e, Decision $decision)
     {
-        $config = $this->getServiceManager()->get('config');
-        $config = $config['email'];
+        $config = $this->config['email'];
 
         $meeting = $decision->getMeeting();
         $body = <<<BODYTEXT
@@ -371,34 +389,6 @@ BODYTEXT;
         $message->addTo($config['to']['report_error']);
         $message->setSubject('Database fout');
 
-        $this->getMailTransport()->send($message);
-    }
-
-    /**
-     * Get the mail transport.
-     *
-     * @return TransportInterface
-     */
-    public function getMailTransport()
-    {
-        return $this->getServiceManager()->get('database_mail_transport');
-    }
-
-    /**
-     * Get the meeting mapper.
-     *
-     * @return \Database\Mapper\Meeting
-     */
-    public function getMeetingMapper()
-    {
-        return $this->getServiceManager()->get('database_mapper_meeting');
-    }
-
-    /**
-     * Get the console object.
-     */
-    public function getConsole()
-    {
-        return $this->getServiceManager()->get('console');
+        $this->mailTransport->send($message);
     }
 }

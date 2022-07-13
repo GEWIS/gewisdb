@@ -2,16 +2,25 @@
 
 namespace User\Controller\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use User\Controller\UserController;
 use User\Service\UserService;
 
 class UserControllerFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $sl)
-    {
-        $sm = $sl->getServiceLocator();
-        return new UserController($sm->get(UserService::class));
+    /**
+     * @param ContainerInterface $container
+     * @param $requestedName
+     * @param array|null $options
+     *
+     * @return UserController
+     */
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ): UserController {
+        return new UserController($container->get(UserService::class));
     }
 }

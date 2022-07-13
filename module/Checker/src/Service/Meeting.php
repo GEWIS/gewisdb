@@ -2,21 +2,31 @@
 
 namespace Checker\Service;
 
-use Application\Service\AbstractService;
+use Database\Model\Meeting as MeetingModel;
 use Database\Service\Meeting as MeetingService;
 
-class Meeting extends AbstractService
+class Meeting
 {
+    /** @var MeetingService $meetingService */
+    private $meetingService;
+
+    /**
+     * @param MeetingService $meetingService
+     */
+    public function __construct(MeetingService $meetingService)
+    {
+        $this->meetingService = $meetingService;
+    }
+
     /**
      * Fetch all the existing organs after the meeting.
      * Proxies to Database\Service\Meeting::getAllMeetings()
      * @return array Database\Model\Meeting
      */
-    public function getAllMeetings()
+    public function getAllMeetings(): array
     {
-        /** @var MeetingService $databaseServiceMeeting */
-        $databaseServiceMeeting = $this->getServiceManager()->get('database_service_meeting');
-        $meetings = $databaseServiceMeeting->getAllMeetings();
+        $meetings = $this->meetingService->getAllMeetings();
+
         // Filters out unneeded information
         return array_map(
             function ($object) {
@@ -27,14 +37,10 @@ class Meeting extends AbstractService
     }
 
     /**
-     * @return \Database\Model\Meeting|null
+     * @return MeetingModel|null
      */
-    public function getLastMeeting()
+    public function getLastMeeting(): ?MeetingModel
     {
-        /** @var MeetingService $databaseServiceMeeting */
-        $databaseServiceMeeting = $this->getServiceManager()->get('database_service_meeting');
-        $meetingMapper = $databaseServiceMeeting->getMeetingMapper();
-
-        return $meetingMapper->findLast();
+        return $this->meetingService->getMeetingMapper()->findLast();
     }
 }

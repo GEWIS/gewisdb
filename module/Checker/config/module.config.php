@@ -1,11 +1,12 @@
 <?php
 
 use Checker\Controller\CheckerController;
+use Checker\Controller\Factory\CheckerControllerFactory;
 
 return array(
     'controllers' => array(
-        'invokables' => array(
-            CheckerController::class => CheckerController::class
+        'factories' => array(
+            CheckerController::class => CheckerControllerFactory::class
         )
     ),
     'console' => array(

@@ -7,6 +7,17 @@
  */
 
 return [
+    'Zend\I18n',
+    'Zend\Mvc\I18n',
+    'Zend\Serializer',
+    'Zend\Mail',
+    'Zend\Cache',
+    'Zend\InputFilter',
+    'Zend\Paginator',
+    'Zend\Hydrator',
+    'Zend\Form',
+    'Zend\Router',
+    'Zend\Validator',
     'DoctrineModule',
     'DoctrineORMModule',
     'Application',

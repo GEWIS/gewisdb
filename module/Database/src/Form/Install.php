@@ -2,8 +2,6 @@
 
 namespace Database\Form;
 
-use Zend\InputFilter\InputFilter;
-
 class Install extends AbstractDecision
 {
     public function __construct(

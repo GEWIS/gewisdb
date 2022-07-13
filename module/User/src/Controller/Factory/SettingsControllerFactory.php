@@ -2,16 +2,25 @@
 
 namespace User\Controller\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use User\Service\UserService;
 use User\Controller\SettingsController;
 
 class SettingsControllerFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $sl)
-    {
-        $sm = $sl->getServiceLocator();
-        return new SettingsController($sm->get(UserService::class));
+    /**
+     * @param ContainerInterface $container
+     * @param $requestedName
+     * @param array|null $options
+     *
+     * @return SettingsController
+     */
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ): SettingsController {
+        return new SettingsController($container->get(UserService::class));
     }
 }

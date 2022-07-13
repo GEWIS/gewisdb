@@ -2,11 +2,10 @@
 
 namespace Export\Service;
 
-use Application\Service\AbstractService;
 use Database\Model\Member as MemberModel;
 use Database\Model\Address;
 
-class Member extends AbstractService
+class Member
 {
     /**
      * Export members.
@@ -101,7 +100,7 @@ class Member extends AbstractService
      */
     public function getMemberMapper()
     {
-        return $this->getServiceManager()->get('database_mapper_member');
+        return $this->getServiceManager()->get(MemberMapper::class);
     }
 
     /**

@@ -2,12 +2,13 @@
 
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Mapping\Driver\DriverChain;
+use Report\Controller\Factory\ReportControllerFactory;
 use Report\Controller\ReportController;
 
 return array(
     'controllers' => array(
-        'invokables' => array(
-            ReportController::class => ReportController::class,
+        'factories' => array(
+            ReportController::class => ReportControllerFactory::class,
         )
     ),
     'doctrine' => array(

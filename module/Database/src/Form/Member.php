@@ -3,10 +3,15 @@
 namespace Database\Form;
 
 use Database\Model\Address;
+use Zend\Filter\ToNull;
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
+use Zend\I18n\Filter\Alnum;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\I18n\Translator\TranslatorInterface as Translator;
+use Zend\Validator\Iban;
+use Zend\Validator\Identical;
+use Zend\Validator\Regex;
+use Zend\Validator\StringLength;
 
 class Member extends Form implements InputFilterProviderInterface
 {
@@ -214,14 +219,14 @@ class Member extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'lastName' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -233,7 +238,7 @@ class Member extends Form implements InputFilterProviderInterface
                 'required' => false,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -245,7 +250,7 @@ class Member extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 1,
                             'max' => 16
@@ -257,7 +262,7 @@ class Member extends Form implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 1,
                             'max' => 32
@@ -267,17 +272,17 @@ class Member extends Form implements InputFilterProviderInterface
             ),
             'iban' => [
                 'validators' => [
-                    ['name' => 'iban']
+                    ['name' => Iban::class]
                 ],
                 'filters' => [
-                    ['name' => 'alnum']
+                    ['name' => Alnum::class]
                 ]
             ],
             'agreed' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'identical',
+                        'name' => Identical::class,
                         'options' => array(
                             'token' => '1',
                             'messages' => array(
@@ -291,7 +296,7 @@ class Member extends Form implements InputFilterProviderInterface
                 'required' => false,
                 'validators' => array(
                     array(
-                        'name' => 'regex',
+                        'name' => Regex::class,
                         'options' => array(
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => array(
@@ -301,7 +306,7 @@ class Member extends Form implements InputFilterProviderInterface
                     )
                 ),
                 'filters' => array(
-                    array('name' => 'tonull')
+                    array('name' => ToNull::class)
                 )
             )
         );

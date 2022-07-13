@@ -3,7 +3,6 @@
 namespace Database\Form;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 class DeleteAddress extends Form implements InputFilterProviderInterface
@@ -29,7 +28,7 @@ class DeleteAddress extends Form implements InputFilterProviderInterface
         ));
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'submit_yes' => array(

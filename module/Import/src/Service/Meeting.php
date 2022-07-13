@@ -2,13 +2,12 @@
 
 namespace Import\Service;
 
-use Application\Service\AbstractService;
 use Database\Model\SubDecision;
 use Database\Model\Decision;
 use Database\Model\Meeting as MeetingModel;
 use Doctrine\ORM\NoResultException;
 
-class Meeting extends AbstractService
+class Meeting
 {
     /**
      * Previous found foundation decision.
@@ -577,7 +576,7 @@ class Meeting extends AbstractService
      */
     public function getOrganMapper()
     {
-        return $this->getServiceManager()->get('database_mapper_organ');
+        return $this->getServiceManager()->get(OrganMapper::class);
     }
 
     /**
@@ -587,7 +586,7 @@ class Meeting extends AbstractService
      */
     public function getMeetingMapper()
     {
-        return $this->getServiceManager()->get('database_mapper_meeting');
+        return $this->getServiceManager()->get(MeetingMapper::class);
     }
 
     /**
@@ -597,7 +596,7 @@ class Meeting extends AbstractService
      */
     public function getMemberMapper()
     {
-        return $this->getServiceManager()->get('database_mapper_member');
+        return $this->getServiceManager()->get(MemberMapper::class);
     }
 
     /**

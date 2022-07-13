@@ -2,23 +2,38 @@
 
 namespace Checker\Service;
 
-use Application\Service\AbstractService;
 use Checker\Mapper\Member as MemberMapper;
 
-class Member extends AbstractService
+class Member
 {
+    /** @var MemberMapper $memberMapper */
+    private $memberMapper;
+
+    /** @var array $config */
+    private $config;
+
+    /**
+     * @param MemberMapper $memberMapper
+     * @param array $config
+     */
+    public function __construct(
+        MemberMapper $memberMapper,
+        array $config
+    ) {
+        $this->memberMapper = $memberMapper;
+        $this->config = $config;
+    }
+
     /**
      * Fetch some members whose membership status should be checked.
      *
-     * @return array Database\Model\Member
+     * @return array
      */
-    public function getMembersToCheck()
+    public function getMembersToCheck(): array
     {
-        /** @var MemberMapper $memberMapper */
-        $memberMapper = $this->getServiceManager()->get('checker_mapper_member');
-        $config = $this->getServiceManager()->get('config')['checker']['membership_api'];
+        $config = $this->config['checker']['membership_api'];
 
-        return $memberMapper->getMembersToCheck($config['max_total_requests'] - $config['max_manual_requests']);
+        return $this->memberMapper->getMembersToCheck($config['max_total_requests'] - $config['max_manual_requests']);
     }
 
     /**
@@ -26,12 +41,9 @@ class Member extends AbstractService
      *
      * @return array
      */
-    public function getEndingMembershipsWithNormalTypes()
+    public function getEndingMembershipsWithNormalTypes(): array
     {
-        /** @var MemberMapper $memberMapper */
-        $memberMapper = $this->getServiceManager()->get('checker_mapper_member');
-
-        return $memberMapper->getEndingMembershipsWithNormalTypes();
+        return $this->memberMapper->getEndingMembershipsWithNormalTypes();
     }
 
     /**
@@ -39,19 +51,16 @@ class Member extends AbstractService
      *
      * @return array
      */
-    public function getExpiringMembershipsWithNormalTypes()
+    public function getExpiringMembershipsWithNormalTypes(): array
     {
-        /** @var MemberMapper $memberMapper */
-        $memberMapper = $this->getServiceManager()->get('checker_mapper_member');
-
-        return $memberMapper->getExpiringMembershipsWithNormalTypes();
+        return $this->memberMapper->getExpiringMembershipsWithNormalTypes();
     }
 
     /**
      * @return MemberMapper
      */
-    public function getMemberMapper()
+    public function getMemberMapper(): MemberMapper
     {
-        return $this->getServiceManager()->get('checker_mapper_member');
+        return $this->memberMapper;
     }
 }

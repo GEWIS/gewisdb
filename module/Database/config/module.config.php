@@ -2,6 +2,14 @@
 
 use Database\Controller\AddressController;
 use Database\Controller\ExportController;
+use Database\Controller\Factory\AddressControllerFactory;
+use Database\Controller\Factory\ExportControllerFactory;
+use Database\Controller\Factory\MeetingControllerFactory;
+use Database\Controller\Factory\MemberControllerFactory;
+use Database\Controller\Factory\OrganControllerFactory;
+use Database\Controller\Factory\ProspectiveMemberControllerFactory;
+use Database\Controller\Factory\QueryControllerFactory;
+use Database\Controller\Factory\SettingsControllerFactory;
 use Database\Controller\IndexController;
 use Database\Controller\MeetingController;
 use Database\Controller\MemberController;
@@ -10,8 +18,8 @@ use Database\Controller\ProspectiveMemberController;
 use Database\Controller\QueryController;
 use Database\Controller\SettingsController;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
-use Zend\Mvc\Router\Http\Literal;
-use Zend\Mvc\Router\Http\Segment;
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 
 return array(
     'router' => array(
@@ -494,17 +502,19 @@ return array(
         ),
     ),
     'controllers' => array(
+        'factories' => [
+            AddressController::class => AddressControllerFactory::class,
+            ExportController::class => ExportControllerFactory::class,
+            MeetingController::class => MeetingControllerFactory::class,
+            MemberController::class => MemberControllerFactory::class,
+            OrganController::class => OrganControllerFactory::class,
+            ProspectiveMemberController::class => ProspectiveMemberControllerFactory::class,
+            QueryController::class => QueryControllerFactory::class,
+            SettingsController::class => SettingsControllerFactory::class,
+        ],
         'invokables' => array(
-            MeetingController::class => MeetingController::class,
-            ProspectiveMemberController::class => ProspectiveMemberController::class,
-            MemberController::class => MemberController::class,
-            OrganController::class => OrganController::class,
-            ExportController::class => ExportController::class,
-            QueryController::class => QueryController::class,
-            SettingsController::class => SettingsController::class,
-            AddressController::class => AddressController::class,
             IndexController::class => IndexController::class,
-        )
+        ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(

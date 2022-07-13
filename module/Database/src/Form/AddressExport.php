@@ -3,7 +3,6 @@
 namespace Database\Form;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 class AddressExport extends Form implements InputFilterProviderInterface
@@ -32,7 +31,7 @@ class AddressExport extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [];
     }

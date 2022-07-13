@@ -1,7 +1,7 @@
 <?php
 
 use Application\Controller\IndexController;
-use Zend\Mvc\Router\Http\Segment;
+use Zend\Router\Http\Segment;
 
 return array(
     'router' => array(
@@ -23,10 +23,6 @@ return array(
         ),
     ),
     'service_manager' => array(
-        'abstract_factories' => array(
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
-        ),
         'aliases' => array(
             'translator' => 'MvcTranslator'
         )

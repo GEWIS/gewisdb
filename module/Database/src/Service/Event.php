@@ -2,34 +2,51 @@
 
 namespace Database\Service;
 
-use Application\Service\AbstractService;
-use Zend\EventManager\StaticEventManager;
+use Database\Mapper\Event as EventMapper;
+use Zend\EventManager\SharedEventManager;
 use Zend\EventManager\Event as EmEvent;
 use Database\Model\Event as EventModel;
 
-class Event extends AbstractService
+/**
+ * TODO: Does not work.
+ */
+class Event
 {
+    /** @var EventMapper $eventMapper */
+    private $eventMapper;
+
+    /** @var array $services */
+    private $services;
+
     /**
-     * Services that are to be logged.
+     * @param EventMapper $eventMapper
+     * @param array $services
      */
-    protected $services = array(
-        'Database\Service\Member',
-        'Database\Service\Meeting'
-    );
+    public function __construct(
+        EventMapper $eventMapper,
+        array $services
+    ) {
+        $this->eventMapper = $eventMapper;
+        $this->services = $services;
+    }
 
     /**
      * Register the logging event.
      */
     public function register()
     {
-        $em = StaticEventManager::getInstance();
-        $em->attach($this->services, '*', array($this, 'log'));
+        // TODO: This shared event manager should actually be shared.
+        $em = new SharedEventManager();
+
+        foreach ($this->services as $service) {
+            $em->attach($service, '*', array($this, 'log'));
+        }
     }
 
     /**
      * Log an event.
      *
-     * @param Event $e EmEvent to be logged.
+     * @param EmEvent $e EmEvent to be logged.
      */
     public function log(EmEvent $e)
     {
@@ -39,16 +56,6 @@ class Event extends AbstractService
         $event->setContext(get_class($e->getTarget()));
         $event->setParameters(serialize($e->getParams()));
 
-        $this->getEventMapper()->persist($event);
-    }
-
-    /**
-     * Get the event mapper.
-     *
-     * @return Database\Mapper\Event
-     */
-    public function getEventMapper()
-    {
-        return $this->getServiceManager()->get('database_mapper_event');
+        $this->eventMapper->persist($event);
     }
 }

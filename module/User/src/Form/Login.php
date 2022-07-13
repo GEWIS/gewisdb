@@ -4,6 +4,8 @@ namespace User\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Regex;
+use Zend\Validator\StringLength;
 
 class Login extends Form implements InputFilterProviderInterface
 {
@@ -39,21 +41,21 @@ class Login extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [
             'login' => [
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => [
                             'min' => 3,
                             'max' => 32
                         ]
                     ],
                     [
-                        'name' => 'regex',
+                        'name' => Regex::class,
                         'options' => [
                             'pattern' => '/^[a-zA-Z0-9]*$/'
                         ]

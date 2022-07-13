@@ -2,95 +2,78 @@
 
 namespace Report\Controller;
 
+use Report\Service\Board as BoardService;
+use Report\Service\Meeting as MeetingService;
+use Report\Service\Member as MemberService;
+use Report\Service\Misc as MiscService;
+use Report\Service\Organ as OrganService;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class ReportController extends AbstractActionController
 {
+    /** @var BoardService $boardService */
+    private $boardService;
+
+    /** @var MeetingService $meetingService */
+    private $meetingService;
+
+    /** @var MemberService $memberService */
+    private $memberService;
+
+    /** @var MiscService $miscService */
+    private $miscService;
+
+    /** @var OrganService $organService */
+    private $organService;
+
+    /**
+     * @param BoardService $boardService
+     * @param MeetingService $meetingService
+     * @param MemberService $memberService
+     * @param MiscService $miscService
+     * @param OrganService $organService
+     */
+    public function __construct(
+        BoardService $boardService,
+        MeetingService $meetingService,
+        MemberService $memberService,
+        MiscService $miscService,
+        OrganService $organService
+    ) {
+        $this->boardService = $boardService;
+        $this->meetingService = $meetingService;
+        $this->memberService = $memberService;
+        $this->miscService = $miscService;
+        $this->organService = $organService;
+    }
+
     /**
      * Generate reporting database.
      */
     public function generateAction()
     {
         echo "generating misc tables\n";
-        $this->getMiscService()->generate();
+        $this->miscService->generate();
 
         echo "generating board tables\n";
-        $this->getBoardService()->generate();
+        $this->boardService->generate();
     }
 
     public function generateAllAction()
     {
         echo "generating mailing list tables\n";
-        $this->getMiscService()->generate();
+        $this->miscService->generate();
 
         echo "generating members table\n";
-        $this->getMemberService()->generate();
+        $this->memberService->generate();
 
         echo "generating meetings and decision tables\n";
-        $this->getMeetingService()->generate();
+        $this->meetingService->generate();
 
         echo "generating organ tables\n";
-        $this->getOrganService()->generate();
+        $this->organService->generate();
 
         echo "generating board tables\n";
-        $this->getBoardService()->generate();
-    }
-
-    /**
-     * Get the member service.
-     *
-     * @return Report\Service\Member
-     */
-    public function getMemberService()
-    {
-        return $this->getServiceLocator()->get('report_service_member');
-    }
-
-    /**
-     * Get the meeting service.
-     *
-     * @return Report\Service\Meeting
-     */
-    public function getMeetingService()
-    {
-        return $this->getServiceLocator()->get('report_service_meeting');
-    }
-
-    /**
-     * Get the organ service.
-     *
-     * @return Report\Service\Organ
-     */
-    public function getOrganService()
-    {
-        return $this->getServiceLocator()->get('report_service_organ');
-    }
-
-    /**
-     * Get the board service.
-     *
-     * @return Report\Service\Board
-     */
-    public function getBoardService()
-    {
-        return $this->getServiceLocator()->get('report_service_board');
-    }
-
-    /**
-     * Get the misc service.
-     *
-     * @return Report\Service\Misc
-     */
-    public function getMiscService()
-    {
-        return $this->getServiceLocator()->get('report_service_misc');
-    }
-
-    /**
-     * Get the console object.
-     */
-    protected function getConsole()
-    {
-        return $this->getServiceLocator()->get('console');
+        $this->boardService->generate();
     }
 }

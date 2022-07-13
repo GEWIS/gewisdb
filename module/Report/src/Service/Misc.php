@@ -2,32 +2,45 @@
 
 namespace Report\Service;
 
-use Application\Service\AbstractService;
+use Database\Mapper\MailingList as MailingListMapper;
+use Doctrine\ORM\EntityManager;
 use Report\Model\MailingList as ReportList;
 
-class Misc extends AbstractService
+class Misc
 {
+    /** @var MailingListMapper $mailingListMapper */
+    private $mailingListMapper;
+
+    /** @var EntityManager $emReport */
+    private $emReport;
+
+    /**
+     * @param MailingListMapper $mailingListMapper
+     * @param EntityManager $emReport
+     */
+    public function __construct(
+        MailingListMapper $mailingListMapper,
+        EntityManager $emReport
+    ) {
+        $this->mailingListMapper = $mailingListMapper;
+        $this->emReport = $emReport;
+    }
+
     /**
      * Export misc info.
      */
     public function generate()
     {
-        // mailing lists
-        $listMapper = $this->getServiceManager()->get('database_mapper_mailinglist');
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-
-        foreach ($listMapper->findAll() as $list) {
+        foreach ($this->mailingListMapper->findAll() as $list) {
             $this->generateList($list);
         }
 
-        $em->flush();
+        $this->emReport->flush();
     }
 
     public function generateList($list)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\MailingList');
-        $memberRepo = $em->getRepository('Report\Model\Member');
+        $repo = $this->emReport->getRepository('Report\Model\MailingList');
         $reportList = $repo->find($list->getName());
 
         if (null === $reportList) {
@@ -40,13 +53,6 @@ class Misc extends AbstractService
         $reportList->setOnForm($list->getOnForm());
         $reportList->setDefaultSub($list->getDefaultSub());
 
-        $em->persist($reportList);
-    }
-    /**
-     * Get the console object.
-     */
-    public function getConsole()
-    {
-        return $this->getServiceManager()->get('console');
+        $this->emReport->persist($reportList);
     }
 }

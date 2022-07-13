@@ -2,10 +2,9 @@
 
 namespace Export\Service;
 
-use Application\Service\AbstractService;
 use Database\Model\SubDecision\Foundation;
 
-class Organ extends AbstractService
+class Organ
 {
     /**
      * Export organs.
@@ -57,7 +56,7 @@ class Organ extends AbstractService
      */
     public function getOrganMapper()
     {
-        return $this->getServiceManager()->get('database_mapper_organ');
+        return $this->getServiceManager()->get(OrganMapper::class);
     }
 
     /**

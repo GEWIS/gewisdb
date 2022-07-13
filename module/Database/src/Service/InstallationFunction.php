@@ -2,17 +2,36 @@
 
 namespace Database\Service;
 
-use Application\Service\AbstractService;
+use Database\Form\InstallationFunction as InstallationFunctionForm;
+use Database\Mapper\InstallationFunction as InstallationFunctionMapper;
 use Database\Model\InstallationFunction as FunctionModel;
 
-class InstallationFunction extends AbstractService
+class InstallationFunction
 {
+    /** @var InstallationFunctionForm $installationFunctionForm */
+    private $installationFunctionForm;
+
+    /** @var InstallationFunctionMapper $installationFunctionMapper */
+    private $installationFunctionMapper;
+
+    /**
+     * @param InstallationFunctionForm $installationFunctionForm
+     * @param InstallationFunctionMapper $installationFunctionMapper
+     */
+    public function __construct(
+        InstallationFunctionForm $installationFunctionForm,
+        InstallationFunctionMapper $installationFunctionMapper
+    ) {
+        $this->installationFunctionForm = $installationFunctionForm;
+        $this->installationFunctionMapper = $installationFunctionMapper;
+    }
+
     /**
      * Get all functions.
      *
      * @return array of InstallationFunction's
      */
-    public function getAllFunctions()
+    public function getAllFunctions(): array
     {
         return $this->getFunctionMapper()->findAll();
     }
@@ -24,7 +43,7 @@ class InstallationFunction extends AbstractService
      *
      * @return boolean if succeeded
      */
-    public function addFunction($data)
+    public function addFunction($data): bool
     {
         $form = $this->getFunctionForm();
 
@@ -37,9 +56,11 @@ class InstallationFunction extends AbstractService
 
         $function = $form->getData();
 
-        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('function' => $function));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('function' => $function));
         $this->getFunctionMapper()->persist($function);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('function' => $function));
+        // TODO: Fix global event listener.
+        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('function' => $function));
 
         return true;
     }
@@ -47,20 +68,20 @@ class InstallationFunction extends AbstractService
     /**
      * Get the function form.
      *
-     * @return \Database\Form\InstallationFunction
+     * @return InstallationFunctionForm
      */
-    public function getFunctionForm()
+    public function getFunctionForm(): InstallationFunctionForm
     {
-        return $this->getServiceManager()->get('database_form_installationfunction');
+        return $this->installationFunctionForm;
     }
 
     /**
      * Get the installation function mapper.
      *
-     * @return \Database\Mapper\InstallationFunction
+     * @return InstallationFunctionMapper
      */
-    public function getFunctionMapper()
+    public function getFunctionMapper(): InstallationFunctionMapper
     {
-        return $this->getServiceManager()->get('database_mapper_installationfunction');
+        return $this->installationFunctionMapper;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Database\Form;
 
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
 
-class Abolish extends AbstractDecision
+class Abolish extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
         Fieldset\Meeting $meeting,
@@ -29,14 +29,10 @@ class Abolish extends AbstractDecision
         ));
 
         $this->add($subdecision);
-
-        $this->initFilters();
     }
 
-    protected function initFilters()
+    public function getInputFilterSpecification(): array
     {
-        $filter = new InputFilter();
-
-        $this->setInputFilter($filter);
+        return [];
     }
 }

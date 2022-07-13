@@ -6,6 +6,8 @@ use Database\Model\SubDecision as SubDecisionModel;
 use Database\Model\Meeting as MeetingModel;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Digits;
+use Zend\Validator\InArray;
 
 class SubDecision extends Fieldset implements InputFilterProviderInterface
 {
@@ -42,14 +44,14 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
     /**
      * Specification for input filters.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'meeting_type' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'in_array',
+                        'name' => InArray::class,
                         'options' => array(
                             'haystack' => MeetingModel::getTypes()
                         )
@@ -59,25 +61,25 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
             'meeting_number' => array(
                 'required' => true,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array('name' => Digits::class)
                 )
             ),
             'decision_point' => array(
                 'required' => true,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array('name' => Digits::class)
                 )
             ),
             'decision_number' => array(
                 'required' => true,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array('name' => Digits::class)
                 )
             ),
             'number' => array(
                 'required' => true,
                 'validators' => array(
-                    array('name' => 'digits')
+                    array('name' => Digits::class)
                 )
             ),
         );

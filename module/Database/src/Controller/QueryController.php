@@ -2,34 +2,44 @@
 
 namespace Database\Controller;
 
+use Database\Service\Query as QueryService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class QueryController extends AbstractActionController
 {
+    /** @var QueryService $queryService */
+    private $queryService;
+
+    /**
+     * @param QueryService $queryService
+     */
+    public function __construct(QueryService $queryService)
+    {
+        $this->queryService = $queryService;
+    }
+
     /**
      * Index action.
      */
     public function indexAction()
     {
-        $service = $this->getQueryService();
-
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
 
             if (isset($post['submit_save'])) {
-                $query = $service->save($post);
+                $query = $this->queryService->save($post);
             }
 
-            $result = $service->execute($post);
+            $result = $this->queryService->execute($post);
 
             if (!is_null($result) && count($result) > 0) {
                 return new ViewModel(array(
-                    'form' => $service->getQueryForm(),
-                    'exportform' => $service->getQueryExportForm(),
+                    'form' => $this->queryService->getQueryForm(),
+                    'exportform' => $this->queryService->getQueryExportForm(),
                     'result' => $result,
-                    'saved' => $service->getSavedQueries(),
-                    'entities' => $service->getEntities()
+                    'saved' => $this->queryService->getSavedQueries(),
+                    'entities' => $this->queryService->getEntities()
                 ));
             } elseif (isset($query)) {
                 return $this->redirect()->toRoute('query/show', array(
@@ -39,9 +49,9 @@ class QueryController extends AbstractActionController
         }
 
         return new ViewModel(array(
-            'form' => $service->getQueryForm(),
-            'saved' => $service->getSavedQueries(),
-            'entities' => $service->getEntities()
+            'form' => $this->queryService->getQueryForm(),
+            'saved' => $this->queryService->getSavedQueries(),
+            'entities' => $this->queryService->getEntities()
         ));
     }
 
@@ -50,14 +60,12 @@ class QueryController extends AbstractActionController
      */
     public function showAction()
     {
-        $service = $this->getQueryService();
-
         $viewmodel = new Viewmodel(array(
-            'form' => $service->getQueryForm(),
-            'saved' => $service->getSavedQueries(),
-            'exportform' => $service->getQueryExportForm(),
-            'result' => $service->executeSaved($this->params()->fromRoute('query')),
-            'entities' => $service->getEntities()
+            'form' => $this->queryService->getQueryForm(),
+            'saved' => $this->queryService->getSavedQueries(),
+            'exportform' => $this->queryService->getQueryExportForm(),
+            'result' => $this->queryService->executeSaved($this->params()->fromRoute('query')),
+            'entities' => $this->queryService->getEntities()
         ));
 
         $viewmodel->setTemplate('database/query/index');
@@ -70,10 +78,8 @@ class QueryController extends AbstractActionController
      */
     public function exportAction()
     {
-        $service = $this->getQueryService();
-
         if ($this->getRequest()->isPost()) {
-            $result = $service->execute($this->getRequest()->getPost(), true);
+            $result = $this->queryService->execute($this->getRequest()->getPost(), true);
 
             if (null !== $result) {
                 $vm = new ViewModel(array(
@@ -87,15 +93,5 @@ class QueryController extends AbstractActionController
             }
         }
         return $this->redirect()->toRoute('query');
-    }
-
-    /**
-     * Get the query service.
-     *
-     * @return \Database\Service\Query
-     */
-    public function getQueryService()
-    {
-        return $this->getServiceLocator()->get('database_service_query');
     }
 }

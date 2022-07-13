@@ -2,24 +2,33 @@
 
 namespace Report\Service;
 
-use Application\Service\AbstractService;
+use Doctrine\ORM\EntityManager;
 use Report\Model\Organ as ReportOrgan;
 use Report\Model\OrganMember;
-use Report\Model\SubDecision;
 use Report\Model\SubDecision\Abrogation;
 use Report\Model\SubDecision\Installation;
 use Zend\ProgressBar\Adapter\Console;
 use Zend\ProgressBar\ProgressBar;
 
-class Organ extends AbstractService
+class Organ
 {
+    /** @var EntityManager $emReport */
+    private $emReport;
+
+    /**
+     * @param EntityManager $emReport
+     */
+    public function __construct(EntityManager $emReport)
+    {
+        $this->emReport = $emReport;
+    }
+
     /**
      * Export organ info.
      */
     public function generate()
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $foundationRepo = $em->getRepository('Report\Model\SubDecision\Foundation');
+        $foundationRepo = $this->emReport->getRepository('Report\Model\SubDecision\Foundation');
 
         $foundations = $foundationRepo->findBy([], [
             'meeting_type' => 'DESC',
@@ -62,18 +71,17 @@ class Organ extends AbstractService
                 }
             }
 
-            $em->persist($repOrgan);
-            $em->flush();
+            $this->emReport->persist($repOrgan);
+            $this->emReport->flush();
             $progress->update(++$num);
         }
 
-        $em->flush();
+        $this->emReport->flush();
         $progress->finish();
     }
 
     public function generateFoundation($foundation)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         // see if there already is an organ
         $repOrgan = $foundation->getOrgan();
 
@@ -86,8 +94,8 @@ class Organ extends AbstractService
         $repOrgan->setName($foundation->getName());
         $repOrgan->setType($foundation->getOrganType());
         $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
-        $em->persist($repOrgan);
-        $em->flush();
+        $this->emReport->persist($repOrgan);
+        $this->emReport->flush();
 
         return $repOrgan;
     }
@@ -98,8 +106,7 @@ class Organ extends AbstractService
 
         if ($repOrgan === null) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
-            $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-            $repo = $em->getRepository('Report\Model\Organ');
+            $repo = $this->emReport->getRepository('Report\Model\Organ');
             $repOrgan = $repo->findOneBy([
                 'foundation' => $ref->getFoundation()
             ]);
@@ -114,8 +121,7 @@ class Organ extends AbstractService
 
     public function generateInstallation($ref)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\Organ');
+        $repo = $this->emReport->getRepository('Report\Model\Organ');
         // get full reference
         $organMember = $ref->getOrganMember();
         $repOrgan = $ref->getFoundation()->getOrgan();
@@ -160,12 +166,11 @@ class Organ extends AbstractService
             $organMember->setDischargeDate($repOrgan->getAbrogationDate());
         }
 
-        $em->persist($organMember);
+        $this->emReport->persist($organMember);
     }
 
     public function generateDischarge($ref)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
         $organMember = $ref->getInstallation()->getOrganMember();
 
         if ($organMember === null) {
@@ -173,6 +178,6 @@ class Organ extends AbstractService
         }
 
         $organMember->setDischargeDate($ref->getDecision()->getMeeting()->getDate());
-        $em->persist($organMember);
+        $this->emReport->persist($organMember);
     }
 }

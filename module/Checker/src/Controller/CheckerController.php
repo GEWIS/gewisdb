@@ -7,27 +7,32 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class CheckerController extends AbstractActionController
 {
+    /** @var CheckerService $checkerService */
+    private $checkerService;
+
+    /**
+     * @param CheckerService $checkerService
+     */
+    public function __construct(CheckerService $checkerService)
+    {
+        $this->checkerService = $checkerService;
+    }
+
     /**
      * Index action.
      */
     public function indexAction()
     {
-        /** @var CheckerService $service */
-        $service = $this->getServiceLocator()->get('checker_service_checker');
-        $service->check();
+        $this->checkerService->check();
     }
 
     public function checkMembershipsAction()
     {
-        /** @var CheckerService $service */
-        $service = $this->getServiceLocator()->get('checker_service_checker');
-        $service->checkMemberships();
+        $this->checkerService->checkMemberships();
     }
 
     public function checkDischargesAction()
     {
-        /** @var CheckerService $service */
-        $service = $this->getServiceLocator()->get('checker_service_checker');
-        $service->checkDischarges();
+        $this->checkerService->checkDischarges();
     }
 }

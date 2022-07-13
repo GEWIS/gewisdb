@@ -3,9 +3,13 @@
 namespace Database\Form\Fieldset;
 
 use Database\Model\Address as AddressModel;
+use Zend\Filter\StringToLower;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\I18n\Translator\TranslatorInterface as Translator;
+use Zend\Validator\InArray;
+use Zend\Validator\Regex;
+use Zend\Validator\StringLength;
 
 class Address extends Fieldset implements InputFilterProviderInterface
 {
@@ -73,14 +77,14 @@ class Address extends Fieldset implements InputFilterProviderInterface
     /**
      * Specification for input filters.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'type' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'in_array',
+                        'name' => InArray::class,
                         'options' => array(
                             'haystack' => AddressModel::getTypes()
                         )
@@ -90,11 +94,11 @@ class Address extends Fieldset implements InputFilterProviderInterface
             'country' => array(
                 'required' => true,
                 'filters' => array(
-                    array('name' => 'string_to_lower')
+                    array('name' => StringToLower::class)
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 32
@@ -106,7 +110,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 1,
                             'max' => 32
@@ -118,7 +122,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'regex',
+                        'name' => Regex::class,
                         'options' => array(
                             'pattern' => '/^[0-9]+[a-zA-Z]*/'
                         )
@@ -129,7 +133,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2,
                             'max' => 16
@@ -141,7 +145,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 1,
                             'max' => 32

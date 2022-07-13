@@ -5,6 +5,7 @@ namespace Database\Form\Fieldset;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\StringLength;
 
 class Installation extends Fieldset implements InputFilterProviderInterface
 {
@@ -21,14 +22,14 @@ class Installation extends Fieldset implements InputFilterProviderInterface
         ));
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return array(
             'function' => array(
                 'required' => true,
                 'validators' => array(
                     array(
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => array(
                             'min' => 2
                         )

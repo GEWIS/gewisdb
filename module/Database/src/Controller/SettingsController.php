@@ -3,11 +3,27 @@
 namespace Database\Controller;
 
 use Database\Model\Member;
+use Database\Service\InstallationFunction as InstallationFunctionService;
+use Database\Service\MailingList as MailingListService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class SettingsController extends AbstractActionController
 {
+    /** @var InstallationFunctionService $installationFunctionService */
+    private $installationFunctionService;
+
+    /** @var MailingListService $mailingListService */
+    private $mailingListService;
+
+    public function __construct(
+        InstallationFunctionService $installationFunctionService,
+        MailingListService $mailingListService
+    ) {
+        $this->installationFunctionService = $installationFunctionService;
+        $this->mailingListService = $mailingListService;
+    }
+
     /**
      * Index action.
      */
@@ -22,12 +38,12 @@ class SettingsController extends AbstractActionController
     public function functionAction()
     {
         if ($this->getRequest()->isPost()) {
-            $this->getFunctionService()->addFunction($this->getRequest()->getPost());
+            $this->installationFunctionService->addFunction($this->getRequest()->getPost());
         }
 
         return new ViewModel(array(
-            'functions' => $this->getFunctionService()->getAllFunctions(),
-            'form' => $this->getFunctionService()->getFunctionForm()
+            'functions' => $this->installationFunctionService->getAllFunctions(),
+            'form' => $this->installationFunctionService->getFunctionForm()
         ));
     }
 
@@ -37,12 +53,12 @@ class SettingsController extends AbstractActionController
     public function listAction()
     {
         if ($this->getRequest()->isPost()) {
-            $this->getListService()->addList($this->getRequest()->getPost());
+            $this->mailingListService->addList($this->getRequest()->getPost());
         }
 
         return new ViewModel(array(
-            'lists' => $this->getListService()->getAllLists(),
-            'form' => $this->getListService()->getListForm()
+            'lists' => $this->mailingListService->getAllLists(),
+            'form' => $this->mailingListService->getListForm()
         ));
     }
 
@@ -51,11 +67,10 @@ class SettingsController extends AbstractActionController
      */
     public function deleteListAction()
     {
-        $service = $this->getListService();
         $name = $this->params()->fromRoute('name');
 
         if ($this->getRequest()->isPost()) {
-            if ($service->delete($name, $this->getRequest()->getPost())) {
+            if ($this->mailingListService->delete($name, $this->getRequest()->getPost())) {
                 return new ViewModel(array(
                     'success' => true,
                     'name' => $name
@@ -68,28 +83,8 @@ class SettingsController extends AbstractActionController
             }
         }
         return new ViewModel(array(
-            'form' => $this->getListService()->getDeleteListForm(),
+            'form' => $this->mailingListService->getDeleteListForm(),
             'name' => $name
         ));
-    }
-
-    /**
-     * Get the list service.
-     *
-     * @return \Database\Service\MailingList
-     */
-    public function getListService()
-    {
-        return $this->getServiceLocator()->get('database_service_mailinglist');
-    }
-
-    /**
-     * Get the function service.
-     *
-     * @return \Database\Service\Function
-     */
-    public function getFunctionService()
-    {
-        return $this->getServiceLocator()->get('database_service_installationfunction');
     }
 }

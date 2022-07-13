@@ -4,9 +4,13 @@ namespace Database\Form;
 
 use Database\Model\Meeting;
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Date;
+use Zend\Validator\Digits;
+use Zend\Validator\InArray;
+use Zend\Validator\LessThan;
 
-class CreateMeeting extends Form
+class CreateMeeting extends Form implements InputFilterProviderInterface
 {
     public function __construct()
     {
@@ -49,57 +53,40 @@ class CreateMeeting extends Form
                 'value' => 'Verzend'
             )
         ));
-
-        $this->initFilters();
     }
 
-    protected function initFilters()
+    public function getInputFilterSpecification(): array
     {
-        $filter = new InputFilter();
-
-        $filter->add(array(
-            'name' => 'type',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'in_array',
-                    'options' => array(
-                        'haystack' => Meeting::getTypes()
+        return [
+            'type' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => InArray::class,
+                        'options' => array(
+                            'haystack' => Meeting::getTypes()
+                        )
                     )
                 )
-            )
-        ));
-
-        $filter->add(array(
-            'name' => 'number',
-            'required' => true,
-            'validators' => array(
-                array('name' => 'digits'),
-                array(
-                    'name' => 'LessThan',
-                    'options' => array(
-                        'max' => 100000
+            ),
+            'number' => array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => Digits::class),
+                    array(
+                        'name' => LessThan::class,
+                        'options' => array(
+                            'max' => 100000
+                        )
                     )
                 )
-            )
-        ));
-
-        $filter->add(array(
-            'name' => 'number',
-            'required' => true,
-            'validators' => array(
-                array('name' => 'digits')
-            )
-        ));
-
-        $filter->add(array(
-            'name' => 'date',
-            'required' => true,
-            'validators' => array(
-                array('name' => 'date')
-            )
-        ));
-
-        $this->setInputFilter($filter);
+            ),
+            'date' => array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => Date::class)
+                )
+            ),
+        ];
     }
 }

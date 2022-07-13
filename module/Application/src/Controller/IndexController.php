@@ -3,7 +3,6 @@
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 use Zend\Session\Container as SessionContainer;
 
 class IndexController extends AbstractActionController

@@ -2,26 +2,35 @@
 
 namespace Report\Service;
 
-use Application\Service\AbstractService;
-use Report\Model\SubDecision\Board\Installation;
-use Report\Model\BoardMember;
+use Doctrine\ORM\EntityManager;
+use Report\Model\BoardMember as BoardMemberModel;
 
-class Board extends AbstractService
+class Board
 {
+    /** @var EntityManager $emReport */
+    private $emReport;
+
+    /**
+     * @param EntityManager $emReport
+     */
+    public function __construct(EntityManager $emReport)
+    {
+        $this->emReport = $emReport;
+    }
+
     /**
      * Export board info.
      */
     public function generate()
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\SubDecision\Board\Installation');
+        $repo = $this->emReport->getRepository('Report\Model\SubDecision\Board\Installation');
 
         $installs = $repo->findAll();
         foreach ($installs as $install) {
             $boardMember = $install->getBoardMember();
 
             if (null === $boardMember) {
-                $boardMember = new BoardMember();
+                $boardMember = new BoardMemberModel();
                 $boardMember->setInstallationDec($install);
             }
 
@@ -40,17 +49,9 @@ class Board extends AbstractService
                 $boardMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
             }
 
-            $em->persist($boardMember);
+            $this->emReport->persist($boardMember);
         }
 
-        $em->flush();
-    }
-
-    /**
-     * Get the console object.
-     */
-    public function getConsole()
-    {
-        return $this->getServiceManager()->get('console');
+        $this->emReport->flush();
     }
 }

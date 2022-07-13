@@ -2,6 +2,10 @@
 
 namespace Import;
 
+use DoctrineORMModule\Service\DBALConnectionFactory;
+use Import\Database\Query;
+use Interop\Container\ContainerInterface;
+
 class Module
 {
     /**
@@ -11,7 +15,7 @@ class Module
      */
     public function getConfig(): array
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__ . '/../config/module.config.php';
     }
 
     /**
@@ -19,7 +23,7 @@ class Module
      *
      * @return array Service configuration
      */
-    public function getServiceConfig()
+    public function getServiceConfig(): array
     {
         return array(
             'invokables' => array(
@@ -27,10 +31,10 @@ class Module
                 'import_service_member' => 'Import\Service\Member'
             ),
             'factories' => array(
-                'doctrine.connection.orm_import' => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_import'),
-                'import_database_query' => function ($sm) {
-                    $queries = new \Import\Database\Query();
-                    $queries->setConnection($sm->get('doctrine.connection.orm_import'));
+                'doctrine.connection.orm_import' => new DBALConnectionFactory('orm_import'),
+                'import_database_query' => function (ContainerInterface $container) {
+                    $queries = new Query();
+                    $queries->setConnection($container->get('doctrine.connection.orm_import'));
                     return $queries;
                 }
             )

@@ -2,7 +2,7 @@
 
 namespace Checker\Service;
 
-use Application\Service\AbstractService;
+use Application\Service\EventAwareService;
 use Checker\Model\Error;
 use Checker\Service\Installation as InstallationService;
 use Checker\Service\Meeting as MeetingService;
@@ -18,16 +18,55 @@ use Zend\Http\Request;
 use Zend\Json\Json;
 use Zend\Mail\Message;
 
-class Checker extends AbstractService
+class Checker
 {
+    /** @var InstallationService $installationService */
+    private $installationService;
+
+    /** @var MeetingService $meetingService */
+    private $meetingService;
+
+    /** @var MemberService $memberService */
+    private $memberService;
+
+    /** @var OrganService $organService */
+    private $organService;
+
+    private $mailTransport;
+
+    /** @var array $config */
+    private $config;
+
+    /**
+     * @param Installation $installationService
+     * @param Meeting $meetingService
+     * @param Member $memberService
+     * @param Organ $organService
+     * @param $mailTransport
+     * @param array $config
+     */
+    public function __construct(
+        InstallationService $installationService,
+        MeetingService $meetingService,
+        MemberService $memberService,
+        OrganService $organService,
+        $mailTransport,
+        array $config
+    ) {
+        $this->installationService = $installationService;
+        $this->meetingService = $meetingService;
+        $this->memberService = $memberService;
+        $this->organService = $organService;
+        $this->mailTransport = $mailTransport;
+        $this->config = $config;
+    }
+
     /**
      * Does a full check on each meeting, checking that after each meeting no database violation occur
      */
     public function check()
     {
-        /** @var MeetingService $meetingService */
-        $meetingService = $this->getServiceManager()->get('checker_service_meeting');
-        $meetings = $meetingService->getAllMeetings();
+        $meetings = $this->meetingService->getAllMeetings();
 
         $message = '';
         foreach ($meetings as $meeting) {
@@ -50,9 +89,7 @@ class Checker extends AbstractService
      */
     public function checkDischarges()
     {
-        /** @var MeetingService $meetingService */
-        $meetingService = $this->getServiceManager()->get('checker_service_meeting');
-        $meeting = $meetingService->getLastMeeting();
+        $meeting = $this->meetingService->getLastMeeting();
 
         $message = $this->handleMeetingErrors($meeting, $this->checkMembersInNonExistingOrgans($meeting));
 
@@ -64,9 +101,13 @@ class Checker extends AbstractService
      *
      * @param MeetingModel $meeting Meeting for which this errors hold
      * @param array $errors
+     *
+     * @return string
      */
-    private function handleMeetingErrors(MeetingModel $meeting, array $errors)
-    {
+    private function handleMeetingErrors(
+        MeetingModel $meeting,
+        array $errors
+    ): string {
         // At this moment only write to output.
         $body =  'Errors after meeting ' . $meeting->getNumber() . ' hold at '
             . $meeting->getDate()->format('Y-m-d') . "\n";
@@ -87,14 +128,12 @@ class Checker extends AbstractService
      */
     private function sendMail($body)
     {
-        $config = $this->getServiceManager()->get('config');
         $message = new Message();
-        $message->addTo($config['checker']['report_mail'])
+        $message->addTo($this->config['checker']['report_mail'])
             ->setSubject('Database Checker Report')
             ->setBody($body);
 
-        $transport = $this->getServiceManager()->get('checker_mail_transport');
-        $transport->send($message);
+        $this->mailTransport->send($message);
     }
 
     /**
@@ -104,21 +143,17 @@ class Checker extends AbstractService
      * is nulled
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
+     *
      * @return array Array of errors that may have occurred.
      */
-    public function checkMembersInNonExistingOrgans(MeetingModel $meeting)
+    public function checkMembersInNonExistingOrgans(MeetingModel $meeting): array
     {
         $errors = [];
-        /** @var OrganService $organService */
-        $organService = $this->getServiceManager()->get('checker_service_organ');
-        /** @var InstallationService $installationService */
-        $installationService = $this->getServiceManager()->get('checker_service_installation');
-
-        $organs = $organService->getAllOrgans($meeting);
-        $installations = $installationService->getAllInstallations($meeting);
+        $organs = $this->organService->getAllOrgans($meeting);
+        $installations = $this->installationService->getAllInstallations($meeting);
 
         foreach ($installations as $installation) {
-            $installationToOrganFoundation = $organService->getHash($installation->getFoundation());
+            $installationToOrganFoundation = $this->organService->getHash($installation->getFoundation());
 
             if (!in_array($installationToOrganFoundation, $organs, true)) {
                 $errors[] = new Error\MemberInNonExistingOrgan($meeting, $installation);
@@ -132,14 +167,13 @@ class Checker extends AbstractService
      * Checks if there are members that have expired, but are still in an oran
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
+     *
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersExpiredButStillInOrgan(MeetingModel $meeting)
+    public function checkMembersExpiredButStillInOrgan(MeetingModel $meeting): array
     {
         $errors = [];
-        /** @var InstallationService $installationService */
-        $installationService = $this->getServiceManager()->get('checker_service_installation');
-        $installations = $installationService->getAllInstallations($meeting);
+        $installations = $this->installationService->getAllInstallations($meeting);
 
         foreach ($installations as $installation) {
             // Check if the members are still member of GEWIS
@@ -159,14 +193,13 @@ class Checker extends AbstractService
      * but they are not a member of the organ anymore
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
+     *
      * @return array Array of errors that may have occured.
      */
-    public function checkMembersHaveRoleButNotInOrgan(MeetingModel $meeting)
+    public function checkMembersHaveRoleButNotInOrgan(MeetingModel $meeting): array
     {
         $errors = [];
-        /** @var InstallationService $installationService */
-        $installationService = $this->getServiceManager()->get('checker_service_installation');
-        $membersArray = $installationService->getCurrentRolesPerOrgan($meeting);
+        $membersArray = $this->installationService->getCurrentRolesPerOrgan($meeting);
 
         foreach ($membersArray as $organsMembers) {
             foreach ($organsMembers as $memberRoles) {
@@ -185,14 +218,13 @@ class Checker extends AbstractService
      * e.g. AVCommissies are only created at an AV
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
+     *
      * @return array Array of errors that may have occured.
      */
-    public function checkOrganMeetingType(MeetingModel $meeting)
+    public function checkOrganMeetingType(MeetingModel $meeting): array
     {
         $errors = [];
-        /** @var OrganService $organService */
-        $organService = $this->getServiceManager()->get('checker_service_organ');
-        $organs = $organService->getOrgansCreatedAtMeeting($meeting);
+        $organs = $this->organService->getOrgansCreatedAtMeeting($meeting);
 
         foreach ($organs as $organ) {
             $organType = $organ->getOrganType();
@@ -218,10 +250,7 @@ class Checker extends AbstractService
      */
     public function checkMemberships()
     {
-        /** @var MemberService $memberService */
-        $memberService = $this->getServiceManager()->get('checker_service_member');
-
-        $this->checkAtTUe($memberService->getMembersToCheck());
+        $this->checkAtTUe($this->memberService->getMembersToCheck());
         $this->checkProperMembershipType();
         $this->checkNormalExpiration();
     }
@@ -235,9 +264,7 @@ class Checker extends AbstractService
      */
     private function checkAtTUe(array $members)
     {
-        /** @var MemberService $memberService */
-        $memberService = $this->getServiceManager()->get('checker_service_member');
-        $config = $this->getServiceManager()->get('config')['checker']['membership_api'];
+        $config = $this->config['checker']['membership_api'];
 
         $client = new Client();
         $client->setAdapter(Curl::class)
@@ -256,7 +283,8 @@ class Checker extends AbstractService
         // Check each member that needs to be checked.
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+            // TODO: Fix global event listener.
+            // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
             echo "Performing request for member " . $member->getLidnr() . PHP_EOL;
 
@@ -312,8 +340,9 @@ class Checker extends AbstractService
 
             echo "Request handled" . PHP_EOL;
 
-            $memberService->getMemberMapper()->persist($member);
-            $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+            $this->memberService->getMemberMapper()->persist($member);
+            // TODO: Fix global event listener.
+            // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
         }
     }
 
@@ -325,17 +354,9 @@ class Checker extends AbstractService
      */
     private function checkProperMembershipType()
     {
-        /** @var MemberService $memberService */
-        $memberService = $this->getServiceManager()->get('checker_service_member');
-        $members = $memberService->getEndingMembershipsWithNormalTypes();
-
-        /** @var MeetingService $meetingService */
-        $meetingService = $this->getServiceManager()->get('checker_service_meeting');
-        $lastMeeting = $meetingService->getLastMeeting();
-
-        /** @var InstallationService $installationService */
-        $installationService = $this->getServiceManager()->get('checker_service_installation');
-        $activeMembers = $installationService->getActiveMembers($lastMeeting);
+        $members = $this->memberService->getEndingMembershipsWithNormalTypes();
+        $lastMeeting = $this->meetingService->getLastMeeting();
+        $activeMembers = $this->installationService->getActiveMembers($lastMeeting);
 
         echo "" . count($members) . " members have an upcoming ending and expiring membership" . PHP_EOL;
         $now = (new DateTime())->setTime(0, 0);
@@ -347,7 +368,8 @@ class Checker extends AbstractService
 
             if ($member->getMembershipEndsOn() <= $now) {
                 echo "Membership has ended and expired" . PHP_EOL;
-                $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+                // TODO: Fix global event listener.
+                // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
                     echo "Currently an active member, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
@@ -378,8 +400,9 @@ class Checker extends AbstractService
                 $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
-                $memberService->getMemberMapper()->persist($member);
-                $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+                $this->memberService->getMemberMapper()->persist($member);
+                // TODO: Fix global event listener.
+                // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
             } else {
                 echo "Membership has not yet ended and expired, so changing nothing" . PHP_EOL;
             }
@@ -393,9 +416,7 @@ class Checker extends AbstractService
      */
     private function checkNormalExpiration()
     {
-        /** @var MemberService $memberService */
-        $memberService = $this->getServiceManager()->get('checker_service_member');
-        $members = $memberService->getExpiringMembershipsWithNormalTypes();
+        $members = $this->memberService->getExpiringMembershipsWithNormalTypes();
 
         echo "" . count($members) . " members have an upcoming expiring membership" . PHP_EOL;
 
@@ -409,13 +430,15 @@ class Checker extends AbstractService
 
             if ($member->getExpiration() <= $now) {
                 echo "Expired, thus extending to " . $exp->format('Y-m-d') . PHP_EOL;
-                $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
+                // TODO: Fix global event listener.
+                // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
                 $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
-                $memberService->getMemberMapper()->persist($member);
-                $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
+                $this->memberService->getMemberMapper()->persist($member);
+                // TODO: Fix global event listener.
+                // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
             } else {
                 echo "Not yet expired, so not extending" . PHP_EOL;
             }
@@ -429,7 +452,7 @@ class Checker extends AbstractService
      *
      * @return DateTime
      */
-    private function getExpiration(DateTime $now)
+    private function getExpiration(DateTime $now): DateTime
     {
         $exp = clone $now;
         $exp->setTime(0, 0);

@@ -3,6 +3,7 @@
 namespace User;
 
 use Zend\Authentication\AuthenticationService;
+use Zend\Console\Response;
 use Zend\Mvc\MvcEvent;
 use Zend\Authentication\Storage\Session as SessionStorage;
 
@@ -24,7 +25,7 @@ class Module
                 return;
             }
 
-            if ($e->getResponse() instanceof \Zend\Console\Response) {
+            if ($e->getResponse() instanceof Response) {
                 // console route, always fine
                 return;
             }
@@ -60,7 +61,7 @@ class Module
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
             // Check if not a console route, as the console has no headers.
-            if (!($e->getResponse() instanceof \Zend\Console\Response)) {
+            if (!($e->getResponse() instanceof Response)) {
                 if (!$authService->hasIdentity()) {
                     $response = $e->getResponse();
                     $response->getHeaders()->addHeaderLine('Location', '/user');
@@ -78,6 +79,6 @@ class Module
      */
     public function getConfig(): array
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__ . '/../config/module.config.php';
     }
 }

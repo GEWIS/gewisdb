@@ -33,9 +33,8 @@ class Query extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
-        return array(
-        );
+        return array();
     }
 }

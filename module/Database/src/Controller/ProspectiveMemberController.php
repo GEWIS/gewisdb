@@ -3,12 +3,24 @@
 namespace Database\Controller;
 
 use Database\Model\Member;
+use Database\Service\Member as MemberService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 
 class ProspectiveMemberController extends AbstractActionController
 {
+    /** @var MemberService $memberService */
+    private $memberService;
+
+    /**
+     * @param MemberService $memberService
+     */
+    public function __construct(MemberService $memberService)
+    {
+        $this->memberService = $memberService;
+    }
+
     /**
      * Index  action.
      */
@@ -24,9 +36,8 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function searchAction()
     {
-        $service = $this->getMemberService();
         $query = $this->params()->fromQuery('q');
-        $res = $service->searchProspective($query);
+        $res = $this->memberService->searchProspective($query);
 
         $res = array_map(function ($member) {
             return $member->toArray();
@@ -44,9 +55,7 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function showAction()
     {
-        $service = $this->getMemberService();
-
-        return new ViewModel($service->getProspectiveMember($this->params()->fromRoute('id')));
+        return new ViewModel($this->memberService->getProspectiveMember($this->params()->fromRoute('id')));
     }
 
     /**
@@ -57,9 +66,8 @@ class ProspectiveMemberController extends AbstractActionController
     public function finalizeAction()
     {
         if ($this->getRequest()->isPost()) {
-            $service = $this->getMemberService();
-            $prospectiveMember = $service->getProspectiveMember($this->params()->fromRoute('id'))['member'];
-            $result = $service->finalizeSubscription($this->getRequest()->getPost()->toArray(), $prospectiveMember);
+            $prospectiveMember = $this->memberService->getProspectiveMember($this->params()->fromRoute('id'))['member'];
+            $result = $this->memberService->finalizeSubscription($this->getRequest()->getPost()->toArray(), $prospectiveMember);
 
             if (null !== $result) {
                 return $this->redirect()->toRoute('member/show', [
@@ -80,22 +88,11 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function deleteAction()
     {
-        $service = $this->getMemberService();
         $lidnr = $this->params()->fromRoute('id');
-        $member = $service->getProspectiveMember($lidnr);
+        $member = $this->memberService->getProspectiveMember($lidnr);
         $member = $member['member'];
 
-        $service->removeProspective($member);
+        $this->memberService->removeProspective($member);
         return $this->redirect()->toRoute('prospective-member');
-    }
-
-    /**
-     * Get the member service.
-     *
-     * @return \Database\Service\Member
-     */
-    public function getMemberService()
-    {
-        return $this->getServiceLocator()->get('database_service_member');
     }
 }

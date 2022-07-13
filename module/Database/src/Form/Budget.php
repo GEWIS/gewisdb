@@ -3,9 +3,12 @@
 namespace Database\Form;
 
 use Database\Model\SubDecision;
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Date;
+use Zend\Validator\InArray;
+use Zend\Validator\StringLength;
 
-class Budget extends AbstractDecision
+class Budget extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
     {
@@ -86,85 +89,68 @@ class Budget extends AbstractDecision
                 'value' => 'Verzend'
             )
         ));
-
-        $this->initFilters();
     }
 
-    protected function initFilters()
+    public function getInputFilterSpecification(): array
     {
-        $filter = new InputFilter();
-
-        $filter->add(array(
-            'name' => 'type',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'in_array',
-                    'options' => array(
-                        'haystack' => array(
-                            'budget',
-                            'reckoning'
+        return [
+            'type' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => InArray::class,
+                        'options' => array(
+                            'haystack' => array(
+                                'budget',
+                                'reckoning'
+                            )
                         )
                     )
                 )
-            )
-        ));
-
-        $filter->add(array(
-            'name' => 'name',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'string_length',
-                    'options' => array(
-                        'min' => 3,
-                        'max' => 255
+            ),
+            'name' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => StringLength::class,
+                        'options' => array(
+                            'min' => 3,
+                            'max' => 255
+                        )
                     )
                 )
-            )
-        ));
-
-        $filter->add(array(
-            'name' => 'date',
-            'required' => true,
-            'validators' => array(
-                array('name' => 'date')
-            )
-        ));
-
-        // TODO: update author check
-
-        $filter->add(array(
-            'name' => 'version',
-            'required' => true,
-            'validators' => array(
-                array(
-                    'name' => 'string_length',
-                    'options' => array(
-                        'min' => 1,
-                        'max' => 32
+            ),
+            'date' => array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => Date::class)
+                )
+            ),
+            // TODO: update author check
+            'version' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => StringLength::class,
+                        'options' => array(
+                            'min' => 1,
+                            'max' => 32
+                        )
                     )
                 )
+            ),
+            // Boolean values have no filter. The form will make sure that it will be casted to true or false
+            // And because of the filters the filter is unable to detect if a value is set.
+            'approve' => array(
+                'required' => true,
+                'allow_empty' => false,
+                'fallback_value' => false,
+            ),
+            'changes' => array(
+                'required' => true,
+                'allow_empty' => false,
+                'fallback_value' => false,
             )
-        ));
-
-        // Boolean values have no filter. The form will make sure that it will be casted to true or false
-        // And because of the filters the filter is unable to detect if a value is set.
-        $filter->add(array(
-            'name' => 'approve',
-            'required' => true,
-            'allow_empty' => false,
-            'fallback_value' => false,
-
-        ));
-
-        $filter->add(array(
-            'name' => 'changes',
-            'required' => true,
-            'allow_empty' => false,
-            'fallback_value' => false,
-        ));
-
-        $this->setInputFilter($filter);
+        ];
     }
 }

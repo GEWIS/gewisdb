@@ -3,7 +3,6 @@
 namespace Database\Form;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 class InstallationFunction extends Form implements InputFilterProviderInterface
@@ -32,9 +31,8 @@ class InstallationFunction extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
-        return array(
-        );
+        return [];
     }
 }

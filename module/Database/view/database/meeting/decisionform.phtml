@@ -26,12 +26,14 @@ case 'board_install':
     break;
 case 'board_discharge':
     echo $this->partial('database/meeting/board/dischargeform', array(
-        'form' => $form
+        'form' => $form,
+        'installs' => $installs
     ));
     break;
 case 'board_release':
     echo $this->partial('database/meeting/board/releaseform', array(
-        'form' => $form
+        'form' => $form,
+        'installs' => $installs
     ));
     break;
 case 'other':

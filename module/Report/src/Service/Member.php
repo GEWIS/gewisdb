@@ -2,26 +2,40 @@
 
 namespace Report\Service;
 
-use Application\Service\AbstractService;
-use Database\Model\Member as DbMember;
-use Database\Model\Address as DbAddress;
+use Database\Mapper\Member as MemberMapper;
+use Doctrine\ORM\EntityManager;
 use Report\Model\Member as ReportMember;
 use Report\Model\Address as ReportAddress;
 use Zend\Cache\Exception\LogicException;
 use Zend\ProgressBar\Adapter\Console;
 use Zend\ProgressBar\ProgressBar;
 
-class Member extends AbstractService
+class Member
 {
+    /** @var MemberMapper $memberMapper */
+    private $memberMapper;
+
+    /** @var EntityManager $emReport */
+    private $emReport;
+
+    /**
+     * @param MemberMapper $memberMapper
+     * @param EntityManager $emReport
+     */
+    public function __construct(
+        MemberMapper $memberMapper,
+        EntityManager $emReport
+    ) {
+        $this->memberMapper = $memberMapper;
+        $this->emReport = $emReport;
+    }
+
     /**
      * Export members.
      */
     public function generate()
     {
-        $mapper = $this->getMemberMapper();
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-
-        $memberCollection = $mapper->findAll();
+        $memberCollection = $this->memberMapper->findAll();
 
         $adapter = new Console();
         $progress = new ProgressBar($adapter, 0, count($memberCollection));
@@ -29,23 +43,22 @@ class Member extends AbstractService
         $num = 0;
         foreach ($memberCollection as $member) {
             if ($num++ % 20 == 0) {
-                $em->flush();
-                $em->clear();
+                $this->emReport->flush();
+                $this->emReport->clear();
                 $progress->update($num);
             }
 
             $this->generateMember($member);
         }
 
-        $em->flush();
-        $em->clear();
+        $this->emReport->flush();
+        $this->emReport->clear();
         $progress->finish();
     }
 
     public function generateMember($member)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\Member');
+        $repo = $this->emReport->getRepository('Report\Model\Member');
         // first try to find an existing member
         $reportMember = $repo->find($member->getLidnr());
 
@@ -77,13 +90,12 @@ class Member extends AbstractService
 
         // process mailing lists
         $this->generateLists($member, $reportMember);
-        $em->persist($reportMember);
+        $this->emReport->persist($reportMember);
     }
 
     public function generateLists($member, $reportMember)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $reportListRepo = $em->getRepository('Report\Model\MailingList');
+        $reportListRepo = $this->emReport->getRepository('Report\Model\MailingList');
 
         $reportLists = array_map(function ($list) {
             return $list->getName();
@@ -101,7 +113,7 @@ class Member extends AbstractService
 
             $reportMember->addList($reportList);
             $this->addToMailmanList($member, $list);
-            $em->persist($reportList);
+            $this->emReport->persist($reportList);
         }
 
         foreach (array_diff($reportLists, $lists) as $list) {
@@ -113,17 +125,16 @@ class Member extends AbstractService
 
             $reportMember->removeList($reportList);
             $this->removeFromMailmanList($member, $list);
-            $em->persist($reportList);
+            $this->emReport->persist($reportList);
         }
     }
 
     public function generateAddress($address, $reportMember = null)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $addrRepo = $em->getRepository('Report\Model\Address');
+        $addrRepo = $this->emReport->getRepository('Report\Model\Address');
 
         if ($reportMember === null) {
-            $reportMember = $em->getRepository('Report\Model\Member')->find($address->getMember()->getLidnr());
+            $reportMember = $this->emReport->getRepository('Report\Model\Member')->find($address->getMember()->getLidnr());
             if ($reportMember === null) {
                 throw new \LogicException('Address without member');
             }
@@ -146,22 +157,20 @@ class Member extends AbstractService
         $reportAddress->setCity($address->getCity());
         $reportAddress->setPhone($address->getPhone());
         $reportMember->addAddress($reportAddress);
-        $em->persist($reportAddress);
+        $this->emReport->persist($reportAddress);
     }
 
     public function deleteMember($member)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\Member');
+        $repo = $this->emReport->getRepository('Report\Model\Member');
         // first try to find an existing member
         $reportMember = $repo->find($member->getLidnr());
-        $em->remove($reportMember);
+        $this->emReport->remove($reportMember);
     }
 
     public function deleteAddress($address)
     {
-        $em = $this->getServiceManager()->get('doctrine.entitymanager.orm_report');
-        $repo = $em->getRepository('Report\Model\Address');
+        $repo = $this->emReport->getRepository('Report\Model\Address');
 
         // first try to find an existing member
         $reportAddress = $repo->find(array(
@@ -169,7 +178,7 @@ class Member extends AbstractService
             'type' => $address->getType()
         ));
 
-        $em->remove($reportAddress);
+        $this->emReport->remove($reportAddress);
     }
 
     public function addToMailmanList($member, $listName)
@@ -180,23 +189,5 @@ class Member extends AbstractService
     public function removeFromMailmanList($member, $listName)
     {
        // TODO
-    }
-
-    /**
-     * Get the member mapper.
-     *
-     * @return \Database\Mapper\Member
-     */
-    public function getMemberMapper()
-    {
-        return $this->getServiceManager()->get('database_mapper_member');
-    }
-
-    /**
-     * Get the console object.
-     */
-    public function getConsole()
-    {
-        return $this->getServiceManager()->get('console');
     }
 }
