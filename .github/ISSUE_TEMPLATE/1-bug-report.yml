@@ -41,8 +41,6 @@ body:
                 - macOS
                 - Windows
                 - Other
-        validations:
-            required: true
     -   type: dropdown
         id: browsers
         attributes:
@@ -55,8 +53,6 @@ body:
                 - Microsoft Edge
                 - Safari
                 - Other
-        validations:
-            required: true
     -   type: textarea
         id: other
         attributes:
