@@ -236,11 +236,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'destroy',
@@ -300,12 +296,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
-
 
         return array(
             'type' => 'other',
@@ -337,11 +328,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'foundation',
@@ -373,11 +360,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'board_install',
@@ -410,11 +393,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'board_discharge',
@@ -447,11 +426,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'board_release',
@@ -483,11 +458,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'install',
@@ -520,11 +491,7 @@ class Meeting
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'foundation',
@@ -578,11 +545,7 @@ class Meeting
         }
 
         // simply persist through the meeting mapper
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('decision' => $decision));
         $this->getMeetingMapper()->persist($decision->getMeeting());
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('decision' => $decision));
 
         return array(
             'type' => 'budget',
@@ -620,11 +583,7 @@ class Meeting
             return null;
         }
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('meeting' => $meeting));
         $mapper->persist($meeting);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('meeting' => $meeting));
 
         return $meeting;
     }

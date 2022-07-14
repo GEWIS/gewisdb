@@ -74,12 +74,7 @@ class MailingList
         }
 
         $list = $form->getData();
-
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
         $this->getListMapper()->persist($list);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
 
         return true;
     }
@@ -103,12 +98,7 @@ class MailingList
         }
 
         $list = $this->getList($name);
-
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('list' => $list));
         $this->getListMapper()->remove($list);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('list' => $list));
 
         return true;
     }

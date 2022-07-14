@@ -43,8 +43,6 @@ use Database\Hydrator\Destroy as DestroyHydrator;
 use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
 use Database\Hydrator\Other as OtherHydrator;
-use Database\Mapper\Event as EventMapper;
-use Database\Mapper\Factory\EventFactory as EventMapperFactory;
 use Database\Mapper\Factory\InstallationFunctionFactory as InstallationFunctionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
@@ -66,8 +64,6 @@ use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
-use Database\Service\Event as EventService;
-use Database\Service\Factory\EventFactory as EventServiceFactory;
 use Database\Service\Factory\InstallationFunctionFactory as InstallationFunctionServiceFactory;
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
@@ -143,7 +139,6 @@ class Module
                 QuerySaveForm::class => QuerySaveForm::class,
             ),
             'factories' => array(
-                EventService::class => EventServiceFactory::class,
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
@@ -367,7 +362,6 @@ class Module
                         $container->get('database_doctrine_em')
                     );
                 },
-                EventMapper::class => EventMapperFactory::class,
                 InstallationFunctionMapper::class => InstallationFunctionMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,

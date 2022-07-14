@@ -2,10 +2,8 @@
 
 namespace Checker\Mapper;
 
-use Database\Model\Event as EventModel;
 use Database\Model\Meeting as MeetingModel;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
 
 /**
  * Event mapper

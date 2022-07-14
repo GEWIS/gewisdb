@@ -55,12 +55,7 @@ class InstallationFunction
         }
 
         $function = $form->getData();
-
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', array('function' => $function));
         $this->getFunctionMapper()->persist($function);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', array('function' => $function));
 
         return true;
     }

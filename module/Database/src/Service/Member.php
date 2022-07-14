@@ -116,9 +116,6 @@ class Member
      */
     public function subscribe($data)
     {
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
-
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
 
@@ -199,8 +196,6 @@ class Member
         }
 
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $prospectiveMember));
 
         return $prospectiveMember;
     }
@@ -295,9 +290,6 @@ class Member
             return null;
         }
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this);
-
         /** @var MemberModel $member */
         $member = $form->getData();
 
@@ -373,8 +365,6 @@ class Member
         $this->getMemberMapper()->persist($member);
 
         $this->removeProspective($prospectiveMember);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -542,11 +532,7 @@ class Member
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -579,8 +565,6 @@ class Member
             return null;
         }
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $data = $form->getData();
 
         // update changed on date
@@ -632,8 +616,6 @@ class Member
         $member->setExpiration($expiration);
 
         $this->getMemberMapper()->persist($member);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -657,9 +639,6 @@ class Member
             return null;
         }
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
-
         // Make new expiration from previous expiration, but always make sure it is the end of the association year.
         $newExpiration = clone $member->getExpiration();
         $year = (int) $newExpiration->format('Y') + 1;
@@ -668,8 +647,6 @@ class Member
         $member->setExpiration($newExpiration);
 
         $this->getMemberMapper()->persist($member);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }
@@ -695,11 +672,7 @@ class Member
 
         $address = $form->getData();
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
         $this->getMemberMapper()->persistAddress($address);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
 
         return $address;
     }
@@ -725,11 +698,7 @@ class Member
 
         $address = $form->getData();
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
         $this->getMemberMapper()->persistAddress($address);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
 
         return $address;
     }
@@ -757,11 +726,7 @@ class Member
         $address = $formData['address'];
         $member = $address->getMember();
 
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('address' => $address));
         $this->getMemberMapper()->removeAddress($address);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('address' => $address));
 
         return $member;
     }
@@ -799,11 +764,7 @@ class Member
         }
 
         // simply persist through member
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
         $this->getMemberMapper()->persist($member);
-        // TODO: Fix global event listener.
-        // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
 
         return $member;
     }

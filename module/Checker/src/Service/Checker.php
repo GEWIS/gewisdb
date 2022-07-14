@@ -283,9 +283,6 @@ class Checker
         // Check each member that needs to be checked.
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            // TODO: Fix global event listener.
-            // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
-
             echo "Performing request for member " . $member->getLidnr() . PHP_EOL;
 
             $request->setUri($config['endpoint'] . $member->getTueUsername());
@@ -341,8 +338,6 @@ class Checker
             echo "Request handled" . PHP_EOL;
 
             $this->memberService->getMemberMapper()->persist($member);
-            // TODO: Fix global event listener.
-            // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
         }
     }
 
@@ -368,8 +363,6 @@ class Checker
 
             if ($member->getMembershipEndsOn() <= $now) {
                 echo "Membership has ended and expired" . PHP_EOL;
-                // TODO: Fix global event listener.
-                // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
                     echo "Currently an active member, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
@@ -401,8 +394,6 @@ class Checker
                 $member->setExpiration($exp);
 
                 $this->memberService->getMemberMapper()->persist($member);
-                // TODO: Fix global event listener.
-                // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
             } else {
                 echo "Membership has not yet ended and expired, so changing nothing" . PHP_EOL;
             }
@@ -430,15 +421,11 @@ class Checker
 
             if ($member->getExpiration() <= $now) {
                 echo "Expired, thus extending to " . $exp->format('Y-m-d') . PHP_EOL;
-                // TODO: Fix global event listener.
-                // $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, array('member' => $member));
 
                 $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
                 $this->memberService->getMemberMapper()->persist($member);
-                // TODO: Fix global event listener.
-                // $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('member' => $member));
             } else {
                 echo "Not yet expired, so not extending" . PHP_EOL;
             }
