@@ -22,9 +22,7 @@ return [
     'DoctrineORMModule',
     'Application',
     'Database',
-    'Import',
     'Checker',
-    'Export',
     'Report',
     'User',
 ];

@@ -13,16 +13,6 @@ return array(
                     'dbname'   => getenv('DOCTRINE_DEFAULT_DATABASE'),
                 )
             ),
-            'orm_import' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
-                'params' => array(
-                    'host'     => getenv('DOCTRINE_IMPORT_HOST'),
-                    'port'     => getenv('DOCTRINE_IMPORT_PORT'),
-                    'user'     => getenv('DOCTRINE_IMPORT_USER'),
-                    'password' => getenv('DOCTRINE_IMPORT_PASSWORD'),
-                    'dbname'   => getenv('DOCTRINE_IMPORT_DATABASE'),
-                )
-            ),
             'orm_report' => array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
                 'params' => array(
