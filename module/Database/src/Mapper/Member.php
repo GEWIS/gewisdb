@@ -2,6 +2,7 @@
 
 namespace Database\Mapper;
 
+use Application\Model\Enums\AddressTypes;
 use Database\Model\Address;
 use Database\Model\Member as MemberModel;
 use Doctrine\ORM\EntityManager;
@@ -82,7 +83,7 @@ class Member
      * Find a member address.
      *
      * @param int $lidnr
-     * @param string $type Address type
+     * @param AddressTypes $type Address type
      *
      * @return Address
      */

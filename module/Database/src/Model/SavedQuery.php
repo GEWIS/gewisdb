@@ -2,44 +2,45 @@
 
 namespace Database\Model;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    GeneratedValue,
+    Id,
+};
 
 /**
  * Saved query model.
- *
- * @ORM\Entity
  */
+#[Entity]
 class SavedQuery
 {
     /**
      * The query ID.
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
-    protected $id;
+    #[Id]
+    #[Column(type: "integer")]
+    #[GeneratedValue(strategy: "AUTO")]
+    protected ?int $id = null;
 
     /**
      * Name.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $name;
+    #[Column(type: "string")]
+    protected string $name;
 
     /**
      * The Saved Query.
-     *
-     * @ORM\Column(type="text")
      */
-    protected $query;
+    #[Column(type: "text")]
+    protected string $query;
 
     /**
      * Get the ID.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -47,9 +48,9 @@ class SavedQuery
     /**
      * Set the ID.
      *
-     * @param inst $id
+     * @param int|null $id
      */
-    public function setId($id)
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }
@@ -59,7 +60,7 @@ class SavedQuery
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -69,7 +70,7 @@ class SavedQuery
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -79,7 +80,7 @@ class SavedQuery
      *
      * @param string $query
      */
-    public function setQuery($query)
+    public function setQuery(string $query): void
     {
         $this->query = $query;
     }
@@ -89,7 +90,7 @@ class SavedQuery
      *
      * @return string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->query;
     }

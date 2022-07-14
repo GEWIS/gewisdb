@@ -16,7 +16,7 @@ foreach ($map as $point => $num) {
 $(document).ready(function () {
     $('#createdecision').click(function () {
         var url = "<?= $this->url('meeting/decision/create', array(
-            'type' => $meeting->getType(),
+            'type' => $meeting->getType()->value,
             'number' => $meeting->getNumber(),
             'point' => '__point__',
             'decision' => '__decision__'
@@ -43,7 +43,7 @@ $(document).ready(function () {
 <?php
 use Database\Model\Meeting;
 ?>
-    <h1><?= $meeting->getType() ?> <?= $meeting->getNumber() ?>
+    <h1><?= $meeting->getType()->value ?> <?= $meeting->getNumber() ?>
     <small><?= $this->dateFormat(
         $meeting->getDate(),
         \IntlDateFormatter::FULL,
@@ -64,12 +64,12 @@ use Database\Model\Meeting;
         $mt = $dec->getMeeting();
         ?>
         <strong>
-        (Vernietigd door Besluit <?= "{$mt->getType()} {$mt->getNumber()}.{$dec->getPoint()}.{$dec->getNumber()}" ?>)
+        (Vernietigd door Besluit <?= "{$mt->getType()->value} {$mt->getNumber()}.{$dec->getPoint()}.{$dec->getNumber()}" ?>)
         </strong>
         <?php endif; ?>
         <br />
         <a href="<?= $this->url('meeting/decision/delete', array(
-            'type' => $meeting->getType(),
+            'type' => $meeting->getType()->value,
             'number' => $meeting->getNumber(),
             'point' => $decision->getPoint(),
             'decision' => $decision->getNumber()

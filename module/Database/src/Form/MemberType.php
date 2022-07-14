@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use Application\Model\Enums\MembershipTypes;
 use Database\Model\Member;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilter;
@@ -19,10 +20,10 @@ class MemberType extends Form implements InputFilterProviderInterface
             'options' => array(
                 'label' => 'Lidmaatschapstype',
                 'value_options' => array(
-                    Member::TYPE_ORDINARY => 'Gewoon lid - Ingeschreven bij faculteit M&CS',
-                    Member::TYPE_EXTERNAL => 'Extern lid - Speciaal toegelaten door het bestuur',
-                    Member::TYPE_GRADUATE => 'Afgestudeerde - Was lid en is speciaal toegelaten door het bestuur',
-                    Member::TYPE_HONORARY => 'Erelid - Speciaal benoemd door de ALV'
+                    MembershipTypes::Ordinary->value => 'Gewoon lid - Ingeschreven bij faculteit M&CS',
+                    MembershipTypes::External->value => 'Extern lid - Speciaal toegelaten door het bestuur',
+                    MembershipTypes::Graduate->value => 'Afgestudeerde - Was lid en is speciaal toegelaten door het bestuur',
+                    MembershipTypes::Honorary->value => 'Erelid - Speciaal benoemd door de ALV'
                 )
             )
         ));

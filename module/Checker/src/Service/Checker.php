@@ -2,6 +2,9 @@
 
 namespace Checker\Service;
 
+use Application\Model\Enums\MeetingTypes;
+use Application\Model\Enums\MembershipTypes;
+use Application\Model\Enums\OrganTypes;
 use Application\Service\EventAwareService;
 use Checker\Model\Error;
 use Checker\Service\Installation as InstallationService;
@@ -234,8 +237,8 @@ class Checker
             // if either both organtype and meetingtype is AV, or they are both not. So
             // it is wrong if only one of them has a meetingtype of AV
             if (
-                $meetingType === MeetingModel::TYPE_VV ||
-                ($organType ===  FoundationModel::ORGAN_TYPE_AVC ^ $meetingType === MeetingModel::TYPE_AV)
+                $meetingType === MeetingTypes::VV ||
+                ($organType === OrganTypes::AVC ^ $meetingType === MeetingTypes::AV)
             ) {
                 $errors[] = new Error\OrganMeetingType($organ);
             }
@@ -366,7 +369,7 @@ class Checker
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
                     echo "Currently an active member, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
-                    $member->setType(MemberModel::TYPE_EXTERNAL);
+                    $member->setType(MembershipTypes::External);
 
                     // External memberships should run till the end of the next association year (which is actually the
                     // same date as the expiration).
@@ -377,14 +380,14 @@ class Checker
                     // member is still studying.
                     if ($member->getIsStudying()) {
                         echo "But is studying, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
-                        $member->setType(MemberModel::TYPE_EXTERNAL);
+                        $member->setType(MembershipTypes::External);
 
                         // External memberships should run till the end of the next association year (which is actually
                         // the same date as the expiration).
                         $member->setMembershipEndsOn($exp);
                     } else {
                         echo "Nor studying, so becoming GRADUATE. Not extending membership" . PHP_EOL;
-                        $member->setType(MemberModel::TYPE_GRADUATE);
+                        $member->setType(MembershipTypes::Graduate);
                     }
                 }
 

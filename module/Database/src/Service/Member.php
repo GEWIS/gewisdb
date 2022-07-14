@@ -2,6 +2,9 @@
 
 namespace Database\Service;
 
+use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\GenderTypes;
+use Application\Model\Enums\MembershipTypes;
 use Application\Service\FileStorage as FileStorageService;
 use Database\Form\Address as AddressForm;
 use Database\Form\AddressExport as AddressExportForm;
@@ -164,9 +167,6 @@ class Member
             return null;
         }
 
-        // by default, we only add ordinary members
-        $prospectiveMember->setType(MemberModel::TYPE_ORDINARY);
-
         // changed on date
         $date = new \DateTime();
         $date->setTime(0, 0);
@@ -263,6 +263,7 @@ class Member
 
         // Fill in the address in the form again
         $data = $prospectiveMember->toArray();
+        $data['gender'] = $data['gender']->value;
 
         // add list data to the form
         foreach ($form->getLists() as $list) {
@@ -300,7 +301,6 @@ class Member
 
         // Copy all remaining information
         $member->setTueUsername($prospectiveMember->getTueUsername());
-        $member->setType($prospectiveMember->getType());
 
         // changed on date
         $date = new \DateTime();
@@ -309,7 +309,7 @@ class Member
 
         // set generation (first year of the current association year), membership type and associated expiration of
         // said membership (always at the end of the current association year).
-        $member->setType($membershipData['type']);
+        $member->setType(MembershipTypes::from($membershipData['type']));
         $expiration = clone $date;
 
         if ($expiration->format('m') >= 7) {
@@ -321,15 +321,15 @@ class Member
         }
 
         switch ($member->getType()) {
-            case MemberModel::TYPE_ORDINARY:
+            case MembershipTypes::Ordinary:
                 $member->setIsStudying(true);
                 $member->setMembershipEndsOn(null);
                 break;
-            case MemberModel::TYPE_EXTERNAL:
+            case MembershipTypes::External:
                 $member->setIsStudying(true);
                 $member->setMembershipEndsOn($expiration);
                 break;
-            case MemberModel::TYPE_GRADUATE:
+            case MembershipTypes::Graduate:
                 $member->setIsStudying(false);
                 // This is a weird situation, as such define the expiration of the membership to be super early. Actual
                 // value will have to be edited manually.
@@ -337,7 +337,7 @@ class Member
                 $membershipEndsOn->setDate(1, 1, 1);
                 $member->setMembershipEndsOn($membershipEndsOn);
                 break;
-            case MemberModel::TYPE_HONORARY:
+            case MembershipTypes::Honorary:
                 $member->setIsStudying(false);
                 $member->setMembershipEndsOn(null);
                 // infinity (1000 is close enough, right?)
@@ -480,7 +480,7 @@ class Member
     /**
      * Clear a member.
      *
-     * @param Member $member
+     * @param MemberModel $member
      */
     public function clear(MemberModel $member)
     {
@@ -491,7 +491,7 @@ class Member
         $date = new \DateTime('0001-01-01 00:00:00');
 
         $member->setEmail(null);
-        $member->setGender(MemberModel::GENDER_OTHER);
+        $member->setGender(GenderTypes::Other);
         $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(null);
@@ -555,7 +555,7 @@ class Member
 
         // It is not possible to have another membership type after being an honorary member and there does not exist a
         // good transition to a different membership type (because of the dates/expiration etc.).
-        if (MemberModel::TYPE_HONORARY === $member->getType()) {
+        if (MembershipTypes::Honorary === $member->getType()) {
             throw new \RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
         }
 
@@ -582,32 +582,32 @@ class Member
             $year = (int) $expiration->format('Y') + 1;
         }
 
-        switch ($data['type']) {
-            case MemberModel::TYPE_ORDINARY:
+        switch (MembershipTypes::from($data['type'])) {
+            case MembershipTypes::Ordinary:
                 $member->setIsStudying(true);
                 $member->setMembershipEndsOn(null);
-                $member->setType(MemberModel::TYPE_ORDINARY);
+                $member->setType(MembershipTypes::Ordinary);
                 $year -= 1;
                 break;
-            case MemberModel::TYPE_EXTERNAL:
+            case MembershipTypes::External:
                 $member->setIsStudying(true);
                 $membershipEndsOn = clone $expiration;
                 $membershipEndsOn->setDate($year - 1, 7, 1);
                 $member->setMembershipEndsOn($membershipEndsOn);
                 break;
-            case MemberModel::TYPE_GRADUATE:
+            case MembershipTypes::Graduate:
                 $member->setIsStudying(false);
                 $membershipEndsOn = clone $expiration;
                 $membershipEndsOn->setDate($year - 1, 7, 1);
                 $member->setMembershipEndsOn($membershipEndsOn);
                 break;
-            case MemberModel::TYPE_HONORARY:
+            case MembershipTypes::Honorary:
                 $member->setIsStudying(false);
                 // infinity (1000 is close enough, right?)
                 $year += 1000;
                 $member->setMembershipEndsOn(null);
                 // Directly apply the honorary membership type.
-                $member->setType(MemberModel::TYPE_HONORARY);
+                $member->setType(MembershipTypes::Honorary);
                 break;
         }
 
@@ -682,7 +682,7 @@ class Member
      *
      * @param array $data
      * @param int $lidnr
-     * @param string $type Type of the address to add
+     * @param AddressTypes $type Type of the address to add
      *
      * @return Address
      */
@@ -708,7 +708,7 @@ class Member
      *
      * @param array $data
      * @param int $lidnr
-     * @param string $type Address to remove
+     * @param AddressTypes $type Address to remove
      *
      * @return MemberModel
      */
@@ -841,7 +841,7 @@ class Member
      * Get the address form.
      *
      * @param int $lidnr
-     * @param string $type address type
+     * @param AddressTypes $type address type
      * @param boolean $create
      *
      * @return AddressForm
@@ -868,7 +868,7 @@ class Member
      * Get the delete address form.
      *
      * @param int $lidnr
-     * @param string $type address type
+     * @param AddressTypes $type address type
      *
      * @return AddressForm
      */

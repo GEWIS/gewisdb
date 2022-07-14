@@ -52,7 +52,7 @@ class MeetingController extends AbstractActionController
             $meeting = $this->meetingService->createMeeting($request->getPost());
             if (null !== $meeting) {
                 return $this->redirect()->toRoute('meeting/view', array(
-                    'type' => $meeting->getType(),
+                    'type' => $meeting->getType()->value,
                     'number' => $meeting->getNumber()
                 ));
             }

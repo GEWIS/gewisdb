@@ -2,6 +2,7 @@
 
 namespace Database\Form\Fieldset;
 
+use Application\Model\Enums\MeetingTypes;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
 use Laminas\Form\Fieldset;
@@ -48,7 +49,7 @@ class Decision extends Fieldset implements InputFilterProviderInterface
                     array(
                         'name' => InArray::class,
                         'options' => array(
-                            'haystack' => MeetingModel::getTypes()
+                            'haystack' => MeetingTypes::values(),
                         )
                     )
                 )

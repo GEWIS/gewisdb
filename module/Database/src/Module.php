@@ -43,6 +43,9 @@ use Database\Hydrator\Destroy as DestroyHydrator;
 use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
 use Database\Hydrator\Other as OtherHydrator;
+use Database\Hydrator\Strategy\AddressHydratorStrategy;
+use Database\Hydrator\Strategy\GenderHydratorStrategy;
+use Database\Hydrator\Strategy\MeetingHydratorStrategy;
 use Database\Mapper\Factory\InstallationFunctionFactory as InstallationFunctionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
@@ -338,29 +341,34 @@ class Module
                 },
                 ///////////////////////////////////////////////////////////////////////////
                 'database_hydrator_member' => function (ContainerInterface $container) {
-                    return new DoctrineObject(
-                        $container->get('database_doctrine_em')
-                    );
+                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator->addStrategy('gender', new GenderHydratorStrategy());
+
+                    return $hydrator;
                 },
                 'database_hydrator_address' => function (ContainerInterface $container) {
-                    return new DoctrineObject(
-                        $container->get('database_doctrine_em')
-                    );
+                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator->addStrategy('type', new AddressHydratorStrategy());
+
+                    return $hydrator;
                 },
                 'database_hydrator_meeting' => function (ContainerInterface $container) {
-                    return new DoctrineObject(
-                        $container->get('database_doctrine_em')
-                    );
+                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator->addStrategy('type', new MeetingHydratorStrategy());
+
+                    return $hydrator;
                 },
                 'database_hydrator_subdecision' => function (ContainerInterface $container) {
-                    return new DoctrineObject(
-                        $container->get('database_doctrine_em')
-                    );
+                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
+
+                    return $hydrator;
                 },
                 'database_hydrator_decision' => function (ContainerInterface $container) {
-                    return new DoctrineObject(
-                        $container->get('database_doctrine_em')
-                    );
+                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
+
+                    return $hydrator;
                 },
                 InstallationFunctionMapper::class => InstallationFunctionMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,

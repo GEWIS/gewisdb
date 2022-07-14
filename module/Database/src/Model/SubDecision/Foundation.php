@@ -2,51 +2,53 @@
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\OrganTypes;
 use Database\Model\SubDecision;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection,
+};
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    OneToMany,
+};
 
 /**
  * Foundation of an organ.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Foundation extends SubDecision
 {
-    public const ORGAN_TYPE_COMMITTEE = 'committee';
-    public const ORGAN_TYPE_AVC = 'avc';
-    public const ORGAN_TYPE_FRATERNITY = 'fraternity';
-    public const ORGAN_TYPE_KKK = 'kkk';
-    public const ORGAN_TYPE_AVW = 'avw';
-    public const ORGAN_TYPE_RVA = 'rva';
-
     /**
      * Abbreviation (only for when organs are created)
-     *
-     * @ORM\Column(type="string")
      */
-    protected $abbr;
+    #[Column(type: "string")]
+    protected string $abbr;
 
     /**
      * Name (only for when organs are created)
-     *
-     * @ORM\Column(type="string")
      */
-    protected $name;
+    #[Column(type: "string")]
+    protected string $name;
 
     /**
      * Type of the organ.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $organType;
+    #[Column(
+        type: "string",
+        enumType: OrganTypes::class,
+    )]
+    protected OrganTypes $organType;
 
     /**
      * References from other subdecisions to this organ.
-     *
-     * @ORM\OneToMany(targetEntity="FoundationReference",mappedBy="foundation")
      */
-    protected $references;
+    #[OneToMany(
+        targetEntity: FoundationReference::class,
+        mappedBy: "foundation",
+    )]
+    protected Collection $references;
 
     /**
      * Constructor.
@@ -57,28 +59,11 @@ class Foundation extends SubDecision
     }
 
     /**
-     * Get available organ types.
-     *
-     * @return array
-     */
-    public function getOrganTypes()
-    {
-        return array(
-            self::ORGAN_TYPE_COMMITTEE,
-            self::ORGAN_TYPE_AVC,
-            self::ORGAN_TYPE_FRATERNITY,
-            self::ORGAN_TYPE_KKK,
-            self::ORGAN_TYPE_AVW,
-            self::ORGAN_TYPE_RVA
-        );
-    }
-
-    /**
      * Get the abbreviation.
      *
      * @return string
      */
-    public function getAbbr()
+    public function getAbbr(): string
     {
         return $this->abbr;
     }
@@ -88,7 +73,7 @@ class Foundation extends SubDecision
      *
      * @param string $abbr
      */
-    public function setAbbr($abbr)
+    public function setAbbr(string $abbr): void
     {
         $this->abbr = $abbr;
     }
@@ -98,7 +83,7 @@ class Foundation extends SubDecision
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -108,7 +93,7 @@ class Foundation extends SubDecision
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -116,9 +101,9 @@ class Foundation extends SubDecision
     /**
      * Get the type.
      *
-     * @return string
+     * @return OrganTypes
      */
-    public function getOrganType()
+    public function getOrganType(): OrganTypes
     {
         return $this->organType;
     }
@@ -126,24 +111,19 @@ class Foundation extends SubDecision
     /**
      * Set the type.
      *
-     * @param string $organType
-     *
-     * @throws \InvalidArgumentException if the type is wrong
+     * @param OrganTypes $organType
      */
-    public function setOrganType($organType)
+    public function setOrganType(OrganTypes $organType): void
     {
-        if (!in_array($organType, self::getOrganTypes())) {
-            throw new \InvalidArgumentException("Given type does not exist.");
-        }
         $this->organType = $organType;
     }
 
     /**
      * Get the references.
      *
-     * @return array of references
+     * @return Collection of references
      */
-    public function getReferences()
+    public function getReferences(): Collection
     {
         return $this->references;
     }
@@ -153,29 +133,9 @@ class Foundation extends SubDecision
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
-        switch ($this->getOrganType()) {
-            case self::ORGAN_TYPE_COMMITTEE:
-                $text = 'Commissie ';
-                break;
-            case self::ORGAN_TYPE_AVC:
-                $text = 'AV-commissie ';
-                break;
-            case self::ORGAN_TYPE_FRATERNITY:
-                $text = 'Dispuut ';
-                break;
-            case self::ORGAN_TYPE_KKK:
-                $text = 'KKK ';
-                break;
-            case self::ORGAN_TYPE_AVW:
-                $text = 'AV-werkgroep ';
-                break;
-            case self::ORGAN_TYPE_RVA:
-                $text = 'RvA ';
-                break;
-        }
-
+        $text = $this->getOrganType()->getName() . ' ';
         $text .= $this->getName();
         $text .= ' met afkorting ';
         $text .= $this->getAbbr();
@@ -187,11 +147,11 @@ class Foundation extends SubDecision
     /**
      * Get an array with all information.
      *
-     * Mostly usefull for usage with JSON.
+     * Mostly useful for usage with JSON.
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $decision = $this->getDecision();
         return array(

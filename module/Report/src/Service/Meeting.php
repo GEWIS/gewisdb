@@ -372,7 +372,7 @@ Ik ben een fout tegen gekomen tijdens het processen:
 
 {$e->getMessage()}
 
-Dit gebeurde tijdens het processen van besluit {$meeting->getType()} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
+Dit gebeurde tijdens het processen van besluit {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
 
 Met vriendelijke groet,
 

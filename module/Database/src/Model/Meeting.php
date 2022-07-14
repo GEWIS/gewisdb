@@ -2,63 +2,57 @@
 
 namespace Database\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Application\Model\Enums\MeetingTypes;
+use DateTime;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection,
+};
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    Id,
+    OneToMany,
+};
 
 /**
  * Meeting model.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Meeting
 {
-    public const TYPE_BV = 'BV'; // bestuursvergadering
-    public const TYPE_AV = 'AV'; // algemene leden vergadering
-    public const TYPE_VV = 'VV'; // voorzitters vergadering
-    public const TYPE_VIRT = 'Virt'; // virtual meeting
-
     /**
      * Meeting type.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="string")
      */
-    protected $type;
+    #[Id]
+    #[Column(
+        type: "string",
+        enumType: MeetingTypes::class,
+    )]
+    protected MeetingTypes $type;
 
     /**
      * Meeting number.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
      */
-    protected $number;
+    #[Id]
+    #[Column(type: "integer")]
+    protected int $number;
 
     /**
      * Meeting date.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $date;
+    #[Column(type: "date")]
+    protected DateTime $date;
 
     /**
      * Decisions.
-     *
-     * @ORM\OneToMany(targetEntity="Decision", mappedBy="meeting", cascade={"persist"})
      */
-    protected $decisions;
-
-    /**
-     * Get all allowed meeting types.
-     */
-    public static function getTypes()
-    {
-        return array(
-            self::TYPE_BV,
-            self::TYPE_AV,
-            self::TYPE_VV,
-            self::TYPE_VIRT
-        );
-    }
+    #[OneToMany(
+        targetEntity: Decision::class,
+        mappedBy: "meeting",
+        cascade: ["persist"],
+    )]
+    protected Collection $decisions;
 
     /**
      * Constructor.
@@ -71,9 +65,9 @@ class Meeting
     /**
      * Get the meeting type.
      *
-     * @return string
+     * @return MeetingTypes
      */
-    public function getType()
+    public function getType(): MeetingTypes
     {
         return $this->type;
     }
@@ -83,7 +77,7 @@ class Meeting
      *
      * @return int
      */
-    public function getNumber()
+    public function getNumber(): int
     {
         return $this->number;
     }
@@ -91,13 +85,10 @@ class Meeting
     /**
      * Set the meeting type.
      *
-     * @param string $type
+     * @param MeetingTypes $type
      */
-    public function setType($type)
+    public function setType(MeetingTypes $type): void
     {
-        if (!in_array($type, self::getTypes())) {
-            throw new \InvalidArgumentException("Invalid meeting type given.");
-        }
         $this->type = $type;
     }
 
@@ -106,7 +97,7 @@ class Meeting
      *
      * @param int $number
      */
-    public function setNumber($number)
+    public function setNumber(int $number): void
     {
         $this->number = $number;
     }
@@ -114,9 +105,9 @@ class Meeting
     /**
      * Get the meeting date.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDate()
+    public function getDate(): DateTime
     {
         return $this->date;
     }
@@ -124,9 +115,9 @@ class Meeting
     /**
      * Set the meeting date.
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      */
-    public function setDate(\DateTime $date)
+    public function setDate(DateTime $date): void
     {
         $this->date = $date;
     }
@@ -134,9 +125,9 @@ class Meeting
     /**
      * Get the decisions.
      *
-     * @return array
+     * @return Collection
      */
-    public function getDecisions()
+    public function getDecisions(): Collection
     {
         return $this->decisions;
     }
@@ -146,9 +137,9 @@ class Meeting
      *
      * @param Decision $decision
      */
-    public function addDecision(Decision $decision)
+    public function addDecision(Decision $decision): void
     {
-        $this->decisions[] = $decision;
+        $this->decisions->add($decision);
     }
 
     /**
@@ -156,7 +147,7 @@ class Meeting
      *
      * @param array $decisions
      */
-    public function addDecisions($decisions)
+    public function addDecisions(array $decisions): void
     {
         foreach ($decisions as $decision) {
             $this->addDecision($decision);

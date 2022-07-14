@@ -2,7 +2,11 @@
 
 namespace Report\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\{
+    Entity,
+    JoinColumn,
+    ManyToOne,
+};
 use Report\Model\SubDecision;
 
 /**
@@ -10,32 +14,46 @@ use Report\Model\SubDecision;
  *
  * Note that this should not be directly used. It is in the inheritance map,
  * but that is only to make it usable as mappable entity.
- *
- * @ORM\Entity
  */
+#[Entity]
 abstract class FoundationReference extends SubDecision
 {
     /**
      * Reference to foundation of organ.
-     *
-     * @ORM\ManyToOne(targetEntity="Foundation",inversedBy="references",cascade={"persist"})
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number", onDelete="cascade"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number", onDelete="cascade")
-     * })
      */
-    protected $foundation;
-
+    #[ManyToOne(
+        targetEntity: Foundation::class,
+        inversedBy: "references",
+        cascade: ["persist"],
+    )]
+    #[JoinColumn(
+        name: "r_meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "r_decision_point",
+        referencedColumnName: "decision_point",
+    )]
+    #[JoinColumn(
+        name: "r_decision_number",
+        referencedColumnName: "decision_number",
+    )]
+    #[JoinColumn(
+        name: "r_number",
+        referencedColumnName: "number",
+    )]
+    protected Foundation $foundation;
 
     /**
      * Get organ foundation.
      *
      * @return Foundation
      */
-    public function getFoundation()
+    public function getFoundation(): Foundation
     {
         return $this->foundation;
     }
@@ -45,7 +63,7 @@ abstract class FoundationReference extends SubDecision
      *
      * @param Foundation $foundation
      */
-    public function setFoundation(Foundation $foundation)
+    public function setFoundation(Foundation $foundation): void
     {
         $this->foundation = $foundation;
     }

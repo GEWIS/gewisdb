@@ -2,105 +2,152 @@
 
 namespace Report\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Application\Model\Enums\OrganTypes;
+use DateTime;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection,
+};
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    GeneratedValue,
+    Id,
+    InverseJoinColumn,
+    JoinColumn,
+    JoinTable,
+    ManyToMany,
+    OneToMany,
+    OneToOne,
+};
+use Report\Model\SubDecision\Foundation;
 
 /**
  * Organ entity.
  *
  * Note that this entity is derived from the decisions themselves.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Organ
 {
-    public const ORGAN_TYPE_COMMITTEE = 'committee';
-    public const ORGAN_TYPE_AVC = 'avc';
-    public const ORGAN_TYPE_FRATERNITY = 'fraternity';
-    public const ORGAN_TYPE_KKK = 'kkk';
-    public const ORGAN_TYPE_AVW = 'avw';
-    public const ORGAN_TYPE_RVA = 'rva';
-
     /**
      * Id.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
      */
-    protected $id;
+    #[Id]
+    #[Column(type: "integer")]
+    #[GeneratedValue(strategy: "AUTO")]
+    protected ?int $id = null;
 
     /**
-     * Abbreviation (only for when organs are created)
-     *
-     * @ORM\Column(type="string")
+     * Abbreviation (only for when organs are created).
      */
-    protected $abbr;
+    #[Column(type: "string")]
+    protected string $abbr;
 
     /**
-     * Name (only for when organs are created)
-     *
-     * @ORM\Column(type="string")
+     * Name (only for when organs are created).
      */
-    protected $name;
+    #[Column(type: "string")]
+    protected string $name;
 
     /**
      * Type of the organ.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $type;
+    #[Column(
+        type: "string",
+        enumType: OrganTypes::class,
+    )]
+    protected OrganTypes $type;
 
     /**
      * Reference to foundation of organ.
-     *
-     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Foundation",inversedBy="organ")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
-     * })
      */
-    protected $foundation;
+    #[OneToOne(
+        inversedBy: "organ",
+        targetEntity: Foundation::class,
+    )]
+    #[JoinColumn(
+        name: "r_meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "r_decision_point",
+        referencedColumnName: "decision_point",
+    )]
+    #[JoinColumn(
+        name: "r_decision_number",
+        referencedColumnName: "decision_number",
+    )]
+    #[JoinColumn(
+        name: "r_number",
+        referencedColumnName: "number",
+    )]
+    protected Foundation $foundation;
 
     /**
      * Foundation date.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $foundationDate;
+    #[Column(type: "date")]
+    protected DateTime $foundationDate;
 
     /**
      * Abrogation date.
-     *
-     * @ORM\Column(type="date", nullable=true)
      */
-    protected $abrogationDate;
+    #[Column(
+        type: "date",
+        nullable: true,
+    )]
+    protected ?DateTime $abrogationDate = null;
 
     /**
      * Reference to members.
-     *
-     * @ORM\OneToMany(targetEntity="OrganMember",mappedBy="organ")
      */
-    protected $members;
+    #[OneToMany(
+        mappedBy: "organ",
+        targetEntity: OrganMember::class,
+    )]
+    protected Collection $members;
 
     /**
      * Reference to subdecisions.
-     *
-     * @ORM\ManyToMany(targetEntity="SubDecision")
-     * @ORM\JoinTable(name="organs_subdecisions",
-     *      joinColumns={@ORM\JoinColumn(name="organ_id", onDelete="cascade", referencedColumnName="id")},
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="decision_point", referencedColumnName="decision_point", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="decision_number", referencedColumnName="decision_number", onDelete="cascade"),
-     *          @ORM\JoinColumn(name="subdecision_number", referencedColumnName="number", onDelete="cascade")
-     *      })
      */
-    protected $subdecisions;
+    #[ManyToMany(targetEntity: SubDecision::class)]
+    #[JoinTable(name: "organs_subdecisions")]
+    #[JoinColumn(
+        name: "organ_id",
+        referencedColumnName: "id",
+        nullable: false,
+    )]
+    #[InverseJoinColumn(
+        name: "meeting_type",
+        referencedColumnName: "meeting_type",
+        nullable: false,
+    )]
+    #[InverseJoinColumn(
+        name: "meeting_number",
+        referencedColumnName: "meeting_number",
+        nullable: false,
+    )]
+    #[InverseJoinColumn(
+        name: "decision_point",
+        referencedColumnName: "decision_point",
+        nullable: false,
+    )]
+    #[InverseJoinColumn(
+        name: "decision_number",
+        referencedColumnName: "decision_number",
+        nullable: false,
+    )]
+    #[InverseJoinColumn(
+        name: "subdecision_number",
+        referencedColumnName: "number",
+        nullable: false,
+    )]
+    protected Collection $subdecisions;
 
     /**
      * Constructor.
@@ -114,9 +161,9 @@ class Organ
     /**
      * Get the ID.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -126,7 +173,7 @@ class Organ
      *
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -136,7 +183,7 @@ class Organ
      *
      * @return string
      */
-    public function getAbbr()
+    public function getAbbr(): string
     {
         return $this->abbr;
     }
@@ -146,7 +193,7 @@ class Organ
      *
      * @param string $abbr
      */
-    public function setAbbr($abbr)
+    public function setAbbr(string $abbr): void
     {
         $this->abbr = $abbr;
     }
@@ -156,7 +203,7 @@ class Organ
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -166,7 +213,7 @@ class Organ
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -174,9 +221,9 @@ class Organ
     /**
      * Get the type.
      *
-     * @return string
+     * @return OrganTypes
      */
-    public function getType()
+    public function getType(): OrganTypes
     {
         return $this->type;
     }
@@ -184,9 +231,9 @@ class Organ
     /**
      * Set the type.
      *
-     * @param string $type
+     * @param OrganTypes $type
      */
-    public function setType($type)
+    public function setType(OrganTypes $type): void
     {
         $this->type = $type;
     }
@@ -194,9 +241,9 @@ class Organ
     /**
      * Get the foundation.
      *
-     * @return Report\Model\SubDecision\Foundation
+     * @return Foundation
      */
-    public function getFoundation()
+    public function getFoundation(): Foundation
     {
         return $this->foundation;
     }
@@ -204,9 +251,9 @@ class Organ
     /**
      * Set the foundation.
      *
-     * @param Report\Model\SubDecision\Foundation $foundation
+     * @param Foundation $foundation
      */
-    public function setFoundation($foundation)
+    public function setFoundation(Foundation $foundation): void
     {
         $this->foundation = $foundation;
     }
@@ -216,7 +263,7 @@ class Organ
      *
      * @return DateTime
      */
-    public function getFoundationDate()
+    public function getFoundationDate(): DateTime
     {
         return $this->foundationDate;
     }
@@ -226,7 +273,7 @@ class Organ
      *
      * @param DateTime $foundationDate
      */
-    public function setFoundationDate(\DateTime $foundationDate)
+    public function setFoundationDate(DateTime $foundationDate): void
     {
         $this->foundationDate = $foundationDate;
     }
@@ -234,9 +281,9 @@ class Organ
     /**
      * Get the abrogation date.
      *
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getAbrogationDate()
+    public function getAbrogationDate(): ?DateTime
     {
         return $this->abrogationDate;
     }
@@ -244,9 +291,9 @@ class Organ
     /**
      * Set the abrogation date.
      *
-     * @param DateTime $abrogationDate
+     * @param DateTime|null $abrogationDate
      */
-    public function setAbrogationDate(\DateTime $abrogationDate)
+    public function setAbrogationDate(?DateTime $abrogationDate): void
     {
         $this->abrogationDate = $abrogationDate;
     }
@@ -254,9 +301,9 @@ class Organ
     /**
      * Get the members.
      *
-     * @return OrganMember
+     * @return Collection of OrganMember
      */
-    public function getMembers()
+    public function getMembers(): Collection
     {
         return $this->members;
     }
@@ -266,7 +313,7 @@ class Organ
      *
      * @param array $subdecisions
      */
-    public function addSubdecisions($subdecisions)
+    public function addSubdecisions(array $subdecisions): void
     {
         foreach ($subdecisions as $subdecision) {
             $this->addSubdecision($subdecision);
@@ -278,7 +325,7 @@ class Organ
      *
      * @param SubDecision $subdecision
      */
-    public function addSubdecision(SubDecision $subdecision)
+    public function addSubdecision(SubDecision $subdecision): void
     {
         if (!$this->subdecisions->contains($subdecision)) {
             $this->subdecisions[] = $subdecision;

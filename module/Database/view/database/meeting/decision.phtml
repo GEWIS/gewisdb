@@ -4,7 +4,7 @@ use Database\Model\Meeting;
 <?php if (isset($error) && $error): ?>
 <h1>Dit besluit bestaat al</h1>
 <?php else: ?>
-<h1>Toevoegen besluit <?= $meeting->getType() . ' ' ?>
+<h1>Toevoegen besluit <?= $meeting->getType()->value . ' ' ?>
 <?= $meeting->getNumber() ?>.<?= $point ?>.<?= $decision ?>
 </h1>
 

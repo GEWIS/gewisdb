@@ -3,39 +3,56 @@
 namespace Database\Model\SubDecision\Board;
 
 use Database\Model\SubDecision;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\{
+    Entity,
+    JoinColumn,
+    OneToOne,
+};
 
 /**
  * Discharge from board position.
  *
  * This decision references to an installation. The given installation is
  * 'undone' by this discharge.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Discharge extends SubDecision
 {
     /**
      * Reference to the installation of a member.
-     *
-     * @ORM\OneToOne(targetEntity="Installation",inversedBy="discharge")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
-     * })
      */
-    protected $installation;
-
+    #[OneToOne(
+        targetEntity: Installation::class,
+        inversedBy: "discharge",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "r_decision_point",
+        referencedColumnName: "decision_point",
+    )]
+    #[JoinColumn(
+        name: "r_decision_number",
+        referencedColumnName: "decision_number",
+    )]
+    #[JoinColumn(
+        name: "r_number",
+        referencedColumnName: "number",
+    )]
+    protected Installation $installation;
 
     /**
      * Get installation.
      *
      * @return Installation
      */
-    public function getInstallation()
+    public function getInstallation(): Installation
     {
         return $this->installation;
     }
@@ -45,7 +62,7 @@ class Discharge extends SubDecision
      *
      * @param Installation $installation
      */
-    public function setInstallation(Installation $installation)
+    public function setInstallation(Installation $installation): void
     {
         $this->installation = $installation;
     }
@@ -55,35 +72,12 @@ class Discharge extends SubDecision
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         $member = $this->getInstallation()->getMember()->getFullName();
         $function = $this->getInstallation()->getFunction();
 
-        $text = $member . ' wordt gedechargeerd als ' . $function
+        return $member . ' wordt gedechargeerd als ' . $function
               . ' der s.v. GEWIS.';
-        return $text;
-    }
-
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @param DateTime $date
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(\DateTime $date)
-    {
-        $formatter = new \IntlDateFormatter(
-            'nl_NL', // yes, hardcoded :D
-            \IntlDateFormatter::NONE,
-            \IntlDateFormatter::NONE,
-            \date_default_timezone_get(),
-            null,
-            'd MMMM Y'
-        );
-        return $formatter->format($date);
     }
 }

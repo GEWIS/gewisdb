@@ -117,7 +117,7 @@ class Installation
     {
         return sprintf(
             '%s%d%d%d%d',
-            $installation->getMeetingType(),
+            $installation->getMeetingType()->value,
             $installation->getMeetingNumber(),
             $installation->getDecisionPoint(),
             $installation->getDecisionNumber(),

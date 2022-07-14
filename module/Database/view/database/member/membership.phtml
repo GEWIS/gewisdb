@@ -17,7 +17,7 @@ $form->setAttribute('class', 'form-horizontal');
 <?php
 $element = $form->get('type');
 $element->setAttribute('placeholder', $element->getLabel());
-$element->setValue($member->getType());
+$element->setValue($member->getType()->value);
 //$element->setLabelAttributes(array('class' => 'radio-inline'));
 ?>
     <div class="form-group">

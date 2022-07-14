@@ -2,46 +2,55 @@
 
 namespace Database\Model\SubDecision;
 
-use Database\Model\SubDecision;
 use Database\Model\Member;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToOne,
+};
 
 /**
  * Installation into organ.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Installation extends FoundationReference
 {
     /**
      * Function given.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $function;
+    #[Column(type: "string")]
+    protected string $function;
 
     /**
      * Member.
-     *
-     * @ORM\ManyToOne(targetEntity="Database\Model\Member",inversedBy="installations")
-     * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
-    protected $member;
+    #[ManyToOne(
+        targetEntity: Member::class,
+        inversedBy: "installations",
+    )]
+    #[JoinColumn(
+        name: "lidnr",
+        referencedColumnName: "lidnr",
+    )]
+    protected Member $member;
 
     /**
      * Discharges.
-     *
-     * @ORM\OneToOne(targetEntity="Discharge",mappedBy="installation")
      */
-    protected $discharge;
-
+    #[OneToOne(
+        targetEntity: Discharge::class,
+        mappedBy: "installation",
+    )]
+    protected Discharge $discharge;
 
     /**
      * Get the function.
      *
      * @return string
      */
-    public function getFunction()
+    public function getFunction(): string
     {
         return $this->function;
     }
@@ -51,7 +60,7 @@ class Installation extends FoundationReference
      *
      * @param string $function
      */
-    public function setFunction($function)
+    public function setFunction(string $function): void
     {
         $this->function = $function;
     }
@@ -61,7 +70,7 @@ class Installation extends FoundationReference
      *
      * @return Member
      */
-    public function getMember()
+    public function getMember(): Member
     {
         return $this->member;
     }
@@ -71,7 +80,7 @@ class Installation extends FoundationReference
      *
      * @param Member $member
      */
-    public function setMember(Member $member)
+    public function setMember(Member $member): void
     {
         $this->member = $member;
     }
@@ -83,7 +92,7 @@ class Installation extends FoundationReference
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         $member = $this->getMember()->getFullName();
         $text = $member . ' wordt geïnstalleerd als ' . $this->getFunction();
@@ -96,7 +105,7 @@ class Installation extends FoundationReference
      *
      * @return Discharge
      */
-    public function getDischarge()
+    public function getDischarge(): Discharge
     {
         return $this->discharge;
     }

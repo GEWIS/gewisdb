@@ -2,91 +2,129 @@
 
 namespace Database\Model;
 
-use Doctrine\ORM\Mapping as ORM;
+use Application\Model\Enums\MeetingTypes;
+use Doctrine\ORM\Mapping\{
+    Column,
+    DiscriminatorColumn,
+    DiscriminatorMap,
+    Entity,
+    Id,
+    InheritanceType,
+    JoinColumn,
+    ManyToOne,
+};
+use Database\Model\SubDecision\{
+    Abrogation,
+    Board\Discharge as BoardDischarge,
+    Board\Installation as BoardInstallation,
+    Board\Release as BoardRelease,
+    Budget,
+    Destroy,
+    Discharge,
+    Foundation,
+    FoundationReference,
+    Installation,
+    Other,
+    Reckoning,
+};
 
 /**
  * SubDecision model.
- *
- * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({
- *  "foundation"="Database\Model\SubDecision\Foundation",
- *  "abrogation"="Database\Model\SubDecision\Abrogation",
- *  "installation"="Database\Model\SubDecision\Installation",
- *  "discharge"="Database\Model\SubDecision\Discharge",
- *  "budget"="Database\Model\SubDecision\Budget",
- *  "reckoning"="Database\Model\SubDecision\Reckoning",
- *  "other"="Database\Model\SubDecision\Other",
- *  "destroy"="Database\Model\SubDecision\Destroy",
- *  "board_installation"="Database\Model\SubDecision\Board\Installation",
- *  "board_release"="Database\Model\SubDecision\Board\Release",
- *  "board_discharge"="Database\Model\SubDecision\Board\Discharge",
- *  "foundationreference"="Database\Model\SubDecision\FoundationReference"
- * })
  */
+#[Entity]
+#[InheritanceType(value: "SINGLE_TABLE")]
+#[DiscriminatorColumn(
+    name: "type",
+    type: "string",
+)]
+#[DiscriminatorMap(
+    value: [
+        "foundation" => Foundation::class,
+        "abrogation" => Abrogation::class,
+        "installation" => Installation::class,
+        "discharge" => Discharge::class,
+        "budget" => Budget::class,
+        "reckoning" => Reckoning::class,
+        "other" => Other::class,
+        "destroy" => Destroy::class,
+        "board_installation" => BoardInstallation::class,
+        "board_release" => BoardRelease::class,
+        "board_discharge" => BoardDischarge::class,
+        "foundationreference" => FoundationReference::class,
+    ],
+)]
 abstract class SubDecision
 {
     /**
      * Decision.
-     *
-     * @ORM\ManyToOne(targetEntity="Decision", inversedBy="subdecisions")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="decision_point", referencedColumnName="point"),
-     *  @ORM\JoinColumn(name="decision_number", referencedColumnName="number"),
-     * })
      */
-    protected $decision;
+    #[ManyToOne(
+        targetEntity: Decision::class,
+        inversedBy: "subdecisions",
+    )]
+    #[JoinColumn(
+        name: "meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "decision_point",
+        referencedColumnName: "point",
+    )]
+    #[JoinColumn(
+        name: "decision_number",
+        referencedColumnName: "number",
+    )]
+    protected Decision $decision;
 
     /**
      * Meeting type.
      *
      * NOTE: This is a hack to make the decision a primary key here.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="string")
      */
-    protected $meeting_type;
+    #[Id]
+    #[Column(
+        type: "string",
+        enumType: MeetingTypes::class,
+    )]
+    protected MeetingTypes $meeting_type;
 
     /**
      * Meeting number
      *
      * NOTE: This is a hack to make the decision a primary key here.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
      */
-    protected $meeting_number;
+    #[Id]
+    #[Column(type: "integer")]
+    protected int $meeting_number;
 
     /**
      * Decision point.
      *
      * NOTE: This is a hack to make the decision a primary key here.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
      */
-    protected $decision_point;
+    #[Id]
+    #[Column(type: "integer")]
+    protected int $decision_point;
 
     /**
      * Decision number.
      *
      * NOTE: This is a hack to make the decision a primary key here.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
      */
-    protected $decision_number;
+    #[Id]
+    #[Column(type: "integer")]
+    protected int $decision_number;
 
     /**
      * Sub decision number.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
      */
-    protected $number;
+    #[Id]
+    #[Column(type: "integer")]
+    protected int $number;
 
 
     /**
@@ -94,7 +132,7 @@ abstract class SubDecision
      *
      * @return Decision
      */
-    public function getDecision()
+    public function getDecision(): Decision
     {
         return $this->decision;
     }
@@ -104,7 +142,7 @@ abstract class SubDecision
      *
      * @param Decision $decision
      */
-    public function setDecision(Decision $decision)
+    public function setDecision(Decision $decision): void
     {
         $decision->addSubdecision($this);
         $this->meeting_type = $decision->getMeetingType();
@@ -117,9 +155,9 @@ abstract class SubDecision
     /**
      * Get the meeting type.
      *
-     * @return string
+     * @return MeetingTypes
      */
-    public function getMeetingType()
+    public function getMeetingType(): MeetingTypes
     {
         return $this->meeting_type;
     }
@@ -129,7 +167,7 @@ abstract class SubDecision
      *
      * @return int
      */
-    public function getMeetingNumber()
+    public function getMeetingNumber(): int
     {
         return $this->meeting_number;
     }
@@ -139,7 +177,7 @@ abstract class SubDecision
      *
      * @return int
      */
-    public function getDecisionPoint()
+    public function getDecisionPoint(): int
     {
         return $this->decision_point;
     }
@@ -149,7 +187,7 @@ abstract class SubDecision
      *
      * @return int
      */
-    public function getDecisionNumber()
+    public function getDecisionNumber(): int
     {
         return $this->decision_number;
     }
@@ -159,7 +197,7 @@ abstract class SubDecision
      *
      * @return int
      */
-    public function getNumber()
+    public function getNumber(): int
     {
         return $this->number;
     }
@@ -169,7 +207,7 @@ abstract class SubDecision
      *
      * @param int $number
      */
-    public function setNumber($number)
+    public function setNumber(int $number): void
     {
         $this->number = $number;
     }
@@ -179,5 +217,5 @@ abstract class SubDecision
      *
      * @return string
      */
-    abstract public function getContent();
+    abstract public function getContent(): string;
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace Database;
+
 use Database\Controller\AddressController;
 use Database\Controller\ExportController;
 use Database\Controller\Factory\AddressControllerFactory;
@@ -17,7 +19,7 @@ use Database\Controller\OrganController;
 use Database\Controller\ProspectiveMemberController;
 use Database\Controller\QueryController;
 use Database\Controller\SettingsController;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 
@@ -526,23 +528,17 @@ return array(
     ),
     'doctrine' => array(
         'driver' => array(
-            'database_entities' => array(
-                'class' => AnnotationDriver::class,
-                'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/Model/')
-            ),
-            'orm_default' => array(
-                'drivers' => array(
-                    'Database\Model' => 'database_entities'
-                ),
-            )
+            __NAMESPACE__ . '_driver' => [
+                'class' => AttributeDriver::class,
+                'paths' => [
+                    __DIR__ . '/../src/Model/',
+                ],
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Model' => __NAMESPACE__ . '_driver',
+                ],
+            ],
         ),
-        'configuration' => array(
-            'orm_default' => array(
-                'entity_namespaces' => array(
-                    'dborig' => 'Database\Model'
-                )
-            )
-        )
     )
 );

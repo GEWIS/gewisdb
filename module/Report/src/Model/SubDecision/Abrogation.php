@@ -2,14 +2,12 @@
 
 namespace Report\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-use Report\Model\SubDecision\FoundationReference;
+use Doctrine\ORM\Mapping\Entity;
 
 /**
  * Abrogation of an organ.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Abrogation extends FoundationReference
 {
 }

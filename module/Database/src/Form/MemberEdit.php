@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use Application\Model\Enums\GenderTypes;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilter;
@@ -55,9 +56,9 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'options' => array(
                 'label' => 'Geslacht',
                 'value_options' => array(
-                    'm' => 'Man',
-                    'f' => 'Vrouw',
-                    'o' => 'Anders'
+                    GenderTypes::Male->value => 'Man',
+                    GenderTypes::Female->value => 'Vrouw',
+                    GenderTypes::Other->value => 'Anders'
                 )
             )
         ));

@@ -2,14 +2,13 @@
 
 namespace Report\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 use Report\Model\SubDecision;
 
 /**
  * Entity for undefined decisions.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Other extends SubDecision
 {
 }

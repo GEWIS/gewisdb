@@ -60,7 +60,7 @@ class Organ
     {
         return sprintf(
             '%s%d%d%d%d',
-            $foundation->getMeetingType(),
+            $foundation->getMeetingType()->value,
             $foundation->getMeetingNumber(),
             $foundation->getDecisionPoint(),
             $foundation->getDecisionNumber(),

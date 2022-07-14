@@ -2,6 +2,7 @@
 
 namespace Database\Form\Fieldset;
 
+use Application\Model\Enums\AddressTypes;
 use Database\Model\Address as AddressModel;
 use Laminas\Filter\StringToLower;
 use Laminas\Form\Fieldset;
@@ -86,7 +87,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                     array(
                         'name' => InArray::class,
                         'options' => array(
-                            'haystack' => AddressModel::getTypes()
+                            'haystack' => AddressTypes::values(),
                         )
                     )
                 )

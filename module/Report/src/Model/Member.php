@@ -2,67 +2,76 @@
 
 namespace Report\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Application\Model\Enums\GenderTypes;
+use Application\Model\Enums\MembershipTypes;
+use DateTime;
+use DateTimeInterface;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection,
+};
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    Id,
+    InverseJoinColumn,
+    JoinColumn,
+    JoinTable,
+    ManyToMany,
+    OneToMany,
+};
+use InvalidArgumentException;
+use Report\Model\SubDecision\Installation;
 
 /**
  * Member model.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Member
 {
-    public const GENDER_MALE = 'm';
-    public const GENDER_FEMALE = 'f';
-    public const GENDER_OTHER = 'o';
-
-    public const TYPE_ORDINARY = 'ordinary';
-    public const TYPE_EXTERNAL = 'external';
-    public const TYPE_GRADUATE = 'graduate';
-    public const TYPE_HONORARY = 'honorary';
-
     /**
-     * The user
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer", name="lidnr")
+     * The user.
      */
-    protected $lidnr;
+    #[Id]
+    #[Column(type: "integer")]
+    #[JoinColumn(
+        name: "lidnr",
+        referencedColumnName: "lidnr",
+    )]
+    protected ?int $lidnr = null;
 
     /**
      * Member's email address.
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
-    protected $email;
+    #[Column(
+        type: "string",
+        nullable: true,
+    )]
+    protected ?string $email = null;
 
     /**
      * Member's last name.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $lastName;
+    #[Column(type: "string")]
+    protected string $lastName;
 
     /**
      * Middle name.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $middleName;
+    #[Column(type: "string")]
+    protected string $middleName;
 
     /**
      * Initials.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $initials;
+    #[Column(type: "string")]
+    protected string $initials;
 
     /**
      * First name.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $firstName;
+    #[Column(type: "string")]
+    protected string $firstName;
 
     /**
      * Gender of the member.
@@ -70,20 +79,21 @@ class Member
      * Either one of:
      * - m
      * - f
-     *
-     * @ORM\Column(type="string",length=1)
      */
-    protected $gender;
+    #[Column(
+        type: "string",
+        enumType: GenderTypes::class,
+    )]
+    protected GenderTypes $gender;
 
     /**
      * Generation.
      *
      * This is the year that this member became a GEWIS member. This is not
      * a academic year, but rather a calendar year.
-     *
-     * @ORM\Column(type="integer")
      */
-    protected $generation;
+    #[Column(type: "integer")]
+    protected int $generation;
 
     /**
      * Member type.
@@ -98,131 +108,121 @@ class Member
      * You can find the GEWIS statuten here: https://gewis.nl/vereniging/statuten/statuten.
      *
      * See artikel 7.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $type;
+    #[Column(
+        type: "string",
+        enumType: MembershipTypes::class,
+    )]
+    protected MembershipTypes $type;
 
     /**
      * Last changed date of membership.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $changedOn;
+    #[Column(type: "date")]
+    protected DateTime $changedOn;
 
     /**
      * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
      * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
      * still meets the requirements as set forth in the bylaws and internal regulations.
-     *
-     * @ORM\Column(type="date", nullable=true)
      */
-    protected $membershipEndsOn;
+    #[Column(
+        type: "date",
+        nullable: true,
+    )]
+    protected ?DateTime $membershipEndsOn = null;
 
     /**
      * Member birth date.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $birth;
+    #[Column(type: "date")]
+    protected DateTime $birth;
 
     /**
      * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
      * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $expiration;
+    #[Column(type: "date")]
+    protected DateTime $expiration;
 
     /**
      * How much the member has paid for membership. 0 by default.
-     *
-     * @ORM\Column(type="integer")
      */
-    protected $paid = 0;
+    #[Column(type: "integer")]
+    protected int $paid = 0;
 
     /**
      * Iban number.
-     *
-     * @ORM\Column(type="string",nullable=true)
      */
-    protected $iban;
+    #[Column(
+        type: "string",
+        nullable: true,
+    )]
+    protected ?string $iban = null;
 
     /**
-     * If the member receives a 'supremum'
-     *
-     * @ORM\Column(type="string",nullable=true)
+     * If the member receives a 'supremum'.
      */
-    protected $supremum;
+    #[Column(
+        type: "string",
+        nullable: true,
+    )]
+    protected ?string $supremum = null;
 
     /**
      * Addresses of this member.
-     *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="member",cascade={"persist", "remove"})
      */
-    protected $addresses;
+    #[OneToMany(
+        targetEntity: Address::class,
+        mappedBy: "member",
+        cascade: ["persist"],
+    )]
+    protected Collection $addresses;
 
     /**
      * Installations of this member.
-     *
-     * @ORM\OneToMany(targetEntity="Report\Model\SubDecision\Installation",mappedBy="member")
      */
-    protected $installations;
+    #[OneToMany(
+        targetEntity: Installation::class,
+        mappedBy: "member",
+    )]
+    protected Collection $installations;
 
     /**
      * Memberships of mailing lists.
-     *
-     * @ORM\ManyToMany(targetEntity="MailingList", inversedBy="members")
-     * @ORM\JoinTable(name="members_mailinglists",
-     *      joinColumns={@ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="name", referencedColumnName="name")}
-     * )
      */
-    protected $lists;
+    #[ManyToMany(
+        targetEntity: MailingList::class,
+        inversedBy: "members",
+    )]
+    #[JoinTable(name: "members_mailinglists")]
+    #[JoinColumn(
+        name: "lidnr",
+        referencedColumnName: "lidnr"
+    )]
+    #[InverseJoinColumn(
+        name: "name",
+        referencedColumnName: "name",
+    )]
+    protected Collection $lists;
 
     /**
      * Organ memberships.
-     *
-     * @ORM\OneToMany(targetEntity="OrganMember", mappedBy="member")
      */
-     protected $organInstallations;
+    #[OneToMany(
+        targetEntity: OrganMember::class,
+        mappedBy: "member",
+    )]
+    protected Collection $organInstallations;
 
     /**
      * Board memberships.
-     *
-     * @ORM\OneToMany(targetEntity="BoardMember", mappedBy="member")
      */
-     protected $boardInstallations;
-
-    /**
-     * Static method to get available genders.
-     *
-     * @return array
-     */
-    protected static function getGenders()
-    {
-        return array(
-            self::GENDER_MALE,
-            self::GENDER_FEMALE,
-            self::GENDER_OTHER
-        );
-    }
-
-    /**
-     * Static method to get available member types.
-     *
-     * @return array
-     */
-    protected static function getTypes()
-    {
-        return array(
-            self::TYPE_ORDINARY,
-            self::TYPE_EXTERNAL,
-            self::TYPE_GRADUATE,
-            self::TYPE_HONORARY
-        );
-    }
-
+    #[OneToMany(
+        targetEntity: BoardMember::class,
+        mappedBy: "member",
+    )]
+    protected Collection $boardInstallations;
 
     /**
      * Constructor.
@@ -241,7 +241,7 @@ class Member
      *
      * @return int
      */
-    public function getLidnr()
+    public function getLidnr(): int
     {
         return $this->lidnr;
     }
@@ -251,7 +251,7 @@ class Member
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -261,7 +261,7 @@ class Member
      *
      * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -271,7 +271,7 @@ class Member
      *
      * @return string
      */
-    public function getMiddleName()
+    public function getMiddleName(): string
     {
         return $this->middleName;
     }
@@ -281,7 +281,7 @@ class Member
      *
      * @return string
      */
-    public function getInitials()
+    public function getInitials(): string
     {
         return $this->initials;
     }
@@ -291,7 +291,7 @@ class Member
      *
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -299,9 +299,9 @@ class Member
     /**
      * Set the lidnr.
      *
-     * @param string $lidnr
+     * @param int $lidnr
      */
-    public function setLidnr($lidnr)
+    public function setLidnr(int $lidnr): void
     {
         $this->lidnr = $lidnr;
     }
@@ -311,7 +311,7 @@ class Member
      *
      * @param string|null $email
      */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
@@ -321,7 +321,7 @@ class Member
      *
      * @param string $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -331,7 +331,7 @@ class Member
      *
      * @param string $middleName
      */
-    public function setMiddleName($middleName)
+    public function setMiddleName(string $middleName): void
     {
         $this->middleName = $middleName;
     }
@@ -339,9 +339,9 @@ class Member
     /**
      * Set the member's initials.
      *
-     * @param string $initals
+     * @param string $initials
      */
-    public function setInitials($initials)
+    public function setInitials(string $initials): void
     {
         $this->initials = $initials;
     }
@@ -351,7 +351,7 @@ class Member
      *
      * @param string $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -361,7 +361,7 @@ class Member
      *
      * @return string
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         $name = $this->getFirstName() . ' ';
 
@@ -376,9 +376,9 @@ class Member
     /**
      * Get the member's gender.
      *
-     * @return string
+     * @return GenderTypes
      */
-    public function getGender()
+    public function getGender(): GenderTypes
     {
         return $this->gender;
     }
@@ -386,24 +386,19 @@ class Member
     /**
      * Set the member's gender.
      *
-     * @param string $gender
-     *
-     * @throws \InvalidArgumentException when the gender does not have correct value
+     * @param GenderTypes $gender
      */
-    public function setGender($gender)
+    public function setGender(GenderTypes $gender): void
     {
-        if (!in_array($gender, self::getGenders())) {
-            throw new \InvalidArgumentException("Invalid gender value");
-        }
         $this->gender = $gender;
     }
 
     /**
      * Get the generation.
      *
-     * @return string
+     * @return int
      */
-    public function getGeneration()
+    public function getGeneration(): int
     {
         return $this->generation;
     }
@@ -411,9 +406,9 @@ class Member
     /**
      * Set the generation.
      *
-     * @param string $generation
+     * @param int $generation
      */
-    public function setGeneration($generation)
+    public function setGeneration(int $generation): void
     {
         $this->generation = $generation;
     }
@@ -421,9 +416,9 @@ class Member
     /**
      * Get the member type.
      *
-     * @return string
+     * @return MembershipTypes
      */
-    public function getType()
+    public function getType(): MembershipTypes
     {
         return $this->type;
     }
@@ -431,24 +426,19 @@ class Member
     /**
      * Set the member type.
      *
-     * @param string $type
-     *
-     * @throws \InvalidArgumentException When the type is incorrect.
+     * @param MembershipTypes $type
      */
-    public function setType($type)
+    public function setType(MembershipTypes $type): void
     {
-        if (!in_array($type, self::getTypes())) {
-            throw new \InvalidArgumentException("Nonexisting type given.");
-        }
         $this->type = $type;
     }
 
     /**
      * Get the expiration date.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getExpiration()
+    public function getExpiration(): DateTime
     {
         return $this->expiration;
     }
@@ -456,9 +446,9 @@ class Member
     /**
      * Set the expiration date.
      *
-     * @param \DateTime $expiration
+     * @param DateTime $expiration
      */
-    public function setExpiration($expiration)
+    public function setExpiration(DateTime $expiration): void
     {
         $this->expiration = $expiration;
     }
@@ -466,9 +456,9 @@ class Member
     /**
      * Get the birth date.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getBirth()
+    public function getBirth(): DateTime
     {
         return $this->birth;
     }
@@ -476,9 +466,9 @@ class Member
     /**
      * Set the birthdate.
      *
-     * @param \DateTime $birth
+     * @param DateTime $birth
      */
-    public function setBirth(\DateTime $birth)
+    public function setBirth(DateTime $birth): void
     {
         $this->birth = $birth;
     }
@@ -486,9 +476,9 @@ class Member
     /**
      * Get the date of the last membership change.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getChangedOn()
+    public function getChangedOn(): DateTime
     {
         return $this->changedOn;
     }
@@ -496,9 +486,9 @@ class Member
     /**
      * Set the date of the last membership change.
      *
-     * @param \DateTime $changedOn
+     * @param DateTime $changedOn
      */
-    public function setChangedOn($changedOn)
+    public function setChangedOn(DateTime $changedOn): void
     {
         $this->changedOn = $changedOn;
     }
@@ -506,9 +496,9 @@ class Member
     /**
      * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getMembershipEndsOn()
+    public function getMembershipEndsOn(): ?DateTime
     {
         return $this->membershipEndsOn;
     }
@@ -516,9 +506,9 @@ class Member
     /**
      * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
      *
-     * @param \DateTime|null $membershipEndsOn
+     * @param DateTime|null $membershipEndsOn
      */
-    public function setMembershipEndsOn($membershipEndsOn)
+    public function setMembershipEndsOn(?DateTime $membershipEndsOn): void
     {
         $this->membershipEndsOn = $membershipEndsOn;
     }
@@ -528,7 +518,7 @@ class Member
      *
      * @return int
      */
-    public function getPaid()
+    public function getPaid(): int
     {
         return $this->paid;
     }
@@ -538,7 +528,7 @@ class Member
      *
      * @param int $paid
      */
-    public function setPaid($paid)
+    public function setPaid(int $paid): void
     {
         $this->paid = $paid;
     }
@@ -546,9 +536,9 @@ class Member
     /**
      * Get the IBAN.
      *
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }
@@ -556,9 +546,9 @@ class Member
     /**
      * Set the IBAN.
      *
-     * @param string $iban
+     * @param string|null $iban
      */
-    public function setIban($iban)
+    public function setIban(?string $iban): void
     {
         $this->iban = $iban;
     }
@@ -566,9 +556,9 @@ class Member
     /**
      * Get if the member wants a supremum.
      *
-     * @return string
+     * @return string|null
      */
-    public function getSupremum()
+    public function getSupremum(): ?string
     {
         return $this->supremum;
     }
@@ -576,9 +566,9 @@ class Member
     /**
      * Set if the member wants a supremum.
      *
-     * @param string $supremum
+     * @param string|null $supremum
      */
-    public function setSupremum($supremum)
+    public function setSupremum(?string $supremum): void
     {
         $this->supremum = $supremum;
     }
@@ -586,9 +576,9 @@ class Member
     /**
      * Get the installations.
      *
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getInstallations()
+    public function getInstallations(): Collection
     {
         return $this->installations;
     }
@@ -598,9 +588,9 @@ class Member
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        return array(
+        return [
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -609,17 +599,17 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
-            'membershipEndsOn' => (null !== $this->getMembershipEndsOn()) ? $this->getMembershipEndsOn()->format('l j F Y') : null,
-            'expiration' => $this->getExpiration()->format('l j F Y')
-        );
+            'membershipEndsOn' => $this->getMembershipEndsOn()?->format(DateTimeInterface::ISO8601) ?? null,
+            'expiration' => $this->getExpiration()->format(DateTimeInterface::ISO8601),
+        ];
     }
 
     /**
      * Get all addresses.
      *
-     * @return ArrayCollection all addresses
+     * @return Collection all addresses
      */
-    public function getAddresses()
+    public function getAddresses(): Collection
     {
         return $this->addresses;
     }
@@ -627,7 +617,7 @@ class Member
     /**
      * Clear all addresses.
      */
-    public function clearAddresses()
+    public function clearAddresses(): void
     {
         $this->addresses = new ArrayCollection();
     }
@@ -637,7 +627,7 @@ class Member
      *
      * @param array $addresses
      */
-    public function addAddresses($addresses)
+    public function addAddresses(array $addresses): void
     {
         foreach ($addresses as $address) {
             $this->addAddress($address);
@@ -649,7 +639,7 @@ class Member
      *
      * @param Address $address
      */
-    public function addAddress(Address $address)
+    public function addAddress(Address $address): void
     {
         $address->setMember($this);
         $this->addresses[] = $address;
@@ -658,9 +648,9 @@ class Member
     /**
      * Get mailing list subscriptions.
      *
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getLists()
+    public function getLists(): Collection
     {
         return $this->lists;
     }
@@ -672,23 +662,10 @@ class Member
      *
      * @param MailingList $list
      */
-    public function addList(MailingList $list)
+    public function addList(MailingList $list): void
     {
         $list->addMember($this);
         $this->lists[] = $list;
-    }
-
-    /**
-     * Remove a mailing list subscription.
-     *
-     * Note that this is the owning side.
-     *
-     * @param MailingList $list
-     */
-    public function removeList(MailingList $list)
-    {
-        $list->removeMember($this);
-        $this->lists->removeElement($list);
     }
 
     /**
@@ -696,7 +673,7 @@ class Member
      *
      * @param array $lists
      */
-    public function addLists($lists)
+    public function addLists(array $lists): void
     {
         foreach ($lists as $list) {
             $this->addList($list);
@@ -706,7 +683,7 @@ class Member
     /**
      * Clear the lists.
      */
-    public function clearLists()
+    public function clearLists(): void
     {
         $this->lists = new ArrayCollection();
     }

@@ -2,84 +2,120 @@
 
 namespace Report\Model;
 
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    GeneratedValue,
+    Id,
+    JoinColumn,
+    ManyToOne,
+    OneToOne,
+};
 use Report\Model\SubDecision\Installation;
 
 /**
  * Organ member entity.
  *
- * Note that this entity is derived from the decisions themselves.
- *
- * @ORM\Entity
+ * Note that this entity is derived from the decisions themself.
  */
+#[Entity]
 class OrganMember
 {
     /**
      * Id.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
      */
-    protected $id;
+    #[Id]
+    #[Column(type: "integer")]
+    #[GeneratedValue(strategy: "AUTO")]
+    protected ?int $id = null;
 
     /**
      * Organ.
-     *
-     * @ORM\ManyToOne(targetEntity="Organ",inversedBy="members")
      */
-    protected $organ;
+    #[ManyToOne(
+        targetEntity: Organ::class,
+        inversedBy: "members",
+    )]
+    protected Organ $organ;
 
     /**
      * Member.
-     *
-     * @ORM\ManyToOne(targetEntity="Member",inversedBy="organInstallations")
-     * @ORM\JoinColumn(name="lidnr",referencedColumnName="lidnr")
      */
-    protected $member;
+    #[ManyToOne(
+        targetEntity: Member::class,
+        inversedBy: "organInstallations",
+    )]
+    #[JoinColumn(
+        name: "lidnr",
+        referencedColumnName: "lidnr",
+    )]
+    protected Member $member;
 
     /**
      * Function.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $function;
+    #[Column(type: "string")]
+    protected string $function;
 
     /**
      * Installation date.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $installDate;
+    #[Column(type: "date")]
+    protected DateTime $installDate;
 
     /**
      * Installation.
-     *
-     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Installation",inversedBy="organMember")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
-     * })
      */
-    protected $installation;
+    #[OneToOne(
+        targetEntity: Installation::class,
+        inversedBy: "organMember",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "r_decision_point",
+        referencedColumnName: "decision_point",
+    )]
+    #[JoinColumn(
+        name: "r_decision_number",
+        referencedColumnName: "decision_number",
+    )]
+    #[JoinColumn(
+        name: "r_number",
+        referencedColumnName: "number",
+    )]
+    protected Installation $installation;
 
     /**
      * Discharge date.
-     *
-     * @ORM\Column(type="date", nullable=true)
      */
-    protected $dischargeDate;
+    #[Column(
+        type: "date",
+        nullable: true,
+    )]
+    protected ?DateTime $dischargeDate = null;
 
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     /**
      * Set the organ.
      *
      * @param Organ $organ
      */
-    public function setOrgan(Organ $organ)
+    public function setOrgan(Organ $organ): void
     {
         $this->organ = $organ;
     }
@@ -89,7 +125,7 @@ class OrganMember
      *
      * @return Organ
      */
-    public function getOrgan()
+    public function getOrgan(): Organ
     {
         return $this->organ;
     }
@@ -99,7 +135,7 @@ class OrganMember
      *
      * @param Member $member
      */
-    public function setMember(Member $member)
+    public function setMember(Member $member): void
     {
         $this->member = $member;
     }
@@ -109,27 +145,27 @@ class OrganMember
      *
      * @return Member
      */
-    public function getMember()
+    public function getMember(): Member
     {
         return $this->member;
     }
 
     /**
-     * Set the function
+     * Set the function.
      *
      * @param string $function
      */
-    public function setFunction($function)
+    public function setFunction(string $function): void
     {
         $this->function = $function;
     }
 
     /**
-     * Get the function
+     * Get the function.
      *
      * @return string
      */
-    public function getFunction()
+    public function getFunction(): string
     {
         return $this->function;
     }
@@ -137,9 +173,9 @@ class OrganMember
     /**
      * Set the installation date.
      *
-     * @param \DateTime $installDate
+     * @param DateTime $installDate
      */
-    public function setInstallDate(\DateTime $installDate)
+    public function setInstallDate(DateTime $installDate): void
     {
         $this->installDate = $installDate;
     }
@@ -147,9 +183,9 @@ class OrganMember
     /**
      * Get the installation date.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getInstallDate()
+    public function getInstallDate(): DateTime
     {
         return $this->installDate;
     }
@@ -159,7 +195,7 @@ class OrganMember
      *
      * @param Installation $installation
      */
-    public function setInstallation($installation)
+    public function setInstallation(Installation $installation): void
     {
         $this->installation = $installation;
     }
@@ -169,7 +205,7 @@ class OrganMember
      *
      * @return Installation
      */
-    public function getInstallation()
+    public function getInstallation(): Installation
     {
         return $this->installation;
     }
@@ -177,9 +213,9 @@ class OrganMember
     /**
      * Set the discharge date.
      *
-     * @param \DateTime|null $dischargeDate
+     * @param DateTime|null $dischargeDate
      */
-    public function setDischargeDate($dischargeDate)
+    public function setDischargeDate(?DateTime $dischargeDate): void
     {
         $this->dischargeDate = $dischargeDate;
     }
@@ -187,9 +223,9 @@ class OrganMember
     /**
      * Get the discharge date.
      *
-     * @return \DateTime
+     * @return DateTime|null
      */
-    public function getDischargeDate()
+    public function getDischargeDate(): ?DateTime
     {
         return $this->dischargeDate;
     }

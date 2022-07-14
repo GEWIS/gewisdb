@@ -2,9 +2,15 @@
 
 namespace Database\Model\SubDecision;
 
-use Database\Model\SubDecision;
-use Database\Model\Decision;
-use Doctrine\ORM\Mapping as ORM;
+use Database\Model\{
+    SubDecision,
+    Decision,
+};
+use Doctrine\ORM\Mapping\{
+    Entity,
+    JoinColumn,
+    OneToOne,
+};
 
 /**
  * Destroying a decision.
@@ -19,30 +25,41 @@ use Doctrine\ORM\Mapping as ORM;
  * Also note that destroying decisions that destroy is undefined behaviour!
  *
  * @author Pieter Kokx <kokx@gewis.nl>
- *
- * @ORM\Entity
  */
+#[Entity]
 class Destroy extends SubDecision
 {
     /**
      * Reference to the destruction of a decision.
-     *
-     * @ORM\OneToOne(targetEntity="\Database\Model\Decision",inversedBy="destroyedby")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="number"),
-     * })
      */
-    protected $target;
+    #[OneToOne(
+        targetEntity: Decision::class,
+        inversedBy: "destroyedby",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "r_decision_point",
+        referencedColumnName: "point",
+    )]
+    #[JoinColumn(
+        name: "r_decision_number",
+        referencedColumnName: "number",
+    )]
+    protected Decision $target;
 
     /**
      * Get the target.
      *
-     * @return SubDecision
+     * @return Decision
      */
-    public function getTarget()
+    public function getTarget(): Decision
     {
         return $this->target;
     }
@@ -50,9 +67,9 @@ class Destroy extends SubDecision
     /**
      * Set the target.
      *
-     * @param Target $target
+     * @param Decision $target
      */
-    public function setTarget(Decision $target)
+    public function setTarget(Decision $target): void
     {
         $this->target = $target;
     }
@@ -62,7 +79,7 @@ class Destroy extends SubDecision
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         $target = $this->getTarget();
         $meet = $this->getTarget()->getMeeting();
@@ -70,9 +87,9 @@ class Destroy extends SubDecision
         foreach ($target->getSubdecisions() as $sub) {
             $content[] = $sub->getContent();
         }
-        $text = "Besluit " . $meet->getType() . " " . $meet->getNumber()
+
+        return "Besluit " . $meet->getType()->value . " " . $meet->getNumber()
             . "." . $target->getPoint() . "." . $target->getNumber()
             . " wordt nietig verklaard. Het besluit luidde: \"" . implode(' ', $content) . '"';
-        return $text;
     }
 }

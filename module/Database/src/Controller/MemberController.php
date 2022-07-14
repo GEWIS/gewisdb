@@ -2,6 +2,7 @@
 
 namespace Database\Controller;
 
+use Application\Model\Enums\AddressTypes;
 use Database\Model\Member;
 use Database\Service\Member as MemberService;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -229,7 +230,7 @@ class MemberController extends AbstractActionController
     public function editAddressAction()
     {
         $lidnr = $this->params()->fromRoute('id');
-        $type = $this->params()->fromRoute('type');
+        $type = AddressTypes::from($this->params()->fromRoute('type'));
 
         if ($this->getRequest()->isPost()) {
             $address = $this->memberService->editAddress($this->getRequest()->getPost(), $lidnr, $type);
@@ -253,7 +254,7 @@ class MemberController extends AbstractActionController
     public function addAddressAction()
     {
         $lidnr = $this->params()->fromRoute('id');
-        $type = $this->params()->fromRoute('type');
+        $type = AddressTypes::from($this->params()->fromRoute('type'));
 
         if ($this->getRequest()->isPost()) {
             $address = $this->memberService->addAddress($this->getRequest()->getPost(), $lidnr, $type);
@@ -286,7 +287,7 @@ class MemberController extends AbstractActionController
     public function removeAddressAction()
     {
         $lidnr = $this->params()->fromRoute('id');
-        $type = $this->params()->fromRoute('type');
+        $type = AddressTypes::from($this->params()->fromRoute('type'));
 
         if ($this->getRequest()->isPost()) {
             $member = $this->memberService->removeAddress($this->getRequest()->getPost(), $lidnr, $type);

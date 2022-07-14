@@ -2,53 +2,67 @@
 
 namespace Report\Model\SubDecision;
 
-use Doctrine\ORM\Mapping as ORM;
-use Report\Model\SubDecision;
-use Report\Model\Member;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToOne,
+};
+use Report\Model\{
+    Member,
+    OrganMember,
+};
 
 /**
  * Installation into organ.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Installation extends FoundationReference
 {
     /**
      * Function given.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $function;
+    #[Column(type: "string")]
+    protected string $function;
 
     /**
      * Member.
-     *
-     * @ORM\ManyToOne(targetEntity="Report\Model\Member",inversedBy="installations")
-     * @ORM\JoinColumn(name="lidnr", referencedColumnName="lidnr")
      */
-    protected $member;
+    #[ManyToOne(
+        targetEntity: Member::class,
+        inversedBy: "installations",
+    )]
+    #[JoinColumn(
+        name: "lidnr",
+        referencedColumnName: "lidnr",
+    )]
+    protected Member $member;
 
     /**
      * Discharges.
-     *
-     * @ORM\OneToOne(targetEntity="Discharge",mappedBy="installation", cascade={"remove"})
      */
-    protected $discharge;
+    #[OneToOne(
+        targetEntity: Discharge::class,
+        mappedBy: "installation",
+    )]
+    protected Discharge $discharge;
 
     /**
      * The organmember reference.
-     *
-     * @ORM\OneToOne(targetEntity="Report\Model\OrganMember",mappedBy="installation", cascade={"remove"})
      */
-    protected $organMember;
-
+    #[OneToOne(
+        targetEntity: OrganMember::class,
+        mappedBy: "installation",
+    )]
+    protected OrganMember $organMember;
 
     /**
      * Get the function.
      *
      * @return string
      */
-    public function getFunction()
+    public function getFunction(): string
     {
         return $this->function;
     }
@@ -58,7 +72,7 @@ class Installation extends FoundationReference
      *
      * @param string $function
      */
-    public function setFunction($function)
+    public function setFunction(string $function): void
     {
         $this->function = $function;
     }
@@ -68,7 +82,7 @@ class Installation extends FoundationReference
      *
      * @return Member
      */
-    public function getMember()
+    public function getMember(): Member
     {
         return $this->member;
     }
@@ -78,35 +92,27 @@ class Installation extends FoundationReference
      *
      * @param Member $member
      */
-    public function setMember(Member $member)
+    public function setMember(Member $member): void
     {
         $this->member = $member;
     }
 
     /**
-     * Get the discharge, if it exists
+     * Get the discharge, if it exists.
      *
      * @return Discharge
      */
-    public function getDischarge()
+    public function getDischarge(): Discharge
     {
         return $this->discharge;
     }
 
     /**
-     * Clears the discharge, if it exists
-     *
-     * @return Discharge
-     */
-    public function clearDischarge()
-    {
-        $this->discharge = null;
-    }
-
-    /**
      * Get the organ member reference.
+     *
+     * @return OrganMember
      */
-    public function getOrganMember()
+    public function getOrganMember(): OrganMember
     {
         return $this->organMember;
     }

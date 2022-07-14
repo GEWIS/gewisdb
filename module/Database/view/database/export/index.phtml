@@ -1,7 +1,7 @@
 <?php
 function showDecisionNumber($decision)
 {
-    $ret = strtoupper($decision->getMeeting()->getType());
+    $ret = strtoupper($decision->getMeeting()->getType()->value);
     $ret .= ' ' . $decision->getMeeting()->getNumber();
     $ret .= '.' . $decision->getPoint();
     $ret .= '.' . $decision->getNumber();

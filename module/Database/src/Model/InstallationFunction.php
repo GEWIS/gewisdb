@@ -2,38 +2,39 @@
 
 namespace Database\Model;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    GeneratedValue,
+    Id,
+};
 
 /**
  * Function model.
- *
- * @ORM\Entity
  */
+#[Entity]
 class InstallationFunction
 {
     /**
      * The event ID.
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
-    protected $id;
+    #[Id]
+    #[Column(type: "integer")]
+    #[GeneratedValue(strategy: "AUTO")]
+    protected ?int $id = null;
 
     /**
      * Name
-     *
-     * @ORM\Column(type="string")
      */
-    protected $name;
-
+    #[Column(type: "string")]
+    protected string $name;
 
     /**
      * Get the ID.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -41,9 +42,9 @@ class InstallationFunction
     /**
      * Set the ID.
      *
-     * @param inst $id
+     * @param int|null $id
      */
-    public function setId($id)
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }
@@ -53,7 +54,7 @@ class InstallationFunction
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -63,7 +64,7 @@ class InstallationFunction
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

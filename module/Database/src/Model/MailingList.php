@@ -2,60 +2,64 @@
 
 namespace Database\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection,
+};
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    Id,
+    ManyToMany,
+};
 
 /**
  * Mailing List model.
- *
- * @ORM\Entity
  */
+#[Entity]
 class MailingList
 {
     /**
      * Mailman-identifier / name.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="string")
      */
-    protected $name;
+    #[Id]
+    #[Column(type: "string")]
+    protected string $name;
 
     /**
      * Dutch description of the mailing list.
-     *
-     * @ORM\Column(type="text")
      */
-    protected $nl_description;
+    #[Column(type: "text")]
+    protected string $nl_description;
 
     /**
      * English description of the mailing list.
-     *
-     * @ORM\Column(type="text")
      */
-    protected $en_description;
+    #[Column(type: "text")]
+    protected string $en_description;
 
     /**
      * If the mailing list should be on the form.
-     *
-     * @ORM\Column(type="boolean")
      */
-    protected $onForm;
+    #[Column(type: "boolean")]
+    protected bool $onForm;
 
     /**
      * If members should be subscribed by default.
      *
      * (when it is on the form, that means that the checkbox is checked by default)
-     *
-     * @ORM\Column(type="boolean")
      */
-    protected $defaultSub;
+    #[Column(type: "boolean")]
+    protected bool $defaultSub;
 
     /**
      * Mailing list members.
-     *
-     * @ORM\ManyToMany(targetEntity="Member", mappedBy="lists")
      */
-    protected $members;
+    #[ManyToMany(
+        targetEntity: Member::class,
+        mappedBy: "lists",
+    )]
+    protected Collection $members;
 
 
     /**
@@ -71,7 +75,7 @@ class MailingList
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -81,7 +85,7 @@ class MailingList
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -91,7 +95,7 @@ class MailingList
      *
      * @return string
      */
-    public function getEnDescription()
+    public function getEnDescription(): string
     {
         return $this->en_description;
     }
@@ -101,7 +105,7 @@ class MailingList
      *
      * @param string $description
      */
-    public function setEnDescription($description)
+    public function setEnDescription(string $description): void
     {
         $this->en_description = $description;
     }
@@ -111,7 +115,7 @@ class MailingList
      *
      * @return string
      */
-    public function getNlDescription()
+    public function getNlDescription(): string
     {
         return $this->nl_description;
     }
@@ -121,7 +125,7 @@ class MailingList
      *
      * @param string $description
      */
-    public function setNlDescription($description)
+    public function setNlDescription(string $description): void
     {
         $this->nl_description = $description;
     }
@@ -131,7 +135,7 @@ class MailingList
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->getNlDescription();
     }
@@ -141,7 +145,7 @@ class MailingList
      *
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->setNlDescription($description);
     }
@@ -151,7 +155,7 @@ class MailingList
      *
      * @return boolean
      */
-    public function getOnForm()
+    public function getOnForm(): bool
     {
         return $this->onForm;
     }
@@ -161,7 +165,7 @@ class MailingList
      *
      * @param boolean $onForm
      */
-    public function setOnForm($onForm)
+    public function setOnForm(bool $onForm): void
     {
         $this->onForm = $onForm;
     }
@@ -171,7 +175,7 @@ class MailingList
      *
      * @return boolean
      */
-    public function getDefaultSub()
+    public function getDefaultSub(): bool
     {
         return $this->defaultSub;
     }
@@ -181,7 +185,7 @@ class MailingList
      *
      * @param boolean $default
      */
-    public function setDefaultSub($default)
+    public function setDefaultSub(bool $default): void
     {
         $this->defaultSub = $default;
     }
@@ -189,9 +193,9 @@ class MailingList
     /**
      * Get subscribed members.
      *
-     * @return ArrayCollection of members
+     * @return Collection of members
      */
-    public function getMembers()
+    public function getMembers(): Collection
     {
         return $this->members;
     }
@@ -203,6 +207,6 @@ class MailingList
      */
     public function addMember(Member $member)
     {
-        $this->members[] = $member;
+        $this->members->add($member);
     }
 }

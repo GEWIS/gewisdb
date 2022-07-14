@@ -2,47 +2,69 @@
 
 namespace Database\Model\SubDecision\Board;
 
+use Application\Model\Enums\GenderTypes;
 use Database\Model\SubDecision;
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    JoinColumn,
+    OneToOne,
+};
+use IntlDateFormatter;
+
+use function date_default_timezone_get;
 
 /**
  * Release from board duties.
  *
  * This decision references to an installation. The duties of this installation
  * are released by this release.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Release extends SubDecision
 {
     /**
      * Reference to the installation of a member.
-     *
-     * @ORM\OneToOne(targetEntity="Installation",inversedBy="release")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
-     * })
      */
-    protected $installation;
+    #[OneToOne(
+        targetEntity: Installation::class,
+        inversedBy: "release",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "r_decision_point",
+        referencedColumnName: "decision_point",
+    )]
+    #[JoinColumn(
+        name: "r_decision_number",
+        referencedColumnName: "decision_number",
+    )]
+    #[JoinColumn(
+        name: "r_number",
+        referencedColumnName: "number",
+    )]
+    protected Installation $installation;
 
     /**
      * Date of the discharge.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $date;
-
+    #[Column(type: "date")]
+    protected DateTime $date;
 
     /**
      * Get installation.
      *
      * @return Installation
      */
-    public function getInstallation()
+    public function getInstallation(): Installation
     {
         return $this->installation;
     }
@@ -52,7 +74,7 @@ class Release extends SubDecision
      *
      * @param Installation $installation
      */
-    public function setInstallation(Installation $installation)
+    public function setInstallation(Installation $installation): void
     {
         $this->installation = $installation;
     }
@@ -60,9 +82,9 @@ class Release extends SubDecision
     /**
      * Get the date.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDate()
+    public function getDate(): DateTime
     {
         return $this->date;
     }
@@ -70,9 +92,9 @@ class Release extends SubDecision
     /**
      * Set the date.
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      */
-    public function setDate($date)
+    public function setDate(DateTime $date): void
     {
         $this->date = $date;
     }
@@ -82,17 +104,16 @@ class Release extends SubDecision
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         $member = $this->getInstallation()->getMember()->getFullName();
         $function = $this->getInstallation()->getFunction();
 
-        $zh = $this->getInstallation()->getMember()->getGender() == 'm' ? 'zijn' : 'haar';
+        $zh = $this->getInstallation()->getMember()->getGender() == GenderTypes::Male ? 'zijn' : 'haar';
 
-        $text = $member . ' wordt per ' . $this->formatDate($this->getDate())
+        return $member . ' wordt per ' . $this->formatDate($this->getDate())
               . ' ontheven uit ' . $zh . ' functie als ' . $function
               . ' der s.v. GEWIS.';
-        return $text;
     }
 
     /**
@@ -104,16 +125,17 @@ class Release extends SubDecision
      *
      * @return string Formatted date
      */
-    protected function formatDate(\DateTime $date)
+    protected function formatDate(DateTime $date): string
     {
-        $formatter = new \IntlDateFormatter(
+        $formatter = new IntlDateFormatter(
             'nl_NL', // yes, hardcoded :D
-            \IntlDateFormatter::NONE,
-            \IntlDateFormatter::NONE,
-            \date_default_timezone_get(),
+            IntlDateFormatter::NONE,
+            IntlDateFormatter::NONE,
+            date_default_timezone_get(),
             null,
             'd MMMM Y'
         );
+
         return $formatter->format($date);
     }
 }

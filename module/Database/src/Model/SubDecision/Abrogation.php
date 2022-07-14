@@ -2,14 +2,12 @@
 
 namespace Database\Model\SubDecision;
 
-use Database\Model\SubDecision;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 
 /**
  * Abrogation of an organ.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Abrogation extends FoundationReference
 {
     /**
@@ -19,30 +17,10 @@ class Abrogation extends FoundationReference
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         // <type> <abbr> wordt opgeheven.
-        switch ($this->getFoundation()->getOrganType()) {
-            case Foundation::ORGAN_TYPE_COMMITTEE:
-                $text = 'Commissie ';
-                break;
-            case Foundation::ORGAN_TYPE_AVC:
-                $text = 'AV-commissie ';
-                break;
-            case Foundation::ORGAN_TYPE_FRATERNITY:
-                $text = 'Dispuut ';
-                break;
-            case Foundation::ORGAN_TYPE_KKK:
-                $text = 'KKK ';
-                break;
-            case Foundation::ORGAN_TYPE_AVW:
-                $text = 'AV-werkgroep ';
-                break;
-            case Foundation::ORGAN_TYPE_RVA:
-                $text = 'RvA ';
-                break;
-        }
-
-        return $text . $this->getFoundation()->getAbbr() . ' wordt opgeheven.';
+        return $this->getFoundation()->getOrganType()->getName() . ' '
+            . $this->getFoundation()->getAbbr() . ' wordt opgeheven.';
     }
 }

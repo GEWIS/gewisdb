@@ -2,13 +2,12 @@
 
 namespace Database\Model\SubDecision;
 
-use Database\Model\SubDecision;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 
 /**
  *
- * @ORM\Entity
  */
+#[Entity]
 class Reckoning extends Budget
 {
     /**
@@ -16,7 +15,7 @@ class Reckoning extends Budget
      *
      * @return string
      */
-    protected function getTemplate()
+    protected function getTemplate(): string
     {
         return 'De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
     }

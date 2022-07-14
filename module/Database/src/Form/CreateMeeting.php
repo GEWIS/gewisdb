@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use Application\Model\Enums\MeetingTypes;
 use Database\Model\Meeting;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
@@ -64,7 +65,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
                     array(
                         'name' => InArray::class,
                         'options' => array(
-                            'haystack' => Meeting::getTypes()
+                            'haystack' => MeetingTypes::values(),
                         )
                     )
                 )

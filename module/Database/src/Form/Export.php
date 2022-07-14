@@ -39,8 +39,8 @@ class Export extends Form implements InputFilterProviderInterface
 
         foreach ($meetingMapper->findAll() as $meeting) {
             $meeting = $meeting[0];
-            $id = $meeting->getType() . '-' . $meeting->getNumber();
-            $options[$id] = strtoupper($meeting->getType()) . ' ' . $meeting->getNumber()
+            $id = $meeting->getType()->value . '-' . $meeting->getNumber();
+            $options[$id] = strtoupper($meeting->getType()->value) . ' ' . $meeting->getNumber()
                           . '   (' . $meeting->getDate()->format('j F Y') . ')';
         }
 

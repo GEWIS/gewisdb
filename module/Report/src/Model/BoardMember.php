@@ -2,84 +2,113 @@
 
 namespace Report\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Report\Model\SubDecision\Board\Installation;
+use DateTime;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    GeneratedValue,
+    Id,
+    JoinColumn,
+    ManyToOne,
+    OneToOne,
+};
+use Report\Model\SubDecision\Board\Installation as BoardInstallation;
 
 /**
  * Board member entity.
  *
- * Note that this entity is derived from the decisions themselves.
- *
- * @ORM\Entity
+ * Note that this entity is derived from the decisions themself.
  */
+#[Entity]
 class BoardMember
 {
     /**
      * Id.
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
      */
-    protected $id;
+    #[Id]
+    #[Column(type: "integer")]
+    #[GeneratedValue(strategy: "AUTO")]
+    protected ?int $id = null;
 
     /**
      * Member lidnr.
-     *
-     * @ORM\ManyToOne(targetEntity="Member",inversedBy="boardInstallations")
-     * @ORM\JoinColumn(name="lidnr",referencedColumnName="lidnr")
      */
-    protected $member;
+    #[ManyToOne(
+        targetEntity: Member::class,
+        inversedBy: "boardInstallations",
+    )]
+    #[JoinColumn(
+        name: "lidnr",
+        referencedColumnName: "lidnr",
+        nullable: false,
+    )]
+    protected Member $member;
 
     /**
      * Function.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $function;
+    #[Column(type: "string")]
+    protected string $function;
 
     /**
      * Installation date.
-     *
-     * @ORM\Column(type="date")
      */
-    protected $installDate;
+    #[Column(type: "date")]
+    protected DateTime $installDate;
 
     /**
      * Installation.
-     *
-     * @ORM\OneToOne(targetEntity="Report\Model\SubDecision\Board\Installation", inversedBy="boardMember")
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="r_meeting_type", referencedColumnName="meeting_type"),
-     *  @ORM\JoinColumn(name="r_meeting_number", referencedColumnName="meeting_number"),
-     *  @ORM\JoinColumn(name="r_decision_point", referencedColumnName="decision_point"),
-     *  @ORM\JoinColumn(name="r_decision_number", referencedColumnName="decision_number"),
-     *  @ORM\JoinColumn(name="r_number", referencedColumnName="number")
-     * })
      */
-    protected $installationDec;
+    #[OneToOne(
+        targetEntity: BoardInstallation::class,
+        inversedBy: "boardMember",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_type",
+        referencedColumnName: "meeting_type",
+    )]
+    #[JoinColumn(
+        name: "r_meeting_number",
+        referencedColumnName: "meeting_number",
+    )]
+    #[JoinColumn(
+        name: "r_decision_point",
+        referencedColumnName: "decision_point",
+    )]
+    #[JoinColumn(
+        name: "r_decision_number",
+        referencedColumnName: "decision_number",
+    )]
+    #[JoinColumn(
+        name: "r_number",
+        referencedColumnName: "number",
+    )]
+    protected BoardInstallation $installationDec;
 
     /**
      * Release date.
-     *
-     * @ORM\Column(type="date", nullable=true)
      */
-    protected $releaseDate;
+    #[Column(
+        type: "date",
+        nullable: true,
+    )]
+    protected ?DateTime $releaseDate = null;
 
     /**
      * Discharge date.
-     *
-     * @ORM\Column(type="date", nullable=true)
      */
-    protected $dischargeDate;
-
+    #[Column(
+        type: "date",
+        nullable: true,
+    )]
+    protected ?DateTime $dischargeDate = null;
 
     /**
      * Get the ID.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -87,9 +116,9 @@ class BoardMember
     /**
      * Get the member.
      *
-     * @return \Report\Model\Member
+     * @return Member
      */
-    public function getMember()
+    public function getMember(): Member
     {
         return $this->member;
     }
@@ -97,9 +126,9 @@ class BoardMember
     /**
      * Set the member.
      *
-     * @param \Report\Model\Member $member
+     * @param Member $member
      */
-    public function setMember($member)
+    public function setMember(Member $member): void
     {
         $this->member = $member;
     }
@@ -109,7 +138,7 @@ class BoardMember
      *
      * @return string
      */
-    public function getFunction()
+    public function getFunction(): string
     {
         return $this->function;
     }
@@ -119,7 +148,7 @@ class BoardMember
      *
      * @param string $function
      */
-    public function setFunction($function)
+    public function setFunction(string $function): void
     {
         $this->function = $function;
     }
@@ -127,9 +156,9 @@ class BoardMember
     /**
      * Get the installation date.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getInstallDate()
+    public function getInstallDate(): DateTime
     {
         return $this->installDate;
     }
@@ -137,9 +166,9 @@ class BoardMember
     /**
      * Set the installation date.
      *
-     * @param \DateTime $installDate
+     * @param DateTime $installDate
      */
-    public function setInstallDate($installDate)
+    public function setInstallDate(DateTime $installDate): void
     {
         $this->installDate = $installDate;
     }
@@ -147,19 +176,17 @@ class BoardMember
     /**
      * Get the installation decision.
      *
-     * @return Installation
+     * @return BoardInstallation
      */
-    public function getInstallationDec()
+    public function getInstallationDec(): BoardInstallation
     {
         return $this->installationDec;
     }
 
     /**
      * Set the installation decision.
-     *
-     * @param Installation $installationDec
      */
-    public function setInstallationDec(Installation $installationDec)
+    public function setInstallationDec(BoardInstallation $installationDec): void
     {
         $this->installationDec = $installationDec;
     }
@@ -167,9 +194,9 @@ class BoardMember
     /**
      * Get the release date.
      *
-     * @return \DateTime
+     * @return DateTime|null
      */
-    public function getReleaseDate()
+    public function getReleaseDate(): ?DateTime
     {
         return $this->releaseDate;
     }
@@ -177,9 +204,9 @@ class BoardMember
     /**
      * Set the release date.
      *
-     * @param \DateTime $releaseDate
+     * @param DateTime|null $releaseDate
      */
-    public function setReleaseDate($releaseDate)
+    public function setReleaseDate(?DateTime $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
     }
@@ -187,9 +214,9 @@ class BoardMember
     /**
      * Get the discharge date.
      *
-     * @return \DateTime
+     * @return DateTime|null
      */
-    public function getDischargeDate()
+    public function getDischargeDate(): ?DateTime
     {
         return $this->dischargeDate;
     }
@@ -197,9 +224,9 @@ class BoardMember
     /**
      * Set the discharge date.
      *
-     * @param \DateTime $dischargeDate
+     * @param DateTime|null $dischargeDate
      */
-    public function setDischargeDate($dischargeDate)
+    public function setDischargeDate(?DateTime $dischargeDate): void
     {
         $this->dischargeDate = $dischargeDate;
     }

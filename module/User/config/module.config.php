@@ -1,11 +1,13 @@
 <?php
 
-use User\Controller\UserController;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+namespace User;
+
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
+use User\Controller\UserController;
 use User\Mapper\UserMapper;
 use User\Mapper\Factory\UserMapperFactory;
 use User\Service\UserService;
@@ -112,16 +114,17 @@ return [
     ],
     'doctrine' => [
         'driver' => [
-            'user_entities' => [
-                'class' => AnnotationDriver::class,
-                'cache' => 'array',
-                'paths' => [__DIR__ . '/../src/Model/']
+            __NAMESPACE__ . '_driver' => [
+                'class' => AttributeDriver::class,
+                'paths' => [
+                    __DIR__ . '/../src/Model/',
+                ],
             ],
             'orm_default' => [
                 'drivers' => [
-                    'User\Model' => 'user_entities'
-                ]
-            ]
+                    __NAMESPACE__ . '\Model' => __NAMESPACE__ . '_driver',
+                ],
+            ],
         ],
         'authentication' => [
             'orm_default' => [

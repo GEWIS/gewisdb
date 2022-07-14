@@ -1,5 +1,7 @@
 <?php
-use Database\Model\Address;
+
+use Application\Model\Enums\AddressTypes;
+
 if (!isset($form)): ?>
 Adres van <a href="<?= $this->url('member/show', array(
     'id' => $member->getLidnr()
@@ -9,7 +11,7 @@ $form->prepare();
 
 $form->setAttribute('action', $this->url('member/show/remove-address', array(
     'id' => $address->getMember()->getLidnr(),
-    'type' => $address->getType()
+    'type' => $address->getType()->value
 )));
 $form->setAttribute('method', 'post');
 $form->setAttribute('role', 'form');
@@ -20,15 +22,15 @@ echo $this->form()->openTag($form);
 <p>
 Weet je zeker dat je het <?php
 switch ($address->getType()) {
-case Address::TYPE_HOME:
-    echo 'thuisadres';
-    break;
-case Address::TYPE_STUDENT:
-    echo 'kameradres';
-    break;
-case Address::TYPE_MAIL:
-    echo 'postadres';
-    break;
+    case AddressTypes::Home:
+        echo 'thuisadres';
+        break;
+    case AddressTypes::Student:
+        echo 'kameradres';
+        break;
+    case AddressTypes::Mail:
+        echo 'postadres';
+        break;
 }
 ?> van <?= $address->getMember()->getFullName() ?> wilt verwijderen?
 </p>

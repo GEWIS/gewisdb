@@ -3,28 +3,29 @@
 namespace Database\Model\SubDecision;
 
 use Database\Model\SubDecision;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+};
 
 /**
  * Entity for undefined decisions.
- *
- * @ORM\Entity
  */
+#[Entity]
 class Other extends SubDecision
 {
     /**
      * Textual content for the decision.
-     *
-     * @ORM\Column(type="text")
      */
-    protected $content;
+    #[Column(type: "text")]
+    protected string $content;
 
     /**
      * Get the content.
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -34,7 +35,7 @@ class Other extends SubDecision
      *
      * @param string $content
      */
-    public function setContent($content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }

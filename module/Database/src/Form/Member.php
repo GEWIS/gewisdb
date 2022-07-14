@@ -2,7 +2,8 @@
 
 namespace Database\Form;
 
-use Database\Model\Address;
+use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\GenderTypes;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Form;
 use Laminas\I18n\Filter\Alnum;
@@ -67,9 +68,9 @@ class Member extends Form implements InputFilterProviderInterface
             'type' => 'radio',
             'options' => array(
                 'value_options' => array(
-                    'm' => $translator->translate('Man'),
-                    'f' => $translator->translate('Vrouw'),
-                    'o' => $translator->translate('Anders'),
+                    GenderTypes::Male->value => $translator->translate('Man'),
+                    GenderTypes::Female->value => $translator->translate('Vrouw'),
+                    GenderTypes::Other->value => $translator->translate('Anders'),
                 ),
                 'label' => $translator->translate('Geslacht'),
             )
@@ -137,7 +138,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $student = clone $address;
         $student->setName('studentAddress');
-        $student->get('type')->setValue(Address::TYPE_STUDENT);
+        $student->get('type')->setValue(AddressTypes::Student->value);
         $this->add($student);
 
         $this->add([

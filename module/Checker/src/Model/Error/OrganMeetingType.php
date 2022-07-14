@@ -2,6 +2,8 @@
 
 namespace Checker\Model\Error;
 
+use Application\Model\Enums\MeetingTypes;
+use Application\Model\Enums\OrganTypes;
 use Checker\Model\Error;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 
@@ -23,17 +25,17 @@ class OrganMeetingType extends Error
     }
 
     /**
-     * @return string Type of organ that was created
+     * @return OrganTypes Type of organ that was created
      */
-    public function getOrganType(): string
+    public function getOrganType(): OrganTypes
     {
         return $this->getSubDecision()->getOrganType();
     }
 
     /**
-     * @return string Type of meeting that this organ was created
+     * @return MeetingTypes Type of meeting that this organ was created
      */
-    public function getMeetingType(): string
+    public function getMeetingType(): MeetingTypes
     {
         return $this->getSubDecision()->getDecision()->getMeeting()->getType();
     }
@@ -41,8 +43,8 @@ class OrganMeetingType extends Error
     public function asText(): string
     {
         return "Organ of type "
-            . $this->getOrganType()
+            . $this->getOrganType()->value
             . ' cannot be created in a meeting of type '
-            . $this->getMeetingType();
+            . $this->getMeetingType()->value;
     }
 }
