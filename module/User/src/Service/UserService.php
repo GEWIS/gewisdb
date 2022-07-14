@@ -2,12 +2,12 @@
 
 namespace User\Service;
 
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Crypt\Password\PasswordInterface;
 use User\Mapper\UserMapper;
 use User\Form\UserCreate;
 use User\Model\User;
-use Zend\Crypt\Password\PasswordInterface;
 use User\Form\Login;
-use Zend\Authentication\AuthenticationService;
 use User\Form\UserEdit;
 
 class UserService

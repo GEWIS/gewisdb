@@ -5,10 +5,10 @@ define('APP_ENV', getenv('APP_ENV') ?: 'production');
 // make sure we are in the correct directory
 chdir(__DIR__);
 
-use Zend\Mvc\Application;
-use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Mvc\Application;
+use Laminas\Mvc\Service\ServiceManagerConfig;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Stdlib\ArrayUtils;
 
 // Composer autoloading
 include __DIR__ . '/vendor/autoload.php';

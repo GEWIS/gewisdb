@@ -2,10 +2,10 @@
 
 namespace User\Form;
 
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Regex;
-use Zend\Validator\StringLength;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class Login extends Form implements InputFilterProviderInterface
 {

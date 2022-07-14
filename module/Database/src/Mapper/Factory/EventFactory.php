@@ -4,7 +4,7 @@ namespace Database\Mapper\Factory;
 
 use Database\Mapper\Event as EventMapper;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class EventFactory implements FactoryInterface
 {

@@ -3,13 +3,13 @@
 namespace User\Service\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use User\Service\UserService;
 use User\Mapper\UserMapper;
 use User\Form\UserCreate;
 use User\Form\Login;
-use Zend\Authentication\AuthenticationService;
-use Zend\Crypt\Password\PasswordInterface;
 use User\Form\UserEdit;
 
 class UserServiceFactory implements FactoryInterface

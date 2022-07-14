@@ -15,8 +15,8 @@ jobs:
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '7.1'
-                    extensions: calendar, curl, exif, gd, intl, opcache, pgsql, pdo_mysql, pdo_pgsql, zip, imagick, memcached, xdebug
+                    php-version: '8.1'
+                    extensions: calendar, curl, intl, opcache, pgsql, pdo_pgsql, zip, memcached, xdebug
 
             -   name: Get Composer cache directory
                 id: composer-cache-head

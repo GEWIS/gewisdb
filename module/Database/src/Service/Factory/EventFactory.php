@@ -10,7 +10,7 @@ use Database\Service\MailingList as MailingListService;
 use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class EventFactory implements FactoryInterface
 {

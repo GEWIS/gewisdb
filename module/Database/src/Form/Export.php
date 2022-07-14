@@ -3,8 +3,8 @@
 namespace Database\Form;
 
 use Database\Mapper\Meeting as MeetingMapper;
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Export extends Form implements InputFilterProviderInterface
 {

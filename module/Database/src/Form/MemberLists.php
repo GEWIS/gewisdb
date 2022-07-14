@@ -3,9 +3,9 @@
 namespace Database\Form;
 
 use Database\Model\Member as MemberModel;
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class MemberLists extends Form implements InputFilterProviderInterface
 {

@@ -4,11 +4,11 @@ namespace Report\Service;
 
 use Database\Mapper\Member as MemberMapper;
 use Doctrine\ORM\EntityManager;
+use Laminas\Cache\Exception\LogicException;
+use Laminas\ProgressBar\Adapter\Console;
+use Laminas\ProgressBar\ProgressBar;
 use Report\Model\Member as ReportMember;
 use Report\Model\Address as ReportAddress;
-use Zend\Cache\Exception\LogicException;
-use Zend\ProgressBar\Adapter\Console;
-use Zend\ProgressBar\ProgressBar;
 
 class Member
 {

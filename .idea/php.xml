@@ -106,7 +106,6 @@
       <path value="$PROJECT_DIR$/vendor/webmozart/glob" />
       <path value="$PROJECT_DIR$/vendor/icanhazstring/composer-unused" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/vendor/true/punycode" />
       <path value="$PROJECT_DIR$/vendor/ondram/ci-detector" />
       <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
       <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
@@ -114,7 +113,6 @@
       <path value="$PROJECT_DIR$/vendor/composer-unused/contracts" />
       <path value="$PROJECT_DIR$/vendor/composer-unused/symbol-parser" />
       <path value="$PROJECT_DIR$/vendor/container-interop/container-interop" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/path-util" />
       <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
       <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
       <path value="$PROJECT_DIR$/vendor/react/promise" />
@@ -123,38 +121,6 @@
       <path value="$PROJECT_DIR$/vendor/bnf/phpstan-psr-container" />
       <path value="$PROJECT_DIR$/vendor/lctrs/psalm-psr-container-plugin" />
       <path value="$PROJECT_DIR$/vendor/symfony/debug" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-math" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-http" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-modulemanager" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-hydrator" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-inputfilter" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-cache" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-escaper" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-authentication" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-console" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-diactoros" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-servicemanager" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-form" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-loader" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-crypt" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-mvc" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-json" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-paginator" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-view" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-config" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-serializer" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-log" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-filter" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-uri" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-validator" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-stdlib" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-psr7bridge" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-session" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-i18n" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-mail" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-mime" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-progressbar" />
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
@@ -164,15 +130,48 @@
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/php-cs-fixer/diff" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-developer-tools" />
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
       <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
-      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mail" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-crypt" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-form" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-math" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-authentication" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mvc-i18n" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-inputfilter" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-paginator" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-developer-tools" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mime" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-hydrator" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-filter" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-router" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-i18n" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-uri" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-session" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-servicemanager" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-http" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-progressbar" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-serializer" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mvc" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-modulemanager" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-loader" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-stdlib" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-validator" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-config" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-escaper" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-json" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-cli" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-view" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-laminas-hydrator" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-i18n-resources" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -248,7 +247,7 @@
       </interpreter>
     </phpInfoCache>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />

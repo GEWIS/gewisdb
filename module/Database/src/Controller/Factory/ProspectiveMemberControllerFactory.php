@@ -5,7 +5,7 @@ namespace Database\Controller\Factory;
 use Database\Controller\ProspectiveMemberController;
 use Database\Service\Member as MemberService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class ProspectiveMemberControllerFactory implements FactoryInterface
 {

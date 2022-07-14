@@ -2,7 +2,7 @@
 
 namespace Database\Hydrator;
 
-use Database\Model\Decision;
+use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Installation;
 use Database\Model\SubDecision\Discharge;
 use Database\Model\SubDecision\Abrogation;
@@ -13,13 +13,13 @@ class Abolish extends AbstractDecision
      * abolish hydration
      *
      * @param array $data
-     * @param Decision $object
+     * @param DecisionModel $object
      *
-     * @return Decision
+     * @return DecisionModel
      *
      * @throws \InvalidArgumentException when $object is not a Decision
      */
-    public function hydrate(array $data, $object)
+    public function hydrate(array $data, $object): DecisionModel
     {
         $object = parent::hydrate($data, $object);
 

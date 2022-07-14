@@ -2,6 +2,7 @@
 
 namespace Database\Hydrator\Board;
 
+use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Board\Discharge as BoardDischarge;
 use Database\Model\Decision;
 use Database\Hydrator\AbstractDecision;
@@ -12,15 +13,15 @@ class Discharge extends AbstractDecision
      * Board discharge hydration
      *
      * @param array $data
-     * @param Decision $decision
+     * @param DecisionModel $object
      *
-     * @return Decision
+     * @return DecisionModel
      *
      * @throws \InvalidArgumentException when $decision is not a Decision
      */
-    public function hydrate(array $data, $decision)
+    public function hydrate(array $data, $object): DecisionModel
     {
-        $decision = parent::hydrate($data, $decision);
+        $decision = parent::hydrate($data, $object);
 
         // data contains:
         // - meeting

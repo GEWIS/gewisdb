@@ -6,7 +6,7 @@ use Database\Form\InstallationFunction as InstallationFunctionForm;
 use Database\Mapper\InstallationFunction as InstallationFunctionMapper;
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class InstallationFunctionFactory implements FactoryInterface
 {

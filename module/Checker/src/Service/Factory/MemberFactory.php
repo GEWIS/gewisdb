@@ -5,7 +5,7 @@ namespace Checker\Service\Factory;
 use Checker\Mapper\Member as MemberMapper;
 use Checker\Service\Member as MemberService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MemberFactory implements FactoryInterface
 {

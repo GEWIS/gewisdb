@@ -78,13 +78,14 @@ use Database\Service\MailingList as MailingListService;
 use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
 use Database\Service\Query as QueryService;
+use Doctrine\Laminas\Hydrator\DoctrineObject;
 use Doctrine\ORM\Events;
 use Interop\Container\ContainerInterface;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Listener\DatabaseUpdateListener;
 use stdClass;
-use Zend\Hydrator\ObjectProperty;
-use Zend\Mvc\MvcEvent;
+use Laminas\Hydrator\ObjectPropertyHydrator;
+use Laminas\Mvc\MvcEvent;
 
 class Module
 {
@@ -298,7 +299,7 @@ class Module
                     $fieldset = new InstallationFieldset(
                         $container->get(MemberFieldset::class)
                     );
-                    $fieldset->setHydrator(new ObjectProperty());
+                    $fieldset->setHydrator(new ObjectPropertyHydrator());
                     $fieldset->setObject(new stdClass());
                     return $fieldset;
                 },
@@ -320,7 +321,7 @@ class Module
                         $container->get(InstallationFunctionService::class),
                         true
                     );
-                    $fieldset->setHydrator(new ObjectProperty());
+                    $fieldset->setHydrator(new ObjectPropertyHydrator());
                     $fieldset->setObject(new stdClass());
                     return $fieldset;
                 },
@@ -330,7 +331,7 @@ class Module
                         $container->get(InstallationFunctionService::class),
                         false
                     );
-                    $fieldset->setHydrator(new ObjectProperty());
+                    $fieldset->setHydrator(new ObjectPropertyHydrator());
                     $fieldset->setObject(new stdClass());
                     return $fieldset;
                 },
@@ -342,28 +343,27 @@ class Module
                 },
                 ///////////////////////////////////////////////////////////////////////////
                 'database_hydrator_member' => function (ContainerInterface $container) {
-                    return new \Application\Doctrine\Hydrator\DoctrineObject(
+                    return new DoctrineObject(
                         $container->get('database_doctrine_em')
                     );
                 },
                 'database_hydrator_address' => function (ContainerInterface $container) {
-                    return new \Application\Doctrine\Hydrator\DoctrineObject(
+                    return new DoctrineObject(
                         $container->get('database_doctrine_em')
                     );
                 },
                 'database_hydrator_meeting' => function (ContainerInterface $container) {
-                    // uses 'fixed' DoctrineObject
-                    return new \Application\Doctrine\Hydrator\DoctrineObject(
+                    return new DoctrineObject(
                         $container->get('database_doctrine_em')
                     );
                 },
                 'database_hydrator_subdecision' => function (ContainerInterface $container) {
-                    return new \Application\Doctrine\Hydrator\DoctrineObject(
+                    return new DoctrineObject(
                         $container->get('database_doctrine_em')
                     );
                 },
                 'database_hydrator_decision' => function (ContainerInterface $container) {
-                    return new \Application\Doctrine\Hydrator\DoctrineObject(
+                    return new DoctrineObject(
                         $container->get('database_doctrine_em')
                     );
                 },
@@ -378,8 +378,8 @@ class Module
                 'database_mail_transport' => function (ContainerInterface $container) {
                     $config = $container->get('config');
                     $config = $config['email'];
-                    $class = '\Zend\Mail\Transport\\' . $config['transport'];
-                    $optionsClass = '\Zend\Mail\Transport\\' . $config['transport'] . 'Options';
+                    $class = '\Laminas\Mail\Transport\\' . $config['transport'];
+                    $optionsClass = '\Laminas\Mail\Transport\\' . $config['transport'] . 'Options';
                     $transport = new $class();
                     $transport->setOptions(new $optionsClass($config['options']));
                     return $transport;

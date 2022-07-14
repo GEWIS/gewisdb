@@ -3,13 +3,13 @@
 namespace Database\Form\Fieldset;
 
 use Database\Model\Address as AddressModel;
-use Zend\Filter\StringToLower;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\I18n\Translator\TranslatorInterface as Translator;
-use Zend\Validator\InArray;
-use Zend\Validator\Regex;
-use Zend\Validator\StringLength;
+use Laminas\Filter\StringToLower;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\I18n\Translator\TranslatorInterface as Translator;
+use Laminas\Validator\InArray;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class Address extends Fieldset implements InputFilterProviderInterface
 {

@@ -2,14 +2,14 @@
 
 namespace Database\Form;
 
-use Zend\Filter\ToNull;
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Digits;
-use Zend\Validator\EmailAddress;
-use Zend\Validator\Regex;
-use Zend\Validator\StringLength;
+use Laminas\Filter\ToNull;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\Digits;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class MemberEdit extends Form implements InputFilterProviderInterface
 {

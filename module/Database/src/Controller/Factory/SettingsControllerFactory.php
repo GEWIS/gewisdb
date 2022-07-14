@@ -6,7 +6,7 @@ use Database\Controller\SettingsController;
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class SettingsControllerFactory implements FactoryInterface
 {

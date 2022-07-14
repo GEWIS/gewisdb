@@ -1,26 +1,32 @@
 <?php
 
+use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSQLDriver;
+
 return array(
     'doctrine' => array(
         'connection' => array(
             'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'driverClass' => PgSQLDriver::class,
                 'params' => array(
                     'host'     => getenv('DOCTRINE_DEFAULT_HOST'),
                     'port'     => getenv('DOCTRINE_DEFAULT_PORT'),
                     'user'     => getenv('DOCTRINE_DEFAULT_USER'),
                     'password' => getenv('DOCTRINE_DEFAULT_PASSWORD'),
                     'dbname'   => getenv('DOCTRINE_DEFAULT_DATABASE'),
+                    'charset' => 'utf8',
+                    'collate' => 'utf8_unicode_ci',
                 )
             ),
             'orm_report' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'driverClass' => PgSQLDriver::class,
                 'params' => array(
-                  'host'     => getenv('DOCTRINE_REPORT_HOST'),
-                  'port'     => getenv('DOCTRINE_REPORT_PORT'),
-                  'user'     => getenv('DOCTRINE_REPORT_USER'),
-                  'password' => getenv('DOCTRINE_REPORT_PASSWORD'),
-                  'dbname'   => getenv('DOCTRINE_REPORT_DATABASE'),
+                    'host'     => getenv('DOCTRINE_REPORT_HOST'),
+                    'port'     => getenv('DOCTRINE_REPORT_PORT'),
+                    'user'     => getenv('DOCTRINE_REPORT_USER'),
+                    'password' => getenv('DOCTRINE_REPORT_PASSWORD'),
+                    'dbname'   => getenv('DOCTRINE_REPORT_DATABASE'),
+                    'charset' => 'utf8',
+                    'collate' => 'utf8_unicode_ci',
                 )
             ),
         )

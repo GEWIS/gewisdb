@@ -20,7 +20,7 @@ use Database\Model\Meeting as MeetingModel;
 use Database\Model\Decision;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use ReflectionObject;
-use Zend\Stdlib\PriorityQueue;
+use Laminas\Stdlib\PriorityQueue;
 
 class Meeting
 {
@@ -547,15 +547,12 @@ class Meeting
         $approveChain = $form->getInputFilter()->get('approve')->getValidatorChain();
         $refObj = new ReflectionObject($approveChain);
         $refProp = $refObj->getProperty('validators');
-        $refProp->setAccessible(true);
         $refProp->setValue($approveChain, new PriorityQueue());
 
         $changesChain = $form->getInputFilter()->get('changes')->getValidatorChain();
         $refObj = new ReflectionObject($changesChain);
         $refProp = $refObj->getProperty('validators');
-        $refProp->setAccessible(true);
         $refProp->setValue($changesChain, new PriorityQueue());
-
 
         $form->setData($data);
 

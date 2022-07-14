@@ -16,8 +16,8 @@ use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Member as MemberService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\View\Renderer\PhpRenderer;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\View\Renderer\PhpRenderer;
 
 class MemberFactory implements FactoryInterface
 {

@@ -1,29 +1,26 @@
 <?php
 
-namespace Checker\Controller\Factory;
+namespace Checker\Command\Factory;
 
-use Checker\Controller\CheckerController;
 use Checker\Service\Checker as CheckerService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
-class CheckerControllerFactory implements FactoryInterface
+class AbstractCheckerCommandFactory implements FactoryInterface
 {
     /**
      * @param ContainerInterface $container
      * @param $requestedName
      * @param array|null $options
-     *
-     * @return CheckerController
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
-    ): CheckerController {
+        array $options = null,
+    ) {
         /** @var CheckerService $checkerService */
         $checkerService = $container->get(CheckerService::class);
 
-        return new CheckerController($checkerService);
+        return new $requestedName($checkerService);
     }
 }

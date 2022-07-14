@@ -4,7 +4,7 @@ namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {

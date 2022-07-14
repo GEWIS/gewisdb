@@ -5,7 +5,7 @@ namespace Checker\Service\Factory;
 use Checker\Mapper\Organ as OrganMapper;
 use Checker\Service\Organ as OrganService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class OrganFactory implements FactoryInterface
 {

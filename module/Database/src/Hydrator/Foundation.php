@@ -3,6 +3,7 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision;
+use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Foundation as FoundationDecision;
 use Database\Model\SubDecision\Installation as InstallationDecision;
 
@@ -12,15 +13,15 @@ class Foundation extends AbstractDecision
      * Budget hydration
      *
      * @param array $data
-     * @param Decision $decision
+     * @param DecisionModel $object
      *
-     * @return Decision
+     * @return DecisionModel
      *
      * @throws \InvalidArgumentException when $decision is not a Decision
      */
-    public function hydrate(array $data, $decision)
+    public function hydrate(array $data, $object): DecisionModel
     {
-        $decision = parent::hydrate($data, $decision);
+        $decision = parent::hydrate($data, $object);
 
         $foundation = new FoundationDecision();
 
@@ -44,6 +45,7 @@ class Foundation extends AbstractDecision
                 $installation->setMember($install->member);
                 $installation->setDecision($decision);
             }
+
             $installation = new InstallationDecision();
             $installation->setNumber($num++);
             $installation->setFoundation($foundation);

@@ -18,7 +18,7 @@ use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Organ as OrganMapper;
 use Database\Service\Meeting as MeetingService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MeetingFactory implements FactoryInterface
 {

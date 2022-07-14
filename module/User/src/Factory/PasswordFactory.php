@@ -3,8 +3,8 @@
 namespace User\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\Crypt\Password\Bcrypt;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\Crypt\Password\Bcrypt;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class PasswordFactory implements FactoryInterface
 {

@@ -3,15 +3,15 @@
 namespace Database\Form;
 
 use Database\Model\Address;
-use Zend\Filter\ToNull;
-use Zend\Form\Form;
-use Zend\I18n\Filter\Alnum;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\I18n\Translator\TranslatorInterface as Translator;
-use Zend\Validator\Iban;
-use Zend\Validator\Identical;
-use Zend\Validator\Regex;
-use Zend\Validator\StringLength;
+use Laminas\Filter\ToNull;
+use Laminas\Form\Form;
+use Laminas\I18n\Filter\Alnum;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\I18n\Translator\TranslatorInterface as Translator;
+use Laminas\Validator\Iban;
+use Laminas\Validator\Identical;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class Member extends Form implements InputFilterProviderInterface
 {

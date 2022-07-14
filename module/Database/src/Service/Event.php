@@ -3,8 +3,8 @@
 namespace Database\Service;
 
 use Database\Mapper\Event as EventMapper;
-use Zend\EventManager\SharedEventManager;
-use Zend\EventManager\Event as EmEvent;
+use Laminas\EventManager\SharedEventManager;
+use Laminas\EventManager\Event as EmEvent;
 use Database\Model\Event as EventModel;
 
 /**

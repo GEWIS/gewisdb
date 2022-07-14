@@ -1,26 +1,32 @@
 <?php
 
+use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSQLDriver;
+
 return array(
     'doctrine' => array(
         'connection' => array(
             'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'driverClass' => PgSQLDriver::class,
                 'params' => array(
                     'host'     => 'postgres',
                     'port'     => '5432',
                     'user'     => 'gewisdb',
                     'password' => 'gewisdb',
                     'dbname'   => 'gewisdb',
+                    'charset' => 'utf8',
+                    'collate' => 'utf8_unicode_ci',
                 )
             ),
             'orm_report' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'driverClass' => PgSQLDriver::class,
                 'params' => array(
                     'host'     => 'postgres',
                     'port'     => '5432',
                     'user'     => 'gewisdb',
                     'password' => 'gewisdb',
                     'dbname'   => 'gewisdb_report',
+                    'charset' => 'utf8',
+                    'collate' => 'utf8_unicode_ci',
                 )
             ),
         )

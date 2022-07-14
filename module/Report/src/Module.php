@@ -11,6 +11,10 @@ use DoctrineORMModule\Service\EntityManagerFactory;
 use DoctrineORMModule\Service\EntityResolverFactory;
 use DoctrineORMModule\Service\SQLLoggerCollectorFactory;
 use Interop\Container\ContainerInterface;
+use Report\Command\Factory\GenerateFullCommandFactory;
+use Report\Command\Factory\GeneratePartialCommandFactory;
+use Report\Command\GenerateFullCommand;
+use Report\Command\GeneratePartialCommand;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Listener\DatabaseUpdateListener;
 use Report\Listener\Factory\DatabaseDeletionListenerFactory;
@@ -47,6 +51,8 @@ class Module
     {
         return array(
             'factories' => array(
+                GenerateFullCommand::class => GenerateFullCommandFactory::class,
+                GeneratePartialCommand::class => GeneratePartialCommandFactory::class,
                 BoardService::class => new BoardServiceFactory(),
                 MeetingService::class => new MeetingServiceFactory(),
                 MemberService::class => new MemberServiceFactory(),

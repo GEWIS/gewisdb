@@ -7,12 +7,12 @@ use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision;
 use Database\Model\Decision;
 use Doctrine\ORM\EntityManager;
+use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mail\Message;
+use Laminas\ProgressBar\Adapter\Console;
+use Laminas\ProgressBar\ProgressBar;
 use Report\Model\Meeting as ReportMeeting;
 use Report\Model\Decision as ReportDecision;
-use Zend\Mail\Transport\TransportInterface;
-use Zend\Mail\Message;
-use Zend\ProgressBar\Adapter\Console;
-use Zend\ProgressBar\ProgressBar;
 
 class Meeting
 {

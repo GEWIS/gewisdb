@@ -2,6 +2,10 @@
 
 namespace Checker;
 
+use Checker\Command\CheckDatabaseCommand;
+use Checker\Command\CheckDischargesCommand;
+use Checker\Command\Factory\AbstractCheckerCommandFactory;
+use Checker\Command\CheckMembershipsCommand;
 use Checker\Mapper\Factory\InstallationFactory as InstallationMapperFactory;
 use Checker\Mapper\Factory\MemberFactory as MemberMapperFactory;
 use Checker\Mapper\Factory\OrganFactory as OrganMapperFactory;
@@ -41,6 +45,9 @@ class Module
     {
         return array(
             'factories' => array(
+                CheckDatabaseCommand::class => AbstractCheckerCommandFactory::class,
+                CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
+                CheckMembershipsCommand::class => AbstractCheckerCommandFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
                 InstallationService::class => InstallationServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
@@ -52,8 +59,8 @@ class Module
                 'checker_mail_transport' => function (ContainerInterface $container) {
                     $config = $container->get('config');
                     $config = $config['email'];
-                    $class = '\Zend\Mail\Transport\\' . $config['transport'];
-                    $optionsClass = '\Zend\Mail\Transport\\' . $config['transport'] . 'Options';
+                    $class = '\Laminas\Mail\Transport\\' . $config['transport'];
+                    $optionsClass = '\Laminas\Mail\Transport\\' . $config['transport'] . 'Options';
                     $transport = new $class();
                     $transport->setOptions(new $optionsClass($config['options']));
                     return $transport;

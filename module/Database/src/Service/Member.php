@@ -19,13 +19,13 @@ use Database\Model\Address;
 use Database\Model\Member as MemberModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\MailingList as MailingListService;
-use Zend\Mail\Transport\TransportInterface;
-use Zend\Mime\Mime;
-use Zend\View\Model\ViewModel;
-use Zend\Mail\Message;
-use Zend\Mime\Part as MimePart;
-use Zend\Mime\Message as MimeMessage;
-use Zend\View\Renderer\PhpRenderer;
+use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mime\Mime;
+use Laminas\View\Model\ViewModel;
+use Laminas\Mail\Message;
+use Laminas\Mime\Part as MimePart;
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\View\Renderer\PhpRenderer;
 
 class Member
 {

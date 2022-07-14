@@ -3,9 +3,9 @@
 namespace Database\Form;
 
 use Database\Form\Fieldset\CollectionWithErrors;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\NotEmpty;
-use Zend\Validator\StringLength;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\NotEmpty;
+use Laminas\Validator\StringLength;
 
 class Foundation extends AbstractDecision implements InputFilterProviderInterface
 {

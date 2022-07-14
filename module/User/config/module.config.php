@@ -2,6 +2,10 @@
 
 use User\Controller\UserController;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
 use User\Mapper\UserMapper;
 use User\Mapper\Factory\UserMapperFactory;
 use User\Service\UserService;
@@ -11,14 +15,10 @@ use User\Controller\SettingsController;
 use User\Controller\Factory\SettingsControllerFactory;
 use User\Form\UserCreate;
 use User\Form\Login;
-use Zend\Crypt\Password\PasswordInterface;
 use User\Factory\PasswordFactory;
 use User\Model\User;
-use Zend\Authentication\AuthenticationService;
 use User\Service\Factory\AuthenticationServiceFactory;
 use User\Form\UserEdit;
-use Zend\Router\Http\Literal;
-use Zend\Router\Http\Segment;
 
 return [
     'router' => [

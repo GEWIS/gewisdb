@@ -3,7 +3,7 @@
 namespace Database\Form;
 
 use Database\Model\Meeting;
-use Zend\Form\Form;
+use Laminas\Form\Form;
 
 abstract class AbstractDecision extends Form
 {

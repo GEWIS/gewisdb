@@ -3,12 +3,12 @@
 namespace Report\Service;
 
 use Doctrine\ORM\EntityManager;
+use Laminas\ProgressBar\Adapter\Console;
+use Laminas\ProgressBar\ProgressBar;
 use Report\Model\Organ as ReportOrgan;
 use Report\Model\OrganMember;
 use Report\Model\SubDecision\Abrogation;
 use Report\Model\SubDecision\Installation;
-use Zend\ProgressBar\Adapter\Console;
-use Zend\ProgressBar\ProgressBar;
 
 class Organ
 {

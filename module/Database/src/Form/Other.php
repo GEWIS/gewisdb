@@ -3,8 +3,8 @@
 namespace Database\Form;
 
 use Database\Model\SubDecision;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\StringLength;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\StringLength;
 
 class Other extends AbstractDecision implements InputFilterProviderInterface
 {

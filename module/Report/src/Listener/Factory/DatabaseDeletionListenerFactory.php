@@ -4,10 +4,10 @@ namespace Report\Listener\Factory;
 
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;
-use Zend\ServiceManager\Factory\FactoryInterface;
 
 class DatabaseDeletionListenerFactory implements FactoryInterface
 {

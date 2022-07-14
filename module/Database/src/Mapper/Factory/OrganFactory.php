@@ -4,7 +4,7 @@ namespace Database\Mapper\Factory;
 
 use Database\Mapper\Organ as OrganMapper;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class OrganFactory implements FactoryInterface
 {

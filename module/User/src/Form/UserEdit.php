@@ -2,10 +2,10 @@
 
 namespace User\Form;
 
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Identical;
-use Zend\Validator\StringLength;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\Identical;
+use Laminas\Validator\StringLength;
 
 class UserEdit extends Form implements InputFilterProviderInterface
 {

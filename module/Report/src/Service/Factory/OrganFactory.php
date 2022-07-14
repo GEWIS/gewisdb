@@ -5,7 +5,7 @@ namespace Report\Service\Factory;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Report\Service\Organ as OrganService;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class OrganFactory implements FactoryInterface
 {

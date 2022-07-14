@@ -2,8 +2,8 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Session\Container as SessionContainer;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 
 class IndexController extends AbstractActionController
 {

@@ -3,12 +3,12 @@
 namespace Database\Form;
 
 use Database\Model\Meeting;
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Date;
-use Zend\Validator\Digits;
-use Zend\Validator\InArray;
-use Zend\Validator\LessThan;
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\Date;
+use Laminas\Validator\Digits;
+use Laminas\Validator\InArray;
+use Laminas\Validator\LessThan;
 
 class CreateMeeting extends Form implements InputFilterProviderInterface
 {

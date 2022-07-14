@@ -4,8 +4,8 @@ namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\StringLength;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\StringLength;
 
 class Install extends AbstractDecision implements InputFilterProviderInterface
 {

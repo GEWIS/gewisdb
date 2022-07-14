@@ -2,7 +2,12 @@
 
 namespace Database\Form\Fieldset;
 
-use Zend\Form\Element\Collection;
+use Laminas\Form\Element;
+use Laminas\Form\Element\Collection;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\FieldsetInterface;
+use ReflectionMethod;
+use Traversable;
 
 /**
  * The normal collection class can not set errors,
@@ -16,10 +21,11 @@ class CollectionWithErrors extends Collection
     /**
      * Override the setMessage method such that Element::setMessage() is used again
      *
-     * @param array|\Traversable $messages
-     * @return $this|\Zend\Form\Element|\Zend\Form\ElementInterface|\Zend\Form\FieldsetInterface
+     * @param array|Traversable $messages
+     *
+     * @return $this|Element|ElementInterface|FieldsetInterface
      */
-    public function setMessages($messages)
+    public function setMessages(iterable $messages): ElementInterface|FieldsetInterface|Element|self
     {
         // Get the correct parent class
         $collection = get_parent_class($this);
@@ -29,8 +35,9 @@ class CollectionWithErrors extends Collection
         // and this is the class that we need
         $element = get_parent_class($fieldset);
 
-        $reflectionMethod = new \ReflectionMethod($element, 'setMessages');
+        $reflectionMethod = new ReflectionMethod($element, 'setMessages');
         $reflectionMethod->invoke($this, $messages);
+
         return $this;
     }
 
@@ -39,7 +46,7 @@ class CollectionWithErrors extends Collection
      *
      * @return array Messages set on this ellement
      */
-    public function getMessages()
+    public function getMessages(?string $elementName = null): array
     {
         // Get the correct parent class
         $collection = get_parent_class($this);
@@ -49,7 +56,8 @@ class CollectionWithErrors extends Collection
         // and this is the class that we need
         $element = get_parent_class($fieldset);
 
-        $reflectionMethod = new \ReflectionMethod($element, 'getMessages');
-        return $reflectionMethod->invoke($this);
+        $reflectionMethod = new ReflectionMethod($element, 'getMessages');
+
+        return $reflectionMethod->invoke($this, $elementName);
     }
 }

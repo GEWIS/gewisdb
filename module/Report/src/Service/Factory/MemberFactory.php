@@ -6,7 +6,7 @@ use Database\Mapper\Member as MemberMapper;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Report\Service\Member as MemberService;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MemberFactory implements FactoryInterface
 {

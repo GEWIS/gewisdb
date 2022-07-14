@@ -3,8 +3,8 @@
 namespace User\Service\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\Crypt\Password\PasswordInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Crypt\Password\PasswordInterface;
 
 class AuthenticationServiceFactory implements FactoryInterface
 {

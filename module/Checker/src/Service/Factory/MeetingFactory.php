@@ -5,7 +5,7 @@ namespace Checker\Service\Factory;
 use Checker\Service\Meeting as MeetingService;
 use Database\Service\Meeting as DatabaseMeetingService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MeetingFactory implements FactoryInterface
 {

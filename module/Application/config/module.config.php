@@ -1,7 +1,8 @@
 <?php
 
 use Application\Controller\IndexController;
-use Zend\Router\Http\Segment;
+use Laminas\I18n\Translator\Resources;
+use Laminas\Router\Http\Segment;
 
 return array(
     'router' => array(
@@ -37,13 +38,12 @@ return array(
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo'
             ),
-            // Zend\Validate translation
-            array(
+            // Translations for Laminas\Validator.
+            [
                 'type' => 'phparray',
-                'base_dir' => 'vendor/zendframework/zendframework/resources/languages/',
-                'pattern' => '%s/Zend_Validate.php',
-                'text_domain' => 'validate'
-            )
+                'base_dir' => Resources::getBasePath(),
+                'pattern' => Resources::getPatternForValidator(),
+            ],
         )
     ),
     'controllers' => array(

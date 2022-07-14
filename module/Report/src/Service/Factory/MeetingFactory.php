@@ -6,7 +6,7 @@ use Database\Mapper\Meeting as MeetingMapper;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Report\Service\Meeting as MeetingService;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MeetingFactory implements FactoryInterface
 {

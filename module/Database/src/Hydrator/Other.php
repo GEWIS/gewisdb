@@ -3,6 +3,7 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision;
+use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Other as OtherDecision;
 
 class Other extends AbstractDecision
@@ -11,13 +12,13 @@ class Other extends AbstractDecision
      * Budget hydration
      *
      * @param array $data
-     * @param SubDecision $object
+     * @param DecisionModel $object
      *
-     * @return SubDecision
+     * @return DecisionModel
      *
      * @throws \InvalidArgumentException when $object is not a SubDecision
      */
-    public function hydrate(array $data, $object)
+    public function hydrate(array $data, $object): DecisionModel
     {
         $object = parent::hydrate($data, $object);
 

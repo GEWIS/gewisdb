@@ -5,7 +5,7 @@ namespace Database\Controller\Factory;
 use Database\Controller\ExportController;
 use Database\Service\Meeting as MeetingService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class ExportControllerFactory implements FactoryInterface
 {

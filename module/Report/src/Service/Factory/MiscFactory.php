@@ -6,7 +6,7 @@ use Database\Mapper\MailingList as MailingListMapper;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Report\Service\Misc as MiscService;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MiscFactory implements FactoryInterface
 {

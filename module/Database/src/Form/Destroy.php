@@ -2,7 +2,7 @@
 
 namespace Database\Form;
 
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Destroy extends AbstractDecision implements InputFilterProviderInterface
 {

@@ -3,9 +3,9 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision;
+use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Budget as BudgetDecision;
 use Database\Model\SubDecision\Reckoning as ReckoningDecision;
-use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 
 class Budget extends AbstractDecision
 {
@@ -13,13 +13,13 @@ class Budget extends AbstractDecision
      * Budget hydration
      *
      * @param array $data
-     * @param SubDecision $object
+     * @param DecisionModel $object
      *
-     * @return SubDecision
+     * @return DecisionModel
      *
      * @throws \InvalidArgumentException when $object is not a SubDecision
      */
-    public function hydrate(array $data, $object)
+    public function hydrate(array $data, $object): DecisionModel
     {
         $object = parent::hydrate($data, $object);
 

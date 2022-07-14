@@ -5,7 +5,7 @@ namespace Database\Controller\Factory;
 use Database\Controller\QueryController;
 use Database\Service\Query as QueryService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class QueryControllerFactory implements FactoryInterface
 {

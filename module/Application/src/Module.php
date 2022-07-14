@@ -6,12 +6,15 @@ use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
 use Application\View\Helper\FileUrl;
 use Interop\Container\ContainerInterface;
+use Laminas\I18n\Translator\Translator as I18nTranslator;
+use Laminas\Mvc\ModuleRouteListener;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
+use Laminas\Session\Container as SessionContainer;
+use Laminas\Validator\AbstractValidator;
+use Locale;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
-use Zend\Mvc\ModuleRouteListener;
-use Zend\Mvc\MvcEvent;
-use Zend\Session\Container as SessionContainer;
-use Zend\Validator\AbstractValidator;
 
 class Module
 {
@@ -21,14 +24,22 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        // add translator
-        $translator = $e->getApplication()->getServiceManager()->get('translator');
-        $translator->setLocale($this->determineLocale($e));
+        $locale = $this->determineLocale($e);
+
+        /** @var MvcTranslator $mvcTranslator */
+        $mvcTranslator = $e->getApplication()->getServiceManager()->get(MvcTranslator::class);
+        $translator = $mvcTranslator->getTranslator();
+        if ($translator instanceof I18nTranslator) {
+            $translator->setlocale($locale);
+        }
+
+        Locale::setDefault($locale);
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'logError']);
         $eventManager->attach(MvCEvent::EVENT_RENDER_ERROR, [$this, 'logError']);
 
-        AbstractValidator::setDefaultTranslator($translator, 'validate');
+        // Enable Laminas\Validator default translator
+        AbstractValidator::setDefaultTranslator($mvcTranslator);
     }
 
     /**

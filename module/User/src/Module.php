@@ -2,10 +2,10 @@
 
 namespace User;
 
-use Zend\Authentication\AuthenticationService;
-use Zend\Console\Response;
-use Zend\Mvc\MvcEvent;
-use Zend\Authentication\Storage\Session as SessionStorage;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Console\Response;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Authentication\Storage\Session as SessionStorage;
 
 class Module
 {

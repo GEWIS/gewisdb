@@ -9,7 +9,7 @@ use Database\Mapper\SavedQuery as SavedQueryMapper;
 use Database\Service\Query as QueryService;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class QueryFactory implements FactoryInterface
 {

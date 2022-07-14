@@ -6,7 +6,7 @@ use Database\Controller\MeetingController;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
 use Database\Service\Meeting as MeetingService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MeetingControllerFactory implements FactoryInterface
 {

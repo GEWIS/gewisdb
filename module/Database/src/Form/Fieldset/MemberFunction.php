@@ -3,7 +3,7 @@
 namespace Database\Form\Fieldset;
 
 use Database\Service\InstallationFunction as FunctionService;
-use Zend\Form\Fieldset;
+use Laminas\Form\Fieldset;
 
 class MemberFunction extends Fieldset
 {

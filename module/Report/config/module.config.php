@@ -2,15 +2,13 @@
 
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Mapping\Driver\DriverChain;
-use Report\Controller\Factory\ReportControllerFactory;
-use Report\Controller\ReportController;
+
+use Report\Command\{
+    GenerateFullCommand,
+    GeneratePartialCommand,
+};
 
 return array(
-    'controllers' => array(
-        'factories' => array(
-            ReportController::class => ReportControllerFactory::class,
-        )
-    ),
     'doctrine' => array(
         'configuration' => array(
             'orm_report' => array(
@@ -59,29 +57,11 @@ return array(
             'orm_report' => array()
         )
     ),
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'generate_reportdb' => array(
-                    'options' => array(
-                        'route' => 'generate reportdb',
-                        'defaults' => array(
-                            'controller' => ReportController::class,
-                            'action' => 'generate'
-                        )
-                    )
-                ),
-                'generate_reportdb_full' => array(
-                    'options' => array(
-                        'route' => 'generate reportdb full',
-                        'defaults' => array(
-                            'controller' => ReportController::class,
-                            'action' => 'generateAll'
-                        )
-                    )
-                )
-            )
-        )
+    'laminas-cli' => array(
+        'commands' => array(
+            'report:generate:partial' => GeneratePartialCommand::class,
+            'report:generate:full' => GenerateFullCommand::class,
+        ),
     ),
     'mail' => []
 );

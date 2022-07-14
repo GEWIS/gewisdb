@@ -5,7 +5,7 @@ namespace Report\Service\Factory;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Report\Service\Board as BoardService;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class BoardFactory implements FactoryInterface
 {

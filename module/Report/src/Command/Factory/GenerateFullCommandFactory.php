@@ -1,30 +1,32 @@
 <?php
 
-namespace Report\Controller\Factory;
+namespace Report\Command\Factory;
 
 use Interop\Container\ContainerInterface;
-use Report\Controller\ReportController;
-use Report\Service\Board as BoardService;
-use Report\Service\Meeting as MeetingService;
-use Report\Service\Member as MemberService;
-use Report\Service\Misc as MiscService;
-use Report\Service\Organ as OrganService;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Report\Command\GenerateFullCommand;
+use Report\Service\{
+    Board as BoardService,
+    Meeting as MeetingService,
+    Member as MemberService,
+    Misc as MiscService,
+    Organ as OrganService,
+};
 
-class ReportControllerFactory implements FactoryInterface
+class GenerateFullCommandFactory implements FactoryInterface
 {
     /**
      * @param ContainerInterface $container
      * @param $requestedName
      * @param array|null $options
      *
-     * @return ReportController
+     * @return GenerateFullCommand
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
         array $options = null
-    ): ReportController {
+    ): GenerateFullCommand {
         /** @var BoardService $boardService */
         $boardService = $container->get(BoardService::class);
         /** @var MeetingService $meetingService */
@@ -36,7 +38,7 @@ class ReportControllerFactory implements FactoryInterface
         /** @var OrganService $organService */
         $organService = $container->get(OrganService::class);
 
-        return new ReportController(
+        return new GenerateFullCommand(
             $boardService,
             $meetingService,
             $memberService,

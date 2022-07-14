@@ -5,7 +5,7 @@ namespace Checker\Service\Factory;
 use Checker\Mapper\Installation as InstallationMapper;
 use Checker\Service\Installation as InstallationService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class InstallationFactory implements FactoryInterface
 {

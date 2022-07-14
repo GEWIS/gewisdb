@@ -4,7 +4,7 @@ namespace Application\Service\Factory;
 
 use Application\Service\FileStorage as FileStorageService;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class FileStorageFactory implements FactoryInterface
 {

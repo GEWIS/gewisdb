@@ -12,11 +12,11 @@ use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\Meeting as MeetingModel;
 use DateTime;
-use Zend\Http\Client;
-use Zend\Http\Client\Adapter\Curl;
-use Zend\Http\Request;
-use Zend\Json\Json;
-use Zend\Mail\Message;
+use Laminas\Http\Client;
+use Laminas\Http\Client\Adapter\Curl;
+use Laminas\Http\Request;
+use Laminas\Json\Json;
+use Laminas\Mail\Message;
 
 class Checker
 {

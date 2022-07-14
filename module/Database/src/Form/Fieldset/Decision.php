@@ -4,10 +4,10 @@ namespace Database\Form\Fieldset;
 
 use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Digits;
-use Zend\Validator\InArray;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\Digits;
+use Laminas\Validator\InArray;
 
 class Decision extends Fieldset implements InputFilterProviderInterface
 {

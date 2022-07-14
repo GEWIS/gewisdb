@@ -2,9 +2,9 @@
 
 namespace Database\Form\Fieldset;
 
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Digits;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\Digits;
 
 class Member extends Fieldset implements InputFilterProviderInterface
 {

@@ -4,9 +4,9 @@ namespace Database\Controller;
 
 use Database\Model\Member;
 use Database\Service\Member as MemberService;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Zend\View\Model\JsonModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+use Laminas\View\Model\JsonModel;
 
 class MemberController extends AbstractActionController
 {

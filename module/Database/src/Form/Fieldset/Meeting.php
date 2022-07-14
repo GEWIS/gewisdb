@@ -3,8 +3,8 @@
 namespace Database\Form\Fieldset;
 
 use Database\Model\Meeting as MeetingModel;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Meeting extends Fieldset
 {

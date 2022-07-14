@@ -3,8 +3,8 @@
 namespace Database\Controller;
 
 use Database\Service\Member as MemberService;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 class AddressController extends AbstractActionController
 {

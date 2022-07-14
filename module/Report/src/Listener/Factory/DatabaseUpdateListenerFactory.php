@@ -4,12 +4,12 @@ namespace Report\Listener\Factory;
 
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Report\Listener\DatabaseUpdateListener;
 use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;
 use Report\Service\Misc as MiscService;
 use Report\Service\Organ as OrganService;
-use Zend\ServiceManager\Factory\FactoryInterface;
 
 class DatabaseUpdateListenerFactory implements FactoryInterface
 {
