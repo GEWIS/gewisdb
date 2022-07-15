@@ -24,7 +24,7 @@ class ConsoleRunner
     /**
      * @return array
      */
-    public static function getConfig()
+    public static function getConfig(): array
     {
         // Retrieve configuration
         $appConfig = require __DIR__ . '/config/application.config.php';
@@ -38,7 +38,7 @@ class ConsoleRunner
     /**
      * @return Application
      */
-    public static function getApplication()
+    public static function getApplication(): Application
     {
         // Retrieve configuration
         $appConfig = self::getConfig();
@@ -50,15 +50,11 @@ class ConsoleRunner
     /**
      * @return ServiceManager
      */
-    public static function getServiceManager()
+    public static function getServiceManager(): ServiceManager
     {
         $appConfig = self::getConfig();
 
-        $servicesConfig = $appConfig['service_manager'];
-        if ($servicesConfig === null) {
-            $servicesConfig = [];
-        }
-
+        $servicesConfig = $appConfig['service_manager'] ?? [];
         $smConfig = new ServiceManagerConfig($servicesConfig);
 
         $serviceManager = new ServiceManager();
