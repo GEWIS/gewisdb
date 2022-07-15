@@ -36,7 +36,7 @@ class DatabaseUpdateListener
         MemberService $memberService,
         MiscService $miscService,
         OrganService $organService,
-        EntityManager $emReport
+        EntityManager $emReport,
     ) {
         $this->meetingService = $meetingService;
         $this->memberService = $memberService;

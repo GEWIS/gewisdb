@@ -198,7 +198,7 @@ class Member
     #[JoinTable(name: "members_mailinglists")]
     #[JoinColumn(
         name: "lidnr",
-        referencedColumnName: "lidnr"
+        referencedColumnName: "lidnr",
     )]
     #[InverseJoinColumn(
         name: "name",

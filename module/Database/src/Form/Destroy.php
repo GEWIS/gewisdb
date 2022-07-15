@@ -10,21 +10,21 @@ class Destroy extends AbstractDecision implements InputFilterProviderInterface
     {
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Besluit',
-            )
-        ));
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Vernietig besluit'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Vernietig besluit',
+            ],
+        ]);
 
         $this->add($decision);
     }

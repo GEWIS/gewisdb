@@ -16,25 +16,25 @@ class Decision extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('fdecision');
 
-        $this->add(array(
+        $this->add([
             'name' => 'meeting_type',
-            'type' => 'hidden'
-        ));
+            'type' => 'hidden',
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'meeting_number',
-            'type' => 'hidden'
-        ));
+            'type' => 'hidden',
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'point',
-            'type' => 'hidden'
-        ));
+            'type' => 'hidden',
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
-            'type' => 'hidden'
-        ));
+            'type' => 'hidden',
+        ]);
     }
 
     /**
@@ -42,36 +42,36 @@ class Decision extends Fieldset implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'meeting_type' => array(
+        return [
+            'meeting_type' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => InArray::class,
-                        'options' => array(
+                        'options' => [
                             'haystack' => MeetingTypes::values(),
-                        )
-                    )
-                )
-            ),
-            'meeting_number' => array(
+                        ],
+                    ],
+                ],
+            ],
+            'meeting_number' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => Digits::class)
-                )
-            ),
-            'point' => array(
+                'validators' => [
+                    ['name' => Digits::class],
+                ],
+            ],
+            'point' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => Digits::class)
-                )
-            ),
-            'number' => array(
+                'validators' => [
+                    ['name' => Digits::class],
+                ],
+            ],
+            'number' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => Digits::class)
-                )
-            ),
-        );
+                'validators' => [
+                    ['name' => Digits::class],
+                ],
+            ],
+        ];
     }
 }

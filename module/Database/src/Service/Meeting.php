@@ -96,7 +96,7 @@ class Meeting
         InstallForm $installForm,
         OtherForm $otherForm,
         MeetingMapper $meetingMapper,
-        OrganMapper $organMapper
+        OrganMapper $organMapper,
     ) {
         $this->abolishForm = $abolishForm;
         $this->boardDischargeForm = $boardDischargeForm;
@@ -199,13 +199,13 @@ class Meeting
 
         // extract the meetings
         $data = $form->getData();
-        $meetings = array();
+        $meetings = [];
         foreach ($data['meetings'] as $meeting) {
             $meeting = explode('-', $meeting);
-            $meetings[] = array(
+            $meetings[] = [
                 'type' => $meeting[0],
-                'number' => $meeting[1]
-            );
+                'number' => $meeting[1],
+            ];
         }
 
         // find meeting data
@@ -227,10 +227,10 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'destroy',
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -238,10 +238,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'destroy',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -287,10 +287,10 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'other',
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -298,10 +298,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'other',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -319,10 +319,10 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'abolish',
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -330,10 +330,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'foundation',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -351,10 +351,10 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'board_install',
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -362,10 +362,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'board_install',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -383,11 +383,11 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'board_discharge',
                 'installs' => $this->getCurrentBoard(),
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -395,10 +395,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'board_discharge',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -416,11 +416,11 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'board_release',
                 'installs' => $this->getCurrentBoard(),
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -428,10 +428,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'board_release',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -449,10 +449,10 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'install',
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -460,10 +460,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'install',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -481,10 +481,10 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'foundation',
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
 
@@ -493,10 +493,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'foundation',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -526,10 +526,10 @@ class Meeting
         $form->bind(new Decision());
 
         if (!$form->isValid()) {
-            return array(
+            return [
                 'type' => 'budget',
-                'form' => $form
-            );
+                'form' => $form,
+            ];
         }
 
         $decision = $form->getData();
@@ -547,10 +547,10 @@ class Meeting
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
-        return array(
+        return [
             'type' => 'budget',
-            'decision' => $decision
-        );
+            'decision' => $decision,
+        ];
     }
 
     /**
@@ -575,11 +575,11 @@ class Meeting
 
         if ($mapper->isManaged($meeting)) {
             // meeting is already in the database
-            $form->setMessages(array(
-                'number' => array(
-                    'Deze vergadering bestaat al'
-                )
-            ));
+            $form->setMessages([
+                'number' => [
+                    'Deze vergadering bestaat al',
+                ],
+            ]);
             return null;
         }
 
@@ -628,7 +628,7 @@ class Meeting
             $meetingNumber,
             $decisionPoint,
             $decisionNumber,
-            $subdecisionNumber
+            $subdecisionNumber,
         );
     }
 

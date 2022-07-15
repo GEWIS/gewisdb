@@ -26,7 +26,7 @@ class MailingList
     public function __construct(
         DeleteListForm $deleteListForm,
         MailingListForm $mailingListForm,
-        MailingListMapper $mailingListMapper
+        MailingListMapper $mailingListMapper,
     ) {
         $this->deleteListForm = $deleteListForm;
         $this->mailingListForm = $mailingListForm;

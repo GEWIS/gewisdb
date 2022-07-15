@@ -16,7 +16,7 @@ enum MeetingTypes: string
     {
         return array_merge(
             array_map(
-                fn(self $status) => $status->value,
+                fn (self $status) => $status->value,
                 self::cases(),
             ),
             self::cases(),

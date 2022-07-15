@@ -108,7 +108,7 @@ class Meeting
         foreach ($meetings as $meeting) {
             $qb->orWhere($qb->expr()->andX(
                 $qb->expr()->eq('m.type', ':type' . $num),
-                $qb->expr()->eq('m.number', ':number' . $num)
+                $qb->expr()->eq('m.number', ':number' . $num),
             ));
             $qb->setParameter(':type' . $num, $meeting['type']);
             $qb->setParameter(':number' . $num, $meeting['number']);
@@ -193,7 +193,7 @@ class Meeting
     {
         $qb = $this->em->createQueryBuilder();
 
-        $fields = array();
+        $fields = [];
         $fields[] = 'LOWER(d.meeting_type)';
         $fields[] = "' '";
         $fields[] = 'd.meeting_number';
@@ -225,8 +225,8 @@ class Meeting
                 ->andWhere('x.number = d.number');
             $qb->andWhere($qb->expr()->not(
                 $qb->expr()->exists(
-                    $qbn->getDql()
-                )
+                    $qbn->getDql(),
+                ),
             ));
         }
 
@@ -261,7 +261,7 @@ class Meeting
 
         // TODO: destroyed decisions (both ways!)
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbn->getDql())
+            $qb->expr()->exists($qbn->getDql()),
         ));
 
         return $qb->getQuery()->getResult();

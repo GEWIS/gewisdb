@@ -18,7 +18,7 @@ class SettingsController extends AbstractActionController
 
     public function __construct(
         InstallationFunctionService $installationFunctionService,
-        MailingListService $mailingListService
+        MailingListService $mailingListService,
     ) {
         $this->installationFunctionService = $installationFunctionService;
         $this->mailingListService = $mailingListService;
@@ -29,7 +29,7 @@ class SettingsController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel(array());
+        return new ViewModel([]);
     }
 
     /**
@@ -41,10 +41,10 @@ class SettingsController extends AbstractActionController
             $this->installationFunctionService->addFunction($this->getRequest()->getPost());
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'functions' => $this->installationFunctionService->getAllFunctions(),
-            'form' => $this->installationFunctionService->getFunctionForm()
-        ));
+            'form' => $this->installationFunctionService->getFunctionForm(),
+        ]);
     }
 
     /**
@@ -56,10 +56,10 @@ class SettingsController extends AbstractActionController
             $this->mailingListService->addList($this->getRequest()->getPost());
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'lists' => $this->mailingListService->getAllLists(),
-            'form' => $this->mailingListService->getListForm()
-        ));
+            'form' => $this->mailingListService->getListForm(),
+        ]);
     }
 
     /**
@@ -71,20 +71,20 @@ class SettingsController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             if ($this->mailingListService->delete($name, $this->getRequest()->getPost())) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'success' => true,
-                    'name' => $name
-                ));
+                    'name' => $name,
+                ]);
             } else {
                 // redirect back
-                return $this->redirect()->toRoute('settings/default', array(
-                    'action' => 'list'
-                ));
+                return $this->redirect()->toRoute('settings/default', [
+                    'action' => 'list',
+                ]);
             }
         }
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $this->mailingListService->getDeleteListForm(),
-            'name' => $name
-        ));
+            'name' => $name,
+        ]);
     }
 }

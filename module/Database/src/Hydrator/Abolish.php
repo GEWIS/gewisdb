@@ -24,7 +24,7 @@ class Abolish extends AbstractDecision
         $object = parent::hydrate($data, $object);
 
         // determine who to discharge
-        $members = array();
+        $members = [];
 
         // check installations and discharges
         foreach ($data['subdecision']->getReferences() as $ref) {

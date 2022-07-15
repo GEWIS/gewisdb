@@ -43,8 +43,8 @@ class Module
      */
     public function getServiceConfig(): array
     {
-        return array(
-            'factories' => array(
+        return [
+            'factories' => [
                 CheckDatabaseCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipsCommand::class => AbstractCheckerCommandFactory::class,
@@ -64,8 +64,8 @@ class Module
                     $transport = new $class();
                     $transport->setOptions(new $optionsClass($config['options']));
                     return $transport;
-                }
-            )
-        );
+                },
+            ],
+        ];
     }
 }

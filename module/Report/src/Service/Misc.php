@@ -20,7 +20,7 @@ class Misc
      */
     public function __construct(
         MailingListMapper $mailingListMapper,
-        EntityManager $emReport
+        EntityManager $emReport,
     ) {
         $this->mailingListMapper = $mailingListMapper;
         $this->emReport = $emReport;

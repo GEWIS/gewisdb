@@ -24,7 +24,7 @@ class UserServiceFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): UserService {
         return new UserService(
             $container->get(UserMapper::class),
@@ -32,7 +32,7 @@ class UserServiceFactory implements FactoryInterface
             $container->get(Login::class),
             $container->get(UserEdit::class),
             $container->get(PasswordInterface::class),
-            $container->get(AuthenticationService::class)
+            $container->get(AuthenticationService::class),
         );
     }
 }

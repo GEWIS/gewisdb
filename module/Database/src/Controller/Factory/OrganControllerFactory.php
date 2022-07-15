@@ -19,7 +19,7 @@ class OrganControllerFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): OrganController {
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);

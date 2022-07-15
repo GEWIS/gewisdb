@@ -8,48 +8,48 @@ class Install extends AbstractDecision
         Fieldset\Meeting $meeting,
         Fieldset\Installation $install,
         Fieldset\SubDecision $discharge,
-        Fieldset\SubDecision $foundation
+        Fieldset\SubDecision $foundation,
     ) {
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Orgaan',
-            )
-        ));
+            ],
+        ]);
 
         $this->add($foundation);
 
-        $this->add(array(
+        $this->add([
             'name' => 'installations',
             'type' => 'collection',
-            'options' => array(
+            'options' => [
                 'label' => 'Installations',
                 'count' => 1,
                 'should_create_template' => true,
-                'target_element' => $install
-            )
-        ));
+                'target_element' => $install,
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'discharges',
             'type' => 'collection',
-            'options' => array(
+            'options' => [
                 'label' => 'Members',
                 'count' => 1,
                 'should_create_template' => true,
-                'target_element' => $discharge
-            )
-        ));
+                'target_element' => $discharge,
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Maak wijzigingen'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Maak wijzigingen',
+            ],
+        ]);
     }
 }

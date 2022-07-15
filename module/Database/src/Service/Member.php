@@ -91,7 +91,7 @@ class Member
         MailingListService $mailingListService,
         PhpRenderer $viewRenderer,
         $mailTransport,
-        array $config
+        array $config,
     ) {
         $this->addressForm = $addressForm;
         $this->addressExportForm = $addressExportForm;
@@ -125,17 +125,17 @@ class Member
         $noiban = false;
 
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
-            $form->setValidationGroup(array(
+            $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tueUsername', 'study', 'email', 'birth',
-                'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation'
-            ));
+                'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation',
+            ]);
         } else {
-            $form->setValidationGroup(array(
+            $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
                 'gender', 'tueUsername', 'study', 'email', 'birth',
-                'agreed', 'iban', 'signature', 'signatureLocation'
-            ));
+                'agreed', 'iban', 'signature', 'signatureLocation',
+            ]);
         }
         if ($data['iban'] == 'noiban') {
             $noiban = true;
@@ -162,7 +162,7 @@ class Member
             || $this->getProspectiveMemberMapper()->hasMemberWith($prospectiveMember->getEmail())
         ) {
             $form->get('email')->setMessages([
-                'There already is a member with this email address.'
+                'There already is a member with this email address.',
             ]);
             return null;
         }
@@ -211,9 +211,9 @@ class Member
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
-        $model = new ViewModel(array(
-            'member' => $member
-        ));
+        $model = new ViewModel([
+            'member' => $member,
+        ]);
         $model->setTemplate('database/member/subscribe');
         $body = $renderer->render($model);
 
@@ -379,15 +379,15 @@ class Member
     public function getMember($id)
     {
         try {
-            return array(
+            return [
                 'member' => $this->getMemberMapper()->find($id),
-                'simple' => false
-            );
+                'simple' => false,
+            ];
         } catch (\Doctrine\ORM\NoResultException $e) {
-            return array(
+            return [
                 'member' => $this->getMemberMapper()->findSimple($id),
-                'simple' => true
-            );
+                'simple' => true,
+            ];
         }
     }
 
@@ -400,10 +400,10 @@ class Member
      */
     public function getProspectiveMember($id)
     {
-        return array(
+        return [
             'member' => $this->getProspectiveMemberMapper()->find($id),
             'form' => $this->memberTypeForm,
-        );
+        ];
     }
 
     /**
@@ -781,10 +781,10 @@ class Member
         $form = $this->memberEditForm;
         $member = $this->getMember($lidnr);
         $form->bind($member['member']);
-        return array(
+        return [
             'member' => $member['member'],
-            'form' => $form
-        );
+            'form' => $form,
+        ];
     }
 
     /**
@@ -796,10 +796,10 @@ class Member
      */
     public function getMemberExpirationForm($lidnr)
     {
-        return array(
+        return [
             'form' => $this->memberExpirationForm,
-            'member' => $this->getMember($lidnr)['member']
-        );
+            'member' => $this->getMember($lidnr)['member'],
+        ];
     }
 
     /**
@@ -811,10 +811,10 @@ class Member
      */
     public function getMemberTypeForm($lidnr)
     {
-        return array(
+        return [
             'member' => $this->getMember($lidnr)['member'],
             'form' => $this->memberTypeForm,
-        );
+        ];
     }
 
     /**
@@ -830,11 +830,11 @@ class Member
         $member = $member['member'];
         $lists = $this->mailingListService->getAllLists();
 
-        return array(
+        return [
             'form' => new MemberListsForm($member, $lists),
             'member' => $member,
-            'lists' => $lists
-        );
+            'lists' => $lists,
+        ];
     }
 
     /**
@@ -858,10 +858,10 @@ class Member
         }
         $form = $this->addressForm;
         $form->bind($address);
-        return array(
+        return [
             'form' => $form,
-            'address' => $address
-        );
+            'address' => $address,
+        ];
     }
 
     /**
@@ -875,10 +875,10 @@ class Member
     public function getDeleteAddressForm($lidnr, $type)
     {
         // find the address
-        return array(
+        return [
             'form' => $this->deleteAddressForm,
-            'address' => $this->getMemberMapper()->findMemberAddress($lidnr, $type)
-        );
+            'address' => $this->getMemberMapper()->findMemberAddress($lidnr, $type),
+        ];
     }
 
     /**

@@ -35,7 +35,7 @@ class Organ
             'meeting_number' => 'ASC',
             'decision_point' => 'ASC',
             'decision_number' => 'ASC',
-            'number' => 'ASC'
+            'number' => 'ASC',
         ]);
 
         $adapter = new Console();
@@ -108,7 +108,7 @@ class Organ
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
             $repo = $this->emReport->getRepository('Report\Model\Organ');
             $repOrgan = $repo->findOneBy([
-                'foundation' => $ref->getFoundation()
+                'foundation' => $ref->getFoundation(),
             ]);
 
             if ($repOrgan === null) {
@@ -129,7 +129,7 @@ class Organ
         if ($repOrgan === null) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
             $repOrgan = $repo->findOneBy([
-                'foundation' => $ref->getFoundation()
+                'foundation' => $ref->getFoundation(),
             ]);
 
             if ($repOrgan === null) {

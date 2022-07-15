@@ -12,21 +12,21 @@ class Query extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'query',
             'type' => 'textarea',
-            'options' => array(
-                'label' => 'Query input'
-            )
-        ));
+            'options' => [
+                'label' => 'Query input',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Uitvoeren'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Uitvoeren',
+            ],
+        ]);
         $this->get('submit')->setLabel('Uitvoeren');
     }
 
@@ -35,6 +35,6 @@ class Query extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return array();
+        return [];
     }
 }

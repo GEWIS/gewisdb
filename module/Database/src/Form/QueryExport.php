@@ -8,15 +8,15 @@ class QueryExport extends Query
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'select',
-            'options' => array(
-                'value_options' => array(
-                    'csv' => 'CSV'
-                )
-            )
-        ));
+            'options' => [
+                'value_options' => [
+                    'csv' => 'CSV',
+                ],
+            ],
+        ]);
 
         $this->get('submit')->setAttribute('value', 'export');
         $this->get('submit')->setLabel('Exporteer');

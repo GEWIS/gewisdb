@@ -25,7 +25,7 @@ class GenerateFullCommandFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): GenerateFullCommand {
         /** @var BoardService $boardService */
         $boardService = $container->get(BoardService::class);
@@ -43,7 +43,7 @@ class GenerateFullCommandFactory implements FactoryInterface
             $meetingService,
             $memberService,
             $miscService,
-            $organService
+            $organService,
         );
     }
 }

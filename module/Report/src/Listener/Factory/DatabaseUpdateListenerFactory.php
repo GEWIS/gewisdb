@@ -23,7 +23,7 @@ class DatabaseUpdateListenerFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): DatabaseUpdateListener {
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);
@@ -41,7 +41,7 @@ class DatabaseUpdateListenerFactory implements FactoryInterface
             $memberService,
             $miscService,
             $organService,
-            $emReport
+            $emReport,
         );
     }
 }

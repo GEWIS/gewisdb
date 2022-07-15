@@ -26,7 +26,7 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function indexAction()
     {
-        return new ViewModel(array());
+        return new ViewModel([]);
     }
 
     /**
@@ -43,9 +43,9 @@ class ProspectiveMemberController extends AbstractActionController
             return $member->toArray();
         }, $res);
 
-        return new JsonModel(array(
-            'json' => $res
-        ));
+        return new JsonModel([
+            'json' => $res,
+        ]);
     }
 
     /**
@@ -71,13 +71,13 @@ class ProspectiveMemberController extends AbstractActionController
 
             if (null !== $result) {
                 return $this->redirect()->toRoute('member/show', [
-                    'id' => $result->getLidnr()
+                    'id' => $result->getLidnr(),
                 ]);
             }
         }
 
         return $this->redirect()->toRoute('prospective-member/show', [
-            'id' => $this->params()->fromRoute('id')
+            'id' => $this->params()->fromRoute('id'),
         ]);
     }
 

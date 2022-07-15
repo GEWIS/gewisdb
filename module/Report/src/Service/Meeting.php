@@ -37,7 +37,7 @@ class Meeting
         MeetingMapper $meetingMapper,
         EntityManager $emReport,
         array $config,
-        $mailTransport
+        $mailTransport,
     ) {
         $this->meetingMapper = $meetingMapper;
         $this->emReport = $emReport;
@@ -72,10 +72,10 @@ class Meeting
     {
         $repo = $this->emReport->getRepository('Report\Model\Meeting');
 
-        $reportMeeting = $repo->find(array(
+        $reportMeeting = $repo->find([
             'type' => $meeting->getType(),
-            'number' => $meeting->getNumber()
-        ));
+            'number' => $meeting->getNumber(),
+        ]);
 
         if ($reportMeeting === null) {
             $reportMeeting = new ReportMeeting();
@@ -105,7 +105,7 @@ class Meeting
         if ($reportMeeting === null) {
             $reportMeeting = $this->emReport->getRepository('Report\Model\Meeting')->find([
                 'type' => $decision->getMeeting()->getType(),
-                'number' => $decision->getMeeting()->getNumber()
+                'number' => $decision->getMeeting()->getNumber(),
             ]);
 
             if ($reportMeeting === null) {
@@ -114,12 +114,12 @@ class Meeting
         }
 
         // see if decision exists
-        $reportDecision = $decRepo->find(array(
+        $reportDecision = $decRepo->find([
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'point' => $decision->getPoint(),
-            'number' => $decision->getNumber()
-        ));
+            'number' => $decision->getNumber(),
+        ]);
 
         if (null === $reportDecision) {
             $reportDecision = new ReportDecision();
@@ -128,7 +128,7 @@ class Meeting
 
         $reportDecision->setPoint($decision->getPoint());
         $reportDecision->setNumber($decision->getNumber());
-        $content = array();
+        $content = [];
 
         foreach ($decision->getSubdecisions() as $subdecision) {
             $this->generateSubDecision($subdecision, $reportDecision);
@@ -150,25 +150,25 @@ class Meeting
         $subdecRepo = $this->emReport->getRepository('Report\Model\SubDecision');
 
         if ($reportDecision === null) {
-            $reportDecision = $decRepo->find(array(
+            $reportDecision = $decRepo->find([
                 'meeting_type' => $subdecision->getMeetingType(),
                 'meeting_number' => $subdecision->getMeetingNumber(),
                 'point' => $subdecision->getDecisionPoint(),
-                'number' => $subdecision->getDecisionNumber()
-            ));
+                'number' => $subdecision->getDecisionNumber(),
+            ]);
 
             if ($reportDecision === null) {
                 throw new \LogicException('Decision without meeting');
             }
         }
 
-        $reportSubDecision = $subdecRepo->find(array(
+        $reportSubDecision = $subdecRepo->find([
             'meeting_type' => $subdecision->getMeetingType(),
             'meeting_number' => $subdecision->getMeetingNumber(),
             'decision_point' => $subdecision->getDecisionPoint(),
             'decision_number' => $subdecision->getDecisionNumber(),
-            'number' => $subdecision->getNumber()
-        ));
+            'number' => $subdecision->getNumber(),
+        ]);
 
         if (null === $reportSubDecision) {
             // determine type and create
@@ -181,13 +181,13 @@ class Meeting
 
         if ($subdecision instanceof SubDecision\FoundationReference) {
             $ref = $subdecision->getFoundation();
-            $foundation = $subdecRepo->find(array(
+            $foundation = $subdecRepo->find([
                 'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                 'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $ref->getDecision()->getPoint(),
                 'decision_number' => $ref->getDecision()->getNumber(),
-                'number' => $ref->getNumber()
-            ));
+                'number' => $ref->getNumber(),
+            ]);
 
             $reportSubDecision->setFoundation($foundation);
         }
@@ -201,13 +201,13 @@ class Meeting
             if ($subdecision instanceof SubDecision\Discharge) {
                 // discharge
                 $ref = $subdecision->getInstallation();
-                $installation = $subdecRepo->find(array(
+                $installation = $subdecRepo->find([
                     'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                     'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                     'decision_point' => $ref->getDecision()->getPoint(),
                     'decision_number' => $ref->getDecision()->getNumber(),
-                    'number' => $ref->getNumber()
-                ));
+                    'number' => $ref->getNumber(),
+                ]);
                 $reportSubDecision->setInstallation($installation);
             } else {
                 if ($subdecision instanceof SubDecision\Foundation) {
@@ -236,35 +236,35 @@ class Meeting
                             if ($subdecision instanceof SubDecision\Board\Release) {
                                 // board release
                                 $ref = $subdecision->getInstallation();
-                                $installation = $subdecRepo->find(array(
+                                $installation = $subdecRepo->find([
                                     'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                                     'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                                     'decision_point' => $ref->getDecision()->getPoint(),
                                     'decision_number' => $ref->getDecision()->getNumber(),
-                                    'number' => $ref->getNumber()
-                                ));
+                                    'number' => $ref->getNumber(),
+                                ]);
                                 $reportSubDecision->setInstallation($installation);
                                 $reportSubDecision->setDate($subdecision->getDate());
                             } else {
                                 if ($subdecision instanceof SubDecision\Board\Discharge) {
                                     $ref = $subdecision->getInstallation();
-                                    $installation = $subdecRepo->find(array(
+                                    $installation = $subdecRepo->find([
                                         'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
                                         'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                                         'decision_point' => $ref->getDecision()->getPoint(),
                                         'decision_number' => $ref->getDecision()->getNumber(),
-                                        'number' => $ref->getNumber()
-                                    ));
+                                        'number' => $ref->getNumber(),
+                                    ]);
                                     $reportSubDecision->setInstallation($installation);
                                 } else {
                                     if ($subdecision instanceof SubDecision\Destroy) {
                                         $ref = $subdecision->getTarget();
-                                        $target = $decRepo->find(array(
+                                        $target = $decRepo->find([
                                             'meeting_type' => $ref->getMeeting()->getType(),
                                             'meeting_number' => $ref->getMeeting()->getNumber(),
                                             'point' => $ref->getPoint(),
-                                            'number' => $ref->getNumber()
-                                        ));
+                                            'number' => $ref->getNumber(),
+                                        ]);
                                         $reportSubDecision->setTarget($target);
                                     }
                                 }
@@ -293,12 +293,12 @@ class Meeting
 
     public function deleteDecision($decision)
     {
-        $reportDecision = $this->emReport->getRepository('Report\Model\Decision')->find(array(
+        $reportDecision = $this->emReport->getRepository('Report\Model\Decision')->find([
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'point' => $decision->getPoint(),
-            'number' => $decision->getNumber()
-        ));
+            'number' => $decision->getNumber(),
+        ]);
 
         foreach (array_reverse($reportDecision->getSubdecisions()->toArray()) as $subDecision) {
             $this->deleteSubDecision($subDecision);
@@ -366,22 +366,22 @@ class Meeting
 
         $meeting = $decision->getMeeting();
         $body = <<<BODYTEXT
-Hallo Belangrijke Database Mensen,
+            Hallo Belangrijke Database Mensen,
 
-Ik ben een fout tegen gekomen tijdens het processen:
+            Ik ben een fout tegen gekomen tijdens het processen:
 
-{$e->getMessage()}
+            {$e->getMessage()}
 
-Dit gebeurde tijdens het processen van besluit {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
+            Dit gebeurde tijdens het processen van besluit {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
 
-Met vriendelijke groet,
+            Met vriendelijke groet,
 
-De GEWIS Database
+            De GEWIS Database
 
-PS: extra info over de fout:
+            PS: extra info over de fout:
 
-{$e->getTraceAsString()}
-BODYTEXT;
+            {$e->getTraceAsString()}
+            BODYTEXT;
 
         $message = new Message();
         $message->setBody($body);

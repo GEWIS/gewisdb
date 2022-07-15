@@ -22,7 +22,7 @@ class CheckerFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): CheckerService {
         /** @var InstallationService $installationService */
         $installationService = $container->get(InstallationService::class);
@@ -42,7 +42,7 @@ class CheckerFactory implements FactoryInterface
             $memberService,
             $organService,
             $mailTransport,
-            $config
+            $config,
         );
     }
 }

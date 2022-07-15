@@ -53,7 +53,7 @@ class UserService
         Login $loginForm,
         UserEdit $editForm,
         PasswordInterface $crypt,
-        AuthenticationService $authService
+        AuthenticationService $authService,
     ) {
         $this->mapper = $mapper;
         $this->createForm = $createForm;

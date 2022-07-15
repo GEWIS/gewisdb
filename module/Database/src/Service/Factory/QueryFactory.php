@@ -23,7 +23,7 @@ class QueryFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): QueryService {
         /** @var QueryForm $queryForm */
         $queryForm = $container->get(QueryForm::class);
@@ -41,7 +41,7 @@ class QueryFactory implements FactoryInterface
             $queryExportForm,
             $querySaveForm,
             $savedQueryMapper,
-            $emReport
+            $emReport,
         );
     }
 }

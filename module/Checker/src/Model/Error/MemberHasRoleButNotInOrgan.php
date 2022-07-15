@@ -31,7 +31,7 @@ class MemberHasRoleButNotInOrgan extends Error
     public function __construct(
         MeetingModel $meeting,
         InstallationModel $installation,
-        $role
+        $role,
     ) {
         parent::__construct($meeting, $installation);
         $this->role = $role;

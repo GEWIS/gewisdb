@@ -99,7 +99,7 @@ class Module
                     $handler = new RotatingFileHandler(
                         $config['logfile_path'],
                         $config['max_rotate_file_count'],
-                        $config['minimal_log_level']
+                        $config['minimal_log_level'],
                     );
                     $logger->pushHandler($handler);
 
@@ -121,7 +121,7 @@ class Module
                 'fileUrl' => function (ContainerInterface $container) {
                     return new FileUrl($container->get('config'));
                 },
-            ]
+            ],
         ];
     }
 }

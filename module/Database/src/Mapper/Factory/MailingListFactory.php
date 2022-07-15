@@ -18,7 +18,7 @@ class MailingListFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MailingListMapper {
         return new MailingListMapper($container->get('database_doctrine_em'));
     }

@@ -27,7 +27,7 @@ class SettingsController extends AbstractActionController
     public function indexAction()
     {
         return new ViewModel([
-            'users' => $this->service->findAll()
+            'users' => $this->service->findAll(),
         ]);
     }
 
@@ -47,7 +47,7 @@ class SettingsController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
@@ -70,7 +70,7 @@ class SettingsController extends AbstractActionController
 
         return new ViewModel([
             'form' => $form,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 

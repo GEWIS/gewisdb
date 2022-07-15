@@ -18,7 +18,7 @@ class Member
      */
     public function __construct(
         MemberMapper $memberMapper,
-        array $config
+        array $config,
     ) {
         $this->memberMapper = $memberMapper;
         $this->config = $config;

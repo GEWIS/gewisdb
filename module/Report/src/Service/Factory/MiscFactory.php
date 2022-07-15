@@ -20,7 +20,7 @@ class MiscFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MiscService {
         /** @var MailingListMapper $mailingListMapper */
         $mailingListMapper = $container->get(MailingListMapper::class);
@@ -29,7 +29,7 @@ class MiscFactory implements FactoryInterface
 
         return new MiscService(
             $mailingListMapper,
-            $emReport
+            $emReport,
         );
     }
 }

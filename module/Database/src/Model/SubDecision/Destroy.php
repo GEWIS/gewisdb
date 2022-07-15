@@ -83,7 +83,7 @@ class Destroy extends SubDecision
     {
         $target = $this->getTarget();
         $meet = $this->getTarget()->getMeeting();
-        $content = array();
+        $content = [];
         foreach ($target->getSubdecisions() as $sub) {
             $content[] = $sub->getContent();
         }

@@ -33,7 +33,7 @@ class UserController extends AbstractActionController
             }
         }
         return new ViewModel([
-            'form' => $this->service->getLoginForm()
+            'form' => $this->service->getLoginForm(),
         ]);
     }
 

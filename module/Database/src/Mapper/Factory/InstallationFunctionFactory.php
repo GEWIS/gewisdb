@@ -18,7 +18,7 @@ class InstallationFunctionFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): InstallationFunctionMapper {
         return new InstallationFunctionMapper($container->get('database_doctrine_em'));
     }

@@ -17,24 +17,24 @@ class UserEdit extends Form implements InputFilterProviderInterface
             'name' => 'password',
             'type' => 'password',
             'options' => [
-                'label' => 'Wachtwoord'
-            ]
+                'label' => 'Wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'password_verify',
             'type' => 'password',
             'options' => [
-                'label' => 'Controleer wachtwoord'
-            ]
+                'label' => 'Controleer wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Wijzig gebruiker'
-            ]
+                'value' => 'Wijzig gebruiker',
+            ],
         ]);
     }
 
@@ -50,10 +50,10 @@ class UserEdit extends Form implements InputFilterProviderInterface
                     [
                         'name' => StringLength::class,
                         'options' => [
-                            'min' => 10
-                        ]
-                    ]
-                ]
+                            'min' => 10,
+                        ],
+                    ],
+                ],
             ],
             'password_verify' => [
                 'required' => true,
@@ -61,11 +61,11 @@ class UserEdit extends Form implements InputFilterProviderInterface
                     [
                         'name' => Identical::class,
                         'options' => [
-                            'token' => 'password'
-                        ]
-                    ]
-                ]
-            ]
+                            'token' => 'password',
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 }

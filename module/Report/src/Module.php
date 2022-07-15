@@ -40,8 +40,8 @@ class Module
      */
     public function getServiceConfig(): array
     {
-        return array(
-            'factories' => array(
+        return [
+            'factories' => [
                 GenerateFullCommand::class => GenerateFullCommandFactory::class,
                 GeneratePartialCommand::class => GeneratePartialCommandFactory::class,
                 BoardService::class => BoardServiceFactory::class,
@@ -51,7 +51,7 @@ class Module
                 OrganService::class => OrganServiceFactory::class,
                 DatabaseDeletionListener::class => DatabaseDeletionListenerFactory::class,
                 DatabaseUpdateListener::class => DatabaseUpdateListenerFactory::class,
-            )
-        );
+            ],
+        ];
     }
 }

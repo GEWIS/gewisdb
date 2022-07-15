@@ -50,7 +50,7 @@ abstract class Error
      */
     public function __construct(
         MeetingModel $meeting,
-        SubDecisionModel $subDecision
+        SubDecisionModel $subDecision,
     ) {
         $this->meeting = $meeting;
         $this->subDecision = $subDecision;

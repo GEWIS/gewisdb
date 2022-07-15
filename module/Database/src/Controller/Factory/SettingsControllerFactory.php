@@ -20,7 +20,7 @@ class SettingsControllerFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): SettingsController {
         /** @var InstallationFunctionService $installationFunctionService */
         $installationFunctionService = $container->get(InstallationFunctionService::class);
@@ -29,7 +29,7 @@ class SettingsControllerFactory implements FactoryInterface
 
         return new SettingsController(
             $installationFunctionService,
-            $mailingListService
+            $mailingListService,
         );
     }
 }

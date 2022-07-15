@@ -21,7 +21,7 @@ class MailingListFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MailingListService {
         /** @var DeleteListForm $deleteListForm */
         $deleteListForm = $container->get(DeleteListForm::class);
@@ -33,7 +33,7 @@ class MailingListFactory implements FactoryInterface
         return new MailingListService(
             $deleteListForm,
             $mailingListForm,
-            $mailingListMapper
+            $mailingListMapper,
         );
     }
 }

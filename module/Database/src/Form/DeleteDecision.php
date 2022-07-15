@@ -11,21 +11,21 @@ class DeleteDecision extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit_yes',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Ja'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Ja',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit_no',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Nee'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Nee',
+            ],
+        ]);
     }
 
     public function getInputFilterSpecification(): array

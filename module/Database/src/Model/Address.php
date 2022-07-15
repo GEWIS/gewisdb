@@ -253,13 +253,13 @@ class Address
      */
     public function toArray(): array
     {
-        return array(
+        return [
             'country' => $this->getCountry(),
             'street' => $this->getStreet(),
             'number' => $this->getNumber(),
             'city' => $this->getCity(),
             'postalCode' => $this->getPostalCode(),
-            'phone' => $this->getPhone()
-        );
+            'phone' => $this->getPhone(),
+        ];
     }
 }

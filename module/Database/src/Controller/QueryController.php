@@ -34,25 +34,25 @@ class QueryController extends AbstractActionController
             $result = $this->queryService->execute($post);
 
             if (!is_null($result) && count($result) > 0) {
-                return new ViewModel(array(
+                return new ViewModel([
                     'form' => $this->queryService->getQueryForm(),
                     'exportform' => $this->queryService->getQueryExportForm(),
                     'result' => $result,
                     'saved' => $this->queryService->getSavedQueries(),
-                    'entities' => $this->queryService->getEntities()
-                ));
+                    'entities' => $this->queryService->getEntities(),
+                ]);
             } elseif (isset($query)) {
-                return $this->redirect()->toRoute('query/show', array(
-                    'query' => $query->getId()
-                ));
+                return $this->redirect()->toRoute('query/show', [
+                    'query' => $query->getId(),
+                ]);
             }
         }
 
-        return new ViewModel(array(
+        return new ViewModel([
             'form' => $this->queryService->getQueryForm(),
             'saved' => $this->queryService->getSavedQueries(),
-            'entities' => $this->queryService->getEntities()
-        ));
+            'entities' => $this->queryService->getEntities(),
+        ]);
     }
 
     /**
@@ -60,13 +60,13 @@ class QueryController extends AbstractActionController
      */
     public function showAction()
     {
-        $viewmodel = new Viewmodel(array(
+        $viewmodel = new Viewmodel([
             'form' => $this->queryService->getQueryForm(),
             'saved' => $this->queryService->getSavedQueries(),
             'exportform' => $this->queryService->getQueryExportForm(),
             'result' => $this->queryService->executeSaved($this->params()->fromRoute('query')),
-            'entities' => $this->queryService->getEntities()
-        ));
+            'entities' => $this->queryService->getEntities(),
+        ]);
 
         $viewmodel->setTemplate('database/query/index');
 
@@ -82,9 +82,9 @@ class QueryController extends AbstractActionController
             $result = $this->queryService->execute($this->getRequest()->getPost(), true);
 
             if (null !== $result) {
-                $vm = new ViewModel(array(
-                    'result' => $result
-                ));
+                $vm = new ViewModel([
+                    'result' => $result,
+                ]);
 
                 $vm->setTemplate('database/query/export');
                 $vm->setTerminal(true);

@@ -8,16 +8,16 @@ use Report\Command\{
     GeneratePartialCommand,
 };
 
-return array(
-    'doctrine' => array(
-        'configuration' => array(
-            'orm_report' => array(
-                'entity_namespaces' => array(
+return [
+    'doctrine' => [
+        'configuration' => [
+            'orm_report' => [
+                'entity_namespaces' => [
                     'db' => __NAMESPACE__ . '\Model',
-                ),
-            ),
-        ),
-        'driver' => array(
+                ],
+            ],
+        ],
+        'driver' => [
             __NAMESPACE__ . '_driver' => [
                 'class' => AttributeDriver::class,
                 'paths' => [
@@ -29,13 +29,13 @@ return array(
                     __NAMESPACE__ . '\Model' => __NAMESPACE__ . '_driver',
                 ],
             ],
-        ),
-    ),
-    'laminas-cli' => array(
-        'commands' => array(
+        ],
+    ],
+    'laminas-cli' => [
+        'commands' => [
             'report:generate:partial' => GeneratePartialCommand::class,
             'report:generate:full' => GenerateFullCommand::class,
-        ),
-    ),
-    'mail' => []
-);
+        ],
+    ],
+    'mail' => [],
+];

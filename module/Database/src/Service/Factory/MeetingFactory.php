@@ -32,7 +32,7 @@ class MeetingFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MeetingService {
         /** @var AbolishForm $abolishForm */
         $abolishForm = $container->get(AbolishForm::class);
@@ -77,7 +77,7 @@ class MeetingFactory implements FactoryInterface
             $installForm,
             $otherForm,
             $meetingMapper,
-            $organMapper
+            $organMapper,
         );
     }
 }

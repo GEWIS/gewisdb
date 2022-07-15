@@ -16,7 +16,7 @@ class MemberExpiredButStillInOrgan extends Error
      */
     public function __construct(
         MeetingModel $meeting,
-        InstallationModel $installation
+        InstallationModel $installation,
     ) {
         parent::__construct($meeting, $installation);
     }

@@ -16,21 +16,21 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add(clone $installation);
 
-        $this->add(array(
+        $this->add([
             'name' => 'date',
             'type' => 'date',
-            'options' => array(
+            'options' => [
                 'label' => 'Van kracht per',
-            )
-        ));
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Dechargeer bestuurder'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Dechargeer bestuurder',
+            ],
+        ]);
     }
 
     /**
@@ -38,10 +38,10 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'date' => array(
-                'required' => true
-            )
-        );
+        return [
+            'date' => [
+                'required' => true,
+            ],
+        ];
     }
 }

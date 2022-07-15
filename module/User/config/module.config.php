@@ -31,18 +31,18 @@ return [
                     'route' => '/user',
                     'defaults' => [
                         'controller' => UserController::class,
-                        'action' => 'index'
-                    ]
+                        'action' => 'index',
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
                     'default' => [
                         'type' => Segment::class,
                         'options' => [
-                            'route' => '/:action'
-                        ]
-                    ]
-                ]
+                            'route' => '/:action',
+                        ],
+                    ],
+                ],
             ],
             // settings route is already defined in the database module
             'settings' => [
@@ -53,8 +53,8 @@ return [
                             'route' => '/user',
                             'defaults' => [
                                 'controller' => SettingsController::class,
-                                'action' => 'index'
-                            ]
+                                'action' => 'index',
+                            ],
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
@@ -62,31 +62,31 @@ return [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/:action',
-                                ]
+                                ],
                             ],
                             'edit' => [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/edit/:id',
                                     'defaults' => [
-                                        'action' => 'edit'
-                                    ]
-                                ]
+                                        'action' => 'edit',
+                                    ],
+                                ],
                             ],
                             'delete' => [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/delete/:id',
                                     'defaults' => [
-                                        'action' => 'remove'
-                                    ]
-                                ]
+                                        'action' => 'remove',
+                                    ],
+                                ],
                             ],
-                        ]
-                    ]
-                ]
-            ]
-        ]
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
     'service_manager' => [
         'factories' => [
@@ -105,12 +105,12 @@ return [
         'factories' => [
             UserController::class => UserControllerFactory::class,
             SettingsController::class => SettingsControllerFactory::class,
-        ]
+        ],
     ],
     'view_manager' => [
         'template_path_stack' => [
-            'user' => __DIR__ . '/../view/'
-        ]
+            'user' => __DIR__ . '/../view/',
+        ],
     ],
     'doctrine' => [
         'driver' => [
@@ -131,8 +131,8 @@ return [
                 'object_manager' => 'database_doctrine_em',
                 'identity_class' => User::class,
                 'identity_property' => 'login',
-                'credential_property' => 'password'
-            ]
-        ]
-    ]
+                'credential_property' => 'password',
+            ],
+        ],
+    ],
 ];

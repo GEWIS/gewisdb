@@ -17,77 +17,77 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'select',
-            'options' => array(
+            'options' => [
                 'label' => 'Vergadertype',
-                'value_options' => array(
+                'value_options' => [
                     'BV' => 'BV (Bestuursvergadering)',
                     'AV' => 'AV (Algemene Ledenvergadering)',
                     'VV' => 'VV (Voorzittersvergadering)',
-                    'Virt' => 'Virt (Virtuele vergadering)'
-                )
-            )
-        ));
+                    'Virt' => 'Virt (Virtuele vergadering)',
+                ],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Vergadernummer'
-            )
-        ));
+            'options' => [
+                'label' => 'Vergadernummer',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'date',
             'type' => 'date',
-            'options' => array(
-                'label' => 'Vergaderdatum'
-            )
-        ));
+            'options' => [
+                'label' => 'Vergaderdatum',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Verzend'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Verzend',
+            ],
+        ]);
     }
 
     public function getInputFilterSpecification(): array
     {
         return [
-            'type' => array(
+            'type' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => InArray::class,
-                        'options' => array(
+                        'options' => [
                             'haystack' => MeetingTypes::values(),
-                        )
-                    )
-                )
-            ),
-            'number' => array(
+                        ],
+                    ],
+                ],
+            ],
+            'number' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => Digits::class),
-                    array(
+                'validators' => [
+                    ['name' => Digits::class],
+                    [
                         'name' => LessThan::class,
-                        'options' => array(
-                            'max' => 100000
-                        )
-                    )
-                )
-            ),
-            'date' => array(
+                        'options' => [
+                            'max' => 100000,
+                        ],
+                    ],
+                ],
+            ],
+            'date' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => Date::class)
-                )
-            ),
+                'validators' => [
+                    ['name' => Date::class],
+                ],
+            ],
         ];
     }
 }

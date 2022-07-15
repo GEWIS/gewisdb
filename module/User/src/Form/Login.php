@@ -17,24 +17,24 @@ class Login extends Form implements InputFilterProviderInterface
             'name' => 'login',
             'type' => 'text',
             'options' => [
-                'label' => 'Login'
-            ]
+                'label' => 'Login',
+            ],
         ]);
 
         $this->add([
             'name' => 'password',
             'type' => 'password',
             'options' => [
-                'label' => 'Password'
-            ]
+                'label' => 'Password',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Login'
-            ]
+                'value' => 'Login',
+            ],
         ]);
     }
 
@@ -51,20 +51,20 @@ class Login extends Form implements InputFilterProviderInterface
                         'name' => StringLength::class,
                         'options' => [
                             'min' => 3,
-                            'max' => 32
-                        ]
+                            'max' => 32,
+                        ],
                     ],
                     [
                         'name' => Regex::class,
                         'options' => [
-                            'pattern' => '/^[a-zA-Z0-9]*$/'
-                        ]
-                    ]
-                ]
+                            'pattern' => '/^[a-zA-Z0-9]*$/',
+                        ],
+                    ],
+                ],
             ],
             'password' => [
                 'required' => true,
-            ]
+            ],
         ];
     }
 }

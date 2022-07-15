@@ -93,7 +93,7 @@ class Module
      *
      * @param MvcEvent $e
      */
-    public function onBootstrap(MvcEvent$e)
+    public function onBootstrap(MvcEvent $e)
     {
         $sm = $e->getApplication()->getServiceManager();
 
@@ -122,8 +122,8 @@ class Module
      */
     public function getServiceConfig(): array
     {
-        return array(
-            'invokables' => array(
+        return [
+            'invokables' => [
                 AbolishHydrator::class => AbolishHydrator::class,
                 BudgetHydrator::class => BudgetHydrator::class,
                 DestroyHydrator::class => DestroyHydrator::class,
@@ -140,8 +140,8 @@ class Module
                 QueryForm::class => QueryForm::class,
                 QueryExportForm::class => QueryExportForm::class,
                 QuerySaveForm::class => QuerySaveForm::class,
-            ),
-            'factories' => array(
+            ],
+            'factories' => [
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
@@ -149,7 +149,7 @@ class Module
                 QueryService::class => QueryServiceFactory::class,
                 ExportForm::class => function (ContainerInterface $container) {
                     return new ExportForm(
-                        $container->get(MeetingMapper::class)
+                        $container->get(MeetingMapper::class),
                     );
                 },
                 AddressForm::class => function (ContainerInterface $container) {
@@ -160,7 +160,7 @@ class Module
                 MemberForm::class => function (ContainerInterface $container) {
                     $form = new MemberForm(
                         $container->get(AddressFieldset::class),
-                        $container->get('translator')
+                        $container->get('translator'),
                     );
                     $form->setHydrator($container->get('database_hydrator_member'));
                     $form->setLists($container->get(MailingListMapper::class)->findAllOnForm());
@@ -183,7 +183,7 @@ class Module
                 },
                 OtherForm::class => function (ContainerInterface $container) {
                     $form = new OtherForm(
-                        $container->get(MeetingFieldset::class)
+                        $container->get(MeetingFieldset::class),
                     );
                     $form->setHydrator($container->get(OtherHydrator::class));
                     return $form;
@@ -191,7 +191,7 @@ class Module
                 BudgetForm::class => function (ContainerInterface $container) {
                     $form = new BudgetForm(
                         $container->get(MeetingFieldset::class),
-                        $container->get(MemberFieldset::class)
+                        $container->get(MemberFieldset::class),
                     );
                     $form->setHydrator($container->get(BudgetHydrator::class));
                     return $form;
@@ -211,7 +211,7 @@ class Module
                         $container->get(MeetingFieldset::class),
                         $container->get(InstallationFieldset::class),
                         $container->get('database_form_fieldset_subdecision_discharge'),
-                        $container->get('database_form_fieldset_subdecision_foundation')
+                        $container->get('database_form_fieldset_subdecision_foundation'),
                     );
                     $form->setHydrator($container->get(InstallHydrator::class));
                     return $form;
@@ -224,7 +224,7 @@ class Module
                 AbolishForm::class => function (ContainerInterface $container) {
                     $form = new AbolishForm(
                         $container->get(MeetingFieldset::class),
-                        $container->get('database_form_fieldset_subdecision_foundation')
+                        $container->get('database_form_fieldset_subdecision_foundation'),
                     );
                     $form->setHydrator($container->get(AbolishHydrator::class));
                     return $form;
@@ -232,7 +232,7 @@ class Module
                 DestroyForm::class => function (ContainerInterface $container) {
                     $form = new DestroyForm(
                         $container->get(MeetingFieldset::class),
-                        $container->get(DecisionFieldset::class)
+                        $container->get(DecisionFieldset::class),
                     );
                     $form->setHydrator($container->get(DestroyHydrator::class));
                     return $form;
@@ -240,7 +240,7 @@ class Module
                 FoundationForm::class => function (ContainerInterface $container) {
                     $form = new FoundationForm(
                         $container->get(MeetingFieldset::class),
-                        $container->get(MemberFunctionFieldset::class)
+                        $container->get(MemberFunctionFieldset::class),
                     );
                     $form->setHydrator($container->get(FoundationHydrator::class));
                     return $form;
@@ -248,7 +248,7 @@ class Module
                 BoardInstallForm::class => function (ContainerInterface $container) {
                     $form = new BoardInstallForm(
                         $container->get(MeetingFieldset::class),
-                        $container->get(MemberFieldset::class)
+                        $container->get(MemberFieldset::class),
                     );
                     $form->setHydrator($container->get(BoardInstallHydrator::class));
                     return $form;
@@ -256,7 +256,7 @@ class Module
                 BoardReleaseForm::class => function (ContainerInterface $container) {
                     $form = new BoardReleaseForm(
                         $container->get(MeetingFieldset::class),
-                        $container->get('database_form_fieldset_subdecision_board_install')
+                        $container->get('database_form_fieldset_subdecision_board_install'),
                     );
                     $form->setHydrator($container->get(BoardReleaseHydrator::class));
                     return $form;
@@ -264,7 +264,7 @@ class Module
                 BoardDischargeForm::class => function (ContainerInterface $container) {
                     $form = new BoardDischargeForm(
                         $container->get(MeetingFieldset::class),
-                        $container->get('database_form_fieldset_subdecision_board_install')
+                        $container->get('database_form_fieldset_subdecision_board_install'),
                     );
                     $form->setHydrator($container->get(BoardDischargeHydrator::class));
                     return $form;
@@ -295,7 +295,7 @@ class Module
                 },
                 InstallationFieldset::class => function (ContainerInterface $container) {
                     $fieldset = new InstallationFieldset(
-                        $container->get(MemberFieldset::class)
+                        $container->get(MemberFieldset::class),
                     );
                     $fieldset->setHydrator(new ObjectPropertyHydrator());
                     $fieldset->setObject(new stdClass());
@@ -317,7 +317,7 @@ class Module
                     $fieldset = new MemberFunctionFieldset(
                         $container->get(MemberFieldset::class),
                         $container->get(InstallationFunctionService::class),
-                        true
+                        true,
                     );
                     $fieldset->setHydrator(new ObjectPropertyHydrator());
                     $fieldset->setObject(new stdClass());
@@ -327,7 +327,7 @@ class Module
                     $fieldset = new MemberFunctionFieldset(
                         $container->get(MemberFieldset::class),
                         $container->get(InstallationFunctionService::class),
-                        false
+                        false,
                     );
                     $fieldset->setHydrator(new ObjectPropertyHydrator());
                     $fieldset->setObject(new stdClass());
@@ -390,14 +390,14 @@ class Module
                 // and aliases don't work with abstract factories
                 'database_doctrine_em' => function (ContainerInterface $container) {
                     return $container->get('doctrine.entitymanager.orm_default');
-                }
-            ),
-            'shared' => array(
+                },
+            ],
+            'shared' => [
                 // every form should get a different meeting fieldset
                 MeetingFieldset::class => false,
                 MemberFieldset::class => false,
                 'database_form_fieldset_subdecision_foundation' => false,
-            )
-        );
+            ],
+        ];
     }
 }

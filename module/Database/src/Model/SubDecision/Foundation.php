@@ -154,7 +154,7 @@ class Foundation extends SubDecision
     public function toArray(): array
     {
         $decision = $this->getDecision();
-        return array(
+        return [
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'decision_point' => $decision->getPoint(),
@@ -162,7 +162,7 @@ class Foundation extends SubDecision
             'subdecision_number' => $this->getNumber(),
             'abbr' => $this->getAbbr(),
             'name' => $this->getName(),
-            'organtype' => $this->getOrganType()
-        );
+            'organtype' => $this->getOrganType(),
+        ];
     }
 }

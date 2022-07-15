@@ -161,7 +161,7 @@ class Installation extends SubDecision
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
             null,
-            'd MMMM Y'
+            'd MMMM Y',
         );
 
         return $formatter->format($date);

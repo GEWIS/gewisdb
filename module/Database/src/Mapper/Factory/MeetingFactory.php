@@ -18,7 +18,7 @@ class MeetingFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MeetingMapper {
         return new MeetingMapper($container->get('database_doctrine_em'));
     }

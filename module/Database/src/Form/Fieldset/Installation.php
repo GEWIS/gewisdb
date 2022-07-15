@@ -16,26 +16,26 @@ class Installation extends Fieldset implements InputFilterProviderInterface
         $member->remove('name');
         $this->add($member);
 
-        $this->add(array(
+        $this->add([
             'name' => 'function',
-            'type' => 'hidden'
-        ));
+            'type' => 'hidden',
+        ]);
     }
 
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'function' => array(
+        return [
+            'function' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
-                            'min' => 2
-                        )
-                    )
-                )
-            )
-        );
+                        'options' => [
+                            'min' => 2,
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 }

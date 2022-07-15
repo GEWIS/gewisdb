@@ -31,7 +31,7 @@ class Installation
         $createdMembers = $this->installationMapper->getAllInstallationsInstalled($meeting);
         $deletedMembers = $this->installationMapper->getAllInstallationsDischarged($meeting);
 
-        $members = array();
+        $members = [];
         foreach ($createdMembers as $cm) {
             $members[$this->getHash($cm)] = $cm;
         }
@@ -121,7 +121,7 @@ class Installation
             $installation->getMeetingNumber(),
             $installation->getDecisionPoint(),
             $installation->getDecisionNumber(),
-            $installation->getNumber()
+            $installation->getNumber(),
         );
     }
 }

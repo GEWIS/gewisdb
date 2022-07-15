@@ -33,14 +33,14 @@ class Organ
             function (FoundationModel $organ) {
                 return $this->getHash($organ);
             },
-            $organFoundations
+            $organFoundations,
         );
 
         $hashedOrganAbrogations = array_map(
             function (AbrogationModel $organ) {
                 return $this->getHash($organ->getFoundation());
             },
-            $organAbrogations
+            $organAbrogations,
         );
 
         return array_diff($hashedOrganFoundations, $hashedOrganAbrogations);
@@ -64,7 +64,7 @@ class Organ
             $foundation->getMeetingNumber(),
             $foundation->getDecisionPoint(),
             $foundation->getDecisionNumber(),
-            $foundation->getNumber()
+            $foundation->getNumber(),
         );
     }
 }

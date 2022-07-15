@@ -18,59 +18,59 @@ class Address extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('address');
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
-            'type' => 'hidden'
-        ));
+            'type' => 'hidden',
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'country',
             'type' => 'text',
-            'options' => array(
-                'label' => $translator->translate('Land')
-            ),
-        ));
+            'options' => [
+                'label' => $translator->translate('Land'),
+            ],
+        ]);
         $this->get('country')->setValue('netherlands');
 
-        $this->add(array(
+        $this->add([
             'name' => 'street',
             'type' => 'text',
-            'options' => array(
-                'label' => $translator->translate('Straat')
-            )
-        ));
+            'options' => [
+                'label' => $translator->translate('Straat'),
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'text',
-            'options' => array(
-                'label' => $translator->translate('Huisnummer')
-            )
-        ));
+            'options' => [
+                'label' => $translator->translate('Huisnummer'),
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'postalCode',
             'type' => 'text',
-            'options' => array(
-                'label' => $translator->translate('Postcode')
-            )
-        ));
+            'options' => [
+                'label' => $translator->translate('Postcode'),
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'city',
             'type' => 'text',
-            'options' => array(
-                'label' => $translator->translate('Stad')
-            )
-        ));
+            'options' => [
+                'label' => $translator->translate('Stad'),
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'phone',
             'type' => 'text',
-            'options' => array(
-                'label' => $translator->translate('Telefoonnummer')
-            )
-        ));
+            'options' => [
+                'label' => $translator->translate('Telefoonnummer'),
+            ],
+        ]);
 
         // TODO: filters
     }
@@ -80,80 +80,80 @@ class Address extends Fieldset implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'type' => array(
+        return [
+            'type' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => InArray::class,
-                        'options' => array(
+                        'options' => [
                             'haystack' => AddressTypes::values(),
-                        )
-                    )
-                )
-            ),
-            'country' => array(
+                        ],
+                    ],
+                ],
+            ],
+            'country' => [
                 'required' => true,
-                'filters' => array(
-                    array('name' => StringToLower::class)
-                ),
-                'validators' => array(
-                    array(
+                'filters' => [
+                    ['name' => StringToLower::class],
+                ],
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
-            'street' => array(
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+            'street' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
-            'number' => array(
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+            'number' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => Regex::class,
-                        'options' => array(
-                            'pattern' => '/^[0-9]+[a-zA-Z]*/'
-                        )
-                    )
-                )
-            ),
-            'postalCode' => array(
+                        'options' => [
+                            'pattern' => '/^[0-9]+[a-zA-Z]*/',
+                        ],
+                    ],
+                ],
+            ],
+            'postalCode' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 16
-                        )
-                    )
-                )
-            ),
-            'city' => array(
+                            'max' => 16,
+                        ],
+                    ],
+                ],
+            ],
+            'city' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
-                            'max' => 32
-                        )
-                    )
-                )
-            )
-        );
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 }

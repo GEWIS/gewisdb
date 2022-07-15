@@ -228,7 +228,7 @@ class Member
     #[JoinTable(name: "members_mailinglists")]
     #[JoinColumn(
         name: "lidnr",
-        referencedColumnName: "lidnr"
+        referencedColumnName: "lidnr",
     )]
     #[InverseJoinColumn(
         name: "name",
@@ -686,7 +686,7 @@ class Member
      */
     public function toArray(): array
     {
-        return array(
+        return [
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -695,8 +695,8 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
-            'expiration' => $this->getExpiration()->format('l j F Y')
-        );
+            'expiration' => $this->getExpiration()->format('l j F Y'),
+        ];
     }
 
     /**

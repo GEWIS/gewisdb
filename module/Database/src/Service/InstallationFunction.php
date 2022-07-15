@@ -20,7 +20,7 @@ class InstallationFunction
      */
     public function __construct(
         InstallationFunctionForm $installationFunctionForm,
-        InstallationFunctionMapper $installationFunctionMapper
+        InstallationFunctionMapper $installationFunctionMapper,
     ) {
         $this->installationFunctionForm = $installationFunctionForm;
         $this->installationFunctionMapper = $installationFunctionMapper;

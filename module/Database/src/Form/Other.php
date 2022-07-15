@@ -12,37 +12,37 @@ class Other extends AbstractDecision implements InputFilterProviderInterface
     {
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'content',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Besluit',
-            )
-        ));
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Verzend'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Verzend',
+            ],
+        ]);
     }
 
     public function getInputFilterSpecification(): array
     {
         return [
-            'content' => array(
+            'content' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
-                            'min' => 3
-                        )
-                    )
-                )
-            ),
+                        'options' => [
+                            'min' => 3,
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 }

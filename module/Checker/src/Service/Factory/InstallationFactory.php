@@ -19,7 +19,7 @@ class InstallationFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): InstallationService {
         /** @var InstallationMapper $installationMapper */
         $installationMapper = $container->get(InstallationMapper::class);

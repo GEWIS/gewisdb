@@ -14,62 +14,62 @@ class Address extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'country',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Land',
-                'value' => 'netherlands'
-            )
-        ));
+                'value' => 'netherlands',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'street',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Straat'
-            )
-        ));
+            'options' => [
+                'label' => 'Straat',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'number',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Huisnummer'
-            )
-        ));
+            'options' => [
+                'label' => 'Huisnummer',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'postalCode',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Postcode'
-            )
-        ));
+            'options' => [
+                'label' => 'Postcode',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'city',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Stad'
-            )
-        ));
+            'options' => [
+                'label' => 'Stad',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'phone',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Telefoonnummer'
-            )
-        ));
+            'options' => [
+                'label' => 'Telefoonnummer',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Wijzig adres'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Wijzig adres',
+            ],
+        ]);
     }
 
     /**
@@ -77,70 +77,70 @@ class Address extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'country' => array(
+        return [
+            'country' => [
                 'required' => true,
-                'filters' => array(
-                    array('name' => StringToLower::class)
-                ),
-                'validators' => array(
-                    array(
+                'filters' => [
+                    ['name' => StringToLower::class],
+                ],
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
-            'street' => array(
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+            'street' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
-            'number' => array(
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+            'number' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => Regex::class,
-                        'options' => array(
-                            'pattern' => '/^[0-9]+[a-zA-Z]*/'
-                        )
-                    )
-                )
-            ),
-            'postalCode' => array(
+                        'options' => [
+                            'pattern' => '/^[0-9]+[a-zA-Z]*/',
+                        ],
+                    ],
+                ],
+            ],
+            'postalCode' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 16
-                        )
-                    )
-                )
-            ),
-            'city' => array(
+                            'max' => 16,
+                        ],
+                    ],
+                ],
+            ],
+            'city' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            )
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
             // TODO: phone number validation
-        );
+        ];
     }
 }

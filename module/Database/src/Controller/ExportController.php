@@ -28,13 +28,13 @@ class ExportController extends AbstractActionController
             $data = $this->meetingService->export($this->getRequest()->getPost());
 
             if (null !== $data) {
-                return new ViewModel(array(
-                    'data' => $data
-                ));
+                return new ViewModel([
+                    'data' => $data,
+                ]);
             }
         }
-        return new ViewModel(array(
-            'form' => $this->meetingService->getExportForm()
-        ));
+        return new ViewModel([
+            'form' => $this->meetingService->getExportForm(),
+        ]);
     }
 }

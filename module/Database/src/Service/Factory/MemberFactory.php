@@ -31,7 +31,7 @@ class MemberFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MemberService {
         /** @var AddressForm $addressForm */
         $addressForm = $container->get(AddressForm::class);
@@ -78,7 +78,7 @@ class MemberFactory implements FactoryInterface
             $mailingListService,
             $viewRenderer,
             $mailTransport,
-            $config
+            $config,
         );
     }
 }

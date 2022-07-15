@@ -24,7 +24,7 @@ class Member
      */
     public function __construct(
         MemberMapper $memberMapper,
-        EntityManager $emReport
+        EntityManager $emReport,
     ) {
         $this->memberMapper = $memberMapper;
         $this->emReport = $emReport;
@@ -140,10 +140,10 @@ class Member
             }
         }
 
-        $reportAddress = $addrRepo->find(array(
+        $reportAddress = $addrRepo->find([
             'member' => $reportMember->getLidnr(),
-            'type' => $address->getType()
-        ));
+            'type' => $address->getType(),
+        ]);
 
         if (null === $reportAddress) {
             $reportAddress = new ReportAddress();
@@ -173,10 +173,10 @@ class Member
         $repo = $this->emReport->getRepository('Report\Model\Address');
 
         // first try to find an existing member
-        $reportAddress = $repo->find(array(
+        $reportAddress = $repo->find([
             'member' => $address->getMember()->getLidnr(),
-            'type' => $address->getType()
-        ));
+            'type' => $address->getType(),
+        ]);
 
         $this->emReport->remove($reportAddress);
     }
@@ -188,6 +188,6 @@ class Member
 
     public function removeFromMailmanList($member, $listName)
     {
-       // TODO
+        // TODO
     }
 }

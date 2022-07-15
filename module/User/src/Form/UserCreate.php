@@ -18,32 +18,32 @@ class UserCreate extends Form implements InputFilterProviderInterface
             'name' => 'login',
             'type' => 'text',
             'options' => [
-                'label' => 'Login'
-            ]
+                'label' => 'Login',
+            ],
         ]);
 
         $this->add([
             'name' => 'password',
             'type' => 'password',
             'options' => [
-                'label' => 'Wachtwoord'
-            ]
+                'label' => 'Wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'password_verify',
             'type' => 'password',
             'options' => [
-                'label' => 'Controleer wachtwoord'
-            ]
+                'label' => 'Controleer wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Maak gebruiker aan'
-            ]
+                'value' => 'Maak gebruiker aan',
+            ],
         ]);
     }
 
@@ -60,16 +60,16 @@ class UserCreate extends Form implements InputFilterProviderInterface
                         'name' => StringLength::class,
                         'options' => [
                             'min' => 3,
-                            'max' => 32
-                        ]
+                            'max' => 32,
+                        ],
                     ],
                     [
                         'name' => Regex::class,
                         'options' => [
-                            'pattern' => '/^[a-zA-Z0-9]*$/'
-                        ]
-                    ]
-                ]
+                            'pattern' => '/^[a-zA-Z0-9]*$/',
+                        ],
+                    ],
+                ],
             ],
             'password' => [
                 'required' => true,
@@ -77,10 +77,10 @@ class UserCreate extends Form implements InputFilterProviderInterface
                     [
                         'name' => StringLength::class,
                         'options' => [
-                            'min' => 10
-                        ]
-                    ]
-                ]
+                            'min' => 10,
+                        ],
+                    ],
+                ],
             ],
             'password_verify' => [
                 'required' => true,
@@ -88,11 +88,11 @@ class UserCreate extends Form implements InputFilterProviderInterface
                     [
                         'name' => Identical::class,
                         'options' => [
-                            'token' => 'password'
-                        ]
-                    ]
-                ]
-            ]
+                            'token' => 'password',
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 }

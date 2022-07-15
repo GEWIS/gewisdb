@@ -24,7 +24,7 @@ class DatabaseDeletionListener
     public function __construct(
         MeetingService $meetingService,
         MemberService $memberService,
-        EntityManager $emReport
+        EntityManager $emReport,
     ) {
         $this->meetingService = $meetingService;
         $this->memberService = $memberService;

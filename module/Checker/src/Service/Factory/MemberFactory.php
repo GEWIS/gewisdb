@@ -19,7 +19,7 @@ class MemberFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MemberService {
         /** @var MemberMapper $memberMapper */
         $memberMapper = $container->get(MemberMapper::class);
@@ -28,7 +28,7 @@ class MemberFactory implements FactoryInterface
 
         return new MemberService(
             $memberMapper,
-            $config
+            $config,
         );
     }
 }

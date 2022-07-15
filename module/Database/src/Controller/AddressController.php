@@ -22,7 +22,7 @@ class AddressController extends AbstractActionController
     public function indexAction()
     {
         return new ViewModel([
-            'form' => $this->memberService->getAddressExportForm()
+            'form' => $this->memberService->getAddressExportForm(),
         ]);
     }
 }

@@ -20,7 +20,7 @@ class MeetingFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MeetingService {
         /** @var MeetingMapper $meetingMapper */
         $meetingMapper = $container->get(MeetingMapper::class);
@@ -34,7 +34,7 @@ class MeetingFactory implements FactoryInterface
             $meetingMapper,
             $emReport,
             $config,
-            $mailTransport
+            $mailTransport,
         );
     }
 }

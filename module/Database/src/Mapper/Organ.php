@@ -82,11 +82,11 @@ class Organ
             ->andWhere('z.number = d.decision_number');
 
         $qbn->andWhere($qbn->expr()->not(
-            $qbn->expr()->exists($qbnd->getDql())
+            $qbn->expr()->exists($qbnd->getDql()),
         ));
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbn->getDql())
+            $qb->expr()->exists($qbn->getDql()),
         ));
 
         // destroyed installation decisions
@@ -100,7 +100,7 @@ class Organ
             ->andWhere('y.number = r.decision_number');
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbd->getDql())
+            $qb->expr()->exists($qbd->getDql()),
         ));
 
         $qb->setParameter(':type', $type);
@@ -148,7 +148,7 @@ class Organ
             ->andWhere('y.number = o.decision_number');
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbd->getDql())
+            $qb->expr()->exists($qbd->getDql()),
         ));
 
         if (!$includeAbrogated) {
@@ -174,14 +174,14 @@ class Organ
                 ->andWhere('z.number = a.decision_number');
 
             $qbn->andWhere($qbn->expr()->not(
-                $qbn->expr()->exists($qbnd->getDql())
+                $qbn->expr()->exists($qbnd->getDql()),
             ));
 
             // add the subexpression
             $qb->andWhere($qb->expr()->not(
                 $qb->expr()->exists(
-                    $qbn->getDql()
-                )
+                    $qbn->getDql(),
+                ),
             ));
         }
 

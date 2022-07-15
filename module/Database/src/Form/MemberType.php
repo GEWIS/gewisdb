@@ -14,27 +14,27 @@ class MemberType extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'radio',
-            'options' => array(
+            'options' => [
                 'label' => 'Lidmaatschapstype',
-                'value_options' => array(
+                'value_options' => [
                     MembershipTypes::Ordinary->value => 'Gewoon lid - Ingeschreven bij faculteit M&CS',
                     MembershipTypes::External->value => 'Extern lid - Speciaal toegelaten door het bestuur',
                     MembershipTypes::Graduate->value => 'Afgestudeerde - Was lid en is speciaal toegelaten door het bestuur',
-                    MembershipTypes::Honorary->value => 'Erelid - Speciaal benoemd door de ALV'
-                )
-            )
-        ));
+                    MembershipTypes::Honorary->value => 'Erelid - Speciaal benoemd door de ALV',
+                ],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Wijzig type'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Wijzig type',
+            ],
+        ]);
     }
 
     /**
@@ -42,10 +42,10 @@ class MemberType extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'type' => array(
-                'required' => true
-            )
-        );
+        return [
+            'type' => [
+                'required' => true,
+            ],
+        ];
     }
 }

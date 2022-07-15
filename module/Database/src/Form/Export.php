@@ -12,30 +12,30 @@ class Export extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'meetings',
             'type' => 'select',
-            'attributes' => array(
-                'multiple' => 'multiple'
-            ),
-            'options' => array(
+            'attributes' => [
+                'multiple' => 'multiple',
+            ],
+            'options' => [
                 'label' => 'Vergaderingen',
-                'value_options' => $this->getValueOptions($meetingMapper)
-            )
-        ));
+                'value_options' => $this->getValueOptions($meetingMapper),
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Exporteer'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Exporteer',
+            ],
+        ]);
     }
 
     protected function getValueOptions(MeetingMapper $meetingMapper)
     {
-        $options = array();
+        $options = [];
 
         foreach ($meetingMapper->findAll() as $meeting) {
             $meeting = $meeting[0];

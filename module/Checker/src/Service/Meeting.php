@@ -32,7 +32,7 @@ class Meeting
             function ($object) {
                 return $object[0];
             },
-            $meetings
+            $meetings,
         );
     }
 

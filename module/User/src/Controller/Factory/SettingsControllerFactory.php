@@ -19,7 +19,7 @@ class SettingsControllerFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): SettingsController {
         return new SettingsController($container->get(UserService::class));
     }

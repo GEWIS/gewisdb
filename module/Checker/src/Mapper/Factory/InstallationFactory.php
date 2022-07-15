@@ -18,10 +18,10 @@ class InstallationFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): InstallationMapper {
         return new InstallationMapper(
-            $container->get('database_doctrine_em')
+            $container->get('database_doctrine_em'),
         );
     }
 }

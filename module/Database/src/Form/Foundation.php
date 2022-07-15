@@ -13,40 +13,40 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
     {
         parent::__construct($meeting);
 
-        $this->add(array(
+        $this->add([
             'name' => 'type',
             'type' => 'radio',
-            'options' => array(
+            'options' => [
                 'label' => 'Type',
-                'value_options' => array(
+                'value_options' => [
                     'committee' => 'Commissie',
                     'avc' => 'AV-Commissie',
                     'avw' => 'AV-Werkgroep',
                     'kkk' => 'KKK',
                     'fraternity' => 'Dispuut',
-                    'rva' => 'RvA'
-                )
-            )
-        ));
+                    'rva' => 'RvA',
+                ],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'name',
             'type' => 'text',
-            'options' => array(
+            'options' => [
                 'label' => 'Naam',
-            )
-        ));
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'abbr',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Afkorting'
-            )
-        ));
+            'options' => [
+                'label' => 'Afkorting',
+            ],
+        ]);
 
         // Is this possible with a factory?
-        $this->add(array(
+        $this->add([
             'name' => 'members',
             'type' => CollectionWithErrors::class,
             'options' => [
@@ -56,15 +56,15 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
                 'should_create_template' => true,
                 'target_element' => $function,
             ],
-        ));
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Richt op'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Richt op',
+            ],
+        ]);
     }
 
     /**
@@ -72,41 +72,41 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
      */
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'name' => array(
+        return [
+            'name' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 128
-                        )
-                    )
-                )
-            ),
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
 
-            'abbr' => array(
+            'abbr' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
 
-            'members' => array(
+            'members' => [
                 'continue_if_empty' => true,
                 'validators' => [
                     [
                         'name' => NotEmpty::class,
-                    ]
-                ]
-            )
-        );
+                    ],
+                ],
+            ],
+        ];
     }
 }

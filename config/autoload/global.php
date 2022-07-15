@@ -12,28 +12,28 @@
  * file.
  */
 
-return array(
+return [
     // ...
 
     /**
      * Email configuration.
      */
-    'email' => array(
+    'email' => [
         'transport' => 'File',
-        'options' => array(
-            'path' => 'data/mail/'
-        ),
+        'options' => [
+            'path' => 'data/mail/',
+        ],
         'from' => 'secr@gewis.nl',
         'to' => [
             'report_error' => 'databaseisstuk@gewis.nl',
-            'subscription' => 'secr@gewis.nl'
-        ]
-    ),
-    'storage' => array(
+            'subscription' => 'secr@gewis.nl',
+        ],
+    ],
+    'storage' => [
         'storage_dir' => 'public/data',
         'public_dir' => 'data',
-        'dir_mode' => 0770,
-    ),
+        'dir_mode' => 0o770,
+    ],
     /*
      * Settings for Monolog logger
      */
@@ -42,4 +42,4 @@ return array(
         'max_rotate_file_count' => 10,
         'minimal_log_level' => 'INFO',
     ],
-);
+];

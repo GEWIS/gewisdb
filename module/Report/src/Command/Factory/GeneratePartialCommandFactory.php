@@ -26,7 +26,7 @@ class GeneratePartialCommandFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): GeneratePartialCommand {
         /** @var BoardService $boardService */
         $boardService = $container->get(BoardService::class);

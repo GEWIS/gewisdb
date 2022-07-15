@@ -21,7 +21,7 @@ class DatabaseDeletionListenerFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): DatabaseDeletionListener {
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);
@@ -33,7 +33,7 @@ class DatabaseDeletionListenerFactory implements FactoryInterface
         return new DatabaseDeletionListener(
             $meetingService,
             $memberService,
-            $emReport
+            $emReport,
         );
     }
 }

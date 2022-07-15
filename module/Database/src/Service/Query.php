@@ -41,7 +41,7 @@ class Query
         QueryExportForm $queryExportForm,
         QuerySaveForm $querySaveForm,
         SavedQueryMapper $savedQueryMapper,
-        EntityManager $emReport
+        EntityManager $emReport,
     ) {
         $this->queryForm = $queryForm;
         $this->queryExportForm = $queryExportForm;
@@ -95,9 +95,9 @@ class Query
     {
         $query = $this->getSavedQueryMapper()->find($id);
 
-        return $this->execute(array(
-            'query' => $query->getQuery()
-        ));
+        return $this->execute([
+            'query' => $query->getQuery(),
+        ]);
     }
 
     /**
@@ -151,15 +151,15 @@ class Query
             return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
         } catch (QueryException $e) {
             $form->get('query')
-                ->setMessages(array(
-                    $e->getMessage()
-                ));
+                ->setMessages([
+                    $e->getMessage(),
+                ]);
             return null;
         } catch (MappingException $e) {
             $form->get('query')
-                ->setMessages(array(
-                    $e->getMessage()
-                ));
+                ->setMessages([
+                    $e->getMessage(),
+                ]);
             return null;
         }
     }
@@ -182,7 +182,7 @@ class Query
     public function getEntities()
     {
         $entityManager = $this->emReport;
-        $classes = array();
+        $classes = [];
         $metas = $entityManager->getMetadataFactory()->getAllMetadata();
         foreach ($metas as $meta) {
             $classes[] = preg_replace('/^Report\\\\Model\\\\/', 'db:', $meta->getName());

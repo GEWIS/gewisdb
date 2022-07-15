@@ -156,11 +156,11 @@ class Member
             ->andWhere('z.number = d.decision_number');
 
         $qbn->andWhere($qbn->expr()->not(
-            $qbn->expr()->exists($qbnd->getDql())
+            $qbn->expr()->exists($qbnd->getDql()),
         ));
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbn->getDql())
+            $qb->expr()->exists($qbn->getDql()),
         ));
 
         // destroyed installation decisions
@@ -174,7 +174,7 @@ class Member
             ->andWhere('y.number = r.decision_number');
 
         $qb->andWhere($qb->expr()->not(
-            $qb->expr()->exists($qbd->getDql())
+            $qb->expr()->exists($qbd->getDql()),
         ));
 
         $qb->setParameter(':lidnr', $lidnr);

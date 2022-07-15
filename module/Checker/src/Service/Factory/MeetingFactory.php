@@ -19,7 +19,7 @@ class MeetingFactory implements FactoryInterface
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        array $options = null,
     ): MeetingService {
         /** @var DatabaseMeetingService $meetingService */
         $meetingService = $container->get(DatabaseMeetingService::class);

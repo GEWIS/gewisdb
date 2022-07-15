@@ -18,13 +18,13 @@ class MemberLists extends Form implements InputFilterProviderInterface
         $this->lists = $lists;
 
         foreach ($this->lists as $list) {
-            $this->add(array(
+            $this->add([
                 'name' => 'list-' . $list->getName(),
                 'type' => 'checkbox',
-                'options' => array(
-                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription()
-                )
-            ));
+                'options' => [
+                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription(),
+                ],
+            ]);
             foreach ($member->getLists() as $lst) {
                 if ($lst->getName() == $list->getName()) {
                     $this->get('list-' . $list->getName())->setChecked(true);
@@ -33,13 +33,13 @@ class MemberLists extends Form implements InputFilterProviderInterface
             }
         }
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Wijzig inschrijvingen'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Wijzig inschrijvingen',
+            ],
+        ]);
     }
 
     /**

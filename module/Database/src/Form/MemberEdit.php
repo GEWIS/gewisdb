@@ -18,90 +18,90 @@ class MemberEdit extends Form implements InputFilterProviderInterface
     {
         parent::__construct();
 
-        $this->add(array(
+        $this->add([
             'name' => 'lastName',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Achternaam'
-            )
-        ));
+            'options' => [
+                'label' => 'Achternaam',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'middleName',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Tussenvoegsels'
-            )
-        ));
+            'options' => [
+                'label' => 'Tussenvoegsels',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'initials',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Voorletter(s)'
-            )
-        ));
+            'options' => [
+                'label' => 'Voorletter(s)',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'firstName',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Voornaam'
-            )
-        ));
+            'options' => [
+                'label' => 'Voornaam',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'gender',
             'type' => 'radio',
-            'options' => array(
+            'options' => [
                 'label' => 'Geslacht',
-                'value_options' => array(
+                'value_options' => [
                     GenderTypes::Male->value => 'Man',
                     GenderTypes::Female->value => 'Vrouw',
-                    GenderTypes::Other->value => 'Anders'
-                )
-            )
-        ));
+                    GenderTypes::Other->value => 'Anders',
+                ],
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'tueUsername',
             'type' => 'text',
-            'options' => array(
-                'label' => 'TU/e-gebruikersnaam'
-            )
-        ));
+            'options' => [
+                'label' => 'TU/e-gebruikersnaam',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'email',
             'type' => 'email',
-            'options' => array(
-                'label' => 'Email-adres'
-            )
-        ));
+            'options' => [
+                'label' => 'Email-adres',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'birth',
             'type' => 'date',
-            'options' => array(
-                'label' => 'Geboortedatum'
-            )
-        ));
+            'options' => [
+                'label' => 'Geboortedatum',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'paid',
             'type' => 'text',
-            'options' => array(
-                'label' => 'Betaald (hoe veel)'
-            )
-        ));
+            'options' => [
+                'label' => 'Betaald (hoe veel)',
+            ],
+        ]);
 
-        $this->add(array(
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
-            'attributes' => array(
-                'value' => 'Wijzig gegevens'
-            )
-        ));
+            'attributes' => [
+                'value' => 'Wijzig gegevens',
+            ],
+        ]);
     }
 
     /**
@@ -109,89 +109,89 @@ class MemberEdit extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return array(
-            'lastName' => array(
+        return [
+            'lastName' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
-            'middleName' => array(
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+            'middleName' => [
                 'required' => false,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
-            'initials' => array(
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+            'initials' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 1,
-                            'max' => 16
-                        )
-                    )
-                )
-            ),
-            'firstName' => array(
+                            'max' => 16,
+                        ],
+                    ],
+                ],
+            ],
+            'firstName' => [
                 'required' => true,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => StringLength::class,
-                        'options' => array(
+                        'options' => [
                             'min' => 2,
-                            'max' => 32
-                        )
-                    )
-                )
-            ),
-            'paid' => array(
+                            'max' => 32,
+                        ],
+                    ],
+                ],
+            ],
+            'paid' => [
                 'required' => true,
-                'validators' => array(
-                    array('name' => Digits::class)
-                )
-            ),
-            'tueUsername' => array(
+                'validators' => [
+                    ['name' => Digits::class],
+                ],
+            ],
+            'tueUsername' => [
                 'required' => false,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => Regex::class,
-                        'options' => array(
+                        'options' => [
                             'pattern' => '/^(s\d{6}|\d{8})$/',
-                            'messages' => array(
-                                'regexNotMatch' => 'Een TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.'
-                            )
-                        )
-                    )
-                ),
-                'filters' => array(
-                    array('name' => ToNull::class)
-                )
-            ),
-            'email' => array(
+                            'messages' => [
+                                'regexNotMatch' => 'Een TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.',
+                            ],
+                        ],
+                    ],
+                ],
+                'filters' => [
+                    ['name' => ToNull::class],
+                ],
+            ],
+            'email' => [
                 'required' => false,
-                'validators' => array(
-                    array(
+                'validators' => [
+                    [
                         'name' => EmailAddress::class,
-                    )
-                ),
-                'filters' => array(
-                    array('name' => ToNull::class)
-                )
-            )
-        );
+                    ],
+                ],
+                'filters' => [
+                    ['name' => ToNull::class],
+                ],
+            ],
+        ];
     }
 }

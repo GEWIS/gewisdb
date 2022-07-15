@@ -54,7 +54,7 @@ class Checker
         MemberService $memberService,
         OrganService $organService,
         $mailTransport,
-        array $config
+        array $config,
     ) {
         $this->installationService = $installationService;
         $this->meetingService = $meetingService;
@@ -77,7 +77,7 @@ class Checker
                 $this->checkMembersHaveRoleButNotInOrgan($meeting),
                 $this->checkMembersInNonExistingOrgans($meeting),
                 $this->checkMembersExpiredButStillInOrgan($meeting),
-                $this->checkOrganMeetingType($meeting)
+                $this->checkOrganMeetingType($meeting),
             );
 
             $message .= $this->handleMeetingErrors($meeting, $errors);
@@ -109,7 +109,7 @@ class Checker
      */
     private function handleMeetingErrors(
         MeetingModel $meeting,
-        array $errors
+        array $errors,
     ): string {
         // At this moment only write to output.
         $body =  'Errors after meeting ' . $meeting->getNumber() . ' hold at '
