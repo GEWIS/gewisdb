@@ -2,7 +2,9 @@
 
 namespace Database\Form;
 
-class QuerySave extends Query
+use Laminas\InputFilter\InputFilterProviderInterface;
+
+class QuerySave extends Query implements InputFilterProviderInterface
 {
     public function __construct()
     {
@@ -20,10 +22,21 @@ class QuerySave extends Query
             'name' => 'submit_save',
             'type' => 'submit',
             'attributes' => [
+                'label' => 'Opslaan',
                 'value' => 'Opslaan',
             ],
         ]);
+    }
 
-        $this->get('submit_save')->setLabel('Opslaan');
+    public function getInputFilterSpecification(): array
+    {
+        $filter = parent::getInputFilterSpecification();
+        $filter += [
+            'name' => [
+                'required' => true,
+            ],
+        ];
+
+        return $filter;
     }
 }

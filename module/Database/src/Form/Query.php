@@ -26,8 +26,10 @@ class Query extends Form implements InputFilterProviderInterface
             'attributes' => [
                 'value' => 'Uitvoeren',
             ],
+            'options' => [
+                'label' => 'Uitvoeren',
+            ],
         ]);
-        $this->get('submit')->setLabel('Uitvoeren');
     }
 
     /**
@@ -35,6 +37,10 @@ class Query extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return [];
+        return [
+            'query' => [
+                'required' => true,
+            ],
+        ];
     }
 }

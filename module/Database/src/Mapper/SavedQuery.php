@@ -2,9 +2,11 @@
 
 namespace Database\Mapper;
 
-use Database\Model\SavedQuery as QueryModel;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
+use Database\Model\SavedQuery as SavedQueryModel;
+use Doctrine\ORM\{
+    EntityManager,
+    EntityRepository,
+};
 
 /**
  * Installation Function mapper
@@ -16,7 +18,7 @@ class SavedQuery
      *
      * @var EntityManager
      */
-    protected $em;
+    protected EntityManager $em;
 
     /**
      * Constructor
@@ -31,9 +33,9 @@ class SavedQuery
     /**
      * Persist a query.
      *
-     * @param QueryModel $function Query to persist.
+     * @param SavedQueryModel $query
      */
-    public function persist(QueryModel $query)
+    public function persist(SavedQueryModel $query): void
     {
         $this->em->persist($query);
         $this->em->flush();
@@ -41,19 +43,22 @@ class SavedQuery
 
     /**
      * Find.
-     * @param string $id
-     * @return QueryModel
+     *
+     * @param int $id
+     *
+     * @return SavedQueryModel|null
      */
-    public function find($id)
+    public function find(int $id): ?SavedQueryModel
     {
         return $this->getRepository()->find($id);
     }
 
     /**
      * Find all.
-     * @return array of QueryModel's
+     *
+     * @return array
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
@@ -61,10 +66,10 @@ class SavedQuery
     /**
      * Get the repository for this mapper.
      *
-     * @return Doctrine\ORM\EntityRepository
+     * @return EntityRepository
      */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository('Database\Model\SavedQuery');
+        return $this->em->getRepository(SavedQueryModel::class);
     }
 }

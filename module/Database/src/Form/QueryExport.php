@@ -2,7 +2,9 @@
 
 namespace Database\Form;
 
-class QueryExport extends Query
+use Laminas\InputFilter\InputFilterProviderInterface;
+
+class QueryExport extends Query implements InputFilterProviderInterface
 {
     public function __construct()
     {
@@ -20,5 +22,17 @@ class QueryExport extends Query
 
         $this->get('submit')->setAttribute('value', 'export');
         $this->get('submit')->setLabel('Exporteer');
+    }
+
+    public function getInputFilterSpecification(): array
+    {
+        $filter = parent::getInputFilterSpecification();
+        $filter += [
+            'type' => [
+                'required' => true,
+            ],
+        ];
+
+        return $filter;
     }
 }

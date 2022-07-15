@@ -2,32 +2,35 @@
 
 namespace Database\Service;
 
-use Database\Form\Query as QueryForm;
-use Database\Form\QueryExport as QueryExportForm;
-use Database\Form\QuerySave as QuerySaveForm;
+use Database\Form\{
+    Query as QueryForm,
+    QueryExport as QueryExportForm,
+    QuerySave as QuerySaveForm,
+};
 use Database\Mapper\SavedQuery as SavedQueryMapper;
 use Database\Model\SavedQuery as SavedQueryModel;
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query\QueryException;
-use Doctrine\Common\Persistence\Mapping\MappingException;
+use Doctrine\ORM\{
+    AbstractQuery,
+    EntityManager,
+    Exception\ORMException,
+};
 
 class Query
 {
     /** @var QueryForm $queryForm */
-    private $queryForm;
+    private QueryForm $queryForm;
 
     /** @var QueryExportForm $queryExportForm */
-    private $queryExportForm;
+    private QueryExportForm $queryExportForm;
 
     /** @var QuerySaveForm $querySaveForm */
-    private $querySaveForm;
+    private QuerySaveForm $querySaveForm;
 
     /** @var SavedQueryMapper $savedQueryMapper */
-    private $savedQueryMapper;
+    private SavedQueryMapper $savedQueryMapper;
 
     /** @var EntityManager */
-    private $emReport;
+    private EntityManager $emReport;
 
     /**
      * @param QueryForm $queryForm
@@ -55,22 +58,21 @@ class Query
      *
      * @return array of SavedQuery's
      */
-    public function getSavedQueries()
+    public function getSavedQueries(): array
     {
         return $this->getSavedQueryMapper()->findAll();
     }
 
     /**
      * Save a query.
+     *
      * @param array $data
-     * @return mixed result
+     *
+     * @return SavedQueryModel|null
      */
-    public function save($data)
+    public function save(array $data): ?SavedQueryModel
     {
         $form = $this->getQuerySaveForm();
-
-        $form->bind(new SavedQueryModel());
-
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -79,21 +81,29 @@ class Query
 
         $data = $form->getData();
 
-        $mapper = $this->getSavedQueryMapper();
+        $queryModel = new SavedQueryModel();
+        $queryModel->setName($data['name']);
+        $queryModel->setQuery($data['query']);
 
-        $mapper->persist($data);
+        $this->getSavedQueryMapper()->persist($queryModel);
 
-        return $data;
+        return $queryModel;
     }
 
     /**
      * Execute a saved query.
-     * @param string $id Query number to execute
-     * @return mixed result
+     *
+     * @param int $id
+     *
+     * @return array|null
      */
-    public function executeSaved($id)
+    public function executeSaved(int $id): ?array
     {
         $query = $this->getSavedQueryMapper()->find($id);
+
+        if (null === $query) {
+            return null;
+        }
 
         return $this->execute([
             'query' => $query->getQuery(),
@@ -102,12 +112,16 @@ class Query
 
     /**
      * Execute a query.
+     *
      * @param array $data
-     * @param boolean $export False by default
-     * @return mixed result
+     * @param bool $export
+     *
+     * @return array|null
      */
-    public function execute($data, $export = false)
-    {
+    public function execute(
+        array $data,
+        bool $export = false,
+    ): ?array {
         if ($export) {
             $form = $this->getQueryExportForm();
         } else {
@@ -145,21 +159,16 @@ class Query
          *
          * TODO: properly put this in a mapper.....
          */
-        $em = $this->emReport;
         try {
-            $query = $em->createQuery($data['query']);
+            $query = $this->emReport->createQuery($data['query']);
+
             return $query->getResult(AbstractQuery::HYDRATE_SCALAR);
-        } catch (QueryException $e) {
+        } catch (ORMException $e) {
             $form->get('query')
                 ->setMessages([
                     $e->getMessage(),
                 ]);
-            return null;
-        } catch (MappingException $e) {
-            $form->get('query')
-                ->setMessages([
-                    $e->getMessage(),
-                ]);
+
             return null;
         }
     }
@@ -179,19 +188,21 @@ class Query
      *
      * @return array Array of all entities
      */
-    public function getEntities()
+    public function getEntities(): array
     {
-        $entityManager = $this->emReport;
         $classes = [];
-        $metas = $entityManager->getMetadataFactory()->getAllMetadata();
+        $metas = $this->emReport->getMetadataFactory()->getAllMetadata();
+
         foreach ($metas as $meta) {
             $classes[] = preg_replace('/^Report\\\\Model\\\\/', 'db:', $meta->getName());
         }
+
         return $classes;
     }
 
     /**
      * Get the query form.
+     *
      * @return QueryForm
      */
     public function getQueryForm(): QueryForm
@@ -201,6 +212,7 @@ class Query
 
     /**
      * Get the query form.
+     *
      * @return QuerySaveForm
      */
     public function getQuerySaveForm(): QuerySaveForm
@@ -210,6 +222,7 @@ class Query
 
     /**
      * Get the query form.
+     *
      * @return QueryExportForm
      */
     public function getQueryExportForm(): QueryExportForm

@@ -3,13 +3,14 @@
 namespace Database\Controller;
 
 use Database\Service\Query as QueryService;
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class QueryController extends AbstractActionController
 {
     /** @var QueryService $queryService */
-    private $queryService;
+    private QueryService $queryService;
 
     /**
      * @param QueryService $queryService
@@ -22,10 +23,10 @@ class QueryController extends AbstractActionController
     /**
      * Index action.
      */
-    public function indexAction()
+    public function indexAction(): Response|ViewModel
     {
         if ($this->getRequest()->isPost()) {
-            $post = $this->getRequest()->getPost();
+            $post = $this->getRequest()->getPost()->toArray();
 
             if (isset($post['submit_save'])) {
                 $query = $this->queryService->save($post);
@@ -58,7 +59,7 @@ class QueryController extends AbstractActionController
     /**
      * Show a saved query.
      */
-    public function showAction()
+    public function showAction(): ViewModel
     {
         $viewmodel = new Viewmodel([
             'form' => $this->queryService->getQueryForm(),
@@ -76,10 +77,10 @@ class QueryController extends AbstractActionController
     /**
      * Export action.
      */
-    public function exportAction()
+    public function exportAction(): Response|ViewModel
     {
         if ($this->getRequest()->isPost()) {
-            $result = $this->queryService->execute($this->getRequest()->getPost(), true);
+            $result = $this->queryService->execute($this->getRequest()->getPost()->toArray(), true);
 
             if (null !== $result) {
                 $vm = new ViewModel([
@@ -92,6 +93,7 @@ class QueryController extends AbstractActionController
                 return $vm;
             }
         }
+
         return $this->redirect()->toRoute('query');
     }
 }
