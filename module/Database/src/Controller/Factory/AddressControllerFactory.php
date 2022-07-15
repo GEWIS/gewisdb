@@ -4,8 +4,8 @@ namespace Database\Controller\Factory;
 
 use Database\Controller\AddressController;
 use Database\Service\Member as MemberService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class AddressControllerFactory implements FactoryInterface
 {

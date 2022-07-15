@@ -2,15 +2,11 @@
 
 namespace Report\Command\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Report\Command\GenerateFullCommand;
+use Psr\Container\ContainerInterface;
 use Report\Service\{
     Board as BoardService,
-    Meeting as MeetingService,
-    Member as MemberService,
     Misc as MiscService,
-    Organ as OrganService,
 };
 use Report\Command\GeneratePartialCommand;
 

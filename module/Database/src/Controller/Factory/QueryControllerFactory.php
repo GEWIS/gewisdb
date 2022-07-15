@@ -4,8 +4,8 @@ namespace Database\Controller\Factory;
 
 use Database\Controller\QueryController;
 use Database\Service\Query as QueryService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class QueryControllerFactory implements FactoryInterface
 {

@@ -2,8 +2,8 @@
 
 namespace User\Mapper\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use User\Mapper\UserMapper;
 
 class UserMapperFactory implements FactoryInterface

@@ -7,8 +7,8 @@ use Checker\Service\Installation as InstallationService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
 use Checker\Service\Organ as OrganService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class CheckerFactory implements FactoryInterface
 {

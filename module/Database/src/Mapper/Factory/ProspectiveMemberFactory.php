@@ -3,8 +3,8 @@
 namespace Database\Mapper\Factory;
 
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class ProspectiveMemberFactory implements FactoryInterface
 {

@@ -3,9 +3,9 @@
 namespace Report\Service\Factory;
 
 use Doctrine\ORM\EntityManager;
-use Interop\Container\ContainerInterface;
-use Report\Service\Board as BoardService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
+use Report\Service\Board as BoardService;
 
 class BoardFactory implements FactoryInterface
 {

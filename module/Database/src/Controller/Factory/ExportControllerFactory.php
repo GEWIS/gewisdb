@@ -4,8 +4,8 @@ namespace Database\Controller\Factory;
 
 use Database\Controller\ExportController;
 use Database\Service\Meeting as MeetingService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class ExportControllerFactory implements FactoryInterface
 {

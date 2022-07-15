@@ -4,8 +4,8 @@ namespace Checker\Service\Factory;
 
 use Checker\Mapper\Installation as InstallationMapper;
 use Checker\Service\Installation as InstallationService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class InstallationFactory implements FactoryInterface
 {

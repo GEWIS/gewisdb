@@ -3,8 +3,8 @@
 namespace Database\Mapper\Factory;
 
 use Database\Mapper\InstallationFunction as InstallationFunctionMapper;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class InstallationFunctionFactory implements FactoryInterface
 {

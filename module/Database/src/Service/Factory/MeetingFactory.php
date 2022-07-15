@@ -17,8 +17,8 @@ use Database\Form\Other as OtherForm;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Organ as OrganMapper;
 use Database\Service\Meeting as MeetingService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class MeetingFactory implements FactoryInterface
 {

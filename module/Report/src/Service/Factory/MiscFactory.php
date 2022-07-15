@@ -4,9 +4,9 @@ namespace Report\Service\Factory;
 
 use Database\Mapper\MailingList as MailingListMapper;
 use Doctrine\ORM\EntityManager;
-use Interop\Container\ContainerInterface;
-use Report\Service\Misc as MiscService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
+use Report\Service\Misc as MiscService;
 
 class MiscFactory implements FactoryInterface
 {

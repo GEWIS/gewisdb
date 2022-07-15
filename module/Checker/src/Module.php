@@ -22,7 +22,7 @@ use Checker\Service\Installation as InstallationService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
 use Checker\Service\Organ as OrganService;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class Module
 {

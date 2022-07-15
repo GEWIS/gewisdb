@@ -4,9 +4,9 @@ namespace Report\Service\Factory;
 
 use Database\Mapper\Meeting as MeetingMapper;
 use Doctrine\ORM\EntityManager;
-use Interop\Container\ContainerInterface;
-use Report\Service\Meeting as MeetingService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
+use Report\Service\Meeting as MeetingService;
 
 class MeetingFactory implements FactoryInterface
 {

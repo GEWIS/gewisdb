@@ -3,8 +3,8 @@
 namespace Database\Mapper\Factory;
 
 use Database\Mapper\MailingList as MailingListMapper;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class MailingListFactory implements FactoryInterface
 {

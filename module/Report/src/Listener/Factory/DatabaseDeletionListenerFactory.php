@@ -3,8 +3,8 @@
 namespace Report\Listener\Factory;
 
 use Doctrine\ORM\EntityManager;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;

@@ -3,8 +3,8 @@
 namespace Database\Mapper\Factory;
 
 use Database\Mapper\SavedQuery as SavedQueryMapper;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class SavedQueryFactory implements FactoryInterface
 {

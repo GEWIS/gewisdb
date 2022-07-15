@@ -3,8 +3,8 @@
 namespace Checker\Mapper\Factory;
 
 use Checker\Mapper\Installation as InstallationMapper;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class InstallationFactory implements FactoryInterface
 {

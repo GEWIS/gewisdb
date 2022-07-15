@@ -4,8 +4,8 @@ namespace Checker\Service\Factory;
 
 use Checker\Service\Meeting as MeetingService;
 use Database\Service\Meeting as DatabaseMeetingService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class MeetingFactory implements FactoryInterface
 {

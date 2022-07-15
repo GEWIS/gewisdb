@@ -3,8 +3,8 @@
 namespace Checker\Command\Factory;
 
 use Checker\Service\Checker as CheckerService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class AbstractCheckerCommandFactory implements FactoryInterface
 {

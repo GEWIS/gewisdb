@@ -79,12 +79,12 @@ use Database\Service\Member as MemberService;
 use Database\Service\Query as QueryService;
 use Doctrine\Laminas\Hydrator\DoctrineObject;
 use Doctrine\ORM\Events;
-use Interop\Container\ContainerInterface;
+use Laminas\Hydrator\ObjectPropertyHydrator;
+use Laminas\Mvc\MvcEvent;
+use Psr\Container\ContainerInterface;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Listener\DatabaseUpdateListener;
 use stdClass;
-use Laminas\Hydrator\ObjectPropertyHydrator;
-use Laminas\Mvc\MvcEvent;
 
 class Module
 {

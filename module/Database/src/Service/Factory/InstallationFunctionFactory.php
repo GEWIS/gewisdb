@@ -5,8 +5,8 @@ namespace Database\Service\Factory;
 use Database\Form\InstallationFunction as InstallationFunctionForm;
 use Database\Mapper\InstallationFunction as InstallationFunctionMapper;
 use Database\Service\InstallationFunction as InstallationFunctionService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class InstallationFunctionFactory implements FactoryInterface
 {

@@ -2,8 +2,8 @@
 
 namespace User\Controller\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use User\Service\UserService;
 use User\Controller\SettingsController;
 

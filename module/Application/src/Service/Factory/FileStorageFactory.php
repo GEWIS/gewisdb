@@ -3,8 +3,8 @@
 namespace Application\Service\Factory;
 
 use Application\Service\FileStorage as FileStorageService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class FileStorageFactory implements FactoryInterface
 {

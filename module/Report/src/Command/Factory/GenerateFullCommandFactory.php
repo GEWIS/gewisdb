@@ -2,8 +2,8 @@
 
 namespace Report\Command\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use Report\Command\GenerateFullCommand;
 use Report\Service\{
     Board as BoardService,

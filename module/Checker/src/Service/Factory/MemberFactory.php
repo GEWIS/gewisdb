@@ -4,8 +4,8 @@ namespace Checker\Service\Factory;
 
 use Checker\Mapper\Member as MemberMapper;
 use Checker\Service\Member as MemberService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class MemberFactory implements FactoryInterface
 {

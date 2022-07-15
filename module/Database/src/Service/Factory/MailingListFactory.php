@@ -6,8 +6,8 @@ use Database\Form\DeleteList as DeleteListForm;
 use Database\Form\MailingList as MailingListForm;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Service\MailingList as MailingListService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class MailingListFactory implements FactoryInterface
 {

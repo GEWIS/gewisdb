@@ -5,8 +5,8 @@ namespace Database\Controller\Factory;
 use Database\Controller\SettingsController;
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class SettingsControllerFactory implements FactoryInterface
 {

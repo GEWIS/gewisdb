@@ -2,9 +2,9 @@
 
 namespace User\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Crypt\Password\Bcrypt;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class PasswordFactory implements FactoryInterface
 {

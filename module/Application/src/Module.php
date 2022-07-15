@@ -5,7 +5,6 @@ namespace Application;
 use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
 use Application\View\Helper\FileUrl;
-use Interop\Container\ContainerInterface;
 use Laminas\I18n\Translator\Translator as I18nTranslator;
 use Laminas\Mvc\ModuleRouteListener;
 use Laminas\Mvc\MvcEvent;
@@ -15,6 +14,7 @@ use Laminas\Validator\AbstractValidator;
 use Locale;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
+use Psr\Container\ContainerInterface;
 
 class Module
 {

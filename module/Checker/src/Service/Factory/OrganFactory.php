@@ -4,8 +4,8 @@ namespace Checker\Service\Factory;
 
 use Checker\Mapper\Organ as OrganMapper;
 use Checker\Service\Organ as OrganService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class OrganFactory implements FactoryInterface
 {

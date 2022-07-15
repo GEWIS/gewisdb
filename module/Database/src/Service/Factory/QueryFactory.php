@@ -8,8 +8,8 @@ use Database\Form\QuerySave as QuerySaveForm;
 use Database\Mapper\SavedQuery as SavedQueryMapper;
 use Database\Service\Query as QueryService;
 use Doctrine\ORM\EntityManager;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class QueryFactory implements FactoryInterface
 {

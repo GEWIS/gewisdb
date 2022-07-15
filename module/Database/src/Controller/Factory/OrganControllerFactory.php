@@ -4,8 +4,8 @@ namespace Database\Controller\Factory;
 
 use Database\Controller\OrganController;
 use Database\Service\Meeting as MeetingService;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class OrganControllerFactory implements FactoryInterface
 {

@@ -2,10 +2,10 @@
 
 namespace User\Service\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use User\Service\UserService;
 use User\Mapper\UserMapper;
 use User\Form\UserCreate;

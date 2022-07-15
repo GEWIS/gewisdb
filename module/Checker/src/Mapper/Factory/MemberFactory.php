@@ -3,8 +3,8 @@
 namespace Checker\Mapper\Factory;
 
 use Checker\Mapper\Member as MemberMapper;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class MemberFactory implements FactoryInterface
 {
