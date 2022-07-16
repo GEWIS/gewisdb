@@ -43,7 +43,7 @@ class Installation extends FoundationReference
         targetEntity: Discharge::class,
         mappedBy: "installation",
     )]
-    protected Discharge $discharge;
+    protected ?Discharge $discharge = null;
 
     /**
      * Get the function.
@@ -103,9 +103,9 @@ class Installation extends FoundationReference
     /**
      * Get the discharge, if it exists
      *
-     * @return Discharge
+     * @return Discharge|null
      */
-    public function getDischarge(): Discharge
+    public function getDischarge(): ?Discharge
     {
         return $this->discharge;
     }

@@ -221,9 +221,9 @@ class Decision
      *
      * Or null, if it wasn't destroyed.
      *
-     * @return SubDecision\Destroy
+     * @return Destroy|null
      */
-    public function getDestroyedBy(): SubDecision\Destroy
+    public function getDestroyedBy(): ?Destroy
     {
         return $this->destroyedby;
     }
