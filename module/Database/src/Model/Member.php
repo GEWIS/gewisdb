@@ -49,25 +49,25 @@ class Member
      * Member's last name.
      */
     #[Column(type: "string")]
-    protected string $lastName = '';
+    protected string $lastName;
 
     /**
      * Middle name.
      */
     #[Column(type: "string")]
-    protected string $middleName = '';
+    protected string $middleName;
 
     /**
      * Initials.
      */
     #[Column(type: "string")]
-    protected string $initials = '';
+    protected string $initials;
 
     /**
      * First name.
      */
     #[Column(type: "string")]
-    protected string $firstName = '';
+    protected string $firstName;
 
     /**
      * Gender of the member.
@@ -80,7 +80,7 @@ class Member
         type: "string",
         enumType: GenderTypes::class,
     )]
-    protected GenderTypes $gender = GenderTypes::Other;
+    protected GenderTypes $gender;
 
     /**
      * Generation.
@@ -89,7 +89,7 @@ class Member
      * a academic year, but rather a calendar year.
      */
     #[Column(type: "integer")]
-    protected int $generation = 0;
+    protected int $generation;
 
     /**
      * TU/e username.
@@ -127,7 +127,7 @@ class Member
         type: "string",
         enumType: MembershipTypes::class,
     )]
-    protected MembershipTypes $type = MembershipTypes::Ordinary;
+    protected MembershipTypes $type;
 
     /**
      * Last changed date of membership.
@@ -140,7 +140,7 @@ class Member
      * the TU/e in general, or another institution).
      */
     #[Column(type: "boolean")]
-    protected bool $isStudying = true;
+    protected bool $isStudying;
 
     /**
      * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
@@ -241,10 +241,6 @@ class Member
      */
     public function __construct()
     {
-        $this->birth = new DateTime();
-        $this->changedOn = new DateTime();
-        $this->expiration = new DateTime();
-
         $this->addresses = new ArrayCollection();
         $this->installations = new ArrayCollection();
         $this->lists = new ArrayCollection();

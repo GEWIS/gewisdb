@@ -73,18 +73,16 @@ class Query
     public function save(array $data): ?SavedQueryModel
     {
         $form = $this->getQuerySaveForm();
+
+        $form->bind(new SavedQueryModel());
         $form->setData($data);
 
         if (!$form->isValid()) {
             return null;
         }
 
-        $data = $form->getData();
-
-        $queryModel = new SavedQueryModel();
-        $queryModel->setName($data['name']);
-        $queryModel->setQuery($data['query']);
-
+        /** @var SavedQueryModel $queryModel */
+        $queryModel = $form->getData();
         $this->getSavedQueryMapper()->persist($queryModel);
 
         return $queryModel;

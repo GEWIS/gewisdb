@@ -139,7 +139,6 @@ class Module
                 MemberExpirationForm::class => MemberExpirationForm::class,
                 QueryForm::class => QueryForm::class,
                 QueryExportForm::class => QueryExportForm::class,
-                QuerySaveForm::class => QuerySaveForm::class,
             ],
             'factories' => [
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
@@ -198,12 +197,12 @@ class Module
                 },
                 MailingListForm::class => function (ContainerInterface $container) {
                     $form = new MailingListForm();
-                    $form->setHydrator($container->get('database_hydrator_member'));
+                    $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
                 InstallationFunctionForm::class => function (ContainerInterface $container) {
                     $form = new InstallationFunctionForm();
-                    $form->setHydrator($container->get('database_hydrator_member'));
+                    $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
                 InstallForm::class => function (ContainerInterface $container) {
@@ -267,6 +266,12 @@ class Module
                         $container->get('database_form_fieldset_subdecision_board_install'),
                     );
                     $form->setHydrator($container->get(BoardDischargeHydrator::class));
+                    return $form;
+                },
+                QuerySaveForm::class => function (ContainerInterface $container) {
+                    $form = new QuerySaveForm();
+                    $form->setHydrator($container->get('database_hydrator_default'));
+
                     return $form;
                 },
                 'database_form_fieldset_subdecision_foundation' => function (ContainerInterface $container) {
@@ -340,32 +345,38 @@ class Module
                     return $fs;
                 },
                 ///////////////////////////////////////////////////////////////////////////
+                'database_hydrator_default' => function (ContainerInterface $container) {
+                    return new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
+                },
                 'database_hydrator_member' => function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator = $container->get('database_hydrator_default');
                     $hydrator->addStrategy('gender', new GenderHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_address' => function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
-                    $hydrator->addStrategy('type', new AddressHydratorStrategy());
+                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator->addStrategy('addressType', new AddressHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_meeting' => function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator = $container->get('database_hydrator_default');
                     $hydrator->addStrategy('type', new MeetingHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_subdecision' => function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator = $container->get('database_hydrator_default');
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_decision' => function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject($container->get('database_doctrine_em'));
+                    $hydrator = $container->get('database_hydrator_default');
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
 
                     return $hydrator;

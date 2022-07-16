@@ -39,31 +39,31 @@ class ProspectiveMember
      * Member's email address.
      */
     #[Column(type: "string")]
-    protected string $email = '';
+    protected string $email;
 
     /**
      * Member's last name.
      */
     #[Column(type: "string")]
-    protected string $lastName = '';
+    protected string $lastName;
 
     /**
      * Middle name.
      */
     #[Column(type: "string")]
-    protected string $middleName = '';
+    protected string $middleName;
 
     /**
      * Initials.
      */
     #[Column(type: "string")]
-    protected string $initials = '';
+    protected string $initials;
 
     /**
      * First name.
      */
     #[Column(type: "string")]
-    protected string $firstName = '';
+    protected string $firstName;
 
     /**
      * Gender of the member.
@@ -76,7 +76,7 @@ class ProspectiveMember
         type: "string",
         enumType: GenderTypes::class,
     )]
-    protected GenderTypes $gender = GenderTypes::Other;
+    protected GenderTypes $gender;
 
     /**
      * TU/e username.
@@ -135,31 +135,31 @@ class ProspectiveMember
      * Street.
      */
     #[Column(type: "string")]
-    protected string $street = '';
+    protected string $street;
 
     /**
      * House number (+ suffix)
      */
     #[Column(type: "string")]
-    protected string $number = '';
+    protected string $number;
 
     /**
      * Postal code.
      */
     #[Column(type: "string")]
-    protected string $postalCode = '';
+    protected string $postalCode;
 
     /**
      * City.
      */
     #[Column(type: "string")]
-    protected string $city = '';
+    protected string $city;
 
     /**
      * Phone number.
      */
     #[Column(type: "string")]
-    protected string $phone = '';
+    protected string $phone;
 
     /**
      * Memberships of mailing lists.
@@ -202,9 +202,6 @@ class ProspectiveMember
      */
     public function __construct()
     {
-        $this->birth = new DateTime();
-        $this->changedOn = new DateTime();
-
         $this->lists = new ArrayCollection();
     }
 

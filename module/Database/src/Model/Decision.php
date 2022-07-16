@@ -4,7 +4,10 @@ namespace Database\Model;
 
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Destroy;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection,
+};
 use Doctrine\ORM\Mapping\{
     Column,
     Entity,
@@ -94,7 +97,7 @@ class Decision
         targetEntity: Destroy::class,
         mappedBy: "target",
     )]
-    protected Destroy $destroyedby;
+    protected ?Destroy $destroyedby = null;
 
     /**
      * Set the meeting.
@@ -103,6 +106,8 @@ class Decision
      */
     public function setMeeting(Meeting $meeting): void
     {
+        $this->subdecisions = new ArrayCollection();
+
         $meeting->addDecision($this);
         $this->meeting_type = $meeting->getType();
         $this->meeting_number = $meeting->getNumber();

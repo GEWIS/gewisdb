@@ -3,8 +3,6 @@
 namespace Database\Form\Fieldset;
 
 use Application\Model\Enums\MeetingTypes;
-use Database\Model\Decision as DecisionModel;
-use Database\Model\Meeting as MeetingModel;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Digits;

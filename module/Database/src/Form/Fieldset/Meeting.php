@@ -32,7 +32,7 @@ class Meeting extends Fieldset
      */
     public function setMeetingData(MeetingModel $meeting)
     {
-        $this->get('type')->setValue($meeting->getType());
+        $this->get('type')->setValue($meeting->getType()->value);
         $this->get('number')->setValue($meeting->getNumber());
     }
 }
