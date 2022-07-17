@@ -19,4 +19,9 @@ class BudgetOrganDoesNotExistTest extends \CheckerTest\Model\Error
     {
         $error = $this->create();
     }
+
+    public function testAsText()
+    {
+        $this->markTestSkipped("This test case is obsolete for this type");
+    }
 }
