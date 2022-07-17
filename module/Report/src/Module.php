@@ -2,24 +2,30 @@
 
 namespace Report;
 
-use Report\Command\Factory\GenerateFullCommandFactory;
-use Report\Command\Factory\GeneratePartialCommandFactory;
-use Report\Command\GenerateFullCommand;
-use Report\Command\GeneratePartialCommand;
-use Report\Listener\DatabaseDeletionListener;
-use Report\Listener\DatabaseUpdateListener;
-use Report\Listener\Factory\DatabaseDeletionListenerFactory;
-use Report\Listener\Factory\DatabaseUpdateListenerFactory;
-use Report\Service\Board as BoardService;
-use Report\Service\Factory\BoardFactory as BoardServiceFactory;
-use Report\Service\Factory\MeetingFactory as MeetingServiceFactory;
-use Report\Service\Factory\MemberFactory as MemberServiceFactory;
-use Report\Service\Factory\MiscFactory as MiscServiceFactory;
-use Report\Service\Factory\OrganFactory as OrganServiceFactory;
-use Report\Service\Meeting as MeetingService;
-use Report\Service\Member as MemberService;
-use Report\Service\Misc as MiscService;
-use Report\Service\Organ as OrganService;
+use Report\Command\{
+    Factory\GenerateFullCommandFactory,
+    Factory\GeneratePartialCommandFactory,
+    GenerateFullCommand,
+    GeneratePartialCommand,
+};
+use Report\Listener\{
+    DatabaseDeletionListener,
+    DatabaseUpdateListener,
+    Factory\DatabaseDeletionListenerFactory,
+    Factory\DatabaseUpdateListenerFactory,
+};
+use Report\Service\{
+    Board as BoardService,
+    Factory\BoardFactory as BoardServiceFactory,
+    Factory\MeetingFactory as MeetingServiceFactory,
+    Factory\MemberFactory as MemberServiceFactory,
+    Factory\MiscFactory as MiscServiceFactory,
+    Factory\OrganFactory as OrganServiceFactory,
+    Meeting as MeetingService,
+    Member as MemberService,
+    Misc as MiscService,
+    Organ as OrganService,
+};
 
 class Module
 {

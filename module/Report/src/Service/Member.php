@@ -3,25 +3,26 @@
 namespace Report\Service;
 
 use Database\Mapper\Member as MemberMapper;
+use Database\Model\{
+    Address as DatabaseAddressModel,
+    Member as DatabaseMemberModel,
+};
 use Doctrine\ORM\EntityManager;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
 use LogicException;
-use Report\Model\Member as ReportMember;
-use Report\Model\Address as ReportAddress;
+use Report\Model\{
+    MailingList as ReportMailingListModel,
+    Member as ReportMemberModel,
+    Address as ReportAddressModel,
+};
 
 class Member
 {
-    /** @var MemberMapper $memberMapper */
-    private $memberMapper;
+    private MemberMapper $memberMapper;
 
-    /** @var EntityManager $emReport */
-    private $emReport;
+    private EntityManager $emReport;
 
-    /**
-     * @param MemberMapper $memberMapper
-     * @param EntityManager $emReport
-     */
     public function __construct(
         MemberMapper $memberMapper,
         EntityManager $emReport,
@@ -41,6 +42,7 @@ class Member
         $progress = new ProgressBar($adapter, 0, count($memberCollection));
 
         $num = 0;
+        /** @var DatabaseMemberModel $member */
         foreach ($memberCollection as $member) {
             if ($num++ % 20 == 0) {
                 $this->emReport->flush();
@@ -56,14 +58,14 @@ class Member
         $progress->finish();
     }
 
-    public function generateMember($member)
+    public function generateMember(DatabaseMemberModel $member)
     {
-        $repo = $this->emReport->getRepository('Report\Model\Member');
+        $repo = $this->emReport->getRepository(ReportMemberModel::class);
         // first try to find an existing member
         $reportMember = $repo->find($member->getLidnr());
 
         if (null === $reportMember) {
-            $reportMember = new ReportMember();
+            $reportMember = new ReportMemberModel();
         }
 
         $reportMember->setLidnr($member->getLidnr());
@@ -84,6 +86,7 @@ class Member
         $reportMember->setSupremum($member->getSupremum());
 
         // go through addresses
+        /** @var DatabaseAddressModel $address */
         foreach ($member->getAddresses() as $address) {
             $this->generateAddress($address, $reportMember);
         }
@@ -93,9 +96,11 @@ class Member
         $this->emReport->persist($reportMember);
     }
 
-    public function generateLists($member, $reportMember)
-    {
-        $reportListRepo = $this->emReport->getRepository('Report\Model\MailingList');
+    public function generateLists(
+        DatabaseMemberModel $member,
+        ReportMemberModel $reportMember,
+    ) {
+        $reportListRepo = $this->emReport->getRepository(ReportMailingListModel::class);
 
         $reportLists = array_map(function ($list) {
             return $list->getName();
@@ -129,12 +134,14 @@ class Member
         }
     }
 
-    public function generateAddress($address, $reportMember = null)
-    {
-        $addrRepo = $this->emReport->getRepository('Report\Model\Address');
+    public function generateAddress(
+        DatabaseAddressModel $address,
+        ?ReportMemberModel $reportMember = null,
+    ) {
+        $addrRepo = $this->emReport->getRepository(ReportAddressModel::class);
 
         if ($reportMember === null) {
-            $reportMember = $this->emReport->getRepository('Report\Model\Member')->find($address->getMember()->getLidnr());
+            $reportMember = $this->emReport->getRepository(ReportMemberModel::class)->find($address->getMember()->getLidnr());
             if ($reportMember === null) {
                 throw new LogicException('Address without member');
             }
@@ -146,7 +153,7 @@ class Member
         ]);
 
         if (null === $reportAddress) {
-            $reportAddress = new ReportAddress();
+            $reportAddress = new ReportAddressModel();
         }
 
         $reportAddress->setType($address->getType());
@@ -160,17 +167,17 @@ class Member
         $this->emReport->persist($reportAddress);
     }
 
-    public function deleteMember($member)
+    public function deleteMember(DatabaseMemberModel $member)
     {
-        $repo = $this->emReport->getRepository('Report\Model\Member');
+        $repo = $this->emReport->getRepository(ReportMemberModel::class);
         // first try to find an existing member
         $reportMember = $repo->find($member->getLidnr());
         $this->emReport->remove($reportMember);
     }
 
-    public function deleteAddress($address)
+    public function deleteAddress(DatabaseAddressModel $address)
     {
-        $repo = $this->emReport->getRepository('Report\Model\Address');
+        $repo = $this->emReport->getRepository(ReportAddressModel::class);
 
         // first try to find an existing member
         $reportAddress = $repo->find([

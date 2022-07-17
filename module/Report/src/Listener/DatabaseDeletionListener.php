@@ -2,24 +2,31 @@
 
 namespace Report\Listener;
 
+use Database\Model\{
+    Address as DatabaseAddressModel,
+    Decision as DatabaseDecisionModel,
+    Meeting as DatabaseMeetingModel,
+    Member as DatabaseMemberModel,
+};
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\ORM\EntityManager;
-use Report\Service\Meeting as MeetingService;
-use Report\Service\Member as MemberService;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Exception;
+use Report\Service\{
+    Meeting as MeetingService,
+    Member as MemberService,
+};
 
 /**
  * Doctrine event listener intended to automatically update reportdb.
  */
 class DatabaseDeletionListener
 {
-    /** @var MeetingService $meetingService */
-    private $meetingService;
+    private MeetingService $meetingService;
 
-    /** @var MemberService $memberService */
-    private $memberService;
+    private MemberService $memberService;
 
-    /** @var EntityManager */
-    private $emReport;
+    private EntityManager $emReport;
 
     public function __construct(
         MeetingService $meetingService,
@@ -31,14 +38,14 @@ class DatabaseDeletionListener
         $this->emReport = $emReport;
     }
 
-    public function preRemove($eventArgs)
+    public function preRemove(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
         switch (true) {
-            case $entity instanceof \Database\Model\Address:
+            case $entity instanceof DatabaseAddressModel:
                 $this->memberService->deleteAddress($entity);
                 break;
-            case $entity instanceof \Database\Model\Member:
+            case $entity instanceof DatabaseMemberModel:
                 try {
                     $this->memberService->deleteMember($entity);
                 } catch (ForeignKeyConstraintViolationException $e) {
@@ -47,11 +54,11 @@ class DatabaseDeletionListener
                 $this->memberService->deleteMember($entity);
                 break;
 
-            case $entity instanceof \Database\Model\Meeting:
-                throw new \Exception('reportdb deletion of meetings not implemented');
+            case $entity instanceof DatabaseMeetingModel:
+                throw new Exception('reportdb deletion of meetings not implemented');
                 break;
 
-            case $entity instanceof \Database\Model\Decision:
+            case $entity instanceof DatabaseDecisionModel:
                 $this->meetingService->deleteDecision($entity);
                 break;
         }

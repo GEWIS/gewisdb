@@ -5,21 +5,21 @@ namespace Report\Service;
 use Doctrine\ORM\EntityManager;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
+use LogicException;
 use ReflectionProperty;
-use Report\Model\Organ as ReportOrgan;
+use Report\Model\Organ as ReportOrganModel;
 use Report\Model\OrganMember;
-use Report\Model\SubDecision\Abrogation;
-use Report\Model\SubDecision\Foundation;
+use Report\Model\SubDecision\Abrogation as ReportAbrogationModel;
+use Report\Model\SubDecision\Discharge as ReportDischargeModel;
+use Report\Model\SubDecision\Foundation as ReportFoundationModel;
+use Report\Model\SubDecision\FoundationReference as ReportFoundationReferenceModel;
 use Report\Model\SubDecision\Installation;
+use Report\Model\SubDecision\Installation as ReportInstallationModel;
 
 class Organ
 {
-    /** @var EntityManager $emReport */
-    private $emReport;
+    private EntityManager $emReport;
 
-    /**
-     * @param EntityManager $emReport
-     */
     public function __construct(EntityManager $emReport)
     {
         $this->emReport = $emReport;
@@ -30,8 +30,9 @@ class Organ
      */
     public function generate()
     {
-        $foundationRepo = $this->emReport->getRepository('Report\Model\SubDecision\Foundation');
+        $foundationRepo = $this->emReport->getRepository(ReportFoundationModel::class);
 
+        /** @var array<array-key, ReportFoundationModel> $foundations */
         $foundations = $foundationRepo->findBy([], [
             'meeting_type' => 'DESC',
             'meeting_number' => 'ASC',
@@ -60,15 +61,16 @@ class Organ
             $repOrgan->addSubdecision($foundation);
 
             // get the abrogation date and find organ members
+            /** @var ReportFoundationReferenceModel $ref */
             foreach ($foundation->getReferences() as $ref) {
                 // first add as related subdecision
                 $repOrgan->addSubdecision($ref);
 
-                if ($ref instanceof Abrogation) {
+                if ($ref instanceof ReportAbrogationModel) {
                     $this->generateAbrogation($ref);
                 }
 
-                if ($ref instanceof Installation) {
+                if ($ref instanceof ReportInstallationModel) {
                     $this->generateInstallation($ref);
                 }
             }
@@ -82,10 +84,10 @@ class Organ
         $progress->finish();
     }
 
-    public function generateFoundation($foundation)
+    public function generateFoundation(ReportFoundationModel $foundation): ReportOrganModel
     {
         // see if there already is an organ (with a slight hack)
-        $rp = new ReflectionProperty(Foundation::class, 'organ');
+        $rp = new ReflectionProperty(ReportFoundationModel::class, 'organ');
         if ($rp->isInitialized($foundation)) {
             $repOrgan = $foundation->getOrgan();
         } else {
@@ -93,7 +95,7 @@ class Organ
         }
 
         if (null === $repOrgan) {
-            $repOrgan = new ReportOrgan();
+            $repOrgan = new ReportOrganModel();
             $repOrgan->setFoundation($foundation);
         }
 
@@ -107,37 +109,42 @@ class Organ
         return $repOrgan;
     }
 
-    public function generateAbrogation($ref)
+    public function generateAbrogation(ReportAbrogationModel $ref)
     {
-        $repOrgan = $ref->getFoundation()->getOrgan();
+        $rp = new ReflectionProperty(ReportFoundationModel::class, 'organ');
+        if ($rp->isInitialized($ref->getFoundation())) {
+            $repOrgan = $ref->getFoundation()->getOrgan();
+        } else {
+            $repOrgan = null;
+        }
 
         if ($repOrgan === null) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
-            $repo = $this->emReport->getRepository('Report\Model\Organ');
+            $repo = $this->emReport->getRepository(ReportOrganModel::class);
             $repOrgan = $repo->findOneBy([
                 'foundation' => $ref->getFoundation(),
             ]);
 
             if ($repOrgan === null) {
-                throw new \LogicException('Abrogation without Organ');
+                throw new LogicException('Abrogation without Organ');
             }
         }
 
         $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
     }
 
-    public function generateInstallation($ref)
+    public function generateInstallation(ReportInstallationModel $ref)
     {
-        $repo = $this->emReport->getRepository('Report\Model\Organ');
+        $repo = $this->emReport->getRepository(ReportOrganModel::class);
         // get full reference
-        $rp = new ReflectionProperty(Installation::class, 'organMember');
+        $rp = new ReflectionProperty(ReportInstallationModel::class, 'organMember');
         if ($rp->isInitialized($ref)) {
             $organMember = $ref->getOrganMember();
         } else {
             $organMember = null;
         }
 
-        $rp = new ReflectionProperty(Foundation::class, 'organ');
+        $rp = new ReflectionProperty(ReportFoundationModel::class, 'organ');
         if ($rp->isInitialized($ref->getFoundation())) {
             $repOrgan = $ref->getFoundation()->getOrgan();
         } else {
@@ -151,7 +158,7 @@ class Organ
             ]);
 
             if ($repOrgan === null) {
-                throw new \LogicException('Installation without Organ');
+                throw new LogicException('Installation without Organ');
             }
         }
 
@@ -187,12 +194,17 @@ class Organ
         $this->emReport->persist($organMember);
     }
 
-    public function generateDischarge($ref)
+    public function generateDischarge(ReportDischargeModel $ref)
     {
-        $organMember = $ref->getInstallation()->getOrganMember();
+        $rp = new ReflectionProperty(ReportInstallationModel::class, 'organ');
+        if ($rp->isInitialized($ref->getInstallation())) {
+            $organMember = $ref->getInstallation()->getOrganMember();
+        } else {
+            $organMember = null;
+        }
 
         if ($organMember === null) {
-            throw new \LogicException('Discharge without OrganMember');
+            throw new LogicException('Discharge without OrganMember');
         }
 
         $organMember->setDischargeDate($ref->getDecision()->getMeeting()->getDate());

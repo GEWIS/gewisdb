@@ -108,6 +108,14 @@ class Installation extends FoundationReference
     }
 
     /**
+     * Clears the discharge, if it exists.
+     */
+    public function clearDischarge(): void
+    {
+        $this->discharge = null;
+    }
+
+    /**
      * Get the organ member reference.
      *
      * @return OrganMember

@@ -681,6 +681,17 @@ class Member
     }
 
     /**
+     * Remove a mailing list subscription.
+     *
+     * Note that this is the owning side.
+     */
+    public function removeList(MailingList $list)
+    {
+        $list->removeMember($this);
+        $this->lists->removeElement($list);
+    }
+
+    /**
      * Clear the lists.
      */
     public function clearLists(): void

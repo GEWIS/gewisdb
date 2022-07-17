@@ -5,16 +5,12 @@ namespace Report\Service;
 use Doctrine\ORM\EntityManager;
 use ReflectionProperty;
 use Report\Model\BoardMember as BoardMemberModel;
-use Report\Model\SubDecision\Board\Installation;
+use Report\Model\SubDecision\Board\Installation as InstallationModel;
 
 class Board
 {
-    /** @var EntityManager $emReport */
-    private $emReport;
+    private EntityManager $emReport;
 
-    /**
-     * @param EntityManager $emReport
-     */
     public function __construct(EntityManager $emReport)
     {
         $this->emReport = $emReport;
@@ -25,11 +21,12 @@ class Board
      */
     public function generate()
     {
-        $repo = $this->emReport->getRepository('Report\Model\SubDecision\Board\Installation');
+        $repo = $this->emReport->getRepository(InstallationModel::class);
 
         $installs = $repo->findAll();
+        /** @var InstallationModel $install */
         foreach ($installs as $install) {
-            $rp = new ReflectionProperty(Installation::class, 'boardMember');
+            $rp = new ReflectionProperty(InstallationModel::class, 'boardMember');
             if ($rp->isInitialized($install)) {
                 $boardMember = $install->getBoardMember();
             } else {

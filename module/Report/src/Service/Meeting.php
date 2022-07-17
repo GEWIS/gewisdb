@@ -3,41 +3,41 @@
 namespace Report\Service;
 
 use Database\Mapper\Meeting as MeetingMapper;
-use Database\Model\Member as MemberModel;
-use Database\Model\SubDecision;
-use Database\Model\Decision;
+use Database\Model\{
+    Meeting as DatabaseMeetingModel,
+    Member as DatabaseMemberModel,
+    SubDecision as DatabaseSubDecisionModel,
+    Decision as DatabaseDecisionModel
+};
 use Doctrine\ORM\EntityManager;
+use Exception;
+use LogicException;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mail\Message;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
-use Report\Model\Meeting as ReportMeeting;
-use Report\Model\Decision as ReportDecision;
+use Report\Model\{
+    Meeting as ReportMeetingModel,
+    Decision as ReportDecisionModel,
+    Member as ReportMemberModel,
+    SubDecision as ReportSubDecisionModel
+};
 
 class Meeting
 {
-    /** @var MeetingMapper $meetingMapper */
-    private $meetingMapper;
+    private MeetingMapper $meetingMapper;
 
-    /** @var EntityManager $emReport */
-    private $emReport;
+    private EntityManager $emReport;
 
-    /** @var array $config */
-    private $config;
+    private array $config;
 
-    private $mailTransport;
+    private TransportInterface $mailTransport;
 
-    /**
-     * @param MeetingMapper $meetingMapper
-     * @param EntityManager $emReport
-     * @param array $config
-     * @param $mailTransport
-     */
     public function __construct(
         MeetingMapper $meetingMapper,
         EntityManager $emReport,
         array $config,
-        $mailTransport,
+        TransportInterface $mailTransport,
     ) {
         $this->meetingMapper = $meetingMapper;
         $this->emReport = $emReport;
@@ -68,9 +68,9 @@ class Meeting
         $progress->finish();
     }
 
-    public function generateMeeting($meeting)
+    public function generateMeeting(DatabaseMeetingModel $meeting)
     {
-        $repo = $this->emReport->getRepository('Report\Model\Meeting');
+        $repo = $this->emReport->getRepository(ReportMeetingModel::class);
 
         $reportMeeting = $repo->find([
             'type' => $meeting->getType(),
@@ -78,7 +78,7 @@ class Meeting
         ]);
 
         if ($reportMeeting === null) {
-            $reportMeeting = new ReportMeeting();
+            $reportMeeting = new ReportMeetingModel();
         }
 
         $reportMeeting->setType($meeting->getType());
@@ -88,7 +88,7 @@ class Meeting
         foreach ($meeting->getDecisions() as $decision) {
             try {
                 $this->generateDecision($decision, $reportMeeting);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // send email, something went wrong
                 $this->sendDecisionExceptionMail($e, $decision);
                 continue;
@@ -98,18 +98,20 @@ class Meeting
         $this->emReport->persist($reportMeeting);
     }
 
-    public function generateDecision($decision, $reportMeeting = null)
-    {
-        $decRepo = $this->emReport->getRepository('Report\Model\Decision');
+    public function generateDecision(
+        DatabaseDecisionModel $decision,
+        ?ReportMeetingModel $reportMeeting = null,
+    ) {
+        $decRepo = $this->emReport->getRepository(ReportDecisionModel::class);
 
         if ($reportMeeting === null) {
-            $reportMeeting = $this->emReport->getRepository('Report\Model\Meeting')->find([
+            $reportMeeting = $this->emReport->getRepository(ReportMeetingModel::class)->find([
                 'type' => $decision->getMeeting()->getType(),
                 'number' => $decision->getMeeting()->getNumber(),
             ]);
 
             if ($reportMeeting === null) {
-                throw new \LogicException('Decision without meeting');
+                throw new LogicException('Decision without meeting');
             }
         }
 
@@ -122,7 +124,7 @@ class Meeting
         ]);
 
         if (null === $reportDecision) {
-            $reportDecision = new ReportDecision();
+            $reportDecision = new ReportDecisionModel();
             $reportDecision->setMeeting($reportMeeting);
         }
 
@@ -144,10 +146,12 @@ class Meeting
         $this->emReport->persist($reportDecision);
     }
 
-    public function generateSubDecision($subdecision, $reportDecision = null)
-    {
-        $decRepo = $this->emReport->getRepository('Report\Model\Decision');
-        $subdecRepo = $this->emReport->getRepository('Report\Model\SubDecision');
+    public function generateSubDecision(
+        DatabaseSubDecisionModel $subdecision,
+        ?ReportDecisionModel $reportDecision = null,
+    ) {
+        $decRepo = $this->emReport->getRepository(ReportDecisionModel::class);
+        $subdecRepo = $this->emReport->getRepository(ReportSubDecisionModel::class);
 
         if ($reportDecision === null) {
             $reportDecision = $decRepo->find([
@@ -158,7 +162,7 @@ class Meeting
             ]);
 
             if ($reportDecision === null) {
-                throw new \LogicException('Decision without meeting');
+                throw new LogicException('Decision without meeting');
             }
         }
 
@@ -179,7 +183,7 @@ class Meeting
             $reportSubDecision->setNumber($subdecision->getNumber());
         }
 
-        if ($subdecision instanceof SubDecision\FoundationReference) {
+        if ($subdecision instanceof DatabaseSubDecisionModel\FoundationReference) {
             $ref = $subdecision->getFoundation();
             $foundation = $subdecRepo->find([
                 'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
@@ -193,12 +197,12 @@ class Meeting
         }
 
         // transfer specific data
-        if ($subdecision instanceof SubDecision\Installation) {
+        if ($subdecision instanceof DatabaseSubDecisionModel\Installation) {
             // installation
             $reportSubDecision->setFunction($subdecision->getFunction());
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
         } else {
-            if ($subdecision instanceof SubDecision\Discharge) {
+            if ($subdecision instanceof DatabaseSubDecisionModel\Discharge) {
                 // discharge
                 $ref = $subdecision->getInstallation();
                 $installation = $subdecRepo->find([
@@ -210,13 +214,13 @@ class Meeting
                 ]);
                 $reportSubDecision->setInstallation($installation);
             } else {
-                if ($subdecision instanceof SubDecision\Foundation) {
+                if ($subdecision instanceof DatabaseSubDecisionModel\Foundation) {
                     // foundation
                     $reportSubDecision->setAbbr($subdecision->getAbbr());
                     $reportSubDecision->setName($subdecision->getName());
                     $reportSubDecision->setOrganType($subdecision->getOrganType());
                 } else {
-                    if ($subdecision instanceof SubDecision\Reckoning || $subdecision instanceof SubDecision\Budget) {
+                    if ($subdecision instanceof DatabaseSubDecisionModel\Reckoning || $subdecision instanceof DatabaseSubDecisionModel\Budget) {
                         // budget and reckoning
                         if (null !== $subdecision->getAuthor()) {
                             $reportSubDecision->setAuthor($this->findMember($subdecision->getAuthor()));
@@ -227,13 +231,13 @@ class Meeting
                         $reportSubDecision->setApproval($subdecision->getApproval());
                         $reportSubDecision->setChanges($subdecision->getChanges());
                     } else {
-                        if ($subdecision instanceof SubDecision\Board\Installation) {
+                        if ($subdecision instanceof DatabaseSubDecisionModel\Board\Installation) {
                             // board installation
                             $reportSubDecision->setFunction($subdecision->getFunction());
                             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
                             $reportSubDecision->setDate($subdecision->getDate());
                         } else {
-                            if ($subdecision instanceof SubDecision\Board\Release) {
+                            if ($subdecision instanceof DatabaseSubDecisionModel\Board\Release) {
                                 // board release
                                 $ref = $subdecision->getInstallation();
                                 $installation = $subdecRepo->find([
@@ -246,7 +250,7 @@ class Meeting
                                 $reportSubDecision->setInstallation($installation);
                                 $reportSubDecision->setDate($subdecision->getDate());
                             } else {
-                                if ($subdecision instanceof SubDecision\Board\Discharge) {
+                                if ($subdecision instanceof DatabaseSubDecisionModel\Board\Discharge) {
                                     $ref = $subdecision->getInstallation();
                                     $installation = $subdecRepo->find([
                                         'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
@@ -257,7 +261,7 @@ class Meeting
                                     ]);
                                     $reportSubDecision->setInstallation($installation);
                                 } else {
-                                    if ($subdecision instanceof SubDecision\Destroy) {
+                                    if ($subdecision instanceof DatabaseSubDecisionModel\Destroy) {
                                         $ref = $subdecision->getTarget();
                                         $target = $decRepo->find([
                                             'meeting_type' => $ref->getMeeting()->getType(),
@@ -291,9 +295,9 @@ class Meeting
         return $reportSubDecision;
     }
 
-    public function deleteDecision($decision)
+    public function deleteDecision(DatabaseDecisionModel $decision)
     {
-        $reportDecision = $this->emReport->getRepository('Report\Model\Decision')->find([
+        $reportDecision = $this->emReport->getRepository(ReportDecisionModel::class)->find([
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),
             'point' => $decision->getPoint(),
@@ -307,27 +311,24 @@ class Meeting
         $this->emReport->remove($reportDecision);
     }
 
-    public function deleteSubDecision($subDecision)
+    public function deleteSubDecision(ReportSubDecisionModel $subDecision)
     {
         switch (true) {
-            case $subDecision instanceof \Report\Model\SubDecision\Destroy:
-                throw new \Exception('Deletion of destroy decisions not implemented');
+            case $subDecision instanceof ReportSubDecisionModel\Destroy:
+                throw new Exception('Deletion of destroy decisions not implemented');
                 break;
-            case $subDecision instanceof \Report\Model\SubDecision\Discharge:
+            case $subDecision instanceof ReportSubDecisionModel\Discharge:
                 $installation = $subDecision->getInstallation();
                 $installation->clearDischarge();
                 $organMember = $subDecision->getInstallation()->getOrganMember();
-
-                if ($organMember !== null) {
-                    $organMember->setDischargeDate(null);
-                }
+                $organMember?->setDischargeDate(null);
 
                 break;
-            case $subDecision instanceof \Report\Model\SubDecision\Foundation:
+            case $subDecision instanceof ReportSubDecisionModel\Foundation:
                 $organ = $subDecision->getOrgan();
                 $this->emReport->remove($organ);
                 break;
-            case $subDecision instanceof \Report\Model\SubDecision\Installation:
+            case $subDecision instanceof ReportSubDecisionModel\Installation:
                 $organMember = $subDecision->getOrganMember();
 
                 if ($organMember !== null) {
@@ -342,26 +343,21 @@ class Meeting
 
     /**
      * Obtain the correct member, given a database member.
-     *
-     * @param MemberModel $member
-     *
-     * @return \Report\Model\Member
      */
-    public function findMember(MemberModel $member)
+    public function findMember(DatabaseMemberModel $member): ReportMemberModel
     {
-        $repo = $this->emReport->getRepository('Report\Model\Member');
+        $repo = $this->emReport->getRepository(ReportMemberModel::class);
 
         return $repo->find($member->getLidnr());
     }
 
     /**
      * Send an email about that something went wrong.
-     *
-     * @param Exception $e
-     * @param Decision $decision
      */
-    public function sendDecisionExceptionMail(\Exception $e, Decision $decision)
-    {
+    public function sendDecisionExceptionMail(
+        Exception $e,
+        DatabaseDecisionModel $decision,
+    ) {
         $config = $this->config['email'];
 
         $meeting = $decision->getMeeting();
