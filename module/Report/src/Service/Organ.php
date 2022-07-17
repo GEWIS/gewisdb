@@ -196,7 +196,7 @@ class Organ
 
     public function generateDischarge(ReportDischargeModel $ref)
     {
-        $rp = new ReflectionProperty(ReportInstallationModel::class, 'organ');
+        $rp = new ReflectionProperty(ReportInstallationModel::class, 'organMember');
         if ($rp->isInitialized($ref->getInstallation())) {
             $organMember = $ref->getInstallation()->getOrganMember();
         } else {
