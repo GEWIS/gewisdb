@@ -52,6 +52,16 @@ class Module
                 return $response;
             }
         }, -100);
+
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
+            if (!$authService->hasIdentity()) {
+                $response = $e->getResponse();
+                $response->getHeaders()->addHeaderLine('Location', '/user');
+                $response->setStatusCode(302);
+
+                return $response;
+            }
+        });
     }
 
     /**
