@@ -9,8 +9,7 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
 
 class Organ
 {
-    /** @var OrganMapper $organMapper */
-    private $organMapper;
+    private OrganMapper $organMapper;
 
     public function __construct(OrganMapper $organMapper)
     {
@@ -51,15 +50,10 @@ class Organ
         return $this->organMapper->getOrgansCreatedAtMeeting($meeting);
     }
 
-    /**
-     * @param FoundationModel $foundation
-     *
-     * @return string
-     */
     public function getHash(FoundationModel $foundation): string
     {
         return sprintf(
-            '%s%d%d%d%d',
+            '%s-%d.%d.%d.%d',
             $foundation->getMeetingType()->value,
             $foundation->getMeetingNumber(),
             $foundation->getDecisionPoint(),

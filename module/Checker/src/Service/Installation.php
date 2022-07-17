@@ -8,12 +8,8 @@ use Database\Model\SubDecision\Installation as InstallationModel;
 
 class Installation
 {
-    /** @var InstallationMapper $installationMapper */
-    private $installationMapper;
+    private InstallationMapper $installationMapper;
 
-    /**
-     * @param InstallationMapper $installationMapper
-     */
     public function __construct(InstallationMapper $installationMapper)
     {
         $this->installationMapper = $installationMapper;
@@ -108,15 +104,11 @@ class Installation
 
     /**
      * Returns a unique hash for a subdecision (Needed for matching subdecisions)
-     *
-     * @param InstallationModel $installation Decision to hash for
-     *
-     * @return string Unique hash for $d
      */
     private function getHash(InstallationModel $installation): string
     {
         return sprintf(
-            '%s%d%d%d%d',
+            '%s-%d.%d.%d.%d',
             $installation->getMeetingType()->value,
             $installation->getMeetingNumber(),
             $installation->getDecisionPoint(),
