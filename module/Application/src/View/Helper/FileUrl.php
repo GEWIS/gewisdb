@@ -6,12 +6,8 @@ use Laminas\View\Helper\AbstractHelper;
 
 class FileUrl extends AbstractHelper
 {
-    /** @var array $config */
-    protected $config;
+    protected array $config;
 
-    /**
-     * @param array $config
-     */
     public function __construct(array $config)
     {
         $this->config = $config;
@@ -19,10 +15,6 @@ class FileUrl extends AbstractHelper
 
     /**
      * Get the file URL.
-     *
-     * @param string $path
-     *
-     * @return string
      */
     public function __invoke(string $path): string
     {
