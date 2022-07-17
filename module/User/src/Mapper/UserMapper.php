@@ -2,74 +2,48 @@
 
 namespace User\Mapper;
 
-use User\Model\User;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\{
+    EntityRepository,
+    EntityManager,
+};
+use User\Model\User as UserModel;
 
 class UserMapper
 {
-    /**
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-
-    /**
-     * @param EntityManager
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
 
     /**
-     * @return User[]
+     * @return array<array-key, UserModel>
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
 
-    /**
-     * @param string $login
-     * @return User
-     */
-    public function findByLogin($login)
-    {
-        return $this->getRepository()->findBy(['login' => $login]);
-    }
-
-    /**
-     * @param int $id
-     * @return User
-     */
-    public function find($id)
+    public function find(int $id): ?UserModel
     {
         return $this->getRepository()->find($id);
     }
 
-    /**
-     * @param User $user
-     */
-    public function persist(User $user)
+    public function persist(UserModel $user): void
     {
         $this->em->persist($user);
         $this->em->flush();
     }
 
-    /**
-     * @param User $user
-     */
-    public function remove(User $user)
+    public function remove(UserModel $user): void
     {
         $this->em->remove($user);
         $this->em->flush();
     }
 
-    /**
-     * @return \Doctrine\ORM\EntityRepository
-     */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository(User::class);
+        return $this->em->getRepository(UserModel::class);
     }
 }

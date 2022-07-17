@@ -2,10 +2,17 @@
 
 namespace User\Form;
 
+use Laminas\Form\Element\{
+    Password,
+    Submit,
+    Text,
+};
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\Regex;
-use Laminas\Validator\StringLength;
+use Laminas\Validator\{
+    Regex,
+    StringLength,
+};
 
 class Login extends Form implements InputFilterProviderInterface
 {
@@ -15,7 +22,7 @@ class Login extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'login',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Login',
             ],
@@ -23,7 +30,7 @@ class Login extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'password',
-            'type' => 'password',
+            'type' => Password::class,
             'options' => [
                 'label' => 'Password',
             ],
@@ -31,7 +38,7 @@ class Login extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Login',
             ],

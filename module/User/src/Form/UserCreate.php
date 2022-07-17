@@ -2,11 +2,18 @@
 
 namespace User\Form;
 
+use Laminas\Form\Element\{
+    Password,
+    Submit,
+    Text,
+};
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\Identical;
-use Laminas\Validator\Regex;
-use Laminas\Validator\StringLength;
+use Laminas\Validator\{
+    Identical,
+    Regex,
+    StringLength,
+};
 
 class UserCreate extends Form implements InputFilterProviderInterface
 {
@@ -16,7 +23,7 @@ class UserCreate extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'login',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Login',
             ],
@@ -24,7 +31,7 @@ class UserCreate extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'password',
-            'type' => 'password',
+            'type' => Password::class,
             'options' => [
                 'label' => 'Wachtwoord',
             ],
@@ -32,7 +39,7 @@ class UserCreate extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'password_verify',
-            'type' => 'password',
+            'type' => Password::class,
             'options' => [
                 'label' => 'Controleer wachtwoord',
             ],
@@ -40,7 +47,7 @@ class UserCreate extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Maak gebruiker aan',
             ],
