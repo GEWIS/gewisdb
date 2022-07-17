@@ -8,6 +8,16 @@
       <sourceFolder url="file://$MODULE_DIR$/module/Database/src" isTestSource="false" packagePrefix="Database\" />
       <sourceFolder url="file://$MODULE_DIR$/module/Report/src" isTestSource="false" packagePrefix="Report\" />
       <sourceFolder url="file://$MODULE_DIR$/module/User/src" isTestSource="false" packagePrefix="User\" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Activity/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Application/test" isTestSource="true" packagePrefix="ApplicationTest\" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Company/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Decision/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Education/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Frontpage/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Photo/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/module/User/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/data/cache" />
     </content>

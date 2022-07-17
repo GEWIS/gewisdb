@@ -10,6 +10,8 @@ parameters:
     reportUnmatchedIgnoredErrors: false
     bootstrapFiles:
         - bootstrap.php
+    laminasframework:
+       serviceManagerLoader: phpstan/phpstan-sm.php
     doctrine:
         objectManagerLoader: phpstan/phpstan-om.php
     paths:
@@ -22,6 +24,7 @@ parameters:
         - module/Import/src
         - module/Report/src
         - module/User/src
+        - module/Application/test
         - module/Checker/test
         - public/index.php
     tmpDir: data/cache/phpstan
