@@ -2,6 +2,10 @@
 
 namespace Database\Form;
 
+use Laminas\Form\Element\{
+    Submit,
+    Text,
+};
 use Laminas\InputFilter\InputFilterProviderInterface;
 
 class QuerySave extends Query implements InputFilterProviderInterface
@@ -12,7 +16,7 @@ class QuerySave extends Query implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Naam',
             ],
@@ -20,7 +24,7 @@ class QuerySave extends Query implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit_save',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'label' => 'Opslaan',
                 'value' => 'Opslaan',

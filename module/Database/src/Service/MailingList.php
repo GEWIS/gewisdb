@@ -5,24 +5,16 @@ namespace Database\Service;
 use Database\Form\DeleteList as DeleteListForm;
 use Database\Form\MailingList as MailingListForm;
 use Database\Mapper\MailingList as MailingListMapper;
-use Database\Model\MailingList as ListModel;
+use Database\Model\MailingList as MailingListModel;
 
 class MailingList
 {
-    /** @var DeleteListForm $deleteListForm */
-    private $deleteListForm;
+    private DeleteListForm $deleteListForm;
 
-    /** @var MailingListForm $mailingListForm */
-    private $mailingListForm;
+    private MailingListForm $mailingListForm;
 
-    /** @var MailingListMapper $mailingListMapper */
-    private $mailingListMapper;
+    private MailingListMapper $mailingListMapper;
 
-    /**
-     * @param DeleteListForm $deleteListForm
-     * @param MailingListForm $mailingListForm
-     * @param MailingListMapper $mailingListMapper
-     */
     public function __construct(
         DeleteListForm $deleteListForm,
         MailingListForm $mailingListForm,
@@ -38,41 +30,34 @@ class MailingList
      *
      * @return array of ListModel's
      */
-    public function getAllLists()
+    public function getAllLists(): array
     {
         return $this->getListMapper()->findAll();
     }
 
     /**
      * Get a list.
-     *
-     * @param string $name
-     *
-     * @return ListModel
      */
-    public function getList($name)
+    public function getList(string $name): ?MailingListModel
     {
         return $this->getListMapper()->find($name);
     }
 
     /**
      * Add a list.
-     *
-     * @param $data POST data.
-     *
-     * @return boolean if succeeded
      */
-    public function addList($data)
+    public function addList(array $data): bool
     {
         $form = $this->getListForm();
 
+        $form->bind(new MailingListModel());
         $form->setData($data);
-        $form->bind(new ListModel());
 
         if (!$form->isValid()) {
             return false;
         }
 
+        /** @var MailingListModel $list */
         $list = $form->getData();
         $this->getListMapper()->persist($list);
 
@@ -81,14 +66,11 @@ class MailingList
 
     /**
      * Delete a list.
-     *
-     * @param string $name Name of the list to delete
-     * @param array $data Form data
-     *
-     * @return boolean If deleted
      */
-    public function delete($name, $data)
-    {
+    public function delete(
+        string $name,
+        array $data,
+    ): bool {
         $form = $this->getDeleteListForm();
 
         $form->setData($data);
@@ -105,8 +87,6 @@ class MailingList
 
     /**
      * Get the delete list form.
-     *
-     * @return DeleteListForm
      */
     public function getDeleteListForm(): DeleteListForm
     {
@@ -115,8 +95,6 @@ class MailingList
 
     /**
      * Get the list form.
-     *
-     * @return MailingListForm
      */
     public function getListForm(): MailingListForm
     {
@@ -125,8 +103,6 @@ class MailingList
 
     /**
      * Get the list mapper.
-     *
-     * @return MailingListMapper
      */
     public function getListMapper(): MailingListMapper
     {

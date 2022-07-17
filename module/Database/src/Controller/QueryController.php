@@ -9,12 +9,8 @@ use Laminas\View\Model\ViewModel;
 
 class QueryController extends AbstractActionController
 {
-    /** @var QueryService $queryService */
     private QueryService $queryService;
 
-    /**
-     * @param QueryService $queryService
-     */
     public function __construct(QueryService $queryService)
     {
         $this->queryService = $queryService;
@@ -80,7 +76,10 @@ class QueryController extends AbstractActionController
     public function exportAction(): Response|ViewModel
     {
         if ($this->getRequest()->isPost()) {
-            $result = $this->queryService->execute($this->getRequest()->getPost()->toArray(), true);
+            $result = $this->queryService->execute(
+                $this->getRequest()->getPost()->toArray(),
+                true,
+            );
 
             if (null !== $result) {
                 $vm = new ViewModel([

@@ -2,92 +2,69 @@
 
 namespace Database\Service;
 
-use Database\Form\Abolish as AbolishForm;
-use Database\Form\Board\Discharge as BoardDischargeForm;
-use Database\Form\Board\Install as BoardInstallForm;
-use Database\Form\Board\Release as BoardReleaseForm;
-use Database\Form\Budget as BudgetForm;
-use Database\Form\CreateMeeting as CreateMeetingForm;
-use Database\Form\DeleteDecision as DeleteDecisionForm;
-use Database\Form\Destroy as DestroyForm;
-use Database\Form\Export as ExportForm;
-use Database\Form\Foundation as FoundationForm;
-use Database\Form\Install as InstallForm;
-use Database\Form\Other as OtherForm;
+use Application\Model\Enums\MeetingTypes;
+use Database\Form\{
+    Abolish as AbolishForm,
+    Budget as BudgetForm,
+    CreateMeeting as CreateMeetingForm,
+    DeleteDecision as DeleteDecisionForm,
+    Destroy as DestroyForm,
+    Export as ExportForm,
+    Foundation as FoundationForm,
+    Install as InstallForm,
+    Other as OtherForm,
+};
+use Database\Form\Board\{
+    Discharge as BoardDischargeForm,
+    Install as BoardInstallForm,
+    Release as BoardReleaseForm,
+};
 use Database\Hydrator\Foundation as FoundationHydrator;
-use Database\Mapper\Meeting as MeetingMapper;
-use Database\Mapper\Member as MemberMapper;
-use Database\Mapper\Organ as OrganMapper;
-use Database\Model\Meeting as MeetingModel;
-use Database\Model\Decision;
+use Database\Mapper\{
+    Meeting as MeetingMapper,
+    Member as MemberMapper,
+    Organ as OrganMapper,
+};
+use Database\Model\{
+    Meeting as MeetingModel,
+    Decision as DecisionModel,
+};
 use Database\Model\SubDecision\Foundation as FoundationModel;
-use Laminas\Form\FormInterface;
-use ReflectionObject;
 use Laminas\Stdlib\PriorityQueue;
+use ReflectionObject;
 
 class Meeting
 {
-    /** @var AbolishForm $abolishForm */
-    private $abolishForm;
+    private AbolishForm $abolishForm;
 
-    /** @var BoardDischargeForm $boardDischargeForm */
-    private $boardDischargeForm;
+    private BoardDischargeForm $boardDischargeForm;
 
-    /** @var BoardInstallForm $boardInstallForm */
-    private $boardInstallForm;
+    private BoardInstallForm $boardInstallForm;
 
-    /** @var BoardReleaseForm $boardReleaseForm */
-    private $boardReleaseForm;
+    private BoardReleaseForm $boardReleaseForm;
 
-    /** @var BudgetForm $budgetForm */
-    private $budgetForm;
+    private BudgetForm $budgetForm;
 
-    /** @var CreateMeetingForm $createMeetingForm */
-    private $createMeetingForm;
+    private CreateMeetingForm $createMeetingForm;
 
-    /** @var DeleteDecisionForm $deleteDecisionForm */
-    private $deleteDecisionForm;
+    private DeleteDecisionForm $deleteDecisionForm;
 
-    /** @var DestroyForm $destroyForm */
-    private $destroyForm;
+    private DestroyForm $destroyForm;
 
-    /** @var ExportForm $exportForm */
-    private $exportForm;
+    private ExportForm $exportForm;
 
-    /** @var FoundationForm $foundationForm */
-    private $foundationForm;
+    private FoundationForm $foundationForm;
 
-    /** @var InstallForm $installForm */
-    private $installForm;
+    private InstallForm $installForm;
 
-    /** @var OtherForm $otherForm */
-    private $otherForm;
+    private OtherForm $otherForm;
 
-    /** @var MeetingMapper $meetingMapper */
-    private $meetingMapper;
+    private MeetingMapper $meetingMapper;
 
     private MemberMapper $memberMapper;
 
-    /** @var OrganMapper $organMapper */
-    private $organMapper;
+    private OrganMapper $organMapper;
 
-    /**
-     * @param AbolishForm $abolishForm
-     * @param BoardDischargeForm $boardDischargeForm
-     * @param BoardInstallForm $boardInstallForm
-     * @param BoardReleaseForm $boardReleaseForm
-     * @param BudgetForm $budgetForm
-     * @param CreateMeetingForm $createMeetingForm
-     * @param DeleteDecisionForm $deleteDecisionForm
-     * @param DestroyForm $destroyForm
-     * @param ExportForm $exportForm
-     * @param FoundationForm $foundationForm
-     * @param InstallForm $installForm
-     * @param OtherForm $otherForm
-     * @param MeetingMapper $meetingMapper
-     * @param MemberMapper $memberMapper
-     * @param OrganMapper $organMapper
-     */
     public function __construct(
         AbolishForm $abolishForm,
         BoardDischargeForm $boardDischargeForm,
@@ -124,14 +101,11 @@ class Meeting
 
     /**
      * Get a meeting.
-     *
-     * @param string $type
-     * @param int $number
-     *
-     * @return MeetingModel
      */
-    public function getMeeting($type, $number)
-    {
+    public function getMeeting(
+        MeetingTypes $type,
+        int $number,
+    ): ?MeetingModel {
         return $this->getMeetingMapper()->find($type, $number);
     }
 
@@ -139,40 +113,29 @@ class Meeting
      * Get all meetings.
      *
      * @todo pagination
-     *
-     * @return array All meetings.
      */
-    public function getAllMeetings()
+    public function getAllMeetings(): array
     {
         return $this->getMeetingMapper()->findAll();
     }
 
     /**
      * Find decisions by meetings.
-     *
-     * @param array $meetings
-     *
-     * @return array Of decisions.
      */
-    public function getDecisionsByMeetings($meetings)
+    public function getDecisionsByMeetings(array $meetings): array
     {
-        $mapper = $this->getMeetingMapper();
-
-        return $mapper->findDecisionsByMeetings($meetings);
+        return $this->getMeetingMapper()->findDecisionsByMeetings($meetings);
     }
 
     /**
      * Check if the decision exists.
-     *
-     * @param string $type
-     * @param int $number
-     * @param int $point
-     * @param int $decision
-     *
-     * @return boolean
      */
-    public function decisionExists($type, $number, $point, $decision)
-    {
+    public function decisionExists(
+        MeetingTypes $type,
+        int $number,
+        int $point,
+        int $decision,
+    ): bool {
         $mapper = $this->getMeetingMapper();
 
         return null !== $mapper->findDecision($type, $number, $point, $decision);
@@ -180,22 +143,16 @@ class Meeting
 
     /**
      * Get the current board installations.
-     *
-     * @return array
      */
-    public function getCurrentBoard()
+    public function getCurrentBoard(): array
     {
         return $this->getMeetingMapper()->findCurrentBoard();
     }
 
     /**
      * Export decisions.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function export($data)
+    public function export(array $data): ?array
     {
         $form = $this->getExportForm();
 
@@ -222,17 +179,13 @@ class Meeting
 
     /**
      * Destroy decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function destroyDecision($data)
+    public function destroyDecision(array $data): array
     {
         $form = $this->getDestroyForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -241,6 +194,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
@@ -254,17 +208,14 @@ class Meeting
 
     /**
      * Delete a decision.
-     *
-     * @param array $data
-     * @param string $type
-     * @param int $number
-     * @param int $point
-     * @param int $decision
-     *
-     * @return boolean
      */
-    public function deleteDecision($data, $type, $number, $point, $decision)
-    {
+    public function deleteDecision(
+        array $data,
+        MeetingTypes $type,
+        int $number,
+        int $point,
+        int $decision,
+    ): bool {
         $form = $this->getDeleteDecisionForm();
 
         $form->setData($data);
@@ -282,17 +233,13 @@ class Meeting
 
     /**
      * Other decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function otherDecision($data)
+    public function otherDecision(array $data): array
     {
         $form = $this->getOtherForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -301,6 +248,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
@@ -314,17 +262,13 @@ class Meeting
 
     /**
      * Abolish decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function abolishDecision($data)
+    public function abolishDecision(array $data): array
     {
         $form = $this->getAbolishForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -333,6 +277,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
@@ -346,17 +291,13 @@ class Meeting
 
     /**
      * Board install decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function boardInstallDecision($data)
+    public function boardInstallDecision(array $data): array
     {
         $form = $this->getBoardInstallForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -365,6 +306,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
@@ -378,17 +320,13 @@ class Meeting
 
     /**
      * Board discharge decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function boardDischargeDecision($data)
+    public function boardDischargeDecision(array $data): array
     {
         $form = $this->getBoardDischargeForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -398,6 +336,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
@@ -411,17 +350,13 @@ class Meeting
 
     /**
      * Board release decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function boardReleaseDecision($data)
+    public function boardReleaseDecision(array $data): array
     {
         $form = $this->getBoardReleaseForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -431,6 +366,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
@@ -444,17 +380,13 @@ class Meeting
 
     /**
      * Install decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function installDecision($data)
+    public function installDecision(array $data): array
     {
         $form = $this->getInstallForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -463,6 +395,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         // simply persist through the meeting mapper
@@ -476,12 +409,8 @@ class Meeting
 
     /**
      * Foundation decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function foundationDecision($data)
+    public function foundationDecision(array $data): array
     {
         $form = $this->getFoundationForm();
 
@@ -503,7 +432,10 @@ class Meeting
         // See important note above, this does not return an object. Because we are not doing this the normal way we
         // must ensure that the meeting actually exists.
         $decision = $form->getData();
-        $meeting = $this->getMeeting(...$decision['meeting']);
+        $meeting = $this->getMeeting(
+            MeetingTypes::from($decision['meeting']['type']),
+            (int) $decision['meeting']['number'],
+        );
 
         if (null === $meeting) {
             return [
@@ -527,7 +459,7 @@ class Meeting
         });
 
         $decision['members'] = $members;
-        $decision = (new FoundationHydrator())->hydrate($decision, new Decision());
+        $decision = (new FoundationHydrator())->hydrate($decision, new DecisionModel());
 
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
@@ -540,12 +472,8 @@ class Meeting
 
     /**
      * Budget decision.
-     *
-     * @param array $data
-     *
-     * @return array
      */
-    public function budgetDecision($data)
+    public function budgetDecision(array $data): array
     {
         $form = $this->getBudgetForm();
 
@@ -562,7 +490,7 @@ class Meeting
 
         $form->setData($data);
 
-        $form->bind(new Decision());
+        $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
@@ -571,6 +499,7 @@ class Meeting
             ];
         }
 
+        /** @var DecisionModel $decision */
         $decision = $form->getData();
 
         foreach ($decision->getSubdecisions() as $sub) {
@@ -594,12 +523,8 @@ class Meeting
 
     /**
      * Create a meeting.
-     *
-     * @param array $data Meeting creation data.
-     *
-     * @return MeetingModel or null if creation was succesfull
      */
-    public function createMeeting($data)
+    public function createMeeting(array $data): ?MeetingModel
     {
         $form = $this->getCreateMeetingForm();
         $form->bind(new MeetingModel());
@@ -609,6 +534,7 @@ class Meeting
             return null;
         }
 
+        /** @var MeetingModel $meeting */
         $meeting = $form->getData();
         $mapper = $this->getMeetingMapper();
 
@@ -629,39 +555,30 @@ class Meeting
 
     /**
      * Search for organs by name.
-     *
-     * @param string $query
-     *
-     * @return array organ (decisions)
      */
-    public function organSearch($query)
+    public function organSearch(string $query): array
     {
         return $this->getOrganMapper()->organSearch($query);
     }
 
     /**
      * Search for decisions by name.
-     * @param string $query
-     * @return array Decisions
      */
-    public function decisionSearch($query)
+    public function decisionSearch(string $query): array
     {
         return $this->getMeetingMapper()->searchDecision($query);
     }
 
     /**
      * Get the foundation of an organ.
-     *
-     * @param string $type
-     * @param string $meetingNumber
-     * @param string $decisionPoint
-     * @param string $decisionNumber
-     * @param string $subdecisionNumber
-     *
-     * @return FoundationModel
      */
-    public function findFoundation($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
-    {
+    public function findFoundation(
+        MeetingTypes $type,
+        int $meetingNumber,
+        int $decisionPoint,
+        int $decisionNumber,
+        int $subdecisionNumber,
+    ): ?FoundationModel {
         return $this->getOrganMapper()->find(
             $type,
             $meetingNumber,
@@ -673,8 +590,6 @@ class Meeting
 
     /**
      * Get the create meeting form.
-     *
-     * @return CreateMeetingForm
      */
     public function getCreateMeetingForm(): CreateMeetingForm
     {
@@ -683,8 +598,6 @@ class Meeting
 
     /**
      * Get the delete decision form.
-     *
-     * @return DeleteDecisionForm
      */
     public function getDeleteDecisionForm(): DeleteDecisionForm
     {
@@ -693,8 +606,6 @@ class Meeting
 
     /**
      * Get the board install form.
-     *
-     * @return BoardInstallForm
      */
     public function getBoardInstallForm(): BoardInstallForm
     {
@@ -703,8 +614,6 @@ class Meeting
 
     /**
      * Get the board release form.
-     *
-     * @return BoardReleaseForm
      */
     public function getBoardReleaseForm(): BoardReleaseForm
     {
@@ -713,8 +622,6 @@ class Meeting
 
     /**
      * Get the board release form.
-     *
-     * @return BoardDischargeForm
      */
     public function getBoardDischargeForm(): BoardDischargeForm
     {
@@ -723,8 +630,6 @@ class Meeting
 
     /**
      * Get install form.
-     *
-     * @return InstallForm
      */
     public function getInstallForm(): InstallForm
     {
@@ -733,8 +638,6 @@ class Meeting
 
     /**
      * Get abolish form.
-     *
-     * @return AbolishForm
      */
     public function getAbolishForm(): AbolishForm
     {
@@ -743,8 +646,6 @@ class Meeting
 
     /**
      * Get the destroy form.
-     *
-     * @return DestroyForm
      */
     public function getDestroyForm(): DestroyForm
     {
@@ -753,8 +654,6 @@ class Meeting
 
     /**
      * Get foundation form.
-     *
-     * @return FoundationForm
      */
     public function getFoundationForm(): FoundationForm
     {
@@ -763,8 +662,6 @@ class Meeting
 
     /**
      * Get budget form.
-     *
-     * @return BudgetForm
      */
     public function getBudgetForm(): BudgetForm
     {
@@ -773,8 +670,6 @@ class Meeting
 
     /**
      * Get other form.
-     *
-     * @return OtherForm
      */
     public function getOtherForm(): OtherForm
     {
@@ -783,8 +678,6 @@ class Meeting
 
     /**
      * Get the export form.
-     *
-     * @return ExportForm
      */
     public function getExportForm(): ExportForm
     {
@@ -793,8 +686,6 @@ class Meeting
 
     /**
      * Get the meeting mapper.
-     *
-     * @return MeetingMapper
      */
     public function getMeetingMapper(): MeetingMapper
     {
@@ -803,8 +694,6 @@ class Meeting
 
     /**
      * Get the organ mapper.
-     *
-     * @return OrganMapper
      */
     public function getOrganMapper(): OrganMapper
     {

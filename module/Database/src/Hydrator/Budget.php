@@ -2,10 +2,12 @@
 
 namespace Database\Hydrator;
 
-use Database\Model\Decision;
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Budget as BudgetDecision;
-use Database\Model\SubDecision\Reckoning as ReckoningDecision;
+use Database\Model\SubDecision\{
+    Budget as BudgetModel,
+    Reckoning as ReckoningModel,
+};
+use DateTime;
 
 class Budget extends AbstractDecision
 {
@@ -24,14 +26,14 @@ class Budget extends AbstractDecision
         $object = parent::hydrate($data, $object);
 
         if ($data['type'] == 'budget') {
-            $subdecision = new BudgetDecision();
+            $subdecision = new BudgetModel();
         } else {
-            $subdecision = new ReckoningDecision();
+            $subdecision = new ReckoningModel();
         }
 
         $subdecision->setNumber(1);
 
-        $date = new \DateTime($data['date']);
+        $date = new DateTime($data['date']);
         $subdecision->setDate($date);
 
         $subdecision->setName($data['name']);

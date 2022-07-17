@@ -3,9 +3,11 @@
 namespace Database\Form;
 
 use Application\Model\Enums\MembershipTypes;
-use Database\Model\Member;
+use Laminas\Form\Element\{
+    Radio,
+    Submit,
+};
 use Laminas\Form\Form;
-use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
 class MemberType extends Form implements InputFilterProviderInterface
@@ -16,7 +18,7 @@ class MemberType extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'type',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Lidmaatschapstype',
                 'value_options' => [
@@ -30,7 +32,7 @@ class MemberType extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Wijzig type',
             ],

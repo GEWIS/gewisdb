@@ -2,19 +2,19 @@
 
 namespace Database\Controller;
 
+use Application\Model\Enums\MeetingTypes;
+use Database\Model\SubDecision\Installation as InstallationModel;
 use Database\Service\Meeting as MeetingService;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\View\Model\ViewModel;
-use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\{
+    ViewModel,
+    JsonModel,
+};
 
 class OrganController extends AbstractActionController
 {
-    /** @var MeetingService $meetingService */
-    private $meetingService;
+    private MeetingService $meetingService;
 
-    /**
-     * @param MeetingService $meetingService
-     */
     public function __construct(MeetingService $meetingService)
     {
         $this->meetingService = $meetingService;
@@ -23,7 +23,7 @@ class OrganController extends AbstractActionController
     /**
      * Index action, for organ search.
      */
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         return new ViewModel([]);
     }
@@ -31,15 +31,15 @@ class OrganController extends AbstractActionController
     /**
      * View an organ.
      */
-    public function viewAction()
+    public function viewAction(): ViewModel
     {
         return new ViewModel([
             'foundation' => $this->meetingService->findFoundation(
-                $this->params()->fromRoute('type'),
-                $this->params()->fromRoute('number'),
-                $this->params()->fromRoute('point'),
-                $this->params()->fromRoute('decision'),
-                $this->params()->fromRoute('subdecision'),
+                MeetingTypes::from($this->params()->fromRoute('type')),
+                (int) $this->params()->fromRoute('number'),
+                (int) $this->params()->fromRoute('point'),
+                (int) $this->params()->fromRoute('decision'),
+                (int) $this->params()->fromRoute('subdecision'),
             ),
         ]);
     }
@@ -47,20 +47,21 @@ class OrganController extends AbstractActionController
     /**
      * Get organ info.
      */
-    public function infoAction()
+    public function infoAction(): JsonModel
     {
         $foundation = $this->meetingService->findFoundation(
-            $this->params()->fromRoute('type'),
-            $this->params()->fromRoute('number'),
-            $this->params()->fromRoute('point'),
-            $this->params()->fromRoute('decision'),
-            $this->params()->fromRoute('subdecision'),
+            MeetingTypes::from($this->params()->fromRoute('type')),
+            (int) $this->params()->fromRoute('number'),
+            (int) $this->params()->fromRoute('point'),
+            (int) $this->params()->fromRoute('decision'),
+            (int) $this->params()->fromRoute('subdecision'),
         );
+
         $data = $foundation->toArray();
         $data['members'] = [];
 
         foreach ($foundation->getReferences() as $reference) {
-            if ($reference instanceof \Database\Model\SubDecision\Installation) {
+            if ($reference instanceof InstallationModel) {
                 $data['members'][] = [
                     'meeting_type' => $reference->getDecision()->getMeeting()->getType(),
                     'meeting_number' => $reference->getDecision()->getMeeting()->getNumber(),
@@ -83,7 +84,7 @@ class OrganController extends AbstractActionController
      *
      * Uses JSON to search for members.
      */
-    public function searchAction()
+    public function searchAction(): JsonModel
     {
         $query = $this->params()->fromQuery('q');
         $res = $this->meetingService->organSearch($query);

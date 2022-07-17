@@ -17,28 +17,16 @@ use Doctrine\ORM\{
 
 class Query
 {
-    /** @var QueryForm $queryForm */
     private QueryForm $queryForm;
 
-    /** @var QueryExportForm $queryExportForm */
     private QueryExportForm $queryExportForm;
 
-    /** @var QuerySaveForm $querySaveForm */
     private QuerySaveForm $querySaveForm;
 
-    /** @var SavedQueryMapper $savedQueryMapper */
     private SavedQueryMapper $savedQueryMapper;
 
-    /** @var EntityManager */
     private EntityManager $emReport;
 
-    /**
-     * @param QueryForm $queryForm
-     * @param QueryExportForm $queryExportForm
-     * @param QuerySaveForm $querySaveForm
-     * @param SavedQueryMapper $savedQueryMapper
-     * @param EntityManager $emReport
-     */
     public function __construct(
         QueryForm $queryForm,
         QueryExportForm $queryExportForm,
@@ -55,8 +43,6 @@ class Query
 
     /**
      * Get all saved queries.
-     *
-     * @return array of SavedQuery's
      */
     public function getSavedQueries(): array
     {
@@ -65,10 +51,6 @@ class Query
 
     /**
      * Save a query.
-     *
-     * @param array $data
-     *
-     * @return SavedQueryModel|null
      */
     public function save(array $data): ?SavedQueryModel
     {
@@ -90,10 +72,6 @@ class Query
 
     /**
      * Execute a saved query.
-     *
-     * @param int $id
-     *
-     * @return array|null
      */
     public function executeSaved(int $id): ?array
     {
@@ -110,11 +88,6 @@ class Query
 
     /**
      * Execute a query.
-     *
-     * @param array $data
-     * @param bool $export
-     *
-     * @return array|null
      */
     public function execute(
         array $data,
@@ -173,8 +146,6 @@ class Query
 
     /**
      * Get the saved query mapper.
-     *
-     * @return SavedQueryMapper
      */
     public function getSavedQueryMapper(): SavedQueryMapper
     {
@@ -183,8 +154,6 @@ class Query
 
     /**
      * Get all entities that are present in the database
-     *
-     * @return array Array of all entities
      */
     public function getEntities(): array
     {
@@ -200,8 +169,6 @@ class Query
 
     /**
      * Get the query form.
-     *
-     * @return QueryForm
      */
     public function getQueryForm(): QueryForm
     {
@@ -210,8 +177,6 @@ class Query
 
     /**
      * Get the query form.
-     *
-     * @return QuerySaveForm
      */
     public function getQuerySaveForm(): QuerySaveForm
     {
@@ -220,8 +185,6 @@ class Query
 
     /**
      * Get the query form.
-     *
-     * @return QueryExportForm
      */
     public function getQueryExportForm(): QueryExportForm
     {

@@ -3,29 +3,34 @@
 namespace Database\Form\Fieldset;
 
 use Application\Model\Enums\AddressTypes;
-use Database\Model\Address as AddressModel;
 use Laminas\Filter\StringToLower;
+use Laminas\Form\Element\{
+    Hidden,
+    Text,
+};
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\I18n\Translator\TranslatorInterface as Translator;
-use Laminas\Validator\InArray;
-use Laminas\Validator\Regex;
-use Laminas\Validator\StringLength;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
+use Laminas\Validator\{
+    InArray,
+    Regex,
+    StringLength,
+};
 
 class Address extends Fieldset implements InputFilterProviderInterface
 {
-    public function __construct(Translator $translator)
+    public function __construct(MvcTranslator $translator)
     {
         parent::__construct('address');
 
         $this->add([
             'name' => 'type',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'country',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Land'),
             ],
@@ -34,7 +39,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'street',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Straat'),
             ],
@@ -42,7 +47,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'number',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Huisnummer'),
             ],
@@ -50,7 +55,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'postalCode',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Postcode'),
             ],
@@ -58,7 +63,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'city',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Stad'),
             ],
@@ -66,7 +71,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'phone',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Telefoonnummer'),
             ],

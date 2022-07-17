@@ -2,24 +2,25 @@
 
 namespace Database\Mapper;
 
-use Database\Model\Meeting as MeetingModel;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
+use Application\Model\Enums\MeetingTypes;
+use Database\Model\{
+    Decision as DecisionModel,
+    Meeting as MeetingModel,
+};
+use Database\Model\SubDecision\Board\{
+    Discharge as BoardDischargeModel,
+    Installation as BoardInstallationModel,
+};
+use Database\Model\SubDecision\Destroy as DestroyModel;
+use Doctrine\ORM\{
+    EntityManager,
+    EntityRepository,
+};
 
 class Meeting
 {
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -27,32 +28,24 @@ class Meeting
 
     /**
      * Check if a model is managed.
-     *
-     * @param MeetingModel $meeting
-     *
-     * @return boolean if managed
      */
-    public function isManaged(MeetingModel $meeting)
+    public function isManaged(MeetingModel $meeting): bool
     {
         return $this->em->getUnitOfWork()->isInIdentityMap($meeting);
     }
 
     /**
-     * Find all meetings.
-     *
-     * Also counts all decision per meeting.
-     *
-     * @param boolean $count
-     *
-     * @return array All meetings.
+     * Find all meetings. Also counts all decision per meeting.
      */
-    public function findAll($count = true, $asc = false)
-    {
+    public function findAll(
+        bool $count = true,
+        bool $asc = false,
+    ): array {
         if ($count) {
             $qb = $this->em->createQueryBuilder();
 
             $qb->select('m, COUNT(d)')
-                ->from('Database\Model\Meeting', 'm')
+                ->from(MeetingModel::class, 'm')
                 ->leftJoin('m.decisions', 'd')
                 ->groupBy('m');
             if ($asc) {
@@ -63,19 +56,18 @@ class Meeting
 
             return $qb->getQuery()->getResult();
         }
+
         return $this->getRepository()->findAll();
     }
 
     /**
      * Find the last meeting.
-     *
-     * @return MeetingModel|null
      */
-    public function findLast()
+    public function findLast(): ?MeetingModel
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('m')
-            ->from('Database\Model\Meeting', 'm')
+            ->from(MeetingModel::class, 'm')
             ->leftJoin('m.decisions', 'd')
             ->orderBy('m.date', 'DESC')
             ->setMaxResults(1);
@@ -85,17 +77,13 @@ class Meeting
 
     /**
      * Find decisions by given meetings.
-     *
-     * @param array $meetings
-     *
-     * @return array All decisions.
      */
-    public function findDecisionsByMeetings($meetings)
+    public function findDecisionsByMeetings(array $meetings): array
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('d, s')
-            ->from('Database\Model\Decision', 'd')
+            ->from(DecisionModel::class, 'd')
             ->join('d.meeting', 'm')
             ->leftJoin('d.subdecisions', 's')
             ->orderBy('m.type', 'ASC')
@@ -120,18 +108,15 @@ class Meeting
 
     /**
      * Find a meeting with all decisions.
-     *
-     * @param string $type
-     * @param int $number
-     *
-     * @return MeetingModel
      */
-    public function find($type, $number)
-    {
+    public function find(
+        MeetingTypes $type,
+        int $number,
+    ): ?MeetingModel {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m, d, s, db')
-            ->from('Database\Model\Meeting', 'm')
+            ->from(MeetingModel::class, 'm')
             ->where('m.type = :type')
             ->andWhere('m.number = :number')
             ->leftJoin('m.decisions', 'd')
@@ -150,20 +135,17 @@ class Meeting
 
     /**
      * Find a decision.
-     *
-     * @param string $type
-     * @param int $number
-     * @param int $point
-     * @param int $decision
-     *
-     * @return \Database\Model\Decision
      */
-    public function findDecision($type, $number, $point, $decision)
-    {
+    public function findDecision(
+        MeetingTypes $type,
+        int $number,
+        int $point,
+        int $decision,
+    ): ?DecisionModel {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('d, s')
-            ->from('Database\Model\Decision', 'd')
+            ->from(DecisionModel::class, 'd')
             ->where('d.meeting_type = :type')
             ->andWhere('d.meeting_number = :number')
             ->andWhere('d.point = :point')
@@ -176,21 +158,16 @@ class Meeting
         $qb->setParameter(':point', $point);
         $qb->setParameter(':decision', $decision);
 
-        $res = $qb->getQuery()->getResult();
-        return empty($res) ? null : $res[0];
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
      * Search for a decision.
-     *
-     * @param string $query
-     * @param bool $includeDestroyed If destroyed decisions should be returned
-     *        (default: false)
-     *
-     * @return array of decisions.
      */
-    public function searchDecision($query, $includeDestroyed = false)
-    {
+    public function searchDecision(
+        string $query,
+        bool $includeDestroyed = false,
+    ): array {
         $qb = $this->em->createQueryBuilder();
 
         $fields = [];
@@ -207,7 +184,7 @@ class Meeting
 
 
         $qb->select('d, s, m')
-            ->from('Database\Model\Decision', 'd')
+            ->from(DecisionModel::class, 'd')
             ->where("$fields LIKE :search")
             ->leftJoin('d.subdecisions', 's')
             ->innerJoin('d.meeting', 'm')
@@ -217,7 +194,7 @@ class Meeting
             // we want to leave out decisions that have been destroyed
             $qbn = $this->em->createQueryBuilder();
             $qbn->select('a')
-                ->from('Database\Model\SubDecision\Destroy', 'a')
+                ->from(DestroyModel::class, 'a')
                 ->join('a.target', 'x')
                 ->where('x.meeting_type = d.meeting_type')
                 ->andWhere('x.meeting_number = d.meeting_number')
@@ -237,21 +214,19 @@ class Meeting
 
     /**
      * Find current board members.
-     *
-     * @return array of board members
      */
-    public function findCurrentBoard()
+    public function findCurrentBoard(): array
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('i, m')
-            ->from('Database\Model\SubDecision\Board\Installation', 'i')
+            ->from(BoardInstallationModel::class, 'i')
             ->join('i.member', 'm');
 
         $qbn = $this->em->createQueryBuilder();
         // remove discharges
         $qbn->select('d')
-            ->from('Database\Model\SubDecision\Board\Discharge', 'd')
+            ->from(BoardDischargeModel::class, 'd')
             ->join('d.installation', 'x')
             ->where('x.meeting_type = i.meeting_type')
             ->andWhere('x.meeting_number = i.meeting_number')
@@ -269,14 +244,13 @@ class Meeting
 
     /**
      * Delete a decision.
-     *
-     * @param string $type
-     * @param int $number
-     * @param int $point
-     * @param int $decision
      */
-    public function deleteDecision($type, $number, $point, $decision)
-    {
+    public function deleteDecision(
+        MeetingTypes $type,
+        int $number,
+        int $point,
+        int $decision,
+    ): void {
         $decision = $this->findDecision($type, $number, $point, $decision);
 
         $this->em->remove($decision);
@@ -288,7 +262,7 @@ class Meeting
      *
      * @param MeetingModel $meeting Meeting to persist.
      */
-    public function persist($meeting)
+    public function persist(MeetingModel $meeting): void
     {
         $this->em->persist($meeting);
         $this->em->flush();
@@ -296,11 +270,9 @@ class Meeting
 
     /**
      * Get the repository for this mapper.
-     *
-     * @return Doctrine\ORM\EntityRepository
      */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository('Database\Model\Meeting');
+        return $this->em->getRepository(MeetingModel::class);
     }
 }

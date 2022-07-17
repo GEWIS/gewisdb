@@ -3,6 +3,7 @@
 namespace Database\Form\Fieldset;
 
 use Database\Service\InstallationFunction as FunctionService;
+use Laminas\Form\Element\Select;
 use Laminas\Form\Fieldset;
 
 class MemberFunction extends Fieldset
@@ -15,7 +16,7 @@ class MemberFunction extends Fieldset
 
         $this->add([
             'name' => 'function',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Functie',
                 'value_options' => $this->getValueOptions($service, $withmember),
@@ -23,8 +24,10 @@ class MemberFunction extends Fieldset
         ]);
     }
 
-    protected function getValueOptions(FunctionService $service, $withmember)
-    {
+    protected function getValueOptions(
+        FunctionService $service,
+        bool $withmember,
+    ): array {
         $array = [];
 
         if ($withmember) {
@@ -40,6 +43,7 @@ class MemberFunction extends Fieldset
 
     public function getInputFilterSpecification(): array
     {
+        // TODO: Check against the known value options (just populate a property while getting the options).
         return [];
     }
 }

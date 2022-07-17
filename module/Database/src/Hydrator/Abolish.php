@@ -3,9 +3,11 @@
 namespace Database\Hydrator;
 
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Installation;
-use Database\Model\SubDecision\Discharge;
-use Database\Model\SubDecision\Abrogation;
+use Database\Model\SubDecision\{
+    Installation as InstallationModel,
+    Discharge as DischargeModel,
+    Abrogation as AbrogationModel,
+};
 
 class Abolish extends AbstractDecision
 {
@@ -28,7 +30,7 @@ class Abolish extends AbstractDecision
 
         // check installations and discharges
         foreach ($data['subdecision']->getReferences() as $ref) {
-            if ($ref instanceof Installation && null === $ref->getDischarge()) {
+            if ($ref instanceof InstallationModel && null === $ref->getDischarge()) {
                 $members[] = $ref;
             }
         }
@@ -39,13 +41,13 @@ class Abolish extends AbstractDecision
         $num = 1;
 
         foreach ($members as $installation) {
-            $discharge = new Discharge();
+            $discharge = new DischargeModel();
             $discharge->setInstallation($installation);
             $discharge->setNumber($num++);
             $discharge->setDecision($object);
         }
 
-        $abrog = new Abrogation();
+        $abrog = new AbrogationModel();
         $abrog->setFoundation($data['subdecision']);
         $abrog->setNumber($num++);
         $abrog->setDecision($object);

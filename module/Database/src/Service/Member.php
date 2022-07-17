@@ -18,10 +18,11 @@ use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\ProspectiveMember;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
-use Database\Model\Address;
+use Database\Model\Address as AddressModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\MailingList as MailingListService;
+use DateTime;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mime\Mime;
 use Laminas\View\Model\ViewModel;
@@ -32,49 +33,35 @@ use Laminas\View\Renderer\PhpRenderer;
 
 class Member
 {
-    /** @var AddressForm $addressForm */
-    private $addressForm;
+    private AddressForm $addressForm;
 
-    /** @var AddressExportForm $addressExportForm */
-    private $addressExportForm;
+    private AddressExportForm $addressExportForm;
 
-    /** @var DeleteAddressForm $deleteAddressForm */
-    private $deleteAddressForm;
+    private DeleteAddressForm $deleteAddressForm;
 
-    /** @var MemberForm $memberForm */
-    private $memberForm;
+    private MemberForm $memberForm;
 
-    /** @var MemberEditForm $memberEditForm */
-    private $memberEditForm;
+    private MemberEditForm $memberEditForm;
 
-    /** @var MemberExpirationForm $memberExpirationForm */
-    private $memberExpirationForm;
+    private MemberExpirationForm $memberExpirationForm;
 
-    /** @var MemberTypeForm $memberTypeForm */
-    private $memberTypeForm;
+    private MemberTypeForm $memberTypeForm;
 
-    /** @var MailingListMapper $mailingListMapper */
-    private $mailingListMapper;
+    private MailingListMapper $mailingListMapper;
 
-    /** @var MemberMapper $memberMapper */
-    private $memberMapper;
+    private MemberMapper $memberMapper;
 
-    /** @var ProspectiveMemberMapper $prospectiveMemberMapper */
-    private $prospectiveMemberMapper;
+    private ProspectiveMemberMapper $prospectiveMemberMapper;
 
-    /** @var FileStorageService $fileStorageService */
-    private $fileStorageService;
+    private FileStorageService $fileStorageService;
 
-    /** @var MailingListService $mailingListService */
-    private $mailingListService;
+    private MailingList $mailingListService;
 
-    /** @var PhpRenderer $viewRenderer */
-    private $viewRenderer;
+    private PhpRenderer $viewRenderer;
 
-    private $mailTransport;
+    private TransportInterface $mailTransport;
 
-    /** @var array $config */
-    private $config;
+    private array $config;
 
     public function __construct(
         AddressForm $addressForm,
@@ -90,7 +77,7 @@ class Member
         FileStorageService $fileStorageService,
         MailingListService $mailingListService,
         PhpRenderer $viewRenderer,
-        $mailTransport,
+        TransportInterface $mailTransport,
         array $config,
     ) {
         $this->addressForm = $addressForm;
@@ -112,12 +99,8 @@ class Member
 
     /**
      * Subscribe a member.
-     *
-     * @param array $data
-     *
-     * @return ProspectiveMemberModel member, null if failed.
      */
-    public function subscribe($data)
+    public function subscribe(array $data): ?ProspectiveMemberModel
     {
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
@@ -168,7 +151,7 @@ class Member
         }
 
         // changed on date
-        $date = new \DateTime();
+        $date = new DateTime();
         $date->setTime(0, 0);
         $prospectiveMember->setChangedOn($date);
 
@@ -202,10 +185,8 @@ class Member
 
     /**
      * Send an email about the newly subscribed member to the new member and the secretary
-     *
-     * @param ProspectiveMemberModel $member
      */
-    public function sendMemberSubscriptionEmail(ProspectiveMemberModel $member)
+    public function sendMemberSubscriptionEmail(ProspectiveMemberModel $member): void
     {
         $config = $this->config;
         $config = $config['email'];
@@ -245,14 +226,10 @@ class Member
         $this->getMailTransport()->send($message);
     }
 
-    /**
-     * @param array $membershipData
-     * @param ProspectiveMemberModel $prospectiveMember
-     *
-     * @return MemberModel|null
-     */
-    public function finalizeSubscription($membershipData, $prospectiveMember)
-    {
+    public function finalizeSubscription(
+        array $membershipData,
+        ProspectiveMemberModel $prospectiveMember,
+    ): ?MemberModel {
         // If no membership type has been submitted it does not make sense to do anything else.
         if (!isset($membershipData['type'])) {
             return null;
@@ -303,7 +280,7 @@ class Member
         $member->setTueUsername($prospectiveMember->getTueUsername());
 
         // changed on date
-        $date = new \DateTime();
+        $date = new DateTime();
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
@@ -371,12 +348,8 @@ class Member
 
     /**
      * Get member info.
-     *
-     * @param int $id
-     *
-     * @return MemberModel
      */
-    public function getMember($id)
+    public function getMember(int $id): array
     {
         try {
             return [
@@ -393,12 +366,8 @@ class Member
 
     /**
      * Get prospective member info.
-     *
-     * @param int $id
-     *
-     * @return array
      */
-    public function getProspectiveMember($id)
+    public function getProspectiveMember(int $id): array
     {
         return [
             'member' => $this->getProspectiveMemberMapper()->find($id),
@@ -408,12 +377,11 @@ class Member
 
     /**
      * Toggle if a member receives the supremum.
-     *
-     * @param int $id
-     * @param string $value
      */
-    public function setSupremum($id, $value)
-    {
+    public function setSupremum(
+        int $id,
+        string $value,
+    ): void {
         $member = $this->getMember($id);
         $member = $member['member'];
 
@@ -425,9 +393,9 @@ class Member
     /**
      * Search for a member.
      *
-     * @param string $query
+     * @return array<array-key, MemberModel>
      */
-    public function search($query)
+    public function search(string $query): array
     {
         return $this->getMemberMapper()->search($query);
     }
@@ -435,42 +403,37 @@ class Member
     /**
      * Search for a prospective member.
      *
-     * @param string $query
+     * @return array<array-key, ProspectiveMemberModel>
      */
-    public function searchProspective($query)
+    public function searchProspective(string $query): array
     {
         return $this->getProspectiveMemberMapper()->search($query);
     }
 
     /**
      * Check if we can easily remove a member.
-     *
-     * @param MemberModel $member
      */
-    public function canRemove(MemberModel $member)
+    public function canRemove(MemberModel $member): bool
     {
         return $this->getMemberMapper()->canRemove($member);
     }
 
     /**
      * Remove a member.
-     *
-     * @param MemberModel $member
      */
-    public function remove(MemberModel $member)
+    public function remove(MemberModel $member): void
     {
         if ($this->canRemove($member)) {
-            return $this->getMemberMapper()->remove($member);
+            $this->getMemberMapper()->remove($member);
         }
+
         $this->clear($member);
     }
 
     /**
      * Remove a member.
-     *
-     * @param ProspectiveMemberModel $member
      */
-    public function removeProspective(ProspectiveMemberModel $member)
+    public function removeProspective(ProspectiveMemberModel $member): void
     {
         // First destroy the signiture file
         $this->getFileStorageService()->removeFile($member->getSignature());
@@ -479,23 +442,21 @@ class Member
 
     /**
      * Clear a member.
-     *
-     * @param MemberModel $member
      */
-    public function clear(MemberModel $member)
+    public function clear(MemberModel $member): void
     {
         foreach ($member->getAddresses() as $address) {
             $this->getMemberMapper()->removeAddress($address);
         }
 
-        $date = new \DateTime('0001-01-01 00:00:00');
+        $date = new DateTime('0001-01-01 00:00:00');
 
         $member->setEmail(null);
         $member->setGender(GenderTypes::Other);
         $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(null);
-        $member->setChangedOn(new \DateTime());
+        $member->setChangedOn(new DateTime());
         $member->setMembershipEndsOn($date);
         $member->setExpiration($date);
         $member->setBirth($date);
@@ -509,14 +470,11 @@ class Member
 
     /**
      * Edit a member.
-     *
-     * @param array $data
-     * @param int $lidnr member to edit
-     *
-     * @return MemberModel
      */
-    public function edit($data, $lidnr)
-    {
+    public function edit(
+        array $data,
+        int $lidnr,
+    ): ?MemberModel {
         $form = $this->getMemberEditForm($lidnr)['form'];
 
         $form->setData($data);
@@ -528,7 +486,7 @@ class Member
         $member = $form->getData();
 
         // update changed on date
-        $date = new \DateTime();
+        $date = new DateTime();
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
@@ -539,14 +497,11 @@ class Member
 
     /**
      * Edit membership.
-     *
-     * @param array $data
-     * @param int $lidnr member to edit
-     *
-     * @return MemberModel|null
      */
-    public function membership($data, $lidnr)
-    {
+    public function membership(
+        array $data,
+        int $lidnr,
+    ): ?MemberModel {
         $form = $this->getMemberTypeForm($lidnr);
         // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
         /** @var MemberModel $member */
@@ -568,7 +523,7 @@ class Member
         $data = $form->getData();
 
         // update changed on date
-        $date = new \DateTime();
+        $date = new DateTime();
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
@@ -620,14 +575,10 @@ class Member
         return $member;
     }
 
-    /**
-     * @param array $data
-     * @param int $lidnr
-     *
-     * @return MemberModel|null
-     */
-    public function expiration($data, $lidnr)
-    {
+    public function expiration(
+        array $data,
+        int $lidnr,
+    ): ?MemberModel {
         $form = $this->getMemberExpirationForm($lidnr);
         // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
         $member = $form['member'];
@@ -653,15 +604,12 @@ class Member
 
     /**
      * Edit address.
-     *
-     * @param array $data
-     * @param int $lidnr
-     * @param string $type Address to edit
-     *
-     * @return Address
      */
-    public function editAddress($data, $lidnr, $type)
-    {
+    public function editAddress(
+        array $data,
+        int $lidnr,
+        AddressTypes $type,
+    ): ?AddressModel {
         $form = $this->getAddressForm($lidnr, $type)['form'];
 
         $form->setData($data);
@@ -670,6 +618,7 @@ class Member
             return null;
         }
 
+        /** @var AddressModel $address */
         $address = $form->getData();
 
         $this->getMemberMapper()->persistAddress($address);
@@ -679,15 +628,12 @@ class Member
 
     /**
      * Add address.
-     *
-     * @param array $data
-     * @param int $lidnr
-     * @param AddressTypes $type Type of the address to add
-     *
-     * @return Address
      */
-    public function addAddress($data, $lidnr, $type)
-    {
+    public function addAddress(
+        array $data,
+        int $lidnr,
+        AddressTypes $type,
+    ): ?AddressModel {
         $form = $this->getAddressForm($lidnr, $type, true)['form'];
 
         $form->setData($data);
@@ -696,6 +642,7 @@ class Member
             return null;
         }
 
+        /** @var AddressModel $address */
         $address = $form->getData();
 
         $this->getMemberMapper()->persistAddress($address);
@@ -705,15 +652,12 @@ class Member
 
     /**
      * Remove address.
-     *
-     * @param array $data
-     * @param int $lidnr
-     * @param AddressTypes $type Address to remove
-     *
-     * @return MemberModel
      */
-    public function removeAddress($data, $lidnr, $type)
-    {
+    public function removeAddress(
+        array $data,
+        int $lidnr,
+        AddressTypes $type,
+    ): ?MemberModel {
         $formData = $this->getDeleteAddressForm($lidnr, $type);
         $form = $formData['form'];
 
@@ -733,14 +677,11 @@ class Member
 
     /**
      * Subscribe member to mailing lists.
-     *
-     * @param array $data
-     * @param int $lidnr
-     *
-     * @return MemberModel
      */
-    public function subscribeLists($data, $lidnr)
-    {
+    public function subscribeLists(
+        array $data,
+        int $lidnr,
+    ): ?MemberModel {
         $formData = $this->getListForm($lidnr);
         $form = $formData['form'];
         $lists = $formData['lists'];
@@ -771,16 +712,13 @@ class Member
 
     /**
      * Get the member edit form.
-     *
-     * @param int $lidnr
-     *
-     * @return array Array with \Database\Form\MemberEdit and MemberModel
      */
-    public function getMemberEditForm($lidnr)
+    public function getMemberEditForm(int $lidnr): array
     {
         $form = $this->memberEditForm;
         $member = $this->getMember($lidnr);
         $form->bind($member['member']);
+
         return [
             'member' => $member['member'],
             'form' => $form,
@@ -789,12 +727,8 @@ class Member
 
     /**
      * Get the member expiration form.
-     *
-     * @param int $lidnr
-     *
-     * @return array
      */
-    public function getMemberExpirationForm($lidnr)
+    public function getMemberExpirationForm(int $lidnr): array
     {
         return [
             'form' => $this->memberExpirationForm,
@@ -804,12 +738,8 @@ class Member
 
     /**
      * Get the member type form.
-     *
-     * @param int $lidnr
-     *
-     * @return array Array with \Database\Form\MemberType and MemberModel
      */
-    public function getMemberTypeForm($lidnr)
+    public function getMemberTypeForm(int $lidnr): array
     {
         return [
             'member' => $this->getMember($lidnr)['member'],
@@ -819,12 +749,8 @@ class Member
 
     /**
      * Get the list edit form.
-     *
-     * @param int $lidnr
-     *
-     * @return array
      */
-    public function getListForm($lidnr)
+    public function getListForm(int $lidnr): array
     {
         $member = $this->getMember($lidnr);
         $member = $member['member'];
@@ -839,25 +765,24 @@ class Member
 
     /**
      * Get the address form.
-     *
-     * @param int $lidnr
-     * @param AddressTypes $type address type
-     * @param boolean $create
-     *
-     * @return AddressForm
      */
-    public function getAddressForm($lidnr, $type, $create = false)
-    {
+    public function getAddressForm(
+        int $lidnr,
+        AddressTypes $type,
+        bool $create = false,
+    ): array {
         // find the address
         if ($create) {
-            $address = new Address();
+            $address = new AddressModel();
             $address->setMember($this->getMemberMapper()->findSimple($lidnr));
             $address->setType($type);
         } else {
             $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
         }
+
         $form = $this->addressForm;
         $form->bind($address);
+
         return [
             'form' => $form,
             'address' => $address,
@@ -866,14 +791,11 @@ class Member
 
     /**
      * Get the delete address form.
-     *
-     * @param int $lidnr
-     * @param AddressTypes $type address type
-     *
-     * @return AddressForm
      */
-    public function getDeleteAddressForm($lidnr, $type)
-    {
+    public function getDeleteAddressForm(
+        int $lidnr,
+        AddressTypes $type,
+    ): array {
         // find the address
         return [
             'form' => $this->deleteAddressForm,
@@ -883,18 +805,14 @@ class Member
 
     /**
      * Get address export form.
-     *
-     * @return AddressExportForm
      */
-    public function getAddressExportForm()
+    public function getAddressExportForm(): AddressExportForm
     {
         return $this->addressExportForm;
     }
 
     /**
      * Get the member form.
-     *
-     * @return MemberForm
      */
     public function getMemberForm(): MemberForm
     {
@@ -903,8 +821,6 @@ class Member
 
     /**
      * Get the member mapper.
-     *
-     * @return MemberMapper
      */
     public function getMemberMapper(): MemberMapper
     {
@@ -913,8 +829,6 @@ class Member
 
     /**
      * Get the member mapper.
-     *
-     * @return ProspectiveMemberMapper
      */
     public function getProspectiveMemberMapper(): ProspectiveMemberMapper
     {
@@ -923,8 +837,6 @@ class Member
 
     /**
      * Gets the storage service.
-     *
-     * @return FileStorageService
      */
     public function getFileStorageService(): FileStorageService
     {
@@ -933,8 +845,6 @@ class Member
 
     /**
      * Get the renderer for the email.
-     *
-     * @return PhpRenderer
      */
     public function getRenderer(): PhpRenderer
     {
@@ -943,8 +853,6 @@ class Member
 
     /**
      * Get the mail transport.
-     *
-     * @return TransportInterface
      */
     public function getMailTransport(): TransportInterface
     {

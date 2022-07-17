@@ -3,23 +3,15 @@
 namespace Database\Mapper;
 
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
+use Doctrine\ORM\{
+    EntityManager,
+    EntityRepository,
+};
 
 class ProspectiveMember
 {
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -27,17 +19,13 @@ class ProspectiveMember
 
     /**
      * See if we can find a member with the same email.
-     *
-     * @param string $email
-     *
-     * @return boolean
      */
-    public function hasMemberWith($email)
+    public function hasMemberWith(string $email): bool
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
-            ->from('Database\Model\ProspectiveMember', 'm')
+            ->from(ProspectiveMemberModel::class, 'm')
             ->where("LOWER(m.email) = LOWER(:email)")
             ->setMaxResults(1);
 
@@ -50,16 +38,14 @@ class ProspectiveMember
     /**
      * Search for a member.
      *
-     * @param string $query
-     *
-     * @return ProspectiveMemberModel
+     * @return array<array-key, ProspectiveMemberModel>
      */
-    public function search($query)
+    public function search(string $query): array
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
-            ->from('Database\Model\ProspectiveMember', 'm')
+            ->from(ProspectiveMemberModel::class, 'm')
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
             ->setMaxResults(32)
@@ -80,9 +66,9 @@ class ProspectiveMember
     /**
      * Find all members.
      *
-     * @return array of members
+     * @return array<array-key, ProspectiveMemberModel>
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
@@ -91,31 +77,25 @@ class ProspectiveMember
      * Find a member (by lidnr).
      *
      * And calculate memberships.
-     *
-     * @param int $lidnr
-     *
-     * @return ProspectiveMemberModel
      */
-    public function find($lidnr)
+    public function find(int $lidnr): ?ProspectiveMemberModel
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m, l')
-            ->from('Database\Model\ProspectiveMember', 'm')
+            ->from(ProspectiveMemberModel::class, 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.lists', 'l');
 
         $qb->setParameter(':lidnr', $lidnr);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
      * Persist a member model.
-     *
-     * @param ProspectiveMemberModel $member Member to persist.
      */
-    public function persist(ProspectiveMemberModel $member)
+    public function persist(ProspectiveMemberModel $member): void
     {
         $this->em->persist($member);
         $this->em->flush();
@@ -123,8 +103,6 @@ class ProspectiveMember
 
     /**
      * Remove a member.
-     *
-     * @param ProspectiveMemberModel $member Member to remove
      */
     public function remove(ProspectiveMemberModel $member)
     {
@@ -134,11 +112,9 @@ class ProspectiveMember
 
     /**
      * Get the repository for this mapper.
-     *
-     * @return \Doctrine\ORM\EntityRepository
      */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository('Database\Model\ProspectiveMember');
+        return $this->em->getRepository(ProspectiveMemberModel::class);
     }
 }

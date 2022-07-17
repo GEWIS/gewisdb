@@ -2,9 +2,8 @@
 
 namespace Database\Hydrator;
 
-use Database\Model\Decision;
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Other as OtherDecision;
+use Database\Model\SubDecision\Other as OtherModel;
 
 class Other extends AbstractDecision
 {
@@ -22,7 +21,7 @@ class Other extends AbstractDecision
     {
         $object = parent::hydrate($data, $object);
 
-        $subdecision = new OtherDecision();
+        $subdecision = new OtherModel();
 
         $subdecision->setNumber(1);
         $subdecision->setContent($data['content']);

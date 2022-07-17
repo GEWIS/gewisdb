@@ -3,10 +3,16 @@
 namespace Database\Form;
 
 use Laminas\Filter\StringToLower;
+use Laminas\Form\Element\{
+    Submit,
+    Text,
+};
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\Regex;
-use Laminas\Validator\StringLength;
+use Laminas\Validator\{
+    Regex,
+    StringLength,
+};
 
 class Address extends Form implements InputFilterProviderInterface
 {
@@ -16,7 +22,7 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'country',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Land',
                 'value' => 'netherlands',
@@ -25,7 +31,7 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'street',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Straat',
             ],
@@ -33,7 +39,7 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'number',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Huisnummer',
             ],
@@ -41,7 +47,7 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'postalCode',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Postcode',
             ],
@@ -49,7 +55,7 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'city',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Stad',
             ],
@@ -57,7 +63,7 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'phone',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Telefoonnummer',
             ],
@@ -65,7 +71,7 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Wijzig adres',
             ],

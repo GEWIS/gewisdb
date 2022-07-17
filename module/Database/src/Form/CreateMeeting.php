@@ -3,13 +3,20 @@
 namespace Database\Form;
 
 use Application\Model\Enums\MeetingTypes;
-use Database\Model\Meeting;
+use Laminas\Form\Element\{
+    Date,
+    Select,
+    Submit,
+    Text,
+};
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\Date;
-use Laminas\Validator\Digits;
-use Laminas\Validator\InArray;
-use Laminas\Validator\LessThan;
+use Laminas\Validator\{
+    Date as DateValidator,
+    Digits,
+    InArray,
+    LessThan,
+};
 
 class CreateMeeting extends Form implements InputFilterProviderInterface
 {
@@ -19,7 +26,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'type',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Vergadertype',
                 'value_options' => [
@@ -33,7 +40,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'number',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Vergadernummer',
             ],
@@ -41,7 +48,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'date',
-            'type' => 'date',
+            'type' => Date::class,
             'options' => [
                 'label' => 'Vergaderdatum',
             ],
@@ -49,7 +56,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Verzend',
             ],
@@ -85,7 +92,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'date' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Date::class],
+                    ['name' => DateValidator::class],
                 ],
             ],
         ];

@@ -3,20 +3,18 @@
 namespace Database\Controller;
 
 use Application\Model\Enums\AddressTypes;
-use Database\Model\Member;
 use Database\Service\Member as MemberService;
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\View\Model\ViewModel;
-use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\{
+    ViewModel,
+    JsonModel,
+};
 
 class MemberController extends AbstractActionController
 {
-    /** @var MemberService $memberService */
-    private $memberService;
+    private MemberService $memberService;
 
-    /**
-     * @param MemberService $memberService
-     */
     public function __construct(MemberService $memberService)
     {
         $this->memberService = $memberService;
@@ -25,7 +23,7 @@ class MemberController extends AbstractActionController
     /**
      * Index action.
      */
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         return new ViewModel([]);
     }
@@ -33,15 +31,16 @@ class MemberController extends AbstractActionController
     /**
      * Subscribe action.
      */
-    public function subscribeAction()
+    public function subscribeAction(): ViewModel
     {
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $member = $this->memberService->subscribe($request->getPost());
+            $member = $this->memberService->subscribe($request->getPost()->toArray());
 
             if (null !== $member) {
                 $this->memberService->sendMemberSubscriptionEmail($member);
+
                 return new ViewModel([
                     'member' => $member,
                 ]);
@@ -58,7 +57,7 @@ class MemberController extends AbstractActionController
      *
      * Searches for members.
      */
-    public function searchAction()
+    public function searchAction(): JsonModel
     {
         $query = $this->params()->fromQuery('q');
         $res = $this->memberService->search($query);
@@ -77,9 +76,9 @@ class MemberController extends AbstractActionController
      *
      * Shows member information.
      */
-    public function showAction()
+    public function showAction(): ViewModel
     {
-        return new ViewModel($this->memberService->getMember($this->params()->fromRoute('id')));
+        return new ViewModel($this->memberService->getMember((int) $this->params()->fromRoute('id')));
     }
 
     /**
@@ -87,9 +86,9 @@ class MemberController extends AbstractActionController
      *
      * Prints member information.
      */
-    public function printAction()
+    public function printAction(): ViewModel
     {
-        return new ViewModel($this->memberService->getMember($this->params()->fromRoute('id')));
+        return new ViewModel($this->memberService->getMember((int) $this->params()->fromRoute('id')));
     }
 
     /**
@@ -97,9 +96,12 @@ class MemberController extends AbstractActionController
      *
      * Toggles if a member wants a supremum
      */
-    public function setSupremumAction()
+    public function setSupremumAction(): Response
     {
-        $this->memberService->setSupremum($this->params()->fromRoute('id'), $this->params()->fromRoute('value'));
+        $this->memberService->setSupremum(
+            (int) $this->params()->fromRoute('id'),
+            $this->params()->fromRoute('value'),
+        );
 
         return $this->redirect()->toRoute('member/show', [
             'id' => $this->params()->fromRoute('id'),
@@ -111,12 +113,16 @@ class MemberController extends AbstractActionController
      *
      * Edit member information.
      */
-    public function editAction()
+    public function editAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->edit($this->getRequest()->getPost(), $lidnr);
+            $member = $this->memberService->edit(
+                $this->getRequest()->getPost()->toArray(),
+                $lidnr,
+            );
+
             if (null !== $member) {
                 return new ViewModel([
                     'success' => true,
@@ -133,14 +139,19 @@ class MemberController extends AbstractActionController
      *
      * Delete a member.
      */
-    public function deleteAction()
+    public function deleteAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
         $member = $this->memberService->getMember($lidnr);
         $member = $member['member'];
 
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
         if ($this->getRequest()->isPost()) {
             $this->memberService->remove($member);
+
             return new ViewModel([
                 'success' => true,
             ]);
@@ -158,12 +169,15 @@ class MemberController extends AbstractActionController
      *
      * Update list membership.
      */
-    public function listsAction()
+    public function listsAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->subscribeLists($this->getRequest()->getPost(), $lidnr);
+            $member = $this->memberService->subscribeLists(
+                $this->getRequest()->getPost()->toArray(),
+                $lidnr,
+            );
 
             if (null !== $member) {
                 return new ViewModel([
@@ -181,12 +195,15 @@ class MemberController extends AbstractActionController
      *
      * Update / renew membership.
      */
-    public function membershipAction()
+    public function membershipAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->membership($this->getRequest()->getPost(), $lidnr);
+            $member = $this->memberService->membership(
+                $this->getRequest()->getPost()->toArray(),
+                $lidnr,
+            );
 
             if (null !== $member) {
                 return new ViewModel([
@@ -204,12 +221,15 @@ class MemberController extends AbstractActionController
      *
      * Extend the duration of the membership.
      */
-    public function expirationAction()
+    public function expirationAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->expiration($this->getRequest()->getPost(), $lidnr);
+            $member = $this->memberService->expiration(
+                $this->getRequest()->getPost()->toArray(),
+                $lidnr,
+            );
 
             if (null !== $member) {
                 return new ViewModel([
@@ -227,13 +247,17 @@ class MemberController extends AbstractActionController
      *
      * Edit a member's address.
      */
-    public function editAddressAction()
+    public function editAddressAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
         $type = AddressTypes::from($this->params()->fromRoute('type'));
 
         if ($this->getRequest()->isPost()) {
-            $address = $this->memberService->editAddress($this->getRequest()->getPost(), $lidnr, $type);
+            $address = $this->memberService->editAddress(
+                $this->getRequest()->getPost()->toArray(),
+                $lidnr,
+                $type,
+            );
 
             if (null !== $address) {
                 return new ViewModel([
@@ -251,13 +275,17 @@ class MemberController extends AbstractActionController
      *
      * Add a member's address.
      */
-    public function addAddressAction()
+    public function addAddressAction(): ViewModel
     {
         $lidnr = $this->params()->fromRoute('id');
         $type = AddressTypes::from($this->params()->fromRoute('type'));
 
         if ($this->getRequest()->isPost()) {
-            $address = $this->memberService->addAddress($this->getRequest()->getPost(), $lidnr, $type);
+            $address = $this->memberService->addAddress(
+                $this->getRequest()->getPost()->toArray(),
+                $lidnr,
+                $type,
+            );
 
             if (null !== $address) {
                 $vm = new ViewModel([
@@ -284,13 +312,17 @@ class MemberController extends AbstractActionController
      *
      * Remove a member's address.
      */
-    public function removeAddressAction()
+    public function removeAddressAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
         $type = AddressTypes::from($this->params()->fromRoute('type'));
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->removeAddress($this->getRequest()->getPost(), $lidnr, $type);
+            $member = $this->memberService->removeAddress(
+                $this->getRequest()->getPost()->toArray(),
+                $lidnr,
+                $type,
+            );
 
             if (null !== $member) {
                 return new ViewModel([

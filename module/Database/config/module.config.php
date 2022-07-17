@@ -2,26 +2,32 @@
 
 namespace Database;
 
-use Database\Controller\AddressController;
-use Database\Controller\ExportController;
-use Database\Controller\Factory\AddressControllerFactory;
-use Database\Controller\Factory\ExportControllerFactory;
-use Database\Controller\Factory\MeetingControllerFactory;
-use Database\Controller\Factory\MemberControllerFactory;
-use Database\Controller\Factory\OrganControllerFactory;
-use Database\Controller\Factory\ProspectiveMemberControllerFactory;
-use Database\Controller\Factory\QueryControllerFactory;
-use Database\Controller\Factory\SettingsControllerFactory;
-use Database\Controller\IndexController;
-use Database\Controller\MeetingController;
-use Database\Controller\MemberController;
-use Database\Controller\OrganController;
-use Database\Controller\ProspectiveMemberController;
-use Database\Controller\QueryController;
-use Database\Controller\SettingsController;
+use Database\Controller\{
+    AddressController,
+    ExportController,
+    IndexController,
+    MeetingController,
+    MemberController,
+    OrganController,
+    ProspectiveMemberController,
+    QueryController,
+    SettingsController,
+};
+use Database\Controller\Factory\{
+    AddressControllerFactory,
+    ExportControllerFactory,
+    MeetingControllerFactory,
+    MemberControllerFactory,
+    OrganControllerFactory,
+    ProspectiveMemberControllerFactory,
+    QueryControllerFactory,
+    SettingsControllerFactory,
+};
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
-use Laminas\Router\Http\Literal;
-use Laminas\Router\Http\Segment;
+use Laminas\Router\Http\{
+    Literal,
+    Segment,
+};
 
 return [
     'router' => [

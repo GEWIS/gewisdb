@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
@@ -13,7 +14,7 @@ class DeleteAddress extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit_yes',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Ja',
             ],
@@ -21,7 +22,7 @@ class DeleteAddress extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit_no',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Nee',
             ],

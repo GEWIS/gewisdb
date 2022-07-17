@@ -2,6 +2,10 @@
 
 namespace Database\Form;
 
+use Laminas\Form\Element\{
+    Checkbox,
+    Submit,
+};
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
@@ -13,12 +17,12 @@ class AddressExport extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'supremum',
-            'type' => 'checkbox',
+            'type' => Checkbox::class,
         ]);
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Exporteer',
             ],

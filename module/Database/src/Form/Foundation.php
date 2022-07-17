@@ -2,20 +2,33 @@
 
 namespace Database\Form;
 
-use Database\Form\Fieldset\CollectionWithErrors;
+use Database\Form\Fieldset\{
+    CollectionWithErrors,
+    Meeting as MeetingFieldset,
+    MemberFunction as MemberFunctionFieldset,
+};
+use Laminas\Form\Element\{
+    Radio,
+    Submit,
+    Text,
+};
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\NotEmpty;
-use Laminas\Validator\StringLength;
+use Laminas\Validator\{
+    NotEmpty,
+    StringLength,
+};
 
 class Foundation extends AbstractDecision implements InputFilterProviderInterface
 {
-    public function __construct(Fieldset\Meeting $meeting, Fieldset\MemberFunction $function)
-    {
+    public function __construct(
+        MeetingFieldset $meeting,
+        MemberFunctionFieldset $function,
+    ) {
         parent::__construct($meeting);
 
         $this->add([
             'name' => 'type',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Type',
                 'value_options' => [
@@ -31,7 +44,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
 
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Naam',
             ],
@@ -39,7 +52,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
 
         $this->add([
             'name' => 'abbr',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Afkorting',
             ],
@@ -60,7 +73,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Richt op',
             ],

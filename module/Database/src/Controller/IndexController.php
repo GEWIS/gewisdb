@@ -7,7 +7,7 @@ use Laminas\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         return new ViewModel();
     }

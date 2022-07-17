@@ -3,16 +3,21 @@
 namespace Database\Form;
 
 use Database\Model\Member as MemberModel;
+use Laminas\Form\Element\{
+    Checkbox,
+    Submit,
+};
 use Laminas\Form\Form;
-use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
 class MemberLists extends Form implements InputFilterProviderInterface
 {
-    protected $lists;
+    protected array $lists;
 
-    public function __construct(MemberModel $member, $lists)
-    {
+    public function __construct(
+        MemberModel $member,
+        array $lists,
+    ) {
         parent::__construct();
 
         $this->lists = $lists;
@@ -20,7 +25,7 @@ class MemberLists extends Form implements InputFilterProviderInterface
         foreach ($this->lists as $list) {
             $this->add([
                 'name' => 'list-' . $list->getName(),
-                'type' => 'checkbox',
+                'type' => Checkbox::class,
                 'options' => [
                     'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription(),
                 ],
@@ -35,7 +40,7 @@ class MemberLists extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Wijzig inschrijvingen',
             ],

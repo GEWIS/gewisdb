@@ -4,7 +4,6 @@ namespace Database\Hydrator\Board;
 
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstall;
-use Database\Model\Decision;
 use Database\Hydrator\AbstractDecision;
 
 class Install extends AbstractDecision

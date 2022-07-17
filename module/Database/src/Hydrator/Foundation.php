@@ -3,10 +3,11 @@
 namespace Database\Hydrator;
 
 use Application\Model\Enums\OrganTypes;
-use Database\Model\Decision;
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Foundation as FoundationDecision;
-use Database\Model\SubDecision\Installation as InstallationDecision;
+use Database\Model\SubDecision\{
+    Foundation as FoundationModel,
+    Installation as InstallationModel,
+};
 
 class Foundation extends AbstractDecision
 {
@@ -24,7 +25,7 @@ class Foundation extends AbstractDecision
     {
         $decision = parent::hydrate($data, $object);
 
-        $foundation = new FoundationDecision();
+        $foundation = new FoundationModel();
 
         $foundation->setNumber(1);
         $foundation->setAbbr($data['abbr']);
@@ -44,7 +45,7 @@ class Foundation extends AbstractDecision
             // if an installation has a different function than 'member'
             // also add a member installation
             if ($install['function'] != 'Lid') {
-                $installation = new InstallationDecision();
+                $installation = new InstallationModel();
                 $installation->setNumber($num++);
                 $installation->setFoundation($foundation);
                 $installation->setFunction('Lid');
@@ -52,7 +53,7 @@ class Foundation extends AbstractDecision
                 $installation->setDecision($decision);
             }
 
-            $installation = new InstallationDecision();
+            $installation = new InstallationModel();
             $installation->setNumber($num++);
             $installation->setFoundation($foundation);
             $installation->setFunction($install['function']);

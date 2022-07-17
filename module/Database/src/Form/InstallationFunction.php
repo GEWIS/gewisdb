@@ -2,6 +2,10 @@
 
 namespace Database\Form;
 
+use Laminas\Form\Element\{
+    Submit,
+    Text,
+};
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
@@ -13,7 +17,7 @@ class InstallationFunction extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Functienaam',
             ],
@@ -21,7 +25,7 @@ class InstallationFunction extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Maak functie',
             ],

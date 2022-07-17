@@ -2,10 +2,11 @@
 
 namespace Database\Hydrator;
 
-use Database\Model\Decision;
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Installation;
-use Database\Model\SubDecision\Discharge;
+use Database\Model\SubDecision\{
+    Installation as InstallationModel,
+    Discharge as DischargeModel,
+};
 
 class Install extends AbstractDecision
 {
@@ -36,7 +37,7 @@ class Install extends AbstractDecision
         // first add discharges
         if (isset($data['discharges']) && !empty($data['discharges'])) {
             foreach ($data['discharges'] as $install) {
-                $discharge = new Discharge();
+                $discharge = new DischargeModel();
                 $discharge->setInstallation($install);
                 $discharge->setNumber($num++);
                 $discharge->setDecision($decision);
@@ -46,7 +47,7 @@ class Install extends AbstractDecision
         // then add installations
         if (isset($data['installations']) && !empty($data['installations'])) {
             foreach ($data['installations'] as $install) {
-                $installation = new Installation();
+                $installation = new InstallationModel();
                 $installation->setNumber($num++);
                 $installation->setFoundation($foundation);
                 $installation->setFunction($install->function);

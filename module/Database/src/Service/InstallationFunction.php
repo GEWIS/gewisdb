@@ -4,20 +4,14 @@ namespace Database\Service;
 
 use Database\Form\InstallationFunction as InstallationFunctionForm;
 use Database\Mapper\InstallationFunction as InstallationFunctionMapper;
-use Database\Model\InstallationFunction as FunctionModel;
+use Database\Model\InstallationFunction as InstallationFunctionModel;
 
 class InstallationFunction
 {
-    /** @var InstallationFunctionForm $installationFunctionForm */
-    private $installationFunctionForm;
+    private InstallationFunctionForm $installationFunctionForm;
 
-    /** @var InstallationFunctionMapper $installationFunctionMapper */
-    private $installationFunctionMapper;
+    private InstallationFunctionMapper $installationFunctionMapper;
 
-    /**
-     * @param InstallationFunctionForm $installationFunctionForm
-     * @param InstallationFunctionMapper $installationFunctionMapper
-     */
     public function __construct(
         InstallationFunctionForm $installationFunctionForm,
         InstallationFunctionMapper $installationFunctionMapper,
@@ -38,22 +32,19 @@ class InstallationFunction
 
     /**
      * Add a function.
-     *
-     * @param $data POST data.
-     *
-     * @return boolean if succeeded
      */
-    public function addFunction($data): bool
+    public function addFunction(array $data): bool
     {
         $form = $this->getFunctionForm();
 
         $form->setData($data);
-        $form->bind(new FunctionModel());
+        $form->bind(new InstallationFunctionModel());
 
         if (!$form->isValid()) {
             return false;
         }
 
+        /** @var InstallationFunctionModel $function */
         $function = $form->getData();
         $this->getFunctionMapper()->persist($function);
 
@@ -62,8 +53,6 @@ class InstallationFunction
 
     /**
      * Get the function form.
-     *
-     * @return InstallationFunctionForm
      */
     public function getFunctionForm(): InstallationFunctionForm
     {
@@ -72,8 +61,6 @@ class InstallationFunction
 
     /**
      * Get the installation function mapper.
-     *
-     * @return InstallationFunctionMapper
      */
     public function getFunctionMapper(): InstallationFunctionMapper
     {

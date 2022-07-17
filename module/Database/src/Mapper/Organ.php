@@ -2,24 +2,22 @@
 
 namespace Database\Mapper;
 
-use Database\Model\SubDecision\Foundation;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
+use Application\Model\Enums\MeetingTypes;
+use Database\Model\SubDecision\{
+    Abrogation as AbrogationModel,
+    Destroy as DestroyModel,
+    Discharge as DischargeModel,
+    Foundation as FoundationModel,
+};
+use Doctrine\ORM\{
+    EntityManager,
+    EntityRepository,
+};
 
 class Organ
 {
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -28,30 +26,27 @@ class Organ
     /**
      * Find all organs.
      *
-     * @return array Foundations
+     * @return array<array-key, FoundationModel>
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
 
     /**
-     * Find an organ. Also calculate which are it's current members.
-     *
-     * @param string $type
-     * @param string $meetingNumber
-     * @param string $decisionPoint
-     * @param string $decisionNumber
-     * @param string $subdecisionNumber
-     *
-     * @return Foundation
+     * Find an organ. Also calculate which are its current members.
      */
-    public function find($type, $meetingNumber, $decisionPoint, $decisionNumber, $subdecisionNumber)
-    {
+    public function find(
+        MeetingTypes $type,
+        int $meetingNumber,
+        int $decisionPoint,
+        int $decisionNumber,
+        int $subdecisionNumber,
+    ): ?FoundationModel {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('o', 'r')
-            ->from('Database\Model\SubDecision\Foundation', 'o')
+            ->from(FoundationModel::class, 'o')
             ->where('o.meeting_type = :type')
             ->andWhere('o.meeting_number = :meeting_number')
             ->andWhere('o.decision_point = :decision_point')
@@ -63,7 +58,7 @@ class Organ
         // discharges
         $qbn = $this->em->createQueryBuilder();
         $qbn->select('d')
-            ->from('Database\Model\SubDecision\Discharge', 'd')
+            ->from(DischargeModel::class, 'd')
             ->join('d.installation', 'x')
             ->where('x.meeting_type = r.meeting_type')
             ->andWhere('x.meeting_number = r.meeting_number')
@@ -74,7 +69,7 @@ class Organ
         // destroyed discharge decisions
         $qbnd = $this->em->createQueryBuilder();
         $qbnd->select('b')
-            ->from('Database\Model\SubDecision\Destroy', 'b')
+            ->from(DestroyModel::class, 'b')
             ->join('b.target', 'z')
             ->where('z.meeting_type = d.meeting_type')
             ->andWhere('z.meeting_number = d.meeting_number')
@@ -92,7 +87,7 @@ class Organ
         // destroyed installation decisions
         $qbd = $this->em->createQueryBuilder();
         $qbd->select('a')
-            ->from('Database\Model\SubDecision\Destroy', 'a')
+            ->from(DestroyModel::class, 'a')
             ->join('a.target', 'y')
             ->where('y.meeting_type = r.meeting_type')
             ->andWhere('y.meeting_number = r.meeting_number')
@@ -109,7 +104,7 @@ class Organ
         $qb->setParameter(':decision_number', $decisionNumber);
         $qb->setParameter(':number', $subdecisionNumber);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -121,17 +116,16 @@ class Organ
      * And since events are implemented anyways, we might want to use that to
      * automatically process changes.
      *
-     * @param string $query
-     * @param boolean $includeAbrogated
-     *
-     * @return array Organs
+     * @return array
      */
-    public function organSearch($query, $includeAbrogated = false)
-    {
+    public function organSearch(
+        string $query,
+        bool $includeAbrogated = false,
+    ): array {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('o, d, m')
-            ->from('Database\Model\SubDecision\Foundation', 'o')
+            ->from(FoundationModel::class, 'o')
             ->where('LOWER(o.name) LIKE :name')
             ->orWhere('LOWER(o.abbr) LIKE :name')
             ->join('o.decision', 'd')
@@ -140,7 +134,7 @@ class Organ
         // destroyed foundation decisions
         $qbd = $this->em->createQueryBuilder();
         $qbd->select('b')
-            ->from('Database\Model\SubDecision\Destroy', 'b')
+            ->from(DestroyModel::class, 'b')
             ->join('b.target', 'y')
             ->where('y.meeting_type = o.meeting_type')
             ->andWhere('y.meeting_number = o.meeting_number')
@@ -155,7 +149,7 @@ class Organ
             // we want to leave out organs that have been abrogated
             $qbn = $this->em->createQueryBuilder();
             $qbn->select('a')
-                ->from('Database\Model\SubDecision\Abrogation', 'a')
+                ->from(AbrogationModel::class, 'a')
                 ->join('a.foundation', 'x')
                 ->where('x.meeting_type = o.meeting_type')
                 ->andWhere('x.meeting_number = o.meeting_number')
@@ -166,7 +160,7 @@ class Organ
             // leave out destroyed abrogation decisions
             $qbnd = $this->em->createQueryBuilder();
             $qbnd->select('c')
-                ->from('Database\Model\SubDecision\Destroy', 'c')
+                ->from(DestroyModel::class, 'c')
                 ->join('c.target', 'z')
                 ->where('z.meeting_type = a.meeting_type')
                 ->andWhere('z.meeting_number = a.meeting_number')
@@ -192,11 +186,9 @@ class Organ
 
     /**
      * Get the repository for this mapper.
-     *
-     * @return Doctrine\ORM\EntityRepository
      */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository('Database\Model\SubDecision\Foundation');
+        return $this->em->getRepository(FoundationModel::class);
     }
 }

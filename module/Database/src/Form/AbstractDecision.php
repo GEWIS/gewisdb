@@ -2,12 +2,14 @@
 
 namespace Database\Form;
 
-use Database\Model\Meeting;
+use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Database\Model\Meeting as MeetingModel;
+use Laminas\Form\Element\Hidden;
 use Laminas\Form\Form;
 
 abstract class AbstractDecision extends Form
 {
-    public function __construct(Fieldset\Meeting $meeting)
+    public function __construct(MeetingFieldset $meeting)
     {
         parent::__construct();
 
@@ -16,12 +18,12 @@ abstract class AbstractDecision extends Form
 
         $this->add([
             'name' => 'point',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'decision',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         // TODO: filters
@@ -29,13 +31,12 @@ abstract class AbstractDecision extends Form
 
     /**
      * Set data for the decision.
-     *
-     * @param Meeting $meeting
-     * @param int $point
-     * @param int $decision
      */
-    public function setDecisionData(Meeting $meeting, $point, $decision)
-    {
+    public function setDecisionData(
+        MeetingModel $meeting,
+        int $point,
+        int $decision,
+    ): void {
         $this->get('meeting')->setMeetingData($meeting);
         $this->get('point')->setValue($point);
         $this->get('decision')->setValue($decision);

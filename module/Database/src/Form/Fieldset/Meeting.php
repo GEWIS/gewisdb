@@ -3,8 +3,8 @@
 namespace Database\Form\Fieldset;
 
 use Database\Model\Meeting as MeetingModel;
+use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
-use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Meeting extends Fieldset
 {
@@ -14,12 +14,12 @@ class Meeting extends Fieldset
 
         $this->add([
             'name' => 'type',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'number',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         // TODO: filters

@@ -8,12 +8,8 @@ use Laminas\View\Model\ViewModel;
 
 class ExportController extends AbstractActionController
 {
-    /** @var MeetingService $meetingService */
-    private $meetingService;
+    private MeetingService $meetingService;
 
-    /**
-     * @param MeetingService $meetingService
-     */
     public function __construct(MeetingService $meetingService)
     {
         $this->meetingService = $meetingService;
@@ -22,10 +18,10 @@ class ExportController extends AbstractActionController
     /**
      * Index action.
      */
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         if ($this->getRequest()->isPost()) {
-            $data = $this->meetingService->export($this->getRequest()->getPost());
+            $data = $this->meetingService->export($this->getRequest()->getPost()->toArray());
 
             if (null !== $data) {
                 return new ViewModel([

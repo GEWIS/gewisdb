@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use Laminas\Form\Element\Select;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
 class QueryExport extends Query implements InputFilterProviderInterface
@@ -12,7 +13,7 @@ class QueryExport extends Query implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'type',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'value_options' => [
                     'csv' => 'CSV',

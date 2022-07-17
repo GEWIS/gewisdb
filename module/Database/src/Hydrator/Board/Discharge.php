@@ -4,7 +4,6 @@ namespace Database\Hydrator\Board;
 
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Board\Discharge as BoardDischarge;
-use Database\Model\Decision;
 use Database\Hydrator\AbstractDecision;
 
 class Discharge extends AbstractDecision

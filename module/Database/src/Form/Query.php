@@ -2,8 +2,11 @@
 
 namespace Database\Form;
 
+use Laminas\Form\Element\{
+    Submit,
+    Textarea,
+};
 use Laminas\Form\Form;
-use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Query extends Form implements InputFilterProviderInterface
@@ -14,7 +17,7 @@ class Query extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'query',
-            'type' => 'textarea',
+            'type' => Textarea::class,
             'options' => [
                 'label' => 'Query input',
             ],
@@ -22,7 +25,7 @@ class Query extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Uitvoeren',
             ],

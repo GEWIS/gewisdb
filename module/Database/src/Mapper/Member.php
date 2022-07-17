@@ -3,25 +3,25 @@
 namespace Database\Mapper;
 
 use Application\Model\Enums\AddressTypes;
-use Database\Model\Address;
-use Database\Model\Member as MemberModel;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
+use Database\Model\{
+    Address as AddressModel,
+    Member as MemberModel,
+};
+use Database\Model\SubDecision\{
+    Budget as BudgetModel,
+    Destroy as DestroyModel,
+    Discharge as DischargeModel,
+    Installation as InstallationModel,
+};
+use Doctrine\ORM\{
+    EntityManager,
+    EntityRepository,
+};
 
 class Member
 {
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -29,39 +29,34 @@ class Member
 
     /**
      * See if we can find a member with the same email.
-     *
-     * @param string $email
-     *
-     * @return boolean
      */
-    public function hasMemberWith($email)
+    public function hasMemberWith(string $email): bool
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
-            ->from('Database\Model\Member', 'm')
+            ->from(MemberModel::class, 'm')
             ->where("LOWER(m.email) = LOWER(:email)")
             ->setMaxResults(1);
 
         $qb->setParameter(':email', $email);
 
         $ret = $qb->getQuery()->getResult();
+
         return $ret !== null && count($ret) > 0;
     }
 
     /**
      * Search for a member.
      *
-     * @param string $query
-     *
-     * @return MemberModel
+     * @return array<array-key, MemberModel>
      */
-    public function search($query)
+    public function search(string $query): array
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
-            ->from('Database\Model\Member', 'm')
+            ->from(MemberModel::class, 'm')
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
             ->setMaxResults(32)
@@ -81,18 +76,15 @@ class Member
 
     /**
      * Find a member address.
-     *
-     * @param int $lidnr
-     * @param AddressTypes $type Address type
-     *
-     * @return Address
      */
-    public function findMemberAddress($lidnr, $type)
-    {
+    public function findMemberAddress(
+        int $lidnr,
+        AddressTypes $type,
+    ): ?AddressModel {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('a, m')
-            ->from('Database\Model\Address', 'a')
+            ->from(AddressModel::class, 'a')
             ->innerJoin('a.member', 'm')
             ->where('m.lidnr = :lidnr')
             ->andWhere('a.type = :type')
@@ -101,15 +93,15 @@ class Member
         $qb->setParameter(':lidnr', $lidnr);
         $qb->setParameter(':type', $type);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
      * Find all members.
      *
-     * @return array of members
+     * @return array<array-key, MemberModel>
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
@@ -118,17 +110,13 @@ class Member
      * Find a member (by lidnr).
      *
      * And calculate memberships.
-     *
-     * @param int $lidnr
-     *
-     * @return MemberModel
      */
-    public function find($lidnr)
+    public function find(int $lidnr): ?MemberModel
     {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m, r, l')
-            ->from('Database\Model\Member', 'm')
+            ->from(MemberModel::class, 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.installations', 'r')
             ->leftJoin('m.lists', 'l')
@@ -137,7 +125,7 @@ class Member
         // discharges
         $qbn = $this->em->createQueryBuilder();
         $qbn->select('d')
-            ->from('Database\Model\SubDecision\Discharge', 'd')
+            ->from(DischargeModel::class, 'd')
             ->join('d.installation', 'x')
             ->where('x.meeting_type = r.meeting_type')
             ->andWhere('x.meeting_number = r.meeting_number')
@@ -148,7 +136,7 @@ class Member
         // destroyed discharge decisions
         $qbnd = $this->em->createQueryBuilder();
         $qbnd->select('b')
-            ->from('Database\Model\SubDecision\Destroy', 'b')
+            ->from(DestroyModel::class, 'b')
             ->join('b.target', 'z')
             ->where('z.meeting_type = d.meeting_type')
             ->andWhere('z.meeting_number = d.meeting_number')
@@ -166,7 +154,7 @@ class Member
         // destroyed installation decisions
         $qbd = $this->em->createQueryBuilder();
         $qbd->select('a')
-            ->from('Database\Model\SubDecision\Destroy', 'a')
+            ->from(DestroyModel::class, 'a')
             ->join('a.target', 'y')
             ->where('y.meeting_type = r.meeting_type')
             ->andWhere('y.meeting_number = r.meeting_number')
@@ -179,17 +167,13 @@ class Member
 
         $qb->setParameter(':lidnr', $lidnr);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
      * Find a member (by lidnr).
      *
      * Do not calculate memberships.
-     *
-     * @param int $lidnr
-     *
-     * @return MemberModel|null
      */
     public function findSimple(int $lidnr): ?MemberModel
     {
@@ -209,16 +193,14 @@ class Member
 
     /**
      * Check if we can fully remove a member.
-     * @param MemberModel $member
-     * @return boolean
      */
-    public function canRemove(MemberModel $member)
+    public function canRemove(MemberModel $member): bool
     {
         // check if the member is included in budgets
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('b')
-            ->from('Database\Model\SubDecision\Budget', 'b')
+            ->from(BudgetModel::class, 'b')
             ->where('b.author = :member');
         $qb->setParameter('member', $member);
 
@@ -231,11 +213,12 @@ class Member
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('i')
-            ->from('Database\Model\SubDecision\Installation', 'i')
+            ->from(InstallationModel::class, 'i')
             ->where('i.member = :member');
         $qb->setParameter('member', $member);
 
         $results = $qb->getQuery()->getResult();
+
         if (!empty($results)) {
             return false;
         }
@@ -246,10 +229,8 @@ class Member
 
     /**
      * Persist a member model.
-     *
-     * @param MemberModel $member Member to persist.
      */
-    public function persist(MemberModel $member)
+    public function persist(MemberModel $member): void
     {
         $this->em->persist($member);
         $this->em->flush();
@@ -257,10 +238,8 @@ class Member
 
     /**
      * Remove a member.
-     *
-     * @param MemberModel $member Member to remove
      */
-    public function remove(MemberModel $member)
+    public function remove(MemberModel $member): void
     {
         $this->em->remove($member);
         $this->em->flush();
@@ -268,10 +247,8 @@ class Member
 
     /**
      * Persist an address.
-     *
-     * @param Address $address Address to persist.
      */
-    public function persistAddress(Address $address)
+    public function persistAddress(AddressModel $address): void
     {
         $this->em->persist($address);
         $this->em->flush();
@@ -279,10 +256,8 @@ class Member
 
     /**
      * Remove an address.
-     *
-     * @param Address $address Address to remove.
      */
-    public function removeAddress(Address $address)
+    public function removeAddress(AddressModel $address): void
     {
         $this->em->remove($address);
         $this->em->flush();
@@ -290,10 +265,8 @@ class Member
 
     /**
      * Get the repository for this mapper.
-     *
-     * @return Doctrine\ORM\EntityRepository
      */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
         return $this->em->getRepository('Database\Model\Member');
     }

@@ -2,21 +2,35 @@
 
 namespace Database\Form;
 
-use Database\Model\SubDecision;
+use Laminas\Form\Element\{
+    Date,
+    Radio,
+    Select,
+    Submit,
+    Text,
+};
+use Database\Form\Fieldset\{
+    Meeting as MeetingFieldset,
+    Member as MemberFieldset,
+};
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\Date;
-use Laminas\Validator\InArray;
-use Laminas\Validator\StringLength;
+use Laminas\Validator\{
+    Date as DateValidator,
+    InArray,
+    StringLength,
+};
 
 class Budget extends AbstractDecision implements InputFilterProviderInterface
 {
-    public function __construct(Fieldset\Meeting $meeting, Fieldset\Member $member)
-    {
+    public function __construct(
+        MeetingFieldset $meeting,
+        MemberFieldset $member,
+    ) {
         parent::__construct($meeting);
 
         $this->add([
             'name' => 'type',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Begroting / Afrekening',
                 'value_options' => [
@@ -28,7 +42,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Naam',
             ],
@@ -36,7 +50,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'date',
-            'type' => 'date',
+            'type' => Date::class,
             'options' => [
                 'label' => 'Datum begroting / afrekening',
             ],
@@ -48,7 +62,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'version',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Versie',
             ],
@@ -56,7 +70,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'approve',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Goedkeuren / Afkeuren',
                 'value_options' => [
@@ -70,7 +84,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'changes',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Wijzigingen',
                 'value_options' => [
@@ -84,7 +98,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Verzend',
             ],
@@ -123,7 +137,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'date' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Date::class],
+                    ['name' => DateValidator::class],
                 ],
             ],
             // TODO: update author check

@@ -3,22 +3,29 @@
 namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
-use Database\Form\Fieldset;
+use Database\Form\Fieldset\{
+    Meeting as MeetingFieldset,
+    SubDecision as SubDecisionFieldset,
+};
+use Laminas\Form\Element\{
+    Date,
+    Submit,
+};
 use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {
-    protected $service;
-
-    public function __construct(Fieldset\Meeting $meeting, Fieldset\SubDecision $installation)
-    {
+    public function __construct(
+        MeetingFieldset $meeting,
+        SubDecisionFieldset $installation,
+    ) {
         parent::__construct($meeting);
 
         $this->add(clone $installation);
 
         $this->add([
             'name' => 'date',
-            'type' => 'date',
+            'type' => Date::class,
             'options' => [
                 'label' => 'Van kracht per',
             ],
@@ -26,7 +33,7 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Dechargeer bestuurder',
             ],

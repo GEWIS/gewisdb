@@ -3,6 +3,10 @@
 namespace Database\Form;
 
 use Database\Mapper\Meeting as MeetingMapper;
+use Laminas\Form\Element\{
+    Select,
+    Submit,
+};
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
@@ -14,7 +18,7 @@ class Export extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'meetings',
-            'type' => 'select',
+            'type' => Select::class,
             'attributes' => [
                 'multiple' => 'multiple',
             ],
@@ -26,14 +30,14 @@ class Export extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Exporteer',
             ],
         ]);
     }
 
-    protected function getValueOptions(MeetingMapper $meetingMapper)
+    protected function getValueOptions(MeetingMapper $meetingMapper): array
     {
         $options = [];
 

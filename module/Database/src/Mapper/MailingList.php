@@ -2,27 +2,19 @@
 
 namespace Database\Mapper;
 
-use Database\Model\MailingList as ListModel;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
+use Database\Model\MailingList as MailingListModel;
+use Doctrine\ORM\{
+    EntityManager,
+    EntityRepository,
+};
 
 /**
  * Mailing list mapper.
  */
 class MailingList
 {
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -30,10 +22,8 @@ class MailingList
 
     /**
      * Persist a list.
-     *
-     * @param ListModel $list List to persist.
      */
-    public function persist(ListModel $list)
+    public function persist(MailingListModel $list): void
     {
         $this->em->persist($list);
         $this->em->flush();
@@ -41,10 +31,8 @@ class MailingList
 
     /**
      * Remove a list.
-     *
-     * @param ListModel $list
      */
-    public function remove(ListModel $list)
+    public function remove(MailingListModel $list): void
     {
         $this->em->remove($list);
         $this->em->flush();
@@ -53,9 +41,9 @@ class MailingList
     /**
      * Find all.
      *
-     * @return array of ListModel's
+     * @return array<array-key, MailingListModel>
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
@@ -63,9 +51,9 @@ class MailingList
     /**
      * Find all mailing lists that are on the subscription form.
      *
-     * @return array of ListModel's
+     * @return array<array-key, MailingListModel>
      */
-    public function findAllOnForm()
+    public function findAllOnForm(): array
     {
         return $this->getRepository()->findBy(['onForm' => true]);
     }
@@ -73,9 +61,9 @@ class MailingList
     /**
      * Find all default
      *
-     * @return array of ListModel's
+     * @return array<array-key, MailingListModel>
      */
-    public function findDefault()
+    public function findDefault(): array
     {
         return $this->getRepository()->findBy([
             'defaultSub' => true,
@@ -85,22 +73,16 @@ class MailingList
 
     /**
      * Find a list.
-     *
-     * @param string $name
-     *
-     * @return ListModel
      */
-    public function find($name)
+    public function find(string $name): ?MailingListModel
     {
         return $this->getRepository()->find($name);
     }
 
     /**
      * Get the repository for this mapper.
-     *
-     * @return Doctrine\ORM\EntityRepository
      */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
         return $this->em->getRepository('Database\Model\MailingList');
     }

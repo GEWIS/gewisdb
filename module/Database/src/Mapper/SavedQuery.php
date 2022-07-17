@@ -13,18 +13,8 @@ use Doctrine\ORM\{
  */
 class SavedQuery
 {
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
     protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -32,8 +22,6 @@ class SavedQuery
 
     /**
      * Persist a query.
-     *
-     * @param SavedQueryModel $query
      */
     public function persist(SavedQueryModel $query): void
     {
@@ -43,10 +31,6 @@ class SavedQuery
 
     /**
      * Find.
-     *
-     * @param int $id
-     *
-     * @return SavedQueryModel|null
      */
     public function find(int $id): ?SavedQueryModel
     {
@@ -56,7 +40,7 @@ class SavedQuery
     /**
      * Find all.
      *
-     * @return array
+     * @return array<array-key, SavedQueryModel>
      */
     public function findAll(): array
     {
@@ -65,8 +49,6 @@ class SavedQuery
 
     /**
      * Get the repository for this mapper.
-     *
-     * @return EntityRepository
      */
     public function getRepository(): EntityRepository
     {

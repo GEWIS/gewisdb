@@ -2,19 +2,23 @@
 
 namespace Database\Form;
 
-use Database\Model\SubDecision;
+use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Laminas\Form\Element\{
+    Submit,
+    Text,
+};
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\StringLength;
 
 class Other extends AbstractDecision implements InputFilterProviderInterface
 {
-    public function __construct(Fieldset\Meeting $meeting)
+    public function __construct(MeetingFieldset $meeting)
     {
         parent::__construct($meeting);
 
         $this->add([
             'name' => 'content',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Besluit',
             ],
@@ -22,7 +26,7 @@ class Other extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Verzend',
             ],

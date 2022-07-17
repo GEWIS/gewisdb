@@ -2,20 +2,18 @@
 
 namespace Database\Controller;
 
-use Database\Model\Member;
 use Database\Service\Member as MemberService;
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\View\Model\ViewModel;
-use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\{
+    ViewModel,
+    JsonModel,
+};
 
 class ProspectiveMemberController extends AbstractActionController
 {
-    /** @var MemberService $memberService */
-    private $memberService;
+    private MemberService $memberService;
 
-    /**
-     * @param MemberService $memberService
-     */
     public function __construct(MemberService $memberService)
     {
         $this->memberService = $memberService;
@@ -24,7 +22,7 @@ class ProspectiveMemberController extends AbstractActionController
     /**
      * Index  action.
      */
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         return new ViewModel([]);
     }
@@ -34,7 +32,7 @@ class ProspectiveMemberController extends AbstractActionController
      *
      * Searches for prospective members.
      */
-    public function searchAction()
+    public function searchAction(): JsonModel
     {
         $query = $this->params()->fromQuery('q');
         $res = $this->memberService->searchProspective($query);
@@ -53,9 +51,9 @@ class ProspectiveMemberController extends AbstractActionController
      *
      * Shows prospective member information.
      */
-    public function showAction()
+    public function showAction(): ViewModel
     {
-        return new ViewModel($this->memberService->getProspectiveMember($this->params()->fromRoute('id')));
+        return new ViewModel($this->memberService->getProspectiveMember((int) $this->params()->fromRoute('id')));
     }
 
     /**
@@ -63,11 +61,16 @@ class ProspectiveMemberController extends AbstractActionController
      *
      * Shows prospective member information.
      */
-    public function finalizeAction()
+    public function finalizeAction(): Response
     {
+        $lidnr = (int) $this->params()->fromRoute('id');
+
         if ($this->getRequest()->isPost()) {
-            $prospectiveMember = $this->memberService->getProspectiveMember($this->params()->fromRoute('id'))['member'];
-            $result = $this->memberService->finalizeSubscription($this->getRequest()->getPost()->toArray(), $prospectiveMember);
+            $prospectiveMember = $this->memberService->getProspectiveMember($lidnr)['member'];
+            $result = $this->memberService->finalizeSubscription(
+                $this->getRequest()->getPost()->toArray(),
+                $prospectiveMember,
+            );
 
             if (null !== $result) {
                 return $this->redirect()->toRoute('member/show', [
@@ -77,7 +80,7 @@ class ProspectiveMemberController extends AbstractActionController
         }
 
         return $this->redirect()->toRoute('prospective-member/show', [
-            'id' => $this->params()->fromRoute('id'),
+            'id' => $lidnr,
         ]);
     }
 
@@ -86,13 +89,16 @@ class ProspectiveMemberController extends AbstractActionController
      *
      * Delete a prospective member.
      */
-    public function deleteAction()
+    public function deleteAction(): Response
     {
-        $lidnr = $this->params()->fromRoute('id');
+        $lidnr = (int) $this->params()->fromRoute('id');
         $member = $this->memberService->getProspectiveMember($lidnr);
         $member = $member['member'];
 
-        $this->memberService->removeProspective($member);
+        if ($member !== null) {
+            $this->memberService->removeProspective($member);
+        }
+
         return $this->redirect()->toRoute('prospective-member');
     }
 }

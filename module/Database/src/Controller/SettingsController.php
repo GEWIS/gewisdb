@@ -2,19 +2,19 @@
 
 namespace Database\Controller;
 
-use Database\Model\Member;
-use Database\Service\InstallationFunction as InstallationFunctionService;
-use Database\Service\MailingList as MailingListService;
+use Database\Service\{
+    InstallationFunction as InstallationFunctionService,
+    MailingList as MailingListService,
+};
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class SettingsController extends AbstractActionController
 {
-    /** @var InstallationFunctionService $installationFunctionService */
-    private $installationFunctionService;
+    private InstallationFunctionService $installationFunctionService;
 
-    /** @var MailingListService $mailingListService */
-    private $mailingListService;
+    private MailingListService $mailingListService;
 
     public function __construct(
         InstallationFunctionService $installationFunctionService,
@@ -27,7 +27,7 @@ class SettingsController extends AbstractActionController
     /**
      * Index action.
      */
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         return new ViewModel([]);
     }
@@ -35,10 +35,10 @@ class SettingsController extends AbstractActionController
     /**
      * Function action.
      */
-    public function functionAction()
+    public function functionAction(): ViewModel
     {
         if ($this->getRequest()->isPost()) {
-            $this->installationFunctionService->addFunction($this->getRequest()->getPost());
+            $this->installationFunctionService->addFunction($this->getRequest()->getPost()->toArray());
         }
 
         return new ViewModel([
@@ -50,10 +50,10 @@ class SettingsController extends AbstractActionController
     /**
      * Mailing list action
      */
-    public function listAction()
+    public function listAction(): ViewModel
     {
         if ($this->getRequest()->isPost()) {
-            $this->mailingListService->addList($this->getRequest()->getPost());
+            $this->mailingListService->addList($this->getRequest()->getPost()->toArray());
         }
 
         return new ViewModel([
@@ -65,12 +65,12 @@ class SettingsController extends AbstractActionController
     /**
      * List deletion action
      */
-    public function deleteListAction()
+    public function deleteListAction(): Response|ViewModel
     {
         $name = $this->params()->fromRoute('name');
 
         if ($this->getRequest()->isPost()) {
-            if ($this->mailingListService->delete($name, $this->getRequest()->getPost())) {
+            if ($this->mailingListService->delete($name, $this->getRequest()->getPost()->toArray())) {
                 return new ViewModel([
                     'success' => true,
                     'name' => $name,
@@ -82,6 +82,7 @@ class SettingsController extends AbstractActionController
                 ]);
             }
         }
+
         return new ViewModel([
             'form' => $this->mailingListService->getDeleteListForm(),
             'name' => $name,

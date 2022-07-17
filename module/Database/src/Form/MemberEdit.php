@@ -4,13 +4,21 @@ namespace Database\Form;
 
 use Application\Model\Enums\GenderTypes;
 use Laminas\Filter\ToNull;
+use Laminas\Form\Element\{
+    Date,
+    Email,
+    Radio,
+    Submit,
+    Text,
+};
 use Laminas\Form\Form;
-use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\Digits;
-use Laminas\Validator\EmailAddress;
-use Laminas\Validator\Regex;
-use Laminas\Validator\StringLength;
+use Laminas\Validator\{
+    Digits,
+    EmailAddress,
+    Regex,
+    StringLength,
+};
 
 class MemberEdit extends Form implements InputFilterProviderInterface
 {
@@ -20,7 +28,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'lastName',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Achternaam',
             ],
@@ -28,7 +36,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'middleName',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Tussenvoegsels',
             ],
@@ -36,7 +44,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'initials',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Voorletter(s)',
             ],
@@ -44,7 +52,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'firstName',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Voornaam',
             ],
@@ -52,7 +60,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'gender',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Geslacht',
                 'value_options' => [
@@ -65,7 +73,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'tueUsername',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'TU/e-gebruikersnaam',
             ],
@@ -73,7 +81,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'email',
-            'type' => 'email',
+            'type' => Email::class,
             'options' => [
                 'label' => 'Email-adres',
             ],
@@ -81,7 +89,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'birth',
-            'type' => 'date',
+            'type' => Date::class,
             'options' => [
                 'label' => 'Geboortedatum',
             ],
@@ -89,7 +97,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'paid',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Betaald (hoe veel)',
             ],
@@ -97,7 +105,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Wijzig gegevens',
             ],

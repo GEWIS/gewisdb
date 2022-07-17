@@ -2,38 +2,49 @@
 
 namespace Database\Form;
 
-use Application\Model\Enums\AddressTypes;
-use Application\Model\Enums\GenderTypes;
+use Application\Model\Enums\{
+    AddressTypes,
+    GenderTypes,
+};
+use Database\Form\Fieldset\Address as AddressFieldset;
 use Laminas\Filter\ToNull;
+use Laminas\Form\Element\{
+    Checkbox,
+    Date,
+    Email,
+    Hidden,
+    Radio,
+    Select,
+    Submit,
+    Text,
+};
 use Laminas\Form\Form;
 use Laminas\I18n\Filter\Alnum;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\I18n\Translator\TranslatorInterface as Translator;
-use Laminas\Validator\Iban;
-use Laminas\Validator\Identical;
-use Laminas\Validator\Regex;
-use Laminas\Validator\StringLength;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
+use Laminas\Validator\{
+    Iban,
+    Identical,
+    Regex,
+    StringLength,
+};
 
 class Member extends Form implements InputFilterProviderInterface
 {
-    /**
-     * Lists
-     */
-    protected $lists;
+    protected array $lists;
 
-    /**
-     * Translator.
-     */
-    protected $translator;
+    protected MvcTranslator $translator;
 
-    public function __construct(Fieldset\Address $address, Translator $translator)
-    {
+    public function __construct(
+        AddressFieldset $address,
+        MvcTranslator $translator,
+    ) {
         parent::__construct();
         $this->translator = $translator;
 
         $this->add([
             'name' => 'lastName',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Achternaam'),
             ],
@@ -41,7 +52,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'middleName',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Tussenvoegsels'),
             ],
@@ -49,7 +60,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'initials',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Voorletter(s)'),
             ],
@@ -57,7 +68,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'firstName',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Voornaam'),
             ],
@@ -65,7 +76,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'gender',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'value_options' => [
                     GenderTypes::Male->value => $translator->translate('Man'),
@@ -78,7 +89,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'tueUsername',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('TU/e-gebruikersnaam'),
             ],
@@ -86,7 +97,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'study',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'label' => $translator->translate('Studie'),
                 'value_options' => [
@@ -121,7 +132,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'email',
-            'type' => 'email',
+            'type' => Email::class,
             'options' => [
                 'label' => $translator->translate('Email-adres'),
             ],
@@ -129,7 +140,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'birth',
-            'type' => 'date',
+            'type' => Date::class,
             'options' => [
                 'label' => $translator->translate('Geboortedatum'),
             ],
@@ -143,7 +154,7 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'iban',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('IBAN'),
             ],
@@ -151,12 +162,12 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'signature',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'signatureLocation',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Plaats van ondertekening'),
             ],
@@ -164,17 +175,17 @@ class Member extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'agreediban',
-            'type' => 'checkbox',
+            'type' => Checkbox::class,
         ]);
 
         $this->add([
             'name' => 'agreed',
-            'type' => 'checkbox',
+            'type' => Checkbox::class,
         ]);
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => $translator->translate('Schrijf in'),
             ],
@@ -183,17 +194,17 @@ class Member extends Form implements InputFilterProviderInterface
 
     /**
      * Set the mailing lists.
-     *
-     * @param array $lists Array of mailing lists
      */
-    public function setLists($lists)
+    public function setLists(array $lists): void
     {
         $this->lists = $lists;
         foreach ($this->lists as $list) {
             $desc = $list->getNlDescription();
+
             if ($this->translator->getLocale() == 'en') {
                 $desc = $list->getEnDescription();
             }
+
             $this->add([
                 'name' => 'list-' . $list->getName(),
                 'type' => 'checkbox',
@@ -201,6 +212,7 @@ class Member extends Form implements InputFilterProviderInterface
                     'label' => '<strong>' . $list->getName() . '</strong> ' . $desc,
                 ],
             ]);
+
             if ($list->getDefaultSub()) {
                 $this->get('list-' . $list->getName())->setChecked(true);
             }
@@ -209,10 +221,8 @@ class Member extends Form implements InputFilterProviderInterface
 
     /**
      * Get the mailing lists.
-     *
-     * @return array of mailing lists
      */
-    public function getLists()
+    public function getLists(): array
     {
         return $this->lists;
     }

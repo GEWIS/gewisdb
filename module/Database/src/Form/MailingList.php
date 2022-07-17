@@ -2,8 +2,13 @@
 
 namespace Database\Form;
 
+use Laminas\Form\Element\{
+    Checkbox,
+    Submit,
+    Text,
+    Textarea,
+};
 use Laminas\Form\Form;
-use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\StringLength;
 
@@ -15,23 +20,23 @@ class MailingList extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Naam',
             ],
         ]);
 
         $this->add([
-            'name' => 'description',
-            'type' => 'textarea',
+            'name' => 'nl_description',
+            'type' => Textarea::class,
             'options' => [
                 'label' => 'Beschrijving (nederlands)',
             ],
         ]);
 
         $this->add([
-            'name' => 'enDescription',
-            'type' => 'textarea',
+            'name' => 'en_description',
+            'type' => Textarea::class,
             'options' => [
                 'label' => 'Beschrijving (engels)',
             ],
@@ -39,7 +44,7 @@ class MailingList extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'onForm',
-            'type' => 'checkbox',
+            'type' => Checkbox::class,
             'options' => [
                 'label' => 'Op inschrijfformulier',
             ],
@@ -48,7 +53,7 @@ class MailingList extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'defaultSub',
-            'type' => 'checkbox',
+            'type' => Checkbox::class,
             'options' => [
                 'label' => 'Standaard ingeschreven',
             ],
@@ -56,7 +61,7 @@ class MailingList extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Voeg lijst toe',
             ],
@@ -81,7 +86,7 @@ class MailingList extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
-            'description' => [
+            'nl_description' => [
                 'required' => true,
                 'validators' => [
                     [
@@ -92,7 +97,7 @@ class MailingList extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
-            'enDescription' => [
+            'en_description' => [
                 'required' => true,
                 'validators' => [
                     [

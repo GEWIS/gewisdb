@@ -3,10 +3,13 @@
 namespace Database\Form\Fieldset;
 
 use Application\Model\Enums\MeetingTypes;
+use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\Digits;
-use Laminas\Validator\InArray;
+use Laminas\Validator\{
+    Digits,
+    InArray,
+};
 
 class Decision extends Fieldset implements InputFilterProviderInterface
 {
@@ -16,22 +19,22 @@ class Decision extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'meeting_type',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'meeting_number',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'point',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'number',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
     }
 

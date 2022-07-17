@@ -2,19 +2,30 @@
 
 namespace Database\Form;
 
+use Database\Form\Fieldset\{
+    Installation as InstallationFieldset,
+    Meeting as MeetingFieldset,
+    SubDecision as SubDecisionFieldset,
+};
+use Laminas\Form\Element\{
+    Collection,
+    Submit,
+    Text,
+};
+
 class Install extends AbstractDecision
 {
     public function __construct(
-        Fieldset\Meeting $meeting,
-        Fieldset\Installation $install,
-        Fieldset\SubDecision $discharge,
-        Fieldset\SubDecision $foundation,
+        MeetingFieldset $meeting,
+        InstallationFieldset $install,
+        SubDecisionFieldset $discharge,
+        SubDecisionFieldset $foundation,
     ) {
         parent::__construct($meeting);
 
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Orgaan',
             ],
@@ -24,7 +35,7 @@ class Install extends AbstractDecision
 
         $this->add([
             'name' => 'installations',
-            'type' => 'collection',
+            'type' => Collection::class,
             'options' => [
                 'label' => 'Installations',
                 'count' => 1,
@@ -35,7 +46,7 @@ class Install extends AbstractDecision
 
         $this->add([
             'name' => 'discharges',
-            'type' => 'collection',
+            'type' => Collection::class,
             'options' => [
                 'label' => 'Members',
                 'count' => 1,
@@ -46,7 +57,7 @@ class Install extends AbstractDecision
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Maak wijzigingen',
             ],

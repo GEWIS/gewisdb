@@ -2,14 +2,15 @@
 
 namespace Database\Form\Fieldset;
 
-use Database\Model\SubDecision\Installation as InstallationModel;
+use Database\Form\Fieldset\Member as MemberFieldset;
+use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\StringLength;
 
 class Installation extends Fieldset implements InputFilterProviderInterface
 {
-    public function __construct(Member $member)
+    public function __construct(MemberFieldset $member)
     {
         parent::__construct('installation');
 
@@ -18,7 +19,7 @@ class Installation extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'function',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
     }
 

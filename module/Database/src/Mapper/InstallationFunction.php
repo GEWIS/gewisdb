@@ -2,27 +2,19 @@
 
 namespace Database\Mapper;
 
-use Database\Model\InstallationFunction as FunctionModel;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
+use Database\Model\InstallationFunction as InstallationFunctionModel;
+use Doctrine\ORM\{
+    EntityManager,
+    EntityRepository,
+};
 
 /**
  * Installation Function mapper
  */
 class InstallationFunction
 {
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -30,10 +22,8 @@ class InstallationFunction
 
     /**
      * Persist a function.
-     *
-     * @param FunctionModel $function Function to persist.
      */
-    public function persist(FunctionModel $function)
+    public function persist(InstallationFunctionModel $function): void
     {
         $this->em->persist($function);
         $this->em->flush();
@@ -41,20 +31,19 @@ class InstallationFunction
 
     /**
      * Find all.
-     * @return array of FunctionModel's
+     *
+     * @return array<array-key, InstallationFunctionModel>
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }
 
     /**
      * Get the repository for this mapper.
-     *
-     * @return Doctrine\ORM\EntityRepository
      */
-    public function getRepository()
+    public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository('Database\Model\InstallationFunction');
+        return $this->em->getRepository(InstallationFunctionModel::class);
     }
 }

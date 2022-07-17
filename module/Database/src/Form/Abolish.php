@@ -2,19 +2,27 @@
 
 namespace Database\Form;
 
+use Database\Form\Fieldset\{
+    Meeting as MeetingFieldset,
+    SubDecision as SubDecisionFieldset,
+};
+use Laminas\Form\Element\{
+    Submit,
+    Text,
+};
 use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Abolish extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
-        Fieldset\Meeting $meeting,
-        Fieldset\SubDecision $subdecision,
+        MeetingFieldset $meeting,
+        SubDecisionFieldset $subdecision,
     ) {
         parent::__construct($meeting);
 
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Orgaan',
             ],
@@ -22,7 +30,7 @@ class Abolish extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'value' => 'Hef orgaan op',
             ],

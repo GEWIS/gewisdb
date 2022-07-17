@@ -2,9 +2,8 @@
 
 namespace Database\Hydrator;
 
-use Database\Model\Decision;
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Destroy as DestroyDecision;
+use Database\Model\SubDecision\Destroy as DestroyModel;
 
 class Destroy extends AbstractDecision
 {
@@ -22,7 +21,7 @@ class Destroy extends AbstractDecision
     {
         $object = parent::hydrate($data, $object);
 
-        $destroy = new DestroyDecision();
+        $destroy = new DestroyModel();
 
         $destroy->setTarget($data['fdecision']);
 

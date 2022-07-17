@@ -8,18 +8,14 @@ use Laminas\View\Model\ViewModel;
 
 class AddressController extends AbstractActionController
 {
-    /** @var MemberService $memberService */
-    private $memberService;
+    private MemberService $memberService;
 
-    /**
-     * @param MemberService $memberService
-     */
     public function __construct(MemberService $memberService)
     {
         $this->memberService = $memberService;
     }
 
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         return new ViewModel([
             'form' => $this->memberService->getAddressExportForm(),
