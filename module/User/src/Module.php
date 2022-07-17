@@ -3,7 +3,6 @@
 namespace User;
 
 use Laminas\Authentication\AuthenticationService;
-use Laminas\Console\Response;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Authentication\Storage\Session as SessionStorage;
 
@@ -22,11 +21,6 @@ class Module
         $eventManager->attach(MvcEvent::EVENT_ROUTE, function ($e) use ($authService) {
             if ($authService->hasIdentity()) {
                 // user is logged in, just continue
-                return;
-            }
-
-            if ($e->getResponse() instanceof Response) {
-                // console route, always fine
                 return;
             }
 
@@ -58,18 +52,6 @@ class Module
                 return $response;
             }
         }, -100);
-
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
-            // Check if not a console route, as the console has no headers.
-            if (!($e->getResponse() instanceof Response)) {
-                if (!$authService->hasIdentity()) {
-                    $response = $e->getResponse();
-                    $response->getHeaders()->addHeaderLine('Location', '/user');
-                    $response->setStatusCode(302);
-                    return $response;
-                }
-            }
-        });
     }
 
     /**
