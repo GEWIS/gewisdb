@@ -8,6 +8,7 @@ use Database\Model\SubDecision\{
     Destroy as DestroyModel,
     Discharge as DischargeModel,
     Foundation as FoundationModel,
+    Installation as InstallationModel,
 };
 use Doctrine\ORM\{
     EntityManager,
@@ -103,6 +104,58 @@ class Organ
         $qb->setParameter(':decision_point', $decisionPoint);
         $qb->setParameter(':decision_number', $decisionNumber);
         $qb->setParameter(':number', $subdecisionNumber);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findSimple(
+        MeetingTypes $meetingType,
+        int $meetingNumber,
+        int $decisionPoint,
+        int $decisionNumber,
+        int $number = null,
+    ): ?FoundationModel {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('f')
+            ->from(FoundationModel::class, 'f')
+            ->where('f.meeting_type = :meeting_type')
+            ->andWhere('f.meeting_number = :meeting_number')
+            ->andWhere('f.decision_point = :decision_point')
+            ->andWhere('f.decision_number = :decision_number')
+            ->andWhere('f.number = :number');
+
+        $qb->setParameter(':meeting_type', $meetingType);
+        $qb->setParameter(':meeting_number', $meetingNumber);
+        $qb->setParameter(':decision_point', $decisionPoint);
+        $qb->setParameter(':decision_number', $decisionNumber);
+        $qb->setParameter(':number', $number);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findInstallationDecision(
+        MeetingTypes $meetingType,
+        int $meetingNumber,
+        int $decisionPoint,
+        int $decisionNumber,
+        int $number = null,
+    ): ?InstallationModel {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('i')
+            ->from(InstallationModel::class, 'i')
+            ->where('i.meeting_type = :meeting_type')
+            ->andWhere('i.meeting_number = :meeting_number')
+            ->andWhere('i.decision_point = :decision_point')
+            ->andWhere('i.decision_number = :decision_number')
+            ->andWhere('i.number = :number');
+
+        $qb->setParameter(':meeting_type', $meetingType);
+        $qb->setParameter(':meeting_number', $meetingNumber);
+        $qb->setParameter(':decision_point', $decisionPoint);
+        $qb->setParameter(':decision_number', $decisionNumber);
+        $qb->setParameter(':number', $number);
 
         return $qb->getQuery()->getOneOrNullResult();
     }

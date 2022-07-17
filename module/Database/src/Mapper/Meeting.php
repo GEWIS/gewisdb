@@ -137,26 +137,26 @@ class Meeting
      * Find a decision.
      */
     public function findDecision(
-        MeetingTypes $type,
-        int $number,
-        int $point,
-        int $decision,
+        MeetingTypes $meetingType,
+        int $meetingNumber,
+        int $decisionPoint,
+        int $decisionNumber,
     ): ?DecisionModel {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('d, s')
             ->from(DecisionModel::class, 'd')
-            ->where('d.meeting_type = :type')
-            ->andWhere('d.meeting_number = :number')
-            ->andWhere('d.point = :point')
-            ->andWhere('d.number = :decision')
+            ->where('d.meeting_type = :meeting_type')
+            ->andWhere('d.meeting_number = :meeting_number')
+            ->andWhere('d.point = :decision_point')
+            ->andWhere('d.number = :decision_number')
             ->leftJoin('d.subdecisions', 's')
             ->orderBy('s.number');
 
-        $qb->setParameter(':type', $type);
-        $qb->setParameter(':number', $number);
-        $qb->setParameter(':point', $point);
-        $qb->setParameter(':decision', $decision);
+        $qb->setParameter(':meeting_type', $meetingType);
+        $qb->setParameter(':meeting_number', $meetingNumber);
+        $qb->setParameter(':decision_point', $decisionPoint);
+        $qb->setParameter(':decision_number', $decisionNumber);
 
         return $qb->getQuery()->getOneOrNullResult();
     }

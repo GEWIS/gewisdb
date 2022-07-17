@@ -50,8 +50,8 @@ class Install extends AbstractDecision
                 $installation = new InstallationModel();
                 $installation->setNumber($num++);
                 $installation->setFoundation($foundation);
-                $installation->setFunction($install->function);
-                $installation->setMember($install->member);
+                $installation->setFunction($install['function']);
+                $installation->setMember($install['member']);
                 $installation->setDecision($decision);
             }
         }

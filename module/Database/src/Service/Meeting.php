@@ -19,7 +19,10 @@ use Database\Form\Board\{
     Install as BoardInstallForm,
     Release as BoardReleaseForm,
 };
-use Database\Hydrator\Foundation as FoundationHydrator;
+use Database\Hydrator\{
+    Foundation as FoundationHydrator,
+    Install as InstallHydrator,
+};
 use Database\Mapper\{
     Meeting as MeetingMapper,
     Member as MemberMapper,
@@ -386,7 +389,12 @@ class Meeting
         $form = $this->getInstallForm();
 
         $form->setData($data);
-        $form->bind(new DecisionModel());
+        // IMPORTANT:
+        // The following line has been disabled to fix an issue with the validation of the member function fieldset in
+        // the installation form. For some reason, when binding a decision, the fieldset loses its data, which prevents
+        // proper validation of the data. We can bypass this by regularly checking the form and using the hydrator
+        // afterwards to create the actual entities.
+        // $form->bind(new Decision());
 
         if (!$form->isValid()) {
             return [
@@ -395,8 +403,70 @@ class Meeting
             ];
         }
 
-        /** @var DecisionModel $decision */
+        // See important note above, this does not return an object. Because we are not doing this the normal way we
+        // must ensure that the meeting actually exists.
         $decision = $form->getData();
+        $meeting = $this->getMeeting(
+            MeetingTypes::from($decision['meeting']['type']),
+            (int) $decision['meeting']['number'],
+        );
+        $subdecision = $this->getOrganMapper()->findSimple(
+            MeetingTypes::from($decision['subdecision']['meeting_type']),
+            (int) $decision['subdecision']['meeting_number'],
+            (int) $decision['subdecision']['decision_point'],
+            (int) $decision['subdecision']['decision_number'],
+            (int) $decision['subdecision']['number'],
+        );
+
+        if (
+            null === $meeting
+            || null === $subdecision
+            || (
+                $meeting->getType() !== $subdecision->getMeetingType()
+                || $meeting->getNumber() !== $subdecision->getMeetingNumber()
+            )
+        ) {
+            return [
+                'type' => 'install',
+                'form' => $form,
+            ];
+        }
+
+        $decision['meeting'] = $meeting;
+        $decision['subdecision'] = $subdecision;
+
+        $installations = [];
+        array_walk($decision['installations'], function ($value) use (&$installations) {
+            $member = $this->memberMapper->findSimple((int) $value['member']['lidnr']);
+
+            if (null !== $member) {
+                $installations[] = [
+                    'member' => $member,
+                    'function' => $value['function'],
+                ];
+            }
+        });
+
+        $decision['installations'] = $installations;
+
+        $discharges = [];
+        array_walk($decision['discharges'], function ($value) use (&$discharges) {
+            $decision = $this->getOrganMapper()->findInstallationDecision(
+                MeetingTypes::from($value['meeting_type']),
+                (int) $value['meeting_number'],
+                (int) $value['decision_point'],
+                (int) $value['decision_number'],
+                (int) $value['number'],
+            );
+
+            if (null !== $decision) {
+                $discharges[] = $decision;
+            }
+        });
+
+        $decision['discharges'] = $discharges;
+
+        $decision = (new InstallHydrator())->hydrate($decision, new DecisionModel());
 
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
