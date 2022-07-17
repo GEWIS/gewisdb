@@ -80,6 +80,7 @@ use Database\Service\Query as QueryService;
 use Doctrine\Laminas\Hydrator\DoctrineObject;
 use Doctrine\ORM\Events;
 use Laminas\Hydrator\ObjectPropertyHydrator;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Mvc\MvcEvent;
 use Psr\Container\ContainerInterface;
 use Report\Listener\DatabaseDeletionListener;
@@ -159,7 +160,7 @@ class Module
                 MemberForm::class => function (ContainerInterface $container) {
                     $form = new MemberForm(
                         $container->get(AddressFieldset::class),
-                        $container->get('translator'),
+                        $container->get(MvcTranslator::class),
                     );
                     $form->setHydrator($container->get('database_hydrator_member'));
                     $form->setLists($container->get(MailingListMapper::class)->findAllOnForm());
@@ -339,7 +340,7 @@ class Module
                     return $fieldset;
                 },
                 AddressFieldset::class => function (ContainerInterface $container) {
-                    $fs = new AddressFieldset($container->get('translator'));
+                    $fs = new AddressFieldset($container->get(MvcTranslator::class));
                     $fs->setHydrator($container->get('database_hydrator_address'));
                     $fs->setObject(new AddressModel());
                     return $fs;

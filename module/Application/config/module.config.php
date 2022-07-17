@@ -23,11 +23,6 @@ return [
             ],
         ],
     ],
-    'service_manager' => [
-        'aliases' => [
-            'translator' => 'MvcTranslator',
-        ],
-    ],
     // however counter-intuitive it is, leaving this in makes sure we do not
     // need the intl extension
     'translator' => [
