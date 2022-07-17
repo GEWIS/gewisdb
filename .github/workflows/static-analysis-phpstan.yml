@@ -17,6 +17,11 @@ jobs:
                     POSTGRES_USER: gewisdb
                 ports:
                     - 5432:5432
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
 
         steps:
             -   name: Checkout head branch
@@ -62,12 +67,14 @@ jobs:
 
             -   name: Create database
                 env:
-                    DOCKER_DB_HOST: 127.0.0.1
+                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
+                    DOCTRINE_REPORT_HOST: 127.0.0.1
                 run: ./orm orm:schema-tool:update --force
 
             -   name: Generate PHPStan Baseline
                 env:
-                    DOCKER_DB_HOST: 127.0.0.1
+                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
+                    DOCTRINE_REPORT_HOST: 127.0.0.1
                 run: |
                     echo "" > phpstan/phpstan-baseline.neon
                     echo "" > phpstan/phpstan-baseline-pr.neon
@@ -88,12 +95,14 @@ jobs:
 
             -   name: Create database
                 env:
-                    DOCKER_DB_HOST: 127.0.0.1
+                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
+                    DOCTRINE_REPORT_HOST: 127.0.0.1
                 run: ./orm orm:schema-tool:update --force
 
             -   name: Run PHPStan
                 env:
-                    DOCKER_DB_HOST: 127.0.0.1
+                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
+                    DOCTRINE_REPORT_HOST: 127.0.0.1
                 run: |
                     cp phpstan/phpstan-baseline-temp.neon phpstan/phpstan-baseline-pr.neon
                     vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr
