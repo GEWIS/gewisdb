@@ -14,11 +14,14 @@ use Database\Form\Export as ExportForm;
 use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
 use Database\Form\Other as OtherForm;
+use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Mapper\Meeting as MeetingMapper;
+use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\Organ as OrganMapper;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\Decision;
 use Database\Model\SubDecision\Foundation as FoundationModel;
+use Laminas\Form\FormInterface;
 use ReflectionObject;
 use Laminas\Stdlib\PriorityQueue;
 
@@ -63,6 +66,8 @@ class Meeting
     /** @var MeetingMapper $meetingMapper */
     private $meetingMapper;
 
+    private MemberMapper $memberMapper;
+
     /** @var OrganMapper $organMapper */
     private $organMapper;
 
@@ -80,6 +85,7 @@ class Meeting
      * @param InstallForm $installForm
      * @param OtherForm $otherForm
      * @param MeetingMapper $meetingMapper
+     * @param MemberMapper $memberMapper
      * @param OrganMapper $organMapper
      */
     public function __construct(
@@ -96,6 +102,7 @@ class Meeting
         InstallForm $installForm,
         OtherForm $otherForm,
         MeetingMapper $meetingMapper,
+        MemberMapper $memberMapper,
         OrganMapper $organMapper,
     ) {
         $this->abolishForm = $abolishForm;
@@ -111,6 +118,7 @@ class Meeting
         $this->installForm = $installForm;
         $this->otherForm = $otherForm;
         $this->meetingMapper = $meetingMapper;
+        $this->memberMapper = $memberMapper;
         $this->organMapper = $organMapper;
     }
 
@@ -478,7 +486,12 @@ class Meeting
         $form = $this->getFoundationForm();
 
         $form->setData($data);
-        $form->bind(new Decision());
+        // IMPORTANT:
+        // The following line has been disabled to fix an issue with the validation of the member function fieldset in
+        // the foundation form. For some reason, when binding a decision, the fieldset loses its data, which prevents
+        // proper validation of the data. We can bypass this by regularly checking the form and using the hydrator
+        // afterwards to create the actual entities.
+        // $form->bind(new Decision());
 
         if (!$form->isValid()) {
             return [
@@ -487,8 +500,34 @@ class Meeting
             ];
         }
 
-
+        // See important note above, this does not return an object. Because we are not doing this the normal way we
+        // must ensure that the meeting actually exists.
         $decision = $form->getData();
+        $meeting = $this->getMeeting(...$decision['meeting']);
+
+        if (null === $meeting) {
+            return [
+                'type' => 'foundation',
+                'form' => $form,
+            ];
+        }
+
+        $decision['meeting'] = $meeting;
+
+        $members = [];
+        array_walk($decision['members'], function ($value) use (&$members) {
+            $member = $this->memberMapper->findSimple((int) $value['member']['lidnr']);
+
+            if (null !== $member) {
+                $members[] = [
+                    'member' => $member,
+                    'function' => $value['function'],
+                ];
+            }
+        });
+
+        $decision['members'] = $members;
+        $decision = (new FoundationHydrator())->hydrate($decision, new Decision());
 
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());

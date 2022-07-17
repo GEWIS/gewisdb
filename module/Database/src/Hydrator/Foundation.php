@@ -2,6 +2,7 @@
 
 namespace Database\Hydrator;
 
+use Application\Model\Enums\OrganTypes;
 use Database\Model\Decision;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Foundation as FoundationDecision;
@@ -28,6 +29,11 @@ class Foundation extends AbstractDecision
         $foundation->setNumber(1);
         $foundation->setAbbr($data['abbr']);
         $foundation->setName($data['name']);
+
+        if (!($data['type'] instanceof OrganTypes)) {
+            $data['type'] = OrganTypes::from($data['type']);
+        }
+
         $foundation->setOrganType($data['type']);
         $foundation->setDecision($decision);
 
@@ -37,20 +43,20 @@ class Foundation extends AbstractDecision
         foreach ($data['members'] as $install) {
             // if an installation has a different function than 'member'
             // also add a member installation
-            if ($install->function != 'Lid') {
+            if ($install['function'] != 'Lid') {
                 $installation = new InstallationDecision();
                 $installation->setNumber($num++);
                 $installation->setFoundation($foundation);
                 $installation->setFunction('Lid');
-                $installation->setMember($install->member);
+                $installation->setMember($install['member']);
                 $installation->setDecision($decision);
             }
 
             $installation = new InstallationDecision();
             $installation->setNumber($num++);
             $installation->setFoundation($foundation);
-            $installation->setFunction($install->function);
-            $installation->setMember($install->member);
+            $installation->setFunction($install['function']);
+            $installation->setMember($install['member']);
             $installation->setDecision($decision);
         }
 

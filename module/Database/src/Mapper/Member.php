@@ -189,9 +189,9 @@ class Member
      *
      * @param int $lidnr
      *
-     * @return MemberModel
+     * @return MemberModel|null
      */
-    public function findSimple($lidnr)
+    public function findSimple(int $lidnr): ?MemberModel
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -204,7 +204,7 @@ class Member
 
         $qb->setParameter(':lidnr', $lidnr);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**

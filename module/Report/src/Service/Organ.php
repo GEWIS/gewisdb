@@ -5,9 +5,11 @@ namespace Report\Service;
 use Doctrine\ORM\EntityManager;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
+use ReflectionProperty;
 use Report\Model\Organ as ReportOrgan;
 use Report\Model\OrganMember;
 use Report\Model\SubDecision\Abrogation;
+use Report\Model\SubDecision\Foundation;
 use Report\Model\SubDecision\Installation;
 
 class Organ
@@ -82,8 +84,13 @@ class Organ
 
     public function generateFoundation($foundation)
     {
-        // see if there already is an organ
-        $repOrgan = $foundation->getOrgan();
+        // see if there already is an organ (with a slight hack)
+        $rp = new ReflectionProperty(Foundation::class, 'organ');
+        if ($rp->isInitialized($foundation)) {
+            $repOrgan = $foundation->getOrgan();
+        } else {
+            $repOrgan = null;
+        }
 
         if (null === $repOrgan) {
             $repOrgan = new ReportOrgan();
@@ -123,8 +130,19 @@ class Organ
     {
         $repo = $this->emReport->getRepository('Report\Model\Organ');
         // get full reference
-        $organMember = $ref->getOrganMember();
-        $repOrgan = $ref->getFoundation()->getOrgan();
+        $rp = new ReflectionProperty(Installation::class, 'organMember');
+        if ($rp->isInitialized($ref)) {
+            $organMember = $ref->getOrganMember();
+        } else {
+            $organMember = null;
+        }
+
+        $rp = new ReflectionProperty(Foundation::class, 'organ');
+        if ($rp->isInitialized($ref->getFoundation())) {
+            $repOrgan = $ref->getFoundation()->getOrgan();
+        } else {
+            $repOrgan = null;
+        }
 
         if ($repOrgan === null) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet

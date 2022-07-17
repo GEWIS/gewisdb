@@ -15,6 +15,7 @@ use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
 use Database\Form\Other as OtherForm;
 use Database\Mapper\Meeting as MeetingMapper;
+use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\Organ as OrganMapper;
 use Database\Service\Meeting as MeetingService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -60,6 +61,8 @@ class MeetingFactory implements FactoryInterface
         $otherForm = $container->get(OtherForm::class);
         /** @var MeetingMapper $meetingMapper */
         $meetingMapper = $container->get(MeetingMapper::class);
+        /** @var MemberMapper $memberMapper */
+        $memberMapper = $container->get(MemberMapper::class);
         /** @var OrganMapper $organMapper */
         $organMapper = $container->get(OrganMapper::class);
 
@@ -77,6 +80,7 @@ class MeetingFactory implements FactoryInterface
             $installForm,
             $otherForm,
             $meetingMapper,
+            $memberMapper,
             $organMapper,
         );
     }

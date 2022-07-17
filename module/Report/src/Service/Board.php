@@ -3,7 +3,9 @@
 namespace Report\Service;
 
 use Doctrine\ORM\EntityManager;
+use ReflectionProperty;
 use Report\Model\BoardMember as BoardMemberModel;
+use Report\Model\SubDecision\Board\Installation;
 
 class Board
 {
@@ -27,7 +29,12 @@ class Board
 
         $installs = $repo->findAll();
         foreach ($installs as $install) {
-            $boardMember = $install->getBoardMember();
+            $rp = new ReflectionProperty(Installation::class, 'boardMember');
+            if ($rp->isInitialized($install)) {
+                $boardMember = $install->getBoardMember();
+            } else {
+                $boardMember = null;
+            }
 
             if (null === $boardMember) {
                 $boardMember = new BoardMemberModel();
