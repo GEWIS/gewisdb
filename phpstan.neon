@@ -20,8 +20,6 @@ parameters:
         - module/Application/src
         - module/Checker/src
         - module/Database/src
-        - module/Export/src
-        - module/Import/src
         - module/Report/src
         - module/User/src
         - module/Application/test

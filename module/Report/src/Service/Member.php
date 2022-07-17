@@ -4,9 +4,9 @@ namespace Report\Service;
 
 use Database\Mapper\Member as MemberMapper;
 use Doctrine\ORM\EntityManager;
-use Laminas\Cache\Exception\LogicException;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
+use LogicException;
 use Report\Model\Member as ReportMember;
 use Report\Model\Address as ReportAddress;
 
@@ -136,7 +136,7 @@ class Member
         if ($reportMember === null) {
             $reportMember = $this->emReport->getRepository('Report\Model\Member')->find($address->getMember()->getLidnr());
             if ($reportMember === null) {
-                throw new \LogicException('Address without member');
+                throw new LogicException('Address without member');
             }
         }
 

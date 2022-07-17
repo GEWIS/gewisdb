@@ -146,7 +146,6 @@ class AutomaticControllerTest extends BaseControllerTest
         $params = [];
 
         $params['id'] = 1;
-        $params['appId'] = 1;
         $params['number'] = 1;
         $params['action'] = '';
 
@@ -155,24 +154,6 @@ class AutomaticControllerTest extends BaseControllerTest
         $params['organ'] = 1;
         $params['type'] = 'committee';
         $params['abbr'] = 'WC';
-
-        $params['category'] = 'vacancies';
-        $params['companySlugName'] = 'asml';
-        $params['packageId'] = 1;
-        $params['jobId'] = 1;
-        $params['jobLabelId'] = 1;
-        $params['jobCategoryId'] = 1;
-        $params['jobSlugName'] = 'gen_CS_offers';
-
-        $params['album_type'] = 'album';
-        $params['album_id'] = 1;
-        $params['photo_id'] = 1;
-        $params['signupList'] = 1;
-
-        $params['regulation'] = 'key-policy';
-        $params['filename'] = 'file.pdf';
-
-        $params['code'] = 'rbIfZwWKyN7gavp00f4Ygs1ANuGDsL8v';
 
         return $params;
     }
