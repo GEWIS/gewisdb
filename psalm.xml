@@ -16,8 +16,6 @@
         <directory name="module/Application/src"/>
         <directory name="module/Checker/src"/>
         <directory name="module/Database/src"/>
-        <directory name="module/Export/src"/>
-        <directory name="module/Import/src"/>
         <directory name="module/Report/src"/>
         <directory name="module/User/src"/>
         <directory name="module/Application/test"/>
