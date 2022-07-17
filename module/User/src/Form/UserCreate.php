@@ -2,8 +2,18 @@
 
 namespace User\Form;
 
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Element\{
+    Password,
+    Submit,
+    Text,
+};
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\{
+    Identical,
+    Regex,
+    StringLength,
+};
 
 class UserCreate extends Form implements InputFilterProviderInterface
 {
@@ -13,83 +23,83 @@ class UserCreate extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'login',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
-                'label' => 'Login'
-            ]
+                'label' => 'Login',
+            ],
         ]);
 
         $this->add([
             'name' => 'password',
-            'type' => 'password',
+            'type' => Password::class,
             'options' => [
-                'label' => 'Wachtwoord'
-            ]
+                'label' => 'Wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'password_verify',
-            'type' => 'password',
+            'type' => Password::class,
             'options' => [
-                'label' => 'Controleer wachtwoord'
-            ]
+                'label' => 'Controleer wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
-                'value' => 'Maak gebruiker aan'
-            ]
+                'value' => 'Maak gebruiker aan',
+            ],
         ]);
     }
 
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [
             'login' => [
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => [
                             'min' => 3,
-                            'max' => 32
-                        ]
+                            'max' => 32,
+                        ],
                     ],
                     [
-                        'name' => 'regex',
+                        'name' => Regex::class,
                         'options' => [
-                            'pattern' => '/^[a-zA-Z0-9]*$/'
-                        ]
-                    ]
-                ]
+                            'pattern' => '/^[a-zA-Z0-9]*$/',
+                        ],
+                    ],
+                ],
             ],
             'password' => [
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => [
-                            'min' => 10
-                        ]
-                    ]
-                ]
+                            'min' => 10,
+                        ],
+                    ],
+                ],
             ],
             'password_verify' => [
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => 'identical',
+                        'name' => Identical::class,
                         'options' => [
-                            'token' => 'password'
-                        ]
-                    ]
-                ]
-            ]
+                            'token' => 'password',
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 }

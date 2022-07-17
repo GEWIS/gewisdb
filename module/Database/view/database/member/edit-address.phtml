@@ -1,16 +1,18 @@
 <?php
-use Database\Model\Address;
+
+use Application\Model\Enums\AddressTypes;
+
 $type = '';
 switch ($address->getType()) {
-case Address::TYPE_HOME:
-    $type = 'thuisadres';
-    break;
-case Address::TYPE_STUDENT:
-    $type = 'kameradres';
-    break;
-case Address::TYPE_MAIL:
-    $type = 'postadres';
-    break;
+    case AddressTypes::Home:
+        $type = 'thuisadres';
+        break;
+    case AddressTypes::Student:
+        $type = 'kameradres';
+        break;
+    case AddressTypes::Mail:
+        $type = 'postadres';
+        break;
 }
 ?>
 <?php if (isset($success) && $success): ?>
@@ -36,12 +38,12 @@ $form->prepare();
 if (isset($add) && $add) {
     $form->setAttribute('action', $this->url('member/show/add-address', array(
         'id' => $address->getMember()->getLidnr(),
-        'type' => $address->getType()
+        'type' => $address->getType()->value
     )));
 } else {
     $form->setAttribute('action', $this->url('member/show/edit/address', array(
         'id' => $address->getMember()->getLidnr(),
-        'type' => $address->getType()
+        'type' => $address->getType()->value
     )));
 }
 $form->setAttribute('method', 'post');

@@ -1,6 +1,11 @@
 <?php
-use Database\Model\Member;
-use Database\Model\Address;
+
+use Application\Model\Enums\{
+    AddressTypes,
+    GenderTypes,
+    MembershipTypes,
+};
+
 ?>
 <div class="row">
 <div class="col-md-6">
@@ -30,15 +35,15 @@ use Database\Model\Address;
             <th>Geslacht</th>
             <td><?php
 switch ($member->getGender()) {
-case Member::GENDER_MALE:
-    echo 'Man';
-    break;
-case Member::GENDER_FEMALE:
-    echo 'Vrouw';
-    break;
-case Member::GENDER_OTHER:
-    echo 'Anders';
-    break;
+    case GenderTypes::Male:
+        echo 'Man';
+        break;
+    case GenderTypes::Female:
+        echo 'Vrouw';
+        break;
+    case GenderTypes::Other:
+        echo 'Anders';
+        break;
 }
 ?></td>
         </tr>
@@ -57,25 +62,6 @@ case Member::GENDER_OTHER:
         <tr>
             <th>Betaald (hoe veel)</th>
             <td><?= $member->getPaid() ?></td>
-        </tr>
-        <tr>
-            <th>Type lid</th>
-            <td><?php
-switch ($member->getType()) {
-    case Member::TYPE_ORDINARY:
-        echo 'Gewoon';
-        break;
-    case Member::TYPE_EXTERNAL:
-        echo 'Extern';
-        break;
-    case Member::TYPE_GRADUATE:
-        echo 'Afgestudeerde';
-        break;
-    case Member::TYPE_HONORARY:
-        echo 'Erelid';
-        break;
-}
-?></td>
         </tr>
         <tr>
             <th>Laatste wijziging lidmaatshap</th>
@@ -127,19 +113,19 @@ switch ($member->getType()) {
 <h3>Adressen</h3>
 <?php $addresses = array() ?>
 <?php foreach ($member->getAddresses() as $address): ?>
-<?php $addresses[$address->getType()] = $address ?>
+<?php $addresses[$address->getType()->value] = $address ?>
 <h4><?php
 switch ($address->getType()) {
-case Address::TYPE_HOME:
-    echo 'Thuisadres (ouders)';
-    break;
-case Address::TYPE_STUDENT:
-    echo 'Kameradres';
-    break;
-case Address::TYPE_MAIL:
-    echo 'Postadres';
-    break;
-}
+    case AddressTypes::Home:
+        echo 'Thuisadres (ouders)';
+        break;
+    case AddressTypes::Student:
+        echo 'Kameradres';
+        break;
+    case AddressTypes::Mail:
+        echo 'Postadres';
+        break;
+    }
 ?></h4>
 <table class="table table-bordered">
     <tr>

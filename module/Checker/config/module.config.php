@@ -1,42 +1,17 @@
 <?php
 
-return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Checker\Controller\Checker' => 'Checker\Controller\CheckerController'
-        )
-    ),
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'check' => array(
-                    'options' => array(
-                        'route' => 'check database',
-                        'defaults' => array(
-                            'controller' => 'Checker\Controller\Checker',
-                            'action' => 'index'
-                        )
-                    )
-                ),
-                'check_memberships' => array(
-                    'options' => array(
-                        'route' => 'check memberships',
-                        'defaults' => array(
-                            'controller' => 'Checker\Controller\Checker',
-                            'action' => 'checkMemberships'
-                        )
-                    )
-                ),
-                'check_discharges' => array(
-                    'options' => array(
-                        'route' => 'check discharges',
-                        'defaults' => array(
-                            'controller' => 'Checker\Controller\Checker',
-                            'action' => 'checkDischarges'
-                        )
-                    )
-                ),
-            )
-        )
-    )
-);
+use Checker\Command\{
+    CheckDatabaseCommand,
+    CheckDischargesCommand,
+    CheckMembershipsCommand,
+};
+
+return [
+    'laminas-cli' => [
+        'commands' => [
+            'check:database' => CheckDatabaseCommand::class,
+            'check:discharges' => CheckDischargesCommand::class,
+            'check:memberships' => CheckMembershipsCommand::class,
+        ],
+    ],
+];

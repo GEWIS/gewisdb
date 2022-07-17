@@ -7,13 +7,22 @@
  */
 
 return [
+    'Laminas\I18n',
+    'Laminas\Mvc\I18n',
+    'Laminas\Serializer',
+    'Laminas\Mail',
+    'Laminas\Cache',
+    'Laminas\InputFilter',
+    'Laminas\Paginator',
+    'Laminas\Hydrator',
+    'Laminas\Form',
+    'Laminas\Router',
+    'Laminas\Validator',
     'DoctrineModule',
     'DoctrineORMModule',
     'Application',
     'Database',
-    'Import',
     'Checker',
-    'Export',
     'Report',
     'User',
 ];

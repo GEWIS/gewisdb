@@ -124,12 +124,12 @@ phpcbfall: loadenv
 		@vendor/bin/phpcbf -p --standard=PSR1,PSR12 --extensions=php,dist module config
 
 phpcsfix: loadenv
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP56Migration module
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP56Migration config
+		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP81Migration module
+		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP81Migration config
 
 phpcsfixrisky: loadenv
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP56Migration:risky,-declare_strict_types,-use_arrow_functions  module
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP56Migration:risky,-declare_strict_types,-use_arrow_functions  config
+		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP81Migration:risky,-declare_strict_types,-use_arrow_functions  module
+		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP81Migration:risky,-declare_strict_types,-use_arrow_functions  config
 
 checkcomposer: loadenv
 		@XDEBUG_MODE=off vendor/bin/composer-require-checker check composer.json

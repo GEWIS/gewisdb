@@ -1,7 +1,13 @@
 <?php
 
+namespace User;
+
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
 use User\Controller\UserController;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use User\Mapper\UserMapper;
 use User\Mapper\Factory\UserMapperFactory;
 use User\Service\UserService;
@@ -11,10 +17,8 @@ use User\Controller\SettingsController;
 use User\Controller\Factory\SettingsControllerFactory;
 use User\Form\UserCreate;
 use User\Form\Login;
-use Zend\Crypt\Password\PasswordInterface;
 use User\Factory\PasswordFactory;
 use User\Model\User;
-use Zend\Authentication\AuthenticationService;
 use User\Service\Factory\AuthenticationServiceFactory;
 use User\Form\UserEdit;
 
@@ -22,68 +26,67 @@ return [
     'router' => [
         'routes' => [
             'user' => [
-                'type' => 'literal',
+                'type' => Literal::class,
                 'options' => [
                     'route' => '/user',
                     'defaults' => [
                         'controller' => UserController::class,
-                        'action' => 'index'
-                    ]
+                        'action' => 'index',
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
                     'default' => [
-                        'type' => 'segment',
+                        'type' => Segment::class,
                         'options' => [
-                            'route' => '/:action'
-                        ]
-                    ]
-                ]
+                            'route' => '/:action',
+                        ],
+                    ],
+                ],
             ],
             // settings route is already defined in the database module
             'settings' => [
                 'child_routes' => [
                     'user' => [
-                        'type' => 'literal',
+                        'type' => Literal::class,
                         'options' => [
                             'route' => '/user',
                             'defaults' => [
-                                '__NAMESPACE__' => '',
                                 'controller' => SettingsController::class,
-                                'action' => 'index'
-                            ]
+                                'action' => 'index',
+                            ],
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
                             'default' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '/:action',
-                                ]
+                                ],
                             ],
                             'edit' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '/edit/:id',
                                     'defaults' => [
-                                        'action' => 'edit'
-                                    ]
-                                ]
+                                        'action' => 'edit',
+                                    ],
+                                ],
                             ],
                             'delete' => [
-                                'type' => 'segment',
+                                'type' => Segment::class,
                                 'options' => [
                                     'route' => '/delete/:id',
                                     'defaults' => [
-                                        'action' => 'remove'
-                                    ]
-                                ]
+                                        'action' => 'remove',
+                                    ],
+                                ],
                             ],
-                        ]
-                    ]
-                ]
-            ]
-        ]
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
     'service_manager' => [
         'factories' => [
@@ -102,33 +105,34 @@ return [
         'factories' => [
             UserController::class => UserControllerFactory::class,
             SettingsController::class => SettingsControllerFactory::class,
-        ]
+        ],
     ],
     'view_manager' => [
         'template_path_stack' => [
-            'user' => __DIR__ . '/../view/'
-        ]
+            'user' => __DIR__ . '/../view/',
+        ],
     ],
     'doctrine' => [
         'driver' => [
-            'user_entities' => [
-                'class' => AnnotationDriver::class,
-                'cache' => 'array',
-                'paths' => [__DIR__ . '/../src/Model/']
+            __NAMESPACE__ . '_driver' => [
+                'class' => AttributeDriver::class,
+                'paths' => [
+                    __DIR__ . '/../src/Model/',
+                ],
             ],
             'orm_default' => [
                 'drivers' => [
-                    'User\Model' => 'user_entities'
-                ]
-            ]
+                    __NAMESPACE__ . '\Model' => __NAMESPACE__ . '_driver',
+                ],
+            ],
         ],
         'authentication' => [
             'orm_default' => [
                 'object_manager' => 'database_doctrine_em',
                 'identity_class' => User::class,
                 'identity_property' => 'login',
-                'credential_property' => 'password'
-            ]
-        ]
-    ]
+                'credential_property' => 'password',
+            ],
+        ],
+    ],
 ];

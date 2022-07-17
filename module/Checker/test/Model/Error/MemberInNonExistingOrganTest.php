@@ -13,6 +13,8 @@ class MemberInNonExistingOrganTest extends \CheckerTest\Model\Error
         $installation->setDecision($this->getDecision());
         $installation->setFoundation($this->getFoundation());
         $installation->setMember($this->getMember());
+        $installation->setNumber(1);
+        $installation->setFunction("Tester");
 
         $meeting = $this->getMeeting();
 

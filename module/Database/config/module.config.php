@@ -1,534 +1,550 @@
 <?php
 
-return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
-                'type' => 'Literal',
-                'options' => array(
+namespace Database;
+
+use Database\Controller\{
+    AddressController,
+    ExportController,
+    IndexController,
+    MeetingController,
+    MemberController,
+    OrganController,
+    ProspectiveMemberController,
+    QueryController,
+    SettingsController,
+};
+use Database\Controller\Factory\{
+    AddressControllerFactory,
+    ExportControllerFactory,
+    MeetingControllerFactory,
+    MemberControllerFactory,
+    OrganControllerFactory,
+    ProspectiveMemberControllerFactory,
+    QueryControllerFactory,
+    SettingsControllerFactory,
+};
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
+use Laminas\Router\Http\{
+    Literal,
+    Segment,
+};
+
+return [
+    'router' => [
+        'routes' => [
+            'home' => [
+                'type' => Literal::class,
+                'options' => [
                     'route'    => '/',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller' => 'Index',
+                    'defaults' => [
+                        'controller' => IndexController::class,
                         'action'     => 'index',
-                    ),
-                ),
-            ),
+                    ],
+                ],
+            ],
             'address' => [
-                'type' => 'Literal',
+                'type' => Literal::class,
                 'options' => [
                     'route' => '/address',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller' => 'Address',
-                        'action' => 'index'
-                    ]
-                ]
+                        'controller' => AddressController::class,
+                        'action' => 'index',
+                    ],
+                ],
             ],
-            'meeting' => array(
-                'type'    => 'Literal',
-                'options' => array(
+            'meeting' => [
+                'type'    => Literal::class,
+                'options' => [
                     'route'    => '/meeting',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Meeting',
+                    'defaults' => [
+                        'controller'    => MeetingController::class,
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'decision' => array(
-                        'type' => 'Literal',
-                        'options' => array(
+                'child_routes' => [
+                    'decision' => [
+                        'type' => Literal::class,
+                        'options' => [
                             'route' => '/decision',
-                            'defaults' => array(
-                                'action' => 'decision'
-                            )
-                        ),
+                            'defaults' => [
+                                'action' => 'decision',
+                            ],
+                        ],
                         'may_terminate' => false,
-                        'child_routes' => array(
-                            'form' => array(
-                                'type' => 'Segment',
-                                'options' => array(
+                        'child_routes' => [
+                            'form' => [
+                                'type' => Segment::class,
+                                'options' => [
                                     'route' => '/:form',
-                                    'constraints' => array(
-                                        'form' => '[a-zA-Z][a-zA-Z0-9_-]*'
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'decisionform'
-                                    )
-                                )
-                            ),
-                            'create' => array(
-                                'type' => 'Segment',
-                                'options' => array(
+                                    'constraints' => [
+                                        'form' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'decisionform',
+                                    ],
+                                ],
+                            ],
+                            'create' => [
+                                'type' => Segment::class,
+                                'options' => [
                                     'route' => '/:type/:number/:point/:decision',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
-                                        'decision' => '[0-9]*'
-                                    )
-                                )
-                            ),
-                            'delete' => array(
-                                'type' => 'Segment',
-                                'options' => array(
+                                        'decision' => '[0-9]*',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type' => Segment::class,
+                                'options' => [
                                     'route' => '/delete/:type/:number/:point/:decision',
-                                    'constraints' => array(
+                                    'constraints' => [
                                         'type' => 'AV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
-                                        'decision' => '[0-9]*'
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'delete'
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    'view' => array(
-                        'type' => 'Segment',
-                        'options' => array(
+                                        'decision' => '[0-9]*',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'delete',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'view' => [
+                        'type' => Segment::class,
+                        'options' => [
                             'route' => '/:type/:number',
-                            'constraints' => array(
+                            'constraints' => [
                                 'type' => 'AV|BV|VV|Virt',
-                                'number' => '\-?[0-9]*'
-                            ),
-                            'defaults' => array(
-                                'action' => 'view'
-                            )
-                        )
-                    ),
-                    'create' => array(
-                        'type' => 'Literal',
-                        'options' => array(
+                                'number' => '\-?[0-9]*',
+                            ],
+                            'defaults' => [
+                                'action' => 'view',
+                            ],
+                        ],
+                    ],
+                    'create' => [
+                        'type' => Literal::class,
+                        'options' => [
                             'route' => '/create',
-                            'defaults' => array(
-                                'action' => 'create'
-                            )
-                        )
-                    ),
-                    'search' => array(
-                        'type' => 'Literal',
-                        'options' => array(
+                            'defaults' => [
+                                'action' => 'create',
+                            ],
+                        ],
+                    ],
+                    'search' => [
+                        'type' => Literal::class,
+                        'options' => [
                             'route' => '/search',
-                            'defaults' => array(
-                                'action' => 'search'
-                            )
-                        )
-                    )
-                ),
-            ),
-            'organ' => array(
-                'type'    => 'Literal',
-                'options' => array(
+                            'defaults' => [
+                                'action' => 'search',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'organ' => [
+                'type'    => Literal::class,
+                'options' => [
                     'route'    => '/organ',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Organ',
+                    'defaults' => [
+                        'controller'    => OrganController::class,
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
+                'child_routes' => [
+                    'default' => [
+                        'type'    => Segment::class,
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                    'info' => array(
-                        'type' => 'Segment',
-                        'options' => array(
+                            ],
+                        ],
+                    ],
+                    'info' => [
+                        'type' => Segment::class,
+                        'options' => [
                             'route' => '/info/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => array(
-                                'action' => 'info'
-                            ),
-                            'constraints' => array(
+                            'defaults' => [
+                                'action' => 'info',
+                            ],
+                            'constraints' => [
                                 'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
-                                'subdecision' => '[0-9]*'
-                            )
-                        )
-                    ),
-                    'view' => array(
-                        'type' => 'Segment',
-                        'options' => array(
+                                'subdecision' => '[0-9]*',
+                            ],
+                        ],
+                    ],
+                    'view' => [
+                        'type' => Segment::class,
+                        'options' => [
                             'route' => '/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => array(
-                                'action' => 'view'
-                            ),
-                            'constraints' => array(
+                            'defaults' => [
+                                'action' => 'view',
+                            ],
+                            'constraints' => [
                                 'type' => 'AV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
-                                'subdecision' => '[0-9]*'
-                            )
-                        )
-                    )
-                ),
-            ),
-            'member' => array(
-                'type'    => 'Literal',
-                'options' => array(
+                                'subdecision' => '[0-9]*',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'member' => [
+                'type'    => Literal::class,
+                'options' => [
                     'route'    => '/member',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Member',
+                    'defaults' => [
+                        'controller'    => MemberController::class,
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'show' => array(
-                        'type' => 'Segment',
-                        'options' => array(
+                'child_routes' => [
+                    'show' => [
+                        'type' => Segment::class,
+                        'options' => [
                             'route' => '/:id',
-                            'constraints' => array(
-                                'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
-                                'action' => 'show'
-                            )
-                        ),
+                            'constraints' => [
+                                'id' => '[0-9]+',
+                            ],
+                            'defaults' => [
+                                'action' => 'show',
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'edit' => array(
-                                'type' => 'Literal',
-                                'options' => array(
+                        'child_routes' => [
+                            'edit' => [
+                                'type' => Literal::class,
+                                'options' => [
                                     'route' => '/edit',
-                                    'defaults' => array(
-                                        'action' => 'edit'
-                                    )
-                                ),
+                                    'defaults' => [
+                                        'action' => 'edit',
+                                    ],
+                                ],
                                 'may_terminate' => true,
-                                'child_routes' => array(
-                                    'address' => array(
-                                        'type' => 'Segment',
-                                        'options' => array(
+                                'child_routes' => [
+                                    'address' => [
+                                        'type' => Segment::class,
+                                        'options' => [
                                             'route' => '/address/:type',
-                                            'constraints' => array(
-                                                'type' => 'home|student|mail'
-                                            ),
-                                            'defaults' => array(
-                                                'action' => 'editAddress'
-                                            ),
-                                        )
-                                    ),
-                                    'membership' => array(
-                                        'type' => 'Literal',
-                                        'options' => array(
+                                            'constraints' => [
+                                                'type' => 'home|student|mail',
+                                            ],
+                                            'defaults' => [
+                                                'action' => 'editAddress',
+                                            ],
+                                        ],
+                                    ],
+                                    'membership' => [
+                                        'type' => Literal::class,
+                                        'options' => [
                                             'route' => '/membership',
-                                            'defaults' => array(
-                                                'action' => 'membership'
-                                            )
-                                        )
-                                    ),
-                                    'lists' => array(
-                                        'type' => 'Literal',
-                                        'options' => array(
+                                            'defaults' => [
+                                                'action' => 'membership',
+                                            ],
+                                        ],
+                                    ],
+                                    'lists' => [
+                                        'type' => Literal::class,
+                                        'options' => [
                                             'route' => '/lists',
-                                            'defaults' => array(
-                                                'action' => 'lists'
-                                            )
-                                        )
-                                    ),
-                                    'expiration' => array(
-                                        'type' => 'Literal',
-                                        'options' => array(
+                                            'defaults' => [
+                                                'action' => 'lists',
+                                            ],
+                                        ],
+                                    ],
+                                    'expiration' => [
+                                        'type' => Literal::class,
+                                        'options' => [
                                             'route' => '/expiration',
-                                            'defaults' => array(
-                                                'action' => 'expiration'
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            'delete' => array(
-                                'type' => 'Literal',
-                                'options' => array(
+                                            'defaults' => [
+                                                'action' => 'expiration',
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type' => Literal::class,
+                                'options' => [
                                     'route' => '/delete',
-                                    'defaults' => array(
-                                        'action' => 'delete'
-                                    )
-                                )
-                            ),
-                            'print' => array(
-                                'type' => 'Literal',
-                                'options' => array(
+                                    'defaults' => [
+                                        'action' => 'delete',
+                                    ],
+                                ],
+                            ],
+                            'print' => [
+                                'type' => Literal::class,
+                                'options' => [
                                     'route' => '/print',
-                                    'defaults' => array(
-                                        'action' => 'print'
-                                    )
-                                )
-                            ),
-                            'remove-address' => array(
-                                'type' => 'Segment',
-                                'options' => array(
+                                    'defaults' => [
+                                        'action' => 'print',
+                                    ],
+                                ],
+                            ],
+                            'remove-address' => [
+                                'type' => Segment::class,
+                                'options' => [
                                     'route' => '/remove/address/:type',
-                                    'constraints' => array(
-                                        'type' => 'home|student|mail'
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'removeAddress'
-                                    ),
-                                )
-                            ),
-                            'add-address' => array(
-                                'type' => 'Segment',
-                                'options' => array(
+                                    'constraints' => [
+                                        'type' => 'home|student|mail',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'removeAddress',
+                                    ],
+                                ],
+                            ],
+                            'add-address' => [
+                                'type' => Segment::class,
+                                'options' => [
                                     'route' => '/add/address/:type',
-                                    'constraints' => array(
-                                        'type' => 'home|student|mail'
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'addAddress'
-                                    ),
-                                )
-                            ),
-                            'supremum' => array(
-                                'type' => 'Literal',
+                                    'constraints' => [
+                                        'type' => 'home|student|mail',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'addAddress',
+                                    ],
+                                ],
+                            ],
+                            'supremum' => [
+                                'type' => Literal::class,
                                 'options' => [
                                     'route' => '/supremum',
                                     'defaults' => [
                                         'action' => 'setSupremum',
-                                        'value' => ''
-                                    ]
+                                        'value' => '',
+                                    ],
                                 ],
                                 'may_terminate' => true,
                                 'child_routes' => [
                                     'optin' => [
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => '/optin',
                                             'defaults' => [
-                                                'value' => 'optin'
-                                            ]
-                                        ]
+                                                'value' => 'optin',
+                                            ],
+                                        ],
                                     ],
                                     'optout' => [
-                                        'type' => 'Literal',
+                                        'type' => Literal::class,
                                         'options' => [
                                             'route' => '/optout',
                                             'defaults' => [
-                                                'value' => 'optout'
-                                            ]
-                                        ]
+                                                'value' => 'optout',
+                                            ],
+                                        ],
                                     ],
-                                ]
-                            )
-                        )
-                    ),
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    'default' => [
+                        'type'    => Segment::class,
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'prospective-member' => array(
-                'type'    => 'Literal',
-                'options' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'prospective-member' => [
+                'type'    => Literal::class,
+                'options' => [
                     'route'    => '/prospective-member',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'ProspectiveMember',
+                    'defaults' => [
+                        'controller'    => ProspectiveMemberController::class,
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'show' => array(
-                        'type' => 'Segment',
-                        'options' => array(
+                'child_routes' => [
+                    'show' => [
+                        'type' => Segment::class,
+                        'options' => [
                             'route' => '/:id',
-                            'constraints' => array(
-                                'id' => '[0-9]+'
-                            ),
-                            'defaults' => array(
-                                'action' => 'show'
-                            )
-                        ),
+                            'constraints' => [
+                                'id' => '[0-9]+',
+                            ],
+                            'defaults' => [
+                                'action' => 'show',
+                            ],
+                        ],
                         'may_terminate' => true,
-                        'child_routes' => array(
-                            'delete' => array(
-                                'type' => 'Literal',
-                                'options' => array(
+                        'child_routes' => [
+                            'delete' => [
+                                'type' => Literal::class,
+                                'options' => [
                                     'route' => '/delete',
-                                    'defaults' => array(
-                                        'action' => 'delete'
-                                    )
-                                )
-                            ),
-                            'finalize' => array(
-                                'type' => 'Literal',
-                                'options' => array(
+                                    'defaults' => [
+                                        'action' => 'delete',
+                                    ],
+                                ],
+                            ],
+                            'finalize' => [
+                                'type' => Literal::class,
+                                'options' => [
                                     'route' => '/finalize',
-                                    'defaults' => array(
-                                        'action' => 'finalize'
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
+                                    'defaults' => [
+                                        'action' => 'finalize',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'default' => [
+                        'type'    => Segment::class,
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'export' => array(
-                'type'    => 'Literal',
-                'options' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'export' => [
+                'type'    => Literal::class,
+                'options' => [
                     'route'    => '/export',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Export',
+                    'defaults' => [
+                        'controller'    => ExportController::class,
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
+                'child_routes' => [
+                    'default' => [
+                        'type'    => Segment::class,
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'settings' => array(
-                'type'    => 'Literal',
-                'options' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'settings' => [
+                'type'    => Literal::class,
+                'options' => [
                     'route'    => '/settings',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Settings',
+                    'defaults' => [
+                        'controller'    => SettingsController::class,
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'list-delete' => array(
-                        'type' => 'Segment',
-                        'options' => array(
+                'child_routes' => [
+                    'list-delete' => [
+                        'type' => Segment::class,
+                        'options' => [
                             'route' => '/list/delete/:name',
-                            'constraints' => array(
-                                'name' => '[a-zA-Z0-9_-]+'
-                            ),
-                            'defaults' => array(
-                                'action' => 'deleteList'
-                            )
-                        )
-                    ),
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
+                            'constraints' => [
+                                'name' => '[a-zA-Z0-9_-]+',
+                            ],
+                            'defaults' => [
+                                'action' => 'deleteList',
+                            ],
+                        ],
+                    ],
+                    'default' => [
+                        'type'    => Segment::class,
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'query' => array(
-                'type'    => 'Literal',
-                'options' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'query' => [
+                'type'    => Literal::class,
+                'options' => [
                     'route'    => '/query',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Database\Controller',
-                        'controller'    => 'Query',
+                    'defaults' => [
+                        'controller'    => QueryController::class,
                         'action'        => 'index',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'show' => array(
-                        'type' => 'Segment',
-                        'options' => array(
+                'child_routes' => [
+                    'show' => [
+                        'type' => Segment::class,
+                        'options' => [
                             'route' => '/show/:query',
-                            'constraints' => array(
-                                'query' => '[0-9]+'
-                            ),
-                            'defaults' => array(
-                                'action' => 'show'
-                            )
-                        )
-                    ),
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
+                            'constraints' => [
+                                'query' => '[0-9]+',
+                            ],
+                            'defaults' => [
+                                'action' => 'show',
+                            ],
+                        ],
+                    ],
+                    'default' => [
+                        'type'    => Segment::class,
+                        'options' => [
                             'route'    => '/:action',
-                            'constraints' => array(
+                            'constraints' => [
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'Database\Controller\Meeting' => 'Database\Controller\MeetingController',
-            'Database\Controller\ProspectiveMember' => 'Database\Controller\ProspectiveMemberController',
-            'Database\Controller\Member' => 'Database\Controller\MemberController',
-            'Database\Controller\Organ' => 'Database\Controller\OrganController',
-            'Database\Controller\Export' => 'Database\Controller\ExportController',
-            'Database\Controller\Query' => 'Database\Controller\QueryController',
-            'Database\Controller\Settings' => 'Database\Controller\SettingsController',
-            'Database\Controller\Address' => 'Database\Controller\AddressController',
-            'Database\Controller\Index' => 'Database\Controller\IndexController',
-        )
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'database' => __DIR__ . '/../view/'
-        ),
-        'strategies' => array(
-            'ViewJsonStrategy'
-        )
-    ),
-    'doctrine' => array(
-        'driver' => array(
-            'database_entities' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/Database/Model/')
-            ),
-            'orm_default' => array(
-                'drivers' => array(
-                    'Database\Model' => 'database_entities'
-                ),
-            )
-        ),
-        'configuration' => array(
-            'orm_default' => array(
-                'entity_namespaces' => array(
-                    'dborig' => 'Database\Model'
-                )
-            )
-        )
-    )
-);
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'controllers' => [
+        'factories' => [
+            AddressController::class => AddressControllerFactory::class,
+            ExportController::class => ExportControllerFactory::class,
+            MeetingController::class => MeetingControllerFactory::class,
+            MemberController::class => MemberControllerFactory::class,
+            OrganController::class => OrganControllerFactory::class,
+            ProspectiveMemberController::class => ProspectiveMemberControllerFactory::class,
+            QueryController::class => QueryControllerFactory::class,
+            SettingsController::class => SettingsControllerFactory::class,
+        ],
+        'invokables' => [
+            IndexController::class => IndexController::class,
+        ],
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
+            'database' => __DIR__ . '/../view/',
+        ],
+        'strategies' => [
+            'ViewJsonStrategy',
+        ],
+    ],
+    'doctrine' => [
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => AttributeDriver::class,
+                'paths' => [
+                    __DIR__ . '/../src/Model/',
+                ],
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Model' => __NAMESPACE__ . '_driver',
+                ],
+            ],
+        ],
+    ],
+];

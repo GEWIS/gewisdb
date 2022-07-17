@@ -2,20 +2,15 @@
 
 namespace User\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Http\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 use User\Service\UserService;
 
 class UserController extends AbstractActionController
 {
-    /**
-     * @var UserService
-     */
-    protected $service;
+    protected UserService $service;
 
-    /**
-     * @param UserService $service
-     */
     public function __construct(UserService $service)
     {
         $this->service = $service;
@@ -24,25 +19,28 @@ class UserController extends AbstractActionController
     /**
      * User login action
      */
-    public function indexAction()
+    public function indexAction(): Response|ViewModel
     {
         if ($this->getRequest()->isPost()) {
-            $result = $this->service->login($this->getRequest()->getPost());
+            $result = $this->service->login($this->getRequest()->getPost()->toArray());
+
             if ($result) {
                 return $this->redirect()->toRoute('home');
             }
         }
+
         return new ViewModel([
-            'form' => $this->service->getLoginForm()
+            'form' => $this->service->getLoginForm(),
         ]);
     }
 
     /**
      * User logout action
      */
-    public function logoutAction()
+    public function logoutAction(): Response
     {
         $this->service->logout();
+
         return $this->redirect()->toRoute('user');
     }
 }

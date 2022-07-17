@@ -22,8 +22,8 @@ return [
             'endpoint' => getenv('CHECKER_MEMBERSHIP_API_ENDPOINT'),
             'key' => getenv('CHECKER_MEMBERSHIP_API_KEY'),
             'max_total_requests' => getenv('CHECKER_MEMBERSHIP_API_MAX_TOTAL_REQUESTS'),
-            'max_manual_requests' => getenv('CHECKER_MEMBERSHIP_API_MAX_MANUAL_REQUESTS')
-        ]
+            'max_manual_requests' => getenv('CHECKER_MEMBERSHIP_API_MAX_MANUAL_REQUESTS'),
+        ],
     ],
 
 
@@ -35,12 +35,12 @@ return [
         'options' => [
             'name' => 'database.gewis.nl',
             'host' => 'postfix',
-            'port' => '25'
+            'port' => '25',
         ],
         'from' => 'secr@gewis.nl',
         'to' => [
             'report_error' => 'databaseisstuk@gewis.nl',
             'subscription' => 'secr@gewis.nl',
-        ]
-    ]
+        ],
+    ],
 ];

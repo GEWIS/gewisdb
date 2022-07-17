@@ -1,4 +1,4 @@
-FROM php:7.1-fpm as gewisdb_web_development
+FROM php:8.1-fpm as gewisdb_web_development
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -26,8 +26,8 @@ RUN docker-php-ext-install \
     pdo_sqlite \
     zip
 
-RUN git clone -b 2.9.8 https://github.com/xdebug/xdebug.git /root/xdebug \
-    && cd /root/xdebug && ./rebuild.sh
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 WORKDIR /code
 

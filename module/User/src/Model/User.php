@@ -2,42 +2,42 @@
 
 namespace User\Model;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    GeneratedValue,
+    Id,
+    Table,
+};
 
 /**
  * Member model.
- *
- * @ORM\Entity
- * @ORM\Table(name="users")
  */
+#[Entity]
+#[Table(name: "users")]
 class User
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
+    #[Id]
+    #[Column(type: "integer")]
+    #[GeneratedValue(strategy: "AUTO")]
+    protected ?int $id = null;
 
     /**
      * Login.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $login;
+    #[Column(type: "string")]
+    protected string $login;
 
     /**
      * User password.
-     *
-     * @ORM\Column(type="string")
      */
-    protected $password;
-
+    #[Column(type: "string")]
+    protected string $password;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -45,7 +45,7 @@ class User
     /**
      * @return string
      */
-    public function getLogin()
+    public function getLogin(): string
     {
         return $this->login;
     }
@@ -53,7 +53,7 @@ class User
     /**
      * @param string $login
      */
-    public function setLogin($login)
+    public function setLogin(string $login): void
     {
         $this->login = $login;
     }
@@ -61,7 +61,7 @@ class User
     /**
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -69,7 +69,7 @@ class User
     /**
      * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }

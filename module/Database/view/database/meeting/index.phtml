@@ -14,9 +14,9 @@ use Database\Model\Meeting;
     <tbody>
 <?php foreach ($meetings as $info): ?>
 <?php $meeting = $info[0]; ?>
-<?php $url = $this->url('meeting/view', array('type' => $meeting->getType(), 'number' => $meeting->getNumber())) ?>
+<?php $url = $this->url('meeting/view', array('type' => $meeting->getType()->value, 'number' => $meeting->getNumber())) ?>
     <tr>
-        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getType() ?></a></td>
+        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getType()->value ?></a></td>
         <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getNumber() ?></a></td>
         <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $this->dateFormat(
             $meeting->getDate(),

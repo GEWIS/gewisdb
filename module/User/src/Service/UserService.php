@@ -2,58 +2,37 @@
 
 namespace User\Service;
 
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Crypt\Password\PasswordInterface;
 use User\Mapper\UserMapper;
-use User\Form\UserCreate;
-use User\Model\User;
-use Zend\Crypt\Password\PasswordInterface;
-use User\Form\Login;
-use Zend\Authentication\AuthenticationService;
-use User\Form\UserEdit;
+use User\Model\User as UserModel;
+use User\Form\{
+    UserCreate as UserCreateForm,
+    Login as LoginForm,
+    UserEdit as UserEditForm,
+};
 
 class UserService
 {
-    /**
-     * @var UserMapper
-     */
-    protected $mapper;
+    protected UserMapper $mapper;
 
-    /**
-     * @var UserCreate
-     */
-    protected $createForm;
+    protected UserCreateForm $createForm;
 
-    /**
-     * @var UserEdit
-     */
-    protected $editForm;
+    protected UserEditForm $editForm;
 
-    /**
-     * @var Login
-     */
-    protected $loginForm;
+    protected LoginForm $loginForm;
 
-    /**
-     * @var PasswordInterface
-     */
-    protected $crypt;
+    protected PasswordInterface $crypt;
 
-    /**
-     * @var AuthenticationService
-     */
-    protected $authService;
+    protected AuthenticationService $authService;
 
-
-    /**
-     * @param UserMapper $mapper
-     * @return bool
-     */
     public function __construct(
         UserMapper $mapper,
-        UserCreate $createForm,
-        Login $loginForm,
-        UserEdit $editForm,
+        UserCreateForm $createForm,
+        LoginForm $loginForm,
+        UserEditForm $editForm,
         PasswordInterface $crypt,
-        AuthenticationService $authService
+        AuthenticationService $authService,
     ) {
         $this->mapper = $mapper;
         $this->createForm = $createForm;
@@ -65,10 +44,8 @@ class UserService
 
     /**
      * Create a user.
-     * @param array $data
-     * @return bool
      */
-    public function create($data)
+    public function create(array $data): bool
     {
         $form = $this->getCreateForm();
 
@@ -81,7 +58,7 @@ class UserService
         $data = $form->getData();
         $password = $this->crypt->create($data['password']);
 
-        $user = new User();
+        $user = new UserModel();
         $user->setLogin($data['login']);
         $user->setPassword($password);
 
@@ -92,11 +69,11 @@ class UserService
 
     /**
      * Edit a user
-     * @param User $user
-     * @return bool
      */
-    public function edit(User $user, $data)
-    {
+    public function edit(
+        UserModel $user,
+        array $data,
+    ): bool {
         $form = $this->getEditForm();
 
         $form->setData($data);
@@ -117,19 +94,18 @@ class UserService
 
     /**
      * Remove a user
-     * @param int $id
      */
-    public function remove($id)
+    public function remove(int $id): void
     {
-        $this->mapper->remove($this->find($id));
+        if (null !== ($user = $this->find($id))) {
+            $this->mapper->remove($user);
+        }
     }
 
     /**
      * Log a user in.
-     * @param array $data
-     * @return bool
      */
-    public function login($data)
+    public function login(array $data): bool
     {
         $form = $this->getLoginForm();
 
@@ -153,53 +129,49 @@ class UserService
     /**
      * Log a user out.
      */
-    public function logout()
+    public function logout(): void
     {
         $this->authService->clearIdentity();
     }
 
     /**
      * Get all users.
-     * @return User[]
+     *
+     * @return array<array-key, UserModel>
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->mapper->findAll();
     }
 
     /**
      * Get a User by ID.
-     * @param int $id
-     * @return User
      */
-    public function find($id)
+    public function find(int $id): ?UserModel
     {
         return $this->mapper->find($id);
     }
 
     /**
      * Get the create form.
-     * @return UserCreate
      */
-    public function getCreateForm()
+    public function getCreateForm(): UserCreateForm
     {
         return $this->createForm;
     }
 
     /**
      * Get the edit form.
-     * @return UserEdit
      */
-    public function getEditForm()
+    public function getEditForm(): UserEditForm
     {
         return $this->editForm;
     }
 
     /**
      * Get the login form.
-     * @return Login
      */
-    public function getLoginForm()
+    public function getLoginForm(): LoginForm
     {
         return $this->loginForm;
     }

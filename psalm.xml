@@ -20,6 +20,7 @@
         <directory name="module/Import/src"/>
         <directory name="module/Report/src"/>
         <directory name="module/User/src"/>
+        <directory name="module/Application/test"/>
         <directory name="module/Checker/test"/>
         <file name="public/index.php"/>
         <ignoreFiles>
@@ -62,6 +63,7 @@
         <NullableReturnStatement errorLevel="info" />
     </issueHandlers>
     <plugins>
+        <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin"/>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>

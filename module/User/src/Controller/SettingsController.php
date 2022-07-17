@@ -2,20 +2,15 @@
 
 namespace User\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Http\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 use User\Service\UserService;
 
 class SettingsController extends AbstractActionController
 {
-    /**
-     * @var UserService
-     */
-    protected $service;
+    protected UserService $service;
 
-    /**
-     * @param UserService $service
-     */
     public function __construct(UserService $service)
     {
         $this->service = $service;
@@ -24,44 +19,22 @@ class SettingsController extends AbstractActionController
     /**
      * View users.
      */
-    public function indexAction()
+    public function indexAction(): ViewModel
     {
         return new ViewModel([
-            'users' => $this->service->findAll()
+            'users' => $this->service->findAll(),
         ]);
     }
 
     /**
      * Create a user.
      */
-    public function createAction()
+    public function createAction(): Response|ViewModel
     {
         $form = $this->service->getCreateForm();
 
         if ($this->getRequest()->isPost()) {
-            $result = $this->service->create($this->getRequest()->getPost());
-
-            if ($result) {
-                return $this->redirect()->toRoute('settings/user');
-            }
-        }
-
-        return new ViewModel([
-            'form' => $form
-        ]);
-    }
-
-    /**
-     * Edit a user.
-     */
-    public function editAction()
-    {
-        $form = $this->service->getEditForm();
-        $id = $this->params()->fromRoute('id');
-        $user = $this->service->find($id);
-
-        if ($this->getRequest()->isPost()) {
-            $result = $this->service->edit($user, $this->getRequest()->getPost());
+            $result = $this->service->create($this->getRequest()->getPost()->toArray());
 
             if ($result) {
                 return $this->redirect()->toRoute('settings/user');
@@ -70,19 +43,45 @@ class SettingsController extends AbstractActionController
 
         return new ViewModel([
             'form' => $form,
-            'user' => $user
+        ]);
+    }
+
+    /**
+     * Edit a user.
+     */
+    public function editAction(): Response|ViewModel
+    {
+        $form = $this->service->getEditForm();
+        $id = (int) $this->params()->fromRoute('id');
+        $user = $this->service->find($id);
+
+        if (null === $user) {
+            return $this->notFoundAction();
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $result = $this->service->edit($user, $this->getRequest()->getPost()->toArray());
+
+            if ($result) {
+                return $this->redirect()->toRoute('settings/user');
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'user' => $user,
         ]);
     }
 
     /**
      * Remove a user.
      */
-    public function removeAction()
+    public function removeAction(): Response
     {
-        $user = $this->service->find($this->params()->fromRoute('id'));
         if ($this->getRequest()->isPost()) {
-            $this->service->remove($user);
+            $this->service->remove((int) $this->params()->fromRoute('id'));
         }
-        $this->redirect()->toRoute('settings/user');
+
+        return $this->redirect()->toRoute('settings/user');
     }
 }

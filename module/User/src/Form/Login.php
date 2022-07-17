@@ -2,8 +2,17 @@
 
 namespace User\Form;
 
-use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Element\{
+    Password,
+    Submit,
+    Text,
+};
+use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Validator\{
+    Regex,
+    StringLength,
+};
 
 class Login extends Form implements InputFilterProviderInterface
 {
@@ -13,56 +22,56 @@ class Login extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'login',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
-                'label' => 'Login'
-            ]
+                'label' => 'Login',
+            ],
         ]);
 
         $this->add([
             'name' => 'password',
-            'type' => 'password',
+            'type' => Password::class,
             'options' => [
-                'label' => 'Password'
-            ]
+                'label' => 'Password',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
-                'value' => 'Login'
-            ]
+                'value' => 'Login',
+            ],
         ]);
     }
 
     /**
      * Specification of input filter.
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [
             'login' => [
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => 'string_length',
+                        'name' => StringLength::class,
                         'options' => [
                             'min' => 3,
-                            'max' => 32
-                        ]
+                            'max' => 32,
+                        ],
                     ],
                     [
-                        'name' => 'regex',
+                        'name' => Regex::class,
                         'options' => [
-                            'pattern' => '/^[a-zA-Z0-9]*$/'
-                        ]
-                    ]
-                ]
+                            'pattern' => '/^[a-zA-Z0-9]*$/',
+                        ],
+                    ],
+                ],
             ],
             'password' => [
                 'required' => true,
-            ]
+            ],
         ];
     }
 }

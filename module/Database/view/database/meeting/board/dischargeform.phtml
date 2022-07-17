@@ -1,10 +1,9 @@
 <?php
-$installs = $form->getMeetingService()->getCurrentBoard();
 $arrInstalls = array();
 
 foreach ($installs as $key => $install) {
     $arrInstalls[$key] = array(
-        'meeting_type' => $install->getDecision()->getMeeting()->getType(),
+        'meeting_type' => $install->getDecision()->getMeeting()->getType()->value,
         'meeting_number' => $install->getDecision()->getMeeting()->getNumber(),
         'decision_point' => $install->getDecision()->getPoint(),
         'decision_number' => $install->getDecision()->getNumber(),

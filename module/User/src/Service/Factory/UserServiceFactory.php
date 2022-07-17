@@ -2,27 +2,37 @@
 
 namespace User\Service\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use User\Service\UserService;
 use User\Mapper\UserMapper;
 use User\Form\UserCreate;
 use User\Form\Login;
-use Zend\Authentication\AuthenticationService;
-use Zend\Crypt\Password\PasswordInterface;
 use User\Form\UserEdit;
 
 class UserServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $sm)
-    {
+    /**
+     * @param ContainerInterface $container
+     * @param $requestedName
+     * @param array|null $options
+     *
+     * @return UserService
+     */
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null,
+    ): UserService {
         return new UserService(
-            $sm->get(UserMapper::class),
-            $sm->get(UserCreate::class),
-            $sm->get(Login::class),
-            $sm->get(UserEdit::class),
-            $sm->get(PasswordInterface::class),
-            $sm->get(AuthenticationService::class)
+            $container->get(UserMapper::class),
+            $container->get(UserCreate::class),
+            $container->get(Login::class),
+            $container->get(UserEdit::class),
+            $container->get(PasswordInterface::class),
+            $container->get(AuthenticationService::class),
         );
     }
 }

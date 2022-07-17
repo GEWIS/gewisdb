@@ -4,7 +4,7 @@ use Database\Model\Meeting;
 <?php if (isset($error) && $error): ?>
 <h1>Dit besluit bestaat al</h1>
 <?php else: ?>
-<h1>Toevoegen besluit <?= $meeting->getType() . ' ' ?>
+<h1>Toevoegen besluit <?= $meeting->getType()->value . ' ' ?>
 <?= $meeting->getNumber() ?>.<?= $point ?>.<?= $decision ?>
 </h1>
 
@@ -62,12 +62,14 @@ use Database\Model\Meeting;
             </div>
             <div class="tab-pane" id="board-ontheven">
             <?= $this->partial('database/meeting/board/releaseform', array(
-                'form' => $forms['board_release']
+                'form' => $forms['board_release'],
+                'installs' => $installs
             )); ?>
             </div>
             <div class="tab-pane" id="board-decharge">
             <?= $this->partial('database/meeting/board/dischargeform', array(
-                'form' => $forms['board_discharge']
+                'form' => $forms['board_discharge'],
+                'installs' => $installs
             )); ?>
             </div>
         </div>

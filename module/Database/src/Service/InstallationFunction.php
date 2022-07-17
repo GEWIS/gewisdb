@@ -1,0 +1,69 @@
+<?php
+
+namespace Database\Service;
+
+use Database\Form\InstallationFunction as InstallationFunctionForm;
+use Database\Mapper\InstallationFunction as InstallationFunctionMapper;
+use Database\Model\InstallationFunction as InstallationFunctionModel;
+
+class InstallationFunction
+{
+    private InstallationFunctionForm $installationFunctionForm;
+
+    private InstallationFunctionMapper $installationFunctionMapper;
+
+    public function __construct(
+        InstallationFunctionForm $installationFunctionForm,
+        InstallationFunctionMapper $installationFunctionMapper,
+    ) {
+        $this->installationFunctionForm = $installationFunctionForm;
+        $this->installationFunctionMapper = $installationFunctionMapper;
+    }
+
+    /**
+     * Get all functions.
+     *
+     * @return array of InstallationFunction's
+     */
+    public function getAllFunctions(): array
+    {
+        return $this->getFunctionMapper()->findAll();
+    }
+
+    /**
+     * Add a function.
+     */
+    public function addFunction(array $data): bool
+    {
+        $form = $this->getFunctionForm();
+
+        $form->setData($data);
+        $form->bind(new InstallationFunctionModel());
+
+        if (!$form->isValid()) {
+            return false;
+        }
+
+        /** @var InstallationFunctionModel $function */
+        $function = $form->getData();
+        $this->getFunctionMapper()->persist($function);
+
+        return true;
+    }
+
+    /**
+     * Get the function form.
+     */
+    public function getFunctionForm(): InstallationFunctionForm
+    {
+        return $this->installationFunctionForm;
+    }
+
+    /**
+     * Get the installation function mapper.
+     */
+    public function getFunctionMapper(): InstallationFunctionMapper
+    {
+        return $this->installationFunctionMapper;
+    }
+}

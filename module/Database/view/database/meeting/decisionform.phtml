@@ -26,12 +26,14 @@ case 'board_install':
     break;
 case 'board_discharge':
     echo $this->partial('database/meeting/board/dischargeform', array(
-        'form' => $form
+        'form' => $form,
+        'installs' => $installs
     ));
     break;
 case 'board_release':
     echo $this->partial('database/meeting/board/releaseform', array(
-        'form' => $form
+        'form' => $form,
+        'installs' => $installs
     ));
     break;
 case 'other':
@@ -44,12 +46,12 @@ case 'other':
 <?php else: ?>
 <?php
 $meeting = $decision->getMeeting();
-$decisionNum = $meeting->getType() . ' ' . $meeting->getNumber() . '.' . $decision->getPoint() . '.' . $decision->getNumber();
+$decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . $decision->getPoint() . '.' . $decision->getNumber();
 ?>
 <h2>Besluit <?= $decisionNum ?> luidt als volgt:</h1>
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
     <?= $subdecision->getContent() ?>
 <?php endforeach; ?>
 <br />
-    <a href="<?= $this->url('meeting/view', array('type' => $meeting->getType(), 'number' => $meeting->getNumber())) ?>">Terug naar <?= $meeting->getType() ?> <?= $meeting->getNumber() ?></a>
+    <a href="<?= $this->url('meeting/view', array('type' => $meeting->getType()->value, 'number' => $meeting->getNumber())) ?>">Terug naar <?= $meeting->getType()->value ?> <?= $meeting->getNumber() ?></a>
 <?php endif; ?>

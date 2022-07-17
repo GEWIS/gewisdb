@@ -25,4 +25,4 @@ if ( $application->getServiceManager()->has($entityManagerName) ) {
     $cli->getHelperSet()->set($emHelper, 'em');
 }
 
-exit($application->run());
+exit($cli->run());

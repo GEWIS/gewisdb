@@ -2,14 +2,17 @@
 
 namespace User\Mapper\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 use User\Mapper\UserMapper;
 
 class UserMapperFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $sm)
-    {
-        return new UserMapper($sm->get('database_doctrine_em'));
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null,
+    ): UserMapper {
+        return new UserMapper($container->get('database_doctrine_em'));
     }
 }
