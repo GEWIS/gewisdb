@@ -275,6 +275,18 @@ class Member extends Form implements InputFilterProviderInterface
                     ['name' => ToNull::class],
                 ],
             ],
+            'signature' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => ToNull::class],
+                ],
+            ],
+            'signatureLocation' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => ToNull::class],
+                ],
+            ],
             'agreed' => [
                 'required' => true,
                 'validators' => [

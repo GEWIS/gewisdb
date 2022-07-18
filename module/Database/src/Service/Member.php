@@ -173,6 +173,7 @@ class Member
         // handle signature
         if (null !== $prospectiveMember->getIban()) {
             $signature = $form->get('signature')->getValue();
+
             if (null !== $signature) {
                 $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
                 $prospectiveMember->setSignature($path);
@@ -429,8 +430,11 @@ class Member
      */
     public function removeProspective(ProspectiveMemberModel $member): void
     {
-        // First destroy the signiture file
-        $this->getFileStorageService()->removeFile($member->getSignature());
+        // First destroy the signature file
+        if (null !== ($signature = $member->getSignature())) {
+            $this->getFileStorageService()->removeFile($signature);
+        }
+
         $this->getProspectiveMemberMapper()->remove($member);
     }
 

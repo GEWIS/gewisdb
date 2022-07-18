@@ -133,6 +133,10 @@ switch ($address->getType()) {
 <?php endforeach ?>
 </ul>
 <h3>Handtekening SEPA incasso</h3>
-<img src="<?= $this->fileUrl($member->getSignature()) ?>" height="150" width="300" />
+<?php if (null !== ($signature = $member->getSignature())): ?>
+    <img src="<?= $this->fileUrl($signature) ?>" height="150" width="300" />
+<?php else: ?>
+    <p>Geen handtekening/IBAN opgegeven.</p>
+<?php endif; ?>
 </div>
 </div>
