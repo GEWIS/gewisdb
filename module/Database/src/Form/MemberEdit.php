@@ -2,7 +2,6 @@
 
 namespace Database\Form;
 
-use Application\Model\Enums\GenderTypes;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\{
     Date,
@@ -55,19 +54,6 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'type' => Text::class,
             'options' => [
                 'label' => 'Voornaam',
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'gender',
-            'type' => Radio::class,
-            'options' => [
-                'label' => 'Geslacht',
-                'value_options' => [
-                    GenderTypes::Male->value => 'Man',
-                    GenderTypes::Female->value => 'Vrouw',
-                    GenderTypes::Other->value => 'Anders',
-                ],
             ],
         ]);
 

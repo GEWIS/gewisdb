@@ -1,7 +1,6 @@
 <?php
 
 use Application\Model\Enums\{
-    GenderTypes,
     MembershipTypes,
     AddressTypes,
 };
@@ -33,22 +32,6 @@ use Application\Model\Enums\{
         <tr>
             <th>Achternaam</th>
             <td><?= $member->getLastName() ?></td>
-        </tr>
-        <tr>
-            <th>Geslacht</th>
-            <td><?php
-switch ($member->getGender()) {
-    case GenderTypes::Male:
-        echo 'Man';
-        break;
-    case GenderTypes::Female:
-        echo 'Vrouw';
-        break;
-    case GenderTypes::Other:
-        echo 'Anders';
-        break;
-}
-?></td>
         </tr>
         <tr>
             <th>TU/e-gebruikersnaam</th>

@@ -2,10 +2,7 @@
 
 namespace Database\Form;
 
-use Application\Model\Enums\{
-    AddressTypes,
-    GenderTypes,
-};
+use Application\Model\Enums\AddressTypes;
 use Database\Form\Fieldset\Address as AddressFieldset;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\{
@@ -71,19 +68,6 @@ class Member extends Form implements InputFilterProviderInterface
             'type' => Text::class,
             'options' => [
                 'label' => $translator->translate('Voornaam'),
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'gender',
-            'type' => Radio::class,
-            'options' => [
-                'value_options' => [
-                    GenderTypes::Male->value => $translator->translate('Man'),
-                    GenderTypes::Female->value => $translator->translate('Vrouw'),
-                    GenderTypes::Other->value => $translator->translate('Anders'),
-                ],
-                'label' => $translator->translate('Geslacht'),
             ],
         ]);
 

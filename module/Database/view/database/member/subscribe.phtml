@@ -124,27 +124,6 @@ $element->setLabelAttributes(array(
 </div>
 
 <?php
-$element = $form->get('gender');
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?php foreach ($element->getValueOptions() as $option => $text): ?>
-            <div class="radio">
-                <label>
-                <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
-                    <?= $text ?>
-                </label>
-            </div>
-        <?php endforeach ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
 $element = $form->get('tueUsername');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
@@ -480,10 +459,6 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
         <tr>
             <th><?= $this->translate('Achternaam') ?></th>
             <td><?= $member->getLastName() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Geslacht') ?></th>
-            <td><?= $member->getGender()->getName($this->plugin('translate')->getTranslator()) ?></td>
         </tr>
         <tr>
             <th><?= $this->translate('TU/e-gebruikersnaam') ?></th>

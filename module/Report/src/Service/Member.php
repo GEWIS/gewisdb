@@ -74,7 +74,6 @@ class Member
         $reportMember->setMiddleName($member->getMiddleName());
         $reportMember->setInitials($member->getInitials());
         $reportMember->setFirstName($member->getFirstName());
-        $reportMember->setGender($member->getGender());
         $reportMember->setGeneration($member->getGeneration());
         $reportMember->setType($member->getType());
         $reportMember->setMembershipEndsOn($member->getMembershipEndsOn());

@@ -55,7 +55,6 @@ use Database\Hydrator\Board\{
 };
 use Database\Hydrator\Strategy\{
     AddressHydratorStrategy,
-    GenderHydratorStrategy,
     MeetingHydratorStrategy,
 };
 use Database\Mapper\Factory\{
@@ -188,18 +187,18 @@ class Module
                         $container->get(AddressFieldset::class),
                         $container->get(MvcTranslator::class),
                     );
-                    $form->setHydrator($container->get('database_hydrator_member'));
+                    $form->setHydrator($container->get('database_hydrator_default'));
                     $form->setLists($container->get(MailingListMapper::class)->findAllOnForm());
                     return $form;
                 },
                 MemberEditForm::class => function (ContainerInterface $container) {
                     $form = new MemberEditForm();
-                    $form->setHydrator($container->get('database_hydrator_member'));
+                    $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
                 MemberTypeForm::class => function (ContainerInterface $container) {
                     $form = new MemberTypeForm();
-                    $form->setHydrator($container->get('database_hydrator_member'));
+                    $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
                 CreateMeetingForm::class => function (ContainerInterface $container) {
@@ -341,7 +340,7 @@ class Module
                 },
                 MemberFieldset::class => function (ContainerInterface $container) {
                     $fieldset = new MemberFieldset();
-                    $fieldset->setHydrator($container->get('database_hydrator_member'));
+                    $fieldset->setHydrator($container->get('database_hydrator_default'));
                     $fieldset->setObject(new MemberModel());
                     return $fieldset;
                 },
@@ -377,12 +376,6 @@ class Module
                         $container->get('database_doctrine_em'),
                         false,
                     );
-                },
-                'database_hydrator_member' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
-                    $hydrator->addStrategy('gender', new GenderHydratorStrategy());
-
-                    return $hydrator;
                 },
                 'database_hydrator_address' => function (ContainerInterface $container) {
                     $hydrator = $container->get('database_hydrator_default');

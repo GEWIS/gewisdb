@@ -2,33 +2,42 @@
 
 namespace Database\Service;
 
-use Application\Model\Enums\AddressTypes;
-use Application\Model\Enums\GenderTypes;
-use Application\Model\Enums\MembershipTypes;
+use Application\Model\Enums\{
+    AddressTypes,
+    MembershipTypes,
+};
 use Application\Service\FileStorage as FileStorageService;
-use Database\Form\Address as AddressForm;
-use Database\Form\AddressExport as AddressExportForm;
-use Database\Form\DeleteAddress as DeleteAddressForm;
-use Database\Form\Member as MemberForm;
-use Database\Form\MemberEdit as MemberEditForm;
-use Database\Form\MemberExpiration as MemberExpirationForm;
-use Database\Form\MemberLists as MemberListsForm;
-use Database\Form\MemberType as MemberTypeForm;
-use Database\Mapper\MailingList as MailingListMapper;
-use Database\Mapper\Member as MemberMapper;
-use Database\Mapper\ProspectiveMember;
-use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
-use Database\Model\Address as AddressModel;
-use Database\Model\Member as MemberModel;
-use Database\Model\ProspectiveMember as ProspectiveMemberModel;
+use Database\Form\{
+    Address as AddressForm,
+    AddressExport as AddressExportForm,
+    DeleteAddress as DeleteAddressForm,
+    Member as MemberForm,
+    MemberEdit as MemberEditForm,
+    MemberExpiration as MemberExpirationForm,
+    MemberLists as MemberListsForm,
+    MemberType as MemberTypeForm,
+};
+use Database\Mapper\{
+    MailingList as MailingListMapper,
+    Member as MemberMapper,
+    ProspectiveMember,
+    ProspectiveMember as ProspectiveMemberMapper,
+};
+use Database\Model\{
+    Address as AddressModel,
+    Member as MemberModel,
+    ProspectiveMember as ProspectiveMemberModel,
+};
 use Database\Service\MailingList as MailingListService;
 use DateTime;
 use Laminas\Mail\Transport\TransportInterface;
-use Laminas\Mime\Mime;
-use Laminas\View\Model\ViewModel;
 use Laminas\Mail\Message;
-use Laminas\Mime\Part as MimePart;
-use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\{
+    Mime,
+    Part as MimePart,
+    Message as MimeMessage,
+};
+use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
 
 class Member
@@ -110,13 +119,13 @@ class Member
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tueUsername', 'study', 'email', 'birth',
+                'tueUsername', 'study', 'email', 'birth',
                 'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation',
             ]);
         } else {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tueUsername', 'study', 'email', 'birth',
+                'tueUsername', 'study', 'email', 'birth',
                 'agreed', 'iban', 'signature', 'signatureLocation',
             ]);
         }
@@ -240,7 +249,6 @@ class Member
 
         // Fill in the address in the form again
         $data = $prospectiveMember->toArray();
-        $data['gender'] = $data['gender']->value;
 
         // add list data to the form
         foreach ($form->getLists() as $list) {
@@ -452,7 +460,6 @@ class Member
         $date = new DateTime('0001-01-01 00:00:00');
 
         $member->setEmail(null);
-        $member->setGender(GenderTypes::Other);
         $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(null);
