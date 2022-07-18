@@ -27,6 +27,11 @@ jobs:
             -   name: Checkout head branch
                 uses: actions/checkout@v2
 
+            -   name: Install PostgreSQL client
+                run: |
+                    apt-get update
+                    apt-get install --yes --no-install-recommends postgresql-client
+
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
@@ -65,11 +70,15 @@ jobs:
                 with:
                     env-file: .env.dist
 
-            -   name: Create database
+            -   name: Create databases
                 env:
                     DOCTRINE_DEFAULT_HOST: 127.0.0.1
                     DOCTRINE_REPORT_HOST: 127.0.0.1
-                run: ./orm orm:schema-tool:update --force
+                run: |
+                    psql -U gewisdb -c "CREATE DATABASE $DOCTRINE_DEFAULT_DATABASE"
+                    psql -U gewisdb -c "CREATE DATABASE $DOCTRINE_REPORT_DATABASE"
+                    ./orm orm:schema-tool:update --force
+                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force
 
             -   name: Generate PHPStan Baseline
                 env:
@@ -93,11 +102,15 @@ jobs:
                 with:
                     env-file: .env.dist
 
-            -   name: Create database
+            -   name: Create databases
                 env:
                     DOCTRINE_DEFAULT_HOST: 127.0.0.1
                     DOCTRINE_REPORT_HOST: 127.0.0.1
-                run: ./orm orm:schema-tool:update --force
+                run: |
+                    psql -U gewisdb -c "CREATE DATABASE $DOCTRINE_DEFAULT_DATABASE"
+                    psql -U gewisdb -c "CREATE DATABASE $DOCTRINE_REPORT_DATABASE"
+                    ./orm orm:schema-tool:update --force
+                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force
 
             -   name: Run PHPStan
                 env:
