@@ -108,7 +108,6 @@ jobs:
                     DOCTRINE_REPORT_HOST: 127.0.0.1
                     PGPASSWORD: gewisdb
                 run: |
-                    psql -h $DOCTRINE_REPORT_HOST -p 5432 -U gewisdb -c "CREATE DATABASE $DOCTRINE_REPORT_DATABASE"
                     ./orm orm:schema-tool:update --force
                     EM_ALIAS=orm_report ./orm orm:schema-tool:update --force
 
