@@ -423,9 +423,9 @@ class Member
     {
         if ($this->canRemove($member)) {
             $this->getMemberMapper()->remove($member);
+        } else {
+            $this->clear($member);
         }
-
-        $this->clear($member);
     }
 
     /**
