@@ -29,8 +29,8 @@ jobs:
 
             -   name: Install PostgreSQL client
                 run: |
-                    apt-get update
-                    apt-get install --yes --no-install-recommends postgresql-client
+                    sudo apt-get update
+                    sudo apt-get install --yes --no-install-recommends postgresql-client
 
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
