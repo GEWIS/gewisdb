@@ -74,6 +74,7 @@ jobs:
                 env:
                     DOCTRINE_DEFAULT_HOST: 127.0.0.1
                     DOCTRINE_REPORT_HOST: 127.0.0.1
+                    PGPASSWORD: gewisdb
                 run: |
                     psql -h $DOCTRINE_DEFAULT_HOST -p 5432 -U gewisdb -c "CREATE DATABASE $DOCTRINE_DEFAULT_DATABASE"
                     psql -h $DOCTRINE_REPORT_HOST -p 5432 -U gewisdb -c "CREATE DATABASE $DOCTRINE_REPORT_DATABASE"
@@ -106,6 +107,7 @@ jobs:
                 env:
                     DOCTRINE_DEFAULT_HOST: 127.0.0.1
                     DOCTRINE_REPORT_HOST: 127.0.0.1
+                    PGPASSWORD: gewisdb
                 run: |
                     psql -h $DOCTRINE_DEFAULT_HOST -p 5432 -U gewisdb -c "CREATE DATABASE $DOCTRINE_DEFAULT_DATABASE"
                     psql -h $DOCTRINE_REPORT_HOST -p 5432 -U gewisdb -c "CREATE DATABASE $DOCTRINE_REPORT_DATABASE"
