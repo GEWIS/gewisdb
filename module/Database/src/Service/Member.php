@@ -114,8 +114,6 @@ class Member
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
 
-        $noiban = false;
-
         if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
@@ -129,10 +127,6 @@ class Member
                 'agreed', 'iban', 'signature', 'signatureLocation',
             ]);
         }
-        if ($data['iban'] == 'noiban') {
-            $noiban = true;
-            $data['iban'] = 'NL20INGB0001234567';
-        }
 
         $form->setData($data);
 
@@ -143,10 +137,6 @@ class Member
         // set some extra data
         /** @var ProspectiveMemberModel $prospectiveMember */
         $prospectiveMember = $form->getData();
-
-        if ($noiban) {
-            $prospectiveMember->setIban(null);
-        }
 
         // find if there is an earlier member with the same email or name
         if (
@@ -181,10 +171,12 @@ class Member
         }
 
         // handle signature
-        $signature = $form->get('signature')->getValue();
-        if (!is_null($signature)) {
-            $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
-            $prospectiveMember->setSignature($path);
+        if (null !== $prospectiveMember->getIban()) {
+            $signature = $form->get('signature')->getValue();
+            if (null !== $signature) {
+                $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
+                $prospectiveMember->setSignature($path);
+            }
         }
 
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
@@ -210,15 +202,21 @@ class Member
         $html = new MimePart($body);
         $html->type = "text/html";
 
-        // Include signature as image attachment
-        $image = new MimePart(fopen($this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(), 'r'));
-        $image->type = 'image/png';
-        $image->filename = 'signature.png';
-        $image->disposition = Mime::DISPOSITION_ATTACHMENT;
-        $image->encoding = Mime::ENCODING_BASE64;
-
         $mimeMessage = new MimeMessage();
-        $mimeMessage->setParts([$html, $image]);
+        $mimeMessage->addPart($html);
+
+        // Include signature as image attachment
+        if (null !== $member->getIban()) {
+            $image = new MimePart(fopen(
+                $this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(),
+                'r',
+            ));
+            $image->type = 'image/png';
+            $image->filename = 'signature.png';
+            $image->disposition = Mime::DISPOSITION_ATTACHMENT;
+            $image->encoding = Mime::ENCODING_BASE64;
+            $mimeMessage->addPart($image);
+        }
 
         $message = new Message();
         $message->setBody($mimeMessage);
@@ -263,13 +261,6 @@ class Member
 
         unset($data['lidnr']);
 
-        // Temporary IBAN to pass the form validator.
-        $noiban = false;
-        if ($data['iban'] == null) {
-            $noiban = true;
-            $data['iban'] = 'NL20INGB0001234567';
-        }
-
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -278,11 +269,6 @@ class Member
 
         /** @var MemberModel $member */
         $member = $form->getData();
-
-        // Remove temporary IBAN.
-        if ($noiban) {
-            $member->setIban(null);
-        }
 
         // Copy all remaining information
         $member->setTueUsername($prospectiveMember->getTueUsername());

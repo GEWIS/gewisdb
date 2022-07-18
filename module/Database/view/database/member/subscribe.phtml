@@ -187,25 +187,6 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<?php
-$element = $form->get('iban');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setAttribute('id', 'iban-input');
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <p><?= sprintf($this->translate('Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-
 <fieldset class="study-address in">
 <h3><?= $this->translate('Adres') ?></h3>
 <?php
@@ -338,6 +319,23 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 <?php endforeach ?>
 
 <h3><?= $this->translate('Handtekening eenmalige SEPA-machtiging') ?></h3>
+<?php
+$element = $form->get('iban');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-input');
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <p><?= sprintf($this->translate('Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
 <p>
 <?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
 </p>
@@ -523,6 +521,8 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
+
+<?php if (null !== $member->getIban()): ?>
 <p>
     <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
 </p>
@@ -554,6 +554,7 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
     </tr>
 </table>
 </div>
+<?php endif; ?>
 </div>
 </div>
 <?php endif ?>

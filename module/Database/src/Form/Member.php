@@ -266,11 +266,13 @@ class Member extends Form implements InputFilterProviderInterface
                 ],
             ],
             'iban' => [
+                'required' => false,
                 'validators' => [
                     ['name' => Iban::class],
                 ],
                 'filters' => [
                     ['name' => Alnum::class],
+                    ['name' => ToNull::class],
                 ],
             ],
             'agreed' => [
