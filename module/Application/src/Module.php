@@ -4,7 +4,10 @@ namespace Application;
 
 use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
-use Application\View\Helper\FileUrl;
+use Application\View\Helper\{
+    FileUrl,
+    IsModuleActive,
+};
 use Laminas\I18n\Translator\Translator as I18nTranslator;
 use Laminas\Mvc\ModuleRouteListener;
 use Laminas\Mvc\MvcEvent;
@@ -121,6 +124,9 @@ class Module
                 'fileUrl' => function (ContainerInterface $container) {
                     return new FileUrl($container->get('config'));
                 },
+                'isModuleActive' => function (ContainerInterface $container) {
+                    return new IsModuleActive($container);
+                }
             ],
         ];
     }

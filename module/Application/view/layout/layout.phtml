@@ -39,20 +39,7 @@ $(document).ready(function() {
 
     </head>
     <body>
-<?php
-function getIsActive($view, array $condition)
-{
-    $viewModel = current($view->viewModel()->getCurrent()->getChildren());
-    $script = explode('/', $viewModel->getTemplate());
-    foreach ($condition as $key => $cond) {
-        if (null !== $cond && $script[$key] != $cond) {
-            return '';
-        }
-    }
-    return ' class="active"';
-}
-?>
-<?php if (getIsActive($this, array('database', 'member', 'subscribe')) == ''): ?>
+<?php if (!$this->isModuleActive(['database', 'member', 'subscribe'])): ?>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -66,17 +53,35 @@ function getIsActive($view, array $condition)
                 <div class="collapse navbar-collapse">
                     <?php if ($this->identity() !== null): ?>
                     <ul class="nav navbar-nav">
-                        <li<?= getIsActive($this, array('database', 'meeting')) ?>><a href="<?= $this->url('meeting') ?>">Vergaderingen en Besluiten</a></li>
-                        <li<?= getIsActive($this, array('database', 'organ')) ?>><a href="<?= $this->url('organ') ?>">Organen</a></li>
-                        <li<?= getIsActive($this, array('database', 'prospective-member')) ?>><a href="<?= $this->url('prospective-member') ?>">Aankomende Leden</a></li>
-                        <li<?= getIsActive($this, array('database', 'member')) ?>><a href="<?= $this->url('member') ?>">Leden</a></li>
-                        <li<?= getIsActive($this, array('database', 'export')) ?>><a href="<?= $this->url('export') ?>">Besluitenlijst</a></li>
-                        <li<?= getIsActive($this, array('database', 'address')) ?>><a href="<?= $this->url('address') ?>">Adressenlijst</a></li>
-                        <li<?= getIsActive($this, array('database', 'query')) ?>><a href="<?= $this->url('query') ?>">Query</a></li>
+                        <li class="<?= $this->isModuleActive(['database', 'meeting']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('meeting') ?>">Vergaderingen en Besluiten</a>
+                        </li>
+                        <li class="<?= $this->isModuleActive(['database', 'organ']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('organ') ?>">Organen</a>
+                        </li>
+                        <li class="<?= $this->isModuleActive(['database', 'prospectivemember']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('prospective-member') ?>">Aankomende Leden</a>
+                        </li>
+                        <li class="<?= $this->isModuleActive(['database', 'member']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('member') ?>">Leden</a>
+                        </li>
+                        <li class="<?= $this->isModuleActive(['database', 'export']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('export') ?>">Besluitenlijst</a>
+                        </li>
+                        <li class="<?= $this->isModuleActive(['database', 'address']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('address') ?>">Adressenlijst</a>
+                        </li>
+                        <li class="<?= $this->isModuleActive(['database', 'query']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('query') ?>">Query</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li<?= getIsActive($this, array('database', 'settings')) ?>><a href="<?= $this->url('settings') ?>">Settings</a></li>
-                        <li<?= getIsActive($this, array('user', 'user')) ?>><a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">Uitloggen</a></li>
+                        <li class="<?= $this->isModuleActive(['database', 'settings']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('settings') ?>">Settings</a>
+                        </li>
+                        <li class="<?= $this->isModuleActive(['user', 'user']) ? 'active' : '' ?>">
+                            <a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">Uitloggen</a>
+                        </li>
                     </ul>
                     <?php endif ?>
                 </div><!--/.nav-collapse -->
