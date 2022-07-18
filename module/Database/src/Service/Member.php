@@ -114,11 +114,11 @@ class Member
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
 
-        if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
+        if (isset($data['address']) && isset($data['address']['street']) && !empty($data['address']['street'])) {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
                 'tueUsername', 'study', 'email', 'birth',
-                'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation',
+                'address', 'agreed', 'iban', 'signature', 'signatureLocation',
             ]);
         } else {
             $form->setValidationGroup([
@@ -155,7 +155,7 @@ class Member
         $prospectiveMember->setChangedOn($date);
 
         // store the address
-        $address = $form->get('studentAddress')->getObject();
+        $address = $form->get('address')->getObject();
         $prospectiveMember->setAddress($address);
 
         // check mailing lists
@@ -320,6 +320,9 @@ class Member
         $expiration->setDate($expirationYear, 7, 1);
         $member->setExpiration($expiration);
         $member->setGeneration($generationYear);
+
+        // add address
+        $member->addAddresses($prospectiveMember->getAddresses());
 
         // add mailing lists
         foreach ($form->getLists() as $list) {

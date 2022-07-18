@@ -46,7 +46,7 @@ class Address
         type: "string",
         enumType: AddressTypes::class,
     )]
-    protected AddressTypes $type = AddressTypes::Student;
+    protected AddressTypes $type;
 
     /**
      * Country.
@@ -60,31 +60,31 @@ class Address
      * Street.
      */
     #[Column(type: "string")]
-    protected string $street = '';
+    protected string $street;
 
     /**
      * House number (+ suffix)
      */
     #[Column(type: "string")]
-    protected string $number = '';
+    protected string $number;
 
     /**
      * Postal code.
      */
     #[Column(type: "string")]
-    protected string $postalCode = '';
+    protected string $postalCode;
 
     /**
      * City.
      */
     #[Column(type: "string")]
-    protected string $city = '';
+    protected string $city;
 
     /**
      * Phone number.
      */
     #[Column(type: "string")]
-    protected string $phone = '';
+    protected string $phone;
 
     /**
      * Get the member.
@@ -254,6 +254,7 @@ class Address
     public function toArray(): array
     {
         return [
+            'type' => $this->getType(),
             'country' => $this->getCountry(),
             'street' => $this->getStreet(),
             'number' => $this->getNumber(),

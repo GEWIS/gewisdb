@@ -502,7 +502,7 @@ class ProspectiveMember
      */
     public function toArray(): array
     {
-        $array = [
+        return [
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -513,13 +513,10 @@ class ProspectiveMember
             'study' => $this->getStudy(),
             'birth' => $this->getBirth()->format('Y-m-d'),
             'iban' => $this->getIban(),
-            'studentAddress' => $this->getAddresses()['studentAddress']->toArray(),
-            'agreediban' => 1,
+            'address' => $this->getAddresses()['studentAddress']->toArray(),
+            'agreediban' => '1',
             'agreed' => '1',
         ];
-        $array['studentAddress']['type'] = AddressTypes::Student;
-
-        return $array;
     }
 
     /**
@@ -537,6 +534,7 @@ class ProspectiveMember
         $address->setPostalCode($this->postalCode);
         $address->setCity($this->city);
         $address->setPhone($this->phone);
+
         return [
             'studentAddress' => $address,
         ];

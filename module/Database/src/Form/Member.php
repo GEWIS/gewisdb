@@ -132,7 +132,7 @@ class Member extends Form implements InputFilterProviderInterface
 
 
         $student = clone $address;
-        $student->setName('studentAddress');
+        $student->setName('address');
         $student->get('type')->setValue(AddressTypes::Student->value);
         $this->add($student);
 
