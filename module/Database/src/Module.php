@@ -379,7 +379,7 @@ class Module
                 },
                 'database_hydrator_address' => function (ContainerInterface $container) {
                     $hydrator = $container->get('database_hydrator_default');
-                    $hydrator->addStrategy('addressType', new AddressHydratorStrategy());
+                    $hydrator->addStrategy('type', new AddressHydratorStrategy());
 
                     return $hydrator;
                 },
