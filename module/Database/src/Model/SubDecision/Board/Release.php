@@ -109,7 +109,7 @@ class Release extends SubDecision
         $function = $this->getInstallation()->getFunction();
 
         return $member . ' wordt per ' . $this->formatDate($this->getDate())
-              . ' ontheven als ' . $function
+              . ' ontheven uit de functie van ' . $function
               . ' der s.v. GEWIS.';
     }
 
