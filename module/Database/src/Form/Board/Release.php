@@ -35,7 +35,7 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Dechargeer bestuurder',
+                'value' => 'Onthef bestuurder',
             ],
         ]);
     }
