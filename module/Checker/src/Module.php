@@ -2,26 +2,38 @@
 
 namespace Checker;
 
-use Checker\Command\CheckDatabaseCommand;
-use Checker\Command\CheckDischargesCommand;
+use Checker\Command\{
+    CheckDatabaseCommand,
+    CheckDischargesCommand,
+    CheckMembershipTUeCommand,
+    CheckMembershipTypeCommand,
+    CheckMembershipExpirationCommand,
+};
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
-use Checker\Command\CheckMembershipsCommand;
-use Checker\Mapper\Factory\InstallationFactory as InstallationMapperFactory;
-use Checker\Mapper\Factory\MemberFactory as MemberMapperFactory;
-use Checker\Mapper\Factory\OrganFactory as OrganMapperFactory;
-use Checker\Mapper\Installation as InstallationMapper;
-use Checker\Mapper\Member as MemberMapper;
-use Checker\Mapper\Organ as OrganMapper;
-use Checker\Service\Checker as CheckerService;
-use Checker\Service\Factory\CheckerFactory as CheckerServiceFactory;
-use Checker\Service\Factory\InstallationFactory as InstallationServiceFactory;
-use Checker\Service\Factory\MeetingFactory as MeetingServiceFactory;
-use Checker\Service\Factory\MemberFactory as MemberServiceFactory;
-use Checker\Service\Factory\OrganFactory as OrganServiceFactory;
-use Checker\Service\Installation as InstallationService;
-use Checker\Service\Meeting as MeetingService;
-use Checker\Service\Member as MemberService;
-use Checker\Service\Organ as OrganService;
+use Checker\Mapper\{
+    Installation as InstallationMapper,
+    Member as MemberMapper,
+    Organ as OrganMapper,
+};
+use Checker\Mapper\Factory\{
+    InstallationFactory as InstallationMapperFactory,
+    MemberFactory as MemberMapperFactory,
+    OrganFactory as OrganMapperFactory,
+};
+use Checker\Service\{
+    Checker as CheckerService,
+    Installation as InstallationService,
+    Meeting as MeetingService,
+    Member as MemberService,
+    Organ as OrganService,
+};
+use Checker\Service\Factory\{
+    CheckerFactory as CheckerServiceFactory,
+    InstallationFactory as InstallationServiceFactory,
+    MeetingFactory as MeetingServiceFactory,
+    MemberFactory as MemberServiceFactory,
+    OrganFactory as OrganServiceFactory,
+};
 use Psr\Container\ContainerInterface;
 
 class Module
@@ -47,7 +59,9 @@ class Module
             'factories' => [
                 CheckDatabaseCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
-                CheckMembershipsCommand::class => AbstractCheckerCommandFactory::class,
+                CheckMembershipExpirationCommand::class => AbstractCheckerCommandFactory::class,
+                CheckMembershipTUeCommand::class => AbstractCheckerCommandFactory::class,
+                CheckMembershipTypeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
                 InstallationService::class => InstallationServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,

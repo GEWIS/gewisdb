@@ -247,26 +247,13 @@ class Checker
     }
 
     /**
-     * Checks members whose membership status and type may require changes.
-     *
-     * @return void
-     */
-    public function checkMemberships()
-    {
-        $this->checkAtTUe($this->memberService->getMembersToCheck());
-        $this->checkProperMembershipType();
-        $this->checkNormalExpiration();
-    }
-
-    /**
      * Checks that "ordinary" members are still enrolled at the TU/e. If not, their membership should expire at the end
      * of the current association year. This does not actually update their membership type, as that is still valid for
      * the remainder of the current association year.
-     *
-     * @return void
      */
-    private function checkAtTUe(array $members)
+    public function checkAtTUe(): void
     {
+        $members = $this->memberService->getMembersToCheck();
         $config = $this->config['checker']['membership_api'];
 
         $client = new Client();
@@ -347,10 +334,8 @@ class Checker
     /**
      * Makes sure that members whose membership has end date are actually converted to "graduate" when their membership
      * has ended.
-     *
-     * @return void
      */
-    private function checkProperMembershipType()
+    public function checkProperMembershipType(): void
     {
         $members = $this->memberService->getEndingMembershipsWithNormalTypes();
         $lastMeeting = $this->meetingService->getLastMeeting();
@@ -405,10 +390,8 @@ class Checker
 
     /**
      * Make sure that ordinary members have their membership expiration automatically extended if they are eligible.
-     *
-     * @return void
      */
-    private function checkNormalExpiration()
+    public function checkNormalExpiration(): void
     {
         $members = $this->memberService->getExpiringMembershipsWithNormalTypes();
 
