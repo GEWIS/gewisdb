@@ -196,7 +196,7 @@ class MeetingController extends AbstractActionController
      */
     public function deleteAction(): ViewModel
     {
-        $type = $this->params()->fromRoute('type');
+        $type = MeetingTypes::from($this->params()->fromRoute('type'));
         $number = (int) $this->params()->fromRoute('number');
         $point = (int) $this->params()->fromRoute('point');
         $decision = (int) $this->params()->fromRoute('decision');
