@@ -120,6 +120,7 @@ $(document).ready(function () {
                     modal.data('decision-point', element.data('decision-point'));
                     modal.data('decision-number', element.data('decision-number'));
                     modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.data('lidnr', element.data('lidnr'));
                     modal.modal();
                 });
 
@@ -261,31 +262,63 @@ $(document).ready(function () {
     $('#discharge-modal-yes').click(function(e)
     {
         var modal = $('#install-modal-discharge');
-        var meeting_type = modal.data('meeting-type');
-        var meeting_number = modal.data('meeting-number');
-        var decision_point = modal.data('decision-point');
-        var decision_number = modal.data('decision-number');
-        var subdecision_number = modal.data('subdecision-number');
-        var name = $('#install-modal-discharge div.modal-body span.name').text();
         var func = $('#install-modal-discharge div.modal-body span.function').text();
+        var name = $('#install-modal-discharge div.modal-body span.name').text();
 
-        // create the discharge, and add to all changes
-        var template = $('#discharge-template').data('template');
-        template = template.replace(/__index__/g, count++);
-        template = template.replace(/__function__/g, func);
-        template = template.replace(/__name__/g, name);
+        // Ensure that is a `Lid` is discharged, all functions are removed too.
+        if ('Lid' === func) {
+            $($('#members-result tr[data-lidnr="' + modal.data('lidnr') + '"]').get().reverse()).each(function (i) {
+                var installation = $(this);
 
-        template = template.replace(/__meeting_type__/g, meeting_type);
-        template = template.replace(/__meeting_number__/g, meeting_number);
-        template = template.replace(/__decision_point__/g, decision_point);
-        template = template.replace(/__decision_number__/g, decision_number);
-        template = template.replace(/__number__/g, subdecision_number);
-        $('#install-changes').append($(template));
+                var meeting_type = installation.data('meeting-type');
+                var meeting_number = installation.data('meeting-number');
+                var decision_point = installation.data('decision-point');
+                var decision_number = installation.data('decision-number');
+                var subdecision_number = installation.data('subdecision-number');
 
-        var select = '.dec-' + meeting_type + '-' + meeting_number
-            + '-' + decision_point + '-' + decision_number
-            + '-' + subdecision_number;
-        $('#members-result').find(select).remove();
+                // create the discharge, and add to all changes
+                var template = $('#discharge-template').data('template');
+                template = template.replace(/__index__/g, count++);
+                template = template.replace(/__function__/g, installation.find('.function').html());
+                template = template.replace(/__name__/g, name);
+
+                template = template.replace(/__meeting_type__/g, meeting_type);
+                template = template.replace(/__meeting_number__/g, meeting_number);
+                template = template.replace(/__decision_point__/g, decision_point);
+                template = template.replace(/__decision_number__/g, decision_number);
+                template = template.replace(/__number__/g, subdecision_number);
+                $('#install-changes').append($(template));
+
+                var select = '.dec-' + meeting_type + '-' + meeting_number
+                    + '-' + decision_point + '-' + decision_number
+                    + '-' + subdecision_number;
+                $('#members-result').find(select).remove();
+            });
+        } else {
+            var meeting_type = modal.data('meeting-type');
+            var meeting_number = modal.data('meeting-number');
+            var decision_point = modal.data('decision-point');
+            var decision_number = modal.data('decision-number');
+            var subdecision_number = modal.data('subdecision-number');
+
+            // create the discharge, and add to all changes
+            var template = $('#discharge-template').data('template');
+            template = template.replace(/__index__/g, count++);
+            template = template.replace(/__function__/g, func);
+            template = template.replace(/__name__/g, name);
+
+            template = template.replace(/__meeting_type__/g, meeting_type);
+            template = template.replace(/__meeting_number__/g, meeting_number);
+            template = template.replace(/__decision_point__/g, decision_point);
+            template = template.replace(/__decision_number__/g, decision_number);
+            template = template.replace(/__number__/g, subdecision_number);
+            $('#install-changes').append($(template));
+
+            var select = '.dec-' + meeting_type + '-' + meeting_number
+                + '-' + decision_point + '-' + decision_number
+                + '-' + subdecision_number;
+            $('#members-result').find(select).remove();
+        }
 
         // dismiss the dialog
         modal.modal('hide');
