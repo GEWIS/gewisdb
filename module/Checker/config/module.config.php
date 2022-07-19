@@ -3,7 +3,9 @@
 use Checker\Command\{
     CheckDatabaseCommand,
     CheckDischargesCommand,
-    CheckMembershipsCommand,
+    CheckMembershipExpirationCommand,
+    CheckMembershipTUeCommand,
+    CheckMembershipTypeCommand,
 };
 
 return [
@@ -11,7 +13,9 @@ return [
         'commands' => [
             'check:database' => CheckDatabaseCommand::class,
             'check:discharges' => CheckDischargesCommand::class,
-            'check:memberships' => CheckMembershipsCommand::class,
+            'check:membership:expiration' => CheckMembershipExpirationCommand::class,
+            'check:membership:tue' => CheckMembershipTUeCommand::class,
+            'check:membership:type' => CheckMembershipTypeCommand::class,
         ],
     ],
 ];
