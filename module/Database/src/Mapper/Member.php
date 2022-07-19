@@ -120,7 +120,7 @@ class Member
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.installations', 'r')
             ->leftJoin('m.lists', 'l')
-            ->andWhere('(r.function = \'Lid\' OR r.function IS NULL)');
+            ->andWhere('(r.function = \'Lid\' OR r.function = \'Inactief Lid\' OR r.function IS NULL)');
 
         // discharges
         $qbn = $this->em->createQueryBuilder();

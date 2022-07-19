@@ -91,11 +91,13 @@ class Installation
 
         $members = [];
         foreach ($installations as $installation) {
-            $member = $installation->getMember()->getLidnr();
+            if ('Inactief Lid' !== $installation->getFunction()) {
+                $member = $installation->getMember()->getLidnr();
 
-            // Doing checks against the keys is a lot faster, and we do not need a lot of information.
-            if (!array_key_exists($member, $members)) {
-                $members[$member] = '';
+                // Doing checks against the keys is a lot faster, and we do not need a lot of information.
+                if (!array_key_exists($member, $members)) {
+                    $members[$member] = '';
+                }
             }
         }
 

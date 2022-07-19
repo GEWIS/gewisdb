@@ -55,8 +55,31 @@ $(document).ready(function () {
                     // show all members
                     $('#div-members-abolish').show();
                     var content = '';
-                    $.each(data.json.members, function(idx, install) {
-                        content += '<li>' + install.member.fullName + ' (' + install.function + ')</li>';
+                    $.each(data.json.members, function(idx, member) {
+                        var installationCount = member.installations.length;
+                        var functionCount = 0;
+                        content += '<li>' + member.member.fullName + ' (';
+
+                        $.each(member.installations, function (idx, install) {
+                            content += install.function;
+
+                            if (
+                                2 === installationCount
+                                && 0 === functionCount
+                            ) {
+                                content += ' en ';
+                            } else if (2 < installationCount) {
+                                content += ', ';
+
+                                if (functionCount === installationCount - 1) {
+                                    content += 'en ';
+                                }
+                            }
+
+                            functionCount++;
+                        });
+
+                        content += ')</li>';
                     });
                     $('#members-abolish').html(content);
 
