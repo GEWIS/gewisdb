@@ -2,12 +2,8 @@
 
 namespace Database\Model;
 
-use Application\Model\Enums\{
-    AddressTypes,
-    GenderTypes,
-};
+use Application\Model\Enums\AddressTypes;
 use DateTime;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\{
     Column,
@@ -64,19 +60,6 @@ class ProspectiveMember
      */
     #[Column(type: "string")]
     protected string $firstName;
-
-    /**
-     * Gender of the member.
-     *
-     * Either one of:
-     * - m
-     * - f
-     */
-    #[Column(
-        type: "string",
-        enumType: GenderTypes::class,
-    )]
-    protected GenderTypes $gender;
 
     /**
      * TU/e username.
@@ -343,26 +326,6 @@ class ProspectiveMember
     }
 
     /**
-     * Get the member's gender.
-     *
-     * @return GenderTypes
-     */
-    public function getGender(): GenderTypes
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Set the member's gender.
-     *
-     * @param GenderTypes $gender
-     */
-    public function setGender(GenderTypes $gender): void
-    {
-        $this->gender = $gender;
-    }
-
-    /**
      * Get the TU/e username.
      *
      * @return string|null
@@ -539,7 +502,7 @@ class ProspectiveMember
      */
     public function toArray(): array
     {
-        $array = [
+        return [
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -547,17 +510,13 @@ class ProspectiveMember
             'middleName' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
-            'gender' => $this->getGender(),
             'study' => $this->getStudy(),
             'birth' => $this->getBirth()->format('Y-m-d'),
             'iban' => $this->getIban(),
-            'studentAddress' => $this->getAddresses()['studentAddress']->toArray(),
-            'agreediban' => 1,
+            'address' => $this->getAddresses()['studentAddress']->toArray(),
+            'agreediban' => '1',
             'agreed' => '1',
         ];
-        $array['studentAddress']['type'] = AddressTypes::Student;
-
-        return $array;
     }
 
     /**
@@ -575,6 +534,7 @@ class ProspectiveMember
         $address->setPostalCode($this->postalCode);
         $address->setCity($this->city);
         $address->setPhone($this->phone);
+
         return [
             'studentAddress' => $address,
         ];

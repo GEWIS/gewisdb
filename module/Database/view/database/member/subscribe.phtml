@@ -1,6 +1,7 @@
 <?php
-use Database\Model\Member;
-use Database\Model\Address;
+use Database\Model\Member as MemberModel;
+
+/** @var MemberModel $member */
 ?>
 <?php if (isset($form)): ?>
 <?php
@@ -124,27 +125,6 @@ $element->setLabelAttributes(array(
 </div>
 
 <?php
-$element = $form->get('gender');
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?php foreach ($element->getValueOptions() as $option => $text): ?>
-            <div class="radio">
-                <label>
-                <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
-                    <?= $text ?>
-                </label>
-            </div>
-        <?php endforeach ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
 $element = $form->get('tueUsername');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
@@ -208,29 +188,10 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<?php
-$element = $form->get('iban');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setAttribute('id', 'iban-input');
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <p><?= sprintf($this->translate('Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-
 <fieldset class="study-address in">
 <h3><?= $this->translate('Adres') ?></h3>
 <?php
-$fs = $form->get('studentAddress');
+$fs = $form->get('address');
 ?>
 <?= $this->formHidden($fs->get('type')) ?>
 
@@ -359,6 +320,23 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 <?php endforeach ?>
 
 <h3><?= $this->translate('Handtekening eenmalige SEPA-machtiging') ?></h3>
+<?php
+$element = $form->get('iban');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-input');
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <p><?= sprintf($this->translate('Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
 <p>
 <?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
 </p>
@@ -482,10 +460,6 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
             <td><?= $member->getLastName() ?></td>
         </tr>
         <tr>
-            <th><?= $this->translate('Geslacht') ?></th>
-            <td><?= $member->getGender()->getName($this->plugin('translate')->getTranslator()) ?></td>
-        </tr>
-        <tr>
             <th><?= $this->translate('TU/e-gebruikersnaam') ?></th>
             <td>
                 <?= (null === $member->getTueUsername()) ? $this->translate('Onbekend') : $member->getTueUsername() ?>
@@ -519,28 +493,26 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
 </div>
 <div class="col-md-6">
 <h3><?= $this->translate('Adressen') ?></h3>
-<?php $addresses = array() ?>
 <?php foreach ($member->getAddresses() as $address): ?>
-<?php $addresses[$address->getType()->value] = $address ?>
-<h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?></h4>
-<table class="table table-bordered">
-    <tr>
-        <th><?= $this->translate('Land') ?></th>
-        <td><?= $address->getCountry() ?></td>
-    </tr>
-    <tr>
-        <th><?= $this->translate('Straat en huisnummer') ?></th>
-        <td><?= $address->getStreet() ?> <?= $address->getNumber() ?></td>
-    </tr>
-    <tr>
-        <th><?= $this->translate('Woonplaats en Postcode') ?></th>
-        <td><?= $address->getCity() ?> <?= $address->getPostalCode() ?></td>
-    </tr>
-    <tr>
-        <th><?= $this->translate('Telefoonnummer') ?></th>
-        <td><?= $address->getPhone() ?></td>
-    </tr>
-</table>
+    <h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?></h4>
+    <table class="table table-bordered">
+        <tr>
+            <th><?= $this->translate('Land') ?></th>
+            <td><?= $address->getCountry() ?></td>
+        </tr>
+        <tr>
+            <th><?= $this->translate('Straat en huisnummer') ?></th>
+            <td><?= $address->getStreet() ?> <?= $address->getNumber() ?></td>
+        </tr>
+        <tr>
+            <th><?= $this->translate('Woonplaats en Postcode') ?></th>
+            <td><?= $address->getCity() ?> <?= $address->getPostalCode() ?></td>
+        </tr>
+        <tr>
+            <th><?= $this->translate('Telefoonnummer') ?></th>
+            <td><?= $address->getPhone() ?></td>
+        </tr>
+    </table>
 <?php endforeach ?>
 <h3><?= $this->translate('Aangemelde mailing lists') ?></h3>
 <ul>
@@ -548,6 +520,8 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
+
+<?php if (null !== $member->getIban()): ?>
 <p>
     <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
 </p>
@@ -579,6 +553,7 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
     </tr>
 </table>
 </div>
+<?php endif; ?>
 </div>
 </div>
 <?php endif ?>

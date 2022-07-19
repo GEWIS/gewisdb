@@ -2,7 +2,6 @@
 
 namespace Report\Model;
 
-use Application\Model\Enums\GenderTypes;
 use Application\Model\Enums\MembershipTypes;
 use DateTime;
 use DateTimeInterface;
@@ -72,19 +71,6 @@ class Member
      */
     #[Column(type: "string")]
     protected string $firstName;
-
-    /**
-     * Gender of the member.
-     *
-     * Either one of:
-     * - m
-     * - f
-     */
-    #[Column(
-        type: "string",
-        enumType: GenderTypes::class,
-    )]
-    protected GenderTypes $gender;
 
     /**
      * Generation.
@@ -371,26 +357,6 @@ class Member
         }
 
         return $name . $this->getLastName();
-    }
-
-    /**
-     * Get the member's gender.
-     *
-     * @return GenderTypes
-     */
-    public function getGender(): GenderTypes
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Set the member's gender.
-     *
-     * @param GenderTypes $gender
-     */
-    public function setGender(GenderTypes $gender): void
-    {
-        $this->gender = $gender;
     }
 
     /**

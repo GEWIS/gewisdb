@@ -70,19 +70,6 @@ $element->setAttribute('placeholder', $element->getLabel());
     </div>
 
 <?php
-$element = $form->get('gender');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array('class' => 'radio-inline'));
-?>
-    <div class="form-group">
-        <label for="<?= $element->getName() ?>" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
-        <div class="col-sm-8">
-            <?= $this->formRadio($element) ?>
-            <?= $this->formElementErrors($element) ?>
-        </div>
-    </div>
-
-<?php
 $element = $form->get('tueUsername');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());

@@ -2,10 +2,7 @@
 
 namespace Database\Form;
 
-use Application\Model\Enums\{
-    AddressTypes,
-    GenderTypes,
-};
+use Application\Model\Enums\AddressTypes;
 use Database\Form\Fieldset\Address as AddressFieldset;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\{
@@ -75,19 +72,6 @@ class Member extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'gender',
-            'type' => Radio::class,
-            'options' => [
-                'value_options' => [
-                    GenderTypes::Male->value => $translator->translate('Man'),
-                    GenderTypes::Female->value => $translator->translate('Vrouw'),
-                    GenderTypes::Other->value => $translator->translate('Anders'),
-                ],
-                'label' => $translator->translate('Geslacht'),
-            ],
-        ]);
-
-        $this->add([
             'name' => 'tueUsername',
             'type' => Text::class,
             'options' => [
@@ -148,7 +132,7 @@ class Member extends Form implements InputFilterProviderInterface
 
 
         $student = clone $address;
-        $student->setName('studentAddress');
+        $student->setName('address');
         $student->get('type')->setValue(AddressTypes::Student->value);
         $this->add($student);
 
@@ -282,11 +266,25 @@ class Member extends Form implements InputFilterProviderInterface
                 ],
             ],
             'iban' => [
+                'required' => false,
                 'validators' => [
                     ['name' => Iban::class],
                 ],
                 'filters' => [
                     ['name' => Alnum::class],
+                    ['name' => ToNull::class],
+                ],
+            ],
+            'signature' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => ToNull::class],
+                ],
+            ],
+            'signatureLocation' => [
+                'required' => false,
+                'filters' => [
+                    ['name' => ToNull::class],
                 ],
             ],
             'agreed' => [

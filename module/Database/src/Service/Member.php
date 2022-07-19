@@ -2,33 +2,42 @@
 
 namespace Database\Service;
 
-use Application\Model\Enums\AddressTypes;
-use Application\Model\Enums\GenderTypes;
-use Application\Model\Enums\MembershipTypes;
+use Application\Model\Enums\{
+    AddressTypes,
+    MembershipTypes,
+};
 use Application\Service\FileStorage as FileStorageService;
-use Database\Form\Address as AddressForm;
-use Database\Form\AddressExport as AddressExportForm;
-use Database\Form\DeleteAddress as DeleteAddressForm;
-use Database\Form\Member as MemberForm;
-use Database\Form\MemberEdit as MemberEditForm;
-use Database\Form\MemberExpiration as MemberExpirationForm;
-use Database\Form\MemberLists as MemberListsForm;
-use Database\Form\MemberType as MemberTypeForm;
-use Database\Mapper\MailingList as MailingListMapper;
-use Database\Mapper\Member as MemberMapper;
-use Database\Mapper\ProspectiveMember;
-use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
-use Database\Model\Address as AddressModel;
-use Database\Model\Member as MemberModel;
-use Database\Model\ProspectiveMember as ProspectiveMemberModel;
+use Database\Form\{
+    Address as AddressForm,
+    AddressExport as AddressExportForm,
+    DeleteAddress as DeleteAddressForm,
+    Member as MemberForm,
+    MemberEdit as MemberEditForm,
+    MemberExpiration as MemberExpirationForm,
+    MemberLists as MemberListsForm,
+    MemberType as MemberTypeForm,
+};
+use Database\Mapper\{
+    MailingList as MailingListMapper,
+    Member as MemberMapper,
+    ProspectiveMember,
+    ProspectiveMember as ProspectiveMemberMapper,
+};
+use Database\Model\{
+    Address as AddressModel,
+    Member as MemberModel,
+    ProspectiveMember as ProspectiveMemberModel,
+};
 use Database\Service\MailingList as MailingListService;
 use DateTime;
 use Laminas\Mail\Transport\TransportInterface;
-use Laminas\Mime\Mime;
-use Laminas\View\Model\ViewModel;
 use Laminas\Mail\Message;
-use Laminas\Mime\Part as MimePart;
-use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\{
+    Mime,
+    Part as MimePart,
+    Message as MimeMessage,
+};
+use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
 
 class Member
@@ -105,24 +114,18 @@ class Member
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
 
-        $noiban = false;
-
-        if (isset($data['studentAddress']) && isset($data['studentAddress']['street']) && !empty($data['studentAddress']['street'])) {
+        if (isset($data['address']) && isset($data['address']['street']) && !empty($data['address']['street'])) {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tueUsername', 'study', 'email', 'birth',
-                'studentAddress', 'agreed', 'iban', 'signature', 'signatureLocation',
+                'tueUsername', 'study', 'email', 'birth',
+                'address', 'agreed', 'iban', 'signature', 'signatureLocation',
             ]);
         } else {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
-                'gender', 'tueUsername', 'study', 'email', 'birth',
+                'tueUsername', 'study', 'email', 'birth',
                 'agreed', 'iban', 'signature', 'signatureLocation',
             ]);
-        }
-        if ($data['iban'] == 'noiban') {
-            $noiban = true;
-            $data['iban'] = 'NL20INGB0001234567';
         }
 
         $form->setData($data);
@@ -134,10 +137,6 @@ class Member
         // set some extra data
         /** @var ProspectiveMemberModel $prospectiveMember */
         $prospectiveMember = $form->getData();
-
-        if ($noiban) {
-            $prospectiveMember->setIban(null);
-        }
 
         // find if there is an earlier member with the same email or name
         if (
@@ -156,7 +155,7 @@ class Member
         $prospectiveMember->setChangedOn($date);
 
         // store the address
-        $address = $form->get('studentAddress')->getObject();
+        $address = $form->get('address')->getObject();
         $prospectiveMember->setAddress($address);
 
         // check mailing lists
@@ -172,10 +171,13 @@ class Member
         }
 
         // handle signature
-        $signature = $form->get('signature')->getValue();
-        if (!is_null($signature)) {
-            $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
-            $prospectiveMember->setSignature($path);
+        if (null !== $prospectiveMember->getIban()) {
+            $signature = $form->get('signature')->getValue();
+
+            if (null !== $signature) {
+                $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
+                $prospectiveMember->setSignature($path);
+            }
         }
 
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
@@ -201,15 +203,21 @@ class Member
         $html = new MimePart($body);
         $html->type = "text/html";
 
-        // Include signature as image attachment
-        $image = new MimePart(fopen($this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(), 'r'));
-        $image->type = 'image/png';
-        $image->filename = 'signature.png';
-        $image->disposition = Mime::DISPOSITION_ATTACHMENT;
-        $image->encoding = Mime::ENCODING_BASE64;
-
         $mimeMessage = new MimeMessage();
-        $mimeMessage->setParts([$html, $image]);
+        $mimeMessage->addPart($html);
+
+        // Include signature as image attachment
+        if (null !== $member->getIban()) {
+            $image = new MimePart(fopen(
+                $this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(),
+                'r',
+            ));
+            $image->type = 'image/png';
+            $image->filename = 'signature.png';
+            $image->disposition = Mime::DISPOSITION_ATTACHMENT;
+            $image->encoding = Mime::ENCODING_BASE64;
+            $mimeMessage->addPart($image);
+        }
 
         $message = new Message();
         $message->setBody($mimeMessage);
@@ -240,7 +248,6 @@ class Member
 
         // Fill in the address in the form again
         $data = $prospectiveMember->toArray();
-        $data['gender'] = $data['gender']->value;
 
         // add list data to the form
         foreach ($form->getLists() as $list) {
@@ -255,13 +262,6 @@ class Member
 
         unset($data['lidnr']);
 
-        // Temporary IBAN to pass the form validator.
-        $noiban = false;
-        if ($data['iban'] == null) {
-            $noiban = true;
-            $data['iban'] = 'NL20INGB0001234567';
-        }
-
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -270,11 +270,6 @@ class Member
 
         /** @var MemberModel $member */
         $member = $form->getData();
-
-        // Remove temporary IBAN.
-        if ($noiban) {
-            $member->setIban(null);
-        }
 
         // Copy all remaining information
         $member->setTueUsername($prospectiveMember->getTueUsername());
@@ -325,6 +320,9 @@ class Member
         $expiration->setDate($expirationYear, 7, 1);
         $member->setExpiration($expiration);
         $member->setGeneration($generationYear);
+
+        // add address
+        $member->addAddresses($prospectiveMember->getAddresses());
 
         // add mailing lists
         foreach ($form->getLists() as $list) {
@@ -425,9 +423,9 @@ class Member
     {
         if ($this->canRemove($member)) {
             $this->getMemberMapper()->remove($member);
+        } else {
+            $this->clear($member);
         }
-
-        $this->clear($member);
     }
 
     /**
@@ -435,8 +433,11 @@ class Member
      */
     public function removeProspective(ProspectiveMemberModel $member): void
     {
-        // First destroy the signiture file
-        $this->getFileStorageService()->removeFile($member->getSignature());
+        // First destroy the signature file
+        if (null !== ($signature = $member->getSignature())) {
+            $this->getFileStorageService()->removeFile($signature);
+        }
+
         $this->getProspectiveMemberMapper()->remove($member);
     }
 
@@ -452,7 +453,6 @@ class Member
         $date = new DateTime('0001-01-01 00:00:00');
 
         $member->setEmail(null);
-        $member->setGender(GenderTypes::Other);
         $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(null);

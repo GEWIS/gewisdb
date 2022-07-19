@@ -2,7 +2,6 @@
 
 namespace Database\Model\SubDecision\Board;
 
-use Application\Model\Enums\GenderTypes;
 use Database\Model\SubDecision;
 use DateTime;
 use Doctrine\ORM\Mapping\{
@@ -109,10 +108,8 @@ class Release extends SubDecision
         $member = $this->getInstallation()->getMember()->getFullName();
         $function = $this->getInstallation()->getFunction();
 
-        $zh = $this->getInstallation()->getMember()->getGender() == GenderTypes::Male ? 'zijn' : 'haar';
-
         return $member . ' wordt per ' . $this->formatDate($this->getDate())
-              . ' ontheven uit ' . $zh . ' functie als ' . $function
+              . ' ontheven uit de functie van ' . $function
               . ' der s.v. GEWIS.';
     }
 
