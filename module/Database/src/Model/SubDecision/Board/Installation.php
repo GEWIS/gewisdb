@@ -141,7 +141,7 @@ class Installation extends SubDecision
     {
         $member = $this->getMember()->getFullName();
         return $member . ' wordt per ' . $this->formatDate($this->getDate())
-              . ' gëinstalleerd als ' . $this->getFunction() . ' der s.v. GEWIS.';
+              . ' geïnstalleerd als ' . $this->getFunction() . ' der s.v. GEWIS.';
     }
 
     /**

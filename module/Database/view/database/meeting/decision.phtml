@@ -50,7 +50,7 @@ use Database\Model\Meeting;
     <div class="tab-pane" id="board">
         <ul class="nav nav-pills">
             <li class="active"><a href="#board-installatie" data-toggle="tab">Installatie</a></li>
-            <li><a href="#board-ontheven" data-toggle="tab">Ontheven uit functie</a></li>
+            <li><a href="#board-ontheffen" data-toggle="tab">Ontheffen uit functie</a></li>
             <li><a href="#board-decharge" data-toggle="tab">Dechargeren uit functie</a></li>
         </ul>
         <br />
@@ -60,7 +60,7 @@ use Database\Model\Meeting;
                 'form' => $forms['board_install']
             )); ?>
             </div>
-            <div class="tab-pane" id="board-ontheven">
+            <div class="tab-pane" id="board-ontheffen">
             <?= $this->partial('database/meeting/board/releaseform', array(
                 'form' => $forms['board_release'],
                 'installs' => $installs
