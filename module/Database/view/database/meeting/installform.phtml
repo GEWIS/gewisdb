@@ -162,15 +162,17 @@ $(document).ready(function () {
             }).done(function(data) {
                 var ret = [];
                 $.each(data.json, function (idx, member) {
-                    // assemble member name and add to list
-                    var name = member.fullName + ' (' + member.lidnr + ')';
+                    if (0 === $('#members-result tr[data-lidnr="' + member.lidnr + '"]').length) {
+                        // assemble member name and add to list
+                        var name = member.fullName + ' (' + member.lidnr + ')';
 
-                    ret.push({
-                        label: name,
-                        value: name,
-                        name: member.fullName,
-                        id: member.lidnr
-                    });
+                        ret.push({
+                            label: name,
+                            value: name,
+                            name: member.fullName,
+                            id: member.lidnr
+                        });
+                    }
                 });
 
                 // show data
@@ -178,10 +180,12 @@ $(document).ready(function () {
             });
         },
         select: function (event, ui) {
-            $('#install-member-lidnr').val(ui.item.id);
-            $('#install-member-name').val(ui.item.name);
-            $('#install-member-btn').prop('disabled', false);
-            $('#install-inactive-member-btn').prop('disabled', false);
+            if (0 === $('#members-result tr[data-lidnr="' + ui.item.id + '"]').length) {
+                $('#install-member-lidnr').val(ui.item.id);
+                $('#install-member-name').val(ui.item.name);
+                $('#install-member-btn').prop('disabled', false);
+                $('#install-inactive-member-btn').prop('disabled', false);
+            }
         }
     });
 
@@ -191,6 +195,22 @@ $(document).ready(function () {
      * Create an installation.
      */
     function createInstallation(func, lidnr, name) {
+        // check that the member not already has this function in the organ.
+        var isInstalled = false;
+        var memberResult = $('#members-result tr[data-lidnr="' + lidnr + '"]');
+
+        memberResult.each(function () {
+            if ($(this).find('.function').html() === func) {
+                isInstalled = true;
+
+                return false;
+            }
+        });
+
+        if (isInstalled) {
+            return;
+        }
+
         // initialize the form data
         var template = $('#install-template').data('template');
         template = template.replace(/__index__/g, count++);
@@ -198,7 +218,6 @@ $(document).ready(function () {
         template = template.replace(/__lidnr__/g, lidnr);
         template = template.replace(/__name__/g, name);
         $('#install-changes').append($(template));
-        var memberResult = $('#members-result tr[data-lidnr="' + lidnr + '"]');
 
         // add to 'result'
         var toAdd = '<tr data-lidnr="' + lidnr + '">'
