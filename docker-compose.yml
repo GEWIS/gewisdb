@@ -15,9 +15,7 @@ services:
         networks:
             - gewisdb_network
         ports:
-            - "9200:9200"
-            - "9201:9201"
-            - "9202:9202"
+            - "9725:9725"
         restart: unless-stopped
     web:
         image: abc-db.docker-registry.gewis.nl/gewisdb_web:production
@@ -26,16 +24,21 @@ services:
 #        environment:
 #            - APP_ENV=
 #            - COOKIE_DOMAIN=
-#            - DOCKER_GOOGLE_API_KEY=
-#            - DOCKER_GOOGLE_CALENDAR_KEY=
-#            - DOCKER_DB_HOST=
-#            - DOCKER_DB_PORT=
-#            - DOCKER_DB_USERNAME=
-#            - DOCKER_DB_PASSWORD=
-#            - DOCKER_DB_DATABASE=
-#            - SSH_USERNAME=
-#            - SSH_PASSWORD=
-#            - SSH_REMOTE=
+#            - CHECKER_REPORT_MAIL=
+#            - CHECKER_MEMBERSHIP_API_ENDPOINT=
+#            - CHECKER_MEMBERSHIP_API_KEY=
+#            - CHECKER_MEMBERSHIP_API_MAX_TOTAL_REQUESTS=
+#            - CHECKER_MEMBERSHIP_API_MAX_MANUAL_REQUESTS=
+#            - DOCTRINE_DEFAULT_HOST=
+#            - DOCTRINE_DEFAULT_PORT=
+#            - DOCTRINE_DEFAULT_USER=
+#            - DOCTRINE_DEFAULT_PASSWORD=
+#            - DOCTRINE_DEFAULT_DATABASE=
+#            - DOCTRINE_REPORT_HOST=
+#            - DOCTRINE_REPORT_PORT=
+#            - DOCTRINE_REPORT_USER=
+#            - DOCTRINE_REPORT_PASSWORD=
+#            - DOCTRINE_REPORT_DATABASE=
         depends_on:
             - postfix
         volumes:

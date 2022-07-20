@@ -29,9 +29,7 @@ services:
     nginx:
         build: docker/nginx
         ports:
-            - "80:9200"
-            - "81:9201"
-            - "82:9202"
+            - "80:9725"
     web:
         image: abc-db.docker-registry.gewis.nl/gewisdb_web:development
         build:
