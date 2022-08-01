@@ -10,7 +10,7 @@ enum OrganTypes: string
     case Committee = 'committee';
     case AVC = 'avc';
     case Fraternity = 'fraternity';
-    case KKK = 'kkk';
+    case KCC = 'kcc';
     case AVW = 'avw';
     case RvA = 'rva';
 
@@ -20,7 +20,7 @@ enum OrganTypes: string
             self::Committee => 'Commissie',
             self::AVC => 'AV-commissie',
             self::Fraternity => 'Dispuut',
-            self::KKK => 'KKK',
+            self::KCC => 'KCC',
             self::AVW => 'AV-werkgroep',
             self::RvA => 'RvA',
         };

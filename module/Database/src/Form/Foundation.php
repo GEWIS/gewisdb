@@ -35,7 +35,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
                     'committee' => 'Commissie',
                     'avc' => 'AV-Commissie',
                     'avw' => 'AV-Werkgroep',
-                    'kkk' => 'KKK',
+                    'kcc' => 'KCC',
                     'fraternity' => 'Dispuut',
                     'rva' => 'RvA',
                 ],
