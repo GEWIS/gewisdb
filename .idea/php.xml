@@ -13,16 +13,11 @@
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/slowprog/composer-copy-file" />
-      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
       <path value="$PROJECT_DIR$/vendor/symfony/string" />
       <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
@@ -85,9 +80,6 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
-      <path value="$PROJECT_DIR$/vendor/nette/utils" />
-      <path value="$PROJECT_DIR$/vendor/nette/schema" />
-      <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
       <path value="$PROJECT_DIR$/vendor/maglnet/composer-require-checker" />
       <path value="$PROJECT_DIR$/vendor/webmozart/glob" />
       <path value="$PROJECT_DIR$/vendor/icanhazstring/composer-unused" />
@@ -98,10 +90,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/config" />
       <path value="$PROJECT_DIR$/vendor/composer-unused/contracts" />
       <path value="$PROJECT_DIR$/vendor/composer-unused/symbol-parser" />
-      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
-      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
-      <path value="$PROJECT_DIR$/vendor/react/promise" />
-      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
       <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
       <path value="$PROJECT_DIR$/vendor/bnf/phpstan-psr-container" />
       <path value="$PROJECT_DIR$/vendor/lctrs/psalm-psr-container-plugin" />
@@ -114,7 +102,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
       <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-mail" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-crypt" />
@@ -122,6 +109,7 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-math" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-authentication" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-mvc-i18n" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mvc-plugin-identity" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-inputfilter" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-paginator" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-developer-tools" />
@@ -153,13 +141,8 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-laminas-hydrator" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-i18n-resources" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-permissions-acl" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-dependency-plugin" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-component-installer" />
       <path value="$PROJECT_DIR$/vendor/slam/phpstan-laminas-framework" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mvc-plugin-flashmessenger" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-test" />
       <path value="$PROJECT_DIR$/vendor/openlss/lib-array2xml" />
       <path value="$PROJECT_DIR$/vendor/felixfbecker/advanced-json-rpc" />
@@ -176,9 +159,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/php-cs-fixer/diff" />
       <path value="$PROJECT_DIR$/vendor/webmozart/path-util" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

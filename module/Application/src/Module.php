@@ -70,7 +70,7 @@ class Module
     {
         $session = new SessionContainer('lang');
         if (!isset($session->lang)) {
-            $session->lang = 'nl';
+            $session->lang = 'en';
         }
         return $session->lang;
     }

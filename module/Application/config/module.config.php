@@ -14,7 +14,7 @@ return [
                     'defaults' => [
                         'controller' => IndexController::class,
                         'action' => 'lang',
-                        'lang' => 'nl',
+                        'lang' => 'en',
                     ],
                     'constraints' => [
                         'lang' => '[a-zA-Z_]{2,5}',
@@ -26,7 +26,7 @@ return [
     // however counter-intuitive it is, leaving this in makes sure we do not
     // need the intl extension
     'translator' => [
-        'locale' => 'nl',
+        'locale' => 'en',
         'translation_file_patterns' => [
             [
                 'type' => 'gettext',
