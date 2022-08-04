@@ -378,25 +378,37 @@ class Module
                     );
                 },
                 'database_hydrator_address' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('type', new AddressHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_meeting' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('type', new MeetingHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_subdecision' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_decision' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
 
                     return $hydrator;
