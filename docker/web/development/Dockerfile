@@ -1,30 +1,38 @@
 FROM php:8.1-fpm-alpine as gewisdb_web_development
 
-RUN apk add --no-cache \
-    $PHPIZE_DEPS \
-    curl-dev \
-    git \
-    icu-dev \
-    libpq-dev \
-    libzip-dev \
-    nano \
-    sqlite-dev \
-    unzip \
-    zip
-
-RUN docker-php-ext-install -j$(nproc) \
-    calendar \
-    curl \
-    intl \
-    opcache \
-    pgsql \
-    pdo \
-    pdo_pgsql \
-    pdo_sqlite \
-    zip
-
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+RUN apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
+        curl-dev \
+        icu-dev \
+        libpq-dev \
+        libzip-dev \
+        sqlite-dev \
+    && apk add --no-cache --virtual .runtime-programs \
+        git \
+        nano \
+        unzip \
+        zip \
+    && docker-php-ext-install -j$(nproc) \
+        calendar \
+        curl \
+        intl \
+        opcache \
+        pgsql \
+        pdo \
+        pdo_pgsql \
+        pdo_sqlite \
+        zip \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && rm -r /tmp/pear \
+    && runtimeDeps="$( \
+            scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
+            | tr ',' '\n' \
+            | sort -u \
+            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+        )" \
+    && apk add --virtual .gewisdb-runtime-deps $runtimeDeps \
+    && apk del .build-deps
 
 WORKDIR /code
 
