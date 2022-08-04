@@ -9,6 +9,7 @@
 return [
     'Laminas\I18n',
     'Laminas\Mvc\I18n',
+    'Laminas\Mvc\Plugin\Identity',
     'Laminas\Serializer',
     'Laminas\Mail',
     'Laminas\Cache',
