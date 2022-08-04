@@ -309,6 +309,7 @@ class Member extends Form implements InputFilterProviderInterface
                         'options' => [
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => [
+                                // phpcs:ignore -- user-visible strings should not be split
                                 'regexNotMatch' => $this->translator->translate('Je TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.'),
                             ],
                         ],

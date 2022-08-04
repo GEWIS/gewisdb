@@ -360,6 +360,15 @@ return [
                             ],
                         ],
                     ],
+                    'tuelookup' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/tuelookup',
+                            'defaults' => [
+                                'action' => 'tueLookup'
+                            ]
+                        ]
+                    ],
                 ],
             ],
             'prospective-member' => [

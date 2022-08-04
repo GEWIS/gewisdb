@@ -7,6 +7,8 @@ use Application\Model\Enums\{
     MembershipTypes,
 };
 use Application\Service\FileStorage as FileStorageService;
+use Checker\Model\Exception\LookupException;
+use Checker\Service\Checker as CheckerService;
 use Database\Form\{
     Address as AddressForm,
     AddressExport as AddressExportForm,
@@ -39,6 +41,7 @@ use Laminas\Mime\{
 };
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
+use RuntimeException;
 
 class Member
 {
@@ -62,6 +65,8 @@ class Member
 
     private ProspectiveMemberMapper $prospectiveMemberMapper;
 
+    private CheckerService $checkerService;
+
     private FileStorageService $fileStorageService;
 
     private MailingList $mailingListService;
@@ -83,6 +88,7 @@ class Member
         MailingListMapper $mailingListMapper,
         MemberMapper $memberMapper,
         ProspectiveMemberMapper $prospectiveMemberMapper,
+        CheckerService $checkerService,
         FileStorageService $fileStorageService,
         MailingListService $mailingListService,
         PhpRenderer $viewRenderer,
@@ -91,6 +97,7 @@ class Member
     ) {
         $this->addressForm = $addressForm;
         $this->addressExportForm = $addressExportForm;
+        $this->checkerService = $checkerService;
         $this->deleteAddressForm = $deleteAddressForm;
         $this->memberForm = $memberForm;
         $this->memberEditForm = $memberEditForm;
@@ -363,13 +370,47 @@ class Member
     }
 
     /**
-     * Get prospective member info.
+     * Get prospective member info
+     *
+     * @return array member, form, tuedata
      */
     public function getProspectiveMember(int $id): array
     {
+        $member = $this->getProspectiveMemberMapper()->find($id);
+        $tuedata = $this->getCheckerService()->tueDataObject();
+        $tuestatus = array();
+        try {
+            $tuedata->setUser($member->getTueUsername());
+            if (!$tuedata->isValid()) {
+                $tuestatus[] = array("info", "No data was returned");
+            } else {
+                $similar = $tuedata->compareData(
+                    firstName: $member->getFirstName(),
+                    initials: $member->getInitials(),
+                    prefixName: $member->getMiddleName(),
+                    lastName: $member->getLastName(),
+                );
+                if ($similar > 3) {
+                    // phpcs:ignore -- user-visible strings should not be split
+                    $tuestatus[] = array("danger", "<b>Warning:</b> Data is not likely to be similar. Requires $similar edits. Please check if the TU/e data matches the data entered by the member before approving membership");
+                } elseif ($similar > 0) {
+                    $tuestatus[] = array("info", "<b>Info:</b> $similar edits needed to correct name. Data likely correct");
+                }
+
+                if ($tuedata->studiesAtDepartment()) {
+                    $tuestatus[] = array("success", "<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>");
+                } else {
+                    $tuestatus[] = array("danger", "<b>Warning:</b> Member studies does not study at department.");
+                }
+            }
+        } catch (LookupException $e) {
+            $tuestatus[] = $e->getMessage();
+        }
         return [
-            'member' => $this->getProspectiveMemberMapper()->find($id),
+            'member' => $member,
             'form' => $this->memberTypeForm,
+            'tuedata' => $tuedata,
+            'tuestatus' => $tuestatus,
         ];
     }
 
@@ -511,7 +552,7 @@ class Member
         // It is not possible to have another membership type after being an honorary member and there does not exist a
         // good transition to a different membership type (because of the dates/expiration etc.).
         if (MembershipTypes::Honorary === $member->getType()) {
-            throw new \RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
+            throw new RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
         }
 
         $form->setData($data);
@@ -857,5 +898,15 @@ class Member
     public function getMailTransport(): TransportInterface
     {
         return $this->mailTransport;
+    }
+
+    /**
+     * Get the checker service.
+     *
+     * @return \Checker\Service\Checker
+     */
+    public function getCheckerService()
+    {
+        return $this->checkerService;
     }
 }

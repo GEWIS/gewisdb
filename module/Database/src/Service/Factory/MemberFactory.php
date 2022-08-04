@@ -3,6 +3,7 @@
 namespace Database\Service\Factory;
 
 use Application\Service\FileStorage as FileStorageService;
+use Checker\Service\Checker as CheckerService;
 use Database\Form\Address as AddressForm;
 use Database\Form\AddressExport as AddressExportForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
@@ -53,6 +54,8 @@ class MemberFactory implements FactoryInterface
         $memberMapper = $container->get(MemberMapper::class);
         /** @var ProspectiveMemberMapper $prospectiveMemberMapper */
         $prospectiveMemberMapper = $container->get(ProspectiveMemberMapper::class);
+        /** @var CheckerService $checkerService */
+        $checkerService = $container->get(CheckerService::class);
         /** @var FileStorageService $fileStorageService */
         $fileStorageService = $container->get(FileStorageService::class);
         /** @var MailingListService $mailingListService */
@@ -74,6 +77,7 @@ class MemberFactory implements FactoryInterface
             $mailingListMapper,
             $memberMapper,
             $prospectiveMemberMapper,
+            $checkerService,
             $fileStorageService,
             $mailingListService,
             $viewRenderer,

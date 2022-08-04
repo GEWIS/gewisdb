@@ -8,46 +8,80 @@ use Application\Model\Enums\AddressTypes;
     <h1><?= $member->getFullName() ?></h1>
     <table class="table table-bordered">
         <tr>
+            <th></th>
+            <th>Member entry</th>
+            <th>TU/e data</th>
+        </tr>
+        <tr>
             <th>Lidnummer</th>
             <td><?= $member->getLidnr() ?></td>
+            <?php if (!$tuedata->isValid()): ?>
+                <td rowspan="11" style="background-color: lightgray;">No data returned</td>
+            <?php else: ?>
+                <td style="background-color: lightgray;"></td>
+            <?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tuedata->isValid() && $member->getInitials() === $tuedata->getData()['name']['initials']) ? 'datavalid' : 'datamismatch'?>">
             <th>Voorletters</th>
             <td><?= $member->getInitials() ?></td>
+            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getData()['name']['initials'] ?></td><?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tuedata->isValid() && $member->getFirstName() === $tuedata->getData()['name']['given']) ? 'datavalid' : 'datamismatch'?>">
             <th>Voornaam</th>
             <td><?= $member->getFirstName() ?></td>
+            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getData()['name']['given'] ?></td><?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tuedata->isValid() && $member->getMiddleName() === $tuedata->computedPrefixName()) ? 'datavalid' : 'datamismatch'?>">
             <th>Tussenvoegsels</th>
             <td><?= $member->getMiddleName() ?></td>
+            <?php if ($tuedata->isValid()): ?><td style="vertical-align: middle;"><?= $tuedata->computedPrefixName() ?></td><?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tuedata->isValid() && $member->getLastName() === $tuedata->computedLastName()) ? 'datavalid' : 'datamismatch'?>">
             <th>Achternaam</th>
             <td><?= $member->getLastName() ?></td>
+            <?php if ($tuedata->isValid()): ?><td style="vertical-align: middle;"><?= $tuedata->computedLastName() ?></td><?php endif; ?>
         </tr>
         <tr>
             <th>TU/e-gebruikersnaam</th>
             <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : $member->getTueUsername() ?></td>
+            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getData()['sAMAccountName'] ?></td><?php endif; ?>
         </tr>
         <tr>
             <th>Email</th>
             <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
+            <?php if ($tuedata->isValid()): ?><td><a href="mailto:<?= $tuedata->getData()['mail'] ?>"><?= $tuedata->getData()['mail'] ?></a></td><?php endif; ?>
         </tr>
         <tr>
             <th>Geboortedatum</th>
             <td><?= $member->getBirth()->format('l j F Y') ?></td>
+            <?php if ($tuedata->isValid()): ?><td style="background-color: lightgray;"></td><?php endif; ?>
         </tr>
         <tr>
             <th>Betaald (hoe veel)</th>
             <td><?= $member->getPaid() ?></td>
+            <?php if ($tuedata->isValid()): ?><td style="background-color: lightgray;"></td><?php endif; ?>
         </tr>
         <tr>
             <th>Laatste wijziging lidmaatshap</th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
+            <?php if ($tuedata->isValid()): ?><td><?= date('l j F Y', strtotime($tuedata->getData()['lastupdated'])) ?></td><?php endif; ?>
+        </tr>
+        <tr>
+            <th>Study</th>
+            <td><?= $member->getStudy() ?></td>
+            <?php if ($tuedata->isValid()): ?><td>
+                <?php foreach($tuedata->getData()['registrations'] as $registration):?>
+                        <?= $registration['dept'] . ": " . $registration['study'] . " (started in " . $registration['generation'] . ")" ?></br>
+                <?php   endforeach;  ?>
+            </td><?php endif; ?>
         </tr>
     </table>
+    <?php foreach ($tuestatus as $alert): ?>
+        <div class="alert alert-<?= $alert[0] ?>" role="alert">
+            <?= $alert[1] ?>
+        </div>
+    <?php endforeach; ?>
+
     <?php
     $form->prepare();
 

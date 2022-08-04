@@ -7,6 +7,8 @@ use Application\Model\Enums\MembershipTypes;
 use Application\Model\Enums\OrganTypes;
 use Application\Service\EventAwareService;
 use Checker\Model\Error;
+use Checker\Model\Exception\LookupException;
+use Checker\Model\TueData;
 use Checker\Service\Installation as InstallationService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
@@ -15,11 +17,9 @@ use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\Meeting as MeetingModel;
 use DateTime;
-use Laminas\Http\Client;
-use Laminas\Http\Client\Adapter\Curl;
-use Laminas\Http\Request;
-use Laminas\Json\Json;
 use Laminas\Mail\Message;
+use RuntimeException;
+use UnexpectedValueException;
 
 class Checker
 {
@@ -246,6 +246,11 @@ class Checker
         return $errors;
     }
 
+    public function tueDataObject()
+    {
+        return new TueData($this->config['checker']['membership_api']);
+    }
+
     /**
      * Checks that "ordinary" members are still enrolled at the TU/e. If not, their membership should expire at the end
      * of the current association year. This does not actually update their membership type, as that is still valid for
@@ -254,17 +259,8 @@ class Checker
     public function checkAtTUe(): void
     {
         $members = $this->memberService->getMembersToCheck();
-        $config = $this->config['checker']['membership_api'];
 
-        $client = new Client();
-        $client->setAdapter(Curl::class)
-            ->setEncType('application/json');
-
-        $request = new Request();
-        $request->setMethod(Request::METHOD_GET)
-            ->getHeaders()->addHeaders([
-                'Authorization' => 'Bearer ' . $config['key'],
-            ]);
+        $user = $this->tueDataObject();
 
         // Determine the date of (potential) expiration of a member's membership outside the foreach to make sure we
         // only do it once.
@@ -273,59 +269,36 @@ class Checker
         // Check each member that needs to be checked.
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            echo "Performing request for member " . $member->getLidnr() . PHP_EOL;
+            echo "Request for member " . $member->getLidnr() . ":" . PHP_EOL;
 
-            $request->setUri($config['endpoint'] . $member->getTueUsername());
-            $response = $client->send($request);
-
-            // Check if the request was successful. If something else happens than 200 or 404 that may have broken the
-            // request, assume that the member is still in the TU/e student administration database but do not update
-            // membership status.
-            if (200 === $response->getStatusCode()) {
-                echo "Received good response" . PHP_EOL;
-                try {
-                    $responseContent = Json::decode($response->getBody(), Json::TYPE_ARRAY);
-
-                    // Check that we have a proper response.
-                    if (array_key_exists('registrations', $responseContent)) {
-                        echo "Response is valid" . PHP_EOL;
-                        if (empty($responseContent['registrations'])) {
-                            echo "Member is no longer studying at the TU/e" . PHP_EOL;
-                            // The member is no longer studying at the TU/e.
-                            $member->setChangedOn(new DateTime());
-                            $member->setIsStudying(false);
-                            $member->setMembershipEndsOn($exp);
-                        } else {
-                            echo "Member is still studying at the TU/e" . PHP_EOL;
-                            // The member is still studying at the TU/e. Determine whether the member is a student at
-                            // the Department of Mathematics and Computer Science or another department. If the member
-                            // is still a student at the M&CS department don't change anything, otherwise, set date of
-                            // expiration.
-                            if (!in_array('WIN', array_column($responseContent['registrations'], 'dept'))) {
-                                echo "Member is still studying but not at the department of MCS" . PHP_EOL;
-                                $member->setChangedOn(new DateTime());
-                                $member->setMembershipEndsOn($exp);
-                            }
-                        }
-
-                        $member->setLastCheckedOn(new DateTime());
-                    }
-                } catch (\RuntimeException $e) {
-                    echo "JSON is malformed or something else went wrong" . PHP_EOL;
-                    // The request could not be decoded :/
+            try {
+                $user->setUser($member->getTueUsername());
+                if ($user->getStatus() !== 0 && $user->getStatus() !== 404) {
+                    echo "--> Did not retrieve data, but no exception was thrown";
+                    continue;
                 }
-            } elseif (404 === $response->getStatusCode()) {
-                echo "Member is no longer known at the TU/e" . PHP_EOL;
-                // The member cannot be found in the TU/e student administration database.
-                $member->setChangedOn(new DateTime());
-                $member->setIsStudying(false);
-                $member->setMembershipEndsOn($exp);
-                $member->setLastCheckedOn(new DateTime());
-            } else {
-                echo "Request failed with status code " . $response->getStatusCode() . PHP_EOL;
-            }
+                echo "--> Successfully retrieved data" . PHP_EOL;
 
-            echo "Request handled" . PHP_EOL;
+                if ($user->status === 404 || !$user->studiesAtTue()) {
+                    echo "--> Member is no longer studying at the TU/e" . PHP_EOL;
+                    // The member is no longer studying at the TU/e.
+                    $member->setChangedOn(new DateTime());
+                    $member->setIsStudying(false);
+                    $member->setMembershipEndsOn($exp);
+                } elseif (!$user->studiesAtDepartment()) {
+                    echo "Member is still studying but not at the department of MCS" . PHP_EOL;
+                    // The member does not study at WIN anymore, so we set the expiration date for the membership
+                    $member->setChangedOn(new DateTime());
+                    $member->setMembershipEndsOn($exp);
+                } else {
+                    //The user is still studying at MCS, so don't change anything
+                }
+
+                // If we made it here, we have successfully checked the member
+                $member->setLastCheckedOn(new DateTime());
+            } catch (LookupException $e) {
+                echo "--> Error occured during lookup: " . $e->getMessage() . PHP_EOL;
+            }
 
             $this->memberService->getMemberMapper()->persist($member);
         }
@@ -347,13 +320,16 @@ class Checker
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            echo "Determining new membership type for " . $member->getLidnr() . " (ends on " . $member->getMembershipEndsOn()->format('Y-m-d') . " and expiring on " . $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+            echo "Determining new membership type for " . $member->getLidnr() . " (ends on " .
+                $member->getMembershipEndsOn()->format('Y-m-d') . " and expiring on " .
+                $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
 
             if ($member->getMembershipEndsOn() <= $now) {
                 echo "Membership has ended and expired" . PHP_EOL;
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
-                    echo "Currently an active member, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
+                    echo "Currently an active member, so becoming EXTERNAL. Extending membership to " .
+                        $exp->format('Y-m-d') . PHP_EOL;
                     $member->setType(MembershipTypes::External);
 
                     // External memberships should run till the end of the next association year (which is actually the
@@ -364,7 +340,8 @@ class Checker
                     // We only have to change the membership type for external or graduates depending on whether the
                     // member is still studying.
                     if ($member->getIsStudying()) {
-                        echo "But is studying, so becoming EXTERNAL. Extending membership to " . $exp->format('Y-m-d') . PHP_EOL;
+                        echo "But is studying, so becoming EXTERNAL. Extending membership to " .
+                            $exp->format('Y-m-d') . PHP_EOL;
                         $member->setType(MembershipTypes::External);
 
                         // External memberships should run till the end of the next association year (which is actually
@@ -403,7 +380,8 @@ class Checker
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            echo "Determining new expiration for " . $member->getLidnr() . " (expiring on " . $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+            echo "Determining new expiration for " . $member->getLidnr() . " (expiring on " .
+                $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
 
             if ($member->getExpiration() <= $now) {
                 echo "Expired, thus extending to " . $exp->format('Y-m-d') . PHP_EOL;

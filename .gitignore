@@ -30,3 +30,5 @@ psalm/psalm-baseline-pr.xml
 .DS_Store
 /.htaccess
 .postgres
+config/bash.env
+.vscode
