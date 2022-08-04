@@ -369,6 +369,15 @@ return [
                             ]
                         ]
                     ],
+                    'tuerequest' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/tuerequest',
+                            'defaults' => [
+                                'action' => 'tueRequest'
+                            ]
+                        ]
+                    ],
                 ],
             ],
             'prospective-member' => [

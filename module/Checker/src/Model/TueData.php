@@ -8,8 +8,9 @@ use Laminas\Http\Client\Adapter\Curl;
 use Laminas\Http\Client\Adapter\Exception\RuntimeException as LaminasRuntimeException;
 use Laminas\Http\Request;
 use Laminas\Json\Json;
-use RuntimeException;
+use DateTime;
 use LogicException;
+use RuntimeException;
 
 /**
  * Object representing data from a TU/e user
@@ -157,14 +158,53 @@ class TueData
         return $this->status;
     }
 
-    public function getData(): ?array
-    {
-        return $this->data;
-    }
-
     public function isValid(): bool
     {
         return $this->data !== null;
+    }
+
+    public function getUsername(): string
+    {
+        if (!isset($this->data['sAMAccountName'])) {
+            return "";
+        }
+        return $this->data['sAMAccountName'];
+    }
+
+    public function getEmail(): string
+    {
+        if (!isset($this->data['mail'])) {
+            return "";
+        }
+        return $this->data['mail'];
+    }
+
+    public function getFirstName(): string
+    {
+        if (!isset($this->data['name']['first'])) {
+            return "";
+        }
+        return $this->data['name']['first'];
+    }
+
+    public function getInitials(): string
+    {
+        if (!isset($this->data['name']['initials'])) {
+            return "";
+        }
+        return $this->data['name']['initials'];
+    }
+
+    public function computedPrefixName(): string
+    {
+        if (!isset($this->data['name']['last'])) {
+            return "";
+        }
+        $exploded = explode(",", $this->data['name']['last']);
+        if (count($exploded) < 2) {
+            return "";
+        }
+        return trim($exploded[1]);
     }
 
     public function computedLastName(): string
@@ -175,12 +215,35 @@ class TueData
         return trim(explode(",", $this->data['name']['last'])[0]);
     }
 
-    public function computedPrefixName(): string
+    public function getRegistrations(): array
     {
-        if (!isset($this->data['name']['last'])) {
-            return "";
+        if (!isset($this->data['registrations'])) {
+            return array();
         }
-        return trim(explode(",", $this->data['name']['last'])[1]);
+        return $this->data['registrations'];
+    }
+
+    public function getChangedOn(): DateTime
+    {
+        return new DateTime($this->data['lastupdated']);
+    }
+
+    /**
+     * Convert to array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'username' => $this->getUsername(),
+            'email' => $this->getEmail(),
+            'lastName' => $this->computedLastName(),
+            'prefixName' => $this->computedPrefixName(),
+            'initials' => $this->getInitials(),
+            'firstName' => $this->getFirstName(),
+            'registrations' => $this->getRegistrations(),
+        ];
     }
 
     /**

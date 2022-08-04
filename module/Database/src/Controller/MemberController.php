@@ -346,11 +346,25 @@ class MemberController extends AbstractActionController
      */
     public function tueLookupAction()
     {
-        $data = $this->checkerService->tueDataObject();
-        $data->setUser("20180001");
-
+        $username = $this->params()->fromQuery('u');
         return new ViewModel([
-            'data' => json_encode($data->getData())
+            "username" => $username,
         ]);
+    }
+
+    /**
+     * Lookup TUe data action
+     *
+     * Gets the TUe data for a given member
+     */
+    public function tueRequestAction(): JsonModel
+    {
+        $username = $this->params()->fromQuery('u');
+        $data = $this->checkerService->tueDataObject();
+        $data->setUser($username);
+
+        return new JsonModel(
+            $data->toArray(),
+        );
     }
 }

@@ -1,6 +1,6 @@
 <h1>TU/e lookup</h1>
 
-<?php if($_ENV['environment'] === "development"):?>
+<?php if($_ENV['APP_ENV'] === "development"):?>
 <p>Valid student IDs for testing:</p>
 <ul>
     <li>20170001: too many requests</li>
@@ -13,4 +13,50 @@
 
 <?php endif; ?>
     
-<?= $data ?>
+<script>
+$(document).ready(function () {
+    var tbody = $('#reponsetable tbody');
+    var currentrequest;
+    var lookup = function (username) {
+        tbody.html('');
+        if (username.length >= 6) {
+            currentrequest = $.ajax({
+                dataType: 'json',
+                url: '<?= $this->url('member/default', array('action' => 'tuerequest')) ?>?u=' + username,
+                context: document.body,
+                beforeSend: () => {
+                    if (currentrequest != undefined) { currentrequest.abort(); }
+                },
+            }).done(function (data) {
+                tbody.html('');
+                $.each(data, function(key,val){
+                    tbody.append('<tr><td>' + key + '</td><td>' + JSON.stringify(val) + '</td></tr>');
+                });
+            });
+        }
+    };
+
+    $('#lookup-username').keyup(function (e) {
+        username = $(e.target).val();
+        lookup(username);
+    });
+    lookup("<?= $username ?>");
+});
+</script>
+<form role="form">
+    <div class="form-group">
+        <label for="">TU/e-gebruiker zoeken</label>
+        <input type="text" class="form-control" placeholder="Zoek" id="lookup-username" value="<?= $username ?>" autofocus>
+    </div>
+</form>
+
+<table id="reponsetable">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

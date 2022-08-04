@@ -32,7 +32,7 @@ use Application\Model\Enums\{
         </tr>
         <tr>
             <th>TU/e-gebruikersnaam</th>
-            <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : $member->getTueUsername() ?></td>
+            <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : ('<a href="' . $this->url('member/tuelookup') . '?u=' . $member->getTueUsername() . '"</a>' . $member->getTueUsername() . '</a></td>') ?>
         </tr>
         <tr>
             <th>Email</th>

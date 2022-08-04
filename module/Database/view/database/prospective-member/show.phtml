@@ -21,15 +21,15 @@ use Application\Model\Enums\AddressTypes;
                 <td style="background-color: lightgray;"></td>
             <?php endif; ?>
         </tr>
-        <tr class="<?= ($tuedata->isValid() && $member->getInitials() === $tuedata->getData()['name']['initials']) ? 'datavalid' : 'datamismatch'?>">
+        <tr class="<?= ($tuedata->isValid() && $member->getInitials() === $tuedata->getInitials()) ? 'datavalid' : 'datamismatch'?>">
             <th>Voorletters</th>
             <td><?= $member->getInitials() ?></td>
-            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getData()['name']['initials'] ?></td><?php endif; ?>
+            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getInitials() ?></td><?php endif; ?>
         </tr>
-        <tr class="<?= ($tuedata->isValid() && $member->getFirstName() === $tuedata->getData()['name']['given']) ? 'datavalid' : 'datamismatch'?>">
+        <tr class="<?= ($tuedata->isValid() && $member->getFirstName() === $tuedata->getFirstName()) ? 'datavalid' : 'datamismatch'?>">
             <th>Voornaam</th>
             <td><?= $member->getFirstName() ?></td>
-            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getData()['name']['given'] ?></td><?php endif; ?>
+            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getFirstName() ?></td><?php endif; ?>
         </tr>
         <tr class="<?= ($tuedata->isValid() && $member->getMiddleName() === $tuedata->computedPrefixName()) ? 'datavalid' : 'datamismatch'?>">
             <th>Tussenvoegsels</th>
@@ -43,13 +43,13 @@ use Application\Model\Enums\AddressTypes;
         </tr>
         <tr>
             <th>TU/e-gebruikersnaam</th>
-            <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : $member->getTueUsername() ?></td>
-            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getData()['sAMAccountName'] ?></td><?php endif; ?>
+            <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : ('<a href="' . $this->url('member/tuelookup') . '?u=' . $member->getTueUsername() . '"</a>' . $member->getTueUsername() . '</a></td>') ?>
+            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getUsername() ?></td><?php endif; ?>
         </tr>
         <tr>
             <th>Email</th>
             <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
-            <?php if ($tuedata->isValid()): ?><td><a href="mailto:<?= $tuedata->getData()['mail'] ?>"><?= $tuedata->getData()['mail'] ?></a></td><?php endif; ?>
+            <?php if ($tuedata->isValid()): ?><td><a href="mailto:<?= $tuedata->getEmail() ?>"><?= $tuedata->getEmail() ?></a></td><?php endif; ?>
         </tr>
         <tr>
             <th>Geboortedatum</th>
@@ -64,13 +64,13 @@ use Application\Model\Enums\AddressTypes;
         <tr>
             <th>Laatste wijziging lidmaatshap</th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
-            <?php if ($tuedata->isValid()): ?><td><?= date('l j F Y', strtotime($tuedata->getData()['lastupdated'])) ?></td><?php endif; ?>
+            <?php if ($tuedata->isValid()): ?><td><?= $tuedata->getChangedOn()->format('l j F Y') ?></td><?php endif; ?>
         </tr>
         <tr>
             <th>Study</th>
             <td><?= $member->getStudy() ?></td>
             <?php if ($tuedata->isValid()): ?><td>
-                <?php foreach($tuedata->getData()['registrations'] as $registration):?>
+                <?php foreach($tuedata->getRegistrations() as $registration):?>
                         <?= $registration['dept'] . ": " . $registration['study'] . " (started in " . $registration['generation'] . ")" ?></br>
                 <?php   endforeach;  ?>
             </td><?php endif; ?>
