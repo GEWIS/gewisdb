@@ -1,16 +1,12 @@
-FROM php:8.1-fpm as php-target
+FROM php:8.1-fpm-alpine as php-target
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        cron \
-        git \
-        libcurl4-openssl-dev \
-        libicu-dev \
-        libpq-dev \
-        libzip-dev \
-        unzip \
-    && apt-get upgrade -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    curl-dev \
+    git \
+    icu-dev \
+    libpq-dev \
+    libzip-dev \
+    unzip
 
 RUN docker-php-ext-install -j$(nproc) \
     calendar \

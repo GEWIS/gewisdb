@@ -1,19 +1,16 @@
-FROM php:8.1-fpm as gewisdb_web_development
+FROM php:8.1-fpm-alpine as gewisdb_web_development
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        cron \
-        git \
-        libcurl4-openssl-dev \
-        libicu-dev \
-        libpq-dev \
-        libsqlite3-dev \
-        libzip-dev \
-        nano \
-        unzip \
-        zip \
-    && apt-get upgrade -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    $PHPIZE_DEPS \
+    curl-dev \
+    git \
+    icu-dev \
+    libpq-dev \
+    libzip-dev \
+    nano \
+    sqlite-dev \
+    unzip \
+    zip
 
 RUN docker-php-ext-install -j$(nproc) \
     calendar \
@@ -34,13 +31,6 @@ WORKDIR /code
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');"
-
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-        nodejs \
-    && apt-get upgrade -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
 
 COPY --chown=www-data:www-data ./composer.json ./
 RUN php composer.phar install

@@ -1,4 +1,6 @@
-FROM nginx:latest as gewisdb_nginx
+FROM nginx:stable-alpine as gewisdb_nginx
+
+RUN adduser -D -H -u 1000 -s /bin/bash www-data -G www-data
 
 COPY --chown=www-data:www-data . /etc/nginx
 COPY --chown=www-data:www-data nginx.conf /etc/nginx/nginx.conf.template
