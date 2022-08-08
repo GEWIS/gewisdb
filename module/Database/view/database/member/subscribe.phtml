@@ -9,6 +9,7 @@ $this->headTitle()->prepend("GEWIS Enrollment");
 
 $this->inlineScript()->appendFile($this->basePath() . '/js/signature_pad.min.js');
 $this->inlineScript()->appendFile($this->basePath() . '/js/subscribe.app.js');
+$this->inlineScript()->appendFile($this->basePath() . '/js/inputvalidator.min.js');
 
 $form->prepare();
 
@@ -62,7 +63,7 @@ verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') ?>
 
 <?php
 $element = $form->get('lastName');
-$element->setAttribute('class', 'form-control');
+$element->setAttribute('class', 'form-control validate-name');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
@@ -78,7 +79,7 @@ $element->setLabelAttributes(array(
 
 <?php
 $element = $form->get('middleName');
-$element->setAttribute('class', 'form-control');
+$element->setAttribute('class', 'form-control validate-middlename');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
@@ -94,7 +95,7 @@ $element->setLabelAttributes(array(
 
 <?php
 $element = $form->get('initials');
-$element->setAttribute('class', 'form-control');
+$element->setAttribute('class', 'form-control validate-initials');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
@@ -110,7 +111,7 @@ $element->setLabelAttributes(array(
 
 <?php
 $element = $form->get('firstName');
-$element->setAttribute('class', 'form-control');
+$element->setAttribute('class', 'form-control validate-name');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
@@ -158,7 +159,7 @@ $element->setLabelAttributes(array(
 
 <?php
 $element = $form->get('email');
-$element->setAttribute('class', 'form-control');
+$element->setAttribute('class', 'form-control validate-email');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
@@ -322,7 +323,7 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 <h3><?= $this->translate('Handtekening eenmalige SEPA-machtiging') ?></h3>
 <?php
 $element = $form->get('iban');
-$element->setAttribute('class', 'form-control');
+$element->setAttribute('class', 'form-control validate-iban');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setAttribute('id', 'iban-input');
 $element->setLabelAttributes(array(
@@ -428,6 +429,13 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
 
 <?= $this->form()->closeTag() ?>
 </div>
+
+<script>
+    window.addEventListener('load', (event) => {
+        validator = new InputValidator(document.getElementById("<?= $form->getAttribute('id'); ?>"));
+    });
+</script>
+
 <?php else: ?>
     <h1 class="hidden-print"><?= $this->translate('Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS') ?>
         <br>
