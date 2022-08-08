@@ -8,6 +8,7 @@ use Database\Form\Address as AddressForm;
 use Database\Form\AddressExport as AddressExportForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\Member as MemberForm;
+use Database\Form\MemberApprove as MemberApproveForm;
 use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
 use Database\Form\MemberType as MemberTypeForm;
@@ -40,6 +41,8 @@ class MemberFactory implements FactoryInterface
         $addressExportForm = $container->get(AddressExportForm::class);
         /** @var DeleteAddressForm $deleteAddressForm */
         $deleteAddressForm = $container->get(DeleteAddressForm::class);
+        /** @var MemberForm $memberApproveForm */
+        $memberApproveForm = $container->get(MemberApproveForm::class);
         /** @var MemberForm $memberForm */
         $memberForm = $container->get(MemberForm::class);
         /** @var MemberEditForm $memberEditForm */
@@ -70,6 +73,7 @@ class MemberFactory implements FactoryInterface
             $addressForm,
             $addressExportForm,
             $deleteAddressForm,
+            $memberApproveForm,
             $memberForm,
             $memberEditForm,
             $memberExpirationForm,

@@ -181,10 +181,10 @@ class TueData
 
     public function getFirstName(): string
     {
-        if (!isset($this->data['name']['first'])) {
+        if (!isset($this->data['name']['given'])) {
             return "";
         }
-        return $this->data['name']['first'];
+        return $this->data['name']['given'];
     }
 
     public function getInitials(): string
@@ -223,8 +223,11 @@ class TueData
         return $this->data['registrations'];
     }
 
-    public function getChangedOn(): DateTime
+    public function getChangedOn(): ?DateTime
     {
+        if (!isset($this->data['lastupdated'])) {
+            return null;
+        }
         return new DateTime($this->data['lastupdated']);
     }
 
@@ -261,12 +264,12 @@ class TueData
             );
         }
 
-        $sum += levenshtein($firstName, $this->data['name']['given']);
+        $sum += levenshtein($firstName, $this->getFirstName());
         $sum += levenshtein($prefixName, $this->computedPrefixName());
         $sum += levenshtein($lastName, $this->computedLastName());
         $sum += levenshtein(
             strtolower(preg_replace('/\PL/u', '', $initials)),
-            strtolower(preg_replace('/\PL/u', '', $this->data['name']['initials']))
+            strtolower(preg_replace('/\PL/u', '', $this->getInitials()))
         );
 
         return $sum;

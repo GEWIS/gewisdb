@@ -8,12 +8,14 @@ use Application\Model\Enums\{
 };
 use Application\Service\FileStorage as FileStorageService;
 use Checker\Model\Exception\LookupException;
+use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
 use Database\Form\{
     Address as AddressForm,
     AddressExport as AddressExportForm,
     DeleteAddress as DeleteAddressForm,
     Member as MemberForm,
+    MemberApprove as MemberApproveForm,
     MemberEdit as MemberEditForm,
     MemberExpiration as MemberExpirationForm,
     MemberLists as MemberListsForm,
@@ -45,72 +47,25 @@ use RuntimeException;
 
 class Member
 {
-    private AddressForm $addressForm;
-
-    private AddressExportForm $addressExportForm;
-
-    private DeleteAddressForm $deleteAddressForm;
-
-    private MemberForm $memberForm;
-
-    private MemberEditForm $memberEditForm;
-
-    private MemberExpirationForm $memberExpirationForm;
-
-    private MemberTypeForm $memberTypeForm;
-
-    private MailingListMapper $mailingListMapper;
-
-    private MemberMapper $memberMapper;
-
-    private ProspectiveMemberMapper $prospectiveMemberMapper;
-
-    private CheckerService $checkerService;
-
-    private FileStorageService $fileStorageService;
-
-    private MailingList $mailingListService;
-
-    private PhpRenderer $viewRenderer;
-
-    private TransportInterface $mailTransport;
-
-    private array $config;
-
     public function __construct(
-        AddressForm $addressForm,
-        AddressExportForm $addressExportForm,
-        DeleteAddressForm $deleteAddressForm,
-        MemberForm $memberForm,
-        MemberEditForm $memberEditForm,
-        MemberExpirationForm $memberExpirationForm,
-        MemberTypeForm $memberTypeForm,
-        MailingListMapper $mailingListMapper,
-        MemberMapper $memberMapper,
-        ProspectiveMemberMapper $prospectiveMemberMapper,
-        CheckerService $checkerService,
-        FileStorageService $fileStorageService,
-        MailingListService $mailingListService,
-        PhpRenderer $viewRenderer,
-        TransportInterface $mailTransport,
-        array $config,
+        private AddressForm $addressForm,
+        private AddressExportForm $addressExportForm,
+        private DeleteAddressForm $deleteAddressForm,
+        private MemberApproveForm $memberApproveForm,
+        private MemberForm $memberForm,
+        private MemberEditForm $memberEditForm,
+        private MemberExpirationForm $memberExpirationForm,
+        private MemberTypeForm $memberTypeForm,
+        private MailingListMapper $mailingListMapper,
+        private MemberMapper $memberMapper,
+        private ProspectiveMemberMapper $prospectiveMemberMapper,
+        private CheckerService $checkerService,
+        private FileStorageService $fileStorageService,
+        private MailingListService $mailingListService,
+        private PhpRenderer $viewRenderer,
+        private TransportInterface $mailTransport,
+        private array $config,
     ) {
-        $this->addressForm = $addressForm;
-        $this->addressExportForm = $addressExportForm;
-        $this->checkerService = $checkerService;
-        $this->deleteAddressForm = $deleteAddressForm;
-        $this->memberForm = $memberForm;
-        $this->memberEditForm = $memberEditForm;
-        $this->memberExpirationForm = $memberExpirationForm;
-        $this->memberTypeForm = $memberTypeForm;
-        $this->mailingListMapper = $mailingListMapper;
-        $this->memberMapper = $memberMapper;
-        $this->prospectiveMemberMapper = $prospectiveMemberMapper;
-        $this->fileStorageService = $fileStorageService;
-        $this->mailingListService =  $mailingListService;
-        $this->viewRenderer = $viewRenderer;
-        $this->mailTransport = $mailTransport;
-        $this->config = $config;
     }
 
     /**
@@ -343,6 +298,18 @@ class Member
             $member->addList($list);
         }
 
+        // If this was requested, update the data with the TU/e data
+        // Assume that this checkbox is only set if the data can be retrieved correctly
+        // so we don't catch any errors
+        if (isset($membershipData['updatedata'])) {
+            $tuedata = $this->getCheckerService()->tueDataObject();
+            $tuedata->setUser($member->getTueUsername());
+            $member->setInitials($tuedata->getInitials());
+            $member->setFirstName($tuedata->getFirstName());
+            $member->setMiddleName($tuedata->computedPrefixName());
+            $member->setLastName($tuedata->computedLastName());
+        }
+
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
 
@@ -394,10 +361,12 @@ class Member
                     // phpcs:ignore -- user-visible strings should not be split
                     $tuestatus[] = array("danger", "<b>Warning:</b> Data is not likely to be similar. Requires $similar edits. Please check if the TU/e data matches the data entered by the member before approving membership");
                 } elseif ($similar > 0) {
+                    // phpcs:ignore -- user-visible strings should not be split
                     $tuestatus[] = array("info", "<b>Info:</b> $similar edits needed to correct name. Data likely correct");
                 }
 
                 if ($tuedata->studiesAtDepartment()) {
+                    // phpcs:ignore -- user-visible strings should not be split
                     $tuestatus[] = array("success", "<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>");
                 } else {
                     $tuestatus[] = array("danger", "<b>Warning:</b> Member studies does not study at department.");
@@ -408,10 +377,24 @@ class Member
         }
         return [
             'member' => $member,
-            'form' => $this->memberTypeForm,
+            'form' => $this->memberApproveForm,
             'tuedata' => $tuedata,
             'tuestatus' => $tuestatus,
         ];
+    }
+
+    /**
+     * Get TU/e data of a member
+     *
+     * @return TueData for member
+     */
+    public function getTueData(int $id): TueData
+    {
+        $member = $this->getMember($id)['member'];
+        $tuedata = $this->getCheckerService()->tueDataObject();
+        $tuedata->setUser($member->getTueUsername());
+
+        return $tuedata;
     }
 
     /**

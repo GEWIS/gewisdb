@@ -342,7 +342,7 @@ class MemberController extends AbstractActionController
     /**
      * Lookup TUe data action
      *
-     * Gets the TUe data for a given member
+     * Gets the TUe data (optionally with a user ID provided)
      */
     public function tueLookupAction()
     {
@@ -353,9 +353,9 @@ class MemberController extends AbstractActionController
     }
 
     /**
-     * Lookup TUe data action
+     * Lookup TUe data action (JSON API)
      *
-     * Gets the TUe data for a given member
+     * Returns the TUe data for a given user id
      */
     public function tueRequestAction(): JsonModel
     {

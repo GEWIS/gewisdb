@@ -1,6 +1,7 @@
 <?php
 
 use Application\Model\Enums\AddressTypes;
+use Laminas\Form\Element\Checkbox;
 
 ?>
 <div class="row">
@@ -94,6 +95,7 @@ use Application\Model\Enums\AddressTypes;
     <?php
     $element = $form->get('type');
     $element->setAttribute('placeholder', $element->getLabel());
+
     //$element->setLabelAttributes(array('class' => 'radio-inline'));
     ?>
     <div class="form-group">
@@ -112,6 +114,30 @@ use Application\Model\Enums\AddressTypes;
         </div>
     </div>
 
+    <?php
+    $element = $form->get('updatedata');
+    if ($tuedata->isValid()) {
+        $element->setChecked(true);
+    } else {
+        $element->setChecked(false);
+        $element->setAttributes([
+            "disabled" => true,
+        ]);
+    }
+    ?>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="checkbox">
+                <label>
+                    <?= $this->formCheckbox($element) ?>
+                    <?= $element->getLabel() ?>
+                </label>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+    
     <?php
     $submit = $form->get('submit');
     $submit->setLabel('Keur lidmaatschap goed');

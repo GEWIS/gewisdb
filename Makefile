@@ -42,6 +42,7 @@ rundev: builddev
 
 updatedb: rundev
 		@docker-compose exec -T web ./orm orm:schema-tool:update --force --no-interaction
+		@docker-compose exec -T web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction"
 
 stop:
 		@docker-compose down

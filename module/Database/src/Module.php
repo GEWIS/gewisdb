@@ -18,6 +18,7 @@ use Database\Form\{
     InstallationFunction as InstallationFunctionForm,
     MailingList as MailingListForm,
     Member as MemberForm,
+    MemberApprove as MemberApproveForm,
     MemberEdit as MemberEditForm,
     MemberExpiration as MemberExpirationForm,
     MemberType as MemberTypeForm,
@@ -193,6 +194,11 @@ class Module
                 },
                 MemberEditForm::class => function (ContainerInterface $container) {
                     $form = new MemberEditForm();
+                    $form->setHydrator($container->get('database_hydrator_default'));
+                    return $form;
+                },
+                MemberApproveForm::class => function (ContainerInterface $container) {
+                    $form = new MemberApproveForm();
                     $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
