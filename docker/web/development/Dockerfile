@@ -1,46 +1,44 @@
-FROM php:8.1-fpm as gewisdb_web_development
+FROM php:8.1-fpm-alpine as gewisdb_web_development
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        cron \
-        git \
-        libcurl4-openssl-dev \
-        libicu-dev \
+RUN apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
+        curl-dev \
+        icu-dev \
         libpq-dev \
-        libsqlite3-dev \
         libzip-dev \
+        sqlite-dev \
+    && apk add --no-cache --virtual .runtime-programs \
+        git \
         nano \
         unzip \
         zip \
-    && apt-get upgrade -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN docker-php-ext-install -j$(nproc) \
-    calendar \
-    curl \
-    intl \
-    opcache \
-    pgsql \
-    pdo \
-    pdo_pgsql \
-    pdo_sqlite \
-    zip
-
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+    && docker-php-ext-install -j$(nproc) \
+        calendar \
+        curl \
+        intl \
+        opcache \
+        pgsql \
+        pdo \
+        pdo_pgsql \
+        pdo_sqlite \
+        zip \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && rm -r /tmp/pear \
+    && runtimeDeps="$( \
+            scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
+            | tr ',' '\n' \
+            | sort -u \
+            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+        )" \
+    && apk add --virtual .gewisdb-runtime-deps $runtimeDeps \
+    && apk del .build-deps
 
 WORKDIR /code
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');"
-
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-        nodejs \
-    && apt-get upgrade -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
 
 COPY --chown=www-data:www-data ./composer.json ./
 RUN php composer.phar install
