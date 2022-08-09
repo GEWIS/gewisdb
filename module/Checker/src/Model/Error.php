@@ -8,45 +8,23 @@ use Database\Model\SubDecision as SubDecisionModel;
 /**
  * Class Error
  *
- * Denotes an error that was occured while checking a database
+ * Denotes an error that was occurred while checking a database
  * i.e. the database is left in a wrong state
- *
- * @package Checker\Model
  */
 abstract class Error
 {
     /**
-     * @var MeetingModel Meeting for which the error is detected
+     * Meeting for which the error is detected.
      */
-    protected $meeting;
+    protected MeetingModel $meeting;
 
     /**
-     * @return MeetingModel
+     * Note that this does not necessarily have to be made during `$meeting`.
      */
-    public function getMeeting()
-    {
-        return $this->meeting;
-    }
+    protected SubDecisionModel $subDecision;
 
     /**
-     * @var SubDecisionModel Decision that caused the error
-     * Note that this does not necessarily have to made made during $meeting
-     */
-    protected $subDecision;
-
-    /**
-     * @return SubDecisionModel
-     */
-    public function getSubDecision()
-    {
-        return $this->subDecision;
-    }
-
-    /**
-     * Create a new desciption
-     *
-     * @param MeetingModel $meeting Meeting for which the error is detected
-     * @param SubDecisionModel $subDecision DEcision that caused the error
+     * Create a new description.
      */
     public function __construct(
         MeetingModel $meeting,
@@ -56,9 +34,18 @@ abstract class Error
         $this->subDecision = $subDecision;
     }
 
+    public function getMeeting(): MeetingModel
+    {
+        return $this->meeting;
+    }
+
+    public function getSubDecision(): SubDecisionModel
+    {
+        return $this->subDecision;
+    }
 
     /**
-     * Return a textual representation of the Error
+     * Return a textual representation of the error.
      */
-    abstract public function asText();
+    abstract public function asText(): string;
 }

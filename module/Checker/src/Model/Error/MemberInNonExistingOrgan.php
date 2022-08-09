@@ -3,18 +3,17 @@
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
-use Database\Model\Meeting as MeetingModel;
-use Database\Model\Member as MemberModel;
-use Database\Model\SubDecision\Foundation as FoundationModel;
-use Database\Model\SubDecision\Installation as InstallationModel;
+use Database\Model\{
+    Meeting as MeetingModel,
+    Member as MemberModel,
+};
+use Database\Model\SubDecision\{
+    Foundation as FoundationModel,
+    Installation as InstallationModel,
+};
 
 /**
- * Class MemberInNonExistingOrgan
- *
- * Denotes an error where a member is installed in an organ that either
- * is not yet created, or is abrogated.
- *
- * @package Checker\Model\Error
+ * Error for when a member is installed in an organ that either is not yet created, or already abrogated.
  */
 class MemberInNonExistingOrgan extends Error
 {
@@ -22,34 +21,36 @@ class MemberInNonExistingOrgan extends Error
         MeetingModel $meeting,
         InstallationModel $installation,
     ) {
-        parent::__construct($meeting, $installation);
+        parent::__construct(
+            $meeting,
+            $installation,
+        );
     }
 
     /**
-     * Return the member that is in a non existing organ
-     *
-     * @return MemberModel
+     * Return the member that is in a non-existing organ.
      */
-    public function getMember()
+    public function getMember(): MemberModel
     {
         return $this->getSubDecision()->getMember();
     }
 
     /**
-     * Get the organ that does not exist anymore
-     *
-     * @return FoundationModel
+     * Get the organ that does not exist anymore.
      */
-    public function getFoundation()
+    public function getOrgan(): FoundationModel
     {
         return $this->getSubDecision()->getFoundation();
     }
 
-    public function asText()
+    public function asText(): string
     {
-        return 'Member ' . $this->getMember()->getFullName()
-            .    ' (' . $this->getMember()->getLidNr() . ')'
-            . ' is still installed as ' . $this->getSubDecision()->getFunction() . ' in '
-            . $this->getFoundation()->getName() . ' which does not exist anymore';
+        return sprintf(
+            'Member %s (%d) is installed as "%s" in %s, which does not exist.',
+            $this->getMember()->getFullName(),
+            $this->getMember()->getLidnr(),
+            $this->getSubDecision()->getFunction(),
+            $this->getOrgan()->getName(),
+        );
     }
 }

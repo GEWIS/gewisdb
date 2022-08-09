@@ -3,36 +3,37 @@
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
-use Database\Model\SubDecision\Budget as BudgetModel;
-use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\{
+    Budget as BudgetModel,
+    Foundation as FoundationModel,
+};
 
 /**
- * Class BudgetOrganDoesNotExist
- *
- * This class denotes an error where a budget is created for an organ that does not exist
- *
- * @package Checker\Model\Error
+ * Error for when a budget is created for an organ that does not exist.
  */
 class BudgetOrganDoesNotExist extends Error
 {
     public function __construct(BudgetModel $budget)
     {
-        parent::__construct($budget->getDecision()->getMeeting(), $budget);
+        parent::__construct(
+            $budget->getDecision()->getMeeting(),
+            $budget,
+        );
     }
 
     /**
-     * Return the foundation where this budget belongs to
-     *
-     * @return FoundationModel
+     * Return the organ where this budget belongs to.
      */
-    public function getFoundation(): FoundationModel
+    public function getOrgan(): FoundationModel
     {
         return $this->getSubDecision()->getFoundation();
     }
 
     public function asText(): string
     {
-        return 'Budget from ' . $this->getFoundation()->getName() . ' has been created. However '
-        . $this->getFoundation()->getName() . ' does not exist';
+        return sprintf(
+            'A budget for %s has been created, however, the organ does not exist.',
+            $this->getOrgan()->getName(),
+        );
     }
 }

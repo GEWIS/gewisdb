@@ -2,16 +2,19 @@
 
 namespace CheckerTest\Model\Error;
 
-use Checker\Model\Error\BudgetOrganDoesNotExist as BudgetOrganDoesNotExistError;
 use Checker\Model\Error\MemberHasRoleButNotInOrgan;
-use Database\Model\SubDecision\Budget;
-use Database\Model\SubDecision\Installation;
+use CheckerTest\Model\Error;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\{
+    Foundation as FoundationModel,
+    Installation as InstallationModel,
+};
 
-class MemberHasRoleButNotInOrganTest extends \CheckerTest\Model\Error
+class MemberHasRoleButNotInOrganTest extends Error
 {
-    protected function create()
+    protected function create(): MemberHasRoleButNotInOrgan
     {
-        $installation = new Installation();
+        $installation = new InstallationModel();
         $installation->setDecision($this->getDecision());
         $installation->setFoundation($this->getFoundation());
         $installation->setMember($this->getMember());
@@ -24,12 +27,12 @@ class MemberHasRoleButNotInOrganTest extends \CheckerTest\Model\Error
     public function testGetFoundation()
     {
         $error = $this->create();
-        $this->assertInstanceOf('Database\Model\SubDecision\Foundation', $error->getFoundation());
+        $this->assertInstanceOf(FoundationModel::class, $error->getOrgan());
     }
 
     public function testGetMember()
     {
         $error = $this->create();
-        $this->assertInstanceOf('Database\Model\Member', $error->getMember());
+        $this->assertInstanceOf(MemberModel::class, $error->getMember());
     }
 }

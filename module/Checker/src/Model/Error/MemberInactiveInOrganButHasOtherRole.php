@@ -13,9 +13,9 @@ use Database\Model\SubDecision\{
 };
 
 /**
- * Error for when a member has a special role in an organ but is not an (in)active member.
+ * Error for when an inactive member of an organ still has special roles.
  */
-class MemberHasRoleButNotInOrgan extends Error
+class MemberInactiveInOrganButHasOtherRole extends Error
 {
     private string $role;
 
@@ -32,13 +32,16 @@ class MemberHasRoleButNotInOrgan extends Error
         $this->role = $role;
     }
 
+    /**
+     * Get the role of the inactive member in the organ.
+     */
     public function getRole(): string
     {
         return $this->role;
     }
 
     /**
-     * Get the member who has a role but is not (in)active in the organ.
+     * Get the inactive member in the organ.
      */
     public function getMember(): MemberModel
     {
@@ -46,7 +49,7 @@ class MemberHasRoleButNotInOrgan extends Error
     }
 
     /**
-     * Get the organ.
+     * Get the organ with the inactive member who still has a role.
      */
     public function getOrgan(): FoundationModel
     {
@@ -56,11 +59,11 @@ class MemberHasRoleButNotInOrgan extends Error
     public function asText(): string
     {
         return sprintf(
-            'Member %s (%d) has a special role "%s" in %s but is not installed as "Lid".',
+            'Member %s (%d) is installed as "Inactief Lid" of %s but has a special role "%s".',
             $this->getMember()->getFullName(),
             $this->getMember()->getLidNr(),
-            $this->getRole(),
             $this->getOrgan()->getName(),
+            $this->getRole(),
         );
     }
 }

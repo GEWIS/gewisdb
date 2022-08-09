@@ -8,24 +8,31 @@ use Checker\Model\Error;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 
 /**
- * Class OrganMeetingType
- *
- * This class denotes an error where an organ is created during a meeting type that it was not allowed to be created in
+ * Error for when an organ is founded during a meeting that it cannot be founded in.
  *
  * AV-commissies can only be created during AV's
  * All other organs can only be created during BV's and Virt's
- *
- * @package Checker\Model\Error
  */
 class OrganMeetingType extends Error
 {
     public function __construct(FoundationModel $foundation)
     {
-        parent::__construct($foundation->getDecision()->getMeeting(), $foundation);
+        parent::__construct(
+            $foundation->getDecision()->getMeeting(),
+            $foundation,
+        );
     }
 
     /**
-     * @return OrganTypes Type of organ that was created
+     * Get the organ that was founded.
+     */
+    public function getOrgan(): FoundationModel
+    {
+        return $this->getSubDecision()->getFoundation();
+    }
+
+    /**
+     * Get the type of organ that was founded.
      */
     public function getOrganType(): OrganTypes
     {
@@ -33,7 +40,7 @@ class OrganMeetingType extends Error
     }
 
     /**
-     * @return MeetingTypes Type of meeting that this organ was created
+     * Get the type of meeting in which the organ was founded.
      */
     public function getMeetingType(): MeetingTypes
     {
@@ -42,9 +49,11 @@ class OrganMeetingType extends Error
 
     public function asText(): string
     {
-        return "Organ of type "
-            . $this->getOrganType()->value
-            . ' cannot be created in a meeting of type '
-            . $this->getMeetingType()->value;
+        return sprintf(
+            'Organ %s of type %s cannot be founded during a meeting of type %s.',
+            $this->getOrgan()->getName(),
+            $this->getOrganType()->value,
+            $this->getMeetingType()->value,
+        );
     }
 }

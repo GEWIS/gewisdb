@@ -3,13 +3,15 @@
 namespace CheckerTest\Model\Error;
 
 use Checker\Model\Error\MemberInNonExistingOrgan;
-use Database\Model\SubDecision\Installation;
+use CheckerTest\Model\Error;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
 
-class MemberInNonExistingOrganTest extends \CheckerTest\Model\Error
+class MemberInNonExistingOrganTest extends Error
 {
-    protected function create()
+    protected function create(): MemberInNonExistingOrgan
     {
-        $installation = new Installation();
+        $installation = new InstallationModel();
         $installation->setDecision($this->getDecision());
         $installation->setFoundation($this->getFoundation());
         $installation->setMember($this->getMember());
@@ -24,6 +26,6 @@ class MemberInNonExistingOrganTest extends \CheckerTest\Model\Error
     public function testGetFoundation()
     {
         $error = $this->create();
-        $this->assertInstanceOf('Database\Model\SubDecision\Foundation', $error->getFoundation());
+        $this->assertInstanceOf(FoundationModel::class, $error->getOrgan());
     }
 }

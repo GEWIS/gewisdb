@@ -3,24 +3,16 @@
 namespace Checker\Mapper;
 
 use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision\Discharge as DischargeModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
 use Doctrine\ORM\EntityManager;
 
 class Installation
 {
     use Filter;
 
-    /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
+    protected EntityManager $em;
 
-    /**
-     * Constructor
-     *
-     * @param EntityManager $em
-     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -29,11 +21,9 @@ class Installation
     /**
      * Returns an array of all installations that are discharged again before or during $meeting
      *
-     * @param MeetingModel $meeting Meeting for which to check
-     *
-     * @return array \Database\Model\SubDecision\Installation
+     * @return array<array-key, DischargeModel>
      */
-    public function getAllInstallationsDischarged(MeetingModel $meeting)
+    public function getAllInstallationsDischarged(MeetingModel $meeting): array
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -48,13 +38,11 @@ class Installation
     }
 
     /**
-     * Returns an array of all installations that have bbeen done before or during $meeting
+     * Returns an array of all installations that have been done before or during `$meeting`.
      *
-     * @param MeetingModel $meeting Meeting for which to check
-     *
-     * @return array \Database\Model\SubDecision\Installation
+     * @return array<array-key, InstallationModel>
      */
-    public function getAllInstallationsInstalled(MeetingModel $meeting)
+    public function getAllInstallationsInstalled(MeetingModel $meeting): array
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('i')
