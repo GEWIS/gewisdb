@@ -2,58 +2,48 @@
 
 namespace Checker\Service;
 
-use Application\Model\Enums\MeetingTypes;
-use Application\Model\Enums\MembershipTypes;
-use Application\Model\Enums\OrganTypes;
-use Application\Service\EventAwareService;
-use Checker\Model\Error;
+use Application\Model\Enums\{
+    MeetingTypes,
+    MembershipTypes,
+    OrganTypes,
+};
+use Checker\Model\{
+    Error,
+    TueData,
+};
 use Checker\Model\Exception\LookupException;
-use Checker\Model\TueData;
-use Checker\Service\Installation as InstallationService;
-use Checker\Service\Meeting as MeetingService;
-use Checker\Service\Member as MemberService;
-use Checker\Service\Organ as OrganService;
+use Checker\Service\{
+    Installation as InstallationService,
+    Meeting as MeetingService,
+    Member as MemberService,
+    Organ as OrganService,
+};
 use Database\Model\Member as MemberModel;
-use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\Meeting as MeetingModel;
 use DateTime;
 use Laminas\Mail\Message;
-use RuntimeException;
-use UnexpectedValueException;
+use Laminas\Mail\Transport\TransportInterface;
 
 class Checker
 {
-    /** @var InstallationService $installationService */
-    private $installationService;
+    private InstallationService $installationService;
 
-    /** @var MeetingService $meetingService */
-    private $meetingService;
+    private MeetingService $meetingService;
 
-    /** @var MemberService $memberService */
-    private $memberService;
+    private MemberService $memberService;
 
-    /** @var OrganService $organService */
-    private $organService;
+    private OrganService $organService;
 
-    private $mailTransport;
+    private TransportInterface $mailTransport;
 
-    /** @var array $config */
-    private $config;
+    private array $config;
 
-    /**
-     * @param Installation $installationService
-     * @param Meeting $meetingService
-     * @param Member $memberService
-     * @param Organ $organService
-     * @param $mailTransport
-     * @param array $config
-     */
     public function __construct(
         InstallationService $installationService,
         MeetingService $meetingService,
         MemberService $memberService,
         OrganService $organService,
-        $mailTransport,
+        TransportInterface $mailTransport,
         array $config,
     ) {
         $this->installationService = $installationService;
@@ -67,7 +57,7 @@ class Checker
     /**
      * Does a full check on each meeting, checking that after each meeting no database violation occur
      */
-    public function check()
+    public function check(): void
     {
         $meetings = $this->meetingService->getAllMeetings();
 
@@ -90,7 +80,7 @@ class Checker
      * Does a full check on the last meeting (and all previous meetings) to determine if there are members who are
      * currently installed in an organ that was abrogated (i.e. they were never discharged).
      */
-    public function checkDischarges()
+    public function checkDischarges(): void
     {
         $meeting = $this->meetingService->getLastMeeting();
 
@@ -129,7 +119,7 @@ class Checker
      *
      * @param $body
      */
-    private function sendMail($body)
+    private function sendMail($body): void
     {
         $message = new Message();
         $message->addTo($this->config['checker']['report_mail'])
@@ -246,7 +236,7 @@ class Checker
         return $errors;
     }
 
-    public function tueDataObject()
+    public function tueDataObject(): TueData
     {
         return new TueData($this->config['checker']['membership_api']);
     }
@@ -259,7 +249,6 @@ class Checker
     public function checkAtTUe(): void
     {
         $members = $this->memberService->getMembersToCheck();
-
         $user = $this->tueDataObject();
 
         // Determine the date of (potential) expiration of a member's membership outside the foreach to make sure we
@@ -269,24 +258,32 @@ class Checker
         // Check each member that needs to be checked.
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            echo "Request for member " . $member->getLidnr() . ":" . PHP_EOL;
+            echo 'Request for member ' . $member->getLidnr() . ':' . PHP_EOL;
 
             try {
                 $user->setUser($member->getTueUsername());
-                if ($user->getStatus() !== 0 && $user->getStatus() !== 404) {
-                    echo "--> Did not retrieve data, but no exception was thrown";
+
+                if (
+                    0 !== $user->getStatus()
+                    && 404 !== $user->getStatus()
+                ) {
+                    echo '--> Did not retrieve data, but no exception was thrown' . PHP_EOL;
                     continue;
                 }
-                echo "--> Successfully retrieved data" . PHP_EOL;
 
-                if ($user->status === 404 || !$user->studiesAtTue()) {
-                    echo "--> Member is no longer studying at the TU/e" . PHP_EOL;
+                echo '--> Successfully retrieved data' . PHP_EOL;
+
+                if (
+                    404 === $user->getStatus()
+                    || !$user->studiesAtTue()
+                ) {
+                    echo '--> Member is no longer studying at the TU/e' . PHP_EOL;
                     // The member is no longer studying at the TU/e.
                     $member->setChangedOn(new DateTime());
                     $member->setIsStudying(false);
                     $member->setMembershipEndsOn($exp);
                 } elseif (!$user->studiesAtDepartment()) {
-                    echo "Member is still studying but not at the department of MCS" . PHP_EOL;
+                    echo 'Member is still studying but not at the department of MCS' . PHP_EOL;
                     // The member does not study at WIN anymore, so we set the expiration date for the membership
                     $member->setChangedOn(new DateTime());
                     $member->setMembershipEndsOn($exp);
@@ -297,7 +294,7 @@ class Checker
                 // If we made it here, we have successfully checked the member
                 $member->setLastCheckedOn(new DateTime());
             } catch (LookupException $e) {
-                echo "--> Error occured during lookup: " . $e->getMessage() . PHP_EOL;
+                echo '--> Error occurred during lookup: ' . $e->getMessage() . PHP_EOL;
             }
 
             $this->memberService->getMemberMapper()->persist($member);
@@ -314,21 +311,21 @@ class Checker
         $lastMeeting = $this->meetingService->getLastMeeting();
         $activeMembers = $this->installationService->getActiveMembers($lastMeeting);
 
-        echo "" . count($members) . " members have an upcoming ending and expiring membership" . PHP_EOL;
+        echo '' . count($members) . ' members have an upcoming ending and expiring membership' . PHP_EOL;
         $now = (new DateTime())->setTime(0, 0);
         $exp = $this->getExpiration($now);
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            echo "Determining new membership type for " . $member->getLidnr() . " (ends on " .
-                $member->getMembershipEndsOn()->format('Y-m-d') . " and expiring on " .
-                $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+            echo 'Determining new membership type for ' . $member->getLidnr() . ' (ends on ' .
+                $member->getMembershipEndsOn()->format('Y-m-d') . ' and expiring on ' .
+                $member->getExpiration()->format('Y-m-d') . ')' . PHP_EOL;
 
             if ($member->getMembershipEndsOn() <= $now) {
-                echo "Membership has ended and expired" . PHP_EOL;
+                echo 'Membership has ended and expired' . PHP_EOL;
 
                 if (array_key_exists($member->getLidnr(), $activeMembers)) {
-                    echo "Currently an active member, so becoming EXTERNAL. Extending membership to " .
+                    echo 'Currently an active member, so becoming EXTERNAL. Extending membership to ' .
                         $exp->format('Y-m-d') . PHP_EOL;
                     $member->setType(MembershipTypes::External);
 
@@ -336,11 +333,11 @@ class Checker
                     // same date as the expiration).
                     $member->setMembershipEndsOn($exp);
                 } else {
-                    echo "Not an active member" . PHP_EOL;
+                    echo 'Not an active member' . PHP_EOL;
                     // We only have to change the membership type for external or graduates depending on whether the
                     // member is still studying.
                     if ($member->getIsStudying()) {
-                        echo "But is studying, so becoming EXTERNAL. Extending membership to " .
+                        echo 'But is studying, so becoming EXTERNAL. Extending membership to ' .
                             $exp->format('Y-m-d') . PHP_EOL;
                         $member->setType(MembershipTypes::External);
 
@@ -348,19 +345,19 @@ class Checker
                         // the same date as the expiration).
                         $member->setMembershipEndsOn($exp);
                     } else {
-                        echo "Nor studying, so becoming GRADUATE. Not extending membership" . PHP_EOL;
+                        echo 'Nor studying, so becoming GRADUATE. Not extending membership' . PHP_EOL;
                         $member->setType(MembershipTypes::Graduate);
                     }
                 }
 
-                echo "Extending expiration to " . $exp->format('Y-m-d') . PHP_EOL;
+                echo 'Extending expiration to ' . $exp->format('Y-m-d') . PHP_EOL;
 
                 $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
                 $this->memberService->getMemberMapper()->persist($member);
             } else {
-                echo "Membership has not yet ended and expired, so changing nothing" . PHP_EOL;
+                echo 'Membership has not yet ended and expired, so changing nothing' . PHP_EOL;
             }
         }
     }
@@ -372,7 +369,7 @@ class Checker
     {
         $members = $this->memberService->getExpiringMembershipsWithNormalTypes();
 
-        echo "" . count($members) . " members have an upcoming expiring membership" . PHP_EOL;
+        echo '' . count($members) . ' members have an upcoming expiring membership' . PHP_EOL;
 
         // Determine the next expiration date (always the end of the next association year).
         $now = (new DateTime())->setTime(0, 0);
@@ -380,18 +377,18 @@ class Checker
 
         /** @var MemberModel $member */
         foreach ($members as $member) {
-            echo "Determining new expiration for " . $member->getLidnr() . " (expiring on " .
-                $member->getExpiration()->format('Y-m-d') . ")" . PHP_EOL;
+            echo 'Determining new expiration for ' . $member->getLidnr() . ' (expiring on ' .
+                $member->getExpiration()->format('Y-m-d') . ')' . PHP_EOL;
 
             if ($member->getExpiration() <= $now) {
-                echo "Expired, thus extending to " . $exp->format('Y-m-d') . PHP_EOL;
+                echo 'Expired, thus extending to ' . $exp->format('Y-m-d') . PHP_EOL;
 
                 $member->setChangedOn(new DateTime());
                 $member->setExpiration($exp);
 
                 $this->memberService->getMemberMapper()->persist($member);
             } else {
-                echo "Not yet expired, so not extending" . PHP_EOL;
+                echo 'Not yet expired, so not extending' . PHP_EOL;
             }
         }
     }

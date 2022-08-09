@@ -3,12 +3,12 @@
 namespace Checker\Model;
 
 use Checker\Model\Exception\LookupException;
+use DateTime;
 use Laminas\Http\Client;
 use Laminas\Http\Client\Adapter\Curl;
 use Laminas\Http\Client\Adapter\Exception\RuntimeException as LaminasRuntimeException;
 use Laminas\Http\Request;
 use Laminas\Json\Json;
-use DateTime;
 use LogicException;
 use RuntimeException;
 
@@ -17,25 +17,22 @@ use RuntimeException;
  */
 class TueData
 {
-    /** @var Client $client */
     private Client $client;
 
-    /** @var string $username */
     private string $username;
 
-    /**
-     * @var int $status
-     */
     private int $status = -1;
 
-    /** @var array $data */
     private ?array $data;
+
+    private array $config;
 
     /**
      * @param array $config an array with membership_api config
      */
-    public function __construct(private array $config)
+    public function __construct(array $config)
     {
+        $this->config = $config;
         $this->client = new Client();
         $this->client->setAdapter(Curl::class)
             ->setEncType('application/json');
@@ -45,10 +42,10 @@ class TueData
      * Load response from TU/e
      *
      * @param string $username TU/e username
-     * @return null
+     *
      * @throws LookupException in case of an error
      */
-    public function setUser($username)
+    public function setUser(string $username): void
     {
         //Assume error, but keep username we last looked up
         $this->username = $username;
@@ -58,37 +55,42 @@ class TueData
 
         $request = new Request();
         $request->setMethod(Request::METHOD_GET)
+            ->setUri($this->config['endpoint'] . $username)
             ->getHeaders()->addHeaders([
                 'Authorization' => 'Bearer ' . $this->config['key'],
             ]);
 
-        $request->setUri($this->config['endpoint'] . $username);
         try {
             $response = $this->client->send($request);
         } catch (LaminasRuntimeException $e) {
             throw new LookupException(
                 message: "Could not connect to TU/e servers",
-                previousThrowable: $e
+                previousThrowable: $e,
             );
         }
 
         if (200 === $response->getStatusCode()) {
             try {
-                $responseContent = Json::decode($response->getBody(), Json::TYPE_ARRAY);
+                $responseContent = Json::decode(
+                    $response->getBody(),
+                    Json::TYPE_ARRAY,
+                );
             } catch (RuntimeException $e) {
                 throw new LookupException(
                     message: "TU/e lookup tool could not decode JSON",
-                    previousThrowable: $e
+                    previousThrowable: $e,
                 );
             }
 
             if ($responseContent['sAMAccountName'] !== $username) {
                 $this->status = 1;
+
                 throw new LookupException(
                     message: "TU/e check API returned user " .
-                        $responseContent['sAMAccountName'] . ", but $username was requested"
+                        $responseContent['sAMAccountName'] . ", but $username was requested",
                 );
             }
+
             $this->status = 0;
             $this->data = $responseContent;
         } elseif (404 === $response->getStatusCode()) {
@@ -96,28 +98,33 @@ class TueData
             $this->status = 404;
         } else {
             throw new LookupException(
-                message: "Request for TUe lookup failed with status code " . $response->getStatusCode()
+                message: "Request for TUe lookup failed with status code " . $response->getStatusCode(),
             );
         }
     }
 
     /**
      * Check if current TU/e student is studying at TU/e
+     *
      * @return bool
+     *
      * @throws LookupException when received unexpected TU/e response
      * @throws LogicException when object is not ready to be checked, for example when no data was requested previously
      */
-    public function studiesAtTue()
+    public function studiesAtTue(): bool
     {
-        if ($this->status !== 0 || !is_array($this->data)) {
+        if (
+            0 !== $this->status
+            || !is_array($this->data)
+        ) {
             throw new LogicException(
-                message: "Trying to query study status from object with status $this->status"
+                message: "Trying to query study status from object with status $this->status",
             );
         }
 
         if (!array_key_exists('registrations', $this->data)) {
             throw new LookupException(
-                message: "Did not receive `registrations` object. so unable to check study status"
+                message: "Did not receive `registrations` object. so unable to check study status",
             );
         }
 
@@ -126,21 +133,30 @@ class TueData
 
     /**
      * Check if current TU/e student is enrolled at department
+     *
      * @param string $department Department to check for
+     *
      * @return bool
+     *
      * @throws LookupException when received unexpected TU/e response
      * @throws LogicException when object is not ready to be checked, for example when no data was requested previously
      */
-    public function studiesAtDepartment(string $department = "WIN")
+    public function studiesAtDepartment(string $department = "WIN"): bool
     {
         if (!$this->studiesAtTue()) {
             return false;
         }
 
         return (
-            is_array($this->data) &&
-            is_array($this->data['registrations']) &&
-            in_array($department, array_column($this->data['registrations'], 'dept'))
+            is_array($this->data)
+            && is_array($this->data['registrations'])
+            && in_array(
+                $department,
+                array_column(
+                    $this->data['registrations'],
+                    'dept',
+                ),
+            )
         );
     }
 
@@ -151,6 +167,7 @@ class TueData
      * 0 = success,
      * 1 = error,
      * 404 = user not found
+     *
      * @return int
      */
     public function getStatus(): int
@@ -160,66 +177,78 @@ class TueData
 
     public function isValid(): bool
     {
-        return $this->data !== null;
+        return null !== $this->data;
     }
 
     public function getUsername(): string
     {
         if (!isset($this->data['sAMAccountName'])) {
-            return "";
+            return '';
         }
+
         return $this->data['sAMAccountName'];
     }
 
     public function getEmail(): string
     {
         if (!isset($this->data['mail'])) {
-            return "";
+            return '';
         }
+
         return $this->data['mail'];
     }
 
     public function getFirstName(): string
     {
         if (!isset($this->data['name']['given'])) {
-            return "";
+            return '';
         }
+
         return $this->data['name']['given'];
     }
 
     public function getInitials(): string
     {
         if (!isset($this->data['name']['initials'])) {
-            return "";
+            return '';
         }
+
         return $this->data['name']['initials'];
     }
 
     public function computedPrefixName(): string
     {
         if (!isset($this->data['name']['last'])) {
-            return "";
+            return '';
         }
-        $exploded = explode(",", $this->data['name']['last']);
+
+        $exploded = explode(
+            ',',
+            $this->data['name']['last'],
+        );
+
         if (count($exploded) < 2) {
-            return "";
+            return '';
         }
+
         return trim($exploded[1]);
     }
 
     public function computedLastName(): string
     {
         if (!isset($this->data['name']['last'])) {
-            return "";
+            return '';
         }
-        return trim(explode(",", $this->data['name']['last'])[0]);
+
+        return trim(explode(',', $this->data['name']['last'])[0]);
     }
 
     public function getRegistrations(): array
     {
         if (!isset($this->data['registrations'])) {
-            return array();
+            return [];
         }
+
         return $this->data['registrations'];
     }
 
@@ -228,14 +257,10 @@ class TueData
         if (!isset($this->data['lastupdated'])) {
             return null;
         }
+
         return new DateTime($this->data['lastupdated']);
     }
 
-    /**
-     * Convert to array.
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         return [
@@ -251,16 +276,25 @@ class TueData
 
     /**
      * Function to check how similar data is to a given user
+     *
      * @return int the number of changes needed to edit the data using Levenshtein distance
+     *
      * @throws LogicException when querying if data is unknown
      */
-    public function compareData($firstName = "", $prefixName = "", $lastName = "", $initials = ""): int
-    {
+    public function compareData(
+        string $firstName = "",
+        string $prefixName = "",
+        string $lastName = "",
+        string $initials = "",
+    ): int {
         $sum = 0;
 
-        if ($this->status !== 0 || !is_array($this->data)) {
+        if (
+            0 !== $this->status
+            || !is_array($this->data)
+        ) {
             throw new LogicException(
-                message: "Trying to query similarity from object with status $this->status"
+                message: "Trying to query similarity from object with status $this->status",
             );
         }
 
@@ -269,7 +303,7 @@ class TueData
         $sum += levenshtein($lastName, $this->computedLastName());
         $sum += levenshtein(
             strtolower(preg_replace('/\PL/u', '', $initials)),
-            strtolower(preg_replace('/\PL/u', '', $this->getInitials()))
+            strtolower(preg_replace('/\PL/u', '', $this->getInitials())),
         );
 
         return $sum;

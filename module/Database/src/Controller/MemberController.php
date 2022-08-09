@@ -18,8 +18,10 @@ class MemberController extends AbstractActionController
     private MemberService $memberService;
     private CheckerService $checkerService;
 
-    public function __construct(MemberService $memberService, CheckerService $checkerService)
-    {
+    public function __construct(
+        MemberService $memberService,
+        CheckerService $checkerService,
+    ) {
         $this->memberService = $memberService;
         $this->checkerService = $checkerService;
     }
@@ -344,11 +346,12 @@ class MemberController extends AbstractActionController
      *
      * Gets the TUe data (optionally with a user ID provided)
      */
-    public function tueLookupAction()
+    public function tueLookupAction(): ViewModel
     {
         $username = $this->params()->fromQuery('u');
+
         return new ViewModel([
-            "username" => $username,
+            'username' => $username,
         ]);
     }
 

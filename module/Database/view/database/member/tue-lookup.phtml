@@ -1,6 +1,6 @@
 <h1>TU/e lookup raw data</h1>
 
-<?php if($_ENV['APP_ENV'] === "development"):?>
+<?php if('development' === APP_ENV):?>
 <p>Valid student IDs for testing:</p>
 <ul>
     <li>20170001: too many requests</li>
@@ -12,7 +12,7 @@
 </ul>
 
 <?php endif; ?>
-    
+
 <script>
 $(document).ready(function () {
     var tbody = $('#reponsetable tbody');

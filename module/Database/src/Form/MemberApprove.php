@@ -18,7 +18,7 @@ class MemberApprove extends MemberType
             'type' => Checkbox::class,
             'options' => [
                 'label' => 'Update name with data from TU/e',
-                'use_hidden_element' => false
+                'use_hidden_element' => false,
             ],
         ]);
     }

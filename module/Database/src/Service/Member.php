@@ -47,25 +47,76 @@ use RuntimeException;
 
 class Member
 {
+    private AddressForm $addressForm;
+
+    private AddressExportForm $addressExportForm;
+
+    private DeleteAddressForm $deleteAddressForm;
+
+    private MemberApproveForm $memberApproveForm;
+
+    private MemberForm $memberForm;
+
+    private MemberEditForm $memberEditForm;
+
+    private MemberExpirationForm $memberExpirationForm;
+
+    private MemberTypeForm $memberTypeForm;
+
+    private MailingListMapper $mailingListMapper;
+
+    private MemberMapper $memberMapper;
+
+    private ProspectiveMemberMapper $prospectiveMemberMapper;
+
+    private CheckerService $checkerService;
+
+    private FileStorageService $fileStorageService;
+
+    private MailingList $mailingListService;
+
+    private PhpRenderer $viewRenderer;
+
+    private TransportInterface $mailTransport;
+
+    private array $config;
+
     public function __construct(
-        private AddressForm $addressForm,
-        private AddressExportForm $addressExportForm,
-        private DeleteAddressForm $deleteAddressForm,
-        private MemberApproveForm $memberApproveForm,
-        private MemberForm $memberForm,
-        private MemberEditForm $memberEditForm,
-        private MemberExpirationForm $memberExpirationForm,
-        private MemberTypeForm $memberTypeForm,
-        private MailingListMapper $mailingListMapper,
-        private MemberMapper $memberMapper,
-        private ProspectiveMemberMapper $prospectiveMemberMapper,
-        private CheckerService $checkerService,
-        private FileStorageService $fileStorageService,
-        private MailingListService $mailingListService,
-        private PhpRenderer $viewRenderer,
-        private TransportInterface $mailTransport,
-        private array $config,
+        AddressForm $addressForm,
+        AddressExportForm $addressExportForm,
+        DeleteAddressForm $deleteAddressForm,
+        MemberApproveForm $memberApproveForm,
+        MemberForm $memberForm,
+        MemberEditForm $memberEditForm,
+        MemberExpirationForm $memberExpirationForm,
+        MemberTypeForm $memberTypeForm,
+        MailingListMapper $mailingListMapper,
+        MemberMapper $memberMapper,
+        ProspectiveMemberMapper $prospectiveMemberMapper,
+        CheckerService $checkerService,
+        FileStorageService $fileStorageService,
+        MailingListService $mailingListService,
+        PhpRenderer $viewRenderer,
+        TransportInterface $mailTransport,
+        array $config,
     ) {
+        $this->addressForm = $addressForm;
+        $this->addressExportForm = $addressExportForm;
+        $this->deleteAddressForm = $deleteAddressForm;
+        $this->memberApproveForm = $memberApproveForm;
+        $this->memberForm = $memberForm;
+        $this->memberEditForm = $memberEditForm;
+        $this->memberExpirationForm = $memberExpirationForm;
+        $this->memberTypeForm = $memberTypeForm;
+        $this->mailingListMapper = $mailingListMapper;
+        $this->memberMapper = $memberMapper;
+        $this->prospectiveMemberMapper = $prospectiveMemberMapper;
+        $this->checkerService = $checkerService;
+        $this->fileStorageService = $fileStorageService;
+        $this->mailingListService =  $mailingListService;
+        $this->viewRenderer = $viewRenderer;
+        $this->mailTransport = $mailTransport;
+        $this->config = $config;
     }
 
     /**
@@ -76,7 +127,11 @@ class Member
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
 
-        if (isset($data['address']) && isset($data['address']['street']) && !empty($data['address']['street'])) {
+        if (
+            isset($data['address'])
+            && isset($data['address']['street'])
+            && !empty($data['address']['street'])
+        ) {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
                 'tueUsername', 'study', 'email', 'birth',
@@ -344,49 +399,63 @@ class Member
     public function getProspectiveMember(int $id): array
     {
         $member = $this->getProspectiveMemberMapper()->find($id);
-        $tuedata = $this->getCheckerService()->tueDataObject();
-        $tuestatus = array();
+        $tueData = $this->getCheckerService()->tueDataObject();
+        $tueStatus = [];
+
         try {
-            $tuedata->setUser($member->getTueUsername());
-            if (!$tuedata->isValid()) {
-                $tuestatus[] = array("info", "No data was returned");
+            $tueData->setUser($member->getTueUsername());
+
+            if (!$tueData->isValid()) {
+                $tueStatus[] = ["info", "No data was returned"];
             } else {
-                $similar = $tuedata->compareData(
+                $similar = $tueData->compareData(
                     firstName: $member->getFirstName(),
-                    initials: $member->getInitials(),
                     prefixName: $member->getMiddleName(),
                     lastName: $member->getLastName(),
+                    initials: $member->getInitials(),
                 );
+
                 if ($similar > 3) {
                     // phpcs:ignore -- user-visible strings should not be split
-                    $tuestatus[] = array("danger", "<b>Warning:</b> Data is not likely to be similar. Requires $similar edits. Please check if the TU/e data matches the data entered by the member before approving membership");
+                    $tueStatus[] = [
+                        'danger',
+                        '<b>Warning:</b> Data is not likely to be similar. Requires $similar edits. Please check if the TU/e data matches the data entered by the member before approving membership',
+                    ];
                 } elseif ($similar > 0) {
-                    // phpcs:ignore -- user-visible strings should not be split
-                    $tuestatus[] = array("info", "<b>Info:</b> $similar edits needed to correct name. Data likely correct");
+                    $tueStatus[] = [
+                        'info',
+                        '<b>Info:</b> $similar edits needed to correct name. Data likely correct',
+                    ];
                 }
 
-                if ($tuedata->studiesAtDepartment()) {
+                if ($tueData->studiesAtDepartment()) {
                     // phpcs:ignore -- user-visible strings should not be split
-                    $tuestatus[] = array("success", "<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>");
+                    $tueStatus[] = [
+                        'success',
+                        '<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>',
+                    ];
                 } else {
-                    $tuestatus[] = array("danger", "<b>Warning:</b> Member does not study at department.");
+                    $tueStatus[] = [
+                        'danger',
+                        '<b>Warning:</b> Member does not study at department.',
+                    ];
                 }
             }
         } catch (LookupException $e) {
-            $tuestatus[] = $e->getMessage();
+            $tueStatus[] = $e->getMessage();
         }
+
         return [
             'member' => $member,
             'form' => $this->memberApproveForm,
-            'tuedata' => $tuedata,
-            'tuestatus' => $tuestatus,
+            'tueData' => $tueData,
+            'tueStatus' => $tueStatus,
         ];
     }
 
     /**
      * Get TU/e data of a member
-     *
-     * @return TueData for member or null if no such data is available
+     * @return TueData|null for member or null if no such data is available
      */
     public function getTueData(int $id): ?TueData
     {
@@ -397,9 +466,11 @@ class Member
         } catch (LookupException $e) {
             return null;
         }
+
         if (!$tuedata->isValid()) {
             return null;
         }
+
         return $tuedata;
     }
 
@@ -541,7 +612,9 @@ class Member
         // It is not possible to have another membership type after being an honorary member and there does not exist a
         // good transition to a different membership type (because of the dates/expiration etc.).
         if (MembershipTypes::Honorary === $member->getType()) {
-            throw new RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
+            throw new RuntimeException(
+                'Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen',
+            );
         }
 
         $form->setData($data);
@@ -752,7 +825,7 @@ class Member
         return [
             'member' => $member['member'],
             'form' => $form,
-            'tuedata' => $this->getTueData($lidnr),
+            'tueData' => $this->getTueData($lidnr),
         ];
     }
 
@@ -892,10 +965,8 @@ class Member
 
     /**
      * Get the checker service.
-     *
-     * @return \Checker\Service\Checker
      */
-    public function getCheckerService()
+    public function getCheckerService(): CheckerService
     {
         return $this->checkerService;
     }
