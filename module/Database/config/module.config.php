@@ -368,18 +368,18 @@ return [
                                 'tueUsername' => '(s\d{6}|\d{8})',
                             ],
                             'defaults' => [
-                                'action' => 'tueLookup'
-                            ]
-                        ]
+                                'action' => 'tueLookup',
+                            ],
+                        ],
                     ],
                     'tuerequest' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/tuerequest',
                             'defaults' => [
-                                'action' => 'tueRequest'
-                            ]
-                        ]
+                                'action' => 'tueRequest',
+                            ],
+                        ],
                     ],
                 ],
             ],

@@ -125,8 +125,7 @@ phpcbfall: loadenv
 		@vendor/bin/phpcbf -p
 
 phpcsfix: loadenv
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP81Migration module
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP81Migration config
+		@vendor/bin/php-cs-fixer fix --format=txt --verbose
 
 phpcsfixrisky: loadenv
 		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP81Migration:risky,-declare_strict_types,-use_arrow_functions  module
