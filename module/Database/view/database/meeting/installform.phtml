@@ -347,33 +347,37 @@ $(document).ready(function () {
     $('#inactive-modal-yes').click(function(e)
     {
         var modal = $('#install-modal-inactive');
-        var meeting_type = modal.data('meeting-type');
-        var meeting_number = modal.data('meeting-number');
-        var decision_point = modal.data('decision-point');
-        var decision_number = modal.data('decision-number');
-        var subdecision_number = modal.data('subdecision-number');
-        var name = $('#install-modal-inactive div.modal-body span.name').text();
-        var func = 'Lid';
-
-        // create the discharge, and add to all changes
-        var template = $('#discharge-template').data('template');
-        template = template.replace(/__index__/g, count++);
-        template = template.replace(/__function__/g, func);
-        template = template.replace(/__name__/g, name);
-
-        template = template.replace(/__meeting_type__/g, meeting_type);
-        template = template.replace(/__meeting_number__/g, meeting_number);
-        template = template.replace(/__decision_point__/g, decision_point);
-        template = template.replace(/__decision_number__/g, decision_number);
-        template = template.replace(/__number__/g, subdecision_number);
-        $('#install-changes').append($(template));
-
-        var select = '.dec-' + meeting_type + '-' + meeting_number
-            + '-' + decision_point + '-' + decision_number
-            + '-' + subdecision_number;
-        $('#members-result').find(select).remove();
-
         var lidnr = modal.data('lidnr');
+        var name = $('#install-modal-inactive div.modal-body span.name').text();
+
+        $($('#members-result tr[data-lidnr="' + lidnr + '"]').get().reverse()).each(function (i) {
+            var installation = $(this);
+
+            var meeting_type = installation.data('meeting-type');
+            var meeting_number = installation.data('meeting-number');
+            var decision_point = installation.data('decision-point');
+            var decision_number = installation.data('decision-number');
+            var subdecision_number = installation.data('subdecision-number');
+
+            // create the discharge, and add to all changes
+            var template = $('#discharge-template').data('template');
+            template = template.replace(/__index__/g, count++);
+            template = template.replace(/__function__/g, installation.find('.function').html());
+            template = template.replace(/__name__/g, name);
+
+            template = template.replace(/__meeting_type__/g, meeting_type);
+            template = template.replace(/__meeting_number__/g, meeting_number);
+            template = template.replace(/__decision_point__/g, decision_point);
+            template = template.replace(/__decision_number__/g, decision_number);
+            template = template.replace(/__number__/g, subdecision_number);
+            $('#install-changes').append($(template));
+
+            var select = '.dec-' + meeting_type + '-' + meeting_number
+                + '-' + decision_point + '-' + decision_number
+                + '-' + subdecision_number;
+            $('#members-result').find(select).remove();
+        });
+
         createInstallation('Inactief Lid', lidnr, name);
 
         // dismiss the dialog
