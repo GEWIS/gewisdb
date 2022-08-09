@@ -386,14 +386,20 @@ class Member
     /**
      * Get TU/e data of a member
      *
-     * @return TueData for member
+     * @return TueData for member or null if no such data is available
      */
-    public function getTueData(int $id): TueData
+    public function getTueData(int $id): ?TueData
     {
-        $member = $this->getMember($id)['member'];
-        $tuedata = $this->getCheckerService()->tueDataObject();
-        $tuedata->setUser($member->getTueUsername());
-
+        try {
+            $member = $this->getMember($id)['member'];
+            $tuedata = $this->getCheckerService()->tueDataObject();
+            $tuedata->setUser($member->getTueUsername());
+        } catch (LookupException $e) {
+            return null;
+        }
+        if (!$tuedata->isValid()) {
+            return null;
+        }
         return $tuedata;
     }
 
@@ -746,6 +752,7 @@ class Member
         return [
             'member' => $member['member'],
             'form' => $form,
+            'tuedata' => $this->getTueData($lidnr),
         ];
     }
 

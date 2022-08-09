@@ -41,7 +41,7 @@ class MemberFactory implements FactoryInterface
         $addressExportForm = $container->get(AddressExportForm::class);
         /** @var DeleteAddressForm $deleteAddressForm */
         $deleteAddressForm = $container->get(DeleteAddressForm::class);
-        /** @var MemberForm $memberApproveForm */
+        /** @var MemberApproveForm $memberApproveForm */
         $memberApproveForm = $container->get(MemberApproveForm::class);
         /** @var MemberForm $memberForm */
         $memberForm = $container->get(MemberForm::class);
