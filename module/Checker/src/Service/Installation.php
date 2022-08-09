@@ -8,11 +8,8 @@ use Database\Model\SubDecision\Installation as InstallationModel;
 
 class Installation
 {
-    private InstallationMapper $installationMapper;
-
-    public function __construct(InstallationMapper $installationMapper)
+    public function __construct(private readonly InstallationMapper $installationMapper)
     {
-        $this->installationMapper = $installationMapper;
     }
 
     /**

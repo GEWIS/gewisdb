@@ -12,16 +12,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GeneratePartialCommand extends Command
 {
-    private BoardService $boardService;
-    private MiscService $miscService;
-
     public function __construct(
-        BoardService $boardService,
-        MiscService $miscService,
+        private readonly BoardService $boardService,
+        private readonly MiscService $miscService,
     ) {
-        $this->boardService = $boardService;
-        $this->miscService = $miscService;
-
         parent::__construct();
     }
 

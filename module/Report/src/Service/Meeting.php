@@ -25,24 +25,12 @@ use Report\Model\{
 
 class Meeting
 {
-    private MeetingMapper $meetingMapper;
-
-    private EntityManager $emReport;
-
-    private array $config;
-
-    private TransportInterface $mailTransport;
-
     public function __construct(
-        MeetingMapper $meetingMapper,
-        EntityManager $emReport,
-        array $config,
-        TransportInterface $mailTransport,
+        private readonly MeetingMapper $meetingMapper,
+        private readonly EntityManager $emReport,
+        private readonly array $config,
+        private readonly TransportInterface $mailTransport,
     ) {
-        $this->meetingMapper = $meetingMapper;
-        $this->emReport = $emReport;
-        $this->config = $config;
-        $this->mailTransport = $mailTransport;
     }
 
     /**

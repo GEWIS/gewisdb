@@ -7,12 +7,8 @@ use Symfony\Component\Console\Command\Command;
 
 abstract class AbstractCheckerCommand extends Command
 {
-    private CheckerService $checkerService;
-
-    public function __construct(CheckerService $checkerService)
+    public function __construct(private readonly CheckerService $checkerService)
     {
-        $this->checkerService = $checkerService;
-
         parent::__construct();
     }
 

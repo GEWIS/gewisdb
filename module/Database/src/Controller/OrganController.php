@@ -13,11 +13,8 @@ use Laminas\View\Model\{
 
 class OrganController extends AbstractActionController
 {
-    private MeetingService $meetingService;
-
-    public function __construct(MeetingService $meetingService)
+    public function __construct(private readonly MeetingService $meetingService)
     {
-        $this->meetingService = $meetingService;
     }
 
     /**

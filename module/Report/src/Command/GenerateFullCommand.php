@@ -15,25 +15,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateFullCommand extends Command
 {
-    private BoardService $boardService;
-    private MeetingService $meetingService;
-    private MemberService $memberService;
-    private MiscService $miscService;
-    private OrganService $organService;
-
     public function __construct(
-        BoardService $boardService,
-        MeetingService $meetingService,
-        MemberService $memberService,
-        MiscService $miscService,
-        OrganService $organService,
+        private readonly BoardService $boardService,
+        private readonly MeetingService $meetingService,
+        private readonly MemberService $memberService,
+        private readonly MiscService $miscService,
+        private readonly OrganService $organService,
     ) {
-        $this->boardService = $boardService;
-        $this->meetingService = $meetingService;
-        $this->memberService = $memberService;
-        $this->miscService = $miscService;
-        $this->organService = $organService;
-
         parent::__construct();
     }
 

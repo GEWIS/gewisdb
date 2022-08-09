@@ -17,11 +17,8 @@ use Doctrine\ORM\{
 
 class Organ
 {
-    protected EntityManager $em;
-
-    public function __construct(EntityManager $em)
+    public function __construct(protected readonly EntityManager $em)
     {
-        $this->em = $em;
     }
 
     /**

@@ -4,11 +4,8 @@ namespace Application\Service;
 
 class FileStorage
 {
-    private array $config;
-
-    public function __construct(array $config)
+    public function __construct(private readonly array $config)
     {
-        $this->config = $config;
     }
 
     /**

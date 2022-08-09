@@ -20,48 +20,26 @@ use Laminas\Http\Client\Adapter\Curl;
 use Laminas\Http\Request;
 use Laminas\Json\Json;
 use Laminas\Mail\Message;
+use Laminas\Mail\Transport\TransportInterface;
 
 class Checker
 {
-    /** @var InstallationService $installationService */
-    private $installationService;
-
-    /** @var MeetingService $meetingService */
-    private $meetingService;
-
-    /** @var MemberService $memberService */
-    private $memberService;
-
-    /** @var OrganService $organService */
-    private $organService;
-
-    private $mailTransport;
-
-    /** @var array $config */
-    private $config;
-
     /**
      * @param Installation $installationService
      * @param Meeting $meetingService
      * @param Member $memberService
      * @param Organ $organService
-     * @param $mailTransport
+     * @param TransportInterface $mailTransport
      * @param array $config
      */
     public function __construct(
-        InstallationService $installationService,
-        MeetingService $meetingService,
-        MemberService $memberService,
-        OrganService $organService,
-        $mailTransport,
-        array $config,
+        private readonly InstallationService $installationService,
+        private readonly MeetingService $meetingService,
+        private readonly MemberService $memberService,
+        private readonly OrganService $organService,
+        private readonly TransportInterface $mailTransport,
+        private readonly array $config,
     ) {
-        $this->installationService = $installationService;
-        $this->meetingService = $meetingService;
-        $this->memberService = $memberService;
-        $this->organService = $organService;
-        $this->mailTransport = $mailTransport;
-        $this->config = $config;
     }
 
     /**

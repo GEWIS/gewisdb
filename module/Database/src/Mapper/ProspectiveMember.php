@@ -10,11 +10,8 @@ use Doctrine\ORM\{
 
 class ProspectiveMember
 {
-    protected EntityManager $em;
-
-    public function __construct(EntityManager $em)
+    public function __construct(protected readonly EntityManager $em)
     {
-        $this->em = $em;
     }
 
     /**

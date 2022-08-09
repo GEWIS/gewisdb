@@ -7,11 +7,8 @@ use Psr\Container\ContainerInterface;
 
 class IsModuleActive extends AbstractHelper
 {
-    protected ContainerInterface $container;
-
-    public function __construct(ContainerInterface $container)
+    public function __construct(protected readonly ContainerInterface $container)
     {
-        $this->container = $container;
     }
 
     /**

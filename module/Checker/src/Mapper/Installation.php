@@ -11,11 +11,13 @@ class Installation
 {
     use Filter;
 
-    protected EntityManager $em;
-
-    public function __construct(EntityManager $em)
+    /**
+     * Constructor
+     *
+     * @param EntityManager $em Doctrine entity manager.
+     */
+    public function __construct(protected readonly EntityManager $em)
     {
-        $this->em = $em;
     }
 
     /**

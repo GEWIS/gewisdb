@@ -12,11 +12,8 @@ use Laminas\View\Model\{
 
 class ProspectiveMemberController extends AbstractActionController
 {
-    private MemberService $memberService;
-
-    public function __construct(MemberService $memberService)
+    public function __construct(private readonly MemberService $memberService)
     {
-        $this->memberService = $memberService;
     }
 
     /**

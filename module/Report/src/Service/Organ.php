@@ -18,11 +18,8 @@ use Report\Model\SubDecision\Installation as ReportInstallationModel;
 
 class Organ
 {
-    private EntityManager $emReport;
-
-    public function __construct(EntityManager $emReport)
+    public function __construct(private readonly EntityManager $emReport)
     {
-        $this->emReport = $emReport;
     }
 
     /**

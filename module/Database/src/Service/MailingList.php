@@ -9,20 +9,11 @@ use Database\Model\MailingList as MailingListModel;
 
 class MailingList
 {
-    private DeleteListForm $deleteListForm;
-
-    private MailingListForm $mailingListForm;
-
-    private MailingListMapper $mailingListMapper;
-
     public function __construct(
-        DeleteListForm $deleteListForm,
-        MailingListForm $mailingListForm,
-        MailingListMapper $mailingListMapper,
+        private readonly DeleteListForm $deleteListForm,
+        private readonly MailingListForm $mailingListForm,
+        private readonly MailingListMapper $mailingListMapper,
     ) {
-        $this->deleteListForm = $deleteListForm;
-        $this->mailingListForm = $mailingListForm;
-        $this->mailingListMapper = $mailingListMapper;
     }
 
     /**

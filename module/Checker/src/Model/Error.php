@@ -16,26 +16,15 @@ use Database\Model\SubDecision as SubDecisionModel;
 abstract class Error
 {
     /**
-     * Meeting for which the error is detected.
-     */
-    protected MeetingModel $meeting;
-
-    /**
-     * @var T $subDecision Note that this does not necessarily have to be made during `$meeting`.
-     */
-    protected SubDecisionModel $subDecision;
-
-    /**
      * Create a new description.
      *
-     * @param T $subDecision
+     * @param MeetingModel $meeting Meeting for which the error is detected.
+     * @param T $subDecision Note that this does not necessarily have to be made during `$meeting`.
      */
     public function __construct(
-        MeetingModel $meeting,
-        SubDecisionModel $subDecision,
+        protected readonly MeetingModel $meeting,
+        protected readonly SubDecisionModel $subDecision,
     ) {
-        $this->meeting = $meeting;
-        $this->subDecision = $subDecision;
     }
 
     public function getMeeting(): MeetingModel

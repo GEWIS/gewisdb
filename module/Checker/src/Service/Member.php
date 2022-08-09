@@ -6,22 +6,14 @@ use Checker\Mapper\Member as MemberMapper;
 
 class Member
 {
-    /** @var MemberMapper $memberMapper */
-    private $memberMapper;
-
-    /** @var array $config */
-    private $config;
-
     /**
      * @param MemberMapper $memberMapper
      * @param array $config
      */
     public function __construct(
-        MemberMapper $memberMapper,
-        array $config,
+        private readonly MemberMapper $memberMapper,
+        private readonly array $config,
     ) {
-        $this->memberMapper = $memberMapper;
-        $this->config = $config;
     }
 
     /**

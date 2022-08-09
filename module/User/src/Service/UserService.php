@@ -14,32 +14,14 @@ use User\Form\{
 
 class UserService
 {
-    protected UserMapper $mapper;
-
-    protected UserCreateForm $createForm;
-
-    protected UserEditForm $editForm;
-
-    protected LoginForm $loginForm;
-
-    protected PasswordInterface $crypt;
-
-    protected AuthenticationService $authService;
-
     public function __construct(
-        UserMapper $mapper,
-        UserCreateForm $createForm,
-        LoginForm $loginForm,
-        UserEditForm $editForm,
-        PasswordInterface $crypt,
-        AuthenticationService $authService,
+        protected readonly UserMapper $mapper,
+        protected readonly UserCreateForm $createForm,
+        protected readonly LoginForm $loginForm,
+        protected readonly UserEditForm $editForm,
+        protected readonly PasswordInterface $crypt,
+        protected readonly AuthenticationService $authService,
     ) {
-        $this->mapper = $mapper;
-        $this->createForm = $createForm;
-        $this->loginForm = $loginForm;
-        $this->editForm = $editForm;
-        $this->crypt = $crypt;
-        $this->authService = $authService;
     }
 
     /**

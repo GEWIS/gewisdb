@@ -13,11 +13,8 @@ use Laminas\View\Model\{
 
 class MemberController extends AbstractActionController
 {
-    private MemberService $memberService;
-
-    public function __construct(MemberService $memberService)
+    public function __construct(private readonly MemberService $memberService)
     {
-        $this->memberService = $memberService;
     }
 
     /**

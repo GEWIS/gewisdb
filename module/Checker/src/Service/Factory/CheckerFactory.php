@@ -7,6 +7,7 @@ use Checker\Service\Installation as InstallationService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
 use Checker\Service\Organ as OrganService;
+use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
@@ -32,6 +33,7 @@ class CheckerFactory implements FactoryInterface
         $memberService = $container->get(MemberService::class);
         /** @var OrganService $organService */
         $organService = $container->get(OrganService::class);
+        /** @var TransportInterface $mailTransport */
         $mailTransport = $container->get('checker_mail_transport');
         /** @var array $config */
         $config = $container->get('config');

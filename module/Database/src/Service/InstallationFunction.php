@@ -8,16 +8,10 @@ use Database\Model\InstallationFunction as InstallationFunctionModel;
 
 class InstallationFunction
 {
-    private InstallationFunctionForm $installationFunctionForm;
-
-    private InstallationFunctionMapper $installationFunctionMapper;
-
     public function __construct(
-        InstallationFunctionForm $installationFunctionForm,
-        InstallationFunctionMapper $installationFunctionMapper,
+        private readonly InstallationFunctionForm $installationFunctionForm,
+        private readonly InstallationFunctionMapper $installationFunctionMapper,
     ) {
-        $this->installationFunctionForm = $installationFunctionForm;
-        $this->installationFunctionMapper = $installationFunctionMapper;
     }
 
     /**

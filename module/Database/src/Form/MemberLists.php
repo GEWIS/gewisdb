@@ -12,15 +12,11 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 
 class MemberLists extends Form implements InputFilterProviderInterface
 {
-    protected array $lists;
-
     public function __construct(
         MemberModel $member,
-        array $lists,
+        protected readonly array $lists,
     ) {
         parent::__construct();
-
-        $this->lists = $lists;
 
         foreach ($this->lists as $list) {
             $this->add([

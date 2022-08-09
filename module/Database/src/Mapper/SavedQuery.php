@@ -13,11 +13,8 @@ use Doctrine\ORM\{
  */
 class SavedQuery
 {
-    protected EntityManager $em;
-
-    public function __construct(EntityManager $em)
+    public function __construct(protected readonly EntityManager $em)
     {
-        $this->em = $em;
     }
 
     /**
