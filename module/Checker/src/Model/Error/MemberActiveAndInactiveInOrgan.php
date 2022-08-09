@@ -13,11 +13,12 @@ use Database\Model\SubDecision\{
 };
 
 /**
- * Error for when a member is installed in an organ that either is not yet created, or already abrogated.
+ * Error for when a member is "Inactief Lid" and "Lid" in an organ WITHOUT any special roles. We assume that the member
+ * should NOT be "Lid".
  *
  * @extends Error<InstallationModel>
  */
-class MemberInNonExistingOrgan extends Error
+class MemberActiveAndInactiveInOrgan extends Error
 {
     public function __construct(
         MeetingModel $meeting,
@@ -30,7 +31,7 @@ class MemberInNonExistingOrgan extends Error
     }
 
     /**
-     * Return the member that is in a non-existing organ.
+     * Get the member who is installed as "Inactief Lid" and "Lid" but without any special roles.
      */
     public function getMember(): MemberModel
     {
@@ -38,7 +39,7 @@ class MemberInNonExistingOrgan extends Error
     }
 
     /**
-     * Get the organ that does not exist anymore.
+     * Get the organ the member is installed in.
      */
     public function getOrgan(): FoundationModel
     {
@@ -48,10 +49,9 @@ class MemberInNonExistingOrgan extends Error
     public function asText(): string
     {
         return sprintf(
-            'Member %s (%d) is installed as "%s" in %s, which does not exist.',
+            'Member %s (%d) is marked as "Inactief Lid" of %s but is still a "Lid".',
             $this->getMember()->getFullName(),
-            $this->getMember()->getLidnr(),
-            $this->getSubDecision()->getFunction(),
+            $this->getMember()->getLidNr(),
             $this->getOrgan()->getName(),
         );
     }

@@ -20,7 +20,7 @@ class Installation
      *
      * @param MeetingModel $meeting
      *
-     * @return array
+     * @return array<string, InstallationModel>
      */
     public function getAllInstallations(MeetingModel $meeting): array
     {
@@ -46,16 +46,10 @@ class Installation
 
     /**
      * Returns the different roles for each user in each organ
+     *
      * @param MeetingModel $meeting
      *
-     * @return array \Database\Model\SubDecision\Installation in the form:
-     * [
-     *      'organName' => [
-     *          'memberId' => [
-     *              'function' => Installation
-     *          ]
-     *      ]
-     * ]
+     * @return array<string, array<int, array<string, InstallationModel>>>
      */
     public function getCurrentRolesPerOrgan(MeetingModel $meeting): array
     {
@@ -64,7 +58,7 @@ class Installation
         $roles = [];
 
         foreach ($installations as $installation) {
-            $memberId = $installation->getMember()->getLidNr();
+            $memberId = (int) $installation->getMember()->getLidnr();
             $function = $installation->getFunction();
             $organName = $installation->getFoundation()->getAbbr();
 
@@ -91,11 +85,13 @@ class Installation
 
         $members = [];
         foreach ($installations as $installation) {
-            $member = $installation->getMember()->getLidnr();
+            if ('Inactief Lid' !== $installation->getFunction()) {
+                $member = $installation->getMember()->getLidnr();
 
-            // Doing checks against the keys is a lot faster, and we do not need a lot of information.
-            if (!array_key_exists($member, $members)) {
-                $members[$member] = '';
+                // Doing checks against the keys is a lot faster, and we do not need a lot of information.
+                if (!array_key_exists($member, $members)) {
+                    $members[$member] = '';
+                }
             }
         }
 
