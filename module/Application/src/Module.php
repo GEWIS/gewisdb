@@ -126,7 +126,7 @@ class Module
                 },
                 'isModuleActive' => function (ContainerInterface $container) {
                     return new IsModuleActive($container);
-                }
+                },
             ],
         ];
     }
