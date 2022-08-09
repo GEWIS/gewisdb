@@ -12,6 +12,8 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
  *
  * AV-commissies can only be created during AV's
  * All other organs can only be created during BV's and Virt's
+ *
+ * @extends Error<FoundationModel>
  */
 class OrganMeetingType extends Error
 {
@@ -28,7 +30,7 @@ class OrganMeetingType extends Error
      */
     public function getOrgan(): FoundationModel
     {
-        return $this->getSubDecision()->getFoundation();
+        return $this->getSubDecision();
     }
 
     /**

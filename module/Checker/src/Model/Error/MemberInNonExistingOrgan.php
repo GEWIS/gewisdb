@@ -14,6 +14,8 @@ use Database\Model\SubDecision\{
 
 /**
  * Error for when a member is installed in an organ that either is not yet created, or already abrogated.
+ *
+ * @extends Error<InstallationModel>
  */
 class MemberInNonExistingOrgan extends Error
 {

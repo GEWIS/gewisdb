@@ -14,6 +14,8 @@ use Database\Model\SubDecision\{
 
 /**
  * Error for when a member has a special role in an organ but is not an (in)active member.
+ *
+ * @extends Error<InstallationModel>
  */
 class MemberHasRoleButNotInOrgan extends Error
 {

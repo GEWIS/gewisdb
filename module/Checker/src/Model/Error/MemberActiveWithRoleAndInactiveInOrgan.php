@@ -15,6 +15,8 @@ use Database\Model\SubDecision\{
 /**
  * Error for when a member is "Inactief Lid" and "Lid" in an organ WITH special roles. We assume that the member should
  * be "Lid" and NOT "Inactief Lid".
+ *
+ * @extends Error<InstallationModel>
  */
 class MemberActiveWithRoleAndInactiveInOrgan extends Error
 {

@@ -14,6 +14,8 @@ use Database\Model\SubDecision\{
 
 /**
  * Error for when a member is installed in an organ while their GEWIS membership has expired.
+ *
+ * @extends Error<InstallationModel>
  */
 class MemberExpiredButStillInOrgan extends Error
 {

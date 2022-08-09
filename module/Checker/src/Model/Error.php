@@ -10,6 +10,8 @@ use Database\Model\SubDecision as SubDecisionModel;
  *
  * Denotes an error that was occurred while checking a database
  * i.e. the database is left in a wrong state
+ *
+ * @template T
  */
 abstract class Error
 {
@@ -19,12 +21,14 @@ abstract class Error
     protected MeetingModel $meeting;
 
     /**
-     * Note that this does not necessarily have to be made during `$meeting`.
+     * @var T $subDecision Note that this does not necessarily have to be made during `$meeting`.
      */
     protected SubDecisionModel $subDecision;
 
     /**
      * Create a new description.
+     *
+     * @param T $subDecision
      */
     public function __construct(
         MeetingModel $meeting,
@@ -39,6 +43,9 @@ abstract class Error
         return $this->meeting;
     }
 
+    /**
+     * @return T
+     */
     public function getSubDecision(): SubDecisionModel
     {
         return $this->subDecision;
