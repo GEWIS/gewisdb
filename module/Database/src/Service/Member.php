@@ -369,7 +369,7 @@ class Member
                     // phpcs:ignore -- user-visible strings should not be split
                     $tuestatus[] = array("success", "<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>");
                 } else {
-                    $tuestatus[] = array("danger", "<b>Warning:</b> Member studies does not study at department.");
+                    $tuestatus[] = array("danger", "<b>Warning:</b> Member does not study at department.");
                 }
             }
         } catch (LookupException $e) {
