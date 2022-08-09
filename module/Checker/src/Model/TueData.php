@@ -19,8 +19,6 @@ class TueData
 {
     private Client $client;
 
-    private string $username;
-
     private int $status = -1;
 
     private ?array $data;
@@ -47,10 +45,9 @@ class TueData
      */
     public function setUser(string $username): void
     {
-        //Assume error, but keep username we last looked up
-        $this->username = $username;
+        // Clear previous data
         $this->data = null;
-        //Unless we change it later, we assume error
+        // Unless we change it later, we assume error
         $this->status = 1;
 
         $request = new Request();

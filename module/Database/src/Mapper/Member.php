@@ -59,17 +59,20 @@ class Member
             ->from(MemberModel::class, 'm')
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
-            ->orWhere("m.email LIKE :name")
+            ->orWhere("m.tueUsername = :name")
             ->setMaxResults(32)
             ->orderBy('m.lidnr', 'DESC')
             ->setFirstResult(0);
+
+        if (filter_var($query, FILTER_VALIDATE_EMAIL)) {
+            $qb->orWhere("m.email LIKE :name");
+        }
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
         // also allow searching for membership or TUe numbers
         if (is_numeric($query)) {
             $qb->orWhere("m.lidnr = :nr");
-            $qb->orWhere("m.tueUsername = :nr");
             $qb->setParameter(':nr', $query);
         }
 
