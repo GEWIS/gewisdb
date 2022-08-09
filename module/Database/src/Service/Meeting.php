@@ -421,10 +421,6 @@ class Meeting
         if (
             null === $meeting
             || null === $subdecision
-            || (
-                $meeting->getType() !== $subdecision->getMeetingType()
-                || $meeting->getNumber() !== $subdecision->getMeetingNumber()
-            )
         ) {
             return [
                 'type' => 'install',
