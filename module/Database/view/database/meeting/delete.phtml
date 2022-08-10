@@ -11,7 +11,7 @@ Besluit verwijderd.
 $form->prepare();
 
 $form->setAttribute('action', $this->url('meeting/decision/delete', array(
-    'type' => $type,
+    'type' => $type->value,
     'number' => $number,
     'point' => $point,
     'decision' => $decision
@@ -24,7 +24,7 @@ echo $this->form()->openTag($form);
 
 <p>
 Weet je zeker dat besluit
-<?= $type . " $number.$point.$decision " ?>
+<?= $type->value . " $number.$point.$decision " ?>
 verwijderd moet worden?
 </p>
 <div class="form-group">

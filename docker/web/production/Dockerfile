@@ -1,25 +1,28 @@
-FROM php:8.1-fpm as php-target
+FROM php:8.1-fpm-alpine as php-target
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        cron \
-        git \
-        libcurl4-openssl-dev \
-        libicu-dev \
+RUN apk add --no-cache --virtual .build-deps \
+        curl-dev \
+        icu-dev \
         libpq-dev \
         libzip-dev \
+    && apk add --no-cache --virtual .runtime-programs \
         unzip \
-    && apt-get upgrade -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN docker-php-ext-install -j$(nproc) \
-    calendar \
-    curl \
-    intl \
-    opcache \
-    pgsql \
-    pdo_pgsql \
-    zip
+    && docker-php-ext-install -j$(nproc) \
+        calendar \
+        curl \
+        intl \
+        opcache \
+        pgsql \
+        pdo_pgsql \
+        zip \
+    && runtimeDeps="$( \
+            scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
+            | tr ',' '\n' \
+            | sort -u \
+            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+        )" \
+    && apk add --virtual .gewisdb-runtime-deps $runtimeDeps \
+    && apk del .build-deps
 
 FROM php-target as gewisdb_web_production
 WORKDIR /code

@@ -612,9 +612,7 @@ class Member
         // It is not possible to have another membership type after being an honorary member and there does not exist a
         // good transition to a different membership type (because of the dates/expiration etc.).
         if (MembershipTypes::Honorary === $member->getType()) {
-            throw new RuntimeException(
-                'Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen',
-            );
+            throw new RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
         }
 
         $form->setData($data);
@@ -630,14 +628,14 @@ class Member
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        // update expiration and 'membership ends on' date (should become effective at the end of the current
+        // update expiration and 'membership ends on' date (should become effective at the end of the previous
         // association year).
         $expiration = clone $date;
 
         if ($expiration->format('m') >= 7) {
-            $year = (int) $expiration->format('Y') + 2;
-        } else {
             $year = (int) $expiration->format('Y') + 1;
+        } else {
+            $year = (int) $expiration->format('Y');
         }
 
         switch (MembershipTypes::from($data['type'])) {
@@ -645,19 +643,20 @@ class Member
                 $member->setIsStudying(true);
                 $member->setMembershipEndsOn(null);
                 $member->setType(MembershipTypes::Ordinary);
-                $year -= 1;
                 break;
             case MembershipTypes::External:
                 $member->setIsStudying(true);
                 $membershipEndsOn = clone $expiration;
                 $membershipEndsOn->setDate($year - 1, 7, 1);
                 $member->setMembershipEndsOn($membershipEndsOn);
+                $member->setType(MembershipTypes::External);
                 break;
             case MembershipTypes::Graduate:
                 $member->setIsStudying(false);
                 $membershipEndsOn = clone $expiration;
                 $membershipEndsOn->setDate($year - 1, 7, 1);
                 $member->setMembershipEndsOn($membershipEndsOn);
+                $member->setType(MembershipTypes::Graduate);
                 break;
             case MembershipTypes::Honorary:
                 $member->setIsStudying(false);

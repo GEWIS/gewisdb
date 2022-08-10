@@ -32,6 +32,7 @@ class MemberFunction extends Fieldset
 
         if ($withmember) {
             $array['Lid'] = 'Lid';
+            $array['Inactief Lid'] = 'Inactief Lid';
         }
 
         foreach ($service->getAllFunctions() as $function) {

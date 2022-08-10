@@ -3,65 +3,66 @@
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
-use Database\Model\Meeting as MeetingModel;
-use Database\Model\Member as MemberModel;
-use Database\Model\SubDecision\Foundation as FoundationModel;
-use Database\Model\SubDecision\Installation as InstallationModel;
+use Database\Model\{
+    Meeting as MeetingModel,
+    Member as MemberModel,
+};
+use Database\Model\SubDecision\{
+    Foundation as FoundationModel,
+    Installation as InstallationModel,
+};
 
+/**
+ * Error for when a member has a special role in an organ but is not an (in)active member.
+ *
+ * @extends Error<InstallationModel>
+ */
 class MemberHasRoleButNotInOrgan extends Error
 {
-    /**
-     * @var string Role that the member has in the organ
-     */
-    private $role;
+    private string $role;
 
-    /**
-     * @return string
-     */
-    public function getRole()
+    public function __construct(
+        MeetingModel $meeting,
+        InstallationModel $installation,
+        string $role,
+    ) {
+        parent::__construct(
+            $meeting,
+            $installation,
+        );
+
+        $this->role = $role;
+    }
+
+    public function getRole(): string
     {
         return $this->role;
     }
 
     /**
-     * @param MeetingModel $meeting
-     * @param InstallationModel $installation
-     * @param $role string The role that the member still has
+     * Get the member who has a role but is not (in)active in the organ.
      */
-    public function __construct(
-        MeetingModel $meeting,
-        InstallationModel $installation,
-        $role,
-    ) {
-        parent::__construct($meeting, $installation);
-        $this->role = $role;
-    }
-
-    /**
-     * Return the member that is in a non existing organ
-     *
-     * @return MemberModel
-     */
-    public function getMember()
+    public function getMember(): MemberModel
     {
         return $this->getSubDecision()->getMember();
     }
 
     /**
-     * Get the organ that does not exist anymore
-     *
-     * @return FoundationModel
+     * Get the organ.
      */
-    public function getFoundation()
+    public function getOrgan(): FoundationModel
     {
         return $this->getSubDecision()->getFoundation();
     }
 
-    public function asText()
+    public function asText(): string
     {
-        return 'Member ' . $this->getMember()->getFullName() .
-        ' (' . $this->getMember()->getLidNr() . ')'
-        . ' has a special role as ' . $this->getRole() . ' in  '
-        . $this->getFoundation()->getName() . '  but is not a member anymore';
+        return sprintf(
+            'Member %s (%d) has a special role "%s" in %s but is not installed as "Lid".',
+            $this->getMember()->getFullName(),
+            $this->getMember()->getLidNr(),
+            $this->getRole(),
+            $this->getOrgan()->getName(),
+        );
     }
 }

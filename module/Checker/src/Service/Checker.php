@@ -64,7 +64,7 @@ class Checker
         $message = '';
         foreach ($meetings as $meeting) {
             $errors = array_merge(
-                $this->checkMembersHaveRoleButNotInOrgan($meeting),
+                $this->checkMembersHaveRolesButInactiveOrNotInOrgan($meeting),
                 $this->checkMembersInNonExistingOrgans($meeting),
                 $this->checkMembersExpiredButStillInOrgan($meeting),
                 $this->checkOrganMeetingType($meeting),
@@ -182,27 +182,69 @@ class Checker
     }
 
     /**
-     * Checks if members still have a role in an organ (e.g. they are treasurer)
-     * but they are not a member of the organ anymore
+     * Checks if members still have a role in an organ (e.g. they are treasurer) but they are not a member of the organ
+     * anymore, or they are an inactive member.
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
-     * @return array Array of errors that may have occured.
+     * @return array Array of errors that may have occurred.
      */
-    public function checkMembersHaveRoleButNotInOrgan(MeetingModel $meeting): array
+    public function checkMembersHaveRolesButInactiveOrNotInOrgan(MeetingModel $meeting): array
     {
         $errors = [];
-        $membersArray = $this->installationService->getCurrentRolesPerOrgan($meeting);
+        $organs = $this->installationService->getCurrentRolesPerOrgan($meeting);
 
-        foreach ($membersArray as $organsMembers) {
-            foreach ($organsMembers as $memberRoles) {
-                if (!isset($memberRoles['Lid'])) {
+        foreach ($organs as $organMembers) {
+            foreach ($organMembers as $memberRoles) {
+                if (
+                    isset($memberRoles['Lid'])
+                    && isset($memberRoles['Inactief Lid'])
+                ) {
+                    // Member is active AND inactive in the same organ.
+                    if (count($memberRoles) > 2) {
+                        $errors[] = new Error\MemberActiveWithRoleAndInactiveInOrgan(
+                            $meeting,
+                            $memberRoles['Inactief Lid'],
+                        );
+                    } else {
+                        $errors[] = new Error\MemberActiveAndInactiveInOrgan(
+                            $meeting,
+                            $memberRoles['Lid'],
+                        );
+                    }
+                } elseif (
+                    !isset($memberRoles['Lid'])
+                    && isset($memberRoles['Inactief Lid'])
+                    && count($memberRoles) > 1
+                ) {
+                    // Member is inactive but still has roles.
                     foreach ($memberRoles as $role => $installation) {
-                        $errors[] = new Error\MemberHasRoleButNotInOrgan($meeting, $installation, $role);
+                        if ('Inactief Lid' === $role) {
+                            continue;
+                        }
+
+                        $errors[] = new Error\MemberInactiveInOrganButHasOtherRole(
+                            $meeting,
+                            $installation,
+                            $role,
+                        );
+                    }
+                } elseif (
+                    !isset($memberRoles['Lid'])
+                    && !isset($memberRoles['Inactief Lid'])
+                ) {
+                    // Member is not active (nor inactive) but still has roles.
+                    foreach ($memberRoles as $role => $installation) {
+                        $errors[] = new Error\MemberHasRoleButNotInOrgan(
+                            $meeting,
+                            $installation,
+                            $role,
+                        );
                     }
                 }
             }
         }
+
         return $errors;
     }
 
@@ -212,7 +254,7 @@ class Checker
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
-     * @return array Array of errors that may have occured.
+     * @return array Array of errors that may have occurred.
      */
     public function checkOrganMeetingType(MeetingModel $meeting): array
     {

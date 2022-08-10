@@ -55,26 +55,40 @@ $(document).ready(function () {
                 var content = '';
                 var content2 = '';
                 // set the data for all current members
-                $.each(data.json.members, function(idx, install) {
-                    var decNum = install.meeting_type + '-' + install.meeting_number
-                        + '-' + install.decision_point + '-' + install.decision_number
-                        + '-' + install.subdecision_number;
-                    var toAdd = '<tr data-lidnr="' + install.member.lidnr + '"'
-                        + ' data-meeting-type="' + install.meeting_type + '"'
-                        + ' data-meeting-number="' + install.meeting_number + '"'
-                        + ' data-decision-point="' + install.decision_point + '"'
-                        + ' data-decision-number="' + install.decision_number + '"'
-                        + ' data-subdecision-number="' + install.subdecision_number + '"'
-                        + ' class="dec-' + decNum + '"'
-                        + '>'
-                        + '<td class="name">' + install.member.fullName + '</td>'
-                        + '<td class="function">' + install.function + '</td>';
-                    content += toAdd + '</tr>';
-                    toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">'
-                        + '<span class="glyphicon glyphicon-remove"></span> Dechargeer</button></td>';
-                    toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
-                        + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
-                    content2 += toAdd + '</tr>';
+                $.each(data.json.members, function (idx, member) {
+                    var installationCount = 0;
+
+                    $.each(member.installations, function (idx, install) {
+                        var decNum = install.meeting_type + '-' + install.meeting_number
+                            + '-' + install.decision_point + '-' + install.decision_number
+                            + '-' + install.subdecision_number;
+                        var toAdd = '<tr data-lidnr="' + member.member.lidnr + '"'
+                            + ' data-meeting-type="' + install.meeting_type + '"'
+                            + ' data-meeting-number="' + install.meeting_number + '"'
+                            + ' data-decision-point="' + install.decision_point + '"'
+                            + ' data-decision-number="' + install.decision_number + '"'
+                            + ' data-subdecision-number="' + install.subdecision_number + '"'
+                            + ' class="dec-' + decNum + '"'
+                            + '>'
+                            + '<td class="name">' + (0 === installationCount ? member.member.fullName : '') + '</td>'
+                            + '<td class="function">' + install.function + '</td>';
+                        content += toAdd + '</tr>';
+                        toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">'
+                            + '<span class="glyphicon glyphicon-remove"></span> Dechargeer</button></td>';
+
+                        if ('Lid' === install.function) {
+                            toAdd += '<td><button type="button" class="btn btn-warning btn-xs inactive">'
+                                + '<span class="glyphicon glyphicon-pencil"></span> Maak inactief</button></td>';
+                            toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
+                                + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
+                        } else {
+                            toAdd += '<td></td>';
+                            toAdd += '<td></td>';
+                        }
+
+                        content2 += toAdd + '</tr>';
+                        installationCount++;
+                    });
                 });
                 $('#members-install').html(content);
                 $('#members-result').html(content2);
@@ -96,7 +110,7 @@ $(document).ready(function () {
                 $('button.discharge').click(function(e)
                 {
                     var element = $(e.target).parent().parent();
-                    var name = element.find('.name').html();
+                    var name = $('#members-result tr[data-lidnr="' + element.data('lidnr') + '"]').first().find('.name').html();
                     var func = element.find('.function').html();
                     $('#install-modal-discharge div.modal-body span.name').html(name);
                     $('#install-modal-discharge div.modal-body span.function').html(func);
@@ -106,6 +120,22 @@ $(document).ready(function () {
                     modal.data('decision-point', element.data('decision-point'));
                     modal.data('decision-number', element.data('decision-number'));
                     modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.data('lidnr', element.data('lidnr'));
+                    modal.modal();
+                });
+
+                $('button.inactive').click(function(e)
+                {
+                    var element = $(e.target).parent().parent();
+                    var name = element.find('.name').html();
+                    $('#install-modal-inactive div.modal-body span.name').html(name);
+                    var modal = $('#install-modal-inactive');
+                    modal.data('meeting-type', element.data('meeting-type'));
+                    modal.data('meeting-number', element.data('meeting-number'));
+                    modal.data('decision-point', element.data('decision-point'));
+                    modal.data('decision-number', element.data('decision-number'));
+                    modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.data('lidnr', element.data('lidnr'));
                     modal.modal();
                 });
 
@@ -132,15 +162,17 @@ $(document).ready(function () {
             }).done(function(data) {
                 var ret = [];
                 $.each(data.json, function (idx, member) {
-                    // assemble member name and add to list
-                    var name = member.fullName + ' (' + member.lidnr + ')';
+                    if (0 === $('#members-result tr[data-lidnr="' + member.lidnr + '"]').length) {
+                        // assemble member name and add to list
+                        var name = member.fullName + ' (' + member.lidnr + ')';
 
-                    ret.push({
-                        label: name,
-                        value: name,
-                        name: member.fullName,
-                        id: member.lidnr
-                    });
+                        ret.push({
+                            label: name,
+                            value: name,
+                            name: member.fullName,
+                            id: member.lidnr
+                        });
+                    }
                 });
 
                 // show data
@@ -148,9 +180,12 @@ $(document).ready(function () {
             });
         },
         select: function (event, ui) {
-            $('#install-member-lidnr').val(ui.item.id);
-            $('#install-member-name').val(ui.item.name);
-            $('#install-member-btn').prop('disabled', false);
+            if (0 === $('#members-result tr[data-lidnr="' + ui.item.id + '"]').length) {
+                $('#install-member-lidnr').val(ui.item.id);
+                $('#install-member-name').val(ui.item.name);
+                $('#install-member-btn').prop('disabled', false);
+                $('#install-inactive-member-btn').prop('disabled', false);
+            }
         }
     });
 
@@ -160,6 +195,22 @@ $(document).ready(function () {
      * Create an installation.
      */
     function createInstallation(func, lidnr, name) {
+        // check that the member not already has this function in the organ.
+        var isInstalled = false;
+        var memberResult = $('#members-result tr[data-lidnr="' + lidnr + '"]');
+
+        memberResult.each(function () {
+            if ($(this).find('.function').html() === func) {
+                isInstalled = true;
+
+                return false;
+            }
+        });
+
+        if (isInstalled) {
+            return;
+        }
+
         // initialize the form data
         var template = $('#install-template').data('template');
         template = template.replace(/__index__/g, count++);
@@ -170,15 +221,24 @@ $(document).ready(function () {
 
         // add to 'result'
         var toAdd = '<tr data-lidnr="' + lidnr + '">'
-            + '<td class="name">' + name + '</td>'
+            + '<td class="name">' + (0 === memberResult.length ? name : '') + '</td>'
             + '<td class="function">' + func + '</td>';
         toAdd += '<td></td>';
-        toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
-            + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
+        toAdd += '<td></td>';
+        if ('Lid' === func) {
+            toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
+                + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
+        } else {
+            toAdd += '<td></td>';
+        }
         toAdd += '</tr>';
 
         toAdd = $(toAdd);
-        $('#members-result').append(toAdd);
+        if (0 !== memberResult.length) {
+            toAdd.insertAfter(memberResult.last());
+        } else {
+            $('#members-result').append(toAdd);
+        }
 
         // also add ability to give a function, using the function modal
         toAdd.find('button.functionchange').click(function(e)
@@ -197,6 +257,16 @@ $(document).ready(function () {
         createInstallation('Lid', lidnr, name);
         $('#install-member').val('');
         $('#install-member-btn').prop('disabled', true);
+        $('#install-inactive-member-btn').prop('disabled', true);
+    });
+    $('#install-inactive-member-btn').click(function(e)
+    {
+        var lidnr = $('#install-member-lidnr').val();
+        var name = $('#install-member-name').val();
+        createInstallation('Inactief Lid', lidnr, name);
+        $('#install-member').val('');
+        $('#install-member-btn').prop('disabled', true);
+        $('#install-inactive-member-btn').prop('disabled', true);
     });
     $('#install-modal-yes').click(function(e)
     {
@@ -211,31 +281,104 @@ $(document).ready(function () {
     $('#discharge-modal-yes').click(function(e)
     {
         var modal = $('#install-modal-discharge');
-        var meeting_type = modal.data('meeting-type');
-        var meeting_number = modal.data('meeting-number');
-        var decision_point = modal.data('decision-point');
-        var decision_number = modal.data('decision-number');
-        var subdecision_number = modal.data('subdecision-number');
-        var name = $('#install-modal-discharge div.modal-body span.name').text();
         var func = $('#install-modal-discharge div.modal-body span.function').text();
+        var name = $('#install-modal-discharge div.modal-body span.name').text();
 
-        // create the discharge, and add to all changes
-        var template = $('#discharge-template').data('template');
-        template = template.replace(/__index__/g, count++);
-        template = template.replace(/__function__/g, func);
-        template = template.replace(/__name__/g, name);
+        // Ensure that is a `Lid` is discharged, all functions are removed too.
+        if ('Lid' === func) {
+            $($('#members-result tr[data-lidnr="' + modal.data('lidnr') + '"]').get().reverse()).each(function (i) {
+                var installation = $(this);
 
-        template = template.replace(/__meeting_type__/g, meeting_type);
-        template = template.replace(/__meeting_number__/g, meeting_number);
-        template = template.replace(/__decision_point__/g, decision_point);
-        template = template.replace(/__decision_number__/g, decision_number);
-        template = template.replace(/__number__/g, subdecision_number);
-        $('#install-changes').append($(template));
+                var meeting_type = installation.data('meeting-type');
+                var meeting_number = installation.data('meeting-number');
+                var decision_point = installation.data('decision-point');
+                var decision_number = installation.data('decision-number');
+                var subdecision_number = installation.data('subdecision-number');
 
-        var select = '.dec-' + meeting_type + '-' + meeting_number
-            + '-' + decision_point + '-' + decision_number
-            + '-' + subdecision_number;
-        $('#members-result').find(select).remove();
+                // create the discharge, and add to all changes
+                var template = $('#discharge-template').data('template');
+                template = template.replace(/__index__/g, count++);
+                template = template.replace(/__function__/g, installation.find('.function').html());
+                template = template.replace(/__name__/g, name);
+
+                template = template.replace(/__meeting_type__/g, meeting_type);
+                template = template.replace(/__meeting_number__/g, meeting_number);
+                template = template.replace(/__decision_point__/g, decision_point);
+                template = template.replace(/__decision_number__/g, decision_number);
+                template = template.replace(/__number__/g, subdecision_number);
+                $('#install-changes').append($(template));
+
+                var select = '.dec-' + meeting_type + '-' + meeting_number
+                    + '-' + decision_point + '-' + decision_number
+                    + '-' + subdecision_number;
+                $('#members-result').find(select).remove();
+            });
+        } else {
+            var meeting_type = modal.data('meeting-type');
+            var meeting_number = modal.data('meeting-number');
+            var decision_point = modal.data('decision-point');
+            var decision_number = modal.data('decision-number');
+            var subdecision_number = modal.data('subdecision-number');
+
+            // create the discharge, and add to all changes
+            var template = $('#discharge-template').data('template');
+            template = template.replace(/__index__/g, count++);
+            template = template.replace(/__function__/g, func);
+            template = template.replace(/__name__/g, name);
+
+            template = template.replace(/__meeting_type__/g, meeting_type);
+            template = template.replace(/__meeting_number__/g, meeting_number);
+            template = template.replace(/__decision_point__/g, decision_point);
+            template = template.replace(/__decision_number__/g, decision_number);
+            template = template.replace(/__number__/g, subdecision_number);
+            $('#install-changes').append($(template));
+
+            var select = '.dec-' + meeting_type + '-' + meeting_number
+                + '-' + decision_point + '-' + decision_number
+                + '-' + subdecision_number;
+            $('#members-result').find(select).remove();
+        }
+
+        // dismiss the dialog
+        modal.modal('hide');
+    });
+
+    // inactive modal
+    $('#inactive-modal-yes').click(function(e)
+    {
+        var modal = $('#install-modal-inactive');
+        var lidnr = modal.data('lidnr');
+        var name = $('#install-modal-inactive div.modal-body span.name').text();
+
+        $($('#members-result tr[data-lidnr="' + lidnr + '"]').get().reverse()).each(function (i) {
+            var installation = $(this);
+
+            var meeting_type = installation.data('meeting-type');
+            var meeting_number = installation.data('meeting-number');
+            var decision_point = installation.data('decision-point');
+            var decision_number = installation.data('decision-number');
+            var subdecision_number = installation.data('subdecision-number');
+
+            // create the discharge, and add to all changes
+            var template = $('#discharge-template').data('template');
+            template = template.replace(/__index__/g, count++);
+            template = template.replace(/__function__/g, installation.find('.function').html());
+            template = template.replace(/__name__/g, name);
+
+            template = template.replace(/__meeting_type__/g, meeting_type);
+            template = template.replace(/__meeting_number__/g, meeting_number);
+            template = template.replace(/__decision_point__/g, decision_point);
+            template = template.replace(/__decision_number__/g, decision_number);
+            template = template.replace(/__number__/g, subdecision_number);
+            $('#install-changes').append($(template));
+
+            var select = '.dec-' + meeting_type + '-' + meeting_number
+                + '-' + decision_point + '-' + decision_number
+                + '-' + subdecision_number;
+            $('#members-result').find(select).remove();
+        });
+
+        createInstallation('Inactief Lid', lidnr, name);
 
         // dismiss the dialog
         modal.modal('hide');
@@ -311,6 +454,7 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
                     <th>Naam</th>
                     <th>Functie</th>
                     <th>Dechargeer</th>
+                    <th>Maak inactief</th>
                     <th>Geef functie</th>
                 </tr>
             </thead>
@@ -392,7 +536,7 @@ $tpl = trim(ob_get_clean());
         </div>
     </div>
     <div class="col-md-6 form-inline">
-        <h2>Nieuw lid toevoegen</h2>
+        <h2>Nieuw (inactief) lid toevoegen</h2>
         <div class="form-group">
             <input type="text" id="install-member" class="form-control" placeholder="Lid" />
             <input type="hidden" id="install-member-lidnr" />
@@ -401,6 +545,10 @@ $tpl = trim(ob_get_clean());
         <button type="button" class="btn btn-success" id="install-member-btn" disabled>
             <span class="glyphicon glyphicon-plus"></span>
             Voeg lid toe
+        </button>
+        <button type="button" class="btn btn-success" id="install-inactive-member-btn" disabled>
+            <span class="glyphicon glyphicon-plus"></span>
+            Voeg inactief lid toe
         </button>
     </div>
 </div>
@@ -422,21 +570,39 @@ $submit->setAttribute('disabled', 'disabled');
 <?= $this->form()->closeTag(); ?>
 <?php /* Modals that might be used */ ?>
 <div id="install-modal-discharge" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="install-model-discharge-label" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="install-model-discharge-label">Dechargeer lid</h4>
-      </div>
-      <div class="modal-body">
-        Dechargeer <span class="name"></span> als <span class="function"></span>?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
-        <button type="button" class="btn btn-primary" id="discharge-modal-yes">Ja</button>
-      </div>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="install-model-discharge-label">Dechargeer lid</h4>
+            </div>
+            <div class="modal-body">
+                Dechargeer <span class="name"></span> als <span class="function"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
+                <button type="button" class="btn btn-primary" id="discharge-modal-yes">Ja</button>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<div id="install-modal-inactive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="install-model-inactive-label" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="install-model-discharge-label">Maak lid inactief</h4>
+            </div>
+            <div class="modal-body">
+                Maak <span class="name"></span> inactief?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
+                <button type="button" class="btn btn-primary" id="inactive-modal-yes">Ja</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="install-modal-function" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="install-model-function-label" aria-hidden="true">
