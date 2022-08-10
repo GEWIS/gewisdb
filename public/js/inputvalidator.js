@@ -4,11 +4,7 @@
  class InputValidator {
     constructor(topEl) {
         this.topEl = topEl;
-        this.addListeners("focusout", "validate-name", InputValidator.nameValidator);
         this.addListeners("focusout", "validate-initials", InputValidator.initialValidator);
-        this.addListeners("focusout", "validate-middlename", InputValidator.nameValidator, true);
-        this.addListeners("focusout", "validate-email", InputValidator.emailValidator);
-        this.addListeners("focusout", "validate-iban", InputValidator.ibanValidator);
     }
 
     validateElement(event, validator) {
@@ -34,28 +30,6 @@
         if (inputValue == '.') inputValue = '';
         inputValue = inputValue.replace(/[^A-Za-z\.]/g, '');
         return inputValue;
-    }
-
-    static nameValidator(inputValue) {
-        // Capitalize each lastname
-        inputValue = InputValidator.titleCase(inputValue);
-        // Dutch or German prefixes are not capitalized
-        inputValue = inputValue.replace(/(\'T|Auf|Aus|Aan|De|Den|Der|Een|Het|In|Im|La|Le|L\'|Onder|Op|Ter|Ten|Uit|Unter|Van|Von|Voor)(\s|$)/g, function(txt){
-            return txt.toLowerCase();
-        });
-        // Sometimes we need two capitals
-        inputValue = inputValue.replace(/Ij/g,'IJ')
-        // We don't want spaces around dashes for consistency
-        inputValue = inputValue.replace(' -','-').replace('- ','-');
-        return inputValue;
-    }
-
-    static emailValidator(inputValue) {
-        return inputValue.toLowerCase();
-    }
-
-    static ibanValidator(inputValue) {
-        return inputValue.replace(/\s/g, '').toUpperCase();
     }
 
     static titleCase(str) {
