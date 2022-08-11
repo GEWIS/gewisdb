@@ -404,23 +404,29 @@ class Member
 
     /**
      * Get TU/e data of a member
+     *
      * @return TueData|null for member or null if no such data is available
      */
     public function getTueData(int $id): ?TueData
     {
-        try {
-            $member = $this->getMember($id)['member'];
+        /** @var MemberModel $member */
+        $member = $this->getMember($id)['member'];
+
+        if (null !== ($tueUsername = $member->getTueUsername())) {
             $tuedata = $this->getCheckerService()->tueDataObject();
-            $tuedata->setUser($member->getTueUsername());
-        } catch (LookupException $e) {
-            return null;
+
+            try {
+                $tuedata->setUser($tueUsername);
+            } catch (LookupException $e) {
+                return null;
+            }
+
+            if ($tuedata->isValid()) {
+                return $tuedata;
+            }
         }
 
-        if (!$tuedata->isValid()) {
-            return null;
-        }
-
-        return $tuedata;
+        return null;
     }
 
     /**
