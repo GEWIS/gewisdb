@@ -361,7 +361,7 @@ return [
                         ],
                     ],
                     'tuelookup' => [
-                        'type' => Literal::class,
+                        'type' => Segment::class,
                         'options' => [
                             'route' => '/tuelookup?u=:tueUsername',
                             'constraints' => [
