@@ -1,6 +1,7 @@
 <?php
 
 use Application\Model\Enums\AddressTypes;
+use Laminas\Form\Element\Checkbox;
 
 ?>
 <div class="row">
@@ -8,46 +9,107 @@ use Application\Model\Enums\AddressTypes;
     <h1><?= $member->getFullName() ?></h1>
     <table class="table table-bordered">
         <tr>
+            <th></th>
+            <th>Member entry</th>
+            <th>TU/e data</th>
+        </tr>
+        <tr>
             <th>Lidnummer</th>
             <td><?= $member->getLidnr() ?></td>
+            <?php if (!$tueData->isValid()): ?>
+                <td rowspan="11" style="background-color: lightgray;">No data returned</td>
+            <?php else: ?>
+                <td style="background-color: lightgray;"></td>
+            <?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tueData->isValid() && $member->getInitials() === $tueData->getInitials()) ? 'datavalid' : 'datamismatch'?>">
             <th>Voorletters</th>
             <td><?= $member->getInitials() ?></td>
+            <?php if ($tueData->isValid()): ?>
+                <td><?= $tueData->getInitials() ?></td>
+            <?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tueData->isValid() && $member->getFirstName() === $tueData->getFirstName()) ? 'datavalid' : 'datamismatch'?>">
             <th>Voornaam</th>
             <td><?= $member->getFirstName() ?></td>
+            <?php if ($tueData->isValid()): ?>
+                <td><?= $tueData->getFirstName() ?></td>
+            <?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tueData->isValid() && $member->getMiddleName() === $tueData->computedPrefixName()) ? 'datavalid' : 'datamismatch'?>">
             <th>Tussenvoegsels</th>
             <td><?= $member->getMiddleName() ?></td>
+            <?php if ($tueData->isValid()): ?>
+                <td style="vertical-align: middle;"><?= $tueData->computedPrefixName() ?></td>
+            <?php endif; ?>
         </tr>
-        <tr>
+        <tr class="<?= ($tueData->isValid() && $member->getLastName() === $tueData->computedLastName()) ? 'datavalid' : 'datamismatch'?>">
             <th>Achternaam</th>
             <td><?= $member->getLastName() ?></td>
+            <?php if ($tueData->isValid()): ?>
+                <td style="vertical-align: middle;"><?= $tueData->computedLastName() ?></td>
+            <?php endif; ?>
         </tr>
         <tr>
             <th>TU/e-gebruikersnaam</th>
-            <td><?= (null === $member->getTueUsername()) ? 'Onbekend' : $member->getTueUsername() ?></td>
+            <td>
+                <?php
+                if (null === $member->getTueUsername()):
+                    ?>
+                    Onbekend
+                <?php
+                else:
+                    ?>
+                    <a href="<?= $this->url(
+                        'member/tuelookup',
+                        ['tueUsername' => $member->getTueUsername()],
+                    ) ?> ">
+                        <?= $member->getTueUsername() ?>
+                    </a>
+                <?php
+                endif;
+                ?>
+            </td>
+            <?php if ($tueData->isValid()): ?><td><?= $tueData->getUsername() ?></td><?php endif; ?>
         </tr>
         <tr>
             <th>Email</th>
             <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
+            <?php if ($tueData->isValid()): ?>
+                <td><a href="mailto:<?= $tueData->getEmail() ?>"><?= $tueData->getEmail() ?></a></td>
+            <?php endif; ?>
         </tr>
         <tr>
             <th>Geboortedatum</th>
             <td><?= $member->getBirth()->format('l j F Y') ?></td>
+            <?php if ($tueData->isValid()): ?><td style="background-color: lightgray;"></td><?php endif; ?>
         </tr>
         <tr>
             <th>Betaald (hoe veel)</th>
             <td><?= $member->getPaid() ?></td>
+            <?php if ($tueData->isValid()): ?><td style="background-color: lightgray;"></td><?php endif; ?>
         </tr>
         <tr>
             <th>Laatste wijziging lidmaatshap</th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
+            <?php if ($tueData->isValid()): ?><td><?= $tueData->getChangedOn()->format('l j F Y') ?></td><?php endif; ?>
+        </tr>
+        <tr>
+            <th>Study</th>
+            <td><?= $member->getStudy() ?></td>
+            <?php if ($tueData->isValid()): ?><td>
+                <?php foreach($tueData->getRegistrations() as $registration):?>
+                    <?= $registration['dept'] . ': ' . $registration['study'] . ' (started in ' . $registration['generation'] . ')' ?><br>
+                <?php endforeach;  ?>
+            </td><?php endif; ?>
         </tr>
     </table>
+    <?php foreach ($tueStatus as $alert): ?>
+        <div class="alert alert-<?= $alert[0] ?>" role="alert">
+            <?= $alert[1] ?>
+        </div>
+    <?php endforeach; ?>
+
     <?php
     $form->prepare();
 
@@ -60,6 +122,7 @@ use Application\Model\Enums\AddressTypes;
     <?php
     $element = $form->get('type');
     $element->setAttribute('placeholder', $element->getLabel());
+
     //$element->setLabelAttributes(array('class' => 'radio-inline'));
     ?>
     <div class="form-group">
@@ -74,6 +137,30 @@ use Application\Model\Enums\AddressTypes;
                     </label>
                 </div>
             <?php endforeach ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+    <?php
+    $element = $form->get('updatedata');
+    if ($tueData->isValid()) {
+        $element->setChecked(true);
+    } else {
+        $element->setChecked(false);
+        $element->setAttributes([
+            "disabled" => true,
+        ]);
+    }
+    ?>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="checkbox">
+                <label>
+                    <?= $this->formCheckbox($element) ?>
+                    <?= $element->getLabel() ?>
+                </label>
+                <?= $this->formElementErrors($element) ?>
+            </div>
             <?= $this->formElementErrors($element) ?>
         </div>
     </div>

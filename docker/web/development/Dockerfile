@@ -56,6 +56,7 @@ COPY --chown=www-data:www-data ./docker/web/development/docker-entrypoint.sh ./d
 RUN chmod 0775 ./docker-entrypoint.sh
 
 COPY --chown=www-data:www-data . /code
+RUN chmod 0775 ./orm
 
 ENV PHP_IDE_CONFIG="serverName=database.gewis.nl"
 

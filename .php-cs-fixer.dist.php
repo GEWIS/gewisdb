@@ -4,7 +4,7 @@ $finder = PhpCsFixer\Finder::create()
     ->path(
         [
             'module/',
-            'config/'
+            'config/',
         ]
     )
     ->name('*.php')

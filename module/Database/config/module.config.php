@@ -360,6 +360,27 @@ return [
                             ],
                         ],
                     ],
+                    'tuelookup' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/tuelookup?u=:tueUsername',
+                            'constraints' => [
+                                'tueUsername' => '(s\d{6}|\d{8})',
+                            ],
+                            'defaults' => [
+                                'action' => 'tueLookup',
+                            ],
+                        ],
+                    ],
+                    'tuerequest' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/tuerequest',
+                            'defaults' => [
+                                'action' => 'tueRequest',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'prospective-member' => [

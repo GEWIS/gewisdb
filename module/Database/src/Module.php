@@ -18,6 +18,7 @@ use Database\Form\{
     InstallationFunction as InstallationFunctionForm,
     MailingList as MailingListForm,
     Member as MemberForm,
+    MemberApprove as MemberApproveForm,
     MemberEdit as MemberEditForm,
     MemberExpiration as MemberExpirationForm,
     MemberType as MemberTypeForm,
@@ -193,6 +194,11 @@ class Module
                 },
                 MemberEditForm::class => function (ContainerInterface $container) {
                     $form = new MemberEditForm();
+                    $form->setHydrator($container->get('database_hydrator_default'));
+                    return $form;
+                },
+                MemberApproveForm::class => function (ContainerInterface $container) {
+                    $form = new MemberApproveForm();
                     $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
@@ -378,25 +384,37 @@ class Module
                     );
                 },
                 'database_hydrator_address' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('type', new AddressHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_meeting' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('type', new MeetingHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_subdecision' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
 
                     return $hydrator;
                 },
                 'database_hydrator_decision' => function (ContainerInterface $container) {
-                    $hydrator = $container->get('database_hydrator_default');
+                    $hydrator = new DoctrineObject(
+                        $container->get('database_doctrine_em'),
+                        false,
+                    );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
 
                     return $hydrator;

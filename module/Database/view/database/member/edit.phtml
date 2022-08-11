@@ -27,6 +27,18 @@ $element->setAttribute('placeholder', $element->getLabel());
         <div class="col-sm-8">
             <?= $this->formInput($element) ?>
             <?= $this->formElementErrors($element) ?>
+            <?php
+            if (
+                null !== $tueData
+                && $tueData->computedLastName() !== $member->getLastName()
+            ):
+            ?>
+                <div class="text-warning">
+                    <?= 'TU/e data: ' . $tueData->computedLastName() ?>
+                </div>
+            <?php
+            endif;
+            ?>
         </div>
     </div>
 
@@ -40,6 +52,18 @@ $element->setAttribute('placeholder', $element->getLabel());
         <div class="col-sm-8">
             <?= $this->formInput($element) ?>
             <?= $this->formElementErrors($element) ?>
+            <?php
+            if (
+                null !== $tueData
+                && $tueData->computedPrefixName() !== $member->getMiddleName()
+            ):
+                ?>
+                <div class="text-warning">
+                    <?= 'TU/e data: ' . $tueData->computedPrefixName() ?>
+                </div>
+            <?php
+            endif;
+            ?>
         </div>
     </div>
 
@@ -53,6 +77,18 @@ $element->setAttribute('placeholder', $element->getLabel());
         <div class="col-sm-8">
             <?= $this->formInput($element) ?>
             <?= $this->formElementErrors($element) ?>
+            <?php
+            if (
+                null !== $tueData
+                && $tueData->getInitials() !== $member->getInitials()
+            ):
+                ?>
+                <div class="text-warning">
+                    <?= 'TU/e data: ' . $tueData->getInitials() ?>
+                </div>
+            <?php
+            endif;
+            ?>
         </div>
     </div>
 
@@ -66,6 +102,18 @@ $element->setAttribute('placeholder', $element->getLabel());
         <div class="col-sm-8">
             <?= $this->formInput($element) ?>
             <?= $this->formElementErrors($element) ?>
+            <?php
+            if (
+                null !== $tueData
+                && $tueData->getFirstName() !== $member->getFirstName()
+            ):
+                ?>
+                <div class="text-warning">
+                    <?= 'TU/e data: ' . $tueData->getFirstName() ?>
+                </div>
+            <?php
+            endif;
+            ?>
         </div>
     </div>
 

@@ -3,6 +3,8 @@
 namespace Database\Controller;
 
 use Application\Model\Enums\AddressTypes;
+use Checker\Model\TueData;
+use Checker\Service\Checker as CheckerService;
 use Database\Service\Member as MemberService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -13,8 +15,10 @@ use Laminas\View\Model\{
 
 class MemberController extends AbstractActionController
 {
-    public function __construct(private readonly MemberService $memberService)
-    {
+    public function __construct(
+        private readonly MemberService $memberService,
+        private readonly CheckerService $checkerService,
+    ) {
     }
 
     /**
@@ -330,5 +334,35 @@ class MemberController extends AbstractActionController
         }
 
         return new ViewModel($this->memberService->getDeleteAddressForm($lidnr, $type));
+    }
+
+    /**
+     * Lookup TUe data action
+     *
+     * Gets the TUe data (optionally with a user ID provided)
+     */
+    public function tueLookupAction(): ViewModel
+    {
+        $username = $this->params()->fromQuery('u');
+
+        return new ViewModel([
+            'username' => $username,
+        ]);
+    }
+
+    /**
+     * Lookup TUe data action (JSON API)
+     *
+     * Returns the TUe data for a given user id
+     */
+    public function tueRequestAction(): JsonModel
+    {
+        $username = $this->params()->fromQuery('u');
+        $data = $this->checkerService->tueDataObject();
+        $data->setUser($username);
+
+        return new JsonModel(
+            $data->toArray(),
+        );
     }
 }
