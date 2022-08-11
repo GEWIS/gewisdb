@@ -6,6 +6,7 @@ RUN apk add --no-cache --virtual .build-deps \
         libpq-dev \
         libzip-dev \
     && apk add --no-cache --virtual .runtime-programs \
+        git \
         unzip \
     && docker-php-ext-install -j$(nproc) \
         calendar \
