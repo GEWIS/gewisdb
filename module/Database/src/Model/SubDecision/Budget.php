@@ -30,8 +30,9 @@ class Budget extends SubDecision
     #[JoinColumn(
         name: "lidnr",
         referencedColumnName: "lidnr",
+        nullable: true,
     )]
-    protected Member $author;
+    protected ?Member $author = null;
 
     /**
      * Name of the budget.
@@ -69,9 +70,9 @@ class Budget extends SubDecision
     /**
      * Get the author.
      *
-     * @return Member
+     * @return Member|null
      */
-    public function getAuthor(): Member
+    public function getAuthor(): ?Member
     {
         return $this->author;
     }
