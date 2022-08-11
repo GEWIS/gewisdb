@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Gewis\Sniffs\General;
 
-use PHP_CodeSniffer\Util\Tokens as PHP_CodeSniffer_Tokens;
-use PHP_CodeSniffer\Sniffs\Sniff as PHP_CodeSniffer_Sniff;
 use PHP_CodeSniffer\Files\File as PHP_CodeSniffer_File;
+use PHP_CodeSniffer\Sniffs\Sniff as PHP_CodeSniffer_Sniff;
 
 class RequireConstructorPromotionSniff implements PHP_CodeSniffer_Sniff
 {
@@ -109,6 +108,7 @@ class RequireConstructorPromotionSniff implements PHP_CodeSniffer_Sniff
                             break 2;
                     }
                 }
+
                 if (
                     $varScopeClass === true
                     && $exprIsVariable === true
@@ -116,7 +116,6 @@ class RequireConstructorPromotionSniff implements PHP_CodeSniffer_Sniff
                     // phpcs:ignore -- user-visible strings should not be split
                     $phpcsFile->addError("Class constructor MUST NOT contain assignments to class variables, but instead use constructor promotion. Assigning to \$this->$varName", $stackPtr, __CLASS__);
                 }
-                continue;
             }
         }
     }
