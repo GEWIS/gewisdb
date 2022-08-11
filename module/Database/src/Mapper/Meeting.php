@@ -42,14 +42,19 @@ class Meeting
             $qb = $this->em->createQueryBuilder();
 
             $qb->select('m, COUNT(d)')
+                ->addSelect('(CASE WHEN m.type = :virtual_meeting THEN 1 ELSE 0 END) AS HIDDEN virtSort')
                 ->from(MeetingModel::class, 'm')
                 ->leftJoin('m.decisions', 'd')
-                ->groupBy('m');
+                ->groupBy('m')
+                ->setParameter(':virtual_meeting', MeetingTypes::VIRT);
+
             if ($asc) {
-                $qb->orderBy('m.date', 'ASC');
+                $qb->addOrderBy('m.date', 'ASC');
             } else {
-                $qb->orderBy('m.date', 'DESC');
+                $qb->addOrderBy('m.date', 'DESC');
             }
+
+            $qb->addOrderBy('virtSort', 'ASC');
 
             return $qb->getQuery()->getResult();
         }
