@@ -137,7 +137,7 @@ $element->setLabelAttributes(array(
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
-        <p><?= $this->translate('This is the identification number you have received from the TU/e after enrolling for a degree programme.') ?></p>
+        <p><?= sprintf($this->translate('If you started after 2016, your username is an 8-digit number starting with the year you started at the TU/e, for example %s0001. You have received this in an email when you enrolled. Go to <a href="%s">this</a> page if you need help finding it. Your username will be used to verify you are studying at the department of M&CS.'), date('Y'), "https://wiki.gewis.nl/link/495") ?></p>
         <?= $this->formElementErrors($element) ?>
     </div>
 </div>
@@ -320,7 +320,33 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
 </div>
 <?php endforeach ?>
 
-<h3><?= $this->translate('Handtekening eenmalige SEPA-machtiging') ?></h3>
+<h3><?= $this->translate('Akkoordverklaring') ?></h3>
+
+<a target="_blank" href="https://gewis.nl/vereniging/statuten/"><?= $this->translate('Statuten, HR en privacybeleid') ?></a>
+
+<?php
+$element = $form->get('agreed');
+$element->setAttribute('placeholder', $element->getLabel());
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <div class="col-sm-offset-1 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <?= $this->formCheckbox($element) ?>
+<?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
+ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de inhoud van de statuten
+en het HR.
+<br/>
+Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) toestemming tot het
+verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
+                <?= $element->getLabel() ?>
+            </label>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+</div>
+
+<h3><?= $this->translate('SEPA Direct Debit') ?></h3>
 <?php
 $element = $form->get('iban');
 $element->setAttribute('class', 'form-control');
@@ -334,19 +360,35 @@ $element->setLabelAttributes(array(
     <?= $this->formLabel($element) ?>
     <div class="col-sm-10">
         <?= $this->formInput($element) ?>
-        <p><?= sprintf($this->translate('Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
+        <p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
+This means that GEWIS will debit &euro;15,- from your bank account. You only have to pay once for
+the entire duration of your studies. Only bank accounts in euros are supported for this payment method.
+Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
         <?= $this->formElementErrors($element) ?>
     </div>
 </div>
-<p>
-<?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
-</p>
-<div class="form-group" id="signature-form-group">
-    <div class="col-sm-12">
-        <canvas id="signature-canvas"><?= $this->translate('Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
-        <br>
-        <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
-        <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+
+<?php
+$element = $form->get('agreediban');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-agreement');
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <div class="col-sm-offset-1 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <?= $this->formCheckbox($element) ?>
+<?= $this->translate('Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
+                toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een bedrag van &euro;15,-, 
+                geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn bank om eenmalig een bedrag van 
+                mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.
+                <br/>
+                Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
+                weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.') ?>
+                <?= $element->getLabel() ?>
+            </label>
+            <?= $this->formElementErrors($element) ?>
+        </div>
     </div>
 </div>
 
@@ -366,52 +408,15 @@ $element->setLabelAttributes(array(
     </div>
 </div>
 
-<h3><?= $this->translate('Akkoordverklaring') ?></h3>
-
-<a href="https://gewis.nl/vereniging/statuten/"><?= $this->translate('Statuten en HR') ?></a>
-
-<?php
-$element = $form->get('agreed');
-$element->setAttribute('placeholder', $element->getLabel());
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <div class="col-sm-offset-1 col-sm-8">
-        <div class="checkbox">
-            <label>
-                <?= $this->formCheckbox($element) ?>
-<?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
-ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten en
-HR gelezen.
-
-Ik geef hierbij GEmeenschap Wiskunde en Informatica (GEWIS) toestemming tot het verwerken van mijn
-persoonsgegevens. Binnen twee jaar na afloop van mijn lidmaatschap worden mijn gegevens automatisch
-verwijderd, tenzij ik expliciete toestemming geef dit niet te doen.') ?>
-                <?= $element->getLabel() ?>
-            </label>
-            <?= $this->formElementErrors($element) ?>
-        </div>
-    </div>
-</div>
-
-<?php
-$element = $form->get('agreediban');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setAttribute('id', 'iban-agreement');
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <div class="col-sm-offset-1 col-sm-8">
-        <div class="checkbox">
-            <label>
-                <?= $this->formCheckbox($element) ?>
-<?= $this->translate('Ik geef hierbij GEmeenschap Wiskunde en Informatica
-(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar mijn bank
-om een bedrag van &euro;15,-, geheten vijftien euro, van mijn rekening af te
-schrijven en aan mijn bank om eenmalig een bedrag van mijn rekening af te
-schrijven overeenkomstig de opdracht van GEWIS.') ?>
-                <?= $element->getLabel() ?>
-            </label>
-            <?= $this->formElementErrors($element) ?>
-        </div>
+<p>
+<?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
+</p>
+<div class="form-group" id="signature-form-group">
+    <div class="col-sm-12">
+        <canvas id="signature-canvas"><?= $this->translate('Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
+        <br>
+        <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
+        <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
     </div>
 </div>
 
@@ -541,17 +546,22 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
 <table class="table table-bordered">
     <tr>
         <td>
-            <?php if($address->getCountry() == 'netherlands'): ?>
-                Door ondertekening van dit formulier geeft u toestemming aan de Gemeenschap van Wiskunde en Informatica Studenten
-                om eenmalig een incassoopdracht te sturen naar uw bank om een bedrag van &euro;15,-, geheten vijftien euro, van uw rekening af te schrijven
-                en uw bank om eenmalig een bedrag van uw rekening af te schrijven overeenkomstig de opdracht van <?= $member->getFullName() ?>.
-                Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen acht weken na afschrijving contact op met uw bank.
-                Vraag uw bank naar de voorwaarden.
+            <?php if($address->getCountry() === 'netherlands'): ?>
+                Door ondertekening van dit formulier geeft u (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
+                toestemming om eenmalig een incasso-opdracht te sturen naar uw bank om een bedrag van &euro;15,-, 
+                geheten vijftien euro, van uw rekening af te schrijven en (B) aan uw bank om eenmalig een bedrag van 
+                uw rekening af te schrijven overeenkomstig de opdracht van GEWIS.
+                <br/>
+                Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
+                weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.
             <?php else: ?>
-                By signing this mandate form, you authorise the Association of Mathematics and Computer Science Students (in Dutch: Gemeenschap van Wiskunde en Informatica Studenten)
-                to send instructions to your bank to debit your account and your bank to debit your account in accordance with the instructions from <?= $member->getFullName() ?>.
-                As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.
-                The amount debited from your account is &euro;15,-, or fifteen euro in words.
+                By signing this mandate form, you (A) authorise Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) 
+                to send instructions to your bank to debit your account with &euro;15,-, fifteen euros, and (B) your bank
+                to debit your account in accordance with the instructions from Gemeenschap van Wiskunde en Informatica Studenten (GEWIS).
+                <br/>
+                As part of your rights, you are entitled to a refund from your bank under the terms and conditions of
+                your agreement with your bank. A refund must be claimed within <b>8 weeks</b> starting from the date on
+                which your account was debited.
             <?php endif ?>
         </td>
     </tr>
