@@ -2,6 +2,7 @@
 
 namespace Database\Controller\Factory;
 
+use Checker\Service\Checker as CheckerService;
 use Database\Controller\MemberController;
 use Database\Service\Member as MemberService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -23,7 +24,12 @@ class MemberControllerFactory implements FactoryInterface
     ): MemberController {
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
+        /** @var CheckerService $checkerService */
+        $checkerService = $container->get(CheckerService::class);
 
-        return new MemberController($memberService);
+        return new MemberController(
+            $memberService,
+            $checkerService,
+        );
     }
 }

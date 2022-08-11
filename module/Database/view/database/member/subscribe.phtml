@@ -9,6 +9,7 @@ $this->headTitle()->prepend("GEWIS Enrollment");
 
 $this->inlineScript()->appendFile($this->basePath() . '/js/signature_pad.min.js');
 $this->inlineScript()->appendFile($this->basePath() . '/js/subscribe.app.js');
+$this->inlineScript()->appendFile($this->basePath() . '/js/inputvalidator.min.js');
 
 $form->prepare();
 
@@ -94,7 +95,7 @@ $element->setLabelAttributes(array(
 
 <?php
 $element = $form->get('initials');
-$element->setAttribute('class', 'form-control');
+$element->setAttribute('class', 'form-control validate-initials');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
@@ -428,6 +429,13 @@ schrijven overeenkomstig de opdracht van GEWIS.') ?>
 
 <?= $this->form()->closeTag() ?>
 </div>
+
+<script>
+    window.addEventListener('load', (event) => {
+        validator = new InputValidator(document.getElementById("<?= $form->getAttribute('id'); ?>"));
+    });
+</script>
+
 <?php else: ?>
     <h1 class="hidden-print"><?= $this->translate('Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS') ?>
         <br>

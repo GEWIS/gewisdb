@@ -24,6 +24,7 @@ class MemberType extends Form implements InputFilterProviderInterface
                 'value_options' => [
                     MembershipTypes::Ordinary->value => 'Gewoon lid - Ingeschreven bij faculteit M&CS',
                     MembershipTypes::External->value => 'Extern lid - Speciaal toegelaten door het bestuur',
+                    // phpcs:ignore -- user-visible strings should not be split
                     MembershipTypes::Graduate->value => 'Afgestudeerde - Was lid en is speciaal toegelaten door het bestuur',
                     MembershipTypes::Honorary->value => 'Erelid - Speciaal benoemd door de ALV',
                 ],

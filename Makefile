@@ -36,12 +36,13 @@ runprodtest: buildprod
 		@docker-compose -f docker-compose.yml up -d --force-recreate --remove-orphans
 
 rundev: builddev
-		@docker-compose up -d --force-recreate --remove-orphans
+		@docker-compose up -d --remove-orphans
 		@make replenish
 		@docker-compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
 
 updatedb: rundev
 		@docker-compose exec -T web ./orm orm:schema-tool:update --force --no-interaction
+		@docker-compose exec -T web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction"
 
 stop:
 		@docker-compose down
@@ -54,12 +55,12 @@ runcoverage: loadenv
 
 getvendordir:
 		@rm -Rf ./vendor
-		@docker cp gewisdb_web_1:/code/vendor ./vendor
+		@docker cp $(shell docker-compose ps -q web):/code/vendor ./vendor
 
 replenish:
-		@docker cp ./public gewisdb_web_1:/code
+		@docker cp ./public "$(shell docker-compose ps -q web)":/code
 		@docker-compose exec web chown -R www-data:www-data /code/public
-		@docker cp ./data gewisdb_web_1:/code
+		@docker cp ./data "$(shell docker-compose ps -q web)":/code
 		@docker-compose exec web chown -R www-data:www-data /code/data
 		@docker-compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
 		@docker-compose exec web php composer.phar dump-autoload --dev
@@ -90,7 +91,7 @@ phpstanpr:
 		@docker-compose exec web vendor/bin/phpstan analyse -c phpstan.neon --generate-baseline phpstan/phpstan-baseline-pr.neon --memory-limit 1G --no-progress
 		@git checkout -- phpstan/phpstan-baseline.neon
 		@git checkout -
-		@docker cp gewisdb_web_1:/code/phpstan/phpstan-baseline-pr.neon ./phpstan/phpstan-baseline-pr.neon
+		@docker cp $(shell docker-compose ps -q web):/code/phpstan/phpstan-baseline-pr.neon ./phpstan/phpstan-baseline-pr.neon
 		@make rundev
 		@docker-compose exec web vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G --no-progress
 
@@ -115,17 +116,16 @@ psalmfix: loadenv
 		@vendor/bin/psalm --no-cache --alter --issues=InvalidReturnType,InvalidNullableReturnType
 
 phpcs: loadenv
-		@vendor/bin/phpcs -p --standard=PSR1,PSR12 --extensions=php,dist module config
+		@vendor/bin/phpcs -p
 
 phpcbf: loadenv
-		@vendor/bin/phpcbf -p --standard=PSR1,PSR12 --extensions=php,dist --filter=GitModified module config
+		@vendor/bin/phpcbf -p --filter=GitModified
 
 phpcbfall: loadenv
-		@vendor/bin/phpcbf -p --standard=PSR1,PSR12 --extensions=php,dist module config
+		@vendor/bin/phpcbf -p
 
 phpcsfix: loadenv
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP81Migration module
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --rules=@PSR1,@PSR12,@DoctrineAnnotation,@PHP81Migration config
+		@vendor/bin/php-cs-fixer fix --format=txt --verbose
 
 phpcsfixrisky: loadenv
 		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP81Migration:risky,-declare_strict_types,-use_arrow_functions  module
@@ -136,11 +136,11 @@ checkcomposer: loadenv
 		@vendor/bin/composer-unused
 
 updatecomposer:
-		@docker cp ./composer.json gewisdb_web_1:/code/composer.json
+		@docker cp ./composer.json $(shell docker-compose ps -q web):/code/composer.json
 		@docker-compose exec web php composer.phar selfupdate
-		@docker cp gewisdb_web_1:/code/composer.phar ./composer.phar
+		@docker cp $(shell docker-compose ps -q web):/code/composer.phar ./composer.phar
 		@docker-compose exec web php composer.phar update -W
-		@docker cp gewisdb_web_1:/code/composer.lock ./composer.lock
+		@docker cp $(shell docker-compose ps -q web):/code/composer.lock ./composer.lock
 
 updatedocker:
 		@docker-compose pull

@@ -7,11 +7,15 @@ use Application\Model\Enums\{
     MembershipTypes,
 };
 use Application\Service\FileStorage as FileStorageService;
+use Checker\Model\Exception\LookupException;
+use Checker\Model\TueData;
+use Checker\Service\Checker as CheckerService;
 use Database\Form\{
     Address as AddressForm,
     AddressExport as AddressExportForm,
     DeleteAddress as DeleteAddressForm,
     Member as MemberForm,
+    MemberApprove as MemberApproveForm,
     MemberEdit as MemberEditForm,
     MemberExpiration as MemberExpirationForm,
     MemberLists as MemberListsForm,
@@ -49,6 +53,8 @@ class Member
 
     private DeleteAddressForm $deleteAddressForm;
 
+    private MemberApproveForm $memberApproveForm;
+
     private MemberForm $memberForm;
 
     private MemberEditForm $memberEditForm;
@@ -62,6 +68,8 @@ class Member
     private MemberMapper $memberMapper;
 
     private ProspectiveMemberMapper $prospectiveMemberMapper;
+
+    private CheckerService $checkerService;
 
     private FileStorageService $fileStorageService;
 
@@ -77,6 +85,7 @@ class Member
         AddressForm $addressForm,
         AddressExportForm $addressExportForm,
         DeleteAddressForm $deleteAddressForm,
+        MemberApproveForm $memberApproveForm,
         MemberForm $memberForm,
         MemberEditForm $memberEditForm,
         MemberExpirationForm $memberExpirationForm,
@@ -84,6 +93,7 @@ class Member
         MailingListMapper $mailingListMapper,
         MemberMapper $memberMapper,
         ProspectiveMemberMapper $prospectiveMemberMapper,
+        CheckerService $checkerService,
         FileStorageService $fileStorageService,
         MailingListService $mailingListService,
         PhpRenderer $viewRenderer,
@@ -93,6 +103,7 @@ class Member
         $this->addressForm = $addressForm;
         $this->addressExportForm = $addressExportForm;
         $this->deleteAddressForm = $deleteAddressForm;
+        $this->memberApproveForm = $memberApproveForm;
         $this->memberForm = $memberForm;
         $this->memberEditForm = $memberEditForm;
         $this->memberExpirationForm = $memberExpirationForm;
@@ -100,6 +111,7 @@ class Member
         $this->mailingListMapper = $mailingListMapper;
         $this->memberMapper = $memberMapper;
         $this->prospectiveMemberMapper = $prospectiveMemberMapper;
+        $this->checkerService = $checkerService;
         $this->fileStorageService = $fileStorageService;
         $this->mailingListService =  $mailingListService;
         $this->viewRenderer = $viewRenderer;
@@ -115,7 +127,11 @@ class Member
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
 
-        if (isset($data['address']) && isset($data['address']['street']) && !empty($data['address']['street'])) {
+        if (
+            isset($data['address'])
+            && isset($data['address']['street'])
+            && !empty($data['address']['street'])
+        ) {
             $form->setValidationGroup([
                 'lastName', 'middleName', 'initials', 'firstName',
                 'tueUsername', 'study', 'email', 'birth',
@@ -337,6 +353,18 @@ class Member
             $member->addList($list);
         }
 
+        // If this was requested, update the data with the TU/e data
+        // Assume that this checkbox is only set if the data can be retrieved correctly
+        // so we don't catch any errors
+        if (isset($membershipData['updatedata'])) {
+            $tuedata = $this->getCheckerService()->tueDataObject();
+            $tuedata->setUser($member->getTueUsername());
+            $member->setInitials($tuedata->getInitials());
+            $member->setFirstName($tuedata->getFirstName());
+            $member->setMiddleName($tuedata->computedPrefixName());
+            $member->setLastName($tuedata->computedLastName());
+        }
+
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
 
@@ -364,14 +392,86 @@ class Member
     }
 
     /**
-     * Get prospective member info.
+     * Get prospective member info
+     *
+     * @return array member, form, tuedata
      */
     public function getProspectiveMember(int $id): array
     {
+        $member = $this->getProspectiveMemberMapper()->find($id);
+        $tueData = $this->getCheckerService()->tueDataObject();
+        $tueStatus = [];
+
+        try {
+            $tueData->setUser($member->getTueUsername());
+
+            if (!$tueData->isValid()) {
+                $tueStatus[] = ["info", "No data was returned"];
+            } else {
+                $similar = $tueData->compareData(
+                    firstName: $member->getFirstName(),
+                    prefixName: $member->getMiddleName(),
+                    lastName: $member->getLastName(),
+                    initials: $member->getInitials(),
+                );
+
+                if ($similar > 3) {
+                    // phpcs:ignore -- user-visible strings should not be split
+                    $tueStatus[] = [
+                        'danger',
+                        '<b>Warning:</b> Data is not likely to be similar. Requires $similar edits. Please check if the TU/e data matches the data entered by the member before approving membership',
+                    ];
+                } elseif ($similar > 0) {
+                    $tueStatus[] = [
+                        'info',
+                        '<b>Info:</b> $similar edits needed to correct name. Data likely correct',
+                    ];
+                }
+
+                if ($tueData->studiesAtDepartment()) {
+                    // phpcs:ignore -- user-visible strings should not be split
+                    $tueStatus[] = [
+                        'success',
+                        '<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>',
+                    ];
+                } else {
+                    $tueStatus[] = [
+                        'danger',
+                        '<b>Warning:</b> Member does not study at department.',
+                    ];
+                }
+            }
+        } catch (LookupException $e) {
+            $tueStatus[] = $e->getMessage();
+        }
+
         return [
-            'member' => $this->getProspectiveMemberMapper()->find($id),
-            'form' => $this->memberTypeForm,
+            'member' => $member,
+            'form' => $this->memberApproveForm,
+            'tueData' => $tueData,
+            'tueStatus' => $tueStatus,
         ];
+    }
+
+    /**
+     * Get TU/e data of a member
+     * @return TueData|null for member or null if no such data is available
+     */
+    public function getTueData(int $id): ?TueData
+    {
+        try {
+            $member = $this->getMember($id)['member'];
+            $tuedata = $this->getCheckerService()->tueDataObject();
+            $tuedata->setUser($member->getTueUsername());
+        } catch (LookupException $e) {
+            return null;
+        }
+
+        if (!$tuedata->isValid()) {
+            return null;
+        }
+
+        return $tuedata;
     }
 
     /**
@@ -724,6 +824,7 @@ class Member
         return [
             'member' => $member['member'],
             'form' => $form,
+            'tueData' => $this->getTueData($lidnr),
         ];
     }
 
@@ -859,5 +960,13 @@ class Member
     public function getMailTransport(): TransportInterface
     {
         return $this->mailTransport;
+    }
+
+    /**
+     * Get the checker service.
+     */
+    public function getCheckerService(): CheckerService
+    {
+        return $this->checkerService;
     }
 }
