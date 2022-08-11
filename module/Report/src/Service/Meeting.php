@@ -36,7 +36,7 @@ class Meeting
     /**
      * Export meetings.
      */
-    public function generate()
+    public function generate(): void
     {
         // simply export every meeting
         $meetings = $this->meetingMapper->findAll(true, true);
@@ -56,7 +56,7 @@ class Meeting
         $progress->finish();
     }
 
-    public function generateMeeting(DatabaseMeetingModel $meeting)
+    public function generateMeeting(DatabaseMeetingModel $meeting): void
     {
         $repo = $this->emReport->getRepository(ReportMeetingModel::class);
 
@@ -89,7 +89,7 @@ class Meeting
     public function generateDecision(
         DatabaseDecisionModel $decision,
         ?ReportMeetingModel $reportMeeting = null,
-    ) {
+    ): void {
         $decRepo = $this->emReport->getRepository(ReportDecisionModel::class);
 
         if ($reportMeeting === null) {
@@ -134,10 +134,15 @@ class Meeting
         $this->emReport->persist($reportDecision);
     }
 
+    /**
+     * @template T of ReportSubDecisionModel
+     *
+     * @return T
+     */
     public function generateSubDecision(
         DatabaseSubDecisionModel $subdecision,
         ?ReportDecisionModel $reportDecision = null,
-    ) {
+    ): ReportSubDecisionModel {
         $decRepo = $this->emReport->getRepository(ReportDecisionModel::class);
         $subdecRepo = $this->emReport->getRepository(ReportSubDecisionModel::class);
 
@@ -154,6 +159,7 @@ class Meeting
             }
         }
 
+        /** @var T|null $reportSubDecision */
         $reportSubDecision = $subdecRepo->find([
             'meeting_type' => $subdecision->getMeetingType(),
             'meeting_number' => $subdecision->getMeetingNumber(),
@@ -165,7 +171,9 @@ class Meeting
         if (null === $reportSubDecision) {
             // determine type and create
             $class = get_class($subdecision);
+            /** @var class-string<T> $class */
             $class = preg_replace('/^Database/', 'Report', $class);
+            /** @var T $reportSubDecision */
             $reportSubDecision = new $class();
             $reportSubDecision->setDecision($reportDecision);
             $reportSubDecision->setNumber($subdecision->getNumber());
@@ -189,101 +197,89 @@ class Meeting
             // installation
             $reportSubDecision->setFunction($subdecision->getFunction());
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
-        } else {
-            if ($subdecision instanceof DatabaseSubDecisionModel\Discharge) {
-                // discharge
-                $ref = $subdecision->getInstallation();
-                $installation = $subdecRepo->find([
-                    'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                    'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                    'decision_point' => $ref->getDecision()->getPoint(),
-                    'decision_number' => $ref->getDecision()->getNumber(),
-                    'number' => $ref->getNumber(),
-                ]);
-                $reportSubDecision->setInstallation($installation);
-            } else {
-                if ($subdecision instanceof DatabaseSubDecisionModel\Foundation) {
-                    // foundation
-                    $reportSubDecision->setAbbr($subdecision->getAbbr());
-                    $reportSubDecision->setName($subdecision->getName());
-                    $reportSubDecision->setOrganType($subdecision->getOrganType());
-                } else {
-                    if ($subdecision instanceof DatabaseSubDecisionModel\Reckoning || $subdecision instanceof DatabaseSubDecisionModel\Budget) {
-                        // budget and reckoning
-                        if (null !== $subdecision->getAuthor()) {
-                            $reportSubDecision->setAuthor($this->findMember($subdecision->getAuthor()));
-                        }
-                        $reportSubDecision->setName($subdecision->getName());
-                        $reportSubDecision->setVersion($subdecision->getVersion());
-                        $reportSubDecision->setDate($subdecision->getDate());
-                        $reportSubDecision->setApproval($subdecision->getApproval());
-                        $reportSubDecision->setChanges($subdecision->getChanges());
-                    } else {
-                        if ($subdecision instanceof DatabaseSubDecisionModel\Board\Installation) {
-                            // board installation
-                            $reportSubDecision->setFunction($subdecision->getFunction());
-                            $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
-                            $reportSubDecision->setDate($subdecision->getDate());
-                        } else {
-                            if ($subdecision instanceof DatabaseSubDecisionModel\Board\Release) {
-                                // board release
-                                $ref = $subdecision->getInstallation();
-                                $installation = $subdecRepo->find([
-                                    'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                                    'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                                    'decision_point' => $ref->getDecision()->getPoint(),
-                                    'decision_number' => $ref->getDecision()->getNumber(),
-                                    'number' => $ref->getNumber(),
-                                ]);
-                                $reportSubDecision->setInstallation($installation);
-                                $reportSubDecision->setDate($subdecision->getDate());
-                            } else {
-                                if ($subdecision instanceof DatabaseSubDecisionModel\Board\Discharge) {
-                                    $ref = $subdecision->getInstallation();
-                                    $installation = $subdecRepo->find([
-                                        'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
-                                        'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
-                                        'decision_point' => $ref->getDecision()->getPoint(),
-                                        'decision_number' => $ref->getDecision()->getNumber(),
-                                        'number' => $ref->getNumber(),
-                                    ]);
-                                    $reportSubDecision->setInstallation($installation);
-                                } else {
-                                    if ($subdecision instanceof DatabaseSubDecisionModel\Destroy) {
-                                        $ref = $subdecision->getTarget();
-                                        $target = $decRepo->find([
-                                            'meeting_type' => $ref->getMeeting()->getType(),
-                                            'meeting_number' => $ref->getMeeting()->getNumber(),
-                                            'point' => $ref->getPoint(),
-                                            'number' => $ref->getNumber(),
-                                        ]);
-                                        $reportSubDecision->setTarget($target);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Discharge) {
+            // discharge
+            $ref = $subdecision->getInstallation();
+            $installation = $subdecRepo->find([
+                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
+                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
+                'decision_point' => $ref->getDecision()->getPoint(),
+                'decision_number' => $ref->getDecision()->getNumber(),
+                'number' => $ref->getNumber(),
+            ]);
+
+            $reportSubDecision->setInstallation($installation);
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Foundation) {
+            // foundation
+            $reportSubDecision->setAbbr($subdecision->getAbbr());
+            $reportSubDecision->setName($subdecision->getName());
+            $reportSubDecision->setOrganType($subdecision->getOrganType());
+        } elseif (
+            $subdecision instanceof DatabaseSubDecisionModel\Reckoning
+            || $subdecision instanceof DatabaseSubDecisionModel\Budget
+        ) {
+            // budget and reckoning
+            if (null !== $subdecision->getAuthor()) {
+                $reportSubDecision->setAuthor($this->findMember($subdecision->getAuthor()));
             }
+
+            $reportSubDecision->setName($subdecision->getName());
+            $reportSubDecision->setVersion($subdecision->getVersion());
+            $reportSubDecision->setDate($subdecision->getDate());
+            $reportSubDecision->setApproval($subdecision->getApproval());
+            $reportSubDecision->setChanges($subdecision->getChanges());
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Board\Installation) {
+            // board installation
+            $reportSubDecision->setFunction($subdecision->getFunction());
+            $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
+            $reportSubDecision->setDate($subdecision->getDate());
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Board\Release) {
+            // board release
+            $ref = $subdecision->getInstallation();
+            $installation = $subdecRepo->find([
+                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
+                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
+                'decision_point' => $ref->getDecision()->getPoint(),
+                'decision_number' => $ref->getDecision()->getNumber(),
+                'number' => $ref->getNumber(),
+            ]);
+
+            $reportSubDecision->setInstallation($installation);
+            $reportSubDecision->setDate($subdecision->getDate());
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Board\Discharge) {
+            $ref = $subdecision->getInstallation();
+            $installation = $subdecRepo->find([
+                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
+                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
+                'decision_point' => $ref->getDecision()->getPoint(),
+                'decision_number' => $ref->getDecision()->getNumber(),
+                'number' => $ref->getNumber(),
+            ]);
+
+            $reportSubDecision->setInstallation($installation);
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Destroy) {
+            $ref = $subdecision->getTarget();
+            $target = $decRepo->find([
+                'meeting_type' => $ref->getMeeting()->getType(),
+                'meeting_number' => $ref->getMeeting()->getNumber(),
+                'point' => $ref->getPoint(),
+                'number' => $ref->getNumber(),
+            ]);
+
+            $reportSubDecision->setTarget($target);
         }
 
         // Abolish decisions are handled by foundationreference
         // Other decisions don't need special handling
 
         // for any decision, make sure the content is filled
-        $cnt = $subdecision->getContent();
-
-        if (null === $cnt) {
-            $cnt = '';
-        }
-
-        $reportSubDecision->setContent($cnt);
+        $reportSubDecision->setContent($subdecision->getContent());
         $this->emReport->persist($reportSubDecision);
 
         return $reportSubDecision;
     }
 
-    public function deleteDecision(DatabaseDecisionModel $decision)
+    public function deleteDecision(DatabaseDecisionModel $decision): void
     {
         $reportDecision = $this->emReport->getRepository(ReportDecisionModel::class)->find([
             'meeting_type' => $decision->getMeeting()->getType(),
@@ -299,7 +295,7 @@ class Meeting
         $this->emReport->remove($reportDecision);
     }
 
-    public function deleteSubDecision(ReportSubDecisionModel $subDecision)
+    public function deleteSubDecision(ReportSubDecisionModel $subDecision): void
     {
         switch (true) {
             case $subDecision instanceof ReportSubDecisionModel\Destroy:
@@ -345,7 +341,7 @@ class Meeting
     public function sendDecisionExceptionMail(
         Exception $e,
         DatabaseDecisionModel $decision,
-    ) {
+    ): void {
         $config = $this->config['email'];
 
         $meeting = $decision->getMeeting();
