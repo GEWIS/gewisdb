@@ -39,15 +39,18 @@ class Board
             $boardMember->setFunction($install->getFunction());
             $boardMember->setInstallDate($install->getDate());
 
-            $release = $install->getRelease();
-            if (null !== $release) {
-                $boardMember->setReleaseDate($release->getDate());
+            $rp = new ReflectionProperty(InstallationModel::class, 'release');
+            if ($rp->isInitialized($install)) {
+                $boardMember->setReleaseDate($install->getRelease()->getDate());
+            } else {
+                $boardMember->setReleaseDate(null);
             }
 
-            $discharge = $install->getDischarge();
-
-            if (null !== $discharge) {
-                $boardMember->setDischargeDate($discharge->getDecision()->getMeeting()->getDate());
+            $rp = new ReflectionProperty(InstallationModel::class, 'discharge');
+            if ($rp->isInitialized($install)) {
+                $boardMember->setDischargeDate($install->getDischarge()->getDecision()->getMeeting()->getDate());
+            } else {
+                $boardMember->setDischargeDate(null);
             }
 
             $this->emReport->persist($boardMember);
