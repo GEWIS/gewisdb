@@ -19,19 +19,15 @@ use Database\Model\SubDecision\{
  */
 class MemberInactiveInOrganButHasOtherRole extends Error
 {
-    private string $role;
-
     public function __construct(
         MeetingModel $meeting,
         InstallationModel $installation,
-        string $role,
+        private readonly string $role,
     ) {
         parent::__construct(
             $meeting,
             $installation,
         );
-
-        $this->role = $role;
     }
 
     /**

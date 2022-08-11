@@ -9,11 +9,8 @@ use Laminas\View\Model\ViewModel;
 
 class QueryController extends AbstractActionController
 {
-    private QueryService $queryService;
-
-    public function __construct(QueryService $queryService)
+    public function __construct(private readonly QueryService $queryService)
     {
-        $this->queryService = $queryService;
     }
 
     /**

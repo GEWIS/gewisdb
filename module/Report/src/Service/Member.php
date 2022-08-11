@@ -19,16 +19,10 @@ use Report\Model\{
 
 class Member
 {
-    private MemberMapper $memberMapper;
-
-    private EntityManager $emReport;
-
     public function __construct(
-        MemberMapper $memberMapper,
-        EntityManager $emReport,
+        private readonly MemberMapper $memberMapper,
+        private readonly EntityManager $emReport,
     ) {
-        $this->memberMapper = $memberMapper;
-        $this->emReport = $emReport;
     }
 
     /**

@@ -15,15 +15,10 @@ use Laminas\View\Model\{
 
 class MemberController extends AbstractActionController
 {
-    private MemberService $memberService;
-    private CheckerService $checkerService;
-
     public function __construct(
-        MemberService $memberService,
-        CheckerService $checkerService,
+        private readonly MemberService $memberService,
+        private readonly CheckerService $checkerService,
     ) {
-        $this->memberService = $memberService;
-        $this->checkerService = $checkerService;
     }
 
     /**

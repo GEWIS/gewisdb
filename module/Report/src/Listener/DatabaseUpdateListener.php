@@ -30,30 +30,15 @@ use Report\Model\SubDecision\{
  */
 class DatabaseUpdateListener
 {
-    private MeetingService $meetingService;
-
-    private MemberService $memberService;
-
-    private MiscService $miscService;
-
-    private OrganService $organService;
-
-    private EntityManager $emReport;
-
     protected static bool $isflushing = false;
 
     public function __construct(
-        MeetingService $meetingService,
-        MemberService $memberService,
-        MiscService $miscService,
-        OrganService $organService,
-        EntityManager $emReport,
+        private readonly MeetingService $meetingService,
+        private readonly MemberService $memberService,
+        private readonly MiscService $miscService,
+        private readonly OrganService $organService,
+        private readonly EntityManager $emReport,
     ) {
-        $this->meetingService = $meetingService;
-        $this->memberService = $memberService;
-        $this->miscService = $miscService;
-        $this->organService = $organService;
-        $this->emReport = $emReport;
     }
 
     protected static function safeFlush(callable $func)

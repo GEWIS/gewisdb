@@ -26,32 +26,14 @@ use Laminas\Mail\Transport\TransportInterface;
 
 class Checker
 {
-    private InstallationService $installationService;
-
-    private MeetingService $meetingService;
-
-    private MemberService $memberService;
-
-    private OrganService $organService;
-
-    private TransportInterface $mailTransport;
-
-    private array $config;
-
     public function __construct(
-        InstallationService $installationService,
-        MeetingService $meetingService,
-        MemberService $memberService,
-        OrganService $organService,
-        TransportInterface $mailTransport,
-        array $config,
+        private readonly InstallationService $installationService,
+        private readonly MeetingService $meetingService,
+        private readonly MemberService $memberService,
+        private readonly OrganService $organService,
+        private readonly TransportInterface $mailTransport,
+        private readonly array $config,
     ) {
-        $this->installationService = $installationService;
-        $this->meetingService = $meetingService;
-        $this->memberService = $memberService;
-        $this->organService = $organService;
-        $this->mailTransport = $mailTransport;
-        $this->config = $config;
     }
 
     /**

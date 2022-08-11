@@ -17,28 +17,13 @@ use Doctrine\ORM\{
 
 class Query
 {
-    private QueryForm $queryForm;
-
-    private QueryExportForm $queryExportForm;
-
-    private QuerySaveForm $querySaveForm;
-
-    private SavedQueryMapper $savedQueryMapper;
-
-    private EntityManager $emReport;
-
     public function __construct(
-        QueryForm $queryForm,
-        QueryExportForm $queryExportForm,
-        QuerySaveForm $querySaveForm,
-        SavedQueryMapper $savedQueryMapper,
-        EntityManager $emReport,
+        private readonly QueryForm $queryForm,
+        private readonly QueryExportForm $queryExportForm,
+        private readonly QuerySaveForm $querySaveForm,
+        private readonly SavedQueryMapper $savedQueryMapper,
+        private readonly EntityManager $emReport,
     ) {
-        $this->queryForm = $queryForm;
-        $this->queryExportForm = $queryExportForm;
-        $this->querySaveForm = $querySaveForm;
-        $this->savedQueryMapper = $savedQueryMapper;
-        $this->emReport = $emReport;
     }
 
     /**

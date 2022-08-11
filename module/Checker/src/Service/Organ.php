@@ -9,11 +9,8 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
 
 class Organ
 {
-    private OrganMapper $organMapper;
-
-    public function __construct(OrganMapper $organMapper)
+    public function __construct(private readonly OrganMapper $organMapper)
     {
-        $this->organMapper = $organMapper;
     }
 
     /**

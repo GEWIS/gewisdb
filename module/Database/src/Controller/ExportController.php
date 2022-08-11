@@ -8,11 +8,8 @@ use Laminas\View\Model\ViewModel;
 
 class ExportController extends AbstractActionController
 {
-    private MeetingService $meetingService;
-
-    public function __construct(MeetingService $meetingService)
+    public function __construct(private readonly MeetingService $meetingService)
     {
-        $this->meetingService = $meetingService;
     }
 
     /**

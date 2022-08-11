@@ -12,16 +12,10 @@ use Laminas\View\Model\ViewModel;
 
 class SettingsController extends AbstractActionController
 {
-    private InstallationFunctionService $installationFunctionService;
-
-    private MailingListService $mailingListService;
-
     public function __construct(
-        InstallationFunctionService $installationFunctionService,
-        MailingListService $mailingListService,
+        private readonly InstallationFunctionService $installationFunctionService,
+        private readonly MailingListService $mailingListService,
     ) {
-        $this->installationFunctionService = $installationFunctionService;
-        $this->mailingListService = $mailingListService;
     }
 
     /**

@@ -16,16 +16,10 @@ use Laminas\View\Model\{
 
 class MeetingController extends AbstractActionController
 {
-    private MeetingService $meetingService;
-
-    private MemberFunctionFieldset $memberFunctionFieldset;
-
     public function __construct(
-        MeetingService $meetingService,
-        MemberFunctionFieldset $memberFunctionFieldset,
+        private readonly MeetingService $meetingService,
+        private readonly MemberFunctionFieldset $memberFunctionFieldset,
     ) {
-        $this->meetingService = $meetingService;
-        $this->memberFunctionFieldset = $memberFunctionFieldset;
     }
 
     /**

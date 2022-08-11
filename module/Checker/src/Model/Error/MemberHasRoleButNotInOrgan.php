@@ -19,19 +19,17 @@ use Database\Model\SubDecision\{
  */
 class MemberHasRoleButNotInOrgan extends Error
 {
-    private string $role;
-
+    /**
+     * @param MeetingModel $meeting
+     * @param InstallationModel $installation
+     * @param string $role Role that the member has in the organ
+     */
     public function __construct(
         MeetingModel $meeting,
         InstallationModel $installation,
-        string $role,
+        private readonly string $role,
     ) {
-        parent::__construct(
-            $meeting,
-            $installation,
-        );
-
-        $this->role = $role;
+        parent::__construct($meeting, $installation);
     }
 
     public function getRole(): string

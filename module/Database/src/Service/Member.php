@@ -47,76 +47,25 @@ use RuntimeException;
 
 class Member
 {
-    private AddressForm $addressForm;
-
-    private AddressExportForm $addressExportForm;
-
-    private DeleteAddressForm $deleteAddressForm;
-
-    private MemberApproveForm $memberApproveForm;
-
-    private MemberForm $memberForm;
-
-    private MemberEditForm $memberEditForm;
-
-    private MemberExpirationForm $memberExpirationForm;
-
-    private MemberTypeForm $memberTypeForm;
-
-    private MailingListMapper $mailingListMapper;
-
-    private MemberMapper $memberMapper;
-
-    private ProspectiveMemberMapper $prospectiveMemberMapper;
-
-    private CheckerService $checkerService;
-
-    private FileStorageService $fileStorageService;
-
-    private MailingList $mailingListService;
-
-    private PhpRenderer $viewRenderer;
-
-    private TransportInterface $mailTransport;
-
-    private array $config;
-
     public function __construct(
-        AddressForm $addressForm,
-        AddressExportForm $addressExportForm,
-        DeleteAddressForm $deleteAddressForm,
-        MemberApproveForm $memberApproveForm,
-        MemberForm $memberForm,
-        MemberEditForm $memberEditForm,
-        MemberExpirationForm $memberExpirationForm,
-        MemberTypeForm $memberTypeForm,
-        MailingListMapper $mailingListMapper,
-        MemberMapper $memberMapper,
-        ProspectiveMemberMapper $prospectiveMemberMapper,
-        CheckerService $checkerService,
-        FileStorageService $fileStorageService,
-        MailingListService $mailingListService,
-        PhpRenderer $viewRenderer,
-        TransportInterface $mailTransport,
-        array $config,
+        private readonly AddressForm $addressForm,
+        private readonly AddressExportForm $addressExportForm,
+        private readonly DeleteAddressForm $deleteAddressForm,
+        private readonly MemberApproveForm $memberApproveForm,
+        private readonly MemberForm $memberForm,
+        private readonly MemberEditForm $memberEditForm,
+        private readonly MemberExpirationForm $memberExpirationForm,
+        private readonly MemberTypeForm $memberTypeForm,
+        private readonly MailingListMapper $mailingListMapper,
+        private readonly MemberMapper $memberMapper,
+        private readonly ProspectiveMemberMapper $prospectiveMemberMapper,
+        private readonly CheckerService $checkerService,
+        private readonly FileStorageService $fileStorageService,
+        private readonly MailingListService $mailingListService,
+        private readonly PhpRenderer $viewRenderer,
+        private readonly TransportInterface $mailTransport,
+        private readonly array $config,
     ) {
-        $this->addressForm = $addressForm;
-        $this->addressExportForm = $addressExportForm;
-        $this->deleteAddressForm = $deleteAddressForm;
-        $this->memberApproveForm = $memberApproveForm;
-        $this->memberForm = $memberForm;
-        $this->memberEditForm = $memberEditForm;
-        $this->memberExpirationForm = $memberExpirationForm;
-        $this->memberTypeForm = $memberTypeForm;
-        $this->mailingListMapper = $mailingListMapper;
-        $this->memberMapper = $memberMapper;
-        $this->prospectiveMemberMapper = $prospectiveMemberMapper;
-        $this->checkerService = $checkerService;
-        $this->fileStorageService = $fileStorageService;
-        $this->mailingListService =  $mailingListService;
-        $this->viewRenderer = $viewRenderer;
-        $this->mailTransport = $mailTransport;
-        $this->config = $config;
     }
 
     /**

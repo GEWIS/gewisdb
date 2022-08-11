@@ -22,20 +22,11 @@ use Report\Service\{
  */
 class DatabaseDeletionListener
 {
-    private MeetingService $meetingService;
-
-    private MemberService $memberService;
-
-    private EntityManager $emReport;
-
     public function __construct(
-        MeetingService $meetingService,
-        MemberService $memberService,
-        EntityManager $emReport,
+        private readonly MeetingService $meetingService,
+        private readonly MemberService $memberService,
+        private readonly EntityManager $emReport,
     ) {
-        $this->meetingService = $meetingService;
-        $this->memberService = $memberService;
-        $this->emReport = $emReport;
     }
 
     public function preRemove(LifecycleEventArgs $eventArgs)

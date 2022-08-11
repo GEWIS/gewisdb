@@ -7,15 +7,11 @@ use Database\Service\Meeting as MeetingService;
 
 class Meeting
 {
-    /** @var MeetingService $meetingService */
-    private $meetingService;
-
     /**
      * @param MeetingService $meetingService
      */
-    public function __construct(MeetingService $meetingService)
+    public function __construct(private readonly MeetingService $meetingService)
     {
-        $this->meetingService = $meetingService;
     }
 
     /**

@@ -30,14 +30,11 @@ class Member extends Form implements InputFilterProviderInterface
 {
     protected array $lists;
 
-    protected MvcTranslator $translator;
-
     public function __construct(
         AddressFieldset $address,
-        MvcTranslator $translator,
+        protected readonly MvcTranslator $translator,
     ) {
         parent::__construct();
-        $this->translator = $translator;
 
         $this->add([
             'name' => 'lastName',

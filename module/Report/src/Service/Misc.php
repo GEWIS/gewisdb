@@ -9,16 +9,10 @@ use Report\Model\MailingList as ReportMailingListModel;
 
 class Misc
 {
-    private MailingListMapper $mailingListMapper;
-
-    private EntityManager $emReport;
-
     public function __construct(
-        MailingListMapper $mailingListMapper,
-        EntityManager $emReport,
+        private readonly MailingListMapper $mailingListMapper,
+        private readonly EntityManager $emReport,
     ) {
-        $this->mailingListMapper = $mailingListMapper;
-        $this->emReport = $emReport;
     }
 
     /**

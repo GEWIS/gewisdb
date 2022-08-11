@@ -8,11 +8,8 @@ use Laminas\View\Model\ViewModel;
 
 class AddressController extends AbstractActionController
 {
-    private MemberService $memberService;
-
-    public function __construct(MemberService $memberService)
+    public function __construct(private readonly MemberService $memberService)
     {
-        $this->memberService = $memberService;
     }
 
     public function indexAction(): ViewModel

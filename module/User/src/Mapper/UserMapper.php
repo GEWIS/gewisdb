@@ -10,11 +10,8 @@ use User\Model\User as UserModel;
 
 class UserMapper
 {
-    protected EntityManager $em;
-
-    public function __construct(EntityManager $em)
+    public function __construct(protected readonly EntityManager $em)
     {
-        $this->em = $em;
     }
 
     /**

@@ -38,68 +38,23 @@ use ReflectionObject;
 
 class Meeting
 {
-    private AbolishForm $abolishForm;
-
-    private BoardDischargeForm $boardDischargeForm;
-
-    private BoardInstallForm $boardInstallForm;
-
-    private BoardReleaseForm $boardReleaseForm;
-
-    private BudgetForm $budgetForm;
-
-    private CreateMeetingForm $createMeetingForm;
-
-    private DeleteDecisionForm $deleteDecisionForm;
-
-    private DestroyForm $destroyForm;
-
-    private ExportForm $exportForm;
-
-    private FoundationForm $foundationForm;
-
-    private InstallForm $installForm;
-
-    private OtherForm $otherForm;
-
-    private MeetingMapper $meetingMapper;
-
-    private MemberMapper $memberMapper;
-
-    private OrganMapper $organMapper;
-
     public function __construct(
-        AbolishForm $abolishForm,
-        BoardDischargeForm $boardDischargeForm,
-        BoardInstallForm $boardInstallForm,
-        BoardReleaseForm $boardReleaseForm,
-        BudgetForm $budgetForm,
-        CreateMeetingForm $createMeetingForm,
-        DeleteDecisionForm $deleteDecisionForm,
-        DestroyForm $destroyForm,
-        ExportForm $exportForm,
-        FoundationForm $foundationForm,
-        InstallForm $installForm,
-        OtherForm $otherForm,
-        MeetingMapper $meetingMapper,
-        MemberMapper $memberMapper,
-        OrganMapper $organMapper,
+        private readonly AbolishForm $abolishForm,
+        private readonly BoardDischargeForm $boardDischargeForm,
+        private readonly BoardInstallForm $boardInstallForm,
+        private readonly BoardReleaseForm $boardReleaseForm,
+        private readonly BudgetForm $budgetForm,
+        private readonly CreateMeetingForm $createMeetingForm,
+        private readonly DeleteDecisionForm $deleteDecisionForm,
+        private readonly DestroyForm $destroyForm,
+        private readonly ExportForm $exportForm,
+        private readonly FoundationForm $foundationForm,
+        private readonly InstallForm $installForm,
+        private readonly OtherForm $otherForm,
+        private readonly MeetingMapper $meetingMapper,
+        private readonly MemberMapper $memberMapper,
+        private readonly OrganMapper $organMapper,
     ) {
-        $this->abolishForm = $abolishForm;
-        $this->boardDischargeForm = $boardDischargeForm;
-        $this->boardInstallForm = $boardInstallForm;
-        $this->boardReleaseForm = $boardReleaseForm;
-        $this->budgetForm = $budgetForm;
-        $this->createMeetingForm = $createMeetingForm;
-        $this->deleteDecisionForm = $deleteDecisionForm;
-        $this->destroyForm = $destroyForm;
-        $this->exportForm = $exportForm;
-        $this->foundationForm = $foundationForm;
-        $this->installForm = $installForm;
-        $this->otherForm = $otherForm;
-        $this->meetingMapper = $meetingMapper;
-        $this->memberMapper = $memberMapper;
-        $this->organMapper = $organMapper;
     }
 
     /**

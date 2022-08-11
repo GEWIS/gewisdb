@@ -9,11 +9,8 @@ use User\Service\UserService;
 
 class UserController extends AbstractActionController
 {
-    protected UserService $service;
-
-    public function __construct(UserService $service)
+    public function __construct(protected readonly UserService $service)
     {
-        $this->service = $service;
     }
 
     /**

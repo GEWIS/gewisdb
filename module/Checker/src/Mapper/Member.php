@@ -11,20 +11,12 @@ use Doctrine\ORM\EntityManager;
 class Member
 {
     /**
-     * Doctrine entity manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
-
-    /**
      * Constructor
      *
-     * @param EntityManager $em
+     * @param EntityManager $em Doctrine entity manager.
      */
-    public function __construct(EntityManager $em)
+    public function __construct(protected readonly EntityManager $em)
     {
-        $this->em = $em;
     }
 
     /**
