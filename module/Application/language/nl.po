@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-23 20:38+0200\n"
+"POT-Creation-Date: 2022-08-11 22:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: \n"
@@ -10,96 +10,32 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
-#: module/Database/view/database/member/print.phtml:5
-#: module/Database/view/database/member/subscribe.phtml:454
-msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
-msgstr "Gefeliciteerd! Je bent geregistreerd als lid van GEWIS"
+msgid "A 404 error occurred"
+msgstr "A 404 error occurred"
 
-#: module/Database/view/database/member/print.phtml:6
-#: module/Database/view/database/member/subscribe.phtml:456
-#, fuzzy
-msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
-msgstr "Je inschrijving is definitief nadat je je inschrijfgeld hebt voldaan!"
+msgid "Aangemelde mailing lists"
+msgstr "Aangemelde mailing lists"
 
-#: module/Database/view/database/member/subscribe.phtml:31
-msgid "Inschrijving"
-msgstr "Inschrijving"
+msgid "Achternaam"
+msgstr "Achternaam"
 
-#: module/Database/view/database/member/subscribe.phtml:32
-msgid "SEPA-machtiging"
-msgstr "SEPA-machtiging"
+msgid "Additional information"
+msgstr "Additional information"
 
-#: module/Database/view/database/member/subscribe.phtml:34
-msgid ""
-"Welkom! Met dit formulier kun je je inschrijven voor een\n"
-"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
-"kost\n"
-"eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging\n"
-"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
-msgstr ""
-"Welkom! Met dit formulier kun je je inschrijven voor een\n"
-"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
-"kost\n"
-"eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging\n"
-"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
-
-#: module/Database/view/database/member/subscribe.phtml:40
-#: module/Database/view/database/member/subscribe.phtml:603
-msgid "Incassant-ID"
-msgstr "Incassant-ID"
-
-#: module/Database/view/database/member/subscribe.phtml:43
-msgid "Naam"
-msgstr "Naam"
-
-#: module/Database/view/database/member/subscribe.phtml:44
-#: module/Database/view/database/member/subscribe.phtml:231
 msgid "Adres"
 msgstr "Adres"
 
-#: module/Database/view/database/member/subscribe.phtml:45
-#: module/Database/src/Database/Form/Fieldset/Address.php:53
-msgid "Postcode"
-msgstr "Postcode"
+msgid "Adressen"
+msgstr "Adressen"
 
-#: module/Database/view/database/member/subscribe.phtml:46
-msgid "Plaats"
-msgstr "Plaats"
+msgid "Afgestudeerde"
+msgstr "Afgestudeerde"
 
-#: module/Database/view/database/member/subscribe.phtml:47
-#: module/Database/view/database/member/subscribe.phtml:579
-#: module/Database/src/Database/Form/Fieldset/Address.php:28
-msgid "Land"
-msgstr "Land"
+msgid "Akkoordverklaring"
+msgstr "Akkoordverklaring"
 
-#: module/Database/view/database/member/subscribe.phtml:48
-msgid "If you have any questions feel free to contact"
-msgstr "Als je vragen hebt, neem gerust contact op met"
-
-#: module/Database/view/database/member/subscribe.phtml:58
-msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-msgstr "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-
-#: module/Database/view/database/member/subscribe.phtml:159
-msgid ""
-"This is the identification number you have received from the TU/e after "
-"enrolling for a degree programme."
-msgstr ""
-"Dit is het identificatienummer dat je hebt ontvangen van de TU/e na het "
-"inschrijven voor een bachelor of master."
-
-#: module/Database/view/database/member/subscribe.phtml:224
-#, php-format
-msgid "Contact %s for any questions about your payment."
-msgstr "Neem contact op met %s voor eventuele vragen over je betaling."
-
-#: module/Database/view/database/member/subscribe.phtml:334
-msgid "Mailinglijsten"
-msgstr "Mailinglijsten"
-
-#: module/Database/view/database/member/subscribe.phtml:336
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
 "mededelingen\n"
@@ -115,368 +51,297 @@ msgstr ""
 "Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze\n"
 "inschrijvingen kunnen op een later tijdstip gewijzigd worden."
 
-#: module/Database/view/database/member/subscribe.phtml:361
-msgid "Handtekening eenmalige SEPA-machtiging"
-msgstr "Handtekening eenmalige SEPA-machtiging"
-
-#: module/Database/view/database/member/subscribe.phtml:363
-msgid ""
-"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
-"nodig. Deze kan je hieronder in het vakje tekenen."
-msgstr ""
-"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
-"nodig. Deze kan je hieronder in het vakje tekenen."
-
-#: module/Database/view/database/member/subscribe.phtml:367
-msgid ""
-"Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een "
-"moderne browser, zoals Firefox."
-msgstr ""
-"Je internet browser ondersteunt geen digitale handtekeningen. Gebruik een "
-"moderne browser, zoals Firefox."
-
-#: module/Database/view/database/member/subscribe.phtml:369
-msgid "Verwijder handtekening"
-msgstr "Verwijder handtekening"
-
-#: module/Database/view/database/member/subscribe.phtml:390
-msgid "Akkoordverklaring"
-msgstr "Akkoordverklaring"
-
-#: module/Database/view/database/member/subscribe.phtml:392
-msgid "Statuten en HR"
-msgstr "Statuten en HR"
-
-#: module/Database/view/database/member/subscribe.phtml:403
-msgid ""
-"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
-"en\n"
-"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten "
-"en\n"
-"HR gelezen.\n"
-"\n"
-"Ik geef hierbij GEmeenschap Wiskunde en Informatica (GEWIS) toestemming tot "
-"het verwerken van mijn\n"
-"persoonsgegevens. Binnen twee jaar na afloop van mijn lidmaatschap worden "
-"mijn gegevens automatisch\n"
-"verwijderd, tenzij ik expliciete toestemming geef dit niet te doen."
-msgstr ""
-"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
-"en\n"
-"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de statuten "
-"en\n"
-"HR gelezen.\n"
-"\n"
-"Ik geef hierbij GEmeenschap Wiskunde en Informatica (GEWIS) toestemming tot "
-"het verwerken van mijn\n"
-"persoonsgegevens. Binnen twee jaar na afloop van mijn lidmaatschap worden "
-"mijn gegevens automatisch\n"
-"verwijderd, tenzij ik expliciete toestemming geef dit niet te doen."
-
-#: module/Database/view/database/member/subscribe.phtml:427
-#, fuzzy
-msgid ""
-"Ik geef hierbij GEmeenschap Wiskunde en Informatica\n"
-"(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar mijn "
-"bank\n"
-"om een bedrag van &euro;15,-, geheten vijftien euro, van mijn rekening af "
-"te\n"
-"schrijven en aan mijn bank om eenmalig een bedrag van mijn rekening af te\n"
-"schrijven overeenkomstig de opdracht van GEWIS."
-msgstr ""
-"Ik geef hierbij GEmeenschap Wiskunde en Informatica\n"
-"(GEWIS) toestemming om een eenmalig incasso-opdracht te sturen naar uw bank "
-"om\n"
-"een bedrag van &euro;15,-, geheten vijftien euro, van uw rekening af te "
-"schrijven en\n"
-"aan uw bank om eenmalig een bedrag van uw rekening af te schrijven\n"
-"overeenkomstig de opdracht van GEWIS."
-
-#: module/Database/view/database/member/subscribe.phtml:468
-#, fuzzy
-msgid "Voorletters"
-msgstr "Voorletter(s)"
-
-#: module/Database/view/database/member/subscribe.phtml:472
-#: module/Database/src/Database/Form/Member.php:58
-msgid "Voornaam"
-msgstr "Voornaam"
-
-#: module/Database/view/database/member/subscribe.phtml:476
-#: module/Database/src/Database/Form/Member.php:42
-msgid "Tussenvoegsels"
-msgstr "Tussenvoegsels"
-
-#: module/Database/view/database/member/subscribe.phtml:480
-#: module/Database/src/Database/Form/Member.php:34
-msgid "Achternaam"
-msgstr "Achternaam"
-
-#: module/Database/view/database/member/subscribe.phtml:484
-#: module/Database/src/Database/Form/Member.php:71
-msgid "Geslacht"
-msgstr "Geslacht"
-
-#: module/Database/view/database/member/subscribe.phtml:488
-#: module/Database/src/Database/Form/Member.php:67
-msgid "Man"
-msgstr "Man"
-
-#: module/Database/view/database/member/subscribe.phtml:491
-#: module/Database/src/Database/Form/Member.php:68
-msgid "Vrouw"
-msgstr "Vrouw"
-
-#: module/Database/view/database/member/subscribe.phtml:494
-#: module/Database/src/Database/Form/Member.php:69
-msgid "Anders"
-msgstr "Niet gespecificeerd"
-
-#: module/Database/view/database/member/subscribe.phtml:500
-#: module/Database/src/Database/Form/Member.php:79
-msgid "TU/e nummer"
-msgstr "TU/e nummer"
-
-#: module/Database/view/database/member/subscribe.phtml:504
-#: module/Database/src/Database/Form/Member.php:87
-msgid "Studie"
-msgstr "Studie"
-
-#: module/Database/view/database/member/subscribe.phtml:508
-#, fuzzy
-msgid "Email"
-msgstr "E-mailadres"
-
-#: module/Database/view/database/member/subscribe.phtml:512
-#: module/Database/src/Database/Form/Member.php:130
-msgid "Geboortedatum"
-msgstr "Geboortedatum"
-
-#: module/Database/view/database/member/subscribe.phtml:516
-msgid "Generatie"
-msgstr "Generatie"
-
-#: module/Database/view/database/member/subscribe.phtml:520
-#: module/Database/src/Database/Form/Member.php:144
-msgid "IBAN"
-msgstr "IBAN"
-
-#: module/Database/view/database/member/subscribe.phtml:524
-msgid "Betaald (hoe veel)"
-msgstr "Betaald (hoe veel)"
-
-#: module/Database/view/database/member/subscribe.phtml:528
-msgid "Type lid"
-msgstr "Type lid"
-
-#: module/Database/view/database/member/subscribe.phtml:532
-msgid "Gewoon"
-msgstr "Gewoon"
-
-#: module/Database/view/database/member/subscribe.phtml:535
-msgid "Verlengd"
-msgstr "Verlengd"
-
-#: module/Database/view/database/member/subscribe.phtml:538
-msgid "Extern"
-msgstr "Extern"
-
-#: module/Database/view/database/member/subscribe.phtml:541
-msgid "Buitengewoon"
-msgstr "Buitengewoon"
-
-#: module/Database/view/database/member/subscribe.phtml:544
-msgid "Erelid"
-msgstr "Erelid"
-
-#: module/Database/view/database/member/subscribe.phtml:550
-msgid "Laatste wijziging lidmaatshap"
-msgstr "Laatste wijziging lidmaatshap"
-
-#: module/Database/view/database/member/subscribe.phtml:554
-msgid "Verloopdatum lidmaatschap"
-msgstr "Verloopdatum lidmaatschap"
-
-#: module/Database/view/database/member/subscribe.phtml:560
-msgid "Adressen"
-msgstr "Adressen"
-
-#: module/Database/view/database/member/subscribe.phtml:567
-msgid "Thuisadres (ouders)"
-msgstr "Thuisadres (adres van je ouders)"
-
-#: module/Database/view/database/member/subscribe.phtml:570
-msgid "Kameradres"
-msgstr "Kameradres"
-
-#: module/Database/view/database/member/subscribe.phtml:573
-msgid "Postadres"
-msgstr "Postadres"
-
-#: module/Database/view/database/member/subscribe.phtml:583
-msgid "Straat en huisnummer"
-msgstr "Straat en huisnummer"
-
-#: module/Database/view/database/member/subscribe.phtml:587
-msgid "Woonplaats en Postcode"
-msgstr "Woonplaats en Postcode"
-
-#: module/Database/view/database/member/subscribe.phtml:591
-#: module/Database/src/Database/Form/Fieldset/Address.php:69
-msgid "Telefoonnummer"
-msgstr "Telefoonnummer"
-
-#: module/Database/view/database/member/subscribe.phtml:596
-msgid "Aangemelde mailing lists"
-msgstr "Aangemelde mailing lists"
-
-#: module/Database/view/database/member/subscribe.phtml:607
-msgid "Kenmerk van de machtiging"
-msgstr "Kenmerk van de machtiging"
-
-#: module/Database/view/database/member/subscribe.phtml:628
-msgid "Plaats en datum van ondertekening"
-msgstr "Plaats en datum van ondertekening"
-
-#: module/Database/view/database/member/subscribe.phtml:629
-msgid "Handtekening"
-msgstr "Handtekening"
-
-#: module/Application/view/error/index.phtml:1
 msgid "An error occurred"
 msgstr "An error occurred"
 
-#: module/Application/view/error/index.phtml:8
-#: module/Application/view/error/404.phtml:53
-msgid "Additional information"
-msgstr "Additional information"
+msgid "Betaald (hoe veel)"
+msgstr "Betaald (hoe veel)"
 
-#: module/Application/view/error/index.phtml:11
-#: module/Application/view/error/index.phtml:35
-#: module/Application/view/error/404.phtml:56
-#: module/Application/view/error/404.phtml:80
+msgid "Controller"
+msgstr "Controller"
+
+msgid ""
+"Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
+"Informatica Studenten (GEWIS)\n"
+"                toestemming om eenmalig een incasso-opdracht te sturen naar "
+"mijn bank om een bedrag van &euro;15,-, \n"
+"                geheten vijftien euro, van mijn rekening af te schrijven en "
+"(B) aan mijn bank om eenmalig een bedrag van \n"
+"                mijn rekening af te schrijven overeenkomstig de opdracht van "
+"GEWIS.\n"
+"                <br/>\n"
+"                Als u het niet eens bent met deze afschrijving kunt u deze "
+"laten terugboeken. Neem hiervoor binnen <b>acht\n"
+"                weken</b> na afschrijving contact op met uw bank. Vraag uw "
+"bank naar de voorwaarden."
+msgstr ""
+"Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
+"Informatica Studenten (GEWIS)\n"
+"                toestemming om eenmalig een incasso-opdracht te sturen naar "
+"mijn bank om een bedrag van &euro;15,-, \n"
+"                geheten vijftien euro, van mijn rekening af te schrijven en "
+"(B) aan mijn bank om eenmalig een bedrag van \n"
+"                mijn rekening af te schrijven overeenkomstig de opdracht van "
+"GEWIS.\n"
+"                <br/>\n"
+"                Als u het niet eens bent met deze afschrijving kunt u deze "
+"laten terugboeken. Neem hiervoor binnen <b>acht\n"
+"                weken</b> na afschrijving contact op met uw bank. Vraag uw "
+"bank naar de voorwaarden."
+
+msgid "Email"
+msgstr "E-mailadres"
+
+msgid "Email-adres"
+msgstr "E-mailadres"
+
+msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
+msgstr "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
+
+msgid "Erelid"
+msgstr "Erelid"
+
+msgid "Extern"
+msgstr "Extern"
+
 msgid "File"
 msgstr "File"
 
-#: module/Application/view/error/index.phtml:15
-#: module/Application/view/error/index.phtml:39
-#: module/Application/view/error/404.phtml:60
-#: module/Application/view/error/404.phtml:84
+msgid "Geboortedatum"
+msgstr "Geboortedatum"
+
+msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
+msgstr "Gefeliciteerd! Je bent geregistreerd als lid van GEWIS"
+
+msgid "Gewoon"
+msgstr "Gewoon"
+
+msgid "Handtekening"
+msgstr "Handtekening"
+
+msgid "Huisnummer"
+msgstr "Huisnummer"
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "If you have any questions feel free to contact"
+msgstr "Als je vragen hebt, neem gerust contact op met"
+
+#, php-format
+msgid ""
+"If you started after 2016, your username is an 8-digit number starting with "
+"the year you started at the TU/e, for example %s0001. You have received this "
+"in an email when you enrolled. Go to <a href=\"%s\">this</a> page if you "
+"need help finding it. Your username will be used to verify you are studying "
+"at the department of M&CS."
+msgstr ""
+"Studeerde je voor het eerst na 2016? Dan is je gebruikersnaam een getal van "
+"8 cijfers waarvan de eerste 4 het jaar zijn waarin je begon met studeren, "
+"bijvoorbeeld %s0001. Je hebt je gebruikersnaam ontvangen in een e-mail toen "
+"je je ingeschreven hebt aan de TU/e. Op <a href=\"%s\">deze</a> pagina staat "
+"hoe je je gebruikersnaam kunt vinden. We gebruiken je gebruikersnaam om te "
+"verifi�ren dat je studeert aan de faculteit W&I."
+
+msgid ""
+"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
+"en\n"
+"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de "
+"inhoud van de statuten\n"
+"en het HR.\n"
+"<br/>\n"
+"Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
+"toestemming tot het\n"
+"verwerken van mijn persoonsgegevens volgens haar privacybeleid."
+msgstr ""
+"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
+"en\n"
+"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de "
+"inhoud van de statuten\n"
+"en het HR.\n"
+"<br/>\n"
+"Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
+"toestemming tot het\n"
+"verwerken van mijn persoonsgegevens volgens haar privacybeleid."
+
+msgid "Incassant-ID"
+msgstr "Incassant-ID"
+
+msgid "Inschrijving"
+msgstr "Inschrijving"
+
+msgid "Je TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX."
+msgstr "Je TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX."
+
+msgid ""
+"Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
+"moderne browser, zoals Firefox."
+msgstr ""
+"Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
+"moderne browser, zoals Firefox."
+
+msgid "Je moet de voorwaarden accepteren!"
+msgstr "Je moet de voorwaarden accepteren!"
+
+msgid "Kameradres"
+msgstr "Kameradres"
+
+msgid "Kenmerk van de machtiging"
+msgstr "Kenmerk van de machtiging"
+
+msgid "Laatste wijziging lidmaatshap"
+msgstr "Laatste wijziging lidmaatshap"
+
+msgid "Land"
+msgstr "Land"
+
+msgid "Mailinglijsten"
+msgstr "Mailinglijsten"
+
 msgid "Message"
 msgstr "Message"
 
-#: module/Application/view/error/index.phtml:19
-#: module/Application/view/error/index.phtml:43
-#: module/Application/view/error/404.phtml:64
-#: module/Application/view/error/404.phtml:88
-msgid "Stack trace"
-msgstr "Stack trace"
+msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
+msgstr "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
 
-#: module/Application/view/error/index.phtml:29
-#: module/Application/view/error/404.phtml:74
-msgid "Previous exceptions"
-msgstr "Previous exceptions"
+msgid "Naam"
+msgstr "Naam"
 
-#: module/Application/view/error/index.phtml:58
-#: module/Application/view/error/404.phtml:103
 msgid "No Exception available"
 msgstr "No Exception available"
 
-#: module/Application/view/error/404.phtml:1
-msgid "A 404 error occurred"
-msgstr "A 404 error occurred"
+msgid "Onbekend"
+msgstr "Onbekend"
 
-#: module/Application/view/error/404.phtml:10
-msgid "The requested controller was unable to dispatch the request."
-msgstr "The requested controller was unable to dispatch the request."
+msgid "Plaats"
+msgstr "Plaats"
 
-#: module/Application/view/error/404.phtml:13
+msgid "Plaats en datum van ondertekening"
+msgstr "Plaats en datum van ondertekening"
+
+msgid "Plaats van ondertekening"
+msgstr "Plaats van ondertekening"
+
+msgid "Postadres"
+msgstr "Postadres"
+
+msgid "Postcode"
+msgstr "Postcode"
+
+msgid "Previous exceptions"
+msgstr "Previous exceptions"
+
+msgid "SEPA Direct Debit"
+msgstr "SEPA-incasso"
+
+msgid "SEPA-machtiging"
+msgstr "SEPA-machtiging"
+
+msgid "Schrijf in"
+msgstr "Schrijf in"
+
+msgid "Selecteer een studie"
+msgstr "Selecteer een studie"
+
+msgid "Stack trace"
+msgstr "Stack trace"
+
+msgid "Stad"
+msgstr "Stad"
+
+msgid "Statuten, HR en privacybeleid"
+msgstr "Statuten, HR en privacybeleid"
+
+msgid "Straat"
+msgstr "Straat"
+
+msgid "Straat en huisnummer"
+msgstr "Straat en huisnummer"
+
+msgid "Studie"
+msgstr "Studie"
+
+msgid "TU/e-gebruikersnaam"
+msgstr "TU/e-gebruikersnaam"
+
+msgid "Telefoonnummer"
+msgstr "Telefoonnummer"
+
+msgid "The requested URL could not be matched by routing."
+msgstr "The requested URL could not be matched by routing."
+
 msgid ""
 "The requested controller could not be mapped to an existing controller class."
 msgstr ""
 "The requested controller could not be mapped to an existing controller class."
 
-#: module/Application/view/error/404.phtml:16
 msgid "The requested controller was not dispatchable."
 msgstr "The requested controller was not dispatchable."
 
-#: module/Application/view/error/404.phtml:19
-msgid "The requested URL could not be matched by routing."
-msgstr "The requested URL could not be matched by routing."
+msgid "The requested controller was unable to dispatch the request."
+msgstr "The requested controller was unable to dispatch the request."
 
-#: module/Application/view/error/404.phtml:22
-msgid "We cannot determine at this time why a 404 was generated."
-msgstr "We cannot determine at this time why a 404 was generated."
+msgid "Thuisadres (ouders)"
+msgstr "Thuisadres (adres van je ouders)"
 
-#: module/Application/view/error/404.phtml:34
-msgid "Controller"
-msgstr "Controller"
+msgid "Tussenvoegsels"
+msgstr "Tussenvoegsels"
 
-#: module/Application/view/error/404.phtml:41
-#, php-format
-msgid "resolves to %s"
-msgstr "resolves to %s"
+msgid "Verwijder handtekening"
+msgstr "Verwijder handtekening"
 
-#: module/Database/src/Database/Form/Member.php:50
+msgid ""
+"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
+"nodig. Deze kan je hieronder in het vakje tekenen."
+msgstr ""
+"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
+"nodig. Deze kan je hieronder in het vakje tekenen."
+
 msgid "Voorletter(s)"
 msgstr "Voorletter(s)"
 
-#: module/Database/src/Database/Form/Member.php:114
-msgid "Selecteer een studie"
-msgstr "Selecteer een studie"
+msgid "Voorletters"
+msgstr "Voorletters"
 
-#: module/Database/src/Database/Form/Member.php:122
-msgid "Email-adres"
-msgstr "E-mailadres"
+msgid "Voornaam"
+msgstr "Voornaam"
 
-#: module/Database/src/Database/Form/Member.php:157
-msgid "Plaats van ondertekening"
-msgstr "Plaats van ondertekening"
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr "We cannot determine at this time why a 404 was generated."
 
-#: module/Database/src/Database/Form/Member.php:175
-msgid "Schrijf in"
-msgstr "Schrijf in"
+msgid ""
+"Welkom! Met dit formulier kun je je inschrijven voor een\n"
+"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
+"kost\n"
+"eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging\n"
+"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
+msgstr ""
+"Welkom! Met dit formulier kun je je inschrijven voor een\n"
+"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
+"kost\n"
+"eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging\n"
+"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
 
-#: module/Database/src/Database/Form/Member.php:286
-msgid "Je moet de voorwaarden accepteren!"
-msgstr "Je moet de voorwaarden accepteren!"
+msgid "Woonplaats en Postcode"
+msgstr "Woonplaats en Postcode"
 
-#: module/Database/src/Database/Form/Fieldset/Address.php:37
-msgid "Straat"
-msgstr "Straat"
+#, php-format
+msgid ""
+"You can pay for your GEWIS membership using a SEPA direct debit.\n"
+"This means that GEWIS will debit &euro;15,- from your bank account. You only "
+"have to pay once for\n"
+"the entire duration of your studies. Only bank accounts in euros are "
+"supported for this payment method.\n"
+"Contact %s for any questions about your payment."
+msgstr ""
+"Je kunt de contributie voor je GEWIS-lidmaatschap betalen middels een "
+"automatische incasso (SEPA-incasso)\n"
+"DIt betekent dat GEWIS je bank vraagt &euro;15,- van je rekening te "
+"debiteren. Je betaalt een keer voor de gehele\n"
+"duur van je studie. Je kunt alleen bankrekeningen in euros gebruiken voor "
+"een SEPA-incasso. Bij vragen kun je\n"
+"contact opnemen met %s."
 
-#: module/Database/src/Database/Form/Fieldset/Address.php:45
-msgid "Huisnummer"
-msgstr "Huisnummer"
-
-#: module/Database/src/Database/Form/Fieldset/Address.php:61
-msgid "Stad"
-msgstr "Stad"
-
-#~ msgid "Inschrijving Studievereniging"
-#~ msgstr "Inschrijving Studievereniging"
-
-#~ msgid "Lidnummer"
-#~ msgstr "Lidnummer"
-
-#~ msgid "Ik heb geen kamer"
-#~ msgstr "Ik heb geen kamer"
-
-#~ msgid "Studieadres (adres kamer)"
-#~ msgstr "Studieadres (adres kamer)"
-
-#~ msgid ""
-#~ "Ik verklaar hierbij het formulier geheel naar waarheid te hebben "
-#~ "ingevuld, en\n"
-#~ "ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de "
-#~ "statuten en\n"
-#~ "HR gelezen."
-#~ msgstr ""
-#~ "Ik verklaar hierbij het formulier geheel naar waarheid te hebben "
-#~ "ingevuld, en\n"
-#~ "ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik heb de "
-#~ "statuten en\n"
-#~ "HR gelezen."
-
-#~ msgid "Lid met lidnummer %1$s is toegevoegd."
-#~ msgstr "Lid met lidnummer %1$s is toegevoegd."
+#, php-format
+msgid "resolves to %s"
+msgstr "resolves to %s"

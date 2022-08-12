@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes build buildprod builddev login push pushprod pushdev update all prod dev
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev login push pushprod pushdev update all prod dev
 
 help:
 		@echo "Makefile commands:"
@@ -13,6 +13,7 @@ help:
 		@echo "phpcsfix"
 		@echo "phpcsfixtypes"
 		@echo "replenish"
+		@echo "compilelang"
 		@echo "build"
 		@echo "buildprod"
 		@echo "builddev"
@@ -59,6 +60,7 @@ getvendordir:
 
 replenish:
 		@docker cp ./public "$(shell docker-compose ps -q web)":/code
+		@docker cp ./module "$(shell docker-compose ps -q web)":/code
 		@docker-compose exec web chown -R www-data:www-data /code/public
 		@docker cp ./data "$(shell docker-compose ps -q web)":/code
 		@docker-compose exec web chown -R www-data:www-data /code/data
@@ -66,6 +68,10 @@ replenish:
 		@docker-compose exec web php composer.phar dump-autoload --dev
 		@docker-compose exec web ./orm orm:generate-proxies
 		@docker-compose exec web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:generate-proxies"
+
+compilelang:
+		msgfmt module/Application/language/en.po -o module/Application/language/en -c --strict -v
+		msgfmt module/Application/language/nl.po -o module/Application/language/nl -c --strict -v
 
 update: updatecomposer updatedocker
 
