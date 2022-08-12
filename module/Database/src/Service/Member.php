@@ -327,17 +327,18 @@ class Member
      */
     public function getMember(int $id): array
     {
-        try {
-            return [
-                'member' => $this->getMemberMapper()->find($id),
-                'simple' => false,
-            ];
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return [
-                'member' => $this->getMemberMapper()->findSimple($id),
-                'simple' => true,
-            ];
+        $member = $this->getMemberMapper()->find($id);
+        $simple = false;
+
+        if (null === $member) {
+            $member = $this->getMemberMapper()->findSimple($id);
+            $simple = true;
         }
+
+        return [
+            'member' => $member,
+            'simple' => $simple,
+        ];
     }
 
     /**
