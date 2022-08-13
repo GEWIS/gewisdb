@@ -320,7 +320,7 @@ class Member extends Form implements InputFilterProviderInterface
                 ],
             ],
             'tueUsername' => [
-                'required' => false,
+                'required' => true,
                 'validators' => [
                     [
                         'name' => Regex::class,
@@ -328,7 +328,7 @@ class Member extends Form implements InputFilterProviderInterface
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => [
                                 'regexNotMatch' => $this->translator->translate(
-                                    'Je TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.',
+                                    'Je TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx.',
                                 ),
                             ],
                         ],
