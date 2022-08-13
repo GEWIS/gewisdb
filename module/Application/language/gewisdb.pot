@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 094ad14-dirty\n"
+"Project-Id-Version: GEWISdb 984acfc-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-11 23:30+0200\n"
+"POT-Creation-Date: 2022-08-12 17:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -292,6 +292,9 @@ msgid "Plaats van ondertekening"
 msgstr ""
 
 msgid "Schrijf in"
+msgstr ""
+
+msgid "Weet je zeker dat je jonger bent dan 10 jaar?"
 msgstr ""
 
 msgid "Je moet de voorwaarden accepteren!"

@@ -4,13 +4,15 @@ namespace Database\Form;
 
 use Application\Model\Enums\AddressTypes;
 use Database\Form\Fieldset\Address as AddressFieldset;
+use DateInterval;
+use DateTime;
+use Exception;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\{
     Checkbox,
     Date,
     Email,
     Hidden,
-    Radio,
     Select,
     Submit,
     Text,
@@ -20,6 +22,7 @@ use Laminas\I18n\Filter\Alnum;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Validator\{
+    Callback,
     Iban,
     Identical,
     Regex,
@@ -262,6 +265,24 @@ class Member extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
+            'birth' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => Callback::class,
+                        'options' => [
+                            'callback' => function ($value) {
+                                return $this->isOldEnough($value);
+                            },
+                            'messages' => [
+                                Callback::INVALID_VALUE => $this->translator->translate(
+                                    'Weet je zeker dat je jonger bent dan 10 jaar?',
+                                ),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'iban' => [
                 'required' => false,
                 'validators' => [
@@ -318,5 +339,16 @@ class Member extends Form implements InputFilterProviderInterface
                 ],
             ],
         ];
+    }
+
+    private function isOldEnough(string $value): bool
+    {
+        try {
+            $longTimeAgo = (new DateTime('now'))->sub(new DateInterval('P10Y'));
+
+            return (new DateTime($value)) < $longTimeAgo;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }
