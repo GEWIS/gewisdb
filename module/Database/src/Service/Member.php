@@ -356,7 +356,10 @@ class Member
             $tueData->setUser($member->getTueUsername());
 
             if (!$tueData->isValid()) {
-                $tueStatus[] = ["info", "No data was returned"];
+                $tueStatus[] = [
+                    'info',
+                    'No data was returned.',
+                ];
             } else {
                 $similar = $tueData->compareData(
                     firstName: $member->getFirstName(),
@@ -369,12 +372,12 @@ class Member
                     // phpcs:ignore -- user-visible strings should not be split
                     $tueStatus[] = [
                         'danger',
-                        '<b>Warning:</b> Data is not likely to be similar. Requires $similar edits. Please check if the TU/e data matches the data entered by the member before approving membership',
+                        '<b>Warning:</b> Data is not likely to be similar. Requires ' . $similar . ' edits. Please check if the TU/e data matches the data entered by the member before approving membership.',
                     ];
                 } elseif ($similar > 0) {
                     $tueStatus[] = [
                         'info',
-                        '<b>Info:</b> $similar edits needed to correct name. Data likely correct',
+                        '<b>Info:</b> ' . $similar . ' edits needed to correct name. Data likely correct.',
                     ];
                 }
 
@@ -382,7 +385,7 @@ class Member
                     // phpcs:ignore -- user-visible strings should not be split
                     $tueStatus[] = [
                         'success',
-                        '<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>',
+                        '<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>.',
                     ];
                 } else {
                     $tueStatus[] = [
