@@ -8,6 +8,7 @@ use Laminas\Form\Element\{
     Hidden,
     Text,
 };
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
@@ -88,6 +89,9 @@ class Address extends Fieldset implements InputFilterProviderInterface
         return [
             'type' => [
                 'required' => true,
+                'filters' => [
+                    ['name' => StringTrim::class],
+                ],
                 'validators' => [
                     [
                         'name' => InArray::class,
@@ -101,6 +105,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'filters' => [
                     ['name' => StringToLower::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
                     [
@@ -114,6 +119,9 @@ class Address extends Fieldset implements InputFilterProviderInterface
             ],
             'street' => [
                 'required' => true,
+                'filters' => [
+                    ['name' => StringTrim::class],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -126,17 +134,23 @@ class Address extends Fieldset implements InputFilterProviderInterface
             ],
             'number' => [
                 'required' => true,
+                'filters' => [
+                    ['name' => StringTrim::class],
+                ],
                 'validators' => [
                     [
                         'name' => Regex::class,
                         'options' => [
-                            'pattern' => '/^[0-9]+[a-zA-Z]*/',
+                            'pattern' => '/^[0-9]+[a-z-A-Z\ \d\#\-\.\/]*$/',
                         ],
                     ],
                 ],
             ],
             'postalCode' => [
                 'required' => true,
+                'filters' => [
+                    ['name' => StringTrim::class],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -149,6 +163,9 @@ class Address extends Fieldset implements InputFilterProviderInterface
             ],
             'city' => [
                 'required' => true,
+                'filters' => [
+                    ['name' => StringTrim::class],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
