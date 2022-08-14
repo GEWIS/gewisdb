@@ -1,4 +1,8 @@
-<?php echo $this->doctype(); ?>
+<?php
+$lang = $this->plugin('translate')->getTranslator()->getLocale();
+
+echo $this->doctype();
+?>
 
 <html lang="en">
     <head>
@@ -40,73 +44,107 @@ $(document).ready(function() {
     </head>
     <body>
 <?php if (!$this->isModuleActive(['database', 'member', 'subscribe'])): ?>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>">GEWIS Database</a>
+                <div class="navbar-header navbar-left pull-left">
+                    <a href="/" class="navbar-brand">
+                        <div class="gi gewis-base"></div>
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <?php if ($this->identity() !== null): ?>
-                    <ul class="nav navbar-nav">
-                        <li class="<?= $this->isModuleActive(['database', 'meeting']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('meeting') ?>">Vergaderingen en Besluiten</a>
-                        </li>
-                        <li class="<?= $this->isModuleActive(['database', 'organ']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('organ') ?>">Organen</a>
-                        </li>
-                        <li class="<?= $this->isModuleActive(['database', 'prospectivemember']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('prospective-member') ?>">Aankomende Leden</a>
-                        </li>
-                        <li class="<?= $this->isModuleActive(['database', 'member']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('member') ?>">Leden</a>
-                        </li>
-                        <li class="<?= $this->isModuleActive(['database', 'export']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('export') ?>">Besluitenlijst</a>
-                        </li>
-                        <li class="<?= $this->isModuleActive(['database', 'address']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('address') ?>">Adressenlijst</a>
-                        </li>
-                        <li class="<?= $this->isModuleActive(['database', 'query']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('query') ?>">Query</a>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="<?= $this->isModuleActive(['database', 'settings']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('settings') ?>">Settings</a>
-                        </li>
-                        <li class="<?= $this->isModuleActive(['user', 'user']) ? 'active' : '' ?>">
-                            <a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">Uitloggen</a>
-                        </li>
-                    </ul>
-                    <?php endif ?>
-                </div><!--/.nav-collapse -->
+                    <?php if (null !== $this->identity()): ?>
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="<?= $this->isModuleActive(['database', 'meeting']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('meeting') ?>">Vergaderingen en Besluiten</a>
+                            </li>
+                            <li class="<?= $this->isModuleActive(['database', 'organ']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('organ') ?>">Organen</a>
+                            </li>
+                            <li class="<?= $this->isModuleActive(['database', 'prospectivemember']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('prospective-member') ?>">Aankomende Leden</a>
+                            </li>
+                            <li class="<?= $this->isModuleActive(['database', 'member']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('member') ?>">Leden</a>
+                            </li>
+                            <li class="<?= $this->isModuleActive(['database', 'export']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('export') ?>">Besluitenlijst</a>
+                            </li>
+                            <li class="<?= $this->isModuleActive(['database', 'address']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('address') ?>">Adressenlijst</a>
+                            </li>
+                            <li class="<?= $this->isModuleActive(['database', 'query']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('query') ?>">Query</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="<?= $this->isModuleActive(['database', 'settings']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('settings') ?>">Settings</a>
+                            </li>
+                            <li class="<?= $this->isModuleActive(['user', 'user']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">Uitloggen</a>
+                            </li>
+                        </ul>
+                    <?php else: ?>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="<?= $this->url('user') ?>">Login</a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
+                </div>
             </div>
         </nav>
 <?php else: ?>
-        <nav class="navbar navbar-default" style="margin-top: -60px; border-radius: 0px; border-width: 0 0 1px;" role="navigation">
+        <nav role="navigation" class="navbar navbar-gewis navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                <div class="navbar-header navbar-left pull-left">
+                    <a href="/" class="navbar-brand">
+                        <span class="gi gewis-base"></span>
+                    </a>
+                </div>
+                <div class="navbar-header navbar-right pull-right">
+                    <ul class="nav navbar-nav pull-left no-collapse">
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">
+                                <span class="glyphicon glyphicon-globe"></span>
+                                <span class="sr-only"><?= $this->translate('Taalinstellingen') ?></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu language <?= ($lang == 'en') ? 'reverse' : '' ?> ">
+                                <li>
+                                    <a class="<?= ('en' === $lang) ? 'disabled' : '' ?>" href="<?= $this->url(
+                                        'lang',
+                                        ['lang' => 'en'],
+                                    ) ?>">
+                                        <span class="flag-icon flag-icon-en"
+                                              style="background-image: url('<?= $this->basePath() ?>/img/en.svg');">
+                                        </span>English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="<?= ('nl' === $lang) ? 'disabled' : '' ?>" href="<?= $this->url(
+                                        'lang',
+                                        ['lang' => 'nl'],
+                                    ) ?>">
+                                        <span class="flag-icon flag-icon-nl"
+                                              style="background-image: url('<?= $this->basePath() ?>/img/nl.svg');">
+                                        </span>Nederlands
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="<?= $this->url('lang', array(
-                            'lang' => 'nl'
-                        )) ?>"><img src="<?= $this->basePath() ?>/img/nl.png" style="height: 18px"/></a></li>
-                        <li><a href="<?= $this->url('lang', array(
-                            'lang' => 'en'
-                        )) ?>"><img src="<?= $this->basePath() ?>/img/en.png" style="height: 18px"/></a></li>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active">
+                            <a href="#" role="button" class="hidden-sm hidden-xs">
+                                <?= $this->translate('Inschrijven') ?>
+                            </a>
+                        </li>
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div>
             </div>
         </nav>
 <?php endif ?>

@@ -17,7 +17,6 @@ $form->setAttribute('action', $this->url('member/default', array('action' => 'su
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
-$form->setAttribute('class', 'form-horizontal');
 $form->setAttribute('id', 'form-subscribe');
 ?>
 <?= $this->form()->openTag($form) ?>
@@ -61,378 +60,410 @@ verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') ?>
 </div>
 <?php endif ?>
 
-<?php
-$element = $form->get('lastName');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <h3><?= $this->translate('Persoonlijke informatie') ?></h3>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('middleName');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
+    <div class="row">
+        <div class="col-md-2">
+            <?php
+            $element = $form->get('initials');
+            $element->setAttribute('class', 'form-control validate-initials');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php
+            $element = $form->get('firstName');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <?php
+            $element = $form->get('middleName');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php
+            $element = $form->get('lastName');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('initials');
-$element->setAttribute('class', 'form-control validate-initials');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
+    <div class="row">
+        <div class="col-md-8">
+            <?php
+            $element = $form->get('email');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php
+            $element = $form->get('birth');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('firstName');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3><?= $this->translate('Studie') ?></h3>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('tueUsername');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <p><?= sprintf($this->translate('If you started after 2016, your username is an 8-digit number starting with the year you started at the TU/e, for example %s0001. You have received this in an email when you enrolled. Go to <a href="%s">this</a> page if you need help finding it. Your username will be used to verify you are studying at the department of M&CS.'), date('Y'), "https://wiki.gewis.nl/link/495") ?></p>
-        <?= $this->formElementErrors($element) ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?php
+            $element = $form->get('tueUsername');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+                <p><?= sprintf($this->translate('If you started after 2016, your username is an 8-digit number starting with the year you started at the TU/e, for example %s0001. You have received this in an email when you enrolled. Go to <a href="%s">this</a> page if you need help finding it. Your username will be used to verify you are studying at the department of M&CS.'), date('Y'), "https://wiki.gewis.nl/link/495") ?></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <?php
+            $element = $form->get('study');
+            $element->setAttribute('class', 'form-control');
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formSelect($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('study');
-$element->setAttribute('class', 'form-control');
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formSelect($element) ?>
-        <?= $this->formElementErrors($element) ?>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3><?= $this->translate('Adres') ?></h3>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('email');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $form->get('birth');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<fieldset class="study-address in">
-<h3><?= $this->translate('Adres') ?></h3>
-<?php
-$fs = $form->getFieldsets()['address'];
-?>
-<?= $this->formHidden($fs->get('type')) ?>
-
-<?php
-$element = $fs->get('country');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('street');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('number');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('postalCode');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('city');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label label-required'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $fs->get('phone');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-</fieldset>
-
-<h3><?= $this->translate('Mailinglijsten') ?></h3>
-<p>
-<?= $this->translate('Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor mededelingen
+    <fieldset class="study-address in">
+        <?php
+        $fs = $form->getFieldsets()['address'];
+        ?>
+        <?= $this->formHidden($fs->get('type')) ?>
+        <div class="row">
+            <div class="col-md-8">
+                <?php
+                $element = $fs->get('street');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label label-required'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <?php
+                $element = $fs->get('number');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label label-required'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <?php
+                $element = $fs->get('postalCode');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label label-required'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <?php
+                $element = $fs->get('city');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label label-required'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                $element = $fs->get('country');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label label-required'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                $element = $fs->get('phone');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3><?= $this->translate('Mailinglijsten') ?></h3>
+            <p>
+                <?= $this->translate('Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor mededelingen
 en activiteiten van de studievereniging. Daarnaast zijn er verschillende
 optionele mailinglijsten.
 Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze
 inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
-</p>
-
-<?php foreach ($form->getLists() as $list): ?>
-<div class="form-group">
-    <?php
-    $element = $form->get('list-' . $list->getName());
-    $element->setAttribute('placeholder', $element->getLabel());
-    ?>
-    <div class="col-sm-offset-1 col-sm-8">
-        <div class="checkbox">
-            <label>
-                <?= $this->formCheckbox($element) ?>
-                <?= $element->getLabel() ?>
-            </label>
-            <?= $this->formElementErrors($element) ?>
+            </p>
         </div>
     </div>
-</div>
-<?php endforeach ?>
-
-<h3><?= $this->translate('Akkoordverklaring') ?></h3>
-
-<a target="_blank" href="https://gewis.nl/vereniging/statuten/"><?= $this->translate('Statuten, HR en privacybeleid') ?></a>
-
-<?php
-$element = $form->get('agreed');
-$element->setAttribute('placeholder', $element->getLabel());
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <div class="col-sm-offset-1 col-sm-8">
-        <div class="checkbox">
-            <label>
-                <?= $this->formCheckbox($element) ?>
-<?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
+    <div class="row">
+        <?php foreach ($form->getLists() as $list): ?>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <?php
+                    $element = $form->get('list-' . $list->getName());
+                    $element->setAttribute('placeholder', $element->getLabel());
+                    ?>
+                    <div class="checkbox">
+                        <label><?= $this->formCheckbox($element) ?> <?= $element->getLabel() ?></label>
+                        <?= $this->formElementErrors($element) ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach ?>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3><?= $this->translate('Akkoordverklaring') ?></h3>
+            <a target="_blank" href="https://gewis.nl/vereniging/statuten/">
+                <?= $this->translate('Statuten, HR en privacybeleid') ?>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $element = $form->get('agreed');
+            $element->setAttribute('placeholder', $element->getLabel());
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
 ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de inhoud van de statuten
 en het HR.
 <br/>
 Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) toestemming tot het
 verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
-                <?= $element->getLabel() ?>
-            </label>
-            <?= $this->formElementErrors($element) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-<h3><?= $this->translate('SEPA Direct Debit') ?></h3>
-<p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3><?= $this->translate('SEPA Direct Debit') ?></h3>
+            <p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
 This means that GEWIS will debit &euro;15,- from your bank account. You only have to pay once for
 the entire duration of your studies. Only bank accounts in euros are supported for this payment method.
 Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
-
-<?php
-$element = $form->get('iban');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setAttribute('id', 'iban-input');
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
+        </div>
     </div>
-</div>
-
-<p>
-<?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
-</p>
-<div class="form-group" id="signature-form-group">
-    <div class="col-sm-12">
-        <canvas id="signature-canvas"><?= $this->translate('Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
-        <br>
-        <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
-        <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $element = $form->get('iban');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setAttribute('id', 'iban-input');
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('signatureLocation');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <?= $this->formElementErrors($element) ?>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
+            </p>
+            <div class="form-group" id="signature-form-group">
+                <canvas id="signature-canvas"><?= $this->translate('Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
+                <br>
+                <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
+                <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <?php
+            $element = $form->get('signatureLocation');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
     </div>
-</div>
-
-<?php
-$element = $form->get('agreediban');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setAttribute('id', 'iban-agreement');
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <div class="col-sm-offset-1 col-sm-8">
-        <div class="checkbox">
-            <label>
-                <?= $this->formCheckbox($element) ?>
-                <?= $this->translate('Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
-        toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een bedrag van &euro;15,-,
-        geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn bank om eenmalig een bedrag van
-        mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.
-        <br/>
-        Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
-        weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.') ?>
-                <?= $element->getLabel() ?>
-            </label>
-            <?= $this->formElementErrors($element) ?>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $element = $form->get('agreediban');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setAttribute('id', 'iban-agreement');
+            ?>
+            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $this->translate('Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
+toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een bedrag van &euro;15,-,
+geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn bank om eenmalig een bedrag van
+mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.
+<br/>
+Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
+weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.') ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <?php
+            $submit = $form->get('submit');
+            $submit->setLabel($submit->getValue());
+            $submit->setAttribute('class', 'btn btn-primary');
+            $submit->setAttribute('id', 'subscription-submit');
+            ?>
+            <div class="form-group">
+                <?= $this->formButton($submit) ?>
+            </div>
         </div>
     </div>
 </div>
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <?php
-        $submit = $form->get('submit');
-        $submit->setLabel($submit->getValue());
-        $submit->setAttribute('class', 'btn btn-primary');
-        $submit->setAttribute('id', 'subscription-submit');
-        ?>
-        <?= $this->formButton($submit) ?>
-    </div>
-</div>
-
 <?= $this->form()->closeTag() ?>
 </div>
 

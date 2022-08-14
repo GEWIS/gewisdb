@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 1b40a38-dirty\n"
+"Project-Id-Version: GEWISdb da27068-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-13 21:09+0200\n"
+"POT-Creation-Date: 2022-08-14 21:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,6 +64,12 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
+msgid "Taalinstellingen"
+msgstr ""
+
+msgid "Inschrijven"
+msgstr ""
+
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr ""
 
@@ -106,6 +112,12 @@ msgid "If you have any questions feel free to contact"
 msgstr ""
 
 msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
+msgstr ""
+
+msgid "Persoonlijke informatie"
+msgstr ""
+
+msgid "Studie"
 msgstr ""
 
 #, php-format
@@ -161,22 +173,6 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
-"Informatica Studenten (GEWIS)\n"
-"                toestemming om eenmalig een incasso-opdracht te sturen naar "
-"mijn bank om een bedrag van &euro;15,-, \n"
-"                geheten vijftien euro, van mijn rekening af te schrijven en "
-"(B) aan mijn bank om eenmalig een bedrag van \n"
-"                mijn rekening af te schrijven overeenkomstig de opdracht van "
-"GEWIS.\n"
-"                <br/>\n"
-"                Als u het niet eens bent met deze afschrijving kunt u deze "
-"laten terugboeken. Neem hiervoor binnen <b>acht\n"
-"                weken</b> na afschrijving contact op met uw bank. Vraag uw "
-"bank naar de voorwaarden."
-msgstr ""
-
-msgid ""
 "Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
 "nodig. Deze kan je hieronder in het vakje tekenen."
 msgstr ""
@@ -187,6 +183,21 @@ msgid ""
 msgstr ""
 
 msgid "Verwijder handtekening"
+msgstr ""
+
+msgid ""
+"Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
+"Informatica Studenten (GEWIS)\n"
+"toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een "
+"bedrag van &euro;15,-,\n"
+"geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn "
+"bank om eenmalig een bedrag van\n"
+"mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.\n"
+"<br/>\n"
+"Als u het niet eens bent met deze afschrijving kunt u deze laten "
+"terugboeken. Neem hiervoor binnen <b>acht\n"
+"weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de "
+"voorwaarden."
 msgstr ""
 
 msgid "Voorletters"
@@ -205,9 +216,6 @@ msgid "TU/e-gebruikersnaam"
 msgstr ""
 
 msgid "Onbekend"
-msgstr ""
-
-msgid "Studie"
 msgstr ""
 
 msgid "Email"
