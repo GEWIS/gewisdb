@@ -66,7 +66,7 @@ $element = $form->get('lastName');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -98,7 +98,7 @@ $element = $form->get('initials');
 $element->setAttribute('class', 'form-control validate-initials');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -114,7 +114,7 @@ $element = $form->get('firstName');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -130,7 +130,7 @@ $element = $form->get('tueUsername');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -146,7 +146,7 @@ $element->setLabelAttributes(array(
 $element = $form->get('study');
 $element->setAttribute('class', 'form-control');
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -162,7 +162,7 @@ $element = $form->get('email');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -178,7 +178,7 @@ $element = $form->get('birth');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -192,7 +192,7 @@ $element->setLabelAttributes(array(
 <fieldset class="study-address in">
 <h3><?= $this->translate('Adres') ?></h3>
 <?php
-$fs = $form->get('address');
+$fs = $form->getFieldsets()['address'];
 ?>
 <?= $this->formHidden($fs->get('type')) ?>
 
@@ -201,7 +201,7 @@ $element = $fs->get('country');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -217,7 +217,7 @@ $element = $fs->get('street');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -233,7 +233,7 @@ $element = $fs->get('number');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -249,7 +249,7 @@ $element = $fs->get('postalCode');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -265,7 +265,7 @@ $element = $fs->get('city');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
+    'class' => 'col-sm-2 control-label label-required'
 ));
 ?>
 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
@@ -347,55 +347,16 @@ verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
 </div>
 
 <h3><?= $this->translate('SEPA Direct Debit') ?></h3>
+<p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
+This means that GEWIS will debit &euro;15,- from your bank account. You only have to pay once for
+the entire duration of your studies. Only bank accounts in euros are supported for this payment method.
+Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
+
 <?php
 $element = $form->get('iban');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('placeholder', $element->getLabel());
 $element->setAttribute('id', 'iban-input');
-$element->setLabelAttributes(array(
-    'class' => 'col-sm-2 control-label'
-));
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <?= $this->formLabel($element) ?>
-    <div class="col-sm-10">
-        <?= $this->formInput($element) ?>
-        <p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
-This means that GEWIS will debit &euro;15,- from your bank account. You only have to pay once for
-the entire duration of your studies. Only bank accounts in euros are supported for this payment method.
-Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
-        <?= $this->formElementErrors($element) ?>
-    </div>
-</div>
-
-<?php
-$element = $form->get('agreediban');
-$element->setAttribute('placeholder', $element->getLabel());
-$element->setAttribute('id', 'iban-agreement');
-?>
-<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-    <div class="col-sm-offset-1 col-sm-8">
-        <div class="checkbox">
-            <label>
-                <?= $this->formCheckbox($element) ?>
-<?= $this->translate('Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
-                toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een bedrag van &euro;15,-, 
-                geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn bank om eenmalig een bedrag van 
-                mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.
-                <br/>
-                Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
-                weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.') ?>
-                <?= $element->getLabel() ?>
-            </label>
-            <?= $this->formElementErrors($element) ?>
-        </div>
-    </div>
-</div>
-
-<?php
-$element = $form->get('signatureLocation');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2 control-label'
 ));
@@ -417,6 +378,46 @@ $element->setLabelAttributes(array(
         <br>
         <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
         <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
+    </div>
+</div>
+
+<?php
+$element = $form->get('signatureLocation');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setLabelAttributes(array(
+    'class' => 'col-sm-2 control-label'
+));
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <?= $this->formLabel($element) ?>
+    <div class="col-sm-10">
+        <?= $this->formInput($element) ?>
+        <?= $this->formElementErrors($element) ?>
+    </div>
+</div>
+
+<?php
+$element = $form->get('agreediban');
+$element->setAttribute('placeholder', $element->getLabel());
+$element->setAttribute('id', 'iban-agreement');
+?>
+<div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <div class="col-sm-offset-1 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <?= $this->formCheckbox($element) ?>
+                <?= $this->translate('Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
+        toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een bedrag van &euro;15,-,
+        geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn bank om eenmalig een bedrag van
+        mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.
+        <br/>
+        Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
+        weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.') ?>
+                <?= $element->getLabel() ?>
+            </label>
+            <?= $this->formElementErrors($element) ?>
+        </div>
     </div>
 </div>
 
@@ -548,14 +549,14 @@ $element->setLabelAttributes(array(
         <td>
             <?php if($address->getCountry() === 'netherlands'): ?>
                 Door ondertekening van dit formulier geeft u (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
-                toestemming om eenmalig een incasso-opdracht te sturen naar uw bank om een bedrag van &euro;15,-, 
-                geheten vijftien euro, van uw rekening af te schrijven en (B) aan uw bank om eenmalig een bedrag van 
+                toestemming om eenmalig een incasso-opdracht te sturen naar uw bank om een bedrag van &euro;15,-,
+                geheten vijftien euro, van uw rekening af te schrijven en (B) aan uw bank om eenmalig een bedrag van
                 uw rekening af te schrijven overeenkomstig de opdracht van GEWIS.
                 <br/>
                 Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
                 weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.
             <?php else: ?>
-                By signing this mandate form, you (A) authorise Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) 
+                By signing this mandate form, you (A) authorise Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
                 to send instructions to your bank to debit your account with &euro;15,-, fifteen euros, and (B) your bank
                 to debit your account in accordance with the instructions from Gemeenschap van Wiskunde en Informatica Studenten (GEWIS).
                 <br/>

@@ -34,7 +34,7 @@ msgid "Afgestudeerde"
 msgstr "Graduate"
 
 msgid "Akkoordverklaring"
-msgstr "Signature"
+msgstr "Statement of agreement"
 
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "

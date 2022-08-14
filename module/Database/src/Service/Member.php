@@ -75,25 +75,6 @@ class Member
     {
         $form = $this->getMemberForm();
         $form->bind(new ProspectiveMemberModel());
-
-        if (
-            isset($data['address'])
-            && isset($data['address']['street'])
-            && !empty($data['address']['street'])
-        ) {
-            $form->setValidationGroup([
-                'lastName', 'middleName', 'initials', 'firstName',
-                'tueUsername', 'study', 'email', 'birth',
-                'address', 'agreed', 'iban', 'signature', 'signatureLocation',
-            ]);
-        } else {
-            $form->setValidationGroup([
-                'lastName', 'middleName', 'initials', 'firstName',
-                'tueUsername', 'study', 'email', 'birth',
-                'agreed', 'iban', 'signature', 'signatureLocation',
-            ]);
-        }
-
         $form->setData($data);
 
         if (!$form->isValid()) {

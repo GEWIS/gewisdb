@@ -19,6 +19,7 @@ use Laminas\Form\Element\{
 };
 use Laminas\Form\Form;
 use Laminas\I18n\Filter\Alnum;
+use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Validator\{
