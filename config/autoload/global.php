@@ -13,22 +13,9 @@
  */
 
 return [
-    // ...
-
     /**
-     * Email configuration.
+     * Settings for storing files.
      */
-    'email' => [
-        'transport' => 'File',
-        'options' => [
-            'path' => 'data/mail/',
-        ],
-        'from' => 'secr@gewis.nl',
-        'to' => [
-            'report_error' => 'databaseisstuk@gewis.nl',
-            'subscription' => 'secr@gewis.nl',
-        ],
-    ],
     'storage' => [
         'storage_dir' => 'public/data',
         'public_dir' => 'data',
