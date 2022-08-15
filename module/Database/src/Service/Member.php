@@ -376,7 +376,10 @@ class Member
                 }
             }
         } catch (LookupException $e) {
-            $tueStatus[] = $e->getMessage();
+            $tueStatus[] = [
+                'danger',
+                $e->getMessage(),
+            ];
         }
 
         return [

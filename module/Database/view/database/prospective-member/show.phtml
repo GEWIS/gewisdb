@@ -13,19 +13,12 @@ use Laminas\Form\Element\Checkbox;
             <th>Member entry</th>
             <th>TU/e data</th>
         </tr>
-        <tr>
-            <th>Lidnummer</th>
-            <td><?= $member->getLidnr() ?></td>
-            <?php if (!$tueData->isValid()): ?>
-                <td rowspan="11" style="background-color: lightgray;">No data returned</td>
-            <?php else: ?>
-                <td style="background-color: lightgray;"></td>
-            <?php endif; ?>
-        </tr>
         <tr class="<?= ($tueData->isValid() && $member->getInitials() === $tueData->getInitials()) ? 'datavalid' : 'datamismatch'?>">
             <th>Voorletters</th>
             <td><?= $member->getInitials() ?></td>
-            <?php if ($tueData->isValid()): ?>
+            <?php if (!$tueData->isValid()): ?>
+                <td rowspan="9" style="background-color: lightgray;">No data returned</td>
+            <?php else: ?>
                 <td><?= $tueData->getInitials() ?></td>
             <?php endif; ?>
         </tr>
@@ -82,11 +75,6 @@ use Laminas\Form\Element\Checkbox;
         <tr>
             <th>Geboortedatum</th>
             <td><?= $member->getBirth()->format('l j F Y') ?></td>
-            <?php if ($tueData->isValid()): ?><td style="background-color: lightgray;"></td><?php endif; ?>
-        </tr>
-        <tr>
-            <th>Betaald (hoe veel)</th>
-            <td><?= $member->getPaid() ?></td>
             <?php if ($tueData->isValid()): ?><td style="background-color: lightgray;"></td><?php endif; ?>
         </tr>
         <tr>
@@ -168,7 +156,7 @@ use Laminas\Form\Element\Checkbox;
     <?php
     $submit = $form->get('submit');
     $submit->setLabel('Keur lidmaatschap goed');
-    $submit->setAttribute('class', 'btn btn-primary');
+    $submit->setAttribute('class', 'btn btn-success');
     ?>
     <?= $this->formButton($submit) ?>
     <a href="<?= $this->url('prospective-member/show/delete', array(
