@@ -7,6 +7,7 @@ use Database\Form\Fieldset\Address as AddressFieldset;
 use DateInterval;
 use DateTime;
 use Exception;
+use Laminas\Filter\StringTrim;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\{
     Checkbox,
@@ -18,14 +19,13 @@ use Laminas\Form\Element\{
     Text,
 };
 use Laminas\Form\Form;
-use Laminas\I18n\Filter\Alnum;
-use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Validator\{
     Callback,
     Iban,
     Identical,
+    NotEmpty,
     Regex,
     StringLength,
 };
@@ -137,31 +137,33 @@ class Member extends Form implements InputFilterProviderInterface
         $student->get('type')->setValue(AddressTypes::Student->value);
         $this->add($student);
 
-        $this->add([
-            'name' => 'iban',
-            'type' => Text::class,
-            'options' => [
-                'label' => $translator->translate('IBAN'),
-            ],
-        ]);
+        if (DATABASE_REQUIRE_IBAN) {
+            $this->add([
+                'name' => 'iban',
+                'type' => Text::class,
+                'options' => [
+                    'label' => $translator->translate('IBAN'),
+                ],
+            ]);
 
-        $this->add([
-            'name' => 'signature',
-            'type' => Hidden::class,
-        ]);
+            $this->add([
+                'name' => 'signature',
+                'type' => Hidden::class,
+            ]);
 
-        $this->add([
-            'name' => 'signatureLocation',
-            'type' => Text::class,
-            'options' => [
-                'label' => $translator->translate('Plaats van ondertekening'),
-            ],
-        ]);
+            $this->add([
+                'name' => 'signatureLocation',
+                'type' => Text::class,
+                'options' => [
+                    'label' => $translator->translate('Plaats van ondertekening'),
+                ],
+            ]);
 
-        $this->add([
-            'name' => 'agreediban',
-            'type' => Checkbox::class,
-        ]);
+            $this->add([
+                'name' => 'agreediban',
+                'type' => Checkbox::class,
+            ]);
+        }
 
         $this->add([
             'name' => 'agreed',
@@ -217,7 +219,7 @@ class Member extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return [
+        $filter = [
             'lastName' => [
                 'required' => true,
                 'validators' => [
@@ -284,28 +286,6 @@ class Member extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
-            'iban' => [
-                'required' => false,
-                'validators' => [
-                    ['name' => Iban::class],
-                ],
-                'filters' => [
-                    ['name' => Alnum::class],
-                    ['name' => ToNull::class],
-                ],
-            ],
-            'signature' => [
-                'required' => false,
-                'filters' => [
-                    ['name' => ToNull::class],
-                ],
-            ],
-            'signatureLocation' => [
-                'required' => false,
-                'filters' => [
-                    ['name' => ToNull::class],
-                ],
-            ],
             'agreed' => [
                 'required' => true,
                 'validators' => [
@@ -314,7 +294,9 @@ class Member extends Form implements InputFilterProviderInterface
                         'options' => [
                             'token' => '1',
                             'messages' => [
-                                'notSame' => $this->translator->translate('Je moet de voorwaarden accepteren!'),
+                                Identical::NOT_SAME => $this->translator->translate(
+                                    'Je moet de voorwaarden accepteren!',
+                                ),
                             ],
                         ],
                     ],
@@ -328,7 +310,7 @@ class Member extends Form implements InputFilterProviderInterface
                         'options' => [
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => [
-                                'regexNotMatch' => $this->translator->translate(
+                                Regex::NOT_MATCH => $this->translator->translate(
                                     'Je TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx.',
                                 ),
                             ],
@@ -340,6 +322,57 @@ class Member extends Form implements InputFilterProviderInterface
                 ],
             ],
         ];
+
+        if (DATABASE_REQUIRE_IBAN) {
+            $filter += [
+                'iban' => [
+                    'required' => true,
+                    'validators' => [
+                        ['name' => Iban::class],
+                    ],
+                    'filters' => [
+                        ['name' => StringTrim::class],
+                    ],
+                ],
+                'signature' => [
+                    'required' => true,
+                    'validators' => [
+                        [
+                            'name' => NotEmpty::class,
+                            'options' => [
+                                'messages' => [
+                                    NotEmpty::IS_EMPTY => $this->translator->translate('Handtekening is vereist!'),
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'signatureLocation' => [
+                    'required' => true,
+                    'filters' => [
+                        ['name' => StringTrim::class],
+                    ],
+                ],
+                'agreediban' => [
+                    'required' => true,
+                    'validators' => [
+                        [
+                            'name' => Identical::class,
+                            'options' => [
+                                'token' => '1',
+                                'messages' => [
+                                    Identical::NOT_SAME => $this->translator->translate(
+                                        'Je moet de voorwaarden accepteren!',
+                                    ),
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ];
+        }
+
+        return $filter;
     }
 
     private function isOldEnough(string $value): bool

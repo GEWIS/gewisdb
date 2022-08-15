@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb da27068-dirty\n"
+"Project-Id-Version: GEWISdb ba22aa8-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-14 21:56+0200\n"
+"POT-Creation-Date: 2022-08-15 15:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,7 +86,11 @@ msgid ""
 "Welkom! Met dit formulier kun je je inschrijven voor een\n"
 "lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
 "kost\n"
-"eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging\n"
+"eenmalig 15 euro."
+msgstr ""
+
+msgid ""
+"Deze betaling zal middels een eenmalige SEPA-machtiging\n"
 "verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
 msgstr ""
 
@@ -141,24 +145,6 @@ msgid ""
 "inschrijvingen kunnen op een later tijdstip veranderd worden."
 msgstr ""
 
-msgid "Akkoordverklaring"
-msgstr ""
-
-msgid "Statuten, HR en privacybeleid"
-msgstr ""
-
-msgid ""
-"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
-"en\n"
-"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de "
-"inhoud van de statuten\n"
-"en het HR.\n"
-"<br/>\n"
-"Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
-"toestemming tot het\n"
-"verwerken van mijn persoonsgegevens volgens haar privacybeleid."
-msgstr ""
-
 msgid "SEPA Direct Debit"
 msgstr ""
 
@@ -200,6 +186,24 @@ msgid ""
 "voorwaarden."
 msgstr ""
 
+msgid "Akkoordverklaring"
+msgstr ""
+
+msgid "Statuten, HR en privacybeleid"
+msgstr ""
+
+msgid ""
+"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
+"en\n"
+"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de "
+"inhoud van de statuten\n"
+"en het HR.\n"
+"<br/>\n"
+"Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
+"toestemming tot het\n"
+"verwerken van mijn persoonsgegevens volgens haar privacybeleid."
+msgstr ""
+
 msgid "Voorletters"
 msgstr ""
 
@@ -225,12 +229,6 @@ msgid "Geboortedatum"
 msgstr ""
 
 msgid "IBAN"
-msgstr ""
-
-msgid "Betaald (hoe veel)"
-msgstr ""
-
-msgid "Laatste wijziging lidmaatshap"
 msgstr ""
 
 msgid "Adressen"
@@ -309,4 +307,7 @@ msgid "Je moet de voorwaarden accepteren!"
 msgstr ""
 
 msgid "Je TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
+msgstr ""
+
+msgid "Handtekening is vereist!"
 msgstr ""

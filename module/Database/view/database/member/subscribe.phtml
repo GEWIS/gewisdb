@@ -22,34 +22,44 @@ $form->setAttribute('id', 'form-subscribe');
 <?= $this->form()->openTag($form) ?>
 
 <div class="jumbotron">
-<div class="row">
-<div class="col-md-3">
-<img src="<?= $this->basePath() ?>/img/gewis.png" />
-</div>
-<div class="col-md-9">
-<h1><?= implode(' ',
-        array('<span class="gewis-red">GEWIS</span>',
-        $this->translate('Inschrijving'),
-        $this->translate('SEPA-machtiging'))) ?></h1>
-<p>
-<?= $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
+    <div class="row">
+        <div class="col-md-3">
+            <img src="<?= $this->basePath() ?>/img/gewis.png" />
+        </div>
+        <div class="col-md-9">
+            <h1>
+                <span class="gewis-red">GEWIS</span> <?= $this->translate('Inschrijving') ?>
+                <?php if (DATABASE_REQUIRE_IBAN): ?>
+                    <?= $this->translate('SEPA-machtiging') ?>
+                <?php endif; ?>
+            </h1>
+            <p>
+                <?= sprintf(
+                    '%s %s',
+                    $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
 lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost
-eenmalig 15 euro. Deze betaling zal middels een eenmalige SEPA-machtiging
-verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') ?>
-</p>
-<p>
-    <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
-</p>
-<p>
-<?= $this->translate('Naam') ?>: Gemeenschap van Wiskunde en Informatica Studenten<br>
-<?= $this->translate('Adres') ?>: Den Dolech 2<br>
-<?= $this->translate('Postcode') ?>: 5600 MB<br>
-<?= $this->translate('Plaats') ?>: Eindhoven<br>
-<?= $this->translate('Land') ?>: Nederland<br>
-<?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>
-</p>
-</div>
-</div>
+eenmalig 15 euro.'),
+                    DATABASE_REQUIRE_IBAN ? $this->translate('Deze betaling zal middels een eenmalige SEPA-machtiging
+verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') : ''
+                )?>
+            </p>
+            <?php if (DATABASE_REQUIRE_IBAN): ?>
+                <p>
+                    <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
+                </p>
+            <?php endif; ?>
+            <p>
+                <?php if (DATABASE_REQUIRE_IBAN): ?>
+                    <?= $this->translate('Naam') ?>: Gemeenschap van Wiskunde en Informatica Studenten<br>
+                    <?= $this->translate('Adres') ?>: Den Dolech 2<br>
+                    <?= $this->translate('Postcode') ?>: 5600 MB<br>
+                    <?= $this->translate('Plaats') ?>: Eindhoven<br>
+                    <?= $this->translate('Land') ?>: Nederland<br>
+                <?php endif; ?>
+                <?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>
+            </p>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -337,6 +347,94 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
             </div>
         <?php endforeach ?>
     </div>
+    <?php if (DATABASE_REQUIRE_IBAN): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                <h3><?= $this->translate('SEPA Direct Debit') ?></h3>
+                <p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
+This means that GEWIS will debit &euro;15,- from your bank account. You only have to pay once for
+the entire duration of your studies. Only bank accounts in euros are supported for this payment method.
+Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                $element = $form->get('iban');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setAttribute('id', 'iban-input');
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label label-required'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    <?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
+                </p>
+                <?php
+                $element = $form->get('signature');
+                $element->setAttribute('id', 'signature-canvas-data');
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>" id="signature-form-group">
+                    <canvas id="signature-canvas"><?= $this->translate('Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
+                    <br>
+                    <?= $this->formHidden($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                    <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <?php
+                $element = $form->get('signatureLocation');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setLabelAttributes(array(
+                    'class' => 'control-label label-required'
+                ));
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formInput($element) ?>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                $element = $form->get('agreediban');
+                $element->setAttribute('placeholder', $element->getLabel());
+                $element->setAttribute('id', 'iban-agreement');
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <div class="checkbox">
+                        <label>
+                            <?= $this->formCheckbox($element) ?>
+                            <?= $this->translate('Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
+toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een bedrag van &euro;15,-,
+geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn bank om eenmalig een bedrag van
+mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.
+<br/>
+Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
+weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.') ?>
+                            <?= $element->getLabel() ?>
+                        </label>
+                        <?= $this->formElementErrors($element) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <div class="col-md-12">
             <hr>
@@ -362,87 +460,6 @@ en het HR.
 <br/>
 Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) toestemming tot het
 verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
-                        <?= $element->getLabel() ?>
-                    </label>
-                    <?= $this->formElementErrors($element) ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <hr>
-            <h3><?= $this->translate('SEPA Direct Debit') ?></h3>
-            <p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
-This means that GEWIS will debit &euro;15,- from your bank account. You only have to pay once for
-the entire duration of your studies. Only bank accounts in euros are supported for this payment method.
-Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <?php
-            $element = $form->get('iban');
-            $element->setAttribute('class', 'form-control');
-            $element->setAttribute('placeholder', $element->getLabel());
-            $element->setAttribute('id', 'iban-input');
-            $element->setLabelAttributes(array(
-                'class' => 'control-label'
-            ));
-            ?>
-            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-                <?= $this->formLabel($element) ?>
-                <?= $this->formInput($element) ?>
-                <?= $this->formElementErrors($element) ?>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p>
-                <?= $this->translate('Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening nodig. Deze kan je hieronder in het vakje tekenen.') ?>
-            </p>
-            <div class="form-group" id="signature-form-group">
-                <canvas id="signature-canvas"><?= $this->translate('Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een moderne browser, zoals Firefox.') ?></canvas>
-                <br>
-                <button class="btn" type="button" id="signature-canvas-clear"><?= $this->translate('Verwijder handtekening') ?></button>
-                <?= $this->formHidden($form->get('signature')->setAttribute('id', 'signature-canvas-data')); ?>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <?php
-            $element = $form->get('signatureLocation');
-            $element->setAttribute('class', 'form-control');
-            $element->setAttribute('placeholder', $element->getLabel());
-            $element->setLabelAttributes(array(
-                'class' => 'control-label'
-            ));
-            ?>
-            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-                <?= $this->formLabel($element) ?>
-                <?= $this->formInput($element) ?>
-                <?= $this->formElementErrors($element) ?>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <?php
-            $element = $form->get('agreediban');
-            $element->setAttribute('placeholder', $element->getLabel());
-            $element->setAttribute('id', 'iban-agreement');
-            ?>
-            <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-                <div class="checkbox">
-                    <label>
-                        <?= $this->formCheckbox($element) ?>
-                        <?= $this->translate('Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
-toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een bedrag van &euro;15,-,
-geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn bank om eenmalig een bedrag van
-mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.
-<br/>
-Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
-weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.') ?>
                         <?= $element->getLabel() ?>
                     </label>
                     <?= $this->formElementErrors($element) ?>
@@ -525,14 +542,6 @@ weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaar
         <tr>
             <th><?= $this->translate('IBAN') ?></th>
             <td><?= $member->getIban() ?? $this->translate('Onbekend') ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Betaald (hoe veel)') ?></th>
-            <td><?= $member->getPaid() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Laatste wijziging lidmaatshap') ?></th>
-            <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
         </tr>
     </table>
 </div>

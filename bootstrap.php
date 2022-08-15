@@ -1,6 +1,7 @@
 <?php
 
 define('APP_ENV', getenv('APP_ENV') ?: 'production');
+define('DATABASE_REQUIRE_IBAN', (bool) getenv('DATABASE_REQUIRE_IBAN'));
 
 // make sure we are in the correct directory
 chdir(__DIR__);
