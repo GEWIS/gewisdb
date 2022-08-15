@@ -177,6 +177,7 @@ class Member
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']);
         $message->addTo($member->getEmail());
+        $message->setReplyTo($config['to']['subscription']);
         $message->setSubject('GEWIS Subscription');
         $this->getMailTransport()->send($message);
     }

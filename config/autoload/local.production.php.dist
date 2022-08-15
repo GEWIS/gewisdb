@@ -14,7 +14,7 @@
 
 return [
     /**
-     * Email adres where the results of the checker is send to
+     * Checker service configuration.
      */
     'checker' => [
         'report_mail' => getenv('CHECKER_REPORT_MAIL'),
@@ -26,18 +26,17 @@ return [
         ],
     ],
 
-
     /**
      * Email configuration.
      */
     'email' => [
         'transport' => 'Smtp',
         'options' => [
-            'name' => 'database.gewis.nl',
+            'name' => 'gewis.nl',
             'host' => 'postfix',
             'port' => '25',
         ],
-        'from' => 'secr@gewis.nl',
+        'from' => 'database@gewis.nl',
         'to' => [
             'report_error' => 'databaseisstuk@gewis.nl',
             'subscription' => 'secr@gewis.nl',

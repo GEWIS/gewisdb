@@ -14,7 +14,7 @@
 
 return [
     /**
-     * Email adres where the results of the checker is send to
+     * Checker service configuration.
      */
     'checker' => [
         'report_mail' => getenv('CHECKER_REPORT_MAIL'),
@@ -25,7 +25,6 @@ return [
             'max_manual_requests' => getenv('CHECKER_MEMBERSHIP_API_MAX_MANUAL_REQUESTS'),
         ],
     ],
-
 
     /**
      * Email configuration.
