@@ -74,11 +74,9 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'options' => [
                 'label' => 'Goedkeuren / Afkeuren',
                 'value_options' => [
-                    'true' => 'Goedkeuren',
-                    'false' => 'Afkeuren',
+                    '1' => 'Goedkeuren',
+                    '0' => 'Afkeuren',
                 ],
-                // forward compatability with ZF 2.3, doesn't actually do anything right now
-                'disable_inarray_validator' => true,
             ],
         ]);
 
@@ -88,11 +86,9 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'options' => [
                 'label' => 'Wijzigingen',
                 'value_options' => [
-                    'true' => 'Met wijzigingen',
-                    'false' => 'Zonder wijzigingen',
+                    '1' => 'Met wijzigingen',
+                    '0' => 'Zonder wijzigingen',
                 ],
-                // forward compatability with ZF 2.3, doesn't actually do anything right now
-                'disable_inarray_validator' => true,
             ],
         ]);
 
