@@ -9,6 +9,7 @@ RUN apk add --no-cache --virtual .build-deps \
         sqlite-dev \
     && apk add --no-cache --virtual .runtime-programs \
         git \
+        icu-data-full \
         nano \
         unzip \
         zip \
