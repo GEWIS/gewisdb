@@ -13,5 +13,5 @@
     <arg name="warning-severity" value="1"/>
     <rule ref="PSR1"/>
     <rule ref="PSR12"/>
-    <rule ref="./phpcs/sniffs/general/RequireConstructorPromotionSniff.php"/>
+    <rule ref="./phpcs"/>
 </ruleset>
