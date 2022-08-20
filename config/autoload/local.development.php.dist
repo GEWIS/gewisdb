@@ -34,7 +34,7 @@ return [
         'options' => [
             'path' => 'data/mail/',
         ],
-        'from' => 'secr@gewis.nl',
+        'from' => 'svc-gewisdb-test@gewis.nl',
         'to' => [
             'report_error' => 'databaseisstuk@gewis.nl',
             'subscription' => 'secr@gewis.nl',
