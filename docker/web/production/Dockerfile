@@ -5,14 +5,17 @@ RUN apk add --no-cache --virtual .build-deps \
         icu-dev \
         libpq-dev \
         libzip-dev \
+        openldap-dev \
     && apk add --no-cache --virtual .runtime-programs \
         git \
         icu-data-full \
+        libldap \
         unzip \
     && docker-php-ext-install -j$(nproc) \
         calendar \
         curl \
         intl \
+        ldap \
         opcache \
         pgsql \
         pdo_pgsql \

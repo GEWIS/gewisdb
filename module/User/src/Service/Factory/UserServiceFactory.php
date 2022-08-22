@@ -33,6 +33,7 @@ class UserServiceFactory implements FactoryInterface
             $container->get(UserEdit::class),
             $container->get(PasswordInterface::class),
             $container->get(AuthenticationService::class),
+            $container->get('config'),
         );
     }
 }
