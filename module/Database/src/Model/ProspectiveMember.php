@@ -510,6 +510,7 @@ class ProspectiveMember
             'middleName' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
+            'tueUsername' => $this->getTueUsername(),
             'study' => $this->getStudy(),
             'birth' => $this->getBirth()->format('Y-m-d'),
             'iban' => $this->getIban(),
