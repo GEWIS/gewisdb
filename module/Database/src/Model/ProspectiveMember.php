@@ -512,6 +512,8 @@ class ProspectiveMember
             'firstName' => $this->getFirstName(),
             'tueUsername' => $this->getTueUsername(),
             'study' => $this->getStudy(),
+            'signature' => $this->getSignature(),
+            'signatureLocation' => $this->getSignatureLocation(),
             'birth' => $this->getBirth()->format('Y-m-d'),
             'iban' => $this->getIban(),
             'address' => $this->getAddresses()['studentAddress']->toArray(),
