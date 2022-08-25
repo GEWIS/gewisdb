@@ -375,6 +375,16 @@ class Member
                         '<b>Warning:</b> Member does not study at department.',
                     ];
                 }
+
+                if (
+                    'NL20INGB0001234567' === str_replace(' ', '', strtoupper($member->getIban()))
+                    || empty($member->getIban())
+                ) {
+                    $tueStatus[] = [
+                        'danger',
+                        '<b>Warning:</b> This member does not pay through SEPA Direct Debit',
+                    ];
+                }
             }
         } catch (LookupException $e) {
             $tueStatus[] = [
