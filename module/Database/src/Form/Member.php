@@ -3,6 +3,7 @@
 namespace Database\Form;
 
 use Application\Model\Enums\AddressTypes;
+use Database\Validator\EuroIban;
 use Database\Form\Fieldset\Address as AddressFieldset;
 use DateInterval;
 use DateTime;
@@ -23,7 +24,6 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Validator\{
     Callback,
-    Iban,
     Identical,
     NotEmpty,
     Regex,
@@ -328,7 +328,7 @@ class Member extends Form implements InputFilterProviderInterface
                 'iban' => [
                     'required' => true,
                     'validators' => [
-                        ['name' => Iban::class],
+                        ['name' => EuroIban::class],
                     ],
                     'filters' => [
                         ['name' => StringTrim::class],
