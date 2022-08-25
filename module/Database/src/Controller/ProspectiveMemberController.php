@@ -70,6 +70,8 @@ class ProspectiveMemberController extends AbstractActionController
             );
 
             if (null !== $result) {
+                $this->memberService->sendMemberConfirmedEmail($result);
+
                 return $this->redirect()->toRoute('member/show', [
                     'id' => $result->getLidnr(),
                 ]);

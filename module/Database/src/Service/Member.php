@@ -182,6 +182,43 @@ class Member
         $this->getMailTransport()->send($message);
     }
 
+    /**
+     * Send an email about the approval to the new member and the secretary
+     */
+    public function sendMemberConfirmedEmail(MemberModel $member): void
+    {
+        $config = $this->config;
+        $config = $config['email'];
+
+        $renderer = $this->getRenderer();
+        $model = new ViewModel([
+            'member' => $member,
+        ]);
+        $model->setTemplate('database/member/email-welcome');
+        $body = $renderer->render($model);
+
+        $html = new MimePart($body);
+        $html->type = "text/html";
+
+        $mimeMessage = new MimeMessage();
+        $mimeMessage->addPart($html);
+
+        $message = new Message();
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']);
+        $message->addTo($config['to']['subscription']);
+        $message->setSubject('Membership confirmed: ' . $member->getFullName());
+        $this->getMailTransport()->send($message);
+
+        $message = new Message();
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']);
+        $message->addTo($member->getEmail());
+        $message->setReplyTo($config['to']['subscription']);
+        $message->setSubject('Your GEWIS membership has been confirmed');
+        $this->getMailTransport()->send($message);
+    }
+
     public function finalizeSubscription(
         array $membershipData,
         ProspectiveMemberModel $prospectiveMember,
