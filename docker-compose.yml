@@ -14,8 +14,8 @@ services:
             - gewisdb_logs:/etc/nginx/logs:rw
         networks:
             - gewisdb_network
-        ports:
-            - "9725:9725"
+        # ports:
+        #     - "9725:9725"
         restart: unless-stopped
     web:
         image: abc-db.docker-registry.gewis.nl/gewisdb_web:production
@@ -40,6 +40,13 @@ services:
 #            - DOCTRINE_REPORT_USER=
 #            - DOCTRINE_REPORT_PASSWORD=
 #            - DOCTRINE_REPORT_DATABASE=
+#            - LDAP_SERVERS=
+#            - LDAP_STARTTLS=
+#            - LDAP_DOMAIN=
+#            - LDAP_FILTER=
+#            - LDAP_BINDUSER_USERNAME=
+#            - LDAP_BINDUSER_PASS=
+#            - LDAP_BASEDN=
         depends_on:
             - postfix
         volumes:

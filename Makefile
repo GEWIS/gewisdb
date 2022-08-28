@@ -76,7 +76,7 @@ compilelang:
 update: updatecomposer updatedocker
 
 loadenv:
-		@export $$(grep -v '^#' .env | xargs -d '\n')
+		@set -o allexport; source .env; set +o allexport
 
 copyconf:
 		cp config/autoload/local.development.php.dist config/autoload/local.php
