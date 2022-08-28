@@ -184,6 +184,17 @@ class Member
     protected ?string $supremum = null;
 
     /**
+     * Stores whether a member should be 'hidden'
+     * Hidden is implemented in gewisweb to lock logins and hide the birthday on the landing page
+     * It can be used for deleted members and members that are deceased but whose profile should be kept
+     */
+    #[Column(
+        type: "boolean",
+        options: ['default' => false]
+    )]
+    protected bool $hidden = false;
+
+    /**
      * Addresses of this member.
      */
     #[OneToMany(
@@ -630,6 +641,26 @@ class Member
     }
 
     /**
+     * Get if the member is hidden.
+     *
+     * @return bool
+     */
+    public function getHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * Set if the member is hidden.
+     *
+     * @param bool $hidden
+     */
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
+    }
+
+    /**
      * Get the installations.
      *
      * @return Collection
@@ -640,7 +671,7 @@ class Member
     }
 
     /**
-     * Convert to array.
+     * Convert most relevant items to array.
      *
      * @return array
      */
@@ -655,6 +686,7 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
+            'hidden' => $this->getHidden(),
             'expiration' => $this->getExpiration()->format('l j F Y'),
         ];
     }

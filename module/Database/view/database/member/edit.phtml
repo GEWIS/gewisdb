@@ -170,6 +170,20 @@ $element->setAttribute('placeholder', $element->getLabel());
     </div>
 
 <?php
+$element = $form->get('hidden');
+$element->setAttribute('class', 'checkbox form-control-checkbox');
+?>
+    <div class="form-group">
+        <label for="<?= $element->getName() ?>" class="control-label col-sm-4">
+            <?= $element->getLabel() ?>
+        </label>
+        <div class="col-sm-8">
+            <?= $this->formCheckbox($element) ?>
+            <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+
+<?php
 $submit = $form->get('submit');
 $submit->setLabel($submit->getValue());
 $submit->setAttribute('class', 'btn btn-primary');
