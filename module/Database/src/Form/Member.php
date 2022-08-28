@@ -357,7 +357,7 @@ class Member extends Form implements InputFilterProviderInterface
                             'options' => [
                                 'pattern' => '/\\s/',
                                 'replacement' => '',
-                            ]
+                            ],
                         ],
                     ],
                 ],
