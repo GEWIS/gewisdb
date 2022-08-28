@@ -377,8 +377,8 @@ class Member
                 }
 
                 if (
-                    'NL20INGB0001234567' === str_replace(' ', '', strtoupper($member->getIban()))
-                    || empty($member->getIban())
+                    empty($member->getIban())
+                    || 'NL20INGB0001234567' === $member->getIban()
                 ) {
                     $tueStatus[] = [
                         'danger',

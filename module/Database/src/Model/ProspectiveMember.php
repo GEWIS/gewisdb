@@ -430,8 +430,11 @@ class ProspectiveMember
      *
      * @return string|null
      */
-    public function getIban(): ?string
+    public function getIban($print = false): ?string
     {
+        if ($print) {
+            return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
+        }
         return $this->iban;
     }
 

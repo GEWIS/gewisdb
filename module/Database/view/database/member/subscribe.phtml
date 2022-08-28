@@ -354,7 +354,8 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
                 <h3><?= $this->translate('SEPA Direct Debit') ?></h3>
                 <p><?= sprintf($this->translate('You can pay for your GEWIS membership using a SEPA direct debit.
 This means that GEWIS will debit &euro;15,- from your bank account. You only have to pay once for
-the entire duration of your studies. Only bank accounts in euros are supported for this payment method.
+the entire duration of your studies. Please make sure your bank accepts SEPA Direct Debits. 
+Note that if your bank account is not in Euros, a conversion to Euros takes place at your bank. 
 Contact %s for any questions about your payment.'), "<a href='mailto:board@gewis.nl'>board@gewis.nl</a>") ?></p>
             </div>
         </div>
@@ -541,7 +542,7 @@ verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
         </tr>
         <tr>
             <th><?= $this->translate('IBAN') ?></th>
-            <td><?= $member->getIban() ?? $this->translate('Onbekend') ?></td>
+            <td><?= $member->getIban(true) ?? $this->translate('Onbekend') ?></td>
         </tr>
     </table>
 </div>
