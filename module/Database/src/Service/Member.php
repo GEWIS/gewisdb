@@ -377,7 +377,7 @@ class Member
                 }
 
                 if (
-                    empty($member->getIban())
+                    null === $member->getIban()
                     || 'NL20INGB0001234567' === $member->getIban()
                 ) {
                     $tueStatus[] = [

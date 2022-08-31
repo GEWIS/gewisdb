@@ -7,8 +7,8 @@ use Database\Form\Fieldset\Address as AddressFieldset;
 use DateInterval;
 use DateTime;
 use Exception;
+use Laminas\I18n\Filter\Alnum;
 use Laminas\Filter\{
-    PregReplace,
     StringToUpper,
     StringTrim,
     ToNull,
@@ -336,29 +336,12 @@ class Member extends Form implements InputFilterProviderInterface
                             'name' => Iban::class,
                             'options' => [
                                 'allow_non_sepa' => false,
-                                'messages' => [
-                                    Iban::NOTSUPPORTED     =>
-                                        $this->translator->translate('IBAN starts with unknown country code.'),
-                                    Iban::SEPANOTSUPPORTED =>
-                                        $this->translator->translate('IBANs from countries that do not participate in SEPA are not supported.'),
-                                    Iban::FALSEFORMAT      =>
-                                        $this->translator->translate('The input has a false IBAN format.'),
-                                    Iban::CHECKFAILED      =>
-                                        $this->translator->translate('The input has failed the IBAN check.'),
-                                ],
                             ],
                         ],
                     ],
                     'filters' => [
-                        ['name' => StringTrim::class],
+                        ['name' => Alnum::class],
                         ['name' => StringToUpper::class],
-                        [
-                            'name' => PregReplace::class,
-                            'options' => [
-                                'pattern' => '/\\s/',
-                                'replacement' => '',
-                            ],
-                        ],
                     ],
                 ],
                 'signature' => [

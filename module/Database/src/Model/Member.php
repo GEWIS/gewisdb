@@ -596,6 +596,9 @@ class Member
      */
     public function getIban($print = false): ?string
     {
+        if (null === $this->iban) {
+            return null;
+        }
         if ($print) {
             return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
         }
