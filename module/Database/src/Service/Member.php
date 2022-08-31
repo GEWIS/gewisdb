@@ -194,7 +194,7 @@ class Member
         $model = new ViewModel([
             'member' => $member,
         ]);
-        $model->setTemplate('database/member/email-welcome');
+        $model->setTemplate('database/email/member-welcome');
         $body = $renderer->render($model);
 
         $html = new MimePart($body);
