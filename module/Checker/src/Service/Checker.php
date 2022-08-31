@@ -104,7 +104,8 @@ class Checker
     private function sendMail($body): void
     {
         $message = new Message();
-        $message->addTo($this->config['checker']['report_mail'])
+        $message->addTo($this->config['email']['to']['checker_result'])
+            ->addFrom($this->config['email']['from'])
             ->setSubject('Database Checker Report')
             ->setBody($body);
 
