@@ -1,5 +1,12 @@
 <h1>Gebruikerslijst</h1>
 
+<?php if ($usesldap): ?>
+<div class="alert alert-danger" role="alert">
+  <b>Warning:</b> This system currently uses GEWIS m-accounts. This means that any accounts you create here can not be used to login.
+  Learn more about m-accounts <a target="_blank" href="https://support.gewis.nl/kb/faq.php?id=36">here</a>.
+</div>
+<?php endif; ?>
+
 <table class="table">
   <thead>
     <tr>

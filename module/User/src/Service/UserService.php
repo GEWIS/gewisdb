@@ -3,6 +3,7 @@
 namespace User\Service;
 
 use Laminas\Authentication\AuthenticationService;
+use Laminas\Authentication\Adapter\Ldap as LdapAdapter;
 use Laminas\Crypt\Password\PasswordInterface;
 use User\Mapper\UserMapper;
 use User\Model\User as UserModel;
@@ -21,6 +22,7 @@ class UserService
         protected readonly UserEditForm $editForm,
         protected readonly PasswordInterface $crypt,
         protected readonly AuthenticationService $authService,
+        protected readonly array $config,
     ) {
     }
 
@@ -99,11 +101,16 @@ class UserService
 
         $data = $form->getData();
 
-        $adapter = $this->authService->getAdapter();
-        $adapter->setIdentity($data['login']);
-        $adapter->setCredential($data['password']);
+        if (!empty($this->config['ldap']['basedn'])) {
+            $ldapAdapter = new LdapAdapter($this->getLdapConfig(), $data['login'], $data['password']);
+            $result = $this->authService->authenticate($ldapAdapter);
+        } else {
+            $adapter = $this->authService->getAdapter();
+            $adapter->setIdentity($data['login']);
+            $adapter->setCredential($data['password']);
 
-        $result = $this->authService->authenticate();
+            $result = $this->authService->authenticate();
+        }
 
         return $result->isValid();
     }
@@ -156,5 +163,24 @@ class UserService
     public function getLoginForm(): LoginForm
     {
         return $this->loginForm;
+    }
+
+    private function getLdapConfig(): array
+    {
+        return array_map(
+            fn ($server) => (
+                [
+                    'host'                   => $server,
+                    'useStartTls'            => $this->config['ldap']['starttls'],
+                    'accountDomainName'      => $this->config['ldap']['domain'],
+                    'accountFilterFormat'    => $this->config['ldap']['filter'],
+                    'username'               => $this->config['ldap']['binduser_username'],
+                    'password'               => $this->config['ldap']['binduser_password'],
+                    'baseDn'                 => $this->config['ldap']['basedn'],
+                    'bindRequiresDn'         => false,
+                ]
+            ),
+            $this->config['ldap']['servers']
+        );
     }
 }

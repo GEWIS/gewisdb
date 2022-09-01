@@ -21,6 +21,9 @@ class UserControllerFactory implements FactoryInterface
         $requestedName,
         array $options = null,
     ): UserController {
-        return new UserController($container->get(UserService::class));
+        return new UserController(
+            $container->get(UserService::class),
+            $container->get('config'),
+        );
     }
 }

@@ -21,6 +21,9 @@ class SettingsControllerFactory implements FactoryInterface
         $requestedName,
         array $options = null,
     ): SettingsController {
-        return new SettingsController($container->get(UserService::class));
+        return new SettingsController(
+            $container->get(UserService::class),
+            $container->get('config'),
+        );
     }
 }

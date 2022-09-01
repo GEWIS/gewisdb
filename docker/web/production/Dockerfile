@@ -5,6 +5,7 @@ RUN apk add --no-cache --virtual .build-deps \
         icu-dev \
         libpq-dev \
         libzip-dev \
+        openldap-dev \
     && apk add --no-cache --virtual .runtime-programs \
         git \
         icu-data-full \
@@ -13,6 +14,7 @@ RUN apk add --no-cache --virtual .build-deps \
         calendar \
         curl \
         intl \
+        ldap \
         opcache \
         pgsql \
         pdo_pgsql \

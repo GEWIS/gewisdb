@@ -40,4 +40,17 @@ return [
             'subscription' => 'secr@gewis.nl',
         ],
     ],
+
+    /**
+     * LDAP settings for login to database frontend
+     */
+    'ldap' => [
+        'servers' => explode(',', getenv('LDAP_SERVERS')),
+        'starttls' => getenv('LDAP_STARTTLS'),
+        'domain' => getenv('LDAP_DOMAIN'),
+        'filter' => getenv('LDAP_FILTER'),
+        'binduser_username' => getenv('LDAP_BINDUSER_USERNAME'),
+        'binduser_password' => getenv('LDAP_BINDUSER_PASS'),
+        'basedn' => getenv('LDAP_BASEDN'),
+    ],
 ];

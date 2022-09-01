@@ -9,8 +9,10 @@ use User\Service\UserService;
 
 class UserController extends AbstractActionController
 {
-    public function __construct(protected readonly UserService $service)
-    {
+    public function __construct(
+        protected readonly UserService $service,
+        protected readonly array $config,
+    ) {
     }
 
     /**
@@ -28,6 +30,7 @@ class UserController extends AbstractActionController
 
         return new ViewModel([
             'form' => $this->service->getLoginForm(),
+            'usesldap' => !empty($this->config['ldap']['basedn']),
         ]);
     }
 

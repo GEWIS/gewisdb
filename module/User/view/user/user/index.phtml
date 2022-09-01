@@ -10,6 +10,11 @@ $form->setAttribute('class', 'form-horizontal');
     <h1>Login</h1>
     <?= $this->form()->openTag($form) ?>
 
+    <div class="alert alert-info" role="alert">
+        <?= $usesldap ? 'This system uses GEWIS m-accounts. Learn more about m-accounts <a target="_blank" href="https://support.gewis.nl/kb/faq.php?id=36">here</a>.'
+        : 'Please use your database credentials' ?>
+    </div>
+
     <?php
     $element = $form->get('login');
     $element->setAttribute('class', 'form-control');

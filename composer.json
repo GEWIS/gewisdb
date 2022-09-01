@@ -28,6 +28,7 @@
         "laminas/laminas-i18n-resources": "^2.8.0",
         "laminas/laminas-inputfilter": "^2.12.1",
         "laminas/laminas-json": "*",
+        "laminas/laminas-ldap": "^2.14.1",
         "laminas/laminas-mail": "^2.16.0",
         "laminas/laminas-mime": "^2.9.1",
         "laminas/laminas-modulemanager": "^2.11.0",

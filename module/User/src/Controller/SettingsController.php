@@ -9,8 +9,10 @@ use User\Service\UserService;
 
 class SettingsController extends AbstractActionController
 {
-    public function __construct(protected readonly UserService $service)
-    {
+    public function __construct(
+        protected readonly UserService $service,
+        protected readonly array $config,
+    ) {
     }
 
     /**
@@ -20,6 +22,7 @@ class SettingsController extends AbstractActionController
     {
         return new ViewModel([
             'users' => $this->service->findAll(),
+            'usesldap' => !empty($this->config['ldap']['basedn']),
         ]);
     }
 
