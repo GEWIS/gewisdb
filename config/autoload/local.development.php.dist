@@ -17,7 +17,6 @@ return [
      * Checker service configuration.
      */
     'checker' => [
-        'report_mail' => getenv('CHECKER_REPORT_MAIL'),
         'membership_api' => [
             'endpoint' => getenv('CHECKER_MEMBERSHIP_API_ENDPOINT'),
             'key' => getenv('CHECKER_MEMBERSHIP_API_KEY'),
@@ -36,6 +35,7 @@ return [
         ],
         'from' => 'svc-gewisdb-test@gewis.nl',
         'to' => [
+            'checker_result' => 'secr@gewis.nl',
             'report_error' => 'databaseisstuk@gewis.nl',
             'subscription' => 'secr@gewis.nl',
         ],
