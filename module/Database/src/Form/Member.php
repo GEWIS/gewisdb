@@ -7,8 +7,12 @@ use Database\Form\Fieldset\Address as AddressFieldset;
 use DateInterval;
 use DateTime;
 use Exception;
-use Laminas\Filter\StringTrim;
-use Laminas\Filter\ToNull;
+use Laminas\I18n\Filter\Alnum;
+use Laminas\Filter\{
+    StringToUpper,
+    StringTrim,
+    ToNull,
+};
 use Laminas\Form\Element\{
     Checkbox,
     Date,
@@ -328,10 +332,16 @@ class Member extends Form implements InputFilterProviderInterface
                 'iban' => [
                     'required' => true,
                     'validators' => [
-                        ['name' => Iban::class],
+                        [
+                            'name' => Iban::class,
+                            'options' => [
+                                'allow_non_sepa' => false,
+                            ],
+                        ],
                     ],
                     'filters' => [
-                        ['name' => StringTrim::class],
+                        ['name' => Alnum::class],
+                        ['name' => StringToUpper::class],
                     ],
                 ],
                 'signature' => [
@@ -362,7 +372,7 @@ class Member extends Form implements InputFilterProviderInterface
                                 'token' => '1',
                                 'messages' => [
                                     Identical::NOT_SAME => $this->translator->translate(
-                                        'Je moet de voorwaarden accepteren!',
+                                        'Please accept the conditions for payment through SEPA Direct Debit',
                                     ),
                                 ],
                             ],
