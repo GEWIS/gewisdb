@@ -508,6 +508,7 @@ class Member
         $member->setPaid(0);
         $member->setIban(null);
         $member->setSupremum('optout');
+        $member->setHidden(true);
         $member->clearLists();
 
         $this->getMemberMapper()->persist($member);
