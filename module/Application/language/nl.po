@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-28 10:29+0200\n"
+"POT-Creation-Date: 2022-09-02 12:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -129,12 +129,6 @@ msgstr "Huisnummer"
 
 msgid "IBAN"
 msgstr "IBAN"
-
-msgid "IBAN starts with unknown country code."
-msgstr "IBAN begint met onbekende landcode."
-
-msgid "IBANs from countries that do not participate in SEPA are not supported."
-msgstr "Alleen IBANs uit landen die meedoen met SEPA worden ondersteund."
 
 msgid "If you have any questions feel free to contact"
 msgstr "Als je vragen hebt, neem gerust contact op met"
@@ -286,12 +280,6 @@ msgstr "Taalinstellingen"
 
 msgid "Telefoonnummer"
 msgstr "Telefoonnummer"
-
-msgid "The input has a false IBAN format."
-msgstr "Dit is geen geldige IBAN"
-
-msgid "The input has failed the IBAN check."
-msgstr "Het controlegetal in de IBAN is onjuist."
 
 msgid "The requested URL could not be matched by routing."
 msgstr "The requested URL could not be matched by routing."

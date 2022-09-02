@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb d9d06aa-dirty\n"
+"Project-Id-Version: GEWISdb 8fb8edb-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-28 10:29+0200\n"
+"POT-Creation-Date: 2022-09-02 12:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -309,18 +309,6 @@ msgid "Je moet de voorwaarden accepteren!"
 msgstr ""
 
 msgid "Je TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
-msgstr ""
-
-msgid "IBAN starts with unknown country code."
-msgstr ""
-
-msgid "IBANs from countries that do not participate in SEPA are not supported."
-msgstr ""
-
-msgid "The input has a false IBAN format."
-msgstr ""
-
-msgid "The input has failed the IBAN check."
 msgstr ""
 
 msgid "Handtekening is vereist!"
