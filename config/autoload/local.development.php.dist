@@ -29,9 +29,11 @@ return [
      * Email configuration.
      */
     'email' => [
-        'transport' => 'File',
+        'transport' => 'Smtp',
         'options' => [
-            'path' => 'data/mail/',
+            'name' => 'gewis.nl',
+            'host' => 'postfix',
+            'port' => '1025',
         ],
         'from' => 'svc-gewisdb-test@gewis.nl',
         'to' => [

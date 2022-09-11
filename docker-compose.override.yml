@@ -26,6 +26,10 @@ services:
         ports:
             - "8080:80"
         restart: unless-stopped
+    postfix:
+        image: mailhog/mailhog
+        ports:
+            - "8025:8025"
     nginx:
         build: docker/nginx
         ports:

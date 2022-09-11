@@ -324,6 +324,10 @@ ul.dropdown-menu.language.reverse {
     transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
 }
 
+.form-horizontal .form-control-checkbox {
+    min-height: 35px;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #D40026;

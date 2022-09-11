@@ -388,9 +388,9 @@ class Member
                 );
 
                 if ($similar > 3) {
-                    // phpcs:ignore -- user-visible strings should not be split
                     $tueStatus[] = [
                         'danger',
+                        // phpcs:ignore -- user-visible strings should not be split
                         '<b>Warning:</b> Data is not likely to be similar. Requires ' . $similar . ' edits. Please check if the TU/e data matches the data entered by the member before approving membership.',
                     ];
                 } elseif ($similar > 0) {
@@ -401,9 +401,9 @@ class Member
                 }
 
                 if ($tueData->studiesAtDepartment()) {
-                    // phpcs:ignore -- user-visible strings should not be split
                     $tueStatus[] = [
                         'success',
+                        // phpcs:ignore -- user-visible strings should not be split
                         '<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>.',
                     ];
                 } else {
@@ -555,6 +555,7 @@ class Member
         $member->setPaid(0);
         $member->setIban(null);
         $member->setSupremum('optout');
+        $member->setHidden(true);
         $member->clearLists();
 
         $this->getMemberMapper()->persist($member);

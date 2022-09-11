@@ -4,6 +4,7 @@ namespace Database\Form;
 
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\{
+    Checkbox,
     Date,
     Email,
     Radio,
@@ -86,6 +87,14 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'type' => Text::class,
             'options' => [
                 'label' => 'Betaald (hoe veel)',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'hidden',
+            'type' => Checkbox::class,
+            'options' => [
+                'label' => 'Hide member',
             ],
         ]);
 

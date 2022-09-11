@@ -77,6 +77,7 @@ class Member
         $reportMember->setPaid($member->getPaid());
         $reportMember->setIban($member->getIban());
         $reportMember->setSupremum($member->getSupremum());
+        $reportMember->setHidden($member->getHidden());
 
         // go through addresses
         /** @var DatabaseAddressModel $address */
