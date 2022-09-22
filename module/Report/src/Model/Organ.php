@@ -126,26 +126,31 @@ class Organ
         name: "meeting_type",
         referencedColumnName: "meeting_type",
         nullable: false,
+        onDelete: "CASCADE",
     )]
     #[InverseJoinColumn(
         name: "meeting_number",
         referencedColumnName: "meeting_number",
         nullable: false,
+        onDelete: "CASCADE",
     )]
     #[InverseJoinColumn(
         name: "decision_point",
         referencedColumnName: "decision_point",
         nullable: false,
+        onDelete: "CASCADE",
     )]
     #[InverseJoinColumn(
         name: "decision_number",
         referencedColumnName: "decision_number",
         nullable: false,
+        onDelete: "CASCADE",
     )]
     #[InverseJoinColumn(
         name: "subdecision_number",
         referencedColumnName: "number",
         nullable: false,
+        onDelete: "CASCADE",
     )]
     protected Collection $subdecisions;
 
