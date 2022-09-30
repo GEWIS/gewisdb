@@ -144,7 +144,7 @@ class Checker
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
-     * @return array Array of errors that may have occured.
+     * @return array Array of errors that may have occurred.
      */
     public function checkMembersExpiredButStillInOrgan(MeetingModel $meeting): array
     {
@@ -155,10 +155,8 @@ class Checker
             // Check if the members are still member of GEWIS
             $member = $installation->getMember();
 
-            if (null !== ($membershipEndsOn = $member->getMembershipEndsOn())) {
-                if ($membershipEndsOn < $meeting->getDate()) {
-                    $errors[] = new Error\MemberExpiredButStillInOrgan($meeting, $installation);
-                }
+            if ($member->getExpiration() < $meeting->getDate()) {
+                $errors[] = new Error\MemberExpiredButStillInOrgan($meeting, $installation);
             }
         }
         return $errors;
