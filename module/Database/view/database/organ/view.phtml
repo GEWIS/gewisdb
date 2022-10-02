@@ -4,6 +4,10 @@
 <ul>
 <?php foreach ($foundation->getReferences() as $ref): ?>
     <?php if (!($ref instanceof \Database\Model\SubDecision\Installation)) continue; ?>
-    <li><?= $ref->getMember()->getFullName() ?> als <?= $ref->getFunction() ?></li>
+    <li>
+        <a href="<?= $this->url('member/show', ['id' => $ref->getMember()->getLidnr()]) ?>">
+            <?= $ref->getMember()->getFullName() ?>
+        </a> als <?= $ref->getFunction() ?>
+    </li>
 <?php endforeach; ?>
 </ul>
