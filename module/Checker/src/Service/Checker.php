@@ -246,12 +246,32 @@ class Checker
             $organType = $organ->getOrganType();
             $meetingType = $organ->getDecision()->getMeeting()->getType();
 
-            // The meeting type and organ type match iff: The meeting type is not VV, or
-            // if either both organtype and meetingtype is AV, or they are both not. So
-            // it is wrong if only one of them has a meetingtype of AV
+            // Chair's Meetings (VV) cannot be used to found an(y) organ. During General Members Meetings (AV) only
+            // specific organs can be founded, namely: AVC, AVW, KCC, Fraternity, and RvA. Furthermore, these organ can
+            // only be founded in AVs, not in any other meeting (except virtual meetings).
             if (
-                $meetingType === MeetingTypes::VV ||
-                ($organType === OrganTypes::AVC ^ $meetingType === MeetingTypes::AV)
+                MeetingTypes::VV === $meetingType
+                || (
+                    MeetingTypes::AV === $meetingType
+                    && (
+                        OrganTypes::AVC !== $organType
+                        && OrganTypes::AVW !== $organType
+                        && OrganTypes::Fraternity !== $organType
+                        && OrganTypes::KCC !== $organType
+                        && OrganTypes::RvA !== $organType
+                    )
+                )
+                || (
+                    MeetingTypes::AV !== $meetingType
+                    && MeetingTypes::VIRT !== $meetingType
+                    && (
+                        OrganTypes::AVC === $organType
+                        || OrganTypes::AVW === $organType
+                        || OrganTypes::Fraternity === $organType
+                        || OrganTypes::KCC === $organType
+                        || OrganTypes::RvA === $organType
+                    )
+                )
             ) {
                 $errors[] = new Error\OrganMeetingType($organ);
             }
