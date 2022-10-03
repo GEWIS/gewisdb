@@ -8,8 +8,6 @@ services:
         volumes:
             - gewisdb_postgresql:/var/lib/postgresql/data:rw
             - ./docker/pgadmin/create-gewisdb_report-database.sh:/docker-entrypoint-initdb.d/create-database.sh
-            - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
-            - ./docker/pgadmin/pgpass:/pgpass
         networks:
             - gewisdb_network
         ports:
@@ -17,6 +15,9 @@ services:
         restart: unless-stopped
     pgadmin:
         image: dpage/pgadmin4:latest
+        build:
+            dockerfile: docker/pgadmin/Dockerfile
+            context: .
         env_file:
             - .env
         depends_on:

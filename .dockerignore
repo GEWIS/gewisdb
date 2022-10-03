@@ -33,7 +33,6 @@ data/DoctrineORMModule/
 data/logs/*
 data/mail/*
 docker/nginx/
-docker/pgadmin/
 Dockerfile
 docker-compose.*
 nbproject
