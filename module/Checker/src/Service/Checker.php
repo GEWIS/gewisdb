@@ -49,7 +49,7 @@ class Checker
                 $this->checkMembersHaveRolesButInactiveOrNotInOrgan($meeting),
                 $this->checkMembersInNonExistingOrgans($meeting),
                 $this->checkMembersExpiredButStillInOrgan($meeting),
-                $this->checkOrganMeetingType($meeting),
+                $this->checkOrganFoundationMeetingType($meeting),
             );
 
             $message .= $this->handleMeetingErrors($meeting, $errors);
@@ -230,14 +230,14 @@ class Checker
     }
 
     /**
-     * Checks all Organ creation, and check if they are created at the the correct Meeting
+     * Checks all Organ creation, and check if they are created at the correct Meeting
      * e.g. AVCommissies are only created at an AV
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
      * @return array Array of errors that may have occurred.
      */
-    public function checkOrganMeetingType(MeetingModel $meeting): array
+    public function checkOrganFoundationMeetingType(MeetingModel $meeting): array
     {
         $errors = [];
         $organs = $this->organService->getOrgansCreatedAtMeeting($meeting);
@@ -249,6 +249,10 @@ class Checker
             // Chair's Meetings (VV) cannot be used to found an(y) organ. During General Members Meetings (AV) only
             // specific organs can be founded, namely: AVC, AVW, KCC, Fraternity, and RvA. Furthermore, these organ can
             // only be founded in AVs, not in any other meeting (except virtual meetings).
+            //
+            // However, this only holds after October 7, 2021, when the Internal Regulations of the association were
+            // updated to reflect changes with respect to fraternities (before October 7, 2021, they could be founded
+            // during a board meeting [BV]).
             if (
                 MeetingTypes::VV === $meetingType
                 || (
@@ -261,18 +265,32 @@ class Checker
                         && OrganTypes::RvA !== $organType
                     )
                 )
-                || (
-                    MeetingTypes::AV !== $meetingType
-                    && MeetingTypes::VIRT !== $meetingType
-                    && (
-                        OrganTypes::AVC === $organType
-                        || OrganTypes::AVW === $organType
-                        || OrganTypes::Fraternity === $organType
-                        || OrganTypes::KCC === $organType
-                        || OrganTypes::RvA === $organType
-                    )
+            ) {
+                $errors[] = new Error\OrganMeetingType($organ);
+                continue;
+            }
+
+            // Special case for the updates to the internal regulations. Skip fraternities when they were founded during
+            // a BV before October 7, 2021.
+            if (
+                MeetingTypes::AV !== $meetingType
+                && MeetingTypes::VIRT !== $meetingType
+                && (
+                    OrganTypes::AVC === $organType
+                    || OrganTypes::AVW === $organType
+                    || OrganTypes::Fraternity === $organType
+                    || OrganTypes::KCC === $organType
+                    || OrganTypes::RvA === $organType
                 )
             ) {
+                if (
+                    OrganTypes::Fraternity === $organType
+                    && MeetingTypes::BV === $meetingType
+                    && $organ->getDecision()->getMeeting()->getDate() <= new DateTime('2021-10-06')
+                ) {
+                    continue;
+                }
+
                 $errors[] = new Error\OrganMeetingType($organ);
             }
         }

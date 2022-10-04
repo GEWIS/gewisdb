@@ -42,6 +42,9 @@ class Organ
         return array_diff($hashedOrganFoundations, $hashedOrganAbrogations);
     }
 
+    /**
+     * @return array<array-key, FoundationModel>
+     */
     public function getOrgansCreatedAtMeeting(MeetingModel $meeting): array
     {
         return $this->organMapper->getOrgansCreatedAtMeeting($meeting);

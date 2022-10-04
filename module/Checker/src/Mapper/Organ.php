@@ -3,6 +3,7 @@
 namespace Checker\Mapper;
 
 use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -25,9 +26,9 @@ class Organ
      * Returns an array of names of all organs created before or during $meeting
      *
      * @param MeetingModel $meeting Meeting to check for
-     * @return array
+     * @return array<array-key, FoundationModel>
      */
-    public function getAllOrganFoundations(MeetingModel $meeting)
+    public function getAllOrganFoundations(MeetingModel $meeting): array
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -45,9 +46,9 @@ class Organ
      * Returns an array of all names of organs discharged before or during $meeting
      *
      * @param MeetingModel $meeting Meeting to check for
-     * @return array
+     * @return array<array-key, FoundationModel>
      */
-    public function getAllOrganAbrogations(MeetingModel $meeting)
+    public function getAllOrganAbrogations(MeetingModel $meeting): array
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -67,9 +68,9 @@ class Organ
      * Returns all the organs created at a meeting
      *
      * @param MeetingModel $meeting The meeting the organ is created at
-     * @return array \Database\Model\SubDecision\Foundation
+     * @return array<array-key, FoundationModel>
      */
-    public function getOrgansCreatedAtMeeting(MeetingModel $meeting)
+    public function getOrgansCreatedAtMeeting(MeetingModel $meeting): array
     {
         $qb = $this->em->createQueryBuilder();
 
