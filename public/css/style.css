@@ -3,7 +3,18 @@ body {
 }
 
 .gewis-red {
-    color: #d40026;
+    color: #D40026;
+}
+
+a {
+    color: #D40026;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #D40026;
+    text-decoration: underline;
 }
 
 /*.btn-success {*/
@@ -32,6 +43,10 @@ body {
 canvas#signature-canvas {
     border: 0.125rem solid #333333;
     border-radius: 0.25rem;
+}
+
+.data-updated {
+    background-color: #F0AD4E;
 }
 
 .label-required::after {

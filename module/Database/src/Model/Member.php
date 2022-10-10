@@ -154,7 +154,7 @@ class Member
     protected ?DateTime $lastCheckedOn = null;
 
     /**
-     * Member birth date.
+     * Member birthdate.
      */
     #[Column(type: "date")]
     protected DateTime $birth;
@@ -495,7 +495,7 @@ class Member
     }
 
     /**
-     * Get the birth date.
+     * Get the birthdate.
      *
      * @return DateTime
      */

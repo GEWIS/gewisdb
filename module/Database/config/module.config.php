@@ -16,6 +16,7 @@ use Database\Controller\{
 use Database\Controller\Factory\{
     AddressControllerFactory,
     ExportControllerFactory,
+    IndexControllerFactory,
     MeetingControllerFactory,
     MemberControllerFactory,
     OrganControllerFactory,
@@ -276,6 +277,36 @@ return [
                                     ],
                                 ],
                             ],
+                            'update' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/update',
+                                    'defaults' => [
+                                        'action' => 'showUpdate',
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'approve' => [
+                                        'type' => Literal::class,
+                                        'options' => [
+                                            'route' => '/approve',
+                                            'defaults' => [
+                                                'action' => 'approveUpdate',
+                                            ],
+                                        ],
+                                    ],
+                                    'reject' => [
+                                        'type' => Literal::class,
+                                        'options' => [
+                                            'route' => '/reject',
+                                            'defaults' => [
+                                                'action' => 'rejectUpdate',
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
                             'delete' => [
                                 'type' => Literal::class,
                                 'options' => [
@@ -378,6 +409,15 @@ return [
                             'route' => '/tuerequest',
                             'defaults' => [
                                 'action' => 'tueRequest',
+                            ],
+                        ],
+                    ],
+                    'updates' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/updates',
+                            'defaults' => [
+                                'action' => 'updates',
                             ],
                         ],
                     ],
@@ -534,15 +574,13 @@ return [
         'factories' => [
             AddressController::class => AddressControllerFactory::class,
             ExportController::class => ExportControllerFactory::class,
+            IndexController::class => IndexControllerFactory::class,
             MeetingController::class => MeetingControllerFactory::class,
             MemberController::class => MemberControllerFactory::class,
             OrganController::class => OrganControllerFactory::class,
             ProspectiveMemberController::class => ProspectiveMemberControllerFactory::class,
             QueryController::class => QueryControllerFactory::class,
             SettingsController::class => SettingsControllerFactory::class,
-        ],
-        'invokables' => [
-            IndexController::class => IndexController::class,
         ],
     ],
     'view_manager' => [

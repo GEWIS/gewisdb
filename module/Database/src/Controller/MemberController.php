@@ -8,6 +8,7 @@ use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\View\Model\{
     ViewModel,
@@ -20,8 +21,9 @@ use Laminas\View\Model\{
 class MemberController extends AbstractActionController
 {
     public function __construct(
-        private readonly MemberService $memberService,
+        private readonly Translator $translator,
         private readonly CheckerService $checkerService,
+        private readonly MemberService $memberService,
     ) {
     }
 
@@ -498,6 +500,121 @@ class MemberController extends AbstractActionController
         return new JsonModel(
             $data->toArray(),
         );
+    }
+
+    /**
+     * Show all pending member updates.
+     */
+    public function updatesAction(): ViewModel
+    {
+        return new ViewModel(['updates' => $this->memberService->getPendingMemberUpdates()]);
+    }
+
+    /**
+     * Show a specific member update.
+     */
+    public function showUpdateAction(): ViewModel
+    {
+        $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
+
+        if (null === $memberUpdate) {
+            return $this->notFoundAction();
+        }
+
+        $member = $memberUpdate->getMember();
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        return new ViewModel([
+            'member' => $member,
+            'memberUpdate' => $memberUpdate,
+        ]);
+    }
+
+    /**
+     * Approve a pending member update.
+     */
+    public function approveUpdateAction(): Response|ViewModel
+    {
+        $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
+
+        if (null === $memberUpdate) {
+            return $this->notFoundAction();
+        }
+
+        $member = $memberUpdate->getMember();
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $member = $this->memberService->approveMemberUpdate($member, $memberUpdate);
+
+            if (null !== $member) {
+                $this->flashMessenger()->addSuccessMessage(
+                    $this->translator->translate('The changes have been applied!')
+                );
+
+                return $this->redirect()->toRoute('member/updates');
+            }
+
+            $this->flashMessenger()->addErrorMessage(
+                $this->translator->translate('An error occurred while trying to save the changes.')
+            );
+        }
+
+        return $this->redirect()->toRoute('member/show/update', ['id' => $member->getLidnr()]);
+    }
+
+    /**
+     * Reject a member update.
+     */
+    public function rejectUpdateAction(): Response|ViewModel
+    {
+        $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
+
+        if (null === $memberUpdate) {
+            return $this->notFoundAction();
+        }
+
+        $member = $memberUpdate->getMember();
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $result = $this->memberService->rejectMemberUpdate($memberUpdate);
+
+            if (null !== $result) {
+                $this->flashMessenger()->addInfoMessage(
+                    $this->translator->translate('The changes have not been applied.')
+                );
+
+                return $this->redirect()->toRoute('member/updates');
+            }
+
+            $this->flashMessenger()->addInfoMessage(
+                $this->translator->translate('An error occurred while trying to reject the changes.')
+            );
+        }
+
+        return $this->redirect()->toRoute('member/show/update', ['id' => $member->getLidnr()]);
     }
 
     private function memberIsDeleted(MemberModel $member): ViewModel

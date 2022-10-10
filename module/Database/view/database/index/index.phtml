@@ -1,5 +1,53 @@
-<div class="jumbotron">
-    <h1><span class="gewis-red">GEWIS</span> database tool</h1>
-    <p>🍑 Niet meer tijdelijke frontpage 🍑</p>
-    <p><a class="btn btn-success btn-lg" href="https://github.com/GEWIS/gewisdb" target="_blank">Fork de GEWIS DB tool op GitHub &raquo;</a></p>
+<?php
+$showPendingUpdates = 0 < $updates;
+?>
+<div class="row">
+    <div class="col-md-12">
+        <h1><span class="gewis-red"><strong>GEWIS</strong></span>Database</h1>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="<?= $showPendingUpdates ? 'col-md-8' : 'col-md-12'?>">
+        <p>
+            <?= sprintf(
+                $this->translate('GEWIS currently has <a href="%s">%d members</a> and <a href="%s">%d prospective members</a>. <a href="%s">Click here</a> to create a meeting or <a href="%s">perform a query</a>.'),
+                $this->url('member'),
+                $members,
+                $this->url('prospective-member'),
+                $prospectives,
+                $this->url('meeting/create'),
+                $this->url('query'),
+            ) ?>
+        </p>
+    </div>
+    <?php if ($showPendingUpdates): ?>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading"><?= $this->translate('Pending member updates') ?></div>
+                <div class="panel-body">
+                    <p>
+                        <?= sprintf(
+                            $this->translatePlural(
+                                'There is currently <a href="%s">%d update</a> pending approval.',
+                                'There are currently <a href="%s">%d updates</a> pending approval.',
+                                $updates,
+                            ),
+                            $this->url('member/updates'),
+                            $updates,
+                        ) ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            <a class="btn btn-primary" href="https://github.com/GEWIS/gewisdb" target="_blank">
+                Fork GEWISDB op GitHub &raquo;
+            </a>
+        </p>
+    </div>
 </div>
