@@ -1,6 +1,4 @@
-<?php if ($success): ?>
-Het lid is succesvol verwijderd.
-<?php elseif ($canRemove): ?>
+<?php if ($canRemove): ?>
 <h1><?= $member->getFullname() ?></h1>
 Weet je zeker dat lid <?= $member->getFullname() ?> verwijdert dient te worden?
 

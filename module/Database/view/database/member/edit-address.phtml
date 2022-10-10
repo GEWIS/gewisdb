@@ -1,31 +1,10 @@
 <?php
 
-use Application\Model\Enums\AddressTypes;
+use Database\Model\Address;
 
-$type = '';
-switch ($address->getType()) {
-    case AddressTypes::Home:
-        $type = 'thuisadres';
-        break;
-    case AddressTypes::Student:
-        $type = 'kameradres';
-        break;
-    case AddressTypes::Mail:
-        $type = 'postadres';
-        break;
-}
+/** @var Address $address */
+$type = $address->getType()->getName($this->plugin('translate')->getTranslator());
 ?>
-<?php if (isset($success) && $success): ?>
-<?php if (isset($add) && $add): ?>
-Adres van <a href="<?= $this->url('member/show', array(
-    'id' => $address->getMember()->getLidnr()
-)) ?>"><?= $address->getMember()->getFullName() ?></a> opgeslagen.</h2>
-<?php else: ?>
-Adres van <a href="<?= $this->url('member/show', array(
-    'id' => $address->getMember()->getLidnr()
-)) ?>"><?= $address->getMember()->getFullName() ?></a> gewijzigd.</h2>
-<?php endif ?>
-<?php else: ?>
 <?php if (isset($add) && $add): ?>
 <h2>Voeg <?= $type ?> van <?= $address->getMember()->getFullName() ?> toe</h2>
 <?php else: ?>
@@ -161,4 +140,3 @@ $element->setLabelAttributes(array(
 </div>
 
 <?= $this->form()->closeTag() ?>
-<?php endif ?>
