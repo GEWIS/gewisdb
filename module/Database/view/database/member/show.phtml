@@ -125,21 +125,17 @@ switch ($member->getType()) {
             'id' => $member->getLidnr()
         )) ?>" class="btn btn-danger">Verwijder lid</a>
     <h3>Lidmaatschap commissies en disputen</h3>
-    <?php if ($simple): ?>
-    Geen huidig lid van commissies en disputen
-<?php else: ?>
-<ul>
-<?php foreach ($member->getInstallations() as $install): ?>
-    <li><a href="<?= $this->url('organ/view', array(
-    'type' => $install->getFoundation()->getDecision()->getMeeting()->getType()->value,
-    'number' => $install->getFoundation()->getDecision()->getMeeting()->getNumber(),
-    'point' => $install->getFoundation()->getDecision()->getPoint(),
-    'decision' => $install->getFoundation()->getDecision()->getNumber(),
-    'subdecision' => $install->getFoundation()->getNumber()
-)) ?>"><?= $install->getFoundation()->getAbbr() ?></a></li>
-<?php endforeach; ?>
-</ul>
-<?php endif ?>
+    <ul>
+        <?php foreach ($member->getInstallations() as $install): ?>
+            <li><a href="<?= $this->url('organ/view', array(
+            'type' => $install->getFoundation()->getDecision()->getMeeting()->getType()->value,
+            'number' => $install->getFoundation()->getDecision()->getMeeting()->getNumber(),
+            'point' => $install->getFoundation()->getDecision()->getPoint(),
+            'decision' => $install->getFoundation()->getDecision()->getNumber(),
+            'subdecision' => $install->getFoundation()->getNumber()
+        )) ?>"><?= $install->getFoundation()->getAbbr() ?></a></li>
+        <?php endforeach; ?>
+    </ul>
 </div>
 <div class="col-md-6">
 <h3>Adressen</h3>

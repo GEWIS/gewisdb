@@ -344,20 +344,18 @@ class Member
     /**
      * Get member info.
      */
-    public function getMember(int $id): array
+    public function getMember(int $id): ?MemberModel
     {
-        $member = $this->getMemberMapper()->find($id);
-        $simple = false;
+        return $this->getMemberMapper()->findSimple($id);
+    }
 
-        if (null === $member) {
-            $member = $this->getMemberMapper()->findSimple($id);
-            $simple = true;
-        }
-
-        return [
-            'member' => $member,
-            'simple' => $simple,
-        ];
+    /**
+     * Get a member including decision information if that exists. This can therefor return `null` even though the
+     * member exists.
+     */
+    public function getMemberWithDecisions(int $id): ?MemberModel
+    {
+        return $this->getMemberMapper()->find($id);
     }
 
     /**
@@ -443,11 +441,8 @@ class Member
      *
      * @return TueData|null for member or null if no such data is available
      */
-    public function getTueData(int $id): ?TueData
+    public function getTueData(MemberModel $member): ?TueData
     {
-        /** @var MemberModel $member */
-        $member = $this->getMember($id)['member'];
-
         if (null !== ($tueUsername = $member->getTueUsername())) {
             $tuedata = $this->getCheckerService()->tueDataObject();
 
@@ -469,12 +464,9 @@ class Member
      * Toggle if a member receives the supremum.
      */
     public function setSupremum(
-        int $id,
+        MemberModel $member,
         string $value,
     ): void {
-        $member = $this->getMember($id);
-        $member = $member['member'];
-
         $member->setSupremum($value);
 
         $this->getMemberMapper()->persist($member);
@@ -566,11 +558,10 @@ class Member
      * Edit a member.
      */
     public function edit(
+        MemberModel $member,
         array $data,
-        int $lidnr,
     ): ?MemberModel {
-        $form = $this->getMemberEditForm($lidnr)['form'];
-
+        $form = $this->getMemberEditForm($member)['form'];
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -593,14 +584,10 @@ class Member
      * Edit membership.
      */
     public function membership(
+        MemberModel $member,
         array $data,
-        int $lidnr,
     ): ?MemberModel {
-        $form = $this->getMemberTypeForm($lidnr);
-        // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
-        /** @var MemberModel $member */
-        $member = $form['member'];
-        $form = $form['form'];
+        $form = $this->getMemberTypeForm();
 
         // It is not possible to have another membership type after being an honorary member and there does not exist a
         // good transition to a different membership type (because of the dates/expiration etc.).
@@ -671,14 +658,10 @@ class Member
     }
 
     public function expiration(
+        MemberModel $member,
         array $data,
-        int $lidnr,
     ): ?MemberModel {
-        $form = $this->getMemberExpirationForm($lidnr);
-        // List unpacking is not allowed in PHP 5.6, so it has to be done like this.
-        $member = $form['member'];
-        $form = $form['form'];
-
+        $form = $this->getMemberExpirationForm();
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -701,12 +684,11 @@ class Member
      * Edit address.
      */
     public function editAddress(
-        array $data,
-        int $lidnr,
+        MemberModel $member,
         AddressTypes $type,
+        array $data,
     ): ?AddressModel {
-        $form = $this->getAddressForm($lidnr, $type)['form'];
-
+        $form = $this->getAddressForm($member, $type);
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -725,12 +707,11 @@ class Member
      * Add address.
      */
     public function addAddress(
-        array $data,
-        int $lidnr,
+        MemberModel $member,
         AddressTypes $type,
+        array $data,
     ): ?AddressModel {
-        $form = $this->getAddressForm($lidnr, $type, true)['form'];
-
+        $form = $this->getAddressForm($member, $type, true);
         $form->setData($data);
 
         if (!$form->isValid()) {
@@ -749,22 +730,18 @@ class Member
      * Remove address.
      */
     public function removeAddress(
-        array $data,
-        int $lidnr,
+        MemberModel $member,
         AddressTypes $type,
+        array $data,
     ): ?MemberModel {
-        $formData = $this->getDeleteAddressForm($lidnr, $type);
-        $form = $formData['form'];
-
+        $form = $this->getDeleteAddressForm();
         $form->setData($data);
 
         if (!$form->isValid()) {
             return null;
         }
 
-        $address = $formData['address'];
-        $member = $address->getMember();
-
+        $address = $this->getMemberMapper()->findMemberAddress($member, $type);
         $this->getMemberMapper()->removeAddress($address);
 
         return $member;
@@ -774,13 +751,12 @@ class Member
      * Subscribe member to mailing lists.
      */
     public function subscribeLists(
+        MemberModel $member,
         array $data,
-        int $lidnr,
     ): ?MemberModel {
-        $formData = $this->getListForm($lidnr);
+        $formData = $this->getListForm($member);
         $form = $formData['form'];
         $lists = $formData['lists'];
-        $member = $formData['member'];
 
         $form->setData($data);
 
@@ -789,12 +765,15 @@ class Member
         }
 
         $data = $form->getData();
-
         $member->clearLists();
 
         foreach ($lists as $list) {
             $name = 'list-' . $list->getName();
-            if (isset($data[$name]) && $data[$name]) {
+
+            if (
+                isset($data[$name])
+                && $data[$name]
+            ) {
                 $member->addList($list);
             }
         }
@@ -808,48 +787,39 @@ class Member
     /**
      * Get the member edit form.
      */
-    public function getMemberEditForm(int $lidnr): array
+    public function getMemberEditForm(MemberModel $member): array
     {
         $form = $this->memberEditForm;
-        $member = $this->getMember($lidnr);
-        $form->bind($member['member']);
+        $form->bind($member);
 
         return [
-            'member' => $member['member'],
+            'member' => $member,
             'form' => $form,
-            'tueData' => $this->getTueData($lidnr),
+            'tueData' => $this->getTueData($member),
         ];
     }
 
     /**
      * Get the member expiration form.
      */
-    public function getMemberExpirationForm(int $lidnr): array
+    public function getMemberExpirationForm(): MemberExpirationForm
     {
-        return [
-            'form' => $this->memberExpirationForm,
-            'member' => $this->getMember($lidnr)['member'],
-        ];
+        return $this->memberExpirationForm;
     }
 
     /**
      * Get the member type form.
      */
-    public function getMemberTypeForm(int $lidnr): array
+    public function getMemberTypeForm(): MemberTypeForm
     {
-        return [
-            'member' => $this->getMember($lidnr)['member'],
-            'form' => $this->memberTypeForm,
-        ];
+        return $this->memberTypeForm;
     }
 
     /**
      * Get the list edit form.
      */
-    public function getListForm(int $lidnr): array
+    public function getListForm(MemberModel $member): array
     {
-        $member = $this->getMember($lidnr);
-        $member = $member['member'];
         $lists = $this->mailingListService->getAllLists();
 
         return [
@@ -863,40 +833,31 @@ class Member
      * Get the address form.
      */
     public function getAddressForm(
-        int $lidnr,
+        MemberModel $member,
         AddressTypes $type,
         bool $create = false,
-    ): array {
+    ): AddressForm {
         // find the address
         if ($create) {
             $address = new AddressModel();
-            $address->setMember($this->getMemberMapper()->findSimple($lidnr));
+            $address->setMember($member);
             $address->setType($type);
         } else {
-            $address = $this->getMemberMapper()->findMemberAddress($lidnr, $type);
+            $address = $this->getMemberMapper()->findMemberAddress($member, $type);
         }
 
         $form = $this->addressForm;
         $form->bind($address);
 
-        return [
-            'form' => $form,
-            'address' => $address,
-        ];
+        return $form;
     }
 
     /**
      * Get the delete address form.
      */
-    public function getDeleteAddressForm(
-        int $lidnr,
-        AddressTypes $type,
-    ): array {
-        // find the address
-        return [
-            'form' => $this->deleteAddressForm,
-            'address' => $this->getMemberMapper()->findMemberAddress($lidnr, $type),
-        ];
+    public function getDeleteAddressForm(): DeleteAddressForm
+    {
+        return $this->deleteAddressForm;
     }
 
     /**

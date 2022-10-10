@@ -15,7 +15,7 @@ $(document).ready(function () {
                 $.each(data.json, function (idx, member) {
                     var link = '';
                     link += '<a style="display: block; width: 100%; height: 100%;" href="' + urlTemplate.replace('__LIDNR__', member.lidnr) + '">'
-                    table += '<tr>';
+                    table += '<tr ' + (member.deleted ? 'class="deleted"' : '') + '>';
                     table += '<td>' + link + member.lidnr + '</a></td>';
                     table += '<td>' + link + member.fullName + '</a></td>';
                     table += '<td>' + link + ((null == member.email) ? 'Onbekend' : member.email) + '</a></td>';

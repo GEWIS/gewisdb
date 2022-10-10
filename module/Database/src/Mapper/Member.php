@@ -80,7 +80,7 @@ class Member
      * Find a member address.
      */
     public function findMemberAddress(
-        int $lidnr,
+        MemberModel $member,
         AddressTypes $type,
     ): ?AddressModel {
         $qb = $this->em->createQueryBuilder();
@@ -92,7 +92,7 @@ class Member
             ->andWhere('a.type = :type')
             ->orderBy('m.lidnr', 'DESC');
 
-        $qb->setParameter(':lidnr', $lidnr);
+        $qb->setParameter(':lidnr', $member);
         $qb->setParameter(':type', $type);
 
         return $qb->getQuery()->getOneOrNullResult();

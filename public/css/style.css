@@ -347,6 +347,19 @@ ul.dropdown-menu.language.reverse {
     margin: 0.5rem 0;
 }
 
+tr.deleted > td {
+    background-color: #FF6666;
+}
+
+tr.deleted:focus > td,
+tr.deleted:hover > td {
+    background-color: #FF5050 !important;
+}
+
+tr.deleted > td > a {
+    color: #FFFFFF;
+}
+
 /* GEWISICONS */
 @font-face {
     font-family: 'gewisicons';
