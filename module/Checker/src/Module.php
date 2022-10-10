@@ -3,6 +3,7 @@
 namespace Checker;
 
 use Checker\Command\{
+    CheckAuthenticationKeysCommand,
     CheckDatabaseCommand,
     CheckDischargesCommand,
     CheckMembershipTUeCommand,
@@ -57,6 +58,7 @@ class Module
     {
         return [
             'factories' => [
+                CheckAuthenticationKeysCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDatabaseCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipExpirationCommand::class => AbstractCheckerCommandFactory::class,

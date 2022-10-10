@@ -49,6 +49,14 @@ class Member
     }
 
     /**
+     * Get members who are hidden or whose membership has expired.
+     */
+    public function getExpiredOrHiddenMembersWithAuthenticationKey(): array
+    {
+        return $this->memberMapper->getExpiredOrHiddenMembersWithAuthenticationKey();
+    }
+
+    /**
      * @return MemberMapper
      */
     public function getMemberMapper(): MemberMapper

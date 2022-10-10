@@ -47,6 +47,9 @@ use Laminas\View\Renderer\PhpRenderer;
 use ReflectionClass;
 use RuntimeException;
 
+use function bin2hex;
+use function random_bytes;
+
 class Member
 {
     public function __construct(
@@ -337,6 +340,9 @@ class Member
             $member->setMiddleName($tuedata->computedPrefixName());
             $member->setLastName($tuedata->computedLastName());
         }
+
+        // Add authentication key to allow external updates.
+        $member->setAuthenticationKey($this->generateAuthenticationKey());
 
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
@@ -839,6 +845,28 @@ class Member
         $this->getMemberUpdateMapper()->remove($memberUpdate);
 
         return true;
+    }
+
+    /**
+     * Generate authentication keys for members whose membership has not expired and who are not hidden.
+     */
+    public function generateAuthenticationKeys(): void
+    {
+        $members = $this->getMemberMapper()->getNonExpiredNonHiddenMembers();
+
+        /** @var MemberModel $member */
+        foreach ($members as $member) {
+            $member->setAuthenticationKey($this->generateAuthenticationKey());
+            $this->getMemberMapper()->persist($member);
+        }
+    }
+
+    /**
+     * Generate a cryptographically secure pseudo-random string of 64 bytes, encoded as hex.
+     */
+    private function generateAuthenticationKey(): string
+    {
+        return bin2hex(random_bytes(64));
     }
 
     /**

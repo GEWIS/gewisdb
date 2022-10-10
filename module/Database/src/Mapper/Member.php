@@ -13,6 +13,7 @@ use Database\Model\SubDecision\{
     Discharge as DischargeModel,
     Installation as InstallationModel,
 };
+use DateTime;
 use Doctrine\ORM\{
     EntityManager,
     EntityRepository,
@@ -228,6 +229,17 @@ class Member
         return true;
     }
 
+    /**
+     * Get a list of members whose membership has not expired and who are not hidden.
+     */
+    public function getNonExpiredNonHiddenMembers(): array
+    {
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where('m.expiration > CURRENT_TIMESTAMP()')
+            ->andWhere('m.hidden = False');
+
+        return $qb->getQuery()->getResult();
+    }
 
     /**
      * Persist a member model.

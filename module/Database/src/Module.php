@@ -27,6 +27,8 @@ use Database\Form\{
     QueryExport as QueryExportForm,
     QuerySave as QuerySaveForm,
 };
+use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
+use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Form\Board\{
     Discharge as BoardDischargeForm,
     Install as BoardInstallForm,
@@ -170,6 +172,7 @@ class Module
                 QueryExportForm::class => QueryExportForm::class,
             ],
             'factories' => [
+                GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,

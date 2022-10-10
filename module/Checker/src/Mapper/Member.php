@@ -95,6 +95,20 @@ class Member
     }
 
     /**
+     * Get a list of members who are hidden or whose membership has expired.
+     */
+    public function getExpiredOrHiddenMembersWithAuthenticationKey(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('m')
+            ->from('Database\Model\Member', 'm')
+            ->where('m.authenticationKey IS NOT NULL')
+            ->andWhere('m.expiration <= CURRENT_TIMESTAMP() OR m.hidden = True');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @return \DateTime
      */
     private function getEndOfCurrentAssociationYear()

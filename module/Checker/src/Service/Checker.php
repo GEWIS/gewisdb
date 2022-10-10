@@ -458,6 +458,22 @@ class Checker
     }
 
     /**
+     * Make sure that members who are hidden or whose membership has expired do not have an authentication key.
+     */
+    public function checkAuthenticationKeys(): void
+    {
+        $members = $this->memberService->getExpiredOrHiddenMembersWithAuthenticationKey();
+
+        echo '' . count($members) . ' members incorrectly have an authentication key' . PHP_EOL;
+
+        /** @var MemberModel $member */
+        foreach ($members as $member) {
+            $member->setAuthenticationKey(null);
+            $this->memberService->getMemberMapper()->persist($member);
+        }
+    }
+
+    /**
      * Determine the next expiration date (always the end of the next association year).
      *
      * @param DateTime $now

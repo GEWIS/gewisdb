@@ -24,6 +24,7 @@ use Database\Controller\Factory\{
     QueryControllerFactory,
     SettingsControllerFactory,
 };
+use Database\Command\GenerateAuthenticationKeysCommand;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Router\Http\{
     Literal,
@@ -589,6 +590,11 @@ return [
         ],
         'strategies' => [
             'ViewJsonStrategy',
+        ],
+    ],
+    'laminas-cli' => [
+        'commands' => [
+            'database:generate:keys' => GenerateAuthenticationKeysCommand::class,
         ],
     ],
     'doctrine' => [
