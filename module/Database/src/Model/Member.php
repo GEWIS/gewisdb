@@ -233,6 +233,19 @@ class Member
     protected Collection $lists;
 
     /**
+     * Determines if a member is deleted. A deleted member is a member whose basic info needs to be retained to ensure
+     * that all decisions that mention this member can be kept (i.e., administrative purposes). This value is only set
+     * when deleting a member and cannot be altered via the interface.
+     *
+     * Additionally, this flag can be used to filter deleted members in external services (e.g., GEWISWEB).
+     */
+    #[Column(
+        type: "boolean",
+        options: ["default" => false],
+    )]
+    protected bool $deleted = false;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -678,6 +691,26 @@ class Member
     }
 
     /**
+     * Get if the member is deleted.
+     *
+     * @return bool
+     */
+    public function getDeleted(): bool
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Set if the member is deleted.
+     *
+     * @param bool $deleted
+     */
+    public function setDeleted(bool $deleted): void
+    {
+        $this->deleted = $deleted;
+    }
+
+    /**
      * Convert most relevant items to array.
      *
      * @return array
@@ -694,6 +727,7 @@ class Member
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
             'hidden' => $this->getHidden(),
+            'deleted' => $this->getDeleted(),
             'expiration' => $this->getExpiration()->format('l j F Y'),
         ];
     }
