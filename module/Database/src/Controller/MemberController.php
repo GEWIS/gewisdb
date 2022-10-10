@@ -5,6 +5,7 @@ namespace Database\Controller;
 use Application\Model\Enums\AddressTypes;
 use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
+use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -79,7 +80,22 @@ class MemberController extends AbstractActionController
      */
     public function showAction(): ViewModel
     {
-        return new ViewModel($this->memberService->getMember((int) $this->params()->fromRoute('id')));
+        $lidnr = (int) $this->params()->fromRoute('id');
+        $member = $this->memberService->getMemberWithDecisions($lidnr);
+
+        if (null === $member) {
+            $member = $this->memberService->getMember($lidnr);
+
+            if (null === $member) {
+                return $this->notFoundAction();
+            }
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        return new ViewModel(['member' => $member]);
     }
 
     /**
@@ -89,7 +105,17 @@ class MemberController extends AbstractActionController
      */
     public function printAction(): ViewModel
     {
-        return new ViewModel($this->memberService->getMember((int) $this->params()->fromRoute('id')));
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if (null === $member) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        return new ViewModel(['member' => $member]);
     }
 
     /**
@@ -97,15 +123,25 @@ class MemberController extends AbstractActionController
      *
      * Toggles if a member wants a supremum
      */
-    public function setSupremumAction(): Response
+    public function setSupremumAction(): Response|ViewModel
     {
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if (null === $member) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
         $this->memberService->setSupremum(
-            (int) $this->params()->fromRoute('id'),
+            $member,
             $this->params()->fromRoute('value'),
         );
 
         return $this->redirect()->toRoute('member/show', [
-            'id' => $this->params()->fromRoute('id'),
+            'id' => $member->getLidnr(),
         ]);
     }
 
@@ -116,12 +152,20 @@ class MemberController extends AbstractActionController
      */
     public function editAction(): ViewModel
     {
-        $lidnr = (int) $this->params()->fromRoute('id');
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if (null === $member) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
 
         if ($this->getRequest()->isPost()) {
             $member = $this->memberService->edit(
+                $member,
                 $this->getRequest()->getPost()->toArray(),
-                $lidnr,
             );
 
             if (null !== $member) {
@@ -132,7 +176,7 @@ class MemberController extends AbstractActionController
             }
         }
 
-        return new ViewModel($this->memberService->getMemberEditForm($lidnr));
+        return new ViewModel($this->memberService->getMemberEditForm($member));
     }
 
     /**
@@ -142,12 +186,14 @@ class MemberController extends AbstractActionController
      */
     public function deleteAction(): ViewModel
     {
-        $lidnr = (int) $this->params()->fromRoute('id');
-        $member = $this->memberService->getMember($lidnr);
-        $member = $member['member'];
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
         if ($member === null) {
             return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
         }
 
         if ($this->getRequest()->isPost()) {
@@ -172,12 +218,20 @@ class MemberController extends AbstractActionController
      */
     public function listsAction(): ViewModel
     {
-        $lidnr = (int) $this->params()->fromRoute('id');
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
 
         if ($this->getRequest()->isPost()) {
             $member = $this->memberService->subscribeLists(
+                $member,
                 $this->getRequest()->getPost()->toArray(),
-                $lidnr,
             );
 
             if (null !== $member) {
@@ -188,7 +242,7 @@ class MemberController extends AbstractActionController
             }
         }
 
-        return new ViewModel($this->memberService->getListForm($lidnr));
+        return new ViewModel($this->memberService->getListForm($member));
     }
 
     /**
@@ -198,12 +252,20 @@ class MemberController extends AbstractActionController
      */
     public function membershipAction(): ViewModel
     {
-        $lidnr = (int) $this->params()->fromRoute('id');
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
 
         if ($this->getRequest()->isPost()) {
             $member = $this->memberService->membership(
+                $member,
                 $this->getRequest()->getPost()->toArray(),
-                $lidnr,
             );
 
             if (null !== $member) {
@@ -214,7 +276,10 @@ class MemberController extends AbstractActionController
             }
         }
 
-        return new ViewModel($this->memberService->getMemberTypeForm($lidnr));
+        return new ViewModel([
+            'form' => $this->memberService->getMemberTypeForm(),
+            'member' => $member,
+        ]);
     }
 
     /**
@@ -224,12 +289,20 @@ class MemberController extends AbstractActionController
      */
     public function expirationAction(): ViewModel
     {
-        $lidnr = (int) $this->params()->fromRoute('id');
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
 
         if ($this->getRequest()->isPost()) {
             $member = $this->memberService->expiration(
+                $member,
                 $this->getRequest()->getPost()->toArray(),
-                $lidnr,
             );
 
             if (null !== $member) {
@@ -240,7 +313,10 @@ class MemberController extends AbstractActionController
             }
         }
 
-        return new ViewModel($this->memberService->getMemberExpirationForm($lidnr));
+        return new ViewModel([
+            'form' => $this->memberService->getMemberExpirationForm(),
+            'member' => $member,
+        ]);
     }
 
     /**
@@ -250,14 +326,27 @@ class MemberController extends AbstractActionController
      */
     public function editAddressAction(): ViewModel
     {
-        $lidnr = (int) $this->params()->fromRoute('id');
-        $type = AddressTypes::from($this->params()->fromRoute('type'));
+        $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
+
+        if (null === $type) {
+            return $this->notFoundAction();
+        }
+
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
 
         if ($this->getRequest()->isPost()) {
             $address = $this->memberService->editAddress(
-                $this->getRequest()->getPost()->toArray(),
-                $lidnr,
+                $member,
                 $type,
+                $this->getRequest()->getPost()->toArray(),
             );
 
             if (null !== $address) {
@@ -268,7 +357,12 @@ class MemberController extends AbstractActionController
             }
         }
 
-        return new ViewModel($this->memberService->getAddressForm($lidnr, $type));
+        $form = $this->memberService->getAddressForm($member, $type);
+
+        return new ViewModel([
+            'address' => $form->getObject(),
+            'form' => $form,
+        ]);
     }
 
     /**
@@ -278,32 +372,49 @@ class MemberController extends AbstractActionController
      */
     public function addAddressAction(): ViewModel
     {
-        $lidnr = $this->params()->fromRoute('id');
-        $type = AddressTypes::from($this->params()->fromRoute('type'));
+        $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
+
+        if (null === $type) {
+            return $this->notFoundAction();
+        }
+
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
 
         if ($this->getRequest()->isPost()) {
             $address = $this->memberService->addAddress(
-                $this->getRequest()->getPost()->toArray(),
-                $lidnr,
+                $member,
                 $type,
+                $this->getRequest()->getPost()->toArray(),
             );
 
             if (null !== $address) {
                 $vm = new ViewModel([
-                    'success' => true,
                     'add' => true,
                     'address' => $address,
+                    'success' => true,
                 ]);
-
                 $vm->setTemplate('database/member/edit-address');
 
                 return $vm;
             }
         }
 
-        $vm = new ViewModel($this->memberService->getAddressForm($lidnr, $type, true));
+        $form = $this->memberService->getAddressForm($member, $type, true);
+
+        $vm = new ViewModel([
+            'add' => true,
+            'address' => $form->getObject(),
+            'form' => $form,
+        ]);
         $vm->setTemplate('database/member/edit-address');
-        $vm->add = true;
 
         return $vm;
     }
@@ -315,14 +426,27 @@ class MemberController extends AbstractActionController
      */
     public function removeAddressAction(): ViewModel
     {
-        $lidnr = (int) $this->params()->fromRoute('id');
-        $type = AddressTypes::from($this->params()->fromRoute('type'));
+        $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
+
+        if (null === $type) {
+            return $this->notFoundAction();
+        }
+
+        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
 
         if ($this->getRequest()->isPost()) {
             $member = $this->memberService->removeAddress(
-                $this->getRequest()->getPost()->toArray(),
-                $lidnr,
+                $member,
                 $type,
+                $this->getRequest()->getPost()->toArray(),
             );
 
             if (null !== $member) {
@@ -333,7 +457,11 @@ class MemberController extends AbstractActionController
             }
         }
 
-        return new ViewModel($this->memberService->getDeleteAddressForm($lidnr, $type));
+        return new ViewModel([
+            'addressType' => $type,
+            'form' => $this->memberService->getDeleteAddressForm(),
+            'member' => $member,
+        ]);
     }
 
     /**
@@ -364,5 +492,15 @@ class MemberController extends AbstractActionController
         return new JsonModel(
             $data->toArray(),
         );
+    }
+
+    private function memberIsDeleted(MemberModel $member): ViewModel
+    {
+        $viewModel = new ViewModel([
+            'member' => $member,
+        ]);
+        $viewModel->setTemplate('database/member/deleted.phtml');
+
+        return $viewModel;
     }
 }

@@ -155,7 +155,10 @@ class Checker
             // Check if the members are still member of GEWIS
             $member = $installation->getMember();
 
-            if ($member->getExpiration() < $meeting->getDate()) {
+            if (
+                $member->getExpiration() < $meeting->getDate()
+                && !$member->getDeleted()
+            ) {
                 $errors[] = new Error\MemberExpiredButStillInOrgan($meeting, $installation);
             }
         }
