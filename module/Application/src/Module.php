@@ -4,23 +4,42 @@ namespace Application;
 
 use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
+use Doctrine\ORM\{
+    EntityManager,
+    Events,
+};
 use Application\View\Helper\{
     FileUrl,
     IsModuleActive,
 };
+use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\Translator as I18nTranslator;
+use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\ModuleRouteListener;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
+use Laminas\ServiceManager\ServiceManager;
 use Laminas\Session\Container as SessionContainer;
 use Laminas\Validator\AbstractValidator;
 use Locale;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
+use Report\Listener\{
+    DatabaseDeletionListener,
+    DatabaseUpdateListener,
+};
 
 class Module
 {
+    public function init(ModuleManager $moduleManager)
+    {
+        // Register event listener for when all modules are loaded to register our database listeners. This is necessary
+        // because `onBootstrap` is never called when using `laminas/laminas-cli`.
+        $events = $moduleManager->getEventManager();
+        $events->attach('loadModules.post', [$this, 'modulesLoaded']);
+    }
+
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
@@ -43,6 +62,18 @@ class Module
 
         // Enable Laminas\Validator default translator
         AbstractValidator::setDefaultTranslator($mvcTranslator);
+    }
+
+    public function modulesLoaded(EventInterface $event)
+    {
+        /** @var ServiceManager $container */
+        $container = $event->getParam('ServiceManager');
+        /** @var EntityManager $entityManager */
+        $entityManager = $container->get('database_doctrine_em');
+        $eventManager = $entityManager->getEventManager();
+        $eventManager->addEventListener([Events::postPersist], $container->get(DatabaseUpdateListener::class));
+        $eventManager->addEventListener([Events::postUpdate], $container->get(DatabaseUpdateListener::class));
+        $eventManager->addEventListener([Events::preRemove], $container->get(DatabaseDeletionListener::class));
     }
 
     /**

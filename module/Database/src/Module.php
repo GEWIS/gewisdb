@@ -106,36 +106,13 @@ use Database\Service\{
     Query as QueryService,
 };
 use Doctrine\Laminas\Hydrator\DoctrineObject;
-use Doctrine\ORM\Events;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
-use Laminas\Mvc\MvcEvent;
 use Psr\Container\ContainerInterface;
-use Report\Listener\{
-    DatabaseDeletionListener,
-    DatabaseUpdateListener,
-};
 use stdClass;
 
 class Module
 {
-    /**
-     * Bootstrap event.
-     *
-     * @param MvcEvent $e
-     */
-    public function onBootstrap(MvcEvent $e)
-    {
-        $sm = $e->getApplication()->getServiceManager();
-
-        // register event logging
-        $em = $sm->get('database_doctrine_em');
-        $dem = $em->getEventManager();
-        $dem->addEventListener([Events::postPersist], $sm->get(DatabaseUpdateListener::class));
-        $dem->addEventListener([Events::postUpdate], $sm->get(DatabaseUpdateListener::class));
-        $dem->addEventListener([Events::preRemove], $sm->get(DatabaseDeletionListener::class));
-    }
-
     /**
      * Get the configuration for this module.
      *
