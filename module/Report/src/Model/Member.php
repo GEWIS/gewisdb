@@ -19,7 +19,6 @@ use Doctrine\ORM\Mapping\{
     ManyToMany,
     OneToMany,
 };
-use InvalidArgumentException;
 use Report\Model\SubDecision\Installation;
 
 /**
@@ -741,7 +740,7 @@ class Member
      *
      * Note that this is the owning side.
      */
-    public function removeList(MailingList $list)
+    public function removeList(MailingList $list): void
     {
         $list->removeMember($this);
         $this->lists->removeElement($list);
