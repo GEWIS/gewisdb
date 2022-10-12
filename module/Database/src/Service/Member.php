@@ -551,6 +551,8 @@ class Member
         $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(null);
+        $member->setIsStudying(false);
+        $member->setLastCheckedOn(null);
         $member->setChangedOn(new DateTime());
         $member->setMembershipEndsOn($date);
         $member->setExpiration($date);
