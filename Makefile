@@ -28,6 +28,7 @@ help:
 
 .DEFAULT_GOAL := all
 
+SHELL = /bin/bash
 LAST_WEB_COMMIT := $(shell git rev-parse --short HEAD)
 
 runprod:
@@ -75,13 +76,20 @@ compilelang:
 
 update: updatecomposer updatedocker
 
-loadenv:
-		@set -o allexport; source .env; set +o allexport
+loadenv: copyprodconf
+		@set -o allexport
+		@source .env
+		@set +o allexport
 
 copyconf:
 		cp config/autoload/local.development.php.dist config/autoload/local.php
 		cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-		cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
+
+copyprodconf:
+		@cp config/autoload/local.production.php.dist config/autoload/local.php
+		@cp config/autoload/doctrine.local.production.php.dist config/autoload/doctrine.local.php
+		@cp config/autoload/local.test.php.dist config/autoload/local.test.php
+		@cp config/autoload/doctrine.local.test.php.dist config/autoload/doctrine.local.test.php
 
 phpstan:
 		@docker compose exec web echo "" > phpstan/phpstan-baseline-pr.neon

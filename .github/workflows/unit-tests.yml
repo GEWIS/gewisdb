@@ -42,8 +42,9 @@ jobs:
             -   name: Extract configuration files
                 run: |
                     cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
-                    cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
                     cp config/autoload/local.development.php.dist config/autoload/local.php
+                    cp config/autoload/doctrine.local.test.php.dist config/autoload/doctrine.local.test.php
+                    cp config/autoload/local.test.php.dist config/autoload/local.test.php
 
             -   name: Load environment variables
                 uses: c-py/action-dotenv-to-setenv@v3
