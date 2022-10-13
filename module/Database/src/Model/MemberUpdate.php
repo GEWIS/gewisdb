@@ -27,7 +27,7 @@ class MemberUpdate
         referencedColumnName: "lidnr",
         nullable: false,
     )]
-    protected ?Member $member = null;
+    protected Member $member;
 
     /**
      * When the update was requested.
