@@ -836,6 +836,7 @@ class Member
             }
         }
 
+        $member->setAuthenticationKey($this->generateAuthenticationKey());
         $this->getMemberMapper()->persist($member);
         $this->getMemberUpdateMapper()->remove($memberUpdate);
 
