@@ -812,7 +812,7 @@ class Member
     public function getFrontpageData(): array
     {
         return [
-            'members' => $this->getMemberMapper()->getRepository()->count([]),
+            'members' => $this->getMemberMapper()->getRepository()->count(['deleted' => false]),
             'prospectives' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
             'updates' => $this->getMemberUpdateMapper()->getRepository()->count([]),
         ];
