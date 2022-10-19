@@ -40,10 +40,10 @@ class SavedQuery
     public function findByName(string $name): ?SavedQueryModel
     {
         $qb = $this->getRepository()->createQueryBuilder('q');
-        $qb->
-            where('LOWER(q.name) LIKE LOWER(:name)')->
-            setMaxResults(1)->
-            setParameter('name', $name);
+        $qb->where('LOWER(q.name) LIKE LOWER(:name)')
+           ->setMaxResults(1)
+           ->setParameter('name', $name);
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -56,6 +56,7 @@ class SavedQuery
     {
         $qb = $this->getRepository()->createQueryBuilder('q');
         $qb->add('orderBy', 'lower(q.name) ASC');
+
         return $qb->getQuery()->getResult();
     }
 

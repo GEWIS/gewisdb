@@ -57,11 +57,13 @@ $submit->setAttribute('class', 'btn btn-primary');
 <?php 
     $prefix = null;
     foreach ($saved as $query): 
-    if ($prefix !== strtoupper(explode(":", $query->getName(), 2)[0])) { 
-        $prefix = strtoupper(explode(":", $query->getName(), 2)[0]); ?>
+    if ($prefix !== strtoupper(explode(":", $query->getName(), 2)[0])):
+        $prefix = strtoupper(explode(":", $query->getName(), 2)[0]);
+    ?>
         </ul></li><li><b><?= $prefix ?></b><ul>
     <?php
-    } ?>
+    endif;
+    ?>
         <li><a href="<?= $this->url('query/show', array('query' => $query->getId())) ?>"><?= explode(":", $query->getName(), 2)[1] ?></a></li>
 <?php 
     endforeach; ?>
