@@ -24,7 +24,10 @@ use Database\Controller\Factory\{
     QueryControllerFactory,
     SettingsControllerFactory,
 };
-use Database\Command\GenerateAuthenticationKeysCommand;
+use Database\Command\{
+    DeleteExpiredMembersCommand,
+    GenerateAuthenticationKeysCommand,
+};
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Router\Http\{
     Literal,
@@ -594,7 +597,8 @@ return [
     ],
     'laminas-cli' => [
         'commands' => [
-            'database:generate:keys' => GenerateAuthenticationKeysCommand::class,
+            'database:members:delete-expired' => DeleteExpiredMembersCommand::class,
+            'database:members:generate-keys' => GenerateAuthenticationKeysCommand::class,
         ],
     ],
     'doctrine' => [

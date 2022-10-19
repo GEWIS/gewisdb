@@ -524,6 +524,18 @@ class Member
     }
 
     /**
+     * Remove all members that are expired on or before some date.
+     */
+    public function removeExpiredMembers(DateTime $expiration): void
+    {
+        $members = $this->getMemberMapper()->findExpired($expiration);
+
+        foreach ($members as $member) {
+            $this->remove($member);
+        }
+    }
+
+    /**
      * Remove a member.
      */
     public function removeProspective(ProspectiveMemberModel $member): void

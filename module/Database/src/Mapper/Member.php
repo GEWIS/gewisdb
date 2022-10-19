@@ -195,6 +195,19 @@ class Member
     }
 
     /**
+     * Find all members whose membership expired on or before a date.
+     */
+    public function findExpired(DateTime $expiration): array
+    {
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where('m.expiration <= :expiration')
+            ->andWhere('m.deleted = False')
+            ->setParameter('expiration', $expiration);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Check if we can fully remove a member.
      */
     public function canRemove(MemberModel $member): bool
