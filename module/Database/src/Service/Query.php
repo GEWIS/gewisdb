@@ -41,7 +41,13 @@ class Query
     {
         $form = $this->getQuerySaveForm();
 
-        $form->bind(new SavedQueryModel());
+        $query = $this->getSavedQueryMapper()->findByName($data['name']);
+        if (null !== $query) {
+            $form->bind($query);
+        } else {
+            $form->bind(new SavedQueryModel());
+        }
+
         $form->setData($data);
 
         if (!$form->isValid()) {

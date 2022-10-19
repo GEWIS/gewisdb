@@ -35,13 +35,29 @@ class SavedQuery
     }
 
     /**
+     * Find by name.
+     */
+    public function findByName(string $name): ?SavedQueryModel
+    {
+        $qb = $this->getRepository()->createQueryBuilder('q');
+        $qb->where('LOWER(q.name) LIKE LOWER(:name)')
+           ->setMaxResults(1)
+           ->setParameter('name', $name);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
      * Find all.
      *
      * @return array<array-key, SavedQueryModel>
      */
     public function findAll(): array
     {
-        return $this->getRepository()->findAll();
+        $qb = $this->getRepository()->createQueryBuilder('q');
+        $qb->add('orderBy', 'lower(q.name) ASC');
+
+        return $qb->getQuery()->getResult();
     }
 
     /**

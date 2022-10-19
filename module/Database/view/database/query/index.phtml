@@ -53,14 +53,25 @@ $submit->setAttribute('class', 'btn btn-primary');
 <div class="col-md-3">
 <h3>Opgeslagen queries</h3>
 <ul>
-<?php foreach ($saved as $query): ?>
-    <li><a href="<?= $this->url('query/show', array('query' => $query->getId())) ?>"><?= $query->getName() ?></a></li>
-<?php endforeach; ?>
-
+    <li><ul>
+<?php 
+    $prefix = null;
+    foreach ($saved as $query): 
+    if ($prefix !== strtoupper(explode(":", $query->getName(), 2)[0])):
+        $prefix = strtoupper(explode(":", $query->getName(), 2)[0]);
+    ?>
+        </ul></li><li><b><?= $prefix ?></b><ul>
+    <?php
+    endif;
+    ?>
+        <li><a href="<?= $this->url('query/show', array('query' => $query->getId())) ?>"><?= explode(":", $query->getName(), 2)[1] ?></a></li>
+<?php 
+    endforeach; ?>
+</ul></li>
 </ul>
 
     Een overzicht van alle mogelijkheden van DQL kan gevonden worden in de
-    <a href="https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/dql-doctrine-query-language.html">DQL documentaties</a>.
+    <a href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/dql-doctrine-query-language.html">DQL documentaties</a>.
 
     Alle entities in deze database:
     <ul>
