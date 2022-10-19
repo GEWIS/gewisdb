@@ -27,7 +27,7 @@ class QueryController extends AbstractActionController
 
             $result = $this->queryService->execute($post);
 
-            if (!is_null($result) && count($result) > 0) {
+            if (!is_null($result)) {
                 return new ViewModel([
                     'form' => $this->queryService->getQueryForm(),
                     'exportform' => $this->queryService->getQueryExportForm(),
