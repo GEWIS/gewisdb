@@ -8,10 +8,12 @@ use Database\Model\{
     Member as MemberModel,
 };
 use Database\Model\SubDecision\{
+    Board\Installation as BoardInstallationModel,
     Budget as BudgetModel,
     Destroy as DestroyModel,
     Discharge as DischargeModel,
     Installation as InstallationModel,
+    Reckoning as ReckoningModel,
 };
 use DateTime;
 use Doctrine\ORM\{
@@ -225,11 +227,39 @@ class Member
             return false;
         }
 
+        // check if the member is included in reckonings
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('b')
+            ->from(ReckoningModel::class, 'b')
+            ->where('b.author = :member');
+        $qb->setParameter('member', $member);
+
+        $results = $qb->getQuery()->getResult();
+
+        if (!empty($results)) {
+            return false;
+        }
+
         // check if the member has been installed
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('i')
             ->from(InstallationModel::class, 'i')
+            ->where('i.member = :member');
+        $qb->setParameter('member', $member);
+
+        $results = $qb->getQuery()->getResult();
+
+        if (!empty($results)) {
+            return false;
+        }
+
+        // check if the member has been a board member
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('i')
+            ->from(BoardInstallationModel::class, 'i')
             ->where('i.member = :member');
         $qb->setParameter('member', $member);
 
