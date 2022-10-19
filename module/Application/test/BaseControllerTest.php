@@ -45,10 +45,9 @@ abstract class BaseControllerTest extends AbstractHttpControllerTestCase
 
         $this->serviceManager = $this->initServiceManager($appConfig);
 
-        $this->serviceManager->setAllowOverride(true);
-        TestConfigProvider::overrideConfig($this->serviceManager);
-        $this->setUpMockedServices();
-        $this->serviceManager->setAllowOverride(false);
+        // $this->serviceManager->setAllowOverride(true);
+        // $this->setUpMockedServices();
+        // $this->serviceManager->setAllowOverride(false);
 
         $this->application = $this->bootstrapApplication($this->serviceManager, $appConfig);
 

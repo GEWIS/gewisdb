@@ -1,0 +1,28 @@
+<h1><?= $this->translate('Data Update Requests')?></h1>
+<?php if (empty($updates)): ?>
+    Er zijn geen update verzoeken.
+<?php else: ?>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th><?= $this->translate('Name') ?></th>
+                <th><?= $this->translate('Action') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($updates as $update): ?>
+                <tr>
+                    <td><?= $update->getMember()->getLidnr() ?></td>
+                    <td><?= $update->getMember()->getFullName() ?></td>
+                    <td>
+                        <a class="btn btn-primary btn-xs"
+                           href="<?= $this->url('member/show/update', ['id' => $update->getMember()->getLidnr()]) ?>">
+                            <?= $this->translate('View') ?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>

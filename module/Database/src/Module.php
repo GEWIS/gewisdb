@@ -27,6 +27,8 @@ use Database\Form\{
     QueryExport as QueryExportForm,
     QuerySave as QuerySaveForm,
 };
+use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
+use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Form\Board\{
     Discharge as BoardDischargeForm,
     Install as BoardInstallForm,
@@ -63,6 +65,7 @@ use Database\Mapper\Factory\{
     MailingListFactory as MailingListMapperFactory,
     MeetingFactory as MeetingMapperFactory,
     MemberFactory as MemberMapperFactory,
+    MemberUpdateFactory as MemberUpdateMapperFactory,
     OrganFactory as OrganMapperFactory,
     ProspectiveMemberFactory as ProspectiveMemberMapperFactory,
     SavedQueryFactory as SavedQueryMapperFactory,
@@ -72,6 +75,7 @@ use Database\Mapper\{
     MailingList as MailingListMapper,
     Meeting as MeetingMapper,
     Member as MemberMapper,
+    MemberUpdate as MemberUpdateMapper,
     Organ as OrganMapper,
     ProspectiveMember as ProspectiveMemberMapper,
     SavedQuery as SavedQueryMapper,
@@ -102,36 +106,13 @@ use Database\Service\{
     Query as QueryService,
 };
 use Doctrine\Laminas\Hydrator\DoctrineObject;
-use Doctrine\ORM\Events;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
-use Laminas\Mvc\MvcEvent;
 use Psr\Container\ContainerInterface;
-use Report\Listener\{
-    DatabaseDeletionListener,
-    DatabaseUpdateListener,
-};
 use stdClass;
 
 class Module
 {
-    /**
-     * Bootstrap event.
-     *
-     * @param MvcEvent $e
-     */
-    public function onBootstrap(MvcEvent $e)
-    {
-        $sm = $e->getApplication()->getServiceManager();
-
-        // register event logging
-        $em = $sm->get('database_doctrine_em');
-        $dem = $em->getEventManager();
-        $dem->addEventListener([Events::postPersist], $sm->get(DatabaseUpdateListener::class));
-        $dem->addEventListener([Events::postUpdate], $sm->get(DatabaseUpdateListener::class));
-        $dem->addEventListener([Events::preRemove], $sm->get(DatabaseDeletionListener::class));
-    }
-
     /**
      * Get the configuration for this module.
      *
@@ -168,6 +149,7 @@ class Module
                 QueryExportForm::class => QueryExportForm::class,
             ],
             'factories' => [
+                GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
@@ -423,6 +405,7 @@ class Module
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
+                MemberUpdateMapper::class => MemberUpdateMapperFactory::class,
                 OrganMapper::class => OrganMapperFactory::class,
                 ProspectiveMemberMapper::class => ProspectiveMemberMapperFactory::class,
                 SavedQueryMapper::class => SavedQueryMapperFactory::class,

@@ -17,6 +17,7 @@ use Database\Form\{
 use Database\Mapper\{
     MailingList as MailingListMapper,
     Member as MemberMapper,
+    MemberUpdate as MemberUpdateMapper,
     ProspectiveMember as ProspectiveMemberMapper,
 };
 use Database\Service\{
@@ -62,6 +63,8 @@ class MemberFactory implements FactoryInterface
         $mailingListMapper = $container->get(MailingListMapper::class);
         /** @var MemberMapper $memberMapper */
         $memberMapper = $container->get(MemberMapper::class);
+        /** @var MemberUpdateMapper $memberUpdateMapper */
+        $memberUpdateMapper = $container->get(MemberUpdateMapper::class);
         /** @var ProspectiveMemberMapper $prospectiveMemberMapper */
         $prospectiveMemberMapper = $container->get(ProspectiveMemberMapper::class);
         /** @var CheckerService $checkerService */
@@ -88,6 +91,7 @@ class MemberFactory implements FactoryInterface
             $memberTypeForm,
             $mailingListMapper,
             $memberMapper,
+            $memberUpdateMapper,
             $prospectiveMemberMapper,
             $checkerService,
             $fileStorageService,

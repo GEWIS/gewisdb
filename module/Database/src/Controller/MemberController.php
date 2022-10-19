@@ -3,22 +3,27 @@
 namespace Database\Controller;
 
 use Application\Model\Enums\AddressTypes;
-use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\I18n\Translator;
+use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\View\Model\{
     ViewModel,
     JsonModel,
 };
 
+/**
+ * @method FlashMessenger flashMessenger()
+ */
 class MemberController extends AbstractActionController
 {
     public function __construct(
-        private readonly MemberService $memberService,
+        private readonly Translator $translator,
         private readonly CheckerService $checkerService,
+        private readonly MemberService $memberService,
     ) {
     }
 
@@ -150,7 +155,7 @@ class MemberController extends AbstractActionController
      *
      * Edit member information.
      */
-    public function editAction(): ViewModel
+    public function editAction(): Response|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -169,11 +174,12 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $member) {
-                return new ViewModel([
-                    'success' => true,
-                    'member' => $member,
-                ]);
+                $this->flashMessenger()->addSuccessMessage('Wijzigingen zijn opgeslagen!');
+
+                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
             }
+
+            $this->flashMessenger()->addSuccessMessage('Wijzigingen kunnen niet worden opgeslagen.');
         }
 
         return new ViewModel($this->memberService->getMemberEditForm($member));
@@ -184,7 +190,7 @@ class MemberController extends AbstractActionController
      *
      * Delete a member.
      */
-    public function deleteAction(): ViewModel
+    public function deleteAction(): Response|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -199,9 +205,9 @@ class MemberController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $this->memberService->remove($member);
 
-            return new ViewModel([
-                'success' => true,
-            ]);
+            $this->flashMessenger()->addSuccessMessage('Het lid is succesvol verwijderd.');
+
+            return $this->redirect()->toRoute('member');
         }
 
         return new ViewModel([
@@ -216,7 +222,7 @@ class MemberController extends AbstractActionController
      *
      * Update list membership.
      */
-    public function listsAction(): ViewModel
+    public function listsAction(): Response|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -235,11 +241,12 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $member) {
-                return new ViewModel([
-                    'success' => true,
-                    'member' => $member,
-                ]);
+                $this->flashMessenger()->addSuccessMessage('Aanmeldingen mailinglijsten zijn opgeslagen!');
+
+                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
             }
+
+            $this->flashMessenger()->addSuccessMessage('Aanmeldingen mailinglijsten kunnen niet worden opgeslagen.');
         }
 
         return new ViewModel($this->memberService->getListForm($member));
@@ -250,7 +257,7 @@ class MemberController extends AbstractActionController
      *
      * Update / renew membership.
      */
-    public function membershipAction(): ViewModel
+    public function membershipAction(): Response|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -269,11 +276,12 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $member) {
-                return new ViewModel([
-                    'success' => true,
-                    'member' => $member,
-                ]);
+                $this->flashMessenger()->addSuccessMessage('Wijziging lidmaatschapstype is opgeslagen!');
+
+                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
             }
+
+            $this->flashMessenger()->addSuccessMessage('Wijziging lidmaatschapstype kan niet worden opgeslagen.');
         }
 
         return new ViewModel([
@@ -287,7 +295,7 @@ class MemberController extends AbstractActionController
      *
      * Extend the duration of the membership.
      */
-    public function expirationAction(): ViewModel
+    public function expirationAction(): Response|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -306,11 +314,12 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $member) {
-                return new ViewModel([
-                    'success' => true,
-                    'member' => $member,
-                ]);
+                $this->flashMessenger()->addSuccessMessage('Nieuwe verloopdatum lidmaatschap is opgeslagen!');
+
+                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
             }
+
+            $this->flashMessenger()->addSuccessMessage('Nieuwe verloopdatum lidmaatschap kan niet worden opgeslagen.');
         }
 
         return new ViewModel([
@@ -324,7 +333,7 @@ class MemberController extends AbstractActionController
      *
      * Edit a member's address.
      */
-    public function editAddressAction(): ViewModel
+    public function editAddressAction(): Response|ViewModel
     {
         $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
 
@@ -350,11 +359,12 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $address) {
-                return new ViewModel([
-                    'success' => true,
-                    'address' => $address,
-                ]);
+                $this->flashMessenger()->addSuccessMessage('Wijzigingen adres zijn opgeslagen!');
+
+                return $this->redirect()->toRoute('member/show', ['id' => $address->getMember()->getLidnr()]);
             }
+
+            $this->flashMessenger()->addSuccessMessage('Wijzigingen adress kunnen niet worden opgeslagen.');
         }
 
         $form = $this->memberService->getAddressForm($member, $type);
@@ -370,7 +380,7 @@ class MemberController extends AbstractActionController
      *
      * Add a member's address.
      */
-    public function addAddressAction(): ViewModel
+    public function addAddressAction(): Response|ViewModel
     {
         $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
 
@@ -396,15 +406,12 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $address) {
-                $vm = new ViewModel([
-                    'add' => true,
-                    'address' => $address,
-                    'success' => true,
-                ]);
-                $vm->setTemplate('database/member/edit-address');
+                $this->flashMessenger()->addSuccessMessage('Nieuw adres is opgeslagen!');
 
-                return $vm;
+                return $this->redirect()->toRoute('member/show', ['id' => $address->getMember()->getLidnr()]);
             }
+
+            $this->flashMessenger()->addSuccessMessage('Nieuw address kan niet worden opgeslagen.');
         }
 
         $form = $this->memberService->getAddressForm($member, $type, true);
@@ -424,7 +431,7 @@ class MemberController extends AbstractActionController
      *
      * Remove a member's address.
      */
-    public function removeAddressAction(): ViewModel
+    public function removeAddressAction(): Response|ViewModel
     {
         $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
 
@@ -450,11 +457,12 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $member) {
-                return new ViewModel([
-                    'success' => true,
-                    'member' => $member,
-                ]);
+                $this->flashMessenger()->addSuccessMessage('Adres is succesvol verwijderd!');
+
+                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
             }
+
+            $this->flashMessenger()->addSuccessMessage('Address kan niet worden verwijderd.');
         }
 
         return new ViewModel([
@@ -492,6 +500,121 @@ class MemberController extends AbstractActionController
         return new JsonModel(
             $data->toArray(),
         );
+    }
+
+    /**
+     * Show all pending member updates.
+     */
+    public function updatesAction(): ViewModel
+    {
+        return new ViewModel(['updates' => $this->memberService->getPendingMemberUpdates()]);
+    }
+
+    /**
+     * Show a specific member update.
+     */
+    public function showUpdateAction(): ViewModel
+    {
+        $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
+
+        if (null === $memberUpdate) {
+            return $this->notFoundAction();
+        }
+
+        $member = $memberUpdate->getMember();
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        return new ViewModel([
+            'member' => $member,
+            'memberUpdate' => $memberUpdate,
+        ]);
+    }
+
+    /**
+     * Approve a pending member update.
+     */
+    public function approveUpdateAction(): Response|ViewModel
+    {
+        $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
+
+        if (null === $memberUpdate) {
+            return $this->notFoundAction();
+        }
+
+        $member = $memberUpdate->getMember();
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $member = $this->memberService->approveMemberUpdate($member, $memberUpdate);
+
+            if (null !== $member) {
+                $this->flashMessenger()->addSuccessMessage(
+                    $this->translator->translate('The changes have been applied!')
+                );
+
+                return $this->redirect()->toRoute('member/updates');
+            }
+
+            $this->flashMessenger()->addErrorMessage(
+                $this->translator->translate('An error occurred while trying to save the changes.')
+            );
+        }
+
+        return $this->redirect()->toRoute('member/show/update', ['id' => $member->getLidnr()]);
+    }
+
+    /**
+     * Reject a member update.
+     */
+    public function rejectUpdateAction(): Response|ViewModel
+    {
+        $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
+
+        if (null === $memberUpdate) {
+            return $this->notFoundAction();
+        }
+
+        $member = $memberUpdate->getMember();
+
+        if ($member === null) {
+            return $this->notFoundAction();
+        }
+
+        if ($member->getDeleted()) {
+            return $this->memberIsDeleted($member);
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $result = $this->memberService->rejectMemberUpdate($memberUpdate);
+
+            if (null !== $result) {
+                $this->flashMessenger()->addInfoMessage(
+                    $this->translator->translate('The changes have not been applied.')
+                );
+
+                return $this->redirect()->toRoute('member/updates');
+            }
+
+            $this->flashMessenger()->addInfoMessage(
+                $this->translator->translate('An error occurred while trying to reject the changes.')
+            );
+        }
+
+        return $this->redirect()->toRoute('member/show/update', ['id' => $member->getLidnr()]);
     }
 
     private function memberIsDeleted(MemberModel $member): ViewModel

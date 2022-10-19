@@ -154,7 +154,7 @@ class Member
     protected ?DateTime $lastCheckedOn = null;
 
     /**
-     * Member birth date.
+     * Member birthdate.
      */
     #[Column(type: "date")]
     protected DateTime $birth;
@@ -231,6 +231,12 @@ class Member
         referencedColumnName: "name",
     )]
     protected Collection $lists;
+
+    #[Column(
+        type: "string",
+        nullable: true,
+    )]
+    protected ?string $authenticationKey = null;
 
     /**
      * Determines if a member is deleted. A deleted member is a member whose basic info needs to be retained to ensure
@@ -495,7 +501,7 @@ class Member
     }
 
     /**
-     * Get the birth date.
+     * Get the birthdate.
      *
      * @return DateTime
      */
@@ -690,6 +696,16 @@ class Member
         return $this->installations;
     }
 
+    public function getAuthenticationKey(): ?string
+    {
+        return $this->authenticationKey;
+    }
+
+    public function setAuthenticationKey(?string $authenticationKey): void
+    {
+        $this->authenticationKey = $authenticationKey;
+    }
+
     /**
      * Get if the member is deleted.
      *
@@ -729,6 +745,7 @@ class Member
             'hidden' => $this->getHidden(),
             'deleted' => $this->getDeleted(),
             'expiration' => $this->getExpiration()->format('l j F Y'),
+            'authenticationKey' => $this->getAuthenticationKey(),
         ];
     }
 

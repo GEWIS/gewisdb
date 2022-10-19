@@ -26,6 +26,8 @@ autoload_classmap.php
 composer.phar
 config/autoload/doctrine.local.php
 config/autoload/local.php
+config/autoload/doctrine.local.test.php
+config/autoload/local.test.php
 config/autoload/laminas-developer-tools.local.php
 coverage/
 data/cache/*

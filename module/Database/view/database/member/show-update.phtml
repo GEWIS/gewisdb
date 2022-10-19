@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1><?= $member->getFullName() ?></h1>
+        <table class="table table-bordered">
+            <tr>
+                <th></th>
+                <th><?= $this->translate('Current data') ?></th>
+                <th><?= $this->translate('Proposed data') ?></th>
+            </tr>
+            <tr>
+                <th><?= $this->translate('Initials') ?></th>
+                <td><?= $member->getInitials() ?></td>
+                <td class="<?= ($member->getInitials() !== $memberUpdate->getInitials()) ? 'data-updated' : ''?>">
+                    <?= $memberUpdate->getInitials() ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?= $this->translate('First name') ?></th>
+                <td><?= $member->getFirstName() ?></td>
+                <td class="<?= ($member->getFirstName() !== $memberUpdate->getFirstName()) ? 'data-updated' : ''?>">
+                    <?= $memberUpdate->getFirstName() ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?= $this->translate('Last name preposition') ?></th>
+                <td><?= $member->getMiddleName() ?></td>
+                <td class="<?= ($member->getMiddleName() !== $memberUpdate->getMiddleName()) ? 'data-updated' : ''?>">
+                    <?= $memberUpdate->getMiddleName() ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?= $this->translate('Last name') ?></th>
+                <td><?= $member->getLastName() ?></td>
+                <td class="<?= ($member->getLastName() !== $memberUpdate->getLastName()) ? 'data-updated' : ''?>">
+                    <?= $memberUpdate->getLastName() ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?= $this->translate('E-mail address') ?></th>
+                <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
+                <td class="<?= ($member->getEmail() !== $memberUpdate->getEmail()) ? 'data-updated' : ''?>">
+                    <a href="mailto:<?= $memberUpdate->getEmail() ?>"><?= $memberUpdate->getEmail() ?></a>
+                </td>
+            </tr>
+        </table>
+        <?php if ($member->getEmail() !== $memberUpdate->getEmail()): ?>
+            <div class="alert alert-warning">
+                <p><?= $this->translate('Warning: the e-mail address of the member will be updated! This will require additional changes to any mailing lists the member is added to.') ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="col-md-12">
+        <form action="<?= $this->url('member/show/update/approve', ['id' => $member->getLidnr()]) ?>"
+              method="POST" id="approve"
+        >
+        </form>
+        <form action="<?= $this->url('member/show/update/reject', ['id' => $member->getLidnr()]) ?>"
+              method="POST" id="reject"
+        >
+        </form>
+        <button class="btn btn-success" name="approve" form="approve" value="1">
+            <?= $this->translate('Apply Update') ?>
+        </button>
+        <button class="btn btn-danger" name="reject" form="reject" value="1">
+            <?= $this->translate('Reject Update') ?>
+        </button>
+    </div>
+</div>

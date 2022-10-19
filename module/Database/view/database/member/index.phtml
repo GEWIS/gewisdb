@@ -70,4 +70,5 @@ $(document).ready(function () {
     </tfoot>
 </table>
 
-<a href="<?= $this->url('member/default', array('action' => 'subscribe')) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Schrijf lid in</a>
+<a href="<?= $this->url('member/default', ['action' => 'subscribe']) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Schrijf lid in</a>
+<a href="<?= $this->url('member/updates') ?>" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span> <?= $this->translate('View Update Requests') ?></a>

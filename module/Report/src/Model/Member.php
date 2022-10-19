@@ -19,7 +19,6 @@ use Doctrine\ORM\Mapping\{
     ManyToMany,
     OneToMany,
 };
-use InvalidArgumentException;
 use Report\Model\SubDecision\Installation;
 
 /**
@@ -221,6 +220,12 @@ class Member
         mappedBy: "member",
     )]
     protected Collection $boardInstallations;
+
+    #[Column(
+        type: "string",
+        nullable: true,
+    )]
+    protected ?string $authenticationKey = null;
 
     /**
      * Determines if a member is deleted. A deleted member is a member whose basic info needs to be retained to ensure
@@ -600,6 +605,16 @@ class Member
         return $this->installations;
     }
 
+    public function getAuthenticationKey(): ?string
+    {
+        return $this->authenticationKey;
+    }
+
+    public function setAuthenticationKey(?string $authenticationKey): void
+    {
+        $this->authenticationKey = $authenticationKey;
+    }
+
     /**
      * Get if the member is deleted.
      *
@@ -640,6 +655,7 @@ class Member
             'deleted' => $this->getDeleted(),
             'membershipEndsOn' => $this->getMembershipEndsOn()?->format(DateTimeInterface::ISO8601) ?? null,
             'expiration' => $this->getExpiration()->format(DateTimeInterface::ISO8601),
+            'authenticationKey' => $this->getAuthenticationKey(),
         ];
     }
 
@@ -724,7 +740,7 @@ class Member
      *
      * Note that this is the owning side.
      */
-    public function removeList(MailingList $list)
+    public function removeList(MailingList $list): void
     {
         $list->removeMember($this);
         $this->lists->removeElement($list);

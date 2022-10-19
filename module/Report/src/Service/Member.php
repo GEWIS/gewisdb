@@ -79,6 +79,7 @@ class Member
         $reportMember->setSupremum($member->getSupremum());
         $reportMember->setHidden($member->getHidden());
         $reportMember->setDeleted($member->getDeleted());
+        $reportMember->setAuthenticationKey($member->getAuthenticationKey());
 
         // go through addresses
         /** @var DatabaseAddressModel $address */

@@ -24,12 +24,13 @@ use Database\Form\{
 use Database\Mapper\{
     MailingList as MailingListMapper,
     Member as MemberMapper,
-    ProspectiveMember,
+    MemberUpdate as MemberUpdateMapper,
     ProspectiveMember as ProspectiveMemberMapper,
 };
 use Database\Model\{
     Address as AddressModel,
     Member as MemberModel,
+    MemberUpdate as MemberUpdateModel,
     ProspectiveMember as ProspectiveMemberModel,
 };
 use Database\Service\MailingList as MailingListService;
@@ -43,7 +44,11 @@ use Laminas\Mime\{
 };
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
+use ReflectionClass;
 use RuntimeException;
+
+use function bin2hex;
+use function random_bytes;
 
 class Member
 {
@@ -58,6 +63,7 @@ class Member
         private readonly MemberTypeForm $memberTypeForm,
         private readonly MailingListMapper $mailingListMapper,
         private readonly MemberMapper $memberMapper,
+        private readonly MemberUpdateMapper $memberUpdateMapper,
         private readonly ProspectiveMemberMapper $prospectiveMemberMapper,
         private readonly CheckerService $checkerService,
         private readonly FileStorageService $fileStorageService,
@@ -155,10 +161,12 @@ class Member
 
         // Include signature as image attachment
         if (null !== $member->getIban()) {
-            $image = new MimePart(fopen(
-                $this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(),
-                'r',
-            ));
+            $image = new MimePart(
+                fopen(
+                    $this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(),
+                    'r',
+                )
+            );
             $image->type = 'image/png';
             $image->filename = 'signature.png';
             $image->disposition = Mime::DISPOSITION_ATTACHMENT;
@@ -332,6 +340,9 @@ class Member
             $member->setMiddleName($tuedata->computedPrefixName());
             $member->setLastName($tuedata->computedLastName());
         }
+
+        // Add authentication key to allow external updates.
+        $member->setAuthenticationKey($this->generateAuthenticationKey());
 
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
@@ -540,6 +551,8 @@ class Member
         $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(null);
+        $member->setIsStudying(false);
+        $member->setLastCheckedOn(null);
         $member->setChangedOn(new DateTime());
         $member->setMembershipEndsOn($date);
         $member->setExpiration($date);
@@ -784,6 +797,81 @@ class Member
         return $member;
     }
 
+    public function getFrontpageData(): array
+    {
+        return [
+            'members' => $this->getMemberMapper()->getRepository()->count([]),
+            'prospectives' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
+            'updates' => $this->getMemberUpdateMapper()->getRepository()->count([]),
+        ];
+    }
+
+    /**
+     * Get a list of all pending member updates.
+     */
+    public function getPendingMemberUpdates(): array
+    {
+        return $this->getMemberUpdateMapper()->getPendingUpdates();
+    }
+
+    /**
+     * Get a specific member update.
+     */
+    public function getPendingMemberUpdate(int $lidnr): ?MemberUpdateModel
+    {
+        return $this->getMemberUpdateMapper()->find($lidnr);
+    }
+
+    public function approveMemberUpdate(
+        MemberModel $member,
+        MemberUpdateModel $memberUpdate,
+    ): ?MemberModel {
+        // We use reflection here, because using the hydrator on Member(Edit)Form sucks (requires more info). This does
+        // not account for any type changes that may be required (everything is currently a string).
+        $reflectionClass = new ReflectionClass($member);
+        foreach ($memberUpdate->toArray() as $property => $value) {
+            if ($reflectionClass->hasProperty($property)) {
+                $reflectionProperty = $reflectionClass->getProperty($property);
+                $reflectionProperty->setValue($member, $value);
+            }
+        }
+
+        $member->setAuthenticationKey($this->generateAuthenticationKey());
+        $this->getMemberMapper()->persist($member);
+        $this->getMemberUpdateMapper()->remove($memberUpdate);
+
+        return $member;
+    }
+
+    public function rejectMemberUpdate(MemberUpdateModel $memberUpdate): ?bool
+    {
+        $this->getMemberUpdateMapper()->remove($memberUpdate);
+
+        return true;
+    }
+
+    /**
+     * Generate authentication keys for members whose membership has not expired and who are not hidden.
+     */
+    public function generateAuthenticationKeys(): void
+    {
+        $members = $this->getMemberMapper()->getNonExpiredNonHiddenMembers();
+
+        /** @var MemberModel $member */
+        foreach ($members as $member) {
+            $member->setAuthenticationKey($this->generateAuthenticationKey());
+            $this->getMemberMapper()->persist($member);
+        }
+    }
+
+    /**
+     * Generate a cryptographically secure pseudo-random string of 64 bytes, encoded as hex.
+     */
+    private function generateAuthenticationKey(): string
+    {
+        return bin2hex(random_bytes(64));
+    }
+
     /**
      * Get the member edit form.
      */
@@ -883,6 +971,15 @@ class Member
     {
         return $this->memberMapper;
     }
+
+    /**
+     * Get the member update mapper.
+     */
+    public function getMemberUpdateMapper(): MemberUpdateMapper
+    {
+        return $this->memberUpdateMapper;
+    }
+
 
     /**
      * Get the member mapper.
