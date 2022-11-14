@@ -4,6 +4,10 @@ use Application\Model\Enums\{
     AddressTypes,
     MembershipTypes,
 };
+use Database\Model\Member as MemberModel;
+
+/** @var MemberModel $member */
+/** @var bool $hasCorrectInstallations */
 
 ?>
 <div class="row">
@@ -125,17 +129,25 @@ switch ($member->getType()) {
             'id' => $member->getLidnr()
         )) ?>" class="btn btn-danger">Verwijder lid</a>
     <h3>Lidmaatschap commissies en disputen</h3>
-    <ul>
-        <?php foreach ($member->getInstallations() as $install): ?>
-            <li><a href="<?= $this->url('organ/view', array(
-            'type' => $install->getFoundation()->getDecision()->getMeeting()->getType()->value,
-            'number' => $install->getFoundation()->getDecision()->getMeeting()->getNumber(),
-            'point' => $install->getFoundation()->getDecision()->getPoint(),
-            'decision' => $install->getFoundation()->getDecision()->getNumber(),
-            'subdecision' => $install->getFoundation()->getNumber()
-        )) ?>"><?= $install->getFoundation()->getAbbr() ?></a></li>
-        <?php endforeach; ?>
-    </ul>
+    <?php if ($hasCorrectInstallations): ?>
+        <ul>
+            <?php foreach ($member->getInstallations() as $install): ?>
+                <li>
+                    <a href="<?= $this->url('organ/view', array(
+                        'type' => $install->getFoundation()->getDecision()->getMeeting()->getType()->value,
+                        'number' => $install->getFoundation()->getDecision()->getMeeting()->getNumber(),
+                        'point' => $install->getFoundation()->getDecision()->getPoint(),
+                        'decision' => $install->getFoundation()->getDecision()->getNumber(),
+                        'subdecision' => $install->getFoundation()->getNumber()
+                    )) ?>">
+                        <?= $install->getFoundation()->getAbbr() ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p><?= $this->translate('This member is not installed in an organ.') ?></p>
+    <?php endif; ?>
 </div>
 <div class="col-md-6">
 <h3>Adressen</h3>
