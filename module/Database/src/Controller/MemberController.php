@@ -87,9 +87,12 @@ class MemberController extends AbstractActionController
     {
         $lidnr = (int) $this->params()->fromRoute('id');
         $member = $this->memberService->getMemberWithDecisions($lidnr);
+        $hasCorrectInstallations = true;
 
         if (null === $member) {
             $member = $this->memberService->getMember($lidnr);
+            // `$member` is simple and has no correct installations (otherwise it would not have been `null`).
+            $hasCorrectInstallations = false;
 
             if (null === $member) {
                 return $this->notFoundAction();
@@ -100,7 +103,10 @@ class MemberController extends AbstractActionController
             return $this->memberIsDeleted($member);
         }
 
-        return new ViewModel(['member' => $member]);
+        return new ViewModel([
+            'member' => $member,
+            'hasCorrectInstallations' => $hasCorrectInstallations,
+        ]);
     }
 
     /**
