@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping\{
     OneToOne,
 };
 use Report\Model\SubDecision\Foundation;
+use Report\Model\SubDecision\FoundationReference;
 
 /**
  * Organ entity.
@@ -115,12 +116,16 @@ class Organ
     /**
      * Reference to subdecisions.
      */
-    #[ManyToMany(targetEntity: SubDecision::class)]
+    #[ManyToMany(
+        targetEntity: SubDecision::class,
+        cascade: ["remove", "persist"],
+    )]
     #[JoinTable(name: "organs_subdecisions")]
     #[JoinColumn(
         name: "organ_id",
         referencedColumnName: "id",
         nullable: false,
+        onDelete: "CASCADE",
     )]
     #[InverseJoinColumn(
         name: "meeting_type",
