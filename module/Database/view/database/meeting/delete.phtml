@@ -6,7 +6,8 @@ use Database\Model\Meeting;
 Er bestaan nog besluiten die naar dit besluit verwijzen.
 <?php else: ?>
 <?php if (!isset($form)): ?>
-Besluit verwijderd.
+<p>Besluit verwijderd.</p>
+<a href="<?= $this->url('meeting/view', array('type' => $type->value, 'number' => $number)) ?>">Terug naar <?= $type->value ?> <?= $number ?></a>
 <?php else:
 $form->prepare();
 
