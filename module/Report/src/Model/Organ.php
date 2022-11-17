@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping\{
     OneToOne,
 };
 use Report\Model\SubDecision\Foundation;
+use Report\Model\SubDecision\FoundationReference;
 
 /**
  * Organ entity.
@@ -121,6 +122,7 @@ class Organ
         name: "organ_id",
         referencedColumnName: "id",
         nullable: false,
+        onDelete: "CASCADE",
     )]
     #[InverseJoinColumn(
         name: "meeting_type",
