@@ -7,14 +7,17 @@ use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
 use LogicException;
 use ReflectionProperty;
-use Report\Model\Organ as ReportOrganModel;
-use Report\Model\OrganMember;
-use Report\Model\SubDecision\Abrogation as ReportAbrogationModel;
-use Report\Model\SubDecision\Discharge as ReportDischargeModel;
-use Report\Model\SubDecision\Foundation as ReportFoundationModel;
-use Report\Model\SubDecision\FoundationReference as ReportFoundationReferenceModel;
-use Report\Model\SubDecision\Installation;
-use Report\Model\SubDecision\Installation as ReportInstallationModel;
+use Report\Model\{
+    Organ as ReportOrganModel,
+    OrganMember,
+};
+use Report\Model\SubDecision\{
+    Abrogation as ReportAbrogationModel,
+    Discharge as ReportDischargeModel,
+    Foundation as ReportFoundationModel,
+    FoundationReference as ReportFoundationReferenceModel,
+    Installation as ReportInstallationModel,
+};
 
 class Organ
 {
@@ -25,7 +28,7 @@ class Organ
     /**
      * Export organ info.
      */
-    public function generate()
+    public function generate(): void
     {
         $foundationRepo = $this->emReport->getRepository(ReportFoundationModel::class);
 
@@ -100,13 +103,17 @@ class Organ
         $repOrgan->setName($foundation->getName());
         $repOrgan->setType($foundation->getOrganType());
         $repOrgan->setFoundationDate($foundation->getDecision()->getMeeting()->getDate());
+
+        // To ensure that the subdecision is correctly linked to the organ.
+        $repOrgan->addSubdecision($foundation);
+
         $this->emReport->persist($repOrgan);
         $this->emReport->flush();
 
         return $repOrgan;
     }
 
-    public function generateAbrogation(ReportAbrogationModel $ref)
+    public function generateAbrogation(ReportAbrogationModel $ref): void
     {
         $rp = new ReflectionProperty(ReportFoundationModel::class, 'organ');
         if ($rp->isInitialized($ref->getFoundation())) {
@@ -128,9 +135,15 @@ class Organ
         }
 
         $repOrgan->setAbrogationDate($ref->getDecision()->getMeeting()->getDate());
+
+        // To ensure that the subdecision is correctly linked to the organ.
+        $repOrgan->addSubdecision($ref);
+
+        $this->emReport->persist($repOrgan);
+        $this->emReport->flush();
     }
 
-    public function generateInstallation(ReportInstallationModel $ref)
+    public function generateInstallation(ReportInstallationModel $ref): void
     {
         $repo = $this->emReport->getRepository(ReportOrganModel::class);
         // get full reference
@@ -188,10 +201,14 @@ class Organ
             $organMember->setDischargeDate($repOrgan->getAbrogationDate());
         }
 
+        // To ensure that the subdecision is correctly linked to the organ.
+        $repOrgan->addSubdecision($ref);
+
         $this->emReport->persist($organMember);
+        $this->emReport->flush();
     }
 
-    public function generateDischarge(ReportDischargeModel $ref)
+    public function generateDischarge(ReportDischargeModel $ref): void
     {
         $rp = new ReflectionProperty(ReportInstallationModel::class, 'organMember');
         if ($rp->isInitialized($ref->getInstallation())) {
@@ -204,7 +221,30 @@ class Organ
             throw new LogicException('Discharge without OrganMember');
         }
 
+        $rp = new ReflectionProperty(ReportFoundationModel::class, 'organ');
+        if ($rp->isInitialized($organMember->getInstallation()->getFoundation())) {
+            $repOrgan = $organMember->getInstallation()->getFoundation()->getOrgan();
+        } else {
+            $repOrgan = null;
+        }
+
+        if ($repOrgan === null) {
+            // Grabbing the organ from the foundation doesn't work when it has not been saved yet
+            $repOrgan = $this->emReport->getRepository(ReportOrganModel::class)->findOneBy([
+                'foundation' => $organMember->getInstallation()->getFoundation(),
+            ]);
+
+            if ($repOrgan === null) {
+                throw new LogicException('Discharge without Organ');
+            }
+        }
+
         $organMember->setDischargeDate($ref->getDecision()->getMeeting()->getDate());
+
+        // To ensure that the subdecision is correctly linked to the organ.
+        $repOrgan->addSubdecision($ref);
+
         $this->emReport->persist($organMember);
+        $this->emReport->flush();
     }
 }

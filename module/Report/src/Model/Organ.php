@@ -116,7 +116,10 @@ class Organ
     /**
      * Reference to subdecisions.
      */
-    #[ManyToMany(targetEntity: SubDecision::class)]
+    #[ManyToMany(
+        targetEntity: SubDecision::class,
+        cascade: ["remove", "persist"],
+    )]
     #[JoinTable(name: "organs_subdecisions")]
     #[JoinColumn(
         name: "organ_id",
