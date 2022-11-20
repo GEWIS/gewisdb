@@ -35,8 +35,9 @@ use Database\Model\{
 };
 use Database\Service\MailingList as MailingListService;
 use DateTime;
-use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
+use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mime\{
     Mime,
     Part as MimePart,
@@ -175,6 +176,7 @@ class Member
         }
 
         $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']);
         $message->addTo($config['to']['subscription']);
@@ -182,6 +184,7 @@ class Member
         $this->getMailTransport()->send($message);
 
         $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']);
         $message->addTo($member->getEmail());
@@ -212,6 +215,7 @@ class Member
         $mimeMessage->addPart($html);
 
         $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']);
         $message->addTo($config['to']['subscription']);
@@ -219,6 +223,7 @@ class Member
         $this->getMailTransport()->send($message);
 
         $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']);
         $message->addTo($member->getEmail());

@@ -12,8 +12,9 @@ use Database\Model\{
 use Doctrine\ORM\EntityManager;
 use Exception;
 use LogicException;
-use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
+use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
 use Report\Model\{
@@ -364,6 +365,7 @@ class Meeting
             BODYTEXT;
 
         $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($body);
         $message->setFrom($config['from']);
         $message->addTo($config['to']['report_error']);
