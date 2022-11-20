@@ -21,6 +21,7 @@ use Checker\Service\{
 use Database\Model\Member as MemberModel;
 use Database\Model\Meeting as MeetingModel;
 use DateTime;
+use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
 
@@ -104,6 +105,7 @@ class Checker
     private function sendMail($body): void
     {
         $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->addTo($this->config['email']['to']['checker_result'])
             ->addFrom($this->config['email']['from'])
             ->setSubject('Database Checker Report')
