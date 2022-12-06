@@ -1,1 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><files/>
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
+  <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
+    <NoValue occurrences="1"></NoValue>
+  </file>
+  <file src="public/index.php">
+    <PossiblyUndefinedArrayOffset occurrences="1">
+      <code>$_SERVER['REQUEST_URI']</code>
+    </PossiblyUndefinedArrayOffset>
+  </file>
+</files>
