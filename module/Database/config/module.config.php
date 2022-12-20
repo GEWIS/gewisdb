@@ -3,6 +3,7 @@
 namespace Database;
 
 use Database\Controller\{
+    ApiController,
     ExportController,
     IndexController,
     MeetingController,
@@ -13,6 +14,7 @@ use Database\Controller\{
     SettingsController,
 };
 use Database\Controller\Factory\{
+    ApiControllerFactory,
     ExportControllerFactory,
     IndexControllerFactory,
     MeetingControllerFactory,
@@ -551,10 +553,45 @@ return [
                     ],
                 ],
             ],
+            'api' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/api',
+                    'defaults' => [
+                        'controller' => ApiController::class,
+                        'action'     => 'healthy',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'members' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/members',
+                            'defaults' => [
+                                'action'     => 'members',
+                            ],
+                        ],
+                    ],
+                    'member' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route'    => '/members/:id',
+                            'constraints' => [
+                                'id' => '[0-9]+',
+                            ],
+                            'defaults' => [
+                                'action'     => 'member',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
+            ApiController::class => ApiControllerFactory::class,
             ExportController::class => ExportControllerFactory::class,
             IndexController::class => IndexControllerFactory::class,
             MeetingController::class => MeetingControllerFactory::class,

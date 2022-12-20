@@ -23,14 +23,12 @@ class TueData
 
     private ?array $data;
 
-    private array $config;
-
     /**
      * @param array $config an array with membership_api config
      */
-    public function __construct(array $config)
-    {
-        $this->config = $config;
+    public function __construct(
+        private array $config,
+    ) {
         $this->client = new Client();
         $this->client->setAdapter(Curl::class)
             ->setEncType('application/json');

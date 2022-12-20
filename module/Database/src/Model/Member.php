@@ -750,6 +750,27 @@ class Member
     }
 
     /**
+     * Get array of member for use in API endpoints
+     *
+     * @return array
+     */
+    public function toArrayApi(): array
+    {
+        return [
+            'lidnr' => $this->getLidnr(),
+            'email' => $this->getEmail(),
+            'fullName' => $this->getFullName(),
+            'lastName' => $this->getLastName(),
+            'middleName' => $this->getMiddleName(),
+            'initials' => $this->getInitials(),
+            'firstName' => $this->getFirstName(),
+            'generation' => $this->getGeneration(),
+            'expiration' => $this->getExpiration()->format('l j F Y'),
+        ];
+    }
+
+
+    /**
      * Get all addresses.
      *
      * @return Collection all addresses

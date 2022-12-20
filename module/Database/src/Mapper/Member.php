@@ -72,7 +72,7 @@ class Member
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
-        // also allow searching for membership or TUe numbers
+        // also allow searching for membership number
         if (is_numeric($query)) {
             $qb->orWhere("m.lidnr = :nr");
             $qb->setParameter(':nr', $query);
@@ -116,6 +116,38 @@ class Member
     {
         return $this->getRepository()->findAll();
     }
+
+    /**
+     * Find all non-hidden and non-deleted members.
+     *
+     * @return array<array-key, MemberModel>
+     */
+    public function findNormal(): array
+    {
+        return $this->getRepository()->findBy([
+            'deleted' => false,
+            'hidden' => false,
+        ]);
+    }
+
+    /**
+     * Find all non-hidden and non-deleted members
+     * with special properties
+     *
+     * @return array<array-key, MemberModel>
+     */
+    // public function findActive(): array
+    // {
+    //     $qb = $this->em->createQueryBuilder();
+
+    //     $qb->select('m, r, l')
+    //         ->from(MemberModel::class, 'm')
+    //         ->leftJoin('m.installations', 'r')
+    //     return $this->getRepository()->findBy([
+    //         'deleted' => false,
+    //         'hidden' => false,
+    //     ]);
+    // }
 
     /**
      * Find a member (by lidnr).

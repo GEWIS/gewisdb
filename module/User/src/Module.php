@@ -45,6 +45,14 @@ class Module
                 return;
             }
 
+            if (
+                $match->getMatchedRouteName() === 'api'
+                || str_starts_with($match->getMatchedRouteName(), 'api/')
+                && 1 === 1 //TODO: Is the user logged in?
+            ) {
+                return;
+            }
+
             if ($match->getMatchedRouteName() !== 'user') {
                 $response = $e->getResponse();
                 $response->getHeaders()->addHeaderLine('Location', '/user');

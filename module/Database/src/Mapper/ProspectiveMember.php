@@ -52,7 +52,7 @@ class ProspectiveMember
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
-        // also allow searching for membership or TUe numbers
+        // also allow searching for membership number
         if (is_numeric($query)) {
             $qb->orWhere("m.lidnr = :nr");
             $qb->orWhere("m.tueUsername = :nr");
