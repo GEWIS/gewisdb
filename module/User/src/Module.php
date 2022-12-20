@@ -2,23 +2,36 @@
 
 namespace User;
 
-use Laminas\Authentication\AuthenticationService;
+use User\Service\ApiAuthenticationService;
+use User\Adapter\ApiPrincipalAdapter;
+use User\Mapper\ApiPrincipalMapper;
+use Laminas\Authentication\{
+    AuthenticationService,
+    Result,
+};
 use Laminas\Mvc\MvcEvent;
 use Laminas\Authentication\Storage\Session as SessionStorage;
+use Laminas\Http\Request;
 
 class Module
 {
     /**
      * On bootstrap.
      */
-    public function onBootstrap($event)
+    public function onBootstrap(MvcEvent $event): void
     {
         $sm = $event->getApplication()->getServiceManager();
         $eventManager = $event->getApplication()->getEventManager();
         $authService = $sm->get(AuthenticationService::class);
         $authService->setStorage(new SessionStorage('gewisdb'));
+        $apiAuthService = $sm->get(ApiAuthenticationService::class);
+        $authAdapter = $sm->get(ApiPrincipalAdapter::class);
 
-        $eventManager->attach(MvcEvent::EVENT_ROUTE, function ($e) use ($authService) {
+        $eventManager->attach(MvcEvent::EVENT_ROUTE, function (MvcEvent $e) use (
+            $authService,
+            $apiAuthService,
+            $authAdapter,
+        ) {
             if ($authService->hasIdentity()) {
                 // user is logged in, just continue
                 return;
@@ -45,12 +58,27 @@ class Module
                 return;
             }
 
+            /**
+             * Special authorization for API routes
+             */
             if (
                 $match->getMatchedRouteName() === 'api'
                 || str_starts_with($match->getMatchedRouteName(), 'api/')
-                && 1 === 1 //TODO: Is the user logged in?
             ) {
-                return;
+                if ($e->getRequest()->getHeaders()->has('Authorization')) {
+                    // This is an API call, we do this on every request
+                    $token = $e->getRequest()->getHeaders()->get('Authorization')->getFieldValue();
+                    $authAdapter->setCredentials(substr($token, strlen("Bearer ")));
+                    $result = $apiAuthService->authenticate($authAdapter);
+                    if ($result->isValid()) {
+                        return;
+                    }
+                }
+
+                $response = $e->getResponse();
+                $response->getHeaders()->addHeaderLine('WWW-Authenticate', 'Bearer realm="/api"');
+                $response->setStatusCode(401);
+                return $response;
             }
 
             if ($match->getMatchedRouteName() !== 'user') {
