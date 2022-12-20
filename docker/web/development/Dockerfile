@@ -6,6 +6,7 @@ RUN apk add --no-cache --virtual .build-deps \
         icu-dev \
         libpq-dev \
         libzip-dev \
+        linux-headers \
         openldap-dev \
         sqlite-dev \
         tzdata \
