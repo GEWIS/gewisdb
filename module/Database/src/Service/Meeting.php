@@ -360,6 +360,7 @@ class Meeting
 
         // See important note above, this does not return an object. Because we are not doing this the normal way we
         // must ensure that the meeting actually exists.
+        /** @var array $decision */
         $decision = $form->getData();
         $meeting = $this->getMeeting(
             MeetingTypes::from($decision['meeting']['type']),
@@ -452,6 +453,7 @@ class Meeting
 
         // See important note above, this does not return an object. Because we are not doing this the normal way we
         // must ensure that the meeting actually exists.
+        /** @var array $decision */
         $decision = $form->getData();
         $meeting = $this->getMeeting(
             MeetingTypes::from($decision['meeting']['type']),

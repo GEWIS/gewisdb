@@ -136,9 +136,8 @@ class Meeting
     }
 
     /**
-     * @template T of ReportSubDecisionModel
-     *
-     * @return T
+     * @psalm-template T of ReportSubDecisionModel
+     * @psalm-return T
      */
     public function generateSubDecision(
         DatabaseSubDecisionModel $subdecision,
@@ -306,7 +305,7 @@ class Meeting
                 $installation = $subDecision->getInstallation();
                 $installation->clearDischarge();
                 $organMember = $subDecision->getInstallation()->getOrganMember();
-                $organMember?->setDischargeDate(null);
+                $organMember->setDischargeDate(null);
 
                 break;
             case $subDecision instanceof ReportSubDecisionModel\Foundation:
@@ -327,7 +326,8 @@ class Meeting
     }
 
     /**
-     * Obtain the correct member, given a database member.
+     * Obtain the correct member, given a database member. Because these members are generated based on what happens in
+     * the `Database` module, this cannot return `null`.
      */
     public function findMember(DatabaseMemberModel $member): ReportMemberModel
     {

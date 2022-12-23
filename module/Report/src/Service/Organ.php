@@ -179,10 +179,6 @@ class Organ
             $organMember->setMember($ref->getMember());
             $function = $ref->getFunction();
 
-            if (null === $function) {
-                $function = 'Lid';
-            }
-
             $organMember->setFunction($function);
             $organMember->setInstallDate($ref->getDecision()->getMeeting()->getDate());
         }

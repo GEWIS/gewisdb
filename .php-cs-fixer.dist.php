@@ -16,8 +16,7 @@ return (new PhpCsFixer\Config())
         [
             '@PSR1' => true,
             '@PSR12' => true,
-            '@DoctrineAnnotation' => true,
-            '@PHP81Migration' => true,
+            '@PHP82Migration' => true,
         ]
     )
     ->setFinder($finder);
