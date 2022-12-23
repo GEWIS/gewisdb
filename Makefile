@@ -142,8 +142,8 @@ phpcsfix: loadenv
 		@vendor/bin/php-cs-fixer fix --format=txt --verbose
 
 phpcsfixrisky: loadenv
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP81Migration:risky,-declare_strict_types,-use_arrow_functions  module
-		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP81Migration:risky,-declare_strict_types,-use_arrow_functions  config
+		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP82Migration,@PHP80Migration:risky,-declare_strict_types,-use_arrow_functions  module
+		@vendor/bin/php-cs-fixer fix --cache-file=data/cache/.php-cs-fixer.cache --allow-risky=yes --rules=@PHP82Migration,@PHP80Migration:risky,-declare_strict_types,-use_arrow_functions  config
 
 checkcomposer: loadenv
 		@XDEBUG_MODE=off vendor/bin/composer-require-checker check composer.json
