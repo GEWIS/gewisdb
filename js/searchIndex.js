@@ -7953,7 +7953,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Service\\Meeting\u003A\u003AfindMember\u0028\u0029",
             "name": "findMember",
-            "summary": "Obtain\u0020the\u0020correct\u0020member,\u0020given\u0020a\u0020database\u0020member.",
+            "summary": "Obtain\u0020the\u0020correct\u0020member,\u0020given\u0020a\u0020database\u0020member.\u0020Because\u0020these\u0020members\u0020are\u0020generated\u0020based\u0020on\u0020what\u0020happens\u0020in\nthe\u0020\u0060Database\u0060\u0020module,\u0020this\u0020cannot\u0020return\u0020\u0060null\u0060.",
             "url": "classes/Report-Service-Meeting.html#method_findMember"
         },                {
             "fqsen": "\\Report\\Service\\Meeting\u003A\u003AsendDecisionExceptionMail\u0028\u0029",

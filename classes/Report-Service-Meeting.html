@@ -319,7 +319,8 @@
     <span>
                                 &nbsp;: <a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>    </span>
 </dt>
-<dd>Obtain the correct member, given a database member.</dd>
+<dd>Obtain the correct member, given a database member. Because these members are generated based on what happens in
+the `Database` module, this cannot return `null`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Service-Meeting.html#method_generate">generate()</a>
@@ -345,7 +346,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Service-Meeting.html#method_generateSubDecision">generateSubDecision()</a>
     <span>
-                                &nbsp;: <abbr title="\Report\Service\T">T</abbr>    </span>
+                                &nbsp;: <a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a>    </span>
 </dt>
 <dd></dd>
 
@@ -592,7 +593,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">283</span>
+    <span class="phpdocumentor-element-found-in__line">282</span>
 
     </aside>
 
@@ -636,7 +637,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">299</span>
+    <span class="phpdocumentor-element-found-in__line">298</span>
 
     </aside>
 
@@ -684,7 +685,8 @@
 
     </aside>
 
-        <p class="phpdocumentor-summary">Obtain the correct member, given a database member.</p>
+        <p class="phpdocumentor-summary">Obtain the correct member, given a database member. Because these members are generated based on what happens in
+the `Database` module, this cannot return `null`.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -853,14 +855,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Meeting.php"><a href="files/module-report-src-service-meeting.html"><abbr title="module/Report/src/Service/Meeting.php">Meeting.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">143</span>
+    <span class="phpdocumentor-element-found-in__line">142</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">generateSubDecision</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-SubDecision.html"><abbr title="\Database\Model\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subdecision</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reportDecision</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Report\Service\T">T</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">generateSubDecision</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-SubDecision.html"><abbr title="\Database\Model\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subdecision</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reportDecision</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a></span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -890,7 +892,7 @@
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">template</span>
+                    <span class="phpdocumentor-tag__name">psalm-template</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
@@ -898,10 +900,19 @@
 </section>
 
                                     </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">psalm-return</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>T</p>
+</section>
+
+                                    </dd>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Report\Service\T">T</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a></span>
             &mdash;
         
     
