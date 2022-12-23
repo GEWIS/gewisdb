@@ -255,9 +255,9 @@ class Member
     /**
      * Get the membership number.
      *
-     * @return int
+     * @return int|null
      */
-    public function getLidnr(): int
+    public function getLidnr(): ?int
     {
         return $this->lidnr;
     }

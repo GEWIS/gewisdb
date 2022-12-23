@@ -3,7 +3,10 @@
 namespace Checker\Mapper;
 
 use Database\Model\Meeting as MeetingModel;
-use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\{
+    Abrogation as AbrogationModel,
+    Foundation as FoundationModel,
+};
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -46,7 +49,7 @@ class Organ
      * Returns an array of all names of organs discharged before or during $meeting
      *
      * @param MeetingModel $meeting Meeting to check for
-     * @return array<array-key, FoundationModel>
+     * @return array<array-key, AbrogationModel>
      */
     public function getAllOrganAbrogations(MeetingModel $meeting): array
     {

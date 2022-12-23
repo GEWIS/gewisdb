@@ -96,6 +96,7 @@ class Query
             return null;
         }
 
+        /** @var array $data */
         $data = $form->getData();
 
         /**

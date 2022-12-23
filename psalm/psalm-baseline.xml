@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
-  <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
-    <NoValue occurrences="1"></NoValue>
-  </file>
-  <file src="public/index.php">
-    <PossiblyUndefinedArrayOffset occurrences="1">
-      <code>$_SERVER['REQUEST_URI']</code>
-    </PossiblyUndefinedArrayOffset>
-  </file>
+    <file src="module/Database/src/Controller/QueryController.php">
+        <InvalidReturnStatement occurrences="1" />
+        <InvalidReturnType occurrences="1">
+            <code>Response|ViewModel</code>
+        </InvalidReturnType>
+    </file>
+    <file src="module/Database/src/Form/Member.php">
+        <TypeDoesNotContainType occurrences="2">
+            <code>DATABASE_REQUIRE_IBAN</code>
+        </TypeDoesNotContainType>
+    </file>
+    <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
+        <NoValue occurrences="1" />
+    </file>
+    <file src="module/Report/src/Service/Meeting.php">
+        <InvalidNullableReturnType occurrences="1">
+            <code>ReportMemberModel</code>
+        </InvalidNullableReturnType>
+    </file>
+    <file src="module/User/src/Controller/UserController.php">
+        <InvalidReturnStatement occurrences="1">
+            <code>$this-&gt;redirect()-&gt;toRoute('home')</code>
+        </InvalidReturnStatement>
+        <InvalidReturnType occurrences="1">
+            <code>Response|ViewModel</code>
+        </InvalidReturnType>
+    </file>
+    <file src="public/index.php">
+        <PossiblyUndefinedArrayOffset occurrences="1">
+            <code>$_SERVER['REQUEST_URI']</code>
+        </PossiblyUndefinedArrayOffset>
+    </file>
 </files>

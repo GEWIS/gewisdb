@@ -4,8 +4,12 @@ namespace Application\Controller;
 
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Plugin\Identity\Identity;
 use Laminas\Session\Container as SessionContainer;
 
+/**
+ * @method Identity identity()
+ */
 class IndexController extends AbstractActionController
 {
     public function langAction(): Response
