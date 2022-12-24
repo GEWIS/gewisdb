@@ -4,6 +4,6 @@ parameters:
         - '#Property [a-zA-Z0-9\\_]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: property can contain [a-zA-Z0-9\\_]+\|null but database expects [a-zA-Z0-9\\_]+\.$#'
         - '#Property [a-zA-Z0-9\\_]+\:\:\$[a-zA-Z0-9_]+ type mapping mismatch\: database can contain [a-zA-Z0-9\\_]+\|null but property expects [a-zA-Z0-9\\_]+\.$#'
         -
-            message: '#^Template type T of method Report\\Service\\Meeting\:\:generateSubDecision\(\b) is not referenced in a parameter.$#'
+            message: '#^Template type T of method Report\\Service\\Meeting\:\:generateSubDecision\(\) is not referenced in a parameter.$#'
             count: 1
             path: ../module/Report/src/Service/Meeting.php
