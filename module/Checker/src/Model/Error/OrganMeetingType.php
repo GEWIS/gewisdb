@@ -10,7 +10,7 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
 /**
  * Error for when an organ is founded during a meeting that it cannot be founded in.
  *
- * AV-commissies can only be created during AV's
+ * ALV-commissies can only be created during ALV's
  * All other organs can only be created during BV's and Virt's
  *
  * @extends Error<FoundationModel>

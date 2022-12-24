@@ -31,7 +31,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
                 'label' => 'Vergadertype',
                 'value_options' => [
                     'BV' => 'BV (Bestuursvergadering)',
-                    'AV' => 'AV (Algemene Ledenvergadering)',
+                    'ALV' => 'ALV (Algemene Ledenvergadering)',
                     'VV' => 'VV (Voorzittersvergadering)',
                     'Virt' => 'Virt (Virtuele vergadering)',
                 ],
