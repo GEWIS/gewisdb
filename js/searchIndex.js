@@ -56,8 +56,8 @@ Search.appendIndex(
             "summary": "",
             "url": ""
         },                {
-            "fqsen": "\\Application\\Model\\Enums\\MeetingTypes\u003A\u003AAV",
-            "name": "AV",
+            "fqsen": "\\Application\\Model\\Enums\\MeetingTypes\u003A\u003AALV",
+            "name": "ALV",
             "summary": "",
             "url": ""
         },                {
@@ -1128,7 +1128,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckOrganFoundationMeetingType\u0028\u0029",
             "name": "checkOrganFoundationMeetingType",
-            "summary": "Checks\u0020all\u0020Organ\u0020creation,\u0020and\u0020check\u0020if\u0020they\u0020are\u0020created\u0020at\u0020the\u0020correct\u0020Meeting\ne.g.\u0020AVCommissies\u0020are\u0020only\u0020created\u0020at\u0020an\u0020AV",
+            "summary": "Checks\u0020all\u0020Organ\u0020creation,\u0020and\u0020check\u0020if\u0020they\u0020are\u0020created\u0020at\u0020the\u0020correct\u0020Meeting\ne.g.\u0020ALV\u002DCommissies\u0020are\u0020only\u0020created\u0020at\u0020an\u0020ALV",
             "url": "classes/Checker-Service-Checker.html#method_checkOrganFoundationMeetingType"
         },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003AtueDataObject\u0028\u0029",
