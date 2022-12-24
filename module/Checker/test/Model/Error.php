@@ -25,7 +25,7 @@ abstract class Error extends TestCase
     public function getMeeting(): MeetingModel
     {
         $meeting = new MeetingModel();
-        $meeting->setType(MeetingTypes::AV);
+        $meeting->setType(MeetingTypes::ALV);
         $meeting->setNumber(1);
 
         return $meeting;

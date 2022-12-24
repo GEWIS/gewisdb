@@ -236,7 +236,7 @@ class Checker
 
     /**
      * Checks all Organ creation, and check if they are created at the correct Meeting
-     * e.g. AVCommissies are only created at an AV
+     * e.g. ALV-Commissies are only created at an ALV
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
@@ -251,9 +251,9 @@ class Checker
             $organType = $organ->getOrganType();
             $meetingType = $organ->getDecision()->getMeeting()->getType();
 
-            // Chair's Meetings (VV) cannot be used to found an(y) organ. During General Members Meetings (AV) only
+            // Chair's Meetings (VV) cannot be used to found an(y) organ. During General Members Meetings (ALV) only
             // specific organs can be founded, namely: AVC, AVW, KCC, Fraternity, and RvA. Furthermore, these organ can
-            // only be founded in AVs, not in any other meeting (except virtual meetings).
+            // only be founded in ALVs, not in any other meeting (except virtual meetings).
             //
             // However, this only holds after October 7, 2021, when the Internal Regulations of the association were
             // updated to reflect changes with respect to fraternities (before October 7, 2021, they could be founded
@@ -261,7 +261,7 @@ class Checker
             if (
                 MeetingTypes::VV === $meetingType
                 || (
-                    MeetingTypes::AV === $meetingType
+                    MeetingTypes::ALV === $meetingType
                     && (
                         OrganTypes::AVC !== $organType
                         && OrganTypes::AVW !== $organType
@@ -278,7 +278,7 @@ class Checker
             // Special case for the updates to the internal regulations. Skip fraternities when they were founded during
             // a BV before October 7, 2021.
             if (
-                MeetingTypes::AV !== $meetingType
+                MeetingTypes::ALV !== $meetingType
                 && MeetingTypes::VIRT !== $meetingType
                 && (
                     OrganTypes::AVC === $organType

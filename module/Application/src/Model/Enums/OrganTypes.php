@@ -18,10 +18,10 @@ enum OrganTypes: string
     {
         return match ($this) {
             self::Committee => 'Commissie',
-            self::AVC => 'AV-commissie',
+            self::AVC => 'ALV-Commissie',
             self::Fraternity => 'Dispuut',
             self::KCC => 'KCC',
-            self::AVW => 'AV-werkgroep',
+            self::AVW => 'ALV-Werkgroep',
             self::RvA => 'RvA',
         };
     }

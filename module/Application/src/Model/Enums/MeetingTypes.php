@@ -8,7 +8,7 @@ namespace Application\Model\Enums;
 enum MeetingTypes: string
 {
     case BV = 'BV'; // bestuursvergadering
-    case AV = 'AV'; // algemene leden vergadering
+    case ALV = 'ALV'; // algemene leden vergadering
     case VV = 'VV'; // voorzitters vergadering
     case VIRT = 'Virt'; // virtual meeting
 

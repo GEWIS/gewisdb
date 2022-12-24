@@ -95,7 +95,7 @@ return [
                                 'options' => [
                                     'route' => '/:type/:number/:point/:decision',
                                     'constraints' => [
-                                        'type' => 'AV|BV|VV|Virt',
+                                        'type' => 'ALV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*',
@@ -107,7 +107,7 @@ return [
                                 'options' => [
                                     'route' => '/delete/:type/:number/:point/:decision',
                                     'constraints' => [
-                                        'type' => 'AV|BV|VV|Virt',
+                                        'type' => 'ALV|BV|VV|Virt',
                                         'number' => '[0-9]*',
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*',
@@ -124,7 +124,7 @@ return [
                         'options' => [
                             'route' => '/:type/:number',
                             'constraints' => [
-                                'type' => 'AV|BV|VV|Virt',
+                                'type' => 'ALV|BV|VV|Virt',
                                 'number' => '\-?[0-9]*',
                             ],
                             'defaults' => [
@@ -180,7 +180,7 @@ return [
                                 'action' => 'info',
                             ],
                             'constraints' => [
-                                'type' => 'AV|BV|VV|Virt',
+                                'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
@@ -196,7 +196,7 @@ return [
                                 'action' => 'view',
                             ],
                             'constraints' => [
-                                'type' => 'AV|BV|VV|Virt',
+                                'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
