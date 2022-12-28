@@ -399,7 +399,8 @@ class Meeting
 
             {$e->getMessage()}
 
-            Dit gebeurde tijdens het processen van besluit {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
+            Dit gebeurde tijdens het processen van onderstaand besluit:
+            {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
 
             Met vriendelijke groet,
 
