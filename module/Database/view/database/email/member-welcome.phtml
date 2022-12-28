@@ -3,93 +3,370 @@ use Database\Model\Member as MemberModel;
 
 /** @var MemberModel $member */
 ?>
-<h1 class="hidden-print">You have been confirmed as a member of GEWIS*
-    <br/>
-    <small>*If you are paying through SEPA Direct Debit, this approval is pending payment.</small></h1>
-<p>
-    Hi <?= $member->getFirstName() ?>,
-</p>
-<p>
-    First of all, welcome, and thank you for your registration at GEWIS. From tomorrow on, your membership number will be <?= $member->getLidnr() ?>.
-    You can use this membership number to log in to the website, where you can, among other things, subscribe to activities and look at photos from all the fun activities that you, together with the other members, have experienced.
-    Below more information on all the functions of the website can be found, but first of all, you can register to the website using the following link: <a href="https://gewis.nl/user/register">gewis.nl/user/register</a>.
-    Besides getting access to the website, you can also create a SudoSOS account, our system with which you will be able to buy drinks from the refrigerators and sweets you can find on the bar.
-    You will need this account if you want to get a drink at the weekly social drink (usually called the “borrel”). To do this, first, log in to the GEWIS website using the account created above. After this, go to <a href="https://sudosos.gewis.nl">sudosos.gewis.nl</a>.
-    When you log in for the first time, you will have to read and accept the terms and conditions. After that, you can also set a pin code to use the point of sales on your own.
-</p>
-<p>
-    The rest of this email includes a bunch of very useful information about the following subjects:
-</p>
-<ul>
-    <li>The GEWIS Website</li>
-    <li>First Year Committees</li>
-    <li>Ordering Books</li>
-    <li>GEWIS on Social Media</li>
-</ul>
+<!DOCTYPE html>
+<html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title>Registration Confirmation GEWIS</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <!--[if mso]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    <!--[if !mso]><!-->
+    <!--<![endif]-->
+    <style>
+        :root {
+        --gewisred: #D40000;
+        --black: #000000;
+        --white: #FFFFFF;
+        --gewisdarkred: #C40000;
+        --gewisdarkgray: #333333;
+        --gewislightgray: #F2F2F2;
+        --slightlydarkergray: #DDDDDD;
+        --gewisdarkblue: #293065;
+        }
+        * {
+        box-sizing: border-box;
+        }
+        body {
+        margin: 0;
+        padding: 0;
+        }
+        th.column {
+        padding: 0
+        }
+        .pleft {
+            text-align: right;
+        }
+        a[x-apple-data-detectors] {
+        color: inherit !important;
+        text-decoration: inherit !important;
+        }
+        #MessageViewBody a {
+        color: inherit;
+        text-decoration: none;
+        }
+        p {
+        line-height: inherit
+        }
+        @media (max-width:720px) {
+        .icons-inner {
+        text-align: center;
+        }
+        .icons-inner td {
+        margin: 0 auto;
+        }
+        .fullMobileWidth,
+        .row-content {
+        width: 100% !important;
+        }
+        .image_block img.big {
+        width: auto !important;
+        }
+        .stack .column {
+        width: 100%;
+        display: block;
+        }
+        .pleft {
+            text-align: left;
+        }
+        .reverse {
+        display: table;
+        width: 100%;
+        }
+        .reverse th.first {
+        display: table-footer-group !important;
+        }
+        .reverse th.last {
+        display: table-header-group !important;
+        }
+        .row-11 th.column.first>table,
+        .row-11 th.column.last>table {
+        padding-left: 25px;
+        padding-right: 25px;
+        }
+        .hiddensmall {
+        display: none;
+        }
+        }
+    </style>
+</head>
+<body style="background-color: #DDDDDD; margin: 0; padding: 0; text-align: center;">
+Registration&nbsp;Confirmation&nbsp;GEWIS
+    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #DDDDDD;" width="100%">
+        <tbody>
+            <tr>
+            <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                    <tbody style="width: 100%;">
+                        
+<tr>
+<td style="width: 100%;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #C40000;" width="720">
+        <tbody>
+            <tr>
+            <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-left: 25px; padding-right: 25px; padding-top: 40px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                    <tr>
+                        <td style="padding-bottom:25px;width:20%;padding-right:0px;padding-left:0px;min-width: 85px;">
+                        <div align="left" style="line-height:10px;">
+                            <img alt="Logo" src="https://static.gewis.nl/mailings/2021/logo-70x70.png" style="display: block; width: auto; border: 0; height: 70px; max-width: 100%;" title="Logo" width="70"/>
+                        </div>
+                        </td>
+                        <td style="padding-bottom:25px;width:50%;padding-right:0px;padding-left:0px;">
+                        <div align="left" style="font-size: 26px; font-family: 'Roboto Slab', Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #ffffff; line-height: 1.5em;">
+                            Update on your registration
+                        </div>
+                        </td>
+                        <td style="padding-bottom:25px;width:50%;padding-right:0px;padding-left:0px;">
+                        <div align="right" style="font-size: 13px; font-family: 'Roboto Slab', Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #ffffff; line-height: 1.5em;">
+                            <?= date('l') ?><br/><?= date('j F Y') ?>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
+            </th>
+            </tr>
+        </tbody>
+    </table>
+</td>
+</tr>
+<!-- Important announcements -->
+<tr>
+<td>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #C40000;" width="720">
+        <tbody>
+            <tr>
+            <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #F2F2F2; margin-top: 10px; " width="660">
+                    <tbody>
+                        <tr>
+                        <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-left: 25px; padding-right: 25px; padding-top: 30px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                            <table border="0" cellpadding="0" cellspacing="0" class="heading_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                                <tr>
+                                    <td style="padding-bottom:10px;text-align:center;width:100%; color: black; font-family: 'Roboto Slab', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 28px; font-weight: bold; letter-spacing: normal; line-height: 120%; text-align: center; ">
+                                    You have been confirmed as member of GEWIS!*
+                                    </td>
+                                </tr>
+                            </table>
+                        </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</td>
+</tr>
+<tr>
+<td>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF;" width="720">
+        <tbody>
+            <tr>
+            <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #F2F2F2; " width="660">
+                    <tbody>
+                        <tr>
+                        <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-left: 25px; padding-right: 25px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="50%">
+                            <table border="0" cellpadding="0" cellspacing="0" class="text_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+                                <tr>
+                                    <td style="padding-top:25px;padding-bottom:25px;">
+                                    <div style="font-family: sans-serif">
+                                        <div style="font-size: 18px; color: #333333; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+                                            <p style="margin: 0; font-size: 18px;">
+                                                <p>Dear <?= $member->getFirstName() ?>,</p>
+<p>First of all, welcome, and thank you for your registration at GEWIS. From tomorrow on, your membership number will be <?= $member->getLidnr() ?>.<br> You can use this membership number to log in to the website, where you can, among other things, subscribe to activities and look at photos from all the fun activities that you, together with the other members, have experienced.  Below more information on all the functions of the website can be found, but first of all, you can register to the website using the following link: <a href="https://gewis.nl/user/register" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">gewis.nl/user/register</a>.</p> <p>Besides getting access to the website, you can also create a SudoSOS account, our system with which you will be able to buy drinks from the refrigerators and sweets you can find on the bar. You will need this account if you want to get a drink at the weekly social drink (usually called the “borrel”). To do this, first, log in to the GEWIS website using the account created above. After this, go to <a href="https://sudosos.gewis.nl" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">sudosos.gewis.nl</a>. When you log in for the first time, you will have to read and accept the terms and conditions. After that, you can also set a pin code to use the point of sales on your own.</p>
+With kind regards,<br> The board of GEWIS
+                                            </p>
+                                        </div>
+                                    </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            </tr>
+            <tr class="hiddensmall">
+            <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF;" width="720">
+                    <tbody>
+                        <tr style="height: 25px;">
+                        <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                            &nbsp;
+                        </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</td>
+</tr>
+<!-- /Important announcements -->
+<tr>
+<td>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; width: 720px;" width="720">
+        <tbody>
+            <tr>
+            <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-left: 55px; padding-right: 55px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; width: 100%;" width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" class="text_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word; width: 100%;" width="100%">
+<tr>
+<td style="padding-left:0px; padding-top:0px;padding-bottom:10px; padding-right:0px; background-color: #FFFFFF;">
+<div style="margin: 0; margin-bottom: 8px; font-size: 16px; color: black; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+    <p style="font-size: 18px; text-align: center; font-weight: bolder; margin-bottom: 6px;">The GEWIS website</p>
+    <p>You might have noticed that GEWIS has its own website, but that it might not be as easy to access as you had hoped. Fear not, as this instruction mail should help you in no time! There are several different tabs in which you can find the following information:<br> <ul> <li><b>Association</b>: If you have ever wondered who is actively helping the association by means of organizing activities, maintaining the servers, taking pictures, or publishing the association magazine: take a look at this page! All our committees, fraternities, and sororities are listed here. Besides that, you can take a look if you forgot what your board looks like, or how you should sing the GEWIS song ;)</li> <li><b>Companies</b>: At some point in the future, you could be looking for an internship or a graduation project from a company. At this header, you find a list of numerous companies offering vacancies for members of GEWIS.</li> <li><b>Education</b>: Especially important when the exam weeks are coming near, here you can find all the old exams and summaries that GEWIS has available for the courses of Mathematics and Computer Science. You can also order your books from here, or submit a complaint about a teacher or a course.</li> <li><b>Activities</b>: Besides studying, it is of course important to relax and enjoy your student life every once in a while. Here, you find an overview of all the activities GEWIS organizes: from weekends to lunch lectures, from external activities such as a conference to internal activities such as a bridge course. Don’t forget that most activities require you to subscribe in advance and that some activities are full quite fast!</li> <li><b>Photos</b>: This kind of speaks for itself: at nearly every activity, members of GEFLITST (the photo committee of GEWIS) are busy taking pictures of our members. If you’re scrolling through the photos, don’t forget to tag the members you know in the picture! This week's photos will be on the website already so check for them regularly :)</li> <li><b>Members</b>: In this section, you can find plenty of different important shortcuts to other parts of the website. For example; you can look at an overview of your profile, look up another member if you can’t remember his name, see when the next General Members Meeting (GMM) is, access your SudoSOS account with which you can buy drinks and food (you have to agree to the terms of use before you can buy stuff), and many other shortcuts. Be sure to check it out! And of course, on our homepage, you can find numerous of these sections in short. A few of the upcoming events, the birthdays of today, the photo of the week, a poll, and of course random infima. So as you can see, there’s a lot to see and do on our website, so be sure to check it out every once in a while!</li> </ul></p>
+</div>
+</td>
+</tr><tr style="height: 30px;"><td><hr style="color: #F2F2F2;"/></td></tr>
+<tr>
+<td style="padding-left:0px; padding-top:10px;padding-bottom:10px; padding-right:0px; background-color: #FFFFFF;">
+<div style="margin: 0; margin-bottom: 8px; font-size: 16px; color: black; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+    <p style="font-size: 18px; text-align: center; font-weight: bolder; margin-bottom: 6px;">First-year committees</p>
+    <p>GEWIS has many committees and fraternities, we even set-up committees dedicated to first-year students every year. As a first year committee you will be experiencing first-hand what being an active GEWIS member is like! Together with your fellow first-year students you will be fleshing out your own identity by creating your very own logo and custom clothing. You will also get the opportunity to organize some very fun activities for GEWIS and you can even be a part of workgroups with other first year committee members with whom you will be organizing parties, parent days or even a cantus! Furthermore, each semester a scoring competition is held to see which first year committee is the very best of them all. Collect points with your committee by passing courses, attending activities and much more!<br><b>Joining a first-year committee</b>: In the first quartile, an information meeting will be held.  Here, first year committees from previous years will tell you about their fun experiences. A second meeting, the formation meeting, will be held to form the first year committees. Not to worry though, it's also possible to join an FYC later in the year. We hope to see you at these meetings!&gt;</p>
+</div>
+</td>
+</tr><tr style="height: 30px;"><td><hr style="color: #F2F2F2;"/></td></tr>
+<tr>
+<td style="padding-left:0px; padding-top:0px;padding-bottom:10px; padding-right:0px; background-color: #FFFFFF;">
+<div style="margin: 0; margin-bottom: 8px; font-size: 16px; color: black; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+    <p style="font-size: 18px; text-align: center; font-weight: bolder; margin-bottom: 6px;">Ordering books</p>
+    <p>By becoming a GEWIS member you have the right to a specialized discount! By navigating to <a href="https://gewis.nl/books" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">gewis.nl/books</a> you can find your study and see which books will be used for your courses.</p>
+</div>
+</td>
+</tr><tr style="height: 30px;"><td><hr style="color: #F2F2F2;"/></td></tr>
+<tr>
+<td style="padding-left:0px; padding-top:0px;padding-bottom:10px; padding-right:0px; background-color: #FFFFFF;">
+<div style="margin: 0; margin-bottom: 8px; font-size: 16px; color: black; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+    <p style="font-size: 18px; text-align: center; font-weight: bolder; margin-bottom: 6px;">GEWIS on social media</p>
+    <p>Next to our own photo section on the website, you can also find us on social media. We have Instagram, Facebook, and LinkedIn (see below). Additionally, we have a weekly newsletter, for which you are automatically subscribed. You will get your first newsletter soon!</p>
+</div>
+</td>
+</tr>
+                </table>
+            </th>
+            </tr>
+        </tbody>
+    </table>
+</td>
+</tr>
 
-<p>
-    <b>The GEWIS website</b><br/>
-    You might have noticed that GEWIS has its own website, but that it might not be as easy to access as you had hoped. Fear not, as this instruction mail should help you in no time! There are several different tabs in which you can find the following information:
-</p>
+<!-- New newsletter announcement -->
+<tr>
+<td>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; width: 720px;" width="720">
+        <tbody>
+            <tr>
+            <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-left: 65px; padding-right: 65px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; width: 100%;" width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" class="text_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word; width: 100%;" width="100%">
+                    <tr>
+                        <td style="padding-left:0px; padding-top:20px; padding-bottom:0px; padding-right:0px; background-color: #FFFFFF;">
+                        <div style="font-size: 11.5px; color: black; line-height: 1.2; font-style: italic; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+                            <p>You received this email because you registered as a member of GEWIS and your membership was confirmed. This is a one-time mailing to update you about the status of your request.<br><br>*If you are paying through SEPA Direct Debit, this approval is pending payment.</p>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
+            </th>
+            </tr>
+        </tbody>
+    </table>
+</td>
+</tr>
+<!-- /New newsletter announcement -->
 
-<p>
-    <b>Association</b><br/>
-    If you have ever wondered who is actively helping the association by means of organizing activities, maintaining the servers, taking pictures, or publishing the association magazine: take a look at this page! All our committees, fraternities, and sororities are listed here. Besides that, you can take a look if you forgot what your board looks like, or how you should sing the GEWIS song ;)
-</p>
-
-<p>
-    <b>Companies</b><br/>
-    At some point in the future, you could be looking for an internship or a graduation project from a company. At this header, you find a list of numerous companies offering vacancies for members of GEWIS.
-</p>
-
-<p>
-    <b>Education</b><br/>
-    Especially important when the exam weeks are coming near, here you can find all the old exams and summaries that GEWIS has available for the courses of Mathematics and Computer Science. You can also order your books from here, or submit a complaint about a teacher or a course.
-</p>
-
-<p>
-    <b>Activities</b><br/>
-    Besides studying, it is of course important to relax and enjoy your student life every once in a while. Here, you find an overview of all the activities GEWIS organizes: from weekends to lunch lectures, from external activities such as a conference to internal activities such as a bridge course. Don’t forget that most activities require you to subscribe in advance and that some activities are full quite fast!
-</p>
-
-<p>
-    <b>Photos</b><br/>
-    This kind of speaks for itself: at nearly every activity, members of GEFLITST (the photo committee of GEWIS) are busy taking pictures of our members. If you’re scrolling through the photos, don’t forget to tag the members you know in the picture! This week's photos will be on the website already so check for them regularly :)
-</p>
-
-<p>
-    <b>Members</b><br/>
-    In this section, you can find plenty of different important shortcuts to other parts of the website. For example; you can look at an overview of your profile, look up another member if you can’t remember his name, see when the next General Members Meeting (GMM) is, access your SudoSOS account with which you can buy drinks and food (you have to agree to the terms of use before you can buy stuff), and many other shortcuts.
-    Be sure to check it out!
-    And of course, on our homepage, you can find numerous of these sections in short. A few of the upcoming events, the birthdays of today, the photo of the week, a poll, and of course random infima. So as you can see, there’s a lot to see and do on our website, so be sure to check it out every once in a while!
-</p>
-
-<p>
-    <b>First Year Committees</b><br/>
-    GEWIS has many committees and fraternities, we even set-up committees dedicated to first-year students every year. As a first year committee you will be experiencing first-hand what being an active GEWIS member is like! Together with your fellow first-year students you will be fleshing out your own identity by creating your very own logo and custom clothing.
-    You will also get the opportunity to organize some very fun activities for GEWIS and you can even be a part of workgroups with other first year committee members with whom you will be organizing parties, parent days or even a cantus!
-    Furthermore, each semester a scoring competition is held to see which first year committee is the very best of them all.
-    Collect points with your committee by passing courses, attending activities and much more!
-</p>
-
-<p>
-    <b>Joining a first year committee</b><br/>
-    In the first quartile, an information meeting will be held.  Here, first year committees from previous years will tell you about their fun experiences.
-    A second meeting, the formation meeting, will be held to form the first year committees. Not to worry though, it's also possible to join an FYC later in the year.
-    We hope to see you at these meetings!
-</p>
-
-<p>
-    <b>Ordering books</b><br/>
-    By becoming a GEWIS member you have the right to a specialized discount! By navigating to <a href="https://gewis.nl/books">gewis.nl/books</a> you can find your study and see which books will be used for your courses.
-</p>
-
-<p>
-    <b>GEWIS on Social Media</b><br/>
-    Next to our own photo section on the website, you can also find us on social media. We have Instagram, Facebook, and LinkedIn. Additionally, we have a weekly newsletter, for which you are automatically subscribed. You will get your first newsletter soon!
-</p>
-
-<p>
-    With kind regards,<br/>
-    The board of GEWIS
-</p>
+                        <tr>
+                        <td>
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;" width="720">
+                                <tbody>
+                                    <tr>
+                                    <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                                        <div class="spacer_block" style="height:60px;line-height:60px;"> </div>
+                                    </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        </tr>
+                        
+                        <tr>
+                        <td>
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #C40000; width: 720px;" width="720">
+                                <tbody>
+                                    <tr>
+                                    <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: bottom; padding-left: 40px; padding-right: 40px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; width: 50%;" width="50%"><table border="0" cellpadding="0" cellspacing="0" class="text_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word; width: 100%;" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom:10px;padding-top:20px;">
+                                                <div style="font-family: Arial, sans-serif">
+                                                    <div style="font-size: 14px; font-family: 'Roboto Slab', Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #ffffff; line-height: 1.2;">
+                                                        <p style="margin: 0; font-size: 14px; text-align: left; letter-spacing: 2px;"><span style="font-size:18px;">Follow GEWIS</span></p>
+                                                    </div>
+                                                    <table align="left" border="0" cellpadding="0" cellspacing="0" class="social-table" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 168px;" width="168">
+                                                        <tr>
+                                                            <td style="padding:0 10px 0 0;"><a href="https://www.gewis.nl/" target="_blank"><img alt="GEWIS Website" height="32" src="https://static.gewis.nl/mailings/2021/fa-globe-europe-32x32.png" style="display: block; height: auto; border: 0;" title="Globe" width="32"/></a></td>
+                                                            <td style="padding:0 10px 0 0;"><a href="https://www.instagram.com/svgewis" target="_blank"><img alt="Instagram" height="32" src="https://static.gewis.nl/mailings/2021/fa-instagram-32x32.png" style="display: block; height: auto; border: 0;" title="Instagram" width="32"/></a></td>
+                                                            <td style="padding:0 10px 0 0;"><a href="https://www.facebook.com/svgewis" target="_blank"><img alt="Facebook" height="32" src="https://static.gewis.nl/mailings/2021/fa-facebook-square-32x32.png" style="display: block; height: auto; border: 0;" title="Facebook" width="32"/></a></td>
+                                                            <td style="padding:0 10px 0 0;"><a href="https://www.linkedin.com/company/study-association-gewis/" target="_blank"><img alt="LinkedIn" height="32" src="https://static.gewis.nl/mailings/2021/fa-linkedin-32x32.png" style="display: block; height: auto; border: 0;" title="LinkedIn" width="32"/></a></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </th>
+                                    <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: bottom; padding-left: 40px; padding-right: 40px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; width: 50%;" width="50%">
+                                        <table border="0" cellpadding="0" cellspacing="0" class="text_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word; width: 100%;" width="100%">
+                                            <tr>
+                                                <td style="padding-top:15px;padding-bottom:0px;">
+                                                <div style="font-family: sans-serif">
+                                                    <div style="font-size: 12px; color: #FFFFFF; line-height: 1.2; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+                                                        <p class="pleft" style="margin: 0; font-size: 14px;">
+                                                            <a href="mailto:secr@gewis.nl" style="color:white; text-decoration:none;">secr@gewis.nl</a><br/>
+                                                            <a href="tel:+31402472815" style="color:white; text-decoration:none;">+31 40 247 2815</a><br/>
+                                                            
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-20" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;" width="100%">
+                    <tbody>
+                        <tr>
+                        <td>
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #C40000; width: 720px;" width="720">
+                                <tbody>
+                                    <tr>
+                                    <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; width: 100%;" width="100%">
+                                        <div class="spacer_block" style="height:40px;line-height:40px;"> </div>
+                                    </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
