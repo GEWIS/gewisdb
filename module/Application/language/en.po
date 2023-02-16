@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-02 12:45+0200\n"
+"POT-Creation-Date: 2023-02-16 18:41+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 3.2.2\n"
 
 msgid "A 404 error occurred"
 msgstr "A 404 error occurred"
@@ -20,6 +20,9 @@ msgstr "Subscribed mailing lists"
 
 msgid "Achternaam"
 msgstr "Last name"
+
+msgid "Action"
+msgstr "Action"
 
 msgid "Additional information"
 msgstr "Additional information"
@@ -54,8 +57,26 @@ msgstr ""
 msgid "An error occurred"
 msgstr "An error occurred"
 
+msgid "An error occurred while trying to reject the changes."
+msgstr "An error occurred while trying to reject the changes."
+
+msgid "An error occurred while trying to save the changes."
+msgstr "An error occurred while trying to save the changes."
+
+msgid "Apply Update"
+msgstr "Apply Update"
+
 msgid "Controller"
 msgstr "Controller"
+
+msgid "Current data"
+msgstr "Current data"
+
+msgid "Data Update Requests"
+msgstr "Data Update Requests"
+
+msgid "Decision List"
+msgstr "Decision List"
 
 msgid ""
 "Deze betaling zal middels een eenmalige SEPA-machtiging\n"
@@ -91,6 +112,9 @@ msgstr ""
 "b> starting from the date on\n"
 "which your account was debited."
 
+msgid "E-mail address"
+msgstr "E-mail address"
+
 msgid "Email"
 msgstr "Email"
 
@@ -108,6 +132,19 @@ msgstr "External"
 
 msgid "File"
 msgstr "File"
+
+msgid "First name"
+msgstr "First name"
+
+#, php-format
+msgid ""
+"GEWIS currently has <a href=\"%s\">%d members</a> and <a href=\"%s\">%d "
+"prospective members</a>. <a href=\"%s\">Click here</a> to create a meeting "
+"or <a href=\"%s\">perform a query</a>."
+msgstr ""
+"GEWIS currently has <a href=\"%s\">%d members</a> and <a href=\"%s\">%d "
+"prospective members</a>. <a href=\"%s\">Click here</a> to create a meeting "
+"or <a href=\"%s\">perform a query</a>."
 
 msgid "Geboortedatum"
 msgstr "Birth date"
@@ -169,8 +206,8 @@ msgstr ""
 msgid "Incassant-ID"
 msgstr "Creditor identifier"
 
-msgid "Inschrijven"
-msgstr "Subscribe"
+msgid "Initials"
+msgstr "Initials"
 
 msgid "Inschrijving"
 msgstr "Subscription"
@@ -197,8 +234,29 @@ msgstr "Mandate reference"
 msgid "Land"
 msgstr "Country"
 
+msgid "Language Settings"
+msgstr "Language Settings"
+
+msgid "Last name"
+msgstr "Last name"
+
+msgid "Last name preposition"
+msgstr "Last name preposition"
+
+msgid "Log in"
+msgstr "Log in"
+
+msgid "Log out"
+msgstr "Log out"
+
 msgid "Mailinglijsten"
 msgstr "Mailing lists"
+
+msgid "Meetings and Decisions"
+msgstr "Meetings and Decisions"
+
+msgid "Members"
+msgstr "Members"
 
 msgid "Message"
 msgstr "Message"
@@ -209,11 +267,20 @@ msgstr "Your registration becomes final after you've paid your membership fee!"
 msgid "Naam"
 msgstr "Name"
 
+msgid "Name"
+msgstr "Name"
+
 msgid "No Exception available"
 msgstr "No Exception available"
 
 msgid "Onbekend"
 msgstr "Unknown"
+
+msgid "Organ"
+msgstr "Organ"
+
+msgid "Pending member updates"
+msgstr "Pending member updates"
 
 msgid "Persoonlijke informatie"
 msgstr "Personal information"
@@ -239,6 +306,18 @@ msgstr "Postal Code"
 msgid "Previous exceptions"
 msgstr "Previous exceptions"
 
+msgid "Proposed data"
+msgstr "Proposed data"
+
+msgid "Prospective Members"
+msgstr "Prospective Members"
+
+msgid "Query"
+msgstr "Query"
+
+msgid "Reject Update"
+msgstr "Reject Update"
+
 msgid "SEPA Direct Debit"
 msgstr "SEPA Direct Debit"
 
@@ -250,6 +329,9 @@ msgstr "Send"
 
 msgid "Selecteer een studie"
 msgstr "Select a study program"
+
+msgid "Settings"
+msgstr "Settings"
 
 msgid "Stack trace"
 msgstr "Stack trace"
@@ -269,14 +351,20 @@ msgstr "Street and house number"
 msgid "Studie"
 msgstr "Study Program"
 
+msgid "Subscribe"
+msgstr "Subscribe"
+
 msgid "TU/e-gebruikersnaam"
 msgstr "TU/e username"
 
-msgid "Taalinstellingen"
-msgstr "Language settings"
-
 msgid "Telefoonnummer"
 msgstr "Phone number"
+
+msgid "The changes have been applied!"
+msgstr "The changes have been applied!"
+
+msgid "The changes have not been applied."
+msgstr "The changes have not been applied."
 
 msgid "The requested URL could not be matched by routing."
 msgstr "The requested URL could not be matched by routing."
@@ -292,14 +380,38 @@ msgstr "The requested controller was not dispatchable."
 msgid "The requested controller was unable to dispatch the request."
 msgstr "The requested controller was unable to dispatch the request."
 
+msgid ""
+"This member has been deleted, you cannot edit their information. Only the "
+"name of this member is stored so that decisions that mention this member "
+"remain correct."
+msgstr ""
+"This member has been deleted, you cannot edit their information. Only the "
+"name of this member is stored so that decisions that mention this member "
+"remain correct."
+
+msgid "This member is not installed in an organ."
+msgstr "This member is not installed in an organ."
+
 msgid "Thuisadres (ouders)"
 msgstr "Home Address (address of your parents)"
+
+msgid "Toggle Navigation"
+msgstr "Toggle Navigation"
 
 msgid "Tussenvoegsels"
 msgstr "Last Name Preposition"
 
+msgid "User"
+msgstr "User"
+
 msgid "Verwijder handtekening"
 msgstr "Remove signature"
+
+msgid "View"
+msgstr "View"
+
+msgid "View Update Requests"
+msgstr "View Update Requests"
 
 msgid ""
 "Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
@@ -316,6 +428,13 @@ msgstr "Initials"
 
 msgid "Voornaam"
 msgstr "First name"
+
+msgid ""
+"Warning: the e-mail address of the member will be updated! This will require "
+"additional changes to any mailing lists the member is added to."
+msgstr ""
+"Warning: the e-mail address of the member will be updated! This will require "
+"additional changes to any mailing lists the member is added to."
 
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr "We cannot determine at this time why a 404 was generated."

@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 8fb8edb-dirty\n"
+"Project-Id-Version: GEWISdb b58e4f5-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-02 12:45+0200\n"
+"POT-Creation-Date: 2023-02-16 18:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,16 +64,103 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
-msgid "Taalinstellingen"
+msgid "Language Settings"
 msgstr ""
 
-msgid "Inschrijven"
+msgid "User"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Toggle Navigation"
+msgstr ""
+
+msgid "Meetings and Decisions"
+msgstr ""
+
+msgid "Organ"
+msgstr ""
+
+msgid "Prospective Members"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
+msgid "Decision List"
+msgstr ""
+
+msgid "Query"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Subscribe"
+msgstr ""
+
+#, php-format
+msgid ""
+"GEWIS currently has <a href=\"%s\">%d members</a> and <a href=\"%s\">%d "
+"prospective members</a>. <a href=\"%s\">Click here</a> to create a meeting "
+"or <a href=\"%s\">perform a query</a>."
+msgstr ""
+
+msgid "Pending member updates"
+msgstr ""
+
+msgid ""
+"This member has been deleted, you cannot edit their information. Only the "
+"name of this member is stored so that decisions that mention this member "
+"remain correct."
+msgstr ""
+
+msgid "View Update Requests"
 msgstr ""
 
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr ""
 
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
+msgstr ""
+
+msgid "This member is not installed in an organ."
+msgstr ""
+
+msgid "Current data"
+msgstr ""
+
+msgid "Proposed data"
+msgstr ""
+
+msgid "Initials"
+msgstr ""
+
+msgid "First name"
+msgstr ""
+
+msgid "Last name preposition"
+msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid "E-mail address"
+msgstr ""
+
+msgid ""
+"Warning: the e-mail address of the member will be updated! This will require "
+"additional changes to any mailing lists the member is added to."
+msgstr ""
+
+msgid "Apply Update"
+msgstr ""
+
+msgid "Reject Update"
 msgstr ""
 
 msgid "Inschrijving"
@@ -257,6 +344,18 @@ msgstr ""
 msgid "Handtekening"
 msgstr ""
 
+msgid "Data Update Requests"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
 msgid "Thuisadres (ouders)"
 msgstr ""
 
@@ -276,6 +375,18 @@ msgid "Afgestudeerde"
 msgstr ""
 
 msgid "Erelid"
+msgstr ""
+
+msgid "The changes have been applied!"
+msgstr ""
+
+msgid "An error occurred while trying to save the changes."
+msgstr ""
+
+msgid "The changes have not been applied."
+msgstr ""
+
+msgid "An error occurred while trying to reject the changes."
 msgstr ""
 
 msgid "Straat"
