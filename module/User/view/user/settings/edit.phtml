@@ -1,4 +1,5 @@
 <?php
+
 $form->prepare();
 $form->setAttribute('action', $this->url('settings/user/edit', ['id' => $user->getId()]));
 $form->setAttribute('method', 'post');
@@ -7,7 +8,12 @@ $form->setAttribute('role', 'form');
 $form->setAttribute('class', 'form-horizontal');
 ?>
 <div class="row">
-    <h2>Wijzig wachtwoord voor gebruiker <?= $user->getLogin() ?></h2>
+    <h2>
+        <?= sprintf(
+            $this->translate('Change password for %s'),
+            $this->escapeHtml($user->getLogin()),
+        ) ?>
+    </h2>
     <?= $this->form()->openTag($form) ?>
 
     <?php
@@ -52,10 +58,15 @@ $form->setAttribute('class', 'form-horizontal');
     <?= $this->form()->closeTag() ?>
 </div>
 <div class="row">
-    <h2>Verwijder gebruiker <?= $user->getLogin() ?></h2>
-<form method="post" action="<?= $this->url('settings/user/delete', ['id' => $user->getId()]) ?>">
-    <div class="col-sm-offset-2 col-sm-10">
-    <button class="btn btn-danger">Verwijder gebruiker</button>
-    </div>
-</form>
+    <h2>
+        <?= sprintf(
+            $this->translate('Delete %s'),
+            $this->escapeHtml($user->getLogin()),
+        ) ?>
+    </h2>
+    <form method="post" action="<?= $this->url('settings/user/delete', ['id' => $user->getId()]) ?>">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-danger"><?= $this->translate('Delete User') ?></button>
+        </div>
+    </form>
 </div>

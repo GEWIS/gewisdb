@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-16 18:41+0100\n"
+"POT-Creation-Date: 2023-02-17 13:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -11,6 +11,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.2.2\n"
+
+#, php-format
+msgid ""
+"<strong>Warning:</strong> The database currently requires the usage of GEWIS "
+"m-accounts to log in. Any accounts created here cannot be used to log in. "
+"Learn more about m-accounts %shere%s."
+msgstr ""
 
 msgid "A 404 error occurred"
 msgstr "A 404 error occurred"
@@ -23,6 +30,9 @@ msgstr "Last name"
 
 msgid "Action"
 msgstr "Action"
+
+msgid "Add new user"
+msgstr "Add new user"
 
 msgid "Additional information"
 msgstr "Additional information"
@@ -66,8 +76,15 @@ msgstr "An error occurred while trying to save the changes."
 msgid "Apply Update"
 msgstr "Apply Update"
 
+#, php-format
+msgid "Change password for %s"
+msgstr "Change password for %s"
+
 msgid "Controller"
 msgstr "Controller"
+
+msgid "Create user"
+msgstr "Create user"
 
 msgid "Current data"
 msgstr "Current data"
@@ -77,6 +94,13 @@ msgstr "Data Update Requests"
 
 msgid "Decision List"
 msgstr "Decision List"
+
+#, php-format
+msgid "Delete %s"
+msgstr "Delete %s"
+
+msgid "Delete User"
+msgstr "Delete User"
 
 msgid ""
 "Deze betaling zal middels een eenmalige SEPA-machtiging\n"
@@ -114,6 +138,9 @@ msgstr ""
 
 msgid "E-mail address"
 msgstr "E-mail address"
+
+msgid "Edit / Delete"
+msgstr "Edit / Delete"
 
 msgid "Email"
 msgstr "Email"
@@ -249,6 +276,9 @@ msgstr "Log in"
 msgid "Log out"
 msgstr "Log out"
 
+msgid "Login"
+msgstr "Login"
+
 msgid "Mailinglijsten"
 msgstr "Mailing lists"
 
@@ -366,6 +396,14 @@ msgstr "The changes have been applied!"
 msgid "The changes have not been applied."
 msgstr "The changes have not been applied."
 
+msgid "The database currently only accepts logins using your GEWIS m-account."
+msgstr "The database currently only accepts logins using your GEWIS m-account."
+
+msgid ""
+"The database currently only accepts logins using your database credentials."
+msgstr ""
+"The database currently only accepts logins using your database credentials."
+
 msgid "The requested URL could not be matched by routing."
 msgstr "The requested URL could not be matched by routing."
 
@@ -403,6 +441,12 @@ msgstr "Last Name Preposition"
 
 msgid "User"
 msgstr "User"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Users"
+msgstr "Users"
 
 msgid "Verwijder handtekening"
 msgstr "Remove signature"

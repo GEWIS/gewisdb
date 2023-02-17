@@ -1,4 +1,5 @@
 <?php
+
 $form->prepare();
 $form->setAttribute('action', $this->url('user'));
 $form->setAttribute('method', 'post');
@@ -7,52 +8,64 @@ $form->setAttribute('role', 'form');
 $form->setAttribute('class', 'form-horizontal');
 ?>
 <div class="row">
-    <h1>Login</h1>
-    <?= $this->form()->openTag($form) ?>
+    <div class="col-sm-10 col-sm-offset-1 col-md-7 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4><?= $this->translate('Login') ?></h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-info">
+                    <p>
+                        <?php if ($usesldap): ?>
+                            <?= $this->translate('The database currently only accepts logins using your GEWIS m-account.') ?>
+                        <?php else: ?>
+                            <?= $this->translate('The database currently only accepts logins using your database credentials.') ?>
+                        <?php endif; ?>
+                    </p>
+                </div>
+                <?= $this->form()->openTag($form) ?>
 
-    <div class="alert alert-info" role="alert">
-        <?= $usesldap ? 'This system uses GEWIS m-accounts. Learn more about m-accounts <a target="_blank" href="https://support.gewis.nl/kb/faq.php?id=36">here</a>.'
-        : 'Please use your database credentials' ?>
-    </div>
+                <?php
+                $element = $form->get('login');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <div class="col-sm-10">
+                        <?= $this->formInput($element) ?>
+                        <?= $this->formElementErrors($element) ?>
+                    </div>
+                </div>
 
-    <?php
-    $element = $form->get('login');
-    $element->setAttribute('class', 'form-control');
-    $element->setAttribute('placeholder', $element->getLabel());
-    ?>
-    <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-        <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
-            <?= $element->getLabel() ?>
-        </label>
-        <div class="col-sm-10">
-            <?= $this->formInput($element) ?>
-            <?= $this->formElementErrors($element) ?>
+                <?php
+                $element = $form->get('password');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('placeholder', $element->getLabel());
+                ?>
+                <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+                    <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <div class="col-sm-10">
+                        <?= $this->formInput($element) ?>
+                        <?= $this->formElementErrors($element) ?>
+                    </div>
+                </div>
+
+                <?php
+                $submit = $form->get('submit');
+                $submit->setLabel($submit->getValue());
+                $submit->setAttribute('class', 'btn btn-primary pull-right');
+                ?>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <?= $this->formButton($submit) ?>
+                </div>
+
+                <?= $this->form()->closeTag() ?>
+            </div>
         </div>
     </div>
-
-    <?php
-    $element = $form->get('password');
-    $element->setAttribute('class', 'form-control');
-    $element->setAttribute('placeholder', $element->getLabel());
-    ?>
-    <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
-        <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
-            <?= $element->getLabel() ?>
-        </label>
-        <div class="col-sm-10">
-            <?= $this->formInput($element) ?>
-            <?= $this->formElementErrors($element) ?>
-        </div>
-    </div>
-
-    <?php
-    $submit = $form->get('submit');
-    $submit->setLabel($submit->getValue());
-    $submit->setAttribute('class', 'btn btn-primary');
-    ?>
-    <div class="col-sm-offset-2 col-sm-10">
-        <?= $this->formButton($submit) ?>
-    </div>
-
-    <?= $this->form()->closeTag() ?>
 </div>
