@@ -1551,26 +1551,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Command-GenerateAuthenticationKeysCommand.html#property_memberService"
         },                {
-            "fqsen": "\\Database\\Controller\\AddressController",
-            "name": "AddressController",
-            "summary": "",
-            "url": "classes/Database-Controller-AddressController.html"
-        },                {
-            "fqsen": "\\Database\\Controller\\AddressController\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Database-Controller-AddressController.html#method___construct"
-        },                {
-            "fqsen": "\\Database\\Controller\\AddressController\u003A\u003AindexAction\u0028\u0029",
-            "name": "indexAction",
-            "summary": "",
-            "url": "classes/Database-Controller-AddressController.html#method_indexAction"
-        },                {
-            "fqsen": "\\Database\\Controller\\AddressController\u003A\u003A\u0024memberService",
-            "name": "memberService",
-            "summary": "",
-            "url": "classes/Database-Controller-AddressController.html#property_memberService"
-        },                {
             "fqsen": "\\Database\\Controller\\ExportController",
             "name": "ExportController",
             "summary": "",
@@ -1590,16 +1570,6 @@ Search.appendIndex(
             "name": "meetingService",
             "summary": "",
             "url": "classes/Database-Controller-ExportController.html#property_meetingService"
-        },                {
-            "fqsen": "\\Database\\Controller\\Factory\\AddressControllerFactory",
-            "name": "AddressControllerFactory",
-            "summary": "",
-            "url": "classes/Database-Controller-Factory-AddressControllerFactory.html"
-        },                {
-            "fqsen": "\\Database\\Controller\\Factory\\AddressControllerFactory\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Database-Controller-Factory-AddressControllerFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Controller\\Factory\\ExportControllerFactory",
             "name": "ExportControllerFactory",
@@ -1790,11 +1760,6 @@ Search.appendIndex(
             "name": "showAction",
             "summary": "Show\u0020action.",
             "url": "classes/Database-Controller-MemberController.html#method_showAction"
-        },                {
-            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AprintAction\u0028\u0029",
-            "name": "printAction",
-            "summary": "Print\u0020action.",
-            "url": "classes/Database-Controller-MemberController.html#method_printAction"
         },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AsetSupremumAction\u0028\u0029",
             "name": "setSupremumAction",
@@ -2051,6 +2016,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-Abolish.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\Abolish\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Abolish.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\AbstractDecision",
             "name": "AbstractDecision",
             "summary": "",
@@ -2081,20 +2051,10 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Address.html#method_getInputFilterSpecification"
         },                {
-            "fqsen": "\\Database\\Form\\AddressExport",
-            "name": "AddressExport",
+            "fqsen": "\\Database\\Form\\Address\u003A\u003A\u0024translator",
+            "name": "translator",
             "summary": "",
-            "url": "classes/Database-Form-AddressExport.html"
-        },                {
-            "fqsen": "\\Database\\Form\\AddressExport\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Database-Form-AddressExport.html#method___construct"
-        },                {
-            "fqsen": "\\Database\\Form\\AddressExport\u003A\u003AgetInputFilterSpecification\u0028\u0029",
-            "name": "getInputFilterSpecification",
-            "summary": "Specification\u0020of\u0020input\u0020filter.",
-            "url": "classes/Database-Form-AddressExport.html#method_getInputFilterSpecification"
+            "url": "classes/Database-Form-Address.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\Board\\Discharge",
             "name": "Discharge",
@@ -2111,6 +2071,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Board-Discharge.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\Board\\Discharge\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Board-Discharge.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\Board\\Install",
             "name": "Install",
             "summary": "",
@@ -2125,6 +2090,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Board-Install.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Board\\Install\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Board-Install.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\Board\\Release",
             "name": "Release",
@@ -2141,6 +2111,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Board-Release.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\Board\\Release\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Board-Release.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\Budget",
             "name": "Budget",
             "summary": "",
@@ -2155,6 +2130,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "",
             "url": "classes/Database-Form-Budget.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Budget\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Budget.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\CreateMeeting",
             "name": "CreateMeeting",
@@ -2171,6 +2151,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-CreateMeeting.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\CreateMeeting\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-CreateMeeting.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\DeleteAddress",
             "name": "DeleteAddress",
             "summary": "",
@@ -2185,6 +2170,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "",
             "url": "classes/Database-Form-DeleteAddress.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\DeleteAddress\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-DeleteAddress.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\DeleteDecision",
             "name": "DeleteDecision",
@@ -2201,6 +2191,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-DeleteDecision.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\DeleteDecision\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-DeleteDecision.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\DeleteList",
             "name": "DeleteList",
             "summary": "",
@@ -2216,6 +2211,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-DeleteList.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\DeleteList\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-DeleteList.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\Destroy",
             "name": "Destroy",
             "summary": "",
@@ -2230,6 +2230,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "",
             "url": "classes/Database-Form-Destroy.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Destroy\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Destroy.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\Export",
             "name": "Export",
@@ -2250,6 +2255,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Export.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Export\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Export.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\Fieldset\\Address",
             "name": "Address",
@@ -2391,6 +2401,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Foundation.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\Foundation\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Foundation.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\Install",
             "name": "Install",
             "summary": "",
@@ -2400,6 +2415,11 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Database-Form-Install.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\Install\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Install.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\InstallationFunction",
             "name": "InstallationFunction",
@@ -2416,6 +2436,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-InstallationFunction.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\InstallationFunction\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-InstallationFunction.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\MailingList",
             "name": "MailingList",
             "summary": "",
@@ -2430,6 +2455,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-MailingList.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\MailingList\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-MailingList.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\Member",
             "name": "Member",
@@ -2481,6 +2511,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberApprove.html#method___construct"
         },                {
+            "fqsen": "\\Database\\Form\\MemberApprove\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-MemberApprove.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\MemberEdit",
             "name": "MemberEdit",
             "summary": "",
@@ -2495,6 +2530,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-MemberEdit.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberEdit\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-MemberEdit.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\MemberExpiration",
             "name": "MemberExpiration",
@@ -2511,6 +2551,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberExpiration.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\MemberExpiration\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-MemberExpiration.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\MemberLists",
             "name": "MemberLists",
             "summary": "",
@@ -2525,6 +2570,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-MemberLists.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberLists\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-MemberLists.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\MemberLists\u003A\u003A\u0024lists",
             "name": "lists",
@@ -2546,6 +2596,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-MemberType.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\MemberType\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-MemberType.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\Other",
             "name": "Other",
             "summary": "",
@@ -2560,6 +2615,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "",
             "url": "classes/Database-Form-Other.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Other\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Other.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\Query",
             "name": "Query",
@@ -2576,6 +2636,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-Query.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\Query\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Query.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\QueryExport",
             "name": "QueryExport",
             "summary": "",
@@ -2591,6 +2656,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-QueryExport.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\QueryExport\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-QueryExport.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\QuerySave",
             "name": "QuerySave",
             "summary": "",
@@ -2605,6 +2675,11 @@ Search.appendIndex(
             "name": "getInputFilterSpecification",
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-QuerySave.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\QuerySave\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-QuerySave.html#property_translator"
         },                {
             "fqsen": "\\Database\\Hydrator\\Abolish",
             "name": "Abolish",
@@ -5731,11 +5806,6 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020delete\u0020address\u0020form.",
             "url": "classes/Database-Service-Member.html#method_getDeleteAddressForm"
         },                {
-            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetAddressExportForm\u0028\u0029",
-            "name": "getAddressExportForm",
-            "summary": "Get\u0020address\u0020export\u0020form.",
-            "url": "classes/Database-Service-Member.html#method_getAddressExportForm"
-        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetMemberForm\u0028\u0029",
             "name": "getMemberForm",
             "summary": "Get\u0020the\u0020member\u0020form.",
@@ -5776,15 +5846,15 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020checker\u0020service.",
             "url": "classes/Database-Service-Member.html#method_getCheckerService"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024addressForm",
             "name": "addressForm",
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_addressForm"
-        },                {
-            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024addressExportForm",
-            "name": "addressExportForm",
-            "summary": "",
-            "url": "classes/Database-Service-Member.html#property_addressExportForm"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024deleteAddressForm",
             "name": "deleteAddressForm",
