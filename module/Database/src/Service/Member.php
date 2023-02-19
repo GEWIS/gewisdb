@@ -12,7 +12,6 @@ use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
 use Database\Form\{
     Address as AddressForm,
-    AddressExport as AddressExportForm,
     DeleteAddress as DeleteAddressForm,
     Member as MemberForm,
     MemberApprove as MemberApproveForm,
@@ -55,7 +54,6 @@ class Member
 {
     public function __construct(
         private readonly AddressForm $addressForm,
-        private readonly AddressExportForm $addressExportForm,
         private readonly DeleteAddressForm $deleteAddressForm,
         private readonly MemberApproveForm $memberApproveForm,
         private readonly MemberForm $memberForm,
@@ -963,14 +961,6 @@ class Member
     public function getDeleteAddressForm(): DeleteAddressForm
     {
         return $this->deleteAddressForm;
-    }
-
-    /**
-     * Get address export form.
-     */
-    public function getAddressExportForm(): AddressExportForm
-    {
-        return $this->addressExportForm;
     }
 
     /**

@@ -5,7 +5,6 @@ namespace Database;
 use Database\Form\{
     Abolish as AbolishForm,
     Address as AddressForm,
-    AddressExport as AddressExportForm,
     Budget as BudgetForm,
     CreateMeeting as CreateMeetingForm,
     DeleteAddress as DeleteAddressForm,
@@ -147,7 +146,6 @@ class Module
                 BoardInstallHydrator::class => BoardInstallHydrator::class,
                 BoardDischargeHydrator::class => BoardDischargeHydrator::class,
                 BoardReleaseHydrator::class => BoardReleaseHydrator::class,
-                AddressExportForm::class => AddressExportForm::class,
                 DeleteAddressForm::class => DeleteAddressForm::class,
                 DeleteListForm::class => DeleteListForm::class,
                 MemberExpirationForm::class => MemberExpirationForm::class,

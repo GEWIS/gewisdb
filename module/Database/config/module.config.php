@@ -3,7 +3,6 @@
 namespace Database;
 
 use Database\Controller\{
-    AddressController,
     ExportController,
     IndexController,
     MeetingController,
@@ -14,7 +13,6 @@ use Database\Controller\{
     SettingsController,
 };
 use Database\Controller\Factory\{
-    AddressControllerFactory,
     ExportControllerFactory,
     IndexControllerFactory,
     MeetingControllerFactory,
@@ -44,16 +42,6 @@ return [
                     'defaults' => [
                         'controller' => IndexController::class,
                         'action'     => 'index',
-                    ],
-                ],
-            ],
-            'address' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/address',
-                    'defaults' => [
-                        'controller' => AddressController::class,
-                        'action' => 'index',
                     ],
                 ],
             ],
@@ -576,7 +564,6 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            AddressController::class => AddressControllerFactory::class,
             ExportController::class => ExportControllerFactory::class,
             IndexController::class => IndexControllerFactory::class,
             MeetingController::class => MeetingControllerFactory::class,

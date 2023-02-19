@@ -6,7 +6,6 @@ use Application\Service\FileStorage as FileStorageService;
 use Checker\Service\Checker as CheckerService;
 use Database\Form\{
     Address as AddressForm,
-    AddressExport as AddressExportForm,
     DeleteAddress as DeleteAddressForm,
     Member as MemberForm,
     MemberApprove as MemberApproveForm,
@@ -45,8 +44,6 @@ class MemberFactory implements FactoryInterface
     ): MemberService {
         /** @var AddressForm $addressForm */
         $addressForm = $container->get(AddressForm::class);
-        /** @var AddressExportForm $addressExportForm */
-        $addressExportForm = $container->get(AddressExportForm::class);
         /** @var DeleteAddressForm $deleteAddressForm */
         $deleteAddressForm = $container->get(DeleteAddressForm::class);
         /** @var MemberApproveForm $memberApproveForm */
@@ -82,7 +79,6 @@ class MemberFactory implements FactoryInterface
 
         return new MemberService(
             $addressForm,
-            $addressExportForm,
             $deleteAddressForm,
             $memberApproveForm,
             $memberForm,
