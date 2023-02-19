@@ -44,26 +44,30 @@
 </script>
 <form role="form">
     <div class="form-group">
-        <label for="">Zoeken op lid</label>
-        <input type="text" class="form-control" placeholder="Zoek" id="member-search" autofocus>
+        <label for=""><?= $this->translate('Search Prospective Members') ?></label>
+        <input type="text" class="form-control" placeholder="<?= $this->translate('Search') ?>" id="member-search" autofocus>
     </div>
 </form>
 
 <table class="table table-hover" id="members-result">
     <thead>
-    <tr>
-        <th>#</th>
-        <th>Naam</th>
-        <th>Email</th>
-    </tr>
+        <tr>
+            <th>#</th>
+            <th><?= $this->translate('Name') ?></th>
+            <th><?= $this->translate('E-mail Address') ?></th>
+        </tr>
     </thead>
     <tbody>
     </tbody>
     <tfoot>
-    <tr>
-        <td colspan="3"> Er zijn teveel resultaten om weer te geven. Probeer te filteren om andere resultaten te zien.</td>
-    </tr>
+        <tr>
+            <td colspan="3">
+                <?= $this->translate('There are too many results to display. Try filtering to see other results.') ?>
+            </td>
+        </tr>
     </tfoot>
 </table>
 
-<a href="<?= $this->url('member/default', array('action' => 'subscribe')) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Schrijf lid in</a>
+<a href="<?= $this->url('member/default', ['action' => 'subscribe']) ?>" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Register Member') ?>
+</a>

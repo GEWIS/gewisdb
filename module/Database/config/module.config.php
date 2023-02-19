@@ -308,15 +308,6 @@ return [
                                     ],
                                 ],
                             ],
-                            'print' => [
-                                'type' => Literal::class,
-                                'options' => [
-                                    'route' => '/print',
-                                    'defaults' => [
-                                        'action' => 'print',
-                                    ],
-                                ],
-                            ],
                             'remove-address' => [
                                 'type' => Segment::class,
                                 'options' => [

@@ -1,5 +1,5 @@
 <?php if (isset($success) && $success): ?>
-Vergadering toegevoegd.
+    <?= $this->translate('Meeting added successfully!') ?>
 <?php else: ?>
 <?php
 $form = $this->form;
@@ -13,7 +13,7 @@ $form->setAttribute('class', 'form-horizontal');
 
 echo $this->form()->openTag($form);
 ?>
-<h1>Bestuur toevoegen</h1>
+<h1><?= $this->translate('Add Meeting') ?></h1>
 <div class="form-group">
 <?php
 $element = $form->get('type');
@@ -32,7 +32,7 @@ $element->setLabelAttributes(array(
 <?php
 $element = $form->get('number');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Vergadernummer');
+$element->setAttribute('placeholder', $this->translate('Meeting Number'));
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2'
 ));
@@ -47,7 +47,7 @@ $element->setLabelAttributes(array(
 <?php
 $element = $form->get('date');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Vergaderdatum');
+$element->setAttribute('placeholder', $this->translate('Meeting Date'));
 $element->setLabelAttributes(array(
     'class' => 'col-sm-2'
 ));

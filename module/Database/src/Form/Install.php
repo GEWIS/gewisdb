@@ -12,10 +12,12 @@ use Laminas\Form\Element\{
     Submit,
     Text,
 };
+use Laminas\Mvc\I18n\Translator;
 
 class Install extends AbstractDecision
 {
     public function __construct(
+        private readonly Translator $translator,
         MeetingFieldset $meeting,
         InstallationFieldset $install,
         SubDecisionFieldset $discharge,
@@ -27,7 +29,7 @@ class Install extends AbstractDecision
             'name' => 'name',
             'type' => Text::class,
             'options' => [
-                'label' => 'Orgaan',
+                'label' => $this->translator->translate('Organ'),
             ],
         ]);
 
@@ -37,7 +39,7 @@ class Install extends AbstractDecision
             'name' => 'installations',
             'type' => Collection::class,
             'options' => [
-                'label' => 'Installations',
+                'label' => $this->translator->translate('Installations'),
                 'count' => 1,
                 'should_create_template' => true,
                 'target_element' => $install,
@@ -48,7 +50,7 @@ class Install extends AbstractDecision
             'name' => 'discharges',
             'type' => Collection::class,
             'options' => [
-                'label' => 'Members',
+                'label' => $this->translator->translate('Discharges'),
                 'count' => 1,
                 'should_create_template' => true,
                 'target_element' => $discharge,
@@ -59,7 +61,7 @@ class Install extends AbstractDecision
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Maak wijzigingen',
+                'value' => $this->translator->translate('Confirm Changes'),
             ],
         ]);
     }

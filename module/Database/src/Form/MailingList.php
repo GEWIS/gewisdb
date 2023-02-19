@@ -10,11 +10,12 @@ use Laminas\Form\Element\{
 };
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
 
 class MailingList extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -22,7 +23,7 @@ class MailingList extends Form implements InputFilterProviderInterface
             'name' => 'name',
             'type' => Text::class,
             'options' => [
-                'label' => 'Naam',
+                'label' => $this->translator->translate('Name'),
             ],
         ]);
 
@@ -30,7 +31,7 @@ class MailingList extends Form implements InputFilterProviderInterface
             'name' => 'nl_description',
             'type' => Textarea::class,
             'options' => [
-                'label' => 'Beschrijving (nederlands)',
+                'label' => $this->translator->translate('Dutch Description'),
             ],
         ]);
 
@@ -38,7 +39,7 @@ class MailingList extends Form implements InputFilterProviderInterface
             'name' => 'en_description',
             'type' => Textarea::class,
             'options' => [
-                'label' => 'Beschrijving (engels)',
+                'label' => $this->translator->translate('English Description'),
             ],
         ]);
 
@@ -46,7 +47,7 @@ class MailingList extends Form implements InputFilterProviderInterface
             'name' => 'onForm',
             'type' => Checkbox::class,
             'options' => [
-                'label' => 'Op inschrijfformulier',
+                'label' => $this->translator->translate('On Form'),
             ],
         ]);
         $this->get('onForm')->setChecked(true);
@@ -55,7 +56,7 @@ class MailingList extends Form implements InputFilterProviderInterface
             'name' => 'defaultSub',
             'type' => Checkbox::class,
             'options' => [
-                'label' => 'Standaard ingeschreven',
+                'label' => $this->translator->translate('Auto-subscription'),
             ],
         ]);
 
@@ -63,7 +64,7 @@ class MailingList extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Voeg lijst toe',
+                'value' => $this->translator->translate('Add Mailing List'),
             ],
         ]);
     }

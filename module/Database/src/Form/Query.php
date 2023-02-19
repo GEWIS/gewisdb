@@ -2,6 +2,7 @@
 
 namespace Database\Form;
 
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Form\Element\{
     Submit,
     Textarea,
@@ -11,7 +12,7 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 
 class Query extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -19,7 +20,7 @@ class Query extends Form implements InputFilterProviderInterface
             'name' => 'query',
             'type' => Textarea::class,
             'options' => [
-                'label' => 'Query input',
+                'label' => $this->translator->translate('Query'),
             ],
         ]);
 
@@ -27,10 +28,10 @@ class Query extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Uitvoeren',
+                'value' => $this->translator->translate('Execute'),
             ],
             'options' => [
-                'label' => 'Uitvoeren',
+                'label' => $this->translator->translate('Execute'),
             ],
         ]);
     }

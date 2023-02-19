@@ -62,24 +62,26 @@ $(document).ready(function () {
 </script>
 <form role="form">
     <div class="form-group">
-        <label for="">Zoeken naar organen</label>
-        <input type="text" class="form-control" placeholder="Zoek" id="organ-search" autofocus>
+        <label for=""><?= $this->translate('Search Organs') ?></label>
+        <input type="text" class="form-control" placeholder="<?= $this->translate('Search') ?>" id="organ-search" autofocus>
     </div>
 </form>
 
 <table class="table table-hover" id="organ-result">
     <thead>
         <tr>
-            <th>Afkorting</th>
-            <th>Naam</th>
-            <th>Besluit</th>
+            <th><?= $this->translate('Abbreviation') ?></th>
+            <th><?= $this->translate('Name') ?></th>
+            <th><?= $this->translate('Decision') ?></th>
         </tr>
     </thead>
     <tbody>
     </tbody>
     <tfoot>
         <tr>
-            <td> Er zijn teveel resultaten om weer te geven. Probeer te filteren om andere resultaten te zien.</td>
+            <td colspan="3">
+                <?= $this->translate('There are too many results to display. Try filtering to see other results.') ?>
+            </td>
         </tr>
     </tfoot>
 </table>

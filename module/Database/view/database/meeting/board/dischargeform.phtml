@@ -59,14 +59,14 @@ $fs->get('number')->setAttribute('id', 'install-board-subdecision-number');
 <?= $this->formHidden($fs->get('decision_number')) ?>
 <?= $this->formHidden($fs->get('number')) ?>
     <label class="col-md-2 control-label">
-        Te dechargeren bestuurslid
+        <?= $this->translate('Board Member(s) to Discharge') ?>
     </label>
     <div class="col-md-10">
 <?php foreach ($installs as $key => $install): ?>
     <div class="radio">
         <label>
             <input type="radio" name="board-discharge-slot" class="board-discharge-slot" value="<?= $key ?>">
-            <?= $install->getMember()->getFullName() ?> als <?= $install->getFunction() ?><br />
+            <?= $install->getMember()->getFullName() ?> <?= $this->translate('as') ?> <?= $install->getFunction() ?><br>
         </label>
     </div>
 <?php endforeach ?>

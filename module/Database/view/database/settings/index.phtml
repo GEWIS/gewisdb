@@ -1,7 +1,19 @@
 <h1>Settings</h1>
 
 <ul>
-    <li><a href="<?= $this->url('settings/default', ['action' => 'function']) ?>">Functies</a></li>
-    <li><a href="<?= $this->url('settings/default', ['action' => 'list']) ?>">Mailing Lijsten</a></li>
-    <li><a href="<?= $this->url('settings/user') ?>">User</a></li>
+    <li>
+        <a href="<?= $this->url('settings/default', ['action' => 'function']) ?>">
+            <?= $this->translate('Functions') ?>
+        </a>
+    </li>
+    <li>
+        <a href="<?= $this->url('settings/default', ['action' => 'list']) ?>">
+            <?= $this->translate('Mailing Lists') ?>
+        </a>
+    </li>
+    <li>
+        <a href="<?= $this->url('settings/user') ?>">
+            <?= $this->translate('Users') ?>
+        </a>
+    </li>
 </ul>

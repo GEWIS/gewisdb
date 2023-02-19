@@ -1,32 +1,35 @@
 <?php
 use Database\Model\Meeting;
 ?>
-<a href="<?= $this->url('meeting/create') ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Maak nieuwe vergadering</a>
+<a href="<?= $this->url('meeting/create') ?>" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add New Meeting') ?>
+</a>
 <table class="table table-hover">
     <thead>
     <tr>
-        <th>Type</th>
-        <th>Vergadernummer</th>
-        <th>Datum</th>
-        <th># Besluiten</th>
+        <th><?= $this->translate('Type') ?></th>
+        <th><?= $this->translate('Meeting Number') ?></th>
+        <th><?= $this->translate('Meeting Date') ?></th>
+        <th><?= $this->translate('# Decisions') ?></th>
     </tr>
     </thead>
     <tbody>
-<?php foreach ($meetings as $info): ?>
-<?php $meeting = $info[0]; ?>
-<?php $url = $this->url('meeting/view', array('type' => $meeting->getType()->value, 'number' => $meeting->getNumber())) ?>
-    <tr>
-        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getType()->value ?></a></td>
-        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getNumber() ?></a></td>
-        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $this->dateFormat(
-            $meeting->getDate(),
-            \IntlDateFormatter::FULL,
-            \IntlDateFormatter::NONE,
-            'nl_NL'
-        ) ?></a></td>
-        <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $info[1] ?></a></td>
-    </tr>
-<?php endforeach; ?>
+        <?php foreach ($meetings as $info): ?>
+            <?php $meeting = $info[0]; ?>
+            <?php $url = $this->url('meeting/view', array('type' => $meeting->getType()->value, 'number' => $meeting->getNumber())) ?>
+            <tr>
+                <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getType()->value ?></a></td>
+                <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $meeting->getNumber() ?></a></td>
+                <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $this->dateFormat(
+                    $meeting->getDate(),
+                    \IntlDateFormatter::FULL,
+                    \IntlDateFormatter::NONE,
+                ) ?></a></td>
+                <td><a href="<?= $url ?>" style="display: block; height: 100%; width:100%;"><?= $info[1] ?></a></td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
-<a href="<?= $this->url('meeting/create') ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Maak nieuwe vergadering</a>
+<a href="<?= $this->url('meeting/create') ?>" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add New Meeting') ?>
+</a>

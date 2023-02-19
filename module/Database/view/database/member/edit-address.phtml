@@ -6,9 +6,25 @@ use Database\Model\Address;
 $type = $address->getType()->getName($this->plugin('translate')->getTranslator());
 ?>
 <?php if (isset($add) && $add): ?>
-<h2>Voeg <?= $type ?> van <?= $address->getMember()->getFullName() ?> toe</h2>
+    <h2>
+        <?=
+            sprintf(
+                $this->translate('Add %s of %s'),
+                $type,
+                $this->escapeHtml($address->getMember()->getFullName()),
+            )
+        ?>
+    </h2>
 <?php else: ?>
-<h2>Wijzig <?= $type ?> van <?= $address->getMember()->getFullName() ?></h2>
+    <h2>
+        <?=
+        sprintf(
+            $this->translate('Update %s of %s'),
+            $type,
+            $this->escapeHtml($address->getMember()->getFullName()),
+        )
+        ?>
+    </h2>
 <?php endif ?>
 <br>
 <?php

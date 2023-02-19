@@ -146,11 +146,6 @@ class Module
                 BoardInstallHydrator::class => BoardInstallHydrator::class,
                 BoardDischargeHydrator::class => BoardDischargeHydrator::class,
                 BoardReleaseHydrator::class => BoardReleaseHydrator::class,
-                DeleteAddressForm::class => DeleteAddressForm::class,
-                DeleteListForm::class => DeleteListForm::class,
-                MemberExpirationForm::class => MemberExpirationForm::class,
-                QueryForm::class => QueryForm::class,
-                QueryExportForm::class => QueryExportForm::class,
             ],
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
@@ -162,13 +157,17 @@ class Module
                 QueryService::class => QueryServiceFactory::class,
                 ExportForm::class => function (ContainerInterface $container) {
                     return new ExportForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingMapper::class),
                     );
                 },
                 AddressForm::class => function (ContainerInterface $container) {
-                    $form = new AddressForm();
+                    $form = new AddressForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_address'));
                     return $form;
+                },
+                DeleteAddressForm::class => function (ContainerInterface $container) {
+                    return new DeleteAddressForm($container->get(MvcTranslator::class));
                 },
                 MemberForm::class => function (ContainerInterface $container) {
                     $form = new MemberForm(
@@ -180,27 +179,31 @@ class Module
                     return $form;
                 },
                 MemberEditForm::class => function (ContainerInterface $container) {
-                    $form = new MemberEditForm();
+                    $form = new MemberEditForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
                 MemberApproveForm::class => function (ContainerInterface $container) {
-                    $form = new MemberApproveForm();
+                    $form = new MemberApproveForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
                 MemberTypeForm::class => function (ContainerInterface $container) {
-                    $form = new MemberTypeForm();
+                    $form = new MemberTypeForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
+                MemberExpirationForm::class => function (ContainerInterface $container) {
+                    return new MemberExpirationForm($container->get(MvcTranslator::class));
+                },
                 CreateMeetingForm::class => function (ContainerInterface $container) {
-                    $form = new CreateMeetingForm();
+                    $form = new CreateMeetingForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_meeting'));
                     return $form;
                 },
                 OtherForm::class => function (ContainerInterface $container) {
                     $form = new OtherForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                     );
                     $form->setHydrator($container->get(OtherHydrator::class));
@@ -208,6 +211,7 @@ class Module
                 },
                 BudgetForm::class => function (ContainerInterface $container) {
                     $form = new BudgetForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(MemberFieldset::class),
                     );
@@ -215,17 +219,21 @@ class Module
                     return $form;
                 },
                 MailingListForm::class => function (ContainerInterface $container) {
-                    $form = new MailingListForm();
+                    $form = new MailingListForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
+                DeleteListForm::class => function (ContainerInterface $container) {
+                    return new DeleteListForm($container->get(MvcTranslator::class));
+                },
                 InstallationFunctionForm::class => function (ContainerInterface $container) {
-                    $form = new InstallationFunctionForm();
+                    $form = new InstallationFunctionForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
                     return $form;
                 },
                 InstallForm::class => function (ContainerInterface $container) {
                     $form = new InstallForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(InstallationFieldset::class),
                         $container->get('database_form_fieldset_subdecision_discharge'),
@@ -235,12 +243,13 @@ class Module
                     return $form;
                 },
                 DeleteDecisionForm::class => function (ContainerInterface $container) {
-                    $form = new DeleteDecisionForm();
+                    $form = new DeleteDecisionForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get(AbolishHydrator::class));
                     return $form;
                 },
                 AbolishForm::class => function (ContainerInterface $container) {
                     $form = new AbolishForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get('database_form_fieldset_subdecision_foundation'),
                     );
@@ -249,6 +258,7 @@ class Module
                 },
                 DestroyForm::class => function (ContainerInterface $container) {
                     $form = new DestroyForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(DecisionFieldset::class),
                     );
@@ -257,6 +267,7 @@ class Module
                 },
                 FoundationForm::class => function (ContainerInterface $container) {
                     $form = new FoundationForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(MemberFunctionFieldset::class),
                     );
@@ -265,6 +276,7 @@ class Module
                 },
                 BoardInstallForm::class => function (ContainerInterface $container) {
                     $form = new BoardInstallForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(MemberFieldset::class),
                     );
@@ -273,6 +285,7 @@ class Module
                 },
                 BoardReleaseForm::class => function (ContainerInterface $container) {
                     $form = new BoardReleaseForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get('database_form_fieldset_subdecision_board_install'),
                     );
@@ -281,14 +294,21 @@ class Module
                 },
                 BoardDischargeForm::class => function (ContainerInterface $container) {
                     $form = new BoardDischargeForm(
+                        $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get('database_form_fieldset_subdecision_board_install'),
                     );
                     $form->setHydrator($container->get(BoardDischargeHydrator::class));
                     return $form;
                 },
+                QueryForm::class => function (ContainerInterface $container) {
+                    return new QueryForm($container->get(MvcTranslator::class));
+                },
+                QueryExportForm::class => function (ContainerInterface $container) {
+                    return new QueryExportForm($container->get(MvcTranslator::class));
+                },
                 QuerySaveForm::class => function (ContainerInterface $container) {
-                    $form = new QuerySaveForm();
+                    $form = new QuerySaveForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
 
                     return $form;

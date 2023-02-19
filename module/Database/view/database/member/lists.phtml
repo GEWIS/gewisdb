@@ -1,4 +1,11 @@
-<h1>Wijzig mailing list inschrijvingen van <?= $member->getFullName() ?></h1>
+<h1>
+    <?=
+        sprintf(
+            $this->translate('Change Mailing List Subscriptions of %s'),
+            $this->escapeHtml($member->getFullName),
+        )
+    ?>
+</h1>
 <?php
 $form->prepare();
 

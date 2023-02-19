@@ -16,9 +16,9 @@ enum AddressTypes: string
     public function getName(Translator $translator): string
     {
         return match ($this) {
-            self::Home => $translator->translate('Thuisadres (ouders)'),
-            self::Student => $translator->translate('Kameradres'),
-            self::Mail => $translator->translate('Postadres'),
+            self::Home => $translator->translate('Home Address (Parents)'),
+            self::Student => $translator->translate('Student Address'),
+            self::Mail => $translator->translate('Mail Address'),
         };
     }
 

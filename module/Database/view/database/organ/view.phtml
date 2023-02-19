@@ -1,13 +1,13 @@
 <h1><?= $foundation->getAbbr() ?> <small><?= $foundation->getName() ?></small></h1>
 
-<h2>Leden</h2>
+<h2><?= $this->translate('Members') ?></h2>
 <ul>
 <?php foreach ($foundation->getReferences() as $ref): ?>
     <?php if (!($ref instanceof \Database\Model\SubDecision\Installation)) continue; ?>
     <li>
         <a href="<?= $this->url('member/show', ['id' => $ref->getMember()->getLidnr()]) ?>">
             <?= $ref->getMember()->getFullName() ?>
-        </a> als <?= $ref->getFunction() ?>
+        </a> <?= $this->translate('as') ?> <?= $ref->getFunction() ?>
     </li>
 <?php endforeach; ?>
 </ul>

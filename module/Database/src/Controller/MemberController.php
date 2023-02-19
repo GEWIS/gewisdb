@@ -110,26 +110,6 @@ class MemberController extends AbstractActionController
     }
 
     /**
-     * Print action.
-     *
-     * Prints member information.
-     */
-    public function printAction(): ViewModel
-    {
-        $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
-
-        if (null === $member) {
-            return $this->notFoundAction();
-        }
-
-        if ($member->getDeleted()) {
-            return $this->memberIsDeleted($member);
-        }
-
-        return new ViewModel(['member' => $member]);
-    }
-
-    /**
      * Toggle supremum action.
      *
      * Toggles if a member wants a supremum

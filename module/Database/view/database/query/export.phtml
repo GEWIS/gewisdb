@@ -1,14 +1,18 @@
 <?php
+
 $new = array();
 // preprocessing, render the DateTime objects
 foreach ($result as $row) {
-    $row = array_map(function($el) {
-        if ($el instanceof \DateTime) {
-            return $el->format('Y-m-d');
-        } else {
-            return $el;
-        }
-    }, $row);
+    $row = array_map(
+        function ($el) {
+            if ($el instanceof \DateTime) {
+                return $el->format('Y-m-d');
+            } else {
+                return $el;
+            }
+        },
+        $row,
+    );
     $new[] = $row;
 }
 

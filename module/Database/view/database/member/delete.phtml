@@ -1,28 +1,51 @@
+<h1><?= $member->getFullname() ?></h1>
 <?php if ($canRemove): ?>
-<h1><?= $member->getFullname() ?></h1>
-Weet je zeker dat lid <?= $member->getFullname() ?> verwijdert dient te worden?
+    <p>
+        <?=
+            sprintf(
+                $this->translate('Are you sure you want to delete member %s?'),
+                $this->escapeHtml($member->getFullname()),
+            )
+        ?>
+    </p>
 
-<form action="<?= $this->url('member/show/delete', ['id' => $member->getLidnr()])?>" method="post">
-    <button class="btn btn-primary" name="delete" value="1">Ja</button>
-    <a href="<?= $this->url('member/show', ['id' => $member->getLidnr()]) ?>" class="btn btn-default">Nee</a>
-</form>
-<?php else: ?>
-<h1><?= $member->getFullname() ?></h1>
-<p>Lid <?= $member->getFullname() ?> kan niet verwijderd worden.</p>
-<p>
-    Dit komt omdat <?= $member->getFullname() ?> lid is (geweest) van commissies en/of disputen,
-    en mogelijk ook begrotingen op zijn naam heeft staan.
-</p>
-<p>
-    Hierdoor kan dit lid niet verwijderd worden. Volgens de AVG hebben we hierbij een wettelijke
-    grondslag om de naam van dit lid te behouden in onze database. De overige gegevens kunnen
-    wel verwijderd worden.
-</p>
-<p>
-    Wil je deze gegevens verwijderen?
-</p>
     <form action="<?= $this->url('member/show/delete', ['id' => $member->getLidnr()])?>" method="post">
-        <button class="btn btn-primary" name="delete" value="1">Ja</button>
-        <a href="<?= $this->url('member/show', ['id' => $member->getLidnr()]) ?>" class="btn btn-default">Nee</a>
+        <button class="btn btn-primary" name="delete" value="1">
+            <?= $this->translate('Yes') ?>
+        </button>
+        <a href="<?= $this->url('member/show', ['id' => $member->getLidnr()]) ?>" class="btn btn-default">
+            <?= $this->translate('No') ?>
+        </a>
+    </form>
+<?php else: ?>
+    <p>
+        <?=
+        sprintf(
+            $this->translate('Member %s cannot be deleted.'),
+            $this->escapeHtml($member->getFullname()),
+        )
+        ?>
+    </p>
+    <p>
+        <?=
+            sprintf(
+                $this->translate('This is because %s is/has been a member of an organ and/or has budgets/statements to their name.'),
+                $this->escapeHtml($member->getFullname()),
+            )
+        ?>
+    </p>
+    <p>
+        <?= $this->translate('As a result, this member cannot be removed. According to the AVG, we have a legal basis to keep this member\'s name in our database. The other data can, however, be deleted.') ?>
+    </p>
+    <p>
+        <?= $this->translate('Do you want to delete the other data?') ?>
+    </p>
+    <form action="<?= $this->url('member/show/delete', ['id' => $member->getLidnr()])?>" method="post">
+        <button class="btn btn-primary" name="delete" value="1">
+            <?= $this->translate('Yes') ?>
+        </button>
+        <a href="<?= $this->url('member/show', ['id' => $member->getLidnr()]) ?>" class="btn btn-default">
+            <?= $this->translate('No') ?>
+        </a>
     </form>
 <?php endif ?>

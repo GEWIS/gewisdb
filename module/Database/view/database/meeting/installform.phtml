@@ -74,13 +74,13 @@ $(document).ready(function () {
                             + '<td class="function">' + install.function + '</td>';
                         content += toAdd + '</tr>';
                         toAdd += '<td><button type="button" class="btn btn-danger btn-xs discharge">'
-                            + '<span class="glyphicon glyphicon-remove"></span> Dechargeer</button></td>';
+                            + '<span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Discharge') ?></button></td>';
 
                         if ('Lid' === install.function) {
                             toAdd += '<td><button type="button" class="btn btn-warning btn-xs inactive">'
-                                + '<span class="glyphicon glyphicon-pencil"></span> Maak inactief</button></td>';
+                                + '<span class="glyphicon glyphicon-pencil"></span> <?= $this->translate('Make Inactive') ?></button></td>';
                             toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
-                                + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
+                                + '<span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Give Function') ?></button></td>';
                         } else {
                             toAdd += '<td></td>';
                             toAdd += '<td></td>';
@@ -227,7 +227,7 @@ $(document).ready(function () {
         toAdd += '<td></td>';
         if ('Lid' === func) {
             toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
-                + '<span class="glyphicon glyphicon-plus"></span> Geef functie</button></td>';
+                + '<span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Give Function') ?></button></td>';
         } else {
             toAdd += '<td></td>';
         }
@@ -409,7 +409,7 @@ $fs = $form->get('meeting')
 // organ search box
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Orgaan');
+$element->setAttribute('placeholder', $this->translate('Organ'));
 $element->setAttribute('id', 'install-organ');
 ?>
     <?= $this->formLabel($element) ?>
@@ -434,12 +434,12 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
 <div id="install-members-hide" style="display: none;">
 <div class="row">
     <div class="col-md-6">
-        <h2>Huidige Leden</h2>
+        <h2><?= $this->translate('Current Members') ?></h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Naam</th>
-                    <th>Functie</th>
+                    <th><?= $this->translate('Name') ?></th>
+                    <th><?= $this->translate('Function') ?></th>
                 </tr>
             </thead>
             <tbody id="members-install">
@@ -447,15 +447,15 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
         </table>
     </div>
     <div class="col-md-6">
-        <h2>Resultaat</h2>
+        <h2><?= $this->translate('Result') ?></h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Naam</th>
-                    <th>Functie</th>
-                    <th>Dechargeer</th>
-                    <th>Maak inactief</th>
-                    <th>Geef functie</th>
+                    <th><?= $this->translate('Name') ?></th>
+                    <th><?= $this->translate('Function') ?></th>
+                    <th><?= $this->translate('Discharge') ?></th>
+                    <th><?= $this->translate('Make Inactive') ?></th>
+                    <th><?= $this->translate('Give Function') ?></th>
                 </tr>
             </thead>
             <tbody id="members-result">
@@ -465,7 +465,7 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
 </div>
 <div class="row">
     <div class="col-md-6">
-        <h2>Wijzigingen</h2>
+        <h2><?= $this->translate('Mutations') ?></h2>
 <?php
 // installation element template
 $element = $form->get('installations');
@@ -536,7 +536,7 @@ $tpl = trim(ob_get_clean());
         </div>
     </div>
     <div class="col-md-6 form-inline">
-        <h2>Nieuw (inactief) lid toevoegen</h2>
+        <h2><?= $this->translate('Add New (Inactive) Member')?></h2>
         <div class="form-group">
             <input type="text" id="install-member" class="form-control" placeholder="Lid" />
             <input type="hidden" id="install-member-lidnr" />
@@ -544,11 +544,11 @@ $tpl = trim(ob_get_clean());
         </div>
         <button type="button" class="btn btn-success" id="install-member-btn" disabled>
             <span class="glyphicon glyphicon-plus"></span>
-            Voeg lid toe
+            <?= $this->translate('Add Member') ?>
         </button>
         <button type="button" class="btn btn-success" id="install-inactive-member-btn" disabled>
             <span class="glyphicon glyphicon-plus"></span>
-            Voeg inactief lid toe
+            <?= $this->translate('Add Inactive Member') ?>
         </button>
     </div>
 </div>
@@ -557,7 +557,7 @@ $tpl = trim(ob_get_clean());
 
 <?php
 $submit = $form->get('submit');
-$submit->setLabel('Bevestig wijzigingen');
+$submit->setLabel($this->translate('Confirm Changes'));
 $submit->setAttribute('class', 'btn btn-primary');
 $submit->setAttribute('id', 'install-submit-decision');
 $submit->setAttribute('disabled', 'disabled');
@@ -574,14 +574,20 @@ $submit->setAttribute('disabled', 'disabled');
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="install-model-discharge-label">Dechargeer lid</h4>
+                <h4 class="modal-title" id="install-model-discharge-label"><?= $this->translate('Discharge Member') ?></h4>
             </div>
             <div class="modal-body">
-                Dechargeer <span class="name"></span> als <span class="function"></span>?
+                <?=
+                    sprintf(
+                        $this->translate('Discharge %s as %s?'),
+                        '<span class="name"></span>',
+                        '<span class="function"></span>',
+                    )
+                ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
-                <button type="button" class="btn btn-primary" id="discharge-modal-yes">Ja</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->translate('No') ?></button>
+                <button type="button" class="btn btn-primary" id="discharge-modal-yes"><?= $this->translate('Yes') ?></button>
             </div>
         </div>
     </div>
@@ -592,14 +598,19 @@ $submit->setAttribute('disabled', 'disabled');
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="install-model-discharge-label">Maak lid inactief</h4>
+                <h4 class="modal-title" id="install-model-discharge-label"><?= $this->translate('Make Member Inactive') ?></h4>
             </div>
             <div class="modal-body">
-                Maak <span class="name"></span> inactief?
+                <?=
+                    sprintf(
+                        $this->translate('Make %s inactive?'),
+                        '<span class="name"></span>',
+                    )
+                ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
-                <button type="button" class="btn btn-primary" id="inactive-modal-yes">Ja</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->translate('No') ?></button>
+                <button type="button" class="btn btn-primary" id="inactive-modal-yes"><?= $this->translate('Yes') ?></button>
             </div>
         </div>
     </div>
@@ -610,11 +621,11 @@ $submit->setAttribute('disabled', 'disabled');
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="install-model-function-label">Geef functie aan lid</h4>
+        <h4 class="modal-title" id="install-model-function-label"><?= $this->translate('Give Member Function') ?></h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-            <label for="function">Functie van <span class="name"></span></label>
+            <label for="function"><?= $this->translate('Function of') ?> <span class="name"></span></label>
             <?php
             $element = $memberfunction->get('function');
             $element->setAttribute('class', 'form-control');
@@ -624,8 +635,8 @@ $submit->setAttribute('disabled', 'disabled');
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
-        <button type="button" class="btn btn-primary" id="install-modal-yes">Ja</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->translate('No') ?></button>
+        <button type="button" class="btn btn-primary" id="install-modal-yes"><?= $this->translate('Yes') ?></button>
       </div>
     </div>
   </div>

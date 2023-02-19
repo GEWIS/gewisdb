@@ -1,4 +1,5 @@
 <?php
+
 function showDecisionNumber($decision)
 {
     $ret = strtoupper($decision->getMeeting()->getType()->value);
@@ -7,6 +8,7 @@ function showDecisionNumber($decision)
     $ret .= '.' . $decision->getNumber();
     return $ret;
 }
+
 function determineCategory($decision)
 {
     $subdecisions = $decision->getSubdecisions();
@@ -15,125 +17,134 @@ function determineCategory($decision)
     $type = $class[count($class) - 1];
 
     switch (strtolower($type)) {
-    case 'budget':
-    case 'reckoning':
-        return 'budget';
-        break;
-    case 'foundation':
-    case 'abrogation':
-    case 'installation':
-    case 'discharge':
-        return 'install';
-        break;
-    default:
-        return 'other';
+        case 'budget':
+        case 'reckoning':
+            return 'budget';
+            break;
+        case 'foundation':
+        case 'abrogation':
+        case 'installation':
+        case 'discharge':
+            return 'install';
+            break;
+        default:
+            return 'other';
     }
 }
+
 // to show a single category
 function showCategory($decisions)
 { ?>
-<?php foreach ($decisions as $decision): ?>
+    <?php
+    foreach ($decisions as $decision): ?>
 
-<strong>\besluit{<?= showDecisionNumber($decision) ?>}{<?php
-echo $decision->getMeeting()->getDate()->format('d-m-Y');
-?>}{</strong><?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-<?= $subdecision->getContent() . ' ' ?>
-<?php endforeach; ?>}
+        <strong>\besluit{<?= showDecisionNumber($decision) ?>}{<?php
+        echo $decision->getMeeting()->getDate()->format('d-m-Y');
+        ?>}{</strong><?php foreach ($decision->getSubdecisions() as $subdecision): ?>
+            <?= $subdecision->getContent() . ' ' ?>
+        <?php endforeach; ?>}
 
-<?php endforeach; ?>
-<?php } // function showCategory
-?>
-<?php if (isset($data)): ?>
+    <?php
+    endforeach; ?>
 <?php
-$categories = array(
-    'budget' => array(),
-    'install' => array(),
-    'other' => array()
-);
-// first we do some preprocessing, by putting everything in categories
-foreach ($data as $decision) {
-    if (count($decision->getSubdecisions()) > 0) {
-        $categories[determineCategory($decision)][] = $decision;
+} // function showCategory
+?>
+<?php
+if (isset($data)): ?>
+    <?php
+    $categories = array(
+        'budget' => array(),
+        'install' => array(),
+        'other' => array(),
+    );
+    // first we do some preprocessing, by putting everything in categories
+    foreach ($data as $decision) {
+        if (count($decision->getSubdecisions()) > 0) {
+            $categories[determineCategory($decision)][] = $decision;
+        }
     }
-}
-ob_start();
-?>
-<h2>\subsection*{Begrotingen en Afrekeningen}</h2>
-<?php showCategory($categories['budget']) ?>
+    ob_start();
+    ?>
+    <h2>\subsection*{Begrotingen en Afrekeningen}</h2>
+    <?php showCategory($categories['budget']) ?>
 
-<h2>\subsection*{Installaties en Decharges}</h2>
-<?php showCategory($categories['install']) ?>
+    <h2>\subsection*{Installaties en Decharges}</h2>
+    <?php showCategory($categories['install']) ?>
 
-<h2>\subsection*{Overige besluiten}</h2>
-<?php showCategory($categories['other']) ?>
+    <h2>\subsection*{Overige besluiten}</h2>
+    <?php showCategory($categories['other']) ?>
+    <?php $decisionList = ob_get_clean(); ?>
+    <pre style="height: 80vh; overflow: scroll">
+        <code>
+            <?php
+            echo $this->partial('database/export/latex.phtml', array(
+                'decisions' => $decisionList,
+            ));
+            ?>
+        </code>
+    </pre>
 <?php
-$decisionList = ob_get_clean();
-?>
-<pre style="height: 80vh; overflow: scroll"><code><?php
-echo $this->partial('database/export/latex.phtml', array(
-    'decisions' => $decisionList
-));
-?></code></pre>
-<?php else: ?>
-<?php
-$form->prepare();
+else: ?>
+    <?php
+    $form->prepare();
 
-$form->setAttribute('action', $this->url('export'));
-$form->setAttribute('method', 'post');
+    $form->setAttribute('action', $this->url('export'));
+    $form->setAttribute('method', 'post');
 
-$form->setAttribute('role', 'form');
+    $form->setAttribute('role', 'form');
 
-echo $this->form()->openTag($form);
-?>
-<h1>Exporteren besluiten</h2>
-<div class="container">
-    <div class="col-md-3">
-        <div class="form-group">
-        <?php
-        $element = $form->get('meetings');
-        $element->setAttribute('class', 'form-control');
-        $element->setAttribute('size', 32);
-        ?>
-            <?= $this->formLabel($element) ?>
-            <?= $this->formSelect($element) ?>
-            <?= $this->formElementErrors($element) ?>
+    echo $this->form()->openTag($form);
+    ?>
+    <h1><?= $this->translate('Export Decisions') ?></h1>
+    <div class="container">
+        <div class="col-md-3">
+            <div class="form-group">
+                <?php
+                $element = $form->get('meetings');
+                $element->setAttribute('class', 'form-control');
+                $element->setAttribute('size', 32);
+                ?>
+                <?= $this->formLabel($element) ?>
+                <?= $this->formSelect($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <?php
+            $submit = $form->get('submit');
+            $submit->setLabel($this->translate('Export'));
+            $submit->setAttribute('class', 'btn btn-primary');
+            ?>
+            <?= $this->formButton($submit) ?>
         </div>
     </div>
-    <div class="col-md-9">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <?php
-        $submit = $form->get('submit');
-        $submit->setLabel('Exporteer');
-        $submit->setAttribute('class', 'btn btn-primary');
-        ?>
-        <?= $this->formButton($submit) ?>
-    </div>
-</div>
-<?= $this->form()->closeTag() ?>
-<?php endif; ?>
+    <?= $this->form()->closeTag() ?>
+<?php
+endif; ?>

@@ -1,148 +1,168 @@
 <?php
+
 // add codemirror
 $this->headLink()->appendStylesheet($this->basePath() . '/css/codemirror.css');
 $this->headScript()->appendFile($this->basePath() . '/js/codemirror-compressed.js');
 ?>
 <script>
-$(document).ready(function() {
-    var editor = CodeMirror.fromTextArea($('#query-editor')[0], {
-        mode: 'text/x-sql',
-        lineNumbers: true
+    $(document).ready(function () {
+        var editor = CodeMirror.fromTextArea($('#query-editor')[0], {
+            mode: 'text/x-sql',
+            lineNumbers: true
+        });
     });
-});
 </script>
 <div class="row">
-<?php
-
-$form->prepare();
-
-$form->setAttribute('action', $this->url('query'));
-$form->setAttribute('method', 'post');
-
-$form->setAttribute('role', 'form');
-
-echo $this->form()->openTag($form);
-?>
-<div class="col-md-9">
-<div class="form-group">
-<?php
-$element = $form->get('query');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('id', 'query-editor');
-?>
-<?= $this->formLabel($element); ?>
-<?= $this->formElementErrors($element) ?>
-<?= $this->formTextarea($element) ?>
-</div>
-
-<?php
-$submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
-?>
-<?= $this->formButton($submit) ?>
-
-
-<div class="pull-right form-inline">
-    <?php /* These are part of the QuerySave form */ ?>
-        <div class="form-group">
-        <input type="text" class="form-control input-small" name="name" placeholder="Naam">
-        </div>
-    <button class="btn btn-success" name="submit_save" type="submit"><span class="glyphicon glyphicon-plus"></span> Opslaan</button>
-</div>
-</div>
-<div class="col-md-3">
-<h3>Opgeslagen queries</h3>
-<ul>
-    <li><ul>
-<?php 
-    $prefix = null;
-    foreach ($saved as $query): 
-    if ($prefix !== strtoupper(explode(":", $query->getName(), 2)[0])):
-        $prefix = strtoupper(explode(":", $query->getName(), 2)[0]);
-    ?>
-        </ul></li><li><b><?= $prefix ?></b><ul>
     <?php
-    endif;
+    $form->prepare();
+
+    $form->setAttribute('action', $this->url('query'));
+    $form->setAttribute('method', 'post');
+
+    $form->setAttribute('role', 'form');
+
+    echo $this->form()->openTag($form);
     ?>
-        <li><a href="<?= $this->url('query/show', array('query' => $query->getId())) ?>"><?= explode(":", $query->getName(), 2)[1] ?></a></li>
-<?php 
-    endforeach; ?>
-</ul></li>
-</ul>
+    <div class="col-md-9">
+        <div class="form-group">
+            <?php
+            $element = $form->get('query');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('id', 'query-editor');
+            ?>
+            <?= $this->formLabel($element); ?>
+            <?= $this->formElementErrors($element) ?>
+            <?= $this->formTextarea($element) ?>
+        </div>
 
-    Een overzicht van alle mogelijkheden van DQL kan gevonden worden in de
-    <a href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/dql-doctrine-query-language.html">DQL documentaties</a>.
+        <?php
+        $submit = $form->get('submit');
+        $submit->setAttribute('class', 'btn btn-primary');
+        ?>
+        <?= $this->formButton($submit) ?>
 
-    Alle entities in deze database:
-    <ul>
-    <?php foreach ($entities as $entity): ?>
-        <li><?= $entity;?></li>
-    <?php endforeach;?>
-    </ul>
-</div>
-<?= $this->form()->closeTag() ?>
-</div>
-<?php if (isset($result)): ?>
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <h2>Query resultaat</h2>
+
+        <div class="pull-right form-inline">
+            <?php
+            /* These are part of the QuerySave form */ ?>
+            <div class="form-group">
+                <input type="text" class="form-control input-small" name="name" placeholder="<?= $this->translate('Name') ?>">
+            </div>
+            <button class="btn btn-success" name="submit_save" type="submit">
+                <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Save') ?>
+            </button>
+        </div>
     </div>
-    <div class="col-md-6">
-        <br />
-<?php
-$exportform->prepare();
+    <div class="col-md-3">
+        <h3><?= $this->translate('Stored Queries') ?></h3>
+        <ul>
+            <li>
+                <ul>
+                    <?php
+                    $prefix = null;
+                    foreach ($saved as $query):
+                        if ($prefix !== strtoupper(explode(":", $query->getName(), 2)[0])):
+                            $prefix = strtoupper(explode(":", $query->getName(), 2)[0]);
+                    ?>
+                                </ul>
+                            </li>
+                            <li><b><?= $prefix ?></b>
+                                <ul>
+                        <?php endif; ?>
+                        <li>
+                            <a href="<?= $this->url('query/show', ['query' => $query->getId()]) ?>">
+                                <?=
+                                    explode(
+                                        ":",
+                                        $query->getName(),
+                                        2,
+                                )[1] ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+        </ul>
 
-$exportform->setAttribute('action', $this->url('query/default', array('action' => 'export')));
-$exportform->setAttribute('method', 'post');
+        <?=
+            sprintf(
+            $this->translate('For an overview of how you can use the Doctrine Query Language (DQL) please refer to %sits documentation%s.'),
+                '<a href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/dql-doctrine-query-language.html">',
+                '</a>',
+            )
+        ?>
 
-$exportform->setAttribute('role', 'form');
-$exportform->setAttribute('class', 'form-inline');
+        <?= $this->translate('The entities that you can use:') ?>
+        <ul>
+            <?php foreach ($entities as $entity): ?>
+                <li><?= $entity; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?= $this->form()->closeTag() ?>
+</div>
+<?php  if (isset($result)): ?>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <h2><?= $this->translate('Query Result') ?></h2>
+        </div>
+        <div class="col-md-6">
+            <br/>
+            <?php
+            $exportform->prepare();
 
-$exportform->get('query')->setValue($form->get('query')->getValue());
+            $exportform->setAttribute('action', $this->url('query/default', ['action' => 'export']));
+            $exportform->setAttribute('method', 'post');
 
-echo $this->form()->openTag($exportform);
-?>
+            $exportform->setAttribute('role', 'form');
+            $exportform->setAttribute('class', 'form-inline');
+
+            $exportform->get('query')->setValue($form->get('query')->getValue());
+
+            echo $this->form()->openTag($exportform);
+            ?>
             <?= $this->formHidden($exportform->get('query')) ?>
             <div class="form-group">
-<?php
-$element = $exportform->get('type');
-$element->setAttribute('class', 'form-control')
-?>
-<?= $this->formElement($element) ?>
+                <?php
+                $element = $exportform->get('type');
+                $element->setAttribute('class', 'form-control')
+                ?>
+                <?= $this->formElement($element) ?>
             </div>
-<?php
-$submit = $exportform->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
-?>
-<?= $this->formButton($submit) ?>
-<?= $this->form()->closeTag() ?>
+            <?php
+            $submit = $exportform->get('submit');
+            $submit->setAttribute('class', 'btn btn-primary');
+            ?>
+            <?= $this->formButton($submit) ?>
+            <?= $this->form()->closeTag() ?>
+        </div>
     </div>
-</div>
-<?php if (count($result) > 0): ?>
-<table class="table table-hover table-condensed">
-    <thead>
-        <tr>
-    <?php foreach (array_keys($result[0]) as $key): ?>
-        <th><?= $key ?></th>
-    <?php endforeach; ?>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($result as $row): ?>
-        <tr>
-        <?php foreach ($row as $col): ?>
-            <?php if ($col instanceof \DateTime): ?>
-            <td><?= $col->format('Y-m-d') ?></td>
-            <?php else: ?>
-            <td><?= $col ?></td>
-            <?php endif; ?>
-        <?php endforeach; ?>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
-<?php else: ?>
-    De query gaf geen resultaten.
-<?php endif; ?>
+    <?php
+    if (count($result) > 0): ?>
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <?php foreach (array_keys($result[0]) as $key): ?>
+                    <th><?= $key ?></th>
+                <?php endforeach; ?>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($result as $row): ?>
+                <tr>
+                    <?php foreach ($row as $col): ?>
+                        <?php if ($col instanceof \DateTime): ?>
+                            <td><?= $col->format('Y-m-d') ?></td>
+                        <?php else: ?>
+                            <td><?= $col ?></td>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <?= $this->translate('The query did not return any results.') ?>
+    <?php endif; ?>
 <?php endif; ?>

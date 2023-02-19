@@ -1,16 +1,15 @@
-<h1>TU/e lookup raw data</h1>
+<h1><?= $this->translate('TU/e Raw Data Lookup') ?></h1>
 
 <?php if('development' === APP_ENV):?>
-<p>Valid student IDs for testing:</p>
-<ul>
-    <li>20170001: too many requests</li>
-    <li>20180001: student MCS (Timo de Teststudent)</li>
-    <li>20190001: student MCS + something else (Tara van Testdata)</li>
-    <li>20200001: student not MCS (Marco van Mechanical Engineering)</li>
-    <li>20210001: not student (Nico Nietstudent)</li>
-    <li>Everything else: invalid number</li>
-</ul>
-
+    <p>Valid student IDs for testing:</p>
+    <ul>
+        <li>20170001: too many requests</li>
+        <li>20180001: student MCS (Timo de Teststudent)</li>
+        <li>20190001: student MCS + something else (Tara van Testdata)</li>
+        <li>20200001: student not MCS (Marco van Mechanical Engineering)</li>
+        <li>20210001: not student (Nico Nietstudent)</li>
+        <li>Everything else: invalid number</li>
+    </ul>
 <?php endif; ?>
 
 <script>
@@ -45,16 +44,16 @@ $(document).ready(function () {
 </script>
 <form role="form">
     <div class="form-group">
-        <label for="">TU/e-gebruiker zoeken</label>
-        <input type="text" class="form-control" placeholder="Zoek" id="lookup-username" value="<?= $username ?>" autofocus>
+        <label for=""><?= $this->translate('Search TU/e Students') ?></label>
+        <input type="text" class="form-control" placeholder="<?= $this->translate('Search') ?>" id="lookup-username" value="<?= $username ?>" autofocus>
     </div>
 </form>
 
 <table id="reponsetable">
     <thead>
         <tr>
-            <th>Key</th>
-            <th>Value</th>
+            <th><?= $this->translate('Key') ?></th>
+            <th><?= $this->translate('Value') ?></th>
         </tr>
     </thead>
     <tbody>

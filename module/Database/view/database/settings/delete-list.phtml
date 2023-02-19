@@ -1,35 +1,46 @@
-<?php if (!isset($form)): ?>
-Mailing list verwijderd.
-<?php else:
-$form->prepare();
-
-$form->setAttribute('action', $this->url('settings/list-delete', array(
-    'name' => $name
-)));
-$form->setAttribute('method', 'post');
-$form->setAttribute('role', 'form');
-
-echo $this->form()->openTag($form);
-?>
-
-<p>
-Weet je zeker dat de mailing lijst <?= $name ?> verwijderd moet worden?
-</p>
-<div class="form-group">
 <?php
-$submit = $form->get('submit_yes');
-$submit->setLabel('Ja');
-$submit->setAttribute('class', 'btn btn-primary');
-?>
-<?= $this->formButton($submit) ?>
-&nbsp;&nbsp;&nbsp;
-<?php
-$submit = $form->get('submit_no');
-$submit->setLabel('Nee');
-$submit->setAttribute('class', 'btn btn-default');
-?>
-<?= $this->formButton($submit) ?>
-</div>
+if (!isset($form)): ?>
+    <?= $this->translate('Mailing list deleted.') ?>
+<?php else: ?>
+    <?php
+    $form->prepare();
 
-<?= $this->form()->closeTag(); ?>
-<?php endif ?>
+    $form->setAttribute(
+        'action',
+        $this->url('settings/list-delete', [
+            'name' => $name,
+        ]),
+    );
+    $form->setAttribute('method', 'post');
+    $form->setAttribute('role', 'form');
+
+    echo $this->form()->openTag($form);
+    ?>
+
+    <p>
+        <?=
+            sprintf(
+                $this->translate('Are you sure that you want to delete the %s mailing list?'),
+                $this->escapeHtml($name),
+            )
+        ?>
+    </p>
+    <div class="form-group">
+        <?php
+        $submit = $form->get('submit_yes');
+        $submit->setLabel($this->translate('Yes'));
+        $submit->setAttribute('class', 'btn btn-primary');
+        ?>
+        <?= $this->formButton($submit) ?>
+        &nbsp;&nbsp;&nbsp;
+        <?php
+        $submit = $form->get('submit_no');
+        $submit->setLabel($this->translate('No'));
+        $submit->setAttribute('class', 'btn btn-default');
+        ?>
+        <?= $this->formButton($submit) ?>
+    </div>
+
+    <?= $this->form()->closeTag(); ?>
+<?php
+endif ?>

@@ -3,6 +3,7 @@
 namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
+use Laminas\Mvc\I18n\Translator;
 use Database\Form\Fieldset\{
     Meeting as MeetingFieldset,
     Member as MemberFieldset,
@@ -18,6 +19,7 @@ use Laminas\Validator\StringLength;
 class Install extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
+        private readonly Translator $translator,
         MeetingFieldset $meeting,
         MemberFieldset $member,
     ) {
@@ -29,7 +31,7 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'function',
             'type' => Text::class,
             'options' => [
-                'label' => 'Functie',
+                'label' => $this->translator->translate('Function'),
             ],
         ]);
 
@@ -37,7 +39,7 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'date',
             'type' => Date::class,
             'options' => [
-                'label' => 'Van kracht per',
+                'label' => $this->translator->translate('Effective From'),
             ],
         ]);
 
@@ -45,7 +47,7 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Installeer bestuurder',
+                'value' => $this->translator->translate('Install Board Member'),
             ],
         ]);
     }

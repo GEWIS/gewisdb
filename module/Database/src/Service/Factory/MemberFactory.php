@@ -13,6 +13,7 @@ use Database\Form\{
     MemberExpiration as MemberExpirationForm,
     MemberType as MemberTypeForm,
 };
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Database\Mapper\{
     MailingList as MailingListMapper,
     Member as MemberMapper,
@@ -42,6 +43,8 @@ class MemberFactory implements FactoryInterface
         $requestedName,
         array $options = null,
     ): MemberService {
+        /** @var MvcTranslator $translator */
+        $translator = $container->get(MvcTranslator::class);
         /** @var AddressForm $addressForm */
         $addressForm = $container->get(AddressForm::class);
         /** @var DeleteAddressForm $deleteAddressForm */
@@ -78,6 +81,7 @@ class MemberFactory implements FactoryInterface
         $config = $container->get('config');
 
         return new MemberService(
+            $translator,
             $addressForm,
             $deleteAddressForm,
             $memberApproveForm,

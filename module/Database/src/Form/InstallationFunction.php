@@ -8,10 +8,11 @@ use Laminas\Form\Element\{
 };
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class InstallationFunction extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -19,7 +20,7 @@ class InstallationFunction extends Form implements InputFilterProviderInterface
             'name' => 'name',
             'type' => Text::class,
             'options' => [
-                'label' => 'Functienaam',
+                'label' => $this->translator->translate('Function'),
             ],
         ]);
 
@@ -27,7 +28,7 @@ class InstallationFunction extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Maak functie',
+                'value' => $this->translator->translate('Add Function'),
             ],
         ]);
     }

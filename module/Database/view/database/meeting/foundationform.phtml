@@ -87,7 +87,7 @@ $element->setLabelAttributes(array('class' => 'radio-inline'));
 <?php
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Naam');
+$element->setAttribute('placeholder', $this->translate('Name'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -98,7 +98,7 @@ $element->setAttribute('placeholder', 'Naam');
 <?php
 $element = $form->get('abbr');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Afkorting');
+$element->setAttribute('placeholder', $this->translate('Abbreviation'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -140,7 +140,9 @@ ob_start();
             <?= $this->formSelect($el) ?>
             <?= $this->formElementErrors($el) ?>
         </div>
-        <button type="button" class="btn btn-danger" onclick="remove_member(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+        <button type="button" class="btn btn-danger" onclick="remove_member(this)">
+            <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Remove Member') ?>
+        </button>
     </div>
 <?php $tpl = trim(ob_get_clean()); ?>
 <span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="members-template"></span>
@@ -171,17 +173,21 @@ ob_start();
             <?= $this->formSelect($el) ?>
             <?= $this->formElementErrors($el) ?>
         </div>
-        <button type="button" class="btn btn-danger" onclick="remove_member(this)"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+        <button type="button" class="btn btn-danger" onclick="remove_member(this)">
+            <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Remove Member') ?>
+        </button>
     </div>
 <?php endforeach; ?>
     <?= $this->formElementErrors($element) ?>
 </div>
-<button type="button" class="btn btn-success" onclick="add_member()"><span class="glyphicon glyphicon-plus"></span> Voeg toe</button>
+<button type="button" class="btn btn-success" onclick="add_member()">
+    <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add Member') ?>
+</button>
 <br><br>
 
 <?php
 $submit = $form->get('submit');
-$submit->setLabel('Richt op');
+$submit->setLabel($this->translate('Found Organ'));
 $submit->setAttribute('class', 'btn btn-primary');
 $submit->setAttribute('id', 'foundation-submit');
 ?>

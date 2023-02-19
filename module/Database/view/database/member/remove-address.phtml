@@ -1,36 +1,45 @@
 <?php
 
-use Application\Model\Enums\AddressTypes;
-
 $form->prepare();
 
-$form->setAttribute('action', $this->url('member/show/remove-address', array(
-    'id' => $member->getMember()->getLidnr(),
-    'type' => $member->getType()->value
-)));
+$form->setAttribute(
+    'action',
+    $this->url(
+        'member/show/remove-address',
+        [
+            'id' => $member->getMember()->getLidnr(),
+            'type' => $member->getType()->value,
+        ],
+    )
+);
 $form->setAttribute('method', 'post');
 $form->setAttribute('role', 'form');
 
 echo $this->form()->openTag($form);
 ?>
-
 <p>
-Weet je zeker dat je het <?= $addressType->getName($this->plugin('translate')->getTranslator()) ?> van <?= $member->getFullName() ?> wilt verwijderen?
+    <?=
+        sprintf(
+            $this->translate('Are you sure that you want to delete the %s of %s?'),
+            $addressType->getName($this->plugin('translate')->getTranslator()),
+            $this->escapeHtml($member->getFullName()),
+        )
+    ?>
 </p>
 <div class="form-group">
-<?php
-$submit = $form->get('submit_yes');
-$submit->setLabel('Ja');
-$submit->setAttribute('class', 'btn btn-primary');
-?>
-<?= $this->formButton($submit) ?>
-&nbsp;&nbsp;&nbsp;
-<?php
-$submit = $form->get('submit_no');
-$submit->setLabel('Nee');
-$submit->setAttribute('class', 'btn btn-default');
-?>
-<?= $this->formButton($submit) ?>
+    <?php
+    $submit = $form->get('submit_yes');
+    $submit->setLabel($this->translate('Yes'));
+    $submit->setAttribute('class', 'btn btn-primary');
+    ?>
+    <?= $this->formButton($submit) ?>
+    &nbsp;&nbsp;&nbsp;
+    <?php
+    $submit = $form->get('submit_no');
+    $submit->setLabel($this->translate('No'));
+    $submit->setAttribute('class', 'btn btn-default');
+    ?>
+    <?= $this->formButton($submit) ?>
 </div>
 
 <?= $this->form()->closeTag(); ?>

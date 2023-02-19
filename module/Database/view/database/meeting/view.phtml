@@ -48,23 +48,30 @@ use Database\Model\Meeting;
         $meeting->getDate(),
         \IntlDateFormatter::FULL,
         \IntlDateFormatter::NONE,
-        'nl_NL'
     ) ?></small></h1>
 
-<h2>Besluiten</h2>
+<h2><?= $this->translate('Decisions') ?></h2>
 
 <?php if (count($meeting->getDecisions()) > 0): ?>
 <ul>
 <?php foreach ($meeting->getDecisions() as $decision): ?>
     <li>
-        Besluit <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:
+        <?= $this->translate('Decision') ?> <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:
         <?php if ($decision->isDestroyed()): ?>
         <?php
         $dec = $decision->getDestroyedBy()->getDecision();
         $mt = $dec->getMeeting();
         ?>
         <strong>
-        (Vernietigd door Besluit <?= "{$mt->getType()->value} {$mt->getNumber()}.{$dec->getPoint()}.{$dec->getNumber()}" ?>)
+            <?=
+                sprintf(
+                    $this->translate('(Annulled by decision %s %d.%d.%d)'),
+                    $mt->getType()->value,
+                    $mt->getNumber(),
+                    $dec->getPoint(),
+                    $dec->getNumber(),
+                )
+            ?>
         </strong>
         <?php endif; ?>
         <br />
@@ -73,7 +80,9 @@ use Database\Model\Meeting;
             'number' => $meeting->getNumber(),
             'point' => $decision->getPoint(),
             'decision' => $decision->getNumber()
-        )) ?>" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Verwijder besluit</a>
+        )) ?>" class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete Decision') ?>
+        </a>
         <ul>
         <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
             <li><?= $subdecision->getContent() ?></li>
@@ -83,22 +92,22 @@ use Database\Model\Meeting;
 <?php endforeach; ?>
 </ul>
 <?php else: ?>
-Deze vergadering heeft (nog) geen besluiten.
+    <?= $this->translate('This meeting has no decisions (yet).') ?>
 <?php endif; ?>
 
-<h2>Besluit toevoegen</h2>
+<h2><?= $this->translate('Add New Decision') ?></h2>
 
 <form role="form" class="form-inline">
 <div class="form-group">
-    <label class="sr-only" for="point">Punt</label>
-    <input type="text" class="form-control" name="point" id="create_point" placeholder="Punt">
+    <label class="sr-only" for="point"><?= $this->translate('Point') ?></label>
+    <input type="text" class="form-control" name="point" id="create_point" placeholder="<?= $this->translate('Point') ?>">
 </div>
 <div class="form-group">
-    <label class="sr-only" for="decision">Punt</label>
-    <input type="text" class="form-control" name="decision" id="create_decision" placeholder="Besluitnummer">
+    <label class="sr-only" for="decision"><?= $this->translate('Decision Number') ?></label>
+    <input type="text" class="form-control" name="decision" id="create_decision" placeholder="<?= $this->translate('Decision Number') ?>">
 </div>
 <button type="button" class="btn btn-success" id="createdecision">
     <span class="glyphicon glyphicon-plus"></span>
-    Voeg toe
+    <?= $this->translate('Add Decision') ?>
 </button>
 </form>
