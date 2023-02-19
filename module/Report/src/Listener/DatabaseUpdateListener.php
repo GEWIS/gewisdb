@@ -13,6 +13,7 @@ use Database\Model\{
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Report\Service\{
+    Keyholder as KeyholderService,
     Meeting as MeetingService,
     Member as MemberService,
     Misc as MiscService,
@@ -23,6 +24,8 @@ use Report\Model\SubDecision\{
     Discharge as ReportDischargeModel,
     Foundation as ReportFoundationModel,
     Installation as ReportInstallationModel,
+    Key\Granting as ReportKeyGrantingModel,
+    Key\Withdrawal as ReportKeyWithdrawalModel
 };
 
 /**
@@ -33,6 +36,7 @@ class DatabaseUpdateListener
     protected static bool $isflushing = false;
 
     public function __construct(
+        private readonly KeyholderService $keyholderService,
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
         private readonly MiscService $miscService,
@@ -81,6 +85,7 @@ class DatabaseUpdateListener
             case $entity instanceof DatabaseSubDecisionModel:
                 $subdecision = $this->meetingService->generateSubDecision($entity);
                 $this->processOrganUpdates($subdecision);
+                $this->processKeyholderUpdates($subdecision);
                 $this->emReport->persist($subdecision);
                 break;
 
@@ -99,7 +104,7 @@ class DatabaseUpdateListener
         });
     }
 
-    public function processOrganUpdates($entity)
+    public function processOrganUpdates($entity): void
     {
         switch (true) {
             case $entity instanceof ReportFoundationModel:
@@ -116,6 +121,19 @@ class DatabaseUpdateListener
 
             case $entity instanceof ReportDischargeModel:
                 $this->organService->generateDischarge($entity);
+                break;
+        }
+    }
+
+    public function processKeyholderUpdates($entity): void
+    {
+        switch (true) {
+            case $entity instanceof ReportKeyGrantingModel:
+                $this->keyholderService->generateGranting($entity);
+                break;
+
+            case $entity instanceof ReportKeyWithdrawalModel:
+                $this->keyholderService->generateWithdrawal($entity);
                 break;
         }
     }

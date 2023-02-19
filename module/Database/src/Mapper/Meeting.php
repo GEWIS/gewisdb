@@ -6,12 +6,15 @@ use Application\Model\Enums\MeetingTypes;
 use Database\Model\{
     Decision as DecisionModel,
     Meeting as MeetingModel,
+    SubDecision\Key\Granting as KeyGrantingModel,
+    SubDecision\Key\Withdrawal as KeyWithdrawalModel
 };
 use Database\Model\SubDecision\Board\{
     Discharge as BoardDischargeModel,
     Installation as BoardInstallationModel,
 };
 use Database\Model\SubDecision\Destroy as DestroyModel;
+use DateTime;
 use Doctrine\ORM\{
     EntityManager,
     EntityRepository,
@@ -240,6 +243,39 @@ class Meeting
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDql()),
         ));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Find all currently granted key codes.
+     */
+    public function findCurrentKeys(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('g, m')
+            ->from(KeyGrantingModel::class, 'g')
+            ->join('g.grantee', 'm')
+            ->where('g.until >= :now');
+
+        // remove withdrawals
+        $qbn = $this->em->createQueryBuilder();
+        $qbn->select('d')
+            ->from(KeyWithdrawalModel::class, 'd')
+            ->join('d.granting', 'x')
+            ->where('x.meeting_type = g.meeting_type')
+            ->andWhere('x.meeting_number = g.meeting_number')
+            ->andWhere('x.decision_point = g.decision_point')
+            ->andWhere('x.decision_number = g.decision_number')
+            ->andWhere('x.number = g.number');
+
+        // TODO: destroyed decisions (both ways!)
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbn->getDql()),
+        ));
+
+        $qb->setParameter('now', new DateTime('now'));
 
         return $qb->getQuery()->getResult();
     }

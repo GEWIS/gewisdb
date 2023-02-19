@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 use Report\Listener\DatabaseUpdateListener;
+use Report\Service\Keyholder as KeyholderService;
 use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;
 use Report\Service\Misc as MiscService;
@@ -25,6 +26,8 @@ class DatabaseUpdateListenerFactory implements FactoryInterface
         $requestedName,
         array $options = null,
     ): DatabaseUpdateListener {
+        /** @var KeyholderService $keyholderService */
+        $keyholderService = $container->get(KeyholderService::class);
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);
         /** @var MemberService $memberService */
@@ -37,6 +40,7 @@ class DatabaseUpdateListenerFactory implements FactoryInterface
         $emReport = $container->get('doctrine.entitymanager.orm_report');
 
         return new DatabaseUpdateListener(
+            $keyholderService,
             $meetingService,
             $memberService,
             $miscService,

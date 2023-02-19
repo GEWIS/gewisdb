@@ -4,6 +4,7 @@ namespace Report\Command;
 
 use Report\Service\{
     Board as BoardService,
+    Keyholder as KeyholderService,
     Meeting as MeetingService,
     Member as MemberService,
     Misc as MiscService,
@@ -17,6 +18,7 @@ class GenerateFullCommand extends Command
 {
     public function __construct(
         private readonly BoardService $boardService,
+        private readonly KeyholderService $keyholderService,
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
         private readonly MiscService $miscService,
@@ -43,6 +45,9 @@ class GenerateFullCommand extends Command
 
         $output->writeln("generating board tables");
         $this->boardService->generate();
+
+        $output->writeln("generating keyholder tables");
+        $this->keyholderService->generate();
 
         return Command::SUCCESS;
     }

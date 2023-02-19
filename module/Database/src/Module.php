@@ -15,6 +15,8 @@ use Database\Form\{
     Foundation as FoundationForm,
     Install as InstallForm,
     InstallationFunction as InstallationFunctionForm,
+    Key\Grant as KeyGrantForm,
+    Key\Withdraw as KeyWithdrawForm,
     MailingList as MailingListForm,
     Member as MemberForm,
     MemberApprove as MemberApproveForm,
@@ -24,8 +26,7 @@ use Database\Form\{
     Other as OtherForm,
     Query as QueryForm,
     QueryExport as QueryExportForm,
-    QuerySave as QuerySaveForm,
-};
+    QuerySave as QuerySaveForm};
 use Database\Command\{
     DeleteExpiredMembersCommand,
     GenerateAuthenticationKeysCommand,
@@ -42,12 +43,12 @@ use Database\Form\Board\{
 use Database\Form\Fieldset\{
     Address as AddressFieldset,
     Decision as DecisionFieldset,
+    Granting as GrantingFieldset,
     Installation as InstallationFieldset,
     Meeting as MeetingFieldset,
     Member as MemberFieldset,
     MemberFunction as MemberFunctionFieldset,
-    SubDecision as SubDecisionFieldset,
-};
+    SubDecision as SubDecisionFieldset};
 use Database\Hydrator\{
     Abolish as AbolishHydrator,
     Budget as BudgetHydrator,
@@ -60,6 +61,10 @@ use Database\Hydrator\Board\{
     Discharge as BoardDischargeHydrator,
     Install as BoardInstallHydrator,
     Release as BoardReleaseHydrator,
+};
+use Database\Hydrator\Key\{
+    Grant as KeyGrantHydrator,
+    Withdraw as KeyWithdrawHydrator,
 };
 use Database\Hydrator\Strategy\{
     AddressHydratorStrategy,
@@ -95,6 +100,7 @@ use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
 use Database\Model\SubDecision\{
     Foundation as FoundationModel,
     Installation as InstallationModel,
+    Key\Granting as KeyGrantingModel
 };
 use Database\Service\Factory\{
     InstallationFunctionFactory as InstallationFunctionServiceFactory,
@@ -146,6 +152,8 @@ class Module
                 BoardInstallHydrator::class => BoardInstallHydrator::class,
                 BoardDischargeHydrator::class => BoardDischargeHydrator::class,
                 BoardReleaseHydrator::class => BoardReleaseHydrator::class,
+                KeyGrantHydrator::class => KeyGrantHydrator::class,
+                KeyWithdrawHydrator::class => KeyWithdrawHydrator::class,
             ],
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
@@ -301,6 +309,25 @@ class Module
                     $form->setHydrator($container->get(BoardDischargeHydrator::class));
                     return $form;
                 },
+                KeyGrantForm::class => function (ContainerInterface $container) {
+                    $form = new KeyGrantForm(
+                        $container->get(MvcTranslator::class),
+                        $container->get(MeetingFieldset::class),
+                        $container->get(MemberFieldset::class),
+                    );
+                    $form->setHydrator($container->get(KeyGrantHydrator::class));
+                    return $form;
+                },
+                KeyWithdrawForm::class => function (ContainerInterface $container) {
+                    $form = new KeyWithdrawForm(
+                        $container->get(MvcTranslator::class),
+                        $container->get(MeetingFieldset::class),
+                        $container->get('database_form_fieldset_subdecision_key_grant'),
+                        $container->get(GrantingFieldset::class),
+                    );
+                    $form->setHydrator($container->get(KeyWithdrawHydrator::class));
+                    return $form;
+                },
                 QueryForm::class => function (ContainerInterface $container) {
                     return new QueryForm($container->get(MvcTranslator::class));
                 },
@@ -331,10 +358,24 @@ class Module
                     $fieldset->setObject(new BoardInstallationModel());
                     return $fieldset;
                 },
+                'database_form_fieldset_subdecision_key_grant' => function (ContainerInterface $container) {
+                    $fieldset = new SubDecisionFieldset();
+                    $fieldset->setHydrator($container->get('database_hydrator_subdecision'));
+                    $fieldset->setObject(new KeyGrantingModel());
+                    return $fieldset;
+                },
                 DecisionFieldset::class => function (ContainerInterface $container) {
                     $fieldset = new DecisionFieldset();
                     $fieldset->setHydrator($container->get('database_hydrator_decision'));
                     $fieldset->setObject(new DecisionModel());
+                    return $fieldset;
+                },
+                GrantingFieldset::class => function (ContainerInterface $container) {
+                    $fieldset = new GrantingFieldset(
+                        $container->get(MemberFieldset::class),
+                    );
+                    $fieldset->setHydrator(new ObjectPropertyHydrator());
+                    $fieldset->setObject(new stdClass());
                     return $fieldset;
                 },
                 InstallationFieldset::class => function (ContainerInterface $container) {

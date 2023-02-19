@@ -12,6 +12,7 @@ use Database\Model\Meeting;
     <li class="active"><a href="#begroting" data-toggle="tab"><?= $this->translate('Budget/Statement') ?></a></li>
     <li><a href="#organ" data-toggle="tab"><?= $this->translate('Organ Mutations') ?></a></li>
     <li><a href="#board" data-toggle="tab"><?= $this->translate('Board Mutations') ?></a></li>
+    <li><a href="#key" data-toggle="tab"><?= $this->translate('Key Codes') ?></a></li>
     <li><a href="#vernietig" data-toggle="tab"><?= $this->translate('Annul Decision') ?></a></li>
     <li><a href="#overig" data-toggle="tab"><?= $this->translate('Other') ?></a></li>
 </ul>
@@ -59,21 +60,43 @@ use Database\Model\Meeting;
         <br />
         <div class="tab-content">
             <div class="tab-pane active" id="board-installatie">
-            <?= $this->partial('database/meeting/board/installform', array(
-                'form' => $forms['board_install']
-            )); ?>
+                <?= $this->partial('database/meeting/board/installform', array(
+                    'form' => $forms['board_install']
+                )); ?>
             </div>
             <div class="tab-pane" id="board-ontheffen">
-            <?= $this->partial('database/meeting/board/releaseform', array(
-                'form' => $forms['board_release'],
-                'installs' => $installs
-            )); ?>
+                <?= $this->partial('database/meeting/board/releaseform', array(
+                    'form' => $forms['board_release'],
+                    'installs' => $installs
+                )); ?>
             </div>
             <div class="tab-pane" id="board-decharge">
-            <?= $this->partial('database/meeting/board/dischargeform', array(
-                'form' => $forms['board_discharge'],
-                'installs' => $installs
-            )); ?>
+                <?= $this->partial('database/meeting/board/dischargeform', array(
+                    'form' => $forms['board_discharge'],
+                    'installs' => $installs
+                )); ?>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="key">
+        <ul class="nav nav-tabs nav-tabs-inverted">
+            <li class="active">
+                <a href="#key-grant" data-toggle="tab"><?= $this->translate('Grant') ?></a>
+            </li>
+            <li><a href="#key-withdraw" data-toggle="tab"><?= $this->translate('Withdraw') ?></a></li>
+        </ul>
+        <br />
+        <div class="tab-content">
+            <div class="tab-pane active" id="key-grant">
+                <?= $this->partial('database/meeting/key/grantform', array(
+                    'form' => $forms['key_grant']
+                )); ?>
+            </div>
+            <div class="tab-pane" id="key-withdraw">
+                <?= $this->partial('database/meeting/key/withdrawform', array(
+                    'form' => $forms['key_withdraw'],
+                    'grants' => $grants,
+                )); ?>
             </div>
         </div>
     </div>

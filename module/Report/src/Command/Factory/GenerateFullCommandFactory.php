@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Report\Command\GenerateFullCommand;
 use Report\Service\{
     Board as BoardService,
+    Keyholder as KeyholderService,
     Meeting as MeetingService,
     Member as MemberService,
     Misc as MiscService,
@@ -29,6 +30,8 @@ class GenerateFullCommandFactory implements FactoryInterface
     ): GenerateFullCommand {
         /** @var BoardService $boardService */
         $boardService = $container->get(BoardService::class);
+        /** @var KeyholderService $keyholderService */
+        $keyholderService = $container->get(KeyholderService::class);
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);
         /** @var MemberService $memberService */
@@ -40,6 +43,7 @@ class GenerateFullCommandFactory implements FactoryInterface
 
         return new GenerateFullCommand(
             $boardService,
+            $keyholderService,
             $meetingService,
             $memberService,
             $miscService,

@@ -36,6 +36,17 @@ case 'board_release':
         'installs' => $installs
     ));
     break;
+case 'key_grant':
+    echo $this->partial('database/meeting/key/grantform', array(
+        'form' => $form,
+    ));
+    break;
+case 'key_withdraw':
+    echo $this->partial('database/meeting/key/withdrawform', array(
+        'form' => $form,
+        'grants' => $grants
+    ));
+    break;
 case 'other':
     echo $this->partial('database/meeting/otherform', array(
         'form' => $form

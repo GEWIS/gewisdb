@@ -221,6 +221,15 @@ class Member
     )]
     protected Collection $boardInstallations;
 
+    /**
+     * Keyholdership.
+     */
+    #[OneToMany(
+        targetEntity: Keyholder::class,
+        mappedBy: "member",
+    )]
+    protected Collection $keyGrantings;
+
     #[Column(
         type: "string",
         nullable: true,
@@ -249,6 +258,7 @@ class Member
         $this->installations = new ArrayCollection();
         $this->organInstallations = new ArrayCollection();
         $this->boardInstallations = new ArrayCollection();
+        $this->keyGrantings = new ArrayCollection();
         $this->lists = new ArrayCollection();
     }
 

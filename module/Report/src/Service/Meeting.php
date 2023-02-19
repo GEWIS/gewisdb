@@ -257,6 +257,23 @@ class Meeting
             ]);
 
             $reportSubDecision->setInstallation($installation);
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Key\Granting) {
+            // key code granting
+            $reportSubDecision->setGrantee($this->findMember($subdecision->getGrantee()));
+            $reportSubDecision->setUntil($subdecision->getUntil());
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Key\Withdrawal) {
+            // key code withdrawal
+            $ref = $subdecision->getGranting();
+            $granting = $subdecRepo->find([
+                'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
+                'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
+                'decision_point' => $ref->getDecision()->getPoint(),
+                'decision_number' => $ref->getDecision()->getNumber(),
+                'number' => $ref->getNumber(),
+            ]);
+
+            $reportSubDecision->setGranting($granting);
+            $reportSubDecision->setWithdrawnOn($subdecision->getWithdrawnOn());
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Destroy) {
             $ref = $subdecision->getTarget();
             $target = $decRepo->find([
@@ -319,6 +336,17 @@ class Meeting
                     $this->emReport->remove($organMember);
                 }
 
+                break;
+            case $subDecision instanceof ReportSubDecisionModel\Key\Granting:
+                $keyholder = $subDecision->getKeyholder();
+                $this->emReport->remove($keyholder);
+                break;
+            case $subDecision instanceof ReportSubDecisionModel\Key\Withdrawal:
+                $granting = $subDecision->getGranting();
+                $granting->clearWithdrawal();
+
+                $keyholder = $granting->getKeyholder();
+                $keyholder->setWithdrawnDate(null);
                 break;
         }
 
