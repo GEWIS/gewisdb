@@ -3,6 +3,7 @@
 namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
+use Laminas\Mvc\I18n\Translator;
 use Database\Form\Fieldset\{
     Meeting as MeetingFieldset,
     SubDecision as SubDecisionFieldset,
@@ -16,6 +17,7 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
+        private readonly Translator $translator,
         MeetingFieldset $meeting,
         SubDecisionFieldset $installation,
     ) {
@@ -27,7 +29,7 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'date',
             'type' => Date::class,
             'options' => [
-                'label' => 'Van kracht per',
+                'label' => $this->translator->translate('Effective From'),
             ],
         ]);
 
@@ -35,7 +37,7 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Onthef bestuurder',
+                'value' => $this->translator->translate('Relieve Board Member'),
             ],
         ]);
     }

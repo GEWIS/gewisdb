@@ -1,4 +1,5 @@
 <?php
+
 $form->prepare();
 $form->setAttribute('action', $this->url('settings/user/default', ['action' => 'create']));
 $form->setAttribute('method', 'post');
@@ -7,7 +8,7 @@ $form->setAttribute('role', 'form');
 $form->setAttribute('class', 'form-horizontal');
 ?>
 <div class="row">
-    <h1>Create user</h1>
+    <h1><?= $this->translate('Create user') ?></h1>
     <?= $this->form()->openTag($form) ?>
 
     <?php

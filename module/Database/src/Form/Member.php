@@ -48,7 +48,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'lastName',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Achternaam'),
+                'label' => $translator->translate('Last Name'),
             ],
         ]);
 
@@ -56,7 +56,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'middleName',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Tussenvoegsels'),
+                'label' => $translator->translate('Last Name Prepositional Particle'),
             ],
         ]);
 
@@ -64,7 +64,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'initials',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Voorletter(s)'),
+                'label' => $translator->translate('Initial(s)'),
             ],
         ]);
 
@@ -72,7 +72,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'firstName',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Voornaam'),
+                'label' => $translator->translate('First Name'),
             ],
         ]);
 
@@ -80,7 +80,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'tueUsername',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('TU/e-gebruikersnaam'),
+                'label' => $translator->translate('TU/e-username'),
             ],
         ]);
 
@@ -88,7 +88,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'study',
             'type' => Select::class,
             'options' => [
-                'label' => $translator->translate('Studie'),
+                'label' => $translator->translate('Study'),
                 'value_options' => [
                     'bachelor' => [
                         'label' => 'Bachelor',
@@ -115,7 +115,7 @@ class Member extends Form implements InputFilterProviderInterface
                         ],
                     ],
                 ],
-                'empty_option' => $translator->translate('Selecteer een studie'),
+                'empty_option' => $translator->translate('Select a study'),
             ],
         ]);
 
@@ -123,7 +123,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'email',
             'type' => Email::class,
             'options' => [
-                'label' => $translator->translate('Email-adres'),
+                'label' => $translator->translate('E-mail Address'),
             ],
         ]);
 
@@ -131,7 +131,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'birth',
             'type' => Date::class,
             'options' => [
-                'label' => $translator->translate('Geboortedatum'),
+                'label' => $translator->translate('Birthdate'),
             ],
         ]);
 
@@ -159,7 +159,7 @@ class Member extends Form implements InputFilterProviderInterface
                 'name' => 'signatureLocation',
                 'type' => Text::class,
                 'options' => [
-                    'label' => $translator->translate('Plaats van ondertekening'),
+                    'label' => $translator->translate('Place of Signing'),
                 ],
             ]);
 
@@ -178,7 +178,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => $translator->translate('Schrijf in'),
+                'value' => $translator->translate('Subscribe'),
             ],
         ]);
     }
@@ -283,7 +283,7 @@ class Member extends Form implements InputFilterProviderInterface
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
-                                    'Weet je zeker dat je jonger bent dan 10 jaar?',
+                                    'Are you sure that you are younger than 10 years?',
                                 ),
                             ],
                         ],
@@ -299,7 +299,7 @@ class Member extends Form implements InputFilterProviderInterface
                             'token' => '1',
                             'messages' => [
                                 Identical::NOT_SAME => $this->translator->translate(
-                                    'Je moet de voorwaarden accepteren!',
+                                    'You have to accept the terms!',
                                 ),
                             ],
                         ],
@@ -315,7 +315,7 @@ class Member extends Form implements InputFilterProviderInterface
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => [
                                 Regex::NOT_MATCH => $this->translator->translate(
-                                    'Je TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx.',
+                                    'Your TU/e-username should look like sYYxxxx or YYYYxxxx.',
                                 ),
                             ],
                         ],
@@ -351,7 +351,7 @@ class Member extends Form implements InputFilterProviderInterface
                             'name' => NotEmpty::class,
                             'options' => [
                                 'messages' => [
-                                    NotEmpty::IS_EMPTY => $this->translator->translate('Handtekening is vereist!'),
+                                    NotEmpty::IS_EMPTY => $this->translator->translate('Signature is required!'),
                                 ],
                             ],
                         ],

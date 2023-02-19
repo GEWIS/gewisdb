@@ -3,6 +3,7 @@
 namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
+use Laminas\Mvc\I18n\Translator;
 use Database\Form\Fieldset\{
     Meeting as MeetingFieldset,
     SubDecision as SubDecisionFieldset,
@@ -13,6 +14,7 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 class Discharge extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
+        private readonly Translator $translator,
         MeetingFieldset $meeting,
         SubDecisionFieldset $installation,
     ) {
@@ -24,7 +26,7 @@ class Discharge extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Dechargeer bestuurder',
+                'value' => $this->translator->translate('Discharge Board Member'),
             ],
         ]);
     }

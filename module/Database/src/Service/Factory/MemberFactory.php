@@ -6,7 +6,6 @@ use Application\Service\FileStorage as FileStorageService;
 use Checker\Service\Checker as CheckerService;
 use Database\Form\{
     Address as AddressForm,
-    AddressExport as AddressExportForm,
     DeleteAddress as DeleteAddressForm,
     Member as MemberForm,
     MemberApprove as MemberApproveForm,
@@ -14,6 +13,7 @@ use Database\Form\{
     MemberExpiration as MemberExpirationForm,
     MemberType as MemberTypeForm,
 };
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Database\Mapper\{
     MailingList as MailingListMapper,
     Member as MemberMapper,
@@ -43,10 +43,10 @@ class MemberFactory implements FactoryInterface
         $requestedName,
         array $options = null,
     ): MemberService {
+        /** @var MvcTranslator $translator */
+        $translator = $container->get(MvcTranslator::class);
         /** @var AddressForm $addressForm */
         $addressForm = $container->get(AddressForm::class);
-        /** @var AddressExportForm $addressExportForm */
-        $addressExportForm = $container->get(AddressExportForm::class);
         /** @var DeleteAddressForm $deleteAddressForm */
         $deleteAddressForm = $container->get(DeleteAddressForm::class);
         /** @var MemberApproveForm $memberApproveForm */
@@ -81,8 +81,8 @@ class MemberFactory implements FactoryInterface
         $config = $container->get('config');
 
         return new MemberService(
+            $translator,
             $addressForm,
-            $addressExportForm,
             $deleteAddressForm,
             $memberApproveForm,
             $memberForm,

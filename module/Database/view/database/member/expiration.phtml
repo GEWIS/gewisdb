@@ -1,12 +1,25 @@
-<h1>Verleng lidmaatschap <?= $member->getFullName() ?></h1>
+<h1>
+    <?=
+        sprintf(
+            $this->translate('Extend Membership of %s'),
+            $this->escapeHtml($member->getFullName()),
+        )
+    ?>
+</h1>
 <?php
 $newExpiration = clone $member->getExpiration();
 $year = (int) $newExpiration->format('Y') + 1;
 $newExpiration->setDate($year, 7, 1);
 ?>
 <p>
-    Weet je zeker dat je het lidmaatschap van <?= $member->getFullName() ?> wilt verlengen van
-    <?= $member->getExpiration()->format('l j F Y') ?> naar <?= $newExpiration->format('l j F Y') ?>?
+    <?=
+        sprintf(
+            $this->translate('Are you sure that you want to extend the membership of %s to %s (from %s)?'),
+            $this->escapeHtml($member->getFullName()),
+            $newExpiration->format('l j F Y'),
+            $member->getExpiration()->format('l j F Y'),
+        )
+    ?>
 </p>
 <?php
 $form->prepare();
@@ -21,13 +34,13 @@ $form->setAttribute('class', 'form-horizontal');
     <div class="form-group">
         <?php
         $submit = $form->get('submit_yes');
-        $submit->setLabel('Ja')
+        $submit->setLabel($this->translate('Yes'))
             ->setAttribute('class', 'btn btn-primary');
         ?>
         <?= $this->formButton($submit) ?>
         <?php
         $submit = $form->get('submit_no');
-        $submit->setLabel('Nee')
+        $submit->setLabel($this->translate('No'))
             ->setAttribute('class', 'btn btn-default');
         ?>
         <?= $this->formButton($submit) ?>

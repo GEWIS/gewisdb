@@ -9,10 +9,11 @@ use Laminas\Form\Element\{
 };
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class MemberType extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -20,13 +21,16 @@ class MemberType extends Form implements InputFilterProviderInterface
             'name' => 'type',
             'type' => Radio::class,
             'options' => [
-                'label' => 'Lidmaatschapstype',
+                'label' => $this->translator->translate('Membership Type'),
                 'value_options' => [
-                    MembershipTypes::Ordinary->value => 'Gewoon lid - Ingeschreven bij faculteit M&CS',
-                    MembershipTypes::External->value => 'Extern lid - Speciaal toegelaten door het bestuur',
                     // phpcs:ignore -- user-visible strings should not be split
-                    MembershipTypes::Graduate->value => 'Afgestudeerde - Was lid en is speciaal toegelaten door het bestuur',
-                    MembershipTypes::Honorary->value => 'Erelid - Speciaal benoemd door de ALV',
+                    MembershipTypes::Ordinary->value => $this->translator->translate('Ordinary - Enrolled at the department of M&CS'),
+                    // phpcs:ignore -- user-visible strings should not be split
+                    MembershipTypes::External->value => $this->translator->translate('External - Specially admitted by the board'),
+                    // phpcs:ignore -- user-visible strings should not be split
+                    MembershipTypes::Graduate->value => $this->translator->translate('Graduate - Old member and specially admitted by the board'),
+                    // phpcs:ignore -- user-visible strings should not be split
+                    MembershipTypes::Honorary->value => $this->translator->translate('Honorary - Specially appointed by the GMM'),
                 ],
             ],
         ]);
@@ -35,7 +39,7 @@ class MemberType extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Wijzig type',
+                'value' => $this->translator->translate('Change Membership Type'),
             ],
         ]);
     }

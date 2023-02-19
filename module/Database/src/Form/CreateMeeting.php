@@ -11,6 +11,7 @@ use Laminas\Form\Element\{
 };
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\{
     Date as DateValidator,
     Digits,
@@ -20,7 +21,7 @@ use Laminas\Validator\{
 
 class CreateMeeting extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -28,12 +29,12 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'name' => 'type',
             'type' => Select::class,
             'options' => [
-                'label' => 'Vergadertype',
+                'label' => $this->translator->translate('Meeting Type'),
                 'value_options' => [
-                    'BV' => 'BV (Bestuursvergadering)',
-                    'ALV' => 'ALV (Algemene Ledenvergadering)',
-                    'VV' => 'VV (Voorzittersvergadering)',
-                    'Virt' => 'Virt (Virtuele vergadering)',
+                    'BV' => $this->translator->translate('BM (Board Meeting)'),
+                    'ALV' => $this->translator->translate('GMM (General Members Meeting)'),
+                    'VV' => $this->translator->translate('CM (Chair\'s Meeting)'),
+                    'Virt' => $this->translator->translate('Virt (Virtual Meeting)'),
                 ],
             ],
         ]);
@@ -42,7 +43,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'name' => 'number',
             'type' => Text::class,
             'options' => [
-                'label' => 'Vergadernummer',
+                'label' => $this->translator->translate('Meeting Number'),
             ],
         ]);
 
@@ -50,7 +51,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'name' => 'date',
             'type' => Date::class,
             'options' => [
-                'label' => 'Vergaderdatum',
+                'label' => $this->translator->translate('Meeting Date'),
             ],
         ]);
 
@@ -58,7 +59,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Verzend',
+                'value' => $this->translator->translate('Add Meeting'),
             ],
         ]);
     }

@@ -5,10 +5,11 @@ namespace Database\Form;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class DeleteDecision extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -16,7 +17,7 @@ class DeleteDecision extends Form implements InputFilterProviderInterface
             'name' => 'submit_yes',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Ja',
+                'value' => $this->translator->translate('Yes'),
             ],
         ]);
 
@@ -24,7 +25,7 @@ class DeleteDecision extends Form implements InputFilterProviderInterface
             'name' => 'submit_no',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Nee',
+                'value' => $this->translator->translate('No'),
             ],
         ]);
     }

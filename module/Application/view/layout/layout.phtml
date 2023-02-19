@@ -1,6 +1,7 @@
 <?php
 
 use Laminas\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger;
+use User\Model\User;
 
 $lang = $this->plugin('translate')->getTranslator()->getLocale();
 
@@ -58,43 +59,116 @@ $(document).ready(function() {
                         <div class="gi gewis-base"></div>
                     </a>
                 </div>
+                <div class="navbar-header navbar-right pull-right">
+                    <ul class="nav navbar-nav pull-left no-collapse">
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">
+                                <span class="glyphicon glyphicon-globe"></span>
+                                <span class="sr-only"><?= $this->translate('Language Settings') ?></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu language <?= ($lang == 'en') ? 'reverse' : '' ?> ">
+                                <li>
+                                    <a class="<?= ('en' === $lang) ? 'disabled' : '' ?>" href="<?= $this->url(
+                                        'lang',
+                                        ['lang' => 'en'],
+                                    ) ?>">
+                                        <span class="flag-icon flag-icon-en"
+                                              style="background-image: url('<?= $this->basePath() ?>/img/en.svg');">
+                                        </span>English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="<?= ('nl' === $lang) ? 'disabled' : '' ?>" href="<?= $this->url(
+                                        'lang',
+                                        ['lang' => 'nl'],
+                                    ) ?>">
+                                        <span class="flag-icon flag-icon-nl"
+                                              style="background-image: url('<?= $this->basePath() ?>/img/nl.svg');">
+                                        </span>Nederlands
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php if (null !== ($identity = $this->identity())): ?>
+                            <?php
+                            if ($identity instanceof User) {
+                                $name = $identity->getLogin();
+                            } else {
+                                if (1 === preg_match('/^((?:a|m)(?:[0-9]{4,5}))@GEWISWG\.GEWIS\.NL$/', $identity, $matches)) {
+                                    $name = $matches[1];
+                                } else {
+                                    $name = $this->translate('User');
+                                }
+                            }
+                            ?>
+                            <li class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <?= $this->escapeHtml($name) ?>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">
+                                            <?= $this->translate('Log out') ?>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php else: ?>
+                            <li class="pull-right">
+                                <a href="<?= $this->url('user') ?>">
+                                    <?= $this->translate('Log in') ?>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only"><?= $this->translate('Toggle Navigation') ?></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
                 <div class="collapse navbar-collapse">
                     <?php if (null !== $this->identity()): ?>
                         <ul class="nav navbar-nav navbar-left">
                             <li class="<?= $this->isModuleActive(['database', 'meeting']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('meeting') ?>">Vergaderingen en Besluiten</a>
+                                <a href="<?= $this->url('meeting') ?>">
+                                    <?= $this->translate('Meetings and Decisions') ?>
+                                </a>
                             </li>
                             <li class="<?= $this->isModuleActive(['database', 'organ']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('organ') ?>">Organen</a>
+                                <a href="<?= $this->url('organ') ?>">
+                                    <?= $this->translate('Organ') ?>
+                                </a>
                             </li>
                             <li class="<?= $this->isModuleActive(['database', 'prospectivemember']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('prospective-member') ?>">Aankomende Leden</a>
+                                <a href="<?= $this->url('prospective-member') ?>">
+                                    <?= $this->translate('Prospective Members') ?>
+                                </a>
                             </li>
                             <li class="<?= $this->isModuleActive(['database', 'member']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('member') ?>">Leden</a>
+                                <a href="<?= $this->url('member') ?>">
+                                    <?= $this->translate('Members') ?>
+                                </a>
                             </li>
                             <li class="<?= $this->isModuleActive(['database', 'export']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('export') ?>">Besluitenlijst</a>
-                            </li>
-                            <li class="<?= $this->isModuleActive(['database', 'address']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('address') ?>">Adressenlijst</a>
+                                <a href="<?= $this->url('export') ?>">
+                                    <?= $this->translate('Decision List') ?>
+                                </a>
                             </li>
                             <li class="<?= $this->isModuleActive(['database', 'query']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('query') ?>">Query</a>
+                                <a href="<?= $this->url('query') ?>">
+                                    <?= $this->translate('Query') ?>
+                                </a>
                             </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
                             <li class="<?= $this->isModuleActive(['database', 'settings']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('settings') ?>">Settings</a>
-                            </li>
-                            <li class="<?= $this->isModuleActive(['user', 'user']) ? 'active' : '' ?>">
-                                <a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">Uitloggen</a>
-                            </li>
-                        </ul>
-                    <?php else: ?>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="<?= $this->url('user') ?>">Login</a>
+                                <a href="<?= $this->url('settings') ?>">
+                                    <?= $this->translate('Settings') ?>
+                                </a>
                             </li>
                         </ul>
                     <?php endif; ?>
@@ -115,7 +189,7 @@ $(document).ready(function() {
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">
                                 <span class="glyphicon glyphicon-globe"></span>
-                                <span class="sr-only"><?= $this->translate('Taalinstellingen') ?></span>
+                                <span class="sr-only"><?= $this->translate('Language Settings') ?></span>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu language <?= ($lang == 'en') ? 'reverse' : '' ?> ">
@@ -147,7 +221,7 @@ $(document).ready(function() {
                     <ul class="nav navbar-nav navbar-left">
                         <li class="active">
                             <a href="#" role="button" class="hidden-sm hidden-xs">
-                                <?= $this->translate('Inschrijven') ?>
+                                <?= $this->translate('Subscribe') ?>
                             </a>
                         </li>
                     </ul>

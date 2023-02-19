@@ -9,6 +9,7 @@ use Laminas\Form\Element\{
 };
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\{
     Regex,
     StringLength,
@@ -16,7 +17,7 @@ use Laminas\Validator\{
 
 class Address extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -24,8 +25,8 @@ class Address extends Form implements InputFilterProviderInterface
             'name' => 'country',
             'type' => Text::class,
             'options' => [
-                'label' => 'Land',
-                'value' => 'netherlands',
+                'label' => $this->translator->translate('Country'),
+                'value' => 'NETHERLANDS',
             ],
         ]);
 
@@ -33,7 +34,7 @@ class Address extends Form implements InputFilterProviderInterface
             'name' => 'street',
             'type' => Text::class,
             'options' => [
-                'label' => 'Straat',
+                'label' => $this->translator->translate('Street'),
             ],
         ]);
 
@@ -41,7 +42,7 @@ class Address extends Form implements InputFilterProviderInterface
             'name' => 'number',
             'type' => Text::class,
             'options' => [
-                'label' => 'Huisnummer',
+                'label' => $this->translator->translate('House Number'),
             ],
         ]);
 
@@ -49,7 +50,7 @@ class Address extends Form implements InputFilterProviderInterface
             'name' => 'postalCode',
             'type' => Text::class,
             'options' => [
-                'label' => 'Postcode',
+                'label' => $this->translator->translate('Postal Code'),
             ],
         ]);
 
@@ -57,7 +58,7 @@ class Address extends Form implements InputFilterProviderInterface
             'name' => 'city',
             'type' => Text::class,
             'options' => [
-                'label' => 'Stad',
+                'label' => $this->translator->translate('City'),
             ],
         ]);
 
@@ -65,7 +66,7 @@ class Address extends Form implements InputFilterProviderInterface
             'name' => 'phone',
             'type' => Text::class,
             'options' => [
-                'label' => 'Telefoonnummer',
+                'label' => $this->translator->translate('Phone Number'),
             ],
         ]);
 
@@ -73,7 +74,7 @@ class Address extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Wijzig adres',
+                'value' => $this->translator->translate('Update Address'),
             ],
         ]);
     }

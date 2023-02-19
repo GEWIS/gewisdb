@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-02 12:45+0200\n"
+"POT-Creation-Date: 2023-02-19 17:13+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -10,31 +10,119 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid "# Decisions"
+msgstr "# Decisions"
+
+#, php-format
+msgid "%s: %s (started in %s)"
+msgstr "%s: %s (started in %s)"
+
+#, php-format
+msgid "(Annulled by decision %s %d.%d.%d)"
+msgstr "(Annulled by decision %s %d.%d.%d)"
+
+#, php-format
+msgid ""
+"<strong>Warning:</strong> The database currently requires the usage of GEWIS "
+"m-accounts to log in. Any accounts created here cannot be used to log in. "
+"Learn more about m-accounts %shere%s."
+msgstr ""
+"<strong>Warning:</strong> The database currently requires the usage of GEWIS "
+"m-accounts to log in. Any accounts created here cannot be used to log in. "
+"Learn more about m-accounts %shere%s."
 
 msgid "A 404 error occurred"
 msgstr "A 404 error occurred"
 
+msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+msgstr "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+
 msgid "Aangemelde mailing lists"
-msgstr "Subscribed mailing lists"
+msgstr "Aangemelde mailing lists"
+
+msgid "Abbreviation"
+msgstr "Abbreviation"
+
+msgid "Abolish Organ"
+msgstr "Abolish Organ"
+
+msgid "Abolition"
+msgstr "Abolition"
 
 msgid "Achternaam"
-msgstr "Last name"
+msgstr "Achternaam"
+
+msgid "Action"
+msgstr "Action"
+
+#, php-format
+msgid "Add %s of %s"
+msgstr "Add %s of %s"
+
+msgid "Add Budget/Statement"
+msgstr "Add Budget/Statement"
+
+msgid "Add Decision"
+msgstr "Add Decision"
+
+msgid "Add Function"
+msgstr "Add Function"
+
+msgid "Add Home Address"
+msgstr "Add Home Address"
+
+msgid "Add Inactive Member"
+msgstr "Add Inactive Member"
+
+msgid "Add Mail Address"
+msgstr "Add Mail Address"
+
+msgid "Add Mailing List"
+msgstr "Add Mailing List"
+
+msgid "Add Meeting"
+msgstr "Add Meeting"
+
+msgid "Add Member"
+msgstr "Add Member"
+
+msgid "Add New (Inactive) Member"
+msgstr "Add New (Inactive) Member"
+
+msgid "Add New Decision"
+msgstr "Add New Decision"
+
+msgid "Add New Function"
+msgstr "Add New Function"
+
+msgid "Add New Mailing List"
+msgstr "Add New Mailing List"
+
+msgid "Add New Meeting"
+msgstr "Add New Meeting"
+
+msgid "Add Student Address"
+msgstr "Add Student Address"
+
+msgid "Add new user"
+msgstr "Add new user"
 
 msgid "Additional information"
 msgstr "Additional information"
 
-msgid "Adres"
-msgstr "Address"
-
-msgid "Adressen"
+msgid "Addresses"
 msgstr "Addresses"
 
-msgid "Afgestudeerde"
-msgstr "Graduate"
+msgid "Adres"
+msgstr "Adres"
+
+msgid "Advisory Board"
+msgstr "Advisory Board"
 
 msgid "Akkoordverklaring"
-msgstr "Statement of agreement"
+msgstr "Akkoordverklaring"
 
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
@@ -44,25 +132,242 @@ msgid ""
 "Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze\n"
 "inschrijvingen kunnen op een later tijdstip veranderd worden."
 msgstr ""
-"As GEWIS-member, you will automatically be signed up for the GEWIS-list. "
-"This is a mailing list for\n"
-"official messages about GEWIS and its activities. On top of that there are "
-"several other mailing lists you can\n"
-"subscribe to. You can sign up for the following mailing lists. These "
-"subscriptions can be withdrawn at any moment."
+"Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
+"mededelingen\n"
+"en activiteiten van de studievereniging. Daarnaast zijn er verschillende\n"
+"optionele mailinglijsten.\n"
+"Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze\n"
+"inschrijvingen kunnen op een later tijdstip veranderd worden."
 
 msgid "An error occurred"
 msgstr "An error occurred"
 
+msgid "An error occurred while trying to reject the changes."
+msgstr "An error occurred while trying to reject the changes."
+
+msgid "An error occurred while trying to save the changes."
+msgstr "An error occurred while trying to save the changes."
+
+msgid "Annul Decision"
+msgstr "Annul Decision"
+
+msgid "Apply Update"
+msgstr "Apply Update"
+
+msgid "Approval"
+msgstr "Approval"
+
+msgid "Approve"
+msgstr "Approve"
+
+msgid "Approve Membership"
+msgstr "Approve Membership"
+
+msgid "Are you sure that you are younger than 10 years?"
+msgstr "Are you sure that you are younger than 10 years?"
+
+#, php-format
+msgid "Are you sure that you want to delete the %s mailing list?"
+msgstr "Are you sure that you want to delete the %s mailing list?"
+
+#, php-format
+msgid "Are you sure that you want to delete the %s of %s?"
+msgstr "Are you sure that you want to delete the %s of %s?"
+
+#, php-format
+msgid ""
+"Are you sure that you want to extend the membership of %s to %s (from %s)?"
+msgstr ""
+"Are you sure that you want to extend the membership of %s to %s (from %s)?"
+
+#, php-format
+msgid "Are you sure you want to delete member %s?"
+msgstr "Are you sure you want to delete member %s?"
+
+#, php-format
+msgid "Are your sure that you want to delete decision %s %d.%d.%d?"
+msgstr "Are your sure that you want to delete decision %s %d.%d.%d?"
+
+msgid ""
+"As a result, this member cannot be removed. According to the AVG, we have a "
+"legal basis to keep this member's name in our database. The other data can, "
+"however, be deleted."
+msgstr ""
+"As a result, this member cannot be removed. According to the AVG, we have a "
+"legal basis to keep this member's name in our database. The other data can, "
+"however, be deleted."
+
+msgid "Author"
+msgstr "Author"
+
+msgid "Auto-subscription"
+msgstr "Auto-subscription"
+
+msgid "BM (Board Meeting)"
+msgstr "BM (Board Meeting)"
+
+#, php-format
+msgid "Back to %s %d"
+msgstr "Back to %s %d"
+
+msgid "Birthdate"
+msgstr "Birthdate"
+
+msgid "Board Member(s) to Discharge"
+msgstr "Board Member(s) to Discharge"
+
+msgid "Board Member(s) to Relieve"
+msgstr "Board Member(s) to Relieve"
+
+msgid "Board Mutations"
+msgstr "Board Mutations"
+
+msgid "Budget"
+msgstr "Budget"
+
+msgid "Budget/Statement"
+msgstr "Budget/Statement"
+
+msgid "CM (Chair's Meeting)"
+msgstr "CM (Chair's Meeting)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Change"
+msgstr "Change"
+
+msgid "Change Data"
+msgstr "Change Data"
+
+msgid "Change Mailing List Subscriptions"
+msgstr "Change Mailing List Subscriptions"
+
+#, php-format
+msgid "Change Mailing List Subscriptions of %s"
+msgstr "Change Mailing List Subscriptions of %s"
+
+msgid "Change Membership Type"
+msgstr "Change Membership Type"
+
+#, php-format
+msgid "Change Membership Type of %s"
+msgstr "Change Membership Type of %s"
+
+msgid "Change Subscriptions"
+msgstr "Change Subscriptions"
+
+#, php-format
+msgid "Change password for %s"
+msgstr "Change password for %s"
+
+msgid "City"
+msgstr "City"
+
+msgid "City and Postal Code"
+msgstr "City and Postal Code"
+
+msgid "Committee"
+msgstr "Committee"
+
+msgid "Confirm Changes"
+msgstr "Confirm Changes"
+
 msgid "Controller"
 msgstr "Controller"
+
+msgid "Country"
+msgstr "Country"
+
+msgid "Create user"
+msgstr "Create user"
+
+msgid "Current Data"
+msgstr "Current Data"
+
+msgid "Current Functions"
+msgstr "Current Functions"
+
+msgid "Current Mailing Lists"
+msgstr "Current Mailing Lists"
+
+msgid "Current Members"
+msgstr "Current Members"
+
+msgid "Data Update Requests"
+msgstr "Data Update Requests"
+
+msgid "Date of Budget/Statement"
+msgstr "Date of Budget/Statement"
+
+msgid "Decision"
+msgstr "Decision"
+
+msgid "Decision Already Exists"
+msgstr "Decision Already Exists"
+
+msgid "Decision Cannot Be Removed"
+msgstr "Decision Cannot Be Removed"
+
+msgid "Decision List"
+msgstr "Decision List"
+
+msgid "Decision Number"
+msgstr "Decision Number"
+
+msgid "Decision removed."
+msgstr "Decision removed."
+
+msgid "Decisions"
+msgstr "Decisions"
+
+msgid "Delete"
+msgstr "Delete"
+
+#, php-format
+msgid "Delete %s"
+msgstr "Delete %s"
+
+msgid "Delete Decision"
+msgstr "Delete Decision"
+
+msgid "Delete Member"
+msgstr "Delete Member"
+
+msgid "Delete Prospective Member"
+msgstr "Delete Prospective Member"
+
+msgid "Delete User"
+msgstr "Delete User"
 
 msgid ""
 "Deze betaling zal middels een eenmalige SEPA-machtiging\n"
 "verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
 msgstr ""
-"The payment of this fee will be by the means of a one-time\n"
-"SEPA-authorization for GEWIS. The address details of GEWIS are as follows:"
+"Deze betaling zal middels een eenmalige SEPA-machtiging\n"
+"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
+
+msgid "Disapprove"
+msgstr "Disapprove"
+
+msgid "Discharge"
+msgstr "Discharge"
+
+#, php-format
+msgid "Discharge %s as %s?"
+msgstr "Discharge %s as %s?"
+
+msgid "Discharge Board Member"
+msgstr "Discharge Board Member"
+
+msgid "Discharge Member"
+msgstr "Discharge Member"
+
+msgid "Discharges"
+msgstr "Discharges"
+
+msgid "Do you want to delete the other data?"
+msgstr "Do you want to delete the other data?"
 
 msgid ""
 "Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
@@ -78,54 +383,154 @@ msgid ""
 "weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de "
 "voorwaarden."
 msgstr ""
-"By signing this mandate form, I (A) authorise Gemeenschap van Wiskunde en "
-"Informatica Studenten (GEWIS) \n"
-"to send instructions to my bank to debit my account with &euro;15,-, fifteen "
-"euros, and (B) my bank\n"
-"to debit my account in accordance with the instructions from Gemeenschap van "
-"Wiskunde en Informatica Studenten (GEWIS).\n"
+"Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
+"Informatica Studenten (GEWIS)\n"
+"toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een "
+"bedrag van &euro;15,-,\n"
+"geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn "
+"bank om eenmalig een bedrag van\n"
+"mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.\n"
 "<br/>\n"
-"As part of your rights, you are entitled to a refund from your bank under "
-"the terms and conditions of\n"
-"your agreement with your bank. A refund must be claimed within <b>8 weeks</"
-"b> starting from the date on\n"
-"which your account was debited."
+"Als u het niet eens bent met deze afschrijving kunt u deze laten "
+"terugboeken. Neem hiervoor binnen <b>acht\n"
+"weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de "
+"voorwaarden."
 
-msgid "Email"
-msgstr "Email"
+msgid "Dutch Description"
+msgstr "Dutch Description"
 
-msgid "Email-adres"
-msgstr "Email address"
+msgid "E-mail Address"
+msgstr "E-mail Address"
+
+msgid "Edit / Delete"
+msgstr "Edit / Delete"
+
+msgid "Effective From"
+msgstr "Effective From"
+
+msgid "English Description"
+msgstr "English Description"
 
 msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-msgstr "Some fields haven't been filled in correctly. Fix this and try again!"
+msgstr "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
 
-msgid "Erelid"
-msgstr "Honorary member"
+msgid "Execute"
+msgstr "Execute"
 
-msgid "Extern"
+msgid "Expiration"
+msgstr "Expiration"
+
+msgid "Export"
+msgstr "Export"
+
+msgid "Export Decisions"
+msgstr "Export Decisions"
+
+msgid "Extend"
+msgstr "Extend"
+
+#, php-format
+msgid "Extend Membership of %s"
+msgstr "Extend Membership of %s"
+
+msgid "External"
 msgstr "External"
+
+msgid "External - Specially admitted by the board"
+msgstr "External - Specially admitted by the board"
 
 msgid "File"
 msgstr "File"
 
-msgid "Geboortedatum"
-msgstr "Birth date"
+msgid "Financial Audit Committee"
+msgstr "Financial Audit Committee"
+
+msgid "First Name"
+msgstr "First Name"
+
+#, php-format
+msgid ""
+"For an overview of how you can use the Doctrine Query Language (DQL) please "
+"refer to %sits documentation%s."
+msgstr ""
+"For an overview of how you can use the Doctrine Query Language (DQL) please "
+"refer to %sits documentation%s."
+
+msgid "Fork GEWISDB on GitHub &raquo;"
+msgstr "Fork GEWISDB on GitHub &raquo;"
+
+msgid "Found Organ"
+msgstr "Found Organ"
+
+msgid "Foundation"
+msgstr "Foundation"
+
+msgid "Fraternity"
+msgstr "Fraternity"
+
+msgid "Function"
+msgstr "Function"
+
+msgid "Function of"
+msgstr "Function of"
+
+msgid "Functions"
+msgstr "Functions"
+
+#, php-format
+msgid ""
+"GEWIS currently has <a href=\"%s\">%d members</a> and <a href=\"%s\">%d "
+"prospective members</a>. <a href=\"%s\">Click here</a> to create a meeting "
+"or <a href=\"%s\">perform a query</a>."
+msgstr ""
+"GEWIS currently has <a href=\"%s\">%d members</a> and <a href=\"%s\">%d "
+"prospective members</a>. <a href=\"%s\">Click here</a> to create a meeting "
+"or <a href=\"%s\">perform a query</a>."
+
+msgid "GMM (General Members Meeting)"
+msgstr "GMM (General Members Meeting)"
+
+msgid "GMM Committee"
+msgstr "GMM Committee"
+
+msgid "GMM Taskforce"
+msgstr "GMM Taskforce"
 
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
-msgstr "Congratulations! You are registered as a member of GEWIS"
+msgstr "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 
-msgid "Gewoon"
-msgstr "Normal"
+msgid "Generation"
+msgstr "Generation"
+
+msgid "Give Function"
+msgstr "Give Function"
+
+msgid "Give Member Function"
+msgstr "Give Member Function"
+
+msgid "Graduate"
+msgstr "Graduate"
+
+msgid "Graduate - Old member and specially admitted by the board"
+msgstr "Graduate - Old member and specially admitted by the board"
 
 msgid "Handtekening"
-msgstr "Signature"
+msgstr "Handtekening"
 
-msgid "Handtekening is vereist!"
-msgstr "Signature is required!"
+msgid "Hide Member"
+msgstr "Hide Member"
 
-msgid "Huisnummer"
-msgstr "House number"
+msgid "Home Address (Parents)"
+msgstr "Home Address (Parents)"
+
+msgid "Honorary"
+msgstr "Honorary"
+
+msgid "Honorary - Specially appointed by the GMM"
+msgstr "Honorary - Specially appointed by the GMM"
+
+msgid "House Number"
+msgstr "House Number"
 
 msgid "IBAN"
 msgstr "IBAN"
@@ -158,125 +563,373 @@ msgid ""
 "toestemming tot het\n"
 "verwerken van mijn persoonsgegevens volgens haar privacybeleid."
 msgstr ""
-"I hereby declare to have filled the form truthfully and agree to become a\n"
-"member of Study Association GEWIS. I have read and agree to be bound \n"
-"by the articles of association and the internal regulations.\n"
-"\n"
-"I hereby give Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
-"permission to\n"
-"process my personal data in accordance with her privacy statement."
+"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
+"en\n"
+"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de "
+"inhoud van de statuten\n"
+"en het HR.\n"
+"<br/>\n"
+"Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
+"toestemming tot het\n"
+"verwerken van mijn persoonsgegevens volgens haar privacybeleid."
 
 msgid "Incassant-ID"
-msgstr "Creditor identifier"
+msgstr "Incassant-ID"
 
-msgid "Inschrijven"
-msgstr "Subscribe"
+msgid "Initial(s)"
+msgstr "Initial(s)"
 
 msgid "Inschrijving"
-msgstr "Subscription"
+msgstr "Inschrijving"
 
-msgid "Je TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
-msgstr "Your TU/e username looks like sYYxxxx or as YYYYxxxx."
+msgid "Install Board Member"
+msgstr "Install Board Member"
+
+msgid "Installation"
+msgstr "Installation"
+
+msgid "Installation/Discharge"
+msgstr "Installation/Discharge"
+
+msgid "Installations"
+msgstr "Installations"
 
 msgid ""
 "Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
 "moderne browser, zoals Firefox."
 msgstr ""
-"Your internet browser does not support digital signatures. Use a modern "
-"browser such as Firefox."
-
-msgid "Je moet de voorwaarden accepteren!"
-msgstr "You have to accept the terms!"
-
-msgid "Kameradres"
-msgstr "Student room address"
+"Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
+"moderne browser, zoals Firefox."
 
 msgid "Kenmerk van de machtiging"
-msgstr "Mandate reference"
+msgstr "Kenmerk van de machtiging"
+
+msgid "Key"
+msgstr "Key"
 
 msgid "Land"
-msgstr "Country"
+msgstr "Land"
+
+msgid "Language Settings"
+msgstr "Language Settings"
+
+msgid "Last Name"
+msgstr "Last Name"
+
+msgid "Last Name Prepositional Particle"
+msgstr "Last Name Prepositional Particle"
+
+msgid "Last Update to Membership"
+msgstr "Last Update to Membership"
+
+msgid "Log in"
+msgstr "Log in"
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Mail Address"
+msgstr "Mail Address"
+
+msgid "Mailing List Subscriptions"
+msgstr "Mailing List Subscriptions"
+
+msgid "Mailing Lists"
+msgstr "Mailing Lists"
+
+msgid "Mailing list deleted."
+msgstr "Mailing list deleted."
 
 msgid "Mailinglijsten"
-msgstr "Mailing lists"
+msgstr "Mailinglijsten"
+
+#, php-format
+msgid "Make %s inactive?"
+msgstr "Make %s inactive?"
+
+msgid "Make Inactive"
+msgstr "Make Inactive"
+
+msgid "Make Member Inactive"
+msgstr "Make Member Inactive"
+
+msgid "Meeting Date"
+msgstr "Meeting Date"
+
+msgid "Meeting Number"
+msgstr "Meeting Number"
+
+msgid "Meeting Type"
+msgstr "Meeting Type"
+
+msgid "Meeting added successfully!"
+msgstr "Meeting added successfully!"
+
+msgid "Meetings"
+msgstr "Meetings"
+
+msgid "Meetings and Decisions"
+msgstr "Meetings and Decisions"
+
+#, php-format
+msgid "Member %s cannot be deleted."
+msgstr "Member %s cannot be deleted."
+
+msgid "Member Number"
+msgstr "Member Number"
+
+msgid "Members"
+msgstr "Members"
+
+msgid "Membership Ends On (Expires On)"
+msgstr "Membership Ends On (Expires On)"
+
+msgid "Membership Type"
+msgstr "Membership Type"
+
+msgid "Membership of Committees and Fraternities"
+msgstr "Membership of Committees and Fraternities"
 
 msgid "Message"
 msgstr "Message"
 
+msgid "Modifications"
+msgstr "Modifications"
+
+msgid "Mutations"
+msgstr "Mutations"
+
+msgid "N/A"
+msgstr "N/A"
+
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
-msgstr "Your registration becomes final after you've paid your membership fee!"
+msgstr "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
 
 msgid "Naam"
+msgstr "Naam"
+
+msgid "Name"
 msgstr "Name"
+
+msgid "No"
+msgstr "No"
 
 msgid "No Exception available"
 msgstr "No Exception available"
 
+msgid "No data returned."
+msgstr "No data returned."
+
+msgid "No signature or IBAN provided."
+msgstr "No signature or IBAN provided."
+
+msgid "On Form"
+msgstr "On Form"
+
 msgid "Onbekend"
-msgstr "Unknown"
+msgstr "Onbekend"
+
+msgid "Ordinary"
+msgstr "Ordinary"
+
+msgid "Ordinary - Enrolled at the department of M&CS"
+msgstr "Ordinary - Enrolled at the department of M&CS"
+
+msgid "Organ"
+msgstr "Organ"
+
+msgid "Other"
+msgstr "Other"
+
+msgid "Paid (Amount)"
+msgstr "Paid (Amount)"
+
+msgid "Pending member updates"
+msgstr "Pending member updates"
 
 msgid "Persoonlijke informatie"
-msgstr "Personal information"
+msgstr "Persoonlijke informatie"
+
+msgid "Phone Number"
+msgstr "Phone Number"
 
 msgid "Plaats"
-msgstr "City"
+msgstr "Plaats"
 
 msgid "Plaats en datum van ondertekening"
-msgstr "Place and date of signing"
+msgstr "Plaats en datum van ondertekening"
 
-msgid "Plaats van ondertekening"
-msgstr "Place of signature"
+msgid "Place of Signing"
+msgstr "Place of Signing"
 
 msgid "Please accept the conditions for payment through SEPA Direct Debit"
 msgstr "Please accept the conditions for payment through SEPA Direct Debit"
 
-msgid "Postadres"
-msgstr "Postal Address"
+msgid ""
+"Please note that if you create a mailing list here, it must also exist in "
+"mailman (with the same name!)."
+msgstr ""
+"Please note that if you create a mailing list here, it must also exist in "
+"mailman (with the same name!)."
+
+msgid "Point"
+msgstr "Point"
+
+msgid "Postal Code"
+msgstr "Postal Code"
 
 msgid "Postcode"
-msgstr "Postal Code"
+msgstr "Postcode"
 
 msgid "Previous exceptions"
 msgstr "Previous exceptions"
+
+msgid "Proposed Data"
+msgstr "Proposed Data"
+
+msgid "Prospective Members"
+msgstr "Prospective Members"
+
+msgid "Provided Data"
+msgstr "Provided Data"
+
+msgid "Query"
+msgstr "Query"
+
+msgid "Query Result"
+msgstr "Query Result"
+
+msgid "Register Member"
+msgstr "Register Member"
+
+msgid "Reject Update"
+msgstr "Reject Update"
+
+msgid "Relieve"
+msgstr "Relieve"
+
+msgid "Relieve Board Member"
+msgstr "Relieve Board Member"
+
+msgid "Remove Member"
+msgstr "Remove Member"
+
+msgid "Result"
+msgstr "Result"
 
 msgid "SEPA Direct Debit"
 msgstr "SEPA Direct Debit"
 
 msgid "SEPA-machtiging"
-msgstr "SEPA Mandate"
+msgstr "SEPA-machtiging"
 
-msgid "Schrijf in"
-msgstr "Send"
+msgid "Save"
+msgstr "Save"
 
-msgid "Selecteer een studie"
-msgstr "Select a study program"
+msgid "Search"
+msgstr "Search"
+
+msgid "Search Members"
+msgstr "Search Members"
+
+msgid "Search Organs"
+msgstr "Search Organs"
+
+msgid "Search Prospective Members"
+msgstr "Search Prospective Members"
+
+msgid "Search TU/e Students"
+msgstr "Search TU/e Students"
+
+msgid "Select a study"
+msgstr "Select a study"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Signature SEPA Direct Debit"
+msgstr "Signature SEPA Direct Debit"
+
+msgid "Signature is required!"
+msgstr "Signature is required!"
 
 msgid "Stack trace"
 msgstr "Stack trace"
 
-msgid "Stad"
-msgstr "City"
+msgid "Statement"
+msgstr "Statement"
 
 msgid "Statuten, HR en privacybeleid"
-msgstr "Articles of Association, Internal Regulations and privacy statement"
+msgstr "Statuten, HR en privacybeleid"
 
-msgid "Straat"
-msgstr "Street"
+msgid "Stored Queries"
+msgstr "Stored Queries"
 
 msgid "Straat en huisnummer"
-msgstr "Street and house number"
+msgstr "Straat en huisnummer"
+
+msgid "Street"
+msgstr "Street"
+
+msgid "Street and House Number"
+msgstr "Street and House Number"
+
+msgid "Student Address"
+msgstr "Student Address"
 
 msgid "Studie"
-msgstr "Study Program"
+msgstr "Studie"
+
+msgid "Study"
+msgstr "Study"
+
+msgid "Subscribe"
+msgstr "Subscribe"
+
+msgid "TU/e Data"
+msgstr "TU/e Data"
+
+msgid "TU/e Raw Data Lookup"
+msgstr "TU/e Raw Data Lookup"
+
+#, php-format
+msgid "TU/e data: %s"
+msgstr "TU/e data: %s"
 
 msgid "TU/e-gebruikersnaam"
-msgstr "TU/e username"
+msgstr "TU/e-gebruikersnaam"
 
-msgid "Taalinstellingen"
-msgstr "Language settings"
+msgid "TU/e-username"
+msgstr "TU/e-username"
 
 msgid "Telefoonnummer"
-msgstr "Phone number"
+msgstr "Telefoonnummer"
+
+msgid "The changes have been applied!"
+msgstr "The changes have been applied!"
+
+msgid "The changes have not been applied."
+msgstr "The changes have not been applied."
+
+msgid "The database currently only accepts logins using your GEWIS m-account."
+msgstr "The database currently only accepts logins using your GEWIS m-account."
+
+msgid ""
+"The database currently only accepts logins using your database credentials."
+msgstr ""
+"The database currently only accepts logins using your database credentials."
+
+msgid "The entities that you can use:"
+msgstr "The entities that you can use:"
+
+msgid "The organ to be abolished includes the following members:"
+msgstr "The organ to be abolished includes the following members:"
+
+msgid "The query did not return any results."
+msgstr "The query did not return any results."
 
 msgid "The requested URL could not be matched by routing."
 msgstr "The requested URL could not be matched by routing."
@@ -292,36 +945,117 @@ msgstr "The requested controller was not dispatchable."
 msgid "The requested controller was unable to dispatch the request."
 msgstr "The requested controller was unable to dispatch the request."
 
-msgid "Thuisadres (ouders)"
-msgstr "Home Address (address of your parents)"
+msgid "There are currently no data update requests."
+msgstr "There are currently no data update requests."
+
+msgid "There are other decisions that still refer to this decision."
+msgstr "There are other decisions that still refer to this decision."
+
+msgid ""
+"There are too many results to display. Try filtering to see other results."
+msgstr ""
+"There are too many results to display. Try filtering to see other results."
+
+#, php-format
+msgid ""
+"This is because %s is/has been a member of an organ and/or has budgets/"
+"statements to their name."
+msgstr ""
+"This is because %s is/has been a member of an organ and/or has budgets/"
+"statements to their name."
+
+msgid "This meeting has no decisions (yet)."
+msgstr "This meeting has no decisions (yet)."
+
+msgid ""
+"This member has been deleted, you cannot edit their information. Only the "
+"name of this member is stored so that decisions that mention this member "
+"remain correct."
+msgstr ""
+"This member has been deleted, you cannot edit their information. Only the "
+"name of this member is stored so that decisions that mention this member "
+"remain correct."
+
+msgid "This member is not installed in an organ."
+msgstr "This member is not installed in an organ."
+
+msgid "Toggle Navigation"
+msgstr "Toggle Navigation"
 
 msgid "Tussenvoegsels"
-msgstr "Last Name Preposition"
+msgstr "Tussenvoegsels"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Unknown"
+msgstr "Unknown"
+
+#, php-format
+msgid "Update %s of %s"
+msgstr "Update %s of %s"
+
+msgid "Update / Renew"
+msgstr "Update / Renew"
+
+msgid "Update Address"
+msgstr "Update Address"
+
+msgid "Update with data from the TU/e"
+msgstr "Update with data from the TU/e"
+
+msgid "User"
+msgstr "User"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Version"
+msgstr "Version"
 
 msgid "Verwijder handtekening"
-msgstr "Remove signature"
+msgstr "Verwijder handtekening"
+
+msgid "View"
+msgstr "View"
+
+msgid "View Update Requests"
+msgstr "View Update Requests"
+
+msgid "Virt (Virtual Meeting)"
+msgstr "Virt (Virtual Meeting)"
 
 msgid ""
 "Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
 "nodig. Deze kan je hieronder in het vakje tekenen."
 msgstr ""
-"For the automatic one-time SEPA Direct Debit mandate we require your "
-"signature. You can enter it in the square below."
-
-msgid "Voorletter(s)"
-msgstr "Initial(s)"
+"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
+"nodig. Deze kan je hieronder in het vakje tekenen."
 
 msgid "Voorletters"
-msgstr "Initials"
+msgstr "Voorletters"
 
 msgid "Voornaam"
-msgstr "First name"
+msgstr "Voornaam"
+
+msgid "Wants to Receive Supremum"
+msgstr "Wants to Receive Supremum"
+
+msgid ""
+"Warning: the e-mail address of the member will be updated! This will require "
+"additional changes to any mailing lists the member is added to."
+msgstr ""
+"Warning: the e-mail address of the member will be updated! This will require "
+"additional changes to any mailing lists the member is added to."
 
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr "We cannot determine at this time why a 404 was generated."
-
-msgid "Weet je zeker dat je jonger bent dan 10 jaar?"
-msgstr "Are you sure you are under 10 years old?"
 
 msgid ""
 "Welkom! Met dit formulier kun je je inschrijven voor een\n"
@@ -329,12 +1063,22 @@ msgid ""
 "kost\n"
 "eenmalig 15 euro."
 msgstr ""
-"Welcome! With this form, you can apply for a membership\n"
-"of GEWIS. The membership is valid as long as you study and has a one-time\n"
-"15 euro membership fee."
+"Welkom! Met dit formulier kun je je inschrijven voor een\n"
+"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
+"kost\n"
+"eenmalig 15 euro."
+
+msgid "With Modifications"
+msgstr "With Modifications"
+
+msgid "Without Modifications"
+msgstr "Without Modifications"
 
 msgid "Woonplaats en Postcode"
-msgstr "City and postal code"
+msgstr "Woonplaats en Postcode"
+
+msgid "Yes"
+msgstr "Yes"
 
 #, php-format
 msgid ""
@@ -342,19 +1086,31 @@ msgid ""
 "This means that GEWIS will debit &euro;15,- from your bank account. You only "
 "have to pay once for\n"
 "the entire duration of your studies. Please make sure your bank accepts SEPA "
-"Direct Debits. \n"
+"Direct Debits.\n"
 "Note that if your bank account is not in Euros, a conversion to Euros takes "
-"place at your bank. \n"
+"place at your bank.\n"
 "Contact %s for any questions about your payment."
 msgstr ""
 "You can pay for your GEWIS membership using a SEPA direct debit.\n"
 "This means that GEWIS will debit &euro;15,- from your bank account. You only "
 "have to pay once for\n"
 "the entire duration of your studies. Please make sure your bank accepts SEPA "
-"Direct Debits. \n"
+"Direct Debits.\n"
 "Note that if your bank account is not in Euros, a conversion to Euros takes "
-"place at your bank. \n"
+"place at your bank.\n"
 "Contact %s for any questions about your payment."
+
+msgid "You have to accept the terms!"
+msgstr "You have to accept the terms!"
+
+msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
+msgstr "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
+
+msgid "as"
+msgstr "as"
+
+msgid "reads as follows:"
+msgstr "reads as follows:"
 
 #, php-format
 msgid "resolves to %s"

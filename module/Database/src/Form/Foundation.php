@@ -13,6 +13,7 @@ use Laminas\Form\Element\{
     Text,
 };
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\{
     NotEmpty,
     StringLength,
@@ -21,6 +22,7 @@ use Laminas\Validator\{
 class Foundation extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
+        private readonly Translator $translator,
         MeetingFieldset $meeting,
         MemberFunctionFieldset $function,
     ) {
@@ -32,12 +34,12 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
             'options' => [
                 'label' => 'Type',
                 'value_options' => [
-                    'committee' => 'Commissie',
-                    'avc' => 'ALV-Commissie',
-                    'avw' => 'ALV-Werkgroep',
-                    'kcc' => 'KCC',
-                    'fraternity' => 'Dispuut',
-                    'rva' => 'RvA',
+                    'committee' => $this->translator->translate('Committee'),
+                    'fraternity' => $this->translator->translate('Fraternity'),
+                    'avc' => $this->translator->translate('GMM Committee'),
+                    'avw' => $this->translator->translate('GMM Taskforce'),
+                    'kcc' => $this->translator->translate('Financial Audit Committee'),
+                    'rva' => $this->translator->translate('Advisory Board'),
                 ],
             ],
         ]);
@@ -46,7 +48,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
             'name' => 'name',
             'type' => Text::class,
             'options' => [
-                'label' => 'Naam',
+                'label' => $this->translator->translate('Name'),
             ],
         ]);
 
@@ -54,7 +56,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
             'name' => 'abbr',
             'type' => Text::class,
             'options' => [
-                'label' => 'Afkorting',
+                'label' => $this->translator->translate('Abbreviation'),
             ],
         ]);
 
@@ -63,7 +65,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
             'name' => 'members',
             'type' => CollectionWithErrors::class,
             'options' => [
-                'label' => 'Members',
+                'label' => $this->translator->translate('Members'),
                 'count' => 2,
                 'allow_add' => true,
                 'should_create_template' => true,
@@ -75,7 +77,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Richt op',
+                'value' => $this->translator->translate('Found Organ'),
             ],
         ]);
     }

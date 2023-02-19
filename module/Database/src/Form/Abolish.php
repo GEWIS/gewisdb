@@ -11,10 +11,12 @@ use Laminas\Form\Element\{
     Text,
 };
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class Abolish extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
+        private readonly Translator $translator,
         MeetingFieldset $meeting,
         SubDecisionFieldset $subdecision,
     ) {
@@ -24,7 +26,7 @@ class Abolish extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'name',
             'type' => Text::class,
             'options' => [
-                'label' => 'Orgaan',
+                'label' => $this->translator->translate('Organ'),
             ],
         ]);
 
@@ -32,7 +34,7 @@ class Abolish extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Hef orgaan op',
+                'value' => $this->translator->translate('Abolish Organ'),
             ],
         ]);
 

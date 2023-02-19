@@ -1,6 +1,6 @@
 <h1><?= $this->translate('Data Update Requests')?></h1>
 <?php if (empty($updates)): ?>
-    Er zijn geen update verzoeken.
+    <?= $this->translate('There are currently no data update requests.') ?>
 <?php else: ?>
     <table class="table">
         <thead>

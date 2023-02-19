@@ -9,11 +9,14 @@ use Laminas\Form\Element\{
 };
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class Export extends Form implements InputFilterProviderInterface
 {
-    public function __construct(MeetingMapper $meetingMapper)
-    {
+    public function __construct(
+        private readonly Translator $translator,
+        MeetingMapper $meetingMapper,
+    ) {
         parent::__construct();
 
         $this->add([
@@ -23,7 +26,7 @@ class Export extends Form implements InputFilterProviderInterface
                 'multiple' => 'multiple',
             ],
             'options' => [
-                'label' => 'Vergaderingen',
+                'label' => $this->translator->translate('Meetings'),
                 'value_options' => $this->getValueOptions($meetingMapper),
             ],
         ]);
@@ -32,7 +35,7 @@ class Export extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Exporteer',
+                'value' => $this->translator->translate('Export Decisions'),
             ],
         ]);
     }

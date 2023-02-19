@@ -20,7 +20,7 @@ $fs = $form->get('meeting')
 <?php
 $element = $form->get('content');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Besluit');
+$element->setAttribute('placeholder', $this->translate('Decision'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -30,7 +30,7 @@ $element->setAttribute('placeholder', 'Besluit');
 
 <?php
 $submit = $form->get('submit');
-$submit->setLabel('Maak besluit');
+$submit->setLabel($this->translate('Add Decision'));
 $submit->setAttribute('class', 'btn btn-primary');
 ?>
 <?= $this->formButton($submit) ?>

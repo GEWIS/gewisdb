@@ -18,7 +18,7 @@ $(document).ready(function () {
                     table += '<tr ' + (member.deleted ? 'class="deleted"' : '') + '>';
                     table += '<td>' + link + member.lidnr + '</a></td>';
                     table += '<td>' + link + member.fullName + '</a></td>';
-                    table += '<td>' + link + ((null == member.email) ? 'Onbekend' : member.email) + '</a></td>';
+                    table += '<td>' + link + ((null == member.email) ? '<?= $this->translate('Unknown') ?>' : member.email) + '</a></td>';
                     table += '<td>' + link + member.generation + '</a></td>';
                     table += '<td>' + link + member.expiration + '</a></td>';
                     table += '</tr>';
@@ -46,29 +46,35 @@ $(document).ready(function () {
 </script>
 <form role="form">
     <div class="form-group">
-        <label for="">Zoeken op lid</label>
-        <input type="text" class="form-control" placeholder="Zoek" id="member-search" autofocus>
+        <label for=""><?= $this->translate('Search Members') ?></label>
+        <input type="text" class="form-control" placeholder="<?= $this->translate('Search') ?>" id="member-search" autofocus>
     </div>
 </form>
 
 <table class="table table-hover" id="members-result">
     <thead>
-    <tr>
-        <th>#</th>
-        <th>Naam</th>
-        <th>Email</th>
-        <th>Generatie</th>
-        <th>Verloopdatum</th>
-    </tr>
+        <tr>
+            <th>#</th>
+            <th><?= $this->translate('Name') ?></th>
+            <th><?= $this->translate('E-mail Address') ?></th>
+            <th><?= $this->translate('Generation') ?></th>
+            <th><?= $this->translate('Expiration') ?></th>
+        </tr>
     </thead>
     <tbody>
     </tbody>
     <tfoot>
-    <tr>
-        <td colspan="4"> Er zijn teveel resultaten om weer te geven. Probeer te filteren om andere resultaten te zien.</td>
-    </tr>
+        <tr>
+            <td colspan="4">
+                <?= $this->translate('There are too many results to display. Try filtering to see other results.') ?>
+            </td>
+        </tr>
     </tfoot>
 </table>
 
-<a href="<?= $this->url('member/default', ['action' => 'subscribe']) ?>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Schrijf lid in</a>
-<a href="<?= $this->url('member/updates') ?>" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span> <?= $this->translate('View Update Requests') ?></a>
+<a href="<?= $this->url('member/default', ['action' => 'subscribe']) ?>" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Register Member') ?>
+</a>
+<a href="<?= $this->url('member/updates') ?>" class="btn btn-info">
+    <span class="glyphicon glyphicon-refresh"></span> <?= $this->translate('View Update Requests') ?>
+</a>

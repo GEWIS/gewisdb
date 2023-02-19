@@ -29,7 +29,12 @@ $element->setAttribute('placeholder', $element->getLabel());
             ):
             ?>
                 <div class="text-warning">
-                    <?= 'TU/e data: ' . $tueData->computedLastName() ?>
+                    <?=
+                        sprintf(
+                            $this->translate('TU/e data: %s'),
+                            $this->escapeHtml($tueData->computedLastName()),
+                        )
+                    ?>
                 </div>
             <?php
             endif;
@@ -54,7 +59,12 @@ $element->setAttribute('placeholder', $element->getLabel());
             ):
                 ?>
                 <div class="text-warning">
-                    <?= 'TU/e data: ' . $tueData->computedPrefixName() ?>
+                    <?=
+                        sprintf(
+                            $this->translate('TU/e data: %s'),
+                            $this->escapeHtml($tueData->computedPrefixName()),
+                        )
+                    ?>
                 </div>
             <?php
             endif;
@@ -79,7 +89,12 @@ $element->setAttribute('placeholder', $element->getLabel());
             ):
                 ?>
                 <div class="text-warning">
-                    <?= 'TU/e data: ' . $tueData->getInitials() ?>
+                    <?=
+                        sprintf(
+                            $this->translate('TU/e data: %s'),
+                            $this->escapeHtml($tueData->getInitials()),
+                        )
+                    ?>
                 </div>
             <?php
             endif;
@@ -104,7 +119,12 @@ $element->setAttribute('placeholder', $element->getLabel());
             ):
                 ?>
                 <div class="text-warning">
-                    <?= 'TU/e data: ' . $tueData->getFirstName() ?>
+                    <?=
+                        sprintf(
+                            $this->translate('TU/e data: %s'),
+                            $this->escapeHtml($tueData->getFirstName()),
+                        )
+                    ?>
                 </div>
             <?php
             endif;

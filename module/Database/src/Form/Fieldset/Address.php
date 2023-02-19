@@ -33,16 +33,16 @@ class Address extends Fieldset implements InputFilterProviderInterface
             'name' => 'country',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Land'),
+                'label' => $translator->translate('Country'),
             ],
         ]);
-        $this->get('country')->setValue('netherlands');
+        $this->get('country')->setValue('NETHERLANDS');
 
         $this->add([
             'name' => 'street',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Straat'),
+                'label' => $translator->translate('Street'),
             ],
         ]);
 
@@ -50,7 +50,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
             'name' => 'number',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Huisnummer'),
+                'label' => $translator->translate('House Number'),
             ],
         ]);
 
@@ -58,7 +58,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
             'name' => 'postalCode',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Postcode'),
+                'label' => $translator->translate('Postal Code'),
             ],
         ]);
 
@@ -66,7 +66,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
             'name' => 'city',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Stad'),
+                'label' => $translator->translate('City'),
             ],
         ]);
 
@@ -74,7 +74,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
             'name' => 'phone',
             'type' => Text::class,
             'options' => [
-                'label' => $translator->translate('Telefoonnummer'),
+                'label' => $translator->translate('Phone Number'),
             ],
         ]);
 

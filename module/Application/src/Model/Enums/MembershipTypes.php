@@ -17,10 +17,10 @@ enum MembershipTypes: string
     public function getName(Translator $translator): string
     {
         return match ($this) {
-            self::Ordinary => $translator->translate('Gewoon'),
-            self::External => $translator->translate('Extern'),
-            self::Graduate => $translator->translate('Afgestudeerde'),
-            self::Honorary => $translator->translate('Erelid'),
+            self::Ordinary => $translator->translate('Ordinary'),
+            self::External => $translator->translate('External'),
+            self::Graduate => $translator->translate('Graduate'),
+            self::Honorary => $translator->translate('Honorary'),
         };
     }
 }

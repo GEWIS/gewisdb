@@ -1,4 +1,11 @@
-<h1>Wijzig lidmaatschapstype <?= $member->getFullName() ?></h1>
+<h1>
+    <?=
+        sprintf(
+            $this->translate('Change Membership Type of %s'),
+            $this->escapeHtml($member->getFullName()),
+        )
+    ?>
+</h1>
 <?php
 $form->prepare();
 
@@ -18,14 +25,14 @@ $element->setValue($member->getType()->value);
     <div class="form-group">
         <label for="<?= $element->getName() ?>" class="control-label col-sm-2"><?= $element->getLabel() ?></label>
         <div class="col-sm-10">
-        <?php foreach ($element->getValueOptions() as $option => $text): ?>
-            <div class="radio">
-                <label>
-                <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
-                    <?= $text ?>
-                </label>
-            </div>
-        <?php endforeach ?>
+            <?php foreach ($element->getValueOptions() as $option => $text): ?>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
+                        <?= $text ?>
+                    </label>
+                </div>
+            <?php endforeach ?>
         <?= $this->formElementErrors($element) ?>
         </div>
     </div>

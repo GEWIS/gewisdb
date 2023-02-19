@@ -2,12 +2,20 @@
 use Database\Model\Meeting;
 ?>
 <?php if (isset($error) && $error): ?>
-<h1>Besluit kan niet verwijderd worden</h1>
-Er bestaan nog besluiten die naar dit besluit verwijzen.
+<h1><?= $this->translate('Decision Cannot Be Removed') ?></h1>
+<?= $this->translate('There are other decisions that still refer to this decision.') ?>
 <?php else: ?>
 <?php if (!isset($form)): ?>
-<p>Besluit verwijderd.</p>
-<a href="<?= $this->url('meeting/view', array('type' => $type->value, 'number' => $number)) ?>">Terug naar <?= $type->value ?> <?= $number ?></a>
+<p><?= $this->translate('Decision removed.') ?></p>
+<a href="<?= $this->url('meeting/view', array('type' => $type->value, 'number' => $number)) ?>">
+    <?=
+        sprintf(
+            $this->translate('Back to %s %d'),
+            $type->value,
+            $number,
+        )
+    ?>
+</a>
 <?php else:
 $form->prepare();
 
@@ -24,9 +32,15 @@ echo $this->form()->openTag($form);
 ?>
 
 <p>
-Weet je zeker dat besluit
-<?= $type->value . " $number.$point.$decision " ?>
-verwijderd moet worden?
+    <?=
+        sprintf(
+            $this->translate('Are your sure that you want to delete decision %s %d.%d.%d?'),
+            $type->value,
+            $number,
+            $point,
+            $decision,
+        )
+    ?>
 </p>
 <div class="form-group">
 <?php

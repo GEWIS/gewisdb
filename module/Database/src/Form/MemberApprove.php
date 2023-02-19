@@ -2,22 +2,20 @@
 
 namespace Database\Form;
 
-use Application\Model\Enums\MembershipTypes;
 use Laminas\Form\Element\Checkbox;
-use Laminas\Form\Form;
-use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class MemberApprove extends MemberType
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
-        parent::__construct();
+        parent::__construct($this->translator);
 
         $this->add([
             'name' => 'updatedata',
             'type' => Checkbox::class,
             'options' => [
-                'label' => 'Update name with data from TU/e',
+                'label' => $this->translator->translate('Update with data from the TU/e'),
                 'use_hidden_element' => false,
             ],
         ]);

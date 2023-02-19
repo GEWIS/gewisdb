@@ -48,10 +48,24 @@ case 'other':
 $meeting = $decision->getMeeting();
 $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . $decision->getPoint() . '.' . $decision->getNumber();
 ?>
-<h2>Besluit <?= $decisionNum ?> luidt als volgt:</h1>
+<h1><?= $this->translate('Decision') ?> <?= $decisionNum ?> <?= $this->translate('reads as follows:') ?></h1>
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
     <?= $subdecision->getContent() ?>
 <?php endforeach; ?>
 <br />
-    <a href="<?= $this->url('meeting/view', array('type' => $meeting->getType()->value, 'number' => $meeting->getNumber())) ?>">Terug naar <?= $meeting->getType()->value ?> <?= $meeting->getNumber() ?></a>
+    <a href="<?= $this->url(
+        'meeting/view',
+        [
+            'type' => $meeting->getType()->value,
+            'number' => $meeting->getNumber(),
+        ],
+    ) ?>">
+        <?=
+            sprintf(
+                $this->translate('Back to %s %d'),
+                $meeting->getType()->value,
+                $meeting->getNumber(),
+            )
+        ?>
+    </a>
 <?php endif; ?>

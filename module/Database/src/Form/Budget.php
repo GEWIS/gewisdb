@@ -2,6 +2,10 @@
 
 namespace Database\Form;
 
+use Database\Form\Fieldset\{
+    Meeting as MeetingFieldset,
+    Member as MemberFieldset,
+};
 use Laminas\Form\Element\{
     Date,
     Radio,
@@ -9,11 +13,8 @@ use Laminas\Form\Element\{
     Submit,
     Text,
 };
-use Database\Form\Fieldset\{
-    Meeting as MeetingFieldset,
-    Member as MemberFieldset,
-};
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\{
     Date as DateValidator,
     InArray,
@@ -23,6 +24,7 @@ use Laminas\Validator\{
 class Budget extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(
+        private readonly Translator $translator,
         MeetingFieldset $meeting,
         MemberFieldset $member,
     ) {
@@ -32,10 +34,10 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'type',
             'type' => Select::class,
             'options' => [
-                'label' => 'Begroting / Afrekening',
+                'label' => $this->translator->translate('Budget/Statement'),
                 'value_options' => [
-                    'budget' => 'Begroting',
-                    'reckoning' => 'Afrekening',
+                    'budget' => $this->translator->translate('Budget'),
+                    'reckoning' => $this->translator->translate('Statement'),
                 ],
             ],
         ]);
@@ -44,7 +46,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'name',
             'type' => Text::class,
             'options' => [
-                'label' => 'Naam',
+                'label' => $this->translator->translate('Name'),
             ],
         ]);
 
@@ -52,19 +54,19 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'date',
             'type' => Date::class,
             'options' => [
-                'label' => 'Datum begroting / afrekening',
+                'label' => $this->translator->translate('Date of Budget/Statement'),
             ],
         ]);
 
         $member->setName('author');
-        $member->setLabel('Auteur');
+        $member->setLabel($this->translator->translate('Author'));
         $this->add($member);
 
         $this->add([
             'name' => 'version',
             'type' => Text::class,
             'options' => [
-                'label' => 'Versie',
+                'label' => $this->translator->translate('Version'),
             ],
         ]);
 
@@ -72,10 +74,10 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'approve',
             'type' => Radio::class,
             'options' => [
-                'label' => 'Goedkeuren / Afkeuren',
+                'label' => $this->translator->translate('Approval'),
                 'value_options' => [
-                    '1' => 'Goedkeuren',
-                    '0' => 'Afkeuren',
+                    '1' => $this->translator->translate('Approve'),
+                    '0' => $this->translator->translate('Disapprove'),
                 ],
             ],
         ]);
@@ -84,10 +86,10 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'changes',
             'type' => Radio::class,
             'options' => [
-                'label' => 'Wijzigingen',
+                'label' => $this->translator->translate('Modifications'),
                 'value_options' => [
-                    '1' => 'Met wijzigingen',
-                    '0' => 'Zonder wijzigingen',
+                    '1' => $this->translator->translate('With Modifications'),
+                    '0' => $this->translator->translate('Without Modifications'),
                 ],
             ],
         ]);
@@ -96,7 +98,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Verzend',
+                'value' => $this->translator->translate('Add Budget/Statement'),
             ],
         ]);
     }

@@ -12,7 +12,6 @@ use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
 use Database\Form\{
     Address as AddressForm,
-    AddressExport as AddressExportForm,
     DeleteAddress as DeleteAddressForm,
     Member as MemberForm,
     MemberApprove as MemberApproveForm,
@@ -43,6 +42,7 @@ use Laminas\Mime\{
     Part as MimePart,
     Message as MimeMessage,
 };
+use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
 use ReflectionClass;
@@ -54,8 +54,8 @@ use function random_bytes;
 class Member
 {
     public function __construct(
+        private readonly Translator $translator,
         private readonly AddressForm $addressForm,
-        private readonly AddressExportForm $addressExportForm,
         private readonly DeleteAddressForm $deleteAddressForm,
         private readonly MemberApproveForm $memberApproveForm,
         private readonly MemberForm $memberForm,
@@ -928,7 +928,7 @@ class Member
         $lists = $this->mailingListService->getAllLists();
 
         return [
-            'form' => new MemberListsForm($member, $lists),
+            'form' => new MemberListsForm($this->translator, $member, $lists),
             'member' => $member,
             'lists' => $lists,
         ];
@@ -963,14 +963,6 @@ class Member
     public function getDeleteAddressForm(): DeleteAddressForm
     {
         return $this->deleteAddressForm;
-    }
-
-    /**
-     * Get address export form.
-     */
-    public function getAddressExportForm(): AddressExportForm
-    {
-        return $this->addressExportForm;
     }
 
     /**

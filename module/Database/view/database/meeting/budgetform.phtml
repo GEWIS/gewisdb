@@ -66,7 +66,7 @@ $element->setAttribute('class', 'form-control');
 <?php
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Naam');
+$element->setAttribute('placeholder', $this->translate('Name'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -77,7 +77,7 @@ $element->setAttribute('placeholder', 'Naam');
 <?php
 $element = $form->get('date');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Datum begroting / afrekening');
+$element->setAttribute('placeholder', $this->translate('Date of Budget/Statement'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -109,7 +109,7 @@ $el->setAttribute('placeholder', $el->getLabel());
 <?php
 $element = $form->get('version');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', 'Versie');
+$element->setAttribute('placeholder', $this->translate('Version'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>

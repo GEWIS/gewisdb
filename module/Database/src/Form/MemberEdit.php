@@ -7,12 +7,12 @@ use Laminas\Form\Element\{
     Checkbox,
     Date,
     Email,
-    Radio,
     Submit,
     Text,
 };
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\{
     Digits,
     EmailAddress,
@@ -22,7 +22,7 @@ use Laminas\Validator\{
 
 class MemberEdit extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct(private readonly Translator $translator)
     {
         parent::__construct();
 
@@ -30,7 +30,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'lastName',
             'type' => Text::class,
             'options' => [
-                'label' => 'Achternaam',
+                'label' => $this->translator->translate('Last Name'),
             ],
         ]);
 
@@ -38,7 +38,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'middleName',
             'type' => Text::class,
             'options' => [
-                'label' => 'Tussenvoegsels',
+                'label' => $this->translator->translate('Last Name Prepositional Particle'),
             ],
         ]);
 
@@ -46,7 +46,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'initials',
             'type' => Text::class,
             'options' => [
-                'label' => 'Voorletter(s)',
+                'label' => $this->translator->translate('Initial(s)'),
             ],
         ]);
 
@@ -54,7 +54,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'firstName',
             'type' => Text::class,
             'options' => [
-                'label' => 'Voornaam',
+                'label' => $this->translator->translate('First Name'),
             ],
         ]);
 
@@ -62,7 +62,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'tueUsername',
             'type' => Text::class,
             'options' => [
-                'label' => 'TU/e-gebruikersnaam',
+                'label' => $this->translator->translate('TU/e-username'),
             ],
         ]);
 
@@ -70,7 +70,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'email',
             'type' => Email::class,
             'options' => [
-                'label' => 'Email-adres',
+                'label' => $this->translator->translate('E-mail Address'),
             ],
         ]);
 
@@ -78,7 +78,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'birth',
             'type' => Date::class,
             'options' => [
-                'label' => 'Geboortedatum',
+                'label' => $this->translator->translate('Birthdate'),
             ],
         ]);
 
@@ -86,7 +86,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'paid',
             'type' => Text::class,
             'options' => [
-                'label' => 'Betaald (hoe veel)',
+                'label' => $this->translator->translate('Paid (Amount)'),
             ],
         ]);
 
@@ -94,7 +94,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'hidden',
             'type' => Checkbox::class,
             'options' => [
-                'label' => 'Hide member',
+                'label' => $this->translator->translate('Hide Member'),
             ],
         ]);
 
@@ -102,7 +102,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Wijzig gegevens',
+                'value' => $this->translator->translate('Change Data'),
             ],
         ]);
     }
@@ -175,7 +175,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                         'options' => [
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => [
-                                'regexNotMatch' => 'Een TU/e-gebruikersnaam ziet er uit als sXXXXXX of als YYYYXXXX.',
+                                'regexNotMatch' => $this->translator->translate('A TU/e-username should look like sYYxxxx or YYYYxxxx.'),
                             ],
                         ],
                     ],

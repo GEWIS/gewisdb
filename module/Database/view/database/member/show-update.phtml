@@ -4,39 +4,39 @@
         <table class="table table-bordered">
             <tr>
                 <th></th>
-                <th><?= $this->translate('Current data') ?></th>
-                <th><?= $this->translate('Proposed data') ?></th>
+                <th><?= $this->translate('Current Data') ?></th>
+                <th><?= $this->translate('Proposed Data') ?></th>
             </tr>
             <tr>
-                <th><?= $this->translate('Initials') ?></th>
+                <th><?= $this->translate('Initial(s)') ?></th>
                 <td><?= $member->getInitials() ?></td>
                 <td class="<?= ($member->getInitials() !== $memberUpdate->getInitials()) ? 'data-updated' : ''?>">
                     <?= $memberUpdate->getInitials() ?>
                 </td>
             </tr>
             <tr>
-                <th><?= $this->translate('First name') ?></th>
+                <th><?= $this->translate('First Name') ?></th>
                 <td><?= $member->getFirstName() ?></td>
                 <td class="<?= ($member->getFirstName() !== $memberUpdate->getFirstName()) ? 'data-updated' : ''?>">
                     <?= $memberUpdate->getFirstName() ?>
                 </td>
             </tr>
             <tr>
-                <th><?= $this->translate('Last name preposition') ?></th>
+                <th><?= $this->translate('Last Name Prepositional Particle') ?></th>
                 <td><?= $member->getMiddleName() ?></td>
                 <td class="<?= ($member->getMiddleName() !== $memberUpdate->getMiddleName()) ? 'data-updated' : ''?>">
                     <?= $memberUpdate->getMiddleName() ?>
                 </td>
             </tr>
             <tr>
-                <th><?= $this->translate('Last name') ?></th>
+                <th><?= $this->translate('Last Name') ?></th>
                 <td><?= $member->getLastName() ?></td>
                 <td class="<?= ($member->getLastName() !== $memberUpdate->getLastName()) ? 'data-updated' : ''?>">
                     <?= $memberUpdate->getLastName() ?>
                 </td>
             </tr>
             <tr>
-                <th><?= $this->translate('E-mail address') ?></th>
+                <th><?= $this->translate('E-mail Address') ?></th>
                 <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
                 <td class="<?= ($member->getEmail() !== $memberUpdate->getEmail()) ? 'data-updated' : ''?>">
                     <a href="mailto:<?= $memberUpdate->getEmail() ?>"><?= $memberUpdate->getEmail() ?></a>

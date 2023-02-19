@@ -91,7 +91,7 @@ $element->setAttribute('id', 'destroy-number');
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
 $element->setAttribute('id', 'destroy-decision');
-$element->setAttribute('placeholder', 'Besluit');
+$element->setAttribute('placeholder', $this->translate('Decision'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -99,12 +99,12 @@ $element->setAttribute('placeholder', 'Besluit');
 </div>
 
 <p class="destroy-decision-display" style="display: none;">
-<strong>Besluit</strong> <strong class="destroy-decision-num"></strong>: <span class="destroy-decision-content"></span>
+<strong><?= $this->translate('Decision') ?></strong> <strong class="destroy-decision-num"></strong>: <span class="destroy-decision-content"></span>
 </p>
 
 <?php
 $submit = $form->get('submit');
-$submit->setLabel('Vernietig besluit');
+$submit->setLabel($this->translate('Annul Decision'));
 $submit->setAttribute('class', 'btn btn-primary');
 $submit->setAttribute('id', 'destroy-decision-button');
 $submit->setAttribute('disabled', 'disabled');
