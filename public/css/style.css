@@ -54,6 +54,22 @@ canvas#signature-canvas {
     color: #D40026
 }
 
+.nav-tabs-inverted {
+    border-bottom: 0;
+    border-top: 1px solid #ddd;
+}
+
+.nav-tabs-inverted > li > a {
+    border-radius: 0 0 4px 4px;
+}
+
+.nav-tabs-inverted > li.active > a,
+.nav-tabs-inverted > li.active > a:hover,
+.nav-tabs-inverted > li.active > a:focus {
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+}
+
 /* ENROLLMENT FORM */
 .navbar .container {
     padding-left: 15px;
