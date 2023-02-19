@@ -10,40 +10,46 @@ use Database\Model\Meeting;
 
 <ul class="nav nav-tabs nav-justified" id="decision-tabs">
     <li class="active"><a href="#begroting" data-toggle="tab"><?= $this->translate('Budget/Statement') ?></a></li>
-    <li><a href="#oprichting" data-toggle="tab"><?= $this->translate('Foundation') ?></a></li>
-    <li><a href="#opheffing" data-toggle="tab"><?= $this->translate('Abolition') ?></a></li>
-    <li><a href="#installatie" data-toggle="tab"><?= $this->translate('Installation/Discharge') ?></a></li>
+    <li><a href="#organ" data-toggle="tab"><?= $this->translate('Organ Mutations') ?></a></li>
     <li><a href="#board" data-toggle="tab"><?= $this->translate('Board Mutations') ?></a></li>
     <li><a href="#vernietig" data-toggle="tab"><?= $this->translate('Annul Decision') ?></a></li>
     <li><a href="#overig" data-toggle="tab"><?= $this->translate('Other') ?></a></li>
 </ul>
-
-<br />
-
 <div class="tab-content">
     <div class="tab-pane active" id="begroting">
-    <?= $this->partial('database/meeting/budgetform', array(
-        'form' => $forms['budget']
-    )); ?>
+        <br>
+        <?= $this->partial('database/meeting/budgetform', array(
+            'form' => $forms['budget']
+        )); ?>
     </div>
-    <div class="tab-pane" id="oprichting">
-    <?= $this->partial('database/meeting/foundationform', array(
-        'form' => $forms['foundation']
-    )); ?>
-    </div>
-    <div class="tab-pane" id="opheffing">
-    <?= $this->partial('database/meeting/abolishform', array(
-        'form' => $forms['abolish']
-    )); ?>
-    </div>
-    <div class="tab-pane" id="installatie">
-    <?= $this->partial('database/meeting/installform', array(
-        'form' => $forms['install'],
-        'memberfunction' => $memberfunction
-    )); ?>
+    <div class="tab-pane" id="organ">
+        <ul class="nav nav-tabs nav-tabs-inverted">
+            <li class="active"><a href="#oprichting" data-toggle="tab"><?= $this->translate('Foundation') ?></a></li>
+            <li><a href="#opheffing" data-toggle="tab"><?= $this->translate('Abolition') ?></a></li>
+            <li><a href="#installatie" data-toggle="tab"><?= $this->translate('Installation/Discharge') ?></a></li>
+        </ul>
+        <br />
+        <div class="tab-content">
+            <div class="tab-pane active" id="oprichting">
+                <?= $this->partial('database/meeting/foundationform', array(
+                    'form' => $forms['foundation']
+                )); ?>
+            </div>
+            <div class="tab-pane" id="opheffing">
+                <?= $this->partial('database/meeting/abolishform', array(
+                    'form' => $forms['abolish']
+                )); ?>
+            </div>
+            <div class="tab-pane" id="installatie">
+                <?= $this->partial('database/meeting/installform', array(
+                    'form' => $forms['install'],
+                    'memberfunction' => $memberfunction
+                )); ?>
+            </div>
+        </div>
     </div>
     <div class="tab-pane" id="board">
-        <ul class="nav nav-pills">
+        <ul class="nav nav-tabs nav-tabs-inverted">
             <li class="active">
                 <a href="#board-installatie" data-toggle="tab"><?= $this->translate('Installation') ?></a>
             </li>
@@ -72,14 +78,16 @@ use Database\Model\Meeting;
         </div>
     </div>
     <div class="tab-pane" id="vernietig">
+        <br>
         <?= $this->partial('database/meeting/destroyform', array(
             'form' => $forms['destroy'],
         )); ?>
     </div>
     <div class="tab-pane" id="overig">
-    <?= $this->partial('database/meeting/otherform', array(
-        'form' => $forms['other']
-    )); ?>
+        <br>
+        <?= $this->partial('database/meeting/otherform', array(
+            'form' => $forms['other']
+        )); ?>
     </div>
 </div>
 <?php endif ?>
