@@ -6,12 +6,14 @@ use Application\Model\Enums\MeetingTypes;
 use Database\Model\{
     Decision as DecisionModel,
     Meeting as MeetingModel,
-    SubDecision\Key\Granting as KeyGrantingModel,
-    SubDecision\Key\Withdrawal as KeyWithdrawalModel
 };
 use Database\Model\SubDecision\Board\{
     Discharge as BoardDischargeModel,
     Installation as BoardInstallationModel,
+};
+use Database\Model\SubDecision\Key\{
+    Granting as KeyGrantingModel,
+    Withdrawal as KeyWithdrawalModel,
 };
 use Database\Model\SubDecision\Destroy as DestroyModel;
 use DateTime;
