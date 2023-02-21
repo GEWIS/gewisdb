@@ -67,7 +67,7 @@ use Database\Model\Meeting;
             <div class="tab-pane" id="board-ontheffen">
                 <?= $this->partial('database/meeting/board/releaseform', array(
                     'form' => $forms['board_release'],
-                    'installs' => $installs
+                    'installs' => $installs_filtered
                 )); ?>
             </div>
             <div class="tab-pane" id="board-decharge">

@@ -112,6 +112,7 @@ class MeetingController extends AbstractActionController
             'decision' => $decision,
             'forms' => $this->getDecisionForms($meeting, $point, $decision),
             'installs' => $this->meetingService->getCurrentBoard(),
+            'installs_filtered' => $this->meetingService->getCurrentBoardNotYetReleased(),
             'grants' => $this->meetingService->getCurrentKeys(),
             'memberfunction' => $this->memberFunctionFieldset,
         ]);

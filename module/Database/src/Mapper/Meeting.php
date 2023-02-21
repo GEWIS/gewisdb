@@ -10,6 +10,7 @@ use Database\Model\{
 use Database\Model\SubDecision\Board\{
     Discharge as BoardDischargeModel,
     Installation as BoardInstallationModel,
+    Release as BoardReleaseModel
 };
 use Database\Model\SubDecision\Key\{
     Granting as KeyGrantingModel,
@@ -244,6 +245,46 @@ class Meeting
         // TODO: destroyed decisions (both ways!)
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDql()),
+        ));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findCurrentBoardNotYetReleased(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('i, m')
+            ->from(BoardInstallationModel::class, 'i')
+            ->join('i.member', 'm');
+
+        // remove discharges
+        $qbd = $this->em->createQueryBuilder();
+        $qbd->select('d')
+            ->from(BoardDischargeModel::class, 'd')
+            ->join('d.installation', 'x')
+            ->where('x.meeting_type = i.meeting_type')
+            ->andWhere('x.meeting_number = i.meeting_number')
+            ->andWhere('x.decision_point = i.decision_point')
+            ->andWhere('x.decision_number = i.decision_number')
+            ->andWhere('x.number = i.number');
+
+        // remove releases
+        $qbr = $this->em->createQueryBuilder();
+        $qbr->select('r')
+            ->from(BoardReleaseModel::class, 'r')
+            ->join('r.installation', 'y')
+            ->where('y.meeting_type = i.meeting_type')
+            ->andWhere('y.meeting_number = i.meeting_number')
+            ->andWhere('y.decision_point = i.decision_point')
+            ->andWhere('y.decision_number = i.decision_number')
+            ->andWhere('y.number = i.number');
+
+        // TODO: destroyed decisions (both ways!)
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbd->getDql()),
+        ));
+        $qb->andWhere($qb->expr()->not(
+            $qb->expr()->exists($qbr->getDql()),
         ));
 
         return $qb->getQuery()->getResult();
