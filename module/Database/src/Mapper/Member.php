@@ -51,8 +51,10 @@ class Member
      *
      * @return array<array-key, MemberModel>
      */
-    public function search(string $query): array
-    {
+    public function search(
+        string $query,
+        bool $filtered = false,
+    ): array {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
@@ -74,6 +76,10 @@ class Member
         if (is_numeric($query)) {
             $qb->orWhere("m.lidnr = :nr");
             $qb->setParameter(':nr', $query);
+        }
+
+        if ($filtered) {
+            $qb->andWhere('m.deleted = False AND m.hidden = False AND m.expiration > CURRENT_TIMESTAMP()');
         }
 
         return $qb->getQuery()->getResult();

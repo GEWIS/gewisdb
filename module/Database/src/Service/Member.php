@@ -499,6 +499,16 @@ class Member
     }
 
     /**
+     * Search for a member that is not deleted, expired, and hidden.
+     *
+     * @return array<array-key, MemberModel>
+     */
+    public function searchFiltered(string $query): array
+    {
+        return $this->getMemberMapper()->search($query, true);
+    }
+
+    /**
      * Search for a prospective member.
      *
      * @return array<array-key, ProspectiveMemberModel>

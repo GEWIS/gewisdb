@@ -22,7 +22,7 @@ $(document).ready(function () {
             // make an AJAX request
             $.ajax({
                 dataType: 'json',
-                url: '<?= $this->url('organ/default', array('action' => 'search')) ?>?q=' + rq.term,
+                url: '<?= $this->url('organ/default', ['action' => 'search']) ?>?q=' + rq.term,
                 context: document.body
             }).done(function(data) {
                 var ret = [];
@@ -157,7 +157,7 @@ $(document).ready(function () {
             // make an AJAX request
             $.ajax({
                 dataType: 'json',
-                url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + rq.term,
+                url: '<?= $this->url('member/default', ['action' => 'searchFiltered']) ?>?q=' + rq.term,
                 context: document.body
             }).done(function(data) {
                 var ret = [];
