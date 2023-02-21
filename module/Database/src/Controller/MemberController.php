@@ -78,6 +78,20 @@ class MemberController extends AbstractActionController
         ]);
     }
 
+    public function searchFilteredAction(): JsonModel
+    {
+        $query = $this->params()->fromQuery('q');
+        $res = $this->memberService->searchFiltered($query);
+
+        $res = array_map(function ($member) {
+            return $member->toArray();
+        }, $res);
+
+        return new JsonModel([
+            'json' => $res,
+        ]);
+    }
+
     /**
      * Show action.
      *
