@@ -245,7 +245,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -276,6 +276,13 @@
     <a href="classes/Checker-Service-Checker.html#property_installationService">$installationService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Checker-Service-Checker.html#property_keyService">$keyService</a>
+    <span>
+                        &nbsp;: <a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a>            </span>
 </dt>
 <dd></dd>
 
@@ -319,7 +326,7 @@
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Does a full check on each meeting, checking that after each meeting no database violation occur</dd>
+<dd>Does a full check on each meeting, checking that after each meeting no database violation occurs</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Checker.html#method_checkAtTUe">checkAtTUe()</a>
@@ -344,6 +351,22 @@ the remainder of the current association year.</dd>
 </dt>
 <dd>Does a full check on the last meeting (and all previous meetings) to determine if there are members who are
 currently installed in an organ that was abrogated (i.e. they were never discharged).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Checker-Service-Checker.html#method_checkKeyGrantingDuration">checkKeyGrantingDuration()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Checks that key codes that have been granted do not expire too late. In accordance with the current Key Policy
+this means that a key code may not be granted for a period longer than a year nor may it be granted for a period
+that ends after September 1st of the next association year.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime">checkKeyWithdrawalTime()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Checker.html#method_checkMembersExpiredButStillInOrgan">checkMembersExpiredButStillInOrgan()</a>
@@ -446,7 +469,7 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -480,7 +503,7 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -489,6 +512,40 @@ has ended.</dd>
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a></span>
     <span class="phpdocumentor-signature__name">$installationService</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_keyService">
+        $keyService
+        <a href="classes/Checker-Service-Checker.html#property_keyService" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$keyService</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -514,7 +571,7 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -548,7 +605,7 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -582,7 +639,7 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -616,7 +673,7 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -654,14 +711,14 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installationService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Member.html"><abbr title="\Checker\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installationService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keyService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Member.html"><abbr title="\Checker\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -670,6 +727,14 @@ has ended.</dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$installationService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$keyService</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -738,11 +803,11 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Does a full check on each meeting, checking that after each meeting no database violation occur</p>
+        <p class="phpdocumentor-summary">Does a full check on each meeting, checking that after each meeting no database violation occurs</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -771,7 +836,7 @@ has ended.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">315</span>
+    <span class="phpdocumentor-element-found-in__line">377</span>
 
     </aside>
 
@@ -806,7 +871,7 @@ the remainder of the current association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">465</span>
+    <span class="phpdocumentor-element-found-in__line">527</span>
 
     </aside>
 
@@ -839,7 +904,7 @@ the remainder of the current association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
@@ -866,6 +931,96 @@ currently installed in an organ that was abrogated (i.e. they were never dischar
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_checkKeyGrantingDuration">
+        checkKeyGrantingDuration()
+        <a href="classes/Checker-Service-Checker.html#method_checkKeyGrantingDuration" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">316</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Checks that key codes that have been granted do not expire too late. In accordance with the current Key Policy
+this means that a key code may not be granted for a period longer than a year nor may it be granted for a period
+that ends after September 1st of the next association year.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">checkKeyGrantingDuration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$meeting</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_checkKeyWithdrawalTime">
+        checkKeyWithdrawalTime()
+        <a href="classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">353</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">checkKeyWithdrawalTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$meeting</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_checkMembersExpiredButStillInOrgan">
         checkMembersExpiredButStillInOrgan()
         <a href="classes/Checker-Service-Checker.html#method_checkMembersExpiredButStillInOrgan" class="headerlink"><i class="fas fa-link"></i></a>
@@ -873,7 +1028,7 @@ currently installed in an organ that was abrogated (i.e. they were never dischar
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">157</span>
 
     </aside>
 
@@ -920,7 +1075,7 @@ currently installed in an organ that was abrogated (i.e. they were never dischar
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">178</span>
+    <span class="phpdocumentor-element-found-in__line">184</span>
 
     </aside>
 
@@ -968,7 +1123,7 @@ anymore, or they are an inactive member.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
@@ -1019,7 +1174,7 @@ is nulled</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">434</span>
+    <span class="phpdocumentor-element-found-in__line">496</span>
 
     </aside>
 
@@ -1052,7 +1207,7 @@ is nulled</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">245</span>
+    <span class="phpdocumentor-element-found-in__line">251</span>
 
     </aside>
 
@@ -1100,7 +1255,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">374</span>
+    <span class="phpdocumentor-element-found-in__line">436</span>
 
     </aside>
 
@@ -1134,7 +1289,7 @@ has ended.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">305</span>
+    <span class="phpdocumentor-element-found-in__line">367</span>
 
     </aside>
 
@@ -1167,7 +1322,7 @@ has ended.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">485</span>
+    <span class="phpdocumentor-element-found-in__line">547</span>
 
     </aside>
 
@@ -1210,7 +1365,7 @@ has ended.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -1262,7 +1417,7 @@ has ended.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 

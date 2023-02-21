@@ -576,6 +576,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Mapper-Factory-InstallationFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Checker\\Mapper\\Factory\\KeyFactory",
+            "name": "KeyFactory",
+            "summary": "",
+            "url": "classes/Checker-Mapper-Factory-KeyFactory.html"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Factory\\KeyFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Checker-Mapper-Factory-KeyFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Checker\\Mapper\\Factory\\MemberFactory",
             "name": "MemberFactory",
             "summary": "",
@@ -640,6 +650,31 @@ Search.appendIndex(
             "name": "em",
             "summary": "",
             "url": "classes/Checker-Mapper-Installation.html#property_em"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Key",
+            "name": "Key",
+            "summary": "Key\u0020mapper",
+            "url": "classes/Checker-Mapper-Key.html"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Key\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor",
+            "url": "classes/Checker-Mapper-Key.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Key\u003A\u003AfindKeysGrantedDuringMeeting\u0028\u0029",
+            "name": "findKeysGrantedDuringMeeting",
+            "summary": "Returns\u0020all\u0020the\u0020key\u0020code\u0020grantings\u0020in\u0020a\u0020meeting",
+            "url": "classes/Checker-Mapper-Key.html#method_findKeysGrantedDuringMeeting"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Key\u003A\u003AfindKeysWithdrawnDuringMeeting\u0028\u0029",
+            "name": "findKeysWithdrawnDuringMeeting",
+            "summary": "Returns\u0020all\u0020the\u0020key\u0020code\u0020withdrawals\u0020in\u0020a\u0020meeting",
+            "url": "classes/Checker-Mapper-Key.html#method_findKeysWithdrawnDuringMeeting"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Key\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Checker-Mapper-Key.html#property_em"
         },                {
             "fqsen": "\\Checker\\Mapper\\Member",
             "name": "Member",
@@ -715,6 +750,86 @@ Search.appendIndex(
             "name": "em",
             "summary": "",
             "url": "classes/Checker-Mapper-Organ.html#property_em"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedInThePast",
+            "name": "KeyGrantedInThePast",
+            "summary": "Error\u0020for\u0020when\u0020a\u0020key\u0020code\u0020is\u0020granted\u0020with\u0020a\u0020negative\u0020duration\u0020\u0028i.e.,\u0020its\u0020\u0060until\u0060\u0020is\u0020in\u0020the\u0020past\u0029.",
+            "url": "classes/Checker-Model-Error-KeyGrantedInThePast.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedInThePast\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-KeyGrantedInThePast.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedInThePast\u003A\u003AgetGranting\u0028\u0029",
+            "name": "getGranting",
+            "summary": "Get\u0020the\u0020granting.",
+            "url": "classes/Checker-Model-Error-KeyGrantedInThePast.html#method_getGranting"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedInThePast\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-KeyGrantedInThePast.html#method_asText"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedLongerThanOneYear",
+            "name": "KeyGrantedLongerThanOneYear",
+            "summary": "Error\u0020for\u0020when\u0020a\u0020key\u0020code\u0020is\u0020granted\u0020for\u0020a\u0020period\u0020longer\u0020than\u0020a\u0020year.",
+            "url": "classes/Checker-Model-Error-KeyGrantedLongerThanOneYear.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedLongerThanOneYear\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-KeyGrantedLongerThanOneYear.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedLongerThanOneYear\u003A\u003AgetGranting\u0028\u0029",
+            "name": "getGranting",
+            "summary": "Get\u0020the\u0020granting.",
+            "url": "classes/Checker-Model-Error-KeyGrantedLongerThanOneYear.html#method_getGranting"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedLongerThanOneYear\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-KeyGrantedLongerThanOneYear.html#method_asText"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedPastBoundary",
+            "name": "KeyGrantedPastBoundary",
+            "summary": "Error\u0020for\u0020when\u0020a\u0020key\u0020code\u0020is\u0020granted\u0020with\u0020\u0060until\u0060\u0020past\u0020September\u00201st\u0020of\u0020the\u0020next\u0020association\u0020year.",
+            "url": "classes/Checker-Model-Error-KeyGrantedPastBoundary.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedPastBoundary\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-KeyGrantedPastBoundary.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedPastBoundary\u003A\u003AgetGranting\u0028\u0029",
+            "name": "getGranting",
+            "summary": "Get\u0020the\u0020granting.",
+            "url": "classes/Checker-Model-Error-KeyGrantedPastBoundary.html#method_getGranting"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyGrantedPastBoundary\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-KeyGrantedPastBoundary.html#method_asText"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyWithdrawnPastOriginalGranting",
+            "name": "KeyWithdrawnPastOriginalGranting",
+            "summary": "Error\u0020for\u0020when\u0020a\u0020key\u0020code\u0020is\u0020withdrawn\u0020when\u0020the\u0020original\u0020granting\u0020already\u0020expired.",
+            "url": "classes/Checker-Model-Error-KeyWithdrawnPastOriginalGranting.html"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyWithdrawnPastOriginalGranting\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020description.",
+            "url": "classes/Checker-Model-Error-KeyWithdrawnPastOriginalGranting.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyWithdrawnPastOriginalGranting\u003A\u003AgetWithdrawal\u0028\u0029",
+            "name": "getWithdrawal",
+            "summary": "Get\u0020the\u0020withdrawal.",
+            "url": "classes/Checker-Model-Error-KeyWithdrawnPastOriginalGranting.html#method_getWithdrawal"
+        },                {
+            "fqsen": "\\Checker\\Model\\Error\\KeyWithdrawnPastOriginalGranting\u003A\u003AasText\u0028\u0029",
+            "name": "asText",
+            "summary": "Return\u0020a\u0020textual\u0020representation\u0020of\u0020the\u0020error.",
+            "url": "classes/Checker-Model-Error-KeyWithdrawnPastOriginalGranting.html#method_asText"
         },                {
             "fqsen": "\\Checker\\Model\\Error\\MemberActiveAndInactiveInOrgan",
             "name": "MemberActiveAndInactiveInOrgan",
@@ -1093,7 +1208,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003Acheck\u0028\u0029",
             "name": "check",
-            "summary": "Does\u0020a\u0020full\u0020check\u0020on\u0020each\u0020meeting,\u0020checking\u0020that\u0020after\u0020each\u0020meeting\u0020no\u0020database\u0020violation\u0020occur",
+            "summary": "Does\u0020a\u0020full\u0020check\u0020on\u0020each\u0020meeting,\u0020checking\u0020that\u0020after\u0020each\u0020meeting\u0020no\u0020database\u0020violation\u0020occurs",
             "url": "classes/Checker-Service-Checker.html#method_check"
         },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckDischarges\u0028\u0029",
@@ -1131,6 +1246,16 @@ Search.appendIndex(
             "summary": "Checks\u0020all\u0020Organ\u0020creation,\u0020and\u0020check\u0020if\u0020they\u0020are\u0020created\u0020at\u0020the\u0020correct\u0020Meeting\ne.g.\u0020ALV\u002DCommissies\u0020are\u0020only\u0020created\u0020at\u0020an\u0020ALV",
             "url": "classes/Checker-Service-Checker.html#method_checkOrganFoundationMeetingType"
         },                {
+            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckKeyGrantingDuration\u0028\u0029",
+            "name": "checkKeyGrantingDuration",
+            "summary": "Checks\u0020that\u0020key\u0020codes\u0020that\u0020have\u0020been\u0020granted\u0020do\u0020not\u0020expire\u0020too\u0020late.\u0020In\u0020accordance\u0020with\u0020the\u0020current\u0020Key\u0020Policy\nthis\u0020means\u0020that\u0020a\u0020key\u0020code\u0020may\u0020not\u0020be\u0020granted\u0020for\u0020a\u0020period\u0020longer\u0020than\u0020a\u0020year\u0020nor\u0020may\u0020it\u0020be\u0020granted\u0020for\u0020a\u0020period\nthat\u0020ends\u0020after\u0020September\u00201st\u0020of\u0020the\u0020next\u0020association\u0020year.",
+            "url": "classes/Checker-Service-Checker.html#method_checkKeyGrantingDuration"
+        },                {
+            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckKeyWithdrawalTime\u0028\u0029",
+            "name": "checkKeyWithdrawalTime",
+            "summary": "",
+            "url": "classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime"
+        },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003AtueDataObject\u0028\u0029",
             "name": "tueDataObject",
             "summary": "",
@@ -1165,6 +1290,11 @@ Search.appendIndex(
             "name": "installationService",
             "summary": "",
             "url": "classes/Checker-Service-Checker.html#property_installationService"
+        },                {
+            "fqsen": "\\Checker\\Service\\Checker\u003A\u003A\u0024keyService",
+            "name": "keyService",
+            "summary": "",
+            "url": "classes/Checker-Service-Checker.html#property_keyService"
         },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003A\u0024meetingService",
             "name": "meetingService",
@@ -1210,6 +1340,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Checker-Service-Factory-InstallationFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Checker\\Service\\Factory\\KeyFactory",
+            "name": "KeyFactory",
+            "summary": "",
+            "url": "classes/Checker-Service-Factory-KeyFactory.html"
+        },                {
+            "fqsen": "\\Checker\\Service\\Factory\\KeyFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Checker-Service-Factory-KeyFactory.html#method___invoke"
         },                {
             "fqsen": "\\Checker\\Service\\Factory\\MeetingFactory",
             "name": "MeetingFactory",
@@ -1275,6 +1415,31 @@ Search.appendIndex(
             "name": "installationMapper",
             "summary": "",
             "url": "classes/Checker-Service-Installation.html#property_installationMapper"
+        },                {
+            "fqsen": "\\Checker\\Service\\Key",
+            "name": "Key",
+            "summary": "",
+            "url": "classes/Checker-Service-Key.html"
+        },                {
+            "fqsen": "\\Checker\\Service\\Key\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Checker-Service-Key.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Service\\Key\u003A\u003AgetKeysGrantedDuringMeeting\u0028\u0029",
+            "name": "getKeysGrantedDuringMeeting",
+            "summary": "",
+            "url": "classes/Checker-Service-Key.html#method_getKeysGrantedDuringMeeting"
+        },                {
+            "fqsen": "\\Checker\\Service\\Key\u003A\u003AgetKeysWithdrawnDuringMeeting\u0028\u0029",
+            "name": "getKeysWithdrawnDuringMeeting",
+            "summary": "",
+            "url": "classes/Checker-Service-Key.html#method_getKeysWithdrawnDuringMeeting"
+        },                {
+            "fqsen": "\\Checker\\Service\\Key\u003A\u003A\u0024keyMapper",
+            "name": "keyMapper",
+            "summary": "",
+            "url": "classes/Checker-Service-Key.html#property_keyMapper"
         },                {
             "fqsen": "\\Checker\\Service\\Meeting",
             "name": "Meeting",
@@ -2306,6 +2471,21 @@ Search.appendIndex(
             "summary": "Specification\u0020for\u0020input\u0020filters.",
             "url": "classes/Database-Form-Fieldset-Decision.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\Fieldset\\Granting",
+            "name": "Granting",
+            "summary": "",
+            "url": "classes/Database-Form-Fieldset-Granting.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Fieldset\\Granting\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-Fieldset-Granting.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\Fieldset\\Granting\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "",
+            "url": "classes/Database-Form-Fieldset-Granting.html#method_getInputFilterSpecification"
+        },                {
             "fqsen": "\\Database\\Form\\Fieldset\\Installation",
             "name": "Installation",
             "summary": "",
@@ -2440,6 +2620,71 @@ Search.appendIndex(
             "name": "translator",
             "summary": "",
             "url": "classes/Database-Form-InstallationFunction.html#property_translator"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Grant",
+            "name": "Grant",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Grant.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Grant.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Grant.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003AisNotInThePast\u0028\u0029",
+            "name": "isNotInThePast",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Grant.html#method_isNotInThePast"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003AisMaxOneYear\u0028\u0029",
+            "name": "isMaxOneYear",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Grant.html#method_isMaxOneYear"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003AisNotTooFar\u0028\u0029",
+            "name": "isNotTooFar",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Grant.html#method_isNotTooFar"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Grant.html#property_translator"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Withdraw",
+            "name": "Withdraw",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Withdraw.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Withdraw\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Withdraw.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Withdraw\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "Specification\u0020of\u0020input\u0020filter.",
+            "url": "classes/Database-Form-Key-Withdraw.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Withdraw\u003A\u003AisNotInThePast\u0028\u0029",
+            "name": "isNotInThePast",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Withdraw.html#method_isNotInThePast"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Withdraw\u003A\u003AisNotAfterGranting\u0028\u0029",
+            "name": "isNotAfterGranting",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Withdraw.html#method_isNotAfterGranting"
+        },                {
+            "fqsen": "\\Database\\Form\\Key\\Withdraw\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Key-Withdraw.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\MailingList",
             "name": "MailingList",
@@ -2776,6 +3021,26 @@ Search.appendIndex(
             "summary": "Install\u0020hydration",
             "url": "classes/Database-Hydrator-Install.html#method_hydrate"
         },                {
+            "fqsen": "\\Database\\Hydrator\\Key\\Grant",
+            "name": "Grant",
+            "summary": "",
+            "url": "classes/Database-Hydrator-Key-Grant.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Key\\Grant\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Key\u0020granting\u0020hydration",
+            "url": "classes/Database-Hydrator-Key-Grant.html#method_hydrate"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Key\\Withdraw",
+            "name": "Withdraw",
+            "summary": "",
+            "url": "classes/Database-Hydrator-Key-Withdraw.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Key\\Withdraw\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Key\u0020withdrawal\u0020hydration",
+            "url": "classes/Database-Hydrator-Key-Withdraw.html#method_hydrate"
+        },                {
             "fqsen": "\\Database\\Hydrator\\Other",
             "name": "Other",
             "summary": "",
@@ -3025,6 +3290,11 @@ Search.appendIndex(
             "name": "findCurrentBoard",
             "summary": "Find\u0020current\u0020board\u0020members.",
             "url": "classes/Database-Mapper-Meeting.html#method_findCurrentBoard"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AfindCurrentKeys\u0028\u0029",
+            "name": "findCurrentKeys",
+            "summary": "Find\u0020all\u0020currently\u0020granted\u0020key\u0020codes.",
+            "url": "classes/Database-Mapper-Meeting.html#method_findCurrentKeys"
         },                {
             "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AdeleteDecision\u0028\u0029",
             "name": "deleteDecision",
@@ -5086,6 +5356,111 @@ Search.appendIndex(
             "summary": "Discharges.",
             "url": "classes/Database-Model-SubDecision-Installation.html#property_discharge"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting",
+            "name": "Granting",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetGrantee\u0028\u0029",
+            "name": "getGrantee",
+            "summary": "Get\u0020the\u0020grantee.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getGrantee"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AsetGrantee\u0028\u0029",
+            "name": "setGrantee",
+            "summary": "Set\u0020the\u0020grantee.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_setGrantee"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetUntil\u0028\u0029",
+            "name": "getUntil",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getUntil"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AsetUntil\u0028\u0029",
+            "name": "setUntil",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_setUntil"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020content.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AformatDate\u0028\u0029",
+            "name": "formatDate",
+            "summary": "Format\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_formatDate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Decision\u0020template.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024grantee",
+            "name": "grantee",
+            "summary": "The\u0020member\u0020who\u0020is\u0020granted\u0020a\u0020keycode\u0020of\u0020GEWIS.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#property_grantee"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024until",
+            "name": "until",
+            "summary": "Till\u0020when\u0020the\u0020keycode\u0020is\u0020granted.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#property_until"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024withdrawal",
+            "name": "withdrawal",
+            "summary": "Discharges.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#property_withdrawal"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal",
+            "name": "Withdrawal",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetGranting\u0028\u0029",
+            "name": "getGranting",
+            "summary": "Get\u0020the\u0020granting\u0020of\u0020the\u0020keycode.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getGranting"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AsetGranting\u0028\u0029",
+            "name": "setGranting",
+            "summary": "Set\u0020the\u0020granting\u0020of\u0020the\u0020keycode.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_setGranting"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetWithdrawnOn\u0028\u0029",
+            "name": "getWithdrawnOn",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getWithdrawnOn"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AsetWithdrawnOn\u0028\u0029",
+            "name": "setWithdrawnOn",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_setWithdrawnOn"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020content.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AformatDate\u0028\u0029",
+            "name": "formatDate",
+            "summary": "Format\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_formatDate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Decision\u0020template.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003A\u0024granting",
+            "name": "granting",
+            "summary": "Reference\u0020to\u0020the\u0020granting\u0020of\u0020a\u0020keycode.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#property_granting"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003A\u0024withdrawnOn",
+            "name": "withdrawnOn",
+            "summary": "When\u0020the\u0020granted\u0020keycode\u0020is\u0020prematurely\u0020revoked.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#property_withdrawnOn"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Other",
             "name": "Other",
             "summary": "Entity\u0020for\u0020undefined\u0020decisions.",
@@ -5396,6 +5771,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020current\u0020board\u0020installations.",
             "url": "classes/Database-Service-Meeting.html#method_getCurrentBoard"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetCurrentKeys\u0028\u0029",
+            "name": "getCurrentKeys",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#method_getCurrentKeys"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003Aexport\u0028\u0029",
             "name": "export",
             "summary": "Export\u0020decisions.",
@@ -5435,6 +5815,16 @@ Search.appendIndex(
             "name": "boardReleaseDecision",
             "summary": "Board\u0020release\u0020decision.",
             "url": "classes/Database-Service-Meeting.html#method_boardReleaseDecision"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AkeyGrantDecision\u0028\u0029",
+            "name": "keyGrantDecision",
+            "summary": "Key\u0020code\u0020granting\u0020decision.",
+            "url": "classes/Database-Service-Meeting.html#method_keyGrantDecision"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AkeyWithdrawDecision\u0028\u0029",
+            "name": "keyWithdrawDecision",
+            "summary": "Key\u0020code\u0020withdrawal\u0020decision.",
+            "url": "classes/Database-Service-Meeting.html#method_keyWithdrawDecision"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AinstallDecision\u0028\u0029",
             "name": "installDecision",
@@ -5521,6 +5911,16 @@ Search.appendIndex(
             "summary": "Get\u0020budget\u0020form.",
             "url": "classes/Database-Service-Meeting.html#method_getBudgetForm"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetKeyGrantForm\u0028\u0029",
+            "name": "getKeyGrantForm",
+            "summary": "Get\u0020key\u0020grant\u0020form.",
+            "url": "classes/Database-Service-Meeting.html#method_getKeyGrantForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetKeyWithdrawForm\u0028\u0029",
+            "name": "getKeyWithdrawForm",
+            "summary": "Get\u0020key\u0020withdraw\u0020form.",
+            "url": "classes/Database-Service-Meeting.html#method_getKeyWithdrawForm"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetOtherForm\u0028\u0029",
             "name": "getOtherForm",
             "summary": "Get\u0020other\u0020form.",
@@ -5595,6 +5995,16 @@ Search.appendIndex(
             "name": "installForm",
             "summary": "",
             "url": "classes/Database-Service-Meeting.html#property_installForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024keyGrantForm",
+            "name": "keyGrantForm",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#property_keyGrantForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024keyWithdrawForm",
+            "name": "keyWithdrawForm",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#property_keyWithdrawForm"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024otherForm",
             "name": "otherForm",
@@ -6056,6 +6466,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Command-GenerateFullCommand.html#property_boardService"
         },                {
+            "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003A\u0024keyholderService",
+            "name": "keyholderService",
+            "summary": "",
+            "url": "classes/Report-Command-GenerateFullCommand.html#property_keyholderService"
+        },                {
             "fqsen": "\\Report\\Command\\GenerateFullCommand\u003A\u003A\u0024meetingService",
             "name": "meetingService",
             "summary": "",
@@ -6161,10 +6576,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_processOrganUpdates"
         },                {
+            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003AprocessKeyholderUpdates\u0028\u0029",
+            "name": "processKeyholderUpdates",
+            "summary": "",
+            "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_processKeyholderUpdates"
+        },                {
             "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024isflushing",
             "name": "isflushing",
             "summary": "",
             "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_isflushing"
+        },                {
+            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024keyholderService",
+            "name": "keyholderService",
+            "summary": "",
+            "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_keyholderService"
         },                {
             "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024meetingService",
             "name": "meetingService",
@@ -6560,6 +6985,81 @@ Search.appendIndex(
             "name": "destroyedby",
             "summary": "Destroyed\u0020by.",
             "url": "classes/Report-Model-Decision.html#property_destroyedby"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder",
+            "name": "Keyholder",
+            "summary": "keyholder\u0020entity.",
+            "url": "classes/Report-Model-Keyholder.html"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "Get\u0020the\u0020ID.",
+            "url": "classes/Report-Model-Keyholder.html#method_getId"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-Keyholder.html#method_getMember"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "Set\u0020the\u0020member.",
+            "url": "classes/Report-Model-Keyholder.html#method_setMember"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AgetExpirationDate\u0028\u0029",
+            "name": "getExpirationDate",
+            "summary": "Get\u0020the\u0020expiration\u0020date.",
+            "url": "classes/Report-Model-Keyholder.html#method_getExpirationDate"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AsetExpirationDate\u0028\u0029",
+            "name": "setExpirationDate",
+            "summary": "Set\u0020the\u0020expiration\u0020date.",
+            "url": "classes/Report-Model-Keyholder.html#method_setExpirationDate"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AgetGrantingDec\u0028\u0029",
+            "name": "getGrantingDec",
+            "summary": "Get\u0020the\u0020granting\u0020decision.",
+            "url": "classes/Report-Model-Keyholder.html#method_getGrantingDec"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AsetGrantingDec\u0028\u0029",
+            "name": "setGrantingDec",
+            "summary": "Set\u0020the\u0020granting\u0020decision.",
+            "url": "classes/Report-Model-Keyholder.html#method_setGrantingDec"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AgetWithdrawnDate\u0028\u0029",
+            "name": "getWithdrawnDate",
+            "summary": "Get\u0020the\u0020withdrawn\u0020date.",
+            "url": "classes/Report-Model-Keyholder.html#method_getWithdrawnDate"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AsetWithdrawnDate\u0028\u0029",
+            "name": "setWithdrawnDate",
+            "summary": "Set\u0020the\u0020withdrawn\u0020date.",
+            "url": "classes/Report-Model-Keyholder.html#method_setWithdrawnDate"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "Id.",
+            "url": "classes/Report-Model-Keyholder.html#property_id"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "Member\u0020lidnr.",
+            "url": "classes/Report-Model-Keyholder.html#property_member"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003A\u0024expirationDate",
+            "name": "expirationDate",
+            "summary": "Expiration\u0020date.",
+            "url": "classes/Report-Model-Keyholder.html#property_expirationDate"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003A\u0024grantingDec",
+            "name": "grantingDec",
+            "summary": "Installation.",
+            "url": "classes/Report-Model-Keyholder.html#property_grantingDec"
+        },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003A\u0024withdrawnDate",
+            "name": "withdrawnDate",
+            "summary": "Release\u0020date.",
+            "url": "classes/Report-Model-Keyholder.html#property_withdrawnDate"
         },                {
             "fqsen": "\\Report\\Model\\MailingList",
             "name": "MailingList",
@@ -7105,6 +7605,11 @@ Search.appendIndex(
             "name": "boardInstallations",
             "summary": "Board\u0020memberships.",
             "url": "classes/Report-Model-Member.html#property_boardInstallations"
+        },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024keyGrantings",
+            "name": "keyGrantings",
+            "summary": "Keyholdership.",
+            "url": "classes/Report-Model-Member.html#property_keyGrantings"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024authenticationKey",
             "name": "authenticationKey",
@@ -7796,6 +8301,101 @@ Search.appendIndex(
             "summary": "The\u0020organmember\u0020reference.",
             "url": "classes/Report-Model-SubDecision-Installation.html#property_organMember"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting",
+            "name": "Granting",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetGrantee\u0028\u0029",
+            "name": "getGrantee",
+            "summary": "Get\u0020the\u0020grantee.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_getGrantee"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AsetGrantee\u0028\u0029",
+            "name": "setGrantee",
+            "summary": "Set\u0020the\u0020grantee.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_setGrantee"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetUntil\u0028\u0029",
+            "name": "getUntil",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_getUntil"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AsetUntil\u0028\u0029",
+            "name": "setUntil",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_setUntil"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetWithdrawal\u0028\u0029",
+            "name": "getWithdrawal",
+            "summary": "Get\u0020the\u0020withdrawal\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_getWithdrawal"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AclearWithdrawal\u0028\u0029",
+            "name": "clearWithdrawal",
+            "summary": "Clears\u0020the\u0020withdrawal,\u0020if\u0020it\u0020exists.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_clearWithdrawal"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetKeyholder\u0028\u0029",
+            "name": "getKeyholder",
+            "summary": "Get\u0020the\u0020keyholder\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_getKeyholder"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024grantee",
+            "name": "grantee",
+            "summary": "The\u0020member\u0020who\u0020is\u0020granted\u0020a\u0020keycode\u0020of\u0020GEWIS.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#property_grantee"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024until",
+            "name": "until",
+            "summary": "Till\u0020when\u0020the\u0020keycode\u0020is\u0020granted.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#property_until"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024withdrawal",
+            "name": "withdrawal",
+            "summary": "Discharges.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#property_withdrawal"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024keyholder",
+            "name": "keyholder",
+            "summary": "Keyholder\u0020reference.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#property_keyholder"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Withdrawal",
+            "name": "Withdrawal",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetGranting\u0028\u0029",
+            "name": "getGranting",
+            "summary": "Get\u0020the\u0020granting\u0020of\u0020the\u0020keycode.",
+            "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#method_getGranting"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AsetGranting\u0028\u0029",
+            "name": "setGranting",
+            "summary": "Set\u0020the\u0020granting\u0020of\u0020the\u0020keycode.",
+            "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#method_setGranting"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetWithdrawnOn\u0028\u0029",
+            "name": "getWithdrawnOn",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#method_getWithdrawnOn"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AsetWithdrawnOn\u0028\u0029",
+            "name": "setWithdrawnOn",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#method_setWithdrawnOn"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003A\u0024granting",
+            "name": "granting",
+            "summary": "Reference\u0020to\u0020the\u0020granting\u0020of\u0020a\u0020keycode.",
+            "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#property_granting"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003A\u0024withdrawnOn",
+            "name": "withdrawnOn",
+            "summary": "When\u0020the\u0020granted\u0020keycode\u0020is\u0020prematurely\u0020revoked.",
+            "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#property_withdrawnOn"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Other",
             "name": "Other",
             "summary": "Entity\u0020for\u0020undefined\u0020decisions.",
@@ -7941,6 +8541,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Service-Factory-BoardFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Report\\Service\\Factory\\KeyholderFactory",
+            "name": "KeyholderFactory",
+            "summary": "",
+            "url": "classes/Report-Service-Factory-KeyholderFactory.html"
+        },                {
+            "fqsen": "\\Report\\Service\\Factory\\KeyholderFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Report-Service-Factory-KeyholderFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Report\\Service\\Factory\\MeetingFactory",
             "name": "MeetingFactory",
             "summary": "",
@@ -7980,6 +8590,36 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Report-Service-Factory-OrganFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Report\\Service\\Keyholder",
+            "name": "Keyholder",
+            "summary": "",
+            "url": "classes/Report-Service-Keyholder.html"
+        },                {
+            "fqsen": "\\Report\\Service\\Keyholder\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Report-Service-Keyholder.html#method___construct"
+        },                {
+            "fqsen": "\\Report\\Service\\Keyholder\u003A\u003Agenerate\u0028\u0029",
+            "name": "generate",
+            "summary": "Export\u0020keyholder\u0020info.",
+            "url": "classes/Report-Service-Keyholder.html#method_generate"
+        },                {
+            "fqsen": "\\Report\\Service\\Keyholder\u003A\u003AgenerateGranting\u0028\u0029",
+            "name": "generateGranting",
+            "summary": "",
+            "url": "classes/Report-Service-Keyholder.html#method_generateGranting"
+        },                {
+            "fqsen": "\\Report\\Service\\Keyholder\u003A\u003AgenerateWithdrawal\u0028\u0029",
+            "name": "generateWithdrawal",
+            "summary": "",
+            "url": "classes/Report-Service-Keyholder.html#method_generateWithdrawal"
+        },                {
+            "fqsen": "\\Report\\Service\\Keyholder\u003A\u003A\u0024emReport",
+            "name": "emReport",
+            "summary": "",
+            "url": "classes/Report-Service-Keyholder.html#property_emReport"
         },                {
             "fqsen": "\\Report\\Service\\Meeting",
             "name": "Meeting",
@@ -8711,6 +9351,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/database-form-fieldset.html"
         },                {
+            "fqsen": "\\Database\\Form\\Key",
+            "name": "Key",
+            "summary": "",
+            "url": "namespaces/database-form-key.html"
+        },                {
             "fqsen": "\\Database\\Hydrator",
             "name": "Hydrator",
             "summary": "",
@@ -8720,6 +9365,11 @@ Search.appendIndex(
             "name": "Board",
             "summary": "",
             "url": "namespaces/database-hydrator-board.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Key",
+            "name": "Key",
+            "summary": "",
+            "url": "namespaces/database-hydrator-key.html"
         },                {
             "fqsen": "\\Database\\Hydrator\\Strategy",
             "name": "Strategy",
@@ -8750,6 +9400,11 @@ Search.appendIndex(
             "name": "Board",
             "summary": "",
             "url": "namespaces/database-model-subdecision-board.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key",
+            "name": "Key",
+            "summary": "",
+            "url": "namespaces/database-model-subdecision-key.html"
         },                {
             "fqsen": "\\Database\\Service\\Factory",
             "name": "Factory",
@@ -8800,6 +9455,11 @@ Search.appendIndex(
             "name": "Board",
             "summary": "",
             "url": "namespaces/report-model-subdecision-board.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key",
+            "name": "Key",
+            "summary": "",
+            "url": "namespaces/report-model-subdecision-key.html"
         },                {
             "fqsen": "\\Report\\Service",
             "name": "Service",

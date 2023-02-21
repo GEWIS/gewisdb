@@ -273,16 +273,28 @@
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Factory-InstallationFactory.html"><abbr title="\Checker\Mapper\Factory\InstallationFactory">InstallationFactory</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Factory-KeyFactory.html"><abbr title="\Checker\Mapper\Factory\KeyFactory">KeyFactory</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Factory-MemberFactory.html"><abbr title="\Checker\Mapper\Factory\MemberFactory">MemberFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Factory-OrganFactory.html"><abbr title="\Checker\Mapper\Factory\OrganFactory">OrganFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Installation.html"><abbr title="\Checker\Mapper\Installation">Installation</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Key.html"><abbr title="\Checker\Mapper\Key">Key</abbr></a></dt>
+        <dd>Key mapper</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Member.html"><abbr title="\Checker\Mapper\Member">Member</abbr></a></dt>
         <dd>Member mapper</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Organ.html"><abbr title="\Checker\Mapper\Organ">Organ</abbr></a></dt>
         <dd>Event mapper</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Model-Error-KeyGrantedInThePast.html"><abbr title="\Checker\Model\Error\KeyGrantedInThePast">KeyGrantedInThePast</abbr></a></dt>
+        <dd>Error for when a key code is granted with a negative duration (i.e., its `until` is in the past).</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Model-Error-KeyGrantedLongerThanOneYear.html"><abbr title="\Checker\Model\Error\KeyGrantedLongerThanOneYear">KeyGrantedLongerThanOneYear</abbr></a></dt>
+        <dd>Error for when a key code is granted for a period longer than a year.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Model-Error-KeyGrantedPastBoundary.html"><abbr title="\Checker\Model\Error\KeyGrantedPastBoundary">KeyGrantedPastBoundary</abbr></a></dt>
+        <dd>Error for when a key code is granted with `until` past September 1st of the next association year.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Model-Error-KeyWithdrawnPastOriginalGranting.html"><abbr title="\Checker\Model\Error\KeyWithdrawnPastOriginalGranting">KeyWithdrawnPastOriginalGranting</abbr></a></dt>
+        <dd>Error for when a key code is withdrawn when the original granting already expired.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Model-Error-MemberActiveAndInactiveInOrgan.html"><abbr title="\Checker\Model\Error\MemberActiveAndInactiveInOrgan">MemberActiveAndInactiveInOrgan</abbr></a></dt>
         <dd>Error for when a member is &quot;Inactief Lid&quot; and &quot;Lid&quot; in an organ WITHOUT any special roles. We assume that the member
 should NOT be &quot;Lid&quot;.</dd>
@@ -313,6 +325,8 @@ be &quot;Lid&quot; and NOT &quot;Inactief Lid&quot;.</dd>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Factory-InstallationFactory.html"><abbr title="\Checker\Service\Factory\InstallationFactory">InstallationFactory</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Factory-KeyFactory.html"><abbr title="\Checker\Service\Factory\KeyFactory">KeyFactory</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Factory-MeetingFactory.html"><abbr title="\Checker\Service\Factory\MeetingFactory">MeetingFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Factory-MemberFactory.html"><abbr title="\Checker\Service\Factory\MemberFactory">MemberFactory</abbr></a></dt>
@@ -320,6 +334,8 @@ be &quot;Lid&quot; and NOT &quot;Inactief Lid&quot;.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Factory-OrganFactory.html"><abbr title="\Checker\Service\Factory\OrganFactory">OrganFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a></dt>
         <dd></dd>
@@ -411,6 +427,8 @@ This class is a collection that handles errors like a normal
 component.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Fieldset-Decision.html"><abbr title="\Database\Form\Fieldset\Decision">Decision</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Fieldset-Granting.html"><abbr title="\Database\Form\Fieldset\Granting">Granting</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Fieldset-Installation.html"><abbr title="\Database\Form\Fieldset\Installation">Installation</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Fieldset-Meeting.html"><abbr title="\Database\Form\Fieldset\Meeting">Meeting</abbr></a></dt>
@@ -426,6 +444,10 @@ component.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Install.html"><abbr title="\Database\Form\Install">Install</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Key-Grant.html"><abbr title="\Database\Form\Key\Grant">Grant</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Key-Withdraw.html"><abbr title="\Database\Form\Key\Withdraw">Withdraw</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-MailingList.html"><abbr title="\Database\Form\MailingList">MailingList</abbr></a></dt>
         <dd></dd>
@@ -466,6 +488,10 @@ component.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Hydrator-Foundation.html"><abbr title="\Database\Hydrator\Foundation">Foundation</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Hydrator-Install.html"><abbr title="\Database\Hydrator\Install">Install</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Hydrator-Key-Grant.html"><abbr title="\Database\Hydrator\Key\Grant">Grant</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Hydrator-Key-Withdraw.html"><abbr title="\Database\Hydrator\Key\Withdraw">Withdraw</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Hydrator-Other.html"><abbr title="\Database\Hydrator\Other">Other</abbr></a></dt>
         <dd></dd>
@@ -543,6 +569,10 @@ component.</dd>
         <dd>Reference to organ foundation.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-SubDecision-Installation.html"><abbr title="\Database\Model\SubDecision\Installation">Installation</abbr></a></dt>
         <dd>Installation into organ.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-SubDecision-Key-Granting.html"><abbr title="\Database\Model\SubDecision\Key\Granting">Granting</abbr></a></dt>
+        <dd>SubDecision model.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-SubDecision-Key-Withdrawal.html"><abbr title="\Database\Model\SubDecision\Key\Withdrawal">Withdrawal</abbr></a></dt>
+        <dd>SubDecision model.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-SubDecision-Other.html"><abbr title="\Database\Model\SubDecision\Other">Other</abbr></a></dt>
         <dd>Entity for undefined decisions.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-SubDecision-Reckoning.html"><abbr title="\Database\Model\SubDecision\Reckoning">Reckoning</abbr></a></dt>
@@ -593,6 +623,8 @@ component.</dd>
         <dd>Board member entity.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a></dt>
         <dd>Decision model.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-Keyholder.html"><abbr title="\Report\Model\Keyholder">Keyholder</abbr></a></dt>
+        <dd>keyholder entity.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-MailingList.html"><abbr title="\Report\Model\MailingList">MailingList</abbr></a></dt>
         <dd>Mailing List model.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-Meeting.html"><abbr title="\Report\Model\Meeting">Meeting</abbr></a></dt>
@@ -623,6 +655,10 @@ component.</dd>
         <dd>Reference to organ foundation.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-SubDecision-Installation.html"><abbr title="\Report\Model\SubDecision\Installation">Installation</abbr></a></dt>
         <dd>Installation into organ.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-SubDecision-Key-Granting.html"><abbr title="\Report\Model\SubDecision\Key\Granting">Granting</abbr></a></dt>
+        <dd>SubDecision model.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-SubDecision-Key-Withdrawal.html"><abbr title="\Report\Model\SubDecision\Key\Withdrawal">Withdrawal</abbr></a></dt>
+        <dd>SubDecision model.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-SubDecision-Other.html"><abbr title="\Report\Model\SubDecision\Other">Other</abbr></a></dt>
         <dd>Entity for undefined decisions.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Model-SubDecision-Reckoning.html"><abbr title="\Report\Model\SubDecision\Reckoning">Reckoning</abbr></a></dt>
@@ -635,6 +671,8 @@ component.</dd>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Factory-BoardFactory.html"><abbr title="\Report\Service\Factory\BoardFactory">BoardFactory</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Factory-KeyholderFactory.html"><abbr title="\Report\Service\Factory\KeyholderFactory">KeyholderFactory</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Factory-MeetingFactory.html"><abbr title="\Report\Service\Factory\MeetingFactory">MeetingFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Factory-MemberFactory.html"><abbr title="\Report\Service\Factory\MemberFactory">MemberFactory</abbr></a></dt>
@@ -642,6 +680,8 @@ component.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Factory-MiscFactory.html"><abbr title="\Report\Service\Factory\MiscFactory">MiscFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Factory-OrganFactory.html"><abbr title="\Report\Service\Factory\OrganFactory">OrganFactory</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Service-Meeting.html"><abbr title="\Report\Service\Meeting">Meeting</abbr></a></dt>
         <dd></dd>
