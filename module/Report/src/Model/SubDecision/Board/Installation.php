@@ -56,7 +56,7 @@ class Installation extends SubDecision
         targetEntity: Discharge::class,
         mappedBy: "installation",
     )]
-    protected Discharge $discharge;
+    protected ?Discharge $discharge = null;
 
     /**
      * Release.
@@ -65,7 +65,7 @@ class Installation extends SubDecision
         targetEntity: Release::class,
         mappedBy: "installation",
     )]
-    protected Release $release;
+    protected ?Release $release = null;
 
     /**
      * Board member reference.
@@ -139,21 +139,37 @@ class Installation extends SubDecision
     /**
      * Get the discharge.
      *
-     * @return Discharge
+     * @return ?Discharge
      */
-    public function getDischarge(): Discharge
+    public function getDischarge(): ?Discharge
     {
         return $this->discharge;
     }
 
     /**
+     * Clears the discharge, if it exists.
+     */
+    public function clearDischarge(): void
+    {
+        $this->discharge = null;
+    }
+
+    /**
      * Get the release.
      *
-     * @return Release
+     * @return ?Release
      */
-    public function getRelease(): Release
+    public function getRelease(): ?Release
     {
         return $this->release;
+    }
+
+    /**
+     * Clears the release, if it exists.
+     */
+    public function clearRelease(): void
+    {
+        $this->release = null;
     }
 
     /**

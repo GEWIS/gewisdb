@@ -13,6 +13,7 @@ use Database\Model\{
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Report\Service\{
+    Board as BoardService,
     Keyholder as KeyholderService,
     Meeting as MeetingService,
     Member as MemberService,
@@ -21,11 +22,14 @@ use Report\Service\{
 };
 use Report\Model\SubDecision\{
     Abrogation as ReportAbrogationModel,
+    Board\Discharge as ReportBoardDischargeModel,
+    Board\Installation as ReportBoardInstallationModel,
+    Board\Release as ReportBoardReleaseModel,
     Discharge as ReportDischargeModel,
     Foundation as ReportFoundationModel,
     Installation as ReportInstallationModel,
     Key\Granting as ReportKeyGrantingModel,
-    Key\Withdrawal as ReportKeyWithdrawalModel
+    Key\Withdrawal as ReportKeyWithdrawalModel,
 };
 
 /**
@@ -36,6 +40,7 @@ class DatabaseUpdateListener
     protected static bool $isflushing = false;
 
     public function __construct(
+        private readonly BoardService $boardService,
         private readonly KeyholderService $keyholderService,
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
@@ -84,8 +89,9 @@ class DatabaseUpdateListener
 
             case $entity instanceof DatabaseSubDecisionModel:
                 $subdecision = $this->meetingService->generateSubDecision($entity);
-                $this->processOrganUpdates($subdecision);
+                $this->processBoardMemberUpdates($subdecision);
                 $this->processKeyholderUpdates($subdecision);
+                $this->processOrganUpdates($subdecision);
                 $this->emReport->persist($subdecision);
                 break;
 
@@ -134,6 +140,23 @@ class DatabaseUpdateListener
 
             case $entity instanceof ReportKeyWithdrawalModel:
                 $this->keyholderService->generateWithdrawal($entity);
+                break;
+        }
+    }
+
+    public function processBoardMemberUpdates($entity): void
+    {
+        switch (true) {
+            case $entity instanceof ReportBoardInstallationModel:
+                $this->boardService->generateInstallation($entity);
+                break;
+
+            case $entity instanceof ReportBoardReleaseModel:
+                $this->boardService->generateRelease($entity);
+                break;
+
+            case $entity instanceof ReportBoardDischargeModel:
+                $this->boardService->generateDischarge($entity);
                 break;
         }
     }

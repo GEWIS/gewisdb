@@ -113,6 +113,14 @@ class Meeting
         return $this->getMeetingMapper()->findCurrentBoard();
     }
 
+    /**
+     * Get the current board installations, but without board members who have already been released.
+     */
+    public function getCurrentBoardNotYetReleased(): array
+    {
+        return $this->getMeetingMapper()->findCurrentBoardNotYetReleased();
+    }
+
     public function getCurrentKeys(): array
     {
         return $this->getMeetingMapper()->findCurrentKeys();
@@ -330,7 +338,7 @@ class Meeting
         if (!$form->isValid()) {
             return [
                 'type' => 'board_release',
-                'installs' => $this->getCurrentBoard(),
+                'installs_filtered' => $this->getCurrentBoardNotYetReleased(),
                 'form' => $form,
             ];
         }

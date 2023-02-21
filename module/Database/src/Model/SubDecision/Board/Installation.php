@@ -59,7 +59,7 @@ class Installation extends SubDecision
         targetEntity: Discharge::class,
         mappedBy: "installation",
     )]
-    protected Discharge $discharge;
+    protected ?Discharge $discharge = null;
 
     /**
      * Release.
@@ -68,7 +68,7 @@ class Installation extends SubDecision
         targetEntity: Release::class,
         mappedBy: "installation",
     )]
-    protected Release $release;
+    protected ?Release $release = null;
 
     /**
      * Get the function.

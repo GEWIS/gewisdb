@@ -33,7 +33,7 @@ case 'board_discharge':
 case 'board_release':
     echo $this->partial('database/meeting/board/releaseform', array(
         'form' => $form,
-        'installs' => $installs
+        'installs' => $installs_filtered
     ));
     break;
 case 'key_grant':
