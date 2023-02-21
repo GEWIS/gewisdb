@@ -112,6 +112,7 @@ class MeetingController extends AbstractActionController
             'decision' => $decision,
             'forms' => $this->getDecisionForms($meeting, $point, $decision),
             'installs' => $this->meetingService->getCurrentBoard(),
+            'grants' => $this->meetingService->getCurrentKeys(),
             'memberfunction' => $this->memberFunctionFieldset,
         ]);
     }
@@ -130,6 +131,8 @@ class MeetingController extends AbstractActionController
             'abolish' => $this->meetingService->getAbolishForm(),
             'destroy' => $this->meetingService->getDestroyForm(),
             'install' => $this->meetingService->getInstallForm(),
+            'key_grant' => $this->meetingService->getKeyGrantForm(),
+            'key_withdraw' => $this->meetingService->getKeyWithdrawForm(),
             'other' => $this->meetingService->getOtherForm(),
             'board_install' => $this->meetingService->getBoardInstallForm(),
             'board_release' => $this->meetingService->getBoardReleaseForm(),
@@ -168,6 +171,12 @@ class MeetingController extends AbstractActionController
             ),
             'destroy' => new ViewModel(
                 $this->meetingService->destroyDecision($this->getRequest()->getPost()->toArray()),
+            ),
+            'key_grant' => new ViewModel(
+                $this->meetingService->keyGrantDecision($this->getRequest()->getPost()->toArray()),
+            ),
+            'key_withdraw' => new ViewModel(
+                $this->meetingService->keyWithdrawDecision($this->getRequest()->getPost()->toArray()),
             ),
             'board_install' => new ViewModel(
                 $this->meetingService->boardInstallDecision($this->getRequest()->getPost()->toArray()),

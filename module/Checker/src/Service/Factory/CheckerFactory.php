@@ -2,11 +2,14 @@
 
 namespace Checker\Service\Factory;
 
-use Checker\Service\Checker as CheckerService;
-use Checker\Service\Installation as InstallationService;
-use Checker\Service\Meeting as MeetingService;
-use Checker\Service\Member as MemberService;
-use Checker\Service\Organ as OrganService;
+use Checker\Service\{
+    Checker as CheckerService,
+    Installation as InstallationService,
+    Key as KeyService,
+    Meeting as MeetingService,
+    Member as MemberService,
+    Organ as OrganService,
+};
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
@@ -27,6 +30,8 @@ class CheckerFactory implements FactoryInterface
     ): CheckerService {
         /** @var InstallationService $installationService */
         $installationService = $container->get(InstallationService::class);
+        /** @var KeyService $keyService */
+        $keyService = $container->get(KeyService::class);
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);
         /** @var MemberService $memberService */
@@ -40,6 +45,7 @@ class CheckerFactory implements FactoryInterface
 
         return new CheckerService(
             $installationService,
+            $keyService,
             $meetingService,
             $memberService,
             $organService,

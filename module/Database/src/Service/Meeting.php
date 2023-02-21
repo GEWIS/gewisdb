@@ -19,6 +19,10 @@ use Database\Form\Board\{
     Install as BoardInstallForm,
     Release as BoardReleaseForm,
 };
+use Database\Form\Key\{
+    Grant as KeyGrantForm,
+    Withdraw as KeyWithdrawForm,
+};
 use Database\Hydrator\{
     Foundation as FoundationHydrator,
     Install as InstallHydrator,
@@ -29,8 +33,8 @@ use Database\Mapper\{
     Organ as OrganMapper,
 };
 use Database\Model\{
-    Meeting as MeetingModel,
     Decision as DecisionModel,
+    Meeting as MeetingModel,
 };
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Laminas\Stdlib\PriorityQueue;
@@ -50,6 +54,8 @@ class Meeting
         private readonly ExportForm $exportForm,
         private readonly FoundationForm $foundationForm,
         private readonly InstallForm $installForm,
+        private readonly KeyGrantForm $keyGrantForm,
+        private readonly KeyWithdrawForm $keyWithdrawForm,
         private readonly OtherForm $otherForm,
         private readonly MeetingMapper $meetingMapper,
         private readonly MemberMapper $memberMapper,
@@ -105,6 +111,11 @@ class Meeting
     public function getCurrentBoard(): array
     {
         return $this->getMeetingMapper()->findCurrentBoard();
+    }
+
+    public function getCurrentKeys(): array
+    {
+        return $this->getMeetingMapper()->findCurrentKeys();
     }
 
     /**
@@ -332,6 +343,65 @@ class Meeting
 
         return [
             'type' => 'board_release',
+            'decision' => $decision,
+        ];
+    }
+
+    /**
+     * Key code granting decision.
+     */
+    public function keyGrantDecision(array $data): array
+    {
+        $form = $this->getKeyGrantForm();
+
+        $form->setData($data);
+        $form->bind(new DecisionModel());
+
+        if (!$form->isValid()) {
+            return [
+                'type' => 'key_grant',
+                'form' => $form,
+            ];
+        }
+
+        /** @var DecisionModel $decision */
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+
+        return [
+            'type' => 'key_grant',
+            'decision' => $decision,
+        ];
+    }
+
+    /**
+     * Key code withdrawal decision.
+     */
+    public function keyWithdrawDecision(array $data): array
+    {
+        $form = $this->getKeyWithdrawForm();
+
+        $form->setData($data);
+        $form->bind(new DecisionModel());
+
+        if (!$form->isValid()) {
+            return [
+                'type' => 'key_withdraw',
+                'grants' => $this->getCurrentKeys(),
+                'form' => $form,
+            ];
+        }
+
+        /** @var DecisionModel $decision */
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+
+        return [
+            'type' => 'key_withdraw',
             'decision' => $decision,
         ];
     }
@@ -689,6 +759,22 @@ class Meeting
     public function getBudgetForm(): BudgetForm
     {
         return $this->budgetForm;
+    }
+
+    /**
+     * Get key grant form.
+     */
+    public function getKeyGrantForm(): KeyGrantForm
+    {
+        return $this->keyGrantForm;
+    }
+
+    /**
+     * Get key withdraw form.
+     */
+    public function getKeyWithdrawForm(): KeyWithdrawForm
+    {
+        return $this->keyWithdrawForm;
     }
 
     /**

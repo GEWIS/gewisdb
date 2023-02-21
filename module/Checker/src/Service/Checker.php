@@ -2,6 +2,8 @@
 
 namespace Checker\Service;
 
+use Database\Model\SubDecision\Key\Granting;
+use DateInterval;
 use Application\Model\Enums\{
     MeetingTypes,
     MembershipTypes,
@@ -14,6 +16,7 @@ use Checker\Model\{
 use Checker\Model\Exception\LookupException;
 use Checker\Service\{
     Installation as InstallationService,
+    Key as KeyService,
     Meeting as MeetingService,
     Member as MemberService,
     Organ as OrganService,
@@ -29,6 +32,7 @@ class Checker
 {
     public function __construct(
         private readonly InstallationService $installationService,
+        private readonly KeyService $keyService,
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
         private readonly OrganService $organService,
@@ -38,7 +42,7 @@ class Checker
     }
 
     /**
-     * Does a full check on each meeting, checking that after each meeting no database violation occur
+     * Does a full check on each meeting, checking that after each meeting no database violation occurs
      */
     public function check(): void
     {
@@ -51,6 +55,8 @@ class Checker
                 $this->checkMembersInNonExistingOrgans($meeting),
                 $this->checkMembersExpiredButStillInOrgan($meeting),
                 $this->checkOrganFoundationMeetingType($meeting),
+                $this->checkKeyGrantingDuration($meeting),
+                $this->checkKeyWithdrawalTime($meeting),
             );
 
             $message .= $this->handleMeetingErrors($meeting, $errors);
@@ -299,6 +305,62 @@ class Checker
                 $errors[] = new Error\OrganMeetingType($organ);
             }
         }
+        return $errors;
+    }
+
+    /**
+     * Checks that key codes that have been granted do not expire too late. In accordance with the current Key Policy
+     * this means that a key code may not be granted for a period longer than a year nor may it be granted for a period
+     * that ends after September 1st of the next association year.
+     */
+    public function checkKeyGrantingDuration(MeetingModel $meeting): array
+    {
+        $errors = [];
+        $grantings = $this->keyService->getKeysGrantedDuringMeeting($meeting);
+
+        // `$today` is when the meeting took place
+        $today = $meeting->getDate();
+        $todayNextYear = (clone $today)->add(new DateInterval('P1Y'));
+
+        if ($today->format('m') >= 7) {
+            $year = (int) $today->format('Y') + 1;
+        } else {
+            $year = (int) $today->format('Y');
+        }
+
+        $septemberFirstNextAssociationYear = clone $today;
+        $septemberFirstNextAssociationYear->setDate($year, 9, 1);
+
+        foreach ($grantings as $granting) {
+            $until = $granting->getUntil();
+
+            if ($until < $today) {
+                $errors[] = new Error\KeyGrantedInThePast($granting);
+            } else {
+                if ($until > $todayNextYear) {
+                    $errors[] = new Error\KeyGrantedLongerThanOneYear($granting);
+                }
+
+                if ($until > $septemberFirstNextAssociationYear) {
+                    $errors[] = new Error\KeyGrantedPastBoundary($granting);
+                }
+            }
+        }
+
+        return $errors;
+    }
+
+    public function checkKeyWithdrawalTime(MeetingModel $meeting): array
+    {
+        $errors = [];
+        $withdrawals = $this->keyService->getKeysWithdrawnDuringMeeting($meeting);
+
+        foreach ($withdrawals as $withdrawal) {
+            if ($withdrawal->getWithdrawnOn() > $withdrawal->getGranting()->getUntil()) {
+                $errors[] = new Error\KeyWithdrawnPastOriginalGranting($withdrawal);
+            }
+        }
+
         return $errors;
     }
 

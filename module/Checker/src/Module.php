@@ -13,28 +13,28 @@ use Checker\Command\{
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
 use Checker\Mapper\{
     Installation as InstallationMapper,
+    Key as KeyMapper,
     Member as MemberMapper,
-    Organ as OrganMapper,
-};
+    Organ as OrganMapper};
 use Checker\Mapper\Factory\{
     InstallationFactory as InstallationMapperFactory,
+    KeyFactory as KeyMapperFactory,
     MemberFactory as MemberMapperFactory,
-    OrganFactory as OrganMapperFactory,
-};
+    OrganFactory as OrganMapperFactory};
 use Checker\Service\{
     Checker as CheckerService,
     Installation as InstallationService,
+    Key as KeyService,
     Meeting as MeetingService,
     Member as MemberService,
-    Organ as OrganService,
-};
+    Organ as OrganService};
 use Checker\Service\Factory\{
     CheckerFactory as CheckerServiceFactory,
     InstallationFactory as InstallationServiceFactory,
+    KeyFactory as KeyServiceFactory,
     MeetingFactory as MeetingServiceFactory,
     MemberFactory as MemberServiceFactory,
-    OrganFactory as OrganServiceFactory,
-};
+    OrganFactory as OrganServiceFactory};
 use Psr\Container\ContainerInterface;
 
 class Module
@@ -66,10 +66,12 @@ class Module
                 CheckMembershipTypeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
                 InstallationService::class => InstallationServiceFactory::class,
+                KeyService::class => KeyServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
                 OrganService::class => OrganServiceFactory::class,
                 InstallationMapper::class => InstallationMapperFactory::class,
+                KeyMapper::class => KeyMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
                 OrganMapper::class => OrganMapperFactory::class,
                 'checker_mail_transport' => function (ContainerInterface $container) {

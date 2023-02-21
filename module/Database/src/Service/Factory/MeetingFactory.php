@@ -13,6 +13,8 @@ use Database\Form\Destroy as DestroyForm;
 use Database\Form\Export as ExportForm;
 use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
+use Database\Form\Key\Grant as KeyGrantForm;
+use Database\Form\Key\Withdraw as KeyWithdrawForm;
 use Database\Form\Other as OtherForm;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Member as MemberMapper;
@@ -57,6 +59,10 @@ class MeetingFactory implements FactoryInterface
         $foundationForm = $container->get(FoundationForm::class);
         /** @var InstallForm $installForm */
         $installForm = $container->get(InstallForm::class);
+        /** @var KeyGrantForm $keyGrantForm */
+        $keyGrantForm = $container->get(KeyGrantForm::class);
+        /** @var KeyWithdrawForm $keyWithdrawForm */
+        $keyWithdrawForm = $container->get(KeyWithdrawForm::class);
         /** @var OtherForm $otherForm */
         $otherForm = $container->get(OtherForm::class);
         /** @var MeetingMapper $meetingMapper */
@@ -78,6 +84,8 @@ class MeetingFactory implements FactoryInterface
             $exportForm,
             $foundationForm,
             $installForm,
+            $keyGrantForm,
+            $keyWithdrawForm,
             $otherForm,
             $meetingMapper,
             $memberMapper,

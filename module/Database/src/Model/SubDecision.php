@@ -3,16 +3,6 @@
 namespace Database\Model;
 
 use Application\Model\Enums\MeetingTypes;
-use Doctrine\ORM\Mapping\{
-    Column,
-    DiscriminatorColumn,
-    DiscriminatorMap,
-    Entity,
-    Id,
-    InheritanceType,
-    JoinColumn,
-    ManyToOne,
-};
 use Database\Model\SubDecision\{
     Abrogation,
     Board\Discharge as BoardDischarge,
@@ -24,8 +14,20 @@ use Database\Model\SubDecision\{
     Foundation,
     FoundationReference,
     Installation,
+    Key\Granting as KeyGranting,
+    Key\Withdrawal as KeyWithdrawal,
     Other,
     Reckoning,
+};
+use Doctrine\ORM\Mapping\{
+    Column,
+    DiscriminatorColumn,
+    DiscriminatorMap,
+    Entity,
+    Id,
+    InheritanceType,
+    JoinColumn,
+    ManyToOne,
 };
 
 /**
@@ -51,6 +53,8 @@ use Database\Model\SubDecision\{
         "board_release" => BoardRelease::class,
         "board_discharge" => BoardDischarge::class,
         "foundationreference" => FoundationReference::class,
+        "key_granting" => KeyGranting::class,
+        "key_withdraw" => KeyWithdrawal::class,
     ],
 )]
 abstract class SubDecision
