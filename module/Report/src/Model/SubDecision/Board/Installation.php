@@ -147,6 +147,14 @@ class Installation extends SubDecision
     }
 
     /**
+     * Clears the discharge, if it exists.
+     */
+    public function clearDischarge(): void
+    {
+        $this->discharge = null;
+    }
+
+    /**
      * Get the release.
      *
      * @return ?Release
@@ -154,6 +162,14 @@ class Installation extends SubDecision
     public function getRelease(): ?Release
     {
         return $this->release;
+    }
+
+    /**
+     * Clears the release, if it exists.
+     */
+    public function clearRelease(): void
+    {
+        $this->release = null;
     }
 
     /**

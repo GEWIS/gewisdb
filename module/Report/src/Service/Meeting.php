@@ -337,6 +337,24 @@ class Meeting
                 }
 
                 break;
+            case $subDecision instanceof ReportSubDecisionModel\Board\Installation:
+                $boardMember = $subDecision->getBoardMember();
+                $this->emReport->remove($boardMember);
+                break;
+            case $subDecision instanceof ReportSubDecisionModel\Board\Release:
+                $installation = $subDecision->getInstallation();
+                $installation->clearRelease();
+
+                $boardMember = $installation->getBoardMember();
+                $boardMember->setReleaseDate(null);
+                break;
+            case $subDecision instanceof ReportSubDecisionModel\Board\Discharge:
+                $installation = $subDecision->getInstallation();
+                $installation->clearDischarge();
+
+                $boardMember = $installation->getBoardMember();
+                $boardMember->setDischargeDate(null);
+                break;
             case $subDecision instanceof ReportSubDecisionModel\Key\Granting:
                 $keyholder = $subDecision->getKeyholder();
                 $this->emReport->remove($keyholder);
