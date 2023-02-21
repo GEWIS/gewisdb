@@ -1921,6 +1921,11 @@ Search.appendIndex(
             "summary": "Search\u0020action.",
             "url": "classes/Database-Controller-MemberController.html#method_searchAction"
         },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AsearchFilteredAction\u0028\u0029",
+            "name": "searchFilteredAction",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#method_searchFilteredAction"
+        },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AshowAction\u0028\u0029",
             "name": "showAction",
             "summary": "Show\u0020action.",
@@ -6095,6 +6100,11 @@ Search.appendIndex(
             "name": "search",
             "summary": "Search\u0020for\u0020a\u0020member.",
             "url": "classes/Database-Service-Member.html#method_search"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AsearchFiltered\u0028\u0029",
+            "name": "searchFiltered",
+            "summary": "Search\u0020for\u0020a\u0020member\u0020that\u0020is\u0020not\u0020deleted,\u0020expired,\u0020and\u0020hidden.",
+            "url": "classes/Database-Service-Member.html#method_searchFiltered"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AsearchProspective\u0028\u0029",
             "name": "searchProspective",
