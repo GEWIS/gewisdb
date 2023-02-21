@@ -315,7 +315,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Report-Model-SubDecision-Board-Installation.html#property_discharge">$discharge</a>
     <span>
-                        &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a>            </span>
+                        &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a>|null            </span>
 </dt>
 <dd>Discharge.</dd>
 
@@ -357,11 +357,25 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Report-Model-SubDecision-Board-Installation.html#property_release">$release</a>
     <span>
-                        &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a>            </span>
+                        &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a>|null            </span>
 </dt>
 <dd>Release.</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_clearDischarge">clearDischarge()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Clears the discharge, if it exists.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_clearRelease">clearRelease()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Clears the release, if it exists.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_getBoardMember">getBoardMember()</a>
     <span>
                                 &nbsp;: <a href="classes/Report-Model-BoardMember.html"><abbr title="\Report\Model\BoardMember">BoardMember</abbr></a>    </span>
@@ -406,7 +420,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_getDischarge">getDischarge()</a>
     <span>
-                                &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a>|null    </span>
 </dt>
 <dd>Get the discharge.</dd>
 
@@ -448,7 +462,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_getRelease">getRelease()</a>
     <span>
-                                &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a>|null    </span>
 </dt>
 <dd>Get the release.</dd>
 
@@ -738,9 +752,9 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a></span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$discharge</span>
-    </code>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
         <section class="phpdocumentor-description"></section>
@@ -950,9 +964,9 @@ Also, honorary, external and extraordinary members cannot be board members.
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a></span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$release</span>
-    </code>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
         <section class="phpdocumentor-description"></section>
@@ -973,6 +987,72 @@ Also, honorary, external and extraordinary members cannot be board members.
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_clearDischarge">
+        clearDischarge()
+        <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_clearDischarge" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Board/Installation.php"><a href="files/module-report-src-model-subdecision-board-installation.html"><abbr title="module/Report/src/Model/SubDecision/Board/Installation.php">Installation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">152</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Clears the discharge, if it exists.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">clearDischarge</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_clearRelease">
+        clearRelease()
+        <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_clearRelease" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Board/Installation.php"><a href="files/module-report-src-model-subdecision-board-installation.html"><abbr title="module/Report/src/Model/SubDecision/Board/Installation.php">Installation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">170</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Clears the release, if it exists.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">clearRelease</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getBoardMember">
         getBoardMember()
         <a href="classes/Report-Model-SubDecision-Board-Installation.html#method_getBoardMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -980,7 +1060,7 @@ Also, honorary, external and extraordinary members cannot be board members.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Board/Installation.php"><a href="files/module-report-src-model-subdecision-board-installation.html"><abbr title="module/Report/src/Model/SubDecision/Board/Installation.php">Installation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">164</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 
@@ -1186,14 +1266,14 @@ Also, honorary, external and extraordinary members cannot be board members.
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDischarge</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getDischarge</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a>|null</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Discharge.html"><abbr title="\Report\Model\SubDecision\Board\Discharge">Discharge</abbr></a>|null</span>
             &mdash;
         
     
@@ -1376,7 +1456,7 @@ Also, honorary, external and extraordinary members cannot be board members.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Board/Installation.php"><a href="files/module-report-src-model-subdecision-board-installation.html"><abbr title="module/Report/src/Model/SubDecision/Board/Installation.php">Installation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">154</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
@@ -1384,14 +1464,14 @@ Also, honorary, external and extraordinary members cannot be board members.
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRelease</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getRelease</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a>|null</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-SubDecision-Board-Release.html"><abbr title="\Report\Model\SubDecision\Board\Release">Release</abbr></a>|null</span>
             &mdash;
         
     

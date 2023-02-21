@@ -3291,6 +3291,11 @@ Search.appendIndex(
             "summary": "Find\u0020current\u0020board\u0020members.",
             "url": "classes/Database-Mapper-Meeting.html#method_findCurrentBoard"
         },                {
+            "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AfindCurrentBoardNotYetReleased\u0028\u0029",
+            "name": "findCurrentBoardNotYetReleased",
+            "summary": "",
+            "url": "classes/Database-Mapper-Meeting.html#method_findCurrentBoardNotYetReleased"
+        },                {
             "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AfindCurrentKeys\u0028\u0029",
             "name": "findCurrentKeys",
             "summary": "Find\u0020all\u0020currently\u0020granted\u0020key\u0020codes.",
@@ -5771,6 +5776,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020current\u0020board\u0020installations.",
             "url": "classes/Database-Service-Meeting.html#method_getCurrentBoard"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetCurrentBoardNotYetReleased\u0028\u0029",
+            "name": "getCurrentBoardNotYetReleased",
+            "summary": "Get\u0020the\u0020current\u0020board\u0020installations,\u0020but\u0020without\u0020board\u0020members\u0020who\u0020have\u0020already\u0020been\u0020released.",
+            "url": "classes/Database-Service-Meeting.html#method_getCurrentBoardNotYetReleased"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetCurrentKeys\u0028\u0029",
             "name": "getCurrentKeys",
             "summary": "",
@@ -6581,10 +6591,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_processKeyholderUpdates"
         },                {
+            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003AprocessBoardMemberUpdates\u0028\u0029",
+            "name": "processBoardMemberUpdates",
+            "summary": "",
+            "url": "classes/Report-Listener-DatabaseUpdateListener.html#method_processBoardMemberUpdates"
+        },                {
             "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024isflushing",
             "name": "isflushing",
             "summary": "",
             "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_isflushing"
+        },                {
+            "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024boardService",
+            "name": "boardService",
+            "summary": "",
+            "url": "classes/Report-Listener-DatabaseUpdateListener.html#property_boardService"
         },                {
             "fqsen": "\\Report\\Listener\\DatabaseUpdateListener\u003A\u003A\u0024keyholderService",
             "name": "keyholderService",
@@ -7931,10 +7951,20 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020discharge.",
             "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_getDischarge"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AclearDischarge\u0028\u0029",
+            "name": "clearDischarge",
+            "summary": "Clears\u0020the\u0020discharge,\u0020if\u0020it\u0020exists.",
+            "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_clearDischarge"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetRelease\u0028\u0029",
             "name": "getRelease",
             "summary": "Get\u0020the\u0020release.",
             "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_getRelease"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AclearRelease\u0028\u0029",
+            "name": "clearRelease",
+            "summary": "Clears\u0020the\u0020release,\u0020if\u0020it\u0020exists.",
+            "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_clearRelease"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetBoardMember\u0028\u0029",
             "name": "getBoardMember",
@@ -8525,6 +8555,21 @@ Search.appendIndex(
             "name": "generate",
             "summary": "Export\u0020board\u0020info.",
             "url": "classes/Report-Service-Board.html#method_generate"
+        },                {
+            "fqsen": "\\Report\\Service\\Board\u003A\u003AgenerateInstallation\u0028\u0029",
+            "name": "generateInstallation",
+            "summary": "",
+            "url": "classes/Report-Service-Board.html#method_generateInstallation"
+        },                {
+            "fqsen": "\\Report\\Service\\Board\u003A\u003AgenerateDischarge\u0028\u0029",
+            "name": "generateDischarge",
+            "summary": "",
+            "url": "classes/Report-Service-Board.html#method_generateDischarge"
+        },                {
+            "fqsen": "\\Report\\Service\\Board\u003A\u003AgenerateRelease\u0028\u0029",
+            "name": "generateRelease",
+            "summary": "",
+            "url": "classes/Report-Service-Board.html#method_generateRelease"
         },                {
             "fqsen": "\\Report\\Service\\Board\u003A\u003A\u0024emReport",
             "name": "emReport",
