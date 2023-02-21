@@ -347,6 +347,9 @@ class Meeting
         ];
     }
 
+    /**
+     * Key code granting decision.
+     */
     public function keyGrantDecision(array $data): array
     {
         $form = $this->getKeyGrantForm();
@@ -373,6 +376,9 @@ class Meeting
         ];
     }
 
+    /**
+     * Key code withdrawal decision.
+     */
     public function keyWithdrawDecision(array $data): array
     {
         $form = $this->getKeyWithdrawForm();
