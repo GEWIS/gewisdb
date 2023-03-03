@@ -14,7 +14,7 @@ class GenerateAuthenticationKeysCommandFactory implements FactoryInterface
         $requestedName,
         array $options = null,
     ): GenerateAuthenticationKeysCommand {
-        /** @var MemberService $checkerService */
+        /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
 
         return new GenerateAuthenticationKeysCommand($memberService);

@@ -11,7 +11,7 @@ class ApiPrincipalAdapterFactory implements FactoryInterface
 {
     /**
      * @param ContainerInterface $container
-     * @param $requestedName
+     * @param string $requestedName
      * @param array|null $options
      *
      * @return ApiPrincipalAdapter

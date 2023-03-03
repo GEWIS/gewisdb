@@ -44,7 +44,7 @@ class ApiPrincipal
     }
 
     /**
-     * @param string $password
+     * @param string $token
      */
     public function setToken(string $token): void
     {

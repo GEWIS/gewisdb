@@ -24,13 +24,10 @@ class Module
         $eventManager = $event->getApplication()->getEventManager();
         $authService = $sm->get(AuthenticationService::class);
         $authService->setStorage(new SessionStorage('gewisdb'));
-        $apiAuthService = $sm->get(ApiAuthenticationService::class);
-        $authAdapter = $sm->get(ApiPrincipalAdapter::class);
 
         $eventManager->attach(MvcEvent::EVENT_ROUTE, function (MvcEvent $e) use (
             $authService,
-            $apiAuthService,
-            $authAdapter,
+            $sm,
         ) {
             if ($authService->hasIdentity()) {
                 // user is logged in, just continue
@@ -66,6 +63,8 @@ class Module
                 || str_starts_with($match->getMatchedRouteName(), 'api/')
             ) {
                 if ($e->getRequest()->getHeaders()->has('Authorization')) {
+                    $apiAuthService = $sm->get(ApiAuthenticationService::class);
+                    $authAdapter = $sm->get(ApiPrincipalAdapter::class);
                     // This is an API call, we do this on every request
                     $token = $e->getRequest()->getHeaders()->get('Authorization')->getFieldValue();
                     $authAdapter->setCredentials(substr($token, strlen("Bearer ")));

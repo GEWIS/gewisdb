@@ -29,6 +29,7 @@ class ApiPrincipalMapper
 
     public function findByToken(string $token): ?ApiPrincipalModel
     {
+        /** @var array<array-key, ApiPrincipalModel> $results */
         $results = $this->getRepository()->findBy(["token" => $token], limit: 1);
         return (count($results) > 0) ? $results[0] : null;
     }

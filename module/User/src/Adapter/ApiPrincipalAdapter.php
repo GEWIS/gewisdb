@@ -2,9 +2,9 @@
 
 namespace User\Adapter;
 
+use User\Mapper\ApiPrincipalMapper;
 use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Authentication\Result;
-use User\Mapper\ApiPrincipalMapper;
 
 class ApiPrincipalAdapter implements AdapterInterface
 {
