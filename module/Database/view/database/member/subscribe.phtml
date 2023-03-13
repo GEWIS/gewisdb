@@ -13,7 +13,7 @@ $this->inlineScript()->appendFile($this->basePath() . '/js/inputvalidator.min.js
 
 $form->prepare();
 
-$form->setAttribute('action', $this->url('member/default', array('action' => 'subscribe')));
+$form->setAttribute('action', $this->url('member/subscribe'));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');

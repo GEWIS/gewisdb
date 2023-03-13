@@ -21,7 +21,7 @@ $(document).ready(function () {
         if (username.length >= 6) {
             currentrequest = $.ajax({
                 dataType: 'json',
-                url: '<?= $this->url('member/default', array('action' => 'tuerequest')) ?>?u=' + username,
+                url: '<?= $this->url('member/tuerequest') ?>?u=' + username,
                 context: document.body,
                 beforeSend: () => {
                     if (currentrequest != undefined) { currentrequest.abort(); }

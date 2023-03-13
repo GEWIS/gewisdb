@@ -27,8 +27,7 @@ class IndexController extends AbstractActionController
         if (null === $this->identity()) {
             // If not logged in, the language action was likely called from the enrolment form, so redirect back to it.
             return $this->redirect()->toRoute(
-                'member/default',
-                ['action' => 'subscribe'],
+                'member/subscribe',
             );
         }
 

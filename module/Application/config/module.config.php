@@ -3,6 +3,7 @@
 use Application\Controller\IndexController;
 use Laminas\I18n\Translator\Resources;
 use Laminas\Router\Http\Segment;
+use User\Listener\AuthenticationListener;
 
 return [
     'router' => [
@@ -15,6 +16,7 @@ return [
                         'controller' => IndexController::class,
                         'action' => 'lang',
                         'lang' => 'en',
+                        'auth_type' => AuthenticationListener::AUTH_NONE,
                     ],
                     'constraints' => [
                         'lang' => '[a-zA-Z_]{2,5}',

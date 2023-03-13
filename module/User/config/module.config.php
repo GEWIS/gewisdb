@@ -5,11 +5,22 @@ namespace User;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
-use Laminas\Router\Http\Literal;
-use Laminas\Router\Http\Segment;
+use Laminas\Router\Http\{
+    Literal,
+    Segment,
+};
 use User\Adapter\ApiPrincipalAdapter;
 use User\Adapter\Factory\ApiPrincipalAdapterFactory;
-use User\Controller\UserController;
+use User\Controller\{
+    UserController,
+    SettingsController,
+};
+use User\Controller\Factory\{
+    SettingsControllerFactory,
+    UserControllerFactory,
+};
+use User\Factory\PasswordFactory;
+use User\Listener\AuthenticationListener;
 use User\Mapper\{
     ApiPrincipalMapper,
     UserMapper,
@@ -17,6 +28,12 @@ use User\Mapper\{
 use User\Mapper\Factory\{
     ApiPrincipalMapperFactory,
     UserMapperFactory,
+};
+use User\Model\User;
+use User\Form\{
+    Login,
+    UserCreate,
+    UserEdit,
 };
 use User\Service\{
     ApiAuthenticationService,
@@ -27,18 +44,6 @@ use User\Service\Factory\{
     AuthenticationServiceFactory,
     UserServiceFactory,
 };
-use User\Controller\SettingsController;
-use User\Controller\Factory\{
-    SettingsControllerFactory,
-    UserControllerFactory,
-};
-use User\Form\{
-    Login,
-    UserCreate,
-    UserEdit,
-};
-use User\Factory\PasswordFactory;
-use User\Model\User;
 
 return [
     'router' => [
@@ -50,6 +55,7 @@ return [
                     'defaults' => [
                         'controller' => UserController::class,
                         'action' => 'index',
+                        'auth_type' => AuthenticationListener::AUTH_NONE,
                     ],
                 ],
                 'may_terminate' => true,

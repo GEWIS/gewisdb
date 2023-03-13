@@ -33,6 +33,7 @@ use Laminas\Router\Http\{
     Literal,
     Segment,
 };
+use User\Listener\AuthenticationListener;
 
 return [
     'router' => [
@@ -367,12 +368,32 @@ return [
                             ],
                         ],
                     ],
-                    'default' => [
-                        'type'    => Segment::class,
+                    'subscribe' => [
+                        'type' => Literal::class,
                         'options' => [
-                            'route'    => '/:action',
-                            'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            'route' => '/subscribe',
+                            'priority' => 100,
+                            'defaults' => [
+                                'action' => 'subscribe',
+                                'auth_type' => AuthenticationListener::AUTH_NONE,
+                            ],
+                        ],
+                    ],
+                    'search' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/search',
+                            'defaults' => [
+                                'action' => 'search',
+                            ],
+                        ],
+                    ],
+                    'searchFiltered' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/searchFiltered',
+                            'defaults' => [
+                                'action' => 'searchFiltered',
                             ],
                         ],
                     ],
@@ -560,6 +581,7 @@ return [
                     'defaults' => [
                         'controller' => ApiController::class,
                         'action'     => 'healthy',
+                        'auth_type'  => AuthenticationListener::AUTH_API,
                     ],
                 ],
                 'may_terminate' => true,
