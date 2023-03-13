@@ -8,11 +8,15 @@ use Database\Service\Api as ApiService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
+use User\Model\Exception\NotAllowed as NotAllowedException;
+use User\Model\Enums\ApiPermissions;
+use User\Service\ApiAuthenticationService;
 
 class ApiController extends AbstractActionController
 {
     public function __construct(
         private readonly ApiService $apiService,
+        private readonly ApiAuthenticationService $apiAuthService,
     ) {
     }
 
@@ -21,6 +25,7 @@ class ApiController extends AbstractActionController
      */
     public function healthyAction(): JsonModel
     {
+        $this->apiAuthService->assertCan(ApiPermissions::HealthR);
         return new JsonModel([
             "healthy" => true,
         ]);
@@ -31,6 +36,7 @@ class ApiController extends AbstractActionController
      */
     public function membersAction(): JsonModel
     {
+        $this->apiAuthService->assertCan(ApiPermissions::MembersR);
         $members = $this->apiService->getMembers();
         $res = [
             "data" => $members,
@@ -43,6 +49,7 @@ class ApiController extends AbstractActionController
      */
     public function memberAction(): JsonModel
     {
+        $this->apiAuthService->assertCan(ApiPermissions::MembersR);
         $member = $this->apiService->getMember((int) $this->params()->fromRoute('id'));
         $res = [
             "data" => $member,

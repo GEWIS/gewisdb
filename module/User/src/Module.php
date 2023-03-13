@@ -8,9 +8,13 @@ use Laminas\Authentication\{
 };
 use Laminas\Mvc\MvcEvent;
 use Laminas\Authentication\Storage\Session as SessionStorage;
+use Laminas\Authentication\Storage\NonPersistent as NonPersistentStorage;
 use Laminas\Http\Request;
 use User\Adapter\ApiPrincipalAdapter;
-use User\Listener\AuthenticationListener;
+use User\Listener\{
+    AuthenticationListener,
+    AuthorizationListener
+};
 use User\Mapper\ApiPrincipalMapper;
 use User\Service\ApiAuthenticationService;
 
@@ -26,15 +30,26 @@ class Module
         $authService = $sm->get(AuthenticationService::class);
         $authService->setStorage(new SessionStorage('gewisdb'));
         $apiAuthService = $sm->get(ApiAuthenticationService::class);
+        $apiAuthService->setStorage(new NonPersistentStorage());
         $apiPrincipalAdapter = $sm->get(ApiPrincipalAdapter::class);
 
+        /**
+         * Establish an identity of the user using the authentication listener
+         */
         $authenticationListener = new AuthenticationListener(
             $authService,
             $apiAuthService,
             $apiPrincipalAdapter,
         );
-
         $eventManager->attach(MvcEvent::EVENT_ROUTE, $authenticationListener, -100);
+
+        /**
+         * Catch authorization exceptions
+         */
+        $authorizationListener = new AuthorizationListener(
+            $apiAuthService,
+        );
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, $authorizationListener);
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
             if (!$authService->hasIdentity()) {

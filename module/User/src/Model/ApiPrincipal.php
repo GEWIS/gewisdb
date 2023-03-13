@@ -61,4 +61,16 @@ class ApiPrincipal
     {
         $this->token = $token;
     }
+
+    /**
+     * @param ApiPermissions $permission
+     */
+    public function can(ApiPermissions $permission): bool
+    {
+        if (in_array(ApiPermissions::All, $this->permissions, true)) {
+            return true;
+        }
+
+        return in_array($permission, $this->permissions, true);
+    }
 }
