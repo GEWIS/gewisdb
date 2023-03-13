@@ -7,6 +7,7 @@ namespace Report\Listener;
 use Database\Model\Address as DatabaseAddressModel;
 use Database\Model\Decision as DatabaseDecisionModel;
 use Database\Model\MailingList as DatabaseMailingListModel;
+use Database\Model\MailingListMember as DatabaseMailingListMemberModel;
 use Database\Model\Meeting as DatabaseMeetingModel;
 use Database\Model\Member as DatabaseMemberModel;
 use Database\Model\SubDecision as DatabaseSubDecisionModel;
@@ -94,6 +95,10 @@ class DatabaseUpdateListener
 
             case $entity instanceof DatabaseMailingListModel:
                 $this->miscService->generateList($entity);
+                break;
+
+            case $entity instanceof DatabaseMailingListMemberModel:
+                $this->miscService->generateListMembership($entity);
                 break;
 
             default:

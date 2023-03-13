@@ -136,14 +136,14 @@ use Laminas\View\Renderer\PhpRenderer;
             </div>
             <div class="col-md-12">
                 <h3><?= $this->translate('Mailing List Subscriptions') ?></h3>
-                <?php if (0 === $member->getLists()->count()): ?>
+                <?php if (0 === count($member->getLists())): ?>
                     <p>
                         <?= $this->translate('No mailing list subscriptions.') ?>
                     </p>
                 <?php else: ?>
                     <ul>
                         <?php foreach ($member->getLists() as $list): ?>
-                            <li><?= $list->getName() ?></li>
+                            <li><?= $list ?></li>
                         <?php endforeach ?>
                     </ul>
                 <?php endif; ?>

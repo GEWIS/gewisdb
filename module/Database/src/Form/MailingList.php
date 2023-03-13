@@ -6,6 +6,7 @@ namespace Database\Form;
 
 use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Element\Textarea;
@@ -62,12 +63,36 @@ class MailingList extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name' => 'mailmanId',
+            'type' => Select::class,
+            'options' => [
+                'label' => $this->translator->translate('Mailman Mailing List'),
+                'empty_option' => $this->translator->translate('Choose a mailing list'),
+                'value_options' => [],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
                 'value' => $this->translator->translate('Add Mailing List'),
             ],
         ]);
+    }
+
+    /**
+     * @param string[] $mailmanIds
+     */
+    public function setMailmanIds(array $mailmanIds): void
+    {
+        $options = [];
+
+        foreach ($mailmanIds as $mailmanId) {
+            $options[$mailmanId] = $mailmanId;
+        }
+
+        $this->get('mailmanId')->setValueOptions($options);
     }
 
     /**

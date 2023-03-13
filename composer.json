@@ -12,6 +12,7 @@
     "require": {
         "php": "^8.3.0",
         "ext-intl": "*",
+        "ext-memcached": "^3.2",
         "ext-pdo_pgsql": "*",
         "ext-pgsql": "*",
         "ext-zend-opcache": "*",
@@ -56,7 +57,9 @@
         "stripe/stripe-php": "^10.21",
         "doctrine/migrations": "^3.8",
         "doctrine/data-fixtures": "^2.0",
-        "fakerphp/faker": "^1.24"
+        "fakerphp/faker": "^1.24",
+        "laminas/laminas-cache": "^3.12.1",
+        "laminas/laminas-cache-storage-adapter-memcached": "^2.5.0"
     },
     "require-dev": {
         "laminas/laminas-component-installer": "^3.4.0",
