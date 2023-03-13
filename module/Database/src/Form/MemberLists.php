@@ -29,7 +29,7 @@ class MemberLists extends Form implements InputFilterProviderInterface
                 'name' => 'list-' . $list->getName(),
                 'type' => Checkbox::class,
                 'options' => [
-                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription(),
+                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getEnDescription(),
                 ],
             ]);
             foreach ($member->getLists() as $lst) {

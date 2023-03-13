@@ -71,6 +71,7 @@
         <exclude-pattern>module/Database/src/Service/Factory/ApiFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/MailmanFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/StripeFactory.php</exclude-pattern>
