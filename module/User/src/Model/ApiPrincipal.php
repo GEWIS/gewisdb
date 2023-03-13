@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\{
     Id,
     Table,
 };
+use User\Model\Enums\ApiPermissions;
 
 /**
  * Member model.
@@ -26,6 +27,16 @@ class ApiPrincipal
      */
     #[Column(type: "string")]
     protected string $token;
+
+    /**
+     * Permission groups.
+     */
+    #[Column(
+        type: "simple_array",
+        nullable: true,
+        enumType: ApiPermissions::class,
+    )]
+    protected array $permissions;
 
     /**
      * @return int|null

@@ -2,9 +2,6 @@
 
 namespace User;
 
-use User\Service\ApiAuthenticationService;
-use User\Adapter\ApiPrincipalAdapter;
-use User\Mapper\ApiPrincipalMapper;
 use Laminas\Authentication\{
     AuthenticationService,
     Result,
@@ -12,6 +9,10 @@ use Laminas\Authentication\{
 use Laminas\Mvc\MvcEvent;
 use Laminas\Authentication\Storage\Session as SessionStorage;
 use Laminas\Http\Request;
+use User\Adapter\ApiPrincipalAdapter;
+use User\Listener\AuthenticationListener;
+use User\Mapper\ApiPrincipalMapper;
+use User\Service\ApiAuthenticationService;
 
 class Module
 {
@@ -24,69 +25,16 @@ class Module
         $eventManager = $event->getApplication()->getEventManager();
         $authService = $sm->get(AuthenticationService::class);
         $authService->setStorage(new SessionStorage('gewisdb'));
+        $apiAuthService = $sm->get(ApiAuthenticationService::class);
+        $apiPrincipalAdapter = $sm->get(ApiPrincipalAdapter::class);
 
-        $eventManager->attach(MvcEvent::EVENT_ROUTE, function (MvcEvent $e) use (
+        $authenticationListener = new AuthenticationListener(
             $authService,
-            $sm,
-        ) {
-            if ($authService->hasIdentity()) {
-                // user is logged in, just continue
-                return;
-            }
+            $apiAuthService,
+            $apiPrincipalAdapter,
+        );
 
-            $match = $e->getRouteMatch();
-
-            if ($match === null) {
-                // won't happen, but just in case
-                return;
-            }
-
-            if (
-                $match->getMatchedRouteName() === 'member/default'
-                && $match->getParam('action') === 'subscribe'
-            ) {
-                return;
-            }
-
-            if (
-                $match->getMatchedRouteName() === 'lang'
-                && ($match->getParam('lang') === 'nl' || $match->getParam('lang') === 'en')
-            ) {
-                return;
-            }
-
-            /**
-             * Special authorization for API routes
-             */
-            if (
-                $match->getMatchedRouteName() === 'api'
-                || str_starts_with($match->getMatchedRouteName(), 'api/')
-            ) {
-                if ($e->getRequest()->getHeaders()->has('Authorization')) {
-                    $apiAuthService = $sm->get(ApiAuthenticationService::class);
-                    $authAdapter = $sm->get(ApiPrincipalAdapter::class);
-                    // This is an API call, we do this on every request
-                    $token = $e->getRequest()->getHeaders()->get('Authorization')->getFieldValue();
-                    $authAdapter->setCredentials(substr($token, strlen("Bearer ")));
-                    $result = $apiAuthService->authenticate($authAdapter);
-                    if ($result->isValid()) {
-                        return;
-                    }
-                }
-
-                $response = $e->getResponse();
-                $response->getHeaders()->addHeaderLine('WWW-Authenticate', 'Bearer realm="/api"');
-                $response->setStatusCode(401);
-                return $response;
-            }
-
-            if ($match->getMatchedRouteName() !== 'user') {
-                $response = $e->getResponse();
-                $response->getHeaders()->addHeaderLine('Location', '/user');
-                $response->setStatusCode(302);
-                return $response;
-            }
-        }, -100);
+        $eventManager->attach(MvcEvent::EVENT_ROUTE, $authenticationListener, -100);
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
             if (!$authService->hasIdentity()) {
