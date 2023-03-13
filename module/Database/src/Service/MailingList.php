@@ -8,6 +8,9 @@ use Database\Form\DeleteList as DeleteListForm;
 use Database\Form\MailingList as MailingListForm;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Model\MailingList as MailingListModel;
+use Database\Service\Mailman as MailmanService;
+
+use function boolval;
 
 class MailingList
 {
@@ -15,6 +18,7 @@ class MailingList
         private readonly DeleteListForm $deleteListForm,
         private readonly MailingListForm $mailingListForm,
         private readonly MailingListMapper $mailingListMapper,
+        private readonly MailmanService $mailmanService,
     ) {
     }
 
@@ -38,25 +42,29 @@ class MailingList
 
     /**
      * Add a list.
-     *
+     */
+    public function addList(MailingListModel $list): void
+    {
+        $this->getListMapper()->persist($list);
+    }
+
+    /**
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function addList(array $data): bool
-    {
-        $form = $this->getListForm();
+    public function editList(
+        MailingListModel $list,
+        array $data,
+    ): MailingListModel {
+        $list->setName($data['name']);
+        $list->setEnDescription($data['en_description']);
+        $list->setNlDescription($data['nl_description']);
+        $list->setOnForm(boolval($data['onForm']));
+        $list->setDefaultSub(boolval($data['defaultSub']));
+        $list->setMailmanId($data['mailmanId']);
 
-        $form->bind(new MailingListModel());
-        $form->setData($data);
-
-        if (!$form->isValid()) {
-            return false;
-        }
-
-        /** @var MailingListModel $list */
-        $list = $form->getData();
         $this->getListMapper()->persist($list);
 
-        return true;
+        return $list;
     }
 
     /**
@@ -104,5 +112,10 @@ class MailingList
     public function getListMapper(): MailingListMapper
     {
         return $this->mailingListMapper;
+    }
+
+    public function getMailmanService(): MailmanService
+    {
+        return $this->mailmanService;
     }
 }

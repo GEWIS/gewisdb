@@ -53,10 +53,17 @@ services:
 #            - STRIPE_CANCEL_URL=
 #            - STRIPE_SUCCESS_URL=
         depends_on:
+            - memcached
             - postfix
         volumes:
             - gewisdb_data:/code/data:rw
             - gewisdb_public:/code/public:rw
+        networks:
+            - gewisdb_network
+        restart: unless-stopped
+    memcached:
+        image: memcached:alpine
+        entrypoint: [ 'memcached', '-m 256' ]
         networks:
             - gewisdb_network
         restart: unless-stopped

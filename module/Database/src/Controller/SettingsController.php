@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Controller;
 
+use Database\Model\MailingList as MailingListModel;
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
+use Laminas\Http\Request;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -44,15 +46,70 @@ class SettingsController extends AbstractActionController
     /**
      * Mailing list action
      */
-    public function listAction(): ViewModel
+    public function listsAction(): ViewModel
     {
-        if ($this->getRequest()->isPost()) {
-            $this->mailingListService->addList($this->getRequest()->getPost()->toArray());
+        return new ViewModel([
+            'lists' => $this->mailingListService->getAllLists(),
+            'mailman' => $this->mailingListService->getMailmanService()->getMailingListIds(),
+        ]);
+    }
+
+    public function addListAction(): Response|ViewModel
+    {
+        $form = $this->mailingListService->getListForm();
+        $form->setMailmanIds($this->mailingListService->getMailmanService()->getMailingListIds()['lists']);
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->bind(new MailingListModel());
+            $form->setData($request->getPost()->toArray());
+
+            if ($form->isValid()) {
+                /** @var MailingListModel $list */
+                $list = $form->getData();
+                $this->mailingListService->addList($list);
+
+                return $this->redirect()->toRoute('settings/lists/edit', ['name' => $list->getName()]);
+            }
         }
 
         return new ViewModel([
-            'lists' => $this->mailingListService->getAllLists(),
-            'form' => $this->mailingListService->getListForm(),
+            'form' => $form,
+            'action' => 'add',
+        ]);
+    }
+
+    public function editListAction(): Response|ViewModel
+    {
+        $listName = $this->params()->fromRoute('name');
+        $list = $this->mailingListService->getList($listName);
+
+        if (null === $list) {
+            return $this->notFoundAction();
+        }
+
+        $form = $this->mailingListService->getListForm();
+        $form->setMailmanIds($this->mailingListService->getMailmanService()->getMailingListIds()['lists']);
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost()->toArray());
+
+            if ($form->isValid()) {
+                $list = $this->mailingListService->editList($list, $form->getData());
+
+                return $this->redirect()->toRoute('settings/lists/edit', ['name' => $list->getName()]);
+            }
+        }
+
+        $form->setData($list->toArray());
+
+        return new ViewModel([
+            'action' => 'edit',
+            'form' => $form,
+            'list' => $list,
         ]);
     }
 
@@ -79,5 +136,15 @@ class SettingsController extends AbstractActionController
             'form' => $this->mailingListService->getDeleteListForm(),
             'name' => $name,
         ]);
+    }
+
+    /**
+     * Sync known mailing list ids from Mailman
+     */
+    public function syncListsAction(): Response
+    {
+        $this->mailingListService->getMailmanService()->cacheMailingLists();
+
+        return $this->redirect()->toRoute('settings/lists');
     }
 }

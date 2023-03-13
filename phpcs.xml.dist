@@ -64,6 +64,7 @@
         <exclude-pattern>module/Database/src/Mapper/Factory/CheckoutSessionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/MailingListMemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MemberUpdateFactory.php</exclude-pattern>
@@ -74,6 +75,7 @@
         <exclude-pattern>module/Database/src/Service/Factory/FrontPageFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/MailmanFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/StripeFactory.php</exclude-pattern>

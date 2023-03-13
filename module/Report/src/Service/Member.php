@@ -100,11 +100,11 @@ class Member
         $reportListRepo = $this->emReport->getRepository(ReportMailingListModel::class);
 
         $reportLists = array_map(static function ($list) {
-            return $list->getName();
-        }, $reportMember->getLists()->toArray());
+            return $list->getMailingList()->getName();
+        }, $reportMember->getMailingListMemberships()->toArray());
         $lists = array_map(static function ($list) {
-            return $list->getName();
-        }, $member->getLists()->toArray());
+            return $list->getMailingList()->getName();
+        }, $member->getMailingListMemberships()->toArray());
 
         foreach (array_diff($lists, $reportLists) as $list) {
             $reportList = $reportListRepo->find($list);

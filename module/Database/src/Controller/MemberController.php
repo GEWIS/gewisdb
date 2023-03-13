@@ -7,6 +7,7 @@ namespace Database\Controller;
 use Application\Model\Enums\AddressTypes;
 use Checker\Service\Checker as CheckerService;
 use Database\Model\Member as MemberModel;
+use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
 use Laminas\Http\Header\HeaderInterface;
@@ -28,6 +29,7 @@ class MemberController extends AbstractActionController
     public function __construct(
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
+        private readonly MailmanService $mailmanService,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
     ) {
@@ -404,6 +406,14 @@ class MemberController extends AbstractActionController
 
         if ($member->getDeleted()) {
             return $this->memberIsDeleted($member);
+        }
+
+        // If a Mailman sync is in progress, we cannot safely allow edits to mail list memberships.
+        if ($this->mailmanService->isSyncLocked()) {
+            $viewModel = new ViewModel(['member' => $member]);
+            $viewModel->setTemplate('database/member/mailman.phtml');
+
+            return $viewModel;
         }
 
         if ($this->getRequest()->isPost()) {

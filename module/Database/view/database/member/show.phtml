@@ -205,7 +205,7 @@ use Laminas\View\Renderer\PhpRenderer;
 <div class="col-md-6">
 <h3><?= $this->translate('Mailing List Subscriptions') ?></h3>
 <ul>
-<?php foreach ($member->getLists() as $list): ?>
+<?php foreach ($member->getMailingListMemberships() as $list): ?>
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>

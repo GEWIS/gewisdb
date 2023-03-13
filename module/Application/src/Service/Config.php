@@ -15,11 +15,18 @@ class Config
     {
     }
 
+    /**
+     * @template T of bool|string|DateTime|null
+     *
+     * @psalm-param T $default
+     *
+     * @psalm-return (T is null ? bool|string|DateTime|null : T)
+     */
     public function getConfig(
         ConfigNamespaces $namespace,
         string $key,
-        string|DateTime|null $default = null,
-    ): string|DateTime|null {
+        bool|string|DateTime|null $default = null,
+    ): bool|string|DateTime|null {
         $configItem = $this->getConfigItemMapper()->findByKey($namespace, $key);
 
         if (null === $configItem || null === $configItem->getValue()) {
@@ -32,7 +39,7 @@ class Config
     public function setConfig(
         ConfigNamespaces $namespace,
         string $key,
-        string|DateTime $value,
+        bool|string|DateTime $value,
     ): void {
         $configItem = $this->getConfigItemMapper()->findByKey($namespace, $key);
 
