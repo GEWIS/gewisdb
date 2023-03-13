@@ -14,13 +14,11 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\InverseJoinColumn;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\OrderBy;
+
+use function in_array;
 
 /**
  * ProspectiveMember model.
@@ -144,22 +142,10 @@ class ProspectiveMember
     /**
      * Memberships of mailing lists.
      *
-     * @var Collection<array-key, MailingList>
+     * @var string[] $lists
      */
-    #[ManyToMany(
-        targetEntity: MailingList::class,
-        inversedBy: 'members',
-    )]
-    #[JoinTable(name: 'prospective_members_mailinglists')]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-    )]
-    #[InverseJoinColumn(
-        name: 'name',
-        referencedColumnName: 'name',
-    )]
-    protected Collection $lists;
+    #[Column(type: 'simple_array')]
+    protected array $lists = [];
 
     /**
      * The Checkout Sessions for this prospective member.
@@ -186,7 +172,6 @@ class ProspectiveMember
 
     public function __construct()
     {
-        $this->lists = new ArrayCollection();
         $this->checkoutSessions = new ArrayCollection();
     }
 
@@ -494,9 +479,9 @@ class ProspectiveMember
     /**
      * Get mailing list subscriptions.
      *
-     * @return Collection<array-key, MailingList>
+     * @return string[]
      */
-    public function getLists(): Collection
+    public function getLists(): array
     {
         return $this->lists;
     }
@@ -506,15 +491,19 @@ class ProspectiveMember
      *
      * Note that this is the owning side.
      */
-    public function addList(MailingList $list): void
+    public function addList(string $list): void
     {
+        if (in_array($list, $this->lists)) {
+            return;
+        }
+
         $this->lists[] = $list;
     }
 
     /**
      * Add multiple mailing lists.
      *
-     * @param MailingList[] $lists
+     * @param string[] $lists
      */
     public function addLists(array $lists): void
     {

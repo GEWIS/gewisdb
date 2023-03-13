@@ -154,7 +154,7 @@ class Member
             ->from(MemberModel::class, 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.installations', 'r')
-            ->leftJoin('m.lists', 'l')
+            ->leftJoin('m.mailingListMemberships', 'l')
             ->andWhere('(r.function = \'Lid\' OR r.function = \'Inactief Lid\' OR r.function IS NULL)');
 
         // discharges
@@ -217,7 +217,7 @@ class Member
         $qb->select('m, l')
             ->from('Database\Model\Member', 'm')
             ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.lists', 'l')
+            ->leftJoin('m.mailingListMemberships', 'l')
             ->orderBy('m.lidnr', 'DESC');
 
         $qb->setParameter(':lidnr', $lidnr);

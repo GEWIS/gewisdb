@@ -268,11 +268,11 @@ Registration&nbsp;Confirmation&nbsp;GEWIS
                                                                         </tbody>
                                                                     </table>
 
-                                                                    <?php if ($member->getLists()->count() > 0): ?>
+                                                                    <?php if (count($member->getLists()) > 0): ?>
                                                                         <h3>Mailing Lists</h3>
                                                                         <ul>
                                                                             <?php foreach ($member->getLists() as $list): ?>
-                                                                                <li><?= $this->escapeHtml($list->getName()) ?></li>
+                                                                                <li><?= $this->escapeHtml($list) ?></li>
                                                                             <?php endforeach; ?>
                                                                         </ul>
                                                                     <?php endif; ?>

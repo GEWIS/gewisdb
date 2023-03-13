@@ -24,6 +24,7 @@ use Database\Form\MemberType as MemberTypeForm;
 use Database\Mapper\ActionLink as ActionLinkMapper;
 use Database\Mapper\Audit as AuditMapper;
 use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
@@ -32,12 +33,14 @@ use Database\Model\AuditEntry as AuditEntryModel;
 use Database\Model\AuditNote as AuditNoteModel;
 use Database\Model\AuditRenewal as AuditRenewalModel;
 use Database\Model\MailingList as MailingListModel;
+use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\MemberUpdate as MemberUpdateModel;
 use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Model\RenewalLink as RenewalLinkModel;
 use Database\Service\MailingList as MailingListService;
+use Database\Service\Mailman as MailmanService;
 use DateTime;
 use InvalidArgumentException;
 use Laminas\Mail\Header\MessageId;
@@ -52,6 +55,8 @@ use ReflectionClass;
 use RuntimeException;
 use User\Service\UserService;
 
+use function array_diff;
+use function array_intersect;
 use function array_merge;
 use function bin2hex;
 use function count;
@@ -76,6 +81,7 @@ class Member
         private readonly MemberRenewalForm $memberRenewalForm,
         private readonly MemberTypeForm $memberTypeForm,
         private readonly MailingListMapper $mailingListMapper,
+        private readonly MailingListMemberMapper $mailingListMemberMapper,
         private readonly ActionLinkMapper $actionLinkMapper,
         private readonly AuditMapper $auditMapper,
         private readonly MemberMapper $memberMapper,
@@ -84,6 +90,7 @@ class Member
         private readonly CheckerService $checkerService,
         private readonly FileStorageService $fileStorageService,
         private readonly MailingListService $mailingListService,
+        private readonly MailmanService $mailmanService,
         private readonly RenewalService $renewalService,
         private readonly UserService $userService,
         private readonly PhpRenderer $viewRenderer,
@@ -136,13 +143,13 @@ class Member
                 continue;
             }
 
-            $prospectiveMember->addList($list);
+            $prospectiveMember->addList($list->getName());
         }
 
         // subscribe to default mailing lists not on the form
         $mailingMapper = $this->mailingListMapper;
         foreach ($mailingMapper->findDefault() as $list) {
-            $prospectiveMember->addList($list);
+            $prospectiveMember->addList($list->getName());
         }
 
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
@@ -302,7 +309,7 @@ class Member
         foreach ($form->getLists() as $list) {
             $result = '0';
             foreach ($prospectiveMember->getLists() as $l) {
-                if ($list->getName() !== $l->getName()) {
+                if ($list->getName() !== $l) {
                     continue;
                 }
 
@@ -382,13 +389,24 @@ class Member
                 continue;
             }
 
-            $member->addList($list);
+            // Ignore Mailman sync lock here as we _always_ need to persist this information. Will be cascade persisted
+            // through `$member`.
+            $mailingListMember = new MailingListMemberModel();
+            $mailingListMember->setMailingList($list);
+            $mailingListMember->setMember($member);
+            // Force cascade by adding to member.
+            $member->addList($mailingListMember);
         }
 
         // subscribe to default mailing lists not on the form
-        $mailingMapper = $this->mailingListMapper;
-        foreach ($mailingMapper->findDefault() as $list) {
-            $member->addList($list);
+        foreach ($this->mailingListMapper->findDefault() as $list) {
+            // Ignore Mailman sync lock here as we _always_ need to persist this information. Will be cascade persisted
+            // through `$member`.
+            $mailingListMember = new MailingListMemberModel();
+            $mailingListMember->setMailingList($list);
+            $mailingListMember->setMember($member);
+            // Force cascade by adding to member.
+            $member->addList($mailingListMember);
         }
 
         // If this was requested, update the data with the TU/e data
@@ -673,7 +691,7 @@ class Member
         $member->setSupremum('optout');
         $member->setHidden(true);
         $member->setDeleted(true);
-        $member->clearLists();
+        $this->unsubscribeLists($member);
 
         $this->getMemberMapper()->persist($member);
     }
@@ -902,36 +920,74 @@ class Member
         MemberModel $member,
         array $data,
     ): ?MemberModel {
+        // Check if we are performing a sync or not.
+        if ($this->mailmanService->isSyncLocked()) {
+            return null;
+        }
+
         $formData = $this->getListForm($member);
         $form = $formData['form'];
-        $lists = $formData['lists'];
 
         $form->setData($data);
 
+        // Validate form.
         if (!$form->isValid()) {
             return null;
         }
 
         $data = $form->getData();
-        $member->clearLists();
 
-        foreach ($lists as $list) {
-            $name = 'list-' . $list->getName();
+        /** @var string[] $selectedLists */
+        $selectedLists = $data['lists'];
+        $currentLists = $member->getMailingListMemberships()->map(
+            static function (MailingListMemberModel $subscription) {
+                return $subscription->getMailingList()->getName();
+            },
+        )->toArray();
 
-            if (
-                !isset($data[$name])
-                || !$data[$name]
-            ) {
+        // Determine which mailing lists the member should be (un)subscribed from/to.
+        $intersection = array_intersect($selectedLists, $currentLists);
+        $toRemove = array_diff($currentLists, $selectedLists);
+        $toAdd = array_diff($selectedLists, $intersection);
+
+        // Unsubscribe member for some mailing lists.
+        foreach ($toRemove as $list) {
+            $list = $this->mailingListMapper->find($list);
+
+            if (null === $list) {
                 continue;
             }
 
-            $member->addList($list);
+            $membership = $this->mailingListMemberMapper->findByListAndMember($list, $member);
+            $membership->setToBeDeleted(true);
         }
 
-        // simply persist through member
+        foreach ($toAdd as $list) {
+            $list = $this->mailingListMapper->find($list);
+
+            if (null === $list) {
+                continue;
+            }
+
+            $mailingListMember = new MailingListMemberModel();
+            $mailingListMember->setMailingList($list);
+            $mailingListMember->setMember($member);
+            // Force cascade by adding to member.
+            $member->addList($mailingListMember);
+        }
+
+        // Simply cascade persist through member.
         $this->getMemberMapper()->persist($member);
 
         return $member;
+    }
+
+    public function unsubscribeLists(MemberModel $member): void
+    {
+        foreach ($member->getMailingListMemberships() as $mailingListMembership) {
+            $mailingListMembership->setToBeDeleted(true);
+            $this->mailingListMemberMapper->persist($mailingListMembership);
+        }
     }
 
     /**

@@ -72,6 +72,7 @@ use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
 use Database\Mapper\Factory\AuditFactory as AuditMapperFactory;
 use Database\Mapper\Factory\CheckoutSessionFactory as CheckoutSessionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
+use Database\Mapper\Factory\MailingListMemberFactory as MailingListMemberMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
 use Database\Mapper\Factory\MemberFactory as MemberMapperFactory;
 use Database\Mapper\Factory\MemberUpdateFactory as MemberUpdateMapperFactory;
@@ -79,6 +80,7 @@ use Database\Mapper\Factory\OrganFactory as OrganMapperFactory;
 use Database\Mapper\Factory\ProspectiveMemberFactory as ProspectiveMemberMapperFactory;
 use Database\Mapper\Factory\SavedQueryFactory as SavedQueryMapperFactory;
 use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
@@ -99,21 +101,26 @@ use Database\Service\Api as ApiService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
 use Database\Service\Factory\FrontPageFactory as FrontPageServiceFactory;
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
+use Database\Service\Factory\MailmanFactory as MailmanServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
 use Database\Service\Factory\MemberFactory as MemberServiceFactory;
 use Database\Service\Factory\QueryFactory as QueryServiceFactory;
 use Database\Service\Factory\StripeFactory as StripeServiceFactory;
 use Database\Service\FrontPage as FrontPageService;
 use Database\Service\MailingList as MailingListService;
+use Database\Service\Mailman as MailmanService;
 use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
 use Database\Service\Query as QueryService;
 use Database\Service\Stripe as StripeService;
 use Doctrine\Laminas\Hydrator\DoctrineObject;
+use Laminas\Cache\Storage\Adapter\Memcached;
+use Laminas\Cache\Storage\Adapter\MemcachedOptions;
 use Laminas\Http\PhpEnvironment\RemoteAddress;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Psr\Container\ContainerInterface;
+use RuntimeException;
 use stdClass;
 
 use function array_map;
@@ -161,6 +168,7 @@ class Module
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
+                MailmanService::class => MailmanServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
                 StripeService::class => StripeServiceFactory::class,
@@ -540,6 +548,7 @@ class Module
                 ActionLinkMapper::class => ActionLinkMapperFactory::class,
                 AuditMapper::class => AuditMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
+                MailingListMemberMapper::class => MailingListMemberMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
                 MemberUpdateMapper::class => MemberUpdateMapperFactory::class,
@@ -598,6 +607,19 @@ class Module
                         ->setProxyHeader($proxyHeader);
 
                     return $remote->getIpAddress();
+                },
+                'database_cache_mailman' => static function () {
+                    $cache = new Memcached();
+                    // The TTL is 24 hours (60 * 60 * 24), unless manually refreshed.
+                    $options = $cache->getOptions();
+                    if (!($options instanceof MemcachedOptions)) {
+                        throw new RuntimeException('Unable to retrieve and set options for Memcached');
+                    }
+
+                    $options->setTtl(60 * 60 * 24);
+                    $options->setServers(['memcached', '11211']);
+
+                    return $cache;
                 },
             ],
             'shared' => [

@@ -581,15 +581,57 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'list-delete' => [
-                        'type' => Segment::class,
+                    'lists' => [
+                        'type' => Literal::class,
                         'options' => [
-                            'route' => '/list/delete/:name',
-                            'constraints' => [
-                                'name' => '[a-zA-Z0-9_-]+',
-                            ],
+                            'route' => '/lists',
                             'defaults' => [
-                                'action' => 'deleteList',
+                                'action' => 'lists',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'add' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/add',
+                                    'defaults' => [
+                                        'action' => 'addList',
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/edit/:name',
+                                    'constraints' => [
+                                        'name' => '[a-zA-Z0-9_-]+',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'editList',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/delete/:name',
+                                    'constraints' => [
+                                        'name' => '[a-zA-Z0-9_-]+',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'deleteList',
+                                    ],
+                                ],
+                            ],
+                            'sync' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/sync',
+                                    'defaults' => [
+                                        'action' => 'syncLists',
+                                    ],
+                                ],
                             ],
                         ],
                     ],
@@ -733,6 +775,9 @@ return [
     'view_manager' => [
         'template_path_stack' => [
             'database' => __DIR__ . '/../view/',
+        ],
+        'template_map' => [
+            'database/settings/edit-list' => __DIR__ . '/../view/database/settings/add-list.phtml',
         ],
         'strategies' => [
             'ViewJsonStrategy',

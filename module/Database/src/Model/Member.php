@@ -14,12 +14,9 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\InverseJoinColumn;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Laminas\Mail\Address as MailAddress;
+use RuntimeException;
 
 use function mb_encode_mimeheader;
 
@@ -216,22 +213,14 @@ class Member
     /**
      * Memberships of mailing lists.
      *
-     * @var Collection<array-key, MailingList>
+     * @var Collection<array-key, MailingListMember>
      */
-    #[ManyToMany(
-        targetEntity: MailingList::class,
-        inversedBy: 'members',
+    #[OneToMany(
+        targetEntity: MailingListMember::class,
+        mappedBy: 'member',
+        cascade: ['persist'],
     )]
-    #[JoinTable(name: 'members_mailinglists')]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-    )]
-    #[InverseJoinColumn(
-        name: 'name',
-        referencedColumnName: 'name',
-    )]
-    protected Collection $lists;
+    protected Collection $mailingListMemberships;
 
     /**
      * RenewalLinks of this member.
@@ -283,7 +272,7 @@ class Member
     {
         $this->addresses = new ArrayCollection();
         $this->installations = new ArrayCollection();
-        $this->lists = new ArrayCollection();
+        $this->mailingListMemberships = new ArrayCollection();
     }
 
     /**
@@ -369,6 +358,17 @@ class Member
      */
     public function setEmail(?string $email): void
     {
+        $toBeDeletedExists = $this->mailingListMemberships->exists(static function ($key, MailingListMember $list) {
+            return $list->isToBeDeleted();
+        });
+
+        if ($toBeDeletedExists) {
+            throw new RuntimeException(
+                // phpcs:ignore -- user-visible strings should not be split
+                'The e-mail address cannot be updated as there are mailing list memberships marked to be deleted. Please wait till after the next sync with Mailman has happened.',
+            );
+        }
+
         $this->email = $email;
     }
 
@@ -743,42 +743,36 @@ class Member
     /**
      * Get mailing list subscriptions.
      *
-     * @return Collection<array-key, MailingList>
+     * @return Collection<array-key, MailingListMember>
      */
-    public function getLists(): Collection
+    public function getMailingListMemberships(): Collection
     {
-        return $this->lists;
+        return $this->mailingListMemberships;
     }
 
     /**
      * Add a mailing list subscription.
-     *
-     * Note that this is the owning side.
      */
-    public function addList(MailingList $list): void
+    public function addList(MailingListMember $list): void
     {
-        $list->addMember($this);
-        $this->lists[] = $list;
+        if ($this->mailingListMemberships->contains($list)) {
+            return;
+        }
+
+        $list->setMember($this);
+        $this->mailingListMemberships->add($list);
     }
 
     /**
      * Add multiple mailing lists.
      *
-     * @param MailingList[] $lists
+     * @param MailingListMember[] $lists
      */
     public function addLists(array $lists): void
     {
         foreach ($lists as $list) {
             $this->addList($list);
         }
-    }
-
-    /**
-     * Clear the lists.
-     */
-    public function clearLists(): void
-    {
-        $this->lists = new ArrayCollection();
     }
 
     /**
