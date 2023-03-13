@@ -3,6 +3,10 @@ name: PHP Static Analysis
 # Only run this action on pull requests (creation, synchronisation, and reopening).
 on: [pull_request]
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
     phpstan:
         name: PHPStan
@@ -58,9 +62,10 @@ jobs:
 
             -   name: Check out master
                 run: |
-                    git fetch --all
-                    git update-ref refs/heads/temp-phpstanpr refs/remotes/origin/master
-                    git checkout --detach temp-phpstanpr
+                    git config --global url."https://github.com/".insteadOf git@github.com:
+                    git config --global url."https://".insteadOf git://
+                    git fetch origin ${{ github.base_ref }}
+                    git checkout --detach ${{ github.base_ref }}
 
             -   name: Install dependencies
                 run: composer install --no-interaction
@@ -93,7 +98,7 @@ jobs:
                 run: |
                     git checkout -- phpstan/phpstan-baseline.neon
                     git checkout --theirs -- config/modules.config.php
-                    git checkout -
+                    git checkout ${{ github.sha }}
 
             -   name: Install dependencies
                 run: composer install --no-interaction
