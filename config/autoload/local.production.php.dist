@@ -35,11 +35,23 @@ return [
             'host' => 'postfix',
             'port' => '25',
         ],
-        'from' => 'gewisdb@gewis.nl',
+        'from' => [
+            'address' => getenv('MAIL_FROM_ADDRESS'),
+            'name' => getenv('MAIL_FROM_NAME'),
+        ],
         'to' => [
-            'checker_result' => 'secr@gewis.nl',
-            'report_error' => 'databaseisstuk@gewis.nl',
-            'subscription' => 'secr@gewis.nl',
+            'checker_result' => [
+                'address' => getenv('MAIL_TO_CHECKER_RESULT_ADDRESS'),
+                'name' => getenv('MAIL_TO_CHECKER_RESULT_NAME'),
+            ],
+            'report_error' => [
+                'address' => getenv('MAIL_TO_REPORT_ERROR_ADDRESS'),
+                'name' => getenv('MAIL_TO_REPORT_ERROR_NAME'),
+            ],
+            'subscription' => [
+                'address' => getenv('MAIL_TO_SUBSCRIPTION_ADDRESS'),
+                'name' => getenv('MAIL_TO_SUBSCRIPTION_NAME'),
+            ],
         ],
     ],
 

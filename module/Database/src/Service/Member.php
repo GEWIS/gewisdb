@@ -178,17 +178,17 @@ class Member
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
-        $message->setFrom($config['from']);
-        $message->addTo($config['to']['subscription']);
+        $message->setFrom($config['from']['address'], $config['from']['name']);
+        $message->addTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('New member subscription: ' . $member->getFullName());
         $this->getMailTransport()->send($message);
 
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
-        $message->setFrom($config['from']);
-        $message->addTo($member->getEmail());
-        $message->setReplyTo($config['to']['subscription']);
+        $message->setFrom($config['from']['address'], $config['from']['name']);
+        $message->addTo($member->getEmail(), $member->getFullName());
+        $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('GEWIS Subscription');
         $this->getMailTransport()->send($message);
     }
@@ -217,17 +217,17 @@ class Member
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
-        $message->setFrom($config['from']);
-        $message->addTo($config['to']['subscription']);
+        $message->setFrom($config['from']['address'], $config['from']['name']);
+        $message->addTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('Membership confirmed: ' . $member->getFullName());
         $this->getMailTransport()->send($message);
 
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
-        $message->setFrom($config['from']);
-        $message->addTo($member->getEmail());
-        $message->setReplyTo($config['to']['subscription']);
+        $message->setFrom($config['from']['address'], $config['from']['name']);
+        $message->addTo($member->getEmail(), $member->getFullName());
+        $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('Your GEWIS membership has been confirmed');
         $this->getMailTransport()->send($message);
     }
