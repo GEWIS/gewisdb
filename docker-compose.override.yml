@@ -27,8 +27,46 @@ services:
         image: mailhog/mailhog
         ports:
             - "8025:8025"
+    mailman-core:
+        image: maxking/mailman-core:0.4
+        container_name: mailman-core
+        hostname: mailman-core
+        volumes:
+            - ./mailman/core:/opt/mailman/
+        depends_on:
+            - postgresql
+        environment:
+            - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql/${POSTGRES_MAILMAN_DATABASE}
+            - DATABASE_TYPE=postgres
+            - DATABASE_CLASS=mailman.database.postgresql.PostgreSQLDatabase
+            - HYPERKITTY_API_KEY=somerandomapikeythatiobviouslydidnotcreatemyself
+        ports:
+            - "8020:8001"
+        networks:
+            - gewisdb_network
+    mailman-web:
+        image: maxking/mailman-web:0.4
+        container_name: mailman-web
+        hostname: mailman-web
+        depends_on:
+            - postgresql
+        volumes:
+            - ./mailman/web:/opt/mailman-web-data/
+        environment:
+            - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql/${POSTGRES_MAILMAN_DATABASE}
+            - DATABASE_TYPE=postgres
+            - HYPERKITTY_API_KEY=somerandomapikeythatiobviouslydidnotcreatemyself
+            - SECRET_KEY=anotherandomkeythatiobviouslydidnotcreatemyself
+            - SERVE_FROM_DOMAIN=localhost
+            - UWSGI_STATIC_MAP=/static=/opt/mailman-web-data/static
+        ports:
+            - "8021:8000"
+        networks:
+            - gewisdb_network
     nginx:
         build: docker/nginx
+        volumes:
+            - ./mailman/web/static:/var/html/mailman/
         ports:
             - "80:9725"
     stripe:
@@ -48,6 +86,7 @@ services:
             dockerfile: docker/web/development/Dockerfile
             context: .
         depends_on:
+            - mailman-core
             - postgresql
 
 volumes:

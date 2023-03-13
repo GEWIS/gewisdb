@@ -37,3 +37,6 @@ phpcs.xml
 
 # Language binaries are created during the docker build process or using 'make compilelang'
 *.mo
+
+# Local mailman data for development
+mailman/
