@@ -414,7 +414,7 @@ class Meeting
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($body);
         $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->addTo($config['to']['report_error']['address'], $config['to']['report_error']['name']);
+        $message->setTo($config['to']['report_error']['address'], $config['to']['report_error']['name']);
         $message->setSubject('Database fout');
 
         $this->mailTransport->send($message);

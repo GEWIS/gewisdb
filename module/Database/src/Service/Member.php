@@ -49,6 +49,7 @@ use ReflectionClass;
 use RuntimeException;
 
 use function bin2hex;
+use function mb_encode_mimeheader;
 use function random_bytes;
 
 class Member
@@ -179,7 +180,7 @@ class Member
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->addTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
+        $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('New member subscription: ' . $member->getFullName());
         $this->getMailTransport()->send($message);
 
@@ -187,7 +188,15 @@ class Member
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->addTo($member->getEmail(), $member->getFullName());
+        $message->setTo(
+            $member->getEmail(),
+            mb_encode_mimeheader(
+                $member->getFullName(),
+                'UTF-8',
+                'Q',
+                '',
+            ),
+        );
         $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('GEWIS Subscription');
         $this->getMailTransport()->send($message);
@@ -218,7 +227,7 @@ class Member
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->addTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
+        $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('Membership confirmed: ' . $member->getFullName());
         $this->getMailTransport()->send($message);
 
@@ -226,7 +235,15 @@ class Member
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->addTo($member->getEmail(), $member->getFullName());
+        $message->setTo(
+            $member->getEmail(),
+            mb_encode_mimeheader(
+                $member->getFullName(),
+                'UTF-8',
+                'Q',
+                '',
+            ),
+        );
         $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject('Your GEWIS membership has been confirmed');
         $this->getMailTransport()->send($message);
