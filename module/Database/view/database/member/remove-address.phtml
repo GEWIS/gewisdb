@@ -7,7 +7,7 @@ $form->setAttribute(
     $this->url(
         'member/show/remove-address',
         [
-            'id' => $member->getMember()->getLidnr(),
+            'id' => $member->getLidnr(),
             'type' => $member->getType()->value,
         ],
     )
