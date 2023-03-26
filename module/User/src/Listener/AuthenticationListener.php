@@ -39,7 +39,7 @@ final class AuthenticationListener
 
         switch ($match->getParam('auth_type', self::AUTH_DBUSER)) {
             case self::AUTH_DBUSER:
-                return $this->dbuserauth($e);
+                return $this->dbuserAuth($e);
             case self::AUTH_API:
                 return $this->apiAuth($e);
             case self::AUTH_NONE:
@@ -54,7 +54,7 @@ final class AuthenticationListener
     /**
      * Handle authentication for users
      */
-    private function dbuserauth(MvcEvent $e): ?Response
+    private function dbuserAuth(MvcEvent $e): ?Response
     {
         if ($this->authService->hasIdentity()) {
             // user is logged in, just continue

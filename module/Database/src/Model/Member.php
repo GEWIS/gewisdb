@@ -5,6 +5,7 @@ namespace Database\Model;
 use Application\Model\Enums\MembershipTypes;
 use Database\Model\SubDecision\Installation;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\{
     Column,
@@ -625,7 +626,7 @@ class Member
      *
      * @return string|null
      */
-    public function getIban($print = false): ?string
+    public function getIban(bool $print = false): ?string
     {
         if (null === $this->iban) {
             return null;
@@ -744,7 +745,7 @@ class Member
             'generation' => $this->getGeneration(),
             'hidden' => $this->getHidden(),
             'deleted' => $this->getDeleted(),
-            'expiration' => $this->getExpiration()->format('l j F Y'),
+            'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
             'authenticationKey' => $this->getAuthenticationKey(),
         ];
     }
@@ -765,7 +766,7 @@ class Member
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
-            'expiration' => $this->getExpiration()->format('l j F Y'),
+            'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
         ];
     }
 
