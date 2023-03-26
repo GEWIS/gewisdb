@@ -168,15 +168,15 @@ class MemberController extends AbstractActionController
         }
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->edit(
+            $updatedMember = $this->memberService->edit(
                 $member,
                 $this->getRequest()->getPost()->toArray(),
             );
 
-            if (null !== $member) {
+            if (null !== $updatedMember) {
                 $this->flashMessenger()->addSuccessMessage('Wijzigingen zijn opgeslagen!');
 
-                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
+                return $this->redirect()->toRoute('member/show', ['id' => $updatedMember->getLidnr()]);
             }
 
             $this->flashMessenger()->addSuccessMessage('Wijzigingen kunnen niet worden opgeslagen.');
