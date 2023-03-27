@@ -1,5 +1,7 @@
 <?php
 
+$escaper = new Laminas\Escaper\Escaper('UTF-8');
+
 function showDecisionNumber($decision)
 {
     $ret = strtoupper($decision->getMeeting()->getType()->value);
@@ -33,21 +35,27 @@ function determineCategory($decision)
 }
 
 // to show a single category
-function showCategory($decisions)
-{ ?>
-    <?php
-    foreach ($decisions as $decision): ?>
-
-        <strong>\besluit{<?= showDecisionNumber($decision) ?>}{<?php
-        echo $decision->getMeeting()->getDate()->format('d-m-Y');
-        ?>}{</strong><?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-            <?= $subdecision->getContent() . ' ' ?>
-        <?php endforeach; ?>}
-
-    <?php
-    endforeach; ?>
-<?php
-} // function showCategory
+function showCategory($escaper, $decisions)
+{
+    foreach ($decisions as $decision) {
+        echo sprintf(
+            '<strong>\besluit{%s}{%s}</strong>{%s}<br><br>',
+            showDecisionNumber($decision),
+            $decision->getMeeting()->getDate()->format('d-m-Y'),
+            $escaper->escapeHtml(
+                implode(
+                    ' ',
+                    array_map(
+                        function ($subdecision) {
+                            return $subdecision->getContent();
+                        },
+                        $decision->getSubdecisions()->toArray(),
+                    ),
+                ),
+            ),
+        );
+    }
+}
 ?>
 <?php
 if (isset($data)): ?>
@@ -66,13 +74,13 @@ if (isset($data)): ?>
     ob_start();
     ?>
     <h2>\subsection*{Begrotingen en Afrekeningen}</h2>
-    <?php showCategory($categories['budget']) ?>
+    <?php showCategory($escaper, $categories['budget']) ?>
 
     <h2>\subsection*{Installaties en Decharges}</h2>
-    <?php showCategory($categories['install']) ?>
+    <?php showCategory($escaper, $categories['install']) ?>
 
     <h2>\subsection*{Overige besluiten}</h2>
-    <?php showCategory($categories['other']) ?>
+    <?php showCategory($escaper, $categories['other']) ?>
     <?php $decisionList = ob_get_clean(); ?>
     <pre style="height: 80vh; overflow: scroll">
         <code>
