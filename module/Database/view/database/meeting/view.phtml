@@ -85,7 +85,7 @@ use Database\Model\Meeting;
         </a>
         <ul>
         <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-            <li><?= $subdecision->getContent() ?></li>
+            <li><?= $this->escapeHtml($subdecision->getContent()) ?></li>
         <?php endforeach; ?>
         </ul>
     </li>

@@ -61,7 +61,7 @@ $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . 
 ?>
 <h1><?= $this->translate('Decision') ?> <?= $decisionNum ?> <?= $this->translate('reads as follows:') ?></h1>
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-    <?= $subdecision->getContent() ?>
+    <?= $this->escapeHtml($subdecision->getContent()) ?>
 <?php endforeach; ?>
 <br />
     <a href="<?= $this->url(
