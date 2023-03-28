@@ -124,10 +124,17 @@ class Member
      */
     public function findNormal(): array
     {
-        return $this->getRepository()->findBy([
-            'deleted' => false,
-            'hidden' => false,
-        ]);
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('m')
+            ->from(MemberModel::class, 'm')
+            ->where("m.expiration >= CURRENT_TIMESTAMP()")
+            ->andWhere("m.hidden = false")
+            ->andWhere("m.deleted = false")
+            ->setMaxResults(32)
+            ->setFirstResult(0);
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
