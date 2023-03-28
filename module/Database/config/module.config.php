@@ -3,6 +3,7 @@
 namespace Database;
 
 use Database\Controller\{
+    ApiController,
     ExportController,
     IndexController,
     MeetingController,
@@ -13,6 +14,7 @@ use Database\Controller\{
     SettingsController,
 };
 use Database\Controller\Factory\{
+    ApiControllerFactory,
     ExportControllerFactory,
     IndexControllerFactory,
     MeetingControllerFactory,
@@ -31,6 +33,7 @@ use Laminas\Router\Http\{
     Literal,
     Segment,
 };
+use User\Listener\AuthenticationListener;
 
 return [
     'router' => [
@@ -365,12 +368,32 @@ return [
                             ],
                         ],
                     ],
-                    'default' => [
-                        'type'    => Segment::class,
+                    'subscribe' => [
+                        'type' => Literal::class,
                         'options' => [
-                            'route'    => '/:action',
-                            'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            'route' => '/subscribe',
+                            'priority' => 100,
+                            'defaults' => [
+                                'action' => 'subscribe',
+                                'auth_type' => AuthenticationListener::AUTH_NONE,
+                            ],
+                        ],
+                    ],
+                    'search' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/search',
+                            'defaults' => [
+                                'action' => 'search',
+                            ],
+                        ],
+                    ],
+                    'searchFiltered' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/searchFiltered',
+                            'defaults' => [
+                                'action' => 'searchFiltered',
                             ],
                         ],
                     ],
@@ -551,10 +574,46 @@ return [
                     ],
                 ],
             ],
+            'api' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/api',
+                    'defaults' => [
+                        'controller' => ApiController::class,
+                        'action'     => 'healthy',
+                        'auth_type'  => AuthenticationListener::AUTH_API,
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'members' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/members',
+                            'defaults' => [
+                                'action'     => 'members',
+                            ],
+                        ],
+                    ],
+                    'member' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route'    => '/members/:id',
+                            'constraints' => [
+                                'id' => '[0-9]+',
+                            ],
+                            'defaults' => [
+                                'action'     => 'member',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
+            ApiController::class => ApiControllerFactory::class,
             ExportController::class => ExportControllerFactory::class,
             IndexController::class => IndexControllerFactory::class,
             MeetingController::class => MeetingControllerFactory::class,

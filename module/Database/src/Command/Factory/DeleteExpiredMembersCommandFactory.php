@@ -14,7 +14,7 @@ class DeleteExpiredMembersCommandFactory implements FactoryInterface
         $requestedName,
         array $options = null,
     ): DeleteExpiredMembersCommand {
-        /** @var MemberService $checkerService */
+        /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
 
         return new DeleteExpiredMembersCommand($memberService);

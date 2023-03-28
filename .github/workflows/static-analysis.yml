@@ -1,7 +1,11 @@
-name: PHP Static Analysis with PHPStan
+name: PHP Static Analysis
 
 # Only run this action on pull requests (creation, synchronisation, and reopening).
 on: [pull_request]
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
     phpstan:
@@ -41,10 +45,10 @@ jobs:
 
             -   name: Get Composer cache directory
                 id: composer-cache-head
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache dependencies
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache-head.outputs.dir }}
                     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -58,6 +62,8 @@ jobs:
 
             -   name: Check out master
                 run: |
+                    git config --global url."https://github.com/".insteadOf git@github.com:
+                    git config --global url."https://".insteadOf git://
                     git fetch --all
                     git update-ref refs/heads/temp-phpstanpr refs/remotes/origin/master
                     git checkout --detach temp-phpstanpr
@@ -77,8 +83,8 @@ jobs:
                     PGPASSWORD: gewisdb
                 run: |
                     psql -h $DOCTRINE_REPORT_HOST -p 5432 -U gewisdb -c "CREATE DATABASE $DOCTRINE_REPORT_DATABASE"
-                    ./orm orm:schema-tool:update --force
-                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force
+                    ./orm orm:schema-tool:update --force --no-interaction --complete
+                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction --complete
 
             -   name: Generate PHPStan Baseline
                 env:
@@ -109,8 +115,8 @@ jobs:
                     DOCTRINE_REPORT_HOST: 127.0.0.1
                     PGPASSWORD: gewisdb
                 run: |
-                    ./orm orm:schema-tool:update --force
-                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force
+                    ./orm orm:schema-tool:update --force --no-interaction --complete
+                    EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction --complete
 
             -   name: Run PHPStan
                 env:
@@ -119,3 +125,71 @@ jobs:
                 run: |
                     cp phpstan/phpstan-baseline-temp.neon phpstan/phpstan-baseline-pr.neon
                     vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G --no-progress --error-format=checkstyle | cs2pr
+
+    psalm:
+        name: Psalm
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout head branch
+                uses: actions/checkout@v3
+
+            -   name: Install PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: '8.2'
+                    extensions: calendar, curl, intl, opcache, pgsql, pdo_pgsql, zip, memcached, xdebug
+
+            -   name: Get Composer cache directory
+                id: composer-cache-head
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: Cache dependencies
+                uses: actions/cache@v3
+                with:
+                    path: ${{ steps.composer-cache-head.outputs.dir }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: ${{ runner.os }}-composer-
+
+            -   name: Extract configuration files
+                run: |
+                    cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
+                    cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
+                    cp config/autoload/local.development.php.dist config/autoload/local.php
+
+            -   name: Check out master
+                run: |
+                    git fetch --all
+                    git update-ref refs/heads/temp-psalmpr refs/remotes/origin/master
+                    git checkout --detach temp-psalmpr
+
+            -   name: Install dependencies
+                run: composer install --no-interaction
+
+            -   name: Load environment variables
+                uses: c-py/action-dotenv-to-setenv@v3
+                with:
+                    env-file: .env.dist
+            -   name: Generate Psalm Baseline
+                run: |
+                    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline.xml
+                    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><files/>" > psalm/psalm-baseline-pr.xml
+                    vendor/bin/psalm --set-baseline=psalm/psalm-baseline-pr.xml --no-diff --no-cache --no-progress || true
+
+            -   name: Check out new branch
+                run: |
+                    git checkout -- psalm/psalm-baseline.xml
+                    git checkout --theirs -- config/modules.config.php
+                    git checkout -
+
+            -   name: Install dependencies
+                run: composer install --no-interaction
+
+            -   name: Load environment variables
+                uses: c-py/action-dotenv-to-setenv@v3
+                with:
+                    env-file: .env.dist
+
+            -   name: Run Psalm
+                run: |
+                    vendor/bin/psalm  --no-diff --no-cache --no-progress --output-format=github

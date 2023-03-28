@@ -80,7 +80,7 @@ class AutomaticControllerTest extends BaseControllerTest
             $this->parseUrl($url);
         } catch (InvalidArgumentException $exception) {
             $this->addWarning(
-                "Skipping one or multiple route segments/parts because required parameters could not be generated automatically."
+                "Skipping one or multiple route segments/parts because required parameters could not be generated."
             );
             $this->addWarning($exception->getMessage());
             try {

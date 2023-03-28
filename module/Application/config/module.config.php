@@ -3,6 +3,7 @@
 use Application\Controller\IndexController;
 use Laminas\I18n\Translator\Resources;
 use Laminas\Router\Http\Segment;
+use User\Listener\AuthenticationListener;
 
 return [
     'router' => [
@@ -15,6 +16,7 @@ return [
                         'controller' => IndexController::class,
                         'action' => 'lang',
                         'lang' => 'en',
+                        'auth_type' => AuthenticationListener::AUTH_NONE,
                     ],
                     'constraints' => [
                         'lang' => '[a-zA-Z_]{2,5}',
@@ -63,7 +65,7 @@ return [
     ],
     'view_helper_config' => [
         'flashmessenger' => [
-            'message_open_format' => '<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>',
+            'message_open_format' => '<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>', // phpcs:ignore -- user-visible strings should not be split
             'message_close_string' => '</li></ul></div>',
             'message_separator_string' => '</li><li>',
         ],

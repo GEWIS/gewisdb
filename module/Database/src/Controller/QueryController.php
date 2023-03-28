@@ -15,6 +15,8 @@ class QueryController extends AbstractActionController
 
     /**
      * Index action.
+     *
+     * @return (Response|ViewModel)
      */
     public function indexAction(): Response|ViewModel
     {

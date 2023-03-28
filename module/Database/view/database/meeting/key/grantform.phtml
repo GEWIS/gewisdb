@@ -7,7 +7,7 @@
                 // make an AJAX request
                 $.ajax({
                     dataType: 'json',
-                    url: '<?= $this->url('member/default', ['action' => 'searchFiltered']) ?>?q=' + rq.term,
+                    url: '<?= $this->url('member/searchFiltered') ?>?q=' + rq.term,
                     context: document.body
                 }).done(function(data) {
                     var ret = [];

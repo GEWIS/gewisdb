@@ -43,8 +43,8 @@ rundev: builddev
 		@docker compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
 
 updatedb: rundev
-		@docker compose exec -T web ./orm orm:schema-tool:update --force --no-interaction
-		@docker compose exec -T web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction"
+		@docker compose exec -T web ./orm orm:schema-tool:update --force --no-interaction --complete
+		@docker compose exec -T web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction --complete"
 
 stop:
 		@docker compose down

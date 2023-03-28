@@ -137,7 +137,8 @@ class Member
         $addrRepo = $this->emReport->getRepository(ReportAddressModel::class);
 
         if ($reportMember === null) {
-            $reportMember = $this->emReport->getRepository(ReportMemberModel::class)->find($address->getMember()->getLidnr());
+            $reportMember = $this->emReport->getRepository(ReportMemberModel::class)
+                ->find($address->getMember()->getLidnr());
             if ($reportMember === null) {
                 throw new LogicException('Address without member');
             }

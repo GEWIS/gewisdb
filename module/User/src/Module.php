@@ -2,56 +2,54 @@
 
 namespace User;
 
-use Laminas\Authentication\AuthenticationService;
+use Laminas\Authentication\{
+    AuthenticationService,
+    Result,
+};
 use Laminas\Mvc\MvcEvent;
 use Laminas\Authentication\Storage\Session as SessionStorage;
+use Laminas\Authentication\Storage\NonPersistent as NonPersistentStorage;
+use Laminas\Http\Request;
+use User\Adapter\ApiPrincipalAdapter;
+use User\Listener\{
+    AuthenticationListener,
+    AuthorizationListener
+};
+use User\Mapper\ApiPrincipalMapper;
+use User\Service\ApiAuthenticationService;
 
 class Module
 {
     /**
      * On bootstrap.
      */
-    public function onBootstrap($event)
+    public function onBootstrap(MvcEvent $event): void
     {
         $sm = $event->getApplication()->getServiceManager();
         $eventManager = $event->getApplication()->getEventManager();
         $authService = $sm->get(AuthenticationService::class);
         $authService->setStorage(new SessionStorage('gewisdb'));
+        $apiAuthService = $sm->get(ApiAuthenticationService::class);
+        $apiAuthService->setStorage(new NonPersistentStorage());
+        $apiPrincipalAdapter = $sm->get(ApiPrincipalAdapter::class);
 
-        $eventManager->attach(MvcEvent::EVENT_ROUTE, function ($e) use ($authService) {
-            if ($authService->hasIdentity()) {
-                // user is logged in, just continue
-                return;
-            }
+        /**
+         * Establish an identity of the user using the authentication listener
+         */
+        $authenticationListener = new AuthenticationListener(
+            $authService,
+            $apiAuthService,
+            $apiPrincipalAdapter,
+        );
+        $eventManager->attach(MvcEvent::EVENT_ROUTE, $authenticationListener, -100);
 
-            $match = $e->getRouteMatch();
-
-            if ($match === null) {
-                // won't happen, but just in case
-                return;
-            }
-
-            if (
-                $match->getMatchedRouteName() === 'member/default'
-                && $match->getParam('action') === 'subscribe'
-            ) {
-                return;
-            }
-
-            if (
-                $match->getMatchedRouteName() === 'lang'
-                && ($match->getParam('lang') === 'nl' || $match->getParam('lang') === 'en')
-            ) {
-                return;
-            }
-
-            if ($match->getMatchedRouteName() !== 'user') {
-                $response = $e->getResponse();
-                $response->getHeaders()->addHeaderLine('Location', '/user');
-                $response->setStatusCode(302);
-                return $response;
-            }
-        }, -100);
+        /**
+         * Catch authorization exceptions
+         */
+        $authorizationListener = new AuthorizationListener(
+            $apiAuthService,
+        );
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, $authorizationListener);
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
             if (!$authService->hasIdentity()) {

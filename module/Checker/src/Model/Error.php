@@ -11,7 +11,7 @@ use Database\Model\SubDecision as SubDecisionModel;
  * Denotes an error that was occurred while checking a database
  * i.e. the database is left in a wrong state
  *
- * @template T
+ * @template T of SubDecisionModel
  */
 abstract class Error
 {

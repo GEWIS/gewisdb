@@ -103,6 +103,7 @@ use Database\Model\SubDecision\{
     Key\Granting as KeyGrantingModel
 };
 use Database\Service\Factory\{
+    ApiFactory as ApiServiceFactory,
     InstallationFunctionFactory as InstallationFunctionServiceFactory,
     MailingListFactory as MailingListServiceFactory,
     MeetingFactory as MeetingServiceFactory,
@@ -110,6 +111,7 @@ use Database\Service\Factory\{
     QueryFactory as QueryServiceFactory,
 };
 use Database\Service\{
+    Api as ApiService,
     InstallationFunction as InstallationFunctionService,
     MailingList as MailingListService,
     Meeting as MeetingService,
@@ -158,6 +160,7 @@ class Module
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
+                ApiService::class => ApiServiceFactory::class,
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,

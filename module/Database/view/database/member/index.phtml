@@ -8,7 +8,7 @@ $(document).ready(function () {
         if (term.length >= 0) {
             $.ajax({
                 dataType: 'json',
-                url: '<?= $this->url('member/default', array('action' => 'search')) ?>?q=' + term,
+                url: '<?= $this->url('member/search') ?>?q=' + term,
                 context: document.body
             }).done(function (data) {
                 var table = '';
@@ -72,7 +72,7 @@ $(document).ready(function () {
     </tfoot>
 </table>
 
-<a href="<?= $this->url('member/default', ['action' => 'subscribe']) ?>" class="btn btn-success">
+<a href="<?= $this->url('member/subscribe') ?>" class="btn btn-success">
     <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Register Member') ?>
 </a>
 <a href="<?= $this->url('member/updates') ?>" class="btn btn-info">

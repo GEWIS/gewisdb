@@ -10,6 +10,10 @@ use Laminas\Form\Element\{
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
+/**
+ * @psalm-import-type InputFilterSpecification from \Laminas\InputFilter\InputFilterInterface
+ * @psalm-import-type CollectionSpecification from \Laminas\InputFilter\InputFilterInterface
+ */
 class Query extends Form implements InputFilterProviderInterface
 {
     public function __construct(private readonly Translator $translator)
@@ -38,6 +42,8 @@ class Query extends Form implements InputFilterProviderInterface
 
     /**
      * Specification of input filter.
+     *
+     * @psalm-return InputFilterSpecification|CollectionSpecification
      */
     public function getInputFilterSpecification(): array
     {
