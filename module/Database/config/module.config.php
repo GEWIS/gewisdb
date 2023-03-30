@@ -563,12 +563,12 @@ return [
                             ],
                         ],
                     ],
-                    'default' => [
-                        'type'    => Segment::class,
+                    'export' => [
+                        'type'    => Literal::class,
                         'options' => [
-                            'route'    => '/:action',
-                            'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            'route'    => '/export',
+                            'defaults' => [
+                                'action' => 'export',
                             ],
                         ],
                     ],
