@@ -20,6 +20,12 @@ $showPendingUpdates = 0 < $updates;
                 $this->url('query'),
             ) ?>
         </p>
+        <p>
+            <?= sprintf(
+                $this->translate('You are using a build based on commit <a target="_blank" href="https://github.com/GEWIS/gewisdb/commit/%1$s">%1$s</a>. Please include this in all your bug reports.'),
+                getenv("GIT_COMMIT", true)
+            ) ?>
+        </p>
     </div>
     <?php if ($showPendingUpdates): ?>
         <div class="col-md-4">
