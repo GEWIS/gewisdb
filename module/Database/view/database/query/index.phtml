@@ -112,7 +112,7 @@ $this->headScript()->appendFile($this->basePath() . '/js/codemirror-compressed.j
             <?php
             $exportform->prepare();
 
-            $exportform->setAttribute('action', $this->url('query/default', ['action' => 'export']));
+            $exportform->setAttribute('action', $this->url('query/export'));
             $exportform->setAttribute('method', 'post');
 
             $exportform->setAttribute('role', 'form');
