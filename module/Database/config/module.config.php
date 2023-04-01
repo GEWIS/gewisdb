@@ -372,7 +372,6 @@ return [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/subscribe',
-                            'priority' => 100,
                             'defaults' => [
                                 'action' => 'subscribe',
                                 'auth_type' => AuthenticationListener::AUTH_NONE,
@@ -398,12 +397,9 @@ return [
                         ],
                     ],
                     'tuelookup' => [
-                        'type' => Segment::class,
+                        'type' => Literal::class,
                         'options' => [
-                            'route' => '/tuelookup?u=:tueUsername',
-                            'constraints' => [
-                                'tueUsername' => '(s\d{6}|\d{8})',
-                            ],
+                            'route' => '/tuelookup',
                             'defaults' => [
                                 'action' => 'tueLookup',
                             ],

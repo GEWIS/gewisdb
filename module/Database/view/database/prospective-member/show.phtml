@@ -49,10 +49,7 @@ use Laminas\Form\Element\Checkbox;
                 <?php if (null === $member->getTueUsername()): ?>
                     <?= $this->translate('Unknown') ?>
                 <?php else: ?>
-                    <a href="<?= $this->url(
-                        'member/tuelookup',
-                        ['tueUsername' => $member->getTueUsername()],
-                    ) ?> ">
+                    <a href="<?= $this->url('member/tuelookup') ?>?u=<?= $member->getTueUsername() ?>">
                         <?= $member->getTueUsername() ?>
                     </a>
                 <?php endif; ?>
