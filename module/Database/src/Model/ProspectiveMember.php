@@ -2,7 +2,10 @@
 
 namespace Database\Model;
 
-use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\{
+    AddressTypes,
+    PostalRegions,
+};
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\{
@@ -108,11 +111,12 @@ class ProspectiveMember
 
     /**
      * Country.
-     *
-     * By default, netherlands.
      */
-    #[Column(type: "string")]
-    protected string $country = 'netherlands';
+    #[Column(
+        type: "string",
+        enumType: PostalRegions::class,
+    )]
+    protected PostalRegions $country;
 
     /**
      * Street.

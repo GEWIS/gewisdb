@@ -146,8 +146,8 @@ use Database\Model\Member as MemberModel;
 )) ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete') ?></a></h4>
 <table class="table table-bordered">
     <tr>
-        <th><?= $this->translate('Country') ?></th>
-        <td><?= $address->getCountry() ?></td>
+        <th><?= $this->translate('Postal Region') ?></th>
+        <td><?= $address->getCountry()->value ?></td>
     </tr>
     <tr>
         <th><?= $this->translate('Street and House Number') ?></th>

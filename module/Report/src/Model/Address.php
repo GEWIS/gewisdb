@@ -2,7 +2,10 @@
 
 namespace Report\Model;
 
-use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\{
+    AddressTypes,
+    PostalRegions,
+};
 use Doctrine\ORM\Mapping\{
     Column,
     Entity,
@@ -50,11 +53,12 @@ class Address
 
     /**
      * Country.
-     *
-     * By default, netherlands.
      */
-    #[Column(type: "string")]
-    protected string $country = 'netherlands';
+    #[Column(
+        type: "string",
+        enumType: PostalRegions::class,
+    )]
+    protected PostalRegions $country;
 
     /**
      * Street.
@@ -129,9 +133,9 @@ class Address
     /**
      * Get the country.
      *
-     * @return string
+     * @return PostalRegions
      */
-    public function getCountry(): string
+    public function getCountry(): PostalRegions
     {
         return $this->country;
     }
@@ -139,9 +143,9 @@ class Address
     /**
      * Set the country.
      *
-     * @param string $country
+     * @param PostalRegions $country
      */
-    public function setCountry(string $country): void
+    public function setCountry(PostalRegions $country): void
     {
         $this->country = $country;
     }

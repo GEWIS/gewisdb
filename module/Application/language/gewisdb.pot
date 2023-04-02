@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb efb017f-dirty\n"
+"Project-Id-Version: GEWISdb 9863867-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 17:13+0100\n"
+"POT-Creation-Date: 2023-04-02 17:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,6 +116,13 @@ msgid ""
 "or <a href=\"%s\">perform a query</a>."
 msgstr ""
 
+#, php-format
+msgid ""
+"You are using a build based on commit <a target=\"_blank\" href=\"https://"
+"github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
+"your bug reports."
+msgstr ""
+
 msgid "Pending member updates"
 msgstr ""
 
@@ -177,6 +184,21 @@ msgstr ""
 msgid "Budget/Statement"
 msgstr ""
 
+msgid "Organ Mutations"
+msgstr ""
+
+msgid "Board Mutations"
+msgstr ""
+
+msgid "Key Codes"
+msgstr ""
+
+msgid "Annul Decision"
+msgstr ""
+
+msgid "Other"
+msgstr ""
+
 msgid "Foundation"
 msgstr ""
 
@@ -186,15 +208,6 @@ msgstr ""
 msgid "Installation/Discharge"
 msgstr ""
 
-msgid "Board Mutations"
-msgstr ""
-
-msgid "Annul Decision"
-msgstr ""
-
-msgid "Other"
-msgstr ""
-
 msgid "Installation"
 msgstr ""
 
@@ -202,6 +215,12 @@ msgid "Relieve"
 msgstr ""
 
 msgid "Discharge"
+msgstr ""
+
+msgid "Grant"
+msgstr ""
+
+msgid "Withdraw"
 msgstr ""
 
 msgid "Decision Cannot Be Removed"
@@ -289,6 +308,12 @@ msgid "Give Member Function"
 msgstr ""
 
 msgid "Function of"
+msgstr ""
+
+msgid "Date of Expiration"
+msgstr ""
+
+msgid "Key Code(s) to Withdraw"
 msgstr ""
 
 msgid "Decisions"
@@ -469,7 +494,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Country"
+msgid "Postal Region"
 msgstr ""
 
 msgid "Street and House Number"
@@ -891,6 +916,9 @@ msgstr ""
 msgid "An error occurred while trying to reject the changes."
 msgstr ""
 
+msgid "Select Postal Region"
+msgstr ""
+
 msgid "Street"
 msgstr ""
 
@@ -990,6 +1018,31 @@ msgstr ""
 msgid "Discharges"
 msgstr ""
 
+msgid "Grantee"
+msgstr ""
+
+msgid "Grant Key Code"
+msgstr ""
+
+msgid "Key code cannot be granted in the past."
+msgstr ""
+
+msgid "Key code cannot be granted for more than one year."
+msgstr ""
+
+msgid ""
+"Key code cannot be granted after September 1st of the next association year."
+msgstr ""
+
+msgid "Withdraw Key Code"
+msgstr ""
+
+msgid "Key code cannot be withdrawn in the past."
+msgstr ""
+
+msgid "Key code cannot be withdrawn after its original expiration."
+msgstr ""
+
 msgid "Add Mailing List"
 msgstr ""
 
@@ -1045,4 +1098,13 @@ msgid "CSV"
 msgstr ""
 
 msgid "Execute"
+msgstr ""
+
+msgid "Get API Health"
+msgstr ""
+
+msgid "Get all Members"
+msgstr ""
+
+msgid "All API permissions"
 msgstr ""

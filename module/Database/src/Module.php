@@ -69,6 +69,7 @@ use Database\Hydrator\Key\{
 use Database\Hydrator\Strategy\{
     AddressHydratorStrategy,
     MeetingHydratorStrategy,
+    PostalRegionHydratorStrategy,
 };
 use Database\Mapper\Factory\{
     InstallationFunctionFactory as InstallationFunctionMapperFactory,
@@ -440,6 +441,7 @@ class Module
                         false,
                     );
                     $hydrator->addStrategy('type', new AddressHydratorStrategy());
+                    $hydrator->addStrategy('country', new PostalRegionHydratorStrategy());
 
                     return $hydrator;
                 },

@@ -2,10 +2,13 @@
 
 namespace Database\Form\Fieldset;
 
-use Application\Model\Enums\AddressTypes;
-use Laminas\Filter\StringToLower;
+use Application\Model\Enums\{
+    AddressTypes,
+    PostalRegions,
+};
 use Laminas\Form\Element\{
     Hidden,
+    Select,
     Text,
 };
 use Laminas\Filter\StringTrim;
@@ -31,12 +34,14 @@ class Address extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'country',
-            'type' => Text::class,
+            'type' => Select::class,
             'options' => [
-                'label' => $translator->translate('Country'),
+                'label' => $translator->translate('Postal Region'),
+                'empty_option' => $translator->translate('Select Postal Region'),
+                'value_options' => PostalRegions::formValues(),
             ],
         ]);
-        $this->get('country')->setValue('NETHERLANDS');
+        $this->get('country')->setValue(PostalRegions::Netherlands->value);
 
         $this->add([
             'name' => 'street',
@@ -103,16 +108,11 @@ class Address extends Fieldset implements InputFilterProviderInterface
             ],
             'country' => [
                 'required' => true,
-                'filters' => [
-                    ['name' => StringToLower::class],
-                    ['name' => StringTrim::class],
-                ],
                 'validators' => [
                     [
-                        'name' => StringLength::class,
+                        'name' => InArray::class,
                         'options' => [
-                            'min' => 2,
-                            'max' => 32,
+                            'haystack' => PostalRegions::values(),
                         ],
                     ],
                 ],

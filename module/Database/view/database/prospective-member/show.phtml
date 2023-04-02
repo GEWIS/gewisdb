@@ -170,8 +170,8 @@ use Laminas\Form\Element\Checkbox;
 <h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?></h4>
 <table class="table table-bordered">
     <tr>
-        <th><?= $this->translate('Country') ?></th>
-        <td><?= $address->getCountry() ?></td>
+        <th><?= $this->translate('Postal Region') ?></th>
+        <td><?= $address->getCountry()->value ?></td>
     </tr>
     <tr>
         <th><?= $this->translate('Street and House Number') ?></th>
