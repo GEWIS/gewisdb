@@ -1,4 +1,6 @@
 <?php
+
+use Application\Model\Enums\PostalRegions;
 use Database\Model\Member as MemberModel;
 
 /** @var MemberModel $member */
@@ -295,7 +297,7 @@ verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') : ''
                 ?>
                 <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
                     <?= $this->formLabel($element) ?>
-                    <?= $this->formInput($element) ?>
+                    <?= $this->formSelect($element) ?>
                     <?= $this->formElementErrors($element) ?>
                 </div>
             </div>
@@ -552,8 +554,8 @@ verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
     <h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?></h4>
     <table class="table table-bordered">
         <tr>
-            <th><?= $this->translate('Land') ?></th>
-            <td><?= $address->getCountry() ?></td>
+            <th><?= $this->translate('Postal Region') ?></th>
+            <td><?= $address->getCountry()->value ?></td>
         </tr>
         <tr>
             <th><?= $this->translate('Straat en huisnummer') ?></th>
@@ -588,7 +590,7 @@ verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
 <table class="table table-bordered">
     <tr>
         <td>
-            <?php if($address->getCountry() === 'netherlands'): ?>
+            <?php if($address->getCountry() === PostalRegions::Netherlands): ?>
                 Door ondertekening van dit formulier geeft u (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
                 toestemming om eenmalig een incasso-opdracht te sturen naar uw bank om een bedrag van &euro;15,-,
                 geheten vijftien euro, van uw rekening af te schrijven en (B) aan uw bank om eenmalig een bedrag van

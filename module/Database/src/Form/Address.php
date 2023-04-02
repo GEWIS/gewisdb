@@ -2,8 +2,9 @@
 
 namespace Database\Form;
 
-use Laminas\Filter\StringToLower;
+use Application\Model\Enums\PostalRegions;
 use Laminas\Form\Element\{
+    Select,
     Submit,
     Text,
 };
@@ -11,6 +12,7 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\{
+    InArray,
     Regex,
     StringLength,
 };
@@ -23,10 +25,11 @@ class Address extends Form implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'country',
-            'type' => Text::class,
+            'type' => Select::class,
             'options' => [
-                'label' => $this->translator->translate('Country'),
-                'value' => 'NETHERLANDS',
+                'label' => $this->translator->translate('Postal Region'),
+                'empty_option' => $this->translator->translate('Select Postal Region'),
+                'value_options' => PostalRegions::formValues(),
             ],
         ]);
 
@@ -87,15 +90,11 @@ class Address extends Form implements InputFilterProviderInterface
         return [
             'country' => [
                 'required' => true,
-                'filters' => [
-                    ['name' => StringToLower::class],
-                ],
                 'validators' => [
                     [
-                        'name' => StringLength::class,
+                        'name' => InArray::class,
                         'options' => [
-                            'min' => 2,
-                            'max' => 32,
+                            'haystack' => PostalRegions::values(),
                         ],
                     ],
                 ],
