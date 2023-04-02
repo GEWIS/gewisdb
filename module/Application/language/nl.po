@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 17:13+0100\n"
+"POT-Creation-Date: 2023-04-02 17:25+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -124,6 +124,9 @@ msgstr "RvA"
 
 msgid "Akkoordverklaring"
 msgstr "Akkoordverklaring"
+
+msgid "All API permissions"
+msgstr "Alle API-rechten"
 
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
@@ -277,9 +280,6 @@ msgstr "Wijzigingen bevestigen"
 msgid "Controller"
 msgstr "Controller"
 
-msgid "Country"
-msgstr "Land"
-
 msgid "Create user"
 msgstr "Maak nieuwe gebruiker aan"
 
@@ -300,6 +300,9 @@ msgstr "Verzoeken om persoonsgegevens bij te werken"
 
 msgid "Date of Budget/Statement"
 msgstr "Datum begroting/afrekening"
+
+msgid "Date of Expiration"
+msgstr "Afloopdatum"
 
 msgid "Decision"
 msgstr "Besluit"
@@ -503,6 +506,12 @@ msgstr "Gefeliciteerd! Je bent geregistreerd als lid van GEWIS"
 msgid "Generation"
 msgstr "Generatie"
 
+msgid "Get API Health"
+msgstr "API-status ophalen"
+
+msgid "Get all Members"
+msgstr "Alle leden ophalen"
+
 msgid "Give Function"
 msgstr "Geef functie"
 
@@ -514,6 +523,15 @@ msgstr "Afgestudeerde"
 
 msgid "Graduate - Old member and specially admitted by the board"
 msgstr "Afgestudeerde - Oud lid en speciaal toegelaten door het bestuur"
+
+msgid "Grant"
+msgstr "Toekennen"
+
+msgid "Grant Key Code"
+msgstr "Sleutelcode toekennen"
+
+msgid "Grantee"
+msgstr "Verkrijger"
 
 msgid "Handtekening"
 msgstr "Handtekening"
@@ -608,6 +626,31 @@ msgstr "Kenmerk van de machtiging"
 
 msgid "Key"
 msgstr "Sleutel"
+
+msgid "Key Code(s) to Withdraw"
+msgstr "Sleutelcode(s) om in te trekken"
+
+msgid "Key Codes"
+msgstr "Sleutelcodes"
+
+msgid ""
+"Key code cannot be granted after September 1st of the next association year."
+msgstr ""
+"Sleutelcode kan niet na 1 september van het volgende verenigingsjaar worden "
+"toegekend."
+
+msgid "Key code cannot be granted for more than one year."
+msgstr "Sleutelcode kan niet langer dan een jaar worden toegekend."
+
+msgid "Key code cannot be granted in the past."
+msgstr "Sleutelcode kan niet in het verleden worden toegekend."
+
+msgid "Key code cannot be withdrawn after its original expiration."
+msgstr ""
+"Sleutelcode kan niet worden ingetrokken na de oorspronkelijke vervaldatum."
+
+msgid "Key code cannot be withdrawn in the past."
+msgstr "Sleutelcode kan in het verleden niet worden ingetrokken."
 
 msgid "Land"
 msgstr "Land"
@@ -743,6 +786,9 @@ msgstr "Gewoon - Ingeschreven bij de faculteit M&CS"
 msgid "Organ"
 msgstr "Orgaan"
 
+msgid "Organ Mutations"
+msgstr "Orgaanmutaties"
+
 msgid "Other"
 msgstr "Overig"
 
@@ -782,6 +828,9 @@ msgstr "Punt"
 
 msgid "Postal Code"
 msgstr "Postcode"
+
+msgid "Postal Region"
+msgstr "Postregio"
 
 msgid "Postcode"
 msgstr "Postcode"
@@ -845,6 +894,9 @@ msgstr "Toekomstige leden zoeken"
 
 msgid "Search TU/e Students"
 msgstr "TU/e-studenten zoeken"
+
+msgid "Select Postal Region"
+msgstr "Selecteer een postregio"
 
 msgid "Select a study"
 msgstr "Selecteer een studie"
@@ -1078,6 +1130,12 @@ msgstr ""
 msgid "With Modifications"
 msgstr "Met wijzigingen"
 
+msgid "Withdraw"
+msgstr "Intrekken"
+
+msgid "Withdraw Key Code"
+msgstr "Sleutelcode intrekken"
+
 msgid "Without Modifications"
 msgstr "Zonder wijzigingen"
 
@@ -1086,6 +1144,16 @@ msgstr "Woonplaats en postcode"
 
 msgid "Yes"
 msgstr "Ja"
+
+#, php-format
+msgid ""
+"You are using a build based on commit <a target=\"_blank\" href=\"https://"
+"github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
+"your bug reports."
+msgstr ""
+"Je gebruikt een build gebaseerd op commit <a target=\"_blank\" "
+"href=\"https://github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Vermeld dit "
+"in al je bugrapporten."
 
 #, php-format
 msgid ""

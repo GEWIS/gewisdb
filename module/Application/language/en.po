@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-19 17:13+0100\n"
+"POT-Creation-Date: 2023-04-02 17:25+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -123,6 +123,9 @@ msgstr "Advisory Board"
 
 msgid "Akkoordverklaring"
 msgstr "Akkoordverklaring"
+
+msgid "All API permissions"
+msgstr "All API permissions"
 
 msgid ""
 "Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
@@ -276,9 +279,6 @@ msgstr "Confirm Changes"
 msgid "Controller"
 msgstr "Controller"
 
-msgid "Country"
-msgstr "Country"
-
 msgid "Create user"
 msgstr "Create user"
 
@@ -299,6 +299,9 @@ msgstr "Data Update Requests"
 
 msgid "Date of Budget/Statement"
 msgstr "Date of Budget/Statement"
+
+msgid "Date of Expiration"
+msgstr "Date of Expiration"
 
 msgid "Decision"
 msgstr "Decision"
@@ -502,6 +505,12 @@ msgstr "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgid "Generation"
 msgstr "Generation"
 
+msgid "Get API Health"
+msgstr "Get API Health"
+
+msgid "Get all Members"
+msgstr "Get all Members"
+
 msgid "Give Function"
 msgstr "Give Function"
 
@@ -513,6 +522,15 @@ msgstr "Graduate"
 
 msgid "Graduate - Old member and specially admitted by the board"
 msgstr "Graduate - Old member and specially admitted by the board"
+
+msgid "Grant"
+msgstr "Grant"
+
+msgid "Grant Key Code"
+msgstr "Grant Key Code"
+
+msgid "Grantee"
+msgstr "Grantee"
 
 msgid "Handtekening"
 msgstr "Handtekening"
@@ -606,6 +624,29 @@ msgstr "Kenmerk van de machtiging"
 
 msgid "Key"
 msgstr "Key"
+
+msgid "Key Code(s) to Withdraw"
+msgstr "Key Code(s) to Withdraw"
+
+msgid "Key Codes"
+msgstr "Key Codes"
+
+msgid ""
+"Key code cannot be granted after September 1st of the next association year."
+msgstr ""
+"Key code cannot be granted after September 1st of the next association year."
+
+msgid "Key code cannot be granted for more than one year."
+msgstr "Key code cannot be granted for more than one year."
+
+msgid "Key code cannot be granted in the past."
+msgstr "Key code cannot be granted in the past."
+
+msgid "Key code cannot be withdrawn after its original expiration."
+msgstr "Key code cannot be withdrawn after its original expiration."
+
+msgid "Key code cannot be withdrawn in the past."
+msgstr "Key code cannot be withdrawn in the past."
 
 msgid "Land"
 msgstr "Land"
@@ -741,6 +782,9 @@ msgstr "Ordinary - Enrolled at the department of M&CS"
 msgid "Organ"
 msgstr "Organ"
 
+msgid "Organ Mutations"
+msgstr "Organ Mutations"
+
 msgid "Other"
 msgstr "Other"
 
@@ -780,6 +824,9 @@ msgstr "Point"
 
 msgid "Postal Code"
 msgstr "Postal Code"
+
+msgid "Postal Region"
+msgstr "Postal Region"
 
 msgid "Postcode"
 msgstr "Postcode"
@@ -843,6 +890,9 @@ msgstr "Search Prospective Members"
 
 msgid "Search TU/e Students"
 msgstr "Search TU/e Students"
+
+msgid "Select Postal Region"
+msgstr "Select Postal Region"
 
 msgid "Select a study"
 msgstr "Select a study"
@@ -1071,6 +1121,12 @@ msgstr ""
 msgid "With Modifications"
 msgstr "With Modifications"
 
+msgid "Withdraw"
+msgstr "Withdraw"
+
+msgid "Withdraw Key Code"
+msgstr "Withdraw Key Code"
+
 msgid "Without Modifications"
 msgstr "Without Modifications"
 
@@ -1079,6 +1135,16 @@ msgstr "Woonplaats en Postcode"
 
 msgid "Yes"
 msgstr "Yes"
+
+#, php-format
+msgid ""
+"You are using a build based on commit <a target=\"_blank\" href=\"https://"
+"github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
+"your bug reports."
+msgstr ""
+"You are using a build based on commit <a target=\"_blank\" href=\"https://"
+"github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
+"your bug reports."
 
 #, php-format
 msgid ""
