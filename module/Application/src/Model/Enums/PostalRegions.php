@@ -193,7 +193,7 @@ enum PostalRegions: string
     case Portugal = 'PORTUGAL';
     case PuertoRico = 'PUERTO RICO';
     case Qatar = 'QATAR';
-    case Romenia = 'ROMENIA';
+    case Romania = 'ROMANIA';
     case Russia = 'RUSSIAN FEDERATION';
     case Rwanda = 'RWANDA';
     case Saba = 'SABA'; // BQ
