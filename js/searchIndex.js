@@ -411,8 +411,8 @@ Search.appendIndex(
             "summary": "",
             "url": ""
         },                {
-            "fqsen": "\\Application\\Model\\Enums\\PostalRegions\u003A\u003AChili",
-            "name": "Chili",
+            "fqsen": "\\Application\\Model\\Enums\\PostalRegions\u003A\u003AChile",
+            "name": "Chile",
             "summary": "",
             "url": ""
         },                {
