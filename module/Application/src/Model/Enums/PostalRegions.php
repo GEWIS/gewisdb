@@ -59,7 +59,7 @@ enum PostalRegions: string
     case CentralAfricanRepublic = 'CENTRAL AFRICAN REPUBLIC';
     case Ceuta = 'CEUTA, SPAIN'; // Melila is listed separately.
     case Chad = 'CHAD';
-    case Chili = 'CHILI';
+    case Chile = 'CHILE';
     case China = 'CHINA';
     case ChristmasIsland = 'CHRISTMAS ISLAND';
     case CoconutIslands = 'COCONUT ISLANDS';
