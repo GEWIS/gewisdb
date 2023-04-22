@@ -1081,8 +1081,8 @@ Search.appendIndex(
             "summary": "",
             "url": ""
         },                {
-            "fqsen": "\\Application\\Model\\Enums\\PostalRegions\u003A\u003ARomenia",
-            "name": "Romenia",
+            "fqsen": "\\Application\\Model\\Enums\\PostalRegions\u003A\u003ARomania",
+            "name": "Romania",
             "summary": "",
             "url": ""
         },                {
