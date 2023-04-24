@@ -20,10 +20,13 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: '8.2'
-                    tools: cs2pr, phpcs, php-cs-fixer
+                    tools: cs2pr, php-cs-fixer
+
+            -   name: Install dependencies with Composer
+                uses: ramsey/composer-install@v2
 
             -   name: Run PHPCS
-                run: phpcs --standard=PSR1,PSR12 --extensions=php,dist --report=checkstyle -q module config | cs2pr --graceful-warnings
+                run: vendor/bin/phpcs --standard=PSR1,PSR12 --extensions=php,dist --report=checkstyle -q module config | cs2pr --graceful-warnings
 
             -   name: Run php-cs-fixer
                 run: php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
