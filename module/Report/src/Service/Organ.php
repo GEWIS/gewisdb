@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Service;
 
 use Doctrine\ORM\EntityManager;

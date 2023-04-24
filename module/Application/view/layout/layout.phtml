@@ -1,13 +1,14 @@
 <?php
 
-use Laminas\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger;
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
 use User\Model\User;
 
-$lang = $this->plugin('translate')->getTranslator()->getLocale();
+/** @var PhpRenderer|HelperTrait $this */
 
-// The FlashMessenger config does allow for namespaced options, hence we need to define all classes below.
-/** @var FlashMessenger $flash */
-$flash = $this->plugin('FlashMessenger');
+$lang = $this->plugin('translate')->getTranslator()->getLocale();
 
 echo $this->doctype();
 ?>
@@ -230,11 +231,11 @@ $(document).ready(function() {
         </nav>
 <?php endif ?>
         <div class="container">
-            <?= $flash->render('default', ['alert', 'alert-dismissible', 'alert-info']) ?>
-            <?= $flash->render('error', ['alert', 'alert-dismissible', 'alert-danger']) ?>
-            <?= $flash->render('info', ['alert', 'alert-dismissible', 'alert-info']) ?>
-            <?= $flash->render('success', ['alert', 'alert-dismissible', 'alert-success']) ?>
-            <?= $flash->render('warning', ['alert', 'alert-dismissible', 'alert-warning']) ?>
+            <?= $this->flashMessenger()->render('default', ['alert', 'alert-dismissible', 'alert-info']) ?>
+            <?= $this->flashMessenger()->render('error', ['alert', 'alert-dismissible', 'alert-danger']) ?>
+            <?= $this->flashMessenger()->render('info', ['alert', 'alert-dismissible', 'alert-info']) ?>
+            <?= $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'alert-success']) ?>
+            <?= $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'alert-warning']) ?>
             <?php echo $this->content; ?>
             <hr>
             <footer>

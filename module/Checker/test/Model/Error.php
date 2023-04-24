@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CheckerTest\Model;
 
 use Application\Model\Enums\{
@@ -66,19 +68,19 @@ abstract class Error extends TestCase
         return $member;
     }
 
-    public function testGetSubDecision()
+    public function testGetSubDecision(): void
     {
         $error = $this->create();
         $this->assertInstanceOf(SubDecisionModel::class, $error->getSubDecision());
     }
 
-    public function testGetMeeting()
+    public function testGetMeeting(): void
     {
         $error = $this->create();
         $this->assertInstanceOf(MeetingModel::class, $error->getMeeting());
     }
 
-    public function testAsText()
+    public function testAsText(): void
     {
         $error = $this->create();
         $this->assertTrue(is_string($error->asText()));

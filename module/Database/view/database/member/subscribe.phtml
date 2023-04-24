@@ -1,9 +1,16 @@
 <?php
 
-use Application\Model\Enums\PostalRegions;
-use Database\Model\Member as MemberModel;
+declare(strict_types=1);
 
-/** @var MemberModel $member */
+use Application\Model\Enums\PostalRegions;
+use Application\View\HelperTrait;
+use Database\Model\Member as MemberModel;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MemberModel $member
+ */
 ?>
 <?php if (isset($form)): ?>
 <?php

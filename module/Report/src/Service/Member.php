@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Service;
 
 use Database\Mapper\Member as MemberMapper;
@@ -28,7 +30,7 @@ class Member
     /**
      * Export members.
      */
-    public function generate()
+    public function generate(): void
     {
         $memberCollection = $this->memberMapper->findAll();
 
@@ -52,7 +54,7 @@ class Member
         $progress->finish();
     }
 
-    public function generateMember(DatabaseMemberModel $member)
+    public function generateMember(DatabaseMemberModel $member): void
     {
         $repo = $this->emReport->getRepository(ReportMemberModel::class);
         // first try to find an existing member
@@ -95,7 +97,7 @@ class Member
     public function generateLists(
         DatabaseMemberModel $member,
         ReportMemberModel $reportMember,
-    ) {
+    ): void {
         $reportListRepo = $this->emReport->getRepository(ReportMailingListModel::class);
 
         $reportLists = array_map(function ($list) {
@@ -113,7 +115,6 @@ class Member
             }
 
             $reportMember->addList($reportList);
-            $this->addToMailmanList($member, $list);
             $this->emReport->persist($reportList);
         }
 
@@ -125,7 +126,6 @@ class Member
             }
 
             $reportMember->removeList($reportList);
-            $this->removeFromMailmanList($member, $list);
             $this->emReport->persist($reportList);
         }
     }
@@ -133,7 +133,7 @@ class Member
     public function generateAddress(
         DatabaseAddressModel $address,
         ?ReportMemberModel $reportMember = null,
-    ) {
+    ): void {
         $addrRepo = $this->emReport->getRepository(ReportAddressModel::class);
 
         if ($reportMember === null) {
@@ -164,7 +164,7 @@ class Member
         $this->emReport->persist($reportAddress);
     }
 
-    public function deleteMember(DatabaseMemberModel $member)
+    public function deleteMember(DatabaseMemberModel $member): void
     {
         $repo = $this->emReport->getRepository(ReportMemberModel::class);
         // first try to find an existing member
@@ -172,7 +172,7 @@ class Member
         $this->emReport->remove($reportMember);
     }
 
-    public function deleteAddress(DatabaseAddressModel $address)
+    public function deleteAddress(DatabaseAddressModel $address): void
     {
         $repo = $this->emReport->getRepository(ReportAddressModel::class);
 
@@ -183,15 +183,5 @@ class Member
         ]);
 
         $this->emReport->remove($reportAddress);
-    }
-
-    public function addToMailmanList($member, $listName)
-    {
-        // TODO
-    }
-
-    public function removeFromMailmanList($member, $listName)
-    {
-        // TODO
     }
 }

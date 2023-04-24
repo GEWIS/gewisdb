@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Form;
 
 use Laminas\Form\Element\Select;
@@ -26,6 +28,9 @@ class QueryExport extends Query implements InputFilterProviderInterface
         $this->get('submit')->setLabel($this->translator->translate('Export'));
     }
 
+    /**
+     * @return array
+     */
     public function getInputFilterSpecification(): array
     {
         $filter = parent::getInputFilterSpecification();

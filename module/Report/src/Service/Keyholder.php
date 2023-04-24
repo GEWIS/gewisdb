@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Service;
 
 use Doctrine\ORM\EntityManager;
@@ -22,7 +24,7 @@ class Keyholder
     /**
      * Export keyholder info.
      */
-    public function generate()
+    public function generate(): void
     {
         $grantingRepo = $this->emReport->getRepository(ReportKeyGrantingModel::class);
 

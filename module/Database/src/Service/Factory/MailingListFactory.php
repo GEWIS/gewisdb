@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Service\Factory;
 
 use Database\Form\DeleteList as DeleteListForm;

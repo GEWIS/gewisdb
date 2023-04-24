@@ -1,5 +1,15 @@
 <?php
-use Database\Model\Meeting;
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Database\Model\Meeting as MeetingModel;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MeetingModel[] $meetings
+ */
 ?>
 <a href="<?= $this->url('meeting/create') ?>" class="btn btn-success">
     <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add New Meeting') ?>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Form;
 
 use Database\Form\Fieldset\Meeting as MeetingFieldset;

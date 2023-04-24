@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Service;
 
 use Database\Mapper\MailingList as MailingListMapper;
@@ -18,7 +20,7 @@ class Misc
     /**
      * Export misc info.
      */
-    public function generate()
+    public function generate(): void
     {
         /** @var DatabaseMailingListModel $list */
         foreach ($this->mailingListMapper->findAll() as $list) {
@@ -28,7 +30,7 @@ class Misc
         $this->emReport->flush();
     }
 
-    public function generateList(DatabaseMailingListModel $list)
+    public function generateList(DatabaseMailingListModel $list): void
     {
         $repo = $this->emReport->getRepository(ReportMailingListModel::class);
         $reportList = $repo->find($list->getName());

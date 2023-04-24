@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Application\Controller\IndexController;
 use Laminas\I18n\Translator\Resources;
 use Laminas\Router\Http\Segment;

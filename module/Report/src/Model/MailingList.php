@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Model;
 
 use Doctrine\Common\Collections\{
@@ -210,7 +212,7 @@ class MailingList
     /**
      * Remove a member.
      */
-    public function removeMember(Member $member)
+    public function removeMember(Member $member): void
     {
         $this->members->removeElement($member);
     }

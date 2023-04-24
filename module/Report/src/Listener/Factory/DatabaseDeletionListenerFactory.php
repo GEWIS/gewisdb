@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Listener\Factory;
 
 use Doctrine\ORM\EntityManager;

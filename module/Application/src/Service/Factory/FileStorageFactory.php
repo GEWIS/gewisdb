@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Application\Service\Factory;
 
 use Application\Service\FileStorage as FileStorageService;

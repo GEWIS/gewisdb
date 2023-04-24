@@ -1,4 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Database\Form\Other as OtherForm;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var OtherForm $form
+ */
+
 $form->prepare();
 
 $form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'other')));

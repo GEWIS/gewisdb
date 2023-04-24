@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Service\Factory;
 
 use Checker\Service\Meeting as MeetingService;

@@ -1,3 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+?>
 <h1><?= $this->translate('TU/e Raw Data Lookup') ?></h1>
 
 <?php if('development' === APP_ENV):?>

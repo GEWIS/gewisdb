@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Mapper;
 
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
@@ -103,7 +105,7 @@ class ProspectiveMember
     /**
      * Remove a member.
      */
-    public function remove(ProspectiveMemberModel $member)
+    public function remove(ProspectiveMemberModel $member): void
     {
         $this->em->remove($member);
         $this->em->flush();

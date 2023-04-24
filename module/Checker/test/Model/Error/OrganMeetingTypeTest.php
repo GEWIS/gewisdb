@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CheckerTest\Model\Error;
 
 use Checker\Model\Error\OrganMeetingType;

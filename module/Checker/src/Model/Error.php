@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Model;
 
 use Database\Model\Meeting as MeetingModel;

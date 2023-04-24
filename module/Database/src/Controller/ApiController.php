@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Controller;
 
 use Application\Model\Enums\AddressTypes;

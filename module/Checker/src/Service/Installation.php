@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Service;
 
 use Checker\Mapper\Installation as InstallationMapper;

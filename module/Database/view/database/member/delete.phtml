@@ -1,3 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+?>
 <h1><?= $member->getFullname() ?></h1>
 <?php if ($canRemove): ?>
     <p>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Listener;
 
 use Database\Model\{
@@ -29,7 +31,7 @@ class DatabaseDeletionListener
     ) {
     }
 
-    public function preRemove(LifecycleEventArgs $eventArgs)
+    public function preRemove(LifecycleEventArgs $eventArgs): void
     {
         $entity = $eventArgs->getEntity();
         switch (true) {

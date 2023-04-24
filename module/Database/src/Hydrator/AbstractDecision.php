@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Hydrator;
 
 use Laminas\Hydrator\HydratorInterface;
@@ -24,8 +26,8 @@ abstract class AbstractDecision implements HydratorInterface
         }
 
         $object->setMeeting($data['meeting']);
-        $object->setPoint($data['point']);
-        $object->setNumber($data['decision']);
+        $object->setPoint(intval($data['point']));
+        $object->setNumber(intval($data['decision']));
 
         return $object;
     }

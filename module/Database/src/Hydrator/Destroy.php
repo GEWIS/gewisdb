@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Hydrator;
 
 use Database\Model\Decision as DecisionModel;

@@ -1,8 +1,15 @@
 <?php
 
-use Database\Model\Address;
+declare(strict_types=1);
 
-/** @var Address $address */
+use Application\View\HelperTrait;
+use Database\Model\Address as AddressModel;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var AddressModel $address
+ */
 $type = $address->getType()->getName($this->plugin('translate')->getTranslator());
 ?>
 <?php if (isset($add) && $add): ?>

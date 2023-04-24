@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Database\Form\QueryExport as QueryExportForm;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var QueryExportForm $form
+ */
+
 $escaper = new Laminas\Escaper\Escaper('UTF-8');
 
 function showDecisionNumber($decision)

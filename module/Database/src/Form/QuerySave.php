@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Form;
 
 use Laminas\Form\Element\{
@@ -33,6 +35,9 @@ class QuerySave extends Query implements InputFilterProviderInterface
         ]);
     }
 
+    /**
+     * @return array
+     */
     public function getInputFilterSpecification(): array
     {
         $filter = parent::getInputFilterSpecification();

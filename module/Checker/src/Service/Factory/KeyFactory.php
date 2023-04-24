@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Service\Factory;
 
 use Checker\Mapper\Key as KeyMapper;

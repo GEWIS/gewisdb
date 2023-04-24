@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Command\Factory;
 
 use Checker\Service\Checker as CheckerService;

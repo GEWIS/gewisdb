@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Model;
 
 use Doctrine\Common\Collections\{
@@ -205,7 +207,7 @@ class MailingList
      *
      * @param Member $member
      */
-    public function addMember(Member $member)
+    public function addMember(Member $member): void
     {
         $this->members->add($member);
     }

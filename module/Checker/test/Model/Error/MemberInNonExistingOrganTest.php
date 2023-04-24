@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CheckerTest\Model\Error;
 
 use Checker\Model\Error\MemberInNonExistingOrgan;
@@ -23,7 +25,7 @@ class MemberInNonExistingOrganTest extends Error
         return new MemberInNonExistingOrgan($meeting, $installation);
     }
 
-    public function testGetFoundation()
+    public function testGetFoundation(): void
     {
         $error = $this->create();
         $this->assertInstanceOf(FoundationModel::class, $error->getOrgan());

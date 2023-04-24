@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Mapper;
 
 use Database\Model\Member as MemberModel;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -33,7 +36,7 @@ class Member
      *
      * @return array
      */
-    public function getMembersToCheck($limit)
+    public function getMembersToCheck(int $limit): array
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -59,7 +62,7 @@ class Member
      *
      * @return array
      */
-    public function getEndingMembershipsWithNormalTypes()
+    public function getEndingMembershipsWithNormalTypes(): array
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -79,7 +82,7 @@ class Member
      *
      * @return array
      */
-    public function getExpiringMembershipsWithNormalTypes()
+    public function getExpiringMembershipsWithNormalTypes(): array
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -111,7 +114,7 @@ class Member
     /**
      * @return \DateTime
      */
-    private function getEndOfCurrentAssociationYear()
+    private function getEndOfCurrentAssociationYear(): DateTime
     {
         $end = new \DateTime();
         $end->setTime(0, 0);
@@ -132,7 +135,7 @@ class Member
      *
      * @param MemberModel $member Member to persist.
      */
-    public function persist(MemberModel $member)
+    public function persist(MemberModel $member): void
     {
         $this->em->persist($member);
         $this->em->flush();
