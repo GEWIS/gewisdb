@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Hydrator;
 
 use Application\Model\Enums\OrganTypes;

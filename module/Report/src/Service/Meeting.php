@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Service;
 
 use Database\Mapper\Meeting as MeetingMapper;
@@ -374,6 +376,8 @@ class Meeting
     /**
      * Obtain the correct member, given a database member. Because these members are generated based on what happens in
      * the `Database` module, this cannot return `null`.
+     *
+     * @psalm-ignore-nullable-return
      */
     public function findMember(DatabaseMemberModel $member): ReportMemberModel
     {

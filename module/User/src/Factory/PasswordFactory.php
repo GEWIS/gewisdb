@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Factory;
 
 use Laminas\Crypt\Password\Bcrypt;

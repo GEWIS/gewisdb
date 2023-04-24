@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Listener;
 
 use Database\Model\{
@@ -50,7 +52,7 @@ class DatabaseUpdateListener
     ) {
     }
 
-    protected static function safeFlush(callable $func)
+    protected static function safeFlush(callable $func): void
     {
         if (self::$isflushing) {
             return;
@@ -61,12 +63,12 @@ class DatabaseUpdateListener
         self::$isflushing = false;
     }
 
-    public function postPersist(LifecycleEventArgs $eventArgs)
+    public function postPersist(LifecycleEventArgs $eventArgs): void
     {
         $this->postUpdate($eventArgs);
     }
 
-    public function postUpdate(LifecycleEventArgs $eventArgs)
+    public function postUpdate(LifecycleEventArgs $eventArgs): void
     {
         $entity = $eventArgs->getEntity();
 

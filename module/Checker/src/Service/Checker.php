@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Service;
 
 use Database\Model\SubDecision\Key\Granting;
@@ -108,7 +110,7 @@ class Checker
      *
      * @param $body
      */
-    private function sendMail($body): void
+    private function sendMail(string $body): void
     {
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());

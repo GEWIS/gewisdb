@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Service;
 
 use Doctrine\ORM\EntityManager;
@@ -21,7 +23,7 @@ class Board
     /**
      * Export board info.
      */
-    public function generate()
+    public function generate(): void
     {
         $repo = $this->emReport->getRepository(ReportBoardInstallationModel::class);
 

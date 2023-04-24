@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Command\Factory;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;

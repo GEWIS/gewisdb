@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CheckerTest\Model\Error;
 
 use Checker\Model\Error\MemberHasRoleButNotInOrgan;
@@ -24,13 +26,13 @@ class MemberHasRoleButNotInOrganTest extends Error
         return new MemberHasRoleButNotInOrgan($meeting, $installation, 'test');
     }
 
-    public function testGetFoundation()
+    public function testGetFoundation(): void
     {
         $error = $this->create();
         $this->assertInstanceOf(FoundationModel::class, $error->getOrgan());
     }
 
-    public function testGetMember()
+    public function testGetMember(): void
     {
         $error = $this->create();
         $this->assertInstanceOf(MemberModel::class, $error->getMember());

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Application;
 
 use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
@@ -32,7 +34,7 @@ use Report\Listener\{
 
 class Module
 {
-    public function init(ModuleManager $moduleManager)
+    public function init(ModuleManager $moduleManager): void
     {
         // Register event listener for when all modules are loaded to register our database listeners. This is necessary
         // because `onBootstrap` is never called when using `laminas/laminas-cli`.
@@ -40,7 +42,7 @@ class Module
         $events->attach('loadModules.post', [$this, 'modulesLoaded']);
     }
 
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(MvcEvent $e): void
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
@@ -64,7 +66,7 @@ class Module
         AbstractValidator::setDefaultTranslator($mvcTranslator);
     }
 
-    public function modulesLoaded(EventInterface $event)
+    public function modulesLoaded(EventInterface $event): void
     {
         /** @var ServiceManager $container */
         $container = $event->getParam('ServiceManager');
@@ -79,7 +81,7 @@ class Module
     /**
      * @param MvcEvent $e
      */
-    public function logError($e)
+    public function logError(MvcEvent $e): void
     {
         $container = $e->getApplication()->getServiceManager();
         $logger = $container->get('logger');
@@ -97,7 +99,7 @@ class Module
         $logger->error($e->getError());
     }
 
-    protected function determineLocale(MvcEvent $e)
+    protected function determineLocale(MvcEvent $e): string
     {
         $session = new SessionContainer('lang');
         if (!isset($session->lang)) {

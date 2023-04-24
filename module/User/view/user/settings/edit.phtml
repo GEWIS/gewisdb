@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $form->prepare();
 $form->setAttribute('action', $this->url('settings/user/edit', ['id' => $user->getId()]));
 $form->setAttribute('method', 'post');

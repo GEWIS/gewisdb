@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Form\Fieldset;
 
 use Database\Model\Meeting as MeetingModel;
@@ -30,7 +32,7 @@ class Meeting extends Fieldset
      *
      * @param MeetingModel $meeting
      */
-    public function setMeetingData(MeetingModel $meeting)
+    public function setMeetingData(MeetingModel $meeting): void
     {
         $this->get('type')->setValue($meeting->getType()->value);
         $this->get('number')->setValue($meeting->getNumber());

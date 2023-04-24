@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Mapper\Factory;
 
 use Database\Mapper\SavedQuery as SavedQueryMapper;

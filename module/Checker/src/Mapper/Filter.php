@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Checker\Mapper;
 
 use Database\Model\SubDecision\Destroy as DestroyModel;

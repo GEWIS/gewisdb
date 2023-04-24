@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Service;
 
 use Database\Form\InstallationFunction as InstallationFunctionForm;

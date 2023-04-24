@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Report\Model\SubDecision\Key;
 
 use Report\Model\SubDecision;
