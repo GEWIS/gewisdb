@@ -1531,6 +1531,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-View-Helper-IsModuleActive.html#property_container"
         },                {
+            "fqsen": "\\Application\\View\\HelperTrait",
+            "name": "HelperTrait",
+            "summary": "Helper\u0020trait\u0020for\u0020auto\u002Dcompletion\u0020of\u0020code\u0020in\u0020modern\u0020IDEs.",
+            "url": "classes/Application-View-HelperTrait.html"
+        },                {
             "fqsen": "\\ApplicationTest\\AutomaticControllerTest",
             "name": "AutomaticControllerTest",
             "summary": "",
@@ -10155,16 +10160,6 @@ Search.appendIndex(
             "name": "deleteAddress",
             "summary": "",
             "url": "classes/Report-Service-Member.html#method_deleteAddress"
-        },                {
-            "fqsen": "\\Report\\Service\\Member\u003A\u003AaddToMailmanList\u0028\u0029",
-            "name": "addToMailmanList",
-            "summary": "",
-            "url": "classes/Report-Service-Member.html#method_addToMailmanList"
-        },                {
-            "fqsen": "\\Report\\Service\\Member\u003A\u003AremoveFromMailmanList\u0028\u0029",
-            "name": "removeFromMailmanList",
-            "summary": "",
-            "url": "classes/Report-Service-Member.html#method_removeFromMailmanList"
         },                {
             "fqsen": "\\Report\\Service\\Member\u003A\u003A\u0024memberMapper",
             "name": "memberMapper",

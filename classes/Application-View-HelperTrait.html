@@ -231,37 +231,29 @@
 
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-controller.html">Controller</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application.html">Application</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-view.html">View</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -class">
+    <article class="phpdocumentor-element -trait">
         <h2 class="phpdocumentor-content__title">
-    IndexController
-
-        <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Laminas\Mvc\Controller\AbstractActionController">AbstractActionController</abbr>
-    </span>
-    
-            <div class="phpdocumentor-element__package">
-            in package
-            <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/gewisdb.html">gewisdb</a></li>
-                            </ul>
-        </div>
-    
-    
+    HelperTrait
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/IndexController.php"><a href="files/module-database-src-controller-indexcontroller.html"><abbr title="module/Database/src/Controller/IndexController.php">IndexController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
-        
-    <section class="phpdocumentor-description"></section>
+            <p class="phpdocumentor-summary">Helper trait for auto-completion of code in modern IDEs.</p>
+
+    <section class="phpdocumentor-description"><p>The trait provides convenience methods for view helpers, defined in the application module. It is designed to be used
+for type-hinting $this variable inside laminas-view templates via doc blocks.</p>
+<p>Other traits from laminas are already chained into this trait. This includes support for the FlashMessenger, Form,
+and i18n view helpers.</p>
+</section>
 
 
 
@@ -276,24 +268,17 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Database-Controller-IndexController.html#property_memberService">$memberService</a>
+                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Application-View-HelperTrait.html#method_fileUrl">fileUrl()</a>
     <span>
-                        &nbsp;: <a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a>            </span>
-</dt>
-<dd></dd>
-
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Controller-IndexController.html#method___construct">__construct()</a>
-    <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Controller-IndexController.html#method_indexAction">indexAction()</a>
+    <a href="classes/Application-View-HelperTrait.html#method_moduleIsActive">moduleIsActive()</a>
     <span>
-                                &nbsp;: <abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr>    </span>
+                                &nbsp;: bool    </span>
 </dt>
 <dd></dd>
 
@@ -303,52 +288,10 @@
 
         
 
-        
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Database-Controller-IndexController.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
-        </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only        "
->
-    <h4 class="phpdocumentor-element__name" id="property_memberService">
-        $memberService
-        <a href="classes/Database-Controller-IndexController.html#property_memberService" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/IndexController.php"><a href="files/module-database-src-controller-indexcontroller.html"><abbr title="module/Database/src/Controller/IndexController.php">IndexController.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$memberService</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-            </section>
-
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Controller-IndexController.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Application-View-HelperTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -356,29 +299,28 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Database-Controller-IndexController.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_fileUrl">
+        fileUrl()
+        <a href="classes/Application-View-HelperTrait.html#method_fileUrl" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/IndexController.php"><a href="files/module-database-src-controller-indexcontroller.html"><abbr title="module/Database/src/Controller/IndexController.php">IndexController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">0</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">fileUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$path</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$memberService</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$path</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -389,7 +331,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
         
     
@@ -400,29 +342,39 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_indexAction">
-        indexAction()
-        <a href="classes/Database-Controller-IndexController.html#method_indexAction" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_moduleIsActive">
+        moduleIsActive()
+        <a href="classes/Application-View-HelperTrait.html#method_moduleIsActive" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/IndexController.php"><a href="files/module-database-src-controller-indexcontroller.html"><abbr title="module/Database/src/Controller/IndexController.php">IndexController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">0</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">indexAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
-
-        <section class="phpdocumentor-description"></section>
+                    <span class="phpdocumentor-signature__name">moduleIsActive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$condition</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$condition</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
         
     
@@ -505,7 +457,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Database-Controller-IndexController.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Application-View-HelperTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
