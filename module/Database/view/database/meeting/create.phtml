@@ -1,6 +1,12 @@
 <?php
 
 declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+
 if (isset($success) && $success): ?>
     <?= $this->translate('Meeting added successfully!') ?>
 <?php else: ?>

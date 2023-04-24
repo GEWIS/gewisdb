@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+use Application\View\HelperTrait;
+use Database\Form\Destroy as DestroyForm;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var DestroyForm $form
+ */
 ?>
 <script>
 $(document).ready(function() {

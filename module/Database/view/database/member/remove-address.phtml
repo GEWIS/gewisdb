@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+
 $form->prepare();
 
 $form->setAttribute(

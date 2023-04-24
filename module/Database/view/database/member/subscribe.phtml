@@ -3,9 +3,14 @@
 declare(strict_types=1);
 
 use Application\Model\Enums\PostalRegions;
+use Application\View\HelperTrait;
 use Database\Model\Member as MemberModel;
+use Laminas\View\Renderer\PhpRenderer;
 
-/** @var MemberModel $member */
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MemberModel $member
+ */
 ?>
 <?php if (isset($form)): ?>
 <?php

@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
 ?>
 <script>
 var urlTemplate = '<?= $this->url('organ/view', array(

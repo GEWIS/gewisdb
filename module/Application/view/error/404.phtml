@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+
 ?>
 <h1><?php echo $this->translate('A 404 error occurred') ?></h1>
 <h2><?php echo $this->message ?></h2>

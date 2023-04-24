@@ -2,6 +2,20 @@
 
 declare(strict_types=1);
 
+use Application\View\HelperTrait;
+use Database\Form\MailingList as MailingListForm;
+use Database\Model\{
+    MailingList as MailingListModel,
+    Member as MemberModel,
+};
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MailingListModel[] $lists
+ * @var MemberModel $member
+ * @var MailingListForm $form
+ */
 ?>
 <h1>
     <?=

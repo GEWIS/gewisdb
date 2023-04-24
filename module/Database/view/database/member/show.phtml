@@ -2,14 +2,19 @@
 
 declare(strict_types=1);
 
+use Application\View\HelperTrait;
 use Application\Model\Enums\{
     AddressTypes,
     MembershipTypes,
 };
 use Database\Model\Member as MemberModel;
+use Laminas\View\Renderer\PhpRenderer;
 
-/** @var MemberModel $member */
-/** @var bool $hasCorrectInstallations */
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MemberModel $member
+ * @var bool $hasCorrectInstallations
+ */
 
 ?>
 <div class="row">
