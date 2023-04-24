@@ -41,8 +41,8 @@ class Budget extends AbstractDecision
         $subdecision->setName($data['name']);
         $subdecision->setAuthor($data['author']);
         $subdecision->setVersion($data['version']);
-        $subdecision->setApproval($data['approve']);
-        $subdecision->setChanges($data['changes']);
+        $subdecision->setApproval(boolval($data['approve']));
+        $subdecision->setChanges(boolval($data['changes']));
 
         $subdecision->setDecision($object);
 
