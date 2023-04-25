@@ -62,7 +62,7 @@ class QueryController extends AbstractActionController
             'form' => $this->queryService->getQueryForm(),
             'saved' => $this->queryService->getSavedQueries(),
             'exportform' => $this->queryService->getQueryExportForm(),
-            'result' => $this->queryService->executeSaved($this->params()->fromRoute('query')),
+            'result' => $this->queryService->executeSaved((int) $this->params()->fromRoute('query')),
             'entities' => $this->queryService->getEntities(),
         ]);
 
