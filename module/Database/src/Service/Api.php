@@ -28,7 +28,7 @@ class Api
     public function getActiveMembers(): array
     {
         return array_map(function ($member) {
-            return $member->toArrayApi();
+            return $member->toArrayApi(true);
         }, $this->getReportMemberMapper()->findActive());
     }
 

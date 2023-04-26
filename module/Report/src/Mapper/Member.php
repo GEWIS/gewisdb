@@ -67,7 +67,7 @@ class Member
      *
      * @return array<array-key, MemberModel>
      */
-    public function findActive(): array
+    public function findActive(bool $includeOrganMembership = false): array
     {
         $qb = $this->em->createQueryBuilder();
 

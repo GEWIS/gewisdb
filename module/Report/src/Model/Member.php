@@ -617,6 +617,16 @@ class Member
         return $this->installations;
     }
 
+    /**
+     * Get the organ installations.
+     *
+     * @return Collection
+     */
+    public function getOrganInstallations(): Collection
+    {
+        return $this->organInstallations;
+    }
+
     public function getAuthenticationKey(): ?string
     {
         return $this->authenticationKey;
@@ -677,9 +687,9 @@ class Member
      *
      * @return array
      */
-    public function toArrayApi(): array
+    public function toArrayApi(bool $includeOrganMembership = false): array
     {
-        return [
+        $result = [
             'lidnr' => $this->getLidnr(),
             'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
@@ -691,6 +701,20 @@ class Member
             'hidden' => $this->getHidden(),
             'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
         ];
+        if ($includeOrganMembership) {
+            $result['organs'] = array_map(
+                function (OrganMember $i) {
+                    return $i->toArray();
+                },
+                array_filter(
+                    $this->getOrganInstallations()->toArray(),
+                    function (OrganMember $i) {
+                        return $i->isCurrent();
+                    }
+                ),
+            );
+        };
+        return $result;
     }
 
     /**
