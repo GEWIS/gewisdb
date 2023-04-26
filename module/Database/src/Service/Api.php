@@ -10,12 +10,26 @@ use Database\Mapper\{
 use Database\Model\{
     Member as MemberModel,
 };
+use Report\Mapper\{
+    Member as ReportMemberMapper,
+};
 
 class Api
 {
     public function __construct(
         private readonly MemberMapper $memberMapper,
+        private readonly ReportMemberMapper $reportMemberMapper,
     ) {
+    }
+
+    /**
+     * Get active members.
+     */
+    public function getActiveMembers(): array
+    {
+        return array_map(function ($member) {
+            return $member->toArrayApi();
+        }, $this->getReportMemberMapper()->findActive());
     }
 
     /**
@@ -25,15 +39,15 @@ class Api
     {
         return array_map(function ($member) {
             return $member->toArrayApi();
-        }, $this->getMemberMapper()->findNormal());
+        }, $this->getReportMemberMapper()->findNormal());
     }
 
     /**
      * Get normal members.
      */
-    public function getMember(int $id): array
+    public function getMember(int $id): ?array
     {
-        return $this->getMemberMapper()->findSimple($id)->toArrayApi();
+        return $this->getReportMemberMapper()->findSimple($id)?->toArrayApi();
     }
 
     /**
@@ -42,5 +56,13 @@ class Api
     private function getMemberMapper(): MemberMapper
     {
         return $this->memberMapper;
+    }
+
+    /**
+     * Get the member mapper.
+     */
+    private function getReportMemberMapper(): ReportMemberMapper
+    {
+        return $this->reportMemberMapper;
     }
 }

@@ -16,6 +16,10 @@ use Report\Listener\{
     Factory\DatabaseDeletionListenerFactory,
     Factory\DatabaseUpdateListenerFactory,
 };
+use Report\Mapper\{
+    Member as MemberMapper,
+    Factory\MemberFactory as MemberMapperFactory,
+};
 use Report\Service\{
     Board as BoardService,
     Factory\BoardFactory as BoardServiceFactory,
@@ -58,6 +62,7 @@ class Module
                 KeyholderService::class => KeyholderServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
+                MemberMapper::class => MemberMapperFactory::class,
                 MiscService::class => MiscServiceFactory::class,
                 OrganService::class => OrganServiceFactory::class,
                 DatabaseDeletionListener::class => DatabaseDeletionListenerFactory::class,

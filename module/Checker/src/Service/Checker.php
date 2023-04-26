@@ -114,7 +114,10 @@ class Checker
     {
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
-        $message->setTo($this->config['email']['to']['checker_result']['address'], $this->config['email']['to']['checker_result']['name'])
+        $message->setTo(
+            $this->config['email']['to']['checker_result']['address'],
+            $this->config['email']['to']['checker_result']['name']
+        )
             ->setFrom($this->config['email']['from']['address'], $this->config['email']['from']['name'])
             ->setSubject('Database Checker Report')
             ->setBody($body);

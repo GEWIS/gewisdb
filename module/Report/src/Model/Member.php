@@ -672,6 +672,28 @@ class Member
     }
 
     /**
+     * Get array of member for use in API endpoints
+     * hides nonrelevant information by default
+     *
+     * @return array
+     */
+    public function toArrayApi(): array
+    {
+        return [
+            'lidnr' => $this->getLidnr(),
+            'email' => $this->getEmail(),
+            'fullName' => $this->getFullName(),
+            'lastName' => $this->getLastName(),
+            'middleName' => $this->getMiddleName(),
+            'initials' => $this->getInitials(),
+            'firstName' => $this->getFirstName(),
+            'generation' => $this->getGeneration(),
+            'hidden' => $this->getHidden(),
+            'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
+        ];
+    }
+
+    /**
      * Get all addresses.
      *
      * @return Collection all addresses

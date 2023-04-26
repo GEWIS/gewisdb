@@ -39,9 +39,29 @@ class ApiController extends AbstractActionController
     public function membersAction(): JsonModel
     {
         $this->apiAuthService->assertCan(ApiPermissions::MembersR);
+
         $members = $this->apiService->getMembers();
         $res = [
             "data" => $members,
+        ];
+
+        return new JsonModel($res);
+    }
+
+    /**
+     * Return members
+     */
+    public function memberAction(): JsonModel|Response
+    {
+        $this->apiAuthService->assertCan(ApiPermissions::MembersR);
+        $member = $this->apiService->getMember((int) $this->params()->fromRoute('id'));
+
+        if (null === $member) {
+            return $this->noContent();
+        }
+
+        $res = [
+            "data" => $member,
         ];
         return new JsonModel($res);
     }
@@ -49,13 +69,15 @@ class ApiController extends AbstractActionController
     /**
      * Return members
      */
-    public function memberAction(): JsonModel
+    public function membersActiveAction(): JsonModel
     {
-        $this->apiAuthService->assertCan(ApiPermissions::MembersR);
-        $member = $this->apiService->getMember((int) $this->params()->fromRoute('id'));
+        $this->apiAuthService->assertCan(ApiPermissions::MembersActiveR);
+
+        $members = $this->apiService->getActiveMembers();
         $res = [
-            "data" => $member,
+            "data" => $members,
         ];
+
         return new JsonModel($res);
     }
 

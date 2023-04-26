@@ -43,20 +43,20 @@ return [
             'home' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route'    => '/',
+                    'route' => '/',
                     'defaults' => [
                         'controller' => IndexController::class,
-                        'action'     => 'index',
+                        'action' => 'index',
                     ],
                 ],
             ],
             'meeting' => [
-                'type'    => Literal::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/meeting',
+                    'route' => '/meeting',
                     'defaults' => [
-                        'controller'    => MeetingController::class,
-                        'action'        => 'index',
+                        'controller' => MeetingController::class,
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
@@ -146,22 +146,22 @@ return [
                 ],
             ],
             'organ' => [
-                'type'    => Literal::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/organ',
+                    'route' => '/organ',
                     'defaults' => [
-                        'controller'    => OrganController::class,
-                        'action'        => 'index',
+                        'controller' => OrganController::class,
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
                     'default' => [
-                        'type'    => Segment::class,
+                        'type' => Segment::class,
                         'options' => [
-                            'route'    => '/:action',
+                            'route' => '/:action',
                             'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],
                         ],
                     ],
@@ -200,12 +200,12 @@ return [
                 ],
             ],
             'member' => [
-                'type'    => Literal::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/member',
+                    'route' => '/member',
                     'defaults' => [
-                        'controller'    => MemberController::class,
-                        'action'        => 'index',
+                        'controller' => MemberController::class,
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
@@ -428,12 +428,12 @@ return [
                 ],
             ],
             'prospective-member' => [
-                'type'    => Literal::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/prospective-member',
+                    'route' => '/prospective-member',
                     'defaults' => [
-                        'controller'    => ProspectiveMemberController::class,
-                        'action'        => 'index',
+                        'controller' => ProspectiveMemberController::class,
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
@@ -472,45 +472,45 @@ return [
                         ],
                     ],
                     'default' => [
-                        'type'    => Segment::class,
+                        'type' => Segment::class,
                         'options' => [
-                            'route'    => '/:action',
+                            'route' => '/:action',
                             'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],
                         ],
                     ],
                 ],
             ],
             'export' => [
-                'type'    => Literal::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/export',
+                    'route' => '/export',
                     'defaults' => [
-                        'controller'    => ExportController::class,
-                        'action'        => 'index',
+                        'controller' => ExportController::class,
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
                     'default' => [
-                        'type'    => Segment::class,
+                        'type' => Segment::class,
                         'options' => [
-                            'route'    => '/:action',
+                            'route' => '/:action',
                             'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],
                         ],
                     ],
                 ],
             ],
             'settings' => [
-                'type'    => Literal::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/settings',
+                    'route' => '/settings',
                     'defaults' => [
-                        'controller'    => SettingsController::class,
-                        'action'        => 'index',
+                        'controller' => SettingsController::class,
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
@@ -528,23 +528,23 @@ return [
                         ],
                     ],
                     'default' => [
-                        'type'    => Segment::class,
+                        'type' => Segment::class,
                         'options' => [
-                            'route'    => '/:action',
+                            'route' => '/:action',
                             'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],
                         ],
                     ],
                 ],
             ],
             'query' => [
-                'type'    => Literal::class,
+                'type' => Literal::class,
                 'options' => [
-                    'route'    => '/query',
+                    'route' => '/query',
                     'defaults' => [
-                        'controller'    => QueryController::class,
-                        'action'        => 'index',
+                        'controller' => QueryController::class,
+                        'action' => 'index',
                     ],
                 ],
                 'may_terminate' => true,
@@ -562,9 +562,9 @@ return [
                         ],
                     ],
                     'export' => [
-                        'type'    => Literal::class,
+                        'type' => Literal::class,
                         'options' => [
-                            'route'    => '/export',
+                            'route' => '/export',
                             'defaults' => [
                                 'action' => 'export',
                             ],
@@ -575,11 +575,11 @@ return [
             'api' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route'    => '/api',
+                    'route' => '/api',
                     'defaults' => [
                         'controller' => ApiController::class,
-                        'action'     => 'healthy',
-                        'auth_type'  => AuthenticationListener::AUTH_API,
+                        'action' => 'healthy',
+                        'auth_type' => AuthenticationListener::AUTH_API,
                     ],
                 ],
                 'may_terminate' => true,
@@ -587,21 +587,34 @@ return [
                     'members' => [
                         'type' => Literal::class,
                         'options' => [
-                            'route'    => '/members',
+                            'route' => '/members',
                             'defaults' => [
-                                'action'     => 'members',
+                                'controller' => ApiController::class,
+                                'action' => 'members',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'active' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/active',
+                                    'defaults' => [
+                                        'action' => 'membersActive',
+                                    ],
+                                ],
                             ],
                         ],
                     ],
                     'member' => [
                         'type' => Segment::class,
                         'options' => [
-                            'route'    => '/members/:id',
+                            'route' => '/members/:id',
                             'constraints' => [
                                 'id' => '[0-9]+',
                             ],
                             'defaults' => [
-                                'action'     => 'member',
+                                'action' => 'member',
                             ],
                         ],
                     ],

@@ -177,7 +177,9 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                         'options' => [
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => [
-                                'regexNotMatch' => $this->translator->translate('A TU/e-username should look like sYYxxxx or YYYYxxxx.'),
+                                'regexNotMatch' => $this->translator->translate(
+                                    'A TU/e-username should look like sYYxxxx or YYYYxxxx.'
+                                ),
                             ],
                         ],
                     ],
