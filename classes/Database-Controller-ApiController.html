@@ -160,6 +160,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/report-mapper.html" class="">Mapper</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/report-model.html" class="">Model</a>
                 
             </li>
@@ -307,12 +311,19 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-ApiController.html#method_memberAction">memberAction()</a>
     <span>
-                                &nbsp;: <abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr>    </span>
+                                &nbsp;: <abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr>|<abbr title="\Laminas\Http\Response">Response</abbr>    </span>
 </dt>
 <dd>Return members</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-ApiController.html#method_membersAction">membersAction()</a>
+    <span>
+                                &nbsp;: <abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr>    </span>
+</dt>
+<dd>Return members</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Controller-ApiController.html#method_membersActiveAction">membersActiveAction()</a>
     <span>
                                 &nbsp;: <abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr>    </span>
 </dt>
@@ -510,7 +521,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/ApiController.php"><a href="files/module-database-src-controller-apicontroller.html"><abbr title="module/Database/src/Controller/ApiController.php">ApiController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -518,14 +529,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">memberAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">memberAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr>|<abbr title="\Laminas\Http\Response">Response</abbr></span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr>|<abbr title="\Laminas\Http\Response">Response</abbr></span>
             &mdash;
         
     
@@ -543,7 +554,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/ApiController.php"><a href="files/module-database-src-controller-apicontroller.html"><abbr title="module/Database/src/Controller/ApiController.php">ApiController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -552,6 +563,39 @@
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">membersAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_membersActiveAction">
+        membersActiveAction()
+        <a href="classes/Database-Controller-ApiController.html#method_membersActiveAction" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/ApiController.php"><a href="files/module-database-src-controller-apicontroller.html"><abbr title="module/Database/src/Controller/ApiController.php">ApiController.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Return members</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">membersActiveAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span></code>
 
     
     
@@ -576,7 +620,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/ApiController.php"><a href="files/module-database-src-controller-apicontroller.html"><abbr title="module/Database/src/Controller/ApiController.php">ApiController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 

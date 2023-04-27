@@ -3001,6 +3001,11 @@ Search.appendIndex(
             "summary": "Return\u0020members",
             "url": "classes/Database-Controller-ApiController.html#method_memberAction"
         },                {
+            "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AmembersActiveAction\u0028\u0029",
+            "name": "membersActiveAction",
+            "summary": "Return\u0020members",
+            "url": "classes/Database-Controller-ApiController.html#method_membersActiveAction"
+        },                {
             "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AnoContent\u0028\u0029",
             "name": "noContent",
             "summary": "To\u0020follow\u0020best\u0020practices,\u0020we\u0020generate\u0020a\u0020204\u0020for\u0020empty\u0020datasets",
@@ -5621,11 +5626,6 @@ Search.appendIndex(
             "summary": "Convert\u0020most\u0020relevant\u0020items\u0020to\u0020array.",
             "url": "classes/Database-Model-Member.html#method_toArray"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AtoArrayApi\u0028\u0029",
-            "name": "toArrayApi",
-            "summary": "Get\u0020array\u0020of\u0020member\u0020for\u0020use\u0020in\u0020API\u0020endpoints",
-            "url": "classes/Database-Model-Member.html#method_toArrayApi"
-        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetAddresses\u0028\u0029",
             "name": "getAddresses",
             "summary": "Get\u0020all\u0020addresses.",
@@ -6941,6 +6941,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Api.html#method___construct"
         },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003AgetActiveMembers\u0028\u0029",
+            "name": "getActiveMembers",
+            "summary": "Get\u0020active\u0020members.",
+            "url": "classes/Database-Service-Api.html#method_getActiveMembers"
+        },                {
             "fqsen": "\\Database\\Service\\Api\u003A\u003AgetMembers\u0028\u0029",
             "name": "getMembers",
             "summary": "Get\u0020normal\u0020members.",
@@ -6951,15 +6956,15 @@ Search.appendIndex(
             "summary": "Get\u0020normal\u0020members.",
             "url": "classes/Database-Service-Api.html#method_getMember"
         },                {
-            "fqsen": "\\Database\\Service\\Api\u003A\u003AgetMemberMapper\u0028\u0029",
-            "name": "getMemberMapper",
+            "fqsen": "\\Database\\Service\\Api\u003A\u003AgetReportMemberMapper\u0028\u0029",
+            "name": "getReportMemberMapper",
             "summary": "Get\u0020the\u0020member\u0020mapper.",
-            "url": "classes/Database-Service-Api.html#method_getMemberMapper"
+            "url": "classes/Database-Service-Api.html#method_getReportMemberMapper"
         },                {
-            "fqsen": "\\Database\\Service\\Api\u003A\u003A\u0024memberMapper",
-            "name": "memberMapper",
+            "fqsen": "\\Database\\Service\\Api\u003A\u003A\u0024reportMemberMapper",
+            "name": "reportMemberMapper",
             "summary": "",
-            "url": "classes/Database-Service-Api.html#property_memberMapper"
+            "url": "classes/Database-Service-Api.html#property_reportMemberMapper"
         },                {
             "fqsen": "\\Database\\Service\\Factory\\ApiFactory",
             "name": "ApiFactory",
@@ -8041,6 +8046,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Listener-Factory-DatabaseUpdateListenerFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Report\\Mapper\\Factory\\MemberFactory",
+            "name": "MemberFactory",
+            "summary": "",
+            "url": "classes/Report-Mapper-Factory-MemberFactory.html"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Factory\\MemberFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Report-Mapper-Factory-MemberFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Member",
+            "name": "Member",
+            "summary": "",
+            "url": "classes/Report-Mapper-Member.html"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Member\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Report-Mapper-Member.html#method___construct"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Member\u003A\u003AfindSimple\u0028\u0029",
+            "name": "findSimple",
+            "summary": "Find\u0020a\u0020member\u0020\u0028by\u0020lidnr\u0029.",
+            "url": "classes/Report-Mapper-Member.html#method_findSimple"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Member\u003A\u003AfindNormal\u0028\u0029",
+            "name": "findNormal",
+            "summary": "Find\u0020all\u0020non\u002Dhidden\u0020and\u0020non\u002Ddeleted\u0020members.",
+            "url": "classes/Report-Mapper-Member.html#method_findNormal"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Member\u003A\u003AfindActive\u0028\u0029",
+            "name": "findActive",
+            "summary": "Find\u0020members\u0020that\u0020are\u0020in\u0020at\u0020least\u0020one\u0020organ\u0020currently",
+            "url": "classes/Report-Mapper-Member.html#method_findActive"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Member\u003A\u003AgetRepository\u0028\u0029",
+            "name": "getRepository",
+            "summary": "Get\u0020the\u0020repository\u0020for\u0020this\u0020mapper.",
+            "url": "classes/Report-Mapper-Member.html#method_getRepository"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Member\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Report-Mapper-Member.html#property_em"
+        },                {
             "fqsen": "\\Report\\Model\\Address",
             "name": "Address",
             "summary": "Address\u0020model.",
@@ -8836,6 +8886,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020installations.",
             "url": "classes/Report-Model-Member.html#method_getInstallations"
         },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AgetOrganInstallations\u0028\u0029",
+            "name": "getOrganInstallations",
+            "summary": "Get\u0020the\u0020organ\u0020installations.",
+            "url": "classes/Report-Model-Member.html#method_getOrganInstallations"
+        },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetAuthenticationKey\u0028\u0029",
             "name": "getAuthenticationKey",
             "summary": "",
@@ -8860,6 +8915,11 @@ Search.appendIndex(
             "name": "toArray",
             "summary": "Convert\u0020most\u0020relevant\u0020items\u0020to\u0020array.",
             "url": "classes/Report-Model-Member.html#method_toArray"
+        },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AtoArrayApi\u0028\u0029",
+            "name": "toArrayApi",
+            "summary": "Get\u0020array\u0020of\u0020member\u0020for\u0020use\u0020in\u0020API\u0020endpoints\nhides\u0020nonrelevant\u0020information\u0020by\u0020default",
+            "url": "classes/Report-Model-Member.html#method_toArrayApi"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetAddresses\u0028\u0029",
             "name": "getAddresses",
@@ -9235,6 +9295,16 @@ Search.appendIndex(
             "name": "getDischargeDate",
             "summary": "Get\u0020the\u0020discharge\u0020date.",
             "url": "classes/Report-Model-OrganMember.html#method_getDischargeDate"
+        },                {
+            "fqsen": "\\Report\\Model\\OrganMember\u003A\u003AisCurrent\u0028\u0029",
+            "name": "isCurrent",
+            "summary": "Get\u0020whether\u0020the\u0020organ\u0020membership\u0020has\u0020ended\u0020or\u0020was\u0020annulled",
+            "url": "classes/Report-Model-OrganMember.html#method_isCurrent"
+        },                {
+            "fqsen": "\\Report\\Model\\OrganMember\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Convert\u0020the\u0020organ\u0020member\u0020to\u0020an\u0020array",
+            "url": "classes/Report-Model-OrganMember.html#method_toArray"
         },                {
             "fqsen": "\\Report\\Model\\OrganMember\u003A\u003A\u0024id",
             "name": "id",
@@ -10676,6 +10746,11 @@ Search.appendIndex(
             "summary": "",
             "url": ""
         },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersActiveR",
+            "name": "MembersActiveR",
+            "summary": "",
+            "url": ""
+        },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AAll",
             "name": "All",
             "summary": "",
@@ -11150,6 +11225,16 @@ Search.appendIndex(
             "name": "Factory",
             "summary": "",
             "url": "namespaces/report-listener-factory.html"
+        },                {
+            "fqsen": "\\Report\\Mapper\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/report-mapper-factory.html"
+        },                {
+            "fqsen": "\\Report\\Mapper",
+            "name": "Mapper",
+            "summary": "",
+            "url": "namespaces/report-mapper.html"
         },                {
             "fqsen": "\\Report\\Model",
             "name": "Model",

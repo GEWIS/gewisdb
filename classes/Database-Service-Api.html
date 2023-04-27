@@ -160,6 +160,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/report-mapper.html" class="">Mapper</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/report-model.html" class="">Model</a>
                 
             </li>
@@ -253,7 +257,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 
     </aside>
 
@@ -274,9 +278,9 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Database-Service-Api.html#property_memberMapper">$memberMapper</a>
+    <a href="classes/Database-Service-Api.html#property_reportMemberMapper">$reportMemberMapper</a>
     <span>
-                        &nbsp;: <a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>            </span>
+                        &nbsp;: <a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a>            </span>
 </dt>
 <dd></dd>
 
@@ -288,9 +292,16 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Api.html#method_getMember">getMember()</a>
+    <a href="classes/Database-Service-Api.html#method_getActiveMembers">getActiveMembers()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Get active members.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Service-Api.html#method_getMember">getMember()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
 </dt>
 <dd>Get normal members.</dd>
 
@@ -302,9 +313,9 @@
 <dd>Get normal members.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Database-Service-Api.html#method_getMemberMapper">getMemberMapper()</a>
+    <a href="classes/Database-Service-Api.html#method_getReportMemberMapper">getReportMemberMapper()</a>
     <span>
-                                &nbsp;: <a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a>    </span>
 </dt>
 <dd>Get the member mapper.</dd>
 
@@ -327,24 +338,24 @@
             -private
                                                 -read-only        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_memberMapper">
-        $memberMapper
-        <a href="classes/Database-Service-Api.html#property_memberMapper" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_reportMemberMapper">
+        $reportMemberMapper
+        <a href="classes/Database-Service-Api.html#property_reportMemberMapper" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$memberMapper</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$reportMemberMapper</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -374,22 +385,22 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberMapper</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reportMemberMapper</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$memberMapper</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$reportMemberMapper</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -411,6 +422,39 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getActiveMembers">
+        getActiveMembers()
+        <a href="classes/Database-Service-Api.html#method_getActiveMembers" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get active members.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getActiveMembers</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getMember">
         getMember()
         <a href="classes/Database-Service-Api.html#method_getMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -418,7 +462,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
@@ -426,7 +470,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -444,7 +488,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
             &mdash;
         
     
@@ -462,7 +506,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -488,14 +532,14 @@
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMemberMapper">
-        getMemberMapper()
-        <a href="classes/Database-Service-Api.html#method_getMemberMapper" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getReportMemberMapper">
+        getReportMemberMapper()
+        <a href="classes/Database-Service-Api.html#method_getReportMemberMapper" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -503,14 +547,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">getMemberMapper</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getReportMemberMapper</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a></span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a></span>
             &mdash;
         
     
