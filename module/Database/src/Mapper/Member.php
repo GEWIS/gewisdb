@@ -140,25 +140,6 @@ class Member
     }
 
     /**
-     * Find all non-hidden and non-deleted members
-     * with special properties
-     *
-     * @return array<array-key, MemberModel>
-     */
-    // public function findActive(): array
-    // {
-    //     $qb = $this->em->createQueryBuilder();
-
-    //     $qb->select('m, r, l')
-    //         ->from(MemberModel::class, 'm')
-    //         ->leftJoin('m.installations', 'r')
-    //     return $this->getRepository()->findBy([
-    //         'deleted' => false,
-    //         'hidden' => false,
-    //     ]);
-    // }
-
-    /**
      * Find a member (by lidnr).
      *
      * And calculate memberships.

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Report\Model;
 
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping\{
     Column,
     Entity,
@@ -230,5 +231,40 @@ class OrganMember
     public function getDischargeDate(): ?DateTime
     {
         return $this->dischargeDate;
+    }
+
+    /**
+     * Get whether the organ membership has ended or was annulled
+     *
+     * @return bool
+     */
+    public function isCurrent(): bool
+    {
+        $now = new DateTime();
+
+        return $this->getInstallDate() <= $now
+            && (
+                null === $this->getDischargeDate()
+                || $this->getDischargeDate() >= $now
+            );
+    }
+
+    /**
+     * Convert the organ member to an array
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'organ' => [
+                'id' => $this->getOrgan()->getId(),
+                'abbreviation' => $this->getOrgan()->getAbbr(),
+            ],
+            'function' => $this->getFunction(),
+            'installDate' => $this->getInstallDate()->format(DateTimeInterface::ATOM),
+            'dischargeDate' => $this->getDischargeDate()?->format(DateTimeInterface::ATOM),
+            'current' => $this->isCurrent(),
+        ];
     }
 }
