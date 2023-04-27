@@ -7,28 +7,11 @@ on:
             - master
     pull_request:
 
+# Cancel running jobs that have become stale through updates to the ref (e.g., pushes to a pull request).
+concurrency:
+    group: '${{ github.workflow }}-${{ github.ref }}'
+    cancel-in-progress: true
+
 jobs:
     php-codesniffer:
-        name: PHP_CodeSniffer
-        runs-on: ubuntu-latest
-
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v3
-
-            -   name: Install PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8.2'
-                    tools: cs2pr, php-cs-fixer
-
-            -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v2
-
-            -   name: Run PHPCS
-                run: vendor/bin/phpcs --standard=PSR1,PSR12 --extensions=php,dist --report=checkstyle -q module config | cs2pr --graceful-warnings
-
-            -   name: Run php-cs-fixer
-                run: php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
-                env:
-                    PHP_CS_FIXER_IGNORE_ENV: true
+        uses: 'GEWIS/gewisphp-coding-standards/.github/workflows/coding-standards.yml@1.0.0'

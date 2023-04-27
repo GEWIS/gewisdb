@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6dcde4169d8749f9a6c46ec92094757c",
+    "content-hash": "b78fe7acd5356753713c4e799840415c",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -6726,6 +6726,38 @@
             "time": "2022-12-18T00:47:22+00:00"
         },
         {
+            "name": "gewis/gewisphp-coding-standards",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GEWIS/gewisphp-coding-standards.git",
+                "reference": "d687ca870b0989ee610a51893a656beecd9a19ad"
+            },
+            "require": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
+                "php": "^8.2",
+                "slevomat/coding-standard": "^8.11",
+                "squizlabs/php_codesniffer": "^3.7.0"
+            },
+            "type": "phpcodesniffer-standard",
+            "autoload": {
+                "psr-4": {
+                    "GEWISPHPCodingStandards\\": "src/GEWISPHPCodingStandards/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "The GEWISPHP Coding Standard is a set of PHP_CS rules that are applied to PHP projects of Study Association GEWIS.",
+            "homepage": "https://github.com/GEWIS/gewisphp-coding-standards",
+            "keywords": [
+                "coding",
+                "gewis",
+                "standard"
+            ],
+            "time": "2023-04-27T11:30:57+00:00"
+        },
+        {
             "name": "icanhazstring/composer-unused",
             "version": "0.8.5",
             "source": {
@@ -11220,5 +11252,5 @@
         "ext-zip": "^1.12.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
