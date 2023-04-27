@@ -701,6 +701,7 @@ class Member
             'hidden' => $this->getHidden(),
             'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
         ];
+
         if ($includeOrganMembership) {
             $result['organs'] = array_map(
                 function (OrganMember $i) {
@@ -713,7 +714,8 @@ class Member
                     }
                 ),
             );
-        };
+        }
+
         return $result;
     }
 

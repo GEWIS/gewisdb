@@ -4,22 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Service;
 
-use Database\Mapper\{
-    Member as MemberMapper,
-};
-use Database\Model\{
-    Member as MemberModel,
-};
 use Report\Mapper\{
     Member as ReportMemberMapper,
 };
 
 class Api
 {
-    public function __construct(
-        private readonly MemberMapper $memberMapper,
-        private readonly ReportMemberMapper $reportMemberMapper,
-    ) {
+    public function __construct(private readonly ReportMemberMapper $reportMemberMapper)
+    {
     }
 
     /**
@@ -27,9 +19,12 @@ class Api
      */
     public function getActiveMembers(): array
     {
-        return array_map(function ($member) {
-            return $member->toArrayApi(true);
-        }, $this->getReportMemberMapper()->findActive());
+        return array_map(
+            function ($member) {
+                return $member->toArrayApi(true);
+            },
+            $this->getReportMemberMapper()->findActive(),
+        );
     }
 
     /**
@@ -37,9 +32,12 @@ class Api
      */
     public function getMembers(): array
     {
-        return array_map(function ($member) {
-            return $member->toArrayApi();
-        }, $this->getReportMemberMapper()->findNormal());
+        return array_map(
+            function ($member) {
+                return $member->toArrayApi();
+            },
+            $this->getReportMemberMapper()->findNormal(),
+        );
     }
 
     /**
@@ -48,14 +46,6 @@ class Api
     public function getMember(int $id): ?array
     {
         return $this->getReportMemberMapper()->findSimple($id)?->toArrayApi();
-    }
-
-    /**
-     * Get the member mapper.
-     */
-    private function getMemberMapper(): MemberMapper
-    {
-        return $this->memberMapper;
     }
 
     /**

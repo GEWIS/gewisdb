@@ -28,6 +28,7 @@ class ApiController extends AbstractActionController
     public function healthyAction(): JsonModel
     {
         $this->apiAuthService->assertCan(ApiPermissions::HealthR);
+
         return new JsonModel([
             "healthy" => true,
         ]);
@@ -54,8 +55,8 @@ class ApiController extends AbstractActionController
     public function memberAction(): JsonModel|Response
     {
         $this->apiAuthService->assertCan(ApiPermissions::MembersR);
-        $member = $this->apiService->getMember((int) $this->params()->fromRoute('id'));
 
+        $member = $this->apiService->getMember((int) $this->params()->fromRoute('id'));
         if (null === $member) {
             return $this->noContent();
         }
@@ -63,6 +64,7 @@ class ApiController extends AbstractActionController
         $res = [
             "data" => $member,
         ];
+
         return new JsonModel($res);
     }
 
@@ -88,6 +90,7 @@ class ApiController extends AbstractActionController
     {
         $response = new Response();
         $response->setStatusCode(Response::STATUS_CODE_204);
+
         return $response;
     }
 }

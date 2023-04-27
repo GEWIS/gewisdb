@@ -241,8 +241,12 @@ class OrganMember
     public function isCurrent(): bool
     {
         $now = new DateTime();
+
         return $this->getInstallDate() <= $now
-            && (null === $this->getDischargeDate() || $this->getDischargeDate() >= $now);
+            && (
+                null === $this->getDischargeDate()
+                || $this->getDischargeDate() >= $now
+            );
     }
 
     /**
