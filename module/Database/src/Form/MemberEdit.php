@@ -5,22 +5,18 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Laminas\Filter\ToNull;
-use Laminas\Form\Element\{
-    Checkbox,
-    Date,
-    Email,
-    Submit,
-    Text,
-};
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Date;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
-use Laminas\Validator\{
-    Digits,
-    EmailAddress,
-    Regex,
-    StringLength,
-};
+use Laminas\Validator\Digits;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class MemberEdit extends Form implements InputFilterProviderInterface
 {
@@ -178,7 +174,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                             'pattern' => '/^(s\d{6}|\d{8})$/',
                             'messages' => [
                                 'regexNotMatch' => $this->translator->translate(
-                                    'A TU/e-username should look like sYYxxxx or YYYYxxxx.'
+                                    'A TU/e-username should look like sYYxxxx or YYYYxxxx.',
                                 ),
                             ],
                         ],

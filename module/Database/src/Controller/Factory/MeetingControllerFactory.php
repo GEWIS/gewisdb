@@ -13,16 +13,12 @@ use Psr\Container\ContainerInterface;
 class MeetingControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return MeetingController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): MeetingController {
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);

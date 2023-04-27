@@ -22,7 +22,6 @@ class Misc
      */
     public function generate(): void
     {
-        /** @var DatabaseMailingListModel $list */
         foreach ($this->mailingListMapper->findAll() as $list) {
             $this->generateList($list);
         }

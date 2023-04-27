@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace User\Service;
 
-use Laminas\Authentication\AuthenticationService;
 use Laminas\Authentication\Adapter\Ldap as LdapAdapter;
+use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
+use User\Form\Login as LoginForm;
+use User\Form\UserCreate as UserCreateForm;
+use User\Form\UserEdit as UserEditForm;
 use User\Mapper\UserMapper;
 use User\Model\User as UserModel;
-use User\Form\{
-    UserCreate as UserCreateForm,
-    Login as LoginForm,
-    UserEdit as UserEditForm,
-};
+
+use function array_map;
 
 class UserService
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(
         protected readonly UserMapper $mapper,
         protected readonly UserCreateForm $createForm,
@@ -30,6 +33,8 @@ class UserService
 
     /**
      * Create a user.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function create(array $data): bool
     {
@@ -55,6 +60,8 @@ class UserService
 
     /**
      * Edit a user
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function edit(
         UserModel $user,
@@ -83,13 +90,17 @@ class UserService
      */
     public function remove(int $id): void
     {
-        if (null !== ($user = $this->find($id))) {
-            $this->mapper->remove($user);
+        if (null === ($user = $this->find($id))) {
+            return;
         }
+
+        $this->mapper->remove($user);
     }
 
     /**
      * Log a user in.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function login(array $data): bool
     {
@@ -128,7 +139,7 @@ class UserService
     /**
      * Get all users.
      *
-     * @return array<array-key, UserModel>
+     * @return UserModel[]
      */
     public function findAll(): array
     {
@@ -167,6 +178,9 @@ class UserService
         return $this->loginForm;
     }
 
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+     */
     private function getLdapConfig(): array
     {
         return array_map(
@@ -182,7 +196,7 @@ class UserService
                     'bindRequiresDn'         => false,
                 ]
             ),
-            $this->config['ldap']['servers']
+            $this->config['ldap']['servers'],
         );
     }
 }

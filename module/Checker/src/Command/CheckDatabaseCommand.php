@@ -10,7 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckDatabaseCommand extends AbstractCheckerCommand
 {
+    /** @var string $defaultName */
     protected static $defaultName = 'check:database';
+    /** @var string $defaultDescription */
     protected static $defaultDescription = 'Check if the database is sound.';
 
     protected function execute(

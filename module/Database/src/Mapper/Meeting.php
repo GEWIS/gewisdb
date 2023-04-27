@@ -5,25 +5,20 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Application\Model\Enums\MeetingTypes;
-use Database\Model\{
-    Decision as DecisionModel,
-    Meeting as MeetingModel,
-};
-use Database\Model\SubDecision\Board\{
-    Discharge as BoardDischargeModel,
-    Installation as BoardInstallationModel,
-    Release as BoardReleaseModel
-};
-use Database\Model\SubDecision\Key\{
-    Granting as KeyGrantingModel,
-    Withdrawal as KeyWithdrawalModel,
-};
+use Database\Model\Decision as DecisionModel;
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision\Board\Discharge as BoardDischargeModel;
+use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
+use Database\Model\SubDecision\Board\Release as BoardReleaseModel;
 use Database\Model\SubDecision\Destroy as DestroyModel;
+use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
+use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawalModel;
 use DateTime;
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+
+use function implode;
+use function strtolower;
 
 class Meeting
 {
@@ -41,6 +36,8 @@ class Meeting
 
     /**
      * Find all meetings. Also counts all decision per meeting.
+     *
+     * @return array<array-key, array{0: MeetingModel, 1: int}>
      */
     public function findAll(
         bool $count = true,
@@ -87,6 +84,10 @@ class Meeting
 
     /**
      * Find decisions by given meetings.
+     *
+     * @param array<array-key, array{type: string, number: int}> $meetings
+     *
+     * @return DecisionModel[]
      */
     public function findDecisionsByMeetings(array $meetings): array
     {
@@ -140,6 +141,7 @@ class Meeting
         $qb->setParameter(':number', $number);
 
         $res = $qb->getQuery()->getResult();
+
         return empty($res) ? null : $res[0];
     }
 
@@ -173,6 +175,8 @@ class Meeting
 
     /**
      * Search for a decision.
+     *
+     * @return DecisionModel[]
      */
     public function searchDecision(
         string $query,
@@ -190,12 +194,11 @@ class Meeting
         $fields[] = 'd.number';
         $fields[] = "' '";
         $fields = implode(', ', $fields);
-        $fields = "CONCAT($fields)";
-
+        $fields = 'CONCAT(' . $fields . ')';
 
         $qb->select('d, s, m')
             ->from(DecisionModel::class, 'd')
-            ->where("$fields LIKE :search")
+            ->where($fields . ' LIKE :search')
             ->leftJoin('d.subdecisions', 's')
             ->innerJoin('d.meeting', 'm')
             ->orderBy('s.number');
@@ -224,6 +227,8 @@ class Meeting
 
     /**
      * Find current board members.
+     *
+     * @return BoardInstallationModel[]
      */
     public function findCurrentBoard(): array
     {
@@ -252,6 +257,9 @@ class Meeting
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return BoardInstallationModel[]
+     */
     public function findCurrentBoardNotYetReleased(): array
     {
         $qb = $this->em->createQueryBuilder();
@@ -294,6 +302,8 @@ class Meeting
 
     /**
      * Find all currently granted key codes.
+     *
+     * @return KeyGrantingModel[]
      */
     public function findCurrentKeys(): array
     {
@@ -342,8 +352,6 @@ class Meeting
 
     /**
      * Persist a meeting model.
-     *
-     * @param MeetingModel $meeting Meeting to persist.
      */
     public function persist(MeetingModel $meeting): void
     {

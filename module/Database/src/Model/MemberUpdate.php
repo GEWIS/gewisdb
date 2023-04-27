@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Database\Model;
 
 use DateTime;
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    Id,
-    JoinColumn,
-    OneToOne,
-};
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * Member update model.
@@ -25,8 +23,8 @@ class MemberUpdate
     #[Id]
     #[OneToOne(targetEntity: Member::class)]
     #[JoinColumn(
-        name: "lidnr",
-        referencedColumnName: "lidnr",
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
         nullable: false,
     )]
     protected Member $member;
@@ -34,37 +32,37 @@ class MemberUpdate
     /**
      * When the update was requested.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $requestedDate;
 
     /**
      * Member's email address.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $email;
 
     /**
      * Member's last name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $lastName;
 
     /**
      * Middle name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $middleName;
 
     /**
      * Initials.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $initials;
 
     /**
      * First name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $firstName;
 
     /**
@@ -167,6 +165,14 @@ class MemberUpdate
 
     /**
      * Convert most relevant items to array.
+     *
+     * @return array{
+     *     email: string,
+     *     lastName: string,
+     *     middleName: string,
+     *     initials: string,
+     *     firstName: string,
+     * }
      */
     public function toArray(): array
     {

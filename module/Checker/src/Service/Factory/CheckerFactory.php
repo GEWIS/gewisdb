@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Checker\Service\Factory;
 
-use Checker\Service\{
-    Checker as CheckerService,
-    Installation as InstallationService,
-    Key as KeyService,
-    Meeting as MeetingService,
-    Member as MemberService,
-    Organ as OrganService,
-};
+use Checker\Service\Checker as CheckerService;
+use Checker\Service\Installation as InstallationService;
+use Checker\Service\Key as KeyService;
+use Checker\Service\Meeting as MeetingService;
+use Checker\Service\Member as MemberService;
+use Checker\Service\Organ as OrganService;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
@@ -19,16 +17,12 @@ use Psr\Container\ContainerInterface;
 class CheckerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return CheckerService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): CheckerService {
         /** @var InstallationService $installationService */
         $installationService = $container->get(InstallationService::class);

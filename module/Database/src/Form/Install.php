@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
-use Database\Form\Fieldset\{
-    Installation as InstallationFieldset,
-    Meeting as MeetingFieldset,
-    SubDecision as SubDecisionFieldset,
-};
-use Laminas\Form\Element\{
-    Collection,
-    Submit,
-    Text,
-};
+use Database\Form\Fieldset\Installation as InstallationFieldset;
+use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
+use Laminas\Form\Element\Collection;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Mvc\I18n\Translator;
 
 class Install extends AbstractDecision

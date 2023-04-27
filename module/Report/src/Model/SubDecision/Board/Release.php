@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace Report\Model\SubDecision\Board;
 
 use DateTime;
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    JoinColumn,
-    OneToOne,
-};
-use IntlDateFormatter;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
 use Report\Model\SubDecision;
 
 /**
@@ -28,40 +25,38 @@ class Release extends SubDecision
      */
     #[OneToOne(
         targetEntity: Installation::class,
-        inversedBy: "release",
+        inversedBy: 'release',
     )]
     #[JoinColumn(
-        name: "r_meeting_type",
-        referencedColumnName: "meeting_type",
+        name: 'r_meeting_type',
+        referencedColumnName: 'meeting_type',
     )]
     #[JoinColumn(
-        name: "r_meeting_number",
-        referencedColumnName: "meeting_number",
+        name: 'r_meeting_number',
+        referencedColumnName: 'meeting_number',
     )]
     #[JoinColumn(
-        name: "r_decision_point",
-        referencedColumnName: "decision_point",
+        name: 'r_decision_point',
+        referencedColumnName: 'decision_point',
     )]
     #[JoinColumn(
-        name: "r_decision_number",
-        referencedColumnName: "decision_number",
+        name: 'r_decision_number',
+        referencedColumnName: 'decision_number',
     )]
     #[JoinColumn(
-        name: "r_number",
-        referencedColumnName: "number",
+        name: 'r_number',
+        referencedColumnName: 'number',
     )]
     protected Installation $installation;
 
     /**
      * Date of the discharge.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $date;
 
     /**
      * Get installation.
-     *
-     * @return Installation
      */
     public function getInstallation(): Installation
     {
@@ -70,8 +65,6 @@ class Release extends SubDecision
 
     /**
      * Set the installation.
-     *
-     * @param Installation $installation
      */
     public function setInstallation(Installation $installation): void
     {
@@ -80,8 +73,6 @@ class Release extends SubDecision
 
     /**
      * Get the date.
-     *
-     * @return DateTime
      */
     public function getDate(): DateTime
     {
@@ -90,8 +81,6 @@ class Release extends SubDecision
 
     /**
      * Set the date.
-     *
-     * @param DateTime $date
      */
     public function setDate(DateTime $date): void
     {

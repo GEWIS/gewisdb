@@ -11,14 +11,16 @@ use Psr\Container\ContainerInterface;
 class AbstractCheckerCommandFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
+     * @template T
+     *
+     * @param class-string<T> $requestedName
+     *
+     * @return T
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ) {
         /** @var CheckerService $checkerService */
         $checkerService = $container->get(CheckerService::class);

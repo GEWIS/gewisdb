@@ -5,29 +5,34 @@ declare(strict_types=1);
 namespace Report\Service;
 
 use Database\Mapper\Meeting as MeetingMapper;
-use Database\Model\{
-    Meeting as DatabaseMeetingModel,
-    Member as DatabaseMemberModel,
-    SubDecision as DatabaseSubDecisionModel,
-    Decision as DatabaseDecisionModel
-};
+use Database\Model\Decision as DatabaseDecisionModel;
+use Database\Model\Meeting as DatabaseMeetingModel;
+use Database\Model\Member as DatabaseMemberModel;
+use Database\Model\SubDecision as DatabaseSubDecisionModel;
 use Doctrine\ORM\EntityManager;
 use Exception;
-use LogicException;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
-use Report\Model\{
-    Meeting as ReportMeetingModel,
-    Decision as ReportDecisionModel,
-    Member as ReportMemberModel,
-    SubDecision as ReportSubDecisionModel
-};
+use LogicException;
+use Report\Model\Decision as ReportDecisionModel;
+use Report\Model\Meeting as ReportMeetingModel;
+use Report\Model\Member as ReportMemberModel;
+use Report\Model\SubDecision as ReportSubDecisionModel;
+use Throwable;
+
+use function array_reverse;
+use function count;
+use function implode;
+use function preg_replace;
 
 class Meeting
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(
         private readonly MeetingMapper $meetingMapper,
         private readonly EntityManager $emReport,
@@ -68,7 +73,7 @@ class Meeting
             'number' => $meeting->getNumber(),
         ]);
 
-        if ($reportMeeting === null) {
+        if (null === $reportMeeting) {
             $reportMeeting = new ReportMeetingModel();
         }
 
@@ -79,7 +84,7 @@ class Meeting
         foreach ($meeting->getDecisions() as $decision) {
             try {
                 $this->generateDecision($decision, $reportMeeting);
-            } catch (Exception $e) {
+            } catch (Throwable $e) {
                 // send email, something went wrong
                 $this->sendDecisionExceptionMail($e, $decision);
                 continue;
@@ -95,13 +100,13 @@ class Meeting
     ): void {
         $decRepo = $this->emReport->getRepository(ReportDecisionModel::class);
 
-        if ($reportMeeting === null) {
+        if (null === $reportMeeting) {
             $reportMeeting = $this->emReport->getRepository(ReportMeetingModel::class)->find([
                 'type' => $decision->getMeeting()->getType(),
                 'number' => $decision->getMeeting()->getNumber(),
             ]);
 
-            if ($reportMeeting === null) {
+            if (null === $reportMeeting) {
                 throw new LogicException('Decision without meeting');
             }
         }
@@ -139,6 +144,7 @@ class Meeting
 
     /**
      * @psalm-template T of ReportSubDecisionModel
+     *
      * @psalm-return T
      */
     public function generateSubDecision(
@@ -148,7 +154,7 @@ class Meeting
         $decRepo = $this->emReport->getRepository(ReportDecisionModel::class);
         $subdecRepo = $this->emReport->getRepository(ReportSubDecisionModel::class);
 
-        if ($reportDecision === null) {
+        if (null === $reportDecision) {
             $reportDecision = $decRepo->find([
                 'meeting_type' => $subdecision->getMeetingType(),
                 'meeting_number' => $subdecision->getMeetingNumber(),
@@ -156,7 +162,7 @@ class Meeting
                 'number' => $subdecision->getDecisionNumber(),
             ]);
 
-            if ($reportDecision === null) {
+            if (null === $reportDecision) {
                 throw new LogicException('Decision without meeting');
             }
         }
@@ -172,7 +178,7 @@ class Meeting
 
         if (null === $reportSubDecision) {
             // determine type and create
-            $class = get_class($subdecision);
+            $class = $subdecision::class;
             /** @var class-string<T> $class */
             $class = preg_replace('/^Database/', 'Report', $class);
             /** @var T $reportSubDecision */
@@ -319,6 +325,7 @@ class Meeting
         switch (true) {
             case $subDecision instanceof ReportSubDecisionModel\Destroy:
                 throw new Exception('Deletion of destroy decisions not implemented');
+
                 break;
             case $subDecision instanceof ReportSubDecisionModel\Discharge:
                 $installation = $subDecision->getInstallation();
@@ -334,7 +341,7 @@ class Meeting
             case $subDecision instanceof ReportSubDecisionModel\Installation:
                 $organMember = $subDecision->getOrganMember();
 
-                if ($organMember !== null) {
+                if (null !== $organMember) {
                     $this->emReport->remove($organMember);
                 }
 
@@ -390,7 +397,7 @@ class Meeting
      * Send an email about that something went wrong.
      */
     public function sendDecisionExceptionMail(
-        Exception $e,
+        Throwable $e,
         DatabaseDecisionModel $decision,
     ): void {
         $config = $this->config['email'];

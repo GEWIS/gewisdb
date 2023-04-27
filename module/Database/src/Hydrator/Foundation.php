@@ -6,25 +6,23 @@ namespace Database\Hydrator;
 
 use Application\Model\Enums\OrganTypes;
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\{
-    Foundation as FoundationModel,
-    Installation as InstallationModel,
-};
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
+use InvalidArgumentException;
 
 class Foundation extends AbstractDecision
 {
     /**
      * Budget hydration
      *
-     * @param array $data
      * @param DecisionModel $object
      *
-     * @return DecisionModel
-     *
-     * @throws \InvalidArgumentException when $decision is not a Decision
+     * @throws InvalidArgumentException when $decision is not a Decision.
      */
-    public function hydrate(array $data, $object): DecisionModel
-    {
+    public function hydrate(
+        array $data,
+        $object,
+    ): DecisionModel {
         $decision = parent::hydrate($data, $object);
 
         $foundation = new FoundationModel();

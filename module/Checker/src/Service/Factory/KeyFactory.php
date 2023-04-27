@@ -12,16 +12,12 @@ use Psr\Container\ContainerInterface;
 class KeyFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return KeyService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): KeyService {
         /** @var KeyMapper $keyMapper */
         $keyMapper = $container->get(KeyMapper::class);

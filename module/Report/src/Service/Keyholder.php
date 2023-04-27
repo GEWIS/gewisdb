@@ -10,10 +10,10 @@ use Laminas\ProgressBar\ProgressBar;
 use LogicException;
 use ReflectionProperty;
 use Report\Model\Keyholder as KeyholderModel;
-use Report\Model\SubDecision\Key\{
-    Granting as ReportKeyGrantingModel,
-    Withdrawal as ReportKeyWithdrawalModel,
-};
+use Report\Model\SubDecision\Key\Granting as ReportKeyGrantingModel;
+use Report\Model\SubDecision\Key\Withdrawal as ReportKeyWithdrawalModel;
+
+use function count;
 
 class Keyholder
 {

@@ -7,6 +7,8 @@ namespace Checker\Model\Error;
 use Checker\Model\Error;
 use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawalModel;
 
+use function sprintf;
+
 /**
  * Error for when a key code is withdrawn when the original granting already expired.
  *

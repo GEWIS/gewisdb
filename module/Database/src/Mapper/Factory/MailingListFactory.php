@@ -11,16 +11,12 @@ use Psr\Container\ContainerInterface;
 class MailingListFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return MailingListMapper
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): MailingListMapper {
         return new MailingListMapper($container->get('database_doctrine_em'));
     }

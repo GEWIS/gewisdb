@@ -14,22 +14,18 @@ use Report\Service\Member as MemberService;
 class DatabaseDeletionListenerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return DatabaseDeletionListener
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): DatabaseDeletionListener {
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
-        /** @var EntityManager */
+        /** @var EntityManager $emReport */
         $emReport = $container->get('doctrine.entitymanager.orm_report');
 
         return new DatabaseDeletionListener(

@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Application\Model\Enums\AddressTypes;
-use Database\Model\{
-    Address as AddressModel,
-    Member as MemberModel,
-};
-use Database\Model\SubDecision\{
-    Board\Installation as BoardInstallationModel,
-    Budget as BudgetModel,
-    Destroy as DestroyModel,
-    Discharge as DischargeModel,
-    Installation as InstallationModel,
-    Reckoning as ReckoningModel,
-};
+use Database\Model\Address as AddressModel;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
+use Database\Model\SubDecision\Budget as BudgetModel;
+use Database\Model\SubDecision\Destroy as DestroyModel;
+use Database\Model\SubDecision\Discharge as DischargeModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
+use Database\Model\SubDecision\Reckoning as ReckoningModel;
 use DateTime;
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+
+use function count;
+use function filter_var;
+use function is_numeric;
+use function strtolower;
+
+use const FILTER_VALIDATE_EMAIL;
 
 class Member
 {
@@ -38,20 +39,20 @@ class Member
 
         $qb->select('m')
             ->from(MemberModel::class, 'm')
-            ->where("LOWER(m.email) = LOWER(:email)")
+            ->where('LOWER(m.email) = LOWER(:email)')
             ->setMaxResults(1);
 
         $qb->setParameter(':email', $email);
 
         $ret = $qb->getQuery()->getResult();
 
-        return $ret !== null && count($ret) > 0;
+        return null !== $ret && count($ret) > 0;
     }
 
     /**
      * Search for a member.
      *
-     * @return array<array-key, MemberModel>
+     * @return MemberModel[]
      */
     public function search(
         string $query,
@@ -63,20 +64,20 @@ class Member
             ->from(MemberModel::class, 'm')
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
-            ->orWhere("m.tueUsername = :name")
+            ->orWhere('m.tueUsername = :name')
             ->setMaxResults(32)
             ->orderBy('m.lidnr', 'DESC')
             ->setFirstResult(0);
 
         if (filter_var($query, FILTER_VALIDATE_EMAIL)) {
-            $qb->orWhere("m.email LIKE :name");
+            $qb->orWhere('m.email LIKE :name');
         }
 
         $qb->setParameter(':name', '%' . strtolower($query) . '%');
 
         // also allow searching for membership number
         if (is_numeric($query)) {
-            $qb->orWhere("m.lidnr = :nr");
+            $qb->orWhere('m.lidnr = :nr');
             $qb->setParameter(':nr', $query);
         }
 
@@ -112,7 +113,7 @@ class Member
     /**
      * Find all members.
      *
-     * @return array<array-key, MemberModel>
+     * @return MemberModel[]
      */
     public function findAll(): array
     {
@@ -122,7 +123,7 @@ class Member
     /**
      * Find all non-hidden and non-deleted members.
      *
-     * @return array<array-key, MemberModel>
+     * @return MemberModel[]
      */
     public function findNormal(): array
     {
@@ -130,9 +131,9 @@ class Member
 
         $qb->select('m')
             ->from(MemberModel::class, 'm')
-            ->where("m.expiration >= CURRENT_TIMESTAMP()")
-            ->andWhere("m.hidden = false")
-            ->andWhere("m.deleted = false")
+            ->where('m.expiration >= CURRENT_TIMESTAMP()')
+            ->andWhere('m.hidden = false')
+            ->andWhere('m.deleted = false')
             ->setMaxResults(32)
             ->setFirstResult(0);
 
@@ -218,7 +219,6 @@ class Member
             ->leftJoin('m.lists', 'l')
             ->orderBy('m.lidnr', 'DESC');
 
-
         $qb->setParameter(':lidnr', $lidnr);
 
         return $qb->getQuery()->getOneOrNullResult();
@@ -226,6 +226,8 @@ class Member
 
     /**
      * Find all members whose membership expired on or before a date.
+     *
+     * @return MemberModel[]
      */
     public function findExpired(DateTime $expiration): array
     {
@@ -293,15 +295,13 @@ class Member
 
         $results = $qb->getQuery()->getResult();
 
-        if (!empty($results)) {
-            return false;
-        }
-
-        return true;
+        return empty($results);
     }
 
     /**
      * Get a list of members whose membership has not expired and who are not hidden.
+     *
+     * @return MemberModel[]
      */
     public function getNonExpiredNonHiddenMembers(): array
     {
@@ -353,6 +353,6 @@ class Member
      */
     public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository('Database\Model\Member');
+        return $this->em->getRepository(MemberModel::class);
     }
 }

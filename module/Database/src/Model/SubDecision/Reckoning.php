@@ -6,16 +6,11 @@ namespace Database\Model\SubDecision;
 
 use Doctrine\ORM\Mapping\Entity;
 
-/**
- *
- */
 #[Entity]
 class Reckoning extends Budget
 {
     /**
      * Decision template
-     *
-     * @return string
      */
     protected function getTemplate(): string
     {

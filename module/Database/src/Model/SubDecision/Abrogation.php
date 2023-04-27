@@ -16,8 +16,6 @@ class Abrogation extends FoundationReference
      * Get the content.
      *
      * @todo implement this
-     *
-     * @return string
      */
     public function getContent(): string
     {

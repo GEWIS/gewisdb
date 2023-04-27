@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
-use Database\Model\{
-    Meeting as MeetingModel,
-    Member as MemberModel,
-};
-use Database\Model\SubDecision\{
-    Foundation as FoundationModel,
-    Installation as InstallationModel,
-};
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
+
+use function sprintf;
 
 /**
  * Error for when a member has a special role in an organ but is not an (in)active member.
@@ -22,8 +20,6 @@ use Database\Model\SubDecision\{
 class MemberHasRoleButNotInOrgan extends Error
 {
     /**
-     * @param MeetingModel $meeting
-     * @param InstallationModel $installation
      * @param string $role Role that the member has in the organ
      */
     public function __construct(

@@ -11,16 +11,12 @@ use Psr\Container\ContainerInterface;
 class KeyFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return KeyMapper
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): KeyMapper {
         return new KeyMapper(
             $container->get('database_doctrine_em'),

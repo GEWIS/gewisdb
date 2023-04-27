@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Application\Model\Enums\PostalRegions;
-use Laminas\Form\Element\{
-    Select,
-    Submit,
-    Text,
-};
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
-use Laminas\Validator\{
-    InArray,
-    Regex,
-    StringLength,
-};
+use Laminas\Validator\InArray;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class Address extends Form implements InputFilterProviderInterface
 {
@@ -118,9 +114,7 @@ class Address extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => Regex::class,
-                        'options' => [
-                            'pattern' => '/^[0-9]+[a-zA-Z]*/',
-                        ],
+                        'options' => ['pattern' => '/^[0-9]+[a-zA-Z]*/'],
                     ],
                 ],
             ],

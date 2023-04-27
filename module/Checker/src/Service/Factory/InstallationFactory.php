@@ -12,16 +12,12 @@ use Psr\Container\ContainerInterface;
 class InstallationFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return InstallationService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): InstallationService {
         /** @var InstallationMapper $installationMapper */
         $installationMapper = $container->get(InstallationMapper::class);

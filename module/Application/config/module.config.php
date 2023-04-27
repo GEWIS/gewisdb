@@ -20,9 +20,7 @@ return [
                         'lang' => 'en',
                         'auth_type' => AuthenticationListener::AUTH_NONE,
                     ],
-                    'constraints' => [
-                        'lang' => '[a-zA-Z_]{2,5}',
-                    ],
+                    'constraints' => ['lang' => '[a-zA-Z_]{2,5}'],
                 ],
             ],
         ],

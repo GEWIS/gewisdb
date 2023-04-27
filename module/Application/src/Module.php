@@ -6,20 +6,16 @@ namespace Application;
 
 use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
-use Doctrine\ORM\{
-    EntityManager,
-    Events,
-};
-use Application\View\Helper\{
-    FileUrl,
-    IsModuleActive,
-};
+use Application\View\Helper\FileUrl;
+use Application\View\Helper\IsModuleActive;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Events;
 use Laminas\EventManager\EventInterface;
 use Laminas\I18n\Translator\Translator as I18nTranslator;
 use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Mvc\ModuleRouteListener;
 use Laminas\Mvc\MvcEvent;
-use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Session\Container as SessionContainer;
 use Laminas\Validator\AbstractValidator;
@@ -27,10 +23,8 @@ use Locale;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
-use Report\Listener\{
-    DatabaseDeletionListener,
-    DatabaseUpdateListener,
-};
+use Report\Listener\DatabaseDeletionListener;
+use Report\Listener\DatabaseUpdateListener;
 
 class Module
 {
@@ -78,9 +72,6 @@ class Module
         $eventManager->addEventListener([Events::preRemove], $container->get(DatabaseDeletionListener::class));
     }
 
-    /**
-     * @param MvcEvent $e
-     */
     public function logError(MvcEvent $e): void
     {
         $container = $e->getApplication()->getServiceManager();
@@ -90,6 +81,7 @@ class Module
             // not an interesting error
             return;
         }
+
         if ('error-exception' === $e->getError()) {
             $logger->error($e->getParam('exception'));
 
@@ -105,13 +97,12 @@ class Module
         if (!isset($session->lang)) {
             $session->lang = 'en';
         }
+
         return $session->lang;
     }
 
     /**
      * Get the configuration for this module.
-     *
-     * @return array Module configuration
      */
     public function getConfig(): array
     {
@@ -120,15 +111,13 @@ class Module
 
     /**
      * Get service configuration.
-     *
-     * @return array Service configuration
      */
     public function getServiceConfig(): array
     {
         return [
             'factories' => [
                 FileStorageService::class => FileStorageServiceFactory::class,
-                'logger' => function (ContainerInterface $container) {
+                'logger' => static function (ContainerInterface $container) {
                     $logger = new Logger('gewisdb');
                     $config = $container->get('config')['logging'];
 
@@ -147,17 +136,15 @@ class Module
 
     /**
      * Get view helper configuration.
-     *
-     * @return array
      */
     public function getViewHelperConfig(): array
     {
         return [
             'factories' => [
-                'fileUrl' => function (ContainerInterface $container) {
+                'fileUrl' => static function (ContainerInterface $container) {
                     return new FileUrl($container->get('config'));
                 },
-                'isModuleActive' => function (ContainerInterface $container) {
+                'isModuleActive' => static function (ContainerInterface $container) {
                     return new IsModuleActive($container);
                 },
             ],

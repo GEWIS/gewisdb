@@ -10,7 +10,7 @@ use Laminas\Hydrator\Strategy\StrategyInterface;
 class AddressHydratorStrategy implements StrategyInterface
 {
     public function extract(
-        $value,
+        mixed $value,
         ?object $object = null,
     ): string {
         if ($value instanceof AddressTypes) {
@@ -21,7 +21,7 @@ class AddressHydratorStrategy implements StrategyInterface
     }
 
     public function hydrate(
-        $value,
+        mixed $value,
         ?array $data,
     ): AddressTypes {
         if ($value instanceof AddressTypes) {

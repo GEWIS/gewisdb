@@ -10,10 +10,13 @@ use User\Mapper\ApiPrincipalMapper;
 
 class ApiPrincipalMapperFactory implements FactoryInterface
 {
+    /**
+     * @param string $requestedName
+     */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): ApiPrincipalMapper {
         return new ApiPrincipalMapper($container->get('database_doctrine_em'));
     }

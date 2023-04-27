@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
-use Laminas\Form\Element\{
-    Checkbox,
-    Submit,
-    Text,
-    Textarea,
-};
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
@@ -94,9 +92,7 @@ class MailingList extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => [
-                            'min' => 10,
-                        ],
+                        'options' => ['min' => 10],
                     ],
                 ],
             ],
@@ -105,9 +101,7 @@ class MailingList extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => [
-                            'min' => 10,
-                        ],
+                        'options' => ['min' => 10],
                     ],
                 ],
             ],

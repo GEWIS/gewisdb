@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace Database\Hydrator;
 
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\{
-    Installation as InstallationModel,
-    Discharge as DischargeModel,
-    Abrogation as AbrogationModel,
-};
+use Database\Model\SubDecision\Abrogation as AbrogationModel;
+use Database\Model\SubDecision\Discharge as DischargeModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
+use InvalidArgumentException;
+
+use function array_reverse;
 
 class Abolish extends AbstractDecision
 {
     /**
      * abolish hydration
      *
-     * @param array $data
      * @param DecisionModel $object
      *
-     * @return DecisionModel
-     *
-     * @throws \InvalidArgumentException when $object is not a Decision
+     * @throws InvalidArgumentException when $object is not a Decision.
      */
-    public function hydrate(array $data, $object): DecisionModel
-    {
+    public function hydrate(
+        array $data,
+        $object,
+    ): DecisionModel {
         $object = parent::hydrate($data, $object);
 
         // determine who to discharge
@@ -32,9 +32,11 @@ class Abolish extends AbstractDecision
 
         // check installations and discharges
         foreach ($data['subdecision']->getReferences() as $ref) {
-            if ($ref instanceof InstallationModel && null === $ref->getDischarge()) {
-                $members[] = $ref;
+            if (!($ref instanceof InstallationModel) || null !== $ref->getDischarge()) {
+                continue;
             }
+
+            $members[] = $ref;
         }
 
         // discharge in reverse order

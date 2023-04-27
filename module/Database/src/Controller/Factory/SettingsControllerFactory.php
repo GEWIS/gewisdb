@@ -13,16 +13,12 @@ use Psr\Container\ContainerInterface;
 class SettingsControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return SettingsController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): SettingsController {
         /** @var InstallationFunctionService $installationFunctionService */
         $installationFunctionService = $container->get(InstallationFunctionService::class);

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Database\Service;
 
-use Database\Form\{
-    Query as QueryForm,
-    QueryExport as QueryExportForm,
-    QuerySave as QuerySaveForm,
-};
+use Database\Form\Query as QueryForm;
+use Database\Form\QueryExport as QueryExportForm;
+use Database\Form\QuerySave as QuerySaveForm;
 use Database\Mapper\SavedQuery as SavedQueryMapper;
 use Database\Model\SavedQuery as SavedQueryModel;
-use Doctrine\ORM\{
-    AbstractQuery,
-    EntityManager,
-    Exception\ORMException,
-};
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\ORMException;
+
+use function explode;
+use function preg_match;
+use function preg_replace;
 
 class Query
 {
@@ -30,6 +30,8 @@ class Query
 
     /**
      * Get all saved queries.
+     *
+     * @return SavedQueryModel[]
      */
     public function getSavedQueries(): array
     {
@@ -38,6 +40,8 @@ class Query
 
     /**
      * Save a query.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function save(array $data): ?SavedQueryModel
     {
@@ -65,6 +69,8 @@ class Query
 
     /**
      * Execute a saved query.
+     *
+     * @return array<array-key, mixed>|null
      */
     public function executeSaved(int $id): ?array
     {
@@ -81,6 +87,10 @@ class Query
 
     /**
      * Execute a query.
+     *
+     * @return array<array-key, mixed>|null
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function execute(
         array $data,
@@ -110,10 +120,13 @@ class Query
         $q = '';
         $arr = explode("\n", $data['query']);
         foreach ($arr as $line) {
-            if (!preg_match('/^-- /i', $line)) {
-                $q .= $line . "\n";
+            if (preg_match('/^-- /i', $line)) {
+                continue;
             }
+
+            $q .= $line . "\n";
         }
+
         $data['query'] = $q;
 
         /**
@@ -148,6 +161,8 @@ class Query
 
     /**
      * Get all entities that are present in the database
+     *
+     * @return string[]
      */
     public function getEntities(): array
     {

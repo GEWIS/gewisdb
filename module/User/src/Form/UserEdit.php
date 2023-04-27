@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace User\Form;
 
-use Laminas\Form\Element\{
-    Password,
-    Submit,
-};
+use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\{
-    Identical,
-    StringLength,
-};
+use Laminas\Validator\Identical;
+use Laminas\Validator\StringLength;
 
 class UserEdit extends Form implements InputFilterProviderInterface
 {
@@ -24,25 +20,19 @@ class UserEdit extends Form implements InputFilterProviderInterface
         $this->add([
             'name' => 'password',
             'type' => Password::class,
-            'options' => [
-                'label' => 'Wachtwoord',
-            ],
+            'options' => ['label' => 'Wachtwoord'],
         ]);
 
         $this->add([
             'name' => 'password_verify',
             'type' => Password::class,
-            'options' => [
-                'label' => 'Controleer wachtwoord',
-            ],
+            'options' => ['label' => 'Controleer wachtwoord'],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => Submit::class,
-            'attributes' => [
-                'value' => 'Wijzig gebruiker',
-            ],
+            'attributes' => ['value' => 'Wijzig gebruiker'],
         ]);
     }
 
@@ -57,9 +47,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => [
-                            'min' => 10,
-                        ],
+                        'options' => ['min' => 10],
                     ],
                 ],
             ],
@@ -68,9 +56,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => Identical::class,
-                        'options' => [
-                            'token' => 'password',
-                        ],
+                        'options' => ['token' => 'password'],
                     ],
                 ],
             ],

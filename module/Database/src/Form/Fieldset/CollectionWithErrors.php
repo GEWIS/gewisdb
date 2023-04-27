@@ -11,6 +11,8 @@ use Laminas\Form\FieldsetInterface;
 use ReflectionMethod;
 use Traversable;
 
+use function get_parent_class;
+
 /**
  * The normal collection class can not set errors,
  * which means that errors set during validation over the
@@ -26,6 +28,8 @@ class CollectionWithErrors extends Collection
      * @param array|Traversable $messages
      *
      * @return $this|Element|ElementInterface|FieldsetInterface
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function setMessages(iterable $messages): ElementInterface|FieldsetInterface|Element|self
     {
@@ -46,7 +50,9 @@ class CollectionWithErrors extends Collection
     /**
      * Override the setMessage method such that Element::getMessage() is used again
      *
-     * @return array Messages set on this ellement
+     * @return array Messages set on this element
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function getMessages(?string $elementName = null): array
     {

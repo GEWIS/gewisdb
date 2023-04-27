@@ -35,9 +35,7 @@ class QueryExport extends Query implements InputFilterProviderInterface
     {
         $filter = parent::getInputFilterSpecification();
         $filter += [
-            'type' => [
-                'required' => true,
-            ],
+            'type' => ['required' => true],
         ];
 
         return $filter;

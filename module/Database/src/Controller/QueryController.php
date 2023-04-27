@@ -17,8 +17,6 @@ class QueryController extends AbstractActionController
 
     /**
      * Index action.
-     *
-     * @return (Response|ViewModel)
      */
     public function indexAction(): Response|ViewModel
     {
@@ -31,7 +29,7 @@ class QueryController extends AbstractActionController
 
             $result = $this->queryService->execute($post);
 
-            if (!is_null($result)) {
+            if (null !== $result) {
                 return new ViewModel([
                     'form' => $this->queryService->getQueryForm(),
                     'exportform' => $this->queryService->getQueryExportForm(),
@@ -39,7 +37,9 @@ class QueryController extends AbstractActionController
                     'saved' => $this->queryService->getSavedQueries(),
                     'entities' => $this->queryService->getEntities(),
                 ]);
-            } elseif (isset($query)) {
+            }
+
+            if (isset($query)) {
                 return $this->redirect()->toRoute('query/show', [
                     'query' => $query->getId(),
                 ]);
@@ -83,9 +83,7 @@ class QueryController extends AbstractActionController
             );
 
             if (null !== $result) {
-                $vm = new ViewModel([
-                    'result' => $result,
-                ]);
+                $vm = new ViewModel(['result' => $result]);
 
                 $vm->setTemplate('database/query/export');
                 $vm->setTerminal(true);

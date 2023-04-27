@@ -12,16 +12,12 @@ use Psr\Container\ContainerInterface;
 class OrganFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return OrganService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): OrganService {
         /** @var OrganMapper $organMapper */
         $organMapper = $container->get(OrganMapper::class);

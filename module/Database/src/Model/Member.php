@@ -9,18 +9,18 @@ use Database\Model\SubDecision\Installation;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    GeneratedValue,
-    Id,
-    InverseJoinColumn,
-    JoinColumn,
-    JoinTable,
-    ManyToMany,
-    OneToMany,
-};
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\InverseJoinColumn;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
+
+use function preg_replace;
 
 /**
  * Member model.
@@ -32,15 +32,15 @@ class Member
      * The user
      */
     #[Id]
-    #[Column(type: "integer")]
-    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: 'integer')]
+    #[GeneratedValue(strategy: 'AUTO')]
     protected ?int $lidnr = null;
 
     /**
      * Member's email address.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $email = null;
@@ -48,25 +48,25 @@ class Member
     /**
      * Member's last name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $lastName;
 
     /**
      * Middle name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $middleName;
 
     /**
      * Initials.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $initials;
 
     /**
      * First name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $firstName;
 
     /**
@@ -75,14 +75,14 @@ class Member
      * This is the year that this member became a GEWIS member. This is not
      * a academic year, but rather a calendar year.
      */
-    #[Column(type: "integer")]
+    #[Column(type: 'integer')]
     protected int $generation;
 
     /**
      * TU/e username.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $tueUsername = null;
@@ -91,7 +91,7 @@ class Member
      * Study of the member.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $study = null;
@@ -111,7 +111,7 @@ class Member
      * See artikel 7.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         enumType: MembershipTypes::class,
     )]
     protected MembershipTypes $type;
@@ -119,14 +119,14 @@ class Member
     /**
      * Last changed date of membership.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $changedOn;
 
     /**
      * Keeps track of whether a student is still studying (either at the Department of Mathematics and Computer Science,
      * the TU/e in general, or another institution).
      */
-    #[Column(type: "boolean")]
+    #[Column(type: 'boolean')]
     protected bool $isStudying;
 
     /**
@@ -135,7 +135,7 @@ class Member
      * still meets the requirements as set forth in the bylaws and internal regulations.
      */
     #[Column(
-        type: "date",
+        type: 'date',
         nullable: true,
     )]
     protected ?DateTime $membershipEndsOn = null;
@@ -144,14 +144,14 @@ class Member
      * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
      * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $expiration;
 
     /**
      * Last date membership status was checked.
      */
     #[Column(
-        type: "date",
+        type: 'date',
         nullable: true,
     )]
     protected ?DateTime $lastCheckedOn = null;
@@ -159,20 +159,20 @@ class Member
     /**
      * Member birthdate.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $birth;
 
     /**
      * How much the member has paid for membership. 0 by default.
      */
-    #[Column(type: "integer")]
+    #[Column(type: 'integer')]
     protected int $paid = 0;
 
     /**
      * Iban number.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $iban = null;
@@ -181,7 +181,7 @@ class Member
      * If the member receives a 'supremum'
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $supremum = null;
@@ -193,50 +193,56 @@ class Member
      * deleted members and members that are deceased but whose profile should be kept.
      */
     #[Column(
-        type: "boolean",
-        options: ["default" => false],
+        type: 'boolean',
+        options: ['default' => false],
     )]
     protected bool $hidden = false;
 
     /**
      * Addresses of this member.
+     *
+     * @var Collection<array-key, Address>
      */
     #[OneToMany(
         targetEntity: Address::class,
-        mappedBy: "member",
-        cascade: ["persist", "remove"],
+        mappedBy: 'member',
+        cascade: ['persist', 'remove'],
     )]
     protected Collection $addresses;
 
     /**
      * Installations of this member.
+     *
+     * @var Collection<array-key, Installation>
      */
     #[OneToMany(
         targetEntity: Installation::class,
-        mappedBy: "member",
+        mappedBy: 'member',
     )]
     protected Collection $installations;
 
     /**
      * Memberships of mailing lists.
+     *
+     * @var Collection<array-key, MailingList>
      */
     #[ManyToMany(
         targetEntity: MailingList::class,
-        inversedBy: "members",
+        inversedBy: 'members',
     )]
-    #[JoinTable(name: "members_mailinglists")]
+    #[JoinTable(name: 'members_mailinglists')]
     #[JoinColumn(
-        name: "lidnr",
-        referencedColumnName: "lidnr",
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
     )]
     #[InverseJoinColumn(
-        name: "name",
-        referencedColumnName: "name",
+        name: 'name',
+        referencedColumnName: 'name',
     )]
     protected Collection $lists;
 
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $authenticationKey = null;
@@ -249,14 +255,11 @@ class Member
      * Additionally, this flag can be used to filter deleted members in external services (e.g., GEWISWEB).
      */
     #[Column(
-        type: "boolean",
-        options: ["default" => false],
+        type: 'boolean',
+        options: ['default' => false],
     )]
     protected bool $deleted = false;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
@@ -267,7 +270,7 @@ class Member
     /**
      * Get the membership number.
      *
-     * @return int|null
+     * @psalm-ignore-nullable-return
      */
     public function getLidnr(): ?int
     {
@@ -276,8 +279,6 @@ class Member
 
     /**
      * Get the member's email address.
-     *
-     * @return string|null
      */
     public function getEmail(): ?string
     {
@@ -286,8 +287,6 @@ class Member
 
     /**
      * Get the member's last name.
-     *
-     * @return string
      */
     public function getLastName(): string
     {
@@ -296,8 +295,6 @@ class Member
 
     /**
      * Get the member's middle name.
-     *
-     * @return string
      */
     public function getMiddleName(): string
     {
@@ -306,8 +303,6 @@ class Member
 
     /**
      * Get the member's initials.
-     *
-     * @return string
      */
     public function getInitials(): string
     {
@@ -316,8 +311,6 @@ class Member
 
     /**
      * Get the member's first name.
-     *
-     * @return string
      */
     public function getFirstName(): string
     {
@@ -326,8 +319,6 @@ class Member
 
     /**
      * Set the lidnr.
-     *
-     * @param int $lidnr
      */
     public function setLidnr(int $lidnr): void
     {
@@ -336,8 +327,6 @@ class Member
 
     /**
      * Set the member's email address.
-     *
-     * @param string|null $email
      */
     public function setEmail(?string $email): void
     {
@@ -346,8 +335,6 @@ class Member
 
     /**
      * Set the member's last name.
-     *
-     * @param string $lastName
      */
     public function setLastName(string $lastName): void
     {
@@ -356,8 +343,6 @@ class Member
 
     /**
      * Set the member's middle name.
-     *
-     * @param string $middleName
      */
     public function setMiddleName(string $middleName): void
     {
@@ -366,8 +351,6 @@ class Member
 
     /**
      * Set the member's initials.
-     *
-     * @param string $initials
      */
     public function setInitials(string $initials): void
     {
@@ -376,8 +359,6 @@ class Member
 
     /**
      * Set the member's first name.
-     *
-     * @param string $firstName
      */
     public function setFirstName(string $firstName): void
     {
@@ -386,8 +367,6 @@ class Member
 
     /**
      * Assemble the member's full name.
-     *
-     * @return string
      */
     public function getFullName(): string
     {
@@ -403,8 +382,6 @@ class Member
 
     /**
      * Get the generation.
-     *
-     * @return int
      */
     public function getGeneration(): int
     {
@@ -413,8 +390,6 @@ class Member
 
     /**
      * Set the generation.
-     *
-     * @param int $generation
      */
     public function setGeneration(int $generation): void
     {
@@ -423,8 +398,6 @@ class Member
 
     /**
      * Get the TU/e username.
-     *
-     * @return string|null
      */
     public function getTueUsername(): ?string
     {
@@ -433,8 +406,6 @@ class Member
 
     /**
      * Set the TU/e username.
-     *
-     * @param string|null $tueUsername
      */
     public function setTueUsername(?string $tueUsername): void
     {
@@ -443,8 +414,6 @@ class Member
 
     /**
      * Get the study.
-     *
-     * @return string|null
      */
     public function getStudy(): ?string
     {
@@ -453,8 +422,6 @@ class Member
 
     /**
      * Set the study.
-     *
-     * @param string|null $study
      */
     public function setStudy(?string $study): void
     {
@@ -463,8 +430,6 @@ class Member
 
     /**
      * Get the member type.
-     *
-     * @return MembershipTypes
      */
     public function getType(): MembershipTypes
     {
@@ -473,8 +438,6 @@ class Member
 
     /**
      * Set the member type.
-     *
-     * @param MembershipTypes $type
      */
     public function setType(MembershipTypes $type): void
     {
@@ -483,8 +446,6 @@ class Member
 
     /**
      * Get the expiration date.
-     *
-     * @return DateTime
      */
     public function getExpiration(): DateTime
     {
@@ -493,10 +454,6 @@ class Member
 
     /**
      * Set the expiration date.
-     *
-     * @param DateTime $expiration
-     *
-     * @return void
      */
     public function setExpiration(DateTime $expiration): void
     {
@@ -505,8 +462,6 @@ class Member
 
     /**
      * Get the birthdate.
-     *
-     * @return DateTime
      */
     public function getBirth(): DateTime
     {
@@ -515,8 +470,6 @@ class Member
 
     /**
      * Set the birthdate.
-     *
-     * @param DateTime $birth
      */
     public function setBirth(DateTime $birth): void
     {
@@ -525,8 +478,6 @@ class Member
 
     /**
      * Get the date of the last membership change.
-     *
-     * @return DateTime
      */
     public function getChangedOn(): DateTime
     {
@@ -535,8 +486,6 @@ class Member
 
     /**
      * Set the date of the last membership change.
-     *
-     * @param DateTime $changedOn
      */
     public function setChangedOn(DateTime $changedOn): void
     {
@@ -545,8 +494,6 @@ class Member
 
     /**
      * Get whether the member is still studying.
-     *
-     * @return bool
      */
     public function getIsStudying(): bool
     {
@@ -555,8 +502,6 @@ class Member
 
     /**
      * Set whether the member is still studying.
-     *
-     * @param bool $isStudying
      */
     public function setIsStudying(bool $isStudying): void
     {
@@ -565,8 +510,6 @@ class Member
 
     /**
      * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
-     *
-     * @return DateTime|null
      */
     public function getMembershipEndsOn(): ?DateTime
     {
@@ -575,8 +518,6 @@ class Member
 
     /**
      * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
-     *
-     * @param DateTime|null $membershipEndsOn
      */
     public function setMembershipEndsOn(?DateTime $membershipEndsOn): void
     {
@@ -585,8 +526,6 @@ class Member
 
     /**
      * Get the date of when the membership status was last checked.
-     *
-     * @return DateTime|null
      */
     public function getLastCheckedOn(): ?DateTime
     {
@@ -595,8 +534,6 @@ class Member
 
     /**
      * Set the date of when the membership status was last checked.
-     *
-     * @param DateTime|null $lastCheckedOn
      */
     public function setLastCheckedOn(?DateTime $lastCheckedOn): void
     {
@@ -605,8 +542,6 @@ class Member
 
     /**
      * Get how much has been paid.
-     *
-     * @return int
      */
     public function getPaid(): int
     {
@@ -615,8 +550,6 @@ class Member
 
     /**
      * Set how much has been paid.
-     *
-     * @param int $paid
      */
     public function setPaid(int $paid): void
     {
@@ -625,24 +558,22 @@ class Member
 
     /**
      * Get the IBAN.
-     *
-     * @return string|null
      */
     public function getIban(bool $print = false): ?string
     {
         if (null === $this->iban) {
             return null;
         }
+
         if ($print) {
             return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
         }
+
         return $this->iban;
     }
 
     /**
      * Set the IBAN.
-     *
-     * @param string|null $iban
      */
     public function setIban(?string $iban): void
     {
@@ -651,8 +582,6 @@ class Member
 
     /**
      * Get if the member wants a supremum.
-     *
-     * @return string|null
      */
     public function getSupremum(): ?string
     {
@@ -661,8 +590,6 @@ class Member
 
     /**
      * Set if the member wants a supremum.
-     *
-     * @param string|null $supremum
      */
     public function setSupremum(?string $supremum): void
     {
@@ -671,8 +598,6 @@ class Member
 
     /**
      * Get if the member is hidden.
-     *
-     * @return bool
      */
     public function getHidden(): bool
     {
@@ -681,8 +606,6 @@ class Member
 
     /**
      * Set if the member is hidden.
-     *
-     * @param bool $hidden
      */
     public function setHidden(bool $hidden): void
     {
@@ -692,7 +615,7 @@ class Member
     /**
      * Get the installations.
      *
-     * @return Collection
+     * @return Collection<array-key, Installation>
      */
     public function getInstallations(): Collection
     {
@@ -711,8 +634,6 @@ class Member
 
     /**
      * Get if the member is deleted.
-     *
-     * @return bool
      */
     public function getDeleted(): bool
     {
@@ -721,8 +642,6 @@ class Member
 
     /**
      * Set if the member is deleted.
-     *
-     * @param bool $deleted
      */
     public function setDeleted(bool $deleted): void
     {
@@ -732,7 +651,20 @@ class Member
     /**
      * Convert most relevant items to array.
      *
-     * @return array
+     * @return array{
+     *     lidnr: int,
+     *     email: ?string,
+     *     fullName: string,
+     *     lastName: string,
+     *     middleName: string,
+     *     initials: string,
+     *     firstName: string,
+     *     generation: int,
+     *     hidden: bool,
+     *     deleted: bool,
+     *     expiration: string,
+     *     authenticationKey: ?string,
+     * }
      */
     public function toArray(): array
     {
@@ -755,7 +687,7 @@ class Member
     /**
      * Get all addresses.
      *
-     * @return Collection all addresses
+     * @return Collection<array-key, Address>
      */
     public function getAddresses(): Collection
     {
@@ -765,7 +697,7 @@ class Member
     /**
      * Add multiple addresses.
      *
-     * @param array $addresses
+     * @param Address[] $addresses
      */
     public function addAddresses(array $addresses): void
     {
@@ -776,8 +708,6 @@ class Member
 
     /**
      * Add an address.
-     *
-     * @param Address $address
      */
     public function addAddress(Address $address): void
     {
@@ -788,7 +718,7 @@ class Member
     /**
      * Get mailing list subscriptions.
      *
-     * @return Collection
+     * @return Collection<array-key, MailingList>
      */
     public function getLists(): Collection
     {
@@ -799,8 +729,6 @@ class Member
      * Add a mailing list subscription.
      *
      * Note that this is the owning side.
-     *
-     * @param MailingList $list
      */
     public function addList(MailingList $list): void
     {
@@ -811,7 +739,7 @@ class Member
     /**
      * Add multiple mailing lists.
      *
-     * @param array $lists
+     * @param MailingList[] $lists
      */
     public function addLists(array $lists): void
     {
@@ -830,8 +758,6 @@ class Member
 
     /**
      * Set the home address.
-     *
-     * @param Address $address
      */
     public function setHomeAddress(Address $address): void
     {
@@ -840,8 +766,6 @@ class Member
 
     /**
      * Set the student address.
-     *
-     * @param Address $address
      */
     public function setStudentAddress(Address $address): void
     {

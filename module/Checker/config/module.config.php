@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-use Checker\Command\{
-    CheckAuthenticationKeysCommand,
-    CheckDatabaseCommand,
-    CheckDischargesCommand,
-    CheckMembershipExpirationCommand,
-    CheckMembershipTUeCommand,
-    CheckMembershipTypeCommand,
-};
+use Checker\Command\CheckAuthenticationKeysCommand;
+use Checker\Command\CheckDatabaseCommand;
+use Checker\Command\CheckDischargesCommand;
+use Checker\Command\CheckMembershipExpirationCommand;
+use Checker\Command\CheckMembershipTUeCommand;
+use Checker\Command\CheckMembershipTypeCommand;
 
 return [
     'laminas-cli' => [

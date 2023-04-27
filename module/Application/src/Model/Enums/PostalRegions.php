@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Application\Model\Enums;
 
+use function array_column;
+use function array_combine;
+use function array_map;
+use function array_merge;
+
 /**
  * Enum for the different many postal regions around the world. Based on data from PostNL and Wikipedia. Note: not all
  * of these regions use ZIP codes as part of their address format.
@@ -259,6 +264,9 @@ enum PostalRegions: string
     case Zanzibar = 'ZANZIBAR';
     case Zimbabwe = 'ZIMBABWE';
 
+    /**
+     * @return string[]
+     */
     public static function formValues(): array
     {
         $values = array_column(self::cases(), 'value');
@@ -266,11 +274,14 @@ enum PostalRegions: string
         return array_combine($values, $values);
     }
 
+    /**
+     * @return array<array-key, PostalRegions|string>
+     */
     public static function values(): array
     {
         return array_merge(
             array_map(
-                fn (self $status) => $status->value,
+                static fn (self $status) => $status->value,
                 self::cases(),
             ),
             self::cases(),

@@ -14,23 +14,44 @@ use Laminas\Json\Json;
 use LogicException;
 use RuntimeException;
 
+use function array_column;
+use function array_key_exists;
+use function count;
+use function explode;
+use function in_array;
+use function is_array;
+use function levenshtein;
+use function preg_replace;
+use function strtolower;
+use function trim;
+
 /**
  * Object representing data from a TU/e user
  */
 class TueData
 {
     private Client $client;
-
     private int $status = -1;
-
-    private ?array $data;
+    /**
+     * @var array{
+     *     name?: array{
+     *         given?: string,
+     *         initials?: string,
+     *         last?: string,
+     *     },
+     *     mail?: string,
+     *     registrations?: array<array-key, array{study: string, generation: int, dept: string}>,
+     *     sAMAccountName?: string,
+     *     lastupdated?: ?string,
+     * }|null
+     */
+    private ?array $data = null;
 
     /**
-     * @param array $config an array with membership_api config
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function __construct(
-        private array $config,
-    ) {
+    public function __construct(private readonly array $config)
+    {
         $this->client = new Client();
         $this->client->setAdapter(Curl::class)
             ->setEncType('application/json');
@@ -41,7 +62,7 @@ class TueData
      *
      * @param string $username TU/e username
      *
-     * @throws LookupException in case of an error
+     * @throws LookupException in case of an error.
      */
     public function setUser(string $username): void
     {
@@ -61,7 +82,7 @@ class TueData
             $response = $this->client->send($request);
         } catch (LaminasRuntimeException $e) {
             throw new LookupException(
-                message: "Could not connect to TU/e servers",
+                message: 'Could not connect to TU/e servers',
                 previousThrowable: $e,
             );
         }
@@ -74,7 +95,7 @@ class TueData
                 );
             } catch (RuntimeException $e) {
                 throw new LookupException(
-                    message: "TU/e lookup tool could not decode JSON",
+                    message: 'TU/e lookup tool could not decode JSON',
                     previousThrowable: $e,
                 );
             }
@@ -83,8 +104,8 @@ class TueData
                 $this->status = 1;
 
                 throw new LookupException(
-                    message: "TU/e check API returned user " .
-                        $responseContent['sAMAccountName'] . ", but $username was requested",
+                    message: 'TU/e check API returned user ' .
+                        $responseContent['sAMAccountName'] . ', but ' . $username . ' was requested',
                 );
             }
 
@@ -95,7 +116,7 @@ class TueData
             $this->status = 404;
         } else {
             throw new LookupException(
-                message: "Request for TUe lookup failed with status code " . $response->getStatusCode(),
+                message: 'Request for TUe lookup failed with status code ' . $response->getStatusCode(),
             );
         }
     }
@@ -103,10 +124,8 @@ class TueData
     /**
      * Check if current TU/e student is studying at TU/e
      *
-     * @return bool
-     *
-     * @throws LookupException when received unexpected TU/e response
-     * @throws LogicException when object is not ready to be checked, for example when no data was requested previously
+     * @throws LookupException when received unexpected TU/e response.
+     * @throws LogicException when object is not ready to be checked, for example when no data was requested previously.
      */
     public function studiesAtTue(): bool
     {
@@ -115,13 +134,13 @@ class TueData
             || !is_array($this->data)
         ) {
             throw new LogicException(
-                message: "Trying to query study status from object with status $this->status",
+                message: 'Trying to query study status from object with status ' . $this->status,
             );
         }
 
         if (!array_key_exists('registrations', $this->data)) {
             throw new LookupException(
-                message: "Did not receive `registrations` object. so unable to check study status",
+                message: 'Did not receive `registrations` object. so unable to check study status',
             );
         }
 
@@ -133,19 +152,16 @@ class TueData
      *
      * @param string $department Department to check for
      *
-     * @return bool
-     *
-     * @throws LookupException when received unexpected TU/e response
-     * @throws LogicException when object is not ready to be checked, for example when no data was requested previously
+     * @throws LookupException when received unexpected TU/e response.
+     * @throws LogicException when object is not ready to be checked, for example when no data was requested previously.
      */
-    public function studiesAtDepartment(string $department = "WIN"): bool
+    public function studiesAtDepartment(string $department = 'WIN'): bool
     {
         if (!$this->studiesAtTue()) {
             return false;
         }
 
-        return (
-            is_array($this->data)
+        return is_array($this->data)
             && is_array($this->data['registrations'])
             && in_array(
                 $department,
@@ -153,8 +169,7 @@ class TueData
                     $this->data['registrations'],
                     'dept',
                 ),
-            )
-        );
+            );
     }
 
     /**
@@ -164,8 +179,6 @@ class TueData
      * 0 = success,
      * 1 = error,
      * 404 = user not found
-     *
-     * @return int
      */
     public function getStatus(): int
     {
@@ -240,6 +253,9 @@ class TueData
         return trim(explode(',', $this->data['name']['last'])[0]);
     }
 
+    /**
+     * @return array<array-key, array{study: string, generation: int, dept: string}>
+     */
     public function getRegistrations(): array
     {
         if (!isset($this->data['registrations'])) {
@@ -258,6 +274,17 @@ class TueData
         return new DateTime($this->data['lastupdated']);
     }
 
+    /**
+     * @return array{
+     *     username: string,
+     *     email: string,
+     *     lastName: string,
+     *     prefixName: string,
+     *     initials: string,
+     *     firstName: string,
+     *     registrations: array<array-key, array{study: string, generation: int, dept: string}>,
+     * }
+     */
     public function toArray(): array
     {
         return [
@@ -276,13 +303,13 @@ class TueData
      *
      * @return int the number of changes needed to edit the data using Levenshtein distance
      *
-     * @throws LogicException when querying if data is unknown
+     * @throws LogicException when querying if data is unknown.
      */
     public function compareData(
-        string $firstName = "",
-        string $prefixName = "",
-        string $lastName = "",
-        string $initials = "",
+        string $firstName = '',
+        string $prefixName = '',
+        string $lastName = '',
+        string $initials = '',
     ): int {
         $sum = 0;
 
@@ -291,7 +318,7 @@ class TueData
             || !is_array($this->data)
         ) {
             throw new LogicException(
-                message: "Trying to query similarity from object with status $this->status",
+                message: 'Trying to query similarity from object with status ' . $this->status,
             );
         }
 

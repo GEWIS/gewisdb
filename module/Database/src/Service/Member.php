@@ -4,46 +4,37 @@ declare(strict_types=1);
 
 namespace Database\Service;
 
-use Application\Model\Enums\{
-    AddressTypes,
-    MembershipTypes,
-};
+use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\MembershipTypes;
 use Application\Service\FileStorage as FileStorageService;
 use Checker\Model\Exception\LookupException;
 use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
-use Database\Form\{
-    Address as AddressForm,
-    DeleteAddress as DeleteAddressForm,
-    Member as MemberForm,
-    MemberApprove as MemberApproveForm,
-    MemberEdit as MemberEditForm,
-    MemberExpiration as MemberExpirationForm,
-    MemberLists as MemberListsForm,
-    MemberType as MemberTypeForm,
-};
-use Database\Mapper\{
-    MailingList as MailingListMapper,
-    Member as MemberMapper,
-    MemberUpdate as MemberUpdateMapper,
-    ProspectiveMember as ProspectiveMemberMapper,
-};
-use Database\Model\{
-    Address as AddressModel,
-    Member as MemberModel,
-    MemberUpdate as MemberUpdateModel,
-    ProspectiveMember as ProspectiveMemberModel,
-};
+use Database\Form\Address as AddressForm;
+use Database\Form\DeleteAddress as DeleteAddressForm;
+use Database\Form\Member as MemberForm;
+use Database\Form\MemberApprove as MemberApproveForm;
+use Database\Form\MemberEdit as MemberEditForm;
+use Database\Form\MemberExpiration as MemberExpirationForm;
+use Database\Form\MemberLists as MemberListsForm;
+use Database\Form\MemberType as MemberTypeForm;
+use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\Member as MemberMapper;
+use Database\Mapper\MemberUpdate as MemberUpdateMapper;
+use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
+use Database\Model\Address as AddressModel;
+use Database\Model\MailingList as MailingListModel;
+use Database\Model\Member as MemberModel;
+use Database\Model\MemberUpdate as MemberUpdateModel;
+use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\MailingList as MailingListService;
 use DateTime;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
-use Laminas\Mime\{
-    Mime,
-    Part as MimePart,
-    Message as MimeMessage,
-};
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\Mime;
+use Laminas\Mime\Part as MimePart;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
@@ -51,11 +42,15 @@ use ReflectionClass;
 use RuntimeException;
 
 use function bin2hex;
+use function fopen;
 use function mb_encode_mimeheader;
 use function random_bytes;
 
 class Member
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(
         private readonly Translator $translator,
         private readonly AddressForm $addressForm,
@@ -80,6 +75,8 @@ class Member
 
     /**
      * Subscribe a member.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function subscribe(array $data): ?ProspectiveMemberModel
     {
@@ -100,9 +97,8 @@ class Member
             $this->getMemberMapper()->hasMemberWith($prospectiveMember->getEmail())
             || $this->getProspectiveMemberMapper()->hasMemberWith($prospectiveMember->getEmail())
         ) {
-            $form->get('email')->setMessages([
-                'There already is a member with this email address.',
-            ]);
+            $form->get('email')->setMessages(['There already is a member with this email address.']);
+
             return null;
         }
 
@@ -117,10 +113,13 @@ class Member
 
         // check mailing lists
         foreach ($form->getLists() as $list) {
-            if ($form->get('list-' . $list->getName())->isChecked()) {
-                $prospectiveMember->addList($list);
+            if (!$form->get('list-' . $list->getName())->isChecked()) {
+                continue;
             }
+
+            $prospectiveMember->addList($list);
         }
+
         // subscribe to default mailing lists not on the form
         $mailingMapper = $this->mailingListMapper;
         foreach ($mailingMapper->findDefault() as $list) {
@@ -151,14 +150,12 @@ class Member
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
-        $model = new ViewModel([
-            'member' => $member,
-        ]);
+        $model = new ViewModel(['member' => $member]);
         $model->setTemplate('database/member/subscribe');
         $body = $renderer->render($model);
 
         $html = new MimePart($body);
-        $html->type = "text/html";
+        $html->type = 'text/html';
 
         $mimeMessage = new MimeMessage();
         $mimeMessage->addPart($html);
@@ -169,7 +166,7 @@ class Member
                 fopen(
                     $this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(),
                     'r',
-                )
+                ),
             );
             $image->type = 'image/png';
             $image->filename = 'signature.png';
@@ -213,14 +210,12 @@ class Member
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
-        $model = new ViewModel([
-            'member' => $member,
-        ]);
+        $model = new ViewModel(['member' => $member]);
         $model->setTemplate('database/email/member-welcome');
         $body = $renderer->render($model);
 
         $html = new MimePart($body);
-        $html->type = "text/html";
+        $html->type = 'text/html';
 
         $mimeMessage = new MimeMessage();
         $mimeMessage->addPart($html);
@@ -251,6 +246,9 @@ class Member
         $this->getMailTransport()->send($message);
     }
 
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function finalizeSubscription(
         array $membershipData,
         ProspectiveMemberModel $prospectiveMember,
@@ -270,10 +268,13 @@ class Member
         foreach ($form->getLists() as $list) {
             $result = '0';
             foreach ($prospectiveMember->getLists() as $l) {
-                if ($list->getName() == $l->getName()) {
-                    $result = '1';
+                if ($list->getName() !== $l->getName()) {
+                    continue;
                 }
+
+                $result = '1';
             }
+
             $data['list-' . $list->getName()] = $result;
         }
 
@@ -343,10 +344,13 @@ class Member
 
         // add mailing lists
         foreach ($form->getLists() as $list) {
-            if ($form->get('list-' . $list->getName())->isChecked()) {
-                $member->addList($list);
+            if (!$form->get('list-' . $list->getName())->isChecked()) {
+                continue;
             }
+
+            $member->addList($list);
         }
+
         // subscribe to default mailing lists not on the form
         $mailingMapper = $this->mailingListMapper;
         foreach ($mailingMapper->findDefault() as $list) {
@@ -397,6 +401,8 @@ class Member
      * Get prospective member info
      *
      * @return array member, form, tuedata
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function getProspectiveMember(int $id): array
     {
@@ -483,7 +489,7 @@ class Member
 
             try {
                 $tuedata->setUser($tueUsername);
-            } catch (LookupException $e) {
+            } catch (LookupException) {
                 return null;
             }
 
@@ -510,7 +516,7 @@ class Member
     /**
      * Search for a member.
      *
-     * @return array<array-key, MemberModel>
+     * @return MemberModel[]
      */
     public function search(string $query): array
     {
@@ -520,7 +526,7 @@ class Member
     /**
      * Search for a member that is not deleted, expired, and hidden.
      *
-     * @return array<array-key, MemberModel>
+     * @return MemberModel[]
      */
     public function searchFiltered(string $query): array
     {
@@ -530,7 +536,7 @@ class Member
     /**
      * Search for a prospective member.
      *
-     * @return array<array-key, ProspectiveMemberModel>
+     * @return ProspectiveMemberModel[]
      */
     public function searchProspective(string $query): array
     {
@@ -615,6 +621,8 @@ class Member
 
     /**
      * Edit a member.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function edit(
         MemberModel $member,
@@ -627,6 +635,7 @@ class Member
             return null;
         }
 
+        /** @var MemberModel $member */
         $member = $form->getData();
 
         // update changed on date
@@ -641,6 +650,8 @@ class Member
 
     /**
      * Edit membership.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function membership(
         MemberModel $member,
@@ -716,6 +727,9 @@ class Member
         return $member;
     }
 
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function expiration(
         MemberModel $member,
         array $data,
@@ -741,6 +755,8 @@ class Member
 
     /**
      * Edit address.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function editAddress(
         MemberModel $member,
@@ -764,6 +780,8 @@ class Member
 
     /**
      * Add address.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function addAddress(
         MemberModel $member,
@@ -787,6 +805,8 @@ class Member
 
     /**
      * Remove address.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function removeAddress(
         MemberModel $member,
@@ -808,6 +828,8 @@ class Member
 
     /**
      * Subscribe member to mailing lists.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function subscribeLists(
         MemberModel $member,
@@ -830,11 +852,13 @@ class Member
             $name = 'list-' . $list->getName();
 
             if (
-                isset($data[$name])
-                && $data[$name]
+                !isset($data[$name])
+                || !$data[$name]
             ) {
-                $member->addList($list);
+                continue;
             }
+
+            $member->addList($list);
         }
 
         // simply persist through member
@@ -843,6 +867,13 @@ class Member
         return $member;
     }
 
+    /**
+     * @return array{
+     *     members: int,
+     *     prospectives: int,
+     *     updates: int,
+     * }
+     */
     public function getFrontpageData(): array
     {
         return [
@@ -854,6 +885,8 @@ class Member
 
     /**
      * Get a list of all pending member updates.
+     *
+     * @return MemberUpdateModel[]
      */
     public function getPendingMemberUpdates(): array
     {
@@ -876,10 +909,12 @@ class Member
         // not account for any type changes that may be required (everything is currently a string).
         $reflectionClass = new ReflectionClass($member);
         foreach ($memberUpdate->toArray() as $property => $value) {
-            if ($reflectionClass->hasProperty($property)) {
-                $reflectionProperty = $reflectionClass->getProperty($property);
-                $reflectionProperty->setValue($member, $value);
+            if (!$reflectionClass->hasProperty($property)) {
+                continue;
             }
+
+            $reflectionProperty = $reflectionClass->getProperty($property);
+            $reflectionProperty->setValue($member, $value);
         }
 
         $member->setAuthenticationKey($this->generateAuthenticationKey());
@@ -903,7 +938,6 @@ class Member
     {
         $members = $this->getMemberMapper()->getNonExpiredNonHiddenMembers();
 
-        /** @var MemberModel $member */
         foreach ($members as $member) {
             $member->setAuthenticationKey($this->generateAuthenticationKey());
             $this->getMemberMapper()->persist($member);
@@ -920,6 +954,12 @@ class Member
 
     /**
      * Get the member edit form.
+     *
+     * @return array{
+     *     member: MemberModel,
+     *     form: MemberEditForm,
+     *     tueData: ?TueData,
+     * }
      */
     public function getMemberEditForm(MemberModel $member): array
     {
@@ -951,6 +991,12 @@ class Member
 
     /**
      * Get the list edit form.
+     *
+     * @return array{
+     *     form: MemberListsForm,
+     *     member: MemberModel,
+     *     lists: MailingListModel[],
+     * }
      */
     public function getListForm(MemberModel $member): array
     {
@@ -1017,7 +1063,6 @@ class Member
     {
         return $this->memberUpdateMapper;
     }
-
 
     /**
      * Get the member mapper.

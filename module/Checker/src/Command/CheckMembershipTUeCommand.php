@@ -10,7 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckMembershipTUeCommand extends AbstractCheckerCommand
 {
+    /** @var string $defaultName */
     protected static $defaultName = 'check:membership:tue';
+    /** @var string $defaultDescription */
     protected static $defaultDescription = 'Check whether ordinary members are still studying at the TU/e.';
 
     protected function execute(

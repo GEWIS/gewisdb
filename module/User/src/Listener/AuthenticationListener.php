@@ -12,6 +12,9 @@ use LogicException;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Service\ApiAuthenticationService;
 
+use function strlen;
+use function substr;
+
 final class AuthenticationListener
 {
     // Defining the authentication types
@@ -26,29 +29,32 @@ final class AuthenticationListener
     ) {
     }
 
-    public function __invoke(MvcEvent $e)
+    public function __invoke(MvcEvent $e): ?Response
     {
-        if ($e->getName() !== MvcEvent::EVENT_ROUTE) {
+        if (MvcEvent::EVENT_ROUTE !== $e->getName()) {
             throw new InvalidArgumentException(
-                "Expected MvcEvent of type " . MvcEvent::EVENT_ROUTE . ", got " . $e->getName()
+                'Expected MvcEvent of type ' . MvcEvent::EVENT_ROUTE . ', got ' . $e->getName(),
             );
         }
 
         $match = $e->getRouteMatch();
-        if ($match === null) {
-            throw new LogicException("Did not match any route after being routed");
+        if (null === $match) {
+            throw new LogicException('Did not match any route after being routed');
         }
 
         switch ($match->getParam('auth_type', self::AUTH_DBUSER)) {
             case self::AUTH_DBUSER:
                 return $this->dbuserAuth($e);
+
             case self::AUTH_API:
                 return $this->apiAuth($e);
+
             case self::AUTH_NONE:
-                return;
+                return null;
+
             default:
                 throw new InvalidArgumentException(
-                    "Authentication type was set to unknown type " . $match->getParam('auth_type')
+                    'Authentication type was set to unknown type ' . $match->getParam('auth_type'),
                 );
         }
     }
@@ -67,6 +73,7 @@ final class AuthenticationListener
         $response = $e->getResponse();
         $response->getHeaders()->addHeaderLine('Location', '/user');
         $response->setStatusCode(302);
+
         return $response;
     }
 
@@ -78,7 +85,7 @@ final class AuthenticationListener
         if ($e->getRequest()->getHeaders()->has('Authorization')) {
             // This is an API call, we do this on every request
             $token = $e->getRequest()->getHeaders()->get('Authorization')->getFieldValue();
-            $this->apiPrincipalAdapter->setCredentials(substr($token, strlen("Bearer ")));
+            $this->apiPrincipalAdapter->setCredentials(substr($token, strlen('Bearer ')));
             $result = $this->apiAuthService->authenticate($this->apiPrincipalAdapter);
             if ($result->isValid()) {
                 return null;
@@ -88,6 +95,7 @@ final class AuthenticationListener
         $response = $e->getResponse();
         $response->getHeaders()->addHeaderLine('WWW-Authenticate', 'Bearer realm="/api"');
         $response->setStatusCode(401);
+
         return $response;
     }
 }

@@ -13,16 +13,12 @@ use Report\Service\Meeting as MeetingService;
 class MeetingFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return MeetingService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): MeetingService {
         /** @var MeetingMapper $meetingMapper */
         $meetingMapper = $container->get(MeetingMapper::class);

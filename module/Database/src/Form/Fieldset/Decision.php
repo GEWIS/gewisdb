@@ -8,10 +8,8 @@ use Application\Model\Enums\MeetingTypes;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\{
-    Digits,
-    InArray,
-};
+use Laminas\Validator\Digits;
+use Laminas\Validator\InArray;
 
 class Decision extends Fieldset implements InputFilterProviderInterface
 {

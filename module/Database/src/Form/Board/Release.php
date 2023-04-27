@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
-use Laminas\Mvc\I18n\Translator;
-use Database\Form\Fieldset\{
-    Meeting as MeetingFieldset,
-    SubDecision as SubDecisionFieldset,
-};
-use Laminas\Form\Element\{
-    Date,
-    Submit,
-};
+use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
+use Laminas\Form\Element\Date;
+use Laminas\Form\Element\Submit;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -50,9 +46,7 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
     public function getInputFilterSpecification(): array
     {
         return [
-            'date' => [
-                'required' => true,
-            ],
+            'date' => ['required' => true],
         ];
     }
 }

@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace User\Form;
 
-use Laminas\Form\Element\{
-    Password,
-    Submit,
-    Text,
-};
+use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\{
-    Regex,
-    StringLength,
-};
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class Login extends Form implements InputFilterProviderInterface
 {
@@ -25,25 +21,19 @@ class Login extends Form implements InputFilterProviderInterface
         $this->add([
             'name' => 'login',
             'type' => Text::class,
-            'options' => [
-                'label' => 'Login',
-            ],
+            'options' => ['label' => 'Login'],
         ]);
 
         $this->add([
             'name' => 'password',
             'type' => Password::class,
-            'options' => [
-                'label' => 'Password',
-            ],
+            'options' => ['label' => 'Password'],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => Submit::class,
-            'attributes' => [
-                'value' => 'Login',
-            ],
+            'attributes' => ['value' => 'Login'],
         ]);
     }
 
@@ -65,15 +55,11 @@ class Login extends Form implements InputFilterProviderInterface
                     ],
                     [
                         'name' => Regex::class,
-                        'options' => [
-                            'pattern' => '/^[a-zA-Z0-9]*$/',
-                        ],
+                        'options' => ['pattern' => '/^[a-zA-Z0-9]*$/'],
                     ],
                 ],
             ],
-            'password' => [
-                'required' => true,
-            ],
+            'password' => ['required' => true],
         ];
     }
 }

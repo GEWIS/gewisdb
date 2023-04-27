@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Checker\Service;
 
 use Checker\Mapper\Member as MemberMapper;
+use Database\Model\Member as DatabaseMemberModel;
 
 class Member
 {
     /**
-     * @param MemberMapper $memberMapper
-     * @param array $config
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
         private readonly MemberMapper $memberMapper,
@@ -21,7 +21,7 @@ class Member
     /**
      * Fetch some members whose membership status should be checked.
      *
-     * @return array
+     * @return DatabaseMemberModel[]
      */
     public function getMembersToCheck(): array
     {
@@ -33,7 +33,7 @@ class Member
     /**
      * Get members who may require an adjustment to their membership type (based on whether their membership has ended).
      *
-     * @return array
+     * @return DatabaseMemberModel[]
      */
     public function getEndingMembershipsWithNormalTypes(): array
     {
@@ -43,7 +43,7 @@ class Member
     /**
      * Get members who require an adjustment to just their membership expiration.
      *
-     * @return array
+     * @return DatabaseMemberModel[]
      */
     public function getExpiringMembershipsWithNormalTypes(): array
     {
@@ -52,15 +52,14 @@ class Member
 
     /**
      * Get members who are hidden or whose membership has expired.
+     *
+     * @return DatabaseMemberModel[]
      */
     public function getExpiredOrHiddenMembersWithAuthenticationKey(): array
     {
         return $this->memberMapper->getExpiredOrHiddenMembersWithAuthenticationKey();
     }
 
-    /**
-     * @return MemberMapper
-     */
     public function getMemberMapper(): MemberMapper
     {
         return $this->memberMapper;

@@ -12,16 +12,12 @@ use Psr\Container\ContainerInterface;
 class IndexControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return IndexController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): IndexController {
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);

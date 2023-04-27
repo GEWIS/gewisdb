@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Application\Model\Enums\MembershipTypes;
-use Laminas\Form\Element\{
-    Radio,
-    Submit,
-};
+use Laminas\Form\Element\Radio;
+use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
@@ -52,9 +50,7 @@ class MemberType extends Form implements InputFilterProviderInterface
     public function getInputFilterSpecification(): array
     {
         return [
-            'type' => [
-                'required' => true,
-            ],
+            'type' => ['required' => true],
         ];
     }
 }

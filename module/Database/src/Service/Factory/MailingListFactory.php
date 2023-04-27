@@ -14,16 +14,12 @@ use Psr\Container\ContainerInterface;
 class MailingListFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return MailingListService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): MailingListService {
         /** @var DeleteListForm $deleteListForm */
         $deleteListForm = $container->get(DeleteListForm::class);

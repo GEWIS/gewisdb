@@ -4,34 +4,36 @@ declare(strict_types=1);
 
 namespace Checker\Service;
 
-use Database\Model\SubDecision\Key\Granting;
-use DateInterval;
-use Application\Model\Enums\{
-    MeetingTypes,
-    MembershipTypes,
-    OrganTypes,
-};
-use Checker\Model\{
-    Error,
-    TueData,
-};
+use Application\Model\Enums\MeetingTypes;
+use Application\Model\Enums\MembershipTypes;
+use Application\Model\Enums\OrganTypes;
+use Checker\Model\Error as ErrorModel;
 use Checker\Model\Exception\LookupException;
-use Checker\Service\{
-    Installation as InstallationService,
-    Key as KeyService,
-    Meeting as MeetingService,
-    Member as MemberService,
-    Organ as OrganService,
-};
-use Database\Model\Member as MemberModel;
+use Checker\Model\TueData;
+use Checker\Service\Installation as InstallationService;
+use Checker\Service\Key as KeyService;
+use Checker\Service\Meeting as MeetingService;
+use Checker\Service\Member as MemberService;
+use Checker\Service\Organ as OrganService;
 use Database\Model\Meeting as MeetingModel;
+use DateInterval;
 use DateTime;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
 
+use function array_key_exists;
+use function array_merge;
+use function count;
+use function in_array;
+
+use const PHP_EOL;
+
 class Checker
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(
         private readonly InstallationService $installationService,
         private readonly KeyService $keyService,
@@ -83,10 +85,7 @@ class Checker
     /**
      * Makes sure that the errors are handled correctly
      *
-     * @param MeetingModel $meeting Meeting for which this errors hold
-     * @param array $errors
-     *
-     * @return string
+     * @param ErrorModel[] $errors
      */
     private function handleMeetingErrors(
         MeetingModel $meeting,
@@ -107,8 +106,6 @@ class Checker
 
     /**
      * Send a mail with the detected errors to the secretary
-     *
-     * @param $body
      */
     private function sendMail(string $body): void
     {
@@ -133,7 +130,7 @@ class Checker
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
-     * @return array Array of errors that may have occurred.
+     * @return ErrorModel[]
      */
     public function checkMembersInNonExistingOrgans(MeetingModel $meeting): array
     {
@@ -144,9 +141,11 @@ class Checker
         foreach ($installations as $installation) {
             $installationToOrganFoundation = $this->organService->getHash($installation->getFoundation());
 
-            if (!in_array($installationToOrganFoundation, $organs, true)) {
-                $errors[] = new Error\MemberInNonExistingOrgan($meeting, $installation);
+            if (in_array($installationToOrganFoundation, $organs, true)) {
+                continue;
             }
+
+            $errors[] = new ErrorModel\MemberInNonExistingOrgan($meeting, $installation);
         }
 
         return $errors;
@@ -157,7 +156,7 @@ class Checker
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
-     * @return array Array of errors that may have occurred.
+     * @return ErrorModel[]
      */
     public function checkMembersExpiredButStillInOrgan(MeetingModel $meeting): array
     {
@@ -169,12 +168,15 @@ class Checker
             $member = $installation->getMember();
 
             if (
-                $member->getExpiration() < $meeting->getDate()
-                && !$member->getDeleted()
+                $member->getExpiration() >= $meeting->getDate()
+                || $member->getDeleted()
             ) {
-                $errors[] = new Error\MemberExpiredButStillInOrgan($meeting, $installation);
+                continue;
             }
+
+            $errors[] = new ErrorModel\MemberExpiredButStillInOrgan($meeting, $installation);
         }
+
         return $errors;
     }
 
@@ -184,7 +186,7 @@ class Checker
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
-     * @return array Array of errors that may have occurred.
+     * @return ErrorModel[]
      */
     public function checkMembersHaveRolesButInactiveOrNotInOrgan(MeetingModel $meeting): array
     {
@@ -199,12 +201,12 @@ class Checker
                 ) {
                     // Member is active AND inactive in the same organ.
                     if (count($memberRoles) > 2) {
-                        $errors[] = new Error\MemberActiveWithRoleAndInactiveInOrgan(
+                        $errors[] = new ErrorModel\MemberActiveWithRoleAndInactiveInOrgan(
                             $meeting,
                             $memberRoles['Inactief Lid'],
                         );
                     } else {
-                        $errors[] = new Error\MemberActiveAndInactiveInOrgan(
+                        $errors[] = new ErrorModel\MemberActiveAndInactiveInOrgan(
                             $meeting,
                             $memberRoles['Lid'],
                         );
@@ -220,7 +222,7 @@ class Checker
                             continue;
                         }
 
-                        $errors[] = new Error\MemberInactiveInOrganButHasOtherRole(
+                        $errors[] = new ErrorModel\MemberInactiveInOrganButHasOtherRole(
                             $meeting,
                             $installation,
                             $role,
@@ -232,7 +234,7 @@ class Checker
                 ) {
                     // Member is not active (nor inactive) but still has roles.
                     foreach ($memberRoles as $role => $installation) {
-                        $errors[] = new Error\MemberHasRoleButNotInOrgan(
+                        $errors[] = new ErrorModel\MemberHasRoleButNotInOrgan(
                             $meeting,
                             $installation,
                             $role,
@@ -251,7 +253,7 @@ class Checker
      *
      * @param MeetingModel $meeting After which meeting do we do the validation
      *
-     * @return array Array of errors that may have occurred.
+     * @return ErrorModel[]
      */
     public function checkOrganFoundationMeetingType(MeetingModel $meeting): array
     {
@@ -282,34 +284,37 @@ class Checker
                     )
                 )
             ) {
-                $errors[] = new Error\OrganMeetingType($organ);
+                $errors[] = new ErrorModel\OrganMeetingType($organ);
                 continue;
             }
 
             // Special case for the updates to the internal regulations. Skip fraternities when they were founded during
             // a BV before October 7, 2021.
             if (
-                MeetingTypes::ALV !== $meetingType
-                && MeetingTypes::VIRT !== $meetingType
-                && (
-                    OrganTypes::AVC === $organType
-                    || OrganTypes::AVW === $organType
-                    || OrganTypes::Fraternity === $organType
-                    || OrganTypes::KCC === $organType
-                    || OrganTypes::RvA === $organType
+                MeetingTypes::ALV === $meetingType
+                || MeetingTypes::VIRT === $meetingType
+                || (
+                    OrganTypes::AVC !== $organType
+                    && OrganTypes::AVW !== $organType
+                    && OrganTypes::Fraternity !== $organType
+                    && OrganTypes::KCC !== $organType
+                    && OrganTypes::RvA !== $organType
                 )
             ) {
-                if (
-                    OrganTypes::Fraternity === $organType
-                    && MeetingTypes::BV === $meetingType
-                    && $organ->getDecision()->getMeeting()->getDate() <= new DateTime('2021-10-06')
-                ) {
-                    continue;
-                }
-
-                $errors[] = new Error\OrganMeetingType($organ);
+                continue;
             }
+
+            if (
+                OrganTypes::Fraternity === $organType
+                && MeetingTypes::BV === $meetingType
+                && $organ->getDecision()->getMeeting()->getDate() <= new DateTime('2021-10-06')
+            ) {
+                continue;
+            }
+
+            $errors[] = new ErrorModel\OrganMeetingType($organ);
         }
+
         return $errors;
     }
 
@@ -317,6 +322,8 @@ class Checker
      * Checks that key codes that have been granted do not expire too late. In accordance with the current Key Policy
      * this means that a key code may not be granted for a period longer than a year nor may it be granted for a period
      * that ends after September 1st of the next association year.
+     *
+     * @return ErrorModel[]
      */
     public function checkKeyGrantingDuration(MeetingModel $meeting): array
     {
@@ -340,14 +347,14 @@ class Checker
             $until = $granting->getUntil();
 
             if ($until < $today) {
-                $errors[] = new Error\KeyGrantedInThePast($granting);
+                $errors[] = new ErrorModel\KeyGrantedInThePast($granting);
             } else {
                 if ($until > $todayNextYear) {
-                    $errors[] = new Error\KeyGrantedLongerThanOneYear($granting);
+                    $errors[] = new ErrorModel\KeyGrantedLongerThanOneYear($granting);
                 }
 
                 if ($until > $septemberFirstNextAssociationYear) {
-                    $errors[] = new Error\KeyGrantedPastBoundary($granting);
+                    $errors[] = new ErrorModel\KeyGrantedPastBoundary($granting);
                 }
             }
         }
@@ -355,15 +362,20 @@ class Checker
         return $errors;
     }
 
+    /**
+     * @return ErrorModel[]
+     */
     public function checkKeyWithdrawalTime(MeetingModel $meeting): array
     {
         $errors = [];
         $withdrawals = $this->keyService->getKeysWithdrawnDuringMeeting($meeting);
 
         foreach ($withdrawals as $withdrawal) {
-            if ($withdrawal->getWithdrawnOn() > $withdrawal->getGranting()->getUntil()) {
-                $errors[] = new Error\KeyWithdrawnPastOriginalGranting($withdrawal);
+            if ($withdrawal->getWithdrawnOn() <= $withdrawal->getGranting()->getUntil()) {
+                continue;
             }
+
+            $errors[] = new ErrorModel\KeyWithdrawnPastOriginalGranting($withdrawal);
         }
 
         return $errors;
@@ -389,7 +401,6 @@ class Checker
         $exp = $this->getExpiration(new DateTime());
 
         // Check each member that needs to be checked.
-        /** @var MemberModel $member */
         foreach ($members as $member) {
             echo 'Request for member ' . $member->getLidnr() . ':' . PHP_EOL;
 
@@ -416,12 +427,13 @@ class Checker
                     $member->setIsStudying(false);
                     $member->setMembershipEndsOn($exp);
                 } elseif (!$user->studiesAtDepartment()) {
-                    echo 'Member is still studying but not at the department of MCS' . PHP_EOL;
+                    echo '--> Member is still studying but not at the department of MCS' . PHP_EOL;
                     // The member does not study at WIN anymore, so we set the expiration date for the membership
                     $member->setChangedOn(new DateTime());
                     $member->setMembershipEndsOn($exp);
                 } else {
-                    //The user is still studying at MCS, so don't change anything
+                    echo '--> Member is still studying at the department of MCS' . PHP_EOL;
+                    // The user is still studying at MCS, so don't change anything
                 }
 
                 // If we made it here, we have successfully checked the member
@@ -448,7 +460,6 @@ class Checker
         $now = (new DateTime())->setTime(0, 0);
         $exp = $this->getExpiration($now);
 
-        /** @var MemberModel $member */
         foreach ($members as $member) {
             echo 'Determining new membership type for ' . $member->getLidnr() . ' (ends on ' .
                 $member->getMembershipEndsOn()->format('Y-m-d') . ' and expiring on ' .
@@ -508,7 +519,6 @@ class Checker
         $now = (new DateTime())->setTime(0, 0);
         $exp = $this->getExpiration($now);
 
-        /** @var MemberModel $member */
         foreach ($members as $member) {
             echo 'Determining new expiration for ' . $member->getLidnr() . ' (expiring on ' .
                 $member->getExpiration()->format('Y-m-d') . ')' . PHP_EOL;
@@ -535,7 +545,6 @@ class Checker
 
         echo '' . count($members) . ' members incorrectly have an authentication key' . PHP_EOL;
 
-        /** @var MemberModel $member */
         foreach ($members as $member) {
             $member->setAuthenticationKey(null);
             $this->memberService->getMemberMapper()->persist($member);
@@ -544,10 +553,6 @@ class Checker
 
     /**
      * Determine the next expiration date (always the end of the next association year).
-     *
-     * @param DateTime $now
-     *
-     * @return DateTime
      */
     private function getExpiration(DateTime $now): DateTime
     {

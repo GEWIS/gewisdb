@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace User\Mapper;
 
-use Doctrine\ORM\{
-    EntityRepository,
-    EntityManager,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use User\Model\User as UserModel;
 
 class UserMapper

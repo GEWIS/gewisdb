@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
-use Database\Form\Fieldset\{
-    Meeting as MeetingFieldset,
-    SubDecision as SubDecisionFieldset,
-};
-use Laminas\Form\Element\{
-    Submit,
-    Text,
-};
+use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 

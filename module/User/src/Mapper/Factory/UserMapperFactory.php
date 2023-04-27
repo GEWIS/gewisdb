@@ -10,10 +10,13 @@ use User\Mapper\UserMapper;
 
 class UserMapperFactory implements FactoryInterface
 {
+    /**
+     * @param string $requestedName
+     */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): UserMapper {
         return new UserMapper($container->get('database_doctrine_em'));
     }

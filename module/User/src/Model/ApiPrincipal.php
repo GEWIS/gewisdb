@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace User\Model;
 
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    GeneratedValue,
-    Id,
-    Table,
-};
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
 use User\Model\Enums\ApiPermissions;
+
+use function in_array;
 
 /**
  * Member model.
@@ -20,53 +19,46 @@ use User\Model\Enums\ApiPermissions;
 class ApiPrincipal
 {
     #[Id]
-    #[Column(type: "integer")]
-    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: 'integer')]
+    #[GeneratedValue(strategy: 'AUTO')]
     protected ?int $id = null;
 
     /**
      * Token.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $token;
 
     /**
      * Permission groups.
+     *
+     * @var ApiPermissions[] $permissions
      */
     #[Column(
-        type: "simple_array",
+        type: 'simple_array',
         nullable: true,
         enumType: ApiPermissions::class,
     )]
     protected array $permissions;
 
     /**
-     * @return int|null
+     * @psalm-ignore-nullable-return
      */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @param string $token
-     */
     public function setToken(string $token): void
     {
         $this->token = $token;
     }
 
-    /**
-     * @param ApiPermissions $permission
-     */
     public function can(ApiPermissions $permission): bool
     {
         if (in_array(ApiPermissions::All, $this->permissions, true)) {

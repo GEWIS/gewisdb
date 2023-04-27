@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Controller;
 
-use Application\Model\Enums\AddressTypes;
-use Checker\Service\Checker as CheckerService;
 use Database\Service\Api as ApiService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
-use User\Model\Exception\NotAllowed as NotAllowedException;
 use User\Model\Enums\ApiPermissions;
 use User\Service\ApiAuthenticationService;
 
@@ -29,9 +26,7 @@ class ApiController extends AbstractActionController
     {
         $this->apiAuthService->assertCan(ApiPermissions::HealthR);
 
-        return new JsonModel([
-            "healthy" => true,
-        ]);
+        return new JsonModel(['healthy' => true]);
     }
 
     /**
@@ -42,9 +37,7 @@ class ApiController extends AbstractActionController
         $this->apiAuthService->assertCan(ApiPermissions::MembersR);
 
         $members = $this->apiService->getMembers();
-        $res = [
-            "data" => $members,
-        ];
+        $res = ['data' => $members];
 
         return new JsonModel($res);
     }
@@ -61,9 +54,7 @@ class ApiController extends AbstractActionController
             return $this->noContent();
         }
 
-        $res = [
-            "data" => $member,
-        ];
+        $res = ['data' => $member];
 
         return new JsonModel($res);
     }
@@ -76,9 +67,7 @@ class ApiController extends AbstractActionController
         $this->apiAuthService->assertCan(ApiPermissions::MembersActiveR);
 
         $members = $this->apiService->getActiveMembers();
-        $res = [
-            "data" => $members,
-        ];
+        $res = ['data' => $members];
 
         return new JsonModel($res);
     }

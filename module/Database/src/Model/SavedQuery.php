@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    GeneratedValue,
-    Id,
-};
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
 
 /**
  * Saved query model.
@@ -21,26 +19,26 @@ class SavedQuery
      * The query ID.
      */
     #[Id]
-    #[Column(type: "integer")]
-    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: 'integer')]
+    #[GeneratedValue(strategy: 'AUTO')]
     protected ?int $id = null;
 
     /**
      * Name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $name;
 
     /**
      * The Saved Query.
      */
-    #[Column(type: "text")]
+    #[Column(type: 'text')]
     protected string $query;
 
     /**
      * Get the ID.
      *
-     * @return int|null
+     * @psalm-ignore-nullable-return
      */
     public function getId(): ?int
     {
@@ -49,8 +47,6 @@ class SavedQuery
 
     /**
      * Set the ID.
-     *
-     * @param int|null $id
      */
     public function setId(?int $id): void
     {
@@ -59,8 +55,6 @@ class SavedQuery
 
     /**
      * Get the name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -69,8 +63,6 @@ class SavedQuery
 
     /**
      * Set the name.
-     *
-     * @param string $name
      */
     public function setName(string $name): void
     {
@@ -79,8 +71,6 @@ class SavedQuery
 
     /**
      * Set the query.
-     *
-     * @param string $query
      */
     public function setQuery(string $query): void
     {
@@ -89,8 +79,6 @@ class SavedQuery
 
     /**
      * Get the query.
-     *
-     * @return string
      */
     public function getQuery(): string
     {

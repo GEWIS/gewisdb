@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Checker\Mapper;
 
 use Database\Model\Meeting as MeetingModel;
-use Database\Model\SubDecision\Key\{
-    Granting as KeyGrantingModel,
-    Withdrawal as KeyWithdrawalModel,
-};
+use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
+use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawalModel;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -30,7 +28,7 @@ class Key
     /**
      * Returns all the key code grantings in a meeting
      *
-     * @return array<array-key, KeyGrantingModel>
+     * @return KeyGrantingModel[]
      */
     public function findKeysGrantedDuringMeeting(MeetingModel $meeting): array
     {
@@ -44,13 +42,16 @@ class Key
             ->setParameter('meeting_number', $meeting->getNumber())
             ->setParameter('meeting_type', $meeting->getType());
 
-        return $this->filterDeleted($qb->getQuery()->getResult());
+        /** @var KeyGrantingModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($result);
     }
 
     /**
      * Returns all the key code withdrawals in a meeting
      *
-     * @return array<array-key, KeyWithdrawalModel>
+     * @return KeyWithdrawalModel[]
      */
     public function findKeysWithdrawnDuringMeeting(MeetingModel $meeting): array
     {
@@ -64,6 +65,9 @@ class Key
             ->setParameter('meeting_number', $meeting->getNumber())
             ->setParameter('meeting_type', $meeting->getType());
 
-        return $this->filterDeleted($qb->getQuery()->getResult());
+        /** @var KeyWithdrawalModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($result);
     }
 }

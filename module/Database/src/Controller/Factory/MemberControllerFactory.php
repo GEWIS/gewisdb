@@ -14,16 +14,12 @@ use Psr\Container\ContainerInterface;
 class MemberControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return MemberController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): MemberController {
         /** @var MvcTranslator $translator */
         $translator = $container->get(MvcTranslator::class);

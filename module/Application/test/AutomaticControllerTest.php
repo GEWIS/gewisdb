@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace ApplicationTest;
 
-use Exception;
 use Iterator;
 use Laminas\Router\Exception\InvalidArgumentException;
-use Laminas\Router\Http\{
-    Literal,
-    Method,
-    Part,
-    Regex,
-    Segment,
-    TreeRouteStack,
-};
+use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Method;
+use Laminas\Router\Http\Part;
+use Laminas\Router\Http\Regex;
+use Laminas\Router\Http\Segment;
+use Laminas\Router\Http\TreeRouteStack;
 use Laminas\Router\PriorityList;
 use RuntimeException;
+use Throwable;
+
+use function is_string;
+use function serialize;
+use function sprintf;
 
 class AutomaticControllerTest extends BaseControllerTest
 {
@@ -29,6 +31,9 @@ class AutomaticControllerTest extends BaseControllerTest
         $this->parsePriorityList($routes);
     }
 
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     protected function parsePriorityList(Iterator $list): void
     {
         foreach ($list as $element) {
@@ -46,8 +51,8 @@ class AutomaticControllerTest extends BaseControllerTest
                 throw new RuntimeException(
                     sprintf(
                         'Unexpected type in parsePriorityList: %s',
-                        get_class($element),
-                    )
+                        $element::class,
+                    ),
                 );
             }
         }
@@ -58,20 +63,20 @@ class AutomaticControllerTest extends BaseControllerTest
         try {
             $this->parseSegment($part);
         } catch (RuntimeException) {
-            # An exception is thrown if the route may not terminate.
+            // An exception is thrown if the route may not terminate.
         }
 
         $routes = $part->getRoutes();
-        if ($routes instanceof PriorityList) {
-            $this->parsePriorityList($routes);
-        } else {
+        if (!($routes instanceof PriorityList)) {
             throw new RuntimeException(
                 sprintf(
                     'Unexpected type in parsePart: %s',
-                    get_class($routes),
-                )
+                    $routes::class,
+                ),
             );
         }
+
+        $this->parsePriorityList($routes);
     }
 
     protected function parseSegment(Segment|Part $element): void
@@ -82,14 +87,14 @@ class AutomaticControllerTest extends BaseControllerTest
             $this->parseUrl($url);
         } catch (InvalidArgumentException $exception) {
             $this->addWarning(
-                "Skipping one or multiple route segments/parts because required parameters could not be generated."
+                'Skipping one or multiple route segments/parts because required parameters could not be generated.',
             );
             $this->addWarning($exception->getMessage());
             try {
                 $this->addWarning(serialize($element));
-            } catch (Exception) {
+            } catch (Throwable) {
                 $this->addWarning('More details could not be provided through serialization.');
-                # A part is not always serializable.
+                // A part is not always serializable.
             }
         }
     }
@@ -113,16 +118,16 @@ class AutomaticControllerTest extends BaseControllerTest
 
     protected function parseUrl(mixed $url): void
     {
-        if (is_string($url)) {
-            $this->testRoute($url);
-        } else {
+        if (!is_string($url)) {
             throw new RuntimeException(
                 sprintf(
                     'Unexpected type in parseUrl: %s',
-                    get_class($url),
-                )
+                    $url::class,
+                ),
             );
         }
+
+        $this->testRoute($url);
     }
 
     protected function testRoute(string $url): void
@@ -143,6 +148,9 @@ class AutomaticControllerTest extends BaseControllerTest
         $this->assertNotResponseStatusCode(500);
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     protected function getParams(): array
     {
         $params = [];

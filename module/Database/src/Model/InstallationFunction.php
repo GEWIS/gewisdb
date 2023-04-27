@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    GeneratedValue,
-    Id,
-};
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
 
 /**
  * Function model.
@@ -21,20 +19,20 @@ class InstallationFunction
      * The event ID.
      */
     #[Id]
-    #[Column(type: "integer")]
-    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: 'integer')]
+    #[GeneratedValue(strategy: 'AUTO')]
     protected ?int $id = null;
 
     /**
      * Name
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $name;
 
     /**
      * Get the ID.
      *
-     * @return int|null
+     * @psalm-ignore-nullable-return
      */
     public function getId(): ?int
     {
@@ -43,8 +41,6 @@ class InstallationFunction
 
     /**
      * Set the ID.
-     *
-     * @param int|null $id
      */
     public function setId(?int $id): void
     {
@@ -53,8 +49,6 @@ class InstallationFunction
 
     /**
      * Get the name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -63,8 +57,6 @@ class InstallationFunction
 
     /**
      * Set the name.
-     *
-     * @param string $name
      */
     public function setName(string $name): void
     {

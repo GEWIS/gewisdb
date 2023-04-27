@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Report\Service;
 
 use Database\Mapper\Member as MemberMapper;
-use Database\Model\{
-    Address as DatabaseAddressModel,
-    Member as DatabaseMemberModel,
-};
+use Database\Model\Address as DatabaseAddressModel;
+use Database\Model\Member as DatabaseMemberModel;
 use Doctrine\ORM\EntityManager;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
 use LogicException;
-use Report\Model\{
-    MailingList as ReportMailingListModel,
-    Member as ReportMemberModel,
-    Address as ReportAddressModel,
-};
+use Report\Model\Address as ReportAddressModel;
+use Report\Model\MailingList as ReportMailingListModel;
+use Report\Model\Member as ReportMemberModel;
+
+use function array_diff;
+use function array_map;
+use function count;
 
 class Member
 {
@@ -40,7 +40,7 @@ class Member
         $num = 0;
         /** @var DatabaseMemberModel $member */
         foreach ($memberCollection as $member) {
-            if ($num++ % 20 == 0) {
+            if (0 === $num++ % 20) {
                 $this->emReport->flush();
                 $this->emReport->clear();
                 $progress->update($num);
@@ -100,10 +100,10 @@ class Member
     ): void {
         $reportListRepo = $this->emReport->getRepository(ReportMailingListModel::class);
 
-        $reportLists = array_map(function ($list) {
+        $reportLists = array_map(static function ($list) {
             return $list->getName();
         }, $reportMember->getLists()->toArray());
-        $lists = array_map(function ($list) {
+        $lists = array_map(static function ($list) {
             return $list->getName();
         }, $member->getLists()->toArray());
 
@@ -136,10 +136,10 @@ class Member
     ): void {
         $addrRepo = $this->emReport->getRepository(ReportAddressModel::class);
 
-        if ($reportMember === null) {
+        if (null === $reportMember) {
             $reportMember = $this->emReport->getRepository(ReportMemberModel::class)
                 ->find($address->getMember()->getLidnr());
-            if ($reportMember === null) {
+            if (null === $reportMember) {
                 throw new LogicException('Address without member');
             }
         }

@@ -12,16 +12,12 @@ use Psr\Container\ContainerInterface;
 class ExportControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return ExportController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): ExportController {
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);

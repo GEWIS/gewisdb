@@ -12,16 +12,12 @@ use Report\Service\Organ as OrganService;
 class OrganFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return OrganService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): OrganService {
         /** @var EntityManager $emReport */
         $emReport = $container->get('doctrine.entitymanager.orm_report');

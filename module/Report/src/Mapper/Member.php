@@ -4,18 +4,11 @@ declare(strict_types=1);
 
 namespace Report\Mapper;
 
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
-use Doctrine\ORM\Query\Expr\{
-    Join,
-};
-use Report\Model\{
-    Address as AddressModel,
-    Member as MemberModel,
-    OrganMember as OrganMemberModel,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
+use Report\Model\Member as MemberModel;
+use Report\Model\OrganMember as OrganMemberModel;
 
 class Member
 {
@@ -53,9 +46,9 @@ class Member
 
         $qb->select('m')
             ->from(MemberModel::class, 'm')
-            ->where("m.expiration >= CURRENT_TIMESTAMP()")
-            ->andWhere("m.hidden = false")
-            ->andWhere("m.deleted = false")
+            ->where('m.expiration >= CURRENT_TIMESTAMP()')
+            ->andWhere('m.hidden = false')
+            ->andWhere('m.deleted = false')
             ->setMaxResults(32)
             ->setFirstResult(0);
 

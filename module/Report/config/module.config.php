@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Report;
 
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
-use Report\Command\{
-    GenerateFullCommand,
-    GeneratePartialCommand,
-};
+use Report\Command\GenerateFullCommand;
+use Report\Command\GeneratePartialCommand;
 
 return [
     'doctrine' => [

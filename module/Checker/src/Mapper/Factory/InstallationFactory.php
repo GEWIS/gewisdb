@@ -11,16 +11,12 @@ use Psr\Container\ContainerInterface;
 class InstallationFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return InstallationMapper
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): InstallationMapper {
         return new InstallationMapper(
             $container->get('database_doctrine_em'),

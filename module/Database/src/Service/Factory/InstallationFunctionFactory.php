@@ -13,16 +13,12 @@ use Psr\Container\ContainerInterface;
 class InstallationFunctionFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return InstallationFunctionService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): InstallationFunctionService {
         /** @var InstallationFunctionForm $installationFunctionForm */
         $installationFunctionForm = $container->get(InstallationFunctionForm::class);

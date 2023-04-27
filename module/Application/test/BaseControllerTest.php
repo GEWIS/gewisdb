@@ -10,14 +10,14 @@ use Laminas\Mvc\Service\ServiceManagerConfig;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use User\Model\{
-    User,
-};
+use User\Model\User;
+
+use function array_merge;
+use function array_unique;
 
 abstract class BaseControllerTest extends AbstractHttpControllerTestCase
 {
     protected ServiceManager $serviceManager;
-
     protected MockObject $authService;
     protected MockObject $aclService;
     protected MockObject $userMapper;
@@ -29,7 +29,9 @@ abstract class BaseControllerTest extends AbstractHttpControllerTestCase
     public function setUp(): void
     {
         $this->setApplicationConfig(TestConfigProvider::getConfig());
+
         parent::setUp();
+
         $this->getApplication();
     }
 
@@ -61,6 +63,8 @@ abstract class BaseControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Variation of {@link Application::init} but without initial bootstrapping.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     private static function initServiceManager(array $configuration = []): ServiceManager
     {
@@ -78,6 +82,9 @@ abstract class BaseControllerTest extends AbstractHttpControllerTestCase
         return $serviceManager;
     }
 
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     private function bootstrapApplication(
         ServiceManager $serviceManager,
         array $configuration = [],
@@ -88,6 +95,7 @@ abstract class BaseControllerTest extends AbstractHttpControllerTestCase
         $listenersFromConfigService = $config['listeners'] ?? [];
 
         $listeners = array_unique(array_merge($listenersFromConfigService, $listenersFromAppConfig));
+
         return $serviceManager->get('Application')->bootstrap($listeners);
     }
 }

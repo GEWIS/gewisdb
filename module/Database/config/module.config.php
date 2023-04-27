@@ -4,37 +4,29 @@ declare(strict_types=1);
 
 namespace Database;
 
-use Database\Controller\{
-    ApiController,
-    ExportController,
-    IndexController,
-    MeetingController,
-    MemberController,
-    OrganController,
-    ProspectiveMemberController,
-    QueryController,
-    SettingsController,
-};
-use Database\Controller\Factory\{
-    ApiControllerFactory,
-    ExportControllerFactory,
-    IndexControllerFactory,
-    MeetingControllerFactory,
-    MemberControllerFactory,
-    OrganControllerFactory,
-    ProspectiveMemberControllerFactory,
-    QueryControllerFactory,
-    SettingsControllerFactory,
-};
-use Database\Command\{
-    DeleteExpiredMembersCommand,
-    GenerateAuthenticationKeysCommand,
-};
+use Database\Command\DeleteExpiredMembersCommand;
+use Database\Command\GenerateAuthenticationKeysCommand;
+use Database\Controller\ApiController;
+use Database\Controller\ExportController;
+use Database\Controller\Factory\ApiControllerFactory;
+use Database\Controller\Factory\ExportControllerFactory;
+use Database\Controller\Factory\IndexControllerFactory;
+use Database\Controller\Factory\MeetingControllerFactory;
+use Database\Controller\Factory\MemberControllerFactory;
+use Database\Controller\Factory\OrganControllerFactory;
+use Database\Controller\Factory\ProspectiveMemberControllerFactory;
+use Database\Controller\Factory\QueryControllerFactory;
+use Database\Controller\Factory\SettingsControllerFactory;
+use Database\Controller\IndexController;
+use Database\Controller\MeetingController;
+use Database\Controller\MemberController;
+use Database\Controller\OrganController;
+use Database\Controller\ProspectiveMemberController;
+use Database\Controller\QueryController;
+use Database\Controller\SettingsController;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
-use Laminas\Router\Http\{
-    Literal,
-    Segment,
-};
+use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
 use User\Listener\AuthenticationListener;
 
 return [
@@ -65,9 +57,7 @@ return [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/decision',
-                            'defaults' => [
-                                'action' => 'decision',
-                            ],
+                            'defaults' => ['action' => 'decision'],
                         ],
                         'may_terminate' => false,
                         'child_routes' => [
@@ -75,12 +65,8 @@ return [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/:form',
-                                    'constraints' => [
-                                        'form' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                    ],
-                                    'defaults' => [
-                                        'action' => 'decisionform',
-                                    ],
+                                    'constraints' => ['form' => '[a-zA-Z][a-zA-Z0-9_-]*'],
+                                    'defaults' => ['action' => 'decisionform'],
                                 ],
                             ],
                             'create' => [
@@ -105,9 +91,7 @@ return [
                                         'point' => '[0-9]*',
                                         'decision' => '[0-9]*',
                                     ],
-                                    'defaults' => [
-                                        'action' => 'delete',
-                                    ],
+                                    'defaults' => ['action' => 'delete'],
                                 ],
                             ],
                         ],
@@ -120,27 +104,21 @@ return [
                                 'type' => 'ALV|BV|VV|Virt',
                                 'number' => '\-?[0-9]*',
                             ],
-                            'defaults' => [
-                                'action' => 'view',
-                            ],
+                            'defaults' => ['action' => 'view'],
                         ],
                     ],
                     'create' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/create',
-                            'defaults' => [
-                                'action' => 'create',
-                            ],
+                            'defaults' => ['action' => 'create'],
                         ],
                     ],
                     'search' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/search',
-                            'defaults' => [
-                                'action' => 'search',
-                            ],
+                            'defaults' => ['action' => 'search'],
                         ],
                     ],
                 ],
@@ -160,18 +138,14 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:action',
-                            'constraints' => [
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ],
+                            'constraints' => ['action' => '[a-zA-Z][a-zA-Z0-9_-]*'],
                         ],
                     ],
                     'info' => [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/info/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => [
-                                'action' => 'info',
-                            ],
+                            'defaults' => ['action' => 'info'],
                             'constraints' => [
                                 'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',
@@ -185,9 +159,7 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => [
-                                'action' => 'view',
-                            ],
+                            'defaults' => ['action' => 'view'],
                             'constraints' => [
                                 'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',
@@ -214,12 +186,8 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:id',
-                            'constraints' => [
-                                'id' => '[0-9]+',
-                            ],
-                            'defaults' => [
-                                'action' => 'show',
-                            ],
+                            'constraints' => ['id' => '[0-9]+'],
+                            'defaults' => ['action' => 'show'],
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
@@ -227,9 +195,7 @@ return [
                                 'type' => Literal::class,
                                 'options' => [
                                     'route' => '/edit',
-                                    'defaults' => [
-                                        'action' => 'edit',
-                                    ],
+                                    'defaults' => ['action' => 'edit'],
                                 ],
                                 'may_terminate' => true,
                                 'child_routes' => [
@@ -237,39 +203,29 @@ return [
                                         'type' => Segment::class,
                                         'options' => [
                                             'route' => '/address/:type',
-                                            'constraints' => [
-                                                'type' => 'home|student|mail',
-                                            ],
-                                            'defaults' => [
-                                                'action' => 'editAddress',
-                                            ],
+                                            'constraints' => ['type' => 'home|student|mail'],
+                                            'defaults' => ['action' => 'editAddress'],
                                         ],
                                     ],
                                     'membership' => [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/membership',
-                                            'defaults' => [
-                                                'action' => 'membership',
-                                            ],
+                                            'defaults' => ['action' => 'membership'],
                                         ],
                                     ],
                                     'lists' => [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/lists',
-                                            'defaults' => [
-                                                'action' => 'lists',
-                                            ],
+                                            'defaults' => ['action' => 'lists'],
                                         ],
                                     ],
                                     'expiration' => [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/expiration',
-                                            'defaults' => [
-                                                'action' => 'expiration',
-                                            ],
+                                            'defaults' => ['action' => 'expiration'],
                                         ],
                                     ],
                                 ],
@@ -278,9 +234,7 @@ return [
                                 'type' => Literal::class,
                                 'options' => [
                                     'route' => '/update',
-                                    'defaults' => [
-                                        'action' => 'showUpdate',
-                                    ],
+                                    'defaults' => ['action' => 'showUpdate'],
                                 ],
                                 'may_terminate' => true,
                                 'child_routes' => [
@@ -288,18 +242,14 @@ return [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/approve',
-                                            'defaults' => [
-                                                'action' => 'approveUpdate',
-                                            ],
+                                            'defaults' => ['action' => 'approveUpdate'],
                                         ],
                                     ],
                                     'reject' => [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/reject',
-                                            'defaults' => [
-                                                'action' => 'rejectUpdate',
-                                            ],
+                                            'defaults' => ['action' => 'rejectUpdate'],
                                         ],
                                     ],
                                 ],
@@ -308,33 +258,23 @@ return [
                                 'type' => Literal::class,
                                 'options' => [
                                     'route' => '/delete',
-                                    'defaults' => [
-                                        'action' => 'delete',
-                                    ],
+                                    'defaults' => ['action' => 'delete'],
                                 ],
                             ],
                             'remove-address' => [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/remove/address/:type',
-                                    'constraints' => [
-                                        'type' => 'home|student|mail',
-                                    ],
-                                    'defaults' => [
-                                        'action' => 'removeAddress',
-                                    ],
+                                    'constraints' => ['type' => 'home|student|mail'],
+                                    'defaults' => ['action' => 'removeAddress'],
                                 ],
                             ],
                             'add-address' => [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/add/address/:type',
-                                    'constraints' => [
-                                        'type' => 'home|student|mail',
-                                    ],
-                                    'defaults' => [
-                                        'action' => 'addAddress',
-                                    ],
+                                    'constraints' => ['type' => 'home|student|mail'],
+                                    'defaults' => ['action' => 'addAddress'],
                                 ],
                             ],
                             'supremum' => [
@@ -352,18 +292,14 @@ return [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/optin',
-                                            'defaults' => [
-                                                'value' => 'optin',
-                                            ],
+                                            'defaults' => ['value' => 'optin'],
                                         ],
                                     ],
                                     'optout' => [
                                         'type' => Literal::class,
                                         'options' => [
                                             'route' => '/optout',
-                                            'defaults' => [
-                                                'value' => 'optout',
-                                            ],
+                                            'defaults' => ['value' => 'optout'],
                                         ],
                                     ],
                                 ],
@@ -384,45 +320,35 @@ return [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/search',
-                            'defaults' => [
-                                'action' => 'search',
-                            ],
+                            'defaults' => ['action' => 'search'],
                         ],
                     ],
                     'searchFiltered' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/searchFiltered',
-                            'defaults' => [
-                                'action' => 'searchFiltered',
-                            ],
+                            'defaults' => ['action' => 'searchFiltered'],
                         ],
                     ],
                     'tuelookup' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/tuelookup',
-                            'defaults' => [
-                                'action' => 'tueLookup',
-                            ],
+                            'defaults' => ['action' => 'tueLookup'],
                         ],
                     ],
                     'tuerequest' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/tuerequest',
-                            'defaults' => [
-                                'action' => 'tueRequest',
-                            ],
+                            'defaults' => ['action' => 'tueRequest'],
                         ],
                     ],
                     'updates' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/updates',
-                            'defaults' => [
-                                'action' => 'updates',
-                            ],
+                            'defaults' => ['action' => 'updates'],
                         ],
                     ],
                 ],
@@ -442,12 +368,8 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:id',
-                            'constraints' => [
-                                'id' => '[0-9]+',
-                            ],
-                            'defaults' => [
-                                'action' => 'show',
-                            ],
+                            'constraints' => ['id' => '[0-9]+'],
+                            'defaults' => ['action' => 'show'],
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
@@ -455,18 +377,14 @@ return [
                                 'type' => Literal::class,
                                 'options' => [
                                     'route' => '/delete',
-                                    'defaults' => [
-                                        'action' => 'delete',
-                                    ],
+                                    'defaults' => ['action' => 'delete'],
                                 ],
                             ],
                             'finalize' => [
                                 'type' => Literal::class,
                                 'options' => [
                                     'route' => '/finalize',
-                                    'defaults' => [
-                                        'action' => 'finalize',
-                                    ],
+                                    'defaults' => ['action' => 'finalize'],
                                 ],
                             ],
                         ],
@@ -475,9 +393,7 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:action',
-                            'constraints' => [
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ],
+                            'constraints' => ['action' => '[a-zA-Z][a-zA-Z0-9_-]*'],
                         ],
                     ],
                 ],
@@ -497,9 +413,7 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:action',
-                            'constraints' => [
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ],
+                            'constraints' => ['action' => '[a-zA-Z][a-zA-Z0-9_-]*'],
                         ],
                     ],
                 ],
@@ -519,21 +433,15 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/list/delete/:name',
-                            'constraints' => [
-                                'name' => '[a-zA-Z0-9_-]+',
-                            ],
-                            'defaults' => [
-                                'action' => 'deleteList',
-                            ],
+                            'constraints' => ['name' => '[a-zA-Z0-9_-]+'],
+                            'defaults' => ['action' => 'deleteList'],
                         ],
                     ],
                     'default' => [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:action',
-                            'constraints' => [
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ],
+                            'constraints' => ['action' => '[a-zA-Z][a-zA-Z0-9_-]*'],
                         ],
                     ],
                 ],
@@ -553,21 +461,15 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/show/:query',
-                            'constraints' => [
-                                'query' => '[0-9]+',
-                            ],
-                            'defaults' => [
-                                'action' => 'show',
-                            ],
+                            'constraints' => ['query' => '[0-9]+'],
+                            'defaults' => ['action' => 'show'],
                         ],
                     ],
                     'export' => [
                         'type' => Literal::class,
                         'options' => [
                             'route' => '/export',
-                            'defaults' => [
-                                'action' => 'export',
-                            ],
+                            'defaults' => ['action' => 'export'],
                         ],
                     ],
                 ],
@@ -599,9 +501,7 @@ return [
                                 'type' => Literal::class,
                                 'options' => [
                                     'route' => '/active',
-                                    'defaults' => [
-                                        'action' => 'membersActive',
-                                    ],
+                                    'defaults' => ['action' => 'membersActive'],
                                 ],
                             ],
                         ],
@@ -610,12 +510,8 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/members/:id',
-                            'constraints' => [
-                                'id' => '[0-9]+',
-                            ],
-                            'defaults' => [
-                                'action' => 'member',
-                            ],
+                            'constraints' => ['id' => '[0-9]+'],
+                            'defaults' => ['action' => 'member'],
                         ],
                     ],
                 ],
@@ -639,9 +535,7 @@ return [
         'template_path_stack' => [
             'database' => __DIR__ . '/../view/',
         ],
-        'strategies' => [
-            'ViewJsonStrategy',
-        ],
+        'strategies' => ['ViewJsonStrategy'],
     ],
     'laminas-cli' => [
         'commands' => [

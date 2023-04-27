@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace User\Mapper;
 
-use Doctrine\ORM\{
-    EntityRepository,
-    EntityManager,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use User\Model\ApiPrincipal as ApiPrincipalModel;
+
+use function count;
 
 class ApiPrincipalMapper
 {
@@ -17,7 +17,7 @@ class ApiPrincipalMapper
     }
 
     /**
-     * @return array<array-key, ApiPrincipalModel>
+     * @return ApiPrincipalModel[]
      */
     public function findAll(): array
     {
@@ -31,9 +31,10 @@ class ApiPrincipalMapper
 
     public function findByToken(string $token): ?ApiPrincipalModel
     {
-        /** @var array<array-key, ApiPrincipalModel> $results */
-        $results = $this->getRepository()->findBy(["token" => $token], limit: 1);
-        return (count($results) > 0) ? $results[0] : null;
+        /** @var ApiPrincipalModel[] $results */
+        $results = $this->getRepository()->findBy(['token' => $token], limit: 1);
+
+        return count($results) > 0 ? $results[0] : null;
     }
 
     public function persist(ApiPrincipalModel $principal): void

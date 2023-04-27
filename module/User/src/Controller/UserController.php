@@ -11,6 +11,9 @@ use User\Service\UserService;
 
 class UserController extends AbstractActionController
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(
         protected readonly UserService $service,
         protected readonly array $config,

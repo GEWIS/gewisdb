@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+
+use function count;
+use function is_numeric;
+use function strtolower;
 
 class ProspectiveMember
 {
@@ -25,13 +27,14 @@ class ProspectiveMember
 
         $qb->select('m')
             ->from(ProspectiveMemberModel::class, 'm')
-            ->where("LOWER(m.email) = LOWER(:email)")
+            ->where('LOWER(m.email) = LOWER(:email)')
             ->setMaxResults(1);
 
         $qb->setParameter(':email', $email);
 
         $ret = $qb->getQuery()->getResult();
-        return $ret !== null && count($ret) > 0;
+
+        return null !== $ret && count($ret) > 0;
     }
 
     /**
@@ -47,7 +50,7 @@ class ProspectiveMember
             ->from(ProspectiveMemberModel::class, 'm')
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
-            ->orWhere("m.email LIKE :name")
+            ->orWhere('m.email LIKE :name')
             ->setMaxResults(32)
             ->orderBy('m.lidnr', 'DESC')
             ->setFirstResult(0);
@@ -56,8 +59,8 @@ class ProspectiveMember
 
         // also allow searching for membership number
         if (is_numeric($query)) {
-            $qb->orWhere("m.lidnr = :nr");
-            $qb->orWhere("m.tueUsername = :nr");
+            $qb->orWhere('m.lidnr = :nr');
+            $qb->orWhere('m.tueUsername = :nr');
             $qb->setParameter(':nr', $query);
         }
 

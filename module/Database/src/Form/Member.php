@@ -6,38 +6,34 @@ namespace Database\Form;
 
 use Application\Model\Enums\AddressTypes;
 use Database\Form\Fieldset\Address as AddressFieldset;
+use Database\Model\MailingList as MailingListModel;
 use DateInterval;
 use DateTime;
-use Exception;
-use Laminas\I18n\Filter\Alnum;
-use Laminas\Filter\{
-    StringToUpper,
-    StringTrim,
-    ToNull,
-};
-use Laminas\Form\Element\{
-    Checkbox,
-    Date,
-    Email,
-    Hidden,
-    Select,
-    Submit,
-    Text,
-};
+use Laminas\Filter\StringToUpper;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\ToNull;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Date;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
+use Laminas\I18n\Filter\Alnum;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
-use Laminas\Validator\{
-    Callback,
-    Iban,
-    Identical,
-    NotEmpty,
-    Regex,
-    StringLength,
-};
+use Laminas\Validator\Callback;
+use Laminas\Validator\Iban;
+use Laminas\Validator\Identical;
+use Laminas\Validator\NotEmpty;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
+use Throwable;
 
 class Member extends Form implements InputFilterProviderInterface
 {
+    /** @var MailingListModel[] $lists */
     protected array $lists;
 
     public function __construct(
@@ -112,9 +108,7 @@ class Member extends Form implements InputFilterProviderInterface
                     ],
                     'other' => [
                         'label' => 'Other',
-                        'options' => [
-                            'Other' => 'Other',
-                        ],
+                        'options' => ['Other' => 'Other'],
                     ],
                 ],
                 'empty_option' => $translator->translate('Select a study'),
@@ -136,7 +130,6 @@ class Member extends Form implements InputFilterProviderInterface
                 'label' => $translator->translate('Birthdate'),
             ],
         ]);
-
 
         $student = clone $address;
         $student->setName('address');
@@ -187,6 +180,8 @@ class Member extends Form implements InputFilterProviderInterface
 
     /**
      * Set the mailing lists.
+     *
+     * @param MailingListModel[] $lists
      */
     public function setLists(array $lists): void
     {
@@ -194,7 +189,7 @@ class Member extends Form implements InputFilterProviderInterface
         foreach ($this->lists as $list) {
             $desc = $list->getNlDescription();
 
-            if ($this->translator->getLocale() == 'en') {
+            if ('en' === $this->translator->getLocale()) {
                 $desc = $list->getEnDescription();
             }
 
@@ -206,9 +201,11 @@ class Member extends Form implements InputFilterProviderInterface
                 ],
             ]);
 
-            if ($list->getDefaultSub()) {
-                $this->get('list-' . $list->getName())->setChecked(true);
+            if (!$list->getDefaultSub()) {
+                continue;
             }
+
+            $this->get('list-' . $list->getName())->setChecked(true);
         }
     }
 
@@ -336,9 +333,7 @@ class Member extends Form implements InputFilterProviderInterface
                     'validators' => [
                         [
                             'name' => Iban::class,
-                            'options' => [
-                                'allow_non_sepa' => false,
-                            ],
+                            'options' => ['allow_non_sepa' => false],
                         ],
                     ],
                     'filters' => [
@@ -393,7 +388,7 @@ class Member extends Form implements InputFilterProviderInterface
             $longTimeAgo = (new DateTime('now'))->sub(new DateInterval('P10Y'));
 
             return (new DateTime($value)) < $longTimeAgo;
-        } catch (Exception $e) {
+        } catch (Throwable) {
             return false;
         }
     }

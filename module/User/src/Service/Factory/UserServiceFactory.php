@@ -8,25 +8,21 @@ use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
-use User\Service\UserService;
-use User\Mapper\UserMapper;
-use User\Form\UserCreate;
 use User\Form\Login;
+use User\Form\UserCreate;
 use User\Form\UserEdit;
+use User\Mapper\UserMapper;
+use User\Service\UserService;
 
 class UserServiceFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return UserService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): UserService {
         return new UserService(
             $container->get(UserMapper::class),

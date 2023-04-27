@@ -6,25 +6,19 @@ namespace Report\Command\Factory;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
-use Report\Service\{
-    Board as BoardService,
-    Misc as MiscService,
-};
 use Report\Command\GeneratePartialCommand;
+use Report\Service\Board as BoardService;
+use Report\Service\Misc as MiscService;
 
 class GeneratePartialCommandFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return GeneratePartialCommand
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): GeneratePartialCommand {
         /** @var BoardService $boardService */
         $boardService = $container->get(BoardService::class);

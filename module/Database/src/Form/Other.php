@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
-use Laminas\Form\Element\{
-    Submit,
-    Text,
-};
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
@@ -46,9 +44,7 @@ class Other extends AbstractDecision implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => [
-                            'min' => 3,
-                        ],
+                        'options' => ['min' => 3],
                     ],
                 ],
             ],

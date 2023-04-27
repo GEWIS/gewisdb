@@ -7,10 +7,8 @@ namespace Database\Command;
 use Database\Service\Member as MemberService;
 use DateTime;
 use Laminas\Cli\Command\AbstractParamAwareCommand;
-use Laminas\Cli\Input\{
-    ParamAwareInputInterface,
-    StringParam,
-};
+use Laminas\Cli\Input\ParamAwareInputInterface;
+use Laminas\Cli\Input\StringParam;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,7 +16,9 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class DeleteExpiredMembersCommand extends AbstractParamAwareCommand
 {
+    /** @var string $defaultName */
     protected static $defaultName = 'database:members:delete-expired';
+    /** @var string $defaultDescription */
     protected static $defaultDescription = 'Delete members whose membership expired on or before the specified date.';
 
     public function __construct(private readonly MemberService $memberService)
@@ -33,7 +33,7 @@ class DeleteExpiredMembersCommand extends AbstractParamAwareCommand
                 ->setPattern('/^[0-9]{4}(-[0-9]{2}){2}$/')
                 ->setDescription('Date of expiration (YYYY-MM-DD)')
                 ->setShortcut('e')
-                ->setRequiredFlag(true)
+                ->setRequiredFlag(true),
         );
     }
 
