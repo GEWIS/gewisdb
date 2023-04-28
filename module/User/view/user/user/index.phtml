@@ -8,7 +8,7 @@ use Laminas\View\Renderer\PhpRenderer;
 /** @var PhpRenderer|HelperTrait $this */
 
 $form->prepare();
-$form->setAttribute('action', $this->url('user'));
+$form->setAttribute('action', $this->url('passwordlogin'));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');

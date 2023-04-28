@@ -34,10 +34,10 @@ use User\Service\UserService;
 return [
     'router' => [
         'routes' => [
-            'user' => [
+            'passwordlogin' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route' => '/user',
+                    'route' => '/login',
                     'defaults' => [
                         'controller' => UserController::class,
                         'action' => 'index',
