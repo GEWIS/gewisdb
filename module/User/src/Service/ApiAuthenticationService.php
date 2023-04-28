@@ -35,7 +35,10 @@ class ApiAuthenticationService extends AuthenticationService implements Authenti
         );
     }
 
-    private function currentUserCan(ApiPermissions $permission): bool
+    /**
+     * Function that checks if the current principal has the required permissions
+     */
+    public function currentUserCan(ApiPermissions $permission): bool
     {
         if (!$this->hasIdentity()) {
             return false;
