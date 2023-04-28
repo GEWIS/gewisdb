@@ -11,7 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateAuthenticationKeysCommand extends Command
 {
+    /** @var string $defaultName */
     protected static $defaultName = 'database:members:generate-keys';
+    /** @var string $defaultDescription */
     protected static $defaultDescription = 'Forcefully update the keys used for external authentication on members.';
 
     public function __construct(private readonly MemberService $memberService)

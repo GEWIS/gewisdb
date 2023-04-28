@@ -8,10 +8,11 @@ use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use Database\Service\Meeting as MeetingService;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\View\Model\{
-    ViewModel,
-    JsonModel,
-};
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
+
+use function array_key_exists;
+use function array_map;
 
 class OrganController extends AbstractActionController
 {
@@ -60,30 +61,30 @@ class OrganController extends AbstractActionController
         $data['members'] = [];
 
         foreach ($foundation->getReferences() as $reference) {
-            if ($reference instanceof InstallationModel) {
-                $member = $reference->getMember();
+            if (!($reference instanceof InstallationModel)) {
+                continue;
+            }
 
-                if (!array_key_exists($member->getLidnr(), $data['members'])) {
-                    $data['members'][$member->getLidnr()] = [
-                        'member' => $member->toArray(),
-                        'installations' => [],
-                    ];
-                }
+            $member = $reference->getMember();
 
-                $data['members'][$member->getLidnr()]['installations'][] = [
-                    'meeting_type' => $reference->getDecision()->getMeeting()->getType(),
-                    'meeting_number' => $reference->getDecision()->getMeeting()->getNumber(),
-                    'decision_point' => $reference->getDecision()->getPoint(),
-                    'decision_number' => $reference->getDecision()->getNumber(),
-                    'subdecision_number' => $reference->getNumber(),
-                    'function' => $reference->getFunction(),
+            if (!array_key_exists($member->getLidnr(), $data['members'])) {
+                $data['members'][$member->getLidnr()] = [
+                    'member' => $member->toArray(),
+                    'installations' => [],
                 ];
             }
+
+            $data['members'][$member->getLidnr()]['installations'][] = [
+                'meeting_type' => $reference->getDecision()->getMeeting()->getType(),
+                'meeting_number' => $reference->getDecision()->getMeeting()->getNumber(),
+                'decision_point' => $reference->getDecision()->getPoint(),
+                'decision_number' => $reference->getDecision()->getNumber(),
+                'subdecision_number' => $reference->getNumber(),
+                'function' => $reference->getFunction(),
+            ];
         }
 
-        return new JsonModel([
-            'json' => $data,
-        ]);
+        return new JsonModel(['json' => $data]);
     }
 
     /**
@@ -96,12 +97,10 @@ class OrganController extends AbstractActionController
         $query = $this->params()->fromQuery('q');
         $res = $this->meetingService->organSearch($query);
 
-        $res = array_map(function ($organ) {
+        $res = array_map(static function ($organ) {
             return $organ->toArray();
         }, $res);
 
-        return new JsonModel([
-            'json' => $res,
-        ]);
+        return new JsonModel(['json' => $res]);
     }
 }

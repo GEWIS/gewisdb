@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\MeetingTypes;
 use Application\Model\Enums\OrganTypes;
 use Database\Model\SubDecision;
-use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection,
-};
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    OneToMany,
-};
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Foundation of an organ.
@@ -25,36 +22,35 @@ class Foundation extends SubDecision
     /**
      * Abbreviation (only for when organs are created)
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $abbr;
 
     /**
      * Name (only for when organs are created)
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $name;
 
     /**
      * Type of the organ.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         enumType: OrganTypes::class,
     )]
     protected OrganTypes $organType;
 
     /**
      * References from other subdecisions to this organ.
+     *
+     * @var Collection<array-key, FoundationReference>
      */
     #[OneToMany(
         targetEntity: FoundationReference::class,
-        mappedBy: "foundation",
+        mappedBy: 'foundation',
     )]
     protected Collection $references;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->references = new ArrayCollection();
@@ -62,8 +58,6 @@ class Foundation extends SubDecision
 
     /**
      * Get the abbreviation.
-     *
-     * @return string
      */
     public function getAbbr(): string
     {
@@ -72,8 +66,6 @@ class Foundation extends SubDecision
 
     /**
      * Set the abbreviation.
-     *
-     * @param string $abbr
      */
     public function setAbbr(string $abbr): void
     {
@@ -82,8 +74,6 @@ class Foundation extends SubDecision
 
     /**
      * Get the name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -92,8 +82,6 @@ class Foundation extends SubDecision
 
     /**
      * Set the name.
-     *
-     * @param string $name
      */
     public function setName(string $name): void
     {
@@ -102,8 +90,6 @@ class Foundation extends SubDecision
 
     /**
      * Get the type.
-     *
-     * @return OrganTypes
      */
     public function getOrganType(): OrganTypes
     {
@@ -112,8 +98,6 @@ class Foundation extends SubDecision
 
     /**
      * Set the type.
-     *
-     * @param OrganTypes $organType
      */
     public function setOrganType(OrganTypes $organType): void
     {
@@ -123,7 +107,7 @@ class Foundation extends SubDecision
     /**
      * Get the references.
      *
-     * @return Collection of references
+     * @return Collection<array-key, FoundationReference>
      */
     public function getReferences(): Collection
     {
@@ -132,8 +116,6 @@ class Foundation extends SubDecision
 
     /**
      * Get the content.
-     *
-     * @return string
      */
     public function getContent(): string
     {
@@ -151,11 +133,21 @@ class Foundation extends SubDecision
      *
      * Mostly useful for usage with JSON.
      *
-     * @return array
+     * @return array{
+     *     meeting_type: MeetingTypes,
+     *     meeting_number: int,
+     *     decision_point: int,
+     *     decision_number: int,
+     *     subdecision_number: int,
+     *     abbr: string,
+     *     name: string,
+     *     organtype: OrganTypes,
+     * }
      */
     public function toArray(): array
     {
         $decision = $this->getDecision();
+
         return [
             'meeting_type' => $decision->getMeeting()->getType(),
             'meeting_number' => $decision->getMeeting()->getNumber(),

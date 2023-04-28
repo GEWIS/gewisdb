@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace User\Model\Enums;
 
-use Decision\Model\Member as MemberModel;
 use Laminas\Mvc\I18n\Translator;
 
 /**
@@ -23,7 +22,7 @@ enum ApiPermissions: string
             self::HealthR => $translator->translate('Get API Health'),
             self::MembersR => $translator->translate('Get all Members'),
             self::MembersActiveR => $translator->translate(
-                'Get active Members (members that are in one or more organs)'
+                'Get active Members (members that are in one or more organs)',
             ),
             self::All => $translator->translate('All API permissions'),
         };

@@ -10,7 +10,7 @@ use Laminas\Hydrator\Strategy\StrategyInterface;
 class PostalRegionHydratorStrategy implements StrategyInterface
 {
     public function extract(
-        $value,
+        mixed $value,
         ?object $object = null,
     ): string {
         if ($value instanceof PostalRegions) {
@@ -21,7 +21,7 @@ class PostalRegionHydratorStrategy implements StrategyInterface
     }
 
     public function hydrate(
-        $value,
+        mixed $value,
         ?array $data,
     ): PostalRegions {
         if ($value instanceof PostalRegions) {

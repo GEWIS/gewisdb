@@ -13,16 +13,12 @@ use User\Service\ApiAuthenticationService;
 class ApiControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return ApiController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): ApiController {
         /** @var ApiService $apiService */
         $apiService = $container->get(ApiService::class);

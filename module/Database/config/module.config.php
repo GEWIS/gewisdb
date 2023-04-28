@@ -4,37 +4,29 @@ declare(strict_types=1);
 
 namespace Database;
 
-use Database\Controller\{
-    ApiController,
-    ExportController,
-    IndexController,
-    MeetingController,
-    MemberController,
-    OrganController,
-    ProspectiveMemberController,
-    QueryController,
-    SettingsController,
-};
-use Database\Controller\Factory\{
-    ApiControllerFactory,
-    ExportControllerFactory,
-    IndexControllerFactory,
-    MeetingControllerFactory,
-    MemberControllerFactory,
-    OrganControllerFactory,
-    ProspectiveMemberControllerFactory,
-    QueryControllerFactory,
-    SettingsControllerFactory,
-};
-use Database\Command\{
-    DeleteExpiredMembersCommand,
-    GenerateAuthenticationKeysCommand,
-};
+use Database\Command\DeleteExpiredMembersCommand;
+use Database\Command\GenerateAuthenticationKeysCommand;
+use Database\Controller\ApiController;
+use Database\Controller\ExportController;
+use Database\Controller\Factory\ApiControllerFactory;
+use Database\Controller\Factory\ExportControllerFactory;
+use Database\Controller\Factory\IndexControllerFactory;
+use Database\Controller\Factory\MeetingControllerFactory;
+use Database\Controller\Factory\MemberControllerFactory;
+use Database\Controller\Factory\OrganControllerFactory;
+use Database\Controller\Factory\ProspectiveMemberControllerFactory;
+use Database\Controller\Factory\QueryControllerFactory;
+use Database\Controller\Factory\SettingsControllerFactory;
+use Database\Controller\IndexController;
+use Database\Controller\MeetingController;
+use Database\Controller\MemberController;
+use Database\Controller\OrganController;
+use Database\Controller\ProspectiveMemberController;
+use Database\Controller\QueryController;
+use Database\Controller\SettingsController;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
-use Laminas\Router\Http\{
-    Literal,
-    Segment,
-};
+use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
 use User\Listener\AuthenticationListener;
 
 return [
@@ -169,9 +161,7 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/info/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => [
-                                'action' => 'info',
-                            ],
+                            'defaults' => ['action' => 'info'],
                             'constraints' => [
                                 'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',
@@ -185,9 +175,7 @@ return [
                         'type' => Segment::class,
                         'options' => [
                             'route' => '/:type/:number/:point/:decision/:subdecision',
-                            'defaults' => [
-                                'action' => 'view',
-                            ],
+                            'defaults' => ['action' => 'view'],
                             'constraints' => [
                                 'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',

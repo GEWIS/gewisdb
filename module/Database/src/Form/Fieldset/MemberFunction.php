@@ -10,8 +10,11 @@ use Laminas\Form\Fieldset;
 
 class MemberFunction extends Fieldset
 {
-    public function __construct(Member $member, FunctionService $service, $withmember = false)
-    {
+    public function __construct(
+        Member $member,
+        FunctionService $service,
+        bool $withmember = false,
+    ) {
         parent::__construct('member_function');
 
         $this->add($member);

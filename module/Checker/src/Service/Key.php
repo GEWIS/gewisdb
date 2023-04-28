@@ -6,10 +6,8 @@ namespace Checker\Service;
 
 use Checker\Mapper\Key as KeyMapper;
 use Database\Model\Meeting as MeetingModel;
-use Database\Model\SubDecision\Key\{
-    Granting as KeyGrantingModel,
-    Withdrawal as KeyWithdrawalModel,
-};
+use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
+use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawalModel;
 
 class Key
 {

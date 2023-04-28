@@ -8,6 +8,9 @@ use Checker\Mapper\Installation as InstallationMapper;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 
+use function array_key_exists;
+use function sprintf;
+
 class Installation
 {
     public function __construct(private readonly InstallationMapper $installationMapper)
@@ -16,8 +19,6 @@ class Installation
 
     /**
      * Fetch all the existing organs after $meeting
-     *
-     * @param MeetingModel $meeting
      *
      * @return array<string, InstallationModel>
      */
@@ -35,9 +36,11 @@ class Installation
             $creation = $dm->getInstallation();
             $hash = $this->getHash($creation);
 
-            if (isset($members[$hash])) {
-                unset($members[$hash]);
+            if (!isset($members[$hash])) {
+                continue;
             }
+
+            unset($members[$hash]);
         }
 
         return $members;
@@ -45,8 +48,6 @@ class Installation
 
     /**
      * Returns the different roles for each user in each organ
-     *
-     * @param MeetingModel $meeting
      *
      * @return array<string, array<int, array<string, InstallationModel>>>
      */
@@ -70,9 +71,7 @@ class Installation
     /**
      * Get all members who are currently installed in an organ.
      *
-     * @param MeetingModel|null $meeting
-     *
-     * @return array
+     * @return array<int, string>
      */
     public function getActiveMembers(?MeetingModel $meeting): array
     {
@@ -84,14 +83,18 @@ class Installation
 
         $members = [];
         foreach ($installations as $installation) {
-            if ('Inactief Lid' !== $installation->getFunction()) {
-                $member = $installation->getMember()->getLidnr();
-
-                // Doing checks against the keys is a lot faster, and we do not need a lot of information.
-                if (!array_key_exists($member, $members)) {
-                    $members[$member] = '';
-                }
+            if ('Inactief Lid' === $installation->getFunction()) {
+                continue;
             }
+
+            $member = $installation->getMember()->getLidnr();
+
+            // Doing checks against the keys is a lot faster, and we do not need a lot of information.
+            if (array_key_exists($member, $members)) {
+                continue;
+            }
+
+            $members[$member] = '';
         }
 
         return $members;

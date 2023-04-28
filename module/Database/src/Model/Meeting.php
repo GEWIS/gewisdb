@@ -6,16 +6,12 @@ namespace Database\Model;
 
 use Application\Model\Enums\MeetingTypes;
 use DateTime;
-use Doctrine\Common\Collections\{
-    ArrayCollection,
-    Collection,
-};
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    Id,
-    OneToMany,
-};
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Meeting model.
@@ -28,7 +24,7 @@ class Meeting
      */
     #[Id]
     #[Column(
-        type: "string",
+        type: 'string',
         enumType: MeetingTypes::class,
     )]
     protected MeetingTypes $type;
@@ -37,28 +33,27 @@ class Meeting
      * Meeting number.
      */
     #[Id]
-    #[Column(type: "integer")]
+    #[Column(type: 'integer')]
     protected int $number;
 
     /**
      * Meeting date.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $date;
 
     /**
      * Decisions.
+     *
+     * @var Collection<array-key, Decision>
      */
     #[OneToMany(
         targetEntity: Decision::class,
-        mappedBy: "meeting",
-        cascade: ["persist"],
+        mappedBy: 'meeting',
+        cascade: ['persist'],
     )]
     protected Collection $decisions;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->decisions = new ArrayCollection();
@@ -66,8 +61,6 @@ class Meeting
 
     /**
      * Get the meeting type.
-     *
-     * @return MeetingTypes
      */
     public function getType(): MeetingTypes
     {
@@ -76,8 +69,6 @@ class Meeting
 
     /**
      * Get the meeting number.
-     *
-     * @return int
      */
     public function getNumber(): int
     {
@@ -86,8 +77,6 @@ class Meeting
 
     /**
      * Set the meeting type.
-     *
-     * @param MeetingTypes $type
      */
     public function setType(MeetingTypes $type): void
     {
@@ -96,8 +85,6 @@ class Meeting
 
     /**
      * Set the meeting number.
-     *
-     * @param int $number
      */
     public function setNumber(int $number): void
     {
@@ -106,8 +93,6 @@ class Meeting
 
     /**
      * Get the meeting date.
-     *
-     * @return DateTime
      */
     public function getDate(): DateTime
     {
@@ -116,8 +101,6 @@ class Meeting
 
     /**
      * Set the meeting date.
-     *
-     * @param DateTime $date
      */
     public function setDate(DateTime $date): void
     {
@@ -127,7 +110,7 @@ class Meeting
     /**
      * Get the decisions.
      *
-     * @return Collection
+     * @return Collection<array-key, Decision>
      */
     public function getDecisions(): Collection
     {
@@ -136,8 +119,6 @@ class Meeting
 
     /**
      * Add a decision.
-     *
-     * @param Decision $decision
      */
     public function addDecision(Decision $decision): void
     {
@@ -147,7 +128,7 @@ class Meeting
     /**
      * Add multiple decisions.
      *
-     * @param array $decisions
+     * @param Decision[] $decisions
      */
     public function addDecisions(array $decisions): void
     {

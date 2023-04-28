@@ -12,16 +12,12 @@ use Report\Service\Board as BoardService;
 class BoardFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return BoardService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): BoardService {
         /** @var EntityManager $emReport */
         $emReport = $container->get('doctrine.entitymanager.orm_report');

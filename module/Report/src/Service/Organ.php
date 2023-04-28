@@ -9,17 +9,15 @@ use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
 use LogicException;
 use ReflectionProperty;
-use Report\Model\{
-    Organ as ReportOrganModel,
-    OrganMember,
-};
-use Report\Model\SubDecision\{
-    Abrogation as ReportAbrogationModel,
-    Discharge as ReportDischargeModel,
-    Foundation as ReportFoundationModel,
-    FoundationReference as ReportFoundationReferenceModel,
-    Installation as ReportInstallationModel,
-};
+use Report\Model\Organ as ReportOrganModel;
+use Report\Model\OrganMember;
+use Report\Model\SubDecision\Abrogation as ReportAbrogationModel;
+use Report\Model\SubDecision\Discharge as ReportDischargeModel;
+use Report\Model\SubDecision\Foundation as ReportFoundationModel;
+use Report\Model\SubDecision\FoundationReference as ReportFoundationReferenceModel;
+use Report\Model\SubDecision\Installation as ReportInstallationModel;
+
+use function count;
 
 class Organ
 {
@@ -72,9 +70,11 @@ class Organ
                     $this->generateAbrogation($ref);
                 }
 
-                if ($ref instanceof ReportInstallationModel) {
-                    $this->generateInstallation($ref);
+                if (!($ref instanceof ReportInstallationModel)) {
+                    continue;
                 }
+
+                $this->generateInstallation($ref);
             }
 
             $this->emReport->persist($repOrgan);
@@ -124,14 +124,14 @@ class Organ
             $repOrgan = null;
         }
 
-        if ($repOrgan === null) {
+        if (null === $repOrgan) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
             $repo = $this->emReport->getRepository(ReportOrganModel::class);
             $repOrgan = $repo->findOneBy([
                 'foundation' => $ref->getFoundation(),
             ]);
 
-            if ($repOrgan === null) {
+            if (null === $repOrgan) {
                 throw new LogicException('Abrogation without Organ');
             }
         }
@@ -163,13 +163,13 @@ class Organ
             $repOrgan = null;
         }
 
-        if ($repOrgan === null) {
+        if (null === $repOrgan) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
             $repOrgan = $repo->findOneBy([
                 'foundation' => $ref->getFoundation(),
             ]);
 
-            if ($repOrgan === null) {
+            if (null === $repOrgan) {
                 throw new LogicException('Installation without Organ');
             }
         }
@@ -195,7 +195,7 @@ class Organ
             $repOrgan->addSubdecision($discharge);
         }
 
-        if ($repOrgan->getAbrogationDate() !== null && $organMember->getDischargeDate() === null) {
+        if (null !== $repOrgan->getAbrogationDate() && null === $organMember->getDischargeDate()) {
             $organMember->setDischargeDate($repOrgan->getAbrogationDate());
         }
 
@@ -215,7 +215,7 @@ class Organ
             $organMember = null;
         }
 
-        if ($organMember === null) {
+        if (null === $organMember) {
             throw new LogicException('Discharge without OrganMember');
         }
 
@@ -226,13 +226,13 @@ class Organ
             $repOrgan = null;
         }
 
-        if ($repOrgan === null) {
+        if (null === $repOrgan) {
             // Grabbing the organ from the foundation doesn't work when it has not been saved yet
             $repOrgan = $this->emReport->getRepository(ReportOrganModel::class)->findOneBy([
                 'foundation' => $organMember->getInstallation()->getFoundation(),
             ]);
 
-            if ($repOrgan === null) {
+            if (null === $repOrgan) {
                 throw new LogicException('Discharge without Organ');
             }
         }

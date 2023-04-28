@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Database\Model\MailingList as MailingListModel;
 use Database\Model\Member as MemberModel;
-use Laminas\Form\Element\{
-    Checkbox,
-    Submit,
-};
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 class MemberLists extends Form implements InputFilterProviderInterface
 {
+    /**
+     * @param MailingListModel[] $lists
+     */
     public function __construct(
         private readonly Translator $translator,
         MemberModel $member,
@@ -31,7 +33,7 @@ class MemberLists extends Form implements InputFilterProviderInterface
                 ],
             ]);
             foreach ($member->getLists() as $lst) {
-                if ($lst->getName() == $list->getName()) {
+                if ($lst->getName() === $list->getName()) {
                     $this->get('list-' . $list->getName())->setChecked(true);
                     break;
                 }

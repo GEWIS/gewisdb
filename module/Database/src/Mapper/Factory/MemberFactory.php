@@ -11,16 +11,12 @@ use Psr\Container\ContainerInterface;
 class MemberFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return MemberMapper
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): MemberMapper {
         return new MemberMapper($container->get('database_doctrine_em'));
     }

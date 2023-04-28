@@ -4,20 +4,13 @@ declare(strict_types=1);
 
 namespace User;
 
-use Laminas\Authentication\{
-    AuthenticationService,
-    Result,
-};
-use Laminas\Mvc\MvcEvent;
-use Laminas\Authentication\Storage\Session as SessionStorage;
+use Laminas\Authentication\AuthenticationService;
 use Laminas\Authentication\Storage\NonPersistent as NonPersistentStorage;
-use Laminas\Http\Request;
+use Laminas\Authentication\Storage\Session as SessionStorage;
+use Laminas\Mvc\MvcEvent;
 use User\Adapter\ApiPrincipalAdapter;
-use User\Listener\{
-    AuthenticationListener,
-    AuthorizationListener
-};
-use User\Mapper\ApiPrincipalMapper;
+use User\Listener\AuthenticationListener;
+use User\Listener\AuthorizationListener;
 use User\Service\ApiAuthenticationService;
 
 class Module
@@ -53,7 +46,7 @@ class Module
         );
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, $authorizationListener);
 
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function ($e) use ($authService) {
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, static function ($e) use ($authService) {
             if (!$authService->hasIdentity()) {
                 $response = $e->getResponse();
                 $response->getHeaders()->addHeaderLine('Location', '/user');
@@ -66,8 +59,6 @@ class Module
 
     /**
      * Get the configuration for this module.
-     *
-     * @return array Module configuration
      */
     public function getConfig(): array
     {

@@ -10,17 +10,13 @@ use User\Model\Enums\ApiPermissions;
 
 class NotAllowed extends RuntimeException
 {
-    /**
-     * @param ApiPermissions $permission
-     * @param int $code
-     * @param ?Throwable $previousThrowable
-     */
     public function __construct(
         ApiPermissions $permission,
         int $code = 0,
-        Throwable $previousThrowable = null,
+        ?Throwable $previousThrowable = null,
     ) {
-        $message = "Permission `" . $permission->getString() . "` is needed but is not currently held.";
+        $message = 'Permission `' . $permission->getString() . '` is needed but is not currently held.';
+
         parent::__construct($message, $code, $previousThrowable);
     }
 }

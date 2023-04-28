@@ -5,21 +5,17 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Application\Model\Enums\MeetingTypes;
-use Laminas\Form\Element\{
-    Date,
-    Select,
-    Submit,
-    Text,
-};
+use Laminas\Form\Element\Date;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
-use Laminas\Validator\{
-    Date as DateValidator,
-    Digits,
-    InArray,
-    LessThan,
-};
+use Laminas\Validator\Date as DateValidator;
+use Laminas\Validator\Digits;
+use Laminas\Validator\InArray;
+use Laminas\Validator\LessThan;
 
 class CreateMeeting extends Form implements InputFilterProviderInterface
 {
@@ -83,19 +79,21 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'number' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                     [
                         'name' => LessThan::class,
-                        'options' => [
-                            'max' => 100000,
-                        ],
+                        'options' => ['max' => 100000],
                     ],
                 ],
             ],
             'date' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => DateValidator::class],
+                    [
+                        'name' => DateValidator::class,
+                    ],
                 ],
             ],
         ];

@@ -6,6 +6,9 @@ namespace Application\Model\Enums;
 
 use Laminas\Mvc\I18n\Translator;
 
+use function array_map;
+use function array_merge;
+
 /**
  * Enum for the different address types.
  */
@@ -24,11 +27,14 @@ enum AddressTypes: string
         };
     }
 
+    /**
+     * @return array<array-key, AddressTypes|string>
+     */
     public static function values(): array
     {
         return array_merge(
             array_map(
-                fn (self $status) => $status->value,
+                static fn (self $status) => $status->value,
                 self::cases(),
             ),
             self::cases(),

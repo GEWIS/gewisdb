@@ -8,21 +8,21 @@ use Database\Hydrator\AbstractDecision;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
 use DateTime;
+use InvalidArgumentException;
 
 class Withdraw extends AbstractDecision
 {
     /**
      * Key withdrawal hydration
      *
-     * @param array $data
      * @param DecisionModel $object
      *
-     * @return DecisionModel
-     *
-     * @throws \InvalidArgumentException when $decision is not a Decision
+     * @throws InvalidArgumentException when $decision is not a Decision.
      */
-    public function hydrate(array $data, $object): DecisionModel
-    {
+    public function hydrate(
+        array $data,
+        $object,
+    ): DecisionModel {
         $decision = parent::hydrate($data, $object);
 
         // data contains:

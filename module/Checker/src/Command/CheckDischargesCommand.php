@@ -10,7 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckDischargesCommand extends AbstractCheckerCommand
 {
+    /** @var string $defaultName */
     protected static $defaultName = 'check:discharges';
+    /** @var string $defaultDescription */
     protected static $defaultDescription = 'Check that no member is installed in a non-existing or abrogated organ.';
 
     protected function execute(

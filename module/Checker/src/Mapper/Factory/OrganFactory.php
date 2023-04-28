@@ -11,16 +11,12 @@ use Psr\Container\ContainerInterface;
 class OrganFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return OrganMapper
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): OrganMapper {
         return new OrganMapper(
             $container->get('database_doctrine_em'),

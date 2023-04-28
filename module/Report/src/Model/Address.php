@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Report\Model;
 
-use Application\Model\Enums\{
-    AddressTypes,
-    PostalRegions,
-};
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    Id,
-    JoinColumn,
-    ManyToOne,
-};
+use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\PostalRegions;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * Address model.
@@ -28,11 +24,11 @@ class Address
     #[Id]
     #[ManyToOne(
         targetEntity: Member::class,
-        inversedBy: "addresses",
+        inversedBy: 'addresses',
     )]
     #[JoinColumn(
-        name: "lidnr",
-        referencedColumnName: "lidnr",
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
         nullable: false,
     )]
     protected Member $member;
@@ -48,7 +44,7 @@ class Address
      */
     #[Id]
     #[Column(
-        type: "string",
+        type: 'string',
         enumType: AddressTypes::class,
     )]
     protected AddressTypes $type;
@@ -57,7 +53,7 @@ class Address
      * Country.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         enumType: PostalRegions::class,
     )]
     protected PostalRegions $country;
@@ -65,37 +61,35 @@ class Address
     /**
      * Street.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $street;
 
     /**
      * House number (+ suffix).
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $number;
 
     /**
      * Postal code.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $postalCode;
 
     /**
      * City.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $city;
 
     /**
      * Phone number.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $phone;
 
     /**
      * Get the member.
-     *
-     * @return Member
      */
     public function getMember(): Member
     {
@@ -104,8 +98,6 @@ class Address
 
     /**
      * Set the member.
-     *
-     * @param Member $member
      */
     public function setMember(Member $member): void
     {
@@ -114,8 +106,6 @@ class Address
 
     /**
      * Get the type.
-     *
-     * @return AddressTypes
      */
     public function getType(): AddressTypes
     {
@@ -124,8 +114,6 @@ class Address
 
     /**
      * Set the type.
-     *
-     * @param AddressTypes $type
      */
     public function setType(AddressTypes $type): void
     {
@@ -134,8 +122,6 @@ class Address
 
     /**
      * Get the country.
-     *
-     * @return PostalRegions
      */
     public function getCountry(): PostalRegions
     {
@@ -144,8 +130,6 @@ class Address
 
     /**
      * Set the country.
-     *
-     * @param PostalRegions $country
      */
     public function setCountry(PostalRegions $country): void
     {
@@ -154,8 +138,6 @@ class Address
 
     /**
      * Get the street.
-     *
-     * @return string
      */
     public function getStreet(): string
     {
@@ -164,8 +146,6 @@ class Address
 
     /**
      * Set the street.
-     *
-     * @param string $street
      */
     public function setStreet(string $street): void
     {
@@ -174,8 +154,6 @@ class Address
 
     /**
      * Get the house number (+ suffix).
-     *
-     * @return string
      */
     public function getNumber(): string
     {
@@ -184,8 +162,6 @@ class Address
 
     /**
      * Set the house number (+ suffix).
-     *
-     * @param string $number
      */
     public function setNumber(string $number): void
     {
@@ -194,8 +170,6 @@ class Address
 
     /**
      * Set the postal code.
-     *
-     * @param string $postalCode
      */
     public function setPostalCode(string $postalCode): void
     {
@@ -204,8 +178,6 @@ class Address
 
     /**
      * Get the postal code.
-     *
-     * @return string
      */
     public function getPostalCode(): string
     {
@@ -214,8 +186,6 @@ class Address
 
     /**
      * Get the city.
-     *
-     * @return string
      */
     public function getCity(): string
     {
@@ -224,8 +194,6 @@ class Address
 
     /**
      * Set the city.
-     *
-     * @param string $city
      */
     public function setCity(string $city): void
     {
@@ -234,8 +202,6 @@ class Address
 
     /**
      * Get the phone number.
-     *
-     * @return string
      */
     public function getPhone(): string
     {
@@ -244,8 +210,6 @@ class Address
 
     /**
      * Set the phone number.
-     *
-     * @param string $phone
      */
     public function setPhone(string $phone): void
     {

@@ -11,19 +11,13 @@ use Psr\Container\ContainerInterface;
 class PasswordFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return Bcrypt
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): Bcrypt {
-        return new Bcrypt([
-            'cost' => 12,
-        ]);
+        return new Bcrypt(['cost' => 12]);
     }
 }

@@ -9,6 +9,8 @@ use Application\Model\Enums\OrganTypes;
 use Checker\Model\Error;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 
+use function sprintf;
+
 /**
  * Error for when an organ is founded during a meeting that it cannot be founded in.
  *

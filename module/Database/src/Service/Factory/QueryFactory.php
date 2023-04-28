@@ -16,16 +16,12 @@ use Psr\Container\ContainerInterface;
 class QueryFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return QueryService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): QueryService {
         /** @var QueryForm $queryForm */
         $queryForm = $container->get(QueryForm::class);

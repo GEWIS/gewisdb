@@ -7,6 +7,11 @@ namespace Application\View\Helper;
 use Laminas\View\Helper\AbstractHelper;
 use Psr\Container\ContainerInterface;
 
+use function array_map;
+use function explode;
+use function preg_replace;
+use function str_replace;
+
 class IsModuleActive extends AbstractHelper
 {
     public function __construct(protected readonly ContainerInterface $container)
@@ -15,6 +20,8 @@ class IsModuleActive extends AbstractHelper
 
     /**
      * Get the active module.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __invoke(array $condition): bool
     {
@@ -23,7 +30,7 @@ class IsModuleActive extends AbstractHelper
         foreach ($condition as $key => $cond) {
             if (
                 !isset($info[$key])
-                || (null !== $cond && $info[$key] != $cond)
+                || (null !== $cond && $info[$key] !== $cond)
             ) {
                 return false;
             }
@@ -34,6 +41,8 @@ class IsModuleActive extends AbstractHelper
 
     /**
      * Get the module.
+     *
+     * @return string[]
      */
     public function getRouteInfo(): array
     {

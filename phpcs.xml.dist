@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="GEWISDB Coding Standard">
+    <arg name="basepath" value="." />
+    <arg name="colors" />
+    <arg name="error-severity" value="1" />
+    <arg name="extensions" value="php,dist" />
+    <arg name="parallel" value="75" />
+    <arg name="warning-severity" value="1" />
+
+    <arg value="nps" />
+
+    <file>module</file>
+    <file>config</file>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <rule ref="GEWISPHPCodingStandards" />
+
+    <!-- Legacy code that cannot be easily changed, so ignore for now -->
+    <rule ref="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps">
+        <exclude-pattern>module/Database/src/Model/Decision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Model/MailingList.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Model/SubDecision.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Model/Decision.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Model/MailingList.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Model/SubDecision.php</exclude-pattern>
+    </rule>
+
+    <!-- Type hints that cannot converted to native types due to signature of parent -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint">
+        <!-- Factories -->
+        <exclude-pattern>module/Application/src/Service/Factory/FileStorageFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/Factory/AbstractCheckerCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Mapper/Factory/InstallationFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Mapper/Factory/KeyFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Mapper/Factory/OrganFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/CheckerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/InstallationFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/KeyFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/MeetingFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/MemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/OrganFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/ApiControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/ExportControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/IndexControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/MeetingControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/MemberControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/OrganControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/ProspectiveMemberControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/QueryControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/InstallationFunctionFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/MeetingFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/MemberUpdateFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/OrganFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/ProspectiveMemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/SavedQueryFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/ApiFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/InstallationFunctionFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/MeetingFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/MemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/QueryFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Command/Factory/GenerateFullCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Command/Factory/GeneratePartialCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Listener/Factory/DatabaseDeletionListenerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Listener/Factory/DatabaseUpdateListenerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Service/Factory/BoardFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Service/Factory/KeyholderFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Service/Factory/MeetingFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Service/Factory/MemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Service/Factory/MiscFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Service/Factory/OrganFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Adapter/Factory/ApiPrincipalAdapterFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Controller/Factory/UserControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Factory/PasswordFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Mapper/Factory/ApiPrincipalMapperFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Mapper/Factory/UserMapperFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Service/Factory/ApiAuthenticationServiceFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Service/Factory/AuthenticationServiceFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Service/Factory/UserServiceFactory.php</exclude-pattern>
+        <!-- Hydrators -->
+        <exclude-pattern>module/Database/src/Hydrator/Abolish.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/AbstractDecision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Budget.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Destroy.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Other.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Board/Discharge.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Board/Install.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Board/Release.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Key/Grant.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Key/Withdraw.php</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
+        <!-- CLI commands -->
+        <exclude-pattern>module/Checker/src/Command/CheckAuthenticationKeysCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/CheckDatabaseCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/CheckDischargesCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/CheckMembershipExpirationCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/CheckMembershipTueCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/CheckMembershipTypeCommand.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/GenerateAuthenticationKeysCommand.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Command/GenerateFullCommand.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Command/GeneratePartialCommand.php</exclude-pattern>
+    </rule>
+
+    <!-- Traversable type hints that lack specification due to complexity -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification">
+        <!-- Hydrators -->
+        <exclude-pattern>module/Database/src/Hydrator/Abolish.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/AbstractDecision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Budget.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Destroy.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Other.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Board/Discharge.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Board/Install.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Board/Release.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Key/Grant.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Key/Withdraw.php</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification">
+        <exclude-pattern>module/Application/src/Module.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Module.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Module.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Abolish.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Address.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Budget.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/CreateMeeting.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/DeleteAddress.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/DeleteDecision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/DeleteList.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Destroy.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Export.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Foundation.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/InstallationFunction.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/MailingList.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Member.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/MemberEdit.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/MemberExpiration.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/MemberLists.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/MemberType.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Other.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Query.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/QueryExport.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/QuerySave.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Board/Discharge.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Board/Install.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Board/Release.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Fieldset/Address.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Fieldset/Decision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Fieldset/Granting.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Fieldset/Installation.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Fieldset/Member.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Fieldset/MemberFunction.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Fieldset/SubDecision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Key/Grant.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Key/Withdraw.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Module.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Module.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Form/Login.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Form/UserCreate.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Form/UserEdit.php</exclude-pattern>
+    </rule>
+
+    <!-- Overrides that provide stricter typing -->
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod.Found">
+        <exclude-pattern>module/Checker/src/Model/Error/MemberExpiredButStillInOrgan.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/MemberActiveAndInactiveInOrgan.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/MemberActiveWithRoleAndInactiveInOrgan.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/MemberInNonExistingOrgan.php</exclude-pattern>
+    </rule>
+</ruleset>

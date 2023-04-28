@@ -8,10 +8,8 @@ use Application\Model\Enums\MeetingTypes;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\{
-    Digits,
-    InArray,
-};
+use Laminas\Validator\Digits;
+use Laminas\Validator\InArray;
 
 class SubDecision extends Fieldset implements InputFilterProviderInterface
 {
@@ -65,25 +63,33 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
             'meeting_number' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
             'decision_point' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
             'decision_number' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
             'number' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
         ];

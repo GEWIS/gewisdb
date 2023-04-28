@@ -181,6 +181,7 @@
       <path value="$PROJECT_DIR$/vendor/stella-maris/clock" />
       <path value="$PROJECT_DIR$/vendor/slevomat/coding-standard" />
       <path value="$PROJECT_DIR$/vendor/dealerdirect/phpcodesniffer-composer-installer" />
+      <path value="$PROJECT_DIR$/vendor/gewis/gewisphp-coding-standards" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

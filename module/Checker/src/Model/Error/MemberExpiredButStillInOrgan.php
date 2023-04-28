@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace Checker\Model\Error;
 
 use Checker\Model\Error;
-use Database\Model\{
-    Meeting as MeetingModel,
-    Member as MemberModel,
-};
-use Database\Model\SubDecision\{
-    Foundation as FoundationModel,
-    Installation as InstallationModel,
-};
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
+
+use function sprintf;
 
 /**
  * Error for when a member is installed in an organ while their GEWIS membership has expired.

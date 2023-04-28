@@ -4,35 +4,30 @@ declare(strict_types=1);
 
 namespace Report\Listener;
 
-use Database\Model\{
-    Address as DatabaseAddressModel,
-    Decision as DatabaseDecisionModel,
-    MailingList as DatabaseMailingListModel,
-    Meeting as DatabaseMeetingModel,
-    Member as DatabaseMemberModel,
-    SubDecision as DatabaseSubDecisionModel,
-};
+use Database\Model\Address as DatabaseAddressModel;
+use Database\Model\Decision as DatabaseDecisionModel;
+use Database\Model\MailingList as DatabaseMailingListModel;
+use Database\Model\Meeting as DatabaseMeetingModel;
+use Database\Model\Member as DatabaseMemberModel;
+use Database\Model\SubDecision as DatabaseSubDecisionModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Report\Service\{
-    Board as BoardService,
-    Keyholder as KeyholderService,
-    Meeting as MeetingService,
-    Member as MemberService,
-    Misc as MiscService,
-    Organ as OrganService,
-};
-use Report\Model\SubDecision\{
-    Abrogation as ReportAbrogationModel,
-    Board\Discharge as ReportBoardDischargeModel,
-    Board\Installation as ReportBoardInstallationModel,
-    Board\Release as ReportBoardReleaseModel,
-    Discharge as ReportDischargeModel,
-    Foundation as ReportFoundationModel,
-    Installation as ReportInstallationModel,
-    Key\Granting as ReportKeyGrantingModel,
-    Key\Withdrawal as ReportKeyWithdrawalModel,
-};
+use Report\Model\SubDecision as SubDecisionModel;
+use Report\Model\SubDecision\Abrogation as ReportAbrogationModel;
+use Report\Model\SubDecision\Board\Discharge as ReportBoardDischargeModel;
+use Report\Model\SubDecision\Board\Installation as ReportBoardInstallationModel;
+use Report\Model\SubDecision\Board\Release as ReportBoardReleaseModel;
+use Report\Model\SubDecision\Discharge as ReportDischargeModel;
+use Report\Model\SubDecision\Foundation as ReportFoundationModel;
+use Report\Model\SubDecision\Installation as ReportInstallationModel;
+use Report\Model\SubDecision\Key\Granting as ReportKeyGrantingModel;
+use Report\Model\SubDecision\Key\Withdrawal as ReportKeyWithdrawalModel;
+use Report\Service\Board as BoardService;
+use Report\Service\Keyholder as KeyholderService;
+use Report\Service\Meeting as MeetingService;
+use Report\Service\Member as MemberService;
+use Report\Service\Misc as MiscService;
+use Report\Service\Organ as OrganService;
 
 /**
  * Doctrine event listener intended to automatically update reportdb.
@@ -107,12 +102,12 @@ class DatabaseUpdateListener
 
         $em = $this->emReport;
 
-        self::safeFlush(function () use ($em) {
+        self::safeFlush(static function () use ($em): void {
             $em->flush();
         });
     }
 
-    public function processOrganUpdates($entity): void
+    public function processOrganUpdates(SubDecisionModel $entity): void
     {
         switch (true) {
             case $entity instanceof ReportFoundationModel:
@@ -133,7 +128,7 @@ class DatabaseUpdateListener
         }
     }
 
-    public function processKeyholderUpdates($entity): void
+    public function processKeyholderUpdates(SubDecisionModel $entity): void
     {
         switch (true) {
             case $entity instanceof ReportKeyGrantingModel:
@@ -146,7 +141,7 @@ class DatabaseUpdateListener
         }
     }
 
-    public function processBoardMemberUpdates($entity): void
+    public function processBoardMemberUpdates(SubDecisionModel $entity): void
     {
         switch (true) {
             case $entity instanceof ReportBoardInstallationModel:

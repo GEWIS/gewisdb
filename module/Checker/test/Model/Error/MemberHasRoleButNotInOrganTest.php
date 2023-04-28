@@ -7,10 +7,8 @@ namespace CheckerTest\Model\Error;
 use Checker\Model\Error\MemberHasRoleButNotInOrgan;
 use CheckerTest\Model\Error;
 use Database\Model\Member as MemberModel;
-use Database\Model\SubDecision\{
-    Foundation as FoundationModel,
-    Installation as InstallationModel,
-};
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
 
 class MemberHasRoleButNotInOrganTest extends Error
 {

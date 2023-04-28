@@ -29,8 +29,6 @@ class Meeting extends Fieldset
 
     /**
      * Set meeting data.
-     *
-     * @param MeetingModel $meeting
      */
     public function setMeetingData(MeetingModel $meeting): void
     {

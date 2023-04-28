@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Controller;
 
-use Database\Service\{
-    InstallationFunction as InstallationFunctionService,
-    MailingList as MailingListService,
-};
+use Database\Service\InstallationFunction as InstallationFunctionService;
+use Database\Service\MailingList as MailingListService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -71,12 +69,10 @@ class SettingsController extends AbstractActionController
                     'success' => true,
                     'name' => $name,
                 ]);
-            } else {
-                // redirect back
-                return $this->redirect()->toRoute('settings/default', [
-                    'action' => 'list',
-                ]);
             }
+
+            // redirect back
+            return $this->redirect()->toRoute('settings/default', ['action' => 'list']);
         }
 
         return new ViewModel([

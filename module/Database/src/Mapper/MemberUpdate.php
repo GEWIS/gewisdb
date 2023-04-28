@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Database\Model\MemberUpdate as MemberUpdateModel;
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 class MemberUpdate
 {
@@ -16,6 +14,9 @@ class MemberUpdate
     {
     }
 
+    /**
+     * @return MemberUpdateModel[]
+     */
     public function getPendingUpdates(): array
     {
         return $this->getRepository()->findAll();

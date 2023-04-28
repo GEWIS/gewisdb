@@ -18,7 +18,7 @@ class MemberInNonExistingOrganTest extends Error
         $installation->setFoundation($this->getFoundation());
         $installation->setMember($this->getMember());
         $installation->setNumber(1);
-        $installation->setFunction("Tester");
+        $installation->setFunction('Tester');
 
         $meeting = $this->getMeeting();
 

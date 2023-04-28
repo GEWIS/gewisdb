@@ -21,7 +21,7 @@ class MailingList
     /**
      * Get all lists.
      *
-     * @return array of ListModel's
+     * @return MailingListModel[]
      */
     public function getAllLists(): array
     {
@@ -38,6 +38,8 @@ class MailingList
 
     /**
      * Add a list.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function addList(array $data): bool
     {
@@ -59,6 +61,8 @@ class MailingList
 
     /**
      * Delete a list.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function delete(
         string $name,

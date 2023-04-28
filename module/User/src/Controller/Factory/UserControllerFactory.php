@@ -12,16 +12,12 @@ use User\Service\UserService;
 class UserControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return UserController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): UserController {
         return new UserController(
             $container->get(UserService::class),

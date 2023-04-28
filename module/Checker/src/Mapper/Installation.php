@@ -25,7 +25,7 @@ class Installation
     /**
      * Returns an array of all installations that are discharged again before or during $meeting
      *
-     * @return array<array-key, DischargeModel>
+     * @return DischargeModel[]
      */
     public function getAllInstallationsDischarged(MeetingModel $meeting): array
     {
@@ -33,29 +33,35 @@ class Installation
 
         $qb->select('d')
             ->where('m.date <= :meeting_date')
-            ->from('Database\Model\SubDecision\Discharge', 'd')
+            ->from(DischargeModel::class, 'd')
             ->innerJoin('d.decision', 'dec')
             ->innerJoin('dec.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        return $this->filterDeleted($qb->getQuery()->getResult());
+        /** @var DischargeModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($result);
     }
 
     /**
      * Returns an array of all installations that have been done before or during `$meeting`.
      *
-     * @return array<array-key, InstallationModel>
+     * @return InstallationModel[]
      */
     public function getAllInstallationsInstalled(MeetingModel $meeting): array
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('i')
             ->where('m.date <= :meeting_date')
-            ->from('Database\Model\SubDecision\Installation', 'i')
+            ->from(InstallationModel::class, 'i')
             ->innerJoin('i.decision', 'd')
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        return $this->filterDeleted($qb->getQuery()->getResult());
+        /** @var InstallationModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($result);
     }
 }

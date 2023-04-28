@@ -7,45 +7,29 @@ namespace User;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
-use Laminas\Router\Http\{
-    Literal,
-    Segment,
-};
+use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Adapter\Factory\ApiPrincipalAdapterFactory;
-use User\Controller\{
-    UserController,
-    SettingsController,
-};
-use User\Controller\Factory\{
-    SettingsControllerFactory,
-    UserControllerFactory,
-};
+use User\Controller\Factory\SettingsControllerFactory;
+use User\Controller\Factory\UserControllerFactory;
+use User\Controller\SettingsController;
+use User\Controller\UserController;
 use User\Factory\PasswordFactory;
+use User\Form\Login;
+use User\Form\UserCreate;
+use User\Form\UserEdit;
 use User\Listener\AuthenticationListener;
-use User\Mapper\{
-    ApiPrincipalMapper,
-    UserMapper,
-};
-use User\Mapper\Factory\{
-    ApiPrincipalMapperFactory,
-    UserMapperFactory,
-};
+use User\Mapper\ApiPrincipalMapper;
+use User\Mapper\Factory\ApiPrincipalMapperFactory;
+use User\Mapper\Factory\UserMapperFactory;
+use User\Mapper\UserMapper;
 use User\Model\User;
-use User\Form\{
-    Login,
-    UserCreate,
-    UserEdit,
-};
-use User\Service\{
-    ApiAuthenticationService,
-    UserService,
-};
-use User\Service\Factory\{
-    ApiAuthenticationServiceFactory,
-    AuthenticationServiceFactory,
-    UserServiceFactory,
-};
+use User\Service\ApiAuthenticationService;
+use User\Service\Factory\ApiAuthenticationServiceFactory;
+use User\Service\Factory\AuthenticationServiceFactory;
+use User\Service\Factory\UserServiceFactory;
+use User\Service\UserService;
 
 return [
     'router' => [

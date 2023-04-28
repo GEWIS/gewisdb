@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace User\Listener;
 
-use InvalidArgumentException;
-use Laminas\Http\Response;
 use Laminas\Mvc\MvcEvent;
 use Laminas\View\Model\JsonModel;
-use User\Model\Enums\ApiPermissions;
 use User\Model\Exception\NotAllowed as NotAllowedException;
 use User\Service\ApiAuthenticationService;
-use RuntimeException;
 
 final class AuthorizationListener
 {
@@ -20,21 +16,23 @@ final class AuthorizationListener
     ) {
     }
 
-    public function __invoke(MvcEvent $e)
+    public function __invoke(MvcEvent $e): void
     {
         if (
-            null !== $e->getParam('exception')
-            && $e->getParam('exception') instanceof NotAllowedException
+            null === $e->getParam('exception')
+            || !($e->getParam('exception') instanceof NotAllowedException)
         ) {
-            $e->stopPropagation(true);
-            $e->setViewModel(new JsonModel([
-                "status" => "error",
-                "error" => [
-                    "type" => NotAllowedException::class,
-                    "message" => $e->getParam('exception')->getMessage(),
-                ],
-            ]));
-            $e->getResponse()->setStatusCode(403);
+            return;
         }
+
+        $e->stopPropagation(true);
+        $e->setViewModel(new JsonModel([
+            'status' => 'error',
+            'error' => [
+                'type' => NotAllowedException::class,
+                'message' => $e->getParam('exception')->getMessage(),
+            ],
+        ]));
+        $e->getResponse()->setStatusCode(403);
     }
 }

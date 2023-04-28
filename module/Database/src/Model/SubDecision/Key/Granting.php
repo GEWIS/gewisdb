@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision\Key;
 
-use Database\Model\{
-    Member,
-    SubDecision,
-};
+use Database\Model\Member;
+use Database\Model\SubDecision;
 use DateTime;
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    OneToOne,
-};
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToOne;
 use IntlDateFormatter;
 
 use function date_default_timezone_get;
@@ -29,8 +25,8 @@ class Granting extends SubDecision
      */
     #[ManyToOne(targetEntity: Member::class)]
     #[JoinColumn(
-        name: "lidnr",
-        referencedColumnName: "lidnr",
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
         nullable: true,
     )]
     protected ?Member $grantee = null;
@@ -38,7 +34,7 @@ class Granting extends SubDecision
     /**
      * Till when the keycode is granted.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $until;
 
     /**
@@ -46,14 +42,12 @@ class Granting extends SubDecision
      */
     #[OneToOne(
         targetEntity: Withdrawal::class,
-        mappedBy: "granting",
+        mappedBy: 'granting',
     )]
     protected ?Withdrawal $withdrawal = null;
 
     /**
      * Get the grantee.
-     *
-     * @return Member|null
      */
     public function getGrantee(): ?Member
     {
@@ -62,8 +56,6 @@ class Granting extends SubDecision
 
     /**
      * Set the grantee.
-     *
-     * @param Member $grantee
      */
     public function setGrantee(Member $grantee): void
     {
@@ -72,8 +64,6 @@ class Granting extends SubDecision
 
     /**
      * Get the date.
-     *
-     * @return DateTime
      */
     public function getUntil(): DateTime
     {
@@ -82,8 +72,6 @@ class Granting extends SubDecision
 
     /**
      * Set the date.
-     *
-     * @param DateTime $until
      */
     public function setUntil(DateTime $until): void
     {
@@ -92,8 +80,6 @@ class Granting extends SubDecision
 
     /**
      * Get the content.
-     *
-     * @return string
      */
     public function getContent(): string
     {
@@ -109,8 +95,6 @@ class Granting extends SubDecision
      * Format the date.
      *
      * returns the localized version of $date->format('d F Y')
-     *
-     * @param DateTime $date
      *
      * @return string Formatted date
      */
@@ -130,8 +114,6 @@ class Granting extends SubDecision
 
     /**
      * Decision template.
-     *
-     * @return string
      */
     protected function getTemplate(): string
     {

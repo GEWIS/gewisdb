@@ -7,6 +7,8 @@ namespace Checker\Model\Error;
 use Checker\Model\Error;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 
+use function sprintf;
+
 /**
  * Error for when a key code is granted with `until` past September 1st of the next association year.
  *

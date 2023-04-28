@@ -11,10 +11,13 @@ use Psr\Container\ContainerInterface;
 
 class GenerateAuthenticationKeysCommandFactory implements FactoryInterface
 {
+    /**
+     * @param string $requestedName
+     */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): GenerateAuthenticationKeysCommand {
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);

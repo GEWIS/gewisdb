@@ -6,27 +6,21 @@ namespace Database\Service\Factory;
 
 use Application\Service\FileStorage as FileStorageService;
 use Checker\Service\Checker as CheckerService;
-use Database\Form\{
-    Address as AddressForm,
-    DeleteAddress as DeleteAddressForm,
-    Member as MemberForm,
-    MemberApprove as MemberApproveForm,
-    MemberEdit as MemberEditForm,
-    MemberExpiration as MemberExpirationForm,
-    MemberType as MemberTypeForm,
-};
-use Laminas\Mvc\I18n\Translator as MvcTranslator;
-use Database\Mapper\{
-    MailingList as MailingListMapper,
-    Member as MemberMapper,
-    MemberUpdate as MemberUpdateMapper,
-    ProspectiveMember as ProspectiveMemberMapper,
-};
-use Database\Service\{
-    MailingList as MailingListService,
-    Member as MemberService,
-};
+use Database\Form\Address as AddressForm;
+use Database\Form\DeleteAddress as DeleteAddressForm;
+use Database\Form\Member as MemberForm;
+use Database\Form\MemberApprove as MemberApproveForm;
+use Database\Form\MemberEdit as MemberEditForm;
+use Database\Form\MemberExpiration as MemberExpirationForm;
+use Database\Form\MemberType as MemberTypeForm;
+use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\Member as MemberMapper;
+use Database\Mapper\MemberUpdate as MemberUpdateMapper;
+use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
+use Database\Service\MailingList as MailingListService;
+use Database\Service\Member as MemberService;
 use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\Renderer\PhpRenderer;
 use Psr\Container\ContainerInterface;
@@ -34,16 +28,12 @@ use Psr\Container\ContainerInterface;
 class MemberFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return MemberService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): MemberService {
         /** @var MvcTranslator $translator */
         $translator = $container->get(MvcTranslator::class);

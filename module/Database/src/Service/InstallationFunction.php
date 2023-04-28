@@ -19,7 +19,7 @@ class InstallationFunction
     /**
      * Get all functions.
      *
-     * @return array of InstallationFunction's
+     * @return InstallationFunctionModel[]
      */
     public function getAllFunctions(): array
     {
@@ -28,6 +28,8 @@ class InstallationFunction
 
     /**
      * Add a function.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function addFunction(array $data): bool
     {

@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Database\Controller;
 
 use Application\Model\Enums\MeetingTypes;
+use Database\Form\AbstractDecision as AbstractDecisionForm;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
 use Database\Model\Meeting as MeetingModel;
 use Database\Service\Meeting as MeetingService;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\View\Model\{
-    ViewModel,
-    JsonModel,
-};
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
+
+use function array_map;
 
 class MeetingController extends AbstractActionController
 {
@@ -122,6 +123,8 @@ class MeetingController extends AbstractActionController
 
     /**
      * Get all forms for a decision action.
+     *
+     * @return array<string, AbstractDecisionForm>
      */
     protected function getDecisionForms(
         MeetingModel $meeting,
@@ -148,7 +151,6 @@ class MeetingController extends AbstractActionController
 
         return $forms;
     }
-
 
     /**
      * Decision form action.
@@ -231,6 +233,7 @@ class MeetingController extends AbstractActionController
                     'exception' => $e,
                 ]);
             }
+
             // Not deleted
             // TODO: redirect back to meeting
         }
@@ -254,12 +257,10 @@ class MeetingController extends AbstractActionController
         $query = $this->params()->fromQuery('q');
         $res = $this->meetingService->decisionSearch($query);
 
-        $res = array_map(function ($decision) {
+        $res = array_map(static function ($decision) {
             return $decision->toArray();
         }, $res);
 
-        return new JsonModel([
-            'json' => $res,
-        ]);
+        return new JsonModel(['json' => $res]);
     }
 }

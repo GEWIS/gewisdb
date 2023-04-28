@@ -6,22 +6,18 @@ namespace User\Controller\Factory;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
-use User\Service\UserService;
 use User\Controller\SettingsController;
+use User\Service\UserService;
 
 class SettingsControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return SettingsController
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): SettingsController {
         return new SettingsController(
             $container->get(UserService::class),

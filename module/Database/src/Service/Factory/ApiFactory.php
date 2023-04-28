@@ -12,16 +12,12 @@ use Report\Mapper\Member as ReportMemberMapper;
 class ApiFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return ApiService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): ApiService {
         /** @var ReportMemberMapper $reportMemberMapper */
         $reportMemberMapper = $container->get(ReportMemberMapper::class);

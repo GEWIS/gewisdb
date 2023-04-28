@@ -32,3 +32,4 @@ psalm/psalm-baseline-pr.xml
 .postgres
 config/bash.env
 .vscode
+phpcs.xml

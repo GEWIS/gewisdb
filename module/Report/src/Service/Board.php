@@ -8,11 +8,9 @@ use Doctrine\ORM\EntityManager;
 use LogicException;
 use ReflectionProperty;
 use Report\Model\BoardMember as BoardMemberModel;
-use Report\Model\SubDecision\Board\{
-    Discharge as ReportBoardDischargeModel,
-    Installation as ReportBoardInstallationModel,
-    Release as ReportBoardReleaseModel,
-};
+use Report\Model\SubDecision\Board\Discharge as ReportBoardDischargeModel;
+use Report\Model\SubDecision\Board\Installation as ReportBoardInstallationModel;
+use Report\Model\SubDecision\Board\Release as ReportBoardReleaseModel;
 
 class Board
 {

@@ -11,16 +11,12 @@ use Psr\Container\ContainerInterface;
 class SavedQueryFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return SavedQueryMapper
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): SavedQueryMapper {
         return new SavedQueryMapper($container->get('database_doctrine_em'));
     }

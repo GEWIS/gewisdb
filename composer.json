@@ -74,7 +74,7 @@
         "psalm/plugin-phpunit": "^0.18.0",
         "maglnet/composer-require-checker": "^4.3.0",
         "icanhazstring/composer-unused": "^0.8.2",
-        "slevomat/coding-standard": "^8.11"
+        "gewis/gewisphp-coding-standards": "^1.0"
     },
     "config": {
         "preferred-install": {
@@ -101,6 +101,12 @@
             }
         }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/GEWIS/gewisphp-coding-standards.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src",

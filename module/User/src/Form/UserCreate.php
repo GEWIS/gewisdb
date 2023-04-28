@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace User\Form;
 
-use Laminas\Form\Element\{
-    Password,
-    Submit,
-    Text,
-};
+use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
-use Laminas\Validator\{
-    Identical,
-    Regex,
-    StringLength,
-};
+use Laminas\Validator\Identical;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class UserCreate extends Form implements InputFilterProviderInterface
 {

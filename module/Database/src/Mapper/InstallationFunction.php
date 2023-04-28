@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Database\Model\InstallationFunction as InstallationFunctionModel;
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Installation Function mapper

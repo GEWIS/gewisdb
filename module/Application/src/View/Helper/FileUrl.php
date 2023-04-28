@@ -8,6 +8,9 @@ use Laminas\View\Helper\AbstractHelper;
 
 class FileUrl extends AbstractHelper
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(protected readonly array $config)
     {
     }

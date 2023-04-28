@@ -5,29 +5,29 @@ declare(strict_types=1);
 namespace Database\Hydrator;
 
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\{
-    Budget as BudgetModel,
-    Reckoning as ReckoningModel,
-};
+use Database\Model\SubDecision\Budget as BudgetModel;
+use Database\Model\SubDecision\Reckoning as ReckoningModel;
 use DateTime;
+use InvalidArgumentException;
+
+use function boolval;
 
 class Budget extends AbstractDecision
 {
     /**
      * Budget hydration
      *
-     * @param array $data
      * @param DecisionModel $object
      *
-     * @return DecisionModel
-     *
-     * @throws \InvalidArgumentException when $object is not a SubDecision
+     * @throws InvalidArgumentException when $object is not a SubDecision.
      */
-    public function hydrate(array $data, $object): DecisionModel
-    {
+    public function hydrate(
+        array $data,
+        $object,
+    ): DecisionModel {
         $object = parent::hydrate($data, $object);
 
-        if ($data['type'] == 'budget') {
+        if ('budget' === $data['type']) {
             $subdecision = new BudgetModel();
         } else {
             $subdecision = new ReckoningModel();

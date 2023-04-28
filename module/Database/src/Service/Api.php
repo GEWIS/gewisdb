@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Service;
 
-use Report\Mapper\{
-    Member as ReportMemberMapper,
-};
+use Report\Mapper\Member as ReportMemberMapper;
+
+use function array_map;
 
 class Api
 {
@@ -16,11 +16,13 @@ class Api
 
     /**
      * Get active members.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function getActiveMembers(): array
     {
         return array_map(
-            function ($member) {
+            static function ($member) {
                 return $member->toArrayApi(true);
             },
             $this->getReportMemberMapper()->findActive(),
@@ -29,11 +31,13 @@ class Api
 
     /**
      * Get normal members.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function getMembers(): array
     {
         return array_map(
-            function ($member) {
+            static function ($member) {
                 return $member->toArrayApi();
             },
             $this->getReportMemberMapper()->findNormal(),
@@ -42,6 +46,8 @@ class Api
 
     /**
      * Get normal members.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function getMember(int $id): ?array
     {

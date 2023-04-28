@@ -5,42 +5,36 @@ declare(strict_types=1);
 namespace Database\Service;
 
 use Application\Model\Enums\MeetingTypes;
-use Database\Form\{
-    Abolish as AbolishForm,
-    Budget as BudgetForm,
-    CreateMeeting as CreateMeetingForm,
-    DeleteDecision as DeleteDecisionForm,
-    Destroy as DestroyForm,
-    Export as ExportForm,
-    Foundation as FoundationForm,
-    Install as InstallForm,
-    Other as OtherForm,
-};
-use Database\Form\Board\{
-    Discharge as BoardDischargeForm,
-    Install as BoardInstallForm,
-    Release as BoardReleaseForm,
-};
-use Database\Form\Key\{
-    Grant as KeyGrantForm,
-    Withdraw as KeyWithdrawForm,
-};
-use Database\Hydrator\{
-    Foundation as FoundationHydrator,
-    Install as InstallHydrator,
-};
-use Database\Mapper\{
-    Meeting as MeetingMapper,
-    Member as MemberMapper,
-    Organ as OrganMapper,
-};
-use Database\Model\{
-    Decision as DecisionModel,
-    Meeting as MeetingModel,
-};
+use Database\Form\Abolish as AbolishForm;
+use Database\Form\Board\Discharge as BoardDischargeForm;
+use Database\Form\Board\Install as BoardInstallForm;
+use Database\Form\Board\Release as BoardReleaseForm;
+use Database\Form\Budget as BudgetForm;
+use Database\Form\CreateMeeting as CreateMeetingForm;
+use Database\Form\DeleteDecision as DeleteDecisionForm;
+use Database\Form\Destroy as DestroyForm;
+use Database\Form\Export as ExportForm;
+use Database\Form\Foundation as FoundationForm;
+use Database\Form\Install as InstallForm;
+use Database\Form\Key\Grant as KeyGrantForm;
+use Database\Form\Key\Withdraw as KeyWithdrawForm;
+use Database\Form\Other as OtherForm;
+use Database\Hydrator\Foundation as FoundationHydrator;
+use Database\Hydrator\Install as InstallHydrator;
+use Database\Mapper\Meeting as MeetingMapper;
+use Database\Mapper\Member as MemberMapper;
+use Database\Mapper\Organ as OrganMapper;
+use Database\Model\Decision as DecisionModel;
+use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 use Laminas\Stdlib\PriorityQueue;
 use ReflectionObject;
+
+use function array_walk;
+use function explode;
+use function intval;
 
 class Meeting
 {
@@ -78,7 +72,9 @@ class Meeting
     /**
      * Get all meetings.
      *
-     * @todo pagination
+     * TODO: pagination
+     *
+     * @return array<array-key, array{0: MeetingModel, 1: int}>
      */
     public function getAllMeetings(): array
     {
@@ -87,6 +83,10 @@ class Meeting
 
     /**
      * Find decisions by meetings.
+     *
+     * @param array<array-key, array{type: string, number: int}> $meetings
+     *
+     * @return DecisionModel[]
      */
     public function getDecisionsByMeetings(array $meetings): array
     {
@@ -109,6 +109,8 @@ class Meeting
 
     /**
      * Get the current board installations.
+     *
+     * @return BoardInstallationModel[]
      */
     public function getCurrentBoard(): array
     {
@@ -117,12 +119,17 @@ class Meeting
 
     /**
      * Get the current board installations, but without board members who have already been released.
+     *
+     * @return BoardInstallationModel[]
      */
     public function getCurrentBoardNotYetReleased(): array
     {
         return $this->getMeetingMapper()->findCurrentBoardNotYetReleased();
     }
 
+    /**
+     * @return KeyGrantingModel[]
+     */
     public function getCurrentKeys(): array
     {
         return $this->getMeetingMapper()->findCurrentKeys();
@@ -130,6 +137,10 @@ class Meeting
 
     /**
      * Export decisions.
+     *
+     * @return DecisionModel[]|null
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function export(array $data): ?array
     {
@@ -148,7 +159,7 @@ class Meeting
             $meeting = explode('-', $meeting);
             $meetings[] = [
                 'type' => $meeting[0],
-                'number' => $meeting[1],
+                'number' => intval($meeting[1]),
             ];
         }
 
@@ -158,6 +169,16 @@ class Meeting
 
     /**
      * Destroy decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: DestroyForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function destroyDecision(array $data): array
     {
@@ -187,6 +208,8 @@ class Meeting
 
     /**
      * Delete a decision.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function deleteDecision(
         array $data,
@@ -212,6 +235,16 @@ class Meeting
 
     /**
      * Other decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: OtherForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function otherDecision(array $data): array
     {
@@ -241,6 +274,16 @@ class Meeting
 
     /**
      * Abolish decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: AbolishForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function abolishDecision(array $data): array
     {
@@ -270,6 +313,16 @@ class Meeting
 
     /**
      * Board install decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: BoardInstallForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function boardInstallDecision(array $data): array
     {
@@ -299,6 +352,17 @@ class Meeting
 
     /**
      * Board discharge decision.
+     *
+     * @return array{
+     *     type: string,
+     *     installs: BoardInstallationModel[],
+     *     form: BoardDischargeForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function boardDischargeDecision(array $data): array
     {
@@ -329,6 +393,17 @@ class Meeting
 
     /**
      * Board release decision.
+     *
+     * @return array{
+     *     type: string,
+     *     installs_filtered: BoardInstallationModel[],
+     *     form: BoardReleaseForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function boardReleaseDecision(array $data): array
     {
@@ -359,6 +434,16 @@ class Meeting
 
     /**
      * Key code granting decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: KeyGrantForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function keyGrantDecision(array $data): array
     {
@@ -388,6 +473,17 @@ class Meeting
 
     /**
      * Key code withdrawal decision.
+     *
+     * @return array{
+     *     type: string,
+     *     grants: KeyGrantingModel[],
+     *     form: KeyWithdrawForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function keyWithdrawDecision(array $data): array
     {
@@ -418,6 +514,16 @@ class Meeting
 
     /**
      * Install decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: InstallForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function installDecision(array $data): array
     {
@@ -468,21 +574,23 @@ class Meeting
         $decision['subdecision'] = $subdecision;
 
         $installations = [];
-        array_walk($decision['installations'], function ($value) use (&$installations) {
+        array_walk($decision['installations'], function ($value) use (&$installations): void {
             $member = $this->memberMapper->findSimple((int) $value['member']['lidnr']);
 
-            if (null !== $member) {
-                $installations[] = [
-                    'member' => $member,
-                    'function' => $value['function'],
-                ];
+            if (null === $member) {
+                return;
             }
+
+            $installations[] = [
+                'member' => $member,
+                'function' => $value['function'],
+            ];
         });
 
         $decision['installations'] = $installations;
 
         $discharges = [];
-        array_walk($decision['discharges'], function ($value) use (&$discharges) {
+        array_walk($decision['discharges'], function ($value) use (&$discharges): void {
             $decision = $this->getOrganMapper()->findInstallationDecision(
                 MeetingTypes::from($value['meeting_type']),
                 (int) $value['meeting_number'],
@@ -491,9 +599,11 @@ class Meeting
                 (int) $value['number'],
             );
 
-            if (null !== $decision) {
-                $discharges[] = $decision;
+            if (null === $decision) {
+                return;
             }
+
+            $discharges[] = $decision;
         });
 
         $decision['discharges'] = $discharges;
@@ -511,6 +621,16 @@ class Meeting
 
     /**
      * Foundation decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: FoundationForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function foundationDecision(array $data): array
     {
@@ -550,15 +670,17 @@ class Meeting
         $decision['meeting'] = $meeting;
 
         $members = [];
-        array_walk($decision['members'], function ($value) use (&$members) {
+        array_walk($decision['members'], function ($value) use (&$members): void {
             $member = $this->memberMapper->findSimple((int) $value['member']['lidnr']);
 
-            if (null !== $member) {
-                $members[] = [
-                    'member' => $member,
-                    'function' => $value['function'],
-                ];
+            if (null === $member) {
+                return;
             }
+
+            $members[] = [
+                'member' => $member,
+                'function' => $value['function'],
+            ];
         });
 
         $decision['members'] = $members;
@@ -575,6 +697,16 @@ class Meeting
 
     /**
      * Budget decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: BudgetForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function budgetDecision(array $data): array
     {
@@ -605,16 +737,6 @@ class Meeting
         /** @var DecisionModel $decision */
         $decision = $form->getData();
 
-        foreach ($decision->getSubdecisions() as $sub) {
-            // use hack to make sure approval and changes are booleans
-            if ($sub->getApproval() === 'false') {
-                $sub->setApproval(false);
-            }
-            if ($sub->getChanges() === 'false') {
-                $sub->setChanges(false);
-            }
-        }
-
         // simply persist through the meeting mapper
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
@@ -626,6 +748,8 @@ class Meeting
 
     /**
      * Create a meeting.
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function createMeeting(array $data): ?MeetingModel
     {
@@ -644,10 +768,9 @@ class Meeting
         if ($mapper->isManaged($meeting)) {
             // meeting is already in the database
             $form->setMessages([
-                'number' => [
-                    'Deze vergadering bestaat al',
-                ],
+                'number' => ['Deze vergadering bestaat al'],
             ]);
+
             return null;
         }
 
@@ -658,6 +781,8 @@ class Meeting
 
     /**
      * Search for organs by name.
+     *
+     * @return FoundationModel[]
      */
     public function organSearch(string $query): array
     {
@@ -666,6 +791,8 @@ class Meeting
 
     /**
      * Search for decisions by name.
+     *
+     * @return DecisionModel[]
      */
     public function decisionSearch(string $query): array
     {

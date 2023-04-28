@@ -4,24 +4,18 @@ declare(strict_types=1);
 
 namespace Database\Form\Fieldset;
 
-use Application\Model\Enums\{
-    AddressTypes,
-    PostalRegions,
-};
-use Laminas\Form\Element\{
-    Hidden,
-    Select,
-    Text,
-};
+use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\PostalRegions;
 use Laminas\Filter\StringTrim;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Text;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
-use Laminas\Validator\{
-    InArray,
-    Regex,
-    StringLength,
-};
+use Laminas\Validator\InArray;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class Address extends Fieldset implements InputFilterProviderInterface
 {
@@ -142,9 +136,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => Regex::class,
-                        'options' => [
-                            'pattern' => '/^[0-9]+[a-z-A-Z\ \d\#\-\.\/]*$/',
-                        ],
+                        'options' => ['pattern' => '/^[0-9]+[a-z-A-Z\ \d\#\-\.\/]*$/'],
                     ],
                 ],
             ],

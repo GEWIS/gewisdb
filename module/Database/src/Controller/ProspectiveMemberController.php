@@ -7,10 +7,10 @@ namespace Database\Controller;
 use Database\Service\Member as MemberService;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\View\Model\{
-    ViewModel,
-    JsonModel,
-};
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
+
+use function array_map;
 
 class ProspectiveMemberController extends AbstractActionController
 {
@@ -36,13 +36,11 @@ class ProspectiveMemberController extends AbstractActionController
         $query = $this->params()->fromQuery('q');
         $res = $this->memberService->searchProspective($query);
 
-        $res = array_map(function ($member) {
+        $res = array_map(static function ($member) {
             return $member->toArray();
         }, $res);
 
-        return new JsonModel([
-            'json' => $res,
-        ]);
+        return new JsonModel(['json' => $res]);
     }
 
     /**
@@ -80,9 +78,7 @@ class ProspectiveMemberController extends AbstractActionController
             }
         }
 
-        return $this->redirect()->toRoute('prospective-member/show', [
-            'id' => $lidnr,
-        ]);
+        return $this->redirect()->toRoute('prospective-member/show', ['id' => $lidnr]);
     }
 
     /**
@@ -96,7 +92,7 @@ class ProspectiveMemberController extends AbstractActionController
         $member = $this->memberService->getProspectiveMember($lidnr);
         $member = $member['member'];
 
-        if ($member !== null) {
+        if (null !== $member) {
             $this->memberService->removeProspective($member);
         }
 

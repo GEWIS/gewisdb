@@ -4,18 +4,11 @@ declare(strict_types=1);
 
 namespace Report\Mapper;
 
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
-use Doctrine\ORM\Query\Expr\{
-    Join,
-};
-use Report\Model\{
-    Address as AddressModel,
-    Member as MemberModel,
-    OrganMember as OrganMemberModel,
-};
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
+use Report\Model\Member as MemberModel;
+use Report\Model\OrganMember as OrganMemberModel;
 
 class Member
 {
@@ -30,11 +23,8 @@ class Member
      */
     public function findSimple(int $lidnr): ?MemberModel
     {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('m')
-            ->from(MemberModel::class, 'm')
-            ->where('m.lidnr = :lidnr')
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where('m.lidnr = :lidnr')
             ->orderBy('m.lidnr', 'DESC');
 
         $qb->setParameter(':lidnr', $lidnr);
@@ -49,13 +39,11 @@ class Member
      */
     public function findNormal(): array
     {
-        $qb = $this->em->createQueryBuilder();
+        $qb = $this->getRepository()->createQueryBuilder('m');
 
-        $qb->select('m')
-            ->from(MemberModel::class, 'm')
-            ->where("m.expiration >= CURRENT_TIMESTAMP()")
-            ->andWhere("m.hidden = false")
-            ->andWhere("m.deleted = false")
+        $qb->where('m.expiration >= CURRENT_TIMESTAMP()')
+            ->andWhere('m.hidden = false')
+            ->andWhere('m.deleted = false')
             ->setMaxResults(32)
             ->setFirstResult(0);
 
@@ -69,11 +57,8 @@ class Member
      */
     public function findActive(bool $includeOrganMembership = false): array
     {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('m')
-            ->from(MemberModel::class, 'm')
-            ->leftJoin(OrganMemberModel::class, 'om', Join::WITH, 'm.lidnr = om.member')
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->leftJoin(OrganMemberModel::class, 'om', Join::WITH, 'm.lidnr = om.member')
             ->where('om.dischargeDate IS NULL OR om.dischargeDate > CURRENT_DATE()')
             ->andWhere('om.installDate < CURRENT_DATE()')
             ->andWhere('om.function <> \'\'')

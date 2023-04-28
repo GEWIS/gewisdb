@@ -1,35 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
-    <file src="module/Database/src/Controller/QueryController.php">
-        <InvalidReturnStatement occurrences="1" />
-        <InvalidReturnType occurrences="1">
-            <code>Response|ViewModel</code>
-        </InvalidReturnType>
-    </file>
-    <file src="module/Database/src/Form/Member.php">
-        <TypeDoesNotContainType occurrences="2">
-            <code>DATABASE_REQUIRE_IBAN</code>
-        </TypeDoesNotContainType>
-    </file>
-    <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
-        <NoValue occurrences="1" />
-    </file>
-    <file src="module/Report/src/Service/Meeting.php">
-        <InvalidNullableReturnType occurrences="1">
-            <code>ReportMemberModel</code>
-        </InvalidNullableReturnType>
-    </file>
-    <file src="module/User/src/Controller/UserController.php">
-        <InvalidReturnStatement occurrences="1">
-            <code>$this-&gt;redirect()-&gt;toRoute('home')</code>
-        </InvalidReturnStatement>
-        <InvalidReturnType occurrences="1">
-            <code>Response|ViewModel</code>
-        </InvalidReturnType>
-    </file>
-    <file src="public/index.php">
-        <PossiblyUndefinedArrayOffset occurrences="1">
-            <code>$_SERVER['REQUEST_URI']</code>
-        </PossiblyUndefinedArrayOffset>
-    </file>
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
+  <file src="module/Checker/src/Command/CheckAuthenticationKeysCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/CheckDatabaseCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/CheckDischargesCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/CheckMembershipExpirationCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/CheckMembershipTUeCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/CheckMembershipTypeCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Model/TueData.php">
+    <PossiblyUndefinedArrayOffset occurrences="1">
+      <code>$this-&gt;data['registrations']</code>
+    </PossiblyUndefinedArrayOffset>
+  </file>
+  <file src="module/Database/src/Command/DeleteExpiredMembersCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Database/src/Command/GenerateAuthenticationKeysCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Database/src/Controller/QueryController.php">
+    <InvalidReturnStatement occurrences="1"/>
+    <InvalidReturnType occurrences="1">
+      <code>Response|ViewModel</code>
+    </InvalidReturnType>
+  </file>
+  <file src="module/Database/src/Form/Member.php">
+    <TypeDoesNotContainType occurrences="2">
+      <code>DATABASE_REQUIRE_IBAN</code>
+      <code>DATABASE_REQUIRE_IBAN</code>
+    </TypeDoesNotContainType>
+  </file>
+  <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
+    <NoValue occurrences="1">
+      <code>$subdecision</code>
+    </NoValue>
+  </file>
+  <file src="module/Report/src/Service/Meeting.php">
+    <InvalidNullableReturnType occurrences="1">
+      <code>ReportMemberModel</code>
+    </InvalidNullableReturnType>
+  </file>
+  <file src="module/User/src/Controller/UserController.php">
+    <InvalidReturnStatement occurrences="1">
+      <code>$this-&gt;redirect()-&gt;toRoute('home')</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>Response|ViewModel</code>
+    </InvalidReturnType>
+  </file>
+  <file src="public/index.php">
+    <PossiblyUndefinedArrayOffset occurrences="1">
+      <code>$_SERVER['REQUEST_URI']</code>
+    </PossiblyUndefinedArrayOffset>
+  </file>
 </files>

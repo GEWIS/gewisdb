@@ -7,6 +7,8 @@ namespace Checker\Model\Error;
 use Checker\Model\Error;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 
+use function sprintf;
+
 /**
  * Error for when a key code is granted with a negative duration (i.e., its `until` is in the past).
  *

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision;
 
 use Database\Model\SubDecision;
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-};
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
 
 /**
  * Entity for undefined decisions.
@@ -19,13 +17,11 @@ class Other extends SubDecision
     /**
      * Textual content for the decision.
      */
-    #[Column(type: "text")]
+    #[Column(type: 'text')]
     protected string $content;
 
     /**
      * Get the content.
-     *
-     * @return string
      */
     public function getContent(): string
     {
@@ -34,8 +30,6 @@ class Other extends SubDecision
 
     /**
      * Set the content.
-     *
-     * @param string $content
      */
     public function setContent(string $content): void
     {

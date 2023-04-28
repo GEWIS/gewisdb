@@ -10,7 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckAuthenticationKeysCommand extends AbstractCheckerCommand
 {
+    /** @var string $defaultName */
     protected static $defaultName = 'check:members:keys';
+    /** @var string $defaultDescription */
     protected static $defaultDescription = 'Check and update authentication keys of members when necessary.';
 
     protected function execute(

@@ -8,8 +8,6 @@ use Database\Model\Meeting as MeetingModel;
 use Database\Model\SubDecision as SubDecisionModel;
 
 /**
- * Class Error
- *
  * Denotes an error that was occurred while checking a database
  * i.e. the database is left in a wrong state
  *
@@ -20,8 +18,8 @@ abstract class Error
     /**
      * Create a new description.
      *
-     * @param MeetingModel $meeting Meeting for which the error is detected.
-     * @param T $subDecision Note that this does not necessarily have to be made during `$meeting`.
+     * @param MeetingModel $meeting     Meeting for which the error is detected.
+     * @param T            $subDecision Note that this does not necessarily have to be made during `$meeting`.
      */
     public function __construct(
         protected readonly MeetingModel $meeting,

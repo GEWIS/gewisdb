@@ -11,6 +11,9 @@ use User\Service\UserService;
 
 class SettingsController extends AbstractActionController
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(
         protected readonly UserService $service,
         protected readonly array $config,
@@ -43,9 +46,7 @@ class SettingsController extends AbstractActionController
             }
         }
 
-        return new ViewModel([
-            'form' => $form,
-        ]);
+        return new ViewModel(['form' => $form]);
     }
 
     /**

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Checker\Mapper;
 
 use Database\Model\Meeting as MeetingModel;
-use Database\Model\SubDecision\{
-    Abrogation as AbrogationModel,
-    Foundation as FoundationModel,
-};
+use Database\Model\SubDecision\Abrogation as AbrogationModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -31,7 +29,8 @@ class Organ
      * Returns an array of names of all organs created before or during $meeting
      *
      * @param MeetingModel $meeting Meeting to check for
-     * @return array<array-key, FoundationModel>
+     *
+     * @return FoundationModel[]
      */
     public function getAllOrganFoundations(MeetingModel $meeting): array
     {
@@ -39,41 +38,48 @@ class Organ
 
         $qb->select('f')
             ->where('m.date <= :meeting_date')
-            ->from('Database\Model\SubDecision\Foundation', 'f')
+            ->from(FoundationModel::class, 'f')
             ->innerJoin('f.decision', 'd')
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        return $this->filterDeleted($qb->getQuery()->getResult());
+        /** @var FoundationModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($result);
     }
 
     /**
      * Returns an array of all names of organs discharged before or during $meeting
      *
      * @param MeetingModel $meeting Meeting to check for
-     * @return array<array-key, AbrogationModel>
+     *
+     * @return AbrogationModel[]
      */
     public function getAllOrganAbrogations(MeetingModel $meeting): array
     {
         $qb = $this->em->createQueryBuilder();
 
-
         $qb->select('a')
             ->where('m.date <= :meeting_date')
-            ->from('Database\Model\SubDecision\Abrogation', 'a')
+            ->from(AbrogationModel::class, 'a')
             ->innerjoin('a.foundation', 'f')
             ->innerJoin('a.decision', 'd')
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_date', $meeting->getDate()->format('Y-m-d'));
 
-        return $this->filterDeleted($qb->getQuery()->getResult());
+        /** @var AbrogationModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($result);
     }
 
     /**
      * Returns all the organs created at a meeting
      *
      * @param MeetingModel $meeting The meeting the organ is created at
-     * @return array<array-key, FoundationModel>
+     *
+     * @return FoundationModel[]
      */
     public function getOrgansCreatedAtMeeting(MeetingModel $meeting): array
     {
@@ -82,12 +88,15 @@ class Organ
         $qb->select('f')
             ->where('m.number = :meeting_number')
             ->andWhere('m.type = :meeting_type')
-            ->from('Database\Model\SubDecision\Foundation', 'f')
+            ->from(FoundationModel::class, 'f')
             ->innerJoin('f.decision', 'd')
             ->innerJoin('d.meeting', 'm')
             ->setParameter('meeting_number', $meeting->getNumber())
             ->setParameter('meeting_type', $meeting->getType());
 
-        return $this->filterDeleted($qb->getQuery()->getResult());
+        /** @var FoundationModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $this->filterDeleted($result);
     }
 }

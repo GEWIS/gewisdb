@@ -4,47 +4,39 @@ declare(strict_types=1);
 
 namespace Checker;
 
-use Checker\Command\{
-    CheckAuthenticationKeysCommand,
-    CheckDatabaseCommand,
-    CheckDischargesCommand,
-    CheckMembershipTUeCommand,
-    CheckMembershipTypeCommand,
-    CheckMembershipExpirationCommand,
-};
+use Checker\Command\CheckAuthenticationKeysCommand;
+use Checker\Command\CheckDatabaseCommand;
+use Checker\Command\CheckDischargesCommand;
+use Checker\Command\CheckMembershipExpirationCommand;
+use Checker\Command\CheckMembershipTUeCommand;
+use Checker\Command\CheckMembershipTypeCommand;
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
-use Checker\Mapper\{
-    Installation as InstallationMapper,
-    Key as KeyMapper,
-    Member as MemberMapper,
-    Organ as OrganMapper};
-use Checker\Mapper\Factory\{
-    InstallationFactory as InstallationMapperFactory,
-    KeyFactory as KeyMapperFactory,
-    MemberFactory as MemberMapperFactory,
-    OrganFactory as OrganMapperFactory};
-use Checker\Service\{
-    Checker as CheckerService,
-    Installation as InstallationService,
-    Key as KeyService,
-    Meeting as MeetingService,
-    Member as MemberService,
-    Organ as OrganService};
-use Checker\Service\Factory\{
-    CheckerFactory as CheckerServiceFactory,
-    InstallationFactory as InstallationServiceFactory,
-    KeyFactory as KeyServiceFactory,
-    MeetingFactory as MeetingServiceFactory,
-    MemberFactory as MemberServiceFactory,
-    OrganFactory as OrganServiceFactory};
+use Checker\Mapper\Factory\InstallationFactory as InstallationMapperFactory;
+use Checker\Mapper\Factory\KeyFactory as KeyMapperFactory;
+use Checker\Mapper\Factory\MemberFactory as MemberMapperFactory;
+use Checker\Mapper\Factory\OrganFactory as OrganMapperFactory;
+use Checker\Mapper\Installation as InstallationMapper;
+use Checker\Mapper\Key as KeyMapper;
+use Checker\Mapper\Member as MemberMapper;
+use Checker\Mapper\Organ as OrganMapper;
+use Checker\Service\Checker as CheckerService;
+use Checker\Service\Factory\CheckerFactory as CheckerServiceFactory;
+use Checker\Service\Factory\InstallationFactory as InstallationServiceFactory;
+use Checker\Service\Factory\KeyFactory as KeyServiceFactory;
+use Checker\Service\Factory\MeetingFactory as MeetingServiceFactory;
+use Checker\Service\Factory\MemberFactory as MemberServiceFactory;
+use Checker\Service\Factory\OrganFactory as OrganServiceFactory;
+use Checker\Service\Installation as InstallationService;
+use Checker\Service\Key as KeyService;
+use Checker\Service\Meeting as MeetingService;
+use Checker\Service\Member as MemberService;
+use Checker\Service\Organ as OrganService;
 use Psr\Container\ContainerInterface;
 
 class Module
 {
     /**
      * Get the configuration for this module.
-     *
-     * @return array Module configuration
      */
     public function getConfig(): array
     {
@@ -53,8 +45,6 @@ class Module
 
     /**
      * Get service configuration.
-     *
-     * @return array Service configuration
      */
     public function getServiceConfig(): array
     {
@@ -76,13 +66,14 @@ class Module
                 KeyMapper::class => KeyMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
                 OrganMapper::class => OrganMapperFactory::class,
-                'checker_mail_transport' => function (ContainerInterface $container) {
+                'checker_mail_transport' => static function (ContainerInterface $container) {
                     $config = $container->get('config');
                     $config = $config['email'];
                     $class = '\Laminas\Mail\Transport\\' . $config['transport'];
                     $optionsClass = '\Laminas\Mail\Transport\\' . $config['transport'] . 'Options';
                     $transport = new $class();
                     $transport->setOptions(new $optionsClass($config['options']));
+
                     return $transport;
                 },
             ],

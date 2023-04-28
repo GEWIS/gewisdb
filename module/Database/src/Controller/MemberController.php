@@ -12,10 +12,10 @@ use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
-use Laminas\View\Model\{
-    ViewModel,
-    JsonModel,
-};
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
+
+use function array_map;
 
 /**
  * @method FlashMessenger flashMessenger()
@@ -50,9 +50,7 @@ class MemberController extends AbstractActionController
             if (null !== $member) {
                 $this->memberService->sendMemberSubscriptionEmail($member);
 
-                return new ViewModel([
-                    'member' => $member,
-                ]);
+                return new ViewModel(['member' => $member]);
             }
         }
 
@@ -71,13 +69,11 @@ class MemberController extends AbstractActionController
         $query = $this->params()->fromQuery('q');
         $res = $this->memberService->search($query);
 
-        $res = array_map(function ($member) {
+        $res = array_map(static function ($member) {
             return $member->toArray();
         }, $res);
 
-        return new JsonModel([
-            'json' => $res,
-        ]);
+        return new JsonModel(['json' => $res]);
     }
 
     public function searchFilteredAction(): JsonModel
@@ -85,13 +81,11 @@ class MemberController extends AbstractActionController
         $query = $this->params()->fromQuery('q');
         $res = $this->memberService->searchFiltered($query);
 
-        $res = array_map(function ($member) {
+        $res = array_map(static function ($member) {
             return $member->toArray();
         }, $res);
 
-        return new JsonModel([
-            'json' => $res,
-        ]);
+        return new JsonModel(['json' => $res]);
     }
 
     /**
@@ -196,7 +190,7 @@ class MemberController extends AbstractActionController
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -228,7 +222,7 @@ class MemberController extends AbstractActionController
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -263,7 +257,7 @@ class MemberController extends AbstractActionController
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -301,7 +295,7 @@ class MemberController extends AbstractActionController
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -345,7 +339,7 @@ class MemberController extends AbstractActionController
 
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -392,7 +386,7 @@ class MemberController extends AbstractActionController
 
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -443,7 +437,7 @@ class MemberController extends AbstractActionController
 
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -452,16 +446,16 @@ class MemberController extends AbstractActionController
         }
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->removeAddress(
+            $updatedMember = $this->memberService->removeAddress(
                 $member,
                 $type,
                 $this->getRequest()->getPost()->toArray(),
             );
 
-            if (null !== $member) {
+            if (null !== $updatedMember) {
                 $this->flashMessenger()->addSuccessMessage('Adres is succesvol verwijderd!');
 
-                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
+                return $this->redirect()->toRoute('member/show', ['id' => $updatedMember->getLidnr()]);
             }
 
             $this->flashMessenger()->addSuccessMessage('Address kan niet worden verwijderd.');
@@ -483,9 +477,7 @@ class MemberController extends AbstractActionController
     {
         $username = $this->params()->fromQuery('u');
 
-        return new ViewModel([
-            'username' => $username,
-        ]);
+        return new ViewModel(['username' => $username]);
     }
 
     /**
@@ -525,7 +517,7 @@ class MemberController extends AbstractActionController
 
         $member = $memberUpdate->getMember();
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -552,7 +544,7 @@ class MemberController extends AbstractActionController
 
         $member = $memberUpdate->getMember();
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -565,14 +557,14 @@ class MemberController extends AbstractActionController
 
             if (null !== $member) {
                 $this->flashMessenger()->addSuccessMessage(
-                    $this->translator->translate('The changes have been applied!')
+                    $this->translator->translate('The changes have been applied!'),
                 );
 
                 return $this->redirect()->toRoute('member/updates');
             }
 
             $this->flashMessenger()->addErrorMessage(
-                $this->translator->translate('An error occurred while trying to save the changes.')
+                $this->translator->translate('An error occurred while trying to save the changes.'),
             );
         }
 
@@ -592,7 +584,7 @@ class MemberController extends AbstractActionController
 
         $member = $memberUpdate->getMember();
 
-        if ($member === null) {
+        if (null === $member) {
             return $this->notFoundAction();
         }
 
@@ -605,14 +597,14 @@ class MemberController extends AbstractActionController
 
             if (null !== $result) {
                 $this->flashMessenger()->addInfoMessage(
-                    $this->translator->translate('The changes have not been applied.')
+                    $this->translator->translate('The changes have not been applied.'),
                 );
 
                 return $this->redirect()->toRoute('member/updates');
             }
 
             $this->flashMessenger()->addInfoMessage(
-                $this->translator->translate('An error occurred while trying to reject the changes.')
+                $this->translator->translate('An error occurred while trying to reject the changes.'),
             );
         }
 
@@ -621,9 +613,7 @@ class MemberController extends AbstractActionController
 
     private function memberIsDeleted(MemberModel $member): ViewModel
     {
-        $viewModel = new ViewModel([
-            'member' => $member,
-        ]);
+        $viewModel = new ViewModel(['member' => $member]);
         $viewModel->setTemplate('database/member/deleted.phtml');
 
         return $viewModel;

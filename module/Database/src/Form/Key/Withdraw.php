@@ -5,20 +5,16 @@ declare(strict_types=1);
 namespace Database\Form\Key;
 
 use Database\Form\AbstractDecision;
+use Database\Form\Fieldset\Granting as GrantingFieldset;
+use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
 use DateTime;
-use Exception;
+use Laminas\Form\Element\Date;
+use Laminas\Form\Element\Submit;
+use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\Callback;
-use Database\Form\Fieldset\{
-    Granting as GrantingFieldset,
-    Meeting as MeetingFieldset,
-    SubDecision as SubDecisionFieldset,
-};
-use Laminas\Form\Element\{
-    Date,
-    Submit,
-};
-use Laminas\InputFilter\InputFilterProviderInterface;
+use Throwable;
 
 class Withdraw extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -96,18 +92,23 @@ class Withdraw extends AbstractDecision implements InputFilterProviderInterface
             $today = new DateTime('today');
 
             return (new DateTime($value)) >= $today;
-        } catch (Exception) {
+        } catch (Throwable) {
             return false;
         }
     }
 
-    private function isNotAfterGranting(string $value, array $context = []): bool
-    {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    private function isNotAfterGranting(
+        string $value,
+        array $context = [],
+    ): bool {
         try {
             $until = new DateTime($context['granting']['until']);
 
             return (new DateTime($value)) <= $until;
-        } catch (Exception) {
+        } catch (Throwable) {
             return false;
         }
     }

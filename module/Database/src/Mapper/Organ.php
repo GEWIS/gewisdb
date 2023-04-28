@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Application\Model\Enums\MeetingTypes;
-use Database\Model\SubDecision\{
-    Abrogation as AbrogationModel,
-    Destroy as DestroyModel,
-    Discharge as DischargeModel,
-    Foundation as FoundationModel,
-    Installation as InstallationModel,
-};
-use Doctrine\ORM\{
-    EntityManager,
-    EntityRepository,
-};
+use Database\Model\SubDecision\Abrogation as AbrogationModel;
+use Database\Model\SubDecision\Destroy as DestroyModel;
+use Database\Model\SubDecision\Discharge as DischargeModel;
+use Database\Model\SubDecision\Foundation as FoundationModel;
+use Database\Model\SubDecision\Installation as InstallationModel;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+
+use function strtolower;
 
 class Organ
 {
@@ -26,7 +24,7 @@ class Organ
     /**
      * Find all organs.
      *
-     * @return array<array-key, FoundationModel>
+     * @return FoundationModel[]
      */
     public function findAll(): array
     {
@@ -112,7 +110,7 @@ class Organ
         int $meetingNumber,
         int $decisionPoint,
         int $decisionNumber,
-        int $number = null,
+        ?int $number = null,
     ): ?FoundationModel {
         $qb = $this->em->createQueryBuilder();
 
@@ -138,7 +136,7 @@ class Organ
         int $meetingNumber,
         int $decisionPoint,
         int $decisionNumber,
-        int $number = null,
+        ?int $number = null,
     ): ?InstallationModel {
         $qb = $this->em->createQueryBuilder();
 
@@ -168,7 +166,7 @@ class Organ
      * And since events are implemented anyways, we might want to use that to
      * automatically process changes.
      *
-     * @return array
+     * @return FoundationModel[]
      */
     public function organSearch(
         string $query,

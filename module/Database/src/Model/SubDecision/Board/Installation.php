@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision\Board;
 
-use Database\Model\{
-    SubDecision,
-    Member,
-};
+use Database\Model\Member;
+use Database\Model\SubDecision;
 use DateTime;
-use Doctrine\ORM\Mapping\{
-    Column,
-    JoinColumn,
-    ManyToOne,
-    OneToOne,
-    Entity,
-};
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToOne;
 use IntlDateFormatter;
 
 use function date_default_timezone_get;
@@ -29,7 +25,7 @@ class Installation extends SubDecision
     /**
      * Function in the board.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $function;
 
     /**
@@ -43,15 +39,15 @@ class Installation extends SubDecision
      */
     #[ManyToOne(targetEntity: Member::class)]
     #[JoinColumn(
-        name: "lidnr",
-        referencedColumnName: "lidnr",
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
     )]
     protected Member $member;
 
     /**
      * The date at which the installation is in effect.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $date;
 
     /**
@@ -59,7 +55,7 @@ class Installation extends SubDecision
      */
     #[OneToOne(
         targetEntity: Discharge::class,
-        mappedBy: "installation",
+        mappedBy: 'installation',
     )]
     protected ?Discharge $discharge = null;
 
@@ -68,14 +64,12 @@ class Installation extends SubDecision
      */
     #[OneToOne(
         targetEntity: Release::class,
-        mappedBy: "installation",
+        mappedBy: 'installation',
     )]
     protected ?Release $release = null;
 
     /**
      * Get the function.
-     *
-     * @return string
      */
     public function getFunction(): string
     {
@@ -84,8 +78,6 @@ class Installation extends SubDecision
 
     /**
      * Set the function.
-     *
-     * @param string $function
      */
     public function setFunction(string $function): void
     {
@@ -94,8 +86,6 @@ class Installation extends SubDecision
 
     /**
      * Get the member.
-     *
-     * @return Member
      */
     public function getMember(): Member
     {
@@ -104,8 +94,6 @@ class Installation extends SubDecision
 
     /**
      * Set the member.
-     *
-     * @param Member $member
      */
     public function setMember(Member $member): void
     {
@@ -114,8 +102,6 @@ class Installation extends SubDecision
 
     /**
      * Get the date.
-     *
-     * @return DateTime
      */
     public function getDate(): DateTime
     {
@@ -124,8 +110,6 @@ class Installation extends SubDecision
 
     /**
      * Set the date.
-     *
-     * @param DateTime $date
      */
     public function setDate(DateTime $date): void
     {
@@ -136,12 +120,11 @@ class Installation extends SubDecision
      * Get the content.
      *
      * Fixes Bor's greatest frustration
-     *
-     * @return string
      */
     public function getContent(): string
     {
         $member = $this->getMember()->getFullName();
+
         return $member . ' wordt per ' . $this->formatDate($this->getDate())
               . ' geïnstalleerd als ' . $this->getFunction() . ' der s.v. GEWIS.';
     }
@@ -150,8 +133,6 @@ class Installation extends SubDecision
      * Format the date.
      *
      * returns the localized version of $date->format('d F Y')
-     *
-     * @param DateTime $date
      *
      * @return string Formatted date
      */

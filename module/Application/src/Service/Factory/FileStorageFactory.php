@@ -11,16 +11,12 @@ use Psr\Container\ContainerInterface;
 class FileStorageFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
-     * @param $requestedName
-     * @param array|null $options
-     *
-     * @return FileStorageService
+     * @param string $requestedName
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null,
+        ?array $options = null,
     ): FileStorageService {
         /** @var array $config */
         $config = $container->get('config');

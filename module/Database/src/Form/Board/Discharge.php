@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Database\Form\Board;
 
 use Database\Form\AbstractDecision;
-use Laminas\Mvc\I18n\Translator;
-use Database\Form\Fieldset\{
-    Meeting as MeetingFieldset,
-    SubDecision as SubDecisionFieldset,
-};
+use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
 use Laminas\Form\Element\Submit;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 
 class Discharge extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -38,7 +36,6 @@ class Discharge extends AbstractDecision implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        return [
-        ];
+        return [];
     }
 }

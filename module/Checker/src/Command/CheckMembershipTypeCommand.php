@@ -10,7 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckMembershipTypeCommand extends AbstractCheckerCommand
 {
+    /** @var string $defaultName */
     protected static $defaultName = 'check:membership:type';
+    /** @var string $defaultDescription */
     protected static $defaultDescription = 'Check and update membership types when necessary.';
 
     protected function execute(

@@ -4,8 +4,22 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
+use Exception;
+
+use function base64_decode;
+use function file_exists;
+use function file_put_contents;
+use function mkdir;
+use function sha1_file;
+use function str_replace;
+use function substr;
+use function unlink;
+
 class FileStorage
 {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
     public function __construct(private readonly array $config)
     {
     }
@@ -27,34 +41,35 @@ class FileStorage
             mkdir($config['storage_dir'] . '/' . $directory, $config['dir_mode']);
         }
 
-        $storagePath = $directory . '/' . substr($hash, 2);
-
-        return $storagePath;
+        return $directory . '/' . substr($hash, 2);
     }
 
     /**
      * Stores uploaded data URL in the content based file system.
      *
-     * @param string $data The data of the image to be stored
+     * @param string $data      The data of the image to be stored
      * @param string $extension The extension of the image to be stored
      *
      * @return string The CFS path at which the file was stored
-     * @throws \Exception
+     *
+     * @throws Exception
      */
-    public function storeUploadedData(string $data, string $extension): string
-    {
+    public function storeUploadedData(
+        string $data,
+        string $extension,
+    ): string {
         $config = $this->getConfig();
         $storagePath = $this->generateStoragePath($data) . '.' . $extension;
         $destination = $config['storage_dir'] . '/' . $storagePath;
 
-        if (!file_exists($destination)) {
-            $data = str_replace('data:image/' . $extension . ';base64,', '', $data);
-            $data = str_replace(' ', '+', $data);
-            $data = base64_decode($data);
-            file_put_contents($destination, $data);
-        } else {
-            throw new \Exception('There already exists a file at this location.');
+        if (file_exists($destination)) {
+            throw new Exception('There already exists a file at this location.');
         }
+
+        $data = str_replace('data:image/' . $extension . ';base64,', '', $data);
+        $data = str_replace(' ', '+', $data);
+        $data = base64_decode($data);
+        file_put_contents($destination, $data);
 
         return $storagePath;
     }
@@ -82,6 +97,8 @@ class FileStorage
      * Get the storage config, as used by this service.
      *
      * @return array containing the config for the module
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function getConfig(): array
     {

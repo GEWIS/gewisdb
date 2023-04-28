@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
-use Application\Model\Enums\{
-    AddressTypes,
-    PostalRegions,
-};
+use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\PostalRegions;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\{
-    Column,
-    Entity,
-    GeneratedValue,
-    Id,
-    InverseJoinColumn,
-    JoinColumn,
-    JoinTable,
-    ManyToMany,
-};
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\InverseJoinColumn;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+
+use function preg_replace;
 
 /**
  * ProspectiveMember model.
@@ -32,45 +30,45 @@ class ProspectiveMember
      * The user
      */
     #[Id]
-    #[Column(type: "integer")]
-    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: 'integer')]
+    #[GeneratedValue(strategy: 'AUTO')]
     protected ?int $lidnr = null;
 
     /**
      * Member's email address.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $email;
 
     /**
      * Member's last name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $lastName;
 
     /**
      * Middle name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $middleName;
 
     /**
      * Initials.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $initials;
 
     /**
      * First name.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $firstName;
 
     /**
      * TU/e username.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $tueUsername = null;
@@ -79,7 +77,7 @@ class ProspectiveMember
      * Study of the member.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $study = null;
@@ -87,26 +85,26 @@ class ProspectiveMember
     /**
      * Last changed date of membership.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $changedOn;
 
     /**
      * Member birthdate.
      */
-    #[Column(type: "date")]
+    #[Column(type: 'date')]
     protected DateTime $birth;
 
     /**
      * How much the member has paid for membership. 0 by default.
      */
-    #[Column(type: "integer")]
+    #[Column(type: 'integer')]
     protected int $paid = 0;
 
     /**
      * Iban number.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $iban = null;
@@ -115,7 +113,7 @@ class ProspectiveMember
      * Country.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         enumType: PostalRegions::class,
     )]
     protected PostalRegions $country;
@@ -123,48 +121,50 @@ class ProspectiveMember
     /**
      * Street.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $street;
 
     /**
      * House number (+ suffix)
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $number;
 
     /**
      * Postal code.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $postalCode;
 
     /**
      * City.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $city;
 
     /**
      * Phone number.
      */
-    #[Column(type: "string")]
+    #[Column(type: 'string')]
     protected string $phone;
 
     /**
      * Memberships of mailing lists.
+     *
+     * @var Collection<array-key, MailingList>
      */
     #[ManyToMany(
         targetEntity: MailingList::class,
-        inversedBy: "members",
+        inversedBy: 'members',
     )]
-    #[JoinTable(name: "prospective_members_mailinglists")]
+    #[JoinTable(name: 'prospective_members_mailinglists')]
     #[JoinColumn(
-        name: "lidnr",
-        referencedColumnName: "lidnr",
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
     )]
     #[InverseJoinColumn(
-        name: "name",
-        referencedColumnName: "name",
+        name: 'name',
+        referencedColumnName: 'name',
     )]
     protected Collection $lists;
 
@@ -172,7 +172,7 @@ class ProspectiveMember
      * The signature image URL.
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $signature = null;
@@ -181,14 +181,11 @@ class ProspectiveMember
      * The signature location
      */
     #[Column(
-        type: "string",
+        type: 'string',
         nullable: true,
     )]
     protected ?string $signatureLocation = null;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->lists = new ArrayCollection();
@@ -197,7 +194,7 @@ class ProspectiveMember
     /**
      * Get the membership number.
      *
-     * @return int|null
+     * @psalm-ignore-nullable-return
      */
     public function getLidnr(): ?int
     {
@@ -206,8 +203,6 @@ class ProspectiveMember
 
     /**
      * Get the member's email address.
-     *
-     * @return string
      */
     public function getEmail(): string
     {
@@ -216,8 +211,6 @@ class ProspectiveMember
 
     /**
      * Get the member's last name.
-     *
-     * @return string
      */
     public function getLastName(): string
     {
@@ -226,8 +219,6 @@ class ProspectiveMember
 
     /**
      * Get the member's middle name.
-     *
-     * @return string
      */
     public function getMiddleName(): string
     {
@@ -236,8 +227,6 @@ class ProspectiveMember
 
     /**
      * Get the member's initials.
-     *
-     * @return string
      */
     public function getInitials(): string
     {
@@ -246,8 +235,6 @@ class ProspectiveMember
 
     /**
      * Get the member's first name.
-     *
-     * @return string
      */
     public function getFirstName(): string
     {
@@ -256,8 +243,6 @@ class ProspectiveMember
 
     /**
      * Set the lidnr.
-     *
-     * @param int $lidnr
      */
     public function setLidnr(int $lidnr): void
     {
@@ -266,8 +251,6 @@ class ProspectiveMember
 
     /**
      * Set the member's email address.
-     *
-     * @param string $email
      */
     public function setEmail(string $email): void
     {
@@ -276,8 +259,6 @@ class ProspectiveMember
 
     /**
      * Set the member's last name.
-     *
-     * @param string $lastName
      */
     public function setLastName(string $lastName): void
     {
@@ -286,8 +267,6 @@ class ProspectiveMember
 
     /**
      * Set the member's middle name.
-     *
-     * @param string $middleName
      */
     public function setMiddleName(string $middleName): void
     {
@@ -296,8 +275,6 @@ class ProspectiveMember
 
     /**
      * Set the member's initials.
-     *
-     * @param string $initials
      */
     public function setInitials(string $initials): void
     {
@@ -306,8 +283,6 @@ class ProspectiveMember
 
     /**
      * Set the member's first name.
-     *
-     * @param string $firstName
      */
     public function setFirstName(string $firstName): void
     {
@@ -316,8 +291,6 @@ class ProspectiveMember
 
     /**
      * Assemble the member's full name.
-     *
-     * @return string
      */
     public function getFullName(): string
     {
@@ -333,8 +306,6 @@ class ProspectiveMember
 
     /**
      * Get the TU/e username.
-     *
-     * @return string|null
      */
     public function getTueUsername(): ?string
     {
@@ -343,8 +314,6 @@ class ProspectiveMember
 
     /**
      * Set the TU/e username.
-     *
-     * @param string|null $tueUsername
      */
     public function setTueUsername(?string $tueUsername): void
     {
@@ -353,8 +322,6 @@ class ProspectiveMember
 
     /**
      * Get the study.
-     *
-     * @return string|null
      */
     public function getStudy(): ?string
     {
@@ -363,8 +330,6 @@ class ProspectiveMember
 
     /**
      * Set the study.
-     *
-     * @param string $study
      */
     public function setStudy(string $study): void
     {
@@ -373,8 +338,6 @@ class ProspectiveMember
 
     /**
      * Get the birth date.
-     *
-     * @return DateTime
      */
     public function getBirth(): DateTime
     {
@@ -383,8 +346,6 @@ class ProspectiveMember
 
     /**
      * Set the birthdate.
-     *
-     * @param DateTime $birth
      */
     public function setBirth(DateTime $birth): void
     {
@@ -393,8 +354,6 @@ class ProspectiveMember
 
     /**
      * Get the date of the last membership change.
-     *
-     * @return DateTime
      */
     public function getChangedOn(): DateTime
     {
@@ -403,8 +362,6 @@ class ProspectiveMember
 
     /**
      * Set the date of the last membership change.
-     *
-     * @param DateTime $changedOn
      */
     public function setChangedOn(DateTime $changedOn): void
     {
@@ -413,8 +370,6 @@ class ProspectiveMember
 
     /**
      * Get how much has been paid.
-     *
-     * @return int
      */
     public function getPaid(): int
     {
@@ -423,8 +378,6 @@ class ProspectiveMember
 
     /**
      * Set how much has been paid.
-     *
-     * @param int $paid
      */
     public function setPaid(int $paid): void
     {
@@ -433,24 +386,22 @@ class ProspectiveMember
 
     /**
      * Get the IBAN.
-     *
-     * @return string|null
      */
-    public function getIban($print = false): ?string
+    public function getIban(bool $print = false): ?string
     {
         if (null === $this->iban) {
             return null;
         }
+
         if ($print) {
             return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
         }
+
         return $this->iban;
     }
 
     /**
      * Set the IBAN.
-     *
-     * @param string|null $iban
      */
     public function setIban(?string $iban): void
     {
@@ -459,8 +410,6 @@ class ProspectiveMember
 
     /**
      * Get the signature image URL.
-     *
-     * @return string|null
      */
     public function getSignature(): ?string
     {
@@ -469,8 +418,6 @@ class ProspectiveMember
 
     /**
      * Set the signature image URL.
-     *
-     * @param string|null $signature
      */
     public function setSignature(?string $signature): void
     {
@@ -479,8 +426,6 @@ class ProspectiveMember
 
     /**
      * Get the signature location
-     *
-     * @return string|null
      */
     public function getSignatureLocation(): ?string
     {
@@ -489,8 +434,6 @@ class ProspectiveMember
 
     /**
      * Set the signature location
-     *
-     * @param string|null $signatureLocation
      */
     public function setSignatureLocation(?string $signatureLocation): void
     {
@@ -499,18 +442,41 @@ class ProspectiveMember
 
     /**
      * Returns the characteristic of the mandate. Is unique for each form entry
-     *
-     * @return string
      */
     public function getMandateCharacteristic(): string
     {
-        return $this->changedOn->format('Y') . "subscription" . $this->getLidnr();
+        return $this->changedOn->format('Y') . 'subscription' . $this->getLidnr();
     }
 
     /**
      * Convert to array.
      *
-     * @return array
+     * @return array{
+     *     lidnr: int,
+     *     email: string,
+     *     fullName: string,
+     *     lastName: string,
+     *     middleName: string,
+     *     initials: string,
+     *     firstName: string,
+     *     tueUsername: ?string,
+     *     study: ?string,
+     *     signature: ?string,
+     *     signatureLocation: ?string,
+     *     birth: string,
+     *     iban: ?string,
+     *     address: array{
+     *         type: AddressTypes,
+     *         country: PostalRegions,
+     *         street: string,
+     *         number: string,
+     *         city: string,
+     *         postalCode: string,
+     *         phone: string,
+     *     },
+     *     agreediban: string,
+     *     agreed: string,
+     * }
      */
     public function toArray(): array
     {
@@ -537,7 +503,7 @@ class ProspectiveMember
     /**
      * Get all addresses.
      *
-     * @return array all addresses
+     * @return array{studentAddress: Address}
      */
     public function getAddresses(): array
     {
@@ -550,15 +516,11 @@ class ProspectiveMember
         $address->setCity($this->city);
         $address->setPhone($this->phone);
 
-        return [
-            'studentAddress' => $address,
-        ];
+        return ['studentAddress' => $address];
     }
 
     /**
      * Add an address.
-     *
-     * @param Address $address
      */
     public function setAddress(Address $address): void
     {
@@ -573,7 +535,7 @@ class ProspectiveMember
     /**
      * Get mailing list subscriptions.
      *
-     * @return Collection
+     * @return Collection<array-key, MailingList>
      */
     public function getLists(): Collection
     {
@@ -584,8 +546,6 @@ class ProspectiveMember
      * Add a mailing list subscription.
      *
      * Note that this is the owning side.
-     *
-     * @param MailingList $list
      */
     public function addList(MailingList $list): void
     {
@@ -595,7 +555,7 @@ class ProspectiveMember
     /**
      * Add multiple mailing lists.
      *
-     * @param array $lists
+     * @param MailingList[] $lists
      */
     public function addLists(array $lists): void
     {

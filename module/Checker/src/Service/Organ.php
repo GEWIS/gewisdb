@@ -9,6 +9,10 @@ use Database\Model\Meeting as MeetingModel;
 use Database\Model\SubDecision\Abrogation as AbrogationModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 
+use function array_diff;
+use function array_map;
+use function sprintf;
+
 class Organ
 {
     public function __construct(private readonly OrganMapper $organMapper)
@@ -18,9 +22,7 @@ class Organ
     /**
      * Get the names of all the organs after $meeting
      *
-     * @param MeetingModel $meeting
-     *
-     * @return array string
+     * @return string[]
      */
     public function getAllOrgans(MeetingModel $meeting): array
     {
@@ -45,7 +47,7 @@ class Organ
     }
 
     /**
-     * @return array<array-key, FoundationModel>
+     * @return FoundationModel[]
      */
     public function getOrgansCreatedAtMeeting(MeetingModel $meeting): array
     {

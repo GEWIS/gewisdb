@@ -32,9 +32,7 @@ class Member
      * The hidden column contains either 0 or 1, when `lastCheckedOn` is `null` or not (respectively). We sort on this
      * column first in ascending order, causing all records having `null` for `lastCheckedOn` to appear first.
      *
-     * @param int $limit
-     *
-     * @return array
+     * @return MemberModel[]
      */
     public function getMembersToCheck(int $limit): array
     {
@@ -60,7 +58,7 @@ class Member
     /**
      * Get a list of members whose membership has an end date, but who are not yet "graduate".
      *
-     * @return array
+     * @return MemberModel[]
      */
     public function getEndingMembershipsWithNormalTypes(): array
     {
@@ -80,7 +78,7 @@ class Member
     /**
      * Get a list of members whose membership is set to expire, but should automatically be renewed.
      *
-     * @return array
+     * @return MemberModel[]
      */
     public function getExpiringMembershipsWithNormalTypes(): array
     {
@@ -99,6 +97,8 @@ class Member
 
     /**
      * Get a list of members who are hidden or whose membership has expired.
+     *
+     * @return MemberModel[]
      */
     public function getExpiredOrHiddenMembersWithAuthenticationKey(): array
     {
@@ -111,12 +111,9 @@ class Member
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * @return \DateTime
-     */
     private function getEndOfCurrentAssociationYear(): DateTime
     {
-        $end = new \DateTime();
+        $end = new DateTime();
         $end->setTime(0, 0);
 
         if ($end->format('m') >= 7) {
