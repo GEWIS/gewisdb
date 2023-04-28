@@ -257,7 +257,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Member.php"><a href="files/module-checker-src-service-member.html"><abbr title="module/Checker/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
@@ -301,21 +301,21 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Member.html#method_getEndingMembershipsWithNormalTypes">getEndingMembershipsWithNormalTypes()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
 </dt>
 <dd>Get members who may require an adjustment to their membership type (based on whether their membership has ended).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Member.html#method_getExpiredOrHiddenMembersWithAuthenticationKey">getExpiredOrHiddenMembersWithAuthenticationKey()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
 </dt>
 <dd>Get members who are hidden or whose membership has expired.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Member.html#method_getExpiringMembershipsWithNormalTypes">getExpiringMembershipsWithNormalTypes()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
 </dt>
 <dd>Get members who require an adjustment to just their membership expiration.</dd>
 
@@ -329,7 +329,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Member.html#method_getMembersToCheck">getMembersToCheck()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
 </dt>
 <dd>Fetch some members whose membership status should be checked.</dd>
 
@@ -450,18 +450,35 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Mapper-Member.html"><abbr title="\Checker\Mapper\Member">Member</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$config</span>
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">phpcsSuppress</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
@@ -490,14 +507,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getEndingMembershipsWithNormalTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getEndingMembershipsWithNormalTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
             &mdash;
         
     
@@ -515,7 +532,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Member.php"><a href="files/module-checker-src-service-member.html"><abbr title="module/Checker/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -523,14 +540,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getExpiredOrHiddenMembersWithAuthenticationKey</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getExpiredOrHiddenMembersWithAuthenticationKey</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
             &mdash;
         
     
@@ -556,14 +573,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getExpiringMembershipsWithNormalTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getExpiringMembershipsWithNormalTypes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
             &mdash;
         
     
@@ -581,7 +598,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Member.php"><a href="files/module-checker-src-service-member.html"><abbr title="module/Checker/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -590,7 +607,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getMemberMapper</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Mapper-Member.html"><abbr title="\Checker\Mapper\Member">Member</abbr></a></span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
     
     
 
@@ -621,14 +639,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMembersToCheck</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getMembersToCheck</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
             &mdash;
         
     

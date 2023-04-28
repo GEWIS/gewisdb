@@ -257,7 +257,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -450,7 +450,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -473,18 +473,18 @@ Status of object:
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                -read-only        "
 >
     <h4 class="phpdocumentor-element__name" id="property_config">
         $config
         <a href="classes/Checker-Model-TueData.html#property_config" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -518,7 +518,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
@@ -527,11 +527,21 @@ Status of object:
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
     <span class="phpdocumentor-signature__name">$data</span>
-    </code>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
+    
+        <section class="phpdocumentor-description"><p>array{
+name?: array{
+given?: string,
+initials?: string,
+last?: string,
+},
+mail?: string,
+registrations?: array&lt;array-key, array{study: string, generation: int, dept: string}&gt;,
+sAMAccountName?: string,
+lastupdated?: ?string,
+}|null</p>
+</section>
 
     
 
@@ -552,7 +562,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -590,7 +600,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -607,13 +617,27 @@ Status of object:
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>an array with membership_api config</p>
-</section>
+                    <section class="phpdocumentor-description"></section>
 
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">phpcsSuppress</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
@@ -634,7 +658,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">281</span>
+    <span class="phpdocumentor-element-found-in__line">308</span>
 
     </aside>
 
@@ -642,7 +666,7 @@ Status of object:
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">compareData</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$firstName</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prefixName</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lastName</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$initials</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+                    <span class="phpdocumentor-signature__name">compareData</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$firstName</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prefixName</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lastName</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$initials</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -650,7 +674,7 @@ Status of object:
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$firstName</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
@@ -658,7 +682,7 @@ Status of object:
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$prefixName</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
@@ -666,7 +690,7 @@ Status of object:
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$lastName</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
@@ -674,7 +698,7 @@ Status of object:
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$initials</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
@@ -693,7 +717,7 @@ Status of object:
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\LogicException">LogicException</abbr></span>
                                                             
-                                                 <section class="phpdocumentor-description"><p>when querying if data is unknown</p>
+                                                 <section class="phpdocumentor-description"><p>when querying if data is unknown.</p>
 </section>
 
                                     </dd>
@@ -720,7 +744,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">234</span>
+    <span class="phpdocumentor-element-found-in__line">247</span>
 
     </aside>
 
@@ -753,7 +777,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">216</span>
+    <span class="phpdocumentor-element-found-in__line">229</span>
 
     </aside>
 
@@ -786,7 +810,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">252</span>
+    <span class="phpdocumentor-element-found-in__line">268</span>
 
     </aside>
 
@@ -819,7 +843,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 
     </aside>
 
@@ -852,7 +876,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">198</span>
+    <span class="phpdocumentor-element-found-in__line">211</span>
 
     </aside>
 
@@ -885,7 +909,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">207</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
@@ -918,7 +942,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">243</span>
+    <span class="phpdocumentor-element-found-in__line">259</span>
 
     </aside>
 
@@ -927,8 +951,7 @@ Status of object:
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getRegistrations</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
@@ -951,7 +974,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">183</span>
 
     </aside>
 
@@ -989,7 +1012,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">180</span>
+    <span class="phpdocumentor-element-found-in__line">193</span>
 
     </aside>
 
@@ -1022,7 +1045,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">175</span>
+    <span class="phpdocumentor-element-found-in__line">188</span>
 
     </aside>
 
@@ -1055,7 +1078,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -1091,7 +1114,7 @@ Status of object:
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><a href="classes/Checker-Model-Exception-LookupException.html"><abbr title="\Checker\Model\Exception\LookupException">LookupException</abbr></a></span>
                                                             
-                                                 <section class="phpdocumentor-description"><p>in case of an error</p>
+                                                 <section class="phpdocumentor-description"><p>in case of an error.</p>
 </section>
 
                                     </dd>
@@ -1116,7 +1139,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">141</span>
+    <span class="phpdocumentor-element-found-in__line">158</span>
 
     </aside>
 
@@ -1124,7 +1147,7 @@ Status of object:
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">studiesAtDepartment</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$department</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;WIN&quot;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">studiesAtDepartment</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$department</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;WIN&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1132,7 +1155,7 @@ Status of object:
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$department</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;WIN&quot;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;WIN&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Department to check for</p>
 </section>
@@ -1152,7 +1175,7 @@ Status of object:
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><a href="classes/Checker-Model-Exception-LookupException.html"><abbr title="\Checker\Model\Exception\LookupException">LookupException</abbr></a></span>
                                                             
-                                                 <section class="phpdocumentor-description"><p>when received unexpected TU/e response</p>
+                                                 <section class="phpdocumentor-description"><p>when received unexpected TU/e response.</p>
 </section>
 
                                     </dd>
@@ -1162,7 +1185,7 @@ Status of object:
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\LogicException">LogicException</abbr></span>
                                                             
-                                                 <section class="phpdocumentor-description"><p>when object is not ready to be checked, for example when no data was requested previously</p>
+                                                 <section class="phpdocumentor-description"><p>when object is not ready to be checked, for example when no data was requested previously.</p>
 </section>
 
                                     </dd>
@@ -1187,7 +1210,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -1211,7 +1234,7 @@ Status of object:
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><a href="classes/Checker-Model-Exception-LookupException.html"><abbr title="\Checker\Model\Exception\LookupException">LookupException</abbr></a></span>
                                                             
-                                                 <section class="phpdocumentor-description"><p>when received unexpected TU/e response</p>
+                                                 <section class="phpdocumentor-description"><p>when received unexpected TU/e response.</p>
 </section>
 
                                     </dd>
@@ -1221,7 +1244,7 @@ Status of object:
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\LogicException">LogicException</abbr></span>
                                                             
-                                                 <section class="phpdocumentor-description"><p>when object is not ready to be checked, for example when no data was requested previously</p>
+                                                 <section class="phpdocumentor-description"><p>when object is not ready to be checked, for example when no data was requested previously.</p>
 </section>
 
                                     </dd>
@@ -1246,7 +1269,7 @@ Status of object:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/TueData.php"><a href="files/module-checker-src-model-tuedata.html"><abbr title="module/Checker/src/Model/TueData.php">TueData.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">261</span>
+    <span class="phpdocumentor-element-found-in__line">288</span>
 
     </aside>
 
@@ -1255,8 +1278,7 @@ Status of object:
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 

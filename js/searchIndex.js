@@ -2293,7 +2293,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Checker\\Model\\Error",
             "name": "Error",
-            "summary": "Class\u0020Error",
+            "summary": "Denotes\u0020an\u0020error\u0020that\u0020was\u0020occurred\u0020while\u0020checking\u0020a\u0020database\ni.e.\u0020the\u0020database\u0020is\u0020left\u0020in\u0020a\u0020wrong\u0020state",
             "url": "classes/Checker-Model-Error.html"
         },                {
             "fqsen": "\\Checker\\Model\\Error\u003A\u003A__construct\u0028\u0029",
@@ -2808,7 +2808,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\\MemberHasRoleButNotInOrganTest\u003A\u003Acreate\u0028\u0029",
             "name": "create",
-            "summary": "",
+            "summary": "Create\u0020a\u0020new\u0020error",
             "url": "classes/CheckerTest-Model-Error-MemberHasRoleButNotInOrganTest.html#method_create"
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\\MemberHasRoleButNotInOrganTest\u003A\u003AtestGetFoundation\u0028\u0029",
@@ -2828,7 +2828,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\\MemberInNonExistingOrganTest\u003A\u003Acreate\u0028\u0029",
             "name": "create",
-            "summary": "",
+            "summary": "Create\u0020a\u0020new\u0020error",
             "url": "classes/CheckerTest-Model-Error-MemberInNonExistingOrganTest.html#method_create"
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\\MemberInNonExistingOrganTest\u003A\u003AtestGetFoundation\u0028\u0029",
@@ -2843,7 +2843,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\\OrganMeetingTypeTest\u003A\u003Acreate\u0028\u0029",
             "name": "create",
-            "summary": "",
+            "summary": "Create\u0020a\u0020new\u0020error",
             "url": "classes/CheckerTest-Model-Error-OrganMeetingTypeTest.html#method_create"
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error",
@@ -2853,7 +2853,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\u003A\u003Acreate\u0028\u0029",
             "name": "create",
-            "summary": "",
+            "summary": "Create\u0020a\u0020new\u0020error",
             "url": "classes/CheckerTest-Model-Error.html#method_create"
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\u003A\u003AgetMeeting\u0028\u0029",
@@ -5203,7 +5203,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Database-Model-MailingList.html#method___construct"
         },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetName\u0028\u0029",
@@ -5313,7 +5313,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\Meeting\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Database-Model-Meeting.html#method___construct"
         },                {
             "fqsen": "\\Database\\Model\\Meeting\u003A\u003AgetType\u0028\u0029",
@@ -5388,7 +5388,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Database-Model-Member.html#method___construct"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetLidnr\u0028\u0029",
@@ -5908,7 +5908,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Database-Model-ProspectiveMember.html#method___construct"
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetLidnr\u0028\u0029",
@@ -6563,7 +6563,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Database-Model-SubDecision-Foundation.html#method___construct"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AgetAbbr\u0028\u0029",
@@ -8523,7 +8523,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\MailingList\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Report-Model-MailingList.html#method___construct"
         },                {
             "fqsen": "\\Report\\Model\\MailingList\u003A\u003AgetName\u0028\u0029",
@@ -8638,7 +8638,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\Meeting\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Report-Model-Meeting.html#method___construct"
         },                {
             "fqsen": "\\Report\\Model\\Meeting\u003A\u003AgetType\u0028\u0029",
@@ -8713,7 +8713,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Report-Model-Member.html#method___construct"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetLidnr\u0028\u0029",
@@ -9093,7 +9093,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\Organ\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Report-Model-Organ.html#method___construct"
         },                {
             "fqsen": "\\Report\\Model\\Organ\u003A\u003AgetId\u0028\u0029",
@@ -9633,7 +9633,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor.",
+            "summary": "",
             "url": "classes/Report-Model-SubDecision-Foundation.html#method___construct"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003AgetAbbr\u0028\u0029",
