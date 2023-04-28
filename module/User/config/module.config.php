@@ -11,6 +11,8 @@ use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Adapter\Factory\ApiPrincipalAdapterFactory;
+use User\Controller\ApiSettingsController;
+use User\Controller\Factory\ApiSettingsControllerFactory;
 use User\Controller\Factory\SettingsControllerFactory;
 use User\Controller\Factory\UserControllerFactory;
 use User\Controller\SettingsController;
@@ -26,7 +28,9 @@ use User\Mapper\Factory\UserMapperFactory;
 use User\Mapper\UserMapper;
 use User\Model\User;
 use User\Service\ApiAuthenticationService;
+use User\Service\ApiPrincipalService;
 use User\Service\Factory\ApiAuthenticationServiceFactory;
+use User\Service\Factory\ApiPrincipalServiceFactory;
 use User\Service\Factory\AuthenticationServiceFactory;
 use User\Service\Factory\UserServiceFactory;
 use User\Service\UserService;
@@ -97,6 +101,16 @@ return [
                             ],
                         ],
                     ],
+                    'api-principals' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/api-users',
+                            'defaults' => [
+                                'controller' => ApiSettingsController::class,
+                                'action' => 'listPrincipals',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
@@ -105,6 +119,7 @@ return [
         // This is not documented somewhere, but more specific classes need to go first
         'factories' => [
             ApiPrincipalAdapter::class => ApiPrincipalAdapterFactory::class,
+            ApiPrincipalService::class => ApiPrincipalServiceFactory::class,
             ApiAuthenticationService::class => ApiAuthenticationServiceFactory::class,
             UserService::class => UserServiceFactory::class,
             UserMapper::class => UserMapperFactory::class,
@@ -120,6 +135,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
+            ApiSettingsController::class => ApiSettingsControllerFactory::class,
             UserController::class => UserControllerFactory::class,
             SettingsController::class => SettingsControllerFactory::class,
         ],

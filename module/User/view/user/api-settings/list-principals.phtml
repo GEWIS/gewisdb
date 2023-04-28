@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+$translator = $this->plugin('translate')->getTranslator();
+
+/** @var PhpRenderer|HelperTrait $this */
+?>
+<h1><?= $this->translate('API Principals') ?></h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th><?= $this->translate('Description') ?></th>
+            <th><?= $this->translate('Permissions') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($principals as $principal): ?>
+            <tr>
+                <td><?= $principal->getId() ?></td>
+                <td><?= $principal->getDescription() ?></td>
+                <td>
+                    <?php foreach ($principal->getPermissions() as $permission): ?>
+                        <?= $permission->getName($translator) ?><br/>
+                    <?php endforeach;?>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>

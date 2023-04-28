@@ -30,6 +30,15 @@ class ApiPrincipal
     protected string $token;
 
     /**
+     * Description.
+     */
+    #[Column(
+        type: 'string',
+        nullable: true,
+    )]
+    protected ?string $description;
+
+    /**
      * Permission groups.
      *
      * @var ApiPermissions[] $permissions
@@ -57,6 +66,26 @@ class ApiPrincipal
     public function setToken(string $token): void
     {
         $this->token = $token;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get all ApiPermissions for principal
+     *
+     * @return ApiPermissions[]
+     */
+    public function getPermissions(): array
+    {
+        return $this->permissions;
     }
 
     public function can(ApiPermissions $permission): bool
