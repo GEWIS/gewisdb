@@ -92,7 +92,9 @@ class MailingList extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => ['min' => 10],
+                        'options' => [
+                            'min' => 10,
+                        ],
                     ],
                 ],
             ],
@@ -101,7 +103,9 @@ class MailingList extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => ['min' => 10],
+                        'options' => [
+                            'min' => 10,
+                        ],
                     ],
                 ],
             ],

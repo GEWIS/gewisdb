@@ -58,19 +58,25 @@ class Decision extends Fieldset implements InputFilterProviderInterface
             'meeting_number' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
             'point' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
             'number' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
         ];

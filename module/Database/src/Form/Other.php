@@ -44,7 +44,9 @@ class Other extends AbstractDecision implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => ['min' => 3],
+                        'options' => [
+                            'min' => 3,
+                        ],
                     ],
                 ],
             ],

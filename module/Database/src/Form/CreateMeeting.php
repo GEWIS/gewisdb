@@ -79,7 +79,9 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'number' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                     [
                         'name' => LessThan::class,
                         'options' => ['max' => 100000],
@@ -89,7 +91,9 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
             'date' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => DateValidator::class],
+                    [
+                        'name' => DateValidator::class,
+                    ],
                 ],
             ],
         ];

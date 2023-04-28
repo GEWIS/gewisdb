@@ -50,7 +50,9 @@ class MemberType extends Form implements InputFilterProviderInterface
     public function getInputFilterSpecification(): array
     {
         return [
-            'type' => ['required' => true],
+            'type' => [
+                'required' => true,
+            ],
         ];
     }
 }

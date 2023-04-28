@@ -21,19 +21,25 @@ class Login extends Form implements InputFilterProviderInterface
         $this->add([
             'name' => 'login',
             'type' => Text::class,
-            'options' => ['label' => 'Login'],
+            'options' => [
+                'label' => 'Login',
+            ],
         ]);
 
         $this->add([
             'name' => 'password',
             'type' => Password::class,
-            'options' => ['label' => 'Password'],
+            'options' => [
+                'label' => 'Password',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => Submit::class,
-            'attributes' => ['value' => 'Login'],
+            'attributes' => [
+                'value' => 'Login',
+            ],
         ]);
     }
 
@@ -59,7 +65,9 @@ class Login extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
-            'password' => ['required' => true],
+            'password' => [
+                'required' => true,
+            ],
         ];
     }
 }

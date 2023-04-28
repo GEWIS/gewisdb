@@ -53,7 +53,9 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
             'until' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => DateValidator::class],
+                    [
+                        'name' => DateValidator::class,
+                    ],
                     [
                         'name' => Callback::class,
                         'options' => [

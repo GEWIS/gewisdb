@@ -35,7 +35,9 @@ class DeleteAddress extends Form implements InputFilterProviderInterface
     public function getInputFilterSpecification(): array
     {
         return [
-            'submit_yes' => ['required' => true],
+            'submit_yes' => [
+                'required' => true,
+            ],
         ];
     }
 }

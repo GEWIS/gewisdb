@@ -22,25 +22,33 @@ class UserCreate extends Form implements InputFilterProviderInterface
         $this->add([
             'name' => 'login',
             'type' => Text::class,
-            'options' => ['label' => 'Login'],
+            'options' => [
+                'label' => 'Login',
+            ],
         ]);
 
         $this->add([
             'name' => 'password',
             'type' => Password::class,
-            'options' => ['label' => 'Wachtwoord'],
+            'options' => [
+                'label' => 'Wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'password_verify',
             'type' => Password::class,
-            'options' => ['label' => 'Controleer wachtwoord'],
+            'options' => [
+                'label' => 'Controleer wachtwoord',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => Submit::class,
-            'attributes' => ['value' => 'Maak gebruiker aan'],
+            'attributes' => [
+                'value' => 'Maak gebruiker aan',
+            ],
         ]);
     }
 
@@ -62,7 +70,9 @@ class UserCreate extends Form implements InputFilterProviderInterface
                     ],
                     [
                         'name' => Regex::class,
-                        'options' => ['pattern' => '/^[a-zA-Z0-9]*$/'],
+                        'options' => [
+                            'pattern' => '/^[a-zA-Z0-9]*$/',
+                        ],
                     ],
                 ],
             ],
@@ -71,7 +81,9 @@ class UserCreate extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => ['min' => 10],
+                        'options' => [
+                            'min' => 10,
+                        ],
                     ],
                 ],
             ],
@@ -80,7 +92,9 @@ class UserCreate extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => Identical::class,
-                        'options' => ['token' => 'password'],
+                        'options' => [
+                            'token' => 'password',
+                        ],
                     ],
                 ],
             ],

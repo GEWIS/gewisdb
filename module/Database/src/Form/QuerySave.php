@@ -40,7 +40,9 @@ class QuerySave extends Query implements InputFilterProviderInterface
     {
         $filter = parent::getInputFilterSpecification();
         $filter += [
-            'name' => ['required' => true],
+            'name' => [
+                'required' => true,
+            ],
         ];
 
         return $filter;

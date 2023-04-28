@@ -131,7 +131,9 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
             'date' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => DateValidator::class],
+                    [
+                        'name' => DateValidator::class,
+                    ],
                 ],
             ],
             // TODO: update author check

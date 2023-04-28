@@ -33,7 +33,9 @@ class Installation extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => StringLength::class,
-                        'options' => ['min' => 2],
+                        'options' => [
+                            'min' => 2,
+                        ],
                     ],
                 ],
             ],

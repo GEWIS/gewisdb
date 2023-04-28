@@ -162,7 +162,9 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'paid' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
             'tueUsername' => [

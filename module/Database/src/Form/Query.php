@@ -44,7 +44,9 @@ class Query extends Form implements InputFilterProviderInterface
     public function getInputFilterSpecification(): array
     {
         return [
-            'query' => ['required' => true],
+            'query' => [
+                'required' => true,
+            ],
         ];
     }
 }

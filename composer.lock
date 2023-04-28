@@ -6727,11 +6727,11 @@
         },
         {
             "name": "gewis/gewisphp-coding-standards",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GEWIS/gewisphp-coding-standards.git",
-                "reference": "d687ca870b0989ee610a51893a656beecd9a19ad"
+                "reference": "2d4cf402405cea2ea3d5aad76a59fdf6d7d362b6"
             },
             "require": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
@@ -6755,7 +6755,7 @@
                 "gewis",
                 "standard"
             ],
-            "time": "2023-04-27T11:30:57+00:00"
+            "time": "2023-04-28T17:20:51+00:00"
         },
         {
             "name": "icanhazstring/composer-unused",

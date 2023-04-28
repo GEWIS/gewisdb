@@ -48,7 +48,9 @@ return [
                 'child_routes' => [
                     'default' => [
                         'type' => Segment::class,
-                        'options' => ['route' => '/:action'],
+                        'options' => [
+                            'route' => '/:action',
+                        ],
                     ],
                 ],
             ],
@@ -68,20 +70,26 @@ return [
                         'child_routes' => [
                             'default' => [
                                 'type' => Segment::class,
-                                'options' => ['route' => '/:action'],
+                                'options' => [
+                                    'route' => '/:action',
+                                ],
                             ],
                             'edit' => [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/edit/:id',
-                                    'defaults' => ['action' => 'edit'],
+                                    'defaults' => [
+                                        'action' => 'edit',
+                                    ],
                                 ],
                             ],
                             'delete' => [
                                 'type' => Segment::class,
                                 'options' => [
                                     'route' => '/delete/:id',
-                                    'defaults' => ['action' => 'remove'],
+                                    'defaults' => [
+                                        'action' => 'remove',
+                                    ],
                                 ],
                             ],
                         ],

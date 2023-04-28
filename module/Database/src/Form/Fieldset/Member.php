@@ -37,7 +37,9 @@ class Member extends Fieldset implements InputFilterProviderInterface
             'lidnr' => [
                 'required' => true,
                 'validators' => [
-                    ['name' => Digits::class],
+                    [
+                        'name' => Digits::class,
+                    ],
                 ],
             ],
         ];
