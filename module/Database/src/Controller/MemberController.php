@@ -446,16 +446,16 @@ class MemberController extends AbstractActionController
         }
 
         if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->removeAddress(
+            $updatedMember = $this->memberService->removeAddress(
                 $member,
                 $type,
                 $this->getRequest()->getPost()->toArray(),
             );
 
-            if (null !== $member) {
+            if (null !== $updatedMember) {
                 $this->flashMessenger()->addSuccessMessage('Adres is succesvol verwijderd!');
 
-                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
+                return $this->redirect()->toRoute('member/show', ['id' => $updatedMember->getLidnr()]);
             }
 
             $this->flashMessenger()->addSuccessMessage('Address kan niet worden verwijderd.');

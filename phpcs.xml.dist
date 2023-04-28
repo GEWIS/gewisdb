@@ -172,4 +172,12 @@
         <exclude-pattern>module/User/src/Form/UserCreate.php</exclude-pattern>
         <exclude-pattern>module/User/src/Form/UserEdit.php</exclude-pattern>
     </rule>
+
+    <!-- Overrides that provide stricter typing -->
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod.Found">
+        <exclude-pattern>module/Checker/src/Model/Error/MemberExpiredButStillInOrgan.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/MemberActiveAndInactiveInOrgan.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/MemberActiveWithRoleAndInactiveInOrgan.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Model/Error/MemberInNonExistingOrgan.php</exclude-pattern>
+    </rule>
 </ruleset>

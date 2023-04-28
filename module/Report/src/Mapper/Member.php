@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Report\Model\Member as MemberModel;
-use Report\Model\OrganMember;
+use Report\Model\OrganMember as OrganMemberModel;
 
 class Member
 {
@@ -58,7 +58,7 @@ class Member
     public function findActive(bool $includeOrganMembership = false): array
     {
         $qb = $this->getRepository()->createQueryBuilder('m');
-        $qb->leftJoin(OrganMember::class, 'om', Join::WITH, 'm.lidnr = om.member')
+        $qb->leftJoin(OrganMemberModel::class, 'om', Join::WITH, 'm.lidnr = om.member')
             ->where('om.dischargeDate IS NULL OR om.dischargeDate > CURRENT_DATE()')
             ->andWhere('om.installDate < CURRENT_DATE()')
             ->andWhere('om.function <> \'\'')

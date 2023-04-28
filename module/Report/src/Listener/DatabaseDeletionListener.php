@@ -33,6 +33,7 @@ class DatabaseDeletionListener
         switch (true) {
             case $entity instanceof DatabaseAddressModel:
                 $this->memberService->deleteAddress($entity);
+
                 break;
             case $entity instanceof DatabaseMemberModel:
                 try {
@@ -42,15 +43,14 @@ class DatabaseDeletionListener
                 }
 
                 $this->memberService->deleteMember($entity);
-                break;
 
+                break;
             case $entity instanceof DatabaseMeetingModel:
                 throw new Exception('reportdb deletion of meetings not implemented');
 
-                break;
-
             case $entity instanceof DatabaseDecisionModel:
                 $this->meetingService->deleteDecision($entity);
+
                 break;
         }
 
