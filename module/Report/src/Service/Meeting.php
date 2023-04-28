@@ -325,8 +325,6 @@ class Meeting
         switch (true) {
             case $subDecision instanceof ReportSubDecisionModel\Destroy:
                 throw new Exception('Deletion of destroy decisions not implemented');
-
-                break;
             case $subDecision instanceof ReportSubDecisionModel\Discharge:
                 $installation = $subDecision->getInstallation();
                 $installation->clearDischarge();
