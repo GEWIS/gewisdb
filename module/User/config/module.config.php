@@ -63,15 +63,18 @@ return [
                             'route' => '/user',
                             'defaults' => [
                                 'controller' => SettingsController::class,
-                                'action' => 'index',
+                                'action' => 'listUser',
                             ],
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
-                            'default' => [
+                            'create' => [
                                 'type' => Segment::class,
                                 'options' => [
-                                    'route' => '/:action',
+                                    'route' => '/create',
+                                    'defaults' => [
+                                        'action' => 'createUser',
+                                    ],
                                 ],
                             ],
                             'edit' => [
@@ -79,7 +82,7 @@ return [
                                 'options' => [
                                     'route' => '/edit/:id',
                                     'defaults' => [
-                                        'action' => 'edit',
+                                        'action' => 'editUser',
                                     ],
                                 ],
                             ],
@@ -88,7 +91,7 @@ return [
                                 'options' => [
                                     'route' => '/delete/:id',
                                     'defaults' => [
-                                        'action' => 'remove',
+                                        'action' => 'removeUser',
                                     ],
                                 ],
                             ],
