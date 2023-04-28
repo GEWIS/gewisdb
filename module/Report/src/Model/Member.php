@@ -678,7 +678,7 @@ class Member
             'firstName' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
             'hidden' => $this->getHidden(),
-            'deleted' => $this->getHidden(),
+            'deleted' => $this->getDeleted(),
             'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
         ];
 
