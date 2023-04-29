@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Model\Enums;
 
-use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Mvc\I18n\Translator;
 
 /**
  * Enum for keeping track of the claims that can be present in the JWT for ApiApps.
@@ -17,7 +17,7 @@ enum ApiPermissions: string
     case OrgansMembershipR = 'organs_members_read';
     case All = '*';
 
-    public function getName(TranslatorInterface $translator): string
+    public function getName(Translator $translator): string
     {
         return match ($this) {
             self::HealthR => $translator->translate('Get API Health'),
@@ -38,7 +38,7 @@ enum ApiPermissions: string
     /**
      * @return array<string,string>
      */
-    public static function toArray(TranslatorInterface $translator): array
+    public static function toArray(Translator $translator): array
     {
         $response = [];
         foreach (self::cases() as $case) {

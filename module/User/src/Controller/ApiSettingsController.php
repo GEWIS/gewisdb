@@ -42,13 +42,13 @@ class ApiSettingsController extends AbstractActionController
         $form = $this->apiPrincipalService->getCreateForm();
 
         if ($this->getRequest()->isPost()) {
-            $result = $this->apiPrincipalService->create(
-                $this->getRequest()->getPost()->toArray(),
-                $this->flashMessenger(),
-            );
+            $result = $this->apiPrincipalService->create($this->getRequest()->getPost()->toArray());
 
-            if ($result) {
+            if (false !== $result) {
                 $this->flashMessenger()->addSuccessMessage('Succesfully created API principal');
+                $this->flashMessenger()->addInfoMessage(
+                    'Your API token is "' . $result->getFullToken() . '". This value will NOT be shown again',
+                );
 
                 return $this->redirectList();
             }

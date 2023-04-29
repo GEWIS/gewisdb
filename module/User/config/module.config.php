@@ -174,8 +174,7 @@ return [
             ApiPrincipalMapper::class => ApiPrincipalMapperFactory::class,
             ApiPrincipalForm::class => static function (ContainerInterface $container) {
                 $form = new ApiPrincipalForm($container->get(MvcTranslator::class));
-                $hydrator = $container->get(ClassMethodsHydrator::class);
-                $form->setHydrator($hydrator);
+                $form->setHydrator(new ClassMethodsHydrator());
 
                 return $form;
             },
@@ -184,7 +183,6 @@ return [
             Login::class => Login::class,
             UserCreate::class => UserCreate::class,
             UserEdit::class => UserEdit::class,
-            ClassMethodsHydrator::class => ClassMethodsHydrator::class,
         ],
     ],
     'controllers' => [

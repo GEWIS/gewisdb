@@ -9,12 +9,13 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Laminas\Form\Annotation\Validator;
-use Laminas\Math\Rand;
 use Laminas\Validator\StringLength;
 use User\Model\Enums\ApiPermissions;
 
 use function array_map;
+use function bin2hex;
 use function in_array;
+use function random_bytes;
 use function str_repeat;
 use function strlen;
 use function substr;
@@ -66,9 +67,20 @@ class ApiPrincipal
         return $this->id;
     }
 
+    /**
+     * Get the token (hidden and used in the form hydrator)
+     */
     public function getToken(): string
     {
         return str_repeat('*', strlen($this->token) - 5) . substr($this->token, -5);
+    }
+
+    /**
+     * Get the full token
+     */
+    public function getFullToken(): string
+    {
+        return $this->token;
     }
 
     /**
@@ -77,7 +89,7 @@ class ApiPrincipal
      */
     public function generateToken(): string
     {
-        $this->token = Rand::getString(64);
+        $this->token = bin2hex(random_bytes(128));
 
         return $this->token;
     }

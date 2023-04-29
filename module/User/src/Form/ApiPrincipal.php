@@ -8,8 +8,8 @@ use Laminas\Form\Element\MultiCheckbox;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
-use Laminas\I18n\Translator\TranslatorInterface;
 use Laminas\InputFilter\InputFilterProviderInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
 use User\Model\ApiPrincipal as ApiPrincipalmodel;
 use User\Model\Enums\ApiPermissions;
@@ -20,7 +20,7 @@ use function in_array;
 class ApiPrincipal extends Form implements InputFilterProviderInterface
 {
     public function __construct(
-        private readonly TranslatorInterface $translator,
+        private readonly Translator $translator,
     ) {
         parent::__construct();
 
@@ -28,7 +28,7 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
             'name' => 'description',
             'type' => Text::class,
             'options' => [
-                'label' => 'Description',
+                'label' => $this->translator->translate('Description'),
             ],
         ]);
 
@@ -36,7 +36,7 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
             'name' => 'token',
             'type' => Text::class,
             'options' => [
-                'label' => 'Token',
+                'label' => $this->translator->translate('Token'),
             ],
             'attributes' => [
                 'readonly' => true,
@@ -55,7 +55,7 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
             'type' => MultiCheckbox::class,
             'name' => 'permissions',
             'options' => [
-                'label' => 'Select API permissions',
+                'label' => $this->translator->translate('Select API permissions'),
                 'value_options' => $permissions,
             ],
         ]);
@@ -64,7 +64,7 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'options' => [
-                'label' => 'Create API principal',
+                'label' => $this->translator->translate('Create API principal'),
             ],
         ]);
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace User\Service;
 
-use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use User\Form\ApiPrincipal as ApiPrincipalForm;
 use User\Mapper\ApiPrincipalMapper;
 use User\Model\ApiPrincipal as ApiPrincipalModel;
@@ -15,7 +14,7 @@ use function array_map;
 class ApiPrincipalService
 {
     public function __construct(
-        protected readonly ApiPrincipalMapper $mapper,
+        protected readonly ApiPrincipalMapper $apiPrincipalMapper,
         protected readonly ApiPrincipalForm $apiPrincipalForm,
     ) {
     }
@@ -35,10 +34,8 @@ class ApiPrincipalService
     /**
      * @param array<array-key,mixed> $data
      */
-    public function create(
-        array $data,
-        ?FlashMessenger $flashMessenger,
-    ): bool {
+    public function create(array $data): false|ApiPrincipalModel
+    {
         $form = $this->getCreateForm();
         $form->setData($data);
 
@@ -60,13 +57,9 @@ class ApiPrincipalService
         );
         $principal->setPermissions($permissions);
 
-        $this->mapper->persist($principal);
+        $this->apiPrincipalMapper->persist($principal);
 
-        $flashMessenger?->addInfoMessage(
-            'Your API token is "' . $token . '". This value will NOT be shown again',
-        );
-
-        return true;
+        return $principal;
     }
 
     /**
@@ -84,7 +77,7 @@ class ApiPrincipalService
             return false;
         }
 
-        $this->mapper->persist($principal);
+        $this->apiPrincipalMapper->persist($principal);
 
         return true;
     }
@@ -98,7 +91,7 @@ class ApiPrincipalService
             return false;
         }
 
-        $this->mapper->remove($principal);
+        $this->apiPrincipalMapper->remove($principal);
 
         return true;
     }
@@ -110,7 +103,7 @@ class ApiPrincipalService
      */
     public function findAll(): array
     {
-        return $this->mapper->findAll();
+        return $this->apiPrincipalMapper->findAll();
     }
 
     /**
@@ -118,6 +111,6 @@ class ApiPrincipalService
      */
     public function find(int $id): ?ApiPrincipalModel
     {
-        return $this->mapper->find($id);
+        return $this->apiPrincipalMapper->find($id);
     }
 }
