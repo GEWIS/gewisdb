@@ -74,6 +74,9 @@ compilelang:
 		msgfmt module/Application/language/en.po -o module/Application/language/en -c --strict -v
 		msgfmt module/Application/language/nl.po -o module/Application/language/nl -c --strict -v
 
+getlangfiles:
+		./translate-helper
+
 update: updatecomposer updatedocker
 
 loadenv: copyprodconf
