@@ -21,8 +21,8 @@ class ApiPrincipalServiceFactory implements FactoryInterface
         ?array $options = null,
     ): ApiPrincipalService {
         return new ApiPrincipalService(
-            $container->get(ApiPrincipalMapper::class),
             $container->get(ApiPrincipalForm::class),
+            $container->get(ApiPrincipalMapper::class),
         );
     }
 }

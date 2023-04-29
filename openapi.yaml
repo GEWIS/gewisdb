@@ -34,12 +34,14 @@ paths:
       tags:
         - basic
       responses:
-        '200':
+        200:
           description: Successful
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/health'
+        403:
+          $ref: '#/components/responses/no_permission'
       security:
         - api_auth:
             - HealthR
@@ -51,7 +53,7 @@ paths:
       tags:
        - members
       responses:
-        '200':
+        200:
           description: Succesful response
           content:
             application/json:
@@ -62,6 +64,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Member'
+        403:
+          $ref: '#/components/responses/no_permission'
       security:
         - api_auth:
             - MembersR
@@ -80,7 +84,7 @@ paths:
             type: integer
             example: 8000
       responses:
-        '200':
+        200:
           description: Succesful response
           content:
             application/json:
@@ -89,8 +93,10 @@ paths:
                 properties:
                   data:
                     $ref: '#/components/schemas/MemberSimple'
-        '204':
+        204:
           description: Member not found
+        403:
+          $ref: '#/components/responses/no_permission'
       security:
         - api_auth:
             - MembersR
@@ -102,7 +108,7 @@ paths:
       tags:
        - members
       responses:
-        '200':
+        200:
           description: Succesful response
           content:
             application/json:
@@ -113,6 +119,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Member'
+        403:
+          $ref: '#/components/responses/no_permission'
       security:
         - api_auth:
             - MembersActiveR
@@ -204,7 +212,6 @@ components:
           nullable: true
         current:
           type: boolean
-        
     Organ:
       type: object
       properties:
@@ -214,7 +221,27 @@ components:
         abbreviation:
           type: string
           example: Testorgaan
-
+  responses:
+    no_permission:
+      description: The token that was used does not have the required permissions
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                default: "error"
+              error:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    default: "User\\Model\\Exception\\NotAllowed"
+                  message:
+                    type: string
+                    example: "Permission `...` is needed but is not currently held."
+              
   securitySchemes:
     api_auth:
       type: http

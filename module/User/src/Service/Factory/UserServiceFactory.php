@@ -25,12 +25,12 @@ class UserServiceFactory implements FactoryInterface
         ?array $options = null,
     ): UserService {
         return new UserService(
-            $container->get(UserMapper::class),
             $container->get(UserCreate::class),
             $container->get(Login::class),
             $container->get(UserEdit::class),
-            $container->get(PasswordInterface::class),
+            $container->get(UserMapper::class),
             $container->get(AuthenticationService::class),
+            $container->get(PasswordInterface::class),
             $container->get('config'),
         );
     }

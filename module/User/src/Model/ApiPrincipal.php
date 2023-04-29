@@ -13,7 +13,7 @@ use Laminas\Validator\StringLength;
 use User\Model\Enums\ApiPermissions;
 
 use function array_map;
-use function bin2hex;
+use function base64_encode;
 use function in_array;
 use function random_bytes;
 use function str_repeat;
@@ -84,14 +84,12 @@ class ApiPrincipal
     }
 
     /**
-     * Generate a (new) token and return it
+     * Generate a (new) token
      * We do not provide a way of specifying a token
      */
-    public function generateToken(): string
+    public function generateToken(): void
     {
-        $this->token = bin2hex(random_bytes(128));
-
-        return $this->token;
+        $this->token = base64_encode(random_bytes(96));
     }
 
     public function getDescription(): ?string

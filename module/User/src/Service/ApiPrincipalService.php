@@ -14,8 +14,8 @@ use function array_map;
 class ApiPrincipalService
 {
     public function __construct(
-        protected readonly ApiPrincipalMapper $apiPrincipalMapper,
         protected readonly ApiPrincipalForm $apiPrincipalForm,
+        protected readonly ApiPrincipalMapper $apiPrincipalMapper,
     ) {
     }
 
@@ -47,7 +47,7 @@ class ApiPrincipalService
 
         $principal = new ApiPrincipalModel();
         $principal->setDescription($data['description']);
-        $token = $principal->generateToken();
+        $principal->generateToken();
 
         $permissions = array_map(
             static function ($p): ApiPermissions {
