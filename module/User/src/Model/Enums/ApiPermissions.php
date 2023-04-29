@@ -34,4 +34,17 @@ enum ApiPermissions: string
     {
         return $this->value;
     }
+
+    /**
+     * @return array<string,string>
+     */
+    public static function toArray(TranslatorInterface $translator): array
+    {
+        $response = [];
+        foreach (self::cases() as $case) {
+            $response[$case->value] = $case->getName($translator);
+        }
+
+        return $response;
+    }
 }

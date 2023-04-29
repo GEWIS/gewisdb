@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: GEWISDB API
+  description: |-
+    The GEWIS member database has a few available endpoints
+  termsOfService: https://gewis.nl
+  contact:
+    email: abc@gewis.nl
+  license:
+    name: GNU GENERAL PUBLIC LICENSE Version 3
+    url: https://github.com/GEWIS/gewisdb/blob/master/LICENSE.txt
+  version: b54649b155402dca833e5b1e5d9d1737f7caccd2
+externalDocs:
+  description: Contribute to this API
+  url: https://github.com/GEWIS/gewisdb
+servers:
+  - url: https://database.gewis.nl/api
+    description: Production environment
+  - url: https://database.test.gewis.nl/api
+    description: Test environment
+tags:
+  - name: basic
+  - name: members
+    description: Obtain information about members
+    externalDocs:
+      description: MemberModel
+      url: https://gewis.github.io/gewisdb/classes/Database-Model-Member.html
+
+paths:
+  /:
+    get:
+      summary: Health endpoint
+      description: This endpoint will return the health status of the API
+      tags:
+        - basic
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/health'
+      security:
+        - api_auth:
+            - HealthR
+            
+  /members:
+    get:
+      summary: Get members
+      description: Get all members
+      tags:
+       - members
+      responses:
+        '200':
+          description: Succesful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Member'
+      security:
+        - api_auth:
+            - MembersR
+            
+  /members/{lidnr}:
+    get:
+      summary: Get a member
+      description: Get a specific member
+      tags:
+       - members
+      parameters:
+        - name: lidnr
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 8000
+      responses:
+        '200':
+          description: Succesful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/MemberSimple'
+        '204':
+          description: Member not found
+      security:
+        - api_auth:
+            - MembersR
+            
+  /members/active:
+    get:
+      summary: Get active members
+      description: Get all members that are currently installed in at least one organ
+      tags:
+       - members
+      responses:
+        '200':
+          description: Succesful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Member'
+      security:
+        - api_auth:
+            - MembersActiveR
+            
+components:
+  schemas:
+    health:
+      type: object
+      properties:
+        healthy:
+          type: boolean
+    MemberSimple:
+      type: object
+      required:
+        - lidnr
+      properties:
+        lidnr:
+          type: integer
+          format: int32
+          example: 8000
+          minimum: 0
+        email:
+          type: string
+          format: email
+          nullable: true
+          example: example@gewis.nl
+        fullName:
+          type: string
+          example: Timo de Teststudent
+        initials:
+          type: string
+          example: T.
+        firstName:
+          type: string
+          example: Timo
+        middleName:
+          type: string
+          example: de
+        lastName:
+          type: string
+          example: Teststudent
+        generation:
+          type: integer
+          example: 2022
+        hidden:
+          type: boolean
+          example: false
+        deleted:
+          type: boolean
+          example: false
+        expiration:
+          type: string
+          format: date
+          description: Date in the Y-m-d\TH:i:sP format
+          example: "2023-07-01T00:00:00+02:00"
+    MemberExtended:
+      allOf:
+        - $ref: '#/components/schemas/MemberSimple'
+        - type: object
+          properties:
+            organs:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/OrganMembership'
+    Member:
+      description: "If the client holds the `OrgansMembershipR` permission, a MemberExtended object, else MemberSimple"
+      oneOf:
+        - $ref: '#/components/schemas/MemberExtended'
+        - $ref: '#/components/schemas/MemberSimple'
+    OrganMembership:
+      type: object
+      properties:
+        organ:
+          $ref: '#/components/schemas/Organ'
+        function:
+          type: string
+          example: Lid
+        installDate:
+          type: string
+          format: date
+          description: Date in the Y-m-d\TH:i:sP format
+          example: "0001-01-01T00:00:00+00:00"
+        dischargeDate:
+          type: string
+          format: date
+          description: Date in the Y-m-d\TH:i:sP format
+          example: null
+          nullable: true
+        current:
+          type: boolean
+        
+    Organ:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        abbreviation:
+          type: string
+          example: Testorgaan
+
+  securitySchemes:
+    api_auth:
+      type: http
+      description: GEWIS API principal token
+      scheme: bearer
+      bearerFormat: FF

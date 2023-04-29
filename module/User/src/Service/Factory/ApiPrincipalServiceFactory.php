@@ -6,6 +6,7 @@ namespace User\Service\Factory;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
+use User\Form\ApiPrincipal as ApiPrincipalForm;
 use User\Mapper\ApiPrincipalMapper;
 use User\Service\ApiPrincipalService;
 
@@ -19,8 +20,9 @@ class ApiPrincipalServiceFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): ApiPrincipalService {
-        $mapper = $container->get(ApiPrincipalMapper::class);
-
-        return new ApiPrincipalService($mapper);
+        return new ApiPrincipalService(
+            $container->get(ApiPrincipalMapper::class),
+            $container->get(ApiPrincipalForm::class),
+        );
     }
 }

@@ -77,12 +77,14 @@
         <exclude-pattern>module/Report/src/Service/Factory/MiscFactory.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Service/Factory/OrganFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Adapter/Factory/ApiPrincipalAdapterFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Controller/Factory/ApiSettingsControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Controller/Factory/UserControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Factory/PasswordFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Mapper/Factory/ApiPrincipalMapperFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Mapper/Factory/UserMapperFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Service/Factory/ApiAuthenticationServiceFactory.php</exclude-pattern>
+        <exclude-pattern>module/User/src/Service/Factory/ApiPrincipalServiceFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Service/Factory/AuthenticationServiceFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Service/Factory/UserServiceFactory.php</exclude-pattern>
         <!-- Hydrators -->

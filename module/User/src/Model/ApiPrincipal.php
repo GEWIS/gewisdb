@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Laminas\Math\Rand;
 use User\Model\Enums\ApiPermissions;
 
 use function in_array;
@@ -63,9 +64,13 @@ class ApiPrincipal
         return $this->token;
     }
 
-    public function setToken(string $token): void
+    /**
+     * Generate a (new) token
+     * We do not provide a way of specifying a token
+     */
+    public function generateToken(): void
     {
-        $this->token = $token;
+        $this->token = Rand::getString(64);
     }
 
     public function getDescription(): ?string
@@ -86,6 +91,14 @@ class ApiPrincipal
     public function getPermissions(): array
     {
         return $this->permissions;
+    }
+
+    /**
+     * @param ApiPermissions[] $permissions
+     */
+    public function setPermissions(array $permissions): void
+    {
+        $this->permissions = $permissions;
     }
 
     public function can(ApiPermissions $permission): bool

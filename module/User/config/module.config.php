@@ -7,8 +7,10 @@ namespace User;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
+use Psr\Container\ContainerInterface;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Adapter\Factory\ApiPrincipalAdapterFactory;
 use User\Controller\ApiSettingsController;
@@ -18,6 +20,7 @@ use User\Controller\Factory\UserControllerFactory;
 use User\Controller\SettingsController;
 use User\Controller\UserController;
 use User\Factory\PasswordFactory;
+use User\Form\ApiPrincipal as ApiPrincipalForm;
 use User\Form\Login;
 use User\Form\UserCreate;
 use User\Form\UserEdit;
@@ -104,10 +107,23 @@ return [
                     'api-principals' => [
                         'type' => Literal::class,
                         'options' => [
-                            'route' => '/api-users',
+                            'route' => '/api-principals',
                             'defaults' => [
                                 'controller' => ApiSettingsController::class,
                                 'action' => 'listPrincipals',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'create' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/create',
+                                    'defaults' => [
+                                        'controller' => ApiSettingsController::class,
+                                        'action' => 'createPrincipal',
+                                    ],
+                                ],
                             ],
                         ],
                     ],
@@ -126,11 +142,17 @@ return [
             PasswordInterface::class => PasswordFactory::class,
             AuthenticationService::class => AuthenticationServiceFactory::class,
             ApiPrincipalMapper::class => ApiPrincipalMapperFactory::class,
+            ApiPrincipalForm::class => static function (ContainerInterface $container) {
+                $form = new ApiPrincipalForm($container->get(MvcTranslator::class));
+                $form->setHydrator($container->get('database_hydrator_default'));
+
+                return $form;
+            },
         ],
         'invokables' => [
+            Login::class => Login::class,
             UserCreate::class => UserCreate::class,
             UserEdit::class => UserEdit::class,
-            Login::class => Login::class,
         ],
     ],
     'controllers' => [
