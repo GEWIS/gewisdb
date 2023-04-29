@@ -90,6 +90,20 @@ class ApiPrincipalService
     }
 
     /**
+     * Remove a principal
+     */
+    public function remove(int $id): bool
+    {
+        if (null === ($principal = $this->find($id))) {
+            return false;
+        }
+
+        $this->mapper->remove($principal);
+
+        return true;
+    }
+
+    /**
      * Get all Api Principals.
      *
      * @return ApiPrincipalModel[]

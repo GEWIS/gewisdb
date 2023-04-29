@@ -50,7 +50,7 @@ class ApiSettingsController extends AbstractActionController
             if ($result) {
                 $this->flashMessenger()->addSuccessMessage('Succesfully created API principal');
 
-                return $this->redirect()->toRoute('settings/api-principals');
+                return $this->redirectList();
             }
         }
 
@@ -77,7 +77,7 @@ class ApiSettingsController extends AbstractActionController
             if ($result) {
                 $this->flashMessenger()->addSuccessMessage('Succesfully updated API principal');
 
-                return $this->redirect()->toRoute('settings/api-principals');
+                return $this->redirectList();
             }
         }
 
@@ -85,5 +85,30 @@ class ApiSettingsController extends AbstractActionController
             'form' => $form,
             'principal' => $principal,
         ]);
+    }
+
+    public function removePrincipalAction(): Response
+    {
+        if ($this->getRequest()->isPost()) {
+            $result = $this->apiPrincipalService->remove((int) $this->params()->fromRoute('id'));
+
+            if ($result) {
+                $this->flashMessenger()->addSuccessMessage('Succesfully removed API principal');
+            }
+        }
+
+        return $this->redirectList();
+    }
+
+    private function redirectList(): Response
+    {
+        return $this->redirect()->toRoute('settings/api-principals');
+    }
+
+    public function notFoundAction(): Response
+    {
+        $this->flashMessenger()->addWarningMessage('Could not find requested API principal');
+
+        return $this->redirectList();
     }
 }

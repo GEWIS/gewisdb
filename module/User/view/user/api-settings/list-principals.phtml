@@ -31,12 +31,16 @@ $translator = $this->plugin('translate')->getTranslator();
                     <?php endforeach;?>
                 </td>
                 <td>
-                    <a class="btn btn-primary btn-xs" href="<?= $this->url(
+                    <a class="btn btn-warning btn-xs" href="<?= $this->url(
                         'settings/api-principals/edit',
                         ['id' => $principal->getId()],
                     ) ?>">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
+                    &nbsp;
+                    <form style="display: inline-block;" method="post" action="<?= $this->url('settings/api-principals/delete', ['id' => $principal->getId()]) ?>">
+                        <button class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach ?>

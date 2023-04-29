@@ -143,6 +143,18 @@ return [
                                     ],
                                 ],
                             ],
+                            'delete' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/delete/:id',
+                                    'defaults' => [
+                                        'action' => 'removePrincipal',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
