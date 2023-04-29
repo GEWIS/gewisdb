@@ -11,7 +11,11 @@ use Laminas\Form\Form;
 use Laminas\I18n\Translator\TranslatorInterface;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\StringLength;
+use User\Model\ApiPrincipal as ApiPrincipalmodel;
 use User\Model\Enums\ApiPermissions;
+
+use function array_map;
+use function in_array;
 
 class ApiPrincipal extends Form implements InputFilterProviderInterface
 {
@@ -29,11 +33,30 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name' => 'token',
+            'type' => Text::class,
+            'options' => [
+                'label' => 'Token',
+            ],
+            'attributes' => [
+                'readonly' => true,
+            ],
+        ]);
+
+        $permissions = [];
+        foreach (ApiPermissions::toArray($this->translator) as $value => $label) {
+            $permissions[] = [
+                'value' => $value,
+                'label' => $label,
+            ];
+        }
+
+        $this->add([
             'type' => MultiCheckbox::class,
             'name' => 'permissions',
             'options' => [
                 'label' => 'Select API permissions',
-                'value_options' => ApiPermissions::toArray($this->translator),
+                'value_options' => $permissions,
             ],
         ]);
 
@@ -67,5 +90,28 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
                 ],
             ],
         ];
+    }
+
+    public function bind(
+        object $object,
+        int $flags = Form::VALUES_NORMALIZED,
+    ): void {
+        if (!($object instanceof ApiPrincipalModel)) {
+            return;
+        }
+
+        parent::bind($object, $flags);
+
+        $permissions = $object->getPermissions();
+        $this->get('permissions')->setValueOptions(
+            array_map(
+                static function ($options) use ($permissions) {
+                    $options['selected'] = in_array(ApiPermissions::tryFrom($options['value']), $permissions);
+
+                    return $options;
+                },
+                $this->get('permissions')->getValueOptions(),
+            ),
+        );
     }
 }

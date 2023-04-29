@@ -42,7 +42,10 @@ class ApiSettingsController extends AbstractActionController
         $form = $this->apiPrincipalService->getCreateForm();
 
         if ($this->getRequest()->isPost()) {
-            $result = $this->apiPrincipalService->create($this->getRequest()->getPost()->toArray());
+            $result = $this->apiPrincipalService->create(
+                $this->getRequest()->getPost()->toArray(),
+                $this->flashMessenger(),
+            );
 
             if ($result) {
                 $this->flashMessenger()->addSuccessMessage('Succesfully created API principal');
@@ -52,5 +55,35 @@ class ApiSettingsController extends AbstractActionController
         }
 
         return new ViewModel(['form' => $form]);
+    }
+
+    /**
+     * Edit an API principal
+     */
+    public function editPrincipalAction(): Response|ViewModel
+    {
+        $id = (int) $this->params()->fromRoute('id');
+        $principal = $this->apiPrincipalService->find($id);
+
+        if (null === $principal) {
+            return $this->notFoundAction();
+        }
+
+        $form = $this->apiPrincipalService->getEditForm($principal);
+
+        if ($this->getRequest()->isPost()) {
+            $result = $this->apiPrincipalService->edit($principal, $this->getRequest()->getPost()->toArray());
+
+            if ($result) {
+                $this->flashMessenger()->addSuccessMessage('Succesfully updated API principal');
+
+                return $this->redirect()->toRoute('settings/api-principals');
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'principal' => $principal,
+        ]);
     }
 }

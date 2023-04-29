@@ -8,10 +8,16 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Laminas\Form\Annotation\Validator;
 use Laminas\Math\Rand;
+use Laminas\Validator\StringLength;
 use User\Model\Enums\ApiPermissions;
 
+use function array_map;
 use function in_array;
+use function str_repeat;
+use function strlen;
+use function substr;
 
 /**
  * Member model.
@@ -37,6 +43,7 @@ class ApiPrincipal
         type: 'string',
         nullable: true,
     )]
+    #[Validator(StringLength::class, options: ['min' => 8, 'max' => 255])]
     protected ?string $description;
 
     /**
@@ -61,16 +68,18 @@ class ApiPrincipal
 
     public function getToken(): string
     {
-        return $this->token;
+        return str_repeat('*', strlen($this->token) - 5) . substr($this->token, -5);
     }
 
     /**
-     * Generate a (new) token
+     * Generate a (new) token and return it
      * We do not provide a way of specifying a token
      */
-    public function generateToken(): void
+    public function generateToken(): string
     {
         $this->token = Rand::getString(64);
+
+        return $this->token;
     }
 
     public function getDescription(): ?string
@@ -94,11 +103,18 @@ class ApiPrincipal
     }
 
     /**
-     * @param ApiPermissions[] $permissions
+     * To allow for hydrator, we convert possible strings
+     *
+     * @param ApiPermissions[]|string[] $permissions
      */
     public function setPermissions(array $permissions): void
     {
-        $this->permissions = $permissions;
+        $this->permissions = array_map(
+            static function ($p): ApiPermissions {
+                return $p instanceof ApiPermissions ? $p : ApiPermissions::from($p);
+            },
+            $permissions,
+        );
     }
 
     public function can(ApiPermissions $permission): bool

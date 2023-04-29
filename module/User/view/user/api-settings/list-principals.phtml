@@ -17,6 +17,7 @@ $translator = $this->plugin('translate')->getTranslator();
             <th>#</th>
             <th><?= $this->translate('Description') ?></th>
             <th><?= $this->translate('Permissions') ?></th>
+            <th><?= $this->translate('Edit / Delete') ?></th>
         </tr>
     </thead>
     <tbody>
@@ -29,7 +30,19 @@ $translator = $this->plugin('translate')->getTranslator();
                         <?= $permission->getName($translator) ?><br/>
                     <?php endforeach;?>
                 </td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="<?= $this->url(
+                        'settings/api-principals/edit',
+                        ['id' => $principal->getId()],
+                    ) ?>">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
             </tr>
         <?php endforeach ?>
     </tbody>
 </table>
+
+<a href="<?= $this->url('settings/api-principals/create'); ?>" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Create new API principal') ?>
+</a>

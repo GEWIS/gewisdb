@@ -7,6 +7,7 @@ namespace User;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
@@ -91,6 +92,9 @@ return [
                                     'defaults' => [
                                         'action' => 'editUser',
                                     ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
+                                    ],
                                 ],
                             ],
                             'delete' => [
@@ -99,6 +103,9 @@ return [
                                     'route' => '/delete/:id',
                                     'defaults' => [
                                         'action' => 'removeUser',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
                                     ],
                                 ],
                             ],
@@ -120,8 +127,19 @@ return [
                                 'options' => [
                                     'route' => '/create',
                                     'defaults' => [
-                                        'controller' => ApiSettingsController::class,
                                         'action' => 'createPrincipal',
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/:id',
+                                    'defaults' => [
+                                        'action' => 'editPrincipal',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
                                     ],
                                 ],
                             ],
@@ -144,7 +162,8 @@ return [
             ApiPrincipalMapper::class => ApiPrincipalMapperFactory::class,
             ApiPrincipalForm::class => static function (ContainerInterface $container) {
                 $form = new ApiPrincipalForm($container->get(MvcTranslator::class));
-                $form->setHydrator($container->get('database_hydrator_default'));
+                $hydrator = $container->get(ClassMethodsHydrator::class);
+                $form->setHydrator($hydrator);
 
                 return $form;
             },
@@ -153,6 +172,7 @@ return [
             Login::class => Login::class,
             UserCreate::class => UserCreate::class,
             UserEdit::class => UserEdit::class,
+            ClassMethodsHydrator::class => ClassMethodsHydrator::class,
         ],
     ],
     'controllers' => [
