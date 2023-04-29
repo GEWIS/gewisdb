@@ -23,7 +23,7 @@ $form->setAttribute('class', 'form-horizontal');
     $element->setAttribute('class', 'form-control');
     $element->setAttribute('placeholder', $element->getLabel());
     ?>
-    <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <div class="form-group<?= $this->bootstrapElementError($element) ?>">
         <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
             <?= $element->getLabel() ?>
         </label>
@@ -38,7 +38,7 @@ $form->setAttribute('class', 'form-horizontal');
     $element->setAttribute('class', 'form-control');
     $element->setAttribute('placeholder', $element->getLabel());
     ?>
-    <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <div class="form-group<?= $this->bootstrapElementError($element) ?>">
         <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
             <?= $element->getLabel() ?>
         </label>
@@ -53,7 +53,7 @@ $form->setAttribute('class', 'form-horizontal');
     $element->setAttribute('class', 'form-control');
     $element->setAttribute('placeholder', $element->getLabel());
     ?>
-    <div class="form-group<?= count($element->getMessages()) > 0 ? ' has-error' : '' ?>">
+    <div class="form-group<?= $this->bootstrapElementError($element) ?>">
         <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
             <?= $element->getLabel() ?>
         </label>
