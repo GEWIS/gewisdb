@@ -237,27 +237,36 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/application.html">Application</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-view.html">View</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-view-helper.html">Helper</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -trait">
+    <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    HelperTrait
+    BootstrapElementError
+
+        <span class="phpdocumentor-element__extends">
+        extends <abbr title="\Laminas\View\Helper\AbstractHelper">AbstractHelper</abbr>
+    </span>
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/gewisdb.html">gewisdb</a></li>
+                            </ul>
+        </div>
+    
+    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/Helper/BootstrapElementError.php"><a href="files/module-application-src-view-helper-bootstrapelementerror.html"><abbr title="module/Application/src/View/Helper/BootstrapElementError.php">BootstrapElementError.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Helper trait for auto-completion of code in modern IDEs.</p>
-
-    <section class="phpdocumentor-description"><p>The trait provides convenience methods for view helpers, defined in the application module. It is designed to be used
-for type-hinting $this variable inside laminas-view templates via doc blocks.</p>
-<p>Other traits from laminas are already chained into this trait. This includes support for the FlashMessenger, Form,
-and i18n view helpers.</p>
-</section>
+        
+    <section class="phpdocumentor-description"></section>
 
 
 
@@ -273,25 +282,11 @@ and i18n view helpers.</p>
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-View-HelperTrait.html#method_bootstrapElementError">bootstrapElementError()</a>
+    <a href="classes/Application-View-Helper-BootstrapElementError.html#method___invoke">__invoke()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-View-HelperTrait.html#method_fileUrl">fileUrl()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-View-HelperTrait.html#method_moduleIsActive">moduleIsActive()</a>
-    <span>
-                                &nbsp;: bool    </span>
-</dt>
-<dd></dd>
+<dd>Checks if the input has a Bootstrap error.</dd>
 
         </dl>
 
@@ -299,10 +294,12 @@ and i18n view helpers.</p>
 
         
 
+        
+
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Application-View-HelperTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Application-View-Helper-BootstrapElementError.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -310,21 +307,22 @@ and i18n view helpers.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_bootstrapElementError">
-        bootstrapElementError()
-        <a href="classes/Application-View-HelperTrait.html#method_bootstrapElementError" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___invoke">
+        __invoke()
+        <a href="classes/Application-View-Helper-BootstrapElementError.html#method___invoke" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/Helper/BootstrapElementError.php"><a href="files/module-application-src-view-helper-bootstrapelementerror.html"><abbr title="module/Application/src/View/Helper/BootstrapElementError.php">BootstrapElementError.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">0</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Checks if the input has a Bootstrap error.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">bootstrapElementError</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Form\ElementInterface">ElementInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$element</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">__invoke</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Form\ElementInterface">ElementInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$element</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -344,93 +342,9 @@ and i18n view helpers.</p>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_fileUrl">
-        fileUrl()
-        <a href="classes/Application-View-HelperTrait.html#method_fileUrl" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
+            <section class="phpdocumentor-description"><p>A Bootstrap class</p>
+</section>
 
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">fileUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$path</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$path</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_moduleIsActive">
-        moduleIsActive()
-        <a href="classes/Application-View-HelperTrait.html#method_moduleIsActive" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">moduleIsActive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$condition</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$condition</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
     
 </article>
             </section>
@@ -511,7 +425,7 @@ and i18n view helpers.</p>
 </section>
             </div>
         </div>
-        <a href="classes/Application-View-HelperTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Application-View-Helper-BootstrapElementError.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

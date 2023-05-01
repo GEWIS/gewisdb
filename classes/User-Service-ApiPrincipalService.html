@@ -236,12 +236,12 @@
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/user.html">User</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/user-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/user-service.html">Service</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    ApiPrincipal
+    ApiPrincipalService
 
     
             <div class="phpdocumentor-element__package">
@@ -255,14 +255,14 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Member model.</p>
-
+        
+    <section class="phpdocumentor-description"></section>
 
 
 
@@ -278,96 +278,74 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/User-Model-ApiPrincipal.html#property_description">$description</a>
+    <a href="classes/User-Service-ApiPrincipalService.html#property_apiPrincipalForm">$apiPrincipalForm</a>
     <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>Description.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/User-Model-ApiPrincipal.html#property_id">$id</a>
-    <span>
-                        &nbsp;: int|null            </span>
+                        &nbsp;: <a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/User-Model-ApiPrincipal.html#property_permissions">$permissions</a>
+    <a href="classes/User-Service-ApiPrincipalService.html#property_apiPrincipalMapper">$apiPrincipalMapper</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: <a href="classes/User-Mapper-ApiPrincipalMapper.html"><abbr title="\User\Mapper\ApiPrincipalMapper">ApiPrincipalMapper</abbr></a>            </span>
 </dt>
-<dd>Permission groups.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/User-Model-ApiPrincipal.html#property_token">$token</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-<dd>Token.</dd>
+<dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_can">can()</a>
+    <a href="classes/User-Service-ApiPrincipalService.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/User-Service-ApiPrincipalService.html#method_create">create()</a>
+    <span>
+                                &nbsp;: false|<a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/User-Service-ApiPrincipalService.html#method_edit">edit()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_generateToken">generateToken()</a>
+    <a href="classes/User-Service-ApiPrincipalService.html#method_find">find()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>|null    </span>
 </dt>
-<dd>Generate a (new) token
-We do not provide a way of specifying a token</dd>
+<dd>Get an API principal by ID</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_getDescription">getDescription()</a>
+    <a href="classes/User-Service-ApiPrincipalService.html#method_findAll">findAll()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>&gt;    </span>
+</dt>
+<dd>Get all Api Principals.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/User-Service-ApiPrincipalService.html#method_getCreateForm">getCreateForm()</a>
+    <span>
+                                &nbsp;: <a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_getFullToken">getFullToken()</a>
+    <a href="classes/User-Service-ApiPrincipalService.html#method_getEditForm">getEditForm()</a>
     <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Get the full token</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_getId">getId()</a>
-    <span>
-                                &nbsp;: int|null    </span>
+                                &nbsp;: <a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_getPermissions">getPermissions()</a>
+    <a href="classes/User-Service-ApiPrincipalService.html#method_remove">remove()</a>
     <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&gt;    </span>
+                                &nbsp;: bool    </span>
 </dt>
-<dd>Get all ApiPermissions for principal</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_getToken">getToken()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Get the token (hidden and used in the form hydrator)</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_setDescription">setDescription()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Model-ApiPrincipal.html#method_setPermissions">setPermissions()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>To allow for hydrator, we convert possible strings</dd>
+<dd>Remove a principal</dd>
 
         </dl>
 
@@ -379,68 +357,34 @@ We do not provide a way of specifying a token</dd>
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/User-Model-ApiPrincipal.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/User-Service-ApiPrincipalService.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
             phpdocumentor-element
             -property
             -protected
-                                                        "
+                                                -read-only        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_description">
-        $description
-        <a href="classes/User-Model-ApiPrincipal.html#property_description" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_apiPrincipalForm">
+        $apiPrincipalForm
+        <a href="classes/User-Service-ApiPrincipalService.html#property_apiPrincipalForm" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Description.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$description</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$apiPrincipalForm</span>
     </code>
-
-    
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_id">
-        $id
-        <a href="classes/User-Model-ApiPrincipal.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int|null</span>
-    <span class="phpdocumentor-signature__name">$id</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -454,63 +398,30 @@ We do not provide a way of specifying a token</dd>
             phpdocumentor-element
             -property
             -protected
-                                                        "
+                                                -read-only        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_permissions">
-        $permissions
-        <a href="classes/User-Model-ApiPrincipal.html#property_permissions" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_apiPrincipalMapper">
+        $apiPrincipalMapper
+        <a href="classes/User-Service-ApiPrincipalService.html#property_apiPrincipalMapper" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Permission groups.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$permissions</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/User-Mapper-ApiPrincipalMapper.html"><abbr title="\User\Mapper\ApiPrincipalMapper">ApiPrincipalMapper</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$apiPrincipalMapper</span>
     </code>
 
-    
-    
-    
+        <section class="phpdocumentor-description"></section>
 
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_token">
-        $token
-        <a href="classes/User-Model-ApiPrincipal.html#property_token" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">37</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Token.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$token</span>
-    </code>
-
-    
         <section class="phpdocumentor-description"></section>
 
     
@@ -521,7 +432,7 @@ We do not provide a way of specifying a token</dd>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/User-Model-ApiPrincipal.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/User-Service-ApiPrincipalService.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -529,33 +440,133 @@ We do not provide a way of specifying a token</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_can">
-        can()
-        <a href="classes/User-Model-ApiPrincipal.html#method_can" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/User-Service-ApiPrincipalService.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">can</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permission</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$apiPrincipalForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Mapper-ApiPrincipalMapper.html"><abbr title="\User\Mapper\ApiPrincipalMapper">ApiPrincipalMapper</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$apiPrincipalMapper</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$permission</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$apiPrincipalForm</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$apiPrincipalMapper</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Mapper-ApiPrincipalMapper.html"><abbr title="\User\Mapper\ApiPrincipalMapper">ApiPrincipalMapper</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_create">
+        create()
+        <a href="classes/User-Service-ApiPrincipalService.html#method_create" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">create</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;array-key, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">false|<a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;array-key, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">false|<a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_edit">
+        edit()
+        <a href="classes/User-Service-ApiPrincipalService.html#method_edit" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">edit</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$principal</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;array-key, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$principal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;array-key, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
             </dd>
             </dl>
 
@@ -573,240 +584,29 @@ We do not provide a way of specifying a token</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_generateToken">
-        generateToken()
-        <a href="classes/User-Model-ApiPrincipal.html#method_generateToken" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_find">
+        find()
+        <a href="classes/User-Service-ApiPrincipalService.html#method_find" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Generate a (new) token
-We do not provide a way of specifying a token</p>
+        <p class="phpdocumentor-summary">Get an API principal by ID</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">generateToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">find</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>|null</span></code>
 
     
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getDescription">
-        getDescription()
-        <a href="classes/User-Model-ApiPrincipal.html#method_getDescription" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">95</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getFullToken">
-        getFullToken()
-        <a href="classes/User-Model-ApiPrincipal.html#method_getFullToken" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">81</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the full token</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getFullToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getId">
-        getId()
-        <a href="classes/User-Model-ApiPrincipal.html#method_getId" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">65</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
-
-    
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">psalm-ignore-nullable-return</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
-                                    </dd>
-                        </dl>
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int|null</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getPermissions">
-        getPermissions()
-        <a href="classes/User-Model-ApiPrincipal.html#method_getPermissions" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">110</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get all ApiPermissions for principal</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPermissions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&gt;</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getToken">
-        getToken()
-        <a href="classes/User-Model-ApiPrincipal.html#method_getToken" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">73</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the token (hidden and used in the form hydrator)</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setDescription">
-        setDescription()
-        <a href="classes/User-Model-ApiPrincipal.html#method_setDescription" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">100</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setDescription</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$description</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -817,7 +617,7 @@ We do not provide a way of specifying a token</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>|null</span>
             &mdash;
         
     
@@ -828,39 +628,150 @@ We do not provide a way of specifying a token</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setPermissions">
-        setPermissions()
-        <a href="classes/User-Model-ApiPrincipal.html#method_setPermissions" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_findAll">
+        findAll()
+        <a href="classes/User-Service-ApiPrincipalService.html#method_findAll" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/ApiPrincipal.php"><a href="files/module-user-src-model-apiprincipal.html"><abbr title="module/User/src/Model/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">To allow for hydrator, we convert possible strings</p>
+        <p class="phpdocumentor-summary">Get all Api Principals.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setPermissions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&gt;|array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permissions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">findAll</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>&gt;</span></code>
 
     
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCreateForm">
+        getCreateForm()
+        <a href="classes/User-Service-ApiPrincipalService.html#method_getCreateForm" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCreateForm</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getEditForm">
+        getEditForm()
+        <a href="classes/User-Service-ApiPrincipalService.html#method_getEditForm" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getEditForm</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$principal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$permissions</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&gt;|array&lt;string|int, string&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$principal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-ApiPrincipal.html"><abbr title="\User\Model\ApiPrincipal">ApiPrincipal</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/User-Form-ApiPrincipal.html"><abbr title="\User\Form\ApiPrincipal">ApiPrincipal</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_remove">
+        remove()
+        <a href="classes/User-Service-ApiPrincipalService.html#method_remove" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiPrincipalService.php"><a href="files/module-user-src-service-apiprincipalservice.html"><abbr title="module/User/src/Service/ApiPrincipalService.php">ApiPrincipalService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Remove a principal</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">remove</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
         
     
@@ -943,7 +854,7 @@ We do not provide a way of specifying a token</p>
 </section>
             </div>
         </div>
-        <a href="classes/User-Model-ApiPrincipal.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/User-Service-ApiPrincipalService.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

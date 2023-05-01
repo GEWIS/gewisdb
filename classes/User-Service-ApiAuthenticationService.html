@@ -310,16 +310,16 @@
 <dd>Function that asserts that a principal has the required permissions to perform a given action</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/User-Service-ApiAuthenticationService.html#method_setAdapter">setAdapter()</a>
-    <span>
-                                &nbsp;: self    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/User-Service-ApiAuthenticationService.html#method_currentUserCan">currentUserCan()</a>
     <span>
                                 &nbsp;: bool    </span>
+</dt>
+<dd>Function that checks if the current principal has the required permissions</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/User-Service-ApiAuthenticationService.html#method_setAdapter">setAdapter()</a>
+    <span>
+                                &nbsp;: self    </span>
 </dt>
 <dd></dd>
 
@@ -393,7 +393,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiAuthenticationService.php"><a href="files/module-user-src-service-apiauthenticationservice.html"><abbr title="module/User/src/Service/ApiAuthenticationService.php">ApiAuthenticationService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -446,6 +446,50 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_currentUserCan">
+        currentUserCan()
+        <a href="classes/User-Service-ApiAuthenticationService.html#method_currentUserCan" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiAuthenticationService.php"><a href="files/module-user-src-service-apiauthenticationservice.html"><abbr title="module/User/src/Service/ApiAuthenticationService.php">ApiAuthenticationService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Function that checks if the current principal has the required permissions</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">currentUserCan</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permission</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$permission</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setAdapter">
         setAdapter()
         <a href="classes/User-Service-ApiAuthenticationService.html#method_setAdapter" class="headerlink"><i class="fas fa-link"></i></a>
@@ -480,50 +524,6 @@
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_currentUserCan">
-        currentUserCan()
-        <a href="classes/User-Service-ApiAuthenticationService.html#method_currentUserCan" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Service/ApiAuthenticationService.php"><a href="files/module-user-src-service-apiauthenticationservice.html"><abbr title="module/User/src/Service/ApiAuthenticationService.php">ApiAuthenticationService.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">38</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">currentUserCan</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$permission</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$permission</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Model-Enums-ApiPermissions.html"><abbr title="\User\Model\Enums\ApiPermissions">ApiPermissions</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
         
     

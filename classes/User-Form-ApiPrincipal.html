@@ -235,35 +235,58 @@
 
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application.html">Application</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application-view.html">View</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/user.html">User</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/user-form.html">Form</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -trait">
+    <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    HelperTrait
+    ApiPrincipal
+
+        <span class="phpdocumentor-element__extends">
+        extends <abbr title="\Laminas\Form\Form">Form</abbr>
+    </span>
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/gewisdb.html">gewisdb</a></li>
+                            </ul>
+        </div>
+    
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\Laminas\InputFilter\InputFilterProviderInterface">InputFilterProviderInterface</abbr>                    </span>
+    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Form/ApiPrincipal.php"><a href="files/module-user-src-form-apiprincipal.html"><abbr title="module/User/src/Form/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Helper trait for auto-completion of code in modern IDEs.</p>
-
-    <section class="phpdocumentor-description"><p>The trait provides convenience methods for view helpers, defined in the application module. It is designed to be used
-for type-hinting $this variable inside laminas-view templates via doc blocks.</p>
-<p>Other traits from laminas are already chained into this trait. This includes support for the FlashMessenger, Form,
-and i18n view helpers.</p>
-</section>
+        
+    <section class="phpdocumentor-description"></section>
 
 
 
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes, Traits and Enums
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Laminas\InputFilter\InputFilterProviderInterface">InputFilterProviderInterface</abbr></dt>
+        <dd></dd>
+    
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -272,26 +295,33 @@ and i18n view helpers.</p>
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-View-HelperTrait.html#method_bootstrapElementError">bootstrapElementError()</a>
+                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/User-Form-ApiPrincipal.html#property_translator">$translator</a>
     <span>
-                                &nbsp;: string    </span>
+                        &nbsp;: <abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>            </span>
+</dt>
+<dd></dd>
+
+                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/User-Form-ApiPrincipal.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-View-HelperTrait.html#method_fileUrl">fileUrl()</a>
+    <a href="classes/User-Form-ApiPrincipal.html#method_bind">bind()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-View-HelperTrait.html#method_moduleIsActive">moduleIsActive()</a>
+    <a href="classes/User-Form-ApiPrincipal.html#method_getInputFilterSpecification">getInputFilterSpecification()</a>
     <span>
-                                &nbsp;: bool    </span>
+                                &nbsp;: array&lt;array-key, mixed&gt;    </span>
 </dt>
-<dd></dd>
+<dd>Specification of input filter.</dd>
 
         </dl>
 
@@ -299,10 +329,52 @@ and i18n view helpers.</p>
 
         
 
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/User-Form-ApiPrincipal.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_translator">
+        $translator
+        <a href="classes/User-Form-ApiPrincipal.html#property_translator" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Form/ApiPrincipal.php"><a href="files/module-user-src-form-apiprincipal.html"><abbr title="module/User/src/Form/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
+    <span class="phpdocumentor-signature__name">$translator</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
+
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Application-View-HelperTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/User-Form-ApiPrincipal.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -310,28 +382,29 @@ and i18n view helpers.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_bootstrapElementError">
-        bootstrapElementError()
-        <a href="classes/Application-View-HelperTrait.html#method_bootstrapElementError" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/User-Form-ApiPrincipal.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Form/ApiPrincipal.php"><a href="files/module-user-src-form-apiprincipal.html"><abbr title="module/User/src/Form/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">0</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">bootstrapElementError</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Form\ElementInterface">ElementInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$element</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$element</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Form\ElementInterface">ElementInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -342,7 +415,7 @@ and i18n view helpers.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -353,29 +426,38 @@ and i18n view helpers.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_fileUrl">
-        fileUrl()
-        <a href="classes/Application-View-HelperTrait.html#method_fileUrl" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_bind">
+        bind()
+        <a href="classes/User-Form-ApiPrincipal.html#method_bind" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Form/ApiPrincipal.php"><a href="files/module-user-src-form-apiprincipal.html"><abbr title="module/User/src/Form/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">0</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">fileUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$path</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">bind</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$flags</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">Form::VALUES_NORMALIZED</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$path</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-signature__argument__name">$object</span>
+                : <span class="phpdocumentor-signature__argument__return-type">object</span>
                             </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$flags</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">Form::VALUES_NORMALIZED</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
@@ -385,7 +467,7 @@ and i18n view helpers.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
@@ -396,39 +478,29 @@ and i18n view helpers.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_moduleIsActive">
-        moduleIsActive()
-        <a href="classes/Application-View-HelperTrait.html#method_moduleIsActive" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getInputFilterSpecification">
+        getInputFilterSpecification()
+        <a href="classes/User-Form-ApiPrincipal.html#method_getInputFilterSpecification" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/View/HelperTrait.php"><a href="files/module-application-src-view-helpertrait.html"><abbr title="module/Application/src/View/HelperTrait.php">HelperTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Form/ApiPrincipal.php"><a href="files/module-user-src-form-apiprincipal.html"><abbr title="module/User/src/Form/ApiPrincipal.php">ApiPrincipal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">0</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Specification of input filter.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">moduleIsActive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$condition</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">getInputFilterSpecification</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;array-key, mixed&gt;</span></code>
 
     
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$condition</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
+    
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;array-key, mixed&gt;</span>
             &mdash;
         
     
@@ -511,7 +583,7 @@ and i18n view helpers.</p>
 </section>
             </div>
         </div>
-        <a href="classes/Application-View-HelperTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/User-Form-ApiPrincipal.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

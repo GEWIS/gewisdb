@@ -1486,6 +1486,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Service-FileStorage.html#property_config"
         },                {
+            "fqsen": "\\Application\\View\\Helper\\BootstrapElementError",
+            "name": "BootstrapElementError",
+            "summary": "",
+            "url": "classes/Application-View-Helper-BootstrapElementError.html"
+        },                {
+            "fqsen": "\\Application\\View\\Helper\\BootstrapElementError\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "Checks\u0020if\u0020the\u0020input\u0020has\u0020a\u0020Bootstrap\u0020error.",
+            "url": "classes/Application-View-Helper-BootstrapElementError.html#method___invoke"
+        },                {
             "fqsen": "\\Application\\View\\Helper\\FileUrl",
             "name": "FileUrl",
             "summary": "",
@@ -10356,6 +10366,66 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Adapter-Factory-ApiPrincipalAdapterFactory.html#method___invoke"
         },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController",
+            "name": "ApiSettingsController",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html#method___construct"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003AlistPrincipalsAction\u0028\u0029",
+            "name": "listPrincipalsAction",
+            "summary": "View\u0020API\u0020principals.",
+            "url": "classes/User-Controller-ApiSettingsController.html#method_listPrincipalsAction"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003AcreatePrincipalAction\u0028\u0029",
+            "name": "createPrincipalAction",
+            "summary": "Create\u0020an\u0020API\u0020principal",
+            "url": "classes/User-Controller-ApiSettingsController.html#method_createPrincipalAction"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003AeditPrincipalAction\u0028\u0029",
+            "name": "editPrincipalAction",
+            "summary": "Edit\u0020an\u0020API\u0020principal",
+            "url": "classes/User-Controller-ApiSettingsController.html#method_editPrincipalAction"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003AremovePrincipalAction\u0028\u0029",
+            "name": "removePrincipalAction",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html#method_removePrincipalAction"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003AredirectList\u0028\u0029",
+            "name": "redirectList",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html#method_redirectList"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003AnotFoundAction\u0028\u0029",
+            "name": "notFoundAction",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html#method_notFoundAction"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003A\u0024apiPrincipalService",
+            "name": "apiPrincipalService",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html#property_apiPrincipalService"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003A\u0024config",
+            "name": "config",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html#property_config"
+        },                {
+            "fqsen": "\\User\\Controller\\Factory\\ApiSettingsControllerFactory",
+            "name": "ApiSettingsControllerFactory",
+            "summary": "",
+            "url": "classes/User-Controller-Factory-ApiSettingsControllerFactory.html"
+        },                {
+            "fqsen": "\\User\\Controller\\Factory\\ApiSettingsControllerFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/User-Controller-Factory-ApiSettingsControllerFactory.html#method___invoke"
+        },                {
             "fqsen": "\\User\\Controller\\Factory\\SettingsControllerFactory",
             "name": "SettingsControllerFactory",
             "summary": "",
@@ -10386,30 +10456,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Controller-SettingsController.html#method___construct"
         },                {
-            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AindexAction\u0028\u0029",
-            "name": "indexAction",
+            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AlistUserAction\u0028\u0029",
+            "name": "listUserAction",
             "summary": "View\u0020users.",
-            "url": "classes/User-Controller-SettingsController.html#method_indexAction"
+            "url": "classes/User-Controller-SettingsController.html#method_listUserAction"
         },                {
-            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AcreateAction\u0028\u0029",
-            "name": "createAction",
+            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AcreateUserAction\u0028\u0029",
+            "name": "createUserAction",
             "summary": "Create\u0020a\u0020user.",
-            "url": "classes/User-Controller-SettingsController.html#method_createAction"
+            "url": "classes/User-Controller-SettingsController.html#method_createUserAction"
         },                {
-            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AeditAction\u0028\u0029",
-            "name": "editAction",
+            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AeditUserAction\u0028\u0029",
+            "name": "editUserAction",
             "summary": "Edit\u0020a\u0020user.",
-            "url": "classes/User-Controller-SettingsController.html#method_editAction"
+            "url": "classes/User-Controller-SettingsController.html#method_editUserAction"
         },                {
-            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AremoveAction\u0028\u0029",
-            "name": "removeAction",
+            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003AremoveUserAction\u0028\u0029",
+            "name": "removeUserAction",
             "summary": "Remove\u0020a\u0020user.",
-            "url": "classes/User-Controller-SettingsController.html#method_removeAction"
+            "url": "classes/User-Controller-SettingsController.html#method_removeUserAction"
         },                {
-            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003A\u0024service",
-            "name": "service",
+            "fqsen": "\\User\\Controller\\SettingsController\u003A\u003A\u0024userService",
+            "name": "userService",
             "summary": "",
-            "url": "classes/User-Controller-SettingsController.html#property_service"
+            "url": "classes/User-Controller-SettingsController.html#property_userService"
         },                {
             "fqsen": "\\User\\Controller\\SettingsController\u003A\u003A\u0024config",
             "name": "config",
@@ -10455,6 +10525,31 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/User-Factory-PasswordFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\User\\Form\\ApiPrincipal",
+            "name": "ApiPrincipal",
+            "summary": "",
+            "url": "classes/User-Form-ApiPrincipal.html"
+        },                {
+            "fqsen": "\\User\\Form\\ApiPrincipal\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/User-Form-ApiPrincipal.html#method___construct"
+        },                {
+            "fqsen": "\\User\\Form\\ApiPrincipal\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "Specification\u0020of\u0020input\u0020filter.",
+            "url": "classes/User-Form-ApiPrincipal.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\User\\Form\\ApiPrincipal\u003A\u003Abind\u0028\u0029",
+            "name": "bind",
+            "summary": "",
+            "url": "classes/User-Form-ApiPrincipal.html#method_bind"
+        },                {
+            "fqsen": "\\User\\Form\\ApiPrincipal\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/User-Form-ApiPrincipal.html#property_translator"
         },                {
             "fqsen": "\\User\\Form\\Login",
             "name": "Login",
@@ -10693,13 +10788,38 @@ Search.appendIndex(
         },                {
             "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AgetToken\u0028\u0029",
             "name": "getToken",
-            "summary": "",
+            "summary": "Get\u0020the\u0020token\u0020\u0028hidden\u0020and\u0020used\u0020in\u0020the\u0020form\u0020hydrator\u0029",
             "url": "classes/User-Model-ApiPrincipal.html#method_getToken"
         },                {
-            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AsetToken\u0028\u0029",
-            "name": "setToken",
+            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AgetFullToken\u0028\u0029",
+            "name": "getFullToken",
+            "summary": "Get\u0020the\u0020full\u0020token",
+            "url": "classes/User-Model-ApiPrincipal.html#method_getFullToken"
+        },                {
+            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AgenerateToken\u0028\u0029",
+            "name": "generateToken",
+            "summary": "Generate\u0020a\u0020\u0028new\u0029\u0020token\nWe\u0020do\u0020not\u0020provide\u0020a\u0020way\u0020of\u0020specifying\u0020a\u0020token",
+            "url": "classes/User-Model-ApiPrincipal.html#method_generateToken"
+        },                {
+            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
             "summary": "",
-            "url": "classes/User-Model-ApiPrincipal.html#method_setToken"
+            "url": "classes/User-Model-ApiPrincipal.html#method_getDescription"
+        },                {
+            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AsetDescription\u0028\u0029",
+            "name": "setDescription",
+            "summary": "",
+            "url": "classes/User-Model-ApiPrincipal.html#method_setDescription"
+        },                {
+            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AgetPermissions\u0028\u0029",
+            "name": "getPermissions",
+            "summary": "Get\u0020all\u0020ApiPermissions\u0020for\u0020principal",
+            "url": "classes/User-Model-ApiPrincipal.html#method_getPermissions"
+        },                {
+            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003AsetPermissions\u0028\u0029",
+            "name": "setPermissions",
+            "summary": "To\u0020allow\u0020for\u0020hydrator,\u0020we\u0020convert\u0020possible\u0020strings",
+            "url": "classes/User-Model-ApiPrincipal.html#method_setPermissions"
         },                {
             "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003Acan\u0028\u0029",
             "name": "can",
@@ -10715,6 +10835,11 @@ Search.appendIndex(
             "name": "token",
             "summary": "Token.",
             "url": "classes/User-Model-ApiPrincipal.html#property_token"
+        },                {
+            "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "Description.",
+            "url": "classes/User-Model-ApiPrincipal.html#property_description"
         },                {
             "fqsen": "\\User\\Model\\ApiPrincipal\u003A\u003A\u0024permissions",
             "name": "permissions",
@@ -10736,6 +10861,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Model-Enums-ApiPermissions.html#method_getString"
         },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#method_toArray"
+        },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AHealthR",
             "name": "HealthR",
             "summary": "",
@@ -10748,6 +10878,11 @@ Search.appendIndex(
         },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersActiveR",
             "name": "MembersActiveR",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AOrgansMembershipR",
+            "name": "OrgansMembershipR",
             "summary": "",
             "url": ""
         },                {
@@ -10843,13 +10978,68 @@ Search.appendIndex(
         },                {
             "fqsen": "\\User\\Service\\ApiAuthenticationService\u003A\u003AcurrentUserCan\u0028\u0029",
             "name": "currentUserCan",
-            "summary": "",
+            "summary": "Function\u0020that\u0020checks\u0020if\u0020the\u0020current\u0020principal\u0020has\u0020the\u0020required\u0020permissions",
             "url": "classes/User-Service-ApiAuthenticationService.html#method_currentUserCan"
         },                {
             "fqsen": "\\User\\Service\\ApiAuthenticationService\u003A\u003AassertCan\u0028\u0029",
             "name": "assertCan",
             "summary": "Function\u0020that\u0020asserts\u0020that\u0020a\u0020principal\u0020has\u0020the\u0020required\u0020permissions\u0020to\u0020perform\u0020a\u0020given\u0020action",
             "url": "classes/User-Service-ApiAuthenticationService.html#method_assertCan"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService",
+            "name": "ApiPrincipalService",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html#method___construct"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003AgetCreateForm\u0028\u0029",
+            "name": "getCreateForm",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html#method_getCreateForm"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003AgetEditForm\u0028\u0029",
+            "name": "getEditForm",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html#method_getEditForm"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003Acreate\u0028\u0029",
+            "name": "create",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html#method_create"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003Aedit\u0028\u0029",
+            "name": "edit",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html#method_edit"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003Aremove\u0028\u0029",
+            "name": "remove",
+            "summary": "Remove\u0020a\u0020principal",
+            "url": "classes/User-Service-ApiPrincipalService.html#method_remove"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003AfindAll\u0028\u0029",
+            "name": "findAll",
+            "summary": "Get\u0020all\u0020Api\u0020Principals.",
+            "url": "classes/User-Service-ApiPrincipalService.html#method_findAll"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003Afind\u0028\u0029",
+            "name": "find",
+            "summary": "Get\u0020an\u0020API\u0020principal\u0020by\u0020ID",
+            "url": "classes/User-Service-ApiPrincipalService.html#method_find"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003A\u0024apiPrincipalForm",
+            "name": "apiPrincipalForm",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html#property_apiPrincipalForm"
+        },                {
+            "fqsen": "\\User\\Service\\ApiPrincipalService\u003A\u003A\u0024apiPrincipalMapper",
+            "name": "apiPrincipalMapper",
+            "summary": "",
+            "url": "classes/User-Service-ApiPrincipalService.html#property_apiPrincipalMapper"
         },                {
             "fqsen": "\\User\\Service\\Factory\\ApiAuthenticationServiceFactory",
             "name": "ApiAuthenticationServiceFactory",
@@ -10860,6 +11050,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/User-Service-Factory-ApiAuthenticationServiceFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\User\\Service\\Factory\\ApiPrincipalServiceFactory",
+            "name": "ApiPrincipalServiceFactory",
+            "summary": "",
+            "url": "classes/User-Service-Factory-ApiPrincipalServiceFactory.html"
+        },                {
+            "fqsen": "\\User\\Service\\Factory\\ApiPrincipalServiceFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/User-Service-Factory-ApiPrincipalServiceFactory.html#method___invoke"
         },                {
             "fqsen": "\\User\\Service\\Factory\\AuthenticationServiceFactory",
             "name": "AuthenticationServiceFactory",
@@ -10946,11 +11146,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Service-UserService.html#method_getLdapConfig"
         },                {
-            "fqsen": "\\User\\Service\\UserService\u003A\u003A\u0024mapper",
-            "name": "mapper",
-            "summary": "",
-            "url": "classes/User-Service-UserService.html#property_mapper"
-        },                {
             "fqsen": "\\User\\Service\\UserService\u003A\u003A\u0024createForm",
             "name": "createForm",
             "summary": "",
@@ -10966,15 +11161,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Service-UserService.html#property_editForm"
         },                {
-            "fqsen": "\\User\\Service\\UserService\u003A\u003A\u0024crypt",
-            "name": "crypt",
+            "fqsen": "\\User\\Service\\UserService\u003A\u003A\u0024mapper",
+            "name": "mapper",
             "summary": "",
-            "url": "classes/User-Service-UserService.html#property_crypt"
+            "url": "classes/User-Service-UserService.html#property_mapper"
         },                {
             "fqsen": "\\User\\Service\\UserService\u003A\u003A\u0024authService",
             "name": "authService",
             "summary": "",
             "url": "classes/User-Service-UserService.html#property_authService"
+        },                {
+            "fqsen": "\\User\\Service\\UserService\u003A\u003A\u0024crypt",
+            "name": "crypt",
+            "summary": "",
+            "url": "classes/User-Service-UserService.html#property_crypt"
         },                {
             "fqsen": "\\User\\Service\\UserService\u003A\u003A\u0024config",
             "name": "config",
@@ -11281,15 +11481,15 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/user-adapter-factory.html"
         },                {
-            "fqsen": "\\User\\Controller\\Factory",
-            "name": "Factory",
-            "summary": "",
-            "url": "namespaces/user-controller-factory.html"
-        },                {
             "fqsen": "\\User\\Controller",
             "name": "Controller",
             "summary": "",
             "url": "namespaces/user-controller.html"
+        },                {
+            "fqsen": "\\User\\Controller\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/user-controller-factory.html"
         },                {
             "fqsen": "\\User\\Factory",
             "name": "Factory",
