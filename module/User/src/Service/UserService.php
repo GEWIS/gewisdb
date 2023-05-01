@@ -21,12 +21,12 @@ class UserService
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
-        protected readonly UserMapper $mapper,
         protected readonly UserCreateForm $createForm,
         protected readonly LoginForm $loginForm,
         protected readonly UserEditForm $editForm,
-        protected readonly PasswordInterface $crypt,
+        protected readonly UserMapper $mapper,
         protected readonly AuthenticationService $authService,
+        protected readonly PasswordInterface $crypt,
         protected readonly array $config,
     ) {
     }

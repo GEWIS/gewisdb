@@ -19,11 +19,11 @@ class Api
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function getActiveMembers(): array
+    public function getActiveMembers(bool $includeOrganMembership): array
     {
         return array_map(
-            static function ($member) {
-                return $member->toArrayApi(true);
+            static function ($member) use ($includeOrganMembership) {
+                return $member->toArrayApi($includeOrganMembership);
             },
             $this->getReportMemberMapper()->findActive(),
         );

@@ -49,7 +49,7 @@ class Module
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, static function ($e) use ($authService) {
             if (!$authService->hasIdentity()) {
                 $response = $e->getResponse();
-                $response->getHeaders()->addHeaderLine('Location', '/user');
+                $response->getHeaders()->addHeaderLine('Location', '/login');
                 $response->setStatusCode(302);
 
                 return $response;

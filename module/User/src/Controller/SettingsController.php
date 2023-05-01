@@ -15,7 +15,7 @@ class SettingsController extends AbstractActionController
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
-        protected readonly UserService $service,
+        protected readonly UserService $userService,
         protected readonly array $config,
     ) {
     }
@@ -23,10 +23,10 @@ class SettingsController extends AbstractActionController
     /**
      * View users.
      */
-    public function indexAction(): ViewModel
+    public function listUserAction(): ViewModel
     {
         return new ViewModel([
-            'users' => $this->service->findAll(),
+            'users' => $this->userService->findAll(),
             'usesldap' => !empty($this->config['ldap']['basedn']),
         ]);
     }
@@ -34,12 +34,12 @@ class SettingsController extends AbstractActionController
     /**
      * Create a user.
      */
-    public function createAction(): Response|ViewModel
+    public function createUserAction(): Response|ViewModel
     {
-        $form = $this->service->getCreateForm();
+        $form = $this->userService->getCreateForm();
 
         if ($this->getRequest()->isPost()) {
-            $result = $this->service->create($this->getRequest()->getPost()->toArray());
+            $result = $this->userService->create($this->getRequest()->getPost()->toArray());
 
             if ($result) {
                 return $this->redirect()->toRoute('settings/user');
@@ -52,18 +52,18 @@ class SettingsController extends AbstractActionController
     /**
      * Edit a user.
      */
-    public function editAction(): Response|ViewModel
+    public function editUserAction(): Response|ViewModel
     {
-        $form = $this->service->getEditForm();
+        $form = $this->userService->getEditForm();
         $id = (int) $this->params()->fromRoute('id');
-        $user = $this->service->find($id);
+        $user = $this->userService->find($id);
 
         if (null === $user) {
             return $this->notFoundAction();
         }
 
         if ($this->getRequest()->isPost()) {
-            $result = $this->service->edit($user, $this->getRequest()->getPost()->toArray());
+            $result = $this->userService->edit($user, $this->getRequest()->getPost()->toArray());
 
             if ($result) {
                 return $this->redirect()->toRoute('settings/user');
@@ -79,10 +79,10 @@ class SettingsController extends AbstractActionController
     /**
      * Remove a user.
      */
-    public function removeAction(): Response
+    public function removeUserAction(): Response
     {
         if ($this->getRequest()->isPost()) {
-            $this->service->remove((int) $this->params()->fromRoute('id'));
+            $this->userService->remove((int) $this->params()->fromRoute('id'));
         }
 
         return $this->redirect()->toRoute('settings/user');

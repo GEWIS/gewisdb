@@ -27,15 +27,15 @@ use Laminas\View\Renderer\PhpRenderer;
     <thead>
         <tr>
             <th>#</th>
-            <th><?= $this->translate('Username') ?>></th>
+            <th><?= $this->translate('Username') ?></th>
             <th><?= $this->translate('Edit / Delete') ?></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($users as $user): ?>
             <tr>
-                <td><?= $user->getId() ?>
-                <td><?= $user->getLogin() ?>
+                <td><?= $user->getId() ?></td>
+                <td><?= $user->getLogin() ?></td>
                 <td>
                     <a class="btn btn-primary btn-xs" href="<?= $this->url(
                         'settings/user/edit',
@@ -49,6 +49,6 @@ use Laminas\View\Renderer\PhpRenderer;
     </tbody>
 </table>
 
-<a href="<?= $this->url('settings/user/default', ['action' => 'create']); ?>" class="btn btn-success">
+<a href="<?= $this->url('settings/user/create'); ?>" class="btn btn-success">
     <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add new user') ?>
 </a>

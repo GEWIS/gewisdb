@@ -7,15 +7,21 @@ namespace User;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
+use Psr\Container\ContainerInterface;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Adapter\Factory\ApiPrincipalAdapterFactory;
+use User\Controller\ApiSettingsController;
+use User\Controller\Factory\ApiSettingsControllerFactory;
 use User\Controller\Factory\SettingsControllerFactory;
 use User\Controller\Factory\UserControllerFactory;
 use User\Controller\SettingsController;
 use User\Controller\UserController;
 use User\Factory\PasswordFactory;
+use User\Form\ApiPrincipal as ApiPrincipalForm;
 use User\Form\Login;
 use User\Form\UserCreate;
 use User\Form\UserEdit;
@@ -26,7 +32,9 @@ use User\Mapper\Factory\UserMapperFactory;
 use User\Mapper\UserMapper;
 use User\Model\User;
 use User\Service\ApiAuthenticationService;
+use User\Service\ApiPrincipalService;
 use User\Service\Factory\ApiAuthenticationServiceFactory;
+use User\Service\Factory\ApiPrincipalServiceFactory;
 use User\Service\Factory\AuthenticationServiceFactory;
 use User\Service\Factory\UserServiceFactory;
 use User\Service\UserService;
@@ -34,10 +42,10 @@ use User\Service\UserService;
 return [
     'router' => [
         'routes' => [
-            'user' => [
+            'passwordlogin' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route' => '/user',
+                    'route' => '/login',
                     'defaults' => [
                         'controller' => UserController::class,
                         'action' => 'index',
@@ -63,15 +71,18 @@ return [
                             'route' => '/user',
                             'defaults' => [
                                 'controller' => SettingsController::class,
-                                'action' => 'index',
+                                'action' => 'listUser',
                             ],
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
-                            'default' => [
+                            'create' => [
                                 'type' => Segment::class,
                                 'options' => [
-                                    'route' => '/:action',
+                                    'route' => '/create',
+                                    'defaults' => [
+                                        'action' => 'createUser',
+                                    ],
                                 ],
                             ],
                             'edit' => [
@@ -79,7 +90,10 @@ return [
                                 'options' => [
                                     'route' => '/edit/:id',
                                     'defaults' => [
-                                        'action' => 'edit',
+                                        'action' => 'editUser',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
                                     ],
                                 ],
                             ],
@@ -88,7 +102,56 @@ return [
                                 'options' => [
                                     'route' => '/delete/:id',
                                     'defaults' => [
-                                        'action' => 'remove',
+                                        'action' => 'removeUser',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'api-principals' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/api-principals',
+                            'defaults' => [
+                                'controller' => ApiSettingsController::class,
+                                'action' => 'listPrincipals',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'create' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/create',
+                                    'defaults' => [
+                                        'action' => 'createPrincipal',
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/:id',
+                                    'defaults' => [
+                                        'action' => 'editPrincipal',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/delete/:id',
+                                    'defaults' => [
+                                        'action' => 'removePrincipal',
+                                    ],
+                                    'constraints' => [
+                                        'id' => '[0-9]+',
                                     ],
                                 ],
                             ],
@@ -102,21 +165,29 @@ return [
         // This is not documented somewhere, but more specific classes need to go first
         'factories' => [
             ApiPrincipalAdapter::class => ApiPrincipalAdapterFactory::class,
+            ApiPrincipalService::class => ApiPrincipalServiceFactory::class,
             ApiAuthenticationService::class => ApiAuthenticationServiceFactory::class,
             UserService::class => UserServiceFactory::class,
             UserMapper::class => UserMapperFactory::class,
             PasswordInterface::class => PasswordFactory::class,
             AuthenticationService::class => AuthenticationServiceFactory::class,
             ApiPrincipalMapper::class => ApiPrincipalMapperFactory::class,
+            ApiPrincipalForm::class => static function (ContainerInterface $container) {
+                $form = new ApiPrincipalForm($container->get(MvcTranslator::class));
+                $form->setHydrator(new ClassMethodsHydrator());
+
+                return $form;
+            },
         ],
         'invokables' => [
+            Login::class => Login::class,
             UserCreate::class => UserCreate::class,
             UserEdit::class => UserEdit::class,
-            Login::class => Login::class,
         ],
     ],
     'controllers' => [
         'factories' => [
+            ApiSettingsController::class => ApiSettingsControllerFactory::class,
             UserController::class => UserControllerFactory::class,
             SettingsController::class => SettingsControllerFactory::class,
         ],

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 17:25+0200\n"
+"POT-Creation-Date: 2023-04-29 22:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 
 msgid "# Decisions"
 msgstr "# Decisions"
@@ -38,6 +38,12 @@ msgstr "A 404 error occurred"
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+
+msgid "API Principals"
+msgstr "API Principals"
+
+msgid "API Tokens"
+msgstr "API Tokens"
 
 msgid "Aangemelde mailing lists"
 msgstr "Aangemelde mailing lists"
@@ -279,6 +285,15 @@ msgstr "Confirm Changes"
 msgid "Controller"
 msgstr "Controller"
 
+msgid "Create API principal"
+msgstr "Create API principal"
+
+msgid "Create API token"
+msgstr "Create API token"
+
+msgid "Create new API principal"
+msgstr "Create new API principal"
+
 msgid "Create user"
 msgstr "Create user"
 
@@ -342,6 +357,9 @@ msgstr "Delete Prospective Member"
 
 msgid "Delete User"
 msgstr "Delete User"
+
+msgid "Description"
+msgstr "Description"
 
 msgid ""
 "Deze betaling zal middels een eenmalige SEPA-machtiging\n"
@@ -507,6 +525,9 @@ msgstr "Generation"
 
 msgid "Get API Health"
 msgstr "Get API Health"
+
+msgid "Get active Members (members that are in one or more organs)"
+msgstr "Get active Members (members that are in one or more organs)"
 
 msgid "Get all Members"
 msgstr "Get all Members"
@@ -794,6 +815,9 @@ msgstr "Paid (Amount)"
 msgid "Pending member updates"
 msgstr "Pending member updates"
 
+msgid "Permissions"
+msgstr "Permissions"
+
 msgid "Persoonlijke informatie"
 msgstr "Persoonlijke informatie"
 
@@ -849,6 +873,9 @@ msgstr "Query"
 msgid "Query Result"
 msgstr "Query Result"
 
+msgid "Read organ membership (per user/organ)"
+msgstr "Read organ membership (per user/organ)"
+
 msgid "Register Member"
 msgstr "Register Member"
 
@@ -890,6 +917,9 @@ msgstr "Search Prospective Members"
 
 msgid "Search TU/e Students"
 msgstr "Search TU/e Students"
+
+msgid "Select API permissions"
+msgstr "Select API permissions"
 
 msgid "Select Postal Region"
 msgstr "Select Postal Region"
@@ -1032,6 +1062,9 @@ msgstr "This member is not installed in an organ."
 msgid "Toggle Navigation"
 msgstr "Toggle Navigation"
 
+msgid "Token"
+msgstr "Token"
+
 msgid "Tussenvoegsels"
 msgstr "Tussenvoegsels"
 
@@ -1047,6 +1080,9 @@ msgstr "Update %s of %s"
 
 msgid "Update / Renew"
 msgstr "Update / Renew"
+
+msgid "Update API principal"
+msgstr "Update API principal"
 
 msgid "Update Address"
 msgstr "Update Address"

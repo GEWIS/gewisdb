@@ -46,6 +46,6 @@ class UserController extends AbstractActionController
     {
         $this->service->logout();
 
-        return $this->redirect()->toRoute('user');
+        return $this->redirect()->toRoute('passwordlogin');
     }
 }

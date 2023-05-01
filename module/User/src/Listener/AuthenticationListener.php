@@ -71,7 +71,7 @@ final class AuthenticationListener
 
         $e->stopPropagation(true);
         $response = $e->getResponse();
-        $response->getHeaders()->addHeaderLine('Location', '/user');
+        $response->getHeaders()->addHeaderLine('Location', '/login');
         $response->setStatusCode(302);
 
         return $response;

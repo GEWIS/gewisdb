@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 17:25+0200\n"
+"POT-Creation-Date: 2023-04-29 22:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 
 msgid "# Decisions"
 msgstr "# besluiten"
@@ -39,6 +39,12 @@ msgstr "Er is een 404-fout opgetreden"
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Een TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
+
+msgid "API Principals"
+msgstr "API-gebruiker"
+
+msgid "API Tokens"
+msgstr "API-token"
 
 msgid "Aangemelde mailing lists"
 msgstr "Aangemelde mailinglijsten"
@@ -280,6 +286,15 @@ msgstr "Wijzigingen bevestigen"
 msgid "Controller"
 msgstr "Controller"
 
+msgid "Create API principal"
+msgstr "Maak API-gebruiker aan"
+
+msgid "Create API token"
+msgstr "Maak API-token"
+
+msgid "Create new API principal"
+msgstr "Nieuwe API-gebruiker"
+
 msgid "Create user"
 msgstr "Maak nieuwe gebruiker aan"
 
@@ -344,6 +359,9 @@ msgstr "Toekomstig lid verwijderen"
 msgid "Delete User"
 msgstr "Gebruiker verwijderen"
 
+msgid "Description"
+msgstr "Beschrijving"
+
 msgid ""
 "Deze betaling zal middels een eenmalige SEPA-machtiging\n"
 "verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
@@ -359,7 +377,7 @@ msgstr "Dechargeer"
 
 #, php-format
 msgid "Discharge %s as %s?"
-msgstr "Dechargeer %s als %s"
+msgstr "Dechargeer %s als %s?"
 
 msgid "Discharge Board Member"
 msgstr "Bestuurder dechargeren"
@@ -509,6 +527,10 @@ msgstr "Generatie"
 msgid "Get API Health"
 msgstr "API-status ophalen"
 
+msgid "Get active Members (members that are in one or more organs)"
+msgstr ""
+"Bekijk actieve leden (leden die in één of meer organen zijn geïnstalleerd)"
+
 msgid "Get all Members"
 msgstr "Alle leden ophalen"
 
@@ -570,7 +592,7 @@ msgstr ""
 "bijvoorbeeld %s0001. Je hebt je gebruikersnaam ontvangen in een e-mail toen "
 "je je ingeschreven hebt aan de TU/e. Op <a href=\"%s\">deze</a> pagina staat "
 "hoe je je gebruikersnaam kunt vinden. We gebruiken je gebruikersnaam om te "
-"verifi�ren dat je aan de faculteit van M&CS studeert."
+"verifi�ren dat je aan de faculteit van M&CS studeert."
 
 msgid ""
 "Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
@@ -748,7 +770,7 @@ msgid "Mutations"
 msgstr "Mutaties"
 
 msgid "N/A"
-msgstr "N.V.T."
+msgstr "n.v.t."
 
 msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
 msgstr "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
@@ -797,6 +819,9 @@ msgstr "Betaald (bedrag)"
 
 msgid "Pending member updates"
 msgstr "Openstaande updates persoonsgegevens"
+
+msgid "Permissions"
+msgstr "Rechten"
 
 msgid "Persoonlijke informatie"
 msgstr "Persoonlijke informatie"
@@ -853,6 +878,9 @@ msgstr "Query"
 msgid "Query Result"
 msgstr "Queryresultaat"
 
+msgid "Read organ membership (per user/organ)"
+msgstr "Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
+
 msgid "Register Member"
 msgstr "Lid inschrijven"
 
@@ -894,6 +922,9 @@ msgstr "Toekomstige leden zoeken"
 
 msgid "Search TU/e Students"
 msgstr "TU/e-studenten zoeken"
+
+msgid "Select API permissions"
+msgstr "Selecteer API-rechten"
 
 msgid "Select Postal Region"
 msgstr "Selecteer een postregio"
@@ -1039,6 +1070,9 @@ msgstr "Dit lid is niet lid van een orgaan."
 msgid "Toggle Navigation"
 msgstr "Klap navigatie in/uit"
 
+msgid "Token"
+msgstr "Token"
+
 msgid "Tussenvoegsels"
 msgstr "Tussenvoegsels"
 
@@ -1054,6 +1088,9 @@ msgstr "Update %s van %s"
 
 msgid "Update / Renew"
 msgstr "Bijwerken / Vernieuwen"
+
+msgid "Update API principal"
+msgstr "API-gebruiker bijwerken"
 
 msgid "Update Address"
 msgstr "Adres bijwerken"

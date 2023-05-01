@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 9863867-dirty\n"
+"Project-Id-Version: GEWISdb 95c03ca4-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 17:25+0200\n"
+"POT-Creation-Date: 2023-04-29 22:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -811,6 +811,9 @@ msgstr ""
 msgid "Add Function"
 msgstr ""
 
+msgid "API Tokens"
+msgstr ""
+
 msgid "Functions"
 msgstr ""
 
@@ -843,6 +846,27 @@ msgid ""
 "mailman (with the same name!)."
 msgstr ""
 
+msgid "Create API token"
+msgstr ""
+
+msgid "Update API principal"
+msgstr ""
+
+msgid "API Principals"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Permissions"
+msgstr ""
+
+msgid "Edit / Delete"
+msgstr ""
+
+msgid "Create new API principal"
+msgstr ""
+
 msgid "Create user"
 msgstr ""
 
@@ -865,9 +889,6 @@ msgid ""
 msgstr ""
 
 msgid "Username"
-msgstr ""
-
-msgid "Edit / Delete"
 msgstr ""
 
 msgid "Add new user"
@@ -1094,16 +1115,31 @@ msgstr ""
 msgid "Change Membership Type"
 msgstr ""
 
+msgid "Execute"
+msgstr ""
+
 msgid "CSV"
 msgstr ""
 
-msgid "Execute"
+msgid "Token"
+msgstr ""
+
+msgid "Select API permissions"
+msgstr ""
+
+msgid "Create API principal"
 msgstr ""
 
 msgid "Get API Health"
 msgstr ""
 
 msgid "Get all Members"
+msgstr ""
+
+msgid "Get active Members (members that are in one or more organs)"
+msgstr ""
+
+msgid "Read organ membership (per user/organ)"
 msgstr ""
 
 msgid "All API permissions"

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Application\Controller\IndexController;
+use Application\View\Helper\BootstrapElementError;
 use Laminas\I18n\Translator\Resources;
 use Laminas\Router\Http\Segment;
 use User\Listener\AuthenticationListener;
@@ -70,6 +71,11 @@ return [
             'message_open_format' => '<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>', // phpcs:ignore -- user-visible strings should not be split
             'message_close_string' => '</li></ul></div>',
             'message_separator_string' => '</li><li>',
+        ],
+    ],
+    'view_helpers' => [
+        'invokables' => [
+            'bootstrapElementError' => BootstrapElementError::class,
         ],
     ],
 ];

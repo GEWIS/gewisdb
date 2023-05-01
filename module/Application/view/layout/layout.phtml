@@ -112,7 +112,7 @@ $(document).ready(function() {
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<?= $this->url('user/default', ['action' => 'logout']) ?>">
+                                        <a href="<?= $this->url('passwordlogin/default', ['action' => 'logout']) ?>">
                                             <?= $this->translate('Log out') ?>
                                         </a>
                                     </li>
@@ -120,7 +120,7 @@ $(document).ready(function() {
                             </li>
                         <?php else: ?>
                             <li class="pull-right">
-                                <a href="<?= $this->url('user') ?>">
+                                <a href="<?= $this->url('passwordlogin') ?>">
                                     <?= $this->translate('Log in') ?>
                                 </a>
                             </li>

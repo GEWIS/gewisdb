@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\View;
 
+use Laminas\Form\ElementInterface;
 use Laminas\Form\View\HelperTrait as FormHelperTrait;
 use Laminas\I18n\View\HelperTrait as I18nHelperTrait;
 use Laminas\Mvc\Plugin\FlashMessenger\View\HelperTrait as FlashMessengerHelperTrait;
@@ -17,6 +18,7 @@ use Laminas\Mvc\Plugin\FlashMessenger\View\HelperTrait as FlashMessengerHelperTr
  * Other traits from laminas are already chained into this trait. This includes support for the FlashMessenger, Form,
  * and i18n view helpers.
  *
+ * @method string bootstrapElementError(ElementInterface $element)
  * @method string fileUrl(string $path)
  * @method bool moduleIsActive(array $condition)
  */
