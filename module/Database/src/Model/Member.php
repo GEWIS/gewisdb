@@ -241,6 +241,18 @@ class Member
     )]
     protected Collection $lists;
 
+    /**
+     * ActionLinks of this member.
+     *
+     * @var Collection<array-key, ActionLink>
+     */
+    #[OneToMany(
+        targetEntity: ActionLink::class,
+        mappedBy: 'member',
+        cascade: ['persist', 'remove'],
+    )]
+    protected Collection $actionLinks;
+
     #[Column(
         type: 'string',
         nullable: true,
@@ -770,5 +782,15 @@ class Member
     public function setStudentAddress(Address $address): void
     {
         $this->addAddress($address);
+    }
+
+    /**
+     * Get action links of a member
+     *
+     * @return Collection<array-key, ActionLink>
+     */
+    public function getActionLinks(): Collection
+    {
+        return $this->actionLinks;
     }
 }

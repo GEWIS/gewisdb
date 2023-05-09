@@ -57,6 +57,8 @@ use Database\Hydrator\Other as OtherHydrator;
 use Database\Hydrator\Strategy\AddressHydratorStrategy;
 use Database\Hydrator\Strategy\MeetingHydratorStrategy;
 use Database\Hydrator\Strategy\PostalRegionHydratorStrategy;
+use Database\Mapper\ActionLink as ActionLinkMapper;
+use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
 use Database\Mapper\Factory\InstallationFunctionFactory as InstallationFunctionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
@@ -474,6 +476,7 @@ class Module
 
                     return $hydrator;
                 },
+                ActionLinkMapper::class => ActionLinkMapperFactory::class,
                 InstallationFunctionMapper::class => InstallationFunctionMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,
