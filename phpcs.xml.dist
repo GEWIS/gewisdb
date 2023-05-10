@@ -28,6 +28,7 @@
     <!-- Type hints that cannot converted to native types due to signature of parent -->
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint">
         <!-- Factories -->
+        <exclude-pattern>module/Application/src/Service/Factory/EmailFactory.php</exclude-pattern>
         <exclude-pattern>module/Application/src/Service/Factory/FileStorageFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/Factory/AbstractCheckerCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/Factory/CheckMembershipGraduateRenewalCommandFactory.php</exclude-pattern>

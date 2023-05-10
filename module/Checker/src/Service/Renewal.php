@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Checker\Service;
 
+use Application\Service\Email as EmailService;
 use Checker\Mapper\Member as MemberMapper;
 use Database\Mapper\ActionLink as ActionLinkMapper;
 
@@ -19,6 +20,7 @@ class Renewal
     public function __construct(
         private readonly ActionLinkMapper $actionLinkMapper,
         private readonly MemberMapper $memberMapper,
+        private readonly EmailService $emailService,
         private readonly array $config,
     ) {
     }
@@ -31,5 +33,8 @@ class Renewal
         $graduates = $this->memberMapper->getExpiringGraduates();
 
         // TODO
+        foreach ($graduates as $graduate) {
+            echo $this->emailService->getEmailBody();
+        }
     }
 }

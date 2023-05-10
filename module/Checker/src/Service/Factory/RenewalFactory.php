@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Checker\Service\Factory;
 
+use Application\Service\Email as EmailService;
 use Checker\Mapper\Member as MemberMapper;
 use Checker\Service\Renewal as RenewalService;
 use Database\Mapper\ActionLink as ActionLinkMapper;
@@ -25,6 +26,7 @@ class RenewalFactory implements FactoryInterface
         return new RenewalService(
             $container->get(ActionLinkMapper::class),
             $container->get(MemberMapper::class),
+            $container->get(EmailService::class),
             $config,
         );
     }
