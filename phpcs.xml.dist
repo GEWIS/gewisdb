@@ -30,6 +30,7 @@
         <!-- Factories -->
         <exclude-pattern>module/Application/src/Service/Factory/FileStorageFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/Factory/AbstractCheckerCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/Factory/CheckMembershipGraduateRenewalCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/InstallationFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/KeyFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
@@ -40,6 +41,7 @@
         <exclude-pattern>module/Checker/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/OrganFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/RenewalFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ApiControllerFactory.php</exclude-pattern>
@@ -108,6 +110,7 @@
         <exclude-pattern>module/Checker/src/Command/CheckDatabaseCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckDischargesCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipExpirationCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTueCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTypeCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>

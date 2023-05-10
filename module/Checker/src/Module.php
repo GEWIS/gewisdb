@@ -8,9 +8,11 @@ use Checker\Command\CheckAuthenticationKeysCommand;
 use Checker\Command\CheckDatabaseCommand;
 use Checker\Command\CheckDischargesCommand;
 use Checker\Command\CheckMembershipExpirationCommand;
+use Checker\Command\CheckMembershipGraduateRenewalCommand;
 use Checker\Command\CheckMembershipTUeCommand;
 use Checker\Command\CheckMembershipTypeCommand;
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
+use Checker\Command\Factory\CheckMembershipGraduateRenewalCommandFactory;
 use Checker\Mapper\Factory\InstallationFactory as InstallationMapperFactory;
 use Checker\Mapper\Factory\KeyFactory as KeyMapperFactory;
 use Checker\Mapper\Factory\MemberFactory as MemberMapperFactory;
@@ -26,11 +28,13 @@ use Checker\Service\Factory\KeyFactory as KeyServiceFactory;
 use Checker\Service\Factory\MeetingFactory as MeetingServiceFactory;
 use Checker\Service\Factory\MemberFactory as MemberServiceFactory;
 use Checker\Service\Factory\OrganFactory as OrganServiceFactory;
+use Checker\Service\Factory\RenewalFactory as RenewalServiceFactory;
 use Checker\Service\Installation as InstallationService;
 use Checker\Service\Key as KeyService;
 use Checker\Service\Meeting as MeetingService;
 use Checker\Service\Member as MemberService;
 use Checker\Service\Organ as OrganService;
+use Checker\Service\Renewal as RenewalService;
 use Psr\Container\ContainerInterface;
 
 class Module
@@ -54,6 +58,7 @@ class Module
                 CheckDatabaseCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipExpirationCommand::class => AbstractCheckerCommandFactory::class,
+                CheckMembershipGraduateRenewalCommand::class => CheckMembershipGraduateRenewalCommandFactory::class,
                 CheckMembershipTUeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipTypeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
@@ -62,6 +67,7 @@ class Module
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
                 OrganService::class => OrganServiceFactory::class,
+                RenewalService::class => RenewalServiceFactory::class,
                 InstallationMapper::class => InstallationMapperFactory::class,
                 KeyMapper::class => KeyMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
