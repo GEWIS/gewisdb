@@ -19,7 +19,9 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
+use Laminas\Mail\Address as MailAddress;
 
+use function mb_encode_mimeheader;
 use function preg_replace;
 
 /**
@@ -295,6 +297,26 @@ class Member
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    /**
+     * Get the member as an email recipient
+     */
+    public function getEmailRecipient(): ?MailAddress
+    {
+        if (null === $this->getEmail()) {
+            return null;
+        }
+
+        return new MailAddress(
+            $this->getEmail(),
+            mb_encode_mimeheader(
+                $this->getFullName(),
+                'UTF-8',
+                'Q',
+                '',
+            ),
+        );
     }
 
     /**

@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
+use Laminas\Mail\Address as MailAddress;
+use Laminas\Mail\Header\MessageId;
+use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\Part as MimePart;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
 
@@ -20,26 +25,65 @@ class Email
     ) {
     }
 
-    public function getEmailBody(): string
-    {
-        return $this->render(
+    public function sendEmailTemplate(
+        MailAddress $recipient,
+        string $titleHeader,
+        string $titleBlock,
+        string $bodyMain,
+        ?string $titleAccessible = null,
+        ?string $titleMoreInformation = null,
+        ?string $bodyMoreInformation = null,
+        ?string $footerReason = null,
+        ?string $emailSubject = null,
+    ): void {
+        $replyTo = new MailAddress($this->config['to']['public']['address'], $this->config['to']['public']['name']);
+
+        $body = $this->render(
             'email/basic',
             [
-                'title_accessible' => 'GEWIS Graduate Renewal',
-                'title_header' => 'Membership notification',
-                'title_block' => 'Expiring membership',
-                'body_main' => '<p style="margin: 0; font-size: 18px;">
-                    Dear {{firstname}},<br><br>
-                    You are currently registered as a Graduate (<i>Afgestudeerde</i>) at GEWIS until <b>July 1st, 2023</b>.  We care about your privacy, so we\'d like to confirm that you want to renew this with another year.
-                    <br><br> Please click <a href="https://database.gewis.nl/" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">here</a> to review your personal details and renew  your status as graduate of GEWIS for another year. If you do not click this link, your status will automatically expire and we will delete your data in  the way described in our <a href="https://gewis.nl/association/regulations/privacy-statement" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">privacy policy</a>.
-                    <br><br> If you prefer this, you can also renew your membership by replying to this email. Please keep the subject intact so we can process it quicker.
-                    <br><br> On behalf of the the board,<br><br> .. ..<br> Secretary of GEWIS ....-....
-                </p>',
-                'title_moreinformation' => 'More information',
-                'body_moreinformation' => '<p>On July 1st, 2021 the new Articles of Association came into effect.         This means you can now also be registered with GEWIS as a graduate. All non-studying members who were not in organ were registered as a graduate on aforementioned date.  <br><br> Graduates do not pay contribution and as a graduate, you can still join  GEWIS activities or visit the social drink like you used to. However, sometimes you have to pay an extra fee to join an (expensive) activity. You can also no longer serve on the board of GEWIS or vote during the GMM. <br><br> Article 3.1 of the Internal Regulations allows you to request renewal  of your status as graduate. Therefore, you are receiving this email.</p>',
-                'footer_reason' => 'You receive this message because your registration as a graduate of GEWIS is almost ending. You can not opt-out of these emails.',
+                'title_header' => $titleHeader,
+                'title_block' => $titleBlock,
+                'body_main' => $bodyMain,
+                'title_accessible' => $titleAccessible ?? $titleBlock,
+                'title_moreinformation' => $titleMoreInformation,
+                'body_moreinformation' => $bodyMoreInformation,
+                'footer_reason' => $footerReason,
+                'footer_sender_email' => $replyTo->getEmail(),
             ],
         );
+
+        $this->sendEmail(
+            $body,
+            $emailSubject ?? $titleHeader,
+            $recipient,
+            $replyTo,
+        );
+    }
+
+    private function sendEmail(
+        string $body,
+        string $subject,
+        MailAddress $recipient,
+        ?MailAddress $replyTo = null,
+    ): void {
+        $html = new MimePart($body);
+        $html->type = 'text/html';
+
+        $mimeMessage = new MimeMessage();
+        $mimeMessage->addPart($html);
+
+        $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
+        $message->setBody($mimeMessage);
+        $message->setFrom($this->config['from']['address'], $this->config['from']['name']);
+        $message->setTo($recipient);
+        $message->setSubject($subject);
+
+        if (null !== $replyTo) {
+            $message->setReplyTo($replyTo);
+        }
+
+        $this->getMailTransport()->send($message);
     }
 
     /**
@@ -55,6 +99,11 @@ class Email
         $model->setTemplate($template);
 
         return $this->renderer->render($model);
+    }
+
+    private function getMailTransport(): TransportInterface
+    {
+        return $this->mailTransport;
     }
 
     /**

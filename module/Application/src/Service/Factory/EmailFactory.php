@@ -21,7 +21,7 @@ class EmailFactory implements FactoryInterface
         return new EmailService(
             $container->get('ViewRenderer'),
             $container->get('application_mail_transport'),
-            $container->get('config'),
+            $container->get('config')['email'],
         );
     }
 }

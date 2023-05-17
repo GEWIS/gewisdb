@@ -202,6 +202,7 @@
 									</td>
 								</tr>
 								<!-- /Important announcements -->
+								<?php if (null !== $title_moreinformation):?>
 								<tr>
 									<td>
 										<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; width: 720px;" width="720">
@@ -224,6 +225,7 @@
 										</table>
 									</td>
 								</tr>
+								<?php endif; ?>
 								<!-- New newsletter announcement -->
 								<tr>
 									<td>
@@ -274,8 +276,8 @@
 																	<div style="font-family: sans-serif">
 																		<div style="font-size: 12px; color: #FFFFFF; line-height: 1.2; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
 																			<p class="pleft" style="margin: 0; font-size: 14px;">
-																				<a href="mailto:secretary@gewis.nl" style="color:white; text-decoration:none;">secretary@gewis.nl</a><br/>
-																				<a href="tel:+31402472815" style="color:white; text-decoration:none;">+31 40 247 2815</a><br/>
+																				<a href="mailto:<?= $footer_sender_email ?>" style="color:white; text-decoration:none;"><?= $footer_sender_email ?></a><br/>
+																				<a href="tel:+31402472815" style="color:white; text-decoration:none;">+31&nbsp;40&nbsp;247&nbsp;2815</a><br/>
 																			</p>
 																		</div>
 																	</div>

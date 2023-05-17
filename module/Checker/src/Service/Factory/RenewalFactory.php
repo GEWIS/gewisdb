@@ -9,6 +9,7 @@ use Checker\Mapper\Member as MemberMapper;
 use Checker\Service\Renewal as RenewalService;
 use Database\Mapper\ActionLink as ActionLinkMapper;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\View\Renderer\PhpRenderer;
 use Psr\Container\ContainerInterface;
 
 class RenewalFactory implements FactoryInterface
@@ -27,6 +28,7 @@ class RenewalFactory implements FactoryInterface
             $container->get(ActionLinkMapper::class),
             $container->get(MemberMapper::class),
             $container->get(EmailService::class),
+            $container->get(PhpRenderer::class),
             $config,
         );
     }

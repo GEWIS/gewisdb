@@ -22,4 +22,9 @@ return [
             'check:membership:type' => CheckMembershipTypeCommand::class,
         ],
     ],
+    'view_manager' => [
+        'template_path_stack' => [
+            'checker' => __DIR__ . '/../view/',
+        ],
+    ],
 ];
