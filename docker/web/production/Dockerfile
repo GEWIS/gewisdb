@@ -8,6 +8,7 @@ RUN apk add --no-cache --virtual .build-deps \
         openldap-dev \
         tzdata \
     && apk add --no-cache --virtual .runtime-programs \
+        gettext \
         git \
         icu-data-full \
         unzip \
@@ -53,6 +54,9 @@ COPY --chown=www-data:www-data ./docker/web/production/docker-entrypoint.sh ./do
 RUN chmod 0775 ./docker-entrypoint.sh
 
 COPY --chown=www-data:www-data . /code
+
+RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
+    && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
 
 RUN php composer.phar dump-autoload -a --no-dev
 

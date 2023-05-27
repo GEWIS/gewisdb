@@ -33,3 +33,6 @@ psalm/psalm-baseline-pr.xml
 config/bash.env
 .vscode
 phpcs.xml
+
+# Language binaries are created during the docker build process or using 'make compilelang'
+*.mo
