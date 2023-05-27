@@ -358,6 +358,19 @@ return [
                             ],
                         ],
                     ],
+                    'renew' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route' => '/renew/:token',
+                            'constraints' => [
+                                'token' => '[a-zA-Z0-9\_\-\+]+',
+                            ],
+                            'defaults' => [
+                                'action' => 'renew',
+                                'auth_type' => AuthenticationListener::AUTH_NONE,
+                            ],
+                        ],
+                    ],
                     'subscribe' => [
                         'type' => Literal::class,
                         'options' => [

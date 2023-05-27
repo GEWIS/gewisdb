@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use InvalidArgumentException;
 
 use function base64_encode;
 use function random_bytes;
@@ -34,7 +35,7 @@ class ActionLink
      * If the URL was clicked
      */
     #[Column(type: 'boolean')]
-    protected bool $used;
+    protected bool $used = false;
 
     /**
      * The token in the URL
@@ -47,7 +48,7 @@ class ActionLink
      */
     #[ManyToOne(
         targetEntity: Member::class,
-        inversedBy: 'actionlinks',
+        inversedBy: 'actionLinks',
     )]
     #[JoinColumn(
         name: 'member',
@@ -62,15 +63,34 @@ class ActionLink
     #[Column(type: 'date')]
     protected DateTime $currentExpiration;
 
-    public function __construct()
-    {
+    /**
+     * New expiration
+     * This is not neccessarily a year from the previous as in principle this
+     * will be until the end of next association year.
+     */
+    #[Column(type: 'date')]
+    protected DateTime $newExpiration;
+
+    public function __construct(
+        Member $member,
+        DateTime $newExpiration,
+    ) {
+        $this->member = $member;
+        $this->newExpiration = $newExpiration;
+        $this->currentExpiration = $member->getExpiration();
         $this->generateToken();
+
+        if ($this->currentExpiration >= $this->newExpiration) {
+            throw new InvalidArgumentException('New expiration must be strictly later than current expiration');
+        }
+
+        return null;
     }
 
     /**
      * Generate a new token and return it
      */
-    public function generateToken(): string
+    private function generateToken(): string
     {
         $this->token = base64_encode(random_bytes(96));
         $this->token = str_replace('/', '-', $this->token);
@@ -86,5 +106,20 @@ class ActionLink
     public function getCurrentExpiration(): DateTime
     {
         return $this->currentExpiration;
+    }
+
+    public function getNewExpiration(): DateTime
+    {
+        return $this->newExpiration;
+    }
+
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    public function isUsed(): bool
+    {
+        return $this->used;
     }
 }

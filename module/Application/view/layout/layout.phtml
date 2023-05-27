@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     </head>
     <body>
-<?php if (!$this->isModuleActive(['database', 'member', 'subscribe'])): ?>
+<?php if (!$this->isModuleActive(['database', 'member', 'subscribe']) && !$this->isModuleActive(['database', 'member', 'renew'])): ?>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container">
                 <div class="navbar-header navbar-left pull-left">
@@ -222,7 +222,7 @@ $(document).ready(function() {
                     <ul class="nav navbar-nav navbar-left">
                         <li class="active">
                             <a href="#" role="button" class="hidden-sm hidden-xs">
-                                <?= $this->translate('Subscribe') ?>
+                                <?= $this->isModuleActive(['database', 'member', 'subscribe']) ? $this->translate('Subscribe') : $this->translate('Renewal') ?>
                             </a>
                         </li>
                     </ul>

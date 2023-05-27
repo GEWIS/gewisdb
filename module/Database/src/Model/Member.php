@@ -132,9 +132,9 @@ class Member
     protected bool $isStudying;
 
     /**
-     * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
-     * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
-     * still meets the requirements as set forth in the bylaws and internal regulations.
+     * Date when the real membership ("ordinary", "external" or "honorary") of the member will have ended, i.e., from
+     * this date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the
+     * member still meets the requirements as set forth in the bylaws and internal regulations.
      */
     #[Column(
         type: 'date',

@@ -112,34 +112,40 @@ class Member
     }
 
     /**
-     * Get all expiring graduates
+     * Get all expiring graduates for which no action link exists
      * The check for hidden is required because hidden members may also expire but should not be emailed
      *
      * @param ?DateTime $expiresBefore Latest expiry date, end of current association year if null
      *
      * @return MemberModel[]
      */
-    public function getExpiringGraduates(?DateTime $expiresBefore = null): array
-    {
+    public function getExpiringGraduates(
+        ?DateTime $expiresBefore = null,
+        ?int $limit = null,
+    ): array {
         $qb = $this->em->createQueryBuilder();
         $qb->select('m')
             ->from('Database\Model\Member', 'm')
             ->where('m.type = \'graduate\'')
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
-            ->andWhere('m.expiration <= :endOfCurrentAssociationYear');
+            ->andWhere('m.expiration <= :expiresBefore');
 
         $qbal = $this->em->createQueryBuilder();
         $qbal->select('al')
             ->from('Database\Model\ActionLink', 'al')
-            ->andWhere('al.currentExpiration <= :endOfCurrentAssociationYear');
+            ->andWhere('al.currentExpiration <= :expiresBefore');
 
-        $qb->setParameter('endOfCurrentAssociationYear', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
-        $qbal->setParameter('endOfCurrentAssociationYear', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
+        $qb->setParameter('expiresBefore', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
+        $qbal->setParameter('expiresBefore', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
 
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbal->getDql()),
         ));
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
 
         return $qb->getQuery()->getResult();
     }

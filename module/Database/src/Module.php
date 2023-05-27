@@ -38,6 +38,7 @@ use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
 use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
+use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
 use Database\Form\Other as OtherForm;
 use Database\Form\Query as QueryForm;
@@ -172,6 +173,12 @@ class Module
                 },
                 MemberApproveForm::class => static function (ContainerInterface $container) {
                     $form = new MemberApproveForm($container->get(MvcTranslator::class));
+                    $form->setHydrator($container->get('database_hydrator_default'));
+
+                    return $form;
+                },
+                MemberRenewalForm::class => static function (ContainerInterface $container) {
+                    $form = new MemberRenewalForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
 
                     return $form;

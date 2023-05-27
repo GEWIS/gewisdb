@@ -60,6 +60,28 @@ class MemberController extends AbstractActionController
     }
 
     /**
+     * (Graduate) renewal action
+     * Perhaps also for ordinary -> graduate in the future
+     */
+    public function renewAction(): ViewModel
+    {
+        $form = $this->memberService->getRenewalForm((string) $this->params()->fromRoute('token'));
+        if (null === $form) {
+            return $this->notFoundAction();
+        }
+
+        $request = $this->getRequest();
+
+        // if ($request->isPost()) {
+        //     return null;
+        // }
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
+    }
+
+    /**
      * Search action.
      *
      * Searches for members.

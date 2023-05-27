@@ -156,6 +156,7 @@
         <exclude-pattern>module/Database/src/Form/MemberEdit.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberExpiration.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberLists.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/MemberRenewal.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberType.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Other.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Query.php</exclude-pattern>

@@ -7,7 +7,9 @@ namespace Checker\Service;
 use Application\Service\Email as EmailService;
 use Checker\Mapper\Member as MemberMapper;
 use Database\Mapper\ActionLink as ActionLinkMapper;
-use Database\Model\Member as MemberModel;
+use Database\Model\ActionLink as ActionLinkModel;
+use DateInterval;
+use DateTime;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
 
@@ -30,32 +32,39 @@ class Renewal
     }
 
     /**
-     * Send emails to expiring graduates
+     * Create an actionlink and send emails to expiring graduates
+     * Emails are sent 45 days before expiry
+     * A limit of 10 graduates is used; e.g. on a cronjob each hour this would mean 250 per day
+     * Limiting to make sure the secretary does not get overwhelmed with questions regarding renewal.
      */
     public function sendRenewalGraduates(): void
     {
-        $graduates = $this->memberMapper->getExpiringGraduates();
+        $expiresWithin = new DateTime();
+        $expiresWithin->add(new DateInterval('P45D'));
+        $limit = 10;
+        $graduates = $this->memberMapper->getExpiringGraduates($expiresWithin, $limit);
 
-        // TODO
         foreach ($graduates as $graduate) {
-            $this->sendRenewalEmail($graduate);
+            $actionLink = $this->actionLinkMapper->createByMember($graduate);
+            $this->sendRenewalEmail($actionLink);
         }
     }
 
-    private function sendRenewalEmail(MemberModel $graduate): void
+    private function sendRenewalEmail(ActionLinkModel $link): void
     {
         $body = $this->render(
             'email/graduate-renewal',
             [
-                'firstName' => $graduate->getFirstName(),
-                'expiration' => $graduate->getExpiration(),
-                'url' => $this->config['application']['public_url'],
+                'firstName' => $link->getMember()->getFirstName(),
+                'currentExpiration' => $link->getCurrentExpiration(),
+                'newExpiration' => $link->getNewExpiration(),
+                'url' => $this->config['application']['public_url'] . '/member/renew/' . $link->getToken(),
                 //TODO: If global config exists, we should make the secretary a global config option
             ],
         );
 
         $this->emailService->sendEmailTemplate(
-            $graduate->getEmailRecipient(),
+            $link->getMember()->getEmailRecipient(),
             'Membership notification',
             'Expiring membership',
             $body,
@@ -74,7 +83,7 @@ class Renewal
                 Therefore, you are receiving this email.</p>',
             'You receive this message because your registration as a graduate of GEWIS is almost ending.
                 You can not opt-out of these emails.',
-            'Graduate Renewal (' . $graduate->getLidnr() . ')',
+            'Graduate Renewal (' . $link->getMember()->getLidnr() . ')',
         );
     }
 
