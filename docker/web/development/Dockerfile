@@ -65,6 +65,8 @@ RUN chmod 0775 ./docker-entrypoint.sh
 
 COPY --chown=www-data:www-data . /code
 RUN chmod 0775 ./orm ./web
+RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
+    && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
 
 RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
     && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
