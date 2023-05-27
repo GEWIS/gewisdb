@@ -16,7 +16,13 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Validator\Identical;
 
+use function array_filter;
+use function array_merge;
+use function array_reduce;
+use function in_array;
 use function sprintf;
+
+use const ARRAY_FILTER_USE_KEY;
 
 class MemberRenewal extends Form implements InputFilterProviderInterface
 {
@@ -81,7 +87,7 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'newExpiration',
+            'name' => 'expiration',
             'type' => Date::class,
             'options' => [
                 'label' => $translator->translate('Renew until'),
@@ -129,9 +135,51 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
         ]);
     }
 
-    public function setNewExpiration(DateTime $date): void
+    public function setExpiration(DateTime $date): void
     {
-        $this->get('newExpiration')->setValue($date);
+        $this->data['expiration'] = $date->format('Y-m-d');
+        $this->get('expiration')->setValue($date);
+    }
+
+    /**
+     * @param array<array-key,string> $data
+     */
+    public function setMutableData(array $data): void
+    {
+        if (null === $this->data) {
+            $this->data = [];
+        }
+
+        $this->data = array_merge(
+            $this->data,
+            array_filter(
+                $data,
+                function ($key) {
+                    return in_array($key, $this->getMutableFields());
+                },
+                ARRAY_FILTER_USE_KEY,
+            ),
+        );
+        $this->populateValues($this->data);
+        $this->hasValidated = false;
+    }
+
+    /**
+     * @return string[] Mutable field names, can be used to make sure readonly data is not submitted
+     */
+    private function getMutableFields(): array
+    {
+        return array_reduce(
+            $this->getElements(),
+            static function ($c, $elem): array {
+                if (!$elem->getAttribute('readonly')) {
+                    $c[] = $elem->getName();
+                }
+
+                return $c;
+            },
+            [],
+        );
     }
 
     /**

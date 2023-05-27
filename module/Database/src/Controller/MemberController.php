@@ -72,9 +72,19 @@ class MemberController extends AbstractActionController
 
         $request = $this->getRequest();
 
-        // if ($request->isPost()) {
-        //     return null;
-        // }
+        if ($request->isPost()) {
+            $form->setMutableData($request->getPost()->toArray());
+
+            if ($form->isValid()) {
+                /** @var MemberModel $updatedMember */
+                $updatedMember = $form->getData();
+                $this->memberService->getMemberMapper()->persist($updatedMember);
+
+                return new ViewModel([
+                    'updatedMember' => $updatedMember,
+                ]);
+            }
+        }
 
         return new ViewModel([
             'form' => $form,

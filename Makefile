@@ -192,6 +192,9 @@ buildwebdev:
 buildnginx:
 		@docker build -t abc-db.docker-registry.gewis.nl/gewisdb_nginx:latest -f docker/nginx/Dockerfile docker/nginx
 
+buildpgadmin:
+		@docker compose build pgadmin
+
 login:
 		@docker login abc-db.docker-registry.gewis.nl
 

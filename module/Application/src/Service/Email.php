@@ -77,6 +77,7 @@ class Email
         $message->setBody($mimeMessage);
         $message->setFrom($this->config['from']['address'], $this->config['from']['name']);
         $message->setTo($recipient);
+        $message->setBcc($this->config['from']['address'], $this->config['from']['name']);
         $message->setSubject($subject);
 
         if (null !== $replyTo) {

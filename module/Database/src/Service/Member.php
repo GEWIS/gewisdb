@@ -1088,7 +1088,7 @@ class Member
 
         $form = $this->memberRenewalForm;
         $form->bind($actionLink->getMember());
-        $form->setNewExpiration($actionLink->getNewExpiration());
+        $form->setExpiration($actionLink->getNewExpiration());
 
         return $form;
     }

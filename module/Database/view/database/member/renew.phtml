@@ -12,18 +12,6 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var MemberModel $member
  */
 ?>
-<?php if (isset($form)): ?>
-<?php
-$this->headTitle()->prepend("GEWIS Renew Membership");
-
-$form->prepare();
-
-$form->setAttribute('method', 'post');
-
-$form->setAttribute('role', 'form');
-$form->setAttribute('id', 'form-subscribe');
-?>
-<?= $this->form()->openTag($form) ?>
 
 <div class="row">
 <div class="col-md-12">
@@ -42,11 +30,24 @@ $form->setAttribute('id', 'form-subscribe');
     </div>
 </div>
 
+<?php if (isset($form)): ?>
+<?php
+$this->headTitle()->prepend("GEWIS Renew Membership");
+
+$form->prepare();
+
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('id', 'form-subscribe');
+?>
+<?= $this->form()->openTag($form) ?>
+
 <div class="row">
 
 <?php if (count($form->getMessages()) > 0): ?>
 <div class="alert alert-danger" role="alert">
-<?= $this->translate('Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!') ?>
+<?= $this->translate('Some of the entered information appears to be missing or incorrect. Please check your data and submit again.') ?>
 </div>
 <?php endif ?>
 
@@ -176,7 +177,7 @@ $form->setAttribute('id', 'form-subscribe');
             $element = $form->get('privacy');
             ?>
             <div class="form-group<?= $this->bootstrapElementError($element) ?>">
-                <div class="checkbox">
+                <div class="checkbox label-required">
                     <label>
                         <?= $this->formCheckbox($element) ?>
                         <?= $element->getLabel() ?>
@@ -192,7 +193,7 @@ $form->setAttribute('id', 'form-subscribe');
             $element = $form->get('agreed');
             ?>
             <div class="form-group<?= $this->bootstrapElementError($element) ?>">
-                <div class="checkbox">
+                <div class="checkbox label-required">
                     <label>
                         <?= $this->formCheckbox($element) ?>
                         <?= $element->getLabel() ?>
@@ -205,7 +206,7 @@ $form->setAttribute('id', 'form-subscribe');
     <div class="row">
         <div class="col-md-4">
             <?php
-            $element = $form->get('newExpiration');
+            $element = $form->get('expiration');
             $element->setAttribute('class', 'form-control');
             $element->setAttribute('placeholder', $element->getLabel());
             $element->setLabelAttributes(array(
@@ -236,135 +237,25 @@ $form->setAttribute('id', 'form-subscribe');
 <?= $this->form()->closeTag() ?>
 </div>
 
-<script>
-    window.addEventListener('load', (event) => {
-        validator = new InputValidator(document.getElementById("<?= $form->getAttribute('id'); ?>"));
-    });
-</script>
-
 <?php else: ?>
-    <h1 class="hidden-print"><?= $this->translate('Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS') ?>
-        <br>
-        <small><?= $this->translate('Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!') ?></small></h1>
-<!--Use the code below to add some nice pop-up or promotion to the subscription email.-->
-<!--    <div class="alert alert-info">-->
-<!--        Liked the introduction week? GEWIS also organizes a follow-up day after the introduction week: the FLUP!-->
-<!--        During the FLUP you get to know even more fellow students and GEWIS as an association through fun activities and a BBQ.-->
-<!--        This event will take place on Saturday, September 12. Tickets can be bought on <a href="https://gewis.nl/FLUP">https://gewis.nl/FLUP</a> for &euro;3,-.-->
-<!--    </div>-->
-    <h2 class="hidden-print">Hier nogmaals je gegevens ter controle</h2>
-<div class="row">
-<div class="col-md-6">
-    <h1><?= $member->getFullName() ?></h1>
-    <table class="table table-bordered">
-        <tr>
-            <th><?= $this->translate('Voorletters') ?></th>
-            <td><?= $member->getInitials() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Voornaam') ?></th>
-            <td><?= $member->getFirstName() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Tussenvoegsels') ?></th>
-            <td><?= $member->getMiddleName() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Achternaam') ?></th>
-            <td><?= $member->getLastName() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('TU/e-gebruikersnaam') ?></th>
-            <td>
-                <?= (null === $member->getTueUsername()) ? $this->translate('Onbekend') : $member->getTueUsername() ?>
-            </td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Study') ?></th>
-            <td><?= $member->getStudy() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('E-mail Address') ?></th>
-            <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Birthdate') ?></th>
-            <td><?= $member->getBirth()->format('l j F Y') ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('IBAN') ?></th>
-            <td><?= $member->getIban(true) ?? $this->translate('Onbekend') ?></td>
-        </tr>
-    </table>
-</div>
-<div class="col-md-6">
-<h3><?= $this->translate('Addresses') ?></h3>
-<?php foreach ($member->getAddresses() as $address): ?>
-    <h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?></h4>
-    <table class="table table-bordered">
-        <tr>
-            <th><?= $this->translate('Postal Region') ?></th>
-            <td><?= $address->getCountry()->value ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Straat en huisnummer') ?></th>
-            <td><?= $address->getStreet() ?> <?= $address->getNumber() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Woonplaats en Postcode') ?></th>
-            <td><?= $address->getCity() ?> <?= $address->getPostalCode() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Telefoonnummer') ?></th>
-            <td><?= $address->getPhone() ?></td>
-        </tr>
-    </table>
-<?php endforeach ?>
-<h3><?= $this->translate('Aangemelde mailing lists') ?></h3>
-<ul>
-<?php foreach ($member->getLists() as $list): ?>
-    <li><?= $list->getName() ?></li>
-<?php endforeach ?>
-</ul>
+    <div class="alert alert-success" role="alert">
+    <?= $this->translate('You have successfully requested renewal of your status as graduate.') ?>
+    </div>
 
-<?php if (null !== $member->getIban()): ?>
-<p>
-    <?= $this->translate('Incassant-ID') ?>: NL44ZZZ402377870000
-</p>
-
-<p>
-    <?= $this->translate('Kenmerk van de machtiging') ?>: <?= $member->getMandateCharacteristic() ?>
-</p>
-<div class="visible-print">
-<table class="table table-bordered">
-    <tr>
-        <td>
-            <?php if($address->getCountry() === PostalRegions::Netherlands): ?>
-                Door ondertekening van dit formulier geeft u (A) Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
-                toestemming om eenmalig een incasso-opdracht te sturen naar uw bank om een bedrag van &euro;15,-,
-                geheten vijftien euro, van uw rekening af te schrijven en (B) aan uw bank om eenmalig een bedrag van
-                uw rekening af te schrijven overeenkomstig de opdracht van GEWIS.
-                <br/>
-                Als u het niet eens bent met deze afschrijving kunt u deze laten terugboeken. Neem hiervoor binnen <b>acht
-                weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaarden.
-            <?php else: ?>
-                By signing this mandate form, you (A) authorise Gemeenschap van Wiskunde en Informatica Studenten (GEWIS)
-                to send instructions to your bank to debit your account with &euro;15,-, fifteen euros, and (B) your bank
-                to debit your account in accordance with the instructions from Gemeenschap van Wiskunde en Informatica Studenten (GEWIS).
-                <br/>
-                As part of your rights, you are entitled to a refund from your bank under the terms and conditions of
-                your agreement with your bank. A refund must be claimed within <b>8 weeks</b> starting from the date on
-                which your account was debited.
-            <?php endif ?>
-        </td>
-    </tr>
-    <tr>
-        <th><?= $this->translate('Plaats en datum van ondertekening') ?><br><?= $member->getSignatureLocation() ?><br><?= $member->getChangedOn()->format('F j, Y') ?><br><br><br><br></th>
-        <th><?= $this->translate('Handtekening') ?><br><img src="<?= $this->fileUrl($member->getSignature()) ?>" height="100" width="300" /><br><br><br><br><br></th>
-    </tr>
-</table>
-</div>
-<?php endif; ?>
-</div>
-</div>
+    <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <h3><?= $this->translate('Personal details') ?></h3>
+            <p>
+                <?= sprintf(
+                    $this->translate('You have requested renewal of your status as graduate. Within 24 hours, you will see your new expiry date <b>%1$s</b> on your member page on <a href="//%2$s">%2$s</a>.'),
+                    $updatedMember->getExpiration()->format('F jS, Y'),
+                    'gewis.nl',
+                ) ?>
+            </p>
+            <p>
+                <?= $this->translate('Note: if you updated your email address, you have to sign in to the GEWIS website using your new email address once this change has been processed.') ?>
+            </p>
+        </div>
+    </div>
 <?php endif ?>
