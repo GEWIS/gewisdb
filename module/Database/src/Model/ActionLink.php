@@ -122,4 +122,20 @@ class ActionLink
     {
         return $this->used;
     }
+
+    public function used(): void
+    {
+        $this->used = true;
+    }
+
+    /**
+     * We assume a link is valid until 30 days after the original membership expired
+     * Then, people can still renew their membership after their account gets locked
+     */
+    public function linkExpired(): bool
+    {
+        $diff = (new DateTime())->diff($this->currentExpiration);
+
+        return 1 === $diff->invert && ($diff->days > 30);
+    }
 }

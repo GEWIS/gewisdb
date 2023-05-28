@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Database\Model\ActionLink as ActionLinkModel;
 use Database\Model\MailingList as MailingListModel;
 use DateTime;
 use Laminas\Form\Element\Checkbox;
@@ -28,6 +29,8 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
 {
     /** @var MailingListModel[] $lists */
     protected array $lists;
+
+    protected ?ActionLinkModel $actionLink;
 
     public function __construct(
         protected readonly MvcTranslator $translator,
@@ -102,6 +105,8 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
             'type' => Checkbox::class,
             'options' => [
                 'label' => $translator->translate('I\'d like to receive the Supremum magazine 3 times a year'),
+                'checked_value' => 'optin',
+                'unchecked_value' => 'optout',
             ],
         ]);
 
@@ -139,6 +144,16 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
     {
         $this->data['expiration'] = $date->format('Y-m-d');
         $this->get('expiration')->setValue($date);
+    }
+
+    public function getActionLink(): ?ActionLinkModel
+    {
+        return $this->actionLink;
+    }
+
+    public function setActionLink(ActionLinkModel $actionLink): void
+    {
+        $this->actionLink = $actionLink;
     }
 
     /**

@@ -12,6 +12,7 @@ use DateInterval;
 use DateTime;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
+use Throwable;
 
 /**
  * Renewal class that takes care of renewing graduates
@@ -46,7 +47,13 @@ class Renewal
 
         foreach ($graduates as $graduate) {
             $actionLink = $this->actionLinkMapper->createByMember($graduate);
-            $this->sendRenewalEmail($actionLink);
+            try {
+                $this->sendRenewalEmail($actionLink);
+            } catch (Throwable $e) {
+                $this->actionLinkMapper->remove($actionLink);
+
+                throw $e;
+            }
         }
     }
 
@@ -82,6 +89,32 @@ class Renewal
                 Article 3.1 of the Internal Regulations allows you to request renewal of your status as graduate.
                 Therefore, you are receiving this email.</p>',
             'You receive this message because your registration as a graduate of GEWIS is almost ending.
+                You can not opt-out of these emails.',
+            'Graduate Renewal (' . $link->getMember()->getLidnr() . ')',
+        );
+    }
+
+    public function sendRenewalSuccessEmail(ActionLinkModel $link): void
+    {
+        $body = $this->render(
+            'email/graduate-renewal-success',
+            [
+                'firstName' => $link->getMember()->getFirstName(),
+                'oldExpiration' => $link->getCurrentExpiration(),
+                'newExpiration' => $link->getNewExpiration(),
+                //TODO: If global config exists, we should make the secretary a global config option
+            ],
+        );
+
+        $this->emailService->sendEmailTemplate(
+            $link->getMember()->getEmailRecipient(),
+            'Membership notification',
+            'Renewed membership',
+            $body,
+            'GEWIS Graduate Renewal',
+            null,
+            null,
+            'You receive this message because you have requested renewal of your registration as a graduate of GEWIS.
                 You can not opt-out of these emails.',
             'Graduate Renewal (' . $link->getMember()->getLidnr() . ')',
         );

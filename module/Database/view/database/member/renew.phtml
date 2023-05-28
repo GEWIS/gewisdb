@@ -17,15 +17,6 @@ use Laminas\View\Renderer\PhpRenderer;
 <div class="col-md-12">
         <section class="content-section">
             <h1><?= $this->translate('Graduate renewal') ?></h1>
-            <p class="lead">
-                According to our data it is time to renew your status as a graduate of GEWIS.
-                To make sure we have up-to-date information on how to contact you, please review your details below.<br/>
-                If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.
-            </p>
-            <p>
-                If you are currently studying at TU/e, please do <u>not</u> fill in this form, but instead inform the secretary of this. 
-                If you want GEWIS to automatically renew your membership, please send your TU/e username.<br/>
-            </p>
         </section>
     </div>
 </div>
@@ -42,6 +33,22 @@ $form->setAttribute('role', 'form');
 $form->setAttribute('id', 'form-subscribe');
 ?>
 <?= $this->form()->openTag($form) ?>
+
+<div class="row">
+<div class="col-md-12">
+        <section class="content-section">
+            <p class="lead">
+                According to our data it is time to renew your status as a graduate of GEWIS.
+                To make sure we have up-to-date information on how to contact you, please review your details below.<br/>
+                If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.
+            </p>
+            <p>
+                If you are currently studying at TU/e, please do <u>not</u> fill in this form, but instead inform the secretary of this. 
+                If you want GEWIS to automatically renew your membership, please send your TU/e username.<br/>
+            </p>
+        </section>
+    </div>
+</div>
 
 <div class="row">
 
@@ -137,7 +144,7 @@ $form->setAttribute('id', 'form-subscribe');
             <hr>
             <h3><?= $this->translate('Supremum') ?></h3>
             <p>
-                <?= $this->translate('As a graduate, you can choose to receive the physical Supremum magazine.') ?>
+                <?= $this->translate('As a graduate, you can choose to keep receiving the physical Supremum magazine.') ?>
                 <?= sprintf(
                     $this->translate('You can always read the online Supremum on %s.'),
                     '<a target="_blank" href="https://supremum.gewis.nl">supremum.gewis.nl</a>'
@@ -237,7 +244,7 @@ $form->setAttribute('id', 'form-subscribe');
 <?= $this->form()->closeTag() ?>
 </div>
 
-<?php else: ?>
+<?php elseif (isset($updatedMember)): ?>
     <div class="alert alert-success" role="alert">
     <?= $this->translate('You have successfully requested renewal of your status as graduate.') ?>
     </div>
@@ -258,4 +265,19 @@ $form->setAttribute('id', 'form-subscribe');
             </p>
         </div>
     </div>
-<?php endif ?>
+    <div class="row">
+        <div class="col-md-12">
+            <h3><?= $this->translate('Ada Alumni') ?></h3>
+            <p>
+                <?= $this->translate('PS: Did you know we have an alumni foundation at the department of M&amp;CS?') ?><br/>
+                <?= sprintf(
+                    $this->translate('Check out the website of Ada Alumni <a href="//%s" target="_blank">here</a>.'),
+                    'ada-alumni.nl',
+                ) ?>
+            </p>
+        </div>
+    </div>
+<?php else: ?>
+    <?= $this->translate('This renewal link could not be found. Perhaps it has been used before or has expired.') ?>
+
+<?php endif; ?>

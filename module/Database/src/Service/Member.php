@@ -1053,6 +1053,14 @@ class Member
     }
 
     /**
+     * Get the actionlink mapper.
+     */
+    public function getActionLinkMapper(): ActionLinkMapper
+    {
+        return $this->actionLinkMapper;
+    }
+
+    /**
      * Get the member mapper.
      */
     public function getMemberMapper(): MemberMapper
@@ -1082,13 +1090,14 @@ class Member
     public function getRenewalForm(string $token): ?MemberRenewalForm
     {
         $actionLink = $this->actionLinkMapper->findByToken($token);
-        if (null === $actionLink) {
+        if (null === $actionLink || $actionLink->isUsed() || $actionLink->linkExpired()) {
             return null;
         }
 
         $form = $this->memberRenewalForm;
         $form->bind($actionLink->getMember());
         $form->setExpiration($actionLink->getNewExpiration());
+        $form->setActionLink($actionLink);
 
         return $form;
     }

@@ -68,9 +68,18 @@ class ActionLink
     }
 
     /**
+     * Delete an action link.
+     */
+    public function remove(ActionLinkModel $link): void
+    {
+        $this->em->remove($link);
+        $this->em->flush();
+    }
+
+    /**
      * Persist an action link.
      */
-    protected function persist(ActionLinkModel $link): void
+    public function persist(ActionLinkModel $link): void
     {
         $this->em->persist($link);
         $this->em->flush();

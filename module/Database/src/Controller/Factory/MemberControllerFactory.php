@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Controller\Factory;
 
 use Checker\Service\Checker as CheckerService;
+use Checker\Service\Renewal as RenewalService;
 use Database\Controller\MemberController;
 use Database\Service\Member as MemberService;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
@@ -27,11 +28,14 @@ class MemberControllerFactory implements FactoryInterface
         $checkerService = $container->get(CheckerService::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
+        /** @var RenewalService $renewalService */
+        $renewalService = $container->get(RenewalService::class);
 
         return new MemberController(
             $translator,
             $checkerService,
             $memberService,
+            $renewalService,
         );
     }
 }

@@ -1,0 +1,18 @@
+<p>Dear <?= $firstName ?>,</p>
+<p>
+    You have requested renewal of your status as a Graduate (<i>Afgestudeerde</i>) of GEWIS.
+    I am happy to inform you that your status has been renewed until <b><?= $newExpiration->format('F jS, Y') ?></b>.
+</p>
+<p>
+    Within 24 hours this change will be visible on <a href="https://gewis.nl/member/self" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">your memberpage</a>.<br/>
+<?php if ($oldExpiration <= new DateTime()): ?>
+    If your account is currently deactivated because your membership had expired, it will be activated automatically within that same timeframe.<br/>
+<?php endif; ?>
+    Note: if you updated your email address, you have to sign in to the GEWIS website using your new email address.<br/>
+    Feel free to let me know if you have any questions. 
+</p>
+<p>
+    On behalf of the the board,
+    <br><br>Daan Verkade
+    <br><i>Secretary of GEWIS 2022-2023</i>
+</p>

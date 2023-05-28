@@ -48,6 +48,10 @@ return [
             'address' => getenv('MAIL_FROM_ADDRESS'),
             'name' => getenv('MAIL_FROM_NAME'),
         ],
+        'from_secretary' => [
+            'address' => getenv('MAIL_FROM_SECRETARY_ADDRESS'),
+            'name' => getenv('MAIL_FROM_SECRETARY_NAME'),
+        ],
         'to' => [
             'checker_result' => [
                 'address' => getenv('MAIL_TO_CHECKER_RESULT_ADDRESS'),
@@ -60,10 +64,6 @@ return [
             'subscription' => [
                 'address' => getenv('MAIL_TO_SUBSCRIPTION_ADDRESS'),
                 'name' => getenv('MAIL_TO_SUBSCRIPTION_NAME'),
-            ],
-            'public' => [
-                'address' => getenv('MAIL_TO_PUBLIC_ADDRESS'),
-                'name' => getenv('MAIL_TO_PUBLIC_NAME'),
             ],
         ],
     ],

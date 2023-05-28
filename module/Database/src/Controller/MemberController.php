@@ -6,6 +6,7 @@ namespace Database\Controller;
 
 use Application\Model\Enums\AddressTypes;
 use Checker\Service\Checker as CheckerService;
+use Checker\Service\Renewal as RenewalService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Laminas\Http\Response;
@@ -26,6 +27,7 @@ class MemberController extends AbstractActionController
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
         private readonly MemberService $memberService,
+        private readonly RenewalService $renewalService,
     ) {
     }
 
@@ -67,7 +69,7 @@ class MemberController extends AbstractActionController
     {
         $form = $this->memberService->getRenewalForm((string) $this->params()->fromRoute('token'));
         if (null === $form) {
-            return $this->notFoundAction();
+            return new ViewModel([]);
         }
 
         $request = $this->getRequest();
@@ -79,6 +81,9 @@ class MemberController extends AbstractActionController
                 /** @var MemberModel $updatedMember */
                 $updatedMember = $form->getData();
                 $this->memberService->getMemberMapper()->persist($updatedMember);
+                $form->getActionLink()->used();
+                $this->memberService->getActionLinkMapper()->persist($form->getActionLink());
+                $this->renewalService->sendRenewalSuccessEmail($form->getActionLink());
 
                 return new ViewModel([
                     'updatedMember' => $updatedMember,

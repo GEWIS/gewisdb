@@ -36,7 +36,7 @@ class Email
         ?string $footerReason = null,
         ?string $emailSubject = null,
     ): void {
-        $replyTo = new MailAddress($this->config['to']['public']['address'], $this->config['to']['public']['name']);
+        $replyTo = new MailAddress($this->config['from_secretary']['address'], $this->config['from_secretary']['name']);
 
         $body = $this->render(
             'email/basic',
@@ -105,17 +105,5 @@ class Email
     private function getMailTransport(): TransportInterface
     {
         return $this->mailTransport;
-    }
-
-    /**
-     * Get the storage config, as used by this service.
-     *
-     * @return array containing the config for the module
-     *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
-     */
-    private function getConfig(): array
-    {
-        return $this->config['email'];
     }
 }
