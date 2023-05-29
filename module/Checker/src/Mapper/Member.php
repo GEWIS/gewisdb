@@ -134,10 +134,10 @@ class Member
         $qbal = $this->em->createQueryBuilder();
         $qbal->select('al')
             ->from('Database\Model\ActionLink', 'al')
-            ->andWhere('al.currentExpiration <= :expiresBefore');
+            ->andWhere('al.member = m.lidnr')
+            ->andWhere('al.currentExpiration = m.expiration');
 
         $qb->setParameter('expiresBefore', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
-        $qbal->setParameter('expiresBefore', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
 
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbal->getDql()),
