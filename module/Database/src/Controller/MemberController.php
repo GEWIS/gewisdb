@@ -77,7 +77,13 @@ class MemberController extends AbstractActionController
         if ($request->isPost()) {
             $form->setMutableData($request->getPost()->toArray());
 
-            if ($form->isValid()) {
+            // find if there is an earlier member with the same email
+            if (
+                $this->memberService->getMemberMapper()->hasMemberWith($form->get('email')->getValue())
+                || $this->memberService->getProspectiveMemberMapper()->hasMemberWith($form->get('email')->getValue())
+            ) {
+                $form->get('email')->setMessages(['There already is a member with this email address.']);
+            } elseif ($form->isValid()) {
                 /** @var MemberModel $updatedMember */
                 $updatedMember = $form->getData();
                 $this->memberService->getMemberMapper()->persist($updatedMember);
