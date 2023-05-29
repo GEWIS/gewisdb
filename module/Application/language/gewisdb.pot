@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 95c03ca4-dirty\n"
+"Project-Id-Version: GEWISdb 7664a205-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 22:07+0200\n"
+"POT-Creation-Date: 2023-05-29 20:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,6 +101,9 @@ msgid "Settings"
 msgstr ""
 
 msgid "Subscribe"
+msgstr ""
+
+msgid "Renewal"
 msgstr ""
 
 msgid "Export Decisions"
@@ -431,6 +434,68 @@ msgstr ""
 msgid "Member Number"
 msgstr ""
 
+msgid "Graduate renewal"
+msgstr ""
+
+msgid ""
+"Some of the entered information appears to be missing or incorrect. Please "
+"check your data and submit again."
+msgstr ""
+
+msgid "Personal details"
+msgstr ""
+
+msgid "Supremum"
+msgstr ""
+
+msgid ""
+"As a graduate, you can choose to keep receiving the physical Supremum "
+"magazine."
+msgstr ""
+
+#, php-format
+msgid "You can always read the online Supremum on %s."
+msgstr ""
+
+msgid "Agreement"
+msgstr ""
+
+msgid "Articles of Association, Internal Regulations and privacy statement"
+msgstr ""
+
+msgid "You have successfully requested renewal of your status as graduate."
+msgstr ""
+
+#, php-format
+msgid ""
+"You have requested renewal of your status as graduate. Within 24 hours, you "
+"will see your new expiry date <b>%1$s</b> on your member page on <a href=\"//"
+"%2$s\">%2$s</a>."
+msgstr ""
+
+msgid ""
+"Note: if you updated your email address, you have to sign in to the GEWIS "
+"website using your new email address once this change has been processed."
+msgstr ""
+
+msgid "Ada Alumni"
+msgstr ""
+
+msgid ""
+"PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
+msgstr ""
+
+#, php-format
+msgid ""
+"Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
+"a>."
+msgstr ""
+
+msgid ""
+"This renewal link could not be found. Perhaps it has been used before or has "
+"expired."
+msgstr ""
+
 msgid "Initial(s)"
 msgstr ""
 
@@ -577,12 +642,6 @@ msgstr ""
 msgid "If you have any questions feel free to contact"
 msgstr ""
 
-msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-msgstr ""
-
-msgid "Persoonlijke informatie"
-msgstr ""
-
 msgid "Studie"
 msgstr ""
 
@@ -648,12 +707,6 @@ msgid ""
 "terugboeken. Neem hiervoor binnen <b>acht\n"
 "weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de "
 "voorwaarden."
-msgstr ""
-
-msgid "Akkoordverklaring"
-msgstr ""
-
-msgid "Statuten, HR en privacybeleid"
 msgstr ""
 
 msgid ""
@@ -1098,6 +1151,37 @@ msgid "Signature is required!"
 msgstr ""
 
 msgid "Please accept the conditions for payment through SEPA Direct Debit"
+msgstr ""
+
+msgid "Renew until"
+msgstr ""
+
+msgid "I'd like to receive the Supremum magazine 3 times a year"
+msgstr ""
+
+#, php-format
+msgid ""
+"I have read the privacy statement of %s and consent to the processing of my "
+"data."
+msgstr ""
+
+msgid "Gemeenschap van Wiskunde en Informatica Studenten"
+msgstr ""
+
+msgid ""
+"I am familiar with the contents of the Articles of Association and the "
+"Internal Regulations of GEWIS and I would like to renew my status as a "
+"graduate"
+msgstr ""
+
+msgid "Renew"
+msgstr ""
+
+msgid ""
+"You have to agree to the Articles of Association and the Internal Regulations"
+msgstr ""
+
+msgid "You have to consent to processing your data"
 msgstr ""
 
 msgid "Ordinary - Enrolled at the department of M&CS"

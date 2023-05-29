@@ -7,6 +7,6 @@ parameters:
             message: '#^Template type T of method Report\\Service\\Meeting\:\:generateSubDecision\(\) is not referenced in a parameter.$#'
             count: 1
             path: ../module/Report/src/Service/Meeting.php
-        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: backing type string of enum User\\Model\\Enums\\ApiPermissions does not match database type array.$#'
+        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: backing type string of enum User\\Model\\Enums\\ApiPermissions does not match database type array\<string\>\.$#'
         - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: database can contain User\\Model\\Enums\\ApiPermissions\|null but property expects array\<User\\Model\\Enums\\ApiPermissions\>.$#'
-        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: property can contain array but database expects User\\Model\\Enums\\ApiPermissions\|null.$#'
+        - '#Property User\\Model\\ApiPrincipal\:\:\$permissions type mapping mismatch\: property can contain array\<User\\Model\\Enums\\ApiPermissions\> but database expects User\\Model\\Enums\\ApiPermissions\|null.$#'

@@ -12,7 +12,9 @@ use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
 use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
+use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
+use Database\Mapper\ActionLink as ActionLinkMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
@@ -49,8 +51,12 @@ class MemberFactory implements FactoryInterface
         $memberEditForm = $container->get(MemberEditForm::class);
         /** @var MemberExpirationForm $memberExpirationForm */
         $memberExpirationForm = $container->get(MemberExpirationForm::class);
+        /** @var MemberRenewalForm $memberRenewalForm */
+        $memberRenewalForm = $container->get(MemberRenewalForm::class);
         /** @var MemberTypeForm $memberTypeForm */
         $memberTypeForm = $container->get(MemberTypeForm::class);
+        /** @var ActionLinkMapper $actionLinkMapper */
+        $actionLinkMapper = $container->get(ActionLinkMapper::class);
         /** @var MailingListMapper $mailingListMapper */
         $mailingListMapper = $container->get(MailingListMapper::class);
         /** @var MemberMapper $memberMapper */
@@ -80,8 +86,10 @@ class MemberFactory implements FactoryInterface
             $memberForm,
             $memberEditForm,
             $memberExpirationForm,
+            $memberRenewalForm,
             $memberTypeForm,
             $mailingListMapper,
+            $actionLinkMapper,
             $memberMapper,
             $memberUpdateMapper,
             $prospectiveMemberMapper,

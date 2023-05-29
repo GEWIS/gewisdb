@@ -75,14 +75,14 @@ verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') : ''
 
 <?php if (count($form->getMessages()) > 0): ?>
 <div class="alert alert-danger" role="alert">
-<?= $this->translate('Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!') ?>
+<?= $this->translate('Some of the entered information appears to be missing or incorrect. Please check your data and submit again.') ?>
 </div>
 <?php endif ?>
 
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-12">
-            <h3><?= $this->translate('Persoonlijke informatie') ?></h3>
+            <h3><?= $this->translate('Personal details') ?></h3>
         </div>
     </div>
     <div class="row">
@@ -446,11 +446,11 @@ weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de voorwaar
         </div>
     <?php endif; ?>
     <div class="row">
-        <div class="col-md-12">
+    <div class="col-md-12">
             <hr>
-            <h3><?= $this->translate('Akkoordverklaring') ?></h3>
+            <h3><?= $this->translate('Agreement') ?></h3>
             <a target="_blank" href="https://gewis.nl/vereniging/statuten/">
-                <?= $this->translate('Statuten, HR en privacybeleid') ?>
+                <?= $this->translate('Articles of Association, Internal Regulations and privacy statement') ?>
             </a>
         </div>
     </div>

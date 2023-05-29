@@ -17,7 +17,9 @@ use Database\Form\MemberApprove as MemberApproveForm;
 use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
 use Database\Form\MemberLists as MemberListsForm;
+use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
+use Database\Mapper\ActionLink as ActionLinkMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
@@ -59,8 +61,10 @@ class Member
         private readonly MemberForm $memberForm,
         private readonly MemberEditForm $memberEditForm,
         private readonly MemberExpirationForm $memberExpirationForm,
+        private readonly MemberRenewalForm $memberRenewalForm,
         private readonly MemberTypeForm $memberTypeForm,
         private readonly MailingListMapper $mailingListMapper,
+        private readonly ActionLinkMapper $actionLinkMapper,
         private readonly MemberMapper $memberMapper,
         private readonly MemberUpdateMapper $memberUpdateMapper,
         private readonly ProspectiveMemberMapper $prospectiveMemberMapper,
@@ -1049,6 +1053,14 @@ class Member
     }
 
     /**
+     * Get the actionlink mapper.
+     */
+    public function getActionLinkMapper(): ActionLinkMapper
+    {
+        return $this->actionLinkMapper;
+    }
+
+    /**
      * Get the member mapper.
      */
     public function getMemberMapper(): MemberMapper
@@ -1070,6 +1082,24 @@ class Member
     public function getProspectiveMemberMapper(): ProspectiveMemberMapper
     {
         return $this->prospectiveMemberMapper;
+    }
+
+    /**
+     * Get the renewal form.
+     */
+    public function getRenewalForm(string $token): ?MemberRenewalForm
+    {
+        $actionLink = $this->actionLinkMapper->findByToken($token);
+        if (null === $actionLink || $actionLink->isUsed() || $actionLink->linkExpired()) {
+            return null;
+        }
+
+        $form = $this->memberRenewalForm;
+        $form->bind($actionLink->getMember());
+        $form->setExpiration($actionLink->getNewExpiration());
+        $form->setActionLink($actionLink);
+
+        return $form;
     }
 
     /**

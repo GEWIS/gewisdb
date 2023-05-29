@@ -28,8 +28,10 @@
     <!-- Type hints that cannot converted to native types due to signature of parent -->
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint">
         <!-- Factories -->
+        <exclude-pattern>module/Application/src/Service/Factory/EmailFactory.php</exclude-pattern>
         <exclude-pattern>module/Application/src/Service/Factory/FileStorageFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/Factory/AbstractCheckerCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/Factory/CheckMembershipGraduateRenewalCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/InstallationFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/KeyFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
@@ -40,6 +42,7 @@
         <exclude-pattern>module/Checker/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/OrganFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/RenewalFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ApiControllerFactory.php</exclude-pattern>
@@ -51,6 +54,7 @@
         <exclude-pattern>module/Database/src/Controller/Factory/ProspectiveMemberControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/QueryControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/ActionLinkfactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MeetingFactory.php</exclude-pattern>
@@ -107,6 +111,7 @@
         <exclude-pattern>module/Checker/src/Command/CheckDatabaseCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckDischargesCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipExpirationCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTueCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTypeCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>
@@ -151,6 +156,7 @@
         <exclude-pattern>module/Database/src/Form/MemberEdit.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberExpiration.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberLists.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/MemberRenewal.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberType.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Other.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Query.php</exclude-pattern>

@@ -38,6 +38,7 @@ use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
 use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
+use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
 use Database\Form\Other as OtherForm;
 use Database\Form\Query as QueryForm;
@@ -57,6 +58,8 @@ use Database\Hydrator\Other as OtherHydrator;
 use Database\Hydrator\Strategy\AddressHydratorStrategy;
 use Database\Hydrator\Strategy\MeetingHydratorStrategy;
 use Database\Hydrator\Strategy\PostalRegionHydratorStrategy;
+use Database\Mapper\ActionLink as ActionLinkMapper;
+use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
 use Database\Mapper\Factory\InstallationFunctionFactory as InstallationFunctionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
@@ -170,6 +173,12 @@ class Module
                 },
                 MemberApproveForm::class => static function (ContainerInterface $container) {
                     $form = new MemberApproveForm($container->get(MvcTranslator::class));
+                    $form->setHydrator($container->get('database_hydrator_default'));
+
+                    return $form;
+                },
+                MemberRenewalForm::class => static function (ContainerInterface $container) {
+                    $form = new MemberRenewalForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_default'));
 
                     return $form;
@@ -474,6 +483,7 @@ class Module
 
                     return $hydrator;
                 },
+                ActionLinkMapper::class => ActionLinkMapperFactory::class,
                 InstallationFunctionMapper::class => InstallationFunctionMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,

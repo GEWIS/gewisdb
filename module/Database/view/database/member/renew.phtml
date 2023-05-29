@@ -1,0 +1,283 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\Model\Enums\PostalRegions;
+use Application\View\HelperTrait;
+use Database\Model\Member as MemberModel;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MemberModel $member
+ */
+?>
+
+<div class="row">
+<div class="col-md-12">
+        <section class="content-section">
+            <h1><?= $this->translate('Graduate renewal') ?></h1>
+        </section>
+    </div>
+</div>
+
+<?php if (isset($form)): ?>
+<?php
+$this->headTitle()->prepend("GEWIS Renew Membership");
+
+$form->prepare();
+
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+$form->setAttribute('id', 'form-subscribe');
+?>
+<?= $this->form()->openTag($form) ?>
+
+<div class="row">
+<div class="col-md-12">
+        <section class="content-section">
+            <p class="lead">
+                According to our data it is time to renew your status as a graduate of GEWIS.
+                To make sure we have up-to-date information on how to contact you, please review your details below.<br/>
+                If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.
+            </p>
+            <p>
+                If you are currently studying at TU/e, please do <u>not</u> fill in this form, but instead inform the secretary of this. 
+                If you want GEWIS to automatically renew your membership, please send your TU/e username.<br/>
+            </p>
+        </section>
+    </div>
+</div>
+
+<div class="row">
+
+<?php if (count($form->getMessages()) > 0): ?>
+<div class="alert alert-danger" role="alert">
+<?= $this->translate('Some of the entered information appears to be missing or incorrect. Please check your data and submit again.') ?>
+</div>
+<?php endif ?>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <h3><?= $this->translate('Personal details') ?></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <?php
+            $element = $form->get('initials');
+            $element->setAttribute('class', 'form-control validate-initials');
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php
+            $element = $form->get('firstName');
+            $element->setAttribute('class', 'form-control');
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <?php
+            $element = $form->get('middleName');
+            $element->setAttribute('class', 'form-control');
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php
+            $element = $form->get('lastName');
+            $element->setAttribute('class', 'form-control');
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $element = $form->get('email');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label label-required'
+            ));
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3><?= $this->translate('Supremum') ?></h3>
+            <p>
+                <?= $this->translate('As a graduate, you can choose to keep receiving the physical Supremum magazine.') ?>
+                <?= sprintf(
+                    $this->translate('You can always read the online Supremum on %s.'),
+                    '<a target="_blank" href="https://supremum.gewis.nl">supremum.gewis.nl</a>'
+                    ) ?>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <?php
+                $element = $form->get('supremum');
+                ?>
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3><?= $this->translate('Agreement') ?></h3>
+            <a target="_blank" href="https://gewis.nl/vereniging/statuten/">
+                <?= $this->translate('Articles of Association, Internal Regulations and privacy statement') ?>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $element = $form->get('privacy');
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <div class="checkbox label-required">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $element = $form->get('agreed');
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <div class="checkbox label-required">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <?php
+            $element = $form->get('expiration');
+            $element->setAttribute('class', 'form-control');
+            $element->setAttribute('placeholder', $element->getLabel());
+            $element->setLabelAttributes(array(
+                'class' => 'control-label'
+            ));
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <?= $this->formLabel($element) ?>
+                <?= $this->formInput($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <?php
+            $submit = $form->get('submit');
+            $submit->setLabel($submit->getValue());
+            $submit->setAttribute('class', 'btn btn-primary');
+            $submit->setAttribute('id', 'subscription-submit');
+            ?>
+            <div class="form-group">
+                <?= $this->formButton($submit) ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?= $this->form()->closeTag() ?>
+</div>
+
+<?php elseif (isset($updatedMember)): ?>
+    <div class="alert alert-success" role="alert">
+    <?= $this->translate('You have successfully requested renewal of your status as graduate.') ?>
+    </div>
+
+    <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <h3><?= $this->translate('Personal details') ?></h3>
+            <p>
+                <?= sprintf(
+                    $this->translate('You have requested renewal of your status as graduate. Within 24 hours, you will see your new expiry date <b>%1$s</b> on your member page on <a href="//%2$s">%2$s</a>.'),
+                    $updatedMember->getExpiration()->format('F jS, Y'),
+                    'gewis.nl',
+                ) ?>
+            </p>
+            <p>
+                <?= $this->translate('Note: if you updated your email address, you have to sign in to the GEWIS website using your new email address once this change has been processed.') ?>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3><?= $this->translate('Ada Alumni') ?></h3>
+            <p>
+                <?= $this->translate('PS: Did you know we have an alumni foundation at the department of M&amp;CS?') ?><br/>
+                <?= sprintf(
+                    $this->translate('Check out the website of Ada Alumni <a href="//%s" target="_blank">here</a>.'),
+                    'ada-alumni.nl',
+                ) ?>
+            </p>
+        </div>
+    </div>
+<?php else: ?>
+    <?= $this->translate('This renewal link could not be found. Perhaps it has been used before or has expired.') ?>
+
+<?php endif; ?>

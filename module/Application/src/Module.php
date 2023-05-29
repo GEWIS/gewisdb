@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Service\Email as EmailService;
+use Application\Service\Factory\EmailFactory as EmailServiceFactory;
 use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
 use Application\View\Helper\FileUrl;
@@ -116,7 +118,18 @@ class Module
     {
         return [
             'factories' => [
+                EmailService::class => EmailServiceFactory::class,
                 FileStorageService::class => FileStorageServiceFactory::class,
+                'application_mail_transport' => static function (ContainerInterface $container) {
+                    $config = $container->get('config')['email'];
+
+                    $class = '\Laminas\Mail\Transport\\' . $config['transport'];
+                    $optionsClass = '\Laminas\Mail\Transport\\' . $config['transport'] . 'Options';
+                    $transport = new $class();
+                    $transport->setOptions(new $optionsClass($config['options']));
+
+                    return $transport;
+                },
                 'logger' => static function (ContainerInterface $container) {
                     $logger = new Logger('gewisdb');
                     $config = $container->get('config')['logging'];

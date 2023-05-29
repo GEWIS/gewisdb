@@ -6,6 +6,7 @@ namespace Database\Controller;
 
 use Application\Model\Enums\AddressTypes;
 use Checker\Service\Checker as CheckerService;
+use Checker\Service\Renewal as RenewalService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Laminas\Http\Response;
@@ -26,6 +27,7 @@ class MemberController extends AbstractActionController
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
         private readonly MemberService $memberService,
+        private readonly RenewalService $renewalService,
     ) {
     }
 
@@ -56,6 +58,47 @@ class MemberController extends AbstractActionController
 
         return new ViewModel([
             'form' => $this->memberService->getMemberForm(),
+        ]);
+    }
+
+    /**
+     * (Graduate) renewal action
+     * Perhaps also for ordinary -> graduate in the future
+     */
+    public function renewAction(): ViewModel
+    {
+        $form = $this->memberService->getRenewalForm((string) $this->params()->fromRoute('token'));
+        if (null === $form) {
+            return new ViewModel([]);
+        }
+
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $form->setMutableData($request->getPost()->toArray());
+
+            // find if there is an earlier member with the same email
+            if (
+                $this->memberService->getMemberMapper()->hasMemberWith($form->get('email')->getValue())
+                || $this->memberService->getProspectiveMemberMapper()->hasMemberWith($form->get('email')->getValue())
+            ) {
+                $form->get('email')->setMessages(['There already is a member with this email address.']);
+            } elseif ($form->isValid()) {
+                /** @var MemberModel $updatedMember */
+                $updatedMember = $form->getData();
+                $this->memberService->getMemberMapper()->persist($updatedMember);
+                $form->getActionLink()->used();
+                $this->memberService->getActionLinkMapper()->persist($form->getActionLink());
+                $this->renewalService->sendRenewalSuccessEmail($form->getActionLink());
+
+                return new ViewModel([
+                    'updatedMember' => $updatedMember,
+                ]);
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
         ]);
     }
 

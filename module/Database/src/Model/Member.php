@@ -19,7 +19,9 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
+use Laminas\Mail\Address as MailAddress;
 
+use function mb_encode_mimeheader;
 use function preg_replace;
 
 /**
@@ -130,9 +132,9 @@ class Member
     protected bool $isStudying;
 
     /**
-     * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
-     * date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the member
-     * still meets the requirements as set forth in the bylaws and internal regulations.
+     * Date when the real membership ("ordinary", "external" or "honorary") of the member will have ended, i.e., from
+     * this date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the
+     * member still meets the requirements as set forth in the bylaws and internal regulations.
      */
     #[Column(
         type: 'date',
@@ -241,6 +243,18 @@ class Member
     )]
     protected Collection $lists;
 
+    /**
+     * ActionLinks of this member.
+     *
+     * @var Collection<array-key, ActionLink>
+     */
+    #[OneToMany(
+        targetEntity: ActionLink::class,
+        mappedBy: 'member',
+        cascade: ['persist', 'remove'],
+    )]
+    protected Collection $actionLinks;
+
     #[Column(
         type: 'string',
         nullable: true,
@@ -283,6 +297,26 @@ class Member
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    /**
+     * Get the member as an email recipient
+     */
+    public function getEmailRecipient(): ?MailAddress
+    {
+        if (null === $this->getEmail()) {
+            return null;
+        }
+
+        return new MailAddress(
+            $this->getEmail(),
+            mb_encode_mimeheader(
+                $this->getFullName(),
+                'UTF-8',
+                'Q',
+                '',
+            ),
+        );
     }
 
     /**
@@ -770,5 +804,15 @@ class Member
     public function setStudentAddress(Address $address): void
     {
         $this->addAddress($address);
+    }
+
+    /**
+     * Get action links of a member
+     *
+     * @return Collection<array-key, ActionLink>
+     */
+    public function getActionLinks(): Collection
+    {
+        return $this->actionLinks;
     }
 }

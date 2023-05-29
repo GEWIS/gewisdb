@@ -16,6 +16,13 @@ declare(strict_types=1);
 
 return [
     /**
+     * General application config
+     */
+    'application' => [
+        'public_url' => getenv('APP_URL'),
+    ],
+
+    /**
      * Checker service configuration.
      */
     'checker' => [
@@ -40,6 +47,10 @@ return [
         'from' => [
             'address' => getenv('MAIL_FROM_ADDRESS'),
             'name' => getenv('MAIL_FROM_NAME'),
+        ],
+        'from_secretary' => [
+            'address' => getenv('MAIL_FROM_SECRETARY_ADDRESS'),
+            'name' => getenv('MAIL_FROM_SECRETARY_NAME'),
         ],
         'to' => [
             'checker_result' => [

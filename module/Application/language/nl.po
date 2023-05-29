@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 22:06+0200\n"
+"POT-Creation-Date: 2023-05-29 20:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -63,6 +63,9 @@ msgstr "Achternaam"
 
 msgid "Action"
 msgstr "Actie"
+
+msgid "Ada Alumni"
+msgstr "Ada Alumni"
 
 #, php-format
 msgid "Add %s of %s"
@@ -128,7 +131,7 @@ msgstr "Adres"
 msgid "Advisory Board"
 msgstr "RvA"
 
-msgid "Akkoordverklaring"
+msgid "Agreement"
 msgstr "Akkoordverklaring"
 
 msgid "All API permissions"
@@ -197,6 +200,15 @@ msgstr "Weet je zeker dat je lid %s wilt verwijderen?"
 #, php-format
 msgid "Are your sure that you want to delete decision %s %d.%d.%d?"
 msgstr "Weet je zeker dat je besluit %s %d.%d.%d wilt verwijderen?"
+
+msgid "Articles of Association, Internal Regulations and privacy statement"
+msgstr "Statuten, huishoudelijk reglement en privacystatement"
+
+msgid ""
+"As a graduate, you can choose to keep receiving the physical Supremum "
+"magazine."
+msgstr ""
+"Als afgestudeerde kun je ervoor kiezen om de Supremum te blijven ontvangen."
 
 msgid ""
 "As a result, this member cannot be removed. According to the AVG, we have a "
@@ -270,6 +282,14 @@ msgstr "Abonnementen wijzigen"
 #, php-format
 msgid "Change password for %s"
 msgstr "Wachtwoord voor %s wijzigen"
+
+#, php-format
+msgid ""
+"Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
+"a>."
+msgstr ""
+"Klik <a href=\"//%s\" target=\"_blank\">hier</a> om naar de website van Ada "
+"Alumni te gaan."
 
 msgid "City"
 msgstr "Stad"
@@ -433,9 +453,6 @@ msgstr "Vanaf"
 msgid "English Description"
 msgstr "Engelse beschrijving"
 
-msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-msgstr "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-
 msgid "Execute"
 msgstr "Uitvoeren"
 
@@ -521,6 +538,9 @@ msgstr "ALV-Werkgroep"
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr "Gefeliciteerd! Je bent geregistreerd als lid van GEWIS"
 
+msgid "Gemeenschap van Wiskunde en Informatica Studenten"
+msgstr "Gemeenschap van Wiskunde en Informatica Studenten"
+
 msgid "Generation"
 msgstr "Generatie"
 
@@ -545,6 +565,9 @@ msgstr "Afgestudeerde"
 
 msgid "Graduate - Old member and specially admitted by the board"
 msgstr "Afgestudeerde - Oud lid en speciaal toegelaten door het bestuur"
+
+msgid "Graduate renewal"
+msgstr "Verlengen afgestudeerde"
 
 msgid "Grant"
 msgstr "Toekennen"
@@ -572,6 +595,25 @@ msgstr "Erelid - Speciaal benoemd door de ALV"
 
 msgid "House Number"
 msgstr "Huisnummer"
+
+msgid ""
+"I am familiar with the contents of the Articles of Association and the "
+"Internal Regulations of GEWIS and I would like to renew my status as a "
+"graduate"
+msgstr ""
+"Ik ben bekend met de inhoud van de statuten en het huishoudelijk reglement "
+"van GEWIS en wil graag mijn status als afgestudeerde verlengen"
+
+#, php-format
+msgid ""
+"I have read the privacy statement of %s and consent to the processing of my "
+"data."
+msgstr ""
+"Ik ben bekend met de privacystatement van %s en ga akkoord met het verwerken "
+"van mijn data."
+
+msgid "I'd like to receive the Supremum magazine 3 times a year"
+msgstr "Ik ontvang graag de Supremum driemaal per jaar."
 
 msgid "IBAN"
 msgstr "IBAN"
@@ -793,6 +835,13 @@ msgstr "Geen gegevens ontvangen."
 msgid "No signature or IBAN provided."
 msgstr "Geen handtekening of IBAN verstrekt."
 
+msgid ""
+"Note: if you updated your email address, you have to sign in to the GEWIS "
+"website using your new email address once this change has been processed."
+msgstr ""
+"Let op: als je je emailadres hebt aangepast, moet je na het verwerken van "
+"deze wijziging met je nieuwe emailadres inloggen op de GEWIS-website."
+
 msgid "On Form"
 msgstr "Op inschrijfformulier"
 
@@ -814,6 +863,10 @@ msgstr "Orgaanmutaties"
 msgid "Other"
 msgstr "Overig"
 
+msgid ""
+"PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
+msgstr "PS: Wist je dat de faculteit W&amp;I een alumni-stichting heeft?"
+
 msgid "Paid (Amount)"
 msgstr "Betaald (bedrag)"
 
@@ -823,7 +876,7 @@ msgstr "Openstaande updates persoonsgegevens"
 msgid "Permissions"
 msgstr "Rechten"
 
-msgid "Persoonlijke informatie"
+msgid "Personal details"
 msgstr "Persoonlijke informatie"
 
 msgid "Phone Number"
@@ -896,6 +949,15 @@ msgstr "Bestuurder ontheffen"
 msgid "Remove Member"
 msgstr "Lid verwijderen"
 
+msgid "Renew"
+msgstr "Verleng"
+
+msgid "Renew until"
+msgstr "Verleng tot en met"
+
+msgid "Renewal"
+msgstr "Verlenging"
+
 msgid "Result"
 msgstr "Resultaat"
 
@@ -941,14 +1003,18 @@ msgstr "Handtekening SEPA automatische incasso"
 msgid "Signature is required!"
 msgstr "Handtekening is vereist!"
 
+msgid ""
+"Some of the entered information appears to be missing or incorrect. Please "
+"check your data and submit again."
+msgstr ""
+"Een deel van de ingevoerde informatie lijkt te missen of is onjuist. "
+"Controleer de data en verstuur het formulier opnieuw."
+
 msgid "Stack trace"
 msgstr "Stack trace"
 
 msgid "Statement"
 msgstr "Afrekening"
-
-msgid "Statuten, HR en privacybeleid"
-msgstr "Statuten, HR en privacybeleid"
 
 msgid "Stored Queries"
 msgstr "Opgeslagen query's"
@@ -973,6 +1039,9 @@ msgstr "Studie"
 
 msgid "Subscribe"
 msgstr "Inschrijven"
+
+msgid "Supremum"
+msgstr "Supremum"
 
 msgid "TU/e Data"
 msgstr "TU/e gegevens"
@@ -1066,6 +1135,13 @@ msgstr ""
 
 msgid "This member is not installed in an organ."
 msgstr "Dit lid is niet lid van een orgaan."
+
+msgid ""
+"This renewal link could not be found. Perhaps it has been used before or has "
+"expired."
+msgstr ""
+"Deze verlengingslink kon niet gevonden worden. Wellicht is deze eerder "
+"gebruikt of reeds verlopen."
 
 msgid "Toggle Navigation"
 msgstr "Klap navigatie in/uit"
@@ -1188,9 +1264,13 @@ msgid ""
 "github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
 "your bug reports."
 msgstr ""
-"Je gebruikt een build gebaseerd op commit <a target=\"_blank\" "
-"href=\"https://github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Vermeld dit "
-"in al je bugrapporten."
+"Je gebruikt een build gebaseerd op commit <a target=\"_blank\" href="
+"\"https://github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Vermeld dit in al "
+"je bugrapporten."
+
+#, php-format
+msgid "You can always read the online Supremum on %s."
+msgstr "Je kunt altijd de Supremum online lezen op %s."
 
 #, php-format
 msgid ""
@@ -1212,8 +1292,29 @@ msgstr ""
 "euros door jouw bank.\n"
 "Bij vragen kun je contact opnemen met %s."
 
+#, php-format
+msgid ""
+"You have requested renewal of your status as graduate. Within 24 hours, you "
+"will see your new expiry date <b>%1$s</b> on your member page on <a href=\"//"
+"%2$s\">%2$s</a>."
+msgstr ""
+"Je hebt verlenging van je status als afgestudeerde aangevraagd. Binnen 24 "
+"uur zal de einddatum <b>%1$s</b> op jouw ledenpagina van <a href=\"//%2$s\">"
+"%2$s</a> te zien zijn."
+
+msgid "You have successfully requested renewal of your status as graduate."
+msgstr ""
+"Je hebt succesvol verlenging van je status als afgestudeerde aangevraagd."
+
 msgid "You have to accept the terms!"
 msgstr "Je moet de voorwaarden accepteren!"
+
+msgid ""
+"You have to agree to the Articles of Association and the Internal Regulations"
+msgstr "Je moet akkoord gaan met de statuten en het huishoudelijk reglement."
+
+msgid "You have to consent to processing your data"
+msgstr "Je moet akkoord gaan met het verwerken van je persoonlijke data."
 
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Jouw TU/e-gebruikersnaam moet lijken op sYYxxxx of YYYYxxxx."

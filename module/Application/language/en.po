@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 22:06+0200\n"
+"POT-Creation-Date: 2023-05-29 20:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -62,6 +62,9 @@ msgstr "Achternaam"
 
 msgid "Action"
 msgstr "Action"
+
+msgid "Ada Alumni"
+msgstr "Ada Alumni"
 
 #, php-format
 msgid "Add %s of %s"
@@ -127,8 +130,8 @@ msgstr "Adres"
 msgid "Advisory Board"
 msgstr "Advisory Board"
 
-msgid "Akkoordverklaring"
-msgstr "Akkoordverklaring"
+msgid "Agreement"
+msgstr "Agreement"
 
 msgid "All API permissions"
 msgstr "All API permissions"
@@ -196,6 +199,16 @@ msgstr "Are you sure you want to delete member %s?"
 #, php-format
 msgid "Are your sure that you want to delete decision %s %d.%d.%d?"
 msgstr "Are your sure that you want to delete decision %s %d.%d.%d?"
+
+msgid "Articles of Association, Internal Regulations and privacy statement"
+msgstr "Articles of Association, Internal Regulations and privacy statement"
+
+msgid ""
+"As a graduate, you can choose to keep receiving the physical Supremum "
+"magazine."
+msgstr ""
+"As a graduate, you can choose to keep receiving the physical Supremum "
+"magazine."
 
 msgid ""
 "As a result, this member cannot be removed. According to the AVG, we have a "
@@ -269,6 +282,14 @@ msgstr "Change Subscriptions"
 #, php-format
 msgid "Change password for %s"
 msgstr "Change password for %s"
+
+#, php-format
+msgid ""
+"Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
+"a>."
+msgstr ""
+"Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
+"a>."
 
 msgid "City"
 msgstr "City"
@@ -432,9 +453,6 @@ msgstr "Effective From"
 msgid "English Description"
 msgstr "English Description"
 
-msgid "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-msgstr "Er zijn velden fout of niet ingevuld. Los dit op en stuur opnieuw in!"
-
 msgid "Execute"
 msgstr "Execute"
 
@@ -520,6 +538,9 @@ msgstr "GMM Taskforce"
 msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 msgstr "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
 
+msgid "Gemeenschap van Wiskunde en Informatica Studenten"
+msgstr "Gemeenschap van Wiskunde en Informatica Studenten"
+
 msgid "Generation"
 msgstr "Generation"
 
@@ -543,6 +564,9 @@ msgstr "Graduate"
 
 msgid "Graduate - Old member and specially admitted by the board"
 msgstr "Graduate - Old member and specially admitted by the board"
+
+msgid "Graduate renewal"
+msgstr "Graduate renewal"
 
 msgid "Grant"
 msgstr "Grant"
@@ -570,6 +594,26 @@ msgstr "Honorary - Specially appointed by the GMM"
 
 msgid "House Number"
 msgstr "House Number"
+
+msgid ""
+"I am familiar with the contents of the Articles of Association and the "
+"Internal Regulations of GEWIS and I would like to renew my status as a "
+"graduate"
+msgstr ""
+"I am familiar with the contents of the Articles of Association and the "
+"Internal Regulations of GEWIS and I would like to renew my status as a "
+"graduate"
+
+#, php-format
+msgid ""
+"I have read the privacy statement of %s and consent to the processing of my "
+"data."
+msgstr ""
+"I have read the privacy statement of %s and consent to the processing of my "
+"data."
+
+msgid "I'd like to receive the Supremum magazine 3 times a year"
+msgstr "I'd like to receive the Supremum magazine 3 times a year"
 
 msgid "IBAN"
 msgstr "IBAN"
@@ -788,6 +832,13 @@ msgstr "No data returned."
 msgid "No signature or IBAN provided."
 msgstr "No signature or IBAN provided."
 
+msgid ""
+"Note: if you updated your email address, you have to sign in to the GEWIS "
+"website using your new email address once this change has been processed."
+msgstr ""
+"Note: if you updated your email address, you have to sign in to the GEWIS "
+"website using your new email address once this change has been processed."
+
 msgid "On Form"
 msgstr "On Form"
 
@@ -809,6 +860,11 @@ msgstr "Organ Mutations"
 msgid "Other"
 msgstr "Other"
 
+msgid ""
+"PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
+msgstr ""
+"PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
+
 msgid "Paid (Amount)"
 msgstr "Paid (Amount)"
 
@@ -818,8 +874,8 @@ msgstr "Pending member updates"
 msgid "Permissions"
 msgstr "Permissions"
 
-msgid "Persoonlijke informatie"
-msgstr "Persoonlijke informatie"
+msgid "Personal details"
+msgstr "Personal details"
 
 msgid "Phone Number"
 msgstr "Phone Number"
@@ -891,6 +947,15 @@ msgstr "Relieve Board Member"
 msgid "Remove Member"
 msgstr "Remove Member"
 
+msgid "Renew"
+msgstr "Renew"
+
+msgid "Renew until"
+msgstr "Renew until"
+
+msgid "Renewal"
+msgstr "Renewal"
+
 msgid "Result"
 msgstr "Result"
 
@@ -936,14 +1001,18 @@ msgstr "Signature SEPA Direct Debit"
 msgid "Signature is required!"
 msgstr "Signature is required!"
 
+msgid ""
+"Some of the entered information appears to be missing or incorrect. Please "
+"check your data and submit again."
+msgstr ""
+"Some of the entered information appears to be missing or incorrect. Please "
+"check your data and submit again."
+
 msgid "Stack trace"
 msgstr "Stack trace"
 
 msgid "Statement"
 msgstr "Statement"
-
-msgid "Statuten, HR en privacybeleid"
-msgstr "Statuten, HR en privacybeleid"
 
 msgid "Stored Queries"
 msgstr "Stored Queries"
@@ -968,6 +1037,9 @@ msgstr "Study"
 
 msgid "Subscribe"
 msgstr "Subscribe"
+
+msgid "Supremum"
+msgstr "Supremum"
 
 msgid "TU/e Data"
 msgstr "TU/e Data"
@@ -1058,6 +1130,13 @@ msgstr ""
 
 msgid "This member is not installed in an organ."
 msgstr "This member is not installed in an organ."
+
+msgid ""
+"This renewal link could not be found. Perhaps it has been used before or has "
+"expired."
+msgstr ""
+"This renewal link could not be found. Perhaps it has been used before or has "
+"expired."
 
 msgid "Toggle Navigation"
 msgstr "Toggle Navigation"
@@ -1183,6 +1262,10 @@ msgstr ""
 "your bug reports."
 
 #, php-format
+msgid "You can always read the online Supremum on %s."
+msgstr "You can always read the online Supremum on %s."
+
+#, php-format
 msgid ""
 "You can pay for your GEWIS membership using a SEPA direct debit.\n"
 "This means that GEWIS will debit &euro;15,- from your bank account. You only "
@@ -1202,8 +1285,29 @@ msgstr ""
 "place at your bank.\n"
 "Contact %s for any questions about your payment."
 
+#, php-format
+msgid ""
+"You have requested renewal of your status as graduate. Within 24 hours, you "
+"will see your new expiry date <b>%1$s</b> on your member page on <a href=\"//"
+"%2$s\">%2$s</a>."
+msgstr ""
+"You have requested renewal of your status as graduate. Within 24 hours, you "
+"will see your new expiry date <b>%1$s</b> on your member page on <a href=\"//"
+"%2$s\">%2$s</a>."
+
+msgid "You have successfully requested renewal of your status as graduate."
+msgstr "You have successfully requested renewal of your status as graduate."
+
 msgid "You have to accept the terms!"
 msgstr "You have to accept the terms!"
+
+msgid ""
+"You have to agree to the Articles of Association and the Internal Regulations"
+msgstr ""
+"You have to agree to the Articles of Association and the Internal Regulations"
+
+msgid "You have to consent to processing your data"
+msgstr "You have to consent to processing your data"
 
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
