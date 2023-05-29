@@ -253,6 +253,10 @@
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Application-Module.html"><abbr title="\Application\Module">Module</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Application-Service-Email.html"><abbr title="\Application\Service\Email">Email</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Application-Service-Factory-EmailFactory.html"><abbr title="\Application\Service\Factory\EmailFactory">EmailFactory</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Application-Service-Factory-FileStorageFactory.html"><abbr title="\Application\Service\Factory\FileStorageFactory">FileStorageFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Application-Service-FileStorage.html"><abbr title="\Application\Service\FileStorage">FileStorage</abbr></a></dt>
@@ -279,11 +283,15 @@
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Command-CheckMembershipExpirationCommand.html"><abbr title="\Checker\Command\CheckMembershipExpirationCommand">CheckMembershipExpirationCommand</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html"><abbr title="\Checker\Command\CheckMembershipGraduateRenewalCommand">CheckMembershipGraduateRenewalCommand</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Command-CheckMembershipTUeCommand.html"><abbr title="\Checker\Command\CheckMembershipTUeCommand">CheckMembershipTUeCommand</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Command-CheckMembershipTypeCommand.html"><abbr title="\Checker\Command\CheckMembershipTypeCommand">CheckMembershipTypeCommand</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Command-Factory-AbstractCheckerCommandFactory.html"><abbr title="\Checker\Command\Factory\AbstractCheckerCommandFactory">AbstractCheckerCommandFactory</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Command-Factory-CheckMembershipGraduateRenewalCommandFactory.html"><abbr title="\Checker\Command\Factory\CheckMembershipGraduateRenewalCommandFactory">CheckMembershipGraduateRenewalCommandFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Mapper-Factory-InstallationFactory.html"><abbr title="\Checker\Mapper\Factory\InstallationFactory">InstallationFactory</abbr></a></dt>
         <dd></dd>
@@ -348,6 +356,8 @@ i.e. the database is left in a wrong state</dd>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Factory-OrganFactory.html"><abbr title="\Checker\Service\Factory\OrganFactory">OrganFactory</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Factory-RenewalFactory.html"><abbr title="\Checker\Service\Factory\RenewalFactory">RenewalFactory</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a></dt>
@@ -358,6 +368,9 @@ i.e. the database is left in a wrong state</dd>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></dt>
+        <dd>Renewal class that takes care of renewing graduates
+and converting memberships to graduates</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/CheckerTest-Model-Error-MemberHasRoleButNotInOrganTest.html"><abbr title="\CheckerTest\Model\Error\MemberHasRoleButNotInOrganTest">MemberHasRoleButNotInOrganTest</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/CheckerTest-Model-Error-MemberInNonExistingOrganTest.html"><abbr title="\CheckerTest\Model\Error\MemberInNonExistingOrganTest">MemberInNonExistingOrganTest</abbr></a></dt>
@@ -480,6 +493,8 @@ component.</dd>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-MemberLists.html"><abbr title="\Database\Form\MemberLists">MemberLists</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-MemberRenewal.html"><abbr title="\Database\Form\MemberRenewal">MemberRenewal</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-MemberType.html"><abbr title="\Database\Form\MemberType">MemberType</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Form-Other.html"><abbr title="\Database\Form\Other">Other</abbr></a></dt>
@@ -520,6 +535,10 @@ component.</dd>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Hydrator-Strategy-PostalRegionHydratorStrategy.html"><abbr title="\Database\Hydrator\Strategy\PostalRegionHydratorStrategy">PostalRegionHydratorStrategy</abbr></a></dt>
         <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Mapper-ActionLink.html"><abbr title="\Database\Mapper\ActionLink">ActionLink</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Mapper-Factory-ActionLinkFactory.html"><abbr title="\Database\Mapper\Factory\ActionLinkFactory">ActionLinkFactory</abbr></a></dt>
+        <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Mapper-Factory-InstallationFunctionFactory.html"><abbr title="\Database\Mapper\Factory\InstallationFunctionFactory">InstallationFunctionFactory</abbr></a></dt>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Mapper-Factory-MailingListFactory.html"><abbr title="\Database\Mapper\Factory\MailingListFactory">MailingListFactory</abbr></a></dt>
@@ -552,6 +571,8 @@ component.</dd>
         <dd></dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Mapper-SavedQuery.html"><abbr title="\Database\Mapper\SavedQuery">SavedQuery</abbr></a></dt>
         <dd>Installation Function mapper</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a></dt>
+        <dd>Class for links that can be clicked</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a></dt>
         <dd>Address model.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a></dt>

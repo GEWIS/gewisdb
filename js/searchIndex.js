@@ -1441,6 +1441,61 @@ Search.appendIndex(
             "summary": "Get\u0020view\u0020helper\u0020configuration.",
             "url": "classes/Application-Module.html#method_getViewHelperConfig"
         },                {
+            "fqsen": "\\Application\\Service\\Email",
+            "name": "Email",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html#method___construct"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003AsendEmailTemplate\u0028\u0029",
+            "name": "sendEmailTemplate",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html#method_sendEmailTemplate"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003AsendEmail\u0028\u0029",
+            "name": "sendEmail",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html#method_sendEmail"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003Arender\u0028\u0029",
+            "name": "render",
+            "summary": "Render\u0020a\u0020template\u0020with\u0020given\u0020variables.",
+            "url": "classes/Application-Service-Email.html#method_render"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003AgetMailTransport\u0028\u0029",
+            "name": "getMailTransport",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html#method_getMailTransport"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003A\u0024renderer",
+            "name": "renderer",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html#property_renderer"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003A\u0024mailTransport",
+            "name": "mailTransport",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html#property_mailTransport"
+        },                {
+            "fqsen": "\\Application\\Service\\Email\u003A\u003A\u0024config",
+            "name": "config",
+            "summary": "",
+            "url": "classes/Application-Service-Email.html#property_config"
+        },                {
+            "fqsen": "\\Application\\Service\\Factory\\EmailFactory",
+            "name": "EmailFactory",
+            "summary": "",
+            "url": "classes/Application-Service-Factory-EmailFactory.html"
+        },                {
+            "fqsen": "\\Application\\Service\\Factory\\EmailFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Application-Service-Factory-EmailFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Application\\Service\\Factory\\FileStorageFactory",
             "name": "FileStorageFactory",
             "summary": "",
@@ -1786,6 +1841,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-CheckMembershipExpirationCommand.html#property_defaultDescription"
         },                {
+            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand",
+            "name": "CheckMembershipGraduateRenewalCommand",
+            "summary": "",
+            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html"
+        },                {
+            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003AgetRenewalService\u0028\u0029",
+            "name": "getRenewalService",
+            "summary": "",
+            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method_getRenewalService"
+        },                {
+            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultName"
+        },                {
+            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003A\u0024defaultDescription",
+            "name": "defaultDescription",
+            "summary": "",
+            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultDescription"
+        },                {
+            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003A\u0024renewalService",
+            "name": "renewalService",
+            "summary": "",
+            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_renewalService"
+        },                {
             "fqsen": "\\Checker\\Command\\CheckMembershipTUeCommand",
             "name": "CheckMembershipTUeCommand",
             "summary": "",
@@ -1835,6 +1925,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Checker-Command-Factory-AbstractCheckerCommandFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Checker\\Command\\Factory\\CheckMembershipGraduateRenewalCommandFactory",
+            "name": "CheckMembershipGraduateRenewalCommandFactory",
+            "summary": "",
+            "url": "classes/Checker-Command-Factory-CheckMembershipGraduateRenewalCommandFactory.html"
+        },                {
+            "fqsen": "\\Checker\\Command\\Factory\\CheckMembershipGraduateRenewalCommandFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Checker-Command-Factory-CheckMembershipGraduateRenewalCommandFactory.html#method___invoke"
         },                {
             "fqsen": "\\Checker\\Mapper\\Factory\\InstallationFactory",
             "name": "InstallationFactory",
@@ -1975,6 +2075,11 @@ Search.appendIndex(
             "name": "getExpiredOrHiddenMembersWithAuthenticationKey",
             "summary": "Get\u0020a\u0020list\u0020of\u0020members\u0020who\u0020are\u0020hidden\u0020or\u0020whose\u0020membership\u0020has\u0020expired.",
             "url": "classes/Checker-Mapper-Member.html#method_getExpiredOrHiddenMembersWithAuthenticationKey"
+        },                {
+            "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetExpiringGraduates\u0028\u0029",
+            "name": "getExpiringGraduates",
+            "summary": "Get\u0020all\u0020expiring\u0020graduates\u0020for\u0020which\u0020no\u0020action\u0020link\u0020exists\nThe\u0020check\u0020for\u0020hidden\u0020is\u0020required\u0020because\u0020hidden\u0020members\u0020may\u0020also\u0020expire\u0020but\u0020should\u0020not\u0020be\u0020emailed",
+            "url": "classes/Checker-Mapper-Member.html#method_getExpiringGraduates"
         },                {
             "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetEndOfCurrentAssociationYear\u0028\u0029",
             "name": "getEndOfCurrentAssociationYear",
@@ -2651,6 +2756,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Service-Factory-OrganFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Checker\\Service\\Factory\\RenewalFactory",
+            "name": "RenewalFactory",
+            "summary": "",
+            "url": "classes/Checker-Service-Factory-RenewalFactory.html"
+        },                {
+            "fqsen": "\\Checker\\Service\\Factory\\RenewalFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Checker-Service-Factory-RenewalFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Checker\\Service\\Installation",
             "name": "Installation",
             "summary": "",
@@ -2810,6 +2925,61 @@ Search.appendIndex(
             "name": "organMapper",
             "summary": "",
             "url": "classes/Checker-Service-Organ.html#property_organMapper"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal",
+            "name": "Renewal",
+            "summary": "Renewal\u0020class\u0020that\u0020takes\u0020care\u0020of\u0020renewing\u0020graduates\nand\u0020converting\u0020memberships\u0020to\u0020graduates",
+            "url": "classes/Checker-Service-Renewal.html"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#method___construct"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003AsendRenewalGraduates\u0028\u0029",
+            "name": "sendRenewalGraduates",
+            "summary": "Create\u0020an\u0020actionlink\u0020and\u0020send\u0020emails\u0020to\u0020expiring\u0020graduates\nEmails\u0020are\u0020sent\u002045\u0020days\u0020before\u0020expiry\nA\u0020limit\u0020of\u002010\u0020graduates\u0020is\u0020used\u003B\u0020e.g.\u0020on\u0020a\u0020cronjob\u0020each\u0020hour\u0020this\u0020would\u0020mean\u0020250\u0020per\u0020day\nLimiting\u0020to\u0020make\u0020sure\u0020the\u0020secretary\u0020does\u0020not\u0020get\u0020overwhelmed\u0020with\u0020questions\u0020regarding\u0020renewal.",
+            "url": "classes/Checker-Service-Renewal.html#method_sendRenewalGraduates"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003AsendRenewalEmail\u0028\u0029",
+            "name": "sendRenewalEmail",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#method_sendRenewalEmail"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003AsendRenewalSuccessEmail\u0028\u0029",
+            "name": "sendRenewalSuccessEmail",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#method_sendRenewalSuccessEmail"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003Arender\u0028\u0029",
+            "name": "render",
+            "summary": "Render\u0020a\u0020template\u0020with\u0020given\u0020variables.",
+            "url": "classes/Checker-Service-Renewal.html#method_render"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A\u0024actionLinkMapper",
+            "name": "actionLinkMapper",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#property_actionLinkMapper"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A\u0024memberMapper",
+            "name": "memberMapper",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#property_memberMapper"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A\u0024emailService",
+            "name": "emailService",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#property_emailService"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A\u0024renderer",
+            "name": "renderer",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#property_renderer"
+        },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A\u0024config",
+            "name": "config",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#property_config"
         },                {
             "fqsen": "\\CheckerTest\\Model\\Error\\MemberHasRoleButNotInOrganTest",
             "name": "MemberHasRoleButNotInOrganTest",
@@ -3241,6 +3411,11 @@ Search.appendIndex(
             "summary": "Subscribe\u0020action.",
             "url": "classes/Database-Controller-MemberController.html#method_subscribeAction"
         },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003ArenewAction\u0028\u0029",
+            "name": "renewAction",
+            "summary": "\u0028Graduate\u0029\u0020renewal\u0020action\nPerhaps\u0020also\u0020for\u0020ordinary\u0020\u002D\u003E\u0020graduate\u0020in\u0020the\u0020future",
+            "url": "classes/Database-Controller-MemberController.html#method_renewAction"
+        },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AsearchAction\u0028\u0029",
             "name": "searchAction",
             "summary": "Search\u0020action.",
@@ -3350,6 +3525,11 @@ Search.appendIndex(
             "name": "memberService",
             "summary": "",
             "url": "classes/Database-Controller-MemberController.html#property_memberService"
+        },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003A\u0024renewalService",
+            "name": "renewalService",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#property_renewalService"
         },                {
             "fqsen": "\\Database\\Controller\\OrganController",
             "name": "OrganController",
@@ -4156,6 +4336,61 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberLists.html#property_lists"
         },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal",
+            "name": "MemberRenewal",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AsetExpiration\u0028\u0029",
+            "name": "setExpiration",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#method_setExpiration"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AgetActionLink\u0028\u0029",
+            "name": "getActionLink",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#method_getActionLink"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AsetActionLink\u0028\u0029",
+            "name": "setActionLink",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#method_setActionLink"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AsetMutableData\u0028\u0029",
+            "name": "setMutableData",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#method_setMutableData"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AgetMutableFields\u0028\u0029",
+            "name": "getMutableFields",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#method_getMutableFields"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "Specification\u0020of\u0020input\u0020filter.",
+            "url": "classes/Database-Form-MemberRenewal.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003A\u0024lists",
+            "name": "lists",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#property_lists"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003A\u0024actionLink",
+            "name": "actionLink",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#property_actionLink"
+        },                {
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-MemberRenewal.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\MemberType",
             "name": "MemberType",
             "summary": "",
@@ -4425,6 +4660,56 @@ Search.appendIndex(
             "name": "hydrate",
             "summary": "",
             "url": "classes/Database-Hydrator-Strategy-PostalRegionHydratorStrategy.html#method_hydrate"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink",
+            "name": "ActionLink",
+            "summary": "",
+            "url": "classes/Database-Mapper-ActionLink.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Mapper-ActionLink.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AfindByToken\u0028\u0029",
+            "name": "findByToken",
+            "summary": "Find\u0020an\u0020action\u0020link\u0020by\u0020token",
+            "url": "classes/Database-Mapper-ActionLink.html#method_findByToken"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AcreateByMember\u0028\u0029",
+            "name": "createByMember",
+            "summary": "Create\u0020an\u0020action\u0020link\u0020for\u0020a\u0020member\nIf\u0020no\u0020expiration\u0020date\u0020is\u0020given,\u0020we\u0020renew\u0020until\u0020the\u0020first\u0020July\u00201st\u0020after\u0020the\u0020current\u0020expiration\u0020date\u0020\u002B\nat\u0020most\u0020an\u0020extra\u002031\u0020days\u0020to\u0020prevent\u0020two\u0020renewals\u0020within\u0020one\u0020month",
+            "url": "classes/Database-Mapper-ActionLink.html#method_createByMember"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AgetRepository\u0028\u0029",
+            "name": "getRepository",
+            "summary": "Get\u0020the\u0020repository\u0020for\u0020this\u0020mapper.",
+            "url": "classes/Database-Mapper-ActionLink.html#method_getRepository"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003Aremove\u0028\u0029",
+            "name": "remove",
+            "summary": "Delete\u0020an\u0020action\u0020link.",
+            "url": "classes/Database-Mapper-ActionLink.html#method_remove"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003Apersist\u0028\u0029",
+            "name": "persist",
+            "summary": "Persist\u0020an\u0020action\u0020link.",
+            "url": "classes/Database-Mapper-ActionLink.html#method_persist"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Database-Mapper-ActionLink.html#property_em"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\ActionLinkFactory",
+            "name": "ActionLinkFactory",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-ActionLinkFactory.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\ActionLinkFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-ActionLinkFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Mapper\\Factory\\InstallationFunctionFactory",
             "name": "InstallationFunctionFactory",
@@ -4931,6 +5216,81 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Mapper-SavedQuery.html#property_em"
         },                {
+            "fqsen": "\\Database\\Model\\ActionLink",
+            "name": "ActionLink",
+            "summary": "Class\u0020for\u0020links\u0020that\u0020can\u0020be\u0020clicked",
+            "url": "classes/Database-Model-ActionLink.html"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-ActionLink.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgenerateToken\u0028\u0029",
+            "name": "generateToken",
+            "summary": "Generate\u0020a\u0020new\u0020token\u0020and\u0020return\u0020it",
+            "url": "classes/Database-Model-ActionLink.html#method_generateToken"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "",
+            "url": "classes/Database-Model-ActionLink.html#method_getMember"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetCurrentExpiration\u0028\u0029",
+            "name": "getCurrentExpiration",
+            "summary": "",
+            "url": "classes/Database-Model-ActionLink.html#method_getCurrentExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetNewExpiration\u0028\u0029",
+            "name": "getNewExpiration",
+            "summary": "",
+            "url": "classes/Database-Model-ActionLink.html#method_getNewExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetToken\u0028\u0029",
+            "name": "getToken",
+            "summary": "",
+            "url": "classes/Database-Model-ActionLink.html#method_getToken"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AisUsed\u0028\u0029",
+            "name": "isUsed",
+            "summary": "",
+            "url": "classes/Database-Model-ActionLink.html#method_isUsed"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024used",
+            "name": "used",
+            "summary": "If\u0020the\u0020URL\u0020was\u0020clicked",
+            "url": "classes/Database-Model-ActionLink.html#property_used"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AlinkExpired\u0028\u0029",
+            "name": "linkExpired",
+            "summary": "We\u0020assume\u0020a\u0020link\u0020is\u0020valid\u0020until\u002030\u0020days\u0020after\u0020the\u0020original\u0020membership\u0020expired\nThen,\u0020people\u0020can\u0020still\u0020renew\u0020their\u0020membership\u0020after\u0020their\u0020account\u0020gets\u0020locked",
+            "url": "classes/Database-Model-ActionLink.html#method_linkExpired"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "Mailman\u002Didentifier\u0020\/\u0020name.",
+            "url": "classes/Database-Model-ActionLink.html#property_id"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024token",
+            "name": "token",
+            "summary": "The\u0020token\u0020in\u0020the\u0020URL",
+            "url": "classes/Database-Model-ActionLink.html#property_token"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "The\u0020member",
+            "url": "classes/Database-Model-ActionLink.html#property_member"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024currentExpiration",
+            "name": "currentExpiration",
+            "summary": "Current\u0020expiration",
+            "url": "classes/Database-Model-ActionLink.html#property_currentExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024newExpiration",
+            "name": "newExpiration",
+            "summary": "New\u0020expiration\nThis\u0020is\u0020not\u0020neccessarily\u0020a\u0020year\u0020from\u0020the\u0020previous\u0020as\u0020in\u0020principle\u0020this\nwill\u0020be\u0020until\u0020the\u0020end\u0020of\u0020next\u0020association\u0020year.",
+            "url": "classes/Database-Model-ActionLink.html#property_newExpiration"
+        },                {
             "fqsen": "\\Database\\Model\\Address",
             "name": "Address",
             "summary": "Address\u0020model.",
@@ -5411,6 +5771,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020member\u0027s\u0020email\u0020address.",
             "url": "classes/Database-Model-Member.html#method_getEmail"
         },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetEmailRecipient\u0028\u0029",
+            "name": "getEmailRecipient",
+            "summary": "Get\u0020the\u0020member\u0020as\u0020an\u0020email\u0020recipient",
+            "url": "classes/Database-Model-Member.html#method_getEmailRecipient"
+        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetLastName\u0028\u0029",
             "name": "getLastName",
             "summary": "Get\u0020the\u0020member\u0027s\u0020last\u0020name.",
@@ -5681,6 +6046,11 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020student\u0020address.",
             "url": "classes/Database-Model-Member.html#method_setStudentAddress"
         },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetActionLinks\u0028\u0029",
+            "name": "getActionLinks",
+            "summary": "Get\u0020action\u0020links\u0020of\u0020a\u0020member",
+            "url": "classes/Database-Model-Member.html#method_getActionLinks"
+        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024lidnr",
             "name": "lidnr",
             "summary": "The\u0020user",
@@ -5743,7 +6113,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024membershipEndsOn",
             "name": "membershipEndsOn",
-            "summary": "Date\u0020when\u0020the\u0020real\u0020membership\u0020\u0028\u0022ordinary\u0022\u0020or\u0020\u0022external\u0022\u0029\u0020of\u0020the\u0020member\u0020will\u0020have\u0020ended,\u0020in\u0020other\u0020words,\u0020from\u0020this\ndate\u0020onwards\u0020they\u0020are\u0020\u0022graduate\u0022.\u0020If\u0020\u0060null\u0060,\u0020the\u0020expiration\u0020is\u0020rolling\u0020and\u0020will\u0020be\u0020silently\u0020renewed\u0020if\u0020the\u0020member\nstill\u0020meets\u0020the\u0020requirements\u0020as\u0020set\u0020forth\u0020in\u0020the\u0020bylaws\u0020and\u0020internal\u0020regulations.",
+            "summary": "Date\u0020when\u0020the\u0020real\u0020membership\u0020\u0028\u0022ordinary\u0022,\u0020\u0022external\u0022\u0020or\u0020\u0022honorary\u0022\u0029\u0020of\u0020the\u0020member\u0020will\u0020have\u0020ended,\u0020i.e.,\u0020from\nthis\u0020date\u0020onwards\u0020they\u0020are\u0020\u0022graduate\u0022.\u0020If\u0020\u0060null\u0060,\u0020the\u0020expiration\u0020is\u0020rolling\u0020and\u0020will\u0020be\u0020silently\u0020renewed\u0020if\u0020the\nmember\u0020still\u0020meets\u0020the\u0020requirements\u0020as\u0020set\u0020forth\u0020in\u0020the\u0020bylaws\u0020and\u0020internal\u0020regulations.",
             "url": "classes/Database-Model-Member.html#property_membershipEndsOn"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024expiration",
@@ -5795,6 +6165,11 @@ Search.appendIndex(
             "name": "lists",
             "summary": "Memberships\u0020of\u0020mailing\u0020lists.",
             "url": "classes/Database-Model-Member.html#property_lists"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024actionLinks",
+            "name": "actionLinks",
+            "summary": "ActionLinks\u0020of\u0020this\u0020member.",
+            "url": "classes/Database-Model-Member.html#property_actionLinks"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024authenticationKey",
             "name": "authenticationKey",
@@ -7631,6 +8006,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020member\u0020form.",
             "url": "classes/Database-Service-Member.html#method_getMemberForm"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetActionLinkMapper\u0028\u0029",
+            "name": "getActionLinkMapper",
+            "summary": "Get\u0020the\u0020actionlink\u0020mapper.",
+            "url": "classes/Database-Service-Member.html#method_getActionLinkMapper"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetMemberMapper\u0028\u0029",
             "name": "getMemberMapper",
             "summary": "Get\u0020the\u0020member\u0020mapper.",
@@ -7645,6 +8025,11 @@ Search.appendIndex(
             "name": "getProspectiveMemberMapper",
             "summary": "Get\u0020the\u0020member\u0020mapper.",
             "url": "classes/Database-Service-Member.html#method_getProspectiveMemberMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetRenewalForm\u0028\u0029",
+            "name": "getRenewalForm",
+            "summary": "Get\u0020the\u0020renewal\u0020form.",
+            "url": "classes/Database-Service-Member.html#method_getRenewalForm"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetFileStorageService\u0028\u0029",
             "name": "getFileStorageService",
@@ -7701,6 +8086,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_memberExpirationForm"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024memberRenewalForm",
+            "name": "memberRenewalForm",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_memberRenewalForm"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024memberTypeForm",
             "name": "memberTypeForm",
             "summary": "",
@@ -7710,6 +8100,11 @@ Search.appendIndex(
             "name": "mailingListMapper",
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_mailingListMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024actionLinkMapper",
+            "name": "actionLinkMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_actionLinkMapper"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024memberMapper",
             "name": "memberMapper",
@@ -11206,15 +11601,15 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/application.html"
         },                {
-            "fqsen": "\\Application\\Service\\Factory",
-            "name": "Factory",
-            "summary": "",
-            "url": "namespaces/application-service-factory.html"
-        },                {
             "fqsen": "\\Application\\Service",
             "name": "Service",
             "summary": "",
             "url": "namespaces/application-service.html"
+        },                {
+            "fqsen": "\\Application\\Service\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/application-service-factory.html"
         },                {
             "fqsen": "\\Application\\View\\Helper",
             "name": "Helper",
@@ -11361,15 +11756,15 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/database-hydrator-strategy.html"
         },                {
-            "fqsen": "\\Database\\Mapper\\Factory",
-            "name": "Factory",
-            "summary": "",
-            "url": "namespaces/database-mapper-factory.html"
-        },                {
             "fqsen": "\\Database\\Mapper",
             "name": "Mapper",
             "summary": "",
             "url": "namespaces/database-mapper.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/database-mapper-factory.html"
         },                {
             "fqsen": "\\Database\\Model",
             "name": "Model",

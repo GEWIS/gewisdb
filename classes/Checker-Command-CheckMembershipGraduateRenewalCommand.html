@@ -235,13 +235,17 @@
 
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/application.html">Application</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker.html">Checker</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker-command.html">Command</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Module
+    CheckMembershipGraduateRenewalCommand
 
+        <span class="phpdocumentor-element__extends">
+        extends <abbr title="\Symfony\Component\Console\Command\Command">Command</abbr>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -254,9 +258,9 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php"><a href="files/module-checker-src-command-checkmembershipgraduaterenewalcommand.html"><abbr title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php">CheckMembershipGraduateRenewalCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
@@ -276,59 +280,45 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-Module.html#method_getConfig">getConfig()</a>
+                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultDescription">$defaultDescription</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: string            </span>
 </dt>
-<dd>Get the configuration for this module.</dd>
+<dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-Module.html#method_getServiceConfig">getServiceConfig()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultName">$defaultName</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: string            </span>
 </dt>
-<dd>Get service configuration.</dd>
+<dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-Module.html#method_getViewHelperConfig">getViewHelperConfig()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_renewalService">$renewalService</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                        &nbsp;: <a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a>            </span>
 </dt>
-<dd>Get view helper configuration.</dd>
+<dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-Module.html#method_init">init()</a>
+                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method___construct">__construct()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-Module.html#method_logError">logError()</a>
+    <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method_getRenewalService">getRenewalService()</a>
     <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-Module.html#method_modulesLoaded">modulesLoaded()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Application-Module.html#method_onBootstrap">onBootstrap()</a>
-    <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Application-Module.html#method_determineLocale">determineLocale()</a>
+    <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method_execute">execute()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: int    </span>
 </dt>
 <dd></dd>
 
@@ -339,11 +329,115 @@
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_defaultDescription">
+        $defaultDescription
+        <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultDescription" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php"><a href="files/module-checker-src-command-checkmembershipgraduaterenewalcommand.html"><abbr title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php">CheckMembershipGraduateRenewalCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$defaultDescription</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;Check graduates who are expiring at the end of the association year and send renewal emails.&#039;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_defaultName">
+        $defaultName
+        <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultName" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php"><a href="files/module-checker-src-command-checkmembershipgraduaterenewalcommand.html"><abbr title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php">CheckMembershipGraduateRenewalCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$defaultName</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;check:membership:renewal:graduate&#039;</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_renewalService">
+        $renewalService
+        <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_renewalService" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php"><a href="files/module-checker-src-command-checkmembershipgraduaterenewalcommand.html"><abbr title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php">CheckMembershipGraduateRenewalCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$renewalService</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Application-Module.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -351,128 +445,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getConfig">
-        getConfig()
-        <a href="classes/Application-Module.html#method_getConfig" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php"><a href="files/module-checker-src-command-checkmembershipgraduaterenewalcommand.html"><abbr title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php">CheckMembershipGraduateRenewalCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the configuration for this module.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getConfig</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getServiceConfig">
-        getServiceConfig()
-        <a href="classes/Application-Module.html#method_getServiceConfig" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">117</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get service configuration.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getServiceConfig</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getViewHelperConfig">
-        getViewHelperConfig()
-        <a href="classes/Application-Module.html#method_getViewHelperConfig" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">153</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get view helper configuration.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getViewHelperConfig</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_init">
-        init()
-        <a href="classes/Application-Module.html#method_init" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">init</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\ModuleManager\ModuleManager">ModuleManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$moduleManager</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renewalService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$moduleManager</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\ModuleManager\ModuleManager">ModuleManager</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$renewalService</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -483,7 +478,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -494,128 +489,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_logError">
-        logError()
-        <a href="classes/Application-Module.html#method_logError" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getRenewalService">
+        getRenewalService()
+        <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method_getRenewalService" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php"><a href="files/module-checker-src-command-checkmembershipgraduaterenewalcommand.html"><abbr title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php">CheckMembershipGraduateRenewalCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">logError</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$e</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">getRenewalService</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$e</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
+    
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_modulesLoaded">
-        modulesLoaded()
-        <a href="classes/Application-Module.html#method_modulesLoaded" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">65</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">modulesLoaded</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\EventManager\EventInterface">EventInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$event</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$event</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\EventManager\EventInterface">EventInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_onBootstrap">
-        onBootstrap()
-        <a href="classes/Application-Module.html#method_onBootstrap" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">41</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">onBootstrap</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$e</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$e</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></span>
             &mdash;
         
     
@@ -626,29 +522,37 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_determineLocale">
-        determineLocale()
-        <a href="classes/Application-Module.html#method_determineLocale" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_execute">
+        execute()
+        <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method_execute" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Module.php"><a href="files/module-application-src-module.html"><abbr title="module/Application/src/Module.php">Module.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php"><a href="files/module-checker-src-command-checkmembershipgraduaterenewalcommand.html"><abbr title="module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php">CheckMembershipGraduateRenewalCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">96</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">determineLocale</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$e</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">execute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$e</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$input</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$output</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -659,7 +563,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type">int</span>
             &mdash;
         
     
@@ -742,7 +646,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Application-Module.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
