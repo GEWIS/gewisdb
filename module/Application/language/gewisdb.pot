@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 7664a205-dirty\n"
+"Project-Id-Version: GEWISdb afd0a855-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-29 20:27+0200\n"
+"POT-Creation-Date: 2023-05-29 21:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,644 +17,125 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "A 404 error occurred"
-msgstr ""
-
-msgid "The requested controller was unable to dispatch the request."
-msgstr ""
-
-msgid ""
-"The requested controller could not be mapped to an existing controller class."
-msgstr ""
-
-msgid "The requested controller was not dispatchable."
-msgstr ""
-
-msgid "The requested URL could not be matched by routing."
-msgstr ""
-
-msgid "We cannot determine at this time why a 404 was generated."
-msgstr ""
-
-msgid "Controller"
-msgstr ""
-
-#, php-format
-msgid "resolves to %s"
-msgstr ""
-
-msgid "Additional information"
-msgstr ""
-
-msgid "File"
-msgstr ""
-
-msgid "Message"
-msgstr ""
-
-msgid "Stack trace"
-msgstr ""
-
-msgid "Previous exceptions"
-msgstr ""
-
-msgid "No Exception available"
-msgstr ""
-
-msgid "An error occurred"
-msgstr ""
-
-msgid "Language Settings"
-msgstr ""
-
-msgid "User"
-msgstr ""
-
-msgid "Log out"
-msgstr ""
-
-msgid "Log in"
-msgstr ""
-
-msgid "Toggle Navigation"
-msgstr ""
-
-msgid "Meetings and Decisions"
-msgstr ""
-
-msgid "Organ"
-msgstr ""
-
-msgid "Prospective Members"
-msgstr ""
-
-msgid "Members"
-msgstr ""
-
-msgid "Decision List"
-msgstr ""
-
-msgid "Query"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Subscribe"
-msgstr ""
-
-msgid "Renewal"
-msgstr ""
-
-msgid "Export Decisions"
-msgstr ""
-
-msgid "Export"
-msgstr ""
-
-#, php-format
-msgid ""
-"GEWIS currently has <a href=\"%s\">%d members</a> and <a href=\"%s\">%d "
-"prospective members</a>. <a href=\"%s\">Click here</a> to create a meeting "
-"or <a href=\"%s\">perform a query</a>."
-msgstr ""
-
-#, php-format
-msgid ""
-"You are using a build based on commit <a target=\"_blank\" href=\"https://"
-"github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
-"your bug reports."
-msgstr ""
-
-msgid "Pending member updates"
-msgstr ""
-
-msgid "Fork GEWISDB on GitHub &raquo;"
-msgstr ""
-
-msgid "The organ to be abolished includes the following members:"
-msgstr ""
-
-msgid "Abolish Organ"
-msgstr ""
-
-msgid "Board Member(s) to Discharge"
-msgstr ""
-
-msgid "as"
-msgstr ""
-
-msgid "Board Member(s) to Relieve"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Date of Budget/Statement"
-msgstr ""
-
-msgid "Version"
-msgstr ""
-
-msgid "Meeting added successfully!"
-msgstr ""
-
-msgid "Add Meeting"
-msgstr ""
-
-msgid "Meeting Number"
-msgstr ""
-
-msgid "Meeting Date"
-msgstr ""
-
-msgid "Decision"
-msgstr ""
-
-msgid "reads as follows:"
-msgstr ""
-
-#, php-format
-msgid "Back to %s %d"
-msgstr ""
-
-msgid "Decision Already Exists"
-msgstr ""
-
-msgid "Add Decision"
-msgstr ""
-
-msgid "Budget/Statement"
-msgstr ""
-
-msgid "Organ Mutations"
-msgstr ""
-
-msgid "Board Mutations"
-msgstr ""
-
-msgid "Key Codes"
-msgstr ""
-
-msgid "Annul Decision"
-msgstr ""
-
-msgid "Other"
-msgstr ""
-
-msgid "Foundation"
-msgstr ""
-
-msgid "Abolition"
-msgstr ""
-
-msgid "Installation/Discharge"
-msgstr ""
-
-msgid "Installation"
-msgstr ""
-
-msgid "Relieve"
-msgstr ""
-
-msgid "Discharge"
-msgstr ""
-
-msgid "Grant"
-msgstr ""
-
-msgid "Withdraw"
-msgstr ""
-
-msgid "Decision Cannot Be Removed"
-msgstr ""
-
-msgid "There are other decisions that still refer to this decision."
-msgstr ""
-
-msgid "Decision removed."
-msgstr ""
-
-#, php-format
-msgid "Are your sure that you want to delete decision %s %d.%d.%d?"
-msgstr ""
-
-msgid "Abbreviation"
-msgstr ""
-
-msgid "Remove Member"
-msgstr ""
-
-msgid "Add Member"
-msgstr ""
-
-msgid "Found Organ"
-msgstr ""
-
-msgid "Add New Meeting"
-msgstr ""
-
-msgid "Type"
-msgstr ""
-
 msgid "# Decisions"
 msgstr ""
 
-msgid "Make Inactive"
-msgstr ""
-
-msgid "Give Function"
-msgstr ""
-
-msgid "Current Members"
-msgstr ""
-
-msgid "Function"
-msgstr ""
-
-msgid "Result"
-msgstr ""
-
-msgid "Mutations"
-msgstr ""
-
-msgid "Add New (Inactive) Member"
-msgstr ""
-
-msgid "Add Inactive Member"
-msgstr ""
-
-msgid "Confirm Changes"
-msgstr ""
-
-msgid "Discharge Member"
-msgstr ""
-
 #, php-format
-msgid "Discharge %s as %s?"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Yes"
-msgstr ""
-
-msgid "Make Member Inactive"
-msgstr ""
-
-#, php-format
-msgid "Make %s inactive?"
-msgstr ""
-
-msgid "Give Member Function"
-msgstr ""
-
-msgid "Function of"
-msgstr ""
-
-msgid "Date of Expiration"
-msgstr ""
-
-msgid "Key Code(s) to Withdraw"
-msgstr ""
-
-msgid "Decisions"
+msgid "%s: %s (started in %s)"
 msgstr ""
 
 #, php-format
 msgid "(Annulled by decision %s %d.%d.%d)"
 msgstr ""
 
-msgid "Delete Decision"
-msgstr ""
-
-msgid "This meeting has no decisions (yet)."
-msgstr ""
-
-msgid "Add New Decision"
-msgstr ""
-
-msgid "Point"
-msgstr ""
-
-msgid "Decision Number"
-msgstr ""
-
-msgid ""
-"This member has been deleted, you cannot edit their information. Only the "
-"name of this member is stored so that decisions that mention this member "
-"remain correct."
-msgstr ""
-
-#, php-format
-msgid "Are you sure you want to delete member %s?"
-msgstr ""
-
-#, php-format
-msgid "Member %s cannot be deleted."
-msgstr ""
-
 #, php-format
 msgid ""
-"This is because %s is/has been a member of an organ and/or has budgets/"
-"statements to their name."
+"<strong>Warning:</strong> The database currently requires the usage of GEWIS "
+"m-accounts to log in. Any accounts created here cannot be used to log in. "
+"Learn more about m-accounts %shere%s."
 msgstr ""
 
-msgid ""
-"As a result, this member cannot be removed. According to the AVG, we have a "
-"legal basis to keep this member's name in our database. The other data can, "
-"however, be deleted."
+msgid "A 404 error occurred"
 msgstr ""
 
-msgid "Do you want to delete the other data?"
+msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+msgstr ""
+
+msgid "API Principals"
+msgstr ""
+
+msgid "API Tokens"
+msgstr ""
+
+msgid "Aangemelde mailing lists"
+msgstr ""
+
+msgid "Abbreviation"
+msgstr ""
+
+msgid "Abolish Organ"
+msgstr ""
+
+msgid "Abolition"
+msgstr ""
+
+msgid "Achternaam"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Ada Alumni"
 msgstr ""
 
 #, php-format
 msgid "Add %s of %s"
 msgstr ""
 
-#, php-format
-msgid "Update %s of %s"
+msgid "Add Budget/Statement"
 msgstr ""
 
-#, php-format
-msgid "TU/e data: %s"
+msgid "Add Decision"
 msgstr ""
 
-#, php-format
-msgid "Extend Membership of %s"
-msgstr ""
-
-#, php-format
-msgid ""
-"Are you sure that you want to extend the membership of %s to %s (from %s)?"
-msgstr ""
-
-msgid "Unknown"
-msgstr ""
-
-msgid "Search Members"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "E-mail Address"
-msgstr ""
-
-msgid "Generation"
-msgstr ""
-
-msgid "Expiration"
-msgstr ""
-
-msgid ""
-"There are too many results to display. Try filtering to see other results."
-msgstr ""
-
-msgid "Register Member"
-msgstr ""
-
-msgid "View Update Requests"
-msgstr ""
-
-#, php-format
-msgid "Change Mailing List Subscriptions of %s"
-msgstr ""
-
-#, php-format
-msgid "Change Membership Type of %s"
-msgstr ""
-
-#, php-format
-msgid "Are you sure that you want to delete the %s of %s?"
-msgstr ""
-
-msgid "Member Number"
-msgstr ""
-
-msgid "Graduate renewal"
-msgstr ""
-
-msgid ""
-"Some of the entered information appears to be missing or incorrect. Please "
-"check your data and submit again."
-msgstr ""
-
-msgid "Personal details"
-msgstr ""
-
-msgid "Supremum"
-msgstr ""
-
-msgid ""
-"As a graduate, you can choose to keep receiving the physical Supremum "
-"magazine."
-msgstr ""
-
-#, php-format
-msgid "You can always read the online Supremum on %s."
-msgstr ""
-
-msgid "Agreement"
-msgstr ""
-
-msgid "Articles of Association, Internal Regulations and privacy statement"
-msgstr ""
-
-msgid "You have successfully requested renewal of your status as graduate."
-msgstr ""
-
-#, php-format
-msgid ""
-"You have requested renewal of your status as graduate. Within 24 hours, you "
-"will see your new expiry date <b>%1$s</b> on your member page on <a href=\"//"
-"%2$s\">%2$s</a>."
-msgstr ""
-
-msgid ""
-"Note: if you updated your email address, you have to sign in to the GEWIS "
-"website using your new email address once this change has been processed."
-msgstr ""
-
-msgid "Ada Alumni"
-msgstr ""
-
-msgid ""
-"PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
-msgstr ""
-
-#, php-format
-msgid ""
-"Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
-"a>."
-msgstr ""
-
-msgid ""
-"This renewal link could not be found. Perhaps it has been used before or has "
-"expired."
-msgstr ""
-
-msgid "Initial(s)"
-msgstr ""
-
-msgid "First Name"
-msgstr ""
-
-msgid "Last Name Prepositional Particle"
-msgstr ""
-
-msgid "Last Name"
-msgstr ""
-
-msgid "TU/e-username"
-msgstr ""
-
-msgid "Birthdate"
-msgstr ""
-
-msgid "Paid (Amount)"
-msgstr ""
-
-msgid "Membership Type"
-msgstr ""
-
-msgid "Update / Renew"
-msgstr ""
-
-msgid "Last Update to Membership"
-msgstr ""
-
-msgid "Membership Ends On (Expires On)"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
-msgid "Extend"
-msgstr ""
-
-msgid "Wants to Receive Supremum"
-msgstr ""
-
-msgid "Change Data"
-msgstr ""
-
-msgid "Delete Member"
-msgstr ""
-
-msgid "Membership of Committees and Fraternities"
-msgstr ""
-
-msgid "This member is not installed in an organ."
-msgstr ""
-
-msgid "Addresses"
-msgstr ""
-
-msgid "Change"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Postal Region"
-msgstr ""
-
-msgid "Street and House Number"
-msgstr ""
-
-msgid "City and Postal Code"
-msgstr ""
-
-msgid "Phone Number"
+msgid "Add Function"
 msgstr ""
 
 msgid "Add Home Address"
 msgstr ""
 
-msgid "Add Student Address"
+msgid "Add Inactive Member"
 msgstr ""
 
 msgid "Add Mail Address"
 msgstr ""
 
-msgid "Mailing List Subscriptions"
+msgid "Add Mailing List"
 msgstr ""
 
-msgid "Change Mailing List Subscriptions"
+msgid "Add Meeting"
 msgstr ""
 
-msgid "Current Data"
+msgid "Add Member"
 msgstr ""
 
-msgid "Proposed Data"
+msgid "Add New (Inactive) Member"
 msgstr ""
 
-msgid ""
-"Warning: the e-mail address of the member will be updated! This will require "
-"additional changes to any mailing lists the member is added to."
+msgid "Add New Decision"
 msgstr ""
 
-msgid "Apply Update"
+msgid "Add New Function"
 msgstr ""
 
-msgid "Reject Update"
+msgid "Add New Mailing List"
 msgstr ""
 
-msgid "Inschrijving"
+msgid "Add New Meeting"
 msgstr ""
 
-msgid "SEPA-machtiging"
+msgid "Add Student Address"
 msgstr ""
 
-msgid ""
-"Welkom! Met dit formulier kun je je inschrijven voor een\n"
-"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
-"kost\n"
-"eenmalig 15 euro."
+msgid "Add new user"
 msgstr ""
 
-msgid ""
-"Deze betaling zal middels een eenmalige SEPA-machtiging\n"
-"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
+msgid "Additional information"
 msgstr ""
 
-msgid "Incassant-ID"
-msgstr ""
-
-msgid "Naam"
+msgid "Addresses"
 msgstr ""
 
 msgid "Adres"
 msgstr ""
 
-msgid "Postcode"
+msgid "Advisory Board"
 msgstr ""
 
-msgid "Plaats"
+msgid "Agreement"
 msgstr ""
 
-msgid "Land"
-msgstr ""
-
-msgid "If you have any questions feel free to contact"
-msgstr ""
-
-msgid "Studie"
-msgstr ""
-
-#, php-format
-msgid ""
-"If you started after 2016, your username is an 8-digit number starting with "
-"the year you started at the TU/e, for example %s0001. You have received this "
-"in an email when you enrolled. Go to <a href=\"%s\">this</a> page if you "
-"need help finding it. Your username will be used to verify you are studying "
-"at the department of M&CS."
-msgstr ""
-
-msgid "Mailinglijsten"
+msgid "All API permissions"
 msgstr ""
 
 msgid ""
@@ -666,32 +147,254 @@ msgid ""
 "inschrijvingen kunnen op een later tijdstip veranderd worden."
 msgstr ""
 
-msgid "SEPA Direct Debit"
+msgid "An error occurred"
+msgstr ""
+
+msgid "An error occurred while trying to reject the changes."
+msgstr ""
+
+msgid "An error occurred while trying to save the changes."
+msgstr ""
+
+msgid "Annul Decision"
+msgstr ""
+
+msgid "Apply Update"
+msgstr ""
+
+msgid "Approval"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Approve Membership"
+msgstr ""
+
+msgid "Are you sure that you are younger than 10 years?"
+msgstr ""
+
+#, php-format
+msgid "Are you sure that you want to delete the %s mailing list?"
+msgstr ""
+
+#, php-format
+msgid "Are you sure that you want to delete the %s of %s?"
 msgstr ""
 
 #, php-format
 msgid ""
-"You can pay for your GEWIS membership using a SEPA direct debit.\n"
-"This means that GEWIS will debit &euro;15,- from your bank account. You only "
-"have to pay once for\n"
-"the entire duration of your studies. Please make sure your bank accepts SEPA "
-"Direct Debits.\n"
-"Note that if your bank account is not in Euros, a conversion to Euros takes "
-"place at your bank.\n"
-"Contact %s for any questions about your payment."
+"Are you sure that you want to extend the membership of %s to %s (from %s)?"
+msgstr ""
+
+#, php-format
+msgid "Are you sure you want to delete member %s?"
+msgstr ""
+
+#, php-format
+msgid "Are your sure that you want to delete decision %s %d.%d.%d?"
+msgstr ""
+
+msgid "Articles of Association, Internal Regulations and privacy statement"
 msgstr ""
 
 msgid ""
-"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
-"nodig. Deze kan je hieronder in het vakje tekenen."
+"As a graduate, you can choose to keep receiving the physical Supremum "
+"magazine."
 msgstr ""
 
 msgid ""
-"Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
-"moderne browser, zoals Firefox."
+"As a result, this member cannot be removed. According to the AVG, we have a "
+"legal basis to keep this member's name in our database. The other data can, "
+"however, be deleted."
 msgstr ""
 
-msgid "Verwijder handtekening"
+msgid "Author"
+msgstr ""
+
+msgid "Auto-subscription"
+msgstr ""
+
+msgid "BM (Board Meeting)"
+msgstr ""
+
+#, php-format
+msgid "Back to %s %d"
+msgstr ""
+
+msgid "Birthdate"
+msgstr ""
+
+msgid "Board Member(s) to Discharge"
+msgstr ""
+
+msgid "Board Member(s) to Relieve"
+msgstr ""
+
+msgid "Board Mutations"
+msgstr ""
+
+msgid "Budget"
+msgstr ""
+
+msgid "Budget/Statement"
+msgstr ""
+
+msgid "CM (Chair's Meeting)"
+msgstr ""
+
+msgid "CSV"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
+msgid "Change Data"
+msgstr ""
+
+msgid "Change Mailing List Subscriptions"
+msgstr ""
+
+#, php-format
+msgid "Change Mailing List Subscriptions of %s"
+msgstr ""
+
+msgid "Change Membership Type"
+msgstr ""
+
+#, php-format
+msgid "Change Membership Type of %s"
+msgstr ""
+
+msgid "Change Subscriptions"
+msgstr ""
+
+#, php-format
+msgid "Change password for %s"
+msgstr ""
+
+#, php-format
+msgid ""
+"Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
+"a>."
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "City and Postal Code"
+msgstr ""
+
+msgid "Committee"
+msgstr ""
+
+msgid "Confirm Changes"
+msgstr ""
+
+msgid "Controller"
+msgstr ""
+
+msgid "Create API principal"
+msgstr ""
+
+msgid "Create API token"
+msgstr ""
+
+msgid "Create new API principal"
+msgstr ""
+
+msgid "Create user"
+msgstr ""
+
+msgid "Current Data"
+msgstr ""
+
+msgid "Current Functions"
+msgstr ""
+
+msgid "Current Mailing Lists"
+msgstr ""
+
+msgid "Current Members"
+msgstr ""
+
+msgid "Data Update Requests"
+msgstr ""
+
+msgid "Date of Budget/Statement"
+msgstr ""
+
+msgid "Date of Expiration"
+msgstr ""
+
+msgid "Decision"
+msgstr ""
+
+msgid "Decision Already Exists"
+msgstr ""
+
+msgid "Decision Cannot Be Removed"
+msgstr ""
+
+msgid "Decision List"
+msgstr ""
+
+msgid "Decision Number"
+msgstr ""
+
+msgid "Decision removed."
+msgstr ""
+
+msgid "Decisions"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+#, php-format
+msgid "Delete %s"
+msgstr ""
+
+msgid "Delete Decision"
+msgstr ""
+
+msgid "Delete Member"
+msgstr ""
+
+msgid "Delete Prospective Member"
+msgstr ""
+
+msgid "Delete User"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid ""
+"Deze betaling zal middels een eenmalige SEPA-machtiging\n"
+"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
+msgstr ""
+
+msgid "Disapprove"
+msgstr ""
+
+msgid "Discharge"
+msgstr ""
+
+#, php-format
+msgid "Discharge %s as %s?"
+msgstr ""
+
+msgid "Discharge Board Member"
+msgstr ""
+
+msgid "Discharge Member"
+msgstr ""
+
+msgid "Discharges"
+msgstr ""
+
+msgid "Do you want to delete the other data?"
 msgstr ""
 
 msgid ""
@@ -709,6 +412,188 @@ msgid ""
 "voorwaarden."
 msgstr ""
 
+msgid "Dutch Description"
+msgstr ""
+
+msgid "E-mail Address"
+msgstr ""
+
+msgid "Edit / Delete"
+msgstr ""
+
+msgid "Effective From"
+msgstr ""
+
+msgid "English Description"
+msgstr ""
+
+msgid "Execute"
+msgstr ""
+
+msgid "Expiration"
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "Export Decisions"
+msgstr ""
+
+msgid "Extend"
+msgstr ""
+
+#, php-format
+msgid "Extend Membership of %s"
+msgstr ""
+
+msgid "External"
+msgstr ""
+
+msgid "External - Specially admitted by the board"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Financial Audit Committee"
+msgstr ""
+
+msgid "First Name"
+msgstr ""
+
+#, php-format
+msgid ""
+"For an overview of how you can use the Doctrine Query Language (DQL) please "
+"refer to %sits documentation%s."
+msgstr ""
+
+msgid "Fork GEWISDB on GitHub &raquo;"
+msgstr ""
+
+msgid "Found Organ"
+msgstr ""
+
+msgid "Foundation"
+msgstr ""
+
+msgid "Fraternity"
+msgstr ""
+
+msgid "Function"
+msgstr ""
+
+msgid "Function of"
+msgstr ""
+
+msgid "Functions"
+msgstr ""
+
+#, php-format
+msgid ""
+"GEWIS currently has <a href=\"%s\">%d members</a> and <a href=\"%s\">%d "
+"prospective members</a>. <a href=\"%s\">Click here</a> to create a meeting "
+"or <a href=\"%s\">perform a query</a>."
+msgstr ""
+
+msgid "GMM (General Members Meeting)"
+msgstr ""
+
+msgid "GMM Committee"
+msgstr ""
+
+msgid "GMM Taskforce"
+msgstr ""
+
+msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
+msgstr ""
+
+msgid "Gemeenschap van Wiskunde en Informatica Studenten"
+msgstr ""
+
+msgid "Generation"
+msgstr ""
+
+msgid "Get API Health"
+msgstr ""
+
+msgid "Get active Members (members that are in one or more organs)"
+msgstr ""
+
+msgid "Get all Members"
+msgstr ""
+
+msgid "Give Function"
+msgstr ""
+
+msgid "Give Member Function"
+msgstr ""
+
+msgid "Graduate"
+msgstr ""
+
+msgid "Graduate - Old member and specially admitted by the board"
+msgstr ""
+
+msgid "Graduate renewal"
+msgstr ""
+
+msgid "Grant"
+msgstr ""
+
+msgid "Grant Key Code"
+msgstr ""
+
+msgid "Grantee"
+msgstr ""
+
+msgid "Handtekening"
+msgstr ""
+
+msgid "Hide Member"
+msgstr ""
+
+msgid "Home Address (Parents)"
+msgstr ""
+
+msgid "Honorary"
+msgstr ""
+
+msgid "Honorary - Specially appointed by the GMM"
+msgstr ""
+
+msgid "House Number"
+msgstr ""
+
+msgid ""
+"I am familiar with the contents of the Articles of Association and the "
+"Internal Regulations of GEWIS and I would like to renew my status as a "
+"graduate"
+msgstr ""
+
+#, php-format
+msgid ""
+"I have read the privacy statement of %s and consent to the processing of my "
+"data."
+msgstr ""
+
+msgid "I'd like to receive the Supremum magazine 3 times a year"
+msgstr ""
+
+msgid "IBAN"
+msgstr ""
+
+msgid "If you have any questions feel free to contact"
+msgstr ""
+
+#, php-format
+msgid ""
+"If you started after 2016, your username is an 8-digit number starting with "
+"the year you started at the TU/e, for example %s0001. You have received this "
+"in an email when you enrolled. Go to <a href=\"%s\">this</a> page if you "
+"need help finding it. Your username will be used to verify you are studying "
+"at the department of M&CS."
+msgstr ""
+
 msgid ""
 "Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
 "en\n"
@@ -721,79 +606,314 @@ msgid ""
 "verwerken van mijn persoonsgegevens volgens haar privacybeleid."
 msgstr ""
 
-msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
+msgid "Incassant-ID"
 msgstr ""
 
-msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
+msgid "Initial(s)"
 msgstr ""
 
-msgid "Voorletters"
+msgid "Inschrijving"
 msgstr ""
 
-msgid "Voornaam"
+msgid "Install Board Member"
 msgstr ""
 
-msgid "Tussenvoegsels"
+msgid "Installation"
 msgstr ""
 
-msgid "Achternaam"
+msgid "Installation/Discharge"
 msgstr ""
 
-msgid "TU/e-gebruikersnaam"
+msgid "Installations"
 msgstr ""
 
-msgid "Onbekend"
-msgstr ""
-
-msgid "Study"
-msgstr ""
-
-msgid "IBAN"
-msgstr ""
-
-msgid "Straat en huisnummer"
-msgstr ""
-
-msgid "Woonplaats en Postcode"
-msgstr ""
-
-msgid "Telefoonnummer"
-msgstr ""
-
-msgid "Aangemelde mailing lists"
+msgid ""
+"Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
+"moderne browser, zoals Firefox."
 msgstr ""
 
 msgid "Kenmerk van de machtiging"
 msgstr ""
 
-msgid "Plaats en datum van ondertekening"
-msgstr ""
-
-msgid "Handtekening"
-msgstr ""
-
-msgid "TU/e Raw Data Lookup"
-msgstr ""
-
-msgid "Search TU/e Students"
-msgstr ""
-
 msgid "Key"
 msgstr ""
 
-msgid "Value"
+msgid "Key Code(s) to Withdraw"
 msgstr ""
 
-msgid "Data Update Requests"
+msgid "Key Codes"
 msgstr ""
 
-msgid "There are currently no data update requests."
+msgid ""
+"Key code cannot be granted after September 1st of the next association year."
 msgstr ""
 
-msgid "Action"
+msgid "Key code cannot be granted for more than one year."
 msgstr ""
 
-msgid "View"
+msgid "Key code cannot be granted in the past."
+msgstr ""
+
+msgid "Key code cannot be withdrawn after its original expiration."
+msgstr ""
+
+msgid "Key code cannot be withdrawn in the past."
+msgstr ""
+
+msgid "Land"
+msgstr ""
+
+msgid "Language Settings"
+msgstr ""
+
+msgid "Last Name"
+msgstr ""
+
+msgid "Last Name Prepositional Particle"
+msgstr ""
+
+msgid "Last Update to Membership"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Mail Address"
+msgstr ""
+
+msgid "Mailing List Subscriptions"
+msgstr ""
+
+msgid "Mailing Lists"
+msgstr ""
+
+msgid "Mailing list deleted."
+msgstr ""
+
+msgid "Mailinglijsten"
+msgstr ""
+
+#, php-format
+msgid "Make %s inactive?"
+msgstr ""
+
+msgid "Make Inactive"
+msgstr ""
+
+msgid "Make Member Inactive"
+msgstr ""
+
+msgid "Meeting Date"
+msgstr ""
+
+msgid "Meeting Number"
+msgstr ""
+
+msgid "Meeting Type"
+msgstr ""
+
+msgid "Meeting added successfully!"
+msgstr ""
+
+msgid "Meetings"
+msgstr ""
+
+msgid "Meetings and Decisions"
+msgstr ""
+
+#, php-format
+msgid "Member %s cannot be deleted."
+msgstr ""
+
+msgid "Member Number"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
+msgid "Membership Ends On (Expires On)"
+msgstr ""
+
+msgid "Membership Type"
+msgstr ""
+
+msgid "Membership of Committees and Fraternities"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Modifications"
+msgstr ""
+
+msgid "Mutations"
+msgstr ""
+
+msgid "N/A"
+msgstr ""
+
+msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
+msgstr ""
+
+msgid "Naam"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "No Exception available"
+msgstr ""
+
+msgid "No data returned."
+msgstr ""
+
+msgid "No signature or IBAN provided."
+msgstr ""
+
+msgid ""
+"Note: if you updated your email address, you have to sign in to the GEWIS "
+"website using your new email address once this change has been processed."
+msgstr ""
+
+msgid "On Form"
+msgstr ""
+
+msgid "Onbekend"
+msgstr ""
+
+msgid "Ordinary"
+msgstr ""
+
+msgid "Ordinary - Enrolled at the department of M&CS"
+msgstr ""
+
+msgid "Organ"
+msgstr ""
+
+msgid "Organ Mutations"
+msgstr ""
+
+msgid "Other"
+msgstr ""
+
+msgid ""
+"PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
+msgstr ""
+
+msgid "Paid (Amount)"
+msgstr ""
+
+msgid "Pending member updates"
+msgstr ""
+
+msgid "Permissions"
+msgstr ""
+
+msgid "Personal details"
+msgstr ""
+
+msgid "Phone Number"
+msgstr ""
+
+msgid "Plaats"
+msgstr ""
+
+msgid "Plaats en datum van ondertekening"
+msgstr ""
+
+msgid "Place of Signing"
+msgstr ""
+
+msgid "Please accept the conditions for payment through SEPA Direct Debit"
+msgstr ""
+
+msgid ""
+"Please note that if you create a mailing list here, it must also exist in "
+"mailman (with the same name!)."
+msgstr ""
+
+msgid "Point"
+msgstr ""
+
+msgid "Postal Code"
+msgstr ""
+
+msgid "Postal Region"
+msgstr ""
+
+msgid "Postcode"
+msgstr ""
+
+msgid "Previous exceptions"
+msgstr ""
+
+msgid "Proposed Data"
+msgstr ""
+
+msgid "Prospective Members"
+msgstr ""
+
+msgid "Provided Data"
+msgstr ""
+
+msgid "Query"
+msgstr ""
+
+msgid "Query Result"
+msgstr ""
+
+msgid "Read organ membership (per user/organ)"
+msgstr ""
+
+msgid "Register Member"
+msgstr ""
+
+msgid "Reject Update"
+msgstr ""
+
+msgid "Relieve"
+msgstr ""
+
+msgid "Relieve Board Member"
+msgstr ""
+
+msgid "Remove Member"
+msgstr ""
+
+msgid "Renew"
+msgstr ""
+
+msgid "Renew until"
+msgstr ""
+
+msgid "Renewal"
+msgstr ""
+
+msgid "Result"
+msgstr ""
+
+msgid "SEPA Direct Debit"
+msgstr ""
+
+msgid "SEPA-machtiging"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search Members"
 msgstr ""
 
 msgid "Search Organs"
@@ -802,152 +922,88 @@ msgstr ""
 msgid "Search Prospective Members"
 msgstr ""
 
-msgid "Provided Data"
+msgid "Search TU/e Students"
 msgstr ""
 
-msgid "TU/e Data"
+msgid "Select API permissions"
 msgstr ""
 
-msgid "No data returned."
+msgid "Select Postal Region"
 msgstr ""
 
-#, php-format
-msgid "%s: %s (started in %s)"
+msgid "Select a study"
 msgstr ""
 
-msgid "Approve Membership"
-msgstr ""
-
-msgid "Delete Prospective Member"
+msgid "Settings"
 msgstr ""
 
 msgid "Signature SEPA Direct Debit"
 msgstr ""
 
-msgid "No signature or IBAN provided."
+msgid "Signature is required!"
 msgstr ""
 
-msgid "Save"
+msgid ""
+"Some of the entered information appears to be missing or incorrect. Please "
+"check your data and submit again."
+msgstr ""
+
+msgid "Stack trace"
+msgstr ""
+
+msgid "Statement"
 msgstr ""
 
 msgid "Stored Queries"
 msgstr ""
 
-#, php-format
-msgid ""
-"For an overview of how you can use the Doctrine Query Language (DQL) please "
-"refer to %sits documentation%s."
+msgid "Straat en huisnummer"
 msgstr ""
 
-msgid "The entities that you can use:"
+msgid "Street"
 msgstr ""
 
-msgid "Query Result"
+msgid "Street and House Number"
 msgstr ""
 
-msgid "The query did not return any results."
+msgid "Student Address"
 msgstr ""
 
-msgid "Mailing list deleted."
+msgid "Studie"
 msgstr ""
 
-#, php-format
-msgid "Are you sure that you want to delete the %s mailing list?"
+msgid "Study"
 msgstr ""
 
-msgid "Current Functions"
+msgid "Subscribe"
 msgstr ""
 
-msgid "Add New Function"
+msgid "Supremum"
 msgstr ""
 
-msgid "Add Function"
+msgid "TU/e Data"
 msgstr ""
 
-msgid "API Tokens"
-msgstr ""
-
-msgid "Functions"
-msgstr ""
-
-msgid "Mailing Lists"
-msgstr ""
-
-msgid "Users"
-msgstr ""
-
-msgid "Current Mailing Lists"
-msgstr ""
-
-msgid "Dutch Description"
-msgstr ""
-
-msgid "English Description"
-msgstr ""
-
-msgid "On Form"
-msgstr ""
-
-msgid "Auto-subscription"
-msgstr ""
-
-msgid "Add New Mailing List"
-msgstr ""
-
-msgid ""
-"Please note that if you create a mailing list here, it must also exist in "
-"mailman (with the same name!)."
-msgstr ""
-
-msgid "Create API token"
-msgstr ""
-
-msgid "Update API principal"
-msgstr ""
-
-msgid "API Principals"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Permissions"
-msgstr ""
-
-msgid "Edit / Delete"
-msgstr ""
-
-msgid "Create new API principal"
-msgstr ""
-
-msgid "Create user"
+msgid "TU/e Raw Data Lookup"
 msgstr ""
 
 #, php-format
-msgid "Change password for %s"
+msgid "TU/e data: %s"
 msgstr ""
 
-#, php-format
-msgid "Delete %s"
+msgid "TU/e-gebruikersnaam"
 msgstr ""
 
-msgid "Delete User"
+msgid "TU/e-username"
 msgstr ""
 
-#, php-format
-msgid ""
-"<strong>Warning:</strong> The database currently requires the usage of GEWIS "
-"m-accounts to log in. Any accounts created here cannot be used to log in. "
-"Learn more about m-accounts %shere%s."
+msgid "Telefoonnummer"
 msgstr ""
 
-msgid "Username"
+msgid "The changes have been applied!"
 msgstr ""
 
-msgid "Add new user"
-msgstr ""
-
-msgid "Login"
+msgid "The changes have not been applied."
 msgstr ""
 
 msgid "The database currently only accepts logins using your GEWIS m-account."
@@ -957,224 +1013,200 @@ msgid ""
 "The database currently only accepts logins using your database credentials."
 msgstr ""
 
-msgid "Home Address (Parents)"
+msgid "The entities that you can use:"
 msgstr ""
 
-msgid "Student Address"
+msgid "The organ to be abolished includes the following members:"
 msgstr ""
 
-msgid "Mail Address"
+msgid "The query did not return any results."
 msgstr ""
 
-msgid "Ordinary"
+msgid "The requested URL could not be matched by routing."
 msgstr ""
 
-msgid "External"
+msgid ""
+"The requested controller could not be mapped to an existing controller class."
 msgstr ""
 
-msgid "Graduate"
+msgid "The requested controller was not dispatchable."
 msgstr ""
 
-msgid "Honorary"
+msgid "The requested controller was unable to dispatch the request."
 msgstr ""
 
-msgid "The changes have been applied!"
+msgid "There are currently no data update requests."
 msgstr ""
 
-msgid "An error occurred while trying to save the changes."
+msgid "There are other decisions that still refer to this decision."
 msgstr ""
 
-msgid "The changes have not been applied."
+msgid ""
+"There are too many results to display. Try filtering to see other results."
 msgstr ""
 
-msgid "An error occurred while trying to reject the changes."
+#, php-format
+msgid ""
+"This is because %s is/has been a member of an organ and/or has budgets/"
+"statements to their name."
 msgstr ""
 
-msgid "Select Postal Region"
+msgid "This meeting has no decisions (yet)."
 msgstr ""
 
-msgid "Street"
+msgid ""
+"This member has been deleted, you cannot edit their information. Only the "
+"name of this member is stored so that decisions that mention this member "
+"remain correct."
 msgstr ""
 
-msgid "House Number"
+msgid "This member is not installed in an organ."
 msgstr ""
 
-msgid "Postal Code"
+msgid ""
+"This renewal link could not be found. Perhaps it has been used before or has "
+"expired."
 msgstr ""
 
-msgid "City"
+msgid "Toggle Navigation"
+msgstr ""
+
+msgid "Token"
+msgstr ""
+
+msgid "Tussenvoegsels"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+#, php-format
+msgid "Update %s of %s"
+msgstr ""
+
+msgid "Update / Renew"
+msgstr ""
+
+msgid "Update API principal"
 msgstr ""
 
 msgid "Update Address"
 msgstr ""
 
-msgid "Discharge Board Member"
+msgid "Update with data from the TU/e"
 msgstr ""
 
-msgid "Effective From"
+msgid "User"
 msgstr ""
 
-msgid "Install Board Member"
+msgid "Username"
 msgstr ""
 
-msgid "Relieve Board Member"
+msgid "Users"
 msgstr ""
 
-msgid "Budget"
+msgid "Value"
 msgstr ""
 
-msgid "Statement"
+msgid "Version"
 msgstr ""
 
-msgid "Author"
+msgid "Verwijder handtekening"
 msgstr ""
 
-msgid "Approval"
+msgid "View"
 msgstr ""
 
-msgid "Approve"
-msgstr ""
-
-msgid "Disapprove"
-msgstr ""
-
-msgid "Modifications"
-msgstr ""
-
-msgid "With Modifications"
-msgstr ""
-
-msgid "Without Modifications"
-msgstr ""
-
-msgid "Add Budget/Statement"
-msgstr ""
-
-msgid "Meeting Type"
-msgstr ""
-
-msgid "BM (Board Meeting)"
-msgstr ""
-
-msgid "GMM (General Members Meeting)"
-msgstr ""
-
-msgid "CM (Chair's Meeting)"
+msgid "View Update Requests"
 msgstr ""
 
 msgid "Virt (Virtual Meeting)"
 msgstr ""
 
-msgid "Meetings"
+msgid ""
+"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
+"nodig. Deze kan je hieronder in het vakje tekenen."
 msgstr ""
 
-msgid "Committee"
+msgid "Voorletters"
 msgstr ""
 
-msgid "Fraternity"
+msgid "Voornaam"
 msgstr ""
 
-msgid "GMM Committee"
-msgstr ""
-
-msgid "GMM Taskforce"
-msgstr ""
-
-msgid "Financial Audit Committee"
-msgstr ""
-
-msgid "Advisory Board"
-msgstr ""
-
-msgid "Installations"
-msgstr ""
-
-msgid "Discharges"
-msgstr ""
-
-msgid "Grantee"
-msgstr ""
-
-msgid "Grant Key Code"
-msgstr ""
-
-msgid "Key code cannot be granted in the past."
-msgstr ""
-
-msgid "Key code cannot be granted for more than one year."
+msgid "Wants to Receive Supremum"
 msgstr ""
 
 msgid ""
-"Key code cannot be granted after September 1st of the next association year."
+"Warning: the e-mail address of the member will be updated! This will require "
+"additional changes to any mailing lists the member is added to."
+msgstr ""
+
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr ""
+
+msgid ""
+"Welkom! Met dit formulier kun je je inschrijven voor een\n"
+"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
+"kost\n"
+"eenmalig 15 euro."
+msgstr ""
+
+msgid "With Modifications"
+msgstr ""
+
+msgid "Withdraw"
 msgstr ""
 
 msgid "Withdraw Key Code"
 msgstr ""
 
-msgid "Key code cannot be withdrawn in the past."
+msgid "Without Modifications"
 msgstr ""
 
-msgid "Key code cannot be withdrawn after its original expiration."
+msgid "Woonplaats en Postcode"
 msgstr ""
 
-msgid "Add Mailing List"
-msgstr ""
-
-msgid "Update with data from the TU/e"
-msgstr ""
-
-msgid "Hide Member"
-msgstr ""
-
-msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
-msgstr ""
-
-msgid "Change Subscriptions"
-msgstr ""
-
-msgid "Select a study"
-msgstr ""
-
-msgid "Place of Signing"
-msgstr ""
-
-msgid "Are you sure that you are younger than 10 years?"
-msgstr ""
-
-msgid "You have to accept the terms!"
-msgstr ""
-
-msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
-msgstr ""
-
-msgid "Signature is required!"
-msgstr ""
-
-msgid "Please accept the conditions for payment through SEPA Direct Debit"
-msgstr ""
-
-msgid "Renew until"
-msgstr ""
-
-msgid "I'd like to receive the Supremum magazine 3 times a year"
+msgid "Yes"
 msgstr ""
 
 #, php-format
 msgid ""
-"I have read the privacy statement of %s and consent to the processing of my "
-"data."
+"You are using a build based on commit <a target=\"_blank\" href=\"https://"
+"github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
+"your bug reports."
 msgstr ""
 
-msgid "Gemeenschap van Wiskunde en Informatica Studenten"
+#, php-format
+msgid "You can always read the online Supremum on %s."
 msgstr ""
 
+#, php-format
 msgid ""
-"I am familiar with the contents of the Articles of Association and the "
-"Internal Regulations of GEWIS and I would like to renew my status as a "
-"graduate"
+"You can pay for your GEWIS membership using a SEPA direct debit.\n"
+"This means that GEWIS will debit &euro;15,- from your bank account. You only "
+"have to pay once for\n"
+"the entire duration of your studies. Please make sure your bank accepts SEPA "
+"Direct Debits.\n"
+"Note that if your bank account is not in Euros, a conversion to Euros takes "
+"place at your bank.\n"
+"Contact %s for any questions about your payment."
 msgstr ""
 
-msgid "Renew"
+#, php-format
+msgid ""
+"You have requested renewal of your status as graduate. Within 24 hours, you "
+"will see your new expiry date <b>%1$s</b> on your member page on <a href=\"//"
+"%2$s\">%2$s</a>."
+msgstr ""
+
+msgid "You have successfully requested renewal of your status as graduate."
+msgstr ""
+
+msgid "You have to accept the terms!"
 msgstr ""
 
 msgid ""
@@ -1184,47 +1216,15 @@ msgstr ""
 msgid "You have to consent to processing your data"
 msgstr ""
 
-msgid "Ordinary - Enrolled at the department of M&CS"
+msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr ""
 
-msgid "External - Specially admitted by the board"
+msgid "as"
 msgstr ""
 
-msgid "Graduate - Old member and specially admitted by the board"
+msgid "reads as follows:"
 msgstr ""
 
-msgid "Honorary - Specially appointed by the GMM"
-msgstr ""
-
-msgid "Change Membership Type"
-msgstr ""
-
-msgid "Execute"
-msgstr ""
-
-msgid "CSV"
-msgstr ""
-
-msgid "Token"
-msgstr ""
-
-msgid "Select API permissions"
-msgstr ""
-
-msgid "Create API principal"
-msgstr ""
-
-msgid "Get API Health"
-msgstr ""
-
-msgid "Get all Members"
-msgstr ""
-
-msgid "Get active Members (members that are in one or more organs)"
-msgstr ""
-
-msgid "Read organ membership (per user/organ)"
-msgstr ""
-
-msgid "All API permissions"
+#, php-format
+msgid "resolves to %s"
 msgstr ""
