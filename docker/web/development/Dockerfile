@@ -11,6 +11,7 @@ RUN apk add --no-cache --virtual .build-deps \
         sqlite-dev \
         tzdata \
     && apk add --no-cache --virtual .runtime-programs \
+        gettext \
         git \
         icu-data-full \
         nano \
@@ -64,6 +65,9 @@ RUN chmod 0775 ./docker-entrypoint.sh
 
 COPY --chown=www-data:www-data . /code
 RUN chmod 0775 ./orm
+
+RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
+    && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
 
 ENV PHP_IDE_CONFIG="serverName=database.gewis.nl"
 
