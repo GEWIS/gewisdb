@@ -9,6 +9,7 @@ find ./module -iname "*.phtml" -print0 | sort -z | xargs -r0 xgettext \
     --output=./module/Application/language/gewisdb.pot \
     --force-po \
     --no-location \
+    --sort-output \
     --package-name=GEWISdb \
     --package-version=`git describe --dirty --always` \
     --copyright-holder=GEWIS \
@@ -19,6 +20,7 @@ find ./module -iname "*.php" -print0 | sort -z | xargs -r0 xgettext \
     --output=./module/Application/language/gewisdb.pot \
     --force-po \
     --no-location \
+    --sort-output \
     --package-name=GEWISdb \
     --package-version=`git describe --dirty --always` \
     --copyright-holder=GEWIS \
