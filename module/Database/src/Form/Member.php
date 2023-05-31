@@ -9,6 +9,7 @@ use Database\Form\Fieldset\Address as AddressFieldset;
 use Database\Model\MailingList as MailingListModel;
 use DateInterval;
 use DateTime;
+use Laminas\Filter\StringToLower;
 use Laminas\Filter\StringToUpper;
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\ToNull;
@@ -287,6 +288,12 @@ class Member extends Form implements InputFilterProviderInterface
                             ],
                         ],
                     ],
+                ],
+            ],
+            'email' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => StringToLower::class],
                 ],
             ],
             'agreed' => [
