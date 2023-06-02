@@ -127,6 +127,7 @@ class Member
         $qb->select('m')
             ->from('Database\Model\Member', 'm')
             ->where('m.type = \'graduate\'')
+            ->andWhere('m.email IS NOT NULL')
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
             ->andWhere('m.expiration <= :expiresBefore');
