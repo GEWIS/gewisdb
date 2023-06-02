@@ -9,6 +9,7 @@ use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
+use DateTime;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator;
@@ -93,6 +94,7 @@ class MemberController extends AbstractActionController
             } elseif ($form->isValid()) {
                 /** @var MemberModel $updatedMember */
                 $updatedMember = $form->getData();
+                $updatedMember->setChangedOn(new DateTime());
                 $this->memberService->getMemberMapper()->persist($updatedMember);
                 $form->getActionLink()->used();
                 $this->memberService->getActionLinkMapper()->persist($form->getActionLink());
