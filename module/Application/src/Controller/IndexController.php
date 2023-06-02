@@ -9,6 +9,8 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\Identity\Identity;
 use Laminas\Session\Container as SessionContainer;
 
+use function explode;
+
 /**
  * @method Identity identity()
  */
@@ -24,6 +26,11 @@ class IndexController extends AbstractActionController
             && 'nl' !== $session->lang
         ) {
             $session->lang = 'en';
+        }
+
+        // Redirect to previous page if set (but prevent open redirect)
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            return $this->redirect()->toUrl('/' . explode('/', $_SERVER['HTTP_REFERER'], 4)[3]);
         }
 
         if (null === $this->identity()) {

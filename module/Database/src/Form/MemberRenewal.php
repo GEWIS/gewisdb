@@ -7,6 +7,7 @@ namespace Database\Form;
 use Database\Model\ActionLink as ActionLinkModel;
 use Database\Model\MailingList as MailingListModel;
 use DateTime;
+use Laminas\Filter\StringToLower;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Email;
@@ -217,6 +218,12 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
                             ],
                         ],
                     ],
+                ],
+            ],
+            'email' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => StringToLower::class],
                 ],
             ],
             'privacy' => [

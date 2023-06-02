@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Laminas\Filter\StringToLower;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Date;
@@ -195,6 +196,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 ],
                 'filters' => [
                     ['name' => ToNull::class],
+                    ['name' => StringToLower::class],
                 ],
             ],
         ];
