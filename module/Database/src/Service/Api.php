@@ -15,19 +15,25 @@ class Api
     }
 
     /**
-     * Get active members.
+     * Get active members and inactive fraternity members.
+     *
+     * It is good to note here that the includeInactiveFraternity argument
+     * only changes who is returned. If someone is active in another organ,
+     * their inactive fraternity membership still gets returned as organ membership
      *
      * @param array<array-key,string> $additionalProperties
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function getActiveMembers(array $additionalProperties): array
-    {
+    public function getActiveMembers(
+        array $additionalProperties,
+        bool $includeInactiveFraternity = false,
+    ): array {
         return array_map(
             static function ($member) use ($additionalProperties) {
                 return $member->toArrayApi($additionalProperties);
             },
-            $this->getReportMemberMapper()->findActive(),
+            $this->getReportMemberMapper()->findActive($includeInactiveFraternity),
         );
     }
 

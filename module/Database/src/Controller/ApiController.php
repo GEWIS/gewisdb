@@ -66,6 +66,8 @@ class ApiController extends AbstractActionController
     {
         $this->apiAuthService->assertCan(ApiPermissions::MembersActiveR);
 
+        $includeInactiveFraternity = (bool) $this->getRequest()->getQuery('includeInactive', false);
+
         $additionalProperties = [];
         if ($this->apiAuthService->currentUserCan(ApiPermissions::OrgansMembershipR)) {
             $additionalProperties[] = 'organs';
@@ -75,7 +77,7 @@ class ApiController extends AbstractActionController
             $additionalProperties[] = 'keyholder';
         }
 
-        $members = $this->apiService->getActiveMembers($additionalProperties);
+        $members = $this->apiService->getActiveMembers($additionalProperties, $includeInactiveFraternity);
         $res = ['data' => $members];
 
         return new JsonModel($res);

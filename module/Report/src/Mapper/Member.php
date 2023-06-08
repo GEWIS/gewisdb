@@ -55,14 +55,17 @@ class Member
      *
      * @return array<array-key, MemberModel>
      */
-    public function findActive(bool $includeOrganMembership = false): array
+    public function findActive(bool $includeInactiveFraternity = false): array
     {
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->leftJoin(OrganMemberModel::class, 'om', Join::WITH, 'm.lidnr = om.member')
             ->where('om.dischargeDate IS NULL OR om.dischargeDate > CURRENT_DATE()')
             ->andWhere('om.installDate < CURRENT_DATE()')
-            ->andWhere('om.function <> \'\'')
-            ->andWhere('om.function <> \'Inactief Lid\'');
+            ->andWhere('om.function <> \'\'');
+
+        if (!$includeInactiveFraternity) {
+            $qb->andWhere('om.function <> \'Inactief Lid\'');
+        }
 
         return $qb->getQuery()->getResult();
     }

@@ -107,6 +107,14 @@ paths:
       description: Get all members that are currently installed in at least one organ
       tags:
        - members
+      parameters:
+       - name: includeInactive
+         in: query
+         required: false
+         description: Whether to include inactive fraternity members in the response. If a member is both an active member in another type and inactive in a fraternity, they also get returned (including possibly their inactive organ memberships).
+         schema:
+           type: boolean
+           default: false
       responses:
         200:
           description: Succesful response
