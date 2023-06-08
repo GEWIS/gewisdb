@@ -7328,7 +7328,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Api\u003A\u003AgetActiveMembers\u0028\u0029",
             "name": "getActiveMembers",
-            "summary": "Get\u0020active\u0020members.",
+            "summary": "Get\u0020active\u0020members\u0020and\u0020inactive\u0020fraternity\u0020members.",
             "url": "classes/Database-Service-Api.html#method_getActiveMembers"
         },                {
             "fqsen": "\\Database\\Service\\Api\u003A\u003AgetMembers\u0028\u0029",
@@ -8896,6 +8896,11 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020withdrawn\u0020date.",
             "url": "classes/Report-Model-Keyholder.html#method_setWithdrawnDate"
         },                {
+            "fqsen": "\\Report\\Model\\Keyholder\u003A\u003AisCurrent\u0028\u0029",
+            "name": "isCurrent",
+            "summary": "Get\u0020whether\u0020the\u0020key\u0020decision\u0020is\u0020still\u0020valid",
+            "url": "classes/Report-Model-Keyholder.html#method_isCurrent"
+        },                {
             "fqsen": "\\Report\\Model\\Keyholder\u003A\u003A\u0024id",
             "name": "id",
             "summary": "Id.",
@@ -9345,6 +9350,11 @@ Search.appendIndex(
             "name": "addAddress",
             "summary": "Add\u0020an\u0020address.",
             "url": "classes/Report-Model-Member.html#method_addAddress"
+        },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AisKeyholder\u0028\u0029",
+            "name": "isKeyholder",
+            "summary": "Is\u0020currently\u0020a\u0020keyholder.",
+            "url": "classes/Report-Model-Member.html#method_isKeyholder"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetLists\u0028\u0029",
             "name": "getLists",
@@ -11268,6 +11278,11 @@ Search.appendIndex(
         },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersR",
             "name": "MembersR",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyKeyholder",
+            "name": "MembersPropertyKeyholder",
             "summary": "",
             "url": ""
         },                {
