@@ -1,3 +1,16 @@
+# Compile the language files
+FROM alpine:latest AS gewisdb_translations
+WORKDIR /code
+
+RUN apk add --no-cache --virtual .runtime-deps \
+        gettext
+
+COPY ./module/Application/language/*.po .
+
+RUN msgfmt en.po -o en -c --strict -v \
+    && msgfmt nl.po -o nl -c --strict -v
+
+# Install dependencies and create final image
 FROM php:8.2-fpm-alpine as gewisdb_web_development
 
 RUN apk add --no-cache --virtual .build-deps \
@@ -11,7 +24,6 @@ RUN apk add --no-cache --virtual .build-deps \
         sqlite-dev \
         tzdata \
     && apk add --no-cache --virtual .runtime-programs \
-        gettext \
         git \
         icu-data-full \
         nano \
@@ -64,12 +76,9 @@ COPY --chown=www-data:www-data ./docker/web/development/docker-entrypoint.sh ./d
 RUN chmod 0775 ./docker-entrypoint.sh
 
 COPY --chown=www-data:www-data . /code
-RUN chmod 0775 ./orm ./web
-RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
-    && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
+COPY --chown=www-data:www-data --from=gewisdb_translations /code/*.mo /code/module/Application/language/
 
-RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
-    && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
+RUN chmod 0775 ./orm ./web
 
 ENV PHP_IDE_CONFIG="serverName=database.gewis.nl"
 

@@ -1,3 +1,16 @@
+# Compile the language files
+FROM alpine:latest AS gewisdb_translations
+WORKDIR /code
+
+RUN apk add --no-cache --virtual .runtime-deps \
+        gettext
+
+COPY ./module/Application/language/*.po .
+
+RUN msgfmt en.po -o en -c --strict -v \
+    && msgfmt nl.po -o nl -c --strict -v
+
+# Install dependencies
 FROM php:8.2-fpm-alpine as php-target
 
 RUN apk add --no-cache --virtual .build-deps \
@@ -8,7 +21,6 @@ RUN apk add --no-cache --virtual .build-deps \
         openldap-dev \
         tzdata \
     && apk add --no-cache --virtual .runtime-programs \
-        gettext \
         git \
         icu-data-full \
         unzip \
@@ -32,6 +44,7 @@ RUN apk add --no-cache --virtual .build-deps \
     && echo 'Europe/Amsterdam' > /etc/timezone \
     && apk del .build-deps
 
+# Create final image
 FROM php-target as gewisdb_web_production
 WORKDIR /code
 
@@ -54,11 +67,7 @@ COPY --chown=www-data:www-data ./docker/web/production/docker-entrypoint.sh ./do
 RUN chmod 0775 ./docker-entrypoint.sh
 
 COPY --chown=www-data:www-data . /code
-RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
-    && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
-
-RUN msgfmt /code/module/Application/language/en.po -o /code/module/Application/language/en -c --strict -v \
-    && msgfmt /code/module/Application/language/nl.po -o /code/module/Application/language/nl -c --strict -v
+COPY --chown=www-data:www-data --from=gewisdb_translations /code/*.mo /code/module/Application/language/
 
 RUN php composer.phar dump-autoload -a --no-dev
 
