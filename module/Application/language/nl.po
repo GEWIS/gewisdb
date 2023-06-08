@@ -298,6 +298,9 @@ msgstr "Abonnementen wijzigen"
 msgid "Change password for %s"
 msgstr "Wachtwoord voor %s wijzigen"
 
+msgid "Check if a member is a keyholder"
+msgstr "Ophalen of een lid een sleutelcode heeft"
+
 #, php-format
 msgid ""
 "Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"

@@ -161,4 +161,18 @@ class Keyholder
     {
         $this->withdrawnDate = $withdrawnDate;
     }
+
+    /**
+     * Get whether the key decision is still valid
+     */
+    public function isCurrent(): bool
+    {
+        $now = new DateTime();
+
+        return $this->getExpirationDate() >= $now
+            && (
+                null === $this->getWithdrawnDate()
+                || $this->getWithdrawnDate() >= $now
+            );
+    }
 }

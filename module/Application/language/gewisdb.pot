@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 1e95a089-dirty\n"
+"Project-Id-Version: GEWISdb 7efca40f-dirty\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-31 14:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -280,6 +280,9 @@ msgstr ""
 
 #, php-format
 msgid "Change password for %s"
+msgstr ""
+
+msgid "Check if a member is a keyholder"
 msgstr ""
 
 #, php-format

@@ -13,6 +13,7 @@ enum ApiPermissions: string
 {
     case HealthR = 'health_read';
     case MembersR = 'members_read';
+    case MembersPropertyKeyholder = 'members_read_keyholder';
     case MembersActiveR = 'members_active_read';
     case OrgansMembershipR = 'organs_members_read';
     case All = '*';
@@ -22,6 +23,9 @@ enum ApiPermissions: string
         return match ($this) {
             self::HealthR => $translator->translate('Get API Health'),
             self::MembersR => $translator->translate('Get all Members'),
+            self::MembersPropertyKeyholder => $translator->translate(
+                'Check if a member is a keyholder',
+            ),
             self::MembersActiveR => $translator->translate(
                 'Get active Members (members that are in one or more organs)',
             ),

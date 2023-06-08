@@ -297,6 +297,9 @@ msgstr "Change Subscriptions"
 msgid "Change password for %s"
 msgstr "Change password for %s"
 
+msgid "Check if a member is a keyholder"
+msgstr "Check if a member is a keyholder"
+
 #, php-format
 msgid ""
 "Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"

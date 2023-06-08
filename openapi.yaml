@@ -107,6 +107,14 @@ paths:
       description: Get all members that are currently installed in at least one organ
       tags:
        - members
+      parameters:
+       - name: includeInactive
+         in: query
+         required: false
+         description: Whether to include inactive fraternity members in the response. If a member is both an active member in another type and inactive in a fraternity, they also get returned (including possibly their inactive organ memberships).
+         schema:
+           type: boolean
+           default: false
       responses:
         200:
           description: Succesful response
@@ -176,7 +184,7 @@ components:
           format: date
           description: Date in the Y-m-d\TH:i:sP format
           example: "2023-07-01T00:00:00+02:00"
-    MemberExtended:
+    MemberExtendedOrgan:
       allOf:
         - $ref: '#/components/schemas/MemberSimple'
         - type: object
@@ -186,10 +194,18 @@ components:
               nullable: true
               items:
                 $ref: '#/components/schemas/OrganMembership'
+    MemberExtendedKeyholder:
+      allOf:
+        - $ref: '#/components/schemas/MemberSimple'
+        - type: object
+          properties:
+            keyholder:
+              type: boolean
     Member:
-      description: "If the client holds the `OrgansMembershipR` permission, a MemberExtended object, else MemberSimple"
+      description: "If the client holds the `OrgansMembershipR` permission, a (combination of) MemberExtended object(s), else MemberSimple"
       oneOf:
-        - $ref: '#/components/schemas/MemberExtended'
+        - $ref: '#/components/schemas/MemberExtendedOrgan'
+        - $ref: '#/components/schemas/MemberExtendedKeyholder'
         - $ref: '#/components/schemas/MemberSimple'
     OrganMembership:
       type: object
