@@ -21,7 +21,9 @@ use Report\Model\SubDecision\Installation;
 
 use function array_filter;
 use function array_map;
+use function array_reduce;
 use function array_values;
+use function in_array;
 use function preg_replace;
 
 /**
@@ -643,6 +645,8 @@ class Member
      * Get array of member for use in API endpoints
      * hides nonrelevant information by default
      *
+     * @param array<array-key,string> $include
+     *
      * @return array{
      *     lidnr: int,
      *     email: ?string,
@@ -665,9 +669,10 @@ class Member
      *         dischargeDate: ?string,
      *         current: bool,
      *      }>,
+     *      keyholder?: bool,
      * }
      */
-    public function toArrayApi(bool $includeOrganMembership = false): array
+    public function toArrayApi(array $include = []): array
     {
         $result = [
             'lidnr' => $this->getLidnr(),
@@ -683,7 +688,7 @@ class Member
             'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
         ];
 
-        if ($includeOrganMembership) {
+        if (in_array('organs', $include)) {
             $result['organs'] = array_values(
                 array_map(
                     static function (OrganMember $i) {
@@ -697,6 +702,10 @@ class Member
                     ),
                 ),
             );
+        }
+
+        if (in_array('keyholder', $include)) {
+            $result['keyholder'] = $this->isKeyholder();
         }
 
         return $result;
@@ -739,6 +748,20 @@ class Member
     {
         $address->setMember($this);
         $this->addresses[] = $address;
+    }
+
+    /**
+     * Is currently a keyholder.
+     */
+    public function isKeyholder(): bool
+    {
+        return array_reduce(
+            $this->keyGrantings->toArray(),
+            static function ($c, $kg) {
+                return $c || $kg->isCurrent();
+            },
+            false,
+        );
     }
 
     /**

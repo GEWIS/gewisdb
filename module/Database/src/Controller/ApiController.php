@@ -66,8 +66,16 @@ class ApiController extends AbstractActionController
     {
         $this->apiAuthService->assertCan(ApiPermissions::MembersActiveR);
 
-        $includeOrganMembership = $this->apiAuthService->currentUserCan(ApiPermissions::OrgansMembershipR);
-        $members = $this->apiService->getActiveMembers($includeOrganMembership);
+        $additionalProperties = [];
+        if ($this->apiAuthService->currentUserCan(ApiPermissions::OrgansMembershipR)) {
+            $additionalProperties[] = 'organs';
+        }
+
+        if ($this->apiAuthService->currentUserCan(ApiPermissions::MembersPropertyKeyholder)) {
+            $additionalProperties[] = 'keyholder';
+        }
+
+        $members = $this->apiService->getActiveMembers($additionalProperties);
         $res = ['data' => $members];
 
         return new JsonModel($res);

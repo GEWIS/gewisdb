@@ -17,13 +17,15 @@ class Api
     /**
      * Get active members.
      *
+     * @param array<array-key,string> $additionalProperties
+     *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function getActiveMembers(bool $includeOrganMembership): array
+    public function getActiveMembers(array $additionalProperties): array
     {
         return array_map(
-            static function ($member) use ($includeOrganMembership) {
-                return $member->toArrayApi($includeOrganMembership);
+            static function ($member) use ($additionalProperties) {
+                return $member->toArrayApi($additionalProperties);
             },
             $this->getReportMemberMapper()->findActive(),
         );

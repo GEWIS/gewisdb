@@ -176,7 +176,7 @@ components:
           format: date
           description: Date in the Y-m-d\TH:i:sP format
           example: "2023-07-01T00:00:00+02:00"
-    MemberExtended:
+    MemberExtendedOrgan:
       allOf:
         - $ref: '#/components/schemas/MemberSimple'
         - type: object
@@ -186,10 +186,18 @@ components:
               nullable: true
               items:
                 $ref: '#/components/schemas/OrganMembership'
+    MemberExtendedKeyholder:
+      allOf:
+        - $ref: '#/components/schemas/MemberSimple'
+        - type: object
+          properties:
+            keyholder:
+              type: boolean
     Member:
-      description: "If the client holds the `OrgansMembershipR` permission, a MemberExtended object, else MemberSimple"
+      description: "If the client holds the `OrgansMembershipR` permission, a (combination of) MemberExtended object(s), else MemberSimple"
       oneOf:
-        - $ref: '#/components/schemas/MemberExtended'
+        - $ref: '#/components/schemas/MemberExtendedOrgan'
+        - $ref: '#/components/schemas/MemberExtendedKeyholder'
         - $ref: '#/components/schemas/MemberSimple'
     OrganMembership:
       type: object
