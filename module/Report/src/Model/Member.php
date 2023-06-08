@@ -21,6 +21,7 @@ use Report\Model\SubDecision\Installation;
 
 use function array_filter;
 use function array_map;
+use function array_values;
 use function preg_replace;
 
 /**
@@ -683,15 +684,17 @@ class Member
         ];
 
         if ($includeOrganMembership) {
-            $result['organs'] = array_map(
-                static function (OrganMember $i) {
-                    return $i->toArray();
-                },
-                array_filter(
-                    $this->getOrganInstallations()->toArray(),
+            $result['organs'] = array_values(
+                array_map(
                     static function (OrganMember $i) {
-                        return $i->isCurrent();
+                        return $i->toArray();
                     },
+                    array_filter(
+                        $this->getOrganInstallations()->toArray(),
+                        static function (OrganMember $i) {
+                            return $i->isCurrent();
+                        },
+                    ),
                 ),
             );
         }
