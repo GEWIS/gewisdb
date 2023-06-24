@@ -6,6 +6,7 @@ cd `dirname $0`
 find ./module -iname "*.phtml" -print0 | sort -z | xargs -r0 xgettext \
     --language=PHP \
     --keyword=translate \
+    --keyword=translatePlural:1,2 \
     --output=./module/Application/language/gewisdb.pot \
     --force-po \
     --no-location \
@@ -17,6 +18,7 @@ find ./module -iname "*.phtml" -print0 | sort -z | xargs -r0 xgettext \
 find ./module -iname "*.php" -print0 | sort -z | xargs -r0 xgettext \
     --language=PHP \
     --keyword=translate \
+    --keyword=translatePlural:1,2 \
     --output=./module/Application/language/gewisdb.pot \
     --force-po \
     --no-location \
