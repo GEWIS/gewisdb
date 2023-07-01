@@ -12,6 +12,30 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var MemberModel $member
  */
 ?>
+<?php if (true): ?>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="<?= $this->basePath() ?>/img/gewis.png" />
+            </div>
+            <div class="col-md-9">
+                <h1>
+                    <span class="gewis-red">GEWIS</span> <?= $this->translate('Inschrijving') ?>
+                </h1>
+                <p>
+                    <?= $this->translate('Dear prospective member,
+<br>
+We apologize for the inconvenience but we are currently performing maintenance on our enrollment form to make enrolling easier in the future. As a result, we are unable to accept new enrollments at this time. We expect the enrollment form to be available again before the introduction week of the TU/e. Please check back soon for updates on when exactly the enrollment form will be available again.
+<br>
+Thank you for your understanding.') ?>
+                </p>
+                <p>
+                    <?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
 <?php if (isset($form)): ?>
 <?php
 $this->headTitle()->prepend("GEWIS Enrollment");
@@ -65,7 +89,7 @@ verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:') : ''
                     <?= $this->translate('Plaats') ?>: Eindhoven<br>
                     <?= $this->translate('Land') ?>: Nederland<br>
                 <?php endif; ?>
-                <?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>
+                <?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>.
             </p>
         </div>
     </div>
@@ -626,3 +650,4 @@ verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
 </div>
 </div>
 <?php endif ?>
+<?php endif; ?>
