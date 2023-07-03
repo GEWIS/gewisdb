@@ -5011,6 +5011,11 @@ Search.appendIndex(
             "summary": "Get\u0020a\u0020list\u0020of\u0020members\u0020whose\u0020membership\u0020has\u0020not\u0020expired\u0020and\u0020who\u0020are\u0020not\u0020hidden.",
             "url": "classes/Database-Mapper-Member.html#method_getNonExpiredNonHiddenMembers"
         },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AcountMembers\u0028\u0029",
+            "name": "countMembers",
+            "summary": "Count\u0020the\u0020members\u0020who\u0020still\u0020have\u0020an\u0020active\u0020membership\/graduate\u0020status,\u0020this\u0020means\u0020that\u0020are\u0020not\u0020deleted\u0020and\u0020their\n\u0060expiration\u0060\u0020is\u0020later\u0020than\u0020now.",
+            "url": "classes/Database-Mapper-Member.html#method_countMembers"
+        },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
             "summary": "Persist\u0020a\u0020member\u0020model.",
