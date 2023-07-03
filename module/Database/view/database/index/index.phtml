@@ -8,6 +8,7 @@ use Laminas\View\Renderer\PhpRenderer;
 /**
  * @var PhpRenderer|HelperTrait $this
  * @var int $members
+ * @var int $expired
  * @var int $prospectives
  * @var int $updates
  */
@@ -24,9 +25,10 @@ $showPendingUpdates = 0 < $updates;
     <div class="<?= $showPendingUpdates ? 'col-md-8' : 'col-md-12'?>">
         <p>
             <?= sprintf(
-                $this->translate('GEWIS currently has <a href="%s">%d members</a> and <a href="%s">%d prospective members</a>. <a href="%s">Click here</a> to create a meeting or <a href="%s">perform a query</a>.'),
+                $this->translate('GEWIS currently has <a href="%s">%d members</a> (+%d expired) and <a href="%s">%d prospective members</a>. <a href="%s">Click here</a> to create a meeting or <a href="%s">perform a query</a>.'),
                 $this->url('member'),
                 $members,
+                $expired,
                 $this->url('prospective-member'),
                 $prospectives,
                 $this->url('meeting/create'),
