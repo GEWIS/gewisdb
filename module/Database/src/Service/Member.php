@@ -874,6 +874,7 @@ class Member
     /**
      * @return array{
      *     members: int,
+     *     expired: int,
      *     prospectives: int,
      *     updates: int,
      * }
@@ -881,7 +882,8 @@ class Member
     public function getFrontpageData(): array
     {
         return [
-            'members' => $this->getMemberMapper()->getRepository()->count(['deleted' => false]),
+            'members' => $this->getMemberMapper()->countMembers(),
+            'expired' => $this->getMemberMapper()->countMembers(true),
             'prospectives' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
             'updates' => $this->getMemberUpdateMapper()->getRepository()->count([]),
         ];

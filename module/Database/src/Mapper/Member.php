@@ -313,6 +313,27 @@ class Member
     }
 
     /**
+     * Count the members who still have an active membership/graduate status, this means that are not deleted and their
+     * `expiration` is later than now.
+     *
+     * If `isExpired`, this only counts expired members/graduates.
+     */
+    public function countMembers(bool $isExpired = false): int
+    {
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->select('COUNT(m.lidnr)')
+            ->where('m.deleted = False');
+
+        if ($isExpired) {
+            $qb->andWhere('m.expiration < CURRENT_TIMESTAMP()');
+        } else {
+            $qb->andWhere('m.expiration >= CURRENT_TIMESTAMP()');
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
      * Persist a member model.
      */
     public function persist(MemberModel $member): void
