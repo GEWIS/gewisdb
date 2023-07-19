@@ -26,6 +26,7 @@ use Database\Controller\QueryController;
 use Database\Controller\SettingsController;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Method;
 use Laminas\Router\Http\Segment;
 use User\Listener\AuthenticationListener;
 
@@ -378,6 +379,60 @@ return [
                             'defaults' => [
                                 'action' => 'subscribe',
                                 'auth_type' => AuthenticationListener::AUTH_NONE,
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'checkout' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/checkout',
+                                ],
+                                'may_terminate' => false,
+                                'child_routes' => [
+                                    'status' => [
+                                        'type' => Segment::class,
+                                        'options' => [
+                                            'route' => '/:status',
+                                            'defaults' => [
+                                                'action' => 'checkoutStatus',
+                                                'constraints' => [
+                                                    'status' => 'cancelled|completed|error',
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'restart' => [
+                                        'type' => Segment::class,
+                                        'options' => [
+                                            'route' => '/restart/:token',
+                                            'defaults' => [
+                                                'action' => 'checkoutRestart',
+                                                'constraints' => [
+                                                    'id' => '[a-zA-Z0-9\_\-\+]+',
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'webhook' => [
+                                        'type' => Literal::class,
+                                        'options' => [
+                                            'route' => '/webhook',
+                                        ],
+                                        'may_terminate' => false,
+                                        'child_routes' => [
+                                            'webhook_post' => [
+                                                'type' => Method::class,
+                                                'options' => [
+                                                    'verb' => 'POST',
+                                                    'defaults' => [
+                                                        'action' => 'paymentWebhook',
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
                         ],
                     ],

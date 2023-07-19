@@ -7,7 +7,7 @@ namespace Checker\Service;
 use Application\Service\Email as EmailService;
 use Checker\Mapper\Member as MemberMapper;
 use Database\Mapper\ActionLink as ActionLinkMapper;
-use Database\Model\ActionLink as ActionLinkModel;
+use Database\Model\RenewalLink as RenewalLinkModel;
 use DateInterval;
 use DateTime;
 use Laminas\View\Model\ViewModel;
@@ -46,18 +46,19 @@ class Renewal
         $graduates = $this->memberMapper->getExpiringGraduates($expiresWithin, $limit);
 
         foreach ($graduates as $graduate) {
-            $actionLink = $this->actionLinkMapper->createByMember($graduate);
+            $renewalLink = $this->actionLinkMapper->createRenewalByMember($graduate);
+
             try {
-                $this->sendRenewalEmail($actionLink);
+                $this->sendRenewalEmail($renewalLink);
             } catch (Throwable $e) {
-                $this->actionLinkMapper->remove($actionLink);
+                $this->actionLinkMapper->remove($renewalLink);
 
                 throw $e;
             }
         }
     }
 
-    private function sendRenewalEmail(ActionLinkModel $link): void
+    private function sendRenewalEmail(RenewalLinkModel $link): void
     {
         $body = $this->render(
             'email/graduate-renewal',
@@ -94,7 +95,7 @@ class Renewal
         );
     }
 
-    public function sendRenewalSuccessEmail(ActionLinkModel $link): void
+    public function sendRenewalSuccessEmail(RenewalLinkModel $link): void
     {
         $body = $this->render(
             'email/graduate-renewal-success',
@@ -123,7 +124,7 @@ class Renewal
     /**
      * Render a template with given variables.
      *
-     * @param array<array-key,mixed> $vars
+     * @param array<array-key, mixed> $vars
      */
     private function render(
         string $template,

@@ -28,6 +28,7 @@ use Database\Model\Address as AddressModel;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\MemberUpdate as MemberUpdateModel;
+use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\MailingList as MailingListService;
 use DateTime;
@@ -130,20 +131,26 @@ class Member
 
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
 
+        // Create a payment link for the prospective member in the event that the checkout did not succeed.
+        $paymentLink = new PaymentLink();
+        $paymentLink->setProspectiveMember($prospectiveMember);
+        $prospectiveMember->setPaymentLink($paymentLink);
+        $this->getActionLinkMapper()->persist($paymentLink);
+
         return $prospectiveMember;
     }
 
     /**
-     * Send an email about the newly subscribed member to the new member and the secretary
+     * Send an email about the newly registered member to the new member and the secretary
      */
-    public function sendMemberSubscriptionEmail(ProspectiveMemberModel $member): void
+    public function sendMemberRegistrationEmail(ProspectiveMemberModel $member): void
     {
         $config = $this->config;
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
         $model = new ViewModel(['member' => $member]);
-        $model->setTemplate('database/member/subscribe');
+        $model->setTemplate('database/email/member-registration');
         $body = $renderer->render($model);
 
         $html = new MimePart($body);
@@ -157,7 +164,7 @@ class Member
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']['address'], $config['from']['name']);
         $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('New member subscription: ' . $member->getFullName());
+        $message->setSubject('New member registration: ' . $member->getFullName());
         $this->getMailTransport()->send($message);
 
         $message = new Message();
@@ -174,7 +181,7 @@ class Member
             ),
         );
         $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('GEWIS Subscription');
+        $message->setSubject('GEWIS Registration');
         $this->getMailTransport()->send($message);
     }
 
@@ -505,9 +512,11 @@ class Member
      *
      * @return ProspectiveMemberModel[]
      */
-    public function searchProspective(string $query): array
-    {
-        return $this->getProspectiveMemberMapper()->search($query);
+    public function searchProspective(
+        string $query,
+        string $type,
+    ): array {
+        return $this->getProspectiveMemberMapper()->search($query, $type);
     }
 
     /**
@@ -1048,15 +1057,20 @@ class Member
      */
     public function getRenewalForm(string $token): ?MemberRenewalForm
     {
-        $actionLink = $this->actionLinkMapper->findByToken($token);
-        if (null === $actionLink || $actionLink->isUsed() || $actionLink->linkExpired()) {
+        $renewalLink = $this->actionLinkMapper->findRenewalByToken($token);
+
+        if (
+            null === $renewalLink
+            || $renewalLink->isUsed()
+            || $renewalLink->linkExpired()
+        ) {
             return null;
         }
 
         $form = $this->memberRenewalForm;
-        $form->bind($actionLink->getMember());
-        $form->setExpiration($actionLink->getNewExpiration());
-        $form->setActionLink($actionLink);
+        $form->bind($renewalLink->getMember());
+        $form->setExpiration($renewalLink->getNewExpiration());
+        $form->setRenewalLink($renewalLink);
 
         return $form;
     }

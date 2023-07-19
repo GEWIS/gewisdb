@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
-use Database\Model\ActionLink as ActionLinkModel;
 use Database\Model\MailingList as MailingListModel;
+use Database\Model\RenewalLink as RenewalLinkModel;
 use DateTime;
 use Laminas\Filter\StringToLower;
 use Laminas\Form\Element\Checkbox;
@@ -31,7 +31,7 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
     /** @var MailingListModel[] $lists */
     protected array $lists;
 
-    protected ?ActionLinkModel $actionLink;
+    protected ?RenewalLinkModel $renewalLink;
 
     public function __construct(
         protected readonly MvcTranslator $translator,
@@ -147,18 +147,18 @@ class MemberRenewal extends Form implements InputFilterProviderInterface
         $this->get('expiration')->setValue($date);
     }
 
-    public function getActionLink(): ?ActionLinkModel
+    public function getRenewalLink(): ?RenewalLinkModel
     {
-        return $this->actionLink;
+        return $this->renewalLink;
     }
 
-    public function setActionLink(ActionLinkModel $actionLink): void
+    public function setRenewalLink(RenewalLinkModel $renewalLink): void
     {
-        $this->actionLink = $actionLink;
+        $this->renewalLink = $renewalLink;
     }
 
     /**
-     * @param array<array-key,string> $data
+     * @param array<array-key, string> $data
      */
     public function setMutableData(array $data): void
     {

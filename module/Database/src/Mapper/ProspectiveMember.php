@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Database\Mapper;
 
+use Database\Model\CheckoutSession as CheckoutSessionModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 use function count;
 use function is_numeric;
@@ -42,8 +44,10 @@ class ProspectiveMember
      *
      * @return array<array-key, ProspectiveMemberModel>
      */
-    public function search(string $query): array
-    {
+    public function search(
+        string $query,
+        string $type,
+    ): array {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
@@ -51,7 +55,7 @@ class ProspectiveMember
             ->where("CONCAT(LOWER(m.firstName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere("CONCAT(LOWER(m.firstName), ' ', LOWER(m.middleName), ' ', LOWER(m.lastName)) LIKE :name")
             ->orWhere('m.email LIKE :name')
-            ->setMaxResults(32)
+            ->setMaxResults(128)
             ->orderBy('m.lidnr', 'DESC')
             ->setFirstResult(0);
 
@@ -62,6 +66,22 @@ class ProspectiveMember
             $qb->orWhere('m.lidnr = :nr');
             $qb->orWhere('m.tueUsername = :nr');
             $qb->setParameter(':nr', $query);
+        }
+
+        // Get payment status.
+        $qb->leftJoin(CheckoutSessionModel::class, 'cs', Join::WITH, 'cs.prospectiveMember = m.lidnr');
+
+        if ('paid' === $type) {
+            $qb->andWhere('cs.state = :paid')
+                ->setParameter('paid', CheckoutSessionModel::PAID);
+        } elseif ('pending' === $type) {
+            $qb->andWhere('cs.state = :pending')
+                ->setParameter('pending', CheckoutSessionModel::PENDING);
+        } else {
+            $qb->andWhere('cs.state != :paid')
+                ->andWhere('cs.state != :pending')
+                ->setParameter('paid', CheckoutSessionModel::PAID)
+                ->setParameter('pending', CheckoutSessionModel::PENDING);
         }
 
         return $qb->getQuery()->getResult();

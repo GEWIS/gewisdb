@@ -59,7 +59,9 @@ use Database\Hydrator\Strategy\AddressHydratorStrategy;
 use Database\Hydrator\Strategy\MeetingHydratorStrategy;
 use Database\Hydrator\Strategy\PostalRegionHydratorStrategy;
 use Database\Mapper\ActionLink as ActionLinkMapper;
+use Database\Mapper\CheckoutSession as CheckoutSessionMapper;
 use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
+use Database\Mapper\Factory\CheckoutSessionFactory as CheckoutSessionMapperFactory;
 use Database\Mapper\Factory\InstallationFunctionFactory as InstallationFunctionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
@@ -90,11 +92,13 @@ use Database\Service\Factory\InstallationFunctionFactory as InstallationFunction
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
 use Database\Service\Factory\MemberFactory as MemberServiceFactory;
+use Database\Service\Factory\PaymentFactory as PaymentServiceFactory;
 use Database\Service\Factory\QueryFactory as QueryServiceFactory;
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
+use Database\Service\Payment as PaymentService;
 use Database\Service\Query as QueryService;
 use Doctrine\Laminas\Hydrator\DoctrineObject;
 use Laminas\Hydrator\ObjectPropertyHydrator;
@@ -139,6 +143,7 @@ class Module
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
+                PaymentService::class => PaymentServiceFactory::class,
                 QueryService::class => QueryServiceFactory::class,
                 ExportForm::class => static function (ContainerInterface $container) {
                     return new ExportForm(
@@ -490,6 +495,7 @@ class Module
                 MemberMapper::class => MemberMapperFactory::class,
                 MemberUpdateMapper::class => MemberUpdateMapperFactory::class,
                 OrganMapper::class => OrganMapperFactory::class,
+                CheckoutSessionMapper::class => CheckoutSessionMapperFactory::class,
                 ProspectiveMemberMapper::class => ProspectiveMemberMapperFactory::class,
                 SavedQueryMapper::class => SavedQueryMapperFactory::class,
                 'database_mail_transport' => static function (ContainerInterface $container) {

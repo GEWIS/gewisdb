@@ -65,6 +65,11 @@
       <code>Response|ViewModel</code>
     </InvalidReturnType>
   </file>
+  <file src="module/Database/src/Service/Payment.php">
+    <UndefinedMagicPropertyFetch occurrences="1">
+      <code>$event-&gt;data-&gt;object</code>
+    </UndefinedMagicPropertyFetch>
+  </file>
   <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
     <NoValue occurrences="1">
       <code>$subdecision</code>

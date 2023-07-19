@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping\InverseJoinColumn;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * ProspectiveMember model.
@@ -156,6 +157,12 @@ class ProspectiveMember
         referencedColumnName: 'name',
     )]
     protected Collection $lists;
+
+    #[OneToOne(
+        targetEntity: PaymentLink::class,
+        mappedBy: 'prospectiveMember',
+    )]
+    protected ?PaymentLink $paymentLink = null;
 
     public function __construct()
     {
@@ -323,6 +330,36 @@ class ProspectiveMember
         $this->birth = $birth;
     }
 
+    public function getCountry(): PostalRegions
+    {
+        return $this->country;
+    }
+
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
+
+    public function getPostalCode(): string
+    {
+        return $this->postalCode;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
     /**
      * Get the date of the last membership change.
      */
@@ -461,5 +498,18 @@ class ProspectiveMember
         foreach ($lists as $list) {
             $this->addList($list);
         }
+    }
+
+    /**
+     * @psalm-ignore-nullable-return
+     */
+    public function getPaymentLink(): ?PaymentLink
+    {
+        return $this->paymentLink;
+    }
+
+    public function setPaymentLink(PaymentLink $paymentLink): void
+    {
+        $this->paymentLink = $paymentLink;
     }
 }

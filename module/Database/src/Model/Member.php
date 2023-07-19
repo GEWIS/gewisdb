@@ -234,16 +234,16 @@ class Member
     protected Collection $lists;
 
     /**
-     * ActionLinks of this member.
+     * RenewalLinks of this member.
      *
-     * @var Collection<array-key, ActionLink>
+     * @var Collection<array-key, RenewalLink>
      */
     #[OneToMany(
-        targetEntity: ActionLink::class,
+        targetEntity: RenewalLink::class,
         mappedBy: 'member',
         cascade: ['persist', 'remove'],
     )]
-    protected Collection $actionLinks;
+    protected Collection $renewalLinks;
 
     #[Column(
         type: 'string',
@@ -773,12 +773,12 @@ class Member
     }
 
     /**
-     * Get action links of a member
+     * Get renewal links of a member
      *
-     * @return Collection<array-key, ActionLink>
+     * @return Collection<array-key, RenewalLink>
      */
-    public function getActionLinks(): Collection
+    public function getRenewalLinks(): Collection
     {
-        return $this->actionLinks;
+        return $this->renewalLinks;
     }
 }

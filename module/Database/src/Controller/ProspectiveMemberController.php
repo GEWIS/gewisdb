@@ -34,7 +34,9 @@ class ProspectiveMemberController extends AbstractActionController
     public function searchAction(): JsonModel
     {
         $query = $this->params()->fromQuery('q');
-        $res = $this->memberService->searchProspective($query);
+        $type = $this->params()->fromQuery('type');
+
+        $res = $this->memberService->searchProspective($query, $type);
 
         $res = array_map(static function ($member) {
             return $member->toArray();

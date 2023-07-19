@@ -47,6 +47,13 @@ services:
 #            - LDAP_BINDUSER_USERNAME=
 #            - LDAP_BINDUSER_PASS=
 #            - LDAP_BASEDN=
+#            - STRIPE_API_VERSION=
+#            - STRIPE_PUBLISHABLE_KEY=
+#            - STRIPE_SECRET_KEY=
+#            - STRIPE_WEBHOOK_SIGNING_KEY=
+#            - STRIPE_MEMBERSHIP_PRICE_ID=
+#            - STRIPE_CANCEL_URL=
+#            - STRIPE_SUCCESS_URL=
         depends_on:
             - postfix
         volumes:

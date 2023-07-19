@@ -140,7 +140,7 @@ class Member extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => $translator->translate('Subscribe'),
+                'value' => $translator->translate('Pay'),
             ],
         ]);
     }

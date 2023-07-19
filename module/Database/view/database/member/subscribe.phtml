@@ -12,7 +12,6 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var MemberModel $member
  */
 ?>
-<?php if (isset($form)): ?>
 <?php
 $this->headTitle()->prepend("GEWIS Enrollment");
 
@@ -388,87 +387,3 @@ verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
         validator = new InputValidator(document.getElementById("<?= $form->getAttribute('id'); ?>"));
     });
 </script>
-
-<?php else: ?>
-    <h1 class="hidden-print"><?= $this->translate('Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS') ?>
-        <br>
-        <small><?= $this->translate('Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!') ?></small></h1>
-<!--Use the code below to add some nice pop-up or promotion to the subscription email.-->
-<!--    <div class="alert alert-info">-->
-<!--        Liked the introduction week? GEWIS also organizes a follow-up day after the introduction week: the FLUP!-->
-<!--        During the FLUP you get to know even more fellow students and GEWIS as an association through fun activities and a BBQ.-->
-<!--        This event will take place on Saturday, September 12. Tickets can be bought on <a href="https://gewis.nl/FLUP">https://gewis.nl/FLUP</a> for &euro;3,-.-->
-<!--    </div>-->
-    <h2 class="hidden-print">Hier nogmaals je gegevens ter controle</h2>
-<div class="row">
-<div class="col-md-6">
-    <h1><?= $member->getFullName() ?></h1>
-    <table class="table table-bordered">
-        <tr>
-            <th><?= $this->translate('Voorletters') ?></th>
-            <td><?= $member->getInitials() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Voornaam') ?></th>
-            <td><?= $member->getFirstName() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Tussenvoegsels') ?></th>
-            <td><?= $member->getMiddleName() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Achternaam') ?></th>
-            <td><?= $member->getLastName() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('TU/e-gebruikersnaam') ?></th>
-            <td>
-                <?= (null === $member->getTueUsername()) ? $this->translate('Onbekend') : $member->getTueUsername() ?>
-            </td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Study') ?></th>
-            <td><?= $member->getStudy() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('E-mail Address') ?></th>
-            <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Birthdate') ?></th>
-            <td><?= $member->getBirth()->format('l j F Y') ?></td>
-        </tr>
-    </table>
-</div>
-<div class="col-md-6">
-<h3><?= $this->translate('Addresses') ?></h3>
-<?php foreach ($member->getAddresses() as $address): ?>
-    <h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?></h4>
-    <table class="table table-bordered">
-        <tr>
-            <th><?= $this->translate('Postal Region') ?></th>
-            <td><?= $address->getCountry()->value ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Straat en huisnummer') ?></th>
-            <td><?= $address->getStreet() ?> <?= $address->getNumber() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Woonplaats en Postcode') ?></th>
-            <td><?= $address->getCity() ?> <?= $address->getPostalCode() ?></td>
-        </tr>
-        <tr>
-            <th><?= $this->translate('Telefoonnummer') ?></th>
-            <td><?= $address->getPhone() ?></td>
-        </tr>
-    </table>
-<?php endforeach ?>
-<h3><?= $this->translate('Aangemelde mailing lists') ?></h3>
-<ul>
-<?php foreach ($member->getLists() as $list): ?>
-    <li><?= $list->getName() ?></li>
-<?php endforeach ?>
-</ul>
-</div>
-</div>
-<?php endif ?>
