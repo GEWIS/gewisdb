@@ -29,7 +29,7 @@
       <code>$defaultDescription</code>
       <code>$defaultName</code>
     </NonInvariantDocblockPropertyType>
-  </file>  
+  </file>
   <file src="module/Checker/src/Command/CheckMembershipTUeCommand.php">
     <NonInvariantDocblockPropertyType occurrences="2">
       <code>$defaultDescription</code>
@@ -64,12 +64,6 @@
     <InvalidReturnType occurrences="1">
       <code>Response|ViewModel</code>
     </InvalidReturnType>
-  </file>
-  <file src="module/Database/src/Form/Member.php">
-    <TypeDoesNotContainType occurrences="2">
-      <code>DATABASE_REQUIRE_IBAN</code>
-      <code>DATABASE_REQUIRE_IBAN</code>
-    </TypeDoesNotContainType>
   </file>
   <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
     <NoValue occurrences="1">

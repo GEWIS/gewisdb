@@ -47,15 +47,15 @@ class MemberController extends AbstractActionController
     {
         $request = $this->getRequest();
 
-        // if ($request->isPost()) {
-        //     $member = $this->memberService->subscribe($request->getPost()->toArray());
-        //
-        //     if (null !== $member) {
-        //         $this->memberService->sendMemberSubscriptionEmail($member);
-        //
-        //        return new ViewModel(['member' => $member]);
-        //     }
-        // }
+        if ($request->isPost()) {
+            $member = $this->memberService->subscribe($request->getPost()->toArray());
+
+            if (null !== $member) {
+                $this->memberService->sendMemberSubscriptionEmail($member);
+
+                return new ViewModel(['member' => $member]);
+            }
+        }
 
         return new ViewModel([
             'form' => $this->memberService->getMemberForm(),

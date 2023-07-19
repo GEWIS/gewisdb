@@ -22,7 +22,6 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Laminas\Mail\Address as MailAddress;
 
 use function mb_encode_mimeheader;
-use function preg_replace;
 
 /**
  * Member model.
@@ -169,15 +168,6 @@ class Member
      */
     #[Column(type: 'integer')]
     protected int $paid = 0;
-
-    /**
-     * Iban number.
-     */
-    #[Column(
-        type: 'string',
-        nullable: true,
-    )]
-    protected ?string $iban = null;
 
     /**
      * If the member receives a 'supremum'
@@ -588,30 +578,6 @@ class Member
     public function setPaid(int $paid): void
     {
         $this->paid = $paid;
-    }
-
-    /**
-     * Get the IBAN.
-     */
-    public function getIban(bool $print = false): ?string
-    {
-        if (null === $this->iban) {
-            return null;
-        }
-
-        if ($print) {
-            return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
-        }
-
-        return $this->iban;
-    }
-
-    /**
-     * Set the IBAN.
-     */
-    public function setIban(?string $iban): void
-    {
-        $this->iban = $iban;
     }
 
     /**

@@ -10,24 +10,18 @@ use Database\Model\MailingList as MailingListModel;
 use DateInterval;
 use DateTime;
 use Laminas\Filter\StringToLower;
-use Laminas\Filter\StringToUpper;
-use Laminas\Filter\StringTrim;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Email;
-use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
-use Laminas\I18n\Filter\Alnum;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Validator\Callback;
-use Laminas\Validator\Iban;
 use Laminas\Validator\Identical;
-use Laminas\Validator\NotEmpty;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 use Throwable;
@@ -137,34 +131,6 @@ class Member extends Form implements InputFilterProviderInterface
         $student->get('type')->setValue(AddressTypes::Student->value);
         $this->add($student);
 
-        if (DATABASE_REQUIRE_IBAN) {
-            $this->add([
-                'name' => 'iban',
-                'type' => Text::class,
-                'options' => [
-                    'label' => $translator->translate('IBAN'),
-                ],
-            ]);
-
-            $this->add([
-                'name' => 'signature',
-                'type' => Hidden::class,
-            ]);
-
-            $this->add([
-                'name' => 'signatureLocation',
-                'type' => Text::class,
-                'options' => [
-                    'label' => $translator->translate('Place of Signing'),
-                ],
-            ]);
-
-            $this->add([
-                'name' => 'agreediban',
-                'type' => Checkbox::class,
-            ]);
-        }
-
         $this->add([
             'name' => 'agreed',
             'type' => Checkbox::class,
@@ -223,7 +189,7 @@ class Member extends Form implements InputFilterProviderInterface
      */
     public function getInputFilterSpecification(): array
     {
-        $filter = [
+        return [
             'lastName' => [
                 'required' => true,
                 'validators' => [
@@ -332,61 +298,6 @@ class Member extends Form implements InputFilterProviderInterface
                 ],
             ],
         ];
-
-        if (DATABASE_REQUIRE_IBAN) {
-            $filter += [
-                'iban' => [
-                    'required' => true,
-                    'validators' => [
-                        [
-                            'name' => Iban::class,
-                            'options' => ['allow_non_sepa' => false],
-                        ],
-                    ],
-                    'filters' => [
-                        ['name' => Alnum::class],
-                        ['name' => StringToUpper::class],
-                    ],
-                ],
-                'signature' => [
-                    'required' => true,
-                    'validators' => [
-                        [
-                            'name' => NotEmpty::class,
-                            'options' => [
-                                'messages' => [
-                                    NotEmpty::IS_EMPTY => $this->translator->translate('Signature is required!'),
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                'signatureLocation' => [
-                    'required' => true,
-                    'filters' => [
-                        ['name' => StringTrim::class],
-                    ],
-                ],
-                'agreediban' => [
-                    'required' => true,
-                    'validators' => [
-                        [
-                            'name' => Identical::class,
-                            'options' => [
-                                'token' => '1',
-                                'messages' => [
-                                    Identical::NOT_SAME => $this->translator->translate(
-                                        'Please accept the conditions for payment through SEPA Direct Debit',
-                                    ),
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ];
-        }
-
-        return $filter;
     }
 
     private function isOldEnough(string $value): bool

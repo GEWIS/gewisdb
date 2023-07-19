@@ -35,7 +35,6 @@ use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mime\Message as MimeMessage;
-use Laminas\Mime\Mime;
 use Laminas\Mime\Part as MimePart;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\ViewModel;
@@ -44,7 +43,6 @@ use ReflectionClass;
 use RuntimeException;
 
 use function bin2hex;
-use function fopen;
 use function mb_encode_mimeheader;
 use function random_bytes;
 
@@ -130,16 +128,6 @@ class Member
             $prospectiveMember->addList($list);
         }
 
-        // handle signature
-        if (null !== $prospectiveMember->getIban()) {
-            $signature = $form->get('signature')->getValue();
-
-            if (null !== $signature) {
-                $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
-                $prospectiveMember->setSignature($path);
-            }
-        }
-
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
 
         return $prospectiveMember;
@@ -163,21 +151,6 @@ class Member
 
         $mimeMessage = new MimeMessage();
         $mimeMessage->addPart($html);
-
-        // Include signature as image attachment
-        if (null !== $member->getIban()) {
-            $image = new MimePart(
-                fopen(
-                    $this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(),
-                    'r',
-                ),
-            );
-            $image->type = 'image/png';
-            $image->filename = 'signature.png';
-            $image->disposition = Mime::DISPOSITION_ATTACHMENT;
-            $image->encoding = Mime::ENCODING_BASE64;
-            $mimeMessage->addPart($image);
-        }
 
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
@@ -455,16 +428,6 @@ class Member
                         '<b>Warning:</b> Member does not study at department.',
                     ];
                 }
-
-                if (
-                    null === $member->getIban()
-                    || 'NL20INGB0001234567' === $member->getIban()
-                ) {
-                    $tueStatus[] = [
-                        'danger',
-                        '<b>Warning:</b> This member does not pay through SEPA Direct Debit',
-                    ];
-                }
             }
         } catch (LookupException $e) {
             $tueStatus[] = [
@@ -584,11 +547,6 @@ class Member
      */
     public function removeProspective(ProspectiveMemberModel $member): void
     {
-        // First destroy the signature file
-        if (null !== ($signature = $member->getSignature())) {
-            $this->getFileStorageService()->removeFile($signature);
-        }
-
         $this->getProspectiveMemberMapper()->remove($member);
     }
 
@@ -614,7 +572,6 @@ class Member
         $member->setExpiration($date);
         $member->setBirth($date);
         $member->setPaid(0);
-        $member->setIban(null);
         $member->setSupremum('optout');
         $member->setHidden(true);
         $member->setDeleted(true);

@@ -198,11 +198,5 @@ use Laminas\View\Renderer\PhpRenderer;
     <li><?= $list->getName() ?></li>
 <?php endforeach ?>
 </ul>
-<h3><?= $this->translate('Signature SEPA Direct Debit') ?></h3>
-<?php if (null !== ($signature = $member->getSignature())): ?>
-    <img src="<?= $this->fileUrl($signature) ?>" height="150" width="300" />
-<?php else: ?>
-    <p><?= $this->translate('No signature or IBAN provided.') ?></p>
-<?php endif; ?>
 </div>
 </div>

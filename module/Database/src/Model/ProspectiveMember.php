@@ -18,8 +18,6 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
 
-use function preg_replace;
-
 /**
  * ProspectiveMember model.
  */
@@ -101,15 +99,6 @@ class ProspectiveMember
     protected int $paid = 0;
 
     /**
-     * Iban number.
-     */
-    #[Column(
-        type: 'string',
-        nullable: true,
-    )]
-    protected ?string $iban = null;
-
-    /**
      * Country.
      */
     #[Column(
@@ -167,24 +156,6 @@ class ProspectiveMember
         referencedColumnName: 'name',
     )]
     protected Collection $lists;
-
-    /**
-     * The signature image URL.
-     */
-    #[Column(
-        type: 'string',
-        nullable: true,
-    )]
-    protected ?string $signature = null;
-
-    /**
-     * The signature location
-     */
-    #[Column(
-        type: 'string',
-        nullable: true,
-    )]
-    protected ?string $signatureLocation = null;
 
     public function __construct()
     {
@@ -385,70 +356,6 @@ class ProspectiveMember
     }
 
     /**
-     * Get the IBAN.
-     */
-    public function getIban(bool $print = false): ?string
-    {
-        if (null === $this->iban) {
-            return null;
-        }
-
-        if ($print) {
-            return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
-        }
-
-        return $this->iban;
-    }
-
-    /**
-     * Set the IBAN.
-     */
-    public function setIban(?string $iban): void
-    {
-        $this->iban = $iban;
-    }
-
-    /**
-     * Get the signature image URL.
-     */
-    public function getSignature(): ?string
-    {
-        return $this->signature;
-    }
-
-    /**
-     * Set the signature image URL.
-     */
-    public function setSignature(?string $signature): void
-    {
-        $this->signature = $signature;
-    }
-
-    /**
-     * Get the signature location
-     */
-    public function getSignatureLocation(): ?string
-    {
-        return $this->signature;
-    }
-
-    /**
-     * Set the signature location
-     */
-    public function setSignatureLocation(?string $signatureLocation): void
-    {
-        $this->signatureLocation = $signatureLocation;
-    }
-
-    /**
-     * Returns the characteristic of the mandate. Is unique for each form entry
-     */
-    public function getMandateCharacteristic(): string
-    {
-        return $this->changedOn->format('Y') . 'subscription' . $this->getLidnr();
-    }
-
-    /**
      * Convert to array.
      *
      * @return array{
@@ -461,10 +368,7 @@ class ProspectiveMember
      *     firstName: string,
      *     tueUsername: ?string,
      *     study: ?string,
-     *     signature: ?string,
-     *     signatureLocation: ?string,
      *     birth: string,
-     *     iban: ?string,
      *     address: array{
      *         type: AddressTypes,
      *         country: PostalRegions,
@@ -474,7 +378,6 @@ class ProspectiveMember
      *         postalCode: string,
      *         phone: string,
      *     },
-     *     agreediban: string,
      *     agreed: string,
      * }
      */
@@ -490,12 +393,8 @@ class ProspectiveMember
             'firstName' => $this->getFirstName(),
             'tueUsername' => $this->getTueUsername(),
             'study' => $this->getStudy(),
-            'signature' => $this->getSignature(),
-            'signatureLocation' => $this->getSignatureLocation(),
             'birth' => $this->getBirth()->format('Y-m-d'),
-            'iban' => $this->getIban(),
             'address' => $this->getAddresses()['studentAddress']->toArray(),
-            'agreediban' => '1',
             'agreed' => '1',
         ];
     }
