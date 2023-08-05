@@ -52,7 +52,13 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function showAction(): ViewModel
     {
-        return new ViewModel($this->memberService->getProspectiveMember((int) $this->params()->fromRoute('id')));
+        $result = $this->memberService->getProspectiveMember((int) $this->params()->fromRoute('id'));
+
+        if (null === $result['member']) {
+            return $this->notFoundAction();
+        }
+
+        return new ViewModel($result);
     }
 
     /**
@@ -66,6 +72,11 @@ class ProspectiveMemberController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $prospectiveMember = $this->memberService->getProspectiveMember($lidnr)['member'];
+
+            if (null === $prospectiveMember) {
+                return $this->redirect()->toRoute('prospective-member');
+            }
+
             $result = $this->memberService->finalizeSubscription(
                 $this->getRequest()->getPost()->toArray(),
                 $prospectiveMember,

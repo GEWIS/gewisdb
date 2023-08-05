@@ -83,9 +83,17 @@ class MemberController extends AbstractActionController
     public function checkoutStatusAction(): ViewModel
     {
         $status = $this->params()->fromRoute('status');
+        $checkoutSessionId = (string) $this->params()->fromQuery('stripe_session_id');
+        $prospectiveMemberId = $this->paymentService->getLidnrFromCheckoutSession($checkoutSessionId);
+
+        if (null !== $prospectiveMemberId) {
+            $prospectiveMember = $this->memberService->getProspectiveMember($prospectiveMemberId)['member'];
+        } else {
+            $prospectiveMember = null;
+        }
 
         // We assume that an empty array means an error state (`$status` will be "error" but not compared).
-        $results = [];
+        $results = ['prospectiveMember' => $prospectiveMember];
         if ('cancelled' === $status) {
             $results['cancelled'] = true;
         } elseif ('completed' === $status) {

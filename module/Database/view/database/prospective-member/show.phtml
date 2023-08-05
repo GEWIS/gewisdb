@@ -101,71 +101,77 @@ use Laminas\View\Renderer\PhpRenderer;
         </div>
     <?php endforeach; ?>
 
-    <?php
-    $form->prepare();
+    <?php if (isset($form)): ?>
+        <?php
+        $form->prepare();
 
-    $form->setAttribute('action', $this->url('prospective-member/show/finalize', array('id' => $member->getLidnr())));
-    $form->setAttribute('method', 'post');
+        $form->setAttribute('action', $this->url('prospective-member/show/finalize', ['id' => $member->getLidnr()]));
+        $form->setAttribute('method', 'post');
 
-    $form->setAttribute('role', 'form');
-    ?>
-    <?= $this->form()->openTag($form) ?>
-    <?php
-    $element = $form->get('type');
-    $element->setAttribute('placeholder', $element->getLabel());
-
-    //$element->setLabelAttributes(array('class' => 'radio-inline'));
-    ?>
-    <div class="form-group">
-        <label for="<?= $element->getName() ?>" class="control-label col-sm-4 label-required"><?= $element->getLabel() ?></label>
-        <br>
-        <div class="col-sm-12">
-            <?php foreach ($element->getValueOptions() as $option => $text): ?>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
-                        <?= $text ?>
-                    </label>
-                </div>
-            <?php endforeach ?>
-            <?= $this->formElementErrors($element) ?>
-        </div>
-    </div>
-
-    <?php
-    $element = $form->get('updatedata');
-    if ($tueData->isValid()) {
-        $element->setChecked(true);
-    } else {
-        $element->setChecked(false);
-        $element->setAttributes([
-            "disabled" => true,
-        ]);
-    }
-    ?>
-    <div class="form-group">
-        <div class="col-sm-12">
-            <div class="checkbox">
-                <label>
-                    <?= $this->formCheckbox($element) ?>
-                    <?= $element->getLabel() ?>
-                </label>
+        $form->setAttribute('role', 'form');
+        ?>
+        <?= $this->form()->openTag($form) ?>
+        <?php
+        $element = $form->get('type');
+        $element->setAttribute('placeholder', $element->getLabel());
+        ?>
+        <div class="form-group">
+            <label for="<?= $element->getName() ?>" class="control-label col-sm-4 label-required">
+                <?= $element->getLabel() ?>
+            </label>
+            <br>
+            <div class="col-sm-12">
+                <?php foreach ($element->getValueOptions() as $option => $text): ?>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="<?= $element->getName() ?>" id="<?= $element->getName() ?>" value="<?= $option ?>" <?= $element->getValue() == $option ? 'checked' : '' ?>>
+                            <?= $text ?>
+                        </label>
+                    </div>
+                <?php endforeach ?>
                 <?= $this->formElementErrors($element) ?>
             </div>
-            <?= $this->formElementErrors($element) ?>
         </div>
-    </div>
 
-    <?php
-    $submit = $form->get('submit');
-    $submit->setLabel($this->translate('Approve Membership'));
-    $submit->setAttribute('class', 'btn btn-success');
-    ?>
-    <?= $this->formButton($submit) ?>
-    <a href="<?= $this->url('prospective-member/show/delete', array(
-        'id' => $member->getLidnr()
-    )) ?>" class="btn btn-danger"><?= $this->translate('Delete Prospective Member') ?></a>
-    <?= $this->form()->closeTag($form) ?>
+        <?php
+        $element = $form->get('updatedata');
+        if ($tueData->isValid()) {
+            $element->setChecked(true);
+        } else {
+            $element->setChecked(false);
+            $element->setAttributes([
+                "disabled" => true,
+            ]);
+        }
+        ?>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+
+        <?php
+        $submit = $form->get('submit');
+        $submit->setLabel($this->translate('Approve Membership'));
+        $submit->setAttribute('class', 'btn btn-success');
+        ?>
+        <?= $this->formButton($submit) ?>
+        <a href="<?= $this->url('prospective-member/show/delete', array(
+            'id' => $member->getLidnr()
+        )) ?>" class="btn btn-danger"><?= $this->translate('Delete Prospective Member') ?></a>
+        <?= $this->form()->closeTag() ?>
+    <?php else: ?>
+        <p>
+            <?= $this->translate('This prospective member cannot be approved or deleted due to a pending transaction.') ?>
+        </p>
+    <?php endif; ?>
 </div>
 <div class="col-md-6">
 <h3><?= $this->translate('Addresses') ?></h3>

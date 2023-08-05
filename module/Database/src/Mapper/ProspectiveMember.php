@@ -74,13 +74,13 @@ class ProspectiveMember
         if ('paid' === $type) {
             $qb->andWhere('cs.state = :paid')
                 ->setParameter('paid', CheckoutSessionModel::PAID);
-        } elseif ('pending' === $type) {
-            $qb->andWhere('cs.state = :pending')
-                ->setParameter('pending', CheckoutSessionModel::PENDING);
+        } elseif ('failed' === $type) {
+            $qb->andWhere('cs.state = :expired OR cs.state = :failed')
+                ->setParameter('expired', CheckoutSessionModel::EXPIRED)
+                ->setParameter('failed', CheckoutSessionModel::FAILED);
         } else {
-            $qb->andWhere('cs.state != :paid')
-                ->andWhere('cs.state != :pending')
-                ->setParameter('paid', CheckoutSessionModel::PAID)
+            $qb->andWhere('cs.state = :created OR cs.state = :pending')
+                ->setParameter('created', CheckoutSessionModel::CREATED)
                 ->setParameter('pending', CheckoutSessionModel::PENDING);
         }
 

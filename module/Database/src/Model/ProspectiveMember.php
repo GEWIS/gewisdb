@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping\InverseJoinColumn;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 
 /**
@@ -158,6 +159,15 @@ class ProspectiveMember
     )]
     protected Collection $lists;
 
+    /**
+     * @var Collection<array-key, CheckoutSession>
+     */
+    #[OneToMany(
+        targetEntity: CheckoutSession::class,
+        mappedBy: 'prospectiveMember',
+    )]
+    protected Collection $checkoutSessions;
+
     #[OneToOne(
         targetEntity: PaymentLink::class,
         mappedBy: 'prospectiveMember',
@@ -167,6 +177,7 @@ class ProspectiveMember
     public function __construct()
     {
         $this->lists = new ArrayCollection();
+        $this->checkoutSessions = new ArrayCollection();
     }
 
     /**
@@ -498,6 +509,18 @@ class ProspectiveMember
         foreach ($lists as $list) {
             $this->addList($list);
         }
+    }
+
+    /**
+     * Determine whether the prospective member does not have a `created` or `pending` checkout session. This is used to
+     * check whether a prospective member can be safely deleted.
+     */
+    public function isCheckoutPending(): bool
+    {
+        $lastState = $this->checkoutSessions->last()->getState();
+
+        return CheckoutSession::CREATED === $lastState
+            || CheckoutSession::PENDING === $lastState;
     }
 
     /**

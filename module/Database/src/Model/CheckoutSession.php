@@ -48,7 +48,10 @@ class CheckoutSession
     #[Column(type: 'string')]
     protected string $checkoutId;
 
-    #[ManyToOne(targetEntity: ProspectiveMember::class)]
+    #[ManyToOne(
+        targetEntity: ProspectiveMember::class,
+        inversedBy: 'checkoutSessions',
+    )]
     #[JoinColumn(
         name: 'prospective_member',
         referencedColumnName: 'lidnr',

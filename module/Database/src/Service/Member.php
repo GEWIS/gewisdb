@@ -391,6 +391,16 @@ class Member
     public function getProspectiveMember(int $id): array
     {
         $member = $this->getProspectiveMemberMapper()->find($id);
+
+        if (null === $member) {
+            return [
+                'member' => null,
+                'form' => null,
+                'tueData' => null,
+                'tueStatus' => null,
+            ];
+        }
+
         $tueData = $this->getCheckerService()->tueDataObject();
         $tueStatus = [];
 
@@ -445,7 +455,7 @@ class Member
 
         return [
             'member' => $member,
-            'form' => $this->memberApproveForm,
+            'form' => $member->isCheckoutPending() ? null : $this->memberApproveForm,
             'tueData' => $tueData,
             'tueStatus' => $tueStatus,
         ];

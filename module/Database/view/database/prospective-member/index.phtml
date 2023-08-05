@@ -13,7 +13,7 @@ use Laminas\View\Renderer\PhpRenderer;
     $(document).ready(function () {
         const maxResults = 128;
         let searchMember = function (term) {
-            const types = ['', 'pending', 'paid'];
+            const types = ['', 'failed', 'paid'];
 
             types.forEach((type) => {
                 let tableType = (type === '') ? '' : type + '-';
@@ -77,7 +77,7 @@ use Laminas\View\Renderer\PhpRenderer;
                 <h4><?= $this->translate('Paid') ?></h4>
             </div>
             <div class="col-md-12">
-                <table class="table table-hover" id="members-result">
+                <table class="table table-hover" id="members-paid-result">
                     <thead>
                     <tr>
                         <th><?= $this->translate('Name') ?></th>
@@ -100,10 +100,10 @@ use Laminas\View\Renderer\PhpRenderer;
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-12">
-                <h4><?= $this->translate('Pending') ?></h4>
+                <h4><?= $this->translate('Expired / Failed') ?></h4>
             </div>
             <div class="col-md-12">
-                <table class="table table-hover" id="members-pending-result">
+                <table class="table table-hover" id="members-failed-result">
                     <thead>
                     <tr>
                         <th><?= $this->translate('Name') ?></th>
@@ -126,10 +126,10 @@ use Laminas\View\Renderer\PhpRenderer;
     <div class="col-md-4 col-md-pull-8">
         <div class="row">
             <div class="col-md-12">
-                <h4><?= $this->translate('Created / Failed') ?></h4>
+                <h4><?= $this->translate('Created / Pending') ?></h4>
             </div>
             <div class="col-md-12">
-                <table class="table table-hover" id="members-paid-result">
+                <table class="table table-hover" id="members-result">
                     <thead>
                         <tr>
                             <th><?= $this->translate('Name') ?></th>

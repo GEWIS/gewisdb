@@ -2,32 +2,69 @@
 
 declare(strict_types=1);
 
+use Database\Model\ProspectiveMember;
+
 /**
  * @var true|null $cancelled
  * @var true|null $completed
+ * @var ProspectiveMember $prospectiveMember
  */
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h3>Checkout</h3>
+        <h3><?= $this->translate('GEWIS Registration - Checkout') ?></h3>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
         <?php if (isset($cancelled) && $cancelled): ?>
             <div class="alert alert-info" role="alert">
-                <?= sprintf(
-                    '<strong>%s</strong> %s',
-                    $this->translate('Mistake?'),
-                    // phpcs:ignore -- user-visible strings should not be split
-                    $this->translate('Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.'),
-                ) ?>
+                <?php if (isset($prospectiveMember)): ?>
+                    <?php
+                    $restartLink = $this->serverUrl($this->url(
+                        'member/subscribe/checkout/restart',
+                        ['token' => $prospectiveMember->getPaymentLink()->getToken()],
+                    ));
+
+                    if ('production' === APP_ENV) {
+                        $restartLink = str_replace('/member/subscribe', '', $restartLink);
+                    }
+                    ?>
+                    <?= sprintf(
+                        '<strong>%s</strong> %s',
+                        sprintf(
+                            $this->translate('Are you sure %s?'),
+                            $this->escapeHtml($prospectiveMember->getFirstName()),
+                        ),
+                        sprintf(
+                            // phpcs:ignore -- user-visible strings should not be split
+                            $this->translate('Was it not your intention to close the payment page? Then do not worry, <a href="%s">click here</a> to go back. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.'),
+                            $restartLink,
+                        ),
+                    ) ?>
+                <?php else: ?>
+                    <?= sprintf(
+                        '<strong>%s</strong> %s',
+                        $this->translate('Mistake?'),
+                        // phpcs:ignore -- user-visible strings should not be split
+                        $this->translate('Was it not your intention to close the payment page? Then do not worry, we have sent you an e-mail containing a link that allows you to go to the payment page again. Do you not want to become a member of GEWIS after all? Let us know and we will delete your details.'),
+                    ) ?>
+                <?php endif; ?>
             </div>
         <?php elseif (isset($completed) && $completed): ?>
             <div class="alert alert-success" role="alert">
+                <?php
+                $text = $this->translate('Awesome!');
+                if (isset($prospectiveMember)) {
+                    $text = sprintf(
+                        $this->translate('Thank you %s!'),
+                        $this->escapeHtml($prospectiveMember->getFirstName()),
+                    );
+                }
+                ?>
                 <?= sprintf(
                     '<strong>%s</strong> %s',
-                    $this->translate('Awesome!'),
+                    $text,
                     // phpcs:ignore -- user-visible strings should not be split
                     $this->translate('We have received your registration, once your payment is verified the secretary will approve your membership. We will let you know via e-mail when this happens.'),
                 ) ?>
@@ -45,7 +82,7 @@ declare(strict_types=1);
     </div>
     <div class="col-md-12">
         <a class="btn btn-primary pull-right" href="<?= $this->url('member/subscribe') ?>">
-            <?= $this->translate('Go back') ?>
+            <?= $this->translate('Return to registration form') ?>
         </a>
     </div>
 </div>

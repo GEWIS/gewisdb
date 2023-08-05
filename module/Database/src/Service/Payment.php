@@ -65,6 +65,27 @@ class Payment
     }
 
     /**
+     * Get the id of a prospective member from the Checkout Session.
+     */
+    public function getLidnrFromCheckoutSession(string $sessionId): ?int
+    {
+        if (
+            '' === $sessionId
+            || 'null' === $sessionId
+        ) {
+            return null;
+        }
+
+        $checkoutSession = $this->getCheckoutSession($sessionId);
+
+        if (null === $checkoutSession) {
+            return null;
+        }
+
+        return intval($checkoutSession->client_reference_id);
+    }
+
+    /**
      * Try to restart an active Checkout Session, if this is not possible, create a new Checkout Session.
      */
     public function restartCheckoutLink(ProspectiveMemberModel $prospectiveMember): ?string
@@ -78,7 +99,7 @@ class Payment
         }
 
         // We have at least one know checkout session on file.
-        if ((new DateTime())->sub(new DateInterval('PT5M')) >= $lastCheckoutStub->getExpiration()) {
+        if ((new DateTime())->add(new DateInterval('PT5M')) >= $lastCheckoutStub->getExpiration()) {
             // Checkout Session has expired or is about to expire (this will create a webhook event to fix some stuff on
             // this payment record). As prospective members may be a bit slow, we internally expire a Checkout Session
             // five minutes earlier. We do not want to deal with people who are in the middle of a checkout when it
