@@ -26,6 +26,8 @@ use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 use Throwable;
 
+use function str_ends_with;
+
 class Member extends Form implements InputFilterProviderInterface
 {
     /** @var MailingListModel[] $lists */
@@ -258,6 +260,22 @@ class Member extends Form implements InputFilterProviderInterface
             ],
             'email' => [
                 'required' => true,
+                'validators' => [
+                    [
+                        'name' => Callback::class,
+                        'options' => [
+                            'callback' => static function ($value) {
+                                return !str_ends_with($value, '@student.tue.nl');
+                            },
+                            'messages' => [
+                                Callback::INVALID_VALUE => $this->translator->translate(
+                                    // phpcs:ignore -- user-visible strings should not be split
+                                    'You cannot use your student e-mail address because if you stop studying, we can no longer reach you about important announcements.',
+                                ),
+                            ],
+                        ],
+                    ],
+                ],
                 'filters' => [
                     ['name' => StringToLower::class],
                 ],
