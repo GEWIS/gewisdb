@@ -68,8 +68,13 @@ class ProspectiveMember
             $qb->setParameter(':nr', $query);
         }
 
-        // Get payment status.
+        // Get Checkout Session status.
         $qb->leftJoin(CheckoutSessionModel::class, 'cs', Join::WITH, 'cs.prospectiveMember = m.lidnr');
+        $qbc = $this->em->createQueryBuilder();
+        $qbc->select('MAX(css.id)')
+            ->from(CheckoutSessionModel::class, 'css')
+            ->where('css.prospectiveMember = m.lidnr');
+        $qb->andWhere($qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'));
 
         if ('paid' === $type) {
             $qb->andWhere('cs.state = :paid')

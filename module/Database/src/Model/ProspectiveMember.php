@@ -160,6 +160,8 @@ class ProspectiveMember
     protected Collection $lists;
 
     /**
+     * The Checkout Sessions for this prospective member.
+     *
      * @var Collection<array-key, CheckoutSession>
      */
     #[OneToMany(
@@ -168,6 +170,9 @@ class ProspectiveMember
     )]
     protected Collection $checkoutSessions;
 
+    /**
+     * Payment link that can be used by the prospective member to restart a Checkout Session.
+     */
     #[OneToOne(
         targetEntity: PaymentLink::class,
         mappedBy: 'prospectiveMember',
@@ -517,7 +522,19 @@ class ProspectiveMember
      */
     public function isCheckoutPending(): bool
     {
-        $lastState = $this->checkoutSessions->last()->getState();
+        /** @var CheckoutSession|false $lastCheckoutSession */
+        $lastCheckoutSession = $this->checkoutSessions->last();
+
+        if (false === $lastCheckoutSession) {
+            return false;
+        }
+
+        $lastState = $lastCheckoutSession->getState();
+
+        if (CheckoutSession::EXPIRED === $lastState) {
+            // Checkout Session can still be recovered (thus we are still pending).
+            return (new DateTime()) < $lastCheckoutSession->getExpiration();
+        }
 
         return CheckoutSession::CREATED === $lastState
             || CheckoutSession::PENDING === $lastState;

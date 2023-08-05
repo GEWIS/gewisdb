@@ -11,6 +11,7 @@ use Database\Model\PaymentLink as PaymentLinkModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use DateInterval;
 use DateTime;
+use DateTimeZone;
 use Monolog\Logger;
 use Stripe\Checkout\Session as CheckoutSession;
 use Stripe\Event;
@@ -49,19 +50,22 @@ class Payment
      */
     public function getCheckoutLink(ProspectiveMemberModel $prospectiveMember): ?string
     {
-        $checkoutSession = $this->createCheckoutSession($prospectiveMember);
+        $session = $this->createCheckoutSession($prospectiveMember);
 
-        if (null === $checkoutSession) {
+        if (null === $session) {
             return null;
         }
 
-        $payment = new CheckoutSessionModel();
-        $payment->setProspectiveMember($prospectiveMember);
-        $payment->setCheckoutId($checkoutSession->id);
-        $payment->setExpiration(DateTime::createFromFormat('U', (string) $checkoutSession->expires_at));
-        $this->checkoutSessionMapper->persist($payment);
+        $checkoutSession = new CheckoutSessionModel();
+        $checkoutSession->setProspectiveMember($prospectiveMember);
+        $checkoutSession->setCheckoutId($session->id);
+        $checkoutSession->setExpiration(DateTime::createFromFormat(
+            'U',
+            (string) $session->expires_at,
+        )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
+        $this->checkoutSessionMapper->persist($checkoutSession);
 
-        return $checkoutSession->url;
+        return $session->url;
     }
 
     /**
@@ -98,13 +102,33 @@ class Payment
             return $this->getCheckoutLink($prospectiveMember);
         }
 
-        // We have at least one know checkout session on file.
-        if ((new DateTime())->add(new DateInterval('PT5M')) >= $lastCheckoutStub->getExpiration()) {
-            // Checkout Session has expired or is about to expire (this will create a webhook event to fix some stuff on
-            // this payment record). As prospective members may be a bit slow, we internally expire a Checkout Session
-            // five minutes earlier. We do not want to deal with people who are in the middle of a checkout when it
-            // expires. Hence, we already create a new Checkout Session.
+        // We have at least one known Checkout Session on file.
+        if (
+            CheckoutSessionModel::PAID === $lastCheckoutStub->getState()
+            || CheckoutSessionModel::PENDING === $lastCheckoutStub->getState()
+        ) {
+            // Checkout Session is finalised or will be after payment processing. Do not allow the prospective member to
+            // do something else.
+            return null;
+        }
+
+        if (CheckoutSessionModel::FAILED === $lastCheckoutStub->getState()) {
+            // Last payment failed, so we need to create a new Checkout Session for the user to be able to try again.
             return $this->getCheckoutLink($prospectiveMember);
+        }
+
+        if (CheckoutSessionModel::EXPIRED === $lastCheckoutStub->getState()) {
+            // The Checkout Session has already been abandoned.
+
+            if ((new DateTime())->add(new DateInterval('PT5M')) >= $lastCheckoutStub->getExpiration()) {
+                // The Checkout Session is completely abandoned, as the maximum expiration for the recovery URL of 30
+                // days has passed (or will pass in 5 minutes). As such, we want to create a new Checkout Session for
+                // this prospective member.
+                return $this->getCheckoutLink($prospectiveMember);
+            }
+
+            // The Checkout Session is not completely dead yet, so return the recovery URL.
+            return $lastCheckoutStub->getRecoveryUrl();
         }
 
         // Checkout Session is still valid (at this point, not necessarily when the prospective member finally submits).
@@ -184,9 +208,37 @@ class Payment
         $storedCheckoutSession = $this->checkoutSessionMapper->findById($session->id);
 
         if (null === $storedCheckoutSession) {
-            // The checkout session we store can only be null of the prospective member is already removed. We do cannot
-            // process anything, so return.
-            return;
+            // The Checkout Session we store can only be null of the prospective member is already removed or when it
+            // was recovered from an abandoned Checkout Session.
+
+            if (null === $session->recovered_from) {
+                // The Checkout Session was not recovered, so the only logical explanation is that the prospective
+                // member is removed. We cannot process anything, so return.
+                return;
+            }
+
+            // We are dealing with a recovered Checkout Session.
+            $originalCheckoutSession = $this->checkoutSessionMapper->findById($session->recovered_from);
+
+            if (null === $originalCheckoutSession) {
+                // The original Checkout Session does not exist, the only logical explanation is that the prospective
+                // member is removed.
+                return;
+            }
+
+            // Create new Checkout Session for this recovery. Leave the state for it on 'CREATED', if something goes
+            // wrong we can easily track what has happened.
+            $storedCheckoutSession = new CheckoutSessionModel();
+            $storedCheckoutSession->setProspectiveMember($originalCheckoutSession->getProspectiveMember());
+            $storedCheckoutSession->setCheckoutId($session->id);
+            $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
+                'U',
+                (string) $session->expires_at,
+            )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
+            // Link recovered Checkout Session to the old one.
+            $storedCheckoutSession->setRecoveredFrom($originalCheckoutSession);
+
+            $this->checkoutSessionMapper->persist($storedCheckoutSession);
         }
 
         // If this is `null` we are in a weird state, we have a checkout session but not a payment link. We tactfully
@@ -196,8 +248,15 @@ class Payment
         switch ($event->type) {
             case 'checkout.session.expired':
                 // The prospective member did not complete the checkout within 24 hours. We mark the stored checkout
-                // session as expired and (re)set the used state of the payment link to enable it.
+                // session as expired.
                 $storedCheckoutSession->setState(CheckoutSessionModel::EXPIRED);
+                // Recovery URL is valid for 30 days.
+                $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
+                    'U',
+                    (string) $session->after_expiration->recovery->expires_at,
+                )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
+                $storedCheckoutSession->setRecoveryUrl($session->after_expiration->recovery->url);
+                // (re)set the used state of the payment link to enable it.
                 $paymentLink?->setUsed(false);
 
                 // TODO: Send AT MOST 1 reminder to pay.

@@ -66,9 +66,15 @@
     </InvalidReturnType>
   </file>
   <file src="module/Database/src/Service/Payment.php">
-    <UndefinedMagicPropertyFetch occurrences="1">
+    <UndefinedMagicPropertyFetch occurrences="2">
       <code>$event-&gt;data-&gt;object</code>
+      <code>$session-&gt;after_expiration-&gt;recovery</code>
     </UndefinedMagicPropertyFetch>
+    <PossiblyNullPropertyFetch occurrences="3">
+      <code>$session-&gt;after_expiration-&gt;recovery</code>
+      <code>$session-&gt;after_expiration-&gt;recovery->expires_at</code>
+      <code>$session-&gt;after_expiration-&gt;recovery->url</code>
+    </PossiblyNullPropertyFetch>
   </file>
   <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
     <NoValue occurrences="1">

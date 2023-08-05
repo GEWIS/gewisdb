@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToOne;
 use InvalidArgumentException;
 
 use function in_array;
@@ -29,8 +30,6 @@ class CheckoutSession
     public const FAILED = 4;
     public const PAID = 5;
 
-
-
     /**
      * Payment ID.
      */
@@ -45,7 +44,10 @@ class CheckoutSession
      *
      * See {@link https://stripe.com/docs/upgrades#what-changes-does-stripe-consider-to-be-backwards-compatible}.
      */
-    #[Column(type: 'string')]
+    #[Column(
+        type: 'string',
+        unique: true,
+    )]
     protected string $checkoutId;
 
     #[ManyToOne(
@@ -63,6 +65,22 @@ class CheckoutSession
      */
     #[Column(type: 'datetime')]
     protected DateTime $expiration;
+
+    /**
+     * Recovery URL for the Checkout Session when the state is 'EXPIRED'.
+     */
+    #[Column(
+        type: 'string',
+        nullable: true,
+    )]
+    protected ?string $recoveryUrl = null;
+
+    #[OneToOne(targetEntity: self::class)]
+    #[JoinColumn(
+        name: 'recovered_from_id',
+        referencedColumnName: 'id',
+    )]
+    protected ?CheckoutSession $recoveredFrom = null;
 
     /**
      * The state of the payment.
@@ -108,6 +126,29 @@ class CheckoutSession
     public function setExpiration(DateTime $expiration): void
     {
         $this->expiration = $expiration;
+    }
+
+    public function getRecoveryUrl(): ?string
+    {
+        return $this->recoveryUrl;
+    }
+
+    public function setRecoveryUrl(string $recoveryUrl): void
+    {
+        $this->recoveryUrl = $recoveryUrl;
+    }
+
+    /**
+     * @psalm-ignore-nullable-return
+     */
+    public function getRecoveredFrom(): ?CheckoutSession
+    {
+        return $this->recoveredFrom;
+    }
+
+    public function setRecoveredFrom(CheckoutSession $recoveredFrom): void
+    {
+        $this->recoveredFrom = $recoveredFrom;
     }
 
     public function getState(): int
