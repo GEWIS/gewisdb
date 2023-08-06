@@ -392,8 +392,8 @@ class Member
      *     member: ?ProspectiveMemberModel,
      *     form: ?MemberApproveForm,
      *     canDelete: ?bool,
-     *     tueData: TueData,
-     *     tueStatus: array<array-key, array{0: string, 1: string}>,
+     *     tueData: ?TueData,
+     *     tueStatus: ?array<array-key, string[]>,
      * }
      */
     public function getProspectiveMember(int $id): array
