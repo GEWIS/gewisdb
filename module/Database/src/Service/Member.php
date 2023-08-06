@@ -32,6 +32,7 @@ use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\MailingList as MailingListService;
 use DateTime;
+use InvalidArgumentException;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
@@ -44,6 +45,7 @@ use ReflectionClass;
 use RuntimeException;
 
 use function bin2hex;
+use function in_array;
 use function mb_encode_mimeheader;
 use function random_bytes;
 
@@ -141,16 +143,58 @@ class Member
     }
 
     /**
-     * Send an email about the newly registered member to the new member and the secretary
+     * Send an e-mail to the (prospective) member and the secretary with an update on the (prospective) member's
+     * registration.
+     *
+     * @psalm-param "registration"|"welcome"|"checkout-expired"|"checkout-failed" $type
      */
-    public function sendMemberRegistrationEmail(ProspectiveMemberModel $member): void
-    {
+    public function sendRegistrationUpdateEmail(
+        MemberModel|ProspectiveMemberModel $member,
+        string $type,
+    ): void {
+        if (!in_array($type, ['registration', 'welcome', 'checkout-expired', 'checkout-failed'])) {
+            throw new InvalidArgumentException('Unknown email type for prospective member.');
+        }
+
+        // Define here to appease the checkers for "possibly undefined variables". Because of the `!in_array()` these
+        // are guaranteed to be changed.
+        $template = '';
+        $subjectProspectiveMember = '';
+        $subjectSecretary = '';
+
+        switch ($type) {
+            case 'registration':
+                $template = 'database/email/member-registration';
+                $subjectProspectiveMember = 'GEWIS registration';
+                $subjectSecretary = 'New member registration: ' . $member->getFullName();
+
+                break;
+            case 'welcome':
+                $template = 'database/email/member-welcome';
+                $subjectProspectiveMember = 'Your GEWIS membership has been confirmed';
+                $subjectSecretary = 'Membership confirmed: ' . $member->getFullName();
+
+                break;
+            case 'checkout-expired':
+                $template = 'database/email/checkout-expired';
+                $subjectProspectiveMember = 'Complete your GEWIS registration';
+                $subjectSecretary = 'Membership payment expired: ' . $member->getFullName();
+
+                break;
+            case 'checkout-failed':
+                $template = 'database/email/checkout-failed';
+                $subjectProspectiveMember = 'Your GEWIS membership fee payment has failed';
+                $subjectSecretary = 'Membership payment failed: ' . $member->getFullName();
+
+                break;
+        }
+
         $config = $this->config;
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
         $model = new ViewModel(['member' => $member]);
-        $model->setTemplate('database/email/member-registration');
+        $model->setTemplate($template);
         $body = $renderer->render($model);
 
         $html = new MimePart($body);
@@ -159,14 +203,8 @@ class Member
         $mimeMessage = new MimeMessage();
         $mimeMessage->addPart($html);
 
-        $message = new Message();
-        $message->getHeaders()->addHeader((new MessageId())->setId());
-        $message->setBody($mimeMessage);
-        $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('New member registration: ' . $member->getFullName());
-        $this->getMailTransport()->send($message);
-
+        // Always try to send the e-mail to the prospective member before sending to the secretary. The secretary can
+        // look in the database, the prospective member cannot.
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
@@ -181,52 +219,15 @@ class Member
             ),
         );
         $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('GEWIS Registration');
+        $message->setSubject($subjectProspectiveMember);
         $this->getMailTransport()->send($message);
-    }
-
-    /**
-     * Send an email about the approval to the new member and the secretary
-     */
-    public function sendMemberConfirmedEmail(MemberModel $member): void
-    {
-        $config = $this->config;
-        $config = $config['email'];
-
-        $renderer = $this->getRenderer();
-        $model = new ViewModel(['member' => $member]);
-        $model->setTemplate('database/email/member-welcome');
-        $body = $renderer->render($model);
-
-        $html = new MimePart($body);
-        $html->type = 'text/html';
-
-        $mimeMessage = new MimeMessage();
-        $mimeMessage->addPart($html);
 
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
         $message->setFrom($config['from']['address'], $config['from']['name']);
         $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('Membership confirmed: ' . $member->getFullName());
-        $this->getMailTransport()->send($message);
-
-        $message = new Message();
-        $message->getHeaders()->addHeader((new MessageId())->setId());
-        $message->setBody($mimeMessage);
-        $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->setTo(
-            $member->getEmail(),
-            mb_encode_mimeheader(
-                $member->getFullName(),
-                'UTF-8',
-                'Q',
-                '',
-            ),
-        );
-        $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('Your GEWIS membership has been confirmed');
+        $message->setSubject($subjectSecretary);
         $this->getMailTransport()->send($message);
     }
 

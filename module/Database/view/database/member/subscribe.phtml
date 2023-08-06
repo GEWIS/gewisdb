@@ -13,7 +13,7 @@ use Laminas\View\Renderer\PhpRenderer;
  */
 ?>
 <?php
-$this->headTitle()->prepend("GEWIS Enrollment");
+$this->headTitle()->prepend("GEWIS Registration");
 
 $this->inlineScript()->appendFile($this->basePath() . '/js/inputvalidator.min.js');
 
@@ -34,12 +34,13 @@ $form->setAttribute('id', 'form-subscribe');
         </div>
         <div class="col-md-9">
             <h1>
-                <span class="gewis-red">GEWIS</span> <?= $this->translate('Inschrijving') ?>
+                <span class="gewis-red">GEWIS</span> <?= $this->translate('Registration') ?>
             </h1>
             <p>
-                <?= $this->translate('Welkom! Met dit formulier kun je je inschrijven voor een
-lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en kost
-eenmalig 15 euro.') ?>
+                <?= $this->translate(
+                    // phpcs:ignore -- user-visible strings should not be split
+                    'Welcome! With this form you can register for a membership of GEWIS. Becoming a member of the assocations costs a one-time fee of 15 euros and your membership is valid as long as you study.',
+                ) ?>
             </p>
             <p>
                 <?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>.
@@ -176,7 +177,7 @@ eenmalig 15 euro.') ?>
                 <?= $this->formLabel($element) ?>
                 <?= $this->formInput($element) ?>
                 <?= $this->formElementErrors($element) ?>
-                <p><?= sprintf($this->translate('If you started after 2016, your username is an 8-digit number starting with the year you started at the TU/e, for example %s0001. You have received this in an email when you enrolled. Go to <a href="%s">this</a> page if you need help finding it. Your username will be used to verify you are studying at the department of M&CS.'), date('Y'), "https://wiki.gewis.nl/link/495") ?></p>
+                <p><?= sprintf($this->translate('If you started after 2016, your username is an 8-digit number starting with the year you started at the TU/e, for example %s0001. You have received this in an email when you enrolled. Go to <a href="%s">this page</a> if you need help finding it. Your username will be used to verify you are studying at the department of M&CS.'), date('Y'), "https://wiki.gewis.nl/link/495") ?></p>
             </div>
         </div>
         <div class="col-md-6">
@@ -197,7 +198,7 @@ eenmalig 15 euro.') ?>
     <div class="row">
         <div class="col-md-12">
             <hr>
-            <h3><?= $this->translate('Adres') ?></h3>
+            <h3><?= $this->translate('Address') ?></h3>
         </div>
     </div>
     <fieldset class="study-address in">
@@ -307,13 +308,12 @@ eenmalig 15 euro.') ?>
     <div class="row">
         <div class="col-md-12">
             <hr>
-            <h3><?= $this->translate('Mailinglijsten') ?></h3>
+            <h3><?= $this->translate('Mailing Lists') ?></h3>
             <p>
-                <?= $this->translate('Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor mededelingen
-en activiteiten van de studievereniging. Daarnaast zijn er verschillende
-optionele mailinglijsten.
-Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze
-inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
+                <?= $this->translate(
+                    // phpcs:ignore -- user-visible strings should not be split
+                    'As a GEWIS member, you will be automatically registered on the "GEWIS-lijst" list. This list is for announcements and activities of the study association. In addition, there are several optional mailing lists. You can subscribe to the following mailing lists. These subscriptions can be changed at a later date.',
+                ) ?>
             </p>
         </div>
     </div>
@@ -334,12 +334,23 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
         <?php endforeach ?>
     </div>
     <div class="row">
-    <div class="col-md-12">
+        <div class="col-md-12">
             <hr>
             <h3><?= $this->translate('Agreement') ?></h3>
-            <a target="_blank" href="https://gewis.nl/vereniging/statuten/">
-                <?= $this->translate('Articles of Association, Internal Regulations and privacy statement') ?>
-            </a>
+            <p>
+                <?= $this->translate('Before submitting the registration form, please review the') ?>
+                <a target="_blank" href="https://gewis.nl/vereniging/statuten/" style="display: inline-block;">
+                    <?= $this->translate(
+                        'Articles of Association, Internal Regulations, and Privacy Statement of GEWIS',
+                    ) ?>
+                </a>.
+                <?= $this->translate(
+                    'Payment of the one-time membership fee is handled by Stripe, please review the',
+                ) ?>
+                <a target="_blank" href="https://stripe.com/privacy" style="display: inline-block;">
+                    <?= $this->translate('Privacy Policy of Stripe') ?>
+                </a>.
+            </p>
         </div>
     </div>
     <div class="row">
@@ -352,12 +363,29 @@ inschrijvingen kunnen op een later tijdstip veranderd worden.') ?>
                 <div class="checkbox">
                     <label>
                         <?= $this->formCheckbox($element) ?>
-                        <?= $this->translate('Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, en
-ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de inhoud van de statuten
-en het HR.
-<br/>
-Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) toestemming tot het
-verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
+                        <?= $this->translate(
+                            // phpcs:ignore -- user-visible strings should not be split
+                            'I hereby declare to have filled in the form truthfully and agree to be a member of Study Association GEWIS. I am familiar with the contents of the Articles of Association and Internal Regulations. I hereby give also Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) permission to process my personal data according to its Privacy Policy.',
+                        ) ?>
+                        <?= $element->getLabel() ?>
+                    </label>
+                    <?= $this->formElementErrors($element) ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <?php
+            $element = $form->get('agreedStripe');
+            $element->setAttribute('placeholder', $element->getLabel());
+            ?>
+            <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formCheckbox($element) ?>
+                        <?= $this->translate(
+                            // phpcs:ignore -- user-visible strings should not be split
+                            'I hereby authorise Stripe to process my personal data according to its privacy policy to pay the one-time membership fee.',
+                        ) ?>
                         <?= $element->getLabel() ?>
                     </label>
                     <?= $this->formElementErrors($element) ?>
@@ -366,11 +394,11 @@ verwerken van mijn persoonsgegevens volgens haar privacybeleid.') ?>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-12">
             <?php
             $submit = $form->get('submit');
             $submit->setLabel($submit->getValue());
-            $submit->setAttribute('class', 'btn btn-primary');
+            $submit->setAttribute('class', 'btn btn-primary pull-right');
             $submit->setAttribute('id', 'subscription-submit');
             ?>
             <div class="form-group">

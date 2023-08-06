@@ -139,10 +139,15 @@ class Member extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name' => 'agreedStripe',
+            'type' => Checkbox::class,
+        ]);
+
+        $this->add([
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => $translator->translate('Pay'),
+                'value' => $translator->translate('Go to checkout'),
             ],
         ]);
     }
@@ -289,7 +294,23 @@ class Member extends Form implements InputFilterProviderInterface
                             'token' => '1',
                             'messages' => [
                                 Identical::NOT_SAME => $this->translator->translate(
-                                    'You have to accept the terms!',
+                                    'You cannot become a member of the association without agreeing to the terms.',
+                                ),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'agreedStripe' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => Identical::class,
+                        'options' => [
+                            'token' => '1',
+                            'messages' => [
+                                Identical::NOT_SAME => $this->translator->translate(
+                                    'To pay the membership fee you must accept Stripe\'s privacy policy.',
                                 ),
                             ],
                         ],

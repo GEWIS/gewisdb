@@ -51,15 +51,18 @@ class MemberController extends AbstractActionController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $member = $this->memberService->subscribe($request->getPost()->toArray());
+            $prospectiveMember = $this->memberService->subscribe($request->getPost()->toArray());
 
-            if (null !== $member) {
+            if (null !== $prospectiveMember) {
                 // Always send the enrolment e-mail to ensure that the prospective member has a payment link that can be
                 // used in the event the checkout did not succeed.
-                $this->memberService->sendMemberRegistrationEmail($member);
+                $this->memberService->sendRegistrationUpdateEmail(
+                    $prospectiveMember,
+                    'registration',
+                );
 
                 // Create Stripe checkout session.
-                $checkoutLink = $this->paymentService->getCheckoutLink($member);
+                $checkoutLink = $this->paymentService->getCheckoutLink($prospectiveMember);
 
                 if (null === $checkoutLink) {
                     // We have failed to generate a payment link, however, as we have already persisted the prospective

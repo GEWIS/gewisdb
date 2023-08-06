@@ -1,0 +1,41 @@
+# This is a GEWIS mailings template
+# Registration confirmation
+---
+# All mailings require some settings. These can be set here. Don't forget to set the title ("Algemene mededeling; tekst zelf invoeren")
+version: 1.1
+settings:
+    title: "Action Required to Complete GEWIS Registration"
+    email: "secr@gewis.nl"
+    lang: en-UK
+    #lang: nl-NL
+    follow: true
+
+# A mailing consists of a series of messageblocks, each with their own type
+# The available types are "header", "topblock", "activities", "activityfooter", "extramessage" and "tinyfooter"
+messageblocks:
+
+    # Each mailing must have a header to make the template shine! It contains the title and the date.
+    - type: "header"
+      title: "Update on your registration"
+      date: 2023-08-06 #Note that this date needs to be updated
+
+    # This is the first block which is shown on top of the message. Recommended for most messages
+    - type: topblock
+      title: "Forgot to pay?"
+      contentHTML: "</p>
+
+      <p>Dear {{FIRST_NAME}},</p>
+
+      <p>We have noticed that you have not yet paid the one-time membership fee of 15 euros. Without the payment we cannot approve your membership. You can use the following link to start again: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>.</p>
+
+      <p>Have you changed your mind and do you not want to become a member after all? Then you do not have to pay and we will delete your details in 31 days. We would also like to hear why you do not want to become a member after all, so that we can improve the registration process.</p>
+
+      <br/>
+      With kind regards,<br/>
+      The board of GEWIS
+      "
+
+
+    # You probably want to include this each newsletter
+    - type: tinyfooter
+      contentHTML: 'You received this email because you have not yet paid the membership fee. This is a one-time mailing to ask you to do so.'

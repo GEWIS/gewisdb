@@ -6,6 +6,7 @@ namespace Database\Service\Factory;
 
 use Database\Mapper\ActionLink as PaymentLinkMapper;
 use Database\Mapper\CheckoutSession as PaymentMapper;
+use Database\Service\Member as MemberService;
 use Database\Service\Payment as PaymentService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Monolog\Logger;
@@ -27,6 +28,8 @@ class PaymentFactory implements FactoryInterface
         $paymentLinkMapper = $container->get(PaymentLinkMapper::class);
         /** @var PaymentMapper $paymentMapper */
         $paymentMapper = $container->get(PaymentMapper::class);
+        /** @var MemberService $memberService */
+        $memberService = $container->get(MemberService::class);
         /** @var array<string, string> $config */
         $config = $container->get('config')['stripe'];
 
@@ -34,6 +37,7 @@ class PaymentFactory implements FactoryInterface
             $logger,
             $paymentLinkMapper,
             $paymentMapper,
+            $memberService,
             $config,
         );
     }

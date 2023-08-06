@@ -16,7 +16,7 @@ messageblocks:
 
     # Each mailing must have a header to make the template shine! It contains the title and the date.
     - type: "header"
-      title: "Update on your registration"
+      title: "Your GEWIS registration"
       date: 2023-08-02 #Note that this date needs to be updated
 
     # This is the first block which is shown on top of the message. Recommended for most messages
@@ -24,7 +24,7 @@ messageblocks:
       title: "Thank you for your interest in GEWIS!"
       contentHTML: "</p>
 
-      <p>Dear {{FULL_NAME}},</p>
+      <p>Dear {{FIRST_NAME}},</p>
 
       <p>We have received your registration and are awaiting your payment*. Below you will find your registration details, in the event that something is wrong please let us know and we will update it.</p>
       <h3>General Information</h3>

@@ -432,6 +432,7 @@ class ProspectiveMember
      *         phone: string,
      *     },
      *     agreed: string,
+     *     agreedStripe: string,
      * }
      */
     public function toArray(): array
@@ -449,6 +450,7 @@ class ProspectiveMember
             'birth' => $this->getBirth()->format('Y-m-d'),
             'address' => $this->getAddresses()['studentAddress']->toArray(),
             'agreed' => '1',
+            'agreedStripe' => '1',
         ];
     }
 

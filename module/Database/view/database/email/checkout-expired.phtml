@@ -16,7 +16,7 @@ if ('production' === APP_ENV) {
 <!DOCTYPE html>
 <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
-    <title>Registration Confirmation GEWIS</title>
+    <title>Action Required to Complete GEWIS Registration</title>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <!--[if mso]>
@@ -107,7 +107,7 @@ if ('production' === APP_ENV) {
     </style>
 </head>
 <body style="background-color: #DDDDDD; margin: 0; padding: 0; text-align: center;">
-Registration&nbsp;Confirmation&nbsp;GEWIS
+Action&nbsp;Required&nbsp;to&nbsp;Complete&nbsp;GEWIS&nbsp;Registration
 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #DDDDDD;" width="100%">
     <tbody>
     <tr>
@@ -130,7 +130,7 @@ Registration&nbsp;Confirmation&nbsp;GEWIS
                                             </td>
                                             <td style="padding-bottom:25px;width:50%;padding-right:0px;padding-left:0px;">
                                                 <div align="left" style="font-size: 26px; font-family: 'Roboto Slab', Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #ffffff; line-height: 1.5em;">
-                                                    Your GEWIS registration
+                                                    Update on your registration
                                                 </div>
                                             </td>
                                             <td style="padding-bottom:25px;width:50%;padding-right:0px;padding-left:0px;">
@@ -160,7 +160,7 @@ Registration&nbsp;Confirmation&nbsp;GEWIS
                                                 <table border="0" cellpadding="0" cellspacing="0" class="heading_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
                                                     <tr>
                                                         <td style="padding-bottom:10px;text-align:center;width:100%; color: black; font-family: 'Roboto Slab', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 28px; font-weight: bold; letter-spacing: normal; line-height: 120%; text-align: center; ">
-                                                            Thank you for your interest in GEWIS!
+                                                            Forgot to pay?
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -191,92 +191,8 @@ Registration&nbsp;Confirmation&nbsp;GEWIS
                                                                 <div style="font-size: 18px; color: #333333; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
                                                                     <p style="margin: 0; font-size: 18px;">
                                                                     <p>Dear <?= $this->escapeHtml($member->getFirstName()) ?>,</p>
-                                                                    <p>We have received your registration and are awaiting your payment*. Below you will find your registration details, in the event that something is wrong please let us know and we will update it.</p>
-                                                                    <h3>General Information</h3>
-                                                                    <table width='100%'>
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th scope='col'><strong>Property</strong></th>
-                                                                            <th scope='col'><strong>Value</strong></th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <th scope='row'>Initial(s)</th>
-                                                                            <td><?= $this->escapeHtml($member->getInitials()) ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>First name</th>
-                                                                            <td><?= $this->escapeHtml($member->getFirstName()) ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>Last name prepositional particle</th>
-                                                                            <td><?= $this->escapeHtml($member->getMiddleName()) ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>Last name</th>
-                                                                            <td><?= $this->escapeHtml($member->getLastName()) ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>TU/e username</th>
-                                                                            <td>
-                                                                                <?= (null === $member->getTueUsername()) ? 'Unknown' : $this->escapeHtml($member->getTueUsername()) ?>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>Study</th>
-                                                                            <td>
-                                                                                <?= (null === $member->getStudy()) ? 'Unknown' : $this->escapeHtml($member->getStudy()) ?>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>E-mail address</th>
-                                                                            <td><a href="mailto:<?= $member->getEmail() ?>"><?= $member->getEmail() ?></a></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>Birthdate</th>
-                                                                            <td><?= $member->getBirth()->format('l j F Y') ?></td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-
-                                                                    <h3>Address Information</h3>
-                                                                    <table width='100%'>
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th scope='col'><strong>Property</strong></th>
-                                                                            <th scope='col'><strong>Value</strong></th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <th scope='row'>Street and number</th>
-                                                                            <td><?= $this->escapeHtml($member->getStreet()) ?> <?= $this->escapeHtml($member->getNumber()) ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>Postal code and city</th>
-                                                                            <td><?= $this->escapeHtml($member->getPostalCode()) ?> <?= $this->escapeHtml($member->getCity()) ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>Postal region</th>
-                                                                            <td><?= $this->escapeHtml($member->getCountry()->value) ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope='row'>Phone number</th>
-                                                                            <td><?= $this->escapeHtml($member->getPhone()) ?></td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-
-                                                                    <?php if ($member->getLists()->count() > 0): ?>
-                                                                        <h3>Mailing Lists</h3>
-                                                                        <ul>
-                                                                            <?php foreach ($member->getLists() as $list): ?>
-                                                                                <li><?= $this->escapeHtml($list->getName()) ?></li>
-                                                                            <?php endforeach; ?>
-                                                                        </ul>
-                                                                    <?php endif; ?>
-
+                                                                    <p>We have noticed that you have not yet paid the one-time membership fee of 15 euros. Without the payment we cannot approve your membership. You can use the following link to start again: <a href="<?= $restartLink ?>" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow"><?= $restartLink ?></a>.</p>
+                                                                    <p>Have you changed your mind and do you not want to become a member after all? Then you do not have to pay and we will delete your details in 31 days. We would also like to hear why you do not want to become a member after all, so that we can improve the registration process.</p>
                                                                     <br>
                                                                     With kind regards,<br> The board of GEWIS
                                                                     </p>
@@ -309,29 +225,6 @@ Registration&nbsp;Confirmation&nbsp;GEWIS
                     </td>
                 </tr>
                 <!-- /Important announcements -->
-                <tr>
-                    <td>
-                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; width: 720px;" width="720">
-                            <tbody>
-                            <tr>
-                                <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-left: 55px; padding-right: 55px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; width: 100%;" width="100%">
-                                    <table border="0" cellpadding="0" cellspacing="0" class="text_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word; width: 100%;" width="100%">
-                                        <tr>
-                                            <td style="padding-left:0px; padding-top:0px;padding-bottom:10px; padding-right:0px; background-color: #FFFFFF;">
-                                                <div style="margin: 0; margin-bottom: 8px; font-size: 16px; color: black; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
-                                                    <p style="font-size: 18px; text-align: center; font-weight: bolder; margin-bottom: 6px;">*Payment of Membership Fee</p>
-                                                    <p><p>Did you forget or fail to pay the membership fee? Then use the following link to start again: <a href="<?= $restartLink ?>" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow"><?= $restartLink ?></a>. Have you already paid? Then you can ignore this link! The secretary will approve your membership after your payment has been verified.</p> </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </th>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-
                 <!-- New newsletter announcement -->
                 <tr>
                     <td>
@@ -343,7 +236,7 @@ Registration&nbsp;Confirmation&nbsp;GEWIS
                                         <tr>
                                             <td style="padding-left:0px; padding-top:20px; padding-bottom:0px; padding-right:0px; background-color: #FFFFFF;">
                                                 <div style="font-size: 11.5px; color: black; line-height: 1.2; font-style: italic; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
-                                                    <p>You received this email because you registered to become a member of GEWIS.</p>
+                                                    <p>You received this email because you have not yet paid the membership fee. This is a one-time mailing to ask you to do so.</p>
                                                 </div>
                                             </td>
                                         </tr>

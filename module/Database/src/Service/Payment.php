@@ -9,6 +9,7 @@ use Database\Mapper\CheckoutSession as CheckoutSessionMapper;
 use Database\Model\CheckoutSession as CheckoutSessionModel;
 use Database\Model\PaymentLink as PaymentLinkModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
+use Database\Service\Member as MemberService;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
@@ -32,6 +33,7 @@ class Payment
         private readonly Logger $logger,
         private readonly PaymentLinkMapper $paymentLinkMapper,
         private readonly CheckoutSessionMapper $checkoutSessionMapper,
+        private readonly MemberService $memberService,
         private readonly array $config,
     ) {
     }
@@ -259,7 +261,15 @@ class Payment
                 // (re)set the used state of the payment link to enable it.
                 $paymentLink?->setUsed(false);
 
-                // TODO: Send AT MOST 1 reminder to pay.
+                // Save changes before sending e-mail. This ensures we do not lose information if the e-mail fails.
+                $this->checkoutSessionMapper->persist($storedCheckoutSession);
+
+                // Send e-mail, as this event only happens once after 24 hours for the original Checkout Session, we do
+                // not have to keep track of if/when we may have already sent an e-mail in the past.
+                $this->memberService->sendRegistrationUpdateEmail(
+                    $storedCheckoutSession->getProspectiveMember(),
+                    'checkout-expired',
+                );
 
                 break;
             case 'checkout.session.completed':
@@ -285,6 +295,15 @@ class Payment
                 // A delayed payment has failed.
                 $storedCheckoutSession->setState(CheckoutSessionModel::FAILED);
                 $paymentLink?->setUsed(false);
+
+                // Save changes before sending e-mail. This ensures we do not lose information if the e-mail fails.
+                $this->checkoutSessionMapper->persist($storedCheckoutSession);
+
+                // Send e-mail.
+                $this->memberService->sendRegistrationUpdateEmail(
+                    $storedCheckoutSession->getProspectiveMember(),
+                    'checkout-failed',
+                );
 
                 break;
             default:
