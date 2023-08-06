@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-03 17:26+0200\n"
+"POT-Creation-Date: 2023-08-06 19:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tom Udding <tomudding@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -47,9 +47,6 @@ msgstr "API-gebruiker"
 msgid "API Tokens"
 msgstr "API-token"
 
-msgid "Aangemelde mailing lists"
-msgstr "Aangemelde mailinglijsten"
-
 msgid "Abbreviation"
 msgstr "Afkorting"
 
@@ -73,9 +70,6 @@ msgstr ""
 "onderstaande gegevens te controleren.<br/>\n"
 "Als je geen afgestudeerde wilt worden of blijven, hoef je niets te doen. Je "
 "afgestudeerde-status verloopt dan op de in de e-mail aangegeven datum."
-
-msgid "Achternaam"
-msgstr "Achternaam"
 
 msgid "Action"
 msgstr "Actie"
@@ -138,11 +132,11 @@ msgstr "Nieuwe gebruiker toevoegen"
 msgid "Additional information"
 msgstr "Meer informatie"
 
+msgid "Address"
+msgstr "Adres"
+
 msgid "Addresses"
 msgstr "Adressen"
-
-msgid "Adres"
-msgstr "Adres"
 
 msgid "Advisory Board"
 msgstr "RvA"
@@ -153,21 +147,6 @@ msgstr "Akkoordverklaring"
 msgid "All API permissions"
 msgstr "Alle API-rechten"
 
-msgid ""
-"Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
-"mededelingen\n"
-"en activiteiten van de studievereniging. Daarnaast zijn er verschillende\n"
-"optionele mailinglijsten.\n"
-"Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze\n"
-"inschrijvingen kunnen op een later tijdstip veranderd worden."
-msgstr ""
-"Als GEWIS-lid word je ingeschreven op de GEWIS-lijst. Deze is voor "
-"mededelingen\n"
-"en activiteiten van de studievereniging. Daarnaast zijn er verschillende\n"
-"optionele mailinglijsten.\n"
-"Voor de volgende mailinglijsten kun je je eventueel aanmelden. Deze\n"
-"inschrijvingen kunnen op een later tijdstip gewijzigd worden."
-
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
 
@@ -176,6 +155,23 @@ msgstr "Er is een fout opgetreden tijdens het afwijzen van de wijzigingen."
 
 msgid "An error occurred while trying to save the changes."
 msgstr "Er is een fout opgetreden tijdens het opslaan van de wijzigingen."
+
+msgid ""
+"An error occurred while we were trying to prepare the checkout page. Please "
+"try again later."
+msgstr ""
+"Er is een fout opgetreden terwijl we probeerden de afrekenpagina voor te "
+"bereiden. Probeer het later nog eens."
+
+msgid ""
+"An error occurred while we were trying to prepare the checkout page. We have "
+"received your registration and sent you an e-mail containing a link that "
+"allows you to restart the checkout process at a later time."
+msgstr ""
+"Er is een fout opgetreden terwijl we probeerden de afrekenpagina voor te "
+"bereiden. We hebben je registratie ontvangen en je een e-mail gestuurd met "
+"een link waarmee je het betalingsproces op een later tijdstip opnieuw kunt "
+"starten."
 
 msgid "Annul Decision"
 msgstr "Vernietig Besluit"
@@ -191,6 +187,10 @@ msgstr "Goedkeuren"
 
 msgid "Approve Membership"
 msgstr "Lidmaatschap goedkeuren"
+
+#, php-format
+msgid "Are you sure %s?"
+msgstr "Weet je het zeker %s?"
 
 msgid "Are you sure that you are younger than 10 years?"
 msgstr "Weet je zeker dat je jonger bent dan 10 jaar?"
@@ -221,6 +221,23 @@ msgid "Articles of Association, Internal Regulations and privacy statement"
 msgstr "Statuten, huishoudelijk reglement en privacystatement"
 
 msgid ""
+"Articles of Association, Internal Regulations, and Privacy Statement of GEWIS"
+msgstr "Statuten, Huishoudelijk Reglement en Privacystatement van GEWIS"
+
+msgid ""
+"As a GEWIS member, you will be automatically registered on the \"GEWIS-"
+"lijst\" list. This list is for announcements and activities of the study "
+"association. In addition, there are several optional mailing lists. You can "
+"subscribe to the following mailing lists. These subscriptions can be changed "
+"at a later date."
+msgstr ""
+"Als GEWIS-lid word je automatisch ingeschreven op de \"GEWIS-lijst\". Deze "
+"lijst is bedoeld voor aankondigingen en activiteiten van de "
+"studievereniging. Daarnaast zijn er verschillende optionele mailinglijsten. "
+"Je kunt je aanmelden voor de volgende mailinglijsten. Deze aanmeldingen "
+"kunnen later worden gewijzigd."
+
+msgid ""
 "As a graduate, you can choose to keep receiving the physical Supremum "
 "magazine."
 msgstr ""
@@ -241,12 +258,18 @@ msgstr "Auteur"
 msgid "Auto-subscription"
 msgstr "Automatische inschrijving"
 
+msgid "Awesome!"
+msgstr "Fantastisch!"
+
 msgid "BM (Board Meeting)"
 msgstr "BV (bestuursvergadering)"
 
 #, php-format
 msgid "Back to %s %d"
 msgstr "Terug naar %s %d"
+
+msgid "Before submitting the registration form, please review the"
+msgstr "Lees voordat je het registratieformulier verzendt de"
 
 msgid "Birthdate"
 msgstr "Geboortedatum"
@@ -271,6 +294,9 @@ msgstr "VV (voorzittersvergadering)"
 
 msgid "CSV"
 msgstr "CSV"
+
+msgid "Cancelled"
+msgstr "Afgebroken"
 
 msgid "Change"
 msgstr "Wijzig"
@@ -310,6 +336,9 @@ msgstr ""
 "Klik <a href=\"//%s\" target=\"_blank\">hier</a> om naar de website van Ada "
 "Alumni te gaan."
 
+msgid "Checkout Status"
+msgstr "Afrekenstatus"
+
 msgid "City"
 msgstr "Stad"
 
@@ -337,6 +366,12 @@ msgstr "Nieuwe API-gebruiker"
 msgid "Create user"
 msgstr "Maak nieuwe gebruiker aan"
 
+msgid "Created"
+msgstr "Aangemaakt"
+
+msgid "Created / Pending"
+msgstr "Aangemaakt / In behandeling"
+
 msgid "Current Data"
 msgstr "Huidige gegevens"
 
@@ -357,29 +392,6 @@ msgstr "Datum begroting/afrekening"
 
 msgid "Date of Expiration"
 msgstr "Afloopdatum"
-
-msgid ""
-"Dear prospective member,\n"
-"<br>\n"
-"We apologize for the inconvenience but we are currently performing "
-"maintenance on our enrollment form to make enrolling easier in the future. "
-"As a result, we are unable to accept new enrollments at this time. We expect "
-"the enrollment form to be available again before the introduction week of "
-"the TU/e. Please check back soon for updates on when exactly the enrollment "
-"form will be available again.\n"
-"<br>\n"
-"Thank you for your understanding."
-msgstr ""
-"Beste toekomstige leden,\n"
-"<br>\n"
-"Onze excuses voor het ongemak, maar we voeren momenteel onderhoud uit aan "
-"ons inschrijfformulier om het inschrijven in de toekomst makkelijker te "
-"maken. Als gevolg hiervan kunnen we op dit moment geen nieuwe inschrijvingen "
-"accepteren. We verwachten dat het inschrijfformulier voor de introductieweek "
-"van de TU/e weer beschikbaar zal zijn. Kom snel terug voor updates over "
-"wanneer het inschrijfformulier precies weer beschikbaar zal zijn.\n"
-"<br>\n"
-"Hartelijk dank voor jullie begrip."
 
 msgid "Decision"
 msgstr "Besluit"
@@ -424,13 +436,6 @@ msgstr "Gebruiker verwijderen"
 msgid "Description"
 msgstr "Beschrijving"
 
-msgid ""
-"Deze betaling zal middels een eenmalige SEPA-machtiging\n"
-"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
-msgstr ""
-"Deze betaling zal middels een eenmalige SEPA-machtiging\n"
-"verlopen aan GEWIS. De adresgegevens van GEWIS zijn als volgt:"
-
 msgid "Disapprove"
 msgstr "Afkeuren"
 
@@ -453,33 +458,6 @@ msgstr "Decharges"
 msgid "Do you want to delete the other data?"
 msgstr "Wil je de andere gegevens verwijderen?"
 
-msgid ""
-"Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
-"Informatica Studenten (GEWIS)\n"
-"toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een "
-"bedrag van &euro;15,-,\n"
-"geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn "
-"bank om eenmalig een bedrag van\n"
-"mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.\n"
-"<br/>\n"
-"Als u het niet eens bent met deze afschrijving kunt u deze laten "
-"terugboeken. Neem hiervoor binnen <b>acht\n"
-"weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de "
-"voorwaarden."
-msgstr ""
-"Door ondertekening van dit formulier geef ik (A) Gemeenschap van Wiskunde en "
-"Informatica Studenten (GEWIS)\n"
-"toestemming om eenmalig een incasso-opdracht te sturen naar mijn bank om een "
-"bedrag van &euro;15,-, \n"
-"geheten vijftien euro, van mijn rekening af te schrijven en (B) aan mijn "
-"bank om eenmalig een bedrag van \n"
-"mijn rekening af te schrijven overeenkomstig de opdracht van GEWIS.\n"
-"<br/>\n"
-"Als u het niet eens bent met deze afschrijving kunt u deze laten "
-"terugboeken. Neem hiervoor binnen <b>acht\n"
-"weken</b> na afschrijving contact op met uw bank. Vraag uw bank naar de "
-"voorwaarden."
-
 msgid "Dutch Description"
 msgstr "Nederlandse beschrijving"
 
@@ -501,6 +479,12 @@ msgstr "Uitvoeren"
 msgid "Expiration"
 msgstr "Afloopdatum"
 
+msgid "Expired"
+msgstr "Verlopen"
+
+msgid "Expired / Failed"
+msgstr "Verlopen / Mislukt"
+
 msgid "Export"
 msgstr "Exporteren"
 
@@ -519,6 +503,9 @@ msgstr "Extern"
 
 msgid "External - Specially admitted by the board"
 msgstr "Extern - Speciaal toegelaten door het bestuur"
+
+msgid "Failed"
+msgstr "Mislukt"
 
 msgid "File"
 msgstr "Bestand"
@@ -558,6 +545,9 @@ msgstr "Functie van"
 msgid "Functions"
 msgstr "Functies"
 
+msgid "GEWIS Registration - Checkout"
+msgstr "GEWIS Inschrijven - Afrekenen"
+
 #, php-format
 msgid ""
 "GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
@@ -576,9 +566,6 @@ msgstr "ALV-Commissie"
 
 msgid "GMM Taskforce"
 msgstr "ALV-Werkgroep"
-
-msgid "Gefeliciteerd! Je bent geregistreed als lid van Studievereniging GEWIS"
-msgstr "Gefeliciteerd! Je bent geregistreerd als lid van GEWIS"
 
 msgid "Gemeenschap van Wiskunde en Informatica Studenten"
 msgstr "Gemeenschap van Wiskunde en Informatica Studenten"
@@ -602,6 +589,9 @@ msgstr "Geef functie"
 msgid "Give Member Function"
 msgstr "Geef lid functie"
 
+msgid "Go to checkout"
+msgstr "Afrekenen"
+
 msgid "Graduate"
 msgstr "Afgestudeerde"
 
@@ -619,9 +609,6 @@ msgstr "Sleutelcode toekennen"
 
 msgid "Grantee"
 msgstr "Verkrijger"
-
-msgid "Handtekening"
-msgstr "Handtekening"
 
 msgid "Hide Member"
 msgstr "Lid verbergen"
@@ -654,11 +641,29 @@ msgstr ""
 "Ik ben bekend met de privacystatement van %s en ga akkoord met het verwerken "
 "van mijn data."
 
+msgid ""
+"I hereby authorise Stripe to process my personal data according to its "
+"privacy policy to pay the one-time membership fee."
+msgstr ""
+"Hierbij geef ik Stripe toestemming om mijn persoonlijke gegevens te "
+"verwerken in overeenstemming met haar privacybeleid om de eenmalige "
+"lidmaatschapsbijdrage te betalen."
+
+msgid ""
+"I hereby declare to have filled in the form truthfully and agree to be a "
+"member of Study Association GEWIS. I am familiar with the contents of the "
+"Articles of Association and Internal Regulations. I hereby give also "
+"Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) permission to "
+"process my personal data according to its Privacy Policy."
+msgstr ""
+"Hierbij verklaar ik het formulier naar waarheid te hebben ingevuld en ga ik "
+"ermee akkoord lid te zijn van Studievereniging GEWIS. Ik ben bekend met de "
+"inhoud van de Statuten en het Huishoudelijk Reglement. Hierbij geef ik ook "
+"Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) toestemming om "
+"mijn persoonlijke gegevens te verwerken volgens haar privacybeleid."
+
 msgid "I'd like to receive the Supremum magazine 3 times a year"
 msgstr "Ik ontvang graag de Supremum driemaal per jaar"
-
-msgid "IBAN"
-msgstr "IBAN"
 
 msgid ""
 "If you are currently studying at TU/e, please do <u>not</u> fill in this "
@@ -678,46 +683,19 @@ msgstr "Als je vragen hebt, neem gerust contact op met"
 msgid ""
 "If you started after 2016, your username is an 8-digit number starting with "
 "the year you started at the TU/e, for example %s0001. You have received this "
-"in an email when you enrolled. Go to <a href=\"%s\">this</a> page if you "
+"in an email when you enrolled. Go to <a href=\"%s\">this page</a> if you "
 "need help finding it. Your username will be used to verify you are studying "
 "at the department of M&CS."
 msgstr ""
 "Studeerde je voor het eerst na 2016? Dan is je gebruikersnaam een getal van "
 "8 cijfers waarvan de eerste 4 het jaar zijn waarin je begon met studeren, "
 "bijvoorbeeld %s0001. Je hebt je gebruikersnaam ontvangen in een e-mail toen "
-"je je ingeschreven hebt aan de TU/e. Op <a href=\"%s\">deze</a> pagina staat "
+"je je ingeschreven hebt aan de TU/e. Op <a href=\"%s\">deze pagina</a> staat "
 "hoe je je gebruikersnaam kunt vinden. We gebruiken je gebruikersnaam om te "
 "verifi�ren dat je aan de faculteit van M&CS studeert."
 
-msgid ""
-"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
-"en\n"
-"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de "
-"inhoud van de statuten\n"
-"en het HR.\n"
-"<br/>\n"
-"Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
-"toestemming tot het\n"
-"verwerken van mijn persoonsgegevens volgens haar privacybeleid."
-msgstr ""
-"Ik verklaar hierbij het formulier geheel naar waarheid te hebben ingevuld, "
-"en\n"
-"ga akkoord met lidmaatschap van Studievereniging GEWIS. Ik ben bekend met de "
-"inhoud van de statuten\n"
-"en het HR.\n"
-"<br/>\n"
-"Ik geef hierbij Gemeenschap van Wiskunde en Informatica Studenten (GEWIS) "
-"toestemming tot het\n"
-"verwerken van mijn persoonsgegevens volgens haar privacybeleid."
-
-msgid "Incassant-ID"
-msgstr "Incassant-ID"
-
 msgid "Initial(s)"
 msgstr "Initialen"
-
-msgid "Inschrijving"
-msgstr "Inschrijving"
 
 msgid "Install Board Member"
 msgstr "Bestuurder installeren"
@@ -730,16 +708,6 @@ msgstr "Installatie/Decharge"
 
 msgid "Installations"
 msgstr "Installaties"
-
-msgid ""
-"Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
-"moderne browser, zoals Firefox."
-msgstr ""
-"Je internetbrowser ondersteunt geen digitale handtekeningen. Gebruik een "
-"moderne browser, zoals Firefox."
-
-msgid "Kenmerk van de machtiging"
-msgstr "Kenmerk van de machtiging"
 
 msgid "Key"
 msgstr "Sleutel"
@@ -768,9 +736,6 @@ msgstr ""
 
 msgid "Key code cannot be withdrawn in the past."
 msgstr "Sleutelcode kan in het verleden niet worden ingetrokken."
-
-msgid "Land"
-msgstr "Land"
 
 msgid "Language Settings"
 msgstr "Taalinstellingen"
@@ -804,9 +769,6 @@ msgstr "Mailinglijsten"
 
 msgid "Mailing list deleted."
 msgstr "Mailinglijst verwijderd."
-
-msgid "Mailinglijsten"
-msgstr "Mailinglijsten"
 
 #, php-format
 msgid "Make %s inactive?"
@@ -858,6 +820,9 @@ msgstr "Lidmaatschap van commissies en disputen"
 msgid "Message"
 msgstr "Bericht"
 
+msgid "Mistake?"
+msgstr "Foutje?"
+
 msgid "Modifications"
 msgstr "Wijzigingen"
 
@@ -867,17 +832,14 @@ msgstr "Mutaties"
 msgid "N/A"
 msgstr "n.v.t."
 
-msgid "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
-msgstr "Na betaling van je lidmaatschapsgeld ben je GEWIS-lid!"
-
-msgid "Naam"
-msgstr "Naam"
-
 msgid "Name"
 msgstr "Naam"
 
 msgid "No"
 msgstr "Nee"
+
+msgid "No Checkout Sessions on record."
+msgstr "Er zijn geen afrekensessies geregistreerd."
 
 msgid "No Exception available"
 msgstr "Geen exceptie beschikbaar"
@@ -885,8 +847,8 @@ msgstr "Geen exceptie beschikbaar"
 msgid "No data returned."
 msgstr "Geen gegevens ontvangen."
 
-msgid "No signature or IBAN provided."
-msgstr "Geen handtekening of IBAN verstrekt."
+msgid "No mailing list subscriptions."
+msgstr "Geen aanmeldingen voor mailinglijsten."
 
 msgid ""
 "Note: if you updated your email address, you have to sign in to the GEWIS "
@@ -895,11 +857,11 @@ msgstr ""
 "Let op: als je je emailadres hebt aangepast, moet je na het verwerken van "
 "deze wijziging met je nieuwe emailadres inloggen op de GEWIS-website."
 
+msgid "Oh snap!"
+msgstr "Oh nee!"
+
 msgid "On Form"
 msgstr "Op inschrijfformulier"
-
-msgid "Onbekend"
-msgstr "Onbekend"
 
 msgid "Ordinary"
 msgstr "Gewoon"
@@ -920,8 +882,21 @@ msgid ""
 "PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
 msgstr "PS: Wist je dat de faculteit W&amp;I een alumni-stichting heeft?"
 
+msgid "Paid"
+msgstr "Betaald"
+
 msgid "Paid (Amount)"
 msgstr "Betaald (bedrag)"
+
+msgid ""
+"Payment of the one-time membership fee is handled by Stripe, please review "
+"the"
+msgstr ""
+"De betaling van de eenmalige lidmaatschapsbijdrage wordt afgehandeld door "
+"Stripe, lees het"
+
+msgid "Pending"
+msgstr "In behandeling"
 
 msgid "Pending member updates"
 msgstr "Openstaande updates persoonsgegevens"
@@ -934,18 +909,6 @@ msgstr "Persoonlijke informatie"
 
 msgid "Phone Number"
 msgstr "Telefoonnummer"
-
-msgid "Plaats"
-msgstr "Plaats"
-
-msgid "Plaats en datum van ondertekening"
-msgstr "Plaats en datum van ondertekening"
-
-msgid "Place of Signing"
-msgstr "Plaats van ondertekening"
-
-msgid "Please accept the conditions for payment through SEPA Direct Debit"
-msgstr "Accepteer de voorwaarden voor betaling middels automatische incasso"
 
 msgid ""
 "Please note that if you create a mailing list here, it must also exist in "
@@ -963,11 +926,11 @@ msgstr "Postcode"
 msgid "Postal Region"
 msgstr "Postregio"
 
-msgid "Postcode"
-msgstr "Postcode"
-
 msgid "Previous exceptions"
 msgstr "Previous exceptions"
+
+msgid "Privacy Policy of Stripe"
+msgstr "Privacybeleid van Stripe"
 
 msgid "Proposed Data"
 msgstr "Voorgestelde gegevens"
@@ -989,6 +952,9 @@ msgstr "Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
 
 msgid "Register Member"
 msgstr "Lid inschrijven"
+
+msgid "Registration"
+msgstr "Inschrijven"
 
 msgid "Reject Update"
 msgstr "Update afwijzen"
@@ -1014,11 +980,8 @@ msgstr "Verlenging"
 msgid "Result"
 msgstr "Resultaat"
 
-msgid "SEPA Direct Debit"
-msgstr "SEPA-incasso"
-
-msgid "SEPA-machtiging"
-msgstr "SEPA-machtiging"
+msgid "Return to registration form"
+msgstr "Terug naar inschrijfformulier"
 
 msgid "Save"
 msgstr "Opslaan"
@@ -1050,12 +1013,6 @@ msgstr "Selecteer een studie"
 msgid "Settings"
 msgstr "Instellingen"
 
-msgid "Signature SEPA Direct Debit"
-msgstr "Handtekening SEPA automatische incasso"
-
-msgid "Signature is required!"
-msgstr "Handtekening is vereist!"
-
 msgid ""
 "Some of the entered information appears to be missing or incorrect. Please "
 "check your data and submit again."
@@ -1069,11 +1026,11 @@ msgstr "Stack trace"
 msgid "Statement"
 msgstr "Afrekening"
 
+msgid "Status"
+msgstr "Status"
+
 msgid "Stored Queries"
 msgstr "Opgeslagen query's"
-
-msgid "Straat en huisnummer"
-msgstr "Straat en huisnummer"
 
 msgid "Street"
 msgstr "Straat"
@@ -1106,14 +1063,12 @@ msgstr "TU/e gegevens opzoeken"
 msgid "TU/e data: %s"
 msgstr "TU/e data: %s"
 
-msgid "TU/e-gebruikersnaam"
-msgstr "TU/e-gebruikersnaam"
-
 msgid "TU/e-username"
 msgstr "TU/e-gebruikersnaam"
 
-msgid "Telefoonnummer"
-msgstr "Telefoonnummer"
+#, php-format
+msgid "Thank you %s!"
+msgstr "Bedankt %s!"
 
 msgid "The changes have been applied!"
 msgstr "De wijzigingen zijn toegepast!"
@@ -1200,20 +1155,32 @@ msgid "This member is not installed in an organ."
 msgstr "Dit lid is niet lid van een orgaan."
 
 msgid ""
+"This payment link could not be found. Perhaps it has been used before or has "
+"expired."
+msgstr ""
+"Deze betaallink kon niet worden gevonden. Misschien is deze al eerder "
+"gebruikt of is deze verlopen."
+
+msgid "This prospective member cannot be approved."
+msgstr "Dit toekomstig lid kan niet worden goedgekeurd."
+
+msgid ""
 "This renewal link could not be found. Perhaps it has been used before or has "
 "expired."
 msgstr ""
 "Deze verlengingslink kon niet gevonden worden. Wellicht is deze eerder "
 "gebruikt of reeds verlopen."
 
+msgid "To pay the membership fee you must accept Stripe's privacy policy."
+msgstr ""
+"Om de lidmaatschapsbijdrage te betalen, moet je het privacybeleid van Stripe "
+"accepteren."
+
 msgid "Toggle Navigation"
 msgstr "Klap navigatie in/uit"
 
 msgid "Token"
 msgstr "Token"
-
-msgid "Tussenvoegsels"
-msgstr "Tussenvoegsels"
 
 msgid "Type"
 msgstr "Type"
@@ -1252,9 +1219,6 @@ msgstr "Waarde"
 msgid "Version"
 msgstr "Versie"
 
-msgid "Verwijder handtekening"
-msgstr "Verwijder handtekening"
-
 msgid "View"
 msgstr "Toon"
 
@@ -1263,19 +1227,6 @@ msgstr "Update-aanvragen bekijken"
 
 msgid "Virt (Virtual Meeting)"
 msgstr "Virt (virtuele vergadering)"
-
-msgid ""
-"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
-"nodig. Deze kan je hieronder in het vakje tekenen."
-msgstr ""
-"Voor de automatische eenmalige SEPA-machtiging hebben we je handtekening "
-"nodig. Deze kan je hieronder in het vakje tekenen."
-
-msgid "Voorletters"
-msgstr "Voorletters"
-
-msgid "Voornaam"
-msgstr "Voornaam"
 
 msgid "Wants to Receive Supremum"
 msgstr "Wil Supremum ontvangen"
@@ -1287,21 +1238,49 @@ msgstr ""
 "Waarschuwing: het e-mailadres van het lid wordt bijgewerkt! Dit vereist "
 "extra wijzigingen in alle mailinglijsten waaraan het lid is toegevoegd."
 
+#, php-format
+msgid ""
+"Was it not your intention to close the payment page? Then do not worry, <a "
+"href=\"%s\">click here</a> to go back. Do you not want to become a member of "
+"GEWIS after all? Let us know and we will delete your details."
+msgstr ""
+"Was het niet je bedoeling om de betaalpagina te sluiten? Maak je dan geen "
+"zorgen, <a href=\"%s\">klik hier</a> om terug te gaan. Wil je toch geen lid "
+"worden van GEWIS? Laat het ons weten en we verwijderen jouw gegevens."
+
+msgid ""
+"Was it not your intention to close the payment page? Then do not worry, we "
+"have sent you an e-mail containing a link that allows you to go to the "
+"payment page again. Do you not want to become a member of GEWIS after all? "
+"Let us know and we will delete your details."
+msgstr ""
+"Was het niet je bedoeling om de betaalpagina te sluiten? Geen zorgen, we "
+"hebben je een e-mail gestuurd met een link waarmee je opnieuw naar de "
+"betaalpagina kunt gaan. Wil je toch geen lid worden van GEWIS? Laat het ons "
+"weten en we verwijderen jouw gegevens."
+
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr ""
 "We kunnen op dit moment niet achterhalen waarom de pagina niet kon worden "
 "gevonden."
 
 msgid ""
-"Welkom! Met dit formulier kun je je inschrijven voor een\n"
-"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
-"kost\n"
-"eenmalig 15 euro."
+"We have received your registration, once your payment is verified the "
+"secretary will approve your membership. We will let you know via e-mail when "
+"this happens."
 msgstr ""
-"Welkom! Met dit formulier kun je je inschrijven voor een\n"
-"lidmaatschap van GEWIS. Het lidmaatschap is geldig zo lang je studeert en "
-"kost\n"
-"eenmalig 15 euro."
+"We hebben je aanmelding ontvangen, zodra je betaling is geverifieerd zal de "
+"secretaris je lidmaatschap goedkeuren. We laten je via e-mail weten wanneer "
+"dit is gebeurd."
+
+msgid ""
+"Welcome! With this form you can register for a membership of GEWIS. Becoming "
+"a member of the assocations costs a one-time fee of 15 euros and your "
+"membership is valid as long as you study."
+msgstr ""
+"Welkom! Met dit formulier kun je je aanmelden voor een lidmaatschap van "
+"GEWIS. Lid worden van de vereniging kost eenmalig 15 euro en je lidmaatschap "
+"is geldig zolang je studeert."
 
 msgid "With Modifications"
 msgstr "Met wijzigingen"
@@ -1314,9 +1293,6 @@ msgstr "Sleutelcode intrekken"
 
 msgid "Without Modifications"
 msgstr "Zonder wijzigingen"
-
-msgid "Woonplaats en Postcode"
-msgstr "Woonplaats en postcode"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1335,25 +1311,18 @@ msgstr ""
 msgid "You can always read the online Supremum on %s."
 msgstr "Je kunt altijd de Supremum online lezen op %s."
 
-#, php-format
 msgid ""
-"You can pay for your GEWIS membership using a SEPA direct debit.\n"
-"This means that GEWIS will debit &euro;15,- from your bank account. You only "
-"have to pay once for\n"
-"the entire duration of your studies. Please make sure your bank accepts SEPA "
-"Direct Debits.\n"
-"Note that if your bank account is not in Euros, a conversion to Euros takes "
-"place at your bank.\n"
-"Contact %s for any questions about your payment."
+"You cannot become a member of the association without agreeing to the terms."
 msgstr ""
-"Je kunt de contributie voor je GEWIS-lidmaatschap betalen middels een "
-"automatische incasso (SEPA-incasso)\n"
-"DIt betekent dat GEWIS je bank vraagt &euro;15,- van je rekening te "
-"debiteren. Je betaalt een keer voor de gehele\n"
-"duur van je studie. Je bank moet SEPA Direct Debit ondersteunen.\n"
-"Als je bankrekening niet in euros is, zal het bedrag omgezet worden naar "
-"euros door jouw bank.\n"
-"Bij vragen kun je contact opnemen met %s."
+"Je kunt geen lid worden van de vereniging zonder akkoord te gaan met de "
+"voorwaarden."
+
+msgid ""
+"You cannot use your student e-mail address because if you stop studying, we "
+"can no longer reach you about important announcements."
+msgstr ""
+"Je kunt je studentenmailadres niet gebruiken, want als je stopt met "
+"studeren, kunnen we je niet meer bereiken over belangrijke mededelingen."
 
 #, php-format
 msgid ""
@@ -1368,9 +1337,6 @@ msgstr ""
 msgid "You have successfully requested renewal of your status as graduate."
 msgstr ""
 "Je hebt succesvol verlenging van je status als afgestudeerde aangevraagd."
-
-msgid "You have to accept the terms!"
-msgstr "Je moet de voorwaarden accepteren!"
 
 msgid ""
 "You have to agree to the Articles of Association and the Internal Regulations"
