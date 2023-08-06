@@ -24,6 +24,7 @@ use Stripe\Webhook;
 use UnexpectedValueException;
 
 use function intval;
+use function sprintf;
 
 class Payment
 {
@@ -230,6 +231,20 @@ class Payment
             if (null === $originalCheckoutSession) {
                 // The original Checkout Session does not exist, the only logical explanation is that the prospective
                 // member is removed.
+                return;
+            }
+
+            // Check if we have previously recovered from the original Checkout Session.
+            $recoveredBy = $this->checkoutSessionMapper->findRecoveredBy($originalCheckoutSession);
+
+            if (null !== $recoveredBy) {
+                // We have previously recovered and this is a new Checkout Session. This should not be possible.
+                $this->logger->error(sprintf(
+                    'Trying to recover Checkout Session % for the second time through %s.',
+                    $originalCheckoutSession->getCheckoutId(),
+                    $session->id,
+                ));
+
                 return;
             }
 

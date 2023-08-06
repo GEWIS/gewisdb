@@ -17,8 +17,8 @@ class CheckoutSession
 
     public function findById(string $id): ?CheckoutSessionModel
     {
-        $qb = $this->getRepository()->createQueryBuilder('p');
-        $qb->where('p.checkoutId = :id');
+        $qb = $this->getRepository()->createQueryBuilder('cs');
+        $qb->where('cs.checkoutId = :id');
 
         $qb->setParameter('id', $id);
 
@@ -27,12 +27,22 @@ class CheckoutSession
 
     public function findLatest(ProspectiveMemberModel $prospectiveMember): ?CheckoutSessionModel
     {
-        $qb = $this->getRepository()->createQueryBuilder('p');
-        $qb->where('p.prospectiveMember = :prospectiveMember')
+        $qb = $this->getRepository()->createQueryBuilder('cs');
+        $qb->where('cs.prospectiveMember = :prospectiveMember')
             ->setMaxResults(1)
-            ->orderBy('p.id', 'DESC');
+            ->orderBy('cs.id', 'DESC');
 
         $qb->setParameter('prospectiveMember', $prospectiveMember);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findRecoveredBy(CheckoutSessionModel $checkoutSession): ?CheckoutSessionModel
+    {
+        $qb = $this->getRepository()->createQueryBuilder('cs');
+        $qb->where('cs.recoveredFrom = :checkoutSession');
+
+        $qb->setParameter('checkoutSession', $checkoutSession);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
