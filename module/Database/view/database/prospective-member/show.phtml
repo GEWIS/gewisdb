@@ -12,6 +12,7 @@ use Laminas\View\Renderer\PhpRenderer;
 /**
  * @var PhpRenderer|HelperTrait $this
  * @var ProspectiveMemberModel $member
+ * @var bool $canDelete
  * @var TueDataModel $tueData
  * @var array<array-key, array{0: string, 1: string}> $tueStatus
  */
@@ -249,14 +250,16 @@ use Laminas\View\Renderer\PhpRenderer;
             $submit->setAttribute('class', 'btn btn-success');
             ?>
             <?= $this->formButton($submit) ?>
+        <?php else: ?>
+            <p>
+                <?= $this->translate('This prospective member cannot be approved.') ?>
+            </p>
+        <?php endif; ?>
+        <?php if ($canDelete): ?>
             <a href="<?= $this->url('prospective-member/show/delete', array(
                 'id' => $member->getLidnr()
             )) ?>" class="btn btn-danger"><?= $this->translate('Delete Prospective Member') ?></a>
             <?= $this->form()->closeTag() ?>
-        <?php else: ?>
-            <p>
-                <?= $this->translate('This prospective member cannot be approved or deleted due to a pending transaction.') ?>
-            </p>
         <?php endif; ?>
     </div>
 </div>

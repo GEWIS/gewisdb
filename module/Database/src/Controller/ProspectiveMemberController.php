@@ -77,7 +77,10 @@ class ProspectiveMemberController extends AbstractActionController
                 return $this->redirect()->toRoute('prospective-member');
             }
 
-            if (!$prospectiveMember->isCheckoutPending()) {
+            if (
+                !$prospectiveMember->isCheckoutPending()
+                && !$prospectiveMember->hasCheckoutExpiredOrFailed()
+            ) {
                 $result = $this->memberService->finalizeSubscription(
                     $this->getRequest()->getPost()->toArray(),
                     $prospectiveMember,
@@ -110,7 +113,13 @@ class ProspectiveMemberController extends AbstractActionController
         $member = $this->memberService->getProspectiveMember($lidnr);
         $member = $member['member'];
 
-        if (null !== $member) {
+        if (
+            null !== $member
+            && (
+                !$member->isCheckoutPending()
+                || $member->hasCheckoutExpiredOrFailed()
+            )
+        ) {
             $this->memberService->removeProspective($member);
         }
 

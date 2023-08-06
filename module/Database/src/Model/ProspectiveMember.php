@@ -530,7 +530,7 @@ class ProspectiveMember
     }
 
     /**
-     * Determine whether the prospective member does not have a `created` or `pending` checkout session. This is used to
+     * Determine whether the prospective member does not have a `created` or `pending` Checkout Session. This is used to
      * check whether a prospective member can be safely deleted.
      */
     public function isCheckoutPending(): bool
@@ -551,6 +551,25 @@ class ProspectiveMember
 
         return CheckoutSessionStates::Created === $lastState
             || CheckoutSessionStates::Pending === $lastState;
+    }
+
+    /**
+     * Determine whether the prospective member has an `expired` or `failed` Checkout Session. This is used to check
+     * whether a prospective member can be approved.
+     */
+    public function hasCheckoutExpiredOrFailed(): bool
+    {
+        /** @var CheckoutSession|false $lastCheckoutSession */
+        $lastCheckoutSession = $this->checkoutSessions->last();
+
+        if (false === $lastCheckoutSession) {
+            return false;
+        }
+
+        $lastState = $lastCheckoutSession->getState();
+
+        return CheckoutSessionStates::Expired === $lastState
+            || CheckoutSessionStates::Failed === $lastState;
     }
 
     /**

@@ -357,6 +357,9 @@ class Member
         // Add authentication key to allow external updates.
         $member->setAuthenticationKey($this->generateAuthenticationKey());
 
+        // Set paid automatically.
+        $member->setPaid(15);
+
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
 
@@ -388,6 +391,7 @@ class Member
      * @return array{
      *     member: ?ProspectiveMemberModel,
      *     form: ?MemberApproveForm,
+     *     canDelete: ?bool,
      *     tueData: TueData,
      *     tueStatus: array<array-key, array{0: string, 1: string}>,
      * }
@@ -400,6 +404,7 @@ class Member
             return [
                 'member' => null,
                 'form' => null,
+                'canDelete' => null,
                 'tueData' => null,
                 'tueStatus' => null,
             ];
@@ -457,9 +462,18 @@ class Member
             ];
         }
 
+        $form = null;
+        if (
+            !$member->isCheckoutPending()
+            && !$member->hasCheckoutExpiredOrFailed()
+        ) {
+            $form = $this->memberApproveForm;
+        }
+
         return [
             'member' => $member,
-            'form' => $member->isCheckoutPending() ? null : $this->memberApproveForm,
+            'form' => $form,
+            'canDelete' => !$member->isCheckoutPending() || $member->hasCheckoutExpiredOrFailed(),
             'tueData' => $tueData,
             'tueStatus' => $tueStatus,
         ];
