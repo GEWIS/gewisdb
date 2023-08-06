@@ -168,6 +168,8 @@ class ProspectiveMember
     #[OneToMany(
         targetEntity: CheckoutSession::class,
         mappedBy: 'prospectiveMember',
+        orphanRemoval: true,
+        cascade: ['remove'],
     )]
     protected Collection $checkoutSessions;
 
