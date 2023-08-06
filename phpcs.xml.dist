@@ -46,6 +46,7 @@
         <exclude-pattern>module/Checker/src/Service/Factory/OrganFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/RenewalFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredProspectiveMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ApiControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ExportControllerFactory.php</exclude-pattern>
@@ -119,6 +120,7 @@
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTueCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTypeCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/DeleteExpiredProspectiveMembersCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/GenerateAuthenticationKeysCommand.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/GenerateFullCommand.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/GeneratePartialCommand.php</exclude-pattern>

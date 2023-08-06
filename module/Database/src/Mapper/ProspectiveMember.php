@@ -7,6 +7,8 @@ namespace Database\Mapper;
 use Database\Model\CheckoutSession as CheckoutSessionModel;
 use Database\Model\Enums\CheckoutSessionStates;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
+use DateInterval;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -120,6 +122,41 @@ class ProspectiveMember
         $qb->setParameter(':lidnr', $lidnr);
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * Find all prospective members whose last Checkout Session has fully expired ((1 + 30) + 1 day ago) or failed 31
+     * days ago.
+     *
+     * @return ProspectiveMemberModel[]
+     */
+    public function findWithFullyExpiredOrFailedCheckout(): array
+    {
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->leftJoin(CheckoutSessionModel::class, 'cs', Join::WITH, 'cs.prospectiveMember = m.lidnr');
+
+        $qbc = $this->em->createQueryBuilder();
+        $qbc->select('MAX(css.id)')
+            ->from(CheckoutSessionModel::class, 'css')
+            ->where('css.prospectiveMember = m.lidnr');
+        $qb->where($qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('cs.state', ':expired'),
+                    $qb->expr()->lt('cs.expiration', ':fullyExpired'),
+                ),
+                $qb->expr()->andX(
+                    $qb->expr()->eq('cs.state', ':failed'),
+                    $qb->expr()->lt('cs.expiration', ':fullyFailed'),
+                ),
+            ));
+
+        $qb->setParameter('expired', CheckoutSessionStates::Expired)
+            ->setParameter('failed', CheckoutSessionStates::Failed)
+            ->setParameter('fullyExpired', (new DateTime())->sub(new DateInterval('P1D')))
+            ->setParameter('fullyFailed', (new DateTime())->sub(new DateInterval('P31D')));
+
+        return $qb->getQuery()->getResult();
     }
 
     /**

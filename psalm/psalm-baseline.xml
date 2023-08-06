@@ -53,6 +53,12 @@
       <code>$defaultName</code>
     </NonInvariantDocblockPropertyType>
   </file>
+  <file src="module/Database/src/Command/DeleteExpiredProspectiveMembersCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
   <file src="module/Database/src/Command/GenerateAuthenticationKeysCommand.php">
     <NonInvariantDocblockPropertyType occurrences="2">
       <code>$defaultDescription</code>

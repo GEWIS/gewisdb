@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database;
 
 use Database\Command\DeleteExpiredMembersCommand;
+use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Controller\ApiController;
 use Database\Controller\ExportController;
@@ -703,6 +704,7 @@ return [
         'commands' => [
             'database:members:delete-expired' => DeleteExpiredMembersCommand::class,
             'database:members:generate-keys' => GenerateAuthenticationKeysCommand::class,
+            'database:prospective-members:delete-expired' => DeleteExpiredProspectiveMembersCommand::class,
         ],
     ],
     'doctrine' => [

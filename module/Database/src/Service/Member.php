@@ -566,11 +566,24 @@ class Member
     }
 
     /**
-     * Remove a member.
+     * Remove a prospective member.
      */
     public function removeProspective(ProspectiveMemberModel $member): void
     {
         $this->getProspectiveMemberMapper()->remove($member);
+    }
+
+    /**
+     * Remove all prospective members whose last Checkout Session has fully expired (1 + 30 + 1 day ago) or failed 31
+     * days ago.
+     */
+    public function removeExpiredProspectiveMembers(): void
+    {
+        $prospectiveMembers = $this->getProspectiveMemberMapper()->findWithFullyExpiredOrFailedCheckout();
+
+        foreach ($prospectiveMembers as $prospectiveMember) {
+            $this->removeProspective($prospectiveMember);
+        }
     }
 
     /**

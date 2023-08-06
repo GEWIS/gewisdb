@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Database;
 
 use Database\Command\DeleteExpiredMembersCommand;
+use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\Factory\DeleteExpiredMembersCommandFactory;
+use Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory;
 use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Form\Abolish as AbolishForm;
@@ -137,6 +139,7 @@ class Module
             ],
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
+                DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
