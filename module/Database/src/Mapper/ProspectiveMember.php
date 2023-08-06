@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Database\Model\CheckoutSession as CheckoutSessionModel;
+use Database\Model\Enums\CheckoutSessionStates;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -78,15 +79,15 @@ class ProspectiveMember
 
         if ('paid' === $type) {
             $qb->andWhere('cs.state = :paid')
-                ->setParameter('paid', CheckoutSessionModel::PAID);
+                ->setParameter('paid', CheckoutSessionStates::Paid);
         } elseif ('failed' === $type) {
             $qb->andWhere('cs.state = :expired OR cs.state = :failed')
-                ->setParameter('expired', CheckoutSessionModel::EXPIRED)
-                ->setParameter('failed', CheckoutSessionModel::FAILED);
+                ->setParameter('expired', CheckoutSessionStates::Expired)
+                ->setParameter('failed', CheckoutSessionStates::Failed);
         } else {
             $qb->andWhere('cs.state = :created OR cs.state = :pending')
-                ->setParameter('created', CheckoutSessionModel::CREATED)
-                ->setParameter('pending', CheckoutSessionModel::PENDING);
+                ->setParameter('created', CheckoutSessionStates::Created)
+                ->setParameter('pending', CheckoutSessionStates::Pending);
         }
 
         return $qb->getQuery()->getResult();

@@ -77,20 +77,22 @@ class ProspectiveMemberController extends AbstractActionController
                 return $this->redirect()->toRoute('prospective-member');
             }
 
-            $result = $this->memberService->finalizeSubscription(
-                $this->getRequest()->getPost()->toArray(),
-                $prospectiveMember,
-            );
-
-            if (null !== $result) {
-                $this->memberService->sendRegistrationUpdateEmail(
-                    $result,
-                    'welcome',
+            if (!$prospectiveMember->isCheckoutPending()) {
+                $result = $this->memberService->finalizeSubscription(
+                    $this->getRequest()->getPost()->toArray(),
+                    $prospectiveMember,
                 );
 
-                return $this->redirect()->toRoute('member/show', [
-                    'id' => $result->getLidnr(),
-                ]);
+                if (null !== $result) {
+                    $this->memberService->sendRegistrationUpdateEmail(
+                        $result,
+                        'welcome',
+                    );
+
+                    return $this->redirect()->toRoute('member/show', [
+                        'id' => $result->getLidnr(),
+                    ]);
+                }
             }
         }
 

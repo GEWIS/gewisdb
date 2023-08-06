@@ -6,6 +6,7 @@ namespace Database\Model;
 
 use Application\Model\Enums\AddressTypes;
 use Application\Model\Enums\PostalRegions;
+use Database\Model\Enums\CheckoutSessionStates;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -519,6 +520,14 @@ class ProspectiveMember
     }
 
     /**
+     * @return Collection<array-key, CheckoutSession>
+     */
+    public function getCheckoutSessions(): Collection
+    {
+        return $this->checkoutSessions;
+    }
+
+    /**
      * Determine whether the prospective member does not have a `created` or `pending` checkout session. This is used to
      * check whether a prospective member can be safely deleted.
      */
@@ -533,13 +542,13 @@ class ProspectiveMember
 
         $lastState = $lastCheckoutSession->getState();
 
-        if (CheckoutSession::EXPIRED === $lastState) {
+        if (CheckoutSessionStates::Expired === $lastState) {
             // Checkout Session can still be recovered (thus we are still pending).
             return (new DateTime()) < $lastCheckoutSession->getExpiration();
         }
 
-        return CheckoutSession::CREATED === $lastState
-            || CheckoutSession::PENDING === $lastState;
+        return CheckoutSessionStates::Created === $lastState
+            || CheckoutSessionStates::Pending === $lastState;
     }
 
     /**

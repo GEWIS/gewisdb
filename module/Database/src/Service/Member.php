@@ -385,9 +385,12 @@ class Member
     /**
      * Get prospective member info
      *
-     * @return array member, form, tuedata
-     *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+     * @return array{
+     *     member: ?ProspectiveMemberModel,
+     *     form: ?MemberApproveForm,
+     *     tueData: TueData,
+     *     tueStatus: array<array-key, array{0: string, 1: string}>,
+     * }
      */
     public function getProspectiveMember(int $id): array
     {

@@ -7,6 +7,7 @@ namespace Database\Service;
 use Database\Mapper\ActionLink as PaymentLinkMapper;
 use Database\Mapper\CheckoutSession as CheckoutSessionMapper;
 use Database\Model\CheckoutSession as CheckoutSessionModel;
+use Database\Model\Enums\CheckoutSessionStates;
 use Database\Model\PaymentLink as PaymentLinkModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\Member as MemberService;
@@ -61,6 +62,10 @@ class Payment
         $checkoutSession = new CheckoutSessionModel();
         $checkoutSession->setProspectiveMember($prospectiveMember);
         $checkoutSession->setCheckoutId($session->id);
+        $checkoutSession->setCreated(DateTime::createFromFormat(
+            'U',
+            (string) $session->created,
+        )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
         $checkoutSession->setExpiration(DateTime::createFromFormat(
             'U',
             (string) $session->expires_at,
@@ -106,20 +111,20 @@ class Payment
 
         // We have at least one known Checkout Session on file.
         if (
-            CheckoutSessionModel::PAID === $lastCheckoutStub->getState()
-            || CheckoutSessionModel::PENDING === $lastCheckoutStub->getState()
+            CheckoutSessionStates::Paid === $lastCheckoutStub->getState()
+            || CheckoutSessionStates::Pending === $lastCheckoutStub->getState()
         ) {
             // Checkout Session is finalised or will be after payment processing. Do not allow the prospective member to
             // do something else.
             return null;
         }
 
-        if (CheckoutSessionModel::FAILED === $lastCheckoutStub->getState()) {
+        if (CheckoutSessionStates::Failed === $lastCheckoutStub->getState()) {
             // Last payment failed, so we need to create a new Checkout Session for the user to be able to try again.
             return $this->getCheckoutLink($prospectiveMember);
         }
 
-        if (CheckoutSessionModel::EXPIRED === $lastCheckoutStub->getState()) {
+        if (CheckoutSessionStates::Expired === $lastCheckoutStub->getState()) {
             // The Checkout Session has already been abandoned.
 
             if ((new DateTime())->add(new DateInterval('PT5M')) >= $lastCheckoutStub->getExpiration()) {
@@ -233,6 +238,10 @@ class Payment
             $storedCheckoutSession = new CheckoutSessionModel();
             $storedCheckoutSession->setProspectiveMember($originalCheckoutSession->getProspectiveMember());
             $storedCheckoutSession->setCheckoutId($session->id);
+            $storedCheckoutSession->setCreated(DateTime::createFromFormat(
+                'U',
+                (string) $session->created,
+            )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
             $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
                 'U',
                 (string) $session->expires_at,
@@ -251,7 +260,7 @@ class Payment
             case 'checkout.session.expired':
                 // The prospective member did not complete the checkout within 24 hours. We mark the stored checkout
                 // session as expired.
-                $storedCheckoutSession->setState(CheckoutSessionModel::EXPIRED);
+                $storedCheckoutSession->setState(CheckoutSessionStates::Expired);
                 // Recovery URL is valid for 30 days.
                 $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
                     'U',
@@ -276,9 +285,9 @@ class Payment
                 // The prospective member has completed the checkout but the payment may be delayed. If the payment is
                 // not delayed we directly mark the stored checkout session as 'PAID', otherwise it will be 'PENDING'.
                 if ('paid' === $session->payment_status) {
-                    $storedCheckoutSession->setState(CheckoutSessionModel::PAID);
+                    $storedCheckoutSession->setState(CheckoutSessionStates::Paid);
                 } else {
-                    $storedCheckoutSession->setState(CheckoutSessionModel::PENDING);
+                    $storedCheckoutSession->setState(CheckoutSessionStates::Pending);
                 }
 
                 // Either way, the payment link should not be active.
@@ -287,13 +296,13 @@ class Payment
                 break;
             case 'checkout.session.async_payment_succeeded':
                 // A delayed payment has succeeded. So we mark the stored checkout session as 'PAID'.
-                $storedCheckoutSession->setState(CheckoutSessionModel::PAID);
+                $storedCheckoutSession->setState(CheckoutSessionStates::Paid);
                 $paymentLink?->setUsed(true);
 
                 break;
             case 'checkout.session.async_payment_failed':
                 // A delayed payment has failed.
-                $storedCheckoutSession->setState(CheckoutSessionModel::FAILED);
+                $storedCheckoutSession->setState(CheckoutSessionStates::Failed);
                 $paymentLink?->setUsed(false);
 
                 // Save changes before sending e-mail. This ensures we do not lose information if the e-mail fails.

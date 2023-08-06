@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
+use Database\Model\Enums\CheckoutSessionStates;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -12,10 +13,6 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToOne;
-use InvalidArgumentException;
-
-use function in_array;
-use function sprintf;
 
 /**
  * Saved query model.
@@ -23,13 +20,6 @@ use function sprintf;
 #[Entity]
 class CheckoutSession
 {
-    public const CREATED = 0;
-    public const CANCELLED = 1;
-    public const EXPIRED = 2;
-    public const PENDING = 3;
-    public const FAILED = 4;
-    public const PAID = 5;
-
     /**
      * Payment ID.
      */
@@ -61,6 +51,12 @@ class CheckoutSession
     protected ProspectiveMember $prospectiveMember;
 
     /**
+     * Creation of the checkout session.
+     */
+    #[Column(type: 'datetime')]
+    protected DateTime $created;
+
+    /**
      * Expiration of the checkout session.
      */
     #[Column(type: 'datetime')]
@@ -85,8 +81,11 @@ class CheckoutSession
     /**
      * The state of the payment.
      */
-    #[Column(type: 'integer')]
-    protected int $state = self::CREATED;
+    #[Column(
+        type: 'integer',
+        enumType: CheckoutSessionStates::class,
+    )]
+    protected CheckoutSessionStates $state = CheckoutSessionStates::Created;
 
     /**
      * Get the ID.
@@ -116,6 +115,16 @@ class CheckoutSession
     public function setProspectiveMember(ProspectiveMember $prospectiveMember): void
     {
         $this->prospectiveMember = $prospectiveMember;
+    }
+
+    public function getCreated(): DateTime
+    {
+        return $this->created;
+    }
+
+    public function setCreated(DateTime $created): void
+    {
+        $this->created = $created;
     }
 
     public function getExpiration(): DateTime
@@ -151,29 +160,13 @@ class CheckoutSession
         $this->recoveredFrom = $recoveredFrom;
     }
 
-    public function getState(): int
+    public function getState(): CheckoutSessionStates
     {
         return $this->state;
     }
 
-    public function setState(int $state): void
+    public function setState(CheckoutSessionStates $state): void
     {
-        if (
-            !in_array(
-                $state,
-                [
-                    self::CREATED,
-                    self::CANCELLED,
-                    self::EXPIRED,
-                    self::PENDING,
-                    self::FAILED,
-                    self::PAID,
-                ],
-            )
-        ) {
-            throw new InvalidArgumentException(sprintf('Unexpected payment state %d', $state));
-        }
-
         $this->state = $state;
     }
 }
