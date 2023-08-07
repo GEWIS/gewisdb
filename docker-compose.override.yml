@@ -35,6 +35,17 @@ services:
         build: docker/nginx
         ports:
             - "80:9725"
+    stripe:
+        image: stripe/stripe-cli:latest
+        command: listen --forward-to nginx:9725/member/subscribe/checkout/webhook
+        environment:
+            - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
+            - STRIPE_DEVICE_NAME="GEWISDB on ${HOST}${NAME}"
+            - STRIPE_CLI_TELEMETRY_OPTOUT=1
+        depends_on:
+            - nginx
+        networks:
+            - gewisdb_network
     web:
         image: abc-db.docker-registry.gewis.nl/gewisdb_web:development
         build:
