@@ -31,7 +31,7 @@ use function str_replace;
         'renewal' => RenewalLink::class,
     ],
 )]
-class ActionLink
+abstract class ActionLink
 {
     /**
      * Identity

@@ -25,6 +25,7 @@ use UnexpectedValueException;
 
 use function intval;
 use function sprintf;
+use function time;
 
 class Stripe
 {
@@ -160,8 +161,12 @@ class Stripe
                     ],
                 ],
                 'mode' => 'payment',
+                'payment_intent_data' => [
+                    'statement_descriptor' => 'GEWIS Membership ' . $prospectiveMember->getLidnr(),
+                ],
                 'cancel_url' => $this->config['cancel_url'],
                 'success_url' => $this->config['success_url'],
+                'expires_at' => time() + 3600,
                 'after_expiration' => [
                     'recovery' => [
                         'enabled' => true,
