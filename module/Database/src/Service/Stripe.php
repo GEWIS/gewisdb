@@ -26,7 +26,7 @@ use UnexpectedValueException;
 use function intval;
 use function sprintf;
 
-class Payment
+class Stripe
 {
     /**
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification

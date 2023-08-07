@@ -71,7 +71,7 @@
       <code>Response|ViewModel</code>
     </InvalidReturnType>
   </file>
-  <file src="module/Database/src/Service/Payment.php">
+  <file src="module/Database/src/Service/Stripe.php">
     <UndefinedMagicPropertyFetch occurrences="2">
       <code>$event-&gt;data-&gt;object</code>
       <code>$session-&gt;after_expiration-&gt;recovery</code>

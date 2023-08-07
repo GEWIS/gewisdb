@@ -94,14 +94,14 @@ use Database\Service\Factory\InstallationFunctionFactory as InstallationFunction
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
 use Database\Service\Factory\MemberFactory as MemberServiceFactory;
-use Database\Service\Factory\PaymentFactory as PaymentServiceFactory;
 use Database\Service\Factory\QueryFactory as QueryServiceFactory;
+use Database\Service\Factory\StripeFactory as StripeServiceFactory;
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
-use Database\Service\Payment as PaymentService;
 use Database\Service\Query as QueryService;
+use Database\Service\Stripe as StripeService;
 use Doctrine\Laminas\Hydrator\DoctrineObject;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
@@ -146,7 +146,7 @@ class Module
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
-                PaymentService::class => PaymentServiceFactory::class,
+                StripeService::class => StripeServiceFactory::class,
                 QueryService::class => QueryServiceFactory::class,
                 ExportForm::class => static function (ContainerInterface $container) {
                     return new ExportForm(

@@ -8,7 +8,7 @@ use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Controller\MemberController;
 use Database\Service\Member as MemberService;
-use Database\Service\Payment as PaymentService;
+use Database\Service\Stripe as StripeService;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
@@ -29,8 +29,8 @@ class MemberControllerFactory implements FactoryInterface
         $checkerService = $container->get(CheckerService::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
-        /** @var PaymentService $paymentService */
-        $paymentService = $container->get(PaymentService::class);
+        /** @var StripeService $stripeService */
+        $stripeService = $container->get(StripeService::class);
         /** @var RenewalService $renewalService */
         $renewalService = $container->get(RenewalService::class);
 
@@ -38,7 +38,7 @@ class MemberControllerFactory implements FactoryInterface
             $translator,
             $checkerService,
             $memberService,
-            $paymentService,
+            $stripeService,
             $renewalService,
         );
     }

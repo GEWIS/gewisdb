@@ -9,7 +9,7 @@ use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
-use Database\Service\Payment as PaymentService;
+use Database\Service\Stripe as StripeService;
 use DateTime;
 use Laminas\Http\Header\HeaderInterface;
 use Laminas\Http\Response;
@@ -30,7 +30,7 @@ class MemberController extends AbstractActionController
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
         private readonly MemberService $memberService,
-        private readonly PaymentService $paymentService,
+        private readonly StripeService $stripeService,
         private readonly RenewalService $renewalService,
     ) {
     }
@@ -62,7 +62,7 @@ class MemberController extends AbstractActionController
                 );
 
                 // Create Stripe checkout session.
-                $checkoutLink = $this->paymentService->getCheckoutLink($prospectiveMember);
+                $checkoutLink = $this->stripeService->getCheckoutLink($prospectiveMember);
 
                 if (null === $checkoutLink) {
                     // We have failed to generate a payment link, however, as we have already persisted the prospective
@@ -87,7 +87,7 @@ class MemberController extends AbstractActionController
     {
         $status = $this->params()->fromRoute('status');
         $checkoutSessionId = (string) $this->params()->fromQuery('stripe_session_id');
-        $prospectiveMemberId = $this->paymentService->getLidnrFromCheckoutSession($checkoutSessionId);
+        $prospectiveMemberId = $this->stripeService->getLidnrFromCheckoutSession($checkoutSessionId);
 
         if (null !== $prospectiveMemberId) {
             $prospectiveMember = $this->memberService->getProspectiveMember($prospectiveMemberId)['member'];
@@ -109,7 +109,7 @@ class MemberController extends AbstractActionController
     public function checkoutRestartAction(): Response|ViewModel
     {
         $token = (string) $this->params()->fromRoute('token');
-        $paymentLink = $this->paymentService->getPaymentLink($token);
+        $paymentLink = $this->stripeService->getPaymentLink($token);
 
         if (
             null === $paymentLink
@@ -118,7 +118,7 @@ class MemberController extends AbstractActionController
             return new ViewModel(['error' => false]);
         }
 
-        $restartedCheckoutLink = $this->paymentService->restartCheckoutLink($paymentLink->getProspectiveMember());
+        $restartedCheckoutLink = $this->stripeService->restartCheckoutLink($paymentLink->getProspectiveMember());
 
         if (null === $restartedCheckoutLink) {
             return new ViewModel(['error' => true]);
@@ -134,12 +134,12 @@ class MemberController extends AbstractActionController
         $signature = $this->getRequest()->getHeader('Stripe-Signature');
 
         if ($signature instanceof HeaderInterface) {
-            $event = $this->paymentService->verifyEvent($this->getRequest()->getContent(), $signature->getFieldValue());
+            $event = $this->stripeService->verifyEvent($this->getRequest()->getContent(), $signature->getFieldValue());
 
             if (null !== $event) {
                 // Stripe technically wants the 200 before we handle things, however, Laminas has as far as I know no
                 // (good) support for using Fibers to do this concurrently.
-                $this->paymentService->handleEvent($event);
+                $this->stripeService->handleEvent($event);
 
                 return $this->getResponse()
                     ->setStatusCode(Response::STATUS_CODE_200);

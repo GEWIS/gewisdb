@@ -7,12 +7,12 @@ namespace Database\Service\Factory;
 use Database\Mapper\ActionLink as PaymentLinkMapper;
 use Database\Mapper\CheckoutSession as PaymentMapper;
 use Database\Service\Member as MemberService;
-use Database\Service\Payment as PaymentService;
+use Database\Service\Stripe as StripeService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 
-class PaymentFactory implements FactoryInterface
+class StripeFactory implements FactoryInterface
 {
     /**
      * @param string $requestedName
@@ -21,7 +21,7 @@ class PaymentFactory implements FactoryInterface
         ContainerInterface $container,
         $requestedName,
         ?array $options = null,
-    ): PaymentService {
+    ): StripeService {
         /** @var Logger $logger */
         $logger = $container->get('logger');
         /** @var PaymentLinkMapper $paymentLinkMapper */
@@ -33,7 +33,7 @@ class PaymentFactory implements FactoryInterface
         /** @var array<string, string> $config */
         $config = $container->get('config')['stripe'];
 
-        return new PaymentService(
+        return new StripeService(
             $logger,
             $paymentLinkMapper,
             $paymentMapper,
