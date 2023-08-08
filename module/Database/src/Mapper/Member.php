@@ -330,7 +330,7 @@ class Member
             $qb->andWhere('m.expiration >= CURRENT_TIMESTAMP()');
         }
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**

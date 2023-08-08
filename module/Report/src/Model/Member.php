@@ -636,6 +636,7 @@ class Member
      *         current: bool,
      *      }>,
      *      keyholder?: bool,
+     *      type?: string,
      * }
      */
     public function toArrayApi(array $include = []): array
@@ -672,6 +673,10 @@ class Member
 
         if (in_array('keyholder', $include)) {
             $result['keyholder'] = $this->isKeyholder();
+        }
+
+        if (in_array('type', $include)) {
+            $result['type'] = $this->getType()->value;
         }
 
         return $result;

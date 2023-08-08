@@ -52,6 +52,14 @@ paths:
       description: Get all members
       tags:
        - members
+      parameters:
+       - name: includeOrgans
+         in: query
+         required: false
+         description: Whether to include organ memberships in the response. By default, organs are not included due to rather long computation time.
+         schema:
+           type: boolean
+           default: false
       responses:
         200:
           description: Succesful response

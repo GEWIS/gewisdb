@@ -14,6 +14,7 @@ enum ApiPermissions: string
     case HealthR = 'health_read';
     case MembersR = 'members_read';
     case MembersPropertyKeyholder = 'members_read_keyholder';
+    case MembersPropertyType = 'members_read_type';
     case MembersActiveR = 'members_active_read';
     case OrgansMembershipR = 'organs_members_read';
     case All = '*';
@@ -25,6 +26,9 @@ enum ApiPermissions: string
             self::MembersR => $translator->translate('Get all Members'),
             self::MembersPropertyKeyholder => $translator->translate(
                 'Check if a member is a keyholder',
+            ),
+            self::MembersPropertyType => $translator->translate(
+                'View the membership type for a member',
             ),
             self::MembersActiveR => $translator->translate(
                 'Get active Members (members that are in one or more organs)',
