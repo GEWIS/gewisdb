@@ -257,7 +257,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -292,20 +292,32 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Mapper-ActionLink.html#method_createByMember">createByMember()</a>
+    <a href="classes/Database-Mapper-ActionLink.html#method_createRenewalByMember">createRenewalByMember()</a>
     <span>
-                                &nbsp;: <a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a>|null    </span>
+                                &nbsp;: <a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null    </span>
 </dt>
-<dd>Create an action link for a member
-If no expiration date is given, we renew until the first July 1st after the current expiration date +
-at most an extra 31 days to prevent two renewals within one month</dd>
+<dd>Create a renewal link for a member.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Mapper-ActionLink.html#method_findByToken">findByToken()</a>
+    <a href="classes/Database-Mapper-ActionLink.html#method_findPaymentByProspectiveMember">findPaymentByProspectiveMember()</a>
     <span>
-                                &nbsp;: <a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a>|null    </span>
+                                &nbsp;: <a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null    </span>
 </dt>
-<dd>Find an action link by token</dd>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Mapper-ActionLink.html#method_findPaymentByToken">findPaymentByToken()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null    </span>
+</dt>
+<dd>Find an payment link by token.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Mapper-ActionLink.html#method_findRenewalByToken">findRenewalByToken()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null    </span>
+</dt>
+<dd>Find an renewal link by token.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Mapper-ActionLink.html#method_getRepository">getRepository()</a>
@@ -356,7 +368,7 @@ at most an extra 31 days to prevent two renewals within one month</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -394,7 +406,7 @@ at most an extra 31 days to prevent two renewals within one month</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -431,26 +443,27 @@ at most an extra 31 days to prevent two renewals within one month</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_createByMember">
-        createByMember()
-        <a href="classes/Database-Mapper-ActionLink.html#method_createByMember" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_createRenewalByMember">
+        createRenewalByMember()
+        <a href="classes/Database-Mapper-ActionLink.html#method_createRenewalByMember" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Create an action link for a member
-If no expiration date is given, we renew until the first July 1st after the current expiration date +
-at most an extra 31 days to prevent two renewals within one month</p>
+        <p class="phpdocumentor-summary">Create a renewal link for a member.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">createByMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newExpiration</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">createRenewalByMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newExpiration</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>If no expiration date is given, we renew until the first July 1st after the current expiration date +
+at most an extra 31 days to prevent two renewals within one month.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -474,7 +487,7 @@ at most an extra 31 days to prevent two renewals within one month</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null</span>
             &mdash;
         
     
@@ -485,22 +498,66 @@ at most an extra 31 days to prevent two renewals within one month</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_findByToken">
-        findByToken()
-        <a href="classes/Database-Mapper-ActionLink.html#method_findByToken" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_findPaymentByProspectiveMember">
+        findPaymentByProspectiveMember()
+        <a href="classes/Database-Mapper-ActionLink.html#method_findPaymentByProspectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Find an action link by token</p>
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findPaymentByProspectiveMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lidnr</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$lidnr</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findPaymentByToken">
+        findPaymentByToken()
+        <a href="classes/Database-Mapper-ActionLink.html#method_findPaymentByToken" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find an payment link by token.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">findByToken</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$token</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">findPaymentByToken</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$token</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -518,7 +575,51 @@ at most an extra 31 days to prevent two renewals within one month</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findRenewalByToken">
+        findRenewalByToken()
+        <a href="classes/Database-Mapper-ActionLink.html#method_findRenewalByToken" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find an renewal link by token.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findRenewalByToken</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$token</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$token</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null</span>
             &mdash;
         
     
@@ -536,7 +637,7 @@ at most an extra 31 days to prevent two renewals within one month</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -569,7 +670,7 @@ at most an extra 31 days to prevent two renewals within one month</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 
     </aside>
 
@@ -613,7 +714,7 @@ at most an extra 31 days to prevent two renewals within one month</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ActionLink.php"><a href="files/module-database-src-mapper-actionlink.html"><abbr title="module/Database/src/Mapper/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 

@@ -235,13 +235,13 @@
 
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/report.html">Report</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/report-service.html">Service</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-mapper.html">Mapper</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Member
+    CheckoutSession
 
     
             <div class="phpdocumentor-element__package">
@@ -255,9 +255,9 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
@@ -277,68 +277,54 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Report-Service-Member.html#property_emReport">$emReport</a>
+                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Mapper-CheckoutSession.html#property_em">$em</a>
     <span>
                         &nbsp;: <abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>            </span>
 </dt>
 <dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Report-Service-Member.html#property_memberMapper">$memberMapper</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>            </span>
-</dt>
-<dd></dd>
-
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Service-Member.html#method___construct">__construct()</a>
+    <a href="classes/Database-Mapper-CheckoutSession.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Service-Member.html#method_deleteAddress">deleteAddress()</a>
+    <a href="classes/Database-Mapper-CheckoutSession.html#method_findById">findById()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Service-Member.html#method_deleteMember">deleteMember()</a>
+    <a href="classes/Database-Mapper-CheckoutSession.html#method_findLatest">findLatest()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Service-Member.html#method_generate">generate()</a>
+    <a href="classes/Database-Mapper-CheckoutSession.html#method_findRecoveredBy">findRecoveredBy()</a>
     <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Export members.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Service-Member.html#method_generateAddress">generateAddress()</a>
-    <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Service-Member.html#method_generateLists">generateLists()</a>
+    <a href="classes/Database-Mapper-CheckoutSession.html#method_getRepository">getRepository()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <abbr title="\Doctrine\ORM\EntityRepository">EntityRepository</abbr>    </span>
 </dt>
-<dd></dd>
+<dd>Get the repository for this mapper.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Service-Member.html#method_generateMember">generateMember()</a>
+    <a href="classes/Database-Mapper-CheckoutSession.html#method_persist">persist()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
+<dd>Persist a payment state.</dd>
 
         </dl>
 
@@ -350,67 +336,33 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Report-Service-Member.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Mapper-CheckoutSession.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
             phpdocumentor-element
             -property
-            -private
+            -protected
                                                 -read-only        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_emReport">
-        $emReport
-        <a href="classes/Report-Service-Member.html#property_emReport" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_em">
+        $em
+        <a href="classes/Database-Mapper-CheckoutSession.html#property_em" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr></span>
-    <span class="phpdocumentor-signature__name">$emReport</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only        "
->
-    <h4 class="phpdocumentor-element__name" id="property_memberMapper">
-        $memberMapper
-        <a href="classes/Report-Service-Member.html#property_memberMapper" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">25</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$memberMapper</span>
+    <span class="phpdocumentor-signature__name">$em</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -425,7 +377,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Report-Service-Member.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Mapper-CheckoutSession.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -435,34 +387,26 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Report-Service-Member.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Mapper-CheckoutSession.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$emReport</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$em</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$memberMapper</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$emReport</span>
+                <span class="phpdocumentor-signature__argument__name">$em</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -485,29 +429,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_deleteAddress">
-        deleteAddress()
-        <a href="classes/Report-Service-Member.html#method_deleteAddress" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_findById">
+        findById()
+        <a href="classes/Database-Mapper-CheckoutSession.html#method_findById" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">174</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">deleteAddress</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$address</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">findById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$address</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -518,7 +462,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span>
             &mdash;
         
     
@@ -529,29 +473,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_deleteMember">
-        deleteMember()
-        <a href="classes/Report-Service-Member.html#method_deleteMember" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_findLatest">
+        findLatest()
+        <a href="classes/Database-Mapper-CheckoutSession.html#method_findLatest" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">166</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">deleteMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">findLatest</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prospectiveMember</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$member</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$prospectiveMember</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -562,7 +506,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span>
             &mdash;
         
     
@@ -573,122 +517,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_generate">
-        generate()
-        <a href="classes/Report-Service-Member.html#method_generate" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_findRecoveredBy">
+        findRecoveredBy()
+        <a href="classes/Database-Mapper-CheckoutSession.html#method_findRecoveredBy" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Export members.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">generate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_generateAddress">
-        generateAddress()
-        <a href="classes/Report-Service-Member.html#method_generateAddress" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">generateAddress</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$address</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reportMember</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">findRecoveredBy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$checkoutSession</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$address</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$reportMember</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_generateLists">
-        generateLists()
-        <a href="classes/Report-Service-Member.html#method_generateLists" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">96</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">generateLists</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reportMember</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$member</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$reportMember</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$checkoutSession</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -699,7 +550,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span>
             &mdash;
         
     
@@ -710,29 +561,62 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_generateMember">
-        generateMember()
-        <a href="classes/Report-Service-Member.html#method_generateMember" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getRepository">
+        getRepository()
+        <a href="classes/Database-Mapper-CheckoutSession.html#method_getRepository" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Service/Member.php"><a href="files/module-report-src-service-member.html"><abbr title="module/Report/src/Service/Member.php">Member.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Get the repository for this mapper.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">generateMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">getRepository</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\EntityRepository">EntityRepository</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
+    
+    
+    
 
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\EntityRepository">EntityRepository</abbr></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_persist">
+        persist()
+        <a href="classes/Database-Mapper-CheckoutSession.html#method_persist" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/CheckoutSession.php"><a href="files/module-database-src-mapper-checkoutsession.html"><abbr title="module/Database/src/Mapper/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Persist a payment state.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">persist</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$payment</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$member</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$payment</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -826,7 +710,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Report-Service-Member.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Mapper-CheckoutSession.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

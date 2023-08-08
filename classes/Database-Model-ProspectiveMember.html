@@ -257,7 +257,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -292,6 +292,13 @@
 <dd>Last changed date of membership.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-ProspectiveMember.html#property_checkoutSessions">$checkoutSessions</a>
+    <span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>            </span>
+</dt>
+<dd>The Checkout Sessions for this prospective member.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ProspectiveMember.html#property_city">$city</a>
     <span>
                         &nbsp;: string            </span>
@@ -318,13 +325,6 @@
                         &nbsp;: string            </span>
 </dt>
 <dd>First name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-ProspectiveMember.html#property_iban">$iban</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>Iban number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ProspectiveMember.html#property_initials">$initials</a>
@@ -376,6 +376,13 @@
 <dd>How much the member has paid for membership. 0 by default.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-ProspectiveMember.html#property_paymentLink">$paymentLink</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null            </span>
+</dt>
+<dd>Payment link that can be used by the prospective member to restart a Checkout Session.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ProspectiveMember.html#property_phone">$phone</a>
     <span>
                         &nbsp;: string            </span>
@@ -388,20 +395,6 @@
                         &nbsp;: string            </span>
 </dt>
 <dd>Postal code.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-ProspectiveMember.html#property_signature">$signature</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>The signature image URL.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-ProspectiveMember.html#property_signatureLocation">$signatureLocation</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>The signature location</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ProspectiveMember.html#property_street">$street</a>
@@ -467,6 +460,27 @@
 <dd>Get the date of the last membership change.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getCheckoutSessions">getCheckoutSessions()</a>
+    <span>
+                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getCity">getCity()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getCountry">getCountry()</a>
+    <span>
+                                &nbsp;: <a href="classes/Application-Model-Enums-PostalRegions.html"><abbr title="\Application\Model\Enums\PostalRegions">PostalRegions</abbr></a>    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getEmail">getEmail()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -486,13 +500,6 @@
                                 &nbsp;: string    </span>
 </dt>
 <dd>Assemble the member&#039;s full name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_getIban">getIban()</a>
-    <span>
-                                &nbsp;: string|null    </span>
-</dt>
-<dd>Get the IBAN.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getInitials">getInitials()</a>
@@ -523,18 +530,18 @@
 <dd>Get mailing list subscriptions.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_getMandateCharacteristic">getMandateCharacteristic()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Returns the characteristic of the mandate. Is unique for each form entry</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getMiddleName">getMiddleName()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
 <dd>Get the member&#039;s middle name.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getNumber">getNumber()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getPaid">getPaid()</a>
@@ -544,18 +551,32 @@
 <dd>Get how much has been paid.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_getSignature">getSignature()</a>
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getPaymentLink">getPaymentLink()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: <a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null    </span>
 </dt>
-<dd>Get the signature image URL.</dd>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_getSignatureLocation">getSignatureLocation()</a>
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getPhone">getPhone()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: string    </span>
 </dt>
-<dd>Get the signature location</dd>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getPostalCode">getPostalCode()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getStreet">getStreet()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getStudy">getStudy()</a>
@@ -570,6 +591,22 @@
                                 &nbsp;: string|null    </span>
 </dt>
 <dd>Get the TU/e username.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_hasCheckoutExpiredOrFailed">hasCheckoutExpiredOrFailed()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Determine whether the prospective member has an `expired` or `failed` Checkout Session. This is used to check
+whether a prospective member can be approved.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_isCheckoutPending">isCheckoutPending()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Determine whether the prospective member does not have a `created` or `pending` Checkout Session. This is used to
+check whether a prospective member can be safely deleted.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_setAddress">setAddress()</a>
@@ -607,13 +644,6 @@
 <dd>Set the member&#039;s first name.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_setIban">setIban()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the IBAN.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_setInitials">setInitials()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -649,18 +679,11 @@
 <dd>Set how much has been paid.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_setSignature">setSignature()</a>
+    <a href="classes/Database-Model-ProspectiveMember.html#method_setPaymentLink">setPaymentLink()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Set the signature image URL.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_setSignatureLocation">setSignatureLocation()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the signature location</dd>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_setStudy">setStudy()</a>
@@ -711,7 +734,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
@@ -745,7 +768,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -770,6 +793,39 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_checkoutSessions">
+        $checkoutSessions
+        <a href="classes/Database-Model-ProspectiveMember.html#property_checkoutSessions" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">168</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The Checkout Sessions for this prospective member.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr></span>
+    <span class="phpdocumentor-signature__name">$checkoutSessions</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_city">
         $city
         <a href="classes/Database-Model-ProspectiveMember.html#property_city" class="headerlink"><i class="fas fa-link"></i></a>
@@ -779,7 +835,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">142</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
@@ -813,7 +869,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
@@ -847,7 +903,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -881,7 +937,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">65</span>
 
     </aside>
 
@@ -906,40 +962,6 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_iban">
-        $iban
-        <a href="classes/Database-Model-ProspectiveMember.html#property_iban" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">106</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Iban number.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$iban</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_initials">
         $initials
         <a href="classes/Database-Model-ProspectiveMember.html#property_initials" class="headerlink"><i class="fas fa-link"></i></a>
@@ -949,7 +971,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
@@ -983,7 +1005,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -1017,7 +1039,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -1051,7 +1073,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
@@ -1084,7 +1106,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -1118,7 +1140,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">122</span>
 
     </aside>
 
@@ -1152,7 +1174,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">101</span>
 
     </aside>
 
@@ -1177,6 +1199,40 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_paymentLink">
+        $paymentLink
+        <a href="classes/Database-Model-ProspectiveMember.html#property_paymentLink" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">179</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Payment link that can be used by the prospective member to restart a Checkout Session.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$paymentLink</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_phone">
         $phone
         <a href="classes/Database-Model-ProspectiveMember.html#property_phone" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1186,7 +1242,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">148</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 
     </aside>
 
@@ -1220,7 +1276,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
@@ -1245,74 +1301,6 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_signature">
-        $signature
-        <a href="classes/Database-Model-ProspectiveMember.html#property_signature" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">174</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The signature image URL.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$signature</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_signatureLocation">
-        $signatureLocation
-        <a href="classes/Database-Model-ProspectiveMember.html#property_signatureLocation" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">183</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The signature location</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$signatureLocation</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_street">
         $street
         <a href="classes/Database-Model-ProspectiveMember.html#property_street" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1322,7 +1310,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">124</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 
     </aside>
 
@@ -1356,7 +1344,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1390,7 +1378,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -1428,7 +1416,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">185</span>
 
     </aside>
 
@@ -1461,7 +1449,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">550</span>
+    <span class="phpdocumentor-element-found-in__line">507</span>
 
     </aside>
 
@@ -1507,7 +1495,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">560</span>
+    <span class="phpdocumentor-element-found-in__line">517</span>
 
     </aside>
 
@@ -1550,7 +1538,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">508</span>
+    <span class="phpdocumentor-element-found-in__line">465</span>
 
     </aside>
 
@@ -1583,7 +1571,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">342</span>
+    <span class="phpdocumentor-element-found-in__line">339</span>
 
     </aside>
 
@@ -1616,7 +1604,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">358</span>
+    <span class="phpdocumentor-element-found-in__line">385</span>
 
     </aside>
 
@@ -1642,6 +1630,104 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getCheckoutSessions">
+        getCheckoutSessions()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getCheckoutSessions" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">527</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCheckoutSessions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCity">
+        getCity()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getCity" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">372</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCity</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCountry">
+        getCountry()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getCountry" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">352</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCountry</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-PostalRegions.html"><abbr title="\Application\Model\Enums\PostalRegions">PostalRegions</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-PostalRegions.html"><abbr title="\Application\Model\Enums\PostalRegions">PostalRegions</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getEmail">
         getEmail()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getEmail" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1649,7 +1735,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">207</span>
+    <span class="phpdocumentor-element-found-in__line">204</span>
 
     </aside>
 
@@ -1682,7 +1768,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">236</span>
 
     </aside>
 
@@ -1715,7 +1801,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">295</span>
+    <span class="phpdocumentor-element-found-in__line">292</span>
 
     </aside>
 
@@ -1741,50 +1827,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getIban">
-        getIban()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_getIban" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">390</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the IBAN.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getIban</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$print</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$print</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getInitials">
         getInitials()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getInitials" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1792,7 +1834,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">231</span>
+    <span class="phpdocumentor-element-found-in__line">228</span>
 
     </aside>
 
@@ -1825,7 +1867,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">215</span>
+    <span class="phpdocumentor-element-found-in__line">212</span>
 
     </aside>
 
@@ -1858,7 +1900,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">199</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
@@ -1904,7 +1946,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">540</span>
+    <span class="phpdocumentor-element-found-in__line">497</span>
 
     </aside>
 
@@ -1930,39 +1972,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMandateCharacteristic">
-        getMandateCharacteristic()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_getMandateCharacteristic" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">446</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Returns the characteristic of the mandate. Is unique for each form entry</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMandateCharacteristic</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getMiddleName">
         getMiddleName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getMiddleName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1970,7 +1979,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">223</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
@@ -1996,6 +2005,39 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getNumber">
+        getNumber()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getNumber" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">362</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getPaid">
         getPaid()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getPaid" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2003,7 +2045,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">374</span>
+    <span class="phpdocumentor-element-found-in__line">401</span>
 
     </aside>
 
@@ -2029,29 +2071,41 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getSignature">
-        getSignature()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_getSignature" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getPaymentLink">
+        getPaymentLink()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getPaymentLink" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">414</span>
+    <span class="phpdocumentor-element-found-in__line">578</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the signature image URL.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getSignature</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getPaymentLink</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span></code>
 
     
     
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">psalm-ignore-nullable-return</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span>
             &mdash;
         
     
@@ -2062,29 +2116,95 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getSignatureLocation">
-        getSignatureLocation()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_getSignatureLocation" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getPhone">
+        getPhone()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getPhone" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">430</span>
+    <span class="phpdocumentor-element-found-in__line">377</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the signature location</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getSignatureLocation</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getPhone</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getPostalCode">
+        getPostalCode()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getPostalCode" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">367</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPostalCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getStreet">
+        getStreet()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getStreet" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">357</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getStreet</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
         
     
@@ -2102,7 +2222,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">326</span>
+    <span class="phpdocumentor-element-found-in__line">323</span>
 
     </aside>
 
@@ -2135,7 +2255,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">310</span>
+    <span class="phpdocumentor-element-found-in__line">307</span>
 
     </aside>
 
@@ -2161,6 +2281,74 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_hasCheckoutExpiredOrFailed">
+        hasCheckoutExpiredOrFailed()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_hasCheckoutExpiredOrFailed" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">560</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Determine whether the prospective member has an `expired` or `failed` Checkout Session. This is used to check
+whether a prospective member can be approved.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasCheckoutExpiredOrFailed</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isCheckoutPending">
+        isCheckoutPending()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_isCheckoutPending" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">536</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Determine whether the prospective member does not have a `created` or `pending` Checkout Session. This is used to
+check whether a prospective member can be safely deleted.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isCheckoutPending</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setAddress">
         setAddress()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setAddress" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2168,7 +2356,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">525</span>
+    <span class="phpdocumentor-element-found-in__line">482</span>
 
     </aside>
 
@@ -2212,7 +2400,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">350</span>
+    <span class="phpdocumentor-element-found-in__line">347</span>
 
     </aside>
 
@@ -2256,7 +2444,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">366</span>
+    <span class="phpdocumentor-element-found-in__line">393</span>
 
     </aside>
 
@@ -2300,7 +2488,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">255</span>
+    <span class="phpdocumentor-element-found-in__line">252</span>
 
     </aside>
 
@@ -2344,7 +2532,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">287</span>
+    <span class="phpdocumentor-element-found-in__line">284</span>
 
     </aside>
 
@@ -2381,50 +2569,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setIban">
-        setIban()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_setIban" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">406</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the IBAN.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setIban</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iban</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$iban</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setInitials">
         setInitials()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setInitials" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2432,7 +2576,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">279</span>
+    <span class="phpdocumentor-element-found-in__line">276</span>
 
     </aside>
 
@@ -2476,7 +2620,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">263</span>
+    <span class="phpdocumentor-element-found-in__line">260</span>
 
     </aside>
 
@@ -2520,7 +2664,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">247</span>
+    <span class="phpdocumentor-element-found-in__line">244</span>
 
     </aside>
 
@@ -2564,7 +2708,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">268</span>
 
     </aside>
 
@@ -2608,7 +2752,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">382</span>
+    <span class="phpdocumentor-element-found-in__line">409</span>
 
     </aside>
 
@@ -2645,73 +2789,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setSignature">
-        setSignature()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_setSignature" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setPaymentLink">
+        setPaymentLink()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_setPaymentLink" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">422</span>
+    <span class="phpdocumentor-element-found-in__line">583</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Set the signature image URL.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setSignature</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signature</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setPaymentLink</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paymentLink</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$signature</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setSignatureLocation">
-        setSignatureLocation()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_setSignatureLocation" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">438</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the signature location</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setSignatureLocation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signatureLocation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$signatureLocation</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                <span class="phpdocumentor-signature__argument__name">$paymentLink</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -2740,7 +2840,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">334</span>
+    <span class="phpdocumentor-element-found-in__line">331</span>
 
     </aside>
 
@@ -2784,7 +2884,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">318</span>
+    <span class="phpdocumentor-element-found-in__line">315</span>
 
     </aside>
 
@@ -2828,7 +2928,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">481</span>
+    <span class="phpdocumentor-element-found-in__line">441</span>
 
     </aside>
 

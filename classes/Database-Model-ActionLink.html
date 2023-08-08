@@ -257,11 +257,11 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Class for links that can be clicked</p>
+            <p class="phpdocumentor-summary">Class for links that can be clicked.</p>
 
 
 
@@ -278,34 +278,11 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-ActionLink.html#property_currentExpiration">$currentExpiration</a>
-    <span>
-                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
-</dt>
-<dd>Current expiration</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ActionLink.html#property_id">$id</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
-<dd>Mailman-identifier / name.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-ActionLink.html#property_member">$member</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>            </span>
-</dt>
-<dd>The member</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-ActionLink.html#property_newExpiration">$newExpiration</a>
-    <span>
-                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
-</dt>
-<dd>New expiration
-This is not neccessarily a year from the previous as in principle this
-will be until the end of next association year.</dd>
+<dd>Identity</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ActionLink.html#property_token">$token</a>
@@ -329,27 +306,6 @@ will be until the end of next association year.</dd>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ActionLink.html#method_getCurrentExpiration">getCurrentExpiration()</a>
-    <span>
-                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ActionLink.html#method_getMember">getMember()</a>
-    <span>
-                                &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ActionLink.html#method_getNewExpiration">getNewExpiration()</a>
-    <span>
-                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ActionLink.html#method_getToken">getToken()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -364,15 +320,7 @@ will be until the end of next association year.</dd>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ActionLink.html#method_linkExpired">linkExpired()</a>
-    <span>
-                                &nbsp;: bool    </span>
-</dt>
-<dd>We assume a link is valid until 30 days after the original membership expired
-Then, people can still renew their membership after their account gets locked</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ActionLink.html#method_used">used()</a>
+    <a href="classes/Database-Model-ActionLink.html#method_setUsed">setUsed()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -381,9 +329,9 @@ Then, people can still renew their membership after their account gets locked</d
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Database-Model-ActionLink.html#method_generateToken">generateToken()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: void    </span>
 </dt>
-<dd>Generate a new token and return it</dd>
+<dd>Generate a new token. Slashes `/` are replaced to make the token URL-friendly.</dd>
 
         </dl>
 
@@ -404,40 +352,6 @@ Then, people can still renew their membership after their account gets locked</d
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_currentExpiration">
-        $currentExpiration
-        <a href="classes/Database-Model-ActionLink.html#property_currentExpiration" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">63</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Current expiration</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
-    <span class="phpdocumentor-signature__name">$currentExpiration</span>
-    </code>
-
-    
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_id">
         $id
         <a href="classes/Database-Model-ActionLink.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
@@ -447,87 +361,17 @@ Then, people can still renew their membership after their account gets locked</d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Mailman-identifier / name.</p>
+        <p class="phpdocumentor-summary">Identity</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$id</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_member">
-        $member
-        <a href="classes/Database-Model-ActionLink.html#property_member" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">49</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The member</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$member</span>
-    </code>
-
-    
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_newExpiration">
-        $newExpiration
-        <a href="classes/Database-Model-ActionLink.html#property_newExpiration" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">71</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">New expiration
-This is not neccessarily a year from the previous as in principle this
-will be until the end of next association year.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
-    <span class="phpdocumentor-signature__name">$newExpiration</span>
-    </code>
 
     
         <section class="phpdocumentor-description"></section>
@@ -551,7 +395,7 @@ will be until the end of next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -585,7 +429,7 @@ will be until the end of next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -623,140 +467,22 @@ will be until the end of next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newExpiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$member</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$newExpiration</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
+    
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getCurrentExpiration">
-        getCurrentExpiration()
-        <a href="classes/Database-Model-ActionLink.html#method_getCurrentExpiration" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">106</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCurrentExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getMember">
-        getMember()
-        <a href="classes/Database-Model-ActionLink.html#method_getMember" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">101</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMember</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getNewExpiration">
-        getNewExpiration()
-        <a href="classes/Database-Model-ActionLink.html#method_getNewExpiration" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">111</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getNewExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
             &mdash;
         
     
@@ -774,7 +500,7 @@ will be until the end of next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -807,7 +533,7 @@ will be until the end of next association year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -833,59 +559,36 @@ will be until the end of next association year.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_linkExpired">
-        linkExpired()
-        <a href="classes/Database-Model-ActionLink.html#method_linkExpired" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setUsed">
+        setUsed()
+        <a href="classes/Database-Model-ActionLink.html#method_setUsed" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">We assume a link is valid until 30 days after the original membership expired
-Then, people can still renew their membership after their account gets locked</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">linkExpired</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_used">
-        used()
-        <a href="classes/Database-Model-ActionLink.html#method_used" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">126</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">used</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setUsed</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$used</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
         <section class="phpdocumentor-description"></section>
 
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$used</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -907,22 +610,22 @@ Then, people can still renew their membership after their account gets locked</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Generate a new token and return it</p>
+        <p class="phpdocumentor-summary">Generate a new token. Slashes `/` are replaced to make the token URL-friendly.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">generateToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">generateToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     

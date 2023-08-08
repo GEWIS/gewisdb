@@ -236,55 +236,42 @@
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-controller.html">Controller</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-controller-factory.html">Factory</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model-enums.html">Enums</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    MemberControllerFactory
+    CheckoutSessionStates
 
+            <span class="phpdocumentor-element__extends">
+        : int
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/gewisdb.html">gewisdb</a></li>
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Laminas\ServiceManager\Factory\FactoryInterface">FactoryInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/Factory/MemberControllerFactory.php"><a href="files/module-database-src-controller-factory-membercontrollerfactory.html"><abbr title="module/Database/src/Controller/Factory/MemberControllerFactory.php">MemberControllerFactory.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
-        
-    <section class="phpdocumentor-description"></section>
+            <p class="phpdocumentor-summary">Enum for the different states a Checkout Session can have.</p>
 
 
 
 
 
 
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes, Traits and Enums
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
-</h3>
 
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Laminas\ServiceManager\Factory\FactoryInterface">FactoryInterface</abbr></dt>
-        <dd></dd>
-    
-    
-    
-    </dl>
 
 
 <h3 id="toc">
@@ -293,10 +280,52 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Controller-Factory-MemberControllerFactory.html#method___invoke">__invoke()</a>
+                <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a href="">Cancelled</a>
     <span>
-                                &nbsp;: <a href="classes/Database-Controller-MemberController.html"><abbr title="\Database\Controller\MemberController">MemberController</abbr></a>    </span>
+                &nbsp;= 1                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a href="">Created</a>
+    <span>
+                                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a href="">Expired</a>
+    <span>
+                &nbsp;= 2                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a href="">Failed</a>
+    <span>
+                &nbsp;= 4                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a href="">Paid</a>
+    <span>
+                &nbsp;= 5                    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a href="">Pending</a>
+    <span>
+                &nbsp;= 3                    </span>
+</dt>
+<dd></dd>
+
+                    <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-Enums-CheckoutSessionStates.html#method_getName">getName()</a>
+    <span>
+                                &nbsp;: string    </span>
 </dt>
 <dd></dd>
 
@@ -304,14 +333,161 @@
 
 
 
-        
+            <section class="phpdocumentor-cases">
+        <h3 class="phpdocumentor-elements__header" id="cases">
+            Cases
+            <a href="classes/Database-Model-Enums-CheckoutSessionStates.html#cases" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
+>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Created">
+        Created
+        <a href="" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
-        
+    </aside>
+
+    
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
+>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Cancelled">
+        Cancelled
+        <a href="" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+
+    </aside>
+
+    
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
+>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Expired">
+        Expired
+        <a href="" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+    
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
+>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Pending">
+        Pending
+        <a href="" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+    
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
+>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Failed">
+        Failed
+        <a href="" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+    
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
+>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Paid">
+        Paid
+        <a href="" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+    
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Controller-Factory-MemberControllerFactory.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-Enums-CheckoutSessionStates.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -319,12 +495,12 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___invoke">
-        __invoke()
-        <a href="classes/Database-Controller-Factory-MemberControllerFactory.html#method___invoke" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getName">
+        getName()
+        <a href="classes/Database-Model-Enums-CheckoutSessionStates.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/Factory/MemberControllerFactory.php"><a href="files/module-database-src-controller-factory-membercontrollerfactory.html"><abbr title="module/Database/src/Controller/Factory/MemberControllerFactory.php">MemberControllerFactory.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/CheckoutSessionStates.php"><a href="files/module-database-src-model-enums-checkoutsessionstates.html"><abbr title="module/Database/src/Model/Enums/CheckoutSessionStates.php">CheckoutSessionStates.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">21</span>
 
@@ -333,30 +509,16 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__invoke</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestedName</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Controller-MemberController.html"><abbr title="\Database\Controller\MemberController">MemberController</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
                             </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$requestedName</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
@@ -366,7 +528,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Controller-MemberController.html"><abbr title="\Database\Controller\MemberController">MemberController</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
         
     
@@ -449,7 +611,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Database-Controller-Factory-MemberControllerFactory.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Model-Enums-CheckoutSessionStates.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

@@ -236,15 +236,15 @@
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-form.html">Form</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model.html">Model</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    MemberRenewal
+    RenewalLink
 
         <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Laminas\Form\Form">Form</abbr>
+        extends <a href="classes/Database-Model-ActionLink.html"><abbr title="\Database\Model\ActionLink">ActionLink</abbr></a>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -254,39 +254,24 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Laminas\InputFilter\InputFilterProviderInterface">InputFilterProviderInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-        
-    <section class="phpdocumentor-description"></section>
+            <p class="phpdocumentor-summary">Membership / graduate status renewal links.</p>
 
 
 
 
 
 
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes, Traits and Enums
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
-</h3>
 
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Laminas\InputFilter\InputFilterProviderInterface">InputFilterProviderInterface</abbr></dt>
-        <dd></dd>
-    
-    
-    
-    </dl>
 
 
 <h3 id="toc">
@@ -296,74 +281,112 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Form-MemberRenewal.html#property_lists">$lists</a>
+    <a href="classes/Database-Model-RenewalLink.html#property_currentExpiration">$currentExpiration</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
 </dt>
-<dd></dd>
+<dd>Current expiration</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Form-MemberRenewal.html#property_renewalLink">$renewalLink</a>
+    <a href="classes/Database-Model-ActionLink.html#property_id">$id</a>
     <span>
-                        &nbsp;: <a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null            </span>
+                        &nbsp;: int|null            </span>
 </dt>
-<dd></dd>
+<dd>Identity</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Form-MemberRenewal.html#property_translator">$translator</a>
+    <a href="classes/Database-Model-RenewalLink.html#property_member">$member</a>
     <span>
-                        &nbsp;: <abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>            </span>
+                        &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>            </span>
 </dt>
-<dd></dd>
+<dd>The member</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-RenewalLink.html#property_newExpiration">$newExpiration</a>
+    <span>
+                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
+</dt>
+<dd>New expiration
+This is not neccessarily a year from the previous as in principle this
+will be until the end of next association year.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-ActionLink.html#property_token">$token</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+<dd>The token in the URL</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-ActionLink.html#property_used">$used</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>If the URL was clicked</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Form-MemberRenewal.html#method___construct">__construct()</a>
+    <a href="classes/Database-Model-RenewalLink.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Form-MemberRenewal.html#method_getInputFilterSpecification">getInputFilterSpecification()</a>
+    <a href="classes/Database-Model-RenewalLink.html#method_getCurrentExpiration">getCurrentExpiration()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Specification of input filter.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Form-MemberRenewal.html#method_getRenewalLink">getRenewalLink()</a>
-    <span>
-                                &nbsp;: <a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null    </span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Form-MemberRenewal.html#method_setExpiration">setExpiration()</a>
+    <a href="classes/Database-Model-RenewalLink.html#method_getMember">getMember()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Form-MemberRenewal.html#method_setMutableData">setMutableData()</a>
+    <a href="classes/Database-Model-RenewalLink.html#method_getNewExpiration">getNewExpiration()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Form-MemberRenewal.html#method_setRenewalLink">setRenewalLink()</a>
+    <a href="classes/Database-Model-ActionLink.html#method_getToken">getToken()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ActionLink.html#method_isUsed">isUsed()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-RenewalLink.html#method_linkExpired">linkExpired()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>We assume a link is valid until 30 days after the original membership expired
+Then, people can still renew their membership after their account gets locked</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ActionLink.html#method_setUsed">setUsed()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Database-Form-MemberRenewal.html#method_getMutableFields">getMutableFields()</a>
+    <a href="classes/Database-Model-ActionLink.html#method_generateToken">generateToken()</a>
     <span>
-                                &nbsp;: array&lt;string|int, string&gt;    </span>
+                                &nbsp;: void    </span>
 </dt>
-<dd></dd>
+<dd>Generate a new token. Slashes `/` are replaced to make the token URL-friendly.</dd>
 
         </dl>
 
@@ -375,7 +398,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Database-Form-MemberRenewal.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-RenewalLink.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
@@ -384,28 +407,30 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_lists">
-        $lists
-        <a href="classes/Database-Form-MemberRenewal.html#property_lists" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_currentExpiration">
+        $currentExpiration
+        <a href="classes/Database-Model-RenewalLink.html#property_currentExpiration" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Current expiration</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$lists</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$currentExpiration</span>
     </code>
 
     
-    
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -416,28 +441,28 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_renewalLink">
-        $renewalLink
-        <a href="classes/Database-Form-MemberRenewal.html#property_renewalLink" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_id">
+        $id
+        <a href="classes/Database-Model-ActionLink.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Identity</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null</span>
-    <span class="phpdocumentor-signature__name">$renewalLink</span>
-    </code>
+        <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$id</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -448,30 +473,134 @@
             phpdocumentor-element
             -property
             -protected
-                                                -read-only        "
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_translator">
-        $translator
-        <a href="classes/Database-Form-MemberRenewal.html#property_translator" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_member">
+        $member
+        <a href="classes/Database-Model-RenewalLink.html#property_member" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+                                </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">The member</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
-    <span class="phpdocumentor-signature__name">$translator</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$member</span>
     </code>
 
+    
         <section class="phpdocumentor-description"></section>
 
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_newExpiration">
+        $newExpiration
+        <a href="classes/Database-Model-RenewalLink.html#property_newExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">45</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">New expiration
+This is not neccessarily a year from the previous as in principle this
+will be until the end of next association year.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$newExpiration</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_token">
+        $token
+        <a href="classes/Database-Model-ActionLink.html#property_token" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The token in the URL</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$token</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_used">
+        $used
+        <a href="classes/Database-Model-ActionLink.html#property_used" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">If the URL was clicked</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$used</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -482,7 +611,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Form-MemberRenewal.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-RenewalLink.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -492,27 +621,35 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Database-Form-MemberRenewal.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-RenewalLink.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newExpiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$translator</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$member</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$newExpiration</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -534,54 +671,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getInputFilterSpecification">
-        getInputFilterSpecification()
-        <a href="classes/Database-Form-MemberRenewal.html#method_getInputFilterSpecification" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getCurrentExpiration">
+        getCurrentExpiration()
+        <a href="classes/Database-Model-RenewalLink.html#method_getCurrentExpiration" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">204</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Specification of input filter.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getInputFilterSpecification</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getRenewalLink">
-        getRenewalLink()
-        <a href="classes/Database-Form-MemberRenewal.html#method_getRenewalLink" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRenewalLink</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getCurrentExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -589,7 +693,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
             &mdash;
         
     
@@ -600,115 +704,195 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setExpiration">
-        setExpiration()
-        <a href="classes/Database-Form-MemberRenewal.html#method_setExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getMember">
+        getMember()
+        <a href="classes/Database-Model-RenewalLink.html#method_getMember" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setExpiration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">getMember</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getNewExpiration">
+        getNewExpiration()
+        <a href="classes/Database-Model-RenewalLink.html#method_getNewExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getNewExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getToken">
+        getToken()
+        <a href="classes/Database-Model-ActionLink.html#method_getToken" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">70</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isUsed">
+        isUsed()
+        <a href="classes/Database-Model-ActionLink.html#method_isUsed" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isUsed</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_linkExpired">
+        linkExpired()
+        <a href="classes/Database-Model-RenewalLink.html#method_linkExpired" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/RenewalLink.php"><a href="files/module-database-src-model-renewallink.html"><abbr title="module/Database/src/Model/RenewalLink.php">RenewalLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">82</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">We assume a link is valid until 30 days after the original membership expired
+Then, people can still renew their membership after their account gets locked</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">linkExpired</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setUsed">
+        setUsed()
+        <a href="classes/Database-Model-ActionLink.html#method_setUsed" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">80</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setUsed</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$used</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$date</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setMutableData">
-        setMutableData()
-        <a href="classes/Database-Form-MemberRenewal.html#method_setMutableData" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">163</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setMutableData</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;array-key, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;array-key, string&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setRenewalLink">
-        setRenewalLink()
-        <a href="classes/Database-Form-MemberRenewal.html#method_setRenewalLink" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">155</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setRenewalLink</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renewalLink</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$renewalLink</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$used</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -730,32 +914,31 @@
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMutableFields">
-        getMutableFields()
-        <a href="classes/Database-Form-MemberRenewal.html#method_getMutableFields" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_generateToken">
+        generateToken()
+        <a href="classes/Database-Model-ActionLink.html#method_generateToken" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Form/MemberRenewal.php"><a href="files/module-database-src-form-memberrenewal.html"><abbr title="module/Database/src/Form/MemberRenewal.php">MemberRenewal.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Generate a new token. Slashes `/` are replaced to make the token URL-friendly.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">getMutableFields</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">generateToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
-            <section class="phpdocumentor-description"><p>Mutable field names, can be used to make sure readonly data is not submitted</p>
-</section>
-
+        
     
 </article>
             </section>
@@ -836,7 +1019,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Database-Form-MemberRenewal.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Model-RenewalLink.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

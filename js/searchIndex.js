@@ -2078,7 +2078,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetExpiringGraduates\u0028\u0029",
             "name": "getExpiringGraduates",
-            "summary": "Get\u0020all\u0020expiring\u0020graduates\u0020for\u0020which\u0020no\u0020action\u0020link\u0020exists\nThe\u0020check\u0020for\u0020hidden\u0020is\u0020required\u0020because\u0020hidden\u0020members\u0020may\u0020also\u0020expire\u0020but\u0020should\u0020not\u0020be\u0020emailed",
+            "summary": "Get\u0020all\u0020expiring\u0020graduates\u0020for\u0020which\u0020no\u0020renewal\u0020link\u0020exists\nThe\u0020check\u0020for\u0020hidden\u0020is\u0020required\u0020because\u0020hidden\u0020members\u0020may\u0020also\u0020expire\u0020but\u0020should\u0020not\u0020be\u0020emailed",
             "url": "classes/Checker-Mapper-Member.html#method_getExpiringGraduates"
         },                {
             "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetEndOfCurrentAssociationYear\u0028\u0029",
@@ -3106,6 +3106,36 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Command-DeleteExpiredMembersCommand.html#property_memberService"
         },                {
+            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand",
+            "name": "DeleteExpiredProspectiveMembersCommand",
+            "summary": "",
+            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html"
+        },                {
+            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#property_defaultName"
+        },                {
+            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003A\u0024defaultDescription",
+            "name": "defaultDescription",
+            "summary": "",
+            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#property_defaultDescription"
+        },                {
+            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003A\u0024memberService",
+            "name": "memberService",
+            "summary": "",
+            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#property_memberService"
+        },                {
             "fqsen": "\\Database\\Command\\Factory\\DeleteExpiredMembersCommandFactory",
             "name": "DeleteExpiredMembersCommandFactory",
             "summary": "",
@@ -3115,6 +3145,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Database-Command-Factory-DeleteExpiredMembersCommandFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Command\\Factory\\DeleteExpiredProspectiveMembersCommandFactory",
+            "name": "DeleteExpiredProspectiveMembersCommandFactory",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-DeleteExpiredProspectiveMembersCommandFactory.html"
+        },                {
+            "fqsen": "\\Database\\Command\\Factory\\DeleteExpiredProspectiveMembersCommandFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-DeleteExpiredProspectiveMembersCommandFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Command\\Factory\\GenerateAuthenticationKeysCommandFactory",
             "name": "GenerateAuthenticationKeysCommandFactory",
@@ -3411,6 +3451,21 @@ Search.appendIndex(
             "summary": "Subscribe\u0020action.",
             "url": "classes/Database-Controller-MemberController.html#method_subscribeAction"
         },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AcheckoutStatusAction\u0028\u0029",
+            "name": "checkoutStatusAction",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#method_checkoutStatusAction"
+        },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AcheckoutRestartAction\u0028\u0029",
+            "name": "checkoutRestartAction",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#method_checkoutRestartAction"
+        },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003ApaymentWebhookAction\u0028\u0029",
+            "name": "paymentWebhookAction",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#method_paymentWebhookAction"
+        },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003ArenewAction\u0028\u0029",
             "name": "renewAction",
             "summary": "\u0028Graduate\u0029\u0020renewal\u0020action\nPerhaps\u0020also\u0020for\u0020ordinary\u0020\u002D\u003E\u0020graduate\u0020in\u0020the\u0020future",
@@ -3525,6 +3580,11 @@ Search.appendIndex(
             "name": "memberService",
             "summary": "",
             "url": "classes/Database-Controller-MemberController.html#property_memberService"
+        },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003A\u0024stripeService",
+            "name": "stripeService",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#property_stripeService"
         },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003A\u0024renewalService",
             "name": "renewalService",
@@ -4351,15 +4411,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberRenewal.html#method_setExpiration"
         },                {
-            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AgetActionLink\u0028\u0029",
-            "name": "getActionLink",
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AgetRenewalLink\u0028\u0029",
+            "name": "getRenewalLink",
             "summary": "",
-            "url": "classes/Database-Form-MemberRenewal.html#method_getActionLink"
+            "url": "classes/Database-Form-MemberRenewal.html#method_getRenewalLink"
         },                {
-            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AsetActionLink\u0028\u0029",
-            "name": "setActionLink",
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AsetRenewalLink\u0028\u0029",
+            "name": "setRenewalLink",
             "summary": "",
-            "url": "classes/Database-Form-MemberRenewal.html#method_setActionLink"
+            "url": "classes/Database-Form-MemberRenewal.html#method_setRenewalLink"
         },                {
             "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003AsetMutableData\u0028\u0029",
             "name": "setMutableData",
@@ -4381,10 +4441,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberRenewal.html#property_lists"
         },                {
-            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003A\u0024actionLink",
-            "name": "actionLink",
+            "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003A\u0024renewalLink",
+            "name": "renewalLink",
             "summary": "",
-            "url": "classes/Database-Form-MemberRenewal.html#property_actionLink"
+            "url": "classes/Database-Form-MemberRenewal.html#property_renewalLink"
         },                {
             "fqsen": "\\Database\\Form\\MemberRenewal\u003A\u003A\u0024translator",
             "name": "translator",
@@ -4671,15 +4731,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Mapper-ActionLink.html#method___construct"
         },                {
-            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AfindByToken\u0028\u0029",
-            "name": "findByToken",
-            "summary": "Find\u0020an\u0020action\u0020link\u0020by\u0020token",
-            "url": "classes/Database-Mapper-ActionLink.html#method_findByToken"
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AfindPaymentByToken\u0028\u0029",
+            "name": "findPaymentByToken",
+            "summary": "Find\u0020an\u0020payment\u0020link\u0020by\u0020token.",
+            "url": "classes/Database-Mapper-ActionLink.html#method_findPaymentByToken"
         },                {
-            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AcreateByMember\u0028\u0029",
-            "name": "createByMember",
-            "summary": "Create\u0020an\u0020action\u0020link\u0020for\u0020a\u0020member\nIf\u0020no\u0020expiration\u0020date\u0020is\u0020given,\u0020we\u0020renew\u0020until\u0020the\u0020first\u0020July\u00201st\u0020after\u0020the\u0020current\u0020expiration\u0020date\u0020\u002B\nat\u0020most\u0020an\u0020extra\u002031\u0020days\u0020to\u0020prevent\u0020two\u0020renewals\u0020within\u0020one\u0020month",
-            "url": "classes/Database-Mapper-ActionLink.html#method_createByMember"
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AfindPaymentByProspectiveMember\u0028\u0029",
+            "name": "findPaymentByProspectiveMember",
+            "summary": "",
+            "url": "classes/Database-Mapper-ActionLink.html#method_findPaymentByProspectiveMember"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AfindRenewalByToken\u0028\u0029",
+            "name": "findRenewalByToken",
+            "summary": "Find\u0020an\u0020renewal\u0020link\u0020by\u0020token.",
+            "url": "classes/Database-Mapper-ActionLink.html#method_findRenewalByToken"
+        },                {
+            "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AcreateRenewalByMember\u0028\u0029",
+            "name": "createRenewalByMember",
+            "summary": "Create\u0020a\u0020renewal\u0020link\u0020for\u0020a\u0020member.",
+            "url": "classes/Database-Mapper-ActionLink.html#method_createRenewalByMember"
         },                {
             "fqsen": "\\Database\\Mapper\\ActionLink\u003A\u003AgetRepository\u0028\u0029",
             "name": "getRepository",
@@ -4701,6 +4771,46 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Mapper-ActionLink.html#property_em"
         },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession",
+            "name": "CheckoutSession",
+            "summary": "",
+            "url": "classes/Database-Mapper-CheckoutSession.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Mapper-CheckoutSession.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003AfindById\u0028\u0029",
+            "name": "findById",
+            "summary": "",
+            "url": "classes/Database-Mapper-CheckoutSession.html#method_findById"
+        },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003AfindLatest\u0028\u0029",
+            "name": "findLatest",
+            "summary": "",
+            "url": "classes/Database-Mapper-CheckoutSession.html#method_findLatest"
+        },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003AfindRecoveredBy\u0028\u0029",
+            "name": "findRecoveredBy",
+            "summary": "",
+            "url": "classes/Database-Mapper-CheckoutSession.html#method_findRecoveredBy"
+        },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003Apersist\u0028\u0029",
+            "name": "persist",
+            "summary": "Persist\u0020a\u0020payment\u0020state.",
+            "url": "classes/Database-Mapper-CheckoutSession.html#method_persist"
+        },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003AgetRepository\u0028\u0029",
+            "name": "getRepository",
+            "summary": "Get\u0020the\u0020repository\u0020for\u0020this\u0020mapper.",
+            "url": "classes/Database-Mapper-CheckoutSession.html#method_getRepository"
+        },                {
+            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Database-Mapper-CheckoutSession.html#property_em"
+        },                {
             "fqsen": "\\Database\\Mapper\\Factory\\ActionLinkFactory",
             "name": "ActionLinkFactory",
             "summary": "",
@@ -4710,6 +4820,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Database-Mapper-Factory-ActionLinkFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\CheckoutSessionFactory",
+            "name": "CheckoutSessionFactory",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-CheckoutSessionFactory.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\CheckoutSessionFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-CheckoutSessionFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Mapper\\Factory\\InstallationFunctionFactory",
             "name": "InstallationFunctionFactory",
@@ -5161,6 +5281,11 @@ Search.appendIndex(
             "summary": "Find\u0020a\u0020member\u0020\u0028by\u0020lidnr\u0029.",
             "url": "classes/Database-Mapper-ProspectiveMember.html#method_find"
         },                {
+            "fqsen": "\\Database\\Mapper\\ProspectiveMember\u003A\u003AfindWithFullyExpiredOrFailedCheckout\u0028\u0029",
+            "name": "findWithFullyExpiredOrFailedCheckout",
+            "summary": "Find\u0020all\u0020prospective\u0020members\u0020whose\u0020last\u0020Checkout\u0020Session\u0020has\u0020fully\u0020expired\u0020\u0028\u00281\u0020\u002B\u002030\u0029\u0020\u002B\u00201\u0020day\u0020ago\u0029\u0020or\u0020failed\u002031\ndays\u0020ago.",
+            "url": "classes/Database-Mapper-ProspectiveMember.html#method_findWithFullyExpiredOrFailedCheckout"
+        },                {
             "fqsen": "\\Database\\Mapper\\ProspectiveMember\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
             "summary": "Persist\u0020a\u0020member\u0020model.",
@@ -5223,7 +5348,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\ActionLink",
             "name": "ActionLink",
-            "summary": "Class\u0020for\u0020links\u0020that\u0020can\u0020be\u0020clicked",
+            "summary": "Class\u0020for\u0020links\u0020that\u0020can\u0020be\u0020clicked.",
             "url": "classes/Database-Model-ActionLink.html"
         },                {
             "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A__construct\u0028\u0029",
@@ -5233,23 +5358,8 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgenerateToken\u0028\u0029",
             "name": "generateToken",
-            "summary": "Generate\u0020a\u0020new\u0020token\u0020and\u0020return\u0020it",
+            "summary": "Generate\u0020a\u0020new\u0020token.\u0020Slashes\u0020\u0060\/\u0060\u0020are\u0020replaced\u0020to\u0020make\u0020the\u0020token\u0020URL\u002Dfriendly.",
             "url": "classes/Database-Model-ActionLink.html#method_generateToken"
-        },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetMember\u0028\u0029",
-            "name": "getMember",
-            "summary": "",
-            "url": "classes/Database-Model-ActionLink.html#method_getMember"
-        },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetCurrentExpiration\u0028\u0029",
-            "name": "getCurrentExpiration",
-            "summary": "",
-            "url": "classes/Database-Model-ActionLink.html#method_getCurrentExpiration"
-        },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetNewExpiration\u0028\u0029",
-            "name": "getNewExpiration",
-            "summary": "",
-            "url": "classes/Database-Model-ActionLink.html#method_getNewExpiration"
         },                {
             "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AgetToken\u0028\u0029",
             "name": "getToken",
@@ -5261,40 +5371,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-ActionLink.html#method_isUsed"
         },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AsetUsed\u0028\u0029",
+            "name": "setUsed",
+            "summary": "",
+            "url": "classes/Database-Model-ActionLink.html#method_setUsed"
+        },                {
+            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "Identity",
+            "url": "classes/Database-Model-ActionLink.html#property_id"
+        },                {
             "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024used",
             "name": "used",
             "summary": "If\u0020the\u0020URL\u0020was\u0020clicked",
             "url": "classes/Database-Model-ActionLink.html#property_used"
         },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003AlinkExpired\u0028\u0029",
-            "name": "linkExpired",
-            "summary": "We\u0020assume\u0020a\u0020link\u0020is\u0020valid\u0020until\u002030\u0020days\u0020after\u0020the\u0020original\u0020membership\u0020expired\nThen,\u0020people\u0020can\u0020still\u0020renew\u0020their\u0020membership\u0020after\u0020their\u0020account\u0020gets\u0020locked",
-            "url": "classes/Database-Model-ActionLink.html#method_linkExpired"
-        },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "Mailman\u002Didentifier\u0020\/\u0020name.",
-            "url": "classes/Database-Model-ActionLink.html#property_id"
-        },                {
             "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024token",
             "name": "token",
             "summary": "The\u0020token\u0020in\u0020the\u0020URL",
             "url": "classes/Database-Model-ActionLink.html#property_token"
-        },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024member",
-            "name": "member",
-            "summary": "The\u0020member",
-            "url": "classes/Database-Model-ActionLink.html#property_member"
-        },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024currentExpiration",
-            "name": "currentExpiration",
-            "summary": "Current\u0020expiration",
-            "url": "classes/Database-Model-ActionLink.html#property_currentExpiration"
-        },                {
-            "fqsen": "\\Database\\Model\\ActionLink\u003A\u003A\u0024newExpiration",
-            "name": "newExpiration",
-            "summary": "New\u0020expiration\nThis\u0020is\u0020not\u0020neccessarily\u0020a\u0020year\u0020from\u0020the\u0020previous\u0020as\u0020in\u0020principle\u0020this\nwill\u0020be\u0020until\u0020the\u0020end\u0020of\u0020next\u0020association\u0020year.",
-            "url": "classes/Database-Model-ActionLink.html#property_newExpiration"
         },                {
             "fqsen": "\\Database\\Model\\Address",
             "name": "Address",
@@ -5426,6 +5521,126 @@ Search.appendIndex(
             "summary": "Phone\u0020number.",
             "url": "classes/Database-Model-Address.html#property_phone"
         },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession",
+            "name": "CheckoutSession",
+            "summary": "Saved\u0020query\u0020model.",
+            "url": "classes/Database-Model-CheckoutSession.html"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "Get\u0020the\u0020ID.",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getId"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetCheckoutId\u0028\u0029",
+            "name": "getCheckoutId",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getCheckoutId"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetCheckoutId\u0028\u0029",
+            "name": "setCheckoutId",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setCheckoutId"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetProspectiveMember\u0028\u0029",
+            "name": "getProspectiveMember",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getProspectiveMember"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetProspectiveMember\u0028\u0029",
+            "name": "setProspectiveMember",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setProspectiveMember"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetCreated\u0028\u0029",
+            "name": "getCreated",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getCreated"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetCreated\u0028\u0029",
+            "name": "setCreated",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setCreated"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetExpiration\u0028\u0029",
+            "name": "getExpiration",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetExpiration\u0028\u0029",
+            "name": "setExpiration",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetRecoveryUrl\u0028\u0029",
+            "name": "getRecoveryUrl",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getRecoveryUrl"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetRecoveryUrl\u0028\u0029",
+            "name": "setRecoveryUrl",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setRecoveryUrl"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetRecoveredFrom\u0028\u0029",
+            "name": "getRecoveredFrom",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getRecoveredFrom"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetRecoveredFrom\u0028\u0029",
+            "name": "setRecoveredFrom",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setRecoveredFrom"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetState\u0028\u0029",
+            "name": "getState",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getState"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetState\u0028\u0029",
+            "name": "setState",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setState"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "Payment\u0020ID.",
+            "url": "classes/Database-Model-CheckoutSession.html#property_id"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024checkoutId",
+            "name": "checkoutId",
+            "summary": "Identifier\u0020of\u0020the\u0020checkout\u0020session,\u0020Stripe\u0020uses\u0020case\u0020SENSITIVE\u0020identifiers,\u0020with\u0020PostgreSQL\u0020this\u0020is\u0020not\u0020a\u0020problem\nbut\u0020if\u0020we\u0020ever\u0020switch\u0020we\u0020need\u0020to\u0020use\u0020the\u0020\u0060utf8_bin\u0060\u0020collation\u0020on\u0020this\u0020column\u0020\u0028as\u0020recommended\u0029.",
+            "url": "classes/Database-Model-CheckoutSession.html#property_checkoutId"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024prospectiveMember",
+            "name": "prospectiveMember",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#property_prospectiveMember"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024created",
+            "name": "created",
+            "summary": "Creation\u0020of\u0020the\u0020checkout\u0020session.",
+            "url": "classes/Database-Model-CheckoutSession.html#property_created"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024expiration",
+            "name": "expiration",
+            "summary": "Expiration\u0020of\u0020the\u0020checkout\u0020session.",
+            "url": "classes/Database-Model-CheckoutSession.html#property_expiration"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024recoveryUrl",
+            "name": "recoveryUrl",
+            "summary": "Recovery\u0020URL\u0020for\u0020the\u0020Checkout\u0020Session\u0020when\u0020the\u0020state\u0020is\u0020\u0027EXPIRED\u0027.",
+            "url": "classes/Database-Model-CheckoutSession.html#property_recoveryUrl"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024recoveredFrom",
+            "name": "recoveredFrom",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#property_recoveredFrom"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024state",
+            "name": "state",
+            "summary": "The\u0020state\u0020of\u0020the\u0020payment.",
+            "url": "classes/Database-Model-CheckoutSession.html#property_state"
+        },                {
             "fqsen": "\\Database\\Model\\Decision",
             "name": "Decision",
             "summary": "Decision\u0020model.",
@@ -5535,6 +5750,46 @@ Search.appendIndex(
             "name": "destroyedby",
             "summary": "Destroyed\u0020by.",
             "url": "classes/Database-Model-Decision.html#property_destroyedby"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates",
+            "name": "CheckoutSessionStates",
+            "summary": "Enum\u0020for\u0020the\u0020different\u0020states\u0020a\u0020Checkout\u0020Session\u0020can\u0020have.",
+            "url": "classes/Database-Model-Enums-CheckoutSessionStates.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-CheckoutSessionStates.html#method_getName"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates\u003A\u003ACreated",
+            "name": "Created",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates\u003A\u003ACancelled",
+            "name": "Cancelled",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates\u003A\u003AExpired",
+            "name": "Expired",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates\u003A\u003APending",
+            "name": "Pending",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates\u003A\u003AFailed",
+            "name": "Failed",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates\u003A\u003APaid",
+            "name": "Paid",
+            "summary": "",
+            "url": ""
         },                {
             "fqsen": "\\Database\\Model\\InstallationFunction",
             "name": "InstallationFunction",
@@ -5946,16 +6201,6 @@ Search.appendIndex(
             "summary": "Set\u0020how\u0020much\u0020has\u0020been\u0020paid.",
             "url": "classes/Database-Model-Member.html#method_setPaid"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetIban\u0028\u0029",
-            "name": "getIban",
-            "summary": "Get\u0020the\u0020IBAN.",
-            "url": "classes/Database-Model-Member.html#method_getIban"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AsetIban\u0028\u0029",
-            "name": "setIban",
-            "summary": "Set\u0020the\u0020IBAN.",
-            "url": "classes/Database-Model-Member.html#method_setIban"
-        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetSupremum\u0028\u0029",
             "name": "getSupremum",
             "summary": "Get\u0020if\u0020the\u0020member\u0020wants\u0020a\u0020supremum.",
@@ -6051,10 +6296,10 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020student\u0020address.",
             "url": "classes/Database-Model-Member.html#method_setStudentAddress"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetActionLinks\u0028\u0029",
-            "name": "getActionLinks",
-            "summary": "Get\u0020action\u0020links\u0020of\u0020a\u0020member",
-            "url": "classes/Database-Model-Member.html#method_getActionLinks"
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetRenewalLinks\u0028\u0029",
+            "name": "getRenewalLinks",
+            "summary": "Get\u0020renewal\u0020links\u0020of\u0020a\u0020member",
+            "url": "classes/Database-Model-Member.html#method_getRenewalLinks"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024lidnr",
             "name": "lidnr",
@@ -6141,11 +6386,6 @@ Search.appendIndex(
             "summary": "How\u0020much\u0020the\u0020member\u0020has\u0020paid\u0020for\u0020membership.\u00200\u0020by\u0020default.",
             "url": "classes/Database-Model-Member.html#property_paid"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024iban",
-            "name": "iban",
-            "summary": "Iban\u0020number.",
-            "url": "classes/Database-Model-Member.html#property_iban"
-        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024supremum",
             "name": "supremum",
             "summary": "If\u0020the\u0020member\u0020receives\u0020a\u0020\u0027supremum\u0027",
@@ -6171,10 +6411,10 @@ Search.appendIndex(
             "summary": "Memberships\u0020of\u0020mailing\u0020lists.",
             "url": "classes/Database-Model-Member.html#property_lists"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024actionLinks",
-            "name": "actionLinks",
-            "summary": "ActionLinks\u0020of\u0020this\u0020member.",
-            "url": "classes/Database-Model-Member.html#property_actionLinks"
+            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024renewalLinks",
+            "name": "renewalLinks",
+            "summary": "RenewalLinks\u0020of\u0020this\u0020member.",
+            "url": "classes/Database-Model-Member.html#property_renewalLinks"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024authenticationKey",
             "name": "authenticationKey",
@@ -6291,6 +6531,26 @@ Search.appendIndex(
             "summary": "First\u0020name.",
             "url": "classes/Database-Model-MemberUpdate.html#property_firstName"
         },                {
+            "fqsen": "\\Database\\Model\\PaymentLink",
+            "name": "PaymentLink",
+            "summary": "Payment\u0020link\u0020for\u0020prospective\u0020members.",
+            "url": "classes/Database-Model-PaymentLink.html"
+        },                {
+            "fqsen": "\\Database\\Model\\PaymentLink\u003A\u003AgetProspectiveMember\u0028\u0029",
+            "name": "getProspectiveMember",
+            "summary": "",
+            "url": "classes/Database-Model-PaymentLink.html#method_getProspectiveMember"
+        },                {
+            "fqsen": "\\Database\\Model\\PaymentLink\u003A\u003AsetProspectiveMember\u0028\u0029",
+            "name": "setProspectiveMember",
+            "summary": "",
+            "url": "classes/Database-Model-PaymentLink.html#method_setProspectiveMember"
+        },                {
+            "fqsen": "\\Database\\Model\\PaymentLink\u003A\u003A\u0024prospectiveMember",
+            "name": "prospectiveMember",
+            "summary": "The\u0020prospective\u0020member",
+            "url": "classes/Database-Model-PaymentLink.html#property_prospectiveMember"
+        },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember",
             "name": "ProspectiveMember",
             "summary": "ProspectiveMember\u0020model.",
@@ -6396,6 +6656,36 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020birthdate.",
             "url": "classes/Database-Model-ProspectiveMember.html#method_setBirth"
         },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetCountry\u0028\u0029",
+            "name": "getCountry",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getCountry"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetStreet\u0028\u0029",
+            "name": "getStreet",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getStreet"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetNumber\u0028\u0029",
+            "name": "getNumber",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getNumber"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetPostalCode\u0028\u0029",
+            "name": "getPostalCode",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getPostalCode"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetCity\u0028\u0029",
+            "name": "getCity",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getCity"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetPhone\u0028\u0029",
+            "name": "getPhone",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getPhone"
+        },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetChangedOn\u0028\u0029",
             "name": "getChangedOn",
             "summary": "Get\u0020the\u0020date\u0020of\u0020the\u0020last\u0020membership\u0020change.",
@@ -6415,41 +6705,6 @@ Search.appendIndex(
             "name": "setPaid",
             "summary": "Set\u0020how\u0020much\u0020has\u0020been\u0020paid.",
             "url": "classes/Database-Model-ProspectiveMember.html#method_setPaid"
-        },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetIban\u0028\u0029",
-            "name": "getIban",
-            "summary": "Get\u0020the\u0020IBAN.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_getIban"
-        },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AsetIban\u0028\u0029",
-            "name": "setIban",
-            "summary": "Set\u0020the\u0020IBAN.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_setIban"
-        },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetSignature\u0028\u0029",
-            "name": "getSignature",
-            "summary": "Get\u0020the\u0020signature\u0020image\u0020URL.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_getSignature"
-        },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AsetSignature\u0028\u0029",
-            "name": "setSignature",
-            "summary": "Set\u0020the\u0020signature\u0020image\u0020URL.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_setSignature"
-        },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetSignatureLocation\u0028\u0029",
-            "name": "getSignatureLocation",
-            "summary": "Get\u0020the\u0020signature\u0020location",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_getSignatureLocation"
-        },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AsetSignatureLocation\u0028\u0029",
-            "name": "setSignatureLocation",
-            "summary": "Set\u0020the\u0020signature\u0020location",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_setSignatureLocation"
-        },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetMandateCharacteristic\u0028\u0029",
-            "name": "getMandateCharacteristic",
-            "summary": "Returns\u0020the\u0020characteristic\u0020of\u0020the\u0020mandate.\u0020Is\u0020unique\u0020for\u0020each\u0020form\u0020entry",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_getMandateCharacteristic"
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
@@ -6480,6 +6735,31 @@ Search.appendIndex(
             "name": "addLists",
             "summary": "Add\u0020multiple\u0020mailing\u0020lists.",
             "url": "classes/Database-Model-ProspectiveMember.html#method_addLists"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetCheckoutSessions\u0028\u0029",
+            "name": "getCheckoutSessions",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getCheckoutSessions"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AisCheckoutPending\u0028\u0029",
+            "name": "isCheckoutPending",
+            "summary": "Determine\u0020whether\u0020the\u0020prospective\u0020member\u0020does\u0020not\u0020have\u0020a\u0020\u0060created\u0060\u0020or\u0020\u0060pending\u0060\u0020Checkout\u0020Session.\u0020This\u0020is\u0020used\u0020to\ncheck\u0020whether\u0020a\u0020prospective\u0020member\u0020can\u0020be\u0020safely\u0020deleted.",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_isCheckoutPending"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AhasCheckoutExpiredOrFailed\u0028\u0029",
+            "name": "hasCheckoutExpiredOrFailed",
+            "summary": "Determine\u0020whether\u0020the\u0020prospective\u0020member\u0020has\u0020an\u0020\u0060expired\u0060\u0020or\u0020\u0060failed\u0060\u0020Checkout\u0020Session.\u0020This\u0020is\u0020used\u0020to\u0020check\nwhether\u0020a\u0020prospective\u0020member\u0020can\u0020be\u0020approved.",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_hasCheckoutExpiredOrFailed"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetPaymentLink\u0028\u0029",
+            "name": "getPaymentLink",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getPaymentLink"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AsetPaymentLink\u0028\u0029",
+            "name": "setPaymentLink",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_setPaymentLink"
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024lidnr",
             "name": "lidnr",
@@ -6536,11 +6816,6 @@ Search.appendIndex(
             "summary": "How\u0020much\u0020the\u0020member\u0020has\u0020paid\u0020for\u0020membership.\u00200\u0020by\u0020default.",
             "url": "classes/Database-Model-ProspectiveMember.html#property_paid"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024iban",
-            "name": "iban",
-            "summary": "Iban\u0020number.",
-            "url": "classes/Database-Model-ProspectiveMember.html#property_iban"
-        },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024country",
             "name": "country",
             "summary": "Country.",
@@ -6576,15 +6851,60 @@ Search.appendIndex(
             "summary": "Memberships\u0020of\u0020mailing\u0020lists.",
             "url": "classes/Database-Model-ProspectiveMember.html#property_lists"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024signature",
-            "name": "signature",
-            "summary": "The\u0020signature\u0020image\u0020URL.",
-            "url": "classes/Database-Model-ProspectiveMember.html#property_signature"
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024checkoutSessions",
+            "name": "checkoutSessions",
+            "summary": "The\u0020Checkout\u0020Sessions\u0020for\u0020this\u0020prospective\u0020member.",
+            "url": "classes/Database-Model-ProspectiveMember.html#property_checkoutSessions"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024signatureLocation",
-            "name": "signatureLocation",
-            "summary": "The\u0020signature\u0020location",
-            "url": "classes/Database-Model-ProspectiveMember.html#property_signatureLocation"
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003A\u0024paymentLink",
+            "name": "paymentLink",
+            "summary": "Payment\u0020link\u0020that\u0020can\u0020be\u0020used\u0020by\u0020the\u0020prospective\u0020member\u0020to\u0020restart\u0020a\u0020Checkout\u0020Session.",
+            "url": "classes/Database-Model-ProspectiveMember.html#property_paymentLink"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink",
+            "name": "RenewalLink",
+            "summary": "Membership\u0020\/\u0020graduate\u0020status\u0020renewal\u0020links.",
+            "url": "classes/Database-Model-RenewalLink.html"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-RenewalLink.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "",
+            "url": "classes/Database-Model-RenewalLink.html#method_getMember"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003AgetCurrentExpiration\u0028\u0029",
+            "name": "getCurrentExpiration",
+            "summary": "",
+            "url": "classes/Database-Model-RenewalLink.html#method_getCurrentExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003AgetNewExpiration\u0028\u0029",
+            "name": "getNewExpiration",
+            "summary": "",
+            "url": "classes/Database-Model-RenewalLink.html#method_getNewExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003AlinkExpired\u0028\u0029",
+            "name": "linkExpired",
+            "summary": "We\u0020assume\u0020a\u0020link\u0020is\u0020valid\u0020until\u002030\u0020days\u0020after\u0020the\u0020original\u0020membership\u0020expired\nThen,\u0020people\u0020can\u0020still\u0020renew\u0020their\u0020membership\u0020after\u0020their\u0020account\u0020gets\u0020locked",
+            "url": "classes/Database-Model-RenewalLink.html#method_linkExpired"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "The\u0020member",
+            "url": "classes/Database-Model-RenewalLink.html#property_member"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003A\u0024currentExpiration",
+            "name": "currentExpiration",
+            "summary": "Current\u0020expiration",
+            "url": "classes/Database-Model-RenewalLink.html#property_currentExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\RenewalLink\u003A\u003A\u0024newExpiration",
+            "name": "newExpiration",
+            "summary": "New\u0020expiration\nThis\u0020is\u0020not\u0020neccessarily\u0020a\u0020year\u0020from\u0020the\u0020previous\u0020as\u0020in\u0020principle\u0020this\nwill\u0020be\u0020until\u0020the\u0020end\u0020of\u0020next\u0020association\u0020year.",
+            "url": "classes/Database-Model-RenewalLink.html#property_newExpiration"
         },                {
             "fqsen": "\\Database\\Model\\SavedQuery",
             "name": "SavedQuery",
@@ -7416,6 +7736,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Factory-QueryFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Database\\Service\\Factory\\StripeFactory",
+            "name": "StripeFactory",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-StripeFactory.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\StripeFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-StripeFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Database\\Service\\InstallationFunction",
             "name": "InstallationFunction",
             "summary": "",
@@ -7826,15 +8156,10 @@ Search.appendIndex(
             "summary": "Subscribe\u0020a\u0020member.",
             "url": "classes/Database-Service-Member.html#method_subscribe"
         },                {
-            "fqsen": "\\Database\\Service\\Member\u003A\u003AsendMemberSubscriptionEmail\u0028\u0029",
-            "name": "sendMemberSubscriptionEmail",
-            "summary": "Send\u0020an\u0020email\u0020about\u0020the\u0020newly\u0020subscribed\u0020member\u0020to\u0020the\u0020new\u0020member\u0020and\u0020the\u0020secretary",
-            "url": "classes/Database-Service-Member.html#method_sendMemberSubscriptionEmail"
-        },                {
-            "fqsen": "\\Database\\Service\\Member\u003A\u003AsendMemberConfirmedEmail\u0028\u0029",
-            "name": "sendMemberConfirmedEmail",
-            "summary": "Send\u0020an\u0020email\u0020about\u0020the\u0020approval\u0020to\u0020the\u0020new\u0020member\u0020and\u0020the\u0020secretary",
-            "url": "classes/Database-Service-Member.html#method_sendMemberConfirmedEmail"
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AsendRegistrationUpdateEmail\u0028\u0029",
+            "name": "sendRegistrationUpdateEmail",
+            "summary": "Send\u0020an\u0020e\u002Dmail\u0020to\u0020the\u0020\u0028prospective\u0029\u0020member\u0020and\u0020the\u0020secretary\u0020with\u0020an\u0020update\u0020on\u0020the\u0020\u0028prospective\u0029\u0020member\u0027s\nregistration.",
+            "url": "classes/Database-Service-Member.html#method_sendRegistrationUpdateEmail"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AfinalizeSubscription\u0028\u0029",
             "name": "finalizeSubscription",
@@ -7898,8 +8223,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AremoveProspective\u0028\u0029",
             "name": "removeProspective",
-            "summary": "Remove\u0020a\u0020member.",
+            "summary": "Remove\u0020a\u0020prospective\u0020member.",
             "url": "classes/Database-Service-Member.html#method_removeProspective"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AremoveExpiredProspectiveMembers\u0028\u0029",
+            "name": "removeExpiredProspectiveMembers",
+            "summary": "Remove\u0020all\u0020prospective\u0020members\u0020whose\u0020last\u0020Checkout\u0020Session\u0020has\u0020fully\u0020expired\u0020\u00281\u0020\u002B\u002030\u0020\u002B\u00201\u0020day\u0020ago\u0029\u0020or\u0020failed\u002031\ndays\u0020ago.",
+            "url": "classes/Database-Service-Member.html#method_removeExpiredProspectiveMembers"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003Aclear\u0028\u0029",
             "name": "clear",
@@ -8235,6 +8565,86 @@ Search.appendIndex(
             "name": "emReport",
             "summary": "",
             "url": "classes/Database-Service-Query.html#property_emReport"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe",
+            "name": "Stripe",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetPaymentLink\u0028\u0029",
+            "name": "getPaymentLink",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#method_getPaymentLink"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetCheckoutLink\u0028\u0029",
+            "name": "getCheckoutLink",
+            "summary": "To\u0020ensure\u0020that\u0020we\u0020can\u0020check\u0020whether\u0020a\u0020Checkout\u0020Session\u0020and\u0020eventually\u0020the\u0020payment\u0020was\u0020successful\u0020we\u0020need\u0020to\u0020keep\ntrack\u0020of\u0020what\u0020we\u0020are\u0020doing.\u0020As\u0020such,\u0020we\u0020create\u0020a\u0020\u0060Payment\u0060\u0020for\u0020the\u0020prospective\u0020member\u0020to\u0020track\u0020the\u0020Checkout\nSession.",
+            "url": "classes/Database-Service-Stripe.html#method_getCheckoutLink"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetLidnrFromCheckoutSession\u0028\u0029",
+            "name": "getLidnrFromCheckoutSession",
+            "summary": "Get\u0020the\u0020id\u0020of\u0020a\u0020prospective\u0020member\u0020from\u0020the\u0020Checkout\u0020Session.",
+            "url": "classes/Database-Service-Stripe.html#method_getLidnrFromCheckoutSession"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003ArestartCheckoutLink\u0028\u0029",
+            "name": "restartCheckoutLink",
+            "summary": "Try\u0020to\u0020restart\u0020an\u0020active\u0020Checkout\u0020Session,\u0020if\u0020this\u0020is\u0020not\u0020possible,\u0020create\u0020a\u0020new\u0020Checkout\u0020Session.",
+            "url": "classes/Database-Service-Stripe.html#method_restartCheckoutLink"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AcreateCheckoutSession\u0028\u0029",
+            "name": "createCheckoutSession",
+            "summary": "Create\u0020a\u0020Checkout\u0020Session\u0020through\u0020the\u0020Stripe\u0020API.\u0020The\u0020Checkout\u0020Session\u0020has\u0020some\u0020required\u0020parameters,\u0020for\u0020more\ninformation\u0020on\u0020their\u0020details\u0020see\u0020\u007B\u0040link\u0020https\u003A\/\/stripe.com\/docs\/api\/checkout\/sessions\/object\u007D.",
+            "url": "classes/Database-Service-Stripe.html#method_createCheckoutSession"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetCheckoutSession\u0028\u0029",
+            "name": "getCheckoutSession",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#method_getCheckoutSession"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AverifyEvent\u0028\u0029",
+            "name": "verifyEvent",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#method_verifyEvent"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AhandleEvent\u0028\u0029",
+            "name": "handleEvent",
+            "summary": "To\u0020keep\u0020track\u0020of\u0020how\u0020the\u0020Checkout\u0020Session\u0020and\u0020its\u0020associated\u0020payment\u0020evolves\u0020over\u0020time\u0020we\u0020need\u0020to\u0020be\u0020able\u0020to\nhandle\u0020a\u0020few\u0020events\u0020from\u0020webhooks\u0020that\u0020Stripe\u0020sends\u0020us.\u0020In\u0020other\u0020words,\u0020this\u0020is\u0020the\u0020fulfillment\u0020process.",
+            "url": "classes/Database-Service-Stripe.html#method_handleEvent"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetClient\u0028\u0029",
+            "name": "getClient",
+            "summary": "Get\u0020the\u0020Stripe\u0020client.\u0020This\u0020should\u0020never\u0020be\u0020directly\u0020accessible,\u0020helper\u0020functions\u0020will\u0020handle\u0020required\u0020actions\u0020to\nprevent\u0020unwanted\u0020access.",
+            "url": "classes/Database-Service-Stripe.html#method_getClient"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003A\u0024logger",
+            "name": "logger",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#property_logger"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003A\u0024paymentLinkMapper",
+            "name": "paymentLinkMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#property_paymentLinkMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003A\u0024checkoutSessionMapper",
+            "name": "checkoutSessionMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#property_checkoutSessionMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003A\u0024memberService",
+            "name": "memberService",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#property_memberService"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003A\u0024config",
+            "name": "config",
+            "summary": "",
+            "url": "classes/Database-Service-Stripe.html#property_config"
         },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
@@ -9266,16 +9676,6 @@ Search.appendIndex(
             "summary": "Set\u0020how\u0020much\u0020has\u0020been\u0020paid.",
             "url": "classes/Report-Model-Member.html#method_setPaid"
         },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003AgetIban\u0028\u0029",
-            "name": "getIban",
-            "summary": "Get\u0020the\u0020IBAN.",
-            "url": "classes/Report-Model-Member.html#method_getIban"
-        },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003AsetIban\u0028\u0029",
-            "name": "setIban",
-            "summary": "Set\u0020the\u0020IBAN.",
-            "url": "classes/Report-Model-Member.html#method_setIban"
-        },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetSupremum\u0028\u0029",
             "name": "getSupremum",
             "summary": "Get\u0020if\u0020the\u0020member\u0020wants\u0020a\u0020supremum.",
@@ -9450,11 +9850,6 @@ Search.appendIndex(
             "name": "paid",
             "summary": "How\u0020much\u0020the\u0020member\u0020has\u0020paid\u0020for\u0020membership.\u00200\u0020by\u0020default.",
             "url": "classes/Report-Model-Member.html#property_paid"
-        },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024iban",
-            "name": "iban",
-            "summary": "Iban\u0020number.",
-            "url": "classes/Report-Model-Member.html#property_iban"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024supremum",
             "name": "supremum",
@@ -11790,6 +12185,11 @@ Search.appendIndex(
             "name": "Model",
             "summary": "",
             "url": "namespaces/database-model.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums",
+            "name": "Enums",
+            "summary": "",
+            "url": "namespaces/database-model-enums.html"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision",
             "name": "SubDecision",

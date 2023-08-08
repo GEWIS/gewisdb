@@ -257,7 +257,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -304,6 +304,14 @@
                                 &nbsp;: array&lt;array-key, <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&gt;    </span>
 </dt>
 <dd>Find all members.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Mapper-ProspectiveMember.html#method_findWithFullyExpiredOrFailedCheckout">findWithFullyExpiredOrFailedCheckout()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&gt;    </span>
+</dt>
+<dd>Find all prospective members whose last Checkout Session has fully expired ((1 + 30) + 1 day ago) or failed 31
+days ago.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Mapper-ProspectiveMember.html#method_getRepository">getRepository()</a>
@@ -368,7 +376,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -406,7 +414,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -450,7 +458,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 
     </aside>
 
@@ -496,7 +504,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -522,6 +530,40 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_findWithFullyExpiredOrFailedCheckout">
+        findWithFullyExpiredOrFailedCheckout()
+        <a href="classes/Database-Mapper-ProspectiveMember.html#method_findWithFullyExpiredOrFailedCheckout" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">133</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find all prospective members whose last Checkout Session has fully expired ((1 + 30) + 1 day ago) or failed 31
+days ago.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findWithFullyExpiredOrFailedCheckout</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&gt;</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getRepository">
         getRepository()
         <a href="classes/Database-Mapper-ProspectiveMember.html#method_getRepository" class="headerlink"><i class="fas fa-link"></i></a>
@@ -529,7 +571,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">183</span>
 
     </aside>
 
@@ -562,7 +604,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -606,7 +648,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
@@ -650,7 +692,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
@@ -694,7 +736,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -702,13 +744,21 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">search</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$query</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;array-key, <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">search</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$query</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;array-key, <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$query</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
