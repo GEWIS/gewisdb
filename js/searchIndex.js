@@ -3218,7 +3218,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AmemberAction\u0028\u0029",
             "name": "memberAction",
-            "summary": "Return\u0020members",
+            "summary": "Return\u0020member",
             "url": "classes/Database-Controller-ApiController.html#method_memberAction"
         },                {
             "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AmembersActiveAction\u0028\u0029",
@@ -3230,6 +3230,11 @@ Search.appendIndex(
             "name": "noContent",
             "summary": "To\u0020follow\u0020best\u0020practices,\u0020we\u0020generate\u0020a\u0020204\u0020for\u0020empty\u0020datasets",
             "url": "classes/Database-Controller-ApiController.html#method_noContent"
+        },                {
+            "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AadditionalProperties\u0028\u0029",
+            "name": "additionalProperties",
+            "summary": "",
+            "url": "classes/Database-Controller-ApiController.html#method_additionalProperties"
         },                {
             "fqsen": "\\Database\\Controller\\ApiController\u003A\u003A\u0024apiService",
             "name": "apiService",
@@ -11683,6 +11688,11 @@ Search.appendIndex(
         },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyKeyholder",
             "name": "MembersPropertyKeyholder",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyType",
+            "name": "MembersPropertyType",
             "summary": "",
             "url": ""
         },                {
