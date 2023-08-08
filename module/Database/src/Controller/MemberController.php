@@ -9,7 +9,9 @@ use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
+use Database\Service\Stripe as StripeService;
 use DateTime;
+use Laminas\Http\Header\HeaderInterface;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator;
@@ -28,6 +30,7 @@ class MemberController extends AbstractActionController
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
         private readonly MemberService $memberService,
+        private readonly StripeService $stripeService,
         private readonly RenewalService $renewalService,
     ) {
     }
@@ -43,23 +46,108 @@ class MemberController extends AbstractActionController
     /**
      * Subscribe action.
      */
-    public function subscribeAction(): ViewModel
+    public function subscribeAction(): Response|ViewModel
     {
         $request = $this->getRequest();
 
-        // if ($request->isPost()) {
-        //     $member = $this->memberService->subscribe($request->getPost()->toArray());
-        //
-        //     if (null !== $member) {
-        //         $this->memberService->sendMemberSubscriptionEmail($member);
-        //
-        //        return new ViewModel(['member' => $member]);
-        //     }
-        // }
+        if ($request->isPost()) {
+            $prospectiveMember = $this->memberService->subscribe($request->getPost()->toArray());
+
+            if (null !== $prospectiveMember) {
+                // Always send the enrolment e-mail to ensure that the prospective member has a payment link that can be
+                // used in the event the checkout did not succeed.
+                $this->memberService->sendRegistrationUpdateEmail(
+                    $prospectiveMember,
+                    'registration',
+                );
+
+                // Create Stripe checkout session.
+                $checkoutLink = $this->stripeService->getCheckoutLink($prospectiveMember);
+
+                if (null === $checkoutLink) {
+                    // We have failed to generate a payment link, however, as we have already persisted the prospective
+                    // member we still want to show them something useful. They should have already received the e-mail
+                    // containing the generic payment link, which they can use to (re)start the checkout flow.
+
+                    return $this->redirect()->toRoute('member/subscribe/checkout/status', ['status' => 'error']);
+                }
+
+                return $this->redirect()
+                    ->toUrl($checkoutLink)
+                    ->setStatusCode(Response::STATUS_CODE_303);
+            }
+        }
 
         return new ViewModel([
             'form' => $this->memberService->getMemberForm(),
         ]);
+    }
+
+    public function checkoutStatusAction(): ViewModel
+    {
+        $status = $this->params()->fromRoute('status');
+        $checkoutSessionId = (string) $this->params()->fromQuery('stripe_session_id');
+        $prospectiveMemberId = $this->stripeService->getLidnrFromCheckoutSession($checkoutSessionId);
+
+        if (null !== $prospectiveMemberId) {
+            $prospectiveMember = $this->memberService->getProspectiveMember($prospectiveMemberId)['member'];
+        } else {
+            $prospectiveMember = null;
+        }
+
+        // We assume that an empty array means an error state (`$status` will be "error" but not compared).
+        $results = ['prospectiveMember' => $prospectiveMember];
+        if ('cancelled' === $status) {
+            $results['cancelled'] = true;
+        } elseif ('completed' === $status) {
+            $results['completed'] = true;
+        }
+
+        return new ViewModel($results);
+    }
+
+    public function checkoutRestartAction(): Response|ViewModel
+    {
+        $token = (string) $this->params()->fromRoute('token');
+        $paymentLink = $this->stripeService->getPaymentLink($token);
+
+        if (
+            null === $paymentLink
+            || $paymentLink->isUsed()
+        ) {
+            return new ViewModel(['error' => false]);
+        }
+
+        $restartedCheckoutLink = $this->stripeService->restartCheckoutLink($paymentLink->getProspectiveMember());
+
+        if (null === $restartedCheckoutLink) {
+            return new ViewModel(['error' => true]);
+        }
+
+        return $this->redirect()
+            ->toUrl($restartedCheckoutLink)
+            ->setStatusCode(Response::STATUS_CODE_303);
+    }
+
+    public function paymentWebhookAction(): Response
+    {
+        $signature = $this->getRequest()->getHeader('Stripe-Signature');
+
+        if ($signature instanceof HeaderInterface) {
+            $event = $this->stripeService->verifyEvent($this->getRequest()->getContent(), $signature->getFieldValue());
+
+            if (null !== $event) {
+                // Stripe technically wants the 200 before we handle things, however, Laminas has as far as I know no
+                // (good) support for using Fibers to do this concurrently.
+                $this->stripeService->handleEvent($event);
+
+                return $this->getResponse()
+                    ->setStatusCode(Response::STATUS_CODE_200);
+            }
+        }
+
+        return $this->getResponse()
+            ->setStatusCode(Response::STATUS_CODE_400);
     }
 
     /**
@@ -69,6 +157,7 @@ class MemberController extends AbstractActionController
     public function renewAction(): ViewModel
     {
         $form = $this->memberService->getRenewalForm((string) $this->params()->fromRoute('token'));
+
         if (null === $form) {
             return new ViewModel([]);
         }
@@ -96,9 +185,9 @@ class MemberController extends AbstractActionController
                 $updatedMember = $form->getData();
                 $updatedMember->setChangedOn(new DateTime());
                 $this->memberService->getMemberMapper()->persist($updatedMember);
-                $form->getActionLink()->used();
-                $this->memberService->getActionLinkMapper()->persist($form->getActionLink());
-                $this->renewalService->sendRenewalSuccessEmail($form->getActionLink());
+                $form->getRenewalLink()->setUsed(true);
+                $this->memberService->getActionLinkMapper()->persist($form->getRenewalLink());
+                $this->renewalService->sendRenewalSuccessEmail($form->getRenewalLink());
 
                 return new ViewModel([
                     'updatedMember' => $updatedMember,

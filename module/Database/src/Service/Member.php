@@ -28,14 +28,15 @@ use Database\Model\Address as AddressModel;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\MemberUpdate as MemberUpdateModel;
+use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\MailingList as MailingListService;
 use DateTime;
+use InvalidArgumentException;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mime\Message as MimeMessage;
-use Laminas\Mime\Mime;
 use Laminas\Mime\Part as MimePart;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\ViewModel;
@@ -44,7 +45,7 @@ use ReflectionClass;
 use RuntimeException;
 
 use function bin2hex;
-use function fopen;
+use function in_array;
 use function mb_encode_mimeheader;
 use function random_bytes;
 
@@ -130,92 +131,70 @@ class Member
             $prospectiveMember->addList($list);
         }
 
-        // handle signature
-        if (null !== $prospectiveMember->getIban()) {
-            $signature = $form->get('signature')->getValue();
-
-            if (null !== $signature) {
-                $path = $this->getFileStorageService()->storeUploadedData($signature, 'png');
-                $prospectiveMember->setSignature($path);
-            }
-        }
-
         $this->getProspectiveMemberMapper()->persist($prospectiveMember);
+
+        // Create a payment link for the prospective member in the event that the checkout did not succeed.
+        $paymentLink = new PaymentLink();
+        $paymentLink->setProspectiveMember($prospectiveMember);
+        $prospectiveMember->setPaymentLink($paymentLink);
+        $this->getActionLinkMapper()->persist($paymentLink);
 
         return $prospectiveMember;
     }
 
     /**
-     * Send an email about the newly subscribed member to the new member and the secretary
+     * Send an e-mail to the (prospective) member and the secretary with an update on the (prospective) member's
+     * registration.
+     *
+     * @psalm-param "registration"|"welcome"|"checkout-expired"|"checkout-failed" $type
      */
-    public function sendMemberSubscriptionEmail(ProspectiveMemberModel $member): void
-    {
-        $config = $this->config;
-        $config = $config['email'];
-
-        $renderer = $this->getRenderer();
-        $model = new ViewModel(['member' => $member]);
-        $model->setTemplate('database/member/subscribe');
-        $body = $renderer->render($model);
-
-        $html = new MimePart($body);
-        $html->type = 'text/html';
-
-        $mimeMessage = new MimeMessage();
-        $mimeMessage->addPart($html);
-
-        // Include signature as image attachment
-        if (null !== $member->getIban()) {
-            $image = new MimePart(
-                fopen(
-                    $this->getFileStorageService()->getConfig()['storage_dir'] . '/' . $member->getSignature(),
-                    'r',
-                ),
-            );
-            $image->type = 'image/png';
-            $image->filename = 'signature.png';
-            $image->disposition = Mime::DISPOSITION_ATTACHMENT;
-            $image->encoding = Mime::ENCODING_BASE64;
-            $mimeMessage->addPart($image);
+    public function sendRegistrationUpdateEmail(
+        MemberModel|ProspectiveMemberModel $member,
+        string $type,
+    ): void {
+        if (!in_array($type, ['registration', 'welcome', 'checkout-expired', 'checkout-failed'])) {
+            throw new InvalidArgumentException('Unknown email type for prospective member.');
         }
 
-        $message = new Message();
-        $message->getHeaders()->addHeader((new MessageId())->setId());
-        $message->setBody($mimeMessage);
-        $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('New member subscription: ' . $member->getFullName());
-        $this->getMailTransport()->send($message);
+        // Define here to appease the checkers for "possibly undefined variables". Because of the `!in_array()` these
+        // are guaranteed to be changed.
+        $template = '';
+        $subjectProspectiveMember = '';
+        $subjectSecretary = '';
 
-        $message = new Message();
-        $message->getHeaders()->addHeader((new MessageId())->setId());
-        $message->setBody($mimeMessage);
-        $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->setTo(
-            $member->getEmail(),
-            mb_encode_mimeheader(
-                $member->getFullName(),
-                'UTF-8',
-                'Q',
-                '',
-            ),
-        );
-        $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('GEWIS Subscription');
-        $this->getMailTransport()->send($message);
-    }
+        switch ($type) {
+            case 'registration':
+                $template = 'database/email/member-registration';
+                $subjectProspectiveMember = 'GEWIS registration';
+                $subjectSecretary = 'New member registration: ' . $member->getFullName();
 
-    /**
-     * Send an email about the approval to the new member and the secretary
-     */
-    public function sendMemberConfirmedEmail(MemberModel $member): void
-    {
+                break;
+            case 'welcome':
+                $template = 'database/email/member-welcome';
+                $subjectProspectiveMember = 'Your GEWIS membership has been confirmed';
+                $subjectSecretary = 'Membership confirmed: ' . $member->getFullName();
+
+                break;
+            case 'checkout-expired':
+                $template = 'database/email/checkout-expired';
+                $subjectProspectiveMember = 'Complete your GEWIS registration';
+                $subjectSecretary = 'Membership payment expired: ' . $member->getFullName();
+
+                break;
+            case 'checkout-failed':
+                $template = 'database/email/checkout-failed';
+                $subjectProspectiveMember = 'Your GEWIS membership fee payment has failed';
+                $subjectSecretary = 'Membership payment failed: ' . $member->getFullName();
+
+                break;
+        }
+
         $config = $this->config;
         $config = $config['email'];
 
         $renderer = $this->getRenderer();
         $model = new ViewModel(['member' => $member]);
-        $model->setTemplate('database/email/member-welcome');
+        $model->setTemplate($template);
         $body = $renderer->render($model);
 
         $html = new MimePart($body);
@@ -224,14 +203,8 @@ class Member
         $mimeMessage = new MimeMessage();
         $mimeMessage->addPart($html);
 
-        $message = new Message();
-        $message->getHeaders()->addHeader((new MessageId())->setId());
-        $message->setBody($mimeMessage);
-        $message->setFrom($config['from']['address'], $config['from']['name']);
-        $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('Membership confirmed: ' . $member->getFullName());
-        $this->getMailTransport()->send($message);
-
+        // Always try to send the e-mail to the prospective member before sending to the secretary. The secretary can
+        // look in the database, the prospective member cannot.
         $message = new Message();
         $message->getHeaders()->addHeader((new MessageId())->setId());
         $message->setBody($mimeMessage);
@@ -246,7 +219,15 @@ class Member
             ),
         );
         $message->setReplyTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
-        $message->setSubject('Your GEWIS membership has been confirmed');
+        $message->setSubject($subjectProspectiveMember);
+        $this->getMailTransport()->send($message);
+
+        $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']['address'], $config['from']['name']);
+        $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
+        $message->setSubject($subjectSecretary);
         $this->getMailTransport()->send($message);
     }
 
@@ -376,6 +357,9 @@ class Member
         // Add authentication key to allow external updates.
         $member->setAuthenticationKey($this->generateAuthenticationKey());
 
+        // Set paid automatically.
+        $member->setPaid(15);
+
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
 
@@ -404,13 +388,28 @@ class Member
     /**
      * Get prospective member info
      *
-     * @return array member, form, tuedata
-     *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+     * @return array{
+     *     member: ?ProspectiveMemberModel,
+     *     form: ?MemberApproveForm,
+     *     canDelete: ?bool,
+     *     tueData: ?TueData,
+     *     tueStatus: ?array<array-key, string[]>,
+     * }
      */
     public function getProspectiveMember(int $id): array
     {
         $member = $this->getProspectiveMemberMapper()->find($id);
+
+        if (null === $member) {
+            return [
+                'member' => null,
+                'form' => null,
+                'canDelete' => null,
+                'tueData' => null,
+                'tueStatus' => null,
+            ];
+        }
+
         $tueData = $this->getCheckerService()->tueDataObject();
         $tueStatus = [];
 
@@ -455,16 +454,6 @@ class Member
                         '<b>Warning:</b> Member does not study at department.',
                     ];
                 }
-
-                if (
-                    null === $member->getIban()
-                    || 'NL20INGB0001234567' === $member->getIban()
-                ) {
-                    $tueStatus[] = [
-                        'danger',
-                        '<b>Warning:</b> This member does not pay through SEPA Direct Debit',
-                    ];
-                }
             }
         } catch (LookupException $e) {
             $tueStatus[] = [
@@ -473,9 +462,18 @@ class Member
             ];
         }
 
+        $form = null;
+        if (
+            !$member->isCheckoutPending()
+            && !$member->hasCheckoutExpiredOrFailed()
+        ) {
+            $form = $this->memberApproveForm;
+        }
+
         return [
             'member' => $member,
-            'form' => $this->memberApproveForm,
+            'form' => $form,
+            'canDelete' => !$member->isCheckoutPending() || $member->hasCheckoutExpiredOrFailed(),
             'tueData' => $tueData,
             'tueStatus' => $tueStatus,
         ];
@@ -542,9 +540,11 @@ class Member
      *
      * @return ProspectiveMemberModel[]
      */
-    public function searchProspective(string $query): array
-    {
-        return $this->getProspectiveMemberMapper()->search($query);
+    public function searchProspective(
+        string $query,
+        string $type,
+    ): array {
+        return $this->getProspectiveMemberMapper()->search($query, $type);
     }
 
     /**
@@ -580,16 +580,24 @@ class Member
     }
 
     /**
-     * Remove a member.
+     * Remove a prospective member.
      */
     public function removeProspective(ProspectiveMemberModel $member): void
     {
-        // First destroy the signature file
-        if (null !== ($signature = $member->getSignature())) {
-            $this->getFileStorageService()->removeFile($signature);
-        }
-
         $this->getProspectiveMemberMapper()->remove($member);
+    }
+
+    /**
+     * Remove all prospective members whose last Checkout Session has fully expired (1 + 30 + 1 day ago) or failed 31
+     * days ago.
+     */
+    public function removeExpiredProspectiveMembers(): void
+    {
+        $prospectiveMembers = $this->getProspectiveMemberMapper()->findWithFullyExpiredOrFailedCheckout();
+
+        foreach ($prospectiveMembers as $prospectiveMember) {
+            $this->removeProspective($prospectiveMember);
+        }
     }
 
     /**
@@ -614,7 +622,6 @@ class Member
         $member->setExpiration($date);
         $member->setBirth($date);
         $member->setPaid(0);
-        $member->setIban(null);
         $member->setSupremum('optout');
         $member->setHidden(true);
         $member->setDeleted(true);
@@ -1091,15 +1098,20 @@ class Member
      */
     public function getRenewalForm(string $token): ?MemberRenewalForm
     {
-        $actionLink = $this->actionLinkMapper->findByToken($token);
-        if (null === $actionLink || $actionLink->isUsed() || $actionLink->linkExpired()) {
+        $renewalLink = $this->actionLinkMapper->findRenewalByToken($token);
+
+        if (
+            null === $renewalLink
+            || $renewalLink->isUsed()
+            || $renewalLink->linkExpired()
+        ) {
             return null;
         }
 
         $form = $this->memberRenewalForm;
-        $form->bind($actionLink->getMember());
-        $form->setExpiration($actionLink->getNewExpiration());
-        $form->setActionLink($actionLink);
+        $form->bind($renewalLink->getMember());
+        $form->setExpiration($renewalLink->getNewExpiration());
+        $form->setRenewalLink($renewalLink);
 
         return $form;
     }

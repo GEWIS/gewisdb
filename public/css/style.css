@@ -40,11 +40,6 @@ a:focus {
 /*background-color: #57a900;*/
 /*}*/
 
-canvas#signature-canvas {
-    border: 0.125rem solid #333333;
-    border-radius: 0.25rem;
-}
-
 .data-updated {
     background-color: #F0AD4E;
 }

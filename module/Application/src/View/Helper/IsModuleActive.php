@@ -9,6 +9,9 @@ use Psr\Container\ContainerInterface;
 
 use function array_map;
 use function explode;
+use function in_array;
+use function is_array;
+use function is_string;
 use function preg_replace;
 use function str_replace;
 
@@ -26,17 +29,40 @@ class IsModuleActive extends AbstractHelper
     public function __invoke(array $condition): bool
     {
         $info = $this->getRouteInfo();
+        $satisfied = [];
 
         foreach ($condition as $key => $cond) {
-            if (
-                !isset($info[$key])
-                || (null !== $cond && $info[$key] !== $cond)
-            ) {
+            if (!isset($info[$key])) {
                 return false;
+            }
+
+            if (!is_array($cond)) {
+                $cond = [$cond];
+            }
+
+            // Keep track if satisfied for this level.
+            $satisfied[$key] = false;
+
+            foreach ($cond as $mini) {
+                if ($satisfied[$key]) {
+                    // Already satisfied, so break early.
+                    break;
+                }
+
+                if (!is_string($mini)) {
+                    // Not a string, we cannot check this.
+                    continue;
+                }
+
+                if ($info[$key] !== $mini) {
+                    continue;
+                }
+
+                $satisfied[$key] = true;
             }
         }
 
-        return true;
+        return false === in_array(false, $satisfied, true);
     }
 
     /**

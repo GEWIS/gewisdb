@@ -4,7 +4,7 @@
 # All mailings require some settings. These can be set here. Don't forget to set the title ("Algemene mededeling; tekst zelf invoeren")
 version: 1.1
 settings:
-    title: "Registration Confirmation GEWIS"
+    title: "Registration Completed GEWIS"
     email: "secr@gewis.nl"
     lang: en-UK
     #lang: nl-NL
@@ -17,22 +17,22 @@ messageblocks:
 # Each mailing must have a header to make the template shine! It contains the title and the date.
     - type: "header"
       title: "Update on your registration"
-      date: 2022-10-26 #Note that this date needs to be updated
+      date: 2023-08-02 #Note that this date needs to be updated
 
 # This is the first block which is shown on top of the message. Recommended for most messages
     - type: topblock
-      title: "You have been confirmed as member of GEWIS!*"
+      title: "You have been confirmed as member of GEWIS!"
       contentHTML: "</p>
-      
+
       <p>Dear {{FIRSTNAME}},</p>
-      
+
       <p>First of all, welcome, and thank you for your registration at GEWIS. From tomorrow on, your membership number will be {{LIDNR}}.<br/>
-    You can use this membership number to log in to the website, where you can, among other things, subscribe to activities and look at photos from all the fun activities that you, together with the other members, have experienced. 
+    You can use this membership number to log in to the website, where you can, among other things, subscribe to activities and look at photos from all the fun activities that you, together with the other members, have experienced.
     Below more information on all the functions of the website can be found, but first of all, you can register to the website using the following link: <a href=\"https://gewis.nl/user/register\">gewis.nl/user/register</a>.</p>
     <p>Besides getting access to the website, you can also create a SudoSOS account, our system with which you will be able to buy drinks from the refrigerators and sweets you can find on the bar.
     You will need this account if you want to get a drink at the weekly social drink (usually called the “borrel”). To do this, first, log in to the GEWIS website using the account created above. After this, go to <a href=\"https://sudosos.gewis.nl\">sudosos.gewis.nl</a>.
     When you log in for the first time, you will have to read and accept the terms and conditions. After that, you can also set a pin code to use the point of sales on your own.</p>
-    
+
     With kind regards,<br/>
     The board of GEWIS"
 
@@ -66,8 +66,8 @@ messageblocks:
         contentHTML: "By becoming a GEWIS member you have the right to a specialized discount! By navigating to <a href=\"https://gewis.nl/books\">gewis.nl/books</a> you can find your study and see which books will be used for your courses."
       - title: "GEWIS on social media"
         contentHTML: "Next to our own photo section on the website, you can also find us on social media. We have Instagram, Facebook, and LinkedIn (see below). Additionally, we have a weekly newsletter, for which you are automatically subscribed. You will get your first newsletter soon!"
-        
+
 
 # You probably want to include this each newsletter
     - type: tinyfooter
-      contentHTML: 'You received this email because you registered as a member of GEWIS and your membership was confirmed. This is a one-time mailing to update you about the status of your request.<br/><br/>*If you are paying through SEPA Direct Debit, this approval is pending payment.'
+      contentHTML: 'You received this email because you registered as a member of GEWIS and your membership was confirmed. This is a one-time mailing to update you about the status of your request.'

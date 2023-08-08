@@ -182,6 +182,7 @@
       <path value="$PROJECT_DIR$/vendor/slevomat/coding-standard" />
       <path value="$PROJECT_DIR$/vendor/dealerdirect/phpcodesniffer-composer-installer" />
       <path value="$PROJECT_DIR$/vendor/gewis/gewisphp-coding-standards" />
+      <path value="$PROJECT_DIR$/vendor/stripe/stripe-php" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

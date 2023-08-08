@@ -80,4 +80,17 @@ return [
         'binduser_password' => getenv('LDAP_BINDUSER_PASS'),
         'basedn' => getenv('LDAP_BASEDN'),
     ],
+
+    /**
+     * Stripe settings to handle payments
+     */
+    'stripe' => [
+        'api_version' => getenv('STRIPE_API_VERSION'),
+        'publishable_key' => getenv('STRIPE_PUBLISHABLE_KEY'),
+        'secret_key' => getenv('STRIPE_SECRET_KEY'),
+        'webhook_signing_key' => getenv('STRIPE_WEBHOOK_SIGNING_KEY'),
+        'membership_price_id' => getenv('STRIPE_MEMBERSHIP_PRICE_ID'),
+        'cancel_url' => getenv('STRIPE_CANCEL_URL'),
+        'success_url' => getenv('STRIPE_SUCCESS_URL'),
+    ],
 ];

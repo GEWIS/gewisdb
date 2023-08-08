@@ -6,6 +6,8 @@ namespace Database\Mapper;
 
 use Database\Model\ActionLink as ActionLinkModel;
 use Database\Model\Member as MemberModel;
+use Database\Model\PaymentLink as PaymentLinkModel;
+use Database\Model\RenewalLink as RenewalLinkModel;
 use DateInterval;
 use DateTime;
 use Doctrine\ORM\EntityManager;
@@ -18,16 +20,43 @@ class ActionLink
     }
 
     /**
-     * Find an action link by token
+     * Find an payment link by token.
      */
-    public function findByToken(string $token): ?ActionLinkModel
+    public function findPaymentByToken(string $token): ?PaymentLinkModel
     {
         $qb = $this->em->createQueryBuilder();
+        $qb->select('pl, m')
+            ->from(PaymentLinkModel::class, 'pl')
+            ->leftJoin('pl.prospectiveMember', 'm')
+            ->where('pl.token = :token');
 
-        $qb->select('al, m')
-            ->from(ActionLinkModel::class, 'al')
-            ->leftJoin('al.member', 'm')
-            ->where('al.token = :token');
+        $qb->setParameter(':token', $token);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findPaymentByProspectiveMember(int $lidnr): ?PaymentLinkModel
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('pl')
+            ->from(PaymentLinkModel::class, 'pl')
+            ->where('pl.prospectiveMember = :lidnr');
+
+        $qb->setParameter(':lidnr', $lidnr);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * Find an renewal link by token.
+     */
+    public function findRenewalByToken(string $token): ?RenewalLinkModel
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('rl, m')
+            ->from(RenewalLinkModel::class, 'rl')
+            ->leftJoin('rl.member', 'm')
+            ->where('rl.token = :token');
 
         $qb->setParameter(':token', $token);
 
@@ -35,25 +64,27 @@ class ActionLink
     }
 
     /**
-     * Create an action link for a member
+     * Create a renewal link for a member.
+     *
      * If no expiration date is given, we renew until the first July 1st after the current expiration date +
-     * at most an extra 31 days to prevent two renewals within one month
+     * at most an extra 31 days to prevent two renewals within one month.
      */
-    public function createByMember(
+    public function createRenewalByMember(
         MemberModel $member,
         ?DateTime $newExpiration = null,
-    ): ?ActionLinkModel {
+    ): ?RenewalLinkModel {
         if (null === $newExpiration) {
             $newExpiration = new DateTime();
             // Expire at midnight on July 1st, renewing at most 366 + 31 days
             $newExpiration->setTime(0, 0);
             $newExpiration->setDate(((int) $member->getExpiration()->format('Y')) + 1, 7, 1);
+
             while ($newExpiration->diff($member->getExpiration())->days > 397) {
                 $newExpiration->sub(new DateInterval('P1Y'));
             }
         }
 
-        $actionLink = new ActionLinkModel($member, $newExpiration);
+        $actionLink = new RenewalLinkModel($member, $newExpiration);
         $this->persist($actionLink);
 
         return $actionLink;

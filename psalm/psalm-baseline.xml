@@ -29,7 +29,7 @@
       <code>$defaultDescription</code>
       <code>$defaultName</code>
     </NonInvariantDocblockPropertyType>
-  </file>  
+  </file>
   <file src="module/Checker/src/Command/CheckMembershipTUeCommand.php">
     <NonInvariantDocblockPropertyType occurrences="2">
       <code>$defaultDescription</code>
@@ -53,6 +53,12 @@
       <code>$defaultName</code>
     </NonInvariantDocblockPropertyType>
   </file>
+  <file src="module/Database/src/Command/DeleteExpiredProspectiveMembersCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
   <file src="module/Database/src/Command/GenerateAuthenticationKeysCommand.php">
     <NonInvariantDocblockPropertyType occurrences="2">
       <code>$defaultDescription</code>
@@ -65,11 +71,16 @@
       <code>Response|ViewModel</code>
     </InvalidReturnType>
   </file>
-  <file src="module/Database/src/Form/Member.php">
-    <TypeDoesNotContainType occurrences="2">
-      <code>DATABASE_REQUIRE_IBAN</code>
-      <code>DATABASE_REQUIRE_IBAN</code>
-    </TypeDoesNotContainType>
+  <file src="module/Database/src/Service/Stripe.php">
+    <UndefinedMagicPropertyFetch occurrences="2">
+      <code>$event-&gt;data-&gt;object</code>
+      <code>$session-&gt;after_expiration-&gt;recovery</code>
+    </UndefinedMagicPropertyFetch>
+    <PossiblyNullPropertyFetch occurrences="3">
+      <code>$session-&gt;after_expiration-&gt;recovery</code>
+      <code>$session-&gt;after_expiration-&gt;recovery->expires_at</code>
+      <code>$session-&gt;after_expiration-&gt;recovery->url</code>
+    </PossiblyNullPropertyFetch>
   </file>
   <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
     <NoValue occurrences="1">

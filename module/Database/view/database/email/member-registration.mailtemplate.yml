@@ -1,0 +1,124 @@
+# This is a GEWIS mailings template
+# Registration confirmation
+---
+# All mailings require some settings. These can be set here. Don't forget to set the title ("Algemene mededeling; tekst zelf invoeren")
+version: 1.1
+settings:
+    title: "Registration Confirmation GEWIS"
+    email: "secr@gewis.nl"
+    lang: en-UK
+    #lang: nl-NL
+    follow: true
+
+# A mailing consists of a series of messageblocks, each with their own type
+# The available types are "header", "topblock", "activities", "activityfooter", "extramessage" and "tinyfooter"
+messageblocks:
+
+    # Each mailing must have a header to make the template shine! It contains the title and the date.
+    - type: "header"
+      title: "Your GEWIS registration"
+      date: 2023-08-02 #Note that this date needs to be updated
+
+    # This is the first block which is shown on top of the message. Recommended for most messages
+    - type: topblock
+      title: "Thank you for your interest in GEWIS!"
+      contentHTML: "</p>
+
+      <p>Dear {{FIRST_NAME}},</p>
+
+      <p>We have received your registration and are awaiting your payment*. Below you will find your registration details, in the event that something is wrong please let us know and we will update it.</p>
+      <h3>General Information</h3>
+      <table width='100%'>
+        <thead>
+          <tr>
+            <th scope='col'><strong>Property</strong></th>
+            <th scope='col'><strong>Value</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope='row'>Initial(s)</th>
+            <td>{{INITIALS}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>First name</th>
+            <td>{{FIRST_NAME}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Last name prepositional particle</th>
+            <td>{{MIDDLE_NAME}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Last name</th>
+            <td>{{LAST_NAME}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>TU/e username</th>
+            <td>{{TUE_USERNAME}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Study</th>
+            <td>{{STUDY}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>E-mail address</th>
+            <td>{{EMAIL}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Birthdate</th>
+            <td>{{BIRTH}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Address Information</h3>
+      <table width='100%'>
+        <thead>
+          <tr>
+            <th scope='col'><strong>Property</strong></th>
+            <th scope='col'><strong>Value</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope='row'>Street and number</th>
+            <td>{{STREET}} {{NUMBER}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Postal code and city</th>
+            <td>{{POSTAL_CODE}} {{CITY}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Postal region</th>
+            <td>{{COUNTRY}}</td>
+          </tr>
+          <tr>
+            <th scope='row'>Phone number</th>
+            <td>{{PHONE}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Mailing Lists</h3>
+      <ul>
+        <li>Example mailing list</li>
+      </ul>
+
+      <br/>
+      With kind regards,<br/>
+      The board of GEWIS"
+
+    - type: extramessage
+      title: ""
+      messages:
+
+          # Each extra message has a title and some HTML content. Line-endings halfway are perfectly fine in YAML
+          - title: "*Payment of Membership Fee"
+            contentHTML: "
+        <p>Did you forget or fail to pay the membership fee? Then use the following link to start again: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>. Have you already paid? Then you can ignore this link! The secretary will approve your membership after your payment has been verified.</p>
+        "
+
+
+    # You probably want to include this each newsletter
+    - type: tinyfooter
+      contentHTML: 'You received this email because you registered to become a member of GEWIS.'

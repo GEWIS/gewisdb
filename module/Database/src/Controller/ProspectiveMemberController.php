@@ -34,7 +34,9 @@ class ProspectiveMemberController extends AbstractActionController
     public function searchAction(): JsonModel
     {
         $query = $this->params()->fromQuery('q');
-        $res = $this->memberService->searchProspective($query);
+        $type = $this->params()->fromQuery('type');
+
+        $res = $this->memberService->searchProspective($query, $type);
 
         $res = array_map(static function ($member) {
             return $member->toArray();
@@ -50,7 +52,13 @@ class ProspectiveMemberController extends AbstractActionController
      */
     public function showAction(): ViewModel
     {
-        return new ViewModel($this->memberService->getProspectiveMember((int) $this->params()->fromRoute('id')));
+        $result = $this->memberService->getProspectiveMember((int) $this->params()->fromRoute('id'));
+
+        if (null === $result['member']) {
+            return $this->notFoundAction();
+        }
+
+        return new ViewModel($result);
     }
 
     /**
@@ -64,17 +72,30 @@ class ProspectiveMemberController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $prospectiveMember = $this->memberService->getProspectiveMember($lidnr)['member'];
-            $result = $this->memberService->finalizeSubscription(
-                $this->getRequest()->getPost()->toArray(),
-                $prospectiveMember,
-            );
 
-            if (null !== $result) {
-                $this->memberService->sendMemberConfirmedEmail($result);
+            if (null === $prospectiveMember) {
+                return $this->redirect()->toRoute('prospective-member');
+            }
 
-                return $this->redirect()->toRoute('member/show', [
-                    'id' => $result->getLidnr(),
-                ]);
+            if (
+                !$prospectiveMember->isCheckoutPending()
+                && !$prospectiveMember->hasCheckoutExpiredOrFailed()
+            ) {
+                $result = $this->memberService->finalizeSubscription(
+                    $this->getRequest()->getPost()->toArray(),
+                    $prospectiveMember,
+                );
+
+                if (null !== $result) {
+                    $this->memberService->sendRegistrationUpdateEmail(
+                        $result,
+                        'welcome',
+                    );
+
+                    return $this->redirect()->toRoute('member/show', [
+                        'id' => $result->getLidnr(),
+                    ]);
+                }
             }
         }
 
@@ -92,7 +113,13 @@ class ProspectiveMemberController extends AbstractActionController
         $member = $this->memberService->getProspectiveMember($lidnr);
         $member = $member['member'];
 
-        if (null !== $member) {
+        if (
+            null !== $member
+            && (
+                !$member->isCheckoutPending()
+                || $member->hasCheckoutExpiredOrFailed()
+            )
+        ) {
             $this->memberService->removeProspective($member);
         }
 

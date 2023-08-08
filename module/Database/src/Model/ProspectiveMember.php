@@ -6,6 +6,7 @@ namespace Database\Model;
 
 use Application\Model\Enums\AddressTypes;
 use Application\Model\Enums\PostalRegions;
+use Database\Model\Enums\CheckoutSessionStates;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,8 +18,8 @@ use Doctrine\ORM\Mapping\InverseJoinColumn;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
-
-use function preg_replace;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * ProspectiveMember model.
@@ -101,15 +102,6 @@ class ProspectiveMember
     protected int $paid = 0;
 
     /**
-     * Iban number.
-     */
-    #[Column(
-        type: 'string',
-        nullable: true,
-    )]
-    protected ?string $iban = null;
-
-    /**
      * Country.
      */
     #[Column(
@@ -169,26 +161,31 @@ class ProspectiveMember
     protected Collection $lists;
 
     /**
-     * The signature image URL.
+     * The Checkout Sessions for this prospective member.
+     *
+     * @var Collection<array-key, CheckoutSession>
      */
-    #[Column(
-        type: 'string',
-        nullable: true,
+    #[OneToMany(
+        targetEntity: CheckoutSession::class,
+        mappedBy: 'prospectiveMember',
+        orphanRemoval: true,
+        cascade: ['remove'],
     )]
-    protected ?string $signature = null;
+    protected Collection $checkoutSessions;
 
     /**
-     * The signature location
+     * Payment link that can be used by the prospective member to restart a Checkout Session.
      */
-    #[Column(
-        type: 'string',
-        nullable: true,
+    #[OneToOne(
+        targetEntity: PaymentLink::class,
+        mappedBy: 'prospectiveMember',
     )]
-    protected ?string $signatureLocation = null;
+    protected ?PaymentLink $paymentLink = null;
 
     public function __construct()
     {
         $this->lists = new ArrayCollection();
+        $this->checkoutSessions = new ArrayCollection();
     }
 
     /**
@@ -352,6 +349,36 @@ class ProspectiveMember
         $this->birth = $birth;
     }
 
+    public function getCountry(): PostalRegions
+    {
+        return $this->country;
+    }
+
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
+
+    public function getPostalCode(): string
+    {
+        return $this->postalCode;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
     /**
      * Get the date of the last membership change.
      */
@@ -385,70 +412,6 @@ class ProspectiveMember
     }
 
     /**
-     * Get the IBAN.
-     */
-    public function getIban(bool $print = false): ?string
-    {
-        if (null === $this->iban) {
-            return null;
-        }
-
-        if ($print) {
-            return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
-        }
-
-        return $this->iban;
-    }
-
-    /**
-     * Set the IBAN.
-     */
-    public function setIban(?string $iban): void
-    {
-        $this->iban = $iban;
-    }
-
-    /**
-     * Get the signature image URL.
-     */
-    public function getSignature(): ?string
-    {
-        return $this->signature;
-    }
-
-    /**
-     * Set the signature image URL.
-     */
-    public function setSignature(?string $signature): void
-    {
-        $this->signature = $signature;
-    }
-
-    /**
-     * Get the signature location
-     */
-    public function getSignatureLocation(): ?string
-    {
-        return $this->signature;
-    }
-
-    /**
-     * Set the signature location
-     */
-    public function setSignatureLocation(?string $signatureLocation): void
-    {
-        $this->signatureLocation = $signatureLocation;
-    }
-
-    /**
-     * Returns the characteristic of the mandate. Is unique for each form entry
-     */
-    public function getMandateCharacteristic(): string
-    {
-        return $this->changedOn->format('Y') . 'subscription' . $this->getLidnr();
-    }
-
-    /**
      * Convert to array.
      *
      * @return array{
@@ -461,10 +424,7 @@ class ProspectiveMember
      *     firstName: string,
      *     tueUsername: ?string,
      *     study: ?string,
-     *     signature: ?string,
-     *     signatureLocation: ?string,
      *     birth: string,
-     *     iban: ?string,
      *     address: array{
      *         type: AddressTypes,
      *         country: PostalRegions,
@@ -474,8 +434,8 @@ class ProspectiveMember
      *         postalCode: string,
      *         phone: string,
      *     },
-     *     agreediban: string,
      *     agreed: string,
+     *     agreedStripe: string,
      * }
      */
     public function toArray(): array
@@ -490,13 +450,10 @@ class ProspectiveMember
             'firstName' => $this->getFirstName(),
             'tueUsername' => $this->getTueUsername(),
             'study' => $this->getStudy(),
-            'signature' => $this->getSignature(),
-            'signatureLocation' => $this->getSignatureLocation(),
             'birth' => $this->getBirth()->format('Y-m-d'),
-            'iban' => $this->getIban(),
             'address' => $this->getAddresses()['studentAddress']->toArray(),
-            'agreediban' => '1',
             'agreed' => '1',
+            'agreedStripe' => '1',
         ];
     }
 
@@ -562,5 +519,69 @@ class ProspectiveMember
         foreach ($lists as $list) {
             $this->addList($list);
         }
+    }
+
+    /**
+     * @return Collection<array-key, CheckoutSession>
+     */
+    public function getCheckoutSessions(): Collection
+    {
+        return $this->checkoutSessions;
+    }
+
+    /**
+     * Determine whether the prospective member does not have a `created` or `pending` Checkout Session. This is used to
+     * check whether a prospective member can be safely deleted.
+     */
+    public function isCheckoutPending(): bool
+    {
+        /** @var CheckoutSession|false $lastCheckoutSession */
+        $lastCheckoutSession = $this->checkoutSessions->last();
+
+        if (false === $lastCheckoutSession) {
+            return false;
+        }
+
+        $lastState = $lastCheckoutSession->getState();
+
+        if (CheckoutSessionStates::Expired === $lastState) {
+            // Checkout Session can still be recovered (thus we are still pending).
+            return (new DateTime()) < $lastCheckoutSession->getExpiration();
+        }
+
+        return CheckoutSessionStates::Created === $lastState
+            || CheckoutSessionStates::Pending === $lastState;
+    }
+
+    /**
+     * Determine whether the prospective member has an `expired` or `failed` Checkout Session. This is used to check
+     * whether a prospective member can be approved.
+     */
+    public function hasCheckoutExpiredOrFailed(): bool
+    {
+        /** @var CheckoutSession|false $lastCheckoutSession */
+        $lastCheckoutSession = $this->checkoutSessions->last();
+
+        if (false === $lastCheckoutSession) {
+            return false;
+        }
+
+        $lastState = $lastCheckoutSession->getState();
+
+        return CheckoutSessionStates::Expired === $lastState
+            || CheckoutSessionStates::Failed === $lastState;
+    }
+
+    /**
+     * @psalm-ignore-nullable-return
+     */
+    public function getPaymentLink(): ?PaymentLink
+    {
+        return $this->paymentLink;
+    }
+
+    public function setPaymentLink(PaymentLink $paymentLink): void
+    {
+        $this->paymentLink = $paymentLink;
     }
 }

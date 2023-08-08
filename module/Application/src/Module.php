@@ -77,6 +77,7 @@ class Module
     public function logError(MvcEvent $e): void
     {
         $container = $e->getApplication()->getServiceManager();
+        /** @var Logger $logger */
         $logger = $container->get('logger');
 
         if ('error-router-no-match' === $e->getError()) {

@@ -18,8 +18,10 @@ use Laminas\View\Renderer\PhpRenderer;
 
 ?>
 <div class="row">
+    <div class="col-md-12">
+        <h1><?= $member->getFullName() ?></h1>
+    </div>
 <div class="col-md-6">
-    <h1><?= $member->getFullName() ?></h1>
     <table class="table table-bordered">
         <tr>
             <th><?= $this->translate('Member Number') ?></th>

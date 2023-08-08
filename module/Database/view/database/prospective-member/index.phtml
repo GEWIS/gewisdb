@@ -8,39 +8,46 @@ use Laminas\View\Renderer\PhpRenderer;
 /** @var PhpRenderer|HelperTrait $this */
 ?>
 <script>
-    var urlTemplate = '<?= $this->url('prospective-member/show', array('id' => '__LIDNR__')) ?>';
-    $(document).ready(function () {
-        var maxResults = 32;
-        var footer = $("#members-result tfoot");
-        var searchMember = function (term) {
-            // When no term is set, all the member should be shown
-            if (term.length >= 0) {
-                $.ajax({
-                    dataType: 'json',
-                    url: '<?= $this->url('prospective-member/default', array('action' => 'search')) ?>?q=' + term,
-                    context: document.body
-                }).done(function (data) {
-                    var table = '';
-                    $.each(data.json, function (idx, member) {
-                        var link = '';
-                        link += '<a style="display: block; width: 100%; height: 100%;" href="' + urlTemplate.replace('__LIDNR__', member.lidnr) + '">'
-                        table += '<tr>';
-                        table += '<td>' + link + member.lidnr + '</a></td>';
-                        table += '<td>' + link + member.fullName + '</a></td>';
-                        table += '<td>' + link + member.email + '</a></td>';
-                        table += '</tr>';
-                    });
-                    $('#members-result tbody').html(table);
+    let urlTemplate = '<?= $this->url('prospective-member/show', array('id' => '__LIDNR__')) ?>';
 
-                    if (data.json.length >= maxResults) {
-                        footer.show();
-                    } else {
-                        footer.hide();
-                    }
-                });
-            } else {
-                $('#members-result tbody').html('');
-            }
+    $(document).ready(function () {
+        const maxResults = 128;
+        let searchMember = function (term) {
+            const types = ['', 'failed', 'paid'];
+
+            types.forEach((type) => {
+                let tableType = (type === '') ? '' : type + '-';
+                let footer = $('#members-' + tableType + 'result tfoot');
+
+                // When no term is set, all the member should be shown
+                if (term.length >= 0) {
+                    $.ajax({
+                        dataType: 'json',
+                        url: '<?= $this->url('prospective-member/default', array('action' => 'search')) ?>?q=' + term + '&type=' + type,
+                        context: document.body
+                    }).done(function (data) {
+                        let table = '';
+                        $.each(data.json, function (idx, member) {
+                            let link = '';
+                            link += '<a style="display: block; width: 100%; height: 100%;" href="' + urlTemplate.replace('__LIDNR__', member.lidnr) + '">'
+                            table += '<tr>';
+                            table += '<td>' + link + member.fullName + '</a></td>';
+                            table += '<td>' + link + member.email + '</a></td>';
+                            table += '</tr>';
+                        });
+
+                        $('#members-' + tableType + 'result tbody').html(table);
+
+                        if (data.json.length >= maxResults) {
+                            footer.show();
+                        } else {
+                            footer.hide();
+                        }
+                    });
+                } else {
+                    $('#members-result tbody').html('');
+                }
+            });
         };
 
         $('#member-search').keyup(function (e) {
@@ -48,34 +55,101 @@ use Laminas\View\Renderer\PhpRenderer;
             searchMember(term)
         });
         searchMember('');
-        footer.hide();
     });
 </script>
-<form role="form">
-    <div class="form-group">
-        <label for=""><?= $this->translate('Search Prospective Members') ?></label>
-        <input type="text" class="form-control" placeholder="<?= $this->translate('Search') ?>" id="member-search" autofocus>
-    </div>
-</form>
 
-<table class="table table-hover" id="members-result">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th><?= $this->translate('Name') ?></th>
-            <th><?= $this->translate('E-mail Address') ?></th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3">
-                <?= $this->translate('There are too many results to display. Try filtering to see other results.') ?>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <form role="form">
+            <div class="form-group">
+                <label for="member-search">
+                    <?= $this->translate('Search Prospective Members') ?>
+                </label>
+                <input type="text" class="form-control" placeholder="<?= $this->translate('Search') ?>" id="member-search" autofocus>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-push-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h4><?= $this->translate('Paid') ?></h4>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-hover" id="members-paid-result">
+                    <thead>
+                    <tr>
+                        <th><?= $this->translate('Name') ?></th>
+                        <th><?= $this->translate('E-mail Address') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <?= $this->translate('There are too many results to display. Try filtering to see other results.') ?>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h4><?= $this->translate('Expired / Failed') ?></h4>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-hover" id="members-failed-result">
+                    <thead>
+                    <tr>
+                        <th><?= $this->translate('Name') ?></th>
+                        <th><?= $this->translate('E-mail Address') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <?= $this->translate('There are too many results to display. Try filtering to see other results.') ?>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-md-pull-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h4><?= $this->translate('Created / Pending') ?></h4>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-hover" id="members-result">
+                    <thead>
+                        <tr>
+                            <th><?= $this->translate('Name') ?></th>
+                            <th><?= $this->translate('E-mail Address') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <?= $this->translate('There are too many results to display. Try filtering to see other results.') ?>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <a href="<?= $this->url('member/subscribe') ?>" class="btn btn-success">
     <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Register Member') ?>

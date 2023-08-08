@@ -23,6 +23,8 @@
         <exclude-pattern>module/Report/src/Model/Decision.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Model/MailingList.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Model/SubDecision.php</exclude-pattern>
+        <!-- Stripe also does this, so ignore those too -->
+        <exclude-pattern>module/Database/src/Service/Stripe.php</exclude-pattern>
     </rule>
 
     <!-- Type hints that cannot converted to native types due to signature of parent -->
@@ -44,6 +46,7 @@
         <exclude-pattern>module/Checker/src/Service/Factory/OrganFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/RenewalFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredProspectiveMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ApiControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ExportControllerFactory.php</exclude-pattern>
@@ -54,7 +57,8 @@
         <exclude-pattern>module/Database/src/Controller/Factory/ProspectiveMemberControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/QueryControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Mapper/Factory/ActionLinkfactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/ActionLinkFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/CheckoutSessionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MeetingFactory.php</exclude-pattern>
@@ -68,6 +72,7 @@
         <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/StripeFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/QueryFactory.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/Factory/GenerateFullCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/Factory/GeneratePartialCommandFactory.php</exclude-pattern>
@@ -115,6 +120,7 @@
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTueCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTypeCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/DeleteExpiredProspectiveMembersCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/GenerateAuthenticationKeysCommand.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/GenerateFullCommand.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/GeneratePartialCommand.php</exclude-pattern>

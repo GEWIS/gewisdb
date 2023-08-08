@@ -22,7 +22,6 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Laminas\Mail\Address as MailAddress;
 
 use function mb_encode_mimeheader;
-use function preg_replace;
 
 /**
  * Member model.
@@ -171,15 +170,6 @@ class Member
     protected int $paid = 0;
 
     /**
-     * Iban number.
-     */
-    #[Column(
-        type: 'string',
-        nullable: true,
-    )]
-    protected ?string $iban = null;
-
-    /**
      * If the member receives a 'supremum'
      */
     #[Column(
@@ -244,16 +234,16 @@ class Member
     protected Collection $lists;
 
     /**
-     * ActionLinks of this member.
+     * RenewalLinks of this member.
      *
-     * @var Collection<array-key, ActionLink>
+     * @var Collection<array-key, RenewalLink>
      */
     #[OneToMany(
-        targetEntity: ActionLink::class,
+        targetEntity: RenewalLink::class,
         mappedBy: 'member',
         cascade: ['persist', 'remove'],
     )]
-    protected Collection $actionLinks;
+    protected Collection $renewalLinks;
 
     #[Column(
         type: 'string',
@@ -591,30 +581,6 @@ class Member
     }
 
     /**
-     * Get the IBAN.
-     */
-    public function getIban(bool $print = false): ?string
-    {
-        if (null === $this->iban) {
-            return null;
-        }
-
-        if ($print) {
-            return preg_replace('/(\\w{4})/', '$1 ', $this->iban);
-        }
-
-        return $this->iban;
-    }
-
-    /**
-     * Set the IBAN.
-     */
-    public function setIban(?string $iban): void
-    {
-        $this->iban = $iban;
-    }
-
-    /**
      * Get if the member wants a supremum.
      */
     public function getSupremum(): ?string
@@ -807,12 +773,12 @@ class Member
     }
 
     /**
-     * Get action links of a member
+     * Get renewal links of a member
      *
-     * @return Collection<array-key, ActionLink>
+     * @return Collection<array-key, RenewalLink>
      */
-    public function getActionLinks(): Collection
+    public function getRenewalLinks(): Collection
     {
-        return $this->actionLinks;
+        return $this->renewalLinks;
     }
 }

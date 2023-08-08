@@ -112,7 +112,7 @@ class Member
     }
 
     /**
-     * Get all expiring graduates for which no action link exists
+     * Get all expiring graduates for which no renewal link exists
      * The check for hidden is required because hidden members may also expire but should not be emailed
      *
      * @param ?DateTime $expiresBefore Latest expiry date, end of current association year if null
@@ -133,10 +133,10 @@ class Member
             ->andWhere('m.expiration <= :expiresBefore');
 
         $qbal = $this->em->createQueryBuilder();
-        $qbal->select('al')
-            ->from('Database\Model\ActionLink', 'al')
-            ->andWhere('al.member = m.lidnr')
-            ->andWhere('al.currentExpiration = m.expiration');
+        $qbal->select('rl')
+            ->from('Database\Model\RenewalLink', 'rl')
+            ->andWhere('rl.member = m.lidnr')
+            ->andWhere('rl.currentExpiration = m.expiration');
 
         $qb->setParameter('expiresBefore', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
 

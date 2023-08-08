@@ -77,7 +77,6 @@ class Member
         $reportMember->setBirth($member->getBirth());
         $reportMember->setChangedOn($member->getChangedOn());
         $reportMember->setPaid($member->getPaid());
-        $reportMember->setIban($member->getIban());
         $reportMember->setSupremum($member->getSupremum());
         $reportMember->setHidden($member->getHidden());
         $reportMember->setDeleted($member->getDeleted());

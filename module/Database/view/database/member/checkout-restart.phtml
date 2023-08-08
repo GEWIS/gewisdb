@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+/** @var bool $error */
+?>
+<div class="row">
+    <div class="col-md-12">
+        <h3><?= $this->translate('GEWIS Registration - Checkout') ?></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <?php if ($error): ?>
+            <div class="alert alert-danger" role="alert">
+                <?= sprintf(
+                    '<strong>%s</strong> %s',
+                    $this->translate('Oh snap!'),
+                    // phpcs:ignore -- user-visible strings should not be split
+                    $this->translate('An error occurred while we were trying to prepare the checkout page. Please try again later.'),
+                ) ?>
+            </div>
+        <?php else: ?>
+            <p>
+                <?= $this->translate('This payment link could not be found. Perhaps it has been used before or has expired.') ?>
+            </p>
+        <?php endif; ?>
+    </div>
+</div>
