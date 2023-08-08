@@ -40,13 +40,15 @@ class Api
     /**
      * Get normal members.
      *
+     * @param array<array-key,string> $additionalProperties
+     *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function getMembers(): array
+    public function getMembers(array $additionalProperties): array
     {
         return array_map(
-            static function ($member) {
-                return $member->toArrayApi();
+            static function ($member) use ($additionalProperties) {
+                return $member->toArrayApi($additionalProperties);
             },
             $this->getReportMemberMapper()->findNormal(),
         );
@@ -55,11 +57,15 @@ class Api
     /**
      * Get normal members.
      *
+     * @param array<array-key,string> $additionalProperties
+     *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function getMember(int $id): ?array
-    {
-        return $this->getReportMemberMapper()->findSimple($id)?->toArrayApi();
+    public function getMember(
+        int $id,
+        array $additionalProperties,
+    ): ?array {
+        return $this->getReportMemberMapper()->findSimple($id)?->toArrayApi($additionalProperties);
     }
 
     /**

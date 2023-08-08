@@ -40,7 +40,7 @@ services:
         command: listen --forward-to nginx:9725/member/subscribe/checkout/webhook
         environment:
             - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
-            - STRIPE_DEVICE_NAME="GEWISDB on ${HOST}${NAME}"
+            - STRIPE_DEVICE_NAME="GEWISDB on ${HOST:-}${NAME:-}"
             - STRIPE_CLI_TELEMETRY_OPTOUT=1
         depends_on:
             - nginx
