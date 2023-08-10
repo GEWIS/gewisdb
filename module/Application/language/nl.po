@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-06 19:21+0200\n"
+"POT-Creation-Date: 2023-08-10 16:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tom Udding <tomudding@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -1041,9 +1041,6 @@ msgstr "Straat en huisnummer"
 msgid "Student Address"
 msgstr "Kameradres"
 
-msgid "Studie"
-msgstr "Studie"
-
 msgid "Study"
 msgstr "Studie"
 
@@ -1224,6 +1221,9 @@ msgstr "Toon"
 
 msgid "View Update Requests"
 msgstr "Update-aanvragen bekijken"
+
+msgid "View the membership type for a member"
+msgstr "Het lidmaatschapstype voor een lid bekijken"
 
 msgid "Virt (Virtual Meeting)"
 msgstr "Virt (virtuele vergadering)"
