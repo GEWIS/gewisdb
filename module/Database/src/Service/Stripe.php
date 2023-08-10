@@ -129,11 +129,17 @@ class Stripe
         if (CheckoutSessionStates::Expired === $lastCheckoutStub->getState()) {
             // The Checkout Session has already been abandoned.
 
-            if ((new DateTime())->add(new DateInterval('PT5M')) >= $lastCheckoutStub->getExpiration()) {
+            if (new DateTime() >= $lastCheckoutStub->getExpiration()) {
                 // The Checkout Session is completely abandoned, as the maximum expiration for the recovery URL of 30
-                // days has passed (or will pass in 5 minutes). As such, we want to create a new Checkout Session for
-                // this prospective member.
-                return $this->getCheckoutLink($prospectiveMember);
+                // days has passed. Do NOT allow recovery of this session before scheduled deletion.
+
+                if (null !== ($paymentLink = $prospectiveMember->getPaymentLink())) {
+                    // Disable the payment link in case the prospective member tries again.
+                    $paymentLink->setUsed(true);
+                    $this->paymentLinkMapper->persist($paymentLink);
+                }
+
+                return null;
             }
 
             // The Checkout Session is not completely dead yet, so return the recovery URL.
