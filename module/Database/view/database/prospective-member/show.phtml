@@ -189,6 +189,19 @@ use Laminas\View\Renderer\PhpRenderer;
         <?php endforeach; ?>
 
         <?php if (isset($form)): ?>
+            <?php if (!$member->hasPaid()): ?>
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#not-paid-collapse">
+                                    <?= $this->translate('Click here for approval if membership fee paid with cash.') ?>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="not-paid-collapse" class="panel-collapse collapse">
+                            <div class="panel-body">
+            <?php endif; ?>
             <?php
             $form->prepare();
 
@@ -227,7 +240,7 @@ use Laminas\View\Renderer\PhpRenderer;
             } else {
                 $element->setChecked(false);
                 $element->setAttributes([
-                    "disabled" => true,
+                    'disabled' => true,
                 ]);
             }
             ?>
@@ -250,16 +263,69 @@ use Laminas\View\Renderer\PhpRenderer;
             $submit->setAttribute('class', 'btn btn-success');
             ?>
             <?= $this->formButton($submit) ?>
+            <?php if (!$canDelete): ?>
+                <?= $this->form()->closeTag() ?>
+            <?php endif; ?>
+            <?php if (!$member->hasPaid()): ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         <?php else: ?>
             <p>
                 <?= $this->translate('This prospective member cannot be approved.') ?>
             </p>
         <?php endif; ?>
         <?php if ($canDelete): ?>
-            <a href="<?= $this->url('prospective-member/show/delete', array(
-                'id' => $member->getLidnr()
-            )) ?>" class="btn btn-danger"><?= $this->translate('Delete Prospective Member') ?></a>
-            <?= $this->form()->closeTag() ?>
+            <button type="button" class="btn btn-danger remove-modal">
+                <?= $this->translate('Delete Prospective Member') ?>
+            </button>
+            <?php if (isset($form)): ?>
+                <?= $this->form()->closeTag() ?>
+            <?php endif; ?>
+            <div id="prospective-removal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="prospective-removal-label" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="prospective-removal-label">
+                                <?= $this->translate('Remove Prospective Member') ?>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <?php if ($member->hasPaid()): ?>
+                                <?= sprintf(
+                                    // phpcs:ignore -- user-visible strings should not be split
+                                    $this->translate('Are you sure that you want to remove %s? Because they have already paid a refund will be requested. If this fails, the prospective member will NOT be removed.'),
+                                    '<span class="name">' . $this->escapeHtml($member->getFullName()) . '</span>',
+                                ) ?>
+                            <?php else: ?>
+                                <?= sprintf(
+                                    $this->translate('Are you sure that you want to remove %s?'),
+                                    '<span class="name">' . $this->escapeHtml($member->getFullName()) . '</span>',
+                                ) ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <?= $this->translate('No') ?>
+                            </button>
+                            <a href="<?= $this->url('prospective-member/show/delete', [
+                                'id' => $member->getLidnr()
+                            ]) ?>" class="btn btn-danger" id="remove-modal-yes">
+                                <?= $this->translate('Delete Prospective Member') ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $('button.remove-modal').click(function() {
+                    let modal = $('#prospective-removal');
+                    modal.modal();
+                });
+            </script>
         <?php endif; ?>
     </div>
 </div>

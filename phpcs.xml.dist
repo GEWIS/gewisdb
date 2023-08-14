@@ -194,4 +194,9 @@
         <exclude-pattern>module/Checker/src/Model/Error/MemberActiveWithRoleAndInactiveInOrgan.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberInNonExistingOrgan.php</exclude-pattern>
     </rule>
+
+    <!-- PHP_CodeSniffer does not yet understand PHP 8.2 functionality -->
+    <rule ref="PSR12.Functions.NullableTypeDeclaration.UnexpectedCharactersFound">
+        <exclude-pattern>module/Database/src/Service/Stripe.php</exclude-pattern>
+    </rule>
 </ruleset>

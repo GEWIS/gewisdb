@@ -11,14 +11,15 @@ use Database\Model\Enums\CheckoutSessionStates;
 use Database\Model\PaymentLink as PaymentLinkModel;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\Member as MemberService;
-use DateInterval;
 use DateTime;
 use DateTimeZone;
 use Monolog\Logger;
+use Stripe\Charge;
 use Stripe\Checkout\Session as CheckoutSession;
 use Stripe\Event;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\SignatureVerificationException;
+use Stripe\Refund;
 use Stripe\StripeClient;
 use Stripe\Webhook;
 use UnexpectedValueException;
@@ -64,14 +65,18 @@ class Stripe
         $checkoutSession = new CheckoutSessionModel();
         $checkoutSession->setProspectiveMember($prospectiveMember);
         $checkoutSession->setCheckoutId($session->id);
-        $checkoutSession->setCreated(DateTime::createFromFormat(
-            'U',
-            (string) $session->created,
-        )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
-        $checkoutSession->setExpiration(DateTime::createFromFormat(
-            'U',
-            (string) $session->expires_at,
-        )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
+        $checkoutSession->setCreated(
+            DateTime::createFromFormat(
+                'U',
+                (string) $session->created,
+            )->setTimezone(new DateTimeZone('Europe/Amsterdam')),
+        );
+        $checkoutSession->setExpiration(
+            DateTime::createFromFormat(
+                'U',
+                (string) $session->expires_at,
+            )->setTimezone(new DateTimeZone('Europe/Amsterdam')),
+        );
         $this->checkoutSessionMapper->persist($checkoutSession);
 
         return $session->url;
@@ -201,6 +206,64 @@ class Stripe
         return null;
     }
 
+    /**
+     * Create a refund for a prospective member. Returns `true` iff the Refund was successfully created.
+     */
+    public function createRefund(ProspectiveMemberModel $prospectiveMember): ?true
+    {
+        if (null !== ($checkoutSession = $this->checkoutSessionMapper->findLatest($prospectiveMember))) {
+            try {
+                // Get last PaymentIntent to obtain the latest Charge.
+                $paymentIntent = $this->getClient()->paymentIntents->retrieve($checkoutSession->getPaymentIntentId());
+
+                // Get the Charge.
+                $charge = $paymentIntent->latest_charge;
+                if ($charge instanceof Charge) {
+                    $charge = $charge->id;
+                }
+
+                // Create a refund for the specific Charge.
+                $this->getClient()->refunds->create(['charge' => $charge]);
+            } catch (ApiErrorException $e) {
+                // We must never throw, as this will break stuff, however, we do want to know what happened.
+                $this->logger->error($e->getMessage() . ' ' . $e->getTraceAsString());
+
+                return null;
+            }
+
+            // Send e-mail.
+            $this->memberService->sendRegistrationUpdateEmail(
+                $prospectiveMember,
+                'refund-created',
+            );
+
+            return true;
+        }
+
+        return null;
+    }
+
+    /**
+     * Determine whether there is already a Refund for a prospective member. This does say nothing about the state of
+     * such a Refund, just that it exists.
+     */
+    public function hasRefund(ProspectiveMemberModel $prospectiveMember): ?bool
+    {
+        if (null !== ($checkoutSession = $this->checkoutSessionMapper->findLatest($prospectiveMember))) {
+            try {
+                return 0 !== $this->getClient()->refunds->all([
+                    'payment_intent' => $checkoutSession->getPaymentIntentId(),
+                    'limit' => 1,
+                ])->count();
+            } catch (ApiErrorException $e) {
+                // We must never throw, as this will break stuff, however, we do want to know what happened.
+                $this->logger->error($e->getMessage() . ' ' . $e->getTraceAsString());
+            }
+        }
+
+        return null;
+    }
+
     public function verifyEvent(
         string $content,
         string $signature,
@@ -217,11 +280,30 @@ class Stripe
     }
 
     /**
-     * To keep track of how the Checkout Session and its associated payment evolves over time we need to be able to
-     * handle a few events from webhooks that Stripe sends us. In other words, this is the fulfillment process.
+     * To keep track of how Checkout Sessions (and its associated payment) and Refunds evolve over time we need to be
+     * able to handle a few webhook events that Stripe sends us. In other words, this is the "fulfillment" process.
      */
     public function handleEvent(Event $event): void
     {
+        if ('charge.refund.updated' === $event->type) {
+            /** @var Refund $refund */
+            $refund = $event->data->object;
+            $status = $refund->status;
+
+            if (
+                'failed' === $status
+                || 'requires_action' === $status
+                || 'canceled' === $status
+            ) {
+                // Send e-mail to secretary that there was an issue while processing the refund. They will have to ask
+                // the ApplicatieBeheerCommissie and/or treasurer to determine the cause/what needs to happen to get it
+                // resolved.
+                $this->memberService->sendRefundProblemEmail($refund->id, $status);
+            }
+
+            return;
+        }
+
         /** @var CheckoutSession $session */
         $session = $event->data->object;
         $storedCheckoutSession = $this->checkoutSessionMapper->findById($session->id);
@@ -312,6 +394,7 @@ class Stripe
                 // not delayed we directly mark the stored checkout session as 'PAID', otherwise it will be 'PENDING'.
                 if ('paid' === $session->payment_status) {
                     $storedCheckoutSession->setState(CheckoutSessionStates::Paid);
+                    $storedCheckoutSession->setPaymentIntentId($session->payment_intent);
                 } else {
                     $storedCheckoutSession->setState(CheckoutSessionStates::Pending);
                 }
@@ -323,6 +406,7 @@ class Stripe
             case 'checkout.session.async_payment_succeeded':
                 // A delayed payment has succeeded. So we mark the stored checkout session as 'PAID'.
                 $storedCheckoutSession->setState(CheckoutSessionStates::Paid);
+                $storedCheckoutSession->setPaymentIntentId($session->payment_intent);
                 $paymentLink?->setUsed(true);
 
                 break;

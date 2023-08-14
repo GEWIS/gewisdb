@@ -146,13 +146,13 @@ class Member
      * Send an e-mail to the (prospective) member and the secretary with an update on the (prospective) member's
      * registration.
      *
-     * @psalm-param "registration"|"welcome"|"checkout-expired"|"checkout-failed" $type
+     * @psalm-param "registration"|"welcome"|"checkout-expired"|"checkout-failed"|"refund-created" $type
      */
     public function sendRegistrationUpdateEmail(
         MemberModel|ProspectiveMemberModel $member,
         string $type,
     ): void {
-        if (!in_array($type, ['registration', 'welcome', 'checkout-expired', 'checkout-failed'])) {
+        if (!in_array($type, ['registration', 'welcome', 'checkout-expired', 'checkout-failed', 'refund-created'])) {
             throw new InvalidArgumentException('Unknown email type for prospective member.');
         }
 
@@ -185,6 +185,12 @@ class Member
                 $template = 'database/email/checkout-failed';
                 $subjectProspectiveMember = 'Your GEWIS membership fee payment has failed';
                 $subjectSecretary = 'Membership payment failed: ' . $member->getFullName();
+
+                break;
+            case 'refund-created':
+                $template = 'database/email/refund-created';
+                $subjectProspectiveMember = 'Your GEWIS membership fee is being refunded';
+                $subjectSecretary = 'Membership payment refund started: ' . $member->getFullName();
 
                 break;
         }
@@ -228,6 +234,36 @@ class Member
         $message->setFrom($config['from']['address'], $config['from']['name']);
         $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
         $message->setSubject($subjectSecretary);
+        $this->getMailTransport()->send($message);
+    }
+
+    public function sendRefundProblemEmail(
+        string $refundId,
+        string $refundStatus,
+    ): void {
+        $config = $this->config;
+        $config = $config['email'];
+
+        $renderer = $this->getRenderer();
+        $model = new ViewModel([
+            'refundId' => $refundId,
+            'refundStatus' => $refundStatus,
+        ]);
+        $model->setTemplate('database/email/refund-problem');
+        $body = $renderer->render($model);
+
+        $html = new MimePart($body);
+        $html->type = 'text/html';
+
+        $mimeMessage = new MimeMessage();
+        $mimeMessage->addPart($html);
+
+        $message = new Message();
+        $message->getHeaders()->addHeader((new MessageId())->setId());
+        $message->setBody($mimeMessage);
+        $message->setFrom($config['from']['address'], $config['from']['name']);
+        $message->setTo($config['to']['subscription']['address'], $config['to']['subscription']['name']);
+        $message->setSubject('Problem while processing membership refund');
         $this->getMailTransport()->send($message);
     }
 
@@ -462,18 +498,10 @@ class Member
             ];
         }
 
-        $form = null;
-        if (
-            !$member->isCheckoutPending()
-            && !$member->hasCheckoutExpiredOrFailed()
-        ) {
-            $form = $this->memberApproveForm;
-        }
-
         return [
             'member' => $member,
-            'form' => $form,
-            'canDelete' => !$member->isCheckoutPending() || $member->hasCheckoutExpiredOrFailed(),
+            'form' => $member->canBeApproved() ? $this->memberApproveForm : null,
+            'canDelete' => $member->canBeDeleted(),
             'tueData' => $tueData,
             'tueStatus' => $tueStatus,
         ];

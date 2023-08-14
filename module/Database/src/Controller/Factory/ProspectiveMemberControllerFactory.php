@@ -6,6 +6,8 @@ namespace Database\Controller\Factory;
 
 use Database\Controller\ProspectiveMemberController;
 use Database\Service\Member as MemberService;
+use Database\Service\Stripe as StripeService;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
@@ -19,9 +21,17 @@ class ProspectiveMemberControllerFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): ProspectiveMemberController {
+        /** @var MvcTranslator $translator */
+        $translator = $container->get(MvcTranslator::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
+        /** @var StripeService $stripeService */
+        $stripeService = $container->get(StripeService::class);
 
-        return new ProspectiveMemberController($memberService);
+        return new ProspectiveMemberController(
+            $translator,
+            $memberService,
+            $stripeService,
+        );
     }
 }

@@ -63,6 +63,15 @@ class CheckoutSession
     protected DateTime $expiration;
 
     /**
+     * The identifier of the PaymentIntent associated with this Checkout Session when the state is 'PAID'.
+     */
+    #[Column(
+        type: 'string',
+        nullable: true,
+    )]
+    protected ?string $paymentIntentId = null;
+
+    /**
      * Recovery URL for the Checkout Session when the state is 'EXPIRED'.
      */
     #[Column(
@@ -135,6 +144,16 @@ class CheckoutSession
     public function setExpiration(DateTime $expiration): void
     {
         $this->expiration = $expiration;
+    }
+
+    public function getPaymentIntentId(): ?string
+    {
+        return $this->paymentIntentId;
+    }
+
+    public function setPaymentIntentId(?string $paymentIntentId): void
+    {
+        $this->paymentIntentId = $paymentIntentId;
     }
 
     public function getRecoveryUrl(): ?string

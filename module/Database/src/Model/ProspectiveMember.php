@@ -530,46 +530,73 @@ class ProspectiveMember
     }
 
     /**
-     * Determine whether the prospective member does not have a `created` or `pending` Checkout Session. This is used to
-     * check whether a prospective member can be safely deleted.
+     * Determine whether the prospective member can be approved (and thus become a member). This should only be possible
+     * if the Checkout Session's state is 'PAID' or 'FAILED' or 'EXPIRED'. The latter two indicate that this is a
+     * manual approval, for example, when the prospective member paid with cash.
      */
-    public function isCheckoutPending(): bool
+    public function canBeApproved(): bool
+    {
+        $lastState = $this->getLastCheckoutSessionState();
+
+        if (null === $lastState) {
+            return false;
+        }
+
+        return CheckoutSessionStates::Paid === $lastState
+            || CheckoutSessionStates::Failed === $lastState
+            || CheckoutSessionStates::Expired === $lastState;
+    }
+
+    /**
+     * Determine whether the prospective member can be deleted. This should only be possible if the last Checkout
+     * Session's state is 'PAID' or fully 'EXPIRED'.
+     */
+    public function canBeDeleted(): bool
     {
         /** @var CheckoutSession|false $lastCheckoutSession */
         $lastCheckoutSession = $this->checkoutSessions->last();
 
         if (false === $lastCheckoutSession) {
+            // No Checkout Session can be found, we are in a state of many unknowns, do not allow removal.
             return false;
         }
 
         $lastState = $lastCheckoutSession->getState();
 
         if (CheckoutSessionStates::Expired === $lastState) {
-            // Checkout Session can still be recovered (thus we are still pending).
-            return (new DateTime()) < $lastCheckoutSession->getExpiration();
+            // Checkout Session is fully expired, it cannot be recovered and is scheduled for automatic removal.
+            return (new DateTime()) >= $lastCheckoutSession->getExpiration();
         }
 
-        return CheckoutSessionStates::Created === $lastState
-            || CheckoutSessionStates::Pending === $lastState;
+        return CheckoutSessionStates::Paid === $lastState;
     }
 
     /**
-     * Determine whether the prospective member has an `expired` or `failed` Checkout Session. This is used to check
-     * whether a prospective member can be approved.
+     * Determine whether the prospective member has paid. This should only be possible if the Checkout Session's state
+     * is 'PAID'.
      */
-    public function hasCheckoutExpiredOrFailed(): bool
+    public function hasPaid(): bool
+    {
+        $lastState = $this->getLastCheckoutSessionState();
+
+        if (null === $lastState) {
+            return false;
+        }
+
+        return CheckoutSessionStates::Paid === $lastState;
+    }
+
+    private function getLastCheckoutSessionState(): ?CheckoutSessionStates
     {
         /** @var CheckoutSession|false $lastCheckoutSession */
         $lastCheckoutSession = $this->checkoutSessions->last();
 
         if (false === $lastCheckoutSession) {
-            return false;
+            // No Checkout Session can be found, we are in a state of many unknowns, return `null` to signal error.
+            return null;
         }
 
-        $lastState = $lastCheckoutSession->getState();
-
-        return CheckoutSessionStates::Expired === $lastState
-            || CheckoutSessionStates::Failed === $lastState;
+        return $lastCheckoutSession->getState();
     }
 
     /**
