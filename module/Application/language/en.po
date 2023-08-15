@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-10 16:11+0200\n"
+"POT-Creation-Date: 2023-08-15 14:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tom Udding <tomudding@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 msgid "# Decisions"
 msgstr "# Decisions"
@@ -208,6 +208,20 @@ msgstr ""
 "Are you sure that you want to extend the membership of %s to %s (from %s)?"
 
 #, php-format
+msgid "Are you sure that you want to remove %s?"
+msgstr "Are you sure that you want to remove %s?"
+
+#, php-format
+msgid ""
+"Are you sure that you want to remove %s? Because they have already paid a "
+"refund will be requested. If this fails, the prospective member will NOT be "
+"removed."
+msgstr ""
+"Are you sure that you want to remove %s? Because they have already paid a "
+"refund will be requested. If this fails, the prospective member will NOT be "
+"removed."
+
+#, php-format
 msgid "Are you sure you want to delete member %s?"
 msgstr "Are you sure you want to delete member %s?"
 
@@ -298,6 +312,9 @@ msgstr "CSV"
 msgid "Cancelled"
 msgstr "Cancelled"
 
+msgid "Cannot Delete Prospective Member:"
+msgstr "Cannot Delete Prospective Member:"
+
 msgid "Change"
 msgstr "Change"
 
@@ -344,6 +361,9 @@ msgstr "City"
 
 msgid "City and Postal Code"
 msgstr "City and Postal Code"
+
+msgid "Click here for approval if membership fee paid with cash."
+msgstr "Click here for approval if membership fee paid with cash."
 
 msgid "Committee"
 msgstr "Committee"
@@ -908,6 +928,15 @@ msgid "Phone Number"
 msgstr "Phone Number"
 
 msgid ""
+"Please check your e-mail address, '%hostname%' does not appear to be able to "
+"receive e-mails. If you are certain that your e-mail address is correct, "
+"please contact the board."
+msgstr ""
+"Please check your e-mail address, '%hostname%' does not appear to be able to "
+"receive e-mails. If you are certain that your e-mail address is correct, "
+"please contact the board."
+
+msgid ""
 "Please note that if you create a mailing list here, it must also exist in "
 "mailman (with the same name!)."
 msgstr ""
@@ -964,6 +993,9 @@ msgstr "Relieve Board Member"
 
 msgid "Remove Member"
 msgstr "Remove Member"
+
+msgid "Remove Prospective Member"
+msgstr "Remove Prospective Member"
 
 msgid "Renew"
 msgstr "Renew"
@@ -1171,6 +1203,12 @@ msgstr "Token"
 msgid "Type"
 msgstr "Type"
 
+msgid "Unable to check refund status"
+msgstr "Unable to check refund status"
+
+msgid "Unable to create refund"
+msgstr "Unable to create refund"
+
 msgid "Unknown"
 msgstr "Unknown"
 
@@ -1261,6 +1299,24 @@ msgstr ""
 "this happens."
 
 msgid ""
+"We were unable to create a refund for the prospective member. Please try "
+"again later. If this error stays, contact the ApplicatieBeheerCommissie and/"
+"or treasurer for more information."
+msgstr ""
+"We were unable to create a refund for the prospective member. Please try "
+"again later. If this error stays, contact the ApplicatieBeheerCommissie and/"
+"or treasurer for more information."
+
+msgid ""
+"We were unable to determine whether the prospective member has already "
+"received a refund. Please try again later. If this error stays, contact the "
+"ApplicatieBeheerCommissie and/or treasurer for more information."
+msgstr ""
+"We were unable to determine whether the prospective member has already "
+"received a refund. Please try again later. If this error stays, contact the "
+"ApplicatieBeheerCommissie and/or treasurer for more information."
+
+msgid ""
 "Welcome! With this form you can register for a membership of GEWIS. Becoming "
 "a member of the assocations costs a one-time fee of 15 euros and your "
 "membership is valid as long as you study."
@@ -1304,11 +1360,11 @@ msgstr ""
 "You cannot become a member of the association without agreeing to the terms."
 
 msgid ""
-"You cannot use your student e-mail address because if you stop studying, we "
-"can no longer reach you about important announcements."
+"You cannot use your TU/e (student) e-mail address because if you leave or "
+"stop studying, we can no longer reach you about important announcements."
 msgstr ""
-"You cannot use your student e-mail address because if you stop studying, we "
-"can no longer reach you about important announcements."
+"You cannot use your TU/e (student) e-mail address because if you leave or "
+"stop studying, we can no longer reach you about important announcements."
 
 #, php-format
 msgid ""

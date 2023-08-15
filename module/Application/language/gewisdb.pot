@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 9f5557d-dirty\n"
+"Project-Id-Version: GEWISdb ee43c0c-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-10 16:11+0200\n"
+"POT-Creation-Date: 2023-08-15 14:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,6 +198,17 @@ msgid ""
 msgstr ""
 
 #, php-format
+msgid "Are you sure that you want to remove %s?"
+msgstr ""
+
+#, php-format
+msgid ""
+"Are you sure that you want to remove %s? Because they have already paid a "
+"refund will be requested. If this fails, the prospective member will NOT be "
+"removed."
+msgstr ""
+
+#, php-format
 msgid "Are you sure you want to delete member %s?"
 msgstr ""
 
@@ -277,6 +288,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+msgid "Cannot Delete Prospective Member:"
+msgstr ""
+
 msgid "Change"
 msgstr ""
 
@@ -320,6 +334,9 @@ msgid "City"
 msgstr ""
 
 msgid "City and Postal Code"
+msgstr ""
+
+msgid "Click here for approval if membership fee paid with cash."
 msgstr ""
 
 msgid "Committee"
@@ -853,6 +870,12 @@ msgid "Phone Number"
 msgstr ""
 
 msgid ""
+"Please check your e-mail address, '%hostname%' does not appear to be able to "
+"receive e-mails. If you are certain that your e-mail address is correct, "
+"please contact the board."
+msgstr ""
+
+msgid ""
 "Please note that if you create a mailing list here, it must also exist in "
 "mailman (with the same name!)."
 msgstr ""
@@ -906,6 +929,9 @@ msgid "Relieve Board Member"
 msgstr ""
 
 msgid "Remove Member"
+msgstr ""
+
+msgid "Remove Prospective Member"
 msgstr ""
 
 msgid "Renew"
@@ -1100,6 +1126,12 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+msgid "Unable to check refund status"
+msgstr ""
+
+msgid "Unable to create refund"
+msgstr ""
+
 msgid "Unknown"
 msgstr ""
 
@@ -1178,6 +1210,18 @@ msgid ""
 msgstr ""
 
 msgid ""
+"We were unable to create a refund for the prospective member. Please try "
+"again later. If this error stays, contact the ApplicatieBeheerCommissie and/"
+"or treasurer for more information."
+msgstr ""
+
+msgid ""
+"We were unable to determine whether the prospective member has already "
+"received a refund. Please try again later. If this error stays, contact the "
+"ApplicatieBeheerCommissie and/or treasurer for more information."
+msgstr ""
+
+msgid ""
 "Welcome! With this form you can register for a membership of GEWIS. Becoming "
 "a member of the assocations costs a one-time fee of 15 euros and your "
 "membership is valid as long as you study."
@@ -1214,8 +1258,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You cannot use your student e-mail address because if you stop studying, we "
-"can no longer reach you about important announcements."
+"You cannot use your TU/e (student) e-mail address because if you leave or "
+"stop studying, we can no longer reach you about important announcements."
 msgstr ""
 
 #, php-format

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-10 16:11+0200\n"
+"POT-Creation-Date: 2023-08-15 14:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tom Udding <tomudding@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 msgid "# Decisions"
 msgstr "# besluiten"
@@ -210,6 +210,20 @@ msgstr ""
 "Weet je zeker dat je het lidmaatschap van %s wilt verlengen tot %s (van %s)?"
 
 #, php-format
+msgid "Are you sure that you want to remove %s?"
+msgstr "Weet je zeker dat je %s wilt verwijderen?"
+
+#, php-format
+msgid ""
+"Are you sure that you want to remove %s? Because they have already paid a "
+"refund will be requested. If this fails, the prospective member will NOT be "
+"removed."
+msgstr ""
+"Weet je zeker dat je %s wilt verwijderen? Omdat ze al betaald hebben, zal er "
+"een terugbetaling worden aangevraagd. Als dit niet lukt, wordt het "
+"toekomstige lid NIET verwijderd."
+
+#, php-format
 msgid "Are you sure you want to delete member %s?"
 msgstr "Weet je zeker dat je lid %s wilt verwijderen?"
 
@@ -298,6 +312,9 @@ msgstr "CSV"
 msgid "Cancelled"
 msgstr "Afgebroken"
 
+msgid "Cannot Delete Prospective Member:"
+msgstr "Kan toekomstig lid niet verwijderen:"
+
 msgid "Change"
 msgstr "Wijzig"
 
@@ -344,6 +361,11 @@ msgstr "Stad"
 
 msgid "City and Postal Code"
 msgstr "Stad en postcode"
+
+msgid "Click here for approval if membership fee paid with cash."
+msgstr ""
+"Klik hier voor goedkeuring als de eenmalige lidmaatschapsbijdrage contant is "
+"betaald."
 
 msgid "Committee"
 msgstr "Commissie"
@@ -911,6 +933,15 @@ msgid "Phone Number"
 msgstr "Telefoonnummer"
 
 msgid ""
+"Please check your e-mail address, '%hostname%' does not appear to be able to "
+"receive e-mails. If you are certain that your e-mail address is correct, "
+"please contact the board."
+msgstr ""
+"Controleer je e-mailadres, '%hostname%' lijkt geen e-mails te kunnen "
+"ontvangen. Als je zeker weet dat je e-mailadres correct is, neem dan contact "
+"op met het bestuur."
+
+msgid ""
 "Please note that if you create a mailing list here, it must also exist in "
 "mailman (with the same name!)."
 msgstr ""
@@ -967,6 +998,9 @@ msgstr "Bestuurder ontheffen"
 
 msgid "Remove Member"
 msgstr "Lid verwijderen"
+
+msgid "Remove Prospective Member"
+msgstr "Verwijder toekomstig lid"
 
 msgid "Renew"
 msgstr "Verleng"
@@ -1182,6 +1216,12 @@ msgstr "Token"
 msgid "Type"
 msgstr "Type"
 
+msgid "Unable to check refund status"
+msgstr "Kan terugbetalingsstatus niet controleren"
+
+msgid "Unable to create refund"
+msgstr "Unable to create refund"
+
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -1274,6 +1314,25 @@ msgstr ""
 "dit is gebeurd."
 
 msgid ""
+"We were unable to create a refund for the prospective member. Please try "
+"again later. If this error stays, contact the ApplicatieBeheerCommissie and/"
+"or treasurer for more information."
+msgstr ""
+"We konden geen terugbetaling aanmaken voor het toekomstige lid. Probeer het "
+"later nog eens. Als deze fout blijft optreden, neem dan contact op met de "
+"ApplicatieBeheerCommissie en/of penningmeester voor meer informatie."
+
+msgid ""
+"We were unable to determine whether the prospective member has already "
+"received a refund. Please try again later. If this error stays, contact the "
+"ApplicatieBeheerCommissie and/or treasurer for more information."
+msgstr ""
+"We konden niet vaststellen of het toekomstige lid al een terugbetaling heeft "
+"ontvangen. Probeer het later nog eens. Als deze fout blijft optreden, neem "
+"dan contact op met de ApplicatieBeheerCommissie en/of penningmeester voor "
+"meer informatie."
+
+msgid ""
 "Welcome! With this form you can register for a membership of GEWIS. Becoming "
 "a member of the assocations costs a one-time fee of 15 euros and your "
 "membership is valid as long as you study."
@@ -1318,11 +1377,12 @@ msgstr ""
 "voorwaarden."
 
 msgid ""
-"You cannot use your student e-mail address because if you stop studying, we "
-"can no longer reach you about important announcements."
+"You cannot use your TU/e (student) e-mail address because if you leave or "
+"stop studying, we can no longer reach you about important announcements."
 msgstr ""
-"Je kunt je studentenmailadres niet gebruiken, want als je stopt met "
-"studeren, kunnen we je niet meer bereiken over belangrijke mededelingen."
+"Je kunt je TU/e (studenten)e-mailadres niet gebruiken, want als je vertrekt "
+"of stopt met studeren, kunnen we je niet meer bereiken over belangrijke "
+"mededelingen."
 
 #, php-format
 msgid ""
