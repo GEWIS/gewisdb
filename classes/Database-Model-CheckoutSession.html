@@ -307,6 +307,13 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
 <dd>Payment ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-CheckoutSession.html#property_paymentIntentId">$paymentIntentId</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The identifier of the PaymentIntent associated with this Checkout Session when the state is &#039;PAID&#039;.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-CheckoutSession.html#property_prospectiveMember">$prospectiveMember</a>
     <span>
                         &nbsp;: <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>            </span>
@@ -363,6 +370,13 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
 <dd>Get the ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-CheckoutSession.html#method_getPaymentIntentId">getPaymentIntentId()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getProspectiveMember">getProspectiveMember()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>    </span>
@@ -406,6 +420,13 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setExpiration">setExpiration()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-CheckoutSession.html#method_setPaymentIntentId">setPaymentIntentId()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -597,6 +618,40 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_paymentIntentId">
+        $paymentIntentId
+        <a href="classes/Database-Model-CheckoutSession.html#property_paymentIntentId" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The identifier of the PaymentIntent associated with this Checkout Session when the state is &#039;PAID&#039;.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$paymentIntentId</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_prospectiveMember">
         $prospectiveMember
         <a href="classes/Database-Model-CheckoutSession.html#property_prospectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -640,7 +695,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -674,7 +729,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -708,7 +763,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -746,7 +801,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -779,7 +834,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 
     </aside>
 
@@ -812,7 +867,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
@@ -845,7 +900,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -884,6 +939,39 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getPaymentIntentId">
+        getPaymentIntentId()
+        <a href="classes/Database-Model-CheckoutSession.html#method_getPaymentIntentId" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">149</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPaymentIntentId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string|null</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getProspectiveMember">
         getProspectiveMember()
         <a href="classes/Database-Model-CheckoutSession.html#method_getProspectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -891,7 +979,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -924,7 +1012,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -969,7 +1057,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -1002,7 +1090,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">182</span>
 
     </aside>
 
@@ -1035,7 +1123,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -1079,7 +1167,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
@@ -1123,7 +1211,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -1160,6 +1248,50 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setPaymentIntentId">
+        setPaymentIntentId()
+        <a href="classes/Database-Model-CheckoutSession.html#method_setPaymentIntentId" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">154</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setPaymentIntentId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paymentIntentId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$paymentIntentId</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setProspectiveMember">
         setProspectiveMember()
         <a href="classes/Database-Model-CheckoutSession.html#method_setProspectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1167,7 +1299,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 
     </aside>
 
@@ -1211,7 +1343,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">177</span>
 
     </aside>
 
@@ -1255,7 +1387,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">145</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
     </aside>
 
@@ -1299,7 +1431,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 
     </aside>
 

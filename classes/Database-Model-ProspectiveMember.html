@@ -439,6 +439,23 @@
 <dd>Add multiple mailing lists.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_canBeApproved">canBeApproved()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Determine whether the prospective member can be approved (and thus become a member). This should only be possible
+if the Checkout Session&#039;s state is &#039;PAID&#039; or &#039;FAILED&#039; or &#039;EXPIRED&#039;. The latter two indicate that this is a
+manual approval, for example, when the prospective member paid with cash.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_canBeDeleted">canBeDeleted()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Determine whether the prospective member can be deleted. This should only be possible if the last Checkout
+Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getAddresses">getAddresses()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
@@ -593,20 +610,12 @@
 <dd>Get the TU/e username.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_hasCheckoutExpiredOrFailed">hasCheckoutExpiredOrFailed()</a>
+    <a href="classes/Database-Model-ProspectiveMember.html#method_hasPaid">hasPaid()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
-<dd>Determine whether the prospective member has an `expired` or `failed` Checkout Session. This is used to check
-whether a prospective member can be approved.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-ProspectiveMember.html#method_isCheckoutPending">isCheckoutPending()</a>
-    <span>
-                                &nbsp;: bool    </span>
-</dt>
-<dd>Determine whether the prospective member does not have a `created` or `pending` Checkout Session. This is used to
-check whether a prospective member can be safely deleted.</dd>
+<dd>Determine whether the prospective member has paid. This should only be possible if the Checkout Session&#039;s state
+is &#039;PAID&#039;.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_setAddress">setAddress()</a>
@@ -705,6 +714,13 @@ check whether a prospective member can be safely deleted.</dd>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd>Convert to array.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Database-Model-ProspectiveMember.html#method_getLastCheckoutSessionState">getLastCheckoutSessionState()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>|null    </span>
+</dt>
+<dd></dd>
 
         </dl>
 
@@ -1531,6 +1547,75 @@ check whether a prospective member can be safely deleted.</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_canBeApproved">
+        canBeApproved()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_canBeApproved" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">537</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Determine whether the prospective member can be approved (and thus become a member). This should only be possible
+if the Checkout Session&#039;s state is &#039;PAID&#039; or &#039;FAILED&#039; or &#039;EXPIRED&#039;. The latter two indicate that this is a
+manual approval, for example, when the prospective member paid with cash.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">canBeApproved</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_canBeDeleted">
+        canBeDeleted()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_canBeDeleted" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">554</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Determine whether the prospective member can be deleted. This should only be possible if the last Checkout
+Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">canBeDeleted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getAddresses">
         getAddresses()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getAddresses" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2078,7 +2163,7 @@ check whether a prospective member can be safely deleted.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">578</span>
+    <span class="phpdocumentor-element-found-in__line">605</span>
 
     </aside>
 
@@ -2281,57 +2366,23 @@ check whether a prospective member can be safely deleted.</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_hasCheckoutExpiredOrFailed">
-        hasCheckoutExpiredOrFailed()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_hasCheckoutExpiredOrFailed" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_hasPaid">
+        hasPaid()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_hasPaid" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">560</span>
+    <span class="phpdocumentor-element-found-in__line">578</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Determine whether the prospective member has an `expired` or `failed` Checkout Session. This is used to check
-whether a prospective member can be approved.</p>
+        <p class="phpdocumentor-summary">Determine whether the prospective member has paid. This should only be possible if the Checkout Session&#039;s state
+is &#039;PAID&#039;.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">hasCheckoutExpiredOrFailed</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_isCheckoutPending">
-        isCheckoutPending()
-        <a href="classes/Database-Model-ProspectiveMember.html#method_isCheckoutPending" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">536</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Determine whether the prospective member does not have a `created` or `pending` Checkout Session. This is used to
-check whether a prospective member can be safely deleted.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">isCheckoutPending</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">hasPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     
     
@@ -2796,7 +2847,7 @@ check whether a prospective member can be safely deleted.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">583</span>
+    <span class="phpdocumentor-element-found-in__line">610</span>
 
     </aside>
 
@@ -2944,6 +2995,39 @@ check whether a prospective member can be safely deleted.</p>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLastCheckoutSessionState">
+        getLastCheckoutSessionState()
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getLastCheckoutSessionState" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">589</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getLastCheckoutSessionState</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>|null</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>|null</span>
             &mdash;
         
     

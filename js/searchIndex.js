@@ -3666,10 +3666,20 @@ Search.appendIndex(
             "summary": "Delete\u0020action.",
             "url": "classes/Database-Controller-ProspectiveMemberController.html#method_deleteAction"
         },                {
+            "fqsen": "\\Database\\Controller\\ProspectiveMemberController\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Controller-ProspectiveMemberController.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Controller\\ProspectiveMemberController\u003A\u003A\u0024memberService",
             "name": "memberService",
             "summary": "",
             "url": "classes/Database-Controller-ProspectiveMemberController.html#property_memberService"
+        },                {
+            "fqsen": "\\Database\\Controller\\ProspectiveMemberController\u003A\u003A\u0024stripeService",
+            "name": "stripeService",
+            "summary": "",
+            "url": "classes/Database-Controller-ProspectiveMemberController.html#property_stripeService"
         },                {
             "fqsen": "\\Database\\Controller\\QueryController",
             "name": "QueryController",
@@ -5576,6 +5586,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-CheckoutSession.html#method_setExpiration"
         },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetPaymentIntentId\u0028\u0029",
+            "name": "getPaymentIntentId",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getPaymentIntentId"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AsetPaymentIntentId\u0028\u0029",
+            "name": "setPaymentIntentId",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_setPaymentIntentId"
+        },                {
             "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetRecoveryUrl\u0028\u0029",
             "name": "getRecoveryUrl",
             "summary": "",
@@ -5630,6 +5650,11 @@ Search.appendIndex(
             "name": "expiration",
             "summary": "Expiration\u0020of\u0020the\u0020checkout\u0020session.",
             "url": "classes/Database-Model-CheckoutSession.html#property_expiration"
+        },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024paymentIntentId",
+            "name": "paymentIntentId",
+            "summary": "The\u0020identifier\u0020of\u0020the\u0020PaymentIntent\u0020associated\u0020with\u0020this\u0020Checkout\u0020Session\u0020when\u0020the\u0020state\u0020is\u0020\u0027PAID\u0027.",
+            "url": "classes/Database-Model-CheckoutSession.html#property_paymentIntentId"
         },                {
             "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003A\u0024recoveryUrl",
             "name": "recoveryUrl",
@@ -6746,15 +6771,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-ProspectiveMember.html#method_getCheckoutSessions"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AisCheckoutPending\u0028\u0029",
-            "name": "isCheckoutPending",
-            "summary": "Determine\u0020whether\u0020the\u0020prospective\u0020member\u0020does\u0020not\u0020have\u0020a\u0020\u0060created\u0060\u0020or\u0020\u0060pending\u0060\u0020Checkout\u0020Session.\u0020This\u0020is\u0020used\u0020to\ncheck\u0020whether\u0020a\u0020prospective\u0020member\u0020can\u0020be\u0020safely\u0020deleted.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_isCheckoutPending"
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AcanBeApproved\u0028\u0029",
+            "name": "canBeApproved",
+            "summary": "Determine\u0020whether\u0020the\u0020prospective\u0020member\u0020can\u0020be\u0020approved\u0020\u0028and\u0020thus\u0020become\u0020a\u0020member\u0029.\u0020This\u0020should\u0020only\u0020be\u0020possible\nif\u0020the\u0020Checkout\u0020Session\u0027s\u0020state\u0020is\u0020\u0027PAID\u0027\u0020or\u0020\u0027FAILED\u0027\u0020or\u0020\u0027EXPIRED\u0027.\u0020The\u0020latter\u0020two\u0020indicate\u0020that\u0020this\u0020is\u0020a\nmanual\u0020approval,\u0020for\u0020example,\u0020when\u0020the\u0020prospective\u0020member\u0020paid\u0020with\u0020cash.",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_canBeApproved"
         },                {
-            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AhasCheckoutExpiredOrFailed\u0028\u0029",
-            "name": "hasCheckoutExpiredOrFailed",
-            "summary": "Determine\u0020whether\u0020the\u0020prospective\u0020member\u0020has\u0020an\u0020\u0060expired\u0060\u0020or\u0020\u0060failed\u0060\u0020Checkout\u0020Session.\u0020This\u0020is\u0020used\u0020to\u0020check\nwhether\u0020a\u0020prospective\u0020member\u0020can\u0020be\u0020approved.",
-            "url": "classes/Database-Model-ProspectiveMember.html#method_hasCheckoutExpiredOrFailed"
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AcanBeDeleted\u0028\u0029",
+            "name": "canBeDeleted",
+            "summary": "Determine\u0020whether\u0020the\u0020prospective\u0020member\u0020can\u0020be\u0020deleted.\u0020This\u0020should\u0020only\u0020be\u0020possible\u0020if\u0020the\u0020last\u0020Checkout\nSession\u0027s\u0020state\u0020is\u0020\u0027PAID\u0027\u0020or\u0020fully\u0020\u0027EXPIRED\u0027.",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_canBeDeleted"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AhasPaid\u0028\u0029",
+            "name": "hasPaid",
+            "summary": "Determine\u0020whether\u0020the\u0020prospective\u0020member\u0020has\u0020paid.\u0020This\u0020should\u0020only\u0020be\u0020possible\u0020if\u0020the\u0020Checkout\u0020Session\u0027s\u0020state\nis\u0020\u0027PAID\u0027.",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_hasPaid"
+        },                {
+            "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetLastCheckoutSessionState\u0028\u0029",
+            "name": "getLastCheckoutSessionState",
+            "summary": "",
+            "url": "classes/Database-Model-ProspectiveMember.html#method_getLastCheckoutSessionState"
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetPaymentLink\u0028\u0029",
             "name": "getPaymentLink",
@@ -8166,6 +8201,11 @@ Search.appendIndex(
             "summary": "Send\u0020an\u0020e\u002Dmail\u0020to\u0020the\u0020\u0028prospective\u0029\u0020member\u0020and\u0020the\u0020secretary\u0020with\u0020an\u0020update\u0020on\u0020the\u0020\u0028prospective\u0029\u0020member\u0027s\nregistration.",
             "url": "classes/Database-Service-Member.html#method_sendRegistrationUpdateEmail"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AsendRefundProblemEmail\u0028\u0029",
+            "name": "sendRefundProblemEmail",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_sendRefundProblemEmail"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AfinalizeSubscription\u0028\u0029",
             "name": "finalizeSubscription",
             "summary": "",
@@ -8611,6 +8651,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Stripe.html#method_getCheckoutSession"
         },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AcreateRefund\u0028\u0029",
+            "name": "createRefund",
+            "summary": "Create\u0020a\u0020refund\u0020for\u0020a\u0020prospective\u0020member.\u0020Returns\u0020\u0060true\u0060\u0020iff\u0020the\u0020Refund\u0020was\u0020successfully\u0020created.",
+            "url": "classes/Database-Service-Stripe.html#method_createRefund"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AhasRefund\u0028\u0029",
+            "name": "hasRefund",
+            "summary": "Determine\u0020whether\u0020there\u0020is\u0020already\u0020a\u0020Refund\u0020for\u0020a\u0020prospective\u0020member.\u0020This\u0020does\u0020say\u0020nothing\u0020about\u0020the\u0020state\u0020of\nsuch\u0020a\u0020Refund,\u0020just\u0020that\u0020it\u0020exists.",
+            "url": "classes/Database-Service-Stripe.html#method_hasRefund"
+        },                {
             "fqsen": "\\Database\\Service\\Stripe\u003A\u003AverifyEvent\u0028\u0029",
             "name": "verifyEvent",
             "summary": "",
@@ -8618,7 +8668,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Stripe\u003A\u003AhandleEvent\u0028\u0029",
             "name": "handleEvent",
-            "summary": "To\u0020keep\u0020track\u0020of\u0020how\u0020the\u0020Checkout\u0020Session\u0020and\u0020its\u0020associated\u0020payment\u0020evolves\u0020over\u0020time\u0020we\u0020need\u0020to\u0020be\u0020able\u0020to\nhandle\u0020a\u0020few\u0020events\u0020from\u0020webhooks\u0020that\u0020Stripe\u0020sends\u0020us.\u0020In\u0020other\u0020words,\u0020this\u0020is\u0020the\u0020fulfillment\u0020process.",
+            "summary": "To\u0020keep\u0020track\u0020of\u0020how\u0020Checkout\u0020Sessions\u0020\u0028and\u0020its\u0020associated\u0020payment\u0029\u0020and\u0020Refunds\u0020evolve\u0020over\u0020time\u0020we\u0020need\u0020to\u0020be\nable\u0020to\u0020handle\u0020a\u0020few\u0020webhook\u0020events\u0020that\u0020Stripe\u0020sends\u0020us.\u0020In\u0020other\u0020words,\u0020this\u0020is\u0020the\u0020\u0022fulfillment\u0022\u0020process.",
             "url": "classes/Database-Service-Stripe.html#method_handleEvent"
         },                {
             "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetClient\u0028\u0029",
