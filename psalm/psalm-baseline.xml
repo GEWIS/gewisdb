@@ -72,7 +72,8 @@
     </InvalidReturnType>
   </file>
   <file src="module/Database/src/Service/Stripe.php">
-    <UndefinedMagicPropertyFetch occurrences="2">
+    <UndefinedMagicPropertyFetch occurrences="3">
+      <code>$event-&gt;data-&gt;object</code>
       <code>$event-&gt;data-&gt;object</code>
       <code>$session-&gt;after_expiration-&gt;recovery</code>
     </UndefinedMagicPropertyFetch>
