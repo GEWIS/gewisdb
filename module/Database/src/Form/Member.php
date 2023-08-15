@@ -21,6 +21,8 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Validator\Callback;
+use Laminas\Validator\EmailAddress;
+use Laminas\Validator\Hostname;
 use Laminas\Validator\Identical;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
@@ -270,12 +272,25 @@ class Member extends Form implements InputFilterProviderInterface
                         'name' => Callback::class,
                         'options' => [
                             'callback' => static function ($value) {
-                                return !str_ends_with($value, '@student.tue.nl');
+                                return !str_ends_with($value, '.tue.nl');
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
                                     // phpcs:ignore -- user-visible strings should not be split
-                                    'You cannot use your student e-mail address because if you stop studying, we can no longer reach you about important announcements.',
+                                    'You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.',
+                                ),
+                            ],
+                        ],
+                    ],
+                    [
+                        'name' => EmailAddress::class,
+                        'options' => [
+                            'allow' => Hostname::ALLOW_DNS,
+                            'useMxCheck' => true,
+                            'messages' => [
+                                EmailAddress::INVALID_MX_RECORD => $this->translator->translate(
+                                    // phpcs:ignore -- user-visible strings should not be split
+                                    'Please check your e-mail address, \'%hostname%\' does not appear to be able to receive e-mails. If you are certain that your e-mail address is correct, please contact the board.'
                                 ),
                             ],
                         ],
