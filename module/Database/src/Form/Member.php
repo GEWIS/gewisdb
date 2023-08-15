@@ -270,12 +270,12 @@ class Member extends Form implements InputFilterProviderInterface
                         'name' => Callback::class,
                         'options' => [
                             'callback' => static function ($value) {
-                                return !str_ends_with($value, '@student.tue.nl');
+                                return !str_ends_with($value, '.tue.nl');
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
                                     // phpcs:ignore -- user-visible strings should not be split
-                                    'You cannot use your student e-mail address because if you stop studying, we can no longer reach you about important announcements.',
+                                    'You cannot use your TU/e (student) e-mail address because if you leave or stop studying, we can no longer reach you about important announcements.',
                                 ),
                             ],
                         ],
