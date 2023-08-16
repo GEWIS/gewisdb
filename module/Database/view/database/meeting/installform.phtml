@@ -67,6 +67,10 @@ $(document).ready(function () {
                 $.each(data.json.members, function (idx, member) {
                     var installationCount = 0;
 
+                    member.installations.sort((a, b) => {
+                        return ('Lid' === b.function) ? 1 : 0;
+                    });
+
                     $.each(member.installations, function (idx, install) {
                         var decNum = install.meeting_type + '-' + install.meeting_number
                             + '-' + install.decision_point + '-' + install.decision_number
