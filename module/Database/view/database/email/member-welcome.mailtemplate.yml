@@ -34,7 +34,7 @@ messageblocks:
     When you log in for the first time, you will have to read and accept the terms and conditions. After that, you can also set a pin code to use the point of sales on your own.</p>
 
     With kind regards,<br/>
-    The board of GEWIS"
+    The 42nd board of GEWIS"
 
 
 # If there is more text that goes below the topblock, you can leave it here. Extramessage has one or multiple short messages
@@ -46,22 +46,19 @@ messageblocks:
       - title: "The GEWIS website"
         contentHTML: "You might have noticed that GEWIS has its own website, but that it might not be as easy to access as you had hoped. Fear not, as this instruction mail should help you in no time! There are several different tabs in which you can find the following information:<br/>
         <ul>
-        <li><b>Association</b>: If you have ever wondered who is actively helping the association by means of organizing activities, maintaining the servers, taking pictures, or publishing the association magazine: take a look at this page! All our committees, fraternities, and sororities are listed here. Besides that, you can take a look if you forgot what your board looks like, or how you should sing the GEWIS song ;)</li>
+        <li><b>Association</b>: If you have ever wondered who is actively helping the association by means of organizing activities, taking pictures, or publishing the association magazine: take a look at this page! All our committees, fraternities, and sororities are listed here. Besides that, you can take a look if you forgot what your board looks like, or how you should sing the GEWIS song ;)</li>
         <li><b>Companies</b>: At some point in the future, you could be looking for an internship or a graduation project from a company. At this header, you find a list of numerous companies offering vacancies for members of GEWIS.</li>
         <li><b>Education</b>: Especially important when the exam weeks are coming near, here you can find all the old exams and summaries that GEWIS has available for the courses of Mathematics and Computer Science. You can also order your books from here, or submit a complaint about a teacher or a course.</li>
         <li><b>Activities</b>: Besides studying, it is of course important to relax and enjoy your student life every once in a while. Here, you find an overview of all the activities GEWIS organizes: from weekends to lunch lectures, from external activities such as a conference to internal activities such as a bridge course. Don’t forget that most activities require you to subscribe in advance and that some activities are full quite fast!</li>
         <li><b>Photos</b>: This kind of speaks for itself: at nearly every activity, members of GEFLITST (the photo committee of GEWIS) are busy taking pictures of our members. If you’re scrolling through the photos, don’t forget to tag the members you know in the picture! This week's photos will be on the website already so check for them regularly :)</li>
-        <li><b>Members</b>: In this section, you can find plenty of different important shortcuts to other parts of the website. For example; you can look at an overview of your profile, look up another member if you can’t remember his name, see when the next General Members Meeting (GMM) is, access your SudoSOS account with which you can buy drinks and food (you have to agree to the terms of use before you can buy stuff), and many other shortcuts.
+        <li><b>Members</b>: In this section, you can find plenty of different important shortcuts to other parts of the website. For example; you can look at an overview of your profile, look up a fellow member, see when the next General Members Meeting (GMM) is, access your SudoSOS account with which you can buy drinks and food (you have to agree to the terms of use before you can buy stuff), and many other shortcuts.
     Be sure to check it out!
     And of course, on our homepage, you can find numerous of these sections in short. A few of the upcoming events, the birthdays of today, the photo of the week, a poll, and of course random infima. So as you can see, there’s a lot to see and do on our website, so be sure to check it out every once in a while!</li>
         </ul>"
       - title: "First-year committees"
-        contentHTML: "GEWIS has many committees and fraternities, we even set-up committees dedicated to first-year students every year. As a first year committee you will be experiencing first-hand what being an active GEWIS member is like! Together with your fellow first-year students you will be fleshing out your own identity by creating your very own logo and custom clothing.
-    You will also get the opportunity to organize some very fun activities for GEWIS and you can even be a part of workgroups with other first year committee members with whom you will be organizing parties, parent days or even a cantus!
-    Furthermore, each semester a scoring competition is held to see which first year committee is the very best of them all.
-    Collect points with your committee by passing courses, attending activities and much more!<br/><b>Joining a first-year committee</b>: In the first quartile, an information meeting will be held.  Here, first year committees from previous years will tell you about their fun experiences.
-    A second meeting, the formation meeting, will be held to form the first year committees. Not to worry though, it's also possible to join an FYC later in the year.
-    We hope to see you at these meetings!>"
+        contentHTML: "GEWIS has many committees and fraternities, and we even set up committees specifically for first-year students! As an upcoming student, you can join an FYC (First-Year Committee) to get a taste of what it's like to be an active member at GEWIS. Together with your fellow first-year stduents, you will be fleshing out your own identity by creating a logo and custom clothing. Then you can organize fun activities for the association and collaborate with other committees or fraternities!
+        <br><br>
+        To join a first year committee information meeting, you can subscribe to <a href='https://gew.is/fycinterest'>this activity</a>!"
       - title: "Ordering books"
         contentHTML: "By becoming a GEWIS member you have the right to a specialized discount! By navigating to <a href=\"https://gewis.nl/books\">gewis.nl/books</a> you can find your study and see which books will be used for your courses."
       - title: "GEWIS on social media"
