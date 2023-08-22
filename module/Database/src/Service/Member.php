@@ -285,6 +285,11 @@ class Member
         // Fill in the address in the form again
         $data = $prospectiveMember->toArray();
 
+        if ($this->getMemberMapper()->hasMemberWith($prospectiveMember->getEmail())) {
+            // phpcs:ignore -- user-visible strings should not be split
+            throw new RuntimeException('You cannot approve this member. A member with this email address already exists. Make sure this is not an error in the database. Disapproving will refund the member, so make sure they paid twice before refunding.');
+        }
+
         // add list data to the form
         foreach ($form->getLists() as $list) {
             $result = '0';
