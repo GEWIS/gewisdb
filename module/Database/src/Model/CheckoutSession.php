@@ -88,6 +88,7 @@ class CheckoutSession
     #[JoinColumn(
         name: 'recovered_from_id',
         referencedColumnName: 'id',
+        onDelete: 'SET NULL',
     )]
     protected ?CheckoutSession $recoveredFrom = null;
 
