@@ -64,6 +64,16 @@ class ActionLink
     }
 
     /**
+     * Get all renewal links for a member
+     *
+     * @return array<array-key, RenewalLinkModel>
+     */
+    public function findRenewalByMember(int $lidnr): ?array
+    {
+        return $this->getRenewalRepository()->findBy(['member' => $lidnr]);
+    }
+
+    /**
      * Create a renewal link for a member.
      *
      * If no expiration date is given, we renew until the first July 1st after the current expiration date +
@@ -96,6 +106,14 @@ class ActionLink
     public function getRepository(): EntityRepository
     {
         return $this->em->getRepository(ActionLinkModel::class);
+    }
+
+    /**
+     * Get the repository for renewal links.
+     */
+    private function getRenewalRepository(): EntityRepository
+    {
+        return $this->em->getRepository(RenewalLinkModel::class);
     }
 
     /**

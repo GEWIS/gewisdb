@@ -417,6 +417,14 @@ class MemberController extends AbstractActionController
             );
 
             if (null !== $member) {
+                $renewalLinks = $this->memberService->getActionLinkMapper()
+                    ->findRenewalByMember($member->getLidnr());
+
+                foreach ($renewalLinks as $renewalLink) {
+                    $renewalLink->setUsed(true);
+                    $this->memberService->getActionLinkMapper()->persist($renewalLink);
+                }
+
                 $this->flashMessenger()->addSuccessMessage('Wijziging lidmaatschapstype is opgeslagen!');
 
                 return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
