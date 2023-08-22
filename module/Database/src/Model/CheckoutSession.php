@@ -80,7 +80,11 @@ class CheckoutSession
     )]
     protected ?string $recoveryUrl = null;
 
-    #[OneToOne(targetEntity: self::class)]
+    #[OneToOne(
+        targetEntity: self::class,
+        orphanRemoval: true,
+        cascade: ['remove'],
+    )]
     #[JoinColumn(
         name: 'recovered_from_id',
         referencedColumnName: 'id',
