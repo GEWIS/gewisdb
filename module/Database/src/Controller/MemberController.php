@@ -72,9 +72,13 @@ class MemberController extends AbstractActionController
                     return $this->redirect()->toRoute('member/subscribe/checkout/status', ['status' => 'error']);
                 }
 
-                return $this->redirect()
-                    ->toUrl($checkoutLink)
-                    ->setStatusCode(Response::STATUS_CODE_303);
+                $view = new ViewModel([
+                    'destination' => $this->translator->translate('our payment provider'),
+                    'url' => $checkoutLink,
+                ]);
+                $view->setTemplate('redirect');
+
+                return $view;
             }
         }
 
