@@ -45,6 +45,7 @@ use ReflectionClass;
 use RuntimeException;
 
 use function bin2hex;
+use function count;
 use function in_array;
 use function mb_encode_mimeheader;
 use function random_bytes;
@@ -915,7 +916,10 @@ class Member
      * @return array{
      *     members: int,
      *     expired: int,
-     *     prospectives: int,
+     *     prospectives: array{
+     *       total: int,
+     *       paid: int,
+     *     },
      *     updates: int,
      * }
      */
@@ -924,7 +928,10 @@ class Member
         return [
             'members' => $this->getMemberMapper()->countMembers(),
             'expired' => $this->getMemberMapper()->countMembers(true),
-            'prospectives' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
+            'prospectives' => [
+                'total' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
+                'paid' => count($this->getProspectiveMemberMapper()->search('', 'paid')),
+            ],
             'updates' => $this->getMemberUpdateMapper()->getRepository()->count([]),
         ];
     }
