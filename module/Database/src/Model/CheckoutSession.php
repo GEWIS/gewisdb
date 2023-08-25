@@ -6,13 +6,15 @@ namespace Database\Model;
 
 use Database\Model\Enums\CheckoutSessionStates;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Saved query model.
@@ -80,9 +82,20 @@ class CheckoutSession
     )]
     protected ?string $recoveryUrl = null;
 
-    #[OneToOne(
+    /**
+     * One-to-many side for self-reference after recovery.
+     *
+     * @var Collection<array-key, CheckoutSession>
+     */
+    #[OneToMany(
         targetEntity: self::class,
-        orphanRemoval: true,
+        mappedBy: 'recoveredFrom',
+    )]
+    protected Collection $recoveredBy;
+
+    #[ManyToOne(
+        targetEntity: self::class,
+        inversedBy: 'recoveredBy',
         cascade: ['remove'],
     )]
     #[JoinColumn(
@@ -100,6 +113,11 @@ class CheckoutSession
         enumType: CheckoutSessionStates::class,
     )]
     protected CheckoutSessionStates $state = CheckoutSessionStates::Created;
+
+    public function __construct()
+    {
+        $this->recoveredBy = new ArrayCollection();
+    }
 
     /**
      * Get the ID.

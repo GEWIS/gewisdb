@@ -116,6 +116,10 @@ class Stripe
             return $this->getCheckoutLink($prospectiveMember);
         }
 
+        // If the Checkout Session was recovered we want to go back to the original one (which has the correct
+        // expiration and Recovery URL).
+        $lastCheckoutStub = $lastCheckoutStub->getRecoveredFrom() ?? $lastCheckoutStub;
+
         // We have at least one known Checkout Session on file.
         if (
             CheckoutSessionStates::Paid === $lastCheckoutStub->getState()
@@ -369,12 +373,17 @@ class Stripe
                 // The prospective member did not complete the checkout within 24 hours. We mark the stored checkout
                 // session as expired.
                 $storedCheckoutSession->setState(CheckoutSessionStates::Expired);
-                // Recovery URL is valid for 30 days.
-                $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
-                    'U',
-                    (string) $session->after_expiration->recovery->expires_at,
-                )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
-                $storedCheckoutSession->setRecoveryUrl($session->after_expiration->recovery->url);
+
+                if (null !== $session->after_expiration) {
+                    // We are handling the expiration of the very first Checkout Session of the prospective member. The
+                    // Recovery URL is valid for 30 days.
+                    $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
+                        'U',
+                        (string) $session->after_expiration->recovery->expires_at,
+                    )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
+                    $storedCheckoutSession->setRecoveryUrl($session->after_expiration->recovery->url);
+                }
+
                 // (re)set the used state of the payment link to enable it.
                 $paymentLink?->setUsed(false);
 
