@@ -383,6 +383,7 @@ class Stripe
                     )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
                     $storedCheckoutSession->setRecoveryUrl($session->after_expiration->recovery->url);
                 }
+
                 // (re)set the used state of the payment link to enable it.
                 $paymentLink?->setUsed(false);
 
