@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -233,8 +234,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/report.html">Report</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/report-listener.html">Listener</a></li>
     </ul>
@@ -254,6 +256,11 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
     :
@@ -268,121 +275,126 @@
 
 
 
-
-
-
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Report-Listener-DatabaseUpdateListener.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Report-Listener-DatabaseUpdateListener.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_isflushing">$isflushing</a>
     <span>
                         &nbsp;: bool            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_boardService">$boardService</a>
     <span>
                         &nbsp;: <a href="classes/Report-Service-Board.html"><abbr title="\Report\Service\Board">Board</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_emReport">$emReport</a>
     <span>
                         &nbsp;: <abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_keyholderService">$keyholderService</a>
     <span>
                         &nbsp;: <a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_meetingService">$meetingService</a>
     <span>
                         &nbsp;: <a href="classes/Report-Service-Meeting.html"><abbr title="\Report\Service\Meeting">Meeting</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_memberService">$memberService</a>
     <span>
                         &nbsp;: <a href="classes/Report-Service-Member.html"><abbr title="\Report\Service\Member">Member</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_miscService">$miscService</a>
     <span>
                         &nbsp;: <a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_organService">$organService</a>
     <span>
                         &nbsp;: <a href="classes/Report-Service-Organ.html"><abbr title="\Report\Service\Organ">Organ</abbr></a>            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Report-Listener-DatabaseUpdateListener.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_postPersist">postPersist()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_postUpdate">postUpdate()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processBoardMemberUpdates">processBoardMemberUpdates()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processKeyholderUpdates">processKeyholderUpdates()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processOrganUpdates">processOrganUpdates()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_safeFlush">safeFlush()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -393,6 +405,7 @@
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/Report-Listener-DatabaseUpdateListener.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -404,6 +417,7 @@
     <h4 class="phpdocumentor-element__name" id="property_isflushing">
         $isflushing
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_isflushing" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -421,10 +435,8 @@
     <span class="phpdocumentor-signature__name">$isflushing</span>
      = <span class="phpdocumentor-signature__default-value">false</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -438,6 +450,7 @@
     <h4 class="phpdocumentor-element__name" id="property_boardService">
         $boardService
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_boardService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -455,10 +468,8 @@
     <span class="phpdocumentor-signature__name">$boardService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -472,6 +483,7 @@
     <h4 class="phpdocumentor-element__name" id="property_emReport">
         $emReport
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_emReport" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -489,10 +501,8 @@
     <span class="phpdocumentor-signature__name">$emReport</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -506,6 +516,7 @@
     <h4 class="phpdocumentor-element__name" id="property_keyholderService">
         $keyholderService
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_keyholderService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -523,10 +534,8 @@
     <span class="phpdocumentor-signature__name">$keyholderService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -540,6 +549,7 @@
     <h4 class="phpdocumentor-element__name" id="property_meetingService">
         $meetingService
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_meetingService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -557,10 +567,8 @@
     <span class="phpdocumentor-signature__name">$meetingService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -574,6 +582,7 @@
     <h4 class="phpdocumentor-element__name" id="property_memberService">
         $memberService
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_memberService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -591,10 +600,8 @@
     <span class="phpdocumentor-signature__name">$memberService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -608,6 +615,7 @@
     <h4 class="phpdocumentor-element__name" id="property_miscService">
         $miscService
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_miscService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -625,10 +633,8 @@
     <span class="phpdocumentor-signature__name">$miscService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -642,6 +648,7 @@
     <h4 class="phpdocumentor-element__name" id="property_organService">
         $organService
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#property_organService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -659,10 +666,8 @@
     <span class="phpdocumentor-signature__name">$organService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -672,6 +677,7 @@
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/Report-Listener-DatabaseUpdateListener.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -682,6 +688,7 @@
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
@@ -695,8 +702,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Board.html"><abbr title="\Report\Service\Board">Board</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$boardService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keyholderService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Meeting.html"><abbr title="\Report\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Member.html"><abbr title="\Report\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$miscService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Organ.html"><abbr title="\Report\Service\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$emReport</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -704,65 +712,54 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Board.html"><abbr title="\Report\Service\Board">Board</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$keyholderService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Keyholder.html"><abbr title="\Report\Service\Keyholder">Keyholder</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$meetingService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Meeting.html"><abbr title="\Report\Service\Meeting">Meeting</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$memberService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Member.html"><abbr title="\Report\Service\Member">Member</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$miscService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Misc.html"><abbr title="\Report\Service\Misc">Misc</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$organService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Service-Organ.html"><abbr title="\Report\Service\Organ">Organ</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$emReport</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -774,6 +771,7 @@
     <h4 class="phpdocumentor-element__name" id="method_postPersist">
         postPersist()
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_postPersist" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
@@ -787,8 +785,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">postPersist</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\Event\LifecycleEventArgs">LifecycleEventArgs</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$eventArgs</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -796,17 +795,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\Event\LifecycleEventArgs">LifecycleEventArgs</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -818,6 +812,7 @@
     <h4 class="phpdocumentor-element__name" id="method_postUpdate">
         postUpdate()
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_postUpdate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
@@ -831,8 +826,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">postUpdate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\Event\LifecycleEventArgs">LifecycleEventArgs</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$eventArgs</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -840,17 +836,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\Event\LifecycleEventArgs">LifecycleEventArgs</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -862,6 +853,7 @@
     <h4 class="phpdocumentor-element__name" id="method_processBoardMemberUpdates">
         processBoardMemberUpdates()
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processBoardMemberUpdates" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
@@ -875,8 +867,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">processBoardMemberUpdates</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -884,17 +877,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -906,6 +894,7 @@
     <h4 class="phpdocumentor-element__name" id="method_processKeyholderUpdates">
         processKeyholderUpdates()
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processKeyholderUpdates" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
@@ -919,8 +908,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">processKeyholderUpdates</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -928,17 +918,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -950,6 +935,7 @@
     <h4 class="phpdocumentor-element__name" id="method_processOrganUpdates">
         processOrganUpdates()
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processOrganUpdates" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
@@ -963,8 +949,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">processOrganUpdates</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -972,17 +959,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-SubDecision.html"><abbr title="\Report\Model\SubDecision">SubDecision</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -994,6 +976,7 @@
     <h4 class="phpdocumentor-element__name" id="method_safeFlush">
         safeFlush()
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#method_safeFlush" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/DatabaseUpdateListener.php"><a href="files/module-report-src-listener-databaseupdatelistener.html"><abbr title="module/Report/src/Listener/DatabaseUpdateListener.php">DatabaseUpdateListener.php</abbr></a></abbr>
@@ -1007,8 +990,9 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">safeFlush</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$func</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1016,85 +1000,156 @@
                 : <span class="phpdocumentor-signature__argument__return-type">callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Report/src/Listener/DatabaseUpdateListener.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_isflushing">$isflushing<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_boardService">$boardService<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_emReport">$emReport<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_keyholderService">$keyholderService<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_meetingService">$meetingService<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_memberService">$memberService<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_miscService">$miscService<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                                    <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#property_organService">$organService<a href="classes/Report-Listener-DatabaseUpdateListener.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#method_postPersist">postPersist()</a></li>
+                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#method_postUpdate">postUpdate()</a></li>
+                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processBoardMemberUpdates">processBoardMemberUpdates()</a></li>
+                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processKeyholderUpdates">processKeyholderUpdates()</a></li>
+                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#method_processOrganUpdates">processOrganUpdates()</a></li>
+                                            <li><a href="classes/Report-Listener-DatabaseUpdateListener.html#method_safeFlush">safeFlush()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1105,7 +1160,6 @@
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/Report-Listener-DatabaseUpdateListener.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

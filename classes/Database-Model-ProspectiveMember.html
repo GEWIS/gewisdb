@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -233,8 +234,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model.html">Model</a></li>
     </ul>
@@ -254,10 +256,15 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -268,16 +275,27 @@
 
 
 
-
-
-
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-ProspectiveMember.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Database-Model-ProspectiveMember.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ProspectiveMember.html#property_birth">$birth</a>
     <span>
                         &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
@@ -294,7 +312,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ProspectiveMember.html#property_checkoutSessions">$checkoutSessions</a>
     <span>
-                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>            </span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;            </span>
 </dt>
 <dd>The Checkout Sessions for this prospective member.</dd>
 
@@ -350,7 +368,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-ProspectiveMember.html#property_lists">$lists</a>
     <span>
-                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>            </span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;            </span>
 </dt>
 <dd>Memberships of mailing lists.</dd>
 
@@ -417,12 +435,19 @@
 </dt>
 <dd>TU/e username.</dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Database-Model-ProspectiveMember.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_addList">addList()</a>
@@ -458,7 +483,7 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getAddresses">getAddresses()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: <abbr title="array{studentAddress: \Database\Model\Address}">Address}</abbr>    </span>
 </dt>
 <dd>Get all addresses.</dd>
 
@@ -479,23 +504,20 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getCheckoutSessions">getCheckoutSessions()</a>
     <span>
-                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;    </span>
+                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getCity">getCity()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getCountry">getCountry()</a>
     <span>
                                 &nbsp;: <a href="classes/Application-Model-Enums-PostalRegions.html"><abbr title="\Application\Model\Enums\PostalRegions">PostalRegions</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getEmail">getEmail()</a>
@@ -542,7 +564,7 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getLists">getLists()</a>
     <span>
-                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;    </span>
+                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;    </span>
 </dt>
 <dd>Get mailing list subscriptions.</dd>
 
@@ -558,7 +580,6 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</dd>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getPaid">getPaid()</a>
@@ -572,28 +593,24 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</dd>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getPhone">getPhone()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getPostalCode">getPostalCode()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getStreet">getStreet()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_getStudy">getStudy()</a>
@@ -692,7 +709,6 @@ is &#039;PAID&#039;.</dd>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_setStudy">setStudy()</a>
@@ -711,7 +727,7 @@ is &#039;PAID&#039;.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-ProspectiveMember.html#method_toArray">toArray()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: <abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, tueUsername: ?string, study: ?string, birth: string, address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr>    </span>
 </dt>
 <dd>Convert to array.</dd>
 
@@ -720,9 +736,9 @@ is &#039;PAID&#039;.</dd>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>|null    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -733,6 +749,7 @@ is &#039;PAID&#039;.</dd>
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/Database-Model-ProspectiveMember.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -744,13 +761,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_birth">
         $birth
         <a href="classes/Database-Model-ProspectiveMember.html#property_birth" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -763,8 +781,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -778,13 +795,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_changedOn">
         $changedOn
         <a href="classes/Database-Model-ProspectiveMember.html#property_changedOn" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -797,8 +815,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -812,13 +829,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_checkoutSessions">
         $checkoutSessions
         <a href="classes/Database-Model-ProspectiveMember.html#property_checkoutSessions" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">169</span>
 
     </aside>
 
@@ -826,7 +844,7 @@ is &#039;PAID&#039;.</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr></span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span>
     <span class="phpdocumentor-signature__name">$checkoutSessions</span>
     </code>
 
@@ -845,13 +863,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_city">
         $city
         <a href="classes/Database-Model-ProspectiveMember.html#property_city" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
@@ -864,8 +883,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -879,13 +897,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_country">
         $country
         <a href="classes/Database-Model-ProspectiveMember.html#property_country" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
@@ -898,8 +917,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -913,13 +931,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_email">
         $email
         <a href="classes/Database-Model-ProspectiveMember.html#property_email" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -932,8 +951,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -947,13 +965,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_firstName">
         $firstName
         <a href="classes/Database-Model-ProspectiveMember.html#property_firstName" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -966,8 +985,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -981,13 +999,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_initials">
         $initials
         <a href="classes/Database-Model-ProspectiveMember.html#property_initials" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -1000,8 +1019,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1015,13 +1033,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_lastName">
         $lastName
         <a href="classes/Database-Model-ProspectiveMember.html#property_lastName" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
@@ -1034,8 +1053,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1049,13 +1067,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_lidnr">
         $lidnr
         <a href="classes/Database-Model-ProspectiveMember.html#property_lidnr" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -1068,8 +1087,7 @@ is &#039;PAID&#039;.</dd>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1083,13 +1101,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_lists">
         $lists
         <a href="classes/Database-Model-ProspectiveMember.html#property_lists" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">148</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -1097,7 +1116,7 @@ is &#039;PAID&#039;.</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr></span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span>
     <span class="phpdocumentor-signature__name">$lists</span>
     </code>
 
@@ -1116,13 +1135,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_middleName">
         $middleName
         <a href="classes/Database-Model-ProspectiveMember.html#property_middleName" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -1135,8 +1155,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1150,13 +1169,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_number">
         $number
         <a href="classes/Database-Model-ProspectiveMember.html#property_number" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 
     </aside>
 
@@ -1169,8 +1189,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1184,13 +1203,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_paid">
         $paid
         <a href="classes/Database-Model-ProspectiveMember.html#property_paid" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -1203,8 +1223,7 @@ is &#039;PAID&#039;.</dd>
      = <span class="phpdocumentor-signature__default-value">0</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1218,13 +1237,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_paymentLink">
         $paymentLink
         <a href="classes/Database-Model-ProspectiveMember.html#property_paymentLink" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">179</span>
+    <span class="phpdocumentor-element-found-in__line">181</span>
 
     </aside>
 
@@ -1237,8 +1257,7 @@ is &#039;PAID&#039;.</dd>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1252,13 +1271,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_phone">
         $phone
         <a href="classes/Database-Model-ProspectiveMember.html#property_phone" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
     </aside>
 
@@ -1271,8 +1291,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1286,13 +1305,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_postalCode">
         $postalCode
         <a href="classes/Database-Model-ProspectiveMember.html#property_postalCode" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">128</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 
     </aside>
 
@@ -1305,8 +1325,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1320,13 +1339,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_street">
         $street
         <a href="classes/Database-Model-ProspectiveMember.html#property_street" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">117</span>
 
     </aside>
 
@@ -1339,8 +1359,7 @@ is &#039;PAID&#039;.</dd>
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1354,13 +1373,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_study">
         $study
         <a href="classes/Database-Model-ProspectiveMember.html#property_study" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
@@ -1373,8 +1393,7 @@ is &#039;PAID&#039;.</dd>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1388,13 +1407,14 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="property_tueUsername">
         $tueUsername
         <a href="classes/Database-Model-ProspectiveMember.html#property_tueUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
@@ -1407,8 +1427,7 @@ is &#039;PAID&#039;.</dd>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -1418,6 +1437,7 @@ is &#039;PAID&#039;.</dd>
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/Database-Model-ProspectiveMember.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -1428,11 +1448,12 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
         <a href="classes/Database-Model-ProspectiveMember.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 
     </aside>
 
@@ -1441,15 +1462,12 @@ is &#039;PAID&#039;.</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1461,11 +1479,12 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="method_addList">
         addList()
         <a href="classes/Database-Model-ProspectiveMember.html#method_addList" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">507</span>
+    <span class="phpdocumentor-element-found-in__line">509</span>
 
     </aside>
 
@@ -1475,6 +1494,8 @@ is &#039;PAID&#039;.</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Note that this is the owning side.</p>
 </section>
 
@@ -1485,17 +1506,12 @@ is &#039;PAID&#039;.</dd>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1507,11 +1523,12 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="method_addLists">
         addLists()
         <a href="classes/Database-Model-ProspectiveMember.html#method_addLists" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">517</span>
+    <span class="phpdocumentor-element-found-in__line">519</span>
 
     </aside>
 
@@ -1521,6 +1538,8 @@ is &#039;PAID&#039;.</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addLists</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lists</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1535,10 +1554,6 @@ is &#039;PAID&#039;.</dd>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1550,11 +1565,12 @@ is &#039;PAID&#039;.</dd>
     <h4 class="phpdocumentor-element__name" id="method_canBeApproved">
         canBeApproved()
         <a href="classes/Database-Model-ProspectiveMember.html#method_canBeApproved" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">537</span>
+    <span class="phpdocumentor-element-found-in__line">539</span>
 
     </aside>
 
@@ -1566,15 +1582,17 @@ manual approval, for example, when the prospective member paid with cash.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">canBeApproved</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1585,11 +1603,12 @@ manual approval, for example, when the prospective member paid with cash.</p>
     <h4 class="phpdocumentor-element__name" id="method_canBeDeleted">
         canBeDeleted()
         <a href="classes/Database-Model-ProspectiveMember.html#method_canBeDeleted" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">554</span>
+    <span class="phpdocumentor-element-found-in__line">556</span>
 
     </aside>
 
@@ -1600,15 +1619,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">canBeDeleted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1619,11 +1640,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getAddresses">
         getAddresses()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getAddresses" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">465</span>
+    <span class="phpdocumentor-element-found-in__line">467</span>
 
     </aside>
 
@@ -1631,17 +1653,19 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getAddresses</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getAddresses</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{studentAddress: \Database\Model\Address}">Address}</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{studentAddress: \Database\Model\Address}">Address}</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1652,11 +1676,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getBirth">
         getBirth()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getBirth" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">339</span>
+    <span class="phpdocumentor-element-found-in__line">341</span>
 
     </aside>
 
@@ -1666,15 +1691,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getBirth</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1685,11 +1712,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getChangedOn">
         getChangedOn()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getChangedOn" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">385</span>
+    <span class="phpdocumentor-element-found-in__line">387</span>
 
     </aside>
 
@@ -1699,15 +1727,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getChangedOn</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1718,28 +1748,31 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getCheckoutSessions">
         getCheckoutSessions()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getCheckoutSessions" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">527</span>
+    <span class="phpdocumentor-element-found-in__line">529</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCheckoutSessions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getCheckoutSessions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1750,11 +1783,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getCity">
         getCity()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getCity" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">372</span>
+    <span class="phpdocumentor-element-found-in__line">374</span>
 
     </aside>
 
@@ -1763,16 +1797,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCity</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1783,11 +1818,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getCountry">
         getCountry()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getCountry" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">352</span>
+    <span class="phpdocumentor-element-found-in__line">354</span>
 
     </aside>
 
@@ -1796,16 +1832,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCountry</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-PostalRegions.html"><abbr title="\Application\Model\Enums\PostalRegions">PostalRegions</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-PostalRegions.html"><abbr title="\Application\Model\Enums\PostalRegions">PostalRegions</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-PostalRegions.html"><abbr title="\Application\Model\Enums\PostalRegions">PostalRegions</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1816,11 +1853,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getEmail">
         getEmail()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">204</span>
+    <span class="phpdocumentor-element-found-in__line">206</span>
 
     </aside>
 
@@ -1830,15 +1868,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getEmail</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1849,11 +1889,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getFirstName">
         getFirstName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getFirstName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">236</span>
+    <span class="phpdocumentor-element-found-in__line">238</span>
 
     </aside>
 
@@ -1863,15 +1904,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getFirstName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1882,11 +1925,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getFullName">
         getFullName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getFullName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">292</span>
+    <span class="phpdocumentor-element-found-in__line">294</span>
 
     </aside>
 
@@ -1896,15 +1940,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getFullName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1915,11 +1961,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getInitials">
         getInitials()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getInitials" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">228</span>
+    <span class="phpdocumentor-element-found-in__line">230</span>
 
     </aside>
 
@@ -1929,15 +1976,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getInitials</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1948,11 +1997,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getLastName">
         getLastName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getLastName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">212</span>
+    <span class="phpdocumentor-element-found-in__line">214</span>
 
     </aside>
 
@@ -1962,15 +2012,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getLastName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1981,11 +2033,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getLidnr">
         getLidnr()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getLidnr" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">196</span>
+    <span class="phpdocumentor-element-found-in__line">198</span>
 
     </aside>
 
@@ -1995,12 +2048,15 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getLidnr</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getLidnr#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -2010,13 +2066,13 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
                                                                                 
                                              
                                     </dd>
-                        </dl>
+                                            </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">int|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2027,11 +2083,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getLists">
         getLists()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getLists" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">497</span>
+    <span class="phpdocumentor-element-found-in__line">499</span>
 
     </aside>
 
@@ -2039,17 +2096,19 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getLists</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getLists</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;array-key, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2060,11 +2119,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getMiddleName">
         getMiddleName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getMiddleName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">220</span>
+    <span class="phpdocumentor-element-found-in__line">222</span>
 
     </aside>
 
@@ -2074,15 +2134,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getMiddleName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2093,11 +2155,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getNumber">
         getNumber()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">362</span>
+    <span class="phpdocumentor-element-found-in__line">364</span>
 
     </aside>
 
@@ -2106,16 +2169,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2126,11 +2190,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getPaid">
         getPaid()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getPaid" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">401</span>
+    <span class="phpdocumentor-element-found-in__line">403</span>
 
     </aside>
 
@@ -2140,15 +2205,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2159,11 +2226,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getPaymentLink">
         getPaymentLink()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getPaymentLink" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">605</span>
+    <span class="phpdocumentor-element-found-in__line">607</span>
 
     </aside>
 
@@ -2172,12 +2240,15 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPaymentLink</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-ProspectiveMember.html#method_getPaymentLink#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -2187,13 +2258,13 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
                                                                                 
                                              
                                     </dd>
-                        </dl>
+                                            </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2204,11 +2275,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getPhone">
         getPhone()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getPhone" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">377</span>
+    <span class="phpdocumentor-element-found-in__line">379</span>
 
     </aside>
 
@@ -2217,16 +2289,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPhone</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2237,11 +2310,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getPostalCode">
         getPostalCode()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getPostalCode" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">367</span>
+    <span class="phpdocumentor-element-found-in__line">369</span>
 
     </aside>
 
@@ -2250,16 +2324,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPostalCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2270,11 +2345,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getStreet">
         getStreet()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getStreet" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">357</span>
+    <span class="phpdocumentor-element-found-in__line">359</span>
 
     </aside>
 
@@ -2283,16 +2359,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getStreet</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2303,11 +2380,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getStudy">
         getStudy()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getStudy" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">323</span>
+    <span class="phpdocumentor-element-found-in__line">325</span>
 
     </aside>
 
@@ -2317,15 +2395,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getStudy</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2336,11 +2416,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getTueUsername">
         getTueUsername()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getTueUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">307</span>
+    <span class="phpdocumentor-element-found-in__line">309</span>
 
     </aside>
 
@@ -2350,15 +2431,17 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getTueUsername</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2369,11 +2452,12 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_hasPaid">
         hasPaid()
         <a href="classes/Database-Model-ProspectiveMember.html#method_hasPaid" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">578</span>
+    <span class="phpdocumentor-element-found-in__line">580</span>
 
     </aside>
 
@@ -2384,15 +2468,17 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">hasPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -2403,11 +2489,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setAddress">
         setAddress()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setAddress" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">482</span>
+    <span class="phpdocumentor-element-found-in__line">484</span>
 
     </aside>
 
@@ -2417,6 +2504,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setAddress</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$address</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2425,17 +2514,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Address.html"><abbr title="\Database\Model\Address">Address</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2447,11 +2531,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setBirth">
         setBirth()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setBirth" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">347</span>
+    <span class="phpdocumentor-element-found-in__line">349</span>
 
     </aside>
 
@@ -2461,6 +2546,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setBirth</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$birth</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2469,17 +2556,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2491,11 +2573,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setChangedOn">
         setChangedOn()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setChangedOn" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">393</span>
+    <span class="phpdocumentor-element-found-in__line">395</span>
 
     </aside>
 
@@ -2505,6 +2588,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setChangedOn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$changedOn</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2513,17 +2598,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2535,11 +2615,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setEmail">
         setEmail()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">252</span>
+    <span class="phpdocumentor-element-found-in__line">254</span>
 
     </aside>
 
@@ -2549,6 +2630,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2557,17 +2640,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2579,11 +2657,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setFirstName">
         setFirstName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setFirstName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">284</span>
+    <span class="phpdocumentor-element-found-in__line">286</span>
 
     </aside>
 
@@ -2593,6 +2672,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setFirstName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$firstName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2601,17 +2682,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2623,11 +2699,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setInitials">
         setInitials()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setInitials" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">276</span>
+    <span class="phpdocumentor-element-found-in__line">278</span>
 
     </aside>
 
@@ -2637,6 +2714,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setInitials</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$initials</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2645,17 +2724,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2667,11 +2741,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setLastName">
         setLastName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setLastName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">260</span>
+    <span class="phpdocumentor-element-found-in__line">262</span>
 
     </aside>
 
@@ -2681,6 +2756,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setLastName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lastName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2689,17 +2766,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2711,11 +2783,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setLidnr">
         setLidnr()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setLidnr" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">244</span>
+    <span class="phpdocumentor-element-found-in__line">246</span>
 
     </aside>
 
@@ -2725,6 +2798,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setLidnr</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lidnr</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2733,17 +2808,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2755,11 +2825,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setMiddleName">
         setMiddleName()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setMiddleName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">268</span>
+    <span class="phpdocumentor-element-found-in__line">270</span>
 
     </aside>
 
@@ -2769,6 +2840,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setMiddleName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$middleName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2777,17 +2850,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2799,11 +2867,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setPaid">
         setPaid()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setPaid" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">409</span>
+    <span class="phpdocumentor-element-found-in__line">411</span>
 
     </aside>
 
@@ -2813,6 +2882,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setPaid</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paid</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2821,17 +2892,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2843,11 +2909,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setPaymentLink">
         setPaymentLink()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setPaymentLink" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">610</span>
+    <span class="phpdocumentor-element-found-in__line">612</span>
 
     </aside>
 
@@ -2856,8 +2923,9 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setPaymentLink</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paymentLink</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2865,17 +2933,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2887,11 +2950,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setStudy">
         setStudy()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setStudy" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">331</span>
+    <span class="phpdocumentor-element-found-in__line">333</span>
 
     </aside>
 
@@ -2901,6 +2965,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setStudy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$study</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2909,17 +2975,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2931,11 +2992,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_setTueUsername">
         setTueUsername()
         <a href="classes/Database-Model-ProspectiveMember.html#method_setTueUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">315</span>
+    <span class="phpdocumentor-element-found-in__line">317</span>
 
     </aside>
 
@@ -2945,6 +3007,8 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setTueUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tueUsername</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2953,17 +3017,12 @@ is &#039;PAID&#039;.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2975,11 +3034,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_toArray">
         toArray()
         <a href="classes/Database-Model-ProspectiveMember.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">441</span>
+    <span class="phpdocumentor-element-found-in__line">443</span>
 
     </aside>
 
@@ -2987,17 +3047,19 @@ is &#039;PAID&#039;.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, tueUsername: ?string, study: ?string, birth: string, address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{lidnr: int, email: string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, tueUsername: ?string, study: ?string, birth: string, address: array{type: \Application\Model\Enums\AddressTypes, country: \Application\Model\Enums\PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}">PostalRegions, street: string, number: string, city: string, postalCode: string, phone: string}, agreed: string, agreedStripe: string}</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -3008,11 +3070,12 @@ is &#039;PAID&#039;.</p>
     <h4 class="phpdocumentor-element__name" id="method_getLastCheckoutSessionState">
         getLastCheckoutSessionState()
         <a href="classes/Database-Model-ProspectiveMember.html#method_getLastCheckoutSessionState" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ProspectiveMember.php"><a href="files/module-database-src-model-prospectivemember.html"><abbr title="module/Database/src/Model/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">589</span>
+    <span class="phpdocumentor-element-found-in__line">591</span>
 
     </aside>
 
@@ -3021,83 +3084,208 @@ is &#039;PAID&#039;.</p>
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">getLastCheckoutSessionState</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>|null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>|null</span>
+            </section>
+
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Model/ProspectiveMember.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/Database-Model-ProspectiveMember.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Model-ProspectiveMember.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_birth">$birth<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_changedOn">$changedOn<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_checkoutSessions">$checkoutSessions<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_city">$city<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_country">$country<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_email">$email<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_firstName">$firstName<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_initials">$initials<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_lastName">$lastName<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_lidnr">$lidnr<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_lists">$lists<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_middleName">$middleName<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_number">$number<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_paid">$paid<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_paymentLink">$paymentLink<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_phone">$phone<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_postalCode">$postalCode<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_street">$street<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_study">$study<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                                    <li><a href="classes/Database-Model-ProspectiveMember.html#property_tueUsername">$tueUsername<a href="classes/Database-Model-ProspectiveMember.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_addList">addList()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_addLists">addLists()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_canBeApproved">canBeApproved()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_canBeDeleted">canBeDeleted()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getAddresses">getAddresses()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getBirth">getBirth()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getChangedOn">getChangedOn()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getCheckoutSessions">getCheckoutSessions()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getCity">getCity()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getCountry">getCountry()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getEmail">getEmail()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getFirstName">getFirstName()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getFullName">getFullName()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getInitials">getInitials()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getLastName">getLastName()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getLidnr">getLidnr()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getLists">getLists()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getMiddleName">getMiddleName()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getNumber">getNumber()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getPaid">getPaid()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getPaymentLink">getPaymentLink()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getPhone">getPhone()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getPostalCode">getPostalCode()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getStreet">getStreet()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getStudy">getStudy()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getTueUsername">getTueUsername()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_hasPaid">hasPaid()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setAddress">setAddress()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setBirth">setBirth()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setChangedOn">setChangedOn()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setEmail">setEmail()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setFirstName">setFirstName()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setInitials">setInitials()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setLastName">setLastName()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setLidnr">setLidnr()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setMiddleName">setMiddleName()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setPaid">setPaid()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setPaymentLink">setPaymentLink()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setStudy">setStudy()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_setTueUsername">setTueUsername()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_toArray">toArray()</a></li>
+                                            <li><a href="classes/Database-Model-ProspectiveMember.html#method_getLastCheckoutSessionState">getLastCheckoutSessionState()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -3108,7 +3296,6 @@ is &#039;PAID&#039;.</p>
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/Database-Model-ProspectiveMember.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

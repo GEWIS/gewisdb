@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -233,8 +234,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker.html">Checker</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker-service.html">Service</a></li>
     </ul>
@@ -254,6 +256,11 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
     :
@@ -262,10 +269,6 @@
     </aside>
 
         
-    <section class="phpdocumentor-description"></section>
-
-
-
 
 
 
@@ -273,65 +276,79 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Checker-Service-Checker.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Checker-Service-Checker.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Checker-Service-Checker.html#property_config">$config</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Checker-Service-Checker.html#property_installationService">$installationService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Checker-Service-Checker.html#property_keyService">$keyService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Checker-Service-Checker.html#property_mailTransport">$mailTransport</a>
     <span>
                         &nbsp;: <abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Checker-Service-Checker.html#property_meetingService">$meetingService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Checker-Service-Checker.html#property_memberService">$memberService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Member.html"><abbr title="\Checker\Service\Member">Member</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Checker-Service-Checker.html#property_organService">$organService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a>            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Checker-Service-Checker.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Checker.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Checker.html#method_check">check()</a>
@@ -378,7 +395,6 @@ that ends after September 1st of the next association year.</dd>
     <span>
                                 &nbsp;: array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Checker-Service-Checker.html#method_checkMembersExpiredButStillInOrgan">checkMembersExpiredButStillInOrgan()</a>
@@ -430,7 +446,6 @@ has ended.</dd>
     <span>
                                 &nbsp;: <a href="classes/Checker-Model-TueData.html"><abbr title="\Checker\Model\TueData">TueData</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Checker-Service-Checker.html#method_getExpiration">getExpiration()</a>
@@ -453,7 +468,8 @@ has ended.</dd>
 </dt>
 <dd>Send a mail with the detected errors to the secretary</dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -464,6 +480,7 @@ has ended.</dd>
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/Checker-Service-Checker.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -475,6 +492,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="property_config">
         $config
         <a href="classes/Checker-Service-Checker.html#property_config" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -492,10 +510,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__name">$config</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -509,6 +525,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="property_installationService">
         $installationService
         <a href="classes/Checker-Service-Checker.html#property_installationService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -526,10 +543,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__name">$installationService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -543,6 +558,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="property_keyService">
         $keyService
         <a href="classes/Checker-Service-Checker.html#property_keyService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -560,10 +576,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__name">$keyService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -577,6 +591,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="property_mailTransport">
         $mailTransport
         <a href="classes/Checker-Service-Checker.html#property_mailTransport" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -594,10 +609,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__name">$mailTransport</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -611,6 +624,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="property_meetingService">
         $meetingService
         <a href="classes/Checker-Service-Checker.html#property_meetingService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -628,10 +642,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__name">$meetingService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -645,6 +657,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="property_memberService">
         $memberService
         <a href="classes/Checker-Service-Checker.html#property_memberService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -662,10 +675,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__name">$memberService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -679,6 +690,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="property_organService">
         $organService
         <a href="classes/Checker-Service-Checker.html#property_organService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -696,10 +708,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__name">$organService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -709,6 +719,7 @@ has ended.</dd>
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/Checker-Service-Checker.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -719,6 +730,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
         <a href="classes/Checker-Service-Checker.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -732,6 +744,8 @@ has ended.</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installationService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keyService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meetingService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Member.html"><abbr title="\Checker\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$organService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -740,63 +754,57 @@ has ended.</dd>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Installation.html"><abbr title="\Checker\Service\Installation">Installation</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$keyService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Key.html"><abbr title="\Checker\Service\Key">Key</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$meetingService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Meeting.html"><abbr title="\Checker\Service\Meeting">Meeting</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$memberService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Member.html"><abbr title="\Checker\Service\Member">Member</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$organService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Organ.html"><abbr title="\Checker\Service\Organ">Organ</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$mailTransport</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$config</span>
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Checker-Service-Checker.html#method___construct#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -808,12 +816,8 @@ has ended.</dd>
 </section>
 
                                     </dd>
-                        </dl>
+                                            </dl>
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -825,6 +829,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="method_check">
         check()
         <a href="classes/Checker-Service-Checker.html#method_check" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -839,14 +844,12 @@ has ended.</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">check</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -858,6 +861,7 @@ has ended.</dd>
     <h4 class="phpdocumentor-element__name" id="method_checkAtTUe">
         checkAtTUe()
         <a href="classes/Checker-Service-Checker.html#method_checkAtTUe" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -874,14 +878,12 @@ the remainder of the current association year.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkAtTUe</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -893,6 +895,7 @@ the remainder of the current association year.</p>
     <h4 class="phpdocumentor-element__name" id="method_checkAuthenticationKeys">
         checkAuthenticationKeys()
         <a href="classes/Checker-Service-Checker.html#method_checkAuthenticationKeys" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -907,14 +910,12 @@ the remainder of the current association year.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkAuthenticationKeys</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -926,6 +927,7 @@ the remainder of the current association year.</p>
     <h4 class="phpdocumentor-element__name" id="method_checkDischarges">
         checkDischarges()
         <a href="classes/Checker-Service-Checker.html#method_checkDischarges" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -941,14 +943,12 @@ currently installed in an organ that was abrogated (i.e. they were never dischar
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkDischarges</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -960,6 +960,7 @@ currently installed in an organ that was abrogated (i.e. they were never dischar
     <h4 class="phpdocumentor-element__name" id="method_checkKeyGrantingDuration">
         checkKeyGrantingDuration()
         <a href="classes/Checker-Service-Checker.html#method_checkKeyGrantingDuration" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -976,6 +977,8 @@ that ends after September 1st of the next association year.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkKeyGrantingDuration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -984,18 +987,17 @@ that ends after September 1st of the next association year.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1006,6 +1008,7 @@ that ends after September 1st of the next association year.</p>
     <h4 class="phpdocumentor-element__name" id="method_checkKeyWithdrawalTime">
         checkKeyWithdrawalTime()
         <a href="classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1019,6 +1022,8 @@ that ends after September 1st of the next association year.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkKeyWithdrawalTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1027,18 +1032,17 @@ that ends after September 1st of the next association year.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1049,6 +1053,7 @@ that ends after September 1st of the next association year.</p>
     <h4 class="phpdocumentor-element__name" id="method_checkMembersExpiredButStillInOrgan">
         checkMembersExpiredButStillInOrgan()
         <a href="classes/Checker-Service-Checker.html#method_checkMembersExpiredButStillInOrgan" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1063,6 +1068,8 @@ that ends after September 1st of the next association year.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkMembersExpiredButStillInOrgan</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1079,11 +1086,11 @@ that ends after September 1st of the next association year.</p>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1094,6 +1101,7 @@ that ends after September 1st of the next association year.</p>
     <h4 class="phpdocumentor-element__name" id="method_checkMembersHaveRolesButInactiveOrNotInOrgan">
         checkMembersHaveRolesButInactiveOrNotInOrgan()
         <a href="classes/Checker-Service-Checker.html#method_checkMembersHaveRolesButInactiveOrNotInOrgan" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1109,6 +1117,8 @@ anymore, or they are an inactive member.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkMembersHaveRolesButInactiveOrNotInOrgan</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1125,11 +1135,11 @@ anymore, or they are an inactive member.</p>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1140,6 +1150,7 @@ anymore, or they are an inactive member.</p>
     <h4 class="phpdocumentor-element__name" id="method_checkMembersInNonExistingOrgans">
         checkMembersInNonExistingOrgans()
         <a href="classes/Checker-Service-Checker.html#method_checkMembersInNonExistingOrgans" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1154,6 +1165,8 @@ anymore, or they are an inactive member.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkMembersInNonExistingOrgans</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>This can happen if there is still a member in the organ after it gets disbanded
 Or if there is a member in the organ if the decision to create an organ
 is nulled</p>
@@ -1174,11 +1187,11 @@ is nulled</p>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1189,6 +1202,7 @@ is nulled</p>
     <h4 class="phpdocumentor-element__name" id="method_checkNormalExpiration">
         checkNormalExpiration()
         <a href="classes/Checker-Service-Checker.html#method_checkNormalExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1203,14 +1217,12 @@ is nulled</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkNormalExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1222,6 +1234,7 @@ is nulled</p>
     <h4 class="phpdocumentor-element__name" id="method_checkOrganFoundationMeetingType">
         checkOrganFoundationMeetingType()
         <a href="classes/Checker-Service-Checker.html#method_checkOrganFoundationMeetingType" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1237,6 +1250,8 @@ e.g. ALV-Commissies are only created at an ALV</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkOrganFoundationMeetingType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1253,11 +1268,11 @@ e.g. ALV-Commissies are only created at an ALV</p>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1268,6 +1283,7 @@ e.g. ALV-Commissies are only created at an ALV</p>
     <h4 class="phpdocumentor-element__name" id="method_checkProperMembershipType">
         checkProperMembershipType()
         <a href="classes/Checker-Service-Checker.html#method_checkProperMembershipType" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1283,14 +1299,12 @@ has ended.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkProperMembershipType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1302,6 +1316,7 @@ has ended.</p>
     <h4 class="phpdocumentor-element__name" id="method_tueDataObject">
         tueDataObject()
         <a href="classes/Checker-Service-Checker.html#method_tueDataObject" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1315,16 +1330,17 @@ has ended.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">tueDataObject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Model-TueData.html"><abbr title="\Checker\Model\TueData">TueData</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Model-TueData.html"><abbr title="\Checker\Model\TueData">TueData</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Checker-Model-TueData.html"><abbr title="\Checker\Model\TueData">TueData</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1335,6 +1351,7 @@ has ended.</p>
     <h4 class="phpdocumentor-element__name" id="method_getExpiration">
         getExpiration()
         <a href="classes/Checker-Service-Checker.html#method_getExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1349,6 +1366,8 @@ has ended.</p>
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">getExpiration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$now</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1357,18 +1376,17 @@ has ended.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1379,6 +1397,7 @@ has ended.</p>
     <h4 class="phpdocumentor-element__name" id="method_handleMeetingErrors">
         handleMeetingErrors()
         <a href="classes/Checker-Service-Checker.html#method_handleMeetingErrors" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1393,6 +1412,8 @@ has ended.</p>
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">handleMeetingErrors</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/Checker-Model-Error.html"><abbr title="\Checker\Model\Error">Error</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$errors</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1401,8 +1422,7 @@ has ended.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$errors</span>
@@ -1415,11 +1435,11 @@ has ended.</p>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1430,6 +1450,7 @@ has ended.</p>
     <h4 class="phpdocumentor-element__name" id="method_sendMail">
         sendMail()
         <a href="classes/Checker-Service-Checker.html#method_sendMail" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Service/Checker.php"><a href="files/module-checker-src-service-checker.html"><abbr title="module/Checker/src/Service/Checker.php">Checker.php</abbr></a></abbr>
@@ -1444,6 +1465,8 @@ has ended.</p>
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">sendMail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$body</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1452,85 +1475,165 @@ has ended.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Checker/src/Service/Checker.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/Checker-Service-Checker.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Checker-Service-Checker.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Checker-Service-Checker.html#property_config">$config<a href="classes/Checker-Service-Checker.html"></li>
+                                                    <li><a href="classes/Checker-Service-Checker.html#property_installationService">$installationService<a href="classes/Checker-Service-Checker.html"></li>
+                                                    <li><a href="classes/Checker-Service-Checker.html#property_keyService">$keyService<a href="classes/Checker-Service-Checker.html"></li>
+                                                    <li><a href="classes/Checker-Service-Checker.html#property_mailTransport">$mailTransport<a href="classes/Checker-Service-Checker.html"></li>
+                                                    <li><a href="classes/Checker-Service-Checker.html#property_meetingService">$meetingService<a href="classes/Checker-Service-Checker.html"></li>
+                                                    <li><a href="classes/Checker-Service-Checker.html#property_memberService">$memberService<a href="classes/Checker-Service-Checker.html"></li>
+                                                    <li><a href="classes/Checker-Service-Checker.html#property_organService">$organService<a href="classes/Checker-Service-Checker.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Checker-Service-Checker.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_check">check()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkAtTUe">checkAtTUe()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkAuthenticationKeys">checkAuthenticationKeys()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkDischarges">checkDischarges()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkKeyGrantingDuration">checkKeyGrantingDuration()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime">checkKeyWithdrawalTime()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkMembersExpiredButStillInOrgan">checkMembersExpiredButStillInOrgan()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkMembersHaveRolesButInactiveOrNotInOrgan">checkMembersHaveRolesButInactiveOrNotInOrgan()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkMembersInNonExistingOrgans">checkMembersInNonExistingOrgans()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkNormalExpiration">checkNormalExpiration()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkOrganFoundationMeetingType">checkOrganFoundationMeetingType()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_checkProperMembershipType">checkProperMembershipType()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_tueDataObject">tueDataObject()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_getExpiration">getExpiration()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_handleMeetingErrors">handleMeetingErrors()</a></li>
+                                            <li><a href="classes/Checker-Service-Checker.html#method_sendMail">sendMail()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1541,7 +1644,6 @@ has ended.</p>
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/Checker-Service-Checker.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

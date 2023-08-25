@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -233,8 +234,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model.html">Model</a></li>
     </ul>
@@ -254,10 +256,15 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -268,16 +275,27 @@
 
 
 
-
-
-
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-CheckoutSession.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Database-Model-CheckoutSession.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-CheckoutSession.html#property_checkoutId">$checkoutId</a>
     <span>
                         &nbsp;: string            </span>
@@ -318,14 +336,19 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span>
                         &nbsp;: <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>            </span>
 </dt>
-<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-CheckoutSession.html#property_recoveredBy">$recoveredBy</a>
+    <span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;            </span>
+</dt>
+<dd>One-to-many side for self-reference after recovery.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-CheckoutSession.html#property_recoveredFrom">$recoveredFrom</a>
     <span>
                         &nbsp;: <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-CheckoutSession.html#property_recoveryUrl">$recoveryUrl</a>
@@ -341,26 +364,37 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
 </dt>
 <dd>The state of the payment.</dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Database-Model-CheckoutSession.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-CheckoutSession.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getCheckoutId">getCheckoutId()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getCreated">getCreated()</a>
     <span>
                                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getExpiration">getExpiration()</a>
     <span>
                                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getId">getId()</a>
@@ -374,93 +408,81 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getProspectiveMember">getProspectiveMember()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getRecoveredFrom">getRecoveredFrom()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getRecoveryUrl">getRecoveryUrl()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_getState">getState()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setCheckoutId">setCheckoutId()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setCreated">setCreated()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setExpiration">setExpiration()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setPaymentIntentId">setPaymentIntentId()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setProspectiveMember">setProspectiveMember()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setRecoveredFrom">setRecoveredFrom()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setRecoveryUrl">setRecoveryUrl()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-CheckoutSession.html#method_setState">setState()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -471,6 +493,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/Database-Model-CheckoutSession.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -482,13 +505,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_checkoutId">
         $checkoutId
         <a href="classes/Database-Model-CheckoutSession.html#property_checkoutId" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -504,8 +528,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
         <section class="phpdocumentor-description"><p>See <a href="https://stripe.com/docs/upgrades#what-changes-does-stripe-consider-to-be-backwards-compatible"></a>.</p>
 </section>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -519,13 +542,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_created">
         $created
         <a href="classes/Database-Model-CheckoutSession.html#property_created" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -538,8 +562,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -553,13 +576,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_expiration">
         $expiration
         <a href="classes/Database-Model-CheckoutSession.html#property_expiration" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
@@ -572,8 +596,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -587,13 +610,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_id">
         $id
         <a href="classes/Database-Model-CheckoutSession.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -606,8 +630,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -621,13 +644,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_paymentIntentId">
         $paymentIntentId
         <a href="classes/Database-Model-CheckoutSession.html#property_paymentIntentId" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -640,8 +664,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -655,13 +678,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_prospectiveMember">
         $prospectiveMember
         <a href="classes/Database-Model-CheckoutSession.html#property_prospectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -672,10 +696,42 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__name">$prospectiveMember</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
+    
+    
+    
 
-        <section class="phpdocumentor-description"></section>
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_recoveredBy">
+        $recoveredBy
+        <a href="classes/Database-Model-CheckoutSession.html#property_recoveredBy" class="headerlink"><i class="fas fa-link"></i></a>
 
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">90</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">One-to-many side for self-reference after recovery.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$recoveredBy</span>
+    </code>
+
+    
+    
     
 
 </article>
@@ -689,13 +745,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_recoveredFrom">
         $recoveredFrom
         <a href="classes/Database-Model-CheckoutSession.html#property_recoveredFrom" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -706,10 +763,8 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__name">$recoveredFrom</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -723,13 +778,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_recoveryUrl">
         $recoveryUrl
         <a href="classes/Database-Model-CheckoutSession.html#property_recoveryUrl" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -742,8 +798,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -757,13 +812,14 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="property_state">
         $state
         <a href="classes/Database-Model-CheckoutSession.html#property_state" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -776,8 +832,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
      = <span class="phpdocumentor-signature__default-value">\Database\Model\Enums\CheckoutSessionStates::Created</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -787,7 +842,39 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/Database-Model-CheckoutSession.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Database-Model-CheckoutSession.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">117</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
                     <article
         class="phpdocumentor-element
             -method
@@ -797,11 +884,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_getCheckoutId">
         getCheckoutId()
         <a href="classes/Database-Model-CheckoutSession.html#method_getCheckoutId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
@@ -810,16 +898,17 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCheckoutId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -830,11 +919,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_getCreated">
         getCreated()
         <a href="classes/Database-Model-CheckoutSession.html#method_getCreated" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">152</span>
 
     </aside>
 
@@ -843,16 +933,17 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCreated</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -863,11 +954,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_getExpiration">
         getExpiration()
         <a href="classes/Database-Model-CheckoutSession.html#method_getExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
@@ -876,16 +968,17 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -896,11 +989,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_getId">
         getId()
         <a href="classes/Database-Model-CheckoutSession.html#method_getId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -910,12 +1004,15 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-CheckoutSession.html#method_getId#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -925,13 +1022,13 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
                                                                                 
                                              
                                     </dd>
-                        </dl>
+                                            </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">int|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -942,72 +1039,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_getPaymentIntentId">
         getPaymentIntentId()
         <a href="classes/Database-Model-CheckoutSession.html#method_getPaymentIntentId" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">149</span>
 
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPaymentIntentId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getProspectiveMember">
-        getProspectiveMember()
-        <a href="classes/Database-Model-CheckoutSession.html#method_getProspectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">119</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getProspectiveMember</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a></span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getRecoveredFrom">
-        getRecoveredFrom()
-        <a href="classes/Database-Model-CheckoutSession.html#method_getRecoveredFrom" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
@@ -1019,14 +1051,87 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPaymentIntentId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getProspectiveMember">
+        getProspectiveMember()
+        <a href="classes/Database-Model-CheckoutSession.html#method_getProspectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">142</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getProspectiveMember</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getRecoveredFrom">
+        getRecoveredFrom()
+        <a href="classes/Database-Model-CheckoutSession.html#method_getRecoveredFrom" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">195</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getRecoveredFrom</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-CheckoutSession.html#method_getRecoveredFrom#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -1036,13 +1141,13 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
                                                                                 
                                              
                                     </dd>
-                        </dl>
+                                            </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1053,39 +1158,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_getRecoveryUrl">
         getRecoveryUrl()
         <a href="classes/Database-Model-CheckoutSession.html#method_getRecoveryUrl" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">159</span>
 
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRecoveryUrl</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getState">
-        getState()
-        <a href="classes/Database-Model-CheckoutSession.html#method_getState" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
@@ -1097,18 +1170,54 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getRecoveryUrl</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getState">
+        getState()
+        <a href="classes/Database-Model-CheckoutSession.html#method_getState" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">205</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getState</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1119,11 +1228,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_setCheckoutId">
         setCheckoutId()
         <a href="classes/Database-Model-CheckoutSession.html#method_setCheckoutId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">114</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -1132,8 +1242,9 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setCheckoutId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$checkoutId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1141,17 +1252,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1163,11 +1269,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_setCreated">
         setCreated()
         <a href="classes/Database-Model-CheckoutSession.html#method_setCreated" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">157</span>
 
     </aside>
 
@@ -1176,8 +1283,9 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setCreated</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$created</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1185,17 +1293,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1207,11 +1310,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_setExpiration">
         setExpiration()
         <a href="classes/Database-Model-CheckoutSession.html#method_setExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
@@ -1220,8 +1324,9 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setExpiration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1229,17 +1334,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1251,94 +1351,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_setPaymentIntentId">
         setPaymentIntentId()
         <a href="classes/Database-Model-CheckoutSession.html#method_setPaymentIntentId" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">154</span>
 
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setPaymentIntentId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paymentIntentId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$paymentIntentId</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setProspectiveMember">
-        setProspectiveMember()
-        <a href="classes/Database-Model-CheckoutSession.html#method_setProspectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">124</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setProspectiveMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prospectiveMember</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$prospectiveMember</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setRecoveredFrom">
-        setRecoveredFrom()
-        <a href="classes/Database-Model-CheckoutSession.html#method_setRecoveredFrom" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
@@ -1350,10 +1363,93 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setPaymentIntentId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paymentIntentId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$paymentIntentId</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setProspectiveMember">
+        setProspectiveMember()
+        <a href="classes/Database-Model-CheckoutSession.html#method_setProspectiveMember" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">147</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setProspectiveMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prospectiveMember</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$prospectiveMember</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-ProspectiveMember.html"><abbr title="\Database\Model\ProspectiveMember">ProspectiveMember</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setRecoveredFrom">
+        setRecoveredFrom()
+        <a href="classes/Database-Model-CheckoutSession.html#method_setRecoveredFrom" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">200</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setRecoveredFrom</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recoveredFrom</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1361,17 +1457,12 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1383,50 +1474,7 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     <h4 class="phpdocumentor-element__name" id="method_setRecoveryUrl">
         setRecoveryUrl()
         <a href="classes/Database-Model-CheckoutSession.html#method_setRecoveryUrl" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">164</span>
 
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setRecoveryUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recoveryUrl</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$recoveryUrl</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setState">
-        setState()
-        <a href="classes/Database-Model-CheckoutSession.html#method_setState" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
@@ -1438,10 +1486,52 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setRecoveryUrl</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recoveryUrl</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$recoveryUrl</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setState">
+        setState()
+        <a href="classes/Database-Model-CheckoutSession.html#method_setState" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/CheckoutSession.php"><a href="files/module-database-src-model-checkoutsession.html"><abbr title="module/Database/src/Model/CheckoutSession.php">CheckoutSession.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">210</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setState</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$state</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1449,85 +1539,169 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Enums-CheckoutSessionStates.html"><abbr title="\Database\Model\Enums\CheckoutSessionStates">CheckoutSessionStates</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Model/CheckoutSession.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/Database-Model-CheckoutSession.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Model-CheckoutSession.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_checkoutId">$checkoutId<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_created">$created<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_expiration">$expiration<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_id">$id<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_paymentIntentId">$paymentIntentId<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_prospectiveMember">$prospectiveMember<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_recoveredBy">$recoveredBy<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_recoveredFrom">$recoveredFrom<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_recoveryUrl">$recoveryUrl<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                                    <li><a href="classes/Database-Model-CheckoutSession.html#property_state">$state<a href="classes/Database-Model-CheckoutSession.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getCheckoutId">getCheckoutId()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getCreated">getCreated()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getExpiration">getExpiration()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getId">getId()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getPaymentIntentId">getPaymentIntentId()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getProspectiveMember">getProspectiveMember()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getRecoveredFrom">getRecoveredFrom()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getRecoveryUrl">getRecoveryUrl()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_getState">getState()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setCheckoutId">setCheckoutId()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setCreated">setCreated()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setExpiration">setExpiration()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setPaymentIntentId">setPaymentIntentId()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setProspectiveMember">setProspectiveMember()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setRecoveredFrom">setRecoveredFrom()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setRecoveryUrl">setRecoveryUrl()</a></li>
+                                            <li><a href="classes/Database-Model-CheckoutSession.html#method_setState">setState()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1538,7 +1712,6 @@ but if we ever switch we need to use the `utf8_bin` collation on this column (as
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/Database-Model-CheckoutSession.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

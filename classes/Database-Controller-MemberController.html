@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -233,8 +234,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-controller.html">Controller</a></li>
     </ul>
@@ -257,6 +259,11 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
@@ -270,56 +277,69 @@
 
 
 
-
-
-
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Controller-MemberController.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Database-Controller-MemberController.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Database-Controller-MemberController.html#property_checkerService">$checkerService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Database-Controller-MemberController.html#property_memberService">$memberService</a>
     <span>
                         &nbsp;: <a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Database-Controller-MemberController.html#property_renewalService">$renewalService</a>
     <span>
                         &nbsp;: <a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Database-Controller-MemberController.html#property_stripeService">$stripeService</a>
     <span>
                         &nbsp;: <a href="classes/Database-Service-Stripe.html"><abbr title="\Database\Service\Stripe">Stripe</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Database-Controller-MemberController.html#property_translator">$translator</a>
     <span>
                         &nbsp;: <abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Database-Controller-MemberController.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-MemberController.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-MemberController.html#method_addAddressAction">addAddressAction()</a>
@@ -340,14 +360,12 @@
     <span>
                                 &nbsp;: <abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-MemberController.html#method_checkoutStatusAction">checkoutStatusAction()</a>
     <span>
                                 &nbsp;: <abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-MemberController.html#method_deleteAction">deleteAction()</a>
@@ -382,7 +400,6 @@
     <span>
                                 &nbsp;: <abbr title="\Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger">FlashMessenger</abbr>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-MemberController.html#method_indexAction">indexAction()</a>
@@ -410,7 +427,6 @@
     <span>
                                 &nbsp;: <abbr title="\Laminas\Http\Response">Response</abbr>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-MemberController.html#method_rejectUpdateAction">rejectUpdateAction()</a>
@@ -446,7 +462,6 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span>
                                 &nbsp;: <abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Controller-MemberController.html#method_setSupremumAction">setSupremumAction()</a>
@@ -502,9 +517,9 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span>
                                 &nbsp;: <abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr>    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -515,6 +530,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/Database-Controller-MemberController.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -526,6 +542,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="property_checkerService">
         $checkerService
         <a href="classes/Database-Controller-MemberController.html#property_checkerService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -543,10 +560,8 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__name">$checkerService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -560,6 +575,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="property_memberService">
         $memberService
         <a href="classes/Database-Controller-MemberController.html#property_memberService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -577,10 +593,8 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__name">$memberService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -594,6 +608,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="property_renewalService">
         $renewalService
         <a href="classes/Database-Controller-MemberController.html#property_renewalService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -611,10 +626,8 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__name">$renewalService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -628,6 +641,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="property_stripeService">
         $stripeService
         <a href="classes/Database-Controller-MemberController.html#property_stripeService" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -645,10 +659,8 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__name">$stripeService</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -662,6 +674,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="property_translator">
         $translator
         <a href="classes/Database-Controller-MemberController.html#property_translator" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
@@ -679,10 +692,8 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__name">$translator</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -692,6 +703,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/Database-Controller-MemberController.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -702,6 +714,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
         <a href="classes/Database-Controller-MemberController.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
@@ -715,8 +728,9 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$checkerService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-Stripe.html"><abbr title="\Database\Service\Stripe">Stripe</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$stripeService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renewalService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -724,49 +738,40 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$checkerService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$memberService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$stripeService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-Stripe.html"><abbr title="\Database\Service\Stripe">Stripe</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$renewalService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -778,11 +783,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_addAddressAction">
         addAddressAction()
         <a href="classes/Database-Controller-MemberController.html#method_addAddressAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">520</span>
+    <span class="phpdocumentor-element-found-in__line">532</span>
 
     </aside>
 
@@ -792,17 +798,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addAddressAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Add a member's address.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -813,11 +821,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_approveUpdateAction">
         approveUpdateAction()
         <a href="classes/Database-Controller-MemberController.html#method_approveUpdateAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">678</span>
+    <span class="phpdocumentor-element-found-in__line">690</span>
 
     </aside>
 
@@ -827,15 +836,17 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">approveUpdateAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -846,11 +857,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_checkoutRestartAction">
         checkoutRestartAction()
         <a href="classes/Database-Controller-MemberController.html#method_checkoutRestartAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 
     </aside>
 
@@ -859,16 +871,17 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkoutRestartAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -879,11 +892,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_checkoutStatusAction">
         checkoutStatusAction()
         <a href="classes/Database-Controller-MemberController.html#method_checkoutStatusAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -892,16 +906,17 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">checkoutStatusAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -912,11 +927,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_deleteAction">
         deleteAction()
         <a href="classes/Database-Controller-MemberController.html#method_deleteAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">330</span>
+    <span class="phpdocumentor-element-found-in__line">334</span>
 
     </aside>
 
@@ -926,17 +942,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">deleteAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Delete a member.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -947,11 +965,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_editAction">
         editAction()
         <a href="classes/Database-Controller-MemberController.html#method_editAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">295</span>
+    <span class="phpdocumentor-element-found-in__line">299</span>
 
     </aside>
 
@@ -961,17 +980,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">editAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Edit member information.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -982,11 +1003,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_editAddressAction">
         editAddressAction()
         <a href="classes/Database-Controller-MemberController.html#method_editAddressAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">473</span>
+    <span class="phpdocumentor-element-found-in__line">485</span>
 
     </aside>
 
@@ -996,17 +1018,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">editAddressAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Edit a member's address.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1017,11 +1041,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_expirationAction">
         expirationAction()
         <a href="classes/Database-Controller-MemberController.html#method_expirationAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">435</span>
+    <span class="phpdocumentor-element-found-in__line">447</span>
 
     </aside>
 
@@ -1031,17 +1056,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">expirationAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Extend the duration of the membership.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1052,6 +1079,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_flashMessenger">
         flashMessenger()
         <a href="classes/Database-Controller-MemberController.html#method_flashMessenger" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
@@ -1065,15 +1093,17 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">flashMessenger</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger">FlashMessenger</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger">FlashMessenger</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger">FlashMessenger</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1084,6 +1114,7 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_indexAction">
         indexAction()
         <a href="classes/Database-Controller-MemberController.html#method_indexAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
@@ -1098,15 +1129,17 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">indexAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1117,11 +1150,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_listsAction">
         listsAction()
         <a href="classes/Database-Controller-MemberController.html#method_listsAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">362</span>
+    <span class="phpdocumentor-element-found-in__line">366</span>
 
     </aside>
 
@@ -1131,17 +1165,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">listsAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Update list membership.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1152,11 +1188,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_membershipAction">
         membershipAction()
         <a href="classes/Database-Controller-MemberController.html#method_membershipAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">397</span>
+    <span class="phpdocumentor-element-found-in__line">401</span>
 
     </aside>
 
@@ -1166,17 +1203,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">membershipAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Update / renew membership.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1187,11 +1226,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_paymentWebhookAction">
         paymentWebhookAction()
         <a href="classes/Database-Controller-MemberController.html#method_paymentWebhookAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -1200,16 +1240,17 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">paymentWebhookAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1220,11 +1261,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_rejectUpdateAction">
         rejectUpdateAction()
         <a href="classes/Database-Controller-MemberController.html#method_rejectUpdateAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">718</span>
+    <span class="phpdocumentor-element-found-in__line">730</span>
 
     </aside>
 
@@ -1234,15 +1276,17 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">rejectUpdateAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1253,11 +1297,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_removeAddressAction">
         removeAddressAction()
         <a href="classes/Database-Controller-MemberController.html#method_removeAddressAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">571</span>
+    <span class="phpdocumentor-element-found-in__line">583</span>
 
     </aside>
 
@@ -1267,17 +1312,19 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">removeAddressAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Remove a member's address.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1288,11 +1335,12 @@ Perhaps also for ordinary -&gt; graduate in the future</dd>
     <h4 class="phpdocumentor-element__name" id="method_renewAction">
         renewAction()
         <a href="classes/Database-Controller-MemberController.html#method_renewAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">157</span>
+    <span class="phpdocumentor-element-found-in__line">161</span>
 
     </aside>
 
@@ -1303,15 +1351,17 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">renewAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1322,11 +1372,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_searchAction">
         searchAction()
         <a href="classes/Database-Controller-MemberController.html#method_searchAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">208</span>
+    <span class="phpdocumentor-element-found-in__line">212</span>
 
     </aside>
 
@@ -1336,17 +1387,19 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">searchAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Searches for members.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1357,11 +1410,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_searchFilteredAction">
         searchFilteredAction()
         <a href="classes/Database-Controller-MemberController.html#method_searchFilteredAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">220</span>
+    <span class="phpdocumentor-element-found-in__line">224</span>
 
     </aside>
 
@@ -1370,16 +1424,17 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">searchFilteredAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1390,11 +1445,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_setSupremumAction">
         setSupremumAction()
         <a href="classes/Database-Controller-MemberController.html#method_setSupremumAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">268</span>
+    <span class="phpdocumentor-element-found-in__line">272</span>
 
     </aside>
 
@@ -1404,17 +1460,19 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setSupremumAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Toggles if a member wants a supremum</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1425,11 +1483,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_showAction">
         showAction()
         <a href="classes/Database-Controller-MemberController.html#method_showAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">237</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
@@ -1439,17 +1498,19 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">showAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Shows member information.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1460,11 +1521,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_showUpdateAction">
         showUpdateAction()
         <a href="classes/Database-Controller-MemberController.html#method_showUpdateAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">651</span>
+    <span class="phpdocumentor-element-found-in__line">663</span>
 
     </aside>
 
@@ -1474,15 +1536,17 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">showUpdateAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1493,6 +1557,7 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_subscribeAction">
         subscribeAction()
         <a href="classes/Database-Controller-MemberController.html#method_subscribeAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
@@ -1507,15 +1572,17 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">subscribeAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Http\Response">Response</abbr>|<abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1526,11 +1593,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_tueLookupAction">
         tueLookupAction()
         <a href="classes/Database-Controller-MemberController.html#method_tueLookupAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">617</span>
+    <span class="phpdocumentor-element-found-in__line">629</span>
 
     </aside>
 
@@ -1540,17 +1608,19 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">tueLookupAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Gets the TUe data (optionally with a user ID provided)</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1561,11 +1631,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_tueRequestAction">
         tueRequestAction()
         <a href="classes/Database-Controller-MemberController.html#method_tueRequestAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">629</span>
+    <span class="phpdocumentor-element-found-in__line">641</span>
 
     </aside>
 
@@ -1575,17 +1646,19 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">tueRequestAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Returns the TUe data for a given user id</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\JsonModel">JsonModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1596,11 +1669,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_updatesAction">
         updatesAction()
         <a href="classes/Database-Controller-MemberController.html#method_updatesAction" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">643</span>
+    <span class="phpdocumentor-element-found-in__line">655</span>
 
     </aside>
 
@@ -1610,15 +1684,17 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">updatesAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1629,11 +1705,12 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <h4 class="phpdocumentor-element__name" id="method_memberIsDeleted">
         memberIsDeleted()
         <a href="classes/Database-Controller-MemberController.html#method_memberIsDeleted" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Controller/MemberController.php"><a href="files/module-database-src-controller-membercontroller.html"><abbr title="module/Database/src/Controller/MemberController.php">MemberController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">755</span>
+    <span class="phpdocumentor-element-found-in__line">767</span>
 
     </aside>
 
@@ -1642,8 +1719,9 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
     <span class="phpdocumentor-signature__visibility">private</span>
                     <span class="phpdocumentor-signature__name">memberIsDeleted</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1651,85 +1729,177 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\View\Model\ViewModel">ViewModel</abbr></span>
+            </section>
+
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Controller/MemberController.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/Database-Controller-MemberController.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Controller-MemberController.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Database-Controller-MemberController.html#property_checkerService">$checkerService<a href="classes/Database-Controller-MemberController.html"></li>
+                                                    <li><a href="classes/Database-Controller-MemberController.html#property_memberService">$memberService<a href="classes/Database-Controller-MemberController.html"></li>
+                                                    <li><a href="classes/Database-Controller-MemberController.html#property_renewalService">$renewalService<a href="classes/Database-Controller-MemberController.html"></li>
+                                                    <li><a href="classes/Database-Controller-MemberController.html#property_stripeService">$stripeService<a href="classes/Database-Controller-MemberController.html"></li>
+                                                    <li><a href="classes/Database-Controller-MemberController.html#property_translator">$translator<a href="classes/Database-Controller-MemberController.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Database-Controller-MemberController.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_addAddressAction">addAddressAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_approveUpdateAction">approveUpdateAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_checkoutRestartAction">checkoutRestartAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_checkoutStatusAction">checkoutStatusAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_deleteAction">deleteAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_editAction">editAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_editAddressAction">editAddressAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_expirationAction">expirationAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_flashMessenger">flashMessenger()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_indexAction">indexAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_listsAction">listsAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_membershipAction">membershipAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_paymentWebhookAction">paymentWebhookAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_rejectUpdateAction">rejectUpdateAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_removeAddressAction">removeAddressAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_renewAction">renewAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_searchAction">searchAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_searchFilteredAction">searchFilteredAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_setSupremumAction">setSupremumAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_showAction">showAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_showUpdateAction">showUpdateAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_subscribeAction">subscribeAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_tueLookupAction">tueLookupAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_tueRequestAction">tueRequestAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_updatesAction">updatesAction()</a></li>
+                                            <li><a href="classes/Database-Controller-MemberController.html#method_memberIsDeleted">memberIsDeleted()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1740,7 +1910,6 @@ Perhaps also for ordinary -&gt; graduate in the future</p>
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/Database-Controller-MemberController.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -233,8 +234,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/report.html">Report</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/report-model.html">Model</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/report-model-subdecision.html">SubDecision</a></li>
@@ -258,6 +260,11 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Reckoning.php"><a href="files/module-report-src-model-subdecision-reckoning.html"><abbr title="module/Report/src/Model/SubDecision/Reckoning.php">Reckoning.php</abbr></a></abbr>
     :
@@ -272,16 +279,27 @@
 
 
 
-
-
-
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Report-Model-SubDecision-Reckoning.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Report-Model-SubDecision-Reckoning.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Report-Model-SubDecision-Budget.html#property_approval">$approval</a>
     <span>
                         &nbsp;: bool            </span>
@@ -372,7 +390,15 @@
 </dt>
 <dd>Version of the budget.</dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Report-Model-SubDecision-Reckoning.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Budget.html#method_getApproval">getApproval()</a>
     <span>
                                 &nbsp;: bool    </span>
@@ -526,7 +552,8 @@
 </dt>
 <dd>Set the version.</dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -537,6 +564,7 @@
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/Report-Model-SubDecision-Reckoning.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -548,6 +576,7 @@
     <h4 class="phpdocumentor-element__name" id="property_approval">
         $approval
         <a href="classes/Report-Model-SubDecision-Budget.html#property_approval" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -567,8 +596,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -582,6 +610,7 @@
     <h4 class="phpdocumentor-element__name" id="property_author">
         $author
         <a href="classes/Report-Model-SubDecision-Budget.html#property_author" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -601,8 +630,7 @@
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -616,6 +644,7 @@
     <h4 class="phpdocumentor-element__name" id="property_changes">
         $changes
         <a href="classes/Report-Model-SubDecision-Budget.html#property_changes" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -635,8 +664,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -650,6 +678,7 @@
     <h4 class="phpdocumentor-element__name" id="property_content">
         $content
         <a href="classes/Report-Model-SubDecision.html#property_content" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -669,8 +698,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -684,6 +712,7 @@
     <h4 class="phpdocumentor-element__name" id="property_date">
         $date
         <a href="classes/Report-Model-SubDecision-Budget.html#property_date" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -703,8 +732,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -718,6 +746,7 @@
     <h4 class="phpdocumentor-element__name" id="property_decision">
         $decision
         <a href="classes/Report-Model-SubDecision.html#property_decision" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -737,8 +766,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -752,6 +780,7 @@
     <h4 class="phpdocumentor-element__name" id="property_decision_number">
         $decision_number
         <a href="classes/Report-Model-SubDecision.html#property_decision_number" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -773,8 +802,7 @@
         <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
 </section>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -788,6 +816,7 @@
     <h4 class="phpdocumentor-element__name" id="property_decision_point">
         $decision_point
         <a href="classes/Report-Model-SubDecision.html#property_decision_point" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -809,8 +838,7 @@
         <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
 </section>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -824,6 +852,7 @@
     <h4 class="phpdocumentor-element__name" id="property_meeting_number">
         $meeting_number
         <a href="classes/Report-Model-SubDecision.html#property_meeting_number" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -845,8 +874,7 @@
         <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
 </section>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -860,6 +888,7 @@
     <h4 class="phpdocumentor-element__name" id="property_meeting_type">
         $meeting_type
         <a href="classes/Report-Model-SubDecision.html#property_meeting_type" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -881,8 +910,7 @@
         <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
 </section>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -896,6 +924,7 @@
     <h4 class="phpdocumentor-element__name" id="property_name">
         $name
         <a href="classes/Report-Model-SubDecision-Budget.html#property_name" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -915,8 +944,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -930,6 +958,7 @@
     <h4 class="phpdocumentor-element__name" id="property_number">
         $number
         <a href="classes/Report-Model-SubDecision.html#property_number" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -949,8 +978,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -964,6 +992,7 @@
     <h4 class="phpdocumentor-element__name" id="property_version">
         $version
         <a href="classes/Report-Model-SubDecision-Budget.html#property_version" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -983,8 +1012,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -994,6 +1022,7 @@
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/Report-Model-SubDecision-Reckoning.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -1004,6 +1033,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getApproval">
         getApproval()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_getApproval" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1018,15 +1048,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getApproval</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1037,6 +1069,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getAuthor">
         getAuthor()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_getAuthor" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1051,15 +1084,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAuthor</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1070,6 +1105,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getChanges">
         getChanges()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_getChanges" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1084,15 +1120,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getChanges</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1103,6 +1141,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getContent">
         getContent()
         <a href="classes/Report-Model-SubDecision.html#method_getContent" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1117,15 +1156,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getContent</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1136,6 +1177,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getDate">
         getDate()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_getDate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1150,15 +1192,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1169,6 +1213,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getDecision">
         getDecision()
         <a href="classes/Report-Model-SubDecision.html#method_getDecision" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1183,15 +1228,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDecision</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1202,6 +1249,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getDecisionNumber">
         getDecisionNumber()
         <a href="classes/Report-Model-SubDecision.html#method_getDecisionNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1216,15 +1264,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDecisionNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1235,6 +1285,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getDecisionPoint">
         getDecisionPoint()
         <a href="classes/Report-Model-SubDecision.html#method_getDecisionPoint" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1249,15 +1300,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDecisionPoint</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1268,6 +1321,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getMeetingNumber">
         getMeetingNumber()
         <a href="classes/Report-Model-SubDecision.html#method_getMeetingNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1282,15 +1336,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getMeetingNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1301,6 +1357,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getMeetingType">
         getMeetingType()
         <a href="classes/Report-Model-SubDecision.html#method_getMeetingType" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1315,15 +1372,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getMeetingType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-MeetingTypes.html"><abbr title="\Application\Model\Enums\MeetingTypes">MeetingTypes</abbr></a></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-MeetingTypes.html"><abbr title="\Application\Model\Enums\MeetingTypes">MeetingTypes</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-MeetingTypes.html"><abbr title="\Application\Model\Enums\MeetingTypes">MeetingTypes</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1334,6 +1393,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getName">
         getName()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1348,15 +1408,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1367,6 +1429,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getNumber">
         getNumber()
         <a href="classes/Report-Model-SubDecision.html#method_getNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1381,15 +1444,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1400,6 +1465,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getVersion">
         getVersion()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_getVersion" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1414,15 +1480,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getVersion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1433,6 +1501,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setApproval">
         setApproval()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_setApproval" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1447,6 +1516,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setApproval</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$approval</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1455,17 +1526,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1477,6 +1543,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setAuthor">
         setAuthor()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_setAuthor" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1491,6 +1558,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setAuthor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$author</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1499,17 +1568,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Member.html"><abbr title="\Report\Model\Member">Member</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1521,6 +1585,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setChanges">
         setChanges()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_setChanges" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1535,6 +1600,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setChanges</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$changes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1543,17 +1610,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1565,6 +1627,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setContent">
         setContent()
         <a href="classes/Report-Model-SubDecision.html#method_setContent" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1579,6 +1642,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setContent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$content</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1587,17 +1652,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1609,6 +1669,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setDate">
         setDate()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_setDate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1623,6 +1684,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1631,17 +1694,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1653,6 +1711,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setDecision">
         setDecision()
         <a href="classes/Report-Model-SubDecision.html#method_setDecision" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1667,6 +1726,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setDecision</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$decision</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1675,17 +1736,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Model-Decision.html"><abbr title="\Report\Model\Decision">Decision</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1697,6 +1753,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setName">
         setName()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_setName" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1711,6 +1768,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1719,17 +1778,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1741,6 +1795,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setNumber">
         setNumber()
         <a href="classes/Report-Model-SubDecision.html#method_setNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
@@ -1755,6 +1810,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1763,17 +1820,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1785,6 +1837,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setVersion">
         setVersion()
         <a href="classes/Report-Model-SubDecision-Budget.html#method_setVersion" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision/Budget.php"><a href="files/module-report-src-model-subdecision-budget.html"><abbr title="module/Report/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
@@ -1799,6 +1852,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1807,85 +1862,176 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Report/src/Model/SubDecision/Reckoning.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/Report-Model-SubDecision-Reckoning.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Report-Model-SubDecision-Reckoning.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Report-Model-SubDecision-Budget.html#property_approval">$approval<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision-Budget.html#property_author">$author<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision-Budget.html#property_changes">$changes<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_content">$content<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision-Budget.html#property_date">$date<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_decision">$decision<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_decision_number">$decision_number<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_decision_point">$decision_point<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_meeting_number">$meeting_number<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_meeting_type">$meeting_type<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision-Budget.html#property_name">$name<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_number">$number<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision-Budget.html#property_version">$version<a href="classes/Report-Model-SubDecision-Reckoning.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_getApproval">getApproval()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_getAuthor">getAuthor()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_getChanges">getChanges()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getContent">getContent()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_getDate">getDate()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getDecision">getDecision()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getDecisionNumber">getDecisionNumber()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getDecisionPoint">getDecisionPoint()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getMeetingNumber">getMeetingNumber()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getMeetingType">getMeetingType()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_getName">getName()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getNumber">getNumber()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_getVersion">getVersion()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_setApproval">setApproval()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_setAuthor">setAuthor()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_setChanges">setChanges()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_setContent">setContent()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_setDate">setDate()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_setDecision">setDecision()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_setName">setName()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_setNumber">setNumber()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision-Budget.html#method_setVersion">setVersion()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1896,7 +2042,6 @@
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/Report-Model-SubDecision-Reckoning.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
