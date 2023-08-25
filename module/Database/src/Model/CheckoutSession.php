@@ -85,7 +85,7 @@ class CheckoutSession
     /**
      * One-to-many side for self-reference after recovery.
      *
-     * @var Collection<array-key, CheckoutSession::class>
+     * @var Collection<array-key, CheckoutSession>
      */
     #[OneToMany(
         targetEntity: self::class,
