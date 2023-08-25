@@ -96,7 +96,6 @@ class CheckoutSession
     #[ManyToOne(
         targetEntity: self::class,
         inversedBy: 'recoveredBy',
-        orphanRemoval: true,
         cascade: ['remove'],
     )]
     #[JoinColumn(
@@ -119,7 +118,7 @@ class CheckoutSession
     {
         $this->recoveredBy = new ArrayCollection();
     }
-    
+
     /**
      * Get the ID.
      *
