@@ -37,16 +37,6 @@ class CheckoutSession
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function findRecoveredBy(CheckoutSessionModel $checkoutSession): ?CheckoutSessionModel
-    {
-        $qb = $this->getRepository()->createQueryBuilder('cs');
-        $qb->where('cs.recoveredFrom = :checkoutSession');
-
-        $qb->setParameter('checkoutSession', $checkoutSession);
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
     /**
      * Persist a payment state.
      */
