@@ -59,8 +59,8 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
                     [
                         'name' => Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return $this->isNotInThePast($value);
+                            'callback' => function ($value, $context) {
+                                return $this->isNotInThePast($value, $context);
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
@@ -72,8 +72,8 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
                     [
                         'name' => Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return $this->isMaxOneYear($value);
+                            'callback' => function ($value, $context) {
+                                return $this->isMaxOneYear($value, $context);
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
@@ -85,8 +85,8 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
                     [
                         'name' => Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return $this->isNotTooFar($value);
+                            'callback' => function ($value, $context) {
+                                return $this->isNotTooFar($value, $context);
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
@@ -100,10 +100,15 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
         ];
     }
 
-    private function isNotInThePast(string $value): bool
-    {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    private function isNotInThePast(
+        string $value,
+        array $context = [],
+    ): bool {
         try {
-            $today = new DateTime('today');
+            $today = new DateTime($context['meeting']['date']);
 
             return (new DateTime($value)) >= $today;
         } catch (Throwable) {
@@ -111,10 +116,15 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
         }
     }
 
-    private function isMaxOneYear(string $value): bool
-    {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    private function isMaxOneYear(
+        string $value,
+        array $context = [],
+    ): bool {
         try {
-            $future = (new DateTime('today'))->add(new DateInterval('P1Y'));
+            $future = (new DateTime($context['meeting']['date']))->add(new DateInterval('P1Y'));
 
             return (new DateTime($value)) <= $future;
         } catch (Throwable) {
@@ -122,10 +132,15 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
         }
     }
 
-    private function isNotTooFar(string $value): bool
-    {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    private function isNotTooFar(
+        string $value,
+        array $context = [],
+    ): bool {
         try {
-            $today = new DateTime('today');
+            $today = new DateTime($context['meeting']['date']);
 
             if ($today->format('m') >= 7) {
                 $year = (int) $today->format('Y') + 1;
