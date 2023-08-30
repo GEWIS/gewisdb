@@ -58,8 +58,8 @@ class Withdraw extends AbstractDecision implements InputFilterProviderInterface
                     [
                         'name' => Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return $this->isNotInThePast($value);
+                            'callback' => function ($value, $context) {
+                                return $this->isNotInThePast($value, $context);
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
@@ -86,10 +86,15 @@ class Withdraw extends AbstractDecision implements InputFilterProviderInterface
         ];
     }
 
-    private function isNotInThePast(string $value): bool
-    {
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    private function isNotInThePast(
+        string $value,
+        array $context = [],
+    ): bool {
         try {
-            $today = new DateTime('today');
+            $today = new DateTime($context['meeting']['date']);
 
             return (new DateTime($value)) >= $today;
         } catch (Throwable) {
