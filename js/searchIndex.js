@@ -4816,11 +4816,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Mapper-CheckoutSession.html#method_findLatest"
         },                {
-            "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003AfindRecoveredBy\u0028\u0029",
-            "name": "findRecoveredBy",
-            "summary": "",
-            "url": "classes/Database-Mapper-CheckoutSession.html#method_findRecoveredBy"
-        },                {
             "fqsen": "\\Database\\Mapper\\CheckoutSession\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
             "summary": "Persist\u0020a\u0020payment\u0020state.",
