@@ -15,6 +15,7 @@ use Doctrine\ORM\Query\Expr\Join;
 
 use function count;
 use function is_numeric;
+use function str_replace;
 use function strtolower;
 
 class ProspectiveMember
@@ -125,7 +126,7 @@ class ProspectiveMember
     }
 
     /**
-     * Find all prospective members whose last Checkout Session has fully expired ((1 + 30) + 1 day ago) or failed 31
+     * Find all prospective members whose last Checkout Session has fully expired ((1/24 + 30) + 1 day ago) or failed 31
      * days ago.
      *
      * @return ProspectiveMemberModel[]
@@ -136,20 +137,27 @@ class ProspectiveMember
         $qb->leftJoin(CheckoutSessionModel::class, 'cs', Join::WITH, 'cs.prospectiveMember = m.lidnr');
 
         $qbc = $this->em->createQueryBuilder();
-        $qbc->select('MAX(css.id)')
+        $qbc->select('MAX(csm.id)')
+            ->from(CheckoutSessionModel::class, 'csm')
+            ->where('csm.prospectiveMember = m.lidnr');
+        $qbd = $this->em->createQueryBuilder();
+        $qbd->select('(CASE WHEN css.recoveredFrom IS NOT NULL THEN IDENTITY(css.recoveredFrom) ELSE css.id END)')
             ->from(CheckoutSessionModel::class, 'css')
-            ->where('css.prospectiveMember = m.lidnr');
-        $qb->where($qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'))
-            ->andWhere($qb->expr()->orX(
-                $qb->expr()->andX(
-                    $qb->expr()->eq('cs.state', ':expired'),
-                    $qb->expr()->lt('cs.expiration', ':fullyExpired'),
-                ),
-                $qb->expr()->andX(
-                    $qb->expr()->eq('cs.state', ':failed'),
-                    $qb->expr()->lt('cs.expiration', ':fullyFailed'),
-                ),
-            ));
+            ->where('css.prospectiveMember = m.lidnr')
+            ->andWhere($qb->expr()->eq('css.id', '(' . str_replace('csm', 'csm2', $qbc->getDQL()) . ')'))
+            ->andWhere('css.state = :expired');
+        $qb->where($qb->expr()->orX(
+            $qb->expr()->andX(
+                $qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'),
+                $qb->expr()->eq('cs.state', ':failed'),
+                $qb->expr()->lt('cs.expiration', ':fullyFailed'),
+            ),
+            $qb->expr()->andX(
+                $qb->expr()->eq('cs.id', '(' . $qbd->getDQL() . ')'),
+                $qb->expr()->eq('cs.state', ':expired'),
+                $qb->expr()->lt('cs.expiration', ':fullyExpired'),
+            ),
+        ));
 
         $qb->setParameter('expired', CheckoutSessionStates::Expired)
             ->setParameter('failed', CheckoutSessionStates::Failed)
