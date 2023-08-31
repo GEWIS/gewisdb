@@ -375,12 +375,15 @@ class Stripe
                 // Save changes before sending e-mail. This ensures we do not lose information if the e-mail fails.
                 $this->checkoutSessionMapper->persist($storedCheckoutSession);
 
-                // Send e-mail, as this event only happens once after 24 hours for the original Checkout Session, we do
-                // not have to keep track of if/when we may have already sent an e-mail in the past.
-                $this->memberService->sendRegistrationUpdateEmail(
-                    $storedCheckoutSession->getProspectiveMember(),
-                    'checkout-expired',
-                );
+                if (null !== $session->after_expiration) {
+                    // Send e-mail, as this event only happens once after 24 hours for the original Checkout Session, we
+                    // only send the e-mail once, when the first Checkout Session expires. Any restarts will not result
+                    // in e-mails for the prospective member.
+                    $this->memberService->sendRegistrationUpdateEmail(
+                        $storedCheckoutSession->getProspectiveMember(),
+                        'checkout-expired',
+                    );
+                }
 
                 break;
             case 'checkout.session.completed':
