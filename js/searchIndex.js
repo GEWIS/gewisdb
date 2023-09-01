@@ -5303,7 +5303,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Mapper\\ProspectiveMember\u003A\u003AfindWithFullyExpiredOrFailedCheckout\u0028\u0029",
             "name": "findWithFullyExpiredOrFailedCheckout",
-            "summary": "Find\u0020all\u0020prospective\u0020members\u0020whose\u0020last\u0020Checkout\u0020Session\u0020has\u0020fully\u0020expired\u0020\u0028\u00281\u0020\u002B\u002030\u0029\u0020\u002B\u00201\u0020day\u0020ago\u0029\u0020or\u0020failed\u002031\ndays\u0020ago.",
+            "summary": "Find\u0020all\u0020prospective\u0020members\u0020whose\u0020last\u0020Checkout\u0020Session\u0020has\u0020fully\u0020expired\u0020\u0028\u00281\/24\u0020\u002B\u002030\u0029\u0020\u002B\u00201\u0020day\u0020ago\u0029\u0020or\u0020failed\u002031\ndays\u0020ago.",
             "url": "classes/Database-Mapper-ProspectiveMember.html#method_findWithFullyExpiredOrFailedCheckout"
         },                {
             "fqsen": "\\Database\\Mapper\\ProspectiveMember\u003A\u003Apersist\u0028\u0029",
