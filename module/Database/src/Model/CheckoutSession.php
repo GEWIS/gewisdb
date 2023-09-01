@@ -60,6 +60,8 @@ class CheckoutSession
 
     /**
      * Expiration of the checkout session.
+     *
+     * If $state == CheckoutSessionStates::Expired, then this is the last date this checkout session can be recovered.
      */
     #[Column(type: 'datetime')]
     protected DateTime $expiration;

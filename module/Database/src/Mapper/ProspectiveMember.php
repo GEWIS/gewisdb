@@ -133,25 +133,33 @@ class ProspectiveMember
      */
     public function findWithFullyExpiredOrFailedCheckout(): array
     {
+        // Get all prospective members and their checkout sessions
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->leftJoin(CheckoutSessionModel::class, 'cs', Join::WITH, 'cs.prospectiveMember = m.lidnr');
 
+        // Subquery to get maximum checkout session for a member
         $qbc = $this->em->createQueryBuilder();
         $qbc->select('MAX(csm.id)')
             ->from(CheckoutSessionModel::class, 'csm')
             ->where('csm.prospectiveMember = m.lidnr');
+
+        // Subquery to get the original (expired) checkout session (the one that could be recovered)
         $qbd = $this->em->createQueryBuilder();
         $qbd->select('(CASE WHEN css.recoveredFrom IS NOT NULL THEN IDENTITY(css.recoveredFrom) ELSE css.id END)')
             ->from(CheckoutSessionModel::class, 'css')
             ->where('css.prospectiveMember = m.lidnr')
             ->andWhere($qb->expr()->eq('css.id', '(' . str_replace('csm', 'csm2', $qbc->getDQL()) . ')'))
             ->andWhere('css.state = :expired');
+
         $qb->where($qb->expr()->orX(
+            // Get the last checkout session, if it has failed more than 31 days ago
             $qb->expr()->andX(
                 $qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'),
                 $qb->expr()->eq('cs.state', ':failed'),
                 $qb->expr()->lt('cs.expiration', ':fullyFailed'),
             ),
+            // OR get the original session if it has expired more than a day ago using that
+            // if x.state == Expired, the expiration date is the last date the checkout session can be recoverd
             $qb->expr()->andX(
                 $qb->expr()->eq('cs.id', '(' . $qbd->getDQL() . ')'),
                 $qb->expr()->eq('cs.state', ':expired'),
