@@ -1,10 +1,10 @@
 name: Docs
 
-# Only run this action when pushing to master.
+# Only run this action when pushing to main.
 on:
     push:
         branches:
-            - master
+            - main
 
 jobs:
     phpunit:

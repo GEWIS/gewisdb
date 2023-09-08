@@ -8,7 +8,7 @@ info:
     email: abc@gewis.nl
   license:
     name: GNU GENERAL PUBLIC LICENSE Version 3
-    url: https://github.com/GEWIS/gewisdb/blob/master/LICENSE.txt
+    url: https://github.com/GEWIS/gewisdb/blob/main/LICENSE.txt
   version: b54649b155402dca833e5b1e5d9d1737f7caccd2
 externalDocs:
   description: Contribute to this API
@@ -45,7 +45,7 @@ paths:
       security:
         - api_auth:
             - HealthR
-            
+
   /members:
     get:
       summary: Get members
@@ -77,7 +77,7 @@ paths:
       security:
         - api_auth:
             - MembersR
-            
+
   /members/{lidnr}:
     get:
       summary: Get a member
@@ -108,7 +108,7 @@ paths:
       security:
         - api_auth:
             - MembersR
-            
+
   /members/active:
     get:
       summary: Get active members
@@ -140,7 +140,7 @@ paths:
       security:
         - api_auth:
             - MembersActiveR
-            
+
 components:
   schemas:
     health:
@@ -265,7 +265,7 @@ components:
                   message:
                     type: string
                     example: "Permission `...` is needed but is not currently held."
-              
+
   securitySchemes:
     api_auth:
       type: http
