@@ -115,10 +115,6 @@ class Stripe
             return $this->getCheckoutLink($prospectiveMember);
         }
 
-        // If the Checkout Session was recovered we want to go back to the original one (which has the correct
-        // expiration and Recovery URL).
-        $lastCheckoutStub = $lastCheckoutStub->getRecoveredFrom() ?? $lastCheckoutStub;
-
         // We have at least one known Checkout Session on file.
         if (
             CheckoutSessionStates::Paid === $lastCheckoutStub->getState()
@@ -128,6 +124,10 @@ class Stripe
             // do something else.
             return null;
         }
+
+        // If the Checkout Session was recovered we want to go back to the original one (which has the correct
+        // expiration and Recovery URL).
+        $lastCheckoutStub = $lastCheckoutStub->getRecoveredFrom() ?? $lastCheckoutStub;
 
         if (CheckoutSessionStates::Failed === $lastCheckoutStub->getState()) {
             // Last payment failed, so we need to create a new Checkout Session for the user to be able to try again.
@@ -330,19 +330,31 @@ class Stripe
                 return;
             }
 
+            // See if we have recovered from this Checkout Session before.
+            if (false !== ($lastCheckoutStub = $originalCheckoutSession->getRecoveredBy()->last())) {
+                if (CheckoutSessionStates::Paid === $lastCheckoutStub->getState()) {
+                    // Do not allow processing of new events if the last recovered Checkout Session is 'PAID'.
+                    return;
+                }
+            }
+
             // Create new Checkout Session for this recovery. Leave the state for it on 'CREATED', if something goes
             // wrong we can easily track what has happened.
             $storedCheckoutSession = new CheckoutSessionModel();
             $storedCheckoutSession->setProspectiveMember($originalCheckoutSession->getProspectiveMember());
             $storedCheckoutSession->setCheckoutId($session->id);
-            $storedCheckoutSession->setCreated(DateTime::createFromFormat(
-                'U',
-                (string) $session->created,
-            )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
-            $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
-                'U',
-                (string) $session->expires_at,
-            )->setTimezone(new DateTimeZone('Europe/Amsterdam')));
+            $storedCheckoutSession->setCreated(
+                DateTime::createFromFormat(
+                    'U',
+                    (string) $session->created,
+                )->setTimezone(new DateTimeZone('Europe/Amsterdam')),
+            );
+            $storedCheckoutSession->setExpiration(
+                DateTime::createFromFormat(
+                    'U',
+                    (string) $session->expires_at,
+                )->setTimezone(new DateTimeZone('Europe/Amsterdam')),
+            );
             // Link recovered Checkout Session to the old one.
             $storedCheckoutSession->setRecoveredFrom($originalCheckoutSession);
 

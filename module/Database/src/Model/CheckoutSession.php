@@ -192,8 +192,13 @@ class CheckoutSession
     }
 
     /**
-     * @psalm-ignore-nullable-return
+     * @return Collection<array-key, CheckoutSession>
      */
+    public function getRecoveredBy(): Collection
+    {
+        return $this->recoveredBy;
+    }
+
     public function getRecoveredFrom(): ?CheckoutSession
     {
         return $this->recoveredFrom;
