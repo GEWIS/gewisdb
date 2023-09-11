@@ -5616,6 +5616,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-CheckoutSession.html#method_setRecoveryUrl"
         },                {
+            "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetRecoveredBy\u0028\u0029",
+            "name": "getRecoveredBy",
+            "summary": "",
+            "url": "classes/Database-Model-CheckoutSession.html#method_getRecoveredBy"
+        },                {
             "fqsen": "\\Database\\Model\\CheckoutSession\u003A\u003AgetRecoveredFrom\u0028\u0029",
             "name": "getRecoveredFrom",
             "summary": "",
