@@ -26,6 +26,7 @@ use Report\Model\SubDecision\Installation;
 use Report\Model\SubDecision\Key\Granting as KeyGranting;
 use Report\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
 use Report\Model\SubDecision\Other;
+use Report\Model\SubDecision\Reappointment;
 use Report\Model\SubDecision\Reckoning;
 
 /**
@@ -42,6 +43,7 @@ use Report\Model\SubDecision\Reckoning;
         'foundation' => Foundation::class,
         'abrogation' => Abrogation::class,
         'installation' => Installation::class,
+        'reappointment' => Reappointment::class,
         'discharge' => Discharge::class,
         'budget' => Budget::class,
         'reckoning' => Reckoning::class,

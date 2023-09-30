@@ -90,11 +90,14 @@ $(document).ready(function () {
                             + '<span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Discharge') ?></button></td>';
 
                         if ('Lid' === install.function) {
+                            toAdd += '<td><button type="button" class="btn btn-warning btn-xs reappoint">'
+                                + '<span class="glyphicon glyphicon-repeat"></span> <?= $this->translate('Reappoint') ?></button></td>';
                             toAdd += '<td><button type="button" class="btn btn-warning btn-xs inactive">'
                                 + '<span class="glyphicon glyphicon-pencil"></span> <?= $this->translate('Make Inactive') ?></button></td>';
                             toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
                                 + '<span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Give Function') ?></button></td>';
                         } else {
+                            toAdd += '<td></td>';
                             toAdd += '<td></td>';
                             toAdd += '<td></td>';
                         }
@@ -105,7 +108,9 @@ $(document).ready(function () {
                 });
                 $('#members-install').html(content);
                 $('#members-result').html(content2);
-                $('#install-changes').html('');
+                $('#reappointment-changes').html('');
+                $('#discharge-changes').html('');
+                $('#installation-changes').html('');
 
                 // set foundation of organ
                 $('#install-foundation-meeting-type').val(data.json.meeting_type);
@@ -120,6 +125,55 @@ $(document).ready(function () {
                 $('#install-organ').prop('disabled', true);
 
                 // enable member change events
+                $('button.reappoint').click(function(e)
+                {
+                    var element = $(e.target).parent().parent();
+                    var name = element.find('.name').html();
+                    $('#install-modal-reappoint div.modal-body span.name').html(name);
+
+                    // Add all special functions to the modal.
+                    var reappointFuctionForm = $('#install-modal-reappoint div.modal-body #reappoint-functions-form');
+                    var functions = 1;
+                    $($('#members-result tr[data-lidnr="' + element.data('lidnr') + '"]').get()).each(function (i) {
+                        var installation = $(this);
+                        var installedFunction = installation.find('.function').text();
+
+                        // We do not need to list the normal membership function, only the extra ones.
+                        if ('Lid' !== installedFunction) {
+                            var meeting_type = installation.data('meeting-type');
+                            var meeting_number = installation.data('meeting-number');
+                            var decision_point = installation.data('decision-point');
+                            var decision_number = installation.data('decision-number');
+                            var subdecision_number = installation.data('subdecision-number');
+
+                            reappointFuctionForm.append(`
+                                <input type="checkbox" id="reappoint-function-${functions}"
+                                    data-function="${installedFunction}"
+                                    data-meeting-type="${meeting_type}"
+                                    data-meeting-number="${meeting_number}"
+                                    data-decision-point="${decision_point}"
+                                    data-decision-number="${decision_number}"
+                                    data-subdecision-number="${subdecision_number}"/>
+                                <label for="reappoint-function-${functions}">
+                                    ${installedFunction} (${meeting_type} ${meeting_number}.${decision_point}.${decision_number})
+                                </label>
+                                <br>
+                            `);
+
+                            functions++;
+                        }
+                    });
+
+                    var modal = $('#install-modal-reappoint');
+                    modal.data('meeting-type', element.data('meeting-type'));
+                    modal.data('meeting-number', element.data('meeting-number'));
+                    modal.data('decision-point', element.data('decision-point'));
+                    modal.data('decision-number', element.data('decision-number'));
+                    modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.data('lidnr', element.data('lidnr'));
+                    modal.modal();
+                });
+
                 $('button.discharge').click(function(e)
                 {
                     var element = $(e.target).parent().parent();
@@ -230,7 +284,7 @@ $(document).ready(function () {
         template = template.replace(/__function__/g, func);
         template = template.replace(/__lidnr__/g, lidnr);
         template = template.replace(/__name__/g, name);
-        $('#install-changes').append($(template));
+        $('#installation-changes').append($(template));
 
         // add to 'result'
         var toAdd = '<tr data-lidnr="' + lidnr + '">'
@@ -290,6 +344,90 @@ $(document).ready(function () {
         $('#install-modal-function').modal('hide');
     });
 
+    function createReappointment(element, name, func) {
+        var meeting_type = element.data('meeting-type');
+        var meeting_number = element.data('meeting-number');
+        var decision_point = element.data('decision-point');
+        var decision_number = element.data('decision-number');
+        var subdecision_number = element.data('subdecision-number');
+
+        var template = $('#reappointment-template').data('template');
+        template = template.replace(/__index__/g, count++);
+        template = template.replace(/__function__/g, func);
+        template = template.replace(/__name__/g, name);
+
+        template = template.replace(/__meeting_type__/g, meeting_type);
+        template = template.replace(/__meeting_number__/g, meeting_number);
+        template = template.replace(/__decision_point__/g, decision_point);
+        template = template.replace(/__decision_number__/g, decision_number);
+        template = template.replace(/__number__/g, subdecision_number);
+        $('#reappointment-changes').append($(template));
+    }
+
+    // reappointment modal stuff
+    $('#reappoint-modal-yes').click(function(e) {
+        var modal = $('#install-modal-reappoint');
+        var name = $('#install-modal-reappoint div.modal-body span.name').text();
+
+        // Reappoint the 'Lid' function (i.e. normal membership).
+        createReappointment(modal, name, 'Lid');
+
+        // Create the reappointments for all checked functions of member.
+        $($('#reappoint-functions-form input:checked').get()).each(function () {
+            var installation = $(this);
+            var func = installation.data('function');
+
+            if ('Lid' !== func) {
+                createReappointment(installation, name, func);
+            }
+        });
+
+        // Create discharges for all unchecked functions of member.
+        $($('#reappoint-functions-form input:not(:checked)').get()).each(function () {
+            var installation = $(this);
+            var meeting_type = installation.data('meeting-type');
+            var meeting_number = installation.data('meeting-number');
+            var decision_point = installation.data('decision-point');
+            var decision_number = installation.data('decision-number');
+            var subdecision_number = installation.data('subdecision-number');
+
+            var select = '.dec-' + meeting_type + '-' + meeting_number
+                + '-' + decision_point + '-' + decision_number
+                + '-' + subdecision_number;
+
+            dischargeFunction($('#members-result').find(select), name)
+        });
+
+        // dismiss the dialog
+        modal.modal('hide');
+    });
+
+    function dischargeFunction(installationElement, name) {
+        var meeting_type = installationElement.data('meeting-type');
+        var meeting_number = installationElement.data('meeting-number');
+        var decision_point = installationElement.data('decision-point');
+        var decision_number = installationElement.data('decision-number');
+        var subdecision_number = installationElement.data('subdecision-number');
+
+        // create the discharge, and add to all changes
+        var template = $('#discharge-template').data('template');
+        template = template.replace(/__index__/g, count++);
+        template = template.replace(/__function__/g, installationElement.find('.function').html());
+        template = template.replace(/__name__/g, name);
+
+        template = template.replace(/__meeting_type__/g, meeting_type);
+        template = template.replace(/__meeting_number__/g, meeting_number);
+        template = template.replace(/__decision_point__/g, decision_point);
+        template = template.replace(/__decision_number__/g, decision_number);
+        template = template.replace(/__number__/g, subdecision_number);
+        $('#discharge-changes').append($(template));
+
+        var select = '.dec-' + meeting_type + '-' + meeting_number
+            + '-' + decision_point + '-' + decision_number
+            + '-' + subdecision_number;
+        $('#members-result').find(select).remove();
+    }
+
     // discharge modal stuff
     $('#discharge-modal-yes').click(function(e)
     {
@@ -297,34 +435,10 @@ $(document).ready(function () {
         var func = $('#install-modal-discharge div.modal-body span.function').text();
         var name = $('#install-modal-discharge div.modal-body span.name').text();
 
-        // Ensure that is a `Lid` is discharged, all functions are removed too.
+        // Ensure that if a `Lid` is discharged, all functions are removed too.
         if ('Lid' === func) {
-            $($('#members-result tr[data-lidnr="' + modal.data('lidnr') + '"]').get().reverse()).each(function (i) {
-                var installation = $(this);
-
-                var meeting_type = installation.data('meeting-type');
-                var meeting_number = installation.data('meeting-number');
-                var decision_point = installation.data('decision-point');
-                var decision_number = installation.data('decision-number');
-                var subdecision_number = installation.data('subdecision-number');
-
-                // create the discharge, and add to all changes
-                var template = $('#discharge-template').data('template');
-                template = template.replace(/__index__/g, count++);
-                template = template.replace(/__function__/g, installation.find('.function').html());
-                template = template.replace(/__name__/g, name);
-
-                template = template.replace(/__meeting_type__/g, meeting_type);
-                template = template.replace(/__meeting_number__/g, meeting_number);
-                template = template.replace(/__decision_point__/g, decision_point);
-                template = template.replace(/__decision_number__/g, decision_number);
-                template = template.replace(/__number__/g, subdecision_number);
-                $('#install-changes').append($(template));
-
-                var select = '.dec-' + meeting_type + '-' + meeting_number
-                    + '-' + decision_point + '-' + decision_number
-                    + '-' + subdecision_number;
-                $('#members-result').find(select).remove();
+            $($('#members-result tr[data-lidnr="' + modal.data('lidnr') + '"]').get().reverse()).each(function () {
+                dischargeFunction($(this), name);
             });
         } else {
             var meeting_type = modal.data('meeting-type');
@@ -333,23 +447,11 @@ $(document).ready(function () {
             var decision_number = modal.data('decision-number');
             var subdecision_number = modal.data('subdecision-number');
 
-            // create the discharge, and add to all changes
-            var template = $('#discharge-template').data('template');
-            template = template.replace(/__index__/g, count++);
-            template = template.replace(/__function__/g, func);
-            template = template.replace(/__name__/g, name);
-
-            template = template.replace(/__meeting_type__/g, meeting_type);
-            template = template.replace(/__meeting_number__/g, meeting_number);
-            template = template.replace(/__decision_point__/g, decision_point);
-            template = template.replace(/__decision_number__/g, decision_number);
-            template = template.replace(/__number__/g, subdecision_number);
-            $('#install-changes').append($(template));
-
             var select = '.dec-' + meeting_type + '-' + meeting_number
                 + '-' + decision_point + '-' + decision_number
                 + '-' + subdecision_number;
-            $('#members-result').find(select).remove();
+
+            dischargeFunction($('#members-result').find(select), name)
         }
 
         // dismiss the dialog
@@ -363,32 +465,8 @@ $(document).ready(function () {
         var lidnr = modal.data('lidnr');
         var name = $('#install-modal-inactive div.modal-body span.name').text();
 
-        $($('#members-result tr[data-lidnr="' + lidnr + '"]').get().reverse()).each(function (i) {
-            var installation = $(this);
-
-            var meeting_type = installation.data('meeting-type');
-            var meeting_number = installation.data('meeting-number');
-            var decision_point = installation.data('decision-point');
-            var decision_number = installation.data('decision-number');
-            var subdecision_number = installation.data('subdecision-number');
-
-            // create the discharge, and add to all changes
-            var template = $('#discharge-template').data('template');
-            template = template.replace(/__index__/g, count++);
-            template = template.replace(/__function__/g, installation.find('.function').html());
-            template = template.replace(/__name__/g, name);
-
-            template = template.replace(/__meeting_type__/g, meeting_type);
-            template = template.replace(/__meeting_number__/g, meeting_number);
-            template = template.replace(/__decision_point__/g, decision_point);
-            template = template.replace(/__decision_number__/g, decision_number);
-            template = template.replace(/__number__/g, subdecision_number);
-            $('#install-changes').append($(template));
-
-            var select = '.dec-' + meeting_type + '-' + meeting_number
-                + '-' + decision_point + '-' + decision_number
-                + '-' + subdecision_number;
-            $('#members-result').find(select).remove();
+        $($('#members-result tr[data-lidnr="' + lidnr + '"]').get().reverse()).each(function () {
+            dischargeFunction($(this), name)
         });
 
         createInstallation('Inactief Lid', lidnr, name);
@@ -446,7 +524,7 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
 
 <div id="install-members-hide" style="display: none;">
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h2><?= $this->translate('Current Members') ?></h2>
         <table class="table table-striped">
             <thead>
@@ -459,7 +537,7 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
             </tbody>
         </table>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <h2><?= $this->translate('Result') ?></h2>
         <table class="table table-striped">
             <thead>
@@ -467,6 +545,7 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
                     <th><?= $this->translate('Name') ?></th>
                     <th><?= $this->translate('Function') ?></th>
                     <th><?= $this->translate('Discharge') ?></th>
+                    <th><?= $this->translate('Reappoint') ?></th>
                     <th><?= $this->translate('Make Inactive') ?></th>
                     <th><?= $this->translate('Give Function') ?></th>
                 </tr>
@@ -479,6 +558,45 @@ $fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
 <div class="row">
     <div class="col-md-6">
         <h2><?= $this->translate('Mutations') ?></h2>
+<?php
+// reappointment element template
+$element = $form->get('reappointments');
+$fs = $element->getTemplateElement();
+// render template element
+ob_start();
+?>
+<div class="organ-reappointment">
+    __name__ wordt herbenoemd als __function__.
+    <?php
+    $el = $fs->get('meeting_type');
+    $el->setValue('__meeting_type__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('meeting_number');
+    $el->setValue('__meeting_number__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('decision_point');
+    $el->setValue('__decision_point__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('decision_number');
+    $el->setValue('__decision_number__');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?php
+    $el = $fs->get('number');
+    $el->setValue('__number__');
+    ?>
+    <?= $this->formHidden($el) ?>
+</div>
+<?php
+$tpl = trim(ob_get_clean());
+?>
+<span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="reappointment-template"></span>
 <?php
 // installation element template
 $element = $form->get('installations');
@@ -545,7 +663,11 @@ ob_start();
 $tpl = trim(ob_get_clean());
 ?>
 <span data-template="<?= $this->escapeHtmlAttr($tpl) ?>" id="discharge-template"></span>
-        <div id="install-changes">
+        <div id="reappointment-changes">
+        </div>
+        <div id="discharge-changes">
+        </div>
+        <div id="installation-changes">
         </div>
     </div>
     <div class="col-md-6 form-inline">
@@ -601,6 +723,30 @@ $submit->setAttribute('disabled', 'disabled');
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->translate('No') ?></button>
                 <button type="button" class="btn btn-primary" id="discharge-modal-yes"><?= $this->translate('Yes') ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="install-modal-reappoint" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="install-model-reappoint-label" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="install-model-reappoint-label"><?= $this->translate('Reappoint Member') ?></h4>
+            </div>
+            <div class="modal-body">
+                <?=
+                sprintf(
+                    $this->translate('Do you want to reappoint %s? Check functions you also want reappointed, functions that are not selected will result in a discharge of that function.'),
+                    '<span class="name"></span>',
+                )
+                ?>
+                <form id="reappoint-functions-form"></form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->translate('No') ?></button>
+                <button type="button" class="btn btn-primary" id="reappoint-modal-yes"><?= $this->translate('Yes') ?></button>
             </div>
         </div>
     </div>

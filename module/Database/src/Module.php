@@ -85,9 +85,10 @@ use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
+use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
-use Database\Model\SubDecision\Installation as InstallationModel;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
+use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
 use Database\Service\Factory\InstallationFunctionFactory as InstallationFunctionServiceFactory;
@@ -245,6 +246,7 @@ class Module
                         $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(InstallationFieldset::class),
+                        $container->get('database_form_fieldset_subdecision_reappointment'),
                         $container->get('database_form_fieldset_subdecision_discharge'),
                         $container->get('database_form_fieldset_subdecision_foundation'),
                     );
@@ -358,10 +360,17 @@ class Module
 
                     return $fieldset;
                 },
+                'database_form_fieldset_subdecision_reappointment' => static function (ContainerInterface $container) {
+                    $fieldset = new SubDecisionFieldset();
+                    $fieldset->setHydrator($container->get('database_hydrator_subdecision'));
+                    $fieldset->setObject(new ReappointmentModel());
+
+                    return $fieldset;
+                },
                 'database_form_fieldset_subdecision_discharge' => static function (ContainerInterface $container) {
                     $fieldset = new SubDecisionFieldset();
                     $fieldset->setHydrator($container->get('database_hydrator_subdecision'));
-                    $fieldset->setObject(new InstallationModel());
+                    $fieldset->setObject(new DischargeModel());
 
                     return $fieldset;
                 },

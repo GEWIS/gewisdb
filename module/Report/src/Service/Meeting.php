@@ -205,8 +205,11 @@ class Meeting
             // installation
             $reportSubDecision->setFunction($subdecision->getFunction());
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
-        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Discharge) {
-            // discharge
+        } elseif (
+            $subdecision instanceof DatabaseSubDecisionModel\Reappointment
+            || $subdecision instanceof DatabaseSubDecisionModel\Discharge
+        ) {
+            // reappointment and discharge
             $ref = $subdecision->getInstallation();
             $installation = $subdecRepo->find([
                 'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
@@ -326,6 +329,11 @@ class Meeting
             case $subDecision instanceof ReportSubDecisionModel\Destroy:
                 throw new Exception('Deletion of destroy decisions not implemented');
 
+            case $subDecision instanceof ReportSubDecisionModel\Reappointment:
+                $installation = $subDecision->getInstallation();
+                $installation->removeReappointment($subDecision);
+
+                break;
             case $subDecision instanceof ReportSubDecisionModel\Discharge:
                 $installation = $subDecision->getInstallation();
                 $installation->clearDischarge();
