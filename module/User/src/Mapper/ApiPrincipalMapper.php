@@ -6,6 +6,7 @@ namespace User\Mapper;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use SensitiveParameter;
 use User\Model\ApiPrincipal as ApiPrincipalModel;
 
 use function count;
@@ -29,8 +30,10 @@ class ApiPrincipalMapper
         return $this->getRepository()->find($id);
     }
 
-    public function findByToken(string $token): ?ApiPrincipalModel
-    {
+    public function findByToken(
+        #[SensitiveParameter]
+        string $token,
+    ): ?ApiPrincipalModel {
         /** @var ApiPrincipalModel[] $results */
         $results = $this->getRepository()->findBy(['token' => $token], limit: 1);
 
