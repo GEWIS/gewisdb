@@ -60,7 +60,7 @@ class Member
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->leftJoin(OrganMemberModel::class, 'om', Join::WITH, 'm.lidnr = om.member')
             ->where('om.dischargeDate IS NULL OR om.dischargeDate > CURRENT_DATE()')
-            ->andWhere('om.installDate < CURRENT_DATE()')
+            ->andWhere('om.installDate <= CURRENT_DATE()')
             ->andWhere('om.function <> \'\'');
 
         if (!$includeInactiveFraternity) {
