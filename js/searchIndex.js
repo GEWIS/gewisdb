@@ -7426,6 +7426,11 @@ Search.appendIndex(
             "summary": "Installation\u0020into\u0020organ.",
             "url": "classes/Database-Model-SubDecision-Installation.html"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-SubDecision-Installation.html#method___construct"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetFunction\u0028\u0029",
             "name": "getFunction",
             "summary": "Get\u0020the\u0020function.",
@@ -7446,15 +7451,20 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020member.",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_setMember"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetContent\u0028\u0029",
-            "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
-            "url": "classes/Database-Model-SubDecision-Installation.html#method_getContent"
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetReappointments\u0028\u0029",
+            "name": "getReappointments",
+            "summary": "Get\u0020the\u0020reappointments,\u0020if\u0020they\u0020exist.",
+            "url": "classes/Database-Model-SubDecision-Installation.html#method_getReappointments"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetDischarge\u0028\u0029",
             "name": "getDischarge",
             "summary": "Get\u0020the\u0020discharge,\u0020if\u0020it\u0020exists",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getDischarge"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020content.",
+            "url": "classes/Database-Model-SubDecision-Installation.html#method_getContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A\u0024function",
             "name": "function",
@@ -7465,6 +7475,11 @@ Search.appendIndex(
             "name": "member",
             "summary": "Member.",
             "url": "classes/Database-Model-SubDecision-Installation.html#property_member"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A\u0024reappointments",
+            "name": "reappointments",
+            "summary": "Reappointment\u0020subdecisions\u0020if\u0020this\u0020installation\u0020was\u0020prolonged\u0020\u0028can\u0020be\u0020done\u0020multiple\u0020times\u0029.",
+            "url": "classes/Database-Model-SubDecision-Installation.html#property_reappointments"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A\u0024discharge",
             "name": "discharge",
@@ -7595,6 +7610,31 @@ Search.appendIndex(
             "name": "content",
             "summary": "Textual\u0020content\u0020for\u0020the\u0020decision.",
             "url": "classes/Database-Model-SubDecision-Other.html#property_content"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment",
+            "name": "Reappointment",
+            "summary": "Reappointment\u0020of\u0020a\u0020previous\u0020installation.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003AgetInstallation\u0028\u0029",
+            "name": "getInstallation",
+            "summary": "Get\u0020the\u0020original\u0020installation\u0020for\u0020this\u0020reappointment.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html#method_getInstallation"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003AsetInstallation\u0028\u0029",
+            "name": "setInstallation",
+            "summary": "Set\u0020the\u0020original\u0020installation\u0020for\u0020this\u0020reappointment.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html#method_setInstallation"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020textual\u0020content\u0020of\u0020this\u0020subdecision.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003A\u0024installation",
+            "name": "installation",
+            "summary": "Reference\u0020to\u0020the\u0020installation\u0020of\u0020a\u0020member.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html#property_installation"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Reckoning",
             "name": "Reckoning",
@@ -10621,6 +10661,11 @@ Search.appendIndex(
             "summary": "Installation\u0020into\u0020organ.",
             "url": "classes/Report-Model-SubDecision-Installation.html"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Report-Model-SubDecision-Installation.html#method___construct"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003AgetFunction\u0028\u0029",
             "name": "getFunction",
             "summary": "Get\u0020the\u0020function.",
@@ -10640,6 +10685,16 @@ Search.appendIndex(
             "name": "setMember",
             "summary": "Set\u0020the\u0020member.",
             "url": "classes/Report-Model-SubDecision-Installation.html#method_setMember"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003AgetReappointments\u0028\u0029",
+            "name": "getReappointments",
+            "summary": "Get\u0020the\u0020reappointments,\u0020if\u0020they\u0020exist.",
+            "url": "classes/Report-Model-SubDecision-Installation.html#method_getReappointments"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003AremoveReappointment\u0028\u0029",
+            "name": "removeReappointment",
+            "summary": "Removes\u0020the\u0020reappointments,\u0020if\u0020they\u0020exist.",
+            "url": "classes/Report-Model-SubDecision-Installation.html#method_removeReappointment"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003AgetDischarge\u0028\u0029",
             "name": "getDischarge",
@@ -10665,6 +10720,11 @@ Search.appendIndex(
             "name": "member",
             "summary": "Member.",
             "url": "classes/Report-Model-SubDecision-Installation.html#property_member"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003A\u0024reappointments",
+            "name": "reappointments",
+            "summary": "Reappointment\u0020subdecisions\u0020if\u0020this\u0020installation\u0020was\u0020prolonged\u0020\u0028can\u0020be\u0020done\u0020multiple\u0020times\u0029.",
+            "url": "classes/Report-Model-SubDecision-Installation.html#property_reappointments"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003A\u0024discharge",
             "name": "discharge",
@@ -10775,6 +10835,26 @@ Search.appendIndex(
             "name": "Other",
             "summary": "Entity\u0020for\u0020undefined\u0020decisions.",
             "url": "classes/Report-Model-SubDecision-Other.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Reappointment",
+            "name": "Reappointment",
+            "summary": "Reappointment\u0020of\u0020a\u0020previous\u0020installation.",
+            "url": "classes/Report-Model-SubDecision-Reappointment.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Reappointment\u003A\u003AgetInstallation\u0028\u0029",
+            "name": "getInstallation",
+            "summary": "Get\u0020the\u0020original\u0020installation\u0020for\u0020this\u0020reappointment.",
+            "url": "classes/Report-Model-SubDecision-Reappointment.html#method_getInstallation"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Reappointment\u003A\u003AsetInstallation\u0028\u0029",
+            "name": "setInstallation",
+            "summary": "Set\u0020the\u0020installation.",
+            "url": "classes/Report-Model-SubDecision-Reappointment.html#method_setInstallation"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Reappointment\u003A\u003A\u0024installation",
+            "name": "installation",
+            "summary": "Reference\u0020to\u0020the\u0020installation\u0020of\u0020a\u0020member.",
+            "url": "classes/Report-Model-SubDecision-Reappointment.html#property_installation"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Reckoning",
             "name": "Reckoning",
