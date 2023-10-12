@@ -133,6 +133,8 @@ $(document).ready(function () {
 
                     // Add all special functions to the modal.
                     var reappointFuctionForm = $('#install-modal-reappoint div.modal-body #reappoint-functions-form');
+                    reappointFuctionForm.empty(); // clear contents before appending functions
+
                     var functions = 1;
                     $($('#members-result tr[data-lidnr="' + element.data('lidnr') + '"]').get()).each(function (i) {
                         var installation = $(this);
@@ -296,6 +298,7 @@ $(document).ready(function () {
             toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
                 + '<span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Give Function') ?></button></td>';
         } else {
+            toAdd += '<td></td>';
             toAdd += '<td></td>';
         }
         toAdd += '</tr>';
