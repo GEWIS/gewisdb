@@ -550,14 +550,14 @@ class Meeting
         $decision = $form->getData();
         $meeting = $this->getMeeting(
             MeetingTypes::from($decision['meeting']['type']),
-            (int) $decision['meeting']['number'],
+            intval($decision['meeting']['number']),
         );
         $subdecision = $this->getOrganMapper()->findSimple(
             MeetingTypes::from($decision['subdecision']['meeting_type']),
-            (int) $decision['subdecision']['meeting_number'],
-            (int) $decision['subdecision']['decision_point'],
-            (int) $decision['subdecision']['decision_number'],
-            (int) $decision['subdecision']['number'],
+            intval($decision['subdecision']['meeting_number']),
+            intval($decision['subdecision']['decision_point']),
+            intval($decision['subdecision']['decision_number']),
+            intval($decision['subdecision']['number']),
         );
 
         if (
@@ -573,9 +573,10 @@ class Meeting
         $decision['meeting'] = $meeting;
         $decision['subdecision'] = $subdecision;
 
+        // Prepare installations.
         $installations = [];
         array_walk($decision['installations'], function ($value) use (&$installations): void {
-            $member = $this->memberMapper->findSimple((int) $value['member']['lidnr']);
+            $member = $this->memberMapper->findSimple(intval($value['member']['lidnr']));
 
             if (null === $member) {
                 return;
@@ -586,27 +587,28 @@ class Meeting
                 'function' => $value['function'],
             ];
         });
-
         $decision['installations'] = $installations;
 
-        $discharges = [];
-        array_walk($decision['discharges'], function ($value) use (&$discharges): void {
-            $decision = $this->getOrganMapper()->findInstallationDecision(
-                MeetingTypes::from($value['meeting_type']),
-                (int) $value['meeting_number'],
-                (int) $value['decision_point'],
-                (int) $value['decision_number'],
-                (int) $value['number'],
-            );
+        // Prepare reappointments and discharges.
+        foreach (['reappointments', 'discharges'] as $subDecisionType) {
+            $subDecisions = [];
+            array_walk($decision[$subDecisionType], function ($value) use (&$subDecisions): void {
+                $decision = $this->getOrganMapper()->findInstallationDecision(
+                    MeetingTypes::from($value['meeting_type']),
+                    intval($value['meeting_number']),
+                    intval($value['decision_point']),
+                    intval($value['decision_number']),
+                    intval($value['number']),
+                );
 
-            if (null === $decision) {
-                return;
-            }
+                if (null === $decision) {
+                    return;
+                }
 
-            $discharges[] = $decision;
-        });
-
-        $decision['discharges'] = $discharges;
+                $subDecisions[] = $decision;
+            });
+            $decision[$subDecisionType] = $subDecisions;
+        }
 
         $decision = (new InstallHydrator())->hydrate($decision, new DecisionModel());
 
