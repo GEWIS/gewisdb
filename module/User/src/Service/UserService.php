@@ -76,9 +76,11 @@ class UserService
         }
 
         $data = $form->getData();
-        $password = $this->crypt->create($data['password']);
 
-        $user->setPassword($password);
+        if ($user->isLocal()) {
+            $password = $this->crypt->create($data['password']);
+            $user->setPassword($password);
+        }
 
         $this->mapper->persist($user);
 
@@ -117,6 +119,21 @@ class UserService
         if (!empty($this->config['ldap']['basedn'])) {
             $ldapAdapter = new LdapAdapter($this->getLdapConfig(), $data['login'], $data['password']);
             $result = $this->authService->authenticate($ldapAdapter);
+            if (!$result->isValid()) {
+                return $result->isValid();
+            }
+
+            // For compatibility reasons, we set a real user
+            $adapter = $this->authService->getAdapter();
+            // Assert that a user exists
+            $this->mapper->findOrCreateByLogin($this->authService->getIdentity());
+            $adapter->setIdentity($this->authService->getIdentity());
+            $adapter->setCredential('');
+            $adapter->getOptions()
+                ->setCredentialCallable(static function ($identity, $credential) {
+                    return true;
+                });
+            $this->authService->authenticate();
         } else {
             $adapter = $this->authService->getAdapter();
             $adapter->setIdentity($data['login']);

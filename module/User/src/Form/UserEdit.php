@@ -13,6 +13,8 @@ use Laminas\Validator\StringLength;
 
 class UserEdit extends Form implements InputFilterProviderInterface
 {
+    private bool $passwordNeeded = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -49,7 +51,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
     {
         return [
             'password' => [
-                'required' => true,
+                'required' => $this->passwordNeeded,
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -60,7 +62,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
                 ],
             ],
             'password_verify' => [
-                'required' => true,
+                'required' => $this->passwordNeeded,
                 'validators' => [
                     [
                         'name' => Identical::class,
@@ -71,5 +73,18 @@ class UserEdit extends Form implements InputFilterProviderInterface
                 ],
             ],
         ];
+    }
+
+    public function bind(
+        object $object,
+        int $flags = Form::VALUES_NORMALIZED,
+    ): void {
+        if ($object->isLocal()) {
+            return;
+        }
+
+        $this->passwordNeeded = false;
+        $this->get('password')->setAttribute('disabled', true);
+        $this->get('password_verify')->setAttribute('disabled', true);
     }
 }

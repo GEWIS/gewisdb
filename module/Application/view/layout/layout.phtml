@@ -106,13 +106,9 @@ $(document).ready(function() {
                         <?php if (null !== ($identity = $this->identity())): ?>
                             <?php
                             if ($identity instanceof User) {
-                                $name = $identity->getLogin();
+                                $name = $identity->getName();
                             } else {
-                                if (1 === preg_match('/^((?:a|m)(?:[0-9]{4,5}))@GEWISWG\.GEWIS\.NL$/', $identity, $matches)) {
-                                    $name = $matches[1];
-                                } else {
-                                    $name = $this->translate('User');
-                                }
+                                $name = $this->translate('User');
                             }
                             ?>
                             <li class="dropdown pull-right">
