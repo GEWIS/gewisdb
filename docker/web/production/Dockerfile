@@ -5,7 +5,7 @@ WORKDIR /code
 RUN apk add --no-cache --virtual .runtime-deps \
         gettext
 
-COPY ./module/Application/language/*.po .
+COPY ./module/Application/language/*.po ./
 
 RUN msgfmt en.po -o en -c --strict -v \
     && msgfmt nl.po -o nl -c --strict -v
