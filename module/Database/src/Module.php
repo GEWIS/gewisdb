@@ -42,6 +42,7 @@ use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
 use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
+use Database\Form\OrganRegulation as RegulationForm;
 use Database\Form\Other as OtherForm;
 use Database\Form\Query as QueryForm;
 use Database\Form\QueryExport as QueryExportForm;
@@ -56,6 +57,7 @@ use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
 use Database\Hydrator\Key\Grant as KeyGrantHydrator;
 use Database\Hydrator\Key\Withdraw as KeyWithdrawHydrator;
+use Database\Hydrator\OrganRegulation as RegulationHydrator;
 use Database\Hydrator\Other as OtherHydrator;
 use Database\Hydrator\Strategy\AddressHydratorStrategy;
 use Database\Hydrator\Strategy\MeetingHydratorStrategy;
@@ -129,6 +131,7 @@ class Module
                 AbolishHydrator::class => AbolishHydrator::class,
                 BudgetHydrator::class => BudgetHydrator::class,
                 DestroyHydrator::class => DestroyHydrator::class,
+                RegulationHydrator::class => RegulationHydrator::class,
                 FoundationHydrator::class => FoundationHydrator::class,
                 InstallHydrator::class => InstallHydrator::class,
                 OtherHydrator::class => OtherHydrator::class,
@@ -277,6 +280,16 @@ class Module
                         $container->get(DecisionFieldset::class),
                     );
                     $form->setHydrator($container->get(DestroyHydrator::class));
+
+                    return $form;
+                },
+                RegulationForm::class => static function (ContainerInterface $container) {
+                    $form = new RegulationForm(
+                        $container->get(MvcTranslator::class),
+                        $container->get(MeetingFieldset::class),
+                        $container->get(MemberFieldset::class),
+                    );
+                    $form->setHydrator($container->get(RegulationHydrator::class));
 
                     return $form;
                 },

@@ -18,6 +18,7 @@ use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
 use Database\Form\Key\Grant as KeyGrantForm;
 use Database\Form\Key\Withdraw as KeyWithdrawForm;
+use Database\Form\OrganRegulation as RegulationForm;
 use Database\Form\Other as OtherForm;
 use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
@@ -52,6 +53,7 @@ class Meeting
         private readonly InstallForm $installForm,
         private readonly KeyGrantForm $keyGrantForm,
         private readonly KeyWithdrawForm $keyWithdrawForm,
+        private readonly RegulationForm $regulationForm,
         private readonly OtherForm $otherForm,
         private readonly MeetingMapper $meetingMapper,
         private readonly MemberMapper $memberMapper,
@@ -749,6 +751,57 @@ class Meeting
     }
 
     /**
+     * Organ regulation decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: RegulationForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    public function regulationDecision(array $data): array
+    {
+        $form = $this->getRegulationForm();
+
+        // use hack to make sure we do not have validators for these fields
+        $approveChain = $form->getInputFilter()->get('approve')->getValidatorChain();
+        $refObj = new ReflectionObject($approveChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setValue($approveChain, new PriorityQueue());
+
+        $changesChain = $form->getInputFilter()->get('changes')->getValidatorChain();
+        $refObj = new ReflectionObject($changesChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setValue($changesChain, new PriorityQueue());
+
+        $form->setData($data);
+
+        $form->bind(new DecisionModel());
+
+        if (!$form->isValid()) {
+            return [
+                'type' => 'organ_regulation',
+                'form' => $form,
+            ];
+        }
+
+        /** @var DecisionModel $decision */
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+
+        return [
+            'type' => 'organ_regulation',
+            'decision' => $decision,
+        ];
+    }
+
+    /**
      * Create a meeting.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
@@ -882,6 +935,14 @@ class Meeting
     public function getDestroyForm(): DestroyForm
     {
         return $this->destroyForm;
+    }
+
+    /**
+     * Get regulation form.
+     */
+    public function getRegulationForm(): RegulationForm
+    {
+        return $this->regulationForm;
     }
 
     /**

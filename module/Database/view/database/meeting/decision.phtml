@@ -15,6 +15,8 @@ use Laminas\View\Renderer\PhpRenderer;
 <?= $meeting->getNumber() ?>.<?= $point ?>.<?= $decision ?>
 </h1>
 
+
+
 <ul class="nav nav-tabs nav-justified" id="decision-tabs">
     <li class="active"><a href="#begroting" data-toggle="tab"><?= $this->translate('Budget/Statement') ?></a></li>
     <li><a href="#organ" data-toggle="tab"><?= $this->translate('Organ Mutations') ?></a></li>
@@ -32,13 +34,19 @@ use Laminas\View\Renderer\PhpRenderer;
     </div>
     <div class="tab-pane" id="organ">
         <ul class="nav nav-tabs nav-tabs-inverted">
-            <li class="active"><a href="#oprichting" data-toggle="tab"><?= $this->translate('Foundation') ?></a></li>
+            <li class="active"><a href="#reglement" data-toggle="tab"><?= $this->translate('OrganRegulation') ?></a></li>
+            <li><a href="#oprichting" data-toggle="tab"><?= $this->translate('Foundation') ?></a></li>
             <li><a href="#opheffing" data-toggle="tab"><?= $this->translate('Abolition') ?></a></li>
             <li><a href="#installatie" data-toggle="tab"><?= $this->translate('Installation/Discharge') ?></a></li>
         </ul>
         <br />
         <div class="tab-content">
-            <div class="tab-pane active" id="oprichting">
+            <div class="tab-pane active" id="reglement">
+                <?= $this->partial('database/meeting/regulationform', array(
+                    'form' => $forms['organ_regulation']
+                )); ?>
+            </div>
+            <div class="tab-pane" id="oprichting">
                 <?= $this->partial('database/meeting/foundationform', array(
                     'form' => $forms['foundation']
                 )); ?>

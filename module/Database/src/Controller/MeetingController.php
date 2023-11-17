@@ -133,6 +133,7 @@ class MeetingController extends AbstractActionController
     ): array {
         $forms = [
             'budget' => $this->meetingService->getBudgetForm(),
+            'organ_regulation' => $this->meetingService->getRegulationForm(),
             'foundation' => $this->meetingService->getFoundationForm(),
             'abolish' => $this->meetingService->getAbolishForm(),
             'destroy' => $this->meetingService->getDestroyForm(),
@@ -164,6 +165,9 @@ class MeetingController extends AbstractActionController
         return match ($this->params()->fromRoute('form')) {
             'budget' => new ViewModel(
                 $this->meetingService->budgetDecision($this->getRequest()->getPost()->toArray()),
+            ),
+            'organ_regulation' => new ViewModel(
+                $this->meetingService->regulationDecision($this->getRequest()->getPost()->toArray()),
             ),
             'foundation' => new ViewModel(
                 $this->meetingService->foundationDecision($this->getRequest()->getPost()->toArray()),

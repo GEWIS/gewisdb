@@ -17,6 +17,7 @@ use Database\Model\SubDecision\FoundationReference;
 use Database\Model\SubDecision\Installation;
 use Database\Model\SubDecision\Key\Granting as KeyGranting;
 use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
+use Database\Model\SubDecision\OrganRegulation;
 use Database\Model\SubDecision\Other;
 use Database\Model\SubDecision\Reappointment;
 use Database\Model\SubDecision\Reckoning;
@@ -40,6 +41,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 )]
 #[DiscriminatorMap(
     value: [
+        'organ_regulation' => OrganRegulation::class,
         'foundation' => Foundation::class,
         'abrogation' => Abrogation::class,
         'installation' => Installation::class,
