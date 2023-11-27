@@ -32,10 +32,6 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
                 'value_options' => [
                     'committee' => $this->translator->translate('Committee'),
                     'fraternity' => $this->translator->translate('Fraternity'),
-                    'avc' => $this->translator->translate('GMM Committee'),
-                    'avw' => $this->translator->translate('GMM Taskforce'),
-                    'kcc' => $this->translator->translate('Financial Audit Committee'),
-                    'rva' => $this->translator->translate('Advisory Board'),
                 ],
             ],
         ]);

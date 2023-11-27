@@ -187,7 +187,7 @@
   </component>
   <component name="PhpInterpreters">
     <interpreters>
-      <interpreter id="b6502dad-7c78-4cdb-b177-76e9f54dbca6" name="abc-db.docker-registry.gewis.nl/gewisdb_web:development" home="docker://DATA" false="false" debugger_id="php.debugger.XDebug">
+      <interpreter id="b6502dad-7c78-4cdb-b177-76e9f54dbca6" name="abc-db.docker-registry.gewis.nl/gewisdb_web:development" home="docker://DATA" auto="false" debugger_id="php.debugger.XDebug">
         <remote_data INTERPRETER_PATH="php" HELPERS_PATH="/opt/.phpstorm_helpers" VALID="true" RUN_AS_ROOT_VIA_SUDO="false" DOCKER_ACCOUNT_NAME="Docker" DOCKER_IMAGE_NAME="abc-db.docker-registry.gewis.nl/gewisdb_web:development" DOCKER_REMOTE_PROJECT_PATH="/opt/project" />
       </interpreter>
     </interpreters>
@@ -255,7 +255,7 @@
       </interpreter>
     </phpInfoCache>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />

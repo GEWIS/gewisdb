@@ -90,6 +90,14 @@ class OrganRegulation extends SubDecision
     }
 
     /**
+     * Get the type.
+     */
+    public function getOrganType(): OrganTypes
+    {
+        return $this->organType;
+    }
+
+    /**
      * Set the organ type
      */
     public function setOrganType(OrganTypes $organType): void
@@ -190,6 +198,12 @@ class OrganRegulation extends SubDecision
             $template = str_replace('%AUTHOR%', $this->getAuthor()->getFullName(), $template);
         }
 
+        if (OrganTypes::Committee === $this->getOrganType()) {
+            $template = str_replace('%TYPE%', 'commissie', $template);
+        } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
+            $template = str_replace('%TYPE%', 'dispuuts', $template);
+        }
+
         $template = str_replace('%VERSION%', $this->getVersion(), $template);
         $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
         if ($this->getApproval()) {
@@ -222,7 +236,7 @@ class OrganRegulation extends SubDecision
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
             null,
-            'd MMMM Y',
+            'd MMMM y',
         );
 
         return $formatter->format($date);
@@ -233,6 +247,6 @@ class OrganRegulation extends SubDecision
      */
     protected function getTemplate(): string
     {
-        return 'Het commissiereglement %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+        return 'Het %TYPE%reglement van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
     }
 }
