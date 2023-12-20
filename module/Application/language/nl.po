@@ -380,7 +380,7 @@ msgid "Controller"
 msgstr "Controller"
 
 msgid "Copy Decision"
-msgstr "Kopieer Besluit"
+msgstr "Besluit kopiëren"
 
 msgid "Create API principal"
 msgstr "Maak API-gebruiker aan"
