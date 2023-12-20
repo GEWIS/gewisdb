@@ -9,6 +9,8 @@ use Checker\Command\CheckMembershipExpirationCommand;
 use Checker\Command\CheckMembershipGraduateRenewalCommand;
 use Checker\Command\CheckMembershipTUeCommand;
 use Checker\Command\CheckMembershipTypeCommand;
+use Checker\Command\SendBirthdayMailCommand;
+
 
 return [
     'laminas-cli' => [
@@ -20,6 +22,7 @@ return [
             'check:membership:renewal:graduate' => CheckMembershipGraduateRenewalCommand::class,
             'check:membership:tue' => CheckMembershipTUeCommand::class,
             'check:membership:type' => CheckMembershipTypeCommand::class,
+            'send:birthday:mail:command' => SendBirthdayMailCommand::class,
         ],
     ],
     'view_manager' => [

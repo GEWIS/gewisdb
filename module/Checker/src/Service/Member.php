@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Checker\Service;
 
-use Checker\Mapper\Member as MemberMapper;
+use Checker\Mapper\Member as  MemberMapper;
 use Database\Model\Member as DatabaseMemberModel;
 
 class Member

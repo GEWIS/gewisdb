@@ -2,8 +2,7 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="LongLine" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="PhpCSFixerValidationInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="PhpCSValidationInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+    <inspection_tool class="PhpCSValidationInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false">
       <option name="CODING_STANDARD" value="PSR12" />
       <option name="SHOW_SNIFF_NAMES" value="true" />
       <option name="EXTENSIONS" value="php" />
@@ -19,7 +18,7 @@
     <inspection_tool class="PhpUnused" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="SUPPRESS_GETTERS_AND_SETTERS" value="true" />
     </inspection_tool>
-    <inspection_tool class="PsalmGlobal" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+    <inspection_tool class="PsalmGlobal" enabled="false" level="WEAK WARNING" enabled_by_default="false">
       <option name="config" value="$PROJECT_DIR$/psalm.xml" />
     </inspection_tool>
   </profile>

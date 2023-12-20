@@ -7,6 +7,7 @@ namespace Database\Controller;
 use Application\Model\Enums\AddressTypes;
 use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
+use Database\Mapper\Member as MemberMapper;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
@@ -28,6 +29,7 @@ class MemberController extends AbstractActionController
 {
     public function __construct(
         private readonly Translator $translator,
+        private readonly MemberMapper $memberMapper,
         private readonly CheckerService $checkerService,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
@@ -253,7 +255,7 @@ class MemberController extends AbstractActionController
                 return $this->notFoundAction();
             }
         }
-
+        var_dump($this->memberService->getMemberMapper()->getCurrentBirthdays());
         if ($member->getDeleted()) {
             return $this->memberIsDeleted($member);
         }

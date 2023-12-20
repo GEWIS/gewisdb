@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSQLDriver;
 use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
+use Database\Extensions\Doctrine\DayOfMonth;
+use Database\Extensions\Doctrine\Month;
 
 return [
     'doctrine' => [
@@ -99,7 +101,7 @@ return [
                 // Custom DQL functions.
                 // You can grab common MySQL ones at https://github.com/beberlei/DoctrineExtensions
                 // Further docs at http://docs.doctrine-project.org/en/latest/cookbook/dql-user-defined-functions.html
-                'datetime_functions' => [],
+                'datetime_functions' => ['MONTH' => Month::class, 'DAYOFMONTH' => DayOfMonth::class],
                 'string_functions' => [],
                 'numeric_functions' => [],
 
@@ -145,7 +147,7 @@ return [
                 // Custom DQL functions.
                 // You can grab common MySQL ones at https://github.com/beberlei/DoctrineExtensions
                 // Further docs at http://docs.doctrine-project.org/en/latest/cookbook/dql-user-defined-functions.html
-                'datetime_functions' => [],
+                'datetime_functions' => ['MONTH' => Month::class, 'DAYOFMONTH' => DayOfMonth::class],
                 'string_functions' => [],
                 'numeric_functions' => [],
 

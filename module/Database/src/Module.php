@@ -515,7 +515,8 @@ class Module
                 // and aliases don't work with abstract factories
                 'database_doctrine_em' => static function (ContainerInterface $container) {
                     return $container->get('doctrine.entitymanager.orm_default');
-                },
+                }
+
             ],
             'shared' => [
                 // every form should get a different meeting fieldset

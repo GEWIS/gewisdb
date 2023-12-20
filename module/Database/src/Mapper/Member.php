@@ -16,6 +16,7 @@ use Database\Model\SubDecision\Reckoning as ReckoningModel;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Database\Extensions\Doctrine\Month;
 
 use function count;
 use function filter_var;
@@ -332,6 +333,31 @@ class Member
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
+
+    /**
+     * Get a list of members whose birthday it is on the current day.
+     *
+     *  When $days equals 0 or isn't given, it will give all birthdays of today.
+     *  We do not show members whose membership has expired or who are hidden
+     *
+     * @return MemberModel[]
+     */
+    public function getCurrentBirthdays(): array
+    {
+
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->select('m')
+            ->where('MONTH(m.birth) = MONTH(CURRENT_DATE()) AND
+                DAYOFMONTH(m.birth) = DAYOFMONTH(CURRENT_DATE())'
+            )
+            ->andWhere('m.deleted = False')
+            ->andWhere('m.expiration > CURRENT_TIMESTAMP()')
+            ->andWhere('m.hidden = False');
+
+
+        return $qb->getQuery()->getResult();
+    }
+
 
     /**
      * Persist a member model.
