@@ -91,6 +91,9 @@ use Database\Model\Meeting;
         )) ?>" class="btn btn-danger">
             <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete Decision') ?>
         </a>
+        <button onclick="copyDecision(this)" class="btn btn-success" value="<?= $this->escapeHtml($decision->getContent()) ?>">
+            <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
+        </button>
         <ul>
         <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
             <li><?= $this->escapeHtml($subdecision->getContent()) ?></li>
@@ -98,6 +101,12 @@ use Database\Model\Meeting;
         </ul>
     </li>
 <?php endforeach; ?>
+<script>
+    function copyDecision(decision) {
+        navigator.clipboard.writeText(decision.value);
+    }
+</script>
+
 </ul>
 <?php else: ?>
     <?= $this->translate('This meeting has no decisions (yet).') ?>

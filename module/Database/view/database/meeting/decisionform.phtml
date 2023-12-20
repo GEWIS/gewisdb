@@ -75,6 +75,10 @@ $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . 
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
     <?= $this->escapeHtml($subdecision->getContent()) ?>
 <?php endforeach; ?>
+
+<button onclick="copyDecision()" class="btn btn-success">
+    <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
+</button>
 <br />
     <a href="<?= $this->url(
         'meeting/view',
@@ -91,4 +95,10 @@ $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . 
             )
         ?>
     </a>
+    <script>
+        var decisionCopy = "<?= $decision->getContent() ?>";
+        function copyDecision() {
+            navigator.clipboard.writeText(decisionCopy);
+        }
+    </script>
 <?php endif; ?>
