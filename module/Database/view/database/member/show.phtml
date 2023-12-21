@@ -196,6 +196,9 @@ use Laminas\View\Renderer\PhpRenderer;
         <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add Mail Address') ?>
     </a>
 <?php endif ?>
+</div>
+
+<div class="col-md-6">
 <h3><?= $this->translate('Mailing List Subscriptions') ?></h3>
 <ul>
 <?php foreach ($member->getLists() as $list): ?>
@@ -205,5 +208,30 @@ use Laminas\View\Renderer\PhpRenderer;
 <a href="<?= $this->url('member/show/edit/lists', array(
     'id' => $member->getLidnr()
 )) ?>" class="btn btn-primary"><?= $this->translate('Change Mailing List Subscriptions') ?></a>
+</div>
+
+<div class="col-md-6">
+<h3><?= $this->translate('Notes') ?></h3>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 20%;">Date</th>
+            <th scope="col" style="width: 65%;">Entry</th>
+            <th scope="col" style="width: 15%;">User</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($member->getAuditEntries() as $entry): ?>
+            <tr>
+                <td><?= $entry->getUpdated()->format('j M Y H:i') ?></td>
+                <td><?= sprintf($this->translate($entry->getStringPlain()['bodyFormatted']), ... $entry->getStringPlain()['arguments']) ?></td>
+                <td><?= $entry->getUser()->getName() ?></td>
+            </tr>
+        <?php endforeach;
+        if (0 === count($member->getAuditEntries())): ?>
+            <tr><td colspan="3"><?= $this->translate('There are no notes for this member.') ?></td></tr>
+        <?php endif; ?>
+    </tbody>
+</table>
 </div>
 </div>

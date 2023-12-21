@@ -14,7 +14,7 @@ use function preg_match;
 use function str_contains;
 
 /**
- * Member model.
+ * User model.
  */
 #[Entity]
 #[Table(name: 'users')]
@@ -38,7 +38,7 @@ class User
         type: 'string',
         nullable: true,
     )]
-    protected ?string $password;
+    protected ?string $password = null;
 
     /**
      * @psalm-ignore-nullable-return

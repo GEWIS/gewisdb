@@ -13,9 +13,36 @@ use Doctrine\ORM\Mapping\Entity;
 #[Entity]
 class AuditNote extends AuditEntry
 {
+    /** @psalm-suppress InvalidClassConstantType */
+    protected bool $IMMUTABLE = false;
+
     /**
-     * When this entry was created
+     * The note itself
      */
     #[Column(type: 'string')]
     protected string $note;
+
+    public function getNote(): string
+    {
+        return $this->note;
+    }
+
+    /**
+     * Get a textual representation of this audit entry
+     */
+    protected function getStringBodyFormatted(): string
+    {
+        return '<strong>Note</strong> on <emph>%s</emph>: <br/>%s';
+    }
+
+    /**
+     * @return array<string>
+     */
+    protected function getStringArguments(): array
+    {
+        return [
+            $this->getMember()->getFullName(),
+            $this->getNote(),
+        ];
+    }
 }

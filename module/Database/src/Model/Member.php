@@ -245,6 +245,21 @@ class Member
     )]
     protected Collection $renewalLinks;
 
+    /**
+     * Audit entries (e.g. notes) of this member.
+     *
+     * @var Collection<array-key, AuditEntry>
+     */
+    #[OneToMany(
+        targetEntity: AuditEntry::class,
+        mappedBy: 'member',
+        cascade: ['persist', 'remove'],
+    )]
+    protected Collection $auditEntries;
+
+    /**
+     * A multiple-use authentication key which can be used in linked systems to verify updates
+     */
     #[Column(
         type: 'string',
         nullable: true,
@@ -620,6 +635,16 @@ class Member
     public function getInstallations(): Collection
     {
         return $this->installations;
+    }
+
+    /**
+     * Get audit entries related to this member.
+     *
+     * @return Collection<array-key, AuditEntry>
+     */
+    public function getAuditEntries(): Collection
+    {
+        return $this->auditEntries;
     }
 
     public function getAuthenticationKey(): ?string
