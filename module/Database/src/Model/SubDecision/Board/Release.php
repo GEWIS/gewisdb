@@ -118,7 +118,7 @@ class Release extends SubDecision
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
             null,
-            'd MMMM Y',
+            'd MMMM y',
         );
 
         return $formatter->format($date);
