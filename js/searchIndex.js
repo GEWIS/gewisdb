@@ -7071,11 +7071,6 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020member.",
             "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_getMember"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003AsetMember\u0028\u0029",
-            "name": "setMember",
-            "summary": "Set\u0020the\u0020member.",
-            "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_setMember"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetDate\u0028\u0029",
             "name": "getDate",
             "summary": "Get\u0020the\u0020date.",
@@ -7100,11 +7095,6 @@ Search.appendIndex(
             "name": "function",
             "summary": "Function\u0020in\u0020the\u0020board.",
             "url": "classes/Database-Model-SubDecision-Board-Installation.html#property_function"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024member",
-            "name": "member",
-            "summary": "Member.",
-            "url": "classes/Database-Model-SubDecision-Board-Installation.html#property_member"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024date",
             "name": "date",
@@ -7171,16 +7161,6 @@ Search.appendIndex(
             "summary": "SubDecision\u0020model.",
             "url": "classes/Database-Model-SubDecision-Budget.html"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetAuthor\u0028\u0029",
-            "name": "getAuthor",
-            "summary": "Get\u0020the\u0020author.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getAuthor"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AsetAuthor\u0028\u0029",
-            "name": "setAuthor",
-            "summary": "Set\u0020the\u0020author.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_setAuthor"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "Get\u0020the\u0020name.",
@@ -7245,11 +7225,6 @@ Search.appendIndex(
             "name": "getTemplate",
             "summary": "Decision\u0020template",
             "url": "classes/Database-Model-SubDecision-Budget.html#method_getTemplate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024author",
-            "name": "author",
-            "summary": "Budget\u0020author.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#property_author"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024name",
             "name": "name",
@@ -7446,11 +7421,6 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020member.",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getMember"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AsetMember\u0028\u0029",
-            "name": "setMember",
-            "summary": "Set\u0020the\u0020member.",
-            "url": "classes/Database-Model-SubDecision-Installation.html#method_setMember"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetReappointments\u0028\u0029",
             "name": "getReappointments",
             "summary": "Get\u0020the\u0020reappointments,\u0020if\u0020they\u0020exist.",
@@ -7471,11 +7441,6 @@ Search.appendIndex(
             "summary": "Function\u0020given.",
             "url": "classes/Database-Model-SubDecision-Installation.html#property_function"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A\u0024member",
-            "name": "member",
-            "summary": "Member.",
-            "url": "classes/Database-Model-SubDecision-Installation.html#property_member"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A\u0024reappointments",
             "name": "reappointments",
             "summary": "Reappointment\u0020subdecisions\u0020if\u0020this\u0020installation\u0020was\u0020prolonged\u0020\u0028can\u0020be\u0020done\u0020multiple\u0020times\u0029.",
@@ -7490,16 +7455,6 @@ Search.appendIndex(
             "name": "Granting",
             "summary": "SubDecision\u0020model.",
             "url": "classes/Database-Model-SubDecision-Key-Granting.html"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetGrantee\u0028\u0029",
-            "name": "getGrantee",
-            "summary": "Get\u0020the\u0020grantee.",
-            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getGrantee"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AsetGrantee\u0028\u0029",
-            "name": "setGrantee",
-            "summary": "Set\u0020the\u0020grantee.",
-            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_setGrantee"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetUntil\u0028\u0029",
             "name": "getUntil",
@@ -7525,11 +7480,6 @@ Search.appendIndex(
             "name": "getTemplate",
             "summary": "Decision\u0020template.",
             "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getTemplate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024grantee",
-            "name": "grantee",
-            "summary": "The\u0020member\u0020who\u0020is\u0020granted\u0020a\u0020keycode\u0020of\u0020GEWIS.",
-            "url": "classes/Database-Model-SubDecision-Key-Granting.html#property_grantee"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024until",
             "name": "until",
@@ -7686,10 +7636,20 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#method_getNumber"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-SubDecision.html#method_getMember"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AsetNumber\u0028\u0029",
             "name": "setNumber",
             "summary": "Set\u0020the\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#method_setNumber"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "Set\u0020the\u0020member.",
+            "url": "classes/Database-Model-SubDecision.html#method_setMember"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
@@ -7725,6 +7685,11 @@ Search.appendIndex(
             "name": "number",
             "summary": "Sub\u0020decision\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#property_number"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "The\u0020member\u0020involved\u0020in\u0020this\u0020sub\u002Ddecision.",
+            "url": "classes/Database-Model-SubDecision.html#property_member"
         },                {
             "fqsen": "\\Database\\Module",
             "name": "Module",
@@ -10316,11 +10281,6 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020member.",
             "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_getMember"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AsetMember\u0028\u0029",
-            "name": "setMember",
-            "summary": "Set\u0020the\u0020member.",
-            "url": "classes/Report-Model-SubDecision-Board-Installation.html#method_setMember"
-        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetDate\u0028\u0029",
             "name": "getDate",
             "summary": "Get\u0020the\u0020date.",
@@ -10360,11 +10320,6 @@ Search.appendIndex(
             "name": "function",
             "summary": "Function\u0020in\u0020the\u0020board.",
             "url": "classes/Report-Model-SubDecision-Board-Installation.html#property_function"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024member",
-            "name": "member",
-            "summary": "Member.",
-            "url": "classes/Report-Model-SubDecision-Board-Installation.html#property_member"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024date",
             "name": "date",
@@ -10426,16 +10381,6 @@ Search.appendIndex(
             "summary": "Budget\u0020decision.",
             "url": "classes/Report-Model-SubDecision-Budget.html"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AgetAuthor\u0028\u0029",
-            "name": "getAuthor",
-            "summary": "Get\u0020the\u0020author.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_getAuthor"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AsetAuthor\u0028\u0029",
-            "name": "setAuthor",
-            "summary": "Set\u0020the\u0020author.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_setAuthor"
-        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "Get\u0020the\u0020name.",
@@ -10485,11 +10430,6 @@ Search.appendIndex(
             "name": "setChanges",
             "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
             "url": "classes/Report-Model-SubDecision-Budget.html#method_setChanges"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003A\u0024author",
-            "name": "author",
-            "summary": "Budget\u0020author.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#property_author"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003A\u0024name",
             "name": "name",
@@ -10716,11 +10656,6 @@ Search.appendIndex(
             "summary": "Function\u0020given.",
             "url": "classes/Report-Model-SubDecision-Installation.html#property_function"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003A\u0024member",
-            "name": "member",
-            "summary": "Member.",
-            "url": "classes/Report-Model-SubDecision-Installation.html#property_member"
-        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Installation\u003A\u003A\u0024reappointments",
             "name": "reappointments",
             "summary": "Reappointment\u0020subdecisions\u0020if\u0020this\u0020installation\u0020was\u0020prolonged\u0020\u0028can\u0020be\u0020done\u0020multiple\u0020times\u0029.",
@@ -10740,16 +10675,6 @@ Search.appendIndex(
             "name": "Granting",
             "summary": "SubDecision\u0020model.",
             "url": "classes/Report-Model-SubDecision-Key-Granting.html"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetGrantee\u0028\u0029",
-            "name": "getGrantee",
-            "summary": "Get\u0020the\u0020grantee.",
-            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_getGrantee"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AsetGrantee\u0028\u0029",
-            "name": "setGrantee",
-            "summary": "Set\u0020the\u0020grantee.",
-            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_setGrantee"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetUntil\u0028\u0029",
             "name": "getUntil",
@@ -10775,11 +10700,6 @@ Search.appendIndex(
             "name": "getKeyholder",
             "summary": "Get\u0020the\u0020keyholder\u0020decision.",
             "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_getKeyholder"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024grantee",
-            "name": "grantee",
-            "summary": "The\u0020member\u0020who\u0020is\u0020granted\u0020a\u0020keycode\u0020of\u0020GEWIS.",
-            "url": "classes/Report-Model-SubDecision-Key-Granting.html#property_grantee"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024until",
             "name": "until",
@@ -10906,6 +10826,16 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020number.",
             "url": "classes/Report-Model-SubDecision.html#method_setNumber"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-SubDecision.html#method_getMember"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "Set\u0020the\u0020member.",
+            "url": "classes/Report-Model-SubDecision.html#method_setMember"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
             "summary": "Get\u0020the\u0020content.",
@@ -10950,6 +10880,11 @@ Search.appendIndex(
             "name": "content",
             "summary": "Content.",
             "url": "classes/Report-Model-SubDecision.html#property_content"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "The\u0020member\u0020involved\u0020in\u0020this\u0020sub\u002Ddecision.",
+            "url": "classes/Report-Model-SubDecision.html#property_member"
         },                {
             "fqsen": "\\Report\\Module",
             "name": "Module",
