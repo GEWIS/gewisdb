@@ -17,7 +17,7 @@ foreach ($grants as $key => $grant) {
         'decision_number' => $grant->getDecision()->getNumber(),
         'subdecision_number' => $grant->getNumber(),
         'granting_until' => $grant->getUntil()->format('Y-m-d'),
-        'granting_member_lidnr' => $grant->getGrantee()->getLidnr(),
+        'granting_member_lidnr' => $grant->getMember()->getLidnr(),
     );
 }
 ?>
@@ -85,7 +85,7 @@ $fsgm = $fsg->get('member');
             <div class="radio">
                 <label>
                     <input type="radio" name="key-withdraw-slot" class="key-withdraw-slot" value="<?= $key ?>">
-                    <?= $grant->getGrantee()->getFullName() ?> (<?= $grant->getUntil()->format('Y-m-d') ?>)<br>
+                    <?= $grant->getMember()->getFullName() ?> (<?= $grant->getUntil()->format('Y-m-d') ?>)<br>
                 </label>
             </div>
         <?php endforeach ?>
