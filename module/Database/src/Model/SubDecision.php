@@ -133,6 +133,20 @@ abstract class SubDecision
     protected int $number;
 
     /**
+     * The member involved in this sub-decision.
+     *
+     * Not all sub-decisions require this, as such it is nullable. However, sub-decisions that need the guarantee that
+     * this is not null or need to specify an inverse side can do so using an association override.
+     */
+    #[ManyToOne(targetEntity: Member::class)]
+    #[JoinColumn(
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
+        nullable: true,
+    )]
+    protected ?Member $member = null;
+
+    /**
      * Get the decision.
      */
     public function getDecision(): Decision
@@ -194,11 +208,27 @@ abstract class SubDecision
     }
 
     /**
+     * Get the member.
+     */
+    public function getMember(): ?Member
+    {
+        return $this->member;
+    }
+
+    /**
      * Set the number.
      */
     public function setNumber(int $number): void
     {
         $this->number = $number;
+    }
+
+    /**
+     * Set the member.
+     */
+    public function setMember(Member $member): void
+    {
+        $this->member = $member;
     }
 
     /**

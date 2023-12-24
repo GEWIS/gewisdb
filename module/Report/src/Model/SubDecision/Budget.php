@@ -7,9 +7,6 @@ namespace Report\Model\SubDecision;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Report\Model\Member;
 use Report\Model\SubDecision;
 
 /**
@@ -18,17 +15,6 @@ use Report\Model\SubDecision;
 #[Entity]
 class Budget extends SubDecision
 {
-    /**
-     * Budget author.
-     */
-    #[ManyToOne(targetEntity: Member::class)]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-        nullable: true,
-    )]
-    protected ?Member $author = null;
-
     /**
      * Name of the budget.
      */
@@ -61,22 +47,6 @@ class Budget extends SubDecision
      */
     #[Column(type: 'boolean')]
     protected bool $changes;
-
-    /**
-     * Get the author.
-     */
-    public function getAuthor(): ?Member
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set the author.
-     */
-    public function setAuthor(Member $author): void
-    {
-        $this->author = $author;
-    }
 
     /**
      * Get the name.

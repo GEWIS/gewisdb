@@ -7,10 +7,11 @@ namespace Database\Model\SubDecision\Board;
 use Database\Model\Member;
 use Database\Model\SubDecision;
 use DateTime;
+use Doctrine\ORM\Mapping\AssociationOverride;
+use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToOne;
 use IntlDateFormatter;
 
@@ -20,6 +21,16 @@ use function date_default_timezone_get;
  * Installation as board member.
  */
 #[Entity]
+#[AssociationOverrides([
+    new AssociationOverride(
+        name: 'member',
+        joinColumns: new JoinColumn(
+            name: 'lidnr',
+            referencedColumnName: 'lidnr',
+            nullable: false,
+        ),
+    ),
+])]
 class Installation extends SubDecision
 {
     /**
@@ -27,22 +38,6 @@ class Installation extends SubDecision
      */
     #[Column(type: 'string')]
     protected string $function;
-
-    /**
-     * Member.
-     *
-     * Note that only members that are older than 18 years can be board members.
-     * Also, honorary members cannot be board members.
-     * (See the Statuten, Art. 13A Lid 2.
-     *
-     * @todo Inversed relation
-     */
-    #[ManyToOne(targetEntity: Member::class)]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-    )]
-    protected Member $member;
 
     /**
      * The date at which the installation is in effect.
@@ -86,18 +81,12 @@ class Installation extends SubDecision
 
     /**
      * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
      */
     public function getMember(): Member
     {
         return $this->member;
-    }
-
-    /**
-     * Set the member.
-     */
-    public function setMember(Member $member): void
-    {
-        $this->member = $member;
     }
 
     /**
