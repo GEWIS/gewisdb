@@ -6,10 +6,11 @@ namespace Report\Model\SubDecision;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\AssociationOverride;
+use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Report\Model\Member;
@@ -19,6 +20,17 @@ use Report\Model\OrganMember;
  * Installation into organ.
  */
 #[Entity]
+#[AssociationOverrides([
+    new AssociationOverride(
+        name: 'member',
+        joinColumns: new JoinColumn(
+            name: 'lidnr',
+            referencedColumnName: 'lidnr',
+            nullable: false,
+        ),
+        inversedBy: 'installations',
+    ),
+])]
 class Installation extends FoundationReference
 {
     /**
@@ -26,19 +38,6 @@ class Installation extends FoundationReference
      */
     #[Column(type: 'string')]
     protected string $function;
-
-    /**
-     * Member.
-     */
-    #[ManyToOne(
-        targetEntity: Member::class,
-        inversedBy: 'installations',
-    )]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-    )]
-    protected Member $member;
 
     /**
      * Reappointment subdecisions if this installation was prolonged (can be done multiple times).
@@ -92,6 +91,8 @@ class Installation extends FoundationReference
 
     /**
      * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
      */
     public function getMember(): Member
     {

@@ -230,8 +230,8 @@ class Meeting
             || $subdecision instanceof DatabaseSubDecisionModel\Budget
         ) {
             // budget and reckoning
-            if (null !== $subdecision->getAuthor()) {
-                $reportSubDecision->setAuthor($this->findMember($subdecision->getAuthor()));
+            if (null !== $subdecision->getMember()) {
+                $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
 
             $reportSubDecision->setName($subdecision->getName());
@@ -270,7 +270,7 @@ class Meeting
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Key\Granting) {
             // key code granting
-            $reportSubDecision->setGrantee($this->findMember($subdecision->getGrantee()));
+            $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             $reportSubDecision->setUntil($subdecision->getUntil());
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Key\Withdrawal) {
             // key code withdrawal

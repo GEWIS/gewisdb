@@ -70,7 +70,7 @@ class Keyholder
             $keyholder->setGrantingDec($granting);
         }
 
-        $keyholder->setMember($granting->getGrantee());
+        $keyholder->setMember($granting->getMember());
         $keyholder->setExpirationDate($granting->getUntil());
 
         $this->emReport->persist($keyholder);

@@ -36,7 +36,7 @@ class KeyGrantedLongerThanOneYear extends Error
     {
         return sprintf(
             'Key code granted to %s has an expiration of %s, this is longer than the 1 year.',
-            $this->getGranting()->getGrantee()->getFullName(),
+            $this->getGranting()->getMember()->getFullName(),
             $this->getGranting()->getUntil()->format('Y-m-d'),
         );
     }
