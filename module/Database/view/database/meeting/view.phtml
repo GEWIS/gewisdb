@@ -103,7 +103,15 @@ use Database\Model\Meeting;
 <?php endforeach; ?>
 <script>
     function copyDecision(decision) {
-        navigator.clipboard.writeText(decision.value);
+        navigator.clipboard.writeText(decision.value).then(
+            () => {
+                // Clipboard succeeded
+            },
+            () => {
+                // Clipboard failed
+                console.log("Copying the decision has failed, please try again.");
+            }
+        );
     }
 </script>
 
