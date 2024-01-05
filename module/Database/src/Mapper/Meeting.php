@@ -35,6 +35,36 @@ class Meeting
     }
 
     /**
+     * Search for a meeting.
+     *
+     * @return MeetingModel[]
+     */
+    public function searchMeeting(
+        string $query,
+    ): array {
+        $qb = $this->em->createQueryBuilder();
+
+        $fields = [];
+        $fields[] = 'LOWER(m.type)';
+        $fields[] = "' '";
+        $fields[] = 'm.number';
+        $fields[] = "' '";
+        $fields = implode(', ', $fields);
+        $fields = 'CONCAT(' . $fields . ')';
+
+        $qb->select('m')
+            ->from(MeetingModel::class, 'm')
+            ->where($fields . ' LIKE :search')
+            ->andWhere('CONCAT(m.number, \'\') NOT LIKE :searchClean')
+            ->orderBy('m.date');
+
+        $qb->setParameter(':search', '%' . strtolower($query) . '%');
+        $qb->setParameter(':searchClean', '%_' . strtolower($query));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Find all meetings. Also counts all decision per meeting.
      *
      * @return array<array-key, array{0: MeetingModel, 1: int}>
