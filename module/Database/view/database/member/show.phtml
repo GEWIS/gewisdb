@@ -223,14 +223,39 @@ use Laminas\View\Renderer\PhpRenderer;
         <tbody>
         <?php foreach ($member->getAuditEntries() as $entry): ?>
             <tr>
-                <td><?= $entry->getUpdated()->format('j M Y H:i') ?></td>
+                <td><?= $entry->getUpdatedAt()->format('j M Y H:i') ?></td>
                 <td><?= sprintf($this->translate($entry->getStringPlain()['bodyFormatted']), ... $entry->getStringPlain()['arguments']) ?></td>
-                <td><?= $entry->getUser()->getName() ?></td>
+                <td><?= $entry->getUserName() ?></td>
             </tr>
         <?php endforeach;
         if (0 === count($member->getAuditEntries())): ?>
             <tr><td colspan="3"><?= $this->translate('There are no notes for this member.') ?></td></tr>
         <?php endif; ?>
+        <tr>
+            <?php 
+                $noteForm->prepare();
+                $noteForm->setAttribute('method', 'post');
+                $noteForm->setAttribute('role', 'form');
+                $noteForm->setAttribute('class', 'form-vertical');
+
+                $submit = $noteForm->get('submit');
+                $submit->setAttribute('class', 'btn btn-success');
+                $submit->setAttribute('value', 'new-auditentry');
+
+                $noteElement = $noteForm->get('note');
+                $noteElement->setAttribute('class', 'form-control');
+                $noteElement->setAttribute('placeholder', $noteElement->getLabel());
+            ?>
+            <?= $this->form()->openTag($noteForm) ?>
+            <td colspan="2">
+                <?= $this->formInput($noteElement) ?>
+                <?= $this->formElementErrors($noteElement) ?>
+            </td>
+            <td>
+                <?= $this->formButton($submit) ?>
+            </td>
+            <?= $this->form()->closeTag() ?>
+        </tr>
     </tbody>
 </table>
 </div>

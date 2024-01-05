@@ -154,6 +154,16 @@ class UserService
     }
 
     /**
+     * Get the current user entity as it is stored in the database.
+     */
+    public function getIdentity(): ?UserModel
+    {
+        $identity = $this->authService->getIdentity();
+
+        return $this->find($identity?->getId());
+    }
+
+    /**
      * Get all users.
      *
      * @return UserModel[]

@@ -20,11 +20,16 @@ class AuditNote extends AuditEntry
      * The note itself
      */
     #[Column(type: 'string')]
-    protected string $note;
+    protected ?string $note = null;
 
-    public function getNote(): string
+    public function getNote(): ?string
     {
         return $this->note;
+    }
+
+    public function setNote(string $note): void
+    {
+        $this->note = $note;
     }
 
     /**
@@ -36,7 +41,7 @@ class AuditNote extends AuditEntry
     }
 
     /**
-     * @return array<string>
+     * @return array<?string>
      */
     protected function getStringArguments(): array
     {

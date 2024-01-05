@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
-use DateTime;
+use Database\Model\Trait\CreatedTrait;
+use Database\Model\Trait\UpdatedTrait;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToOne;
+use LogicException;
+use UnexpectedValueException;
 use User\Model\User;
 
 use function strip_tags;
@@ -23,6 +27,7 @@ use function strip_tags;
  * Abstract audit log entry, can take different types
  */
 #[Entity]
+#[HasLifecycleCallbacks]
 #[InheritanceType('SINGLE_TABLE')]
 #[DiscriminatorColumn(
     name: 'type',
@@ -35,6 +40,9 @@ use function strip_tags;
 )]
 abstract class AuditEntry
 {
+    use CreatedTrait;
+    use UpdatedTrait;
+
     /**
      * TODO PHP8.3: make this a typed constant so we can change the value later
      */
@@ -46,24 +54,19 @@ abstract class AuditEntry
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected int $id;
-
-    /**
-     * When this entry was created
-     */
-    #[Column(type: 'datetime')]
-    protected DateTime $created;
+    protected ?int $id = null;
 
     /**
      * The user who created the entry
      */
     #[OneToOne(targetEntity: User::class)]
     #[JoinColumn(
-        name: 'user',
+        name: 'user_id',
         referencedColumnName: 'id',
-        nullable: false,
+        onDelete: 'set null',
+        nullable: true,
     )]
-    protected User $user;
+    protected ?User $user = null;
 
     /**
      * If this entry is linked to a member, the member who this entry is linked to
@@ -78,26 +81,64 @@ abstract class AuditEntry
         onDelete: 'cascade',
         nullable: true,
     )]
-    protected ?Member $member;
+    protected ?Member $member = null;
 
-    public function getCreated(): DateTime
+    public function getId(): ?int
     {
-        return $this->created;
+        return $this->id;
     }
 
-    public function getUpdated(): DateTime
+    public function setId(int $id): void
     {
-        return $this->created;
+        $this->id = $id;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
+    }
+
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
+    }
+
+    public function getUserName(): string
+    {
+        if (null === $this->user) {
+            return '';
+        }
+
+        return $this->user->getName();
     }
 
     public function getMember(): ?Member
     {
         return $this->member;
+    }
+
+    public function setMember(Member $member): void
+    {
+        if (null !== $this->member) {
+            throw new LogicException('Must not link an audit entry to another object after creation');
+        }
+
+        $this->member = $member;
+    }
+
+    /**
+     * It is not possible to require a link always when constructing the model, but we want
+     * to always link at least one of the linkable objects. Currently only member is possible
+     */
+    public function assertValid(): void
+    {
+        if (null === $this->member) {
+            throw new UnexpectedValueException(
+                'Asserting that object of type ' .
+                $this::class .
+                ' is linked to at least one object.',
+            );
+        }
     }
 
     /**

@@ -58,6 +58,7 @@
         <exclude-pattern>module/Database/src/Controller/Factory/QueryControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/ActionLinkFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/AuditFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/CheckoutSessionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>

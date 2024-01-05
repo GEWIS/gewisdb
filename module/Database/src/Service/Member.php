@@ -11,6 +11,7 @@ use Checker\Model\Exception\LookupException;
 use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
 use Database\Form\Address as AddressForm;
+use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
@@ -20,11 +21,13 @@ use Database\Form\MemberLists as MemberListsForm;
 use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
 use Database\Mapper\ActionLink as ActionLinkMapper;
+use Database\Mapper\Audit as AuditMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
 use Database\Model\Address as AddressModel;
+use Database\Model\AuditNote as AuditNoteModel;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\MemberUpdate as MemberUpdateModel;
@@ -43,6 +46,7 @@ use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
 use ReflectionClass;
 use RuntimeException;
+use User\Service\UserService;
 
 use function bin2hex;
 use function count;
@@ -58,6 +62,7 @@ class Member
     public function __construct(
         private readonly Translator $translator,
         private readonly AddressForm $addressForm,
+        private readonly AuditNoteForm $auditNoteForm,
         private readonly DeleteAddressForm $deleteAddressForm,
         private readonly MemberApproveForm $memberApproveForm,
         private readonly MemberForm $memberForm,
@@ -67,12 +72,14 @@ class Member
         private readonly MemberTypeForm $memberTypeForm,
         private readonly MailingListMapper $mailingListMapper,
         private readonly ActionLinkMapper $actionLinkMapper,
+        private readonly AuditMapper $auditMapper,
         private readonly MemberMapper $memberMapper,
         private readonly MemberUpdateMapper $memberUpdateMapper,
         private readonly ProspectiveMemberMapper $prospectiveMemberMapper,
         private readonly CheckerService $checkerService,
         private readonly FileStorageService $fileStorageService,
         private readonly MailingListService $mailingListService,
+        private readonly UserService $userService,
         private readonly PhpRenderer $viewRenderer,
         private readonly TransportInterface $mailTransport,
         private readonly array $config,
@@ -913,6 +920,27 @@ class Member
     }
 
     /**
+     * Add audit note to a member.
+     */
+    public function addAuditNote(
+        MemberModel $member,
+        AuditNoteForm $form,
+    ): ?AuditNoteModel {
+        if (!$form->isValid()) {
+            return null;
+        }
+
+        /** @var AuditNoteModel $auditNote */
+        $auditNote = $form->getData();
+        $auditNote->setMember($member);
+        $auditNote->setUser($this->userService->getIdentity());
+
+        $this->getAuditMapper()->persist($auditNote);
+
+        return $auditNote;
+    }
+
+    /**
      * @return array{
      *     members: int,
      *     expired: int,
@@ -1086,6 +1114,14 @@ class Member
     }
 
     /**
+     * Get the audit note form.
+     */
+    public function getAuditNoteForm(MemberModel $member): AuditNoteForm
+    {
+        return $this->auditNoteForm;
+    }
+
+    /**
      * Get the delete address form.
      */
     public function getDeleteAddressForm(): DeleteAddressForm
@@ -1099,6 +1135,14 @@ class Member
     public function getMemberForm(): MemberForm
     {
         return $this->memberForm;
+    }
+
+    /**
+     * Get the audit mapper.
+     */
+    public function getAuditMapper(): AuditMapper
+    {
+        return $this->auditMapper;
     }
 
     /**
