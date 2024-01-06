@@ -104,17 +104,10 @@ $(document).ready(function() {
                             </ul>
                         </li>
                         <?php if (null !== ($identity = $this->identity())): ?>
-                            <?php
-                            if ($identity instanceof User) {
-                                $name = $identity->getName();
-                            } else {
-                                $name = $this->translate('User');
-                            }
-                            ?>
                             <li class="dropdown pull-right">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">
-                                    <?= $this->escapeHtml($name) ?>
+                                    <?= $this->escapeHtml($identity->getName()) ?>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
