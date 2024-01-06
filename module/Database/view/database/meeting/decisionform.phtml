@@ -21,6 +21,11 @@ case 'foundation':
         'form' => $form
     ));
     break;
+case 'organ_regulation':
+    echo $this->partial('database/meeting/regulationform', array(
+        'form' => $form
+    ));
+    break;
 case 'destroy':
     echo $this->partial('database/meeting/destroyform', array(
         'form' => $form

@@ -9,7 +9,7 @@ use Laminas\View\Renderer\PhpRenderer;
 ?>
 <script>
 $(document).ready(function () {
-    $('#budget-author').autocomplete({
+    $('#regulation-author').autocomplete({
             minLength: 2, // at least two chars before request
             delay: 0, // no delay before request
             source: function (rq, response) {
@@ -45,10 +45,12 @@ $(document).ready(function () {
 $form = $this->form;
 $form->prepare();
 
-$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'budget')));
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'organ_regulation')));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
+//$form->setAttribute('id', 'regulation-form');
+
 
 echo $this->form()->openTag($form);
 ?>
@@ -63,12 +65,10 @@ $fs = $form->get('meeting')
 
 <div class="form-group">
 <?php
-$element = $form->get('type');
-$element->setAttribute('class', 'form-control');
-
-?>
-    <?= $this->formLabel($element) ?>
-    <?= $this->formSelect($element) ?>
+    $element = $form->get('type');
+    $element->setLabelAttributes(array('class' => 'radio-inline'));
+    ?>
+    <?= $this->formRadio($element) ?>
     <?= $this->formElementErrors($element) ?>
 </div>
 
@@ -87,7 +87,7 @@ $element->setAttribute('placeholder', $this->translate('Name'));
 <?php
 $element = $form->get('date');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $this->translate('Date of Budget/Statement'));
+$element->setAttribute('placeholder', $this->translate('Date of Organ Regulation'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -101,7 +101,7 @@ $fs = $form->get('author');
 <?php
 $el = $fs->get('name');
 $el->setAttribute('class', 'form-control member-autocomplete');
-$el->setAttribute('id', 'budget-author');
+$el->setAttribute('id', 'regulation-author');
 $el->setAttribute('placeholder', $el->getLabel());
 ?>
     <?= $this->formLabel($fs) ?>
@@ -149,6 +149,7 @@ $element->setLabelAttributes(array('class' => 'radio-inline'));
 $submit = $form->get('submit');
 $submit->setLabel('Submit');
 $submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('id', 'regulation-submit');
 ?>
 <?= $this->formButton($submit) ?>
 

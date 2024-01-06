@@ -228,6 +228,7 @@ class Meeting
         } elseif (
             $subdecision instanceof DatabaseSubDecisionModel\Reckoning
             || $subdecision instanceof DatabaseSubDecisionModel\Budget
+            || $subdecision instanceof DatabaseSubDecisionModel\OrganRegulation
         ) {
             // budget and reckoning
             if (null !== $subdecision->getMember()) {
@@ -239,6 +240,11 @@ class Meeting
             $reportSubDecision->setDate($subdecision->getDate());
             $reportSubDecision->setApproval($subdecision->getApproval());
             $reportSubDecision->setChanges($subdecision->getChanges());
+
+            // Specific to the `OrganRegulation`s, set the type of organ
+            if ($subdecision instanceof DatabaseSubDecisionModel\OrganRegulation) {
+                $reportSubDecision->setOrganType($subdecision->getOrganType());
+            }
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Board\Installation) {
             // board installation
             $reportSubDecision->setFunction($subdecision->getFunction());

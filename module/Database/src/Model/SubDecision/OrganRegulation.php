@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\OrganTypes;
 use Database\Model\SubDecision;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
@@ -14,16 +15,25 @@ use function date_default_timezone_get;
 use function str_replace;
 
 #[Entity]
-class Budget extends SubDecision
+class OrganRegulation extends SubDecision
 {
     /**
-     * Name of the budget.
+     * Name of the organ.
      */
     #[Column(type: 'string')]
     protected string $name;
 
     /**
-     * Version of the budget.
+     * Type of the organ.
+     */
+    #[Column(
+        type: 'string',
+        enumType: OrganTypes::class,
+    )]
+    protected OrganTypes $organType;
+
+    /**
+     * Version of the regulation.
      */
     #[Column(
         type: 'string',
@@ -32,13 +42,13 @@ class Budget extends SubDecision
     protected string $version;
 
     /**
-     * Date of the budget.
+     * Date of the regulation.
      */
     #[Column(type: 'date')]
     protected DateTime $date;
 
     /**
-     * If the budget was approved.
+     * If the regulation was approved.
      */
     #[Column(type: 'boolean')]
     protected bool $approval;
@@ -48,6 +58,22 @@ class Budget extends SubDecision
      */
     #[Column(type: 'boolean')]
     protected bool $changes;
+
+    /**
+     * Get the type.
+     */
+    public function getOrganType(): OrganTypes
+    {
+        return $this->organType;
+    }
+
+    /**
+     * Set the organ type
+     */
+    public function setOrganType(OrganTypes $organType): void
+    {
+        $this->organType = $organType;
+    }
 
     /**
      * Get the name.
@@ -143,6 +169,12 @@ class Budget extends SubDecision
             $template = str_replace('%AUTHOR%', $this->getMember()->getFullName(), $template);
         }
 
+        if (OrganTypes::Committee === $this->getOrganType()) {
+            $template = str_replace('%TYPE%', 'commissie', $template);
+        } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
+            $template = str_replace('%TYPE%', 'dispuuts', $template);
+        }
+
         $template = str_replace('%VERSION%', $this->getVersion(), $template);
         $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
 
@@ -188,6 +220,6 @@ class Budget extends SubDecision
      */
     protected function getTemplate(): string
     {
-        return 'De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+        return 'Het %TYPE%reglement van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
     }
 }

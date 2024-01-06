@@ -25,6 +25,7 @@ use Report\Model\SubDecision\FoundationReference;
 use Report\Model\SubDecision\Installation;
 use Report\Model\SubDecision\Key\Granting as KeyGranting;
 use Report\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
+use Report\Model\SubDecision\OrganRegulation;
 use Report\Model\SubDecision\Other;
 use Report\Model\SubDecision\Reappointment;
 use Report\Model\SubDecision\Reckoning;
@@ -40,6 +41,7 @@ use Report\Model\SubDecision\Reckoning;
 )]
 #[DiscriminatorMap(
     value: [
+        'organ_regulation' => OrganRegulation::class,
         'foundation' => Foundation::class,
         'abrogation' => Abrogation::class,
         'installation' => Installation::class,
