@@ -75,7 +75,7 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
             'name' => 'date',
             'type' => Date::class,
             'options' => [
-                'label' => $this->translator->translate('Date of Organ OrganRegulation'),
+                'label' => $this->translator->translate('Date of Organ Regulation'),
             ],
         ]);
 
@@ -119,7 +119,7 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => $this->translator->translate('Add OrganRegulation'),
+                'value' => $this->translator->translate('Add Organ Regulation'),
             ],
         ]);
     }

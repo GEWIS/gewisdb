@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 14:01+0200\n"
+"POT-Creation-Date: 2024-01-06 20:04+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Tom Udding <tomudding@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 msgid "# Decisions"
 msgstr "# Decisions"
@@ -121,6 +121,9 @@ msgstr "Add New Mailing List"
 
 msgid "Add New Meeting"
 msgstr "Add New Meeting"
+
+msgid "Add Organ Regulation"
+msgstr "Add Organ Regulation"
 
 msgid "Add Student Address"
 msgstr "Add Student Address"
@@ -413,6 +416,9 @@ msgstr "Date of Budget/Statement"
 msgid "Date of Expiration"
 msgstr "Date of Expiration"
 
+msgid "Date of Organ Regulation"
+msgstr "Date of Organ Regulation"
+
 msgid "Decision"
 msgstr "Decision"
 
@@ -477,6 +483,14 @@ msgstr "Discharges"
 
 msgid "Do you want to delete the other data?"
 msgstr "Do you want to delete the other data?"
+
+#, php-format
+msgid ""
+"Do you want to reappoint %s? Check functions you also want reappointed, "
+"functions that are not selected will result in a discharge of that function."
+msgstr ""
+"Do you want to reappoint %s? Check functions you also want reappointed, "
+"functions that are not selected will result in a discharge of that function."
 
 msgid "Dutch Description"
 msgstr "Dutch Description"
@@ -571,12 +585,14 @@ msgstr "GEWIS Registration - Checkout"
 #, php-format
 msgid ""
 "GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members</a>. <a href=\"%s\">Click here</a> to "
-"create a meeting or <a href=\"%s\">perform a query</a>."
+"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
+"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
+"query</a>."
 msgstr ""
 "GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members</a>. <a href=\"%s\">Click here</a> to "
-"create a meeting or <a href=\"%s\">perform a query</a>."
+"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
+"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
+"query</a>."
 
 msgid "GMM (General Members Meeting)"
 msgstr "GMM (General Members Meeting)"
@@ -711,6 +727,14 @@ msgstr ""
 "in an email when you enrolled. Go to <a href=\"%s\">this page</a> if you "
 "need help finding it. Your username will be used to verify you are studying "
 "at the department of M&CS."
+
+#, php-format
+msgid ""
+"If your browser does not redirect you, please <a href=\"%s\">click here</a> "
+"to continue."
+msgstr ""
+"If your browser does not redirect you, please <a href=\"%s\">click here</a> "
+"to continue."
 
 msgid "Initial(s)"
 msgstr "Initial(s)"
@@ -891,6 +915,12 @@ msgstr "Organ"
 msgid "Organ Mutations"
 msgstr "Organ Mutations"
 
+msgid "Organ Regulation"
+msgstr "Organ Regulation"
+
+msgid "Organ regulations can only be created for 'committee' or 'fraternity'."
+msgstr "Organ regulations can only be created for 'committee' or 'fraternity'."
+
 msgid "Other"
 msgstr "Other"
 
@@ -975,6 +1005,15 @@ msgstr "Query Result"
 
 msgid "Read organ membership (per user/organ)"
 msgstr "Read organ membership (per user/organ)"
+
+msgid "Reappoint"
+msgstr "Reappoint"
+
+msgid "Reappoint Member"
+msgstr "Reappoint Member"
+
+msgid "Reappointments"
+msgstr "Reappointments"
 
 msgid "Register Member"
 msgstr "Register Member"
@@ -1341,6 +1380,10 @@ msgid "Yes"
 msgstr "Yes"
 
 #, php-format
+msgid "You are being redirected to %s"
+msgstr "You are being redirected to %s"
+
+#, php-format
 msgid ""
 "You are using a build based on commit <a target=\"_blank\" href=\"https://"
 "github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
@@ -1392,6 +1435,9 @@ msgstr "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 
 msgid "as"
 msgstr "as"
+
+msgid "our payment provider"
+msgstr "our payment provider"
 
 msgid "reads as follows:"
 msgstr "reads as follows:"
