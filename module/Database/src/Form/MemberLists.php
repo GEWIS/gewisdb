@@ -15,7 +15,7 @@ use Laminas\Mvc\I18n\Translator;
 /**
  * @template TFilteredValues
  *
- * @extends Form<TFilteredValues>
+ * @extends Form<array<string,string>>
  */
 class MemberLists extends Form implements InputFilterProviderInterface
 {

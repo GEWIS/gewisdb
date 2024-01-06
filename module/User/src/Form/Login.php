@@ -15,7 +15,10 @@ use Laminas\Validator\StringLength;
 /**
  * @template TFilteredValues
  *
- * @extends Form<TFilteredValues>
+ * @extends Form<array{
+ *  'login': string,
+ *  'password': string,
+ * }>
  */
 class Login extends Form implements InputFilterProviderInterface
 {

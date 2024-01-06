@@ -40,7 +40,7 @@ class TueData
      *         last?: string,
      *     },
      *     mail?: string,
-     *     registrations?: array<array-key, array{study: string, generation: int, dept: string}>,
+     *     registrations: array<array-key, array{study: string, generation: int, dept: string}>,
      *     sAMAccountName?: string,
      *     lastupdated?: ?string,
      * }|null

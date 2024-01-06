@@ -20,7 +20,11 @@ use function in_array;
 /**
  * @template TFilteredValues
  *
- * @extends Form<TFilteredValues>
+ * @extends Form<array{
+ *  'description': string,
+ *  'token': string,
+ *  'permissions': array<array-key,enum-string<ApiPermissions>>,
+ * }>
  */
 class ApiPrincipal extends Form implements InputFilterProviderInterface
 {

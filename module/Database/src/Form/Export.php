@@ -16,7 +16,9 @@ use function strtoupper;
 /**
  * @template TFilteredValues
  *
- * @extends Form<TFilteredValues>
+ * @extends Form<array{
+ *     meetings: string[],
+ * }>
  */
 class Export extends Form implements InputFilterProviderInterface
 {
