@@ -13,6 +13,11 @@ use Laminas\Mvc\I18n\Translator;
 
 use function strtoupper;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class Export extends Form implements InputFilterProviderInterface
 {
     public function __construct(

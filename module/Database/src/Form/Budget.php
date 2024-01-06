@@ -17,6 +17,11 @@ use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\InArray;
 use Laminas\Validator\StringLength;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends AbstractDecision<TFilteredValues>
+ */
 class Budget extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

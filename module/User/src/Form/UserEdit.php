@@ -11,6 +11,11 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Identical;
 use Laminas\Validator\StringLength;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class UserEdit extends Form implements InputFilterProviderInterface
 {
     private bool $passwordNeeded = true;

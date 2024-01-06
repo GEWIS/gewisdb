@@ -12,6 +12,11 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class Login extends Form implements InputFilterProviderInterface
 {
     public function __construct()
