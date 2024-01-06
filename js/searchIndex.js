@@ -3806,6 +3806,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-Address.html#property_translator"
         },                {
+            "fqsen": "\\Database\\Form\\AuditEntry\\AuditNote",
+            "name": "AuditNote",
+            "summary": "",
+            "url": "classes/Database-Form-AuditEntry-AuditNote.html"
+        },                {
+            "fqsen": "\\Database\\Form\\AuditEntry\\AuditNote\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-AuditEntry-AuditNote.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\AuditEntry\\AuditNote\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "Specification\u0020of\u0020input\u0020filter.",
+            "url": "classes/Database-Form-AuditEntry-AuditNote.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\AuditEntry\\AuditNote\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-AuditEntry-AuditNote.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\Board\\Discharge",
             "name": "Discharge",
             "summary": "",
@@ -4616,6 +4636,21 @@ Search.appendIndex(
             "summary": "Extraction.",
             "url": "classes/Database-Hydrator-AbstractDecision.html#method_extract"
         },                {
+            "fqsen": "\\Database\\Hydrator\\AuditEntry",
+            "name": "AuditEntry",
+            "summary": "",
+            "url": "classes/Database-Hydrator-AuditEntry.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\AuditEntry\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Decision\u0020hydration",
+            "url": "classes/Database-Hydrator-AuditEntry.html#method_hydrate"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\AuditEntry\u003A\u003Aextract\u0028\u0029",
+            "name": "extract",
+            "summary": "Extraction.",
+            "url": "classes/Database-Hydrator-AuditEntry.html#method_extract"
+        },                {
             "fqsen": "\\Database\\Hydrator\\Board\\Discharge",
             "name": "Discharge",
             "summary": "",
@@ -4831,6 +4866,36 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Mapper-ActionLink.html#property_em"
         },                {
+            "fqsen": "\\Database\\Mapper\\Audit",
+            "name": "Audit",
+            "summary": "",
+            "url": "classes/Database-Mapper-Audit.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Audit\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Mapper-Audit.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Audit\u003A\u003Apersist\u0028\u0029",
+            "name": "persist",
+            "summary": "Persist\u0020an\u0020audit\u0020entry",
+            "url": "classes/Database-Mapper-Audit.html#method_persist"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Audit\u003A\u003Aremove\u0028\u0029",
+            "name": "remove",
+            "summary": "Remove\u0020a\u0020member.",
+            "url": "classes/Database-Mapper-Audit.html#method_remove"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Audit\u003A\u003AgetRepository\u0028\u0029",
+            "name": "getRepository",
+            "summary": "Get\u0020the\u0020repository\u0020for\u0020this\u0020mapper.",
+            "url": "classes/Database-Mapper-Audit.html#method_getRepository"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Audit\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Database-Mapper-Audit.html#property_em"
+        },                {
             "fqsen": "\\Database\\Mapper\\CheckoutSession",
             "name": "CheckoutSession",
             "summary": "",
@@ -4875,6 +4940,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Database-Mapper-Factory-ActionLinkFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\AuditFactory",
+            "name": "AuditFactory",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-AuditFactory.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\AuditFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-AuditFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Mapper\\Factory\\CheckoutSessionFactory",
             "name": "CheckoutSessionFactory",
@@ -5575,6 +5650,136 @@ Search.appendIndex(
             "name": "phone",
             "summary": "Phone\u0020number.",
             "url": "classes/Database-Model-Address.html#property_phone"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry",
+            "name": "AuditEntry",
+            "summary": "Abstract\u0020audit\u0020log\u0020entry,\u0020can\u0020take\u0020different\u0020types",
+            "url": "classes/Database-Model-AuditEntry.html"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_getId"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_setId"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetUser\u0028\u0029",
+            "name": "getUser",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_getUser"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AsetUser\u0028\u0029",
+            "name": "setUser",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_setUser"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetUserName\u0028\u0029",
+            "name": "getUserName",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_getUserName"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_getMember"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_setMember"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AassertValid\u0028\u0029",
+            "name": "assertValid",
+            "summary": "It\u0020is\u0020not\u0020possible\u0020to\u0020require\u0020a\u0020link\u0020always\u0020when\u0020constructing\u0020the\u0020model,\u0020but\u0020we\u0020want\nto\u0020always\u0020link\u0020at\u0020least\u0020one\u0020of\u0020the\u0020linkable\u0020objects.\u0020Currently\u0020only\u0020member\u0020is\u0020possible",
+            "url": "classes/Database-Model-AuditEntry.html#method_assertValid"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetStringPlain\u0028\u0029",
+            "name": "getStringPlain",
+            "summary": "Get\u0020a\u0020textual\u0020representation\u0020of\u0020this\u0020audit\u0020entry\nThe\u0020first\u0020element\u0020is\u0020to\u0020be\u0020the\u0020body\u0020which\u0020after\u0020translation\u0020can\u0020be\nsupplied\u0020as\u0020an\u0020argument\u0020to\u0020sprintf",
+            "url": "classes/Database-Model-AuditEntry.html#method_getStringPlain"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AisEditable\u0028\u0029",
+            "name": "isEditable",
+            "summary": "Whether\u0020this\u0020entry\u0020type\u0020can\u0020be\u0020edited\nNot\u0020implemented",
+            "url": "classes/Database-Model-AuditEntry.html#method_isEditable"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AisDeletable\u0028\u0029",
+            "name": "isDeletable",
+            "summary": "Whether\u0020this\u0020entry\u0020type\u0020can\u0020be\u0020removed",
+            "url": "classes/Database-Model-AuditEntry.html#method_isDeletable"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetStringBodyPlain\u0028\u0029",
+            "name": "getStringBodyPlain",
+            "summary": "Get\u0020the\u0020string\u0020body,\u0020currently\u0020is\u0020constant\u0020for\u0020all\u0020types,\u0020but\u0020may\u0020change",
+            "url": "classes/Database-Model-AuditEntry.html#method_getStringBodyPlain"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetStringBodyFormatted\u0028\u0029",
+            "name": "getStringBodyFormatted",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_getStringBodyFormatted"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AgetStringArguments\u0028\u0029",
+            "name": "getStringArguments",
+            "summary": "",
+            "url": "classes/Database-Model-AuditEntry.html#method_getStringArguments"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003A\u0024IMMUTABLE",
+            "name": "IMMUTABLE",
+            "summary": "TODO\u0020PHP8.3\u003A\u0020make\u0020this\u0020a\u0020typed\u0020constant\u0020so\u0020we\u0020can\u0020change\u0020the\u0020value\u0020later",
+            "url": "classes/Database-Model-AuditEntry.html#property_IMMUTABLE"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "Entry\u0020ID.",
+            "url": "classes/Database-Model-AuditEntry.html#property_id"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "The\u0020user\u0020who\u0020created\u0020the\u0020entry",
+            "url": "classes/Database-Model-AuditEntry.html#property_user"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "If\u0020this\u0020entry\u0020is\u0020linked\u0020to\u0020a\u0020member,\u0020the\u0020member\u0020who\u0020this\u0020entry\u0020is\u0020linked\u0020to",
+            "url": "classes/Database-Model-AuditEntry.html#property_member"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditNote",
+            "name": "AuditNote",
+            "summary": "Class\u0020for\u0020registering\u0020manual\u0020notes",
+            "url": "classes/Database-Model-AuditNote.html"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003AgetNote\u0028\u0029",
+            "name": "getNote",
+            "summary": "",
+            "url": "classes/Database-Model-AuditNote.html#method_getNote"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003AsetNote\u0028\u0029",
+            "name": "setNote",
+            "summary": "",
+            "url": "classes/Database-Model-AuditNote.html#method_setNote"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003AgetStringBodyFormatted\u0028\u0029",
+            "name": "getStringBodyFormatted",
+            "summary": "Get\u0020a\u0020textual\u0020representation\u0020of\u0020this\u0020audit\u0020entry",
+            "url": "classes/Database-Model-AuditNote.html#method_getStringBodyFormatted"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003AgetStringArguments\u0028\u0029",
+            "name": "getStringArguments",
+            "summary": "",
+            "url": "classes/Database-Model-AuditNote.html#method_getStringArguments"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003A\u0024IMMUTABLE",
+            "name": "IMMUTABLE",
+            "summary": "TODO\u0020PHP8.3\u003A\u0020make\u0020this\u0020a\u0020typed\u0020constant\u0020so\u0020we\u0020can\u0020change\u0020the\u0020value\u0020later",
+            "url": "classes/Database-Model-AuditNote.html#property_IMMUTABLE"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003A\u0024note",
+            "name": "note",
+            "summary": "The\u0020note\u0020itself",
+            "url": "classes/Database-Model-AuditNote.html#property_note"
         },                {
             "fqsen": "\\Database\\Model\\CheckoutSession",
             "name": "CheckoutSession",
@@ -6311,6 +6516,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020installations.",
             "url": "classes/Database-Model-Member.html#method_getInstallations"
         },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetAuditEntries\u0028\u0029",
+            "name": "getAuditEntries",
+            "summary": "Get\u0020audit\u0020entries\u0020related\u0020to\u0020this\u0020member.",
+            "url": "classes/Database-Model-Member.html#method_getAuditEntries"
+        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AgetAuthenticationKey\u0028\u0029",
             "name": "getAuthenticationKey",
             "summary": "",
@@ -6501,9 +6711,14 @@ Search.appendIndex(
             "summary": "RenewalLinks\u0020of\u0020this\u0020member.",
             "url": "classes/Database-Model-Member.html#property_renewalLinks"
         },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024auditEntries",
+            "name": "auditEntries",
+            "summary": "Audit\u0020entries\u0020\u0028e.g.\u0020notes\u0029\u0020of\u0020this\u0020member.",
+            "url": "classes/Database-Model-Member.html#property_auditEntries"
+        },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024authenticationKey",
             "name": "authenticationKey",
-            "summary": "",
+            "summary": "A\u0020multiple\u002Duse\u0020authentication\u0020key\u0020which\u0020can\u0020be\u0020used\u0020in\u0020linked\u0020systems\u0020to\u0020verify\u0020updates",
             "url": "classes/Database-Model-Member.html#property_authenticationKey"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024deleted",
@@ -7836,6 +8051,46 @@ Search.appendIndex(
             "summary": "The\u0020member\u0020involved\u0020in\u0020this\u0020sub\u002Ddecision.",
             "url": "classes/Database-Model-SubDecision.html#property_member"
         },                {
+            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait",
+            "name": "CreatedTrait",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-CreatedTrait.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait\u003A\u003AgetCreatedAt\u0028\u0029",
+            "name": "getCreatedAt",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-CreatedTrait.html#method_getCreatedAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait\u003A\u003AsetCreatedAtValue\u0028\u0029",
+            "name": "setCreatedAtValue",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait\u003A\u003A\u0024createdAt",
+            "name": "createdAt",
+            "summary": "When\u0020this\u0020entry\u0020was\u0020created",
+            "url": "classes/Database-Model-Trait-CreatedTrait.html#property_createdAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait",
+            "name": "UpdatedTrait",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-UpdatedTrait.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait\u003A\u003AgetUpdatedAt\u0028\u0029",
+            "name": "getUpdatedAt",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-UpdatedTrait.html#method_getUpdatedAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait\u003A\u003AsetUpdatedAtValue\u0028\u0029",
+            "name": "setUpdatedAtValue",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait\u003A\u003A\u0024updatedAt",
+            "name": "updatedAt",
+            "summary": "When\u0020this\u0020entry\u0020was\u0020last\u0020updated",
+            "url": "classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt"
+        },                {
             "fqsen": "\\Database\\Module",
             "name": "Module",
             "summary": "",
@@ -8501,6 +8756,11 @@ Search.appendIndex(
             "summary": "Subscribe\u0020member\u0020to\u0020mailing\u0020lists.",
             "url": "classes/Database-Service-Member.html#method_subscribeLists"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AaddAuditNote\u0028\u0029",
+            "name": "addAuditNote",
+            "summary": "Add\u0020audit\u0020note\u0020to\u0020a\u0020member.",
+            "url": "classes/Database-Service-Member.html#method_addAuditNote"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetFrontpageData\u0028\u0029",
             "name": "getFrontpageData",
             "summary": "",
@@ -8561,6 +8821,11 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020address\u0020form.",
             "url": "classes/Database-Service-Member.html#method_getAddressForm"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetAuditNoteForm\u0028\u0029",
+            "name": "getAuditNoteForm",
+            "summary": "Get\u0020the\u0020audit\u0020note\u0020form.",
+            "url": "classes/Database-Service-Member.html#method_getAuditNoteForm"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetDeleteAddressForm\u0028\u0029",
             "name": "getDeleteAddressForm",
             "summary": "Get\u0020the\u0020delete\u0020address\u0020form.",
@@ -8570,6 +8835,11 @@ Search.appendIndex(
             "name": "getMemberForm",
             "summary": "Get\u0020the\u0020member\u0020form.",
             "url": "classes/Database-Service-Member.html#method_getMemberForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetAuditMapper\u0028\u0029",
+            "name": "getAuditMapper",
+            "summary": "Get\u0020the\u0020audit\u0020mapper.",
+            "url": "classes/Database-Service-Member.html#method_getAuditMapper"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetActionLinkMapper\u0028\u0029",
             "name": "getActionLinkMapper",
@@ -8626,6 +8896,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_addressForm"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024auditNoteForm",
+            "name": "auditNoteForm",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_auditNoteForm"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024deleteAddressForm",
             "name": "deleteAddressForm",
             "summary": "",
@@ -8671,6 +8946,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_actionLinkMapper"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024auditMapper",
+            "name": "auditMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_auditMapper"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024memberMapper",
             "name": "memberMapper",
             "summary": "",
@@ -8700,6 +8980,11 @@ Search.appendIndex(
             "name": "mailingListService",
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_mailingListService"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024userService",
+            "name": "userService",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_userService"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024viewRenderer",
             "name": "viewRenderer",
@@ -11741,6 +12026,16 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/User-Form-UserEdit.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\User\\Form\\UserEdit\u003A\u003Abind\u0028\u0029",
+            "name": "bind",
+            "summary": "",
+            "url": "classes/User-Form-UserEdit.html#method_bind"
+        },                {
+            "fqsen": "\\User\\Form\\UserEdit\u003A\u003A\u0024passwordNeeded",
+            "name": "passwordNeeded",
+            "summary": "",
+            "url": "classes/User-Form-UserEdit.html#property_passwordNeeded"
+        },                {
             "fqsen": "\\User\\Listener\\AuthenticationListener",
             "name": "AuthenticationListener",
             "summary": "",
@@ -11901,6 +12196,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Mapper-UserMapper.html#method_find"
         },                {
+            "fqsen": "\\User\\Mapper\\UserMapper\u003A\u003AfindByLogin\u0028\u0029",
+            "name": "findByLogin",
+            "summary": "",
+            "url": "classes/User-Mapper-UserMapper.html#method_findByLogin"
+        },                {
             "fqsen": "\\User\\Mapper\\UserMapper\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
             "summary": "",
@@ -11910,6 +12210,11 @@ Search.appendIndex(
             "name": "remove",
             "summary": "",
             "url": "classes/User-Mapper-UserMapper.html#method_remove"
+        },                {
+            "fqsen": "\\User\\Mapper\\UserMapper\u003A\u003AfindOrCreateByLogin\u0028\u0029",
+            "name": "findOrCreateByLogin",
+            "summary": "findByLogin,\u0020but\u0020always\u0020returns\u0020a\u0020user",
+            "url": "classes/User-Mapper-UserMapper.html#method_findOrCreateByLogin"
         },                {
             "fqsen": "\\User\\Mapper\\UserMapper\u003A\u003AgetRepository\u0028\u0029",
             "name": "getRepository",
@@ -12058,13 +12363,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\User\\Model\\User",
             "name": "User",
-            "summary": "Member\u0020model.",
+            "summary": "User\u0020model.",
             "url": "classes/User-Model-User.html"
         },                {
             "fqsen": "\\User\\Model\\User\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
             "summary": "",
             "url": "classes/User-Model-User.html#method_getId"
+        },                {
+            "fqsen": "\\User\\Model\\User\u003A\u003AisLocal\u0028\u0029",
+            "name": "isLocal",
+            "summary": "",
+            "url": "classes/User-Model-User.html#method_isLocal"
+        },                {
+            "fqsen": "\\User\\Model\\User\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "This\u0020is\u0020the\u0020human\u002Dreadable\u0020name\nMight\u0020be\u0020changed\u0020to\u0020firstname\u0020later",
+            "url": "classes/User-Model-User.html#method_getName"
         },                {
             "fqsen": "\\User\\Model\\User\u003A\u003AgetLogin\u0028\u0029",
             "name": "getLogin",
@@ -12270,6 +12585,11 @@ Search.appendIndex(
             "name": "logout",
             "summary": "Log\u0020a\u0020user\u0020out.",
             "url": "classes/User-Service-UserService.html#method_logout"
+        },                {
+            "fqsen": "\\User\\Service\\UserService\u003A\u003AgetIdentity\u0028\u0029",
+            "name": "getIdentity",
+            "summary": "Get\u0020the\u0020current\u0020user\u0020entity\u0020as\u0020it\u0020is\u0020stored\u0020in\u0020the\u0020database.",
+            "url": "classes/User-Service-UserService.html#method_getIdentity"
         },                {
             "fqsen": "\\User\\Service\\UserService\u003A\u003AfindAll\u0028\u0029",
             "name": "findAll",
@@ -12481,6 +12801,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/database-form.html"
         },                {
+            "fqsen": "\\Database\\Form\\AuditEntry",
+            "name": "AuditEntry",
+            "summary": "",
+            "url": "namespaces/database-form-auditentry.html"
+        },                {
             "fqsen": "\\Database\\Form\\Board",
             "name": "Board",
             "summary": "",
@@ -12550,6 +12875,11 @@ Search.appendIndex(
             "name": "Key",
             "summary": "",
             "url": "namespaces/database-model-subdecision-key.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait",
+            "name": "Trait",
+            "summary": "",
+            "url": "namespaces/database-model-trait.html"
         },                {
             "fqsen": "\\Database\\Service",
             "name": "Service",

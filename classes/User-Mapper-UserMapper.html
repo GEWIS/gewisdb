@@ -327,6 +327,19 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/User-Mapper-UserMapper.html#method_findByLogin">findByLogin()</a>
+    <span>
+                                &nbsp;: <a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>|null    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/User-Mapper-UserMapper.html#method_findOrCreateByLogin">findOrCreateByLogin()</a>
+    <span>
+                                &nbsp;: <a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>    </span>
+</dt>
+<dd>findByLogin, but always returns a user</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/User-Mapper-UserMapper.html#method_getRepository">getRepository()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\ORM\EntityRepository">EntityRepository</abbr>    </span>
@@ -526,6 +539,97 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_findByLogin">
+        findByLogin()
+        <a href="classes/User-Mapper-UserMapper.html#method_findByLogin" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Mapper/UserMapper.php"><a href="files/module-user-src-mapper-usermapper.html"><abbr title="module/User/src/Mapper/UserMapper.php">UserMapper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findByLogin</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$login</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$login</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findOrCreateByLogin">
+        findOrCreateByLogin()
+        <a href="classes/User-Mapper-UserMapper.html#method_findOrCreateByLogin" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Mapper/UserMapper.php"><a href="files/module-user-src-mapper-usermapper.html"><abbr title="module/User/src/Mapper/UserMapper.php">UserMapper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">50</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">findByLogin, but always returns a user</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findOrCreateByLogin</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$login</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$login</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getRepository">
         getRepository()
         <a href="classes/User-Mapper-UserMapper.html#method_getRepository" class="headerlink"><i class="fas fa-link"></i></a>
@@ -534,7 +638,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Mapper/UserMapper.php"><a href="files/module-user-src-mapper-usermapper.html"><abbr title="module/User/src/Mapper/UserMapper.php">UserMapper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
@@ -569,7 +673,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Mapper/UserMapper.php"><a href="files/module-user-src-mapper-usermapper.html"><abbr title="module/User/src/Mapper/UserMapper.php">UserMapper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -610,7 +714,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Mapper/UserMapper.php"><a href="files/module-user-src-mapper-usermapper.html"><abbr title="module/User/src/Mapper/UserMapper.php">UserMapper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -760,6 +864,8 @@
                                             <li><a href="classes/User-Mapper-UserMapper.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/User-Mapper-UserMapper.html#method_find">find()</a></li>
                                             <li><a href="classes/User-Mapper-UserMapper.html#method_findAll">findAll()</a></li>
+                                            <li><a href="classes/User-Mapper-UserMapper.html#method_findByLogin">findByLogin()</a></li>
+                                            <li><a href="classes/User-Mapper-UserMapper.html#method_findOrCreateByLogin">findOrCreateByLogin()</a></li>
                                             <li><a href="classes/User-Mapper-UserMapper.html#method_getRepository">getRepository()</a></li>
                                             <li><a href="classes/User-Mapper-UserMapper.html#method_persist">persist()</a></li>
                                             <li><a href="classes/User-Mapper-UserMapper.html#method_remove">remove()</a></li>
