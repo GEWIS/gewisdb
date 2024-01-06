@@ -42,7 +42,7 @@ class OrganRegulation extends AbstractDecision
         $subdecision->setDate($date);
 
         $subdecision->setName($data['name']);
-        $subdecision->setAuthor($data['author']);
+        $subdecision->setMember($data['author']);
         $subdecision->setVersion($data['version']);
         $subdecision->setApproval(boolval($data['approve']));
         $subdecision->setChanges(boolval($data['changes']));

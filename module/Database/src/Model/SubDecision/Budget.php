@@ -136,6 +136,7 @@ class Budget extends SubDecision
     {
         $template = $this->getTemplate();
         $template = str_replace('%NAME%', $this->getName(), $template);
+
         if (null === $this->getMember()) {
             $template = str_replace('%AUTHOR%', 'onbekend', $template);
         } else {
@@ -144,8 +145,10 @@ class Budget extends SubDecision
 
         $template = str_replace('%VERSION%', $this->getVersion(), $template);
         $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
+
         if ($this->getApproval()) {
             $template = str_replace('%APPROVAL%', 'goedgekeurd', $template);
+
             if ($this->getChanges()) {
                 $template = str_replace('%CHANGES%', ' met genoemde wijzigingen', $template);
             } else {

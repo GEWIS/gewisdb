@@ -8,25 +8,11 @@ use Application\Model\Enums\OrganTypes;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Report\Model\Member;
 use Report\Model\SubDecision;
 
 #[Entity]
 class OrganRegulation extends SubDecision
 {
-    /**
-     * OrganRegulation author.
-     */
-    #[ManyToOne(targetEntity: Member::class)]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-        nullable: true,
-    )]
-    protected ?Member $author = null;
-
     /**
      * Name of the organ.
      */
@@ -68,22 +54,6 @@ class OrganRegulation extends SubDecision
      */
     #[Column(type: 'boolean')]
     protected bool $changes;
-
-    /**
-     * Get the author.
-     */
-    public function getAuthor(): ?Member
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set the author.
-     */
-    public function setAuthor(Member $author): void
-    {
-        $this->author = $author;
-    }
 
     /**
      * Set the organ type
