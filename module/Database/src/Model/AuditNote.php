@@ -4,13 +4,27 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
+use Doctrine\ORM\Mapping\AssociationOverride;
+use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Class for registering manual notes
  */
 #[Entity]
+#[AssociationOverrides([
+    new AssociationOverride(
+        name: 'member',
+        joinColumns: new JoinColumn(
+            name: 'member',
+            referencedColumnName: 'lidnr',
+            onDelete: 'cascade',
+            nullable: false,
+        ),
+    ),
+])]
 class AuditNote extends AuditEntry
 {
     /** @psalm-suppress InvalidClassConstantType */
