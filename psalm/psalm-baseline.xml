@@ -76,6 +76,11 @@
       <code>Response|ViewModel</code>
     </InvalidReturnType>
   </file>
+  <file src="module/Database/src/Form/OrganRegulation.php">
+    <PossiblyInvalidArrayOffset occurrences="1">
+      <code>$option['value']</code>
+    </PossiblyInvalidArrayOffset>
+  </file>
   <file src="module/Database/src/Service/Stripe.php">
     <UndefinedMagicPropertyFetch occurrences="3">
       <code>$event-&gt;data-&gt;object</code>

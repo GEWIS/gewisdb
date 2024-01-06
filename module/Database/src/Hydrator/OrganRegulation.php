@@ -9,6 +9,7 @@ use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\OrganRegulation as RegulationModel;
 use DateTime;
 use InvalidArgumentException;
+use UnexpectedValueException;
 
 use function boolval;
 
@@ -34,6 +35,14 @@ class OrganRegulation extends AbstractDecision
 
         if (!($data['type'] instanceof OrganTypes)) {
             $data['type'] = OrganTypes::from($data['type']);
+        }
+
+        // Only allow committees and fraternities. This should already be handled by the form, just a fail-safe.
+        if (
+            OrganTypes::Committee !== $data['type']
+            && OrganTypes::Fraternity !== $data['type']
+        ) {
+            throw new UnexpectedValueException('Unexpected organ type for organ regulation.');
         }
 
         $subdecision->setOrganType($data['type']);

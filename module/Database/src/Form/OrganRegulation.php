@@ -12,6 +12,7 @@ use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Laminas\Validator\Callback;
 use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\StringLength;
 
@@ -30,8 +31,34 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
             'options' => [
                 'label' => 'Type',
                 'value_options' => [
-                    'committee' => $this->translator->translate('Committee'),
-                    'fraternity' => $this->translator->translate('Fraternity'),
+                    [
+                        'value' => 'committee',
+                        'label' => $this->translator->translate('Committee'),
+                    ],
+                    [
+                        'value' => 'fraternity',
+                        'label' => $this->translator->translate('Fraternity'),
+                    ],
+                    [
+                        'value' => 'avc',
+                        'label' => $this->translator->translate('GMM Committee'),
+                        'disabled' => true,
+                    ],
+                    [
+                        'value' => 'avw',
+                        'label' => $this->translator->translate('GMM Taskforce'),
+                        'disabled' => true,
+                    ],
+                    [
+                        'value' => 'kcc',
+                        'label' => $this->translator->translate('Financial Audit Committee'),
+                        'disabled' => true,
+                    ],
+                    [
+                        'value' => 'rva',
+                        'label' => $this->translator->translate('Advisory Board'),
+                        'disabled' => true,
+                    ],
                 ],
             ],
         ]);
@@ -100,6 +127,22 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
     public function getInputFilterSpecification(): array
     {
         return [
+            'type' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => Callback::class,
+                        'options' => [
+                            'messages' => [
+                                Callback::INVALID_VALUE => $this->translator->translate(
+                                    'Organ regulations can only be created for \'committee\' or \'fraternity\'.',
+                                ),
+                            ],
+                            'callback' => [$this, 'organTypeNotDisabled'],
+                        ],
+                    ],
+                ],
+            ],
             'name' => [
                 'required' => true,
                 'validators' => [
@@ -146,5 +189,25 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
                 'fallback_value' => false,
             ],
         ];
+    }
+
+    public function organTypeNotDisabled(string $value): bool
+    {
+        /** @var Radio $element */
+        $element = $this->get('type');
+
+        foreach ($element->getValueOptions() as $option) {
+            if (
+                $option['value'] === $value
+                && (
+                    !isset($option['disabled'])
+                    || true !== $option['disabled']
+                )
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
