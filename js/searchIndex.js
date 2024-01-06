@@ -4486,6 +4486,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberType.html#property_translator"
         },                {
+            "fqsen": "\\Database\\Form\\OrganRegulation",
+            "name": "OrganRegulation",
+            "summary": "",
+            "url": "classes/Database-Form-OrganRegulation.html"
+        },                {
+            "fqsen": "\\Database\\Form\\OrganRegulation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-OrganRegulation.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\OrganRegulation\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "",
+            "url": "classes/Database-Form-OrganRegulation.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\OrganRegulation\u003A\u003AorganTypeNotDisabled\u0028\u0029",
+            "name": "organTypeNotDisabled",
+            "summary": "",
+            "url": "classes/Database-Form-OrganRegulation.html#method_organTypeNotDisabled"
+        },                {
+            "fqsen": "\\Database\\Form\\OrganRegulation\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-OrganRegulation.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\Other",
             "name": "Other",
             "summary": "",
@@ -4680,6 +4705,16 @@ Search.appendIndex(
             "name": "hydrate",
             "summary": "Key\u0020withdrawal\u0020hydration",
             "url": "classes/Database-Hydrator-Key-Withdraw.html#method_hydrate"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\OrganRegulation",
+            "name": "OrganRegulation",
+            "summary": "",
+            "url": "classes/Database-Hydrator-OrganRegulation.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\OrganRegulation\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Budget\u0020hydration",
+            "url": "classes/Database-Hydrator-OrganRegulation.html#method_hydrate"
         },                {
             "fqsen": "\\Database\\Hydrator\\Other",
             "name": "Other",
@@ -7541,6 +7576,116 @@ Search.appendIndex(
             "summary": "When\u0020the\u0020granted\u0020keycode\u0020is\u0020prematurely\u0020revoked.",
             "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#property_withdrawnOn"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation",
+            "name": "OrganRegulation",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetOrganType\u0028\u0029",
+            "name": "getOrganType",
+            "summary": "Get\u0020the\u0020type.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getOrganType"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetOrganType\u0028\u0029",
+            "name": "setOrganType",
+            "summary": "Set\u0020the\u0020organ\u0020type",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setOrganType"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Get\u0020the\u0020name.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getName"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "Set\u0020the\u0020name.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setName"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetVersion\u0028\u0029",
+            "name": "getVersion",
+            "summary": "Get\u0020the\u0020version.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getVersion"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetVersion\u0028\u0029",
+            "name": "setVersion",
+            "summary": "Set\u0020the\u0020version.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setVersion"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetDate\u0028\u0029",
+            "name": "getDate",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getDate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetDate\u0028\u0029",
+            "name": "setDate",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setDate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetApproval\u0028\u0029",
+            "name": "getApproval",
+            "summary": "Get\u0020approval\u0020status.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getApproval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetApproval\u0028\u0029",
+            "name": "setApproval",
+            "summary": "Set\u0020approval\u0020status.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setApproval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetChanges\u0028\u0029",
+            "name": "getChanges",
+            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getChanges"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetChanges\u0028\u0029",
+            "name": "setChanges",
+            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setChanges"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020content.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AformatDate\u0028\u0029",
+            "name": "formatDate",
+            "summary": "Format\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_formatDate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Decision\u0020template",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "Name\u0020of\u0020the\u0020organ.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_name"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024organType",
+            "name": "organType",
+            "summary": "Type\u0020of\u0020the\u0020organ.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_organType"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "Version\u0020of\u0020the\u0020regulation.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_version"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "Date\u0020of\u0020the\u0020regulation.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_date"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024approval",
+            "name": "approval",
+            "summary": "If\u0020the\u0020regulation\u0020was\u0020approved.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_approval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024changes",
+            "name": "changes",
+            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_changes"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Other",
             "name": "Other",
             "summary": "Entity\u0020for\u0020undefined\u0020decisions.",
@@ -8021,6 +8166,11 @@ Search.appendIndex(
             "summary": "Budget\u0020decision.",
             "url": "classes/Database-Service-Meeting.html#method_budgetDecision"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AregulationDecision\u0028\u0029",
+            "name": "regulationDecision",
+            "summary": "Organ\u0020regulation\u0020decision.",
+            "url": "classes/Database-Service-Meeting.html#method_regulationDecision"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AcreateMeeting\u0028\u0029",
             "name": "createMeeting",
             "summary": "Create\u0020a\u0020meeting.",
@@ -8080,6 +8230,11 @@ Search.appendIndex(
             "name": "getDestroyForm",
             "summary": "Get\u0020the\u0020destroy\u0020form.",
             "url": "classes/Database-Service-Meeting.html#method_getDestroyForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetRegulationForm\u0028\u0029",
+            "name": "getRegulationForm",
+            "summary": "Get\u0020regulation\u0020form.",
+            "url": "classes/Database-Service-Meeting.html#method_getRegulationForm"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetFoundationForm\u0028\u0029",
             "name": "getFoundationForm",
@@ -8185,6 +8340,11 @@ Search.appendIndex(
             "name": "keyWithdrawForm",
             "summary": "",
             "url": "classes/Database-Service-Meeting.html#property_keyWithdrawForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024regulationForm",
+            "name": "regulationForm",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#property_regulationForm"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024otherForm",
             "name": "otherForm",
@@ -10750,6 +10910,96 @@ Search.appendIndex(
             "name": "withdrawnOn",
             "summary": "When\u0020the\u0020granted\u0020keycode\u0020is\u0020prematurely\u0020revoked.",
             "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#property_withdrawnOn"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation",
+            "name": "OrganRegulation",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetOrganType\u0028\u0029",
+            "name": "setOrganType",
+            "summary": "Set\u0020the\u0020organ\u0020type",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setOrganType"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Get\u0020the\u0020name.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getName"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "Set\u0020the\u0020name.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setName"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetVersion\u0028\u0029",
+            "name": "getVersion",
+            "summary": "Get\u0020the\u0020version.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getVersion"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetVersion\u0028\u0029",
+            "name": "setVersion",
+            "summary": "Set\u0020the\u0020version.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setVersion"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetDate\u0028\u0029",
+            "name": "getDate",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getDate"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetDate\u0028\u0029",
+            "name": "setDate",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setDate"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetApproval\u0028\u0029",
+            "name": "getApproval",
+            "summary": "Get\u0020approval\u0020status.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getApproval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetApproval\u0028\u0029",
+            "name": "setApproval",
+            "summary": "Set\u0020approval\u0020status.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setApproval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetChanges\u0028\u0029",
+            "name": "getChanges",
+            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getChanges"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetChanges\u0028\u0029",
+            "name": "setChanges",
+            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setChanges"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "Name\u0020of\u0020the\u0020organ.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_name"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024organType",
+            "name": "organType",
+            "summary": "Type\u0020of\u0020the\u0020organ.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_organType"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "Version\u0020of\u0020the\u0020regulation.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_version"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "Date\u0020of\u0020the\u0020regulation.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_date"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024approval",
+            "name": "approval",
+            "summary": "If\u0020the\u0020regulation\u0020was\u0020approved.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_approval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024changes",
+            "name": "changes",
+            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_changes"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Other",
             "name": "Other",
