@@ -17,6 +17,11 @@ use User\Model\Enums\ApiPermissions;
 use function array_map;
 use function in_array;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class ApiPrincipal extends Form implements InputFilterProviderInterface
 {
     public function __construct(

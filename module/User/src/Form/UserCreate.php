@@ -13,6 +13,11 @@ use Laminas\Validator\Identical;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class UserCreate extends Form implements InputFilterProviderInterface
 {
     public function __construct()

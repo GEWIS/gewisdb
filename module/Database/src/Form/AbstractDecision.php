@@ -9,6 +9,11 @@ use Database\Model\Meeting as MeetingModel;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Form;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 abstract class AbstractDecision extends Form
 {
     public function __construct(MeetingFieldset $meeting)
