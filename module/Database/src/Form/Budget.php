@@ -18,9 +18,18 @@ use Laminas\Validator\InArray;
 use Laminas\Validator\StringLength;
 
 /**
- * @template TFilteredValues
- *
- * @extends AbstractDecision<TFilteredValues>
+ * @psalm-import-type AbstractDecisionFormType from AbstractDecision
+ * @psalm-import-type MemberFieldsetType from MemberFieldset
+ * @psalm-type BudgetDecisionFormType = array{
+ *  type: 'budget'|'reckoning',
+ *  name: string,
+ *  date: string,
+ *  author: MemberFieldsetType,
+ *  version: string,
+ *  approve: bool,
+ *  changes: bool,
+ * }
+ * @extends AbstractDecision<AbstractDecisionFormType & BudgetDecisionFormType>
  */
 class Budget extends AbstractDecision implements InputFilterProviderInterface
 {

@@ -11,6 +11,15 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Digits;
 use Laminas\Validator\InArray;
 
+/**
+ * @psalm-type SubDecisionFieldsetType = array{
+ *  meeting_type: value-of<MeetingTypes>,
+ *  meeting_number: numeric-string,
+ *  decision_point: numeric-string,
+ *  decision_number: numeric-string,
+ *  number: numeric-string,
+ * }
+ */
 class SubDecision extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct()

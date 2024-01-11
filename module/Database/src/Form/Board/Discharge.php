@@ -12,9 +12,12 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @template TFilteredValues
- *
- * @extends AbstractDecision<TFilteredValues>
+ * @psalm-import-type AbstractDecisionFormType from AbstractDecision
+ * @psalm-import-type SubDecisionFieldsetType from SubDecisionFieldset
+ * @psalm-type DischargeDecisionFormType = array{
+ *  installation: SubDecisionFieldsetType,
+ * }
+ * @extends AbstractDecision<DischargeDecisionFormType & AbstractDecisionFormType>
  */
 class Discharge extends AbstractDecision implements InputFilterProviderInterface
 {

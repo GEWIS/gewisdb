@@ -13,9 +13,13 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @template TFilteredValues
- *
- * @extends AbstractDecision<TFilteredValues>
+ * @psalm-import-type AbstractDecisionFormType from AbstractDecision
+ * @psalm-import-type SubDecisionFieldsetType from SubDecisionFieldset
+ * @psalm-type ReleaseDecisionFormType = array{
+ *  installation: SubDecisionFieldsetType,
+ *  date: string,
+ * }
+ * @extends AbstractDecision<ReleaseDecisionFormType & AbstractDecisionFormType>
  */
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {

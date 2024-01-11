@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace Database\Form\Fieldset;
 
+use Application\Model\Enums\MeetingTypes;
 use Database\Model\Meeting as MeetingModel;
 use DateTimeInterface;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
 
+/**
+ * @psalm-type MeetingType = array{
+ *  type: value-of<MeetingTypes>,
+ *  number: int,
+ *  date: string,
+ * }
+ */
 class Meeting extends Fieldset
 {
     public function __construct()

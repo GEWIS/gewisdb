@@ -10,9 +10,16 @@ use Laminas\Form\Element\Hidden;
 use Laminas\Form\Form;
 
 /**
- * @template TFilteredValues
+ * @template AbstractDecisionFormTypeTemplate of AbstractDecisionFormType
  *
- * @extends Form<TFilteredValues>
+ * @psalm-import-type MeetingType from MeetingFieldset
+ * @psalm-type AbstractDecisionFormType = array{
+ *  meeting: MeetingType,
+ *  point: int,
+ *  decision: int,
+ *  ... <array-key, mixed>,
+ * }
+ * @extends Form<AbstractDecisionFormTypeTemplate>
  */
 abstract class AbstractDecision extends Form
 {

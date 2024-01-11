@@ -15,9 +15,14 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
 
 /**
- * @template TFilteredValues
- *
- * @extends AbstractDecision<TFilteredValues>
+ * @psalm-import-type AbstractDecisionFormType from AbstractDecision
+ * @psalm-import-type MemberFieldsetType from MemberFieldset
+ * @psalm-type InstallDecisionFormType = array{
+ *  member: MemberFieldsetType,
+ *  function: string,
+ *  date: string,
+ * }
+ * @extends AbstractDecision<AbstractDecisionFormType & InstallDecisionFormType>
  */
 class Install extends AbstractDecision implements InputFilterProviderInterface
 {
