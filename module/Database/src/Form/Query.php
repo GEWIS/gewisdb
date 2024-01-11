@@ -13,7 +13,7 @@ use Laminas\Mvc\I18n\Translator;
 /**
  * @template QueryFormTypeTemplate of QueryFormType & array<array-key,string>
  *
- * @psalm-type QueryFormType = array{
+ * @phpstan-type QueryFormType = array{
  *  'query': string,
  * }
  * @extends Form<QueryFormTypeTemplate>

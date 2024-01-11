@@ -12,9 +12,9 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @psalm-import-type AbstractDecisionFormType from AbstractDecision
- * @psalm-import-type SubDecisionFieldsetType from SubDecisionFieldset
- * @psalm-type DischargeDecisionFormType = array{
+ * @phpstan-import-type AbstractDecisionFormType from AbstractDecision
+ * @phpstan-import-type SubDecisionFieldsetType from SubDecisionFieldset
+ * @phpstan-type DischargeDecisionFormType = array{
  *  installation: SubDecisionFieldsetType,
  * }
  * @extends AbstractDecision<DischargeDecisionFormType & AbstractDecisionFormType>

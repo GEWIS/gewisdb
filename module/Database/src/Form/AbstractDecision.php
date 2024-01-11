@@ -12,8 +12,8 @@ use Laminas\Form\Form;
 /**
  * @template AbstractDecisionFormTypeTemplate of AbstractDecisionFormType
  *
- * @psalm-import-type MeetingType from MeetingFieldset
- * @psalm-type AbstractDecisionFormType = array{
+ * @phpstan-import-type MeetingType from MeetingFieldset
+ * @phpstan-type AbstractDecisionFormType = array{
  *  meeting: MeetingType,
  *  point: int,
  *  decision: int,

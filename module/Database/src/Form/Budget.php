@@ -18,9 +18,9 @@ use Laminas\Validator\InArray;
 use Laminas\Validator\StringLength;
 
 /**
- * @psalm-import-type AbstractDecisionFormType from AbstractDecision
- * @psalm-import-type MemberFieldsetType from MemberFieldset
- * @psalm-type BudgetDecisionFormType = array{
+ * @phpstan-import-type AbstractDecisionFormType from AbstractDecision
+ * @phpstan-import-type MemberFieldsetType from MemberFieldset
+ * @phpstan-type BudgetDecisionFormType = array{
  *  type: 'budget'|'reckoning',
  *  name: string,
  *  date: string,

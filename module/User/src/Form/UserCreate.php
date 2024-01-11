@@ -14,7 +14,7 @@ use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
 /**
- * @psalm-type UserCreateFormType = array{
+ * @phpstan-type UserCreateFormType = array{
  *  login: string,
  *  password: string,
  *  password_verify: string,

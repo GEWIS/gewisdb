@@ -11,7 +11,7 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Digits;
 
 /**
- * @psalm-type MemberFieldsetType = array{
+ * @phpstan-type MemberFieldsetType = array{
  *  name: string,
  *  lidnr: numeric-string,
  * }

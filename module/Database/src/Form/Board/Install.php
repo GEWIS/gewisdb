@@ -15,9 +15,9 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
 
 /**
- * @psalm-import-type AbstractDecisionFormType from AbstractDecision
- * @psalm-import-type MemberFieldsetType from MemberFieldset
- * @psalm-type InstallDecisionFormType = array{
+ * @phpstan-import-type AbstractDecisionFormType from AbstractDecision
+ * @phpstan-import-type MemberFieldsetType from MemberFieldset
+ * @phpstan-type InstallDecisionFormType = array{
  *  member: MemberFieldsetType,
  *  function: string,
  *  date: string,
