@@ -18,13 +18,12 @@ use function array_map;
 use function in_array;
 
 /**
- * @template TFilteredValues
- *
- * @extends Form<array{
- *  'description': string,
- *  'token': string,
- *  'permissions': array<array-key,enum-string<ApiPermissions>>,
- * }>
+ * @psalm-type ApiPrincipalFormType = array{
+ *     description: string,
+ *     token: string,
+ *     permissions: value-of<ApiPermissions>[],
+ * }
+ * @extends Form<ApiPrincipalFormType>
  */
 class ApiPrincipal extends Form implements InputFilterProviderInterface
 {

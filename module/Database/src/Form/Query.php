@@ -11,9 +11,12 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @template TFilteredValues
+ * @template QueryFormTypeTemplate of QueryFormType & array<array-key,string>
  *
- * @extends Form<TFilteredValues>
+ * @psalm-type QueryFormType = array{
+ *  'query': string,
+ * }
+ * @extends Form<QueryFormTypeTemplate>
  */
 class Query extends Form implements InputFilterProviderInterface
 {

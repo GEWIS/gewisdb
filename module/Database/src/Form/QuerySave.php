@@ -10,9 +10,11 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @template TFilteredValues
- *
- * @extends Query<TFilteredValues>
+ * @psalm-import-type QueryFormType from Query
+ * @psalm-type QuerySaveFormType = array{
+ *  'name': string,
+ * }
+ * @extends Query<QueryFormType & QuerySaveFormType>
  */
 class QuerySave extends Query implements InputFilterProviderInterface
 {

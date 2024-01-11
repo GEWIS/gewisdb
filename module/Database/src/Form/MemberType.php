@@ -15,7 +15,7 @@ use Laminas\Mvc\I18n\Translator;
  * @template TFilteredValues
  *
  * @extends Form<array{
- *     type: enum-string<MembershipTypes>,
+ *     type: value-of<MembershipTypes>,
  * }>
  */
 class MemberType extends Form implements InputFilterProviderInterface

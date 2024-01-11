@@ -12,12 +12,11 @@ use Laminas\Validator\Identical;
 use Laminas\Validator\StringLength;
 
 /**
- * @template TFilteredValues
- *
- * @extends Form<array{
- *  'password': string,
- *  'password_verify': string,
- * }>
+ * @psalm-type UserEditFormType = array{
+ *  password: string,
+ *  password_verify: string,
+ * }
+ * @extends Form<UserEditFormType>
  */
 class UserEdit extends Form implements InputFilterProviderInterface
 {

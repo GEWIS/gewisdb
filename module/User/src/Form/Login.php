@@ -13,12 +13,11 @@ use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
 /**
- * @template TFilteredValues
- *
- * @extends Form<array{
- *  'login': string,
- *  'password': string,
- * }>
+ * @psalm-type LoginFormType = array{
+ *  login: string,
+ *  password: string,
+ * }
+ * @extends Form<LoginFormType>
  */
 class Login extends Form implements InputFilterProviderInterface
 {
