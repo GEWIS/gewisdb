@@ -91,12 +91,12 @@ use Database\Model\Meeting;
         )) ?>" class="btn btn-danger">
             <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete Decision') ?>
         </a>
-        <button onclick="copyDecision(this)" class="btn btn-success" value="<?= $this->escapeHtml($decision->getContent()) ?>">
+        <button onclick="copyDecision(this)" class="btn btn-success" value="<?= $this->escapeHtmlAttr($decision->getContent()) ?>">
             <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
         </button>
         <ul>
         <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-            <li><?= $this->escapeHtml($subdecision->getContent()) ?></li>
+            <li><?= $this->escapeHtmlAttr($subdecision->getContent()) ?></li>
         <?php endforeach; ?>
         </ul>
     </li>

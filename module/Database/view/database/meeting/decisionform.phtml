@@ -96,7 +96,7 @@ $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . 
         ?>
     </a>
     <script>
-        var decisionCopy = "<?= $decision->getContent() ?>";
+        var decisionCopy = "<?= $this->escapeHtml($decision->getContent()) ?>";
         function copyDecision() {
             navigator.clipboard.writeText(decisionCopy);
         }
