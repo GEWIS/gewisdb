@@ -6001,6 +6001,11 @@ Search.appendIndex(
             "summary": "Check\u0020if\u0020this\u0020decision\u0020is\u0020destroyed\u0020by\u0020another\u0020decision.",
             "url": "classes/Database-Model-Decision.html#method_isDestroyed"
         },                {
+            "fqsen": "\\Database\\Model\\Decision\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "",
+            "url": "classes/Database-Model-Decision.html#method_getContent"
+        },                {
             "fqsen": "\\Database\\Model\\Decision\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
             "summary": "Transform\u0020into\u0020an\u0020array.",
