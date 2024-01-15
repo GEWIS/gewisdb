@@ -218,6 +218,18 @@ class Decision
         return null !== $this->destroyedby;
     }
 
+    public function getContent(): string
+    {
+        $content = [];
+        foreach ($this->getSubdecisions() as $subdecision) {
+            $content[] = $subdecision->getContent();
+        }
+
+        $content = implode(' ', $content);
+
+        return $content;
+    }
+
     /**
      * Transform into an array.
      *
@@ -231,12 +243,7 @@ class Decision
      */
     public function toArray(): array
     {
-        $content = [];
-        foreach ($this->getSubdecisions() as $subdecision) {
-            $content[] = $subdecision->getContent();
-        }
-
-        $content = implode(' ', $content);
+        $content = $this->getContent();
 
         return [
             'meeting_type' => $this->getMeeting()->getType(),
