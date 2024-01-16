@@ -49,11 +49,12 @@ class Birthday
             'Membership notification',
             'Member birthday',
             $body,
-            'GEWIS Birthday card',
-            'More information',
-            '<p> Wie dit leest trekt een bak.',
-            'test',
-            'Happy Birthday!!! ('. $person->getFullName() .')',
+            null,
+            null,
+            null,
+            null,
+            null,
+            true,
         );
     }
 

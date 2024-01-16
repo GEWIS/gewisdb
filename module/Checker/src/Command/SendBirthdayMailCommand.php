@@ -13,6 +13,7 @@ class SendBirthdayMailCommand extends Command
 {
     /** @var string $defaultName */
     protected static $defaultName = 'send:birthday:mail:command';
+
     /** @var string $defaultDescription*/
     protected static $defaultDescription =
         'Send birthday mails to all those that have their birthday';

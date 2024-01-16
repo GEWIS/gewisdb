@@ -35,22 +35,28 @@ class Email
         ?string $bodyMoreInformation = null,
         ?string $footerReason = null,
         ?string $emailSubject = null,
+        ?bool $noTemplate = false,
     ): void {
         $replyTo = new MailAddress($this->config['from_secretary']['address'], $this->config['from_secretary']['name']);
 
-        $body = $this->render(
-            'email/basic',
-            [
-                'title_header' => $titleHeader,
-                'title_block' => $titleBlock,
-                'body_main' => $bodyMain,
-                'title_accessible' => $titleAccessible ?? $titleBlock,
-                'title_moreinformation' => $titleMoreInformation,
-                'body_moreinformation' => $bodyMoreInformation,
-                'footer_reason' => $footerReason,
-                'footer_sender_email' => $replyTo->getEmail(),
-            ],
-        );
+
+        if (!$noTemplate) {
+            $body = $this->render(
+                'email/basic',
+                [
+                    'title_header' => $titleHeader,
+                    'title_block' => $titleBlock,
+                    'body_main' => $bodyMain,
+                    'title_accessible' => $titleAccessible ?? $titleBlock,
+                    'title_moreinformation' => $titleMoreInformation,
+                    'body_moreinformation' => $bodyMoreInformation,
+                    'footer_reason' => $footerReason,
+                    'footer_sender_email' => $replyTo->getEmail(),
+                ],
+            );
+        } else {
+            $body = $bodyMain;
+        }
 
         $this->sendEmail(
             $body,
