@@ -1666,70 +1666,45 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/ApplicationTest-AutomaticControllerTest.html#method_getParams"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest",
-            "name": "BaseControllerTest",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait",
+            "name": "BaseControllerTrait",
             "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003AsetUp\u0028\u0029",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003AsetUp\u0028\u0029",
             "name": "setUp",
             "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#method_setUp"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#method_setUp"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003AsetUpMockedServices\u0028\u0029",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003AsetUpMockedServices\u0028\u0029",
             "name": "setUpMockedServices",
             "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#method_setUpMockedServices"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#method_setUpMockedServices"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003AgetApplication\u0028\u0029",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003AgetApplication\u0028\u0029",
             "name": "getApplication",
             "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#method_getApplication"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#method_getApplication"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003AinitServiceManager\u0028\u0029",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003AinitServiceManager\u0028\u0029",
             "name": "initServiceManager",
             "summary": "Variation\u0020of\u0020\u007B\u0040link\u0020Application\u003A\u003Ainit\u007D\u0020but\u0020without\u0020initial\u0020bootstrapping.",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#method_initServiceManager"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#method_initServiceManager"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003AbootstrapApplication\u0028\u0029",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003AbootstrapApplication\u0028\u0029",
             "name": "bootstrapApplication",
             "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#method_bootstrapApplication"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#method_bootstrapApplication"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003ALIDNR",
-            "name": "LIDNR",
-            "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#constant_LIDNR"
-        },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003A\u0024serviceManager",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003A\u0024serviceManager",
             "name": "serviceManager",
             "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#property_serviceManager"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#property_serviceManager"
         },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003A\u0024authService",
-            "name": "authService",
-            "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#property_authService"
-        },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003A\u0024aclService",
-            "name": "aclService",
-            "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#property_aclService"
-        },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003A\u0024userMapper",
-            "name": "userMapper",
-            "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#property_userMapper"
-        },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003A\u0024memberMapper",
-            "name": "memberMapper",
-            "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#property_memberMapper"
-        },                {
-            "fqsen": "\\ApplicationTest\\BaseControllerTest\u003A\u003A\u0024user",
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003A\u0024user",
             "name": "user",
             "summary": "",
-            "url": "classes/ApplicationTest-BaseControllerTest.html#property_user"
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#property_user"
         },                {
             "fqsen": "\\ApplicationTest\\TestConfigProvider",
             "name": "TestConfigProvider",

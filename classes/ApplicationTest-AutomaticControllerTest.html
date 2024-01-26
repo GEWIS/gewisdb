@@ -245,7 +245,7 @@
     AutomaticControllerTest
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/ApplicationTest-BaseControllerTest.html"><abbr title="\ApplicationTest\BaseControllerTest">BaseControllerTest</abbr></a>
+        extends <abbr title="\Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase">AbstractHttpControllerTestCase</abbr>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -256,6 +256,9 @@
         </div>
     
     
+            <span class="phpdocumentor-element__extends">
+            Uses
+                            <a href="classes/ApplicationTest-BaseControllerTrait.html"><abbr title="\ApplicationTest\BaseControllerTrait">BaseControllerTrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -266,7 +269,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -288,19 +291,6 @@
 
 
 
-<h4 id="toc-constants">
-    Constants
-    <a href="classes/ApplicationTest-AutomaticControllerTest.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -constant -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#constant_LIDNR">LIDNR</a>
-    <span>
-        &nbsp;= 8000                            </span>
-</dt>
-
-    </dl>
 
 
 <h4 id="toc-properties">
@@ -310,39 +300,15 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#property_aclService">$aclService</a>
-    <span>
-                        &nbsp;: <abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#property_authService">$authService</a>
-    <span>
-                        &nbsp;: <abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#property_memberMapper">$memberMapper</a>
-    <span>
-                        &nbsp;: <abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#property_serviceManager">$serviceManager</a>
+    <a href="classes/ApplicationTest-BaseControllerTrait.html#property_serviceManager">$serviceManager</a>
     <span>
                         &nbsp;: <abbr title="\Laminas\ServiceManager\ServiceManager">ServiceManager</abbr>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#property_user">$user</a>
+    <a href="classes/ApplicationTest-BaseControllerTrait.html#property_user">$user</a>
     <span>
                         &nbsp;: <a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#property_userMapper">$userMapper</a>
-    <span>
-                        &nbsp;: <abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr>            </span>
 </dt>
 
     </dl>
@@ -354,13 +320,13 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#method_getApplication">getApplication()</a>
+    <a href="classes/ApplicationTest-BaseControllerTrait.html#method_getApplication">getApplication()</a>
     <span>
                                 &nbsp;: <abbr title="\Laminas\Mvc\ApplicationInterface">ApplicationInterface</abbr>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#method_setUp">setUp()</a>
+    <a href="classes/ApplicationTest-BaseControllerTrait.html#method_setUp">setUp()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -420,7 +386,7 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#method_setUpMockedServices">setUpMockedServices()</a>
+    <a href="classes/ApplicationTest-BaseControllerTrait.html#method_setUpMockedServices">setUpMockedServices()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -444,13 +410,13 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#method_bootstrapApplication">bootstrapApplication()</a>
+    <a href="classes/ApplicationTest-BaseControllerTrait.html#method_bootstrapApplication">bootstrapApplication()</a>
     <span>
                                 &nbsp;: <abbr title="\Laminas\Mvc\Application">Application</abbr>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/ApplicationTest-BaseControllerTest.html#method_initServiceManager">initServiceManager()</a>
+    <a href="classes/ApplicationTest-BaseControllerTrait.html#method_initServiceManager">initServiceManager()</a>
     <span>
                                 &nbsp;: <abbr title="\Laminas\ServiceManager\ServiceManager">ServiceManager</abbr>    </span>
 </dt>
@@ -462,41 +428,6 @@
 
 
         
-    <section class="phpdocumentor-constants">
-        <h3 class="phpdocumentor-elements__header" id="constants">
-            Constants
-            <a href="classes/ApplicationTest-AutomaticControllerTest.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h3>
-                    <article class="phpdocumentor-element -constant -protected ">
-    <h4 class="phpdocumentor-element__name" id="constant_LIDNR">
-        LIDNR
-        <a href="classes/ApplicationTest-BaseControllerTest.html#constant_LIDNR" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">26</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">LIDNR</span>
-    = <span class="phpdocumentor-signature__default-value">8000</span>
-</code>
-
-
-    
-    
-    
-
-</article>
-            </section>
 
         
     <section class="phpdocumentor-properties">
@@ -512,116 +443,17 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_aclService">
-        $aclService
-        <a href="classes/ApplicationTest-BaseControllerTest.html#property_aclService" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">22</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr></span>
-    <span class="phpdocumentor-signature__name">$aclService</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_authService">
-        $authService
-        <a href="classes/ApplicationTest-BaseControllerTest.html#property_authService" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">21</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr></span>
-    <span class="phpdocumentor-signature__name">$authService</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_memberMapper">
-        $memberMapper
-        <a href="classes/ApplicationTest-BaseControllerTest.html#property_memberMapper" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr></span>
-    <span class="phpdocumentor-signature__name">$memberMapper</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_serviceManager">
         $serviceManager
-        <a href="classes/ApplicationTest-BaseControllerTest.html#property_serviceManager" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#property_serviceManager" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTrait.php"><a href="files/module-application-test-basecontrollertrait.html"><abbr title="module/Application/test/BaseControllerTrait.php">BaseControllerTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -646,15 +478,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_user">
         $user
-        <a href="classes/ApplicationTest-BaseControllerTest.html#property_user" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#property_user" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTrait.php"><a href="files/module-application-test-basecontrollertrait.html"><abbr title="module/Application/test/BaseControllerTrait.php">BaseControllerTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -663,39 +495,6 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a></span>
     <span class="phpdocumentor-signature__name">$user</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_userMapper">
-        $userMapper
-        <a href="classes/ApplicationTest-BaseControllerTest.html#property_userMapper" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">23</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><abbr title="\PHPUnit\Framework\MockObject\MockObject">MockObject</abbr></span>
-    <span class="phpdocumentor-signature__name">$userMapper</span>
     </code>
 
     
@@ -719,13 +518,13 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_getApplication">
         getApplication()
-        <a href="classes/ApplicationTest-BaseControllerTest.html#method_getApplication" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#method_getApplication" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTrait.php"><a href="files/module-application-test-basecontrollertrait.html"><abbr title="module/Application/test/BaseControllerTrait.php">BaseControllerTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -754,13 +553,13 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_setUp">
         setUp()
-        <a href="classes/ApplicationTest-BaseControllerTest.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#method_setUp" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTrait.php"><a href="files/module-application-test-basecontrollertrait.html"><abbr title="module/Application/test/BaseControllerTrait.php">BaseControllerTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -791,7 +590,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -822,7 +621,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">154</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
     </aside>
 
@@ -857,7 +656,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -898,7 +697,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">114</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -939,7 +738,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -980,7 +779,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -1037,7 +836,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
@@ -1078,7 +877,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -1119,7 +918,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -1154,13 +953,13 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_setUpMockedServices">
         setUpMockedServices()
-        <a href="classes/ApplicationTest-BaseControllerTest.html#method_setUpMockedServices" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#method_setUpMockedServices" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTrait.php"><a href="files/module-application-test-basecontrollertrait.html"><abbr title="module/Application/test/BaseControllerTrait.php">BaseControllerTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -1191,7 +990,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -1232,7 +1031,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">156</span>
 
     </aside>
 
@@ -1273,7 +1072,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/AutomaticControllerTest.php"><a href="files/module-application-test-automaticcontrollertest.html"><abbr title="module/Application/test/AutomaticControllerTest.php">AutomaticControllerTest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">145</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
@@ -1308,13 +1107,13 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_bootstrapApplication">
         bootstrapApplication()
-        <a href="classes/ApplicationTest-BaseControllerTest.html#method_bootstrapApplication" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#method_bootstrapApplication" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTrait.php"><a href="files/module-application-test-basecontrollertrait.html"><abbr title="module/Application/test/BaseControllerTrait.php">BaseControllerTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1347,7 +1146,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/ApplicationTest-BaseControllerTest.html#method_bootstrapApplication#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#method_bootstrapApplication#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1376,13 +1175,13 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_initServiceManager">
         initServiceManager()
-        <a href="classes/ApplicationTest-BaseControllerTest.html#method_initServiceManager" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#method_initServiceManager" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTest.php"><a href="files/module-application-test-basecontrollertest.html"><abbr title="module/Application/test/BaseControllerTest.php">BaseControllerTest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/test/BaseControllerTrait.php"><a href="files/module-application-test-basecontrollertrait.html"><abbr title="module/Application/test/BaseControllerTrait.php">BaseControllerTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -1409,7 +1208,7 @@
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/ApplicationTest-BaseControllerTest.html#method_initServiceManager#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/ApplicationTest-BaseControllerTrait.html#method_initServiceManager#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1535,35 +1334,24 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#toc-constants">Constants</a></li>
                                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#toc-properties">Properties</a></li>
                                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
-                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
-                <li>
-                    <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/ApplicationTest-BaseControllerTest.html#constant_LIDNR">LIDNR</a></li>
-                                            </ul>
-                </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/ApplicationTest-BaseControllerTest.html#property_aclService">$aclService<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
-                                                    <li><a href="classes/ApplicationTest-BaseControllerTest.html#property_authService">$authService<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
-                                                    <li><a href="classes/ApplicationTest-BaseControllerTest.html#property_memberMapper">$memberMapper<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
-                                                    <li><a href="classes/ApplicationTest-BaseControllerTest.html#property_serviceManager">$serviceManager<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
-                                                    <li><a href="classes/ApplicationTest-BaseControllerTest.html#property_user">$user<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
-                                                    <li><a href="classes/ApplicationTest-BaseControllerTest.html#property_userMapper">$userMapper<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
+                                                    <li><a href="classes/ApplicationTest-BaseControllerTrait.html#property_serviceManager">$serviceManager<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
+                                                    <li><a href="classes/ApplicationTest-BaseControllerTrait.html#property_user">$user<a href="classes/ApplicationTest-AutomaticControllerTest.html"></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/ApplicationTest-BaseControllerTest.html#method_getApplication">getApplication()</a></li>
-                                            <li><a href="classes/ApplicationTest-BaseControllerTest.html#method_setUp">setUp()</a></li>
+                                            <li><a href="classes/ApplicationTest-BaseControllerTrait.html#method_getApplication">getApplication()</a></li>
+                                            <li><a href="classes/ApplicationTest-BaseControllerTrait.html#method_setUp">setUp()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_testAllRoutes">testAllRoutes()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_getParams">getParams()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_parseLiteral">parseLiteral()</a></li>
@@ -1573,12 +1361,12 @@
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_parseRegex">parseRegex()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_parseSegment">parseSegment()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_parseUrl">parseUrl()</a></li>
-                                            <li><a href="classes/ApplicationTest-BaseControllerTest.html#method_setUpMockedServices">setUpMockedServices()</a></li>
+                                            <li><a href="classes/ApplicationTest-BaseControllerTrait.html#method_setUpMockedServices">setUpMockedServices()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_testRoute">testRoute()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_testRouteGet">testRouteGet()</a></li>
                                             <li><a href="classes/ApplicationTest-AutomaticControllerTest.html#method_testRoutePost">testRoutePost()</a></li>
-                                            <li><a href="classes/ApplicationTest-BaseControllerTest.html#method_bootstrapApplication">bootstrapApplication()</a></li>
-                                            <li><a href="classes/ApplicationTest-BaseControllerTest.html#method_initServiceManager">initServiceManager()</a></li>
+                                            <li><a href="classes/ApplicationTest-BaseControllerTrait.html#method_bootstrapApplication">bootstrapApplication()</a></li>
+                                            <li><a href="classes/ApplicationTest-BaseControllerTrait.html#method_initServiceManager">initServiceManager()</a></li>
                                     </ul>
             </li>
                     </ul>
