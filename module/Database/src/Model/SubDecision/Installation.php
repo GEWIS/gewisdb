@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use Override;
 
 /**
  * Installation into organ.
@@ -84,6 +85,7 @@ class Installation extends FoundationReference
      *
      * @psalm-suppress InvalidNullableReturnType
      */
+    #[Override]
     public function getMember(): Member
     {
         return $this->member;

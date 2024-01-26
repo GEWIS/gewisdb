@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
 use IntlDateFormatter;
+use Override;
 
 use function date_default_timezone_get;
 
@@ -84,6 +85,7 @@ class Installation extends SubDecision
      *
      * @psalm-suppress InvalidNullableReturnType
      */
+    #[Override]
     public function getMember(): Member
     {
         return $this->member;
