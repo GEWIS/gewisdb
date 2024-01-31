@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
-use Database\Model\Member;
 use Database\Model\SubDecision;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use IntlDateFormatter;
 
 use function date_default_timezone_get;
@@ -19,17 +16,6 @@ use function str_replace;
 #[Entity]
 class Budget extends SubDecision
 {
-    /**
-     * Budget author.
-     */
-    #[ManyToOne(targetEntity: Member::class)]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-        nullable: true,
-    )]
-    protected ?Member $author = null;
-
     /**
      * Name of the budget.
      */
@@ -62,22 +48,6 @@ class Budget extends SubDecision
      */
     #[Column(type: 'boolean')]
     protected bool $changes;
-
-    /**
-     * Get the author.
-     */
-    public function getAuthor(): ?Member
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set the author.
-     */
-    public function setAuthor(Member $author): void
-    {
-        $this->author = $author;
-    }
 
     /**
      * Get the name.
@@ -166,16 +136,19 @@ class Budget extends SubDecision
     {
         $template = $this->getTemplate();
         $template = str_replace('%NAME%', $this->getName(), $template);
-        if (null === $this->getAuthor()) {
+
+        if (null === $this->getMember()) {
             $template = str_replace('%AUTHOR%', 'onbekend', $template);
         } else {
-            $template = str_replace('%AUTHOR%', $this->getAuthor()->getFullName(), $template);
+            $template = str_replace('%AUTHOR%', $this->getMember()->getFullName(), $template);
         }
 
         $template = str_replace('%VERSION%', $this->getVersion(), $template);
         $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
+
         if ($this->getApproval()) {
             $template = str_replace('%APPROVAL%', 'goedgekeurd', $template);
+
             if ($this->getChanges()) {
                 $template = str_replace('%CHANGES%', ' met genoemde wijzigingen', $template);
             } else {
@@ -204,7 +177,7 @@ class Budget extends SubDecision
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
             null,
-            'd MMMM Y',
+            'd MMMM y',
         );
 
         return $formatter->format($date);

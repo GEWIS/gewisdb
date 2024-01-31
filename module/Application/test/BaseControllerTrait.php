@@ -8,22 +8,14 @@ use Laminas\Mvc\Application;
 use Laminas\Mvc\ApplicationInterface;
 use Laminas\Mvc\Service\ServiceManagerConfig;
 use Laminas\ServiceManager\ServiceManager;
-use Laminas\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 use User\Model\User;
 
 use function array_merge;
 use function array_unique;
 
-abstract class BaseControllerTest extends AbstractHttpControllerTestCase
+trait BaseControllerTrait
 {
     protected ServiceManager $serviceManager;
-    protected MockObject $authService;
-    protected MockObject $aclService;
-    protected MockObject $userMapper;
-    protected MockObject $memberMapper;
-
-    protected const LIDNR = 8000;
     protected User $user;
 
     public function setUp(): void

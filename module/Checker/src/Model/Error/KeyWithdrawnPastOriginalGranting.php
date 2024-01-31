@@ -36,7 +36,7 @@ class KeyWithdrawnPastOriginalGranting extends Error
     {
         return sprintf(
             'Key code of %s withdrawn per %s, this is after the original expiration %s.',
-            $this->getWithdrawal()->getGranting()->getGrantee()->getFullName(),
+            $this->getWithdrawal()->getGranting()->getMember()->getFullName(),
             $this->getWithdrawal()->getWithdrawnOn()->format('Y-m-d'),
             $this->getWithdrawal()->getGranting()->getUntil()->format('Y-m-d'),
         );

@@ -6,6 +6,7 @@ namespace User\Adapter;
 
 use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Authentication\Result;
+use SensitiveParameter;
 use User\Mapper\ApiPrincipalMapper;
 
 class ApiPrincipalAdapter implements AdapterInterface
@@ -36,8 +37,10 @@ class ApiPrincipalAdapter implements AdapterInterface
     /**
      * Sets the credentials used to authenticate.
      */
-    public function setCredentials(string $token): void
-    {
+    public function setCredentials(
+        #[SensitiveParameter]
+        string $token,
+    ): void {
         $this->token = $token;
     }
 

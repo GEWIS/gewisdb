@@ -36,7 +36,7 @@ class KeyGrantedPastBoundary extends Error
     {
         return sprintf(
             'Key code granted to %s has an expiration of %s, this is after September 1st of the next association year.',
-            $this->getGranting()->getGrantee()->getFullName(),
+            $this->getGranting()->getMember()->getFullName(),
             $this->getGranting()->getUntil()->format('Y-m-d'),
         );
     }

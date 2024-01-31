@@ -240,7 +240,7 @@ class MemberController extends AbstractActionController
      *
      * Shows member information.
      */
-    public function showAction(): ViewModel
+    public function showAction(): Response|ViewModel
     {
         $lidnr = (int) $this->params()->fromRoute('id');
         $member = $this->memberService->getMemberWithDecisions($lidnr);
@@ -260,9 +260,24 @@ class MemberController extends AbstractActionController
             return $this->memberIsDeleted($member);
         }
 
+        $noteForm = $this->memberService->getAuditNoteForm($member);
+        if ($this->getRequest()->isPost() && 'new-auditentry' === $this->getRequest()->getPost('submit', '')) {
+            $noteForm->setData($this->getRequest()->getPost()->toArray());
+
+            if ($noteForm->isValid()) {
+                $this->memberService->addAuditNote($member, $noteForm);
+                $this->flashMessenger()->addSuccessMessage('Note has been added to member');
+
+                return $this->redirect()->toRoute('member/show', [
+                    'id' => $lidnr,
+                ]);
+            }
+        }
+
         return new ViewModel([
             'member' => $member,
             'hasCorrectInstallations' => $hasCorrectInstallations,
+            'noteForm' => $noteForm,
         ]);
     }
 

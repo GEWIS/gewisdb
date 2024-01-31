@@ -5,16 +5,32 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision;
 
 use Database\Model\Member;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\AssociationOverride;
+use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use Override;
 
 /**
  * Installation into organ.
  */
 #[Entity]
+#[AssociationOverrides([
+    new AssociationOverride(
+        name: 'member',
+        joinColumns: new JoinColumn(
+            name: 'lidnr',
+            referencedColumnName: 'lidnr',
+            nullable: false,
+        ),
+        inversedBy: 'installations',
+    ),
+])]
 class Installation extends FoundationReference
 {
     /**
@@ -24,17 +40,15 @@ class Installation extends FoundationReference
     protected string $function;
 
     /**
-     * Member.
+     * Reappointment subdecisions if this installation was prolonged (can be done multiple times).
+     *
+     * @var Collection<array-key, Reappointment>
      */
-    #[ManyToOne(
-        targetEntity: Member::class,
-        inversedBy: 'installations',
+    #[OneToMany(
+        targetEntity: Reappointment::class,
+        mappedBy: 'installation',
     )]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-    )]
-    protected Member $member;
+    protected Collection $reappointments;
 
     /**
      * Discharges.
@@ -44,6 +58,11 @@ class Installation extends FoundationReference
         mappedBy: 'installation',
     )]
     protected ?Discharge $discharge = null;
+
+    public function __construct()
+    {
+        $this->reappointments = new ArrayCollection();
+    }
 
     /**
      * Get the function.
@@ -63,18 +82,31 @@ class Installation extends FoundationReference
 
     /**
      * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
      */
+    #[Override]
     public function getMember(): Member
     {
         return $this->member;
     }
 
     /**
-     * Set the member.
+     * Get the reappointments, if they exist.
+     *
+     * @return Collection<array-key, Reappointment>
      */
-    public function setMember(Member $member): void
+    public function getReappointments(): Collection
     {
-        $this->member = $member;
+        return $this->reappointments;
+    }
+
+    /**
+     * Get the discharge, if it exists
+     */
+    public function getDischarge(): ?Discharge
+    {
+        return $this->discharge;
     }
 
     /**
@@ -89,13 +121,5 @@ class Installation extends FoundationReference
         $text .= ' van ' . $this->getFoundation()->getAbbr() . '.';
 
         return $text;
-    }
-
-    /**
-     * Get the discharge, if it exists
-     */
-    public function getDischarge(): ?Discharge
-    {
-        return $this->discharge;
     }
 }

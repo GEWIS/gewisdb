@@ -205,8 +205,11 @@ class Meeting
             // installation
             $reportSubDecision->setFunction($subdecision->getFunction());
             $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
-        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Discharge) {
-            // discharge
+        } elseif (
+            $subdecision instanceof DatabaseSubDecisionModel\Reappointment
+            || $subdecision instanceof DatabaseSubDecisionModel\Discharge
+        ) {
+            // reappointment and discharge
             $ref = $subdecision->getInstallation();
             $installation = $subdecRepo->find([
                 'meeting_type' => $ref->getDecision()->getMeeting()->getType(),
@@ -225,10 +228,11 @@ class Meeting
         } elseif (
             $subdecision instanceof DatabaseSubDecisionModel\Reckoning
             || $subdecision instanceof DatabaseSubDecisionModel\Budget
+            || $subdecision instanceof DatabaseSubDecisionModel\OrganRegulation
         ) {
             // budget and reckoning
-            if (null !== $subdecision->getAuthor()) {
-                $reportSubDecision->setAuthor($this->findMember($subdecision->getAuthor()));
+            if (null !== $subdecision->getMember()) {
+                $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
 
             $reportSubDecision->setName($subdecision->getName());
@@ -236,6 +240,11 @@ class Meeting
             $reportSubDecision->setDate($subdecision->getDate());
             $reportSubDecision->setApproval($subdecision->getApproval());
             $reportSubDecision->setChanges($subdecision->getChanges());
+
+            // Specific to the `OrganRegulation`s, set the type of organ
+            if ($subdecision instanceof DatabaseSubDecisionModel\OrganRegulation) {
+                $reportSubDecision->setOrganType($subdecision->getOrganType());
+            }
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Board\Installation) {
             // board installation
             $reportSubDecision->setFunction($subdecision->getFunction());
@@ -267,7 +276,7 @@ class Meeting
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Key\Granting) {
             // key code granting
-            $reportSubDecision->setGrantee($this->findMember($subdecision->getGrantee()));
+            $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             $reportSubDecision->setUntil($subdecision->getUntil());
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Key\Withdrawal) {
             // key code withdrawal
@@ -326,6 +335,11 @@ class Meeting
             case $subDecision instanceof ReportSubDecisionModel\Destroy:
                 throw new Exception('Deletion of destroy decisions not implemented');
 
+            case $subDecision instanceof ReportSubDecisionModel\Reappointment:
+                $installation = $subDecision->getInstallation();
+                $installation->removeReappointment($subDecision);
+
+                break;
             case $subDecision instanceof ReportSubDecisionModel\Discharge:
                 $installation = $subDecision->getInstallation();
                 $installation->clearDischarge();

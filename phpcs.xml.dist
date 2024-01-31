@@ -58,6 +58,7 @@
         <exclude-pattern>module/Database/src/Controller/Factory/QueryControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/ActionLinkFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/AuditFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/CheckoutSessionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
@@ -102,6 +103,7 @@
         <exclude-pattern>module/Database/src/Hydrator/Budget.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Destroy.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Other.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Board/Discharge.php</exclude-pattern>
@@ -134,6 +136,7 @@
         <exclude-pattern>module/Database/src/Hydrator/Budget.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Destroy.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Other.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Board/Discharge.php</exclude-pattern>
@@ -156,6 +159,7 @@
         <exclude-pattern>module/Database/src/Form/Destroy.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Export.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Foundation.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/InstallationFunction.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MailingList.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Member.php</exclude-pattern>
@@ -193,10 +197,5 @@
         <exclude-pattern>module/Checker/src/Model/Error/MemberActiveAndInactiveInOrgan.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberActiveWithRoleAndInactiveInOrgan.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Model/Error/MemberInNonExistingOrgan.php</exclude-pattern>
-    </rule>
-
-    <!-- PHP_CodeSniffer does not yet understand PHP 8.2 functionality -->
-    <rule ref="PSR12.Functions.NullableTypeDeclaration.UnexpectedCharactersFound">
-        <exclude-pattern>module/Database/src/Service/Stripe.php</exclude-pattern>
     </rule>
 </ruleset>

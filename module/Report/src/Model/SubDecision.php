@@ -25,7 +25,9 @@ use Report\Model\SubDecision\FoundationReference;
 use Report\Model\SubDecision\Installation;
 use Report\Model\SubDecision\Key\Granting as KeyGranting;
 use Report\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
+use Report\Model\SubDecision\OrganRegulation;
 use Report\Model\SubDecision\Other;
+use Report\Model\SubDecision\Reappointment;
 use Report\Model\SubDecision\Reckoning;
 
 /**
@@ -39,9 +41,11 @@ use Report\Model\SubDecision\Reckoning;
 )]
 #[DiscriminatorMap(
     value: [
+        'organ_regulation' => OrganRegulation::class,
         'foundation' => Foundation::class,
         'abrogation' => Abrogation::class,
         'installation' => Installation::class,
+        'reappointment' => Reappointment::class,
         'discharge' => Discharge::class,
         'budget' => Budget::class,
         'reckoning' => Reckoning::class,
@@ -135,6 +139,20 @@ abstract class SubDecision
     protected string $content;
 
     /**
+     * The member involved in this sub-decision.
+     *
+     * Not all sub-decisions require this, as such it is nullable. However, sub-decisions that need the guarantee that
+     * this is not null or need to specify an inverse side can do so using an association override.
+     */
+    #[ManyToOne(targetEntity: Member::class)]
+    #[JoinColumn(
+        name: 'lidnr',
+        referencedColumnName: 'lidnr',
+        nullable: true,
+    )]
+    protected ?Member $member = null;
+
+    /**
      * Get the decision.
      */
     public function getDecision(): Decision
@@ -201,6 +219,22 @@ abstract class SubDecision
     public function setNumber(int $number): void
     {
         $this->number = $number;
+    }
+
+    /**
+     * Get the member.
+     */
+    public function getMember(): ?Member
+    {
+        return $this->member;
+    }
+
+    /**
+     * Set the member.
+     */
+    public function setMember(Member $member): void
+    {
+        $this->member = $member;
     }
 
     /**

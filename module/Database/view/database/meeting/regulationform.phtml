@@ -1,0 +1,156 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+?>
+<script>
+$(document).ready(function () {
+    $('#regulation-author').autocomplete({
+            minLength: 2, // at least two chars before request
+            delay: 0, // no delay before request
+            source: function (rq, response) {
+                // make an AJAX request
+                $.ajax({
+                    dataType: 'json',
+                    url: '<?= $this->url('member/searchFiltered') ?>?q=' + rq.term,
+                    context: document.body
+                }).done(function(data) {
+                    var ret = [];
+                    $.each(data.json, function (idx, member) {
+                        // assemble member name and add to list
+                        var name = member.fullName + ' (' + member.lidnr + ')';
+
+                        ret.push({
+                            label: name,
+                            value: name,
+                            id: member.lidnr
+                        });
+                    });
+
+                    // show data
+                    response(ret);
+                });
+            },
+            select: function (event, ui) {
+                $(event.target).parent().find("input.member-lidnr").val(ui.item.id);
+            }
+        });
+});
+</script>
+<?php
+$form = $this->form;
+$form->prepare();
+
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'organ_regulation')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+//$form->setAttribute('id', 'regulation-form');
+
+
+echo $this->form()->openTag($form);
+?>
+<?php /* first do hidden elements */ ?>
+<?php
+$fs = $form->get('meeting')
+?>
+<?= $this->formHidden($fs->get('type')) ?>
+<?= $this->formHidden($fs->get('number')) ?>
+<?= $this->formHidden($form->get('point')) ?>
+<?= $this->formHidden($form->get('decision')) ?>
+
+<div class="form-group">
+<?php
+    $element = $form->get('type');
+    $element->setLabelAttributes(array('class' => 'radio-inline'));
+    ?>
+    <?= $this->formRadio($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('name');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $this->translate('Name'));
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('date');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $this->translate('Date of Organ Regulation'));
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<?php
+$fs = $form->get('author');
+?>
+<div class="form-group">
+<?php
+$el = $fs->get('name');
+$el->setAttribute('class', 'form-control member-autocomplete');
+$el->setAttribute('id', 'regulation-author');
+$el->setAttribute('placeholder', $el->getLabel());
+?>
+    <?= $this->formLabel($fs) ?>
+    <?= $this->formInput($el) ?>
+    <?php
+    // hidden element for actual membership number
+    $el = $fs->get('lidnr');
+    $el->setAttribute('class', 'member-lidnr');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?= $this->formElementErrors($el) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('version');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('placeholder', $this->translate('Version'));
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('approve');
+$element->setLabelAttributes(array('class' => 'radio-inline'));
+?>
+    <?= $this->formRadio($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+<?php
+$element = $form->get('changes');
+$element->setLabelAttributes(array('class' => 'radio-inline'));
+?>
+    <?= $this->formRadio($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+
+<?php
+$submit = $form->get('submit');
+$submit->setLabel('Submit');
+$submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('id', 'regulation-submit');
+?>
+<?= $this->formButton($submit) ?>
+
+<?= $this->form()->closeTag(); ?>

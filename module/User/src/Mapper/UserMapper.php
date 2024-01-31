@@ -27,6 +27,11 @@ class UserMapper
         return $this->getRepository()->find($id);
     }
 
+    public function findByLogin(string $login): ?UserModel
+    {
+        return $this->getRepository()->findOneBy(['login' => $login]);
+    }
+
     public function persist(UserModel $user): void
     {
         $this->em->persist($user);
@@ -37,6 +42,23 @@ class UserMapper
     {
         $this->em->remove($user);
         $this->em->flush();
+    }
+
+    /**
+     * findByLogin, but always returns a user
+     */
+    public function findOrCreateByLogin(string $login): UserModel
+    {
+        $user = $this->findByLogin($login);
+        if (null !== $user) {
+            return $user;
+        }
+
+        $user = new UserModel();
+        $user->setLogin($login);
+        $this->persist($user);
+
+        return $user;
     }
 
     public function getRepository(): EntityRepository
