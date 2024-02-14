@@ -34,6 +34,7 @@
         <exclude-pattern>module/Application/src/Service/Factory/FileStorageFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/Factory/AbstractCheckerCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/Factory/CheckMembershipGraduateRenewalCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/Factory/SendBirthdayMailCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/InstallationFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/KeyFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
@@ -45,6 +46,7 @@
         <exclude-pattern>module/Checker/src/Service/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/OrganFactory.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Service/Factory/RenewalFactory.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Service/Factory/BirthdayFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredProspectiveMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
@@ -119,6 +121,7 @@
         <exclude-pattern>module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTueCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckMembershipTypeCommand.php</exclude-pattern>
+        <exclude-pattern>module/Checker/src/Command/SendBirthdayMailCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/DeleteExpiredProspectiveMembersCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/GenerateAuthenticationKeysCommand.php</exclude-pattern>

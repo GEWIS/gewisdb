@@ -42,6 +42,30 @@
       <code>$defaultName</code>
     </NonInvariantDocblockPropertyType>
   </file>
+  <file src="module/Checker/src/Command/CheckAuthenticationKeysCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/CheckDatabaseCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/CheckDatabaseCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="module/Checker/src/Command/SendBirthdayMailCommand.php">
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$defaultDescription</code>
+      <code>$defaultName</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
   <file src="module/Checker/src/Model/TueData.php">
     <PossiblyUndefinedArrayOffset occurrences="1">
       <code>$this-&gt;data['registrations']</code>

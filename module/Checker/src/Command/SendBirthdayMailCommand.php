@@ -25,14 +25,14 @@ class SendBirthdayMailCommand extends Command
 
     protected function execute(
         InputInterface $input,
-        OutputInterface $output
+        OutputInterface $output,
     ): int {
         $this->getBirthdayService()->sendBirthday();
 
         return Command::SUCCESS;
     }
 
-    public function getBirthdayService() : BirthdayService
+    public function getBirthdayService(): BirthdayService
     {
         return $this->birthdayService;
     }

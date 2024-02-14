@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSQLDriver;
-use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 use Database\Extensions\Doctrine\DayOfMonth;
 use Database\Extensions\Doctrine\Month;
+use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSQLDriver;
+use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 
 return [
     'doctrine' => [
