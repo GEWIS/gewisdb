@@ -5,22 +5,25 @@ declare(strict_types=1);
 namespace Database\Extensions\Doctrine;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
+use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
+
+use function sprintf;
 
 /**
  * DayOfMonth ::= "DAYOFMONTH" "(" ArithmeticPrimary ")"
  */
 class DayOfMonth extends FunctionNode
 {
-    private $date;
+    private Node|string $date;
 
     public function getSql(SqlWalker $sqlWalker): string
     {
         return sprintf(
             'EXTRACT(DAY FROM %s)',
-            $sqlWalker->walkArithmeticPrimary($this->date)
+            $sqlWalker->walkArithmeticPrimary($this->date),
         );
     }
 

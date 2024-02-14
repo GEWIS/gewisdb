@@ -1,23 +1,29 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Database\Extensions\Doctrine;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
+use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
+
+use function sprintf;
 
 /**
  * MonthFunction ::= "MONTH" "(" ArithmeticPrimary ")"
  */
 class Month extends FunctionNode
 {
-    private $date;
+    private Node|string $date;
 
     public function getSql(SqlWalker $sqlWalker): string
     {
         return sprintf(
             'EXTRACT(MONTH FROM %s)',
-            $sqlWalker->walkArithmeticPrimary($this->date)
+            $sqlWalker->walkArithmeticPrimary($this->date),
         );
     }
 

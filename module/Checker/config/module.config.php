@@ -11,7 +11,6 @@ use Checker\Command\CheckMembershipTUeCommand;
 use Checker\Command\CheckMembershipTypeCommand;
 use Checker\Command\SendBirthdayMailCommand;
 
-
 return [
     'laminas-cli' => [
         'commands' => [

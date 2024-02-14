@@ -16,7 +16,6 @@ use Database\Model\SubDecision\Reckoning as ReckoningModel;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Database\Extensions\Doctrine\Month;
 
 use function count;
 use function filter_var;
@@ -344,20 +343,15 @@ class Member
      */
     public function getCurrentBirthdays(): array
     {
-
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->select('m')
-            ->where('MONTH(m.birth) = MONTH(CURRENT_DATE()) AND
-                DAYOFMONTH(m.birth) = DAYOFMONTH(CURRENT_DATE())'
-            )
+            ->where('MONTH(m.birth) = MONTH(CURRENT_DATE()) AND DAYOFMONTH(m.birth) = DAYOFMONTH(CURRENT_DATE())')
             ->andWhere('m.deleted = False')
             ->andWhere('m.expiration > CURRENT_TIMESTAMP()')
             ->andWhere('m.hidden = False');
 
-
         return $qb->getQuery()->getResult();
     }
-
 
     /**
      * Persist a member model.

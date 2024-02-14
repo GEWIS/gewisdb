@@ -39,7 +39,6 @@ class Email
     ): void {
         $replyTo = new MailAddress($this->config['from_secretary']['address'], $this->config['from_secretary']['name']);
 
-
         if (!$noTemplate) {
             $body = $this->render(
                 'email/basic',

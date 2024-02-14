@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 use Database\Extensions\Doctrine\DayOfMonth;
 use Database\Extensions\Doctrine\Month;
 use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSQLDriver;

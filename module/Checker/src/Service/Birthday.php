@@ -1,13 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Checker\Service;
 
+use Application\Service\Email as EmailService;
 use Database\Mapper\Member as MemberMapper;
 use Database\Model\Member as MemberModel;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
-use Application\Service\Email as EmailService;
 
 /**
  * Birthday class that takes care of sending out birthday mails to members
@@ -18,11 +19,8 @@ class Birthday
         private readonly PhpRenderer $renderer,
         private readonly MemberMapper $memberMapper,
         private readonly EmailService $emailService,
-    ){
-
+    ) {
     }
-
-
 
     public function sendBirthday(): void
     {
@@ -39,9 +37,8 @@ class Birthday
             'email/birthday-mail',
             [
                 'firstName' => $person->getFirstName(),
-                'birthday' => $person->getBirth()
-
-            ]
+                'birthday' => $person->getBirth(),
+            ],
         );
 
         $this->emailService->sendEmailTemplate(
@@ -58,13 +55,11 @@ class Birthday
         );
     }
 
-
-
     /**
-    * Render a template with given variables.
-    *
-    * @param array<array-key, mixed> $vars
-    */
+     * Render a template with given variables.
+     *
+     * @param array<array-key, mixed> $vars
+     */
     private function render(
         string $template,
         array $vars,
@@ -74,5 +69,4 @@ class Birthday
 
         return $this->renderer->render($model);
     }
-
 }
