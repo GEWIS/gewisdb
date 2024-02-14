@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 14:01+0200\n"
+"POT-Creation-Date: 2024-01-06 23:12+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Tom Udding <tomudding@users.noreply.github.com>\n"
+"Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 2.2.4\n"
 
 msgid "# Decisions"
 msgstr "# besluiten"
@@ -122,6 +122,9 @@ msgstr "Voeg nieuwe mailinglijst toe"
 
 msgid "Add New Meeting"
 msgstr "Voeg nieuwe vergadering toe"
+
+msgid "Add Organ Regulation"
+msgstr "Voeg orgaanreglement toe"
 
 msgid "Add Student Address"
 msgstr "Voeg kameradres toe"
@@ -239,8 +242,8 @@ msgid ""
 msgstr "Statuten, Huishoudelijk Reglement en Privacystatement van GEWIS"
 
 msgid ""
-"As a GEWIS member, you will be automatically registered on the \"GEWIS-"
-"lijst\" list. This list is for announcements and activities of the study "
+"As a GEWIS member, you will be automatically registered on the \"GEWIS-lijst"
+"\" list. This list is for announcements and activities of the study "
 "association. In addition, there are several optional mailing lists. You can "
 "subscribe to the following mailing lists. These subscriptions can be changed "
 "at a later date."
@@ -376,6 +379,9 @@ msgstr "Wijzigingen bevestigen"
 msgid "Controller"
 msgstr "Controller"
 
+msgid "Copy Decision"
+msgstr "Besluit kopiëren"
+
 msgid "Create API principal"
 msgstr "Maak API-gebruiker aan"
 
@@ -414,6 +420,9 @@ msgstr "Datum begroting/afrekening"
 
 msgid "Date of Expiration"
 msgstr "Afloopdatum"
+
+msgid "Date of Organ Regulation"
+msgstr "Datum orgaanreglement"
 
 msgid "Decision"
 msgstr "Besluit"
@@ -479,6 +488,15 @@ msgstr "Decharges"
 
 msgid "Do you want to delete the other data?"
 msgstr "Wil je de andere gegevens verwijderen?"
+
+#, php-format
+msgid ""
+"Do you want to reappoint %s? Check functions you also want reappointed, "
+"functions that are not selected will result in a discharge of that function."
+msgstr ""
+"Wil je %s herbenoemen? Vink functies aan die je ook wilt herbenoemen, "
+"functies die niet zijn geselecteerd zullen resulteren in een decharge van "
+"die functie."
 
 msgid "Dutch Description"
 msgstr "Nederlandse beschrijving"
@@ -570,15 +588,17 @@ msgstr "Functies"
 msgid "GEWIS Registration - Checkout"
 msgstr "GEWIS Inschrijven - Afrekenen"
 
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members</a>. <a href=\"%s\">Click here</a> to "
-"create a meeting or <a href=\"%s\">perform a query</a>."
+"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
+"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
+"query</a>."
 msgstr ""
 "GEWIS heeft momenteel <a href=\"%s\">%d leden</a> (+%d verlopen) en <a "
-"href=\"%s\">%d toekomstige leden</a>. <a href=\"%s\">Klik hier</a> om een "
-"vergadering te maken of om een <a href=\"%s\">query uit te voeren</a>."
+"href=\"%s\">%d toekomstige leden (%d betaald, %d onbetaald)</a>. <a "
+"href=\"%s\">Klik hier</a> om een vergadering te maken of om een <a "
+"href=\"%s\">query uit te voeren</a>."
 
 msgid "GMM (General Members Meeting)"
 msgstr "ALV (algemene ledenvergadering)"
@@ -716,6 +736,14 @@ msgstr ""
 "hoe je je gebruikersnaam kunt vinden. We gebruiken je gebruikersnaam om te "
 "verifi�ren dat je aan de faculteit van M&CS studeert."
 
+#, php-format
+msgid ""
+"If your browser does not redirect you, please <a href=\"%s\">click here</a> "
+"to continue."
+msgstr ""
+"Als je browser je niet doorverwijst, <a href=\"%s\">klik dan hier</a> om "
+"verder te gaan."
+
 msgid "Initial(s)"
 msgstr "Initialen"
 
@@ -753,11 +781,10 @@ msgid "Key code cannot be granted in the past."
 msgstr "Sleutelcode kan niet in het verleden worden toegekend."
 
 msgid "Key code cannot be withdrawn after its original expiration."
-msgstr ""
-"Sleutelcode kan niet worden ingetrokken na de oorspronkelijke vervaldatum."
+msgstr "Sleutelcode kan niet worden ingetrokken nadat deze is vervallen."
 
 msgid "Key code cannot be withdrawn in the past."
-msgstr "Sleutelcode kan in het verleden niet worden ingetrokken."
+msgstr "Sleutelcode kan niet met terugwerkende kracht worden ingetrokken."
 
 msgid "Language Settings"
 msgstr "Taalinstellingen"
@@ -770,6 +797,9 @@ msgstr "Tussenvoegsel"
 
 msgid "Last Update to Membership"
 msgstr "Laatste aanpassing van het lidmaatschap"
+
+msgid "Leave note"
+msgstr "Voeg notitie toe"
 
 msgid "Log in"
 msgstr "Inloggen"
@@ -872,12 +902,18 @@ msgstr "Geen gegevens ontvangen."
 msgid "No mailing list subscriptions."
 msgstr "Geen aanmeldingen voor mailinglijsten."
 
+msgid "Note"
+msgstr "Notitie"
+
 msgid ""
 "Note: if you updated your email address, you have to sign in to the GEWIS "
 "website using your new email address once this change has been processed."
 msgstr ""
 "Let op: als je je emailadres hebt aangepast, moet je na het verwerken van "
 "deze wijziging met je nieuwe emailadres inloggen op de GEWIS-website."
+
+msgid "Notes"
+msgstr "Notities"
 
 msgid "Oh snap!"
 msgstr "Oh nee!"
@@ -896,6 +932,14 @@ msgstr "Orgaan"
 
 msgid "Organ Mutations"
 msgstr "Orgaanmutaties"
+
+msgid "Organ Regulation"
+msgstr "Orgaanreglement"
+
+msgid "Organ regulations can only be created for 'committee' or 'fraternity'."
+msgstr ""
+"Orgaanreglementen kunnen alleen worden aangemaakt voor 'commissie' of "
+"'dispuut'."
 
 msgid "Other"
 msgstr "Overig"
@@ -980,6 +1024,15 @@ msgstr "Queryresultaat"
 
 msgid "Read organ membership (per user/organ)"
 msgstr "Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
+
+msgid "Reappoint"
+msgstr "Herbenoemen"
+
+msgid "Reappoint Member"
+msgstr "Lid herbenoemen"
+
+msgid "Reappointments"
+msgstr "Herbenoemingen"
 
 msgid "Register Member"
 msgstr "Lid inschrijven"
@@ -1143,6 +1196,9 @@ msgstr "De opgevraagde controller kon deze aanvraag niet verwerken."
 msgid "There are currently no data update requests."
 msgstr "Er zijn momenteel geen verzoeken om gegevens bij te werken."
 
+msgid "There are no notes for this member."
+msgstr "Dit lid heeft geen notities."
+
 msgid "There are other decisions that still refer to this decision."
 msgstr "Er zijn nog andere besluiten die naar dit besluit verwijzen."
 
@@ -1240,9 +1296,6 @@ msgstr "Adres bijwerken"
 
 msgid "Update with data from the TU/e"
 msgstr "Bijwerken met gegevens van de TU/e"
-
-msgid "User"
-msgstr "Gebruiker"
 
 msgid "Username"
 msgstr "Gebruikersnaam"
@@ -1357,14 +1410,18 @@ msgid "Yes"
 msgstr "Ja"
 
 #, php-format
+msgid "You are being redirected to %s"
+msgstr "Je wordt doorgestuurd naar %s"
+
+#, php-format
 msgid ""
 "You are using a build based on commit <a target=\"_blank\" href=\"https://"
 "github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
 "your bug reports."
 msgstr ""
-"Je gebruikt een build gebaseerd op commit <a target=\"_blank\" "
-"href=\"https://github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Vermeld dit "
-"in al je bugrapporten."
+"Je gebruikt een build gebaseerd op commit <a target=\"_blank\" href="
+"\"https://github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Vermeld dit in al "
+"je bugrapporten."
 
 #, php-format
 msgid "You can always read the online Supremum on %s."
@@ -1391,8 +1448,8 @@ msgid ""
 "%2$s\">%2$s</a>."
 msgstr ""
 "Je hebt verlenging van je status als afgestudeerde aangevraagd. Binnen 24 "
-"uur zal de einddatum <b>%1$s</b> op jouw ledenpagina van <a href=\"//"
-"%2$s\">%2$s</a> te zien zijn."
+"uur zal de einddatum <b>%1$s</b> op jouw ledenpagina van <a href=\"//%2$s\">"
+"%2$s</a> te zien zijn."
 
 msgid "You have successfully requested renewal of your status as graduate."
 msgstr ""
@@ -1410,6 +1467,9 @@ msgstr "Jouw TU/e-gebruikersnaam moet lijken op sYYxxxx of YYYYxxxx."
 
 msgid "as"
 msgstr "als"
+
+msgid "our payment provider"
+msgstr "onze betalingsprovider"
 
 msgid "reads as follows:"
 msgstr "luidt als volgt:"

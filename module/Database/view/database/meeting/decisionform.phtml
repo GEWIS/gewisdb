@@ -21,6 +21,11 @@ case 'foundation':
         'form' => $form
     ));
     break;
+case 'organ_regulation':
+    echo $this->partial('database/meeting/regulationform', array(
+        'form' => $form
+    ));
+    break;
 case 'destroy':
     echo $this->partial('database/meeting/destroyform', array(
         'form' => $form
@@ -70,6 +75,10 @@ $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . 
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
     <?= $this->escapeHtml($subdecision->getContent()) ?>
 <?php endforeach; ?>
+
+<button onclick="copyDecision()" class="btn btn-success">
+    <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
+</button>
 <br />
     <a href="<?= $this->url(
         'meeting/view',
@@ -86,8 +95,11 @@ $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . 
             )
         ?>
     </a>
-<script>
-    var = "<?= $subdecision->getContent() ?>";
+    <script>
+        var decisionCopy = "<?= $this->escapeHtml($decision->getContent()) ?>";
+        function copyDecision() {
+            navigator.clipboard.writeText(decisionCopy);
+        }
+    </script>
 
-</script>
 <?php endif; ?>

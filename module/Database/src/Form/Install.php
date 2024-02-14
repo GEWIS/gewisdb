@@ -18,6 +18,7 @@ class Install extends AbstractDecision
         private readonly Translator $translator,
         MeetingFieldset $meeting,
         InstallationFieldset $install,
+        SubDecisionFieldset $reappointment,
         SubDecisionFieldset $discharge,
         SubDecisionFieldset $foundation,
     ) {
@@ -41,6 +42,17 @@ class Install extends AbstractDecision
                 'count' => 1,
                 'should_create_template' => true,
                 'target_element' => $install,
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'reappointments',
+            'type' => Collection::class,
+            'options' => [
+                'label' => $this->translator->translate('Reappointments'),
+                'count' => 1,
+                'should_create_template' => true,
+                'target_element' => $reappointment,
             ],
         ]);
 

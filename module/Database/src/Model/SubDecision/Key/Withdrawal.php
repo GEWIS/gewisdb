@@ -92,7 +92,7 @@ class Withdrawal extends SubDecision
     {
         $template = $this->getTemplate();
 
-        $template = str_replace('%GRANTEE%', $this->getGranting()->getGrantee()->getFullName(), $template);
+        $template = str_replace('%GRANTEE%', $this->getGranting()->getMember()->getFullName(), $template);
         $template = str_replace('%WITHDRAWAL%', $this->formatDate($this->getWithdrawnOn()), $template);
 
         return $template;
@@ -113,7 +113,7 @@ class Withdrawal extends SubDecision
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
             null,
-            'd MMMM Y',
+            'd MMMM y',
         );
 
         return $formatter->format($date);

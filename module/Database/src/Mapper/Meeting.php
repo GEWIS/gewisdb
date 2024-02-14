@@ -311,7 +311,7 @@ class Meeting
 
         $qb->select('g, m')
             ->from(KeyGrantingModel::class, 'g')
-            ->join('g.grantee', 'm')
+            ->join('g.member', 'm')
             ->where('g.until >= :now');
 
         // remove withdrawals

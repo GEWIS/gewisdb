@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
+  <file src="module/Database/src/Service/Meeting.php">
+    <PossiblyUndefinedArrayOffset occurrences="1">
+      <code>$decision[$subDecisionType]</code>
+    </PossiblyUndefinedArrayOffset>
+  </file>
   <file src="module/Checker/src/Command/CheckAuthenticationKeysCommand.php">
     <NonInvariantDocblockPropertyType occurrences="2">
       <code>$defaultDescription</code>
@@ -94,6 +99,11 @@
     <InvalidReturnType occurrences="1">
       <code>Response|ViewModel</code>
     </InvalidReturnType>
+  </file>
+  <file src="module/Database/src/Form/OrganRegulation.php">
+    <PossiblyInvalidArrayOffset occurrences="1">
+      <code>$option['value']</code>
+    </PossiblyInvalidArrayOffset>
   </file>
   <file src="module/Database/src/Service/Stripe.php">
     <UndefinedMagicPropertyFetch occurrences="3">

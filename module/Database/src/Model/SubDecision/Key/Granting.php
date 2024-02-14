@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision\Key;
 
-use Database\Model\Member;
 use Database\Model\SubDecision;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToOne;
 use IntlDateFormatter;
 
@@ -20,17 +17,6 @@ use function str_replace;
 #[Entity]
 class Granting extends SubDecision
 {
-    /**
-     * The member who is granted a keycode of GEWIS.
-     */
-    #[ManyToOne(targetEntity: Member::class)]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-        nullable: true,
-    )]
-    protected ?Member $grantee = null;
-
     /**
      * Till when the keycode is granted.
      */
@@ -45,22 +31,6 @@ class Granting extends SubDecision
         mappedBy: 'granting',
     )]
     protected ?Withdrawal $withdrawal = null;
-
-    /**
-     * Get the grantee.
-     */
-    public function getGrantee(): ?Member
-    {
-        return $this->grantee;
-    }
-
-    /**
-     * Set the grantee.
-     */
-    public function setGrantee(Member $grantee): void
-    {
-        $this->grantee = $grantee;
-    }
 
     /**
      * Get the date.
@@ -85,7 +55,7 @@ class Granting extends SubDecision
     {
         $template = $this->getTemplate();
 
-        $template = str_replace('%GRANTEE%', $this->getGrantee()->getFullName(), $template);
+        $template = str_replace('%GRANTEE%', $this->getMember()->getFullName(), $template);
         $template = str_replace('%UNTIL%', $this->formatDate($this->getUntil()), $template);
 
         return $template;
@@ -106,7 +76,7 @@ class Granting extends SubDecision
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
             null,
-            'd MMMM Y',
+            'd MMMM y',
         );
 
         return $formatter->format($date);

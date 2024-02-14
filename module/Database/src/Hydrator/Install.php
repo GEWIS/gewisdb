@@ -7,6 +7,7 @@ namespace Database\Hydrator;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
+use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use InvalidArgumentException;
 
 class Install extends AbstractDecision
@@ -34,8 +35,18 @@ class Install extends AbstractDecision
 
         $num = 1;
 
-        // first add discharges
-        if (isset($data['discharges']) && !empty($data['discharges'])) {
+        // first do reappointments
+        if (!empty($data['reappointments'])) {
+            foreach ($data['reappointments'] as $install) {
+                $reappointment = new ReappointmentModel();
+                $reappointment->setInstallation($install);
+                $reappointment->setNumber($num++);
+                $reappointment->setDecision($decision);
+            }
+        }
+
+        // then add discharges
+        if (!empty($data['discharges'])) {
             foreach ($data['discharges'] as $install) {
                 $discharge = new DischargeModel();
                 $discharge->setInstallation($install);
@@ -44,8 +55,8 @@ class Install extends AbstractDecision
             }
         }
 
-        // then add installations
-        if (isset($data['installations']) && !empty($data['installations'])) {
+        // finally add installations
+        if (!empty($data['installations'])) {
             foreach ($data['installations'] as $install) {
                 $installation = new InstallationModel();
                 $installation->setNumber($num++);

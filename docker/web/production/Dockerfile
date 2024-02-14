@@ -5,13 +5,13 @@ WORKDIR /code
 RUN apk add --no-cache --virtual .runtime-deps \
         gettext
 
-COPY ./module/Application/language/*.po .
+COPY ./module/Application/language/*.po ./
 
 RUN msgfmt en.po -o en -c --strict -v \
     && msgfmt nl.po -o nl -c --strict -v
 
 # Install dependencies
-FROM php:8.2-fpm-alpine as php-target
+FROM php:8.3-fpm-alpine as php-target
 
 RUN apk add --no-cache --virtual .build-deps \
         curl-dev \

@@ -7,6 +7,7 @@ namespace Database\Service\Factory;
 use Application\Service\FileStorage as FileStorageService;
 use Checker\Service\Checker as CheckerService;
 use Database\Form\Address as AddressForm;
+use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\Member as MemberForm;
 use Database\Form\MemberApprove as MemberApproveForm;
@@ -15,6 +16,7 @@ use Database\Form\MemberExpiration as MemberExpirationForm;
 use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
 use Database\Mapper\ActionLink as ActionLinkMapper;
+use Database\Mapper\Audit as AuditMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
@@ -26,6 +28,7 @@ use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\Renderer\PhpRenderer;
 use Psr\Container\ContainerInterface;
+use User\Service\UserService;
 
 class MemberFactory implements FactoryInterface
 {
@@ -41,6 +44,8 @@ class MemberFactory implements FactoryInterface
         $translator = $container->get(MvcTranslator::class);
         /** @var AddressForm $addressForm */
         $addressForm = $container->get(AddressForm::class);
+        /** @var AuditNoteForm $auditNoteForm */
+        $auditNoteForm = $container->get(AuditNoteForm::class);
         /** @var DeleteAddressForm $deleteAddressForm */
         $deleteAddressForm = $container->get(DeleteAddressForm::class);
         /** @var MemberApproveForm $memberApproveForm */
@@ -57,6 +62,8 @@ class MemberFactory implements FactoryInterface
         $memberTypeForm = $container->get(MemberTypeForm::class);
         /** @var ActionLinkMapper $actionLinkMapper */
         $actionLinkMapper = $container->get(ActionLinkMapper::class);
+        /** @var AuditMapper $auditMapper */
+        $auditMapper = $container->get(AuditMapper::class);
         /** @var MailingListMapper $mailingListMapper */
         $mailingListMapper = $container->get(MailingListMapper::class);
         /** @var MemberMapper $memberMapper */
@@ -71,6 +78,8 @@ class MemberFactory implements FactoryInterface
         $fileStorageService = $container->get(FileStorageService::class);
         /** @var MailingListService $mailingListService */
         $mailingListService = $container->get(MailingListService::class);
+        /** @var UserService $userService */
+        $userService = $container->get(UserService::class);
         /** @var PhpRenderer $viewRenderer */
         $viewRenderer = $container->get('ViewRenderer');
         /** @var TransportInterface $mailTransport */
@@ -81,6 +90,7 @@ class MemberFactory implements FactoryInterface
         return new MemberService(
             $translator,
             $addressForm,
+            $auditNoteForm,
             $deleteAddressForm,
             $memberApproveForm,
             $memberForm,
@@ -90,12 +100,14 @@ class MemberFactory implements FactoryInterface
             $memberTypeForm,
             $mailingListMapper,
             $actionLinkMapper,
+            $auditMapper,
             $memberMapper,
             $memberUpdateMapper,
             $prospectiveMemberMapper,
             $checkerService,
             $fileStorageService,
             $mailingListService,
+            $userService,
             $viewRenderer,
             $mailTransport,
             $config,

@@ -18,6 +18,7 @@ use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
 use Database\Form\Key\Grant as KeyGrantForm;
 use Database\Form\Key\Withdraw as KeyWithdrawForm;
+use Database\Form\OrganRegulation as RegulationForm;
 use Database\Form\Other as OtherForm;
 use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
@@ -52,6 +53,7 @@ class Meeting
         private readonly InstallForm $installForm,
         private readonly KeyGrantForm $keyGrantForm,
         private readonly KeyWithdrawForm $keyWithdrawForm,
+        private readonly RegulationForm $regulationForm,
         private readonly OtherForm $otherForm,
         private readonly MeetingMapper $meetingMapper,
         private readonly MemberMapper $memberMapper,
@@ -550,14 +552,14 @@ class Meeting
         $decision = $form->getData();
         $meeting = $this->getMeeting(
             MeetingTypes::from($decision['meeting']['type']),
-            (int) $decision['meeting']['number'],
+            intval($decision['meeting']['number']),
         );
         $subdecision = $this->getOrganMapper()->findSimple(
             MeetingTypes::from($decision['subdecision']['meeting_type']),
-            (int) $decision['subdecision']['meeting_number'],
-            (int) $decision['subdecision']['decision_point'],
-            (int) $decision['subdecision']['decision_number'],
-            (int) $decision['subdecision']['number'],
+            intval($decision['subdecision']['meeting_number']),
+            intval($decision['subdecision']['decision_point']),
+            intval($decision['subdecision']['decision_number']),
+            intval($decision['subdecision']['number']),
         );
 
         if (
@@ -573,9 +575,10 @@ class Meeting
         $decision['meeting'] = $meeting;
         $decision['subdecision'] = $subdecision;
 
+        // Prepare installations.
         $installations = [];
         array_walk($decision['installations'], function ($value) use (&$installations): void {
-            $member = $this->memberMapper->findSimple((int) $value['member']['lidnr']);
+            $member = $this->memberMapper->findSimple(intval($value['member']['lidnr']));
 
             if (null === $member) {
                 return;
@@ -586,27 +589,28 @@ class Meeting
                 'function' => $value['function'],
             ];
         });
-
         $decision['installations'] = $installations;
 
-        $discharges = [];
-        array_walk($decision['discharges'], function ($value) use (&$discharges): void {
-            $decision = $this->getOrganMapper()->findInstallationDecision(
-                MeetingTypes::from($value['meeting_type']),
-                (int) $value['meeting_number'],
-                (int) $value['decision_point'],
-                (int) $value['decision_number'],
-                (int) $value['number'],
-            );
+        // Prepare reappointments and discharges.
+        foreach (['reappointments', 'discharges'] as $subDecisionType) {
+            $subDecisions = [];
+            array_walk($decision[$subDecisionType], function ($value) use (&$subDecisions): void {
+                $decision = $this->getOrganMapper()->findInstallationDecision(
+                    MeetingTypes::from($value['meeting_type']),
+                    intval($value['meeting_number']),
+                    intval($value['decision_point']),
+                    intval($value['decision_number']),
+                    intval($value['number']),
+                );
 
-            if (null === $decision) {
-                return;
-            }
+                if (null === $decision) {
+                    return;
+                }
 
-            $discharges[] = $decision;
-        });
-
-        $decision['discharges'] = $discharges;
+                $subDecisions[] = $decision;
+            });
+            $decision[$subDecisionType] = $subDecisions;
+        }
 
         $decision = (new InstallHydrator())->hydrate($decision, new DecisionModel());
 
@@ -747,6 +751,57 @@ class Meeting
     }
 
     /**
+     * Organ regulation decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: RegulationForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    public function regulationDecision(array $data): array
+    {
+        $form = $this->getRegulationForm();
+
+        // use hack to make sure we do not have validators for these fields
+        $approveChain = $form->getInputFilter()->get('approve')->getValidatorChain();
+        $refObj = new ReflectionObject($approveChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setValue($approveChain, new PriorityQueue());
+
+        $changesChain = $form->getInputFilter()->get('changes')->getValidatorChain();
+        $refObj = new ReflectionObject($changesChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setValue($changesChain, new PriorityQueue());
+
+        $form->setData($data);
+
+        $form->bind(new DecisionModel());
+
+        if (!$form->isValid()) {
+            return [
+                'type' => 'organ_regulation',
+                'form' => $form,
+            ];
+        }
+
+        /** @var DecisionModel $decision */
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+
+        return [
+            'type' => 'organ_regulation',
+            'decision' => $decision,
+        ];
+    }
+
+    /**
      * Create a meeting.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
@@ -880,6 +935,14 @@ class Meeting
     public function getDestroyForm(): DestroyForm
     {
         return $this->destroyForm;
+    }
+
+    /**
+     * Get regulation form.
+     */
+    public function getRegulationForm(): RegulationForm
+    {
+        return $this->regulationForm;
     }
 
     /**

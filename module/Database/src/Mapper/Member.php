@@ -250,7 +250,7 @@ class Member
 
         $qb->select('b')
             ->from(BudgetModel::class, 'b')
-            ->where('b.author = :member');
+            ->where('b.member = :member');
         $qb->setParameter('member', $member);
 
         $results = $qb->getQuery()->getResult();
@@ -263,7 +263,7 @@ class Member
 
         $qb->select('b')
             ->from(ReckoningModel::class, 'b')
-            ->where('b.author = :member');
+            ->where('b.member = :member');
         $qb->setParameter('member', $member);
 
         $results = $qb->getQuery()->getResult();

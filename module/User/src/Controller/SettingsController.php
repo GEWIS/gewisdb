@@ -62,6 +62,8 @@ class SettingsController extends AbstractActionController
             return $this->notFoundAction();
         }
 
+        $form->bind($user);
+
         if ($this->getRequest()->isPost()) {
             $result = $this->userService->edit($user, $this->getRequest()->getPost()->toArray());
 

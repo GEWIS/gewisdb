@@ -12,6 +12,7 @@ use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Form\Abolish as AbolishForm;
 use Database\Form\Address as AddressForm;
+use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
 use Database\Form\Board\Discharge as BoardDischargeForm;
 use Database\Form\Board\Install as BoardInstallForm;
 use Database\Form\Board\Release as BoardReleaseForm;
@@ -42,11 +43,13 @@ use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
 use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
+use Database\Form\OrganRegulation as RegulationForm;
 use Database\Form\Other as OtherForm;
 use Database\Form\Query as QueryForm;
 use Database\Form\QueryExport as QueryExportForm;
 use Database\Form\QuerySave as QuerySaveForm;
 use Database\Hydrator\Abolish as AbolishHydrator;
+use Database\Hydrator\AuditEntry as AuditEntryHydrator;
 use Database\Hydrator\Board\Discharge as BoardDischargeHydrator;
 use Database\Hydrator\Board\Install as BoardInstallHydrator;
 use Database\Hydrator\Board\Release as BoardReleaseHydrator;
@@ -56,13 +59,16 @@ use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
 use Database\Hydrator\Key\Grant as KeyGrantHydrator;
 use Database\Hydrator\Key\Withdraw as KeyWithdrawHydrator;
+use Database\Hydrator\OrganRegulation as RegulationHydrator;
 use Database\Hydrator\Other as OtherHydrator;
 use Database\Hydrator\Strategy\AddressHydratorStrategy;
 use Database\Hydrator\Strategy\MeetingHydratorStrategy;
 use Database\Hydrator\Strategy\PostalRegionHydratorStrategy;
 use Database\Mapper\ActionLink as ActionLinkMapper;
+use Database\Mapper\Audit as AuditMapper;
 use Database\Mapper\CheckoutSession as CheckoutSessionMapper;
 use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
+use Database\Mapper\Factory\AuditFactory as AuditMapperFactory;
 use Database\Mapper\Factory\CheckoutSessionFactory as CheckoutSessionMapperFactory;
 use Database\Mapper\Factory\InstallationFunctionFactory as InstallationFunctionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
@@ -81,13 +87,15 @@ use Database\Mapper\Organ as OrganMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
 use Database\Mapper\SavedQuery as SavedQueryMapper;
 use Database\Model\Address as AddressModel;
+use Database\Model\AuditNote as AuditNoteModel;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
+use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
-use Database\Model\SubDecision\Installation as InstallationModel;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
+use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
 use Database\Service\Factory\InstallationFunctionFactory as InstallationFunctionServiceFactory;
@@ -128,6 +136,7 @@ class Module
                 AbolishHydrator::class => AbolishHydrator::class,
                 BudgetHydrator::class => BudgetHydrator::class,
                 DestroyHydrator::class => DestroyHydrator::class,
+                RegulationHydrator::class => RegulationHydrator::class,
                 FoundationHydrator::class => FoundationHydrator::class,
                 InstallHydrator::class => InstallHydrator::class,
                 OtherHydrator::class => OtherHydrator::class,
@@ -157,6 +166,13 @@ class Module
                 AddressForm::class => static function (ContainerInterface $container) {
                     $form = new AddressForm($container->get(MvcTranslator::class));
                     $form->setHydrator($container->get('database_hydrator_address'));
+
+                    return $form;
+                },
+                AuditNoteForm::class => static function (ContainerInterface $container) {
+                    $form = new AuditNoteForm($container->get(MvcTranslator::class));
+                    $form->setHydrator(new AuditEntryHydrator());
+                    $form->setObject(new AuditNoteModel());
 
                     return $form;
                 },
@@ -245,6 +261,7 @@ class Module
                         $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(InstallationFieldset::class),
+                        $container->get('database_form_fieldset_subdecision_reappointment'),
                         $container->get('database_form_fieldset_subdecision_discharge'),
                         $container->get('database_form_fieldset_subdecision_foundation'),
                     );
@@ -275,6 +292,16 @@ class Module
                         $container->get(DecisionFieldset::class),
                     );
                     $form->setHydrator($container->get(DestroyHydrator::class));
+
+                    return $form;
+                },
+                RegulationForm::class => static function (ContainerInterface $container) {
+                    $form = new RegulationForm(
+                        $container->get(MvcTranslator::class),
+                        $container->get(MeetingFieldset::class),
+                        $container->get(MemberFieldset::class),
+                    );
+                    $form->setHydrator($container->get(RegulationHydrator::class));
 
                     return $form;
                 },
@@ -358,10 +385,17 @@ class Module
 
                     return $fieldset;
                 },
+                'database_form_fieldset_subdecision_reappointment' => static function (ContainerInterface $container) {
+                    $fieldset = new SubDecisionFieldset();
+                    $fieldset->setHydrator($container->get('database_hydrator_subdecision'));
+                    $fieldset->setObject(new ReappointmentModel());
+
+                    return $fieldset;
+                },
                 'database_form_fieldset_subdecision_discharge' => static function (ContainerInterface $container) {
                     $fieldset = new SubDecisionFieldset();
                     $fieldset->setHydrator($container->get('database_hydrator_subdecision'));
-                    $fieldset->setObject(new InstallationModel());
+                    $fieldset->setObject(new DischargeModel());
 
                     return $fieldset;
                 },
@@ -492,6 +526,7 @@ class Module
                     return $hydrator;
                 },
                 ActionLinkMapper::class => ActionLinkMapperFactory::class,
+                AuditMapper::class => AuditMapperFactory::class,
                 InstallationFunctionMapper::class => InstallationFunctionMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,

@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb ee43c0c-dirty\n"
+"Project-Id-Version: GEWISdb 5957641f-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 14:01+0200\n"
+"POT-Creation-Date: 2024-01-06 23:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,6 +118,9 @@ msgstr ""
 msgid "Add New Meeting"
 msgstr ""
 
+msgid "Add Organ Regulation"
+msgstr ""
+
 msgid "Add Student Address"
 msgstr ""
 
@@ -224,8 +227,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"As a GEWIS member, you will be automatically registered on the \"GEWIS-"
-"lijst\" list. This list is for announcements and activities of the study "
+"As a GEWIS member, you will be automatically registered on the \"GEWIS-lijst"
+"\" list. This list is for announcements and activities of the study "
 "association. In addition, there are several optional mailing lists. You can "
 "subscribe to the following mailing lists. These subscriptions can be changed "
 "at a later date."
@@ -348,6 +351,9 @@ msgstr ""
 msgid "Controller"
 msgstr ""
 
+msgid "Copy Decision"
+msgstr ""
+
 msgid "Create API principal"
 msgstr ""
 
@@ -385,6 +391,9 @@ msgid "Date of Budget/Statement"
 msgstr ""
 
 msgid "Date of Expiration"
+msgstr ""
+
+msgid "Date of Organ Regulation"
 msgstr ""
 
 msgid "Decision"
@@ -450,6 +459,12 @@ msgid "Discharges"
 msgstr ""
 
 msgid "Do you want to delete the other data?"
+msgstr ""
+
+#, php-format
+msgid ""
+"Do you want to reappoint %s? Check functions you also want reappointed, "
+"functions that are not selected will result in a discharge of that function."
 msgstr ""
 
 msgid "Dutch Description"
@@ -543,8 +558,9 @@ msgstr ""
 #, php-format
 msgid ""
 "GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members</a>. <a href=\"%s\">Click here</a> to "
-"create a meeting or <a href=\"%s\">perform a query</a>."
+"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
+"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
+"query</a>."
 msgstr ""
 
 msgid "GMM (General Members Meeting)"
@@ -660,6 +676,12 @@ msgid ""
 "at the department of M&CS."
 msgstr ""
 
+#, php-format
+msgid ""
+"If your browser does not redirect you, please <a href=\"%s\">click here</a> "
+"to continue."
+msgstr ""
+
 msgid "Initial(s)"
 msgstr ""
 
@@ -710,6 +732,9 @@ msgid "Last Name Prepositional Particle"
 msgstr ""
 
 msgid "Last Update to Membership"
+msgstr ""
+
+msgid "Leave note"
 msgstr ""
 
 msgid "Log in"
@@ -813,9 +838,15 @@ msgstr ""
 msgid "No mailing list subscriptions."
 msgstr ""
 
+msgid "Note"
+msgstr ""
+
 msgid ""
 "Note: if you updated your email address, you have to sign in to the GEWIS "
 "website using your new email address once this change has been processed."
+msgstr ""
+
+msgid "Notes"
 msgstr ""
 
 msgid "Oh snap!"
@@ -834,6 +865,12 @@ msgid "Organ"
 msgstr ""
 
 msgid "Organ Mutations"
+msgstr ""
+
+msgid "Organ Regulation"
+msgstr ""
+
+msgid "Organ regulations can only be created for 'committee' or 'fraternity'."
 msgstr ""
 
 msgid "Other"
@@ -911,6 +948,15 @@ msgid "Query Result"
 msgstr ""
 
 msgid "Read organ membership (per user/organ)"
+msgstr ""
+
+msgid "Reappoint"
+msgstr ""
+
+msgid "Reappoint Member"
+msgstr ""
+
+msgid "Reappointments"
 msgstr ""
 
 msgid "Register Member"
@@ -1069,6 +1115,9 @@ msgstr ""
 msgid "There are currently no data update requests."
 msgstr ""
 
+msgid "There are no notes for this member."
+msgstr ""
+
 msgid "There are other decisions that still refer to this decision."
 msgstr ""
 
@@ -1149,9 +1198,6 @@ msgid "Update Address"
 msgstr ""
 
 msgid "Update with data from the TU/e"
-msgstr ""
-
-msgid "User"
 msgstr ""
 
 msgid "Username"
@@ -1243,6 +1289,10 @@ msgid "Yes"
 msgstr ""
 
 #, php-format
+msgid "You are being redirected to %s"
+msgstr ""
+
+#, php-format
 msgid ""
 "You are using a build based on commit <a target=\"_blank\" href=\"https://"
 "github.com/GEWIS/gewisdb/commit/%1$s\">%1$s</a>. Please include this in all "
@@ -1283,6 +1333,9 @@ msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr ""
 
 msgid "as"
+msgstr ""
+
+msgid "our payment provider"
 msgstr ""
 
 msgid "reads as follows:"
