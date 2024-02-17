@@ -554,6 +554,37 @@ class Member
     }
 
     /**
+     * Member is at least 16 years old on the given date.
+     */
+    public function hasReached16(DateTime $onDate = new DateTime()): bool
+    {
+        return $this->isOlderThan($onDate, 16);
+    }
+
+    /**
+     * Member is at least 18 years old on the given date.
+     */
+    public function hasReached18(DateTime $onDate = new DateTime()): bool
+    {
+        return $this->isOlderThan($onDate, 18);
+    }
+
+    /**
+     * Member is at least 21 years old on the given date.
+     */
+    public function hasReached21(DateTime $onDate = new DateTime()): bool
+    {
+        return $this->isOlderThan($onDate, 21);
+    }
+
+    private function isOlderThan(
+        DateTime $onDate,
+        int $years,
+    ): bool {
+        return $onDate->diff($this->getBirth())->y >= $years;
+    }
+
+    /**
      * Get if the member is deleted.
      */
     public function getDeleted(): bool
@@ -583,6 +614,10 @@ class Member
      *     generation: int,
      *     hidden: bool,
      *     deleted: bool,
+     *     birthdate: string,
+     *     is_16_plus: bool,
+     *     is_18_plus: bool,
+     *     is_21_plus: bool,
      *     membershipEndsOn: ?string,
      *     expiration: string,
      *     authenticationKey: ?string,
@@ -601,6 +636,10 @@ class Member
             'generation' => $this->getGeneration(),
             'hidden' => $this->getHidden(),
             'deleted' => $this->getDeleted(),
+            'birthdate' => $this->getBirth()->format(DateTimeInterface::ATOM),
+            'is_16_plus' => $this->hasReached16(),
+            'is_18_plus' => $this->hasReached18(),
+            'is_21_plus' => $this->hasReached21(),
             'membershipEndsOn' => $this->getMembershipEndsOn()?->format(DateTimeInterface::ATOM) ?? null,
             'expiration' => $this->getExpiration()->format(DateTimeInterface::ATOM),
             'authenticationKey' => $this->getAuthenticationKey(),
@@ -615,7 +654,7 @@ class Member
      *
      * @return array{
      *     lidnr: int,
-     *     email: ?string,
+     *     email?: ?string,
      *     fullName: string,
      *     lastName: string,
      *     middleName: string,
@@ -624,6 +663,10 @@ class Member
      *     generation: int,
      *     hidden: bool,
      *     deleted: bool,
+     *     birthdate?: string,
+     *     is_16_plus?: bool,
+     *     is_18_plus?: bool,
+     *     is_21_plus?: bool,
      *     expiration: string,
      *     organs?: array<array-key, array{
      *         organ: array{
@@ -643,7 +686,6 @@ class Member
     {
         $result = [
             'lidnr' => $this->getLidnr(),
-            'email' => $this->getEmail(),
             'fullName' => $this->getFullName(),
             'lastName' => $this->getLastName(),
             'middleName' => $this->getMiddleName(),
@@ -669,6 +711,26 @@ class Member
                     ),
                 ),
             );
+        }
+
+        if (in_array('email', $include)) {
+            $result['email'] = $this->getEmail();
+        }
+
+        if (in_array('birthdate', $include)) {
+            $result['birthdate'] = $this->getBirth()->format(DateTimeInterface::ATOM);
+        }
+
+        if (in_array('is_16_plus', $include)) {
+            $result['is_16_plus'] = $this->hasReached16();
+        }
+
+        if (in_array('is_18_plus', $include)) {
+            $result['is_18_plus'] = $this->hasReached18();
+        }
+
+        if (in_array('is_21_plus', $include)) {
+            $result['is_21_plus'] = $this->hasReached21();
         }
 
         if (in_array('keyholder', $include)) {

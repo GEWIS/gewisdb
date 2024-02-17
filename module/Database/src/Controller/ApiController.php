@@ -113,6 +113,26 @@ class ApiController extends AbstractActionController
             $additionalProperties[] = 'type';
         }
 
+        if ($this->apiAuthService->currentUserCan(ApiPermissions::MembersEmail)) {
+            $additionalProperties[] = 'email';
+        }
+
+        if ($this->apiAuthService->currentUserCan(ApiPermissions::MembersBirth)) {
+            $additionalProperties[] = 'birthdate';
+        }
+
+        if ($this->apiAuthService->currentUserCan(ApiPermissions::MembersAge16)) {
+            $additionalProperties[] = 'is_16_plus';
+        }
+
+        if ($this->apiAuthService->currentUserCan(ApiPermissions::MembersAge18)) {
+            $additionalProperties[] = 'is_18_plus';
+        }
+
+        if ($this->apiAuthService->currentUserCan(ApiPermissions::MembersAge21)) {
+            $additionalProperties[] = 'is_21_plus';
+        }
+
         return $additionalProperties;
     }
 }

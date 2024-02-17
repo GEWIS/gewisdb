@@ -60,6 +60,7 @@
         <ImplementedReturnTypeMismatch errorLevel="info" />
         <UndefinedInterfaceMethod errorLevel="info" />
         <NullableReturnStatement errorLevel="info" />
+        <Trace errorLevel="error"/>
     </issueHandlers>
     <plugins>
         <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin"/>

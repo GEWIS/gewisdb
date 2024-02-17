@@ -158,11 +158,6 @@ components:
           format: int32
           example: 8000
           minimum: 0
-        email:
-          type: string
-          format: email
-          nullable: true
-          example: example@gewis.nl
         fullName:
           type: string
           example: Timo de Teststudent
@@ -209,9 +204,40 @@ components:
           properties:
             keyholder:
               type: boolean
+    MemberExtendedEmail:
+      allOf:
+        - $ref: '#/components/schemas/MemberSimple'
+        - type: object
+          properties:
+            email:
+              type: string
+              format: email
+              nullable: true
+              example: example@gewis.nl
+    MemberExtendedBirthDate:
+      allOf:
+        - $ref: '#/components/schemas/MemberSimple'
+        - type: object
+          properties:
+            birthdate:
+              type: string
+              format: date
+              description: Date in the Y-m-d\TH:i:sP format
+              example: "2023-07-01T00:00:00+02:00"
+            is_16_plus:
+              type: boolean
+              description: Whether the member is at least 16 years old
+            is_18_plus:
+              type: boolean
+              description: Whether the member is at least 18 years old
+            is_21_plus:
+              type: boolean
+              description: Whether the member is at least 21 years old
     Member:
       description: "If the client holds the `OrgansMembershipR` permission, a (combination of) MemberExtended object(s), else MemberSimple"
       oneOf:
+        - $ref: '#/components/schemas/MemberExtendedBirthDate'
+        - $ref: '#/components/schemas/MemberExtendedEmail'
         - $ref: '#/components/schemas/MemberExtendedOrgan'
         - $ref: '#/components/schemas/MemberExtendedKeyholder'
         - $ref: '#/components/schemas/MemberSimple'
