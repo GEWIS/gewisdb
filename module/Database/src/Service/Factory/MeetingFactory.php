@@ -17,6 +17,7 @@ use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
 use Database\Form\Key\Grant as KeyGrantForm;
 use Database\Form\Key\Withdraw as KeyWithdrawForm;
+use Database\Form\Minutes as MinutesForm;
 use Database\Form\OrganRegulation as OrganRegulationForm;
 use Database\Form\Other as OtherForm;
 use Database\Mapper\Meeting as MeetingMapper;
@@ -64,6 +65,8 @@ class MeetingFactory implements FactoryInterface
         $keyWithdrawForm = $container->get(KeyWithdrawForm::class);
         /** @var OrganRegulationForm $organRegulationForm */
         $organRegulationForm = $container->get(OrganRegulationForm::class);
+        /** @var MinutesForm $minutesForm */
+        $minutesForm = $container->get(MinutesForm::class);
         /** @var OtherForm $otherForm */
         $otherForm = $container->get(OtherForm::class);
         /** @var MeetingMapper $meetingMapper */
@@ -87,6 +90,7 @@ class MeetingFactory implements FactoryInterface
             $installForm,
             $keyGrantForm,
             $keyWithdrawForm,
+            $minutesForm,
             $organRegulationForm,
             $otherForm,
             $meetingMapper,

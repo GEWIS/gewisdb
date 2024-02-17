@@ -13,15 +13,15 @@ var urlTemplate = '<?= $this->url('organ/info', array(
     'number' => '__number__',
     'point' => '__point__',
     'decision' => '__decision__',
-    'subdecision' => '__subdecision__'
+    'sequence' => '__sequence__'
 )) ?>';
-function getUrl(type, meeting, point, decision, subdecision)
+function getUrl(type, meeting, point, decision, sequence)
 {
     url = urlTemplate.replace('__type__', type);
     url = url.replace('__number__', meeting);
     url = url.replace('__point__', point);
     url = url.replace('__decision__', decision);
-    return url.replace('__subdecision__', subdecision);
+    return url.replace('__sequence__', sequence);
 }
 $(document).ready(function () {
     $('#abolish-organ').autocomplete({

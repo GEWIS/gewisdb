@@ -108,6 +108,7 @@
         <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Minutes.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Other.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Board/Discharge.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Board/Install.php</exclude-pattern>
@@ -141,6 +142,7 @@
         <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Minutes.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Other.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Board/Discharge.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Board/Install.php</exclude-pattern>
@@ -171,6 +173,7 @@
         <exclude-pattern>module/Database/src/Form/MemberLists.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberRenewal.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberType.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Minutes.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Other.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Query.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/QueryExport.php</exclude-pattern>

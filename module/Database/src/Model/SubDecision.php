@@ -18,6 +18,7 @@ use Database\Model\SubDecision\FoundationReference;
 use Database\Model\SubDecision\Installation;
 use Database\Model\SubDecision\Key\Granting as KeyGranting;
 use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
+use Database\Model\SubDecision\Minutes;
 use Database\Model\SubDecision\OrganRegulation;
 use Database\Model\SubDecision\Other;
 use Database\Model\SubDecision\Reappointment;
@@ -60,6 +61,7 @@ use function str_replace;
         'foundationreference' => FoundationReference::class,
         'key_granting' => KeyGranting::class,
         'key_withdraw' => KeyWithdrawal::class,
+        'minutes' => Minutes::class,
     ],
 )]
 abstract class SubDecision

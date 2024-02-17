@@ -39,7 +39,7 @@ class OrganController extends AbstractActionController
                 (int) $this->params()->fromRoute('number'),
                 (int) $this->params()->fromRoute('point'),
                 (int) $this->params()->fromRoute('decision'),
-                (int) $this->params()->fromRoute('subdecision'),
+                (int) $this->params()->fromRoute('sequence'),
             ),
         ]);
     }
@@ -54,7 +54,7 @@ class OrganController extends AbstractActionController
             (int) $this->params()->fromRoute('number'),
             (int) $this->params()->fromRoute('point'),
             (int) $this->params()->fromRoute('decision'),
-            (int) $this->params()->fromRoute('subdecision'),
+            (int) $this->params()->fromRoute('sequence'),
         );
 
         $data = $foundation->toArray();

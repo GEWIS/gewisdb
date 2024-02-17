@@ -60,6 +60,11 @@ case 'key_withdraw':
         'grants' => $grants
     ));
     break;
+case 'minutes':
+    echo $this->partial('database/meeting/minutesform', array(
+        'form' => $form
+    ));
+    break;
 case 'other':
     echo $this->partial('database/meeting/otherform', array(
         'form' => $form

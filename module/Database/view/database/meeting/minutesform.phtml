@@ -1,0 +1,169 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+?>
+<script>
+    $(document).ready(function() {
+        $('#minutes-decision').autocomplete({
+            minLength: 1,
+            delay: 0,
+            source: function(rq, response) {
+                $.ajax({
+                    dataType: 'json',
+                    url: '<?= $this->url('meeting/search') ?>?q=' + rq.term,
+                    context: document.body
+                }).done(function (data) {
+                    var ret = [];
+                    $.each(data.json, function (idx, meeting) {
+                        var result = meeting.meeting_type + ' ' + meeting.meeting_number;
+
+                        ret.push({
+                            label: result,
+                            value: result,
+                            id: meeting
+                        });
+                    })
+
+                    response(ret);
+                });
+            },
+            select: function(event, ui) {
+                let meeting = ui.item.id;
+                $('#minutes-meeting-type').val(meeting.meeting_type);
+                $('#minutes-meeting-number').val(meeting.meeting_number);
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#minutes-author').autocomplete({
+            minLength: 2, // at least two chars before request
+            delay: 0, // no delay before request
+            source: function (rq, response) {
+                // make an AJAX request
+                $.ajax({
+                    dataType: 'json',
+                    url: '<?= $this->url('member/searchFiltered') ?>?q=' + rq.term,
+                    context: document.body
+                }).done(function(data) {
+                    var ret = [];
+                    $.each(data.json, function (idx, member) {
+                        // assemble member name and add to list
+                        var name = member.fullName + ' (' + member.lidnr + ')';
+
+                        ret.push({
+                            label: name,
+                            value: name,
+                            id: member.lidnr
+                        });
+                    });
+
+                    // show data
+                    response(ret);
+                });
+            },
+            select: function (event, ui) {
+                $(event.target).parent().find("input.member-lidnr").val(ui.item.id);
+            }
+        });
+    });
+</script>
+<?php
+$form = $this->form;
+$form->prepare();
+
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'minutes')));
+$form->setAttribute('method', 'post');
+
+$form->setAttribute('role', 'form');
+
+echo $this->form()->openTag($form);
+?>
+<?php /* first do hidden elements */ ?>
+<?php
+$fs = $form->get('meeting')
+?>
+<?= $this->formHidden($fs->get('type')) ?>
+<?= $this->formHidden($fs->get('number')) ?>
+<?= $this->formHidden($form->get('point')) ?>
+<?= $this->formHidden($form->get('decision')) ?>
+
+<?php
+$fs = $form->get('meeting');
+?>
+<div class="form-group">
+<?php
+$element = $form->get('name');
+$element->setAttribute('class', 'form-control');
+$element->setAttribute('id', 'minutes-decision');
+$element->setAttribute('placeholder', $this->translate('Meeting'));
+?>
+    <?= $this->formLabel($element) ?>
+    <?= $this->formInput($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<?php
+$fs = $form->get('fmeeting');
+$minutesMeetingType = $fs->get('type');
+$minutesMeetingType->setAttribute('id', 'minutes-meeting-type');
+$minutesMeetingNum = $fs->get('number');
+$minutesMeetingNum->setAttribute('id', 'minutes-meeting-number');
+?>
+<?= $this->formHidden($minutesMeetingType) ?>
+<?= $this->formHidden($minutesMeetingNum) ?>
+
+<?php
+$fs = $form->get('author');
+?>
+<div class="form-group">
+    <?php
+    $el = $fs->get('name');
+    $el->setAttribute('class', 'form-control member-autocomplete');
+    $el->setAttribute('id', 'minutes-author');
+    $el->setAttribute('placeholder', $el->getLabel());
+    ?>
+    <?= $this->formLabel($fs) ?>
+    <?= $this->formInput($el) ?>
+    <?php
+    // hidden element for actual membership number
+    $el = $fs->get('lidnr');
+    $el->setAttribute('class', 'member-lidnr');
+    ?>
+    <?= $this->formHidden($el) ?>
+    <?= $this->formElementErrors($el) ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $element = $form->get('approve');
+    $element->setLabelAttributes(array('class' => 'radio-inline'));
+    ?>
+    <?= $this->formRadio($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<div class="form-group">
+    <?php
+    $element = $form->get('changes');
+    $element->setLabelAttributes(array('class' => 'radio-inline'));
+    ?>
+    <?= $this->formRadio($element) ?>
+    <?= $this->formElementErrors($element) ?>
+</div>
+
+<?php
+$submit = $form->get('submit');
+$submit->setLabel('Submit');
+$submit->setAttribute('class', 'btn btn-primary');
+?>
+<?= $this->formButton($submit) ?>
+
+<?= $this->form()->closeTag(); ?>
+

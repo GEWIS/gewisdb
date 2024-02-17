@@ -142,6 +142,7 @@ class MeetingController extends AbstractActionController
             'install' => $this->meetingService->getInstallForm(),
             'key_grant' => $this->meetingService->getKeyGrantForm(),
             'key_withdraw' => $this->meetingService->getKeyWithdrawForm(),
+            'minutes' => $this->meetingService->getMinutesForm(),
             'other' => $this->meetingService->getOtherForm(),
             'board_install' => $this->meetingService->getBoardInstallForm(),
             'board_release' => $this->meetingService->getBoardReleaseForm(),
@@ -203,6 +204,9 @@ class MeetingController extends AbstractActionController
             ),
             'other' => new ViewModel(
                 $this->meetingService->otherDecision($this->getRequest()->getPost()->toArray()),
+            ),
+            'minutes' => new ViewModel(
+                $this->meetingService->minutesDecision($this->getRequest()->getPost()->toArray()),
             ),
             default => $this->redirect()->toRoute('meeting'),
         };
