@@ -18,6 +18,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 use function implode;
+use function str_replace;
 use function strtolower;
 
 class Meeting
@@ -46,20 +47,17 @@ class Meeting
 
         $fields = [];
         $fields[] = 'LOWER(m.type)';
-        $fields[] = "' '";
         $fields[] = 'm.number';
-        $fields[] = "' '";
         $fields = implode(', ', $fields);
         $fields = 'CONCAT(' . $fields . ')';
 
         $qb->select('m')
             ->from(MeetingModel::class, 'm')
             ->where($fields . ' LIKE :search')
-            ->andWhere('CONCAT(m.number, \'\') NOT LIKE :searchClean')
-            ->orderBy('m.date');
+            ->orWhere('CONCAT(m.number, \'\') LIKE :search')
+            ->orderBy('m.date', 'DESC');
 
-        $qb->setParameter(':search', '%' . strtolower($query) . '%');
-        $qb->setParameter(':searchClean', '%_' . strtolower($query));
+        $qb->setParameter(':search', str_replace(' ', '', strtolower($query)) . '%');
 
         return $qb->getQuery()->getResult();
     }
