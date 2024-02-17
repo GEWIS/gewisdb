@@ -6,9 +6,12 @@ namespace User\Controller;
 
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\View\Model\ViewModel;
 use User\Service\ApiPrincipalService;
+
+use function sprintf;
 
 /**
  * @method FlashMessenger flashMessenger()
@@ -19,6 +22,7 @@ class ApiSettingsController extends AbstractActionController
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
+        protected readonly MvcTranslator $translator,
         protected readonly ApiPrincipalService $apiPrincipalService,
         protected readonly array $config,
     ) {
@@ -45,9 +49,17 @@ class ApiSettingsController extends AbstractActionController
             $result = $this->apiPrincipalService->create($this->getRequest()->getPost()->toArray());
 
             if (false !== $result) {
-                $this->flashMessenger()->addSuccessMessage('Succesfully created API principal');
+                $this->flashMessenger()->addSuccessMessage(
+                    sprintf(
+                        $this->translator->translate('Succesfully created %s!'),
+                        $this->translator->translate('API principal'),
+                    ),
+                );
                 $this->flashMessenger()->addInfoMessage(
-                    'Your API token is "' . $result->getFullToken() . '". This value will NOT be shown again',
+                    sprintf(
+                        $this->translator->translate('Your API token is "%s". This value will NOT be shown again!'),
+                        $result->getFullToken(),
+                    ),
                 );
 
                 return $this->redirectList();
@@ -75,7 +87,12 @@ class ApiSettingsController extends AbstractActionController
             $result = $this->apiPrincipalService->edit($principal, $this->getRequest()->getPost()->toArray());
 
             if ($result) {
-                $this->flashMessenger()->addSuccessMessage('Succesfully updated API principal');
+                $this->flashMessenger()->addSuccessMessage(
+                    sprintf(
+                        $this->translator->translate('Change(s) of %s have been saved!'),
+                        $this->translator->translate('API principal'),
+                    ),
+                );
 
                 return $this->redirectList();
             }
@@ -93,7 +110,12 @@ class ApiSettingsController extends AbstractActionController
             $result = $this->apiPrincipalService->remove((int) $this->params()->fromRoute('id'));
 
             if ($result) {
-                $this->flashMessenger()->addSuccessMessage('Succesfully removed API principal');
+                $this->flashMessenger()->addSuccessMessage(
+                    sprintf(
+                        $this->translator->translate('Succesfully deleted %s!'),
+                        $this->translator->translate('API principal'),
+                    ),
+                );
             }
         }
 
@@ -107,7 +129,12 @@ class ApiSettingsController extends AbstractActionController
 
     public function notFoundAction(): Response
     {
-        $this->flashMessenger()->addWarningMessage('Could not find requested API principal');
+        $this->flashMessenger()->addWarningMessage(
+            sprintf(
+                $this->translator->translate('Could not find %s!'),
+                $this->translator->translate('API principal'),
+            ),
+        );
 
         return $this->redirectList();
     }

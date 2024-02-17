@@ -25,9 +25,9 @@ class Audit
     }
 
     /**
-     * Remove a member.
+     * Remove an audit entry.
      */
-    private function remove(AuditEntryModel $entry): void
+    public function remove(AuditEntryModel $entry): void
     {
         $this->em->remove($entry);
         $this->em->flush();

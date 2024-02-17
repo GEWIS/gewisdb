@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace User\Controller\Factory;
 
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 use User\Controller\ApiSettingsController;
@@ -20,6 +21,7 @@ class ApiSettingsControllerFactory implements FactoryInterface
         ?array $options = null,
     ): ApiSettingsController {
         return new ApiSettingsController(
+            $container->get(MvcTranslator::class),
             $container->get(ApiPrincipalService::class),
             $container->get('config'),
         );

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 15:21+0100\n"
+"POT-Creation-Date: 2024-02-17 17:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -15,6 +15,10 @@ msgstr ""
 
 msgid "# Decisions"
 msgstr "# Decisions"
+
+#, php-format
+msgid "%s has been added to %s"
+msgstr "%s has been added to %s"
 
 #, php-format
 msgid "%s: %s (started in %s)"
@@ -40,11 +44,14 @@ msgstr "A 404 error occurred"
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 
-msgid "API Principals"
-msgstr "API Principals"
-
 msgid "API Tokens"
 msgstr "API Tokens"
+
+msgid "API principal"
+msgstr "API principal"
+
+msgid "API principals"
+msgstr "API principals"
 
 msgid "Abbreviation"
 msgstr "Abbreviation"
@@ -151,12 +158,6 @@ msgstr "All API permissions"
 
 msgid "An error occurred"
 msgstr "An error occurred"
-
-msgid "An error occurred while trying to reject the changes."
-msgstr "An error occurred while trying to reject the changes."
-
-msgid "An error occurred while trying to save the changes."
-msgstr "An error occurred while trying to save the changes."
 
 msgid ""
 "An error occurred while we were trying to prepare the checkout page. Please "
@@ -346,6 +347,18 @@ msgid "Change password for %s"
 msgstr "Change password for %s"
 
 #, php-format
+msgid "Change(s) of %s have been approved and saved!"
+msgstr "Change(s) of %s have been approved and saved!"
+
+#, php-format
+msgid "Change(s) of %s have been rejected!"
+msgstr "Change(s) of %s have been rejected!"
+
+#, php-format
+msgid "Change(s) of %s have been saved!"
+msgstr "Change(s) of %s have been saved!"
+
+#, php-format
 msgid ""
 "Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
 "a>."
@@ -376,6 +389,26 @@ msgstr "Controller"
 
 msgid "Copy Decision"
 msgstr "Copy Decision"
+
+#, php-format
+msgid "Could not add new %s!"
+msgstr "Could not add new %s!"
+
+#, php-format
+msgid "Could not delete %s!"
+msgstr "Could not delete %s!"
+
+#, php-format
+msgid "Could not find %s!"
+msgstr "Could not find %s!"
+
+#, php-format
+msgid "Could not reject change(s) of %s!"
+msgstr "Could not reject change(s) of %s!"
+
+#, php-format
+msgid "Could not save change(s) of %s!"
+msgstr "Could not save change(s) of %s!"
 
 msgid "Create API principal"
 msgstr "Create API principal"
@@ -1143,6 +1176,14 @@ msgstr "Study"
 msgid "Subscribe"
 msgstr "Subscribe"
 
+#, php-format
+msgid "Succesfully created %s!"
+msgstr "Succesfully created %s!"
+
+#, php-format
+msgid "Succesfully deleted %s!"
+msgstr "Succesfully deleted %s!"
+
 msgid "Supremum"
 msgstr "Supremum"
 
@@ -1162,12 +1203,6 @@ msgstr "TU/e username"
 #, php-format
 msgid "Thank you %s!"
 msgstr "Thank you %s!"
-
-msgid "The changes have been applied!"
-msgstr "The changes have been applied!"
-
-msgid "The changes have not been applied."
-msgstr "The changes have not been applied."
 
 msgid "The database currently only accepts logins using your GEWIS m-account."
 msgstr "The database currently only accepts logins using your GEWIS m-account."
@@ -1462,11 +1497,30 @@ msgstr ""
 msgid "You have to consent to processing your data"
 msgstr "You have to consent to processing your data"
 
+#, php-format
+msgid "Your API token is \"%s\". This value will NOT be shown again!"
+msgstr "Your API token is \"%s\". This value will NOT be shown again!"
+
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 
 msgid "as"
 msgstr "as"
+
+msgid "mailing list subscriptions"
+msgstr "mailing list subscriptions"
+
+msgid "member"
+msgstr "member"
+
+msgid "member address"
+msgstr "member address"
+
+msgid "membership expiration date"
+msgstr "membership expiration date"
+
+msgid "membership type"
+msgstr "membership type"
 
 msgid "our payment provider"
 msgstr "our payment provider"
