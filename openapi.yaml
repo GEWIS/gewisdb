@@ -9,7 +9,7 @@ info:
   license:
     name: GNU GENERAL PUBLIC LICENSE Version 3
     url: https://github.com/GEWIS/gewisdb/blob/main/LICENSE.txt
-  version: b54649b155402dca833e5b1e5d9d1737f7caccd2
+  version: 86c08a87afe939cbb9a515f7063965f7bdb30bce
 externalDocs:
   description: Contribute to this API
   url: https://github.com/GEWIS/gewisdb
@@ -18,6 +18,8 @@ servers:
     description: Production environment
   - url: https://database.test.gewis.nl/api
     description: Test environment
+  - url: http://localhost/api
+    description: Local environment    
 tags:
   - name: basic
   - name: members
@@ -158,19 +160,19 @@ components:
           format: int32
           example: 8000
           minimum: 0
-        fullName:
+        full_name:
           type: string
           example: Timo de Teststudent
         initials:
           type: string
           example: T.
-        firstName:
+        given_name:
           type: string
           example: Timo
-        middleName:
+        middle_name:
           type: string
           example: de
-        lastName:
+        family_name:
           type: string
           example: Teststudent
         generation:
@@ -214,6 +216,14 @@ components:
               format: email
               nullable: true
               example: example@gewis.nl
+    MemberExtendedType:
+      allOf:
+        - $ref: '#/components/schemas/MemberSimple'
+        - type: object
+          properties:
+            membership_type:
+              type: string
+              enum: [ordinary, external, graduate, honorary]
     MemberExtendedBirthDate:
       allOf:
         - $ref: '#/components/schemas/MemberSimple'
@@ -240,6 +250,7 @@ components:
         - $ref: '#/components/schemas/MemberExtendedEmail'
         - $ref: '#/components/schemas/MemberExtendedOrgan'
         - $ref: '#/components/schemas/MemberExtendedKeyholder'
+        - $ref: '#/components/schemas/MemberExtendedType'
         - $ref: '#/components/schemas/MemberSimple'
     OrganMembership:
       type: object

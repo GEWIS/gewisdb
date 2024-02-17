@@ -655,11 +655,11 @@ class Member
      * @return array{
      *     lidnr: int,
      *     email?: ?string,
-     *     fullName: string,
-     *     lastName: string,
-     *     middleName: string,
+     *     full_name: string,
+     *     family_name: string,
+     *     middle_name: string,
      *     initials: string,
-     *     firstName: string,
+     *     given_name: string,
      *     generation: int,
      *     hidden: bool,
      *     deleted: bool,
@@ -679,18 +679,18 @@ class Member
      *         current: bool,
      *      }>,
      *      keyholder?: bool,
-     *      type?: string,
+     *      membership_type?: string,
      * }
      */
     public function toArrayApi(array $include = []): array
     {
         $result = [
             'lidnr' => $this->getLidnr(),
-            'fullName' => $this->getFullName(),
-            'lastName' => $this->getLastName(),
-            'middleName' => $this->getMiddleName(),
+            'full_name' => $this->getFullName(),
+            'family_name' => $this->getLastName(),
+            'middle_name' => $this->getMiddleName(),
             'initials' => $this->getInitials(),
-            'firstName' => $this->getFirstName(),
+            'given_name' => $this->getFirstName(),
             'generation' => $this->getGeneration(),
             'hidden' => $this->getHidden(),
             'deleted' => $this->getDeleted(),
@@ -738,7 +738,7 @@ class Member
         }
 
         if (in_array('type', $include)) {
-            $result['type'] = $this->getType()->value;
+            $result['membership_type'] = $this->getType()->value;
         }
 
         return $result;
