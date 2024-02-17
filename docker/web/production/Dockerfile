@@ -11,7 +11,8 @@ RUN msgfmt en.po -o en -c --strict -v \
     && msgfmt nl.po -o nl -c --strict -v
 
 # Install dependencies
-FROM php:8.3-fpm-alpine as php-target
+FROM php:8.3-fpm-alpine as gewisdb_web_production_base
+WORKDIR /code
 
 RUN apk add --no-cache --virtual .build-deps \
         curl-dev \
@@ -44,16 +45,14 @@ RUN apk add --no-cache --virtual .build-deps \
     && echo 'Europe/Amsterdam' > /etc/timezone \
     && apk del .build-deps
 
-# Create final image
-FROM php-target as gewisdb_web_production
-WORKDIR /code
-
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
-    && php -r "unlink('composer-setup.php');"
-
+# Install composer and through it the application dependencies.
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY ./composer.json ./composer.lock ./
-RUN php composer.phar install -o --no-dev
+
+RUN composer install -o --no-dev
+
+# Create the final image.
+FROM gewisdb_web_production_base AS gewisdb_web_production
 
 COPY --chown=www-data:www-data ./docker/web/production/php.ini /usr/local/etc/php/conf.d/default.ini
 COPY --chown=www-data:www-data ./docker/web/production/php-fpm.conf /usr/local/etc/php-fpm.d/zz-gewisdb.conf
@@ -69,7 +68,7 @@ RUN chmod 0775 ./docker-entrypoint.sh
 COPY --chown=www-data:www-data . /code
 COPY --chown=www-data:www-data --from=gewisdb_translations /code/*.mo /code/module/Application/language/
 
-RUN php composer.phar dump-autoload -a --no-dev
+RUN composer dump-autoload -a --no-dev
 
 ARG GIT_COMMIT
 ENV GIT_COMMIT=${GIT_COMMIT}
