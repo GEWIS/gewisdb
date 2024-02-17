@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 23:12+0100\n"
+"POT-Creation-Date: 2024-02-17 15:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -345,9 +345,6 @@ msgstr "Change Subscriptions"
 msgid "Change password for %s"
 msgstr "Change password for %s"
 
-msgid "Check if a member is a keyholder"
-msgstr "Check if a member is a keyholder"
-
 #, php-format
 msgid ""
 "Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
@@ -585,17 +582,15 @@ msgstr "Functions"
 msgid "GEWIS Registration - Checkout"
 msgstr "GEWIS Registration - Checkout"
 
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
-"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
-"query</a>."
+"GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a href="
+"\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a href=\"%s\">Click "
+"here</a> to create a meeting or <a href=\"%s\">perform a query</a>."
 msgstr ""
-"GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
-"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
-"query</a>."
+"GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a href="
+"\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a href=\"%s\">Click "
+"here</a> to create a meeting or <a href=\"%s\">perform a query</a>."
 
 msgid "GMM (General Members Meeting)"
 msgstr "GMM (General Members Meeting)"
@@ -862,6 +857,27 @@ msgstr "Membership Type"
 
 msgid "Membership of Committees and Fraternities"
 msgstr "Membership of Committees and Fraternities"
+
+msgid "Member¹ - Check if has reached age 16"
+msgstr "Member¹ - Check if has reached age 16"
+
+msgid "Member¹ - Check if has reached age 18"
+msgstr "Member¹ - Check if has reached age 18"
+
+msgid "Member¹ - Check if has reached age 21"
+msgstr "Member¹ - Check if has reached age 21"
+
+msgid "Member¹ - Check if keyholder"
+msgstr "Member¹ - Check if keyholder"
+
+msgid "Member¹ - Check membership type"
+msgstr "Member¹ - Check membership type"
+
+msgid "Member¹ - Get birthdate"
+msgstr "Member¹ - Get birthdate"
+
+msgid "Member¹ - Get email address"
+msgstr "Member¹ - Get email address"
 
 msgid "Message"
 msgstr "Message"
@@ -1235,6 +1251,13 @@ msgstr ""
 "This payment link could not be found. Perhaps it has been used before or has "
 "expired."
 
+msgid ""
+"This permission will add more properties to existing entities that can "
+"already be requested."
+msgstr ""
+"This permission will add more properties to existing entities that can "
+"already be requested."
+
 msgid "This prospective member cannot be approved."
 msgstr "This prospective member cannot be approved."
 
@@ -1299,9 +1322,6 @@ msgstr "View"
 
 msgid "View Update Requests"
 msgstr "View Update Requests"
-
-msgid "View the membership type for a member"
-msgstr "View the membership type for a member"
 
 msgid "Virt (Virtual Meeting)"
 msgstr "Virt (Virtual Meeting)"

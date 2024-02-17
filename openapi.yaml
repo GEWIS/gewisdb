@@ -244,7 +244,7 @@ components:
               type: boolean
               description: Whether the member is at least 21 years old
     Member:
-      description: "If the client holds the `OrgansMembershipR` permission, a (combination of) MemberExtended object(s), else MemberSimple"
+      description: "If the client holds the `OrgansMembershipR` or `MemberProperty*` permissions, a (combination of) MemberExtended object(s), else MemberSimple"
       oneOf:
         - $ref: '#/components/schemas/MemberExtendedBirthDate'
         - $ref: '#/components/schemas/MemberExtendedEmail'
