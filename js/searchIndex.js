@@ -3396,10 +3396,15 @@ Search.appendIndex(
             "summary": "Delete\u0020a\u0020decision.",
             "url": "classes/Database-Controller-MeetingController.html#method_deleteAction"
         },                {
-            "fqsen": "\\Database\\Controller\\MeetingController\u003A\u003AsearchAction\u0028\u0029",
-            "name": "searchAction",
-            "summary": "Search\u0020action.",
-            "url": "classes/Database-Controller-MeetingController.html#method_searchAction"
+            "fqsen": "\\Database\\Controller\\MeetingController\u003A\u003AsearchMeetingAction\u0028\u0029",
+            "name": "searchMeetingAction",
+            "summary": "Search\u0020action\u0020for\u0020meetings.",
+            "url": "classes/Database-Controller-MeetingController.html#method_searchMeetingAction"
+        },                {
+            "fqsen": "\\Database\\Controller\\MeetingController\u003A\u003AsearchDecisionAction\u0028\u0029",
+            "name": "searchDecisionAction",
+            "summary": "Search\u0020action\u0020for\u0020decisions.",
+            "url": "classes/Database-Controller-MeetingController.html#method_searchDecisionAction"
         },                {
             "fqsen": "\\Database\\Controller\\MeetingController\u003A\u003A\u0024meetingService",
             "name": "meetingService",
@@ -5111,6 +5116,11 @@ Search.appendIndex(
             "summary": "Check\u0020if\u0020a\u0020model\u0020is\u0020managed.",
             "url": "classes/Database-Mapper-Meeting.html#method_isManaged"
         },                {
+            "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AsearchMeeting\u0028\u0029",
+            "name": "searchMeeting",
+            "summary": "Search\u0020for\u0020a\u0020meeting.",
+            "url": "classes/Database-Mapper-Meeting.html#method_searchMeeting"
+        },                {
             "fqsen": "\\Database\\Mapper\\Meeting\u003A\u003AfindAll\u0028\u0029",
             "name": "findAll",
             "summary": "Find\u0020all\u0020meetings.\u0020Also\u0020counts\u0020all\u0020decision\u0020per\u0020meeting.",
@@ -6260,6 +6270,11 @@ Search.appendIndex(
             "name": "addDecisions",
             "summary": "Add\u0020multiple\u0020decisions.",
             "url": "classes/Database-Model-Meeting.html#method_addDecisions"
+        },                {
+            "fqsen": "\\Database\\Model\\Meeting\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020into\u0020an\u0020array.",
+            "url": "classes/Database-Model-Meeting.html#method_toArray"
         },                {
             "fqsen": "\\Database\\Model\\Meeting\u003A\u003A\u0024type",
             "name": "type",
@@ -8420,6 +8435,11 @@ Search.appendIndex(
             "name": "decisionSearch",
             "summary": "Search\u0020for\u0020decisions\u0020by\u0020name.",
             "url": "classes/Database-Service-Meeting.html#method_decisionSearch"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AmeetingSearch\u0028\u0029",
+            "name": "meetingSearch",
+            "summary": "Search\u0020for\u0020meetings\u0020by\u0020name.",
+            "url": "classes/Database-Service-Meeting.html#method_meetingSearch"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AfindFoundation\u0028\u0029",
             "name": "findFoundation",
