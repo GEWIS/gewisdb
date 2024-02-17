@@ -10,8 +10,9 @@ COPY ./module/Application/language/*.po ./
 RUN msgfmt en.po -o en -c --strict -v \
     && msgfmt nl.po -o nl -c --strict -v
 
-# Install dependencies and create final image
-FROM php:8.3-fpm-alpine as gewisdb_web_development
+# Install dependencies
+FROM php:8.3-fpm-alpine as gewisdb_web_development_base
+WORKDIR /code
 
 RUN apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \
@@ -54,15 +55,14 @@ RUN apk add --no-cache --virtual .build-deps \
     && echo 'Europe/Amsterdam' > /etc/timezone \
     && apk del .build-deps
 
-WORKDIR /code
+# Install composer and dependencies.
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY ./composer.json ./composer.lock ./
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
-    && php -r "unlink('composer-setup.php');"
+RUN composer install
 
-COPY --chown=www-data:www-data ./composer.json ./
-RUN php composer.phar install
+# Create the final image.
+FROM gewisdb_web_development_base AS gewisdb_web_development
 
 COPY --chown=www-data:www-data ./docker/web/development/php.ini /usr/local/etc/php/conf.d/default.ini
 COPY --chown=www-data:www-data ./docker/web/development/php-fpm.conf /usr/local/etc/php-fpm.d/zz-gewisdb.conf
@@ -83,7 +83,7 @@ RUN chmod 0775 ./orm ./web
 
 ENV PHP_IDE_CONFIG="serverName=database.gewis.nl"
 
-RUN php composer.phar dump-autoload
+RUN composer dump-autoload
 
 ARG GIT_COMMIT
 ENV GIT_COMMIT=${GIT_COMMIT}
