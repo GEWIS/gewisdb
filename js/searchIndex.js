@@ -4863,7 +4863,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Mapper\\Audit\u003A\u003Aremove\u0028\u0029",
             "name": "remove",
-            "summary": "Remove\u0020a\u0020member.",
+            "summary": "Remove\u0020an\u0020audit\u0020entry.",
             "url": "classes/Database-Mapper-Audit.html#method_remove"
         },                {
             "fqsen": "\\Database\\Mapper\\Audit\u003A\u003AgetRepository\u0028\u0029",
@@ -11855,6 +11855,11 @@ Search.appendIndex(
             "name": "notFoundAction",
             "summary": "",
             "url": "classes/User-Controller-ApiSettingsController.html#method_notFoundAction"
+        },                {
+            "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/User-Controller-ApiSettingsController.html#property_translator"
         },                {
             "fqsen": "\\User\\Controller\\ApiSettingsController\u003A\u003A\u0024apiPrincipalService",
             "name": "apiPrincipalService",
