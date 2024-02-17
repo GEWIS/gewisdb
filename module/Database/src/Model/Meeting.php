@@ -136,4 +136,20 @@ class Meeting
             $this->addDecision($decision);
         }
     }
+
+    /**
+     * Transform into an array.
+     *
+     * @return array{
+     *     meeting_type: MeetingTypes,
+     *     meeting_number: int,
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            'meeting_type' => $this->getType(),
+            'meeting_number' => $this->getNumber(),
+        ];
+    }
 }

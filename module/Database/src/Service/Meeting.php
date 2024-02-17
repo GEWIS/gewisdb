@@ -855,6 +855,16 @@ class Meeting
     }
 
     /**
+     * Search for meetings by name.
+     *
+     * @return MeetingModel[]
+     */
+    public function meetingSearch(string $query): array
+    {
+        return $this->getMeetingMapper()->searchMeeting($query);
+    }
+
+    /**
      * Get the foundation of an organ.
      */
     public function findFoundation(

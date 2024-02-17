@@ -252,11 +252,28 @@ class MeetingController extends AbstractActionController
     }
 
     /**
-     * Search action.
+     * Search action for meetings.
      *
      * Uses JSON to search for decisions.
      */
-    public function searchAction(): JsonModel
+    public function searchMeetingAction(): JsonModel
+    {
+        $query = $this->params()->fromQuery('q');
+        $res = $this->meetingService->meetingSearch($query);
+
+        $res = array_map(static function ($meeting) {
+            return $meeting->toArray();
+        }, $res);
+
+        return new JsonModel(['json' => $res]);
+    }
+
+    /**
+     * Search action for decisions.
+     *
+     * Uses JSON to search for decisions.
+     */
+    public function searchDecisionAction(): JsonModel
     {
         $query = $this->params()->fromQuery('q');
         $res = $this->meetingService->decisionSearch($query);

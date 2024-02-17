@@ -18,6 +18,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 use function implode;
+use function str_replace;
 use function strtolower;
 
 class Meeting
@@ -32,6 +33,33 @@ class Meeting
     public function isManaged(MeetingModel $meeting): bool
     {
         return $this->em->getUnitOfWork()->isInIdentityMap($meeting);
+    }
+
+    /**
+     * Search for a meeting.
+     *
+     * @return MeetingModel[]
+     */
+    public function searchMeeting(
+        string $query,
+    ): array {
+        $qb = $this->em->createQueryBuilder();
+
+        $fields = [];
+        $fields[] = 'LOWER(m.type)';
+        $fields[] = 'm.number';
+        $fields = implode(', ', $fields);
+        $fields = 'CONCAT(' . $fields . ')';
+
+        $qb->select('m')
+            ->from(MeetingModel::class, 'm')
+            ->where($fields . ' LIKE :search')
+            ->orWhere('CONCAT(m.number, \'\') LIKE :search')
+            ->orderBy('m.date', 'DESC');
+
+        $qb->setParameter(':search', str_replace(' ', '', strtolower($query)) . '%');
+
+        return $qb->getQuery()->getResult();
     }
 
     /**

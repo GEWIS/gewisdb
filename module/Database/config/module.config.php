@@ -104,6 +104,15 @@ return [
                                     ],
                                 ],
                             ],
+                            'search' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/search',
+                                    'defaults' => [
+                                        'action' => 'searchDecision',
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                     'view' => [
@@ -133,7 +142,7 @@ return [
                         'options' => [
                             'route' => '/search',
                             'defaults' => [
-                                'action' => 'search',
+                                'action' => 'searchMeeting',
                             ],
                         ],
                     ],
