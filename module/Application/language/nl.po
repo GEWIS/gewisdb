@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 15:21+0100\n"
+"POT-Creation-Date: 2024-02-17 17:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -15,6 +15,10 @@ msgstr ""
 
 msgid "# Decisions"
 msgstr "# besluiten"
+
+#, php-format
+msgid "%s has been added to %s"
+msgstr "%s toegevoegd aan %s"
 
 #, php-format
 msgid "%s: %s (started in %s)"
@@ -41,11 +45,14 @@ msgstr "Er is een 404-fout opgetreden"
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Een TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
 
-msgid "API Principals"
-msgstr "API-gebruiker"
-
 msgid "API Tokens"
 msgstr "API-token"
+
+msgid "API principal"
+msgstr "API-gebruiker"
+
+msgid "API principals"
+msgstr "API-gebruikers"
 
 msgid "Abbreviation"
 msgstr "Afkorting"
@@ -152,12 +159,6 @@ msgstr "Alle API-rechten"
 
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
-
-msgid "An error occurred while trying to reject the changes."
-msgstr "Er is een fout opgetreden tijdens het afwijzen van de wijzigingen."
-
-msgid "An error occurred while trying to save the changes."
-msgstr "Er is een fout opgetreden tijdens het opslaan van de wijzigingen."
 
 msgid ""
 "An error occurred while we were trying to prepare the checkout page. Please "
@@ -346,6 +347,18 @@ msgid "Change password for %s"
 msgstr "Wachtwoord voor %s wijzigen"
 
 #, php-format
+msgid "Change(s) of %s have been approved and saved!"
+msgstr "Wijzigingen van %s zijn goedgekeurd en opgeslagen!"
+
+#, php-format
+msgid "Change(s) of %s have been rejected!"
+msgstr "Wijzigingen van %s zijn afgekeurd!"
+
+#, php-format
+msgid "Change(s) of %s have been saved!"
+msgstr "Wijzigingen van %s zijn opgeslagen!"
+
+#, php-format
 msgid ""
 "Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
 "a>."
@@ -378,6 +391,26 @@ msgstr "Controller"
 
 msgid "Copy Decision"
 msgstr "Besluit kopiÃ«ren"
+
+#, php-format
+msgid "Could not add new %s!"
+msgstr "Kan nieuw %s niet toevoegen!"
+
+#, php-format
+msgid "Could not delete %s!"
+msgstr "Kon %s niet verwijderen!"
+
+#, php-format
+msgid "Could not find %s!"
+msgstr "Kan %s niet vinden!"
+
+#, php-format
+msgid "Could not reject change(s) of %s!"
+msgstr "Kon wijzigingen van %s niet afkeuren!"
+
+#, php-format
+msgid "Could not save change(s) of %s!"
+msgstr "Kon wijzigingen van %s niet opslaan!"
 
 msgid "Create API principal"
 msgstr "Maak API-gebruiker aan"
@@ -1151,6 +1184,14 @@ msgstr "Studie"
 msgid "Subscribe"
 msgstr "Inschrijven"
 
+#, php-format
+msgid "Succesfully created %s!"
+msgstr "Succesvol %s gemaakt!"
+
+#, php-format
+msgid "Succesfully deleted %s!"
+msgstr "%s succesvol verwijderd!"
+
 msgid "Supremum"
 msgstr "Supremum"
 
@@ -1170,12 +1211,6 @@ msgstr "TU/e-gebruikersnaam"
 #, php-format
 msgid "Thank you %s!"
 msgstr "Bedankt %s!"
-
-msgid "The changes have been applied!"
-msgstr "De wijzigingen zijn toegepast!"
-
-msgid "The changes have not been applied."
-msgstr "De wijzigingen zijn niet toegepast."
 
 msgid "The database currently only accepts logins using your GEWIS m-account."
 msgstr ""
@@ -1483,11 +1518,31 @@ msgstr "Je moet akkoord gaan met de statuten en het huishoudelijk reglement"
 msgid "You have to consent to processing your data"
 msgstr "Je moet akkoord gaan met het verwerken van je persoonlijke data"
 
+#, php-format
+msgid "Your API token is \"%s\". This value will NOT be shown again!"
+msgstr ""
+"Jouw API-sleutel is \"%s\". Deze sleutel wordt NIET opnieuw weergegeven!"
+
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Jouw TU/e-gebruikersnaam moet lijken op sYYxxxx of YYYYxxxx."
 
 msgid "as"
 msgstr "als"
+
+msgid "mailing list subscriptions"
+msgstr "mailinglijst-registraties"
+
+msgid "member"
+msgstr "lid"
+
+msgid "member address"
+msgstr "lid-adres"
+
+msgid "membership expiration date"
+msgstr "einddatum lidmaatschap"
+
+msgid "membership type"
+msgstr "lidmaatschapstype"
 
 msgid "our payment provider"
 msgstr "onze betalingsprovider"
