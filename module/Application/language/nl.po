@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 23:12+0100\n"
+"POT-Creation-Date: 2024-02-17 15:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.4\n"
@@ -345,9 +345,6 @@ msgstr "Abonnementen wijzigen"
 msgid "Change password for %s"
 msgstr "Wachtwoord voor %s wijzigen"
 
-msgid "Check if a member is a keyholder"
-msgstr "Ophalen of een lid een sleutelcode heeft"
-
 #, php-format
 msgid ""
 "Check out the website of Ada Alumni <a href=\"//%s\" target=\"_blank\">here</"
@@ -380,7 +377,7 @@ msgid "Controller"
 msgstr "Controller"
 
 msgid "Copy Decision"
-msgstr "Besluit kopiëren"
+msgstr "Besluit kopiÃ«ren"
 
 msgid "Create API principal"
 msgstr "Maak API-gebruiker aan"
@@ -588,17 +585,16 @@ msgstr "Functies"
 msgid "GEWIS Registration - Checkout"
 msgstr "GEWIS Inschrijven - Afrekenen"
 
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
-"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
-"query</a>."
+"GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a href="
+"\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a href=\"%s\">Click "
+"here</a> to create a meeting or <a href=\"%s\">perform a query</a>."
 msgstr ""
-"GEWIS heeft momenteel <a href=\"%s\">%d leden</a> (+%d verlopen) en <a "
-"href=\"%s\">%d toekomstige leden (%d betaald, %d onbetaald)</a>. <a "
-"href=\"%s\">Klik hier</a> om een vergadering te maken of om een <a "
-"href=\"%s\">query uit te voeren</a>."
+"GEWIS heeft momenteel <a href=\"%s\">%d leden</a> (+%d verlopen) en <a href="
+"\"%s\">%d toekomstige leden (%d betaald, %d onbetaald)</a>. <a href=\"%s"
+"\">Klik hier</a> om een vergadering te maken of om een <a href=\"%s\">query "
+"uit te voeren</a>."
 
 msgid "GMM (General Members Meeting)"
 msgstr "ALV (algemene ledenvergadering)"
@@ -734,7 +730,7 @@ msgstr ""
 "bijvoorbeeld %s0001. Je hebt je gebruikersnaam ontvangen in een e-mail toen "
 "je je ingeschreven hebt aan de TU/e. Op <a href=\"%s\">deze pagina</a> staat "
 "hoe je je gebruikersnaam kunt vinden. We gebruiken je gebruikersnaam om te "
-"verifi�ren dat je aan de faculteit van M&CS studeert."
+"verifiï¿½ren dat je aan de faculteit van M&CS studeert."
 
 #, php-format
 msgid ""
@@ -868,6 +864,27 @@ msgstr "Lidmaatschapstype"
 
 msgid "Membership of Committees and Fraternities"
 msgstr "Lidmaatschap van commissies en disputen"
+
+msgid "Member¹ - Check if has reached age 16"
+msgstr "Lid¹ - Controleer of lid ten minste 16 jaar is"
+
+msgid "Member¹ - Check if has reached age 18"
+msgstr "Lid¹ - Controleer of lid ten minste 18 jaar is"
+
+msgid "Member¹ - Check if has reached age 21"
+msgstr "Lid¹ - Controleer of lid ten minste 21 jaar is"
+
+msgid "Member¹ - Check if keyholder"
+msgstr "Lid¹ - Controleer of lid sleutelhouder is"
+
+msgid "Member¹ - Check membership type"
+msgstr "Lid¹ - Lidmaatschapstype inzien"
+
+msgid "Member¹ - Get birthdate"
+msgstr "Lid¹ - Geboortedatum inzien"
+
+msgid "Member¹ - Get email address"
+msgstr "Lid¹ - E-mailadres inzien"
 
 msgid "Message"
 msgstr "Bericht"
@@ -1248,6 +1265,13 @@ msgstr ""
 "Deze betaallink kon niet worden gevonden. Misschien is deze al eerder "
 "gebruikt of is deze verlopen."
 
+msgid ""
+"This permission will add more properties to existing entities that can "
+"already be requested."
+msgstr ""
+"Dit API-recht voegt meer attributen toe aan objecten die al opgehaald kunnen "
+"worden."
+
 msgid "This prospective member cannot be approved."
 msgstr "Dit toekomstig lid kan niet worden goedgekeurd."
 
@@ -1314,9 +1338,6 @@ msgstr "Toon"
 
 msgid "View Update Requests"
 msgstr "Update-aanvragen bekijken"
-
-msgid "View the membership type for a member"
-msgstr "Het lidmaatschapstype voor een lid bekijken"
 
 msgid "Virt (Virtual Meeting)"
 msgstr "Virt (virtuele vergadering)"

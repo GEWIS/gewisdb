@@ -62,6 +62,7 @@ $form->setAttribute('class', 'form-horizontal');
             <?= $this->formMultiCheckbox()->setSeparator('<br/>')->render($element, 'prepend') ?>
             </div>
             <?= $this->formElementErrors($element) ?>
+            <p>¹ <?= $this->translate('This permission will add more properties to existing entities that can already be requested.') ?></p>
         </div>
     </div>
 
