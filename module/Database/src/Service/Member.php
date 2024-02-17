@@ -650,6 +650,10 @@ class Member
             $this->getMemberMapper()->removeAddress($address);
         }
 
+        foreach ($member->getAuditEntries() as $auditEntry) {
+            $this->getAuditMapper()->remove($auditEntry);
+        }
+
         $date = new DateTime('0001-01-01 00:00:00');
 
         $member->setEmail(null);
