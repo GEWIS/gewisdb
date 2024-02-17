@@ -10241,6 +10241,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Model-Member.html#method_setAuthenticationKey"
         },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AhasReached16\u0028\u0029",
+            "name": "hasReached16",
+            "summary": "Member\u0020is\u0020at\u0020least\u002016\u0020years\u0020old\u0020on\u0020the\u0020given\u0020date.",
+            "url": "classes/Report-Model-Member.html#method_hasReached16"
+        },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AhasReached18\u0028\u0029",
+            "name": "hasReached18",
+            "summary": "Member\u0020is\u0020at\u0020least\u002018\u0020years\u0020old\u0020on\u0020the\u0020given\u0020date.",
+            "url": "classes/Report-Model-Member.html#method_hasReached18"
+        },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AhasReached21\u0028\u0029",
+            "name": "hasReached21",
+            "summary": "Member\u0020is\u0020at\u0020least\u002021\u0020years\u0020old\u0020on\u0020the\u0020given\u0020date.",
+            "url": "classes/Report-Model-Member.html#method_hasReached21"
+        },                {
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AisOlderThan\u0028\u0029",
+            "name": "isOlderThan",
+            "summary": "",
+            "url": "classes/Report-Model-Member.html#method_isOlderThan"
+        },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AgetDeleted\u0028\u0029",
             "name": "getDeleted",
             "summary": "Get\u0020if\u0020the\u0020member\u0020is\u0020deleted.",
@@ -12326,6 +12346,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersR"
         },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersActiveR",
+            "name": "MembersActiveR",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersActiveR"
+        },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyKeyholder",
             "name": "MembersPropertyKeyholder",
             "summary": "",
@@ -12336,10 +12361,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersPropertyType"
         },                {
-            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersActiveR",
-            "name": "MembersActiveR",
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyEmail",
+            "name": "MembersPropertyEmail",
             "summary": "",
-            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersActiveR"
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersPropertyEmail"
+        },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyBirthDate",
+            "name": "MembersPropertyBirthDate",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersPropertyBirthDate"
+        },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyAge16",
+            "name": "MembersPropertyAge16",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersPropertyAge16"
+        },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyAge18",
+            "name": "MembersPropertyAge18",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersPropertyAge18"
+        },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersPropertyAge21",
+            "name": "MembersPropertyAge21",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersPropertyAge21"
         },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AOrgansMembershipR",
             "name": "OrgansMembershipR",

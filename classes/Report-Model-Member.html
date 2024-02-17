@@ -670,6 +670,27 @@ still meets the requirements as set forth in the bylaws and internal regulations
 <dd>Get the member type.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Report-Model-Member.html#method_hasReached16">hasReached16()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Member is at least 16 years old on the given date.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Report-Model-Member.html#method_hasReached18">hasReached18()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Member is at least 18 years old on the given date.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Report-Model-Member.html#method_hasReached21">hasReached21()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Member is at least 21 years old on the given date.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-Member.html#method_isKeyholder">isKeyholder()</a>
     <span>
                                 &nbsp;: bool    </span>
@@ -804,17 +825,23 @@ still meets the requirements as set forth in the bylaws and internal regulations
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-Member.html#method_toArray">toArray()</a>
     <span>
-                                &nbsp;: array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, membershipEndsOn: ?string, expiration: string, authenticationKey: ?string}    </span>
+                                &nbsp;: array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, birthdate: string, is_16_plus: bool, is_18_plus: bool, is_21_plus: bool, membershipEndsOn: ?string, expiration: string, authenticationKey: ?string}    </span>
 </dt>
 <dd>Convert most relevant items to array.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-Member.html#method_toArrayApi">toArrayApi()</a>
     <span>
-                                &nbsp;: array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, expiration: string, organs?: array<array-key,array{organ: array{id: int, abbreviation: string}, function: string, installDate: string, dischargeDate: ?string, current: bool}>, keyholder?: bool, type?: string}    </span>
+                                &nbsp;: array{lidnr: int, email?: ?string, full_name: string, family_name: string, middle_name: string, initials: string, given_name: string, generation: int, hidden: bool, deleted: bool, birthdate?: string, is_16_plus?: bool, is_18_plus?: bool, is_21_plus?: bool, expiration: string, organs?: array<array-key,array{organ: array{id: int, abbreviation: string}, function: string, installDate: string, dischargeDate: ?string, current: bool}>, keyholder?: bool, membership_type?: string}    </span>
 </dt>
 <dd>Get array of member for use in API endpoints
 hides nonrelevant information by default</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Report-Model-Member.html#method_isOlderThan">isOlderThan()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
 
     </dl>
 
@@ -1687,7 +1714,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">718</span>
+    <span class="phpdocumentor-element-found-in__line">780</span>
 
     </aside>
 
@@ -1729,7 +1756,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">708</span>
+    <span class="phpdocumentor-element-found-in__line">770</span>
 
     </aside>
 
@@ -1771,7 +1798,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">753</span>
+    <span class="phpdocumentor-element-found-in__line">815</span>
 
     </aside>
 
@@ -1815,7 +1842,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">764</span>
+    <span class="phpdocumentor-element-found-in__line">826</span>
 
     </aside>
 
@@ -1857,7 +1884,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">698</span>
+    <span class="phpdocumentor-element-found-in__line">760</span>
 
     </aside>
 
@@ -1889,7 +1916,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">785</span>
+    <span class="phpdocumentor-element-found-in__line">847</span>
 
     </aside>
 
@@ -1921,7 +1948,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">690</span>
+    <span class="phpdocumentor-element-found-in__line">752</span>
 
     </aside>
 
@@ -2064,7 +2091,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">559</span>
+    <span class="phpdocumentor-element-found-in__line">590</span>
 
     </aside>
 
@@ -2474,7 +2501,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">743</span>
+    <span class="phpdocumentor-element-found-in__line">805</span>
 
     </aside>
 
@@ -2718,6 +2745,144 @@ still meets the requirements as set forth in the bylaws and internal regulations
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_hasReached16">
+        hasReached16()
+        <a href="classes/Report-Model-Member.html#method_hasReached16" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">559</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Member is at least 16 years old on the given date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasReached16</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onDate</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">new DateTime()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$onDate</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                 = <span class="phpdocumentor-signature__argument__default-value">new DateTime()</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasReached18">
+        hasReached18()
+        <a href="classes/Report-Model-Member.html#method_hasReached18" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">567</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Member is at least 18 years old on the given date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasReached18</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onDate</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">new DateTime()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$onDate</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                 = <span class="phpdocumentor-signature__argument__default-value">new DateTime()</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasReached21">
+        hasReached21()
+        <a href="classes/Report-Model-Member.html#method_hasReached21" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">575</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Member is at least 21 years old on the given date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasReached21</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onDate</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">new DateTime()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$onDate</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                 = <span class="phpdocumentor-signature__argument__default-value">new DateTime()</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_isKeyholder">
         isKeyholder()
         <a href="classes/Report-Model-Member.html#method_isKeyholder" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2726,7 +2891,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">727</span>
+    <span class="phpdocumentor-element-found-in__line">789</span>
 
     </aside>
 
@@ -2762,7 +2927,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">776</span>
+    <span class="phpdocumentor-element-found-in__line">838</span>
 
     </aside>
 
@@ -2931,7 +3096,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">567</span>
+    <span class="phpdocumentor-element-found-in__line">598</span>
 
     </aside>
 
@@ -3519,7 +3684,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">591</span>
+    <span class="phpdocumentor-element-found-in__line">626</span>
 
     </aside>
 
@@ -3527,7 +3692,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, membershipEndsOn: ?string, expiration: string, authenticationKey: ?string}</span></code>
+                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, birthdate: string, is_16_plus: bool, is_18_plus: bool, is_21_plus: bool, membershipEndsOn: ?string, expiration: string, authenticationKey: ?string}</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3537,7 +3702,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, membershipEndsOn: ?string, expiration: string, authenticationKey: ?string}</span>
+        <span class="phpdocumentor-signature__response_type">array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, birthdate: string, is_16_plus: bool, is_18_plus: bool, is_21_plus: bool, membershipEndsOn: ?string, expiration: string, authenticationKey: ?string}</span>
             </section>
 
 </article>
@@ -3555,7 +3720,7 @@ still meets the requirements as set forth in the bylaws and internal regulations
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">642</span>
+    <span class="phpdocumentor-element-found-in__line">685</span>
 
     </aside>
 
@@ -3564,7 +3729,7 @@ hides nonrelevant information by default</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">toArrayApi</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$include</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, expiration: string, organs?: array<array-key,array{organ: array{id: int, abbreviation: string}, function: string, installDate: string, dischargeDate: ?string, current: bool}>, keyholder?: bool, type?: string}</span></code>
+                    <span class="phpdocumentor-signature__name">toArrayApi</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$include</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{lidnr: int, email?: ?string, full_name: string, family_name: string, middle_name: string, initials: string, given_name: string, generation: int, hidden: bool, deleted: bool, birthdate?: string, is_16_plus?: bool, is_18_plus?: bool, is_21_plus?: bool, expiration: string, organs?: array<array-key,array{organ: array{id: int, abbreviation: string}, function: string, installDate: string, dischargeDate: ?string, current: bool}>, keyholder?: bool, membership_type?: string}</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3584,7 +3749,59 @@ hides nonrelevant information by default</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array{lidnr: int, email: ?string, fullName: string, lastName: string, middleName: string, initials: string, firstName: string, generation: int, hidden: bool, deleted: bool, expiration: string, organs?: array<array-key,array{organ: array{id: int, abbreviation: string}, function: string, installDate: string, dischargeDate: ?string, current: bool}>, keyholder?: bool, type?: string}</span>
+        <span class="phpdocumentor-signature__response_type">array{lidnr: int, email?: ?string, full_name: string, family_name: string, middle_name: string, initials: string, given_name: string, generation: int, hidden: bool, deleted: bool, birthdate?: string, is_16_plus?: bool, is_18_plus?: bool, is_21_plus?: bool, expiration: string, organs?: array<array-key,array{organ: array{id: int, abbreviation: string}, function: string, installDate: string, dischargeDate: ?string, current: bool}>, keyholder?: bool, membership_type?: string}</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isOlderThan">
+        isOlderThan()
+        <a href="classes/Report-Model-Member.html#method_isOlderThan" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/Member.php"><a href="files/module-report-src-model-member.html"><abbr title="module/Report/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">580</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">isOlderThan</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onDate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$years</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$onDate</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$years</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
             </section>
 
 </article>
@@ -3759,6 +3976,9 @@ hides nonrelevant information by default</p>
                                             <li><a href="classes/Report-Model-Member.html#method_getPaid">getPaid()</a></li>
                                             <li><a href="classes/Report-Model-Member.html#method_getSupremum">getSupremum()</a></li>
                                             <li><a href="classes/Report-Model-Member.html#method_getType">getType()</a></li>
+                                            <li><a href="classes/Report-Model-Member.html#method_hasReached16">hasReached16()</a></li>
+                                            <li><a href="classes/Report-Model-Member.html#method_hasReached18">hasReached18()</a></li>
+                                            <li><a href="classes/Report-Model-Member.html#method_hasReached21">hasReached21()</a></li>
                                             <li><a href="classes/Report-Model-Member.html#method_isKeyholder">isKeyholder()</a></li>
                                             <li><a href="classes/Report-Model-Member.html#method_removeList">removeList()</a></li>
                                             <li><a href="classes/Report-Model-Member.html#method_setAuthenticationKey">setAuthenticationKey()</a></li>
@@ -3780,6 +4000,7 @@ hides nonrelevant information by default</p>
                                             <li><a href="classes/Report-Model-Member.html#method_setType">setType()</a></li>
                                             <li><a href="classes/Report-Model-Member.html#method_toArray">toArray()</a></li>
                                             <li><a href="classes/Report-Model-Member.html#method_toArrayApi">toArrayApi()</a></li>
+                                            <li><a href="classes/Report-Model-Member.html#method_isOlderThan">isOlderThan()</a></li>
                                     </ul>
             </li>
                     </ul>
