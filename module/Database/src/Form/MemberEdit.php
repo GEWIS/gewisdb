@@ -19,6 +19,11 @@ use Laminas\Validator\EmailAddress;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class MemberEdit extends Form implements InputFilterProviderInterface
 {
     public function __construct(private readonly Translator $translator)

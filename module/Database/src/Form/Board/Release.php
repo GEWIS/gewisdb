@@ -12,6 +12,10 @@ use Laminas\Form\Element\Submit;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
+/**
+ * @psalm-import-type ReleaseDecisionFormType from AbstractDecision
+ * @extends AbstractDecision<ReleaseDecisionFormType>
+ */
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

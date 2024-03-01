@@ -15,6 +15,11 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\NotEmpty;
 use Laminas\Validator\StringLength;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends AbstractDecision<TFilteredValues>
+ */
 class Foundation extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

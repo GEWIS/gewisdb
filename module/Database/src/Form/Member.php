@@ -30,6 +30,11 @@ use Throwable;
 
 use function str_ends_with;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class Member extends Form implements InputFilterProviderInterface
 {
     /** @var MailingListModel[] $lists */

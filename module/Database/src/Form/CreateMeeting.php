@@ -17,6 +17,11 @@ use Laminas\Validator\Digits;
 use Laminas\Validator\InArray;
 use Laminas\Validator\LessThan;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class CreateMeeting extends Form implements InputFilterProviderInterface
 {
     public function __construct(private readonly Translator $translator)

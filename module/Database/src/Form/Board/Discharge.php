@@ -11,6 +11,10 @@ use Laminas\Form\Element\Submit;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
+/**
+ * @psalm-import-type DischargeDecisionFormType from AbstractDecision
+ * @extends AbstractDecision<DischargeDecisionFormType>
+ */
 class Discharge extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

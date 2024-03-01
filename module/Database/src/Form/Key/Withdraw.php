@@ -16,6 +16,11 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\Callback;
 use Throwable;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends AbstractDecision<TFilteredValues>
+ */
 class Withdraw extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

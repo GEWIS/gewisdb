@@ -7,6 +7,11 @@ namespace Database\Form;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Mvc\I18n\Translator;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends MemberType<TFilteredValues>
+ */
 class MemberApprove extends MemberType
 {
     public function __construct(private readonly Translator $translator)

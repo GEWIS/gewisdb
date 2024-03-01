@@ -10,6 +10,23 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
+/**
+ * @template QueryFormTypeTemplate
+ *
+ * @psalm-type QueryFormType = array{
+ *  'query': string,
+ * }
+ *
+ * @psalm-type QueryExportFormType = array{
+ *  'type': string,
+ * } & QueryFormType
+ *
+ * @psalm-type QuerySaveFormType = array{
+ *  'name': string,
+ * } & QueryFormType
+ *
+ * @extends Form<QueryFormTypeTemplate>
+ */
 class Query extends Form implements InputFilterProviderInterface
 {
     public function __construct(private readonly Translator $translator)

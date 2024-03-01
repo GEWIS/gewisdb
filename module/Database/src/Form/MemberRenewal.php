@@ -26,6 +26,11 @@ use function sprintf;
 
 use const ARRAY_FILTER_USE_KEY;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends Form<TFilteredValues>
+ */
 class MemberRenewal extends Form implements InputFilterProviderInterface
 {
     /** @var MailingListModel[] $lists */

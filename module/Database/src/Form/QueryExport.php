@@ -8,6 +8,10 @@ use Laminas\Form\Element\Select;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
+/**
+ * @psalm-import-type QueryExportFormType from Query
+ * @extends Query<QueryExportFormType>
+ */
 class QueryExport extends Query implements InputFilterProviderInterface
 {
     public function __construct(private readonly Translator $translator)

@@ -9,6 +9,10 @@ use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
+/**
+ * @psalm-import-type QuerySaveFormType from Query
+ * @extends Query<QuerySaveFormType>
+ */
 class QuerySave extends Query implements InputFilterProviderInterface
 {
     public function __construct(private readonly Translator $translator)

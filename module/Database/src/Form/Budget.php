@@ -17,6 +17,10 @@ use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\InArray;
 use Laminas\Validator\StringLength;
 
+/**
+ * @psalm-import-type BudgetDecisionFormType from AbstractDecision
+ * @extends AbstractDecision<BudgetDecisionFormType>
+ */
 class Budget extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

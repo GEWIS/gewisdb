@@ -17,6 +17,14 @@ use User\Model\Enums\ApiPermissions;
 use function array_map;
 use function in_array;
 
+/**
+ * @psalm-type ApiPrincipalFormType = array{
+ *     description: string,
+ *     token: string,
+ *     permissions: value-of<ApiPermissions>[],
+ * }
+ * @extends Form<ApiPrincipalFormType>
+ */
 class ApiPrincipal extends Form implements InputFilterProviderInterface
 {
     public function __construct(

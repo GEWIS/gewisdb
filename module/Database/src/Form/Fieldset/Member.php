@@ -10,6 +10,12 @@ use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Digits;
 
+/**
+ * @psalm-type MemberFieldsetType = array{
+ *  name: string,
+ *  lidnr: numeric-string,
+ * }
+ */
 class Member extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct()

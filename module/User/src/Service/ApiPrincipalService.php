@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace User\Service;
 
+use Laminas\Form\FormInterface;
 use User\Form\ApiPrincipal as ApiPrincipalForm;
 use User\Mapper\ApiPrincipalMapper;
 use User\Model\ApiPrincipal as ApiPrincipalModel;
@@ -43,7 +44,7 @@ class ApiPrincipalService
             return false;
         }
 
-        $data = $form->getData();
+        $data = $form->getData(FormInterface::VALUES_AS_ARRAY);
 
         $principal = new ApiPrincipalModel();
         $principal->setDescription($data['description']);

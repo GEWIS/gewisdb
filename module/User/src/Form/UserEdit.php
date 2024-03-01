@@ -11,6 +11,13 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Identical;
 use Laminas\Validator\StringLength;
 
+/**
+ * @psalm-type UserEditFormType = array{
+ *  password: string,
+ *  password_verify: string,
+ * }
+ * @extends Form<UserEditFormType>
+ */
 class UserEdit extends Form implements InputFilterProviderInterface
 {
     private bool $passwordNeeded = true;

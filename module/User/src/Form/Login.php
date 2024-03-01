@@ -12,6 +12,13 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
+/**
+ * @psalm-type LoginFormType = array{
+ *  login: string,
+ *  password: string,
+ * }
+ * @extends Form<LoginFormType>
+ */
 class Login extends Form implements InputFilterProviderInterface
 {
     public function __construct()

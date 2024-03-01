@@ -16,6 +16,11 @@ use Laminas\Validator\Callback;
 use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\StringLength;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends AbstractDecision<TFilteredValues>
+ */
 class OrganRegulation extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

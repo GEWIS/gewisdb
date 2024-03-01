@@ -13,6 +13,14 @@ use Laminas\Validator\Identical;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
+/**
+ * @psalm-type UserCreateFormType = array{
+ *  login: string,
+ *  password: string,
+ *  password_verify: string,
+ * }
+ * @extends Form<UserCreateFormType>
+ */
 class UserCreate extends Form implements InputFilterProviderInterface
 {
     public function __construct()

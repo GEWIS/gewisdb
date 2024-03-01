@@ -17,6 +17,11 @@ use Laminas\Validator\Callback;
 use Laminas\Validator\Date as DateValidator;
 use Throwable;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends AbstractDecision<TFilteredValues>
+ */
 class Grant extends AbstractDecision implements InputFilterProviderInterface
 {
     public function __construct(

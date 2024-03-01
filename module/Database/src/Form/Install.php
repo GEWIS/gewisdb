@@ -12,6 +12,11 @@ use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Mvc\I18n\Translator;
 
+/**
+ * @template TFilteredValues
+ *
+ * @extends AbstractDecision<TFilteredValues>
+ */
 class Install extends AbstractDecision
 {
     public function __construct(
