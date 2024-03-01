@@ -11,7 +11,7 @@ use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
 
 /**
- * @phpstan-type MeetingType = array{
+ * @psalm-type MeetingType = array{
  *  type: value-of<MeetingTypes>,
  *  number: int,
  *  date: string,

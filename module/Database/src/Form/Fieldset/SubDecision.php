@@ -12,7 +12,7 @@ use Laminas\Validator\Digits;
 use Laminas\Validator\InArray;
 
 /**
- * @phpstan-type SubDecisionFieldsetType = array{
+ * @psalm-type SubDecisionFieldsetType = array{
  *  meeting_type: value-of<MeetingTypes>,
  *  meeting_number: numeric-string,
  *  decision_point: numeric-string,

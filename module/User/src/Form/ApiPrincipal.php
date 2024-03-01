@@ -18,7 +18,7 @@ use function array_map;
 use function in_array;
 
 /**
- * @phpstan-type ApiPrincipalFormType = array{
+ * @psalm-type ApiPrincipalFormType = array{
  *     description: string,
  *     token: string,
  *     permissions: value-of<ApiPermissions>[],

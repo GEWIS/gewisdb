@@ -10,11 +10,8 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @phpstan-import-type QueryFormType from Query
- * @phpstan-type QuerySaveFormType = array{
- *  'name': string,
- * }
- * @extends Query<QueryFormType & QuerySaveFormType>
+ * @psalm-import-type QuerySaveFormType from Query
+ * @extends Query<QuerySaveFormType>
  */
 class QuerySave extends Query implements InputFilterProviderInterface
 {

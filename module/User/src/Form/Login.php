@@ -13,7 +13,7 @@ use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
 /**
- * @phpstan-type LoginFormType = array{
+ * @psalm-type LoginFormType = array{
  *  login: string,
  *  password: string,
  * }

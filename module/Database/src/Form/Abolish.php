@@ -12,13 +12,8 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @phpstan-import-type AbstractDecisionFormType from AbstractDecision
- * @phpstan-import-type SubDecisionFieldsetType from SubDecisionFieldset
- * @phpstan-type AbolishDecisionFormType = array{
- *  name: string,
- *  subdecision: SubDecisionFieldsetType
- * }
- * @extends AbstractDecision<AbstractDecisionFormType & AbolishDecisionFormType>
+ * @psalm-import-type AbolishDecisionFormType from AbstractDecision
+ * @extends AbstractDecision<AbolishDecisionFormType>
  */
 class Abolish extends AbstractDecision implements InputFilterProviderInterface
 {

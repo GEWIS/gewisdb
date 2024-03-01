@@ -13,13 +13,8 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @phpstan-import-type AbstractDecisionFormType from AbstractDecision
- * @phpstan-import-type SubDecisionFieldsetType from SubDecisionFieldset
- * @phpstan-type ReleaseDecisionFormType = array{
- *  installation: SubDecisionFieldsetType,
- *  date: string,
- * }
- * @extends AbstractDecision<ReleaseDecisionFormType & AbstractDecisionFormType>
+ * @psalm-import-type ReleaseDecisionFormType from AbstractDecision
+ * @extends AbstractDecision<ReleaseDecisionFormType>
  */
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {

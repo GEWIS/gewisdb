@@ -18,18 +18,8 @@ use Laminas\Validator\InArray;
 use Laminas\Validator\StringLength;
 
 /**
- * @phpstan-import-type AbstractDecisionFormType from AbstractDecision
- * @phpstan-import-type MemberFieldsetType from MemberFieldset
- * @phpstan-type BudgetDecisionFormType = array{
- *  type: 'budget'|'reckoning',
- *  name: string,
- *  date: string,
- *  author: MemberFieldsetType,
- *  version: string,
- *  approve: bool,
- *  changes: bool,
- * }
- * @extends AbstractDecision<AbstractDecisionFormType & BudgetDecisionFormType>
+ * @psalm-import-type BudgetDecisionFormType from AbstractDecision
+ * @extends AbstractDecision<BudgetDecisionFormType>
  */
 class Budget extends AbstractDecision implements InputFilterProviderInterface
 {

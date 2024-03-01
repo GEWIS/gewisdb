@@ -9,11 +9,8 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @phpstan-import-type QueryFormType from Query
- * @phpstan-type QueryExportFormType = array{
- *  'type': string,
- * }
- * @extends Query<QueryFormType & QueryExportFormType>
+ * @psalm-import-type QueryExportFormType from Query
+ * @extends Query<QueryExportFormType>
  */
 class QueryExport extends Query implements InputFilterProviderInterface
 {

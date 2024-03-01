@@ -12,13 +12,8 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 
 /**
- * @phpstan-import-type AbstractDecisionFormType from AbstractDecision
- * @phpstan-import-type DecisionFieldsetType from DecisionFieldset
- * @phpstan-type DestroyDecisionFormType = array{
- *  name: string,
- *  decision: DecisionFieldsetType,
- * }
- * @extends AbstractDecision<DestroyDecisionFormType & AbstractDecisionFormType>
+ * @psalm-import-type DestroyDecisionFormType from AbstractDecision
+ * @extends AbstractDecision<DestroyDecisionFormType>
  */
 class Destroy extends AbstractDecision implements InputFilterProviderInterface
 {

@@ -12,7 +12,7 @@ use Laminas\Validator\Identical;
 use Laminas\Validator\StringLength;
 
 /**
- * @phpstan-type UserEditFormType = array{
+ * @psalm-type UserEditFormType = array{
  *  password: string,
  *  password_verify: string,
  * }
