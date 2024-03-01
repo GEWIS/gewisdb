@@ -334,6 +334,26 @@ class Member
     }
 
     /**
+     * Get a list of members whose birthday it is on the current day.
+     *
+     *  When $days equals 0 or isn't given, it will give all birthdays of today.
+     *  We do not show members whose membership has expired or who are hidden
+     *
+     * @return MemberModel[]
+     */
+    public function getCurrentBirthdays(): array
+    {
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->select('m')
+            ->where('MONTH(m.birth) = MONTH(CURRENT_DATE()) AND DAYOFMONTH(m.birth) = DAYOFMONTH(CURRENT_DATE())')
+            ->andWhere('m.deleted = False')
+            ->andWhere('m.expiration > CURRENT_TIMESTAMP()')
+            ->andWhere('m.hidden = False');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Persist a member model.
      */
     public function persist(MemberModel $member): void

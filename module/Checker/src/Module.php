@@ -13,6 +13,8 @@ use Checker\Command\CheckMembershipTUeCommand;
 use Checker\Command\CheckMembershipTypeCommand;
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
 use Checker\Command\Factory\CheckMembershipGraduateRenewalCommandFactory;
+use Checker\Command\Factory\SendBirthdayMailCommandFactory;
+use Checker\Command\SendBirthdayMailCommand;
 use Checker\Mapper\Factory\InstallationFactory as InstallationMapperFactory;
 use Checker\Mapper\Factory\KeyFactory as KeyMapperFactory;
 use Checker\Mapper\Factory\MemberFactory as MemberMapperFactory;
@@ -21,7 +23,9 @@ use Checker\Mapper\Installation as InstallationMapper;
 use Checker\Mapper\Key as KeyMapper;
 use Checker\Mapper\Member as MemberMapper;
 use Checker\Mapper\Organ as OrganMapper;
+use Checker\Service\Birthday;
 use Checker\Service\Checker as CheckerService;
+use Checker\Service\Factory\BirthdayFactory;
 use Checker\Service\Factory\CheckerFactory as CheckerServiceFactory;
 use Checker\Service\Factory\InstallationFactory as InstallationServiceFactory;
 use Checker\Service\Factory\KeyFactory as KeyServiceFactory;
@@ -61,6 +65,7 @@ class Module
                 CheckMembershipGraduateRenewalCommand::class => CheckMembershipGraduateRenewalCommandFactory::class,
                 CheckMembershipTUeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipTypeCommand::class => AbstractCheckerCommandFactory::class,
+                SendBirthdayMailCommand::class => SendBirthdayMailCommandFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
                 InstallationService::class => InstallationServiceFactory::class,
                 KeyService::class => KeyServiceFactory::class,
@@ -72,6 +77,7 @@ class Module
                 KeyMapper::class => KeyMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
                 OrganMapper::class => OrganMapperFactory::class,
+                Birthday::class => BirthdayFactory::class,
                 'checker_mail_transport' => static function (ContainerInterface $container) {
                     $config = $container->get('config');
                     $config = $config['email'];
