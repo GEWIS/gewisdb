@@ -69,6 +69,15 @@ return [
     ],
 
     /**
+     * Mailman REST API configuration.
+     */
+    'mailman_api' => [
+        'endpoint' => getenv('MAILMAN_API_ENDPOINT'),
+        'username' => getenv('MAILMAN_API_USERNAME'),
+        'password' => getenv('MAILMAN_API_PASSWORD'),
+    ],
+
+    /**
      * LDAP settings for login to database frontend
      */
     'ldap' => [

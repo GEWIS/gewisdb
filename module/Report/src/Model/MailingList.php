@@ -115,14 +115,6 @@ class MailingList
     }
 
     /**
-     * Get the description.
-     */
-    public function getDescription(): string
-    {
-        return $this->getNlDescription();
-    }
-
-    /**
      * Set the description.
      */
     public function setDescription(string $description): void

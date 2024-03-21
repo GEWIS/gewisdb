@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.3.0",
         "ext-intl": "*",
+        "ext-memcached": "^3.2",
         "ext-pdo_pgsql": "*",
         "ext-pgsql": "*",
         "ext-zend-opcache": "*",
@@ -52,7 +53,9 @@
         "doctrine/doctrine-laminas-hydrator": "^3.4.0",
         "monolog/monolog": "^1.27.1",
         "cweagans/composer-patches": "^1.7.3",
-        "stripe/stripe-php": "^10.21"
+        "stripe/stripe-php": "^10.21",
+        "laminas/laminas-cache": "^3.12.1",
+        "laminas/laminas-cache-storage-adapter-memcached": "^2.5.0"
     },
     "require-dev": {
         "laminas/laminas-component-installer": "^3.4.0",

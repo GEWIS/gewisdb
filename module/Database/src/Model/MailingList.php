@@ -51,6 +51,15 @@ class MailingList
     protected bool $defaultSub;
 
     /**
+     * The identifier of the mailing list in Mailman.
+     */
+    #[Column(
+        type: 'string',
+        unique: true,
+    )]
+    protected string $mailmanId;
+
+    /**
      * Mailing list members.
      *
      * @var Collection<array-key, Member>
@@ -115,22 +124,6 @@ class MailingList
     }
 
     /**
-     * Get the description.
-     */
-    public function getDescription(): string
-    {
-        return $this->getNlDescription();
-    }
-
-    /**
-     * Set the description.
-     */
-    public function setDescription(string $description): void
-    {
-        $this->setNlDescription($description);
-    }
-
-    /**
      * Get if it should be on the form.
      */
     public function getOnForm(): bool
@@ -163,6 +156,22 @@ class MailingList
     }
 
     /**
+     * Get the identifier of the mailing list in Mailman.
+     */
+    public function getMailmanId(): string
+    {
+        return $this->mailmanId;
+    }
+
+    /**
+     * Set the identifier of the mailing list in Mailman.
+     */
+    public function setMailmanId(string $mailmanId): void
+    {
+        $this->mailmanId = $mailmanId;
+    }
+
+    /**
      * Get subscribed members.
      *
      * @return Collection<array-key, Member>
@@ -178,5 +187,27 @@ class MailingList
     public function addMember(Member $member): void
     {
         $this->members->add($member);
+    }
+
+    /**
+     * @return array{
+     *     name: string,
+     *     nl_description: string,
+     *     en_description: string,
+     *     defaultSub: bool,
+     *     onForm: bool,
+     *     mailmanId: string,
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'nl_description' => $this->getNlDescription(),
+            'en_description' => $this->getEnDescription(),
+            'defaultSub' => $this->getDefaultSub(),
+            'onForm' => $this->getOnForm(),
+            'mailmanId' => $this->getMailmanId(),
+        ];
     }
 }
