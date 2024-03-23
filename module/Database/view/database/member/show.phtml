@@ -89,6 +89,10 @@ use Laminas\View\Renderer\PhpRenderer;
             </td>
         </tr>
         <tr>
+            <th><?= $this->translate('Study') ?></th>
+            <td><?= $member->getStudy() ?></td>
+        </tr>
+        <tr>
             <th><?= $this->translate('Last Update to Membership') ?></th>
             <td><?= $member->getChangedOn()->format('l j F Y') ?></td>
         </tr>
@@ -232,7 +236,7 @@ use Laminas\View\Renderer\PhpRenderer;
             <tr><td colspan="3"><?= $this->translate('There are no notes for this member.') ?></td></tr>
         <?php endif; ?>
         <tr>
-            <?php 
+            <?php
                 $noteForm->prepare();
                 $noteForm->setAttribute('method', 'post');
                 $noteForm->setAttribute('role', 'form');
