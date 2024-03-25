@@ -6,11 +6,9 @@ namespace Database\Controller;
 
 use Application\Model\Enums\AddressTypes;
 use Checker\Service\Checker as CheckerService;
-use Checker\Service\Renewal as RenewalService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
-use DateTime;
 use Laminas\Http\Header\HeaderInterface;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -32,7 +30,6 @@ class MemberController extends AbstractActionController
         private readonly CheckerService $checkerService,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
-        private readonly RenewalService $renewalService,
     ) {
     }
 
@@ -188,11 +185,8 @@ class MemberController extends AbstractActionController
             } elseif ($form->isValid()) {
                 /** @var MemberModel $updatedMember */
                 $updatedMember = $form->getData();
-                $updatedMember->setChangedOn(new DateTime());
-                $this->memberService->getMemberMapper()->persist($updatedMember);
-                $form->getRenewalLink()->setUsed(true);
-                $this->memberService->getActionLinkMapper()->persist($form->getRenewalLink());
-                $this->renewalService->sendRenewalSuccessEmail($form->getRenewalLink());
+                $renewalLink = $form->getRenewalLink();
+                $this->memberService->renewMember($updatedMember, $renewalLink);
 
                 return new ViewModel([
                     'updatedMember' => $updatedMember,
