@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Controller\Factory;
 
 use Checker\Service\Checker as CheckerService;
-use Checker\Service\Renewal as RenewalService;
 use Database\Controller\MemberController;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
@@ -31,15 +30,12 @@ class MemberControllerFactory implements FactoryInterface
         $memberService = $container->get(MemberService::class);
         /** @var StripeService $stripeService */
         $stripeService = $container->get(StripeService::class);
-        /** @var RenewalService $renewalService */
-        $renewalService = $container->get(RenewalService::class);
 
         return new MemberController(
             $translator,
             $checkerService,
             $memberService,
             $stripeService,
-            $renewalService,
         );
     }
 }
