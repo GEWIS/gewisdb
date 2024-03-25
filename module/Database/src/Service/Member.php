@@ -733,6 +733,10 @@ class Member
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
+        // Record a renewal audit entry
+        $renewalAudit = new AuditRenewalModel();
+        $renewalAudit->setOldExpiration($member->getExpiration());
+
         // update expiration and 'membership ends on' date (should become effective at the end of the previous
         // association year).
         $expiration = clone $date;
@@ -776,6 +780,10 @@ class Member
         // At the end of the current association year.
         $expiration->setDate($year, 7, 1);
         $member->setExpiration($expiration);
+
+        $renewalAudit->setNewExpiration($member->getExpiration());
+        $renewalAudit->setUser($this->userService->getIdentity());
+        $this->addAuditEntry($member, $renewalAudit);
 
         $this->getMemberMapper()->persist($member);
 
