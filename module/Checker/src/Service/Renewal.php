@@ -12,6 +12,8 @@ use DateInterval;
 use DateTime;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\PhpRenderer;
+use Report\Mapper\Member as ReportMemberMapper;
+use Report\Model\OrganMember as OrganMemberModel;
 use Throwable;
 
 /**
@@ -26,6 +28,7 @@ class Renewal
     public function __construct(
         private readonly ActionLinkMapper $actionLinkMapper,
         private readonly MemberMapper $memberMapper,
+        private readonly ReportMemberMapper $reportMemberMapper,
         private readonly EmailService $emailService,
         private readonly PhpRenderer $renderer,
         private readonly array $config,
@@ -60,10 +63,16 @@ class Renewal
 
     private function sendRenewalEmail(RenewalLinkModel $link): void
     {
+        $reportMember = $this->reportMemberMapper->findSimple($link->getMember()->getLidnr());
+        $isInstalled = !$reportMember->getOrganInstallations()
+            ->filter(static fn (OrganMemberModel $member) => $member->isCurrent())
+            ->isEmpty();
+
         $body = $this->render(
             'email/graduate-renewal',
             [
                 'firstName' => $link->getMember()->getFirstName(),
+                'isInstalled' => $isInstalled,
                 'currentExpiration' => $link->getCurrentExpiration(),
                 'newExpiration' => $link->getNewExpiration(),
                 'url' => $this->config['application']['public_url'] . '/member/renew/' . $link->getToken(),
@@ -74,13 +83,12 @@ class Renewal
         $this->emailService->sendEmailTemplate(
             $link->getMember()->getEmailRecipient(),
             'Membership notification',
-            'Expiring membership',
+            'Expiring graduate status',
             $body,
             'GEWIS Graduate Renewal',
             'More information',
-            '<p>On July 1st, 2021 the new Articles of Association came into effect.
-                This means you can now also be registered with GEWIS as a graduate.
-                All non-studying members who were not in organ were registered as a graduate on aforementioned date.
+            '<p>You are currently registered as a graduate of GEWIS. This is a status 
+                assigned to members who are no longer active within GEWIS and also are no longer studying.
                 <br><br>
                 Graduates do not pay contribution and as a graduate,
                 you can still join GEWIS activities or visit the social drink like you used to.
@@ -110,7 +118,7 @@ class Renewal
         $this->emailService->sendEmailTemplate(
             $link->getMember()->getEmailRecipient(),
             'Membership notification',
-            'Renewed membership',
+            'Renewed graduate status',
             $body,
             'GEWIS Graduate Renewal',
             null,
