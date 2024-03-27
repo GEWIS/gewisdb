@@ -11,6 +11,7 @@ use Database\Mapper\ActionLink as ActionLinkMapper;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\Renderer\PhpRenderer;
 use Psr\Container\ContainerInterface;
+use Report\Mapper\Member as ReportMemberMapper;
 
 class RenewalFactory implements FactoryInterface
 {
@@ -27,6 +28,7 @@ class RenewalFactory implements FactoryInterface
         return new RenewalService(
             $container->get(ActionLinkMapper::class),
             $container->get(MemberMapper::class),
+            $container->get(ReportMemberMapper::class),
             $container->get(EmailService::class),
             $container->get(PhpRenderer::class),
             $config,
