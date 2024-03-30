@@ -33,9 +33,6 @@ class QuerySave extends Query implements InputFilterProviderInterface
         ]);
     }
 
-    /**
-     * @return array
-     */
     public function getInputFilterSpecification(): array
     {
         $filter = parent::getInputFilterSpecification();
