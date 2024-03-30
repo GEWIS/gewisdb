@@ -39,8 +39,6 @@ abstract class AbstractDecision implements HydratorInterface
      *
      * Not implemented.
      *
-     * @return array
-     *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function extract(object $object): array
