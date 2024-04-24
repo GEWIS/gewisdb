@@ -2941,6 +2941,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Service-Renewal.html#property_memberMapper"
         },                {
+            "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A\u0024reportMemberMapper",
+            "name": "reportMemberMapper",
+            "summary": "",
+            "url": "classes/Checker-Service-Renewal.html#property_reportMemberMapper"
+        },                {
             "fqsen": "\\Checker\\Service\\Renewal\u003A\u003A\u0024emailService",
             "name": "emailService",
             "summary": "",
