@@ -170,6 +170,10 @@ components:
       properties:
         healthy:
           type: boolean
+        sync_paused:
+          type: boolean
+          default: false
+          description: Attribute to indicate that data is currently being modified and that client applications that perform syncs in the background are requested to temporarily suspend this sync.
     MemberSimple:
       type: object
       required:
