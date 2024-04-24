@@ -294,13 +294,15 @@ $(document).ready(function () {
             + '<td class="function">' + func + '</td>';
         toAdd += '<td></td>';
         toAdd += '<td></td>';
+        toAdd += '<td></td>';
+
         if ('Lid' === func) {
             toAdd += '<td><button type="button" class="btn btn-warning btn-xs functionchange">'
                 + '<span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Give Function') ?></button></td>';
         } else {
             toAdd += '<td></td>';
-            toAdd += '<td></td>';
         }
+
         toAdd += '</tr>';
 
         toAdd = $(toAdd);
