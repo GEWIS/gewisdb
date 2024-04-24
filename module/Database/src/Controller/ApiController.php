@@ -28,7 +28,7 @@ class ApiController extends AbstractActionController
     {
         $this->apiAuthService->assertCan(ApiPermissions::HealthR);
 
-        return new JsonModel(['healthy' => true]);
+        return new JsonModel(['healthy' => true, 'sync_paused' => false]);
     }
 
     /**

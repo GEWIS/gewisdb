@@ -33,6 +33,26 @@ paths:
     get:
       summary: Health endpoint
       description: This endpoint will return the health status of the API
+      deprecated: true
+      tags:
+        - basic
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/health'
+        403:
+          $ref: '#/components/responses/no_permission'
+      security:
+        - api_auth:
+            - HealthR
+            
+  /health:
+    get:
+      summary: Health endpoint
+      description: This endpoint will return the health status of the API and whether client applications are requested to temporarily pause their synchronisation.
       tags:
         - basic
       responses:
@@ -150,6 +170,10 @@ components:
       properties:
         healthy:
           type: boolean
+        sync_paused:
+          type: boolean
+          default: false
+          description: Attribute to indicate that data is currently being modified and that client applications that perform syncs in the background are requested to temporarily suspend this sync.
     MemberSimple:
       type: object
       required:
