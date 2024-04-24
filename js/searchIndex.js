@@ -3576,11 +3576,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Controller-MemberController.html#property_stripeService"
         },                {
-            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003A\u0024renewalService",
-            "name": "renewalService",
-            "summary": "",
-            "url": "classes/Database-Controller-MemberController.html#property_renewalService"
-        },                {
             "fqsen": "\\Database\\Controller\\OrganController",
             "name": "OrganController",
             "summary": "",
@@ -5770,6 +5765,71 @@ Search.appendIndex(
             "name": "note",
             "summary": "The\u0020note\u0020itself",
             "url": "classes/Database-Model-AuditNote.html#property_note"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal",
+            "name": "AuditRenewal",
+            "summary": "Class\u0020for\u0020registering\u0020renewals\u0020by\u0020the\u0020member\u0020or\u0020another\u0020user",
+            "url": "classes/Database-Model-AuditRenewal.html"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AfromRenewalLink\u0028\u0029",
+            "name": "fromRenewalLink",
+            "summary": "",
+            "url": "classes/Database-Model-AuditRenewal.html#method_fromRenewalLink"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AgetOldExpiration\u0028\u0029",
+            "name": "getOldExpiration",
+            "summary": "Get\u0020the\u0020old\u0020expiration\u0020date.",
+            "url": "classes/Database-Model-AuditRenewal.html#method_getOldExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AsetOldExpiration\u0028\u0029",
+            "name": "setOldExpiration",
+            "summary": "Set\u0020the\u0020old\u0020expiration\u0020date.",
+            "url": "classes/Database-Model-AuditRenewal.html#method_setOldExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AgetNewExpiration\u0028\u0029",
+            "name": "getNewExpiration",
+            "summary": "Get\u0020the\u0020new\u0020expiration\u0020date.",
+            "url": "classes/Database-Model-AuditRenewal.html#method_getNewExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AsetNewExpiration\u0028\u0029",
+            "name": "setNewExpiration",
+            "summary": "Set\u0020the\u0020new\u0020expiration\u0020date.",
+            "url": "classes/Database-Model-AuditRenewal.html#method_setNewExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AisSelfRenewal\u0028\u0029",
+            "name": "isSelfRenewal",
+            "summary": "Check\u0020if\u0020the\u0020renewal\u0020was\u0020done\u0020by\u0020the\u0020member",
+            "url": "classes/Database-Model-AuditRenewal.html#method_isSelfRenewal"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AgetStringRenewalType\u0028\u0029",
+            "name": "getStringRenewalType",
+            "summary": "",
+            "url": "classes/Database-Model-AuditRenewal.html#method_getStringRenewalType"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AgetStringBodyFormatted\u0028\u0029",
+            "name": "getStringBodyFormatted",
+            "summary": "Get\u0020a\u0020textual\u0020representation\u0020of\u0020this\u0020audit\u0020entry",
+            "url": "classes/Database-Model-AuditRenewal.html#method_getStringBodyFormatted"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AgetStringArguments\u0028\u0029",
+            "name": "getStringArguments",
+            "summary": "",
+            "url": "classes/Database-Model-AuditRenewal.html#method_getStringArguments"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003A\u0024IMMUTABLE",
+            "name": "IMMUTABLE",
+            "summary": "TODO\u0020PHP8.3\u003A\u0020make\u0020this\u0020a\u0020typed\u0020constant\u0020so\u0020we\u0020can\u0020change\u0020the\u0020value\u0020later",
+            "url": "classes/Database-Model-AuditRenewal.html#property_IMMUTABLE"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003A\u0024oldExpiration",
+            "name": "oldExpiration",
+            "summary": "Expiration\u0020value\u0020before\u0020this\u0020renewal\u0020took\u0020place",
+            "url": "classes/Database-Model-AuditRenewal.html#property_oldExpiration"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003A\u0024newExpiration",
+            "name": "newExpiration",
+            "summary": "Expiration\u0020value\u0020after\u0020the\u0020renewal",
+            "url": "classes/Database-Model-AuditRenewal.html#property_newExpiration"
         },                {
             "fqsen": "\\Database\\Model\\CheckoutSession",
             "name": "CheckoutSession",
@@ -8766,6 +8826,11 @@ Search.appendIndex(
             "summary": "Add\u0020audit\u0020note\u0020to\u0020a\u0020member.",
             "url": "classes/Database-Service-Member.html#method_addAuditNote"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AaddAuditEntry\u0028\u0029",
+            "name": "addAuditEntry",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_addAuditEntry"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetFrontpageData\u0028\u0029",
             "name": "getFrontpageData",
             "summary": "",
@@ -8870,6 +8935,11 @@ Search.appendIndex(
             "name": "getRenewalForm",
             "summary": "Get\u0020the\u0020renewal\u0020form.",
             "url": "classes/Database-Service-Member.html#method_getRenewalForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003ArenewMember\u0028\u0029",
+            "name": "renewMember",
+            "summary": "Renew\u0020a\u0020member,\u0020assumes\u0020that\u0020the\u0020expiry\u0020date\u0020has\u0020already\u0020been\u0020set",
+            "url": "classes/Database-Service-Member.html#method_renewMember"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetFileStorageService\u0028\u0029",
             "name": "getFileStorageService",
@@ -8985,6 +9055,11 @@ Search.appendIndex(
             "name": "mailingListService",
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_mailingListService"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024renewalService",
+            "name": "renewalService",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_renewalService"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024userService",
             "name": "userService",

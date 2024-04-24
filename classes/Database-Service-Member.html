@@ -264,7 +264,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -412,6 +412,12 @@
     <a href="classes/Database-Service-Member.html#property_prospectiveMemberMapper">$prospectiveMemberMapper</a>
     <span>
                         &nbsp;: <a href="classes/Database-Mapper-ProspectiveMember.html"><abbr title="\Database\Mapper\ProspectiveMember">ProspectiveMember</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Database-Service-Member.html#property_renewalService">$renewalService</a>
+    <span>
+                        &nbsp;: <a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -738,6 +744,13 @@ days ago.</dd>
 <dd>Remove a prospective member.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Service-Member.html#method_renewMember">renewMember()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>    </span>
+</dt>
+<dd>Renew a member, assumes that the expiry date has already been set</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Service-Member.html#method_search">search()</a>
     <span>
                                 &nbsp;: array&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
@@ -794,6 +807,12 @@ registration.</dd>
 <dd>Subscribe member to mailing lists.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Database-Service-Member.html#method_addAuditEntry">addAuditEntry()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Database-Service-Member.html#method_generateAuthenticationKey">generateAuthenticationKey()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -831,7 +850,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -864,7 +883,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -897,7 +916,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -930,7 +949,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -963,7 +982,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -996,7 +1015,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -1029,7 +1048,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -1062,7 +1081,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -1095,7 +1114,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -1128,7 +1147,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
     </aside>
 
@@ -1161,7 +1180,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -1194,7 +1213,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -1227,7 +1246,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
     </aside>
 
@@ -1260,7 +1279,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -1293,7 +1312,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
@@ -1326,7 +1345,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1359,7 +1378,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -1392,7 +1411,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
@@ -1425,7 +1444,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
@@ -1458,7 +1477,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
@@ -1467,6 +1486,39 @@ registration.</dd>
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-ProspectiveMember.html"><abbr title="\Database\Mapper\ProspectiveMember">ProspectiveMember</abbr></a></span>
     <span class="phpdocumentor-signature__name">$prospectiveMemberMapper</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_renewalService">
+        $renewalService
+        <a href="classes/Database-Service-Member.html#property_renewalService" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">86</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$renewalService</span>
     </code>
 
     
@@ -1491,7 +1543,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -1524,7 +1576,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
@@ -1557,7 +1609,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -1595,14 +1647,14 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-Address.html"><abbr title="\Database\Form\Address">Address</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$addressForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-AuditEntry-AuditNote.html"><abbr title="\Database\Form\AuditEntry\AuditNote">AuditNote</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$auditNoteForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-DeleteAddress.html"><abbr title="\Database\Form\DeleteAddress">DeleteAddress</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deleteAddressForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberApprove.html"><abbr title="\Database\Form\MemberApprove">MemberApprove</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberApproveForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-Member.html"><abbr title="\Database\Form\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberEdit.html"><abbr title="\Database\Form\MemberEdit">MemberEdit</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberEditForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberExpiration.html"><abbr title="\Database\Form\MemberExpiration">MemberExpiration</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberExpirationForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberRenewal.html"><abbr title="\Database\Form\MemberRenewal">MemberRenewal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberRenewalForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberType.html"><abbr title="\Database\Form\MemberType">MemberType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberTypeForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-MailingList.html"><abbr title="\Database\Mapper\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-ActionLink.html"><abbr title="\Database\Mapper\ActionLink">ActionLink</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$actionLinkMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Audit.html"><abbr title="\Database\Mapper\Audit">Audit</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$auditMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-MemberUpdate.html"><abbr title="\Database\Mapper\MemberUpdate">MemberUpdate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberUpdateMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-ProspectiveMember.html"><abbr title="\Database\Mapper\ProspectiveMember">ProspectiveMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prospectiveMemberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$checkerService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Service-FileStorage.html"><abbr title="\Application\Service\FileStorage">FileStorage</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fileStorageService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-MailingList.html"><abbr title="\Database\Service\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Service-UserService.html"><abbr title="\User\Service\UserService">UserService</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\View\Renderer\PhpRenderer">PhpRenderer</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$viewRenderer</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-Address.html"><abbr title="\Database\Form\Address">Address</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$addressForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-AuditEntry-AuditNote.html"><abbr title="\Database\Form\AuditEntry\AuditNote">AuditNote</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$auditNoteForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-DeleteAddress.html"><abbr title="\Database\Form\DeleteAddress">DeleteAddress</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deleteAddressForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberApprove.html"><abbr title="\Database\Form\MemberApprove">MemberApprove</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberApproveForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-Member.html"><abbr title="\Database\Form\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberEdit.html"><abbr title="\Database\Form\MemberEdit">MemberEdit</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberEditForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberExpiration.html"><abbr title="\Database\Form\MemberExpiration">MemberExpiration</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberExpirationForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberRenewal.html"><abbr title="\Database\Form\MemberRenewal">MemberRenewal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberRenewalForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-MemberType.html"><abbr title="\Database\Form\MemberType">MemberType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberTypeForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-MailingList.html"><abbr title="\Database\Mapper\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-ActionLink.html"><abbr title="\Database\Mapper\ActionLink">ActionLink</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$actionLinkMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Audit.html"><abbr title="\Database\Mapper\Audit">Audit</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$auditMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-MemberUpdate.html"><abbr title="\Database\Mapper\MemberUpdate">MemberUpdate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberUpdateMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-ProspectiveMember.html"><abbr title="\Database\Mapper\ProspectiveMember">ProspectiveMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prospectiveMemberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Checker.html"><abbr title="\Checker\Service\Checker">Checker</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$checkerService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Service-FileStorage.html"><abbr title="\Application\Service\FileStorage">FileStorage</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fileStorageService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Service-MailingList.html"><abbr title="\Database\Service\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renewalService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Service-UserService.html"><abbr title="\User\Service\UserService">UserService</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$userService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\View\Renderer\PhpRenderer">PhpRenderer</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$viewRenderer</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mail\Transport\TransportInterface">TransportInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailTransport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1743,6 +1795,13 @@ registration.</dd>
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renewalService</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Checker-Service-Renewal.html"><abbr title="\Checker\Service\Renewal">Renewal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$userService</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/User-Service-UserService.html"><abbr title="\User\Service\UserService">UserService</abbr></a></span>
                             </dt>
@@ -1806,7 +1865,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">842</span>
+    <span class="phpdocumentor-element-found-in__line">849</span>
 
     </aside>
 
@@ -1882,7 +1941,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">929</span>
+    <span class="phpdocumentor-element-found-in__line">936</span>
 
     </aside>
 
@@ -1935,7 +1994,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">989</span>
+    <span class="phpdocumentor-element-found-in__line">1005</span>
 
     </aside>
 
@@ -1987,7 +2046,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">594</span>
+    <span class="phpdocumentor-element-found-in__line">593</span>
 
     </aside>
 
@@ -2033,7 +2092,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">647</span>
+    <span class="phpdocumentor-element-found-in__line">646</span>
 
     </aside>
 
@@ -2075,7 +2134,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">683</span>
+    <span class="phpdocumentor-element-found-in__line">682</span>
 
     </aside>
 
@@ -2144,7 +2203,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">817</span>
+    <span class="phpdocumentor-element-found-in__line">824</span>
 
     </aside>
 
@@ -2220,7 +2279,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">789</span>
+    <span class="phpdocumentor-element-found-in__line">796</span>
 
     </aside>
 
@@ -2288,7 +2347,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">281</span>
+    <span class="phpdocumentor-element-found-in__line">280</span>
 
     </aside>
 
@@ -2356,7 +2415,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1022</span>
+    <span class="phpdocumentor-element-found-in__line">1038</span>
 
     </aside>
 
@@ -2388,7 +2447,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1155</span>
+    <span class="phpdocumentor-element-found-in__line">1171</span>
 
     </aside>
 
@@ -2424,7 +2483,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1100</span>
+    <span class="phpdocumentor-element-found-in__line">1116</span>
 
     </aside>
 
@@ -2484,7 +2543,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1147</span>
+    <span class="phpdocumentor-element-found-in__line">1163</span>
 
     </aside>
 
@@ -2520,7 +2579,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1123</span>
+    <span class="phpdocumentor-element-found-in__line">1139</span>
 
     </aside>
 
@@ -2566,7 +2625,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1234</span>
+    <span class="phpdocumentor-element-found-in__line">1270</span>
 
     </aside>
 
@@ -2602,7 +2661,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1131</span>
+    <span class="phpdocumentor-element-found-in__line">1147</span>
 
     </aside>
 
@@ -2638,7 +2697,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1210</span>
+    <span class="phpdocumentor-element-found-in__line">1246</span>
 
     </aside>
 
@@ -2674,7 +2733,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">958</span>
+    <span class="phpdocumentor-element-found-in__line">974</span>
 
     </aside>
 
@@ -2709,7 +2768,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1086</span>
+    <span class="phpdocumentor-element-found-in__line">1102</span>
 
     </aside>
 
@@ -2755,7 +2814,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1226</span>
+    <span class="phpdocumentor-element-found-in__line">1262</span>
 
     </aside>
 
@@ -2791,7 +2850,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">423</span>
+    <span class="phpdocumentor-element-found-in__line">422</span>
 
     </aside>
 
@@ -2837,7 +2896,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1049</span>
+    <span class="phpdocumentor-element-found-in__line">1065</span>
 
     </aside>
 
@@ -2883,7 +2942,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1064</span>
+    <span class="phpdocumentor-element-found-in__line">1080</span>
 
     </aside>
 
@@ -2919,7 +2978,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1139</span>
+    <span class="phpdocumentor-element-found-in__line">1155</span>
 
     </aside>
 
@@ -2955,7 +3014,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1163</span>
+    <span class="phpdocumentor-element-found-in__line">1179</span>
 
     </aside>
 
@@ -2991,7 +3050,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1072</span>
+    <span class="phpdocumentor-element-found-in__line">1088</span>
 
     </aside>
 
@@ -3027,7 +3086,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1171</span>
+    <span class="phpdocumentor-element-found-in__line">1187</span>
 
     </aside>
 
@@ -3063,7 +3122,7 @@ registration.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">432</span>
+    <span class="phpdocumentor-element-found-in__line">431</span>
 
     </aside>
 
@@ -3110,7 +3169,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">984</span>
+    <span class="phpdocumentor-element-found-in__line">1000</span>
 
     </aside>
 
@@ -3156,7 +3215,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">976</span>
+    <span class="phpdocumentor-element-found-in__line">992</span>
 
     </aside>
 
@@ -3192,7 +3251,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">448</span>
+    <span class="phpdocumentor-element-found-in__line">447</span>
 
     </aside>
 
@@ -3238,7 +3297,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1179</span>
+    <span class="phpdocumentor-element-found-in__line">1195</span>
 
     </aside>
 
@@ -3274,7 +3333,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1218</span>
+    <span class="phpdocumentor-element-found-in__line">1254</span>
 
     </aside>
 
@@ -3310,7 +3369,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1187</span>
+    <span class="phpdocumentor-element-found-in__line">1203</span>
 
     </aside>
 
@@ -3356,7 +3415,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">528</span>
+    <span class="phpdocumentor-element-found-in__line">527</span>
 
     </aside>
 
@@ -3406,7 +3465,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">712</span>
+    <span class="phpdocumentor-element-found-in__line">711</span>
 
     </aside>
 
@@ -3475,7 +3534,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1012</span>
+    <span class="phpdocumentor-element-found-in__line">1028</span>
 
     </aside>
 
@@ -3520,7 +3579,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">602</span>
+    <span class="phpdocumentor-element-found-in__line">601</span>
 
     </aside>
 
@@ -3562,7 +3621,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">867</span>
+    <span class="phpdocumentor-element-found-in__line">874</span>
 
     </aside>
 
@@ -3638,7 +3697,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">614</span>
+    <span class="phpdocumentor-element-found-in__line">613</span>
 
     </aside>
 
@@ -3680,7 +3739,7 @@ member exists.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">635</span>
+    <span class="phpdocumentor-element-found-in__line">634</span>
 
     </aside>
 
@@ -3713,7 +3772,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">626</span>
+    <span class="phpdocumentor-element-found-in__line">625</span>
 
     </aside>
 
@@ -3747,6 +3806,59 @@ days ago.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_renewMember">
+        renewMember()
+        <a href="classes/Database-Service-Member.html#method_renewMember" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">1226</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Renew a member, assumes that the expiry date has already been set</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">renewMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renewalLink</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$member</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renewalLink</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_search">
         search()
         <a href="classes/Database-Service-Member.html#method_search" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3755,7 +3867,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">564</span>
+    <span class="phpdocumentor-element-found-in__line">563</span>
 
     </aside>
 
@@ -3801,7 +3913,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">574</span>
+    <span class="phpdocumentor-element-found-in__line">573</span>
 
     </aside>
 
@@ -3847,7 +3959,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">584</span>
+    <span class="phpdocumentor-element-found-in__line">583</span>
 
     </aside>
 
@@ -3900,7 +4012,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">248</span>
+    <span class="phpdocumentor-element-found-in__line">247</span>
 
     </aside>
 
@@ -3948,7 +4060,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">159</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
     </aside>
 
@@ -4014,7 +4126,7 @@ registration.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">550</span>
+    <span class="phpdocumentor-element-found-in__line">549</span>
 
     </aside>
 
@@ -4063,7 +4175,7 @@ registration.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 
     </aside>
 
@@ -4125,7 +4237,7 @@ registration.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">890</span>
+    <span class="phpdocumentor-element-found-in__line">897</span>
 
     </aside>
 
@@ -4186,6 +4298,58 @@ registration.</p>
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_addAuditEntry">
+        addAuditEntry()
+        <a href="classes/Database-Service-Member.html#method_addAuditEntry" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">953</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">addAuditEntry</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$auditEntry</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$member</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$auditEntry</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_generateAuthenticationKey">
         generateAuthenticationKey()
         <a href="classes/Database-Service-Member.html#method_generateAuthenticationKey" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4194,7 +4358,7 @@ registration.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Member.php"><a href="files/module-database-src-service-member.html"><abbr title="module/Database/src/Service/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1035</span>
+    <span class="phpdocumentor-element-found-in__line">1051</span>
 
     </aside>
 
@@ -4349,6 +4513,7 @@ registration.</p>
                                                     <li><a href="classes/Database-Service-Member.html#property_memberTypeForm">$memberTypeForm<a href="classes/Database-Service-Member.html"></li>
                                                     <li><a href="classes/Database-Service-Member.html#property_memberUpdateMapper">$memberUpdateMapper<a href="classes/Database-Service-Member.html"></li>
                                                     <li><a href="classes/Database-Service-Member.html#property_prospectiveMemberMapper">$prospectiveMemberMapper<a href="classes/Database-Service-Member.html"></li>
+                                                    <li><a href="classes/Database-Service-Member.html#property_renewalService">$renewalService<a href="classes/Database-Service-Member.html"></li>
                                                     <li><a href="classes/Database-Service-Member.html#property_translator">$translator<a href="classes/Database-Service-Member.html"></li>
                                                     <li><a href="classes/Database-Service-Member.html#property_userService">$userService<a href="classes/Database-Service-Member.html"></li>
                                                     <li><a href="classes/Database-Service-Member.html#property_viewRenderer">$viewRenderer<a href="classes/Database-Service-Member.html"></li>
@@ -4401,6 +4566,7 @@ registration.</p>
                                             <li><a href="classes/Database-Service-Member.html#method_removeExpiredMembers">removeExpiredMembers()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_removeExpiredProspectiveMembers">removeExpiredProspectiveMembers()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_removeProspective">removeProspective()</a></li>
+                                            <li><a href="classes/Database-Service-Member.html#method_renewMember">renewMember()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_search">search()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_searchFiltered">searchFiltered()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_searchProspective">searchProspective()</a></li>
@@ -4409,6 +4575,7 @@ registration.</p>
                                             <li><a href="classes/Database-Service-Member.html#method_setSupremum">setSupremum()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_subscribe">subscribe()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_subscribeLists">subscribeLists()</a></li>
+                                            <li><a href="classes/Database-Service-Member.html#method_addAuditEntry">addAuditEntry()</a></li>
                                             <li><a href="classes/Database-Service-Member.html#method_generateAuthenticationKey">generateAuthenticationKey()</a></li>
                                     </ul>
             </li>

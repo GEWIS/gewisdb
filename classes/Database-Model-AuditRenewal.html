@@ -243,8 +243,11 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    AuditEntry
+    AuditRenewal
 
+        <span class="phpdocumentor-element__extends">
+        extends <a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -254,26 +257,21 @@
         </div>
     
     
-            <span class="phpdocumentor-element__extends">
-            Uses
-                            <a href="classes/Database-Model-Trait-CreatedTrait.html"><abbr title="\Database\Model\Trait\CreatedTrait">CreatedTrait</abbr></a>,                             <a href="classes/Database-Model-Trait-UpdatedTrait.html"><abbr title="\Database\Model\Trait\UpdatedTrait">UpdatedTrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
 
 
-    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Abstract</span><span>Yes</span></div>
-
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Abstract audit log entry, can take different types</p>
+            <p class="phpdocumentor-summary">Class for registering renewals by the member or another user</p>
 
 
 
@@ -282,7 +280,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Database-Model-AuditEntry.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-AuditRenewal.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -296,7 +294,7 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/Database-Model-AuditEntry.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-AuditRenewal.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -315,7 +313,7 @@
 <dd>Entry ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-AuditEntry.html#property_IMMUTABLE">$IMMUTABLE</a>
+    <a href="classes/Database-Model-AuditRenewal.html#property_IMMUTABLE">$IMMUTABLE</a>
     <span>
                         &nbsp;: bool            </span>
 </dt>
@@ -327,6 +325,20 @@
                         &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null            </span>
 </dt>
 <dd>If this entry is linked to a member, the member who this entry is linked to</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-AuditRenewal.html#property_newExpiration">$newExpiration</a>
+    <span>
+                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
+</dt>
+<dd>Expiration value after the renewal</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-AuditRenewal.html#property_oldExpiration">$oldExpiration</a>
+    <span>
+                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
+</dt>
+<dd>Expiration value before this renewal took place</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt">$updatedAt</a>
@@ -346,7 +358,7 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Database-Model-AuditEntry.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-AuditRenewal.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -357,6 +369,12 @@
 </dt>
 <dd>It is not possible to require a link always when constructing the model, but we want
 to always link at least one of the linkable objects. Currently only member is possible</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-AuditRenewal.html#method_fromRenewalLink">fromRenewalLink()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-AuditRenewal.html"><abbr title="\Database\Model\AuditRenewal">AuditRenewal</abbr></a>    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-Trait-CreatedTrait.html#method_getCreatedAt">getCreatedAt()</a>
@@ -375,6 +393,20 @@ to always link at least one of the linkable objects. Currently only member is po
     <span>
                                 &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-AuditRenewal.html#method_getNewExpiration">getNewExpiration()</a>
+    <span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
+</dt>
+<dd>Get the new expiration date.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-AuditRenewal.html#method_getOldExpiration">getOldExpiration()</a>
+    <span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
+</dt>
+<dd>Get the old expiration date.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-AuditEntry.html#method_getStringPlain">getStringPlain()</a>
@@ -437,6 +469,20 @@ Not implemented</dd>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-AuditRenewal.html#method_setNewExpiration">setNewExpiration()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the new expiration date.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-AuditRenewal.html#method_setOldExpiration">setOldExpiration()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the old expiration date.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue">setUpdatedAtValue()</a>
     <span>
                                 &nbsp;: self    </span>
@@ -449,16 +495,17 @@ Not implemented</dd>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Database-Model-AuditEntry.html#method_getStringArguments">getStringArguments()</a>
+    <a href="classes/Database-Model-AuditRenewal.html#method_getStringArguments">getStringArguments()</a>
     <span>
-                                &nbsp;: array&lt;string|int, string&gt;    </span>
+                                &nbsp;: array&lt;string|int, string|null&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Database-Model-AuditEntry.html#method_getStringBodyFormatted">getStringBodyFormatted()</a>
+    <a href="classes/Database-Model-AuditRenewal.html#method_getStringBodyFormatted">getStringBodyFormatted()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>Get a textual representation of this audit entry</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Database-Model-AuditEntry.html#method_getStringBodyPlain">getStringBodyPlain()</a>
@@ -466,6 +513,19 @@ Not implemented</dd>
                                 &nbsp;: string    </span>
 </dt>
 <dd>Get the string body, currently is constant for all types, but may change</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Database-Model-AuditRenewal.html#method_getStringRenewalType">getStringRenewalType()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Database-Model-AuditRenewal.html#method_isSelfRenewal">isSelfRenewal()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Check if the renewal was done by the member</dd>
 
     </dl>
 
@@ -478,7 +538,7 @@ Not implemented</dd>
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Database-Model-AuditEntry.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-AuditRenewal.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -558,15 +618,15 @@ Not implemented</dd>
 >
     <h4 class="phpdocumentor-element__name" id="property_IMMUTABLE">
         $IMMUTABLE
-        <a href="classes/Database-Model-AuditEntry.html#property_IMMUTABLE" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-AuditRenewal.html#property_IMMUTABLE" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -581,6 +641,22 @@ Not implemented</dd>
     
     
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Database-Model-AuditRenewal.html#property_IMMUTABLE#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">psalm-suppress</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>InvalidClassConstantType</p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 </article>
                     <article
@@ -611,6 +687,74 @@ Not implemented</dd>
         <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$member</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_newExpiration">
+        $newExpiration
+        <a href="classes/Database-Model-AuditRenewal.html#property_newExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Expiration value after the renewal</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$newExpiration</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_oldExpiration">
+        $oldExpiration
+        <a href="classes/Database-Model-AuditRenewal.html#property_oldExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Expiration value before this renewal took place</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$oldExpiration</span>
+    </code>
 
     
     
@@ -690,7 +834,7 @@ Not implemented</dd>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Model-AuditEntry.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-AuditRenewal.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -725,6 +869,51 @@ to always link at least one of the linkable objects. Currently only member is po
     
 
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static            -final        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_fromRenewalLink">
+        fromRenewalLink()
+        <a href="classes/Database-Model-AuditRenewal.html#method_fromRenewalLink" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">46</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__final">final</span>    <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">fromRenewalLink</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renewalLink</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-AuditRenewal.html"><abbr title="\Database\Model\AuditRenewal">AuditRenewal</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renewalLink</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-RenewalLink.html"><abbr title="\Database\Model\RenewalLink">RenewalLink</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-AuditRenewal.html"><abbr title="\Database\Model\AuditRenewal">AuditRenewal</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -828,6 +1017,78 @@ to always link at least one of the linkable objects. Currently only member is po
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getNewExpiration">
+        getNewExpiration()
+        <a href="classes/Database-Model-AuditRenewal.html#method_getNewExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the new expiration date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getNewExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getOldExpiration">
+        getOldExpiration()
+        <a href="classes/Database-Model-AuditRenewal.html#method_getOldExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">59</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the old expiration date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getOldExpiration</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
             </section>
 
 </article>
@@ -1170,6 +1431,90 @@ Not implemented</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setNewExpiration">
+        setNewExpiration()
+        <a href="classes/Database-Model-AuditRenewal.html#method_setNewExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">83</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the new expiration date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setNewExpiration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newExpiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$newExpiration</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setOldExpiration">
+        setOldExpiration()
+        <a href="classes/Database-Model-AuditRenewal.html#method_setOldExpiration" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">67</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the old expiration date.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setOldExpiration</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$oldExpiration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$oldExpiration</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setUpdatedAtValue">
         setUpdatedAtValue()
         <a href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1244,24 +1589,24 @@ Not implemented</p>
         class="phpdocumentor-element
             -method
             -protected
-                        -abstract                                "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_getStringArguments">
         getStringArguments()
-        <a href="classes/Database-Model-AuditEntry.html#method_getStringArguments" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-AuditRenewal.html#method_getStringArguments" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">191</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getStringArguments</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getStringArguments</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string|null&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1271,7 +1616,7 @@ Not implemented</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, string|null&gt;</span>
             </section>
 
 </article>
@@ -1279,24 +1624,25 @@ Not implemented</p>
         class="phpdocumentor-element
             -method
             -protected
-                        -abstract                                "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_getStringBodyFormatted">
         getStringBodyFormatted()
-        <a href="classes/Database-Model-AuditEntry.html#method_getStringBodyFormatted" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-AuditRenewal.html#method_getStringBodyFormatted" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Get a textual representation of this audit entry</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getStringBodyFormatted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getStringBodyFormatted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1346,13 +1692,84 @@ Not implemented</p>
             </section>
 
 </article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getStringRenewalType">
+        getStringRenewalType()
+        <a href="classes/Database-Model-AuditRenewal.html#method_getStringRenewalType" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">96</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">getStringRenewalType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isSelfRenewal">
+        isSelfRenewal()
+        <a href="classes/Database-Model-AuditRenewal.html#method_isSelfRenewal" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditRenewal.php"><a href="files/module-database-src-model-auditrenewal.html"><abbr title="module/Database/src/Model/AuditRenewal.php">AuditRenewal.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">91</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Check if the renewal was done by the member</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">isSelfRenewal</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
             </section>
 
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Model/AuditEntry.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Model/AuditRenewal.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -1451,20 +1868,22 @@ Not implemented</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/Database-Model-AuditEntry.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Database-Model-AuditEntry.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/Database-Model-AuditRenewal.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Model-AuditRenewal.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/Database-Model-Trait-CreatedTrait.html#property_createdAt">$createdAt<a href="classes/Database-Model-AuditEntry.html"></li>
-                                                    <li><a href="classes/Database-Model-AuditEntry.html#property_id">$id<a href="classes/Database-Model-AuditEntry.html"></li>
-                                                    <li><a href="classes/Database-Model-AuditEntry.html#property_IMMUTABLE">$IMMUTABLE<a href="classes/Database-Model-AuditEntry.html"></li>
-                                                    <li><a href="classes/Database-Model-AuditEntry.html#property_member">$member<a href="classes/Database-Model-AuditEntry.html"></li>
-                                                    <li><a href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt">$updatedAt<a href="classes/Database-Model-AuditEntry.html"></li>
-                                                    <li><a href="classes/Database-Model-AuditEntry.html#property_user">$user<a href="classes/Database-Model-AuditEntry.html"></li>
+                                                    <li><a href="classes/Database-Model-Trait-CreatedTrait.html#property_createdAt">$createdAt<a href="classes/Database-Model-AuditRenewal.html"></li>
+                                                    <li><a href="classes/Database-Model-AuditEntry.html#property_id">$id<a href="classes/Database-Model-AuditRenewal.html"></li>
+                                                    <li><a href="classes/Database-Model-AuditRenewal.html#property_IMMUTABLE">$IMMUTABLE<a href="classes/Database-Model-AuditRenewal.html"></li>
+                                                    <li><a href="classes/Database-Model-AuditEntry.html#property_member">$member<a href="classes/Database-Model-AuditRenewal.html"></li>
+                                                    <li><a href="classes/Database-Model-AuditRenewal.html#property_newExpiration">$newExpiration<a href="classes/Database-Model-AuditRenewal.html"></li>
+                                                    <li><a href="classes/Database-Model-AuditRenewal.html#property_oldExpiration">$oldExpiration<a href="classes/Database-Model-AuditRenewal.html"></li>
+                                                    <li><a href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt">$updatedAt<a href="classes/Database-Model-AuditRenewal.html"></li>
+                                                    <li><a href="classes/Database-Model-AuditEntry.html#property_user">$user<a href="classes/Database-Model-AuditRenewal.html"></li>
                                             </ul>
                 </li>
             
@@ -1472,9 +1891,12 @@ Not implemented</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_assertValid">assertValid()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_fromRenewalLink">fromRenewalLink()</a></li>
                                             <li><a href="classes/Database-Model-Trait-CreatedTrait.html#method_getCreatedAt">getCreatedAt()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_getId">getId()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_getMember">getMember()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_getNewExpiration">getNewExpiration()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_getOldExpiration">getOldExpiration()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_getStringPlain">getStringPlain()</a></li>
                                             <li><a href="classes/Database-Model-Trait-UpdatedTrait.html#method_getUpdatedAt">getUpdatedAt()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_getUser">getUser()</a></li>
@@ -1484,11 +1906,15 @@ Not implemented</p>
                                             <li><a href="classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue">setCreatedAtValue()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_setId">setId()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_setMember">setMember()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_setNewExpiration">setNewExpiration()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_setOldExpiration">setOldExpiration()</a></li>
                                             <li><a href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue">setUpdatedAtValue()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_setUser">setUser()</a></li>
-                                            <li><a href="classes/Database-Model-AuditEntry.html#method_getStringArguments">getStringArguments()</a></li>
-                                            <li><a href="classes/Database-Model-AuditEntry.html#method_getStringBodyFormatted">getStringBodyFormatted()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_getStringArguments">getStringArguments()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_getStringBodyFormatted">getStringBodyFormatted()</a></li>
                                             <li><a href="classes/Database-Model-AuditEntry.html#method_getStringBodyPlain">getStringBodyPlain()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_getStringRenewalType">getStringRenewalType()</a></li>
+                                            <li><a href="classes/Database-Model-AuditRenewal.html#method_isSelfRenewal">isSelfRenewal()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -1508,7 +1934,7 @@ Not implemented</p>
     </section>
 </section>
         </div>
-        <a href="classes/Database-Model-AuditEntry.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Model-AuditRenewal.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
