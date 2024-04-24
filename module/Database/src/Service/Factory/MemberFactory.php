@@ -6,6 +6,7 @@ namespace Database\Service\Factory;
 
 use Application\Service\FileStorage as FileStorageService;
 use Checker\Service\Checker as CheckerService;
+use Checker\Service\Renewal as RenewalService;
 use Database\Form\Address as AddressForm;
 use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
@@ -78,6 +79,8 @@ class MemberFactory implements FactoryInterface
         $fileStorageService = $container->get(FileStorageService::class);
         /** @var MailingListService $mailingListService */
         $mailingListService = $container->get(MailingListService::class);
+        /** @var RenewalService $renewalService */
+        $renewalService = $container->get(RenewalService::class);
         /** @var UserService $userService */
         $userService = $container->get(UserService::class);
         /** @var PhpRenderer $viewRenderer */
@@ -107,6 +110,7 @@ class MemberFactory implements FactoryInterface
             $checkerService,
             $fileStorageService,
             $mailingListService,
+            $renewalService,
             $userService,
             $viewRenderer,
             $mailTransport,

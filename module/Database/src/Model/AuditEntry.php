@@ -36,6 +36,7 @@ use function strip_tags;
 #[DiscriminatorMap(
     value: [
         'note' => AuditNote::class,
+        'renewal' => AuditRenewal::class,
     ],
 )]
 abstract class AuditEntry
@@ -119,7 +120,7 @@ abstract class AuditEntry
 
     public function setMember(Member $member): void
     {
-        if (null !== $this->member) {
+        if (null !== $this->member && $this->member !== $member) {
             throw new LogicException('Must not link an audit entry to another object after creation');
         }
 

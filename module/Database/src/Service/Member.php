@@ -10,6 +10,7 @@ use Application\Service\FileStorage as FileStorageService;
 use Checker\Model\Exception\LookupException;
 use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
+use Checker\Service\Renewal as RenewalService;
 use Database\Form\Address as AddressForm;
 use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
@@ -27,12 +28,15 @@ use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
 use Database\Model\Address as AddressModel;
+use Database\Model\AuditEntry as AuditEntryModel;
 use Database\Model\AuditNote as AuditNoteModel;
+use Database\Model\AuditRenewal as AuditRenewalModel;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\MemberUpdate as MemberUpdateModel;
 use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
+use Database\Model\RenewalLink as RenewalLinkModel;
 use Database\Service\MailingList as MailingListService;
 use DateTime;
 use InvalidArgumentException;
@@ -79,6 +83,7 @@ class Member
         private readonly CheckerService $checkerService,
         private readonly FileStorageService $fileStorageService,
         private readonly MailingListService $mailingListService,
+        private readonly RenewalService $renewalService,
         private readonly UserService $userService,
         private readonly PhpRenderer $viewRenderer,
         private readonly TransportInterface $mailTransport,
@@ -163,12 +168,6 @@ class Member
         if (!in_array($type, ['registration', 'welcome', 'checkout-expired', 'checkout-failed', 'refund-created'])) {
             throw new InvalidArgumentException('Unknown email type for prospective member.');
         }
-
-        // Define here to appease the checkers for "possibly undefined variables". Because of the `!in_array()` these
-        // are guaranteed to be changed.
-        $template = '';
-        $subjectProspectiveMember = '';
-        $subjectSecretary = '';
 
         switch ($type) {
             case 'registration':
@@ -734,6 +733,10 @@ class Member
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
+        // Record a renewal audit entry
+        $renewalAudit = new AuditRenewalModel();
+        $renewalAudit->setOldExpiration($member->getExpiration());
+
         // update expiration and 'membership ends on' date (should become effective at the end of the previous
         // association year).
         $expiration = clone $date;
@@ -777,6 +780,10 @@ class Member
         // At the end of the current association year.
         $expiration->setDate($year, 7, 1);
         $member->setExpiration($expiration);
+
+        $renewalAudit->setNewExpiration($member->getExpiration());
+        $renewalAudit->setUser($this->userService->getIdentity());
+        $this->addAuditEntry($member, $renewalAudit);
 
         $this->getMemberMapper()->persist($member);
 
@@ -936,12 +943,21 @@ class Member
 
         /** @var AuditNoteModel $auditNote */
         $auditNote = $form->getData();
-        $auditNote->setMember($member);
         $auditNote->setUser($this->userService->getIdentity());
 
-        $this->getAuditMapper()->persist($auditNote);
+        $this->addAuditEntry($member, $auditNote);
 
         return $auditNote;
+    }
+
+    private function addAuditEntry(
+        MemberModel $member,
+        AuditEntryModel $auditEntry,
+    ): AuditEntryModel {
+        $auditEntry->setMember($member);
+        $this->getAuditMapper()->persist($auditEntry);
+
+        return $auditEntry;
     }
 
     /**
@@ -1202,6 +1218,26 @@ class Member
         $form->setRenewalLink($renewalLink);
 
         return $form;
+    }
+
+    /**
+     * Renew a member, assumes that the expiry date has already been set
+     */
+    public function renewMember(
+        MemberModel $member,
+        RenewalLinkModel $renewalLink,
+    ): MemberModel {
+        $member->setChangedOn(new DateTime());
+        $this->getMemberMapper()->persist($member);
+        $renewalLink->setUsed(true);
+        $this->getActionLinkMapper()->persist($renewalLink);
+        $this->renewalService->sendRenewalSuccessEmail($renewalLink);
+
+        // Record a renewal audit entry
+        $renewalAudit = AuditRenewalModel::fromRenewalLink($renewalLink);
+        $this->addAuditEntry($member, $renewalAudit);
+
+        return $member;
     }
 
     /**
