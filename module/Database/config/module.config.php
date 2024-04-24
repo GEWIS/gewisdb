@@ -650,6 +650,16 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'health' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/health',
+                            'defaults' => [
+                                'controller' => ApiController::class,
+                                'action' => 'healthy',
+                            ],
+                        ],
+                    ],
                     'members' => [
                         'type' => Literal::class,
                         'options' => [

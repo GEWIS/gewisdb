@@ -33,6 +33,26 @@ paths:
     get:
       summary: Health endpoint
       description: This endpoint will return the health status of the API
+      deprecated: true
+      tags:
+        - basic
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/health'
+        403:
+          $ref: '#/components/responses/no_permission'
+      security:
+        - api_auth:
+            - HealthR
+            
+  /health:
+    get:
+      summary: Health endpoint
+      description: This endpoint will return the health status of the API and whether client applications are requested to temporarily pause their synchronisation.
       tags:
         - basic
       responses:
