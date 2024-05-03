@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+namespace Application;
+
 use Application\Controller\IndexController;
 use Application\View\Helper\BootstrapElementError;
+use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Laminas\I18n\Translator\Resources;
 use Laminas\Router\Http\Segment;
 use User\Listener\AuthenticationListener;
@@ -76,6 +79,21 @@ return [
     'view_helpers' => [
         'invokables' => [
             'bootstrapElementError' => BootstrapElementError::class,
+        ],
+    ],
+    'doctrine' => [
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => AttributeDriver::class,
+                'paths' => [
+                    __DIR__ . '/../src/Model/',
+                ],
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Model' => __NAMESPACE__ . '_driver',
+                ],
+            ],
         ],
     ],
 ];

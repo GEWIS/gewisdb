@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Checker;
+
 use Checker\Command\CheckAuthenticationKeysCommand;
 use Checker\Command\CheckDatabaseCommand;
 use Checker\Command\CheckDischargesCommand;
