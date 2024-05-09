@@ -76,34 +76,36 @@ case 'other':
     <?= $this->escapeHtml($subdecision->getContent()) ?>
 <?php endforeach; ?>
 
-<button onclick="copyDecision()" class="btn btn-success">
+<br>
+<span class="hidden" id="decision-contents">
+    <?= sprintf(
+        '\decision[%s]{%s}',
+        $this->escapeHtml($decision->getAlternativeContent(true)),
+        $this->escapeHtml($decision->getContent(true)),
+    ) ?>
+</span>
+
+<button onclick="copyDecision()" class="btn btn-info">
     <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
 </button>
-<br />
-    <a href="<?= $this->url(
-        'meeting/view',
-        [
-            'type' => $decision->getMeetingType()->value,
-            'number' => $decision->getMeetingNumber(),
-        ],
-    ) ?>">
-        <?=
-            sprintf(
-                $this->translate('Back to %s %d'),
-                $decision->getMeetingType()->value,
-                $decision->getMeetingNumber(),
-            )
-        ?>
-    </a>
+<a href="<?= $this->url(
+    'meeting/view',
+    [
+        'type' => $decision->getMeetingType()->value,
+        'number' => $decision->getMeetingNumber(),
+    ],
+) ?>" class="btn btn-success">
+    <?=
+    sprintf(
+        $this->translate('Back to %s %d'),
+        $decision->getMeetingType()->value,
+        $decision->getMeetingNumber(),
+    )
+    ?>
+</a>
     <script>
-        let decisionCopy = "<?= sprintf(
-            '\decision[%s]{%s}',
-            $this->escapeHtmlAttr($decision->getAlternativeContent(true)),
-            $this->escapeHtmlAttr($decision->getContent(true)),
-        ) ?>";
-
         function copyDecision() {
-            navigator.clipboard.writeText(decisionCopy);
+            navigator.clipboard.writeText(document.getElementById('decision-contents').textContent.trim());
         }
     </script>
 <?php endif; ?>

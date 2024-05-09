@@ -67,21 +67,21 @@ $(document).ready(function () {
     <li>
         <?= $this->translate('Decision') ?> <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:
         <?php if ($decision->isDestroyed()): ?>
-        <?php
-        $dec = $decision->getDestroyedBy()->getDecision();
-        $mt = $dec->getMeeting();
-        ?>
-        <strong>
-            <?=
-                sprintf(
-                    $this->translate('(Annulled by decision %s %d.%d.%d)'),
-                    $mt->getType()->value,
-                    $mt->getNumber(),
-                    $dec->getPoint(),
-                    $dec->getNumber(),
-                )
+            <?php
+            $dec = $decision->getDestroyedBy()->getDecision();
+            $mt = $dec->getMeeting();
             ?>
-        </strong>
+            <strong>
+                <?=
+                    sprintf(
+                        $this->translate('(Annulled by decision %s %d.%d.%d)'),
+                        $mt->getType()->value,
+                        $mt->getNumber(),
+                        $dec->getPoint(),
+                        $dec->getNumber(),
+                    )
+                ?>
+            </strong>
         <?php endif; ?>
         <br />
         <a href="<?= $this->url('meeting/decision/delete', array(
@@ -92,23 +92,26 @@ $(document).ready(function () {
         )) ?>" class="btn btn-danger">
             <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete Decision') ?>
         </a>
-        <button onclick="copyDecision(this)" class="btn btn-success" value="<?= sprintf(
-            '\decision[%s]{%s}',
-            $this->escapeHtmlAttr($decision->getAlternativeContent(true)),
-            $this->escapeHtmlAttr($decision->getContent(true)),
-        ) ?>">
+        <button onclick="copyDecision('<?= $decision->getHash() ?>')" class="btn btn-info">
             <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
         </button>
         <ul>
         <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-            <li><?= $this->escapeHtmlAttr($subdecision->getContent()) ?></li>
+            <li><?= $this->escapeHtml($subdecision->getContent()) ?></li>
         <?php endforeach; ?>
         </ul>
+        <span class="hidden" id="<?= $decision->getHash() ?>">
+            <?= sprintf(
+                '\decision[%s]{%s}',
+                $this->escapeHtmlAttr($decision->getAlternativeContent(true)),
+                $this->escapeHtmlAttr($decision->getContent(true)),
+            ) ?>
+        </span>
     </li>
 <?php endforeach; ?>
 <script>
     function copyDecision(decision) {
-        navigator.clipboard.writeText(decision.value).then(
+        navigator.clipboard.writeText(document.getElementById(decision).textContent.trim()).then(
             () => {
                 // Clipboard succeeded
             },
