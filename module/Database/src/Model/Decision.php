@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\OrderBy;
 
 use function implode;
+use function sprintf;
 
 /**
  * Decision model.
@@ -218,6 +219,26 @@ class Decision
         return null !== $this->destroyedby;
     }
 
+    /**
+     * Get the string ("hash") that uniquely identifies this decision.
+     *
+     * Referencing a decision should always happen through this and only this identifier (or a variation thereof). No
+     * alternative version is provided (in contrast to the contents of this decision).
+     */
+    public function getHash(): string
+    {
+        return sprintf(
+            '%s %d.%d.%d',
+            $this->getMeetingType()->value,
+            $this->getMeetingNumber(),
+            $this->getPoint(),
+            $this->getNumber(),
+        );
+    }
+
+    /**
+     * Get the statutory content of the decision (in Dutch) by going over all subdecisions.
+     */
     public function getContent(): string
     {
         $content = [];
@@ -225,9 +246,20 @@ class Decision
             $content[] = $subdecision->getContent();
         }
 
-        $content = implode(' ', $content);
+        return implode(' ', $content);
+    }
 
-        return $content;
+    /**
+     * Get the alternative content of the subdecision (in English) by going over all subdecisions.
+     */
+    public function getAlternativeContent(): string
+    {
+        $alternativeContent = [];
+        foreach ($this->getSubdecisions() as $subdecision) {
+            $alternativeContent[] = $subdecision->getAlternativeContent();
+        }
+
+        return implode(' ', $alternativeContent);
     }
 
     /**

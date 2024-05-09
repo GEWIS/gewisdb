@@ -108,29 +108,18 @@ class Installation extends SubDecision
     }
 
     /**
-     * Get the content.
-     *
-     * Fixes Bor's greatest frustration
-     */
-    public function getContent(): string
-    {
-        $member = $this->getMember()->getFullName();
-
-        return $member . ' wordt per ' . $this->formatDate($this->getDate())
-              . ' geïnstalleerd als ' . $this->getFunction() . ' der s.v. GEWIS.';
-    }
-
-    /**
      * Format the date.
      *
      * returns the localized version of $date->format('d F Y')
      *
      * @return string Formatted date
      */
-    protected function formatDate(DateTime $date): string
-    {
+    protected function formatDate(
+        DateTime $date,
+        string $locale = 'nl_NL',
+    ): string {
         $formatter = new IntlDateFormatter(
-            'nl_NL', // yes, hardcoded :D
+            $locale,
             IntlDateFormatter::NONE,
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
@@ -139,5 +128,37 @@ class Installation extends SubDecision
         );
 
         return $formatter->format($date);
+    }
+
+    protected function getTemplate(): string
+    {
+        return '%MEMBER% wordt per %DATE% geïnstalleerd als %FUNCTION% der s.v. GEWIS.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return '%MEMBER% is installed as %FUNCTION% of s.v. GEWIS effective from %DATE%.';
+    }
+
+    public function getContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getMember()->getFullName(),
+            '%DATE%' => $this->formatDate($this->getDate()),
+            '%FUNCTION%' => $this->getFunction(),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getMember()->getFullName(),
+            '%DATE%' => $this->formatDate($this->getDate(), 'en_GB'),
+            '%FUNCTION%' => $this->getFunction(), // Has no alternative (like the decision hash).
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

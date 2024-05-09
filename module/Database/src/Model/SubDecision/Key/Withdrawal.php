@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping\OneToOne;
 use IntlDateFormatter;
 
 use function date_default_timezone_get;
-use function str_replace;
 
 #[Entity]
 class Withdrawal extends SubDecision
@@ -86,29 +85,18 @@ class Withdrawal extends SubDecision
     }
 
     /**
-     * Get the content.
-     */
-    public function getContent(): string
-    {
-        $template = $this->getTemplate();
-
-        $template = str_replace('%GRANTEE%', $this->getGranting()->getMember()->getFullName(), $template);
-        $template = str_replace('%WITHDRAWAL%', $this->formatDate($this->getWithdrawnOn()), $template);
-
-        return $template;
-    }
-
-    /**
      * Format the date.
      *
      * returns the localized version of $date->format('d F Y')
      *
      * @return string Formatted date
      */
-    protected function formatDate(DateTime $date): string
-    {
+    protected function formatDate(
+        DateTime $date,
+        string $locale = 'nl_NL',
+    ): string {
         $formatter = new IntlDateFormatter(
-            'nl_NL',
+            $locale,
             IntlDateFormatter::NONE,
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
@@ -119,11 +107,33 @@ class Withdrawal extends SubDecision
         return $formatter->format($date);
     }
 
-    /**
-     * Decision template.
-     */
     protected function getTemplate(): string
     {
         return 'De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return 'The key code of %GRANTEE% of GEWIS is withdrawn from %WITHDRAWAL%.';
+    }
+
+    public function getContent(): string
+    {
+        $replacements = [
+            '%GRANTEE%' => $this->getGranting()->getMember()->getFullName(),
+            '%WITHDRAWAL%' => $this->formatDate($this->getWithdrawnOn()),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%GRANTEE%' => $this->getGranting()->getMember()->getFullName(),
+            '%WITHDRAWAL%' => $this->formatDate($this->getWithdrawnOn(), 'en_GB'),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

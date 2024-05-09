@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
+use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting;
 use Laminas\View\Renderer\PhpRenderer;
 
@@ -68,10 +69,9 @@ case 'other':
 ?>
 <?php else: ?>
 <?php
-$meeting = $decision->getMeeting();
-$decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . $decision->getPoint() . '.' . $decision->getNumber();
+/** @var DecisionModel $decision */
 ?>
-<h1><?= $this->translate('Decision') ?> <?= $decisionNum ?> <?= $this->translate('reads as follows:') ?></h1>
+<h1><?= $this->translate('Decision') ?> <?= $decision->getHash() ?> <?= $this->translate('reads as follows:') ?></h1>
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
     <?= $this->escapeHtml($subdecision->getContent()) ?>
 <?php endforeach; ?>
@@ -83,20 +83,25 @@ $decisionNum = $meeting->getType()->value . ' ' . $meeting->getNumber() . '.' . 
     <a href="<?= $this->url(
         'meeting/view',
         [
-            'type' => $meeting->getType()->value,
-            'number' => $meeting->getNumber(),
+            'type' => $decision->getMeetingType()->value,
+            'number' => $decision->getMeetingNumber(),
         ],
     ) ?>">
         <?=
             sprintf(
                 $this->translate('Back to %s %d'),
-                $meeting->getType()->value,
-                $meeting->getNumber(),
+                $decision->getMeetingType()->value,
+                $decision->getMeetingNumber(),
             )
         ?>
     </a>
     <script>
-        var decisionCopy = "<?= $this->escapeHtml($decision->getContent()) ?>";
+        let decisionCopy = "<?= sprintf(
+            '\decision[%s]{%s}',
+            $this->escapeHtmlAttr($decision->getAlternativeContent()),
+            $this->escapeHtmlAttr($decision->getContent()),
+        ) ?>";
+
         function copyDecision() {
             navigator.clipboard.writeText(decisionCopy);
         }

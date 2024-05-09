@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping\OneToOne;
 use IntlDateFormatter;
 
 use function date_default_timezone_get;
-use function str_replace;
 
 #[Entity]
 class Granting extends SubDecision
@@ -49,29 +48,18 @@ class Granting extends SubDecision
     }
 
     /**
-     * Get the content.
-     */
-    public function getContent(): string
-    {
-        $template = $this->getTemplate();
-
-        $template = str_replace('%GRANTEE%', $this->getMember()->getFullName(), $template);
-        $template = str_replace('%UNTIL%', $this->formatDate($this->getUntil()), $template);
-
-        return $template;
-    }
-
-    /**
      * Format the date.
      *
      * returns the localized version of $date->format('d F Y')
      *
      * @return string Formatted date
      */
-    protected function formatDate(DateTime $date): string
-    {
+    protected function formatDate(
+        DateTime $date,
+        string $locale = 'nl_NL',
+    ): string {
         $formatter = new IntlDateFormatter(
-            'nl_NL',
+            $locale,
             IntlDateFormatter::NONE,
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
@@ -82,11 +70,38 @@ class Granting extends SubDecision
         return $formatter->format($date);
     }
 
-    /**
-     * Decision template.
-     */
     protected function getTemplate(): string
     {
         return '%GRANTEE% krijgt een sleutelcode van GEWIS tot en met %UNTIL%.';
+    }
+
+    /**
+     * Note: whether "until" is inclusive or exclusive is ambiguous. However, the wording in the actual key policy is
+     * also ambiguous. As such, it was decided that the actual decision (in Dutch) will always be inclusive as indicated
+     * by "tot en met".
+     */
+    protected function getAlternativeTemplate(): string
+    {
+        return '%GRANTEE% is granted a key code of GEWIS until %UNTIL%.';
+    }
+
+    public function getContent(): string
+    {
+        $replacements = [
+            '%GRANTEE%' => $this->getMember()->getFullName(),
+            '%UNTIL%' => $this->formatDate($this->getUntil()),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%GRANTEE%' => $this->getMember()->getFullName(),
+            '%UNTIL%' => $this->formatDate($this->getUntil(), 'en_GB'),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

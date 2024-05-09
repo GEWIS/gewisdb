@@ -3,9 +3,13 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
+use Database\Model\Meeting as MeetingModel;
 use Laminas\View\Renderer\PhpRenderer;
 
-/** @var PhpRenderer|HelperTrait $this */
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MeetingModel $meeting
+ */
 
 // determine last decision of each point
 $map = array();
@@ -48,9 +52,6 @@ $(document).ready(function () {
     });
 });
 </script>
-<?php
-use Database\Model\Meeting;
-?>
     <h1><?= $meeting->getType()->value ?> <?= $meeting->getNumber() ?>
     <small><?= $this->dateFormat(
         $meeting->getDate(),
@@ -91,7 +92,11 @@ use Database\Model\Meeting;
         )) ?>" class="btn btn-danger">
             <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete Decision') ?>
         </a>
-        <button onclick="copyDecision(this)" class="btn btn-success" value="<?= $this->escapeHtmlAttr($decision->getContent()) ?>">
+        <button onclick="copyDecision(this)" class="btn btn-success" value="<?= sprintf(
+            '\decision[%s]{%s}',
+            $this->escapeHtmlAttr($decision->getAlternativeContent()),
+            $this->escapeHtmlAttr($decision->getContent()),
+        ) ?>">
             <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
         </button>
         <ul>

@@ -114,18 +114,36 @@ class Foundation extends SubDecision
         return $this->references;
     }
 
-    /**
-     * Get the content.
-     */
+    protected function getTemplate(): string
+    {
+        return '%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return '%ORGAN_TYPE% %ORGAN_NAME% with abbreviation %ORGAN_ABBR% is established.';
+    }
+
     public function getContent(): string
     {
-        $text = $this->getOrganType()->getName() . ' ';
-        $text .= $this->getName();
-        $text .= ' met afkorting ';
-        $text .= $this->getAbbr();
-        $text .= ' wordt opgericht.';
+        $replacements = [
+            '%ORGAN_TYPE%' => $this->getOrganType()->getName(),
+            '%ORGAN_NAME%' => $this->getName(),
+            '%ORGAN_ABBR%' => $this->getAbbr(),
+        ];
 
-        return $text;
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%ORGAN_TYPE%' => $this->getOrganType()->getAlternativeName(),
+            '%ORGAN_NAME%' => $this->getName(),
+            '%ORGAN_ABBR%' => $this->getAbbr(),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 
     /**

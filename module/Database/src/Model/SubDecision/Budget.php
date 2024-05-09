@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping\Entity;
 use IntlDateFormatter;
 
 use function date_default_timezone_get;
-use function str_replace;
 
 #[Entity]
 class Budget extends SubDecision
@@ -130,49 +129,18 @@ class Budget extends SubDecision
     }
 
     /**
-     * Get the content.
-     */
-    public function getContent(): string
-    {
-        $template = $this->getTemplate();
-        $template = str_replace('%NAME%', $this->getName(), $template);
-
-        if (null === $this->getMember()) {
-            $template = str_replace('%AUTHOR%', 'onbekend', $template);
-        } else {
-            $template = str_replace('%AUTHOR%', $this->getMember()->getFullName(), $template);
-        }
-
-        $template = str_replace('%VERSION%', $this->getVersion(), $template);
-        $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
-
-        if ($this->getApproval()) {
-            $template = str_replace('%APPROVAL%', 'goedgekeurd', $template);
-
-            if ($this->getChanges()) {
-                $template = str_replace('%CHANGES%', ' met genoemde wijzigingen', $template);
-            } else {
-                $template = str_replace('%CHANGES%', '', $template);
-            }
-        } else {
-            $template = str_replace('%APPROVAL%', 'afgekeurd', $template);
-            $template = str_replace('%CHANGES%', '', $template);
-        }
-
-        return $template;
-    }
-
-    /**
      * Format the date.
      *
      * returns the localized version of $date->format('d F Y')
      *
      * @return string Formatted date
      */
-    protected function formatDate(DateTime $date): string
-    {
+    protected function formatDate(
+        DateTime $date,
+        string $locale = 'nl_NL',
+    ): string {
         $formatter = new IntlDateFormatter(
-            'nl_NL', // yes, hardcoded :D
+            $locale,
             IntlDateFormatter::NONE,
             IntlDateFormatter::NONE,
             date_default_timezone_get(),
@@ -183,11 +151,41 @@ class Budget extends SubDecision
         return $formatter->format($date);
     }
 
-    /**
-     * Decision template
-     */
     protected function getTemplate(): string
     {
         return 'De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return 'The budget %NAME% by %AUTHOR%, version %VERSION% dated %DATE% is %APPROVAL%%CHANGES%.';
+    }
+
+    public function getContent(): string
+    {
+        $replacements = [
+            '%NAME%' => $this->getName(),
+            '%AUTHOR%' => null === $this->getMember() ? 'onbekend' : $this->getMember()->getFullName(),
+            '%VERSION%' => $this->getVersion(),
+            '%DATE%' => $this->formatDate($this->getDate()),
+            '%APPROVAL%' => $this->getApproval() ? 'goedgekeurd' : 'afgekeurd',
+            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' met genoemde wijzigingen' : '',
+        ];
+
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%NAME%' => $this->getName(),
+            '%AUTHOR%' => null === $this->getMember() ? 'unknown' : $this->getMember()->getFullName(),
+            '%VERSION%' => $this->getVersion(),
+            '%DATE%' => $this->formatDate($this->getDate(), 'en_GB'),
+            '%APPROVAL%' => $this->getApproval() ? 'approved' : 'disapproved',
+            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' with mentioned changes' : '',
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

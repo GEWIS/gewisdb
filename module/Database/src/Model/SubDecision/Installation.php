@@ -109,17 +109,35 @@ class Installation extends FoundationReference
         return $this->discharge;
     }
 
-    /**
-     * Get the content.
-     *
-     * Fixes Bor's greatest frustration
-     */
+    protected function getTemplate(): string
+    {
+        return '%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return '%MEMBER% is installed as %FUNCTION% of %ORGAN_ABBR%.';
+    }
+
     public function getContent(): string
     {
-        $member = $this->getMember()->getFullName();
-        $text = $member . ' wordt geïnstalleerd als ' . $this->getFunction();
-        $text .= ' van ' . $this->getFoundation()->getAbbr() . '.';
+        $replacements = [
+            '%MEMBER%' => $this->getMember()->getFullName(),
+            '%FUNCTION%' => $this->getFunction(),
+            '%ORGAN_ABBR%' => $this->getFoundation()->getAbbr(),
+        ];
 
-        return $text;
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getMember()->getFullName(),
+            '%FUNCTION%' => $this->getFunction(), // Has no alternative (like the decision hash).
+            '%ORGAN_ABBR%' => $this->getFoundation()->getAbbr(),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

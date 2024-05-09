@@ -7,6 +7,7 @@ namespace Database\Model\SubDecision;
 use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use RuntimeException;
 
 /**
  * Entity for undefined decisions.
@@ -34,5 +35,20 @@ class Other extends SubDecision
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    protected function getTemplate(): string
+    {
+        throw new RuntimeException('Not implemented');
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        throw new RuntimeException('Not implemented');
+    }
+
+    public function getAlternativeContent(): string
+    {
+        return $this->getContent(); // No alternative content exists for a custom decision.
     }
 }
