@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision;
 
 use Database\Model\SubDecision;
+use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use IntlDateFormatter;
-
-use function date_default_timezone_get;
 
 #[Entity]
 class Budget extends SubDecision
 {
+    use FormattableDateTrait;
+
     /**
      * Name of the budget.
      */
@@ -126,29 +126,6 @@ class Budget extends SubDecision
     public function setChanges(bool $changes): void
     {
         $this->changes = $changes;
-    }
-
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(
-        DateTime $date,
-        string $locale = 'nl_NL',
-    ): string {
-        $formatter = new IntlDateFormatter(
-            $locale,
-            IntlDateFormatter::NONE,
-            IntlDateFormatter::NONE,
-            date_default_timezone_get(),
-            null,
-            'd MMMM y',
-        );
-
-        return $formatter->format($date);
     }
 
     protected function getTemplate(): string

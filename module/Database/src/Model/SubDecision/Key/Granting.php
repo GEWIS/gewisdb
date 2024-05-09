@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision\Key;
 
 use Database\Model\SubDecision;
+use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToOne;
-use IntlDateFormatter;
-
-use function date_default_timezone_get;
 
 #[Entity]
 class Granting extends SubDecision
 {
+    use FormattableDateTrait;
+
     /**
      * Till when the keycode is granted.
      */
@@ -45,29 +45,6 @@ class Granting extends SubDecision
     public function setUntil(DateTime $until): void
     {
         $this->until = $until;
-    }
-
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(
-        DateTime $date,
-        string $locale = 'nl_NL',
-    ): string {
-        $formatter = new IntlDateFormatter(
-            $locale,
-            IntlDateFormatter::NONE,
-            IntlDateFormatter::NONE,
-            date_default_timezone_get(),
-            null,
-            'd MMMM y',
-        );
-
-        return $formatter->format($date);
     }
 
     protected function getTemplate(): string

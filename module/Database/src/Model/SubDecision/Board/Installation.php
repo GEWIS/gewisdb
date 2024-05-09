@@ -6,6 +6,7 @@ namespace Database\Model\SubDecision\Board;
 
 use Database\Model\Member;
 use Database\Model\SubDecision;
+use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\AssociationOverride;
 use Doctrine\ORM\Mapping\AssociationOverrides;
@@ -13,10 +14,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use IntlDateFormatter;
 use Override;
-
-use function date_default_timezone_get;
 
 /**
  * Installation as board member.
@@ -34,6 +32,8 @@ use function date_default_timezone_get;
 ])]
 class Installation extends SubDecision
 {
+    use FormattableDateTrait;
+
     /**
      * Function in the board.
      */
@@ -105,29 +105,6 @@ class Installation extends SubDecision
     public function setDate(DateTime $date): void
     {
         $this->date = $date;
-    }
-
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(
-        DateTime $date,
-        string $locale = 'nl_NL',
-    ): string {
-        $formatter = new IntlDateFormatter(
-            $locale,
-            IntlDateFormatter::NONE,
-            IntlDateFormatter::NONE,
-            date_default_timezone_get(),
-            null,
-            'd MMMM y',
-        );
-
-        return $formatter->format($date);
     }
 
     protected function getTemplate(): string

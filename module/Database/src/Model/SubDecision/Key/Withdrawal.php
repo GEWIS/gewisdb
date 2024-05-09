@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision\Key;
 
 use Database\Model\SubDecision;
+use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use IntlDateFormatter;
-
-use function date_default_timezone_get;
 
 #[Entity]
 class Withdrawal extends SubDecision
 {
+    use FormattableDateTrait;
+
     /**
      * Reference to the granting of a keycode.
      */
@@ -82,29 +82,6 @@ class Withdrawal extends SubDecision
     public function setWithdrawnOn(DateTime $withdrawnOn): void
     {
         $this->withdrawnOn = $withdrawnOn;
-    }
-
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(
-        DateTime $date,
-        string $locale = 'nl_NL',
-    ): string {
-        $formatter = new IntlDateFormatter(
-            $locale,
-            IntlDateFormatter::NONE,
-            IntlDateFormatter::NONE,
-            date_default_timezone_get(),
-            null,
-            'd MMMM y',
-        );
-
-        return $formatter->format($date);
     }
 
     protected function getTemplate(): string
