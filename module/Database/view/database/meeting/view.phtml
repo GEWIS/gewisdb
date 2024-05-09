@@ -94,8 +94,8 @@ $(document).ready(function () {
         </a>
         <button onclick="copyDecision(this)" class="btn btn-success" value="<?= sprintf(
             '\decision[%s]{%s}',
-            $this->escapeHtmlAttr($decision->getAlternativeContent()),
-            $this->escapeHtmlAttr($decision->getContent()),
+            $this->escapeHtmlAttr($decision->getAlternativeContent(true)),
+            $this->escapeHtmlAttr($decision->getContent(true)),
         ) ?>">
             <span class="glyphicon glyphicon-floppy-disk"></span> <?= $this->translate('Copy Decision')?>
         </button>

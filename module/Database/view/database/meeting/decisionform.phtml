@@ -98,8 +98,8 @@ case 'other':
     <script>
         let decisionCopy = "<?= sprintf(
             '\decision[%s]{%s}',
-            $this->escapeHtmlAttr($decision->getAlternativeContent()),
-            $this->escapeHtmlAttr($decision->getContent()),
+            $this->escapeHtmlAttr($decision->getAlternativeContent(true)),
+            $this->escapeHtmlAttr($decision->getContent(true)),
         ) ?>";
 
         function copyDecision() {
