@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Controller;
 
+use Application\Model\Enums\ConfigNamespaces;
+use Application\Service\Config as ConfigService;
 use Database\Service\Api as ApiService;
+use DateTime;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
@@ -18,6 +21,7 @@ class ApiController extends AbstractActionController
     public function __construct(
         private readonly ApiService $apiService,
         private readonly ApiAuthenticationService $apiAuthService,
+        private readonly ConfigService $configService,
     ) {
     }
 
@@ -28,7 +32,10 @@ class ApiController extends AbstractActionController
     {
         $this->apiAuthService->assertCan(ApiPermissions::HealthR);
 
-        return new JsonModel(['healthy' => true, 'sync_paused' => false]);
+        $syncPausedUntil = $this->configService->getConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
+        $syncPaused = $syncPausedUntil > new DateTime();
+
+        return new JsonModel(['healthy' => true, 'sync_paused' => $syncPaused]);
     }
 
     /**

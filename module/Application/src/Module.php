@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Mapper\ConfigItem as ConfigItemMapper;
+use Application\Mapper\Factory\ConfigItemFactory as ConfigItemMapperFactory;
+use Application\Service\Config as ConfigService;
 use Application\Service\Email as EmailService;
+use Application\Service\Factory\ConfigFactory as ConfigServiceFactory;
 use Application\Service\Factory\EmailFactory as EmailServiceFactory;
 use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
@@ -46,7 +50,6 @@ class Module
 
         $locale = $this->determineLocale($e);
 
-        /** @var MvcTranslator $mvcTranslator */
         $mvcTranslator = $e->getApplication()->getServiceManager()->get(MvcTranslator::class);
         $translator = $mvcTranslator->getTranslator();
         if ($translator instanceof I18nTranslator) {
@@ -119,6 +122,8 @@ class Module
     {
         return [
             'factories' => [
+                ConfigItemMapper::class => ConfigItemMapperFactory::class,
+                ConfigService::class => ConfigServiceFactory::class,
                 EmailService::class => EmailServiceFactory::class,
                 FileStorageService::class => FileStorageServiceFactory::class,
                 'application_mail_transport' => static function (ContainerInterface $container) {
