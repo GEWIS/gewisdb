@@ -1901,16 +1901,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-CheckAuthenticationKeysCommand.html#method_execute"
         },                {
-            "fqsen": "\\Checker\\Command\\CheckAuthenticationKeysCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckAuthenticationKeysCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckAuthenticationKeysCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckAuthenticationKeysCommand.html#property_defaultDescription"
-        },                {
             "fqsen": "\\Checker\\Command\\CheckDatabaseCommand",
             "name": "CheckDatabaseCommand",
             "summary": "",
@@ -1920,16 +1910,6 @@ Search.appendIndex(
             "name": "execute",
             "summary": "",
             "url": "classes/Checker-Command-CheckDatabaseCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckDatabaseCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckDatabaseCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckDatabaseCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckDatabaseCommand.html#property_defaultDescription"
         },                {
             "fqsen": "\\Checker\\Command\\CheckDischargesCommand",
             "name": "CheckDischargesCommand",
@@ -1941,16 +1921,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-CheckDischargesCommand.html#method_execute"
         },                {
-            "fqsen": "\\Checker\\Command\\CheckDischargesCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckDischargesCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckDischargesCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckDischargesCommand.html#property_defaultDescription"
-        },                {
             "fqsen": "\\Checker\\Command\\CheckMembershipExpirationCommand",
             "name": "CheckMembershipExpirationCommand",
             "summary": "",
@@ -1960,16 +1930,6 @@ Search.appendIndex(
             "name": "execute",
             "summary": "",
             "url": "classes/Checker-Command-CheckMembershipExpirationCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipExpirationCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipExpirationCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipExpirationCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipExpirationCommand.html#property_defaultDescription"
         },                {
             "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand",
             "name": "CheckMembershipGraduateRenewalCommand",
@@ -1991,16 +1951,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#method_getRenewalService"
         },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_defaultDescription"
-        },                {
             "fqsen": "\\Checker\\Command\\CheckMembershipGraduateRenewalCommand\u003A\u003A\u0024renewalService",
             "name": "renewalService",
             "summary": "",
@@ -2016,16 +1966,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-CheckMembershipTUeCommand.html#method_execute"
         },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTUeCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTUeCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTUeCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTUeCommand.html#property_defaultDescription"
-        },                {
             "fqsen": "\\Checker\\Command\\CheckMembershipTypeCommand",
             "name": "CheckMembershipTypeCommand",
             "summary": "",
@@ -2035,16 +1975,6 @@ Search.appendIndex(
             "name": "execute",
             "summary": "",
             "url": "classes/Checker-Command-CheckMembershipTypeCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTypeCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTypeCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTypeCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTypeCommand.html#property_defaultDescription"
         },                {
             "fqsen": "\\Checker\\Command\\Factory\\AbstractCheckerCommandFactory",
             "name": "AbstractCheckerCommandFactory",
@@ -3226,16 +3156,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Command-DeleteExpiredMembersCommand.html#method_execute"
         },                {
-            "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Database-Command-DeleteExpiredMembersCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Database-Command-DeleteExpiredMembersCommand.html#property_defaultDescription"
-        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand\u003A\u003A\u0024memberService",
             "name": "memberService",
             "summary": "",
@@ -3255,16 +3175,6 @@ Search.appendIndex(
             "name": "execute",
             "summary": "",
             "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html#property_defaultDescription"
         },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredProspectiveMembersCommand\u003A\u003A\u0024memberService",
             "name": "memberService",
@@ -3315,16 +3225,6 @@ Search.appendIndex(
             "name": "execute",
             "summary": "",
             "url": "classes/Database-Command-GenerateAuthenticationKeysCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Database\\Command\\GenerateAuthenticationKeysCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Database-Command-GenerateAuthenticationKeysCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Database\\Command\\GenerateAuthenticationKeysCommand\u003A\u003A\u0024defaultDescription",
-            "name": "defaultDescription",
-            "summary": "",
-            "url": "classes/Database-Command-GenerateAuthenticationKeysCommand.html#property_defaultDescription"
         },                {
             "fqsen": "\\Database\\Command\\GenerateAuthenticationKeysCommand\u003A\u003A\u0024memberService",
             "name": "memberService",
