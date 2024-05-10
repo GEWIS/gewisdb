@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Application\View\HelperTrait;
 use Database\Form\QueryExport as QueryExportForm;
+use Database\Model\Decision as DecisionModel;
+use Laminas\Escaper\Escaper;
 use Laminas\View\Renderer\PhpRenderer;
 
 /**
@@ -11,7 +13,7 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var QueryExportForm $form
  */
 
-$escaper = new Laminas\Escaper\Escaper('UTF-8');
+$escaper = new Escaper('UTF-8');
 
 function showDecisionNumber($decision)
 {
@@ -45,25 +47,19 @@ function determineCategory($decision)
     }
 }
 
-// to show a single category
-function showCategory($escaper, $decisions)
+/**
+ * To show a single category
+ *
+ * @param DecisionModel[] $decisions
+ */
+function showCategory(Escaper $escaper, array $decisions): void
 {
     foreach ($decisions as $decision) {
         echo sprintf(
             '<strong>\besluit{%s}{%s}</strong>{%s}<br><br>',
-            showDecisionNumber($decision),
+            $decision->getHash(),
             $decision->getMeeting()->getDate()->format('d-m-Y'),
-            $escaper->escapeHtml(
-                implode(
-                    ' ',
-                    array_map(
-                        function ($subdecision) {
-                            return $subdecision->getContent();
-                        },
-                        $decision->getSubdecisions()->toArray(),
-                    ),
-                ),
-            ),
+            $escaper->escapeHtml($decision->getContent(true)),
         );
     }
 }

@@ -162,7 +162,7 @@ class OrganRegulation extends SubDecision
 
     protected function getAlternativeTemplate(): string
     {
-        return 'The %TYPE%regulation of %NAME% by %AUTHOR%, version %VERSION% dated %DATE% is %APPROVAL%%CHANGES%.';
+        return 'The %TYPE%regulations of %NAME% by %AUTHOR%, version %VERSION% dated %DATE% are %APPROVAL%%CHANGES%.';
     }
 
     /**
