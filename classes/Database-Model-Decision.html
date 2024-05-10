@@ -268,7 +268,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -371,10 +371,18 @@
 <dd>Add multiple subdecisions.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-Decision.html#method_getAlternativeContent">getAlternativeContent()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Get the alternative content of the subdecision (in English) by going over all subdecisions.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-Decision.html#method_getContent">getContent()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>Get the statutory content of the decision (in Dutch) by going over all subdecisions.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-Decision.html#method_getDestroyedBy">getDestroyedBy()</a>
@@ -382,6 +390,13 @@
                                 &nbsp;: <a href="classes/Database-Model-SubDecision-Destroy.html"><abbr title="\Database\Model\SubDecision\Destroy">Destroy</abbr></a>|null    </span>
 </dt>
 <dd>Get the subdecision by which this decision is destroyed.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-Decision.html#method_getHash">getHash()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Get the string (&quot;hash&quot;) that uniquely identifies this decision.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-Decision.html#method_getMeeting">getMeeting()</a>
@@ -460,6 +475,13 @@
 </dt>
 <dd>Transform into an array.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Database-Model-Decision.html#method_escapeLaTeXCharacters">escapeLaTeXCharacters()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Escape special LaTeX characters.</dd>
+
     </dl>
 
 
@@ -491,7 +513,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">98</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -525,7 +547,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -559,7 +581,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -595,7 +617,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -631,7 +653,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -665,7 +687,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
     </aside>
 
@@ -699,7 +721,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -738,7 +760,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">188</span>
 
     </aside>
 
@@ -780,7 +802,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">196</span>
+    <span class="phpdocumentor-element-found-in__line">198</span>
 
     </aside>
 
@@ -814,6 +836,52 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getAlternativeContent">
+        getAlternativeContent()
+        <a href="classes/Database-Model-Decision.html#method_getAlternativeContent" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">293</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the alternative content of the subdecision (in English) by going over all subdecisions.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getAlternativeContent</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$escapeCharacters</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$escapeCharacters</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getContent">
         getContent()
         <a href="classes/Database-Model-Decision.html#method_getContent" class="headerlink"><i class="fas fa-link"></i></a>
@@ -822,19 +890,30 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">221</span>
+    <span class="phpdocumentor-element-found-in__line">278</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Get the statutory content of the decision (in Dutch) by going over all subdecisions.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getContent</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getContent</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$escapeCharacters</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$escapeCharacters</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
             <section>
@@ -857,7 +936,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">208</span>
+    <span class="phpdocumentor-element-found-in__line">210</span>
 
     </aside>
 
@@ -887,6 +966,45 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getHash">
+        getHash()
+        <a href="classes/Database-Model-Decision.html#method_getHash" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">229</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the string (&quot;hash&quot;) that uniquely identifies this decision.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getHash</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Referencing a decision should always happen through this and only this identifier (or a variation thereof). No
+alternative version is provided (in contrast to the contents of this decision).</p>
+</section>
+
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getMeeting">
         getMeeting()
         <a href="classes/Database-Model-Decision.html#method_getMeeting" class="headerlink"><i class="fas fa-link"></i></a>
@@ -895,7 +1013,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">138</span>
 
     </aside>
 
@@ -931,7 +1049,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">128</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -967,7 +1085,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">122</span>
 
     </aside>
 
@@ -1003,7 +1121,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">170</span>
 
     </aside>
 
@@ -1039,7 +1157,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
@@ -1075,7 +1193,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">178</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 
@@ -1111,7 +1229,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">216</span>
+    <span class="phpdocumentor-element-found-in__line">218</span>
 
     </aside>
 
@@ -1147,7 +1265,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -1189,7 +1307,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
@@ -1231,7 +1349,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">146</span>
 
     </aside>
 
@@ -1273,7 +1391,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">244</span>
+    <span class="phpdocumentor-element-found-in__line">316</span>
 
     </aside>
 
@@ -1292,6 +1410,56 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="array{meeting_type: \Application\Model\Enums\MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, content: string}">MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, content: string}</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_escapeLaTeXCharacters">
+        escapeLaTeXCharacters()
+        <a href="classes/Database-Model-Decision.html#method_escapeLaTeXCharacters" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Decision.php"><a href="files/module-database-src-model-decision.html"><abbr title="module/Database/src/Model/Decision.php">Decision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">247</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Escape special LaTeX characters.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">escapeLaTeXCharacters</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$content</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>The ordering of the replacements is of utmost importance to prevent creating illegal LaTeX commands or mangling
+the intended output. As such, we cannot use <abbr title="\str_replace()">str_replace()</abbr> which will replace earlier replacements and
+have to use a regex to actually achieve this.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$content</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
             </section>
 
 </article>
@@ -1423,8 +1591,10 @@
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Database-Model-Decision.html#method_addSubdecision">addSubdecision()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_addSubdecisions">addSubdecisions()</a></li>
+                                            <li><a href="classes/Database-Model-Decision.html#method_getAlternativeContent">getAlternativeContent()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_getContent">getContent()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_getDestroyedBy">getDestroyedBy()</a></li>
+                                            <li><a href="classes/Database-Model-Decision.html#method_getHash">getHash()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_getMeeting">getMeeting()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_getMeetingNumber">getMeetingNumber()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_getMeetingType">getMeetingType()</a></li>
@@ -1436,6 +1606,7 @@
                                             <li><a href="classes/Database-Model-Decision.html#method_setNumber">setNumber()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_setPoint">setPoint()</a></li>
                                             <li><a href="classes/Database-Model-Decision.html#method_toArray">toArray()</a></li>
+                                            <li><a href="classes/Database-Model-Decision.html#method_escapeLaTeXCharacters">escapeLaTeXCharacters()</a></li>
                                     </ul>
             </li>
                     </ul>

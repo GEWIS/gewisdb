@@ -396,6 +396,13 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent">getAlternativeContent()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Get the alternative content of the subdecision (in English).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-SubDecision-Budget.html#method_getApproval">getApproval()</a>
     <span>
                                 &nbsp;: bool    </span>
@@ -414,7 +421,7 @@
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Get the content.</dd>
+<dd>Get the statutory content of the subdecision (in Dutch).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-SubDecision-Budget.html#method_getDate">getDate()</a>
@@ -543,18 +550,32 @@
 <dd>Set the version.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Database-Model-SubDecision-Budget.html#method_formatDate">formatDate()</a>
+    <a href="classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate">formatDate()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Format the date.</dd>
+<dd>Format a `DateTime` in a specified locale.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Database-Model-SubDecision-Reckoning.html#method_getAlternativeTemplate">getAlternativeTemplate()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Get the template string for the alternative content of the subdecision (in English).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Database-Model-SubDecision-Reckoning.html#method_getTemplate">getTemplate()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Decision template</dd>
+<dd>Get the template string for the statutory content of the subdecision (in Dutch).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Database-Model-SubDecision.html#method_replaceContentPlaceholders">replaceContentPlaceholders()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Perform string replacements on a template.</dd>
 
     </dl>
 
@@ -587,7 +608,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -621,7 +642,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
@@ -655,7 +676,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -689,7 +710,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -723,7 +744,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">124</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -759,7 +780,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 
     </aside>
 
@@ -795,7 +816,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -831,7 +852,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
@@ -867,7 +888,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">141</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -904,7 +925,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -938,7 +959,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
@@ -972,7 +993,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -1001,6 +1022,44 @@ this is not null or need to specify an inverse side can do so using an associati
         class="phpdocumentor-element
             -method
             -public
+                        -abstract                                "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getAlternativeContent">
+        getAlternativeContent()
+        <a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">277</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the alternative content of the subdecision (in English).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getAlternativeContent</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getContent"><abbr title="\Database\Model\SubDecision::getContent()">SubDecision::getContent()</abbr></a>.</p>
+</section>
+
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_getApproval">
@@ -1011,7 +1070,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -1047,7 +1106,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 
     </aside>
 
@@ -1083,11 +1142,11 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">237</span>
+    <span class="phpdocumentor-element-found-in__line">270</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the content.</p>
+        <p class="phpdocumentor-summary">Get the statutory content of the subdecision (in Dutch).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1095,7 +1154,9 @@ this is not null or need to specify an inverse side can do so using an associati
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent"><abbr title="\Database\Model\SubDecision::getAlternativeContent()">SubDecision::getAlternativeContent()</abbr></a>.</p>
+</section>
+
     
     
 
@@ -1119,7 +1180,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -1155,7 +1216,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">155</span>
 
     </aside>
 
@@ -1191,7 +1252,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">197</span>
+    <span class="phpdocumentor-element-found-in__line">200</span>
 
     </aside>
 
@@ -1227,7 +1288,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">192</span>
 
     </aside>
 
@@ -1263,7 +1324,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">181</span>
+    <span class="phpdocumentor-element-found-in__line">184</span>
 
     </aside>
 
@@ -1299,7 +1360,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">173</span>
+    <span class="phpdocumentor-element-found-in__line">176</span>
 
     </aside>
 
@@ -1335,7 +1396,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">213</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
@@ -1371,7 +1432,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -1407,7 +1468,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">208</span>
 
     </aside>
 
@@ -1443,7 +1504,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -1479,7 +1540,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -1521,7 +1582,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
@@ -1563,7 +1624,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 
     </aside>
 
@@ -1605,7 +1666,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">163</span>
 
     </aside>
 
@@ -1647,7 +1708,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">229</span>
+    <span class="phpdocumentor-element-found-in__line">232</span>
 
     </aside>
 
@@ -1689,7 +1750,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
@@ -1731,7 +1792,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">221</span>
+    <span class="phpdocumentor-element-found-in__line">224</span>
 
     </aside>
 
@@ -1773,7 +1834,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -1809,25 +1870,26 @@ this is not null or need to specify an inverse side can do so using an associati
 >
     <h4 class="phpdocumentor-element__name" id="method_formatDate">
         formatDate()
-        <a href="classes/Database-Model-SubDecision-Budget.html#method_formatDate" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Budget.php"><a href="files/module-database-src-model-subdecision-budget.html"><abbr title="module/Database/src/Model/SubDecision/Budget.php">Budget.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/FormattableDateTrait.php"><a href="files/module-database-src-model-trait-formattabledatetrait.html"><abbr title="module/Database/src/Model/Trait/FormattableDateTrait.php">FormattableDateTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">172</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Format the date.</p>
+        <p class="phpdocumentor-summary">Format a `DateTime` in a specified locale.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">formatDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">formatDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;nl_NL&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-        <section class="phpdocumentor-description"><p>returns the localized version of $date-&gt;format('d F Y')</p>
+        <section class="phpdocumentor-description"><p>With <abbr title="\IntlDateFormatter::LONG">IntlDateFormatter::LONG</abbr> the date will be formatted using the day of the month, full month, and
+4-digit year. For example, for</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1839,6 +1901,13 @@ this is not null or need to specify an inverse side can do so using an associati
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$locale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;nl_NL&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
             </dl>
 
     
@@ -1846,10 +1915,44 @@ this is not null or need to specify an inverse side can do so using an associati
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>Formatted date</p>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getAlternativeTemplate">
+        getAlternativeTemplate()
+        <a href="classes/Database-Model-SubDecision-Reckoning.html#method_getAlternativeTemplate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Reckoning.php"><a href="files/module-database-src-model-subdecision-reckoning.html"><abbr title="module/Database/src/Model/SubDecision/Reckoning.php">Reckoning.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the template string for the alternative content of the subdecision (in English).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">getAlternativeTemplate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getTemplate"><abbr title="\Database\Model\SubDecision::getTemplate()">SubDecision::getTemplate()</abbr></a>.</p>
 </section>
 
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
             </section>
 
 </article>
@@ -1867,11 +1970,11 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Reckoning.php"><a href="files/module-database-src-model-subdecision-reckoning.html"><abbr title="module/Database/src/Model/SubDecision/Reckoning.php">Reckoning.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Decision template</p>
+        <p class="phpdocumentor-summary">Get the template string for the statutory content of the subdecision (in Dutch).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
@@ -1879,8 +1982,65 @@ this is not null or need to specify an inverse side can do so using an associati
 
     <div class="phpdocumentor-label-line">
         </div>
+        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getAlternativeTemplate"><abbr title="\Database\Model\SubDecision::getAlternativeTemplate()">SubDecision::getAlternativeTemplate()</abbr></a>.</p>
+</section>
+
     
     
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_replaceContentPlaceholders">
+        replaceContentPlaceholders()
+        <a href="classes/Database-Model-SubDecision.html#method_replaceContentPlaceholders" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">258</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Perform string replacements on a template.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">replaceContentPlaceholders</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$template</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$replacements</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>Used in the implementations of <a href="classes/Database-Model-SubDecision.html#method_getContent"><abbr title="\Database\Model\SubDecision::getContent()">SubDecision::getContent()</abbr></a> and <a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent"><abbr title="\Database\Model\SubDecision::getAlternativeContent()">SubDecision::getAlternativeContent()</abbr></a>.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$template</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$replacements</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
             <section>
@@ -2020,6 +2180,7 @@ this is not null or need to specify an inverse side can do so using an associati
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent">getAlternativeContent()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-Budget.html#method_getApproval">getApproval()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-Budget.html#method_getChanges">getChanges()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision.html#method_getContent">getContent()</a></li>
@@ -2041,8 +2202,10 @@ this is not null or need to specify an inverse side can do so using an associati
                                             <li><a href="classes/Database-Model-SubDecision-Budget.html#method_setName">setName()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision.html#method_setNumber">setNumber()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-Budget.html#method_setVersion">setVersion()</a></li>
-                                            <li><a href="classes/Database-Model-SubDecision-Budget.html#method_formatDate">formatDate()</a></li>
+                                            <li><a href="classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate">formatDate()</a></li>
+                                            <li><a href="classes/Database-Model-SubDecision-Reckoning.html#method_getAlternativeTemplate">getAlternativeTemplate()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-Reckoning.html#method_getTemplate">getTemplate()</a></li>
+                                            <li><a href="classes/Database-Model-SubDecision.html#method_replaceContentPlaceholders">replaceContentPlaceholders()</a></li>
                                     </ul>
             </li>
                     </ul>

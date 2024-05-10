@@ -243,15 +243,30 @@
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model-trait.html">Trait</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -namespace">
-        <h2 class="phpdocumentor-content__title">Trait</h2>
+    <article class="phpdocumentor-element -trait">
+        <h2 class="phpdocumentor-content__title">
+    FormattableDateTrait
+    </h2>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/FormattableDateTrait.php"><a href="files/module-database-src-model-trait-formattabledatetrait.html"><abbr title="module/Database/src/Model/Trait/FormattableDateTrait.php">FormattableDateTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+    </aside>
 
         
+
+
+
+
+
 <h3 id="toc">
     Table of Contents
-    <a href="namespaces/database-model-trait.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-Trait-FormattableDateTrait.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -259,28 +274,102 @@
 
 
 
-    <h4 id="toc-traits">
-        Traits
-        <a href="namespaces/database-model-trait.html#toc-traits" class="headerlink"><i class="fas fa-link"></i></a>
+
+
+
+
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Database-Model-Trait-FormattableDateTrait.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate">formatDate()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Format a `DateTime` in a specified locale.</dd>
+
+    </dl>
+
+
+
+
+        
+
+        
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/Database-Model-Trait-FormattableDateTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_formatDate">
+        formatDate()
+        <a href="classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
-    <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Database-Model-Trait-CreatedTrait.html"><abbr title="\Database\Model\Trait\CreatedTrait">CreatedTrait</abbr></a></dt>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Database-Model-Trait-FormattableDateTrait.html"><abbr title="\Database\Model\Trait\FormattableDateTrait">FormattableDateTrait</abbr></a></dt>        <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Database-Model-Trait-UpdatedTrait.html"><abbr title="\Database\Model\Trait\UpdatedTrait">UpdatedTrait</abbr></a></dt>    </dl>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/FormattableDateTrait.php"><a href="files/module-database-src-model-trait-formattabledatetrait.html"><abbr title="module/Database/src/Model/Trait/FormattableDateTrait.php">FormattableDateTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
+    </aside>
 
+        <p class="phpdocumentor-summary">Format a `DateTime` in a specified locale.</p>
 
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">formatDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;nl_NL&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>With <abbr title="\IntlDateFormatter::LONG">IntlDateFormatter::LONG</abbr> the date will be formatted using the day of the month, full month, and
+4-digit year. For example, for</p>
+</section>
 
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$date</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$locale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;nl_NL&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
 
+    
 
-        
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
 
-        
+</article>
+            </section>
+
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Model/Trait/FormattableDateTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -371,7 +460,7 @@
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
-                            
+                                
     <section class="phpdocumentor-on-this-page__content">
         <strong class="phpdocumentor-on-this-page__title">On this page</strong>
 
@@ -379,11 +468,15 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                                                        <li><a href="namespaces/database-model-trait.html#toc-traits">Traits</a></li>
-                                                                                                </ul>
+                                                                                <li><a href="classes/Database-Model-Trait-FormattableDateTrait.html#toc-methods">Methods</a></li>
+                                    </ul>
             </li>
-
-            
+                                                <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate">formatDate()</a></li>
+                                    </ul>
+            </li>
                     </ul>
     </section>
 
@@ -401,7 +494,7 @@
     </section>
 </section>
         </div>
-        <a href="namespaces/database-model-trait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Model-Trait-FormattableDateTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

@@ -216,6 +216,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Model-Enums-OrganTypes.html#method_getName"
         },                {
+            "fqsen": "\\Application\\Model\\Enums\\OrganTypes\u003A\u003AgetAlternativeName\u0028\u0029",
+            "name": "getAlternativeName",
+            "summary": "",
+            "url": "classes/Application-Model-Enums-OrganTypes.html#method_getAlternativeName"
+        },                {
             "fqsen": "\\Application\\Model\\Enums\\OrganTypes\u003A\u003ACommittee",
             "name": "Committee",
             "summary": "",
@@ -6206,10 +6211,25 @@ Search.appendIndex(
             "summary": "Check\u0020if\u0020this\u0020decision\u0020is\u0020destroyed\u0020by\u0020another\u0020decision.",
             "url": "classes/Database-Model-Decision.html#method_isDestroyed"
         },                {
+            "fqsen": "\\Database\\Model\\Decision\u003A\u003AgetHash\u0028\u0029",
+            "name": "getHash",
+            "summary": "Get\u0020the\u0020string\u0020\u0028\u0022hash\u0022\u0029\u0020that\u0020uniquely\u0020identifies\u0020this\u0020decision.",
+            "url": "classes/Database-Model-Decision.html#method_getHash"
+        },                {
+            "fqsen": "\\Database\\Model\\Decision\u003A\u003AescapeLaTeXCharacters\u0028\u0029",
+            "name": "escapeLaTeXCharacters",
+            "summary": "Escape\u0020special\u0020LaTeX\u0020characters.",
+            "url": "classes/Database-Model-Decision.html#method_escapeLaTeXCharacters"
+        },                {
             "fqsen": "\\Database\\Model\\Decision\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020decision\u0020\u0028in\u0020Dutch\u0029\u0020by\u0020going\u0020over\u0020all\u0020subdecisions.",
             "url": "classes/Database-Model-Decision.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\Decision\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029\u0020by\u0020going\u0020over\u0020all\u0020subdecisions.",
+            "url": "classes/Database-Model-Decision.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\Decision\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
@@ -7486,10 +7506,25 @@ Search.appendIndex(
             "summary": "Abrogation\u0020of\u0020an\u0020organ.",
             "url": "classes/Database-Model-SubDecision-Abrogation.html"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "",
+            "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "",
+            "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "",
             "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "",
+            "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Discharge",
             "name": "Discharge",
@@ -7506,10 +7541,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020installation.",
             "url": "classes/Database-Model-SubDecision-Board-Discharge.html#method_setInstallation"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Discharge\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Discharge.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Discharge\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Discharge.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Discharge\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Board-Discharge.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Discharge\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Discharge.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Discharge\u003A\u003A\u0024installation",
             "name": "installation",
@@ -7546,15 +7596,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020date.",
             "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_setDate"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_getContent"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003AformatDate\u0028\u0029",
-            "name": "formatDate",
-            "summary": "Format\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_formatDate"
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Installation.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024function",
             "name": "function",
@@ -7601,15 +7661,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020date.",
             "url": "classes/Database-Model-SubDecision-Board-Release.html#method_setDate"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Release\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Release.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Release\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Release.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Release\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Board-Release.html#method_getContent"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Release\u003A\u003AformatDate\u0028\u0029",
-            "name": "formatDate",
-            "summary": "Format\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-Board-Release.html#method_formatDate"
+            "fqsen": "\\Database\\Model\\SubDecision\\Board\\Release\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Board-Release.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Release\u003A\u003A\u0024installation",
             "name": "installation",
@@ -7676,20 +7746,25 @@ Search.appendIndex(
             "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
             "url": "classes/Database-Model-SubDecision-Budget.html#method_setChanges"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetContent\u0028\u0029",
-            "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getContent"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AformatDate\u0028\u0029",
-            "name": "formatDate",
-            "summary": "Format\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_formatDate"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetTemplate\u0028\u0029",
             "name": "getTemplate",
-            "summary": "Decision\u0020template",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Budget.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Budget.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Budget.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Budget.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024name",
             "name": "name",
@@ -7731,10 +7806,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020target.",
             "url": "classes/Database-Model-SubDecision-Destroy.html#method_setTarget"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Destroy.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003A\u0024target",
             "name": "target",
@@ -7756,10 +7846,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020installation.",
             "url": "classes/Database-Model-SubDecision-Discharge.html#method_setInstallation"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Discharge\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Discharge.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Discharge\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Discharge.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Discharge\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Discharge.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Discharge\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Discharge.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Discharge\u003A\u003A\u0024installation",
             "name": "installation",
@@ -7811,10 +7916,25 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020references.",
             "url": "classes/Database-Model-SubDecision-Foundation.html#method_getReferences"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Foundation.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Foundation.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Foundation.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Foundation.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
@@ -7896,10 +8016,25 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020discharge,\u0020if\u0020it\u0020exists",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getDischarge"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "",
+            "url": "classes/Database-Model-SubDecision-Installation.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "",
+            "url": "classes/Database-Model-SubDecision-Installation.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "",
+            "url": "classes/Database-Model-SubDecision-Installation.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A\u0024function",
             "name": "function",
@@ -7931,20 +8066,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020date.",
             "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_setUntil"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetContent\u0028\u0029",
-            "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
-            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getContent"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AformatDate\u0028\u0029",
-            "name": "formatDate",
-            "summary": "Format\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_formatDate"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetTemplate\u0028\u0029",
             "name": "getTemplate",
-            "summary": "Decision\u0020template.",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Note\u003A\u0020whether\u0020\u0022until\u0022\u0020is\u0020inclusive\u0020or\u0020exclusive\u0020is\u0020ambiguous.\u0020However,\u0020the\u0020wording\u0020in\u0020the\u0020actual\u0020key\u0020policy\u0020is\nalso\u0020ambiguous.\u0020As\u0020such,\u0020it\u0020was\u0020decided\u0020that\u0020the\u0020actual\u0020decision\u0020\u0028in\u0020Dutch\u0029\u0020will\u0020always\u0020be\u0020inclusive\u0020as\u0020indicated\nby\u0020\u0022tot\u0020en\u0020met\u0022.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003A\u0024until",
             "name": "until",
@@ -7981,20 +8121,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020date.",
             "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_setWithdrawnOn"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetContent\u0028\u0029",
-            "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
-            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getContent"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AformatDate\u0028\u0029",
-            "name": "formatDate",
-            "summary": "Format\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_formatDate"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetTemplate\u0028\u0029",
             "name": "getTemplate",
-            "summary": "Decision\u0020template.",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key\\Withdrawal\u003A\u003A\u0024granting",
             "name": "granting",
@@ -8071,20 +8216,25 @@ Search.appendIndex(
             "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
             "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setChanges"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
             "summary": "Get\u0020the\u0020content.",
             "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getContent"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AformatDate\u0028\u0029",
-            "name": "formatDate",
-            "summary": "Format\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_formatDate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetTemplate\u0028\u0029",
-            "name": "getTemplate",
-            "summary": "Decision\u0020template",
-            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getTemplate"
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024name",
             "name": "name",
@@ -8131,6 +8281,21 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020content.",
             "url": "classes/Database-Model-SubDecision-Other.html#method_setContent"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Other\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Other.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Other\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Other.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Other\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Other.html#method_getAlternativeContent"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Other\u003A\u003A\u0024content",
             "name": "content",
             "summary": "Textual\u0020content\u0020for\u0020the\u0020decision.",
@@ -8151,10 +8316,25 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020original\u0020installation\u0020for\u0020this\u0020reappointment.",
             "url": "classes/Database-Model-SubDecision-Reappointment.html#method_setInstallation"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html#method_getAlternativeTemplate"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020textual\u0020content\u0020of\u0020this\u0020subdecision.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Reappointment.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Reappointment.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Reappointment\u003A\u003A\u0024installation",
             "name": "installation",
@@ -8168,8 +8348,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Reckoning\u003A\u003AgetTemplate\u0028\u0029",
             "name": "getTemplate",
-            "summary": "Decision\u0020template",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Reckoning.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Reckoning\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Reckoning.html#method_getAlternativeTemplate"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision",
             "name": "SubDecision",
@@ -8226,10 +8411,30 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020member.",
             "url": "classes/Database-Model-SubDecision.html#method_setMember"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AreplaceContentPlaceholders\u0028\u0029",
+            "name": "replaceContentPlaceholders",
+            "summary": "Perform\u0020string\u0020replacements\u0020on\u0020a\u0020template.",
+            "url": "classes/Database-Model-SubDecision.html#method_replaceContentPlaceholders"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "Get\u0020the\u0020content.",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003A\u0024decision",
             "name": "decision",
@@ -8285,6 +8490,16 @@ Search.appendIndex(
             "name": "createdAt",
             "summary": "When\u0020this\u0020entry\u0020was\u0020created",
             "url": "classes/Database-Model-Trait-CreatedTrait.html#property_createdAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\FormattableDateTrait",
+            "name": "FormattableDateTrait",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-FormattableDateTrait.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\FormattableDateTrait\u003A\u003AformatDate\u0028\u0029",
+            "name": "formatDate",
+            "summary": "Format\u0020a\u0020\u0060DateTime\u0060\u0020in\u0020a\u0020specified\u0020locale.",
+            "url": "classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate"
         },                {
             "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait",
             "name": "UpdatedTrait",
