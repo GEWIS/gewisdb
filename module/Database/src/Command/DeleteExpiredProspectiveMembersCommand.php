@@ -6,17 +6,17 @@ namespace Database\Command;
 
 use Database\Service\Member as MemberService;
 use Laminas\Cli\Command\AbstractParamAwareCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'database:prospective-members:delete-expired',
+    description: 'Delete prospective members whose Checkout Session has expired or failed.',
+)]
 class DeleteExpiredProspectiveMembersCommand extends AbstractParamAwareCommand
 {
-    /** @var string $defaultName */
-    protected static $defaultName = 'database:prospective-members:delete-expired';
-    /** @var string $defaultDescription */
-    protected static $defaultDescription = 'Delete prospective members whose Checkout Session has expired or failed.';
-
     public function __construct(private readonly MemberService $memberService)
     {
         parent::__construct();
