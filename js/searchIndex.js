@@ -11,6 +11,101 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Controller-IndexController.html#method_langAction"
         },                {
+            "fqsen": "\\Application\\Mapper\\ConfigItem",
+            "name": "ConfigItem",
+            "summary": "",
+            "url": "classes/Application-Mapper-ConfigItem.html"
+        },                {
+            "fqsen": "\\Application\\Mapper\\ConfigItem\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Application-Mapper-ConfigItem.html#method___construct"
+        },                {
+            "fqsen": "\\Application\\Mapper\\ConfigItem\u003A\u003AfindByKey\u0028\u0029",
+            "name": "findByKey",
+            "summary": "",
+            "url": "classes/Application-Mapper-ConfigItem.html#method_findByKey"
+        },                {
+            "fqsen": "\\Application\\Mapper\\ConfigItem\u003A\u003Apersist\u0028\u0029",
+            "name": "persist",
+            "summary": "Persist\u0020configuration.",
+            "url": "classes/Application-Mapper-ConfigItem.html#method_persist"
+        },                {
+            "fqsen": "\\Application\\Mapper\\ConfigItem\u003A\u003Aremove\u0028\u0029",
+            "name": "remove",
+            "summary": "Remove\u0020configuration.",
+            "url": "classes/Application-Mapper-ConfigItem.html#method_remove"
+        },                {
+            "fqsen": "\\Application\\Mapper\\ConfigItem\u003A\u003AgetRepository\u0028\u0029",
+            "name": "getRepository",
+            "summary": "Get\u0020the\u0020repository\u0020for\u0020this\u0020mapper.",
+            "url": "classes/Application-Mapper-ConfigItem.html#method_getRepository"
+        },                {
+            "fqsen": "\\Application\\Mapper\\ConfigItem\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Application-Mapper-ConfigItem.html#property_em"
+        },                {
+            "fqsen": "\\Application\\Mapper\\Factory\\ConfigItemFactory",
+            "name": "ConfigItemFactory",
+            "summary": "",
+            "url": "classes/Application-Mapper-Factory-ConfigItemFactory.html"
+        },                {
+            "fqsen": "\\Application\\Mapper\\Factory\\ConfigItemFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Application-Mapper-Factory-ConfigItemFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem",
+            "name": "ConfigItem",
+            "summary": "Runtime\u0020configuration\u0020items\u0020model.",
+            "url": "classes/Application-Model-ConfigItem.html"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003AassertValid\u0028\u0029",
+            "name": "assertValid",
+            "summary": "",
+            "url": "classes/Application-Model-ConfigItem.html#method_assertValid"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003AsetKey\u0028\u0029",
+            "name": "setKey",
+            "summary": "Set\u0020the\u0020namespace\u0020and\u0020key\u0020of\u0020the\u0020configuration\u0020item.",
+            "url": "classes/Application-Model-ConfigItem.html#method_setKey"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003AsetValue\u0028\u0029",
+            "name": "setValue",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020the\u0020configuration\u0020item.",
+            "url": "classes/Application-Model-ConfigItem.html#method_setValue"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Application-Model-ConfigItem.html#method_getValue"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "Primary\u0020key\u0020item\u0020ID\u0020\u0028to\u0020avoid\u0020reference\u0020issues\u0029.",
+            "url": "classes/Application-Model-ConfigItem.html#property_id"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003A\u0024namespace",
+            "name": "namespace",
+            "summary": "Namespace",
+            "url": "classes/Application-Model-ConfigItem.html#property_namespace"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003A\u0024key",
+            "name": "key",
+            "summary": "Configuration\u0020item\u0020key.",
+            "url": "classes/Application-Model-ConfigItem.html#property_key"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003A\u0024valueString",
+            "name": "valueString",
+            "summary": "If\u0020the\u0020item\u0020is\u0020a\u0020string,\u0020its\u0020value.",
+            "url": "classes/Application-Model-ConfigItem.html#property_valueString"
+        },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003A\u0024valueDate",
+            "name": "valueDate",
+            "summary": "If\u0020the\u0020item\u0020is\u0020a\u0020DateTime,\u0020its\u0020value.",
+            "url": "classes/Application-Model-ConfigItem.html#property_valueDate"
+        },                {
             "fqsen": "\\Application\\Model\\Enums\\AddressTypes",
             "name": "AddressTypes",
             "summary": "Enum\u0020for\u0020the\u0020different\u0020address\u0020types.",
@@ -40,6 +135,16 @@ Search.appendIndex(
             "name": "Mail",
             "summary": "",
             "url": "classes/Application-Model-Enums-AddressTypes.html#enumcase_Mail"
+        },                {
+            "fqsen": "\\Application\\Model\\Enums\\ConfigNamespaces",
+            "name": "ConfigNamespaces",
+            "summary": "The\u0020different\u0020namespaces\u0020in\u0020which\u0020configuration\u0020items\u0020can\u0020be\u0020created.",
+            "url": "classes/Application-Model-Enums-ConfigNamespaces.html"
+        },                {
+            "fqsen": "\\Application\\Model\\Enums\\ConfigNamespaces\u003A\u003ADatabaseApi",
+            "name": "DatabaseApi",
+            "summary": "",
+            "url": "classes/Application-Model-Enums-ConfigNamespaces.html#enumcase_DatabaseApi"
         },                {
             "fqsen": "\\Application\\Model\\Enums\\MeetingTypes",
             "name": "MeetingTypes",
@@ -1441,6 +1546,41 @@ Search.appendIndex(
             "summary": "Get\u0020view\u0020helper\u0020configuration.",
             "url": "classes/Application-Module.html#method_getViewHelperConfig"
         },                {
+            "fqsen": "\\Application\\Service\\Config",
+            "name": "Config",
+            "summary": "",
+            "url": "classes/Application-Service-Config.html"
+        },                {
+            "fqsen": "\\Application\\Service\\Config\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Application-Service-Config.html#method___construct"
+        },                {
+            "fqsen": "\\Application\\Service\\Config\u003A\u003AgetConfig\u0028\u0029",
+            "name": "getConfig",
+            "summary": "",
+            "url": "classes/Application-Service-Config.html#method_getConfig"
+        },                {
+            "fqsen": "\\Application\\Service\\Config\u003A\u003AsetConfig\u0028\u0029",
+            "name": "setConfig",
+            "summary": "",
+            "url": "classes/Application-Service-Config.html#method_setConfig"
+        },                {
+            "fqsen": "\\Application\\Service\\Config\u003A\u003AunsetConfig\u0028\u0029",
+            "name": "unsetConfig",
+            "summary": "",
+            "url": "classes/Application-Service-Config.html#method_unsetConfig"
+        },                {
+            "fqsen": "\\Application\\Service\\Config\u003A\u003AgetConfigItemMapper\u0028\u0029",
+            "name": "getConfigItemMapper",
+            "summary": "Get\u0020the\u0020member\u0020mapper.",
+            "url": "classes/Application-Service-Config.html#method_getConfigItemMapper"
+        },                {
+            "fqsen": "\\Application\\Service\\Config\u003A\u003A\u0024configItemMapper",
+            "name": "configItemMapper",
+            "summary": "",
+            "url": "classes/Application-Service-Config.html#property_configItemMapper"
+        },                {
             "fqsen": "\\Application\\Service\\Email",
             "name": "Email",
             "summary": "",
@@ -1485,6 +1625,16 @@ Search.appendIndex(
             "name": "config",
             "summary": "",
             "url": "classes/Application-Service-Email.html#property_config"
+        },                {
+            "fqsen": "\\Application\\Service\\Factory\\ConfigFactory",
+            "name": "ConfigFactory",
+            "summary": "",
+            "url": "classes/Application-Service-Factory-ConfigFactory.html"
+        },                {
+            "fqsen": "\\Application\\Service\\Factory\\ConfigFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Application-Service-Factory-ConfigFactory.html#method___invoke"
         },                {
             "fqsen": "\\Application\\Service\\Factory\\EmailFactory",
             "name": "EmailFactory",
@@ -3225,6 +3375,11 @@ Search.appendIndex(
             "name": "apiAuthService",
             "summary": "",
             "url": "classes/Database-Controller-ApiController.html#property_apiAuthService"
+        },                {
+            "fqsen": "\\Database\\Controller\\ApiController\u003A\u003A\u0024configService",
+            "name": "configService",
+            "summary": "",
+            "url": "classes/Database-Controller-ApiController.html#property_configService"
         },                {
             "fqsen": "\\Database\\Controller\\ExportController",
             "name": "ExportController",
@@ -12791,25 +12946,35 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html"
         },                {
+            "fqsen": "\\Application",
+            "name": "Application",
+            "summary": "",
+            "url": "namespaces/application.html"
+        },                {
             "fqsen": "\\Application\\Controller",
             "name": "Controller",
             "summary": "",
             "url": "namespaces/application-controller.html"
         },                {
-            "fqsen": "\\Application\\Model\\Enums",
-            "name": "Enums",
+            "fqsen": "\\Application\\Mapper",
+            "name": "Mapper",
             "summary": "",
-            "url": "namespaces/application-model-enums.html"
+            "url": "namespaces/application-mapper.html"
+        },                {
+            "fqsen": "\\Application\\Mapper\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/application-mapper-factory.html"
         },                {
             "fqsen": "\\Application\\Model",
             "name": "Model",
             "summary": "",
             "url": "namespaces/application-model.html"
         },                {
-            "fqsen": "\\Application",
-            "name": "Application",
+            "fqsen": "\\Application\\Model\\Enums",
+            "name": "Enums",
             "summary": "",
-            "url": "namespaces/application.html"
+            "url": "namespaces/application-model-enums.html"
         },                {
             "fqsen": "\\Application\\Service",
             "name": "Service",
@@ -12835,6 +13000,11 @@ Search.appendIndex(
             "name": "ApplicationTest",
             "summary": "",
             "url": "namespaces/applicationtest.html"
+        },                {
+            "fqsen": "\\Checker",
+            "name": "Checker",
+            "summary": "",
+            "url": "namespaces/checker.html"
         },                {
             "fqsen": "\\Checker\\Command",
             "name": "Command",
@@ -12870,11 +13040,6 @@ Search.appendIndex(
             "name": "Exception",
             "summary": "",
             "url": "namespaces/checker-model-exception.html"
-        },                {
-            "fqsen": "\\Checker",
-            "name": "Checker",
-            "summary": "",
-            "url": "namespaces/checker.html"
         },                {
             "fqsen": "\\Checker\\Service",
             "name": "Service",
