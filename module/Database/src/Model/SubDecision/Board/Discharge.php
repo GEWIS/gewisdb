@@ -63,15 +63,33 @@ class Discharge extends SubDecision
         $this->installation = $installation;
     }
 
-    /**
-     * Get the content.
-     */
+    protected function getTemplate(): string
+    {
+        return '%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return '%MEMBER% is discharged as %FUNCTION% of s.v. GEWIS.';
+    }
+
     public function getContent(): string
     {
-        $member = $this->getInstallation()->getMember()->getFullName();
-        $function = $this->getInstallation()->getFunction();
+        $replacements = [
+            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
+            '%FUNCTION%' => $this->getInstallation()->getFunction(),
+        ];
 
-        return $member . ' wordt gedechargeerd als ' . $function
-              . ' der s.v. GEWIS.';
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
+            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision hash).
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

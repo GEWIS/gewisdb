@@ -63,18 +63,35 @@ class Discharge extends SubDecision
         $this->installation = $installation;
     }
 
-    /**
-     * Get the content.
-     */
+    protected function getTemplate(): string
+    {
+        return '%MEMBER% wordt gedechargeerd als %FUNCTION% van %ORGAN_ABBR%.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return '%MEMBER% is discharged as %FUNCTION% of %ORGAN_ABBR%.';
+    }
+
     public function getContent(): string
     {
-        $member = $this->getInstallation()->getMember()->getFullName();
-        $function = $this->getInstallation()->getFunction();
-        $organ = $this->getInstallation()->getFoundation()->getAbbr();
+        $replacements = [
+            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
+            '%FUNCTION%' => $this->getInstallation()->getFunction(),
+            '%ORGAN_ABBR%' => $this->getInstallation()->getFoundation()->getAbbr(),
+        ];
 
-        $text = $member . ' wordt gedechargeerd als ' . $function;
-        $text .= ' van ' . $organ . '.';
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
 
-        return $text;
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
+            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision hash).
+            '%ORGAN_ABBR%' => $this->getInstallation()->getFoundation()->getAbbr(),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

@@ -10,8 +10,6 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
 
-use function implode;
-
 /**
  * Destroying a decision.
  *
@@ -68,20 +66,33 @@ class Destroy extends SubDecision
         $this->target = $target;
     }
 
-    /**
-     * Get the content.
-     */
+    protected function getTemplate(): string
+    {
+        return 'Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "%DECISION_CONTENT%"';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return 'Decision %DECISION_HASH% is annulled. The decision read: "%DECISION_CONTENT%"';
+    }
+
     public function getContent(): string
     {
-        $target = $this->getTarget();
-        $meet = $this->getTarget()->getMeeting();
-        $content = [];
-        foreach ($target->getSubdecisions() as $sub) {
-            $content[] = $sub->getContent();
-        }
+        $replacements = [
+            '%DECISION_HASH%' => $this->getTarget()->getHash(),
+            '%DECISION_CONTENT%' => $this->getTarget()->getContent(),
+        ];
 
-        return 'Besluit ' . $meet->getType()->value . ' ' . $meet->getNumber()
-            . '.' . $target->getPoint() . '.' . $target->getNumber()
-            . ' wordt nietig verklaard. Het besluit luidde: "' . implode(' ', $content) . '"';
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%DECISION_HASH%' => $this->getTarget()->getHash(), // We do not provide an alternative to the hash.
+            '%DECISION_CONTENT%' => $this->getTarget()->getAlternativeContent(),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

@@ -6,6 +6,7 @@ namespace Database\Model\SubDecision\Board;
 
 use Database\Model\Member;
 use Database\Model\SubDecision;
+use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\AssociationOverride;
 use Doctrine\ORM\Mapping\AssociationOverrides;
@@ -13,10 +14,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use IntlDateFormatter;
 use Override;
-
-use function date_default_timezone_get;
 
 /**
  * Installation as board member.
@@ -34,6 +32,8 @@ use function date_default_timezone_get;
 ])]
 class Installation extends SubDecision
 {
+    use FormattableDateTrait;
+
     /**
      * Function in the board.
      */
@@ -107,37 +107,35 @@ class Installation extends SubDecision
         $this->date = $date;
     }
 
-    /**
-     * Get the content.
-     *
-     * Fixes Bor's greatest frustration
-     */
-    public function getContent(): string
+    protected function getTemplate(): string
     {
-        $member = $this->getMember()->getFullName();
-
-        return $member . ' wordt per ' . $this->formatDate($this->getDate())
-              . ' geïnstalleerd als ' . $this->getFunction() . ' der s.v. GEWIS.';
+        return '%MEMBER% wordt per %DATE% geïnstalleerd als %FUNCTION% der s.v. GEWIS.';
     }
 
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(DateTime $date): string
+    protected function getAlternativeTemplate(): string
     {
-        $formatter = new IntlDateFormatter(
-            'nl_NL', // yes, hardcoded :D
-            IntlDateFormatter::NONE,
-            IntlDateFormatter::NONE,
-            date_default_timezone_get(),
-            null,
-            'd MMMM y',
-        );
+        return '%MEMBER% is installed as %FUNCTION% of s.v. GEWIS effective from %DATE%.';
+    }
 
-        return $formatter->format($date);
+    public function getContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getMember()->getFullName(),
+            '%DATE%' => $this->formatDate($this->getDate()),
+            '%FUNCTION%' => $this->getFunction(),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getMember()->getFullName(),
+            '%DATE%' => $this->formatDate($this->getDate(), 'en_GB'),
+            '%FUNCTION%' => $this->getFunction(), // Has no alternative (like the decision hash).
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

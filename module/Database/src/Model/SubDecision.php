@@ -30,6 +30,9 @@ use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
+use function array_keys;
+use function str_replace;
+
 /**
  * SubDecision model.
  */
@@ -232,7 +235,44 @@ abstract class SubDecision
     }
 
     /**
-     * Get the content.
+     * Get the template string for the statutory content of the subdecision (in Dutch).
+     *
+     * Any changes to this method should also be reflected in {@see SubDecision::getAlternativeTemplate()}.
+     */
+    abstract protected function getTemplate(): string;
+
+    /**
+     * Get the template string for the alternative content of the subdecision (in English).
+     *
+     * Any changes to this method should also be reflected in {@see SubDecision::getTemplate()}.
+     */
+    abstract protected function getAlternativeTemplate(): string;
+
+    /**
+     * Perform string replacements on a template.
+     *
+     * Used in the implementations of {@see SubDecision::getContent()} and {@see SubDecision::getAlternativeContent()}.
+     *
+     * @param array<string, string> $replacements
+     */
+    protected function replaceContentPlaceholders(
+        string $template,
+        array $replacements,
+    ): string {
+        return str_replace(array_keys($replacements), $replacements, $template);
+    }
+
+    /**
+     * Get the statutory content of the subdecision (in Dutch).
+     *
+     * Any changes to this method should also be reflected in {@see SubDecision::getAlternativeContent()}.
      */
     abstract public function getContent(): string;
+
+    /**
+     * Get the alternative content of the subdecision (in English).
+     *
+     * Any changes to this method should also be reflected in {@see SubDecision::getContent()}.
+     */
+    abstract public function getAlternativeContent(): string;
 }

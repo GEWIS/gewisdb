@@ -27,4 +27,16 @@ enum OrganTypes: string
             self::RvA => 'RvA',
         };
     }
+
+    public function getAlternativeName(): string
+    {
+        return match ($this) {
+            self::Committee => 'Committee',
+            self::AVC => 'GMM Committee',
+            self::Fraternity => 'Fraternity',
+            self::KCC => 'Financial Audit Committee',
+            self::AVW => 'GMM Taskforce',
+            self::RvA => 'Advisory Board',
+        };
+    }
 }

@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision\Board;
 
 use Database\Model\SubDecision;
+use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use IntlDateFormatter;
-
-use function date_default_timezone_get;
 
 /**
  * Release from board duties.
@@ -23,6 +21,8 @@ use function date_default_timezone_get;
 #[Entity]
 class Release extends SubDecision
 {
+    use FormattableDateTrait;
+
     /**
      * Reference to the installation of a member.
      */
@@ -90,37 +90,35 @@ class Release extends SubDecision
         $this->date = $date;
     }
 
-    /**
-     * Get the content.
-     */
-    public function getContent(): string
+    protected function getTemplate(): string
     {
-        $member = $this->getInstallation()->getMember()->getFullName();
-        $function = $this->getInstallation()->getFunction();
-
-        return $member . ' wordt per ' . $this->formatDate($this->getDate())
-              . ' ontheven uit de functie van ' . $function
-              . ' der s.v. GEWIS.';
+        return '%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. GEWIS.';
     }
 
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(DateTime $date): string
+    protected function getAlternativeTemplate(): string
     {
-        $formatter = new IntlDateFormatter(
-            'nl_NL', // yes, hardcoded :D
-            IntlDateFormatter::NONE,
-            IntlDateFormatter::NONE,
-            date_default_timezone_get(),
-            null,
-            'd MMMM y',
-        );
+        return '%MEMBER% is relieved from the position of %FUNCTION% of s.v. GEWIS effective from %DATE%.';
+    }
 
-        return $formatter->format($date);
+    public function getContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
+            '%DATE%' => $this->formatDate($this->date),
+            '%FUNCTION%' => $this->getInstallation()->getFunction(),
+        ];
+
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
+    }
+
+    public function getAlternativeContent(): string
+    {
+        $replacements = [
+            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
+            '%DATE%' => $this->formatDate($this->date, 'en_GB'),
+            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision hash).
+        ];
+
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

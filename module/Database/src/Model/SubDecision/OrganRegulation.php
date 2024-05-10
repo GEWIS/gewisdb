@@ -6,17 +6,17 @@ namespace Database\Model\SubDecision;
 
 use Application\Model\Enums\OrganTypes;
 use Database\Model\SubDecision;
+use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use IntlDateFormatter;
-
-use function date_default_timezone_get;
-use function str_replace;
+use ValueError;
 
 #[Entity]
 class OrganRegulation extends SubDecision
 {
+    use FormattableDateTrait;
+
     /**
      * Name of the organ.
      */
@@ -155,71 +155,62 @@ class OrganRegulation extends SubDecision
         $this->changes = $changes;
     }
 
+    protected function getTemplate(): string
+    {
+        return 'Het %TYPE%reglement van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+    }
+
+    protected function getAlternativeTemplate(): string
+    {
+        return 'The %TYPE%regulations of %NAME% by %AUTHOR%, version %VERSION% dated %DATE% are %APPROVAL%%CHANGES%.';
+    }
+
     /**
      * Get the content.
      */
     public function getContent(): string
     {
-        $template = $this->getTemplate();
-        $template = str_replace('%NAME%', $this->getName(), $template);
-
-        if (null === $this->getMember()) {
-            $template = str_replace('%AUTHOR%', 'onbekend', $template);
-        } else {
-            $template = str_replace('%AUTHOR%', $this->getMember()->getFullName(), $template);
-        }
-
         if (OrganTypes::Committee === $this->getOrganType()) {
-            $template = str_replace('%TYPE%', 'commissie', $template);
+            $organType = 'commissie';
         } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
-            $template = str_replace('%TYPE%', 'dispuuts', $template);
-        }
-
-        $template = str_replace('%VERSION%', $this->getVersion(), $template);
-        $template = str_replace('%DATE%', $this->formatDate($this->getDate()), $template);
-
-        if ($this->getApproval()) {
-            $template = str_replace('%APPROVAL%', 'goedgekeurd', $template);
-
-            if ($this->getChanges()) {
-                $template = str_replace('%CHANGES%', ' met genoemde wijzigingen', $template);
-            } else {
-                $template = str_replace('%CHANGES%', '', $template);
-            }
+            $organType = 'dispuuts';
         } else {
-            $template = str_replace('%APPROVAL%', 'afgekeurd', $template);
-            $template = str_replace('%CHANGES%', '', $template);
+            throw new ValueError();
         }
 
-        return $template;
+        $replacements = [
+            '%NAME%' => $this->getName(),
+            '%AUTHOR%' => null === $this->getMember() ? 'onbekend' : $this->getMember()->getFullName(),
+            '%TYPE%' => $organType,
+            '%VERSION%' => $this->getVersion(),
+            '%DATE%' => $this->formatDate($this->getDate()),
+            '%APPROVAL%' => $this->getApproval() ? 'goedgekeurd' : 'afgekeurd',
+            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' met genoemde wijzigingen' : '',
+        ];
+
+        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
     }
 
-    /**
-     * Format the date.
-     *
-     * returns the localized version of $date->format('d F Y')
-     *
-     * @return string Formatted date
-     */
-    protected function formatDate(DateTime $date): string
+    public function getAlternativeContent(): string
     {
-        $formatter = new IntlDateFormatter(
-            'nl_NL', // yes, hardcoded :D
-            IntlDateFormatter::NONE,
-            IntlDateFormatter::NONE,
-            date_default_timezone_get(),
-            null,
-            'd MMMM y',
-        );
+        if (OrganTypes::Committee === $this->getOrganType()) {
+            $organType = 'committee ';
+        } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
+            $organType = 'fraternity ';
+        } else {
+            throw new ValueError();
+        }
 
-        return $formatter->format($date);
-    }
+        $replacements = [
+            '%NAME%' => $this->getName(),
+            '%AUTHOR%' => null === $this->getMember() ? 'unknown' : $this->getMember()->getFullName(),
+            '%TYPE%' => $organType,
+            '%VERSION%' => $this->getVersion(),
+            '%DATE%' => $this->formatDate($this->getDate(), 'en_GB'),
+            '%APPROVAL%' => $this->getApproval() ? 'approved' : 'disapproved',
+            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' with mentioned changes' : '',
+        ];
 
-    /**
-     * Decision template
-     */
-    protected function getTemplate(): string
-    {
-        return 'Het %TYPE%reglement van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
     }
 }

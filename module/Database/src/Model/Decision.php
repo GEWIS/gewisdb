@@ -18,6 +18,8 @@ use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\OrderBy;
 
 use function implode;
+use function preg_replace_callback;
+use function sprintf;
 
 /**
  * Decision model.
@@ -218,16 +220,86 @@ class Decision
         return null !== $this->destroyedby;
     }
 
-    public function getContent(): string
+    /**
+     * Get the string ("hash") that uniquely identifies this decision.
+     *
+     * Referencing a decision should always happen through this and only this identifier (or a variation thereof). No
+     * alternative version is provided (in contrast to the contents of this decision).
+     */
+    public function getHash(): string
+    {
+        return sprintf(
+            '%s %d.%d.%d',
+            $this->getMeetingType()->value,
+            $this->getMeetingNumber(),
+            $this->getPoint(),
+            $this->getNumber(),
+        );
+    }
+
+    /**
+     * Escape special LaTeX characters.
+     *
+     * The ordering of the replacements is of utmost importance to prevent creating illegal LaTeX commands or mangling
+     * the intended output. As such, we cannot use {@see \str_replace()} which will replace earlier replacements and
+     * have to use a regex to actually achieve this.
+     */
+    private function escapeLaTeXCharacters(string $content): string
+    {
+        $replacements = [
+            '&' => '\\&',
+            '%' => '\\%',
+            '$' => '\\$',
+            '#' => '\\#',
+            '_' => '\\_',
+            '[' => '\\[',
+            ']' => '\\]',
+            '{' => '\\{',
+            '}' => '\\}',
+            '~' => '\\textasciitilde{}',
+            '^' => '\\textasciicircum{}',
+            '\\' => '\\textbackslash{}',
+            '<' => '\\textless{}',
+            '>' => '\\textgreater{}',
+        ];
+
+        return preg_replace_callback(
+            '/([&%$#_\[\]{}~^\\\\<>])/',
+            static function ($matches) use ($replacements) {
+                return $replacements[$matches[0]];
+            },
+            $content,
+        );
+    }
+
+    /**
+     * Get the statutory content of the decision (in Dutch) by going over all subdecisions.
+     */
+    public function getContent(bool $escapeCharacters = false): string
     {
         $content = [];
         foreach ($this->getSubdecisions() as $subdecision) {
             $content[] = $subdecision->getContent();
         }
 
-        $content = implode(' ', $content);
+        $contents = implode(' ', $content);
 
-        return $content;
+        return $escapeCharacters ? $this->escapeLaTeXCharacters($contents) : $contents;
+    }
+
+    /**
+     * Get the alternative content of the subdecision (in English) by going over all subdecisions.
+     */
+    public function getAlternativeContent(bool $escapeCharacters = false): string
+    {
+        $alternativeContent = [];
+        foreach ($this->getSubdecisions() as $subdecision) {
+            $alternativeContent[] = $subdecision->getAlternativeContent();
+        }
+
+        $alternativeContents = implode(' ', $alternativeContent);
+
+        return $escapeCharacters ? $this->escapeLaTeXCharacters($alternativeContents) : $alternativeContents;
     }
 
     /**
