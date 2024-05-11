@@ -17,9 +17,10 @@ use Report\Model\SubDecision\Abrogation;
 use Report\Model\SubDecision\Board\Discharge as BoardDischarge;
 use Report\Model\SubDecision\Board\Installation as BoardInstallation;
 use Report\Model\SubDecision\Board\Release as BoardRelease;
-use Report\Model\SubDecision\Budget;
 use Report\Model\SubDecision\Destroy;
 use Report\Model\SubDecision\Discharge;
+use Report\Model\SubDecision\Financial\Budget;
+use Report\Model\SubDecision\Financial\Statement;
 use Report\Model\SubDecision\Foundation;
 use Report\Model\SubDecision\FoundationReference;
 use Report\Model\SubDecision\Installation;
@@ -28,7 +29,6 @@ use Report\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
 use Report\Model\SubDecision\OrganRegulation;
 use Report\Model\SubDecision\Other;
 use Report\Model\SubDecision\Reappointment;
-use Report\Model\SubDecision\Reckoning;
 
 /**
  * SubDecision model.
@@ -47,8 +47,8 @@ use Report\Model\SubDecision\Reckoning;
         'installation' => Installation::class,
         'reappointment' => Reappointment::class,
         'discharge' => Discharge::class,
-        'budget' => Budget::class,
-        'reckoning' => Reckoning::class,
+        'financial_budget' => Budget::class,
+        'financial_statement' => Statement::class,
         'other' => Other::class,
         'destroy' => Destroy::class,
         'board_installation' => BoardInstallation::class,

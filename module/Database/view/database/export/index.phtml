@@ -33,8 +33,8 @@ function determineCategory($decision)
 
     switch (strtolower($type)) {
         case 'budget':
-        case 'reckoning':
-            return 'budget';
+        case 'statement':
+            return 'financial';
             break;
         case 'foundation':
         case 'abrogation':
@@ -68,7 +68,7 @@ function showCategory(Escaper $escaper, array $decisions): void
 if (isset($data)): ?>
     <?php
     $categories = array(
-        'budget' => array(),
+        'financial' => array(),
         'install' => array(),
         'other' => array(),
     );
@@ -81,7 +81,7 @@ if (isset($data)): ?>
     ob_start();
     ?>
     <h2>\subsection*{Begrotingen en Afrekeningen}</h2>
-    <?php showCategory($escaper, $categories['budget']) ?>
+    <?php showCategory($escaper, $categories['financial']) ?>
 
     <h2>\subsection*{Installaties en Decharges}</h2>
     <?php showCategory($escaper, $categories['install']) ?>

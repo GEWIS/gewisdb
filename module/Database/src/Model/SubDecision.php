@@ -9,9 +9,10 @@ use Database\Model\SubDecision\Abrogation;
 use Database\Model\SubDecision\Board\Discharge as BoardDischarge;
 use Database\Model\SubDecision\Board\Installation as BoardInstallation;
 use Database\Model\SubDecision\Board\Release as BoardRelease;
-use Database\Model\SubDecision\Budget;
 use Database\Model\SubDecision\Destroy;
 use Database\Model\SubDecision\Discharge;
+use Database\Model\SubDecision\Financial\Budget;
+use Database\Model\SubDecision\Financial\Statement;
 use Database\Model\SubDecision\Foundation;
 use Database\Model\SubDecision\FoundationReference;
 use Database\Model\SubDecision\Installation;
@@ -20,7 +21,6 @@ use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
 use Database\Model\SubDecision\OrganRegulation;
 use Database\Model\SubDecision\Other;
 use Database\Model\SubDecision\Reappointment;
-use Database\Model\SubDecision\Reckoning;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -50,8 +50,8 @@ use function str_replace;
         'installation' => Installation::class,
         'reappointment' => Reappointment::class,
         'discharge' => Discharge::class,
-        'budget' => Budget::class,
-        'reckoning' => Reckoning::class,
+        'financial_budget' => Budget::class,
+        'financial_statement' => Statement::class,
         'other' => Other::class,
         'destroy' => Destroy::class,
         'board_installation' => BoardInstallation::class,

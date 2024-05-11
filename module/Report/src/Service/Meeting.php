@@ -226,11 +226,11 @@ class Meeting
             $reportSubDecision->setName($subdecision->getName());
             $reportSubDecision->setOrganType($subdecision->getOrganType());
         } elseif (
-            $subdecision instanceof DatabaseSubDecisionModel\Reckoning
-            || $subdecision instanceof DatabaseSubDecisionModel\Budget
+            $subdecision instanceof DatabaseSubDecisionModel\Financial\Statement
+            || $subdecision instanceof DatabaseSubDecisionModel\Financial\Budget
             || $subdecision instanceof DatabaseSubDecisionModel\OrganRegulation
         ) {
-            // budget and reckoning
+            // financial budgets and statements
             if (null !== $subdecision->getMember()) {
                 $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }

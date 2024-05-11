@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Database\Hydrator;
 
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Budget as BudgetModel;
-use Database\Model\SubDecision\Reckoning as ReckoningModel;
+use Database\Model\SubDecision\Financial\Budget as BudgetModel;
+use Database\Model\SubDecision\Financial\Statement as StatementModel;
 use DateTime;
 use InvalidArgumentException;
 
@@ -30,7 +30,7 @@ class Budget extends AbstractDecision
         if ('budget' === $data['type']) {
             $subdecision = new BudgetModel();
         } else {
-            $subdecision = new ReckoningModel();
+            $subdecision = new StatementModel();
         }
 
         $subdecision->setSequence(1);

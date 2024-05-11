@@ -8,11 +8,11 @@ use Application\Model\Enums\AddressTypes;
 use Database\Model\Address as AddressModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
-use Database\Model\SubDecision\Budget as BudgetModel;
 use Database\Model\SubDecision\Destroy as DestroyModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
+use Database\Model\SubDecision\Financial\Budget as BudgetModel;
+use Database\Model\SubDecision\Financial\Statement as StatementModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
-use Database\Model\SubDecision\Reckoning as ReckoningModel;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -257,11 +257,11 @@ class Member
             return false;
         }
 
-        // check if the member is included in reckonings
+        // check if the member is included in financial statements
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('b')
-            ->from(ReckoningModel::class, 'b')
+            ->from(StatementModel::class, 'b')
             ->where('b.member = :member');
         $qb->setParameter('member', $member);
 

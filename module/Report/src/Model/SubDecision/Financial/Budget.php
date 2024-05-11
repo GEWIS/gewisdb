@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Report\Model\SubDecision;
+namespace Report\Model\SubDecision\Financial;
 
 use DateTime;
 use Doctrine\ORM\Mapping\Column;

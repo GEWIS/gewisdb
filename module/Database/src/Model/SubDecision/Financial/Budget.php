@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Model\SubDecision;
+namespace Database\Model\SubDecision\Financial;
 
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
