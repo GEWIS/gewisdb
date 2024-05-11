@@ -33,7 +33,7 @@ class Budget extends AbstractDecision
             $subdecision = new ReckoningModel();
         }
 
-        $subdecision->setNumber(1);
+        $subdecision->setSequence(1);
 
         $date = new DateTime($data['date']);
         $subdecision->setDate($date);

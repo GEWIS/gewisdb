@@ -30,7 +30,7 @@ class OrganRegulation extends AbstractDecision
 
         $subdecision = new RegulationModel();
 
-        $subdecision->setNumber(1);
+        $subdecision->setSequence(1);
         $subdecision->setName($data['name']);
 
         if (!($data['type'] instanceof OrganTypes)) {

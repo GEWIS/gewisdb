@@ -3,9 +3,13 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
+use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 use Laminas\View\Renderer\PhpRenderer;
 
-/** @var PhpRenderer|HelperTrait $this */
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var KeyGrantingModel[] $grants
+ */
 
 $arrGrants = array();
 
@@ -15,7 +19,7 @@ foreach ($grants as $key => $grant) {
         'meeting_number' => $grant->getDecision()->getMeeting()->getNumber(),
         'decision_point' => $grant->getDecision()->getPoint(),
         'decision_number' => $grant->getDecision()->getNumber(),
-        'subdecision_number' => $grant->getNumber(),
+        'subdecision_sequence' => $grant->getSequence(),
         'granting_until' => $grant->getUntil()->format('Y-m-d'),
         'granting_member_lidnr' => $grant->getMember()->getLidnr(),
     );
@@ -30,7 +34,7 @@ foreach ($grants as $key => $grant) {
             $('#withdraw-grant-key-meeting-number').val(data['meeting_number']);
             $('#withdraw-grant-key-decision-point').val(data['decision_point']);
             $('#withdraw-grant-key-decision-number').val(data['decision_number']);
-            $('#withdraw-grant-key-subdecision-number').val(data['subdecision_number']);
+            $('#withdraw-grant-key-subdecision-sequence').val(data['subdecision_sequence']);
             $('#withdraw-grant-key-granting-until').val(data['granting_until']);
             $('#withdraw-grant-key-granting-member-lidnr').val(data['granting_member_lidnr']);
             $('#key-withdraw-submit').prop('disabled', false);
@@ -66,7 +70,7 @@ $fsgm = $fsg->get('member');
     $fs->get('meeting_number')->setAttribute('id', 'withdraw-grant-key-meeting-number');
     $fs->get('decision_point')->setAttribute('id', 'withdraw-grant-key-decision-point');
     $fs->get('decision_number')->setAttribute('id', 'withdraw-grant-key-decision-number');
-    $fs->get('number')->setAttribute('id', 'withdraw-grant-key-subdecision-number');
+    $fs->get('sequence')->setAttribute('id', 'withdraw-grant-key-subdecision-sequence');
     $fsg->get('until')->setAttribute('id', 'withdraw-grant-key-granting-until');
     $fsgm->get('lidnr')->setAttribute('id', 'withdraw-grant-key-granting-member-lidnr');
     ?>
@@ -74,7 +78,7 @@ $fsgm = $fsg->get('member');
     <?= $this->formHidden($fs->get('meeting_number')) ?>
     <?= $this->formHidden($fs->get('decision_point')) ?>
     <?= $this->formHidden($fs->get('decision_number')) ?>
-    <?= $this->formHidden($fs->get('number')) ?>
+    <?= $this->formHidden($fs->get('sequence')) ?>
     <?= $this->formHidden($fsg->get('until')) ?>
     <?= $this->formHidden($fsgm->get('lidnr')) ?>
     <label class="col-md-2 control-label">

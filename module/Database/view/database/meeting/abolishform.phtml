@@ -58,7 +58,7 @@ $(document).ready(function () {
             select: function (event, ui) {
                 $.ajax({
                     dataType: 'json',
-                    url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
+                    url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_sequence),
                     context: document.body
                 }).done(function(data) {
                     // show all members
@@ -96,7 +96,7 @@ $(document).ready(function () {
                     $('#abolish-meeting-number').val(ui.item.id.meeting_number);
                     $('#abolish-decision-point').val(ui.item.id.decision_point);
                     $('#abolish-decision-number').val(ui.item.id.decision_number);
-                    $('#abolish-number').val(ui.item.id.subdecision_number);
+                    $('#abolish-sequence').val(ui.item.id.subdecision_sequence);
                     $('#abolish-button').prop('disabled', false);
                 });
             }
@@ -146,8 +146,8 @@ $element->setAttribute('id', 'abolish-decision-number');
 ?>
 <?= $this->formHidden($element) ?>
 <?php
-$element = $fs->get('number');
-$element->setAttribute('id', 'abolish-number');
+$element = $fs->get('sequence');
+$element->setAttribute('id', 'abolish-sequence');
 ?>
 <?= $this->formHidden($element) ?>
 <div class="form-group">

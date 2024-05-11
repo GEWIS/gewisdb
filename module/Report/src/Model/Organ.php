@@ -81,8 +81,8 @@ class Organ
         referencedColumnName: 'decision_number',
     )]
     #[JoinColumn(
-        name: 'r_number',
-        referencedColumnName: 'number',
+        name: 'r_sequence',
+        referencedColumnName: 'sequence',
     )]
     protected Foundation $foundation;
 
@@ -153,8 +153,8 @@ class Organ
         onDelete: 'CASCADE',
     )]
     #[InverseJoinColumn(
-        name: 'subdecision_number',
-        referencedColumnName: 'number',
+        name: 'subdecision_sequence',
+        referencedColumnName: 'sequence',
         nullable: false,
         onDelete: 'CASCADE',
     )]

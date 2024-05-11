@@ -32,7 +32,7 @@ class Withdraw extends AbstractDecision
 
         $release = new KeyWithdrawal();
 
-        $release->setNumber(1);
+        $release->setSequence(1);
         $release->setGranting($data['subdecision']);
         $release->setWithdrawnOn(new DateTime($data['withdrawOn']));
 

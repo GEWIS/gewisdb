@@ -165,7 +165,7 @@ class Member
             ->andWhere('x.meeting_number = r.meeting_number')
             ->andWhere('x.decision_point = r.decision_point')
             ->andWhere('x.decision_number = r.decision_number')
-            ->andWhere('x.number = r.number');
+            ->andWhere('x.sequence = r.sequence');
 
         // destroyed discharge decisions
         $qbnd = $this->em->createQueryBuilder();

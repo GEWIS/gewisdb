@@ -25,7 +25,7 @@ class Other extends AbstractDecision
 
         $subdecision = new OtherModel();
 
-        $subdecision->setNumber(1);
+        $subdecision->setSequence(1);
         $subdecision->setContent($data['content']);
 
         $subdecision->setDecision($object);

@@ -32,7 +32,7 @@ class Grant extends AbstractDecision
 
         $install = new KeyGranting();
 
-        $install->setNumber(1);
+        $install->setSequence(1);
         $install->setMember($data['grantee']);
         $install->setUntil(new DateTime($data['until']));
 

@@ -27,7 +27,7 @@ class Foundation extends AbstractDecision
 
         $foundation = new FoundationModel();
 
-        $foundation->setNumber(1);
+        $foundation->setSequence(1);
         $foundation->setAbbr($data['abbr']);
         $foundation->setName($data['name']);
 
@@ -49,7 +49,7 @@ class Foundation extends AbstractDecision
                 && 'Inactief Lid' !== $install['function']
             ) {
                 $installation = new InstallationModel();
-                $installation->setNumber($num++);
+                $installation->setSequence($num++);
                 $installation->setFoundation($foundation);
                 $installation->setFunction('Lid');
                 $installation->setMember($install['member']);
@@ -57,7 +57,7 @@ class Foundation extends AbstractDecision
             }
 
             $installation = new InstallationModel();
-            $installation->setNumber($num++);
+            $installation->setSequence($num++);
             $installation->setFoundation($foundation);
             $installation->setFunction($install['function']);
             $installation->setMember($install['member']);

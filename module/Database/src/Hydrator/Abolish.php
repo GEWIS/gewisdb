@@ -47,13 +47,13 @@ class Abolish extends AbstractDecision
         foreach ($members as $installation) {
             $discharge = new DischargeModel();
             $discharge->setInstallation($installation);
-            $discharge->setNumber($num++);
+            $discharge->setSequence($num++);
             $discharge->setDecision($object);
         }
 
         $abrog = new AbrogationModel();
         $abrog->setFoundation($data['subdecision']);
-        $abrog->setNumber($num++);
+        $abrog->setSequence($num++);
         $abrog->setDecision($object);
 
         return $object;

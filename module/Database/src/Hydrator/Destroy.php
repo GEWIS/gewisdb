@@ -27,7 +27,7 @@ class Destroy extends AbstractDecision
 
         $destroy->setTarget($data['fdecision']);
 
-        $destroy->setNumber(0);
+        $destroy->setSequence(0);
         $destroy->setDecision($object);
 
         return $object;

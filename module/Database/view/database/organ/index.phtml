@@ -33,7 +33,7 @@ $(document).ready(function () {
                     url = url.replace('__number__', organ.meeting_number);
                     url = url.replace('__point__', organ.decision_point);
                     url = url.replace('__decision__', organ.decision_number);
-                    url = url.replace('__subdecision__', organ.subdecision_number);
+                    url = url.replace('__subdecision__', organ.subdecision_sequence);
 
                     var link = '<a href="' + url + '" ';
                     link += 'style="display:block;height:100%;width:100%;">';

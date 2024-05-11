@@ -32,7 +32,7 @@ class Install extends AbstractDecision
 
         $install = new BoardInstall();
 
-        $install->setNumber(1);
+        $install->setSequence(1);
         $install->setMember($data['member']);
         $install->setFunction($data['function']);
         $install->setDate(new DateTime($data['date']));
