@@ -2053,7 +2053,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Checker\\Mapper\\Filter\u003A\u003AisValid\u0028\u0029",
             "name": "isValid",
-            "summary": "Checks\u0020if\u0020a\u0020destroy\u0020decision\u0020is\u0020still\u0020valid\u0020\u0028i,e.\u0020is\u0020not\u0020destroyed",
+            "summary": "Checks\u0020if\u0020an\u0020annulment\u0020decision\u0020is\u0020still\u0020valid\u0020\u0028i.e.\u0020is\u0020not\u0020annulled\u0029.",
             "url": "classes/Checker-Mapper-Filter.html#method_isValid"
         },                {
             "fqsen": "\\Checker\\Mapper\\Installation",
@@ -3846,6 +3846,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-Address.html#property_translator"
         },                {
+            "fqsen": "\\Database\\Form\\Annulment",
+            "name": "Annulment",
+            "summary": "",
+            "url": "classes/Database-Form-Annulment.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Annulment\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-Annulment.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\Annulment\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "",
+            "url": "classes/Database-Form-Annulment.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Annulment\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Annulment.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\AuditEntry\\AuditNote",
             "name": "AuditNote",
             "summary": "",
@@ -4025,26 +4045,6 @@ Search.appendIndex(
             "name": "translator",
             "summary": "",
             "url": "classes/Database-Form-DeleteList.html#property_translator"
-        },                {
-            "fqsen": "\\Database\\Form\\Destroy",
-            "name": "Destroy",
-            "summary": "",
-            "url": "classes/Database-Form-Destroy.html"
-        },                {
-            "fqsen": "\\Database\\Form\\Destroy\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Database-Form-Destroy.html#method___construct"
-        },                {
-            "fqsen": "\\Database\\Form\\Destroy\u003A\u003AgetInputFilterSpecification\u0028\u0029",
-            "name": "getInputFilterSpecification",
-            "summary": "",
-            "url": "classes/Database-Form-Destroy.html#method_getInputFilterSpecification"
-        },                {
-            "fqsen": "\\Database\\Form\\Destroy\u003A\u003A\u0024translator",
-            "name": "translator",
-            "summary": "",
-            "url": "classes/Database-Form-Destroy.html#property_translator"
         },                {
             "fqsen": "\\Database\\Form\\Export",
             "name": "Export",
@@ -4676,6 +4676,16 @@ Search.appendIndex(
             "summary": "Extraction.",
             "url": "classes/Database-Hydrator-AbstractDecision.html#method_extract"
         },                {
+            "fqsen": "\\Database\\Hydrator\\Annulment",
+            "name": "Annulment",
+            "summary": "",
+            "url": "classes/Database-Hydrator-Annulment.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Annulment\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Annulment\u0020hydration",
+            "url": "classes/Database-Hydrator-Annulment.html#method_hydrate"
+        },                {
             "fqsen": "\\Database\\Hydrator\\AuditEntry",
             "name": "AuditEntry",
             "summary": "",
@@ -4730,16 +4740,6 @@ Search.appendIndex(
             "name": "hydrate",
             "summary": "Budget\u0020hydration",
             "url": "classes/Database-Hydrator-Budget.html#method_hydrate"
-        },                {
-            "fqsen": "\\Database\\Hydrator\\Destroy",
-            "name": "Destroy",
-            "summary": "",
-            "url": "classes/Database-Hydrator-Destroy.html"
-        },                {
-            "fqsen": "\\Database\\Hydrator\\Destroy\u003A\u003Ahydrate\u0028\u0029",
-            "name": "hydrate",
-            "summary": "abolish\u0020hydration",
-            "url": "classes/Database-Hydrator-Destroy.html#method_hydrate"
         },                {
             "fqsen": "\\Database\\Hydrator\\Foundation",
             "name": "Foundation",
@@ -6101,15 +6101,15 @@ Search.appendIndex(
             "summary": "Add\u0020multiple\u0020subdecisions.",
             "url": "classes/Database-Model-Decision.html#method_addSubdecisions"
         },                {
-            "fqsen": "\\Database\\Model\\Decision\u003A\u003AgetDestroyedBy\u0028\u0029",
-            "name": "getDestroyedBy",
-            "summary": "Get\u0020the\u0020subdecision\u0020by\u0020which\u0020this\u0020decision\u0020is\u0020destroyed.",
-            "url": "classes/Database-Model-Decision.html#method_getDestroyedBy"
+            "fqsen": "\\Database\\Model\\Decision\u003A\u003AgetAnnulledBy\u0028\u0029",
+            "name": "getAnnulledBy",
+            "summary": "Get\u0020the\u0020subdecision\u0020by\u0020which\u0020this\u0020decision\u0020is\u0020annulled.",
+            "url": "classes/Database-Model-Decision.html#method_getAnnulledBy"
         },                {
-            "fqsen": "\\Database\\Model\\Decision\u003A\u003AisDestroyed\u0028\u0029",
-            "name": "isDestroyed",
-            "summary": "Check\u0020if\u0020this\u0020decision\u0020is\u0020destroyed\u0020by\u0020another\u0020decision.",
-            "url": "classes/Database-Model-Decision.html#method_isDestroyed"
+            "fqsen": "\\Database\\Model\\Decision\u003A\u003AisAnnulled\u0028\u0029",
+            "name": "isAnnulled",
+            "summary": "Check\u0020if\u0020this\u0020decision\u0020is\u0020annulled\u0020by\u0020another\u0020decision.",
+            "url": "classes/Database-Model-Decision.html#method_isAnnulled"
         },                {
             "fqsen": "\\Database\\Model\\Decision\u003A\u003AgetHash\u0028\u0029",
             "name": "getHash",
@@ -6166,10 +6166,10 @@ Search.appendIndex(
             "summary": "Subdecisions.",
             "url": "classes/Database-Model-Decision.html#property_subdecisions"
         },                {
-            "fqsen": "\\Database\\Model\\Decision\u003A\u003A\u0024destroyedby",
-            "name": "destroyedby",
-            "summary": "Destroyed\u0020by.",
-            "url": "classes/Database-Model-Decision.html#property_destroyedby"
+            "fqsen": "\\Database\\Model\\Decision\u003A\u003A\u0024annulledBy",
+            "name": "annulledBy",
+            "summary": "Annulled\u0020by.",
+            "url": "classes/Database-Model-Decision.html#property_annulledBy"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates",
             "name": "CheckoutSessionStates",
@@ -7426,6 +7426,46 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getAlternativeContent"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment",
+            "name": "Annulment",
+            "summary": "Annulling\u0020a\u0020decision.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment\u003A\u003AgetTarget\u0028\u0029",
+            "name": "getTarget",
+            "summary": "Get\u0020the\u0020target.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html#method_getTarget"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment\u003A\u003AsetTarget\u0028\u0029",
+            "name": "setTarget",
+            "summary": "Set\u0020the\u0020target.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html#method_setTarget"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html#method_getAlternativeContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Annulment\u003A\u003A\u0024target",
+            "name": "target",
+            "summary": "Reference\u0020to\u0020the\u0020annulment\u0020of\u0020a\u0020decision.",
+            "url": "classes/Database-Model-SubDecision-Annulment.html#property_target"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Discharge",
             "name": "Discharge",
             "summary": "Discharge\u0020from\u0020board\u0020position.",
@@ -7591,146 +7631,6 @@ Search.appendIndex(
             "summary": "Date\u0020of\u0020the\u0020discharge.",
             "url": "classes/Database-Model-SubDecision-Board-Release.html#property_date"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget",
-            "name": "Budget",
-            "summary": "SubDecision\u0020model.",
-            "url": "classes/Database-Model-SubDecision-Budget.html"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "Get\u0020the\u0020name.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getName"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "Set\u0020the\u0020name.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_setName"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetVersion\u0028\u0029",
-            "name": "getVersion",
-            "summary": "Get\u0020the\u0020version.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getVersion"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AsetVersion\u0028\u0029",
-            "name": "setVersion",
-            "summary": "Set\u0020the\u0020version.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_setVersion"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetDate\u0028\u0029",
-            "name": "getDate",
-            "summary": "Get\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getDate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AsetDate\u0028\u0029",
-            "name": "setDate",
-            "summary": "Set\u0020the\u0020date.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_setDate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetApproval\u0028\u0029",
-            "name": "getApproval",
-            "summary": "Get\u0020approval\u0020status.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getApproval"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AsetApproval\u0028\u0029",
-            "name": "setApproval",
-            "summary": "Set\u0020approval\u0020status.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_setApproval"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetChanges\u0028\u0029",
-            "name": "getChanges",
-            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getChanges"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AsetChanges\u0028\u0029",
-            "name": "setChanges",
-            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_setChanges"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetTemplate\u0028\u0029",
-            "name": "getTemplate",
-            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getTemplate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetAlternativeTemplate\u0028\u0029",
-            "name": "getAlternativeTemplate",
-            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getAlternativeTemplate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetContent\u0028\u0029",
-            "name": "getContent",
-            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getContent"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003AgetAlternativeContent\u0028\u0029",
-            "name": "getAlternativeContent",
-            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#method_getAlternativeContent"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "Name\u0020of\u0020the\u0020budget.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#property_name"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024version",
-            "name": "version",
-            "summary": "Version\u0020of\u0020the\u0020budget.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#property_version"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024date",
-            "name": "date",
-            "summary": "Date\u0020of\u0020the\u0020budget.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#property_date"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024approval",
-            "name": "approval",
-            "summary": "If\u0020the\u0020budget\u0020was\u0020approved.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#property_approval"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Budget\u003A\u003A\u0024changes",
-            "name": "changes",
-            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
-            "url": "classes/Database-Model-SubDecision-Budget.html#property_changes"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy",
-            "name": "Destroy",
-            "summary": "Destroying\u0020a\u0020decision.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetTarget\u0028\u0029",
-            "name": "getTarget",
-            "summary": "Get\u0020the\u0020target.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getTarget"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AsetTarget\u0028\u0029",
-            "name": "setTarget",
-            "summary": "Set\u0020the\u0020target.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html#method_setTarget"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetTemplate\u0028\u0029",
-            "name": "getTemplate",
-            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getTemplate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetAlternativeTemplate\u0028\u0029",
-            "name": "getAlternativeTemplate",
-            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getAlternativeTemplate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetContent\u0028\u0029",
-            "name": "getContent",
-            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getContent"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003AgetAlternativeContent\u0028\u0029",
-            "name": "getAlternativeContent",
-            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html#method_getAlternativeContent"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Destroy\u003A\u003A\u0024target",
-            "name": "target",
-            "summary": "Reference\u0020to\u0020the\u0020destruction\u0020of\u0020a\u0020decision.",
-            "url": "classes/Database-Model-SubDecision-Destroy.html#property_target"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Discharge",
             "name": "Discharge",
             "summary": "Discharge\u0020from\u0020organ.",
@@ -7770,6 +7670,121 @@ Search.appendIndex(
             "name": "installation",
             "summary": "Reference\u0020to\u0020the\u0020installation\u0020of\u0020a\u0020member.",
             "url": "classes/Database-Model-SubDecision-Discharge.html#property_installation"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget",
+            "name": "Budget",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Get\u0020the\u0020name.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getName"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "Set\u0020the\u0020name.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_setName"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetVersion\u0028\u0029",
+            "name": "getVersion",
+            "summary": "Get\u0020the\u0020version.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getVersion"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetVersion\u0028\u0029",
+            "name": "setVersion",
+            "summary": "Set\u0020the\u0020version.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_setVersion"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetDate\u0028\u0029",
+            "name": "getDate",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getDate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetDate\u0028\u0029",
+            "name": "setDate",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_setDate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetApproval\u0028\u0029",
+            "name": "getApproval",
+            "summary": "Get\u0020approval\u0020status.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getApproval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetApproval\u0028\u0029",
+            "name": "setApproval",
+            "summary": "Set\u0020approval\u0020status.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_setApproval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetChanges\u0028\u0029",
+            "name": "getChanges",
+            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getChanges"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetChanges\u0028\u0029",
+            "name": "setChanges",
+            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_setChanges"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getAlternativeContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "Name\u0020of\u0020the\u0020budget.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#property_name"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "Version\u0020of\u0020the\u0020budget.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#property_version"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "Date\u0020of\u0020the\u0020budget.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#property_date"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024approval",
+            "name": "approval",
+            "summary": "If\u0020the\u0020budget\u0020was\u0020approved.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#property_approval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024changes",
+            "name": "changes",
+            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#property_changes"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Statement",
+            "name": "Statement",
+            "summary": "SubDecision\u0020model.",
+            "url": "classes/Database-Model-SubDecision-Financial-Statement.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Statement\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Financial-Statement.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Statement\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Financial-Statement.html#method_getAlternativeTemplate"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Foundation",
             "name": "Foundation",
@@ -8241,21 +8256,6 @@ Search.appendIndex(
             "summary": "Reference\u0020to\u0020the\u0020installation\u0020of\u0020a\u0020member.",
             "url": "classes/Database-Model-SubDecision-Reappointment.html#property_installation"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Reckoning",
-            "name": "Reckoning",
-            "summary": "SubDecision\u0020model.",
-            "url": "classes/Database-Model-SubDecision-Reckoning.html"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Reckoning\u003A\u003AgetTemplate\u0028\u0029",
-            "name": "getTemplate",
-            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
-            "url": "classes/Database-Model-SubDecision-Reckoning.html#method_getTemplate"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Reckoning\u003A\u003AgetAlternativeTemplate\u0028\u0029",
-            "name": "getAlternativeTemplate",
-            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
-            "url": "classes/Database-Model-SubDecision-Reckoning.html#method_getAlternativeTemplate"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision",
             "name": "SubDecision",
             "summary": "SubDecision\u0020model.",
@@ -8691,10 +8691,10 @@ Search.appendIndex(
             "summary": "Export\u0020decisions.",
             "url": "classes/Database-Service-Meeting.html#method_export"
         },                {
-            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AdestroyDecision\u0028\u0029",
-            "name": "destroyDecision",
-            "summary": "Destroy\u0020decision.",
-            "url": "classes/Database-Service-Meeting.html#method_destroyDecision"
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AannulDecision\u0028\u0029",
+            "name": "annulDecision",
+            "summary": "Annul\u0020decision.",
+            "url": "classes/Database-Service-Meeting.html#method_annulDecision"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AdeleteDecision\u0028\u0029",
             "name": "deleteDecision",
@@ -8816,10 +8816,10 @@ Search.appendIndex(
             "summary": "Get\u0020abolish\u0020form.",
             "url": "classes/Database-Service-Meeting.html#method_getAbolishForm"
         },                {
-            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetDestroyForm\u0028\u0029",
-            "name": "getDestroyForm",
-            "summary": "Get\u0020the\u0020destroy\u0020form.",
-            "url": "classes/Database-Service-Meeting.html#method_getDestroyForm"
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetAnnulmentForm\u0028\u0029",
+            "name": "getAnnulmentForm",
+            "summary": "Get\u0020the\u0020annulment\u0020form.",
+            "url": "classes/Database-Service-Meeting.html#method_getAnnulmentForm"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetRegulationForm\u0028\u0029",
             "name": "getRegulationForm",
@@ -8871,6 +8871,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Meeting.html#property_abolishForm"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024annulmentForm",
+            "name": "annulmentForm",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#property_annulmentForm"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024boardDischargeForm",
             "name": "boardDischargeForm",
             "summary": "",
@@ -8900,11 +8905,6 @@ Search.appendIndex(
             "name": "deleteDecisionForm",
             "summary": "",
             "url": "classes/Database-Service-Meeting.html#property_deleteDecisionForm"
-        },                {
-            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024destroyForm",
-            "name": "destroyForm",
-            "summary": "",
-            "url": "classes/Database-Service-Meeting.html#property_destroyForm"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024exportForm",
             "name": "exportForm",
@@ -10086,15 +10086,15 @@ Search.appendIndex(
             "summary": "Add\u0020multiple\u0020subdecisions.",
             "url": "classes/Report-Model-Decision.html#method_addSubdecisions"
         },                {
-            "fqsen": "\\Report\\Model\\Decision\u003A\u003AgetDestroyedBy\u0028\u0029",
-            "name": "getDestroyedBy",
-            "summary": "Get\u0020the\u0020subdecision\u0020by\u0020which\u0020this\u0020decision\u0020is\u0020destroyed.",
-            "url": "classes/Report-Model-Decision.html#method_getDestroyedBy"
+            "fqsen": "\\Report\\Model\\Decision\u003A\u003AgetAnnulledBy\u0028\u0029",
+            "name": "getAnnulledBy",
+            "summary": "Get\u0020the\u0020subdecision\u0020by\u0020which\u0020this\u0020decision\u0020is\u0020annulled.",
+            "url": "classes/Report-Model-Decision.html#method_getAnnulledBy"
         },                {
-            "fqsen": "\\Report\\Model\\Decision\u003A\u003AisDestroyed\u0028\u0029",
-            "name": "isDestroyed",
-            "summary": "Check\u0020if\u0020this\u0020decision\u0020is\u0020destroyed\u0020by\u0020another\u0020decision.",
-            "url": "classes/Report-Model-Decision.html#method_isDestroyed"
+            "fqsen": "\\Report\\Model\\Decision\u003A\u003AisAnnulled\u0028\u0029",
+            "name": "isAnnulled",
+            "summary": "Check\u0020if\u0020this\u0020decision\u0020is\u0020annulled\u0020by\u0020another\u0020decision.",
+            "url": "classes/Report-Model-Decision.html#method_isAnnulled"
         },                {
             "fqsen": "\\Report\\Model\\Decision\u003A\u003A\u0024meeting",
             "name": "meeting",
@@ -10131,10 +10131,10 @@ Search.appendIndex(
             "summary": "Subdecisions.",
             "url": "classes/Report-Model-Decision.html#property_subdecisions"
         },                {
-            "fqsen": "\\Report\\Model\\Decision\u003A\u003A\u0024destroyedby",
-            "name": "destroyedby",
-            "summary": "Destroyed\u0020by.",
-            "url": "classes/Report-Model-Decision.html#property_destroyedby"
+            "fqsen": "\\Report\\Model\\Decision\u003A\u003A\u0024annulledBy",
+            "name": "annulledBy",
+            "summary": "Annulled\u0020by.",
+            "url": "classes/Report-Model-Decision.html#property_annulledBy"
         },                {
             "fqsen": "\\Report\\Model\\Keyholder",
             "name": "Keyholder",
@@ -11056,6 +11056,26 @@ Search.appendIndex(
             "summary": "Abrogation\u0020of\u0020an\u0020organ.",
             "url": "classes/Report-Model-SubDecision-Abrogation.html"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Annulment",
+            "name": "Annulment",
+            "summary": "Annulling\u0020a\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Annulment.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Annulment\u003A\u003AgetTarget\u0028\u0029",
+            "name": "getTarget",
+            "summary": "Get\u0020the\u0020target.",
+            "url": "classes/Report-Model-SubDecision-Annulment.html#method_getTarget"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Annulment\u003A\u003AsetTarget\u0028\u0029",
+            "name": "setTarget",
+            "summary": "Set\u0020the\u0020target.",
+            "url": "classes/Report-Model-SubDecision-Annulment.html#method_setTarget"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Annulment\u003A\u003A\u0024target",
+            "name": "target",
+            "summary": "Reference\u0020to\u0020the\u0020annulment\u0020of\u0020a\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Annulment.html#property_target"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Discharge",
             "name": "Discharge",
             "summary": "Discharge\u0020from\u0020board\u0020position.",
@@ -11191,106 +11211,6 @@ Search.appendIndex(
             "summary": "Date\u0020of\u0020the\u0020discharge.",
             "url": "classes/Report-Model-SubDecision-Board-Release.html#property_date"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget",
-            "name": "Budget",
-            "summary": "Budget\u0020decision.",
-            "url": "classes/Report-Model-SubDecision-Budget.html"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "Get\u0020the\u0020name.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_getName"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "Set\u0020the\u0020name.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_setName"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AgetVersion\u0028\u0029",
-            "name": "getVersion",
-            "summary": "Get\u0020the\u0020version.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_getVersion"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AsetVersion\u0028\u0029",
-            "name": "setVersion",
-            "summary": "Set\u0020the\u0020version.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_setVersion"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AgetDate\u0028\u0029",
-            "name": "getDate",
-            "summary": "Get\u0020the\u0020date.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_getDate"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AsetDate\u0028\u0029",
-            "name": "setDate",
-            "summary": "Set\u0020the\u0020date.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_setDate"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AgetApproval\u0028\u0029",
-            "name": "getApproval",
-            "summary": "Get\u0020approval\u0020status.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_getApproval"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AsetApproval\u0028\u0029",
-            "name": "setApproval",
-            "summary": "Set\u0020approval\u0020status.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_setApproval"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AgetChanges\u0028\u0029",
-            "name": "getChanges",
-            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_getChanges"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003AsetChanges\u0028\u0029",
-            "name": "setChanges",
-            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#method_setChanges"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "Name\u0020of\u0020the\u0020budget.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#property_name"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003A\u0024version",
-            "name": "version",
-            "summary": "Version\u0020of\u0020the\u0020budget.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#property_version"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003A\u0024date",
-            "name": "date",
-            "summary": "Date\u0020of\u0020the\u0020budget.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#property_date"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003A\u0024approval",
-            "name": "approval",
-            "summary": "If\u0020the\u0020budget\u0020was\u0020approved.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#property_approval"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Budget\u003A\u003A\u0024changes",
-            "name": "changes",
-            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
-            "url": "classes/Report-Model-SubDecision-Budget.html#property_changes"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Destroy",
-            "name": "Destroy",
-            "summary": "Destroying\u0020a\u0020decision.",
-            "url": "classes/Report-Model-SubDecision-Destroy.html"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Destroy\u003A\u003AgetTarget\u0028\u0029",
-            "name": "getTarget",
-            "summary": "Get\u0020the\u0020target.",
-            "url": "classes/Report-Model-SubDecision-Destroy.html#method_getTarget"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Destroy\u003A\u003AsetTarget\u0028\u0029",
-            "name": "setTarget",
-            "summary": "Set\u0020the\u0020target.",
-            "url": "classes/Report-Model-SubDecision-Destroy.html#method_setTarget"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Destroy\u003A\u003A\u0024target",
-            "name": "target",
-            "summary": "Reference\u0020to\u0020the\u0020destruction\u0020of\u0020a\u0020decision.",
-            "url": "classes/Report-Model-SubDecision-Destroy.html#property_target"
-        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Discharge",
             "name": "Discharge",
             "summary": "Discharge\u0020from\u0020organ.",
@@ -11310,6 +11230,91 @@ Search.appendIndex(
             "name": "installation",
             "summary": "Reference\u0020to\u0020the\u0020installation\u0020of\u0020a\u0020member.",
             "url": "classes/Report-Model-SubDecision-Discharge.html#property_installation"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget",
+            "name": "Budget",
+            "summary": "Budget\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Get\u0020the\u0020name.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_getName"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "Set\u0020the\u0020name.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_setName"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetVersion\u0028\u0029",
+            "name": "getVersion",
+            "summary": "Get\u0020the\u0020version.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_getVersion"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetVersion\u0028\u0029",
+            "name": "setVersion",
+            "summary": "Set\u0020the\u0020version.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_setVersion"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetDate\u0028\u0029",
+            "name": "getDate",
+            "summary": "Get\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_getDate"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetDate\u0028\u0029",
+            "name": "setDate",
+            "summary": "Set\u0020the\u0020date.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_setDate"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetApproval\u0028\u0029",
+            "name": "getApproval",
+            "summary": "Get\u0020approval\u0020status.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_getApproval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetApproval\u0028\u0029",
+            "name": "setApproval",
+            "summary": "Set\u0020approval\u0020status.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_setApproval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetChanges\u0028\u0029",
+            "name": "getChanges",
+            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_getChanges"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AsetChanges\u0028\u0029",
+            "name": "setChanges",
+            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_setChanges"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "Name\u0020of\u0020the\u0020budget.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#property_name"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "Version\u0020of\u0020the\u0020budget.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#property_version"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "Date\u0020of\u0020the\u0020budget.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#property_date"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024approval",
+            "name": "approval",
+            "summary": "If\u0020the\u0020budget\u0020was\u0020approved.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#property_approval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003A\u0024changes",
+            "name": "changes",
+            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#property_changes"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Statement",
+            "name": "Statement",
+            "summary": "Budget\u0020decision.",
+            "url": "classes/Report-Model-SubDecision-Financial-Statement.html"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Foundation",
             "name": "Foundation",
@@ -11680,11 +11685,6 @@ Search.appendIndex(
             "name": "installation",
             "summary": "Reference\u0020to\u0020the\u0020installation\u0020of\u0020a\u0020member.",
             "url": "classes/Report-Model-SubDecision-Reappointment.html#property_installation"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Reckoning",
-            "name": "Reckoning",
-            "summary": "Budget\u0020decision.",
-            "url": "classes/Report-Model-SubDecision-Reckoning.html"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision",
             "name": "SubDecision",
@@ -13281,6 +13281,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/database-model-subdecision-board.html"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial",
+            "name": "Financial",
+            "summary": "",
+            "url": "namespaces/database-model-subdecision-financial.html"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key",
             "name": "Key",
             "summary": "",
@@ -13350,6 +13355,11 @@ Search.appendIndex(
             "name": "Board",
             "summary": "",
             "url": "namespaces/report-model-subdecision-board.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial",
+            "name": "Financial",
+            "summary": "",
+            "url": "namespaces/report-model-subdecision-financial.html"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Key",
             "name": "Key",
