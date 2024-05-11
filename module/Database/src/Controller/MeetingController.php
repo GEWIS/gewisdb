@@ -136,7 +136,7 @@ class MeetingController extends AbstractActionController
             'organ_regulation' => $this->meetingService->getRegulationForm(),
             'foundation' => $this->meetingService->getFoundationForm(),
             'abolish' => $this->meetingService->getAbolishForm(),
-            'destroy' => $this->meetingService->getDestroyForm(),
+            'annulment' => $this->meetingService->getAnnulmentForm(),
             'install' => $this->meetingService->getInstallForm(),
             'key_grant' => $this->meetingService->getKeyGrantForm(),
             'key_withdraw' => $this->meetingService->getKeyWithdrawForm(),
@@ -178,8 +178,8 @@ class MeetingController extends AbstractActionController
             'install' => new ViewModel(
                 $this->meetingService->installDecision($this->getRequest()->getPost()->toArray()),
             ),
-            'destroy' => new ViewModel(
-                $this->meetingService->destroyDecision($this->getRequest()->getPost()->toArray()),
+            'annulment' => new ViewModel(
+                $this->meetingService->annulDecision($this->getRequest()->getPost()->toArray()),
             ),
             'key_grant' => new ViewModel(
                 $this->meetingService->keyGrantDecision($this->getRequest()->getPost()->toArray()),

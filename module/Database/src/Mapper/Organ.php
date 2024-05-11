@@ -6,7 +6,7 @@ namespace Database\Mapper;
 
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Abrogation as AbrogationModel;
-use Database\Model\SubDecision\Destroy as DestroyModel;
+use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
@@ -64,10 +64,10 @@ class Organ
             ->andWhere('x.decision_number = r.decision_number')
             ->andWhere('x.sequence = r.sequence');
 
-        // destroyed discharge decisions
+        // annulled discharge decisions
         $qbnd = $this->em->createQueryBuilder();
         $qbnd->select('b')
-            ->from(DestroyModel::class, 'b')
+            ->from(AnnulmentModel::class, 'b')
             ->join('b.target', 'z')
             ->where('z.meeting_type = d.meeting_type')
             ->andWhere('z.meeting_number = d.meeting_number')
@@ -82,10 +82,10 @@ class Organ
             $qb->expr()->exists($qbn->getDql()),
         ));
 
-        // destroyed installation decisions
+        // annulled installation decisions
         $qbd = $this->em->createQueryBuilder();
         $qbd->select('a')
-            ->from(DestroyModel::class, 'a')
+            ->from(AnnulmentModel::class, 'a')
             ->join('a.target', 'y')
             ->where('y.meeting_type = r.meeting_type')
             ->andWhere('y.meeting_number = r.meeting_number')
@@ -181,10 +181,10 @@ class Organ
             ->join('o.decision', 'd')
             ->join('d.meeting', 'm');
 
-        // destroyed foundation decisions
+        // annulled foundation decisions
         $qbd = $this->em->createQueryBuilder();
         $qbd->select('b')
-            ->from(DestroyModel::class, 'b')
+            ->from(AnnulmentModel::class, 'b')
             ->join('b.target', 'y')
             ->where('y.meeting_type = o.meeting_type')
             ->andWhere('y.meeting_number = o.meeting_number')
@@ -207,10 +207,10 @@ class Organ
                 ->andWhere('x.decision_number = o.decision_number')
                 ->andWhere('x.sequence = o.sequence');
 
-            // leave out destroyed abrogation decisions
+            // leave out annulled abrogation decisions
             $qbnd = $this->em->createQueryBuilder();
             $qbnd->select('c')
-                ->from(DestroyModel::class, 'c')
+                ->from(AnnulmentModel::class, 'c')
                 ->join('c.target', 'z')
                 ->where('z.meeting_type = a.meeting_type')
                 ->andWhere('z.meeting_number = a.meeting_number')

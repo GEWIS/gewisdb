@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Report\Model\SubDecision;
+namespace Report\Model\SubDecision\Financial;
 
 use Doctrine\ORM\Mapping\Entity;
 
 #[Entity]
-class Reckoning extends Budget
+class Statement extends Budget
 {
 }

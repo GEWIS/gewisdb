@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Model;
 
 use Application\Model\Enums\MeetingTypes;
-use Database\Model\SubDecision\Destroy;
+use Database\Model\SubDecision\Annulment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -95,13 +95,13 @@ class Decision
     protected Collection $subdecisions;
 
     /**
-     * Destroyed by.
+     * Annulled by.
      */
     #[OneToOne(
-        targetEntity: Destroy::class,
+        targetEntity: Annulment::class,
         mappedBy: 'target',
     )]
-    protected ?Destroy $destroyedby = null;
+    protected ?Annulment $annulledBy = null;
 
     /**
      * Set the meeting.
@@ -203,21 +203,21 @@ class Decision
     }
 
     /**
-     * Get the subdecision by which this decision is destroyed.
+     * Get the subdecision by which this decision is annulled.
      *
-     * Or null, if it wasn't destroyed.
+     * Or null, if it wasn't annulled.
      */
-    public function getDestroyedBy(): ?Destroy
+    public function getAnnulledBy(): ?Annulment
     {
-        return $this->destroyedby;
+        return $this->annulledBy;
     }
 
     /**
-     * Check if this decision is destroyed by another decision.
+     * Check if this decision is annulled by another decision.
      */
-    public function isDestroyed(): bool
+    public function isAnnulled(): bool
     {
-        return null !== $this->destroyedby;
+        return null !== $this->annulledBy;
     }
 
     /**

@@ -226,11 +226,11 @@ class Meeting
             $reportSubDecision->setName($subdecision->getName());
             $reportSubDecision->setOrganType($subdecision->getOrganType());
         } elseif (
-            $subdecision instanceof DatabaseSubDecisionModel\Reckoning
-            || $subdecision instanceof DatabaseSubDecisionModel\Budget
+            $subdecision instanceof DatabaseSubDecisionModel\Financial\Statement
+            || $subdecision instanceof DatabaseSubDecisionModel\Financial\Budget
             || $subdecision instanceof DatabaseSubDecisionModel\OrganRegulation
         ) {
-            // budget and reckoning
+            // financial budgets and statements
             if (null !== $subdecision->getMember()) {
                 $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
@@ -291,7 +291,7 @@ class Meeting
 
             $reportSubDecision->setGranting($granting);
             $reportSubDecision->setWithdrawnOn($subdecision->getWithdrawnOn());
-        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Destroy) {
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Annulment) {
             $ref = $subdecision->getTarget();
             $target = $decRepo->find([
                 'meeting_type' => $ref->getMeeting()->getType(),
@@ -332,8 +332,8 @@ class Meeting
     public function deleteSubDecision(ReportSubDecisionModel $subDecision): void
     {
         switch (true) {
-            case $subDecision instanceof ReportSubDecisionModel\Destroy:
-                throw new Exception('Deletion of destroy decisions not implemented');
+            case $subDecision instanceof ReportSubDecisionModel\Annulment:
+                throw new Exception('Annulment of annulling decisions not implemented');
 
             case $subDecision instanceof ReportSubDecisionModel\Reappointment:
                 $installation = $subDecision->getInstallation();

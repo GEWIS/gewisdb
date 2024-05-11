@@ -33,7 +33,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
                 'label' => $this->translator->translate('Budget/Statement'),
                 'value_options' => [
                     'budget' => $this->translator->translate('Budget'),
-                    'reckoning' => $this->translator->translate('Statement'),
+                    'statement' => $this->translator->translate('Statement'),
                 ],
             ],
         ]);
@@ -110,7 +110,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
                         'options' => [
                             'haystack' => [
                                 'budget',
-                                'reckoning',
+                                'statement',
                             ],
                         ],
                     ],

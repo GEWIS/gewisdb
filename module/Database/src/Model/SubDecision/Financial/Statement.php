@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Database\Model\SubDecision;
+namespace Database\Model\SubDecision\Financial;
 
 use Doctrine\ORM\Mapping\Entity;
 
 #[Entity]
-class Reckoning extends Budget
+class Statement extends Budget
 {
     protected function getTemplate(): string
     {
