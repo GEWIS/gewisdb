@@ -40,7 +40,7 @@ class Install extends AbstractDecision
             foreach ($data['reappointments'] as $install) {
                 $reappointment = new ReappointmentModel();
                 $reappointment->setInstallation($install);
-                $reappointment->setNumber($num++);
+                $reappointment->setSequence($num++);
                 $reappointment->setDecision($decision);
             }
         }
@@ -50,7 +50,7 @@ class Install extends AbstractDecision
             foreach ($data['discharges'] as $install) {
                 $discharge = new DischargeModel();
                 $discharge->setInstallation($install);
-                $discharge->setNumber($num++);
+                $discharge->setSequence($num++);
                 $discharge->setDecision($decision);
             }
         }
@@ -59,7 +59,7 @@ class Install extends AbstractDecision
         if (!empty($data['installations'])) {
             foreach ($data['installations'] as $install) {
                 $installation = new InstallationModel();
-                $installation->setNumber($num++);
+                $installation->setSequence($num++);
                 $installation->setFoundation($foundation);
                 $installation->setFunction($install['function']);
                 $installation->setMember($install['member']);

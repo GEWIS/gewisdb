@@ -91,7 +91,7 @@ class Decision
         mappedBy: 'decision',
         cascade: ['persist', 'remove'],
     )]
-    #[OrderBy(value: ['number' => 'ASC'])]
+    #[OrderBy(value: ['sequence' => 'ASC'])]
     protected Collection $subdecisions;
 
     /**

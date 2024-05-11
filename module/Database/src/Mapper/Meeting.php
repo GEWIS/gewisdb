@@ -129,7 +129,7 @@ class Meeting
             ->addOrderBy('m.number', 'ASC')
             ->addOrderBy('d.point', 'ASC')
             ->addOrderBy('d.number', 'ASC')
-            ->addOrderBy('s.number', 'ASC');
+            ->addOrderBy('s.sequence', 'ASC');
 
         $num = 0;
         foreach ($meetings as $meeting) {
@@ -163,7 +163,7 @@ class Meeting
             ->leftJoin('d.destroyedby', 'db')
             ->orderBy('d.point')
             ->addOrderBy('d.number')
-            ->addOrderBy('s.number');
+            ->addOrderBy('s.sequence');
 
         $qb->setParameter(':type', $type);
         $qb->setParameter(':number', $number);
@@ -191,7 +191,7 @@ class Meeting
             ->andWhere('d.point = :decision_point')
             ->andWhere('d.number = :decision_number')
             ->leftJoin('d.subdecisions', 's')
-            ->orderBy('s.number');
+            ->orderBy('s.sequence');
 
         $qb->setParameter(':meeting_type', $meetingType);
         $qb->setParameter(':meeting_number', $meetingNumber);
@@ -229,7 +229,7 @@ class Meeting
             ->where($fields . ' LIKE :search')
             ->leftJoin('d.subdecisions', 's')
             ->innerJoin('d.meeting', 'm')
-            ->orderBy('s.number');
+            ->orderBy('s.sequence');
 
         if (!$includeDestroyed) {
             // we want to leave out decisions that have been destroyed
@@ -275,7 +275,7 @@ class Meeting
             ->andWhere('x.meeting_number = i.meeting_number')
             ->andWhere('x.decision_point = i.decision_point')
             ->andWhere('x.decision_number = i.decision_number')
-            ->andWhere('x.number = i.number');
+            ->andWhere('x.sequence = i.sequence');
 
         // TODO: destroyed decisions (both ways!)
         $qb->andWhere($qb->expr()->not(
@@ -304,7 +304,7 @@ class Meeting
             ->andWhere('x.meeting_number = i.meeting_number')
             ->andWhere('x.decision_point = i.decision_point')
             ->andWhere('x.decision_number = i.decision_number')
-            ->andWhere('x.number = i.number');
+            ->andWhere('x.sequence = i.sequence');
 
         // remove releases
         $qbr = $this->em->createQueryBuilder();
@@ -315,7 +315,7 @@ class Meeting
             ->andWhere('y.meeting_number = i.meeting_number')
             ->andWhere('y.decision_point = i.decision_point')
             ->andWhere('y.decision_number = i.decision_number')
-            ->andWhere('y.number = i.number');
+            ->andWhere('y.sequence = i.sequence');
 
         // TODO: destroyed decisions (both ways!)
         $qb->andWhere($qb->expr()->not(
@@ -351,7 +351,7 @@ class Meeting
             ->andWhere('x.meeting_number = g.meeting_number')
             ->andWhere('x.decision_point = g.decision_point')
             ->andWhere('x.decision_number = g.decision_number')
-            ->andWhere('x.number = g.number');
+            ->andWhere('x.sequence = g.sequence');
 
         // TODO: destroyed decisions (both ways!)
         $qb->andWhere($qb->expr()->not(

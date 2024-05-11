@@ -58,7 +58,7 @@ $(document).ready(function () {
         select: function (event, ui) {
             $.ajax({
                 dataType: 'json',
-                url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_number),
+                url: getUrl(ui.item.id.meeting_type, ui.item.id.meeting_number, ui.item.id.decision_point, ui.item.id.decision_number, ui.item.id.subdecision_sequence),
                 context: document.body
             }).done(function(data) {
                 var content = '';
@@ -74,13 +74,13 @@ $(document).ready(function () {
                     $.each(member.installations, function (idx, install) {
                         var decNum = install.meeting_type + '-' + install.meeting_number
                             + '-' + install.decision_point + '-' + install.decision_number
-                            + '-' + install.subdecision_number;
+                            + '-' + install.subdecision_sequence;
                         var toAdd = '<tr data-lidnr="' + member.member.lidnr + '"'
                             + ' data-meeting-type="' + install.meeting_type + '"'
                             + ' data-meeting-number="' + install.meeting_number + '"'
                             + ' data-decision-point="' + install.decision_point + '"'
                             + ' data-decision-number="' + install.decision_number + '"'
-                            + ' data-subdecision-number="' + install.subdecision_number + '"'
+                            + ' data-subdecision-sequence="' + install.subdecision_sequence + '"'
                             + ' class="dec-' + decNum + '"'
                             + '>'
                             + '<td class="name">' + (0 === installationCount ? member.member.fullName : '') + '</td>'
@@ -117,7 +117,7 @@ $(document).ready(function () {
                 $('#install-foundation-meeting-name').val(data.json.meeting_number);
                 $('#install-foundation-decision-point').val(data.json.decision_point);
                 $('#install-foundation-decision-number').val(data.json.decision_number);
-                $('#install-foundation-subdecision-number').val(data.json.subdecision_number);
+                $('#install-foundation-subdecision-sequence').val(data.json.subdecision_sequence);
 
                 // show the rest of the form
                 $('#install-members-hide').show();
@@ -146,7 +146,7 @@ $(document).ready(function () {
                             var meeting_number = installation.data('meeting-number');
                             var decision_point = installation.data('decision-point');
                             var decision_number = installation.data('decision-number');
-                            var subdecision_number = installation.data('subdecision-number');
+                            var subdecision_sequence = installation.data('subdecision-sequence');
 
                             reappointFuctionForm.append(`
                                 <input type="checkbox" id="reappoint-function-${functions}"
@@ -155,7 +155,7 @@ $(document).ready(function () {
                                     data-meeting-number="${meeting_number}"
                                     data-decision-point="${decision_point}"
                                     data-decision-number="${decision_number}"
-                                    data-subdecision-number="${subdecision_number}"/>
+                                    data-subdecision-sequence="${subdecision_sequence}"/>
                                 <label for="reappoint-function-${functions}">
                                     ${installedFunction} (${meeting_type} ${meeting_number}.${decision_point}.${decision_number})
                                 </label>
@@ -171,7 +171,7 @@ $(document).ready(function () {
                     modal.data('meeting-number', element.data('meeting-number'));
                     modal.data('decision-point', element.data('decision-point'));
                     modal.data('decision-number', element.data('decision-number'));
-                    modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.data('subdecision-sequence', element.data('subdecision-sequence'));
                     modal.data('lidnr', element.data('lidnr'));
                     modal.modal();
                 });
@@ -188,7 +188,7 @@ $(document).ready(function () {
                     modal.data('meeting-number', element.data('meeting-number'));
                     modal.data('decision-point', element.data('decision-point'));
                     modal.data('decision-number', element.data('decision-number'));
-                    modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.data('subdecision-sequence', element.data('subdecision-sequence'));
                     modal.data('lidnr', element.data('lidnr'));
                     modal.modal();
                 });
@@ -203,7 +203,7 @@ $(document).ready(function () {
                     modal.data('meeting-number', element.data('meeting-number'));
                     modal.data('decision-point', element.data('decision-point'));
                     modal.data('decision-number', element.data('decision-number'));
-                    modal.data('subdecision-number', element.data('subdecision-number'));
+                    modal.data('subdecision-sequence', element.data('subdecision-sequence'));
                     modal.data('lidnr', element.data('lidnr'));
                     modal.modal();
                 });
@@ -354,7 +354,7 @@ $(document).ready(function () {
         var meeting_number = element.data('meeting-number');
         var decision_point = element.data('decision-point');
         var decision_number = element.data('decision-number');
-        var subdecision_number = element.data('subdecision-number');
+        var subdecision_sequence = element.data('subdecision-sequence');
 
         var template = $('#reappointment-template').data('template');
         template = template.replace(/__index__/g, count++);
@@ -365,7 +365,7 @@ $(document).ready(function () {
         template = template.replace(/__meeting_number__/g, meeting_number);
         template = template.replace(/__decision_point__/g, decision_point);
         template = template.replace(/__decision_number__/g, decision_number);
-        template = template.replace(/__number__/g, subdecision_number);
+        template = template.replace(/__sequence__/g, subdecision_sequence);
         $('#reappointment-changes').append($(template));
     }
 
@@ -394,11 +394,11 @@ $(document).ready(function () {
             var meeting_number = installation.data('meeting-number');
             var decision_point = installation.data('decision-point');
             var decision_number = installation.data('decision-number');
-            var subdecision_number = installation.data('subdecision-number');
+            var subdecision_sequence = installation.data('subdecision-sequence');
 
             var select = '.dec-' + meeting_type + '-' + meeting_number
                 + '-' + decision_point + '-' + decision_number
-                + '-' + subdecision_number;
+                + '-' + subdecision_sequence;
 
             dischargeFunction($('#members-result').find(select), name)
         });
@@ -412,7 +412,7 @@ $(document).ready(function () {
         var meeting_number = installationElement.data('meeting-number');
         var decision_point = installationElement.data('decision-point');
         var decision_number = installationElement.data('decision-number');
-        var subdecision_number = installationElement.data('subdecision-number');
+        var subdecision_sequence = installationElement.data('subdecision-sequence');
 
         // create the discharge, and add to all changes
         var template = $('#discharge-template').data('template');
@@ -424,12 +424,12 @@ $(document).ready(function () {
         template = template.replace(/__meeting_number__/g, meeting_number);
         template = template.replace(/__decision_point__/g, decision_point);
         template = template.replace(/__decision_number__/g, decision_number);
-        template = template.replace(/__number__/g, subdecision_number);
+        template = template.replace(/__sequence__/g, subdecision_sequence);
         $('#discharge-changes').append($(template));
 
         var select = '.dec-' + meeting_type + '-' + meeting_number
             + '-' + decision_point + '-' + decision_number
-            + '-' + subdecision_number;
+            + '-' + subdecision_sequence;
         $('#members-result').find(select).remove();
     }
 
@@ -450,11 +450,11 @@ $(document).ready(function () {
             var meeting_number = modal.data('meeting-number');
             var decision_point = modal.data('decision-point');
             var decision_number = modal.data('decision-number');
-            var subdecision_number = modal.data('subdecision-number');
+            var subdecision_sequence = modal.data('subdecision-sequence');
 
             var select = '.dec-' + meeting_type + '-' + meeting_number
                 + '-' + decision_point + '-' + decision_number
-                + '-' + subdecision_number;
+                + '-' + subdecision_sequence;
 
             dischargeFunction($('#members-result').find(select), name)
         }
@@ -519,13 +519,13 @@ $fs->get('meeting_type')->setAttribute('id', 'install-foundation-meeting-type');
 $fs->get('meeting_number')->setAttribute('id', 'install-foundation-meeting-name');
 $fs->get('decision_point')->setAttribute('id', 'install-foundation-decision-point');
 $fs->get('decision_number')->setAttribute('id', 'install-foundation-decision-number');
-$fs->get('number')->setAttribute('id', 'install-foundation-subdecision-number');
+$fs->get('sequence')->setAttribute('id', 'install-foundation-subdecision-sequence');
 ?>
 <?= $this->formHidden($fs->get('meeting_type')) ?>
 <?= $this->formHidden($fs->get('meeting_number')) ?>
 <?= $this->formHidden($fs->get('decision_point')) ?>
 <?= $this->formHidden($fs->get('decision_number')) ?>
-<?= $this->formHidden($fs->get('number')) ?>
+<?= $this->formHidden($fs->get('sequence')) ?>
 
 <div id="install-members-hide" style="display: none;">
 <div class="row">
@@ -593,8 +593,8 @@ ob_start();
     ?>
     <?= $this->formHidden($el) ?>
     <?php
-    $el = $fs->get('number');
-    $el->setValue('__number__');
+    $el = $fs->get('sequence');
+    $el->setValue('__sequence__');
     ?>
     <?= $this->formHidden($el) ?>
 </div>
@@ -659,8 +659,8 @@ ob_start();
     ?>
     <?= $this->formHidden($el) ?>
     <?php
-    $el = $fs->get('number');
-    $el->setValue('__number__');
+    $el = $fs->get('sequence');
+    $el->setValue('__sequence__');
     ?>
     <?= $this->formHidden($el) ?>
 </div>

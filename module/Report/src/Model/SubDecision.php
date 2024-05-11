@@ -126,11 +126,11 @@ abstract class SubDecision
     protected int $decision_number;
 
     /**
-     * Sub decision number.
+     * Sub decision sequence number.
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $number;
+    protected int $sequence;
 
     /**
      * Content.
@@ -202,23 +202,23 @@ abstract class SubDecision
      */
     public function getDecisionNumber(): int
     {
-        return $this->number;
+        return $this->decision_number;
     }
 
     /**
-     * Get the number.
+     * Get the sequence number.
      */
-    public function getNumber(): int
+    public function getSequence(): int
     {
-        return $this->number;
+        return $this->sequence;
     }
 
     /**
-     * Set the number.
+     * Set the sequence number.
      */
-    public function setNumber(int $number): void
+    public function setSequence(int $sequence): void
     {
-        $this->number = $number;
+        $this->sequence = $sequence;
     }
 
     /**

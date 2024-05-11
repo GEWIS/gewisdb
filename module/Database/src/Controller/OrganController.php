@@ -79,7 +79,7 @@ class OrganController extends AbstractActionController
                 'meeting_number' => $reference->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $reference->getDecision()->getPoint(),
                 'decision_number' => $reference->getDecision()->getNumber(),
-                'subdecision_number' => $reference->getNumber(),
+                'subdecision_sequence' => $reference->getSequence(),
                 'function' => $reference->getFunction(),
             ];
         }

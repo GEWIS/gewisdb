@@ -62,7 +62,7 @@ class Organ
             $foundation->getMeetingNumber(),
             $foundation->getDecisionPoint(),
             $foundation->getDecisionNumber(),
-            $foundation->getNumber(),
+            $foundation->getSequence(),
         );
     }
 }

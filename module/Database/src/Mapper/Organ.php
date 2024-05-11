@@ -49,7 +49,7 @@ class Organ
             ->andWhere('o.meeting_number = :meeting_number')
             ->andWhere('o.decision_point = :decision_point')
             ->andWhere('o.decision_number = :decision_number')
-            ->andWhere('o.number = :number')
+            ->andWhere('o.sequence = :number')
             ->leftJoin('o.references', 'r')
             ->andWhere('r INSTANCE OF Database\Model\SubDecision\Installation');
 
@@ -62,7 +62,7 @@ class Organ
             ->andWhere('x.meeting_number = r.meeting_number')
             ->andWhere('x.decision_point = r.decision_point')
             ->andWhere('x.decision_number = r.decision_number')
-            ->andWhere('x.number = r.number');
+            ->andWhere('x.sequence = r.sequence');
 
         // destroyed discharge decisions
         $qbnd = $this->em->createQueryBuilder();
@@ -120,7 +120,7 @@ class Organ
             ->andWhere('f.meeting_number = :meeting_number')
             ->andWhere('f.decision_point = :decision_point')
             ->andWhere('f.decision_number = :decision_number')
-            ->andWhere('f.number = :number');
+            ->andWhere('f.sequence = :number');
 
         $qb->setParameter(':meeting_type', $meetingType);
         $qb->setParameter(':meeting_number', $meetingNumber);
@@ -146,7 +146,7 @@ class Organ
             ->andWhere('i.meeting_number = :meeting_number')
             ->andWhere('i.decision_point = :decision_point')
             ->andWhere('i.decision_number = :decision_number')
-            ->andWhere('i.number = :number');
+            ->andWhere('i.sequence = :number');
 
         $qb->setParameter(':meeting_type', $meetingType);
         $qb->setParameter(':meeting_number', $meetingNumber);
@@ -205,7 +205,7 @@ class Organ
                 ->andWhere('x.meeting_number = o.meeting_number')
                 ->andWhere('x.decision_point = o.decision_point')
                 ->andWhere('x.decision_number = o.decision_number')
-                ->andWhere('x.number = o.number');
+                ->andWhere('x.sequence = o.sequence');
 
             // leave out destroyed abrogation decisions
             $qbnd = $this->em->createQueryBuilder();

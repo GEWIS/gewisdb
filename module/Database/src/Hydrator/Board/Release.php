@@ -32,7 +32,7 @@ class Release extends AbstractDecision
 
         $release = new BoardRelease();
 
-        $release->setNumber(1);
+        $release->setSequence(1);
         $release->setInstallation($data['subdecision']);
         $release->setDate(new DateTime($data['date']));
 

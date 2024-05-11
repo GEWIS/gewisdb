@@ -111,7 +111,7 @@ class Installation
             $installation->getMeetingNumber(),
             $installation->getDecisionPoint(),
             $installation->getDecisionNumber(),
-            $installation->getNumber(),
+            $installation->getSequence(),
         );
     }
 }

@@ -38,7 +38,7 @@ class Organ
             'meeting_number' => 'ASC',
             'decision_point' => 'ASC',
             'decision_number' => 'ASC',
-            'number' => 'ASC',
+            'sequence' => 'ASC',
         ]);
 
         $adapter = new Console();

@@ -38,7 +38,7 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'number',
+            'name' => 'sequence',
             'type' => Hidden::class,
         ]);
     }
@@ -84,7 +84,7 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
                     ],
                 ],
             ],
-            'number' => [
+            'sequence' => [
                 'required' => true,
                 'validators' => [
                     [

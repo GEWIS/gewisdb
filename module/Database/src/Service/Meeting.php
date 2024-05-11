@@ -559,7 +559,7 @@ class Meeting
             intval($decision['subdecision']['meeting_number']),
             intval($decision['subdecision']['decision_point']),
             intval($decision['subdecision']['decision_number']),
-            intval($decision['subdecision']['number']),
+            intval($decision['subdecision']['sequence']),
         );
 
         if (
@@ -600,7 +600,7 @@ class Meeting
                     intval($value['meeting_number']),
                     intval($value['decision_point']),
                     intval($value['decision_number']),
-                    intval($value['number']),
+                    intval($value['sequence']),
                 );
 
                 if (null === $decision) {

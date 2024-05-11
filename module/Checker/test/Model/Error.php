@@ -48,7 +48,7 @@ abstract class Error extends TestCase
     {
         $foundation = new FoundationModel();
         $foundation->setDecision($this->getDecision());
-        $foundation->setNumber(1);
+        $foundation->setSequence(1);
         $foundation->setAbbr('AT');
         $foundation->setName('A Test');
         $foundation->setOrganType(OrganTypes::Committee);

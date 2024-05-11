@@ -3,9 +3,13 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
+use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
 use Laminas\View\Renderer\PhpRenderer;
 
-/** @var PhpRenderer|HelperTrait $this */
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var BoardInstallationModel[] $installs
+ */
 
 $arrInstalls = array();
 
@@ -15,7 +19,7 @@ foreach ($installs as $key => $install) {
         'meeting_number' => $install->getDecision()->getMeeting()->getNumber(),
         'decision_point' => $install->getDecision()->getPoint(),
         'decision_number' => $install->getDecision()->getNumber(),
-        'subdecision_number' => $install->getNumber()
+        'subdecision_sequence' => $install->getSequence(),
     );
 }
 ?>
@@ -28,7 +32,7 @@ $(document).ready(function() {
         $('#release-install-board-meeting-number').val(data['meeting_number']);
         $('#release-install-board-decision-point').val(data['decision_point']);
         $('#release-install-board-decision-number').val(data['decision_number']);
-        $('#release-install-board-subdecision-number').val(data['subdecision_number']);
+        $('#release-install-board-subdecision-sequence').val(data['subdecision_sequence']);
         $('#board-release-submit').prop('disabled', false);
     });
 });
@@ -59,13 +63,13 @@ $fs->get('meeting_type')->setAttribute('id', 'release-install-board-meeting-type
 $fs->get('meeting_number')->setAttribute('id', 'release-install-board-meeting-number');
 $fs->get('decision_point')->setAttribute('id', 'release-install-board-decision-point');
 $fs->get('decision_number')->setAttribute('id', 'release-install-board-decision-number');
-$fs->get('number')->setAttribute('id', 'release-install-board-subdecision-number');
+$fs->get('sequence')->setAttribute('id', 'release-install-board-subdecision-sequence');
 ?>
 <?= $this->formHidden($fs->get('meeting_type')) ?>
 <?= $this->formHidden($fs->get('meeting_number')) ?>
 <?= $this->formHidden($fs->get('decision_point')) ?>
 <?= $this->formHidden($fs->get('decision_number')) ?>
-<?= $this->formHidden($fs->get('number')) ?>
+<?= $this->formHidden($fs->get('sequence')) ?>
     <label class="col-md-2 control-label">
         <?= $this->translate('Board Member(s) to Relieve') ?>
     </label>

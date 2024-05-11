@@ -173,7 +173,7 @@ class Meeting
             'meeting_number' => $subdecision->getMeetingNumber(),
             'decision_point' => $subdecision->getDecisionPoint(),
             'decision_number' => $subdecision->getDecisionNumber(),
-            'number' => $subdecision->getNumber(),
+            'sequence' => $subdecision->getSequence(),
         ]);
 
         if (null === $reportSubDecision) {
@@ -184,7 +184,7 @@ class Meeting
             /** @var T $reportSubDecision */
             $reportSubDecision = new $class();
             $reportSubDecision->setDecision($reportDecision);
-            $reportSubDecision->setNumber($subdecision->getNumber());
+            $reportSubDecision->setSequence($subdecision->getSequence());
         }
 
         if ($subdecision instanceof DatabaseSubDecisionModel\FoundationReference) {
@@ -194,7 +194,7 @@ class Meeting
                 'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $ref->getDecision()->getPoint(),
                 'decision_number' => $ref->getDecision()->getNumber(),
-                'number' => $ref->getNumber(),
+                'sequence' => $ref->getSequence(),
             ]);
 
             $reportSubDecision->setFoundation($foundation);
@@ -216,7 +216,7 @@ class Meeting
                 'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $ref->getDecision()->getPoint(),
                 'decision_number' => $ref->getDecision()->getNumber(),
-                'number' => $ref->getNumber(),
+                'sequence' => $ref->getSequence(),
             ]);
 
             $reportSubDecision->setInstallation($installation);
@@ -258,7 +258,7 @@ class Meeting
                 'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $ref->getDecision()->getPoint(),
                 'decision_number' => $ref->getDecision()->getNumber(),
-                'number' => $ref->getNumber(),
+                'sequence' => $ref->getSequence(),
             ]);
 
             $reportSubDecision->setInstallation($installation);
@@ -270,7 +270,7 @@ class Meeting
                 'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $ref->getDecision()->getPoint(),
                 'decision_number' => $ref->getDecision()->getNumber(),
-                'number' => $ref->getNumber(),
+                'sequence' => $ref->getSequence(),
             ]);
 
             $reportSubDecision->setInstallation($installation);
@@ -286,7 +286,7 @@ class Meeting
                 'meeting_number' => $ref->getDecision()->getMeeting()->getNumber(),
                 'decision_point' => $ref->getDecision()->getPoint(),
                 'decision_number' => $ref->getDecision()->getNumber(),
-                'number' => $ref->getNumber(),
+                'sequence' => $ref->getSequence(),
             ]);
 
             $reportSubDecision->setGranting($granting);

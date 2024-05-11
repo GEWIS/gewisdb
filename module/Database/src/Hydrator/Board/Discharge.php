@@ -31,7 +31,7 @@ class Discharge extends AbstractDecision
 
         $discharge = new BoardDischarge();
 
-        $discharge->setNumber(1);
+        $discharge->setSequence(1);
         $discharge->setInstallation($data['subdecision']);
 
         $discharge->setDecision($decision);
