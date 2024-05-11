@@ -8291,20 +8291,20 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020decision\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#method_getDecisionNumber"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetNumber\u0028\u0029",
-            "name": "getNumber",
-            "summary": "Get\u0020the\u0020number.",
-            "url": "classes/Database-Model-SubDecision.html#method_getNumber"
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetSequence\u0028\u0029",
+            "name": "getSequence",
+            "summary": "Get\u0020the\u0020sequence\u0020number.",
+            "url": "classes/Database-Model-SubDecision.html#method_getSequence"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetMember\u0028\u0029",
             "name": "getMember",
             "summary": "Get\u0020the\u0020member.",
             "url": "classes/Database-Model-SubDecision.html#method_getMember"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AsetNumber\u0028\u0029",
-            "name": "setNumber",
-            "summary": "Set\u0020the\u0020number.",
-            "url": "classes/Database-Model-SubDecision.html#method_setNumber"
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AsetSequence\u0028\u0029",
+            "name": "setSequence",
+            "summary": "Set\u0020the\u0020sequence\u0020number.",
+            "url": "classes/Database-Model-SubDecision.html#method_setSequence"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AsetMember\u0028\u0029",
             "name": "setMember",
@@ -8361,10 +8361,10 @@ Search.appendIndex(
             "summary": "Decision\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#property_decision_number"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003A\u0024number",
-            "name": "number",
-            "summary": "Sub\u0020decision\u0020number.",
-            "url": "classes/Database-Model-SubDecision.html#property_number"
+            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003A\u0024sequence",
+            "name": "sequence",
+            "summary": "Sub\u0020decision\u0020sequence\u0020number.",
+            "url": "classes/Database-Model-SubDecision.html#property_sequence"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003A\u0024member",
             "name": "member",
@@ -11721,15 +11721,15 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020decision\u0020number.",
             "url": "classes/Report-Model-SubDecision.html#method_getDecisionNumber"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AgetNumber\u0028\u0029",
-            "name": "getNumber",
-            "summary": "Get\u0020the\u0020number.",
-            "url": "classes/Report-Model-SubDecision.html#method_getNumber"
+            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AgetSequence\u0028\u0029",
+            "name": "getSequence",
+            "summary": "Get\u0020the\u0020sequence\u0020number.",
+            "url": "classes/Report-Model-SubDecision.html#method_getSequence"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AsetNumber\u0028\u0029",
-            "name": "setNumber",
-            "summary": "Set\u0020the\u0020number.",
-            "url": "classes/Report-Model-SubDecision.html#method_setNumber"
+            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AsetSequence\u0028\u0029",
+            "name": "setSequence",
+            "summary": "Set\u0020the\u0020sequence\u0020number.",
+            "url": "classes/Report-Model-SubDecision.html#method_setSequence"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AgetMember\u0028\u0029",
             "name": "getMember",
@@ -11776,10 +11776,10 @@ Search.appendIndex(
             "summary": "Decision\u0020number.",
             "url": "classes/Report-Model-SubDecision.html#property_decision_number"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003A\u0024number",
-            "name": "number",
-            "summary": "Sub\u0020decision\u0020number.",
-            "url": "classes/Report-Model-SubDecision.html#property_number"
+            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003A\u0024sequence",
+            "name": "sequence",
+            "summary": "Sub\u0020decision\u0020sequence\u0020number.",
+            "url": "classes/Report-Model-SubDecision.html#property_sequence"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\u003A\u003A\u0024content",
             "name": "content",

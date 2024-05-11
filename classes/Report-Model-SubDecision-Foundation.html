@@ -367,13 +367,6 @@
 <dd>Name (only for when organs are created).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Report-Model-SubDecision.html#property_number">$number</a>
-    <span>
-                        &nbsp;: int            </span>
-</dt>
-<dd>Sub decision number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Report-Model-SubDecision-Foundation.html#property_organ">$organ</a>
     <span>
                         &nbsp;: <a href="classes/Report-Model-Organ.html"><abbr title="\Report\Model\Organ">Organ</abbr></a>            </span>
@@ -393,6 +386,13 @@
                         &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Report-Model-SubDecision-FoundationReference.html"><abbr title="\Report\Model\SubDecision\FoundationReference">FoundationReference</abbr></a>&gt;            </span>
 </dt>
 <dd>References from other subdecisions to this organ.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Report-Model-SubDecision.html#property_sequence">$sequence</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Sub decision sequence number.</dd>
 
     </dl>
 
@@ -472,13 +472,6 @@
 <dd>Get the name.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Model-SubDecision.html#method_getNumber">getNumber()</a>
-    <span>
-                                &nbsp;: int    </span>
-</dt>
-<dd>Get the number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Foundation.html#method_getOrgan">getOrgan()</a>
     <span>
                                 &nbsp;: <a href="classes/Report-Model-Organ.html"><abbr title="\Report\Model\Organ">Organ</abbr></a>    </span>
@@ -498,6 +491,13 @@
                                 &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Report-Model-SubDecision-FoundationReference.html"><abbr title="\Report\Model\SubDecision\FoundationReference">FoundationReference</abbr></a>&gt;    </span>
 </dt>
 <dd>Get the references.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Report-Model-SubDecision.html#method_getSequence">getSequence()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Get the sequence number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Foundation.html#method_setAbbr">setAbbr()</a>
@@ -535,13 +535,6 @@
 <dd>Set the name.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Report-Model-SubDecision.html#method_setNumber">setNumber()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Foundation.html#method_setOrganType">setOrganType()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -549,9 +542,16 @@
 <dd>Set the type.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Report-Model-SubDecision.html#method_setSequence">setSequence()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the sequence number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Report-Model-SubDecision-Foundation.html#method_toArray">toArray()</a>
     <span>
-                                &nbsp;: <abbr title="array{meeting_type: \Application\Model\Enums\MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, subdecision_number: int, abbr: string, name: string, organtype: \Application\Model\Enums\OrganTypes}">OrganTypes}</abbr>    </span>
+                                &nbsp;: <abbr title="array{meeting_type: \Application\Model\Enums\MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, subdecision_sequence: int, abbr: string, name: string, organtype: \Application\Model\Enums\OrganTypes}">OrganTypes}</abbr>    </span>
 </dt>
 <dd>Get an array with all information.</dd>
 
@@ -893,40 +893,6 @@ this is not null or need to specify an inverse side can do so using an associati
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_number">
-        $number
-        <a href="classes/Report-Model-SubDecision.html#property_number" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">131</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Sub decision number.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$number</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_organ">
         $organ
         <a href="classes/Report-Model-SubDecision-Foundation.html#property_organ" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1015,6 +981,40 @@ this is not null or need to specify an inverse side can do so using an associati
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Report-Model-SubDecision-FoundationReference.html"><abbr title="\Report\Model\SubDecision\FoundationReference">FoundationReference</abbr></a>&gt;</span>
     <span class="phpdocumentor-signature__name">$references</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_sequence">
+        $sequence
+        <a href="classes/Report-Model-SubDecision.html#property_sequence" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">131</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sub decision sequence number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$sequence</span>
     </code>
 
     
@@ -1391,42 +1391,6 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getNumber">
-        getNumber()
-        <a href="classes/Report-Model-SubDecision.html#method_getNumber" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">211</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the number.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getOrgan">
         getOrgan()
         <a href="classes/Report-Model-SubDecision-Foundation.html#method_getOrgan" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1526,6 +1490,42 @@ this is not null or need to specify an inverse side can do so using an associati
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Report-Model-SubDecision-FoundationReference.html"><abbr title="\Report\Model\SubDecision\FoundationReference">FoundationReference</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSequence">
+        getSequence()
+        <a href="classes/Report-Model-SubDecision.html#method_getSequence" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">211</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the sequence number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSequence</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
             </section>
 
 </article>
@@ -1745,48 +1745,6 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setNumber">
-        setNumber()
-        <a href="classes/Report-Model-SubDecision.html#method_setNumber" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">219</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the number.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$number</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setOrganType">
         setOrganType()
         <a href="classes/Report-Model-SubDecision-Foundation.html#method_setOrganType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1829,6 +1787,48 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setSequence">
+        setSequence()
+        <a href="classes/Report-Model-SubDecision.html#method_setSequence" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Model/SubDecision.php"><a href="files/module-report-src-model-subdecision.html"><abbr title="module/Report/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">219</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the sequence number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setSequence</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sequence</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$sequence</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_toArray">
         toArray()
         <a href="classes/Report-Model-SubDecision-Foundation.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1845,7 +1845,7 @@ this is not null or need to specify an inverse side can do so using an associati
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{meeting_type: \Application\Model\Enums\MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, subdecision_number: int, abbr: string, name: string, organtype: \Application\Model\Enums\OrganTypes}">OrganTypes}</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{meeting_type: \Application\Model\Enums\MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, subdecision_sequence: int, abbr: string, name: string, organtype: \Application\Model\Enums\OrganTypes}">OrganTypes}</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1857,7 +1857,7 @@ this is not null or need to specify an inverse side can do so using an associati
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="array{meeting_type: \Application\Model\Enums\MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, subdecision_number: int, abbr: string, name: string, organtype: \Application\Model\Enums\OrganTypes}">OrganTypes}</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{meeting_type: \Application\Model\Enums\MeetingTypes, meeting_number: int, decision_point: int, decision_number: int, subdecision_sequence: int, abbr: string, name: string, organtype: \Application\Model\Enums\OrganTypes}">OrganTypes}</abbr></span>
             </section>
 
 </article>
@@ -1983,10 +1983,10 @@ this is not null or need to specify an inverse side can do so using an associati
                                                     <li><a href="classes/Report-Model-SubDecision.html#property_meeting_type">$meeting_type<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
                                                     <li><a href="classes/Report-Model-SubDecision.html#property_member">$member<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
                                                     <li><a href="classes/Report-Model-SubDecision-Foundation.html#property_name">$name<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
-                                                    <li><a href="classes/Report-Model-SubDecision.html#property_number">$number<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
                                                     <li><a href="classes/Report-Model-SubDecision-Foundation.html#property_organ">$organ<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
                                                     <li><a href="classes/Report-Model-SubDecision-Foundation.html#property_organType">$organType<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
                                                     <li><a href="classes/Report-Model-SubDecision-Foundation.html#property_references">$references<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
+                                                    <li><a href="classes/Report-Model-SubDecision.html#property_sequence">$sequence<a href="classes/Report-Model-SubDecision-Foundation.html"></li>
                                             </ul>
                 </li>
             
@@ -2003,17 +2003,17 @@ this is not null or need to specify an inverse side can do so using an associati
                                             <li><a href="classes/Report-Model-SubDecision.html#method_getMeetingType">getMeetingType()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision.html#method_getMember">getMember()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_getName">getName()</a></li>
-                                            <li><a href="classes/Report-Model-SubDecision.html#method_getNumber">getNumber()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_getOrgan">getOrgan()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_getOrganType">getOrganType()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_getReferences">getReferences()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_getSequence">getSequence()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_setAbbr">setAbbr()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision.html#method_setContent">setContent()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision.html#method_setDecision">setDecision()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision.html#method_setMember">setMember()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_setName">setName()</a></li>
-                                            <li><a href="classes/Report-Model-SubDecision.html#method_setNumber">setNumber()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_setOrganType">setOrganType()</a></li>
+                                            <li><a href="classes/Report-Model-SubDecision.html#method_setSequence">setSequence()</a></li>
                                             <li><a href="classes/Report-Model-SubDecision-Foundation.html#method_toArray">toArray()</a></li>
                                     </ul>
             </li>

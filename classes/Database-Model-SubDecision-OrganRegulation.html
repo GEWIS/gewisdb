@@ -377,18 +377,18 @@
 <dd>Name of the organ.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Database-Model-SubDecision.html#property_number">$number</a>
-    <span>
-                        &nbsp;: int            </span>
-</dt>
-<dd>Sub decision number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-SubDecision-OrganRegulation.html#property_organType">$organType</a>
     <span>
                         &nbsp;: <a href="classes/Application-Model-Enums-OrganTypes.html"><abbr title="\Application\Model\Enums\OrganTypes">OrganTypes</abbr></a>            </span>
 </dt>
 <dd>Type of the organ.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Database-Model-SubDecision.html#property_sequence">$sequence</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Sub decision sequence number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Database-Model-SubDecision-OrganRegulation.html#property_version">$version</a>
@@ -490,18 +490,18 @@
 <dd>Get the name.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-SubDecision.html#method_getNumber">getNumber()</a>
-    <span>
-                                &nbsp;: int    </span>
-</dt>
-<dd>Get the number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_getOrganType">getOrganType()</a>
     <span>
                                 &nbsp;: <a href="classes/Application-Model-Enums-OrganTypes.html"><abbr title="\Application\Model\Enums\OrganTypes">OrganTypes</abbr></a>    </span>
 </dt>
 <dd>Get the type.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-SubDecision.html#method_getSequence">getSequence()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Get the sequence number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_getVersion">getVersion()</a>
@@ -553,18 +553,18 @@
 <dd>Set the name.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Model-SubDecision.html#method_setNumber">setNumber()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setOrganType">setOrganType()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set the organ type</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Model-SubDecision.html#method_setSequence">setSequence()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the sequence number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setVersion">setVersion()</a>
@@ -973,40 +973,6 @@ this is not null or need to specify an inverse side can do so using an associati
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_number">
-        $number
-        <a href="classes/Database-Model-SubDecision.html#property_number" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">134</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Sub decision number.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$number</span>
-    </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_organType">
         $organType
         <a href="classes/Database-Model-SubDecision-OrganRegulation.html#property_organType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1027,6 +993,40 @@ this is not null or need to specify an inverse side can do so using an associati
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type"><a href="classes/Application-Model-Enums-OrganTypes.html"><abbr title="\Application\Model\Enums\OrganTypes">OrganTypes</abbr></a></span>
     <span class="phpdocumentor-signature__name">$organType</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_sequence">
+        $sequence
+        <a href="classes/Database-Model-SubDecision.html#property_sequence" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">134</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sub decision sequence number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$sequence</span>
     </code>
 
     
@@ -1516,42 +1516,6 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getNumber">
-        getNumber()
-        <a href="classes/Database-Model-SubDecision.html#method_getNumber" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">208</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the number.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getNumber</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getOrganType">
         getOrganType()
         <a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_getOrganType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1579,6 +1543,42 @@ this is not null or need to specify an inverse side can do so using an associati
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-OrganTypes.html"><abbr title="\Application\Model\Enums\OrganTypes">OrganTypes</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSequence">
+        getSequence()
+        <a href="classes/Database-Model-SubDecision.html#method_getSequence" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">208</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the sequence number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSequence</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
             </section>
 
 </article>
@@ -1876,48 +1876,6 @@ this is not null or need to specify an inverse side can do so using an associati
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setNumber">
-        setNumber()
-        <a href="classes/Database-Model-SubDecision.html#method_setNumber" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">224</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the number.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$number</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$number</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setOrganType">
         setOrganType()
         <a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setOrganType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1944,6 +1902,48 @@ this is not null or need to specify an inverse side can do so using an associati
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$organType</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-OrganTypes.html"><abbr title="\Application\Model\Enums\OrganTypes">OrganTypes</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setSequence">
+        setSequence()
+        <a href="classes/Database-Model-SubDecision.html#method_setSequence" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">224</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the sequence number.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setSequence</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sequence</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$sequence</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2306,8 +2306,8 @@ this is not null or need to specify an inverse side can do so using an associati
                                                     <li><a href="classes/Database-Model-SubDecision.html#property_meeting_type">$meeting_type<a href="classes/Database-Model-SubDecision-OrganRegulation.html"></li>
                                                     <li><a href="classes/Database-Model-SubDecision.html#property_member">$member<a href="classes/Database-Model-SubDecision-OrganRegulation.html"></li>
                                                     <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#property_name">$name<a href="classes/Database-Model-SubDecision-OrganRegulation.html"></li>
-                                                    <li><a href="classes/Database-Model-SubDecision.html#property_number">$number<a href="classes/Database-Model-SubDecision-OrganRegulation.html"></li>
                                                     <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#property_organType">$organType<a href="classes/Database-Model-SubDecision-OrganRegulation.html"></li>
+                                                    <li><a href="classes/Database-Model-SubDecision.html#property_sequence">$sequence<a href="classes/Database-Model-SubDecision-OrganRegulation.html"></li>
                                                     <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#property_version">$version<a href="classes/Database-Model-SubDecision-OrganRegulation.html"></li>
                                             </ul>
                 </li>
@@ -2327,8 +2327,8 @@ this is not null or need to specify an inverse side can do so using an associati
                                             <li><a href="classes/Database-Model-SubDecision.html#method_getMeetingType">getMeetingType()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision.html#method_getMember">getMember()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_getName">getName()</a></li>
-                                            <li><a href="classes/Database-Model-SubDecision.html#method_getNumber">getNumber()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_getOrganType">getOrganType()</a></li>
+                                            <li><a href="classes/Database-Model-SubDecision.html#method_getSequence">getSequence()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_getVersion">getVersion()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setApproval">setApproval()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setChanges">setChanges()</a></li>
@@ -2336,8 +2336,8 @@ this is not null or need to specify an inverse side can do so using an associati
                                             <li><a href="classes/Database-Model-SubDecision.html#method_setDecision">setDecision()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision.html#method_setMember">setMember()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setName">setName()</a></li>
-                                            <li><a href="classes/Database-Model-SubDecision.html#method_setNumber">setNumber()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setOrganType">setOrganType()</a></li>
+                                            <li><a href="classes/Database-Model-SubDecision.html#method_setSequence">setSequence()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_setVersion">setVersion()</a></li>
                                             <li><a href="classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate">formatDate()</a></li>
                                             <li><a href="classes/Database-Model-SubDecision-OrganRegulation.html#method_getAlternativeTemplate">getAlternativeTemplate()</a></li>
