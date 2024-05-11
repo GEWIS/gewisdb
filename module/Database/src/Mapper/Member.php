@@ -7,8 +7,8 @@ namespace Database\Mapper;
 use Application\Model\Enums\AddressTypes;
 use Database\Model\Address as AddressModel;
 use Database\Model\Member as MemberModel;
+use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
-use Database\Model\SubDecision\Destroy as DestroyModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Financial\Budget as BudgetModel;
 use Database\Model\SubDecision\Financial\Statement as StatementModel;
@@ -167,10 +167,10 @@ class Member
             ->andWhere('x.decision_number = r.decision_number')
             ->andWhere('x.sequence = r.sequence');
 
-        // destroyed discharge decisions
+        // annulled discharge decisions
         $qbnd = $this->em->createQueryBuilder();
         $qbnd->select('b')
-            ->from(DestroyModel::class, 'b')
+            ->from(AnnulmentModel::class, 'b')
             ->join('b.target', 'z')
             ->where('z.meeting_type = d.meeting_type')
             ->andWhere('z.meeting_number = d.meeting_number')
@@ -185,10 +185,10 @@ class Member
             $qb->expr()->exists($qbn->getDql()),
         ));
 
-        // destroyed installation decisions
+        // annulled installation decisions
         $qbd = $this->em->createQueryBuilder();
         $qbd->select('a')
-            ->from(DestroyModel::class, 'a')
+            ->from(AnnulmentModel::class, 'a')
             ->join('a.target', 'y')
             ->where('y.meeting_type = r.meeting_type')
             ->andWhere('y.meeting_number = r.meeting_number')

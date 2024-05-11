@@ -12,6 +12,7 @@ use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Form\Abolish as AbolishForm;
 use Database\Form\Address as AddressForm;
+use Database\Form\Annulment as AnnulmentForm;
 use Database\Form\AuditEntry\AuditNote as AuditNoteForm;
 use Database\Form\Board\Discharge as BoardDischargeForm;
 use Database\Form\Board\Install as BoardInstallForm;
@@ -21,7 +22,6 @@ use Database\Form\CreateMeeting as CreateMeetingForm;
 use Database\Form\DeleteAddress as DeleteAddressForm;
 use Database\Form\DeleteDecision as DeleteDecisionForm;
 use Database\Form\DeleteList as DeleteListForm;
-use Database\Form\Destroy as DestroyForm;
 use Database\Form\Export as ExportForm;
 use Database\Form\Fieldset\Address as AddressFieldset;
 use Database\Form\Fieldset\Decision as DecisionFieldset;
@@ -49,12 +49,12 @@ use Database\Form\Query as QueryForm;
 use Database\Form\QueryExport as QueryExportForm;
 use Database\Form\QuerySave as QuerySaveForm;
 use Database\Hydrator\Abolish as AbolishHydrator;
+use Database\Hydrator\Annulment as AnnulmentHydrator;
 use Database\Hydrator\AuditEntry as AuditEntryHydrator;
 use Database\Hydrator\Board\Discharge as BoardDischargeHydrator;
 use Database\Hydrator\Board\Install as BoardInstallHydrator;
 use Database\Hydrator\Board\Release as BoardReleaseHydrator;
 use Database\Hydrator\Budget as BudgetHydrator;
-use Database\Hydrator\Destroy as DestroyHydrator;
 use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
 use Database\Hydrator\Key\Grant as KeyGrantHydrator;
@@ -135,7 +135,7 @@ class Module
             'invokables' => [
                 AbolishHydrator::class => AbolishHydrator::class,
                 BudgetHydrator::class => BudgetHydrator::class,
-                DestroyHydrator::class => DestroyHydrator::class,
+                AnnulmentHydrator::class => AnnulmentHydrator::class,
                 RegulationHydrator::class => RegulationHydrator::class,
                 FoundationHydrator::class => FoundationHydrator::class,
                 InstallHydrator::class => InstallHydrator::class,
@@ -285,13 +285,13 @@ class Module
 
                     return $form;
                 },
-                DestroyForm::class => static function (ContainerInterface $container) {
-                    $form = new DestroyForm(
+                AnnulmentForm::class => static function (ContainerInterface $container) {
+                    $form = new AnnulmentForm(
                         $container->get(MvcTranslator::class),
                         $container->get(MeetingFieldset::class),
                         $container->get(DecisionFieldset::class),
                     );
-                    $form->setHydrator($container->get(DestroyHydrator::class));
+                    $form->setHydrator($container->get(AnnulmentHydrator::class));
 
                     return $form;
                 },

@@ -101,9 +101,9 @@
         <exclude-pattern>module/User/src/Service/Factory/UserServiceFactory.php</exclude-pattern>
         <!-- Hydrators -->
         <exclude-pattern>module/Database/src/Hydrator/Abolish.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Annulment.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/AbstractDecision.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Budget.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Hydrator/Destroy.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
@@ -135,8 +135,8 @@
         <!-- Hydrators -->
         <exclude-pattern>module/Database/src/Hydrator/Abolish.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/AbstractDecision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Hydrator/Annulment.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Budget.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Hydrator/Destroy.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Foundation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Install.php</exclude-pattern>
@@ -153,12 +153,12 @@
         <exclude-pattern>module/Database/src/Module.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Abolish.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Address.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Form/Annulment.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Budget.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/CreateMeeting.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/DeleteAddress.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/DeleteDecision.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/DeleteList.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Form/Destroy.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Export.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Foundation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/OrganRegulation.php</exclude-pattern>

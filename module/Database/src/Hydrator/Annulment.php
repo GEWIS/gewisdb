@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Database\Hydrator;
 
 use Database\Model\Decision as DecisionModel;
-use Database\Model\SubDecision\Destroy as DestroyModel;
+use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use InvalidArgumentException;
 
-class Destroy extends AbstractDecision
+class Annulment extends AbstractDecision
 {
     /**
-     * abolish hydration
+     * Annulment hydration
      *
      * @param DecisionModel $object
      *
@@ -23,12 +23,12 @@ class Destroy extends AbstractDecision
     ): DecisionModel {
         $object = parent::hydrate($data, $object);
 
-        $destroy = new DestroyModel();
+        $annulment = new AnnulmentModel();
 
-        $destroy->setTarget($data['fdecision']);
+        $annulment->setTarget($data['fdecision']);
 
-        $destroy->setSequence(0);
-        $destroy->setDecision($object);
+        $annulment->setSequence(0);
+        $annulment->setDecision($object);
 
         return $object;
     }

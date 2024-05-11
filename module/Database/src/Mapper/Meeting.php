@@ -7,10 +7,10 @@ namespace Database\Mapper;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
+use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Board\Discharge as BoardDischargeModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
 use Database\Model\SubDecision\Board\Release as BoardReleaseModel;
-use Database\Model\SubDecision\Destroy as DestroyModel;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawalModel;
 use DateTime;
@@ -160,7 +160,7 @@ class Meeting
             ->andWhere('m.number = :number')
             ->leftJoin('m.decisions', 'd')
             ->leftJoin('d.subdecisions', 's')
-            ->leftJoin('d.destroyedby', 'db')
+            ->leftJoin('d.annulledBy', 'db')
             ->orderBy('d.point')
             ->addOrderBy('d.number')
             ->addOrderBy('s.sequence');
@@ -208,7 +208,7 @@ class Meeting
      */
     public function searchDecision(
         string $query,
-        bool $includeDestroyed = false,
+        bool $includeAnnulled = false,
     ): array {
         $qb = $this->em->createQueryBuilder();
 
@@ -231,11 +231,11 @@ class Meeting
             ->innerJoin('d.meeting', 'm')
             ->orderBy('s.sequence');
 
-        if (!$includeDestroyed) {
-            // we want to leave out decisions that have been destroyed
+        if (!$includeAnnulled) {
+            // we want to leave out decisions that have been annulled
             $qbn = $this->em->createQueryBuilder();
             $qbn->select('a')
-                ->from(DestroyModel::class, 'a')
+                ->from(AnnulmentModel::class, 'a')
                 ->join('a.target', 'x')
                 ->where('x.meeting_type = d.meeting_type')
                 ->andWhere('x.meeting_number = d.meeting_number')
@@ -277,7 +277,7 @@ class Meeting
             ->andWhere('x.decision_number = i.decision_number')
             ->andWhere('x.sequence = i.sequence');
 
-        // TODO: destroyed decisions (both ways!)
+        // TODO: annulled decisions (both ways!)
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDql()),
         ));
@@ -317,7 +317,7 @@ class Meeting
             ->andWhere('y.decision_number = i.decision_number')
             ->andWhere('y.sequence = i.sequence');
 
-        // TODO: destroyed decisions (both ways!)
+        // TODO: annulled decisions (both ways!)
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbd->getDql()),
         ));
@@ -353,7 +353,7 @@ class Meeting
             ->andWhere('x.decision_number = g.decision_number')
             ->andWhere('x.sequence = g.sequence');
 
-        // TODO: destroyed decisions (both ways!)
+        // TODO: annulled decisions (both ways!)
         $qb->andWhere($qb->expr()->not(
             $qb->expr()->exists($qbn->getDql()),
         ));

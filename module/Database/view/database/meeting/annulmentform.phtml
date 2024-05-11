@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
-use Database\Form\Destroy as DestroyForm;
+use Database\Form\Annulment as AnnulmentForm;
 use Laminas\View\Renderer\PhpRenderer;
 
 /**
  * @var PhpRenderer|HelperTrait $this
- * @var DestroyForm $form
+ * @var AnnulmentForm $form
  */
 ?>
 <script>
 $(document).ready(function() {
-    $('#destroy-decision').autocomplete({
+    $('#annulment-decision').autocomplete({
         minLength: 2,
         delay: 0,
         source: function(rq, response) {
@@ -45,14 +45,14 @@ $(document).ready(function() {
         },
         select: function(event, ui) {
             var decision = ui.item.id;
-            $('#destroy-meeting-type').val(decision.meeting_type);
-            $('#destroy-meeting-number').val(decision.meeting_number);
-            $('#destroy-decision-point').val(decision.decision_point);
-            $('#destroy-number').val(decision.decision_number);
-            $('.destroy-decision-num').text(decision.num);
-            $('.destroy-decision-content').text(decision.content);
-            $('.destroy-decision-display').show();
-            $('#destroy-decision-button').prop('disabled', false);
+            $('#annulment-meeting-type').val(decision.meeting_type);
+            $('#annulment-meeting-number').val(decision.meeting_number);
+            $('#annulment-decision-point').val(decision.decision_point);
+            $('#annulment-number').val(decision.decision_number);
+            $('.annulment-decision-num').text(decision.num);
+            $('.annulment-decision-content').text(decision.content);
+            $('.annulment-decision-display').show();
+            $('#annulment-decision-button').prop('disabled', false);
         }
     });
 });
@@ -61,7 +61,7 @@ $(document).ready(function() {
 <?php
 $form->prepare();
 
-$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'destroy')));
+$form->setAttribute('action', $this->url('meeting/decision/form', array('form' => 'annulment')));
 $form->setAttribute('method', 'post');
 
 $form->setAttribute('role', 'form');
@@ -81,29 +81,29 @@ $fs = $form->get('fdecision');
 ?>
 <?php
 $element = $fs->get('meeting_type');
-$element->setAttribute('id', 'destroy-meeting-type');
+$element->setAttribute('id', 'annulment-meeting-type');
 ?>
 <?= $this->formHidden($element) ?>
 <?php
 $element = $fs->get('meeting_number');
-$element->setAttribute('id', 'destroy-meeting-number');
+$element->setAttribute('id', 'annulment-meeting-number');
 ?>
 <?= $this->formHidden($element) ?>
 <?php
 $element = $fs->get('point');
-$element->setAttribute('id', 'destroy-decision-point');
+$element->setAttribute('id', 'annulment-decision-point');
 ?>
 <?= $this->formHidden($element) ?>
 <?php
 $element = $fs->get('number');
-$element->setAttribute('id', 'destroy-number');
+$element->setAttribute('id', 'annulment-number');
 ?>
 <?= $this->formHidden($element) ?>
 <div class="form-group">
 <?php
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('id', 'destroy-decision');
+$element->setAttribute('id', 'annulment-decision');
 $element->setAttribute('placeholder', $this->translate('Decision'));
 ?>
     <?= $this->formLabel($element) ?>
@@ -111,15 +111,15 @@ $element->setAttribute('placeholder', $this->translate('Decision'));
     <?= $this->formElementErrors($element) ?>
 </div>
 
-<p class="destroy-decision-display" style="display: none;">
-<strong><?= $this->translate('Decision') ?></strong> <strong class="destroy-decision-num"></strong>: <span class="destroy-decision-content"></span>
+<p class="annulment-decision-display" style="display: none;">
+<strong><?= $this->translate('Decision') ?></strong> <strong class="annulment-decision-num"></strong>: <span class="annulment-decision-content"></span>
 </p>
 
 <?php
 $submit = $form->get('submit');
 $submit->setLabel($this->translate('Annul Decision'));
 $submit->setAttribute('class', 'btn btn-primary');
-$submit->setAttribute('id', 'destroy-decision-button');
+$submit->setAttribute('id', 'annulment-decision-button');
 $submit->setAttribute('disabled', 'disabled');
 ?>
 <?= $this->formButton($submit) ?>

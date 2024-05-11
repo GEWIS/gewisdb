@@ -66,9 +66,9 @@ $(document).ready(function () {
 <?php foreach ($meeting->getDecisions() as $decision): ?>
     <li>
         <?= $this->translate('Decision') ?> <?= "{$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}" ?>:
-        <?php if ($decision->isDestroyed()): ?>
+        <?php if ($decision->isAnnulled()): ?>
             <?php
-            $dec = $decision->getDestroyedBy()->getDecision();
+            $dec = $decision->getAnnulledBy()->getDecision();
             $mt = $dec->getMeeting();
             ?>
             <strong>

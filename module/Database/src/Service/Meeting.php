@@ -6,13 +6,13 @@ namespace Database\Service;
 
 use Application\Model\Enums\MeetingTypes;
 use Database\Form\Abolish as AbolishForm;
+use Database\Form\Annulment as AnnulmentForm;
 use Database\Form\Board\Discharge as BoardDischargeForm;
 use Database\Form\Board\Install as BoardInstallForm;
 use Database\Form\Board\Release as BoardReleaseForm;
 use Database\Form\Budget as BudgetForm;
 use Database\Form\CreateMeeting as CreateMeetingForm;
 use Database\Form\DeleteDecision as DeleteDecisionForm;
-use Database\Form\Destroy as DestroyForm;
 use Database\Form\Export as ExportForm;
 use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
@@ -41,13 +41,13 @@ class Meeting
 {
     public function __construct(
         private readonly AbolishForm $abolishForm,
+        private readonly AnnulmentForm $annulmentForm,
         private readonly BoardDischargeForm $boardDischargeForm,
         private readonly BoardInstallForm $boardInstallForm,
         private readonly BoardReleaseForm $boardReleaseForm,
         private readonly BudgetForm $budgetForm,
         private readonly CreateMeetingForm $createMeetingForm,
         private readonly DeleteDecisionForm $deleteDecisionForm,
-        private readonly DestroyForm $destroyForm,
         private readonly ExportForm $exportForm,
         private readonly FoundationForm $foundationForm,
         private readonly InstallForm $installForm,
@@ -170,11 +170,11 @@ class Meeting
     }
 
     /**
-     * Destroy decision.
+     * Annul decision.
      *
      * @return array{
      *     type: string,
-     *     form: DestroyForm,
+     *     form: AnnulmentForm,
      * }|array{
      *     type: string,
      *     decision: DecisionModel,
@@ -182,16 +182,16 @@ class Meeting
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function destroyDecision(array $data): array
+    public function annulDecision(array $data): array
     {
-        $form = $this->getDestroyForm();
+        $form = $this->getAnnulmentForm();
 
         $form->setData($data);
         $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
             return [
-                'type' => 'destroy',
+                'type' => 'annulment',
                 'form' => $form,
             ];
         }
@@ -203,7 +203,7 @@ class Meeting
         $this->getMeetingMapper()->persist($decision->getMeeting());
 
         return [
-            'type' => 'destroy',
+            'type' => 'annulment',
             'decision' => $decision,
         ];
     }
@@ -940,11 +940,11 @@ class Meeting
     }
 
     /**
-     * Get the destroy form.
+     * Get the annulment form.
      */
-    public function getDestroyForm(): DestroyForm
+    public function getAnnulmentForm(): AnnulmentForm
     {
-        return $this->destroyForm;
+        return $this->annulmentForm;
     }
 
     /**

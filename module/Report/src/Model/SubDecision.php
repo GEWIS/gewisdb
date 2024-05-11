@@ -14,10 +14,10 @@ use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Report\Model\SubDecision\Abrogation;
+use Report\Model\SubDecision\Annulment;
 use Report\Model\SubDecision\Board\Discharge as BoardDischarge;
 use Report\Model\SubDecision\Board\Installation as BoardInstallation;
 use Report\Model\SubDecision\Board\Release as BoardRelease;
-use Report\Model\SubDecision\Destroy;
 use Report\Model\SubDecision\Discharge;
 use Report\Model\SubDecision\Financial\Budget;
 use Report\Model\SubDecision\Financial\Statement;
@@ -50,7 +50,7 @@ use Report\Model\SubDecision\Reappointment;
         'financial_budget' => Budget::class,
         'financial_statement' => Statement::class,
         'other' => Other::class,
-        'destroy' => Destroy::class,
+        'annulment' => Annulment::class,
         'board_installation' => BoardInstallation::class,
         'board_release' => BoardRelease::class,
         'board_discharge' => BoardDischarge::class,

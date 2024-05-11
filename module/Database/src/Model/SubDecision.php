@@ -6,10 +6,10 @@ namespace Database\Model;
 
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Abrogation;
+use Database\Model\SubDecision\Annulment;
 use Database\Model\SubDecision\Board\Discharge as BoardDischarge;
 use Database\Model\SubDecision\Board\Installation as BoardInstallation;
 use Database\Model\SubDecision\Board\Release as BoardRelease;
-use Database\Model\SubDecision\Destroy;
 use Database\Model\SubDecision\Discharge;
 use Database\Model\SubDecision\Financial\Budget;
 use Database\Model\SubDecision\Financial\Statement;
@@ -53,7 +53,7 @@ use function str_replace;
         'financial_budget' => Budget::class,
         'financial_statement' => Statement::class,
         'other' => Other::class,
-        'destroy' => Destroy::class,
+        'annulment' => Annulment::class,
         'board_installation' => BoardInstallation::class,
         'board_release' => BoardRelease::class,
         'board_discharge' => BoardDischarge::class,

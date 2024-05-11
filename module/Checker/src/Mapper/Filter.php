@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Checker\Mapper;
 
 use Database\Model\SubDecision as SubDecisionModel;
-use Database\Model\SubDecision\Destroy as DestroyModel;
+use Database\Model\SubDecision\Annulment as AnnulmentModel;
 
 use function in_array;
 
@@ -45,11 +45,11 @@ trait Filter
         // use static to only make sure that the variable has only be set once
         static $deleted;
         if (null === $deleted) {
-            // First, fetch all destroy decisions
+            // First, fetch all annulment decisions
             $qb = $this->em->createQueryBuilder();
             $qb->select('d')
-                ->from(DestroyModel::class, 'd');
-            /** @var DestroyModel[] $deletions */
+                ->from(AnnulmentModel::class, 'd');
+            /** @var AnnulmentModel[] $deletions */
             $deletions = $qb->getQuery()->getResult();
 
             // check for all decisions if they are valid
@@ -69,25 +69,25 @@ trait Filter
     }
 
     /**
-     * Checks if a destroy decision is still valid (i,e. is not destroyed
+     * Checks if an annulment decision is still valid (i.e. is not annulled).
      *
-     * @param DestroyModel $d Destroy decision
+     * @param AnnulmentModel $d Annulment decision
      *
-     * @return bool is the destroy decision not destroyed?
+     * @return bool is the annul decision not annulled?
      */
-    protected function isValid(DestroyModel $d): bool
+    protected function isValid(AnnulmentModel $d): bool
     {
         // Get the decision
         $decision = $d->getDecision();
 
-        $destroy = $decision->getDestroyedBy();
+        $annulment = $decision->getAnnulledBy();
 
-        // if this decision was not destroyed, it is certainly valid
-        if (null === $destroy) {
+        // if this decision was not annulled, it is certainly valid
+        if (null === $annulment) {
             return true;
         }
 
-        // else it is valid iff the destroyed by is not valid
-        return !$this->isValid($destroy);
+        // else it is valid iff the annulled by is not valid
+        return !$this->isValid($annulment);
     }
 }

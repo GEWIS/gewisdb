@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Database\Service\Factory;
 
 use Database\Form\Abolish as AbolishForm;
+use Database\Form\Annulment as AnnulmentForm;
 use Database\Form\Board\Discharge as BoardDischargeForm;
 use Database\Form\Board\Install as BoardInstallForm;
 use Database\Form\Board\Release as BoardReleaseForm;
 use Database\Form\Budget as BudgetForm;
 use Database\Form\CreateMeeting as CreateMeetingForm;
 use Database\Form\DeleteDecision as DeleteDecisionForm;
-use Database\Form\Destroy as DestroyForm;
 use Database\Form\Export as ExportForm;
 use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
@@ -50,8 +50,8 @@ class MeetingFactory implements FactoryInterface
         $createMeetingForm = $container->get(CreateMeetingForm::class);
         /** @var DeleteDecisionForm $deleteDecisionForm */
         $deleteDecisionForm = $container->get(DeleteDecisionForm::class);
-        /** @var DestroyForm $destroyForm */
-        $destroyForm = $container->get(DestroyForm::class);
+        /** @var AnnulmentForm $annulmentForm */
+        $annulmentForm = $container->get(AnnulmentForm::class);
         /** @var ExportForm $exportForm */
         $exportForm = $container->get(ExportForm::class);
         /** @var FoundationForm $foundationForm */
@@ -75,13 +75,13 @@ class MeetingFactory implements FactoryInterface
 
         return new MeetingService(
             $abolishForm,
+            $annulmentForm,
             $boardDischargeForm,
             $boardInstallForm,
             $boardReleaseForm,
             $budgetForm,
             $createMeetingForm,
             $deleteDecisionForm,
-            $destroyForm,
             $exportForm,
             $foundationForm,
             $installForm,
