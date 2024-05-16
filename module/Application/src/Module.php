@@ -14,6 +14,7 @@ use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
 use Application\View\Helper\FileUrl;
 use Application\View\Helper\IsModuleActive;
+use Application\View\Helper\NotificationCount;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Laminas\EventManager\EventInterface;
@@ -50,7 +51,8 @@ class Module
 
         $locale = $this->determineLocale($e);
 
-        $mvcTranslator = $e->getApplication()->getServiceManager()->get(MvcTranslator::class);
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $mvcTranslator = $serviceManager->get(MvcTranslator::class);
         $translator = $mvcTranslator->getTranslator();
         if ($translator instanceof I18nTranslator) {
             $translator->setlocale($locale);
@@ -165,6 +167,9 @@ class Module
                 },
                 'isModuleActive' => static function (ContainerInterface $container) {
                     return new IsModuleActive($container);
+                },
+                'getNotificationCount' => static function (ContainerInterface $container) {
+                    return new NotificationCount($container);
                 },
             ],
         ];

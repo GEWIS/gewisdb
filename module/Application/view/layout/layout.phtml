@@ -63,6 +63,7 @@ $(document).ready(function() {
             'subscribe',
         ],
     ])):
+    $notificationCount = $this->getNotificationCount();
     ?>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container">
@@ -136,6 +137,12 @@ $(document).ready(function() {
                 <div class="collapse navbar-collapse">
                     <?php if (null !== $this->identity()): ?>
                         <ul class="nav navbar-nav navbar-left">
+                            <li class="<?= $this->isModuleActive(['database', 'index']) ? 'active' : '' ?>">
+                                <a href="<?= $this->url('home') ?>">
+                                    <?= $this->translate('Home') ?>
+                                    <?= 0 < $notificationCount ? '&nbsp;<span class="badge">' . $notificationCount . '</span>' : '' ?>
+                                </a>
+                            </li>    
                             <li class="<?= $this->isModuleActive(['database', 'meeting']) ? 'active' : '' ?>">
                                 <a href="<?= $this->url('meeting') ?>">
                                     <?= $this->translate('Meetings and Decisions') ?>

@@ -11,9 +11,13 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var int $expired
  * @var int $prospectives
  * @var int $updates
+ * @var bool $syncPaused
+ * @var DateTime $syncPausedUntil
+ * @var int $totalCount
  */
 
-$showPendingUpdates = 0 < $updates;
+$twoColumnMode = $totalCount > 0;
+$syncPausedDifference = $syncPausedUntil->getTimestamp() - (new DateTime())->getTimestamp();
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -22,7 +26,7 @@ $showPendingUpdates = 0 < $updates;
     </div>
 </div>
 <div class="row">
-    <div class="<?= $showPendingUpdates ? 'col-md-8' : 'col-md-12'?>">
+    <div class="<?= $twoColumnMode ? 'col-md-8' : 'col-md-12'?>">
         <p>
             <?= sprintf(
                 $this->translate('GEWIS currently has <a href="%s">%d members</a> (+%d expired) and <a href="%s">%d prospective members (%d paid, %d unpaid)</a>. <a href="%s">Click here</a> to create a meeting or <a href="%s">perform a query</a>.'),
@@ -44,7 +48,7 @@ $showPendingUpdates = 0 < $updates;
             ) ?>
         </p>
     </div>
-    <?php if ($showPendingUpdates): ?>
+    <?php if (0 < $updates): ?>
         <div class="col-md-4">
             <div class="panel panel-info">
                 <div class="panel-heading"><?= $this->translate('Pending member updates') ?></div>
@@ -59,6 +63,34 @@ $showPendingUpdates = 0 < $updates;
                             $this->url('member/updates'),
                             $updates,
                         ) ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if ($syncPaused): ?>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading"><?= $this->translate('Synchronisation paused') ?></div>
+                <div class="panel-body">
+                    <p>
+                        <?php
+                            if ($syncPausedDifference > 3600) {
+                                echo sprintf(
+                                    $this->translate(
+                                        'Synchronisation with other systems is paused until %s.',
+                                    ),
+                                    $syncPausedUntil->format(DateTimeInterface::ATOM),
+                                );
+                            } else {
+                                echo sprintf(
+                                    $this->translate(
+                                        'Synchronisation with other systems is paused and will resume in %d minutes.',
+                                    ),
+                                    (int) $syncPausedDifference/60,
+                                );
+                            }
+                        ?>
                     </p>
                 </div>
             </div>

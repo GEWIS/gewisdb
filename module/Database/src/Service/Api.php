@@ -10,6 +10,7 @@ use DateTime;
 use Report\Mapper\Member as ReportMemberMapper;
 
 use function array_map;
+use function is_string;
 
 class Api
 {
@@ -73,11 +74,34 @@ class Api
         return $this->getReportMemberMapper()->findSimple($id)?->toArrayApi($additionalProperties);
     }
 
+    /**
+     * @return array{
+     *     syncPaused: bool,
+     *     syncPausedUntil: ?DateTime,
+     * }
+     */
+    public function getFrontpageData(): array
+    {
+        return [
+            'syncPaused' => $this->isSyncPaused(),
+            'syncPausedUntil' => $this->getSyncPausedUntil(),
+        ];
+    }
+
     public function isSyncPaused(): bool
     {
-        $syncPausedUntil = $this->configService->getConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
+        return $this->getSyncPausedUntil() > new DateTime();
+    }
 
-        return $syncPausedUntil > new DateTime();
+    private function getSyncPausedUntil(): ?DateTime
+    {
+        $pausedUntil = $this->configService->getConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
+
+        if (is_string($pausedUntil)) {
+            return null;
+        }
+
+        return $pausedUntil;
     }
 
     /**
