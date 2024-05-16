@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Service\Factory;
 
+use Application\Service\Config as ConfigService;
 use Database\Service\Api as ApiService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
@@ -19,9 +20,12 @@ class ApiFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): ApiService {
-        /** @var ReportMemberMapper $reportMemberMapper */
         $reportMemberMapper = $container->get(ReportMemberMapper::class);
+        $configService = $container->get(ConfigService::class);
 
-        return new ApiService($reportMemberMapper);
+        return new ApiService(
+            $reportMemberMapper,
+            $configService,
+        );
     }
 }

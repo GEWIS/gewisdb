@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Database\Controller\Factory;
 
-use Application\Service\Config as ConfigService;
 use Database\Controller\ApiController;
 use Database\Service\Api as ApiService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -23,12 +22,10 @@ class ApiControllerFactory implements FactoryInterface
     ): ApiController {
         $apiService = $container->get(ApiService::class);
         $apiAuthService = $container->get(ApiAuthenticationService::class);
-        $configService = $container->get(ConfigService::class);
 
         return new ApiController(
             $apiService,
             $apiAuthService,
-            $configService,
         );
     }
 }

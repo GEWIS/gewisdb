@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace Database\Service;
 
+use Application\Model\Enums\ConfigNamespaces;
+use Application\Service\Config as ConfigService;
+use DateTime;
 use Report\Mapper\Member as ReportMemberMapper;
 
 use function array_map;
 
 class Api
 {
-    public function __construct(private readonly ReportMemberMapper $reportMemberMapper)
-    {
+    public function __construct(
+        private readonly ReportMemberMapper $reportMemberMapper,
+        private readonly ConfigService $configService,
+    ) {
     }
 
     /**
@@ -66,6 +71,13 @@ class Api
         array $additionalProperties,
     ): ?array {
         return $this->getReportMemberMapper()->findSimple($id)?->toArrayApi($additionalProperties);
+    }
+
+    public function isSyncPaused(): bool
+    {
+        $syncPausedUntil = $this->configService->getConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
+
+        return $syncPausedUntil > new DateTime();
     }
 
     /**
