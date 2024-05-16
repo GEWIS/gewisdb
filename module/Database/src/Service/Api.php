@@ -11,6 +11,7 @@ use Report\Mapper\Member as ReportMemberMapper;
 
 use function array_map;
 use function is_string;
+use function max;
 
 class Api
 {
@@ -86,6 +87,24 @@ class Api
             'syncPaused' => $this->isSyncPaused(),
             'syncPausedUntil' => $this->getSyncPausedUntil(),
         ];
+    }
+
+    /**
+     * Flag to other applications using GEWISDB API that they should wait with syncing
+     */
+    public function pauseSync(int $minutes): void
+    {
+        $syncPausedUntil = max(
+            $this->getSyncPausedUntil(),
+            (new DateTime())->modify('+' . $minutes . ' minutes'),
+        );
+
+        $this->configService->setConfig(ConfigNamespaces::DatabaseApi, 'sync_paused', $syncPausedUntil);
+    }
+
+    public function resumeSyncNow(): void
+    {
+        $this->configService->unsetConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
     }
 
     public function isSyncPaused(): bool
