@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 17:34+0100\n"
+"POT-Creation-Date: 2024-05-16 22:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -200,6 +200,10 @@ msgid "Are you sure that you are younger than 10 years?"
 msgstr "Weet je zeker dat je jonger bent dan 10 jaar?"
 
 #, php-format
+msgid "Are you sure that you want to delete decision %s %d.%d.%d?"
+msgstr "Weet je zeker dat je besluit %s %d.%d.%d wilt verwijderen?"
+
+#, php-format
 msgid "Are you sure that you want to delete the %s mailing list?"
 msgstr "Weet je zeker dat je de %s mailinglijst wilt verwijderen?"
 
@@ -230,10 +234,6 @@ msgstr ""
 #, php-format
 msgid "Are you sure you want to delete member %s?"
 msgstr "Weet je zeker dat je lid %s wilt verwijderen?"
-
-#, php-format
-msgid "Are your sure that you want to delete decision %s %d.%d.%d?"
-msgstr "Weet je zeker dat je besluit %s %d.%d.%d wilt verwijderen?"
 
 msgid "Articles of Association, Internal Regulations and privacy statement"
 msgstr "Statuten, huishoudelijk reglement en privacystatement"
@@ -683,6 +683,9 @@ msgstr "Verkrijger"
 
 msgid "Hide Member"
 msgstr "Lid verbergen"
+
+msgid "Home"
+msgstr "Home"
 
 msgid "Home Address (Parents)"
 msgstr "Thuisadres (ouders)"
@@ -1194,6 +1197,20 @@ msgstr "%s succesvol verwijderd!"
 
 msgid "Supremum"
 msgstr "Supremum"
+
+msgid "Synchronisation paused"
+msgstr "Synchronisatie gepauzeeerd"
+
+#, php-format
+msgid ""
+"Synchronisation with other systems is paused and will resume in %d minutes."
+msgstr ""
+"Synchronisatie met andere systemen is onderbroken en wordt hervat over %d "
+"minuten."
+
+#, php-format
+msgid "Synchronisation with other systems is paused until %s."
+msgstr "Synchronisatie met andere systemen is onderbroken tot %s."
 
 msgid "TU/e Data"
 msgstr "TU/e gegevens"
