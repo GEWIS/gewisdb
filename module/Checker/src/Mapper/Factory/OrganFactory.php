@@ -19,7 +19,7 @@ class OrganFactory implements FactoryInterface
         ?array $options = null,
     ): OrganMapper {
         return new OrganMapper(
-            $container->get('database_doctrine_em'),
+            $container->get('doctrine.entitymanager.orm_default'),
         );
     }
 }

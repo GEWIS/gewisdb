@@ -18,6 +18,6 @@ class InstallationFunctionFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): InstallationFunctionMapper {
-        return new InstallationFunctionMapper($container->get('database_doctrine_em'));
+        return new InstallationFunctionMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

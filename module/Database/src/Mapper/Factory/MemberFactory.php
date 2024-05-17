@@ -18,6 +18,6 @@ class MemberFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): MemberMapper {
-        return new MemberMapper($container->get('database_doctrine_em'));
+        return new MemberMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

@@ -487,13 +487,13 @@ class Module
                 ///////////////////////////////////////////////////////////////////////////
                 'database_hydrator_default' => static function (ContainerInterface $container) {
                     return new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                 },
                 'database_hydrator_address' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('type', new AddressHydratorStrategy());
@@ -503,7 +503,7 @@ class Module
                 },
                 'database_hydrator_meeting' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('type', new MeetingHydratorStrategy());
@@ -512,7 +512,7 @@ class Module
                 },
                 'database_hydrator_subdecision' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
@@ -521,7 +521,7 @@ class Module
                 },
                 'database_hydrator_decision' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
@@ -548,11 +548,6 @@ class Module
                     $transport->setOptions(new $optionsClass($config['options']));
 
                     return $transport;
-                },
-                // fake 'alias' for entity manager, because doctrine uses an abstract factory
-                // and aliases don't work with abstract factories
-                'database_doctrine_em' => static function (ContainerInterface $container) {
-                    return $container->get('doctrine.entitymanager.orm_default');
                 },
             ],
             'shared' => [

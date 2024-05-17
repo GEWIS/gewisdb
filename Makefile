@@ -91,8 +91,6 @@ copyconf:
 copyprodconf:
 		@cp config/autoload/local.production.php.dist config/autoload/local.php
 		@cp config/autoload/doctrine.local.production.php.dist config/autoload/doctrine.local.php
-		@cp config/autoload/local.test.php.dist config/autoload/local.test.php
-		@cp config/autoload/doctrine.local.test.php.dist config/autoload/doctrine.local.test.php
 
 phpstan:
 		@docker compose exec web echo "" > phpstan/phpstan-baseline-pr.neon

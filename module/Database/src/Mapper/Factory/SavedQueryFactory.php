@@ -18,6 +18,6 @@ class SavedQueryFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): SavedQueryMapper {
-        return new SavedQueryMapper($container->get('database_doctrine_em'));
+        return new SavedQueryMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

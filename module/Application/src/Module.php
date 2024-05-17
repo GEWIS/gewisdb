@@ -73,7 +73,7 @@ class Module
         /** @var ServiceManager $container */
         $container = $event->getParam('ServiceManager');
         /** @var EntityManager $entityManager */
-        $entityManager = $container->get('database_doctrine_em');
+        $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $eventManager = $entityManager->getEventManager();
         $eventManager->addEventListener([Events::postPersist], $container->get(DatabaseUpdateListener::class));
         $eventManager->addEventListener([Events::postUpdate], $container->get(DatabaseUpdateListener::class));

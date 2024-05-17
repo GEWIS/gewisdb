@@ -18,6 +18,6 @@ class ApiPrincipalMapperFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): ApiPrincipalMapper {
-        return new ApiPrincipalMapper($container->get('database_doctrine_em'));
+        return new ApiPrincipalMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

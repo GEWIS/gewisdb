@@ -19,7 +19,7 @@ class InstallationFactory implements FactoryInterface
         ?array $options = null,
     ): InstallationMapper {
         return new InstallationMapper(
-            $container->get('database_doctrine_em'),
+            $container->get('doctrine.entitymanager.orm_default'),
         );
     }
 }
