@@ -15,6 +15,7 @@ use Application\Service\FileStorage as FileStorageService;
 use Application\View\Helper\FileUrl;
 use Application\View\Helper\IsModuleActive;
 use Application\View\Helper\NotificationCount;
+use Database\Service\FrontPage as FrontPageService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Laminas\EventManager\EventInterface;
@@ -169,7 +170,7 @@ class Module
                     return new IsModuleActive($container);
                 },
                 'getNotificationCount' => static function (ContainerInterface $container) {
-                    return new NotificationCount($container);
+                    return new NotificationCount($container->get(FrontPageService::class));
                 },
             ],
         ];

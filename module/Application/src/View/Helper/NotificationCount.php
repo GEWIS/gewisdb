@@ -6,11 +6,10 @@ namespace Application\View\Helper;
 
 use Database\Service\FrontPage as FrontPageService;
 use Laminas\View\Helper\AbstractHelper;
-use Psr\Container\ContainerInterface;
 
 class NotificationCount extends AbstractHelper
 {
-    public function __construct(protected readonly ContainerInterface $container)
+    public function __construct(protected readonly FrontPageService $frontPageService)
     {
     }
 
@@ -19,8 +18,6 @@ class NotificationCount extends AbstractHelper
      */
     public function __invoke(): int
     {
-        $frontPageService = $this->container->get(FrontPageService::class);
-
-        return $frontPageService->getNotificationCount();
+        return $this->frontPageService->getNotificationCount();
     }
 }

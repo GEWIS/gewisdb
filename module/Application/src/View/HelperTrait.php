@@ -20,6 +20,7 @@ use Laminas\Mvc\Plugin\FlashMessenger\View\HelperTrait as FlashMessengerHelperTr
  *
  * @method string bootstrapElementError(ElementInterface $element)
  * @method string fileUrl(string $path)
+ * @method int getNotificationCount()
  * @method bool moduleIsActive(array $condition)
  */
 trait HelperTrait
