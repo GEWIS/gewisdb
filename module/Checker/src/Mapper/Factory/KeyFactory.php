@@ -19,7 +19,7 @@ class KeyFactory implements FactoryInterface
         ?array $options = null,
     ): KeyMapper {
         return new KeyMapper(
-            $container->get('database_doctrine_em'),
+            $container->get('doctrine.entitymanager.orm_default'),
         );
     }
 }

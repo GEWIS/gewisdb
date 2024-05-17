@@ -18,6 +18,6 @@ class CheckoutSessionFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): PaymentMapper {
-        return new PaymentMapper($container->get('database_doctrine_em'));
+        return new PaymentMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

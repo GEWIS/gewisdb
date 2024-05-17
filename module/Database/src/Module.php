@@ -98,12 +98,14 @@ use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
+use Database\Service\Factory\FrontPageFactory as FrontPageServiceFactory;
 use Database\Service\Factory\InstallationFunctionFactory as InstallationFunctionServiceFactory;
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
 use Database\Service\Factory\MemberFactory as MemberServiceFactory;
 use Database\Service\Factory\QueryFactory as QueryServiceFactory;
 use Database\Service\Factory\StripeFactory as StripeServiceFactory;
+use Database\Service\FrontPage as FrontPageService;
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Meeting as MeetingService;
@@ -151,6 +153,7 @@ class Module
                 DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
+                FrontPageService::class => FrontPageServiceFactory::class,
                 InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
@@ -185,7 +188,6 @@ class Module
                         $container->get(MvcTranslator::class),
                     );
                     $form->setHydrator($container->get('database_hydrator_default'));
-                    $form->setLists($container->get(MailingListMapper::class)->findAllOnForm());
 
                     return $form;
                 },
@@ -484,13 +486,13 @@ class Module
                 ///////////////////////////////////////////////////////////////////////////
                 'database_hydrator_default' => static function (ContainerInterface $container) {
                     return new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                 },
                 'database_hydrator_address' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('type', new AddressHydratorStrategy());
@@ -500,7 +502,7 @@ class Module
                 },
                 'database_hydrator_meeting' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('type', new MeetingHydratorStrategy());
@@ -509,7 +511,7 @@ class Module
                 },
                 'database_hydrator_subdecision' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
@@ -518,7 +520,7 @@ class Module
                 },
                 'database_hydrator_decision' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineObject(
-                        $container->get('database_doctrine_em'),
+                        $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                     $hydrator->addStrategy('meeting_type', new MeetingHydratorStrategy());
@@ -545,11 +547,6 @@ class Module
                     $transport->setOptions(new $optionsClass($config['options']));
 
                     return $transport;
-                },
-                // fake 'alias' for entity manager, because doctrine uses an abstract factory
-                // and aliases don't work with abstract factories
-                'database_doctrine_em' => static function (ContainerInterface $container) {
-                    return $container->get('doctrine.entitymanager.orm_default');
                 },
             ],
             'shared' => [

@@ -980,8 +980,17 @@ class Member
                 'total' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
                 'paid' => count($this->getProspectiveMemberMapper()->search('', 'paid')),
             ],
-            'updates' => $this->getMemberUpdateMapper()->getRepository()->count([]),
+            'updates' => $this->getPendingUpdateCount(),
         ];
+    }
+
+    /**
+     * The number of pending member updates, a separate function to make sure we don't have to do a lot
+     * of database queries for each page.
+     */
+    public function getPendingUpdateCount(): int
+    {
+        return $this->getMemberUpdateMapper()->getRepository()->count([]);
     }
 
     /**
@@ -1154,6 +1163,8 @@ class Member
      */
     public function getMemberForm(): MemberForm
     {
+        $this->memberForm->setLists($this->mailingListMapper->findAllOnForm());
+
         return $this->memberForm;
     }
 

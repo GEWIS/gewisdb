@@ -18,6 +18,6 @@ class AuditFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): AuditMapper {
-        return new AuditMapper($container->get('database_doctrine_em'));
+        return new AuditMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

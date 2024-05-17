@@ -18,6 +18,6 @@ class MemberUpdateFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): MemberUpdateMapper {
-        return new MemberUpdateMapper($container->get('database_doctrine_em'));
+        return new MemberUpdateMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

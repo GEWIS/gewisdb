@@ -8,6 +8,7 @@ use Application\Model\Enums\MeetingTypes;
 use Database\Form\AbstractDecision as AbstractDecisionForm;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
 use Database\Model\Meeting as MeetingModel;
+use Database\Service\Api as ApiService;
 use Database\Service\Meeting as MeetingService;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Laminas\Http\Response;
@@ -20,6 +21,7 @@ use function array_map;
 class MeetingController extends AbstractActionController
 {
     public function __construct(
+        private readonly ApiService $apiService,
         private readonly MeetingService $meetingService,
         private readonly MemberFunctionFieldset $memberFunctionFieldset,
     ) {
@@ -162,6 +164,9 @@ class MeetingController extends AbstractActionController
             return $this->redirect()->toRoute('meeting');
         }
 
+        /** If we are entering a decision, we pause sync for a while */
+        $this->apiService->pauseSync(15);
+
         return match ($this->params()->fromRoute('form')) {
             'budget' => new ViewModel(
                 $this->meetingService->budgetDecision($this->getRequest()->getPost()->toArray()),
@@ -224,6 +229,9 @@ class MeetingController extends AbstractActionController
                         $decision,
                     )
                 ) {
+                    /** If a decision was deleted, pause sync */
+                    $this->apiService->pauseSync(60);
+
                     return new ViewModel([
                         'type' => $type,
                         'number' => $number,

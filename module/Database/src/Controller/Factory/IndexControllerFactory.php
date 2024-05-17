@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Controller\Factory;
 
 use Database\Controller\IndexController;
-use Database\Service\Member as MemberService;
+use Database\Service\FrontPage as FrontPageService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
@@ -19,9 +19,8 @@ class IndexControllerFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): IndexController {
-        /** @var MemberService $memberService */
-        $memberService = $container->get(MemberService::class);
+        $frontPageService = $container->get(FrontPageService::class);
 
-        return new IndexController($memberService);
+        return new IndexController($frontPageService);
     }
 }

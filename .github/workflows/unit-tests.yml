@@ -19,13 +19,13 @@ jobs:
 
         steps:
             -   name: Checkout
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: '8.3'
-                    extensions: calendar, curl, intl, opcache, pgsql, pdo_pgsql, zip, memcached, xdebug
+                    extensions: calendar, curl, intl, opcache, pdo_sqlite, sqlite3, zip, memcached
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -36,9 +36,8 @@ jobs:
             -   name: Extract configuration files
                 run: |
                     cp config/autoload/doctrine.local.development.php.dist config/autoload/doctrine.local.php
+                    cp config/autoload/laminas-developer-tools.local.php.dist config/autoload/laminas-developer-tools.local.php
                     cp config/autoload/local.development.php.dist config/autoload/local.php
-                    cp config/autoload/doctrine.local.test.php.dist config/autoload/doctrine.local.test.php
-                    cp config/autoload/local.test.php.dist config/autoload/local.test.php
 
             -   name: Load environment variables
                 uses: c-py/action-dotenv-to-setenv@v3

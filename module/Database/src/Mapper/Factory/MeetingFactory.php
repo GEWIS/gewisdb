@@ -18,6 +18,6 @@ class MeetingFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): MeetingMapper {
-        return new MeetingMapper($container->get('database_doctrine_em'));
+        return new MeetingMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

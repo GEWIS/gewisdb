@@ -213,7 +213,7 @@ return [
         ],
         'authentication' => [
             'orm_default' => [
-                'object_manager' => 'database_doctrine_em',
+                'object_manager' => 'doctrine.entitymanager.orm_default',
                 'identity_class' => User::class,
                 'identity_property' => 'login',
                 'credential_property' => 'password',

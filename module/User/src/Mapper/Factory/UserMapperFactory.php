@@ -18,6 +18,6 @@ class UserMapperFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): UserMapper {
-        return new UserMapper($container->get('database_doctrine_em'));
+        return new UserMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

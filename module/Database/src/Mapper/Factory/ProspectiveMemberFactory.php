@@ -18,6 +18,6 @@ class ProspectiveMemberFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): ProspectiveMemberMapper {
-        return new ProspectiveMemberMapper($container->get('database_doctrine_em'));
+        return new ProspectiveMemberMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

@@ -18,6 +18,6 @@ class MailingListFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): MailingListMapper {
-        return new MailingListMapper($container->get('database_doctrine_em'));
+        return new MailingListMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

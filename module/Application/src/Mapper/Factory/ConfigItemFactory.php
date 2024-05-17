@@ -18,6 +18,6 @@ class ConfigItemFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): ConfigItemMapper {
-        return new ConfigItemMapper($container->get('database_doctrine_em'));
+        return new ConfigItemMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

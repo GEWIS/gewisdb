@@ -18,6 +18,6 @@ class ActionLinkFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): ActionLinkMapper {
-        return new ActionLinkMapper($container->get('database_doctrine_em'));
+        return new ActionLinkMapper($container->get('doctrine.entitymanager.orm_default'));
     }
 }

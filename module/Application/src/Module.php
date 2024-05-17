@@ -14,6 +14,8 @@ use Application\Service\Factory\FileStorageFactory as FileStorageServiceFactory;
 use Application\Service\FileStorage as FileStorageService;
 use Application\View\Helper\FileUrl;
 use Application\View\Helper\IsModuleActive;
+use Application\View\Helper\NotificationCount;
+use Database\Service\FrontPage as FrontPageService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Laminas\EventManager\EventInterface;
@@ -70,7 +72,7 @@ class Module
         /** @var ServiceManager $container */
         $container = $event->getParam('ServiceManager');
         /** @var EntityManager $entityManager */
-        $entityManager = $container->get('database_doctrine_em');
+        $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $eventManager = $entityManager->getEventManager();
         $eventManager->addEventListener([Events::postPersist], $container->get(DatabaseUpdateListener::class));
         $eventManager->addEventListener([Events::postUpdate], $container->get(DatabaseUpdateListener::class));
@@ -165,6 +167,9 @@ class Module
                 },
                 'isModuleActive' => static function (ContainerInterface $container) {
                     return new IsModuleActive($container);
+                },
+                'getNotificationCount' => static function (ContainerInterface $container) {
+                    return new NotificationCount($container->get(FrontPageService::class));
                 },
             ],
         ];
