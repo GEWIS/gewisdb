@@ -52,8 +52,7 @@ class Module
 
         $locale = $this->determineLocale($e);
 
-        $serviceManager = $e->getApplication()->getServiceManager();
-        $mvcTranslator = $serviceManager->get(MvcTranslator::class);
+        $mvcTranslator = $e->getApplication()->getServiceManager()->get(MvcTranslator::class);
         $translator = $mvcTranslator->getTranslator();
         if ($translator instanceof I18nTranslator) {
             $translator->setlocale($locale);

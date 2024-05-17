@@ -12,12 +12,11 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var int $prospectives
  * @var int $updates
  * @var bool $syncPaused
- * @var DateTime $syncPausedUntil
+ * @var ?DateTime $syncPausedUntil
  * @var int $totalCount
  */
 
 $twoColumnMode = $totalCount > 0;
-$syncPausedDifference = $syncPausedUntil->getTimestamp() - (new DateTime())->getTimestamp();
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -68,13 +67,14 @@ $syncPausedDifference = $syncPausedUntil->getTimestamp() - (new DateTime())->get
             </div>
         </div>
     <?php endif; ?>
-    <?php if ($syncPaused): ?>
+    <?php if ($syncPaused && null !== $syncPausedUntil): ?>
         <div class="col-md-4">
             <div class="panel panel-info">
                 <div class="panel-heading"><?= $this->translate('Synchronisation paused') ?></div>
                 <div class="panel-body">
                     <p>
                         <?php
+                            $syncPausedDifference = $syncPausedUntil->getTimestamp() - (new DateTime())->getTimestamp();
                             if ($syncPausedDifference > 3600) {
                                 echo sprintf(
                                     $this->translate(
