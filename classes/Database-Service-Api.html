@@ -268,7 +268,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -299,6 +299,12 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Database-Service-Api.html#property_configService">$configService</a>
+    <span>
+                        &nbsp;: <a href="classes/Application-Service-Config.html"><abbr title="\Application\Service\Config">Config</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Database-Service-Api.html#property_reportMemberMapper">$reportMemberMapper</a>
     <span>
                         &nbsp;: <a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a>            </span>
@@ -326,6 +332,12 @@
 <dd>Get active members and inactive fraternity members.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Service-Api.html#method_getFrontpageData">getFrontpageData()</a>
+    <span>
+                                &nbsp;: <abbr title="array{syncPaused: bool, syncPausedUntil: ?\DateTime}">DateTime}</abbr>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Database-Service-Api.html#method_getMember">getMember()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
@@ -339,12 +351,37 @@
 </dt>
 <dd>Get normal members.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Service-Api.html#method_isSyncPaused">isSyncPaused()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Service-Api.html#method_pauseSync">pauseSync()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Flag to other applications using GEWISDB API that they should wait with syncing</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Database-Service-Api.html#method_resumeSyncNow">resumeSyncNow()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Database-Service-Api.html#method_getReportMemberMapper">getReportMemberMapper()</a>
     <span>
                                 &nbsp;: <a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a>    </span>
 </dt>
 <dd>Get the member mapper.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Database-Service-Api.html#method_getSyncPausedUntil">getSyncPausedUntil()</a>
+    <span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null    </span>
+</dt>
 
     </dl>
 
@@ -367,6 +404,39 @@
             -private
                                                 -read-only        "
 >
+    <h4 class="phpdocumentor-element__name" id="property_configService">
+        $configService
+        <a href="classes/Database-Service-Api.html#property_configService" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Application-Service-Config.html"><abbr title="\Application\Service\Config">Config</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$configService</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only        "
+>
     <h4 class="phpdocumentor-element__name" id="property_reportMemberMapper">
         $reportMemberMapper
         <a href="classes/Database-Service-Api.html#property_reportMemberMapper" class="headerlink"><i class="fas fa-link"></i></a>
@@ -377,7 +447,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -415,14 +485,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reportMemberMapper</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reportMemberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Service-Config.html"><abbr title="\Application\Service\Config">Config</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$configService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -432,6 +502,13 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$reportMemberMapper</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$configService</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Service-Config.html"><abbr title="\Application\Service\Config">Config</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -456,7 +533,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -521,6 +598,41 @@ their inactive fraternity membership still gets returned as organ membership</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getFrontpageData">
+        getFrontpageData()
+        <a href="classes/Database-Service-Api.html#method_getFrontpageData" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getFrontpageData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{syncPaused: bool, syncPausedUntil: ?\DateTime}">DateTime}</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{syncPaused: bool, syncPausedUntil: ?\DateTime}">DateTime}</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getMember">
         getMember()
         <a href="classes/Database-Service-Api.html#method_getMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -529,7 +641,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -598,7 +710,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -649,6 +761,114 @@ their inactive fraternity membership still gets returned as organ membership</p>
                     <article
         class="phpdocumentor-element
             -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isSyncPaused">
+        isSyncPaused()
+        <a href="classes/Database-Service-Api.html#method_isSyncPaused" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">110</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isSyncPaused</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_pauseSync">
+        pauseSync()
+        <a href="classes/Database-Service-Api.html#method_pauseSync" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">95</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Flag to other applications using GEWISDB API that they should wait with syncing</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">pauseSync</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$minutes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$minutes</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_resumeSyncNow">
+        resumeSyncNow()
+        <a href="classes/Database-Service-Api.html#method_resumeSyncNow" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">105</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">resumeSyncNow</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -private
                                                         "
 >
@@ -660,7 +880,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 
     </aside>
 
@@ -679,6 +899,41 @@ their inactive fraternity membership still gets returned as organ membership</p>
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Report-Mapper-Member.html"><abbr title="\Report\Mapper\Member">Member</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSyncPausedUntil">
+        getSyncPausedUntil()
+        <a href="classes/Database-Service-Api.html#method_getSyncPausedUntil" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">115</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getSyncPausedUntil</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span>
             </section>
 
 </article>
@@ -795,6 +1050,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/Database-Service-Api.html#property_configService">$configService<a href="classes/Database-Service-Api.html"></li>
                                                     <li><a href="classes/Database-Service-Api.html#property_reportMemberMapper">$reportMemberMapper<a href="classes/Database-Service-Api.html"></li>
                                             </ul>
                 </li>
@@ -804,9 +1060,14 @@ their inactive fraternity membership still gets returned as organ membership</p>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Database-Service-Api.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/Database-Service-Api.html#method_getActiveMembers">getActiveMembers()</a></li>
+                                            <li><a href="classes/Database-Service-Api.html#method_getFrontpageData">getFrontpageData()</a></li>
                                             <li><a href="classes/Database-Service-Api.html#method_getMember">getMember()</a></li>
                                             <li><a href="classes/Database-Service-Api.html#method_getMembers">getMembers()</a></li>
+                                            <li><a href="classes/Database-Service-Api.html#method_isSyncPaused">isSyncPaused()</a></li>
+                                            <li><a href="classes/Database-Service-Api.html#method_pauseSync">pauseSync()</a></li>
+                                            <li><a href="classes/Database-Service-Api.html#method_resumeSyncNow">resumeSyncNow()</a></li>
                                             <li><a href="classes/Database-Service-Api.html#method_getReportMemberMapper">getReportMemberMapper()</a></li>
+                                            <li><a href="classes/Database-Service-Api.html#method_getSyncPausedUntil">getSyncPausedUntil()</a></li>
                                     </ul>
             </li>
                     </ul>

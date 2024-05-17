@@ -1751,6 +1751,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-View-Helper-IsModuleActive.html#property_container"
         },                {
+            "fqsen": "\\Application\\View\\Helper\\NotificationCount",
+            "name": "NotificationCount",
+            "summary": "",
+            "url": "classes/Application-View-Helper-NotificationCount.html"
+        },                {
+            "fqsen": "\\Application\\View\\Helper\\NotificationCount\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Application-View-Helper-NotificationCount.html#method___construct"
+        },                {
+            "fqsen": "\\Application\\View\\Helper\\NotificationCount\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "Get\u0020the\u0020current\u0020number\u0020of\u0020notifications.",
+            "url": "classes/Application-View-Helper-NotificationCount.html#method___invoke"
+        },                {
+            "fqsen": "\\Application\\View\\Helper\\NotificationCount\u003A\u003A\u0024frontPageService",
+            "name": "frontPageService",
+            "summary": "",
+            "url": "classes/Application-View-Helper-NotificationCount.html#property_frontPageService"
+        },                {
             "fqsen": "\\Application\\View\\HelperTrait",
             "name": "HelperTrait",
             "summary": "Helper\u0020trait\u0020for\u0020auto\u002Dcompletion\u0020of\u0020code\u0020in\u0020modern\u0020IDEs.",
@@ -1846,6 +1866,11 @@ Search.appendIndex(
             "summary": "Variation\u0020of\u0020\u007B\u0040link\u0020Application\u003A\u003Ainit\u007D\u0020but\u0020without\u0020initial\u0020bootstrapping.",
             "url": "classes/ApplicationTest-BaseControllerTrait.html#method_initServiceManager"
         },                {
+            "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003AprepareDoctrine\u0028\u0029",
+            "name": "prepareDoctrine",
+            "summary": "",
+            "url": "classes/ApplicationTest-BaseControllerTrait.html#method_prepareDoctrine"
+        },                {
             "fqsen": "\\ApplicationTest\\BaseControllerTrait\u003A\u003AbootstrapApplication\u0028\u0029",
             "name": "bootstrapApplication",
             "summary": "",
@@ -1870,6 +1895,11 @@ Search.appendIndex(
             "name": "getConfig",
             "summary": "",
             "url": "classes/ApplicationTest-TestConfigProvider.html#method_getConfig"
+        },                {
+            "fqsen": "\\ApplicationTest\\TestConfigProvider\u003A\u003AoverrideConfig\u0028\u0029",
+            "name": "overrideConfig",
+            "summary": "",
+            "url": "classes/ApplicationTest-TestConfigProvider.html#method_overrideConfig"
         },                {
             "fqsen": "\\Checker\\Command\\AbstractCheckerCommand",
             "name": "AbstractCheckerCommand",
@@ -3281,11 +3311,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Controller-ApiController.html#property_apiAuthService"
         },                {
-            "fqsen": "\\Database\\Controller\\ApiController\u003A\u003A\u0024configService",
-            "name": "configService",
-            "summary": "",
-            "url": "classes/Database-Controller-ApiController.html#property_configService"
-        },                {
             "fqsen": "\\Database\\Controller\\ExportController",
             "name": "ExportController",
             "summary": "",
@@ -3411,10 +3436,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Controller-IndexController.html#method_indexAction"
         },                {
-            "fqsen": "\\Database\\Controller\\IndexController\u003A\u003A\u0024memberService",
-            "name": "memberService",
+            "fqsen": "\\Database\\Controller\\IndexController\u003A\u003A\u0024frontPageService",
+            "name": "frontPageService",
             "summary": "",
-            "url": "classes/Database-Controller-IndexController.html#property_memberService"
+            "url": "classes/Database-Controller-IndexController.html#property_frontPageService"
         },                {
             "fqsen": "\\Database\\Controller\\MeetingController",
             "name": "MeetingController",
@@ -3470,6 +3495,11 @@ Search.appendIndex(
             "name": "searchDecisionAction",
             "summary": "Search\u0020action\u0020for\u0020decisions.",
             "url": "classes/Database-Controller-MeetingController.html#method_searchDecisionAction"
+        },                {
+            "fqsen": "\\Database\\Controller\\MeetingController\u003A\u003A\u0024apiService",
+            "name": "apiService",
+            "summary": "",
+            "url": "classes/Database-Controller-MeetingController.html#property_apiService"
         },                {
             "fqsen": "\\Database\\Controller\\MeetingController\u003A\u003A\u0024meetingService",
             "name": "meetingService",
@@ -8461,6 +8491,31 @@ Search.appendIndex(
             "summary": "Get\u0020normal\u0020members.",
             "url": "classes/Database-Service-Api.html#method_getMember"
         },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003AgetFrontpageData\u0028\u0029",
+            "name": "getFrontpageData",
+            "summary": "",
+            "url": "classes/Database-Service-Api.html#method_getFrontpageData"
+        },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003ApauseSync\u0028\u0029",
+            "name": "pauseSync",
+            "summary": "Flag\u0020to\u0020other\u0020applications\u0020using\u0020GEWISDB\u0020API\u0020that\u0020they\u0020should\u0020wait\u0020with\u0020syncing",
+            "url": "classes/Database-Service-Api.html#method_pauseSync"
+        },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003AresumeSyncNow\u0028\u0029",
+            "name": "resumeSyncNow",
+            "summary": "",
+            "url": "classes/Database-Service-Api.html#method_resumeSyncNow"
+        },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003AisSyncPaused\u0028\u0029",
+            "name": "isSyncPaused",
+            "summary": "",
+            "url": "classes/Database-Service-Api.html#method_isSyncPaused"
+        },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003AgetSyncPausedUntil\u0028\u0029",
+            "name": "getSyncPausedUntil",
+            "summary": "",
+            "url": "classes/Database-Service-Api.html#method_getSyncPausedUntil"
+        },                {
             "fqsen": "\\Database\\Service\\Api\u003A\u003AgetReportMemberMapper\u0028\u0029",
             "name": "getReportMemberMapper",
             "summary": "Get\u0020the\u0020member\u0020mapper.",
@@ -8471,6 +8526,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Api.html#property_reportMemberMapper"
         },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003A\u0024configService",
+            "name": "configService",
+            "summary": "",
+            "url": "classes/Database-Service-Api.html#property_configService"
+        },                {
             "fqsen": "\\Database\\Service\\Factory\\ApiFactory",
             "name": "ApiFactory",
             "summary": "",
@@ -8480,6 +8540,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Database-Service-Factory-ApiFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\FrontPageFactory",
+            "name": "FrontPageFactory",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-FrontPageFactory.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\FrontPageFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-FrontPageFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Service\\Factory\\InstallationFunctionFactory",
             "name": "InstallationFunctionFactory",
@@ -8540,6 +8610,36 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Database-Service-Factory-StripeFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Service\\FrontPage",
+            "name": "FrontPage",
+            "summary": "",
+            "url": "classes/Database-Service-FrontPage.html"
+        },                {
+            "fqsen": "\\Database\\Service\\FrontPage\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Service-FrontPage.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Service\\FrontPage\u003A\u003AgetFrontpageData\u0028\u0029",
+            "name": "getFrontpageData",
+            "summary": "",
+            "url": "classes/Database-Service-FrontPage.html#method_getFrontpageData"
+        },                {
+            "fqsen": "\\Database\\Service\\FrontPage\u003A\u003AgetNotificationCount\u0028\u0029",
+            "name": "getNotificationCount",
+            "summary": "",
+            "url": "classes/Database-Service-FrontPage.html#method_getNotificationCount"
+        },                {
+            "fqsen": "\\Database\\Service\\FrontPage\u003A\u003A\u0024apiService",
+            "name": "apiService",
+            "summary": "",
+            "url": "classes/Database-Service-FrontPage.html#property_apiService"
+        },                {
+            "fqsen": "\\Database\\Service\\FrontPage\u003A\u003A\u0024memberService",
+            "name": "memberService",
+            "summary": "",
+            "url": "classes/Database-Service-FrontPage.html#property_memberService"
         },                {
             "fqsen": "\\Database\\Service\\InstallationFunction",
             "name": "InstallationFunction",
@@ -9105,6 +9205,11 @@ Search.appendIndex(
             "name": "getFrontpageData",
             "summary": "",
             "url": "classes/Database-Service-Member.html#method_getFrontpageData"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetPendingUpdateCount\u0028\u0029",
+            "name": "getPendingUpdateCount",
+            "summary": "The\u0020number\u0020of\u0020pending\u0020member\u0020updates,\u0020a\u0020separate\u0020function\u0020to\u0020make\u0020sure\u0020we\u0020don\u0027t\u0020have\u0020to\u0020do\u0020a\u0020lot\nof\u0020database\u0020queries\u0020for\u0020each\u0020page.",
+            "url": "classes/Database-Service-Member.html#method_getPendingUpdateCount"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetPendingMemberUpdates\u0028\u0029",
             "name": "getPendingMemberUpdates",
