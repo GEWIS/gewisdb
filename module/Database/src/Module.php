@@ -188,7 +188,6 @@ class Module
                         $container->get(MvcTranslator::class),
                     );
                     $form->setHydrator($container->get('database_hydrator_default'));
-                    $form->setLists($container->get(MailingListMapper::class)->findAllOnForm());
 
                     return $form;
                 },

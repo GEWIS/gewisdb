@@ -1163,6 +1163,8 @@ class Member
      */
     public function getMemberForm(): MemberForm
     {
+        $this->memberForm->setLists($this->mailingListMapper->findAllOnForm());
+
         return $this->memberForm;
     }
 
