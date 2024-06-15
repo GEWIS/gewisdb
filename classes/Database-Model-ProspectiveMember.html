@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/application.html" class="">Application</a>
@@ -217,7 +217,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/gewisdb.html" class="">gewisdb</a>
@@ -225,14 +225,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -276,6 +276,19 @@
 
 
 
+
+
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Entity">Entity</abbr>]
+    </dt>
+    </dl>
+            </section>
 
 
 
@@ -745,7 +758,6 @@ is &#039;PAID&#039;.</dd>
 
 
 
-
         
 
         
@@ -788,6 +800,22 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_birth#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;date&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -821,6 +849,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_changedOn#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;date&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -856,6 +900,39 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_checkoutSessions#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\CheckoutSession::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $mappedBy: &#039;prospectiveMember&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $orphanRemoval: true
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $cascade: [&#039;remove&#039;]
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OrderBy">OrderBy</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        [&#039;created&#039; =&gt; &#039;ASC&#039;]
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -889,6 +966,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_city#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -924,6 +1017,25 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_country#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $enumType: \Application\Model\Enums\PostalRegions::class
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -957,6 +1069,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_email#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -992,6 +1120,22 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_firstName#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1025,6 +1169,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_initials#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1060,6 +1220,22 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_lastName#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1093,6 +1269,35 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_lidnr#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\GeneratedValue">GeneratedValue</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $strategy: &#039;AUTO&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1128,6 +1333,55 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_lists#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\InverseJoinColumn">InverseJoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;name&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;name&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;lidnr&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;lidnr&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinTable">JoinTable</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;prospective_members_mailinglists&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\ManyToMany">ManyToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\MailingList::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $inversedBy: &#039;members&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1161,6 +1415,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_middleName#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1196,6 +1466,22 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_number#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1229,6 +1515,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_paid#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1264,6 +1566,25 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_paymentLink#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToOne">OneToOne</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\PaymentLink::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $mappedBy: &#039;prospectiveMember&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1297,6 +1618,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_phone#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1332,6 +1669,22 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_postalCode#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1365,6 +1718,22 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_street#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1400,6 +1769,25 @@ is &#039;PAID&#039;.</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_study#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1433,6 +1821,25 @@ is &#039;PAID&#039;.</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-ProspectiveMember.html#property_tueUsername#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
 
 </article>
             </section>
@@ -1470,6 +1877,8 @@ is &#039;PAID&#039;.</dd>
         </div>
     
     
+    
+
     
 
     
@@ -1517,6 +1926,8 @@ is &#039;PAID&#039;.</dd>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1559,6 +1970,8 @@ is &#039;PAID&#039;.</dd>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1590,6 +2003,8 @@ manual approval, for example, when the prospective member paid with cash.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1629,6 +2044,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
@@ -1663,6 +2080,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1701,6 +2120,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
@@ -1735,6 +2156,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1772,6 +2195,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-CheckoutSession.html"><abbr title="\Database\Model\CheckoutSession">CheckoutSession</abbr></a>&gt;</span>
@@ -1807,6 +2232,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1840,6 +2267,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1878,6 +2307,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1912,6 +2343,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1950,6 +2383,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1986,6 +2421,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -2020,6 +2457,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2072,6 +2511,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
                                     </dd>
                                             </dl>
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
@@ -2106,6 +2547,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2144,6 +2587,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -2177,6 +2622,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2213,6 +2660,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2264,6 +2713,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
                                     </dd>
                                             </dl>
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null</span>
@@ -2297,6 +2748,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2334,6 +2787,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -2367,6 +2822,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2405,6 +2862,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
@@ -2439,6 +2898,8 @@ Session&#039;s state is &#039;PAID&#039; or fully &#039;EXPIRED&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2476,6 +2937,8 @@ is &#039;PAID&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -2525,6 +2988,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2563,6 +3028,8 @@ is &#039;PAID&#039;.</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -2609,6 +3076,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2647,6 +3116,8 @@ is &#039;PAID&#039;.</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -2693,6 +3164,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2731,6 +3204,8 @@ is &#039;PAID&#039;.</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -2777,6 +3252,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2815,6 +3292,8 @@ is &#039;PAID&#039;.</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -2861,6 +3340,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2903,6 +3384,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2940,6 +3423,8 @@ is &#039;PAID&#039;.</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -2986,6 +3471,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3028,6 +3515,8 @@ is &#039;PAID&#039;.</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3057,6 +3546,8 @@ is &#039;PAID&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -3092,6 +3583,8 @@ is &#039;PAID&#039;.</p>
         </div>
     
     
+    
+
     
 
             <section>

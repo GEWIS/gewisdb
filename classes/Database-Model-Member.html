@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/application.html" class="">Application</a>
@@ -217,7 +217,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/gewisdb.html" class="">gewisdb</a>
@@ -225,14 +225,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -276,6 +276,19 @@
 
 
 
+
+
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Entity">Entity</abbr>]
+    </dt>
+    </dl>
+            </section>
 
 
 
@@ -902,7 +915,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
 
 
-
         
 
         
@@ -945,6 +957,28 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_addresses#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\Address::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $mappedBy: &#039;member&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $cascade: [&#039;persist&#039;, &#039;remove&#039;]
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -978,6 +1012,28 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_auditEntries#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\AuditEntry::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $mappedBy: &#039;member&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $cascade: [&#039;persist&#039;, &#039;remove&#039;]
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1013,6 +1069,25 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_authenticationKey#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1047,6 +1122,22 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_birth#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;date&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1080,6 +1171,22 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_changedOn#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;date&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1119,6 +1226,25 @@ when deleting a member and cannot be altered via the interface.</p>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_deleted#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;boolean&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $options: [&#039;default&#039; =&gt; false]
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1152,6 +1278,25 @@ when deleting a member and cannot be altered via the interface.</p>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_email#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1188,6 +1333,22 @@ happens either automatically or has to be done manually, as set forth in the byl
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_expiration#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;date&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1221,6 +1382,22 @@ happens either automatically or has to be done manually, as set forth in the byl
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_firstName#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1259,6 +1436,22 @@ a academic year, but rather a calendar year.</p>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_generation#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1296,6 +1489,25 @@ deleted members and members that are deceased but whose profile should be kept.<
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_hidden#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;boolean&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $options: [&#039;default&#039; =&gt; false]
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1330,6 +1542,22 @@ deleted members and members that are deceased but whose profile should be kept.<
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_initials#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1363,6 +1591,25 @@ deleted members and members that are deceased but whose profile should be kept.<
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_installations#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\SubDecision\Installation::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $mappedBy: &#039;member&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1399,6 +1646,22 @@ the TU/e in general, or another institution).</p>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_isStudying#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;boolean&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1432,6 +1695,25 @@ the TU/e in general, or another institution).</p>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_lastCheckedOn#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;date&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1467,6 +1749,22 @@ the TU/e in general, or another institution).</p>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_lastName#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1501,6 +1799,35 @@ the TU/e in general, or another institution).</p>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_lidnr#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\GeneratedValue">GeneratedValue</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $strategy: &#039;AUTO&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1534,6 +1861,55 @@ the TU/e in general, or another institution).</p>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_lists#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\InverseJoinColumn">InverseJoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;name&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;name&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;lidnr&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;lidnr&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinTable">JoinTable</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;members_mailinglists&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\ManyToMany">ManyToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\MailingList::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $inversedBy: &#039;members&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1571,6 +1947,25 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_membershipEndsOn#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;date&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1604,6 +1999,22 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_middleName#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1639,6 +2050,22 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_paid#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1672,6 +2099,28 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_renewalLinks#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\RenewalLink::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $mappedBy: &#039;member&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $cascade: [&#039;persist&#039;, &#039;remove&#039;]
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1707,6 +2156,25 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_study#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1741,6 +2209,25 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_supremum#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -1774,6 +2261,25 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_tueUsername#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -1819,6 +2325,25 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Member.html#property_type#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $enumType: \Application\Model\Enums\MembershipTypes::class
+    </dd>
+    </dl>
+            </section>
+
 </article>
             </section>
 
@@ -1855,6 +2380,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
     
@@ -1900,6 +2427,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1938,6 +2467,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -1986,6 +2517,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2028,6 +2561,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2060,6 +2595,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -2089,6 +2626,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2127,6 +2666,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a>&gt;</span>
@@ -2160,6 +2701,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2198,6 +2741,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
@@ -2232,6 +2777,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2270,6 +2817,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
@@ -2304,6 +2853,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2342,6 +2893,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Mail\Address">Address</abbr>|null</span>
@@ -2376,6 +2929,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2414,6 +2969,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -2448,6 +3005,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2486,6 +3045,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -2520,6 +3081,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2558,6 +3121,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -2592,6 +3157,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2630,6 +3197,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
@@ -2666,6 +3235,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span>
@@ -2700,6 +3271,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2752,6 +3325,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                     </dd>
                                             </dl>
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
@@ -2786,6 +3361,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2824,6 +3401,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span>
@@ -2858,6 +3437,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2896,6 +3477,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -2930,6 +3513,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -2968,6 +3553,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
@@ -3002,6 +3589,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -3040,6 +3629,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
@@ -3074,6 +3665,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>
@@ -3122,6 +3715,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3160,6 +3755,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3206,6 +3803,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3244,6 +3843,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3290,6 +3891,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3328,6 +3931,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3374,6 +3979,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3412,6 +4019,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3458,6 +4067,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3496,6 +4107,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3542,6 +4155,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3580,6 +4195,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3626,6 +4243,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3664,6 +4283,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3710,6 +4331,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3748,6 +4371,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3794,6 +4419,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3832,6 +4459,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3878,6 +4507,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -3916,6 +4547,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -3962,6 +4595,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -4000,6 +4635,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -4046,6 +4683,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -4075,6 +4714,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
         </div>
     
     
+    
+
     
 
             <section>

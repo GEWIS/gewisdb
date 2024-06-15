@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/application.html" class="">Application</a>
@@ -217,7 +217,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/gewisdb.html" class="">gewisdb</a>
@@ -225,14 +225,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -279,6 +279,27 @@
 
 
 
+
+
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-AuditRenewal.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\AssociationOverrides">AssociationOverrides</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        [new \Doctrine\ORM\Mapping\AssociationOverride(name: &#039;member&#039;, joinColumns: new \Doctrine\ORM\Mapping\JoinColumn(name: &#039;member&#039;, referencedColumnName: &#039;lidnr&#039;, onDelete: &#039;cascade&#039;, nullable: false))]
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Entity">Entity</abbr>]
+    </dt>
+    </dl>
+            </section>
 
 
 
@@ -535,7 +556,6 @@ Not implemented</dd>
 
 
 
-
         
 
         
@@ -578,6 +598,22 @@ Not implemented</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Trait-CreatedTrait.html#property_createdAt#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;datetime&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -611,6 +647,35 @@ Not implemented</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-AuditEntry.html#property_id#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\GeneratedValue">GeneratedValue</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $strategy: &#039;AUTO&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -662,6 +727,8 @@ Not implemented</dd>
                                     </dd>
                                             </dl>
 
+    
+
 </article>
                     <article
         class="
@@ -695,6 +762,42 @@ Not implemented</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-AuditEntry.html#property_member#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;member&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;lidnr&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $onDelete: &#039;cascade&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\ManyToOne">ManyToOne</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\Member::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $inversedBy: &#039;auditEntries&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -730,6 +833,22 @@ Not implemented</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-AuditRenewal.html#property_newExpiration#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;datetime&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -763,6 +882,22 @@ Not implemented</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-AuditRenewal.html#property_oldExpiration#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;datetime&#039;
+    </dd>
+    </dl>
+            </section>
 
 </article>
                     <article
@@ -798,6 +933,22 @@ Not implemented</dd>
     
     
 
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;datetime&#039;
+    </dd>
+    </dl>
+            </section>
+
 </article>
                     <article
         class="
@@ -831,6 +982,39 @@ Not implemented</dd>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-AuditEntry.html#property_user#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;user_id&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;id&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $onDelete: &#039;set null&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToOne">OneToOne</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \User\Model\User::class
+    </dd>
+    </dl>
+            </section>
 
 </article>
             </section>
@@ -870,6 +1054,8 @@ to always link at least one of the linkable objects. Currently only member is po
         </div>
     
     
+    
+
     
 
     
@@ -913,6 +1099,8 @@ to always link at least one of the linkable objects. Currently only member is po
 
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-AuditRenewal.html"><abbr title="\Database\Model\AuditRenewal">AuditRenewal</abbr></a></span>
@@ -946,6 +1134,8 @@ to always link at least one of the linkable objects. Currently only member is po
         </div>
     
     
+    
+
     
 
             <section>
@@ -983,6 +1173,8 @@ to always link at least one of the linkable objects. Currently only member is po
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
@@ -1016,6 +1208,8 @@ to always link at least one of the linkable objects. Currently only member is po
         </div>
     
     
+    
+
     
 
             <section>
@@ -1054,6 +1248,8 @@ to always link at least one of the linkable objects. Currently only member is po
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span>
@@ -1088,6 +1284,8 @@ to always link at least one of the linkable objects. Currently only member is po
         </div>
     
     
+    
+
     
 
             <section>
@@ -1128,6 +1326,8 @@ supplied as an argument to sprintf</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array{bodyPlain: string, bodyFormatted: string, arguments: string[]}</span>
@@ -1161,6 +1361,8 @@ supplied as an argument to sprintf</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1198,6 +1400,8 @@ supplied as an argument to sprintf</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>|null</span>
@@ -1231,6 +1435,8 @@ supplied as an argument to sprintf</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1267,6 +1473,8 @@ supplied as an argument to sprintf</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1306,6 +1514,8 @@ Not implemented</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
@@ -1340,6 +1550,19 @@ Not implemented</p>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\PrePersist">PrePersist</abbr>]
+    </dt>
+    </dl>
+            </section>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1387,6 +1610,8 @@ Not implemented</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1424,6 +1649,8 @@ Not implemented</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -1470,6 +1697,8 @@ Not implemented</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1512,6 +1741,8 @@ Not implemented</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1541,6 +1772,24 @@ Not implemented</p>
     
     
     
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\PrePersist">PrePersist</abbr>]
+    </dt>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\PreUpdate">PreUpdate</abbr>]
+    </dt>
+    </dl>
+            </section>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1588,6 +1837,8 @@ Not implemented</p>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1616,6 +1867,8 @@ Not implemented</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1654,6 +1907,8 @@ Not implemented</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1688,6 +1943,8 @@ Not implemented</p>
         </div>
     
     
+    
+
     
 
             <section>
@@ -1725,6 +1982,8 @@ Not implemented</p>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1759,6 +2018,8 @@ Not implemented</p>
         </div>
     
     
+    
+
     
 
             <section>

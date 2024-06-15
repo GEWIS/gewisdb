@@ -7438,22 +7438,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetTemplate\u0028\u0029",
             "name": "getTemplate",
-            "summary": "",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getTemplate"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetAlternativeTemplate\u0028\u0029",
             "name": "getAlternativeTemplate",
-            "summary": "",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
             "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getAlternativeTemplate"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Abrogation\u003A\u003AgetAlternativeContent\u0028\u0029",
             "name": "getAlternativeContent",
-            "summary": "",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
             "url": "classes/Database-Model-SubDecision-Abrogation.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Annulment",
@@ -7963,22 +7963,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetTemplate\u0028\u0029",
             "name": "getTemplate",
-            "summary": "",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getTemplate"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetAlternativeTemplate\u0028\u0029",
             "name": "getAlternativeTemplate",
-            "summary": "",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getAlternativeTemplate"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetAlternativeContent\u0028\u0029",
             "name": "getAlternativeContent",
-            "summary": "",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_getAlternativeContent"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003A\u0024function",
