@@ -45,7 +45,7 @@ services:
         networks:
             - gewisdb_network
     web:
-        image: abc-db.docker-registry.gewis.nl/gewisdb_web:development
+        image: abc.docker-registry.gewis.nl/db/gewisdb/web:development
         build:
             dockerfile: docker/web/development/Dockerfile
             context: .
