@@ -1,6 +1,6 @@
 services:
     nginx:
-        image: abc-db.docker-registry.gewis.nl/gewisdb_nginx:latest
+        image: abc.docker-registry.gewis.nl/db/gewisdb/nginx:latest
         env_file:
             - .env
         #        environment:
@@ -16,7 +16,7 @@ services:
         #     - "9725:9725"
         restart: unless-stopped
     web:
-        image: abc-db.docker-registry.gewis.nl/gewisdb_web:production
+        image: abc.docker-registry.gewis.nl/db/gewisdb/web:production
         env_file:
             - .env
 #        environment:
