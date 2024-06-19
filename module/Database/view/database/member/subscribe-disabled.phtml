@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ */
+?>
+<?php
+$this->headTitle()->prepend("GEWIS Registration");
+?>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="<?= $this->basePath() ?>/img/gewis.png" />
+        </div>
+        <div class="col-md-9">
+            <h1>
+                <span class="gewis-red">GEWIS</span> <?= $this->translate('Registration') ?>
+            </h1>
+            <p>
+                <?= $this->translate(
+                    // phpcs:ignore -- user-visible strings should not be split
+                    'Sadly, during the month of July we are not able to verify your enrollment at TU/e. Therefore, it is not possible to register for GEWIS at this time. <br/>We would love to welcome you as a member starting on August 1st. If you were already studying at TU/e before the summer break, please reach out to the secretary on the email address below.',
+                ) ?>
+            </p>
+            <p>
+                <?= $this->translate('If you have any questions feel free to contact') ?> <a href="mailto:board@gewis.nl">board@gewis.nl</a>.
+            </p>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ use Checker\Service\Checker as CheckerService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
+use DateTime;
 use Laminas\Http\Header\HeaderInterface;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -18,6 +19,8 @@ use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 
 use function array_map;
+use function intval;
+use function ip2long;
 use function sprintf;
 
 /**
@@ -46,6 +49,13 @@ class MemberController extends AbstractActionController
      */
     public function subscribeAction(): Response|ViewModel
     {
+        $ipMCS = isset($_SERVER['REMOTE_ADDR'])
+            && ip2long($_SERVER['REMOTE_ADDR']) >= ip2long('131.155.68.0')
+            && ip2long($_SERVER['REMOTE_ADDR']) <= ip2long('131.155.71.255');
+        if (7 === intval((new DateTime())->format('n')) && !$ipMCS) {
+            return (new ViewModel())->setTemplate('database/member/subscribe-disabled');
+        }
+
         $request = $this->getRequest();
 
         if ($request->isPost()) {

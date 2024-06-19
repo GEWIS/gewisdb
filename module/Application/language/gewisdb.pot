@@ -1060,6 +1060,14 @@ msgstr ""
 msgid "Return to registration form"
 msgstr ""
 
+msgid ""
+"Sadly, during the month of July we are not able to verify your enrollment at "
+"TU/e. Therefore, it is not possible to register for GEWIS at this time. <br/"
+">We would love to welcome you as a member starting on August 1st. If you "
+"were already studying at TU/e before the summer break, please reach out to "
+"the secretary on the email address below."
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
