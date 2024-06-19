@@ -115,7 +115,7 @@ messageblocks:
           # Each extra message has a title and some HTML content. Line-endings halfway are perfectly fine in YAML
           - title: "*Payment of Membership Fee"
             contentHTML: "
-        <p>Did you forget or fail to pay the membership fee? Then use the following link to start again: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>. Have you already paid? Then you can ignore this link! The secretary will approve your membership after your payment has been verified.</p>
+        <p>Did you forget or fail to pay the membership fee? Then use the following link to start again: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>. Have you already paid? Then you can ignore this link!<br/>The secretary will verify your details after payment and then approve your membership. If you do not receive your membership number within 3 working days, please contact the secretary.</p>
         "
 
 
