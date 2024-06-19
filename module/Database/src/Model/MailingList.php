@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Mailing List model.
@@ -51,19 +51,28 @@ class MailingList
     protected bool $defaultSub;
 
     /**
+     * The identifier of the mailing list in Mailman.
+     */
+    #[Column(
+        type: 'string',
+        unique: true,
+    )]
+    protected string $mailmanId;
+
+    /**
      * Mailing list members.
      *
-     * @var Collection<array-key, Member>
+     * @var Collection<array-key, MailingListMember>
      */
-    #[ManyToMany(
-        targetEntity: Member::class,
-        mappedBy: 'lists',
+    #[OneToMany(
+        targetEntity: MailingListMember::class,
+        mappedBy: 'mailingList',
     )]
-    protected Collection $members;
+    protected Collection $mailingListMemberships;
 
     public function __construct()
     {
-        $this->members = new ArrayCollection();
+        $this->mailingListMemberships = new ArrayCollection();
     }
 
     /**
@@ -115,22 +124,6 @@ class MailingList
     }
 
     /**
-     * Get the description.
-     */
-    public function getDescription(): string
-    {
-        return $this->getNlDescription();
-    }
-
-    /**
-     * Set the description.
-     */
-    public function setDescription(string $description): void
-    {
-        $this->setNlDescription($description);
-    }
-
-    /**
      * Get if it should be on the form.
      */
     public function getOnForm(): bool
@@ -163,20 +156,50 @@ class MailingList
     }
 
     /**
-     * Get subscribed members.
-     *
-     * @return Collection<array-key, Member>
+     * Get the identifier of the mailing list in Mailman.
      */
-    public function getMembers(): Collection
+    public function getMailmanId(): string
     {
-        return $this->members;
+        return $this->mailmanId;
     }
 
     /**
-     * Add a member.
+     * Set the identifier of the mailing list in Mailman.
      */
-    public function addMember(Member $member): void
+    public function setMailmanId(string $mailmanId): void
     {
-        $this->members->add($member);
+        $this->mailmanId = $mailmanId;
+    }
+
+    /**
+     * Get subscribed members.
+     *
+     * @return Collection<array-key, MailingListMember>
+     */
+    public function getMailingListMemberships(): Collection
+    {
+        return $this->mailingListMemberships;
+    }
+
+    /**
+     * @return array{
+     *     name: string,
+     *     nl_description: string,
+     *     en_description: string,
+     *     defaultSub: bool,
+     *     onForm: bool,
+     *     mailmanId: string,
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'nl_description' => $this->getNlDescription(),
+            'en_description' => $this->getEnDescription(),
+            'defaultSub' => $this->getDefaultSub(),
+            'onForm' => $this->getOnForm(),
+            'mailmanId' => $this->getMailmanId(),
+        ];
     }
 }

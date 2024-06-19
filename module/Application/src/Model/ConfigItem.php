@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 use LogicException;
 use TypeError;
 
+use function is_bool;
 use function is_string;
 
 /**
@@ -77,6 +78,15 @@ class ConfigItem
     )]
     protected ?DateTime $valueDate = null;
 
+    /**
+     * If the item is a boolean, its value.
+     */
+    #[Column(
+        type: 'boolean',
+        nullable: true,
+    )]
+    protected ?bool $valueBool = null;
+
     #[PrePersist]
     #[PreUpdate]
     public function assertValid(): void
@@ -102,20 +112,26 @@ class ConfigItem
     /**
      * Set the value of the configuration item.
      */
-    public function setValue(string|DateTime $value): void
+    public function setValue(bool|string|DateTime $value): void
     {
         if ($value instanceof DateTime) {
             $this->valueString = null;
             $this->valueDate = $value;
+            $this->valueBool = null;
         } elseif (is_string($value)) {
             $this->valueString = $value;
             $this->valueDate = null;
+            $this->valueBool = null;
+        } elseif (is_bool($value)) {
+            $this->valueString = null;
+            $this->valueDate = null;
+            $this->valueBool = $value;
         } else {
             throw new TypeError();
         }
     }
 
-    public function getValue(): string|DateTime|null
+    public function getValue(): bool|string|DateTime|null
     {
         if (null !== $this->valueDate) {
             return $this->valueDate;
@@ -123,6 +139,10 @@ class ConfigItem
 
         if (null !== $this->valueString) {
             return $this->valueString;
+        }
+
+        if (null !== $this->valueBool) {
+            return $this->valueBool;
         }
 
         return null;
