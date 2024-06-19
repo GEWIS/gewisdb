@@ -13021,6 +13021,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersPropertyAge21"
         },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AMembersDeleted",
+            "name": "MembersDeleted",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_MembersDeleted"
+        },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AOrgansMembershipR",
             "name": "OrgansMembershipR",
             "summary": "",
