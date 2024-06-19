@@ -45,7 +45,9 @@ class ApiController extends AbstractActionController
             $additionalProperties = array_diff($additionalProperties, ['organs']);
         }
 
-        $members = $this->apiService->getMembers($additionalProperties);
+        $allowDeleted = $this->apiAuthService->currentUserCan(ApiPermissions::MembersDeleted);
+
+        $members = $this->apiService->getMembers($additionalProperties, $allowDeleted);
         $res = ['data' => $members];
 
         return new JsonModel($res);
@@ -58,9 +60,11 @@ class ApiController extends AbstractActionController
     {
         $this->apiAuthService->assertCan(ApiPermissions::MembersR);
 
+        $allowDeleted = $this->apiAuthService->currentUserCan(ApiPermissions::MembersDeleted);
         $member = $this->apiService->getMember(
             (int) $this->params()->fromRoute('id'),
             $this->additionalProperties(),
+            $allowDeleted,
         );
         if (null === $member) {
             return $this->noContent();
@@ -79,8 +83,13 @@ class ApiController extends AbstractActionController
         $this->apiAuthService->assertCan(ApiPermissions::MembersActiveR);
 
         $includeInactiveFraternity = (bool) $this->getRequest()->getQuery('includeInactive', false);
+        $allowDeleted = $this->apiAuthService->currentUserCan(ApiPermissions::MembersDeleted);
 
-        $members = $this->apiService->getActiveMembers($this->additionalProperties(), $includeInactiveFraternity);
+        $members = $this->apiService->getActiveMembers(
+            $this->additionalProperties(),
+            $includeInactiveFraternity,
+            $allowDeleted,
+        );
         $res = ['data' => $members];
 
         return new JsonModel($res);

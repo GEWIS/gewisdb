@@ -66,7 +66,7 @@ class AuditRenewal extends AuditEntry
      */
     public function setOldExpiration(DateTime $oldExpiration): void
     {
-        $this->newExpiration = $oldExpiration;
+        $this->oldExpiration = $oldExpiration;
     }
 
     /**
