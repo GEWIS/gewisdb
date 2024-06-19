@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Model;
 
 use Application\Model\Enums\MeetingTypes;
+use Database\Model\SubDecision\Minutes;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * Meeting model.
@@ -53,6 +55,12 @@ class Meeting
         cascade: ['persist'],
     )]
     protected Collection $decisions;
+
+    #[OneToOne(
+        targetEntity: Minutes::class,
+        mappedBy: 'meeting',
+    )]
+    protected Minutes $minutes;
 
     public function __construct()
     {

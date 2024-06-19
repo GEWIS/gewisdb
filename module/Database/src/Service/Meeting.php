@@ -18,6 +18,7 @@ use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
 use Database\Form\Key\Grant as KeyGrantForm;
 use Database\Form\Key\Withdraw as KeyWithdrawForm;
+use Database\Form\Minutes as MinutesForm;
 use Database\Form\OrganRegulation as RegulationForm;
 use Database\Form\Other as OtherForm;
 use Database\Hydrator\Foundation as FoundationHydrator;
@@ -53,6 +54,7 @@ class Meeting
         private readonly InstallForm $installForm,
         private readonly KeyGrantForm $keyGrantForm,
         private readonly KeyWithdrawForm $keyWithdrawForm,
+        private readonly MinutesForm $minutesForm,
         private readonly RegulationForm $regulationForm,
         private readonly OtherForm $otherForm,
         private readonly MeetingMapper $meetingMapper,
@@ -751,6 +753,56 @@ class Meeting
     }
 
     /**
+     * Minutes decision.
+     *
+     * @return array{
+     *     type: string,
+     *     form: MinutesForm,
+     * }|array{
+     *     type: string,
+     *     decision: DecisionModel,
+     * }
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
+     */
+    public function minutesDecision(array $data): array
+    {
+        $form = $this->getMinutesForm();
+
+        // use hack to make sure we do not have validators for these fields
+        $approveChain = $form->getInputFilter()->get('approve')->getValidatorChain();
+        $refObj = new ReflectionObject($approveChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setValue($approveChain, new PriorityQueue());
+
+        $changesChain = $form->getInputFilter()->get('changes')->getValidatorChain();
+        $refObj = new ReflectionObject($changesChain);
+        $refProp = $refObj->getProperty('validators');
+        $refProp->setValue($changesChain, new PriorityQueue());
+
+        $form->setData($data);
+        $form->bind(new DecisionModel());
+
+        if (!$form->isValid()) {
+            return [
+                'type' => 'minutes',
+                'form' => $form,
+            ];
+        }
+
+        /** @var DecisionModel $decision */
+        $decision = $form->getData();
+
+        // simply persist through the meeting mapper
+        $this->getMeetingMapper()->persist($decision->getMeeting());
+
+        return [
+            'type' => 'minutes',
+            'decision' => $decision,
+        ];
+    }
+
+    /**
      * Organ regulation decision.
      *
      * @return array{
@@ -779,7 +831,6 @@ class Meeting
         $refProp->setValue($changesChain, new PriorityQueue());
 
         $form->setData($data);
-
         $form->bind(new DecisionModel());
 
         if (!$form->isValid()) {
@@ -868,18 +919,18 @@ class Meeting
      * Get the foundation of an organ.
      */
     public function findFoundation(
-        MeetingTypes $type,
+        MeetingTypes $meetingType,
         int $meetingNumber,
         int $decisionPoint,
         int $decisionNumber,
-        int $subdecisionNumber,
+        int $sequence,
     ): ?FoundationModel {
         return $this->getOrganMapper()->find(
-            $type,
+            $meetingType,
             $meetingNumber,
             $decisionPoint,
             $decisionNumber,
-            $subdecisionNumber,
+            $sequence,
         );
     }
 
@@ -985,6 +1036,14 @@ class Meeting
     public function getKeyWithdrawForm(): KeyWithdrawForm
     {
         return $this->keyWithdrawForm;
+    }
+
+    /**
+     * Get minutes form.
+     */
+    public function getMinutesForm(): MinutesForm
+    {
+        return $this->minutesForm;
     }
 
     /**

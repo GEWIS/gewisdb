@@ -35,11 +35,11 @@ class Organ
      * Find an organ. Also calculate which are its current members.
      */
     public function find(
-        MeetingTypes $type,
+        MeetingTypes $meetingType,
         int $meetingNumber,
         int $decisionPoint,
         int $decisionNumber,
-        int $subdecisionNumber,
+        int $sequence,
     ): ?FoundationModel {
         $qb = $this->em->createQueryBuilder();
 
@@ -49,7 +49,7 @@ class Organ
             ->andWhere('o.meeting_number = :meeting_number')
             ->andWhere('o.decision_point = :decision_point')
             ->andWhere('o.decision_number = :decision_number')
-            ->andWhere('o.sequence = :number')
+            ->andWhere('o.sequence = :sequence')
             ->leftJoin('o.references', 'r')
             ->andWhere('r INSTANCE OF Database\Model\SubDecision\Installation');
 
@@ -96,11 +96,11 @@ class Organ
             $qb->expr()->exists($qbd->getDql()),
         ));
 
-        $qb->setParameter(':type', $type);
+        $qb->setParameter(':type', $meetingType);
         $qb->setParameter(':meeting_number', $meetingNumber);
         $qb->setParameter(':decision_point', $decisionPoint);
         $qb->setParameter(':decision_number', $decisionNumber);
-        $qb->setParameter(':number', $subdecisionNumber);
+        $qb->setParameter(':sequence', $sequence);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -110,7 +110,7 @@ class Organ
         int $meetingNumber,
         int $decisionPoint,
         int $decisionNumber,
-        ?int $number = null,
+        ?int $sequence = null,
     ): ?FoundationModel {
         $qb = $this->em->createQueryBuilder();
 
@@ -120,13 +120,13 @@ class Organ
             ->andWhere('f.meeting_number = :meeting_number')
             ->andWhere('f.decision_point = :decision_point')
             ->andWhere('f.decision_number = :decision_number')
-            ->andWhere('f.sequence = :number');
+            ->andWhere('f.sequence = :sequence');
 
         $qb->setParameter(':meeting_type', $meetingType);
         $qb->setParameter(':meeting_number', $meetingNumber);
         $qb->setParameter(':decision_point', $decisionPoint);
         $qb->setParameter(':decision_number', $decisionNumber);
-        $qb->setParameter(':number', $number);
+        $qb->setParameter(':sequence', $sequence);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -136,7 +136,7 @@ class Organ
         int $meetingNumber,
         int $decisionPoint,
         int $decisionNumber,
-        ?int $number = null,
+        ?int $sequence = null,
     ): ?InstallationModel {
         $qb = $this->em->createQueryBuilder();
 
@@ -146,13 +146,13 @@ class Organ
             ->andWhere('i.meeting_number = :meeting_number')
             ->andWhere('i.decision_point = :decision_point')
             ->andWhere('i.decision_number = :decision_number')
-            ->andWhere('i.sequence = :number');
+            ->andWhere('i.sequence = :sequence');
 
         $qb->setParameter(':meeting_type', $meetingType);
         $qb->setParameter(':meeting_number', $meetingNumber);
         $qb->setParameter(':decision_point', $decisionPoint);
         $qb->setParameter(':decision_number', $decisionNumber);
-        $qb->setParameter(':number', $number);
+        $qb->setParameter(':sequence', $sequence);
 
         return $qb->getQuery()->getOneOrNullResult();
     }

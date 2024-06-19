@@ -43,6 +43,7 @@ use Database\Form\MemberEdit as MemberEditForm;
 use Database\Form\MemberExpiration as MemberExpirationForm;
 use Database\Form\MemberRenewal as MemberRenewalForm;
 use Database\Form\MemberType as MemberTypeForm;
+use Database\Form\Minutes as MinutesForm;
 use Database\Form\OrganRegulation as RegulationForm;
 use Database\Form\Other as OtherForm;
 use Database\Form\Query as QueryForm;
@@ -59,6 +60,7 @@ use Database\Hydrator\Foundation as FoundationHydrator;
 use Database\Hydrator\Install as InstallHydrator;
 use Database\Hydrator\Key\Grant as KeyGrantHydrator;
 use Database\Hydrator\Key\Withdraw as KeyWithdrawHydrator;
+use Database\Hydrator\Minutes as MinutesHydrator;
 use Database\Hydrator\OrganRegulation as RegulationHydrator;
 use Database\Hydrator\Other as OtherHydrator;
 use Database\Hydrator\Strategy\AddressHydratorStrategy;
@@ -141,6 +143,7 @@ class Module
                 RegulationHydrator::class => RegulationHydrator::class,
                 FoundationHydrator::class => FoundationHydrator::class,
                 InstallHydrator::class => InstallHydrator::class,
+                MinutesHydrator::class => MinutesHydrator::class,
                 OtherHydrator::class => OtherHydrator::class,
                 BoardInstallHydrator::class => BoardInstallHydrator::class,
                 BoardDischargeHydrator::class => BoardDischargeHydrator::class,
@@ -294,6 +297,17 @@ class Module
                         $container->get(DecisionFieldset::class),
                     );
                     $form->setHydrator($container->get(AnnulmentHydrator::class));
+
+                    return $form;
+                },
+                MinutesForm::class => static function (ContainerInterface $container) {
+                    $form = new MinutesForm(
+                        $container->get(MvcTranslator::class),
+                        $container->get(MeetingFieldset::class),
+                        $container->get(MemberFieldset::class),
+                        $container->get(MeetingFieldset::class),
+                    );
+                    $form->setHydrator($container->get(MinutesHydrator::class));
 
                     return $form;
                 },

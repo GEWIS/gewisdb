@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
+use Report\Model\SubDecision\Minutes;
 
 /**
  * Meeting model.
@@ -52,6 +54,12 @@ class Meeting
         mappedBy: 'meeting',
     )]
     protected Collection $decisions;
+
+    #[OneToOne(
+        targetEntity: Minutes::class,
+        mappedBy: 'meeting',
+    )]
+    protected Minutes $minutes;
 
     public function __construct()
     {

@@ -153,6 +153,7 @@ class Meeting
     ): ReportSubDecisionModel {
         $decRepo = $this->emReport->getRepository(ReportDecisionModel::class);
         $subdecRepo = $this->emReport->getRepository(ReportSubDecisionModel::class);
+        $meetingRepo = $this->emReport->getRepository(ReportMeetingModel::class);
 
         if (null === $reportDecision) {
             $reportDecision = $decRepo->find([
@@ -245,6 +246,17 @@ class Meeting
             if ($subdecision instanceof DatabaseSubDecisionModel\OrganRegulation) {
                 $reportSubDecision->setOrganType($subdecision->getOrganType());
             }
+        } elseif ($subdecision instanceof DatabaseSubDecisionModel\Minutes) {
+            $ref = $subdecision->getTarget();
+            $meeting = $meetingRepo->find([
+                'type' => $ref->getType(),
+                'number' => $ref->getNumber(),
+            ]);
+
+            $reportSubDecision->setMeeting($meeting);
+            $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
+            $reportSubDecision->setApproval($subdecision->getApproval());
+            $reportSubDecision->setChanges($subdecision->getChanges());
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Board\Installation) {
             // board installation
             $reportSubDecision->setFunction($subdecision->getFunction());

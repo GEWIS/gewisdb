@@ -26,6 +26,7 @@ use Report\Model\SubDecision\FoundationReference;
 use Report\Model\SubDecision\Installation;
 use Report\Model\SubDecision\Key\Granting as KeyGranting;
 use Report\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
+use Report\Model\SubDecision\Minutes;
 use Report\Model\SubDecision\OrganRegulation;
 use Report\Model\SubDecision\Other;
 use Report\Model\SubDecision\Reappointment;
@@ -51,6 +52,7 @@ use Report\Model\SubDecision\Reappointment;
         'financial_statement' => Statement::class,
         'other' => Other::class,
         'annulment' => Annulment::class,
+        'minutes' => Minutes::class,
         'board_installation' => BoardInstallation::class,
         'board_release' => BoardRelease::class,
         'board_discharge' => BoardDischarge::class,
