@@ -49,6 +49,7 @@ class Other extends SubDecision
 
     public function getAlternativeContent(): string
     {
-        return $this->getContent(); // No alternative content exists for a custom decision.
+        // No alternative content exists for a custom decision.
+        return 'If you are reading this, the secretary has not done their job.';
     }
 }
