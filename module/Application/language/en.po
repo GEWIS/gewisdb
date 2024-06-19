@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-19 17:25+0200\n"
+"POT-Creation-Date: 2024-06-19 20:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 2.2.4\n"
 
 msgid "# Decisions"
 msgstr "# Decisions"
@@ -859,6 +859,9 @@ msgstr "Make Inactive"
 msgid "Make Member Inactive"
 msgstr "Make Member Inactive"
 
+msgid "Meeting"
+msgstr "Meeting"
+
 msgid "Meeting Date"
 msgstr "Meeting Date"
 
@@ -896,6 +899,9 @@ msgstr "Membership Type"
 msgid "Membership of Committees and Fraternities"
 msgstr "Membership of Committees and Fraternities"
 
+msgid "Member¹ - Allow operations on `deleted' members"
+msgstr "Member¹ - Allow operations on `deleted' members"
+
 msgid "Member¹ - Check if has reached age 16"
 msgstr "Member¹ - Check if has reached age 16"
 
@@ -919,6 +925,9 @@ msgstr "Member¹ - Get email address"
 
 msgid "Message"
 msgstr "Message"
+
+msgid "Minutes"
+msgstr "Minutes"
 
 msgid "Mistake?"
 msgstr "Mistake?"
@@ -1181,6 +1190,9 @@ msgstr "Student Address"
 
 msgid "Study"
 msgstr "Study"
+
+msgid "Submit"
+msgstr "Submit"
 
 msgid "Subscribe"
 msgstr "Subscribe"

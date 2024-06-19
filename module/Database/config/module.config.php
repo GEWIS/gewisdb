@@ -171,28 +171,28 @@ return [
                     'info' => [
                         'type' => Segment::class,
                         'options' => [
-                            'route' => '/info/:type/:number/:point/:decision/:subdecision',
+                            'route' => '/info/:type/:number/:point/:decision/:sequence',
                             'defaults' => ['action' => 'info'],
                             'constraints' => [
                                 'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
-                                'subdecision' => '[0-9]*',
+                                'sequence' => '[0-9]*',
                             ],
                         ],
                     ],
                     'view' => [
                         'type' => Segment::class,
                         'options' => [
-                            'route' => '/:type/:number/:point/:decision/:subdecision',
+                            'route' => '/:type/:number/:point/:decision/:sequence',
                             'defaults' => ['action' => 'view'],
                             'constraints' => [
                                 'type' => 'ALV|BV|VV|Virt',
                                 'number' => '[0-9]*',
                                 'point' => '[0-9]*',
                                 'decision' => '[0-9]*',
-                                'subdecision' => '[0-9]*',
+                                'sequence' => '[0-9]*',
                             ],
                         ],
                     ],

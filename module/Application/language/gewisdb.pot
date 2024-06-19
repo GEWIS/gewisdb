@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 2dbfbb7e-dirty\n"
+"Project-Id-Version: GEWISdb bbdacb70-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-19 17:25+0200\n"
+"POT-Creation-Date: 2024-06-19 20:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -801,6 +801,9 @@ msgstr ""
 msgid "Make Member Inactive"
 msgstr ""
 
+msgid "Meeting"
+msgstr ""
+
 msgid "Meeting Date"
 msgstr ""
 
@@ -838,6 +841,9 @@ msgstr ""
 msgid "Membership of Committees and Fraternities"
 msgstr ""
 
+msgid "Member¹ - Allow operations on `deleted' members"
+msgstr ""
+
 msgid "Member¹ - Check if has reached age 16"
 msgstr ""
 
@@ -860,6 +866,9 @@ msgid "Member¹ - Get email address"
 msgstr ""
 
 msgid "Message"
+msgstr ""
+
+msgid "Minutes"
 msgstr ""
 
 msgid "Mistake?"
@@ -1108,6 +1117,9 @@ msgid "Student Address"
 msgstr ""
 
 msgid "Study"
+msgstr ""
+
+msgid "Submit"
 msgstr ""
 
 msgid "Subscribe"
