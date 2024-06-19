@@ -170,7 +170,10 @@ class OrganRegulation extends SubDecision
      */
     public function getContent(): string
     {
-        if (OrganTypes::Committee === $this->getOrganType()) {
+        if (
+            OrganTypes::Committee === $this->getOrganType()
+            || OrganTypes::KCC === $this->getOrganType()
+        ) {
             $organType = 'commissie';
         } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
             $organType = 'dispuuts';
@@ -193,7 +196,10 @@ class OrganRegulation extends SubDecision
 
     public function getAlternativeContent(): string
     {
-        if (OrganTypes::Committee === $this->getOrganType()) {
+        if (
+            OrganTypes::Committee === $this->getOrganType()
+            || OrganTypes::KCC === $this->getOrganType()
+        ) {
             $organType = 'committee ';
         } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
             $organType = 'fraternity ';
