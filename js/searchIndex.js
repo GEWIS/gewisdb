@@ -4576,6 +4576,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-MemberType.html#property_translator"
         },                {
+            "fqsen": "\\Database\\Form\\Minutes",
+            "name": "Minutes",
+            "summary": "",
+            "url": "classes/Database-Form-Minutes.html"
+        },                {
+            "fqsen": "\\Database\\Form\\Minutes\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Form-Minutes.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\Minutes\u003A\u003AgetInputFilterSpecification\u0028\u0029",
+            "name": "getInputFilterSpecification",
+            "summary": "",
+            "url": "classes/Database-Form-Minutes.html#method_getInputFilterSpecification"
+        },                {
+            "fqsen": "\\Database\\Form\\Minutes\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Database-Form-Minutes.html#property_translator"
+        },                {
             "fqsen": "\\Database\\Form\\OrganRegulation",
             "name": "OrganRegulation",
             "summary": "",
@@ -4810,6 +4830,16 @@ Search.appendIndex(
             "name": "hydrate",
             "summary": "Key\u0020withdrawal\u0020hydration",
             "url": "classes/Database-Hydrator-Key-Withdraw.html#method_hydrate"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Minutes",
+            "name": "Minutes",
+            "summary": "",
+            "url": "classes/Database-Hydrator-Minutes.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Minutes\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Minutes\u0020hydration",
+            "url": "classes/Database-Hydrator-Minutes.html#method_hydrate"
         },                {
             "fqsen": "\\Database\\Hydrator\\OrganRegulation",
             "name": "OrganRegulation",
@@ -6466,6 +6496,11 @@ Search.appendIndex(
             "summary": "Decisions.",
             "url": "classes/Database-Model-Meeting.html#property_decisions"
         },                {
+            "fqsen": "\\Database\\Model\\Meeting\u003A\u003A\u0024minutes",
+            "name": "minutes",
+            "summary": "",
+            "url": "classes/Database-Model-Meeting.html#property_minutes"
+        },                {
             "fqsen": "\\Database\\Model\\Member",
             "name": "Member",
             "summary": "Member\u0020model.",
@@ -8096,6 +8131,76 @@ Search.appendIndex(
             "summary": "When\u0020the\u0020granted\u0020keycode\u0020is\u0020prematurely\u0020revoked.",
             "url": "classes/Database-Model-SubDecision-Key-Withdrawal.html#property_withdrawnOn"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes",
+            "name": "Minutes",
+            "summary": "Decisions\u0020on\u0020minutes.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetTarget\u0028\u0029",
+            "name": "getTarget",
+            "summary": "Get\u0020the\u0020target.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getTarget"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AsetTarget\u0028\u0029",
+            "name": "setTarget",
+            "summary": "Set\u0020the\u0020target.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_setTarget"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetApproval\u0028\u0029",
+            "name": "getApproval",
+            "summary": "Get\u0020approval\u0020status.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getApproval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AsetApproval\u0028\u0029",
+            "name": "setApproval",
+            "summary": "Set\u0020approval\u0020status.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_setApproval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetChanges\u0028\u0029",
+            "name": "getChanges",
+            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getChanges"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AsetChanges\u0028\u0029",
+            "name": "setChanges",
+            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_setChanges"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetTemplate\u0028\u0029",
+            "name": "getTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetAlternativeTemplate\u0028\u0029",
+            "name": "getAlternativeTemplate",
+            "summary": "Get\u0020the\u0020template\u0020string\u0020for\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getAlternativeTemplate"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetContent\u0028\u0029",
+            "name": "getContent",
+            "summary": "Get\u0020the\u0020statutory\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020Dutch\u0029.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetAlternativeContent\u0028\u0029",
+            "name": "getAlternativeContent",
+            "summary": "Get\u0020the\u0020alternative\u0020content\u0020of\u0020the\u0020subdecision\u0020\u0028in\u0020English\u0029.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getAlternativeContent"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003A\u0024meeting",
+            "name": "meeting",
+            "summary": "Reference\u0020to\u0020the\u0020meeting.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#property_meeting"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003A\u0024approval",
+            "name": "approval",
+            "summary": "If\u0020the\u0020minutes\u0020were\u0020approved.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#property_approval"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003A\u0024changes",
+            "name": "changes",
+            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#property_changes"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation",
             "name": "OrganRegulation",
             "summary": "SubDecision\u0020model.",
@@ -8851,6 +8956,11 @@ Search.appendIndex(
             "summary": "Budget\u0020decision.",
             "url": "classes/Database-Service-Meeting.html#method_budgetDecision"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AminutesDecision\u0028\u0029",
+            "name": "minutesDecision",
+            "summary": "Minutes\u0020decision.",
+            "url": "classes/Database-Service-Meeting.html#method_minutesDecision"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AregulationDecision\u0028\u0029",
             "name": "regulationDecision",
             "summary": "Organ\u0020regulation\u0020decision.",
@@ -8946,6 +9056,11 @@ Search.appendIndex(
             "summary": "Get\u0020key\u0020withdraw\u0020form.",
             "url": "classes/Database-Service-Meeting.html#method_getKeyWithdrawForm"
         },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetMinutesForm\u0028\u0029",
+            "name": "getMinutesForm",
+            "summary": "Get\u0020minutes\u0020form.",
+            "url": "classes/Database-Service-Meeting.html#method_getMinutesForm"
+        },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003AgetOtherForm\u0028\u0029",
             "name": "getOtherForm",
             "summary": "Get\u0020other\u0020form.",
@@ -9030,6 +9145,11 @@ Search.appendIndex(
             "name": "keyWithdrawForm",
             "summary": "",
             "url": "classes/Database-Service-Meeting.html#property_keyWithdrawForm"
+        },                {
+            "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024minutesForm",
+            "name": "minutesForm",
+            "summary": "",
+            "url": "classes/Database-Service-Meeting.html#property_minutesForm"
         },                {
             "fqsen": "\\Database\\Service\\Meeting\u003A\u003A\u0024regulationForm",
             "name": "regulationForm",
@@ -10511,6 +10631,11 @@ Search.appendIndex(
             "summary": "Decisions.",
             "url": "classes/Report-Model-Meeting.html#property_decisions"
         },                {
+            "fqsen": "\\Report\\Model\\Meeting\u003A\u003A\u0024minutes",
+            "name": "minutes",
+            "summary": "",
+            "url": "classes/Report-Model-Meeting.html#property_minutes"
+        },                {
             "fqsen": "\\Report\\Model\\Member",
             "name": "Member",
             "summary": "Member\u0020model.",
@@ -11675,6 +11800,56 @@ Search.appendIndex(
             "name": "withdrawnOn",
             "summary": "When\u0020the\u0020granted\u0020keycode\u0020is\u0020prematurely\u0020revoked.",
             "url": "classes/Report-Model-SubDecision-Key-Withdrawal.html#property_withdrawnOn"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes",
+            "name": "Minutes",
+            "summary": "Decisions\u0020on\u0020minutes.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AgetMeeting\u0028\u0029",
+            "name": "getMeeting",
+            "summary": "Get\u0020the\u0020target.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#method_getMeeting"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AsetMeeting\u0028\u0029",
+            "name": "setMeeting",
+            "summary": "Set\u0020the\u0020target.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#method_setMeeting"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AgetApproval\u0028\u0029",
+            "name": "getApproval",
+            "summary": "Get\u0020approval\u0020status.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#method_getApproval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AsetApproval\u0028\u0029",
+            "name": "setApproval",
+            "summary": "Set\u0020approval\u0020status.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#method_setApproval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AgetChanges\u0028\u0029",
+            "name": "getChanges",
+            "summary": "Get\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#method_getChanges"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AsetChanges\u0028\u0029",
+            "name": "setChanges",
+            "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#method_setChanges"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003A\u0024meeting",
+            "name": "meeting",
+            "summary": "Reference\u0020to\u0020the\u0020meetings",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#property_meeting"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003A\u0024approval",
+            "name": "approval",
+            "summary": "If\u0020the\u0020minutes\u0020were\u0020approved.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#property_approval"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003A\u0024changes",
+            "name": "changes",
+            "summary": "If\u0020there\u0020were\u0020changes\u0020made.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#property_changes"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation",
             "name": "OrganRegulation",
