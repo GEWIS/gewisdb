@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-19 17:25+0200\n"
+"POT-Creation-Date: 2024-06-19 20:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 2.2.4\n"
 
 msgid "# Decisions"
 msgstr "# besluiten"
@@ -865,6 +865,9 @@ msgstr "Maak inactief"
 msgid "Make Member Inactive"
 msgstr "Maak lid inactief"
 
+msgid "Meeting"
+msgstr "Vergadering"
+
 msgid "Meeting Date"
 msgstr "Vergaderdatum"
 
@@ -902,6 +905,9 @@ msgstr "Lidmaatschapstype"
 msgid "Membership of Committees and Fraternities"
 msgstr "Lidmaatschap van commissies en disputen"
 
+msgid "Member¹ - Allow operations on `deleted' members"
+msgstr "Lid¹ - Acties op `verwijderde' leden toestaan"
+
 msgid "Member¹ - Check if has reached age 16"
 msgstr "Lid¹ - Controleer of lid ten minste 16 jaar is"
 
@@ -925,6 +931,9 @@ msgstr "Lid¹ - E-mailadres inzien"
 
 msgid "Message"
 msgstr "Bericht"
+
+msgid "Minutes"
+msgstr "Notulen"
 
 msgid "Mistake?"
 msgstr "Foutje?"
@@ -1186,6 +1195,9 @@ msgstr "Kameradres"
 
 msgid "Study"
 msgstr "Studie"
+
+msgid "Submit"
+msgstr "Verstuur"
 
 msgid "Subscribe"
 msgstr "Inschrijven"

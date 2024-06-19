@@ -9,7 +9,7 @@ use Application\Service\Config as ConfigService;
 use DateTime;
 use Report\Mapper\Member as ReportMemberMapper;
 
-use function array_map;
+use function array_reduce;
 use function is_string;
 use function max;
 
@@ -35,12 +35,17 @@ class Api
     public function getActiveMembers(
         array $additionalProperties,
         bool $includeInactiveFraternity = false,
+        bool $allowDeleted = false,
     ): array {
-        return array_map(
-            static function ($member) use ($additionalProperties) {
-                return $member->toArrayApi($additionalProperties);
-            },
+        return array_reduce(
             $this->getReportMemberMapper()->findActive($includeInactiveFraternity),
+            static function ($array, $member) use ($additionalProperties, $allowDeleted) {
+                if (!$member->getDeleted() || $allowDeleted) {
+                    $array[] = $member->toArrayApi($additionalProperties);
+                }
+
+                return $array;
+            },
         );
     }
 
@@ -51,13 +56,19 @@ class Api
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function getMembers(array $additionalProperties): array
-    {
-        return array_map(
-            static function ($member) use ($additionalProperties) {
-                return $member->toArrayApi($additionalProperties);
-            },
+    public function getMembers(
+        array $additionalProperties,
+        bool $allowDeleted = false,
+    ): array {
+        return array_reduce(
             $this->getReportMemberMapper()->findNormal(),
+            static function ($array, $member) use ($additionalProperties, $allowDeleted) {
+                if (!$member->getDeleted() || $allowDeleted) {
+                    $array[] = $member->toArrayApi($additionalProperties);
+                }
+
+                return $array;
+            },
         );
     }
 
@@ -71,8 +82,19 @@ class Api
     public function getMember(
         int $id,
         array $additionalProperties,
+        bool $allowDeleted = false,
     ): ?array {
-        return $this->getReportMemberMapper()->findSimple($id)?->toArrayApi($additionalProperties);
+        $member = $this->getReportMemberMapper()->findSimple($id);
+
+        if (null === $member) {
+            return null;
+        }
+
+        if (!$allowDeleted && $member->getDeleted()) {
+            return null;
+        }
+
+        return $member->toArrayApi($additionalProperties);
     }
 
     /**

@@ -208,6 +208,7 @@ components:
         deleted:
           type: boolean
           example: false
+          description: Always false unless the API principal has MembersDeleted permission
         expiration:
           type: string
           format: date
