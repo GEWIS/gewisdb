@@ -1,2 +1,5 @@
 blank_issues_enabled: false
-
+contact_links:
+  - name: GESUPPORT
+    url: https://support.gewis.nl/open.php
+    about: Do you need support with non-code issues? Please create a ticket in GESUPPORT.
