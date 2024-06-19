@@ -37,10 +37,12 @@ class OrganRegulation extends AbstractDecision
             $data['type'] = OrganTypes::from($data['type']);
         }
 
-        // Only allow committees and fraternities. This should already be handled by the form, just a fail-safe.
+        // Only allow committees, fraternities, and financial audit committees. This should already be handled by the
+        // form, so this is just a fail-safe.
         if (
             OrganTypes::Committee !== $data['type']
             && OrganTypes::Fraternity !== $data['type']
+            && OrganTypes::KCC !== $data['type']
         ) {
             throw new UnexpectedValueException('Unexpected organ type for organ regulation.');
         }

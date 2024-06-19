@@ -52,7 +52,6 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
                     [
                         'value' => 'kcc',
                         'label' => $this->translator->translate('Financial Audit Committee'),
-                        'disabled' => true,
                     ],
                     [
                         'value' => 'rva',
@@ -135,7 +134,7 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
                         'options' => [
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
-                                    'Organ regulations can only be created for \'committee\' or \'fraternity\'.',
+                                    'Organ regulations can only be created for \'committee\', \'fraternity\', or \'financial audit committee\'.',
                                 ),
                             ],
                             'callback' => [$this, 'organTypeNotDisabled'],
