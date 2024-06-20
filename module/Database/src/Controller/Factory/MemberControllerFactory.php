@@ -30,12 +30,15 @@ class MemberControllerFactory implements FactoryInterface
         $memberService = $container->get(MemberService::class);
         /** @var StripeService $stripeService */
         $stripeService = $container->get(StripeService::class);
+        /** @var string $remoteAddress */
+        $remoteAddress = $container->get('database_remoteaddress');
 
         return new MemberController(
             $translator,
             $checkerService,
             $memberService,
             $stripeService,
+            $remoteAddress,
         );
     }
 }

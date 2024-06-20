@@ -33,6 +33,7 @@ class MemberController extends AbstractActionController
         private readonly CheckerService $checkerService,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
+        private readonly string $remoteAddress,
     ) {
     }
 
@@ -49,9 +50,8 @@ class MemberController extends AbstractActionController
      */
     public function subscribeAction(): Response|ViewModel
     {
-        $ipMCS = isset($_SERVER['REMOTE_ADDR'])
-            && ip2long($_SERVER['REMOTE_ADDR']) >= ip2long('131.155.68.0')
-            && ip2long($_SERVER['REMOTE_ADDR']) <= ip2long('131.155.71.255');
+        $ipMCS = ip2long($this->remoteAddress) >= ip2long('131.155.68.0')
+            && ip2long($this->remoteAddress) <= ip2long('131.155.71.255');
         if (7 === intval((new DateTime())->format('n')) && !$ipMCS) {
             return (new ViewModel())->setTemplate('database/member/subscribe-disabled');
         }
