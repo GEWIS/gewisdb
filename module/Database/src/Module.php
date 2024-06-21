@@ -115,6 +115,7 @@ use Database\Service\Member as MemberService;
 use Database\Service\Query as QueryService;
 use Database\Service\Stripe as StripeService;
 use Doctrine\Laminas\Hydrator\DoctrineObject;
+use Laminas\Http\PhpEnvironment\RemoteAddress;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Psr\Container\ContainerInterface;
@@ -561,6 +562,19 @@ class Module
                     $transport->setOptions(new $optionsClass($config['options']));
 
                     return $transport;
+                },
+                ///////////////////////////////////////////////////////////////////////////
+                'database_remoteaddress' => static function (ContainerInterface $container) {
+                    $remote = new RemoteAddress();
+                    $isProxied = $container->get('config')['proxy']['enabled'];
+                    $trustedProxies = $container->get('config')['proxy']['ip_addresses'];
+                    $proxyHeader = $container->get('config')['proxy']['header'];
+
+                    $remote->setUseProxy($isProxied)
+                        ->setTrustedProxies($trustedProxies)
+                        ->setProxyHeader($proxyHeader);
+
+                    return $remote->getIpAddress();
                 },
             ],
             'shared' => [

@@ -23,6 +23,15 @@ return [
     ],
 
     /**
+     * Proxy configuration.
+     */
+    'proxy' => [
+        'enabled' => boolval(getenv('PROXY_ENABLED')),
+        'ip_addresses' => explode(',', getenv('PROXY_IPS') ?: ''),
+        'header' => getenv('PROXY_HEADER'),
+    ],
+
+    /**
      * Checker service configuration.
      */
     'checker' => [
