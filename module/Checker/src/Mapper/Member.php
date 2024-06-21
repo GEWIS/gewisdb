@@ -41,7 +41,7 @@ class Member
         $qb->select('m')
             ->addSelect('CASE WHEN m.lastCheckedOn IS NULL THEN 0 ELSE 1 END AS HIDDEN fix_ordering')
             ->from('Database\Model\Member', 'm')
-            ->where('m.type = \'ordinary\'')
+            ->where('m.type = \'ordinary\' OR m.type = \'external\'')
             ->andWhere('m.tueUsername IS NOT NULL')
             ->andWhere('m.membershipEndsOn IS NULL')
             ->andWhere('m.lastCheckedOn IS NULL OR m.lastCheckedOn < CURRENT_DATE()')
@@ -86,7 +86,7 @@ class Member
 
         $qb->select('m')
             ->from('Database\Model\Member', 'm')
-            ->where('m.type = \'ordinary\'')
+            ->where('m.type = \'ordinary\' OR m.type = \'external\'')
             ->andWhere('m.membershipEndsOn IS NULL')
             ->andWhere('m.expiration <= :endOfCurrentAssociationYear');
 

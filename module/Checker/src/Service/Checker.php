@@ -430,10 +430,15 @@ class Checker
                     echo '--> Member is still studying but not at the department of MCS' . PHP_EOL;
                     // The member does not study at WIN anymore, so we set the expiration date for the membership
                     $member->setChangedOn(new DateTime());
+                    $member->setIsStudying(true);
                     $member->setMembershipEndsOn($exp);
                 } else {
                     echo '--> Member is still studying at the department of MCS' . PHP_EOL;
-                    // The user is still studying at MCS, so don't change anything
+                    // The member is still studying at MCS, so their membership does not end. If the member is currently
+                    // external they will be converted to ordinary on July 1.
+                    $member->setChangedOn(new DateTime());
+                    $member->setIsStudying(true);
+                    $member->setMembershipEndsOn(null);
                 }
 
                 // If we made it here, we have successfully checked the member
@@ -480,7 +485,10 @@ class Checker
                     echo 'Not an active member' . PHP_EOL;
                     // We only have to change the membership type for external or graduates depending on whether the
                     // member is still studying.
-                    if ($member->getIsStudying()) {
+                    if (
+                        $member->getIsStudying()
+                        && $member->getLastCheckedOn() >= (new DateTime())->sub(new DateInterval('P1Y'))
+                    ) {
                         echo 'But is studying, so becoming EXTERNAL. Extending membership to ' .
                             $exp->format('Y-m-d') . PHP_EOL;
                         $member->setType(MembershipTypes::External);
@@ -491,6 +499,7 @@ class Checker
                     } else {
                         echo 'Nor studying, so becoming GRADUATE. Not extending membership' . PHP_EOL;
                         $member->setType(MembershipTypes::Graduate);
+                        $member->setIsStudying(false);
                     }
                 }
 
@@ -527,6 +536,7 @@ class Checker
                 echo 'Expired, thus extending to ' . $exp->format('Y-m-d') . PHP_EOL;
 
                 $member->setChangedOn(new DateTime());
+                $member->setType(MembershipTypes::Ordinary);
                 $member->setExpiration($exp);
 
                 $this->memberService->getMemberMapper()->persist($member);
