@@ -3666,6 +3666,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Controller-MemberController.html#property_stripeService"
         },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003A\u0024remoteAddress",
+            "name": "remoteAddress",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#property_remoteAddress"
+        },                {
             "fqsen": "\\Database\\Controller\\OrganController",
             "name": "OrganController",
             "summary": "",
