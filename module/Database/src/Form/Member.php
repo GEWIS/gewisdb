@@ -88,21 +88,48 @@ class Member extends Form implements InputFilterProviderInterface
                 'label' => $translator->translate('Study'),
                 'value_options' => [
                     'bachelor' => [
-                        'label' => 'Bachelor',
+                        'label' => 'Bachelor Programs',
                         'options' => [
-                            'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
                             'Bachelor Applied Mathematics' => 'Applied Mathematics',
+                            'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
+                            'Bachelor Data Science' => 'Data Science¹',
                         ],
                     ],
-                    'master' => [
-                        'label' => 'Master',
+                    'premaster' => [
+                        'label' => 'Premaster Programs',
                         'options' => [
-                            'Master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
+                            'Pre-master Computer Science and Engineering' => 'Computer Science and Engineering',
+                            'Pre-master Data Science and Artificial Intelligence' => 'Data Science and Artificial Intelligence¹',
+                            'Pre-master Embedded Systems' => 'Embedded Systems',
+                            'Pre-master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
+                            'Pre-master Information Security Technology' => 'Information Security Technology',
+                            'Schakelprogramma SEC Leraar vho Informatica' => 'Schakelprogramma SEC Leraar vho Informatica',
+                            'Schakelprogramma SEC Leraar vho Wiskunde' => 'Schakelprogramma SEC Leraar vho Wiskunde',
+                        ],
+                    ],
+                    'graduate' => [
+                        'label' => 'Graduate Programs',
+                        'options' => [
+                            'Master Artificial Intelligence & Engineering Systems' => 'Artificial Intelligence & Engineering Systems',
                             'Master Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Master Data Science in Engineering' => 'Data Science in Engineering',
-                            'Master Information Security Technology' => 'Information Security Technology',
+                            'Master Data Science & Artificial Intelligence' => 'Data Science & Artificial Intelligence¹',
+                            'Master Data Science in Business and Entrepreneurship' => 'Data Science in Business and Entrepreneurship',
                             'Master Embedded Systems' => 'Embedded Systems',
-                            'Master Science Education and Communication' => 'Science Education and Communication',
+                            'Master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
+                            'Master Information Security Technology' => 'Information Security Technology',
+                            'Master Science Education' => 'Science Education',
+                        ],
+                    ],
+                    'phd' => [
+                        'label' => 'EngD / PhD Programs',
+                        'options' => [
+                            'EngD Automotive Systems Design' => 'EngD Automotive Systems Design',
+                            'EngD Data Science' => 'EngD Data Science¹',
+                            'EngD Mechatronic Systems Design' => 'EngD Mechatronic Systems Design',
+                            'EngD Software Technology' => 'EngD Software Technology',
+                            'PhD Computer Science' => 'PhD Computer Science',
+                            'PhD Data Science' => 'PhD Data Science¹',
+                            'PhD Mathematics' => 'PhD Mathematics',
                         ],
                     ],
                     'other' => [
