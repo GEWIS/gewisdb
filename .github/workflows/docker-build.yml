@@ -1,0 +1,52 @@
+name: Docker Image CI
+
+# Only run this action when pushing to main (development release) or on tagged versions (latest release).
+on:
+    push:
+        branches:
+            - main
+        tags:
+            - 'v*.*.*'
+
+# Cancel running jobs that have become stale through updates to the ref (e.g., pushes to a pull request).
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    IS_RELEASE: ${{ format('{0}', startsWith(github.ref, 'refs/tags/')) }}
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                image: ['web', 'nginx']
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+
+            -   name: Get short commit SHA
+                run: echo "SHORT_COMMIT_SHA=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+
+            -   name: Set up Docker Buildx
+                uses: docker/setup-buildx-action@v3
+
+            -   name: Login to Docker Registry
+                uses: docker/login-action@v3
+                with:
+                    registry: ${{ vars.ABC_DOCKER_REGISTRY }}
+                    username: ${{ secrets.SVC_GH_ABCDB_USERNAME }}
+                    password: ${{ secrets.SVC_GH_ABCDB_PWD }}
+
+            -   name: Build and push image
+                uses: docker/build-push-action@v6
+                with:
+                    build-args: GIT_COMMIT=${{ env.SHORT_COMMIT_SHA }}
+                    cache-from: type=gha
+                    cache-to: type=gha,mode=max
+                    context: ${{ matrix.image == 'web' && '.' || format('./docker/{0}', matrix.image) }}
+                    file: ${{ matrix.image == 'web' && (env.IS_RELEASE == 'true' && './docker/web/production/Dockerfile' || './docker/web/development/Dockerfile') || format('./docker/{0}/Dockerfile', matrix.image) }}
+                    platforms: linux/amd64
+                    push: true
+                    tags: ${{ format('{0}:{1}', format('{0}/db/gewisdb/{1}', vars.ABC_DOCKER_REGISTRY, matrix.image), env.IS_RELEASE == 'true' && format('{0},{1}:latest', github.ref_name, format('{0}/db/gewisdb/{1}', vars.ABC_DOCKER_REGISTRY, matrix.image)) || 'development') }}
