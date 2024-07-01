@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev login push pushprod pushdev update all prod dev
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update
 
 help:
 		@echo "Makefile commands:"
@@ -17,16 +17,9 @@ help:
 		@echo "build"
 		@echo "buildprod"
 		@echo "builddev"
-		@echo "login"
-		@echo "push"
-		@echo "pushprod"
-		@echo "pushdev"
 		@echo "update = updatecomposer"
-		@echo "all = build login push"
-		@echo "prod = buildprod login pushprod"
-		@echo "dev = builddev login pushdev"
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := rundev
 
 SHELL = /bin/bash
 LAST_WEB_COMMIT := $(shell git rev-parse --short HEAD)
@@ -161,16 +154,6 @@ updatedocker:
 		@docker build --pull --no-cache -t abc.docker-registry.gewis.nl/db/gewisdb/web:development -f docker/web/development/Dockerfile .
 		@docker build --pull --no-cache -t abc.docker-registry.gewis.nl/db/gewisdb/nginx:latest -f docker/nginx/Dockerfile docker/nginx
 
-all: build login push
-
-prod: buildprod login pushprod
-
-dev: builddev login pushdev
-
-webprod: buildwebprod login pushwebprod
-
-webdev: buildwebdev login pushwebdev
-
 build: buildweb buildnginx
 
 buildprod: buildwebprod buildnginx
@@ -190,23 +173,3 @@ buildnginx:
 
 buildpgadmin:
 		@docker compose build pgadmin
-
-login:
-		@docker login abc.docker-registry.gewis.nl
-
-push: pushweb pushnginx
-
-pushprod: pushwebprod pushnginx
-
-pushdev: pushwebdev pushnginx
-
-pushweb: pushwebprod pushwebdev
-
-pushwebprod:
-		@docker push abc.docker-registry.gewis.nl/db/gewisdb/web:production
-
-pushwebdev:
-		@docker push abc.docker-registry.gewis.nl/db/gewisdb/web:development
-
-pushnginx:
-		@docker push abc.docker-registry.gewis.nl/db/gewisdb/nginx:latest
