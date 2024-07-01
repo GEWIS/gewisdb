@@ -280,6 +280,7 @@
 
 
 
+
 <h3 id="toc">
     Table of Contents
     <a href="classes/Database-Service-Stripe.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
@@ -301,31 +302,31 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Database-Service-Stripe.html#property_checkoutSessionMapper">$checkoutSessionMapper</a>
+    <a class="" href="classes/Database-Service-Stripe.html#property_checkoutSessionMapper">$checkoutSessionMapper</a>
     <span>
                         &nbsp;: <a href="classes/Database-Mapper-CheckoutSession.html"><abbr title="\Database\Mapper\CheckoutSession">CheckoutSession</abbr></a>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Database-Service-Stripe.html#property_config">$config</a>
+    <a class="" href="classes/Database-Service-Stripe.html#property_config">$config</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Database-Service-Stripe.html#property_logger">$logger</a>
+    <a class="" href="classes/Database-Service-Stripe.html#property_logger">$logger</a>
     <span>
                         &nbsp;: <abbr title="\Monolog\Logger">Logger</abbr>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Database-Service-Stripe.html#property_memberService">$memberService</a>
+    <a class="" href="classes/Database-Service-Stripe.html#property_memberService">$memberService</a>
     <span>
                         &nbsp;: <a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Database-Service-Stripe.html#property_paymentLinkMapper">$paymentLinkMapper</a>
+    <a class="" href="classes/Database-Service-Stripe.html#property_paymentLinkMapper">$paymentLinkMapper</a>
     <span>
                         &nbsp;: <a href="classes/Database-Mapper-ActionLink.html"><abbr title="\Database\Mapper\ActionLink">ActionLink</abbr></a>            </span>
 </dt>
@@ -339,20 +340,20 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method___construct">__construct()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_createRefund">createRefund()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_createRefund">createRefund()</a>
     <span>
                                 &nbsp;: true|null    </span>
 </dt>
 <dd>Create a refund for a prospective member. Returns `true` iff the Refund was successfully created.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_getCheckoutLink">getCheckoutLink()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_getCheckoutLink">getCheckoutLink()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
@@ -361,20 +362,20 @@ track of what we are doing. As such, we create a `Payment` for the prospective m
 Session.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_getLidnrFromCheckoutSession">getLidnrFromCheckoutSession()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_getLidnrFromCheckoutSession">getLidnrFromCheckoutSession()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
 <dd>Get the id of a prospective member from the Checkout Session.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_getPaymentLink">getPaymentLink()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_getPaymentLink">getPaymentLink()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-PaymentLink.html"><abbr title="\Database\Model\PaymentLink">PaymentLink</abbr></a>|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_handleEvent">handleEvent()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_handleEvent">handleEvent()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -382,7 +383,7 @@ Session.</dd>
 able to handle a few webhook events that Stripe sends us. In other words, this is the &quot;fulfillment&quot; process.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_hasRefund">hasRefund()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_hasRefund">hasRefund()</a>
     <span>
                                 &nbsp;: bool|null    </span>
 </dt>
@@ -390,20 +391,20 @@ able to handle a few webhook events that Stripe sends us. In other words, this i
 such a Refund, just that it exists.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_restartCheckoutLink">restartCheckoutLink()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_restartCheckoutLink">restartCheckoutLink()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
 <dd>Try to restart an active Checkout Session, if this is not possible, create a new Checkout Session.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Database-Service-Stripe.html#method_verifyEvent">verifyEvent()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_verifyEvent">verifyEvent()</a>
     <span>
                                 &nbsp;: <abbr title="\Stripe\Event">Event</abbr>|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Database-Service-Stripe.html#method_createCheckoutSession">createCheckoutSession()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_createCheckoutSession">createCheckoutSession()</a>
     <span>
                                 &nbsp;: <abbr title="\Stripe\Checkout\Session">Session</abbr>|null    </span>
 </dt>
@@ -411,13 +412,13 @@ such a Refund, just that it exists.</dd>
 information on their details see {@link https://stripe.com/docs/api/checkout/sessions/object}.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Database-Service-Stripe.html#method_getCheckoutSession">getCheckoutSession()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_getCheckoutSession">getCheckoutSession()</a>
     <span>
                                 &nbsp;: <abbr title="\Stripe\Checkout\Session">Session</abbr>|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Database-Service-Stripe.html#method_getClient">getClient()</a>
+    <a class="" href="classes/Database-Service-Stripe.html#method_getClient">getClient()</a>
     <span>
                                 &nbsp;: <abbr title="\Stripe\StripeClient">StripeClient</abbr>    </span>
 </dt>
@@ -459,6 +460,7 @@ prevent unwanted access.</dd>
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-CheckoutSession.html"><abbr title="\Database\Mapper\CheckoutSession">CheckoutSession</abbr></a></span>
@@ -493,6 +495,7 @@ prevent unwanted access.</dd>
 
     </aside>
 
+    
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
@@ -529,6 +532,7 @@ prevent unwanted access.</dd>
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type"><abbr title="\Monolog\Logger">Logger</abbr></span>
@@ -564,6 +568,7 @@ prevent unwanted access.</dd>
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a></span>
@@ -598,6 +603,7 @@ prevent unwanted access.</dd>
 
     </aside>
 
+    
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
@@ -645,6 +651,7 @@ prevent unwanted access.</dd>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -734,6 +741,7 @@ prevent unwanted access.</dd>
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -783,6 +791,7 @@ Session.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
         <section class="phpdocumentor-description"><p>Finally, we return the URL of the Stripe checkout page on which the user can pay.</p>
 </section>
 
@@ -834,6 +843,7 @@ Session.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -880,6 +890,7 @@ Session.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -930,6 +941,7 @@ able to handle a few webhook events that Stripe sends us. In other words, this i
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -974,6 +986,7 @@ such a Refund, just that it exists.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1023,6 +1036,7 @@ such a Refund, just that it exists.</p>
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1069,6 +1083,7 @@ such a Refund, just that it exists.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1126,6 +1141,7 @@ information on their details see {@link https://stripe.com/docs/api/checkout/ses
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1172,6 +1188,7 @@ information on their details see {@link https://stripe.com/docs/api/checkout/ses
 
     <div class="phpdocumentor-label-line">
         </div>
+    
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1221,6 +1238,7 @@ prevent unwanted access.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
     
     
     
@@ -1346,29 +1364,29 @@ prevent unwanted access.</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/Database-Service-Stripe.html#property_checkoutSessionMapper">$checkoutSessionMapper<a href="classes/Database-Service-Stripe.html"></li>
-                                                    <li><a href="classes/Database-Service-Stripe.html#property_config">$config<a href="classes/Database-Service-Stripe.html"></li>
-                                                    <li><a href="classes/Database-Service-Stripe.html#property_logger">$logger<a href="classes/Database-Service-Stripe.html"></li>
-                                                    <li><a href="classes/Database-Service-Stripe.html#property_memberService">$memberService<a href="classes/Database-Service-Stripe.html"></li>
-                                                    <li><a href="classes/Database-Service-Stripe.html#property_paymentLinkMapper">$paymentLinkMapper<a href="classes/Database-Service-Stripe.html"></li>
+                                                    <li class=""><a href="classes/Database-Service-Stripe.html#property_checkoutSessionMapper">$checkoutSessionMapper</li>
+                                                    <li class=""><a href="classes/Database-Service-Stripe.html#property_config">$config</li>
+                                                    <li class=""><a href="classes/Database-Service-Stripe.html#property_logger">$logger</li>
+                                                    <li class=""><a href="classes/Database-Service-Stripe.html#property_memberService">$memberService</li>
+                                                    <li class=""><a href="classes/Database-Service-Stripe.html#property_paymentLinkMapper">$paymentLinkMapper</li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/Database-Service-Stripe.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_createRefund">createRefund()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_getCheckoutLink">getCheckoutLink()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_getLidnrFromCheckoutSession">getLidnrFromCheckoutSession()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_getPaymentLink">getPaymentLink()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_handleEvent">handleEvent()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_hasRefund">hasRefund()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_restartCheckoutLink">restartCheckoutLink()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_verifyEvent">verifyEvent()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_createCheckoutSession">createCheckoutSession()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_getCheckoutSession">getCheckoutSession()</a></li>
-                                            <li><a href="classes/Database-Service-Stripe.html#method_getClient">getClient()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_createRefund">createRefund()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_getCheckoutLink">getCheckoutLink()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_getLidnrFromCheckoutSession">getLidnrFromCheckoutSession()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_getPaymentLink">getPaymentLink()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_handleEvent">handleEvent()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_hasRefund">hasRefund()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_restartCheckoutLink">restartCheckoutLink()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_verifyEvent">verifyEvent()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_createCheckoutSession">createCheckoutSession()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_getCheckoutSession">getCheckoutSession()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Stripe.html#method_getClient">getClient()</a></li>
                                     </ul>
             </li>
                     </ul>
