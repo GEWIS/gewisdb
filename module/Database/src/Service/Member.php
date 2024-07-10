@@ -756,7 +756,7 @@ class Member
             case MembershipTypes::External:
                 $member->setIsStudying(true);
                 $membershipEndsOn = clone $expiration;
-                $membershipEndsOn->setDate($year - 1, 7, 1);
+                $membershipEndsOn->setDate($year, 7, 1);
                 $member->setMembershipEndsOn($membershipEndsOn);
                 $member->setType(MembershipTypes::External);
                 break;
