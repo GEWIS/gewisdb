@@ -660,6 +660,16 @@ return [
                             ],
                         ],
                     ],
+                    'example500' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/example500',
+                            'defaults' => [
+                                'controller' => ApiController::class,
+                                'action' => 'example500',
+                            ],
+                        ],
+                    ],
                     'members' => [
                         'type' => Literal::class,
                         'options' => [

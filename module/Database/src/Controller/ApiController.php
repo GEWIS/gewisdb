@@ -10,6 +10,7 @@ use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Stdlib\ResponseInterface;
 use Laminas\View\Model\JsonModel;
+use RuntimeException;
 use User\Model\Enums\ApiPermissions;
 use User\Service\ApiAuthenticationService;
 
@@ -38,6 +39,13 @@ class ApiController extends AbstractActionController
             'sync_paused' => $syncPaused,
         ]);
     }
+
+    /**
+     * Error 500 action.
+     */
+    public function example500Action(): JsonModel
+    {
+        throw new RuntimeException('An example exception was thrown.');
     }
 
     /**
@@ -118,7 +126,7 @@ class ApiController extends AbstractActionController
     {
         $response = $this->getResponse();
         if ($response instanceof Response) {
-        $response->setStatusCode(Response::STATUS_CODE_204);
+            $response->setStatusCode(Response::STATUS_CODE_204);
         }
 
         $res = [

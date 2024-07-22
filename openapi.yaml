@@ -171,7 +171,25 @@ paths:
       security:
         - api_auth:
             - MembersActiveR
-
+  /example404:
+    get:
+      summary: Example 404
+      description: This 404 will be returned if there is a mistake in the requested path
+      tags:
+        - errors
+      responses:
+        404:
+          $ref: '#/components/responses/not_found_route'
+  /example500:
+    get:
+      summary: Example 500
+      description: This 500 will be returned if there is a mistake in the requested path
+      tags:
+        - errors
+      responses:
+        500:
+          $ref: '#/components/responses/server_error'
+          
 components:
   schemas:
     health:
