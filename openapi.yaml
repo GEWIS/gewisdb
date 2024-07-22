@@ -328,6 +328,44 @@ components:
           type: string
           example: Testorgaan
   responses:
+    server_error:
+      description: There was an error in the server. Most likely, this is a permanent error.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                default: "error"
+              error:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    default: "error-exception"
+                  exception:
+                    type: string
+                    example: "An example exception was thrown"
+    not_found_route:
+      description: This route does not exist (which is different from not finding a specific resource)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                default: "error"
+              error:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    default: "error-router-no-match"
+                  exception:
+                    type: string
+                    example: null
     no_permission:
       description: The token that was used does not have the required permissions
       content:

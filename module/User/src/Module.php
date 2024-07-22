@@ -11,6 +11,7 @@ use Laminas\Mvc\MvcEvent;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Listener\AuthenticationListener;
 use User\Listener\AuthorizationListener;
+use User\Listener\DispatchErrorFormatterListener;
 use User\Service\ApiAuthenticationService;
 
 class Module
@@ -44,17 +45,13 @@ class Module
         $authorizationListener = new AuthorizationListener(
             $apiAuthService,
         );
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, $authorizationListener);
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, $authorizationListener, 10);
 
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, static function ($e) use ($authService) {
-            if (!$authService->hasIdentity()) {
-                $response = $e->getResponse();
-                $response->getHeaders()->addHeaderLine('Location', '/login');
-                $response->setStatusCode(302);
-
-                return $response;
-            }
-        });
+        /**
+         * Format errors in case of dispatch errors after authentication
+         */
+        $dispatchErrorFormatterListener = new DispatchErrorFormatterListener();
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, $dispatchErrorFormatterListener, 5);
     }
 
     /**
