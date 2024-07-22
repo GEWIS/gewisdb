@@ -9,7 +9,7 @@ info:
   license:
     name: GNU GENERAL PUBLIC LICENSE Version 3
     url: https://github.com/GEWIS/gewisdb/blob/main/LICENSE.txt
-  version: 61a3f816c126d454d7bd665dd6788f9d7a619961
+  version: 3.0.1
 externalDocs:
   description: Contribute to this API
   url: https://github.com/GEWIS/gewisdb
@@ -90,6 +90,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  status:
+                    type: string
+                    example: "success"
                   data:
                     type: array
                     items:
@@ -121,6 +124,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  status:
+                    type: string
+                    example: "success"
                   data:
                     $ref: '#/components/schemas/Member'
         204:
@@ -153,6 +159,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  status:
+                    type: string
+                    example: "success"
                   data:
                     type: array
                     items:
@@ -168,6 +177,9 @@ components:
     health:
       type: object
       properties:
+        status:
+          type: string
+          example: "success"
         healthy:
           type: boolean
         sync_paused:
