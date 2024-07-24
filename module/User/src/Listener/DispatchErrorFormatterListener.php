@@ -19,6 +19,36 @@ use function substr;
 
 final class DispatchErrorFormatterListener
 {
+    public function __invoke(MvcEvent $e): void
+    {
+        /**
+         * The source code is public so we can give away 404 errors if it is because of no route
+         * This does not include 404 responses that are returned by logic, such as when a member does not exist
+         **/
+        if ('error-router-no-match' === $e->getError()) {
+            $this->handleNoMatchedRoute($e);
+
+            return;
+        }
+
+        /**
+         * If this is not an error-router-no-match error, we must have a matching route
+         */
+        $match = $e->getRouteMatch();
+
+        // We should always have a match here; if we do not, throw an exception
+        // possibly including previous exceptions
+        if (null === $match) {
+            throw new LogicException(
+                message: 'Assumed route would be present; no route present',
+                previous: $e->getParam('exception', null),
+            );
+        }
+
+        // If we do have a match, this implies we have properly authenticated before
+        $this->handleMatchedRoute($e, $match);
+    }
+
     private function matchAncestorRoute(
         Request $request,
         Router $router,
@@ -106,35 +136,5 @@ final class DispatchErrorFormatterListener
         }
 
         $e->stopPropagation();
-    }
-
-    public function __invoke(MvcEvent $e): void
-    {
-        /**
-         * The source code is public so we can give away 404 errors if it is because of no route
-         * This does not include 404 responses that are returned by logic, such as when a member does not exist
-         **/
-        if ('error-router-no-match' === $e->getError()) {
-            $this->handleNoMatchedRoute($e);
-
-            return;
-        }
-
-        /**
-         * If this is not an error-router-no-match error, we must have a matching route
-         */
-        $match = $e->getRouteMatch();
-
-        // We should always have a match here; if we do not, throw an exception
-        // possibly including previous exceptions
-        if (null === $match) {
-            throw new LogicException(
-                message: 'Assumed route would be present; no route present',
-                previous: $e->getParam('exception', null),
-            );
-        }
-
-        // If we do have a match, this implies we have properly authenticated before
-        $this->handleMatchedRoute($e, $match);
     }
 }
