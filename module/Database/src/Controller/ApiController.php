@@ -8,7 +8,6 @@ use Database\Model\Enums\ApiResponseStatuses;
 use Database\Service\Api as ApiService;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\Stdlib\ResponseInterface;
 use Laminas\View\Model\JsonModel;
 use RuntimeException;
 use User\Model\Enums\ApiPermissions;
@@ -74,7 +73,7 @@ class ApiController extends AbstractActionController
     /**
      * Return member
      */
-    public function memberAction(): JsonModel|ResponseInterface
+    public function memberAction(): JsonModel
     {
         $this->apiAuthService->assertCan(ApiPermissions::MembersR);
 
