@@ -241,13 +241,13 @@
             <div class="phpdocumentor-column -nine phpdocumentor-content">
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker.html">Checker</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/user.html">User</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/user-listener.html">Listener</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Error
+    DispatchErrorFormatterListener
 
     
             <div class="phpdocumentor-element__package">
@@ -262,40 +262,22 @@
 
 <div class="phpdocumentor-label-line">
 
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
 
-    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Abstract</span><span>Yes</span></div>
 
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Listener/DispatchErrorFormatterListener.php"><a href="files/module-user-src-listener-dispatcherrorformatterlistener.html"><abbr title="module/User/src/Listener/DispatchErrorFormatterListener.php">DispatchErrorFormatterListener.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Denotes an error that was occurred while checking a database
-i.e. the database is left in a wrong state</p>
+        
 
 
 
-
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Checker-Model-Error.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">template</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>T of SubDecisionModel</p>
-</section>
-
-                                    </dd>
-                                            </dl>
 
 
 
@@ -303,7 +285,7 @@ i.e. the database is left in a wrong state</p>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Checker-Model-Error.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/User-Listener-DispatchErrorFormatterListener.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -315,56 +297,41 @@ i.e. the database is left in a wrong state</p>
 
 
 
-<h4 id="toc-properties">
-    Properties
-    <a href="classes/Checker-Model-Error.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Checker-Model-Error.html#property_meeting">$meeting</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Checker-Model-Error.html#property_subDecision">$subDecision</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Model-SubDecision.html"><abbr title="\Database\Model\SubDecision">SubDecision</abbr></a>            </span>
-</dt>
-
-    </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Checker-Model-Error.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/User-Listener-DispatchErrorFormatterListener.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method___construct">__construct()</a>
+    <a class="" href="classes/User-Listener-DispatchErrorFormatterListener.html#method___invoke">__invoke()</a>
     <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd>Create a new description.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method_asText">asText()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Return a textual representation of the error.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method_getMeeting">getMeeting()</a>
-    <span>
-                                &nbsp;: <a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>    </span>
+                                &nbsp;: void    </span>
 </dt>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method_getSubDecision">getSubDecision()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/User-Listener-DispatchErrorFormatterListener.html#method_handleMatchedRoute">handleMatchedRoute()</a>
     <span>
-                                &nbsp;: <abbr title="\Checker\Model\T">T</abbr>    </span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/User-Listener-DispatchErrorFormatterListener.html#method_handleNoMatchedRoute">handleNoMatchedRoute()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/User-Listener-DispatchErrorFormatterListener.html#method_isApiMatch">isApiMatch()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/User-Listener-DispatchErrorFormatterListener.html#method_matchAncestorRoute">matchAncestorRoute()</a>
+    <span>
+                                &nbsp;: <abbr title="\Laminas\Router\RouteMatch">RouteMatch</abbr>|null    </span>
 </dt>
 
     </dl>
@@ -374,90 +341,11 @@ i.e. the database is left in a wrong state</p>
         
 
         
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Checker-Model-Error.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                -read-only        "
->
-    <h4 class="phpdocumentor-element__name" id="property_meeting">
-        $meeting
-        <a href="classes/Checker-Model-Error.html#property_meeting" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">25</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$meeting</span>
-    </code>
-
-    
-    
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                -read-only        "
->
-    <h4 class="phpdocumentor-element__name" id="property_subDecision">
-        $subDecision
-        <a href="classes/Checker-Model-Error.html#property_subDecision" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">26</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-SubDecision.html"><abbr title="\Database\Model\SubDecision">SubDecision</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$subDecision</span>
-    </code>
-
-    
-    
-    
-
-    
-
-</article>
-            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Checker-Model-Error.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/User-Listener-DispatchErrorFormatterListener.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -466,23 +354,22 @@ i.e. the database is left in a wrong state</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Checker-Model-Error.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___invoke">
+        __invoke()
+        <a href="classes/User-Listener-DispatchErrorFormatterListener.html#method___invoke" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Listener/DispatchErrorFormatterListener.php"><a href="files/module-user-src-listener-dispatcherrorformatterlistener.html"><abbr title="module/User/src/Listener/DispatchErrorFormatterListener.php">DispatchErrorFormatterListener.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Create a new description.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Checker\Model\T">T</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subDecision</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__invoke</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$e</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -491,22 +378,11 @@ i.e. the database is left in a wrong state</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$meeting</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$e</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Meeting for which the error is detected.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$subDecision</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Checker\Model\T">T</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Note that this does not necessarily have to be made during <code class="prettyprint">$meeting</code>.</p>
-</section>
-
+                
             </dd>
             </dl>
 
@@ -519,115 +395,198 @@ i.e. the database is left in a wrong state</p>
                     <article
         class="phpdocumentor-element
             -method
-            -public
-                        -abstract                                "
+            -private
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_asText">
-        asText()
-        <a href="classes/Checker-Model-Error.html#method_asText" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_handleMatchedRoute">
+        handleMatchedRoute()
+        <a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_handleMatchedRoute" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Listener/DispatchErrorFormatterListener.php"><a href="files/module-user-src-listener-dispatcherrorformatterlistener.html"><abbr title="module/User/src/Listener/DispatchErrorFormatterListener.php">DispatchErrorFormatterListener.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Return a textual representation of the error.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">asText</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">handleMatchedRoute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$e</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Router\RouteMatch">RouteMatch</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$match</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
     
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$e</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$match</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Router\RouteMatch">RouteMatch</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleNoMatchedRoute">
+        handleNoMatchedRoute()
+        <a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_handleNoMatchedRoute" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Listener/DispatchErrorFormatterListener.php"><a href="files/module-user-src-listener-dispatcherrorformatterlistener.html"><abbr title="module/User/src/Listener/DispatchErrorFormatterListener.php">DispatchErrorFormatterListener.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">81</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">handleNoMatchedRoute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$e</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$e</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\MvcEvent">MvcEvent</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isApiMatch">
+        isApiMatch()
+        <a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_isApiMatch" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Listener/DispatchErrorFormatterListener.php"><a href="files/module-user-src-listener-dispatcherrorformatterlistener.html"><abbr title="module/User/src/Listener/DispatchErrorFormatterListener.php">DispatchErrorFormatterListener.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">76</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">isApiMatch</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Router\RouteMatch">RouteMatch</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$match</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$match</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Router\RouteMatch">RouteMatch</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
     
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
+        <span class="phpdocumentor-signature__response_type">bool</span>
             </section>
 
 </article>
                     <article
         class="phpdocumentor-element
             -method
-            -public
+            -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMeeting">
-        getMeeting()
-        <a href="classes/Checker-Model-Error.html#method_getMeeting" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_matchAncestorRoute">
+        matchAncestorRoute()
+        <a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_matchAncestorRoute" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Listener/DispatchErrorFormatterListener.php"><a href="files/module-user-src-listener-dispatcherrorformatterlistener.html"><abbr title="module/User/src/Listener/DispatchErrorFormatterListener.php">DispatchErrorFormatterListener.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMeeting</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span></code>
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">matchAncestorRoute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Http\Request">Request</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Router\RouteStackInterface">RouteStackInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$router</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Router\RouteMatch">RouteMatch</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
     
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Http\Request">Request</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$router</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Router\RouteStackInterface">RouteStackInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
     
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSubDecision">
-        getSubDecision()
-        <a href="classes/Checker-Model-Error.html#method_getSubDecision" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">38</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getSubDecision</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Checker\Model\T">T</abbr></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Checker\Model\T">T</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Router\RouteMatch">RouteMatch</abbr>|null</span>
             </section>
 
 </article>
@@ -637,7 +596,7 @@ i.e. the database is left in a wrong state</p>
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Checker/src/Model/Error.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/User/src/Listener/DispatchErrorFormatterListener.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -736,26 +695,19 @@ i.e. the database is left in a wrong state</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/Checker-Model-Error.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Checker-Model-Error.html#toc-methods">Methods</a></li>
+                                                                                <li><a href="classes/User-Listener-DispatchErrorFormatterListener.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
-                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
-                <li>
-                    <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Checker-Model-Error.html#property_meeting">$meeting</a></li>
-                                                    <li class=""><a href="classes/Checker-Model-Error.html#property_subDecision">$subDecision</a></li>
-                                            </ul>
-                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method_asText">asText()</a></li>
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method_getMeeting">getMeeting()</a></li>
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method_getSubDecision">getSubDecision()</a></li>
+                                            <li class=""><a href="classes/User-Listener-DispatchErrorFormatterListener.html#method___invoke">__invoke()</a></li>
+                                            <li class=""><a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_handleMatchedRoute">handleMatchedRoute()</a></li>
+                                            <li class=""><a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_handleNoMatchedRoute">handleNoMatchedRoute()</a></li>
+                                            <li class=""><a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_isApiMatch">isApiMatch()</a></li>
+                                            <li class=""><a href="classes/User-Listener-DispatchErrorFormatterListener.html#method_matchAncestorRoute">matchAncestorRoute()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -775,7 +727,7 @@ i.e. the database is left in a wrong state</p>
     </section>
 </section>
         </div>
-        <a href="classes/Checker-Model-Error.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/User-Listener-DispatchErrorFormatterListener.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

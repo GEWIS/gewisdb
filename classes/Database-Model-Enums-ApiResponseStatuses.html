@@ -241,14 +241,18 @@
             <div class="phpdocumentor-column -nine phpdocumentor-content">
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker.html">Checker</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/checker-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-model-enums.html">Enums</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Error
+    ApiResponseStatuses
 
+            <span class="phpdocumentor-element__extends">
+        : string
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -260,42 +264,18 @@
     
     </h2>
 
-<div class="phpdocumentor-label-line">
-
-
-    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Abstract</span><span>Yes</span></div>
-
-</div>
-
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/ApiResponseStatuses.php"><a href="files/module-database-src-model-enums-apiresponsestatuses.html"><abbr title="module/Database/src/Model/Enums/ApiResponseStatuses.php">ApiResponseStatuses.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Denotes an error that was occurred while checking a database
-i.e. the database is left in a wrong state</p>
+            <p class="phpdocumentor-summary">Enum for the different statuses an API response can have</p>
 
 
 
 
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Checker-Model-Error.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">template</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>T of SubDecisionModel</p>
-</section>
-
-                                    </dd>
-                                            </dl>
 
 
 
@@ -303,7 +283,7 @@ i.e. the database is left in a wrong state</p>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Checker-Model-Error.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -314,101 +294,69 @@ i.e. the database is left in a wrong state</p>
 
 
 
-
-<h4 id="toc-properties">
-    Properties
-    <a href="classes/Checker-Model-Error.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Checker-Model-Error.html#property_meeting">$meeting</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Checker-Model-Error.html#property_subDecision">$subDecision</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Model-SubDecision.html"><abbr title="\Database\Model\SubDecision">SubDecision</abbr></a>            </span>
-</dt>
-
-    </dl>
-
-<h4 id="toc-methods">
-    Methods
-    <a href="classes/Checker-Model-Error.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+<h4 id="toc-cases">
+    Cases
+    <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#toc-cases" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method___construct">__construct()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a class="" href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Error">Error</a>
     <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd>Create a new description.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method_asText">asText()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Return a textual representation of the error.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method_getMeeting">getMeeting()</a>
-    <span>
-                                &nbsp;: <a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>    </span>
+                &nbsp;= &#039;error&#039;                    </span>
 </dt>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Checker-Model-Error.html#method_getSubDecision">getSubDecision()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a class="" href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Forbidden">Forbidden</a>
     <span>
-                                &nbsp;: <abbr title="\Checker\Model\T">T</abbr>    </span>
+                &nbsp;= &#039;forbidden&#039;                    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a class="" href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_NotFound">NotFound</a>
+    <span>
+                &nbsp;= &#039;notfound&#039;                    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -case -">
+    <a class="" href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Success">Success</a>
+    <span>
+                &nbsp;= &#039;success&#039;                    </span>
 </dt>
 
     </dl>
 
 
 
-        
 
-        
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Checker-Model-Error.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+
+            <section class="phpdocumentor-cases">
+        <h3 class="phpdocumentor-elements__header" id="cases">
+            Cases
+            <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#cases" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
         class="
             phpdocumentor-element
-            -property
-            -protected
-                                                -read-only        "
+            -enum-case
+        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_meeting">
-        $meeting
-        <a href="classes/Checker-Model-Error.html#property_meeting" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Success">
+        Success
+        <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Success" class="headerlink"><i class="fas fa-link"></i></a>
 
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/ApiResponseStatuses.php"><a href="files/module-database-src-model-enums-apiresponsestatuses.html"><abbr title="module/Database/src/Model/Enums/ApiResponseStatuses.php">ApiResponseStatuses.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
     
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$meeting</span>
-    </code>
-
     
     
     
@@ -419,225 +367,92 @@ i.e. the database is left in a wrong state</p>
                     <article
         class="
             phpdocumentor-element
-            -property
-            -protected
-                                                -read-only        "
+            -enum-case
+        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_subDecision">
-        $subDecision
-        <a href="classes/Checker-Model-Error.html#property_subDecision" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="enumcase_NotFound">
+        NotFound
+        <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_NotFound" class="headerlink"><i class="fas fa-link"></i></a>
 
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/ApiResponseStatuses.php"><a href="files/module-database-src-model-enums-apiresponsestatuses.html"><abbr title="module/Database/src/Model/Enums/ApiResponseStatuses.php">ApiResponseStatuses.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
     
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-SubDecision.html"><abbr title="\Database\Model\SubDecision">SubDecision</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$subDecision</span>
-    </code>
-
     
     
     
 
     
-
-</article>
-            </section>
-
-            <section class="phpdocumentor-methods">
-        <h3 class="phpdocumentor-elements__header" id="methods">
-            Methods
-            <a href="classes/Checker-Model-Error.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h3>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Checker-Model-Error.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Create a new description.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$meeting</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Checker\Model\T">T</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subDecision</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$meeting</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Meeting for which the error is detected.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$subDecision</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Checker\Model\T">T</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Note that this does not necessarily have to be made during <code class="prettyprint">$meeting</code>.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                        -abstract                                "
->
-    <h4 class="phpdocumentor-element__name" id="method_asText">
-        asText()
-        <a href="classes/Checker-Model-Error.html#method_asText" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">46</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Return a textual representation of the error.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">asText</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
 
 </article>
                     <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMeeting">
-        getMeeting()
-        <a href="classes/Checker-Model-Error.html#method_getMeeting" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Forbidden">
+        Forbidden
+        <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Forbidden" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/ApiResponseStatuses.php"><a href="files/module-database-src-model-enums-apiresponsestatuses.html"><abbr title="module/Database/src/Model/Enums/ApiResponseStatuses.php">ApiResponseStatuses.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMeeting</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
     
     
     
     
 
     
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Meeting.html"><abbr title="\Database\Model\Meeting">Meeting</abbr></a></span>
-            </section>
 
 </article>
                     <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
+        class="
+            phpdocumentor-element
+            -enum-case
+        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getSubDecision">
-        getSubDecision()
-        <a href="classes/Checker-Model-Error.html#method_getSubDecision" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="enumcase_Error">
+        Error
+        <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Error" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Checker/src/Model/Error.php"><a href="files/module-checker-src-model-error.html"><abbr title="module/Checker/src/Model/Error.php">Error.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Enums/ApiResponseStatuses.php"><a href="files/module-database-src-model-enums-apiresponsestatuses.html"><abbr title="module/Database/src/Model/Enums/ApiResponseStatuses.php">ApiResponseStatuses.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getSubDecision</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Checker\Model\T">T</abbr></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
     
     
     
     
 
     
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Checker\Model\T">T</abbr></span>
-            </section>
 
 </article>
             </section>
 
+        
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Checker/src/Model/Error.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Model/Enums/ApiResponseStatuses.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -728,7 +543,7 @@ i.e. the database is left in a wrong state</p>
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
-                                
+                            
     <section class="phpdocumentor-on-this-page__content">
         <strong class="phpdocumentor-on-this-page__title">On this page</strong>
 
@@ -736,28 +551,19 @@ i.e. the database is left in a wrong state</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/Checker-Model-Error.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Checker-Model-Error.html#toc-methods">Methods</a></li>
-                                    </ul>
+                                            <li><a href="classes/Database-Model-Enums-ApiResponseStatuses.html#toc-cases">Cases</a></li>
+                                                        </ul>
             </li>
-            
-                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                            <li class="phpdocumentor-on-this-page-section__title">Cases</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Checker-Model-Error.html#property_meeting">$meeting</a></li>
-                                                    <li class=""><a href="classes/Checker-Model-Error.html#property_subDecision">$subDecision</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Success">Success</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_NotFound">NotFound</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Forbidden">Forbidden</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Error">Error</a></li>
                                             </ul>
                 </li>
             
-                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
-            <li>
-                <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method_asText">asText()</a></li>
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method_getMeeting">getMeeting()</a></li>
-                                            <li class=""><a href="classes/Checker-Model-Error.html#method_getSubDecision">getSubDecision()</a></li>
-                                    </ul>
-            </li>
                     </ul>
     </section>
 
@@ -775,7 +581,7 @@ i.e. the database is left in a wrong state</p>
     </section>
 </section>
         </div>
-        <a href="classes/Checker-Model-Error.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Model-Enums-ApiResponseStatuses.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

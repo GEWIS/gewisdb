@@ -3276,6 +3276,11 @@ Search.appendIndex(
             "summary": "Healthy\u0020action.",
             "url": "classes/Database-Controller-ApiController.html#method_healthyAction"
         },                {
+            "fqsen": "\\Database\\Controller\\ApiController\u003A\u003Aexample500Action\u0028\u0029",
+            "name": "example500Action",
+            "summary": "Error\u0020500\u0020action.",
+            "url": "classes/Database-Controller-ApiController.html#method_example500Action"
+        },                {
             "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AmembersAction\u0028\u0029",
             "name": "membersAction",
             "summary": "Return\u0020members",
@@ -6235,6 +6240,31 @@ Search.appendIndex(
             "name": "annulledBy",
             "summary": "Annulled\u0020by.",
             "url": "classes/Database-Model-Decision.html#property_annulledBy"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\ApiResponseStatuses",
+            "name": "ApiResponseStatuses",
+            "summary": "Enum\u0020for\u0020the\u0020different\u0020statuses\u0020an\u0020API\u0020response\u0020can\u0020have",
+            "url": "classes/Database-Model-Enums-ApiResponseStatuses.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\ApiResponseStatuses\u003A\u003ASuccess",
+            "name": "Success",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Success"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\ApiResponseStatuses\u003A\u003ANotFound",
+            "name": "NotFound",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_NotFound"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\ApiResponseStatuses\u003A\u003AForbidden",
+            "name": "Forbidden",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Forbidden"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\ApiResponseStatuses\u003A\u003AError",
+            "name": "Error",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Error"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates",
             "name": "CheckoutSessionStates",
@@ -12756,20 +12786,40 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Listener-AuthorizationListener.html"
         },                {
-            "fqsen": "\\User\\Listener\\AuthorizationListener\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/User-Listener-AuthorizationListener.html#method___construct"
-        },                {
             "fqsen": "\\User\\Listener\\AuthorizationListener\u003A\u003A__invoke\u0028\u0029",
             "name": "__invoke",
             "summary": "",
             "url": "classes/User-Listener-AuthorizationListener.html#method___invoke"
         },                {
-            "fqsen": "\\User\\Listener\\AuthorizationListener\u003A\u003A\u0024apiAuthService",
-            "name": "apiAuthService",
+            "fqsen": "\\User\\Listener\\DispatchErrorFormatterListener",
+            "name": "DispatchErrorFormatterListener",
             "summary": "",
-            "url": "classes/User-Listener-AuthorizationListener.html#property_apiAuthService"
+            "url": "classes/User-Listener-DispatchErrorFormatterListener.html"
+        },                {
+            "fqsen": "\\User\\Listener\\DispatchErrorFormatterListener\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/User-Listener-DispatchErrorFormatterListener.html#method___invoke"
+        },                {
+            "fqsen": "\\User\\Listener\\DispatchErrorFormatterListener\u003A\u003AmatchAncestorRoute\u0028\u0029",
+            "name": "matchAncestorRoute",
+            "summary": "",
+            "url": "classes/User-Listener-DispatchErrorFormatterListener.html#method_matchAncestorRoute"
+        },                {
+            "fqsen": "\\User\\Listener\\DispatchErrorFormatterListener\u003A\u003AisApiMatch\u0028\u0029",
+            "name": "isApiMatch",
+            "summary": "",
+            "url": "classes/User-Listener-DispatchErrorFormatterListener.html#method_isApiMatch"
+        },                {
+            "fqsen": "\\User\\Listener\\DispatchErrorFormatterListener\u003A\u003AhandleNoMatchedRoute\u0028\u0029",
+            "name": "handleNoMatchedRoute",
+            "summary": "",
+            "url": "classes/User-Listener-DispatchErrorFormatterListener.html#method_handleNoMatchedRoute"
+        },                {
+            "fqsen": "\\User\\Listener\\DispatchErrorFormatterListener\u003A\u003AhandleMatchedRoute\u0028\u0029",
+            "name": "handleMatchedRoute",
+            "summary": "",
+            "url": "classes/User-Listener-DispatchErrorFormatterListener.html#method_handleMatchedRoute"
         },                {
             "fqsen": "\\User\\Mapper\\ApiPrincipalMapper",
             "name": "ApiPrincipalMapper",
