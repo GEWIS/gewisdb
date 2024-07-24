@@ -393,7 +393,7 @@ components:
             properties:
               status:
                 type: string
-                default: "error"
+                default: "forbidden"
               error:
                 type: object
                 properties:

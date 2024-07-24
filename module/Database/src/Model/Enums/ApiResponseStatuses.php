@@ -15,6 +15,9 @@ enum ApiResponseStatuses: string
     // For 404 HTTP code
     case NotFound = 'notfound';
 
+    // For 403 HTTP code
+    case Forbidden = 'forbidden';
+
     // For 5xx HTTP codes
     case Error = 'error';
 }

@@ -22,7 +22,7 @@ final class AuthorizationListener
         }
 
         $e->setViewModel(new JsonModel([
-            'status' => ApiResponseStatuses::Error,
+            'status' => ApiResponseStatuses::Forbidden,
             'error' => [
                 'type' => NotAllowedException::class,
                 'message' => $e->getParam('exception')->getMessage(),
