@@ -69,10 +69,11 @@ final class AuthenticationListener
             return null;
         }
 
-        $e->stopPropagation(true);
         $response = $e->getResponse();
         $response->getHeaders()->addHeaderLine('Location', '/login');
         $response->setStatusCode(302);
+
+        $e->stopPropagation();
 
         return $response;
     }

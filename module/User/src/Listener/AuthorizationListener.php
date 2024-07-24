@@ -39,6 +39,6 @@ final class AuthorizationListener
             $response->setStatusCode(Response::STATUS_CODE_403);
         }
 
-        $e->stopPropagation(true);
+        $e->stopPropagation();
     }
 }

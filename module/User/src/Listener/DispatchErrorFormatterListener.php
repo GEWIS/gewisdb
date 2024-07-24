@@ -79,7 +79,7 @@ final class DispatchErrorFormatterListener
             $response->setStatusCode(Response::STATUS_CODE_404);
         }
 
-        $e->stopPropagation(true);
+        $e->stopPropagation();
     }
 
     private function handleMatchedRoute(
@@ -105,7 +105,7 @@ final class DispatchErrorFormatterListener
             $response->setStatusCode(Response::STATUS_CODE_500);
         }
 
-        $e->stopPropagation(true);
+        $e->stopPropagation();
     }
 
     public function __invoke(MvcEvent $e): void
