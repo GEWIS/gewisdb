@@ -6,7 +6,7 @@ namespace Database\Controller;
 
 use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -59,7 +59,7 @@ class SettingsController extends AbstractActionController
     /**
      * List deletion action
      */
-    public function deleteListAction(): Response|ViewModel
+    public function deleteListAction(): HttpResponse|ViewModel
     {
         $name = $this->params()->fromRoute('name');
 

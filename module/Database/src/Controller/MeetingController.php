@@ -11,7 +11,7 @@ use Database\Model\Meeting as MeetingModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Meeting as MeetingService;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
@@ -42,7 +42,7 @@ class MeetingController extends AbstractActionController
     /**
      * Create a new meeting.
      */
-    public function createAction(): Response|ViewModel
+    public function createAction(): HttpResponse|ViewModel
     {
         $request = $this->getRequest();
 
@@ -159,7 +159,7 @@ class MeetingController extends AbstractActionController
     /**
      * Decision form action.
      */
-    public function decisionformAction(): Response|ViewModel
+    public function decisionformAction(): HttpResponse|ViewModel
     {
         if (!$this->getRequest()->isPost()) {
             return $this->redirect()->toRoute('meeting');

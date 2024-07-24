@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Controller;
 
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use User\Service\UserService;
@@ -34,7 +34,7 @@ class SettingsController extends AbstractActionController
     /**
      * Create a user.
      */
-    public function createUserAction(): Response|ViewModel
+    public function createUserAction(): HttpResponse|ViewModel
     {
         $form = $this->userService->getCreateForm();
 
@@ -52,7 +52,7 @@ class SettingsController extends AbstractActionController
     /**
      * Edit a user.
      */
-    public function editUserAction(): Response|ViewModel
+    public function editUserAction(): HttpResponse|ViewModel
     {
         $form = $this->userService->getEditForm();
         $id = (int) $this->params()->fromRoute('id');
@@ -81,7 +81,7 @@ class SettingsController extends AbstractActionController
     /**
      * Remove a user.
      */
-    public function removeUserAction(): Response
+    public function removeUserAction(): HttpResponse
     {
         if ($this->getRequest()->isPost()) {
             $this->userService->remove((int) $this->params()->fromRoute('id'));

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Controller;
 
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use User\Service\UserService;
@@ -23,7 +23,7 @@ class UserController extends AbstractActionController
     /**
      * User login action
      */
-    public function indexAction(): Response|ViewModel
+    public function indexAction(): HttpResponse|ViewModel
     {
         if ($this->getRequest()->isPost()) {
             $result = $this->service->login($this->getRequest()->getPost()->toArray());
@@ -42,7 +42,7 @@ class UserController extends AbstractActionController
     /**
      * User logout action
      */
-    public function logoutAction(): Response
+    public function logoutAction(): HttpResponse
     {
         $this->service->logout();
 

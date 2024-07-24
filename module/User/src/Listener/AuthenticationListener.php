@@ -6,8 +6,9 @@ namespace User\Listener;
 
 use InvalidArgumentException;
 use Laminas\Authentication\AuthenticationService;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\MvcEvent;
-use Laminas\Stdlib\ResponseInterface as Response;
+use Laminas\Stdlib\ResponseInterface;
 use LogicException;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Service\ApiAuthenticationService;
@@ -29,7 +30,7 @@ final class AuthenticationListener
     ) {
     }
 
-    public function __invoke(MvcEvent $e): ?Response
+    public function __invoke(MvcEvent $e): ?ResponseInterface
     {
         if (MvcEvent::EVENT_ROUTE !== $e->getName()) {
             throw new InvalidArgumentException(
@@ -62,17 +63,22 @@ final class AuthenticationListener
     /**
      * Handle authentication for users
      */
-    private function dbuserAuth(MvcEvent $e): ?Response
+    private function dbuserAuth(MvcEvent $e): ?ResponseInterface
     {
         if ($this->authService->hasIdentity()) {
             // user is logged in, just continue
             return null;
         }
 
-        $e->stopPropagation(true);
+        // If this is a HTTP request, we redirect the user to the login page
         $response = $e->getResponse();
-        $response->getHeaders()->addHeaderLine('Location', '/login');
-        $response->setStatusCode(302);
+        if ($response instanceof HttpResponse) {
+            $response->getHeaders()->addHeaderLine('Location', '/login');
+            $response->setStatusCode(302);
+        }
+
+        // Return $response will prevent output, but we also stop other listeners when we need to logon first
+        $e->stopPropagation();
 
         return $response;
     }
@@ -80,7 +86,7 @@ final class AuthenticationListener
     /**
      * Handle authentication for api tokens
      */
-    private function apiAuth(MvcEvent $e): ?Response
+    private function apiAuth(MvcEvent $e): ?ResponseInterface
     {
         if ($e->getRequest()->getHeaders()->has('Authorization')) {
             // This is an API call, we do this on every request
@@ -92,9 +98,14 @@ final class AuthenticationListener
             }
         }
 
+        // If this is a HTTP request, we add authentication headers
         $response = $e->getResponse();
-        $response->getHeaders()->addHeaderLine('WWW-Authenticate', 'Bearer realm="/api"');
-        $response->setStatusCode(401);
+        if ($response instanceof HttpResponse) {
+            $response->getHeaders()->addHeaderLine('WWW-Authenticate', 'Bearer realm="/api"');
+            $response->setStatusCode(401);
+        }
+
+        $e->stopPropagation();
 
         return $response;
     }

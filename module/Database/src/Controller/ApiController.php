@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Controller;
 
+use Database\Model\Enums\ApiResponseStatuses;
 use Database\Service\Api as ApiService;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
+use RuntimeException;
 use User\Model\Enums\ApiPermissions;
 use User\Service\ApiAuthenticationService;
 
@@ -30,7 +32,19 @@ class ApiController extends AbstractActionController
 
         $syncPaused = $this->apiService->isSyncPaused();
 
-        return new JsonModel(['healthy' => true, 'sync_paused' => $syncPaused]);
+        return new JsonModel([
+            'status' => ApiResponseStatuses::Success,
+            'healthy' => true,
+            'sync_paused' => $syncPaused,
+        ]);
+    }
+
+    /**
+     * Error 500 action.
+     */
+    public function example500Action(): JsonModel
+    {
+        throw new RuntimeException('An example exception was thrown.');
     }
 
     /**
@@ -48,7 +62,10 @@ class ApiController extends AbstractActionController
         $allowDeleted = $this->apiAuthService->currentUserCan(ApiPermissions::MembersDeleted);
 
         $members = $this->apiService->getMembers($additionalProperties, $allowDeleted);
-        $res = ['data' => $members];
+        $res = [
+            'status' => ApiResponseStatuses::Success,
+            'data' => $members,
+        ];
 
         return new JsonModel($res);
     }
@@ -56,7 +73,7 @@ class ApiController extends AbstractActionController
     /**
      * Return member
      */
-    public function memberAction(): JsonModel|Response
+    public function memberAction(): JsonModel
     {
         $this->apiAuthService->assertCan(ApiPermissions::MembersR);
 
@@ -70,7 +87,10 @@ class ApiController extends AbstractActionController
             return $this->noContent();
         }
 
-        $res = ['data' => $member];
+        $res = [
+            'status' => ApiResponseStatuses::Success,
+            'data' => $member,
+        ];
 
         return new JsonModel($res);
     }
@@ -90,7 +110,10 @@ class ApiController extends AbstractActionController
             $includeInactiveFraternity,
             $allowDeleted,
         );
-        $res = ['data' => $members];
+        $res = [
+            'status' => ApiResponseStatuses::Success,
+            'data' => $members,
+        ];
 
         return new JsonModel($res);
     }
@@ -98,12 +121,19 @@ class ApiController extends AbstractActionController
     /**
      * To follow best practices, we generate a 204 for empty datasets
      */
-    private function noContent(): Response
+    private function noContent(): JsonModel
     {
-        $response = new Response();
-        $response->setStatusCode(Response::STATUS_CODE_204);
+        $response = $this->getResponse();
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_204);
+        }
 
-        return $response;
+        $res = [
+            'status' => ApiResponseStatuses::Success,
+            'data' => null,
+        ];
+
+        return new JsonModel($res);
     }
 
     /**

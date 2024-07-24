@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace User\Listener;
 
+use Database\Model\Enums\ApiResponseStatuses;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\MvcEvent;
 use Laminas\View\Model\JsonModel;
 use User\Model\Exception\NotAllowed as NotAllowedException;
-use User\Service\ApiAuthenticationService;
 
 final class AuthorizationListener
 {
-    public function __construct(
-        private readonly ApiAuthenticationService $apiAuthService,
-    ) {
-    }
-
     public function __invoke(MvcEvent $e): void
     {
         if (
@@ -25,14 +21,18 @@ final class AuthorizationListener
             return;
         }
 
-        $e->stopPropagation(true);
         $e->setViewModel(new JsonModel([
-            'status' => 'error',
+            'status' => ApiResponseStatuses::Forbidden,
             'error' => [
                 'type' => NotAllowedException::class,
                 'message' => $e->getParam('exception')->getMessage(),
             ],
         ]));
-        $e->getResponse()->setStatusCode(403);
+        $response = $e->getResponse();
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_403);
+        }
+
+        $e->stopPropagation();
     }
 }
