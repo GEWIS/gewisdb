@@ -25,7 +25,7 @@ final class AuthorizationListener
             'status' => ApiResponseStatuses::Forbidden,
             'error' => [
                 'type' => NotAllowedException::class,
-                'message' => $e->getParam('exception')->getMessage(),
+                'exception' => $e->getParam('exception')->getMessage(),
             ],
         ]));
         $response = $e->getResponse();
