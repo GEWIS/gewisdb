@@ -42,9 +42,7 @@ class Module
         /**
          * Catch authorization exceptions
          */
-        $authorizationListener = new AuthorizationListener(
-            $apiAuthService,
-        );
+        $authorizationListener = new AuthorizationListener();
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, $authorizationListener, 10);
 
         /**
