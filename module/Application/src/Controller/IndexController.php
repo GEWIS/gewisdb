@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\Plugin\Identity\Identity;
 use Laminas\Session\Container as SessionContainer;
@@ -16,7 +16,7 @@ use function explode;
  */
 class IndexController extends AbstractActionController
 {
-    public function langAction(): Response
+    public function langAction(): HttpResponse
     {
         $session = new SessionContainer('lang');
         $session->lang = $this->params()->fromRoute('lang');

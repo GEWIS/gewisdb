@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Controller;
 
 use Database\Service\Query as QueryService;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -18,7 +18,7 @@ class QueryController extends AbstractActionController
     /**
      * Index action.
      */
-    public function indexAction(): Response|ViewModel
+    public function indexAction(): HttpResponse|ViewModel
     {
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
@@ -74,7 +74,7 @@ class QueryController extends AbstractActionController
     /**
      * Export action.
      */
-    public function exportAction(): Response|ViewModel
+    public function exportAction(): HttpResponse|ViewModel
     {
         if ($this->getRequest()->isPost()) {
             $result = $this->queryService->execute(

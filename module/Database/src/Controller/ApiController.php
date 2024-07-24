@@ -6,7 +6,7 @@ namespace Database\Controller;
 
 use Database\Model\Enums\ApiResponseStatuses;
 use Database\Service\Api as ApiService;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Stdlib\ResponseInterface;
 use Laminas\View\Model\JsonModel;
@@ -125,8 +125,8 @@ class ApiController extends AbstractActionController
     private function noContent(): JsonModel
     {
         $response = $this->getResponse();
-        if ($response instanceof Response) {
-            $response->setStatusCode(Response::STATUS_CODE_204);
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_204);
         }
 
         $res = [

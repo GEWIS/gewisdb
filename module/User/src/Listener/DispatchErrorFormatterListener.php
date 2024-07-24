@@ -6,7 +6,7 @@ namespace User\Listener;
 
 use Database\Model\Enums\ApiResponseStatuses;
 use Laminas\Http\Request;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Router\RouteMatch;
 use Laminas\Router\RouteStackInterface as Router;
@@ -75,8 +75,8 @@ final class DispatchErrorFormatterListener
         ]);
         $e->setViewModel($view);
         $response = $e->getResponse();
-        if ($response instanceof Response) {
-            $response->setStatusCode(Response::STATUS_CODE_404);
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_404);
         }
 
         $e->stopPropagation();
@@ -101,8 +101,8 @@ final class DispatchErrorFormatterListener
         ]);
         $e->setViewModel($view);
         $response = $e->getResponse();
-        if ($response instanceof Response) {
-            $response->setStatusCode(Response::STATUS_CODE_500);
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_500);
         }
 
         $e->stopPropagation();

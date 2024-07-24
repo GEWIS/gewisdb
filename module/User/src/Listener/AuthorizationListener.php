@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace User\Listener;
 
 use Database\Model\Enums\ApiResponseStatuses;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\MvcEvent;
 use Laminas\View\Model\JsonModel;
 use User\Model\Exception\NotAllowed as NotAllowedException;
@@ -29,8 +29,8 @@ final class AuthorizationListener
             ],
         ]));
         $response = $e->getResponse();
-        if ($response instanceof Response) {
-            $response->setStatusCode(Response::STATUS_CODE_403);
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_403);
         }
 
         $e->stopPropagation();

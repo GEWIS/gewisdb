@@ -7,7 +7,7 @@ namespace Database\Controller;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\JsonModel;
@@ -72,7 +72,7 @@ class ProspectiveMemberController extends AbstractActionController
      *
      * Shows prospective member information.
      */
-    public function finalizeAction(): Response
+    public function finalizeAction(): HttpResponse
     {
         $lidnr = (int) $this->params()->fromRoute('id');
 
@@ -111,7 +111,7 @@ class ProspectiveMemberController extends AbstractActionController
      *
      * Delete a prospective member.
      */
-    public function deleteAction(): Response|ViewModel
+    public function deleteAction(): HttpResponse|ViewModel
     {
         $lidnr = (int) $this->params()->fromRoute('id');
         $prospectiveMember = $this->memberService->getProspectiveMember($lidnr);

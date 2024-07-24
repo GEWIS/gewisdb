@@ -11,10 +11,11 @@ use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
 use DateTime;
 use Laminas\Http\Header\HeaderInterface;
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
+use Laminas\Stdlib\ResponseInterface;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 
@@ -48,7 +49,7 @@ class MemberController extends AbstractActionController
     /**
      * Subscribe action.
      */
-    public function subscribeAction(): Response|ViewModel
+    public function subscribeAction(): HttpResponse|ViewModel
     {
         $ipMCS = ip2long($this->remoteAddress) >= ip2long('131.155.68.0')
             && ip2long($this->remoteAddress) <= ip2long('131.155.71.255');
@@ -118,7 +119,7 @@ class MemberController extends AbstractActionController
         return new ViewModel($results);
     }
 
-    public function checkoutRestartAction(): Response|ViewModel
+    public function checkoutRestartAction(): HttpResponse|ViewModel
     {
         $token = (string) $this->params()->fromRoute('token');
         $paymentLink = $this->stripeService->getPaymentLink($token);
@@ -138,10 +139,10 @@ class MemberController extends AbstractActionController
 
         return $this->redirect()
             ->toUrl($restartedCheckoutLink)
-            ->setStatusCode(Response::STATUS_CODE_303);
+            ->setStatusCode(HttpResponse::STATUS_CODE_303);
     }
 
-    public function paymentWebhookAction(): Response
+    public function paymentWebhookAction(): ResponseInterface
     {
         $signature = $this->getRequest()->getHeader('Stripe-Signature');
 
@@ -153,13 +154,23 @@ class MemberController extends AbstractActionController
                 // (good) support for using Fibers to do this concurrently.
                 $this->stripeService->handleEvent($event);
 
-                return $this->getResponse()
-                    ->setStatusCode(Response::STATUS_CODE_200);
+                // We know this is always going to be an HttpResponse
+                $response = $this->getResponse();
+                if ($response instanceof HttpResponse) {
+                    $response->setStatusCode(HttpResponse::STATUS_CODE_200);
+                }
+
+                return $response;
             }
         }
 
-        return $this->getResponse()
-            ->setStatusCode(Response::STATUS_CODE_400);
+        // We know this is always going to be an HttpResponse
+        $response = $this->getResponse();
+        if ($response instanceof HttpResponse) {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_400);
+        }
+
+        return $response;
     }
 
     /**
@@ -243,7 +254,7 @@ class MemberController extends AbstractActionController
      *
      * Shows member information.
      */
-    public function showAction(): Response|ViewModel
+    public function showAction(): HttpResponse|ViewModel
     {
         $lidnr = (int) $this->params()->fromRoute('id');
         $member = $this->memberService->getMemberWithDecisions($lidnr);
@@ -295,7 +306,7 @@ class MemberController extends AbstractActionController
      *
      * Toggles if a member wants a supremum
      */
-    public function setSupremumAction(): Response|ViewModel
+    public function setSupremumAction(): HttpResponse|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -322,7 +333,7 @@ class MemberController extends AbstractActionController
      *
      * Edit member information.
      */
-    public function editAction(): Response|ViewModel
+    public function editAction(): HttpResponse|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -367,7 +378,7 @@ class MemberController extends AbstractActionController
      *
      * Delete a member.
      */
-    public function deleteAction(): Response|ViewModel
+    public function deleteAction(): HttpResponse|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -404,7 +415,7 @@ class MemberController extends AbstractActionController
      *
      * Update list membership.
      */
-    public function listsAction(): Response|ViewModel
+    public function listsAction(): HttpResponse|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -449,7 +460,7 @@ class MemberController extends AbstractActionController
      *
      * Update / renew membership.
      */
-    public function membershipAction(): Response|ViewModel
+    public function membershipAction(): HttpResponse|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -505,7 +516,7 @@ class MemberController extends AbstractActionController
      *
      * Extend the duration of the membership.
      */
-    public function expirationAction(): Response|ViewModel
+    public function expirationAction(): HttpResponse|ViewModel
     {
         $member = $this->memberService->getMember((int) $this->params()->fromRoute('id'));
 
@@ -553,7 +564,7 @@ class MemberController extends AbstractActionController
      *
      * Edit a member's address.
      */
-    public function editAddressAction(): Response|ViewModel
+    public function editAddressAction(): HttpResponse|ViewModel
     {
         $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
 
@@ -610,7 +621,7 @@ class MemberController extends AbstractActionController
      *
      * Add a member's address.
      */
-    public function addAddressAction(): Response|ViewModel
+    public function addAddressAction(): HttpResponse|ViewModel
     {
         $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
 
@@ -672,7 +683,7 @@ class MemberController extends AbstractActionController
      *
      * Remove a member's address.
      */
-    public function removeAddressAction(): Response|ViewModel
+    public function removeAddressAction(): HttpResponse|ViewModel
     {
         $type = AddressTypes::tryFrom($this->params()->fromRoute('type'));
 
@@ -789,7 +800,7 @@ class MemberController extends AbstractActionController
     /**
      * Approve a pending member update.
      */
-    public function approveUpdateAction(): Response|ViewModel
+    public function approveUpdateAction(): HttpResponse|ViewModel
     {
         $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
 
@@ -835,7 +846,7 @@ class MemberController extends AbstractActionController
     /**
      * Reject a member update.
      */
-    public function rejectUpdateAction(): Response|ViewModel
+    public function rejectUpdateAction(): HttpResponse|ViewModel
     {
         $memberUpdate = $this->memberService->getPendingMemberUpdate((int) $this->params()->fromRoute('id'));
 

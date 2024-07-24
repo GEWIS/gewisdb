@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Controller;
 
-use Laminas\Http\Response;
+use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
@@ -41,7 +41,7 @@ class ApiSettingsController extends AbstractActionController
     /**
      * Create an API principal
      */
-    public function createPrincipalAction(): Response|ViewModel
+    public function createPrincipalAction(): HttpResponse|ViewModel
     {
         $form = $this->apiPrincipalService->getCreateForm();
 
@@ -72,7 +72,7 @@ class ApiSettingsController extends AbstractActionController
     /**
      * Edit an API principal
      */
-    public function editPrincipalAction(): Response|ViewModel
+    public function editPrincipalAction(): HttpResponse|ViewModel
     {
         $id = (int) $this->params()->fromRoute('id');
         $principal = $this->apiPrincipalService->find($id);
@@ -104,7 +104,7 @@ class ApiSettingsController extends AbstractActionController
         ]);
     }
 
-    public function removePrincipalAction(): Response
+    public function removePrincipalAction(): HttpResponse
     {
         if ($this->getRequest()->isPost()) {
             $result = $this->apiPrincipalService->remove((int) $this->params()->fromRoute('id'));
@@ -122,12 +122,12 @@ class ApiSettingsController extends AbstractActionController
         return $this->redirectList();
     }
 
-    private function redirectList(): Response
+    private function redirectList(): HttpResponse
     {
         return $this->redirect()->toRoute('settings/api-principals');
     }
 
-    public function notFoundAction(): Response
+    public function notFoundAction(): HttpResponse
     {
         $this->flashMessenger()->addWarningMessage(
             sprintf(
