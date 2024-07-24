@@ -1,24 +1,23 @@
 openapi: 3.0.3
 info:
   title: GEWISDB API
-  description: |-
-    The GEWIS member database has a few available endpoints
-  termsOfService: https://gewis.nl
+  description: The GEWIS member database has a few available endpoints
+  termsOfService: 'https://gewis.nl'
   contact:
     email: abc@gewis.nl
   license:
     name: GNU GENERAL PUBLIC LICENSE Version 3
-    url: https://github.com/GEWIS/gewisdb/blob/main/LICENSE.txt
-  version: 3.0.1
+    url: 'https://github.com/GEWIS/gewisdb/blob/main/LICENSE.txt'
+  version: 3.0.2
 externalDocs:
   description: Contribute to this API
-  url: https://github.com/GEWIS/gewisdb
+  url: 'https://github.com/GEWIS/gewisdb'
 servers:
-  - url: https://database.gewis.nl/api
+  - url: 'https://database.gewis.nl/api'
     description: Production environment
-  - url: https://database.test.gewis.nl/api
+  - url: 'https://database.test.gewis.nl/api'
     description: Test environment
-  - url: http://localhost/api
+  - url: 'http://localhost/api'
     description: Local environment
 tags:
   - name: basic
@@ -26,8 +25,7 @@ tags:
     description: Obtain information about members
     externalDocs:
       description: MemberModel
-      url: https://gewis.github.io/gewisdb/classes/Database-Model-Member.html
-
+      url: 'https://gewis.github.io/gewisdb/classes/Database-Model-Member.html'
 paths:
   /:
     get:
@@ -37,78 +35,69 @@ paths:
       tags:
         - basic
       responses:
-        200:
-          description: Successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/health'
-        403:
+        '200':
+          $ref: '#/components/responses/health'
+        '403':
           $ref: '#/components/responses/no_permission'
+        '500':
+          $ref: '#/components/responses/server_error'
       security:
         - api_auth:
             - HealthR
-            
   /health:
     get:
       summary: Health endpoint
-      description: This endpoint will return the health status of the API and whether client applications are requested to temporarily pause their synchronisation.
+      description: >-
+        This endpoint will return the health status of the API and whether
+        client applications are requested to temporarily pause their
+        synchronisation.
+      operationId: getHealth
       tags:
         - basic
       responses:
-        200:
-          description: Successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/health'
-        403:
+        '200':
+          $ref: '#/components/responses/health'
+        '403':
           $ref: '#/components/responses/no_permission'
+        '500':
+          $ref: '#/components/responses/server_error'
       security:
         - api_auth:
             - HealthR
-
   /members:
     get:
       summary: Get members
       description: Get all members
+      operationId: getMembers
       tags:
-       - members
+        - members
       parameters:
-       - name: includeOrgans
-         in: query
-         required: false
-         description: Whether to include organ memberships in the response. By default, organs are not included due to rather long computation time.
-         schema:
-           type: boolean
-           default: false
+        - name: includeOrgans
+          in: query
+          required: false
+          description: >-
+            Whether to include organ memberships in the response. By default,
+            organs are not included due to rather long computation time.
+          schema:
+            type: boolean
+            default: false
       responses:
-        200:
-          description: Succesful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: "success"
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Member'
-        403:
+        '200':
+          $ref: '#/components/responses/member_list'
+        '403':
           $ref: '#/components/responses/no_permission'
+        '500':
+          $ref: '#/components/responses/server_error'
       security:
         - api_auth:
             - MembersR
-
-  /members/{lidnr}:
+  '/members/{lidnr}':
     get:
       summary: Get a member
-      description: Get a specific member
+      description: Get a specific member by lidnr
+      operationId: getMemberByLidnr
       tags:
-       - members
+        - members
       parameters:
         - name: lidnr
           in: path
@@ -117,57 +106,43 @@ paths:
             type: integer
             example: 8000
       responses:
-        200:
-          description: Succesful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: "success"
-                  data:
-                    $ref: '#/components/schemas/Member'
-        204:
+        '200':
+          $ref: '#/components/responses/member_single'
+        '204':
           description: Member not found
-        403:
+        '403':
           $ref: '#/components/responses/no_permission'
+        '500':
+          $ref: '#/components/responses/server_error'
       security:
         - api_auth:
             - MembersR
-
   /members/active:
     get:
       summary: Get active members
       description: Get all members that are currently installed in at least one organ
+      operationId: getMembersActive
       tags:
-       - members
+        - members
       parameters:
-       - name: includeInactive
-         in: query
-         required: false
-         description: Whether to include inactive fraternity members in the response. If a member is both an active member in another type and inactive in a fraternity, they also get returned (including possibly their inactive organ memberships).
-         schema:
-           type: boolean
-           default: false
+        - name: includeInactive
+          in: query
+          required: false
+          description: >-
+            Whether to include inactive fraternity members in the response. If a
+            member is both an active member in another type and inactive in a
+            fraternity, they also get returned (including possibly their
+            inactive organ memberships).
+          schema:
+            type: boolean
+            default: false
       responses:
-        200:
-          description: Succesful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: "success"
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Member'
-        403:
+        '200':
+          $ref: '#/components/responses/member_list'
+        '403':
           $ref: '#/components/responses/no_permission'
+        '500':
+          $ref: '#/components/responses/server_error'
       security:
         - api_auth:
             - MembersActiveR
@@ -175,39 +150,60 @@ paths:
     get:
       summary: Example 404
       description: This 404 will be returned if there is a mistake in the requested path
+      operationId: test404
       tags:
         - errors
       responses:
-        404:
+        '404':
           $ref: '#/components/responses/not_found_route'
   /example500:
     get:
       summary: Example 500
       description: This 500 will be returned if there is a mistake in the requested path
+      operationId: test500
       tags:
         - errors
       responses:
-        500:
+        '500':
           $ref: '#/components/responses/server_error'
-          
 components:
   schemas:
     health:
       type: object
+      required:
+        - status
+        - healthy
+        - sync_paused
       properties:
         status:
-          type: string
-          example: "success"
+          $ref: '#/components/schemas/ResponseStatusEnum'
         healthy:
           type: boolean
         sync_paused:
           type: boolean
           default: false
-          description: Attribute to indicate that data is currently being modified and that client applications that perform syncs in the background are requested to temporarily suspend this sync.
-    MemberSimple:
+          description: >-
+            Attribute to indicate that data is currently being modified and that
+            client applications that perform syncs in the background are
+            requested to temporarily suspend this sync.
+    Member:
+      description: >-
+        Model representing a member. The exact attributes that are visible
+        depend on the permissions of the API token. If the client holds the
+        `OrgansMembershipR` or `MemberProperty*` permissions, a (combination of)
+        MemberExtended object(s), else MemberSimple
       type: object
       required:
         - lidnr
+        - full_name
+        - initials
+        - given_name
+        - middle_name
+        - family_name
+        - generation
+        - hideen
+        - deleted
+        - expiration
       properties:
         lidnr:
           type: integer
@@ -242,79 +238,41 @@ components:
         expiration:
           type: string
           format: date
-          description: Date in the Y-m-d\TH:i:sP format
-          example: "2023-07-01T00:00:00+02:00"
-    MemberAllAttributes:
-      allOf:
-        - $ref: '#/components/schemas/MemberExtendedOrgan'
-        - $ref: '#/components/schemas/MemberExtendedKeyholder'
-        - $ref: '#/components/schemas/MemberExtendedEmail'
-        - $ref: '#/components/schemas/MemberExtendedType'
-        - $ref: '#/components/schemas/MemberExtendedBirthDate'
-    MemberExtendedOrgan:
-      allOf:
-        - $ref: '#/components/schemas/MemberSimple'
-        - type: object
-          properties:
-            organs:
-              type: array
-              nullable: true
-              items:
-                $ref: '#/components/schemas/OrganMembership'
-    MemberExtendedKeyholder:
-      allOf:
-        - $ref: '#/components/schemas/MemberSimple'
-        - type: object
-          properties:
-            keyholder:
-              type: boolean
-    MemberExtendedEmail:
-      allOf:
-        - $ref: '#/components/schemas/MemberSimple'
-        - type: object
-          properties:
-            email:
-              type: string
-              format: email
-              nullable: true
-              example: example@gewis.nl
-    MemberExtendedType:
-      allOf:
-        - $ref: '#/components/schemas/MemberSimple'
-        - type: object
-          properties:
-            membership_type:
-              type: string
-              enum: [ordinary, external, graduate, honorary]
-    MemberExtendedBirthDate:
-      allOf:
-        - $ref: '#/components/schemas/MemberSimple'
-        - type: object
-          properties:
-            birthdate:
-              type: string
-              format: date
-              description: Date in the Y-m-d\TH:i:sP format
-              example: "2023-07-01T00:00:00+02:00"
-            is_16_plus:
-              type: boolean
-              description: Whether the member is at least 16 years old
-            is_18_plus:
-              type: boolean
-              description: Whether the member is at least 18 years old
-            is_21_plus:
-              type: boolean
-              description: Whether the member is at least 21 years old
-    Member:
-      description: "If the client holds the `OrgansMembershipR` or `MemberProperty*` permissions, a (combination of) MemberExtended object(s), else MemberSimple"
-      oneOf:
-        - $ref: '#/components/schemas/MemberAllAttributes'
-        - $ref: '#/components/schemas/MemberExtendedBirthDate'
-        - $ref: '#/components/schemas/MemberExtendedEmail'
-        - $ref: '#/components/schemas/MemberExtendedOrgan'
-        - $ref: '#/components/schemas/MemberExtendedKeyholder'
-        - $ref: '#/components/schemas/MemberExtendedType'
-        - $ref: '#/components/schemas/MemberSimple'
+          description: 'Date in the Y-m-d\TH:i:sP format'
+          example: '2023-07-01T00:00:00+02:00'
+        email:
+          type: string
+          format: email
+          nullable: true
+          example: example@gewis.nl
+        keyholder:
+          type: boolean
+        organs:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/OrganMembership'
+        membership_type:
+          type: string
+          enum:
+            - ordinary
+            - external
+            - graduate
+            - honorary
+        birthdate:
+          type: string
+          format: date
+          description: 'Date in the Y-m-d\TH:i:sP format'
+          example: '2023-07-01T00:00:00+02:00'
+        is_16_plus:
+          type: boolean
+          description: Whether the member is at least 16 years old
+        is_18_plus:
+          type: boolean
+          description: Whether the member is at least 18 years old
+        is_21_plus:
+          type: boolean
+          description: Whether the member is at least 21 years old
     OrganMembership:
       type: object
       properties:
@@ -326,12 +284,12 @@ components:
         installDate:
           type: string
           format: date
-          description: Date in the Y-m-d\TH:i:sP format
-          example: "0001-01-01T00:00:00+00:00"
+          description: 'Date in the Y-m-d\TH:i:sP format'
+          example: '0001-01-01T00:00:00+00:00'
         dischargeDate:
           type: string
           format: date
-          description: Date in the Y-m-d\TH:i:sP format
+          description: 'Date in the Y-m-d\TH:i:sP format'
           example: null
           nullable: true
         current:
@@ -345,65 +303,155 @@ components:
         abbreviation:
           type: string
           example: Testorgaan
+    ResponseObject:
+      oneOf:
+        - $ref: '#/components/schemas/ResponseSuccess'
+        - $ref: '#/components/schemas/ResponseError'
+    ResponseStatusEnum:
+      type: string
+      title: ResponseStatusEnum
+      enum:
+        - success
+        - error
+        - forbidden
+        - notfound
+      example: success
+    ResponseSuccess:
+      type: object
+      title: ResponseSuccess
+      description: Model that is returned in case of success
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatusEnum'
+        data:
+          type: object
+    ResponseError:
+      type: object
+      title: ResponseError
+      description: Model that is returned in case of an error
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatusEnum'
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              example: error-exception
+            exception:
+              type: string
+              example: An example exception was thrown
   responses:
+    health:
+      description: Successful
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/health'
+    member_single:
+      description: Succesful response containing exactly one member
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: success
+              data:
+                $ref: '#/components/schemas/Member'
+    member_list:
+      description: Succesful response containing zero or more members
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ResponseSuccess'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Member'
+          example:
+            status: success
+            data:
+              - lidnr: 8000
+                full_name: Timo de Teststudent
+                initials: T.
+                given_name: Timo
+                middle_name: de
+                family_name: Teststudent
+                generation: 2022
+                hidden: false
+                deleted: false
+                expiration: '2023-07-01T00:00:00+02:00'
+              - lidnr: 8000
+                full_name: Timo de Teststudent
+                initials: T.
+                given_name: Timo
+                middle_name: de
+                family_name: Teststudent
+                generation: 2022
+                hidden: false
+                deleted: false
+                expiration: '2023-07-01T00:00:00+02:00'
+                email: timo@gewis.nl
+                keyholder: true
+                organs:
+                  - organ:
+                      id: 1
+                      abbreviation: Testorgaan
+                    function: Lid
+                    installDate: '0001-01-01T00:00:00+02:00'
+                    dischargeDate: null
+                    current: true
+                membership_type: ordinary
+                birthdate: '2023-07-01T00:00:00+02:00'
+                is_16_plus: false
+                is_18_plus: false
+                is_21_plus: false
     server_error:
-      description: There was an error in the server. Most likely, this is a permanent error.
+      description: >-
+        There was an error in the server. Most likely, this is a permanent
+        error.
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              status:
-                type: string
-                default: "error"
-              error:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    default: "error-exception"
-                  exception:
-                    type: string
-                    example: "An example exception was thrown"
+            $ref: '#/components/schemas/ResponseError'
+          example:
+            status: error
+            error:
+              type: error-exception
+              exception: An example exception was thrown
     not_found_route:
-      description: This route does not exist (which is different from not finding a specific resource)
+      description: >-
+        This route does not exist (which is different from not finding a
+        specific resource)
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              status:
-                type: string
-                default: "error"
-              error:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    default: "error-router-no-match"
-                  exception:
-                    type: string
-                    example: null
+            $ref: '#/components/schemas/ResponseError'
+          example:
+            status: notfound
+            error:
+              type: error-router-no-match
+              exception: null
     no_permission:
       description: The token that was used does not have the required permissions
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              status:
-                type: string
-                default: "forbidden"
-              error:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    default: "User\\Model\\Exception\\NotAllowed"
-                  message:
-                    type: string
-                    example: "Permission `...` is needed but is not currently held."
-
+            $ref: '#/components/schemas/ResponseError'
+          example:
+            status: forbidden
+            error:
+              type: User\\Model\\Exception\\NotAllowed
+              exception: Permission `...` is needed but is not currently held.
   securitySchemes:
     api_auth:
       type: http
