@@ -94,7 +94,7 @@ class Member
      * - graduate
      * - honorary
      *
-     * You can find the GEWIS statuten here: https://gewis.nl/vereniging/statuten/statuten.
+     * You can find the GEWIS statuten here: https://gewis.nl/association/regulations/articles-of-association.
      *
      * See artikel 7.
      */

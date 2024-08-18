@@ -43,7 +43,7 @@ $form->setAttribute('id', 'form-subscribe');
                 If you do not want to become or remain a graduate, you do not have to do anything. It will simply expire on the indicated date.') ?>
             </p>
             <p>
-                <?= $this->translate('If you are currently studying at TU/e, please do <u>not</u> fill in this form, but instead inform the secretary of this. 
+                <?= $this->translate('If you are currently studying at TU/e, please do <u>not</u> fill in this form, but instead inform the secretary of this.
                 If you want GEWIS to automatically renew your membership, please send your TU/e username.') ?>
             </p>
         </section>
@@ -168,12 +168,12 @@ $form->setAttribute('id', 'form-subscribe');
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <hr>
             <h3><?= $this->translate('Agreement') ?></h3>
-            <a target="_blank" href="https://gewis.nl/vereniging/statuten/">
+            <a target="_blank" href="<?= $this->translate('https://gewis.nl/association/regulations') ?>">
                 <?= $this->translate('Articles of Association, Internal Regulations and privacy statement') ?>
             </a>
         </div>
