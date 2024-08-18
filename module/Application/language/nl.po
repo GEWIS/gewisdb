@@ -1576,7 +1576,7 @@ msgid "as"
 msgstr "als"
 
 msgid "https://gewis.nl/association/regulations"
-msgstr "https://gewis.nl/vereniging/reglementen"
+msgstr "https://gewis.nl/nl/vereniging/reglementen"
 
 msgid "mailing list subscriptions"
 msgstr "mailinglijst-registraties"
