@@ -1,3 +1,9 @@
+## [v3.0.1](https://github.com/GEWIS/gewisdb/tree/v3.0.1) (2024-08-18)
+
+* Improved API return states
+* Fix hardcoding names in e-mails
+* Fix URLs for GEWIS' regulations
+
 ## [v3.0.0](https://github.com/GEWIS/gewisdb/tree/v3.0.0) (2024-07-10)
 
 * API changes to health endpoint
