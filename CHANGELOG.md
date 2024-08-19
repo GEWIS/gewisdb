@@ -1,3 +1,7 @@
+## [v3.0.2](https://github.com/GEWIS/gewisdb/tree/v3.0.2) (2024-08-19)
+
+* Fix missing information in checkout status notice for deferred payments
+
 ## [v3.0.1](https://github.com/GEWIS/gewisdb/tree/v3.0.1) (2024-08-18)
 
 * Improved API return states
