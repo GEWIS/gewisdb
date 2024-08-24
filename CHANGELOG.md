@@ -1,3 +1,8 @@
+## [v3.0.3](https://github.com/GEWIS/gewisdb/tree/v3.0.3) (2024-08-24)
+
+* Changed GEWISWEB account registration URL
+* Fix inconsistency in API response
+
 ## [v3.0.2](https://github.com/GEWIS/gewisdb/tree/v3.0.2) (2024-08-19)
 
 * Fix missing information in checkout status notice for deferred payments
