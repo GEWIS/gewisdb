@@ -167,7 +167,7 @@ class Keyholder
      */
     public function isCurrent(): bool
     {
-        $now = new DateTime();
+        $now = new DateTime('today');
 
         return $this->getExpirationDate() >= $now
             && (
