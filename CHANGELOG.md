@@ -1,3 +1,7 @@
+## [v3.0.4](https://github.com/GEWIS/gewisdb/tree/v3.0.4) (2024-08-31)
+
+* Fix keyholder decisions expiring one day too early
+
 ## [v3.0.3](https://github.com/GEWIS/gewisdb/tree/v3.0.3) (2024-08-24)
 
 * Changed GEWISWEB account registration URL
