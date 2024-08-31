@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilterProviderInterface;
@@ -41,6 +42,11 @@ class Other extends AbstractDecision implements InputFilterProviderInterface
         return [
             'content' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Laminas\Filter\StringToLower;
+use Laminas\Filter\StringTrim;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Date;
@@ -114,6 +115,11 @@ class MemberEdit extends Form implements InputFilterProviderInterface
         return [
             'lastName' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -126,6 +132,11 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             ],
             'middleName' => [
                 'required' => false,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -138,6 +149,11 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             ],
             'initials' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -150,6 +166,11 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             ],
             'firstName' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,

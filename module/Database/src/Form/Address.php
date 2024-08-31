@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Application\Model\Enums\PostalRegions;
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
@@ -99,6 +100,11 @@ class Address extends Form implements InputFilterProviderInterface
             ],
             'street' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -120,6 +126,11 @@ class Address extends Form implements InputFilterProviderInterface
             ],
             'postalCode' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -132,6 +143,11 @@ class Address extends Form implements InputFilterProviderInterface
             ],
             'city' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,

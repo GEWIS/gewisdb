@@ -7,6 +7,7 @@ namespace Database\Form;
 use Database\Form\Fieldset\CollectionWithErrors;
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Radio;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
@@ -86,6 +87,11 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
         return [
             'name' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -99,6 +105,11 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
 
             'abbr' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,

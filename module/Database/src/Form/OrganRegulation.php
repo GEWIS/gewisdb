@@ -6,6 +6,7 @@ namespace Database\Form;
 
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\Member as MemberFieldset;
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Radio;
 use Laminas\Form\Element\Submit;
@@ -144,6 +145,11 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
             ],
             'name' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
