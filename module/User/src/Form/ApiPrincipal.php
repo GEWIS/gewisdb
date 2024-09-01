@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace User\Form;
 
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\MultiCheckbox;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
@@ -79,6 +80,11 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
         return [
             'description' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,

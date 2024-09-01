@@ -7,6 +7,7 @@ namespace Database\Form\Board;
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\Member as MemberFieldset;
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
@@ -25,6 +26,7 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
 
         $this->add(clone $member);
 
+        // TODO: GH-398
         $this->add([
             'name' => 'function',
             'type' => Text::class,
@@ -58,6 +60,11 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
         return [
             'function' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,

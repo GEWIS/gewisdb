@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilterProviderInterface;
@@ -39,6 +40,11 @@ class QuerySave extends Query implements InputFilterProviderInterface
         $filter += [
             'name' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
             ],
         ];
 

@@ -10,6 +10,7 @@ use Database\Model\MailingList as MailingListModel;
 use DateInterval;
 use DateTime;
 use Laminas\Filter\StringToLower;
+use Laminas\Filter\StringTrim;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Date;
@@ -228,6 +229,11 @@ class Member extends Form implements InputFilterProviderInterface
         return [
             'lastName' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -240,6 +246,11 @@ class Member extends Form implements InputFilterProviderInterface
             ],
             'middleName' => [
                 'required' => false,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -252,6 +263,11 @@ class Member extends Form implements InputFilterProviderInterface
             ],
             'initials' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -264,6 +280,11 @@ class Member extends Form implements InputFilterProviderInterface
             ],
             'firstName' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -324,7 +345,12 @@ class Member extends Form implements InputFilterProviderInterface
                     ],
                 ],
                 'filters' => [
-                    ['name' => StringToLower::class],
+                    [
+                        'name' => StringToLower::class,
+                    ],
+                    [
+                        'name' => StringTrim::class,
+                    ],
                 ],
             ],
             'agreed' => [

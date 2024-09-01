@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
@@ -77,6 +78,11 @@ class MailingList extends Form implements InputFilterProviderInterface
         return [
             'name' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -89,6 +95,11 @@ class MailingList extends Form implements InputFilterProviderInterface
             ],
             'nl_description' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -100,6 +111,11 @@ class MailingList extends Form implements InputFilterProviderInterface
             ],
             'en_description' => [
                 'required' => true,
+                'filters' => [
+                    [
+                        'name' => StringTrim::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => StringLength::class,
