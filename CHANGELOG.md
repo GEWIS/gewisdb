@@ -1,3 +1,9 @@
+## [v3.1.0](https://github.com/GEWIS/gewisdb/tree/v3.1.0) (2024-09-01)
+
+* Update Stripe API
+* Fix organs not clickable due to incorrect templating
+* Fix extra spaces being allowed in many data fields
+
 ## [v3.0.4](https://github.com/GEWIS/gewisdb/tree/v3.0.4) (2024-08-31)
 
 * Fix keyholder decisions expiring one day too early
