@@ -120,7 +120,7 @@ class Address extends Form implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => Regex::class,
-                        'options' => ['pattern' => '/^[0-9]+[a-zA-Z]*/'],
+                        'options' => ['pattern' => '/^[1-9]\d*(?:[ \/\-\#\.]?(?:[a-zA-Z]+|[1-9]\d*))?$/'],
                     ],
                 ],
             ],
