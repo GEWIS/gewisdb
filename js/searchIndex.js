@@ -4466,6 +4466,11 @@ Search.appendIndex(
             "summary": "Specification\u0020of\u0020input\u0020filter.",
             "url": "classes/Database-Form-MemberEdit.html#method_getInputFilterSpecification"
         },                {
+            "fqsen": "\\Database\\Form\\MemberEdit\u003A\u003AisNewTueUsernameValid\u0028\u0029",
+            "name": "isNewTueUsernameValid",
+            "summary": "",
+            "url": "classes/Database-Form-MemberEdit.html#method_isNewTueUsernameValid"
+        },                {
             "fqsen": "\\Database\\Form\\MemberEdit\u003A\u003A\u0024translator",
             "name": "translator",
             "summary": "",
