@@ -15,10 +15,16 @@ use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Laminas\Validator\Callback;
 use Laminas\Validator\Digits;
 use Laminas\Validator\EmailAddress;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
+use Throwable;
+
+use function date;
+use function preg_match;
+use function substr;
 
 class MemberEdit extends Form implements InputFilterProviderInterface
 {
@@ -203,6 +209,20 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                             ],
                         ],
                     ],
+                    [
+                        'name' => Callback::class,
+                        'options' => [
+                            'callback' => function ($value) {
+                                return $this->isNewTueUsernameValid($value);
+                            },
+                            'messages' => [
+                                Callback::INVALID_VALUE => $this->translator->translate(
+                                    // phpcs:ignore -- user-visible strings should not be split
+                                    'Your TU/e-username appears to be incorrect. Ensure that it starts with a valid year and looks like: YYYYxxxx. If you believe your TU/e-username is correct, please contact the secretary.',
+                                ),
+                            ],
+                        ],
+                    ],
                 ],
                 'filters' => [
                     ['name' => ToNull::class],
@@ -221,5 +241,24 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 ],
             ],
         ];
+    }
+
+    private function isNewTueUsernameValid(string $value): bool
+    {
+        try {
+            // Only check for YYYYABCD TU/e usernames.
+            if (preg_match('/^s\d{6}$/', $value)) {
+                return true;
+            }
+
+            $year = substr($value, 0, 4);
+            $currentYear = date('Y');
+
+            // Check if the year is within the valid range, the assumption being that you can never have a number
+            // starting with a year that is higher than the current year.
+            return $year >= 2000 && $year <= $currentYear;
+        } catch (Throwable) {
+            return false;
+        }
     }
 }
