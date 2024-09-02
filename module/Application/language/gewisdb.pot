@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-570-g4b9a5a8f-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-590-g07dc9e8e-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-19 14:18+0200\n"
+"POT-Creation-Date: 2024-09-02 15:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1425,6 +1425,12 @@ msgstr ""
 
 #, php-format
 msgid "Your API token is \"%s\". This value will NOT be shown again!"
+msgstr ""
+
+msgid ""
+"Your TU/e-username appears to be incorrect. Ensure that it starts with a "
+"valid year and looks like: YYYYxxxx. If you believe your TU/e-username is "
+"correct, please contact the secretary."
 msgstr ""
 
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
