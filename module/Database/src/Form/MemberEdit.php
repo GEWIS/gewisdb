@@ -23,6 +23,7 @@ use Laminas\Validator\StringLength;
 use Throwable;
 
 use function date;
+use function intval;
 use function preg_match;
 use function substr;
 
@@ -251,8 +252,8 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 return true;
             }
 
-            $year = substr($value, 0, 4);
-            $currentYear = date('Y');
+            $year = intval(substr($value, 0, 4));
+            $currentYear = intval(date('Y'));
 
             // Check if the year is within the valid range, the assumption being that you can never have a number
             // starting with a year that is higher than the current year.
