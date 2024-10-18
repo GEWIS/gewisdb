@@ -135,6 +135,7 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
                         'options' => [
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
+                                    // phpcs:ignore Generic.Files.LineLength.TooLong -- user-visible strings should not be split
                                     'Organ regulations can only be created for \'committee\', \'fraternity\', or \'financial audit committee\'.',
                                 ),
                             ],
