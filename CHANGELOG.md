@@ -1,3 +1,9 @@
+## [v3.2.0](https://github.com/GEWIS/gewisdb/tree/v3.2.0) (2024-10-18)
+
+* Added validity checks for TU/e usernames
+* Fix house number regex being to restrictive
+* Updated dependencies
+
 ## [v3.1.0](https://github.com/GEWIS/gewisdb/tree/v3.1.0) (2024-09-01)
 
 * Update Stripe API
