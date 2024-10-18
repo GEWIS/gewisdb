@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
   <component name="PHPCSFixerOptionsConfiguration">
-    <option name="codingStandard" value="Custom" />
-    <option name="rulesetPath" value="$PROJECT_DIR$/.php-cs-fixer.dist.php" />
+    <option name="transferred" value="true" />
   </component>
   <component name="PHPCodeSnifferOptionsConfiguration">
     <option name="codingStandard" value="PSR12" />
@@ -187,6 +189,7 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache-storage-adapter-filesystem" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache-storage-adapter-memory" />
       <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache-storage-adapter-memcached" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
@@ -197,6 +200,9 @@
   </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="config" value="$PROJECT_DIR$/phpstan.neon" />
+    <option name="fullProject" value="true" />
+    <option name="level" value="5" />
+    <option name="transferred" value="true" />
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
@@ -210,5 +216,6 @@
   </component>
   <component name="PsalmOptionsConfiguration">
     <option name="config" value="$PROJECT_DIR$/psalm.xml" />
+    <option name="transferred" value="true" />
   </component>
 </project>
