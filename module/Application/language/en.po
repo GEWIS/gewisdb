@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 15:08+0200\n"
+"POT-Creation-Date: 2024-10-18 22:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -93,9 +93,6 @@ msgstr "Add Budget/Statement"
 msgid "Add Decision"
 msgstr "Add Decision"
 
-msgid "Add Function"
-msgstr "Add Function"
-
 msgid "Add Home Address"
 msgstr "Add Home Address"
 
@@ -120,9 +117,6 @@ msgstr "Add New (Inactive) Member"
 msgid "Add New Decision"
 msgstr "Add New Decision"
 
-msgid "Add New Function"
-msgstr "Add New Function"
-
 msgid "Add New Mailing List"
 msgstr "Add New Mailing List"
 
@@ -146,6 +140,9 @@ msgstr "Address"
 
 msgid "Addresses"
 msgstr "Addresses"
+
+msgid "Administrative Functions"
+msgstr "Administrative Functions"
 
 msgid "Advisory Board"
 msgstr "Advisory Board"
@@ -318,6 +315,9 @@ msgstr "Cancelled"
 
 msgid "Cannot Delete Prospective Member:"
 msgstr "Cannot Delete Prospective Member:"
+
+msgid "Chair"
+msgstr "Chair"
 
 msgid "Change"
 msgstr "Change"
@@ -583,6 +583,9 @@ msgstr "Financial Audit Committee"
 msgid "First Name"
 msgstr "First Name"
 
+msgid "Foosball Coordinator"
+msgstr "Foosball Coordinator"
+
 #, php-format
 msgid ""
 "For an overview of how you can use the Doctrine Query Language (DQL) please "
@@ -681,6 +684,9 @@ msgstr "Grantee"
 msgid "Hide Member"
 msgstr "Hide Member"
 
+msgid "Historic Functions"
+msgstr "Historic Functions"
+
 msgid "Home"
 msgstr "Home"
 
@@ -771,6 +777,9 @@ msgid ""
 msgstr ""
 "If your browser does not redirect you, please <a href=\"%s\">click here</a> "
 "to continue."
+
+msgid "Inactive Member"
+msgstr "Inactive Member"
 
 msgid "Initial(s)"
 msgstr "Initial(s)"
@@ -880,6 +889,9 @@ msgstr "Meetings"
 msgid "Meetings and Decisions"
 msgstr "Meetings and Decisions"
 
+msgid "Member"
+msgstr "Member"
+
 #, php-format
 msgid "Member %s cannot be deleted."
 msgstr "Member %s cannot be deleted."
@@ -978,6 +990,9 @@ msgstr "Oh snap!"
 msgid "On Form"
 msgstr "On Form"
 
+msgid "Opperhoofd"
+msgstr "Opperhoofd"
+
 msgid "Ordinary"
 msgstr "Ordinary"
 
@@ -1002,6 +1017,9 @@ msgstr ""
 
 msgid "Other"
 msgstr "Other"
+
+msgid "PR Officer"
+msgstr "PR Officer"
 
 msgid ""
 "PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
@@ -1161,6 +1179,9 @@ msgstr "Search Prospective Members"
 msgid "Search TU/e Students"
 msgstr "Search TU/e Students"
 
+msgid "Secretary"
+msgstr "Secretary"
+
 msgid "Select API permissions"
 msgstr "Select API permissions"
 
@@ -1182,6 +1203,13 @@ msgstr ""
 
 msgid "Stack trace"
 msgstr "Stack trace"
+
+msgid ""
+"Starting 2024, organ installation functions can only be changed through the "
+"code"
+msgstr ""
+"Starting 2024, organ installation functions can only be changed through the "
+"code"
 
 msgid "Statement"
 msgstr "Statement"
@@ -1303,6 +1331,25 @@ msgid_plural ""
 msgstr[0] "There is currently <a href=\"%s\">%d update</a> pending approval."
 msgstr[1] "There are currently <a href=\"%s\">%d updates</a> pending approval."
 
+msgid ""
+"These organ functions can be selected when installing someone into a "
+"committee/fraternity"
+msgstr ""
+"These organ functions can be selected when installing someone into a "
+"committee/fraternity"
+
+msgid ""
+"These organ functions cannot be selected manually but are used by the "
+"database internally"
+msgstr ""
+"These organ functions cannot be selected manually but are used by the "
+"database internally"
+
+msgid ""
+"These organ functions were used in the past but can no longer be selected"
+msgstr ""
+"These organ functions were used in the past but can no longer be selected"
+
 #, php-format
 msgid ""
 "This is because %s is/has been a member of an organ and/or has budgets/"
@@ -1359,6 +1406,9 @@ msgstr "Toggle Navigation"
 msgid "Token"
 msgstr "Token"
 
+msgid "Treasurer"
+msgstr "Treasurer"
+
 msgid "Type"
 msgstr "Type"
 
@@ -1398,6 +1448,9 @@ msgstr "Value"
 
 msgid "Version"
 msgstr "Version"
+
+msgid "Vice-Chair"
+msgstr "Vice-Chair"
 
 msgid "View"
 msgstr "View"

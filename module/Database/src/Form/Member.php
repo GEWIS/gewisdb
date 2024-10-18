@@ -86,6 +86,7 @@ class Member extends Form implements InputFilterProviderInterface
             ],
         ]);
 
+        // phpcs:disable Generic.Files.LineLength.TooLong -- user-visible strings should not be split
         $this->add([
             'name' => 'study',
             'type' => Select::class,
@@ -145,6 +146,7 @@ class Member extends Form implements InputFilterProviderInterface
                 'empty_option' => $translator->translate('Select a study'),
             ],
         ]);
+        // phpcs:enable Generic.Files.LineLength.TooLong
 
         $this->add([
             'name' => 'email',

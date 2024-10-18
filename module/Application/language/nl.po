@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 15:08+0200\n"
+"POT-Creation-Date: 2024-10-18 22:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -94,9 +94,6 @@ msgstr "Voeg budget/afrekening toe"
 msgid "Add Decision"
 msgstr "Voeg besluit toe"
 
-msgid "Add Function"
-msgstr "Voeg functie toe"
-
 msgid "Add Home Address"
 msgstr "Voeg thuisadres toe"
 
@@ -121,9 +118,6 @@ msgstr "Voeg nieuw (inactief) lid toe"
 msgid "Add New Decision"
 msgstr "Voeg nieuw besluit toe"
 
-msgid "Add New Function"
-msgstr "Voeg nieuwe functie toe"
-
 msgid "Add New Mailing List"
 msgstr "Voeg nieuwe mailinglijst toe"
 
@@ -147,6 +141,9 @@ msgstr "Adres"
 
 msgid "Addresses"
 msgstr "Adressen"
+
+msgid "Administrative Functions"
+msgstr "Administratieve functies"
 
 msgid "Advisory Board"
 msgstr "RvA"
@@ -318,6 +315,9 @@ msgstr "Afgebroken"
 
 msgid "Cannot Delete Prospective Member:"
 msgstr "Kan toekomstig lid niet verwijderen:"
+
+msgid "Chair"
+msgstr "Voorzitter"
 
 msgid "Change"
 msgstr "Wijzig"
@@ -586,6 +586,9 @@ msgstr "KCC"
 msgid "First Name"
 msgstr "Voornaam"
 
+msgid "Foosball Coordinator"
+msgstr "Tafelvoetbalcoördinator"
+
 #, php-format
 msgid ""
 "For an overview of how you can use the Doctrine Query Language (DQL) please "
@@ -685,6 +688,9 @@ msgstr "Verkrijger"
 msgid "Hide Member"
 msgstr "Lid verbergen"
 
+msgid "Historic Functions"
+msgstr "Historische functies"
+
 msgid "Home"
 msgstr "Home"
 
@@ -777,6 +783,9 @@ msgid ""
 msgstr ""
 "Als je browser je niet doorverwijst, <a href=\"%s\">klik dan hier</a> om "
 "verder te gaan."
+
+msgid "Inactive Member"
+msgstr "Inactief lid"
 
 msgid "Initial(s)"
 msgstr "Initialen"
@@ -887,6 +896,9 @@ msgstr "Vergaderingen"
 msgid "Meetings and Decisions"
 msgstr "Vergaderingen en besluiten"
 
+msgid "Member"
+msgstr "Lid"
+
 #, php-format
 msgid "Member %s cannot be deleted."
 msgstr "Lid %s kan niet worden verwijderd."
@@ -985,6 +997,9 @@ msgstr "Oh nee!"
 msgid "On Form"
 msgstr "Op inschrijfformulier"
 
+msgid "Opperhoofd"
+msgstr "Opperhoofd"
+
 msgid "Ordinary"
 msgstr "Gewoon"
 
@@ -1009,6 +1024,9 @@ msgstr ""
 
 msgid "Other"
 msgstr "Overig"
+
+msgid "PR Officer"
+msgstr "PR-functionaris"
 
 msgid ""
 "PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
@@ -1167,6 +1185,9 @@ msgstr "Toekomstige leden zoeken"
 msgid "Search TU/e Students"
 msgstr "TU/e-studenten zoeken"
 
+msgid "Secretary"
+msgstr "Secretaris"
+
 msgid "Select API permissions"
 msgstr "Selecteer API-rechten"
 
@@ -1188,6 +1209,13 @@ msgstr ""
 
 msgid "Stack trace"
 msgstr "Stack trace"
+
+msgid ""
+"Starting 2024, organ installation functions can only be changed through the "
+"code"
+msgstr ""
+"Vanaf 2024 is het slechts mogelijk om orgaan-functies aan te passen in de "
+"GEWISDB-code"
 
 msgid "Statement"
 msgstr "Afrekening"
@@ -1316,6 +1344,24 @@ msgstr[1] ""
 "Er zijn momenteel <a href=\"%s\">%d updates</a> in afwachting van "
 "goedkeuring."
 
+msgid ""
+"These organ functions can be selected when installing someone into a "
+"committee/fraternity"
+msgstr "Deze functies zijn beschikbaar tijdens installaties"
+
+msgid ""
+"These organ functions cannot be selected manually but are used by the "
+"database internally"
+msgstr ""
+"Deze functies worden intern gebruikt, maar kunnen niet handmatig "
+"geselecteerd worden"
+
+msgid ""
+"These organ functions were used in the past but can no longer be selected"
+msgstr ""
+"Deze functies zijn in het verleden gebruikt en kunnen niet langer "
+"geselecteerd worden"
+
 #, php-format
 msgid ""
 "This is because %s is/has been a member of an organ and/or has budgets/"
@@ -1374,6 +1420,9 @@ msgstr "Klap navigatie in/uit"
 msgid "Token"
 msgstr "Token"
 
+msgid "Treasurer"
+msgstr "Penningmeester"
+
 msgid "Type"
 msgstr "Type"
 
@@ -1413,6 +1462,9 @@ msgstr "Waarde"
 
 msgid "Version"
 msgstr "Versie"
+
+msgid "Vice-Chair"
+msgstr "Vice-Voorzitter"
 
 msgid "View"
 msgstr "Toon"
