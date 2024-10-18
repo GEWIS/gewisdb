@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine as gewisdb_nginx
+FROM nginx:stable-alpine AS gewisdb_nginx
 
 RUN adduser -D -H -u 1000 -s /bin/sh www-data -G www-data
 
