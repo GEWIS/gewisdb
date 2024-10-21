@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Application\Extensions\Doctrine\Middleware\SetRoleMiddleware;
 use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSQLDriver;
 use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 
@@ -82,6 +83,9 @@ return [
                 // to use the default chained driver. The retrieved service name will
                 // be `doctrine.driver.$thisSetting`
                 'driver'            => 'orm_default',
+                'middlewares'       => [
+                    SetRoleMiddleware::class,
+                ],
 
                 // Generate proxies automatically (turn off for production)
                 'generate_proxies'  => true,
@@ -128,6 +132,9 @@ return [
                 // to use the default chained driver. The retrieved service name will
                 // be `doctrine.driver.$thisSetting`
                 'driver'            => 'orm_report',
+                'middlewares'       => [
+                    SetRoleMiddleware::class,
+                ],
 
                 // Generate proxies automatically (turn off for production)
                 'generate_proxies'  => true,
