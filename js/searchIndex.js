@@ -11,6 +11,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Controller-IndexController.html#method_langAction"
         },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\Driver",
+            "name": "Driver",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Middleware-Driver.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\Driver\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Middleware-Driver.html#method___construct"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\Driver\u003A\u003Aconnect\u0028\u0029",
+            "name": "connect",
+            "summary": "\u007B\u0040inheritDoc\u007D",
+            "url": "classes/Application-Extensions-Doctrine-Middleware-Driver.html#method_connect"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\Driver\u003A\u003A\u0024roles",
+            "name": "roles",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Middleware-Driver.html#property_roles"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\Driver\u003A\u003A\u0024isPgSQL",
+            "name": "isPgSQL",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Middleware-Driver.html#property_isPgSQL"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\SetRoleMiddleware",
+            "name": "SetRoleMiddleware",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Middleware-SetRoleMiddleware.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware\\SetRoleMiddleware\u003A\u003Awrap\u0028\u0029",
+            "name": "wrap",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Middleware-SetRoleMiddleware.html#method_wrap"
+        },                {
             "fqsen": "\\Application\\Mapper\\ConfigItem",
             "name": "ConfigItem",
             "summary": "",
@@ -3165,6 +3200,26 @@ Search.appendIndex(
             "name": "testAsText",
             "summary": "",
             "url": "classes/CheckerTest-Model-Error.html#method_testAsText"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20241020224949",
+            "name": "Version20241020224949",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong",
+            "url": "classes/Database-Migrations-Version20241020224949.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20241020224949\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20241020224949.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20241020224949\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20241020224949.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20241020224949\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20241020224949.html#method_down"
         },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
@@ -9791,6 +9846,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Stripe.html#property_config"
         },                {
+            "fqsen": "\\Report\\Migrations\\Version20241020224949",
+            "name": "Version20241020224949",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong",
+            "url": "classes/Report-Migrations-Version20241020224949.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20241020224949\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20241020224949.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20241020224949\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20241020224949.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20241020224949\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20241020224949.html#method_down"
+        },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
             "summary": "",
@@ -13421,6 +13496,21 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/application-controller.html"
         },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Middleware",
+            "name": "Middleware",
+            "summary": "",
+            "url": "namespaces/application-extensions-doctrine-middleware.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine",
+            "name": "Doctrine",
+            "summary": "",
+            "url": "namespaces/application-extensions-doctrine.html"
+        },                {
+            "fqsen": "\\Application\\Extensions",
+            "name": "Extensions",
+            "summary": "",
+            "url": "namespaces/application-extensions.html"
+        },                {
             "fqsen": "\\Application\\Mapper",
             "name": "Mapper",
             "summary": "",
@@ -13535,6 +13625,11 @@ Search.appendIndex(
             "name": "Database",
             "summary": "",
             "url": "namespaces/database.html"
+        },                {
+            "fqsen": "\\Database\\Migrations",
+            "name": "Migrations",
+            "summary": "",
+            "url": "namespaces/database-migrations.html"
         },                {
             "fqsen": "\\Database\\Command",
             "name": "Command",
@@ -13660,6 +13755,11 @@ Search.appendIndex(
             "name": "Report",
             "summary": "",
             "url": "namespaces/report.html"
+        },                {
+            "fqsen": "\\Report\\Migrations",
+            "name": "Migrations",
+            "summary": "",
+            "url": "namespaces/report-migrations.html"
         },                {
             "fqsen": "\\Report\\Command\\Factory",
             "name": "Factory",
