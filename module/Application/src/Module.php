@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Extensions\Doctrine\Middleware\SetRoleMiddleware;
 use Application\Mapper\ConfigItem as ConfigItemMapper;
 use Application\Mapper\Factory\ConfigItemFactory as ConfigItemMapperFactory;
 use Application\Service\Config as ConfigService;
@@ -123,6 +124,9 @@ class Module
     public function getServiceConfig(): array
     {
         return [
+            'invokables' => [
+                SetRoleMiddleware::class => SetRoleMiddleware::class,
+            ],
             'factories' => [
                 ConfigItemMapper::class => ConfigItemMapperFactory::class,
                 ConfigService::class => ConfigServiceFactory::class,

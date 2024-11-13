@@ -35,9 +35,29 @@ rundev: builddev
 		@make replenish
 		@docker compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
 
-updatedb: rundev
-		@docker compose exec -T web ./orm orm:schema-tool:update --force --no-interaction --complete
-		@docker compose exec -T web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:schema-tool:update --force --no-interaction --complete"
+migration-list: replenish
+		@docker compose exec -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_default
+		@docker compose exec -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_report
+
+migration-diff: replenish
+		@docker compose exec -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_default
+		@docker cp "$(shell docker compose ps -q web)":/code/module/Database/migrations ./module/Database/migrations
+		@docker compose exec -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_report
+		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report/migrations
+
+migration-migrate: replenish
+		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
+		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
+
+migration-up: replenish migration-list
+		@read -p "Enter EM_ALIAS (orm_default or orm_report): " alias; \
+		read -p "Enter the migration version to execute (e.g.,  -- note escaping the backslashes is required): " version; \
+		docker compose exec -it web ./orm migrations:execute --up $$version --object-manager doctrine.entitymanager.$$alias
+
+migration-down: replenish migration-list
+		@read -p "Enter EM_ALIAS (orm_default or orm_report): " alias; \
+		read -p "Enter the migration version to down (e.g.,  -- note escaping the backslashes is required): " version; \
+		docker compose exec -it web ./orm migrations:execute --down $$version --object-manager doctrine.entitymanager.$$alias
 
 stop:
 		@docker compose down
