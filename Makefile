@@ -21,8 +21,10 @@ help:
 
 .DEFAULT_GOAL := rundev
 
-SHELL = /bin/bash
+MODULE_DIR := ./module
 LAST_WEB_COMMIT := $(shell git rev-parse --short HEAD)
+SHELL := /bin/bash
+TRANSLATIONS_DIR := $(MODULE_DIR)/Application/language/
 
 runprod:
 		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
@@ -59,6 +61,9 @@ migration-down: replenish migration-list
 		read -p "Enter the migration version to down (e.g.,  -- note escaping the backslashes is required): " version; \
 		docker compose exec -it web ./orm migrations:execute --down $$version --object-manager doctrine.entitymanager.$$alias
 
+exec:
+		docker compose exec -it web $(cmd)
+
 stop:
 		@docker compose down
 
@@ -83,9 +88,36 @@ replenish:
 		@docker compose exec web ./orm orm:generate-proxies
 		@docker compose exec web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:generate-proxies"
 
-compilelang:
-		msgfmt module/Application/language/en.po -o module/Application/language/en -c --strict -v
-		msgfmt module/Application/language/nl.po -o module/Application/language/nl -c --strict -v
+translations:
+		@find $(MODULE_DIR) -iname "*.phtml" -print0 | sort -z | xargs -r0 xgettext \
+				--language=PHP \
+				--from-code=UTF-8 \
+				--keyword=translate \
+				--keyword=translatePlural:1,2 \
+				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
+				--force-po \
+				--no-location \
+				--sort-output \
+				--package-name=GEWISdb \
+				--package-version=$(shell git describe --dirty --always) \
+				--copyright-holder=GEWIS && \
+		find $(MODULE_DIR) -iname "*.php" -print0 | sort -z | xargs -r0 xgettext \
+				--language=PHP \
+				--from-code=UTF-8 \
+				--keyword=translate \
+				--keyword=translatePlural:1,2 \
+				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
+				--force-po \
+				--no-location \
+				--sort-output \
+				--package-name=GEWISdb \
+				--package-version=$(shell git describe --dirty --always) \
+				--copyright-holder=GEWIS \
+				--join-existing && \
+		msgmerge --sort-output -U $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgmerge --sort-output -U $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
+		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
 
 getlangfiles:
 		./translate-helper
