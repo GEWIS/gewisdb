@@ -1,6 +1,51 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\Application\\Command\\Factory\\LoadFixturesCommandFactory",
+            "name": "LoadFixturesCommandFactory",
+            "summary": "",
+            "url": "classes/Application-Command-Factory-LoadFixturesCommandFactory.html"
+        },                {
+            "fqsen": "\\Application\\Command\\Factory\\LoadFixturesCommandFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Application-Command-Factory-LoadFixturesCommandFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Application\\Command\\LoadFixturesCommand",
+            "name": "LoadFixturesCommand",
+            "summary": "",
+            "url": "classes/Application-Command-LoadFixturesCommand.html"
+        },                {
+            "fqsen": "\\Application\\Command\\LoadFixturesCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Application-Command-LoadFixturesCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Application\\Command\\LoadFixturesCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Application-Command-LoadFixturesCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Application\\Command\\LoadFixturesCommand\u003A\u003ADATABASE_FIXTURES",
+            "name": "DATABASE_FIXTURES",
+            "summary": "",
+            "url": "classes/Application-Command-LoadFixturesCommand.html#constant_DATABASE_FIXTURES"
+        },                {
+            "fqsen": "\\Application\\Command\\LoadFixturesCommand\u003A\u003AREPORT_FIXTURES",
+            "name": "REPORT_FIXTURES",
+            "summary": "",
+            "url": "classes/Application-Command-LoadFixturesCommand.html#constant_REPORT_FIXTURES"
+        },                {
+            "fqsen": "\\Application\\Command\\LoadFixturesCommand\u003A\u003A\u0024databaseEntityManager",
+            "name": "databaseEntityManager",
+            "summary": "",
+            "url": "classes/Application-Command-LoadFixturesCommand.html#property_databaseEntityManager"
+        },                {
+            "fqsen": "\\Application\\Command\\LoadFixturesCommand\u003A\u003A\u0024reportEntityManager",
+            "name": "reportEntityManager",
+            "summary": "",
+            "url": "classes/Application-Command-LoadFixturesCommand.html#property_reportEntityManager"
+        },                {
             "fqsen": "\\Application\\Controller\\IndexController",
             "name": "IndexController",
             "summary": "",
@@ -13481,6 +13526,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Service-UserService.html#property_config"
         },                {
+            "fqsen": "\\UserTest\\Seeder\\UserFixture",
+            "name": "UserFixture",
+            "summary": "",
+            "url": "classes/UserTest-Seeder-UserFixture.html"
+        },                {
+            "fqsen": "\\UserTest\\Seeder\\UserFixture\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/UserTest-Seeder-UserFixture.html#method_load"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -13490,6 +13545,16 @@ Search.appendIndex(
             "name": "Application",
             "summary": "",
             "url": "namespaces/application.html"
+        },                {
+            "fqsen": "\\Application\\Command\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/application-command-factory.html"
+        },                {
+            "fqsen": "\\Application\\Command",
+            "name": "Command",
+            "summary": "",
+            "url": "namespaces/application-command.html"
         },                {
             "fqsen": "\\Application\\Controller",
             "name": "Controller",
@@ -13900,5 +13965,15 @@ Search.appendIndex(
             "name": "Factory",
             "summary": "",
             "url": "namespaces/user-service-factory.html"
+        },                {
+            "fqsen": "\\UserTest\\Seeder",
+            "name": "Seeder",
+            "summary": "",
+            "url": "namespaces/usertest-seeder.html"
+        },                {
+            "fqsen": "\\UserTest",
+            "name": "UserTest",
+            "summary": "",
+            "url": "namespaces/usertest.html"
         }            ]
 );
