@@ -30,6 +30,7 @@
     <!-- Type hints that cannot converted to native types due to signature of parent -->
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint">
         <!-- Factories -->
+        <exclude-pattern>module/Application/src/Command/Factory/LoadFixturesCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Application/src/Mapper/Factory/ConfigItemFactory.php</exclude-pattern>
         <exclude-pattern>module/Application/src/Service/Factory/ConfigFactory.php</exclude-pattern>
         <exclude-pattern>module/Application/src/Service/Factory/EmailFactory.php</exclude-pattern>
@@ -118,6 +119,7 @@
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
         <!-- CLI commands -->
+        <exclude-pattern>module/Application/src/Command/LoadFixturesCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckAuthenticationKeysCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckDatabaseCommand.php</exclude-pattern>
         <exclude-pattern>module/Checker/src/Command/CheckDischargesCommand.php</exclude-pattern>

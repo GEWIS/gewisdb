@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Command\LoadFixturesCommand;
 use Application\Controller\IndexController;
 use Application\View\Helper\BootstrapElementError;
 use Doctrine\ORM\Mapping\Driver\AttributeDriver;
@@ -79,6 +80,11 @@ return [
     'view_helpers' => [
         'invokables' => [
             'bootstrapElementError' => BootstrapElementError::class,
+        ],
+    ],
+    'laminas-cli' => [
+        'commands' => [
+            'application:fixtures:load' => LoadFixturesCommand::class,
         ],
     ],
     'doctrine' => [
