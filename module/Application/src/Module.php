@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Command\Factory\LoadFixturesCommandFactory;
+use Application\Command\LoadFixturesCommand;
 use Application\Extensions\Doctrine\Middleware\SetRoleMiddleware;
 use Application\Mapper\ConfigItem as ConfigItemMapper;
 use Application\Mapper\Factory\ConfigItemFactory as ConfigItemMapperFactory;
@@ -155,6 +157,7 @@ class Module
 
                     return $logger;
                 },
+                LoadFixturesCommand::class => LoadFixturesCommandFactory::class,
             ],
         ];
     }
