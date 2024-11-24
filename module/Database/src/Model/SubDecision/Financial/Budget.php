@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision\Financial;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 #[Entity]
 class Budget extends SubDecision
@@ -128,41 +130,35 @@ class Budget extends SubDecision
         $this->changes = $changes;
     }
 
-    protected function getTemplate(): string
-    {
-        return 'De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            'De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return 'The budget %NAME% by %AUTHOR%, version %VERSION% dated %DATE% is %APPROVAL%%CHANGES%.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
             '%NAME%' => $this->getName(),
-            '%AUTHOR%' => null === $this->getMember() ? 'onbekend' : $this->getMember()->getFullName(),
+            '%AUTHOR%' => null === $this->getMember()
+                ? $translator->translate('onbekend', locale: $language->getLangParam())
+                : $this->getMember()->getFullName(),
             '%VERSION%' => $this->getVersion(),
-            '%DATE%' => $this->formatDate($this->getDate()),
-            '%APPROVAL%' => $this->getApproval() ? 'goedgekeurd' : 'afgekeurd',
-            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' met genoemde wijzigingen' : '',
+            '%DATE%' => $this->formatDate($this->getDate(), $language),
+            '%APPROVAL%' => $this->getApproval()
+                ? $translator->translate('goedgekeurd', locale: $language->getLangParam())
+                : $translator->translate('afgekeurd', locale: $language->getLangParam()),
+            '%CHANGES%' => $this->getApproval() && $this->getChanges()
+                ? $translator->translate(' met genoemde wijzigingen', locale: $language->getLangParam())
+                : '',
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $replacements = [
-            '%NAME%' => $this->getName(),
-            '%AUTHOR%' => null === $this->getMember() ? 'unknown' : $this->getMember()->getFullName(),
-            '%VERSION%' => $this->getVersion(),
-            '%DATE%' => $this->formatDate($this->getDate(), 'en_GB'),
-            '%APPROVAL%' => $this->getApproval() ? 'approved' : 'disapproved',
-            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' with mentioned changes' : '',
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

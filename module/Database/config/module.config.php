@@ -704,6 +704,15 @@ return [
                             ],
                         ],
                     ],
+                    'organFunctions' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/organFunctions',
+                            'defaults' => [
+                                'action' => 'organFunctions',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],

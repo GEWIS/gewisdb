@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\OrganTypes;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Laminas\I18n\Translator\TranslatorInterface;
 use ValueError;
 
 #[Entity]
@@ -155,68 +157,47 @@ class OrganRegulation extends SubDecision
         $this->changes = $changes;
     }
 
-    protected function getTemplate(): string
-    {
-        return 'Het %TYPE%reglement van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            'Het %DOCUMENTTYPE% van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% wordt %APPROVAL%%CHANGES%.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return 'The %TYPE%regulations of %NAME% by %AUTHOR%, version %VERSION% dated %DATE% are %APPROVAL%%CHANGES%.';
-    }
-
-    /**
-     * Get the content.
-     */
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         if (
             OrganTypes::Committee === $this->getOrganType()
             || OrganTypes::KCC === $this->getOrganType()
         ) {
-            $organType = 'commissie';
+            $documentType = $translator->translate('commissiereglement', locale: $language->getLangParam());
         } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
-            $organType = 'dispuuts';
+            $documentType = $translator->translate('dispuutsreglement', locale: $language->getLangParam());
         } else {
             throw new ValueError();
         }
 
         $replacements = [
             '%NAME%' => $this->getName(),
-            '%AUTHOR%' => null === $this->getMember() ? 'onbekend' : $this->getMember()->getFullName(),
-            '%TYPE%' => $organType,
+            '%AUTHOR%' => null === $this->getMember()
+                ? $translator->translate('onbekend', locale: $language->getLangParam())
+                : $this->getMember()->getFullName(),
+            '%DOCUMENTTYPE%' => $documentType,
             '%VERSION%' => $this->getVersion(),
-            '%DATE%' => $this->formatDate($this->getDate()),
-            '%APPROVAL%' => $this->getApproval() ? 'goedgekeurd' : 'afgekeurd',
-            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' met genoemde wijzigingen' : '',
+            '%DATE%' => $this->formatDate($this->getDate(), $language),
+            '%APPROVAL%' => $this->getApproval()
+                ? $translator->translate('goedgekeurd', locale: $language->getLangParam())
+                : $translator->translate('afgekeurd', locale: $language->getLangParam()),
+            '%CHANGES%' => $this->getApproval() && $this->getChanges()
+                ? $translator->translate(' met genoemde wijzigingen', locale: $language->getLangParam())
+                : '',
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        if (
-            OrganTypes::Committee === $this->getOrganType()
-            || OrganTypes::KCC === $this->getOrganType()
-        ) {
-            $organType = 'committee ';
-        } elseif (OrganTypes::Fraternity === $this->getOrganType()) {
-            $organType = 'fraternity ';
-        } else {
-            throw new ValueError();
-        }
-
-        $replacements = [
-            '%NAME%' => $this->getName(),
-            '%AUTHOR%' => null === $this->getMember() ? 'unknown' : $this->getMember()->getFullName(),
-            '%TYPE%' => $organType,
-            '%VERSION%' => $this->getVersion(),
-            '%DATE%' => $this->formatDate($this->getDate(), 'en_GB'),
-            '%APPROVAL%' => $this->getApproval() ? 'approved' : 'disapproved',
-            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' with mentioned changes' : '',
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

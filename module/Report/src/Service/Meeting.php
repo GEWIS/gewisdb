@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Report\Service;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Model\Decision as DatabaseDecisionModel;
 use Database\Model\Meeting as DatabaseMeetingModel;
@@ -14,6 +15,7 @@ use Exception;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\ProgressBar\Adapter\Console;
 use Laminas\ProgressBar\ProgressBar;
 use LogicException;
@@ -34,6 +36,7 @@ class Meeting
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
+        private readonly Translator $translator,
         private readonly MeetingMapper $meetingMapper,
         private readonly EntityManager $emReport,
         private readonly array $config,
@@ -126,18 +129,22 @@ class Meeting
 
         $reportDecision->setPoint($decision->getPoint());
         $reportDecision->setNumber($decision->getNumber());
-        $content = [];
+        $contentNL = [];
+        $contentEN = [];
 
         foreach ($decision->getSubdecisions() as $subdecision) {
             $this->generateSubDecision($subdecision, $reportDecision);
-            $content[] = $subdecision->getContent();
+            $contentNL[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::Dutch);
+            $contentEN[] = $subdecision->getTranslatedContent($this->translator, AppLanguages::English);
         }
 
-        if (empty($content)) {
-            $content[] = '';
+        if (empty($contentNL)) {
+            $contentNL[] = '';
+            $contentEN[] = '';
         }
 
-        $reportDecision->setContent(implode(' ', $content));
+        $reportDecision->setContentNL(implode(' ', $contentNL));
+        $reportDecision->setContentEN(implode(' ', $contentEN));
 
         $this->emReport->persist($reportDecision);
     }
@@ -318,8 +325,9 @@ class Meeting
         // Abolish decisions are handled by foundationreference
         // Other decisions don't need special handling
 
-        // for any decision, make sure the content is filled
-        $reportSubDecision->setContent($subdecision->getContent());
+        // for any decision, make sure the content is filled for Dutch and English
+        $reportSubDecision->setContentNL($subdecision->getTranslatedContent($this->translator, AppLanguages::Dutch));
+        $reportSubDecision->setContentEN($subdecision->getTranslatedContent($this->translator, AppLanguages::English));
         $this->emReport->persist($reportSubDecision);
 
         return $reportSubDecision;

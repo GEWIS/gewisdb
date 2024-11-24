@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Model\Decision;
 use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 /**
  * Annulling a decision.
@@ -66,33 +68,25 @@ class Annulment extends SubDecision
         $this->target = $target;
     }
 
-    protected function getTemplate(): string
-    {
-        return 'Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "%DECISION_CONTENT%"';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            'Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "%DECISION_CONTENT%"',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return 'Decision %DECISION_HASH% is annulled. The decision read: "%DECISION_CONTENT%"';
-    }
-
-    public function getContent(): string
-    {
-        $replacements = [
-            '%DECISION_HASH%' => $this->getTarget()->getHash(),
-            '%DECISION_CONTENT%' => $this->getTarget()->getContent(),
-        ];
-
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
             '%DECISION_HASH%' => $this->getTarget()->getHash(), // We do not provide an alternative to the hash.
-            '%DECISION_CONTENT%' => $this->getTarget()->getAlternativeContent(),
+            '%DECISION_CONTENT%' => $this->getTarget()->getTranslatedContent($translator, $language),
         ];
 
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

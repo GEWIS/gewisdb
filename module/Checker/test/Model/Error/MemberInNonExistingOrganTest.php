@@ -6,6 +6,7 @@ namespace CheckerTest\Model\Error;
 
 use Checker\Model\Error\MemberInNonExistingOrgan;
 use CheckerTest\Model\Error;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 
@@ -18,7 +19,7 @@ class MemberInNonExistingOrganTest extends Error
         $installation->setFoundation($this->getFoundation());
         $installation->setMember($this->getMember());
         $installation->setSequence(1);
-        $installation->setFunction('Tester');
+        $installation->setFunction(InstallationFunctions::Chair);
 
         $meeting = $this->getMeeting();
 
