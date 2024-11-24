@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Application\Model\Enums\OrganTypes;
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\Member as MemberFieldset;
 use Laminas\Filter\StringTrim;
@@ -16,6 +17,8 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\Callback;
 use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\StringLength;
+
+use function array_map;
 
 class OrganRegulation extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -31,35 +34,14 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
             'type' => Radio::class,
             'options' => [
                 'label' => 'Type',
-                'value_options' => [
-                    [
-                        'value' => 'committee',
-                        'label' => $this->translator->translate('Committee'),
+                'value_options' => array_map(
+                    fn (OrganTypes $organType) => [
+                        'value' => $organType->value,
+                        'label' => $organType->getName($this->translator),
+                        'disabled' => !$organType->hasOrganRegulations(),
                     ],
-                    [
-                        'value' => 'fraternity',
-                        'label' => $this->translator->translate('Fraternity'),
-                    ],
-                    [
-                        'value' => 'avc',
-                        'label' => $this->translator->translate('GMM Committee'),
-                        'disabled' => true,
-                    ],
-                    [
-                        'value' => 'avw',
-                        'label' => $this->translator->translate('GMM Taskforce'),
-                        'disabled' => true,
-                    ],
-                    [
-                        'value' => 'kcc',
-                        'label' => $this->translator->translate('Financial Audit Committee'),
-                    ],
-                    [
-                        'value' => 'rva',
-                        'label' => $this->translator->translate('Advisory Board'),
-                        'disabled' => true,
-                    ],
-                ],
+                    OrganTypes::cases(),
+                ),
             ],
         ]);
 

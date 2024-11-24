@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Hydrator;
 
 use Database\Model\Decision as DecisionModel;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use Database\Model\SubDecision\Reappointment as ReappointmentModel;
@@ -58,6 +59,10 @@ class Install extends AbstractDecision
         // finally add installations
         if (!empty($data['installations'])) {
             foreach ($data['installations'] as $install) {
+                if (!($install['function'] instanceof InstallationFunctions)) {
+                    $install['function'] = InstallationFunctions::from($install['function']);
+                }
+
                 $installation = new InstallationModel();
                 $installation->setSequence($num++);
                 $installation->setFoundation($foundation);

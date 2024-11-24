@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Report\Model\SubDecision;
 
+use Database\Model\Enums\InstallationFunctions;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\AssociationOverride;
@@ -37,8 +38,11 @@ class Installation extends FoundationReference
     /**
      * Function given.
      */
-    #[Column(type: 'string')]
-    protected string $function;
+    #[Column(
+        type: 'string',
+        enumType: InstallationFunctions::class,
+    )]
+    protected InstallationFunctions $function;
 
     /**
      * Reappointment subdecisions if this installation was prolonged (can be done multiple times).
@@ -77,7 +81,7 @@ class Installation extends FoundationReference
     /**
      * Get the function.
      */
-    public function getFunction(): string
+    public function getFunction(): InstallationFunctions
     {
         return $this->function;
     }
@@ -85,7 +89,7 @@ class Installation extends FoundationReference
     /**
      * Set the function.
      */
-    public function setFunction(string $function): void
+    public function setFunction(InstallationFunctions $function): void
     {
         $this->function = $function;
     }

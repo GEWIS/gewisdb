@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Application\Model\Enums\OrganTypes;
 use Database\Form\Fieldset\CollectionWithErrors;
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
@@ -30,14 +31,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
             'type' => Radio::class,
             'options' => [
                 'label' => 'Type',
-                'value_options' => [
-                    'committee' => $this->translator->translate('Committee'),
-                    'fraternity' => $this->translator->translate('Fraternity'),
-                    'avc' => $this->translator->translate('GMM Committee'),
-                    'avw' => $this->translator->translate('GMM Taskforce'),
-                    'kcc' => $this->translator->translate('Financial Audit Committee'),
-                    'rva' => $this->translator->translate('Advisory Board'),
-                ],
+                'value_options' => OrganTypes::getTypesArray($translator),
             ],
         ]);
 

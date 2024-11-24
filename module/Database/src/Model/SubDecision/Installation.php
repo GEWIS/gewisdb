@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\AppLanguages;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Model\Member;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,6 +16,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
 use Override;
 
 /**
@@ -36,8 +39,11 @@ class Installation extends FoundationReference
     /**
      * Function given.
      */
-    #[Column(type: 'string')]
-    protected string $function;
+    #[Column(
+        type: 'string',
+        enumType: InstallationFunctions::class,
+    )]
+    protected InstallationFunctions $function;
 
     /**
      * Reappointment subdecisions if this installation was prolonged (can be done multiple times).
@@ -67,7 +73,7 @@ class Installation extends FoundationReference
     /**
      * Get the function.
      */
-    public function getFunction(): string
+    public function getFunction(): InstallationFunctions
     {
         return $this->function;
     }
@@ -75,7 +81,7 @@ class Installation extends FoundationReference
     /**
      * Set the function.
      */
-    public function setFunction(string $function): void
+    public function setFunction(InstallationFunctions $function): void
     {
         $this->function = $function;
     }
@@ -109,35 +115,26 @@ class Installation extends FoundationReference
         return $this->discharge;
     }
 
-    protected function getTemplate(): string
-    {
-        return '%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            '%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return '%MEMBER% is installed as %FUNCTION% of %ORGAN_ABBR%.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
             '%MEMBER%' => $this->getMember()->getFullName(),
-            '%FUNCTION%' => $this->getFunction(),
+            '%FUNCTION%' => $this->getFunction()->getName($translator, $language),
             '%ORGAN_ABBR%' => $this->getFoundation()->getAbbr(),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $replacements = [
-            '%MEMBER%' => $this->getMember()->getFullName(),
-            '%FUNCTION%' => $this->getFunction(), // Has no alternative (like the decision hash).
-            '%ORGAN_ABBR%' => $this->getFoundation()->getAbbr(),
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

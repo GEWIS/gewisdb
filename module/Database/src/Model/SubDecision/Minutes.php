@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\Meeting;
 use Database\Model\SubDecision;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 use function strval;
 
@@ -97,43 +99,38 @@ class Minutes extends SubDecision
         $this->changes = $changes;
     }
 
-    protected function getTemplate(): string
-    {
-        return 'De notulen van de %NUMBER%e %TYPE%%AUTHOR% worden%APPROVAL%%THANK%%CHANGES%.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            'De notulen van de %NUMBERORDINAL% %TYPE%%AUTHOR% worden %APPROVAL%%THANK%%CHANGES%.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return 'The minutes of the %NUMBER%th %TYPE%%AUTHOR% are%APPROVAL%%THANK%%CHANGES%.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
             '%TYPE%' => $this->getTarget()->getType()->value,
-            '%NUMBER%' => strval($this->getTarget()->getNumber()),
-            '%APPROVAL%' => $this->getApproval() ? ' goedgekeurd' : ' afgekeurd',
-            '%AUTHOR%' => MeetingTypes::BV === $this->getTarget()->getType() ? ''
-                : ' door ' . $this->getMember()->getFullName(),
-            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' met genoemde wijzigingen' : '',
-            '%THANK%' => MeetingTypes::BV === $this->getTarget()->getType() ? ' met dank aan de notulist' : '',
+            '%NUMBERORDINAL%' => strval($this->getTarget()->getNumberAsOrdinal($language->getLangParam())),
+            '%APPROVAL%' => $this->getApproval()
+                ? $translator->translate('goedgekeurd', locale: $language->getLangParam())
+                : $translator->translate('afgekeurd', locale: $language->getLangParam()),
+            '%AUTHOR%' => MeetingTypes::BV === $this->getTarget()->getType()
+                ? ''
+                : $translator->translate(' door ', locale: $language->getLangParam())
+                    . $this->getMember()->getFullName(),
+            '%CHANGES%' => $this->getApproval() && $this->getChanges()
+                ? $translator->translate(' met genoemde wijzigingen', locale: $language->getLangParam())
+                : '',
+            '%THANK%' => MeetingTypes::BV === $this->getTarget()->getType()
+                ? ' met dank aan de notulist'
+                : '',
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $replacements = [
-            '%TYPE%' => $this->getTarget()->getType()->value,
-            '%NUMBER%' => strval($this->getTarget()->getNumber()),
-            '%APPROVAL%' => $this->getApproval() ? ' approved' : ' disapproved',
-            '%AUTHOR%' => MeetingTypes::BV === $this->getTarget()->getType() ? ''
-                : ' by ' . $this->getMember()->getFullName(),
-            '%CHANGES%' => $this->getApproval() && $this->getChanges() ? ' with mentioned changes' : '',
-            '%THANK%' => MeetingTypes::BV === $this->getTarget()->getType() ? ' thanks to the minute taker' : '',
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

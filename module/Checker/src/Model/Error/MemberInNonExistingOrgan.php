@@ -51,7 +51,7 @@ class MemberInNonExistingOrgan extends Error
             'Member %s (%d) is installed as "%s" in %s, which does not exist.',
             $this->getMember()->getFullName(),
             $this->getMember()->getLidnr(),
-            $this->getSubDecision()->getFunction(),
+            $this->getSubDecision()->getFunction()->getName(null),
             $this->getOrgan()->getName(),
         );
     }

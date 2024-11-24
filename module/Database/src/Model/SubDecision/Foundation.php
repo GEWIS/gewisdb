@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\MeetingTypes;
 use Application\Model\Enums\OrganTypes;
 use Database\Model\SubDecision;
@@ -12,6 +13,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 /**
  * Foundation of an organ.
@@ -114,36 +116,27 @@ class Foundation extends SubDecision
         return $this->references;
     }
 
-    protected function getTemplate(): string
-    {
-        return '%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            '%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return '%ORGAN_TYPE% %ORGAN_NAME% with abbreviation %ORGAN_ABBR% is established.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
-            '%ORGAN_TYPE%' => $this->getOrganType()->getName(),
+            '%ORGAN_TYPE%' => $this->getOrganType()->getName($translator, $language),
             '%ORGAN_NAME%' => $this->getName(),
             '%ORGAN_ABBR%' => $this->getAbbr(),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $replacements = [
-            '%ORGAN_TYPE%' => $this->getOrganType()->getAlternativeName(),
-            '%ORGAN_NAME%' => $this->getName(),
-            '%ORGAN_ABBR%' => $this->getAbbr(),
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 
     /**

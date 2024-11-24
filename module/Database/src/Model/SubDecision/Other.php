@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
+use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Mvc\I18n\DummyTranslator;
 use RuntimeException;
 
 /**
@@ -22,14 +25,6 @@ class Other extends SubDecision
     protected string $content;
 
     /**
-     * Get the content.
-     */
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    /**
      * Set the content.
      */
     public function setContent(string $content): void
@@ -37,19 +32,25 @@ class Other extends SubDecision
         $this->content = $content;
     }
 
-    protected function getTemplate(): string
-    {
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         throw new RuntimeException('Not implemented');
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        throw new RuntimeException('Not implemented');
-    }
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        if ($translator instanceof DummyTranslator || AppLanguages::Dutch === $language) {
+            return $this->content;
+        }
 
-    public function getAlternativeContent(): string
-    {
         // No alternative content exists for a custom decision.
-        return 'If you are reading this, the secretary has not done their job.';
+        return $translator->translate(
+            'If you are reading this, the secretary has not done their job.',
+            locale: $language->getLangParam(),
+        );
     }
 }
