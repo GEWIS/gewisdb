@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use NumberFormatter;
 use ValueError;
 
 /**
@@ -198,12 +199,7 @@ class Meeting
         }
 
         if ('en_GB' === $locale) {
-            $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
-            if (($this->getNumber() % 100 >= 11) && ($this->getNumber() % 100 <= 13)) {
-                return $this->getNumber() . 'th';
-            }
-
-            return $this->getNumber() . $ends[$this->getNumber() % 10];
+            return (new NumberFormatter($locale, NumberFormatter::ORDINAL))->format($this->getNumber());
         }
 
         return $this->getNumber() . 'e';

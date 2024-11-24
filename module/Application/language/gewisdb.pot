@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-606-g1eef4f4f-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-607-gef8939ac-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 14:00+0100\n"
+"POT-Creation-Date: 2024-10-29 15:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,9 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 msgid " door "
+msgstr ""
+
+msgid " met dank aan de notulist"
 msgstr ""
 
 msgid " met genoemde wijzigingen"
@@ -1017,6 +1020,12 @@ msgid ""
 "'financial audit committee'."
 msgstr ""
 
+msgid "Organs - List functions and translations"
+msgstr ""
+
+msgid "Organs - Read organ membership (per user/organ)"
+msgstr ""
+
 msgid "Other"
 msgstr ""
 
@@ -1092,9 +1101,6 @@ msgid "Query"
 msgstr ""
 
 msgid "Query Result"
-msgstr ""
-
-msgid "Read organ membership (per user/organ)"
 msgstr ""
 
 msgid "Reappoint"

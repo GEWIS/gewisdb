@@ -115,7 +115,7 @@ class Minutes extends SubDecision
     ): string {
         $replacements = [
             '%TYPE%' => $this->getTarget()->getType()->value,
-            '%NUMBERORDINAL%' => strval($this->getTarget()->getNumberAsOrdinal($language->getLangParam())),
+            '%NUMBERORDINAL%' => strval($this->getTarget()->getNumberAsOrdinal($language->getLocale())),
             '%APPROVAL%' => $this->getApproval()
                 ? $translator->translate('goedgekeurd', locale: $language->getLangParam())
                 : $translator->translate('afgekeurd', locale: $language->getLangParam()),
@@ -127,7 +127,7 @@ class Minutes extends SubDecision
                 ? $translator->translate(' met genoemde wijzigingen', locale: $language->getLangParam())
                 : '',
             '%THANK%' => MeetingTypes::BV === $this->getTarget()->getType()
-                ? ' met dank aan de notulist'
+                ? $translator->translate(' met dank aan de notulist', locale: $language->getLangParam())
                 : '',
         ];
 

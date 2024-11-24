@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 00:51+0100\n"
+"POT-Creation-Date: 2024-10-29 15:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -15,6 +15,9 @@ msgstr ""
 
 msgid " door "
 msgstr " door "
+
+msgid " met dank aan de notulist"
+msgstr " met dank aan de notulist"
 
 msgid " met genoemde wijzigingen"
 msgstr " met genoemde wijzigingen"
@@ -1100,6 +1103,12 @@ msgstr ""
 "Orgaanreglementen kunnen alleen worden aangemaakt voor 'commissie', "
 "'dispuut' of 'kas controle commissie'."
 
+msgid "Organs - List functions and translations"
+msgstr "Organen - Functie- en vertalingenlijst bekijken"
+
+msgid "Organs - Read organ membership (per user/organ)"
+msgstr "Organen - Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
+
 msgid "Other"
 msgstr "Overig"
 
@@ -1183,9 +1192,6 @@ msgstr "Query"
 
 msgid "Query Result"
 msgstr "Queryresultaat"
-
-msgid "Read organ membership (per user/organ)"
-msgstr "Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
 
 msgid "Reappoint"
 msgstr "Herbenoemen"
