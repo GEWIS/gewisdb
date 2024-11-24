@@ -78,13 +78,16 @@ class ProspectiveMember
         $qbc->select('MAX(css.id)')
             ->from(CheckoutSessionModel::class, 'css')
             ->where('css.prospectiveMember = m.lidnr');
-        $qb->andWhere($qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'));
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'),
+            $qb->expr()->isNull('cs.id'),
+        ));
 
         if ('paid' === $type) {
             $qb->andWhere('cs.state = :paid')
                 ->setParameter('paid', CheckoutSessionStates::Paid);
         } elseif ('failed' === $type) {
-            $qb->andWhere('cs.state = :expired OR cs.state = :failed')
+            $qb->andWhere('cs.state = :expired OR cs.state = :failed OR cs.state IS NULL')
                 ->setParameter('expired', CheckoutSessionStates::Expired)
                 ->setParameter('failed', CheckoutSessionStates::Failed);
         } else {
