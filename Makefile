@@ -47,9 +47,9 @@ migration-list: replenish
 
 migration-diff: replenish
 		@docker compose exec -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_default
-		@docker cp "$(shell docker compose ps -q web)":/code/module/Database/migrations ./module/Database/migrations
+		@docker cp "$(shell docker compose ps -q web)":/code/module/Database/migrations ./module/Database
 		@docker compose exec -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_report
-		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report/migrations
+		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report
 
 migration-up: replenish migration-list
 		@read -p "Enter EM_ALIAS (orm_default or orm_report): " alias; \
