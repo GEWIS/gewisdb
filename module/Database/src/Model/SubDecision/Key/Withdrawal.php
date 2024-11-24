@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision\Key;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 #[Entity]
 class Withdrawal extends SubDecision
@@ -84,33 +86,25 @@ class Withdrawal extends SubDecision
         $this->withdrawnOn = $withdrawnOn;
     }
 
-    protected function getTemplate(): string
-    {
-        return 'De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            'De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return 'The key code of %GRANTEE% of GEWIS is withdrawn from %WITHDRAWAL%.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
             '%GRANTEE%' => $this->getGranting()->getMember()->getFullName(),
-            '%WITHDRAWAL%' => $this->formatDate($this->getWithdrawnOn()),
+            '%WITHDRAWAL%' => $this->formatDate($this->getWithdrawnOn(), $language),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $replacements = [
-            '%GRANTEE%' => $this->getGranting()->getMember()->getFullName(),
-            '%WITHDRAWAL%' => $this->formatDate($this->getWithdrawnOn(), 'en_GB'),
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

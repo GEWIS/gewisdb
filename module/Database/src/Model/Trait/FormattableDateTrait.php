@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model\Trait;
 
+use Application\Model\Enums\AppLanguages;
 use DateTime;
 use IntlDateFormatter;
 
@@ -19,10 +20,10 @@ trait FormattableDateTrait
      */
     protected function formatDate(
         DateTime $date,
-        string $locale = 'nl_NL',
+        AppLanguages $language = AppLanguages::Dutch,
     ): string {
         $formatter = new IntlDateFormatter(
-            $locale,
+            $language->getLocale(),
             IntlDateFormatter::LONG,
             IntlDateFormatter::NONE,
             date_default_timezone_get(),

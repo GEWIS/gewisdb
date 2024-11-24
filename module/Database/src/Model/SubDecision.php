@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
+use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Abrogation;
 use Database\Model\SubDecision\Annulment;
@@ -30,6 +31,8 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Mvc\I18n\Translator;
 
 use function array_keys;
 use function str_replace;
@@ -237,18 +240,16 @@ abstract class SubDecision
     }
 
     /**
-     * Get the template string for the statutory content of the subdecision (in Dutch).
-     *
-     * Any changes to this method should also be reflected in {@see SubDecision::getAlternativeTemplate()}.
-     */
-    abstract protected function getTemplate(): string;
-
-    /**
-     * Get the template string for the alternative content of the subdecision (in English).
+     * Get the template string for the alternative content of the subdecision in a specified language.
+     * A decision was made to let the statutory content be the translation template.
+     * Hence, if no translation to English is available, the Dutch text will be shown.
      *
      * Any changes to this method should also be reflected in {@see SubDecision::getTemplate()}.
      */
-    abstract protected function getAlternativeTemplate(): string;
+    abstract protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string;
 
     /**
      * Perform string replacements on a template.
@@ -265,16 +266,30 @@ abstract class SubDecision
     }
 
     /**
-     * Get the statutory content of the subdecision (in Dutch).
-     *
-     * Any changes to this method should also be reflected in {@see SubDecision::getAlternativeContent()}.
+     * Get the statutory content of the subdecision
      */
-    abstract public function getContent(): string;
+    // final public function getContent(): string
+    // {
+    //     $translator = new DummyTranslator();
+
+    //     return $this->getTranslatedContent($translator, AppLanguages::Dutch);
+    // }
 
     /**
-     * Get the alternative content of the subdecision (in English).
-     *
-     * Any changes to this method should also be reflected in {@see SubDecision::getContent()}.
+     * Get the content in the current language (requires real translator)
      */
-    abstract public function getAlternativeContent(): string;
+    final public function getContent(Translator $translator): string
+    {
+        $language = AppLanguages::fromLangParam($translator->getLocale());
+
+        return $this->getTranslatedContent($translator, $language);
+    }
+
+    /**
+     * Get the content of the subdecision in a specified language.
+     */
+    abstract public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string;
 }

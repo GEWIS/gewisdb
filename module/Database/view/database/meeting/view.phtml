@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Application\Model\Enums\AppLanguages;
 use Application\View\HelperTrait;
 use Database\Model\Meeting as MeetingModel;
 use Laminas\View\Renderer\PhpRenderer;
@@ -97,14 +98,14 @@ $(document).ready(function () {
         </button>
         <ul>
         <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-            <li><?= $this->escapeHtml($subdecision->getContent()) ?></li>
+            <li><?= $this->escapeHtml($subdecision->getContent($this->plugin('translate')->getTranslator())) ?></li>
         <?php endforeach; ?>
         </ul>
         <span class="hidden" id="<?= $decision->getHash() ?>">
             <?= sprintf(
                 '\decision[%s]{%s}',
-                $this->escapeHtmlAttr($decision->getAlternativeContent(true)),
-                $this->escapeHtmlAttr($decision->getContent(true)),
+                $this->escapeHtmlAttr($decision->getTranslatedContent($this->plugin('translate')->getTranslator(), AppLanguages::English, true)),
+                $this->escapeHtmlAttr($decision->getTranslatedContent($this->plugin('translate')->getTranslator(), AppLanguages::Dutch, true)),
             ) ?>
         </span>
     </li>
