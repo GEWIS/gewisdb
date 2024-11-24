@@ -59,7 +59,7 @@ jobs:
                     git checkout --detach temp-phpstanpr
 
             -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v2
+                uses: ramsey/composer-install@v3
 
             -   name: Load environment variables
                 uses: c-py/action-dotenv-to-setenv@v3
@@ -92,7 +92,7 @@ jobs:
                     git checkout -
 
             -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v2
+                uses: ramsey/composer-install@v3
 
             -   name: Load environment variables
                 uses: c-py/action-dotenv-to-setenv@v3
@@ -143,7 +143,7 @@ jobs:
                     git checkout --detach temp-psalmpr
 
             -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v2
+                uses: ramsey/composer-install@v3
 
             -   name: Load environment variables
                 uses: c-py/action-dotenv-to-setenv@v3
@@ -163,7 +163,7 @@ jobs:
                     git checkout -
 
             -   name: Install dependencies with Composer
-                uses: ramsey/composer-install@v2
+                uses: ramsey/composer-install@v3
 
             -   name: Load environment variables
                 uses: c-py/action-dotenv-to-setenv@v3
