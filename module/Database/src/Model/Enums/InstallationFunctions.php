@@ -100,4 +100,45 @@ enum InstallationFunctions: string
             }, $cases),
         );
     }
+
+    /**
+     * Returns a list of functions (and its translations)
+     *
+     * @return array<non-empty-string, array{
+     *  isAdministrative: bool,
+     *  isLegacy: bool,
+     *  translations: non-empty-array<array-key, string>
+     * }>
+     */
+    public static function getMultilangArray(
+        Translator $translator,
+        bool $includeAdministrative = true,
+        bool $includeLegacy = true,
+        bool $includeCurrent = true,
+    ): array {
+        $cases = array_filter(
+            self::cases(),
+            static function ($case) use ($includeAdministrative, $includeLegacy, $includeCurrent) {
+                return (!$case->isLegacy() || $includeLegacy) &&
+                    (!$case->isAdministrative() || $includeAdministrative) &&
+                    ($case->isAdministrative() || $case->isLegacy() || $includeCurrent);
+            },
+        );
+
+        return array_combine(
+            array_map(static function ($func) {
+                return $func->value;
+            }, $cases),
+            array_map(static function ($func) use ($translator) {
+                return [
+                    'translations' => [
+                        AppLanguages::English->getLangParam() => $func->getName($translator, AppLanguages::English),
+                        AppLanguages::Dutch->getLangParam() => $func->getName($translator, AppLanguages::Dutch),
+                    ],
+                    'isAdministrative' => $func->isAdministrative(),
+                    'isLegacy' => $func->isLegacy(),
+                ];
+            }, $cases),
+        );
+    }
 }

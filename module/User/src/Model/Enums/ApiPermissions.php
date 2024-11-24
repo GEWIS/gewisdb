@@ -23,6 +23,7 @@ enum ApiPermissions: string
     case MembersPropertyAge21 = 'members_read_is21';
     case MembersDeleted = 'members_deleted';
     case OrgansMembershipR = 'organs_members_read';
+    case OrganFunctionsListR = 'organs_functionslist_read';
     case All = '*';
 
     public function getName(Translator $translator): string
@@ -45,7 +46,8 @@ enum ApiPermissions: string
             self::MembersPropertyAge18 => $translator->translate('Member¹ - Check if has reached age 18'),
             self::MembersPropertyAge21 => $translator->translate('Member¹ - Check if has reached age 21'),
             self::MembersDeleted => $translator->translate('Member¹ - Allow operations on `deleted\' members'),
-            self::OrgansMembershipR => $translator->translate('Read organ membership (per user/organ)'),
+            self::OrgansMembershipR => $translator->translate('Organs - Read organ membership (per user/organ)'),
+            self::OrganFunctionsListR => $translator->translate('Organs - List functions and translations'),
             self::All => $translator->translate('All API permissions'),
         };
     }

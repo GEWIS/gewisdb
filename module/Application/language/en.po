@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 00:51+0100\n"
+"POT-Creation-Date: 2024-10-29 15:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -15,6 +15,9 @@ msgstr ""
 
 msgid " door "
 msgstr " by "
+
+msgid " met dank aan de notulist"
+msgstr " thanks to the minute taker"
 
 msgid " met genoemde wijzigingen"
 msgstr " with mentioned changes"
@@ -525,7 +528,7 @@ msgid ""
 "De notulen van de %NUMBERORDINAL% %TYPE%%AUTHOR% worden %APPROVAL%%THANK%"
 "%CHANGES%."
 msgstr ""
-"The minutes of the %NUMBERORDINAL% %TYPE%%AUTHOR% are%APPROVAL%%THANK%"
+"The minutes of the %NUMBERORDINAL% %TYPE%%AUTHOR% are %APPROVAL%%THANK%"
 "%CHANGES%."
 
 msgid ""
@@ -1111,6 +1114,12 @@ msgstr ""
 "Organ regulations can only be created for 'committee', 'fraternity', or "
 "'financial audit committee'."
 
+msgid "Organs - List functions and translations"
+msgstr "Organs - List functions and translations"
+
+msgid "Organs - Read organ membership (per user/organ)"
+msgstr "Organs - Read organ membership (per user/organ)"
+
 msgid "Other"
 msgstr "Other"
 
@@ -1195,9 +1204,6 @@ msgstr "Query"
 
 msgid "Query Result"
 msgstr "Query Result"
-
-msgid "Read organ membership (per user/organ)"
-msgstr "Read organ membership (per user/organ)"
 
 msgid "Reappoint"
 msgstr "Reappoint"
