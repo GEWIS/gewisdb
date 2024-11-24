@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-18 22:55+0200\n"
+"POT-Creation-Date: 2024-10-29 00:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -13,8 +13,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
+msgid " door "
+msgstr " by "
+
+msgid " met genoemde wijzigingen"
+msgstr " with mentioned changes"
+
 msgid "# Decisions"
 msgstr "# Decisions"
+
+msgid "%GRANTEE% krijgt een sleutelcode van GEWIS tot en met %UNTIL%."
+msgstr "%GRANTEE% is granted a key code of GEWIS until %UNTIL%."
+
+msgid "%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS."
+msgstr "%MEMBER% is discharged as %FUNCTION% of s.v. GEWIS."
+
+msgid "%MEMBER% wordt gedechargeerd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr "%MEMBER% is discharged as %FUNCTION% of %ORGAN_ABBR%."
+
+msgid "%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr "%MEMBER% is installed as %FUNCTION% of %ORGAN_ABBR%."
+
+msgid "%MEMBER% wordt herbenoemd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr "%MEMBER% is reappointed as %FUNCTION% of %ORGAN_ABBR%."
+
+msgid "%MEMBER% wordt per %DATE% geïnstalleerd als %FUNCTION% der s.v. GEWIS."
+msgstr ""
+"%MEMBER% is installed as %FUNCTION% of s.v. GEWIS effective from %DATE%."
+
+msgid ""
+"%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. "
+"GEWIS."
+msgstr ""
+"%MEMBER% is relieved from the position of %FUNCTION% of s.v. GEWIS effective "
+"from %DATE%."
+
+msgid "%ORGAN_TYPE% %ORGAN_ABBR% wordt opgeheven."
+msgstr "%ORGAN_TYPE% %ORGAN_ABBR% is abrogated."
+
+msgid "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
+msgstr ""
+"%ORGAN_TYPE% %ORGAN_NAME% with abbreviation %ORGAN_ABBR% is established."
 
 #, php-format
 msgid "%s has been added to %s"
@@ -43,6 +82,12 @@ msgstr "A 404 error occurred"
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+
+msgid "ALV-Commissie"
+msgstr "GMM Committee"
+
+msgid "ALV-Werkgroep"
+msgstr "GMM Taskforce"
 
 msgid "API Tokens"
 msgstr "API Tokens"
@@ -286,6 +331,13 @@ msgstr "Back to %s %d"
 msgid "Before submitting the registration form, please review the"
 msgstr "Before submitting the registration form, please review the"
 
+msgid ""
+"Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "
+"\"%DECISION_CONTENT%\""
+msgstr ""
+"Decision %DECISION_HASH% is annulled. The decision read: \"%DECISION_CONTENT%"
+"\""
+
 msgid "Birthdate"
 msgstr "Birthdate"
 
@@ -378,6 +430,9 @@ msgstr "City and Postal Code"
 msgid "Click here for approval if membership fee paid with cash."
 msgstr "Click here for approval if membership fee paid with cash."
 
+msgid "Commissie"
+msgstr "Committee"
+
 msgid "Committee"
 msgstr "Committee"
 
@@ -452,6 +507,31 @@ msgstr "Date of Expiration"
 msgid "Date of Organ Regulation"
 msgstr "Date of Organ Regulation"
 
+msgid ""
+"De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+msgstr ""
+"The financial statement %NAME% by %AUTHOR%, version %VERSION% dated %DATE% "
+"is %APPROVAL%%CHANGES%."
+
+msgid ""
+"De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+msgstr ""
+"The budget %NAME% by %AUTHOR%, version %VERSION% dated %DATE% is %APPROVAL%"
+"%CHANGES%."
+
+msgid ""
+"De notulen van de %NUMBERORDINAL% %TYPE%%AUTHOR% worden %APPROVAL%%THANK%"
+"%CHANGES%."
+msgstr ""
+"The minutes of the %NUMBERORDINAL% %TYPE%%AUTHOR% are%APPROVAL%%THANK%"
+"%CHANGES%."
+
+msgid ""
+"De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%."
+msgstr "The key code of %GRANTEE% of GEWIS is withdrawn from %WITHDRAWAL%."
+
 msgid "Decision"
 msgstr "Decision"
 
@@ -513,6 +593,9 @@ msgstr "Discharge Member"
 
 msgid "Discharges"
 msgstr "Discharges"
+
+msgid "Dispuut"
+msgstr "Fraternity"
 
 msgid "Do you want to delete the other data?"
 msgstr "Do you want to delete the other data?"
@@ -681,6 +764,13 @@ msgstr "Grant Key Code"
 msgid "Grantee"
 msgstr "Grantee"
 
+msgid ""
+"Het %DOCUMENTTYPE% van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% "
+"wordt %APPROVAL%%CHANGES%."
+msgstr ""
+"The %DOCUMENTTYPE% of %NAME% by %AUTHOR%, version %VERSION% dated %DATE% are "
+"%APPROVAL%%CHANGES%."
+
 msgid "Hide Member"
 msgstr "Hide Member"
 
@@ -753,6 +843,9 @@ msgstr ""
 "                If you want GEWIS to automatically renew your membership, "
 "please send your TU/e username."
 
+msgid "If you are reading this, the secretary has not done their job."
+msgstr "If you are reading this, the secretary has not done their job."
+
 msgid "If you have any questions feel free to contact"
 msgstr "If you have any questions feel free to contact"
 
@@ -795,6 +888,9 @@ msgstr "Installation/Discharge"
 
 msgid "Installations"
 msgstr "Installations"
+
+msgid "KCC"
+msgstr "Financial Audit Committee"
 
 msgid "Key"
 msgstr "Key"
@@ -1147,6 +1243,9 @@ msgstr "Result"
 
 msgid "Return to registration form"
 msgstr "Return to registration form"
+
+msgid "RvA"
+msgstr "Advisory Board"
 
 msgid ""
 "Sadly, during the month of July we are not able to verify your enrollment at "
@@ -1617,8 +1716,20 @@ msgstr ""
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 
+msgid "afgekeurd"
+msgstr "disapproved"
+
 msgid "as"
 msgstr "as"
+
+msgid "commissiereglement"
+msgstr "committee regulations"
+
+msgid "dispuutsreglement"
+msgstr "fraternity regulations"
+
+msgid "goedgekeurd"
+msgstr "approved"
 
 msgid "https://gewis.nl/association/regulations"
 msgstr "https://gewis.nl/en/association/regulations"
@@ -1637,6 +1748,9 @@ msgstr "membership expiration date"
 
 msgid "membership type"
 msgstr "membership type"
+
+msgid "onbekend"
+msgstr "unknown"
 
 msgid "our payment provider"
 msgstr "our payment provider"

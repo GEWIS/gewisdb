@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-602-gfe1c41d6-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-606-g1eef4f4f-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-18 22:55+0200\n"
+"POT-Creation-Date: 2024-10-29 14:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+msgid " door "
+msgstr ""
+
+msgid " met genoemde wijzigingen"
+msgstr ""
+
 msgid "# Decisions"
+msgstr ""
+
+msgid "%GRANTEE% krijgt een sleutelcode van GEWIS tot en met %UNTIL%."
+msgstr ""
+
+msgid "%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS."
+msgstr ""
+
+msgid "%MEMBER% wordt gedechargeerd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr ""
+
+msgid "%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr ""
+
+msgid "%MEMBER% wordt herbenoemd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr ""
+
+msgid "%MEMBER% wordt per %DATE% geïnstalleerd als %FUNCTION% der s.v. GEWIS."
+msgstr ""
+
+msgid ""
+"%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. "
+"GEWIS."
+msgstr ""
+
+msgid "%ORGAN_TYPE% %ORGAN_ABBR% wordt opgeheven."
+msgstr ""
+
+msgid "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
 msgstr ""
 
 #, php-format
@@ -44,6 +79,12 @@ msgid "A 404 error occurred"
 msgstr ""
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+msgstr ""
+
+msgid "ALV-Commissie"
+msgstr ""
+
+msgid "ALV-Werkgroep"
 msgstr ""
 
 msgid "API Tokens"
@@ -262,6 +303,11 @@ msgstr ""
 msgid "Before submitting the registration form, please review the"
 msgstr ""
 
+msgid ""
+"Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "
+"\"%DECISION_CONTENT%\""
+msgstr ""
+
 msgid "Birthdate"
 msgstr ""
 
@@ -352,6 +398,9 @@ msgstr ""
 msgid "Click here for approval if membership fee paid with cash."
 msgstr ""
 
+msgid "Commissie"
+msgstr ""
+
 msgid "Committee"
 msgstr ""
 
@@ -426,6 +475,25 @@ msgstr ""
 msgid "Date of Organ Regulation"
 msgstr ""
 
+msgid ""
+"De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+msgstr ""
+
+msgid ""
+"De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+msgstr ""
+
+msgid ""
+"De notulen van de %NUMBERORDINAL% %TYPE%%AUTHOR% worden %APPROVAL%%THANK%"
+"%CHANGES%."
+msgstr ""
+
+msgid ""
+"De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%."
+msgstr ""
+
 msgid "Decision"
 msgstr ""
 
@@ -486,6 +554,9 @@ msgid "Discharge Member"
 msgstr ""
 
 msgid "Discharges"
+msgstr ""
+
+msgid "Dispuut"
 msgstr ""
 
 msgid "Do you want to delete the other data?"
@@ -647,6 +718,11 @@ msgstr ""
 msgid "Grantee"
 msgstr ""
 
+msgid ""
+"Het %DOCUMENTTYPE% van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% "
+"wordt %APPROVAL%%CHANGES%."
+msgstr ""
+
 msgid "Hide Member"
 msgstr ""
 
@@ -703,6 +779,9 @@ msgid ""
 "please send your TU/e username."
 msgstr ""
 
+msgid "If you are reading this, the secretary has not done their job."
+msgstr ""
+
 msgid "If you have any questions feel free to contact"
 msgstr ""
 
@@ -737,6 +816,9 @@ msgid "Installation/Discharge"
 msgstr ""
 
 msgid "Installations"
+msgstr ""
+
+msgid "KCC"
 msgstr ""
 
 msgid "Key"
@@ -1076,6 +1158,9 @@ msgid "Result"
 msgstr ""
 
 msgid "Return to registration form"
+msgstr ""
+
+msgid "RvA"
 msgstr ""
 
 msgid ""
@@ -1482,7 +1567,19 @@ msgstr ""
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr ""
 
+msgid "afgekeurd"
+msgstr ""
+
 msgid "as"
+msgstr ""
+
+msgid "commissiereglement"
+msgstr ""
+
+msgid "dispuutsreglement"
+msgstr ""
+
+msgid "goedgekeurd"
 msgstr ""
 
 msgid "https://gewis.nl/association/regulations"
@@ -1501,6 +1598,9 @@ msgid "membership expiration date"
 msgstr ""
 
 msgid "membership type"
+msgstr ""
+
+msgid "onbekend"
 msgstr ""
 
 msgid "our payment provider"
