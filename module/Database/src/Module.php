@@ -33,7 +33,6 @@ use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
 use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
 use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
-use Database\Form\InstallationFunction as InstallationFunctionForm;
 use Database\Form\Key\Grant as KeyGrantForm;
 use Database\Form\Key\Withdraw as KeyWithdrawForm;
 use Database\Form\MailingList as MailingListForm;
@@ -72,7 +71,6 @@ use Database\Mapper\CheckoutSession as CheckoutSessionMapper;
 use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
 use Database\Mapper\Factory\AuditFactory as AuditMapperFactory;
 use Database\Mapper\Factory\CheckoutSessionFactory as CheckoutSessionMapperFactory;
-use Database\Mapper\Factory\InstallationFunctionFactory as InstallationFunctionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
 use Database\Mapper\Factory\MemberFactory as MemberMapperFactory;
@@ -80,7 +78,6 @@ use Database\Mapper\Factory\MemberUpdateFactory as MemberUpdateMapperFactory;
 use Database\Mapper\Factory\OrganFactory as OrganMapperFactory;
 use Database\Mapper\Factory\ProspectiveMemberFactory as ProspectiveMemberMapperFactory;
 use Database\Mapper\Factory\SavedQueryFactory as SavedQueryMapperFactory;
-use Database\Mapper\InstallationFunction as InstallationFunctionMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Member as MemberMapper;
@@ -101,14 +98,12 @@ use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
 use Database\Service\Factory\FrontPageFactory as FrontPageServiceFactory;
-use Database\Service\Factory\InstallationFunctionFactory as InstallationFunctionServiceFactory;
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
 use Database\Service\Factory\MemberFactory as MemberServiceFactory;
 use Database\Service\Factory\QueryFactory as QueryServiceFactory;
 use Database\Service\Factory\StripeFactory as StripeServiceFactory;
 use Database\Service\FrontPage as FrontPageService;
-use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
@@ -158,7 +153,6 @@ class Module
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
-                InstallationFunctionService::class => InstallationFunctionServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
@@ -255,12 +249,6 @@ class Module
                 },
                 DeleteListForm::class => static function (ContainerInterface $container) {
                     return new DeleteListForm($container->get(MvcTranslator::class));
-                },
-                InstallationFunctionForm::class => static function (ContainerInterface $container) {
-                    $form = new InstallationFunctionForm($container->get(MvcTranslator::class));
-                    $form->setHydrator($container->get('database_hydrator_default'));
-
-                    return $form;
                 },
                 InstallForm::class => static function (ContainerInterface $container) {
                     $form = new InstallForm(
@@ -471,8 +459,8 @@ class Module
                 },
                 MemberFunctionFieldset::class => static function (ContainerInterface $container) {
                     $fieldset = new MemberFunctionFieldset(
+                        $container->get(MvcTranslator::class),
                         $container->get(MemberFieldset::class),
-                        $container->get(InstallationFunctionService::class),
                         true,
                     );
                     $fieldset->setHydrator(new ObjectPropertyHydrator());
@@ -482,8 +470,8 @@ class Module
                 },
                 'database_form_fieldset_memberfunction_nomember' => static function (ContainerInterface $container) {
                     $fieldset = new MemberFunctionFieldset(
+                        $container->get(MvcTranslator::class),
                         $container->get(MemberFieldset::class),
-                        $container->get(InstallationFunctionService::class),
                         false,
                     );
                     $fieldset->setHydrator(new ObjectPropertyHydrator());
@@ -544,7 +532,6 @@ class Module
                 },
                 ActionLinkMapper::class => ActionLinkMapperFactory::class,
                 AuditMapper::class => AuditMapperFactory::class,
-                InstallationFunctionMapper::class => InstallationFunctionMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
