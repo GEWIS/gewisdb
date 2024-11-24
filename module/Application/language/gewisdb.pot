@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-590-g07dc9e8e-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-602-gfe1c41d6-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 15:08+0200\n"
+"POT-Creation-Date: 2024-10-18 22:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,9 +89,6 @@ msgstr ""
 msgid "Add Decision"
 msgstr ""
 
-msgid "Add Function"
-msgstr ""
-
 msgid "Add Home Address"
 msgstr ""
 
@@ -116,9 +113,6 @@ msgstr ""
 msgid "Add New Decision"
 msgstr ""
 
-msgid "Add New Function"
-msgstr ""
-
 msgid "Add New Mailing List"
 msgstr ""
 
@@ -141,6 +135,9 @@ msgid "Address"
 msgstr ""
 
 msgid "Addresses"
+msgstr ""
+
+msgid "Administrative Functions"
 msgstr ""
 
 msgid "Advisory Board"
@@ -293,6 +290,9 @@ msgid "Cancelled"
 msgstr ""
 
 msgid "Cannot Delete Prospective Member:"
+msgstr ""
+
+msgid "Chair"
 msgstr ""
 
 msgid "Change"
@@ -555,6 +555,9 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
+msgid "Foosball Coordinator"
+msgstr ""
+
 #, php-format
 msgid ""
 "For an overview of how you can use the Doctrine Query Language (DQL) please "
@@ -647,6 +650,9 @@ msgstr ""
 msgid "Hide Member"
 msgstr ""
 
+msgid "Historic Functions"
+msgstr ""
+
 msgid "Home"
 msgstr ""
 
@@ -713,6 +719,9 @@ msgstr ""
 msgid ""
 "If your browser does not redirect you, please <a href=\"%s\">click here</a> "
 "to continue."
+msgstr ""
+
+msgid "Inactive Member"
 msgstr ""
 
 msgid "Initial(s)"
@@ -822,6 +831,9 @@ msgstr ""
 msgid "Meetings and Decisions"
 msgstr ""
 
+msgid "Member"
+msgstr ""
+
 #, php-format
 msgid "Member %s cannot be deleted."
 msgstr ""
@@ -918,6 +930,9 @@ msgstr ""
 msgid "On Form"
 msgstr ""
 
+msgid "Opperhoofd"
+msgstr ""
+
 msgid "Ordinary"
 msgstr ""
 
@@ -939,6 +954,9 @@ msgid ""
 msgstr ""
 
 msgid "Other"
+msgstr ""
+
+msgid "PR Officer"
 msgstr ""
 
 msgid ""
@@ -1086,6 +1104,9 @@ msgstr ""
 msgid "Search TU/e Students"
 msgstr ""
 
+msgid "Secretary"
+msgstr ""
+
 msgid "Select API permissions"
 msgstr ""
 
@@ -1104,6 +1125,11 @@ msgid ""
 msgstr ""
 
 msgid "Stack trace"
+msgstr ""
+
+msgid ""
+"Starting 2024, organ installation functions can only be changed through the "
+"code"
 msgstr ""
 
 msgid "Statement"
@@ -1222,6 +1248,20 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+msgid ""
+"These organ functions can be selected when installing someone into a "
+"committee/fraternity"
+msgstr ""
+
+msgid ""
+"These organ functions cannot be selected manually but are used by the "
+"database internally"
+msgstr ""
+
+msgid ""
+"These organ functions were used in the past but can no longer be selected"
+msgstr ""
+
 #, php-format
 msgid ""
 "This is because %s is/has been a member of an organ and/or has budgets/"
@@ -1267,6 +1307,9 @@ msgstr ""
 msgid "Token"
 msgstr ""
 
+msgid "Treasurer"
+msgstr ""
+
 msgid "Type"
 msgstr ""
 
@@ -1305,6 +1348,9 @@ msgid "Value"
 msgstr ""
 
 msgid "Version"
+msgstr ""
+
+msgid "Vice-Chair"
 msgstr ""
 
 msgid "View"
