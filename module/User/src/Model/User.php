@@ -28,7 +28,10 @@ class User
     /**
      * Login.
      */
-    #[Column(type: 'string')]
+    #[Column(
+        type: 'string',
+        unique: true,
+    )]
     protected string $login;
 
     /**
