@@ -21,7 +21,7 @@ use Throwable;
 class LoadFixturesCommand extends Command
 {
     private const array DATABASE_FIXTURES = [
-        // './module/Database/test/Seeder',
+        './module/Database/test/Seeder',
         './module/User/test/Seeder',
     ];
 
@@ -72,7 +72,8 @@ class LoadFixturesCommand extends Command
             $reportConnection->executeStatement('SET session_replication_role = \'replica\'');
             $reportExecutor->execute($reportLoader->getFixtures());
             $reportConnection->executeStatement('SET session_replication_role = \'origin\'');
-        } catch (Throwable) {
+        } catch (Throwable $e) {
+            $output->writeln('<comment>' . $e->getMessage() . '</comment>');
         }
 
         $output->writeln('<info>Loaded fixtures!</info>');

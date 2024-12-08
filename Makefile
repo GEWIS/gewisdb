@@ -63,6 +63,7 @@ migration-down: replenish migration-list
 
 seed: replenish
 		@docker compose exec -T web ./web application:fixtures:load
+		@docker compose exec web ./web report:generate:full
 
 exec:
 		docker compose exec -it web $(cmd)

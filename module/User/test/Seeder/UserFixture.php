@@ -10,6 +10,8 @@ use User\Model\User;
 
 class UserFixture extends AbstractFixture
 {
+    public const REF_ADMIN_USER = 'admin-user';
+
     public function load(ObjectManager $manager): void
     {
         $user = new User();
@@ -17,7 +19,7 @@ class UserFixture extends AbstractFixture
         $user->setPassword('$2y$13$smUYvCkgowlfHOFrogwcPONGDFmcylKHmTOZQAks9cDvs15tPxR2a'); // == gewisdbgewis
 
         $manager->persist($user);
-        $this->addReference('user-admin', $user);
+        $this->addReference(self::REF_ADMIN_USER, $user);
 
         $manager->flush();
     }
