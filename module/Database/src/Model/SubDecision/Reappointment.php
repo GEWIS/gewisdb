@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 /**
  * Reappointment of a previous installation.
@@ -62,39 +64,28 @@ class Reappointment extends SubDecision
         $this->installation = $installation;
     }
 
-    protected function getTemplate(): string
-    {
-        return '%MEMBER% wordt herbenoemd als %FUNCTION% van %ORGAN_ABBR%.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            '%MEMBER% wordt herbenoemd als %FUNCTION% van %ORGAN_ABBR%.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return '%MEMBER% is reappointed as %FUNCTION% of %ORGAN_ABBR%.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $installation = $this->getInstallation();
 
         $replacements = [
             '%MEMBER%' => $installation->getMember()->getFullName(),
-            '%FUNCTION%' => $installation->getFunction(),
+            '%FUNCTION%' => $installation->getFunction()->getName($translator, $language),
             '%ORGAN_ABBR%' => $installation->getFoundation()->getAbbr(),
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $installation = $this->getInstallation();
-
-        $replacements = [
-            '%MEMBER%' => $installation->getMember()->getFullName(),
-            '%FUNCTION%' => $installation->getFunction(), // Has no alternative (like the decision hash).
-            '%ORGAN_ABBR%' => $installation->getFoundation()->getAbbr(),
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

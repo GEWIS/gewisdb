@@ -39,7 +39,8 @@ And there is plenty more! GEWISDB continuously evolves to meet the needs of the 
 GEWISDB is built on PHP and the [Laminas MVC framework](https://getlaminas.org/). The Laminas MVC framework provides a solid foundation for building scalable and maintainable web applications.
 
 ### Prerequisites
-We recommend developing natively on a Linux machine or through WSL2 on Windows (note: Arch-based distributions are **not** recommended) with the [PhpStorm](https://www.jetbrains.com/phpstorm/) IDE or another IDE with good IntelliSense support for PHP.
+We recommend developing natively on a Linux machine or through WSL2 on Windows (note: Arch-based distributions are **not** recommended) with the [PhpStorm](https://www.jetbrains.com/phpstorm/) IDE or another IDE with good IntelliSense support for PHP.<br/>
+Alternatively, you can use [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=false&repo=gewis/gewisdb&geo=EuropeWest&machine=basicLinux32gb).
 
 You will need at least:
 - `docker` and `docker compose` (make sure that you have enabled [Buildkit](https://docs.docker.com/build/buildkit/#getting-started))

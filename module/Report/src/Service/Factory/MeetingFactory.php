@@ -6,6 +6,7 @@ namespace Report\Service\Factory;
 
 use Database\Mapper\Meeting as MeetingMapper;
 use Doctrine\ORM\EntityManager;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 use Report\Service\Meeting as MeetingService;
@@ -20,7 +21,7 @@ class MeetingFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): MeetingService {
-        /** @var MeetingMapper $meetingMapper */
+        $translator = $container->get(MvcTranslator::class);
         $meetingMapper = $container->get(MeetingMapper::class);
         /** @var EntityManager $emReport */
         $emReport = $container->get('doctrine.entitymanager.orm_report');
@@ -29,6 +30,7 @@ class MeetingFactory implements FactoryInterface
         $mailTransport = $container->get('database_mail_transport');
 
         return new MeetingService(
+            $translator,
             $meetingMapper,
             $emReport,
             $config,

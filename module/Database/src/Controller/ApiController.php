@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Database\Controller;
 
 use Database\Model\Enums\ApiResponseStatuses;
+use Database\Model\Enums\InstallationFunctions as OrganInstallationFunctions;
 use Database\Service\Api as ApiService;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\JsonModel;
 use RuntimeException;
 use User\Model\Enums\ApiPermissions;
@@ -18,6 +20,7 @@ use function array_diff;
 class ApiController extends AbstractActionController
 {
     public function __construct(
+        private readonly Translator $translator,
         private readonly ApiService $apiService,
         private readonly ApiAuthenticationService $apiAuthService,
     ) {
@@ -113,6 +116,22 @@ class ApiController extends AbstractActionController
         $res = [
             'status' => ApiResponseStatuses::Success,
             'data' => $members,
+        ];
+
+        return new JsonModel($res);
+    }
+
+    /**
+     * Return organ functions
+     */
+    public function organFunctionsAction(): JsonModel
+    {
+        $this->apiAuthService->assertCan(ApiPermissions::OrganFunctionsListR);
+
+        $functions = OrganInstallationFunctions::getMultilangArray($this->translator);
+
+        $res = [
+            'data' => $functions,
         ];
 
         return new JsonModel($res);

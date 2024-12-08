@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision\Board;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 /**
  * Release from board duties.
@@ -90,35 +92,26 @@ class Release extends SubDecision
         $this->date = $date;
     }
 
-    protected function getTemplate(): string
-    {
-        return '%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. GEWIS.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            '%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. GEWIS.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return '%MEMBER% is relieved from the position of %FUNCTION% of s.v. GEWIS effective from %DATE%.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
             '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
-            '%DATE%' => $this->formatDate($this->date),
-            '%FUNCTION%' => $this->getInstallation()->getFunction(),
-        ];
-
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $replacements = [
-            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
-            '%DATE%' => $this->formatDate($this->date, 'en_GB'),
+            '%DATE%' => $this->formatDate($this->date, $language),
             '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision hash).
         ];
 
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }

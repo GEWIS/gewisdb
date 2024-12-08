@@ -6,6 +6,7 @@ namespace Database\Hydrator;
 
 use Application\Model\Enums\OrganTypes;
 use Database\Model\Decision as DecisionModel;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use InvalidArgumentException;
@@ -45,13 +46,13 @@ class Foundation extends AbstractDecision
             // if an installation has a different function than 'member'
             // also add a member installation
             if (
-                'Lid' !== $install['function']
-                && 'Inactief Lid' !== $install['function']
+                InstallationFunctions::Member !== $install['function']
+                && InstallationFunctions::InactiveMember !== $install['function']
             ) {
                 $installation = new InstallationModel();
                 $installation->setSequence($num++);
                 $installation->setFoundation($foundation);
-                $installation->setFunction('Lid');
+                $installation->setFunction(InstallationFunctions::Member);
                 $installation->setMember($install['member']);
                 $installation->setDecision($decision);
             }

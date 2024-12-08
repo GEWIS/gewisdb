@@ -16,7 +16,7 @@ use Laminas\View\Renderer\PhpRenderer;
     <li>
         <a href="<?= $this->url('member/show', ['id' => $ref->getMember()->getLidnr()]) ?>">
             <?= $ref->getMember()->getFullName() ?>
-        </a> <?= $this->translate('as') ?> <?= $ref->getFunction() ?>
+        </a> <?= $this->translate('as') ?> <?= $ref->getFunction()->getName($this->plugin('translate')->getTranslator()) ?>
     </li>
 <?php endforeach; ?>
 </ul>

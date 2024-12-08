@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Database\Form\Fieldset;
 
-use Database\Service\InstallationFunction as FunctionService;
+use Database\Model\Enums\InstallationFunctions;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Fieldset;
+use Laminas\Mvc\I18n\Translator;
 
 class MemberFunction extends Fieldset
 {
     public function __construct(
+        private readonly Translator $translator,
         Member $member,
-        FunctionService $service,
         bool $withmember = false,
+        bool $withLegacy = false,
     ) {
         parent::__construct('member_function');
 
@@ -24,27 +26,9 @@ class MemberFunction extends Fieldset
             'type' => Select::class,
             'options' => [
                 'label' => 'Functie',
-                'value_options' => $this->getValueOptions($service, $withmember),
+                'value_options' => InstallationFunctions::getFunctionsArray($translator, $withmember, $withLegacy),
             ],
         ]);
-    }
-
-    protected function getValueOptions(
-        FunctionService $service,
-        bool $withmember,
-    ): array {
-        $array = [];
-
-        if ($withmember) {
-            $array['Lid'] = 'Lid';
-            $array['Inactief Lid'] = 'Inactief Lid';
-        }
-
-        foreach ($service->getAllFunctions() as $function) {
-            $array[$function->getName()] = $function->getName();
-        }
-
-        return $array;
     }
 
     public function getInputFilterSpecification(): array
