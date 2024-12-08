@@ -44,10 +44,12 @@ class LoadFixturesCommand extends Command
 
         $databaseLoader = new Loader();
         $reportLoader = new Loader();
-        $purger = new ORMPurger();
-        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
-        $databaseExecutor = new ORMExecutor($this->databaseEntityManager, $purger);
-        $reportExecutor = new ORMExecutor($this->reportEntityManager, $purger);
+        $databasePurger = new ORMPurger();
+        $databasePurger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
+        $databaseExecutor = new ORMExecutor($this->databaseEntityManager, $databasePurger);
+        $reportPurger = new ORMPurger();
+        $reportPurger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
+        $reportExecutor = new ORMExecutor($this->reportEntityManager, $reportPurger);
 
         foreach ($this::DATABASE_FIXTURES as $fixture) {
             $databaseLoader->loadFromDirectory($fixture);
