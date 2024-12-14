@@ -9,7 +9,7 @@ use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Translator\TranslatorInterface;
 
 /**
  * Reappointment of a previous installation.

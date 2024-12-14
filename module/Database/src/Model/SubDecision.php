@@ -31,8 +31,8 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Laminas\I18n\Translator\TranslatorInterface;
 use Laminas\Mvc\I18n\Translator;
+use Laminas\Translator\TranslatorInterface;
 
 use function array_keys;
 use function str_replace;

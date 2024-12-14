@@ -8,8 +8,8 @@ use Application\Model\Enums\AppLanguages;
 use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\I18n\Translator\TranslatorInterface;
 use Laminas\Mvc\I18n\DummyTranslator;
+use Laminas\Translator\TranslatorInterface;
 use RuntimeException;
 
 /**
