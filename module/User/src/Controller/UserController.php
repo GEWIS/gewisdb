@@ -23,7 +23,7 @@ class UserController extends AbstractActionController
     /**
      * User login action
      */
-    public function indexAction(): HttpResponse|ViewModel
+    public function loginAction(): HttpResponse|ViewModel
     {
         if ($this->getRequest()->isPost()) {
             $result = $this->service->login($this->getRequest()->getPost()->toArray());

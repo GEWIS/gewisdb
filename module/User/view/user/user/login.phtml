@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
+use Laminas\Form\Element\Password;
 use Laminas\View\Renderer\PhpRenderer;
 
 /** @var PhpRenderer|HelperTrait $this */
@@ -23,7 +24,9 @@ $form->setAttribute('class', 'form-horizontal');
             <div class="panel-body">
                 <div class="alert alert-info">
                     <p>
-                        <?php if ($usesldap): ?>
+                        <?php if ($form->get('login')->getAttribute('readonly')): ?>
+                            <?= $this->translate('The database currently is in demo mode and uses environment credentials.') ?>
+                        <?php elseif ($usesldap): ?>
                             <?= $this->translate('The database currently only accepts logins using your GEWIS m-account.') ?>
                         <?php else: ?>
                             <?= $this->translate('The database currently only accepts logins using your database credentials.') ?>
@@ -49,20 +52,27 @@ $form->setAttribute('class', 'form-horizontal');
 
                 <?php
                 $element = $form->get('password');
-                $element->setAttribute('class', 'form-control');
-                $element->setAttribute('placeholder', $element->getLabel());
-                ?>
-                <div class="form-group<?= $this->bootstrapElementError($element) ?>">
-                    <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
-                        <?= $element->getLabel() ?>
-                    </label>
-                    <div class="col-sm-10">
-                        <?= $this->formInput($element) ?>
-                        <?= $this->formElementErrors($element) ?>
+                if ($element instanceof Password):
+                    $element->setAttribute('class', 'form-control');
+                    $element->setAttribute('placeholder', $element->getLabel());
+                    ?>
+                    <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+                        <label for="<?= $element->getName() ?>" class="control-label col-sm-2">
+                            <?= $element->getLabel() ?>
+                        </label>
+                        <div class="col-sm-10">
+                            <?= $this->formInput($element) ?>
+                            <?= $this->formElementErrors($element) ?>
+                        </div>
                     </div>
-                </div>
 
                 <?php
+                else:
+                ?>
+                    <?= $this->formInput($element) ?>
+                
+                <?php
+                endif;
                 $submit = $form->get('submit');
                 $submit->setLabel($submit->getValue());
                 $submit->setAttribute('class', 'btn btn-primary pull-right');
