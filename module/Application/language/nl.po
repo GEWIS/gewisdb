@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 15:05+0100\n"
+"POT-Creation-Date: 2024-12-14 20:21+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -349,6 +349,9 @@ msgstr "Bestuurder(s) om te ontheffen"
 msgid "Board Mutations"
 msgstr "Bestuursmutaties"
 
+msgid "Brand Manager"
+msgstr "Brand Manager"
+
 msgid "Budget"
 msgstr "Begroting"
 
@@ -366,6 +369,9 @@ msgstr "Afgebroken"
 
 msgid "Cannot Delete Prospective Member:"
 msgstr "Kan toekomstig lid niet verwijderen:"
+
+msgid "Career Development and External Affairs Officer"
+msgstr "Commissaris Carrièreontwikkeling en Externe Betrekkingen"
 
 msgid "Chair"
 msgstr "Voorzitter"
@@ -574,6 +580,9 @@ msgstr "Gebruiker verwijderen"
 msgid "Description"
 msgstr "Beschrijving"
 
+msgid "Digital Infrastructure Officer"
+msgstr "Commissaris Digitale Infrastructuur"
+
 msgid "Disapprove"
 msgstr "Afkeuren"
 
@@ -617,6 +626,9 @@ msgstr "E-mailadres"
 msgid "Edit / Delete"
 msgstr "Bewerken / Verwijderen"
 
+msgid "Education Officer"
+msgstr "Onderwijscommissaris"
+
 msgid "Effective From"
 msgstr "Vanaf"
 
@@ -653,6 +665,9 @@ msgstr "Extern"
 
 msgid "External - Specially admitted by the board"
 msgstr "Extern - Speciaal toegelaten door het bestuur"
+
+msgid "External Affairs Officer"
+msgstr "Commissaris Externe Betrekkingen"
 
 msgid "Failed"
 msgstr "Mislukt"
@@ -865,8 +880,14 @@ msgstr ""
 msgid "Inactive Member"
 msgstr "Inactief lid"
 
+msgid "Information Officer"
+msgstr "Commissaris Kennisbeheer"
+
 msgid "Initial(s)"
 msgstr "Initialen"
+
+msgid "Innovation Officer"
+msgstr "Commissaris Innovatie"
 
 msgid "Install Board Member"
 msgstr "Bestuurder installeren"
@@ -879,6 +900,9 @@ msgstr "Installatie/Decharge"
 
 msgid "Installations"
 msgstr "Installaties"
+
+msgid "Internal Affairs Officer"
+msgstr "Commissaris Interne Betrekkingen"
 
 msgid "KCC"
 msgstr "KCC"
@@ -1163,6 +1187,9 @@ msgstr ""
 "Let op als je hier een mailinglijst maakt, deze moet dan ook bestaan in "
 "mailman (met dezelfde naam!)."
 
+msgid "Please select a function"
+msgstr "Selecteer een functie"
+
 msgid "Point"
 msgstr "Punt"
 
@@ -1372,6 +1399,10 @@ msgstr "TU/e-gebruikersnaam"
 #, php-format
 msgid "Thank you %s!"
 msgstr "Bedankt %s!"
+
+msgid ""
+"The database currently is in demo mode and uses environment credentials."
+msgstr "De database is in demo-modus en gebruikt de environment-inloggegevens."
 
 msgid "The database currently only accepts logins using your GEWIS m-account."
 msgstr ""

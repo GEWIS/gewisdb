@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-607-gef8939ac-dirty\n"
+"Project-Id-Version: GEWISdb 828c4d66\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 15:05+0100\n"
+"POT-Creation-Date: 2024-12-14 20:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -320,6 +320,9 @@ msgstr ""
 msgid "Board Mutations"
 msgstr ""
 
+msgid "Brand Manager"
+msgstr ""
+
 msgid "Budget"
 msgstr ""
 
@@ -336,6 +339,9 @@ msgid "Cancelled"
 msgstr ""
 
 msgid "Cannot Delete Prospective Member:"
+msgstr ""
+
+msgid "Career Development and External Affairs Officer"
 msgstr ""
 
 msgid "Chair"
@@ -534,6 +540,9 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+msgid "Digital Infrastructure Officer"
+msgstr ""
+
 msgid "Disapprove"
 msgstr ""
 
@@ -574,6 +583,9 @@ msgstr ""
 msgid "Edit / Delete"
 msgstr ""
 
+msgid "Education Officer"
+msgstr ""
+
 msgid "Effective From"
 msgstr ""
 
@@ -609,6 +621,9 @@ msgid "External"
 msgstr ""
 
 msgid "External - Specially admitted by the board"
+msgstr ""
+
+msgid "External Affairs Officer"
 msgstr ""
 
 msgid "Failed"
@@ -788,7 +803,13 @@ msgstr ""
 msgid "Inactive Member"
 msgstr ""
 
+msgid "Information Officer"
+msgstr ""
+
 msgid "Initial(s)"
+msgstr ""
+
+msgid "Innovation Officer"
 msgstr ""
 
 msgid "Install Board Member"
@@ -801,6 +822,9 @@ msgid "Installation/Discharge"
 msgstr ""
 
 msgid "Installations"
+msgstr ""
+
+msgid "Internal Affairs Officer"
 msgstr ""
 
 msgid "KCC"
@@ -1073,6 +1097,9 @@ msgid ""
 "mailman (with the same name!)."
 msgstr ""
 
+msgid "Please select a function"
+msgstr ""
+
 msgid "Point"
 msgstr ""
 
@@ -1270,6 +1297,10 @@ msgstr ""
 
 #, php-format
 msgid "Thank you %s!"
+msgstr ""
+
+msgid ""
+"The database currently is in demo mode and uses environment credentials."
 msgstr ""
 
 msgid "The database currently only accepts logins using your GEWIS m-account."

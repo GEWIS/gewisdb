@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 15:05+0100\n"
+"POT-Creation-Date: 2024-12-14 20:21+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -350,6 +350,9 @@ msgstr "Board Member(s) to Relieve"
 msgid "Board Mutations"
 msgstr "Board Mutations"
 
+msgid "Brand Manager"
+msgstr "Brand Manager"
+
 msgid "Budget"
 msgstr "Budget"
 
@@ -367,6 +370,9 @@ msgstr "Cancelled"
 
 msgid "Cannot Delete Prospective Member:"
 msgstr "Cannot Delete Prospective Member:"
+
+msgid "Career Development and External Affairs Officer"
+msgstr "Career Development and External Affairs Officer"
 
 msgid "Chair"
 msgstr "Chair"
@@ -572,6 +578,9 @@ msgstr "Delete User"
 msgid "Description"
 msgstr "Description"
 
+msgid "Digital Infrastructure Officer"
+msgstr "Digital Infrastructure Officer"
+
 msgid "Disapprove"
 msgstr "Disapprove"
 
@@ -614,6 +623,9 @@ msgstr "E-mail Address"
 msgid "Edit / Delete"
 msgstr "Edit / Delete"
 
+msgid "Education Officer"
+msgstr "Education Officer"
+
 msgid "Effective From"
 msgstr "Effective From"
 
@@ -650,6 +662,9 @@ msgstr "External"
 
 msgid "External - Specially admitted by the board"
 msgstr "External - Specially admitted by the board"
+
+msgid "External Affairs Officer"
+msgstr "External Affairs Officer"
 
 msgid "Failed"
 msgstr "Failed"
@@ -859,8 +874,14 @@ msgstr ""
 msgid "Inactive Member"
 msgstr "Inactive Member"
 
+msgid "Information Officer"
+msgstr "Information Officer"
+
 msgid "Initial(s)"
 msgstr "Initial(s)"
+
+msgid "Innovation Officer"
+msgstr "Innovation Officer"
 
 msgid "Install Board Member"
 msgstr "Install Board Member"
@@ -873,6 +894,9 @@ msgstr "Installation/Discharge"
 
 msgid "Installations"
 msgstr "Installations"
+
+msgid "Internal Affairs Officer"
+msgstr "Internal Affairs Officer"
 
 msgid "KCC"
 msgstr "Financial Audit Committee"
@@ -1157,6 +1181,9 @@ msgstr ""
 "Please note that if you create a mailing list here, it must also exist in "
 "mailman (with the same name!)."
 
+msgid "Please select a function"
+msgstr "Please select a function"
+
 msgid "Point"
 msgstr "Point"
 
@@ -1365,6 +1392,11 @@ msgstr "TU/e username"
 #, php-format
 msgid "Thank you %s!"
 msgstr "Thank you %s!"
+
+msgid ""
+"The database currently is in demo mode and uses environment credentials."
+msgstr ""
+"The database currently is in demo mode and uses environment credentials."
 
 msgid "The database currently only accepts logins using your GEWIS m-account."
 msgstr "The database currently only accepts logins using your GEWIS m-account."
