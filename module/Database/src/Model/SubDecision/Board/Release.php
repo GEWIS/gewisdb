@@ -109,7 +109,7 @@ class Release extends SubDecision
         $replacements = [
             '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
             '%DATE%' => $this->formatDate($this->date, $language),
-            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision hash).
+            '%FUNCTION%' => $this->getInstallation()->getFunction()->getName($translator, $language),
         ];
 
         return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);

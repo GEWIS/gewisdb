@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision\Board;
 
 use Application\Model\Enums\AppLanguages;
+use Database\Model\Enums\BoardFunctions;
 use Database\Model\Member;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
@@ -37,10 +38,13 @@ class Installation extends SubDecision
     use FormattableDateTrait;
 
     /**
-     * Function in the board.
+     * Function given.
      */
-    #[Column(type: 'string')]
-    protected string $function;
+    #[Column(
+        type: 'string',
+        enumType: BoardFunctions::class,
+    )]
+    protected BoardFunctions $function;
 
     /**
      * The date at which the installation is in effect.
@@ -69,7 +73,7 @@ class Installation extends SubDecision
     /**
      * Get the function.
      */
-    public function getFunction(): string
+    public function getFunction(): BoardFunctions
     {
         return $this->function;
     }
@@ -77,7 +81,7 @@ class Installation extends SubDecision
     /**
      * Set the function.
      */
-    public function setFunction(string $function): void
+    public function setFunction(BoardFunctions $function): void
     {
         $this->function = $function;
     }
@@ -126,7 +130,7 @@ class Installation extends SubDecision
         $replacements = [
             '%MEMBER%' => $this->getMember()->getFullName(),
             '%DATE%' => $this->formatDate($this->getDate(), $language),
-            '%FUNCTION%' => $this->getFunction(), // Has no alternative (like the decision has).
+            '%FUNCTION%' => $this->getFunction()->getName($translator, $language),
         ];
 
         return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);

@@ -11,6 +11,8 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var BoardInstallationModel[] $installs
  */
 
+$translator = $this->plugin('translate')->getTranslator();
+
 $arrInstalls = array();
 
 foreach ($installs as $key => $install) {
@@ -78,7 +80,8 @@ $fs->get('sequence')->setAttribute('id', 'release-install-board-subdecision-sequ
     <div class="radio">
         <label>
             <input type="radio" name="board-release-slot" class="board-release-slot" value="<?= $key ?>">
-            <?= $install->getMember()->getFullName() ?> <?= $this->translate('as') ?> <?= $install->getFunction() ?><br>
+            <?= $install->getMember()->getFullName() ?> <?= $this->translate('as') ?>
+            <?= $install->getFunction()->getName($translator) ?><br>
         </label>
     </div>
 <?php endforeach ?>

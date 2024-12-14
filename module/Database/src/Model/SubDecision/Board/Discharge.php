@@ -81,7 +81,7 @@ class Discharge extends SubDecision
     ): string {
         $replacements = [
             '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
-            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision has)
+            '%FUNCTION%' => $this->getInstallation()->getFunction()->getName($translator, $language),
         ];
 
         return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);

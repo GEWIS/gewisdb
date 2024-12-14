@@ -14,34 +14,41 @@ use function array_map;
 use function in_array;
 
 /**
- * Enum with organ functions
+ * Enum with board functions
  * The values are in Dutch, because decisions are made in Dutch and thus this value is guaranteed to not change
  */
-enum InstallationFunctions: string
+enum BoardFunctions: string
 {
     /** Current functions */
     case Chair = 'Voorzitter';
     case Secretary = 'Secretaris';
     case Treasurer = 'Penningmeester';
-    case ViceChair = 'Vice-Voorzitter';
-    case Opperhoofd = 'Opperhoofd';
-    case PrOfficer = 'PR-functionaris';
+    case Education = 'Onderwijscommissaris';
+    case ExternalAffairs = 'Commissaris Externe Betrekkingen';
+    case InternalAffairs = 'Commissaris Interne Betrekkingen';
 
     /** Legacy functions */
-    case FoosballCoordinator = 'Tafelvoetbalcoordinator';
+    case PrOfficer = 'PR-functionaris'; //this one is with an F in the db
+    case ViceChair = 'Vice-Voorzitter';
 
-    /** Administrative functions */
-    case Member = 'Lid';
-    case InactiveMember = 'Inactief Lid';
+    /** One-off functions */
+    case BrandManager = 'Brand Manager';
+    case CareerdevelopmentExternalAffairs = 'Commissaris Carrièreontwikkeling en Externe Betrekkingen';
+    case DigitalInfrastructure = 'Commissaris Digitale Infrastructuur';
+    case DigitalInfrastructureEN = 'Digital Infrastructure Officer'; //todo: change db value?
+    case Innovation = 'Commissaris Innovatie';
+    case Information = 'Commissaris Kennisbeheer';
 
     public function isLegacy(): bool
     {
-        return in_array($this, [self::FoosballCoordinator]);
-    }
-
-    public function isAdministrative(): bool
-    {
-        return in_array($this, [self::Member, self::InactiveMember]);
+        return !in_array($this, [
+            self::Chair,
+            self::Secretary,
+            self::Treasurer,
+            self::Education,
+            self::ExternalAffairs,
+            self::InternalAffairs,
+        ]);
     }
 
     /**
@@ -59,15 +66,32 @@ enum InstallationFunctions: string
             self::Chair => $translator->translate('Chair', locale: $language?->getLangParam()),
             self::Secretary => $translator->translate('Secretary', locale: $language?->getLangParam()),
             self::Treasurer => $translator->translate('Treasurer', locale: $language?->getLangParam()),
-            self::ViceChair => $translator->translate('Vice-Chair', locale: $language?->getLangParam()),
-            self::Opperhoofd => $translator->translate('Opperhoofd', locale: $language?->getLangParam()),
-            self::PrOfficer => $translator->translate('PR Officer', locale: $language?->getLangParam()),
-            self::FoosballCoordinator => $translator->translate(
-                'Foosball Coordinator',
+            self::Education => $translator->translate('Education Officer', locale: $language?->getLangParam()),
+            self::ExternalAffairs => $translator->translate(
+                'External Affairs Officer',
                 locale: $language?->getLangParam(),
             ),
-            self::Member => $translator->translate('Member', locale: $language?->getLangParam()),
-            self::InactiveMember => $translator->translate('Inactive Member', locale: $language?->getLangParam()),
+            self::InternalAffairs => $translator->translate(
+                'Internal Affairs Officer',
+                locale: $language?->getLangParam(),
+            ),
+            self::PrOfficer => $translator->translate('PR Officer', locale: $language?->getLangParam()),
+            self::ViceChair => $translator->translate('Vice-Chair', locale: $language?->getLangParam()),
+            self::BrandManager => $translator->translate('Brand Manager', locale: $language?->getLangParam()),
+            self::CareerdevelopmentExternalAffairs => $translator->translate(
+                'Career Development and External Affairs Officer',
+                locale: $language?->getLangParam(),
+            ),
+            self::DigitalInfrastructure => $translator->translate(
+                'Digital Infrastructure Officer',
+                locale: $language?->getLangParam(),
+            ),
+            self::DigitalInfrastructureEN => $translator->translate(
+                'Digital Infrastructure Officer',
+                locale: $language?->getLangParam(),
+            ),
+            self::Information => $translator->translate('Information Officer', locale: $language?->getLangParam()),
+            self::Innovation => $translator->translate('Innovation Officer', locale: $language?->getLangParam()),
         };
     }
 
@@ -78,16 +102,14 @@ enum InstallationFunctions: string
      */
     public static function getFunctionsArray(
         Translator $translator,
-        bool $includeAdministrative = true,
         bool $includeLegacy = true,
         bool $includeCurrent = true,
     ): array {
         $cases = array_filter(
             self::cases(),
-            static function ($case) use ($includeAdministrative, $includeLegacy, $includeCurrent) {
+            static function ($case) use ($includeLegacy, $includeCurrent) {
                 return (!$case->isLegacy() || $includeLegacy) &&
-                    (!$case->isAdministrative() || $includeAdministrative) &&
-                    ($case->isAdministrative() || $case->isLegacy() || $includeCurrent);
+                    ($case->isLegacy() || $includeCurrent);
             },
         );
 
@@ -105,23 +127,20 @@ enum InstallationFunctions: string
      * Returns a list of functions (and its translations)
      *
      * @return array<non-empty-string, array{
-     *  isAdministrative: bool,
      *  isLegacy: bool,
      *  translations: non-empty-array<array-key, string>
      * }>
      */
     public static function getMultilangArray(
         Translator $translator,
-        bool $includeAdministrative = true,
         bool $includeLegacy = true,
         bool $includeCurrent = true,
     ): array {
         $cases = array_filter(
             self::cases(),
-            static function ($case) use ($includeAdministrative, $includeLegacy, $includeCurrent) {
+            static function ($case) use ($includeLegacy, $includeCurrent) {
                 return (!$case->isLegacy() || $includeLegacy) &&
-                    (!$case->isAdministrative() || $includeAdministrative) &&
-                    ($case->isAdministrative() || $case->isLegacy() || $includeCurrent);
+                    ($case->isLegacy() || $includeCurrent);
             },
         );
 
@@ -135,7 +154,6 @@ enum InstallationFunctions: string
                         AppLanguages::English->getLangParam() => $func->getName($translator, AppLanguages::English),
                         AppLanguages::Dutch->getLangParam() => $func->getName($translator, AppLanguages::Dutch),
                     ],
-                    'isAdministrative' => $func->isAdministrative(),
                     'isLegacy' => $func->isLegacy(),
                 ];
             }, $cases),

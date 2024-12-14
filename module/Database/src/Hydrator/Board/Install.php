@@ -6,6 +6,7 @@ namespace Database\Hydrator\Board;
 
 use Database\Hydrator\AbstractDecision;
 use Database\Model\Decision as DecisionModel;
+use Database\Model\Enums\BoardFunctions;
 use Database\Model\SubDecision\Board\Installation as BoardInstall;
 use DateTime;
 use InvalidArgumentException;
@@ -29,6 +30,10 @@ class Install extends AbstractDecision
         // - meeting
         // - member
         // - function
+
+        if (!($data['function'] instanceof BoardFunctions)) {
+            $data['function'] = BoardFunctions::from($data['function']);
+        }
 
         $install = new BoardInstall();
 
