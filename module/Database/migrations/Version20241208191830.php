@@ -27,7 +27,6 @@ final class Version20241208191830 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP INDEX UNIQ_1483A5E9AA08CB10');
         // phpcs:enable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall
     }
