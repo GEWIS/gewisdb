@@ -6411,6 +6411,101 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-ApiResponseStatuses.html#enumcase_Error"
         },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions",
+            "name": "BoardFunctions",
+            "summary": "Enum\u0020with\u0020board\u0020functions\nThe\u0020values\u0020are\u0020in\u0020Dutch,\u0020because\u0020decisions\u0020are\u0020made\u0020in\u0020Dutch\u0020and\u0020thus\u0020this\u0020value\u0020is\u0020guaranteed\u0020to\u0020not\u0020change",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AisLegacy\u0028\u0029",
+            "name": "isLegacy",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#method_isLegacy"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Give\u0020the\u0020function\u0020name\u0020with\u0020the\u0020given\u0020translation.\u0020If\u0020no\u0020translator\u0020is\u0020given,\u0020we\u0020return\u0020the\u0020default\u0020language.",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#method_getName"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AgetFunctionsArray\u0028\u0029",
+            "name": "getFunctionsArray",
+            "summary": "Returns\u0020a\u0020list\u0020of\u0020functions\u0020\u0028and\u0020its\u0020translations\u0029",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#method_getFunctionsArray"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AgetMultilangArray\u0028\u0029",
+            "name": "getMultilangArray",
+            "summary": "Returns\u0020a\u0020list\u0020of\u0020functions\u0020\u0028and\u0020its\u0020translations\u0029",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#method_getMultilangArray"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AChair",
+            "name": "Chair",
+            "summary": "Current\u0020functions",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Chair"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ASecretary",
+            "name": "Secretary",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Secretary"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ATreasurer",
+            "name": "Treasurer",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Treasurer"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AEducation",
+            "name": "Education",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Education"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AExternalAffairs",
+            "name": "ExternalAffairs",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_ExternalAffairs"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AInternalAffairs",
+            "name": "InternalAffairs",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_InternalAffairs"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003APrOfficer",
+            "name": "PrOfficer",
+            "summary": "Legacy\u0020functions",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_PrOfficer"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AViceChair",
+            "name": "ViceChair",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_ViceChair"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ABrandManager",
+            "name": "BrandManager",
+            "summary": "One\u002Doff\u0020functions",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_BrandManager"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ACareerdevelopmentExternalAffairs",
+            "name": "CareerdevelopmentExternalAffairs",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_CareerdevelopmentExternalAffairs"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ADigitalInfrastructure",
+            "name": "DigitalInfrastructure",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_DigitalInfrastructure"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ADigitalInfrastructureEN",
+            "name": "DigitalInfrastructureEN",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_DigitalInfrastructureEN"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AInnovation",
+            "name": "Innovation",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Innovation"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AInformation",
+            "name": "Information",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Information"
+        },                {
             "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates",
             "name": "CheckoutSessionStates",
             "summary": "Enum\u0020for\u0020the\u0020different\u0020states\u0020a\u0020Checkout\u0020Session\u0020can\u0020have.",
@@ -6453,7 +6548,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\Enums\\InstallationFunctions",
             "name": "InstallationFunctions",
-            "summary": "Enum\u0020with\u0020organ\u0020and\u0020board\u0020functions\nThe\u0020values\u0020are\u0020in\u0020Dutch,\u0020because\u0020decisions\u0020are\u0020made\u0020in\u0020Dutch\u0020and\u0020thus\u0020this\u0020value\u0020is\u0020guaranteed\u0020to\u0020not\u0020change",
+            "summary": "Enum\u0020with\u0020organ\u0020functions\nThe\u0020values\u0020are\u0020in\u0020Dutch,\u0020because\u0020decisions\u0020are\u0020made\u0020in\u0020Dutch\u0020and\u0020thus\u0020this\u0020value\u0020is\u0020guaranteed\u0020to\u0020not\u0020change",
             "url": "classes/Database-Model-Enums-InstallationFunctions.html"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\InstallationFunctions\u003A\u003AisLegacy\u0028\u0029",
@@ -7808,7 +7903,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024function",
             "name": "function",
-            "summary": "Function\u0020in\u0020the\u0020board.",
+            "summary": "Function\u0020given.",
             "url": "classes/Database-Model-SubDecision-Board-Installation.html#property_function"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024date",
@@ -9771,10 +9866,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/DatabaseTest-Seeder-MeetingFixture.html#method_load"
         },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MeetingFixture\u003A\u003AgetDependencies\u0028\u0029",
+            "name": "getDependencies",
+            "summary": "Returns\u0020dependent\u0020fixture\u0020classes",
+            "url": "classes/DatabaseTest-Seeder-MeetingFixture.html#method_getDependencies"
+        },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MeetingFixture\u003A\u003AREF_MEETING_BV1",
             "name": "REF_MEETING_BV1",
             "summary": "",
             "url": "classes/DatabaseTest-Seeder-MeetingFixture.html#constant_REF_MEETING_BV1"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MeetingFixture\u003A\u003AREF_SUBDEC_BOARDINSTALL",
+            "name": "REF_SUBDEC_BOARDINSTALL",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MeetingFixture.html#constant_REF_SUBDEC_BOARDINSTALL"
         },                {
             "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture",
             "name": "MemberFixture",
@@ -10318,7 +10423,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\BoardMember\u003A\u003A\u0024function",
             "name": "function",
-            "summary": "Function.",
+            "summary": "Function\u0020given.",
             "url": "classes/Report-Model-BoardMember.html#property_function"
         },                {
             "fqsen": "\\Report\\Model\\BoardMember\u003A\u003A\u0024installDate",
@@ -11498,7 +11603,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024function",
             "name": "function",
-            "summary": "Function\u0020in\u0020the\u0020board.",
+            "summary": "Function\u0020given.",
             "url": "classes/Report-Model-SubDecision-Board-Installation.html#property_function"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Board\\Installation\u003A\u003A\u0024date",
@@ -12716,10 +12821,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Controller-UserController.html#method___construct"
         },                {
-            "fqsen": "\\User\\Controller\\UserController\u003A\u003AindexAction\u0028\u0029",
-            "name": "indexAction",
+            "fqsen": "\\User\\Controller\\UserController\u003A\u003AloginAction\u0028\u0029",
+            "name": "loginAction",
             "summary": "User\u0020login\u0020action",
-            "url": "classes/User-Controller-UserController.html#method_indexAction"
+            "url": "classes/User-Controller-UserController.html#method_loginAction"
         },                {
             "fqsen": "\\User\\Controller\\UserController\u003A\u003AlogoutAction\u0028\u0029",
             "name": "logoutAction",

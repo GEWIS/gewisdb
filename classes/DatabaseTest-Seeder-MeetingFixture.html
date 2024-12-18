@@ -296,6 +296,9 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\Doctrine\Common\DataFixtures\DependentFixtureInterface">DependentFixtureInterface</abbr>                    </span>
     
     </h2>
 
@@ -307,7 +310,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MeetingFixture.php"><a href="files/module-database-test-seeder-meetingfixture.html"><abbr title="module/Database/test/Seeder/MeetingFixture.php">MeetingFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -328,6 +331,13 @@
 
 
 
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/DatabaseTest-Seeder-MeetingFixture.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Doctrine\Common\DataFixtures\DependentFixtureInterface">DependentFixtureInterface</abbr></dt>    </dl>
 
 
 
@@ -344,6 +354,12 @@
         &nbsp;= &#039;bv-1&#039;                            </span>
 </dt>
 
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/DatabaseTest-Seeder-MeetingFixture.html#constant_REF_SUBDEC_BOARDINSTALL">REF_SUBDEC_BOARDINSTALL</a>
+    <span>
+        &nbsp;= &#039;subdecision-boardinstall&#039;                            </span>
+</dt>
+
     </dl>
 
 
@@ -354,6 +370,13 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/DatabaseTest-Seeder-MeetingFixture.html#method_getDependencies">getDependencies()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <abbr title="\DatabaseTest\Seeder\class">class</abbr>&gt;    </span>
+</dt>
+<dd>Returns dependent fixture classes</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/DatabaseTest-Seeder-MeetingFixture.html#method_load">load()</a>
     <span>
@@ -381,7 +404,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MeetingFixture.php"><a href="files/module-database-test-seeder-meetingfixture.html"><abbr title="module/Database/test/Seeder/MeetingFixture.php">MeetingFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -392,6 +415,37 @@
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">REF_MEETING_BV1</span>
     = <span class="phpdocumentor-signature__default-value">&#039;bv-1&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REF_SUBDEC_BOARDINSTALL">
+        REF_SUBDEC_BOARDINSTALL
+        <a href="classes/DatabaseTest-Seeder-MeetingFixture.html#constant_REF_SUBDEC_BOARDINSTALL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MeetingFixture.php"><a href="files/module-database-test-seeder-meetingfixture.html"><abbr title="module/Database/test/Seeder/MeetingFixture.php">MeetingFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">REF_SUBDEC_BOARDINSTALL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;subdecision-boardinstall&#039;</span>
 </code>
 
 
@@ -418,6 +472,45 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getDependencies">
+        getDependencies()
+        <a href="classes/DatabaseTest-Seeder-MeetingFixture.html#method_getDependencies" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MeetingFixture.php"><a href="files/module-database-test-seeder-meetingfixture.html"><abbr title="module/Database/test/Seeder/MeetingFixture.php">MeetingFixture.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">58</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns dependent fixture classes</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getDependencies</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <abbr title="\DatabaseTest\Seeder\class">class</abbr>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <abbr title="\DatabaseTest\Seeder\class">class</abbr>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_load">
         load()
         <a href="classes/DatabaseTest-Seeder-MeetingFixture.html#method_load" class="headerlink"><i class="fas fa-link"></i></a>
@@ -426,7 +519,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/test/Seeder/MeetingFixture.php"><a href="files/module-database-test-seeder-meetingfixture.html"><abbr title="module/Database/test/Seeder/MeetingFixture.php">MeetingFixture.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -569,6 +662,7 @@
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/DatabaseTest-Seeder-MeetingFixture.html#constant_REF_MEETING_BV1">REF_MEETING_BV1</a></li>
+                                                    <li class=""><a href="classes/DatabaseTest-Seeder-MeetingFixture.html#constant_REF_SUBDEC_BOARDINSTALL">REF_SUBDEC_BOARDINSTALL</a></li>
                                             </ul>
                 </li>
             
@@ -576,6 +670,7 @@
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/DatabaseTest-Seeder-MeetingFixture.html#method_getDependencies">getDependencies()</a></li>
                                             <li class=""><a href="classes/DatabaseTest-Seeder-MeetingFixture.html#method_load">load()</a></li>
                                     </ul>
             </li>
