@@ -3326,6 +3326,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20241124183711.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20241208191830",
+            "name": "Version20241208191830",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong",
+            "url": "classes/Database-Migrations-Version20241208191830.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20241208191830\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20241208191830.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20241208191830\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20241208191830.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20241208191830\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20241208191830.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -9741,6 +9761,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Stripe.html#property_config"
         },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MeetingFixture",
+            "name": "MeetingFixture",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MeetingFixture.html"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MeetingFixture\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MeetingFixture.html#method_load"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MeetingFixture\u003A\u003AREF_MEETING_BV1",
+            "name": "REF_MEETING_BV1",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MeetingFixture.html#constant_REF_MEETING_BV1"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture",
+            "name": "MemberFixture",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#method_load"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_STUDENT",
+            "name": "REF_MEMBER_STUDENT",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_STUDENT"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_EXTERNAL",
+            "name": "REF_MEMBER_EXTERNAL",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_EXTERNAL"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_GRADUATE",
+            "name": "REF_MEMBER_GRADUATE",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_GRADUATE"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\MemberFixture\u003A\u003AREF_MEMBER_PROSPECTIVE",
+            "name": "REF_MEMBER_PROSPECTIVE",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_PROSPECTIVE"
+        },                {
             "fqsen": "\\Report\\Migrations\\Version20241020224949",
             "name": "Version20241020224949",
             "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong",
@@ -13446,6 +13511,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/UserTest-Seeder-UserFixture.html#method_load"
         },                {
+            "fqsen": "\\UserTest\\Seeder\\UserFixture\u003A\u003AREF_ADMIN_USER",
+            "name": "REF_ADMIN_USER",
+            "summary": "",
+            "url": "classes/UserTest-Seeder-UserFixture.html#constant_REF_ADMIN_USER"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -13725,6 +13795,16 @@ Search.appendIndex(
             "name": "Factory",
             "summary": "",
             "url": "namespaces/database-service-factory.html"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder",
+            "name": "Seeder",
+            "summary": "",
+            "url": "namespaces/databasetest-seeder.html"
+        },                {
+            "fqsen": "\\DatabaseTest",
+            "name": "DatabaseTest",
+            "summary": "",
+            "url": "namespaces/databasetest.html"
         },                {
             "fqsen": "\\Report",
             "name": "Report",
