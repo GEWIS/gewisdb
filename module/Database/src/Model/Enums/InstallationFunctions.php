@@ -25,7 +25,7 @@ enum InstallationFunctions: string
     case Treasurer = 'Penningmeester';
     case ViceChair = 'Vice-Voorzitter';
     case Opperhoofd = 'Opperhoofd';
-    case PrOfficer = 'PR-functionaris';
+    case PrOfficer = 'PR-Functionaris';
 
     /** Legacy functions */
     case FoosballCoordinator = 'Tafelvoetbalcoordinator';

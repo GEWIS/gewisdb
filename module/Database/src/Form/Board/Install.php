@@ -60,23 +60,7 @@ class Install extends AbstractDecision implements InputFilterProviderInterface
     public function getInputFilterSpecification(): array
     {
         return [
-            'function' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => StringTrim::class,
-                    ],
-                ],
-                'validators' => [
-                    [
-                        'name' => StringLength::class,
-                        'options' => [
-                            'min' => 2,
-                            'max' => 32,
-                        ],
-                    ],
-                ],
-            ],
+            'function' => ['required' => true],
             'date' => ['required' => true],
         ];
     }

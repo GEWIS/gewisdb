@@ -28,7 +28,7 @@ enum BoardFunctions: string
     case InternalAffairs = 'Commissaris Interne Betrekkingen';
 
     /** Legacy functions */
-    case PrOfficer = 'PR-functionaris'; //this one is with an F in the db
+    case PrOfficer = 'PR-Functionaris';
     case ViceChair = 'Vice-Voorzitter';
 
     /** One-off functions */

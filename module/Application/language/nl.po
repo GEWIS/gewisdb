@@ -1137,7 +1137,7 @@ msgid "Other"
 msgstr "Overig"
 
 msgid "PR Officer"
-msgstr "PR-functionaris"
+msgstr "PR-Functionaris"
 
 msgid ""
 "PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
