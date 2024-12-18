@@ -8,13 +8,11 @@ use Database\Form\AbstractDecision;
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\Member as MemberFieldset;
 use Database\Model\Enums\BoardFunctions;
-use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
-use Laminas\Validator\StringLength;
 
 class Install extends AbstractDecision implements InputFilterProviderInterface
 {
