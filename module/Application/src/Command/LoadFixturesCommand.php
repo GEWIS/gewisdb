@@ -21,7 +21,7 @@ use Throwable;
 class LoadFixturesCommand extends Command
 {
     private const array DATABASE_FIXTURES = [
-        // './module/Database/test/Seeder',
+        './module/Database/test/Seeder',
         './module/User/test/Seeder',
     ];
 
@@ -44,10 +44,12 @@ class LoadFixturesCommand extends Command
 
         $databaseLoader = new Loader();
         $reportLoader = new Loader();
-        $purger = new ORMPurger();
-        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
-        $databaseExecutor = new ORMExecutor($this->databaseEntityManager, $purger);
-        $reportExecutor = new ORMExecutor($this->reportEntityManager, $purger);
+        $databasePurger = new ORMPurger();
+        $databasePurger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
+        $databaseExecutor = new ORMExecutor($this->databaseEntityManager, $databasePurger);
+        $reportPurger = new ORMPurger();
+        $reportPurger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
+        $reportExecutor = new ORMExecutor($this->reportEntityManager, $reportPurger);
 
         foreach ($this::DATABASE_FIXTURES as $fixture) {
             $databaseLoader->loadFromDirectory($fixture);
@@ -70,7 +72,8 @@ class LoadFixturesCommand extends Command
             $reportConnection->executeStatement('SET session_replication_role = \'replica\'');
             $reportExecutor->execute($reportLoader->getFixtures());
             $reportConnection->executeStatement('SET session_replication_role = \'origin\'');
-        } catch (Throwable) {
+        } catch (Throwable $e) {
+            $output->writeln('<comment>' . $e->getMessage() . '</comment>');
         }
 
         $output->writeln('<info>Loaded fixtures!</info>');

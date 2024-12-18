@@ -1,0 +1,76 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/php:8.3",
+	"customizations": {
+		"vscode": {
+      		"extensions": [
+				"getpsalm.psalm-vscode-plugin",
+				"swordev.phpstan",
+				"bmewburn.vscode-intelephense-client",
+				"ms-vscode.makefile-tools",
+				"ms-azuretools.vscode-docker",
+				"wongjn.php-sniffer"
+			],
+			"settings": {
+				"makefile.configureOnOpen": false,
+				"phpSniffer.run": "onType",
+				"phpSniffer.autoDetect": true,
+				"[php]": {
+					"editor.defaultFormatter": "wongjn.php-sniffer"
+				}
+			}
+    	}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+			"moby": true,
+			"installDockerBuildx": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "v2"
+		},
+		"./local-features/gewisdb-php-opcache": {
+			"version": "latest"
+		},
+		"./local-features/gewisdb-php-intl": {
+			"version": "latest"
+		}
+	},
+	"remoteUser": "vscode",
+	"postCreateCommand": {
+		"build": "cp .env.dist .env && make builddev && docker compose build",
+		"noXdebug": "sudo rm -f /usr/local/etc/php/conf.d/xdebug.ini"
+	},
+	"postStartCommand": {
+		"runGewisDb": "make rundev && make getvendordir"
+	},
+	"waitFor": "postStartCommand",
+	//"postAttachCommand": "",
+	"forwardPorts": [
+		80,
+		8080,
+		8025
+	],
+	"portsAttributes": {
+		"80": {
+			"label": "GEWISDB Web interface",
+			"onAutoForward": "openBrowserOnce",
+			"protocol": "http"
+		},
+		"8080": {
+			"label": "PGAdmin",
+			"onAutoForward": "openBrowserOnce",
+			"protocol": "http"
+		},
+		"8025": {
+			"label": "mailhog",
+			"onAutoForward": "silent",
+			"protocol": "http"
+		}
+	},
+	"shutdownAction": "stopContainer",
+	"hostRequirements": {
+		"cpus": 2,
+		"memory": "4gb",
+		"gpu": false,
+		"storage": "25gb"
+	}
+}

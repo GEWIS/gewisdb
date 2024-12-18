@@ -63,6 +63,7 @@ migration-down: replenish migration-list
 
 seed: replenish
 		@docker compose exec -T web ./web application:fixtures:load
+		@docker compose exec web ./web report:generate:full
 
 exec:
 		docker compose exec -it web $(cmd)
@@ -141,7 +142,7 @@ copyprodconf:
 		@cp config/autoload/doctrine.local.production.php.dist config/autoload/doctrine.local.php
 
 phpstan:
-		@docker compose exec web echo "" > phpstan/phpstan-baseline-pr.neon
+		@docker compose exec web /bin/sh -c 'echo "" > phpstan/phpstan-baseline-pr.neon'
 		@docker compose exec web vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G
 
 phpstanpr:
