@@ -6,7 +6,7 @@ namespace Database\Model\SubDecision;
 
 use Application\Model\Enums\AppLanguages;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Translator\TranslatorInterface;
 
 /**
  * Abrogation of an organ.

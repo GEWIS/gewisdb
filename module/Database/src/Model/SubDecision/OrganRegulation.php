@@ -11,7 +11,7 @@ use Database\Model\Trait\FormattableDateTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Translator\TranslatorInterface;
 use ValueError;
 
 #[Entity]

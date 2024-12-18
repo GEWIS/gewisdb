@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Report\Model;
 
+use Database\Model\Enums\BoardFunctions;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -45,10 +46,13 @@ class BoardMember
     protected Member $member;
 
     /**
-     * Function.
+     * Function given.
      */
-    #[Column(type: 'string')]
-    protected string $function;
+    #[Column(
+        type: 'string',
+        enumType: BoardFunctions::class,
+    )]
+    protected BoardFunctions $function;
 
     /**
      * Installation date.
@@ -132,7 +136,7 @@ class BoardMember
     /**
      * Get the function.
      */
-    public function getFunction(): string
+    public function getFunction(): BoardFunctions
     {
         return $this->function;
     }
@@ -140,7 +144,7 @@ class BoardMember
     /**
      * Set the function.
      */
-    public function setFunction(string $function): void
+    public function setFunction(BoardFunctions $function): void
     {
         $this->function = $function;
     }

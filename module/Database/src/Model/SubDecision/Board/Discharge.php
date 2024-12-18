@@ -9,7 +9,7 @@ use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Translator\TranslatorInterface;
 
 /**
  * Discharge from board position.
@@ -81,7 +81,7 @@ class Discharge extends SubDecision
     ): string {
         $replacements = [
             '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
-            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision has)
+            '%FUNCTION%' => $this->getInstallation()->getFunction()->getName($translator, $language),
         ];
 
         return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);

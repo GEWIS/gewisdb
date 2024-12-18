@@ -38,14 +38,6 @@
       <code>ReportMemberModel</code>
     </InvalidNullableReturnType>
   </file>
-  <file src="module/User/src/Controller/UserController.php">
-    <InvalidReturnStatement occurrences="1">
-      <code>$this-&gt;redirect()-&gt;toRoute('home')</code>
-    </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
-      <code>HttpResponse|ViewModel</code>
-    </InvalidReturnType>
-  </file>
   <file src="public/index.php">
     <PossiblyUndefinedArrayOffset occurrences="1">
       <code>$_SERVER['REQUEST_URI']</code>

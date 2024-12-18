@@ -48,7 +48,7 @@ return [
                     'route' => '/login',
                     'defaults' => [
                         'controller' => UserController::class,
-                        'action' => 'index',
+                        'action' => 'login',
                         'auth_type' => AuthenticationListener::AUTH_NONE,
                     ],
                 ],
