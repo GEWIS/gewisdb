@@ -293,7 +293,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -372,15 +372,23 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_getAlternativeName">getAlternativeName()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_getName">getName()</a>
     <span>
                                 &nbsp;: string    </span>
+</dt>
+<dd>Give the function name with the given translation. If no translator is given, we return the default language.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_getTypesArray">getTypesArray()</a>
+    <span>
+                                &nbsp;: array&lt;string, string&gt;    </span>
+</dt>
+<dd>Returns a list of types (and its translations)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Application-Model-Enums-OrganTypes.html#method_hasOrganRegulations">hasOrganRegulations()</a>
+    <span>
+                                &nbsp;: bool    </span>
 </dt>
 
     </dl>
@@ -408,7 +416,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -435,7 +443,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -462,7 +470,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -489,7 +497,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -516,7 +524,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -543,7 +551,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -570,28 +578,46 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getAlternativeName">
-        getAlternativeName()
-        <a href="classes/Application-Model-Enums-OrganTypes.html#method_getAlternativeName" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getName">
+        getName()
+        <a href="classes/Application-Model-Enums-OrganTypes.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Give the function name with the given translation. If no translator is given, we return the default language.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getAlternativeName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$language</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
     
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$language</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
     
@@ -606,24 +632,80 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                                    -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getName">
-        getName()
-        <a href="classes/Application-Model-Enums-OrganTypes.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getTypesArray">
+        getTypesArray()
+        <a href="classes/Application-Model-Enums-OrganTypes.html#method_getTypesArray" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a list of types (and its translations)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getTypesArray</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$language</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$language</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasOrganRegulations">
+        hasOrganRegulations()
+        <a href="classes/Application-Model-Enums-OrganTypes.html#method_hasOrganRegulations" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Application/src/Model/Enums/OrganTypes.php"><a href="files/module-application-src-model-enums-organtypes.html"><abbr title="module/Application/src/Model/Enums/OrganTypes.php">OrganTypes.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">hasOrganRegulations</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -636,7 +718,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
+        <span class="phpdocumentor-signature__response_type">bool</span>
             </section>
 
 </article>
@@ -764,8 +846,9 @@
                             <li class="phpdocumentor-on-this-page-section__title">Methods</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_getAlternativeName">getAlternativeName()</a></li>
                                                     <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_getName">getName()</a></li>
+                                                    <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_getTypesArray">getTypesArray()</a></li>
+                                                    <li class=""><a href="classes/Application-Model-Enums-OrganTypes.html#method_hasOrganRegulations">hasOrganRegulations()</a></li>
                                             </ul>
                 </li>
                     </ul>

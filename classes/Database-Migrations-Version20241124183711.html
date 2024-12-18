@@ -268,13 +268,16 @@
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-service.html">Service</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-migrations.html">Migrations</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    InstallationFunction
+    Version20241124183711
 
+        <span class="phpdocumentor-element__extends">
+        extends <abbr title="\Doctrine\Migrations\AbstractMigration">AbstractMigration</abbr>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -288,17 +291,20 @@
 
 <div class="phpdocumentor-label-line">
 
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
+
 
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20241124183711.php"><a href="files/module-database-migrations-version20241124183711.html"><abbr title="module/Database/migrations/Version20241124183711.php">Version20241124183711.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">phpcs:disable Generic.Files.LineLength.TooLong</p>
+
 
 
 
@@ -309,7 +315,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Database-Service-InstallationFunction.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Migrations-Version20241124183711.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -321,65 +327,30 @@
 
 
 
-<h4 id="toc-properties">
-    Properties
-    <a href="classes/Database-Service-InstallationFunction.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-InstallationFunction.html#property_installationFunctionForm">$installationFunctionForm</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-InstallationFunction.html#property_installationFunctionMapper">$installationFunctionMapper</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Mapper-InstallationFunction.html"><abbr title="\Database\Mapper\InstallationFunction">InstallationFunction</abbr></a>            </span>
-</dt>
-
-    </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Database-Service-InstallationFunction.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Migrations-Version20241124183711.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-InstallationFunction.html#method___construct">__construct()</a>
+    <a class="" href="classes/Database-Migrations-Version20241124183711.html#method_down">down()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-InstallationFunction.html#method_addFunction">addFunction()</a>
+    <a class="" href="classes/Database-Migrations-Version20241124183711.html#method_getDescription">getDescription()</a>
     <span>
-                                &nbsp;: bool    </span>
+                                &nbsp;: string    </span>
 </dt>
-<dd>Add a function.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-InstallationFunction.html#method_getAllFunctions">getAllFunctions()</a>
+    <a class="" href="classes/Database-Migrations-Version20241124183711.html#method_up">up()</a>
     <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-InstallationFunction.html"><abbr title="\Database\Model\InstallationFunction">InstallationFunction</abbr></a>&gt;    </span>
+                                &nbsp;: void    </span>
 </dt>
-<dd>Get all functions.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-InstallationFunction.html#method_getFunctionForm">getFunctionForm()</a>
-    <span>
-                                &nbsp;: <a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a>    </span>
-</dt>
-<dd>Get the function form.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-InstallationFunction.html#method_getFunctionMapper">getFunctionMapper()</a>
-    <span>
-                                &nbsp;: <a href="classes/Database-Mapper-InstallationFunction.html"><abbr title="\Database\Mapper\InstallationFunction">InstallationFunction</abbr></a>    </span>
-</dt>
-<dd>Get the installation function mapper.</dd>
 
     </dl>
 
@@ -388,114 +359,117 @@
         
 
         
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Database-Service-InstallationFunction.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/Database-Migrations-Version20241124183711.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only        "
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_installationFunctionForm">
-        $installationFunctionForm
-        <a href="classes/Database-Service-InstallationFunction.html#property_installationFunctionForm" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_down">
+        down()
+        <a href="classes/Database-Migrations-Version20241124183711.html#method_down" class="headerlink"><i class="fas fa-link"></i></a>
 
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20241124183711.php"><a href="files/module-database-migrations-version20241124183711.html"><abbr title="module/Database/migrations/Version20241124183711.php">Version20241124183711.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
     
-    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$installationFunctionForm</span>
-    </code>
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">down</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$schema</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
 
     
-    
-    
 
     
 
+    
 </article>
                     <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only        "
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_installationFunctionMapper">
-        $installationFunctionMapper
-        <a href="classes/Database-Service-InstallationFunction.html#property_installationFunctionMapper" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getDescription">
+        getDescription()
+        <a href="classes/Database-Migrations-Version20241124183711.html#method_getDescription" class="headerlink"><i class="fas fa-link"></i></a>
 
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20241124183711.php"><a href="files/module-database-migrations-version20241124183711.html"><abbr title="module/Database/migrations/Version20241124183711.php">Version20241124183711.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
     
-    
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-InstallationFunction.html"><abbr title="\Database\Mapper\InstallationFunction">InstallationFunction</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$installationFunctionMapper</span>
-    </code>
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
 
     
-    
-    
 
-    
-
-</article>
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
             </section>
 
-            <section class="phpdocumentor-methods">
-        <h3 class="phpdocumentor-elements__header" id="methods">
-            Methods
-            <a href="classes/Database-Service-InstallationFunction.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h3>
+</article>
                     <article
         class="phpdocumentor-element
             -method
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Database-Service-InstallationFunction.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_up">
+        up()
+        <a href="classes/Database-Migrations-Version20241124183711.html#method_up" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20241124183711.php"><a href="files/module-database-migrations-version20241124183711.html"><abbr title="module/Database/migrations/Version20241124183711.php">Version20241124183711.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installationFunctionForm</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-InstallationFunction.html"><abbr title="\Database\Mapper\InstallationFunction">InstallationFunction</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$installationFunctionMapper</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">up</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -504,15 +478,8 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$installationFunctionForm</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$installationFunctionMapper</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Mapper-InstallationFunction.html"><abbr title="\Database\Mapper\InstallationFunction">InstallationFunction</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$schema</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -524,188 +491,6 @@
     
 
     
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_addFunction">
-        addFunction()
-        <a href="classes/Database-Service-InstallationFunction.html#method_addFunction" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">34</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Add a function.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addFunction</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Database-Service-InstallationFunction.html#method_addFunction#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">phpcsSuppress</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification</p>
-</section>
-
-                                    </dd>
-                                            </dl>
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getAllFunctions">
-        getAllFunctions()
-        <a href="classes/Database-Service-InstallationFunction.html#method_getAllFunctions" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get all functions.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getAllFunctions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-InstallationFunction.html"><abbr title="\Database\Model\InstallationFunction">InstallationFunction</abbr></a>&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-InstallationFunction.html"><abbr title="\Database\Model\InstallationFunction">InstallationFunction</abbr></a>&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getFunctionForm">
-        getFunctionForm()
-        <a href="classes/Database-Service-InstallationFunction.html#method_getFunctionForm" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">55</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the function form.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getFunctionForm</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Form-InstallationFunction.html"><abbr title="\Database\Form\InstallationFunction">InstallationFunction</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getFunctionMapper">
-        getFunctionMapper()
-        <a href="classes/Database-Service-InstallationFunction.html#method_getFunctionMapper" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/InstallationFunction.php"><a href="files/module-database-src-service-installationfunction.html"><abbr title="module/Database/src/Service/InstallationFunction.php">InstallationFunction.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">63</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the installation function mapper.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getFunctionMapper</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Mapper-InstallationFunction.html"><abbr title="\Database\Mapper\InstallationFunction">InstallationFunction</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Mapper-InstallationFunction.html"><abbr title="\Database\Mapper\InstallationFunction">InstallationFunction</abbr></a></span>
-            </section>
-
 </article>
             </section>
 
@@ -713,7 +498,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/src/Service/InstallationFunction.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/module/Database/migrations/Version20241124183711.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -812,27 +597,17 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/Database-Service-InstallationFunction.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Database-Service-InstallationFunction.html#toc-methods">Methods</a></li>
+                                                                                <li><a href="classes/Database-Migrations-Version20241124183711.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
-                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
-                <li>
-                    <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Database-Service-InstallationFunction.html#property_installationFunctionForm">$installationFunctionForm</a></li>
-                                                    <li class=""><a href="classes/Database-Service-InstallationFunction.html#property_installationFunctionMapper">$installationFunctionMapper</a></li>
-                                            </ul>
-                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Database-Service-InstallationFunction.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Database-Service-InstallationFunction.html#method_addFunction">addFunction()</a></li>
-                                            <li class=""><a href="classes/Database-Service-InstallationFunction.html#method_getAllFunctions">getAllFunctions()</a></li>
-                                            <li class=""><a href="classes/Database-Service-InstallationFunction.html#method_getFunctionForm">getFunctionForm()</a></li>
-                                            <li class=""><a href="classes/Database-Service-InstallationFunction.html#method_getFunctionMapper">getFunctionMapper()</a></li>
+                                            <li class=""><a href="classes/Database-Migrations-Version20241124183711.html#method_down">down()</a></li>
+                                            <li class=""><a href="classes/Database-Migrations-Version20241124183711.html#method_getDescription">getDescription()</a></li>
+                                            <li class=""><a href="classes/Database-Migrations-Version20241124183711.html#method_up">up()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -852,7 +627,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/Database-Service-InstallationFunction.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Migrations-Version20241124183711.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

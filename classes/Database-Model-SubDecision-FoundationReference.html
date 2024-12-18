@@ -413,18 +413,11 @@ but that is only to make it usable as mappable entity.</p>
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-SubDecision.html#method_getAlternativeContent">getAlternativeContent()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Get the alternative content of the subdecision (in English).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-SubDecision.html#method_getContent">getContent()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Get the statutory content of the subdecision (in Dutch).</dd>
+<dd>Get the content in the current language (requires real translator)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-SubDecision.html#method_getDecision">getDecision()</a>
@@ -483,6 +476,13 @@ but that is only to make it usable as mappable entity.</p>
 <dd>Get the sequence number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-SubDecision.html#method_getTranslatedContent">getTranslatedContent()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Get the content of the subdecision in a specified language.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-SubDecision.html#method_setDecision">setDecision()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -511,18 +511,11 @@ but that is only to make it usable as mappable entity.</p>
 <dd>Set the sequence number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a class="" href="classes/Database-Model-SubDecision.html#method_getAlternativeTemplate">getAlternativeTemplate()</a>
+    <a class="" href="classes/Database-Model-SubDecision.html#method_getTranslatedTemplate">getTranslatedTemplate()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Get the template string for the alternative content of the subdecision (in English).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a class="" href="classes/Database-Model-SubDecision.html#method_getTemplate">getTemplate()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Get the template string for the statutory content of the subdecision (in Dutch).</dd>
+<dd>Get the template string for the alternative content of the subdecision in a specified language.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a class="" href="classes/Database-Model-SubDecision.html#method_replaceContentPlaceholders">replaceContentPlaceholders()</a>
@@ -561,7 +554,7 @@ but that is only to make it usable as mappable entity.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -659,7 +652,7 @@ but that is only to make it usable as mappable entity.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
@@ -717,7 +710,7 @@ but that is only to make it usable as mappable entity.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 
     </aside>
 
@@ -887,7 +880,7 @@ but that is only to make it usable as mappable entity.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -945,7 +938,7 @@ but that is only to make it usable as mappable entity.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -1006,7 +999,7 @@ but that is only to make it usable as mappable entity.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -1074,7 +1067,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
@@ -1125,48 +1118,7 @@ this is not null or need to specify an inverse side can do so using an associati
         class="phpdocumentor-element
             -method
             -public
-                        -abstract                                "
->
-    <h4 class="phpdocumentor-element__name" id="method_getAlternativeContent">
-        getAlternativeContent()
-        <a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">279</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the alternative content of the subdecision (in English).</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getAlternativeContent</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getContent"><abbr title="\Database\Model\SubDecision::getContent()">SubDecision::getContent()</abbr></a>.</p>
-</section>
-
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                        -abstract                                "
+                                                -final        "
 >
     <h4 class="phpdocumentor-element__name" id="method_getContent">
         getContent()
@@ -1176,23 +1128,31 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">272</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the statutory content of the subdecision (in Dutch).</p>
+        <p class="phpdocumentor-summary">Get the content in the current language (requires real translator)</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getContent</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+        <span class="phpdocumentor-signature__final">final</span>            <span class="phpdocumentor-signature__name">getContent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent"><abbr title="\Database\Model\SubDecision::getAlternativeContent()">SubDecision::getAlternativeContent()</abbr></a>.</p>
-</section>
-
     
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\Mvc\I18n\Translator">Translator</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
     
@@ -1217,7 +1177,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">157</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 
     </aside>
 
@@ -1256,7 +1216,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -1295,7 +1255,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">194</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -1373,7 +1333,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">189</span>
 
     </aside>
 
@@ -1412,7 +1372,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">178</span>
+    <span class="phpdocumentor-element-found-in__line">181</span>
 
     </aside>
 
@@ -1451,7 +1411,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">221</span>
 
     </aside>
 
@@ -1490,7 +1450,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">213</span>
 
     </aside>
 
@@ -1519,6 +1479,62 @@ this is not null or need to specify an inverse side can do so using an associati
         class="phpdocumentor-element
             -method
             -public
+                        -abstract                                "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getTranslatedContent">
+        getTranslatedContent()
+        <a href="classes/Database-Model-SubDecision.html#method_getTranslatedContent" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">281</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the content of the subdecision in a specified language.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getTranslatedContent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\I18n\Translator\TranslatorInterface">TranslatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$language</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\I18n\Translator\TranslatorInterface">TranslatorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$language</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_setDecision">
@@ -1529,7 +1545,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">165</span>
+    <span class="phpdocumentor-element-found-in__line">168</span>
 
     </aside>
 
@@ -1619,7 +1635,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">234</span>
+    <span class="phpdocumentor-element-found-in__line">237</span>
 
     </aside>
 
@@ -1664,7 +1680,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">226</span>
+    <span class="phpdocumentor-element-found-in__line">229</span>
 
     </aside>
 
@@ -1701,72 +1717,50 @@ this is not null or need to specify an inverse side can do so using an associati
             -protected
                         -abstract                                "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getAlternativeTemplate">
-        getAlternativeTemplate()
-        <a href="classes/Database-Model-SubDecision.html#method_getAlternativeTemplate" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getTranslatedTemplate">
+        getTranslatedTemplate()
+        <a href="classes/Database-Model-SubDecision.html#method_getTranslatedTemplate" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">251</span>
+    <span class="phpdocumentor-element-found-in__line">249</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the template string for the alternative content of the subdecision (in English).</p>
+        <p class="phpdocumentor-summary">Get the template string for the alternative content of the subdecision in a specified language.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getAlternativeTemplate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getTranslatedTemplate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\I18n\Translator\TranslatorInterface">TranslatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$language</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getTemplate"><abbr title="\Database\Model\SubDecision::getTemplate()">SubDecision::getTemplate()</abbr></a>.</p>
+        <section class="phpdocumentor-description"><p>A decision was made to let the statutory content be the translation template.
+Hence, if no translation to English is available, the Dutch text will be shown.</p>
+<p>Any changes to this method should also be reflected in <abbr title="\Database\Model\SubDecision::getTemplate()">SubDecision::getTemplate()</abbr>.</p>
 </section>
 
-    
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\I18n\Translator\TranslatorInterface">TranslatorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$language</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Application-Model-Enums-AppLanguages.html"><abbr title="\Application\Model\Enums\AppLanguages">AppLanguages</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
 
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                        -abstract                                "
->
-    <h4 class="phpdocumentor-element__name" id="method_getTemplate">
-        getTemplate()
-        <a href="classes/Database-Model-SubDecision.html#method_getTemplate" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">244</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the template string for the statutory content of the subdecision (in Dutch).</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getTemplate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <section class="phpdocumentor-description"><p>Any changes to this method should also be reflected in <a href="classes/Database-Model-SubDecision.html#method_getAlternativeTemplate"><abbr title="\Database\Model\SubDecision::getAlternativeTemplate()">SubDecision::getAlternativeTemplate()</abbr></a>.</p>
-</section>
-
-    
     
 
     
@@ -1791,7 +1785,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">260</span>
+    <span class="phpdocumentor-element-found-in__line">261</span>
 
     </aside>
 
@@ -1804,7 +1798,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Used in the implementations of <a href="classes/Database-Model-SubDecision.html#method_getContent"><abbr title="\Database\Model\SubDecision::getContent()">SubDecision::getContent()</abbr></a> and <a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent"><abbr title="\Database\Model\SubDecision::getAlternativeContent()">SubDecision::getAlternativeContent()</abbr></a>.</p>
+        <section class="phpdocumentor-description"><p>Used in the implementations of <a href="classes/Database-Model-SubDecision.html#method_getContent"><abbr title="\Database\Model\SubDecision::getContent()">SubDecision::getContent()</abbr></a> and <abbr title="\Database\Model\SubDecision::getAlternativeContent()">SubDecision::getAlternativeContent()</abbr>.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1962,7 +1956,6 @@ this is not null or need to specify an inverse side can do so using an associati
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Database-Model-SubDecision.html#method_getAlternativeContent">getAlternativeContent()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_getContent">getContent()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_getDecision">getDecision()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_getDecisionNumber">getDecisionNumber()</a></li>
@@ -1972,12 +1965,12 @@ this is not null or need to specify an inverse side can do so using an associati
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_getMeetingType">getMeetingType()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_getMember">getMember()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_getSequence">getSequence()</a></li>
+                                            <li class=""><a href="classes/Database-Model-SubDecision.html#method_getTranslatedContent">getTranslatedContent()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_setDecision">setDecision()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision-FoundationReference.html#method_setFoundation">setFoundation()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_setMember">setMember()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_setSequence">setSequence()</a></li>
-                                            <li class=""><a href="classes/Database-Model-SubDecision.html#method_getAlternativeTemplate">getAlternativeTemplate()</a></li>
-                                            <li class=""><a href="classes/Database-Model-SubDecision.html#method_getTemplate">getTemplate()</a></li>
+                                            <li class=""><a href="classes/Database-Model-SubDecision.html#method_getTranslatedTemplate">getTranslatedTemplate()</a></li>
                                             <li class=""><a href="classes/Database-Model-SubDecision.html#method_replaceContentPlaceholders">replaceContentPlaceholders()</a></li>
                                     </ul>
             </li>
