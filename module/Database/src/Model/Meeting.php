@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
+use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Minutes;
 use DateTime;
@@ -14,6 +15,8 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use NumberFormatter;
+use ValueError;
 
 /**
  * Meeting model.
@@ -33,9 +36,16 @@ class Meeting
 
     /**
      * Meeting number.
+     *
+     * See the getNumber and setNumber implementations to maintain the >=0 assumption
      */
     #[Id]
-    #[Column(type: 'integer')]
+    #[Column(
+        type: 'integer',
+        options: [
+            'unsigned' => true,
+        ],
+    )]
     protected int $number;
 
     /**
@@ -76,14 +86,6 @@ class Meeting
     }
 
     /**
-     * Get the meeting number.
-     */
-    public function getNumber(): int
-    {
-        return $this->number;
-    }
-
-    /**
      * Set the meeting type.
      */
     public function setType(MeetingTypes $type): void
@@ -92,10 +94,35 @@ class Meeting
     }
 
     /**
+     * Get the meeting number.
+     *
+     * In practice, unsigned is not possible in PostgreSQL:
+     * https://www.doctrine-project.org/projects/doctrine-dbal/en/stable/reference/types.html#mapping-matrix
+     *
+     * Hence, we raise an error if the number is negative
+     *
+     * @return non-negative-int
+     */
+    public function getNumber(): int
+    {
+        if ($this->number < 0) {
+            throw new ValueError('Meeting ID < 0');
+        }
+
+        return $this->number;
+    }
+
+    /**
      * Set the meeting number.
+     *
+     * @param non-negative-int $number
      */
     public function setNumber(int $number): void
     {
+        if ($number < 0) {
+            throw new ValueError('Cannot set meeting ID < 0');
+        }
+
         $this->number = $number;
     }
 
@@ -159,5 +186,23 @@ class Meeting
             'meeting_type' => $this->getType(),
             'meeting_number' => $this->getNumber(),
         ];
+    }
+
+    /**
+     * Return the meeting number as short ordinal, e.g. "1st" or "3e"
+     *
+     * Verify the logic here: https://3v4l.org/fYUoo
+     */
+    public function getNumberAsOrdinal(?string $locale): string
+    {
+        if (null === $locale) {
+            $locale = AppLanguages::Dutch->getLocale();
+        }
+
+        if (AppLanguages::English->getLocale() === $locale) {
+            return (new NumberFormatter($locale, NumberFormatter::ORDINAL))->format($this->getNumber());
+        }
+
+        return $this->getNumber() . 'e';
     }
 }

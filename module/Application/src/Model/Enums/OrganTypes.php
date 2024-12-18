@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Application\Model\Enums;
 
+use Laminas\Mvc\I18n\DummyTranslator;
+use Laminas\Mvc\I18n\Translator;
+
+use function array_combine;
+use function array_map;
+use function in_array;
+
 /**
  * Enum for the different organ types.
  */
@@ -16,27 +23,50 @@ enum OrganTypes: string
     case AVW = 'avw';
     case RvA = 'rva';
 
-    public function getName(): string
-    {
-        return match ($this) {
-            self::Committee => 'Commissie',
-            self::AVC => 'ALV-Commissie',
-            self::Fraternity => 'Dispuut',
-            self::KCC => 'KCC',
-            self::AVW => 'ALV-Werkgroep',
-            self::RvA => 'RvA',
+    /**
+     * Give the function name with the given translation. If no translator is given, we return the default language.
+     */
+    public function getName(
+        ?Translator $translator,
+        ?AppLanguages $language = null,
+    ): string {
+        if (null === $translator) {
+            $translator = new DummyTranslator();
+        }
+
+        $function = match ($this) {
+            self::Committee => $translator->translate('Commissie', locale: $language?->getLangParam()),
+            self::AVC => $translator->translate('ALV-Commissie', locale: $language?->getLangParam()),
+            self::Fraternity => $translator->translate('Dispuut', locale: $language?->getLangParam()),
+            self::KCC => $translator->translate('KCC', locale: $language?->getLangParam()),
+            self::AVW => $translator->translate('ALV-Werkgroep', locale: $language?->getLangParam()),
+            self::RvA => $translator->translate('RvA', locale: $language?->getLangParam()),
         };
+
+        return $translator->translate($function, locale: $language?->getLangParam());
     }
 
-    public function getAlternativeName(): string
+    public function hasOrganRegulations(): bool
     {
-        return match ($this) {
-            self::Committee => 'Committee',
-            self::AVC => 'GMM Committee',
-            self::Fraternity => 'Fraternity',
-            self::KCC => 'Financial Audit Committee',
-            self::AVW => 'GMM Taskforce',
-            self::RvA => 'Advisory Board',
-        };
+        return in_array($this, [self::Committee, self::Fraternity, self::KCC]);
+    }
+
+    /**
+     * Returns a list of types (and its translations)
+     *
+     * @return array<string, string>
+     */
+    public static function getTypesArray(
+        Translator $translator,
+        ?AppLanguages $language = null,
+    ): array {
+        return array_combine(
+            array_map(static function ($func) {
+                return $func->value;
+            }, self::cases()),
+            array_map(static function ($func) use ($translator, $language) {
+                return $func->getName($translator, $language);
+            }, self::cases()),
+        );
     }
 }

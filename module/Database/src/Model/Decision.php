@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
+use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Annulment;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,6 +17,8 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\OrderBy;
+use Laminas\Mvc\I18n\DummyTranslator;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 
 use function implode;
 use function preg_replace_callback;
@@ -273,33 +276,33 @@ class Decision
     }
 
     /**
-     * Get the statutory content of the decision (in Dutch) by going over all subdecisions.
+     * Get the statutory content of the decision by going over all subdecisions.
      */
     public function getContent(bool $escapeCharacters = false): string
     {
+        return $this->getTranslatedContent(null, null, $escapeCharacters);
+    }
+
+    /**
+     * Get the content of the decision in a specified language by going over all subdecisions.
+     */
+    public function getTranslatedContent(
+        ?MvcTranslator $translator,
+        ?AppLanguages $language,
+        bool $escapeCharacters = false,
+    ): string {
+        if (null === $translator) {
+            $translator = new DummyTranslator();
+        }
+
         $content = [];
         foreach ($this->getSubdecisions() as $subdecision) {
-            $content[] = $subdecision->getContent();
+            $content[] = $subdecision->getTranslatedContent($translator, $language);
         }
 
         $contents = implode(' ', $content);
 
         return $escapeCharacters ? $this->escapeLaTeXCharacters($contents) : $contents;
-    }
-
-    /**
-     * Get the alternative content of the subdecision (in English) by going over all subdecisions.
-     */
-    public function getAlternativeContent(bool $escapeCharacters = false): string
-    {
-        $alternativeContent = [];
-        foreach ($this->getSubdecisions() as $subdecision) {
-            $alternativeContent[] = $subdecision->getAlternativeContent();
-        }
-
-        $alternativeContents = implode(' ', $alternativeContent);
-
-        return $escapeCharacters ? $this->escapeLaTeXCharacters($alternativeContents) : $alternativeContents;
     }
 
     /**

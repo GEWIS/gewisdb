@@ -78,13 +78,16 @@ class ProspectiveMember
         $qbc->select('MAX(css.id)')
             ->from(CheckoutSessionModel::class, 'css')
             ->where('css.prospectiveMember = m.lidnr');
-        $qb->andWhere($qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'));
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->eq('cs.id', '(' . $qbc->getDQL() . ')'),
+            $qb->expr()->isNull('cs.id'),
+        ));
 
         if ('paid' === $type) {
             $qb->andWhere('cs.state = :paid')
                 ->setParameter('paid', CheckoutSessionStates::Paid);
         } elseif ('failed' === $type) {
-            $qb->andWhere('cs.state = :expired OR cs.state = :failed')
+            $qb->andWhere('cs.state = :expired OR cs.state = :failed OR cs.state IS NULL')
                 ->setParameter('expired', CheckoutSessionStates::Expired)
                 ->setParameter('failed', CheckoutSessionStates::Failed);
         } else {
@@ -171,6 +174,29 @@ class ProspectiveMember
             ->setParameter('failed', CheckoutSessionStates::Failed)
             ->setParameter('fullyExpired', (new DateTime())->sub(new DateInterval('P1D')))
             ->setParameter('fullyFailed', (new DateTime())->sub(new DateInterval('P31D')));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Find all prospective members wihout any checkout session (should not happen)
+     *
+     * @return ProspectiveMemberModel[]
+     */
+    public function findWithoutCheckout(): array
+    {
+        // Get all checkout sessions
+        $checkoutSessions = $this->em->createQueryBuilder();
+        $checkoutSessions->select('pmwithcs.lidnr')
+            ->from(CheckoutSessionModel::class, 'cs')
+            ->innerJoin('cs.prospectiveMember', 'pmwithcs');
+
+        // Get all prospective members without a checkout session that are there for more than 30 days
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where($qb->expr()->notIn('m.lidnr', $checkoutSessions->getDQL()))
+            ->andWhere('m.changedOn <= :fullyExpired');
+
+        $qb->setParameter('fullyExpired', (new DateTime())->sub(new DateInterval('P31D')));
 
         return $qb->getQuery()->getResult();
     }

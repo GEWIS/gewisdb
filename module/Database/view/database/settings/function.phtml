@@ -7,40 +7,28 @@ use Laminas\View\Renderer\PhpRenderer;
 
 /** @var PhpRenderer|HelperTrait $this */
 ?>
-<h1><?= $this->translate('Current Functions') ?></h1>
+<h2><?= $this->translate('Current Functions') ?></h2>
+<p><?= $this->translate('These organ functions can be selected when installing someone into a committee/fraternity')?></p>
 <ul>
-    <?php foreach ($functions as $function): ?>
-        <li><?= $this->escapeHtml($function->getName()) ?></li>
+    <?php foreach ($currentFunctions as $key => $value): ?>
+        <li><?= $this->escapeHtml($value) ?> (<code><?= $this->escapeHtml($key) ?></code>)</li>
     <?php endforeach; ?>
 </ul>
-<h2><?= $this->translate('Add New Function') ?></h2>
-<?php
-$form = $this->form;
-$form->prepare();
 
-$form->setAttribute('action', $this->url('settings/default', ['action' => 'function']));
-$form->setAttribute('method', 'post');
+<h2><?= $this->translate('Historic Functions') ?></h2>
+<p><?= $this->translate('These organ functions were used in the past but can no longer be selected')?></p>
+<ul>
+    <?php foreach ($legacyFunctions as $key => $value): ?>
+        <li><?= $this->escapeHtml($value) ?> (<code><?= $this->escapeHtml($key) ?></code>)</li>
+    <?php endforeach; ?>
+</ul>
 
-$form->setAttribute('role', 'form');
+<h2><?= $this->translate('Administrative Functions') ?></h2>
+<p><?= $this->translate('These organ functions cannot be selected manually but are used by the database internally')?></p>
+<ul>
+    <?php foreach ($adminFunctions as $key => $value): ?>
+        <li><?= $this->escapeHtml($value) ?> (<code><?= $this->escapeHtml($key) ?></code>)</li>
+    <?php endforeach; ?>
+</ul>
 
-echo $this->form()->openTag($form);
-?>
-<div class="form-group">
-    <?php
-    $element = $form->get('name');
-    $element->setAttribute('class', 'form-control');
-    $element->setAttribute('placeholder', 'Functienaam');
-    ?>
-    <?= $this->formLabel($element) ?>
-    <?= $this->formInput($element) ?>
-    <?= $this->formElementErrors($element) ?>
-</div>
-
-<?php
-$submit = $form->get('submit');
-$submit->setLabel($this->translate('Add Function'));
-$submit->setAttribute('class', 'btn btn-primary');
-?>
-<?= $this->formButton($submit) ?>
-
-<?= $this->form()->closeTag(); ?>
+<em><?= $this->translate('Starting 2024, organ installation functions can only be changed through the code') ?></em>

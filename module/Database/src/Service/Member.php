@@ -52,6 +52,7 @@ use ReflectionClass;
 use RuntimeException;
 use User\Service\UserService;
 
+use function array_merge;
 use function bin2hex;
 use function count;
 use function in_array;
@@ -629,11 +630,14 @@ class Member
 
     /**
      * Remove all prospective members whose last Checkout Session has fully expired (1 + 30 + 1 day ago) or failed 31
-     * days ago.
+     * days ago or who don't have a checkout session.
      */
     public function removeExpiredProspectiveMembers(): void
     {
-        $prospectiveMembers = $this->getProspectiveMemberMapper()->findWithFullyExpiredOrFailedCheckout();
+        $prospectiveMembers = array_merge(
+            $this->getProspectiveMemberMapper()->findWithFullyExpiredOrFailedCheckout(),
+            $this->getProspectiveMemberMapper()->findWithoutCheckout(),
+        );
 
         foreach ($prospectiveMembers as $prospectiveMember) {
             $this->removeProspective($prospectiveMember);

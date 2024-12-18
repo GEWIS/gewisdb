@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Checker\Service;
 
 use Checker\Mapper\Installation as InstallationMapper;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 
@@ -59,7 +60,7 @@ class Installation
 
         foreach ($installations as $installation) {
             $memberId = (int) $installation->getMember()->getLidnr();
-            $function = $installation->getFunction();
+            $function = $installation->getFunction()->value;
             $organName = $installation->getFoundation()->getAbbr();
 
             $roles[$organName][$memberId][$function] = $installation;
@@ -83,7 +84,7 @@ class Installation
 
         $members = [];
         foreach ($installations as $installation) {
-            if ('Inactief Lid' === $installation->getFunction()) {
+            if (InstallationFunctions::InactiveMember === $installation->getFunction()) {
                 continue;
             }
 

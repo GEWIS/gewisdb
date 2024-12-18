@@ -63,7 +63,6 @@
         <exclude-pattern>module/Database/src/Mapper/Factory/ActionLinkFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/AuditFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/CheckoutSessionFactory.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Mapper/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
@@ -73,7 +72,6 @@
         <exclude-pattern>module/Database/src/Mapper/Factory/SavedQueryFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/ApiFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/FrontPageFactory.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Service/Factory/InstallationFunctionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MemberFactory.php</exclude-pattern>
@@ -167,7 +165,6 @@
         <exclude-pattern>module/Database/src/Form/Export.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Foundation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/OrganRegulation.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Form/InstallationFunction.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MailingList.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Member.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberEdit.php</exclude-pattern>

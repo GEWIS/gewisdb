@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Report\Model;
 
+use Database\Model\Enums\InstallationFunctions;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping\Column;
@@ -54,10 +55,13 @@ class OrganMember
     protected Member $member;
 
     /**
-     * Function.
+     * Function given.
      */
-    #[Column(type: 'string')]
-    protected string $function;
+    #[Column(
+        type: 'string',
+        enumType: InstallationFunctions::class,
+    )]
+    protected InstallationFunctions $function;
 
     /**
      * Installation date.
@@ -146,7 +150,7 @@ class OrganMember
     /**
      * Set the function.
      */
-    public function setFunction(string $function): void
+    public function setFunction(InstallationFunctions $function): void
     {
         $this->function = $function;
     }
@@ -154,7 +158,7 @@ class OrganMember
     /**
      * Get the function.
      */
-    public function getFunction(): string
+    public function getFunction(): InstallationFunctions
     {
         return $this->function;
     }
@@ -242,7 +246,7 @@ class OrganMember
                 'id' => $this->getOrgan()->getId(),
                 'abbreviation' => $this->getOrgan()->getAbbr(),
             ],
-            'function' => $this->getFunction(),
+            'function' => $this->getFunction()->value,
             'installDate' => $this->getInstallDate()->format(DateTimeInterface::ATOM),
             'dischargeDate' => $this->getDischargeDate()?->format(DateTimeInterface::ATOM),
             'current' => $this->isCurrent(),

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 15:08+0200\n"
+"POT-Creation-Date: 2024-10-29 15:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -13,8 +13,48 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
+msgid " door "
+msgstr " door "
+
+msgid " met dank aan de notulist"
+msgstr " met dank aan de notulist"
+
+msgid " met genoemde wijzigingen"
+msgstr " met genoemde wijzigingen"
+
 msgid "# Decisions"
 msgstr "# besluiten"
+
+msgid "%GRANTEE% krijgt een sleutelcode van GEWIS tot en met %UNTIL%."
+msgstr "%GRANTEE% krijgt een sleutelcode van GEWIS tot en met %UNTIL%."
+
+msgid "%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS."
+msgstr "%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS."
+
+msgid "%MEMBER% wordt gedechargeerd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr "%MEMBER% wordt gedechargeerd als %FUNCTION% van %ORGAN_ABBR%."
+
+msgid "%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr "%MEMBER% wordt geïnstalleerd als %FUNCTION% van %ORGAN_ABBR%."
+
+msgid "%MEMBER% wordt herbenoemd als %FUNCTION% van %ORGAN_ABBR%."
+msgstr "%MEMBER% wordt herbenoemd als %FUNCTION% van %ORGAN_ABBR%."
+
+msgid "%MEMBER% wordt per %DATE% geïnstalleerd als %FUNCTION% der s.v. GEWIS."
+msgstr "%MEMBER% wordt per %DATE% geïnstalleerd als %FUNCTION% der s.v. GEWIS."
+
+msgid ""
+"%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. "
+"GEWIS."
+msgstr ""
+"%MEMBER% wordt per %DATE% ontheven uit de functie van %FUNCTION% der s.v. "
+"GEWIS."
+
+msgid "%ORGAN_TYPE% %ORGAN_ABBR% wordt opgeheven."
+msgstr "%ORGAN_TYPE% %ORGAN_ABBR% wordt opgeheven."
+
+msgid "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
+msgstr "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
 
 #, php-format
 msgid "%s has been added to %s"
@@ -45,6 +85,12 @@ msgstr "Er is een 404-fout opgetreden"
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Een TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
 
+msgid "ALV-Commissie"
+msgstr "ALV-Commissie"
+
+msgid "ALV-Werkgroep"
+msgstr "ALV-Werkgroep"
+
 msgid "API Tokens"
 msgstr "API-token"
 
@@ -73,10 +119,11 @@ msgid ""
 msgstr ""
 "Volgens onze gegevens is het tijd om je status als afgestudeerde van GEWIS "
 "te verlengen.\n"
-"Om te zorgen dat we actuele contactgegevens hebben, vragen we je "
-"onderstaande gegevens te controleren.<br/>\n"
-"Als je geen afgestudeerde wilt worden of blijven, hoef je niets te doen. Je "
-"afgestudeerde-status verloopt dan op de in de e-mail aangegeven datum."
+"                Om te zorgen dat we actuele contactgegevens hebben, vragen "
+"we je onderstaande gegevens te controleren.<br/>\n"
+"                Als je geen afgestudeerde wilt worden of blijven, hoef je "
+"niets te doen. Je afgestudeerde-status verloopt dan op de in de e-mail "
+"aangegeven datum."
 
 msgid "Action"
 msgstr "Actie"
@@ -93,9 +140,6 @@ msgstr "Voeg budget/afrekening toe"
 
 msgid "Add Decision"
 msgstr "Voeg besluit toe"
-
-msgid "Add Function"
-msgstr "Voeg functie toe"
 
 msgid "Add Home Address"
 msgstr "Voeg thuisadres toe"
@@ -121,9 +165,6 @@ msgstr "Voeg nieuw (inactief) lid toe"
 msgid "Add New Decision"
 msgstr "Voeg nieuw besluit toe"
 
-msgid "Add New Function"
-msgstr "Voeg nieuwe functie toe"
-
 msgid "Add New Mailing List"
 msgstr "Voeg nieuwe mailinglijst toe"
 
@@ -148,8 +189,8 @@ msgstr "Adres"
 msgid "Addresses"
 msgstr "Adressen"
 
-msgid "Advisory Board"
-msgstr "RvA"
+msgid "Administrative Functions"
+msgstr "Administratieve functies"
 
 msgid "Agreement"
 msgstr "Akkoordverklaring"
@@ -289,6 +330,13 @@ msgstr "Terug naar %s %d"
 msgid "Before submitting the registration form, please review the"
 msgstr "Lees voordat je het registratieformulier verzendt de"
 
+msgid ""
+"Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "
+"\"%DECISION_CONTENT%\""
+msgstr ""
+"Besluit %DECISION_HASH% wordt nietig verklaard. Het besluit luidde: "
+"\"%DECISION_CONTENT%\""
+
 msgid "Birthdate"
 msgstr "Geboortedatum"
 
@@ -318,6 +366,9 @@ msgstr "Afgebroken"
 
 msgid "Cannot Delete Prospective Member:"
 msgstr "Kan toekomstig lid niet verwijderen:"
+
+msgid "Chair"
+msgstr "Voorzitter"
 
 msgid "Change"
 msgstr "Wijzig"
@@ -380,7 +431,7 @@ msgstr ""
 "Klik hier voor goedkeuring als de eenmalige lidmaatschapsbijdrage contant is "
 "betaald."
 
-msgid "Committee"
+msgid "Commissie"
 msgstr "Commissie"
 
 msgid "Confirm Changes"
@@ -454,6 +505,32 @@ msgstr "Afloopdatum"
 msgid "Date of Organ Regulation"
 msgstr "Datum orgaanreglement"
 
+msgid ""
+"De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+msgstr ""
+"De afrekening %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+
+msgid ""
+"De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+msgstr ""
+"De begroting %NAME% van %AUTHOR%, versie %VERSION% van %DATE% wordt "
+"%APPROVAL%%CHANGES%."
+
+msgid ""
+"De notulen van de %NUMBERORDINAL% %TYPE%%AUTHOR% worden %APPROVAL%%THANK%"
+"%CHANGES%."
+msgstr ""
+"De notulen van de %NUMBERORDINAL% %TYPE%%AUTHOR% worden %APPROVAL%%THANK%"
+"%CHANGES%."
+
+msgid ""
+"De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%."
+msgstr ""
+"De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%."
+
 msgid "Decision"
 msgstr "Besluit"
 
@@ -515,6 +592,9 @@ msgstr "Lid dechargeren"
 
 msgid "Discharges"
 msgstr "Decharges"
+
+msgid "Dispuut"
+msgstr "Dispuut"
 
 msgid "Do you want to delete the other data?"
 msgstr "Wil je de andere gegevens verwijderen?"
@@ -580,11 +660,11 @@ msgstr "Mislukt"
 msgid "File"
 msgstr "Bestand"
 
-msgid "Financial Audit Committee"
-msgstr "KCC"
-
 msgid "First Name"
 msgstr "Voornaam"
+
+msgid "Foosball Coordinator"
+msgstr "Tafelvoetbalcoordinator"
 
 #, php-format
 msgid ""
@@ -602,9 +682,6 @@ msgstr "Orgaan oprichten"
 
 msgid "Foundation"
 msgstr "Oprichting"
-
-msgid "Fraternity"
-msgstr "Dispuut"
 
 msgid "Function"
 msgstr "Functie"
@@ -632,12 +709,6 @@ msgstr ""
 
 msgid "GMM (General Members Meeting)"
 msgstr "ALV (algemene ledenvergadering)"
-
-msgid "GMM Committee"
-msgstr "ALV-Commissie"
-
-msgid "GMM Taskforce"
-msgstr "ALV-Werkgroep"
 
 msgid "Gemeenschap van Wiskunde en Informatica Studenten"
 msgstr "Gemeenschap van Wiskunde en Informatica Studenten"
@@ -682,8 +753,18 @@ msgstr "Sleutelcode toekennen"
 msgid "Grantee"
 msgstr "Verkrijger"
 
+msgid ""
+"Het %DOCUMENTTYPE% van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% "
+"wordt %APPROVAL%%CHANGES%."
+msgstr ""
+"Het %DOCUMENTTYPE% van %NAME% door %AUTHOR%, versie %VERSION% van %DATE% "
+"wordt %APPROVAL%%CHANGES%."
+
 msgid "Hide Member"
 msgstr "Lid verbergen"
+
+msgid "Historic Functions"
+msgstr "Historische functies"
 
 msgid "Home"
 msgstr "Home"
@@ -752,6 +833,9 @@ msgstr ""
 "verlengen zolang je aan de TU/e studeert; stuur daarvoor je TU/e-"
 "gebruikersnaam op."
 
+msgid "If you are reading this, the secretary has not done their job."
+msgstr "Als je dit leest, heeft de secretaris zijn/haar werk niet gedaan."
+
 msgid "If you have any questions feel free to contact"
 msgstr "Als je vragen hebt, neem gerust contact op met"
 
@@ -778,6 +862,9 @@ msgstr ""
 "Als je browser je niet doorverwijst, <a href=\"%s\">klik dan hier</a> om "
 "verder te gaan."
 
+msgid "Inactive Member"
+msgstr "Inactief lid"
+
 msgid "Initial(s)"
 msgstr "Initialen"
 
@@ -792,6 +879,9 @@ msgstr "Installatie/Decharge"
 
 msgid "Installations"
 msgstr "Installaties"
+
+msgid "KCC"
+msgstr "KCC"
 
 msgid "Key"
 msgstr "Sleutel"
@@ -886,6 +976,9 @@ msgstr "Vergaderingen"
 
 msgid "Meetings and Decisions"
 msgstr "Vergaderingen en besluiten"
+
+msgid "Member"
+msgstr "Lid"
 
 #, php-format
 msgid "Member %s cannot be deleted."
@@ -985,6 +1078,9 @@ msgstr "Oh nee!"
 msgid "On Form"
 msgstr "Op inschrijfformulier"
 
+msgid "Opperhoofd"
+msgstr "Opperhoofd"
+
 msgid "Ordinary"
 msgstr "Gewoon"
 
@@ -1007,8 +1103,17 @@ msgstr ""
 "Orgaanreglementen kunnen alleen worden aangemaakt voor 'commissie', "
 "'dispuut' of 'kas controle commissie'."
 
+msgid "Organs - List functions and translations"
+msgstr "Organen - Functie- en vertalingenlijst bekijken"
+
+msgid "Organs - Read organ membership (per user/organ)"
+msgstr "Organen - Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
+
 msgid "Other"
 msgstr "Overig"
+
+msgid "PR Officer"
+msgstr "PR-functionaris"
 
 msgid ""
 "PS: Did you know we have an alumni foundation at the department of M&amp;CS?"
@@ -1088,9 +1193,6 @@ msgstr "Query"
 msgid "Query Result"
 msgstr "Queryresultaat"
 
-msgid "Read organ membership (per user/organ)"
-msgstr "Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
-
 msgid "Reappoint"
 msgstr "Herbenoemen"
 
@@ -1136,6 +1238,9 @@ msgstr "Resultaat"
 msgid "Return to registration form"
 msgstr "Terug naar inschrijfformulier"
 
+msgid "RvA"
+msgstr "RvA"
+
 msgid ""
 "Sadly, during the month of July we are not able to verify your enrollment at "
 "TU/e. Therefore, it is not possible to register for GEWIS at this time. <br/"
@@ -1167,6 +1272,9 @@ msgstr "Toekomstige leden zoeken"
 msgid "Search TU/e Students"
 msgstr "TU/e-studenten zoeken"
 
+msgid "Secretary"
+msgstr "Secretaris"
+
 msgid "Select API permissions"
 msgstr "Selecteer API-rechten"
 
@@ -1188,6 +1296,13 @@ msgstr ""
 
 msgid "Stack trace"
 msgstr "Stack trace"
+
+msgid ""
+"Starting 2024, organ installation functions can only be changed through the "
+"code"
+msgstr ""
+"Vanaf 2024 is het slechts mogelijk om orgaan-functies aan te passen in de "
+"GEWISDB-code"
 
 msgid "Statement"
 msgstr "Afrekening"
@@ -1316,6 +1431,24 @@ msgstr[1] ""
 "Er zijn momenteel <a href=\"%s\">%d updates</a> in afwachting van "
 "goedkeuring."
 
+msgid ""
+"These organ functions can be selected when installing someone into a "
+"committee/fraternity"
+msgstr "Deze functies zijn beschikbaar tijdens installaties"
+
+msgid ""
+"These organ functions cannot be selected manually but are used by the "
+"database internally"
+msgstr ""
+"Deze functies worden intern gebruikt, maar kunnen niet handmatig "
+"geselecteerd worden"
+
+msgid ""
+"These organ functions were used in the past but can no longer be selected"
+msgstr ""
+"Deze functies zijn in het verleden gebruikt en kunnen niet langer "
+"geselecteerd worden"
+
 #, php-format
 msgid ""
 "This is because %s is/has been a member of an organ and/or has budgets/"
@@ -1374,6 +1507,9 @@ msgstr "Klap navigatie in/uit"
 msgid "Token"
 msgstr "Token"
 
+msgid "Treasurer"
+msgstr "Penningmeester"
+
 msgid "Type"
 msgstr "Type"
 
@@ -1413,6 +1549,9 @@ msgstr "Waarde"
 
 msgid "Version"
 msgstr "Versie"
+
+msgid "Vice-Chair"
+msgstr "Vice-Voorzitter"
 
 msgid "View"
 msgstr "Toon"
@@ -1586,8 +1725,20 @@ msgstr ""
 msgid "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Jouw TU/e-gebruikersnaam moet lijken op sYYxxxx of YYYYxxxx."
 
+msgid "afgekeurd"
+msgstr "afgekeurd"
+
 msgid "as"
 msgstr "als"
+
+msgid "commissiereglement"
+msgstr "commissiereglement"
+
+msgid "dispuutsreglement"
+msgstr "dispuutsreglement"
+
+msgid "goedgekeurd"
+msgstr "goedgekeurd"
 
 msgid "https://gewis.nl/association/regulations"
 msgstr "https://gewis.nl/nl/vereniging/reglementen"
@@ -1606,6 +1757,9 @@ msgstr "einddatum lidmaatschap"
 
 msgid "membership type"
 msgstr "lidmaatschapstype"
+
+msgid "onbekend"
+msgstr "onbekend"
 
 msgid "our payment provider"
 msgstr "onze betalingsprovider"

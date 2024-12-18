@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Database\Controller\Factory;
 
 use Database\Controller\SettingsController;
-use Database\Service\InstallationFunction as InstallationFunctionService;
 use Database\Service\MailingList as MailingListService;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
@@ -20,13 +20,11 @@ class SettingsControllerFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): SettingsController {
-        /** @var InstallationFunctionService $installationFunctionService */
-        $installationFunctionService = $container->get(InstallationFunctionService::class);
-        /** @var MailingListService $mailingListService */
+        $translator = $container->get(MvcTranslator::class);
         $mailingListService = $container->get(MailingListService::class);
 
         return new SettingsController(
-            $installationFunctionService,
+            $translator,
             $mailingListService,
         );
     }

@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Database\Controller;
 
-use Database\Service\InstallationFunction as InstallationFunctionService;
+use Database\Model\Enums\InstallationFunctions;
 use Database\Service\MailingList as MailingListService;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\View\Model\ViewModel;
 
 class SettingsController extends AbstractActionController
 {
     public function __construct(
-        private readonly InstallationFunctionService $installationFunctionService,
+        private readonly MvcTranslator $translator,
         private readonly MailingListService $mailingListService,
     ) {
     }
@@ -31,13 +32,10 @@ class SettingsController extends AbstractActionController
      */
     public function functionAction(): ViewModel
     {
-        if ($this->getRequest()->isPost()) {
-            $this->installationFunctionService->addFunction($this->getRequest()->getPost()->toArray());
-        }
-
         return new ViewModel([
-            'functions' => $this->installationFunctionService->getAllFunctions(),
-            'form' => $this->installationFunctionService->getFunctionForm(),
+            'currentFunctions' => InstallationFunctions::getFunctionsArray($this->translator, false, false, true),
+            'legacyFunctions' => InstallationFunctions::getFunctionsArray($this->translator, false, true, false),
+            'adminFunctions' => InstallationFunctions::getFunctionsArray($this->translator, true, false, false),
         ]);
     }
 

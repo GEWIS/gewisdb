@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use Application\Model\Enums\AppLanguages;
 use Application\View\HelperTrait;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting;
 use Laminas\View\Renderer\PhpRenderer;
 
 /** @var PhpRenderer|HelperTrait $this */
+$translator = $this->plugin('translate')->getTranslator();
 ?>
 <?php if (isset($form)): ?>
 <?php
@@ -78,16 +80,16 @@ case 'other':
 ?>
 <h1><?= $this->translate('Decision') ?> <?= $decision->getHash() ?> <?= $this->translate('reads as follows:') ?></h1>
 <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-    <?= $this->escapeHtml($subdecision->getContent()) ?>
+    <?= $this->escapeHtml($subdecision->getContent($translator)) ?>
 <?php endforeach; ?>
 
 <br>
 <span class="hidden" id="decision-contents">
     <?= sprintf(
         '\decision[%s]{%s}',
-        $this->escapeHtml($decision->getAlternativeContent(true)),
-        $this->escapeHtml($decision->getContent(true)),
-    ) ?>
+        $this->escapeHtml($decision->getTranslatedContent($translator, AppLanguages::English, true)),
+        $this->escapeHtml($decision->getTranslatedContent($translator, AppLanguages::Dutch, true)),
+) ?>
 </span>
 
 <button onclick="copyDecision()" class="btn btn-info">

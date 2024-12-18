@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Model\SubDecision\Board;
 
+use Application\Model\Enums\AppLanguages;
 use Database\Model\SubDecision;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use Laminas\I18n\Translator\TranslatorInterface;
 
 /**
  * Discharge from board position.
@@ -63,33 +65,25 @@ class Discharge extends SubDecision
         $this->installation = $installation;
     }
 
-    protected function getTemplate(): string
-    {
-        return '%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS.';
+    protected function getTranslatedTemplate(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
+        return $translator->translate(
+            '%MEMBER% wordt gedechargeerd als %FUNCTION% der s.v. GEWIS.',
+            locale: $language->getLangParam(),
+        );
     }
 
-    protected function getAlternativeTemplate(): string
-    {
-        return '%MEMBER% is discharged as %FUNCTION% of s.v. GEWIS.';
-    }
-
-    public function getContent(): string
-    {
+    public function getTranslatedContent(
+        TranslatorInterface $translator,
+        AppLanguages $language,
+    ): string {
         $replacements = [
             '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
-            '%FUNCTION%' => $this->getInstallation()->getFunction(),
+            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision has)
         ];
 
-        return $this->replaceContentPlaceholders($this->getTemplate(), $replacements);
-    }
-
-    public function getAlternativeContent(): string
-    {
-        $replacements = [
-            '%MEMBER%' => $this->getInstallation()->getMember()->getFullName(),
-            '%FUNCTION%' => $this->getInstallation()->getFunction(), // Has no alternative (like the decision hash).
-        ];
-
-        return $this->replaceContentPlaceholders($this->getAlternativeTemplate(), $replacements);
+        return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 }
