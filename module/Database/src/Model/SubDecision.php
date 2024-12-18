@@ -266,16 +266,6 @@ abstract class SubDecision
     }
 
     /**
-     * Get the statutory content of the subdecision
-     */
-    // final public function getContent(): string
-    // {
-    //     $translator = new DummyTranslator();
-
-    //     return $this->getTranslatedContent($translator, AppLanguages::Dutch);
-    // }
-
-    /**
      * Get the content in the current language (requires real translator)
      */
     final public function getContent(Translator $translator): string

@@ -28,7 +28,6 @@ final class Version20241124183711 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('CREATE SEQUENCE installationfunction_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE installationfunction (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         // phpcs:enable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall

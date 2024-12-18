@@ -20,17 +20,16 @@ final class Version20241124183712 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall
-        $this->addSql('ALTER TABLE decision ADD contentEN TEXT NOT NULL');
-        $this->addSql('ALTER TABLE decision RENAME COLUMN content TO contentNL');
-        $this->addSql('ALTER TABLE subdecision ADD contentEN TEXT NOT NULL');
-        $this->addSql('ALTER TABLE subdecision RENAME COLUMN content TO contentNL');
+        $this->addSql('ALTER TABLE Decision ADD contentEN TEXT NOT NULL');
+        $this->addSql('ALTER TABLE Decision RENAME COLUMN content TO contentNL');
+        $this->addSql('ALTER TABLE SubDecision ADD contentEN TEXT NOT NULL');
+        $this->addSql('ALTER TABLE SubDecision RENAME COLUMN content TO contentNL');
         // phpcs:enable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall
     }
 
     public function down(Schema $schema): void
     {
         // phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE Decision ADD content TEXT NOT NULL');
         $this->addSql('ALTER TABLE Decision DROP contentNL');
         $this->addSql('ALTER TABLE Decision DROP contentEN');

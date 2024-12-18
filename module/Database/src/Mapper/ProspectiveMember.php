@@ -179,6 +179,29 @@ class ProspectiveMember
     }
 
     /**
+     * Find all prospective members wihout any checkout session (should not happen)
+     *
+     * @return ProspectiveMemberModel[]
+     */
+    public function findWithoutCheckout(): array
+    {
+        // Get all checkout sessions
+        $checkoutSessions = $this->em->createQueryBuilder();
+        $checkoutSessions->select('pmwithcs.lidnr')
+            ->from(CheckoutSessionModel::class, 'cs')
+            ->innerJoin('cs.prospectiveMember', 'pmwithcs');
+
+        // Get all prospective members without a checkout session that are there for more than 30 days
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where($qb->expr()->notIn('m.lidnr', $checkoutSessions->getDQL()))
+            ->andWhere('m.changedOn <= :fullyExpired');
+
+        $qb->setParameter('fullyExpired', (new DateTime())->sub(new DateInterval('P31D')));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * Persist a member model.
      */
     public function persist(ProspectiveMemberModel $member): void

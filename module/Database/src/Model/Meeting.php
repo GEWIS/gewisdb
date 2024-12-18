@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
+use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\SubDecision\Minutes;
 use DateTime;
@@ -195,10 +196,10 @@ class Meeting
     public function getNumberAsOrdinal(?string $locale): string
     {
         if (null === $locale) {
-            $locale = 'nl_NL';
+            $locale = AppLanguages::Dutch->getLocale();
         }
 
-        if ('en_GB' === $locale) {
+        if (AppLanguages::English->getLocale() === $locale) {
             return (new NumberFormatter($locale, NumberFormatter::ORDINAL))->format($this->getNumber());
         }
 
