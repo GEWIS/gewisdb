@@ -136,7 +136,7 @@ class Address extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => Regex::class,
-                        'options' => ['pattern' => '/^[1-9]\d*(?:[ \/\-\#\.]?(?:[a-zA-Z]+|[1-9]\d*))?$/'],
+                        'options' => ['pattern' => '/^[1-9]\d*(?:[ \/\-\#\.]?(?:[a-zA-Z]+|[0-9]\d*))?$/'],
                     ],
                 ],
             ],
