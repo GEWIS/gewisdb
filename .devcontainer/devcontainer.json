@@ -8,7 +8,8 @@
 				"bmewburn.vscode-intelephense-client",
 				"ms-vscode.makefile-tools",
 				"ms-azuretools.vscode-docker",
-				"wongjn.php-sniffer"
+				"wongjn.php-sniffer",
+				"ms-vscode-remote.remote-containers"
 			],
 			"settings": {
 				"makefile.configureOnOpen": false,
@@ -18,7 +19,25 @@
 					"editor.defaultFormatter": "wongjn.php-sniffer"
 				}
 			}
-    	}
+    	},
+		"codespaces": {
+			"repositories": {
+				"GEWIS/gewisdb": {
+					"permissions": {
+						"metadata": "read",
+						"contents": "write",
+						"deployments": "read"
+					}
+				},
+				"GEWIS/gewisweb": {
+					"permissions": {
+						"metadata": "read",
+						"contents": "read",
+						"deployments": "read"
+					}
+				}
+			}
+		}
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
