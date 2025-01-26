@@ -47,6 +47,8 @@ class Query
     {
         $form = $this->getQuerySaveForm();
 
+        // This is an intentional choice to find the query by name
+        // (we require unique names even across categories)
         $query = $this->getSavedQueryMapper()->findByName($data['name']);
         if (null !== $query) {
             $form->bind($query);
