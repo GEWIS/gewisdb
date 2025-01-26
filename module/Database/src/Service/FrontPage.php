@@ -45,6 +45,8 @@ class FrontPage
 
     public function getNotificationCount(): int
     {
-        return $this->memberService->getPendingUpdateCount() + (int) $this->apiService->isSyncPaused();
+        return $this->memberService->getPendingUpdateCount() +
+        (int) $this->apiService->isSyncPaused() +
+        $this->memberService->getPaidProspectivesCount();
     }
 }
