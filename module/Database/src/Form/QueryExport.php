@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Select;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
@@ -13,6 +14,11 @@ class QueryExport extends Query implements InputFilterProviderInterface
     public function __construct(private readonly Translator $translator)
     {
         parent::__construct($this->translator);
+
+        $this->add([
+            'name' => 'name',
+            'type' => Hidden::class,
+        ]);
 
         $this->add([
             'name' => 'type',
