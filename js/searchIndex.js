@@ -91,6 +91,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Extensions-Doctrine-Middleware-SetRoleMiddleware.html#method_wrap"
         },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Year",
+            "name": "Year",
+            "summary": "YearFunction\u0020\u003A\u003A\u003D\u0020\u0022YEAR\u0022\u0020\u0022\u0028\u0022\u0020ArithmeticPrimary\u0020\u0022\u0029\u0022",
+            "url": "classes/Application-Extensions-Doctrine-Year.html"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Year\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Year.html#method_parse"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Year\u003A\u003AgetSql\u0028\u0029",
+            "name": "getSql",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Year.html#method_getSql"
+        },                {
+            "fqsen": "\\Application\\Extensions\\Doctrine\\Year\u003A\u003A\u0024yearExpression",
+            "name": "yearExpression",
+            "summary": "",
+            "url": "classes/Application-Extensions-Doctrine-Year.html#property_yearExpression"
+        },                {
             "fqsen": "\\Application\\Mapper\\ConfigItem",
             "name": "ConfigItem",
             "summary": "",
@@ -3345,6 +3365,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/Database-Migrations-Version20241208191830.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250126144021",
+            "name": "Version20250126144021",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong",
+            "url": "classes/Database-Migrations-Version20250126144021.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250126144021\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250126144021.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250126144021\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250126144021.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250126144021\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250126144021.html#method_down"
         },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
@@ -7761,6 +7801,16 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020name.",
             "url": "classes/Database-Model-SavedQuery.html#method_setName"
         },                {
+            "fqsen": "\\Database\\Model\\SavedQuery\u003A\u003AgetCategory\u0028\u0029",
+            "name": "getCategory",
+            "summary": "Get\u0020the\u0020category.",
+            "url": "classes/Database-Model-SavedQuery.html#method_getCategory"
+        },                {
+            "fqsen": "\\Database\\Model\\SavedQuery\u003A\u003AsetCategory\u0028\u0029",
+            "name": "setCategory",
+            "summary": "Set\u0020the\u0020category.",
+            "url": "classes/Database-Model-SavedQuery.html#method_setCategory"
+        },                {
             "fqsen": "\\Database\\Model\\SavedQuery\u003A\u003AsetQuery\u0028\u0029",
             "name": "setQuery",
             "summary": "Set\u0020the\u0020query.",
@@ -7775,6 +7825,11 @@ Search.appendIndex(
             "name": "id",
             "summary": "The\u0020query\u0020ID.",
             "url": "classes/Database-Model-SavedQuery.html#property_id"
+        },                {
+            "fqsen": "\\Database\\Model\\SavedQuery\u003A\u003A\u0024category",
+            "name": "category",
+            "summary": "Category.",
+            "url": "classes/Database-Model-SavedQuery.html#property_category"
         },                {
             "fqsen": "\\Database\\Model\\SavedQuery\u003A\u003A\u0024name",
             "name": "name",
@@ -9441,6 +9496,11 @@ Search.appendIndex(
             "summary": "The\u0020number\u0020of\u0020pending\u0020member\u0020updates,\u0020a\u0020separate\u0020function\u0020to\u0020make\u0020sure\u0020we\u0020don\u0027t\u0020have\u0020to\u0020do\u0020a\u0020lot\nof\u0020database\u0020queries\u0020for\u0020each\u0020page.",
             "url": "classes/Database-Service-Member.html#method_getPendingUpdateCount"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetPaidProspectivesCount\u0028\u0029",
+            "name": "getPaidProspectivesCount",
+            "summary": "Paid\u0020prospective\u0020members\u0020\u0028separately\u0020from\u0020frontpage\u0020data\u0020to\u0020reduce\u0020number\nof\u0020database\u0020queries\u0029",
+            "url": "classes/Database-Service-Member.html#method_getPaidProspectivesCount"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AgetPendingMemberUpdates\u0028\u0029",
             "name": "getPendingMemberUpdates",
             "summary": "Get\u0020a\u0020list\u0020of\u0020all\u0020pending\u0020member\u0020updates.",
@@ -9706,6 +9766,11 @@ Search.appendIndex(
             "summary": "Save\u0020a\u0020query.",
             "url": "classes/Database-Service-Query.html#method_save"
         },                {
+            "fqsen": "\\Database\\Service\\Query\u003A\u003AgetSavedQuery\u0028\u0029",
+            "name": "getSavedQuery",
+            "summary": "Get\u0020a\u0020saved\u0020query",
+            "url": "classes/Database-Service-Query.html#method_getSavedQuery"
+        },                {
             "fqsen": "\\Database\\Service\\Query\u003A\u003AexecuteSaved\u0028\u0029",
             "name": "executeSaved",
             "summary": "Execute\u0020a\u0020saved\u0020query.",
@@ -9910,6 +9975,26 @@ Search.appendIndex(
             "name": "REF_MEMBER_PROSPECTIVE",
             "summary": "",
             "url": "classes/DatabaseTest-Seeder-MemberFixture.html#constant_REF_MEMBER_PROSPECTIVE"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\SavedQueriesFixture",
+            "name": "SavedQueriesFixture",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-SavedQueriesFixture.html"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\SavedQueriesFixture\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-SavedQueriesFixture.html#method_load"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\SavedQueriesFixture\u003A\u003AREF_QUERY_UNDERAGE",
+            "name": "REF_QUERY_UNDERAGE",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-SavedQueriesFixture.html#constant_REF_QUERY_UNDERAGE"
+        },                {
+            "fqsen": "\\DatabaseTest\\Seeder\\SavedQueriesFixture\u003A\u003AREF_QUERY_MEMBERDETAILS",
+            "name": "REF_QUERY_MEMBERDETAILS",
+            "summary": "",
+            "url": "classes/DatabaseTest-Seeder-SavedQueriesFixture.html#constant_REF_QUERY_MEMBERDETAILS"
         },                {
             "fqsen": "\\Report\\Migrations\\Version20241020224949",
             "name": "Version20241020224949",
