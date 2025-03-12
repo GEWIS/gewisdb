@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-14 20:21+0000\n"
+"POT-Creation-Date: 2025-03-12 20:35+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -61,6 +61,10 @@ msgstr ""
 #, php-format
 msgid "%s has been added to %s"
 msgstr "%s has been added to %s"
+
+#, php-format
+msgid "%s prospective member(s) have paid and are pending approval."
+msgstr "%s prospective member(s) have paid and are pending approval."
 
 #, php-format
 msgid "%s: %s (started in %s)"
@@ -373,6 +377,9 @@ msgstr "Cannot Delete Prospective Member:"
 
 msgid "Career Development and External Affairs Officer"
 msgstr "Career Development and External Affairs Officer"
+
+msgid "Category"
+msgstr "Category"
 
 msgid "Chair"
 msgstr "Chair"
@@ -1070,6 +1077,9 @@ msgstr "No Checkout Sessions on record."
 msgid "No Exception available"
 msgstr "No Exception available"
 
+msgid "No category"
+msgstr "No category"
+
 msgid "No data returned."
 msgstr "No data returned."
 
@@ -1278,6 +1288,13 @@ msgstr ""
 msgid "Save"
 msgstr "Save"
 
+msgid ""
+"Saving a query with a previously used name will overwrite the previously "
+"saved query and update its category."
+msgstr ""
+"Saving a query with a previously used name will overwrite the previously "
+"saved query and update its category."
+
 msgid "Search"
 msgstr "Search"
 
@@ -1434,6 +1451,9 @@ msgstr "There are currently no data update requests."
 
 msgid "There are no notes for this member."
 msgstr "There are no notes for this member."
+
+msgid "There are no saved queries."
+msgstr "There are no saved queries."
 
 msgid "There are other decisions that still refer to this decision."
 msgstr "There are other decisions that still refer to this decision."
@@ -1771,6 +1791,9 @@ msgstr "membership type"
 
 msgid "onbekend"
 msgstr "unknown"
+
+msgid "optional"
+msgstr "optional"
 
 msgid "our payment provider"
 msgstr "our payment provider"

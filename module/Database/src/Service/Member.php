@@ -998,6 +998,15 @@ class Member
     }
 
     /**
+     * Paid prospective members (separately from frontpage data to reduce number
+     * of database queries)
+     */
+    public function getPaidProspectivesCount(): int
+    {
+        return count($this->getProspectiveMemberMapper()->search('', 'paid'));
+    }
+
+    /**
      * Get a list of all pending member updates.
      *
      * @return MemberUpdateModel[]

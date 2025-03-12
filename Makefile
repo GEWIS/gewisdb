@@ -123,9 +123,6 @@ translations:
 		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
 		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
 
-getlangfiles:
-		./translate-helper
-
 update: updatecomposer updatedocker
 
 loadenv: copyprodconf

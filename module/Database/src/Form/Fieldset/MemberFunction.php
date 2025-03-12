@@ -28,6 +28,9 @@ class MemberFunction extends Fieldset
                 'label' => 'Functie',
                 'value_options' => InstallationFunctions::getFunctionsArray($translator, $withmember, $withLegacy),
             ],
+            'attributes' => [
+                'value' => InstallationFunctions::Member->value,
+            ],
         ]);
     }
 
