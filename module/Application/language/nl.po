@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-14 20:21+0000\n"
+"POT-Creation-Date: 2025-03-12 20:35+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -59,6 +59,10 @@ msgstr "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
 #, php-format
 msgid "%s has been added to %s"
 msgstr "%s toegevoegd aan %s"
+
+#, fuzzy, php-format
+msgid "%s prospective member(s) have paid and are pending approval."
+msgstr "Dit toekomstig lid kan niet worden goedgekeurd."
 
 #, php-format
 msgid "%s: %s (started in %s)"
@@ -372,6 +376,9 @@ msgstr "Kan toekomstig lid niet verwijderen:"
 
 msgid "Career Development and External Affairs Officer"
 msgstr "Commissaris Carrièreontwikkeling en Externe Betrekkingen"
+
+msgid "Category"
+msgstr "Categorie"
 
 msgid "Chair"
 msgstr "Voorzitter"
@@ -1077,6 +1084,9 @@ msgstr "Er zijn geen afrekensessies geregistreerd."
 msgid "No Exception available"
 msgstr "Geen exceptie beschikbaar"
 
+msgid "No category"
+msgstr "Zonder categorie"
+
 msgid "No data returned."
 msgstr "Geen gegevens ontvangen."
 
@@ -1284,6 +1294,13 @@ msgstr ""
 msgid "Save"
 msgstr "Opslaan"
 
+msgid ""
+"Saving a query with a previously used name will overwrite the previously "
+"saved query and update its category."
+msgstr ""
+"Het opslaan van een query met een eerder gebruikte naam zal de eerder "
+"opgeslagen query overschrijven en de categorie aanpassen."
+
 msgid "Search"
 msgstr "Zoek"
 
@@ -1442,6 +1459,9 @@ msgstr "Er zijn momenteel geen verzoeken om gegevens bij te werken."
 
 msgid "There are no notes for this member."
 msgstr "Dit lid heeft geen notities."
+
+msgid "There are no saved queries."
+msgstr "Er zijn geen opgeslagen queries."
 
 msgid "There are other decisions that still refer to this decision."
 msgstr "Er zijn nog andere besluiten die naar dit besluit verwijzen."
@@ -1791,6 +1811,9 @@ msgstr "lidmaatschapstype"
 
 msgid "onbekend"
 msgstr "onbekend"
+
+msgid "optional"
+msgstr "optioneel"
 
 msgid "our payment provider"
 msgstr "onze betalingsprovider"
