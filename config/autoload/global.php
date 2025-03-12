@@ -14,7 +14,22 @@
 
 declare(strict_types=1);
 
+use Application\Extensions\Doctrine\Year;
+
 return [
+    /*
+     * Doctrine global configuration, like functions
+     */
+    'doctrine' => [
+        'configuration' => [
+            'orm_report' => [
+                'numeric_functions' => [
+                    'YEAR' => Year::class,
+                ],
+            ],
+        ],
+    ],
+
     /**
      * Settings for storing files.
      */
