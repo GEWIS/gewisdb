@@ -24,6 +24,12 @@ class SavedQuery
     protected ?int $id = null;
 
     /**
+     * Category.
+     */
+    #[Column(type: 'string')]
+    protected string $category;
+
+    /**
      * Name.
      */
     #[Column(type: 'string')]
@@ -67,6 +73,22 @@ class SavedQuery
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * Get the category.
+     */
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the category.
+     */
+    public function setCategory(string $category): void
+    {
+        $this->category = $category;
     }
 
     /**

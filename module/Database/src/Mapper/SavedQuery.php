@@ -55,7 +55,7 @@ class SavedQuery
     public function findAll(): array
     {
         $qb = $this->getRepository()->createQueryBuilder('q');
-        $qb->add('orderBy', 'lower(q.name) ASC');
+        $qb->add('orderBy', 'lower(q.category), lower(q.name) ASC');
 
         return $qb->getQuery()->getResult();
     }

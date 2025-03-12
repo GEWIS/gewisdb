@@ -17,6 +17,14 @@ class QuerySave extends Query implements InputFilterProviderInterface
         parent::__construct($this->translator);
 
         $this->add([
+            'name' => 'category',
+            'type' => Text::class,
+            'options' => [
+                'label' => $this->translator->translate('Category'),
+            ],
+        ]);
+
+        $this->add([
             'name' => 'name',
             'type' => Text::class,
             'options' => [
@@ -29,7 +37,7 @@ class QuerySave extends Query implements InputFilterProviderInterface
             'type' => Submit::class,
             'attributes' => [
                 'label' => $this->translator->translate('Save'),
-                'value' => $this->translator->translate('Save'),
+                'value' => 'save',
             ],
         ]);
     }
