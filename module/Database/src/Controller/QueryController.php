@@ -29,6 +29,12 @@ class QueryController extends AbstractActionController
 
             $result = $this->queryService->execute($post);
 
+            if (isset($query)) {
+                return $this->redirect()->toRoute('query/show', [
+                    'query' => $query->getId(),
+                ]);
+            }
+
             if (null !== $result) {
                 return new ViewModel([
                     'form' => $this->queryService->getQueryForm(),
@@ -36,12 +42,7 @@ class QueryController extends AbstractActionController
                     'result' => $result,
                     'saved' => $this->queryService->getSavedQueries(),
                     'entities' => $this->queryService->getEntities(),
-                ]);
-            }
-
-            if (isset($query)) {
-                return $this->redirect()->toRoute('query/show', [
-                    'query' => $query->getId(),
+                    'query' => null,
                 ]);
             }
         }
@@ -50,6 +51,7 @@ class QueryController extends AbstractActionController
             'form' => $this->queryService->getQueryForm(),
             'saved' => $this->queryService->getSavedQueries(),
             'entities' => $this->queryService->getEntities(),
+            'query' => null,
         ]);
     }
 
@@ -64,6 +66,7 @@ class QueryController extends AbstractActionController
             'exportform' => $this->queryService->getQueryExportForm(),
             'result' => $this->queryService->executeSaved((int) $this->params()->fromRoute('query')),
             'entities' => $this->queryService->getEntities(),
+            'query' => $this->queryService->getSavedQuery((int) $this->params()->fromRoute('query')),
         ]);
 
         $viewmodel->setTemplate('database/query/index');
@@ -82,8 +85,16 @@ class QueryController extends AbstractActionController
                 true,
             );
 
+            $name = $this->getRequest()->getPost()->toArray()['name'];
+            if (empty($name)) {
+                $name = 'query';
+            }
+
             if (null !== $result) {
-                $vm = new ViewModel(['result' => $result]);
+                $vm = new ViewModel([
+                    'result' => $result,
+                    'name' => $name,
+                ]);
 
                 $vm->setTemplate('database/query/export');
                 $vm->setTerminal(true);

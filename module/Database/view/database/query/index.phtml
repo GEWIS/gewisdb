@@ -53,7 +53,8 @@ $this->headScript()->appendFile($this->basePath() . '/js/codemirror-compressed.j
             <?php
             /* These are part of the QuerySave form */ ?>
             <div class="form-group">
-                <input type="text" class="form-control input-small" name="name" placeholder="<?= $this->translate('Name') ?>">
+                <input type="text" class="form-control input-small" name="category" placeholder="<?= $this->translate('Category') ?> (<?= $this->translate('optional') ?>)" value="<?= $query?->getCategory();?>">
+                <input type="text" class="form-control input-small" name="name" placeholder="<?= $this->translate('Name') ?>" value="<?= $query?->getName();?>">
             </div>
             <button class="btn btn-success" name="submit_save" type="submit">
                 <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Save') ?>
@@ -62,46 +63,56 @@ $this->headScript()->appendFile($this->basePath() . '/js/codemirror-compressed.j
     </div>
     <div class="col-md-3">
         <h3><?= $this->translate('Stored Queries') ?></h3>
-        <ul>
-            <li>
-                <ul>
-                    <?php
-                    $prefix = null;
-                    foreach ($saved as $query):
-                        if ($prefix !== strtoupper(explode(":", $query->getName(), 2)[0])):
-                            $prefix = strtoupper(explode(":", $query->getName(), 2)[0]);
-                    ?>
-                                </ul>
-                            </li>
-                            <li><b><?= $prefix ?></b>
-                                <ul>
+        <?php if (count($saved)): ?>
+            <ul>
+                <li>
+                    <ul>
+                        <?php
+                        $prefix = null;
+                        foreach ($saved as $savedquery):
+                            if ($prefix !== $savedquery->getCategory()):
+                                $prefix = $savedquery->getCategory();
+                        ?>
+                    </ul>
+                </li>
+                <li><b><?= $prefix ? $prefix : $this->translate('No category') ?></b>
+                    <ul>
                         <?php endif; ?>
                         <li>
-                            <a href="<?= $this->url('query/show', ['query' => $query->getId()]) ?>">
-                                <?=
-                                    explode(
-                                        ":",
-                                        $query->getName(),
-                                        2,
-                                )[1] ?>
+                            <a href="<?= $this->url('query/show', ['query' => $savedquery->getId()]) ?>">
+                                <?= $savedquery->getName() ?>
                             </a>
                         </li>
-                    <?php endforeach; ?>
-                </ul>
-            </li>
-        </ul>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+            </ul>
+        <?php else: ?>
+            <em><?= $this->translate('There are no saved queries.') ?></em>
+            <br/><br/>
+        <?php endif; ?>
 
-        <?=
+        <p>
+            <?= $this->translate('Saving a query with a previously used name will overwrite the previously saved query and update its category.') ?>
+        </p>
+
+        <p>
+            <?=
             sprintf(
             $this->translate('For an overview of how you can use the Doctrine Query Language (DQL) please refer to %sits documentation%s.'),
                 '<a href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/dql-doctrine-query-language.html">',
                 '</a>',
             )
-        ?>
+            ?>
+        </p>
 
+        <p>
         <?= $this->translate('The entities that you can use:') ?>
+        </p>
         <ul>
-            <?php foreach ($entities as $entity): ?>
+            <?php
+            sort($entities);
+            foreach ($entities as $entity): ?>
                 <li><?= $entity; ?></li>
             <?php endforeach; ?>
         </ul>
@@ -130,6 +141,13 @@ $this->headScript()->appendFile($this->basePath() . '/js/codemirror-compressed.j
             echo $this->form()->openTag($exportform);
             ?>
             <?= $this->formHidden($exportform->get('query')) ?>
+            <?php
+                $element = $exportform->get('name');
+                if (null !== $query) {
+                    $element->setValue($query->getCategory() . ' - ' . $query->getName());
+                }
+            ?>
+            <?= $this->formElement($element) ?>
             <div class="form-group">
                 <?php
                 $element = $exportform->get('type');

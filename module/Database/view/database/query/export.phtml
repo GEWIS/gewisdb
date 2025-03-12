@@ -41,6 +41,6 @@ rewind($mem);
 
 // send correct download headers
 header('Content-Type: application/csv');
-header('Content-Disposition: attachement; filename="query.csv"');
+header('Content-Disposition: attachement; filename="' . $this->escapeHtml($name) . '.csv"');
 
 fpassthru($mem);
