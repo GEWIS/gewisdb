@@ -6651,6 +6651,11 @@ Search.appendIndex(
             "summary": "Legacy\u0020functions",
             "url": "classes/Database-Model-Enums-InstallationFunctions.html#enumcase_FoosballCoordinator"
         },                {
+            "fqsen": "\\Database\\Model\\Enums\\InstallationFunctions\u003A\u003AProcurementOfficer",
+            "name": "ProcurementOfficer",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-InstallationFunctions.html#enumcase_ProcurementOfficer"
+        },                {
             "fqsen": "\\Database\\Model\\Enums\\InstallationFunctions\u003A\u003AMember",
             "name": "Member",
             "summary": "Administrative\u0020functions",
