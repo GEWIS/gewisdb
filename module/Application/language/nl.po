@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-12 20:35+0000\n"
+"POT-Creation-Date: 2025-04-23 16:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid " door "
 msgstr " door "
@@ -60,9 +60,10 @@ msgstr "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
 msgid "%s has been added to %s"
 msgstr "%s toegevoegd aan %s"
 
-#, fuzzy, php-format
+#, php-format
 msgid "%s prospective member(s) have paid and are pending approval."
-msgstr "Dit toekomstig lid kan niet worden goedgekeurd."
+msgstr ""
+"%s toekomstig lid heeft/leden hebben betaald en wachten op goedkeuring."
 
 #, php-format
 msgid "%s: %s (started in %s)"
@@ -892,6 +893,9 @@ msgstr "Commissaris Kennisbeheer"
 
 msgid "Initial(s)"
 msgstr "Initialen"
+
+msgid "Inkoper"
+msgstr "Inkoper"
 
 msgid "Innovation Officer"
 msgstr "Commissaris Innovatie"
