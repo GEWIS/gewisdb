@@ -1,3 +1,8 @@
+## [v4.0.1](https://github.com/GEIWS/gewisdb/tree/v4.0.1) (2025-04-30)
+
+* Fix legacy board installation function for Education position
+* Fix showing created decision in application language
+
 ## [v4.0.0](https://github.com/GEIWS/gewisdb/tree/v4.0.0) (2025-04-23)
 
 * Added migrations
