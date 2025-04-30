@@ -6506,9 +6506,14 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_InternalAffairs"
         },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ALegacyEducation",
+            "name": "LegacyEducation",
+            "summary": "Legacy\u0020functions",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_LegacyEducation"
+        },                {
             "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003APrOfficer",
             "name": "PrOfficer",
-            "summary": "Legacy\u0020functions",
+            "summary": "",
             "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_PrOfficer"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AViceChair",
@@ -6530,11 +6535,6 @@ Search.appendIndex(
             "name": "DigitalInfrastructure",
             "summary": "",
             "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_DigitalInfrastructure"
-        },                {
-            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ADigitalInfrastructureEN",
-            "name": "DigitalInfrastructureEN",
-            "summary": "",
-            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_DigitalInfrastructureEN"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AInnovation",
             "name": "Innovation",
