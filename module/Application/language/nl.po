@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 16:05+0200\n"
+"POT-Creation-Date: 2025-04-30 16:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -635,7 +635,7 @@ msgid "Edit / Delete"
 msgstr "Bewerken / Verwijderen"
 
 msgid "Education Officer"
-msgstr "Onderwijscommissaris"
+msgstr "Commissaris Onderwijs"
 
 msgid "Effective From"
 msgstr "Vanaf"
@@ -944,6 +944,9 @@ msgstr "Sleutelcode kan niet worden ingetrokken nadat deze is vervallen."
 
 msgid "Key code cannot be withdrawn in the past."
 msgstr "Sleutelcode kan niet met terugwerkende kracht worden ingetrokken."
+
+msgid "LEGACY Education Officer"
+msgstr "Onderwijscommissaris"
 
 msgid "Language Settings"
 msgstr "Taalinstellingen"

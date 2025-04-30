@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 16:05+0200\n"
+"POT-Creation-Date: 2025-04-30 16:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -936,6 +936,9 @@ msgstr "Key code cannot be withdrawn after its original expiration."
 
 msgid "Key code cannot be withdrawn in the past."
 msgstr "Key code cannot be withdrawn in the past."
+
+msgid "LEGACY Education Officer"
+msgstr "Education Officer"
 
 msgid "Language Settings"
 msgstr "Language Settings"
