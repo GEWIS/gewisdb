@@ -79,8 +79,13 @@ case 'other':
 /** @var DecisionModel $decision */
 ?>
 <h1><?= $this->translate('Decision') ?> <?= $decision->getHash() ?> <?= $this->translate('reads as follows:') ?></h1>
-<?php foreach ($decision->getSubdecisions() as $subdecision): ?>
-    <?= $this->escapeHtml($subdecision->getContent($translator)) ?>
+<?php foreach (AppLanguages::cases() as $language): ?>
+    <p>
+        <?php foreach ($decision->getSubdecisions() as $subdecision): ?>
+            <?= $this->escapeHtml($subdecision->getTranslatedContent($translator, $language)) ?>
+        <?php endforeach; ?>
+    </p>
+    <br>
 <?php endforeach; ?>
 
 <br>
