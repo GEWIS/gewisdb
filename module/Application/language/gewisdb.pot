@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-655-gc5af0310-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-658-gd9471052-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 16:05+0200\n"
+"POT-Creation-Date: 2025-04-30 16:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -863,6 +863,9 @@ msgid "Key code cannot be withdrawn after its original expiration."
 msgstr ""
 
 msgid "Key code cannot be withdrawn in the past."
+msgstr ""
+
+msgid "LEGACY Education Officer"
 msgstr ""
 
 msgid "Language Settings"

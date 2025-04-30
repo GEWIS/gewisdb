@@ -23,11 +23,12 @@ enum BoardFunctions: string
     case Chair = 'Voorzitter';
     case Secretary = 'Secretaris';
     case Treasurer = 'Penningmeester';
-    case Education = 'Onderwijscommissaris';
+    case Education = 'Commissaris Onderwijs';
     case ExternalAffairs = 'Commissaris Externe Betrekkingen';
     case InternalAffairs = 'Commissaris Interne Betrekkingen';
 
     /** Legacy functions */
+    case LegacyEducation = 'Onderwijscommissaris';
     case PrOfficer = 'PR-Functionaris';
     case ViceChair = 'Vice-Voorzitter';
 
@@ -73,6 +74,10 @@ enum BoardFunctions: string
             ),
             self::InternalAffairs => $translator->translate(
                 'Internal Affairs Officer',
+                locale: $language?->getLangParam(),
+            ),
+            self::LegacyEducation => $translator->translate(
+                'LEGACY Education Officer',
                 locale: $language?->getLangParam(),
             ),
             self::PrOfficer => $translator->translate('PR Officer', locale: $language?->getLangParam()),
