@@ -36,7 +36,6 @@ enum BoardFunctions: string
     case BrandManager = 'Brand Manager';
     case CareerdevelopmentExternalAffairs = 'Commissaris Carrièreontwikkeling en Externe Betrekkingen';
     case DigitalInfrastructure = 'Commissaris Digitale Infrastructuur';
-    case DigitalInfrastructureEN = 'Digital Infrastructure Officer'; //todo: change db value?
     case Innovation = 'Commissaris Innovatie';
     case Information = 'Commissaris Kennisbeheer';
 
@@ -88,10 +87,6 @@ enum BoardFunctions: string
                 locale: $language?->getLangParam(),
             ),
             self::DigitalInfrastructure => $translator->translate(
-                'Digital Infrastructure Officer',
-                locale: $language?->getLangParam(),
-            ),
-            self::DigitalInfrastructureEN => $translator->translate(
                 'Digital Infrastructure Officer',
                 locale: $language?->getLangParam(),
             ),
