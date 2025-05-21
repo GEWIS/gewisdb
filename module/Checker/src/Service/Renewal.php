@@ -68,14 +68,15 @@ class Renewal
             ->filter(static fn (OrganMemberModel $member) => $member->isCurrent())
             ->isEmpty();
 
+        // TODO: after 2025-07-31, revert template.
         $body = $this->render(
-            'email/graduate-renewal',
+            'email/graduate-renewal-2025',
             [
                 'firstName' => $link->getMember()->getFirstName(),
                 'isInstalled' => $isInstalled,
                 'currentExpiration' => $link->getCurrentExpiration(),
                 'newExpiration' => $link->getNewExpiration(),
-                'url' => $this->config['application']['public_url'] . '/member/renew/' . $link->getToken(),
+                'url' => $this->config['application']['public_url'] . '/renew/' . $link->getToken(),
                 //TODO: If global config exists, we should make the secretary a global config option
             ],
         );
@@ -87,7 +88,7 @@ class Renewal
             $body,
             'GEWIS Graduate Renewal',
             'More information',
-            '<p>You are currently registered as a graduate of GEWIS. This is a status 
+            '<p>You are currently registered as a graduate of GEWIS. This is a status
                 assigned to members who are no longer active within GEWIS and also are no longer studying.
                 <br><br>
                 Graduates do not pay contribution and as a graduate,

@@ -1,0 +1,33 @@
+</div>
+<div style="font-size: 18px; color: #FFFFFF; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif; background-color: #D40000; padding: 10px 20px;">
+    <p>We recently sent you an email regarding renewing your graduate status at GEWIS. Unfortunately, due to the mitigations following the cyber attack on the university the link we provided is no longer accessible outside of the campus.</p>
+
+    <p>
+        We sincerely apologise for the inconvenience this may have caused. Please find the corrected link below to complete the renewal process smoothly.<br/>
+        If you have requested renewal of your graduate status via email, you can ignore this email. Your previous response will be processed soon.
+    </p>
+</div>
+<div style="font-size: 18px; color: #333333; line-height: 1.4; font-family: Roboto, Tahoma, Verdana, Segoe, sans-serif;">
+<p>Dear <?= $firstName ?>,</p>
+<p>
+    You are currently registered as a Graduate (<i>Afgestudeerde</i>) at GEWIS until <b><?= $currentExpiration->format('F jS, Y') ?></b>.
+    We care about your privacy, so we'd like to confirm that you want to renew this graduate status.
+</p>
+<p>
+    Please click <a href="<?= $url ?>" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">here</a> to review your personal details and renew your status as graduate of GEWIS until <b><?= $newExpiration->format('F jS, Y') ?></b>.
+    If you do not click this link, your status will automatically expire and we will delete your data in the way described in our <a href="https://gewis.nl/association/regulations/privacy-statement" style="color: #C40000; text-decoration: none;" target="_blank" rel="noopener nofollow">privacy statement</a>.
+</p>
+<? if ($isInstalled): ?>
+<p>
+    <span style="font-weight: bold;">Please note:</span> you are currently an (in)active member of one or more committees/fraternities.
+    If you do not renew your status, those memberships will end on <?= $currentExpiration->format('F jS, Y') ?>.
+</p>
+<? endif; ?>
+<p>
+    If you prefer this, you can also renew your graduate status by replying to this email.
+    Please keep the subject intact so we can process it more efficiently.
+</p>
+<p>
+    Kind regards,
+    <br>The Secretary of GEWIS
+</p>
