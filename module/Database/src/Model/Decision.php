@@ -280,7 +280,7 @@ class Decision
      */
     public function getContent(bool $escapeCharacters = false): string
     {
-        return $this->getTranslatedContent(null, null, $escapeCharacters);
+        return $this->getTranslatedContent(null, AppLanguages::Dutch, $escapeCharacters);
     }
 
     /**
@@ -288,7 +288,7 @@ class Decision
      */
     public function getTranslatedContent(
         ?MvcTranslator $translator,
-        ?AppLanguages $language,
+        AppLanguages $language,
         bool $escapeCharacters = false,
     ): string {
         if (null === $translator) {
