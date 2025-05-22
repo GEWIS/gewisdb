@@ -1,3 +1,9 @@
+## [v4.1.0](https://github.com/GEIWS/gewisdb/tree/v4.1.0) (2025-05-22)
+
+* Added new public URL for graduate status renewal (and future features)
+* Fix generating decisions for annulment
+* Fix proxy IP ranges due to university WAF
+
 ## [v4.0.1](https://github.com/GEIWS/gewisdb/tree/v4.0.1) (2025-04-30)
 
 * Fix legacy board installation function for Education position
