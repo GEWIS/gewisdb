@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-658-gd9471052-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-672-ga51a3e67-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-30 16:20+0200\n"
+"POT-Creation-Date: 2025-06-04 21:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -345,13 +345,7 @@ msgstr ""
 msgid "Cannot Delete Prospective Member:"
 msgstr ""
 
-msgid "Career Development and External Affairs Officer"
-msgstr ""
-
 msgid "Category"
-msgstr ""
-
-msgid "Chair"
 msgstr ""
 
 msgid "Change"
@@ -409,6 +403,27 @@ msgid "City and Postal Code"
 msgstr ""
 
 msgid "Click here for approval if membership fee paid with cash."
+msgstr ""
+
+msgid "Commissaris Carrièreontwikkeling en Externe Betrekkingen"
+msgstr ""
+
+msgid "Commissaris Digitale Infrastructuur"
+msgstr ""
+
+msgid "Commissaris Externe Betrekkingen"
+msgstr ""
+
+msgid "Commissaris Innovatie"
+msgstr ""
+
+msgid "Commissaris Interne Betrekkingen"
+msgstr ""
+
+msgid "Commissaris Kennisbeheer"
+msgstr ""
+
+msgid "Commissaris Onderwijs"
 msgstr ""
 
 msgid "Commissie"
@@ -547,9 +562,6 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-msgid "Digital Infrastructure Officer"
-msgstr ""
-
 msgid "Disapprove"
 msgstr ""
 
@@ -590,9 +602,6 @@ msgstr ""
 msgid "Edit / Delete"
 msgstr ""
 
-msgid "Education Officer"
-msgstr ""
-
 msgid "Effective From"
 msgstr ""
 
@@ -630,9 +639,6 @@ msgstr ""
 msgid "External - Specially admitted by the board"
 msgstr ""
 
-msgid "External Affairs Officer"
-msgstr ""
-
 msgid "Failed"
 msgstr ""
 
@@ -640,9 +646,6 @@ msgid "File"
 msgstr ""
 
 msgid "First Name"
-msgstr ""
-
-msgid "Foosball Coordinator"
 msgstr ""
 
 #, php-format
@@ -807,19 +810,13 @@ msgid ""
 "to continue."
 msgstr ""
 
-msgid "Inactive Member"
-msgstr ""
-
-msgid "Information Officer"
+msgid "Inactief Lid"
 msgstr ""
 
 msgid "Initial(s)"
 msgstr ""
 
 msgid "Inkoper"
-msgstr ""
-
-msgid "Innovation Officer"
 msgstr ""
 
 msgid "Install Board Member"
@@ -832,9 +829,6 @@ msgid "Installation/Discharge"
 msgstr ""
 
 msgid "Installations"
-msgstr ""
-
-msgid "Internal Affairs Officer"
 msgstr ""
 
 msgid "KCC"
@@ -865,7 +859,7 @@ msgstr ""
 msgid "Key code cannot be withdrawn in the past."
 msgstr ""
 
-msgid "LEGACY Education Officer"
+msgid "LEGACY Onderwijscommissaris"
 msgstr ""
 
 msgid "Language Settings"
@@ -881,6 +875,9 @@ msgid "Last Update to Membership"
 msgstr ""
 
 msgid "Leave note"
+msgstr ""
+
+msgid "Lid"
 msgstr ""
 
 msgid "Log in"
@@ -933,9 +930,6 @@ msgid "Meetings"
 msgstr ""
 
 msgid "Meetings and Decisions"
-msgstr ""
-
-msgid "Member"
 msgstr ""
 
 #, php-format
@@ -1069,7 +1063,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-msgid "PR Officer"
+msgid "PR-Functionaris"
 msgstr ""
 
 msgid ""
@@ -1091,6 +1085,9 @@ msgid "Pending"
 msgstr ""
 
 msgid "Pending member updates"
+msgstr ""
+
+msgid "Penningmeester"
 msgstr ""
 
 msgid "Permissions"
@@ -1225,7 +1222,7 @@ msgstr ""
 msgid "Search TU/e Students"
 msgstr ""
 
-msgid "Secretary"
+msgid "Secretaris"
 msgstr ""
 
 msgid "Select API permissions"
@@ -1314,6 +1311,9 @@ msgid "TU/e data: %s"
 msgstr ""
 
 msgid "TU/e-username"
+msgstr ""
+
+msgid "Tafelvoetbalcoordinator"
 msgstr ""
 
 #, php-format
@@ -1435,9 +1435,6 @@ msgstr ""
 msgid "Token"
 msgstr ""
 
-msgid "Treasurer"
-msgstr ""
-
 msgid "Type"
 msgstr ""
 
@@ -1478,7 +1475,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-msgid "Vice-Chair"
+msgid "Vice-Voorzitter"
 msgstr ""
 
 msgid "View"
@@ -1488,6 +1485,9 @@ msgid "View Update Requests"
 msgstr ""
 
 msgid "Virt (Virtual Meeting)"
+msgstr ""
+
+msgid "Voorzitter"
 msgstr ""
 
 msgid "Wants to Receive Supremum"

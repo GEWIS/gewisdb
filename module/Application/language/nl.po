@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-30 16:20+0200\n"
+"POT-Creation-Date: 2025-06-04 21:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -375,14 +375,8 @@ msgstr "Afgebroken"
 msgid "Cannot Delete Prospective Member:"
 msgstr "Kan toekomstig lid niet verwijderen:"
 
-msgid "Career Development and External Affairs Officer"
-msgstr "Commissaris Carrièreontwikkeling en Externe Betrekkingen"
-
 msgid "Category"
 msgstr "Categorie"
-
-msgid "Chair"
-msgstr "Voorzitter"
 
 msgid "Change"
 msgstr "Wijzig"
@@ -444,6 +438,27 @@ msgid "Click here for approval if membership fee paid with cash."
 msgstr ""
 "Klik hier voor goedkeuring als de eenmalige lidmaatschapsbijdrage contant is "
 "betaald."
+
+msgid "Commissaris Carrièreontwikkeling en Externe Betrekkingen"
+msgstr "Commissaris Carrièreontwikkeling en Externe Betrekkingen"
+
+msgid "Commissaris Digitale Infrastructuur"
+msgstr "Commissaris Digitale Infrastructuur"
+
+msgid "Commissaris Externe Betrekkingen"
+msgstr "Commissaris Externe Betrekkingen"
+
+msgid "Commissaris Innovatie"
+msgstr "Commissaris Innovatie"
+
+msgid "Commissaris Interne Betrekkingen"
+msgstr "Commissaris Interne Betrekkingen"
+
+msgid "Commissaris Kennisbeheer"
+msgstr "Commissaris Kennisbeheer"
+
+msgid "Commissaris Onderwijs"
+msgstr "Commissaris Onderwijs"
 
 msgid "Commissie"
 msgstr "Commissie"
@@ -588,9 +603,6 @@ msgstr "Gebruiker verwijderen"
 msgid "Description"
 msgstr "Beschrijving"
 
-msgid "Digital Infrastructure Officer"
-msgstr "Commissaris Digitale Infrastructuur"
-
 msgid "Disapprove"
 msgstr "Afkeuren"
 
@@ -634,9 +646,6 @@ msgstr "E-mailadres"
 msgid "Edit / Delete"
 msgstr "Bewerken / Verwijderen"
 
-msgid "Education Officer"
-msgstr "Commissaris Onderwijs"
-
 msgid "Effective From"
 msgstr "Vanaf"
 
@@ -674,9 +683,6 @@ msgstr "Extern"
 msgid "External - Specially admitted by the board"
 msgstr "Extern - Speciaal toegelaten door het bestuur"
 
-msgid "External Affairs Officer"
-msgstr "Commissaris Externe Betrekkingen"
-
 msgid "Failed"
 msgstr "Mislukt"
 
@@ -685,9 +691,6 @@ msgstr "Bestand"
 
 msgid "First Name"
 msgstr "Voornaam"
-
-msgid "Foosball Coordinator"
-msgstr "Tafelvoetbalcoordinator"
 
 #, php-format
 msgid ""
@@ -885,20 +888,14 @@ msgstr ""
 "Als je browser je niet doorverwijst, <a href=\"%s\">klik dan hier</a> om "
 "verder te gaan."
 
-msgid "Inactive Member"
-msgstr "Inactief lid"
-
-msgid "Information Officer"
-msgstr "Commissaris Kennisbeheer"
+msgid "Inactief Lid"
+msgstr "Inactief Lid"
 
 msgid "Initial(s)"
 msgstr "Initialen"
 
 msgid "Inkoper"
 msgstr "Inkoper"
-
-msgid "Innovation Officer"
-msgstr "Commissaris Innovatie"
 
 msgid "Install Board Member"
 msgstr "Bestuurder installeren"
@@ -911,9 +908,6 @@ msgstr "Installatie/Decharge"
 
 msgid "Installations"
 msgstr "Installaties"
-
-msgid "Internal Affairs Officer"
-msgstr "Commissaris Interne Betrekkingen"
 
 msgid "KCC"
 msgstr "KCC"
@@ -945,7 +939,7 @@ msgstr "Sleutelcode kan niet worden ingetrokken nadat deze is vervallen."
 msgid "Key code cannot be withdrawn in the past."
 msgstr "Sleutelcode kan niet met terugwerkende kracht worden ingetrokken."
 
-msgid "LEGACY Education Officer"
+msgid "LEGACY Onderwijscommissaris"
 msgstr "Onderwijscommissaris"
 
 msgid "Language Settings"
@@ -962,6 +956,9 @@ msgstr "Laatste aanpassing van het lidmaatschap"
 
 msgid "Leave note"
 msgstr "Voeg notitie toe"
+
+msgid "Lid"
+msgstr "Lid"
 
 msgid "Log in"
 msgstr "Inloggen"
@@ -1014,9 +1011,6 @@ msgstr "Vergaderingen"
 
 msgid "Meetings and Decisions"
 msgstr "Vergaderingen en besluiten"
-
-msgid "Member"
-msgstr "Lid"
 
 #, php-format
 msgid "Member %s cannot be deleted."
@@ -1153,7 +1147,7 @@ msgstr "Organen - Orgaanlidmaatschap ophalen (per gebruiker/orgaan)"
 msgid "Other"
 msgstr "Overig"
 
-msgid "PR Officer"
+msgid "PR-Functionaris"
 msgstr "PR-Functionaris"
 
 msgid ""
@@ -1178,6 +1172,9 @@ msgstr "In behandeling"
 
 msgid "Pending member updates"
 msgstr "Openstaande updates persoonsgegevens"
+
+msgid "Penningmeester"
+msgstr "Penningmeester"
 
 msgid "Permissions"
 msgstr "Rechten"
@@ -1323,7 +1320,7 @@ msgstr "Toekomstige leden zoeken"
 msgid "Search TU/e Students"
 msgstr "TU/e-studenten zoeken"
 
-msgid "Secretary"
+msgid "Secretaris"
 msgstr "Secretaris"
 
 msgid "Select API permissions"
@@ -1419,6 +1416,9 @@ msgstr "TU/e data: %s"
 
 msgid "TU/e-username"
 msgstr "TU/e-gebruikersnaam"
+
+msgid "Tafelvoetbalcoordinator"
+msgstr "Tafelvoetbalcoordinator"
 
 #, php-format
 msgid "Thank you %s!"
@@ -1565,9 +1565,6 @@ msgstr "Klap navigatie in/uit"
 msgid "Token"
 msgstr "Token"
 
-msgid "Treasurer"
-msgstr "Penningmeester"
-
 msgid "Type"
 msgstr "Type"
 
@@ -1608,7 +1605,7 @@ msgstr "Waarde"
 msgid "Version"
 msgstr "Versie"
 
-msgid "Vice-Chair"
+msgid "Vice-Voorzitter"
 msgstr "Vice-Voorzitter"
 
 msgid "View"
@@ -1619,6 +1616,9 @@ msgstr "Update-aanvragen bekijken"
 
 msgid "Virt (Virtual Meeting)"
 msgstr "Virt (virtuele vergadering)"
+
+msgid "Voorzitter"
+msgstr "Voorzitter"
 
 msgid "Wants to Receive Supremum"
 msgstr "Wil Supremum ontvangen"
