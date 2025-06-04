@@ -6536,15 +6536,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_DigitalInfrastructure"
         },                {
-            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AInnovation",
-            "name": "Innovation",
-            "summary": "",
-            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Innovation"
-        },                {
             "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AInformation",
             "name": "Information",
             "summary": "",
             "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Information"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003AInnovation",
+            "name": "Innovation",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Innovation"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates",
             "name": "CheckoutSessionStates",
