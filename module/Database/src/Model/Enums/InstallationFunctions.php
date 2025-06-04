@@ -57,19 +57,19 @@ enum InstallationFunctions: string
         }
 
         return match ($this) {
-            self::Chair => $translator->translate('Chair', locale: $language?->getLangParam()),
-            self::Secretary => $translator->translate('Secretary', locale: $language?->getLangParam()),
-            self::Treasurer => $translator->translate('Treasurer', locale: $language?->getLangParam()),
-            self::ViceChair => $translator->translate('Vice-Chair', locale: $language?->getLangParam()),
+            self::Chair => $translator->translate('Voorzitter', locale: $language?->getLangParam()),
+            self::Secretary => $translator->translate('Secretaris', locale: $language?->getLangParam()),
+            self::Treasurer => $translator->translate('Penningmeester', locale: $language?->getLangParam()),
+            self::ViceChair => $translator->translate('Vice-Voorzitter', locale: $language?->getLangParam()),
             self::Opperhoofd => $translator->translate('Opperhoofd', locale: $language?->getLangParam()),
-            self::PrOfficer => $translator->translate('PR Officer', locale: $language?->getLangParam()),
+            self::PrOfficer => $translator->translate('PR-Functionaris', locale: $language?->getLangParam()),
             self::FoosballCoordinator => $translator->translate(
-                'Foosball Coordinator',
+                'Tafelvoetbalcoordinator',
                 locale: $language?->getLangParam(),
             ),
             self::ProcurementOfficer => $translator->translate('Inkoper', locale: $language?->getLangParam()),
-            self::Member => $translator->translate('Member', locale: $language?->getLangParam()),
-            self::InactiveMember => $translator->translate('Inactive Member', locale: $language?->getLangParam()),
+            self::Member => $translator->translate('Lid', locale: $language?->getLangParam()),
+            self::InactiveMember => $translator->translate('Inactief Lid', locale: $language?->getLangParam()),
         };
     }
 

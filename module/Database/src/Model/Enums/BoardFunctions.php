@@ -36,8 +36,8 @@ enum BoardFunctions: string
     case BrandManager = 'Brand Manager';
     case CareerdevelopmentExternalAffairs = 'Commissaris Carrièreontwikkeling en Externe Betrekkingen';
     case DigitalInfrastructure = 'Commissaris Digitale Infrastructuur';
-    case Innovation = 'Commissaris Innovatie';
     case Information = 'Commissaris Kennisbeheer';
+    case Innovation = 'Commissaris Innovatie';
 
     public function isLegacy(): bool
     {
@@ -63,35 +63,35 @@ enum BoardFunctions: string
         }
 
         return match ($this) {
-            self::Chair => $translator->translate('Chair', locale: $language?->getLangParam()),
-            self::Secretary => $translator->translate('Secretary', locale: $language?->getLangParam()),
-            self::Treasurer => $translator->translate('Treasurer', locale: $language?->getLangParam()),
-            self::Education => $translator->translate('Education Officer', locale: $language?->getLangParam()),
+            self::Chair => $translator->translate('Voorzitter', locale: $language?->getLangParam()),
+            self::Secretary => $translator->translate('Secretaris', locale: $language?->getLangParam()),
+            self::Treasurer => $translator->translate('Penningmeester', locale: $language?->getLangParam()),
+            self::Education => $translator->translate('Commissaris Onderwijs', locale: $language?->getLangParam()),
             self::ExternalAffairs => $translator->translate(
-                'External Affairs Officer',
+                'Commissaris Externe Betrekkingen',
                 locale: $language?->getLangParam(),
             ),
             self::InternalAffairs => $translator->translate(
-                'Internal Affairs Officer',
+                'Commissaris Interne Betrekkingen',
                 locale: $language?->getLangParam(),
             ),
             self::LegacyEducation => $translator->translate(
-                'LEGACY Education Officer',
+                'LEGACY Onderwijscommissaris',
                 locale: $language?->getLangParam(),
             ),
-            self::PrOfficer => $translator->translate('PR Officer', locale: $language?->getLangParam()),
-            self::ViceChair => $translator->translate('Vice-Chair', locale: $language?->getLangParam()),
+            self::PrOfficer => $translator->translate('PR-Functionaris', locale: $language?->getLangParam()),
+            self::ViceChair => $translator->translate('Vice-Voorzitter', locale: $language?->getLangParam()),
             self::BrandManager => $translator->translate('Brand Manager', locale: $language?->getLangParam()),
             self::CareerdevelopmentExternalAffairs => $translator->translate(
-                'Career Development and External Affairs Officer',
+                'Commissaris Carrièreontwikkeling en Externe Betrekkingen',
                 locale: $language?->getLangParam(),
             ),
             self::DigitalInfrastructure => $translator->translate(
-                'Digital Infrastructure Officer',
+                'Commissaris Digitale Infrastructuur',
                 locale: $language?->getLangParam(),
             ),
-            self::Information => $translator->translate('Information Officer', locale: $language?->getLangParam()),
-            self::Innovation => $translator->translate('Innovation Officer', locale: $language?->getLangParam()),
+            self::Information => $translator->translate('Commissaris Kennisbeheer', locale: $language?->getLangParam()),
+            self::Innovation => $translator->translate('Commissaris Innovatie', locale: $language?->getLangParam()),
         };
     }
 

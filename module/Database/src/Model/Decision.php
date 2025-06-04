@@ -292,7 +292,7 @@ class Decision
         bool $escapeCharacters = false,
     ): string {
         if (null === $translator) {
-            $translator = new DummyTranslator();
+            $translator = new MvcTranslator(new DummyTranslator());
         }
 
         $content = [];
