@@ -1,3 +1,7 @@
+## [v4.1.1](https://github.com/GEIWS/gewisdb/tree/v4.1.1) (2025-06-04)
+
+* Fix decision statutory content on export
+
 ## [v4.1.0](https://github.com/GEIWS/gewisdb/tree/v4.1.0) (2025-05-22)
 
 * Added new public URL for graduate status renewal (and future features)
