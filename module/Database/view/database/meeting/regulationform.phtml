@@ -74,9 +74,9 @@ $fs = $form->get('meeting')
 
 <div class="form-group">
 <?php
-$element = $form->get('name');
+$element = $form->get('abbr');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $this->translate('Name'));
+$element->setAttribute('placeholder', $this->translate('Abbreviation'));
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>

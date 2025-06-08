@@ -29,9 +29,7 @@ class OrganRegulation extends AbstractDecision
         $object = parent::hydrate($data, $object);
 
         $subdecision = new RegulationModel();
-
         $subdecision->setSequence(1);
-        $subdecision->setName($data['name']);
 
         if (!($data['type'] instanceof OrganTypes)) {
             $data['type'] = OrganTypes::from($data['type']);
@@ -52,7 +50,7 @@ class OrganRegulation extends AbstractDecision
         $date = new DateTime($data['date']);
         $subdecision->setDate($date);
 
-        $subdecision->setName($data['name']);
+        $subdecision->setAbbr($data['abbr']);
         $subdecision->setMember($data['author']);
         $subdecision->setVersion($data['version']);
         $subdecision->setApproval(boolval($data['approve']));

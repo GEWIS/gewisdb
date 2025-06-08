@@ -231,7 +231,7 @@ class Meeting
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Foundation) {
             // foundation
             $reportSubDecision->setAbbr($subdecision->getAbbr());
-            $reportSubDecision->setName($subdecision->getName());
+            $reportSubDecision->setAbbr($subdecision->getName());
             $reportSubDecision->setOrganType($subdecision->getOrganType());
         } elseif (
             $subdecision instanceof DatabaseSubDecisionModel\Financial\Statement
@@ -243,7 +243,7 @@ class Meeting
                 $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
 
-            $reportSubDecision->setName($subdecision->getName());
+            $reportSubDecision->setAbbr($subdecision->getAbbr());
             $reportSubDecision->setVersion($subdecision->getVersion());
             $reportSubDecision->setDate($subdecision->getDate());
             $reportSubDecision->setApproval($subdecision->getApproval());

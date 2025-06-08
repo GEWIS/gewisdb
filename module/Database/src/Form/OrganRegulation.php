@@ -46,10 +46,10 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
         ]);
 
         $this->add([
-            'name' => 'name',
+            'name' => 'abbr',
             'type' => Text::class,
             'options' => [
-                'label' => $this->translator->translate('Name'),
+                'label' => $this->translator->translate('Abbreviation'),
             ],
         ]);
 
@@ -126,7 +126,7 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
                     ],
                 ],
             ],
-            'name' => [
+            'abbr' => [
                 'required' => true,
                 'filters' => [
                     [
