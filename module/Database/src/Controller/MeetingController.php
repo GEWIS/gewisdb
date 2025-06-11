@@ -17,6 +17,7 @@ use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 
 use function array_map;
+use function array_merge;
 
 class MeetingController extends AbstractActionController
 {
@@ -176,7 +177,15 @@ class MeetingController extends AbstractActionController
                 $this->meetingService->regulationDecision($this->getRequest()->getPost()->toArray()),
             ),
             'foundation' => new ViewModel(
-                $this->meetingService->foundationDecision($this->getRequest()->getPost()->toArray()),
+                $this->meetingService->foundationDecision(
+                    array_merge(
+                        $this->getRequest()->getPost()->toArray(),
+                        [
+                            'name' => 'AUTOMATICALLY GENERATED',
+                            'abbr' => 'AUTOMATICALLY GENERATED',
+                        ],
+                    ),
+                ),
             ),
             'abolish' => new ViewModel(
                 $this->meetingService->abolishDecision($this->getRequest()->getPost()->toArray()),

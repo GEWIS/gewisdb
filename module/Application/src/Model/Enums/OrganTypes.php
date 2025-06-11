@@ -22,6 +22,7 @@ enum OrganTypes: string
     case KCC = 'kcc';
     case AVW = 'avw';
     case RvA = 'rva';
+    case SC = 'sc';
 
     /**
      * Give the function name with the given translation. If no translator is given, we return the default language.
@@ -41,6 +42,7 @@ enum OrganTypes: string
             self::KCC => $translator->translate('KCC', locale: $language?->getLangParam()),
             self::AVW => $translator->translate('ALV-Werkgroep', locale: $language?->getLangParam()),
             self::RvA => $translator->translate('RvA', locale: $language?->getLangParam()),
+            self::SC => $translator->translate('SC', locale: $language?->getLangParam()),
         };
 
         return $translator->translate($function, locale: $language?->getLangParam());
