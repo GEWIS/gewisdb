@@ -5578,8 +5578,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003AcountMembers\u0028\u0029",
             "name": "countMembers",
-            "summary": "Count\u0020the\u0020members\u0020who\u0020still\u0020have\u0020an\u0020active\u0020membership\/graduate\u0020status,\u0020this\u0020means\u0020that\u0020are\u0020not\u0020deleted\u0020and\u0020their\n\u0060expiration\u0060\u0020is\u0020later\u0020than\u0020now.",
+            "summary": "Count\u0020the\u0020members\u0020who\u0020still\u0020have\u0020an\u0020active\u0020membership\u0020\u0028and\u0020graduate\u0020status\u0020if\u0020\u0060includeGraduates\u0060\u0029,\u0020this\u0020means\nthat\u0020are\u0020not\u0020deleted\u0020and\u0020their\u0020\u0060expiration\u0060\u0020is\u0020later\u0020than\u0020now.",
             "url": "classes/Database-Mapper-Member.html#method_countMembers"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AcountGraduates\u0028\u0029",
+            "name": "countGraduates",
+            "summary": "",
+            "url": "classes/Database-Mapper-Member.html#method_countGraduates"
         },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
