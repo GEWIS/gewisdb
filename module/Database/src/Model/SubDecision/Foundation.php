@@ -120,8 +120,15 @@ class Foundation extends SubDecision
         TranslatorInterface $translator,
         AppLanguages $language,
     ): string {
+        if (OrganTypes::SC !== $this->getOrganType()) {
+            return $translator->translate(
+                '%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht.',
+                locale: $language->getLangParam(),
+            );
+        }
+
         return $translator->translate(
-            '%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht.',
+            'De stemcommissie van de %MEETING_NUMBER%e ALV met afkorting %ORGAN_ABBR% wordt opgericht.',
             locale: $language->getLangParam(),
         );
     }
@@ -131,11 +138,19 @@ class Foundation extends SubDecision
         AppLanguages $language,
     ): string {
         $replacements = [
-            '%ORGAN_TYPE%' => $this->getOrganType()->getName($translator, $language),
-            '%ORGAN_NAME%' => $this->getName(),
             '%ORGAN_ABBR%' => $this->getAbbr(),
         ];
 
+        if (OrganTypes::SC !== $this->getOrganType()) {
+            $replacements += [
+                '%ORGAN_TYPE%' => $this->getOrganType()->getName($translator, $language),
+                '%ORGAN_NAME%' => $this->getName(),
+            ];
+        } else {
+            $replacements['%MEETING_NUMBER%'] = $this->getMeetingNumber();
+        }
+
+        /** @psalm-suppress InvalidArgument */
         return $this->replaceContentPlaceholders($this->getTranslatedTemplate($translator, $language), $replacements);
     }
 

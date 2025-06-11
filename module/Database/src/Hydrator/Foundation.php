@@ -11,6 +11,8 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use InvalidArgumentException;
 
+use function sprintf;
+
 class Foundation extends AbstractDecision
 {
     /**
@@ -29,8 +31,6 @@ class Foundation extends AbstractDecision
         $foundation = new FoundationModel();
 
         $foundation->setSequence(1);
-        $foundation->setAbbr($data['abbr']);
-        $foundation->setName($data['name']);
 
         if (!($data['type'] instanceof OrganTypes)) {
             $data['type'] = OrganTypes::from($data['type']);
@@ -38,6 +38,14 @@ class Foundation extends AbstractDecision
 
         $foundation->setOrganType($data['type']);
         $foundation->setDecision($decision);
+
+        if (OrganTypes::SC !== $foundation->getOrganType()) {
+            $foundation->setName($data['name']);
+            $foundation->setAbbr($data['abbr']);
+        } else {
+            $foundation->setName(sprintf('Stemcommissie van de %de ALV', $foundation->getMeetingNumber()));
+            $foundation->setAbbr(sprintf('SC%d', $foundation->getMeetingNumber()));
+        }
 
         $num = 2;
 

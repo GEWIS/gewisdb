@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Application\Model\Enums\OrganTypes;
 use Application\View\HelperTrait;
 use Laminas\View\Renderer\PhpRenderer;
 
@@ -203,3 +204,27 @@ $submit->setAttribute('id', 'foundation-submit');
 <?= $this->formButton($submit) ?>
 
 <?= $this->form()->closeTag(); ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let radioButtons = document.querySelectorAll('#oprichting input[name="type"]');
+        let nameField = document.querySelector('#oprichting input[name="name"]');
+        let abbrField = document.querySelector('#oprichting input[name="abbr"]');
+
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value == '<?= OrganTypes::SC->value ?>') {
+                    nameField.setAttribute('disabled', '');
+                    abbrField.setAttribute('disabled', '');
+                    nameField.setAttribute('value', 'AUTOMATICALLY GENERATED');
+                    abbrField.setAttribute('value', 'AUTOMATICALLY GENERATED');
+                } else {
+                    nameField.removeAttribute('disabled');
+                    abbrField.removeAttribute('disabled');
+                    nameField.setAttribute('value', '');
+                    abbrField.setAttribute('value', '');
+                }
+            });
+        });
+    });
+</script>
