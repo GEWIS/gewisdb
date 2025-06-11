@@ -3386,6 +3386,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20250126144021.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20250608122118",
+            "name": "Version20250608122118",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20250608122118.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250608122118\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250608122118.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250608122118\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250608122118.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250608122118\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250608122118.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -8471,15 +8491,15 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020organ\u0020type",
             "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setOrganType"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "Get\u0020the\u0020name.",
-            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getName"
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetAbbr\u0028\u0029",
+            "name": "getAbbr",
+            "summary": "Get\u0020the\u0020abbreviation.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getAbbr"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "Set\u0020the\u0020name.",
-            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setName"
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetAbbr\u0028\u0029",
+            "name": "setAbbr",
+            "summary": "Set\u0020the\u0020abbreviation.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_setAbbr"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetVersion\u0028\u0029",
             "name": "getVersion",
@@ -8531,10 +8551,10 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020content\u0020of\u0020the\u0020subdecision\u0020in\u0020a\u0020specified\u0020language.",
             "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getTranslatedContent"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "Name\u0020of\u0020the\u0020organ.",
-            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_name"
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024abbr",
+            "name": "abbr",
+            "summary": "Abbreviation\u0020of\u0020the\u0020organ.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#property_abbr"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024organType",
             "name": "organType",
@@ -10040,6 +10060,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/Report-Migrations-Version20241124183712.html#method_down"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250608122118",
+            "name": "Version20250608122118",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Report-Migrations-Version20250608122118.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250608122118\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250608122118.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250608122118\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250608122118.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250608122118\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250608122118.html#method_down"
         },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
@@ -12171,15 +12211,15 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020organ\u0020type",
             "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setOrganType"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "Get\u0020the\u0020name.",
-            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getName"
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetAbbr\u0028\u0029",
+            "name": "getAbbr",
+            "summary": "Get\u0020the\u0020abbreviation.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getAbbr"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "Set\u0020the\u0020name.",
-            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setName"
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetAbbr\u0028\u0029",
+            "name": "setAbbr",
+            "summary": "Set\u0020the\u0020abbreviation.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setAbbr"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetVersion\u0028\u0029",
             "name": "getVersion",
@@ -12221,10 +12261,10 @@ Search.appendIndex(
             "summary": "Set\u0020if\u0020changes\u0020were\u0020made.",
             "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_setChanges"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "Name\u0020of\u0020the\u0020organ.",
-            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_name"
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024abbr",
+            "name": "abbr",
+            "summary": "Abbreviation\u0020of\u0020the\u0020organ.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#property_abbr"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003A\u0024organType",
             "name": "organType",
