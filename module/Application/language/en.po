@@ -561,7 +561,7 @@ msgid ""
 "De stemcommissie van de %MEETING_NUMBER%e ALV met afkorting %ORGAN_ABBR% "
 "wordt opgericht."
 msgstr ""
-"The voting committee of the %MEETING_NUMBER%e GMM with abbreviation "
+"The Voting Committee of the %MEETING_NUMBER%e GMM with abbreviation "
 "%ORGAN_ABBR% is established."
 
 msgid "Decision"
