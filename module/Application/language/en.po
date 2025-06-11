@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 20:25+0200\n"
+"POT-Creation-Date: 2025-06-11 20:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -1282,9 +1282,6 @@ msgstr "Return to registration form"
 msgid "RvA"
 msgstr "Advisory Board"
 
-msgid "SC"
-msgstr "VC"
-
 msgid ""
 "Sadly, during the month of July we are not able to verify your enrollment at "
 "TU/e. Therefore, it is not possible to register for GEWIS at this time. <br/"
@@ -1360,6 +1357,9 @@ msgstr "Statement"
 
 msgid "Status"
 msgstr "Status"
+
+msgid "Stemcommissie"
+msgstr "Voting Committee"
 
 msgid "Stored Queries"
 msgstr "Stored Queries"

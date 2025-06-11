@@ -42,7 +42,7 @@ enum OrganTypes: string
             self::KCC => $translator->translate('KCC', locale: $language?->getLangParam()),
             self::AVW => $translator->translate('ALV-Werkgroep', locale: $language?->getLangParam()),
             self::RvA => $translator->translate('RvA', locale: $language?->getLangParam()),
-            self::SC => $translator->translate('SC', locale: $language?->getLangParam()),
+            self::SC => $translator->translate('Stemcommissie', locale: $language?->getLangParam()),
         };
 
         return $translator->translate($function, locale: $language?->getLangParam());
