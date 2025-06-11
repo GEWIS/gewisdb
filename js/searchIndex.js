@@ -391,6 +391,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Model-Enums-OrganTypes.html#enumcase_RvA"
         },                {
+            "fqsen": "\\Application\\Model\\Enums\\OrganTypes\u003A\u003ASC",
+            "name": "SC",
+            "summary": "",
+            "url": "classes/Application-Model-Enums-OrganTypes.html#enumcase_SC"
+        },                {
             "fqsen": "\\Application\\Model\\Enums\\PostalRegions",
             "name": "PostalRegions",
             "summary": "Enum\u0020for\u0020the\u0020different\u0020many\u0020postal\u0020regions\u0020around\u0020the\u0020world.\u0020Based\u0020on\u0020data\u0020from\u0020PostNL\u0020and\u0020Wikipedia.\u0020Note\u003A\u0020not\u0020all\nof\u0020these\u0020regions\u0020use\u0020ZIP\u0020codes\u0020as\u0020part\u0020of\u0020their\u0020address\u0020format.",
