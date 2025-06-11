@@ -967,6 +967,7 @@ class Member
     /**
      * @return array{
      *     members: int,
+     *     graduates: int,
      *     expired: int,
      *     prospectives: array{
      *       total: int,
@@ -979,7 +980,8 @@ class Member
     {
         return [
             'members' => $this->getMemberMapper()->countMembers(),
-            'expired' => $this->getMemberMapper()->countMembers(true),
+            'graduates' => $this->getMemberMapper()->countGraduates(),
+            'expired' => $this->getMemberMapper()->countMembers(true, true),
             'prospectives' => [
                 'total' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
                 'paid' => count($this->getProspectiveMemberMapper()->search('', 'paid')),
