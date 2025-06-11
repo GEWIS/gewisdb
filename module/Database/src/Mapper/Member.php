@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Mapper;
 
 use Application\Model\Enums\AddressTypes;
+use Application\Model\Enums\MembershipTypes;
 use Database\Model\Address as AddressModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Annulment as AnnulmentModel;
@@ -313,22 +314,47 @@ class Member
     }
 
     /**
-     * Count the members who still have an active membership/graduate status, this means that are not deleted and their
-     * `expiration` is later than now.
+     * Count the members who still have an active membership (and graduate status if `includeGraduates`), this means
+     * that are not deleted and their `expiration` is later than now.
      *
-     * If `isExpired`, this only counts expired members/graduates.
+     * If `isExpired`, this only counts expired members (and graduate status if `includeGraduates`).
      */
-    public function countMembers(bool $isExpired = false): int
-    {
+    public function countMembers(
+        bool $includeGraduates = false,
+        bool $isExpired = false,
+    ): int {
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->select('COUNT(m.lidnr)')
             ->where('m.deleted = False');
+
+        if (!$includeGraduates) {
+            $qb->andWhere('m.type != :graduate')
+                ->setParameter('graduate', MembershipTypes::Graduate);
+        }
 
         if ($isExpired) {
             $qb->andWhere('m.expiration < CURRENT_TIMESTAMP()');
         } else {
             $qb->andWhere('m.expiration >= CURRENT_TIMESTAMP()');
         }
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countGraduates(bool $isExpired = false): int
+    {
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->select('COUNT(m.lidnr)')
+            ->where('m.deleted = False')
+            ->andWhere('m.type = :graduate');
+
+        if ($isExpired) {
+            $qb->andWhere('m.expiration < CURRENT_TIMESTAMP()');
+        } else {
+            $qb->andWhere('m.expiration >= CURRENT_TIMESTAMP()');
+        }
+
+        $qb->setParameter('graduate', MembershipTypes::Graduate);
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }

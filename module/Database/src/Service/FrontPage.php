@@ -21,6 +21,7 @@ class FrontPage
     /**
      * @return array{
      *   members: int,
+     *   graduates: int,
      *   expired: int,
      *   prospectives: array{
      *     total: int,

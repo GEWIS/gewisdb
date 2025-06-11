@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-672-ga51a3e67-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-678-gb8efd24c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-04 21:05+0200\n"
+"POT-Creation-Date: 2025-06-11 18:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -677,10 +677,10 @@ msgstr ""
 
 #, php-format
 msgid ""
-"GEWIS currently has <a href=\"%s\">%d members</a> (+%d expired) and <a "
-"href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. <a "
-"href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform a "
-"query</a>."
+"GEWIS currently has <a href=\"%s\">%d members and %d graduates</a> (+%d "
+"expired) and <a href=\"%s\">%d prospective members (%d paid, %d unpaid)</a>. "
+"<a href=\"%s\">Click here</a> to create a meeting or <a href=\"%s\">perform "
+"a query</a>."
 msgstr ""
 
 msgid "GMM (General Members Meeting)"
