@@ -20,10 +20,10 @@ class OrganRegulation extends SubDecision
     use FormattableDateTrait;
 
     /**
-     * Name of the organ.
+     * Abbreviation of the organ.
      */
     #[Column(type: 'string')]
-    protected string $name;
+    protected string $abbr;
 
     /**
      * Type of the organ.
@@ -78,19 +78,19 @@ class OrganRegulation extends SubDecision
     }
 
     /**
-     * Get the name.
+     * Get the abbreviation.
      */
-    public function getName(): string
+    public function getAbbr(): string
     {
-        return $this->name;
+        return $this->abbr;
     }
 
     /**
-     * Set the name.
+     * Set the abbreviation.
      */
-    public function setName(string $name): void
+    public function setAbbr(string $abbr): void
     {
-        $this->name = $name;
+        $this->abbr = $abbr;
     }
 
     /**
@@ -183,7 +183,7 @@ class OrganRegulation extends SubDecision
         }
 
         $replacements = [
-            '%NAME%' => $this->getName(),
+            '%NAME%' => $this->getAbbr(),
             '%AUTHOR%' => null === $this->getMember()
                 ? $translator->translate('onbekend', locale: $language->getLangParam())
                 : $this->getMember()->getFullName(),
