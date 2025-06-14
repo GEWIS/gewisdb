@@ -243,7 +243,7 @@ class Meeting
                 $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
 
-            $reportSubDecision->setAbbr($subdecision->getAbbr());
+            $reportSubDecision->setName($subdecision->getName());
             $reportSubDecision->setVersion($subdecision->getVersion());
             $reportSubDecision->setDate($subdecision->getDate());
             $reportSubDecision->setApproval($subdecision->getApproval());
