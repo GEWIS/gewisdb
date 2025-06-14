@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.1
 info:
   title: GEWISDB API
   description: The GEWIS member database has a few available endpoints
@@ -79,7 +79,8 @@ paths:
             Whether to include organ memberships in the response. By default,
             organs are not included due to rather long computation time.
           schema:
-            type: boolean
+            type:
+            - "boolean"
             default: false
       responses:
         '200':
@@ -103,8 +104,10 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
-            example: 8000
+            type:
+            - "integer"
+            examples:
+              - 8000
       responses:
         '200':
           $ref: '#/components/responses/member_single'
@@ -134,7 +137,8 @@ paths:
             fraternity, they also get returned (including possibly their
             inactive organ memberships).
           schema:
-            type: boolean
+            type:
+            - "boolean"
             default: false
       responses:
         '200':
@@ -169,7 +173,8 @@ paths:
 components:
   schemas:
     health:
-      type: object
+      type:
+        - "object"
       required:
         - status
         - healthy
@@ -178,9 +183,11 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatusEnum'
         healthy:
-          type: boolean
+          type:
+            - "boolean"
         sync_paused:
-          type: boolean
+          type:
+            - "boolean"
           default: false
           description: >-
             Attribute to indicate that data is currently being modified and that
@@ -192,7 +199,8 @@ components:
         depend on the permissions of the API token. If the client holds the
         `OrgansMembershipR` or `MemberProperty*` permissions, a (combination of)
         MemberExtended object(s), else MemberSimple
-      type: object
+      type:
+        - "object"
       required:
         - lidnr
         - full_name
@@ -206,118 +214,167 @@ components:
         - expiration
       properties:
         lidnr:
-          type: integer
+          type:
+            - "integer"
           format: int32
-          example: 8000
+          examples:
+            - 8000
           minimum: 0
+          exclusiveMinimum: true
         full_name:
-          type: string
-          example: Timo de Teststudent
+          type:
+            - "string"
+          examples:
+            - Timo de Teststudent
         initials:
-          type: string
-          example: T.
+          type:
+            - "string"
+          examples:
+            - T.
         given_name:
-          type: string
-          example: Timo
+          type:
+            - "string"
+          examples:
+            - Timo
         middle_name:
-          type: string
-          example: de
+          type:
+            - "string"
+          examples:
+            - de
         family_name:
-          type: string
-          example: Teststudent
+          type:
+            - "string"
+          examples:
+            - Teststudent
         generation:
-          type: integer
-          example: 2022
+          type:
+            - "integer"
+          examples:
+            - 2023
         hidden:
-          type: boolean
-          example: false
+          type:
+            - "boolean"
+          examples:
+            - false
         deleted:
-          type: boolean
-          example: false
+          type:
+            - "boolean"
+          examples:
+            - false
           description: Always false unless the API principal has MembersDeleted permission
         expiration:
-          type: string
+          type:
+            - "string"
           format: date
           description: 'Date in the Y-m-d\TH:i:sP format'
-          example: '2023-07-01T00:00:00+02:00'
+          examples:
+            - '2023-07-01T00:00:00+02:00'
         email:
-          type: string
+          type:
+            - "string"
+            - "null"
           format: email
-          nullable: true
-          example: example@gewis.nl
+          examples:
+            - example@gewis.nl
         keyholder:
-          type: boolean
+          type:
+            - "boolean"
         organs:
-          type: array
-          nullable: true
+          type:
+            - "array"
+            - "null"
           items:
             $ref: '#/components/schemas/OrganMembership'
         membership_type:
-          type: string
+          type:
+            - "string"
+            - "null"
           enum:
             - ordinary
             - external
             - graduate
             - honorary
         birthdate:
-          type: string
+          type:
+            - "string"
+            - "null"
           format: date
           description: 'Date in the Y-m-d\TH:i:sP format'
-          example: '2023-07-01T00:00:00+02:00'
+          examples:
+            - '2023-07-01T00:00:00+02:00'
         is_16_plus:
-          type: boolean
+          type:
+            - "boolean"
           description: Whether the member is at least 16 years old
         is_18_plus:
-          type: boolean
+          type:
+            - "boolean"
           description: Whether the member is at least 18 years old
         is_21_plus:
-          type: boolean
+          type:
+            - "boolean"
           description: Whether the member is at least 21 years old
     OrganMembership:
-      type: object
+      type:
+        - "object"
       properties:
         organ:
           $ref: '#/components/schemas/Organ'
         function:
-          type: string
-          example: Lid
+          type:
+            - "string"
+          examples:
+            - Lid
         installDate:
-          type: string
+          type:
+            - "string"
           format: date
           description: 'Date in the Y-m-d\TH:i:sP format'
-          example: '0001-01-01T00:00:00+00:00'
+          examples:
+            - '0001-01-01T00:00:00+00:00'
         dischargeDate:
-          type: string
+          type:
+            - "string"
+            - "null"
           format: date
           description: 'Date in the Y-m-d\TH:i:sP format'
-          example: null
-          nullable: true
+          examples:
+            - null
         current:
-          type: boolean
+          type:
+            - "boolean"
     Organ:
-      type: object
+      type:
+        - "object"
       properties:
         id:
-          type: integer
-          example: 1
+          type:
+            - "integer"
+          examples:
+            - 1
         abbreviation:
-          type: string
-          example: Testorgaan
+          type:
+            - "string"
+          examples:
+            - Testorgaan
     ResponseObject:
       oneOf:
         - $ref: '#/components/schemas/ResponseSuccess'
         - $ref: '#/components/schemas/ResponseError'
     ResponseStatusEnum:
-      type: string
+      type:
+        - "string"
       title: ResponseStatusEnum
       enum:
         - success
         - error
         - forbidden
         - notfound
-      example: success
+      examples:
+        - success
     ResponseSuccess:
-      type: object
+      type:
+        - "object"
       title: ResponseSuccess
       description: Model that is returned in case of success
       required:
@@ -326,9 +383,11 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatusEnum'
         data:
-          type: object
+          type:
+            - "object"
     ResponseError:
-      type: object
+      type:
+        - "object"
       title: ResponseError
       description: Model that is returned in case of an error
       required:
@@ -337,14 +396,19 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatusEnum'
         error:
-          type: object
+          type:
+            - "object"
           properties:
             type:
-              type: string
-              example: error-exception
+              type:
+                - "string"
+              examples:
+                - error-exception
             exception:
-              type: string
-              example: An example exception was thrown
+              type:
+                - "string"
+              examples:
+                - An example exception was thrown
   responses:
     health:
       description: Successful
@@ -357,11 +421,14 @@ components:
       content:
         application/json:
           schema:
-            type: object
+            type:
+              - "object"
             properties:
               status:
-                type: string
-                example: success
+                type:
+                  - "string"
+                examples:
+                  - success
               data:
                 $ref: '#/components/schemas/Member'
     member_list:
@@ -371,50 +438,52 @@ components:
           schema:
             allOf:
               - $ref: '#/components/schemas/ResponseSuccess'
-              - type: object
+              - type:
+                  - object
                 properties:
                   data:
-                    type: array
+                    type:
+                      - "array"
                     items:
                       $ref: '#/components/schemas/Member'
-          example:
-            status: success
-            data:
-              - lidnr: 8000
-                full_name: Timo de Teststudent
-                initials: T.
-                given_name: Timo
-                middle_name: de
-                family_name: Teststudent
-                generation: 2022
-                hidden: false
-                deleted: false
-                expiration: '2023-07-01T00:00:00+02:00'
-              - lidnr: 8000
-                full_name: Timo de Teststudent
-                initials: T.
-                given_name: Timo
-                middle_name: de
-                family_name: Teststudent
-                generation: 2022
-                hidden: false
-                deleted: false
-                expiration: '2023-07-01T00:00:00+02:00'
-                email: timo@gewis.nl
-                keyholder: true
-                organs:
-                  - organ:
-                      id: 1
-                      abbreviation: Testorgaan
-                    function: Lid
-                    installDate: '0001-01-01T00:00:00+02:00'
-                    dischargeDate: null
-                    current: true
-                membership_type: ordinary
-                birthdate: '2023-07-01T00:00:00+02:00'
-                is_16_plus: false
-                is_18_plus: false
-                is_21_plus: false
+          examples:
+            - status: success
+              data:
+                - lidnr: 8000
+                  full_name: Timo de Teststudent
+                  initials: T.
+                  given_name: Timo
+                  middle_name: de
+                  family_name: Teststudent
+                  generation: 2022
+                  hidden: false
+                  deleted: false
+                  expiration: '2023-07-01T00:00:00+02:00'
+                - lidnr: 8000
+                  full_name: Timo de Teststudent
+                  initials: T.
+                  given_name: Timo
+                  middle_name: de
+                  family_name: Teststudent
+                  generation: 2022
+                  hidden: false
+                  deleted: false
+                  expiration: '2023-07-01T00:00:00+02:00'
+                  email: timo@gewis.nl
+                  keyholder: true
+                  organs:
+                    - organ:
+                        id: 1
+                        abbreviation: Testorgaan
+                      function: Lid
+                      installDate: '0001-01-01T00:00:00+02:00'
+                      dischargeDate: null
+                      current: true
+                  membership_type: ordinary
+                  birthdate: '2023-07-01T00:00:00+02:00'
+                  is_16_plus: false
+                  is_18_plus: false
+                  is_21_plus: false
     server_error:
       description: >-
         There was an error in the server. Most likely, this is a permanent
@@ -423,11 +492,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseError'
-          example:
-            status: error
-            error:
-              type: error-exception
-              exception: An example exception was thrown
+          examples:
+            - status: error
+              error:
+                type: error-exception
+                exception: An example exception was thrown
     not_found_route:
       description: >-
         This route does not exist (which is different from not finding a
@@ -436,22 +505,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseError'
-          example:
-            status: notfound
-            error:
-              type: error-router-no-match
-              exception: null
+          examples:
+            - status: notfound
+              error:
+                type: error-router-no-match
+                exception: null
     no_permission:
       description: The token that was used does not have the required permissions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseError'
-          example:
-            status: forbidden
-            error:
-              type: User\\Model\\Exception\\NotAllowed
-              exception: Permission `...` is needed but is not currently held.
+          examples:
+            - status: forbidden
+              error:
+                type: User\\Model\\Exception\\NotAllowed
+                exception: Permission `...` is needed but is not currently held.
   securitySchemes:
     api_auth:
       type: http
