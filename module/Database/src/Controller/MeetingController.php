@@ -7,6 +7,7 @@ namespace Database\Controller;
 use Application\Model\Enums\MeetingTypes;
 use Database\Form\AbstractDecision as AbstractDecisionForm;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
+use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Meeting as MeetingService;
@@ -15,7 +16,9 @@ use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use UnexpectedValueException;
 
+use function array_key_exists;
 use function array_map;
 use function array_merge;
 
@@ -166,59 +169,43 @@ class MeetingController extends AbstractActionController
             return $this->redirect()->toRoute('meeting');
         }
 
-        /** If we are entering a decision, we pause sync for a while */
-        $this->apiService->pauseSync(15);
-
-        return match ($this->params()->fromRoute('form')) {
-            'budget' => new ViewModel(
-                $this->meetingService->budgetDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'organ_regulation' => new ViewModel(
-                $this->meetingService->regulationDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'foundation' => new ViewModel(
-                $this->meetingService->foundationDecision(
-                    array_merge(
-                        $this->getRequest()->getPost()->toArray(),
-                        [
-                            'name' => 'AUTOMATICALLY GENERATED',
-                            'abbr' => 'AUTOMATICALLY GENERATED',
-                        ],
-                    ),
+        $decisionOrForm = match ($this->params()->fromRoute('form')) {
+            'budget' => $this->meetingService->budgetDecision($this->getRequest()->getPost()->toArray()),
+            'organ_regulation' => $this->meetingService->regulationDecision($this->getRequest()->getPost()->toArray()),
+            'foundation' => $this->meetingService->foundationDecision(
+                array_merge(
+                    $this->getRequest()->getPost()->toArray(),
+                    [
+                        'name' => 'AUTOMATICALLY GENERATED',
+                        'abbr' => 'AUTOMATICALLY GENERATED',
+                    ],
                 ),
             ),
-            'abolish' => new ViewModel(
-                $this->meetingService->abolishDecision($this->getRequest()->getPost()->toArray()),
+            'abolish' => $this->meetingService->abolishDecision($this->getRequest()->getPost()->toArray()),
+            'install' => $this->meetingService->installDecision($this->getRequest()->getPost()->toArray()),
+            'annulment' => $this->meetingService->annulDecision($this->getRequest()->getPost()->toArray()),
+            'key_grant' => $this->meetingService->keyGrantDecision($this->getRequest()->getPost()->toArray()),
+            'key_withdraw' => $this->meetingService->keyWithdrawDecision($this->getRequest()->getPost()->toArray()),
+            'board_install' => $this->meetingService->boardInstallDecision($this->getRequest()->getPost()->toArray()),
+            'board_release' => $this->meetingService->boardReleaseDecision($this->getRequest()->getPost()->toArray()),
+            'board_discharge' => $this->meetingService->boardDischargeDecision(
+                $this->getRequest()->getPost()->toArray(),
             ),
-            'install' => new ViewModel(
-                $this->meetingService->installDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'annulment' => new ViewModel(
-                $this->meetingService->annulDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'key_grant' => new ViewModel(
-                $this->meetingService->keyGrantDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'key_withdraw' => new ViewModel(
-                $this->meetingService->keyWithdrawDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'board_install' => new ViewModel(
-                $this->meetingService->boardInstallDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'board_release' => new ViewModel(
-                $this->meetingService->boardReleaseDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'board_discharge' => new ViewModel(
-                $this->meetingService->boardDischargeDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'other' => new ViewModel(
-                $this->meetingService->otherDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            'minutes' => new ViewModel(
-                $this->meetingService->minutesDecision($this->getRequest()->getPost()->toArray()),
-            ),
-            default => $this->redirect()->toRoute('meeting'),
+            'other' => $this->meetingService->otherDecision($this->getRequest()->getPost()->toArray()),
+            'minutes' => $this->meetingService->minutesDecision($this->getRequest()->getPost()->toArray()),
+            default => new UnexpectedValueException('Unknown decision type'),
         };
+
+        if ($decisionOrForm instanceof UnexpectedValueException) {
+            return $this->redirect()->toRoute('meeting');
+        }
+
+        if (array_key_exists('decision', $decisionOrForm) && $decisionOrForm['decision'] instanceof DecisionModel) {
+            /** If we are entering a decision, we pause sync for a while */
+            $this->apiService->pauseSync(15);
+        }
+
+        return new ViewMOdel($decisionOrForm);
     }
 
     /**
