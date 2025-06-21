@@ -28,7 +28,7 @@ services:
         ports:
             - "8025:8025"
     mailman-core:
-        image: maxking/mailman-core:0.4
+        image: maxking/mailman-core:0.5
         container_name: mailman-core
         hostname: mailmanc
         volumes:
@@ -45,7 +45,7 @@ services:
         networks:
             - gewisdb_network
     mailman-web:
-        image: maxking/mailman-web:0.4
+        image: maxking/mailman-web:0.5
         container_name: mailman-web
         hostname: mailmanw
         depends_on:

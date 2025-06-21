@@ -79,6 +79,11 @@
 			"onAutoForward": "openBrowserOnce",
 			"protocol": "http"
 		},
+		"8021": {
+			"label": "Mailman web interface",
+			"onAutoForward": "silent",
+			"protocol": "http"
+		},
 		"8025": {
 			"label": "mailhog",
 			"onAutoForward": "silent",

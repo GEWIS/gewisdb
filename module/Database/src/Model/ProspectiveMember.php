@@ -144,7 +144,10 @@ class ProspectiveMember
      *
      * @var string[] $lists
      */
-    #[Column(type: 'simple_array')]
+    #[Column(
+        type: 'simple_array',
+        nullable: true,
+    )]
     protected array $lists = [];
 
     /**
