@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparemailman
 
 help:
 		@echo "Makefile commands:"
@@ -35,6 +35,7 @@ runprodtest: buildprod
 rundev: builddev
 		@docker compose up -d --remove-orphans
 		@make replenish
+		@make preparemailman
 		@docker compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
 
 migrate: replenish
@@ -64,6 +65,8 @@ migration-down: replenish migration-list
 seed: replenish
 		@docker compose exec -T web ./web application:fixtures:load
 		@docker compose exec web ./web report:generate:full
+		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null); pkill -HUP uwsgi'
+		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
 
 exec:
 		docker compose exec -it web $(cmd)
@@ -226,3 +229,7 @@ buildnginx:
 
 buildpgadmin:
 		@docker compose build pgadmin
+
+preparemailman:
+		@docker compose cp ./docker/mailman/settings_local.py mailman-web:/opt/mailman-web/settings_local.py
+		@docker compose exec mailman-web bash -c "pkill -HUP uwsgi"

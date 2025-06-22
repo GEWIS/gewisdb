@@ -39,4 +39,4 @@ phpcs.xml
 *.mo
 
 # Local mailman data for development
-mailman/
+/mailman/
