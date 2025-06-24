@@ -9,16 +9,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
- * Mailing List model.
+ * Mailing List model for liss on the db side.
  */
 #[Entity]
 class MailingList
 {
     /**
-     * Mailman-identifier / name.
+     * Name of the mailing list
      */
     #[Id]
     #[Column(type: 'string')]
@@ -51,13 +53,17 @@ class MailingList
     protected bool $defaultSub;
 
     /**
-     * The identifier of the mailing list in Mailman.
+     * The corresponding mailman mailing list
      */
-    #[Column(
-        type: 'string',
-        unique: true,
+    #[OneToOne(
+        targetEntity: MailmanMailingList::class,
+        inversedBy: 'mailingList',
     )]
-    protected string $mailmanId;
+    #[JoinColumn(
+        name: 'mailmanId',
+        referencedColumnName: 'id',
+    )]
+    protected ?MailmanMailingList $mailmanList;
 
     /**
      * Mailing list members.
@@ -124,7 +130,7 @@ class MailingList
     }
 
     /**
-     * Get if it should be on the form.
+     * Get if it should be on the join form.
      */
     public function getOnForm(): bool
     {
@@ -132,7 +138,7 @@ class MailingList
     }
 
     /**
-     * Set if it should be on the form.
+     * Set if it should be on the join form.
      */
     public function setOnForm(bool $onForm): void
     {
@@ -156,19 +162,19 @@ class MailingList
     }
 
     /**
-     * Get the identifier of the mailing list in Mailman.
+     * Get the matching mailman list, or null if none
      */
-    public function getMailmanId(): string
+    public function getMailmanList(): ?MailmanMailingList
     {
-        return $this->mailmanId;
+        return $this->mailmanList;
     }
 
     /**
-     * Set the identifier of the mailing list in Mailman.
+     * Set the corresponding mailman list
      */
-    public function setMailmanId(string $mailmanId): void
+    public function setMailmanList(MailmanMailingList $mailmanList): void
     {
-        $this->mailmanId = $mailmanId;
+        $this->mailmanList = $mailmanList;
     }
 
     /**
@@ -188,7 +194,7 @@ class MailingList
      *     en_description: string,
      *     defaultSub: bool,
      *     onForm: bool,
-     *     mailmanId: string,
+     *     mailmanList: string,
      * }
      */
     public function toArray(): array
@@ -199,7 +205,7 @@ class MailingList
             'en_description' => $this->getEnDescription(),
             'defaultSub' => $this->getDefaultSub(),
             'onForm' => $this->getOnForm(),
-            'mailmanId' => $this->getMailmanId(),
+            'mailmanList' => $this->getMailmanList()->getMailmanId(),
         ];
     }
 }

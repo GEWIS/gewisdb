@@ -142,13 +142,13 @@ class ProspectiveMember
     /**
      * Memberships of mailing lists.
      *
-     * @var string[] $lists
+     * @var ?string[] $lists
      */
     #[Column(
         type: 'simple_array',
         nullable: true,
     )]
-    protected array $lists = [];
+    protected ?array $lists = [];
 
     /**
      * The Checkout Sessions for this prospective member.
@@ -486,6 +486,10 @@ class ProspectiveMember
      */
     public function getLists(): array
     {
+        if (null === $this->lists) {
+            return [];
+        }
+
         return $this->lists;
     }
 

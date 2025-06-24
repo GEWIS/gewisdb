@@ -26,7 +26,6 @@ return [
     'DoctrineORMModule',
     'Laminas\Cache\Storage\Adapter\Filesystem',
     'Laminas\Cache\Storage\Adapter\Memory',
-    'Laminas\Cache\Storage\Adapter\Memcached',
     'Application',
     'Database',
     'Checker',

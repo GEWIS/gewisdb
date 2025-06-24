@@ -7,15 +7,16 @@ namespace Database\Service;
 use Application\Model\Enums\ConfigNamespaces;
 use Application\Service\Config as ConfigService;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
+use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Model\MailingListMember as MailingListMemberModel;
+use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use DateTime;
-use Laminas\Cache\Storage\Adapter\AbstractAdapter;
 use Laminas\Http\Client;
 use Laminas\Http\Client\Adapter\Curl;
 use Laminas\Http\Request;
 use RuntimeException;
 
-use function array_column;
+use function array_map;
 use function json_decode;
 use function json_last_error_msg;
 use function json_validate;
@@ -26,7 +27,7 @@ class Mailman
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
-        private readonly AbstractAdapter $mailmanCache,
+        private readonly MailmanMailingListMapper $mailmanMailingListMapper,
         private readonly MailingListMemberMapper $mailingListMemberMapper,
         private readonly ConfigService $configService,
         private readonly array $mailmanConfig,
@@ -54,6 +55,10 @@ class Mailman
         // Data encoding is automatically set to `application/x-www-form-urlencoded` for "POST"-like requests.
         switch ($method) {
             case Request::METHOD_GET:
+                if (null === $data) {
+                    $data = [];
+                }
+
                 $client->setParameterGet($data);
                 break;
             case Request::METHOD_POST:
@@ -145,9 +150,12 @@ class Mailman
     }
 
     /**
-     * @return string[]
+     * @return array<array-key,array{
+     *     display_name: string,
+     *     list_id: string,
+     * }>
      */
-    private function getAllListIdsFromMailman(): array
+    private function getAllListsFromMailman(): array
     {
         $lists = $this->performMailmanRequest('lists');
 
@@ -155,36 +163,65 @@ class Mailman
             isset($lists['total_size'])
             && 0 !== $lists['total_size']
         ) {
-            return array_column($lists['entries'], 'list_id');
+            return array_map(
+                static fn ($list) => [
+                    'list_id' => $list['list_id'],
+                    'display_name' => $list['display_name'],
+                ],
+                $lists['entries'],
+            );
         }
 
         return [];
     }
 
-    public function cacheMailingLists(): void
+    /**
+     * Fetch mailing lists from mailman and import them to the mailmanlist model in GEWISDB
+     */
+    public function fetchMailingLists(): void
     {
-        $this->mailmanCache->setItem(
-            'lists',
-            [
-                'synced' => new DateTime(),
-                'lists' => $this->getAllListIdsFromMailman(),
-            ],
-        );
+        $lists = $this->getAllListsFromMailman();
+
+        foreach ($lists as $list) {
+            $l = $this->mailmanMailingListMapper->find($list['list_id']);
+
+            if (null === $l) {
+                $l = new MailmanMailingListModel();
+            }
+
+            $l->setName($list['display_name']);
+            $l->setMailmanId($list['list_id']);
+            $l->setLastSeen();
+
+            $this->mailmanMailingListMapper->persist($l);
+        }
+    }
+
+    public function getMailingList(string $mailmanId): ?MailmanMailingListModel
+    {
+        return $this->mailmanMailingListMapper->find($mailmanId);
     }
 
     /**
-     * @return array{
-     *     synced: DateTime,
-     *     lists: string[],
-     * }
+     * Returns all recently seen mailing lists
+     *
+     * @return MailmanMailingListModel[]
      */
-    public function getMailingListIds(): array
+    public function getMailingLists(bool $activeOnly = true): array
     {
-        if (!$this->mailmanCache->hasItem('lists')) {
-            $this->cacheMailingLists();
+        if (false === $activeOnly) {
+            return $this->mailmanMailingListMapper->findAll();
         }
 
-        return $this->mailmanCache->getItem('lists');
+        return $this->mailmanMailingListMapper->findActive();
+    }
+
+    /**
+     * Get the last succesfull mailman sync (>= 1 list)
+     */
+    public function getLastFetchTime(): ?DateTime
+    {
+        return $this->mailmanMailingListMapper->getLastFetchTime();
     }
 
     /**
@@ -196,7 +233,7 @@ class Mailman
     private function subscribeMemberToMailingList(MailingListMemberModel $mailingListMember): void
     {
         $member = $mailingListMember->getMember();
-        $listId = $mailingListMember->getMailingList()->getMailmanId();
+        $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
         // Create the data for the request
         $data = [

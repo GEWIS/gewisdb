@@ -17,7 +17,6 @@ WORKDIR /code
 RUN apk add --no-cache --virtual .build-deps \
         curl-dev \
         icu-dev \
-        libmemcached-dev \
         libpq-dev \
         libzip-dev \
         openldap-dev \
@@ -35,9 +34,6 @@ RUN apk add --no-cache --virtual .build-deps \
         pgsql \
         pdo_pgsql \
         zip \
-    && pecl install memcached \
-    && docker-php-ext-enable memcached \
-    && rm -r /tmp/pear \
     && runtimeDeps="$( \
             scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
             | tr ',' '\n' \

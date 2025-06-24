@@ -8,7 +8,9 @@ use Database\Command\DeleteExpiredMembersCommand;
 use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\Factory\DeleteExpiredMembersCommandFactory;
 use Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory;
+use Database\Command\Factory\FetchMailmanListsCommandFactory;
 use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
+use Database\Command\FetchMailmanListsCommand;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Form\Abolish as AbolishForm;
 use Database\Form\Address as AddressForm;
@@ -73,6 +75,7 @@ use Database\Mapper\Factory\AuditFactory as AuditMapperFactory;
 use Database\Mapper\Factory\CheckoutSessionFactory as CheckoutSessionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
 use Database\Mapper\Factory\MailingListMemberFactory as MailingListMemberMapperFactory;
+use Database\Mapper\Factory\MailmanMailingListFactory as MailmanMailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
 use Database\Mapper\Factory\MemberFactory as MemberMapperFactory;
 use Database\Mapper\Factory\MemberUpdateFactory as MemberUpdateMapperFactory;
@@ -81,6 +84,7 @@ use Database\Mapper\Factory\ProspectiveMemberFactory as ProspectiveMemberMapperF
 use Database\Mapper\Factory\SavedQueryFactory as SavedQueryMapperFactory;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
+use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
@@ -114,13 +118,10 @@ use Database\Service\Member as MemberService;
 use Database\Service\Query as QueryService;
 use Database\Service\Stripe as StripeService;
 use Doctrine\Laminas\Hydrator\DoctrineObject;
-use Laminas\Cache\Storage\Adapter\Memcached;
-use Laminas\Cache\Storage\Adapter\MemcachedOptions;
 use Laminas\Http\PhpEnvironment\RemoteAddress;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Psr\Container\ContainerInterface;
-use RuntimeException;
 use stdClass;
 
 use function array_map;
@@ -164,6 +165,7 @@ class Module
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
                 DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
+                FetchMailmanListsCommand::class => FetchMailmanListsCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
@@ -547,6 +549,7 @@ class Module
                 },
                 ActionLinkMapper::class => ActionLinkMapperFactory::class,
                 AuditMapper::class => AuditMapperFactory::class,
+                MailmanMailingListMapper::class => MailmanMailingListMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MailingListMemberMapper::class => MailingListMemberMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,
@@ -561,7 +564,9 @@ class Module
                     $config = $config['email'];
                     $class = '\Laminas\Mail\Transport\\' . $config['transport'];
                     $optionsClass = '\Laminas\Mail\Transport\\' . $config['transport'] . 'Options';
+                    /** @psalm-suppress InvalidStringClass */
                     $transport = new $class();
+                    /** @psalm-suppress InvalidStringClass */
                     $transport->setOptions(new $optionsClass($config['options']));
 
                     return $transport;
@@ -607,19 +612,6 @@ class Module
                         ->setProxyHeader($proxyHeader);
 
                     return $remote->getIpAddress();
-                },
-                'database_cache_mailman' => static function () {
-                    $cache = new Memcached();
-                    // The TTL is 24 hours (60 * 60 * 24), unless manually refreshed.
-                    $options = $cache->getOptions();
-                    if (!($options instanceof MemcachedOptions)) {
-                        throw new RuntimeException('Unable to retrieve and set options for Memcached');
-                    }
-
-                    $options->setTtl(60 * 60 * 24);
-                    $options->setServers(['memcached', '11211']);
-
-                    return $cache;
                 },
             ],
             'shared' => [

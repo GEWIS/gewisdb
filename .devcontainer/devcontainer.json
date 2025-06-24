@@ -55,13 +55,13 @@
 	},
 	"remoteUser": "vscode",
 	"postCreateCommand": {
-		"build": "cp .env.dist .env && make builddev && docker compose build",
+		"build": "cp .env.dist .env",
 		"noXdebug": "sudo rm -f /usr/local/etc/php/conf.d/xdebug.ini"
 	},
 	"postStartCommand": {
-		"runGewisDb": "make rundev && make getvendordir"
+		"runGewisDb": "(make builddev && docker compose build && make rundev && make getvendordir); true"
 	},
-	"waitFor": "postStartCommand",
+	"waitFor": "postCreateCommand",
 	//"postAttachCommand": "",
 	"forwardPorts": [
 		80,

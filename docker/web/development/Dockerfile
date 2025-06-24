@@ -18,7 +18,6 @@ RUN apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \
         curl-dev \
         icu-dev \
-        libmemcached-dev \
         libpq-dev \
         libzip-dev \
         linux-headers \
@@ -42,8 +41,6 @@ RUN apk add --no-cache --virtual .build-deps \
         pdo_pgsql \
         pdo_sqlite \
         zip \
-    && pecl install memcached \
-    && docker-php-ext-enable memcached \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && rm -r /tmp/pear \

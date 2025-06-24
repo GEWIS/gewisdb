@@ -24,6 +24,7 @@ final class Version20250621133119 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_3A8467A97B1AC3ED ON MailingListMember (mailingList)');
         $this->addSql('CREATE INDEX IDX_3A8467A970E4FA78 ON MailingListMember (member)');
         $this->addSql('CREATE UNIQUE INDEX mailinglistmember_unique_idx ON MailingListMember (mailingList, member)');
+        $this->addSql('CREATE TABLE MailmanMailingList (id VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, lastSeen TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE MailingListMember ADD CONSTRAINT FK_3A8467A97B1AC3ED FOREIGN KEY (mailingList) REFERENCES MailingList (name) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE MailingListMember ADD CONSTRAINT FK_3A8467A970E4FA78 FOREIGN KEY (member) REFERENCES Member (lidnr) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE prospective_members_mailinglists DROP CONSTRAINT fk_c86f04985e237e06');
@@ -33,14 +34,16 @@ final class Version20250621133119 extends AbstractMigration
         $this->addSql('DROP TABLE prospective_members_mailinglists');
         $this->addSql('DROP TABLE members_mailinglists');
         $this->addSql('ALTER TABLE configitem ADD valueBool BOOLEAN DEFAULT NULL');
-        $this->addSql('ALTER TABLE mailinglist ADD mailmanId VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE mailinglist ADD mailmanId VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE mailinglist ADD CONSTRAINT FK_FD864C3AFD6980D2 FOREIGN KEY (mailmanId) REFERENCES MailmanMailingList (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_FD864C3AFD6980D2 ON mailinglist (mailmanId)');
-        $this->addSql('ALTER TABLE prospectivemember ADD lists TEXT');
+        $this->addSql('ALTER TABLE prospectivemember ADD lists TEXT DEFAULT NULL');
         $this->addSql('COMMENT ON COLUMN prospectivemember.lists IS \'(DC2Type:simple_array)\'');
     }
 
     public function down(Schema $schema): void
     {
+        $this->addSql('ALTER TABLE MailingList DROP CONSTRAINT FK_FD864C3AFD6980D2');
         $this->addSql('CREATE TABLE prospective_members_mailinglists (lidnr INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(lidnr, name))');
         $this->addSql('CREATE INDEX idx_c86f04985e237e06 ON prospective_members_mailinglists (name)');
         $this->addSql('CREATE INDEX idx_c86f0498d665e01d ON prospective_members_mailinglists (lidnr)');
@@ -54,6 +57,7 @@ final class Version20250621133119 extends AbstractMigration
         $this->addSql('ALTER TABLE MailingListMember DROP CONSTRAINT FK_3A8467A97B1AC3ED');
         $this->addSql('ALTER TABLE MailingListMember DROP CONSTRAINT FK_3A8467A970E4FA78');
         $this->addSql('DROP TABLE MailingListMember');
+        $this->addSql('DROP TABLE MailmanMailingList');
         $this->addSql('ALTER TABLE ConfigItem DROP valueBool');
         $this->addSql('DROP INDEX UNIQ_FD864C3AFD6980D2');
         $this->addSql('ALTER TABLE MailingList DROP mailmanId');

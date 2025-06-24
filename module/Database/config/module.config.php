@@ -6,6 +6,7 @@ namespace Database;
 
 use Database\Command\DeleteExpiredMembersCommand;
 use Database\Command\DeleteExpiredProspectiveMembersCommand;
+use Database\Command\FetchMailmanListsCommand;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Controller\ApiController;
 use Database\Controller\ExportController;
@@ -624,15 +625,6 @@ return [
                                     ],
                                 ],
                             ],
-                            'sync' => [
-                                'type' => Literal::class,
-                                'options' => [
-                                    'route' => '/sync',
-                                    'defaults' => [
-                                        'action' => 'syncLists',
-                                    ],
-                                ],
-                            ],
                         ],
                     ],
                     'default' => [
@@ -785,6 +777,7 @@ return [
     ],
     'laminas-cli' => [
         'commands' => [
+            'database:mailinglist:fetch' => FetchMailmanListsCommand::class,
             'database:members:delete-expired' => DeleteExpiredMembersCommand::class,
             'database:members:generate-keys' => GenerateAuthenticationKeysCommand::class,
             'database:prospective-members:delete-expired' => DeleteExpiredProspectiveMembersCommand::class,
