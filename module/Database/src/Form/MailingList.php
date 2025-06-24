@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Select;
@@ -14,6 +15,8 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
+
+use function sprintf;
 
 class MailingList extends Form implements InputFilterProviderInterface
 {
@@ -63,7 +66,7 @@ class MailingList extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'mailmanId',
+            'name' => 'mailmanList',
             'type' => Select::class,
             'options' => [
                 'label' => $this->translator->translate('Mailman Mailing List'),
@@ -82,17 +85,21 @@ class MailingList extends Form implements InputFilterProviderInterface
     }
 
     /**
-     * @param string[] $mailmanIds
+     * @param MailmanMailingListModel[] $mailmanLists
      */
-    public function setMailmanIds(array $mailmanIds): void
+    public function setMailmanLists(array $mailmanLists): void
     {
         $options = [];
 
-        foreach ($mailmanIds as $mailmanId) {
-            $options[$mailmanId] = $mailmanId;
+        foreach ($mailmanLists as $mailmanList) {
+            $options[$mailmanList->getMailmanId()] = sprintf(
+                '%s (%s)',
+                $mailmanList->getName(),
+                $mailmanList->getMailmanId(),
+            );
         }
 
-        $this->get('mailmanId')->setValueOptions($options);
+        $this->get('mailmanList')->setValueOptions($options);
     }
 
     /**

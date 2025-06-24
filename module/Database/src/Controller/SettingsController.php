@@ -13,6 +13,8 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\View\Model\ViewModel;
 
+use function array_filter;
+
 class SettingsController extends AbstractActionController
 {
     public function __construct(
@@ -48,14 +50,21 @@ class SettingsController extends AbstractActionController
     {
         return new ViewModel([
             'lists' => $this->mailingListService->getAllLists(),
-            'mailman' => $this->mailingListService->getMailmanService()->getMailingListIds(),
+            'mailmanLists' => $this->mailingListService->getMailmanService()->getMailingLists(),
+            'mailmanLastFetch' => $this->mailingListService->getMailmanService()->getLastFetchTime(),
         ]);
     }
 
     public function addListAction(): HttpResponse|ViewModel
     {
         $form = $this->mailingListService->getListForm();
-        $form->setMailmanIds($this->mailingListService->getMailmanService()->getMailingListIds()['lists']);
+
+        // Each mailman list may be used for at most one db list, don't show previously used
+        $lists = array_filter(
+            $this->mailingListService->getMailmanService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged(),
+        );
+        $form->setMailmanLists($lists);
 
         /** @var Request $request */
         $request = $this->getRequest();
@@ -88,7 +97,14 @@ class SettingsController extends AbstractActionController
         }
 
         $form = $this->mailingListService->getListForm();
-        $form->setMailmanIds($this->mailingListService->getMailmanService()->getMailingListIds()['lists']);
+
+        // Provide mailman lists to the creation form, ideally filter out previously used lists
+        // except for if it used for this list (saving with the same value is allowed)
+        $lists = array_filter(
+            $this->mailingListService->getMailmanService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged() || $list->getMailingList()->getName() === $listName,
+        );
+        $form->setMailmanLists($lists);
 
         /** @var Request $request */
         $request = $this->getRequest();
@@ -134,15 +150,5 @@ class SettingsController extends AbstractActionController
             'form' => $this->mailingListService->getDeleteListForm(),
             'name' => $name,
         ]);
-    }
-
-    /**
-     * Sync known mailing list ids from Mailman
-     */
-    public function syncListsAction(): HttpResponse
-    {
-        $this->mailingListService->getMailmanService()->cacheMailingLists();
-
-        return $this->redirect()->toRoute('settings/lists');
     }
 }

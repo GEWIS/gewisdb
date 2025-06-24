@@ -1,16 +1,17 @@
-# ┌───────────── minute (0 - 59)
-# │ ┌───────────── hour (0 - 23)
-# │ │ ┌───────────── day of month (1 - 31)
-# │ │ │ ┌───────────── month (1 - 12)
-# │ │ │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday;
-# │ │ │ │ │                                       7 is also Sunday on some systems)
-# │ │ │ │ │
-# │ │ │ │ │
+# ┌─────────────────── minute (0 - 59)
+# │     ┌─────────────── hour (0 - 23)
+# │     │   ┌───────────── day of month (1 - 31)
+# │     │   │ ┌───────────── month (1 - 12)
+# │     │   │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday;
+# │     │   │ │ │                                       7 is also Sunday on some systems)
+# │     │   │ │ │
+# │     │   │ │ │
 # * * * * *  command to execute
 # Don't remove the empty line at the end of this file. It is required to run the cron job
-0 1 * * * { . /code/config/bash.env && /usr/local/bin/php /code/web report:generate:full; } > /code/data/logs/cron-report-partial.log 2>&1
-0 0 * 6 * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:tue; } > /code/data/logs/cron-check-tue.log 2>&1
-0 0 1 7 * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:expiration; } > /code/data/logs/cron-check-expiration.log 2>&1
-0 0 1 7 * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:type; } > /code/data/logs/cron-check-type.log 2>&1
-*/30 * * * * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:renewal:graduate; } > /code/data/logs/cron-check-renewal.log 2>&1
-0 2 * * * { . /code/config/bash.env && /usr/local/bin/php /code/web database:prospective-members:delete-expired; } > /code/data/logs/cron-delete-prospective.log 2>&1
+0       1   * * * { . /code/config/bash.env && /usr/local/bin/php /code/web report:generate:full; } > /code/data/logs/cron-report-partial.log 2>&1
+0       0   * 6 * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:tue; } > /code/data/logs/cron-check-tue.log 2>&1
+0       0   1 7 * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:expiration; } > /code/data/logs/cron-check-expiration.log 2>&1
+0       0   1 7 * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:type; } > /code/data/logs/cron-check-type.log 2>&1
+*/30    *   * * * { . /code/config/bash.env && /usr/local/bin/php /code/web check:membership:renewal:graduate; } > /code/data/logs/cron-check-renewal.log 2>&1
+0       2   * * * { . /code/config/bash.env && /usr/local/bin/php /code/web database:prospective-members:delete-expired; } > /code/data/logs/cron-delete-prospective.log 2>&1
+55      *   * * * { . /code/config/bash.env && /usr/local/bin/php /code/web database:mailinglist:fetch; } > /code/data/logs/cron-mailinglist-fetch.log 2>&1

@@ -6,8 +6,8 @@ namespace Database\Service\Factory;
 
 use Application\Service\Config as ConfigService;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
+use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Service\Mailman as MailmanService;
-use Laminas\Cache\Storage\Adapter\AbstractAdapter;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
@@ -21,8 +21,8 @@ class MailmanFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): MailmanService {
-        /** @var AbstractAdapter $mailmanCache */
-        $mailmanCache = $container->get('database_cache_mailman');
+        /** @var MailmanMailingListMapper $mailmanMailingListMapper */
+        $mailmanMailingListMapper = $container->get(MailmanMailingListMapper::class);
         /** @var MailingListMemberMapper $mailingListMemberMapper */
         $mailingListMemberMapper = $container->get(MailingListMemberMapper::class);
         /** @var ConfigService $configService */
@@ -31,7 +31,7 @@ class MailmanFactory implements FactoryInterface
         $mailmanConfig = $container->get('config')['mailman_api'];
 
         return new MailmanService(
-            $mailmanCache,
+            $mailmanMailingListMapper,
             $mailingListMemberMapper,
             $configService,
             $mailmanConfig,
