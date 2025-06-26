@@ -88,7 +88,6 @@ class Misc
         $reportListMembership->setLastSyncOn($mailingListMember->getLastSyncOn());
         $reportListMembership->setLastSyncSuccess($mailingListMember->isLastSyncSuccess());
         $reportListMembership->setToBeDeleted($mailingListMember->isToBeDeleted());
-        $reportListMembership->setMembershipId($mailingListMember->getMembershipId());
 
         $this->emReport->persist($reportListMembership);
     }

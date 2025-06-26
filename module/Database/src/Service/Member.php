@@ -912,7 +912,7 @@ class Member
     }
 
     /**
-     * Subscribe member to mailing lists.
+     * Update mailing list subscriptions of a member
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
@@ -950,7 +950,8 @@ class Member
         $toRemove = array_diff($currentLists, $selectedLists);
         $toAdd = array_diff($selectedLists, $intersection);
 
-        // Unsubscribe member for some mailing lists.
+        // If a member unsubscribes, we set the to be deleted status of that entry
+        // This will later be processed and then this entry will be deleted
         foreach ($toRemove as $list) {
             $list = $this->mailingListMapper->find($list);
 
@@ -962,6 +963,7 @@ class Member
             $membership->setToBeDeleted(true);
         }
 
+        // Mailing lists to add
         foreach ($toAdd as $list) {
             $list = $this->mailingListMapper->find($list);
 
@@ -972,6 +974,7 @@ class Member
             $mailingListMember = new MailingListMemberModel();
             $mailingListMember->setMailingList($list);
             $mailingListMember->setMember($member);
+            $mailingListMember->setEmail($member->getEmail());
             // Force cascade by adding to member.
             $member->addList($mailingListMember);
         }

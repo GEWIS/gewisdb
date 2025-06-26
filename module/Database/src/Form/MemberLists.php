@@ -29,7 +29,7 @@ class MemberLists extends Form implements InputFilterProviderInterface
         $memberLists = [];
         foreach ($member->getMailingListMemberships() as $mailingListMember) {
             $memberLists[$mailingListMember->getMailingList()->getName()] = [
-                'synced' => null !== $mailingListMember->getLastSyncOn() && $mailingListMember->isLastSyncSuccess(),
+                'toBeCreated' => $mailingListMember->isToBeCreated(),
                 'toBeDeleted' => $mailingListMember->isToBeDeleted(),
             ];
         }
@@ -39,34 +39,31 @@ class MemberLists extends Form implements InputFilterProviderInterface
             $listName = $list->getName();
 
             $selected = array_key_exists($listName, $memberLists);
-            $synced = $memberLists[$listName]['synced'];
-            $toBeDeleted = $memberLists[$listName]['toBeDeleted'];
-            $disabled = $selected && ($toBeDeleted || !$synced);
 
             $label = $listName;
             if ($selected) {
+                $toBeCreated = ! $memberLists[$listName]['toBeCreated'];
+                $toBeDeleted = $memberLists[$listName]['toBeDeleted'];
+                $disabled = $selected && ($toBeDeleted || $toBeCreated );
+
                 $label .= ' (';
 
                 if (
-                    $synced
-                    && $toBeDeleted
+                    $toBeDeleted
                 ) {
                     $label .= $this->translator->translate('to be deleted');
                 } elseif (
-                    $synced
+                    !$toBeCreated
                     && !$toBeDeleted
                 ) {
                     $label .= $this->translator->translate('synced');
-                } elseif (
-                    !$synced
-                    && $toBeDeleted
-                ) {
-                    $label .= $this->translator->translate('to be deleted');
                 } else {
-                    $label .= $this->translator->translate('to be synced');
+                    $label .= $this->translator->translate('to be created');
                 }
 
                 $label .= ')';
+            } else {
+                $disabled = false;
             }
 
             $listOptions[] = [
