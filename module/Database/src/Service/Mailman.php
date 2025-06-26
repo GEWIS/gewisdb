@@ -10,6 +10,7 @@ use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\MailmanMailingList as MailmanMailingListModel;
+use DateInterval;
 use DateTime;
 use Laminas\Http\Client;
 use Laminas\Http\Client\Adapter\Curl;
@@ -150,6 +151,30 @@ class Mailman
     }
 
     /**
+     * @return array{
+     *     mailmanLastFetch: ?DateTime,
+     *     mailmanLastFetchOverdue: bool,
+     *     mailmanLastSync: DateTime,
+     *     mailmanChangesPending: array{
+     *       creations: int,
+     *       deletions: int,
+     *     },
+     * }
+     */
+    public function getFrontpageData(): array
+    {
+        return [
+            'mailmanLastFetch' => $this->getLastFetchTime(),
+            'mailmanLastFetchOverdue' => $this->isLastFetchOverdue(),
+            'mailmanLastSync' => new DateTime(), //TODO
+            'mailmanChangesPending' => [
+                'creations' => $this->mailingListMemberMapper->countPendingCreation(),
+                'deletions' => $this->mailingListMemberMapper->countPendingDeletion(),
+            ],
+        ];
+    }
+
+    /**
      * @return array<array-key,array{
      *     display_name: string,
      *     list_id: string,
@@ -224,6 +249,11 @@ class Mailman
         return $this->mailmanMailingListMapper->getLastFetchTime();
     }
 
+    public function isLastFetchOverdue(): bool
+    {
+        return $this->getLastFetchTime()->add(new DateInterval('PT1H5M')) < new DateTime();
+    }
+
     /**
      * Subscribe a member to a mailing list.
      *
@@ -260,7 +290,6 @@ class Mailman
         // Check if the request was successful
         if (isset($response['member_id'])) {
             $mailingListMember->setLastSyncSuccess(true);
-            $mailingListMember->setMembershipId($response['member_id']);
         } else {
             $mailingListMember->setLastSyncSuccess(false);
         }

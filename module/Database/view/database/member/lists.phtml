@@ -38,23 +38,22 @@ $form->setAttribute('class', 'form-horizontal');
 ?>
 <?= $this->form()->openTag($form) ?>
 
-<?php foreach ($lists as $list): ?>
 <div class="form-group">
 <?php
-$element = $form->get('list-' . $list->getName());
-$element->setAttribute('placeholder', $element->getLabel());
+$element = $form->get('lists');
 ?>
+<?php foreach ($element->getValueOptions() as $key => $value): ?>
     <div class="col-sm-12">
         <div class="checkbox">
             <label>
-                <?= $this->formCheckbox($element) ?>
-                <?= $element->getLabel() ?>
+                <input type="checkbox" name="<?= $element->getName() ?>[]" value="<?= $value['value'] ?>" <?= $value['selected'] ? 'selected ' : '' ?> <?= $value['disabled'] ? 'disabled ' : '' ?>>
+                <?= $value['label'] ?>
             </label>
             <?= $this->formElementErrors($element) ?>
         </div>
     </div>
-</div>
 <?php endforeach ?>
+</div>
 
 <div class="form-group">
     <div class="col-sm-12">

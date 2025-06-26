@@ -52,6 +52,40 @@ class MailingListMember
     }
 
     /**
+     * Get the pending number of creations
+     * Intentionally, does not do a findAll
+     */
+    public function countPendingCreation(): int
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select($qb->expr()->count('mlm.member'))
+            ->from(MailingListMemberModel::class, 'mlm')
+            ->where('mlm.toBeCreated = True');
+
+        $query = $qb->getQuery();
+
+        return (int) $query->getSingleScalarResult();
+    }
+
+    /**
+     * Get the pending number of deletions
+     * Intentionally, does not do a findAll
+     */
+    public function countPendingDeletion(): int
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select($qb->expr()->count('mlm.member'))
+            ->from(MailingListMemberModel::class, 'mlm')
+            ->where('mlm.toBeDeleted = True');
+
+        $query = $qb->getQuery();
+
+        return (int) $query->getSingleScalarResult();
+    }
+
+    /**
      * @return MailingListMemberModel[]
      */
     public function findAll(): array

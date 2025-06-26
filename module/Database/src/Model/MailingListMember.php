@@ -61,11 +61,16 @@ class MailingListMember
     )]
     private Member $member;
 
+    /**
+     * In case of email address changes, we need to know the email address that is on the list
+     *
+     * For the old email address, we have an entry toBeDeleted=True, for the new address, we have a toBeCreated=True
+     */
     #[Column(
         type: 'string',
-        nullable: true,
+        nullable: false,
     )]
-    private ?string $membershipId = null;
+    private string $email;
 
     /**
      * When this association was last synced to/from Mailman.
@@ -84,6 +89,14 @@ class MailingListMember
      */
     #[Column(type: 'boolean')]
     protected bool $lastSyncSuccess = false;
+
+    /**
+     * Whether this entry still needs to be created in Mailman.
+     *
+     * It indicates that a new registration on a mailing list should be performed
+     */
+    #[Column(type: 'boolean')]
+    protected bool $toBeCreated = true;
 
     /**
      * Whether this entry still needs to be removed from Mailman.
@@ -130,19 +143,19 @@ class MailingListMember
     }
 
     /**
-     * Get the Mailman `member_id` for this subscription.
+     * Get the email address of this subscription
      */
-    public function getMembershipId(): ?string
+    public function getEmail(): string
     {
-        return $this->membershipId;
+        return $this->email;
     }
 
     /**
-     * Set the Mailman `member_id` for this subscription.
+     * Set the email address of this subscription
      */
-    public function setMembershipId(string $membershipId): void
+    public function setEmail(string $email): void
     {
-        $this->membershipId = $membershipId;
+        $this->email = $email;
     }
 
     /**
@@ -175,6 +188,14 @@ class MailingListMember
     public function setLastSyncSuccess(bool $lastSyncSuccess): void
     {
         $this->lastSyncSuccess = $lastSyncSuccess;
+    }
+
+    /**
+     * Get whether the entry must still be created in Mailman.
+     */
+    public function isToBeCreated(): bool
+    {
+        return $this->toBeCreated;
     }
 
     /**
