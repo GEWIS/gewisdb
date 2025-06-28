@@ -251,7 +251,12 @@ class Mailman
 
     public function isLastFetchOverdue(): bool
     {
-        return $this->getLastFetchTime()->add(new DateInterval('PT1H5M')) < new DateTime();
+        $lastFetch = $this->getLastFetchTime();
+        if (null === $lastFetch) {
+            return true;
+        }
+
+        return $lastFetch->add(new DateInterval('PT1H5M')) < new DateTime();
     }
 
     /**

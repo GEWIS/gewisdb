@@ -98,7 +98,12 @@ class DatabaseUpdateListener
                 break;
 
             case $entity instanceof DatabaseMailingListMemberModel:
-                $this->miscService->generateListMembership($entity);
+                if ($entity->isToBeDeleted()) {
+                    $this->miscService->deleteListMembership($entity);
+                } else {
+                    $this->miscService->generateListMembership($entity);
+                }
+
                 break;
 
             default:

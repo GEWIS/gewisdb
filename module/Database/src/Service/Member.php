@@ -913,25 +913,13 @@ class Member
 
     /**
      * Update mailing list subscriptions of a member
-     *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function subscribeLists(
         MemberModel $member,
-        array $data,
+        MemberListsForm $form,
     ): ?MemberModel {
         // Check if we are performing a sync or not.
         if ($this->mailmanService->isSyncLocked()) {
-            return null;
-        }
-
-        $formData = $this->getListForm($member);
-        $form = $formData['form'];
-
-        $form->setData($data);
-
-        // Validate form.
-        if (!$form->isValid()) {
             return null;
         }
 

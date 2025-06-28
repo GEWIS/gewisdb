@@ -32,13 +32,16 @@ class Misc
             $this->generateList($list);
         }
 
-        foreach ($this->mailingListMemberMapper->findAll() as $listMember) {
+        foreach ($this->mailingListMemberMapper->findAfterSync() as $listMember) {
             $this->generateListMembership($listMember);
         }
 
         $this->emReport->flush();
     }
 
+    /**
+     * Generate a mailing list for usage in reportdb.
+     */
     public function generateList(DatabaseMailingListModel $list): void
     {
         $repo = $this->emReport->getRepository(ReportMailingListModel::class);
@@ -56,6 +59,25 @@ class Misc
         $this->emReport->persist($reportList);
     }
 
+    /**
+     * Delete a mailing list if it exists
+     */
+    public function deleteList(DatabaseMailingListModel $list): void
+    {
+        $repo = $this->emReport->getRepository(ReportMailingListModel::class);
+        /** @var ReportMailingListModel|null $reportList */
+        $reportList = $repo->find($list->getName());
+
+        if (null === $reportList) {
+            return;
+        }
+
+        $this->emReport->remove($reportList);
+    }
+
+    /**
+     * Generate a list membership for usage in reportdb.
+     */
     public function generateListMembership(DatabaseMailingListMemberModel $mailingListMember): void
     {
         $repo = $this->emReport->getRepository(ReportMailingListMemberModel::class);
@@ -63,6 +85,7 @@ class Misc
         $reportListMembership = $repo->find([
             'mailingList' => $mailingListMember->getMailingList()->getName(),
             'member' => $mailingListMember->getMember()->getLidnr(),
+            'email' => $mailingListMember->getEmail(),
         ]);
 
         if (null === $reportListMembership) {
@@ -83,12 +106,31 @@ class Misc
             $reportListMembership = new ReportMailingListMemberModel();
             $reportListMembership->setMailingList($reportList);
             $reportListMembership->setMember($reportMember);
+            $reportListMembership->setEmail($mailingListMember->getEmail());
         }
 
-        $reportListMembership->setLastSyncOn($mailingListMember->getLastSyncOn());
-        $reportListMembership->setLastSyncSuccess($mailingListMember->isLastSyncSuccess());
-        $reportListMembership->setToBeDeleted($mailingListMember->isToBeDeleted());
+        // There is no possibility of updating an entry, all values are a key
 
         $this->emReport->persist($reportListMembership);
+    }
+
+    /**
+     * Delete list membership if it exists (both when deleting a row and when setting toBeDeleted=true)
+     */
+    public function deleteListMembership(DatabaseMailingListMemberModel $mailingListMember): void
+    {
+        $repo = $this->emReport->getRepository(ReportMailingListMemberModel::class);
+        /** @var ReportMailingListMemberModel|null $reportListMembership */
+        $reportListMembership = $repo->find([
+            'mailingList' => $mailingListMember->getMailingList()->getName(),
+            'member' => $mailingListMember->getMember()->getLidnr(),
+            'email' => $mailingListMember->getEmail(),
+        ]);
+
+        if (null === $reportListMembership) {
+            return;
+        }
+
+        $this->emReport->remove($reportListMembership);
     }
 }

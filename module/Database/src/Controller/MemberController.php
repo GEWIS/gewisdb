@@ -437,21 +437,28 @@ class MemberController extends AbstractActionController
             return $viewModel;
         }
 
-        if ($this->getRequest()->isPost()) {
-            $member = $this->memberService->subscribeLists(
-                $member,
-                $this->getRequest()->getPost()->toArray(),
-            );
+        $formData = $this->memberService->getListForm($member);
 
-            if (null !== $member) {
-                $this->flashMessenger()->addSuccessMessage(
-                    sprintf(
-                        $this->translator->translate('Change(s) of %s have been saved!'),
-                        $this->translator->translate('mailing list subscriptions'),
-                    ),
+        if ($this->getRequest()->isPost()) {
+            $formData['form']->setData($this->getRequest()->getPost()->toArray());
+
+            // Validate form.
+            if ($formData['form']->isValid()) {
+                $updatedMember = $this->memberService->subscribeLists(
+                    $member,
+                    $formData['form'],
                 );
 
-                return $this->redirect()->toRoute('member/show', ['id' => $member->getLidnr()]);
+                if (null !== $updatedMember) {
+                    $this->flashMessenger()->addSuccessMessage(
+                        sprintf(
+                            $this->translator->translate('Change(s) of %s have been saved!'),
+                            $this->translator->translate('mailing list subscriptions'),
+                        ),
+                    );
+
+                    return $this->redirect()->toRoute('member/show', ['id' => $updatedMember->getLidnr()]);
+                }
             }
 
             $this->flashMessenger()->addErrorMessage(
@@ -462,7 +469,7 @@ class MemberController extends AbstractActionController
             );
         }
 
-        return new ViewModel($this->memberService->getListForm($member));
+        return new ViewModel($formData);
     }
 
     /**

@@ -86,6 +86,26 @@ class MailingListMember
     }
 
     /**
+     * Get the mailing list members that should exist after the next sync
+     * Value of toBeCreated does not matter, toBeDeleted should be excluded
+     *
+     * @return MailingListMemberModel[]
+     */
+    public function findAfterSync(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('mlm')
+            ->from(MailingListMemberModel::class, 'mlm')
+            ->where('mlm.toBeDeleted != True');
+
+        /** @var MailingListMemberModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    /**
      * @return MailingListMemberModel[]
      */
     public function findAll(): array

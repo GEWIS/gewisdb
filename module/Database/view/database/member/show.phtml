@@ -206,7 +206,7 @@ use Laminas\View\Renderer\PhpRenderer;
 <h3><?= $this->translate('Mailing List Subscriptions') ?></h3>
 <ul>
 <?php foreach ($member->getMailingListMemberships() as $list): ?>
-    <li><?= $list->getName() ?></li>
+    <li><?= $list->getMailingList()->getName() ?></li>
 <?php endforeach ?>
 </ul>
 <a href="<?= $this->url('member/show/edit/lists', array(
