@@ -89,9 +89,14 @@ class MemberLists extends Form implements InputFilterProviderInterface
 
     /**
      * Specification of input filter.
+     * Should use Explode validator by default, so we only need to change required state
      */
     public function getInputFilterSpecification(): array
     {
-        return [];
+        return [
+            'lists' => [
+                'required' => false,
+            ],
+        ];
     }
 }

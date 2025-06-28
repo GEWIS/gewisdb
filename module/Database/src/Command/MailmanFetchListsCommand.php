@@ -11,10 +11,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'database:mailinglist:fetch',
+    name: 'database:mailman:fetch',
     description: 'Fetch mailing lists from mailman and store store references in GEWISDB.',
 )]
-class FetchMailmanListsCommand extends Command
+class MailmanFetchListsCommand extends Command
 {
     public function __construct(private readonly MailmanService $mailmanService)
     {
