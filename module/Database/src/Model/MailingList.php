@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 
 /**
- * Mailing List model for liss on the db side.
+ * Mailing List model for lists on the db side.
  */
 #[Entity]
 class MailingList

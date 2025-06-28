@@ -42,23 +42,18 @@ class MemberLists extends Form implements InputFilterProviderInterface
 
             $label = $listName;
             if ($selected) {
-                $toBeCreated = ! $memberLists[$listName]['toBeCreated'];
+                $toBeCreated = $memberLists[$listName]['toBeCreated'];
                 $toBeDeleted = $memberLists[$listName]['toBeDeleted'];
                 $disabled = $selected && ($toBeDeleted || $toBeCreated );
 
                 $label .= ' (';
 
-                if (
-                    $toBeDeleted
-                ) {
+                if ($toBeDeleted) {
                     $label .= $this->translator->translate('to be deleted');
-                } elseif (
-                    !$toBeCreated
-                    && !$toBeDeleted
-                ) {
-                    $label .= $this->translator->translate('synced');
-                } else {
+                } elseif ($toBeCreated) {
                     $label .= $this->translator->translate('to be created');
+                } else {
+                    $label .= $this->translator->translate('synced');
                 }
 
                 $label .= ')';

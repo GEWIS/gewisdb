@@ -66,6 +66,7 @@ class MailingListMember
      *
      * For the old email address, we have an entry toBeDeleted=True, for the new address, we have a toBeCreated=True
      */
+    #[Id]
     #[Column(
         type: 'string',
         nullable: false,
@@ -196,6 +197,14 @@ class MailingListMember
     public function isToBeCreated(): bool
     {
         return $this->toBeCreated;
+    }
+
+    /**
+     * Set whether the entry must still be created in Mailman.
+     */
+    public function setToBeCreated(bool $toBeCreated): void
+    {
+        $this->toBeCreated = $toBeCreated;
     }
 
     /**

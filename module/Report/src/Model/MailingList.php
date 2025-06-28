@@ -12,13 +12,15 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
 
 /**
- * Mailing List model.
+ * Mailing List model (partial)
+ *
+ * ReportDB does not know about mailman and doesn't need to know.
  */
 #[Entity]
 class MailingList
 {
     /**
-     * Mailman-identifier / name.
+     * Name of the mailing list
      */
     #[Id]
     #[Column(type: 'string')]

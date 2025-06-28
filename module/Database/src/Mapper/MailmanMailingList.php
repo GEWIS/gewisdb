@@ -48,7 +48,7 @@ class MailmanMailingList
     }
 
     /**
-     * Find active mailing lists (i.e. seen in the last 1 day).
+     * Find active mailing lists (i.e. seen in the last fetch or the hour before)
      *
      * @return array<array-key, MailmanMailingListModel>
      */
@@ -62,7 +62,7 @@ class MailmanMailingList
             ->from(MailmanMailingListModel::class, 'l')
             ->where('l.lastSeen >= :lastSeen');
 
-        $qb->setParameter('lastSeen', $lastFetch?->sub(new DateInterval('P1D')));
+        $qb->setParameter('lastSeen', $lastFetch?->sub(new DateInterval('PT1H5M')));
 
         return $qb->getQuery()->getResult();
     }

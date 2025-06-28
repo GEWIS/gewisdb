@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Report\Model;
 
-use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
@@ -13,10 +12,12 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * Mailing List Member model.
+ * Mailing List Member model (partial)
  *
  * To allow having additional properties in the many-to-many association between {@see MailingList}s and {@see Member}s
  * we use this class as a connector.
+ *
+ * Report assumes a full sync has happened (e.g. toBeDeleted entires don't exist)
  */
 #[Entity]
 #[UniqueConstraint(
@@ -53,37 +54,15 @@ class MailingListMember
     )]
     private Member $member;
 
+    /**
+     * Email address on the list
+     */
+    #[Id]
     #[Column(
         type: 'string',
-        nullable: true,
+        nullable: false,
     )]
-    private ?string $membershipId = null;
-
-    /**
-     * When this association was last synced to/from Mailman.
-     */
-    #[Column(
-        type: 'datetime',
-        nullable: true,
-    )]
-    protected ?DateTime $lastSyncOn = null;
-
-    /**
-     * Whether the last attempted sync was successful.
-     *
-     * At creation of the association, no sync has taken place (i.e. {@see MailingListMember::$lastSyncOn} is `null`) so
-     * we default to `false`.
-     */
-    #[Column(type: 'boolean')]
-    protected bool $lastSyncSuccess = false;
-
-    /**
-     * Whether this entry still needs to be removed from Mailman.
-     *
-     * It indicates that there is no longer an association between the mailing list and the member.
-     */
-    #[Column(type: 'boolean')]
-    protected bool $toBeDeleted = false;
+    private string $email;
 
     public function __construct()
     {
@@ -122,66 +101,18 @@ class MailingListMember
     }
 
     /**
-     * Get the Mailman `member_id` for this subscription.
+     * Get the email address of this subscription
      */
-    public function getMembershipId(): ?string
+    public function getEmail(): string
     {
-        return $this->membershipId;
+        return $this->email;
     }
 
     /**
-     * Set the Mailman `member_id` for this subscription.
+     * Set the email address of this subscription
      */
-    public function setMembershipId(string $membershipId): void
+    public function setEmail(string $email): void
     {
-        $this->membershipId = $membershipId;
-    }
-
-    /**
-     * Get when the last sync happened.
-     */
-    public function getLastSyncOn(): ?DateTime
-    {
-        return $this->lastSyncOn;
-    }
-
-    /**
-     * Set when the last sync happened.
-     */
-    public function setLastSyncOn(DateTime $lastSyncOn): void
-    {
-        $this->lastSyncOn = $lastSyncOn;
-    }
-
-    /**
-     * Get whether the last sync was successful.
-     */
-    public function isLastSyncSuccess(): bool
-    {
-        return $this->lastSyncSuccess;
-    }
-
-    /**
-     * Set whether the last sync was successful.
-     */
-    public function setLastSyncSuccess(bool $lastSyncSuccess): void
-    {
-        $this->lastSyncSuccess = $lastSyncSuccess;
-    }
-
-    /**
-     * Get whether the entry must still be removed from Mailman.
-     */
-    public function isToBeDeleted(): bool
-    {
-        return $this->toBeDeleted;
-    }
-
-    /**
-     * Set whether the entry must still be removed from Mailman.
-     */
-    public function setToBeDeleted(bool $toBeDeleted): void
-    {
-        $this->toBeDeleted = $toBeDeleted;
+        $this->email = $email;
     }
 }
