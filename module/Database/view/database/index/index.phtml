@@ -125,12 +125,12 @@ use Laminas\View\Renderer\PhpRenderer;
                 <p>
                 <?=
                     sprintf(
-                        $this->translate('Last fetch of available mailman lists was at %s.') .
+                        $this->translate('Last fetch of available mailman lists was %s.') .
                         ' ' .
                         $this->translate(
                             'Possibly, the mailing list server is down or fetch mechanism is malfunctioning.',
                         ),
-                        $mailmanLastFetch->format(DateTimeInterface::ATOM),
+                        $mailmanLastFetch?->format(DateTimeInterface::ATOM) ?: $this->translate('never'),
                     );
                 ?>
                 </p>

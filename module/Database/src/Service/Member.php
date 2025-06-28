@@ -926,7 +926,7 @@ class Member
         $data = $form->getData();
 
         /** @var string[] $selectedLists */
-        $selectedLists = $data['lists'];
+        $selectedLists = $data['lists'] ?: [];
         $currentLists = $member->getMailingListMemberships()->map(
             static function (MailingListMemberModel $subscription) {
                 return $subscription->getMailingList()->getName();

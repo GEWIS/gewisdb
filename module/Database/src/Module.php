@@ -8,10 +8,12 @@ use Database\Command\DeleteExpiredMembersCommand;
 use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\Factory\DeleteExpiredMembersCommandFactory;
 use Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory;
-use Database\Command\Factory\FetchMailmanListsCommandFactory;
 use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
-use Database\Command\FetchMailmanListsCommand;
+use Database\Command\Factory\MailmanFetchListsCommandFactory;
+use Database\Command\Factory\MailmanSyncMembershipCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
+use Database\Command\MailmanFetchListsCommand;
+use Database\Command\MailmanSyncMembershipCommand;
 use Database\Form\Abolish as AbolishForm;
 use Database\Form\Address as AddressForm;
 use Database\Form\Annulment as AnnulmentForm;
@@ -165,7 +167,8 @@ class Module
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
                 DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
-                FetchMailmanListsCommand::class => FetchMailmanListsCommandFactory::class,
+                MailmanFetchListsCommand::class => MailmanFetchListsCommandFactory::class,
+                MailmanSyncMembershipCommand::class => MailmanSyncMembershipCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
