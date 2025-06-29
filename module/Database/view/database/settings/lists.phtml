@@ -26,7 +26,7 @@ use Laminas\View\Renderer\PhpRenderer;
         <?= sprintf(
             '%s: %s',
             $this->translate('Last fetch of mailman lists'),
-            $mailmanLastFetch->format('Y-m-d  H:i:s')
+            $mailmanLastFetch?->format('Y-m-d H:i:s') ?: $this->translate('never')
         ) ?>
     </div>
     <div class="col-md-12">
@@ -44,7 +44,8 @@ use Laminas\View\Renderer\PhpRenderer;
             <tbody>
             <?php foreach ($lists as $list): ?>
                 <tr>
-                    <td><?= $this->escapeHtml($list->getName()) ?> (<?= $this->escapeHtml($list->getMailmanList()->getMailmanId())?>)</td>
+                    <td><?= $this->escapeHtml($list->getName()) ?>
+                        (<?= $this->escapeHtml($list->getMailmanList()?->getMailmanId() ?: $this->translate('n/a'))?>)</td>
                     <td><?= $this->escapeHtml($list->getNlDescription()) ?></td>
                     <td><?= $this->escapeHtml($list->getEnDescription()) ?></td>
                     <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>

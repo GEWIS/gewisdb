@@ -36,6 +36,18 @@ class Member
      */
     public function hasMemberWith(string $email): bool
     {
+        $ret = $this->findByEmail($email);
+
+        return null !== $ret && count($ret) > 0;
+    }
+
+    /**
+     * Find by email
+     *
+     * @return MemberModel[]
+     */
+    public function findByEmail(string $email): array
+    {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
@@ -45,9 +57,7 @@ class Member
 
         $qb->setParameter(':email', $email);
 
-        $ret = $qb->getQuery()->getResult();
-
-        return null !== $ret && count($ret) > 0;
+        return $qb->getQuery()->getResult();
     }
 
     /**

@@ -6,8 +6,11 @@ namespace Database\Service;
 
 use Application\Model\Enums\ConfigNamespaces;
 use Application\Service\Config as ConfigService;
+use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
+use Database\Mapper\Member as MemberMapper;
+use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use DateInterval;
@@ -15,11 +18,13 @@ use DateTime;
 use Laminas\Http\Client;
 use Laminas\Http\Client\Adapter\Curl;
 use Laminas\Http\Request;
+use LogicException;
 use RuntimeException;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_map;
+use function count;
 use function json_decode;
 use function json_last_error_msg;
 use function json_validate;
@@ -47,8 +52,10 @@ class Mailman
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function __construct(
+        private readonly MailingListMapper $mailingListMapper,
         private readonly MailmanMailingListMapper $mailmanMailingListMapper,
         private readonly MailingListMemberMapper $mailingListMemberMapper,
+        private readonly MemberMapper $memberMapper,
         private readonly ConfigService $configService,
         private readonly array $mailmanConfig,
     ) {
@@ -162,18 +169,15 @@ class Mailman
 
     /**
      * This functions syncs the mailing list membership of all mailing lists
+     * Even if they don't have an associated mailman mailing list, to keep the code throughout the application the same
      */
     public function syncMembership(
         OutputInterface $output = new NullOutput(),
         bool $dryRun = false,
     ): void {
-        $lists = $this->mailmanMailingListMapper->findActive();
+        $lists = $this->mailingListMapper->findAll();
 
         foreach ($lists as $list) {
-            if (null === $list->getMailingList()) {
-                continue;
-            }
-
             $this->syncMembershipSingle($list, $output, $dryRun);
         }
     }
@@ -182,21 +186,22 @@ class Mailman
      * This function syncs the membership of a mailing list
      */
     private function syncMembershipSingle(
-        MailmanMailingListModel $mmList,
+        MailingListModel $dbList,
         OutputInterface $output,
         bool $dryRun,
     ): void {
-        $dbList = $mmList->getMailingList();
         $dbMemberships = $dbList->getMailingListMemberships();
 
         $output->writeln(
             sprintf(
                 '-> Syncing membership changes for <info>%s</info> (%s)',
                 $dbList->getName(),
-                $mmList->getMailmanId(),
+                $dbList->hasMailmanList() ? $dbList->getMailmanList()->getMailmanId() : 'local',
             ),
             OutputInterface::VERBOSITY_VERBOSE,
         );
+
+        $verifyTime = (new DateTime())->sub(new DateInterval('P1D'));
 
         // Phase 1: Sync all pending changes from DB side
         foreach ($dbMemberships as $mailingListMember) {
@@ -213,11 +218,31 @@ class Mailman
                     dryRun: $dryRun,
                     sendWelcomeEmail: true,
                 );
+            } elseif ($dbList->hasMailmanList() && $mailingListMember->getLastSyncOn() < $verifyTime) {
+                $this->verifyMemberOnMailingList(
+                    mailingListMember: $mailingListMember,
+                    output: $output,
+                    dryRun: $dryRun,
+                );
             }
         }
 
-        // Phase 2: Voor alle to be created, perform creation
-        // TODO
+        // The rest only applies to mailing lists that have a mailman list
+        if (!$dbList->hasMailmanList()) {
+            return;
+        }
+
+        // Phase 2: once per 24 hours
+        if ($dbList->getMailmanList()->getLastCheck() > $verifyTime) {
+            return;
+        }
+
+        // Sync all unknowns from mailman
+        $this->fullCheckMailmanList(
+            mailingList: $dbList,
+            output: $output,
+            dryRun: $dryRun,
+        );
     }
 
     public function isMailmanHealthy(): bool
@@ -352,6 +377,15 @@ class Mailman
         bool $dryRun,
         bool $sendWelcomeEmail,
     ): void {
+        // If there is no associated mailman list, assume processed
+        if (!$mailingListMember->getMailingList()->hasMailmanList()) {
+            $mailingListMember->setLastSyncSuccess(true);
+            $mailingListMember->setToBeCreated(false);
+            $this->mailingListMemberMapper->persist($mailingListMember);
+
+            return;
+        }
+
         $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
@@ -384,7 +418,7 @@ class Mailman
         }
 
         // Send the request to the Mailman API
-        $mailingListMember->setLastSyncOn(new DateTime());
+        $mailingListMember->setLastSyncOn();
         $response = $this->performMailmanRequest(
             uri: 'members',
             method: Request::METHOD_POST,
@@ -408,6 +442,13 @@ class Mailman
         OutputInterface $output,
         bool $dryRun,
     ): void {
+        // If there is no associated mailman list, assume processed
+        if (!$mailingListMember->getMailingList()->hasMailmanList()) {
+            $this->mailingListMemberMapper->remove($mailingListMember);
+
+            return;
+        }
+
         $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
@@ -453,7 +494,133 @@ class Mailman
         $this->mailingListMemberMapper->remove($mailingListMember);
     }
 
-    public function massUnsubscribeMembersFromMailingList(): void
-    {
+    /**
+     * This function verifies that a member is still on a given mailing list
+     * and if not, removes the mailinglistMemberModel
+     */
+    private function verifyMemberOnMailingList(
+        MailingListMemberModel $mailingListMember,
+        OutputInterface $output,
+        bool $dryRun,
+    ): void {
+        // If there is no associated mailman list, assume this is right
+        if (!$mailingListMember->getMailingList()->hasMailmanList()) {
+            throw new LogicException('Cannot verify mailing list subscription for non-mailman list');
+        }
+
+        $member = $mailingListMember->getMember();
+        $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
+
+        $data = [
+            'list_id' => $listId,
+            'subscriber' => $member->getEmail(),
+            'role' => self::MM_ROLE_MEMBER,
+        ];
+
+        $response = $this->performMailmanRequest('members/find', data: $data);
+
+        // There should be at most one entry
+        if (1 < $response['total_size']) {
+            throw new RuntimeException(
+                sprintf(
+                    'Found more than one member %s with role %s on list %s',
+                    $data['subscriber'],
+                    $data['role'],
+                    $data['list_id'],
+                ),
+            );
+        }
+
+        if (1 === $response['total_size']) {
+            return;
+        }
+
+        $output->writeln(
+            sprintf(
+                '--> %s has disappeared from %s, removing db entry',
+                $data['subscriber'],
+                $data['list_id'],
+            ),
+            OutputInterface::VERBOSITY_VERY_VERBOSE,
+        );
+
+        if ($dryRun) {
+            return;
+        }
+
+        $this->mailingListMemberMapper->remove($mailingListMember);
+    }
+
+    private function fullCheckMailmanList(
+        MailingListModel $mailingList,
+        OutputInterface $output,
+        bool $dryRun,
+    ): void {
+        $mmList = $mailingList->getMailmanList();
+        $membersDB = $mailingList->getMailingListMemberships();
+        $listId = $mmList->getMailmanId();
+
+        $data = [
+            'list_id' => $listId,
+            'role' => self::MM_ROLE_MEMBER,
+        ];
+
+        $response = $this->performMailmanRequest('members/find', data: $data);
+
+        foreach ($response['entries'] as $entry) {
+            $found = false;
+            foreach ($membersDB as $member) {
+                if ($member->getEmail() !== $entry['email']) {
+                    continue;
+                }
+
+                $found = true;
+            }
+
+            $foundMembers = $this->memberMapper->findByEmail($entry['email']);
+
+            if (!$found && 0 === count($foundMembers)) {
+                $output->writeln(
+                    sprintf(
+                        '--> Removing unknown email %s from %s',
+                        $entry['email'],
+                        $data['list_id'],
+                    ),
+                    OutputInterface::VERBOSITY_VERY_VERBOSE,
+                );
+
+                if (!$dryRun) {
+                    $this->performMailmanRequest(
+                        'members/' . rawurlencode($entry['member_id']),
+                        method: Request::METHOD_DELETE,
+                    );
+                }
+            } elseif (!$found) {
+                $output->writeln(
+                    sprintf(
+                        '--> Found %s on %s, updating database',
+                        $entry['email'],
+                        $data['list_id'],
+                    ),
+                    OutputInterface::VERBOSITY_VERY_VERBOSE,
+                );
+
+                if (!$dryRun) {
+                    $mailingListMember = new MailingListMemberModel();
+                    $mailingListMember->setMailingList($mailingList);
+                    $mailingListMember->setMember($foundMembers[0]);
+                    $mailingListMember->setEmail($entry['email']);
+                    $mailingListMember->setToBeCreated(false);
+                    $this->mailingListMemberMapper->persist($mailingListMember);
+                }
+            }
+        }
+
+        if ($dryRun) {
+            return;
+        }
+
+        $mmList->setLastCheck();
+        $this->mailmanMailingListMapper->persist($mmList);
     }
 }

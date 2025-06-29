@@ -125,6 +125,12 @@ class MailingListMember
     public function setMailingList(MailingList $mailingList): void
     {
         $this->mailingList = $mailingList;
+
+        if ($mailingList->hasMailmanList()) {
+            return;
+        }
+
+        $this->setToBeCreated(false);
     }
 
     /**
@@ -137,10 +143,12 @@ class MailingListMember
 
     /**
      * Set the member.
+     * By default, this also sets the email address, but can be overriden with setEmail()
      */
     public function setMember(Member $member): void
     {
         $this->member = $member;
+        $this->setEmail($member->getEmail());
     }
 
     /**
@@ -170,7 +178,7 @@ class MailingListMember
     /**
      * Set when the last sync happened.
      */
-    public function setLastSyncOn(DateTime $lastSyncOn): void
+    public function setLastSyncOn(DateTime $lastSyncOn = new DateTime()): void
     {
         $this->lastSyncOn = $lastSyncOn;
     }

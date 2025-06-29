@@ -6,6 +6,7 @@ namespace Report\Service;
 
 use Database\Mapper\Member as MemberMapper;
 use Database\Model\Address as DatabaseAddressModel;
+use Database\Model\MailingListMember as DatabaseMailingListMemberModel;
 use Database\Model\Member as DatabaseMemberModel;
 use Doctrine\ORM\EntityManager;
 use Laminas\ProgressBar\Adapter\Console;
@@ -13,9 +14,11 @@ use Laminas\ProgressBar\ProgressBar;
 use LogicException;
 use Report\Model\Address as ReportAddressModel;
 use Report\Model\MailingList as ReportMailingListModel;
+use Report\Model\MailingListMember as ReportMailingListMemberModel;
 use Report\Model\Member as ReportMemberModel;
 
 use function array_diff;
+use function array_filter;
 use function array_map;
 use function count;
 
@@ -102,9 +105,17 @@ class Member
         $reportLists = array_map(static function ($list) {
             return $list->getMailingList()->getName();
         }, $reportMember->getMailingListMemberships()->toArray());
-        $lists = array_map(static function ($list) {
-            return $list->getMailingList()->getName();
-        }, $member->getMailingListMemberships()->toArray());
+        $lists = array_map(
+            static function ($list) {
+                return $list->getMailingList()->getName();
+            },
+            array_filter(
+                $member->getMailingListMemberships()->toArray(),
+                static function (DatabaseMailingListMemberModel $list) use ($reportMember) {
+                    return !$list->isToBeDeleted() && $list->getEmail() === $reportMember->getEmail();
+                },
+            ),
+        );
 
         foreach (array_diff($lists, $reportLists) as $list) {
             $reportList = $reportListRepo->find($list);
@@ -113,8 +124,11 @@ class Member
                 throw new LogicException('mailing list missing from reportdb');
             }
 
-            // TODO: Add list to report member
-            // $reportMember->addList($reportList);
+            $reportMailingListMember = new ReportMailingListMemberModel();
+            $reportMailingListMember->setMailingList($reportList);
+            $reportMailingListMember->setEmail($reportMember->getEmail());
+
+            $reportMember->addList($reportMailingListMember);
             $this->emReport->persist($reportList);
         }
 
@@ -125,8 +139,13 @@ class Member
                 throw new LogicException('mailing list missing from reportdb');
             }
 
-            // TODO: Remove list
-            $this->emReport->persist($reportList);
+            foreach ($reportMember->getMailingListMemberships() as $repMLM) {
+                if ($repMLM->getMailingList() !== $list) {
+                    continue;
+                }
+
+                $this->emReport->remove($repMLM);
+            }
         }
     }
 

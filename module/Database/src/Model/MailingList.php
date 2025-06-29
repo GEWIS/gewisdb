@@ -170,9 +170,17 @@ class MailingList
     }
 
     /**
+     * Check if this has a mailman mailing list
+     */
+    public function hasMailmanList(): bool
+    {
+        return null !== $this->mailmanList;
+    }
+
+    /**
      * Set the corresponding mailman list
      */
-    public function setMailmanList(MailmanMailingList $mailmanList): void
+    public function setMailmanList(?MailmanMailingList $mailmanList): void
     {
         $this->mailmanList = $mailmanList;
     }
@@ -194,7 +202,7 @@ class MailingList
      *     en_description: string,
      *     defaultSub: bool,
      *     onForm: bool,
-     *     mailmanList: string,
+     *     mailmanList: ?string,
      * }
      */
     public function toArray(): array
@@ -205,7 +213,7 @@ class MailingList
             'en_description' => $this->getEnDescription(),
             'defaultSub' => $this->getDefaultSub(),
             'onForm' => $this->getOnForm(),
-            'mailmanList' => $this->getMailmanList()->getMailmanId(),
+            'mailmanList' => $this->getMailmanList()?->getMailmanId(),
         ];
     }
 }

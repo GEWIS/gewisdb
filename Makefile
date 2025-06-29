@@ -72,7 +72,7 @@ exec:
 		docker compose exec -it web $(cmd)
 
 stop:
-		@docker compose down
+		@docker compose down --remove-orphans
 
 runtest: loadenv
 		@vendor/phpunit/phpunit/phpunit --bootstrap ./bootstrap.php --configuration ./phpunit.xml --stop-on-error --stop-on-failure

@@ -383,7 +383,6 @@ class Member
         // add address
         $member->addAddresses($prospectiveMember->getAddresses());
 
-        // add mailing lists
         foreach ($form->getLists() as $list) {
             if (!$form->get('list-' . $list->getName())->isChecked()) {
                 continue;
@@ -962,7 +961,6 @@ class Member
             $mailingListMember = new MailingListMemberModel();
             $mailingListMember->setMailingList($list);
             $mailingListMember->setMember($member);
-            $mailingListMember->setEmail($member->getEmail());
             // Force cascade by adding to member.
             $member->addList($mailingListMember);
         }
