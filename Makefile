@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparemailman
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparemailman migrate migrate-to migration-down migration-up migration-diff
 
 help:
 		@echo "Makefile commands:"
@@ -41,6 +41,9 @@ migrate: replenish
 		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
 		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
 
+migrate-to:
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
+
 migration-list: replenish
 		@docker compose exec -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_default
 		@docker compose exec -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_report
@@ -52,14 +55,10 @@ migration-diff: replenish
 		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report
 
 migration-up: replenish migration-list
-		@read -p "Enter EM_ALIAS (orm_default or orm_report): " alias; \
-		read -p "Enter the migration version to execute (e.g.,  -- note escaping the backslashes is required): " version; \
-		docker compose exec -it web ./orm migrations:execute --up $$version --object-manager doctrine.entitymanager.$$alias
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --up $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 migration-down: replenish migration-list
-		@read -p "Enter EM_ALIAS (orm_default or orm_report): " alias; \
-		read -p "Enter the migration version to down (e.g.,  -- note escaping the backslashes is required): " version; \
-		docker compose exec -it web ./orm migrations:execute --down $$version --object-manager doctrine.entitymanager.$$alias
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --down $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 seed: replenish
 		@docker compose exec -T web ./web application:fixtures:load
@@ -68,7 +67,6 @@ seed: replenish
 		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null); pkill -HUP uwsgi'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
 		@docker compose exec web ./web database:mailman:fetch
-
 
 exec:
 		docker compose exec -it web $(cmd)
