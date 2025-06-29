@@ -20,7 +20,7 @@ final class Version20250621133118 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('CREATE TABLE MailmanMailingList (id VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, lastSeen TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE MailmanMailingList (id VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, lastSeen TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, lastCheck TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE mailinglist ADD mailmanId VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE mailinglist ADD CONSTRAINT FK_FD864C3AFD6980D2 FOREIGN KEY (mailmanId) REFERENCES MailmanMailingList (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_FD864C3AFD6980D2 ON mailinglist (mailmanId)');

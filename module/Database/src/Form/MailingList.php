@@ -157,6 +157,9 @@ class MailingList extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
+            'mailmanList' => [
+                'required' => false,
+            ],
         ];
     }
 }

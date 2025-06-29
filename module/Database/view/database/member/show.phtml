@@ -100,7 +100,7 @@ use Laminas\View\Renderer\PhpRenderer;
             <th><?= $this->translate('Membership Ends On (Expires On)') ?></th>
             <td>
                 <?= sprintf('%s (%s)',
-                    (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : $this->translate('N/A'),
+                    (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : $this->translate('n/a'),
                     $member->getExpiration()->format('l j F Y')
                 )?>
                 <?php if (MembershipTypes::External === $member->getType() || MembershipTypes::Graduate === $member->getType()): ?>

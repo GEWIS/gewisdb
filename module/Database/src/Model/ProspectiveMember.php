@@ -415,6 +415,7 @@ class ProspectiveMember
      *     tueUsername: ?string,
      *     study: ?string,
      *     birth: string,
+     *     lists: string[],
      *     address: array{
      *         type: AddressTypes,
      *         country: PostalRegions,
@@ -441,6 +442,7 @@ class ProspectiveMember
             'tueUsername' => $this->getTueUsername(),
             'study' => $this->getStudy(),
             'birth' => $this->getBirth()->format('Y-m-d'),
+            'lists' => $this->getLists(),
             'address' => $this->getAddresses()['studentAddress']->toArray(),
             'agreed' => '1',
             'agreedStripe' => '1',

@@ -39,6 +39,15 @@ class MailmanMailingList
     protected DateTime $lastSeen;
 
     /**
+     * When the last full check of this mailing list took place
+     */
+    #[Column(
+        type: 'datetime',
+        nullable: true,
+    )]
+    protected ?DateTime $lastCheck = null;
+
+    /**
      * The corresponding gewisdb mailing list
      * If null, this list is not managed by GEWISDB
      */
@@ -97,6 +106,22 @@ class MailmanMailingList
     public function setLastSeen(DateTime $lastSeen = new DateTime()): void
     {
         $this->lastSeen = $lastSeen;
+    }
+
+    /**
+     * Get the date the list was last fully checked
+     */
+    public function getLastCheck(): ?DateTime
+    {
+        return $this->lastCheck;
+    }
+
+    /**
+     * Set the date the list was last fully checked
+     */
+    public function setLastCheck(DateTime $lastCheck = new DateTime()): void
+    {
+        $this->lastCheck = $lastCheck;
     }
 
     /**
