@@ -1,3 +1,11 @@
+## [v4.2.0](https://github.com/GEIWS/gewisdb/tree/v4.2.0) (2025-06-29)
+
+* Added foundation decision for GMM voting committees
+* Added new Community Development Officer board function
+* Fix body regulation using wrong field for abbreviation
+* Fix member count on homepage
+* Fix only pausing sync if a decision was saved
+
 ## [v4.1.1](https://github.com/GEIWS/gewisdb/tree/v4.1.1) (2025-06-04)
 
 * Fix decision statutory content on export
