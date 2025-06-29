@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 20:51+0200\n"
+"POT-Creation-Date: 2025-06-29 12:03+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -457,6 +457,9 @@ msgstr "Information Officer"
 
 msgid "Commissaris Onderwijs"
 msgstr "Education Officer"
+
+msgid "Commissaris Verenigingsontwikkeling"
+msgstr "Community Development Officer"
 
 msgid "Commissie"
 msgstr "Committee"
