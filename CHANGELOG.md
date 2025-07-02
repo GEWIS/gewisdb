@@ -1,3 +1,8 @@
+## [v4.2.1](https://github.com/GEIWS/gewisdb/tree/v4.2.1) (2025-07-02)
+
+* Fix wrong error message being displayed when deleting annulling decision
+* Fix generation of body regulation subdecision
+
 ## [v4.2.0](https://github.com/GEIWS/gewisdb/tree/v4.2.0) (2025-06-29)
 
 * Added foundation decision for GMM voting committees
