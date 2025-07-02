@@ -353,7 +353,7 @@ class Meeting
     {
         switch (true) {
             case $subDecision instanceof ReportSubDecisionModel\Annulment:
-                throw new Exception('Annulment of annulling decisions not implemented');
+                throw new Exception('Deletion of annulling decisions not implemented');
 
             case $subDecision instanceof ReportSubDecisionModel\Reappointment:
                 $installation = $subDecision->getInstallation();
