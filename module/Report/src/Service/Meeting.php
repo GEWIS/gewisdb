@@ -243,16 +243,18 @@ class Meeting
                 $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
 
-            $reportSubDecision->setName($subdecision->getName());
+            // Specific to the `OrganRegulation`s, set the abbr and type of organ
+            if ($subdecision instanceof DatabaseSubDecisionModel\OrganRegulation) {
+                $reportSubDecision->setAbbr($subdecision->getAbbr());
+                $reportSubDecision->setOrganType($subdecision->getOrganType());
+            } else {
+                $reportSubDecision->setName($subdecision->getName());
+            }
+
             $reportSubDecision->setVersion($subdecision->getVersion());
             $reportSubDecision->setDate($subdecision->getDate());
             $reportSubDecision->setApproval($subdecision->getApproval());
             $reportSubDecision->setChanges($subdecision->getChanges());
-
-            // Specific to the `OrganRegulation`s, set the type of organ
-            if ($subdecision instanceof DatabaseSubDecisionModel\OrganRegulation) {
-                $reportSubDecision->setOrganType($subdecision->getOrganType());
-            }
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Minutes) {
             $ref = $subdecision->getTarget();
             $meeting = $meetingRepo->find([
