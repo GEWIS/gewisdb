@@ -6,6 +6,7 @@ namespace Database\Controller\Factory;
 
 use Checker\Service\Checker as CheckerService;
 use Database\Controller\MemberController;
+use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
@@ -26,6 +27,8 @@ class MemberControllerFactory implements FactoryInterface
         $translator = $container->get(MvcTranslator::class);
         /** @var CheckerService $checkerService */
         $checkerService = $container->get(CheckerService::class);
+        /** @var MailmanService $mailmanService */
+        $mailmanService = $container->get(MailmanService::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
         /** @var StripeService $stripeService */
@@ -36,6 +39,7 @@ class MemberControllerFactory implements FactoryInterface
         return new MemberController(
             $translator,
             $checkerService,
+            $mailmanService,
             $memberService,
             $stripeService,
             $remoteAddress,

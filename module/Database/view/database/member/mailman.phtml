@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Laminas\View\Renderer\PhpRenderer;
+
+/** @var PhpRenderer|HelperTrait $this */
+?>
+<div class="row">
+    <div class="col-md-12">
+        <h1><?= $this->translate('Sync in progress') ?></h1>
+        <p><?= $this->translate('A Mailman sync is currently in progress. It is now not possible to safely update the mailing list administration, please try again in a few minutes.') ?></p>
+    </div>
+</div>

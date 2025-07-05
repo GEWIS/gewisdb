@@ -36,6 +36,18 @@ class Member
      */
     public function hasMemberWith(string $email): bool
     {
+        $ret = $this->findByEmail($email);
+
+        return null !== $ret && count($ret) > 0;
+    }
+
+    /**
+     * Find by email
+     *
+     * @return MemberModel[]
+     */
+    public function findByEmail(string $email): array
+    {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
@@ -45,9 +57,7 @@ class Member
 
         $qb->setParameter(':email', $email);
 
-        $ret = $qb->getQuery()->getResult();
-
-        return null !== $ret && count($ret) > 0;
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -154,7 +164,7 @@ class Member
             ->from(MemberModel::class, 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.installations', 'r')
-            ->leftJoin('m.lists', 'l')
+            ->leftJoin('m.mailingListMemberships', 'l')
             ->andWhere('(r.function = \'Lid\' OR r.function = \'Inactief Lid\' OR r.function IS NULL)');
 
         // discharges
@@ -217,7 +227,7 @@ class Member
         $qb->select('m, l')
             ->from('Database\Model\Member', 'm')
             ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.lists', 'l')
+            ->leftJoin('m.mailingListMemberships', 'l')
             ->orderBy('m.lidnr', 'DESC');
 
         $qb->setParameter(':lidnr', $lidnr);

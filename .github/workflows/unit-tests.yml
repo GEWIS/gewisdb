@@ -25,7 +25,7 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: '8.3'
-                    extensions: calendar, curl, intl, opcache, pdo_sqlite, sqlite3, zip, memcached
+                    extensions: calendar, curl, intl, opcache, pdo_sqlite, sqlite3, zip
 
             -   name: Setup problem matchers for PHPUnit
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"

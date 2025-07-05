@@ -68,7 +68,7 @@ class ProspectiveMemberController extends AbstractActionController
     }
 
     /**
-     * Show action.
+     * Approve or finalize action.
      *
      * Shows prospective member information.
      */

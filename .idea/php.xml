@@ -189,7 +189,6 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache-storage-adapter-filesystem" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache-storage-adapter-memory" />
       <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-cache-storage-adapter-memcached" />
       <path value="$PROJECT_DIR$/vendor/react/promise" />
       <path value="$PROJECT_DIR$/vendor/react/event-loop" />
       <path value="$PROJECT_DIR$/vendor/react/cache" />

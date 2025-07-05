@@ -10,6 +10,7 @@ use DateTime;
 use Report\Mapper\Member as ReportMemberMapper;
 
 use function array_reduce;
+use function is_bool;
 use function is_string;
 use function max;
 
@@ -139,6 +140,10 @@ class Api
         $pausedUntil = $this->configService->getConfig(ConfigNamespaces::DatabaseApi, 'sync_paused');
 
         if (is_string($pausedUntil)) {
+            return null;
+        }
+
+        if (is_bool($pausedUntil)) {
             return null;
         }
 

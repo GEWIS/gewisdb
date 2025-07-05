@@ -38,23 +38,25 @@ $form->setAttribute('class', 'form-horizontal');
 ?>
 <?= $this->form()->openTag($form) ?>
 
-<?php foreach ($lists as $list): ?>
-<div class="form-group">
+<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
 <?php
-$element = $form->get('list-' . $list->getName());
-$element->setAttribute('placeholder', $element->getLabel());
+$element = $form->get('lists');
+
+// formMultiCheckbox($element) outputs all options on a single line
 ?>
+<?php foreach ($element->getValueOptions() as $key => $value): ?>
     <div class="col-sm-12">
         <div class="checkbox">
             <label>
-                <?= $this->formCheckbox($element) ?>
-                <?= $element->getLabel() ?>
+                <input type="checkbox" name="<?= $element->getName() ?>[]" value="<?= $value['value'] ?>" <?= $value['selected'] ? 'checked ' : '' ?> <?= $value['disabled'] ? 'disabled ' : '' ?>>
+                <?= $value['label'] ?>
             </label>
+            <?= $value['disabled'] ? '<input type="hidden" name="' . $element->getName() . '[]" value="' . $value['value'] . '" />' : '' ?>
             <?= $this->formElementErrors($element) ?>
         </div>
     </div>
-</div>
 <?php endforeach ?>
+</div>
 
 <div class="form-group">
     <div class="col-sm-12">

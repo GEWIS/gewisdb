@@ -6,11 +6,13 @@ namespace Database\Form;
 
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\Member as MemberModel;
-use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\MultiCheckbox;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+
+use function array_key_exists;
 
 class MemberLists extends Form implements InputFilterProviderInterface
 {
@@ -24,21 +26,57 @@ class MemberLists extends Form implements InputFilterProviderInterface
     ) {
         parent::__construct();
 
-        foreach ($this->lists as $list) {
-            $this->add([
-                'name' => 'list-' . $list->getName(),
-                'type' => Checkbox::class,
-                'options' => [
-                    'label' => '<strong>' . $list->getName() . '</strong> ' . $list->getDescription(),
-                ],
-            ]);
-            foreach ($member->getLists() as $lst) {
-                if ($lst->getName() === $list->getName()) {
-                    $this->get('list-' . $list->getName())->setChecked(true);
-                    break;
-                }
-            }
+        $memberLists = [];
+        foreach ($member->getMailingListMemberships() as $mailingListMember) {
+            $memberLists[$mailingListMember->getMailingList()->getName()] = [
+                'toBeCreated' => $mailingListMember->isToBeCreated(),
+                'toBeDeleted' => $mailingListMember->isToBeDeleted(),
+            ];
         }
+
+        $listOptions = [];
+        foreach ($this->lists as $list) {
+            $listName = $list->getName();
+
+            $selected = array_key_exists($listName, $memberLists);
+
+            $label = $listName;
+            if ($selected) {
+                $toBeCreated = $memberLists[$listName]['toBeCreated'];
+                $toBeDeleted = $memberLists[$listName]['toBeDeleted'];
+                $disabled = $selected && ($toBeDeleted || $toBeCreated );
+
+                $label .= ' (';
+
+                if ($toBeDeleted) {
+                    $label .= $this->translator->translate('to be deleted');
+                } elseif ($toBeCreated) {
+                    $label .= $this->translator->translate('to be created');
+                } else {
+                    $label .= $this->translator->translate('synced');
+                }
+
+                $label .= ')';
+            } else {
+                $disabled = false;
+            }
+
+            $listOptions[] = [
+                'value' => $listName,
+                'label' => $label,
+                'selected' => $selected,
+                'disabled' => $disabled,
+            ];
+        }
+
+        $this->add([
+            'type' => MultiCheckbox::class,
+            'name' => 'lists',
+            'options' => [
+                'label' => $this->translator->translate('Lists'),
+                'value_options' => $listOptions,
+            ],
+        ]);
 
         $this->add([
             'name' => 'submit',
@@ -51,9 +89,14 @@ class MemberLists extends Form implements InputFilterProviderInterface
 
     /**
      * Specification of input filter.
+     * Should use Explode validator by default, so we only need to change required state
      */
     public function getInputFilterSpecification(): array
     {
-        return [];
+        return [
+            'lists' => [
+                'required' => false,
+            ],
+        ];
     }
 }

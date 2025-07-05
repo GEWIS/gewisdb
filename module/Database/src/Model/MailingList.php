@@ -9,16 +9,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
- * Mailing List model.
+ * Mailing List model for lists on the db side.
  */
 #[Entity]
 class MailingList
 {
     /**
-     * Mailman-identifier / name.
+     * Name of the mailing list
      */
     #[Id]
     #[Column(type: 'string')]
@@ -51,19 +53,32 @@ class MailingList
     protected bool $defaultSub;
 
     /**
+     * The corresponding mailman mailing list
+     */
+    #[OneToOne(
+        targetEntity: MailmanMailingList::class,
+        inversedBy: 'mailingList',
+    )]
+    #[JoinColumn(
+        name: 'mailmanId',
+        referencedColumnName: 'id',
+    )]
+    protected ?MailmanMailingList $mailmanList;
+
+    /**
      * Mailing list members.
      *
-     * @var Collection<array-key, Member>
+     * @var Collection<array-key, MailingListMember>
      */
-    #[ManyToMany(
-        targetEntity: Member::class,
-        mappedBy: 'lists',
+    #[OneToMany(
+        targetEntity: MailingListMember::class,
+        mappedBy: 'mailingList',
     )]
-    protected Collection $members;
+    protected Collection $mailingListMemberships;
 
     public function __construct()
     {
-        $this->members = new ArrayCollection();
+        $this->mailingListMemberships = new ArrayCollection();
     }
 
     /**
@@ -115,23 +130,7 @@ class MailingList
     }
 
     /**
-     * Get the description.
-     */
-    public function getDescription(): string
-    {
-        return $this->getNlDescription();
-    }
-
-    /**
-     * Set the description.
-     */
-    public function setDescription(string $description): void
-    {
-        $this->setNlDescription($description);
-    }
-
-    /**
-     * Get if it should be on the form.
+     * Get if it should be on the join form.
      */
     public function getOnForm(): bool
     {
@@ -139,7 +138,7 @@ class MailingList
     }
 
     /**
-     * Set if it should be on the form.
+     * Set if it should be on the join form.
      */
     public function setOnForm(bool $onForm): void
     {
@@ -163,20 +162,58 @@ class MailingList
     }
 
     /**
-     * Get subscribed members.
-     *
-     * @return Collection<array-key, Member>
+     * Get the matching mailman list, or null if none
      */
-    public function getMembers(): Collection
+    public function getMailmanList(): ?MailmanMailingList
     {
-        return $this->members;
+        return $this->mailmanList;
     }
 
     /**
-     * Add a member.
+     * Check if this has a mailman mailing list
      */
-    public function addMember(Member $member): void
+    public function hasMailmanList(): bool
     {
-        $this->members->add($member);
+        return null !== $this->mailmanList;
+    }
+
+    /**
+     * Set the corresponding mailman list
+     */
+    public function setMailmanList(?MailmanMailingList $mailmanList): void
+    {
+        $this->mailmanList = $mailmanList;
+    }
+
+    /**
+     * Get subscribed members.
+     *
+     * @return Collection<array-key, MailingListMember>
+     */
+    public function getMailingListMemberships(): Collection
+    {
+        return $this->mailingListMemberships;
+    }
+
+    /**
+     * @return array{
+     *     name: string,
+     *     nl_description: string,
+     *     en_description: string,
+     *     defaultSub: bool,
+     *     onForm: bool,
+     *     mailmanList: ?string,
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'nl_description' => $this->getNlDescription(),
+            'en_description' => $this->getEnDescription(),
+            'defaultSub' => $this->getDefaultSub(),
+            'onForm' => $this->getOnForm(),
+            'mailmanList' => $this->getMailmanList()?->getMailmanId(),
+        ];
     }
 }

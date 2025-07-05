@@ -100,7 +100,7 @@ use Laminas\View\Renderer\PhpRenderer;
             <th><?= $this->translate('Membership Ends On (Expires On)') ?></th>
             <td>
                 <?= sprintf('%s (%s)',
-                    (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : $this->translate('N/A'),
+                    (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : $this->translate('n/a'),
                     $member->getExpiration()->format('l j F Y')
                 )?>
                 <?php if (MembershipTypes::External === $member->getType() || MembershipTypes::Graduate === $member->getType()): ?>
@@ -205,8 +205,8 @@ use Laminas\View\Renderer\PhpRenderer;
 <div class="col-md-6">
 <h3><?= $this->translate('Mailing List Subscriptions') ?></h3>
 <ul>
-<?php foreach ($member->getLists() as $list): ?>
-    <li><?= $list->getName() ?></li>
+<?php foreach ($member->getMailingListMemberships() as $list): ?>
+    <li><?= $list->getMailingList()->getName() ?></li>
 <?php endforeach ?>
 </ul>
 <a href="<?= $this->url('member/show/edit/lists', array(

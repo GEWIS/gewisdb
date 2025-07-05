@@ -10,6 +10,7 @@ use Psr\Container\ContainerInterface;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;
+use Report\Service\Misc as MiscService;
 
 class DatabaseDeletionListenerFactory implements FactoryInterface
 {
@@ -25,12 +26,15 @@ class DatabaseDeletionListenerFactory implements FactoryInterface
         $meetingService = $container->get(MeetingService::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
+        /** @var MiscService $miscService */
+        $miscService = $container->get(MiscService::class);
         /** @var EntityManager $emReport */
         $emReport = $container->get('doctrine.entitymanager.orm_report');
 
         return new DatabaseDeletionListener(
             $meetingService,
             $memberService,
+            $miscService,
             $emReport,
         );
     }

@@ -51,6 +51,8 @@
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredProspectiveMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/MailmanFetchListsCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/MailmanSyncMembershipCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ApiControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ExportControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/IndexControllerFactory.php</exclude-pattern>
@@ -64,6 +66,8 @@
         <exclude-pattern>module/Database/src/Mapper/Factory/AuditFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/CheckoutSessionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/MailmanMailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/MailingListMemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MemberUpdateFactory.php</exclude-pattern>
@@ -73,6 +77,7 @@
         <exclude-pattern>module/Database/src/Service/Factory/ApiFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/FrontPageFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/MailmanFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/StripeFactory.php</exclude-pattern>

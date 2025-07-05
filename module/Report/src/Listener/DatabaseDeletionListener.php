@@ -6,6 +6,8 @@ namespace Report\Listener;
 
 use Database\Model\Address as DatabaseAddressModel;
 use Database\Model\Decision as DatabaseDecisionModel;
+use Database\Model\MailingList as DatabaseMailingListModel;
+use Database\Model\MailingListMember as DatabaseMailingListMemberModel;
 use Database\Model\Meeting as DatabaseMeetingModel;
 use Database\Model\Member as DatabaseMemberModel;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
@@ -14,6 +16,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Exception;
 use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;
+use Report\Service\Misc as MiscService;
 
 /**
  * Doctrine event listener intended to automatically update reportdb.
@@ -23,6 +26,7 @@ class DatabaseDeletionListener
     public function __construct(
         private readonly MeetingService $meetingService,
         private readonly MemberService $memberService,
+        private readonly MiscService $miscService,
         private readonly EntityManager $emReport,
     ) {
     }
@@ -50,6 +54,16 @@ class DatabaseDeletionListener
 
             case $entity instanceof DatabaseDecisionModel:
                 $this->meetingService->deleteDecision($entity);
+
+                break;
+
+            case $entity instanceof DatabaseMailingListModel:
+                $this->miscService->deleteList($entity);
+
+                break;
+
+            case $entity instanceof DatabaseMailingListMemberModel:
+                $this->miscService->deleteListMembership($entity);
 
                 break;
         }

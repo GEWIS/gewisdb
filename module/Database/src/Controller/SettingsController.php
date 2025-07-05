@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace Database\Controller;
 
 use Database\Model\Enums\InstallationFunctions;
+use Database\Model\MailingList as MailingListModel;
 use Database\Service\MailingList as MailingListService;
+use Laminas\Http\Request;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\View\Model\ViewModel;
+
+use function array_filter;
 
 class SettingsController extends AbstractActionController
 {
@@ -42,15 +46,84 @@ class SettingsController extends AbstractActionController
     /**
      * Mailing list action
      */
-    public function listAction(): ViewModel
+    public function listsAction(): ViewModel
     {
-        if ($this->getRequest()->isPost()) {
-            $this->mailingListService->addList($this->getRequest()->getPost()->toArray());
+        return new ViewModel([
+            'lists' => $this->mailingListService->getAllLists(),
+            'mailmanLists' => $this->mailingListService->getMailmanService()->getMailingLists(),
+            'mailmanLastFetch' => $this->mailingListService->getMailmanService()->getLastFetchTime(),
+        ]);
+    }
+
+    public function addListAction(): HttpResponse|ViewModel
+    {
+        $form = $this->mailingListService->getListForm();
+
+        // Each mailman list may be used for at most one db list, don't show previously used
+        $lists = array_filter(
+            $this->mailingListService->getMailmanService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged(),
+        );
+        $form->setMailmanLists($lists);
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->bind(new MailingListModel());
+            $form->setData($request->getPost()->toArray());
+
+            if ($form->isValid()) {
+                /** @var MailingListModel $list */
+                $list = $form->getData();
+                $this->mailingListService->addList($list);
+
+                return $this->redirect()->toRoute('settings/lists/edit', ['name' => $list->getName()]);
+            }
         }
 
         return new ViewModel([
-            'lists' => $this->mailingListService->getAllLists(),
-            'form' => $this->mailingListService->getListForm(),
+            'form' => $form,
+            'action' => 'add',
+        ]);
+    }
+
+    public function editListAction(): HttpResponse|ViewModel
+    {
+        $listName = $this->params()->fromRoute('name');
+        $list = $this->mailingListService->getList($listName);
+
+        if (null === $list) {
+            return $this->notFoundAction();
+        }
+
+        $form = $this->mailingListService->getListForm();
+
+        // Provide mailman lists to the creation form, ideally filter out previously used lists
+        // except for if it used for this list (saving with the same value is allowed)
+        $lists = array_filter(
+            $this->mailingListService->getMailmanService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged() || $list->getMailingList()->getName() === $listName,
+        );
+        $form->setMailmanLists($lists);
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost()->toArray());
+
+            if ($form->isValid()) {
+                $list = $this->mailingListService->editList($list, $form->getData());
+
+                return $this->redirect()->toRoute('settings/lists/edit', ['name' => $list->getName()]);
+            }
+        }
+
+        $form->setData($list->toArray());
+
+        return new ViewModel([
+            'action' => 'edit',
+            'form' => $form,
+            'list' => $list,
         ]);
     }
 
