@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 12:03+0200\n"
+"POT-Creation-Date: 2025-07-05 21:32+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
+"Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -59,6 +59,14 @@ msgstr ""
 "%ORGAN_TYPE% %ORGAN_NAME% with abbreviation %ORGAN_ABBR% is established."
 
 #, php-format
+msgid "%d pending mailing list subscriptions"
+msgstr "%d pending mailing list subscriptions"
+
+#, php-format
+msgid "%d pending mailing list unsubscriptions"
+msgstr "%d pending mailing list unsubscriptions"
+
+#, php-format
 msgid "%s has been added to %s"
 msgstr "%s has been added to %s"
 
@@ -86,6 +94,13 @@ msgstr ""
 
 msgid "A 404 error occurred"
 msgstr "A 404 error occurred"
+
+msgid ""
+"A Mailman sync is currently in progress. It is now not possible to safely "
+"update the mailing list administration, please try again in a few minutes."
+msgstr ""
+"A Mailman sync is currently in progress. It is now not possible to safely "
+"update the mailing list administration, please try again in a few minutes."
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "A TU/e-username should look like sYYxxxx or YYYYxxxx."
@@ -384,9 +399,6 @@ msgstr "Change"
 msgid "Change Data"
 msgstr "Change Data"
 
-msgid "Change Mailing List Subscriptions"
-msgstr "Change Mailing List Subscriptions"
-
 #, php-format
 msgid "Change Mailing List Subscriptions of %s"
 msgstr "Change Mailing List Subscriptions of %s"
@@ -427,6 +439,9 @@ msgstr ""
 
 msgid "Checkout Status"
 msgstr "Checkout Status"
+
+msgid "Choose a mailing list"
+msgstr "Choose a mailing list"
 
 msgid "City"
 msgstr "City"
@@ -649,8 +664,14 @@ msgstr "Dutch Description"
 msgid "E-mail Address"
 msgstr "E-mail Address"
 
+msgid "Edit"
+msgstr "Edit"
+
 msgid "Edit / Delete"
 msgstr "Edit / Delete"
+
+msgid "Edit Mailing List"
+msgstr "Edit Mailing List"
 
 msgid "Effective From"
 msgstr "Effective From"
@@ -956,11 +977,21 @@ msgstr "Last Name Prepositional Particle"
 msgid "Last Update to Membership"
 msgstr "Last Update to Membership"
 
+#, php-format
+msgid "Last fetch of available mailman lists was %s."
+msgstr "Last fetch of available mailman lists was %s."
+
+msgid "Last fetch of mailman lists"
+msgstr "Last fetch of mailman lists"
+
 msgid "Leave note"
 msgstr "Leave note"
 
 msgid "Lid"
 msgstr "Member"
+
+msgid "Lists"
+msgstr "Lists"
 
 msgid "Log in"
 msgstr "Log in"
@@ -982,6 +1013,15 @@ msgstr "Mailing Lists"
 
 msgid "Mailing list deleted."
 msgstr "Mailing list deleted."
+
+msgid "Mailman Mailing List"
+msgstr "Mailman Mailing List"
+
+msgid "Mailman lists not being fetched"
+msgstr "Mailman lists not being fetched"
+
+msgid "Mailman sync"
+msgstr "Mailman sync"
 
 #, php-format
 msgid "Make %s inactive?"
@@ -1072,11 +1112,11 @@ msgstr "Modifications"
 msgid "Mutations"
 msgstr "Mutations"
 
-msgid "N/A"
-msgstr "N/A"
-
 msgid "Name"
 msgstr "Name"
+
+msgid "Name (Mailman)"
+msgstr "Name (Mailman)"
 
 msgid "No"
 msgstr "No"
@@ -1188,14 +1228,15 @@ msgstr "Personal details"
 msgid "Phone Number"
 msgstr "Phone Number"
 
+#, php-format
 msgid ""
-"Please check your e-mail address, '%hostname%' does not appear to be able to "
-"receive e-mails. If you are certain that your e-mail address is correct, "
-"please contact the board."
+"Please check your e-mail address, '%s' does not appear to be able to receive "
+"e-mails. If you are certain that your e-mail address is correct, please "
+"contact the board."
 msgstr ""
-"Please check your e-mail address, '%hostname%' does not appear to be able to "
-"receive e-mails. If you are certain that your e-mail address is correct, "
-"please contact the board."
+"Please check your e-mail address, '%s' does not appear to be able to receive "
+"e-mails. If you are certain that your e-mail address is correct, please "
+"contact the board."
 
 msgid ""
 "Please note that if you create a mailing list here, it must also exist in "
@@ -1209,6 +1250,13 @@ msgstr "Please select a function"
 
 msgid "Point"
 msgstr "Point"
+
+msgid ""
+"Possibly, the mailing list server is down or fetch mechanism is "
+"malfunctioning."
+msgstr ""
+"Possibly, the mailing list server is down or fetch mechanism is "
+"malfunctioning."
 
 msgid "Postal Code"
 msgstr "Postal Code"
@@ -1396,6 +1444,9 @@ msgstr "Succesfully deleted %s!"
 msgid "Supremum"
 msgstr "Supremum"
 
+msgid "Sync in progress"
+msgstr "Sync in progress"
+
 msgid "Synchronisation paused"
 msgstr "Synchronisation paused"
 
@@ -1464,6 +1515,9 @@ msgstr "The requested controller was not dispatchable."
 
 msgid "The requested controller was unable to dispatch the request."
 msgstr "The requested controller was unable to dispatch the request."
+
+msgid "There are"
+msgstr "There are"
 
 msgid "There are currently no data update requests."
 msgstr "There are currently no data update requests."
@@ -1778,14 +1832,24 @@ msgstr "Your TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgid "afgekeurd"
 msgstr "disapproved"
 
+msgid "and"
+msgstr "and"
+
 msgid "as"
 msgstr "as"
+
+#, php-format
+msgid "change %s"
+msgstr "change %s"
 
 msgid "commissiereglement"
 msgstr "committee regulations"
 
 msgid "dispuutsreglement"
 msgstr "fraternity regulations"
+
+msgid "email address change pending"
+msgstr "email address change pending"
 
 msgid "goedgekeurd"
 msgstr "approved"
@@ -1808,6 +1872,12 @@ msgstr "membership expiration date"
 msgid "membership type"
 msgstr "membership type"
 
+msgid "n/a"
+msgstr "n/a"
+
+msgid "never"
+msgstr "never"
+
 msgid "onbekend"
 msgstr "unknown"
 
@@ -1823,6 +1893,15 @@ msgstr "reads as follows:"
 #, php-format
 msgid "resolves to %s"
 msgstr "resolves to %s"
+
+msgid "synced"
+msgstr "synced"
+
+msgid "to be created"
+msgstr "to be created"
+
+msgid "to be deleted"
+msgstr "to be deleted"
 
 msgid ""
 "¹ DSA Pattern is the study association for students of the data science "

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 12:03+0200\n"
+"POT-Creation-Date: 2025-07-05 21:32+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Rink Pieters <rinkp@users.noreply.github.com>\n"
+"Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -57,6 +57,14 @@ msgid "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
 msgstr "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
 
 #, php-format
+msgid "%d pending mailing list subscriptions"
+msgstr "%d geplande maillijst-aanmeldingen"
+
+#, php-format
+msgid "%d pending mailing list unsubscriptions"
+msgstr "%d geplande maillijst-afmeldingen"
+
+#, php-format
 msgid "%s has been added to %s"
 msgstr "%s toegevoegd aan %s"
 
@@ -86,6 +94,14 @@ msgstr ""
 
 msgid "A 404 error occurred"
 msgstr "Er is een 404-fout opgetreden"
+
+msgid ""
+"A Mailman sync is currently in progress. It is now not possible to safely "
+"update the mailing list administration, please try again in a few minutes."
+msgstr ""
+"Een Mailman synchronisatie vindt op dit moment plaats; het is op dit moment "
+"niet mogelijk om wijzigingen uit te voeren. Probeer het over een paar "
+"minuten opnieuw."
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Een TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
@@ -384,9 +400,6 @@ msgstr "Wijzig"
 msgid "Change Data"
 msgstr "Gegevens wijzigingen"
 
-msgid "Change Mailing List Subscriptions"
-msgstr "Mailinglijst abonnementen wijzigen"
-
 #, php-format
 msgid "Change Mailing List Subscriptions of %s"
 msgstr "Mailinglijst abonnementen van %s wijzigen"
@@ -427,6 +440,9 @@ msgstr ""
 
 msgid "Checkout Status"
 msgstr "Afrekenstatus"
+
+msgid "Choose a mailing list"
+msgstr "Kies een maillijst"
 
 msgid "City"
 msgstr "Stad"
@@ -653,8 +669,14 @@ msgstr "Nederlandse beschrijving"
 msgid "E-mail Address"
 msgstr "E-mailadres"
 
+msgid "Edit"
+msgstr "Bewerk"
+
 msgid "Edit / Delete"
 msgstr "Bewerken / Verwijderen"
+
+msgid "Edit Mailing List"
+msgstr "Bewerk maillijst"
 
 msgid "Effective From"
 msgstr "Vanaf"
@@ -964,11 +986,21 @@ msgstr "Tussenvoegsel"
 msgid "Last Update to Membership"
 msgstr "Laatste aanpassing van het lidmaatschap"
 
+#, php-format
+msgid "Last fetch of available mailman lists was %s."
+msgstr "Beschikbare Mailman lijsten voor het laatst om %s opgehaald."
+
+msgid "Last fetch of mailman lists"
+msgstr "Mailman lijsten voor het laatst opgehaald"
+
 msgid "Leave note"
 msgstr "Voeg notitie toe"
 
 msgid "Lid"
 msgstr "Lid"
+
+msgid "Lists"
+msgstr "Lijsten"
 
 msgid "Log in"
 msgstr "Inloggen"
@@ -990,6 +1022,15 @@ msgstr "Mailinglijsten"
 
 msgid "Mailing list deleted."
 msgstr "Mailinglijst verwijderd."
+
+msgid "Mailman Mailing List"
+msgstr "Mailman-maillijst"
+
+msgid "Mailman lists not being fetched"
+msgstr "Mailman lijsten worden niet opgehaald"
+
+msgid "Mailman sync"
+msgstr "Mailman-synchronisatie"
 
 #, php-format
 msgid "Make %s inactive?"
@@ -1080,11 +1121,11 @@ msgstr "Wijzigingen"
 msgid "Mutations"
 msgstr "Mutaties"
 
-msgid "N/A"
-msgstr "n.v.t."
-
 msgid "Name"
 msgstr "Naam"
+
+msgid "Name (Mailman)"
+msgstr "Naam (Mailman)"
 
 msgid "No"
 msgstr "Nee"
@@ -1195,14 +1236,15 @@ msgstr "Persoonlijke informatie"
 msgid "Phone Number"
 msgstr "Telefoonnummer"
 
+#, php-format
 msgid ""
-"Please check your e-mail address, '%hostname%' does not appear to be able to "
-"receive e-mails. If you are certain that your e-mail address is correct, "
-"please contact the board."
+"Please check your e-mail address, '%s' does not appear to be able to receive "
+"e-mails. If you are certain that your e-mail address is correct, please "
+"contact the board."
 msgstr ""
-"Controleer je e-mailadres, '%hostname%' lijkt geen e-mails te kunnen "
-"ontvangen. Als je zeker weet dat je e-mailadres correct is, neem dan contact "
-"op met het bestuur."
+"Controleer je e-mailadres, '%s' lijkt geen e-mails te kunnen ontvangen. Als "
+"je zeker weet dat je e-mailadres correct is, neem dan contact op met het "
+"bestuur."
 
 msgid ""
 "Please note that if you create a mailing list here, it must also exist in "
@@ -1216,6 +1258,13 @@ msgstr "Selecteer een functie"
 
 msgid "Point"
 msgstr "Punt"
+
+msgid ""
+"Possibly, the mailing list server is down or fetch mechanism is "
+"malfunctioning."
+msgstr ""
+"Mogelijk is de maillijst-server offline or is er een storing bij het ophalen "
+"van de lijsten."
 
 msgid "Postal Code"
 msgstr "Postcode"
@@ -1403,6 +1452,9 @@ msgstr "%s succesvol verwijderd!"
 msgid "Supremum"
 msgstr "Supremum"
 
+msgid "Sync in progress"
+msgstr "Synchronisatie bezig"
+
 msgid "Synchronisation paused"
 msgstr "Synchronisatie gepauzeeerd"
 
@@ -1473,6 +1525,9 @@ msgstr "De opgevraagde controller is niet bruikbaar."
 
 msgid "The requested controller was unable to dispatch the request."
 msgstr "De opgevraagde controller kon deze aanvraag niet verwerken."
+
+msgid "There are"
+msgstr "Er zijn"
 
 msgid "There are currently no data update requests."
 msgstr "Er zijn momenteel geen verzoeken om gegevens bij te werken."
@@ -1799,14 +1854,24 @@ msgstr "Jouw TU/e-gebruikersnaam moet lijken op sYYxxxx of YYYYxxxx."
 msgid "afgekeurd"
 msgstr "afgekeurd"
 
+msgid "and"
+msgstr "en"
+
 msgid "as"
 msgstr "als"
+
+#, php-format
+msgid "change %s"
+msgstr "wijzig %s"
 
 msgid "commissiereglement"
 msgstr "commissiereglement"
 
 msgid "dispuutsreglement"
 msgstr "dispuutsreglement"
+
+msgid "email address change pending"
+msgstr "e-mailadreswijziging gepland"
 
 msgid "goedgekeurd"
 msgstr "goedgekeurd"
@@ -1829,6 +1894,12 @@ msgstr "einddatum lidmaatschap"
 msgid "membership type"
 msgstr "lidmaatschapstype"
 
+msgid "n/a"
+msgstr "n.v.t."
+
+msgid "never"
+msgstr "nooit"
+
 msgid "onbekend"
 msgstr "onbekend"
 
@@ -1844,6 +1915,15 @@ msgstr "luidt als volgt:"
 #, php-format
 msgid "resolves to %s"
 msgstr "verwijst naar %s"
+
+msgid "synced"
+msgstr "gesynchroniseerd"
+
+msgid "to be created"
+msgstr "aanmaken gepland"
+
+msgid "to be deleted"
+msgstr "verwijderen gepland"
 
 msgid ""
 "¹ DSA Pattern is the study association for students of the data science "

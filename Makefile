@@ -104,7 +104,6 @@ translations:
 				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
 				--force-po \
 				--no-location \
-				--sort-output \
 				--package-name=GEWISdb \
 				--package-version=$(shell git describe --dirty --always) \
 				--copyright-holder=GEWIS && \
@@ -116,15 +115,15 @@ translations:
 				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
 				--force-po \
 				--no-location \
-				--sort-output \
 				--package-name=GEWISdb \
 				--package-version=$(shell git describe --dirty --always) \
 				--copyright-holder=GEWIS \
 				--join-existing && \
-		msgmerge --sort-output -U $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
-		msgmerge --sort-output -U $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
-		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
-		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
+		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/gewisdb.pot $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgmerge -U $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgmerge -U $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
+		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
 
 update: updatecomposer updatedocker
 
