@@ -175,11 +175,17 @@ class Mailman
         OutputInterface $output = new NullOutput(),
         bool $dryRun = false,
     ): void {
+        $this->assertMailmanHealthy();
+
+        $this->acquireSyncLock();
+
         $lists = $this->mailingListMapper->findAll();
 
         foreach ($lists as $list) {
             $this->syncMembershipSingle($list, $output, $dryRun);
         }
+
+        $this->releaseSyncLock();
     }
 
     /**
@@ -204,6 +210,8 @@ class Mailman
         $verifyTime = (new DateTime())->sub(new DateInterval('P1D'));
 
         // Phase 1: Sync all pending changes from DB side
+        // The order matters; we first process deletions, because we can have both be true
+        // (e.g. when changing email addresses twice)
         foreach ($dbMemberships as $mailingListMember) {
             if ($mailingListMember->isToBeDeleted()) {
                 $this->unsubscribeMemberFromMailingList(
@@ -245,7 +253,7 @@ class Mailman
         );
     }
 
-    public function isMailmanHealthy(): bool
+    private function isMailmanHealthy(): bool
     {
         try {
             $data = $this->performMailmanRequest('system/versions');
@@ -254,6 +262,12 @@ class Mailman
         }
 
         return isset($data['api_version']) && $data['api_version'] === $this->mailmanConfig['version'];
+    }
+
+    private function assertMailmanHealthy(): void
+    {
+        $this->isMailmanHealthy() ||
+            throw new RuntimeException('Mailman API is not healthy when performing mailman operation');
     }
 
     /**
@@ -392,7 +406,7 @@ class Mailman
         // Create the data for the request
         $data = [
             'list_id' => $listId,
-            'subscriber' => $member->getEmail(),
+            'subscriber' => $mailingListMember->getEmail(),
             'display_name' => $member->getFullName(),
             'role' => self::MM_ROLE_MEMBER,
             'pre_verified' => true,
@@ -449,12 +463,11 @@ class Mailman
             return;
         }
 
-        $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
         $data = [
             'list_id' => $listId,
-            'subscriber' => $member->getEmail(),
+            'subscriber' => $mailingListMember->getEmail(),
             'role' => self::MM_ROLE_MEMBER,
         ];
 
@@ -508,12 +521,11 @@ class Mailman
             throw new LogicException('Cannot verify mailing list subscription for non-mailman list');
         }
 
-        $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
         $data = [
             'list_id' => $listId,
-            'subscriber' => $member->getEmail(),
+            'subscriber' => $mailingListMember->getEmail(),
             'role' => self::MM_ROLE_MEMBER,
         ];
 
@@ -551,6 +563,10 @@ class Mailman
         $this->mailingListMemberMapper->remove($mailingListMember);
     }
 
+    /**
+     * Function to process 'new' or unknown mailman registrations
+     * When member known, adds to DB. When member unknown, removes from mailman
+     */
     private function fullCheckMailmanList(
         MailingListModel $mailingList,
         OutputInterface $output,
@@ -567,51 +583,53 @@ class Mailman
 
         $response = $this->performMailmanRequest('members/find', data: $data);
 
-        foreach ($response['entries'] as $entry) {
-            $found = false;
-            foreach ($membersDB as $member) {
-                if ($member->getEmail() !== $entry['email']) {
-                    continue;
+        if ($response['total_size'] > 0) {
+            foreach ($response['entries'] as $entry) {
+                $found = false;
+                foreach ($membersDB as $member) {
+                    if ($member->getEmail() !== $entry['email']) {
+                        continue;
+                    }
+
+                    $found = true;
                 }
 
-                $found = true;
-            }
+                $foundMembers = $this->memberMapper->findByEmail($entry['email']);
 
-            $foundMembers = $this->memberMapper->findByEmail($entry['email']);
-
-            if (!$found && 0 === count($foundMembers)) {
-                $output->writeln(
-                    sprintf(
-                        '--> Removing unknown email %s from %s',
-                        $entry['email'],
-                        $data['list_id'],
-                    ),
-                    OutputInterface::VERBOSITY_VERY_VERBOSE,
-                );
-
-                if (!$dryRun) {
-                    $this->performMailmanRequest(
-                        'members/' . rawurlencode($entry['member_id']),
-                        method: Request::METHOD_DELETE,
+                if (!$found && 0 === count($foundMembers)) {
+                    $output->writeln(
+                        sprintf(
+                            '--> Removing unknown email %s from %s',
+                            $entry['email'],
+                            $data['list_id'],
+                        ),
+                        OutputInterface::VERBOSITY_VERY_VERBOSE,
                     );
-                }
-            } elseif (!$found) {
-                $output->writeln(
-                    sprintf(
-                        '--> Found %s on %s, updating database',
-                        $entry['email'],
-                        $data['list_id'],
-                    ),
-                    OutputInterface::VERBOSITY_VERY_VERBOSE,
-                );
 
-                if (!$dryRun) {
-                    $mailingListMember = new MailingListMemberModel();
-                    $mailingListMember->setMailingList($mailingList);
-                    $mailingListMember->setMember($foundMembers[0]);
-                    $mailingListMember->setEmail($entry['email']);
-                    $mailingListMember->setToBeCreated(false);
-                    $this->mailingListMemberMapper->persist($mailingListMember);
+                    if (!$dryRun) {
+                        $this->performMailmanRequest(
+                            'members/' . rawurlencode($entry['member_id']),
+                            method: Request::METHOD_DELETE,
+                        );
+                    }
+                } elseif (!$found) {
+                    $output->writeln(
+                        sprintf(
+                            '--> Found %s on %s, updating database',
+                            $entry['email'],
+                            $data['list_id'],
+                        ),
+                        OutputInterface::VERBOSITY_VERY_VERBOSE,
+                    );
+
+                    if (!$dryRun) {
+                        $mailingListMember = new MailingListMemberModel();
+                        $mailingListMember->setMailingList($mailingList);
+                        $mailingListMember->setMember($foundMembers[0]);
+                        $mailingListMember->setEmail($entry['email']);
+                        $mailingListMember->setToBeCreated(false);
+                        $this->mailingListMemberMapper->persist($mailingListMember);
+                    }
                 }
             }
         }

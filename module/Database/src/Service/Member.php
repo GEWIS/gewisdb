@@ -711,9 +711,6 @@ class Member
             return null;
         }
 
-        /** @var MemberModel $member */
-        $member = $form->getData();
-
         // update changed on date
         $date = new DateTime();
         $date->setTime(0, 0);

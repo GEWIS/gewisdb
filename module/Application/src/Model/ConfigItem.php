@@ -21,6 +21,7 @@ use TypeError;
 
 use function is_bool;
 use function is_string;
+use function sprintf;
 
 /**
  * Runtime configuration items model.
@@ -91,11 +92,23 @@ class ConfigItem
     #[PreUpdate]
     public function assertValid(): void
     {
-        if (null !== $this->valueDate xor null !== $this->valueString) {
+        if (
+            1 ===
+            (int) (null !== $this->valueDate) +
+            (int) (null !== $this->valueString) +
+            (int) (null !== $this->valueBool)
+        ) {
             return;
         }
 
-        throw new LogicException();
+        throw new LogicException(
+            sprintf(
+                'ConfigItem must be exactly one of date (=%d), string (=%d) or bool (=%d)',
+                (int) (null !== $this->valueDate),
+                (int) (null !== $this->valueString),
+                (int) (null !== $this->valueBool),
+            ),
+        );
     }
 
     /**

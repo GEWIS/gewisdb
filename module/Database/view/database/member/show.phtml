@@ -177,41 +177,47 @@ use Laminas\View\Renderer\PhpRenderer;
 </table>
 <?php endforeach ?>
 <?php if (!isset($addresses[AddressTypes::Home->value])): ?>
-    <a href="<?= $this->url('member/show/add-address', array(
+    <a href="<?= $this->url('member/show/add-address', [
         'id' => $member->getLidnr(),
-        'type' => AddressTypes::Home->value
-    )) ?>" class="btn btn-success">
+        'type' => AddressTypes::Home->value,
+    ]) ?>" class="btn btn-success">
         <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add Home Address') ?>
     </a>
 <?php endif ?>
 <?php if (!isset($addresses[AddressTypes::Student->value])): ?>
-    <a href="<?= $this->url('member/show/add-address', array(
+    <a href="<?= $this->url('member/show/add-address', [
         'id' => $member->getLidnr(),
-        'type' => AddressTypes::Student->value
-    )) ?>" class="btn btn-success">
+        'type' => AddressTypes::Student->value,
+    ]) ?>" class="btn btn-success">
         <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add Student Address') ?>
     </a>
 <?php endif ?>
 <?php if (!isset($addresses[AddressTypes::Mail->value])): ?>
-    <a href="<?= $this->url('member/show/add-address', array(
+    <a href="<?= $this->url('member/show/add-address', [
         'id' => $member->getLidnr(),
-        'type' => AddressTypes::Mail->value
-    )) ?>" class="btn btn-success">
+        'type' => AddressTypes::Mail->value,
+    ]) ?>" class="btn btn-success">
         <span class="glyphicon glyphicon-plus"></span> <?= $this->translate('Add Mail Address') ?>
     </a>
 <?php endif ?>
 </div>
 
 <div class="col-md-6">
-<h3><?= $this->translate('Mailing List Subscriptions') ?></h3>
+<h3><?= ucwords($this->translate('mailing list subscriptions')) ?></h3>
 <ul>
-<?php foreach ($member->getMailingListMemberships() as $list): ?>
+<?php foreach ($member->getMailingListMemberships() as $list):
+    if ($list->isToBeDeleted()) continue;?>
     <li><?= $list->getMailingList()->getName() ?></li>
 <?php endforeach ?>
 </ul>
-<a href="<?= $this->url('member/show/edit/lists', array(
-    'id' => $member->getLidnr()
-)) ?>" class="btn btn-primary"><?= $this->translate('Change Mailing List Subscriptions') ?></a>
+<a href="<?= $this->url('member/show/edit/lists', [
+    'id' => $member->getLidnr(),
+]) ?>" class="btn btn-primary"><?= ucwords(
+    sprintf(
+        $this->translate('change %s'),
+        $this->translate('mailing list subscriptions'),
+    ),
+) ?></a>
 </div>
 
 <div class="col-md-6">

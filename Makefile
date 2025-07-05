@@ -33,7 +33,7 @@ runprodtest: buildprod
 		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
 
 rundev: builddev
-		@docker compose up -d --remove-orphans
+		@docker compose up -d --build --remove-orphans
 		@make replenish
 		@docker compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
 

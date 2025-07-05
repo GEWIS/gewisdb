@@ -4,9 +4,9 @@ services:
         env_file:
             - .env
         volumes:
-            - gewisdb_postgresql:/var/lib/postgresql/data:rw
+            - postgresql:/var/lib/postgresql/data:rw
         networks:
-            - gewisdb_network
+            - network
         ports:
             - "5432:5432"
         restart: unless-stopped
@@ -19,7 +19,7 @@ services:
         depends_on:
             - postgresql
         networks:
-            - gewisdb_network
+            - network
         ports:
             - "8080:80"
         restart: unless-stopped
@@ -29,10 +29,9 @@ services:
             - "8025:8025"
     mailman-core:
         image: maxking/mailman-core:0.5
-        container_name: mailman-core
-        hostname: mailmanc
+        hostname: mailman-core
         volumes:
-            - ./mailman/core:/opt/mailman/
+            - mailman-core:/opt/mailman/
         depends_on:
             - postgresql
         environment:
@@ -47,15 +46,15 @@ services:
         ports:
             - "8020:8001"
         networks:
-            - gewisdb_network
+            - network
     mailman-web:
         image: maxking/mailman-web:0.5
-        container_name: mailman-web
-        hostname: mailmanw
+        hostname: mailman-web
         depends_on:
             - postgresql
         volumes:
-            - ./mailman/web:/opt/mailman-web-data/
+            - mailman-web:/opt/mailman-web-data/
+            - mailman-static:/opt/mailman-web-data/static/
         environment:
             - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql/${POSTGRES_MAILMAN_DATABASE}
             - DATABASE_TYPE=postgres
@@ -74,11 +73,13 @@ services:
         ports:
             - "8021:8000"
         networks:
-            - gewisdb_network
+            - network
     nginx:
         build: docker/nginx
+        depends_on:
+            - mailman-web
         volumes:
-            - ./mailman/web/static:/var/html/mailman/
+            - mailman-static:/var/html/mailman/:ro
         ports:
             - "80:9725"
     stripe:
@@ -91,7 +92,7 @@ services:
         depends_on:
             - nginx
         networks:
-            - gewisdb_network
+            - network
     web:
         image: abc.docker-registry.gewis.nl/db/gewisdb/web:development
         build:
@@ -102,4 +103,7 @@ services:
             - postgresql
 
 volumes:
-    gewisdb_postgresql:
+    postgresql:
+    mailman-web:
+    mailman-core:
+    mailman-static:

@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Laminas\Mail\Address as MailAddress;
 use RuntimeException;
 
+use function is_string;
 use function mb_encode_mimeheader;
 
 /**
@@ -356,20 +357,47 @@ class Member
     /**
      * Set the member's email address.
      */
-    public function setEmail(?string $email): void
+    public function setEmail(?string $newEmail): void
     {
-        $toBeDeletedExists = $this->mailingListMemberships->exists(static function ($key, MailingListMember $list) {
-            return $list->isToBeDeleted();
-        });
+        // If the new email address matches the current, we don't have to do anything
+        if ($this->email === $newEmail) {
+            return;
+        }
 
-        if ($toBeDeletedExists) {
+        $oldEmail = $this->email;
+        $this->email = $newEmail;
+
+        if (null === $oldEmail) {
+            return;
+        }
+
+        $mailAddressExists = $this->mailingListMemberships->exists(
+            static function ($key, MailingListMember $list) use ($newEmail) {
+                return $newEmail === $list->getEmail();
+            },
+        );
+        if ($mailAddressExists) {
             throw new RuntimeException(
                 // phpcs:ignore -- user-visible strings should not be split
-                'The e-mail address cannot be updated as there are mailing list memberships marked to be deleted. Please wait till after the next sync with Mailman has happened.',
+                'The e-mail address cannot be updated while there are already (pending) registrations for this member using this email address. Please try again once all list updates have been processed.',
             );
         }
 
-        $this->email = $email;
+        // For each mailing list memberships, schedule deletion of the old email and
+        // registration using the new email address
+        // Will be persisted with the member
+        foreach ($this->mailingListMemberships as $mailingListMembership) {
+            if ($mailingListMembership->isToBeDeleted()) {
+                continue;
+            }
+
+            $mailingListMembership->setToBeDeleted(true);
+            $newMembership = new MailingListMember();
+            $newMembership->setMember($this);
+            $newMembership->setEmail($newEmail);
+            $newMembership->setMailingList($mailingListMembership->getMailingList());
+            $this->addList($newMembership);
+        }
     }
 
     /**
@@ -510,8 +538,12 @@ class Member
     /**
      * Set the birthdate.
      */
-    public function setBirth(DateTime $birth): void
+    public function setBirth(DateTime|string $birth): void
     {
+        if (is_string($birth)) {
+            $birth = new DateTime($birth);
+        }
+
         $this->birth = $birth;
     }
 
@@ -799,5 +831,14 @@ class Member
     public function getRenewalLinks(): Collection
     {
         return $this->renewalLinks;
+    }
+
+    public function hasActiveRenewalLink(): bool
+    {
+        return $this->getRenewalLinks()->exists(
+            static function ($key, RenewalLink $renewalLink) {
+                return !$renewalLink->linkExpired();
+            },
+        );
     }
 }

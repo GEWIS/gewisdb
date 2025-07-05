@@ -7,10 +7,14 @@ namespace Database\Service;
 use Database\Form\DeleteList as DeleteListForm;
 use Database\Form\MailingList as MailingListForm;
 use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Model\MailingList as MailingListModel;
 use Database\Service\Mailman as MailmanService;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 
 use function boolval;
+use function sprintf;
 
 class MailingList
 {
@@ -18,6 +22,7 @@ class MailingList
         private readonly DeleteListForm $deleteListForm,
         private readonly MailingListForm $mailingListForm,
         private readonly MailingListMapper $mailingListMapper,
+        private readonly MailingListMemberMapper $mailingListMemberMapper,
         private readonly MailmanService $mailmanService,
     ) {
     }
@@ -114,8 +119,54 @@ class MailingList
         return $this->mailingListMapper;
     }
 
+    /**
+     * Get the mailing list member mapper.
+     */
+    protected function getMailingListMemberMapper(): MailingListMemberMapper
+    {
+        return $this->mailingListMemberMapper;
+    }
+
     public function getMailmanService(): MailmanService
     {
         return $this->mailmanService;
+    }
+
+    /**
+     * Perform maintenance to abnormal mailing list situations
+     * This does not directly operate on mailman
+     */
+    public function performMaintenance(
+        OutputInterface $output = new NullOutput(),
+        bool $dryRun = false,
+    ): void {
+        $output->writeln('Checking for mailing list memberships for expired/hidden members:');
+        $expiredMemberships = $this->getMailingListMemberMapper()->findAllExpiredOrHidden();
+
+        foreach ($expiredMemberships as $expiredMembership) {
+            $member = $expiredMembership->getMember();
+
+            // If the member still is able to renew, do not delete memberships yet
+            if (!$member->getHidden() && $member->hasActiveRenewalLink()) {
+                continue;
+            }
+
+            $output->writeln(
+                sprintf(
+                    '-> Scheduling deletion of mailing list membership for %s on %s',
+                    $expiredMembership->getEmail(),
+                    $expiredMembership->getMailingList()->getName(),
+                ),
+                OutputInterface::VERBOSITY_VERBOSE,
+            );
+
+            if ($dryRun) {
+                continue;
+            }
+
+            // Else, schedule deletion
+            $expiredMembership->setToBeDeleted(true);
+            $this->getMailingListMemberMapper()->persist($expiredMembership);
+        }
     }
 }

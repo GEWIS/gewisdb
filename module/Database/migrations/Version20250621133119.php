@@ -24,7 +24,7 @@ final class Version20250621133119 extends AbstractMigration
         $this->addSql('CREATE TABLE MailingListMember (email VARCHAR(255) NOT NULL, member INT NOT NULL, lastSyncOn TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, lastSyncSuccess BOOLEAN NOT NULL, toBeCreated BOOLEAN NOT NULL, toBeDeleted BOOLEAN NOT NULL, mailingList VARCHAR(255) NOT NULL, PRIMARY KEY(mailingList, member, email))');
         $this->addSql('CREATE INDEX IDX_3A8467A97B1AC3ED ON MailingListMember (mailingList)');
         $this->addSql('CREATE INDEX IDX_3A8467A970E4FA78 ON MailingListMember (member)');
-        $this->addSql('CREATE UNIQUE INDEX mailinglistmember_unique_idx ON MailingListMember (mailingList, member)');
+        $this->addSql('CREATE UNIQUE INDEX mailinglistmember_unique_idx ON MailingListMember (mailingList, member, email)');
         $this->addSql('ALTER TABLE MailingListMember ADD CONSTRAINT FK_3A8467A97B1AC3ED FOREIGN KEY (mailingList) REFERENCES MailingList (name) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE MailingListMember ADD CONSTRAINT FK_3A8467A970E4FA78 FOREIGN KEY (member) REFERENCES Member (lidnr) NOT DEFERRABLE INITIALLY IMMEDIATE');
 

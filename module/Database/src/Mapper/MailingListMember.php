@@ -106,6 +106,28 @@ class MailingListMember
     }
 
     /**
+     * Get the mailing list members that belong to hidden or expired members
+     * and that are not already scheduled for deletion
+     *
+     * @return MailingListMemberModel[]
+     */
+    public function findAllExpiredOrHidden(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('mlm')
+            ->from(MailingListMemberModel::class, 'mlm')
+            ->leftJoin('mlm.member', 'm')
+            ->where('mlm.toBeDeleted != True')
+            ->andWhere('m.expiration <= CURRENT_TIMESTAMP() OR m.hidden = True');
+
+        /** @var MailingListMemberModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    /**
      * @return MailingListMemberModel[]
      */
     public function findAll(): array

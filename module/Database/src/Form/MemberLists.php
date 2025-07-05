@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Database\Model\MailingList as MailingListModel;
+use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\Member as MemberModel;
 use Laminas\Form\Element\MultiCheckbox;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
-
-use function array_key_exists;
 
 class MemberLists extends Form implements InputFilterProviderInterface
 {
@@ -26,29 +25,37 @@ class MemberLists extends Form implements InputFilterProviderInterface
     ) {
         parent::__construct();
 
-        $memberLists = [];
-        foreach ($member->getMailingListMemberships() as $mailingListMember) {
-            $memberLists[$mailingListMember->getMailingList()->getName()] = [
-                'toBeCreated' => $mailingListMember->isToBeCreated(),
-                'toBeDeleted' => $mailingListMember->isToBeDeleted(),
-            ];
-        }
+        $memberLists = $member->getMailingListMemberships();
 
         $listOptions = [];
         foreach ($this->lists as $list) {
             $listName = $list->getName();
 
-            $selected = array_key_exists($listName, $memberLists);
+            $selected = $memberLists->exists(
+                static function ($key, MailingListMemberModel $mlm) use ($listName) {
+                    return $listName === $mlm->getMailingList()->getName();
+                },
+            );
 
             $label = $listName;
             if ($selected) {
-                $toBeCreated = $memberLists[$listName]['toBeCreated'];
-                $toBeDeleted = $memberLists[$listName]['toBeDeleted'];
-                $disabled = $selected && ($toBeDeleted || $toBeCreated );
+                $toBeCreated = $memberLists->exists(
+                    static function ($key, MailingListMemberModel $mlm) use ($listName) {
+                        return $mlm->isToBeCreated() && $listName === $mlm->getMailingList()->getName();
+                    },
+                );
+                $toBeDeleted = $memberLists->exists(
+                    static function ($key, MailingListMemberModel $mlm) use ($listName) {
+                        return $mlm->isToBeDeleted() && $listName === $mlm->getMailingList()->getName();
+                    },
+                );
+                $disabled = $toBeDeleted || $toBeCreated;
 
                 $label .= ' (';
 
-                if ($toBeDeleted) {
+                if ($toBeCreated && $toBeDeleted) {
+                    $label .= $this->translator->translate('email address change pending');
+                } elseif ($toBeDeleted) {
                     $label .= $this->translator->translate('to be deleted');
                 } elseif ($toBeCreated) {
                     $label .= $this->translator->translate('to be created');

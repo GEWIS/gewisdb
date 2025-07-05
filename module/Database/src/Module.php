@@ -9,9 +9,11 @@ use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\Factory\DeleteExpiredMembersCommandFactory;
 use Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory;
 use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
+use Database\Command\Factory\MailingListMaintenanceCommandFactory;
 use Database\Command\Factory\MailmanFetchListsCommandFactory;
 use Database\Command\Factory\MailmanSyncMembershipCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
+use Database\Command\MailingListMaintenanceCommand;
 use Database\Command\MailmanFetchListsCommand;
 use Database\Command\MailmanSyncMembershipCommand;
 use Database\Form\Abolish as AbolishForm;
@@ -119,7 +121,7 @@ use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
 use Database\Service\Query as QueryService;
 use Database\Service\Stripe as StripeService;
-use Doctrine\Laminas\Hydrator\DoctrineObject;
+use Doctrine\Laminas\Hydrator\DoctrineObject as DoctrineHydrator;
 use Laminas\Http\PhpEnvironment\RemoteAddress;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
@@ -168,6 +170,7 @@ class Module
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
                 DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
                 MailmanFetchListsCommand::class => MailmanFetchListsCommandFactory::class,
+                MailingListMaintenanceCommand::class => MailingListMaintenanceCommandFactory::class,
                 MailmanSyncMembershipCommand::class => MailmanSyncMembershipCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
@@ -211,7 +214,7 @@ class Module
                 },
                 MemberEditForm::class => static function (ContainerInterface $container) {
                     $form = new MemberEditForm($container->get(MvcTranslator::class));
-                    $form->setHydrator($container->get('database_hydrator_default'));
+                    $form->setHydrator($container->get('database_hydrator_default_classmethods'));
 
                     return $form;
                 },
@@ -508,13 +511,19 @@ class Module
                 },
                 ///////////////////////////////////////////////////////////////////////////
                 'database_hydrator_default' => static function (ContainerInterface $container) {
-                    return new DoctrineObject(
+                    return new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                 },
+                'database_hydrator_default_classmethods' => static function (ContainerInterface $container) {
+                    return new DoctrineHydrator(
+                        $container->get('doctrine.entitymanager.orm_default'),
+                        true,
+                    );
+                },
                 'database_hydrator_address' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
@@ -524,7 +533,7 @@ class Module
                     return $hydrator;
                 },
                 'database_hydrator_meeting' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
@@ -533,7 +542,7 @@ class Module
                     return $hydrator;
                 },
                 'database_hydrator_subdecision' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
@@ -542,7 +551,7 @@ class Module
                     return $hydrator;
                 },
                 'database_hydrator_decision' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
