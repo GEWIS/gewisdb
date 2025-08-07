@@ -90,6 +90,6 @@ class MailmanMailingList
      */
     public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository('Database\Model\MailmanMailingList');
+        return $this->em->getRepository(MailmanMailingListModel::class);
     }
 }

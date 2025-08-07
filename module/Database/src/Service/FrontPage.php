@@ -35,7 +35,7 @@ class FrontPage
      *   totalCount: int,
      *   mailmanLastFetch: ?DateTime,
      *   mailmanLastFetchOverdue: bool,
-     *   mailmanLastSync: DateTime,
+     *   mailmanLastSync: ?DateTime,
      *   mailmanChangesPending: array{
      *      creations: int,
      *      deletions: int,

@@ -18,7 +18,6 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-use function count;
 use function filter_var;
 use function is_numeric;
 use function strtolower;
@@ -38,15 +37,13 @@ class Member
     {
         $ret = $this->findByEmail($email);
 
-        return null !== $ret && count($ret) > 0;
+        return null !== $ret;
     }
 
     /**
      * Find by email
-     *
-     * @return MemberModel[]
      */
-    public function findByEmail(string $email): array
+    public function findByEmail(string $email): ?MemberModel
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -57,7 +54,7 @@ class Member
 
         $qb->setParameter(':email', $email);
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**

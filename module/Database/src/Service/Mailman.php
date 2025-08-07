@@ -24,7 +24,6 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_map;
-use function count;
 use function json_decode;
 use function json_last_error_msg;
 use function json_validate;
@@ -33,20 +32,20 @@ use function sprintf;
 
 class Mailman
 {
-    private const MM_ROLE_NONMEMBER = 'nonmember';
-    private const MM_ROLE_MEMBER = 'member';
-    private const MM_ROLE_MODERATOR = 'moderator';
-    private const MM_ROLE_OWNER = 'owner';
+    private const string MM_ROLE_NONMEMBER = 'nonmember';
+    private const string MM_ROLE_MEMBER = 'member';
+    private const string MM_ROLE_MODERATOR = 'moderator';
+    private const string MM_ROLE_OWNER = 'owner';
 
-    private const MM_DELIVERYMODE_REGULAR = 'regular';
-    private const MM_DELIVERYMODE_DIGESTS_MIME = 'mime_digests';
-    private const MM_DELIVERYMODE_DIGESTS_PLAIN = 'plaintext_digests';
-    private const MM_DELLIVERYMODE_DIGESTS_SUMMARY = 'summary_digests';
+    private const string MM_DELIVERYMODE_REGULAR = 'regular';
+    private const string MM_DELIVERYMODE_DIGESTS_MIME = 'mime_digests';
+    private const string MM_DELIVERYMODE_DIGESTS_PLAIN = 'plaintext_digests';
+    private const string MM_DELLIVERYMODE_DIGESTS_SUMMARY = 'summary_digests';
 
-    private const MM_DELIVERYSTATUS_ENABLED = 'enabled';
-    private const MM_DELIVERYSTATUS_DISABLED_BY_USER = 'by_user';
-    private const MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES = 'by_bounces';
-    private const MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR = 'by_moderator';
+    private const string MM_DELIVERYSTATUS_ENABLED = 'enabled';
+    private const string MM_DELIVERYSTATUS_DISABLED_BY_USER = 'by_user';
+    private const string MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES = 'by_bounces';
+    private const string MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR = 'by_moderator';
 
     /**
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
@@ -185,6 +184,8 @@ class Mailman
             $this->syncMembershipSingle($list, $output, $dryRun);
         }
 
+        $this->configService->setConfig(ConfigNamespaces::DatabaseMailman, 'lastSync', new DateTime());
+
         $this->releaseSyncLock();
     }
 
@@ -274,7 +275,7 @@ class Mailman
      * @return array{
      *     mailmanLastFetch: ?DateTime,
      *     mailmanLastFetchOverdue: bool,
-     *     mailmanLastSync: DateTime,
+     *     mailmanLastSync: ?DateTime,
      *     mailmanChangesPending: array{
      *       creations: int,
      *       deletions: int,
@@ -286,7 +287,11 @@ class Mailman
         return [
             'mailmanLastFetch' => $this->getLastFetchTime(),
             'mailmanLastFetchOverdue' => $this->isLastFetchOverdue(),
-            'mailmanLastSync' => new DateTime(), //TODO
+            'mailmanLastSync' => $this->configService->getConfig(
+                ConfigNamespaces::DatabaseMailman,
+                'lastSync',
+                new DateTime('0001-01-01 00:00:00'),
+            ),
             'mailmanChangesPending' => [
                 'creations' => $this->mailingListMemberMapper->countPendingCreation(),
                 'deletions' => $this->mailingListMemberMapper->countPendingDeletion(),
@@ -594,9 +599,9 @@ class Mailman
                     $found = true;
                 }
 
-                $foundMembers = $this->memberMapper->findByEmail($entry['email']);
+                $foundMember = $this->memberMapper->findByEmail($entry['email']);
 
-                if (!$found && 0 === count($foundMembers)) {
+                if (!$found && null === $foundMember) {
                     $output->writeln(
                         sprintf(
                             '--> Removing unknown email %s from %s',
@@ -625,7 +630,7 @@ class Mailman
                     if (!$dryRun) {
                         $mailingListMember = new MailingListMemberModel();
                         $mailingListMember->setMailingList($mailingList);
-                        $mailingListMember->setMember($foundMembers[0]);
+                        $mailingListMember->setMember($foundMember);
                         $mailingListMember->setEmail($entry['email']);
                         $mailingListMember->setToBeCreated(false);
                         $this->mailingListMemberMapper->persist($mailingListMember);
