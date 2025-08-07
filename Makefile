@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparemailman migrate migrate-to migration-down migration-up migration-diff
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused
 
 help:
 		@echo "Makefile commands:"
@@ -35,41 +35,41 @@ runprodtest: buildprod
 rundev: builddev
 		@docker compose up -d --build --remove-orphans
 		@make replenish
-		@docker compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
+		@docker compose exec -u www-data web rm -rf data/cache/module-config-cache.application.config.cache.php
 
 migrate: replenish
-		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
-		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
+		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
+		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
 
 migrate-to:
-		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
+		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 migration-list: replenish
-		@docker compose exec -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_default
-		@docker compose exec -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_report
+		@docker compose exec -u www-data -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_default
+		@docker compose exec -u www-data -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_report
 
 migration-diff: replenish
-		@docker compose exec -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_default
+		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_default
 		@docker cp "$(shell docker compose ps -q web)":/code/module/Database/migrations ./module/Database
-		@docker compose exec -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_report
+		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_report
 		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report
 
 migration-up: replenish migration-list
-		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --up $$migrations --object-manager doctrine.entitymanager.$$alias'
+		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --up $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 migration-down: replenish migration-list
-		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --down $$migrations --object-manager doctrine.entitymanager.$$alias'
+		@docker compose exec -u www-data web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --down $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 seed: replenish
-		@docker compose exec -T web ./web application:fixtures:load
-		@docker compose exec web ./web report:generate:full
+		@docker compose exec -u www-data -T web ./web application:fixtures:load
+		@docker compose exec -u www-data web ./web report:generate:full
 		@make preparemailman
 		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null); pkill -HUP uwsgi'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
-		@docker compose exec web ./web database:mailman:fetch
+		@docker compose exec -u www-data web ./web database:mailman:fetch
 
 exec:
-		docker compose exec -it web $(cmd)
+		docker compose exec -u www-data -it web $(cmd)
 
 stop:
 		@docker compose down --remove-orphans
@@ -82,18 +82,26 @@ runcoverage: loadenv
 
 getvendordir:
 		@rm -Rf ./vendor
-		@docker cp $(shell docker compose ps -q web):/code/vendor ./vendor
+		@docker compose cp web:/code/vendor ./vendor
+		@docker compose cp web:/code/composer.json ./
+		@docker compose cp web:/code/composer.lock ./
+
+# The scan does not consider packages used by ./orm 
+# as well as the usage of composer patches in composer.json so these are whitelisted
+# Status code 0 -> Success
+composerunused:
+		@docker compose exec -it web sh -c "ls composer-unused.phar || wget https://github.com/composer-unused/composer-unused/releases/latest/download/composer-unused.phar"
+		@docker compose exec -it web php composer-unused.phar --excludePackage=doctrine/migrations --excludePackage=doctrine/doctrine-orm-module --excludePackage=cweagans/composer-patches
 
 replenish:
-		@docker cp ./public "$(shell docker compose ps -q web)":/code
-		@docker cp ./module "$(shell docker compose ps -q web)":/code
-		@docker compose exec web chown -R www-data:www-data /code/public
-		@docker cp ./data "$(shell docker compose ps -q web)":/code
-		@docker compose exec web chown -R www-data:www-data /code/data
-		@docker compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
-		@docker compose exec web composer dump-autoload --dev
-		@docker compose exec web ./orm orm:generate-proxies
-		@docker compose exec web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:generate-proxies"
+		@docker compose cp ./public web:/code
+		@docker compose cp ./module web:/code
+		@docker compose exec -u root web chown -R root:root /code/public /code/module
+		@docker compose exec -u root web chown -R www-data:www-data /code/public/data
+		@docker compose exec -u www-data web rm -rf data/cache/module-config-cache.application.config.cache.php
+		@docker compose exec -u root web composer dump-autoload --dev
+		@docker compose exec -u www-data web ./orm orm:generate-proxies
+		@docker compose exec -u www-data web /bin/sh -c "EM_ALIAS=orm_report ./orm orm:generate-proxies"
 
 translations:
 		@find $(MODULE_DIR) -iname "*.phtml" -print0 | sort -z | xargs -r0 xgettext \

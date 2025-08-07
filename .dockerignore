@@ -41,7 +41,6 @@ nbproject
 node_modules/
 public/css/gewis-theme.css
 public/css/gewis-theme.css.map
-public/data/photo/
 vendor/
 
 # Language binaries are created during the docker build process or using 'make compilelang'

@@ -54,7 +54,8 @@ class TueData
     {
         $this->client = new Client();
         $this->client->setAdapter(Curl::class)
-            ->setEncType('application/json');
+            ->setEncType('application/json')
+            ->setOptions(['timeout' => 5]);
     }
 
     /**
