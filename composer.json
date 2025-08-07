@@ -12,10 +12,6 @@
     "require": {
         "php": "^8.3.0",
         "ext-intl": "*",
-        "ext-pdo_pgsql": "*",
-        "ext-pgsql": "*",
-        "ext-zend-opcache": "*",
-        "ext-zip": "^1.12.0",
         "laminas/laminas-authentication": "^2.16.0",
         "laminas/laminas-config": "^3.9.0",
         "laminas/laminas-cli": "^1.10.0",
@@ -48,15 +44,13 @@
         "doctrine/dbal": "^3.9.3",
         "doctrine/orm": "^2.20.0",
         "doctrine/common": "^3.4.3",
-        "doctrine/doctrine-module": "^6.1.1",
-        "doctrine/doctrine-orm-module": "^6.1.0",
         "doctrine/doctrine-laminas-hydrator": "^3.4.0",
         "monolog/monolog": "^1.27.1",
         "cweagans/composer-patches": "^1.7.3",
         "stripe/stripe-php": "^10.21",
-        "doctrine/migrations": "^3.8",
         "doctrine/data-fixtures": "^2.0",
-        "fakerphp/faker": "^1.24"
+        "doctrine/migrations": "^3.9",
+        "doctrine/doctrine-orm-module": "*"
     },
     "require-dev": {
         "laminas/laminas-component-installer": "^3.4.0",
