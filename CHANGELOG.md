@@ -1,3 +1,8 @@
+## [v4.3.0](https://github.com/GEWIS/gewisdb/tree/v4.3.0) (2025-08-07)
+
+* Mailman API integration for synchronisation of mailing list memberships
+* Improved Docker images and build process
+
 ## [v4.2.1](https://github.com/GEIWS/gewisdb/tree/v4.2.1) (2025-07-02)
 
 * Fix wrong error message being displayed when deleting annulling decision
