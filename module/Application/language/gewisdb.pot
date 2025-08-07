@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-689-gb7cad6d2-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-705-g44080b49-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 12:03+0200\n"
+"POT-Creation-Date: 2025-07-05 21:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,6 +60,14 @@ msgid "%ORGAN_TYPE% %ORGAN_NAME% met afkorting %ORGAN_ABBR% wordt opgericht."
 msgstr ""
 
 #, php-format
+msgid "%d pending mailing list subscriptions"
+msgstr ""
+
+#, php-format
+msgid "%d pending mailing list unsubscriptions"
+msgstr ""
+
+#, php-format
 msgid "%s has been added to %s"
 msgstr ""
 
@@ -83,6 +91,11 @@ msgid ""
 msgstr ""
 
 msgid "A 404 error occurred"
+msgstr ""
+
+msgid ""
+"A Mailman sync is currently in progress. It is now not possible to safely "
+"update the mailing list administration, please try again in a few minutes."
 msgstr ""
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
@@ -354,9 +367,6 @@ msgstr ""
 msgid "Change Data"
 msgstr ""
 
-msgid "Change Mailing List Subscriptions"
-msgstr ""
-
 #, php-format
 msgid "Change Mailing List Subscriptions of %s"
 msgstr ""
@@ -394,6 +404,9 @@ msgid ""
 msgstr ""
 
 msgid "Checkout Status"
+msgstr ""
+
+msgid "Choose a mailing list"
 msgstr ""
 
 msgid "City"
@@ -607,7 +620,13 @@ msgstr ""
 msgid "E-mail Address"
 msgstr ""
 
+msgid "Edit"
+msgstr ""
+
 msgid "Edit / Delete"
+msgstr ""
+
+msgid "Edit Mailing List"
 msgstr ""
 
 msgid "Effective From"
@@ -882,10 +901,20 @@ msgstr ""
 msgid "Last Update to Membership"
 msgstr ""
 
+#, php-format
+msgid "Last fetch of available mailman lists was %s."
+msgstr ""
+
+msgid "Last fetch of mailman lists"
+msgstr ""
+
 msgid "Leave note"
 msgstr ""
 
 msgid "Lid"
+msgstr ""
+
+msgid "Lists"
 msgstr ""
 
 msgid "Log in"
@@ -907,6 +936,15 @@ msgid "Mailing Lists"
 msgstr ""
 
 msgid "Mailing list deleted."
+msgstr ""
+
+msgid "Mailman Mailing List"
+msgstr ""
+
+msgid "Mailman lists not being fetched"
+msgstr ""
+
+msgid "Mailman sync"
 msgstr ""
 
 #, php-format
@@ -998,10 +1036,10 @@ msgstr ""
 msgid "Mutations"
 msgstr ""
 
-msgid "N/A"
+msgid "Name"
 msgstr ""
 
-msgid "Name"
+msgid "Name (Mailman)"
 msgstr ""
 
 msgid "No"
@@ -1107,10 +1145,11 @@ msgstr ""
 msgid "Phone Number"
 msgstr ""
 
+#, php-format
 msgid ""
-"Please check your e-mail address, '%hostname%' does not appear to be able to "
-"receive e-mails. If you are certain that your e-mail address is correct, "
-"please contact the board."
+"Please check your e-mail address, '%s' does not appear to be able to receive "
+"e-mails. If you are certain that your e-mail address is correct, please "
+"contact the board."
 msgstr ""
 
 msgid ""
@@ -1122,6 +1161,11 @@ msgid "Please select a function"
 msgstr ""
 
 msgid "Point"
+msgstr ""
+
+msgid ""
+"Possibly, the mailing list server is down or fetch mechanism is "
+"malfunctioning."
 msgstr ""
 
 msgid "Postal Code"
@@ -1299,6 +1343,9 @@ msgstr ""
 msgid "Supremum"
 msgstr ""
 
+msgid "Sync in progress"
+msgstr ""
+
 msgid "Synchronisation paused"
 msgstr ""
 
@@ -1362,6 +1409,9 @@ msgid "The requested controller was not dispatchable."
 msgstr ""
 
 msgid "The requested controller was unable to dispatch the request."
+msgstr ""
+
+msgid "There are"
 msgstr ""
 
 msgid "There are currently no data update requests."
@@ -1624,13 +1674,23 @@ msgstr ""
 msgid "afgekeurd"
 msgstr ""
 
+msgid "and"
+msgstr ""
+
 msgid "as"
+msgstr ""
+
+#, php-format
+msgid "change %s"
 msgstr ""
 
 msgid "commissiereglement"
 msgstr ""
 
 msgid "dispuutsreglement"
+msgstr ""
+
+msgid "email address change pending"
 msgstr ""
 
 msgid "goedgekeurd"
@@ -1654,6 +1714,12 @@ msgstr ""
 msgid "membership type"
 msgstr ""
 
+msgid "n/a"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
 msgid "onbekend"
 msgstr ""
 
@@ -1668,6 +1734,15 @@ msgstr ""
 
 #, php-format
 msgid "resolves to %s"
+msgstr ""
+
+msgid "synced"
+msgstr ""
+
+msgid "to be created"
+msgstr ""
+
+msgid "to be deleted"
 msgstr ""
 
 msgid ""

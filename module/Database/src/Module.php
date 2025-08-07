@@ -9,7 +9,13 @@ use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\Factory\DeleteExpiredMembersCommandFactory;
 use Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory;
 use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
+use Database\Command\Factory\MailingListMaintenanceCommandFactory;
+use Database\Command\Factory\MailmanFetchListsCommandFactory;
+use Database\Command\Factory\MailmanSyncMembershipCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
+use Database\Command\MailingListMaintenanceCommand;
+use Database\Command\MailmanFetchListsCommand;
+use Database\Command\MailmanSyncMembershipCommand;
 use Database\Form\Abolish as AbolishForm;
 use Database\Form\Address as AddressForm;
 use Database\Form\Annulment as AnnulmentForm;
@@ -72,6 +78,8 @@ use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
 use Database\Mapper\Factory\AuditFactory as AuditMapperFactory;
 use Database\Mapper\Factory\CheckoutSessionFactory as CheckoutSessionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
+use Database\Mapper\Factory\MailingListMemberFactory as MailingListMemberMapperFactory;
+use Database\Mapper\Factory\MailmanMailingListFactory as MailmanMailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
 use Database\Mapper\Factory\MemberFactory as MemberMapperFactory;
 use Database\Mapper\Factory\MemberUpdateFactory as MemberUpdateMapperFactory;
@@ -79,6 +87,8 @@ use Database\Mapper\Factory\OrganFactory as OrganMapperFactory;
 use Database\Mapper\Factory\ProspectiveMemberFactory as ProspectiveMemberMapperFactory;
 use Database\Mapper\Factory\SavedQueryFactory as SavedQueryMapperFactory;
 use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\MailingListMember as MailingListMemberMapper;
+use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Mapper\Meeting as MeetingMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
@@ -99,17 +109,19 @@ use Database\Service\Api as ApiService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
 use Database\Service\Factory\FrontPageFactory as FrontPageServiceFactory;
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
+use Database\Service\Factory\MailmanFactory as MailmanServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
 use Database\Service\Factory\MemberFactory as MemberServiceFactory;
 use Database\Service\Factory\QueryFactory as QueryServiceFactory;
 use Database\Service\Factory\StripeFactory as StripeServiceFactory;
 use Database\Service\FrontPage as FrontPageService;
 use Database\Service\MailingList as MailingListService;
+use Database\Service\Mailman as MailmanService;
 use Database\Service\Meeting as MeetingService;
 use Database\Service\Member as MemberService;
 use Database\Service\Query as QueryService;
 use Database\Service\Stripe as StripeService;
-use Doctrine\Laminas\Hydrator\DoctrineObject;
+use Doctrine\Laminas\Hydrator\DoctrineObject as DoctrineHydrator;
 use Laminas\Http\PhpEnvironment\RemoteAddress;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
@@ -157,10 +169,14 @@ class Module
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
                 DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
+                MailmanFetchListsCommand::class => MailmanFetchListsCommandFactory::class,
+                MailingListMaintenanceCommand::class => MailingListMaintenanceCommandFactory::class,
+                MailmanSyncMembershipCommand::class => MailmanSyncMembershipCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
+                MailmanService::class => MailmanServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
                 StripeService::class => StripeServiceFactory::class,
@@ -198,7 +214,7 @@ class Module
                 },
                 MemberEditForm::class => static function (ContainerInterface $container) {
                     $form = new MemberEditForm($container->get(MvcTranslator::class));
-                    $form->setHydrator($container->get('database_hydrator_default'));
+                    $form->setHydrator($container->get('database_hydrator_default_classmethods'));
 
                     return $form;
                 },
@@ -495,13 +511,19 @@ class Module
                 },
                 ///////////////////////////////////////////////////////////////////////////
                 'database_hydrator_default' => static function (ContainerInterface $container) {
-                    return new DoctrineObject(
+                    return new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
                 },
+                'database_hydrator_default_classmethods' => static function (ContainerInterface $container) {
+                    return new DoctrineHydrator(
+                        $container->get('doctrine.entitymanager.orm_default'),
+                        true,
+                    );
+                },
                 'database_hydrator_address' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
@@ -511,7 +533,7 @@ class Module
                     return $hydrator;
                 },
                 'database_hydrator_meeting' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
@@ -520,7 +542,7 @@ class Module
                     return $hydrator;
                 },
                 'database_hydrator_subdecision' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
@@ -529,7 +551,7 @@ class Module
                     return $hydrator;
                 },
                 'database_hydrator_decision' => static function (ContainerInterface $container) {
-                    $hydrator = new DoctrineObject(
+                    $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
                         false,
                     );
@@ -539,7 +561,9 @@ class Module
                 },
                 ActionLinkMapper::class => ActionLinkMapperFactory::class,
                 AuditMapper::class => AuditMapperFactory::class,
+                MailmanMailingListMapper::class => MailmanMailingListMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
+                MailingListMemberMapper::class => MailingListMemberMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,
                 MemberMapper::class => MemberMapperFactory::class,
                 MemberUpdateMapper::class => MemberUpdateMapperFactory::class,
@@ -552,7 +576,9 @@ class Module
                     $config = $config['email'];
                     $class = '\Laminas\Mail\Transport\\' . $config['transport'];
                     $optionsClass = '\Laminas\Mail\Transport\\' . $config['transport'] . 'Options';
+                    /** @psalm-suppress InvalidStringClass */
                     $transport = new $class();
+                    /** @psalm-suppress InvalidStringClass */
                     $transport->setOptions(new $optionsClass($config['options']));
 
                     return $transport;

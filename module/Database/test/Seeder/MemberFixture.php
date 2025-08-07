@@ -35,7 +35,7 @@ class MemberFixture extends AbstractFixture
             $pros->setLastName('Testdata');
             $pros->setTueUsername('20190001');
             $pros->setBirth(new DateTime('2001-01-01'));
-            $pros->setEmail('tara@gewisdb.local');
+            $pros->setEmail('tara@example.com');
             $pros->setPaid(15);
             $pros->setChangedOn(new DateTime());
             $prosAddress = new Address();
@@ -65,7 +65,7 @@ class MemberFixture extends AbstractFixture
             $student->setFirstName('Timon');
             $student->setMiddleName('de');
             $student->setLastName('Teststudent');
-            $student->setEmail('timon@gewisdb.local');
+            $student->setEmail('timon@example.com');
             $student->setBirth(new DateTime('2000-01-01'));
             $student->setGeneration(2018);
             $student->setType(MembershipTypes::Ordinary);
@@ -83,7 +83,7 @@ class MemberFixture extends AbstractFixture
             $external->setFirstName('Joe');
             $external->setMiddleName('');
             $external->setLastName('Bloggs');
-            $external->setEmail('joe@gewisdb.local');
+            $external->setEmail('joe@example.com');
             $external->setBirth(new DateTime('1999-01-01'));
             $external->setGeneration(2017);
             $external->setType(MembershipTypes::External);
@@ -100,7 +100,7 @@ class MemberFixture extends AbstractFixture
             $graduate->setFirstName('Jack');
             $graduate->setMiddleName('van');
             $graduate->setLastName('Lint');
-            $graduate->setEmail('vanlint@gewisdb.local');
+            $graduate->setEmail('vanlint@example.com');
             $graduate->setBirth(new DateTime('1932-09-01'));
             $graduate->setGeneration(1989);
             $graduate->setType(MembershipTypes::Graduate);

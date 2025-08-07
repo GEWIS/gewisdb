@@ -14,13 +14,11 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\InverseJoinColumn;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Laminas\Mail\Address as MailAddress;
+use RuntimeException;
 
+use function is_string;
 use function mb_encode_mimeheader;
 
 /**
@@ -216,22 +214,14 @@ class Member
     /**
      * Memberships of mailing lists.
      *
-     * @var Collection<array-key, MailingList>
+     * @var Collection<array-key, MailingListMember>
      */
-    #[ManyToMany(
-        targetEntity: MailingList::class,
-        inversedBy: 'members',
+    #[OneToMany(
+        targetEntity: MailingListMember::class,
+        mappedBy: 'member',
+        cascade: ['persist'],
     )]
-    #[JoinTable(name: 'members_mailinglists')]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-    )]
-    #[InverseJoinColumn(
-        name: 'name',
-        referencedColumnName: 'name',
-    )]
-    protected Collection $lists;
+    protected Collection $mailingListMemberships;
 
     /**
      * RenewalLinks of this member.
@@ -283,7 +273,7 @@ class Member
     {
         $this->addresses = new ArrayCollection();
         $this->installations = new ArrayCollection();
-        $this->lists = new ArrayCollection();
+        $this->mailingListMemberships = new ArrayCollection();
     }
 
     /**
@@ -367,9 +357,47 @@ class Member
     /**
      * Set the member's email address.
      */
-    public function setEmail(?string $email): void
+    public function setEmail(?string $newEmail): void
     {
-        $this->email = $email;
+        // If the new email address matches the current, we don't have to do anything
+        if ($this->email === $newEmail) {
+            return;
+        }
+
+        $oldEmail = $this->email;
+        $this->email = $newEmail;
+
+        if (null === $oldEmail) {
+            return;
+        }
+
+        $mailAddressExists = $this->mailingListMemberships->exists(
+            static function ($key, MailingListMember $list) use ($newEmail) {
+                return $newEmail === $list->getEmail();
+            },
+        );
+        if ($mailAddressExists) {
+            throw new RuntimeException(
+                // phpcs:ignore -- user-visible strings should not be split
+                'The e-mail address cannot be updated while there are already (pending) registrations for this member using this email address. Please try again once all list updates have been processed.',
+            );
+        }
+
+        // For each mailing list memberships, schedule deletion of the old email and
+        // registration using the new email address
+        // Will be persisted with the member
+        foreach ($this->mailingListMemberships as $mailingListMembership) {
+            if ($mailingListMembership->isToBeDeleted()) {
+                continue;
+            }
+
+            $mailingListMembership->setToBeDeleted(true);
+            $newMembership = new MailingListMember();
+            $newMembership->setMember($this);
+            $newMembership->setEmail($newEmail);
+            $newMembership->setMailingList($mailingListMembership->getMailingList());
+            $this->addList($newMembership);
+        }
     }
 
     /**
@@ -510,8 +538,12 @@ class Member
     /**
      * Set the birthdate.
      */
-    public function setBirth(DateTime $birth): void
+    public function setBirth(DateTime|string $birth): void
     {
+        if (is_string($birth)) {
+            $birth = new DateTime($birth);
+        }
+
         $this->birth = $birth;
     }
 
@@ -743,42 +775,36 @@ class Member
     /**
      * Get mailing list subscriptions.
      *
-     * @return Collection<array-key, MailingList>
+     * @return Collection<array-key, MailingListMember>
      */
-    public function getLists(): Collection
+    public function getMailingListMemberships(): Collection
     {
-        return $this->lists;
+        return $this->mailingListMemberships;
     }
 
     /**
      * Add a mailing list subscription.
-     *
-     * Note that this is the owning side.
      */
-    public function addList(MailingList $list): void
+    public function addList(MailingListMember $list): void
     {
-        $list->addMember($this);
-        $this->lists[] = $list;
+        if ($this->mailingListMemberships->contains($list)) {
+            return;
+        }
+
+        $list->setMember($this);
+        $this->mailingListMemberships->add($list);
     }
 
     /**
      * Add multiple mailing lists.
      *
-     * @param MailingList[] $lists
+     * @param MailingListMember[] $lists
      */
     public function addLists(array $lists): void
     {
         foreach ($lists as $list) {
             $this->addList($list);
         }
-    }
-
-    /**
-     * Clear the lists.
-     */
-    public function clearLists(): void
-    {
-        $this->lists = new ArrayCollection();
     }
 
     /**
@@ -805,5 +831,14 @@ class Member
     public function getRenewalLinks(): Collection
     {
         return $this->renewalLinks;
+    }
+
+    public function hasActiveRenewalLink(): bool
+    {
+        return $this->getRenewalLinks()->exists(
+            static function ($key, RenewalLink $renewalLink) {
+                return !$renewalLink->linkExpired();
+            },
+        );
     }
 }

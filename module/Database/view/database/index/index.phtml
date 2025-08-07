@@ -14,6 +14,13 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var int $updates
  * @var bool $syncPaused
  * @var ?DateTime $syncPausedUntil
+ * @var DateTime $mailmanLastFetch
+ * @var bool $mailmanLastFetchOverdue
+ * @var ?DateTime $mailmanLastSync
+ * @var array{
+ *  creations: int,
+ *  deletions: int,
+ * } $mailmanChangesPending
  * @var int $totalCount
  */
 
@@ -99,13 +106,63 @@ use Laminas\View\Renderer\PhpRenderer;
             <div class="panel-heading"><?= $this->translate('Prospective Members') ?></div>
             <div class="panel-body">
                 <p>
-                <?php
-                    echo sprintf(
+                <?=
+                    sprintf(
                         $this->translate(
                             '%s prospective member(s) have paid and are pending approval.',
                         ),
                         $prospectives['paid'],
                     );
+                ?>
+                </p>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if ($mailmanLastFetchOverdue): ?>
+        <div class="panel panel-warning">
+            <div class="panel-heading"><?= $this->translate('Mailman lists not being fetched') ?></div>
+            <div class="panel-body">
+                <p>
+                <?=
+                    sprintf(
+                        $this->translate('Last fetch of available mailman lists was %s.') .
+                        ' ' .
+                        $this->translate(
+                            'Possibly, the mailing list server is down or fetch mechanism is malfunctioning.',
+                        ),
+                        $mailmanLastFetch?->format(DateTimeInterface::ATOM) ?: $this->translate('never'),
+                    );
+                ?>
+                </p>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if (0 < $mailmanChangesPending['creations'] || 0 < $mailmanChangesPending['deletions']):
+        $messages = [];
+        if (0 < $mailmanChangesPending['creations']) {
+            $messages[] = sprintf(
+                $this->translate('%d pending mailing list subscriptions'),
+                $mailmanChangesPending['creations'],
+            );
+        }
+
+        if (0 < $mailmanChangesPending['deletions']) {
+            $messages[] = sprintf(
+                $this->translate('%d pending mailing list unsubscriptions'),
+                $mailmanChangesPending['deletions'],
+            );
+        }
+    ?>
+        <div class="panel panel-info">
+            <div class="panel-heading"><?= $this->translate('Mailman sync') ?></div>
+            <div class="panel-body">
+                <p>
+                <?=
+                    $this->translate('There are') . ' ' .
+                    implode(
+                        ' ' . $this->translate('and') . ' ',
+                        $messages,
+                    ) . '.'
                 ?>
                 </p>
             </div>

@@ -116,12 +116,8 @@ class ProspectiveMember
      */
     public function find(int $lidnr): ?ProspectiveMemberModel
     {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('m, l')
-            ->from(ProspectiveMemberModel::class, 'm')
-            ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.lists', 'l');
+        $qb = $this->getRepository()->createQueryBuilder('m');
+        $qb->where('m.lidnr = :lidnr');
 
         $qb->setParameter(':lidnr', $lidnr);
 

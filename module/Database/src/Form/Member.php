@@ -32,6 +32,7 @@ use Throwable;
 use function date;
 use function intval;
 use function preg_match;
+use function sprintf;
 use function str_ends_with;
 use function substr;
 
@@ -342,9 +343,12 @@ class Member extends Form implements InputFilterProviderInterface
                             'allow' => Hostname::ALLOW_DNS,
                             'useMxCheck' => true,
                             'messages' => [
-                                EmailAddress::INVALID_MX_RECORD => $this->translator->translate(
-                                    // phpcs:ignore -- user-visible strings should not be split
-                                    'Please check your e-mail address, \'%hostname%\' does not appear to be able to receive e-mails. If you are certain that your e-mail address is correct, please contact the board.'
+                                EmailAddress::INVALID_MX_RECORD => sprintf(
+                                    $this->translator->translate(
+                                        // phpcs:ignore -- user-visible strings should not be split
+                                        'Please check your e-mail address, \'%s\' does not appear to be able to receive e-mails. If you are certain that your e-mail address is correct, please contact the board.'
+                                    ),
+                                    '%hostname%',
                                 ),
                             ],
                         ],

@@ -3,52 +3,34 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
+use Database\Form\MailingList as MailingListForm;
+use Database\Model\MailingList as MailingListModel;
 use Laminas\View\Renderer\PhpRenderer;
 
-/** @var PhpRenderer|HelperTrait $this */
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var string $action
+ * @var MailingListForm $form
+ * @var MailingListModel $list
+ */
+
+if ('add' === $action) {
+    $title = $this->translate('Add New Mailing List');
+    $url = $this->url('settings/lists/add');
+} else {
+    $title = $this->translate('Edit Mailing List');
+    $url = $this->url('settings/lists/edit', ['name' => $list->getName()]);
+}
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h2><?= $this->translate('Current Mailing Lists') ?></h2>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th><?= $this->translate('Name') ?></th>
-                    <th><?= $this->translate('Dutch Description') ?></th>
-                    <th><?= $this->translate('English Description') ?></th>
-                    <th><?= $this->translate('On Form') ?></th>
-                    <th><?= $this->translate('Auto-subscription') ?></th>
-                    <th><?= $this->translate('Delete') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($lists as $list): ?>
-                <tr>
-                    <td><?= $this->escapeHtml($list->getName()) ?></td>
-                    <td><?= $this->escapeHtml($list->getNlDescription()) ?></td>
-                    <td><?= $this->escapeHtml($list->getEnDescription()) ?></td>
-                    <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>
-                    <td><span class="glyphicon glyphicon-<?= $list->getDefaultSub() ? 'ok' : 'remove' ?>"></span></td>
-                    <td>
-                        <a href="<?= $this->url('settings/list-delete', [
-                            'name' => $list->getName(),
-                        ]) ?>" class="btn btn-xs btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete')?>
-                        </a>
-                    </td>
-                </tr>
-            <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <h2><?= $this->translate('Add New Mailing List') ?></h2>
+        <h2>
+            <?= $title ?>
+        </h2>
         <?php
         $form->prepare();
 
-        $form->setAttribute('action', $this->url('settings/default', ['action' => 'list']));
+        $form->setAttribute('action', $url);
         $form->setAttribute('method', 'post');
 
         $form->setAttribute('role', 'form');
@@ -134,10 +116,22 @@ use Laminas\View\Renderer\PhpRenderer;
         </div>
 
         <div class="form-group">
+            <?php
+            $element = $form->get('mailmanList');
+            $element->setAttribute('placeholder', $element->getLabel());
+            ?>
+            <div class="col-sm-offset-2 col-sm-10">
+                <label><?= $element->getLabel() ?></label>
+                <?= $this->formSelect($element) ?>
+                <?= $this->formElementErrors($element) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <?php
                 $submit = $form->get('submit');
-                $submit->setLabel($submit->getValue());
+                $submit->setLabel($title);
                 $submit->setAttribute('class', 'btn btn-primary');
                 ?>
                 <?= $this->formButton($submit) ?>

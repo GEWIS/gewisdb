@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+use Application\View\HelperTrait;
+use Database\Model\MailingList as MailingListModel;
+use Database\Model\MailmanMailingList as MailmanMailingListModel;
+use Laminas\View\Renderer\PhpRenderer;
+
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MailingListModel[] $lists
+ * @var MailmanMailingListModel[] $mailmanLists
+ * @var DateTime $mailmanLastFetch
+ */
+?>
+<div class="row">
+    <div class="page-header">
+        <div class="btn-toolbar pull-right">
+            <a href="<?= $this->url('settings/lists/add')?>" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+                <?= $this->translate('Add Mailing List') ?>
+            </a>
+        </div>
+        <h2><?= $this->translate('Current Mailing Lists') ?></h2>
+        <?= sprintf(
+            '%s: %s',
+            $this->translate('Last fetch of mailman lists'),
+            $mailmanLastFetch?->format('Y-m-d H:i:s') ?: $this->translate('never')
+        ) ?>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><?= $this->translate('Name (Mailman)') ?></th>
+                    <th><?= $this->translate('Dutch Description') ?></th>
+                    <th><?= $this->translate('English Description') ?></th>
+                    <th><?= $this->translate('On Form') ?></th>
+                    <th><?= $this->translate('Auto-subscription') ?></th>
+                    <th><?= $this->translate('Delete') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($lists as $list): ?>
+                <tr>
+                    <td><?= $this->escapeHtml($list->getName()) ?>
+                        (<?= $this->escapeHtml($list->getMailmanList()?->getMailmanId() ?: $this->translate('n/a'))?>)</td>
+                    <td><?= $this->escapeHtml($list->getNlDescription()) ?></td>
+                    <td><?= $this->escapeHtml($list->getEnDescription()) ?></td>
+                    <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>
+                    <td><span class="glyphicon glyphicon-<?= $list->getDefaultSub() ? 'ok' : 'remove' ?>"></span></td>
+                    <td>
+                        <a href="<?= $this->url('settings/lists/edit', [
+                            'name' => $list->getName(),
+                        ]) ?>" class="btn btn-xs btn-danger">
+                            <span class="glyphicon glyphicon-pencil"></span> <?= $this->translate('Edit')?>
+                        </a>
+                        <a href="<?= $this->url('settings/lists/delete', [
+                            'name' => $list->getName(),
+                        ]) ?>" class="btn btn-xs btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span> <?= $this->translate('Delete')?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>

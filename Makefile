@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparemailman migrate migrate-to migration-down migration-up migration-diff
 
 help:
 		@echo "Makefile commands:"
@@ -33,13 +33,16 @@ runprodtest: buildprod
 		@docker compose -f docker-compose.yml up -d --force-recreate --remove-orphans
 
 rundev: builddev
-		@docker compose up -d --remove-orphans
+		@docker compose up -d --build --remove-orphans
 		@make replenish
 		@docker compose exec web rm -rf data/cache/module-config-cache.application.config.cache.php
 
 migrate: replenish
 		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
 		@docker compose exec -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_report
+
+migrate-to:
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:migrate $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 migration-list: replenish
 		@docker compose exec -T web ./orm migrations:list --object-manager doctrine.entitymanager.orm_default
@@ -52,24 +55,24 @@ migration-diff: replenish
 		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report
 
 migration-up: replenish migration-list
-		@read -p "Enter EM_ALIAS (orm_default or orm_report): " alias; \
-		read -p "Enter the migration version to execute (e.g.,  -- note escaping the backslashes is required): " version; \
-		docker compose exec -it web ./orm migrations:execute --up $$version --object-manager doctrine.entitymanager.$$alias
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --up $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 migration-down: replenish migration-list
-		@read -p "Enter EM_ALIAS (orm_default or orm_report): " alias; \
-		read -p "Enter the migration version to down (e.g.,  -- note escaping the backslashes is required): " version; \
-		docker compose exec -it web ./orm migrations:execute --down $$version --object-manager doctrine.entitymanager.$$alias
+		@docker compose exec web sh -c '. ./scripts/migrate-version.sh && ./orm migrations:execute --down $$migrations --object-manager doctrine.entitymanager.$$alias'
 
 seed: replenish
 		@docker compose exec -T web ./web application:fixtures:load
 		@docker compose exec web ./web report:generate:full
+		@make preparemailman
+		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null); pkill -HUP uwsgi'
+		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
+		@docker compose exec web ./web database:mailman:fetch
 
 exec:
 		docker compose exec -it web $(cmd)
 
 stop:
-		@docker compose down
+		@docker compose down --remove-orphans
 
 runtest: loadenv
 		@vendor/phpunit/phpunit/phpunit --bootstrap ./bootstrap.php --configuration ./phpunit.xml --stop-on-error --stop-on-failure
@@ -101,7 +104,6 @@ translations:
 				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
 				--force-po \
 				--no-location \
-				--sort-output \
 				--package-name=GEWISdb \
 				--package-version=$(shell git describe --dirty --always) \
 				--copyright-holder=GEWIS && \
@@ -113,15 +115,15 @@ translations:
 				--output=$(TRANSLATIONS_DIR)/gewisdb.pot \
 				--force-po \
 				--no-location \
-				--sort-output \
 				--package-name=GEWISdb \
 				--package-version=$(shell git describe --dirty --always) \
 				--copyright-holder=GEWIS \
 				--join-existing && \
-		msgmerge --sort-output -U $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
-		msgmerge --sort-output -U $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
-		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
-		msgattrib --no-obsolete -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
+		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/gewisdb.pot $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgmerge -U $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgmerge -U $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/gewisdb.pot && \
+		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/en.po $(TRANSLATIONS_DIR)/en.po && \
+		msgattrib --no-obsolete --sort-output -o $(TRANSLATIONS_DIR)/nl.po $(TRANSLATIONS_DIR)/nl.po
 
 update: updatecomposer updatedocker
 
@@ -226,3 +228,7 @@ buildnginx:
 
 buildpgadmin:
 		@docker compose build pgadmin
+
+preparemailman:
+		@docker compose cp ./docker/mailman/settings_local.py mailman-web:/opt/mailman-web/settings_local.py
+		@docker compose exec mailman-web bash -c "pkill -HUP uwsgi"

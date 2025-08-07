@@ -8,10 +8,10 @@ services:
         depends_on:
             - web
         volumes:
-            - gewisdb_public:/code/public:ro
-            - gewisdb_logs:/etc/nginx/logs:rw
+            - public:/code/public:ro
+            - logs:/etc/nginx/logs:rw
         networks:
-            - gewisdb_network
+            - network
         # ports:
         #     - "9725:9725"
         restart: unless-stopped
@@ -55,10 +55,10 @@ services:
         depends_on:
             - postfix
         volumes:
-            - gewisdb_data:/code/data:rw
-            - gewisdb_public:/code/public:rw
+            - data:/code/data:rw
+            - public:/code/public:rw
         networks:
-            - gewisdb_network
+            - network
         restart: unless-stopped
     postfix:
         image: juanluisbaptiste/postfix
@@ -71,14 +71,16 @@ services:
 #            - SMTP_PASSWORD=
 #            - SERVER_HOSTNAME=
         networks:
-            - gewisdb_network
+            - network
+        expose:
+            - 1025
         restart: unless-stopped
         stop_grace_period: 60s
 
 volumes:
-    gewisdb_data:
-    gewisdb_public:
-    gewisdb_logs:
+    data:
+    public:
+    logs:
 
 networks:
-    gewisdb_network:
+    network:

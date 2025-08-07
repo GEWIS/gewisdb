@@ -7,6 +7,9 @@ namespace Database;
 use Database\Command\DeleteExpiredMembersCommand;
 use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\GenerateAuthenticationKeysCommand;
+use Database\Command\MailingListMaintenanceCommand;
+use Database\Command\MailmanFetchListsCommand;
+use Database\Command\MailmanSyncMembershipCommand;
 use Database\Controller\ApiController;
 use Database\Controller\ExportController;
 use Database\Controller\Factory\ApiControllerFactory;
@@ -581,15 +584,48 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'list-delete' => [
-                        'type' => Segment::class,
+                    'lists' => [
+                        'type' => Literal::class,
                         'options' => [
-                            'route' => '/list/delete/:name',
-                            'constraints' => [
-                                'name' => '[a-zA-Z0-9_-]+',
-                            ],
+                            'route' => '/lists',
                             'defaults' => [
-                                'action' => 'deleteList',
+                                'action' => 'lists',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'add' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/add',
+                                    'defaults' => [
+                                        'action' => 'addList',
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/edit/:name',
+                                    'constraints' => [
+                                        'name' => '[a-zA-Z0-9_-]+',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'editList',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type' => Segment::class,
+                                'options' => [
+                                    'route' => '/delete/:name',
+                                    'constraints' => [
+                                        'name' => '[a-zA-Z0-9_-]+',
+                                    ],
+                                    'defaults' => [
+                                        'action' => 'deleteList',
+                                    ],
+                                ],
                             ],
                         ],
                     ],
@@ -734,12 +770,18 @@ return [
         'template_path_stack' => [
             'database' => __DIR__ . '/../view/',
         ],
+        'template_map' => [
+            'database/settings/edit-list' => __DIR__ . '/../view/database/settings/add-list.phtml',
+        ],
         'strategies' => [
             'ViewJsonStrategy',
         ],
     ],
     'laminas-cli' => [
         'commands' => [
+            'database:mailinglist:maintenance' => MailingListMaintenanceCommand::class,
+            'database:mailman:fetch' => MailmanFetchListsCommand::class,
+            'database:mailman:syncmembership' => MailmanSyncMembershipCommand::class,
             'database:members:delete-expired' => DeleteExpiredMembersCommand::class,
             'database:members:generate-keys' => GenerateAuthenticationKeysCommand::class,
             'database:prospective-members:delete-expired' => DeleteExpiredProspectiveMembersCommand::class,

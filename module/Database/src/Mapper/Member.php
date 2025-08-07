@@ -18,7 +18,6 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-use function count;
 use function filter_var;
 use function is_numeric;
 use function strtolower;
@@ -36,6 +35,16 @@ class Member
      */
     public function hasMemberWith(string $email): bool
     {
+        $ret = $this->findByEmail($email);
+
+        return null !== $ret;
+    }
+
+    /**
+     * Find by email
+     */
+    public function findByEmail(string $email): ?MemberModel
+    {
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('m')
@@ -45,9 +54,7 @@ class Member
 
         $qb->setParameter(':email', $email);
 
-        $ret = $qb->getQuery()->getResult();
-
-        return null !== $ret && count($ret) > 0;
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -154,7 +161,7 @@ class Member
             ->from(MemberModel::class, 'm')
             ->where('m.lidnr = :lidnr')
             ->leftJoin('m.installations', 'r')
-            ->leftJoin('m.lists', 'l')
+            ->leftJoin('m.mailingListMemberships', 'l')
             ->andWhere('(r.function = \'Lid\' OR r.function = \'Inactief Lid\' OR r.function IS NULL)');
 
         // discharges
@@ -217,7 +224,7 @@ class Member
         $qb->select('m, l')
             ->from('Database\Model\Member', 'm')
             ->where('m.lidnr = :lidnr')
-            ->leftJoin('m.lists', 'l')
+            ->leftJoin('m.mailingListMemberships', 'l')
             ->orderBy('m.lidnr', 'DESC');
 
         $qb->setParameter(':lidnr', $lidnr);
