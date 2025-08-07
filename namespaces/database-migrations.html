@@ -300,6 +300,10 @@
     </h4>
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20241020224949.html"><abbr title="\Database\Migrations\Version20241020224949">Version20241020224949</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20241124183711.html"><abbr title="\Database\Migrations\Version20241124183711">Version20241124183711</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20241208191830.html"><abbr title="\Database\Migrations\Version20241208191830">Version20241208191830</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20250126144021.html"><abbr title="\Database\Migrations\Version20250126144021">Version20250126144021</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20250608122118.html"><abbr title="\Database\Migrations\Version20250608122118">Version20250608122118</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
+phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20250621133117.html"><abbr title="\Database\Migrations\Version20250621133117">Version20250621133117</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
+phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20250621133118.html"><abbr title="\Database\Migrations\Version20250621133118">Version20250621133118</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
+phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20250621133119.html"><abbr title="\Database\Migrations\Version20250621133119">Version20250621133119</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
+phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Migrations-Version20250621133120.html"><abbr title="\Database\Migrations\Version20250621133120">Version20250621133120</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
 phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>    </dl>
 
 
@@ -348,6 +352,8 @@ phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMult
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

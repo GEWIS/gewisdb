@@ -304,11 +304,11 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Mailing List model.</p>
+            <p class="phpdocumentor-summary">Mailing List model for lists on the db side.</p>
 
 
 
@@ -364,18 +364,25 @@
 <dd>English description of the mailing list.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-MailingList.html#property_members">$members</a>
+    <a class="" href="classes/Database-Model-MailingList.html#property_mailingListMemberships">$mailingListMemberships</a>
     <span>
-                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;            </span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;            </span>
 </dt>
 <dd>Mailing list members.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-MailingList.html#property_mailmanList">$mailmanList</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null            </span>
+</dt>
+<dd>The corresponding mailman mailing list</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/Database-Model-MailingList.html#property_name">$name</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd>Mailman-identifier / name.</dd>
+<dd>Name of the mailing list</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/Database-Model-MailingList.html#property_nl_description">$nl_description</a>
@@ -406,25 +413,11 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-MailingList.html#method_addMember">addMember()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Add a member.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-MailingList.html#method_getDefaultSub">getDefaultSub()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 <dd>Get if it is a default list.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-MailingList.html#method_getDescription">getDescription()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Get the description.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-MailingList.html#method_getEnDescription">getEnDescription()</a>
@@ -434,11 +427,18 @@
 <dd>Get the english description.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-MailingList.html#method_getMembers">getMembers()</a>
+    <a class="" href="classes/Database-Model-MailingList.html#method_getMailingListMemberships">getMailingListMemberships()</a>
     <span>
-                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;    </span>
+                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;    </span>
 </dt>
 <dd>Get subscribed members.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-MailingList.html#method_getMailmanList">getMailmanList()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null    </span>
+</dt>
+<dd>Get the matching mailman list, or null if none</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-MailingList.html#method_getName">getName()</a>
@@ -459,7 +459,14 @@
     <span>
                                 &nbsp;: bool    </span>
 </dt>
-<dd>Get if it should be on the form.</dd>
+<dd>Get if it should be on the join form.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-MailingList.html#method_hasMailmanList">hasMailmanList()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Check if this has a mailman mailing list</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-MailingList.html#method_setDefaultSub">setDefaultSub()</a>
@@ -469,18 +476,18 @@
 <dd>Set if it is a default list.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-MailingList.html#method_setDescription">setDescription()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Set the description.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-MailingList.html#method_setEnDescription">setEnDescription()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Set the english description.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-MailingList.html#method_setMailmanList">setMailmanList()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the corresponding mailman list</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-MailingList.html#method_setName">setName()</a>
@@ -501,7 +508,13 @@
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Set if it should be on the form.</dd>
+<dd>Set if it should be on the join form.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-MailingList.html#method_toArray">toArray()</a>
+    <span>
+                                &nbsp;: array{name: string, nl_description: string, en_description: string, defaultSub: bool, onForm: bool, mailmanList: ?string}    </span>
+</dt>
 
     </dl>
 
@@ -533,7 +546,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
@@ -588,7 +601,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -631,9 +644,65 @@
             -protected
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_members">
-        $members
-        <a href="classes/Database-Model-MailingList.html#property_members" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_mailingListMemberships">
+        $mailingListMemberships
+        <a href="classes/Database-Model-MailingList.html#property_mailingListMemberships" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Mailing list members.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$mailingListMemberships</span>
+    </code>
+
+    
+    
+    
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-MailingList.html#property_mailingListMemberships#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\MailingListMember::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $mappedBy: &#039;mailingList&#039;
+    </dd>
+    </dl>
+            </section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mailmanList">
+        $mailmanList
+        <a href="classes/Database-Model-MailingList.html#property_mailmanList" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
@@ -645,13 +714,13 @@
 
     </aside>
 
-        <p class="phpdocumentor-summary">Mailing list members.</p>
+        <p class="phpdocumentor-summary">The corresponding mailman mailing list</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
-    <span class="phpdocumentor-signature__name">$members</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$mailmanList</span>
     </code>
 
     
@@ -661,18 +730,29 @@
     
     <section class="phpdocumentor-attributes">
         <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-MailingList.html#property_members#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+            Attributes <a href="classes/Database-Model-MailingList.html#property_mailmanList#attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h5>
                     <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\ManyToMany">ManyToMany</abbr>]
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $targetEntity: \Database\Model\Member::class
+        $name: &#039;mailmanId&#039;
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
-        $mappedBy: &#039;lists&#039;
+        $referencedColumnName: &#039;id&#039;
+    </dd>
+    </dl>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToOne">OneToOne</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\MailmanMailingList::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $inversedBy: &#039;mailingList&#039;
     </dd>
     </dl>
             </section>
@@ -697,11 +777,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Mailman-identifier / name.</p>
+        <p class="phpdocumentor-summary">Name of the mailing list</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -755,7 +835,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -808,7 +888,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -866,7 +946,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -892,51 +972,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_addMember">
-        addMember()
-        <a href="classes/Database-Model-MailingList.html#method_addMember" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">178</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Add a member.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$member</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getDefaultSub">
         getDefaultSub()
         <a href="classes/Database-Model-MailingList.html#method_getDefaultSub" class="headerlink"><i class="fas fa-link"></i></a>
@@ -945,7 +980,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">151</span>
 
     </aside>
 
@@ -976,45 +1011,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getDescription">
-        getDescription()
-        <a href="classes/Database-Model-MailingList.html#method_getDescription" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">120</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the description.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getEnDescription">
         getEnDescription()
         <a href="classes/Database-Model-MailingList.html#method_getEnDescription" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1023,7 +1019,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -1054,15 +1050,15 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMembers">
-        getMembers()
-        <a href="classes/Database-Model-MailingList.html#method_getMembers" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getMailingListMemberships">
+        getMailingListMemberships()
+        <a href="classes/Database-Model-MailingList.html#method_getMailingListMemberships" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">193</span>
 
     </aside>
 
@@ -1070,7 +1066,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMembers</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getMailingListMemberships</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1083,7 +1079,46 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&gt;</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getMailmanList">
+        getMailmanList()
+        <a href="classes/Database-Model-MailingList.html#method_getMailmanList" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">167</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the matching mailman list, or null if none</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getMailmanList</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null</span>
             </section>
 
 </article>
@@ -1101,7 +1136,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
@@ -1140,7 +1175,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -1179,15 +1214,54 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get if it should be on the form.</p>
+        <p class="phpdocumentor-summary">Get if it should be on the join form.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getOnForm</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasMailmanList">
+        hasMailmanList()
+        <a href="classes/Database-Model-MailingList.html#method_hasMailmanList" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">175</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Check if this has a mailman mailing list</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasMailmanList</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1218,7 +1292,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -1255,51 +1329,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setDescription">
-        setDescription()
-        <a href="classes/Database-Model-MailingList.html#method_setDescription" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">128</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Set the description.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setDescription</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$description</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setEnDescription">
         setEnDescription()
         <a href="classes/Database-Model-MailingList.html#method_setEnDescription" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1308,7 +1337,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">96</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -1345,6 +1374,51 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setMailmanList">
+        setMailmanList()
+        <a href="classes/Database-Model-MailingList.html#method_setMailmanList" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">183</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the corresponding mailman list</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setMailmanList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailmanList</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mailmanList</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setName">
         setName()
         <a href="classes/Database-Model-MailingList.html#method_setName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1353,7 +1427,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
@@ -1398,7 +1472,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">112</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -1443,11 +1517,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">143</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Set if it should be on the form.</p>
+        <p class="phpdocumentor-summary">Set if it should be on the join form.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1473,6 +1547,44 @@
     
 
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_toArray">
+        toArray()
+        <a href="classes/Database-Model-MailingList.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingList.php"><a href="files/module-database-src-model-mailinglist.html"><abbr title="module/Database/src/Model/MailingList.php">MailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">208</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{name: string, nl_description: string, en_description: string, defaultSub: bool, onForm: bool, mailmanList: ?string}</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array{name: string, nl_description: string, en_description: string, defaultSub: bool, onForm: bool, mailmanList: ?string}</span>
+            </section>
+
 </article>
             </section>
 
@@ -1512,6 +1624,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 
@@ -1589,7 +1703,8 @@
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/Database-Model-MailingList.html#property_defaultSub">$defaultSub</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingList.html#property_en_description">$en_description</a></li>
-                                                    <li class=""><a href="classes/Database-Model-MailingList.html#property_members">$members</a></li>
+                                                    <li class=""><a href="classes/Database-Model-MailingList.html#property_mailingListMemberships">$mailingListMemberships</a></li>
+                                                    <li class=""><a href="classes/Database-Model-MailingList.html#property_mailmanList">$mailmanList</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingList.html#property_name">$name</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingList.html#property_nl_description">$nl_description</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingList.html#property_onForm">$onForm</a></li>
@@ -1600,20 +1715,21 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_addMember">addMember()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_getDefaultSub">getDefaultSub()</a></li>
-                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_getDescription">getDescription()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_getEnDescription">getEnDescription()</a></li>
-                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_getMembers">getMembers()</a></li>
+                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_getMailingListMemberships">getMailingListMemberships()</a></li>
+                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_getMailmanList">getMailmanList()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_getName">getName()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_getNlDescription">getNlDescription()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_getOnForm">getOnForm()</a></li>
+                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_hasMailmanList">hasMailmanList()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_setDefaultSub">setDefaultSub()</a></li>
-                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_setDescription">setDescription()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_setEnDescription">setEnDescription()</a></li>
+                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_setMailmanList">setMailmanList()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_setName">setName()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_setNlDescription">setNlDescription()</a></li>
                                             <li class=""><a href="classes/Database-Model-MailingList.html#method_setOnForm">setOnForm()</a></li>
+                                            <li class=""><a href="classes/Database-Model-MailingList.html#method_toArray">toArray()</a></li>
                                     </ul>
             </li>
                     </ul>

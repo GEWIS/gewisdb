@@ -304,7 +304,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -473,9 +473,9 @@ the TU/e in general, or another institution).</dd>
 <dd>The user</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-Member.html#property_lists">$lists</a>
+    <a class="" href="classes/Database-Model-Member.html#property_mailingListMemberships">$mailingListMemberships</a>
     <span>
-                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;            </span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;            </span>
 </dt>
 <dd>Memberships of mailing lists.</dd>
 
@@ -578,13 +578,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                 &nbsp;: void    </span>
 </dt>
 <dd>Add multiple mailing lists.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_clearLists">clearLists()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Clear the lists.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_getAddresses">getAddresses()</a>
@@ -719,9 +712,9 @@ member still meets the requirements as set forth in the bylaws and internal regu
 <dd>Get the membership number.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Member.html#method_getLists">getLists()</a>
+    <a class="" href="classes/Database-Model-Member.html#method_getMailingListMemberships">getMailingListMemberships()</a>
     <span>
-                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;    </span>
+                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;    </span>
 </dt>
 <dd>Get mailing list subscriptions.</dd>
 
@@ -780,6 +773,12 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                 &nbsp;: <a href="classes/Application-Model-Enums-MembershipTypes.html"><abbr title="\Application\Model\Enums\MembershipTypes">MembershipTypes</abbr></a>    </span>
 </dt>
 <dd>Get the member type.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Member.html#method_hasActiveRenewalLink">hasActiveRenewalLink()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Member.html#method_setAuthenticationKey">setAuthenticationKey()</a>
@@ -978,7 +977,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">198</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
@@ -1037,7 +1036,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">253</span>
+    <span class="phpdocumentor-element-found-in__line">243</span>
 
     </aside>
 
@@ -1096,7 +1095,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">263</span>
+    <span class="phpdocumentor-element-found-in__line">253</span>
 
     </aside>
 
@@ -1152,7 +1151,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">161</span>
 
     </aside>
 
@@ -1205,7 +1204,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">123</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
@@ -1258,7 +1257,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">276</span>
+    <span class="phpdocumentor-element-found-in__line">266</span>
 
     </aside>
 
@@ -1318,7 +1317,7 @@ when deleting a member and cannot be altered via the interface.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -1374,7 +1373,7 @@ when deleting a member and cannot be altered via the interface.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">148</span>
+    <span class="phpdocumentor-element-found-in__line">146</span>
 
     </aside>
 
@@ -1428,7 +1427,7 @@ happens either automatically or has to be done manually, as set forth in the byl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -1481,7 +1480,7 @@ happens either automatically or has to be done manually, as set forth in the byl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -1537,7 +1536,7 @@ a academic year, but rather a calendar year.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">187</span>
+    <span class="phpdocumentor-element-found-in__line">185</span>
 
     </aside>
 
@@ -1596,7 +1595,7 @@ deleted members and members that are deceased but whose profile should be kept.<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
@@ -1649,7 +1648,7 @@ deleted members and members that are deceased but whose profile should be kept.<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">208</span>
 
     </aside>
 
@@ -1705,7 +1704,7 @@ deleted members and members that are deceased but whose profile should be kept.<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
@@ -1759,7 +1758,7 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">154</span>
+    <span class="phpdocumentor-element-found-in__line">152</span>
 
     </aside>
 
@@ -1815,7 +1814,7 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -1868,7 +1867,7 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -1924,9 +1923,9 @@ the TU/e in general, or another institution).</p>
             -protected
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_lists">
-        $lists
-        <a href="classes/Database-Model-Member.html#property_lists" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_mailingListMemberships">
+        $mailingListMemberships
+        <a href="classes/Database-Model-Member.html#property_mailingListMemberships" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
@@ -1934,7 +1933,7 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">221</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 
     </aside>
 
@@ -1943,8 +1942,8 @@ the TU/e in general, or another institution).</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span>
-    <span class="phpdocumentor-signature__name">$lists</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$mailingListMemberships</span>
     </code>
 
     
@@ -1954,48 +1953,21 @@ the TU/e in general, or another institution).</p>
     
     <section class="phpdocumentor-attributes">
         <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-Member.html#property_lists#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+            Attributes <a href="classes/Database-Model-Member.html#property_mailingListMemberships#attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h5>
                     <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\InverseJoinColumn">InverseJoinColumn</abbr>]
+        #[<abbr title="\Doctrine\ORM\Mapping\OneToMany">OneToMany</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $name: &#039;name&#039;
+        $targetEntity: \Database\Model\MailingListMember::class
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
-        $referencedColumnName: &#039;name&#039;
-    </dd>
-    </dl>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $name: &#039;lidnr&#039;
+        $mappedBy: &#039;member&#039;
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
-        $referencedColumnName: &#039;lidnr&#039;
-    </dd>
-    </dl>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\JoinTable">JoinTable</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $name: &#039;members_mailinglists&#039;
-    </dd>
-    </dl>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\ManyToMany">ManyToMany</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $targetEntity: \Database\Model\MailingList::class
-    </dd>
-        <dd class="phpdocumentor-argument-list__entry">
-        $inversedBy: &#039;members&#039;
+        $cascade: [&#039;persist&#039;]
     </dd>
     </dl>
             </section>
@@ -2020,7 +1992,7 @@ the TU/e in general, or another institution).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -2078,7 +2050,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
@@ -2131,7 +2103,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">169</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
@@ -2184,7 +2156,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">241</span>
+    <span class="phpdocumentor-element-found-in__line">231</span>
 
     </aside>
 
@@ -2243,7 +2215,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -2299,7 +2271,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">175</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
     </aside>
 
@@ -2355,7 +2327,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -2411,7 +2383,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">114</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
@@ -2482,7 +2454,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">282</span>
+    <span class="phpdocumentor-element-found-in__line">272</span>
 
     </aside>
 
@@ -2516,7 +2488,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">737</span>
+    <span class="phpdocumentor-element-found-in__line">769</span>
 
     </aside>
 
@@ -2561,7 +2533,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">727</span>
+    <span class="phpdocumentor-element-found-in__line">759</span>
 
     </aside>
 
@@ -2606,7 +2578,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">758</span>
+    <span class="phpdocumentor-element-found-in__line">788</span>
 
     </aside>
 
@@ -2614,19 +2586,17 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">addList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Note that this is the owning side.</p>
-</section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$list</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2653,7 +2623,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">769</span>
+    <span class="phpdocumentor-element-found-in__line">803</span>
 
     </aside>
 
@@ -2661,7 +2631,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addLists</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lists</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">addLists</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lists</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2671,48 +2641,13 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$lists</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
             </dl>
 
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_clearLists">
-        clearLists()
-        <a href="classes/Database-Model-Member.html#method_clearLists" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">779</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Clear the lists.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">clearLists</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
     
 
     
@@ -2733,7 +2668,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">717</span>
+    <span class="phpdocumentor-element-found-in__line">749</span>
 
     </aside>
 
@@ -2772,7 +2707,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">645</span>
+    <span class="phpdocumentor-element-found-in__line">677</span>
 
     </aside>
 
@@ -2811,7 +2746,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">650</span>
+    <span class="phpdocumentor-element-found-in__line">682</span>
 
     </aside>
 
@@ -2849,7 +2784,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">505</span>
+    <span class="phpdocumentor-element-found-in__line">533</span>
 
     </aside>
 
@@ -2888,7 +2823,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">521</span>
+    <span class="phpdocumentor-element-found-in__line">553</span>
 
     </aside>
 
@@ -2927,7 +2862,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">663</span>
+    <span class="phpdocumentor-element-found-in__line">695</span>
 
     </aside>
 
@@ -2966,7 +2901,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">302</span>
+    <span class="phpdocumentor-element-found-in__line">292</span>
 
     </aside>
 
@@ -3005,7 +2940,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">310</span>
+    <span class="phpdocumentor-element-found-in__line">300</span>
 
     </aside>
 
@@ -3044,7 +2979,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">489</span>
+    <span class="phpdocumentor-element-found-in__line">517</span>
 
     </aside>
 
@@ -3083,7 +3018,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">354</span>
+    <span class="phpdocumentor-element-found-in__line">344</span>
 
     </aside>
 
@@ -3122,7 +3057,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">410</span>
+    <span class="phpdocumentor-element-found-in__line">438</span>
 
     </aside>
 
@@ -3161,7 +3096,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">425</span>
+    <span class="phpdocumentor-element-found-in__line">453</span>
 
     </aside>
 
@@ -3200,7 +3135,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">617</span>
+    <span class="phpdocumentor-element-found-in__line">649</span>
 
     </aside>
 
@@ -3239,7 +3174,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">346</span>
+    <span class="phpdocumentor-element-found-in__line">336</span>
 
     </aside>
 
@@ -3278,7 +3213,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">635</span>
+    <span class="phpdocumentor-element-found-in__line">667</span>
 
     </aside>
 
@@ -3317,7 +3252,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">537</span>
+    <span class="phpdocumentor-element-found-in__line">569</span>
 
     </aside>
 
@@ -3356,7 +3291,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">569</span>
+    <span class="phpdocumentor-element-found-in__line">601</span>
 
     </aside>
 
@@ -3395,7 +3330,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">330</span>
+    <span class="phpdocumentor-element-found-in__line">320</span>
 
     </aside>
 
@@ -3434,7 +3369,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">294</span>
+    <span class="phpdocumentor-element-found-in__line">284</span>
 
     </aside>
 
@@ -3479,15 +3414,15 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getLists">
-        getLists()
-        <a href="classes/Database-Model-Member.html#method_getLists" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getMailingListMemberships">
+        getMailingListMemberships()
+        <a href="classes/Database-Model-Member.html#method_getMailingListMemberships" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">748</span>
+    <span class="phpdocumentor-element-found-in__line">780</span>
 
     </aside>
 
@@ -3495,7 +3430,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getLists</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getMailingListMemberships</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3508,7 +3443,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&gt;</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
             </section>
 
 </article>
@@ -3526,7 +3461,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">553</span>
+    <span class="phpdocumentor-element-found-in__line">585</span>
 
     </aside>
 
@@ -3565,7 +3500,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">338</span>
+    <span class="phpdocumentor-element-found-in__line">328</span>
 
     </aside>
 
@@ -3604,7 +3539,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">585</span>
+    <span class="phpdocumentor-element-found-in__line">617</span>
 
     </aside>
 
@@ -3643,7 +3578,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">805</span>
+    <span class="phpdocumentor-element-found-in__line">831</span>
 
     </aside>
 
@@ -3682,7 +3617,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">457</span>
+    <span class="phpdocumentor-element-found-in__line">485</span>
 
     </aside>
 
@@ -3721,7 +3656,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">601</span>
+    <span class="phpdocumentor-element-found-in__line">633</span>
 
     </aside>
 
@@ -3760,7 +3695,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">441</span>
+    <span class="phpdocumentor-element-found-in__line">469</span>
 
     </aside>
 
@@ -3799,7 +3734,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">473</span>
+    <span class="phpdocumentor-element-found-in__line">501</span>
 
     </aside>
 
@@ -3830,6 +3765,44 @@ member still meets the requirements as set forth in the bylaws and internal regu
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_hasActiveRenewalLink">
+        hasActiveRenewalLink()
+        <a href="classes/Database-Model-Member.html#method_hasActiveRenewalLink" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">836</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasActiveRenewalLink</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setAuthenticationKey">
         setAuthenticationKey()
         <a href="classes/Database-Model-Member.html#method_setAuthenticationKey" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3838,7 +3811,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">655</span>
+    <span class="phpdocumentor-element-found-in__line">687</span>
 
     </aside>
 
@@ -3882,7 +3855,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">513</span>
+    <span class="phpdocumentor-element-found-in__line">541</span>
 
     </aside>
 
@@ -3890,7 +3863,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setBirth</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$birth</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setBirth</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$birth</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3900,7 +3873,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$birth</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>|string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -3927,7 +3900,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">529</span>
+    <span class="phpdocumentor-element-found-in__line">561</span>
 
     </aside>
 
@@ -3972,7 +3945,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">671</span>
+    <span class="phpdocumentor-element-found-in__line">703</span>
 
     </aside>
 
@@ -4017,7 +3990,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">370</span>
+    <span class="phpdocumentor-element-found-in__line">360</span>
 
     </aside>
 
@@ -4025,7 +3998,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newEmail</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -4034,7 +4007,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$email</span>
+                <span class="phpdocumentor-signature__argument__name">$newEmail</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -4062,7 +4035,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">497</span>
+    <span class="phpdocumentor-element-found-in__line">525</span>
 
     </aside>
 
@@ -4107,7 +4080,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">402</span>
+    <span class="phpdocumentor-element-found-in__line">430</span>
 
     </aside>
 
@@ -4152,7 +4125,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">433</span>
+    <span class="phpdocumentor-element-found-in__line">461</span>
 
     </aside>
 
@@ -4197,7 +4170,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">625</span>
+    <span class="phpdocumentor-element-found-in__line">657</span>
 
     </aside>
 
@@ -4242,7 +4215,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">787</span>
+    <span class="phpdocumentor-element-found-in__line">813</span>
 
     </aside>
 
@@ -4287,7 +4260,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">394</span>
+    <span class="phpdocumentor-element-found-in__line">422</span>
 
     </aside>
 
@@ -4332,7 +4305,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">545</span>
+    <span class="phpdocumentor-element-found-in__line">577</span>
 
     </aside>
 
@@ -4377,7 +4350,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">577</span>
+    <span class="phpdocumentor-element-found-in__line">609</span>
 
     </aside>
 
@@ -4422,7 +4395,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">378</span>
+    <span class="phpdocumentor-element-found-in__line">406</span>
 
     </aside>
 
@@ -4467,7 +4440,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">362</span>
+    <span class="phpdocumentor-element-found-in__line">352</span>
 
     </aside>
 
@@ -4512,7 +4485,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">561</span>
+    <span class="phpdocumentor-element-found-in__line">593</span>
 
     </aside>
 
@@ -4557,7 +4530,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">386</span>
+    <span class="phpdocumentor-element-found-in__line">414</span>
 
     </aside>
 
@@ -4602,7 +4575,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">593</span>
+    <span class="phpdocumentor-element-found-in__line">625</span>
 
     </aside>
 
@@ -4647,7 +4620,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">795</span>
+    <span class="phpdocumentor-element-found-in__line">821</span>
 
     </aside>
 
@@ -4692,7 +4665,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">465</span>
+    <span class="phpdocumentor-element-found-in__line">493</span>
 
     </aside>
 
@@ -4737,7 +4710,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">609</span>
+    <span class="phpdocumentor-element-found-in__line">641</span>
 
     </aside>
 
@@ -4782,7 +4755,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">449</span>
+    <span class="phpdocumentor-element-found-in__line">477</span>
 
     </aside>
 
@@ -4827,7 +4800,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">481</span>
+    <span class="phpdocumentor-element-found-in__line">509</span>
 
     </aside>
 
@@ -4872,7 +4845,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Member.php"><a href="files/module-database-src-model-member.html"><abbr title="module/Database/src/Model/Member.php">Member.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">694</span>
+    <span class="phpdocumentor-element-found-in__line">726</span>
 
     </aside>
 
@@ -4935,6 +4908,8 @@ member still meets the requirements as set forth in the bylaws and internal regu
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 
@@ -5027,7 +5002,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_lastCheckedOn">$lastCheckedOn</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_lastName">$lastName</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_lidnr">$lidnr</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Member.html#property_lists">$lists</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Member.html#property_mailingListMemberships">$mailingListMemberships</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_membershipEndsOn">$membershipEndsOn</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_middleName">$middleName</a></li>
                                                     <li class=""><a href="classes/Database-Model-Member.html#property_paid">$paid</a></li>
@@ -5047,7 +5022,6 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                             <li class=""><a href="classes/Database-Model-Member.html#method_addAddresses">addAddresses()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_addList">addList()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_addLists">addLists()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_clearLists">clearLists()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getAddresses">getAddresses()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getAuditEntries">getAuditEntries()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getAuthenticationKey">getAuthenticationKey()</a></li>
@@ -5067,7 +5041,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getLastCheckedOn">getLastCheckedOn()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getLastName">getLastName()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getLidnr">getLidnr()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Member.html#method_getLists">getLists()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_getMailingListMemberships">getMailingListMemberships()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getMembershipEndsOn">getMembershipEndsOn()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getMiddleName">getMiddleName()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getPaid">getPaid()</a></li>
@@ -5076,6 +5050,7 @@ member still meets the requirements as set forth in the bylaws and internal regu
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getSupremum">getSupremum()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getTueUsername">getTueUsername()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_getType">getType()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Member.html#method_hasActiveRenewalLink">hasActiveRenewalLink()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setAuthenticationKey">setAuthenticationKey()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setBirth">setBirth()</a></li>
                                             <li class=""><a href="classes/Database-Model-Member.html#method_setChangedOn">setChangedOn()</a></li>

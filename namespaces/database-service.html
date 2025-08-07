@@ -307,7 +307,7 @@
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Api.html"><abbr title="\Database\Service\Api">Api</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-FrontPage.html"><abbr title="\Database\Service\FrontPage">FrontPage</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-MailingList.html"><abbr title="\Database\Service\MailingList">MailingList</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Meeting.html"><abbr title="\Database\Service\Meeting">Meeting</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Query.html"><abbr title="\Database\Service\Query">Query</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Stripe.html"><abbr title="\Database\Service\Stripe">Stripe</abbr></a></dt>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Api.html"><abbr title="\Database\Service\Api">Api</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-FrontPage.html"><abbr title="\Database\Service\FrontPage">FrontPage</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-MailingList.html"><abbr title="\Database\Service\MailingList">MailingList</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Mailman.html"><abbr title="\Database\Service\Mailman">Mailman</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Meeting.html"><abbr title="\Database\Service\Meeting">Meeting</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Member.html"><abbr title="\Database\Service\Member">Member</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Query.html"><abbr title="\Database\Service\Query">Query</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Service-Stripe.html"><abbr title="\Database\Service\Stripe">Stripe</abbr></a></dt>    </dl>
 
 
 
@@ -355,6 +355,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

@@ -300,6 +300,8 @@
     </h4>
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Migrations-Version20241020224949.html"><abbr title="\Report\Migrations\Version20241020224949">Version20241020224949</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Migrations-Version20241124183712.html"><abbr title="\Report\Migrations\Version20241124183712">Version20241124183712</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Migrations-Version20250608122118.html"><abbr title="\Report\Migrations\Version20250608122118">Version20250608122118</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
+phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Migrations-Version20250621133118.html"><abbr title="\Report\Migrations\Version20250621133118">Version20250621133118</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
+phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Report-Migrations-Version20250621133119.html"><abbr title="\Report\Migrations\Version20250621133119">Version20250621133119</abbr></a></dt><dd>phpcs:disable Generic.Files.LineLength.TooLong
 phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</dd>    </dl>
 
 
@@ -348,6 +350,8 @@ phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMult
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

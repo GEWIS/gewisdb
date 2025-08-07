@@ -206,6 +206,11 @@ Search.appendIndex(
             "summary": "If\u0020the\u0020item\u0020is\u0020a\u0020DateTime,\u0020its\u0020value.",
             "url": "classes/Application-Model-ConfigItem.html#property_valueDate"
         },                {
+            "fqsen": "\\Application\\Model\\ConfigItem\u003A\u003A\u0024valueBool",
+            "name": "valueBool",
+            "summary": "If\u0020the\u0020item\u0020is\u0020a\u0020boolean,\u0020its\u0020value.",
+            "url": "classes/Application-Model-ConfigItem.html#property_valueBool"
+        },                {
             "fqsen": "\\Application\\Model\\Enums\\AddressTypes",
             "name": "AddressTypes",
             "summary": "Enum\u0020for\u0020the\u0020different\u0020address\u0020types.",
@@ -280,6 +285,11 @@ Search.appendIndex(
             "name": "DatabaseApi",
             "summary": "",
             "url": "classes/Application-Model-Enums-ConfigNamespaces.html#enumcase_DatabaseApi"
+        },                {
+            "fqsen": "\\Application\\Model\\Enums\\ConfigNamespaces\u003A\u003ADatabaseMailman",
+            "name": "DatabaseMailman",
+            "summary": "",
+            "url": "classes/Application-Model-Enums-ConfigNamespaces.html#enumcase_DatabaseMailman"
         },                {
             "fqsen": "\\Application\\Model\\Enums\\MeetingTypes",
             "name": "MeetingTypes",
@@ -3411,6 +3421,86 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20250608122118.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133117",
+            "name": "Version20250621133117",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20250621133117.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133117\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133117.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133117\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133117.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133117\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133117.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133118",
+            "name": "Version20250621133118",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20250621133118.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133118\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133118.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133118\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133118.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133118\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133118.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133119",
+            "name": "Version20250621133119",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20250621133119.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133119\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133119.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133119\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133119.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133119\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133119.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133120",
+            "name": "Version20250621133120",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20250621133120.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133120\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133120.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133120\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133120.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250621133120\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250621133120.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -3486,6 +3576,36 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Command-Factory-GenerateAuthenticationKeysCommandFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Database\\Command\\Factory\\MailingListMaintenanceCommandFactory",
+            "name": "MailingListMaintenanceCommandFactory",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-MailingListMaintenanceCommandFactory.html"
+        },                {
+            "fqsen": "\\Database\\Command\\Factory\\MailingListMaintenanceCommandFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-MailingListMaintenanceCommandFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Command\\Factory\\MailmanFetchListsCommandFactory",
+            "name": "MailmanFetchListsCommandFactory",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-MailmanFetchListsCommandFactory.html"
+        },                {
+            "fqsen": "\\Database\\Command\\Factory\\MailmanFetchListsCommandFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-MailmanFetchListsCommandFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Command\\Factory\\MailmanSyncMembershipCommandFactory",
+            "name": "MailmanSyncMembershipCommandFactory",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-MailmanSyncMembershipCommandFactory.html"
+        },                {
+            "fqsen": "\\Database\\Command\\Factory\\MailmanSyncMembershipCommandFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Command-Factory-MailmanSyncMembershipCommandFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Database\\Command\\GenerateAuthenticationKeysCommand",
             "name": "GenerateAuthenticationKeysCommand",
             "summary": "",
@@ -3505,6 +3625,86 @@ Search.appendIndex(
             "name": "memberService",
             "summary": "",
             "url": "classes/Database-Command-GenerateAuthenticationKeysCommand.html#property_memberService"
+        },                {
+            "fqsen": "\\Database\\Command\\MailingListMaintenanceCommand",
+            "name": "MailingListMaintenanceCommand",
+            "summary": "",
+            "url": "classes/Database-Command-MailingListMaintenanceCommand.html"
+        },                {
+            "fqsen": "\\Database\\Command\\MailingListMaintenanceCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Command-MailingListMaintenanceCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Command\\MailingListMaintenanceCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Database-Command-MailingListMaintenanceCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Database\\Command\\MailingListMaintenanceCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Database-Command-MailingListMaintenanceCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Database\\Command\\MailingListMaintenanceCommand\u003A\u003APARAM_FORCE",
+            "name": "PARAM_FORCE",
+            "summary": "",
+            "url": "classes/Database-Command-MailingListMaintenanceCommand.html#constant_PARAM_FORCE"
+        },                {
+            "fqsen": "\\Database\\Command\\MailingListMaintenanceCommand\u003A\u003A\u0024mailingListService",
+            "name": "mailingListService",
+            "summary": "",
+            "url": "classes/Database-Command-MailingListMaintenanceCommand.html#property_mailingListService"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanFetchListsCommand",
+            "name": "MailmanFetchListsCommand",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanFetchListsCommand.html"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanFetchListsCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanFetchListsCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanFetchListsCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanFetchListsCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanFetchListsCommand\u003A\u003A\u0024mailmanService",
+            "name": "mailmanService",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanFetchListsCommand.html#property_mailmanService"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanSyncMembershipCommand",
+            "name": "MailmanSyncMembershipCommand",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanSyncMembershipCommand.html"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanSyncMembershipCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanSyncMembershipCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanSyncMembershipCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanSyncMembershipCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanSyncMembershipCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanSyncMembershipCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanSyncMembershipCommand\u003A\u003APARAM_FORCE",
+            "name": "PARAM_FORCE",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanSyncMembershipCommand.html#constant_PARAM_FORCE"
+        },                {
+            "fqsen": "\\Database\\Command\\MailmanSyncMembershipCommand\u003A\u003A\u0024mailmanService",
+            "name": "mailmanService",
+            "summary": "",
+            "url": "classes/Database-Command-MailmanSyncMembershipCommand.html#property_mailmanService"
         },                {
             "fqsen": "\\Database\\Controller\\ApiController",
             "name": "ApiController",
@@ -3916,6 +4116,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Controller-MemberController.html#property_checkerService"
         },                {
+            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003A\u0024mailmanService",
+            "name": "mailmanService",
+            "summary": "",
+            "url": "classes/Database-Controller-MemberController.html#property_mailmanService"
+        },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003A\u0024memberService",
             "name": "memberService",
             "summary": "",
@@ -3993,7 +4198,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Controller\\ProspectiveMemberController\u003A\u003AfinalizeAction\u0028\u0029",
             "name": "finalizeAction",
-            "summary": "Show\u0020action.",
+            "summary": "Approve\u0020or\u0020finalize\u0020action.",
             "url": "classes/Database-Controller-ProspectiveMemberController.html#method_finalizeAction"
         },                {
             "fqsen": "\\Database\\Controller\\ProspectiveMemberController\u003A\u003AdeleteAction\u0028\u0029",
@@ -4066,10 +4271,20 @@ Search.appendIndex(
             "summary": "Function\u0020action.",
             "url": "classes/Database-Controller-SettingsController.html#method_functionAction"
         },                {
-            "fqsen": "\\Database\\Controller\\SettingsController\u003A\u003AlistAction\u0028\u0029",
-            "name": "listAction",
+            "fqsen": "\\Database\\Controller\\SettingsController\u003A\u003AlistsAction\u0028\u0029",
+            "name": "listsAction",
             "summary": "Mailing\u0020list\u0020action",
-            "url": "classes/Database-Controller-SettingsController.html#method_listAction"
+            "url": "classes/Database-Controller-SettingsController.html#method_listsAction"
+        },                {
+            "fqsen": "\\Database\\Controller\\SettingsController\u003A\u003AaddListAction\u0028\u0029",
+            "name": "addListAction",
+            "summary": "",
+            "url": "classes/Database-Controller-SettingsController.html#method_addListAction"
+        },                {
+            "fqsen": "\\Database\\Controller\\SettingsController\u003A\u003AeditListAction\u0028\u0029",
+            "name": "editListAction",
+            "summary": "",
+            "url": "classes/Database-Controller-SettingsController.html#method_editListAction"
         },                {
             "fqsen": "\\Database\\Controller\\SettingsController\u003A\u003AdeleteListAction\u0028\u0029",
             "name": "deleteListAction",
@@ -4615,6 +4830,11 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Database-Form-MailingList.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Form\\MailingList\u003A\u003AsetMailmanLists\u0028\u0029",
+            "name": "setMailmanLists",
+            "summary": "",
+            "url": "classes/Database-Form-MailingList.html#method_setMailmanLists"
         },                {
             "fqsen": "\\Database\\Form\\MailingList\u003A\u003AgetInputFilterSpecification\u0028\u0029",
             "name": "getInputFilterSpecification",
@@ -5326,6 +5546,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Mapper-Factory-MailingListFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\MailingListMemberFactory",
+            "name": "MailingListMemberFactory",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-MailingListMemberFactory.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\MailingListMemberFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-MailingListMemberFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\MailmanMailingListFactory",
+            "name": "MailmanMailingListFactory",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-MailmanMailingListFactory.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Factory\\MailmanMailingListFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Mapper-Factory-MailmanMailingListFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Database\\Mapper\\Factory\\MeetingFactory",
             "name": "MeetingFactory",
             "summary": "",
@@ -5436,6 +5676,116 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Mapper-MailingList.html#property_em"
         },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember",
+            "name": "MailingListMember",
+            "summary": "Mailing\u0020list\u0020member\u0020mapper.",
+            "url": "classes/Database-Mapper-MailingListMember.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Mapper-MailingListMember.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003Apersist\u0028\u0029",
+            "name": "persist",
+            "summary": "Persist\u0020a\u0020membership.",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_persist"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003Aremove\u0028\u0029",
+            "name": "remove",
+            "summary": "Remove\u0020a\u0020membership.",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_remove"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003AfindByListAndMember\u0028\u0029",
+            "name": "findByListAndMember",
+            "summary": "",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_findByListAndMember"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003AcountPendingCreation\u0028\u0029",
+            "name": "countPendingCreation",
+            "summary": "Get\u0020the\u0020pending\u0020number\u0020of\u0020creations\nIntentionally,\u0020does\u0020not\u0020do\u0020a\u0020findAll",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_countPendingCreation"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003AcountPendingDeletion\u0028\u0029",
+            "name": "countPendingDeletion",
+            "summary": "Get\u0020the\u0020pending\u0020number\u0020of\u0020deletions\nIntentionally,\u0020does\u0020not\u0020do\u0020a\u0020findAll",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_countPendingDeletion"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003AfindAfterSync\u0028\u0029",
+            "name": "findAfterSync",
+            "summary": "Get\u0020the\u0020mailing\u0020list\u0020members\u0020that\u0020should\u0020exist\u0020after\u0020the\u0020next\u0020sync\nValue\u0020of\u0020toBeCreated\u0020does\u0020not\u0020matter,\u0020toBeDeleted\u0020should\u0020be\u0020excluded",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_findAfterSync"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003AfindAllExpiredOrHidden\u0028\u0029",
+            "name": "findAllExpiredOrHidden",
+            "summary": "Get\u0020the\u0020mailing\u0020list\u0020members\u0020that\u0020belong\u0020to\u0020hidden\u0020or\u0020expired\u0020members\nand\u0020that\u0020are\u0020not\u0020already\u0020scheduled\u0020for\u0020deletion",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_findAllExpiredOrHidden"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003AfindAll\u0028\u0029",
+            "name": "findAll",
+            "summary": "",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_findAll"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003AgetRepository\u0028\u0029",
+            "name": "getRepository",
+            "summary": "Get\u0020the\u0020repository\u0020for\u0020this\u0020mapper.",
+            "url": "classes/Database-Mapper-MailingListMember.html#method_getRepository"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailingListMember\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Database-Mapper-MailingListMember.html#property_em"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList",
+            "name": "MailmanMailingList",
+            "summary": "Mailman\u0020Mailing\u0020List\u0020mapper.",
+            "url": "classes/Database-Mapper-MailmanMailingList.html"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003Apersist\u0028\u0029",
+            "name": "persist",
+            "summary": "Persist\u0020a\u0020mailman\u0020list.",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method_persist"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003Aremove\u0028\u0029",
+            "name": "remove",
+            "summary": "Remove\u0020a\u0020mailman\u0020list.",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method_remove"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003AgetLastFetchTime\u0028\u0029",
+            "name": "getLastFetchTime",
+            "summary": "Get\u0020the\u0020time\u0020of\u0020last\u0020sync,\u0020or\u0020null\u0020if\u0020none",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method_getLastFetchTime"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003AfindActive\u0028\u0029",
+            "name": "findActive",
+            "summary": "Find\u0020active\u0020mailing\u0020lists\u0020\u0028i.e.\u0020seen\u0020in\u0020the\u0020last\u0020fetch\u0020or\u0020the\u0020hour\u0020before\u0029",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method_findActive"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003AfindAll\u0028\u0029",
+            "name": "findAll",
+            "summary": "Find\u0020all.",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method_findAll"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003Afind\u0028\u0029",
+            "name": "find",
+            "summary": "Find\u0020a\u0020list\u0020by\u0020mailman\u0020ID.",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method_find"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003AgetRepository\u0028\u0029",
+            "name": "getRepository",
+            "summary": "Get\u0020the\u0020repository\u0020for\u0020this\u0020mapper.",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#method_getRepository"
+        },                {
+            "fqsen": "\\Database\\Mapper\\MailmanMailingList\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Database-Mapper-MailmanMailingList.html#property_em"
+        },                {
             "fqsen": "\\Database\\Mapper\\Meeting",
             "name": "Meeting",
             "summary": "",
@@ -5535,6 +5885,11 @@ Search.appendIndex(
             "name": "hasMemberWith",
             "summary": "See\u0020if\u0020we\u0020can\u0020find\u0020a\u0020member\u0020with\u0020the\u0020same\u0020email.",
             "url": "classes/Database-Mapper-Member.html#method_hasMemberWith"
+        },                {
+            "fqsen": "\\Database\\Mapper\\Member\u003A\u003AfindByEmail\u0028\u0029",
+            "name": "findByEmail",
+            "summary": "Find\u0020by\u0020email",
+            "url": "classes/Database-Mapper-Member.html#method_findByEmail"
         },                {
             "fqsen": "\\Database\\Mapper\\Member\u003A\u003Asearch\u0028\u0029",
             "name": "search",
@@ -6703,7 +7058,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\MailingList",
             "name": "MailingList",
-            "summary": "Mailing\u0020List\u0020model.",
+            "summary": "Mailing\u0020List\u0020model\u0020for\u0020lists\u0020on\u0020the\u0020db\u0020side.",
             "url": "classes/Database-Model-MailingList.html"
         },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003A__construct\u0028\u0029",
@@ -6741,24 +7096,14 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020dutch\u0020description.",
             "url": "classes/Database-Model-MailingList.html#method_setNlDescription"
         },                {
-            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetDescription\u0028\u0029",
-            "name": "getDescription",
-            "summary": "Get\u0020the\u0020description.",
-            "url": "classes/Database-Model-MailingList.html#method_getDescription"
-        },                {
-            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AsetDescription\u0028\u0029",
-            "name": "setDescription",
-            "summary": "Set\u0020the\u0020description.",
-            "url": "classes/Database-Model-MailingList.html#method_setDescription"
-        },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetOnForm\u0028\u0029",
             "name": "getOnForm",
-            "summary": "Get\u0020if\u0020it\u0020should\u0020be\u0020on\u0020the\u0020form.",
+            "summary": "Get\u0020if\u0020it\u0020should\u0020be\u0020on\u0020the\u0020join\u0020form.",
             "url": "classes/Database-Model-MailingList.html#method_getOnForm"
         },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003AsetOnForm\u0028\u0029",
             "name": "setOnForm",
-            "summary": "Set\u0020if\u0020it\u0020should\u0020be\u0020on\u0020the\u0020form.",
+            "summary": "Set\u0020if\u0020it\u0020should\u0020be\u0020on\u0020the\u0020join\u0020form.",
             "url": "classes/Database-Model-MailingList.html#method_setOnForm"
         },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetDefaultSub\u0028\u0029",
@@ -6771,19 +7116,34 @@ Search.appendIndex(
             "summary": "Set\u0020if\u0020it\u0020is\u0020a\u0020default\u0020list.",
             "url": "classes/Database-Model-MailingList.html#method_setDefaultSub"
         },                {
-            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetMembers\u0028\u0029",
-            "name": "getMembers",
-            "summary": "Get\u0020subscribed\u0020members.",
-            "url": "classes/Database-Model-MailingList.html#method_getMembers"
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetMailmanList\u0028\u0029",
+            "name": "getMailmanList",
+            "summary": "Get\u0020the\u0020matching\u0020mailman\u0020list,\u0020or\u0020null\u0020if\u0020none",
+            "url": "classes/Database-Model-MailingList.html#method_getMailmanList"
         },                {
-            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AaddMember\u0028\u0029",
-            "name": "addMember",
-            "summary": "Add\u0020a\u0020member.",
-            "url": "classes/Database-Model-MailingList.html#method_addMember"
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AhasMailmanList\u0028\u0029",
+            "name": "hasMailmanList",
+            "summary": "Check\u0020if\u0020this\u0020has\u0020a\u0020mailman\u0020mailing\u0020list",
+            "url": "classes/Database-Model-MailingList.html#method_hasMailmanList"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AsetMailmanList\u0028\u0029",
+            "name": "setMailmanList",
+            "summary": "Set\u0020the\u0020corresponding\u0020mailman\u0020list",
+            "url": "classes/Database-Model-MailingList.html#method_setMailmanList"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetMailingListMemberships\u0028\u0029",
+            "name": "getMailingListMemberships",
+            "summary": "Get\u0020subscribed\u0020members.",
+            "url": "classes/Database-Model-MailingList.html#method_getMailingListMemberships"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "",
+            "url": "classes/Database-Model-MailingList.html#method_toArray"
         },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003A\u0024name",
             "name": "name",
-            "summary": "Mailman\u002Didentifier\u0020\/\u0020name.",
+            "summary": "Name\u0020of\u0020the\u0020mailing\u0020list",
             "url": "classes/Database-Model-MailingList.html#property_name"
         },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003A\u0024nl_description",
@@ -6806,10 +7166,210 @@ Search.appendIndex(
             "summary": "If\u0020members\u0020should\u0020be\u0020subscribed\u0020by\u0020default.",
             "url": "classes/Database-Model-MailingList.html#property_defaultSub"
         },                {
-            "fqsen": "\\Database\\Model\\MailingList\u003A\u003A\u0024members",
-            "name": "members",
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003A\u0024mailmanList",
+            "name": "mailmanList",
+            "summary": "The\u0020corresponding\u0020mailman\u0020mailing\u0020list",
+            "url": "classes/Database-Model-MailingList.html#property_mailmanList"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003A\u0024mailingListMemberships",
+            "name": "mailingListMemberships",
             "summary": "Mailing\u0020list\u0020members.",
-            "url": "classes/Database-Model-MailingList.html#property_members"
+            "url": "classes/Database-Model-MailingList.html#property_mailingListMemberships"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember",
+            "name": "MailingListMember",
+            "summary": "Mailing\u0020List\u0020Member\u0020model.",
+            "url": "classes/Database-Model-MailingListMember.html"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-MailingListMember.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AgetMailingList\u0028\u0029",
+            "name": "getMailingList",
+            "summary": "Get\u0020the\u0020mailing\u0020list.",
+            "url": "classes/Database-Model-MailingListMember.html#method_getMailingList"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AsetMailingList\u0028\u0029",
+            "name": "setMailingList",
+            "summary": "Set\u0020the\u0020mailing\u0020list.",
+            "url": "classes/Database-Model-MailingListMember.html#method_setMailingList"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-MailingListMember.html#method_getMember"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "Set\u0020the\u0020member.",
+            "url": "classes/Database-Model-MailingListMember.html#method_setMember"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AgetEmail\u0028\u0029",
+            "name": "getEmail",
+            "summary": "Get\u0020the\u0020email\u0020address\u0020of\u0020this\u0020subscription",
+            "url": "classes/Database-Model-MailingListMember.html#method_getEmail"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AsetEmail\u0028\u0029",
+            "name": "setEmail",
+            "summary": "Set\u0020the\u0020email\u0020address\u0020of\u0020this\u0020subscription",
+            "url": "classes/Database-Model-MailingListMember.html#method_setEmail"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AgetLastSyncOn\u0028\u0029",
+            "name": "getLastSyncOn",
+            "summary": "Get\u0020when\u0020the\u0020last\u0020sync\u0020happened.",
+            "url": "classes/Database-Model-MailingListMember.html#method_getLastSyncOn"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AsetLastSyncOn\u0028\u0029",
+            "name": "setLastSyncOn",
+            "summary": "Set\u0020when\u0020the\u0020last\u0020sync\u0020happened.",
+            "url": "classes/Database-Model-MailingListMember.html#method_setLastSyncOn"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AisLastSyncSuccess\u0028\u0029",
+            "name": "isLastSyncSuccess",
+            "summary": "Get\u0020whether\u0020the\u0020last\u0020sync\u0020was\u0020successful.",
+            "url": "classes/Database-Model-MailingListMember.html#method_isLastSyncSuccess"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AsetLastSyncSuccess\u0028\u0029",
+            "name": "setLastSyncSuccess",
+            "summary": "Set\u0020whether\u0020the\u0020last\u0020sync\u0020was\u0020successful.",
+            "url": "classes/Database-Model-MailingListMember.html#method_setLastSyncSuccess"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AisToBeCreated\u0028\u0029",
+            "name": "isToBeCreated",
+            "summary": "Get\u0020whether\u0020the\u0020entry\u0020must\u0020still\u0020be\u0020created\u0020in\u0020Mailman.",
+            "url": "classes/Database-Model-MailingListMember.html#method_isToBeCreated"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AsetToBeCreated\u0028\u0029",
+            "name": "setToBeCreated",
+            "summary": "Set\u0020whether\u0020the\u0020entry\u0020must\u0020still\u0020be\u0020created\u0020in\u0020Mailman.",
+            "url": "classes/Database-Model-MailingListMember.html#method_setToBeCreated"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AisToBeDeleted\u0028\u0029",
+            "name": "isToBeDeleted",
+            "summary": "Get\u0020whether\u0020the\u0020entry\u0020must\u0020still\u0020be\u0020removed\u0020from\u0020Mailman.",
+            "url": "classes/Database-Model-MailingListMember.html#method_isToBeDeleted"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AsetToBeDeleted\u0028\u0029",
+            "name": "setToBeDeleted",
+            "summary": "Set\u0020whether\u0020the\u0020entry\u0020must\u0020still\u0020be\u0020removed\u0020from\u0020Mailman.",
+            "url": "classes/Database-Model-MailingListMember.html#method_setToBeDeleted"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A\u0024mailingList",
+            "name": "mailingList",
+            "summary": "Mailing\u0020list.",
+            "url": "classes/Database-Model-MailingListMember.html#property_mailingList"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "Member.",
+            "url": "classes/Database-Model-MailingListMember.html#property_member"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A\u0024email",
+            "name": "email",
+            "summary": "In\u0020case\u0020of\u0020email\u0020address\u0020changes,\u0020we\u0020need\u0020to\u0020know\u0020the\u0020email\u0020address\u0020that\u0020is\u0020on\u0020the\u0020list",
+            "url": "classes/Database-Model-MailingListMember.html#property_email"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A\u0024lastSyncOn",
+            "name": "lastSyncOn",
+            "summary": "When\u0020this\u0020association\u0020was\u0020last\u0020synced\u0020to\/from\u0020Mailman.",
+            "url": "classes/Database-Model-MailingListMember.html#property_lastSyncOn"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A\u0024lastSyncSuccess",
+            "name": "lastSyncSuccess",
+            "summary": "Whether\u0020the\u0020last\u0020attempted\u0020sync\u0020was\u0020successful.",
+            "url": "classes/Database-Model-MailingListMember.html#property_lastSyncSuccess"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A\u0024toBeCreated",
+            "name": "toBeCreated",
+            "summary": "Whether\u0020this\u0020entry\u0020still\u0020needs\u0020to\u0020be\u0020created\u0020in\u0020Mailman.",
+            "url": "classes/Database-Model-MailingListMember.html#property_toBeCreated"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003A\u0024toBeDeleted",
+            "name": "toBeDeleted",
+            "summary": "Whether\u0020this\u0020entry\u0020still\u0020needs\u0020to\u0020be\u0020removed\u0020from\u0020Mailman.",
+            "url": "classes/Database-Model-MailingListMember.html#property_toBeDeleted"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList",
+            "name": "MailmanMailingList",
+            "summary": "Model\u0020that\u0020represents\/caches\u0020mailman\u0020mailing\u0020lists\u0020and\u0020stores\u0020some\u0020additional\u0020information",
+            "url": "classes/Database-Model-MailmanMailingList.html"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AgetMailmanId\u0028\u0029",
+            "name": "getMailmanId",
+            "summary": "Get\u0020the\u0020mailman\u0020ID",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_getMailmanId"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AsetMailmanId\u0028\u0029",
+            "name": "setMailmanId",
+            "summary": "Set\u0020the\u0020mailman\u0020ID\nIt\u0020is\u0020only\u0020sensible\u0020if\u0020this\u0020happens\u0020during\u0020a\u0020sync",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_setMailmanId"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Get\u0020the\u0020name\u0020of\u0020the\u0020list\u0020in\u0020mailman",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_getName"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "Set\u0020the\u0020name\u0020of\u0020the\u0020list\u0020in\u0020mailman\nIt\u0020is\u0020only\u0020sensible\u0020if\u0020this\u0020happens\u0020during\u0020a\u0020sync",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_setName"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AgetLastSeen\u0028\u0029",
+            "name": "getLastSeen",
+            "summary": "Get\u0020the\u0020date\u0020the\u0020list\u0020was\u0020last\u0020seen",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_getLastSeen"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AsetLastSeen\u0028\u0029",
+            "name": "setLastSeen",
+            "summary": "Set\u0020the\u0020date\u0020the\u0020list\u0020was\u0020last\u0020seen\nIt\u0020is\u0020only\u0020sensible\u0020if\u0020this\u0020happens\u0020during\u0020a\u0020sync",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_setLastSeen"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AgetLastCheck\u0028\u0029",
+            "name": "getLastCheck",
+            "summary": "Get\u0020the\u0020date\u0020the\u0020list\u0020was\u0020last\u0020fully\u0020checked",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_getLastCheck"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AsetLastCheck\u0028\u0029",
+            "name": "setLastCheck",
+            "summary": "Set\u0020the\u0020date\u0020the\u0020list\u0020was\u0020last\u0020fully\u0020checked",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_setLastCheck"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AgetMailingList\u0028\u0029",
+            "name": "getMailingList",
+            "summary": "Get\u0020the\u0020mailing\u0020list\u0020corresponding\u0020to\u0020this\u0020mailman\u0020list",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_getMailingList"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003AisManaged\u0028\u0029",
+            "name": "isManaged",
+            "summary": "Whether\u0020this\u0020mailman\u0020list\u0020is\u0020managed\u0020by\u0020GEWISDB",
+            "url": "classes/Database-Model-MailmanMailingList.html#method_isManaged"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003A\u0024mailmanId",
+            "name": "mailmanId",
+            "summary": "Mailman\u002Didentifier.",
+            "url": "classes/Database-Model-MailmanMailingList.html#property_mailmanId"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "Name\u0020of\u0020this\u0020list\u0020in\u0020the\u0020mailman\u0020side",
+            "url": "classes/Database-Model-MailmanMailingList.html#property_name"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003A\u0024lastSeen",
+            "name": "lastSeen",
+            "summary": "When\u0020this\u0020list\u0020was\u0020last\u0020observed\u0020in\u0020mailman",
+            "url": "classes/Database-Model-MailmanMailingList.html#property_lastSeen"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003A\u0024lastCheck",
+            "name": "lastCheck",
+            "summary": "When\u0020the\u0020last\u0020full\u0020check\u0020of\u0020this\u0020mailing\u0020list\u0020took\u0020place",
+            "url": "classes/Database-Model-MailmanMailingList.html#property_lastCheck"
+        },                {
+            "fqsen": "\\Database\\Model\\MailmanMailingList\u003A\u003A\u0024mailingList",
+            "name": "mailingList",
+            "summary": "The\u0020corresponding\u0020gewisdb\u0020mailing\u0020list\nIf\u0020null,\u0020this\u0020list\u0020is\u0020not\u0020managed\u0020by\u0020GEWISDB",
+            "url": "classes/Database-Model-MailmanMailingList.html#property_mailingList"
         },                {
             "fqsen": "\\Database\\Model\\Meeting",
             "name": "Meeting",
@@ -7161,10 +7721,10 @@ Search.appendIndex(
             "summary": "Add\u0020an\u0020address.",
             "url": "classes/Database-Model-Member.html#method_addAddress"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetLists\u0028\u0029",
-            "name": "getLists",
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AgetMailingListMemberships\u0028\u0029",
+            "name": "getMailingListMemberships",
             "summary": "Get\u0020mailing\u0020list\u0020subscriptions.",
-            "url": "classes/Database-Model-Member.html#method_getLists"
+            "url": "classes/Database-Model-Member.html#method_getMailingListMemberships"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AaddList\u0028\u0029",
             "name": "addList",
@@ -7175,11 +7735,6 @@ Search.appendIndex(
             "name": "addLists",
             "summary": "Add\u0020multiple\u0020mailing\u0020lists.",
             "url": "classes/Database-Model-Member.html#method_addLists"
-        },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003AclearLists\u0028\u0029",
-            "name": "clearLists",
-            "summary": "Clear\u0020the\u0020lists.",
-            "url": "classes/Database-Model-Member.html#method_clearLists"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003AsetHomeAddress\u0028\u0029",
             "name": "setHomeAddress",
@@ -7195,6 +7750,11 @@ Search.appendIndex(
             "name": "getRenewalLinks",
             "summary": "Get\u0020renewal\u0020links\u0020of\u0020a\u0020member",
             "url": "classes/Database-Model-Member.html#method_getRenewalLinks"
+        },                {
+            "fqsen": "\\Database\\Model\\Member\u003A\u003AhasActiveRenewalLink\u0028\u0029",
+            "name": "hasActiveRenewalLink",
+            "summary": "",
+            "url": "classes/Database-Model-Member.html#method_hasActiveRenewalLink"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024lidnr",
             "name": "lidnr",
@@ -7301,10 +7861,10 @@ Search.appendIndex(
             "summary": "Installations\u0020of\u0020this\u0020member.",
             "url": "classes/Database-Model-Member.html#property_installations"
         },                {
-            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024lists",
-            "name": "lists",
+            "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024mailingListMemberships",
+            "name": "mailingListMemberships",
             "summary": "Memberships\u0020of\u0020mailing\u0020lists.",
-            "url": "classes/Database-Model-Member.html#property_lists"
+            "url": "classes/Database-Model-Member.html#property_mailingListMemberships"
         },                {
             "fqsen": "\\Database\\Model\\Member\u003A\u003A\u0024renewalLinks",
             "name": "renewalLinks",
@@ -8921,6 +9481,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Factory-MailingListFactory.html#method___invoke"
         },                {
+            "fqsen": "\\Database\\Service\\Factory\\MailmanFactory",
+            "name": "MailmanFactory",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-MailmanFactory.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\MailmanFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-MailmanFactory.html#method___invoke"
+        },                {
             "fqsen": "\\Database\\Service\\Factory\\MeetingFactory",
             "name": "MeetingFactory",
             "summary": "",
@@ -8978,13 +9548,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\FrontPage\u003A\u003AgetNotificationCount\u0028\u0029",
             "name": "getNotificationCount",
-            "summary": "",
+            "summary": "Get\u0020the\u0020total\u0020notification\u0020count\u0020to\u0020show\u0020in\u0020the\u0020navbar,\u0020not\u0020including\u0020\u0027info\u0027\u0020messages",
             "url": "classes/Database-Service-FrontPage.html#method_getNotificationCount"
         },                {
             "fqsen": "\\Database\\Service\\FrontPage\u003A\u003A\u0024apiService",
             "name": "apiService",
             "summary": "",
             "url": "classes/Database-Service-FrontPage.html#property_apiService"
+        },                {
+            "fqsen": "\\Database\\Service\\FrontPage\u003A\u003A\u0024mailmanService",
+            "name": "mailmanService",
+            "summary": "",
+            "url": "classes/Database-Service-FrontPage.html#property_mailmanService"
         },                {
             "fqsen": "\\Database\\Service\\FrontPage\u003A\u003A\u0024memberService",
             "name": "memberService",
@@ -9016,6 +9591,11 @@ Search.appendIndex(
             "summary": "Add\u0020a\u0020list.",
             "url": "classes/Database-Service-MailingList.html#method_addList"
         },                {
+            "fqsen": "\\Database\\Service\\MailingList\u003A\u003AeditList\u0028\u0029",
+            "name": "editList",
+            "summary": "",
+            "url": "classes/Database-Service-MailingList.html#method_editList"
+        },                {
             "fqsen": "\\Database\\Service\\MailingList\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "Delete\u0020a\u0020list.",
@@ -9036,6 +9616,21 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020list\u0020mapper.",
             "url": "classes/Database-Service-MailingList.html#method_getListMapper"
         },                {
+            "fqsen": "\\Database\\Service\\MailingList\u003A\u003AgetMailingListMemberMapper\u0028\u0029",
+            "name": "getMailingListMemberMapper",
+            "summary": "Get\u0020the\u0020mailing\u0020list\u0020member\u0020mapper.",
+            "url": "classes/Database-Service-MailingList.html#method_getMailingListMemberMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\MailingList\u003A\u003AgetMailmanService\u0028\u0029",
+            "name": "getMailmanService",
+            "summary": "",
+            "url": "classes/Database-Service-MailingList.html#method_getMailmanService"
+        },                {
+            "fqsen": "\\Database\\Service\\MailingList\u003A\u003AperformMaintenance\u0028\u0029",
+            "name": "performMaintenance",
+            "summary": "Perform\u0020maintenance\u0020to\u0020abnormal\u0020mailing\u0020list\u0020situations\nThis\u0020does\u0020not\u0020directly\u0020operate\u0020on\u0020mailman",
+            "url": "classes/Database-Service-MailingList.html#method_performMaintenance"
+        },                {
             "fqsen": "\\Database\\Service\\MailingList\u003A\u003A\u0024deleteListForm",
             "name": "deleteListForm",
             "summary": "",
@@ -9050,6 +9645,211 @@ Search.appendIndex(
             "name": "mailingListMapper",
             "summary": "",
             "url": "classes/Database-Service-MailingList.html#property_mailingListMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\MailingList\u003A\u003A\u0024mailingListMemberMapper",
+            "name": "mailingListMemberMapper",
+            "summary": "",
+            "url": "classes/Database-Service-MailingList.html#property_mailingListMemberMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\MailingList\u003A\u003A\u0024mailmanService",
+            "name": "mailmanService",
+            "summary": "",
+            "url": "classes/Database-Service-MailingList.html#property_mailmanService"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman",
+            "name": "Mailman",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AperformMailmanRequest\u0028\u0029",
+            "name": "performMailmanRequest",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_performMailmanRequest"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AacquireSyncLock\u0028\u0029",
+            "name": "acquireSyncLock",
+            "summary": "Acquire\u0020sync\u0020lock.",
+            "url": "classes/Database-Service-Mailman.html#method_acquireSyncLock"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AreleaseSyncLock\u0028\u0029",
+            "name": "releaseSyncLock",
+            "summary": "Release\u0020sync\u0020lock.",
+            "url": "classes/Database-Service-Mailman.html#method_releaseSyncLock"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AisSyncLocked\u0028\u0029",
+            "name": "isSyncLocked",
+            "summary": "Get\u0020state\u0020of\u0020sync\u0020lock.",
+            "url": "classes/Database-Service-Mailman.html#method_isSyncLocked"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AsyncMembership\u0028\u0029",
+            "name": "syncMembership",
+            "summary": "This\u0020functions\u0020syncs\u0020the\u0020mailing\u0020list\u0020membership\u0020of\u0020all\u0020mailing\u0020lists\nEven\u0020if\u0020they\u0020don\u0027t\u0020have\u0020an\u0020associated\u0020mailman\u0020mailing\u0020list,\u0020to\u0020keep\u0020the\u0020code\u0020throughout\u0020the\u0020application\u0020the\u0020same",
+            "url": "classes/Database-Service-Mailman.html#method_syncMembership"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AsyncMembershipSingle\u0028\u0029",
+            "name": "syncMembershipSingle",
+            "summary": "This\u0020function\u0020syncs\u0020the\u0020membership\u0020of\u0020a\u0020mailing\u0020list",
+            "url": "classes/Database-Service-Mailman.html#method_syncMembershipSingle"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AisMailmanHealthy\u0028\u0029",
+            "name": "isMailmanHealthy",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_isMailmanHealthy"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AassertMailmanHealthy\u0028\u0029",
+            "name": "assertMailmanHealthy",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_assertMailmanHealthy"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AgetFrontpageData\u0028\u0029",
+            "name": "getFrontpageData",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_getFrontpageData"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AgetAllListsFromMailman\u0028\u0029",
+            "name": "getAllListsFromMailman",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_getAllListsFromMailman"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AfetchMailingLists\u0028\u0029",
+            "name": "fetchMailingLists",
+            "summary": "Fetch\u0020mailing\u0020lists\u0020from\u0020mailman\u0020and\u0020import\u0020them\u0020to\u0020the\u0020mailmanlist\u0020model\u0020in\u0020GEWISDB",
+            "url": "classes/Database-Service-Mailman.html#method_fetchMailingLists"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AgetMailingList\u0028\u0029",
+            "name": "getMailingList",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_getMailingList"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AgetMailingLists\u0028\u0029",
+            "name": "getMailingLists",
+            "summary": "Returns\u0020all\u0020recently\u0020seen\u0020mailing\u0020lists",
+            "url": "classes/Database-Service-Mailman.html#method_getMailingLists"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AgetLastFetchTime\u0028\u0029",
+            "name": "getLastFetchTime",
+            "summary": "Get\u0020the\u0020last\u0020succesfull\u0020mailman\u0020sync\u0020\u0028\u003E\u003D\u00201\u0020list\u0029",
+            "url": "classes/Database-Service-Mailman.html#method_getLastFetchTime"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AisLastFetchOverdue\u0028\u0029",
+            "name": "isLastFetchOverdue",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_isLastFetchOverdue"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AsubscribeMemberToMailingList\u0028\u0029",
+            "name": "subscribeMemberToMailingList",
+            "summary": "Subscribe\u0020a\u0020member\u0020to\u0020a\u0020mailing\u0020list.",
+            "url": "classes/Database-Service-Mailman.html#method_subscribeMemberToMailingList"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AunsubscribeMemberFromMailingList\u0028\u0029",
+            "name": "unsubscribeMemberFromMailingList",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#method_unsubscribeMemberFromMailingList"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AverifyMemberOnMailingList\u0028\u0029",
+            "name": "verifyMemberOnMailingList",
+            "summary": "This\u0020function\u0020verifies\u0020that\u0020a\u0020member\u0020is\u0020still\u0020on\u0020a\u0020given\u0020mailing\u0020list\nand\u0020if\u0020not,\u0020removes\u0020the\u0020mailinglistMemberModel",
+            "url": "classes/Database-Service-Mailman.html#method_verifyMemberOnMailingList"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AfullCheckMailmanList\u0028\u0029",
+            "name": "fullCheckMailmanList",
+            "summary": "Function\u0020to\u0020process\u0020\u0027new\u0027\u0020or\u0020unknown\u0020mailman\u0020registrations\nWhen\u0020member\u0020known,\u0020adds\u0020to\u0020DB.\u0020When\u0020member\u0020unknown,\u0020removes\u0020from\u0020mailman",
+            "url": "classes/Database-Service-Mailman.html#method_fullCheckMailmanList"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_ROLE_NONMEMBER",
+            "name": "MM_ROLE_NONMEMBER",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_ROLE_NONMEMBER"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_ROLE_MEMBER",
+            "name": "MM_ROLE_MEMBER",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_ROLE_MEMBER"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_ROLE_MODERATOR",
+            "name": "MM_ROLE_MODERATOR",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_ROLE_MODERATOR"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_ROLE_OWNER",
+            "name": "MM_ROLE_OWNER",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_ROLE_OWNER"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELIVERYMODE_REGULAR",
+            "name": "MM_DELIVERYMODE_REGULAR",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_REGULAR"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELIVERYMODE_DIGESTS_MIME",
+            "name": "MM_DELIVERYMODE_DIGESTS_MIME",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_MIME"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELIVERYMODE_DIGESTS_PLAIN",
+            "name": "MM_DELIVERYMODE_DIGESTS_PLAIN",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_PLAIN"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELLIVERYMODE_DIGESTS_SUMMARY",
+            "name": "MM_DELLIVERYMODE_DIGESTS_SUMMARY",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELLIVERYMODE_DIGESTS_SUMMARY"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELIVERYSTATUS_ENABLED",
+            "name": "MM_DELIVERYSTATUS_ENABLED",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_ENABLED"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELIVERYSTATUS_DISABLED_BY_USER",
+            "name": "MM_DELIVERYSTATUS_DISABLED_BY_USER",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_USER"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELIVERYSTATUS_DISABLED_BY_BOUNCES",
+            "name": "MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_DELIVERYSTATUS_DISABLED_BY_MODERATOR",
+            "name": "MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A\u0024mailingListMapper",
+            "name": "mailingListMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#property_mailingListMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A\u0024mailmanMailingListMapper",
+            "name": "mailmanMailingListMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#property_mailmanMailingListMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A\u0024mailingListMemberMapper",
+            "name": "mailingListMemberMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#property_mailingListMemberMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A\u0024memberMapper",
+            "name": "memberMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#property_memberMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A\u0024configService",
+            "name": "configService",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#property_configService"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A\u0024mailmanConfig",
+            "name": "mailmanConfig",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#property_mailmanConfig"
         },                {
             "fqsen": "\\Database\\Service\\Meeting",
             "name": "Meeting",
@@ -9513,8 +10313,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AsubscribeLists\u0028\u0029",
             "name": "subscribeLists",
-            "summary": "Subscribe\u0020member\u0020to\u0020mailing\u0020lists.",
+            "summary": "Update\u0020mailing\u0020list\u0020subscriptions\u0020of\u0020a\u0020member",
             "url": "classes/Database-Service-Member.html#method_subscribeLists"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003AunsubscribeLists\u0028\u0029",
+            "name": "unsubscribeLists",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#method_unsubscribeLists"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AaddAuditNote\u0028\u0029",
             "name": "addAuditNote",
@@ -9721,6 +10526,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_mailingListMapper"
         },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024mailingListMemberMapper",
+            "name": "mailingListMemberMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_mailingListMemberMapper"
+        },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024actionLinkMapper",
             "name": "actionLinkMapper",
             "summary": "",
@@ -9760,6 +10570,11 @@ Search.appendIndex(
             "name": "mailingListService",
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_mailingListService"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024mailmanService",
+            "name": "mailmanService",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_mailmanService"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024renewalService",
             "name": "renewalService",
@@ -10096,6 +10911,46 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Migrations-Version20250608122118.html#method_down"
         },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133118",
+            "name": "Version20250621133118",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Report-Migrations-Version20250621133118.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133118\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250621133118.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133118\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250621133118.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133118\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250621133118.html#method_down"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133119",
+            "name": "Version20250621133119",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Report-Migrations-Version20250621133119.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133119\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250621133119.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133119\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250621133119.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20250621133119\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20250621133119.html#method_down"
+        },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
             "summary": "",
@@ -10210,6 +11065,11 @@ Search.appendIndex(
             "name": "memberService",
             "summary": "",
             "url": "classes/Report-Listener-DatabaseDeletionListener.html#property_memberService"
+        },                {
+            "fqsen": "\\Report\\Listener\\DatabaseDeletionListener\u003A\u003A\u0024miscService",
+            "name": "miscService",
+            "summary": "",
+            "url": "classes/Report-Listener-DatabaseDeletionListener.html#property_miscService"
         },                {
             "fqsen": "\\Report\\Listener\\DatabaseDeletionListener\u003A\u003A\u0024emReport",
             "name": "emReport",
@@ -10808,7 +11668,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Model\\MailingList",
             "name": "MailingList",
-            "summary": "Mailing\u0020List\u0020model.",
+            "summary": "Mailing\u0020List\u0020model\u0020\u0028partial\u0029",
             "url": "classes/Report-Model-MailingList.html"
         },                {
             "fqsen": "\\Report\\Model\\MailingList\u003A\u003A__construct\u0028\u0029",
@@ -10846,54 +11706,14 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020dutch\u0020description.",
             "url": "classes/Report-Model-MailingList.html#method_setNlDescription"
         },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AgetDescription\u0028\u0029",
-            "name": "getDescription",
-            "summary": "Get\u0020the\u0020description.",
-            "url": "classes/Report-Model-MailingList.html#method_getDescription"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AsetDescription\u0028\u0029",
-            "name": "setDescription",
-            "summary": "Set\u0020the\u0020description.",
-            "url": "classes/Report-Model-MailingList.html#method_setDescription"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AgetOnForm\u0028\u0029",
-            "name": "getOnForm",
-            "summary": "Get\u0020if\u0020it\u0020should\u0020be\u0020on\u0020the\u0020form.",
-            "url": "classes/Report-Model-MailingList.html#method_getOnForm"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AsetOnForm\u0028\u0029",
-            "name": "setOnForm",
-            "summary": "Set\u0020if\u0020it\u0020should\u0020be\u0020on\u0020the\u0020form.",
-            "url": "classes/Report-Model-MailingList.html#method_setOnForm"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AgetDefaultSub\u0028\u0029",
-            "name": "getDefaultSub",
-            "summary": "Get\u0020if\u0020it\u0020is\u0020a\u0020default\u0020list.",
-            "url": "classes/Report-Model-MailingList.html#method_getDefaultSub"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AsetDefaultSub\u0028\u0029",
-            "name": "setDefaultSub",
-            "summary": "Set\u0020if\u0020it\u0020is\u0020a\u0020default\u0020list.",
-            "url": "classes/Report-Model-MailingList.html#method_setDefaultSub"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AgetMembers\u0028\u0029",
-            "name": "getMembers",
+            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AgetMailingListMemberships\u0028\u0029",
+            "name": "getMailingListMemberships",
             "summary": "Get\u0020subscribed\u0020members.",
-            "url": "classes/Report-Model-MailingList.html#method_getMembers"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AaddMember\u0028\u0029",
-            "name": "addMember",
-            "summary": "Add\u0020a\u0020member.",
-            "url": "classes/Report-Model-MailingList.html#method_addMember"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003AremoveMember\u0028\u0029",
-            "name": "removeMember",
-            "summary": "Remove\u0020a\u0020member.",
-            "url": "classes/Report-Model-MailingList.html#method_removeMember"
+            "url": "classes/Report-Model-MailingList.html#method_getMailingListMemberships"
         },                {
             "fqsen": "\\Report\\Model\\MailingList\u003A\u003A\u0024name",
             "name": "name",
-            "summary": "Mailman\u002Didentifier\u0020\/\u0020name.",
+            "summary": "Name\u0020of\u0020the\u0020mailing\u0020list",
             "url": "classes/Report-Model-MailingList.html#property_name"
         },                {
             "fqsen": "\\Report\\Model\\MailingList\u003A\u003A\u0024nl_description",
@@ -10906,20 +11726,65 @@ Search.appendIndex(
             "summary": "English\u0020description\u0020of\u0020the\u0020mailing\u0020list.",
             "url": "classes/Report-Model-MailingList.html#property_en_description"
         },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003A\u0024onForm",
-            "name": "onForm",
-            "summary": "If\u0020the\u0020mailing\u0020list\u0020should\u0020be\u0020on\u0020the\u0020form.",
-            "url": "classes/Report-Model-MailingList.html#property_onForm"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003A\u0024defaultSub",
-            "name": "defaultSub",
-            "summary": "If\u0020members\u0020should\u0020be\u0020subscribed\u0020by\u0020default.",
-            "url": "classes/Report-Model-MailingList.html#property_defaultSub"
-        },                {
-            "fqsen": "\\Report\\Model\\MailingList\u003A\u003A\u0024members",
-            "name": "members",
+            "fqsen": "\\Report\\Model\\MailingList\u003A\u003A\u0024mailingListMemberships",
+            "name": "mailingListMemberships",
             "summary": "Mailing\u0020list\u0020members.",
-            "url": "classes/Report-Model-MailingList.html#property_members"
+            "url": "classes/Report-Model-MailingList.html#property_mailingListMemberships"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember",
+            "name": "MailingListMember",
+            "summary": "Mailing\u0020List\u0020Member\u0020model\u0020\u0028partial\u0029",
+            "url": "classes/Report-Model-MailingListMember.html"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Report-Model-MailingListMember.html#method___construct"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003AgetMailingList\u0028\u0029",
+            "name": "getMailingList",
+            "summary": "Get\u0020the\u0020mailing\u0020list.",
+            "url": "classes/Report-Model-MailingListMember.html#method_getMailingList"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003AsetMailingList\u0028\u0029",
+            "name": "setMailingList",
+            "summary": "Set\u0020the\u0020mailing\u0020list.",
+            "url": "classes/Report-Model-MailingListMember.html#method_setMailingList"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-MailingListMember.html#method_getMember"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "Set\u0020the\u0020member.",
+            "url": "classes/Report-Model-MailingListMember.html#method_setMember"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003AgetEmail\u0028\u0029",
+            "name": "getEmail",
+            "summary": "Get\u0020the\u0020email\u0020address\u0020of\u0020this\u0020subscription",
+            "url": "classes/Report-Model-MailingListMember.html#method_getEmail"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003AsetEmail\u0028\u0029",
+            "name": "setEmail",
+            "summary": "Set\u0020the\u0020email\u0020address\u0020of\u0020this\u0020subscription",
+            "url": "classes/Report-Model-MailingListMember.html#method_setEmail"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003A\u0024mailingList",
+            "name": "mailingList",
+            "summary": "Mailing\u0020list.",
+            "url": "classes/Report-Model-MailingListMember.html#property_mailingList"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "Member.",
+            "url": "classes/Report-Model-MailingListMember.html#property_member"
+        },                {
+            "fqsen": "\\Report\\Model\\MailingListMember\u003A\u003A\u0024email",
+            "name": "email",
+            "summary": "Email\u0020address\u0020on\u0020the\u0020list",
+            "url": "classes/Report-Model-MailingListMember.html#property_email"
         },                {
             "fqsen": "\\Report\\Model\\Meeting",
             "name": "Meeting",
@@ -11251,10 +12116,10 @@ Search.appendIndex(
             "summary": "Is\u0020currently\u0020a\u0020keyholder.",
             "url": "classes/Report-Model-Member.html#method_isKeyholder"
         },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003AgetLists\u0028\u0029",
-            "name": "getLists",
+            "fqsen": "\\Report\\Model\\Member\u003A\u003AgetMailingListMemberships\u0028\u0029",
+            "name": "getMailingListMemberships",
             "summary": "Get\u0020mailing\u0020list\u0020subscriptions.",
-            "url": "classes/Report-Model-Member.html#method_getLists"
+            "url": "classes/Report-Model-Member.html#method_getMailingListMemberships"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003AaddList\u0028\u0029",
             "name": "addList",
@@ -11265,16 +12130,6 @@ Search.appendIndex(
             "name": "addLists",
             "summary": "Add\u0020multiple\u0020mailing\u0020lists.",
             "url": "classes/Report-Model-Member.html#method_addLists"
-        },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003AremoveList\u0028\u0029",
-            "name": "removeList",
-            "summary": "Remove\u0020a\u0020mailing\u0020list\u0020subscription.",
-            "url": "classes/Report-Model-Member.html#method_removeList"
-        },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003AclearLists\u0028\u0029",
-            "name": "clearLists",
-            "summary": "Clear\u0020the\u0020lists.",
-            "url": "classes/Report-Model-Member.html#method_clearLists"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024lidnr",
             "name": "lidnr",
@@ -11361,10 +12216,10 @@ Search.appendIndex(
             "summary": "Installations\u0020of\u0020this\u0020member.",
             "url": "classes/Report-Model-Member.html#property_installations"
         },                {
-            "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024lists",
-            "name": "lists",
+            "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024mailingListMemberships",
+            "name": "mailingListMemberships",
             "summary": "Memberships\u0020of\u0020mailing\u0020lists.",
-            "url": "classes/Report-Model-Member.html#property_lists"
+            "url": "classes/Report-Model-Member.html#property_mailingListMemberships"
         },                {
             "fqsen": "\\Report\\Model\\Member\u003A\u003A\u0024organInstallations",
             "name": "organInstallations",
@@ -12733,13 +13588,33 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Report\\Service\\Misc\u003A\u003AgenerateList\u0028\u0029",
             "name": "generateList",
-            "summary": "",
+            "summary": "Generate\u0020a\u0020mailing\u0020list\u0020for\u0020usage\u0020in\u0020reportdb.",
             "url": "classes/Report-Service-Misc.html#method_generateList"
+        },                {
+            "fqsen": "\\Report\\Service\\Misc\u003A\u003AdeleteList\u0028\u0029",
+            "name": "deleteList",
+            "summary": "Delete\u0020a\u0020mailing\u0020list\u0020if\u0020it\u0020exists",
+            "url": "classes/Report-Service-Misc.html#method_deleteList"
+        },                {
+            "fqsen": "\\Report\\Service\\Misc\u003A\u003AgenerateListMembership\u0028\u0029",
+            "name": "generateListMembership",
+            "summary": "Generate\u0020a\u0020list\u0020membership\u0020for\u0020usage\u0020in\u0020reportdb.",
+            "url": "classes/Report-Service-Misc.html#method_generateListMembership"
+        },                {
+            "fqsen": "\\Report\\Service\\Misc\u003A\u003AdeleteListMembership\u0028\u0029",
+            "name": "deleteListMembership",
+            "summary": "Delete\u0020list\u0020membership\u0020if\u0020it\u0020exists\u0020\u0028both\u0020when\u0020deleting\u0020a\u0020row\u0020and\u0020when\u0020setting\u0020toBeDeleted\u003Dtrue\u0029",
+            "url": "classes/Report-Service-Misc.html#method_deleteListMembership"
         },                {
             "fqsen": "\\Report\\Service\\Misc\u003A\u003A\u0024mailingListMapper",
             "name": "mailingListMapper",
             "summary": "",
             "url": "classes/Report-Service-Misc.html#property_mailingListMapper"
+        },                {
+            "fqsen": "\\Report\\Service\\Misc\u003A\u003A\u0024mailingListMemberMapper",
+            "name": "mailingListMemberMapper",
+            "summary": "",
+            "url": "classes/Report-Service-Misc.html#property_mailingListMemberMapper"
         },                {
             "fqsen": "\\Report\\Service\\Misc\u003A\u003A\u0024emReport",
             "name": "emReport",

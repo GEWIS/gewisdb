@@ -308,7 +308,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/Factory/DatabaseDeletionListenerFactory.php"><a href="files/module-report-src-listener-factory-databasedeletionlistenerfactory.html"><abbr title="module/Report/src/Listener/Factory/DatabaseDeletionListenerFactory.php">DatabaseDeletionListenerFactory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
@@ -383,7 +383,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Report/src/Listener/Factory/DatabaseDeletionListenerFactory.php"><a href="files/module-report-src-listener-factory-databasedeletionlistenerfactory.html"><abbr title="module/Report/src/Listener/Factory/DatabaseDeletionListenerFactory.php">DatabaseDeletionListenerFactory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -469,6 +469,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

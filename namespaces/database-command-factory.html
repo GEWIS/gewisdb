@@ -300,7 +300,7 @@
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-DeleteExpiredMembersCommandFactory.html"><abbr title="\Database\Command\Factory\DeleteExpiredMembersCommandFactory">DeleteExpiredMembersCommandFactory</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-DeleteExpiredProspectiveMembersCommandFactory.html"><abbr title="\Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory">DeleteExpiredProspectiveMembersCommandFactory</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-GenerateAuthenticationKeysCommandFactory.html"><abbr title="\Database\Command\Factory\GenerateAuthenticationKeysCommandFactory">GenerateAuthenticationKeysCommandFactory</abbr></a></dt>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-DeleteExpiredMembersCommandFactory.html"><abbr title="\Database\Command\Factory\DeleteExpiredMembersCommandFactory">DeleteExpiredMembersCommandFactory</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-DeleteExpiredProspectiveMembersCommandFactory.html"><abbr title="\Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory">DeleteExpiredProspectiveMembersCommandFactory</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-GenerateAuthenticationKeysCommandFactory.html"><abbr title="\Database\Command\Factory\GenerateAuthenticationKeysCommandFactory">GenerateAuthenticationKeysCommandFactory</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-MailingListMaintenanceCommandFactory.html"><abbr title="\Database\Command\Factory\MailingListMaintenanceCommandFactory">MailingListMaintenanceCommandFactory</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-MailmanFetchListsCommandFactory.html"><abbr title="\Database\Command\Factory\MailmanFetchListsCommandFactory">MailmanFetchListsCommandFactory</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-Factory-MailmanSyncMembershipCommandFactory.html"><abbr title="\Database\Command\Factory\MailmanSyncMembershipCommandFactory">MailmanSyncMembershipCommandFactory</abbr></a></dt>    </dl>
 
 
 
@@ -348,6 +348,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

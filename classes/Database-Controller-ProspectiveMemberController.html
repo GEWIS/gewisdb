@@ -384,7 +384,7 @@
     <span>
                                 &nbsp;: <abbr title="\Laminas\Http\Response">Response</abbr>    </span>
 </dt>
-<dd>Show action.</dd>
+<dd>Approve or finalize action.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Controller-ProspectiveMemberController.html#method_indexAction">indexAction()</a>
@@ -659,7 +659,7 @@
 
     </aside>
 
-        <p class="phpdocumentor-summary">Show action.</p>
+        <p class="phpdocumentor-summary">Approve or finalize action.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -841,6 +841,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

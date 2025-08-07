@@ -628,7 +628,7 @@ days ago.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
@@ -668,7 +668,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">182</span>
 
     </aside>
 
@@ -707,7 +707,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">225</span>
+    <span class="phpdocumentor-element-found-in__line">221</span>
 
     </aside>
 
@@ -795,7 +795,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">207</span>
+    <span class="phpdocumentor-element-found-in__line">203</span>
 
     </aside>
 
@@ -840,7 +840,7 @@ days ago.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ProspectiveMember.php"><a href="files/module-database-src-mapper-prospectivemember.html"><abbr title="module/Database/src/Mapper/ProspectiveMember.php">ProspectiveMember.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">216</span>
+    <span class="phpdocumentor-element-found-in__line">212</span>
 
     </aside>
 
@@ -965,6 +965,8 @@ days ago.</p>
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

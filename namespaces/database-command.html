@@ -307,7 +307,7 @@
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-DeleteExpiredMembersCommand.html"><abbr title="\Database\Command\DeleteExpiredMembersCommand">DeleteExpiredMembersCommand</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html"><abbr title="\Database\Command\DeleteExpiredProspectiveMembersCommand">DeleteExpiredProspectiveMembersCommand</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-GenerateAuthenticationKeysCommand.html"><abbr title="\Database\Command\GenerateAuthenticationKeysCommand">GenerateAuthenticationKeysCommand</abbr></a></dt>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-DeleteExpiredMembersCommand.html"><abbr title="\Database\Command\DeleteExpiredMembersCommand">DeleteExpiredMembersCommand</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-DeleteExpiredProspectiveMembersCommand.html"><abbr title="\Database\Command\DeleteExpiredProspectiveMembersCommand">DeleteExpiredProspectiveMembersCommand</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-GenerateAuthenticationKeysCommand.html"><abbr title="\Database\Command\GenerateAuthenticationKeysCommand">GenerateAuthenticationKeysCommand</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-MailingListMaintenanceCommand.html"><abbr title="\Database\Command\MailingListMaintenanceCommand">MailingListMaintenanceCommand</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-MailmanFetchListsCommand.html"><abbr title="\Database\Command\MailmanFetchListsCommand">MailmanFetchListsCommand</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database-Command-MailmanSyncMembershipCommand.html"><abbr title="\Database\Command\MailmanSyncMembershipCommand">MailmanSyncMembershipCommand</abbr></a></dt>    </dl>
 
 
 
@@ -355,6 +355,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 
