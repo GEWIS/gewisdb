@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-705-g44080b49-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-713-g5fecbe51-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-05 21:32+0200\n"
+"POT-Creation-Date: 2025-08-08 15:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1598,7 +1598,7 @@ msgstr ""
 
 msgid ""
 "Welcome! With this form you can register for a membership of GEWIS. Becoming "
-"a member of the assocations costs a one-time fee of 15 euros and your "
+"a member of the assocation costs a one-time fee of 20 euros and your "
 "membership is valid as long as you study."
 msgstr ""
 
