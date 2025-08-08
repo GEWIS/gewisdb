@@ -36,7 +36,7 @@ class MemberFixture extends AbstractFixture
             $pros->setTueUsername('20190001');
             $pros->setBirth(new DateTime('2001-01-01'));
             $pros->setEmail('tara@example.com');
-            $pros->setPaid(15);
+            $pros->setPaid(20);
             $pros->setChangedOn(new DateTime());
             $prosAddress = new Address();
             $prosAddress->setStreet('Teststraat');

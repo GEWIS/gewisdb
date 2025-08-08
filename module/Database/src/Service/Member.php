@@ -424,7 +424,7 @@ class Member
         $member->setAuthenticationKey($this->generateAuthenticationKey());
 
         // Set paid automatically.
-        $member->setPaid(15);
+        $member->setPaid(20);
 
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
