@@ -42,7 +42,7 @@ class MailingList
      */
     public function findAll(): array
     {
-        return $this->getRepository()->findAll();
+        return $this->getRepository()->findBy([], ['name' => 'ASC']);
     }
 
     /**
@@ -52,7 +52,7 @@ class MailingList
      */
     public function findAllOnForm(): array
     {
-        return $this->getRepository()->findBy(['onForm' => true]);
+        return $this->getRepository()->findBy(['onForm' => true], ['name' => 'ASC']);
     }
 
     /**
@@ -65,6 +65,8 @@ class MailingList
         return $this->getRepository()->findBy([
             'defaultSub' => true,
             'onForm' => false,
+        ], [
+            'name' => 'ASC',
         ]);
     }
 
