@@ -24,6 +24,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_map;
+use function in_array;
 use function json_decode;
 use function json_last_error_msg;
 use function json_validate;
@@ -210,6 +211,15 @@ class Mailman
 
         $verifyTime = (new DateTime())->sub(new DateInterval('P1D'));
 
+        $isMailmanList = $dbList->hasMailmanList();
+        if ($isMailmanList) {
+            $listId = $dbList->getMailmanList()->getMailmanId();
+            $knownMembers = $this->getMailmanListSubscriberEmails($listId);
+        } else {
+            // This is to satisfy psalm, observe that it is not needed
+            $knownMembers = [];
+        }
+
         // Phase 1: Sync all pending changes from DB side
         // The order matters; we first process deletions, because we can have both be true
         // (e.g. when changing email addresses twice)
@@ -227,11 +237,12 @@ class Mailman
                     dryRun: $dryRun,
                     sendWelcomeEmail: true,
                 );
-            } elseif ($dbList->hasMailmanList() && $mailingListMember->getLastSyncOn() < $verifyTime) {
+            } elseif ($isMailmanList && $mailingListMember->getLastSyncOn() < $verifyTime) {
                 $this->verifyMemberOnMailingList(
                     mailingListMember: $mailingListMember,
                     output: $output,
                     dryRun: $dryRun,
+                    knownMembers: $knownMembers,
                 );
             }
         }
@@ -515,11 +526,16 @@ class Mailman
     /**
      * This function verifies that a member is still on a given mailing list
      * and if not, removes the mailinglistMemberModel
+     *
+     * Optionally accepts an array of known members
+     *
+     * @param string[] $knownMembers A list of email addresses guaranteed to be on the list
      */
     private function verifyMemberOnMailingList(
         MailingListMemberModel $mailingListMember,
         OutputInterface $output,
         bool $dryRun,
+        array $knownMembers,
     ): void {
         // If there is no associated mailman list, assume this is right
         if (!$mailingListMember->getMailingList()->hasMailmanList()) {
@@ -527,6 +543,22 @@ class Mailman
         }
 
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
+
+        if (in_array($mailingListMember->getEmail(), $knownMembers)) {
+            $mailingListMember->setLastSyncOn();
+            $this->mailingListMemberMapper->persist($mailingListMember);
+
+            return;
+        }
+
+        $output->writeln(
+            sprintf(
+                '--> %s is not in the list of known members of %s, verifying in mailman',
+                $mailingListMember->getEmail(),
+                $listId,
+            ),
+            OutputInterface::VERBOSITY_VERY_VERBOSE,
+        );
 
         $data = [
             'list_id' => $listId,
@@ -549,6 +581,9 @@ class Mailman
         }
 
         if (1 === $response['total_size']) {
+            $mailingListMember->setLastSyncOn();
+            $this->mailingListMemberMapper->persist($mailingListMember);
+
             return;
         }
 
@@ -579,62 +614,54 @@ class Mailman
     ): void {
         $mmList = $mailingList->getMailmanList();
         $membersDB = $mailingList->getMailingListMemberships();
-        $listId = $mmList->getMailmanId();
+        $listId = $mailingList->getMailmanList()->getMailmanId();
 
-        $data = [
-            'list_id' => $listId,
-            'role' => self::MM_ROLE_MEMBER,
-        ];
-
-        $response = $this->performMailmanRequest('members/find', data: $data);
-
-        if ($response['total_size'] > 0) {
-            foreach ($response['entries'] as $entry) {
-                $found = false;
-                foreach ($membersDB as $member) {
-                    if ($member->getEmail() !== $entry['email']) {
-                        continue;
-                    }
-
-                    $found = true;
+        $entries = $this->getMailmanListSubscriberEntries($listId);
+        foreach ($entries as $entry) {
+            $found = false;
+            foreach ($membersDB as $member) {
+                if ($member->getEmail() !== $entry['email']) {
+                    continue;
                 }
 
-                $foundMember = $this->memberMapper->findByEmail($entry['email']);
+                $found = true;
+            }
 
-                if (!$found && null === $foundMember) {
-                    $output->writeln(
-                        sprintf(
-                            '--> Removing unknown email %s from %s',
-                            $entry['email'],
-                            $data['list_id'],
-                        ),
-                        OutputInterface::VERBOSITY_VERY_VERBOSE,
+            $foundMember = $this->memberMapper->findByEmail($entry['email']);
+
+            if (!$found && null === $foundMember) {
+                $output->writeln(
+                    sprintf(
+                        '--> Removing unknown email %s from %s',
+                        $entry['email'],
+                        $listId,
+                    ),
+                    OutputInterface::VERBOSITY_VERY_VERBOSE,
+                );
+
+                if (!$dryRun) {
+                    $this->performMailmanRequest(
+                        'members/' . rawurlencode($entry['member_id']),
+                        method: Request::METHOD_DELETE,
                     );
+                }
+            } elseif (!$found) {
+                $output->writeln(
+                    sprintf(
+                        '--> Found %s on %s, updating database',
+                        $entry['email'],
+                        $listId,
+                    ),
+                    OutputInterface::VERBOSITY_VERY_VERBOSE,
+                );
 
-                    if (!$dryRun) {
-                        $this->performMailmanRequest(
-                            'members/' . rawurlencode($entry['member_id']),
-                            method: Request::METHOD_DELETE,
-                        );
-                    }
-                } elseif (!$found) {
-                    $output->writeln(
-                        sprintf(
-                            '--> Found %s on %s, updating database',
-                            $entry['email'],
-                            $data['list_id'],
-                        ),
-                        OutputInterface::VERBOSITY_VERY_VERBOSE,
-                    );
-
-                    if (!$dryRun) {
-                        $mailingListMember = new MailingListMemberModel();
-                        $mailingListMember->setMailingList($mailingList);
-                        $mailingListMember->setMember($foundMember);
-                        $mailingListMember->setEmail($entry['email']);
-                        $mailingListMember->setToBeCreated(false);
-                        $this->mailingListMemberMapper->persist($mailingListMember);
-                    }
+                if (!$dryRun) {
+                    $mailingListMember = new MailingListMemberModel();
+                    $mailingListMember->setMailingList($mailingList);
+                    $mailingListMember->setMember($foundMember);
+                    $mailingListMember->setEmail($entry['email']);
+                    $mailingListMember->setToBeCreated(false);
+                    $this->mailingListMemberMapper->persist($mailingListMember);
                 }
             }
         }
@@ -645,5 +672,46 @@ class Mailman
 
         $mmList->setLastCheck();
         $this->mailmanMailingListMapper->persist($mmList);
+    }
+
+    /**
+     * Function to get all current subscribers to a list in mailman
+     * Particularly useful when comparing the entire list
+     *
+     * @return array<array-key,array{
+     *  email: string,
+     *  list_id : string,
+     *  member_id: string,
+     *  role: string,
+     * }>
+     */
+    private function getMailmanListSubscriberEntries(string $listId): array
+    {
+        $data = [
+            'list_id' => $listId,
+            'role' => self::MM_ROLE_MEMBER,
+        ];
+
+        // By default this response is not paginated, which is what we want here
+        $response = $this->performMailmanRequest('members/find', data: $data);
+
+        if ($response['total_size'] > 0) {
+            return $response['entries'];
+        }
+
+        return [];
+    }
+
+    /**
+     * Function to get all email addresses currently subscribed to a given mailman list
+     *
+     * @return string[]
+     */
+    private function getMailmanListSubscriberEmails(string $listId): array
+    {
+        return array_map(
+            static fn (array $entry) => $entry['email'],
+            $this->getMailmanListSubscriberEntries($listId),
+        );
     }
 }

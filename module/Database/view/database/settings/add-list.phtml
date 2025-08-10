@@ -37,9 +37,6 @@ if ('add' === $action) {
         $form->setAttribute('class', 'form-horizontal');
         ?>
         <?= $this->form()->openTag($form) ?>
-        <p>
-            <?= $this->translate('Please note that if you create a mailing list here, it must also exist in mailman (with the same name!).') ?>
-        </p>
 
         <div class="form-group">
             <?php
@@ -47,6 +44,10 @@ if ('add' === $action) {
             $element->setAttribute('class', 'form-control');
             $element->setAttribute('placeholder', $element->getLabel());
             $element->setLabelAttributes(['class' => 'col-sm-2 control-label']);
+
+            if ('add' !== $action) {
+                $element->setAttribute('readonly', true);
+            }
             ?>
             <?= $this->formLabel($element) ?>
             <div class="col-sm-10">
