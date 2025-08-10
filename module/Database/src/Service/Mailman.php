@@ -76,6 +76,9 @@ class Mailman
         $client->setAdapter(Curl::class)
             ->setAuth($this->mailmanConfig['username'], $this->mailmanConfig['password'])
             ->setMethod($method)
+            ->setOptions([
+                'timeout' => 600,
+            ])
             ->setUri($this->mailmanConfig['endpoint'] . $uri);
 
         // Data encoding is automatically set to `application/x-www-form-urlencoded` for "POST"-like requests.
