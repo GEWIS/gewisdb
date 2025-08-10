@@ -9761,6 +9761,16 @@ Search.appendIndex(
             "summary": "Function\u0020to\u0020process\u0020\u0027new\u0027\u0020or\u0020unknown\u0020mailman\u0020registrations\nWhen\u0020member\u0020known,\u0020adds\u0020to\u0020DB.\u0020When\u0020member\u0020unknown,\u0020removes\u0020from\u0020mailman",
             "url": "classes/Database-Service-Mailman.html#method_fullCheckMailmanList"
         },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AgetMailmanListSubscriberEntries\u0028\u0029",
+            "name": "getMailmanListSubscriberEntries",
+            "summary": "Function\u0020to\u0020get\u0020all\u0020current\u0020subscribers\u0020to\u0020a\u0020list\u0020in\u0020mailman\nParticularly\u0020useful\u0020when\u0020comparing\u0020the\u0020entire\u0020list",
+            "url": "classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEntries"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003AgetMailmanListSubscriberEmails\u0028\u0029",
+            "name": "getMailmanListSubscriberEmails",
+            "summary": "Function\u0020to\u0020get\u0020all\u0020email\u0020addresses\u0020currently\u0020subscribed\u0020to\u0020a\u0020given\u0020mailman\u0020list",
+            "url": "classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEmails"
+        },                {
             "fqsen": "\\Database\\Service\\Mailman\u003A\u003AMM_ROLE_NONMEMBER",
             "name": "MM_ROLE_NONMEMBER",
             "summary": "",
