@@ -26,7 +26,7 @@ messageblocks:
 
       <p>Dear {{FIRST_NAME}},</p>
 
-      <p>We have noticed that you have not yet paid the one-time membership fee of 20 euros. Without the payment we cannot approve your membership. You can use the following link to start again: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>.</p>
+      <p>We have noticed that you have not yet paid the one-time membership fee. Without the payment we cannot approve your membership. You can use the following link to start again: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>.</p>
 
       <p>Have you changed your mind and do you not want to become a member after all? Then you do not have to pay and we will delete your details in 31 days. We would also like to hear why you do not want to become a member after all, so that we can improve the registration process.</p>
 
