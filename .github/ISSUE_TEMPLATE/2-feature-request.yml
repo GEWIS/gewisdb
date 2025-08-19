@@ -1,6 +1,7 @@
 name: "✨ Feature Request"
 description: Suggest a feature or enhancement to improve the GEWIS database.
 labels: ["Type: Idea"]
+type: "Feature"
 body:
     -   type: textarea
         id: feature
