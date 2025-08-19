@@ -1,6 +1,7 @@
 name: "🐛 Bug Report"
 description: Report a bug found while using the GEWIS database.
 labels: ["Type: Bug", "Status: Triage"]
+type: "Bug"
 body:
     -   type: textarea
         id: current-behavior
