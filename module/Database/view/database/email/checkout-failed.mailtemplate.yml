@@ -26,11 +26,14 @@ messageblocks:
 
       <p>Dear {{FIRST_NAME}},</p>
 
-      <p>Your payment of the membership fee has failed. We kindly ask you to try again using the following link: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>.</p>
+      <p>Your payment of the membership fee has failed. Without payment of the membership fee, we cannot approve the membership. We kindly ask you to try again using the following link: <a href='{{RESTART_CHECKOUT_URL}}'>{{RESTART_CHECKOUT_URL}}</a>.</p>
 
-      <p>Have you changed your mind and do you not want to become a member after all? Then you do not have to pay again and we will delete your details in 31 days. We would also like to hear why you do not want to become a member after all, so that we can improve the registration process.</p>
+      <ul>
+        <li>Have you changed your mind and do you not want to become a member? Then you do not have to pay again and we will delete your details in 31 days. We would also like to hear why you do not want to become a member after all, so that we can improve the registration process.</li>
+        <li>Did you pay by bank transfer or cash? Then your payment will be processed manually. You can ignore this email. Manual verification can take up to 5 working days. If you have not heard from us after that, please reach out.</li>
+      </ul>
 
-      <br/>
+      <p>
       With kind regards,<br/>
       The board of GEWIS
       "
