@@ -120,5 +120,14 @@ The `Application` module has one additional folder:
 The `Database` and `Report` modules have one additional folder:
 - `migrations` containing database migrations.
 
+### Using the API
+To experiment with the API, import the openapi.yaml file into your favourite REST client.
+
+Alternatively, you can use PowerShell, for example:
+
+```powershell
+((Invoke-WebRequest -Uri http://localhost/api/organFunctions -Headers @{"Authorization" = "Bearer APITOKEN"}).Content | ConvertFrom-Json).data | Format-List
+```
+
 ## License
 This software is licensed under the GNU General Public License v3.0 (GPL-3.0), see [LICENSE](./LICENSE.txt).

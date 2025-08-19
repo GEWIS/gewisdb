@@ -8,15 +8,15 @@ info:
   license:
     name: GNU GENERAL PUBLIC LICENSE Version 3
     url: 'https://github.com/GEWIS/gewisdb/blob/main/LICENSE.txt'
-  version: 3.0.2
+  version: 4.3.3
 externalDocs:
   description: Contribute to this API
   url: 'https://github.com/GEWIS/gewisdb'
 servers:
-  - url: 'https://database.gewis.nl/api'
-    description: Production environment
   - url: 'https://database.test.gewis.nl/api'
     description: Test environment
+  - url: 'https://database.gewis.nl/api'
+    description: Production environment
   - url: 'http://localhost/api'
     description: Local environment
 tags:
@@ -26,6 +26,8 @@ tags:
     externalDocs:
       description: MemberModel
       url: 'https://gewis.github.io/gewisdb/classes/Database-Model-Member.html'
+  - name: functions
+    description: Obtain information about board/organ functions (names, translations)
 paths:
   /:
     get:
@@ -150,6 +152,23 @@ paths:
       security:
         - api_auth:
             - MembersActiveR
+  /organFunction:
+    get:
+      summary: Get organ functions
+      description: Get all organ functions including translations
+      operationId: getOrganFunctions
+      tags:
+        - functions
+      responses:
+        '200':
+          $ref: '#/components/responses/organFunction_list'
+        '403':
+          $ref: '#/components/responses/no_permission'
+        '500':
+          $ref: '#/components/responses/server_error'
+      security:
+        - api_auth:
+            - OrganFunctionsListR
   /example404:
     get:
       summary: Example 404
@@ -357,6 +376,18 @@ components:
             - "string"
           examples:
             - Testorgaan
+    OrganFunction:
+      type:
+        - "object"
+      properties:
+        translations:
+          $ref: '#/components/schemas/TranslationString'
+        isAdministrative:
+          type:
+            - "boolean"
+        isLegacy:
+          type:
+            - "boolean"
     ResponseObject:
       oneOf:
         - $ref: '#/components/schemas/ResponseSuccess'
@@ -409,6 +440,23 @@ components:
                 - "string"
               examples:
                 - An example exception was thrown
+    TranslationString:
+      type:
+        - "object"
+      required:
+        - en
+        - nl
+      properties:
+        en:
+          type:
+            - "string"
+          examples:
+            - "Chair"
+        nl:
+          type:
+            - "string"
+          examples:
+            - "Voorzitter"
   responses:
     health:
       description: Successful
@@ -484,6 +532,47 @@ components:
                   is_16_plus: false
                   is_18_plus: false
                   is_21_plus: false
+    organFunction_list:
+      description: Succesful response containing zero or more organ functions
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ResponseSuccess'
+              - type:
+                  - object
+                properties:
+                  data:
+                    type:
+                      - object
+                    additionalProperties:
+                      type:
+                        - object
+                      properties:
+                        translations:
+                          type:
+                            - array
+                          items:
+                            $ref: '#/components/schemas/OrganFunction'
+                    examples:
+                      - Voorzitter:
+                          translations:
+                            en: "Chair"
+                            nl: "Voorzitter"
+                          isAdministrative: false
+                          isLegacy: false
+                        Inkoper:
+                          translations:
+                            en: "Procurement Officer"
+                            nl: "Inkoper"
+                          isAdministrative: false
+                          isLegacy: true
+                        Inactief Lid:
+                          translations:
+                            en: "Inactive Member"
+                            nl: "Inactief Lid"
+                          isAdministrative: true
+                          isLegacy: false
     server_error:
       description: >-
         There was an error in the server. Most likely, this is a permanent
