@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace User\Model;
 
+use Database\Model\Trait\CreatedTrait;
+use Database\Model\Trait\UpdatedTrait;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
 use Laminas\Form\Annotation\Validator;
 use Laminas\Validator\StringLength;
@@ -24,8 +27,12 @@ use function substr;
  * Member model.
  */
 #[Entity]
+#[HasLifecycleCallbacks]
 class ApiPrincipal
 {
+    use CreatedTrait;
+    use UpdatedTrait;
+
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]

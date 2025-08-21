@@ -12,6 +12,7 @@ use Laminas\Router\RouteMatch;
 use Laminas\Router\RouteStackInterface as Router;
 use Laminas\View\Model\JsonModel;
 use LogicException;
+use User\Model\Exception\ApiException;
 
 use function strpos;
 use function strrpos;
@@ -130,11 +131,19 @@ final class DispatchErrorFormatterListener
             ],
         ]);
         $e->setViewModel($view);
+        $e->stopPropagation();
+
         $response = $e->getResponse();
-        if ($response instanceof HttpResponse) {
-            $response->setStatusCode(HttpResponse::STATUS_CODE_500);
+
+        if (!($response instanceof HttpResponse)) {
+            return;
         }
 
-        $e->stopPropagation();
+        $exception = $e->getParam('exception');
+        if ($exception instanceof ApiException) {
+            $response->setStatusCode($exception->getHttpStatusCode());
+        } else {
+            $response->setStatusCode(HttpResponse::STATUS_CODE_500);
+        }
     }
 }
