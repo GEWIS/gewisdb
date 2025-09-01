@@ -27,6 +27,7 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
     apk add --virtual .build-deps \
         tzdata \
     && apk add --virtual .runtime-programs \
+        icu-data-full \
         git \
         ${PHPVERSION} \
         ${PHPVERSION}-calendar \
