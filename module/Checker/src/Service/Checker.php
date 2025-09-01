@@ -329,6 +329,8 @@ class Checker
     {
         $errors = [];
         $grantings = $this->keyService->getKeysGrantedDuringMeeting($meeting);
+        // With BV 1749.15.1 no more restrictions on max. one year.
+        $maxOneYearCutOff = new DateTime('2025-07-01 midnight');
 
         // `$today` is when the meeting took place
         $today = $meeting->getDate();
@@ -349,7 +351,10 @@ class Checker
             if ($until < $today) {
                 $errors[] = new ErrorModel\KeyGrantedInThePast($granting);
             } else {
-                if ($until > $todayNextYear) {
+                if (
+                    $today < $maxOneYearCutOff
+                    && $until > $todayNextYear
+                ) {
                     $errors[] = new ErrorModel\KeyGrantedLongerThanOneYear($granting);
                 }
 
