@@ -4776,11 +4776,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Form-Key-Grant.html#method_isNotInThePast"
         },                {
-            "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003AisMaxOneYear\u0028\u0029",
-            "name": "isMaxOneYear",
-            "summary": "",
-            "url": "classes/Database-Form-Key-Grant.html#method_isMaxOneYear"
-        },                {
             "fqsen": "\\Database\\Form\\Key\\Grant\u003A\u003AisNotTooFar\u0028\u0029",
             "name": "isNotTooFar",
             "summary": "",
