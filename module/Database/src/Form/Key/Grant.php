@@ -7,7 +7,6 @@ namespace Database\Form\Key;
 use Database\Form\AbstractDecision;
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\Member as MemberFieldset;
-use DateInterval;
 use DateTime;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Submit;
@@ -73,19 +72,6 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
                         'name' => Callback::class,
                         'options' => [
                             'callback' => function ($value, $context) {
-                                return $this->isMaxOneYear($value, $context);
-                            },
-                            'messages' => [
-                                Callback::INVALID_VALUE => $this->translator->translate(
-                                    'Key code cannot be granted for more than one year.',
-                                ),
-                            ],
-                        ],
-                    ],
-                    [
-                        'name' => Callback::class,
-                        'options' => [
-                            'callback' => function ($value, $context) {
                                 return $this->isNotTooFar($value, $context);
                             },
                             'messages' => [
@@ -111,22 +97,6 @@ class Grant extends AbstractDecision implements InputFilterProviderInterface
             $today = new DateTime($context['meeting']['date']);
 
             return (new DateTime($value)) >= $today;
-        } catch (Throwable) {
-            return false;
-        }
-    }
-
-    /**
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
-     */
-    private function isMaxOneYear(
-        string $value,
-        array $context = [],
-    ): bool {
-        try {
-            $future = (new DateTime($context['meeting']['date']))->add(new DateInterval('P1Y'));
-
-            return (new DateTime($value)) <= $future;
         } catch (Throwable) {
             return false;
         }
