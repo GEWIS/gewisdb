@@ -131,6 +131,7 @@ class ApiController extends AbstractActionController
         $functions = OrganInstallationFunctions::getMultilangArray($this->translator);
 
         $res = [
+            'status' => ApiResponseStatuses::Success,
             'data' => $functions,
         ];
 
