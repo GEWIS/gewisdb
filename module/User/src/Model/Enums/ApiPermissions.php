@@ -24,6 +24,7 @@ enum ApiPermissions: string
     case MembersDeleted = 'members_deleted';
     case OrgansMembershipR = 'organs_members_read';
     case OrganFunctionsListR = 'organs_functionslist_read';
+    case BoardFunctionsListR = 'boards_functionslist_read';
     case All = '*';
 
     public function getName(Translator $translator): string
@@ -48,6 +49,7 @@ enum ApiPermissions: string
             self::MembersDeleted => $translator->translate('Member¹ - Allow operations on `deleted\' members'),
             self::OrgansMembershipR => $translator->translate('Organs - Read organ membership (per user/organ)'),
             self::OrganFunctionsListR => $translator->translate('Organs - List functions and translations'),
+            self::BoardFunctionsListR => $translator->translate('Boards - List functions and translations'),
             self::All => $translator->translate('All API permissions'),
         };
     }

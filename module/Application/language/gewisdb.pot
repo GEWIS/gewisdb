@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v2.0.0-715-gc447b642-dirty\n"
+"Project-Id-Version: GEWISdb v2.0.0-737-g339ef586\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-08 15:47+0200\n"
+"POT-Creation-Date: 2025-09-23 18:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -336,6 +336,9 @@ msgid "Board Member(s) to Relieve"
 msgstr ""
 
 msgid "Board Mutations"
+msgstr ""
+
+msgid "Boards - List functions and translations"
 msgstr ""
 
 msgid "Brand Manager"
@@ -875,9 +878,6 @@ msgid ""
 "Key code cannot be granted after September 1st of the next association year."
 msgstr ""
 
-msgid "Key code cannot be granted for more than one year."
-msgstr ""
-
 msgid "Key code cannot be granted in the past."
 msgstr ""
 
@@ -1151,11 +1151,6 @@ msgid ""
 "Please check your e-mail address, '%s' does not appear to be able to receive "
 "e-mails. If you are certain that your e-mail address is correct, please "
 "contact the board."
-msgstr ""
-
-msgid ""
-"Please note that if you create a mailing list here, it must also exist in "
-"mailman (with the same name!)."
 msgstr ""
 
 msgid "Please select a function"

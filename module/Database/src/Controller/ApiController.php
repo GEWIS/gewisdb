@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Database\Controller;
 
 use Database\Model\Enums\ApiResponseStatuses;
+use Database\Model\Enums\BoardFunctions;
 use Database\Model\Enums\InstallationFunctions as OrganInstallationFunctions;
 use Database\Service\Api as ApiService;
+use Laminas\Http\Request as HttpRequest;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\JsonModel;
+use PHLAK\SemVer\Version as SemanticVersion;
 use RuntimeException;
 use User\Model\Enums\ApiPermissions;
 use User\Service\ApiAuthenticationService;
@@ -127,10 +130,30 @@ class ApiController extends AbstractActionController
     public function organFunctionsAction(): JsonModel
     {
         $this->apiAuthService->assertCan(ApiPermissions::OrganFunctionsListR);
+        $this->assertVersions('v4.3.3', null, $this->getRequest());
 
         $functions = OrganInstallationFunctions::getMultilangArray($this->translator);
 
         $res = [
+            'status' => ApiResponseStatuses::Success,
+            'data' => $functions,
+        ];
+
+        return new JsonModel($res);
+    }
+
+    /**
+     * Return board functions
+     */
+    public function boardFunctionsAction(): JsonModel
+    {
+        $this->apiAuthService->assertCan(ApiPermissions::BoardFunctionsListR);
+        $this->assertVersions('v4.3.3', null, $this->getRequest());
+
+        $functions = BoardFunctions::getMultilangArray($this->translator);
+
+        $res = [
+            'status' => ApiResponseStatuses::Success,
             'data' => $functions,
         ];
 
@@ -194,5 +217,20 @@ class ApiController extends AbstractActionController
         }
 
         return $additionalProperties;
+    }
+
+    private function assertVersions(
+        string $minimumVersion,
+        ?string $maximumVersion,
+        HttpRequest $request,
+    ): void {
+        $minimumVersion = new SemanticVersion($minimumVersion);
+
+        if (null !== $maximumVersion) {
+            $maximumVersion = new SemanticVersion($maximumVersion);
+        }
+
+        $acceptHeader = $request->getHeaders('Accept', null);
+        $this->apiService->assertVersion($minimumVersion, $maximumVersion, $acceptHeader);
     }
 }
