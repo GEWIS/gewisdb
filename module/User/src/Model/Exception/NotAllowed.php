@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace User\Model\Exception;
 
-use RuntimeException;
 use Throwable;
 use User\Model\Enums\ApiPermissions;
 
-class NotAllowed extends RuntimeException
+class NotAllowed extends ApiException
 {
     public function __construct(
         ApiPermissions $permission,
