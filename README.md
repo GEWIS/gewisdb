@@ -126,7 +126,7 @@ To experiment with the API, import the openapi.yaml file into your favourite RES
 Alternatively, you can use PowerShell, for example:
 
 ```powershell
-((Invoke-WebRequest -Uri http://localhost/api/organFunctions -Headers @{"Authorization" = "Bearer APITOKEN"}).Content | ConvertFrom-Json).data | Format-List
+((Invoke-WebRequest -Uri http://localhost/api/organFunctions -Headers @{"Authorization" = "Bearer APITOKEN"; "Accept" = "application/vnd.gewis.gewisdb+json;version=4.3.3"}).Content | ConvertFrom-Json).data | Format-List
 ```
 
 ## License

@@ -159,6 +159,13 @@ paths:
       operationId: getOrganFunctions
       tags:
         - functions
+      parameters:
+        - in: header
+          name: Accept
+          schema:
+            type: string
+          required: true
+          example: "application/vnd.gewis.gewisdb+json;version=4.3.3"
       responses:
         '200':
           $ref: '#/components/responses/organFunction_list'
@@ -546,14 +553,7 @@ components:
                     type:
                       - object
                     additionalProperties:
-                      type:
-                        - object
-                      properties:
-                        translations:
-                          type:
-                            - array
-                          items:
-                            $ref: '#/components/schemas/OrganFunction'
+                      $ref: '#/components/schemas/OrganFunction'
                     examples:
                       - Voorzitter:
                           translations:
