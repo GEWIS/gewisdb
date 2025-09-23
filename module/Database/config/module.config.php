@@ -749,6 +749,15 @@ return [
                             ],
                         ],
                     ],
+                    'boardFunctions' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/boardFunctions',
+                            'defaults' => [
+                                'action' => 'boardFunctions',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],

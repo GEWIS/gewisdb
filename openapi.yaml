@@ -26,8 +26,12 @@ tags:
     externalDocs:
       description: MemberModel
       url: 'https://gewis.github.io/gewisdb/classes/Database-Model-Member.html'
+  - name: board
+    description: Obtain information about board (installations)
   - name: functions
     description: Obtain information about board/organ functions (names, translations)
+  - name: organs
+    description: Obtain information about organs of GEWIS
 paths:
   /:
     get:
@@ -152,13 +156,14 @@ paths:
       security:
         - api_auth:
             - MembersActiveR
-  /organFunction:
+  /organFunctions:
     get:
       summary: Get organ functions
       description: Get all organ functions including translations
       operationId: getOrganFunctions
       tags:
         - functions
+        - organs
       parameters:
         - in: header
           name: Accept
@@ -171,11 +176,40 @@ paths:
           $ref: '#/components/responses/organFunction_list'
         '403':
           $ref: '#/components/responses/no_permission'
+        '406':
+          $ref: '#/components/responses/not_acceptable'
         '500':
           $ref: '#/components/responses/server_error'
       security:
         - api_auth:
             - OrganFunctionsListR
+  /boardFunctions:
+    get:
+      summary: Get board functions
+      description: Get all board functions including translations
+      operationId: getBoardFunctions
+      tags:
+        - board
+        - functions
+      parameters:
+        - in: header
+          name: Accept
+          schema:
+            type: string
+          required: true
+          example: "application/vnd.gewis.gewisdb+json;version=4.3.3"
+      responses:
+        '200':
+          $ref: '#/components/responses/boardFunction_list'
+        '403':
+          $ref: '#/components/responses/no_permission'
+        '406':
+          $ref: '#/components/responses/not_acceptable'
+        '500':
+          $ref: '#/components/responses/server_error'
+      security:
+        - api_auth:
+            - BoardFunctionsListR
   /example404:
     get:
       summary: Example 404
@@ -219,6 +253,15 @@ components:
             Attribute to indicate that data is currently being modified and that
             client applications that perform syncs in the background are
             requested to temporarily suspend this sync.
+    BoardFunction:
+      type:
+        - "object"
+      properties:
+        translations:
+          $ref: '#/components/schemas/TranslationString'
+        isLegacy:
+          type:
+            - "boolean"
     Member:
       description: >-
         Model representing a member. The exact attributes that are visible
@@ -471,6 +514,32 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/health'
+    boardFunction_list:
+      description: Succesful response containing zero or more board functions
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ResponseSuccess'
+              - type:
+                  - object
+                properties:
+                  data:
+                    type:
+                      - object
+                    additionalProperties:
+                      $ref: '#/components/schemas/BoardFunction'
+                    examples:
+                      - Voorzitter:
+                          translations:
+                            en: "Chair"
+                            nl: "Voorzitter"
+                          isLegacy: false
+                        Commissaris Kennisbeheer:
+                          translations:
+                            en: "Information Officer"
+                            nl: "Commissaris Kennisbeheer"
+                          isLegacy: true
     member_single:
       description: Succesful response containing exactly one member
       content:
@@ -610,6 +679,25 @@ components:
               error:
                 type: User\\Model\\Exception\\NotAllowed
                 exception: Permission `...` is needed but is not currently held.
+    not_acceptable:
+      description: You requested an API version that is not supported or you did not specify an API version
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+          examples:
+            - status: error
+              error:
+                type: Database\\Model\\Exception\\VersionIncompatible
+                exception: API version must be at least `...`, but `...` was given.
+            - status: error
+              error:
+                type: Database\\Model\\Exception\\VersionExpected
+                exception: API version expected, but none was given.
+            - status: error
+              error:
+                type: Database\\Model\\Exception\\VersionFormat
+                exception: API version expected, but v4.32 was given
   securitySchemes:
     api_auth:
       type: http

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Controller;
 
 use Database\Model\Enums\ApiResponseStatuses;
+use Database\Model\Enums\BoardFunctions;
 use Database\Model\Enums\InstallationFunctions as OrganInstallationFunctions;
 use Database\Service\Api as ApiService;
 use Laminas\Http\Request as HttpRequest;
@@ -132,6 +133,24 @@ class ApiController extends AbstractActionController
         $this->assertVersions('v4.3.3', null, $this->getRequest());
 
         $functions = OrganInstallationFunctions::getMultilangArray($this->translator);
+
+        $res = [
+            'status' => ApiResponseStatuses::Success,
+            'data' => $functions,
+        ];
+
+        return new JsonModel($res);
+    }
+
+    /**
+     * Return board functions
+     */
+    public function boardFunctionsAction(): JsonModel
+    {
+        $this->apiAuthService->assertCan(ApiPermissions::BoardFunctionsListR);
+        $this->assertVersions('v4.3.3', null, $this->getRequest());
+
+        $functions = BoardFunctions::getMultilangArray($this->translator);
 
         $res = [
             'status' => ApiResponseStatuses::Success,
