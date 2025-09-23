@@ -14,6 +14,7 @@ use Laminas\View\Model\JsonModel;
 use LogicException;
 use User\Model\Exception\ApiException;
 
+use function get_class;
 use function strpos;
 use function strrpos;
 use function substr;
@@ -126,7 +127,7 @@ final class DispatchErrorFormatterListener
         $view = new JsonModel([
             'status' => ApiResponseStatuses::Error,
             'error' => [
-                'type' => $e->getError(),
+                'type' => null !== $e->getParam('exception') ? get_class($e->getParam('exception')) : $e->getError(),
                 'exception' => $e->getParam('exception')?->getMessage(),
             ],
         ]);

@@ -6,11 +6,13 @@ namespace Database\Service;
 
 use Application\Model\Enums\ConfigNamespaces;
 use Application\Service\Config as ConfigService;
-use Database\Model\Exception\VersionExpected as VersionExceptedException;
+use Database\Model\Exception\VersionExpected as VersionExpectedException;
+use Database\Model\Exception\VersionFormat as VersionFormatException;
 use Database\Model\Exception\VersionIncompatible as VersionIncompatibleException;
 use DateTime;
 use Laminas\Http\Header\HeaderInterface;
 use PHLAK\SemVer\Enums\Compare as SemanticCompare;
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Version as SemanticVersion;
 use Report\Mapper\Member as ReportMemberMapper;
 
@@ -167,7 +169,7 @@ class Api
     /**
      * Function that asserts that the given api version is between two bounds.
      *
-     * @throws VersionExceptedException if not allowed.
+     * @throws VersionExpectedException if not allowed.
      */
     public function assertVersion(
         SemanticVersion $lower,
@@ -175,7 +177,7 @@ class Api
         ?HeaderInterface $acceptHeader,
     ): void {
         if (null === $acceptHeader) {
-            throw new VersionExceptedException();
+            throw new VersionExpectedException();
         }
 
         $count = 0;
@@ -187,10 +189,14 @@ class Api
             count: $count,
         );
 
-        $given = new SemanticVersion($value);
+        try {
+            $given = new SemanticVersion($value);
+        } catch (InvalidVersionException) {
+            throw new VersionFormatException($value);
+        }
 
         if (1 !== $count) {
-            throw new VersionExceptedException();
+            throw new VersionExpectedException();
         }
 
         if ($given->lt($lower, SemanticCompare::PATCH)) {
