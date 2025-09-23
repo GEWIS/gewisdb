@@ -20,12 +20,13 @@ final class Version20250821111612 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $now = new DateTime()->format('Y-m-d');
         $this->addSql('ALTER TABLE apiprincipal ADD createdAt TIMESTAMP(0) WITHOUT TIME ZONE, ADD updatedAt TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('UPDATE apiprincipal set createdAt = \'1900-01-01\', updatedAt = \'1900-01-01\'');
+        $this->addSql('UPDATE apiprincipal set createdAt = \'' . $now . '\', updatedAt = \'' . $now . '\'');
         $this->addSql('ALTER TABLE apiprincipal ALTER COLUMN createdAt SET NOT NULL, ALTER COLUMN updatedAt SET NOT NULL;');
 
         $this->addSql('ALTER TABLE users ADD createdAt TIMESTAMP(0) WITHOUT TIME ZONE, ADD updatedAt TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('UPDATE users set createdAt = \'1900-01-01\', updatedAt = \'1900-01-01\'');
+        $this->addSql('UPDATE users set createdAt = \'' . $now . '\', updatedAt = \'' . $now . '\'');
         $this->addSql('ALTER TABLE users ALTER COLUMN createdAt SET NOT NULL, ALTER COLUMN updatedAt SET NOT NULL;');
     }
 
