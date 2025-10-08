@@ -174,11 +174,11 @@ class MeetingController extends AbstractActionController
             'organ_regulation' => $this->meetingService->regulationDecision($this->getRequest()->getPost()->toArray()),
             'foundation' => $this->meetingService->foundationDecision(
                 array_merge(
-                    $this->getRequest()->getPost()->toArray(),
                     [
                         'name' => 'AUTOMATICALLY GENERATED',
                         'abbr' => 'AUTOMATICALLY GENERATED',
                     ],
+                    $this->getRequest()->getPost()->toArray(),
                 ),
             ),
             'abolish' => $this->meetingService->abolishDecision($this->getRequest()->getPost()->toArray()),
