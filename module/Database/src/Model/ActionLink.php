@@ -39,19 +39,19 @@ abstract class ActionLink
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * If the URL was clicked
      */
     #[Column(type: 'boolean')]
-    protected bool $used = false;
+    private bool $used = false;
 
     /**
      * The token in the URL
      */
     #[Column(type: 'string')]
-    protected string $token;
+    private string $token;
 
     public function __construct()
     {

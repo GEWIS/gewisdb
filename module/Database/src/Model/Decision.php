@@ -47,7 +47,7 @@ class Decision
         referencedColumnName: 'number',
         nullable: false,
     )]
-    protected Meeting $meeting;
+    private Meeting $meeting;
 
     /**
      * Meeting type.
@@ -59,7 +59,7 @@ class Decision
         type: 'string',
         enumType: MeetingTypes::class,
     )]
-    protected MeetingTypes $meeting_type;
+    private MeetingTypes $meeting_type;
 
     /**
      * Meeting number.
@@ -68,21 +68,21 @@ class Decision
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $meeting_number;
+    private int $meeting_number;
 
     /**
      * Point in the meeting in which the decision was made.
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $point;
+    private int $point;
 
     /**
      * Decision number.
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $number;
+    private int $number;
 
     /**
      * Subdecisions.
@@ -95,7 +95,7 @@ class Decision
         cascade: ['persist', 'remove'],
     )]
     #[OrderBy(value: ['sequence' => 'ASC'])]
-    protected Collection $subdecisions;
+    private Collection $subdecisions;
 
     /**
      * Annulled by.
@@ -104,7 +104,7 @@ class Decision
         targetEntity: Annulment::class,
         mappedBy: 'target',
     )]
-    protected ?Annulment $annulledBy = null;
+    private ?Annulment $annulledBy = null;
 
     /**
      * Set the meeting.

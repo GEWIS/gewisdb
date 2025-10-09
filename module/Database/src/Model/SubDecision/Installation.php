@@ -7,17 +7,16 @@ namespace Database\Model\SubDecision;
 use Application\Model\Enums\AppLanguages;
 use Database\Model\Enums\InstallationFunctions;
 use Database\Model\Member;
+use Database\Model\Trait\MemberAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\AssociationOverride;
 use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Laminas\Translator\TranslatorInterface;
-use Override;
 
 /**
  * Installation into organ.
@@ -26,16 +25,13 @@ use Override;
 #[AssociationOverrides([
     new AssociationOverride(
         name: 'member',
-        joinColumns: new JoinColumn(
-            name: 'lidnr',
-            referencedColumnName: 'lidnr',
-            nullable: false,
-        ),
         inversedBy: 'installations',
     ),
 ])]
 class Installation extends FoundationReference
 {
+    use MemberAwareTrait;
+
     /**
      * Function given.
      */
@@ -43,7 +39,7 @@ class Installation extends FoundationReference
         type: 'string',
         enumType: InstallationFunctions::class,
     )]
-    protected InstallationFunctions $function;
+    private InstallationFunctions $function;
 
     /**
      * Reappointment subdecisions if this installation was prolonged (can be done multiple times).
@@ -54,7 +50,7 @@ class Installation extends FoundationReference
         targetEntity: Reappointment::class,
         mappedBy: 'installation',
     )]
-    protected Collection $reappointments;
+    private Collection $reappointments;
 
     /**
      * Discharges.
@@ -63,11 +59,21 @@ class Installation extends FoundationReference
         targetEntity: Discharge::class,
         mappedBy: 'installation',
     )]
-    protected ?Discharge $discharge = null;
+    private ?Discharge $discharge = null;
 
     public function __construct()
     {
         $this->reappointments = new ArrayCollection();
+    }
+
+    /**
+     * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
+     */
+    public function getMember(): Member
+    {
+        return $this->member;
     }
 
     /**
@@ -84,17 +90,6 @@ class Installation extends FoundationReference
     public function setFunction(InstallationFunctions $function): void
     {
         $this->function = $function;
-    }
-
-    /**
-     * Get the member.
-     *
-     * @psalm-suppress InvalidNullableReturnType
-     */
-    #[Override]
-    public function getMember(): Member
-    {
-        return $this->member;
     }
 
     /**

@@ -22,7 +22,7 @@ class Other extends SubDecision
      * Textual content for the decision.
      */
     #[Column(type: 'text')]
-    protected string $content;
+    private string $content;
 
     /**
      * Set the content.

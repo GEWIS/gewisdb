@@ -29,13 +29,13 @@ class RenewalLink extends ActionLink
         referencedColumnName: 'lidnr',
         onDelete: 'cascade',
     )]
-    protected Member $member;
+    private Member $member;
 
     /**
      * Current expiration
      */
     #[Column(type: 'date')]
-    protected DateTime $currentExpiration;
+    private DateTime $currentExpiration;
 
     /**
      * New expiration
@@ -43,7 +43,7 @@ class RenewalLink extends ActionLink
      * will be until the end of next association year.
      */
     #[Column(type: 'date')]
-    protected DateTime $newExpiration;
+    private DateTime $newExpiration;
 
     public function __construct(
         Member $member,

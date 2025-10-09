@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision\Key;
 
 use Application\Model\Enums\AppLanguages;
+use Database\Model\Member;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
+use Database\Model\Trait\MemberAwareTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -17,12 +19,13 @@ use Laminas\Translator\TranslatorInterface;
 class Granting extends SubDecision
 {
     use FormattableDateTrait;
+    use MemberAwareTrait;
 
     /**
      * Till when the keycode is granted.
      */
     #[Column(type: 'date')]
-    protected DateTime $until;
+    private DateTime $until;
 
     /**
      * Discharges.
@@ -31,7 +34,17 @@ class Granting extends SubDecision
         targetEntity: Withdrawal::class,
         mappedBy: 'granting',
     )]
-    protected ?Withdrawal $withdrawal = null;
+    private ?Withdrawal $withdrawal = null;
+
+    /**
+     * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
+     */
+    public function getMember(): Member
+    {
+        return $this->member;
+    }
 
     /**
      * Get the date.

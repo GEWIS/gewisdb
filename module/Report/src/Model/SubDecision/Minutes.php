@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
 use Report\Model\Meeting;
+use Report\Model\Member;
 use Report\Model\SubDecision;
+use Report\Model\Trait\MemberAwareTrait;
 
 /**
  * Decisions on minutes.
@@ -17,6 +19,8 @@ use Report\Model\SubDecision;
 #[Entity]
 class Minutes extends SubDecision
 {
+    use MemberAwareTrait;
+
     /**
      * Reference to the meetings
      */
@@ -32,19 +36,29 @@ class Minutes extends SubDecision
         name: 'r_meeting_number',
         referencedColumnName: 'number',
     )]
-    protected Meeting $meeting;
+    private Meeting $meeting;
 
     /**
      * If the minutes were approved.
      */
     #[Column(type: 'boolean')]
-    protected bool $approval;
+    private bool $approval;
 
     /**
      * If there were changes made.
      */
     #[Column(type: 'boolean')]
-    protected bool $changes;
+    private bool $changes;
+
+    /**
+     * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
+     */
+    public function getMember(): Member
+    {
+        return $this->member;
+    }
 
     /**
      * Get the target.

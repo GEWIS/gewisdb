@@ -80,7 +80,7 @@ class MailingListMember
         type: 'datetime',
         nullable: true,
     )]
-    protected ?DateTime $lastSyncOn = null;
+    private ?DateTime $lastSyncOn = null;
 
     /**
      * Whether the last attempted sync was successful.
@@ -89,7 +89,7 @@ class MailingListMember
      * we default to `false`.
      */
     #[Column(type: 'boolean')]
-    protected bool $lastSyncSuccess = false;
+    private bool $lastSyncSuccess = false;
 
     /**
      * Whether this entry still needs to be created in Mailman.
@@ -97,7 +97,7 @@ class MailingListMember
      * It indicates that a new registration on a mailing list should be performed
      */
     #[Column(type: 'boolean')]
-    protected bool $toBeCreated = true;
+    private bool $toBeCreated = true;
 
     /**
      * Whether this entry still needs to be removed from Mailman.
@@ -105,7 +105,7 @@ class MailingListMember
      * It indicates that there is no longer an association between the mailing list and the member.
      */
     #[Column(type: 'boolean')]
-    protected bool $toBeDeleted = false;
+    private bool $toBeDeleted = false;
 
     public function __construct()
     {

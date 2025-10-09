@@ -34,19 +34,19 @@ class Organ
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * Abbreviation (only for when organs are created).
      */
     #[Column(type: 'string')]
-    protected string $abbr;
+    private string $abbr;
 
     /**
      * Name (only for when organs are created).
      */
     #[Column(type: 'string')]
-    protected string $name;
+    private string $name;
 
     /**
      * Type of the organ.
@@ -55,7 +55,7 @@ class Organ
         type: 'string',
         enumType: OrganTypes::class,
     )]
-    protected OrganTypes $type;
+    private OrganTypes $type;
 
     /**
      * Reference to foundation of organ.
@@ -84,13 +84,13 @@ class Organ
         name: 'r_sequence',
         referencedColumnName: 'sequence',
     )]
-    protected Foundation $foundation;
+    private Foundation $foundation;
 
     /**
      * Foundation date.
      */
     #[Column(type: 'date')]
-    protected DateTime $foundationDate;
+    private DateTime $foundationDate;
 
     /**
      * Abrogation date.
@@ -99,7 +99,7 @@ class Organ
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $abrogationDate = null;
+    private ?DateTime $abrogationDate = null;
 
     /**
      * Reference to members.
@@ -110,7 +110,7 @@ class Organ
         mappedBy: 'organ',
         targetEntity: OrganMember::class,
     )]
-    protected Collection $members;
+    private Collection $members;
 
     /**
      * Reference to subdecisions.
@@ -158,7 +158,7 @@ class Organ
         nullable: false,
         onDelete: 'CASCADE',
     )]
-    protected Collection $subdecisions;
+    private Collection $subdecisions;
 
     public function __construct()
     {

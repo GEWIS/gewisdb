@@ -18,7 +18,7 @@ trait UpdatedTrait
      * When this entry was last updated
      */
     #[Column(type: 'datetime')]
-    protected DateTimeInterface $updatedAt;
+    private DateTimeInterface $updatedAt;
 
     public function getUpdatedAt(): ?DateTimeInterface
     {
