@@ -369,40 +369,26 @@ additional properties in this entity are used for this.</p>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-MailingListMember.html#property_lastSyncOn">$lastSyncOn</a>
-    <span>
-                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null            </span>
-</dt>
-<dd>When this association was last synced to/from Mailman.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-MailingListMember.html#property_lastSyncSuccess">$lastSyncSuccess</a>
-    <span>
-                        &nbsp;: bool            </span>
-</dt>
-<dd>Whether the last attempted sync was successful.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-MailingListMember.html#property_toBeCreated">$toBeCreated</a>
-    <span>
-                        &nbsp;: bool            </span>
-</dt>
-<dd>Whether this entry still needs to be created in Mailman.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-MailingListMember.html#property_toBeDeleted">$toBeDeleted</a>
-    <span>
-                        &nbsp;: bool            </span>
-</dt>
-<dd>Whether this entry still needs to be removed from Mailman.</dd>
-
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-MailingListMember.html#property_email">$email</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
 <dd>In case of email address changes, we need to know the email address that is on the list</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-MailingListMember.html#property_lastSyncOn">$lastSyncOn</a>
+    <span>
+                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null            </span>
+</dt>
+<dd>When this association was last synced to/from Mailman.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-MailingListMember.html#property_lastSyncSuccess">$lastSyncSuccess</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Whether the last attempted sync was successful.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-MailingListMember.html#property_mailingList">$mailingList</a>
@@ -417,6 +403,20 @@ additional properties in this entity are used for this.</p>
                         &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>            </span>
 </dt>
 <dd>Member.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-MailingListMember.html#property_toBeCreated">$toBeCreated</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Whether this entry still needs to be created in Mailman.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-MailingListMember.html#property_toBeDeleted">$toBeDeleted</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Whether this entry still needs to be removed from Mailman.</dd>
 
     </dl>
 
@@ -547,228 +547,6 @@ additional properties in this entity are used for this.</p>
         class="
             phpdocumentor-element
             -property
-            -protected
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_lastSyncOn">
-        $lastSyncOn
-        <a href="classes/Database-Model-MailingListMember.html#property_lastSyncOn" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">79</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">When this association was last synced to/from Mailman.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr>|null</span>
-    <span class="phpdocumentor-signature__name">$lastSyncOn</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-    
-    
-
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-MailingListMember.html#property_lastSyncOn#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;datetime&#039;
-    </dd>
-        <dd class="phpdocumentor-argument-list__entry">
-        $nullable: true
-    </dd>
-    </dl>
-            </section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_lastSyncSuccess">
-        $lastSyncSuccess
-        <a href="classes/Database-Model-MailingListMember.html#property_lastSyncSuccess" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">91</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Whether the last attempted sync was successful.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$lastSyncSuccess</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-        <section class="phpdocumentor-description"><p>At creation of the association, no sync has taken place (i.e. <a href="classes/Database-Model-MailingListMember.html#property_lastSyncOn"><abbr title="\Database\Model\MailingListMember::$lastSyncOn">MailingListMember::$lastSyncOn</abbr></a> is <code class="prettyprint">null</code>) so
-we default to <code class="prettyprint">false</code>.</p>
-</section>
-
-    
-    
-
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-MailingListMember.html#property_lastSyncSuccess#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;boolean&#039;
-    </dd>
-    </dl>
-            </section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_toBeCreated">
-        $toBeCreated
-        <a href="classes/Database-Model-MailingListMember.html#property_toBeCreated" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">99</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Whether this entry still needs to be created in Mailman.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$toBeCreated</span>
-     = <span class="phpdocumentor-signature__default-value">true</span></code>
-
-        <section class="phpdocumentor-description"><p>It indicates that a new registration on a mailing list should be performed</p>
-</section>
-
-    
-    
-
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-MailingListMember.html#property_toBeCreated#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;boolean&#039;
-    </dd>
-    </dl>
-            </section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_toBeDeleted">
-        $toBeDeleted
-        <a href="classes/Database-Model-MailingListMember.html#property_toBeDeleted" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">107</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Whether this entry still needs to be removed from Mailman.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$toBeDeleted</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-        <section class="phpdocumentor-description"><p>It indicates that there is no longer an association between the mailing list and the member.</p>
-</section>
-
-    
-    
-
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-MailingListMember.html#property_toBeDeleted#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;boolean&#039;
-    </dd>
-    </dl>
-            </section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
             -private
                                                                     "
 >
@@ -822,6 +600,118 @@ we default to <code class="prettyprint">false</code>.</p>
     <dt class="phpdocumentor-argument-list__entry">
         #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
     </dt>
+    </dl>
+            </section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lastSyncOn">
+        $lastSyncOn
+        <a href="classes/Database-Model-MailingListMember.html#property_lastSyncOn" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">79</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">When this association was last synced to/from Mailman.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr>|null</span>
+    <span class="phpdocumentor-signature__name">$lastSyncOn</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-MailingListMember.html#property_lastSyncOn#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;datetime&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $nullable: true
+    </dd>
+    </dl>
+            </section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lastSyncSuccess">
+        $lastSyncSuccess
+        <a href="classes/Database-Model-MailingListMember.html#property_lastSyncSuccess" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">91</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether the last attempted sync was successful.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$lastSyncSuccess</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+        <section class="phpdocumentor-description"><p>At creation of the association, no sync has taken place (i.e. <a href="classes/Database-Model-MailingListMember.html#property_lastSyncOn"><abbr title="\Database\Model\MailingListMember::$lastSyncOn">MailingListMember::$lastSyncOn</abbr></a> is <code class="prettyprint">null</code>) so
+we default to <code class="prettyprint">false</code>.</p>
+</section>
+
+    
+    
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-MailingListMember.html#property_lastSyncSuccess#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;boolean&#039;
+    </dd>
     </dl>
             </section>
 
@@ -965,6 +855,116 @@ we default to <code class="prettyprint">false</code>.</p>
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
         $inversedBy: &#039;mailingListMemberships&#039;
+    </dd>
+    </dl>
+            </section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_toBeCreated">
+        $toBeCreated
+        <a href="classes/Database-Model-MailingListMember.html#property_toBeCreated" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">99</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether this entry still needs to be created in Mailman.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$toBeCreated</span>
+     = <span class="phpdocumentor-signature__default-value">true</span></code>
+
+        <section class="phpdocumentor-description"><p>It indicates that a new registration on a mailing list should be performed</p>
+</section>
+
+    
+    
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-MailingListMember.html#property_toBeCreated#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;boolean&#039;
+    </dd>
+    </dl>
+            </section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_toBeDeleted">
+        $toBeDeleted
+        <a href="classes/Database-Model-MailingListMember.html#property_toBeDeleted" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/MailingListMember.php"><a href="files/module-database-src-model-mailinglistmember.html"><abbr title="module/Database/src/Model/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">107</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether this entry still needs to be removed from Mailman.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$toBeDeleted</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+        <section class="phpdocumentor-description"><p>It indicates that there is no longer an association between the mailing list and the member.</p>
+</section>
+
+    
+    
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/Database-Model-MailingListMember.html#property_toBeDeleted#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;boolean&#039;
     </dd>
     </dl>
             </section>
@@ -1719,13 +1719,13 @@ we default to <code class="prettyprint">false</code>.</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Database-Model-MailingListMember.html#property_email">$email</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingListMember.html#property_lastSyncOn">$lastSyncOn</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingListMember.html#property_lastSyncSuccess">$lastSyncSuccess</a></li>
-                                                    <li class=""><a href="classes/Database-Model-MailingListMember.html#property_toBeCreated">$toBeCreated</a></li>
-                                                    <li class=""><a href="classes/Database-Model-MailingListMember.html#property_toBeDeleted">$toBeDeleted</a></li>
-                                                    <li class=""><a href="classes/Database-Model-MailingListMember.html#property_email">$email</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingListMember.html#property_mailingList">$mailingList</a></li>
                                                     <li class=""><a href="classes/Database-Model-MailingListMember.html#property_member">$member</a></li>
+                                                    <li class=""><a href="classes/Database-Model-MailingListMember.html#property_toBeCreated">$toBeCreated</a></li>
+                                                    <li class=""><a href="classes/Database-Model-MailingListMember.html#property_toBeDeleted">$toBeDeleted</a></li>
                                             </ul>
                 </li>
             

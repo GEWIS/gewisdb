@@ -8651,6 +8651,11 @@ Search.appendIndex(
             "summary": "SubDecision\u0020model.",
             "url": "classes/Database-Model-SubDecision-Financial-Budget.html"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-SubDecision-Financial-Budget.html#method_getMember"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "Get\u0020the\u0020name.",
@@ -8856,6 +8861,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-SubDecision-Installation.html#method___construct"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-SubDecision-Installation.html#method_getMember"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetFunction\u0028\u0029",
             "name": "getFunction",
             "summary": "Get\u0020the\u0020function.",
@@ -8865,11 +8875,6 @@ Search.appendIndex(
             "name": "setFunction",
             "summary": "Set\u0020the\u0020function.",
             "url": "classes/Database-Model-SubDecision-Installation.html#method_setFunction"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetMember\u0028\u0029",
-            "name": "getMember",
-            "summary": "Get\u0020the\u0020member.",
-            "url": "classes/Database-Model-SubDecision-Installation.html#method_getMember"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Installation\u003A\u003AgetReappointments\u0028\u0029",
             "name": "getReappointments",
@@ -8910,6 +8915,11 @@ Search.appendIndex(
             "name": "Granting",
             "summary": "SubDecision\u0020model.",
             "url": "classes/Database-Model-SubDecision-Key-Granting.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-SubDecision-Key-Granting.html#method_getMember"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetUntil\u0028\u0029",
             "name": "getUntil",
@@ -8991,6 +9001,11 @@ Search.appendIndex(
             "summary": "Decisions\u0020on\u0020minutes.",
             "url": "classes/Database-Model-SubDecision-Minutes.html"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-SubDecision-Minutes.html#method_getMember"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Minutes\u003A\u003AgetTarget\u0028\u0029",
             "name": "getTarget",
             "summary": "Get\u0020the\u0020target.",
@@ -9050,6 +9065,11 @@ Search.appendIndex(
             "name": "OrganRegulation",
             "summary": "SubDecision\u0020model.",
             "url": "classes/Database-Model-SubDecision-OrganRegulation.html"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-SubDecision-OrganRegulation.html#method_getMember"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetOrganType\u0028\u0029",
             "name": "getOrganType",
@@ -9246,20 +9266,10 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020sequence\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#method_getSequence"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetMember\u0028\u0029",
-            "name": "getMember",
-            "summary": "Get\u0020the\u0020member.",
-            "url": "classes/Database-Model-SubDecision.html#method_getMember"
-        },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AsetSequence\u0028\u0029",
             "name": "setSequence",
             "summary": "Set\u0020the\u0020sequence\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#method_setSequence"
-        },                {
-            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AsetMember\u0028\u0029",
-            "name": "setMember",
-            "summary": "Set\u0020the\u0020member.",
-            "url": "classes/Database-Model-SubDecision.html#method_setMember"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\u003A\u003AgetTranslatedTemplate\u0028\u0029",
             "name": "getTranslatedTemplate",
@@ -9311,11 +9321,6 @@ Search.appendIndex(
             "summary": "Sub\u0020decision\u0020sequence\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#property_sequence"
         },                {
-            "fqsen": "\\Database\\Model\\SubDecision\u003A\u003A\u0024member",
-            "name": "member",
-            "summary": "The\u0020member\u0020involved\u0020in\u0020this\u0020sub\u002Ddecision.",
-            "url": "classes/Database-Model-SubDecision.html#property_member"
-        },                {
             "fqsen": "\\Database\\Model\\Trait\\CreatedTrait",
             "name": "CreatedTrait",
             "summary": "",
@@ -9345,6 +9350,26 @@ Search.appendIndex(
             "name": "formatDate",
             "summary": "Format\u0020a\u0020\u0060DateTime\u0060\u0020in\u0020a\u0020specified\u0020locale.",
             "url": "classes/Database-Model-Trait-FormattableDateTrait.html#method_formatDate"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\MemberAwareTrait",
+            "name": "MemberAwareTrait",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-MemberAwareTrait.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\MemberAwareTrait\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Database-Model-Trait-MemberAwareTrait.html#method_getMember"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\MemberAwareTrait\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "Set\u0020the\u0020member.",
+            "url": "classes/Database-Model-Trait-MemberAwareTrait.html#method_setMember"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\MemberAwareTrait\u003A\u003A\u0024member",
+            "name": "member",
+            "summary": "The\u0020member\u0020involved\u0020in\u0020this\u0020sub\u002Ddecision.",
+            "url": "classes/Database-Model-Trait-MemberAwareTrait.html#property_member"
         },                {
             "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait",
             "name": "UpdatedTrait",
@@ -12691,6 +12716,11 @@ Search.appendIndex(
             "summary": "Budget\u0020decision.",
             "url": "classes/Report-Model-SubDecision-Financial-Budget.html"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_getMember"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "Get\u0020the\u0020name.",
@@ -12951,6 +12981,11 @@ Search.appendIndex(
             "summary": "SubDecision\u0020model.",
             "url": "classes/Report-Model-SubDecision-Key-Granting.html"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-SubDecision-Key-Granting.html#method_getMember"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Key\\Granting\u003A\u003AgetUntil\u0028\u0029",
             "name": "getUntil",
             "summary": "Get\u0020the\u0020date.",
@@ -13031,6 +13066,11 @@ Search.appendIndex(
             "summary": "Decisions\u0020on\u0020minutes.",
             "url": "classes/Report-Model-SubDecision-Minutes.html"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-SubDecision-Minutes.html#method_getMember"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Minutes\u003A\u003AgetMeeting\u0028\u0029",
             "name": "getMeeting",
             "summary": "Get\u0020the\u0020target.",
@@ -13080,6 +13120,11 @@ Search.appendIndex(
             "name": "OrganRegulation",
             "summary": "SubDecision\u0020model.",
             "url": "classes/Report-Model-SubDecision-OrganRegulation.html"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-SubDecision-OrganRegulation.html#method_getMember"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\OrganRegulation\u003A\u003AsetOrganType\u0028\u0029",
             "name": "setOrganType",
@@ -13236,16 +13281,6 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020sequence\u0020number.",
             "url": "classes/Report-Model-SubDecision.html#method_setSequence"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AgetMember\u0028\u0029",
-            "name": "getMember",
-            "summary": "Get\u0020the\u0020member.",
-            "url": "classes/Report-Model-SubDecision.html#method_getMember"
-        },                {
-            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AsetMember\u0028\u0029",
-            "name": "setMember",
-            "summary": "Set\u0020the\u0020member.",
-            "url": "classes/Report-Model-SubDecision.html#method_setMember"
-        },                {
             "fqsen": "\\Report\\Model\\SubDecision\u003A\u003AgetContentNL\u0028\u0029",
             "name": "getContentNL",
             "summary": "Get\u0020the\u0020content\u0020in\u0020Dutch.",
@@ -13306,10 +13341,25 @@ Search.appendIndex(
             "summary": "Content\u0020in\u0020English.",
             "url": "classes/Report-Model-SubDecision.html#property_contentEN"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\u003A\u003A\u0024member",
+            "fqsen": "\\Report\\Model\\Trait\\MemberAwareTrait",
+            "name": "MemberAwareTrait",
+            "summary": "",
+            "url": "classes/Report-Model-Trait-MemberAwareTrait.html"
+        },                {
+            "fqsen": "\\Report\\Model\\Trait\\MemberAwareTrait\u003A\u003AgetMember\u0028\u0029",
+            "name": "getMember",
+            "summary": "Get\u0020the\u0020member.",
+            "url": "classes/Report-Model-Trait-MemberAwareTrait.html#method_getMember"
+        },                {
+            "fqsen": "\\Report\\Model\\Trait\\MemberAwareTrait\u003A\u003AsetMember\u0028\u0029",
+            "name": "setMember",
+            "summary": "Set\u0020the\u0020member.",
+            "url": "classes/Report-Model-Trait-MemberAwareTrait.html#method_setMember"
+        },                {
+            "fqsen": "\\Report\\Model\\Trait\\MemberAwareTrait\u003A\u003A\u0024member",
             "name": "member",
             "summary": "The\u0020member\u0020involved\u0020in\u0020this\u0020sub\u002Ddecision.",
-            "url": "classes/Report-Model-SubDecision.html#property_member"
+            "url": "classes/Report-Model-Trait-MemberAwareTrait.html#property_member"
         },                {
             "fqsen": "\\Report\\Module",
             "name": "Module",
@@ -15000,6 +15050,11 @@ Search.appendIndex(
             "name": "Key",
             "summary": "",
             "url": "namespaces/report-model-subdecision-key.html"
+        },                {
+            "fqsen": "\\Report\\Model\\Trait",
+            "name": "Trait",
+            "summary": "",
+            "url": "namespaces/report-model-trait.html"
         },                {
             "fqsen": "\\Report\\Service",
             "name": "Service",

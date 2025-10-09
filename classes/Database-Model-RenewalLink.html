@@ -352,28 +352,21 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-RenewalLink.html#property_currentExpiration">$currentExpiration</a>
     <span>
                         &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
 </dt>
 <dd>Current expiration</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-ActionLink.html#property_id">$id</a>
-    <span>
-                        &nbsp;: int|null            </span>
-</dt>
-<dd>Identity</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-RenewalLink.html#property_member">$member</a>
     <span>
                         &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>            </span>
 </dt>
 <dd>The member</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-RenewalLink.html#property_newExpiration">$newExpiration</a>
     <span>
                         &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
@@ -381,20 +374,6 @@
 <dd>New expiration
 This is not neccessarily a year from the previous as in principle this
 will be until the end of next association year.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-ActionLink.html#property_token">$token</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-<dd>The token in the URL</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Model-ActionLink.html#property_used">$used</a>
-    <span>
-                        &nbsp;: bool            </span>
-</dt>
-<dd>If the URL was clicked</dd>
 
     </dl>
 
@@ -471,7 +450,7 @@ Then, people can still renew their membership after their account gets locked</d
         class="
             phpdocumentor-element
             -property
-            -protected
+            -private
                                                                     "
 >
     <h4 class="phpdocumentor-element__name" id="property_currentExpiration">
@@ -492,7 +471,7 @@ Then, people can still renew their membership after their account gets locked</d
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
     <span class="phpdocumentor-signature__name">$currentExpiration</span>
     </code>
@@ -524,73 +503,7 @@ Then, people can still renew their membership after their account gets locked</d
         class="
             phpdocumentor-element
             -property
-            -protected
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_id">
-        $id
-        <a href="classes/Database-Model-ActionLink.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">39</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Identity</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type">int|null</span>
-    <span class="phpdocumentor-signature__name">$id</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-    
-    
-
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-ActionLink.html#property_id#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;integer&#039;
-    </dd>
-    </dl>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\GeneratedValue">GeneratedValue</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $strategy: &#039;AUTO&#039;
-    </dd>
-    </dl>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
-    </dt>
-    </dl>
-            </section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
+            -private
                                                                     "
 >
     <h4 class="phpdocumentor-element__name" id="property_member">
@@ -611,7 +524,7 @@ Then, people can still renew their membership after their account gets locked</d
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
     <span class="phpdocumentor-signature__name">$member</span>
     </code>
@@ -660,7 +573,7 @@ Then, people can still renew their membership after their account gets locked</d
         class="
             phpdocumentor-element
             -property
-            -protected
+            -private
                                                                     "
 >
     <h4 class="phpdocumentor-element__name" id="property_newExpiration">
@@ -683,7 +596,7 @@ will be until the end of next association year.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr></span>
     <span class="phpdocumentor-signature__name">$newExpiration</span>
     </code>
@@ -704,112 +617,6 @@ will be until the end of next association year.</p>
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
         $type: &#039;date&#039;
-    </dd>
-    </dl>
-            </section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_token">
-        $token
-        <a href="classes/Database-Model-ActionLink.html#property_token" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">53</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The token in the URL</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$token</span>
-    </code>
-
-    
-    
-    
-
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-ActionLink.html#property_token#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;string&#039;
-    </dd>
-    </dl>
-            </section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_used">
-        $used
-        <a href="classes/Database-Model-ActionLink.html#property_used" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/ActionLink.php"><a href="files/module-database-src-model-actionlink.html"><abbr title="module/Database/src/Model/ActionLink.php">ActionLink.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">47</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">If the URL was clicked</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">protected</span>
-            <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$used</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-    
-    
-    
-
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-ActionLink.html#property_used#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;boolean&#039;
     </dd>
     </dl>
             </section>
@@ -1266,11 +1073,8 @@ Then, people can still renew their membership after their account gets locked</p
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/Database-Model-RenewalLink.html#property_currentExpiration">$currentExpiration</a></li>
-                                                    <li class=""><a href="classes/Database-Model-ActionLink.html#property_id">$id</a></li>
                                                     <li class=""><a href="classes/Database-Model-RenewalLink.html#property_member">$member</a></li>
                                                     <li class=""><a href="classes/Database-Model-RenewalLink.html#property_newExpiration">$newExpiration</a></li>
-                                                    <li class=""><a href="classes/Database-Model-ActionLink.html#property_token">$token</a></li>
-                                                    <li class=""><a href="classes/Database-Model-ActionLink.html#property_used">$used</a></li>
                                             </ul>
                 </li>
             
