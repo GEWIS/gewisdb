@@ -29,7 +29,7 @@ class BoardMember
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * Member lidnr.
@@ -43,7 +43,7 @@ class BoardMember
         referencedColumnName: 'lidnr',
         nullable: false,
     )]
-    protected Member $member;
+    private Member $member;
 
     /**
      * Function given.
@@ -52,13 +52,13 @@ class BoardMember
         type: 'string',
         enumType: BoardFunctions::class,
     )]
-    protected BoardFunctions $function;
+    private BoardFunctions $function;
 
     /**
      * Installation date.
      */
     #[Column(type: 'date')]
-    protected DateTime $installDate;
+    private DateTime $installDate;
 
     /**
      * Installation.
@@ -87,7 +87,7 @@ class BoardMember
         name: 'r_sequence',
         referencedColumnName: 'sequence',
     )]
-    protected BoardInstallation $installationDec;
+    private BoardInstallation $installationDec;
 
     /**
      * Release date.
@@ -96,7 +96,7 @@ class BoardMember
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $releaseDate = null;
+    private ?DateTime $releaseDate = null;
 
     /**
      * Discharge date.
@@ -105,7 +105,7 @@ class BoardMember
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $dischargeDate = null;
+    private ?DateTime $dischargeDate = null;
 
     /**
      * Get the ID.

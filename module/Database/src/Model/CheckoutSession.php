@@ -28,7 +28,7 @@ class CheckoutSession
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * Identifier of the checkout session, Stripe uses case SENSITIVE identifiers, with PostgreSQL this is not a problem
@@ -40,7 +40,7 @@ class CheckoutSession
         type: 'string',
         unique: true,
     )]
-    protected string $checkoutId;
+    private string $checkoutId;
 
     #[ManyToOne(
         targetEntity: ProspectiveMember::class,
@@ -50,13 +50,13 @@ class CheckoutSession
         name: 'prospective_member',
         referencedColumnName: 'lidnr',
     )]
-    protected ProspectiveMember $prospectiveMember;
+    private ProspectiveMember $prospectiveMember;
 
     /**
      * Creation of the checkout session.
      */
     #[Column(type: 'datetime')]
-    protected DateTime $created;
+    private DateTime $created;
 
     /**
      * Expiration of the checkout session.
@@ -64,7 +64,7 @@ class CheckoutSession
      * If $state == CheckoutSessionStates::Expired, then this is the last date this checkout session can be recovered.
      */
     #[Column(type: 'datetime')]
-    protected DateTime $expiration;
+    private DateTime $expiration;
 
     /**
      * The identifier of the PaymentIntent associated with this Checkout Session when the state is 'PAID'.
@@ -73,7 +73,7 @@ class CheckoutSession
         type: 'string',
         nullable: true,
     )]
-    protected ?string $paymentIntentId = null;
+    private ?string $paymentIntentId = null;
 
     /**
      * Recovery URL for the Checkout Session when the state is 'EXPIRED'.
@@ -82,7 +82,7 @@ class CheckoutSession
         type: 'string',
         nullable: true,
     )]
-    protected ?string $recoveryUrl = null;
+    private ?string $recoveryUrl = null;
 
     /**
      * One-to-many side for self-reference after recovery.
@@ -93,7 +93,7 @@ class CheckoutSession
         targetEntity: self::class,
         mappedBy: 'recoveredFrom',
     )]
-    protected Collection $recoveredBy;
+    private Collection $recoveredBy;
 
     #[ManyToOne(
         targetEntity: self::class,
@@ -105,7 +105,7 @@ class CheckoutSession
         referencedColumnName: 'id',
         onDelete: 'SET NULL',
     )]
-    protected ?CheckoutSession $recoveredFrom = null;
+    private ?CheckoutSession $recoveredFrom = null;
 
     /**
      * The state of the payment.
@@ -114,7 +114,7 @@ class CheckoutSession
         type: 'integer',
         enumType: CheckoutSessionStates::class,
     )]
-    protected CheckoutSessionStates $state = CheckoutSessionStates::Created;
+    private CheckoutSessionStates $state = CheckoutSessionStates::Created;
 
     public function __construct()
     {

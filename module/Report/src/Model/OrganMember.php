@@ -30,7 +30,7 @@ class OrganMember
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * Organ.
@@ -39,7 +39,7 @@ class OrganMember
         targetEntity: Organ::class,
         inversedBy: 'members',
     )]
-    protected Organ $organ;
+    private Organ $organ;
 
     /**
      * Member.
@@ -52,7 +52,7 @@ class OrganMember
         name: 'lidnr',
         referencedColumnName: 'lidnr',
     )]
-    protected Member $member;
+    private Member $member;
 
     /**
      * Function given.
@@ -61,13 +61,13 @@ class OrganMember
         type: 'string',
         enumType: InstallationFunctions::class,
     )]
-    protected InstallationFunctions $function;
+    private InstallationFunctions $function;
 
     /**
      * Installation date.
      */
     #[Column(type: 'date')]
-    protected DateTime $installDate;
+    private DateTime $installDate;
 
     /**
      * Installation.
@@ -96,7 +96,7 @@ class OrganMember
         name: 'r_sequence',
         referencedColumnName: 'sequence',
     )]
-    protected Installation $installation;
+    private Installation $installation;
 
     /**
      * Discharge date.
@@ -105,7 +105,7 @@ class OrganMember
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $dischargeDate = null;
+    private ?DateTime $dischargeDate = null;
 
     /**
      * @psalm-ignore-nullable-return

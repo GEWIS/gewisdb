@@ -28,13 +28,13 @@ use Doctrine\ORM\Mapping\JoinColumn;
 class AuditNote extends AuditEntry
 {
     /** @psalm-suppress InvalidClassConstantType */
-    protected bool $IMMUTABLE = false;
+    private bool $IMMUTABLE = false;
 
     /**
      * The note itself
      */
     #[Column(type: 'string')]
-    protected ?string $note = null;
+    private ?string $note = null;
 
     public function getNote(): ?string
     {

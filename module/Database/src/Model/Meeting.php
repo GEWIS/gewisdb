@@ -32,7 +32,7 @@ class Meeting
         type: 'string',
         enumType: MeetingTypes::class,
     )]
-    protected MeetingTypes $type;
+    private MeetingTypes $type;
 
     /**
      * Meeting number.
@@ -46,13 +46,13 @@ class Meeting
             'unsigned' => true,
         ],
     )]
-    protected int $number;
+    private int $number;
 
     /**
      * Meeting date.
      */
     #[Column(type: 'date')]
-    protected DateTime $date;
+    private DateTime $date;
 
     /**
      * Decisions.
@@ -64,13 +64,13 @@ class Meeting
         mappedBy: 'meeting',
         cascade: ['persist'],
     )]
-    protected Collection $decisions;
+    private Collection $decisions;
 
     #[OneToOne(
         targetEntity: Minutes::class,
         mappedBy: 'meeting',
     )]
-    protected Minutes $minutes;
+    private Minutes $minutes;
 
     public function __construct()
     {

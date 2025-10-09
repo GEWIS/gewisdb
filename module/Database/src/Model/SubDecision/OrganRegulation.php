@@ -6,8 +6,10 @@ namespace Database\Model\SubDecision;
 
 use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\OrganTypes;
+use Database\Model\Member;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
+use Database\Model\Trait\MemberAwareTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -18,12 +20,13 @@ use ValueError;
 class OrganRegulation extends SubDecision
 {
     use FormattableDateTrait;
+    use MemberAwareTrait;
 
     /**
      * Abbreviation of the organ.
      */
     #[Column(type: 'string')]
-    protected string $abbr;
+    private string $abbr;
 
     /**
      * Type of the organ.
@@ -32,7 +35,7 @@ class OrganRegulation extends SubDecision
         type: 'string',
         enumType: OrganTypes::class,
     )]
-    protected OrganTypes $organType;
+    private OrganTypes $organType;
 
     /**
      * Version of the regulation.
@@ -41,25 +44,35 @@ class OrganRegulation extends SubDecision
         type: 'string',
         length: 32,
     )]
-    protected string $version;
+    private string $version;
 
     /**
      * Date of the regulation.
      */
     #[Column(type: 'date')]
-    protected DateTime $date;
+    private DateTime $date;
 
     /**
      * If the regulation was approved.
      */
     #[Column(type: 'boolean')]
-    protected bool $approval;
+    private bool $approval;
 
     /**
      * If there were changes made.
      */
     #[Column(type: 'boolean')]
-    protected bool $changes;
+    private bool $changes;
+
+    /**
+     * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
+     */
+    public function getMember(): Member
+    {
+        return $this->member;
+    }
 
     /**
      * Get the type.
@@ -184,9 +197,7 @@ class OrganRegulation extends SubDecision
 
         $replacements = [
             '%NAME%' => $this->getAbbr(),
-            '%AUTHOR%' => null === $this->getMember()
-                ? $translator->translate('onbekend', locale: $language->getLangParam())
-                : $this->getMember()->getFullName(),
+            '%AUTHOR%' => $this->getMember()->getFullName(),
             '%DOCUMENTTYPE%' => $documentType,
             '%VERSION%' => $this->getVersion(),
             '%DATE%' => $this->formatDate($this->getDate(), $language),

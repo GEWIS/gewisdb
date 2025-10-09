@@ -7,7 +7,9 @@ namespace Database\Model\SubDecision;
 use Application\Model\Enums\AppLanguages;
 use Application\Model\Enums\MeetingTypes;
 use Database\Model\Meeting;
+use Database\Model\Member;
 use Database\Model\SubDecision;
+use Database\Model\Trait\MemberAwareTrait;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -22,6 +24,8 @@ use function strval;
 #[Entity]
 class Minutes extends SubDecision
 {
+    use MemberAwareTrait;
+
     /**
      * Reference to the meeting.
      */
@@ -37,19 +41,29 @@ class Minutes extends SubDecision
         name: 'r_meeting_number',
         referencedColumnName: 'number',
     )]
-    protected Meeting $meeting;
+    private Meeting $meeting;
 
     /**
      * If the minutes were approved.
      */
     #[Column(type: 'boolean')]
-    protected bool $approval;
+    private bool $approval;
 
     /**
      * If there were changes made.
      */
     #[Column(type: 'boolean')]
-    protected bool $changes;
+    private bool $changes;
+
+    /**
+     * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
+     */
+    public function getMember(): Member
+    {
+        return $this->member;
+    }
 
     /**
      * Get the target.

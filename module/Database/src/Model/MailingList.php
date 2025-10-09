@@ -24,25 +24,25 @@ class MailingList
      */
     #[Id]
     #[Column(type: 'string')]
-    protected string $name;
+    private string $name;
 
     /**
      * Dutch description of the mailing list.
      */
     #[Column(type: 'text')]
-    protected string $nl_description;
+    private string $nl_description;
 
     /**
      * English description of the mailing list.
      */
     #[Column(type: 'text')]
-    protected string $en_description;
+    private string $en_description;
 
     /**
      * If the mailing list should be on the form.
      */
     #[Column(type: 'boolean')]
-    protected bool $onForm;
+    private bool $onForm;
 
     /**
      * If members should be subscribed by default.
@@ -50,7 +50,7 @@ class MailingList
      * (when it is on the form, that means that the checkbox is checked by default)
      */
     #[Column(type: 'boolean')]
-    protected bool $defaultSub;
+    private bool $defaultSub;
 
     /**
      * The corresponding mailman mailing list
@@ -63,7 +63,7 @@ class MailingList
         name: 'mailmanId',
         referencedColumnName: 'id',
     )]
-    protected ?MailmanMailingList $mailmanList;
+    private ?MailmanMailingList $mailmanList;
 
     /**
      * Mailing list members.
@@ -74,7 +74,7 @@ class MailingList
         targetEntity: MailingListMember::class,
         mappedBy: 'mailingList',
     )]
-    protected Collection $mailingListMemberships;
+    private Collection $mailingListMemberships;
 
     public function __construct()
     {

@@ -50,7 +50,7 @@ class Annulment extends SubDecision
         name: 'r_decision_number',
         referencedColumnName: 'number',
     )]
-    protected Decision $target;
+    private Decision $target;
 
     /**
      * Get the target.

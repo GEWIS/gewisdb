@@ -27,43 +27,43 @@ class MemberUpdate
         referencedColumnName: 'lidnr',
         nullable: false,
     )]
-    protected Member $member;
+    private Member $member;
 
     /**
      * When the update was requested.
      */
     #[Column(type: 'date')]
-    protected DateTime $requestedDate;
+    private DateTime $requestedDate;
 
     /**
      * Member's email address.
      */
     #[Column(type: 'string')]
-    protected string $email;
+    private string $email;
 
     /**
      * Member's last name.
      */
     #[Column(type: 'string')]
-    protected string $lastName;
+    private string $lastName;
 
     /**
      * Middle name.
      */
     #[Column(type: 'string')]
-    protected string $middleName;
+    private string $middleName;
 
     /**
      * Initials.
      */
     #[Column(type: 'string')]
-    protected string $initials;
+    private string $initials;
 
     /**
      * First name.
      */
     #[Column(type: 'string')]
-    protected string $firstName;
+    private string $firstName;
 
     /**
      * Get the member.

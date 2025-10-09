@@ -18,7 +18,7 @@ trait FormattableDateTrait
      * With {@see IntlDateFormatter::LONG} the date will be formatted using the day of the month, full month, and
      * 4-digit year. For example, for
      */
-    protected function formatDate(
+    private function formatDate(
         DateTime $date,
         AppLanguages $language = AppLanguages::Dutch,
     ): string {

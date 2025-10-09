@@ -24,19 +24,19 @@ class MailmanMailingList
         name: 'id',
         type: 'string',
     )]
-    protected string $mailmanId;
+    private string $mailmanId;
 
     /**
      * Name of this list in the mailman side
      */
     #[Column(type: 'string')]
-    protected string $name;
+    private string $name;
 
     /**
      * When this list was last observed in mailman
      */
     #[Column(type: 'datetime')]
-    protected DateTime $lastSeen;
+    private DateTime $lastSeen;
 
     /**
      * When the last full check of this mailing list took place
@@ -45,7 +45,7 @@ class MailmanMailingList
         type: 'datetime',
         nullable: true,
     )]
-    protected ?DateTime $lastCheck = null;
+    private ?DateTime $lastCheck = null;
 
     /**
      * The corresponding gewisdb mailing list
@@ -55,7 +55,7 @@ class MailmanMailingList
         targetEntity: MailingList::class,
         mappedBy: 'mailmanList',
     )]
-    protected ?MailingList $mailingList;
+    private ?MailingList $mailingList;
 
     /**
      * Get the mailman ID

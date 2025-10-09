@@ -29,19 +29,19 @@ use Doctrine\ORM\Mapping\JoinColumn;
 class AuditRenewal extends AuditEntry
 {
     /** @psalm-suppress InvalidClassConstantType */
-    protected bool $IMMUTABLE = true;
+    private bool $IMMUTABLE = true;
 
     /**
      * Expiration value before this renewal took place
      */
     #[Column(type: 'datetime')]
-    protected DateTime $oldExpiration;
+    private DateTime $oldExpiration;
 
     /**
      * Expiration value after the renewal
      */
     #[Column(type: 'datetime')]
-    protected DateTime $newExpiration;
+    private DateTime $newExpiration;
 
     final public static function fromRenewalLink(RenewalLink $renewalLink): AuditRenewal
     {
@@ -88,12 +88,12 @@ class AuditRenewal extends AuditEntry
     /**
      * Check if the renewal was done by the member
      */
-    protected function isSelfRenewal(): bool
+    private function isSelfRenewal(): bool
     {
         return null === $this->user;
     }
 
-    protected function getStringRenewalType(): string
+    private function getStringRenewalType(): string
     {
         return $this->isSelfRenewal() ? 'Self-renewal' : 'Renewal';
     }

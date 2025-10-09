@@ -47,7 +47,7 @@ abstract class AuditEntry
     /**
      * TODO PHP8.3: make this a typed constant so we can change the value later
      */
-    protected bool $IMMUTABLE = true;
+    private bool $IMMUTABLE = true;
 
     /**
      * Entry ID.
@@ -55,7 +55,7 @@ abstract class AuditEntry
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * The user who created the entry
@@ -82,7 +82,7 @@ abstract class AuditEntry
         onDelete: 'cascade',
         nullable: true,
     )]
-    protected ?Member $member = null;
+    private ?Member $member = null;
 
     public function getId(): ?int
     {
@@ -178,7 +178,7 @@ abstract class AuditEntry
     /**
      * Get the string body, currently is constant for all types, but may change
      */
-    protected function getStringBodyPlain(): string
+    private function getStringBodyPlain(): string
     {
         return strip_tags($this->getStringBodyFormatted());
     }

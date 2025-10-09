@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Database\Model\SubDecision\Financial;
 
 use Application\Model\Enums\AppLanguages;
+use Database\Model\Member;
 use Database\Model\SubDecision;
 use Database\Model\Trait\FormattableDateTrait;
+use Database\Model\Trait\MemberAwareTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -16,12 +18,13 @@ use Laminas\Translator\TranslatorInterface;
 class Budget extends SubDecision
 {
     use FormattableDateTrait;
+    use MemberAwareTrait;
 
     /**
      * Name of the budget.
      */
     #[Column(type: 'string')]
-    protected string $name;
+    private string $name;
 
     /**
      * Version of the budget.
@@ -30,25 +33,35 @@ class Budget extends SubDecision
         type: 'string',
         length: 32,
     )]
-    protected string $version;
+    private string $version;
 
     /**
      * Date of the budget.
      */
     #[Column(type: 'date')]
-    protected DateTime $date;
+    private DateTime $date;
 
     /**
      * If the budget was approved.
      */
     #[Column(type: 'boolean')]
-    protected bool $approval;
+    private bool $approval;
 
     /**
      * If there were changes made.
      */
     #[Column(type: 'boolean')]
-    protected bool $changes;
+    private bool $changes;
+
+    /**
+     * Get the member.
+     *
+     * @psalm-suppress InvalidNullableReturnType
+     */
+    public function getMember(): Member
+    {
+        return $this->member;
+    }
 
     /**
      * Get the name.
@@ -146,9 +159,7 @@ class Budget extends SubDecision
     ): string {
         $replacements = [
             '%NAME%' => $this->getName(),
-            '%AUTHOR%' => null === $this->getMember()
-                ? $translator->translate('onbekend', locale: $language->getLangParam())
-                : $this->getMember()->getFullName(),
+            '%AUTHOR%' => $this->getMember()->getFullName(),
             '%VERSION%' => $this->getVersion(),
             '%DATE%' => $this->formatDate($this->getDate(), $language),
             '%APPROVAL%' => $this->getApproval()

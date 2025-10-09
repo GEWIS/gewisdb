@@ -17,7 +17,7 @@ trait CreatedTrait
      * When this entry was created
      */
     #[Column(type: 'datetime')]
-    protected DateTimeInterface $createdAt;
+    private DateTimeInterface $createdAt;
 
     public function getCreatedAt(): ?DateTimeInterface
     {

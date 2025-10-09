@@ -26,7 +26,7 @@ class PaymentLink extends ActionLink
         referencedColumnName: 'lidnr',
         onDelete: 'cascade',
     )]
-    protected ProspectiveMember $prospectiveMember;
+    private ProspectiveMember $prospectiveMember;
 
     public function getProspectiveMember(): ProspectiveMember
     {

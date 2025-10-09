@@ -92,7 +92,7 @@ abstract class SubDecision
         name: 'decision_number',
         referencedColumnName: 'number',
     )]
-    protected Decision $decision;
+    private Decision $decision;
 
     /**
      * Meeting type.
@@ -104,7 +104,7 @@ abstract class SubDecision
         type: 'string',
         enumType: MeetingTypes::class,
     )]
-    protected MeetingTypes $meeting_type;
+    private MeetingTypes $meeting_type;
 
     /**
      * Meeting number
@@ -113,7 +113,7 @@ abstract class SubDecision
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $meeting_number;
+    private int $meeting_number;
 
     /**
      * Decision point.
@@ -122,7 +122,7 @@ abstract class SubDecision
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $decision_point;
+    private int $decision_point;
 
     /**
      * Decision number.
@@ -131,28 +131,14 @@ abstract class SubDecision
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $decision_number;
+    private int $decision_number;
 
     /**
      * Sub decision sequence number.
      */
     #[Id]
     #[Column(type: 'integer')]
-    protected int $sequence;
-
-    /**
-     * The member involved in this sub-decision.
-     *
-     * Not all sub-decisions require this, as such it is nullable. However, sub-decisions that need the guarantee that
-     * this is not null or need to specify an inverse side can do so using an association override.
-     */
-    #[ManyToOne(targetEntity: Member::class)]
-    #[JoinColumn(
-        name: 'lidnr',
-        referencedColumnName: 'lidnr',
-        nullable: true,
-    )]
-    protected ?Member $member = null;
+    private int $sequence;
 
     /**
      * Get the decision.
@@ -216,27 +202,11 @@ abstract class SubDecision
     }
 
     /**
-     * Get the member.
-     */
-    public function getMember(): ?Member
-    {
-        return $this->member;
-    }
-
-    /**
      * Set the sequence number.
      */
     public function setSequence(int $sequence): void
     {
         $this->sequence = $sequence;
-    }
-
-    /**
-     * Set the member.
-     */
-    public function setMember(Member $member): void
-    {
-        $this->member = $member;
     }
 
     /**

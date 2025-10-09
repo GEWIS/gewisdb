@@ -28,7 +28,7 @@ class Keyholder
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * Member lidnr.
@@ -42,13 +42,13 @@ class Keyholder
         referencedColumnName: 'lidnr',
         nullable: false,
     )]
-    protected Member $member;
+    private Member $member;
 
     /**
      * Expiration date.
      */
     #[Column(type: 'date')]
-    protected DateTime $expirationDate;
+    private DateTime $expirationDate;
 
     /**
      * Installation.
@@ -77,7 +77,7 @@ class Keyholder
         name: 'r_sequence',
         referencedColumnName: 'sequence',
     )]
-    protected KeyGranting $grantingDec;
+    private KeyGranting $grantingDec;
 
     /**
      * Release date.
@@ -86,7 +86,7 @@ class Keyholder
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $withdrawnDate = null;
+    private ?DateTime $withdrawnDate = null;
 
     /**
      * Get the ID.

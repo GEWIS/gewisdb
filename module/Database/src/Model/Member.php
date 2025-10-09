@@ -33,7 +33,7 @@ class Member
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $lidnr = null;
+    private ?int $lidnr = null;
 
     /**
      * Member's email address.
@@ -42,31 +42,31 @@ class Member
         type: 'string',
         nullable: true,
     )]
-    protected ?string $email = null;
+    private ?string $email = null;
 
     /**
      * Member's last name.
      */
     #[Column(type: 'string')]
-    protected string $lastName;
+    private string $lastName;
 
     /**
      * Middle name.
      */
     #[Column(type: 'string')]
-    protected string $middleName;
+    private string $middleName;
 
     /**
      * Initials.
      */
     #[Column(type: 'string')]
-    protected string $initials;
+    private string $initials;
 
     /**
      * First name.
      */
     #[Column(type: 'string')]
-    protected string $firstName;
+    private string $firstName;
 
     /**
      * Generation.
@@ -75,7 +75,7 @@ class Member
      * a academic year, but rather a calendar year.
      */
     #[Column(type: 'integer')]
-    protected int $generation;
+    private int $generation;
 
     /**
      * TU/e username.
@@ -84,7 +84,7 @@ class Member
         type: 'string',
         nullable: true,
     )]
-    protected ?string $tueUsername = null;
+    private ?string $tueUsername = null;
 
     /**
      * Study of the member.
@@ -93,7 +93,7 @@ class Member
         type: 'string',
         nullable: true,
     )]
-    protected ?string $study = null;
+    private ?string $study = null;
 
     /**
      * Member type.
@@ -113,20 +113,20 @@ class Member
         type: 'string',
         enumType: MembershipTypes::class,
     )]
-    protected MembershipTypes $type;
+    private MembershipTypes $type;
 
     /**
      * Last changed date of membership.
      */
     #[Column(type: 'date')]
-    protected DateTime $changedOn;
+    private DateTime $changedOn;
 
     /**
      * Keeps track of whether a student is still studying (either at the Department of Mathematics and Computer Science,
      * the TU/e in general, or another institution).
      */
     #[Column(type: 'boolean')]
-    protected bool $isStudying;
+    private bool $isStudying;
 
     /**
      * Date when the real membership ("ordinary", "external" or "honorary") of the member will have ended, i.e., from
@@ -137,14 +137,14 @@ class Member
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $membershipEndsOn = null;
+    private ?DateTime $membershipEndsOn = null;
 
     /**
      * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
      * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
      */
     #[Column(type: 'date')]
-    protected DateTime $expiration;
+    private DateTime $expiration;
 
     /**
      * Last date membership status was checked.
@@ -153,19 +153,19 @@ class Member
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $lastCheckedOn = null;
+    private ?DateTime $lastCheckedOn = null;
 
     /**
      * Member birthdate.
      */
     #[Column(type: 'date')]
-    protected DateTime $birth;
+    private DateTime $birth;
 
     /**
      * How much the member has paid for membership. 0 by default.
      */
     #[Column(type: 'integer')]
-    protected int $paid = 0;
+    private int $paid = 0;
 
     /**
      * If the member receives a 'supremum'
@@ -174,7 +174,7 @@ class Member
         type: 'string',
         nullable: true,
     )]
-    protected ?string $supremum = null;
+    private ?string $supremum = null;
 
     /**
      * Stores whether a member should be 'hidden'.
@@ -186,7 +186,7 @@ class Member
         type: 'boolean',
         options: ['default' => false],
     )]
-    protected bool $hidden = false;
+    private bool $hidden = false;
 
     /**
      * Addresses of this member.
@@ -198,7 +198,7 @@ class Member
         mappedBy: 'member',
         cascade: ['persist', 'remove'],
     )]
-    protected Collection $addresses;
+    private Collection $addresses;
 
     /**
      * Installations of this member.
@@ -209,7 +209,7 @@ class Member
         targetEntity: Installation::class,
         mappedBy: 'member',
     )]
-    protected Collection $installations;
+    private Collection $installations;
 
     /**
      * Memberships of mailing lists.
@@ -221,7 +221,7 @@ class Member
         mappedBy: 'member',
         cascade: ['persist'],
     )]
-    protected Collection $mailingListMemberships;
+    private Collection $mailingListMemberships;
 
     /**
      * RenewalLinks of this member.
@@ -233,7 +233,7 @@ class Member
         mappedBy: 'member',
         cascade: ['persist', 'remove'],
     )]
-    protected Collection $renewalLinks;
+    private Collection $renewalLinks;
 
     /**
      * Audit entries (e.g. notes) of this member.
@@ -245,7 +245,7 @@ class Member
         mappedBy: 'member',
         cascade: ['persist', 'remove'],
     )]
-    protected Collection $auditEntries;
+    private Collection $auditEntries;
 
     /**
      * A multiple-use authentication key which can be used in linked systems to verify updates
@@ -254,7 +254,7 @@ class Member
         type: 'string',
         nullable: true,
     )]
-    protected ?string $authenticationKey = null;
+    private ?string $authenticationKey = null;
 
     /**
      * Determines if a member is deleted. A deleted member is a member whose basic info needs to be retained to ensure
@@ -267,7 +267,7 @@ class Member
         type: 'boolean',
         options: ['default' => false],
     )]
-    protected bool $deleted = false;
+    private bool $deleted = false;
 
     public function __construct()
     {

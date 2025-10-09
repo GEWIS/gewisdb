@@ -32,37 +32,37 @@ class ProspectiveMember
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $lidnr = null;
+    private ?int $lidnr = null;
 
     /**
      * Member's email address.
      */
     #[Column(type: 'string')]
-    protected string $email;
+    private string $email;
 
     /**
      * Member's last name.
      */
     #[Column(type: 'string')]
-    protected string $lastName;
+    private string $lastName;
 
     /**
      * Middle name.
      */
     #[Column(type: 'string')]
-    protected string $middleName;
+    private string $middleName;
 
     /**
      * Initials.
      */
     #[Column(type: 'string')]
-    protected string $initials;
+    private string $initials;
 
     /**
      * First name.
      */
     #[Column(type: 'string')]
-    protected string $firstName;
+    private string $firstName;
 
     /**
      * TU/e username.
@@ -71,7 +71,7 @@ class ProspectiveMember
         type: 'string',
         nullable: true,
     )]
-    protected ?string $tueUsername = null;
+    private ?string $tueUsername = null;
 
     /**
      * Study of the member.
@@ -80,25 +80,25 @@ class ProspectiveMember
         type: 'string',
         nullable: true,
     )]
-    protected ?string $study = null;
+    private ?string $study = null;
 
     /**
      * Last changed date of membership.
      */
     #[Column(type: 'date')]
-    protected DateTime $changedOn;
+    private DateTime $changedOn;
 
     /**
      * Member birthdate.
      */
     #[Column(type: 'date')]
-    protected DateTime $birth;
+    private DateTime $birth;
 
     /**
      * How much the member has paid for membership. 0 by default.
      */
     #[Column(type: 'integer')]
-    protected int $paid = 0;
+    private int $paid = 0;
 
     /**
      * Country.
@@ -107,37 +107,37 @@ class ProspectiveMember
         type: 'string',
         enumType: PostalRegions::class,
     )]
-    protected PostalRegions $country;
+    private PostalRegions $country;
 
     /**
      * Street.
      */
     #[Column(type: 'string')]
-    protected string $street;
+    private string $street;
 
     /**
      * House number (+ suffix)
      */
     #[Column(type: 'string')]
-    protected string $number;
+    private string $number;
 
     /**
      * Postal code.
      */
     #[Column(type: 'string')]
-    protected string $postalCode;
+    private string $postalCode;
 
     /**
      * City.
      */
     #[Column(type: 'string')]
-    protected string $city;
+    private string $city;
 
     /**
      * Phone number.
      */
     #[Column(type: 'string')]
-    protected string $phone;
+    private string $phone;
 
     /**
      * Memberships of mailing lists.
@@ -148,7 +148,7 @@ class ProspectiveMember
         type: 'simple_array',
         nullable: true,
     )]
-    protected ?array $lists = [];
+    private ?array $lists = [];
 
     /**
      * The Checkout Sessions for this prospective member.
@@ -162,7 +162,7 @@ class ProspectiveMember
         cascade: ['remove'],
     )]
     #[OrderBy(['created' => 'ASC'])]
-    protected Collection $checkoutSessions;
+    private Collection $checkoutSessions;
 
     /**
      * Payment link that can be used by the prospective member to restart a Checkout Session.
@@ -171,7 +171,7 @@ class ProspectiveMember
         targetEntity: PaymentLink::class,
         mappedBy: 'prospectiveMember',
     )]
-    protected ?PaymentLink $paymentLink = null;
+    private ?PaymentLink $paymentLink = null;
 
     public function __construct()
     {

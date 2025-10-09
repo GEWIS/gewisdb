@@ -37,7 +37,7 @@ class Member
         name: 'lidnr',
         referencedColumnName: 'lidnr',
     )]
-    protected ?int $lidnr = null;
+    private ?int $lidnr = null;
 
     /**
      * Member's email address.
@@ -46,31 +46,31 @@ class Member
         type: 'string',
         nullable: true,
     )]
-    protected ?string $email = null;
+    private ?string $email = null;
 
     /**
      * Member's last name.
      */
     #[Column(type: 'string')]
-    protected string $lastName;
+    private string $lastName;
 
     /**
      * Middle name.
      */
     #[Column(type: 'string')]
-    protected string $middleName;
+    private string $middleName;
 
     /**
      * Initials.
      */
     #[Column(type: 'string')]
-    protected string $initials;
+    private string $initials;
 
     /**
      * First name.
      */
     #[Column(type: 'string')]
-    protected string $firstName;
+    private string $firstName;
 
     /**
      * Generation.
@@ -79,7 +79,7 @@ class Member
      * a academic year, but rather a calendar year.
      */
     #[Column(type: 'integer')]
-    protected int $generation;
+    private int $generation;
 
     /**
      * Member type.
@@ -99,13 +99,13 @@ class Member
         type: 'string',
         enumType: MembershipTypes::class,
     )]
-    protected MembershipTypes $type;
+    private MembershipTypes $type;
 
     /**
      * Last changed date of membership.
      */
     #[Column(type: 'date')]
-    protected DateTime $changedOn;
+    private DateTime $changedOn;
 
     /**
      * Date when the real membership ("ordinary" or "external") of the member will have ended, in other words, from this
@@ -116,26 +116,26 @@ class Member
         type: 'date',
         nullable: true,
     )]
-    protected ?DateTime $membershipEndsOn = null;
+    private ?DateTime $membershipEndsOn = null;
 
     /**
      * Member birth date.
      */
     #[Column(type: 'date')]
-    protected DateTime $birth;
+    private DateTime $birth;
 
     /**
      * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
      * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
      */
     #[Column(type: 'date')]
-    protected DateTime $expiration;
+    private DateTime $expiration;
 
     /**
      * How much the member has paid for membership. 0 by default.
      */
     #[Column(type: 'integer')]
-    protected int $paid = 0;
+    private int $paid = 0;
 
     /**
      * If the member receives a 'supremum'.
@@ -144,7 +144,7 @@ class Member
         type: 'string',
         nullable: true,
     )]
-    protected ?string $supremum = null;
+    private ?string $supremum = null;
 
     /**
      * Stores whether a member should be 'hidden'.
@@ -156,7 +156,7 @@ class Member
         type: 'boolean',
         options: ['default' => false],
     )]
-    protected bool $hidden = false;
+    private bool $hidden = false;
 
     /**
      * Addresses of this member.
@@ -168,7 +168,7 @@ class Member
         mappedBy: 'member',
         cascade: ['persist'],
     )]
-    protected Collection $addresses;
+    private Collection $addresses;
 
     /**
      * Installations of this member.
@@ -179,7 +179,7 @@ class Member
         targetEntity: Installation::class,
         mappedBy: 'member',
     )]
-    protected Collection $installations;
+    private Collection $installations;
 
     /**
      * Memberships of mailing lists.
@@ -191,7 +191,7 @@ class Member
         mappedBy: 'member',
         cascade: ['persist'],
     )]
-    protected Collection $mailingListMemberships;
+    private Collection $mailingListMemberships;
 
     /**
      * Organ memberships.
@@ -202,7 +202,7 @@ class Member
         targetEntity: OrganMember::class,
         mappedBy: 'member',
     )]
-    protected Collection $organInstallations;
+    private Collection $organInstallations;
 
     /**
      * Board memberships.
@@ -213,7 +213,7 @@ class Member
         targetEntity: BoardMember::class,
         mappedBy: 'member',
     )]
-    protected Collection $boardInstallations;
+    private Collection $boardInstallations;
 
     /**
      * Keyholdership.
@@ -224,13 +224,13 @@ class Member
         targetEntity: Keyholder::class,
         mappedBy: 'member',
     )]
-    protected Collection $keyGrantings;
+    private Collection $keyGrantings;
 
     #[Column(
         type: 'string',
         nullable: true,
     )]
-    protected ?string $authenticationKey = null;
+    private ?string $authenticationKey = null;
 
     /**
      * Determines if a member is deleted. A deleted member is a member whose basic info needs to be retained to ensure
@@ -243,7 +243,7 @@ class Member
         type: 'boolean',
         options: ['default' => false],
     )]
-    protected bool $deleted = false;
+    private bool $deleted = false;
 
     public function __construct()
     {

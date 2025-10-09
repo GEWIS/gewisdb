@@ -21,25 +21,25 @@ class SavedQuery
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     /**
      * Category.
      */
     #[Column(type: 'string')]
-    protected string $category;
+    private string $category;
 
     /**
      * Name.
      */
     #[Column(type: 'string')]
-    protected string $name;
+    private string $name;
 
     /**
      * The Saved Query.
      */
     #[Column(type: 'text')]
-    protected string $query;
+    private string $query;
 
     /**
      * Get the ID.
