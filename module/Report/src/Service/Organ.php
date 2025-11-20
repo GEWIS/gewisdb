@@ -10,7 +10,7 @@ use Laminas\ProgressBar\ProgressBar;
 use LogicException;
 use ReflectionProperty;
 use Report\Model\Organ as ReportOrganModel;
-use Report\Model\OrganMember;
+use Report\Model\OrganMember as ReportOrganMemberModel;
 use Report\Model\SubDecision\Abrogation as ReportAbrogationModel;
 use Report\Model\SubDecision\Discharge as ReportDischargeModel;
 use Report\Model\SubDecision\Foundation as ReportFoundationModel;
@@ -175,7 +175,7 @@ class Organ
         }
 
         if (null === $organMember) {
-            $organMember = new OrganMember();
+            $organMember = new ReportOrganMemberModel();
             // set the ID stuff
             $organMember->setOrgan($repOrgan);
             $organMember->setMember($ref->getMember());
@@ -212,7 +212,8 @@ class Organ
         if ($rp->isInitialized($ref->getInstallation())) {
             $organMember = $ref->getInstallation()->getOrganMember();
         } else {
-            $organMember = null;
+            $organMember = $this->emReport->getRepository(ReportOrganMemberModel::class)
+                ->findOneBy(['installation' => $ref->getInstallation()]);
         }
 
         if (null === $organMember) {
