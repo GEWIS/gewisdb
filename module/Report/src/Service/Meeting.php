@@ -11,7 +11,6 @@ use Database\Model\Meeting as DatabaseMeetingModel;
 use Database\Model\Member as DatabaseMemberModel;
 use Database\Model\SubDecision as DatabaseSubDecisionModel;
 use Doctrine\ORM\EntityManager;
-use Exception;
 use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
@@ -23,6 +22,7 @@ use Report\Model\Decision as ReportDecisionModel;
 use Report\Model\Meeting as ReportMeetingModel;
 use Report\Model\Member as ReportMemberModel;
 use Report\Model\SubDecision as ReportSubDecisionModel;
+use Report\Service\SubDecision as SubDecisionService;
 use RuntimeException;
 use Throwable;
 
@@ -39,6 +39,7 @@ class Meeting
     public function __construct(
         private readonly Translator $translator,
         private readonly MeetingMapper $meetingMapper,
+        private readonly SubDecisionService $subDecisionService,
         private readonly EntityManager $emReport,
         private readonly array $config,
         private readonly TransportInterface $mailTransport,
@@ -79,11 +80,10 @@ class Meeting
 
         if (null === $reportMeeting) {
             $reportMeeting = new ReportMeetingModel();
+            $reportMeeting->setType($meeting->getType());
+            $reportMeeting->setNumber($meeting->getNumber());
+            $reportMeeting->setDate($meeting->getDate());
         }
-
-        $reportMeeting->setType($meeting->getType());
-        $reportMeeting->setNumber($meeting->getNumber());
-        $reportMeeting->setDate($meeting->getDate());
 
         foreach ($meeting->getDecisions() as $decision) {
             try {
@@ -126,10 +126,10 @@ class Meeting
         if (null === $reportDecision) {
             $reportDecision = new ReportDecisionModel();
             $reportDecision->setMeeting($reportMeeting);
+            $reportDecision->setPoint($decision->getPoint());
+            $reportDecision->setNumber($decision->getNumber());
         }
 
-        $reportDecision->setPoint($decision->getPoint());
-        $reportDecision->setNumber($decision->getNumber());
         $contentNL = [];
         $contentEN = [];
 
@@ -368,8 +368,9 @@ class Meeting
                     null !== $organMember->getDischargeDate()
                     || !$organMember->getInstallation()->getReappointments()->isEmpty()
                 ) {
-                    // phpcs:ignore Generic.Files.LineLength.TooLong -- user-visible strings should not be split
-                    throw new RuntimeException('Cannot annul installation due to other relevant decisions after installation');
+                    throw new RuntimeException(
+                        'Cannot annul installation due to other relevant decisions after installation',
+                    );
                 }
 
                 $targetSubDecision->getFoundation()->getOrgan()->getMembers()->removeElement($organMember);
@@ -395,8 +396,9 @@ class Meeting
 
                     // Compare ordering: if another reappointment comes after this one, annulment is invalid.
                     if ($this->isAfter($otherReappointment, $targetSubDecision)) {
-                        // phpcs:ignore Generic.Files.LineLength.TooLong -- user-visible strings should not be split
-                        throw new RuntimeException('Cannot annul reappointment due to other relevant decisions after reappointment');
+                        throw new RuntimeException(
+                            'Cannot annul reappointment due to other relevant decisions after reappointment',
+                        );
                     }
                 }
 
@@ -514,8 +516,12 @@ class Meeting
     {
         switch (true) {
             case $subDecision instanceof ReportSubDecisionModel\Annulment:
-                throw new Exception('Deletion of annulling decisions not implemented');
+                $targetDecision = $subDecision->getTarget();
+                foreach ($targetDecision->getSubdecisions() as $targetSubDecision) {
+                    $this->subDecisionService->generateRelated($targetSubDecision);
+                }
 
+                break;
             case $subDecision instanceof ReportSubDecisionModel\Reappointment:
                 $installation = $subDecision->getInstallation();
                 $installation->removeReappointment($subDecision);
@@ -580,11 +586,10 @@ class Meeting
      *
      * @psalm-ignore-nullable-return
      */
-    public function findMember(DatabaseMemberModel $member): ReportMemberModel
+    public function findMember(DatabaseMemberModel $member): ?ReportMemberModel
     {
-        $repo = $this->emReport->getRepository(ReportMemberModel::class);
-
-        return $repo->find($member->getLidnr());
+        return $this->emReport->getRepository(ReportMemberModel::class)
+            ->find($member->getLidnr());
     }
 
     /**
