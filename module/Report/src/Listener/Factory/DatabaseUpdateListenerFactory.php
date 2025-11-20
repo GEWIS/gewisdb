@@ -14,6 +14,7 @@ use Report\Service\Meeting as MeetingService;
 use Report\Service\Member as MemberService;
 use Report\Service\Misc as MiscService;
 use Report\Service\Organ as OrganService;
+use Report\Service\SubDecision as SubDecisionService;
 
 class DatabaseUpdateListenerFactory implements FactoryInterface
 {
@@ -25,28 +26,22 @@ class DatabaseUpdateListenerFactory implements FactoryInterface
         $requestedName,
         ?array $options = null,
     ): DatabaseUpdateListener {
-        /** @var BoardService $boardService */
-        $boardService = $container->get(BoardService::class);
-        /** @var KeyholderService $keyholderService */
-        $keyholderService = $container->get(KeyholderService::class);
         /** @var MeetingService $meetingService */
         $meetingService = $container->get(MeetingService::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
         /** @var MiscService $miscService */
         $miscService = $container->get(MiscService::class);
-        /** @var OrganService $organService */
-        $organService = $container->get(OrganService::class);
+        /** @var SubDecisionService $subDecisionService */
+        $subDecisionService = $container->get(SubDecisionService::class);
         /** @var EntityManager $emReport */
         $emReport = $container->get('doctrine.entitymanager.orm_report');
 
         return new DatabaseUpdateListener(
-            $boardService,
-            $keyholderService,
             $meetingService,
             $memberService,
             $miscService,
-            $organService,
+            $subDecisionService,
             $emReport,
         );
     }
