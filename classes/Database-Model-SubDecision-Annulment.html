@@ -325,21 +325,19 @@ catch. If that is the case, let me know!</p>
 
 
 
+    
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision-Annulment.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-SubDecision-Annulment.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
         #[<abbr title="\Doctrine\ORM\Mapping\Entity">Entity</abbr>]
     </dt>
     </dl>
-            </section>
-
-
-
+                    </section>
+    
 <h3 id="toc">
     Table of Contents
     <a href="classes/Database-Model-SubDecision-Annulment.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
@@ -360,6 +358,48 @@ catch. If that is the case, let me know!</p>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-SubDecision.html#property_decision">$decision</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a>            </span>
+</dt>
+<dd>Decision.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-SubDecision.html#property_decision_number">$decision_number</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Decision number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-SubDecision.html#property_decision_point">$decision_point</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Decision point.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-SubDecision.html#property_meeting_number">$meeting_number</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Meeting number</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-SubDecision.html#property_meeting_type">$meeting_type</a>
+    <span>
+                        &nbsp;: <a href="classes/Application-Model-Enums-MeetingTypes.html"><abbr title="\Application\Model\Enums\MeetingTypes">MeetingTypes</abbr></a>            </span>
+</dt>
+<dd>Meeting type.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-SubDecision.html#property_sequence">$sequence</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Sub decision sequence number.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-SubDecision-Annulment.html#property_target">$target</a>
     <span>
@@ -490,6 +530,401 @@ catch. If that is the case, let me know!</p>
         class="
             phpdocumentor-element
             -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_decision">
+        $decision
+        <a href="classes/Database-Model-SubDecision.html#property_decision" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Decision.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$decision</span>
+    </code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision.html#property_decision#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;meeting_type&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;meeting_type&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;meeting_number&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;meeting_number&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;decision_point&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;point&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $name: &#039;decision_number&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $referencedColumnName: &#039;number&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\ManyToOne">ManyToOne</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $targetEntity: \Database\Model\Decision::class
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $inversedBy: &#039;subdecisions&#039;
+    </dd>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_decision_number">
+        $decision_number
+        <a href="classes/Database-Model-SubDecision.html#property_decision_number" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">132</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Decision number.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$decision_number</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
+</section>
+
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision.html#property_decision_number#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_decision_point">
+        $decision_point
+        <a href="classes/Database-Model-SubDecision.html#property_decision_point" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">123</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Decision point.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$decision_point</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
+</section>
+
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision.html#property_decision_point#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_meeting_number">
+        $meeting_number
+        <a href="classes/Database-Model-SubDecision.html#property_meeting_number" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">114</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Meeting number</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$meeting_number</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
+</section>
+
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision.html#property_meeting_number#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_meeting_type">
+        $meeting_type
+        <a href="classes/Database-Model-SubDecision.html#property_meeting_type" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">102</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Meeting type.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Application-Model-Enums-MeetingTypes.html"><abbr title="\Application\Model\Enums\MeetingTypes">MeetingTypes</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$meeting_type</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>NOTE: This is a hack to make the decision a primary key here.</p>
+</section>
+
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision.html#property_meeting_type#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $enumType: \Application\Model\Enums\MeetingTypes::class
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_sequence">
+        $sequence
+        <a href="classes/Database-Model-SubDecision.html#property_sequence" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision.php"><a href="files/module-database-src-model-subdecision.html"><abbr title="module/Database/src/Model/SubDecision.php">SubDecision.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">139</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sub decision sequence number.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$sequence</span>
+    </code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision.html#property_sequence#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;integer&#039;
+    </dd>
+    </dl>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
+    </dt>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
             -private
                                                                     "
 >
@@ -520,13 +955,13 @@ catch. If that is the case, let me know!</p>
     
     
 
-    
-    <section class="phpdocumentor-attributes">
-        <h5 class="phpdocumentor-elements__header" id="attributes">
-            Attributes <a href="classes/Database-Model-SubDecision-Annulment.html#property_target#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-SubDecision-Annulment.html#property_target#attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
-        </h5>
-                    <dl class="phpdocumentor-argument-list">
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
         #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
     </dt>
@@ -537,7 +972,7 @@ catch. If that is the case, let me know!</p>
         $referencedColumnName: &#039;meeting_type&#039;
     </dd>
     </dl>
-                    <dl class="phpdocumentor-argument-list">
+                            <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
         #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
     </dt>
@@ -548,7 +983,7 @@ catch. If that is the case, let me know!</p>
         $referencedColumnName: &#039;meeting_number&#039;
     </dd>
     </dl>
-                    <dl class="phpdocumentor-argument-list">
+                            <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
         #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
     </dt>
@@ -559,7 +994,7 @@ catch. If that is the case, let me know!</p>
         $referencedColumnName: &#039;point&#039;
     </dd>
     </dl>
-                    <dl class="phpdocumentor-argument-list">
+                            <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
         #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
     </dt>
@@ -570,7 +1005,7 @@ catch. If that is the case, let me know!</p>
         $referencedColumnName: &#039;number&#039;
     </dd>
     </dl>
-                    <dl class="phpdocumentor-argument-list">
+                            <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
         #[<abbr title="\Doctrine\ORM\Mapping\OneToOne">OneToOne</abbr>]
     </dt>
@@ -581,9 +1016,8 @@ catch. If that is the case, let me know!</p>
         $inversedBy: &#039;annulledBy&#039;
     </dd>
     </dl>
-            </section>
-
-    
+                    </section>
+        
 
 </article>
             </section>
@@ -635,8 +1069,8 @@ catch. If that is the case, let me know!</p>
 
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -674,8 +1108,8 @@ catch. If that is the case, let me know!</p>
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a></span>
@@ -713,8 +1147,8 @@ catch. If that is the case, let me know!</p>
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -752,8 +1186,8 @@ catch. If that is the case, let me know!</p>
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -791,8 +1225,8 @@ catch. If that is the case, let me know!</p>
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -830,8 +1264,8 @@ catch. If that is the case, let me know!</p>
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Application-Model-Enums-MeetingTypes.html"><abbr title="\Application\Model\Enums\MeetingTypes">MeetingTypes</abbr></a></span>
@@ -869,8 +1303,8 @@ catch. If that is the case, let me know!</p>
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -908,8 +1342,8 @@ catch. If that is the case, let me know!</p>
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Decision.html"><abbr title="\Database\Model\Decision">Decision</abbr></a></span>
@@ -964,8 +1398,8 @@ catch. If that is the case, let me know!</p>
 
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1013,8 +1447,8 @@ catch. If that is the case, let me know!</p>
 
     
 
+        
     
-
     
 </article>
                     <article
@@ -1058,8 +1492,8 @@ catch. If that is the case, let me know!</p>
 
     
 
+        
     
-
     
 </article>
                     <article
@@ -1103,8 +1537,8 @@ catch. If that is the case, let me know!</p>
 
     
 
+        
     
-
     
 </article>
                     <article
@@ -1159,8 +1593,8 @@ Hence, if no translation to English is available, the Dutch text will be shown.<
 
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1217,8 +1651,8 @@ Hence, if no translation to English is available, the Dutch text will be shown.<
 
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -1340,6 +1774,12 @@ Hence, if no translation to English is available, the Dutch text will be shown.<
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Database-Model-SubDecision.html#property_decision">$decision</a></li>
+                                                    <li class=""><a href="classes/Database-Model-SubDecision.html#property_decision_number">$decision_number</a></li>
+                                                    <li class=""><a href="classes/Database-Model-SubDecision.html#property_decision_point">$decision_point</a></li>
+                                                    <li class=""><a href="classes/Database-Model-SubDecision.html#property_meeting_number">$meeting_number</a></li>
+                                                    <li class=""><a href="classes/Database-Model-SubDecision.html#property_meeting_type">$meeting_type</a></li>
+                                                    <li class=""><a href="classes/Database-Model-SubDecision.html#property_sequence">$sequence</a></li>
                                                     <li class=""><a href="classes/Database-Model-SubDecision-Annulment.html#property_target">$target</a></li>
                                             </ul>
                 </li>
