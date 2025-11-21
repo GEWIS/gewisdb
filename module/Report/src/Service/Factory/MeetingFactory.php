@@ -10,6 +10,7 @@ use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 use Report\Service\Meeting as MeetingService;
+use Report\Service\SubDecision as SubDecisionService;
 
 class MeetingFactory implements FactoryInterface
 {
@@ -23,6 +24,7 @@ class MeetingFactory implements FactoryInterface
     ): MeetingService {
         $translator = $container->get(MvcTranslator::class);
         $meetingMapper = $container->get(MeetingMapper::class);
+        $subDecisionService = $container->get(SubDecisionService::class);
         /** @var EntityManager $emReport */
         $emReport = $container->get('doctrine.entitymanager.orm_report');
         /** @var array $config */
@@ -32,6 +34,7 @@ class MeetingFactory implements FactoryInterface
         return new MeetingService(
             $translator,
             $meetingMapper,
+            $subDecisionService,
             $emReport,
             $config,
             $mailTransport,
