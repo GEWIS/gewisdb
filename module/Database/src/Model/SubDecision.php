@@ -92,7 +92,7 @@ abstract class SubDecision
         name: 'decision_number',
         referencedColumnName: 'number',
     )]
-    private Decision $decision;
+    protected Decision $decision;
 
     /**
      * Meeting type.
@@ -104,7 +104,7 @@ abstract class SubDecision
         type: 'string',
         enumType: MeetingTypes::class,
     )]
-    private MeetingTypes $meeting_type;
+    protected MeetingTypes $meeting_type;
 
     /**
      * Meeting number
@@ -113,7 +113,7 @@ abstract class SubDecision
      */
     #[Id]
     #[Column(type: 'integer')]
-    private int $meeting_number;
+    protected int $meeting_number;
 
     /**
      * Decision point.
@@ -122,7 +122,7 @@ abstract class SubDecision
      */
     #[Id]
     #[Column(type: 'integer')]
-    private int $decision_point;
+    protected int $decision_point;
 
     /**
      * Decision number.
@@ -131,14 +131,14 @@ abstract class SubDecision
      */
     #[Id]
     #[Column(type: 'integer')]
-    private int $decision_number;
+    protected int $decision_number;
 
     /**
      * Sub decision sequence number.
      */
     #[Id]
     #[Column(type: 'integer')]
-    private int $sequence;
+    protected int $sequence;
 
     /**
      * Get the decision.
