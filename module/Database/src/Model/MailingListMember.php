@@ -50,7 +50,6 @@ class MailingListMember
     /**
      * Member.
      */
-    #[Id]
     #[ManyToOne(
         targetEntity: Member::class,
         inversedBy: 'mailingListMemberships',
