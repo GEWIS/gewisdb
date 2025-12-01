@@ -227,7 +227,7 @@ class Mailman
         // The order matters; we first process deletions, because we can have both be true
         // (e.g. when changing email addresses twice)
         foreach ($dbMemberships as $mailingListMember) {
-            if ($mailingListMember->isToBeDeleted()) {
+            if ($mailingListMember->isToBeDeleted() || null === $mailingListMember->getMember()) {
                 $this->unsubscribeMemberFromMailingList(
                     mailingListMember: $mailingListMember,
                     output: $output,

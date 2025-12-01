@@ -201,6 +201,11 @@ class Member
             'type' => $address->getType(),
         ]);
 
+        // If the report address has already been deleted, we don't need to do anything here.
+        if (null === $reportAddress) {
+            return;
+        }
+
         $this->emReport->remove($reportAddress);
     }
 }

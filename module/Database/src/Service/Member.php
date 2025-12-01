@@ -618,6 +618,12 @@ class Member
      */
     public function remove(MemberModel $member): void
     {
+        foreach ($member->getMailingListMemberships() as $mailingListMembership) {
+            $mailingListMembership->setToBeDeleted(true);
+            $mailingListMembership->unsetMember();
+            $this->mailingListMemberMapper->persist($mailingListMembership);
+        }
+
         if ($this->canRemove($member)) {
             $this->getMemberMapper()->remove($member);
         } else {

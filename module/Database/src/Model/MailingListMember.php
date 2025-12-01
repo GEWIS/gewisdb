@@ -58,7 +58,7 @@ class MailingListMember
         name: 'member',
         referencedColumnName: 'lidnr',
     )]
-    private Member $member;
+    private ?Member $member;
 
     /**
      * In case of email address changes, we need to know the email address that is on the list
@@ -135,7 +135,7 @@ class MailingListMember
     /**
      * Get the member.
      */
-    public function getMember(): Member
+    public function getMember(): ?Member
     {
         return $this->member;
     }
@@ -148,6 +148,16 @@ class MailingListMember
     {
         $this->member = $member;
         $this->setEmail($member->getEmail());
+    }
+
+    /**
+     * Unset the member.
+     * This is used to remove the reference to a member when the mailing list membership has to be deleted.
+     */
+    public function unsetMember(): void
+    {
+        $this->setToBeDeleted(true);
+        $this->member = null;
     }
 
     /**
