@@ -6,6 +6,7 @@ namespace Application\Model;
 
 use Application\Model\Enums\ConfigNamespaces;
 use Database\Model\Trait\TimestampableTrait;
+use Database\Model\Trait\VersionTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -34,6 +35,11 @@ use function sprintf;
 class ConfigItem
 {
     use TimestampableTrait;
+    // We implement locking by using version numbers (optimistic locking)
+    // rather than by banning other processes from locking the same row.
+    // This is more versatile and is possible because we do not care which
+    // process in the end changes the config, as long as it is only one.
+    use VersionTrait;
 
     /**
      * Primary key item ID (to avoid reference issues).
