@@ -58,7 +58,7 @@ class MailingListMember
         name: 'member',
         referencedColumnName: 'lidnr',
     )]
-    private ?Member $member;
+    private ?Member $member = null;
 
     /**
      * In case of email address changes, we need to know the email address that is on the list
