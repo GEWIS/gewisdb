@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace User\Model;
 
-use Database\Model\Trait\CreatedTrait;
-use Database\Model\Trait\UpdatedTrait;
+use Database\Model\Trait\TimestampableTrait;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -24,8 +23,7 @@ use function str_contains;
 #[Table(name: 'users')]
 class User
 {
-    use CreatedTrait;
-    use UpdatedTrait;
+    use TimestampableTrait;
 
     #[Id]
     #[Column(type: 'integer')]

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Model\Enums\ConfigNamespaces;
-use Database\Model\Trait\CreatedTrait;
-use Database\Model\Trait\UpdatedTrait;
+use Database\Model\Trait\TimestampableTrait;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -34,8 +33,7 @@ use function sprintf;
 )]
 class ConfigItem
 {
-    use CreatedTrait;
-    use UpdatedTrait;
+    use TimestampableTrait;
 
     /**
      * Primary key item ID (to avoid reference issues).
