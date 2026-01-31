@@ -1,0 +1,84 @@
+name: Check migrations and seed
+
+# This job should run whenever a migration is updated
+# it should check whether the migration + seed still works as well as
+# check whether the pull request message mentions the migration
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - '**/migrations/*.php'
+      - '**/test/Seeder/*.php'
+
+jobs:
+  migration_seed:
+    name: Check migrations and seed
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo
+        run: echo "This job should only run in if migrations or fixtures are updated"
+      
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Copy .env
+        run: cp .env.dist .env
+
+      - name: setup docker buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: build base
+        run: docker buildx bake --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
+
+      - name: run base
+        run: docker compose --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml up -d --build --quiet-pull
+
+      - name: migrate base
+        run: make migrate
+
+      - name: get migration status
+        run: |
+          MIGRATION_BASE_DEFAULT=$(docker compose exec -u www-data -it web ./orm migrations:current --no-interaction --object-manager doctrine.entitymanager.orm_default | sed 's/\s-.*//' | sed 's/\s//')
+          echo "Default is at: $MIGRATION_BASE_DEFAULT"
+          echo "MIGRATION_BASE_DEFAULT=$MIGRATION_BASE_DEFAULT" >> $GITHUB_ENV
+          MIGRATION_BASE_REPORT=$(docker compose exec -u www-data -it web ./orm migrations:current --no-interaction --object-manager doctrine.entitymanager.orm_report | sed 's/\s-.*//' | sed 's/\s//')
+          echo "Report is at: $MIGRATION_BASE_REPORT"
+          echo "MIGRATION_BASE_REPORT=$MIGRATION_BASE_REPORT" >> $GITHUB_ENV
+
+      - name: seed base
+        run: make seed
+
+      - name: cleanup base
+        run: docker compose --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml down
+
+      - name: Checkout head branch
+        uses: actions/checkout@v4
+
+      - name: Copy .env
+        run: cp .env.dist .env
+
+      - name: build head
+        run: docker buildx bake --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml
+
+      - name: run head
+        run: docker compose --file docker-compose.github.yml --file docker-compose.override.yml --file docker-compose.yml up -d --build --quiet-pull
+
+      - name: migrate head
+        run: make migrate
+
+      - name: seed head
+        run: make seed
+
+      - name: revert to base migration
+        run: |
+          docker compose exec -u www-data -it web ./orm migrations:migrate --no-interaction --object-manager doctrine.entitymanager.orm_default $MIGRATION_BASE_DEFAULT
+          docker compose exec -u www-data -it web ./orm migrations:migrate --no-interaction --object-manager doctrine.entitymanager.orm_report $MIGRATION_BASE_REPORT
+
+      - name: stop
+        run: docker compose down
