@@ -130,20 +130,29 @@ class Mailman
      * Acquire sync lock.
      *
      * To ensure that the sync between GEWISDB and Mailman is as clean as possible, we need to acquire a global lock on
-     * the mail list administration. This will prevent (if properly implemented and used) the secretary from modifying
-     * any mailing list memberships.
+     * the mail list administration. This will prevent (if properly implemented and used) concurrent syncs from running.
      */
-    private function acquireSyncLock(int $retries = 3): void
-    {
+    private function acquireSyncLock(
+        int $retries = 3,
+        bool $renew = false,
+    ): void {
         if (0 === $retries) {
             throw new RuntimeException('Unable to acquire sync lock for Mailman sync: timeout.');
         }
 
-        if ($this->isSyncLocked()) {
+        if ($this->isSyncLocked() && !$renew) {
             throw new RuntimeException('Unable to acquire sync lock for Mailman sync: locked by other process.');
         }
 
-        $this->configService->setConfig(ConfigNamespaces::DatabaseMailman, 'locked', true);
+        if (!$this->isSyncLocked() && $renew) {
+            throw new RuntimeException('Unable to renew sync lock for Mailman sync: currently unlocked.');
+        }
+
+        $this->configService->setConfig(
+            ConfigNamespaces::DatabaseMailman,
+            'locked',
+            (new DateTime())->modify('+23 hours'),
+        );
 
         if ($this->isSyncLocked()) {
             return;
@@ -159,7 +168,7 @@ class Mailman
      */
     private function releaseSyncLock(): void
     {
-        $this->configService->setConfig(ConfigNamespaces::DatabaseMailman, 'locked', false);
+        $this->configService->setConfig(ConfigNamespaces::DatabaseMailman, 'locked', new DateTime());
     }
 
     /**
@@ -167,7 +176,7 @@ class Mailman
      */
     public function isSyncLocked(): bool
     {
-        return $this->configService->getConfig(ConfigNamespaces::DatabaseMailman, 'locked', false);
+        return $this->configService->getConfig(ConfigNamespaces::DatabaseMailman, 'locked') > new DateTime();
     }
 
     /**
@@ -185,6 +194,7 @@ class Mailman
         $lists = $this->mailingListMapper->findAll();
 
         foreach ($lists as $list) {
+            $this->acquireSyncLock(renew: true);
             $this->syncMembershipSingle($list, $output, $dryRun);
         }
 
