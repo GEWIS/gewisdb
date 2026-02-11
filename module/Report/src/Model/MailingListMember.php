@@ -50,6 +50,7 @@ class MailingListMember
     #[JoinColumn(
         name: 'member',
         referencedColumnName: 'lidnr',
+        nullable: false,
     )]
     private Member $member;
 

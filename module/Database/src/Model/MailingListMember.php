@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use LogicException;
 
 /**
  * Mailing List Member model.
@@ -57,6 +58,7 @@ class MailingListMember
     #[JoinColumn(
         name: 'member',
         referencedColumnName: 'lidnr',
+        nullable: true,
     )]
     private ?Member $member = null;
 
@@ -156,7 +158,12 @@ class MailingListMember
      */
     public function unsetMember(): void
     {
-        $this->setToBeDeleted(true);
+        if (!$this->isToBeDeleted()) {
+            throw new LogicException(
+                'MailingListMember member can only be unset when the mailing list membership is marked to be deleted.',
+            );
+        }
+
         $this->member = null;
     }
 

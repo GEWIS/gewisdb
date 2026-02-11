@@ -17,14 +17,12 @@ final class Version20251201181030 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql('ALTER TABLE mailinglistmember DROP CONSTRAINT mailinglistmember_pkey');
-        $this->addSql('ALTER TABLE mailinglistmember ALTER member DROP NOT NULL');
         $this->addSql('ALTER TABLE mailinglistmember ADD PRIMARY KEY (mailingList, email)');
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql('ALTER TABLE mailinglistmember DROP CONSTRAINT mailinglistmember_pkey');
-        $this->addSql('ALTER TABLE mailinglistmember ALTER member SET NOT NULL');
         $this->addSql('ALTER TABLE mailinglistmember ADD PRIMARY KEY (mailinglist, member, email)');
     }
 }
