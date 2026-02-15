@@ -1,3 +1,38 @@
+## [v4.4.0](https://github.com/GEWIS/gewisdb/tree/v4.4.0) (2026-02-15)
+
+* Internal changes to class setups
+* Build/CI changes for stability and more complete testing
+* Introduce API endpoints for functions (board/other bodies)
+* Remove mailing list subscriptions when deleting member (fix)
+* Introduce time limit for mailman sync locking mechanism to bypass intermittent failures
+
+## [v4.3.6](https://github.com/GEWIS/gewisdb/tree/v4.3.6) (2025-10-09)
+
+* Internal orm changes
+
+## [v4.3.5](https://github.com/GEWIS/gewisdb/tree/v4.3.5) (2025-10-08)
+
+* Ordering of body name in various lookups/overviews
+
+## [v4.3.4](https://github.com/GEWIS/gewisdb/tree/v4.3.4) (2025-09-01)
+
+* Change wording of failed payment emails to avoid confusion
+* Key decisions can be >1 year in line with change to key policy
+
+## [v4.3.3](https://github.com/GEWIS/gewisdb/tree/v4.3.3) (2025-08-18)
+
+* Allow more (legal) house numbers
+* Remove subscription fee payment amount from email
+
+## [v4.3.2](https://github.com/GEWIS/gewisdb/tree/v4.3.2) (2025-08-10)
+
+* Performance improvement for mailman sync when verifying members
+
+## [v4.3.1](https://github.com/GEWIS/gewisdb/tree/v4.3.1) (2025-08-08)
+
+* Update for new membership fee
+* Explain mailing lists more clearly on join page after changes in v4.3.0
+
 ## [v4.3.0](https://github.com/GEWIS/gewisdb/tree/v4.3.0) (2025-08-07)
 
 * Mailman API integration for synchronisation of mailing list memberships
