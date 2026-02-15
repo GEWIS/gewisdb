@@ -3521,6 +3521,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20250821111612.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20251201181030",
+            "name": "Version20251201181030",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251201181030.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20251201181030\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251201181030.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20251201181030\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251201181030.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20251201181030\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251201181030.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -7275,6 +7295,11 @@ Search.appendIndex(
             "name": "setMember",
             "summary": "Set\u0020the\u0020member.",
             "url": "classes/Database-Model-MailingListMember.html#method_setMember"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AunsetMember\u0028\u0029",
+            "name": "unsetMember",
+            "summary": "Unset\u0020the\u0020member.",
+            "url": "classes/Database-Model-MailingListMember.html#method_unsetMember"
         },                {
             "fqsen": "\\Database\\Model\\MailingListMember\u003A\u003AgetEmail\u0028\u0029",
             "name": "getEmail",
@@ -11065,6 +11090,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/Report-Migrations-Version20250621133119.html#method_down"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20251201181030",
+            "name": "Version20251201181030",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20251201181030.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20251201181030\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20251201181030.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20251201181030\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20251201181030.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20251201181030\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20251201181030.html#method_down"
         },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
