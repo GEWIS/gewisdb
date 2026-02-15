@@ -4,7 +4,7 @@
 # If you put this directly in the makefile, replace $ with $$
 set -e
 
-. /code/scripts/migrate-alias.sh
+. /code/scripts/migrate-list.sh
 
 read -rp "Give (partial, unique) version name (e.g. Database\Migrations\Version20241020224949 or 20241020)): " version
 
