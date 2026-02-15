@@ -3541,6 +3541,46 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20251201181030.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20251207150548",
+            "name": "Version20251207150548",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251207150548.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20251207150548\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251207150548.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20251207150548\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251207150548.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20251207150548\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20251207150548.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260211203320",
+            "name": "Version20260211203320",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20260211203320.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260211203320\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260211203320.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260211203320\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260211203320.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260211203320\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260211203320.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -9495,6 +9535,16 @@ Search.appendIndex(
             "name": "updatedAt",
             "summary": "When\u0020this\u0020entry\u0020was\u0020last\u0020updated",
             "url": "classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\VersionTrait",
+            "name": "VersionTrait",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-VersionTrait.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\VersionTrait\u003A\u003A\u0024version",
+            "name": "version",
+            "summary": "integer\u0020version\nFrom\u0020the\u0020docs\u003A\n\u0022Version\u0020numbers\u0020\u005Bshould\u005D\u0020be\u0020preferred\u0020as\u0020they\u0020can\u0020not\u0020potentially\u0020conflict\u0020in\u0020a\u0020highly\u0020concurrent\u0020environment\u0022",
+            "url": "classes/Database-Model-Trait-VersionTrait.html#property_version"
         },                {
             "fqsen": "\\Database\\Module",
             "name": "Module",
