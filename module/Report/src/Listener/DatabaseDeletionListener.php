@@ -10,7 +10,6 @@ use Database\Model\MailingList as DatabaseMailingListModel;
 use Database\Model\MailingListMember as DatabaseMailingListMemberModel;
 use Database\Model\Meeting as DatabaseMeetingModel;
 use Database\Model\Member as DatabaseMemberModel;
-use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Exception;
@@ -40,12 +39,7 @@ class DatabaseDeletionListener
 
                 break;
             case $entity instanceof DatabaseMemberModel:
-                try {
-                    $this->memberService->deleteMember($entity);
-                } catch (ForeignKeyConstraintViolationException) {
-                    // Member has relations, so we'll just leave it in reportdb
-                }
-
+                // This should never fail, because we will not delete a member if it still has relations
                 $this->memberService->deleteMember($entity);
 
                 break;

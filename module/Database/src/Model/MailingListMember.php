@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use LogicException;
 
 /**
  * Mailing List Member model.
@@ -50,7 +51,6 @@ class MailingListMember
     /**
      * Member.
      */
-    #[Id]
     #[ManyToOne(
         targetEntity: Member::class,
         inversedBy: 'mailingListMemberships',
@@ -58,8 +58,9 @@ class MailingListMember
     #[JoinColumn(
         name: 'member',
         referencedColumnName: 'lidnr',
+        nullable: true,
     )]
-    private Member $member;
+    private ?Member $member = null;
 
     /**
      * In case of email address changes, we need to know the email address that is on the list
@@ -136,7 +137,7 @@ class MailingListMember
     /**
      * Get the member.
      */
-    public function getMember(): Member
+    public function getMember(): ?Member
     {
         return $this->member;
     }
@@ -149,6 +150,21 @@ class MailingListMember
     {
         $this->member = $member;
         $this->setEmail($member->getEmail());
+    }
+
+    /**
+     * Unset the member.
+     * This is used to remove the reference to a member when the mailing list membership has to be deleted.
+     */
+    public function unsetMember(): void
+    {
+        if (!$this->isToBeDeleted()) {
+            throw new LogicException(
+                'MailingListMember member can only be unset when the mailing list membership is marked to be deleted.',
+            );
+        }
+
+        $this->member = null;
     }
 
     /**

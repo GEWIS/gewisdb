@@ -43,7 +43,6 @@ class MailingListMember
     /**
      * Member.
      */
-    #[Id]
     #[ManyToOne(
         targetEntity: Member::class,
         inversedBy: 'mailingListMemberships',
@@ -51,6 +50,7 @@ class MailingListMember
     #[JoinColumn(
         name: 'member',
         referencedColumnName: 'lidnr',
+        nullable: false,
     )]
     private Member $member;
 

@@ -84,7 +84,6 @@ class Misc
         /** @var ReportMailingListMemberModel|null $reportListMembership */
         $reportListMembership = $repo->find([
             'mailingList' => $mailingListMember->getMailingList()->getName(),
-            'member' => $mailingListMember->getMember()->getLidnr(),
             'email' => $mailingListMember->getEmail(),
         ]);
 
@@ -123,7 +122,6 @@ class Misc
         /** @var ReportMailingListMemberModel|null $reportListMembership */
         $reportListMembership = $repo->find([
             'mailingList' => $mailingListMember->getMailingList()->getName(),
-            'member' => $mailingListMember->getMember()->getLidnr(),
             'email' => $mailingListMember->getEmail(),
         ]);
 
