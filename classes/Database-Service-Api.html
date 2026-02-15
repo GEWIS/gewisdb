@@ -304,7 +304,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -360,6 +360,13 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Service-Api.html#method_assertVersion">assertVersion()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Function that asserts that the given api version is between two bounds.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Service-Api.html#method_getActiveMembers">getActiveMembers()</a>
@@ -450,7 +457,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -487,7 +494,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -529,7 +536,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -572,6 +579,82 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_assertVersion">
+        assertVersion()
+        <a href="classes/Database-Service-Api.html#method_assertVersion" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">174</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Function that asserts that the given api version is between two bounds.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">assertVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\PHLAK\SemVer\Version">Version</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lower</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\PHLAK\SemVer\Version">Version</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$upper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Laminas\Http\Header\HeaderInterface">HeaderInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$acceptHeader</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$lower</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\PHLAK\SemVer\Version">Version</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$upper</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\PHLAK\SemVer\Version">Version</abbr>|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$acceptHeader</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Laminas\Http\Header\HeaderInterface">HeaderInterface</abbr>|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Database-Service-Api.html#method_assertVersion#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Database-Model-Exception-VersionExpected.html"><abbr title="\Database\Model\Exception\VersionExpected">VersionExpected</abbr></a></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>if not allowed.</p>
+</section>
+
+                                    </dd>
+                                            </dl>
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getActiveMembers">
         getActiveMembers()
         <a href="classes/Database-Service-Api.html#method_getActiveMembers" class="headerlink"><i class="fas fa-link"></i></a>
@@ -580,7 +663,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -663,7 +746,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -701,7 +784,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">91</span>
 
     </aside>
 
@@ -780,7 +863,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -852,7 +935,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
     </aside>
 
@@ -890,7 +973,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
@@ -935,7 +1018,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">128</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -969,7 +1052,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
     </aside>
 
@@ -1008,7 +1091,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Api.php"><a href="files/module-database-src-service-api.html"><abbr title="module/Database/src/Service/Api.php">Api.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">146</span>
 
     </aside>
 
@@ -1156,6 +1239,7 @@ their inactive fraternity membership still gets returned as organ membership</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Database-Service-Api.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Api.html#method_assertVersion">assertVersion()</a></li>
                                             <li class=""><a href="classes/Database-Service-Api.html#method_getActiveMembers">getActiveMembers()</a></li>
                                             <li class=""><a href="classes/Database-Service-Api.html#method_getFrontpageData">getFrontpageData()</a></li>
                                             <li class=""><a href="classes/Database-Service-Api.html#method_getMember">getMember()</a></li>

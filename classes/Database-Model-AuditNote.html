@@ -359,18 +359,25 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#property_createdAt">$createdAt</a>
+    <span>
+                        &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>            </span>
+</dt>
+<dd>When this entry was created</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt">$updatedAt</a>
+    <span>
+                        &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>            </span>
+</dt>
+<dd>When this entry was last updated</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a class="" href="classes/Database-Model-AuditEntry.html#property_user">$user</a>
     <span>
                         &nbsp;: <a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>|null            </span>
 </dt>
 <dd>The user who created the entry</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Trait-CreatedTrait.html#property_createdAt">$createdAt</a>
-    <span>
-                        &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>            </span>
-</dt>
-<dd>When this entry was created</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-AuditNote.html#property_IMMUTABLE">$IMMUTABLE</a>
@@ -385,13 +392,6 @@
                         &nbsp;: string|null            </span>
 </dt>
 <dd>The note itself</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt">$updatedAt</a>
-    <span>
-                        &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>            </span>
-</dt>
-<dd>When this entry was last updated</dd>
 
     </dl>
 
@@ -410,9 +410,9 @@
 to always link at least one of the linkable objects. Currently only member is possible</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Trait-CreatedTrait.html#method_getCreatedAt">getCreatedAt()</a>
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_getCreatedAt">getCreatedAt()</a>
     <span>
-                                &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null    </span>
+                                &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -443,9 +443,9 @@ The first element is to be the body which after translation can be
 supplied as an argument to sprintf</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Trait-UpdatedTrait.html#method_getUpdatedAt">getUpdatedAt()</a>
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_getUpdatedAt">getUpdatedAt()</a>
     <span>
-                                &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null    </span>
+                                &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -476,10 +476,18 @@ supplied as an argument to sprintf</dd>
 Not implemented</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue">setCreatedAtValue()</a>
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_prePersist">prePersist()</a>
     <span>
-                                &nbsp;: self    </span>
+                                &nbsp;: void    </span>
 </dt>
+<dd>Automatically fill in the `DateTime`s before the initial call to `persist()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_preUpdate">preUpdate()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Automatically update the `updatedAt` `DateTime` when doing an update to the entity.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-AuditEntry.html#method_setId">setId()</a>
@@ -497,12 +505,6 @@ Not implemented</dd>
     <a class="" href="classes/Database-Model-AuditNote.html#method_setNote">setNote()</a>
     <span>
                                 &nbsp;: void    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue">setUpdatedAtValue()</a>
-    <span>
-                                &nbsp;: self    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -524,6 +526,18 @@ Not implemented</dd>
 </dt>
 <dd>Get a textual representation of this audit entry</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_setCreatedAt">setCreatedAt()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_setUpdatedAt">setUpdatedAt()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
     </dl>
 
 
@@ -544,6 +558,110 @@ Not implemented</dd>
             -protected
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_createdAt">
+        $createdAt
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#property_createdAt" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">When this entry was created</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$createdAt</span>
+    </code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-Trait-TimestampableTrait.html#property_createdAt#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;datetime&#039;
+    </dd>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_updatedAt">
+        $updatedAt
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">When this entry was last updated</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$updatedAt</span>
+    </code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;datetime&#039;
+    </dd>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_user">
         $user
         <a href="classes/Database-Model-AuditEntry.html#property_user" class="headerlink"><i class="fas fa-link"></i></a>
@@ -554,7 +672,7 @@ Not implemented</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -600,58 +718,6 @@ Not implemented</dd>
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
         $targetEntity: \User\Model\User::class
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_createdAt">
-        $createdAt
-        <a href="classes/Database-Model-Trait-CreatedTrait.html#property_createdAt" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/CreatedTrait.php"><a href="files/module-database-src-model-trait-createdtrait.html"><abbr title="module/Database/src/Model/Trait/CreatedTrait.php">CreatedTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">19</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">When this entry was created</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$createdAt</span>
-    </code>
-
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/Database-Model-Trait-CreatedTrait.html#property_createdAt#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;datetime&#039;
     </dd>
     </dl>
                     </section>
@@ -764,58 +830,6 @@ Not implemented</dd>
         
 
 </article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_updatedAt">
-        $updatedAt
-        <a href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/UpdatedTrait.php"><a href="files/module-database-src-model-trait-updatedtrait.html"><abbr title="module/Database/src/Model/Trait/UpdatedTrait.php">UpdatedTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">20</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">When this entry was last updated</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
-    <span class="phpdocumentor-signature__name">$updatedAt</span>
-    </code>
-
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;datetime&#039;
-    </dd>
-    </dl>
-                    </section>
-        
-
-</article>
             </section>
 
             <section class="phpdocumentor-methods">
@@ -838,7 +852,7 @@ Not implemented</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
@@ -868,20 +882,20 @@ to always link at least one of the linkable objects. Currently only member is po
 >
     <h4 class="phpdocumentor-element__name" id="method_getCreatedAt">
         getCreatedAt()
-        <a href="classes/Database-Model-Trait-CreatedTrait.html#method_getCreatedAt" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_getCreatedAt" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/CreatedTrait.php"><a href="files/module-database-src-model-trait-createdtrait.html"><abbr title="module/Database/src/Model/Trait/CreatedTrait.php">CreatedTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCreatedAt</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getCreatedAt</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -894,7 +908,7 @@ to always link at least one of the linkable objects. Currently only member is po
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
             </section>
 
 </article>
@@ -912,7 +926,7 @@ to always link at least one of the linkable objects. Currently only member is po
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
     </aside>
 
@@ -950,7 +964,7 @@ to always link at least one of the linkable objects. Currently only member is po
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -1026,7 +1040,7 @@ to always link at least one of the linkable objects. Currently only member is po
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -1061,20 +1075,20 @@ supplied as an argument to sprintf</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_getUpdatedAt">
         getUpdatedAt()
-        <a href="classes/Database-Model-Trait-UpdatedTrait.html#method_getUpdatedAt" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_getUpdatedAt" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/UpdatedTrait.php"><a href="files/module-database-src-model-trait-updatedtrait.html"><abbr title="module/Database/src/Model/Trait/UpdatedTrait.php">UpdatedTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getUpdatedAt</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getUpdatedAt</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1087,7 +1101,7 @@ supplied as an argument to sprintf</p>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr>|null</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
             </section>
 
 </article>
@@ -1105,7 +1119,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
@@ -1143,7 +1157,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -1181,7 +1195,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">173</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
     </aside>
 
@@ -1220,7 +1234,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">165</span>
+    <span class="phpdocumentor-element-found-in__line">163</span>
 
     </aside>
 
@@ -1252,22 +1266,23 @@ Not implemented</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setCreatedAtValue">
-        setCreatedAtValue()
-        <a href="classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_prePersist">
+        prePersist()
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_prePersist" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/CreatedTrait.php"><a href="files/module-database-src-model-trait-createdtrait.html"><abbr title="module/Database/src/Model/Trait/CreatedTrait.php">CreatedTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Automatically fill in the `DateTime`s before the initial call to `persist()`.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setCreatedAtValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+                    <span class="phpdocumentor-signature__name">prePersist</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1279,7 +1294,7 @@ Not implemented</p>
         
             <section class="phpdocumentor-attributes">
             <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+                Attributes <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_prePersist#attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -1289,11 +1304,53 @@ Not implemented</p>
     </dl>
                     </section>
     
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">self</span>
-            </section>
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_preUpdate">
+        preUpdate()
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_preUpdate" class="headerlink"><i class="fas fa-link"></i></a>
 
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">64</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Automatically update the `updatedAt` `DateTime` when doing an update to the entity.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">preUpdate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="attributes">
+                Attributes <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_preUpdate#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\PreUpdate">PreUpdate</abbr>]
+    </dt>
+    </dl>
+                    </section>
+    
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1309,7 +1366,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -1353,7 +1410,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -1433,60 +1490,6 @@ Not implemented</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setUpdatedAtValue">
-        setUpdatedAtValue()
-        <a href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/UpdatedTrait.php"><a href="files/module-database-src-model-trait-updatedtrait.html"><abbr title="module/Database/src/Model/Trait/UpdatedTrait.php">UpdatedTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">28</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setUpdatedAtValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-            <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue#attributes" class="headerlink"><i class="fas fa-link"></i></a>
-
-            </h5>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\PrePersist">PrePersist</abbr>]
-    </dt>
-    </dl>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\PreUpdate">PreUpdate</abbr>]
-    </dt>
-    </dl>
-                    </section>
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">self</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setUser">
         setUser()
         <a href="classes/Database-Model-AuditEntry.html#method_setUser" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1495,7 +1498,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -1601,6 +1604,94 @@ Not implemented</p>
         <span class="phpdocumentor-signature__response_type">string</span>
             </section>
 
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCreatedAt">
+        setCreatedAt()
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_setCreatedAt" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">setCreatedAt</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$createdAt</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$createdAt</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setUpdatedAt">
+        setUpdatedAt()
+        <a href="classes/Database-Model-Trait-TimestampableTrait.html#method_setUpdatedAt" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/Trait/TimestampableTrait.php"><a href="files/module-database-src-model-trait-timestampabletrait.html"><abbr title="module/Database/src/Model/Trait/TimestampableTrait.php">TimestampableTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">setUpdatedAt</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$updatedAt</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$updatedAt</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\DateTime">DateTime</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
 </article>
             </section>
 
@@ -1717,11 +1808,11 @@ Not implemented</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#property_createdAt">$createdAt</a></li>
+                                                    <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt">$updatedAt</a></li>
                                                     <li class=""><a href="classes/Database-Model-AuditEntry.html#property_user">$user</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Trait-CreatedTrait.html#property_createdAt">$createdAt</a></li>
                                                     <li class=""><a href="classes/Database-Model-AuditNote.html#property_IMMUTABLE">$IMMUTABLE</a></li>
                                                     <li class=""><a href="classes/Database-Model-AuditNote.html#property_note">$note</a></li>
-                                                    <li class=""><a href="classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt">$updatedAt</a></li>
                                             </ul>
                 </li>
             
@@ -1729,24 +1820,26 @@ Not implemented</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_assertValid">assertValid()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Trait-CreatedTrait.html#method_getCreatedAt">getCreatedAt()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_getCreatedAt">getCreatedAt()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getId">getId()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getMember">getMember()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditNote.html#method_getNote">getNote()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getStringPlain">getStringPlain()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Trait-UpdatedTrait.html#method_getUpdatedAt">getUpdatedAt()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_getUpdatedAt">getUpdatedAt()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getUser">getUser()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getUserName">getUserName()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_isDeletable">isDeletable()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_isEditable">isEditable()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue">setCreatedAtValue()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_prePersist">prePersist()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_preUpdate">preUpdate()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_setId">setId()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_setMember">setMember()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditNote.html#method_setNote">setNote()</a></li>
-                                            <li class=""><a href="classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue">setUpdatedAtValue()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_setUser">setUser()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditNote.html#method_getStringArguments">getStringArguments()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditNote.html#method_getStringBodyFormatted">getStringBodyFormatted()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_setCreatedAt">setCreatedAt()</a></li>
+                                            <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_setUpdatedAt">setUpdatedAt()</a></li>
                                     </ul>
             </li>
                     </ul>

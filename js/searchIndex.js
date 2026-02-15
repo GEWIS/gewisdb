@@ -3501,6 +3501,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20250621133120.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20250821111612",
+            "name": "Version20250821111612",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20250821111612.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250821111612\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250821111612.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250821111612\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250821111612.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20250821111612\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20250821111612.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -3746,6 +3766,11 @@ Search.appendIndex(
             "summary": "Return\u0020organ\u0020functions",
             "url": "classes/Database-Controller-ApiController.html#method_organFunctionsAction"
         },                {
+            "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AboardFunctionsAction\u0028\u0029",
+            "name": "boardFunctionsAction",
+            "summary": "Return\u0020board\u0020functions",
+            "url": "classes/Database-Controller-ApiController.html#method_boardFunctionsAction"
+        },                {
             "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AnoContent\u0028\u0029",
             "name": "noContent",
             "summary": "To\u0020follow\u0020best\u0020practices,\u0020we\u0020generate\u0020a\u0020204\u0020for\u0020empty\u0020datasets",
@@ -3755,6 +3780,11 @@ Search.appendIndex(
             "name": "additionalProperties",
             "summary": "",
             "url": "classes/Database-Controller-ApiController.html#method_additionalProperties"
+        },                {
+            "fqsen": "\\Database\\Controller\\ApiController\u003A\u003AassertVersions\u0028\u0029",
+            "name": "assertVersions",
+            "summary": "",
+            "url": "classes/Database-Controller-ApiController.html#method_assertVersions"
         },                {
             "fqsen": "\\Database\\Controller\\ApiController\u003A\u003A\u0024translator",
             "name": "translator",
@@ -7051,6 +7081,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-InstallationFunctions.html#enumcase_InactiveMember"
         },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionExpected",
+            "name": "VersionExpected",
+            "summary": "Abstract\u0020class\u0020for\u0020API\u0020exceptions",
+            "url": "classes/Database-Model-Exception-VersionExpected.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionExpected\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-Exception-VersionExpected.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionExpected\u003A\u003A\u0024httpStatusCode",
+            "name": "httpStatusCode",
+            "summary": "",
+            "url": "classes/Database-Model-Exception-VersionExpected.html#property_httpStatusCode"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionFormat",
+            "name": "VersionFormat",
+            "summary": "Abstract\u0020class\u0020for\u0020API\u0020exceptions",
+            "url": "classes/Database-Model-Exception-VersionFormat.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionFormat\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-Exception-VersionFormat.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionFormat\u003A\u003A\u0024httpStatusCode",
+            "name": "httpStatusCode",
+            "summary": "",
+            "url": "classes/Database-Model-Exception-VersionFormat.html#property_httpStatusCode"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionIncompatible",
+            "name": "VersionIncompatible",
+            "summary": "Abstract\u0020class\u0020for\u0020API\u0020exceptions",
+            "url": "classes/Database-Model-Exception-VersionIncompatible.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionIncompatible\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Model-Exception-VersionIncompatible.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception\\VersionIncompatible\u003A\u003A\u0024httpStatusCode",
+            "name": "httpStatusCode",
+            "summary": "",
+            "url": "classes/Database-Model-Exception-VersionIncompatible.html#property_httpStatusCode"
+        },                {
             "fqsen": "\\Database\\Model\\MailingList",
             "name": "MailingList",
             "summary": "Mailing\u0020List\u0020model\u0020for\u0020lists\u0020on\u0020the\u0020db\u0020side.",
@@ -9321,26 +9396,6 @@ Search.appendIndex(
             "summary": "Sub\u0020decision\u0020sequence\u0020number.",
             "url": "classes/Database-Model-SubDecision.html#property_sequence"
         },                {
-            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait",
-            "name": "CreatedTrait",
-            "summary": "",
-            "url": "classes/Database-Model-Trait-CreatedTrait.html"
-        },                {
-            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait\u003A\u003AgetCreatedAt\u0028\u0029",
-            "name": "getCreatedAt",
-            "summary": "",
-            "url": "classes/Database-Model-Trait-CreatedTrait.html#method_getCreatedAt"
-        },                {
-            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait\u003A\u003AsetCreatedAtValue\u0028\u0029",
-            "name": "setCreatedAtValue",
-            "summary": "",
-            "url": "classes/Database-Model-Trait-CreatedTrait.html#method_setCreatedAtValue"
-        },                {
-            "fqsen": "\\Database\\Model\\Trait\\CreatedTrait\u003A\u003A\u0024createdAt",
-            "name": "createdAt",
-            "summary": "When\u0020this\u0020entry\u0020was\u0020created",
-            "url": "classes/Database-Model-Trait-CreatedTrait.html#property_createdAt"
-        },                {
             "fqsen": "\\Database\\Model\\Trait\\FormattableDateTrait",
             "name": "FormattableDateTrait",
             "summary": "",
@@ -9371,25 +9426,50 @@ Search.appendIndex(
             "summary": "The\u0020member\u0020involved\u0020in\u0020this\u0020sub\u002Ddecision.",
             "url": "classes/Database-Model-Trait-MemberAwareTrait.html#property_member"
         },                {
-            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait",
-            "name": "UpdatedTrait",
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait",
+            "name": "TimestampableTrait",
             "summary": "",
-            "url": "classes/Database-Model-Trait-UpdatedTrait.html"
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html"
         },                {
-            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait\u003A\u003AgetUpdatedAt\u0028\u0029",
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003AgetCreatedAt\u0028\u0029",
+            "name": "getCreatedAt",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#method_getCreatedAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003AsetCreatedAt\u0028\u0029",
+            "name": "setCreatedAt",
+            "summary": "",
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#method_setCreatedAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003AgetUpdatedAt\u0028\u0029",
             "name": "getUpdatedAt",
             "summary": "",
-            "url": "classes/Database-Model-Trait-UpdatedTrait.html#method_getUpdatedAt"
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#method_getUpdatedAt"
         },                {
-            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait\u003A\u003AsetUpdatedAtValue\u0028\u0029",
-            "name": "setUpdatedAtValue",
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003AsetUpdatedAt\u0028\u0029",
+            "name": "setUpdatedAt",
             "summary": "",
-            "url": "classes/Database-Model-Trait-UpdatedTrait.html#method_setUpdatedAtValue"
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#method_setUpdatedAt"
         },                {
-            "fqsen": "\\Database\\Model\\Trait\\UpdatedTrait\u003A\u003A\u0024updatedAt",
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003AprePersist\u0028\u0029",
+            "name": "prePersist",
+            "summary": "Automatically\u0020fill\u0020in\u0020the\u0020\u0060DateTime\u0060s\u0020before\u0020the\u0020initial\u0020call\u0020to\u0020\u0060persist\u0028\u0029\u0060.",
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#method_prePersist"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003ApreUpdate\u0028\u0029",
+            "name": "preUpdate",
+            "summary": "Automatically\u0020update\u0020the\u0020\u0060updatedAt\u0060\u0020\u0060DateTime\u0060\u0020when\u0020doing\u0020an\u0020update\u0020to\u0020the\u0020entity.",
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#method_preUpdate"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003A\u0024createdAt",
+            "name": "createdAt",
+            "summary": "When\u0020this\u0020entry\u0020was\u0020created",
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#property_createdAt"
+        },                {
+            "fqsen": "\\Database\\Model\\Trait\\TimestampableTrait\u003A\u003A\u0024updatedAt",
             "name": "updatedAt",
             "summary": "When\u0020this\u0020entry\u0020was\u0020last\u0020updated",
-            "url": "classes/Database-Model-Trait-UpdatedTrait.html#property_updatedAt"
+            "url": "classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt"
         },                {
             "fqsen": "\\Database\\Module",
             "name": "Module",
@@ -9460,6 +9540,11 @@ Search.appendIndex(
             "name": "getReportMemberMapper",
             "summary": "Get\u0020the\u0020member\u0020mapper.",
             "url": "classes/Database-Service-Api.html#method_getReportMemberMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Api\u003A\u003AassertVersion\u0028\u0029",
+            "name": "assertVersion",
+            "summary": "Function\u0020that\u0020asserts\u0020that\u0020the\u0020given\u0020api\u0020version\u0020is\u0020between\u0020two\u0020bounds.",
+            "url": "classes/Database-Service-Api.html#method_assertVersion"
         },                {
             "fqsen": "\\Database\\Service\\Api\u003A\u003A\u0024reportMemberMapper",
             "name": "reportMemberMapper",
@@ -14371,14 +14456,34 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_OrganFunctionsListR"
         },                {
+            "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003ABoardFunctionsListR",
+            "name": "BoardFunctionsListR",
+            "summary": "",
+            "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_BoardFunctionsListR"
+        },                {
             "fqsen": "\\User\\Model\\Enums\\ApiPermissions\u003A\u003AAll",
             "name": "All",
             "summary": "",
             "url": "classes/User-Model-Enums-ApiPermissions.html#enumcase_All"
         },                {
+            "fqsen": "\\User\\Model\\Exception\\ApiException",
+            "name": "ApiException",
+            "summary": "Abstract\u0020class\u0020for\u0020API\u0020exceptions",
+            "url": "classes/User-Model-Exception-ApiException.html"
+        },                {
+            "fqsen": "\\User\\Model\\Exception\\ApiException\u003A\u003AgetHttpStatusCode\u0028\u0029",
+            "name": "getHttpStatusCode",
+            "summary": "",
+            "url": "classes/User-Model-Exception-ApiException.html#method_getHttpStatusCode"
+        },                {
+            "fqsen": "\\User\\Model\\Exception\\ApiException\u003A\u003A\u0024httpStatusCode",
+            "name": "httpStatusCode",
+            "summary": "",
+            "url": "classes/User-Model-Exception-ApiException.html#property_httpStatusCode"
+        },                {
             "fqsen": "\\User\\Model\\Exception\\NotAllowed",
             "name": "NotAllowed",
-            "summary": "",
+            "summary": "Abstract\u0020class\u0020for\u0020API\u0020exceptions",
             "url": "classes/User-Model-Exception-NotAllowed.html"
         },                {
             "fqsen": "\\User\\Model\\Exception\\NotAllowed\u003A\u003A__construct\u0028\u0029",
@@ -14940,6 +15045,11 @@ Search.appendIndex(
             "name": "Enums",
             "summary": "",
             "url": "namespaces/database-model-enums.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Exception",
+            "name": "Exception",
+            "summary": "",
+            "url": "namespaces/database-model-exception.html"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision",
             "name": "SubDecision",

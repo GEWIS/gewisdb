@@ -287,7 +287,7 @@
     NotAllowed
 
         <span class="phpdocumentor-element__extends">
-        extends <abbr title="\RuntimeException">RuntimeException</abbr>
+        extends <a href="classes/User-Model-Exception-ApiException.html"><abbr title="\User\Model\Exception\ApiException">ApiException</abbr></a>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -308,11 +308,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/Exception/NotAllowed.php"><a href="files/module-user-src-model-exception-notallowed.html"><abbr title="module/User/src/Model/Exception/NotAllowed.php">NotAllowed.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Abstract class for API exceptions</p>
+
 
 
 
@@ -333,6 +334,19 @@
 
 
 
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/User-Model-Exception-NotAllowed.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/User-Model-Exception-ApiException.html#property_httpStatusCode">$httpStatusCode</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+
+    </dl>
 
 <h4 id="toc-methods">
     Methods
@@ -346,6 +360,12 @@
                                 &nbsp;: mixed    </span>
 </dt>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/User-Model-Exception-ApiException.html#method_getHttpStatusCode">getHttpStatusCode()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+
     </dl>
 
 
@@ -353,6 +373,50 @@
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/User-Model-Exception-NotAllowed.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_httpStatusCode">
+        $httpStatusCode
+        <a href="classes/User-Model-Exception-ApiException.html#property_httpStatusCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/Exception/ApiException.php"><a href="files/module-user-src-model-exception-apiexception.html"><abbr title="module/User/src/Model/Exception/ApiException.php">ApiException.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$httpStatusCode</span>
+     = <span class="phpdocumentor-signature__default-value">500</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
@@ -374,7 +438,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/Exception/NotAllowed.php"><a href="files/module-user-src-model-exception-notallowed.html"><abbr title="module/User/src/Model/Exception/NotAllowed.php">NotAllowed.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
@@ -417,6 +481,44 @@
         
     
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                -final        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getHttpStatusCode">
+        getHttpStatusCode()
+        <a href="classes/User-Model-Exception-ApiException.html#method_getHttpStatusCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/User/src/Model/Exception/ApiException.php"><a href="files/module-user-src-model-exception-apiexception.html"><abbr title="module/User/src/Model/Exception/ApiException.php">ApiException.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__final">final</span>            <span class="phpdocumentor-signature__name">getHttpStatusCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
 </article>
             </section>
 
@@ -525,15 +627,23 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/User-Model-Exception-NotAllowed.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/User-Model-Exception-NotAllowed.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/User-Model-Exception-NotAllowed.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/User-Model-Exception-ApiException.html#property_httpStatusCode">$httpStatusCode</a></li>
+                                            </ul>
+                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/User-Model-Exception-NotAllowed.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/User-Model-Exception-ApiException.html#method_getHttpStatusCode">getHttpStatusCode()</a></li>
                                     </ul>
             </li>
                     </ul>
