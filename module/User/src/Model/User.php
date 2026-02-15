@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace User\Model;
 
+use Database\Model\Trait\TimestampableTrait;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 
@@ -17,9 +19,12 @@ use function str_contains;
  * User model.
  */
 #[Entity]
+#[HasLifecycleCallbacks]
 #[Table(name: 'users')]
 class User
 {
+    use TimestampableTrait;
+
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]

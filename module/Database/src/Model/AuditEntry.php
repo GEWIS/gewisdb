@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
-use Database\Model\Trait\CreatedTrait;
-use Database\Model\Trait\UpdatedTrait;
+use Database\Model\Trait\TimestampableTrait;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -41,8 +40,7 @@ use function strip_tags;
 )]
 abstract class AuditEntry
 {
-    use CreatedTrait;
-    use UpdatedTrait;
+    use TimestampableTrait;
 
     /**
      * TODO PHP8.3: make this a typed constant so we can change the value later
