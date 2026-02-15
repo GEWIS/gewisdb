@@ -64,7 +64,7 @@ seed: replenish
 		@docker compose exec -u www-data -T web ./web application:fixtures:load
 		@docker compose exec -u www-data web ./web report:generate:full
 		@make preparemailman
-		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null); pkill -HUP uwsgi'
+		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null || true)'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
 		@docker compose exec -u www-data web ./web database:mailman:fetch
 
@@ -239,4 +239,4 @@ buildpgadmin:
 
 preparemailman:
 		@docker compose cp ./docker/mailman/settings_local.py mailman-web:/opt/mailman-web/settings_local.py
-		@docker compose exec mailman-web bash -c "pkill -HUP uwsgi"
+		@docker compose restart mailman-web

@@ -1,0 +1,17 @@
+services:
+    pgadmin:
+        build:
+            cache_from: [ type=gha ]
+            cache_to: [ "type=gha,mode=max" ]
+    postgresql:
+        build:
+            cache_from: [ type=gha ]
+            cache_to: [ "type=gha,mode=max" ]
+    nginx:
+        build:
+            cache_from: [ type=gha ]
+            cache_to: [ "type=gha,mode=max" ]
+    web:
+        build:
+            cache_from: [ type=gha ]
+            cache_to: [ "type=gha,mode=max" ]
