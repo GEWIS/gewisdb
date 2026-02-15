@@ -1,5 +1,12 @@
-ARG BASE="alpine:latest"
-ARG PHPVERSION="php83"
+ARG ALPINE_VERSION="3.23"
+ARG BASE="alpine:$ALPINE_VERSION"
+
+ARG PHP_MAJOR="8"
+ARG PHP_MINOR="3"
+ARG PHP_VERSION=$PHP_MAJOR$PHP_MINOR
+
+ARG COMPOSER_VERSION="2.9"
+
 ARG BUILDTYPE="development"
 
 # Compile the language files (shared between dev and prod)
@@ -16,9 +23,11 @@ COPY ./module/Application/language/*.po ./
 RUN msgfmt en.po -o en -c --strict -v \
     && msgfmt nl.po -o nl -c --strict -v
 
+FROM composer:${COMPOSER_VERSION} AS gewisdb_composer
+
 # Install dependencies
 FROM ${BASE} AS gewisdb_web_development_base
-ARG PHPVERSION
+ARG PHP_VERSION
 
 WORKDIR /code
 
@@ -30,25 +39,25 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
         icu-data-full \
         git \
         nano \
-        ${PHPVERSION} \
-        ${PHPVERSION}-calendar \
-        ${PHPVERSION}-curl \
-        ${PHPVERSION}-dom \
-        ${PHPVERSION}-fpm \
-        ${PHPVERSION}-iconv \
-        ${PHPVERSION}-intl \
-        ${PHPVERSION}-ldap \
-        ${PHPVERSION}-mbstring \
-        ${PHPVERSION}-opcache \
-        ${PHPVERSION}-openssl \
-        ${PHPVERSION}-pdo_pgsql \
-        ${PHPVERSION}-pecl-xdebug \
-        ${PHPVERSION}-phar \
-        ${PHPVERSION}-session \
-        ${PHPVERSION}-simplexml \
-        ${PHPVERSION}-tokenizer \
-        ${PHPVERSION}-xml \
-        ${PHPVERSION}-xmlwriter \
+        php${PHP_VERSION} \
+        php${PHP_VERSION}-calendar \
+        php${PHP_VERSION}-curl \
+        php${PHP_VERSION}-dom \
+        php${PHP_VERSION}-fpm \
+        php${PHP_VERSION}-iconv \
+        php${PHP_VERSION}-intl \
+        php${PHP_VERSION}-ldap \
+        php${PHP_VERSION}-mbstring \
+        php${PHP_VERSION}-opcache \
+        php${PHP_VERSION}-openssl \
+        php${PHP_VERSION}-pdo_pgsql \
+        php${PHP_VERSION}-pecl-xdebug \
+        php${PHP_VERSION}-phar \
+        php${PHP_VERSION}-session \
+        php${PHP_VERSION}-simplexml \
+        php${PHP_VERSION}-tokenizer \
+        php${PHP_VERSION}-xml \
+        php${PHP_VERSION}-xmlwriter \
     && runtimeDeps="$( \
             scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
             | tr ',' '\n' \
@@ -59,19 +68,20 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
     && cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime \
     && echo 'Europe/Amsterdam' > /etc/timezone \
     && apk del .build-deps \
-    && ln -s /usr/sbin/php-fpm83 /usr/sbin/php-fpm \
-    && rm /etc/${PHPVERSION}/php-fpm.d/www.conf \
+    && ln -s ./php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
+    && ln -s ./php${PHP_VERSION} /usr/bin/php \
+    && rm /etc/php${PHP_VERSION}/php-fpm.d/www.conf \
     && rm /etc/crontabs/root
 
 RUN adduser -S --uid 82 -D -H www-data -G www-data
 
 # Copy composer over (needed for replenish)
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=gewisdb_composer /usr/bin/composer /usr/bin/composer
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN --mount=type=cache,target=/root/.composer,sharing=locked \
-    --mount=from=composer:latest,source=/usr/bin/composer,target=/usr/bin/composer \
+    --mount=from=gewisdb_composer,source=/usr/bin/composer,target=/usr/bin/composer \
     --mount=source=./composer.json,target=/code/composer.json \
     --mount=source=./composer.lock,target=/code/composer.lock \
     composer install
@@ -80,8 +90,8 @@ RUN --mount=type=cache,target=/root/.composer,sharing=locked \
 FROM gewisdb_web_development_base AS gewisdb_web_development
 ARG BUILDTYPE
 
-COPY ./docker/web/${BUILDTYPE}/php.ini /etc/${PHPVERSION}/php.ini
-COPY ./docker/web/${BUILDTYPE}/php-fpm.conf /etc/${PHPVERSION}/php-fpm.d/zz-gewisdb.conf
+COPY ./docker/web/${BUILDTYPE}/php.ini /etc/php${PHP_VERSION}/php.ini
+COPY ./docker/web/${BUILDTYPE}/php-fpm.conf /etc/php${PHP_VERSION}/php-fpm.d/zz-gewisdb.conf
 COPY ./config/autoload/local.${BUILDTYPE}.php.dist ./config/autoload/local.php
 COPY ./config/autoload/doctrine.local.${BUILDTYPE}.php.dist ./config/autoload/doctrine.local.php
 COPY ./config/autoload/laminas-developer-tools.local.php.dist ./config/autoload/laminas-developer-tools.local.php
@@ -99,7 +109,7 @@ RUN chmod +x ./orm ./web
 
 ENV PHP_IDE_CONFIG="serverName=database.gewis.nl"
 
-RUN --mount=from=composer:latest,source=/usr/bin/composer,target=/usr/bin/composer \
+RUN --mount=from=gewisdb_composer,source=/usr/bin/composer,target=/usr/bin/composer \
     composer dump-autoload
 
 # Set up a persistent data volumes
