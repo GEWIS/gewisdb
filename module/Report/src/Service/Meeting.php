@@ -446,7 +446,7 @@ class Meeting
             {$e->getMessage()}
 
             Dit gebeurde tijdens het processen van onderstaand besluit:
-            {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
+            {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}.
 
             Met vriendelijke groet,
 
