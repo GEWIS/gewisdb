@@ -56,9 +56,12 @@ class Budget extends SubDecision
     /**
      * Get the member.
      *
-     * @psalm-suppress InvalidNullableReturnType
+     * NOTE: Before BV 1209, there are 147 BVs that have "unknown" ("onbekend" or "?") authors for budgets and financial
+     * statements. Even in the minutes of those meetings they are "unknown", as such, allow `null` to be returned here.
+     *
+     * @psalm-ignore-nullable-return
      */
-    public function getMember(): Member
+    public function getMember(): ?Member
     {
         return $this->member;
     }
@@ -159,7 +162,8 @@ class Budget extends SubDecision
     ): string {
         $replacements = [
             '%NAME%' => $this->getName(),
-            '%AUTHOR%' => $this->getMember()->getFullName(),
+            '%AUTHOR%' => $this->getMember()?->getFullName()
+                ?? $translator->translate('onbekend', locale: $language->getLangParam()),
             '%VERSION%' => $this->getVersion(),
             '%DATE%' => $this->formatDate($this->getDate(), $language),
             '%APPROVAL%' => $this->getApproval()

@@ -238,7 +238,9 @@ class Meeting
             || $subdecision instanceof DatabaseSubDecisionModel\Financial\Budget
             || $subdecision instanceof DatabaseSubDecisionModel\OrganRegulation
         ) {
-            // financial budgets and statements
+            // There are 147 Board Meetings before BV 1209 that have an "unknown" author for a budget and/or financial
+            // statement. As such, we need to allow for the member to be null here. In that case, we simply will not set
+            // a member for the report subdecision, and it will be shown as "unknown" in the (sub)decision content.
             if (null !== $subdecision->getMember()) {
                 $reportSubDecision->setMember($this->findMember($subdecision->getMember()));
             }
@@ -446,7 +448,7 @@ class Meeting
             {$e->getMessage()}
 
             Dit gebeurde tijdens het processen van onderstaand besluit:
-            {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getNumber()}.{$decision->getPoint()}.
+            {$meeting->getType()->value} {$meeting->getNumber()}.{$decision->getPoint()}.{$decision->getNumber()}.
 
             Met vriendelijke groet,
 

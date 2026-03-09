@@ -7,7 +7,6 @@ namespace Report\Model\SubDecision\Financial;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Report\Model\Member;
 use Report\Model\SubDecision;
 use Report\Model\Trait\MemberAwareTrait;
 
@@ -51,16 +50,6 @@ class Budget extends SubDecision
      */
     #[Column(type: 'boolean')]
     private bool $changes;
-
-    /**
-     * Get the member.
-     *
-     * @psalm-suppress InvalidNullableReturnType
-     */
-    public function getMember(): Member
-    {
-        return $this->member;
-    }
 
     /**
      * Get the name.

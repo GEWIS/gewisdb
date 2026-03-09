@@ -9,6 +9,8 @@
 declare(strict_types=1);
 
 return [
+    'Laminas\Session',
+    'Laminas\Filter',
     'Laminas\I18n',
     'Laminas\Mvc\I18n',
     'Laminas\Mvc\Plugin\FlashMessenger',
