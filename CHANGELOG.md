@@ -1,3 +1,7 @@
+## [v4.4.1](https://github.com/GEWIS/gewisdb/tree/v4.4.1) (2026-03-09)
+
+* Fix generation of financial budget/statement subdecisions
+
 ## [v4.4.0](https://github.com/GEWIS/gewisdb/tree/v4.4.0) (2026-02-15)
 
 * Internal changes to class setups
