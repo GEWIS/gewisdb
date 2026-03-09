@@ -475,7 +475,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-SubDecision-Financial-Budget.html#method_getMember">getMember()</a>
     <span>
-                                &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null    </span>
 </dt>
 <dd>Get the member.</dd>
 
@@ -1083,7 +1083,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
@@ -1122,7 +1122,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -1210,7 +1210,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -1444,7 +1444,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
@@ -1452,12 +1452,15 @@ this is not null or need to specify an inverse side can do so using an associati
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMember</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getMember</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>NOTE: Before BV 1209, there are 147 BVs that have &quot;unknown&quot; (&quot;onbekend&quot; or &quot;?&quot;) authors for budgets and financial
+statements. Even in the minutes of those meetings they are &quot;unknown&quot;, as such, allow <code class="prettyprint">null</code> to be returned here.</p>
+</section>
+
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -1467,13 +1470,11 @@ this is not null or need to specify an inverse side can do so using an associati
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">psalm-suppress</span>
+                    <span class="phpdocumentor-tag__name">psalm-ignore-nullable-return</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>InvalidNullableReturnType</p>
-</section>
-
+                                             
                                     </dd>
                                             </dl>
 
@@ -1481,7 +1482,7 @@ this is not null or need to specify an inverse side can do so using an associati
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null</span>
             </section>
 
 </article>
@@ -1499,7 +1500,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
@@ -1577,7 +1578,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -1633,7 +1634,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -1672,7 +1673,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
@@ -1717,7 +1718,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">141</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -1762,7 +1763,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
@@ -1897,7 +1898,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1987,7 +1988,7 @@ this is not null or need to specify an inverse side can do so using an associati
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/SubDecision/Financial/Budget.php"><a href="files/module-database-src-model-subdecision-financial-budget.html"><abbr title="module/Database/src/Model/SubDecision/Financial/Budget.php">Budget.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 

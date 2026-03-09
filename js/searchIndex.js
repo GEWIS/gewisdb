@@ -12896,11 +12896,6 @@ Search.appendIndex(
             "summary": "Budget\u0020decision.",
             "url": "classes/Report-Model-SubDecision-Financial-Budget.html"
         },                {
-            "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetMember\u0028\u0029",
-            "name": "getMember",
-            "summary": "Get\u0020the\u0020member.",
-            "url": "classes/Report-Model-SubDecision-Financial-Budget.html#method_getMember"
-        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Financial\\Budget\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "Get\u0020the\u0020name.",
