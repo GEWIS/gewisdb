@@ -33,11 +33,6 @@
       <code>$subdecision</code>
     </NoValue>
   </file>
-  <file src="module/Report/src/Service/Meeting.php">
-    <InvalidNullableReturnType occurrences="1">
-      <code>ReportMemberModel</code>
-    </InvalidNullableReturnType>
-  </file>
   <file src="public/index.php">
     <PossiblyUndefinedArrayOffset occurrences="1">
       <code>$_SERVER['REQUEST_URI']</code>
