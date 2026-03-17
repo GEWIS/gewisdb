@@ -8,6 +8,8 @@ use Database\Command\DeleteExpiredMembersCommand;
 use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Command\MailingListMaintenanceCommand;
+use Database\Command\ListmonkFetchListsCommand;
+use Database\Command\ListmonkSyncMembershipCommand;
 use Database\Command\MailmanFetchListsCommand;
 use Database\Command\MailmanSyncMembershipCommand;
 use Database\Controller\ApiController;
@@ -791,6 +793,8 @@ return [
             'database:mailinglist:maintenance' => MailingListMaintenanceCommand::class,
             'database:mailman:fetch' => MailmanFetchListsCommand::class,
             'database:mailman:syncmembership' => MailmanSyncMembershipCommand::class,
+            'database:listmonk:fetch' => ListmonkFetchListsCommand::class,
+            'database:listmonk:syncmembership' => ListmonkSyncMembershipCommand::class,
             'database:members:delete-expired' => DeleteExpiredMembersCommand::class,
             'database:members:generate-keys' => GenerateAuthenticationKeysCommand::class,
             'database:prospective-members:delete-expired' => DeleteExpiredProspectiveMembersCommand::class,

@@ -16,4 +16,5 @@ enum ConfigNamespaces: string
     /* Database module */
     case DatabaseApi = 'database_api';
     case DatabaseMailman = 'database_mailman';
+    case DatabaseListmonk = 'database_listmonk';
 }
