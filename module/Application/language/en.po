@@ -96,6 +96,13 @@ msgid "A 404 error occurred"
 msgstr "A 404 error occurred"
 
 msgid ""
+"A Listmonk sync is currently in progress. It is now not possible to safely "
+"update the mailing list administration, please try again in a few minutes."
+msgstr ""
+"A Listmonk sync is currently in progress. It is now not possible to safely "
+"update the mailing list administration, please try again in a few minutes."
+
+msgid ""
 "A Mailman sync is currently in progress. It is now not possible to safely "
 "update the mailing list administration, please try again in a few minutes."
 msgstr ""
@@ -980,6 +987,12 @@ msgid "Last Update to Membership"
 msgstr "Last Update to Membership"
 
 #, php-format
+msgid "Last fetch of available listmonk lists was %s."
+msgstr "Last fetch of available listmonk lists was %s."
+
+msgid "Last fetch of listmonk lists"
+msgstr "Last fetch of listmonk lists"
+
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Last fetch of available mailman lists was %s."
 
@@ -1015,6 +1028,15 @@ msgstr "Mailing Lists"
 
 msgid "Mailing list deleted."
 msgstr "Mailing list deleted."
+
+msgid "Listmonk Mailing List"
+msgstr "Listmonk Mailing List"
+
+msgid "Listmonk lists not being fetched"
+msgstr "Listmonk lists not being fetched"
+
+msgid "Listmonk sync"
+msgstr "Listmonk sync"
 
 msgid "Mailman Mailing List"
 msgstr "Mailman Mailing List"
@@ -1116,6 +1138,9 @@ msgstr "Mutations"
 
 msgid "Name"
 msgstr "Name"
+
+msgid "Name (Listmonk)"
+msgstr "Name (Listmonk)"
 
 msgid "Name (Mailman)"
 msgstr "Name (Mailman)"
