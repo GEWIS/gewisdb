@@ -18,6 +18,7 @@
     <!-- Legacy code that cannot be easily changed, so ignore for now -->
     <rule ref="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps">
         <exclude-pattern>module/Database/src/Model/Decision.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Model/ListmonkMailingList.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Model/MailingList.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Model/SubDecision.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Model/Decision.php</exclude-pattern>
@@ -51,6 +52,8 @@
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredProspectiveMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/ListmonkFetchListsCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/ListmonkSyncMembershipCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailingListMaintenanceCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailmanFetchListsCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailmanSyncMembershipCommandFactory.php</exclude-pattern>
@@ -68,6 +71,7 @@
         <exclude-pattern>module/Database/src/Mapper/Factory/CheckoutSessionFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailingListMemberFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Mapper/Factory/ListmonkMailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MailmanMailingListFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Mapper/Factory/MemberFactory.php</exclude-pattern>
@@ -78,6 +82,7 @@
         <exclude-pattern>module/Database/src/Service/Factory/ApiFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/FrontPageFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MailingListFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Service/Factory/ListmonkFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MailmanFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MeetingFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Service/Factory/MemberFactory.php</exclude-pattern>
