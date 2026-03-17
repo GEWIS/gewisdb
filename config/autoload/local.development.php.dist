@@ -82,9 +82,18 @@ return [
      */
     'mailman_api' => [
         'endpoint' => getenv('MAILMAN_API_ENDPOINT'),
-        'version' => getenv('MAILMAN_API_VERSION'),
+        'version' => getenv('MAILMONK_API_VERSION'),
         'username' => getenv('MAILMAN_API_USERNAME'),
         'password' => getenv('MAILMAN_API_PASSWORD'),
+    ],
+
+    /**
+     * Listmonk REST API configuration.
+     */
+    'listmonk_api' => [
+        'endpoint' => getenv('LISTMONK_API_ENDPOINT'),
+        'username' => getenv('LISTMONK_API_USERNAME'),
+        'password' => getenv('LISTMONK_API_PASSWORD'),
     ],
 
     /**

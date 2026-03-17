@@ -9,11 +9,15 @@ use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\Factory\DeleteExpiredMembersCommandFactory;
 use Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory;
 use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
+use Database\Command\Factory\ListmonkFetchListsCommandFactory;
+use Database\Command\Factory\ListmonkSyncMembershipCommandFactory;
 use Database\Command\Factory\MailingListMaintenanceCommandFactory;
 use Database\Command\Factory\MailmanFetchListsCommandFactory;
 use Database\Command\Factory\MailmanSyncMembershipCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Command\MailingListMaintenanceCommand;
+use Database\Command\ListmonkFetchListsCommand;
+use Database\Command\ListmonkSyncMembershipCommand;
 use Database\Command\MailmanFetchListsCommand;
 use Database\Command\MailmanSyncMembershipCommand;
 use Database\Form\Abolish as AbolishForm;
@@ -78,6 +82,7 @@ use Database\Mapper\Factory\ActionLinkFactory as ActionLinkMapperFactory;
 use Database\Mapper\Factory\AuditFactory as AuditMapperFactory;
 use Database\Mapper\Factory\CheckoutSessionFactory as CheckoutSessionMapperFactory;
 use Database\Mapper\Factory\MailingListFactory as MailingListMapperFactory;
+use Database\Mapper\Factory\ListmonkMailingListFactory as ListmonkMailingListMapperFactory;
 use Database\Mapper\Factory\MailingListMemberFactory as MailingListMemberMapperFactory;
 use Database\Mapper\Factory\MailmanMailingListFactory as MailmanMailingListMapperFactory;
 use Database\Mapper\Factory\MeetingFactory as MeetingMapperFactory;
@@ -87,6 +92,7 @@ use Database\Mapper\Factory\OrganFactory as OrganMapperFactory;
 use Database\Mapper\Factory\ProspectiveMemberFactory as ProspectiveMemberMapperFactory;
 use Database\Mapper\Factory\SavedQueryFactory as SavedQueryMapperFactory;
 use Database\Mapper\MailingList as MailingListMapper;
+use Database\Mapper\ListmonkMailingList as ListmonkMailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Mapper\Meeting as MeetingMapper;
@@ -108,6 +114,7 @@ use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use Database\Service\Api as ApiService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
 use Database\Service\Factory\FrontPageFactory as FrontPageServiceFactory;
+use Database\Service\Factory\ListmonkFactory as ListmonkServiceFactory;
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
 use Database\Service\Factory\MailmanFactory as MailmanServiceFactory;
 use Database\Service\Factory\MeetingFactory as MeetingServiceFactory;
@@ -115,6 +122,7 @@ use Database\Service\Factory\MemberFactory as MemberServiceFactory;
 use Database\Service\Factory\QueryFactory as QueryServiceFactory;
 use Database\Service\Factory\StripeFactory as StripeServiceFactory;
 use Database\Service\FrontPage as FrontPageService;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Mailman as MailmanService;
 use Database\Service\Meeting as MeetingService;
@@ -170,13 +178,16 @@ class Module
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
                 DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
                 MailmanFetchListsCommand::class => MailmanFetchListsCommandFactory::class,
+                ListmonkFetchListsCommand::class => ListmonkFetchListsCommandFactory::class,
                 MailingListMaintenanceCommand::class => MailingListMaintenanceCommandFactory::class,
                 MailmanSyncMembershipCommand::class => MailmanSyncMembershipCommandFactory::class,
+                ListmonkSyncMembershipCommand::class => ListmonkSyncMembershipCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MailmanService::class => MailmanServiceFactory::class,
+                ListmonkService::class => ListmonkServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
                 MemberService::class => MemberServiceFactory::class,
                 StripeService::class => StripeServiceFactory::class,
@@ -562,6 +573,7 @@ class Module
                 ActionLinkMapper::class => ActionLinkMapperFactory::class,
                 AuditMapper::class => AuditMapperFactory::class,
                 MailmanMailingListMapper::class => MailmanMailingListMapperFactory::class,
+                ListmonkMailingListMapper::class => ListmonkMailingListMapperFactory::class,
                 MailingListMapper::class => MailingListMapperFactory::class,
                 MailingListMemberMapper::class => MailingListMemberMapperFactory::class,
                 MeetingMapper::class => MeetingMapperFactory::class,
