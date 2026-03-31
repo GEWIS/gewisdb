@@ -82,7 +82,7 @@ return [
      */
     'mailman_api' => [
         'endpoint' => getenv('MAILMAN_API_ENDPOINT'),
-        'version' => getenv('MAILMONK_API_VERSION'),
+        'version' => getenv('MAILMAN_API_VERSION'),
         'username' => getenv('MAILMAN_API_USERNAME'),
         'password' => getenv('MAILMAN_API_PASSWORD'),
     ],
