@@ -240,6 +240,7 @@ class MailingList
      *     defaultSub: bool,
      *     onForm: bool,
      *     mailmanList: ?string,
+     *     listmonkList: ?string,
      * }
      */
     public function toArray(): array
