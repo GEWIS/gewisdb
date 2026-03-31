@@ -74,6 +74,36 @@ services:
             - "8021:8000"
         networks:
             - network
+    listmonk:
+        image: listmonk/listmonk:latest
+        restart: unless-stopped
+        ports:
+            - "8022:9000"
+        depends_on:
+            - postgresql
+        command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+          # --config (file) param is set to empty so that listmonk only uses the env vars (below) for config.
+          # --install --idempotent ensures that DB installation happens only once on an empty DB, on the first ever start.
+        # --upgrade automatically runs any DB migrations when a new image is pulled.
+        hostname: listmonk
+        networks:
+            - network
+        environment:
+            LISTMONK_app__address: 0.0.0.0:9000
+            LISTMONK_db__user: ${POSTGRES_USER}
+            LISTMONK_db__password: ${POSTGRES_PASSWORD}
+            LISTMONK_db__database: ${POSTGRES_LISTMONK_DATABASE}
+            LISTMONK_db__host: postgresql
+            LISTMONK_db__port: 5432
+            LISTMONK_db__ssl_mode: disable
+            LISTMONK_db__max_open: 25
+            LISTMONK_db__max_idle: 25
+            LISTMONK_db__max_lifetime: 300s
+            TZ: Etc/UTC
+            LISTMONK_ADMIN_USER: ${DEMO_CREDENTIALS_USERNAME}
+            LISTMONK_ADMIN_PASSWORD: ${DEMO_CREDENTIALS_PASSWORD}
+        volumes:
+            - listmonk-uploads:/listmonk/uploads:rw
     nginx:
         build: docker/nginx
         depends_on:
@@ -107,3 +137,4 @@ volumes:
     mailman-web:
     mailman-core:
     mailman-static:
+    listmonk-uploads:
