@@ -96,6 +96,14 @@ msgid "A 404 error occurred"
 msgstr "Er is een 404-fout opgetreden"
 
 msgid ""
+"A Listmonk sync is currently in progress. It is now not possible to safely "
+"update the mailing list administration, please try again in a few minutes."
+msgstr ""
+"Een Listmonk synchronisatie vindt op dit moment plaats; het is op dit moment "
+"niet mogelijk om wijzigingen uit te voeren. Probeer het over een paar "
+"minuten opnieuw."
+
+msgid ""
 "A Mailman sync is currently in progress. It is now not possible to safely "
 "update the mailing list administration, please try again in a few minutes."
 msgstr ""
@@ -1025,6 +1033,15 @@ msgstr "Mailinglijsten"
 msgid "Mailing list deleted."
 msgstr "Mailinglijst verwijderd."
 
+msgid "Listmonk Mailing List"
+msgstr "Listmonk-maillijst"
+
+msgid "Listmonk lists not being fetched"
+msgstr "Listmonk lijsten worden niet opgehaald"
+
+msgid "Listmonk sync"
+msgstr "Listmonk-synchronisatie"
+
 msgid "Mailman Mailing List"
 msgstr "Mailman-maillijst"
 
@@ -1125,6 +1142,9 @@ msgstr "Mutaties"
 
 msgid "Name"
 msgstr "Naam"
+
+msgid "Name (Listmonk)"
+msgstr "Naam (Listmonk)"
 
 msgid "Name (Mailman)"
 msgstr "Naam (Mailman)"

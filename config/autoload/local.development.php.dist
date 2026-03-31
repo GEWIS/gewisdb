@@ -88,6 +88,15 @@ return [
     ],
 
     /**
+     * Listmonk REST API configuration.
+     */
+    'listmonk_api' => [
+        'endpoint' => getenv('LISTMONK_API_ENDPOINT'),
+        'username' => getenv('LISTMONK_API_USERNAME'),
+        'password' => getenv('LISTMONK_API_PASSWORD'),
+    ],
+
+    /**
      * LDAP settings for login to database frontend
      */
     'ldap' => [

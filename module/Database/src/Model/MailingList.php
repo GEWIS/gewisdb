@@ -66,6 +66,19 @@ class MailingList
     private ?MailmanMailingList $mailmanList;
 
     /**
+     * The corresponding listmonk mailing list
+     */
+    #[OneToOne(
+        targetEntity: ListmonkMailingList::class,
+        inversedBy: 'mailingList',
+    )]
+    #[JoinColumn(
+        name: 'listmonkId',
+        referencedColumnName: 'id',
+    )]
+    private ?ListmonkMailingList $listmonkList;
+
+    /**
      * Mailing list members.
      *
      * @var Collection<array-key, MailingListMember>
@@ -186,6 +199,30 @@ class MailingList
     }
 
     /**
+     * Get the matching listmonk list, or null if none
+     */
+    public function getListmonkList(): ?ListmonkMailingList
+    {
+        return $this->listmonkList;
+    }
+
+    /**
+     * Check if this has a listmonk mailing list
+     */
+    public function hasListmonkList(): bool
+    {
+        return null !== $this->listmonkList;
+    }
+
+    /**
+     * Set the corresponding listmonk list
+     */
+    public function setListmonkList(?ListmonkMailingList $listmonkList): void
+    {
+        $this->listmonkList = $listmonkList;
+    }
+
+    /**
      * Get subscribed members.
      *
      * @return Collection<array-key, MailingListMember>
@@ -203,6 +240,7 @@ class MailingList
      *     defaultSub: bool,
      *     onForm: bool,
      *     mailmanList: ?string,
+     *     listmonkList: ?string,
      * }
      */
     public function toArray(): array
@@ -214,6 +252,7 @@ class MailingList
             'defaultSub' => $this->getDefaultSub(),
             'onForm' => $this->getOnForm(),
             'mailmanList' => $this->getMailmanList()?->getMailmanId(),
+            'listmonkList' => $this->getListmonkList()?->getListmonkId(),
         ];
     }
 }
