@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Form;
 
 use Database\Model\MailmanMailingList as MailmanMailingListModel;
+use Database\Model\ListmonkMailingList as ListmonkMailingListModel;
 use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Select;
@@ -77,6 +78,16 @@ class MailingList extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name' => 'listmonkList',
+            'type' => Select::class,
+            'options' => [
+                'label' => $this->translator->translate('Listmonk Mailing List'),
+                'empty_option' => $this->translator->translate('Choose a mailing list'),
+                'value_options' => [],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
@@ -101,6 +112,24 @@ class MailingList extends Form implements InputFilterProviderInterface
         }
 
         $this->get('mailmanList')->setValueOptions($options);
+    }
+
+    /**
+     * @param ListmonkMailingListModel[] $listmonkLists
+     */
+    public function setListmonkLists(array $listmonkLists): void
+    {
+        $options = [];
+
+        foreach ($listmonkLists as $listmonkList) {
+            $options[$listmonkList->getListmonkId()] = sprintf(
+                '%s (%s)',
+                $listmonkList->getName(),
+                $listmonkList->getListmonkId(),
+            );
+        }
+
+        $this->get('listmonkList')->setValueOptions($options);
     }
 
     /**
