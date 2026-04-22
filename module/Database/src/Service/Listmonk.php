@@ -24,10 +24,13 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_map;
+use function http_build_query;
 use function in_array;
+use function json_encode;
 use function json_decode;
 use function json_last_error_msg;
 use function json_validate;
+use function strlen;
 use function sprintf;
 
 class Listmonk
@@ -60,6 +63,21 @@ class Listmonk
         ?array $data = null,
     ): array {
         $client = new Client();
+        $url = $this->listmonkConfig['endpoint'] . $uri;
+
+        $payload = null;
+        if (null !== $data) {
+            $payload = Request::METHOD_GET === $method ? $data : json_encode($data);
+        }
+
+        $payloadDebug = is_string($payload) ? $payload : json_encode($payload);
+
+        error_log(sprintf(
+            '[Listmonk] sending %s request to %s%s',
+            $method,
+            $url,
+            null === $payload ? '' : sprintf(' with payload: %s', $payloadDebug),
+        ));
 
         $client->setAdapter(Curl::class)
             ->setAuth($this->listmonkConfig['username'], $this->listmonkConfig['password'])
@@ -67,7 +85,7 @@ class Listmonk
             ->setOptions([
                 'timeout' => 600,
             ])
-            ->setUri($this->listmonkConfig['endpoint'] . $uri);
+            ->setUri($url);
 
         // Data encoding is automatically set to `application/x-www-form-urlencoded` for "POST"-like requests.
         switch ($method) {
@@ -97,6 +115,15 @@ class Listmonk
         } catch (RuntimeException $e) {
             throw new RuntimeException('Failed to send request: ' . $e->getMessage());
         }
+
+        error_log(sprintf(
+            '[Listmonk] response for %s %s: status=%d, body_length=%d, body=%s',
+            $method,
+            $url,
+            $response->getStatusCode(),
+            strlen($response->getBody()),
+            $response->getBody()
+        ));
 
         // We want to try to parse everything that returned a 2xx status code.
         if (!$response->isSuccess()) {
@@ -181,7 +208,7 @@ class Listmonk
     ): void {
         $this->assertListmonkHealthy();
 
-        $this->acquireSyncLock();
+//        $this->acquireSyncLock();
 
         $lists = $this->mailingListMapper->findAll();
 
@@ -192,7 +219,7 @@ class Listmonk
 
         $this->configService->setConfig(ConfigNamespaces::DatabaseListmonk, 'lastSync', new DateTime());
 
-        $this->releaseSyncLock();
+//        $this->releaseSyncLock();
     }
 
     /**
@@ -317,7 +344,7 @@ class Listmonk
     /**
      * @return array<array-key,array{
      *     name: string,
-     *     uuid: string,
+     *     id: string,
      * }>
      */
     private function getAllListsFromListmonk(): array
@@ -330,7 +357,7 @@ class Listmonk
         ) {
             return array_map(
                 static fn ($list) => [
-                    'uuid' => $list['uuid'],
+                    'id' => (string) $list['id'],
                     'name' => $list['name'],
                 ],
                 $lists['data']['results'],
@@ -348,14 +375,14 @@ class Listmonk
         $lists = $this->getAllListsFromListmonk();
 
         foreach ($lists as $list) {
-            $l = $this->listmonkMailingListMapper->find($list['uuid']);
+            $l = $this->listmonkMailingListMapper->find($list['id']);
 
             if (null === $l) {
                 $l = new ListmonkMailingListModel();
             }
 
             $l->setName($list['name']);
-            $l->setListmonkId($list['uuid']);
+            $l->setListmonkId($list['id']);
             $l->setLastSeen();
 
             $this->listmonkMailingListMapper->persist($l);
@@ -424,9 +451,12 @@ class Listmonk
             'email' => $mailingListMember->getEmail(),
         ];
 
-        $existingSubscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
-            'query' => sprintf("email='%s'", $subscriberData['email']),
-        ]);
+        $existingSubscribers = $this->performListmonkRequest(
+            'subscribers?' . http_build_query([
+                'query' => sprintf("email='%s'", $subscriberData['email']),
+            ]),
+            Request::METHOD_GET,
+        );
 
         $subscriberId = null;
         if (isset($existingSubscribers['data']['results'][0]['id'])) {
@@ -438,8 +468,8 @@ class Listmonk
             $newSubscriber = [
                 'email' => $mailingListMember->getEmail(),
                 'name' => $member->getFullName(),
-                'status' => self::LM_STATUS_CONFIRMED,
-                'list_uuids' => [$listId],
+                'preconfirm_subscriptions' => true,
+                'lists' => [(int) $listId],
             ];
 
             $output->writeln(
@@ -476,11 +506,13 @@ class Listmonk
             }
 
             $response = $this->performListmonkRequest(
-                uri: sprintf('subscribers/lists/%s', $listId),
+                uri: 'subscribers/lists',
                 method: Request::METHOD_PUT,
                 data: [
                     'action' => 'add',
-                    'query' => sprintf("id=%d", $subscriberId),
+                    'ids' => [(int) $subscriberId],
+                    'target_list_ids' => [(int) $listId],
+                    'status' => 'confirmed'
                 ],
             );
         }
@@ -529,11 +561,12 @@ class Listmonk
 
             // Remove subscriber from the specific list
             $this->performListmonkRequest(
-                uri: sprintf('subscribers/lists/%s', $listId),
+                uri: 'subscribers/lists',
                 method: Request::METHOD_PUT,
                 data: [
                     'action' => 'remove',
-                    'query' => sprintf("id=%d", $subscriberId),
+                    'ids' => [$subscriberId],
+                    'target_list_ids' => [(int) $listId],
                 ],
             );
         }
@@ -579,9 +612,12 @@ class Listmonk
         );
 
         // Check if subscriber is on the list by getting their details
-        $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
-            'query' => sprintf("email='%s' AND lists.uuid='%s'", $mailingListMember->getEmail(), $listId),
-        ]);
+        $subscribers = $this->performListmonkRequest(
+            'subscribers?' . http_build_query([
+                'query' => sprintf("email='%s'", $mailingListMember->getEmail()),
+                'list_id' => $listId,
+            ])
+        );
 
         if (isset($subscribers['data']['results'][0])) {
             $mailingListMember->setLastSyncOn();
@@ -655,7 +691,8 @@ class Listmonk
                             method: Request::METHOD_PUT,
                             data: [
                                 'action' => 'remove',
-                                'query' => sprintf("id=%d", $subscriber['id']),
+                                'ids' => [$subscriber['id']],
+                                'target_list_ids' => [(int) $listId],
                             ],
                         );
                     }
@@ -696,10 +733,13 @@ class Listmonk
      */
     private function getListmonkListSubscriberEmails(string $listId): array
     {
-        $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
-            'list_id' => $listId,
-            'per_page' => 'all',
-        ]);
+        $subscribers = $this->performListmonkRequest(
+            'subscribers?' . http_build_query([
+                'list_id' => $listId,
+                'per_page' => 'all',
+            ]),
+            Request::METHOD_GET,
+        );
 
         if (isset($subscribers['data']['results'])) {
             return array_map(

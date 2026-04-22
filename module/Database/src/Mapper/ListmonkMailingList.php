@@ -78,7 +78,7 @@ class ListmonkMailingList
     }
 
     /**
-     * Find a list by listmonk ID (UUID).
+     * Find a list by listmonk ID.
      */
     public function find(string $listmonkId): ?ListmonkMailingListModel
     {

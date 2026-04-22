@@ -127,7 +127,7 @@ class MailingListMember
     {
         $this->mailingList = $mailingList;
 
-        if ($mailingList->hasMailmanList()) {
+        if ($mailingList->hasMailmanList() || $mailingList->hasListmonkList()) {
             return;
         }
 
