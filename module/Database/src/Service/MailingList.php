@@ -10,6 +10,7 @@ use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Model\MailingList as MailingListModel;
 use Database\Service\Mailman as MailmanService;
+use Database\Service\Listmonk as ListmonkService;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -24,6 +25,7 @@ class MailingList
         private readonly MailingListMapper $mailingListMapper,
         private readonly MailingListMemberMapper $mailingListMemberMapper,
         private readonly MailmanService $mailmanService,
+        private readonly ListmonkService $listmonkService,
     ) {
     }
 
@@ -66,6 +68,7 @@ class MailingList
         $list->setOnForm(boolval($data['onForm']));
         $list->setDefaultSub(boolval($data['defaultSub']));
         $list->setMailmanList($this->getMailmanService()->getMailingList($data['mailmanList']));
+        $list->setMailmanList($this->getListmonkService()->getMailingList($data['listmonkList']));
 
         $this->getListMapper()->persist($list);
 
@@ -130,6 +133,11 @@ class MailingList
     public function getMailmanService(): MailmanService
     {
         return $this->mailmanService;
+    }
+
+    public function getListmonkService(): ListmonkService
+    {
+        return $this->listmonkService;
     }
 
     /**

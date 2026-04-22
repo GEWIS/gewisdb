@@ -98,13 +98,19 @@ class SettingsController extends AbstractActionController
 
         $form = $this->mailingListService->getListForm();
 
-        // Provide mailman lists to the creation form, ideally filter out previously used lists
+        // Provide mailman/listmonk lists to the creation form, ideally filter out previously used lists
         // except for if it used for this list (saving with the same value is allowed)
-        $lists = array_filter(
+        $mailmanLists = array_filter(
             $this->mailingListService->getMailmanService()->getMailingLists(),
             static fn ($list) => !$list->isManaged() || $list->getMailingList()->getName() === $listName,
         );
-        $form->setMailmanLists($lists);
+        $listmonkLists = array_filter(
+            $this->mailingListService->getListmonkService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged() || $list->getMailingList()->getName() === $listName,
+        );
+
+        $form->setMailmanLists($mailmanLists);
+        $form->setListmonkLists($listmonkLists);
 
         /** @var Request $request */
         $request = $this->getRequest();
