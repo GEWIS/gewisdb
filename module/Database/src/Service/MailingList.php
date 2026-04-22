@@ -68,7 +68,7 @@ class MailingList
         $list->setOnForm(boolval($data['onForm']));
         $list->setDefaultSub(boolval($data['defaultSub']));
         $list->setMailmanList($this->getMailmanService()->getMailingList($data['mailmanList']));
-        $list->setMailmanList($this->getListmonkService()->getMailingList($data['listmonkList']));
+        $list->setListmonkList($this->getListmonkService()->getMailingList($data['listmonkList']));
 
         $this->getListMapper()->persist($list);
 

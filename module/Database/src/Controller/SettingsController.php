@@ -59,12 +59,18 @@ class SettingsController extends AbstractActionController
     {
         $form = $this->mailingListService->getListForm();
 
-        // Each mailman list may be used for at most one db list, don't show previously used
-        $lists = array_filter(
+        // Each mailman/listmonk list may be used for at most one db list, don't show previously used
+        $mailmanLists = array_filter(
             $this->mailingListService->getMailmanService()->getMailingLists(),
             static fn ($list) => !$list->isManaged(),
         );
-        $form->setMailmanLists($lists);
+        $listmonkLists = array_filter(
+            $this->mailingListService->getListmonkService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged(),
+        );
+
+        $form->setMailmanLists($mailmanLists);
+        $form->setListmonkLists($listmonkLists);
 
         /** @var Request $request */
         $request = $this->getRequest();

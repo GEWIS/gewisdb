@@ -66,7 +66,7 @@ class ListmonkMailingList
     }
 
     /**
-     * Set the listmonk ID (UUID)
+     * Set the listmonk ID
      * It is only sensible if this happens during a sync
      */
     public function setListmonkId(string $listmonkId): void
