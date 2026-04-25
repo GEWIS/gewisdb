@@ -8,6 +8,7 @@ use Database\Command\DeleteExpiredMembersCommand;
 use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Command\MailingListMaintenanceCommand;
+use Database\Command\MailingListSyncLocalMembershipCommand;
 use Database\Command\ListmonkFetchListsCommand;
 use Database\Command\ListmonkSyncMembershipCommand;
 use Database\Command\MailmanFetchListsCommand;
@@ -791,6 +792,7 @@ return [
     'laminas-cli' => [
         'commands' => [
             'database:mailinglist:maintenance' => MailingListMaintenanceCommand::class,
+            'database:mailinglist:syncmembership:local' => MailingListSyncLocalMembershipCommand::class,
             'database:mailman:fetch' => MailmanFetchListsCommand::class,
             'database:mailman:syncmembership' => MailmanSyncMembershipCommand::class,
             'database:listmonk:fetch' => ListmonkFetchListsCommand::class,

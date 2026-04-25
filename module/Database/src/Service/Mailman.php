@@ -420,15 +420,6 @@ class Mailman
         bool $dryRun,
         bool $sendWelcomeEmail,
     ): void {
-        // If there is no associated mailman list, assume processed
-        if (!$mailingListMember->getMailingList()->hasMailmanList()) {
-            $mailingListMember->setLastSyncSuccess(true);
-            $mailingListMember->setToBeCreated(false);
-            $this->mailingListMemberMapper->persist($mailingListMember);
-
-            return;
-        }
-
         $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 

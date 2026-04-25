@@ -128,6 +128,28 @@ class MailingListMember
     }
 
     /**
+     * Get memberships with pending sync flags for lists without external backends.
+     *
+     * @return MailingListMemberModel[]
+     */
+    public function findAllPendingLocalOnly(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('mlm')
+            ->from(MailingListMemberModel::class, 'mlm')
+            ->innerJoin('mlm.mailingList', 'ml')
+            ->where('ml.mailmanList IS NULL')
+            ->andWhere('ml.listmonkList IS NULL')
+            ->andWhere('mlm.toBeCreated = True OR mlm.toBeDeleted = True');
+
+        /** @var MailingListMemberModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    /**
      * @return MailingListMemberModel[]
      */
     public function findAll(): array

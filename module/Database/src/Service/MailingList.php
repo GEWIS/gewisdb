@@ -177,4 +177,59 @@ class MailingList
             $this->getMailingListMemberMapper()->persist($expiredMembership);
         }
     }
+
+    /**
+     * Process pending local-only mailing list memberships.
+     *
+     * For lists without a Mailman or Listmonk binding, external sync is impossible, so
+     * pending creations are marked successful and pending deletions are removed.
+     */
+    public function syncLocalOnlyMembership(
+        OutputInterface $output = new NullOutput(),
+        bool $dryRun = false,
+    ): void {
+        $output->writeln('Processing pending memberships for local-only mailing lists:');
+
+        $memberships = $this->getMailingListMemberMapper()->findAllPendingLocalOnly();
+
+        foreach ($memberships as $mailingListMember) {
+            $listName = $mailingListMember->getMailingList()->getName();
+            $email = $mailingListMember->getEmail();
+
+            if ($mailingListMember->isToBeDeleted()) {
+                $output->writeln(
+                    sprintf(
+                        '-> Removing local-only mailing list membership for %s on %s',
+                        $email,
+                        $listName,
+                    ),
+                    OutputInterface::VERBOSITY_VERBOSE,
+                );
+
+                if (!$dryRun) {
+                    $this->getMailingListMemberMapper()->remove($mailingListMember);
+                }
+
+            }
+
+            if ($mailingListMember->isToBeCreated()) {
+                $output->writeln(
+                    sprintf(
+                        '-> Clearing pending creation for local-only mailing list membership %s on %s',
+                        $email,
+                        $listName,
+                    ),
+                    OutputInterface::VERBOSITY_VERBOSE,
+                );
+
+                if (!$dryRun) {
+                    $mailingListMember->setToBeCreated(false);
+                }
+            }
+
+            $mailingListMember->setLastSyncOn();
+            $mailingListMember->setLastSyncSuccess(true);
+            $this->getMailingListMemberMapper()->persist($mailingListMember);
+        }
+    }
 }
