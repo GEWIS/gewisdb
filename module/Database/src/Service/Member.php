@@ -921,6 +921,7 @@ class Member
         MemberListsForm $form,
     ): ?MemberModel {
         // Check if we are performing a sync or not.
+        // TODO!!
         if ($this->mailmanService->isSyncLocked()) {
             return null;
         }

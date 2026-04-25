@@ -12,10 +12,12 @@ use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
 use Database\Command\Factory\ListmonkFetchListsCommandFactory;
 use Database\Command\Factory\ListmonkSyncMembershipCommandFactory;
 use Database\Command\Factory\MailingListMaintenanceCommandFactory;
+use Database\Command\Factory\MailingListSyncLocalMembershipCommandFactory;
 use Database\Command\Factory\MailmanFetchListsCommandFactory;
 use Database\Command\Factory\MailmanSyncMembershipCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Command\MailingListMaintenanceCommand;
+use Database\Command\MailingListSyncLocalMembershipCommand;
 use Database\Command\ListmonkFetchListsCommand;
 use Database\Command\ListmonkSyncMembershipCommand;
 use Database\Command\MailmanFetchListsCommand;
@@ -180,6 +182,7 @@ class Module
                 MailmanFetchListsCommand::class => MailmanFetchListsCommandFactory::class,
                 ListmonkFetchListsCommand::class => ListmonkFetchListsCommandFactory::class,
                 MailingListMaintenanceCommand::class => MailingListMaintenanceCommandFactory::class,
+                MailingListSyncLocalMembershipCommand::class => MailingListSyncLocalMembershipCommandFactory::class,
                 MailmanSyncMembershipCommand::class => MailmanSyncMembershipCommandFactory::class,
                 ListmonkSyncMembershipCommand::class => ListmonkSyncMembershipCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
