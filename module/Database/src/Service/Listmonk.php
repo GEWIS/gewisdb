@@ -208,18 +208,21 @@ class Listmonk
     ): void {
         $this->assertListmonkHealthy();
 
-//        $this->acquireSyncLock();
+        $this->acquireSyncLock();
 
         $lists = $this->mailingListMapper->findAll();
 
         foreach ($lists as $list) {
+            if (!$list->hasListmonkList()) {
+                continue;
+            }
             $this->acquireSyncLock(renew: true);
             $this->syncMembershipSingle($list, $output, $dryRun);
         }
 
         $this->configService->setConfig(ConfigNamespaces::DatabaseListmonk, 'lastSync', new DateTime());
 
-//        $this->releaseSyncLock();
+        $this->releaseSyncLock();
     }
 
     /**
@@ -243,14 +246,8 @@ class Listmonk
 
         $verifyTime = (new DateTime())->sub(new DateInterval('P1D'));
 
-        $isListmonkList = $dbList->hasListmonkList();
-        if ($isListmonkList) {
-            $listId = $dbList->getListmonkList()->getListmonkId();
-            $knownMembers = $this->getListmonkListSubscriberEmails($listId);
-        } else {
-            // This is to satisfy psalm, observe that it is not needed
-            $knownMembers = [];
-        }
+        $listId = $dbList->getListmonkList()->getListmonkId();
+        $knownMembers = $this->getListmonkListSubscriberEmails($listId);
 
         // Phase 1: Sync all pending changes from DB side
         // The order matters; we first process deletions, because we can have both be true
@@ -268,7 +265,7 @@ class Listmonk
                     output: $output,
                     dryRun: $dryRun,
                 );
-            } elseif ($isListmonkList && $mailingListMember->getLastSyncOn() < $verifyTime) {
+            } elseif ($mailingListMember->getLastSyncOn() < $verifyTime) {
                 $this->verifyMemberOnMailingList(
                     mailingListMember: $mailingListMember,
                     output: $output,
@@ -276,11 +273,6 @@ class Listmonk
                     knownMembers: $knownMembers,
                 );
             }
-        }
-
-        // The rest only applies to mailing lists that have a listmonk list
-        if (!$dbList->hasListmonkList()) {
-            return;
         }
 
         // Phase 2: once per 24 hours
@@ -434,15 +426,6 @@ class Listmonk
         OutputInterface $output,
         bool $dryRun,
     ): void {
-        // If there is no associated listmonk list, assume processed
-        if (!$mailingListMember->getMailingList()->hasListmonkList()) {
-            $mailingListMember->setLastSyncSuccess(true);
-            $mailingListMember->setToBeCreated(false);
-            $this->mailingListMemberMapper->persist($mailingListMember);
-
-            return;
-        }
-
         $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getListmonkList()->getListmonkId();
 
