@@ -8,6 +8,7 @@ use Application\Model\Enums\AddressTypes;
 use Checker\Service\Checker as CheckerService;
 use Database\Model\Member as MemberModel;
 use Database\Service\Mailman as MailmanService;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
 use DateTime;
@@ -35,6 +36,7 @@ class MemberController extends AbstractActionController
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
         private readonly MailmanService $mailmanService,
+        private readonly ListmonkService $listmonkService,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
         private readonly string $remoteAddress,
@@ -431,10 +433,10 @@ class MemberController extends AbstractActionController
             return $this->memberIsDeleted($member);
         }
 
-        // If a Mailman sync is in progress, we cannot safely allow edits to mail list memberships.
-        if ($this->mailmanService->isSyncLocked()) {
+        // If a Mailman/listmonk sync is in progress, we cannot safely allow edits to mail list memberships.
+        if ($this->mailmanService->isSyncLocked() || $this->listmonkService->isSyncLocked()) {
             $viewModel = new ViewModel(['member' => $member]);
-            $viewModel->setTemplate('database/member/mailman.phtml');
+            $viewModel->setTemplate('database/member/listmonk.phtml');
 
             return $viewModel;
         }
