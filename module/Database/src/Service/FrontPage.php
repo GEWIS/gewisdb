@@ -6,6 +6,7 @@ namespace Database\Service;
 
 use Database\Service\Api as ApiService;
 use Database\Service\Mailman as MailmanService;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\Member as MemberService;
 use DateTime;
 
@@ -16,6 +17,7 @@ class FrontPage
     public function __construct(
         private readonly ApiService $apiService,
         private readonly MailmanService $mailmanService,
+        private readonly ListmonkService $listmonkService,
         private readonly MemberService $memberService,
     ) {
     }
@@ -40,6 +42,13 @@ class FrontPage
      *      creations: int,
      *      deletions: int,
      *   }
+     *   listmonkLastFetch: ?DateTime,
+     *   listmonkLastFetchOverdue: bool,
+     *   listmonkLastSync: ?DateTime,
+     *   listmonkChangesPending: array{
+     *      creations: int,
+     *      deletions: int,
+     *   }
      * }
      */
     public function getFrontpageData(): array
@@ -48,6 +57,7 @@ class FrontPage
             $this->memberService->getFrontpageData(),
             $this->apiService->getFrontpageData(),
             $this->mailmanService->getFrontpageData(),
+            $this->listmonkService->getFrontpageData(),
             [
                 'totalCount' => $this->getNotificationCount(),
             ],
@@ -62,6 +72,7 @@ class FrontPage
         return $this->memberService->getPendingUpdateCount() +
         (int) $this->apiService->isSyncPaused() +
         $this->memberService->getPaidProspectivesCount() +
-        (int) $this->mailmanService->isLastFetchOverdue();
+        (int) $this->mailmanService->isLastFetchOverdue() +
+        (int) $this->listmonkService->isLastFetchOverdue();
     }
 }

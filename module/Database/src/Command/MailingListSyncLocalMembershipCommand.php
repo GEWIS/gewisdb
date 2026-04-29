@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'database:mailinglist:syncmembership:local',
+    name: 'database:local:syncmembership',
     description: 'Process pending memberships for lists without Mailman or Listmonk bindings.',
 )]
 class MailingListSyncLocalMembershipCommand extends AbstractParamAwareCommand
