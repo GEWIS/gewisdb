@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 /**
  * Mailing List model (partial)
  *
- * ReportDB does not know about mailman and doesn't need to know.
+ * ReportDB does not know about mailman/listmonk and doesn't need to know.
  */
 #[Entity]
 class MailingList
