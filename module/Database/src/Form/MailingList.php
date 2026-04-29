@@ -133,6 +133,33 @@ class MailingList extends Form implements InputFilterProviderInterface
     }
 
     /**
+     * Validate that mailmanList and listmonkList cannot both be set.
+     */
+    public function isValid(): bool
+    {
+        if (!parent::isValid()) {
+            return false;
+        }
+
+        $data = $this->getData();
+        $mailmanList = $data['mailmanList'] ?? null;
+        $listmonkList = $data['listmonkList'] ?? null;
+
+        if (!empty($mailmanList) && !empty($listmonkList)) {
+            $errorMessage = $this->translator->translate(
+                'Mailman and Listmonk mailing lists cannot both be set at the same time',
+            );
+            $this->setMessages([
+                'mailmanList' => ['cannotBothBeSet' => $errorMessage],
+                'listmonkList' => ['cannotBothBeSet' => $errorMessage],
+            ]);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Specification of input filter.
      */
     #[Override]
@@ -190,7 +217,6 @@ class MailingList extends Form implements InputFilterProviderInterface
             ],
             'mailmanList' => [
                 'required' => false,
-                'disabled' => true,
             ],
             'listmonkList' => [
                 'required' => false,

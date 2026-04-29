@@ -116,6 +116,10 @@ if ('add' === $action) {
             </div>
         </div>
 
+        <?php
+        $mailmanListValue = $form->get('mailmanList')->getValue();
+        if (!empty($mailmanListValue)):
+        ?>
         <div class="form-group">
             <?php
             $element = $form->get('mailmanList');
@@ -127,6 +131,7 @@ if ('add' === $action) {
                 <?= $this->formElementErrors($element) ?>
             </div>
         </div>
+        <?php endif; ?>
 
         <div class="form-group">
             <?php
@@ -139,6 +144,7 @@ if ('add' === $action) {
                 <?= $this->formElementErrors($element) ?>
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
