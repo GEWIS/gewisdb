@@ -461,13 +461,6 @@ class Mailman
         OutputInterface $output,
         bool $dryRun,
     ): void {
-        // If there is no associated mailman list, assume processed
-        if (!$mailingListMember->getMailingList()->hasMailmanList()) {
-            $this->mailingListMemberMapper->remove($mailingListMember);
-
-            return;
-        }
-
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
         $data = [

@@ -792,7 +792,7 @@ return [
     'laminas-cli' => [
         'commands' => [
             'database:mailinglist:maintenance' => MailingListMaintenanceCommand::class,
-            'database:mailinglist:syncmembership:local' => MailingListSyncLocalMembershipCommand::class,
+            'database:local:syncmembership' => MailingListSyncLocalMembershipCommand::class,
             'database:mailman:fetch' => MailmanFetchListsCommand::class,
             'database:mailman:syncmembership' => MailmanSyncMembershipCommand::class,
             'database:listmonk:fetch' => ListmonkFetchListsCommand::class,

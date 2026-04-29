@@ -224,12 +224,16 @@ class MailingList
 
                 if (!$dryRun) {
                     $mailingListMember->setToBeCreated(false);
+                    $this->getMailingListMemberMapper()->persist($mailingListMember);
                 }
+            }
+
+            if ($dryRun) {
+                return;
             }
 
             $mailingListMember->setLastSyncOn();
             $mailingListMember->setLastSyncSuccess(true);
-            $this->getMailingListMemberMapper()->persist($mailingListMember);
         }
     }
 
