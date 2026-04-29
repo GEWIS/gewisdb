@@ -232,4 +232,22 @@ class MailingList
             $this->getMailingListMemberMapper()->persist($mailingListMember);
         }
     }
+
+    /**
+     * @return array{
+     *     mailingListChangesPending: array{
+     *       creations: int,
+     *       deletions: int,
+     *     },
+     * }
+     */
+    public function getFrontpageData(): array
+    {
+        return [
+            'mailingListChangesPending' => [
+                'creations' => $this->getMailingListMemberMapper()->countPendingCreation(),
+                'deletions' => $this->getMailingListMemberMapper()->countPendingDeletion(),
+            ],
+        ];
+    }
 }
