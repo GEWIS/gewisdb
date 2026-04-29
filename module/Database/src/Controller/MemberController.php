@@ -436,7 +436,7 @@ class MemberController extends AbstractActionController
         // If a Mailman/listmonk sync is in progress, we cannot safely allow edits to mail list memberships.
         if ($this->mailmanService->isSyncLocked() || $this->listmonkService->isSyncLocked()) {
             $viewModel = new ViewModel(['member' => $member]);
-            $viewModel->setTemplate('database/member/listmonk.phtml');
+            $viewModel->setTemplate('database/member/mailinglist-sync-status.phtml');
 
             return $viewModel;
         }
