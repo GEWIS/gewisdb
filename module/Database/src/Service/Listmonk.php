@@ -72,13 +72,6 @@ class Listmonk
 
         $payloadDebug = is_string($payload) ? $payload : json_encode($payload);
 
-        error_log(sprintf(
-            '[Listmonk] sending %s request to %s%s',
-            $method,
-            $url,
-            null === $payload ? '' : sprintf(' with payload: %s', $payloadDebug),
-        ));
-
         $client->setAdapter(Curl::class)
             ->setAuth($this->listmonkConfig['username'], $this->listmonkConfig['password'])
             ->setMethod($method)
@@ -115,15 +108,6 @@ class Listmonk
         } catch (RuntimeException $e) {
             throw new RuntimeException('Failed to send request: ' . $e->getMessage());
         }
-
-        error_log(sprintf(
-            '[Listmonk] response for %s %s: status=%d, body_length=%d, body=%s',
-            $method,
-            $url,
-            $response->getStatusCode(),
-            strlen($response->getBody()),
-            $response->getBody()
-        ));
 
         // We want to try to parse everything that returned a 2xx status code.
         if (!$response->isSuccess()) {
@@ -430,7 +414,6 @@ class Listmonk
             'subscribers?' . http_build_query([
                 'query' => sprintf("email='%s'", $subscriberData['email']),
             ]),
-            Request::METHOD_GET,
         );
 
         $subscriberId = null;
@@ -460,7 +443,7 @@ class Listmonk
                 return;
             }
 
-            $response = $this->performListmonkRequest(
+            $this->performListmonkRequest(
                 uri: 'subscribers',
                 method: Request::METHOD_POST,
                 data: $newSubscriber,
@@ -480,14 +463,14 @@ class Listmonk
                 return;
             }
 
-            $response = $this->performListmonkRequest(
+            $this->performListmonkRequest(
                 uri: 'subscribers/lists',
                 method: Request::METHOD_PUT,
                 data: [
                     'action' => 'add',
                     'ids' => [(int) $subscriberId],
                     'target_list_ids' => [(int) $listId],
-                    'status' => 'confirmed'
+                    'status' => 'confirmed' // By passes double confirm
                 ],
             );
         }
@@ -503,13 +486,6 @@ class Listmonk
         OutputInterface $output,
         bool $dryRun,
     ): void {
-        // If there is no associated listmonk list, assume processed
-        if (!$mailingListMember->getMailingList()->hasListmonkList()) {
-            $this->mailingListMemberMapper->remove($mailingListMember);
-
-            return;
-        }
-
         $listId = $mailingListMember->getMailingList()->getListmonkList()->getListmonkId();
         $email = $mailingListMember->getEmail();
 
