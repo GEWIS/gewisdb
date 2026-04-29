@@ -50,8 +50,7 @@ class SettingsController extends AbstractActionController
     {
         return new ViewModel([
             'lists' => $this->mailingListService->getAllLists(),
-            'mailmanLists' => $this->mailingListService->getMailmanService()->getMailingLists(),
-            'mailmanLastFetch' => $this->mailingListService->getMailmanService()->getLastFetchTime(),
+            'listmonkLastFetch' => $this->mailingListService->getListmonkService()->getLastFetchTime(),
         ]);
     }
 
