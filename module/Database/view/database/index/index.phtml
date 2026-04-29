@@ -17,17 +17,13 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var DateTime $mailmanLastFetch
  * @var bool $mailmanLastFetchOverdue
  * @var ?DateTime $mailmanLastSync
- * @var array{
- *   creations: int,
- *   deletions: int,
- *  } $mailmanChangesPending
  * @var DateTime $listmonkLastFetch
  * @var bool $listmonkLastFetchOverdue
  * @var ?DateTime $listmonkLastSync
  * @var array{
  *  creations: int,
  *  deletions: int,
- * } $listmonkChangesPending
+ * } $mailingListChangesPending
  * @var int $totalCount
  */
 
@@ -144,37 +140,6 @@ use Laminas\View\Renderer\PhpRenderer;
             </div>
         </div>
     <?php endif; ?>
-    <?php if (0 < $mailmanChangesPending['creations'] || 0 < $mailmanChangesPending['deletions']):
-        $messages = [];
-        if (0 < $mailmanChangesPending['creations']) {
-            $messages[] = sprintf(
-                $this->translate('%d pending mailing list subscriptions'),
-                $mailmanChangesPending['creations'],
-            );
-        }
-
-        if (0 < $mailmanChangesPending['deletions']) {
-            $messages[] = sprintf(
-                $this->translate('%d pending mailing list unsubscriptions'),
-                $mailmanChangesPending['deletions'],
-            );
-        }
-    ?>
-        <div class="panel panel-info">
-            <div class="panel-heading"><?= $this->translate('Mailman sync') ?></div>
-            <div class="panel-body">
-                <p>
-                    <?=
-                    $this->translate('There are') . ' ' .
-                    implode(
-                        ' ' . $this->translate('and') . ' ',
-                        $messages,
-                    ) . '.'
-                    ?>
-                </p>
-            </div>
-        </div>
-    <?php endif; ?>
     <?php if ($listmonkLastFetchOverdue): ?>
         <div class="panel panel-warning">
             <div class="panel-heading"><?= $this->translate('Listmonk lists not being fetched') ?></div>
@@ -194,24 +159,24 @@ use Laminas\View\Renderer\PhpRenderer;
             </div>
         </div>
     <?php endif; ?>
-    <?php if (0 < $listmonkChangesPending['creations'] || 0 < $listmonkChangesPending['deletions']):
+    <?php if (0 < $mailingListChangesPending['creations'] || 0 < $mailingListChangesPending['deletions']):
         $messages = [];
-        if (0 < $listmonkChangesPending['creations']) {
+        if (0 < $mailingListChangesPending['creations']) {
             $messages[] = sprintf(
                 $this->translate('%d pending mailing list subscriptions'),
-                $listmonkChangesPending['creations'],
+                $mailingListChangesPending['creations'],
             );
         }
 
-        if (0 < $listmonkChangesPending['deletions']) {
+        if (0 < $mailingListChangesPending['deletions']) {
             $messages[] = sprintf(
                 $this->translate('%d pending mailing list unsubscriptions'),
-                $listmonkChangesPending['deletions'],
+                $mailingListChangesPending['deletions'],
             );
         }
     ?>
         <div class="panel panel-info">
-            <div class="panel-heading"><?= $this->translate('Listmonk sync') ?></div>
+            <div class="panel-heading"><?= $this->translate('Mailing list sync') ?></div>
             <div class="panel-body">
                 <p>
                 <?=

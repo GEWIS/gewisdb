@@ -293,10 +293,6 @@ class Mailman
      *     mailmanLastFetch: ?DateTime,
      *     mailmanLastFetchOverdue: bool,
      *     mailmanLastSync: ?DateTime,
-     *     mailmanChangesPending: array{
-     *       creations: int,
-     *       deletions: int,
-     *     },
      * }
      */
     public function getFrontpageData(): array
@@ -309,10 +305,6 @@ class Mailman
                 'lastSync',
                 new DateTime('0001-01-01 00:00:00'),
             ),
-            'mailmanChangesPending' => [
-                'creations' => $this->mailingListMemberMapper->countPendingCreation(),
-                'deletions' => $this->mailingListMemberMapper->countPendingDeletion(),
-            ],
         ];
     }
 

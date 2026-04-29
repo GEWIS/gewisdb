@@ -310,10 +310,6 @@ class Listmonk
      *     listmonkLastFetch: ?DateTime,
      *     listmonkLastFetchOverdue: bool,
      *     listmonkLastSync: ?DateTime,
-     *     listmonkChangesPending: array{
-     *       creations: int,
-     *       deletions: int,
-     *     },
      * }
      */
     public function getFrontpageData(): array
@@ -326,10 +322,6 @@ class Listmonk
                 'lastSync',
                 new DateTime('0001-01-01 00:00:00'),
             ),
-            'listmonkChangesPending' => [
-                'creations' => $this->mailingListMemberMapper->countPendingCreation(),
-                'deletions' => $this->mailingListMemberMapper->countPendingDeletion(),
-            ],
         ];
     }
 
