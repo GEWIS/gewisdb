@@ -31,7 +31,6 @@ final class Version20260331181824 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE MailingList DROP CONSTRAINT FK_FD864C3AB97ED0D8');
         $this->addSql('DROP TABLE ListmonkMailingList');
         $this->addSql('ALTER TABLE ConfigItem ALTER version SET DEFAULT 1000');
