@@ -59,4 +59,3 @@ class MailingListSyncLocalMembershipCommand extends AbstractParamAwareCommand
         return Command::SUCCESS;
     }
 }
-

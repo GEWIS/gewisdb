@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Database\Service;
 
 use Database\Service\Api as ApiService;
-use Database\Service\Mailman as MailmanService;
 use Database\Service\Listmonk as ListmonkService;
 use Database\Service\MailingList as MailingListService;
+use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use DateTime;
 

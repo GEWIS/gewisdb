@@ -9,8 +9,8 @@ use Database\Form\MailingList as MailingListForm;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Model\MailingList as MailingListModel;
-use Database\Service\Mailman as MailmanService;
 use Database\Service\Listmonk as ListmonkService;
+use Database\Service\Mailman as MailmanService;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -209,7 +209,6 @@ class MailingList
                 if (!$dryRun) {
                     $this->getMailingListMemberMapper()->remove($mailingListMember);
                 }
-
             }
 
             if ($mailingListMember->isToBeCreated()) {

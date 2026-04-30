@@ -54,6 +54,7 @@
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/ListmonkFetchListsCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/ListmonkSyncMembershipCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/MailingListSyncLocalMembershipCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailingListMaintenanceCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailmanFetchListsCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailmanSyncMembershipCommandFactory.php</exclude-pattern>

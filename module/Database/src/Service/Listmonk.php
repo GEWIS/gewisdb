@@ -6,13 +6,13 @@ namespace Database\Service;
 
 use Application\Model\Enums\ConfigNamespaces;
 use Application\Service\Config as ConfigService;
+use Database\Mapper\ListmonkMailingList as ListmonkMailingListMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
-use Database\Mapper\ListmonkMailingList as ListmonkMailingListMapper;
 use Database\Mapper\Member as MemberMapper;
+use Database\Model\ListmonkMailingList as ListmonkMailingListModel;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
-use Database\Model\ListmonkMailingList as ListmonkMailingListModel;
 use DateInterval;
 use DateTime;
 use Laminas\Http\Client;
@@ -26,11 +26,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function array_map;
 use function http_build_query;
 use function in_array;
-use function json_encode;
+use function is_string;
 use function json_decode;
+use function json_encode;
 use function json_last_error_msg;
 use function json_validate;
-use function strlen;
 use function sprintf;
 
 class Listmonk
@@ -200,6 +200,7 @@ class Listmonk
             if (!$list->hasListmonkList()) {
                 continue;
             }
+
             $this->acquireSyncLock(renew: true);
             $this->syncMembershipSingle($list, $output, $dryRun);
         }
@@ -470,7 +471,7 @@ class Listmonk
                     'action' => 'add',
                     'ids' => [(int) $subscriberId],
                     'target_list_ids' => [(int) $listId],
-                    'status' => 'confirmed' // By passes double confirm
+                    'status' => 'confirmed', // By passes double confirm
                 ],
             );
         }
@@ -567,7 +568,7 @@ class Listmonk
             'subscribers?' . http_build_query([
                 'query' => sprintf("email='%s'", $mailingListMember->getEmail()),
                 'list_id' => $listId,
-            ])
+            ]),
         );
 
         if (isset($subscribers['data']['results'][0])) {
