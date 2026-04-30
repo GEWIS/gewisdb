@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
-use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use Database\Model\ListmonkMailingList as ListmonkMailingListModel;
+use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use Laminas\Filter\StringTrim;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Select;
@@ -153,6 +153,7 @@ class MailingList extends Form implements InputFilterProviderInterface
                 'mailmanList' => ['cannotBothBeSet' => $errorMessage],
                 'listmonkList' => ['cannotBothBeSet' => $errorMessage],
             ]);
+
             return false;
         }
 

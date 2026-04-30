@@ -6,8 +6,8 @@ namespace Database\Controller\Factory;
 
 use Checker\Service\Checker as CheckerService;
 use Database\Controller\MemberController;
-use Database\Service\Mailman as MailmanService;
 use Database\Service\Listmonk as ListmonkService;
+use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;

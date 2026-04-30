@@ -11,9 +11,6 @@ use Psr\Container\ContainerInterface;
 
 class MailingListSyncLocalMembershipCommandFactory implements FactoryInterface
 {
-    /**
-     * @param string $requestedName
-     */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
@@ -25,4 +22,3 @@ class MailingListSyncLocalMembershipCommandFactory implements FactoryInterface
         return new MailingListSyncLocalMembershipCommand($mailingListService);
     }
 }
-
