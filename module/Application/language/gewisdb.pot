@@ -94,13 +94,9 @@ msgid "A 404 error occurred"
 msgstr ""
 
 msgid ""
-"A Listmonk sync is currently in progress. It is now not possible to safely "
-"update the mailing list administration, please try again in a few minutes."
-msgstr ""
-
-msgid ""
-"A Mailman sync is currently in progress. It is now not possible to safely "
-"update the mailing list administration, please try again in a few minutes."
+"A Mailman/Listmonk sync is currently in progress. It is now not possible to "
+"safely update the mailing list administration, please try again in a few "
+"minutes."
 msgstr ""
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
@@ -951,19 +947,23 @@ msgstr ""
 msgid "Last fetch of available listmonk lists was %s."
 msgstr ""
 
-msgid "Last fetch of listmonk lists"
-msgstr ""
-
+#, php-format
 msgid "Last fetch of available mailman lists was %s."
 msgstr ""
 
-msgid "Last fetch of mailman lists"
+msgid "Last fetch of listmonk lists"
 msgstr ""
 
 msgid "Leave note"
 msgstr ""
 
 msgid "Lid"
+msgstr ""
+
+msgid "Listmonk Mailing List"
+msgstr ""
+
+msgid "Listmonk lists not being fetched"
 msgstr ""
 
 msgid "Lists"
@@ -990,22 +990,16 @@ msgstr ""
 msgid "Mailing list deleted."
 msgstr ""
 
-msgid "Listmonk Mailing List"
-msgstr ""
-
-msgid "Listmonk lists not being fetched"
-msgstr ""
-
-msgid "Listmonk sync"
+msgid "Mailing list sync"
 msgstr ""
 
 msgid "Mailman Mailing List"
 msgstr ""
 
-msgid "Mailman lists not being fetched"
+msgid "Mailman and Listmonk mailing lists cannot both be set at the same time"
 msgstr ""
 
-msgid "Mailman sync"
+msgid "Mailman lists not being fetched"
 msgstr ""
 
 #, php-format
@@ -1127,10 +1121,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-msgid "Name (Listmonk)"
-msgstr ""
-
-msgid "Name (Mailman)"
+msgid "Name (Sync)"
 msgstr ""
 
 msgid "No"
