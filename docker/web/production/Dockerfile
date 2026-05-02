@@ -71,7 +71,7 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
     && rm /etc/php${PHP_VERSION}/php-fpm.d/www.conf \
     && rm /etc/crontabs/root
 
-RUN adduser -S --uid 82 -D -H www-data -G www-data
+RUN adduser -S --uid 82 -D www-data -G www-data
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
