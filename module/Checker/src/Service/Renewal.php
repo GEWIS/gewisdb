@@ -68,9 +68,8 @@ class Renewal
             ->filter(static fn (OrganMemberModel $member) => $member->isCurrent())
             ->isEmpty();
 
-        // TODO: after 2025-07-31, revert template.
         $body = $this->render(
-            'email/graduate-renewal-2025',
+            'email/graduate-renewal',
             [
                 'firstName' => $link->getMember()->getFirstName(),
                 'isInstalled' => $isInstalled,
