@@ -1,3 +1,9 @@
+## [v4.4.2](https://github.com/GEWIS/gewisdb/tree/v4.4.2) (2026-05-03)
+
+* Updated dependencies
+* Prevent warnings about missing home directory of `www-data` user in crond
+* Change email template for graduate renewal to regular template
+
 ## [v4.4.1](https://github.com/GEWIS/gewisdb/tree/v4.4.1) (2026-03-09)
 
 * Fix generation of financial budget/statement subdecisions
