@@ -301,6 +301,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Application-Model-Enums-MeetingTypes.html#method_values"
         },                {
+            "fqsen": "\\Application\\Model\\Enums\\MeetingTypes\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Give\u0020the\u0020function\u0020name\u0020with\u0020the\u0020given\u0020translation.\u0020If\u0020no\u0020translator\u0020is\u0020given,\u0020we\u0020return\u0020the\u0020default\u0020language.",
+            "url": "classes/Application-Model-Enums-MeetingTypes.html#method_getName"
+        },                {
             "fqsen": "\\Application\\Model\\Enums\\MeetingTypes\u003A\u003ABV",
             "name": "BV",
             "summary": "",
@@ -3580,6 +3585,26 @@ Search.appendIndex(
             "name": "down",
             "summary": "",
             "url": "classes/Database-Migrations-Version20260211203320.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260504104135",
+            "name": "Version20260504104135",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20260504104135.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260504104135\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260504104135.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260504104135\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260504104135.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260504104135\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260504104135.html#method_down"
         },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
@@ -8921,6 +8946,16 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020name.",
             "url": "classes/Database-Model-SubDecision-Foundation.html#method_setName"
         },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AgetPurpose\u0028\u0029",
+            "name": "getPurpose",
+            "summary": "Get\u0020the\u0020purpose.",
+            "url": "classes/Database-Model-SubDecision-Foundation.html#method_getPurpose"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AsetPurpose\u0028\u0029",
+            "name": "setPurpose",
+            "summary": "Set\u0020the\u0020purpose.",
+            "url": "classes/Database-Model-SubDecision-Foundation.html#method_setPurpose"
+        },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003AgetOrganType\u0028\u0029",
             "name": "getOrganType",
             "summary": "Get\u0020the\u0020type.",
@@ -8960,6 +8995,11 @@ Search.appendIndex(
             "name": "name",
             "summary": "Name\u0020\u0028only\u0020for\u0020when\u0020organs\u0020are\u0020created\u0029",
             "url": "classes/Database-Model-SubDecision-Foundation.html#property_name"
+        },                {
+            "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003A\u0024purpose",
+            "name": "purpose",
+            "summary": "Purpose\u0020\u0028only\u0020for\u0020when\u0020organs\u0020are\u0020created\u0029",
+            "url": "classes/Database-Model-SubDecision-Foundation.html#property_purpose"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision\\Foundation\u003A\u003A\u0024organType",
             "name": "organType",
@@ -11161,6 +11201,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Report-Migrations-Version20251201181030.html#method_down"
         },                {
+            "fqsen": "\\Report\\Migrations\\Version20260504104136",
+            "name": "Version20260504104136",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Report-Migrations-Version20260504104136.html"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260504104136\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260504104136.html#method_getDescription"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260504104136\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260504104136.html#method_up"
+        },                {
+            "fqsen": "\\Report\\Migrations\\Version20260504104136\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Report-Migrations-Version20260504104136.html#method_down"
+        },                {
             "fqsen": "\\Report\\Command\\Factory\\GenerateFullCommandFactory",
             "name": "GenerateFullCommandFactory",
             "summary": "",
@@ -13006,6 +13066,16 @@ Search.appendIndex(
             "summary": "Set\u0020the\u0020name.",
             "url": "classes/Report-Model-SubDecision-Foundation.html#method_setName"
         },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003AgetPurpose\u0028\u0029",
+            "name": "getPurpose",
+            "summary": "Get\u0020the\u0020purpose.",
+            "url": "classes/Report-Model-SubDecision-Foundation.html#method_getPurpose"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003AsetPurpose\u0028\u0029",
+            "name": "setPurpose",
+            "summary": "Set\u0020the\u0020purpose.",
+            "url": "classes/Report-Model-SubDecision-Foundation.html#method_setPurpose"
+        },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003AgetOrganType\u0028\u0029",
             "name": "getOrganType",
             "summary": "Get\u0020the\u0020type.",
@@ -13040,6 +13110,11 @@ Search.appendIndex(
             "name": "name",
             "summary": "Name\u0020\u0028only\u0020for\u0020when\u0020organs\u0020are\u0020created\u0029.",
             "url": "classes/Report-Model-SubDecision-Foundation.html#property_name"
+        },                {
+            "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003A\u0024purpose",
+            "name": "purpose",
+            "summary": "Purpose\u0020\u0028only\u0020for\u0020when\u0020organs\u0020are\u0020created\u0029.",
+            "url": "classes/Report-Model-SubDecision-Foundation.html#property_purpose"
         },                {
             "fqsen": "\\Report\\Model\\SubDecision\\Foundation\u003A\u003A\u0024organType",
             "name": "organType",
