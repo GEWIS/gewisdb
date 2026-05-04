@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v4.4.0-14-g96e65cd3-dirty\n"
+"Project-Id-Version: GEWISdb v4.4.0-17-gcb702d98-dirty\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 12:38+0200\n"
+"POT-Creation-Date: 2026-05-04 16:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,6 +99,9 @@ msgid ""
 msgstr ""
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+msgstr ""
+
+msgid "ALV"
 msgstr ""
 
 msgid "ALV-Commissie"
@@ -316,6 +319,9 @@ msgid "Awesome!"
 msgstr ""
 
 msgid "BM (Board Meeting)"
+msgstr ""
+
+msgid "BV"
 msgstr ""
 
 #, php-format
@@ -544,8 +550,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e ALV met "
-"afkorting %ORGAN_ABBR% wordt opgericht."
+"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e "
+"%MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht."
 msgstr ""
 
 msgid "Decision"
@@ -1533,6 +1539,9 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+msgid "VV"
+msgstr ""
+
 msgid "Value"
 msgstr ""
 
@@ -1546,6 +1555,9 @@ msgid "View"
 msgstr ""
 
 msgid "View Update Requests"
+msgstr ""
+
+msgid "Virt"
 msgstr ""
 
 msgid "Virt (Virtual Meeting)"

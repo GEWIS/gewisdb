@@ -153,7 +153,7 @@ class Foundation extends SubDecision
         }
 
         return $translator->translate(
-            'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e ALV met afkorting %ORGAN_ABBR% wordt opgericht.',
+            'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.',
             locale: $language->getLangParam(),
         );
     }
@@ -172,8 +172,11 @@ class Foundation extends SubDecision
                 '%ORGAN_NAME%' => $this->getName(),
             ];
         } else {
-            $replacements['%MEETING_NUMBER%'] = $this->getMeetingNumber();
-            $replacements['%ORGAN_PURPOSE%'] = $this->getPurpose();
+            $replacements += [
+                '%MEETING_TYPE%' => $this->getMeetingType()->getName($translator, $language),
+                '%MEETING_NUMBER%' => $this->getMeetingNumber(),
+                '%ORGAN_PURPOSE%' => $this->getPurpose(),
+            ];
         }
 
         /** @psalm-suppress InvalidArgument */

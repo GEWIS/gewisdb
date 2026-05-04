@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Application\Model\Enums;
 
+use Laminas\Mvc\I18n\DummyTranslator;
+use Laminas\Mvc\I18n\Translator;
+
 use function array_map;
 use function array_merge;
 
@@ -29,5 +32,26 @@ enum MeetingTypes: string
             ),
             self::cases(),
         );
+    }
+
+    /**
+     * Give the function name with the given translation. If no translator is given, we return the default language.
+     */
+    public function getName(
+        ?Translator $translator,
+        ?AppLanguages $language = null,
+    ): string {
+        if (null === $translator) {
+            $translator = new DummyTranslator();
+        }
+
+        $function = match ($this) {
+            self::BV => $translator->translate('BV', locale: $language?->getLangParam()),
+            self::ALV => $translator->translate('ALV', locale: $language?->getLangParam()),
+            self::VV => $translator->translate('VV', locale: $language?->getLangParam()),
+            self::VIRT => $translator->translate('Virt', locale: $language?->getLangParam()),
+        };
+
+        return $translator->translate($function, locale: $language?->getLangParam());
     }
 }

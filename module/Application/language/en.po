@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 12:38+0200\n"
+"POT-Creation-Date: 2026-05-04 16:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -104,6 +104,9 @@ msgstr ""
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "A TU/e-username should look like sYYxxxx or YYYYxxxx."
+
+msgid "ALV"
+msgstr "GMM"
 
 msgid "ALV-Commissie"
 msgstr "GMM Committee"
@@ -349,6 +352,9 @@ msgstr "Awesome!"
 msgid "BM (Board Meeting)"
 msgstr "BM (Board Meeting)"
 
+msgid "BV"
+msgstr "BM"
+
 #, php-format
 msgid "Back to %s %d"
 msgstr "Back to %s %d"
@@ -585,11 +591,11 @@ msgid ""
 msgstr "The key code of %GRANTEE% of GEWIS is withdrawn from %WITHDRAWAL%."
 
 msgid ""
-"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e ALV met "
-"afkorting %ORGAN_ABBR% wordt opgericht."
+"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e "
+"%MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht."
 msgstr ""
-"The Voting Committee for %ORGAN_PURPOSE% of the %MEETING_NUMBER%e GMM with "
-"abbreviation %ORGAN_ABBR% is established."
+"The Voting Committee for %ORGAN_PURPOSE% of the %MEETING_NUMBER%e "
+"%MEETING_TYPE% with abbreviation %ORGAN_ABBR% is established."
 
 msgid "Decision"
 msgstr "Decision"
@@ -1654,6 +1660,9 @@ msgstr "Username"
 msgid "Users"
 msgstr "Users"
 
+msgid "VV"
+msgstr "CM"
+
 msgid "Value"
 msgstr "Value"
 
@@ -1668,6 +1677,9 @@ msgstr "View"
 
 msgid "View Update Requests"
 msgstr "View Update Requests"
+
+msgid "Virt"
+msgstr "VIRT"
 
 msgid "Virt (Virtual Meeting)"
 msgstr "Virt (Virtual Meeting)"

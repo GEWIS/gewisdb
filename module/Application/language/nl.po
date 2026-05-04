@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 12:38+0200\n"
+"POT-Creation-Date: 2026-05-04 16:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -105,6 +105,9 @@ msgstr ""
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Een TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
+
+msgid "ALV"
+msgstr "ALV"
 
 msgid "ALV-Commissie"
 msgstr "ALV-Commissie"
@@ -350,6 +353,9 @@ msgstr "Fantastisch!"
 msgid "BM (Board Meeting)"
 msgstr "BV (bestuursvergadering)"
 
+msgid "BV"
+msgstr "BV"
+
 #, php-format
 msgid "Back to %s %d"
 msgstr "Terug naar %s %d"
@@ -589,11 +595,11 @@ msgstr ""
 "De sleutelcode van %GRANTEE% van GEWIS wordt ingetrokken vanaf %WITHDRAWAL%."
 
 msgid ""
-"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e ALV met "
-"afkorting %ORGAN_ABBR% wordt opgericht."
+"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e "
+"%MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht."
 msgstr ""
-"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e ALV met "
-"afkorting %ORGAN_ABBR% wordt opgericht."
+"De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e "
+"%MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht."
 
 msgid "Decision"
 msgstr "Besluit"
@@ -1669,6 +1675,9 @@ msgstr "Gebruikersnaam"
 msgid "Users"
 msgstr "Gebruikers"
 
+msgid "VV"
+msgstr "VV"
+
 msgid "Value"
 msgstr "Waarde"
 
@@ -1683,6 +1692,9 @@ msgstr "Toon"
 
 msgid "View Update Requests"
 msgstr "Update-aanvragen bekijken"
+
+msgid "Virt"
+msgstr "VIRT"
 
 msgid "Virt (Virtual Meeting)"
 msgstr "Virt (virtuele vergadering)"
