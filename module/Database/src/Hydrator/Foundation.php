@@ -43,8 +43,17 @@ class Foundation extends AbstractDecision
             $foundation->setName($data['name']);
             $foundation->setAbbr($data['abbr']);
         } else {
-            $foundation->setName(sprintf('Stemcommissie van de %de ALV', $foundation->getMeetingNumber()));
-            $foundation->setAbbr(sprintf('SC%d', $foundation->getMeetingNumber()));
+            $foundation->setName(sprintf(
+                'Stemcommissie voor %s van de %de ALV',
+                $data['name'],
+                $foundation->getMeetingNumber(),
+            ));
+            $foundation->setAbbr(sprintf(
+                'SC%d-%s',
+                $foundation->getMeetingNumber(),
+                $data['abbr'],
+            ));
+            $foundation->setPurpose($data['name']);
         }
 
         $num = 2;

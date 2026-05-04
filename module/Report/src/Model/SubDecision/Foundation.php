@@ -34,6 +34,15 @@ class Foundation extends SubDecision
     private string $name;
 
     /**
+     * Purpose (only for when organs are created).
+     */
+    #[Column(
+        type: 'string',
+        nullable: true,
+    )]
+    private ?string $purpose = null;
+
+    /**
      * Type of the organ.
      */
     #[Column(
@@ -97,6 +106,22 @@ class Foundation extends SubDecision
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * Get the purpose.
+     */
+    public function getPurpose(): ?string
+    {
+        return $this->purpose;
+    }
+
+    /**
+     * Set the purpose.
+     */
+    public function setPurpose(string $purpose): void
+    {
+        $this->purpose = $purpose;
     }
 
     /**
