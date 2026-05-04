@@ -20,7 +20,6 @@ use UnexpectedValueException;
 
 use function array_key_exists;
 use function array_map;
-use function array_merge;
 
 class MeetingController extends AbstractActionController
 {
@@ -172,15 +171,7 @@ class MeetingController extends AbstractActionController
         $decisionOrForm = match ($this->params()->fromRoute('form')) {
             'budget' => $this->meetingService->budgetDecision($this->getRequest()->getPost()->toArray()),
             'organ_regulation' => $this->meetingService->regulationDecision($this->getRequest()->getPost()->toArray()),
-            'foundation' => $this->meetingService->foundationDecision(
-                array_merge(
-                    [
-                        'name' => 'AUTOMATICALLY GENERATED',
-                        'abbr' => 'AUTOMATICALLY GENERATED',
-                    ],
-                    $this->getRequest()->getPost()->toArray(),
-                ),
-            ),
+            'foundation' => $this->meetingService->foundationDecision($this->getRequest()->getPost()->toArray()),
             'abolish' => $this->meetingService->abolishDecision($this->getRequest()->getPost()->toArray()),
             'install' => $this->meetingService->installDecision($this->getRequest()->getPost()->toArray()),
             'annulment' => $this->meetingService->annulDecision($this->getRequest()->getPost()->toArray()),
