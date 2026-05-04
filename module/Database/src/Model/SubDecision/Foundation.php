@@ -34,6 +34,15 @@ class Foundation extends SubDecision
     private string $name;
 
     /**
+     * Purpose (only for when organs are created)
+     */
+    #[Column(
+        type: 'string',
+        nullable: true,
+    )]
+    private ?string $purpose = null;
+
+    /**
      * Type of the organ.
      */
     #[Column(
@@ -91,6 +100,22 @@ class Foundation extends SubDecision
     }
 
     /**
+     * Get the purpose.
+     */
+    public function getPurpose(): ?string
+    {
+        return $this->purpose;
+    }
+
+    /**
+     * Set the purpose.
+     */
+    public function setPurpose(string $purpose): void
+    {
+        $this->purpose = $purpose;
+    }
+
+    /**
      * Get the type.
      */
     public function getOrganType(): OrganTypes
@@ -128,7 +153,7 @@ class Foundation extends SubDecision
         }
 
         return $translator->translate(
-            'De stemcommissie van de %MEETING_NUMBER%e ALV met afkorting %ORGAN_ABBR% wordt opgericht.',
+            'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.',
             locale: $language->getLangParam(),
         );
     }
@@ -147,7 +172,11 @@ class Foundation extends SubDecision
                 '%ORGAN_NAME%' => $this->getName(),
             ];
         } else {
-            $replacements['%MEETING_NUMBER%'] = $this->getMeetingNumber();
+            $replacements += [
+                '%MEETING_TYPE%' => $this->getMeetingType()->getName($translator, $language),
+                '%MEETING_NUMBER%' => $this->getMeetingNumber(),
+                '%ORGAN_PURPOSE%' => $this->getPurpose(),
+            ];
         }
 
         /** @psalm-suppress InvalidArgument */
@@ -165,8 +194,9 @@ class Foundation extends SubDecision
      *     decision_point: int,
      *     decision_number: int,
      *     subdecision_sequence: int,
-     *     abbr: string,
      *     name: string,
+     *     abbr: string,
+     *     purpose: string|null,
      *     organtype: OrganTypes,
      * }
      */
@@ -180,8 +210,9 @@ class Foundation extends SubDecision
             'decision_point' => $decision->getPoint(),
             'decision_number' => $decision->getNumber(),
             'subdecision_sequence' => $this->getSequence(),
-            'abbr' => $this->getAbbr(),
             'name' => $this->getName(),
+            'abbr' => $this->getAbbr(),
+            'purpose' => $this->getPurpose(),
             'organtype' => $this->getOrganType(),
         ];
     }

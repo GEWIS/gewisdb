@@ -230,8 +230,9 @@ class Meeting
             $reportSubDecision->setInstallation($installation);
         } elseif ($subdecision instanceof DatabaseSubDecisionModel\Foundation) {
             // foundation
-            $reportSubDecision->setAbbr($subdecision->getAbbr());
             $reportSubDecision->setName($subdecision->getName());
+            $reportSubDecision->setAbbr($subdecision->getAbbr());
+            $reportSubDecision->setPurpose($subdecision->getPurpose());
             $reportSubDecision->setOrganType($subdecision->getOrganType());
         } elseif (
             $subdecision instanceof DatabaseSubDecisionModel\Financial\Statement

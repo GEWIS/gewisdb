@@ -97,7 +97,7 @@ $element->setLabelAttributes(array('class' => 'radio-inline'));
 <?php
 $element = $form->get('name');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $this->translate('Name'));
+$element->setAttribute('placeholder', $element->getLabel());
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -108,7 +108,7 @@ $element->setAttribute('placeholder', $this->translate('Name'));
 <?php
 $element = $form->get('abbr');
 $element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $this->translate('Abbreviation'));
+$element->setAttribute('placeholder', $element->getLabel());
 ?>
     <?= $this->formLabel($element) ?>
     <?= $this->formInput($element) ?>
@@ -209,20 +209,22 @@ $submit->setAttribute('id', 'foundation-submit');
     document.addEventListener('DOMContentLoaded', () => {
         let radioButtons = document.querySelectorAll('#oprichting input[name="type"]');
         let nameField = document.querySelector('#oprichting input[name="name"]');
+        let nameLabel = document.querySelector('#oprichting label[for="name"]');
         let abbrField = document.querySelector('#oprichting input[name="abbr"]');
+        let abbrLabel = document.querySelector('#oprichting label[for="abbr"]');
 
         radioButtons.forEach(radio => {
             radio.addEventListener('change', () => {
                 if (radio.value == '<?= OrganTypes::SC->value ?>') {
-                    nameField.setAttribute('disabled', '');
-                    abbrField.setAttribute('disabled', '');
-                    nameField.setAttribute('value', 'AUTOMATICALLY GENERATED');
-                    abbrField.setAttribute('value', 'AUTOMATICALLY GENERATED');
+                    nameField.setAttribute('placeholder', '<?= $this->translate('Purpose') ?>');
+                    nameLabel.textContent = '<?= $this->translate('Purpose') ?>';
+                    abbrField.setAttribute('placeholder', '<?= sprintf($this->translate('Abbreviation suffix (SC%d-{SUFFIX})'), $form->get('meeting')->get('number')->getValue()) ?>');
+                    abbrLabel.textContent = '<?= sprintf($this->translate('Abbreviation suffix (SC%d-{SUFFIX})'), $form->get('meeting')->get('number')->getValue()) ?>';
                 } else {
-                    nameField.removeAttribute('disabled');
-                    abbrField.removeAttribute('disabled');
-                    nameField.setAttribute('value', '');
-                    abbrField.setAttribute('value', '');
+                    nameField.setAttribute('placeholder', '<?= $form->get('name')->getLabel() ?>');
+                    nameLabel.textContent = '<?= $form->get('name')->getLabel() ?>';
+                    abbrField.setAttribute('placeholder', '<?= $form->get('abbr')->getLabel() ?>');
+                    abbrLabel.textContent = '<?= $form->get('abbr')->getLabel() ?>';
                 }
             });
         });
