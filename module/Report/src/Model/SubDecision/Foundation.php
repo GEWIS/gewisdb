@@ -119,7 +119,7 @@ class Foundation extends SubDecision
     /**
      * Set the purpose.
      */
-    public function setPurpose(string $purpose): void
+    public function setPurpose(?string $purpose): void
     {
         $this->purpose = $purpose;
     }
