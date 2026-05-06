@@ -1,3 +1,7 @@
+## [v4.5.1](https://github.com/GEWIS/gewisdb/tree/v4.5.1) (2026-05-06)
+
+* Fix body generation when purpose is `null`
+
 ## [v4.5.0](https://github.com/GEWIS/gewisdb/tree/v4.5.0) (2026-05-05)
 
 * Add option for certain bodies (currently voting committees) to have a purpose
