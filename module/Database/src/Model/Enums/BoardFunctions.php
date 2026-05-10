@@ -39,6 +39,7 @@ enum BoardFunctions: string
     case Information = 'Commissaris Kennisbeheer';
     case Innovation = 'Commissaris Innovatie';
     case Community = 'Commissaris Verenigingsontwikkeling';
+    case DigitalInnovation = 'Commissaris Digitale Innovatie';
 
     public function isLegacy(): bool
     {
@@ -50,6 +51,7 @@ enum BoardFunctions: string
             self::ExternalAffairs,
             self::InternalAffairs,
             self::Community,
+            self::DigitalInnovation,
         ]);
     }
 
@@ -96,6 +98,10 @@ enum BoardFunctions: string
             self::Innovation => $translator->translate('Commissaris Innovatie', locale: $language?->getLangParam()),
             self::Community => $translator->translate(
                 'Commissaris Verenigingsontwikkeling',
+                locale: $language?->getLangParam(),
+            ),
+            self::DigitalInnovation => $translator->translate(
+                'Commissaris Digitale Innovatie',
                 locale: $language?->getLangParam(),
             ),
         };
