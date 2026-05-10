@@ -50,7 +50,6 @@ enum BoardFunctions: string
             self::Education,
             self::ExternalAffairs,
             self::InternalAffairs,
-            self::Community,
             self::DigitalInnovation,
         ]);
     }
