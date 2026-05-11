@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 16:16+0200\n"
+"POT-Creation-Date: 2026-05-10 22:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -472,6 +472,9 @@ msgstr "Career Development and External Affairs Officer"
 
 msgid "Commissaris Digitale Infrastructuur"
 msgstr "Digital Infrastructure Officer"
+
+msgid "Commissaris Digitale Innovatie"
+msgstr "Digital Innovation Officer"
 
 msgid "Commissaris Externe Betrekkingen"
 msgstr "External Affairs Officer"
