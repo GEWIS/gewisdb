@@ -7046,6 +7046,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_Community"
         },                {
+            "fqsen": "\\Database\\Model\\Enums\\BoardFunctions\u003A\u003ADigitalInnovation",
+            "name": "DigitalInnovation",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-BoardFunctions.html#enumcase_DigitalInnovation"
+        },                {
             "fqsen": "\\Database\\Model\\Enums\\CheckoutSessionStates",
             "name": "CheckoutSessionStates",
             "summary": "Enum\u0020for\u0020the\u0020different\u0020states\u0020a\u0020Checkout\u0020Session\u0020can\u0020have.",
