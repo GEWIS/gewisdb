@@ -94,6 +94,7 @@
         <exclude-pattern>module/Report/src/Service/Factory/MemberFactory.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Service/Factory/MiscFactory.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Service/Factory/OrganFactory.php</exclude-pattern>
+        <exclude-pattern>module/Report/src/Service/Factory/SubDecisionFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Adapter/Factory/ApiPrincipalAdapterFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Controller/Factory/ApiSettingsControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/User/src/Controller/Factory/SettingsControllerFactory.php</exclude-pattern>

@@ -52,6 +52,7 @@ class Meeting
     #[OneToMany(
         targetEntity: Decision::class,
         mappedBy: 'meeting',
+        cascade: ['persist', 'remove'],
     )]
     private Collection $decisions;
 
