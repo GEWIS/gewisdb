@@ -1,3 +1,7 @@
+## [v4.5.2](https://github.com/GEWIS/gewisdb/tree/v4.5.2) (2026-05-12)
+
+* Add Digital Innovation Officer, deprecate Community Development Officer
+
 ## [v4.5.1](https://github.com/GEWIS/gewisdb/tree/v4.5.1) (2026-05-06)
 
 * Fix body generation when purpose is `null`
