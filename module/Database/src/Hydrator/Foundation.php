@@ -11,6 +11,7 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use InvalidArgumentException;
 
+use function in_array;
 use function sprintf;
 
 class Foundation extends AbstractDecision
@@ -58,6 +59,8 @@ class Foundation extends AbstractDecision
 
         $num = 2;
 
+        $addedMembers = [];
+
         // create installations
         foreach ($data['members'] as $install) {
             if (!($install['function'] instanceof InstallationFunctions)) {
@@ -69,6 +72,7 @@ class Foundation extends AbstractDecision
             if (
                 InstallationFunctions::Member !== $install['function']
                 && InstallationFunctions::InactiveMember !== $install['function']
+                && !in_array($install['member']->getLidnr(), $addedMembers, true)
             ) {
                 $installation = new InstallationModel();
                 $installation->setSequence($num++);
@@ -76,6 +80,7 @@ class Foundation extends AbstractDecision
                 $installation->setFunction(InstallationFunctions::Member);
                 $installation->setMember($install['member']);
                 $installation->setDecision($decision);
+                $addedMembers[] = $install['member']->getLidnr();
             }
 
             $installation = new InstallationModel();
