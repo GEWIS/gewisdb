@@ -58,7 +58,7 @@ class ListmonkMailingList
     private ?MailingList $mailingList;
 
     /**
-     * Get the listmonk ID (UUID)
+     * Get the listmonk ID
      */
     public function getListmonkId(): string
     {

@@ -18,7 +18,6 @@
     <!-- Legacy code that cannot be easily changed, so ignore for now -->
     <rule ref="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps">
         <exclude-pattern>module/Database/src/Model/Decision.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Model/ListmonkMailingList.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Model/MailingList.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Model/SubDecision.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Model/Decision.php</exclude-pattern>
@@ -53,11 +52,9 @@
         <exclude-pattern>module/Database/src/Command/Factory/DeleteExpiredProspectiveMembersCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/GenerateAuthenticationKeysCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/ListmonkFetchListsCommandFactory.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Command/Factory/ListmonkSyncMembershipCommandFactory.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Command/Factory/MailingListSyncLocalMembershipCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailingListMaintenanceCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/Factory/MailmanFetchListsCommandFactory.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Command/Factory/MailmanSyncMembershipCommandFactory.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/Factory/MailingListSyncCommandFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ApiControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/ExportControllerFactory.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Controller/Factory/IndexControllerFactory.php</exclude-pattern>
@@ -140,6 +137,7 @@
         <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/DeleteExpiredProspectiveMembersCommand.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Command/GenerateAuthenticationKeysCommand.php</exclude-pattern>
+        <exclude-pattern>module/Database/src/Command/MailingListSyncCommand.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/GenerateFullCommand.php</exclude-pattern>
         <exclude-pattern>module/Report/src/Command/GeneratePartialCommand.php</exclude-pattern>
     </rule>
