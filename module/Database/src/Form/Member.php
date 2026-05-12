@@ -201,7 +201,7 @@ class Member extends Form implements InputFilterProviderInterface
         foreach ($this->lists as $list) {
             $desc = $list->getNlDescription();
 
-            if ('en' === $this->translator->getLocale()) {
+            if ('en' === $this->translator->getTranslator()->getLocale()) {
                 $desc = $list->getEnDescription();
             }
 

@@ -155,7 +155,7 @@ class Foundation extends SubDecision
         }
 
         return $translator->translate(
-            'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.',
+            'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.', // phpcs:ignore -- user-visible strings should not be split
             locale: $language->getLangParam(),
         );
     }

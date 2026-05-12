@@ -18,6 +18,8 @@ class QueryController extends AbstractActionController
 
     /**
      * Index action.
+     *
+     * @psalm-suppress InvalidReturnType, InvalidReturnStatement
      */
     #[Override]
     public function indexAction(): HttpResponse|ViewModel
