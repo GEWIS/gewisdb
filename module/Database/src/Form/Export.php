@@ -10,6 +10,7 @@ use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Override;
 
 use function strtoupper;
 
@@ -57,6 +58,7 @@ class Export extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [];

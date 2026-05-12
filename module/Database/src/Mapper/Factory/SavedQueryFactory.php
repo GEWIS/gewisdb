@@ -6,6 +6,7 @@ namespace Database\Mapper\Factory;
 
 use Database\Mapper\SavedQuery as SavedQueryMapper;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class SavedQueryFactory implements FactoryInterface
@@ -13,6 +14,7 @@ class SavedQueryFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

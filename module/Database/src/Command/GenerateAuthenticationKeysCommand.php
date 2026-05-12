@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Command;
 
 use Database\Service\Member as MemberService;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,6 +22,7 @@ class GenerateAuthenticationKeysCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

@@ -8,6 +8,7 @@ use Application\Model\Enums\MeetingTypes;
 use Application\Model\Enums\OrganTypes;
 use Checker\Model\Error;
 use Database\Model\SubDecision\Foundation as FoundationModel;
+use Override;
 
 use function sprintf;
 
@@ -53,6 +54,7 @@ class OrganMeetingType extends Error
         return $this->getSubDecision()->getDecision()->getMeeting()->getType();
     }
 
+    #[Override]
     public function asText(): string
     {
         return sprintf(

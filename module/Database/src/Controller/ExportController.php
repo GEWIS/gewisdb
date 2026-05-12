@@ -7,6 +7,7 @@ namespace Database\Controller;
 use Database\Service\Meeting as MeetingService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Override;
 
 class ExportController extends AbstractActionController
 {
@@ -17,6 +18,7 @@ class ExportController extends AbstractActionController
     /**
      * Index action.
      */
+    #[Override]
     public function indexAction(): ViewModel
     {
         if ($this->getRequest()->isPost()) {

@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 /**
  * Annulling a decision.
@@ -68,6 +69,7 @@ class Annulment extends SubDecision
         $this->target = $target;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -78,6 +80,7 @@ class Annulment extends SubDecision
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

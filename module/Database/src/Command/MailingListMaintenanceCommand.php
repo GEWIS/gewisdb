@@ -8,6 +8,7 @@ use Database\Service\MailingList as MailingListService;
 use Laminas\Cli\Command\AbstractParamAwareCommand;
 use Laminas\Cli\Input\BoolParam;
 use Laminas\Cli\Input\ParamAwareInputInterface;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,6 +27,7 @@ class MailingListMaintenanceCommand extends AbstractParamAwareCommand
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->addParam(
@@ -39,6 +41,7 @@ class MailingListMaintenanceCommand extends AbstractParamAwareCommand
     /**
      * @param ParamAwareInputInterface $input
      */
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

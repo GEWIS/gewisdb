@@ -9,6 +9,7 @@ use DateTime;
 use Laminas\Cli\Command\AbstractParamAwareCommand;
 use Laminas\Cli\Input\ParamAwareInputInterface;
 use Laminas\Cli\Input\StringParam;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,6 +27,7 @@ class DeleteExpiredMembersCommand extends AbstractParamAwareCommand
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->addParam(
@@ -40,6 +42,7 @@ class DeleteExpiredMembersCommand extends AbstractParamAwareCommand
     /**
      * @param ParamAwareInputInterface $input
      */
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

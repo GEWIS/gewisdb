@@ -7,6 +7,7 @@ namespace Database\Controller;
 use Database\Service\FrontPage as FrontPageService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Override;
 
 class IndexController extends AbstractActionController
 {
@@ -14,6 +15,7 @@ class IndexController extends AbstractActionController
     {
     }
 
+    #[Override]
     public function indexAction(): ViewModel
     {
         return new ViewModel($this->frontPageService->getFrontpageData());

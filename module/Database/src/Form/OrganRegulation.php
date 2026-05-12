@@ -17,6 +17,7 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\Callback;
 use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\StringLength;
+use Override;
 
 use function array_map;
 
@@ -106,6 +107,7 @@ class OrganRegulation extends AbstractDecision implements InputFilterProviderInt
         ]);
     }
 
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

@@ -7,10 +7,12 @@ namespace Database\Model\SubDecision\Financial;
 use Application\Model\Enums\AppLanguages;
 use Doctrine\ORM\Mapping\Entity;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 #[Entity]
 class Statement extends Budget
 {
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,

@@ -7,6 +7,7 @@ namespace Application\Service\Factory;
 use Application\Mapper\ConfigItem as ConfigItemMapper;
 use Application\Service\Config as ConfigService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class ConfigFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class ConfigFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

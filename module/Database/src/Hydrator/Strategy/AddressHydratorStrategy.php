@@ -6,9 +6,11 @@ namespace Database\Hydrator\Strategy;
 
 use Application\Model\Enums\AddressTypes;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use Override;
 
 class AddressHydratorStrategy implements StrategyInterface
 {
+    #[Override]
     public function extract(
         mixed $value,
         ?object $object = null,
@@ -20,6 +22,7 @@ class AddressHydratorStrategy implements StrategyInterface
         return AddressTypes::from($value)->value;
     }
 
+    #[Override]
     public function hydrate(
         mixed $value,
         ?array $data,

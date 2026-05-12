@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 /**
  * Foundation of an organ.
@@ -141,6 +142,7 @@ class Foundation extends SubDecision
         return $this->references;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -158,6 +160,7 @@ class Foundation extends SubDecision
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

@@ -7,6 +7,7 @@ namespace Database\Command\Factory;
 use Database\Command\MailingListMaintenanceCommand;
 use Database\Service\MailingList as MailingListService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class MailingListMaintenanceCommandFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class MailingListMaintenanceCommandFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

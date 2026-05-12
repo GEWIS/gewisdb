@@ -8,6 +8,7 @@ use Database\Mapper\Meeting as MeetingMapper;
 use Doctrine\ORM\EntityManager;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use Report\Service\Meeting as MeetingService;
 
@@ -16,6 +17,7 @@ class MeetingFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

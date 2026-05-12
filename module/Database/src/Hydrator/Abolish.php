@@ -9,6 +9,7 @@ use Database\Model\SubDecision\Abrogation as AbrogationModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use InvalidArgumentException;
+use Override;
 
 use function array_reverse;
 
@@ -21,6 +22,7 @@ class Abolish extends AbstractDecision
      *
      * @throws InvalidArgumentException when $object is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

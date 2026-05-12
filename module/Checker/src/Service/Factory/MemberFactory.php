@@ -7,6 +7,7 @@ namespace Checker\Service\Factory;
 use Checker\Mapper\Member as MemberMapper;
 use Checker\Service\Member as MemberService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class MemberFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class MemberFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

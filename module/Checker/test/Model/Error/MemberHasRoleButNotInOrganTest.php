@@ -9,9 +9,11 @@ use CheckerTest\Model\Error;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
+use Override;
 
 class MemberHasRoleButNotInOrganTest extends Error
 {
+    #[Override]
     protected function create(): MemberHasRoleButNotInOrgan
     {
         $installation = new InstallationModel();

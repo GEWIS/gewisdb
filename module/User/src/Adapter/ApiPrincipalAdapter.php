@@ -6,6 +6,7 @@ namespace User\Adapter;
 
 use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Authentication\Result;
+use Override;
 use SensitiveParameter;
 use User\Mapper\ApiPrincipalMapper;
 
@@ -20,6 +21,7 @@ class ApiPrincipalAdapter implements AdapterInterface
     /**
      * Try to authenticate.
      */
+    #[Override]
     public function authenticate(): Result
     {
         $principal = $this->mapper->findByToken($this->token);

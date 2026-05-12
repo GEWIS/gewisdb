@@ -7,6 +7,7 @@ namespace Checker\Command\Factory;
 use Checker\Command\CheckMembershipGraduateRenewalCommand;
 use Checker\Service\Renewal as RenewalService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class CheckMembershipGraduateRenewalCommandFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class CheckMembershipGraduateRenewalCommandFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

@@ -12,6 +12,7 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
+use Override;
 
 use function getenv;
 use function strlen;
@@ -86,6 +87,7 @@ class Login extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

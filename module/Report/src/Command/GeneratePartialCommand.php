@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Report\Command;
 
+use Override;
 use Report\Service\Board as BoardService;
 use Report\Service\Misc as MiscService;
 use Symfony\Component\Console\Command\Command;
@@ -19,6 +20,7 @@ class GeneratePartialCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

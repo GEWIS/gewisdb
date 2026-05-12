@@ -19,6 +19,7 @@ use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\Stdlib\ResponseInterface;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use Override;
 
 use function array_map;
 use function intval;
@@ -43,6 +44,7 @@ class MemberController extends AbstractActionController
     /**
      * Index action.
      */
+    #[Override]
     public function indexAction(): ViewModel
     {
         return new ViewModel([]);

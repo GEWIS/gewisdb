@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Report\Command\Factory;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use Report\Command\GenerateFullCommand;
 use Report\Service\Board as BoardService;
@@ -19,6 +20,7 @@ class GenerateFullCommandFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

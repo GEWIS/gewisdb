@@ -10,6 +10,7 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Identical;
 use Laminas\Validator\StringLength;
+use Override;
 
 class UserEdit extends Form implements InputFilterProviderInterface
 {
@@ -47,6 +48,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [
@@ -75,6 +77,7 @@ class UserEdit extends Form implements InputFilterProviderInterface
         ];
     }
 
+    #[Override]
     public function bind(
         object $object,
         int $flags = Form::VALUES_NORMALIZED,

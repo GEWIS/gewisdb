@@ -15,6 +15,7 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\InArray;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
+use Override;
 
 class Address extends Form implements InputFilterProviderInterface
 {
@@ -84,6 +85,7 @@ class Address extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [
