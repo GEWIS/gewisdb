@@ -15,6 +15,8 @@ use Laminas\Form\Element\Textarea;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Laminas\Validator\Callback;
+use Laminas\Validator\NotEmpty;
 use Laminas\Validator\StringLength;
 
 use function sprintf;
@@ -132,34 +134,6 @@ class MailingList extends Form implements InputFilterProviderInterface
     }
 
     /**
-     * Validate that mailmanList and listmonkList cannot both be set.
-     */
-    public function isValid(): bool
-    {
-        if (!parent::isValid()) {
-            return false;
-        }
-
-        $data = $this->getData();
-        $mailmanList = $data['mailmanList'] ?? null;
-        $listmonkList = $data['listmonkList'] ?? null;
-
-        if (!empty($mailmanList) && !empty($listmonkList)) {
-            $errorMessage = $this->translator->translate(
-                'Mailman and Listmonk mailing lists cannot both be set at the same time',
-            );
-            $this->setMessages([
-                'mailmanList' => ['cannotBothBeSet' => $errorMessage],
-                'listmonkList' => ['cannotBothBeSet' => $errorMessage],
-            ]);
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Specification of input filter.
      */
     public function getInputFilterSpecification(): array
@@ -219,6 +193,22 @@ class MailingList extends Form implements InputFilterProviderInterface
             ],
             'listmonkList' => [
                 'required' => false,
+                'validators' => [
+                    [
+                        'name' => Callback::class,
+                        'options' => [
+                            'callback' => static function ($value, $context = null) {
+                                return !((new NotEmpty())->isValid($context['mailmanList'])
+                                    && (new NotEmpty())->isValid($context['listmonkList']));
+                            },
+                            'messages' => [
+                                Callback::INVALID_VALUE => $this->translator->translate(
+                                    'Mailman and Listmonk mailing lists cannot both be set at the same time.',
+                                ),
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ];
     }
