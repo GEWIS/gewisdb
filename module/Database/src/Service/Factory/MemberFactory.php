@@ -23,6 +23,7 @@ use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
@@ -85,6 +86,8 @@ class MemberFactory implements FactoryInterface
         $mailingListService = $container->get(MailingListService::class);
         /** @var MailmanService $mailmanService */
         $mailmanService = $container->get(MailmanService::class);
+        /** @var ListmonkService $listmonkService */
+        $listmonkService = $container->get(ListmonkService::class);
         /** @var RenewalService $renewalService */
         $renewalService = $container->get(RenewalService::class);
         /** @var UserService $userService */
@@ -118,6 +121,7 @@ class MemberFactory implements FactoryInterface
             $fileStorageService,
             $mailingListService,
             $mailmanService,
+            $listmonkService,
             $renewalService,
             $userService,
             $viewRenderer,

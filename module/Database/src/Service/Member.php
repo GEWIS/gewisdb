@@ -39,6 +39,7 @@ use Database\Model\MemberUpdate as MemberUpdateModel;
 use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Model\RenewalLink as RenewalLinkModel;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Mailman as MailmanService;
 use DateTime;
@@ -91,6 +92,7 @@ class Member
         private readonly FileStorageService $fileStorageService,
         private readonly MailingListService $mailingListService,
         private readonly MailmanService $mailmanService,
+        private readonly ListmonkService $listmonkService,
         private readonly RenewalService $renewalService,
         private readonly UserService $userService,
         private readonly PhpRenderer $viewRenderer,
@@ -388,7 +390,8 @@ class Member
                 continue;
             }
 
-            // Ignore Mailman sync lock here as we _always_ need to persist this information. Will be cascade persisted
+            // Ignore Mailman/listmonk sync lock here as we _always_ need to persist this information.
+            // Will be cascade persisted
             // through `$member`.
             $mailingListMember = new MailingListMemberModel();
             $mailingListMember->setMailingList($list);
@@ -399,7 +402,8 @@ class Member
 
         // subscribe to default mailing lists not on the form
         foreach ($this->mailingListMapper->findDefault() as $list) {
-            // Ignore Mailman sync lock here as we _always_ need to persist this information. Will be cascade persisted
+            // Ignore Mailman/listmonk sync lock here as we _always_ need to persist this information.
+            // Will be cascade persisted
             // through `$member`.
             $mailingListMember = new MailingListMemberModel();
             $mailingListMember->setMailingList($list);
@@ -921,7 +925,7 @@ class Member
         MemberListsForm $form,
     ): ?MemberModel {
         // Check if we are performing a sync or not.
-        if ($this->mailmanService->isSyncLocked()) {
+        if ($this->mailmanService->isSyncLocked() || $this->listmonkService->isSyncLocked()) {
             return null;
         }
 

@@ -194,6 +194,10 @@ class Mailman
         $lists = $this->mailingListMapper->findAll();
 
         foreach ($lists as $list) {
+            if (!$list->hasMailmanList()) {
+                continue;
+            }
+
             $this->acquireSyncLock(renew: true);
             $this->syncMembershipSingle($list, $output, $dryRun);
         }
@@ -224,14 +228,8 @@ class Mailman
 
         $verifyTime = (new DateTime())->sub(new DateInterval('P1D'));
 
-        $isMailmanList = $dbList->hasMailmanList();
-        if ($isMailmanList) {
-            $listId = $dbList->getMailmanList()->getMailmanId();
-            $knownMembers = $this->getMailmanListSubscriberEmails($listId);
-        } else {
-            // This is to satisfy psalm, observe that it is not needed
-            $knownMembers = [];
-        }
+        $listId = $dbList->getMailmanList()->getMailmanId();
+        $knownMembers = $this->getMailmanListSubscriberEmails($listId);
 
         // Phase 1: Sync all pending changes from DB side
         // The order matters; we first process deletions, because we can have both be true
@@ -250,7 +248,7 @@ class Mailman
                     dryRun: $dryRun,
                     sendWelcomeEmail: true,
                 );
-            } elseif ($isMailmanList && $mailingListMember->getLastSyncOn() < $verifyTime) {
+            } elseif ($mailingListMember->getLastSyncOn() < $verifyTime) {
                 $this->verifyMemberOnMailingList(
                     mailingListMember: $mailingListMember,
                     output: $output,
@@ -258,11 +256,6 @@ class Mailman
                     knownMembers: $knownMembers,
                 );
             }
-        }
-
-        // The rest only applies to mailing lists that have a mailman list
-        if (!$dbList->hasMailmanList()) {
-            return;
         }
 
         // Phase 2: once per 24 hours
@@ -300,10 +293,6 @@ class Mailman
      *     mailmanLastFetch: ?DateTime,
      *     mailmanLastFetchOverdue: bool,
      *     mailmanLastSync: ?DateTime,
-     *     mailmanChangesPending: array{
-     *       creations: int,
-     *       deletions: int,
-     *     },
      * }
      */
     public function getFrontpageData(): array
@@ -316,10 +305,6 @@ class Mailman
                 'lastSync',
                 new DateTime('0001-01-01 00:00:00'),
             ),
-            'mailmanChangesPending' => [
-                'creations' => $this->mailingListMemberMapper->countPendingCreation(),
-                'deletions' => $this->mailingListMemberMapper->countPendingDeletion(),
-            ],
         ];
     }
 
@@ -420,15 +405,6 @@ class Mailman
         bool $dryRun,
         bool $sendWelcomeEmail,
     ): void {
-        // If there is no associated mailman list, assume processed
-        if (!$mailingListMember->getMailingList()->hasMailmanList()) {
-            $mailingListMember->setLastSyncSuccess(true);
-            $mailingListMember->setToBeCreated(false);
-            $this->mailingListMemberMapper->persist($mailingListMember);
-
-            return;
-        }
-
         $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
@@ -485,13 +461,6 @@ class Mailman
         OutputInterface $output,
         bool $dryRun,
     ): void {
-        // If there is no associated mailman list, assume processed
-        if (!$mailingListMember->getMailingList()->hasMailmanList()) {
-            $this->mailingListMemberMapper->remove($mailingListMember);
-
-            return;
-        }
-
         $listId = $mailingListMember->getMailingList()->getMailmanList()->getMailmanId();
 
         $data = [

@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 use Application\View\HelperTrait;
 use Database\Model\MailingList as MailingListModel;
-use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use Laminas\View\Renderer\PhpRenderer;
 
 /**
  * @var PhpRenderer|HelperTrait $this
  * @var MailingListModel[] $lists
- * @var MailmanMailingListModel[] $mailmanLists
- * @var DateTime $mailmanLastFetch
+ * @var DateTime $listmonkLastFetch
  */
 ?>
 <div class="row">
@@ -25,15 +23,15 @@ use Laminas\View\Renderer\PhpRenderer;
         <h2><?= $this->translate('Current Mailing Lists') ?></h2>
         <?= sprintf(
             '%s: %s',
-            $this->translate('Last fetch of mailman lists'),
-            $mailmanLastFetch?->format('Y-m-d H:i:s') ?: $this->translate('never')
+            $this->translate('Last fetch of Listmonk lists'),
+            $listmonkLastFetch?->format('Y-m-d H:i:s') ?: $this->translate('never')
         ) ?>
     </div>
     <div class="col-md-12">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th><?= $this->translate('Name (Mailman)') ?></th>
+                    <th><?= $this->translate('Name (Sync)') ?></th>
                     <th><?= $this->translate('Dutch Description') ?></th>
                     <th><?= $this->translate('English Description') ?></th>
                     <th><?= $this->translate('On Form') ?></th>
@@ -45,7 +43,9 @@ use Laminas\View\Renderer\PhpRenderer;
             <?php foreach ($lists as $list): ?>
                 <tr>
                     <td><?= $this->escapeHtml($list->getName()) ?>
-                        (<?= $this->escapeHtml($list->getMailmanList()?->getMailmanId() ?: $this->translate('n/a'))?>)</td>
+                        (<?= $this->escapeHtml($list->getListmonkList()
+                            ? 'Listmonk' : ($list->getMailmanList()
+                                ? 'Mailman' : $this->translate('n/a')))?>)</td>
                     <td><?= $this->escapeHtml($list->getNlDescription()) ?></td>
                     <td><?= $this->escapeHtml($list->getEnDescription()) ?></td>
                     <td><span class="glyphicon glyphicon-<?= $list->getOnForm() ? 'ok' : 'remove' ?>"></span></td>

@@ -6,6 +6,8 @@ namespace Database\Service\Factory;
 
 use Database\Service\Api as ApiService;
 use Database\Service\FrontPage as FrontPageService;
+use Database\Service\Listmonk as ListmonkService;
+use Database\Service\MailingList as MailingListService;
 use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -23,11 +25,15 @@ class FrontPageFactory implements FactoryInterface
     ): FrontPageService {
         $apiService = $container->get(ApiService::class);
         $mailmanService = $container->get(MailmanService::class);
+        $listmonkService = $container->get(ListmonkService::class);
+        $mailingListService = $container->get(MailingListService::class);
         $memberService = $container->get(MemberService::class);
 
         return new FrontPageService(
             $apiService,
             $mailmanService,
+            $listmonkService,
+            $mailingListService,
             $memberService,
         );
     }

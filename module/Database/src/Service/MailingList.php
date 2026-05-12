@@ -9,6 +9,7 @@ use Database\Form\MailingList as MailingListForm;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Model\MailingList as MailingListModel;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\Mailman as MailmanService;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,6 +25,7 @@ class MailingList
         private readonly MailingListMapper $mailingListMapper,
         private readonly MailingListMemberMapper $mailingListMemberMapper,
         private readonly MailmanService $mailmanService,
+        private readonly ListmonkService $listmonkService,
     ) {
     }
 
@@ -65,7 +67,17 @@ class MailingList
         $list->setNlDescription($data['nl_description']);
         $list->setOnForm(boolval($data['onForm']));
         $list->setDefaultSub(boolval($data['defaultSub']));
-        $list->setMailmanList($this->getMailmanService()->getMailingList($data['mailmanList']));
+        $list->setMailmanList(
+            $data['mailmanList']
+                ? $this->getMailmanService()->getMailingList($data['mailmanList'])
+                : null
+        );
+
+        $list->setListmonkList(
+            $data['listmonkList']
+                ? $this->getListmonkService()->getMailingList($data['listmonkList'])
+                : null
+        );
 
         $this->getListMapper()->persist($list);
 
@@ -132,6 +144,11 @@ class MailingList
         return $this->mailmanService;
     }
 
+    public function getListmonkService(): ListmonkService
+    {
+        return $this->listmonkService;
+    }
+
     /**
      * Perform maintenance to abnormal mailing list situations
      * This does not directly operate on mailman
@@ -168,5 +185,81 @@ class MailingList
             $expiredMembership->setToBeDeleted(true);
             $this->getMailingListMemberMapper()->persist($expiredMembership);
         }
+    }
+
+    /**
+     * Process pending local-only mailing list memberships.
+     *
+     * For lists without a Mailman or Listmonk binding, external sync is impossible, so
+     * pending creations are marked successful and pending deletions are removed.
+     */
+    public function syncLocalOnlyMembership(
+        OutputInterface $output = new NullOutput(),
+        bool $dryRun = false,
+    ): void {
+        $output->writeln('Processing pending memberships for local-only mailing lists:');
+
+        $memberships = $this->getMailingListMemberMapper()->findAllPendingLocalOnly();
+
+        foreach ($memberships as $mailingListMember) {
+            $listName = $mailingListMember->getMailingList()->getName();
+            $email = $mailingListMember->getEmail();
+
+            if ($mailingListMember->isToBeDeleted()) {
+                $output->writeln(
+                    sprintf(
+                        '-> Removing local-only mailing list membership for %s on %s',
+                        $email,
+                        $listName,
+                    ),
+                    OutputInterface::VERBOSITY_VERBOSE,
+                );
+
+                if (!$dryRun) {
+                    $this->getMailingListMemberMapper()->remove($mailingListMember);
+                }
+            }
+
+            if ($mailingListMember->isToBeCreated()) {
+                $output->writeln(
+                    sprintf(
+                        '-> Clearing pending creation for local-only mailing list membership %s on %s',
+                        $email,
+                        $listName,
+                    ),
+                    OutputInterface::VERBOSITY_VERBOSE,
+                );
+
+                if (!$dryRun) {
+                    $mailingListMember->setToBeCreated(false);
+                    $this->getMailingListMemberMapper()->persist($mailingListMember);
+                }
+            }
+
+            if ($dryRun) {
+                return;
+            }
+
+            $mailingListMember->setLastSyncOn();
+            $mailingListMember->setLastSyncSuccess(true);
+        }
+    }
+
+    /**
+     * @return array{
+     *     mailingListChangesPending: array{
+     *       creations: int,
+     *       deletions: int,
+     *     },
+     * }
+     */
+    public function getFrontpageData(): array
+    {
+        return [
+            'mailingListChangesPending' => [
+                'creations' => $this->getMailingListMemberMapper()->countPendingCreation(),
+                'deletions' => $this->getMailingListMemberMapper()->countPendingDeletion(),
+            ],
+        ];
     }
 }

@@ -6,6 +6,7 @@ namespace Database\Controller\Factory;
 
 use Checker\Service\Checker as CheckerService;
 use Database\Controller\MemberController;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
@@ -29,6 +30,8 @@ class MemberControllerFactory implements FactoryInterface
         $checkerService = $container->get(CheckerService::class);
         /** @var MailmanService $mailmanService */
         $mailmanService = $container->get(MailmanService::class);
+        /** @var ListmonkService $listmonkService */
+        $listmonkService = $container->get(ListmonkService::class);
         /** @var MemberService $memberService */
         $memberService = $container->get(MemberService::class);
         /** @var StripeService $stripeService */
@@ -40,6 +43,7 @@ class MemberControllerFactory implements FactoryInterface
             $translator,
             $checkerService,
             $mailmanService,
+            $listmonkService,
             $memberService,
             $stripeService,
             $remoteAddress,

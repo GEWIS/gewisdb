@@ -8,6 +8,7 @@ use Database\Form\DeleteList as DeleteListForm;
 use Database\Form\MailingList as MailingListForm;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Mailman as MailmanService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -33,6 +34,8 @@ class MailingListFactory implements FactoryInterface
         $mailingListMemberMapper = $container->get(MailingListMemberMapper::class);
         /** @var MailmanService $mailmanService */
         $mailmanService = $container->get(MailmanService::class);
+        /** @var ListmonkService $listmonkService */
+        $listmonkService = $container->get(ListmonkService::class);
 
         return new MailingListService(
             $deleteListForm,
@@ -40,6 +43,7 @@ class MailingListFactory implements FactoryInterface
             $mailingListMapper,
             $mailingListMemberMapper,
             $mailmanService,
+            $listmonkService,
         );
     }
 }
