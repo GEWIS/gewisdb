@@ -23,7 +23,7 @@ use Laminas\View\Renderer\PhpRenderer;
         <h2><?= $this->translate('Current Mailing Lists') ?></h2>
         <?= sprintf(
             '%s: %s',
-            $this->translate('Last fetch of listmonk lists'),
+            $this->translate('Last fetch of Listmonk lists'),
             $listmonkLastFetch?->format('Y-m-d H:i:s') ?: $this->translate('never')
         ) ?>
     </div>

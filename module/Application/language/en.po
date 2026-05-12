@@ -1022,15 +1022,15 @@ msgid "Last Update to Membership"
 msgstr "Last Update to Membership"
 
 #, php-format
-msgid "Last fetch of available listmonk lists was %s."
-msgstr "Last fetch of available listmonk lists was %s."
+msgid "Last fetch of available Listmonk lists was %s."
+msgstr "Last fetch of available Listmonk lists was %s."
 
 #, php-format
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Last fetch of available mailman lists was %s."
 
-msgid "Last fetch of listmonk lists"
-msgstr "Last fetch of listmonk lists"
+msgid "Last fetch of Listmonk lists"
+msgstr "Last fetch of Listmonk lists"
 
 msgid "Leave note"
 msgstr "Leave note"

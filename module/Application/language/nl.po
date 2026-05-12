@@ -1030,14 +1030,14 @@ msgid "Last Update to Membership"
 msgstr "Laatste aanpassing van het lidmaatschap"
 
 #, php-format
-msgid "Last fetch of available listmonk lists was %s."
+msgid "Last fetch of available Listmonk lists was %s."
 msgstr "Beschikbare Listmonk lijsten voor het laatst om %s opgehaald."
 
 #, php-format
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Beschikbare Mailman lijsten voor het laatst om %s opgehaald."
 
-msgid "Last fetch of listmonk lists"
+msgid "Last fetch of Listmonk lists"
 msgstr "Listmonk lijsten voor het laatst opgehaald"
 
 msgid "Leave note"
