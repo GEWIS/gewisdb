@@ -10,6 +10,7 @@ use Database\Model\SubDecision\Discharge as DischargeModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use InvalidArgumentException;
+use Override;
 
 class Install extends AbstractDecision
 {
@@ -20,6 +21,7 @@ class Install extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

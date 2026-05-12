@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToOne;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 /**
  * Installation as board member.
@@ -100,6 +101,7 @@ class Installation extends SubDecision
         $this->date = $date;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -110,6 +112,7 @@ class Installation extends SubDecision
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

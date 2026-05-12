@@ -10,6 +10,7 @@ use Database\Service\Meeting as MeetingService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use Override;
 
 use function array_key_exists;
 use function array_map;
@@ -23,6 +24,7 @@ class OrganController extends AbstractActionController
     /**
      * Index action, for organ search.
      */
+    #[Override]
     public function indexAction(): ViewModel
     {
         return new ViewModel([]);

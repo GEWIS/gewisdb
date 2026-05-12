@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 /**
  * Reappointment of a previous installation.
@@ -64,6 +65,7 @@ class Reappointment extends SubDecision
         $this->installation = $installation;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -74,6 +76,7 @@ class Reappointment extends SubDecision
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

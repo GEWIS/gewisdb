@@ -12,6 +12,7 @@ use Checker\Service\Member as MemberService;
 use Checker\Service\Organ as OrganService;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class CheckerFactory implements FactoryInterface
@@ -19,6 +20,7 @@ class CheckerFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

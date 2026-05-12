@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 #[Entity]
 class Withdrawal extends SubDecision
@@ -86,6 +87,7 @@ class Withdrawal extends SubDecision
         $this->withdrawnOn = $withdrawnOn;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -96,6 +98,7 @@ class Withdrawal extends SubDecision
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

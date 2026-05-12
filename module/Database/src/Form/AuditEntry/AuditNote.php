@@ -10,6 +10,7 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
+use Override;
 
 /**
  * @template TFilteredValues
@@ -42,6 +43,7 @@ class AuditNote extends Form implements InputFilterProviderInterface
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

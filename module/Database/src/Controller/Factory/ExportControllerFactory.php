@@ -7,6 +7,7 @@ namespace Database\Controller\Factory;
 use Database\Controller\ExportController;
 use Database\Service\Meeting as MeetingService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class ExportControllerFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class ExportControllerFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

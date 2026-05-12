@@ -16,6 +16,7 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\NotEmpty;
 use Laminas\Validator\StringLength;
+use Override;
 
 class Foundation extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -76,6 +77,7 @@ class Foundation extends AbstractDecision implements InputFilterProviderInterfac
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

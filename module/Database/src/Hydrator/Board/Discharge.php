@@ -8,6 +8,7 @@ use Database\Hydrator\AbstractDecision;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Board\Discharge as BoardDischarge;
 use InvalidArgumentException;
+use Override;
 
 class Discharge extends AbstractDecision
 {
@@ -18,6 +19,7 @@ class Discharge extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

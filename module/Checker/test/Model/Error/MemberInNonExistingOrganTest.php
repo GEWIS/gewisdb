@@ -9,9 +9,11 @@ use CheckerTest\Model\Error;
 use Database\Model\Enums\InstallationFunctions;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
+use Override;
 
 class MemberInNonExistingOrganTest extends Error
 {
+    #[Override]
     protected function create(): MemberInNonExistingOrgan
     {
         $installation = new InstallationModel();

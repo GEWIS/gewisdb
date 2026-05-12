@@ -6,9 +6,11 @@ namespace Database\Hydrator\Strategy;
 
 use Application\Model\Enums\PostalRegions;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use Override;
 
 class PostalRegionHydratorStrategy implements StrategyInterface
 {
+    #[Override]
     public function extract(
         mixed $value,
         ?object $object = null,
@@ -20,6 +22,7 @@ class PostalRegionHydratorStrategy implements StrategyInterface
         return PostalRegions::from($value)->value;
     }
 
+    #[Override]
     public function hydrate(
         mixed $value,
         ?array $data,

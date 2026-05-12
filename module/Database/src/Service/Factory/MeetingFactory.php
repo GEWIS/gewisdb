@@ -25,6 +25,7 @@ use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\Organ as OrganMapper;
 use Database\Service\Meeting as MeetingService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class MeetingFactory implements FactoryInterface
@@ -32,6 +33,7 @@ class MeetingFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

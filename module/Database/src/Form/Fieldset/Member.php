@@ -9,6 +9,7 @@ use Laminas\Form\Element\Text;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Digits;
+use Override;
 
 class Member extends Fieldset implements InputFilterProviderInterface
 {
@@ -31,6 +32,7 @@ class Member extends Fieldset implements InputFilterProviderInterface
         ]);
     }
 
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

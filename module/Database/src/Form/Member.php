@@ -27,6 +27,7 @@ use Laminas\Validator\Hostname;
 use Laminas\Validator\Identical;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
+use Override;
 use Throwable;
 
 use function date;
@@ -200,7 +201,7 @@ class Member extends Form implements InputFilterProviderInterface
         foreach ($this->lists as $list) {
             $desc = $list->getNlDescription();
 
-            if ('en' === $this->translator->getLocale()) {
+            if ('en' === $this->translator->getTranslator()->getLocale()) {
                 $desc = $list->getEnDescription();
             }
 
@@ -231,6 +232,7 @@ class Member extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

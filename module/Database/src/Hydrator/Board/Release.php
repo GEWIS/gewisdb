@@ -9,6 +9,7 @@ use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Board\Release as BoardRelease;
 use DateTime;
 use InvalidArgumentException;
+use Override;
 
 class Release extends AbstractDecision
 {
@@ -19,6 +20,7 @@ class Release extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

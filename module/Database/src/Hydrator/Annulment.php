@@ -7,6 +7,7 @@ namespace Database\Hydrator;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use InvalidArgumentException;
+use Override;
 
 class Annulment extends AbstractDecision
 {
@@ -17,6 +18,7 @@ class Annulment extends AbstractDecision
      *
      * @throws InvalidArgumentException when $object is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

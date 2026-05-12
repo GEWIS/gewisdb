@@ -240,7 +240,7 @@ abstract class SubDecision
      */
     final public function getContent(Translator $translator): string
     {
-        $language = AppLanguages::fromLangParam($translator->getLocale());
+        $language = AppLanguages::fromLangParam($translator->getTranslator()->getLocale());
 
         return $this->getTranslatedContent($translator, $language);
     }

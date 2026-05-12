@@ -8,6 +8,7 @@ use Database\Service\Query as QueryService;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Override;
 
 class QueryController extends AbstractActionController
 {
@@ -17,7 +18,10 @@ class QueryController extends AbstractActionController
 
     /**
      * Index action.
+     *
+     * @psalm-suppress InvalidReturnType, InvalidReturnStatement
      */
+    #[Override]
     public function indexAction(): HttpResponse|ViewModel
     {
         if ($this->getRequest()->isPost()) {

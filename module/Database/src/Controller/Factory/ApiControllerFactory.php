@@ -8,6 +8,7 @@ use Database\Controller\ApiController;
 use Database\Service\Api as ApiService;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use User\Service\ApiAuthenticationService;
 
@@ -16,6 +17,7 @@ class ApiControllerFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

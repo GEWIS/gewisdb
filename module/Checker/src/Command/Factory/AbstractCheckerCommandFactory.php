@@ -6,6 +6,7 @@ namespace Checker\Command\Factory;
 
 use Checker\Service\Checker as CheckerService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class AbstractCheckerCommandFactory implements FactoryInterface
@@ -17,6 +18,7 @@ class AbstractCheckerCommandFactory implements FactoryInterface
      *
      * @return T
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

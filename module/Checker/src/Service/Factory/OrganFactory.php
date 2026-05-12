@@ -7,6 +7,7 @@ namespace Checker\Service\Factory;
 use Checker\Mapper\Organ as OrganMapper;
 use Checker\Service\Organ as OrganService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class OrganFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class OrganFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

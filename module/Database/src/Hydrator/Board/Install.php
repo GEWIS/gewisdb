@@ -10,6 +10,7 @@ use Database\Model\Enums\BoardFunctions;
 use Database\Model\SubDecision\Board\Installation as BoardInstall;
 use DateTime;
 use InvalidArgumentException;
+use Override;
 
 class Install extends AbstractDecision
 {
@@ -20,6 +21,7 @@ class Install extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

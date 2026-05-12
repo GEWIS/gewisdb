@@ -9,6 +9,7 @@ use Database\Model\Meeting as MeetingModel;
 use Database\Model\Member as MemberModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
+use Override;
 
 use function sprintf;
 
@@ -46,6 +47,7 @@ class MemberActiveWithRoleAndInactiveInOrgan extends Error
         return $this->getSubDecision()->getFoundation();
     }
 
+    #[Override]
     public function asText(): string
     {
         return sprintf(

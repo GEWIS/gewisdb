@@ -16,6 +16,7 @@ use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use Override;
 use UnexpectedValueException;
 
 use function array_key_exists;
@@ -35,6 +36,7 @@ class MeetingController extends AbstractActionController
      *
      * Shows all meetings.
      */
+    #[Override]
     public function indexAction(): ViewModel
     {
         return new ViewModel([

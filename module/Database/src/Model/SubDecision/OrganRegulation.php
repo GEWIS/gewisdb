@@ -14,6 +14,7 @@ use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 use ValueError;
 
 #[Entity]
@@ -170,6 +171,7 @@ class OrganRegulation extends SubDecision
         $this->changes = $changes;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -180,6 +182,7 @@ class OrganRegulation extends SubDecision
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

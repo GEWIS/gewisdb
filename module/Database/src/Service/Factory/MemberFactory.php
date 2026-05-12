@@ -30,6 +30,7 @@ use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\Renderer\PhpRenderer;
+use Override;
 use Psr\Container\ContainerInterface;
 use User\Service\UserService;
 
@@ -38,6 +39,7 @@ class MemberFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

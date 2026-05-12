@@ -7,6 +7,7 @@ namespace Application\Extensions\Doctrine\Middleware;
 use Doctrine\DBAL\Driver as DriverInterface;
 use Doctrine\DBAL\Driver\Connection as ConnectionInterface;
 use Doctrine\DBAL\Driver\Middleware\AbstractDriverMiddleware;
+use Override;
 use SensitiveParameter;
 
 use function implode;
@@ -27,6 +28,7 @@ class Driver extends AbstractDriverMiddleware
     /**
      * {@inheritDoc}
      */
+    #[Override]
     public function connect(
         #[SensitiveParameter]
         array $params,

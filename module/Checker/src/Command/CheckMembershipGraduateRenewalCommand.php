@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Checker\Command;
 
 use Checker\Service\Renewal as RenewalService;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,6 +22,7 @@ class CheckMembershipGraduateRenewalCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

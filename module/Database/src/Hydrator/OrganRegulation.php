@@ -9,6 +9,7 @@ use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\OrganRegulation as RegulationModel;
 use DateTime;
 use InvalidArgumentException;
+use Override;
 use UnexpectedValueException;
 
 use function boolval;
@@ -22,6 +23,7 @@ class OrganRegulation extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,
