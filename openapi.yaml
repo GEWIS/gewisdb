@@ -17,7 +17,7 @@ servers:
     description: Test environment
   - url: 'https://database.gewis.nl/api'
     description: Production environment
-  - url: 'http://localhost/api'
+  - url: 'http://localhost:9725/api'
     description: Local environment
 tags:
   - name: basic
