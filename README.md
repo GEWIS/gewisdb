@@ -51,6 +51,8 @@ You will need at least:
 
 Some of the `make` commands run natively on your machine; as such, you may also need to install PHP itself (use the `ondrej/php` PPA for `apt` to get the latest version) and [`composer`](https://getcomposer.org/download/).
 
+It is possible to use [rootless docker](https://docs.docker.com/engine/security/rootless/) on many Linux systems. For this, install `uidmap`, ensure IP forwarding is enabled, run `dockerd-rootless-setuptool.sh install` and set the `DOCKER_HOST` variable in your profile (e.g. `.bashrc`).
+
 ### Installation
 To set up GEWISDB locally, follow these steps:
 
@@ -59,7 +61,7 @@ To set up GEWISDB locally, follow these steps:
 3. Copy the `.env.dist` file to `.env` and alter the file to your needs.
 4. Run `make rundev` to build and serve the website (this may take 5-10 minutes).
 5. Run `make migrate` and `make seed` to get some test data.
-6. Go to `http://localhost/` in your browser and you are greeted with the GEWIS decision and membership database.
+6. Go to `http://localhost:9725/` in your browser and you are greeted with the GEWIS decision and membership database.
 7. Log in with username `admin` and the password `gewisdbgewis`.
 
 ### Contributing
@@ -126,7 +128,7 @@ To experiment with the API, import the openapi.yaml file into your favourite RES
 Alternatively, you can use PowerShell, for example:
 
 ```powershell
-((Invoke-WebRequest -Uri http://localhost/api/organFunctions -Headers @{"Authorization" = "Bearer APITOKEN"; "Accept" = "application/vnd.gewis.gewisdb+json;version=4.3.3"}).Content | ConvertFrom-Json).data | Format-List
+((Invoke-WebRequest -Uri http://localhost:9725/api/organFunctions -Headers @{"Authorization" = "Bearer APITOKEN"; "Accept" = "application/vnd.gewis.gewisdb+json;version=4.3.3"}).Content | ConvertFrom-Json).data | Format-List
 ```
 
 ## License

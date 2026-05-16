@@ -81,7 +81,7 @@ services:
         volumes:
             - mailman-static:/var/html/mailman/:ro
         ports:
-            - "80:9725"
+            - "9725:9725"
     stripe:
         image: stripe/stripe-cli:latest
         command: listen --forward-to nginx:9725/member/subscribe/checkout/webhook
