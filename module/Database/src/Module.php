@@ -36,6 +36,7 @@ use Database\Form\Fieldset\Installation as InstallationFieldset;
 use Database\Form\Fieldset\Meeting as MeetingFieldset;
 use Database\Form\Fieldset\Member as MemberFieldset;
 use Database\Form\Fieldset\MemberFunction as MemberFunctionFieldset;
+use Database\Form\Fieldset\Study as StudyFieldset;
 use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
 use Database\Form\Foundation as FoundationForm;
 use Database\Form\Install as InstallForm;
@@ -206,6 +207,7 @@ class Module
                 MemberForm::class => static function (ContainerInterface $container) {
                     $form = new MemberForm(
                         $container->get(AddressFieldset::class),
+                        $container->get(StudyFieldset::class),
                         $container->get(MvcTranslator::class),
                     );
                     $form->setHydrator($container->get('database_hydrator_default'));
@@ -496,6 +498,15 @@ class Module
                         $container->get(MvcTranslator::class),
                         $container->get(MemberFieldset::class),
                         false,
+                    );
+                    $fieldset->setHydrator(new ObjectPropertyHydrator());
+                    $fieldset->setObject(new stdClass());
+
+                    return $fieldset;
+                },
+                StudyFieldset::class => static function (ContainerInterface $container) {
+                    $fieldset = new StudyFieldset(
+                        $container->get(MvcTranslator::class),
                     );
                     $fieldset->setHydrator(new ObjectPropertyHydrator());
                     $fieldset->setObject(new stdClass());
