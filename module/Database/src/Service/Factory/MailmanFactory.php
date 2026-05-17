@@ -11,6 +11,7 @@ use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Service\Mailman as MailmanService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class MailmanFactory implements FactoryInterface
@@ -18,6 +19,7 @@ class MailmanFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

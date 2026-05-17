@@ -6,6 +6,7 @@ namespace Database\Form;
 
 use Application\Model\Enums\AddressTypes;
 use Database\Form\Fieldset\Address as AddressFieldset;
+use Database\Form\Fieldset\Study as StudyFieldset;
 use Database\Model\MailingList as MailingListModel;
 use DateInterval;
 use DateTime;
@@ -15,7 +16,6 @@ use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Email;
-use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
@@ -27,6 +27,7 @@ use Laminas\Validator\Hostname;
 use Laminas\Validator\Identical;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
+use Override;
 use Throwable;
 
 use function date;
@@ -43,6 +44,7 @@ class Member extends Form implements InputFilterProviderInterface
 
     public function __construct(
         AddressFieldset $address,
+        StudyFieldset $study,
         protected readonly MvcTranslator $translator,
     ) {
         parent::__construct();
@@ -87,67 +89,8 @@ class Member extends Form implements InputFilterProviderInterface
             ],
         ]);
 
-        // phpcs:disable Generic.Files.LineLength.TooLong -- user-visible strings should not be split
-        $this->add([
-            'name' => 'study',
-            'type' => Select::class,
-            'options' => [
-                'label' => $translator->translate('Study'),
-                'value_options' => [
-                    'bachelor' => [
-                        'label' => 'Bachelor Programs',
-                        'options' => [
-                            'Bachelor Applied Mathematics' => 'Applied Mathematics',
-                            'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Bachelor Data Science' => 'Data Science¹',
-                        ],
-                    ],
-                    'premaster' => [
-                        'label' => 'Premaster Programs',
-                        'options' => [
-                            'Pre-master Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Pre-master Data Science and Artificial Intelligence' => 'Data Science and Artificial Intelligence¹',
-                            'Pre-master Embedded Systems' => 'Embedded Systems',
-                            'Pre-master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
-                            'Pre-master Information Security Technology' => 'Information Security Technology',
-                            'Schakelprogramma SEC Leraar vho Informatica' => 'Schakelprogramma SEC Leraar vho Informatica',
-                            'Schakelprogramma SEC Leraar vho Wiskunde' => 'Schakelprogramma SEC Leraar vho Wiskunde',
-                        ],
-                    ],
-                    'graduate' => [
-                        'label' => 'Graduate Programs',
-                        'options' => [
-                            'Master Artificial Intelligence & Engineering Systems' => 'Artificial Intelligence & Engineering Systems',
-                            'Master Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Master Data Science & Artificial Intelligence' => 'Data Science & Artificial Intelligence¹',
-                            'Master Data Science in Business and Entrepreneurship' => 'Data Science in Business and Entrepreneurship',
-                            'Master Embedded Systems' => 'Embedded Systems',
-                            'Master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
-                            'Master Information Security Technology' => 'Information Security Technology',
-                            'Master Science Education' => 'Science Education',
-                        ],
-                    ],
-                    'phd' => [
-                        'label' => 'EngD / PhD Programs',
-                        'options' => [
-                            'EngD Automotive Systems Design' => 'EngD Automotive Systems Design',
-                            'EngD Data Science' => 'EngD Data Science¹',
-                            'EngD Mechatronic Systems Design' => 'EngD Mechatronic Systems Design',
-                            'EngD Software Technology' => 'EngD Software Technology',
-                            'PhD Computer Science' => 'PhD Computer Science',
-                            'PhD Data Science' => 'PhD Data Science¹',
-                            'PhD Mathematics' => 'PhD Mathematics',
-                        ],
-                    ],
-                    'other' => [
-                        'label' => 'Other',
-                        'options' => ['Other' => 'Other'],
-                    ],
-                ],
-                'empty_option' => $translator->translate('Select a study'),
-            ],
-        ]);
-        // phpcs:enable Generic.Files.LineLength.TooLong
+        $study->setName('study');
+        $this->add($study);
 
         $this->add([
             'name' => 'email',
@@ -200,7 +143,7 @@ class Member extends Form implements InputFilterProviderInterface
         foreach ($this->lists as $list) {
             $desc = $list->getNlDescription();
 
-            if ('en' === $this->translator->getLocale()) {
+            if ('en' === $this->translator->getTranslator()->getLocale()) {
                 $desc = $list->getEnDescription();
             }
 
@@ -231,6 +174,7 @@ class Member extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

@@ -7,6 +7,7 @@ namespace Database\Model\SubDecision;
 use Application\Model\Enums\AppLanguages;
 use Doctrine\ORM\Mapping\Entity;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 /**
  * Abrogation of an organ.
@@ -14,6 +15,7 @@ use Laminas\Translator\TranslatorInterface;
 #[Entity]
 class Abrogation extends FoundationReference
 {
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -24,6 +26,7 @@ class Abrogation extends FoundationReference
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

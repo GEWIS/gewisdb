@@ -12,6 +12,7 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\StringLength;
+use Override;
 use User\Model\ApiPrincipal as ApiPrincipalmodel;
 use User\Model\Enums\ApiPermissions;
 
@@ -75,6 +76,7 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
      *
      * @return array<array-key,mixed>
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [
@@ -98,6 +100,7 @@ class ApiPrincipal extends Form implements InputFilterProviderInterface
         ];
     }
 
+    #[Override]
     public function bind(
         object $object,
         int $flags = Form::VALUES_NORMALIZED,

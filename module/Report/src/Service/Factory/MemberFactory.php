@@ -7,6 +7,7 @@ namespace Report\Service\Factory;
 use Database\Mapper\Member as MemberMapper;
 use Doctrine\ORM\EntityManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use Report\Service\Member as MemberService;
 
@@ -15,6 +16,7 @@ class MemberFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

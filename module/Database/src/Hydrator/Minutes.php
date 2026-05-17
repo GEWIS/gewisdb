@@ -7,6 +7,7 @@ namespace Database\Hydrator;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Minutes as MinutesModel;
 use InvalidArgumentException;
+use Override;
 
 use function boolval;
 
@@ -19,6 +20,7 @@ class Minutes extends AbstractDecision
      *
      * @throws InvalidArgumentException when $object is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

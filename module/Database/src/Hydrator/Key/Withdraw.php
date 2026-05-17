@@ -9,6 +9,7 @@ use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Key\Withdrawal as KeyWithdrawal;
 use DateTime;
 use InvalidArgumentException;
+use Override;
 
 class Withdraw extends AbstractDecision
 {
@@ -19,6 +20,7 @@ class Withdraw extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

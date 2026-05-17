@@ -9,6 +9,7 @@ use Database\Model\SubDecision\Financial\Budget as BudgetModel;
 use Database\Model\SubDecision\Financial\Statement as StatementModel;
 use DateTime;
 use InvalidArgumentException;
+use Override;
 
 use function boolval;
 
@@ -21,6 +22,7 @@ class Budget extends AbstractDecision
      *
      * @throws InvalidArgumentException when $object is not a SubDecision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Authentication\AuthenticationServiceInterface;
+use Override;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Model\Enums\ApiPermissions;
 use User\Model\Exception\NotAllowed as NotAllowedException;
@@ -22,6 +23,7 @@ class ApiAuthenticationService extends AuthenticationService implements Authenti
         parent::__construct(null, $adapter);
     }
 
+    #[Override]
     public function setAdapter(AdapterInterface $adapter): self
     {
         if ($adapter instanceof ApiPrincipalAdapter) {

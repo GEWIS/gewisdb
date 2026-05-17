@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Report\Command;
 
+use Override;
 use Report\Service\Board as BoardService;
 use Report\Service\Keyholder as KeyholderService;
 use Report\Service\Meeting as MeetingService;
@@ -27,6 +28,7 @@ class GenerateFullCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

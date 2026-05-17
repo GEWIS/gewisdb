@@ -9,6 +9,7 @@ use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Override;
 
 class QuerySave extends Query implements InputFilterProviderInterface
 {
@@ -42,6 +43,7 @@ class QuerySave extends Query implements InputFilterProviderInterface
         ]);
     }
 
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         $filter = parent::getInputFilterSpecification();

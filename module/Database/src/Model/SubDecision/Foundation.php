@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 /**
  * Foundation of an organ.
@@ -141,6 +142,7 @@ class Foundation extends SubDecision
         return $this->references;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -153,11 +155,12 @@ class Foundation extends SubDecision
         }
 
         return $translator->translate(
-            'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.',
+            'De stemcommissie voor %ORGAN_PURPOSE% van de %MEETING_NUMBER%e %MEETING_TYPE% met afkorting %ORGAN_ABBR% wordt opgericht.', // phpcs:ignore -- user-visible strings should not be split
             locale: $language->getLangParam(),
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

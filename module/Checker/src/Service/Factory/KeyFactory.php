@@ -7,6 +7,7 @@ namespace Checker\Service\Factory;
 use Checker\Mapper\Key as KeyMapper;
 use Checker\Service\Key as KeyService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class KeyFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class KeyFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

@@ -17,6 +17,7 @@ use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\InArray;
 use Laminas\Validator\StringLength;
+use Override;
 
 class Budget extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -100,6 +101,7 @@ class Budget extends AbstractDecision implements InputFilterProviderInterface
         ]);
     }
 
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

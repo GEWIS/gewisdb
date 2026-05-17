@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Override;
 
 /**
  * Class for registering renewals by the member or another user
@@ -101,6 +102,7 @@ class AuditRenewal extends AuditEntry
     /**
      * Get a textual representation of this audit entry
      */
+    #[Override]
     protected function getStringBodyFormatted(): string
     {
         return '<strong>%s</strong> of <emph>%s</emph> until <br/>%s';
@@ -109,6 +111,7 @@ class AuditRenewal extends AuditEntry
     /**
      * @return array<?string>
      */
+    #[Override]
     protected function getStringArguments(): array
     {
         return [

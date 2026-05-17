@@ -10,6 +10,7 @@ use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Digits;
 use Laminas\Validator\InArray;
+use Override;
 
 class SubDecision extends Fieldset implements InputFilterProviderInterface
 {
@@ -46,6 +47,7 @@ class SubDecision extends Fieldset implements InputFilterProviderInterface
     /**
      * Specification for input filters.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

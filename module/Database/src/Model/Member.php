@@ -33,7 +33,7 @@ class Member
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
-    private ?int $lidnr = null;
+    private int $lidnr;
 
     /**
      * Member's email address.
@@ -278,10 +278,8 @@ class Member
 
     /**
      * Get the membership number.
-     *
-     * @psalm-ignore-nullable-return
      */
-    public function getLidnr(): ?int
+    public function getLidnr(): int
     {
         return $this->lidnr;
     }

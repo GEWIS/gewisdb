@@ -10,6 +10,7 @@ use Database\Model\Enums\InstallationFunctions;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Installation as InstallationModel;
 use InvalidArgumentException;
+use Override;
 
 use function sprintf;
 
@@ -22,6 +23,7 @@ class Foundation extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

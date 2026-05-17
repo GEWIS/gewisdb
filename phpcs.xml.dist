@@ -182,7 +182,6 @@
         <exclude-pattern>module/Database/src/Form/Key/Grant.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/Key/Withdraw.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MailingList.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Form/Member.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberEdit.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberExpiration.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Form/MemberLists.php</exclude-pattern>

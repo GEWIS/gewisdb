@@ -59,6 +59,7 @@ abstract class Error extends TestCase
     protected function getMember(): MemberModel
     {
         $member = new MemberModel();
+        $member->setLidnr(1);
         $member->setType(MembershipTypes::Ordinary);
         $member->setFirstName('Anton');
         $member->setMiddleName('');

@@ -11,6 +11,7 @@ use Database\Mapper\SavedQuery as SavedQueryMapper;
 use Database\Service\Query as QueryService;
 use Doctrine\ORM\EntityManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class QueryFactory implements FactoryInterface
@@ -18,6 +19,7 @@ class QueryFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

@@ -11,6 +11,7 @@ use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Submit;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Override;
 
 class Release extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -43,6 +44,7 @@ class Release extends AbstractDecision implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

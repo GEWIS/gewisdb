@@ -7,6 +7,7 @@ namespace Database\Hydrator;
 use Database\Model\Decision as DecisionModel;
 use InvalidArgumentException;
 use Laminas\Hydrator\HydratorInterface;
+use Override;
 
 use function intval;
 
@@ -19,6 +20,7 @@ abstract class AbstractDecision implements HydratorInterface
      *
      * @throws InvalidArgumentException when $object is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,
@@ -41,6 +43,7 @@ abstract class AbstractDecision implements HydratorInterface
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
+    #[Override]
     public function extract(object $object): array
     {
         if (!$object instanceof DecisionModel) {

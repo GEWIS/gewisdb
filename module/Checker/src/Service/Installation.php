@@ -59,7 +59,7 @@ class Installation
         $roles = [];
 
         foreach ($installations as $installation) {
-            $memberId = (int) $installation->getMember()->getLidnr();
+            $memberId = $installation->getMember()->getLidnr();
             $function = $installation->getFunction()->value;
             $organName = $installation->getFoundation()->getAbbr();
 

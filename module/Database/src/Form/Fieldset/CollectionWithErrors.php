@@ -8,6 +8,7 @@ use Laminas\Form\Element;
 use Laminas\Form\Element\Collection;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\FieldsetInterface;
+use Override;
 use ReflectionMethod;
 use Traversable;
 
@@ -31,6 +32,7 @@ class CollectionWithErrors extends Collection
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
+    #[Override]
     public function setMessages(iterable $messages): ElementInterface|FieldsetInterface|Element|self
     {
         // Get the correct parent class
@@ -54,6 +56,7 @@ class CollectionWithErrors extends Collection
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
+    #[Override]
     public function getMessages(?string $elementName = null): array
     {
         // Get the correct parent class

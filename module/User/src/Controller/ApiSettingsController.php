@@ -9,6 +9,7 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Laminas\View\Model\ViewModel;
+use Override;
 use User\Service\ApiPrincipalService;
 
 use function sprintf;
@@ -127,6 +128,7 @@ class ApiSettingsController extends AbstractActionController
         return $this->redirect()->toRoute('settings/api-principals');
     }
 
+    #[Override]
     public function notFoundAction(): HttpResponse
     {
         $this->flashMessenger()->addWarningMessage(

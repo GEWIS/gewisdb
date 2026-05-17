@@ -9,6 +9,7 @@ use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Key\Granting as KeyGranting;
 use DateTime;
 use InvalidArgumentException;
+use Override;
 
 class Grant extends AbstractDecision
 {
@@ -19,6 +20,7 @@ class Grant extends AbstractDecision
      *
      * @throws InvalidArgumentException when $decision is not a Decision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,
