@@ -1,4 +1,4 @@
-.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused
+.PHONY: help runprod rundev runtest runcoverage update updatecomposer getvendordir phpstan phpcs phpcbf phpcsfix phpcsfixtypes replenish compilelang build buildprod builddev update preparelistmonk preparemailman migrate migrate-to migration-down migration-up migration-diff composerunused
 
 help:
 		@echo "Makefile commands:"
@@ -69,6 +69,9 @@ seed: replenish
 		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null || true)'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
 		@docker compose exec -u www-data web ./web database:mailman:fetch
+		@make preparelistmonk
+		@docker compose exec -u www-data web ./web database:listmonk:fetch
+
 
 exec:
 		docker compose exec -u www-data -it web $(cmd)
@@ -88,7 +91,7 @@ getvendordir:
 		@docker compose cp web:/code/composer.json ./
 		@docker compose cp web:/code/composer.lock ./
 
-# The scan does not consider packages used by ./orm 
+# The scan does not consider packages used by ./orm
 # as well as the usage of composer patches in composer.json so these are whitelisted
 # Status code 0 -> Success
 composerunused:
@@ -242,3 +245,9 @@ buildpgadmin:
 preparemailman:
 		@docker compose cp ./docker/mailman/settings_local.py mailman-web:/opt/mailman-web/settings_local.py
 		@docker compose restart mailman-web
+
+preparelistmonk:
+		@echo -n "Adding listmonk API user to database if not exists: "
+		@docker compose exec postgresql sh -c 'psql -q -U $${POSTGRES_USER} -d $${POSTGRES_LISTMONK_DATABASE} -c "INSERT INTO public.users (\"username\", \"password_login\", \"password\", \"email\", \"name\", \"type\", \"user_role_id\", \"list_role_id\", \"status\") VALUES ('\''$${LISTMONK_API_USERNAME}'\'', false, '\''$${LISTMONK_API_PASSWORD}'\'', '\''$${LISTMONK_API_USERNAME}@api'\'', '\''Listmonk API User'\'', '\''api'\'', 1, null, '\''enabled'\'') ON CONFLICT (\"username\") DO UPDATE SET \"username\" = '\''$${LISTMONK_API_USERNAME}'\'', \"password\" = '\''$${LISTMONK_API_PASSWORD}'\'', \"user_role_id\" = 1;"'
+		@if [ $$? -eq 0 ]; then echo "success"; else echo "failed"; fi
+		@docker compose restart listmonk
