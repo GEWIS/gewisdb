@@ -99,7 +99,7 @@ services:
             LISTMONK_db__max_open: 25
             LISTMONK_db__max_idle: 25
             LISTMONK_db__max_lifetime: 300s
-            TZ: Etc/UTC
+            TZ: ${TZ}
             LISTMONK_ADMIN_USER: ${DEMO_CREDENTIALS_USERNAME}
             LISTMONK_ADMIN_PASSWORD: ${DEMO_CREDENTIALS_PASSWORD}
         volumes:
