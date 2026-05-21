@@ -35,8 +35,8 @@ class MemberController extends AbstractActionController
     public function __construct(
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
-        private readonly MailmanService $mailmanService,
         private readonly ListmonkService $listmonkService,
+        private readonly MailmanService $mailmanService,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
         private readonly string $remoteAddress,

@@ -31,10 +31,10 @@ class MemberControllerFactory implements FactoryInterface
         /** @var CheckerService $checkerService */
         $checkerService = $container->get(CheckerService::class);
         /** @var MailmanService $mailmanService */
-        $mailmanService = $container->get(MailmanService::class);
-        /** @var ListmonkService $listmonkService */
         $listmonkService = $container->get(ListmonkService::class);
         /** @var MemberService $memberService */
+        $mailmanService = $container->get(MailmanService::class);
+        /** @var ListmonkService $listmonkService */
         $memberService = $container->get(MemberService::class);
         /** @var StripeService $stripeService */
         $stripeService = $container->get(StripeService::class);
@@ -44,8 +44,8 @@ class MemberControllerFactory implements FactoryInterface
         return new MemberController(
             $translator,
             $checkerService,
-            $mailmanService,
             $listmonkService,
+            $mailmanService,
             $memberService,
             $stripeService,
             $remoteAddress,
