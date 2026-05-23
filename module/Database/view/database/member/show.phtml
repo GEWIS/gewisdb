@@ -15,7 +15,7 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var MemberModel $member
  * @var bool $hasCorrectInstallations
  */
-
+$translator = $this->plugin('translate')->getTranslator();
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -80,7 +80,7 @@ use Laminas\View\Renderer\PhpRenderer;
         <tr>
             <th><?= $this->translate('Membership Type') ?></th>
             <td>
-                <?= $member->getType()->getName($this->plugin('translate')->getTranslator()) ?>
+                <?= $member->getType()->getName($translator) ?>
                 <a href="<?= $this->url('member/show/edit/membership', array(
                     'id' => $member->getLidnr()
                 )) ?>" class="btn btn-primary btn-xs">
@@ -90,7 +90,7 @@ use Laminas\View\Renderer\PhpRenderer;
         </tr>
         <tr>
             <th><?= $this->translate('Study') ?></th>
-            <td><?= $member->getStudy() ?></td>
+            <td><?= $member->getStudy()?->getName($translator) ?></td>
         </tr>
         <tr>
             <th><?= $this->translate('Last Update to Membership') ?></th>
@@ -150,7 +150,7 @@ use Laminas\View\Renderer\PhpRenderer;
 <?php $addresses = array() ?>
 <?php foreach ($member->getAddresses() as $address): ?>
 <?php $addresses[$address->getType()->value] = $address ?>
-<h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?> <a href="<?= $this->url('member/show/edit/address', array(
+<h4><?= $address->getType()->getName($translator) ?> <a href="<?= $this->url('member/show/edit/address', array(
     'id' => $member->getLidnr(),
     'type' => $address->getType()->value
 )) ?>" class="btn btn-primary btn-sm"><?= $this->translate('Change') ?></a> <a href="<?= $this->url('member/show/remove-address', array(

@@ -16,6 +16,7 @@ use Laminas\View\Renderer\PhpRenderer;
  * @var TueDataModel $tueData
  * @var array<array-key, string[]> $tueStatus
  */
+$translator = $this->plugin('translate')->getTranslator();
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -90,7 +91,7 @@ use Laminas\View\Renderer\PhpRenderer;
         </tr>
         <tr>
             <th><?= $this->translate('Study') ?></th>
-            <td><?= $member->getStudy() ?></td>
+            <td><?= $member->getStudy()?->getName($translator) ?></td>
             <?php if ($tueData->isValid()): ?><td>
                 <?php foreach($tueData->getRegistrations() as $registration): ?>
                     <?=
@@ -113,7 +114,7 @@ use Laminas\View\Renderer\PhpRenderer;
                 <?php $addresses = array() ?>
                 <?php foreach ($member->getAddresses() as $address): ?>
                     <?php $addresses[$address->getType()->value] = $address ?>
-                    <h4><?= $address->getType()->getName($this->plugin('translate')->getTranslator()) ?></h4>
+                    <h4><?= $address->getType()->getName($translator) ?></h4>
                     <table class="table table-bordered">
                         <tr>
                             <th><?= $this->translate('Postal Region') ?></th>
@@ -163,7 +164,6 @@ use Laminas\View\Renderer\PhpRenderer;
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $translator = $this->plugin('translate')->getTranslator(); ?>
                             <?php foreach ($member->getCheckoutSessions() as $checkoutSession): ?>
                                 <tr>
                                     <td><?= $checkoutSession->getCreated()->format(DateTimeInterface::ATOM) ?></td>

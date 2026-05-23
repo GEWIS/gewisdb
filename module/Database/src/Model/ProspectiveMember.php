@@ -7,6 +7,7 @@ namespace Database\Model;
 use Application\Model\Enums\AddressTypes;
 use Application\Model\Enums\PostalRegions;
 use Database\Model\Enums\CheckoutSessionStates;
+use Database\Model\Enums\Studies;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -78,9 +79,10 @@ class ProspectiveMember
      */
     #[Column(
         type: 'string',
+        enumType: Studies::class,
         nullable: true,
     )]
-    private ?string $study = null;
+    private ?Studies $study = null;
 
     /**
      * Last changed date of membership.
@@ -308,15 +310,15 @@ class ProspectiveMember
     /**
      * Get the study.
      */
-    public function getStudy(): ?string
+    public function getStudy(): ?Studies
     {
         return $this->study;
     }
 
     /**
-     * Set the study.
+     * Set the study (null should never happen, but made consistent with Member)
      */
-    public function setStudy(string $study): void
+    public function setStudy(?Studies $study): void
     {
         $this->study = $study;
     }
@@ -438,7 +440,7 @@ class ProspectiveMember
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'tueUsername' => $this->getTueUsername(),
-            'study' => $this->getStudy(),
+            'study' => $this->getStudy()?->value,
             'birth' => $this->getBirth()->format('Y-m-d'),
             'lists' => $this->getLists(),
             'address' => $this->getAddresses()['studentAddress']->toArray(),
