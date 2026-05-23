@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-10 22:39+0200\n"
+"POT-Creation-Date: 2026-05-23 20:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -356,6 +356,18 @@ msgstr "BV (bestuursvergadering)"
 msgid "BV"
 msgstr "BV"
 
+msgid "Bachelor Applied Mathematics"
+msgstr "Bachelor Applied Mathematics"
+
+msgid "Bachelor Computer Science and Engineering"
+msgstr "Bachelor Computer Science and Engineering"
+
+msgid "Bachelor Data Science"
+msgstr "Bachelor Data Science"
+
+msgid "Bachelor Programs"
+msgstr "Bacheloropleidingen"
+
 #, php-format
 msgid "Back to %s %d"
 msgstr "Terug naar %s %d"
@@ -698,6 +710,21 @@ msgstr "Bewerk maillijst"
 
 msgid "Effective From"
 msgstr "Vanaf"
+
+msgid "EngD / PhD Programs"
+msgstr "EngD/PhD-programma's"
+
+msgid "EngD Automotive Systems Design"
+msgstr "EngD Automotive Systems Design"
+
+msgid "EngD Data Science"
+msgstr "EngD Data Science"
+
+msgid "EngD Mechatronic Systems Design"
+msgstr "EngD Mechatronic Systems Design"
+
+msgid "EngD Software Technology"
+msgstr "EngD Software Technology"
 
 msgid "English Description"
 msgstr "Engelse beschrijving"
@@ -1057,6 +1084,33 @@ msgstr "Maak inactief"
 msgid "Make Member Inactive"
 msgstr "Maak lid inactief"
 
+msgid "Master Artificial Intelligence & Engineering Systems"
+msgstr "Master Artificial Intelligence & Engineering Systems"
+
+msgid "Master Computer Science and Engineering"
+msgstr "Master Computer Science and Engineering"
+
+msgid "Master Data Science & Artificial Intelligence"
+msgstr "Master Data Science & Artificial Intelligence"
+
+msgid "Master Data Science in Business and Entrepreneurship"
+msgstr "Master Data Science in Business and Entrepreneurship"
+
+msgid "Master Embedded Systems"
+msgstr "Master Embedded Systems"
+
+msgid "Master Industrial and Applied Mathematics"
+msgstr "Master Industrial and Applied Mathematics"
+
+msgid "Master Information Security Technology"
+msgstr "Master Information Security Technology"
+
+msgid "Master Programs"
+msgstr "Masteropleidingen"
+
+msgid "Master Science Education"
+msgstr "Master Educatie in de Bètawetenschappen (Science Education)"
+
 msgid "Meeting"
 msgstr "Vergadering"
 
@@ -1248,6 +1302,15 @@ msgstr "Rechten"
 msgid "Personal details"
 msgstr "Persoonlijke informatie"
 
+msgid "PhD Computer Science"
+msgstr "PhD Computer Science"
+
+msgid "PhD Data Science"
+msgstr "PhD Data Science"
+
+msgid "PhD Mathematics"
+msgstr "PhD Mathematics"
+
 msgid "Phone Number"
 msgstr "Telefoonnummer"
 
@@ -1279,6 +1342,24 @@ msgstr "Postcode"
 
 msgid "Postal Region"
 msgstr "Postregio"
+
+msgid "Pre-master Computer Science and Engineering"
+msgstr "Pre-master Computer Science and Engineering"
+
+msgid "Pre-master Data Science and Artificial Intelligence"
+msgstr "Pre-master Data Science and Artificial Intelligence"
+
+msgid "Pre-master Embedded Systems"
+msgstr "Pre-master Embedded Systems"
+
+msgid "Pre-master Industrial and Applied Mathematics"
+msgstr "Pre-master Industrial and Applied Mathematics"
+
+msgid "Pre-master Information Security Technology"
+msgstr "Pre-master Information Security Technology"
+
+msgid "Pre-master Programs"
+msgstr "Schakelprogramma's"
 
 msgid "Previous exceptions"
 msgstr "Previous exceptions"
@@ -1374,6 +1455,12 @@ msgid ""
 msgstr ""
 "Het opslaan van een query met een eerder gebruikte naam zal de eerder "
 "opgeslagen query overschrijven en de categorie aanpassen."
+
+msgid "Schakelprogramma SEC Leraar vho Informatica"
+msgstr "Schakelprogramma SEC Leraar vho Informatica"
+
+msgid "Schakelprogramma SEC Leraar vho Wiskunde"
+msgstr "Schakelprogramma SEC Leraar vho Wiskunde"
 
 msgid "Search"
 msgstr "Zoek"

@@ -23,32 +23,35 @@ use function in_array;
  * to the new program. Removal of a variant should be done only when the study is no longer offered, even to
  * existing students: joining GEWIS is not exclusive to freshmen, so you may encounter students who follow a
  * study that is no longer offered to new students.
+ *
+ * "Opleidingscode" in Centraal Register Opleidingen Hoger Onderwijs (CROHO) added. This is also the source
+ * of the translation in the language files.
  */
 enum Studies: string
 {
     /** Bachelor programs */
-    case BAM = 'Bachelor Applied Mathematics';
-    case BCS = 'Bachelor Computer Science and Engineering';
-    case BDS = 'Bachelor Data Science';
+    case BAM = 'Bachelor Applied Mathematics'; //1015O6295
+    case BCS = 'Bachelor Computer Science and Engineering'; //1015O6287
+    case BDS = 'Bachelor Data Science'; //1015O6359
 
     /** Premaster programs */
-    case PMCSE = 'Pre-master Computer Science and Engineering';
-    case PMDSAI = 'Pre-master Data Science and Artificial Intelligence';
-    case PMES = 'Pre-master Embedded Systems';
-    case PMIAM = 'Pre-master Industrial and Applied Mathematics';
-    case PMIST = 'Pre-master Information Security Technology';
-    case SkSEInf = 'Schakelprogramma SEC Leraar vho Informatica';
-    case SkSEWisk = 'Schakelprogramma SEC Leraar vho Wiskunde';
+    case PMCSE = 'Pre-master Computer Science and Engineering'; //1015O6290
+    case PMDSAI = 'Pre-master Data Science and Artificial Intelligence'; //1015O6291
+    case PMES = 'Pre-master Embedded Systems'; //1015O6292
+    case PMIAM = 'Pre-master Industrial and Applied Mathematics'; //1015O6296
+    case PMIST = 'Pre-master Information Security Technology'; //1015O6293
+    case SkSEInf = 'Schakelprogramma SEC Leraar vho Informatica'; //1015O6294
+    case SkSEWisk = 'Schakelprogramma SEC Leraar vho Wiskunde'; //1015O6297
 
     /** Graduate programs */
-    case MAIES = 'Master Artificial Intelligence & Engineering Systems';
-    case MCSE = 'Master Computer Science and Engineering';
-    case MDSAI = 'Master Data Science & Artificial Intelligence';
-    case MDSBE = 'Master Data Science in Business and Entrepreneurship';
-    case MES = 'Master Embedded Systems';
-    case MIAM = 'Master Industrial and Applied Mathematics';
-    case MIST = 'Master Information Security Technology';
-    case MSEC = 'Master Science Education';
+    case MAIES = 'Master Artificial Intelligence & Engineering Systems'; //66476
+    case MCSE = 'Master Computer Science and Engineering'; //1015O6321
+    case MDSAI = 'Master Data Science & Artificial Intelligence'; //60976
+    case MDSBE = 'Master Data Science in Business and Entrepreneurship'; //65018
+    case MES = 'Master Embedded Systems'; //60331
+    case MIAM = 'Master Industrial and Applied Mathematics'; //1015O6311
+    case MIST = 'Master Information Security Technology'; //1015O6323
+    case MSEC = 'Master Science Education'; //69345
 
     /** EngD / PhD programs */
     case EngDASD = 'EngD Automotive Systems Design';
