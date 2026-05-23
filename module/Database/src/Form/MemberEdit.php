@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Database\Model\Enums\Studies;
 use Laminas\Filter\StringToLower;
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
@@ -87,6 +89,16 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'type' => Date::class,
             'options' => [
                 'label' => $this->translator->translate('Birthdate'),
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'study',
+            'type' => Select::class,
+            'options' => [
+                'label' => $translator->translate('Study'),
+                'value_options' => Studies::getFunctionsArray($translator, true),
+                'empty_option' => $translator->translate('Select a study'),
             ],
         ]);
 
