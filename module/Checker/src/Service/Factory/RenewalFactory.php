@@ -10,6 +10,7 @@ use Checker\Service\Renewal as RenewalService;
 use Database\Mapper\ActionLink as ActionLinkMapper;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\Renderer\PhpRenderer;
+use Override;
 use Psr\Container\ContainerInterface;
 use Report\Mapper\Member as ReportMemberMapper;
 
@@ -18,6 +19,7 @@ class RenewalFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

@@ -8,6 +8,7 @@ use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Select;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Override;
 
 class QueryExport extends Query implements InputFilterProviderInterface
 {
@@ -34,6 +35,7 @@ class QueryExport extends Query implements InputFilterProviderInterface
         $this->get('submit')->setLabel($this->translator->translate('Export'));
     }
 
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         $filter = parent::getInputFilterSpecification();

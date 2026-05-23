@@ -10,6 +10,7 @@ use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Monolog\Logger;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class StripeFactory implements FactoryInterface
@@ -17,6 +18,7 @@ class StripeFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

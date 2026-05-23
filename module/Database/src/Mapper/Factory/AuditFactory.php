@@ -6,6 +6,7 @@ namespace Database\Mapper\Factory;
 
 use Database\Mapper\Audit as AuditMapper;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class AuditFactory implements FactoryInterface
@@ -13,6 +14,7 @@ class AuditFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

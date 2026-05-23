@@ -6,6 +6,7 @@ namespace Checker\Mapper\Factory;
 
 use Checker\Mapper\Installation as InstallationMapper;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class InstallationFactory implements FactoryInterface
@@ -13,6 +14,7 @@ class InstallationFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

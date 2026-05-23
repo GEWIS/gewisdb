@@ -6,6 +6,7 @@ namespace Application\Extensions\Doctrine\Middleware;
 
 use Doctrine\DBAL\Driver as DriverInterface;
 use Doctrine\DBAL\Driver\Middleware as MiddlewareInterface;
+use Override;
 use RuntimeException;
 
 use function getenv;
@@ -13,6 +14,7 @@ use function implode;
 
 class SetRoleMiddleware implements MiddlewareInterface
 {
+    #[Override]
     public function wrap(DriverInterface $driver): DriverInterface
     {
         $isPgSQL = $driver instanceof DriverInterface\PDO\PgSQL\Driver;

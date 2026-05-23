@@ -13,6 +13,7 @@ use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 
 #[Entity]
 class Budget extends SubDecision
@@ -146,6 +147,7 @@ class Budget extends SubDecision
         $this->changes = $changes;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -156,6 +158,7 @@ class Budget extends SubDecision
         );
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,

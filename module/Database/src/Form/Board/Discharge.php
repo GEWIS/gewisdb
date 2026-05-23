@@ -10,6 +10,7 @@ use Database\Form\Fieldset\SubDecision as SubDecisionFieldset;
 use Laminas\Form\Element\Submit;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Override;
 
 class Discharge extends AbstractDecision implements InputFilterProviderInterface
 {
@@ -34,6 +35,7 @@ class Discharge extends AbstractDecision implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [];

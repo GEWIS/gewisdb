@@ -20,6 +20,7 @@ use Laminas\Validator\Digits;
 use Laminas\Validator\EmailAddress;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
+use Override;
 use Throwable;
 
 use function date;
@@ -117,6 +118,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

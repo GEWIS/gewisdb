@@ -12,6 +12,7 @@ use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\Identical;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
+use Override;
 
 class UserCreate extends Form implements InputFilterProviderInterface
 {
@@ -55,6 +56,7 @@ class UserCreate extends Form implements InputFilterProviderInterface
     /**
      * Specification of input filter.
      */
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

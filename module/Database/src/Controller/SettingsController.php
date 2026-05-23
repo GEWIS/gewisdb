@@ -12,6 +12,7 @@ use Laminas\Http\Response as HttpResponse;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
 use Laminas\View\Model\ViewModel;
+use Override;
 
 use function array_filter;
 
@@ -26,6 +27,7 @@ class SettingsController extends AbstractActionController
     /**
      * Index action.
      */
+    #[Override]
     public function indexAction(): ViewModel
     {
         return new ViewModel([]);

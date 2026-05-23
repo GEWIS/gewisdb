@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\OrderBy;
 use Laminas\Mvc\I18n\DummyTranslator;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
+use RuntimeException;
 
 use function implode;
 use function preg_replace_callback;
@@ -266,13 +267,20 @@ class Decision
             '>' => '\\textgreater{}',
         ];
 
-        return preg_replace_callback(
+        $return = preg_replace_callback(
             '/([&%$#_\[\]{}~^\\\\<>])/',
             static function ($matches) use ($replacements) {
                 return $replacements[$matches[0]];
             },
             $content,
         );
+
+        if (null === $return) {
+            // preg_replace can only return null on error, so this should never happen.
+            throw new RuntimeException('An error occurred while escaping LaTeX characters');
+        }
+
+        return $return;
     }
 
     /**

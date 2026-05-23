@@ -16,6 +16,7 @@ use Laminas\Validator\Date as DateValidator;
 use Laminas\Validator\Digits;
 use Laminas\Validator\InArray;
 use Laminas\Validator\LessThan;
+use Override;
 
 class CreateMeeting extends Form implements InputFilterProviderInterface
 {
@@ -62,6 +63,7 @@ class CreateMeeting extends Form implements InputFilterProviderInterface
         ]);
     }
 
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

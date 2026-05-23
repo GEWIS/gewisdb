@@ -7,6 +7,7 @@ namespace Database\Command\Factory;
 use Database\Command\MailmanFetchListsCommand;
 use Database\Service\Mailman as MailmanService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class MailmanFetchListsCommandFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class MailmanFetchListsCommandFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

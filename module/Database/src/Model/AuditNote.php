@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\AssociationOverrides;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Override;
 
 /**
  * Class for registering manual notes
@@ -49,6 +50,7 @@ class AuditNote extends AuditEntry
     /**
      * Get a textual representation of this audit entry
      */
+    #[Override]
     protected function getStringBodyFormatted(): string
     {
         return '<strong>Note</strong> on <emph>%s</emph>: <br/>%s';
@@ -57,6 +59,7 @@ class AuditNote extends AuditEntry
     /**
      * @return array<?string>
      */
+    #[Override]
     protected function getStringArguments(): array
     {
         return [

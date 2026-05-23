@@ -7,6 +7,7 @@ namespace Database\Command\Factory;
 use Database\Command\GenerateAuthenticationKeysCommand;
 use Database\Service\Member as MemberService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class GenerateAuthenticationKeysCommandFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class GenerateAuthenticationKeysCommandFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

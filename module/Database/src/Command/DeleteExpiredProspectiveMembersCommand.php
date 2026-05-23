@@ -6,6 +6,7 @@ namespace Database\Command;
 
 use Database\Service\Member as MemberService;
 use Laminas\Cli\Command\AbstractParamAwareCommand;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,6 +23,7 @@ class DeleteExpiredProspectiveMembersCommand extends AbstractParamAwareCommand
         parent::__construct();
     }
 
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

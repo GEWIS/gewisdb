@@ -10,12 +10,6 @@
       <code>$this-&gt;data['registrations']</code>
     </PossiblyUndefinedArrayOffset>
   </file>
-  <file src="module/Database/src/Controller/QueryController.php">
-    <InvalidReturnStatement occurrences="1"/>
-    <InvalidReturnType occurrences="1">
-      <code>HttpResponse|ViewModel</code>
-    </InvalidReturnType>
-  </file>
   <file src="module/Database/src/Form/OrganRegulation.php">
     <PossiblyInvalidArrayOffset occurrences="1">
       <code>$option['value']</code>

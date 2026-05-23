@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace User\Service\Factory;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use User\Form\ApiPrincipal as ApiPrincipalForm;
 use User\Mapper\ApiPrincipalMapper;
@@ -15,6 +16,7 @@ class ApiPrincipalServiceFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

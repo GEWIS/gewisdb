@@ -6,6 +6,7 @@ namespace Report\Listener\Factory;
 
 use Doctrine\ORM\EntityManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use Report\Listener\DatabaseDeletionListener;
 use Report\Service\Meeting as MeetingService;
@@ -17,6 +18,7 @@ class DatabaseDeletionListenerFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

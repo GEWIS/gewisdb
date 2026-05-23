@@ -9,6 +9,7 @@ use Database\Service\FrontPage as FrontPageService;
 use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class FrontPageFactory implements FactoryInterface
@@ -16,6 +17,7 @@ class FrontPageFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

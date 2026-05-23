@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace User\Service\Factory;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use User\Adapter\ApiPrincipalAdapter;
 use User\Service\ApiAuthenticationService;
@@ -14,6 +15,7 @@ class ApiAuthenticationServiceFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

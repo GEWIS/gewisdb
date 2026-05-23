@@ -7,6 +7,7 @@ namespace Database\Hydrator;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\SubDecision\Other as OtherModel;
 use InvalidArgumentException;
+use Override;
 
 class Other extends AbstractDecision
 {
@@ -17,6 +18,7 @@ class Other extends AbstractDecision
      *
      * @throws InvalidArgumentException when $object is not a SubDecision.
      */
+    #[Override]
     public function hydrate(
         array $data,
         $object,

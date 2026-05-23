@@ -12,6 +12,7 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use Override;
 
 use function array_map;
 
@@ -27,6 +28,7 @@ class ProspectiveMemberController extends AbstractActionController
     /**
      * Index  action.
      */
+    #[Override]
     public function indexAction(): ViewModel
     {
         return new ViewModel([]);

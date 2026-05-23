@@ -12,10 +12,12 @@ use Database\Model\SavedQuery as SavedQueryModel;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
+use RuntimeException;
 
 use function explode;
 use function preg_match;
 use function preg_replace;
+use function sprintf;
 
 class Query
 {
@@ -180,7 +182,16 @@ class Query
         $metas = $this->emReport->getMetadataFactory()->getAllMetadata();
 
         foreach ($metas as $meta) {
-            $classes[] = preg_replace('/^Report\\\\Model\\\\/', 'db:', $meta->getName());
+            $class = preg_replace('/^Report\\\\Model\\\\/', 'db:', $meta->getName());
+
+            if (null === $class) {
+                // preg_replace can only return null on error, so this should never happen.
+                throw new RuntimeException(
+                    sprintf('An error occurred while processing entity class "%s"', $meta->getName()),
+                );
+            }
+
+            $classes[] = $class;
         }
 
         return $classes;

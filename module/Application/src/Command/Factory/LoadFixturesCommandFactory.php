@@ -7,6 +7,7 @@ namespace Application\Command\Factory;
 use Application\Command\LoadFixturesCommand;
 use Doctrine\ORM\EntityManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class LoadFixturesCommandFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class LoadFixturesCommandFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

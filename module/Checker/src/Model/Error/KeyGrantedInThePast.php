@@ -6,6 +6,7 @@ namespace Checker\Model\Error;
 
 use Checker\Model\Error;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
+use Override;
 
 use function sprintf;
 
@@ -32,6 +33,7 @@ class KeyGrantedInThePast extends Error
         return $this->getSubDecision();
     }
 
+    #[Override]
     public function asText(): string
     {
         return sprintf(

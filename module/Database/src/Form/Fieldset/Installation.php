@@ -9,6 +9,7 @@ use Laminas\Form\Element\Hidden;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Validator\StringLength;
+use Override;
 
 class Installation extends Fieldset implements InputFilterProviderInterface
 {
@@ -25,6 +26,7 @@ class Installation extends Fieldset implements InputFilterProviderInterface
         ]);
     }
 
+    #[Override]
     public function getInputFilterSpecification(): array
     {
         return [

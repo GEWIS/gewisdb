@@ -7,6 +7,7 @@ namespace User\Service\Factory;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Crypt\Password\PasswordInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 use User\Form\Login as LoginForm;
 use User\Form\UserCreate as UserCreateForm;
@@ -19,6 +20,7 @@ class UserServiceFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

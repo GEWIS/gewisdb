@@ -8,6 +8,7 @@ use Database\Model\AuditEntry as AuditEntryModel;
 use Database\Model\AuditNote as AuditNoteModel;
 use InvalidArgumentException;
 use Laminas\Hydrator\HydratorInterface;
+use Override;
 
 use function method_exists;
 
@@ -22,6 +23,7 @@ class AuditEntry implements HydratorInterface
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
+    #[Override]
     public function hydrate(
         array $data,
         object $object,
@@ -44,6 +46,7 @@ class AuditEntry implements HydratorInterface
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
+    #[Override]
     public function extract(object $object): array
     {
         if (!$object instanceof AuditNoteModel) {

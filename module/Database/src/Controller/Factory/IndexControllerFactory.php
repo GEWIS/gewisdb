@@ -7,6 +7,7 @@ namespace Database\Controller\Factory;
 use Database\Controller\IndexController;
 use Database\Service\FrontPage as FrontPageService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Override;
 use Psr\Container\ContainerInterface;
 
 class IndexControllerFactory implements FactoryInterface
@@ -14,6 +15,7 @@ class IndexControllerFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
+    #[Override]
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

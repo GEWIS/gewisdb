@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Laminas\Mvc\I18n\DummyTranslator;
 use Laminas\Translator\TranslatorInterface;
+use Override;
 use RuntimeException;
 
 /**
@@ -32,6 +33,7 @@ class Other extends SubDecision
         $this->content = $content;
     }
 
+    #[Override]
     protected function getTranslatedTemplate(
         TranslatorInterface $translator,
         AppLanguages $language,
@@ -39,6 +41,7 @@ class Other extends SubDecision
         throw new RuntimeException('Not implemented');
     }
 
+    #[Override]
     public function getTranslatedContent(
         TranslatorInterface $translator,
         AppLanguages $language,
