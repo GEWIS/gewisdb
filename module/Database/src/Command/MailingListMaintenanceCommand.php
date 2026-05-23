@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class MailingListMaintenanceCommand extends AbstractParamAwareCommand
 {
-    private const PARAM_FORCE = 'force';
+    private const string PARAM_FORCE = 'force';
 
     public function __construct(private readonly MailingListService $mailingListService)
     {

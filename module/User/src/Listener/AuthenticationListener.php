@@ -19,9 +19,9 @@ use function substr;
 final class AuthenticationListener
 {
     // Defining the authentication types
-    public const AUTH_NONE = 'none';
-    public const AUTH_DBUSER = 'dbuser';
-    public const AUTH_API = 'api';
+    public const string AUTH_NONE = 'none';
+    public const string AUTH_DBUSER = 'dbuser';
+    public const string AUTH_API = 'api';
 
     public function __construct(
         private readonly AuthenticationService $authService,

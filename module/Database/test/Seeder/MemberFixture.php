@@ -17,10 +17,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class MemberFixture extends AbstractFixture
 {
-    public const REF_MEMBER_STUDENT = 'student';
-    public const REF_MEMBER_EXTERNAL = 'external';
-    public const REF_MEMBER_GRADUATE = 'graduate';
-    public const REF_MEMBER_PROSPECTIVE = 'prospective';
+    public const string REF_MEMBER_STUDENT = 'student';
+    public const string REF_MEMBER_EXTERNAL = 'external';
+    public const string REF_MEMBER_GRADUATE = 'graduate';
+    public const string REF_MEMBER_PROSPECTIVE = 'prospective';
 
     public function load(ObjectManager $manager): void
     {

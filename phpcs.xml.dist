@@ -11,7 +11,6 @@
 
     <file>module</file>
     <file>config</file>
-    <exclude-pattern>*/vendor/*</exclude-pattern>
 
     <rule ref="GEWISPHPCodingStandards" />
 
@@ -121,23 +120,6 @@
         <exclude-pattern>module/Database/src/Hydrator/OrganRegulation.php</exclude-pattern>
         <exclude-pattern>module/Database/src/Hydrator/Other.php</exclude-pattern>
     </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
-        <!-- CLI commands -->
-        <exclude-pattern>module/Application/src/Command/LoadFixturesCommand.php</exclude-pattern>
-        <exclude-pattern>module/Checker/src/Command/CheckAuthenticationKeysCommand.php</exclude-pattern>
-        <exclude-pattern>module/Checker/src/Command/CheckDatabaseCommand.php</exclude-pattern>
-        <exclude-pattern>module/Checker/src/Command/CheckDischargesCommand.php</exclude-pattern>
-        <exclude-pattern>module/Checker/src/Command/CheckMembershipExpirationCommand.php</exclude-pattern>
-        <exclude-pattern>module/Checker/src/Command/CheckMembershipGraduateRenewalCommand.php</exclude-pattern>
-        <exclude-pattern>module/Checker/src/Command/CheckMembershipTueCommand.php</exclude-pattern>
-        <exclude-pattern>module/Checker/src/Command/CheckMembershipTypeCommand.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Command/DeleteExpiredMembersCommand.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Command/DeleteExpiredProspectiveMembersCommand.php</exclude-pattern>
-        <exclude-pattern>module/Database/src/Command/GenerateAuthenticationKeysCommand.php</exclude-pattern>
-        <exclude-pattern>module/Report/src/Command/GenerateFullCommand.php</exclude-pattern>
-        <exclude-pattern>module/Report/src/Command/GeneratePartialCommand.php</exclude-pattern>
-    </rule>
-
     <!-- Traversable type hints that lack specification due to complexity -->
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification">
         <!-- Hydrators -->

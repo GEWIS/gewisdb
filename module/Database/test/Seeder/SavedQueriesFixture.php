@@ -10,8 +10,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class SavedQueriesFixture extends AbstractFixture
 {
-    public const REF_QUERY_UNDERAGE = 'query_underage';
-    public const REF_QUERY_MEMBERDETAILS = 'query_memberdetails';
+    public const string REF_QUERY_UNDERAGE = 'query_underage';
+    public const string REF_QUERY_MEMBERDETAILS = 'query_memberdetails';
 
     public function load(ObjectManager $manager): void
     {
