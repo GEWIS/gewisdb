@@ -54,6 +54,7 @@ class ApiPrincipal
 
     /**
      * Permission groups.
+     * Column type is necessary here.
      *
      * @var ApiPermissions[] $permissions
      */

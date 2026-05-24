@@ -27,7 +27,6 @@ class OrganRegulation extends SubDecision
      * Type of the organ.
      */
     #[Column(
-        type: 'string',
         enumType: OrganTypes::class,
     )]
     private OrganTypes $organType;

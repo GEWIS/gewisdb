@@ -26,7 +26,6 @@ class Meeting
      */
     #[Id]
     #[Column(
-        type: 'string',
         enumType: MeetingTypes::class,
     )]
     private MeetingTypes $type;

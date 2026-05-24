@@ -78,7 +78,6 @@ class ProspectiveMember
      * Study of the member.
      */
     #[Column(
-        type: 'string',
         enumType: Studies::class,
         nullable: true,
     )]
@@ -106,7 +105,6 @@ class ProspectiveMember
      * Country.
      */
     #[Column(
-        type: 'string',
         enumType: PostalRegions::class,
     )]
     private PostalRegions $country;

@@ -58,7 +58,6 @@ class OrganMember
      * Function given.
      */
     #[Column(
-        type: 'string',
         enumType: InstallationFunctions::class,
     )]
     private InstallationFunctions $function;

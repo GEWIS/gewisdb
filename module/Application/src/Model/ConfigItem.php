@@ -53,7 +53,6 @@ class ConfigItem
      * Namespace
      */
     #[Column(
-        type: 'string',
         enumType: ConfigNamespaces::class,
     )]
     protected ConfigNamespaces $namespace;

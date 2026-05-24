@@ -30,7 +30,6 @@ class Installation extends SubDecision
      * Function given.
      */
     #[Column(
-        type: 'string',
         enumType: BoardFunctions::class,
     )]
     private BoardFunctions $function;

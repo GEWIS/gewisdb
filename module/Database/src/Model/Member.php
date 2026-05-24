@@ -91,7 +91,6 @@ class Member
      * Study of the member.
      */
     #[Column(
-        type: 'string',
         enumType: Studies::class,
         nullable: true,
     )]
@@ -112,7 +111,6 @@ class Member
      * See artikel 7.
      */
     #[Column(
-        type: 'string',
         enumType: MembershipTypes::class,
     )]
     private MembershipTypes $type;

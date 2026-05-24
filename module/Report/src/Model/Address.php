@@ -44,7 +44,6 @@ class Address
      */
     #[Id]
     #[Column(
-        type: 'string',
         enumType: AddressTypes::class,
     )]
     private AddressTypes $type;
@@ -53,7 +52,6 @@ class Address
      * Country.
      */
     #[Column(
-        type: 'string',
         enumType: PostalRegions::class,
     )]
     private PostalRegions $country;

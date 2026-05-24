@@ -37,7 +37,6 @@ class Installation extends FoundationReference
      * Function given.
      */
     #[Column(
-        type: 'string',
         enumType: InstallationFunctions::class,
     )]
     private InstallationFunctions $function;
