@@ -91,7 +91,7 @@ $translator = $this->plugin('translate')->getTranslator();
         </tr>
         <tr>
             <th><?= $this->translate('Study') ?></th>
-            <td><?= $member->getStudy()?->getName($translator) ?></td>
+            <td><?= $member->getStudy()->getName($translator) ?></td>
             <?php if ($tueData->isValid()): ?><td>
                 <?php foreach($tueData->getRegistrations() as $registration): ?>
                     <?=

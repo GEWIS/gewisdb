@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Model\Enums;
 
 use Application\Model\Enums\AppLanguages;
+use InvalidArgumentException;
 use Laminas\Mvc\I18n\DummyTranslator;
 use Laminas\Mvc\I18n\Translator;
 
@@ -65,6 +66,10 @@ enum Studies: string
     /** Other */
     case Other = 'Other';
 
+    /** Special cases */
+    case None = 'Not studying';
+    case Unknown = 'Unknown';
+
     public function isBachelor(): bool
     {
         return in_array($this, [
@@ -122,6 +127,15 @@ enum Studies: string
             self::MDSAI,
             self::EngDDS,
             self::PhDDS,
+        ]);
+    }
+
+    public function isSpecial(): bool
+    {
+        return in_array($this, [
+            self::Other,
+            self::None,
+            self::Unknown,
         ]);
     }
 
@@ -241,6 +255,15 @@ enum Studies: string
                 'Other',
                 locale: $language?->getLangParam(),
             ),
+            self::Unknown => $translator->translate(
+                'Unknown',
+                locale: $language?->getLangParam(),
+            ),
+            self::None => $translator->translate(
+                'Not studying',
+                locale: $language?->getLangParam(),
+            ),
+            default => throw new InvalidArgumentException('Invalid study: ' . $this->value),
         };
     }
 
@@ -274,6 +297,11 @@ enum Studies: string
                 'Other',
                 locale: $language?->getLangParam(),
             ),
+            'special' => $translator->translate(
+                'Special cases (secretary use only)',
+                locale: $language?->getLangParam(),
+            ),
+            default => throw new InvalidArgumentException('Invalid study category: ' . $category),
         };
     }
 
@@ -285,10 +313,11 @@ enum Studies: string
     public static function getFunctionsArray(
         Translator $translator,
         bool $withDSFootnote = false,
+        bool $withSpecialCases = false,
     ): array {
         $result = [];
 
-        foreach (self::getCategorisedStudies() as $category => $studies) {
+        foreach (self::getCategorisedStudies($withSpecialCases) as $category => $studies) {
             $result[$category] = [
                 'label' => self::getCategoryName($category, $translator),
                 'options' => array_combine(
@@ -312,9 +341,9 @@ enum Studies: string
      *
      * @return array<string, array<Studies>>
      */
-    private static function getCategorisedStudies(): array
+    private static function getCategorisedStudies(bool $withSpecialCases = false): array
     {
-        return [
+        $result = [
             'bachelor' => array_filter(self::cases(), static function ($case) {
                 return $case->isBachelor() || self::Other === $case;
             }),
@@ -327,7 +356,16 @@ enum Studies: string
             'phd' => array_filter(self::cases(), static function ($case) {
                 return $case->isEngDPhD() || self::Other === $case;
             }),
-            'other' => [self::Other],
         ];
+
+        if ($withSpecialCases) {
+            $result['special'] = array_filter(self::cases(), static function ($case) {
+                return $case->isSpecial();
+            });
+        } else {
+            $result['other'] = [self::Other];
+        }
+
+        return $result;
     }
 }

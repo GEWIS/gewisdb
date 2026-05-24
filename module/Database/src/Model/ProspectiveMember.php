@@ -79,9 +79,8 @@ class ProspectiveMember
      */
     #[Column(
         enumType: Studies::class,
-        nullable: true,
     )]
-    private ?Studies $study = null;
+    private Studies $study = Studies::Unknown;
 
     /**
      * Last changed date of membership.
@@ -308,7 +307,7 @@ class ProspectiveMember
     /**
      * Get the study.
      */
-    public function getStudy(): ?Studies
+    public function getStudy(): Studies
     {
         return $this->study;
     }
@@ -316,7 +315,7 @@ class ProspectiveMember
     /**
      * Set the study (null should never happen, but made consistent with Member)
      */
-    public function setStudy(?Studies $study): void
+    public function setStudy(Studies $study): void
     {
         $this->study = $study;
     }
@@ -411,7 +410,7 @@ class ProspectiveMember
      *     initials: string,
      *     firstName: string,
      *     tueUsername: ?string,
-     *     study: ?string,
+     *     study: string,
      *     birth: string,
      *     lists: string[],
      *     address: array{
@@ -438,7 +437,7 @@ class ProspectiveMember
             'initials' => $this->getInitials(),
             'firstName' => $this->getFirstName(),
             'tueUsername' => $this->getTueUsername(),
-            'study' => $this->getStudy()?->value,
+            'study' => $this->getStudy()->getName(null),
             'birth' => $this->getBirth()->format('Y-m-d'),
             'lists' => $this->getLists(),
             'address' => $this->getAddresses()['studentAddress']->toArray(),

@@ -74,7 +74,7 @@ class MemberFixture extends AbstractFixture
             $student->setChangedOn(new DateTime());
             $student->setTueUsername('20180001');
             $student->setIsStudying(true);
-            $student->setStudy(Studies::Other);
+            $student->setStudy(Studies::BAM);
 
             $manager->persist($student);
             $this->addReference(self::REF_MEMBER_STUDENT, $student);
@@ -110,7 +110,7 @@ class MemberFixture extends AbstractFixture
             $graduate->setMembershipEndsOn(new DateTime());
             $graduate->setChangedOn(new DateTime('1990-07-01'));
             $graduate->setIsStudying(false);
-            $graduate->setStudy(null);
+            $graduate->setStudy(Studies::None);
 
             $manager->persist($graduate);
             $this->addReference(self::REF_MEMBER_GRADUATE, $graduate);

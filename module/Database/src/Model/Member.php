@@ -92,9 +92,8 @@ class Member
      */
     #[Column(
         enumType: Studies::class,
-        nullable: true,
     )]
-    private ?Studies $study = null;
+    private Studies $study = Studies::Unknown;
 
     /**
      * Member type.
@@ -480,7 +479,7 @@ class Member
     /**
      * Get the study.
      */
-    public function getStudy(): ?Studies
+    public function getStudy(): Studies
     {
         return $this->study;
     }
@@ -488,7 +487,7 @@ class Member
     /**
      * Set the study.
      */
-    public function setStudy(?Studies $study): void
+    public function setStudy(Studies $study): void
     {
         $this->study = $study;
     }

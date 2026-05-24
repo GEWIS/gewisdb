@@ -90,7 +90,7 @@ $translator = $this->plugin('translate')->getTranslator();
         </tr>
         <tr>
             <th><?= $this->translate('Study') ?></th>
-            <td><?= $member->getStudy()?->getName($translator) ?></td>
+            <td><?= $member->getStudy()->getName($translator) ?></td>
         </tr>
         <tr>
             <th><?= $this->translate('Last Update to Membership') ?></th>
