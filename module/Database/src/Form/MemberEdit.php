@@ -97,7 +97,7 @@ class MemberEdit extends Form implements InputFilterProviderInterface
             'type' => Select::class,
             'options' => [
                 'label' => $translator->translate('Study'),
-                'value_options' => Studies::getFunctionsArray($translator, false, true),
+                'value_options' => Studies::getValueOptions($translator, false, true),
                 'empty_option' => $translator->translate('Select a study'),
             ],
         ]);

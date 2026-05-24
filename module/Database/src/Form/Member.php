@@ -94,7 +94,7 @@ class Member extends Form implements InputFilterProviderInterface
             'type' => Select::class,
             'options' => [
                 'label' => $translator->translate('Study'),
-                'value_options' => Studies::getFunctionsArray($translator, true),
+                'value_options' => Studies::getValueOptions($translator, true),
                 'empty_option' => $translator->translate('Select a study'),
             ],
             'attributes' => [

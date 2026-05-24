@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Database\Model\Enums;
 
 use Application\Model\Enums\AppLanguages;
+use Database\Model\Interface\FormSelectable;
 use InvalidArgumentException;
 use Laminas\Mvc\I18n\DummyTranslator;
 use Laminas\Mvc\I18n\Translator;
+use Override;
 
 use function array_combine;
 use function array_filter;
@@ -28,7 +30,7 @@ use function in_array;
  * "Opleidingscode" in Centraal Register Opleidingen Hoger Onderwijs (CROHO) added. This is also the source
  * of the translation in the language files.
  */
-enum Studies: string
+enum Studies: string implements FormSelectable
 {
     /** Bachelor programs */
     case BAM = 'Bachelor Applied Mathematics'; //1015O6295
@@ -306,11 +308,12 @@ enum Studies: string
     }
 
     /**
-     * Returns a list of categorised studies
+     * Returns categorised studies to be used in Select field value_options
      *
      * @return array<string, array{label: string, options: array<string, string>}>
      */
-    public static function getFunctionsArray(
+    #[Override]
+    public static function getValueOptions(
         Translator $translator,
         bool $withDSFootnote = false,
         bool $withSpecialCases = false,
