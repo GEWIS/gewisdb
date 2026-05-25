@@ -1132,7 +1132,6 @@ class Member
      * @return array{
      *     member: MemberModel,
      *     form: MemberEditForm,
-     *     tueData: ?TueData,
      * }
      */
     public function getMemberEditForm(MemberModel $member): array
@@ -1143,7 +1142,6 @@ class Member
         return [
             'member' => $member,
             'form' => $form,
-            'tueData' => $this->getTueData($member),
         ];
     }
 
