@@ -65,9 +65,7 @@ $translator = $this->plugin('translate')->getTranslator();
                 <?php if (null === $member->getTueUsername()): ?>
                     <?= $this->translate('Unknown') ?>
                 <?php else: ?>
-                    <a href="<?= $this->url('member/tuelookup') ?>?u=<?= $member->getTueUsername() ?>">
-                        <?= $member->getTueUsername() ?>
-                    </a>
+                    <?= $member->getTueUsername() ?>
                 <?php endif; ?>
             </td>
             <?php if ($tueData->isValid()): ?><td><?= $tueData->getUsername() ?></td><?php endif; ?>
