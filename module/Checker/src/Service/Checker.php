@@ -8,7 +8,6 @@ use Application\Model\Enums\MeetingTypes;
 use Application\Model\Enums\MembershipTypes;
 use Application\Model\Enums\OrganTypes;
 use Checker\Model\Error as ErrorModel;
-use Checker\Model\TueData;
 use Checker\Service\Installation as InstallationService;
 use Checker\Service\Key as KeyService;
 use Checker\Service\Meeting as MeetingService;
@@ -383,11 +382,6 @@ class Checker
         }
 
         return $errors;
-    }
-
-    public function tueDataObject(): TueData
-    {
-        return new TueData($this->config['checker']['membership_api']);
     }
 
     /**

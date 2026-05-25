@@ -7,8 +7,6 @@ namespace Database\Service;
 use Application\Model\Enums\AddressTypes;
 use Application\Model\Enums\MembershipTypes;
 use Application\Service\FileStorage as FileStorageService;
-use Checker\Model\Exception\LookupException;
-use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Form\Address as AddressForm;
@@ -501,30 +499,6 @@ class Member
             'canDelete' => $member->canBeDeleted(),
             'approveMessages' => $approveMessages,
         ];
-    }
-
-    /**
-     * Get TU/e data of a member
-     *
-     * @return TueData|null for member or null if no such data is available
-     */
-    public function getTueData(MemberModel $member): ?TueData
-    {
-        if (null !== ($tueUsername = $member->getTueUsername())) {
-            $tuedata = $this->getCheckerService()->tueDataObject();
-
-            try {
-                $tuedata->setUser($tueUsername);
-            } catch (LookupException) {
-                return null;
-            }
-
-            if ($tuedata->isValid()) {
-                return $tuedata;
-            }
-        }
-
-        return null;
     }
 
     /**
