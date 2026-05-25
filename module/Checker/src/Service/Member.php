@@ -19,18 +19,6 @@ class Member
     }
 
     /**
-     * Fetch some members whose membership status should be checked.
-     *
-     * @return DatabaseMemberModel[]
-     */
-    public function getMembersToCheck(): array
-    {
-        $config = $this->config['checker']['membership_api'];
-
-        return $this->memberMapper->getMembersToCheck($config['max_total_requests'] - $config['max_manual_requests']);
-    }
-
-    /**
      * Get members who may require an adjustment to their membership type (based on whether their membership has ended).
      *
      * @return DatabaseMemberModel[]
