@@ -280,17 +280,15 @@
             <div class="phpdocumentor-column -nine phpdocumentor-content">
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/usertest.html">UserTest</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/usertest-seeder.html">Seeder</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-hydrator.html">Hydrator</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-hydrator-strategy.html">Strategy</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    UserFixture
+    StudyHydratorStrategy
 
-        <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Doctrine\Common\DataFixtures\AbstractFixture">AbstractFixture</abbr>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -299,6 +297,9 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\Laminas\Hydrator\Strategy\StrategyInterface">StrategyInterface</abbr>                    </span>
     
     </h2>
 
@@ -308,7 +309,7 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/test/Seeder/UserFixture.php"><a href="files/module-user-test-seeder-userfixture.html"><abbr title="module/User/test/Seeder/UserFixture.php">UserFixture.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Hydrator/Strategy/StudyHydratorStrategy.php"><a href="files/module-database-src-hydrator-strategy-studyhydratorstrategy.html"><abbr title="module/Database/src/Hydrator/Strategy/StudyHydratorStrategy.php">StudyHydratorStrategy.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">11</span>
 
@@ -323,42 +324,42 @@
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/UserTest-Seeder-UserFixture.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
 
 
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Laminas\Hydrator\Strategy\StrategyInterface">StrategyInterface</abbr></dt>    </dl>
 
 
 
 
-<h4 id="toc-constants">
-    Constants
-    <a href="classes/UserTest-Seeder-UserFixture.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/UserTest-Seeder-UserFixture.html#constant_REF_ADMIN_USER">REF_ADMIN_USER</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;admin-user&#039;                            </span>
-</dt>
-
-    </dl>
 
 
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/UserTest-Seeder-UserFixture.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/UserTest-Seeder-UserFixture.html#method_load">load()</a>
+    <a class="" href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_extract">extract()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: string|null    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_hydrate">hydrate()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>|null    </span>
 </dt>
 
     </dl>
@@ -366,50 +367,13 @@
 
 
         
-    <section class="phpdocumentor-constants">
-        <h3 class="phpdocumentor-elements__header" id="constants">
-            Constants
-            <a href="classes/UserTest-Seeder-UserFixture.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h3>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_REF_ADMIN_USER">
-        REF_ADMIN_USER
-        <a href="classes/UserTest-Seeder-UserFixture.html#constant_REF_ADMIN_USER" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/test/Seeder/UserFixture.php"><a href="files/module-user-test-seeder-userfixture.html"><abbr title="module/User/test/Seeder/UserFixture.php">UserFixture.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">REF_ADMIN_USER</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;admin-user&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-            </section>
 
         
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/UserTest-Seeder-UserFixture.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -418,22 +382,22 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_load">
-        load()
-        <a href="classes/UserTest-Seeder-UserFixture.html#method_load" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_extract">
+        extract()
+        <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_extract" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/test/Seeder/UserFixture.php"><a href="files/module-user-test-seeder-userfixture.html"><abbr title="module/User/test/Seeder/UserFixture.php">UserFixture.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Hydrator/Strategy/StudyHydratorStrategy.php"><a href="files/module-database-src-hydrator-strategy-studyhydratorstrategy.html"><abbr title="module/Database/src/Hydrator/Strategy/StudyHydratorStrategy.php">StudyHydratorStrategy.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">load</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$manager</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">extract</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">object|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -442,8 +406,81 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$manager</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr></span>
+                <span class="phpdocumentor-argument-list__argument__name">$value</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$object</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="method_extract_attributes">
+                Attributes <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_extract_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Override">Override</abbr>]
+    </dt>
+    </dl>
+                    </section>
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hydrate">
+        hydrate()
+        <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_hydrate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Hydrator/Strategy/StudyHydratorStrategy.php"><a href="files/module-database-src-hydrator-strategy-studyhydratorstrategy.html"><abbr title="module/Database/src/Hydrator/Strategy/StudyHydratorStrategy.php">StudyHydratorStrategy.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hydrate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$value</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$data</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -453,8 +490,23 @@
     
 
         
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="method_hydrate_attributes">
+                Attributes <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_hydrate_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Override">Override</abbr>]
+    </dt>
+    </dl>
+                    </section>
     
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-Studies.html"><abbr title="\Database\Model\Enums\Studies">Studies</abbr></a>|null</span>
+            </section>
+
 </article>
             </section>
 
@@ -470,22 +522,16 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/UserTest-Seeder-UserFixture.html#toc-constants">Constants</a></li>
-                                                                                <li><a href="classes/UserTest-Seeder-UserFixture.html#toc-methods">Methods</a></li>
+                                                                                <li><a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
-                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
-                <li>
-                    <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/UserTest-Seeder-UserFixture.html#constant_REF_ADMIN_USER">REF_ADMIN_USER</a></li>
-                                            </ul>
-                </li>
             
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/UserTest-Seeder-UserFixture.html#method_load">load()</a></li>
+                                            <li class=""><a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_extract">extract()</a></li>
+                                            <li class=""><a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_hydrate">hydrate()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -505,7 +551,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/UserTest-Seeder-UserFixture.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

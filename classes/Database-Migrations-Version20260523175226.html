@@ -280,16 +280,16 @@
             <div class="phpdocumentor-column -nine phpdocumentor-content">
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/usertest.html">UserTest</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/usertest-seeder.html">Seeder</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database.html">Database</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/database-migrations.html">Migrations</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    UserFixture
+    Version20260523175226
 
         <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Doctrine\Common\DataFixtures\AbstractFixture">AbstractFixture</abbr>
+        extends <abbr title="\Doctrine\Migrations\AbstractMigration">AbstractMigration</abbr>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -304,17 +304,21 @@
 
 <div class="phpdocumentor-label-line">
 
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
+
 
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/test/Seeder/UserFixture.php"><a href="files/module-user-test-seeder-userfixture.html"><abbr title="module/User/test/Seeder/UserFixture.php">UserFixture.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20260523175226.php"><a href="files/module-database-migrations-version20260523175226.html"><abbr title="module/Database/migrations/Version20260523175226.php">Version20260523175226.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">phpcs:disable Generic.Files.LineLength.TooLong
+phpcs:disable SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall</p>
+
 
 
 
@@ -323,7 +327,7 @@
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/UserTest-Seeder-UserFixture.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Migrations-Version20260523175226.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -335,14 +339,14 @@
 
 <h4 id="toc-constants">
     Constants
-    <a href="classes/UserTest-Seeder-UserFixture.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Migrations-Version20260523175226.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/UserTest-Seeder-UserFixture.html#constant_REF_ADMIN_USER">REF_ADMIN_USER</a>
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a class="" href="classes/Database-Migrations-Version20260523175226.html#constant_VALID_STUDIES">VALID_STUDIES</a>
     <span>
-        &nbsp;: string&nbsp;= &#039;admin-user&#039;                            </span>
+        &nbsp;: array&lt;string|int, mixed&gt;&nbsp;= [ /** Bachelor programs */ &#039;Bachelor Applied Ma...                            </span>
 </dt>
 
     </dl>
@@ -351,12 +355,24 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/UserTest-Seeder-UserFixture.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Migrations-Version20260523175226.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/UserTest-Seeder-UserFixture.html#method_load">load()</a>
+    <a class="" href="classes/Database-Migrations-Version20260523175226.html#method_down">down()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Migrations-Version20260523175226.html#method_getDescription">getDescription()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Migrations-Version20260523175226.html#method_up">up()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -369,30 +385,64 @@
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/UserTest-Seeder-UserFixture.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Migrations-Version20260523175226.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_REF_ADMIN_USER">
-        REF_ADMIN_USER
-        <a href="classes/UserTest-Seeder-UserFixture.html#constant_REF_ADMIN_USER" class="headerlink"><i class="fas fa-link"></i></a>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_VALID_STUDIES">
+        VALID_STUDIES
+        <a href="classes/Database-Migrations-Version20260523175226.html#constant_VALID_STUDIES" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/test/Seeder/UserFixture.php"><a href="files/module-user-test-seeder-userfixture.html"><abbr title="module/User/test/Seeder/UserFixture.php">UserFixture.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20260523175226.php"><a href="files/module-database-migrations-version20260523175226.html"><abbr title="module/Database/migrations/Version20260523175226.php">Version20260523175226.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
     
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">REF_ADMIN_USER</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;admin-user&#039;</span>
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">VALID_STUDIES</span>
+    = <span class="phpdocumentor-signature__default-value">[
+    /** Bachelor programs */
+    &#039;Bachelor Applied Mathematics&#039;,
+    &#039;Bachelor Computer Science and Engineering&#039;,
+    &#039;Bachelor Data Science&#039;,
+    /** Premaster programs */
+    &#039;Pre-master Computer Science and Engineering&#039;,
+    &#039;Pre-master Data Science and Artificial Intelligence&#039;,
+    &#039;Pre-master Embedded Systems&#039;,
+    &#039;Pre-master Industrial and Applied Mathematics&#039;,
+    &#039;Pre-master Information Security Technology&#039;,
+    &#039;Schakelprogramma SEC Leraar vho Informatica&#039;,
+    &#039;Schakelprogramma SEC Leraar vho Wiskunde&#039;,
+    /** Graduate programs */
+    &#039;Master Artificial Intelligence &amp; Engineering Systems&#039;,
+    &#039;Master Computer Science and Engineering&#039;,
+    &#039;Master Data Science &amp; Artificial Intelligence&#039;,
+    &#039;Master Data Science in Business and Entrepreneurship&#039;,
+    &#039;Master Embedded Systems&#039;,
+    &#039;Master Industrial and Applied Mathematics&#039;,
+    &#039;Master Information Security Technology&#039;,
+    &#039;Master Science Education&#039;,
+    /** EngD / PhD programs */
+    &#039;EngD Automotive Systems Design&#039;,
+    &#039;EngD Data Science&#039;,
+    &#039;EngD Mechatronic Systems Design&#039;,
+    &#039;EngD Software Technology&#039;,
+    &#039;PhD Computer Science&#039;,
+    &#039;PhD Data Science&#039;,
+    &#039;PhD Mathematics&#039;,
+    /** Other */
+    &#039;Other&#039;,
+    &#039;Unknown&#039;,
+    &#039;Not studying&#039;,
+]</span>
 </code>
 
 
@@ -409,7 +459,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/UserTest-Seeder-UserFixture.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Migrations-Version20260523175226.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -418,22 +468,22 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_load">
-        load()
-        <a href="classes/UserTest-Seeder-UserFixture.html#method_load" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_down">
+        down()
+        <a href="classes/Database-Migrations-Version20260523175226.html#method_down" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/User/test/Seeder/UserFixture.php"><a href="files/module-user-test-seeder-userfixture.html"><abbr title="module/User/test/Seeder/UserFixture.php">UserFixture.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20260523175226.php"><a href="files/module-database-migrations-version20260523175226.html"><abbr title="module/Database/migrations/Version20260523175226.php">Version20260523175226.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">load</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$manager</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">down</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -442,8 +492,90 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$manager</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\Persistence\ObjectManager">ObjectManager</abbr></span>
+                <span class="phpdocumentor-argument-list__argument__name">$schema</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getDescription">
+        getDescription()
+        <a href="classes/Database-Migrations-Version20260523175226.html#method_getDescription" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20260523175226.php"><a href="files/module-database-migrations-version20260523175226.html"><abbr title="module/Database/migrations/Version20260523175226.php">Version20260523175226.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">61</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_up">
+        up()
+        <a href="classes/Database-Migrations-Version20260523175226.html#method_up" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/migrations/Version20260523175226.php"><a href="files/module-database-migrations-version20260523175226.html"><abbr title="module/Database/migrations/Version20260523175226.php">Version20260523175226.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">66</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">up</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$schema</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Doctrine\DBAL\Schema\Schema">Schema</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -470,14 +602,14 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/UserTest-Seeder-UserFixture.html#toc-constants">Constants</a></li>
-                                                                                <li><a href="classes/UserTest-Seeder-UserFixture.html#toc-methods">Methods</a></li>
+                                        <li><a href="classes/Database-Migrations-Version20260523175226.html#toc-constants">Constants</a></li>
+                                                                                <li><a href="classes/Database-Migrations-Version20260523175226.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/UserTest-Seeder-UserFixture.html#constant_REF_ADMIN_USER">REF_ADMIN_USER</a></li>
+                                                    <li class=""><a href="classes/Database-Migrations-Version20260523175226.html#constant_VALID_STUDIES">VALID_STUDIES</a></li>
                                             </ul>
                 </li>
             
@@ -485,7 +617,9 @@
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/UserTest-Seeder-UserFixture.html#method_load">load()</a></li>
+                                            <li class=""><a href="classes/Database-Migrations-Version20260523175226.html#method_down">down()</a></li>
+                                            <li class=""><a href="classes/Database-Migrations-Version20260523175226.html#method_getDescription">getDescription()</a></li>
+                                            <li class=""><a href="classes/Database-Migrations-Version20260523175226.html#method_up">up()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -505,7 +639,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/UserTest-Seeder-UserFixture.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Migrations-Version20260523175226.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

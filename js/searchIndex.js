@@ -3606,6 +3606,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20260504104135.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20260523175226",
+            "name": "Version20260523175226",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20260523175226.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260523175226\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260523175226.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260523175226\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260523175226.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260523175226\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260523175226.html#method_down"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260523175226\u003A\u003AVALID_STUDIES",
+            "name": "VALID_STUDIES",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260523175226.html#constant_VALID_STUDIES"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -5491,6 +5516,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Hydrator-Strategy-PostalRegionHydratorStrategy.html#method_hydrate"
         },                {
+            "fqsen": "\\Database\\Hydrator\\Strategy\\StudyHydratorStrategy",
+            "name": "StudyHydratorStrategy",
+            "summary": "",
+            "url": "classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Strategy\\StudyHydratorStrategy\u003A\u003Aextract\u0028\u0029",
+            "name": "extract",
+            "summary": "",
+            "url": "classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_extract"
+        },                {
+            "fqsen": "\\Database\\Hydrator\\Strategy\\StudyHydratorStrategy\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "",
+            "url": "classes/Database-Hydrator-Strategy-StudyHydratorStrategy.html#method_hydrate"
+        },                {
             "fqsen": "\\Database\\Mapper\\ActionLink",
             "name": "ActionLink",
             "summary": "",
@@ -7171,6 +7211,201 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-InstallationFunctions.html#enumcase_InactiveMember"
         },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies",
+            "name": "Studies",
+            "summary": "Enum\u0020with\u0020studies",
+            "url": "classes/Database-Model-Enums-Studies.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisBachelor\u0028\u0029",
+            "name": "isBachelor",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_isBachelor"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisPreMaster\u0028\u0029",
+            "name": "isPreMaster",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_isPreMaster"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisGraduate\u0028\u0029",
+            "name": "isGraduate",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_isGraduate"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisEngDPhD\u0028\u0029",
+            "name": "isEngDPhD",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_isEngDPhD"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisDataScience\u0028\u0029",
+            "name": "isDataScience",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_isDataScience"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisSpecial\u0028\u0029",
+            "name": "isSpecial",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_isSpecial"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "Give\u0020the\u0020function\u0020name\u0020with\u0020the\u0020given\u0020translation.\u0020If\u0020no\u0020translator\u0020is\u0020given,\u0020we\u0020return\u0020the\u0020default\u0020language.",
+            "url": "classes/Database-Model-Enums-Studies.html#method_getName"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AgetCategoryName\u0028\u0029",
+            "name": "getCategoryName",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_getCategoryName"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AgetValueOptions\u0028\u0029",
+            "name": "getValueOptions",
+            "summary": "Returns\u0020categorised\u0020studies\u0020to\u0020be\u0020used\u0020in\u0020Select\u0020field\u0020value_options",
+            "url": "classes/Database-Model-Enums-Studies.html#method_getValueOptions"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AgetCategorisedStudies\u0028\u0029",
+            "name": "getCategorisedStudies",
+            "summary": "Returns\u0020a\u0020list\u0020of\u0020categorised\u0020studies",
+            "url": "classes/Database-Model-Enums-Studies.html#method_getCategorisedStudies"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003ABAM",
+            "name": "BAM",
+            "summary": "Bachelor\u0020programs",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_BAM"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003ABCS",
+            "name": "BCS",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_BCS"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003ABDS",
+            "name": "BDS",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_BDS"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APMCSE",
+            "name": "PMCSE",
+            "summary": "Premaster\u0020programs",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PMCSE"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APMDSAI",
+            "name": "PMDSAI",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PMDSAI"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APMES",
+            "name": "PMES",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PMES"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APMIAM",
+            "name": "PMIAM",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PMIAM"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APMIST",
+            "name": "PMIST",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PMIST"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003ASkSEInf",
+            "name": "SkSEInf",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_SkSEInf"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003ASkSEWisk",
+            "name": "SkSEWisk",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_SkSEWisk"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMAIES",
+            "name": "MAIES",
+            "summary": "Graduate\u0020programs",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MAIES"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMCSE",
+            "name": "MCSE",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MCSE"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMDSAI",
+            "name": "MDSAI",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MDSAI"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMDSBE",
+            "name": "MDSBE",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MDSBE"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMES",
+            "name": "MES",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MES"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMIAM",
+            "name": "MIAM",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MIAM"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMIST",
+            "name": "MIST",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MIST"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AMSEC",
+            "name": "MSEC",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_MSEC"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AEngDASD",
+            "name": "EngDASD",
+            "summary": "EngD\u0020\/\u0020PhD\u0020programs",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_EngDASD"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AEngDDS",
+            "name": "EngDDS",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_EngDDS"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AEngDMSD",
+            "name": "EngDMSD",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_EngDMSD"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AEngDST",
+            "name": "EngDST",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_EngDST"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APhDCS",
+            "name": "PhDCS",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PhDCS"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APhDDS",
+            "name": "PhDDS",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PhDDS"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003APhDM",
+            "name": "PhDM",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_PhDM"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AOther",
+            "name": "Other",
+            "summary": "Other",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_Other"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003ANone",
+            "name": "None",
+            "summary": "Special\u0020cases",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_None"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AUnknown",
+            "name": "Unknown",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#enumcase_Unknown"
+        },                {
             "fqsen": "\\Database\\Model\\Exception\\VersionExpected",
             "name": "VersionExpected",
             "summary": "Abstract\u0020class\u0020for\u0020API\u0020exceptions",
@@ -7215,6 +7450,16 @@ Search.appendIndex(
             "name": "httpStatusCode",
             "summary": "",
             "url": "classes/Database-Model-Exception-VersionIncompatible.html#property_httpStatusCode"
+        },                {
+            "fqsen": "\\Database\\Model\\Interface\\FormSelectable",
+            "name": "FormSelectable",
+            "summary": "",
+            "url": "classes/Database-Model-Interface-FormSelectable.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Interface\\FormSelectable\u003A\u003AgetValueOptions\u0028\u0029",
+            "name": "getValueOptions",
+            "summary": "Returns\u0020a\u0020list\u0020of\u0020value\u0020options\u0020to\u0020be\u0020used\u0020in\u0020a\u0020form\u0020Select\u0020element.",
+            "url": "classes/Database-Model-Interface-FormSelectable.html#method_getValueOptions"
         },                {
             "fqsen": "\\Database\\Model\\MailingList",
             "name": "MailingList",
@@ -8268,7 +8513,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AsetStudy\u0028\u0029",
             "name": "setStudy",
-            "summary": "Set\u0020the\u0020study.",
+            "summary": "Set\u0020the\u0020study\u0020\u0028null\u0020should\u0020never\u0020happen,\u0020but\u0020made\u0020consistent\u0020with\u0020Member\u0029",
             "url": "classes/Database-Model-ProspectiveMember.html#method_setStudy"
         },                {
             "fqsen": "\\Database\\Model\\ProspectiveMember\u003A\u003AgetBirth\u0028\u0029",
@@ -15220,6 +15465,11 @@ Search.appendIndex(
             "name": "Exception",
             "summary": "",
             "url": "namespaces/database-model-exception.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Interface",
+            "name": "Interface",
+            "summary": "",
+            "url": "namespaces/database-model-interface.html"
         },                {
             "fqsen": "\\Database\\Model\\SubDecision",
             "name": "SubDecision",
