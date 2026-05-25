@@ -10,7 +10,7 @@ use User\Model\User;
 
 class UserFixture extends AbstractFixture
 {
-    public const REF_ADMIN_USER = 'admin-user';
+    public const string REF_ADMIN_USER = 'admin-user';
 
     public function load(ObjectManager $manager): void
     {

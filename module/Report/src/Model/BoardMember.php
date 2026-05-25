@@ -49,7 +49,6 @@ class BoardMember
      * Function given.
      */
     #[Column(
-        type: 'string',
         enumType: BoardFunctions::class,
     )]
     private BoardFunctions $function;

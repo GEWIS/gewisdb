@@ -57,7 +57,6 @@ class Decision
      */
     #[Id]
     #[Column(
-        type: 'string',
         enumType: MeetingTypes::class,
     )]
     private MeetingTypes $meeting_type;

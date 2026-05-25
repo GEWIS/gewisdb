@@ -9,6 +9,7 @@ use Application\Model\Enums\PostalRegions;
 use Database\Model\Address;
 use Database\Model\CheckoutSession;
 use Database\Model\Enums\CheckoutSessionStates;
+use Database\Model\Enums\Studies;
 use Database\Model\Member;
 use Database\Model\ProspectiveMember;
 use DateTime;
@@ -17,10 +18,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class MemberFixture extends AbstractFixture
 {
-    public const REF_MEMBER_STUDENT = 'student';
-    public const REF_MEMBER_EXTERNAL = 'external';
-    public const REF_MEMBER_GRADUATE = 'graduate';
-    public const REF_MEMBER_PROSPECTIVE = 'prospective';
+    public const string REF_MEMBER_STUDENT = 'student';
+    public const string REF_MEMBER_EXTERNAL = 'external';
+    public const string REF_MEMBER_GRADUATE = 'graduate';
+    public const string REF_MEMBER_PROSPECTIVE = 'prospective';
 
     public function load(ObjectManager $manager): void
     {
@@ -46,7 +47,7 @@ class MemberFixture extends AbstractFixture
             $prosAddress->setPhone('1');
             $prosAddress->setCountry(PostalRegions::Netherlands);
             $pros->setAddress($prosAddress);
-            $pros->setStudy('Other');
+            $pros->setStudy(Studies::BAM);
 
             $manager->persist($pros);
             $this->addReference(self::REF_MEMBER_PROSPECTIVE, $pros);
@@ -73,6 +74,7 @@ class MemberFixture extends AbstractFixture
             $student->setChangedOn(new DateTime());
             $student->setTueUsername('20180001');
             $student->setIsStudying(true);
+            $student->setStudy(Studies::BAM);
 
             $manager->persist($student);
             $this->addReference(self::REF_MEMBER_STUDENT, $student);
@@ -90,7 +92,7 @@ class MemberFixture extends AbstractFixture
             $external->setExpiration($expiryDate);
             $external->setChangedOn(new DateTime());
             $external->setIsStudying(false);
-
+            $external->setStudy(Studies::Other);
             $manager->persist($external);
             $this->addReference(self::REF_MEMBER_EXTERNAL, $external);
 
@@ -108,6 +110,7 @@ class MemberFixture extends AbstractFixture
             $graduate->setMembershipEndsOn(new DateTime());
             $graduate->setChangedOn(new DateTime('1990-07-01'));
             $graduate->setIsStudying(false);
+            $graduate->setStudy(Studies::None);
 
             $manager->persist($graduate);
             $this->addReference(self::REF_MEMBER_GRADUATE, $graduate);

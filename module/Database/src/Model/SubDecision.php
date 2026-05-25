@@ -101,7 +101,6 @@ abstract class SubDecision
      */
     #[Id]
     #[Column(
-        type: 'string',
         enumType: MeetingTypes::class,
     )]
     protected MeetingTypes $meeting_type;

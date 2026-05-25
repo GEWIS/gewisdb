@@ -4,19 +4,31 @@
  class InputValidator {
     constructor(topEl) {
         this.topEl = topEl;
-        this.addListeners("focusout", "validate-initials", InputValidator.initialValidator);
+        this.addListeners("focusout", "validate-initials", InputValidator.initialValidator, false, true);
+        this.addListeners("change", "validate-study", InputValidator.studyWarning, false, false);
     }
 
     validateElement(event, validator) {
+        let targetElement = event.target;
+        validator(targetElement);
+    }
+
+    validateUpdateElement(event, validator) {
         event.target.disabled = true;
         let currentValue = event.target.value;
         event.target.value = validator(currentValue);
         event.target.disabled = false;
     }
 
-    addListeners(eventName, className, validator, runOnce = false) {
+    addListeners(eventName, className, validator, runOnce = false, updater = true) {
         for (let elem of this.topEl.getElementsByClassName(className)) {
-            elem.addEventListener(eventName, (event) => {this.validateElement(event, validator)}, {once : runOnce});
+            elem.addEventListener(eventName, (event) => {
+                if (updater) {
+                    this.validateUpdateElement(event, validator);
+                } else {
+                    this.validateElement(event, validator);
+                }
+            }, {once : runOnce});
         }
     }
 
@@ -37,5 +49,11 @@
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     }
+
+    // This validator adds the 'warning' for DS studies if it is empty or a DS study is selected.
+    static studyWarning(inputElement) {
+        for (let elem of inputElement.parentElement.getElementsByClassName('validate-study-help-text')) {
+            elem.style.display = inputElement.options[inputElement.selectedIndex].text.includes('¹') || '' === inputElement.value ? 'block' : 'none';
+        }
+    }
 }
-  

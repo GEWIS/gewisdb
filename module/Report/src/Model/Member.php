@@ -96,7 +96,6 @@ class Member
      * See artikel 7.
      */
     #[Column(
-        type: 'string',
         enumType: MembershipTypes::class,
     )]
     private MembershipTypes $type;

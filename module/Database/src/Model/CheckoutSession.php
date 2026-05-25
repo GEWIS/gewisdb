@@ -111,7 +111,6 @@ class CheckoutSession
      * The state of the payment.
      */
     #[Column(
-        type: 'integer',
         enumType: CheckoutSessionStates::class,
     )]
     private CheckoutSessionStates $state = CheckoutSessionStates::Created;

@@ -71,6 +71,7 @@ use Database\Hydrator\Other as OtherHydrator;
 use Database\Hydrator\Strategy\AddressHydratorStrategy;
 use Database\Hydrator\Strategy\MeetingHydratorStrategy;
 use Database\Hydrator\Strategy\PostalRegionHydratorStrategy;
+use Database\Hydrator\Strategy\StudyHydratorStrategy;
 use Database\Mapper\ActionLink as ActionLinkMapper;
 use Database\Mapper\Audit as AuditMapper;
 use Database\Mapper\CheckoutSession as CheckoutSessionMapper;
@@ -208,13 +209,13 @@ class Module
                         $container->get(AddressFieldset::class),
                         $container->get(MvcTranslator::class),
                     );
-                    $form->setHydrator($container->get('database_hydrator_default'));
+                    $form->setHydrator($container->get('database_hydrator_member'));
 
                     return $form;
                 },
                 MemberEditForm::class => static function (ContainerInterface $container) {
                     $form = new MemberEditForm($container->get(MvcTranslator::class));
-                    $form->setHydrator($container->get('database_hydrator_default_classmethods'));
+                    $form->setHydrator($container->get('database_hydrator_member_classmethods'));
 
                     return $form;
                 },
@@ -516,12 +517,6 @@ class Module
                         false,
                     );
                 },
-                'database_hydrator_default_classmethods' => static function (ContainerInterface $container) {
-                    return new DoctrineHydrator(
-                        $container->get('doctrine.entitymanager.orm_default'),
-                        true,
-                    );
-                },
                 'database_hydrator_address' => static function (ContainerInterface $container) {
                     $hydrator = new DoctrineHydrator(
                         $container->get('doctrine.entitymanager.orm_default'),
@@ -529,6 +524,24 @@ class Module
                     );
                     $hydrator->addStrategy('type', new AddressHydratorStrategy());
                     $hydrator->addStrategy('country', new PostalRegionHydratorStrategy());
+
+                    return $hydrator;
+                },
+                'database_hydrator_member' => static function (ContainerInterface $container) {
+                    $hydrator = new DoctrineHydrator(
+                        $container->get('doctrine.entitymanager.orm_default'),
+                        false,
+                    );
+                    $hydrator->addStrategy('study', new StudyHydratorStrategy());
+
+                    return $hydrator;
+                },
+                'database_hydrator_member_classmethods' => static function (ContainerInterface $container) {
+                    $hydrator = new DoctrineHydrator(
+                        $container->get('doctrine.entitymanager.orm_default'),
+                        true,
+                    );
+                    $hydrator->addStrategy('study', new StudyHydratorStrategy());
 
                     return $hydrator;
                 },

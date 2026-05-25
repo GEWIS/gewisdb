@@ -52,7 +52,6 @@ class Organ
      * Type of the organ.
      */
     #[Column(
-        type: 'string',
         enumType: OrganTypes::class,
     )]
     private OrganTypes $type;

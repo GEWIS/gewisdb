@@ -32,6 +32,7 @@ use Database\Model\Address as AddressModel;
 use Database\Model\AuditEntry as AuditEntryModel;
 use Database\Model\AuditNote as AuditNoteModel;
 use Database\Model\AuditRenewal as AuditRenewalModel;
+use Database\Model\Enums\Studies;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\Member as MemberModel;
@@ -685,7 +686,7 @@ class Member
         $member->setEmail(null);
         $member->setGeneration(0);
         $member->setTueUsername(null);
-        $member->setStudy(null);
+        $member->setStudy(Studies::Unknown);
         $member->setIsStudying(false);
         $member->setLastCheckedOn(null);
         $member->setChangedOn(new DateTime());

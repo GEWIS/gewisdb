@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Model;
 
 use Application\Model\Enums\MembershipTypes;
+use Database\Model\Enums\Studies;
 use Database\Model\SubDecision\Installation;
 use DateTime;
 use DateTimeInterface;
@@ -90,10 +91,9 @@ class Member
      * Study of the member.
      */
     #[Column(
-        type: 'string',
-        nullable: true,
+        enumType: Studies::class,
     )]
-    private ?string $study = null;
+    private Studies $study = Studies::Unknown;
 
     /**
      * Member type.
@@ -110,7 +110,6 @@ class Member
      * See artikel 7.
      */
     #[Column(
-        type: 'string',
         enumType: MembershipTypes::class,
     )]
     private MembershipTypes $type;
@@ -480,7 +479,7 @@ class Member
     /**
      * Get the study.
      */
-    public function getStudy(): ?string
+    public function getStudy(): Studies
     {
         return $this->study;
     }
@@ -488,7 +487,7 @@ class Member
     /**
      * Set the study.
      */
-    public function setStudy(?string $study): void
+    public function setStudy(Studies $study): void
     {
         $this->study = $study;
     }

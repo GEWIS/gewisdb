@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb 7d38854e-dirty\n"
+"Project-Id-Version: GEWISdb v4.4.0-32-gee1a7045\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-10 22:40+0200\n"
+"POT-Creation-Date: 2026-05-23 20:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -322,6 +322,18 @@ msgid "BM (Board Meeting)"
 msgstr ""
 
 msgid "BV"
+msgstr ""
+
+msgid "Bachelor Applied Mathematics"
+msgstr ""
+
+msgid "Bachelor Computer Science and Engineering"
+msgstr ""
+
+msgid "Bachelor Data Science"
+msgstr ""
+
+msgid "Bachelor Programs"
 msgstr ""
 
 #, php-format
@@ -649,6 +661,21 @@ msgstr ""
 msgid "Effective From"
 msgstr ""
 
+msgid "EngD / PhD Programs"
+msgstr ""
+
+msgid "EngD Automotive Systems Design"
+msgstr ""
+
+msgid "EngD Data Science"
+msgstr ""
+
+msgid "EngD Mechatronic Systems Design"
+msgstr ""
+
+msgid "EngD Software Technology"
+msgstr ""
+
 msgid "English Description"
 msgstr ""
 
@@ -971,6 +998,33 @@ msgstr ""
 msgid "Make Member Inactive"
 msgstr ""
 
+msgid "Master Artificial Intelligence & Engineering Systems"
+msgstr ""
+
+msgid "Master Computer Science and Engineering"
+msgstr ""
+
+msgid "Master Data Science & Artificial Intelligence"
+msgstr ""
+
+msgid "Master Data Science in Business and Entrepreneurship"
+msgstr ""
+
+msgid "Master Embedded Systems"
+msgstr ""
+
+msgid "Master Industrial and Applied Mathematics"
+msgstr ""
+
+msgid "Master Information Security Technology"
+msgstr ""
+
+msgid "Master Programs"
+msgstr ""
+
+msgid "Master Science Education"
+msgstr ""
+
 msgid "Meeting"
 msgstr ""
 
@@ -1156,6 +1210,15 @@ msgstr ""
 msgid "Personal details"
 msgstr ""
 
+msgid "PhD Computer Science"
+msgstr ""
+
+msgid "PhD Data Science"
+msgstr ""
+
+msgid "PhD Mathematics"
+msgstr ""
+
 msgid "Phone Number"
 msgstr ""
 
@@ -1181,6 +1244,24 @@ msgid "Postal Code"
 msgstr ""
 
 msgid "Postal Region"
+msgstr ""
+
+msgid "Pre-master Computer Science and Engineering"
+msgstr ""
+
+msgid "Pre-master Data Science and Artificial Intelligence"
+msgstr ""
+
+msgid "Pre-master Embedded Systems"
+msgstr ""
+
+msgid "Pre-master Industrial and Applied Mathematics"
+msgstr ""
+
+msgid "Pre-master Information Security Technology"
+msgstr ""
+
+msgid "Pre-master Programs"
 msgstr ""
 
 msgid "Previous exceptions"
@@ -1269,6 +1350,12 @@ msgstr ""
 msgid ""
 "Saving a query with a previously used name will overwrite the previously "
 "saved query and update its category."
+msgstr ""
+
+msgid "Schakelprogramma SEC Leraar vho Informatica"
+msgstr ""
+
+msgid "Schakelprogramma SEC Leraar vho Wiskunde"
 msgstr ""
 
 msgid "Search"

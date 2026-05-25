@@ -226,7 +226,7 @@ Registration&nbsp;Confirmation&nbsp;GEWIS
                                                                         <tr>
                                                                             <th scope='row'>Study</th>
                                                                             <td>
-                                                                                <?= (null === $member->getStudy()) ? 'Unknown' : $this->escapeHtml($member->getStudy()) ?>
+                                                                                <?= (null === $member->getStudy()->getName(null)) ? 'Unknown' : $this->escapeHtml($member->getStudy()->getName(null)) ?>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>

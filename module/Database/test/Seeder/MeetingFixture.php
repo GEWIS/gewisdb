@@ -17,8 +17,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class MeetingFixture extends AbstractFixture implements DependentFixtureInterface
 {
-    public const REF_MEETING_BV1 = 'bv-1';
-    public const REF_SUBDEC_BOARDINSTALL = 'subdecision-boardinstall';
+    public const string REF_MEETING_BV1 = 'bv-1';
+    public const string REF_SUBDEC_BOARDINSTALL = 'subdecision-boardinstall';
 
     public function load(ObjectManager $manager): void
     {

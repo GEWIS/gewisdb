@@ -6,6 +6,7 @@ namespace Database\Form;
 
 use Application\Model\Enums\AddressTypes;
 use Database\Form\Fieldset\Address as AddressFieldset;
+use Database\Model\Enums\Studies;
 use Database\Model\MailingList as MailingListModel;
 use DateInterval;
 use DateTime;
@@ -88,67 +89,18 @@ class Member extends Form implements InputFilterProviderInterface
             ],
         ]);
 
-        // phpcs:disable Generic.Files.LineLength.TooLong -- user-visible strings should not be split
         $this->add([
             'name' => 'study',
             'type' => Select::class,
             'options' => [
                 'label' => $translator->translate('Study'),
-                'value_options' => [
-                    'bachelor' => [
-                        'label' => 'Bachelor Programs',
-                        'options' => [
-                            'Bachelor Applied Mathematics' => 'Applied Mathematics',
-                            'Bachelor Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Bachelor Data Science' => 'Data Science¹',
-                        ],
-                    ],
-                    'premaster' => [
-                        'label' => 'Premaster Programs',
-                        'options' => [
-                            'Pre-master Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Pre-master Data Science and Artificial Intelligence' => 'Data Science and Artificial Intelligence¹',
-                            'Pre-master Embedded Systems' => 'Embedded Systems',
-                            'Pre-master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
-                            'Pre-master Information Security Technology' => 'Information Security Technology',
-                            'Schakelprogramma SEC Leraar vho Informatica' => 'Schakelprogramma SEC Leraar vho Informatica',
-                            'Schakelprogramma SEC Leraar vho Wiskunde' => 'Schakelprogramma SEC Leraar vho Wiskunde',
-                        ],
-                    ],
-                    'graduate' => [
-                        'label' => 'Graduate Programs',
-                        'options' => [
-                            'Master Artificial Intelligence & Engineering Systems' => 'Artificial Intelligence & Engineering Systems',
-                            'Master Computer Science and Engineering' => 'Computer Science and Engineering',
-                            'Master Data Science & Artificial Intelligence' => 'Data Science & Artificial Intelligence¹',
-                            'Master Data Science in Business and Entrepreneurship' => 'Data Science in Business and Entrepreneurship',
-                            'Master Embedded Systems' => 'Embedded Systems',
-                            'Master Industrial and Applied Mathematics' => 'Industrial and Applied Mathematics',
-                            'Master Information Security Technology' => 'Information Security Technology',
-                            'Master Science Education' => 'Science Education',
-                        ],
-                    ],
-                    'phd' => [
-                        'label' => 'EngD / PhD Programs',
-                        'options' => [
-                            'EngD Automotive Systems Design' => 'EngD Automotive Systems Design',
-                            'EngD Data Science' => 'EngD Data Science¹',
-                            'EngD Mechatronic Systems Design' => 'EngD Mechatronic Systems Design',
-                            'EngD Software Technology' => 'EngD Software Technology',
-                            'PhD Computer Science' => 'PhD Computer Science',
-                            'PhD Data Science' => 'PhD Data Science¹',
-                            'PhD Mathematics' => 'PhD Mathematics',
-                        ],
-                    ],
-                    'other' => [
-                        'label' => 'Other',
-                        'options' => ['Other' => 'Other'],
-                    ],
-                ],
+                'value_options' => Studies::getValueOptions($translator, true),
                 'empty_option' => $translator->translate('Select a study'),
             ],
+            'attributes' => [
+                'value' => '',
+            ],
         ]);
-        // phpcs:enable Generic.Files.LineLength.TooLong
 
         $this->add([
             'name' => 'email',
