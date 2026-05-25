@@ -2,7 +2,7 @@ ARG ALPINE_VERSION="3.23"
 ARG BASE="alpine:$ALPINE_VERSION"
 
 ARG PHP_MAJOR="8"
-ARG PHP_MINOR="3"
+ARG PHP_MINOR="4"
 ARG PHP_VERSION=$PHP_MAJOR$PHP_MINOR
 
 ARG COMPOSER_VERSION="2.9"
@@ -41,8 +41,10 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
         nano \
         php${PHP_VERSION} \
         php${PHP_VERSION}-calendar \
+        php${PHP_VERSION}-ctype \
         php${PHP_VERSION}-curl \
         php${PHP_VERSION}-dom \
+        php${PHP_VERSION}-fileinfo \
         php${PHP_VERSION}-fpm \
         php${PHP_VERSION}-iconv \
         php${PHP_VERSION}-intl \
@@ -68,8 +70,8 @@ RUN --mount=type=cache,target=/var/cache/apk,sharing=locked \
     && cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime \
     && echo 'Europe/Amsterdam' > /etc/timezone \
     && apk del .build-deps \
-    && ln -s ./php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
-    && ln -s ./php${PHP_VERSION} /usr/bin/php \
+    && ln -fs ./php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
+    && ln -fs ./php${PHP_VERSION} /usr/bin/php \
     && rm /etc/php${PHP_VERSION}/php-fpm.d/www.conf \
     && rm /etc/crontabs/root
 

@@ -1,5 +1,5 @@
 {
-	"image": "mcr.microsoft.com/devcontainers/php:8.3",
+	"image": "mcr.microsoft.com/devcontainers/php:8.4",
 	"customizations": {
 		"vscode": {
       		"extensions": [
@@ -64,13 +64,13 @@
 	"waitFor": "postCreateCommand",
 	//"postAttachCommand": "",
 	"forwardPorts": [
-		80,
+		9725,
 		8080,
 		8021,
 		8025
 	],
 	"portsAttributes": {
-		"80": {
+		"9725": {
 			"label": "GEWISDB Web interface",
 			"onAutoForward": "openBrowserOnce",
 			"protocol": "http"

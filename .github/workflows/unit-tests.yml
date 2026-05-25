@@ -24,7 +24,7 @@ jobs:
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '8.3'
+                    php-version: '8.4'
                     extensions: calendar, curl, intl, opcache, pdo_sqlite, sqlite3, zip
 
             -   name: Setup problem matchers for PHPUnit
