@@ -15,13 +15,6 @@
       <code>Collection</code>
     </InvalidExtendClass>
   </file>
-  <file src="module/Database/src/Service/Stripe.php">
-    <UndefinedMagicPropertyFetch occurrences="3">
-      <code>$event-&gt;data-&gt;object</code>
-      <code>$event-&gt;data-&gt;object</code>
-      <code>$session-&gt;after_expiration-&gt;recovery</code>
-    </UndefinedMagicPropertyFetch>
-  </file>
   <file src="module/Report/src/Listener/DatabaseUpdateListener.php">
     <NoValue occurrences="1">
       <code>$subdecision</code>

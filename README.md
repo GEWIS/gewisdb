@@ -122,6 +122,19 @@ The `Application` module has one additional folder:
 The `Database` and `Report` modules have one additional folder:
 - `migrations` containing database migrations.
 
+### Testing stripe behaviour
+Some additional configuration needs to be done to set up the Stripe API:
+
+* Create a restricted key on https://dashboard.stripe.com/test/apikeys and set it in the `STRIPE_SECRET_KEY` environment variable (check `.env.dist` for permissions to set)
+* Copy the publishable key from https://dashboard.stripe.com/test/apikeys and set it in the `STRIPE_PUBLISHABLE_KEY` environment variable
+* Copy the webhook signing secret from the output of `make stripewebhooksecret`
+* Create a product with a one-off price on https://dashboard.stripe.com/test/products?active=true and copy its price ID to `STRIPE_MEMBERSHIP_PRICE_ID`
+
+Tip: to reduce waiting time for checkout sessions to expire, you can speed up this process by invoking `docker compose exec stripe stripe checkout sessions expire cs_test_fromcheckoutsessionstable`.
+This will enable cash payment and send the retry email.
+
+Note: the links in the emails don't work in development setup. Replace `http://nginx:9725/checkout` with `http://localhost:9725/member/subscribe/checkout` etc.
+
 ### Using the API
 To experiment with the API, import the openapi.yaml file into your favourite REST client.
 

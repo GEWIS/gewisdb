@@ -114,7 +114,7 @@ services:
             - "9725:9725"
     stripe:
         image: stripe/stripe-cli:latest
-        command: listen --forward-to nginx:9725/member/subscribe/checkout/webhook
+        command: listen --forward-to nginx:9725/member/subscribe/checkout/webhook --skip-update -e charge.refund.updated,checkout.session.expired,checkout.session.completed,checkout.session.async_payment_succeeded,checkout.session.async_payment_failed
         environment:
             - STRIPE_API_KEY=${STRIPE_SECRET_KEY}
             - STRIPE_DEVICE_NAME="GEWISDB on ${HOST:-}${NAME:-}"
