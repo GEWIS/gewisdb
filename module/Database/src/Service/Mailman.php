@@ -221,7 +221,7 @@ class Mailman
             sprintf(
                 '-> Syncing membership changes for <info>%s</info> (%s)',
                 $dbList->getName(),
-                $dbList->hasMailmanList() ? $dbList->getMailmanList()->getMailmanId() : 'local',
+                $dbList->getMailmanList()->getMailmanId(),
             ),
             OutputInterface::VERBOSITY_VERBOSE,
         );
