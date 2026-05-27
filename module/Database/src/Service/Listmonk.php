@@ -224,7 +224,7 @@ class Listmonk
             sprintf(
                 '-> Syncing membership changes for <info>%s</info> (%s)',
                 $dbList->getName(),
-                $dbList->hasListmonkList() ? $dbList->getListmonkList()->getListmonkId() : 'local',
+                $dbList->getListmonkList()->getName(),
             ),
             OutputInterface::VERBOSITY_VERBOSE,
         );
@@ -405,6 +405,7 @@ class Listmonk
     ): void {
         $member = $mailingListMember->getMember();
         $listId = $mailingListMember->getMailingList()->getListmonkList()->getListmonkId();
+        $listName = $mailingListMember->getMailingList()->getListmonkList()->getName();
 
         // First, check if subscriber exists
         $subscriberData = [
@@ -435,7 +436,7 @@ class Listmonk
                 sprintf(
                     '--> Creating subscriber %s and adding to list %s',
                     $newSubscriber['email'],
-                    $listId,
+                    $listName,
                 ),
                 OutputInterface::VERBOSITY_VERY_VERBOSE,
             );
@@ -455,7 +456,7 @@ class Listmonk
                 sprintf(
                     '--> Adding existing subscriber %s to list %s',
                     $subscriberData['email'],
-                    $listId,
+                    $listName,
                 ),
                 OutputInterface::VERBOSITY_VERY_VERBOSE,
             );
@@ -488,13 +489,14 @@ class Listmonk
         bool $dryRun,
     ): void {
         $listId = $mailingListMember->getMailingList()->getListmonkList()->getListmonkId();
+        $listName = $mailingListMember->getMailingList()->getListmonkList()->getName();
         $email = $mailingListMember->getEmail();
 
         $output->writeln(
             sprintf(
                 '--> Removing %s from %s',
                 $email,
-                $listId,
+                $listName,
             ),
             OutputInterface::VERBOSITY_VERY_VERBOSE,
         );
@@ -546,6 +548,7 @@ class Listmonk
         }
 
         $listId = $mailingListMember->getMailingList()->getListmonkList()->getListmonkId();
+        $listName = $mailingListMember->getMailingList()->getListmonkList()->getName();
 
         if (in_array($mailingListMember->getEmail(), $knownMembers)) {
             $mailingListMember->setLastSyncOn();
@@ -558,7 +561,7 @@ class Listmonk
             sprintf(
                 '--> %s is not in the list of known members of %s, verifying in listmonk',
                 $mailingListMember->getEmail(),
-                $listId,
+                $listName,
             ),
             OutputInterface::VERBOSITY_VERY_VERBOSE,
         );
@@ -582,7 +585,7 @@ class Listmonk
             sprintf(
                 '--> %s has disappeared from %s, removing db entry',
                 $mailingListMember->getEmail(),
-                $listId,
+                $listName,
             ),
             OutputInterface::VERBOSITY_VERY_VERBOSE,
         );
@@ -606,6 +609,7 @@ class Listmonk
         $lmList = $mailingList->getListmonkList();
         $membersDB = $mailingList->getMailingListMemberships();
         $listId = $mailingList->getListmonkList()->getListmonkId();
+        $listName = $mailingList->getListmonkList()->getName();
 
         // Get all subscribers for this list
         $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
@@ -631,7 +635,7 @@ class Listmonk
                         sprintf(
                             '--> Removing unknown email %s from %s',
                             $subscriber['email'],
-                            $listId,
+                            $listName,
                         ),
                         OutputInterface::VERBOSITY_VERY_VERBOSE,
                     );
@@ -653,7 +657,7 @@ class Listmonk
                         sprintf(
                             '--> Found %s on %s, updating database',
                             $subscriber['email'],
-                            $listId,
+                            $listName,
                         ),
                         OutputInterface::VERBOSITY_VERY_VERBOSE,
                     );
@@ -683,7 +687,7 @@ class Listmonk
      *
      * @return string[]
      */
-    private function getListmonkListSubscriberEmails(string $listId): array
+    private function getListmonkListSubscriberEmails(int $listId): array
     {
         $subscribers = $this->performListmonkRequest(
             'subscribers?' . http_build_query([
