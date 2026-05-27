@@ -63,4 +63,3 @@ class MailingListFetchListsCommand extends Command
         return Command::SUCCESS;
     }
 }
-

@@ -70,13 +70,13 @@ class MailingList
         $list->setMailmanList(
             $data['mailmanList']
                 ? $this->getMailmanService()->getMailingList($data['mailmanList'])
-                : null
+                : null,
         );
 
         $list->setListmonkList(
             $data['listmonkList']
                 ? $this->getListmonkService()->getMailingList($data['listmonkList'])
-                : null
+                : null,
         );
 
         $this->getListMapper()->persist($list);
@@ -265,6 +265,7 @@ class MailingList
 
     /**
      * Checks whether any of the mailing list syncs are locked
+     *
      * @return bool sync locked
      */
     public function isSyncLocked(): bool

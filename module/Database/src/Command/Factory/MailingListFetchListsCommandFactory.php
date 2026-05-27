@@ -28,4 +28,3 @@ class MailingListFetchListsCommandFactory implements FactoryInterface
         return new MailingListFetchListsCommand($listmonkService, $mailmanService);
     }
 }
-

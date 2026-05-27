@@ -23,6 +23,7 @@ use RuntimeException;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use function array_flip;
 use function array_map;
 use function in_array;
 use function json_decode;

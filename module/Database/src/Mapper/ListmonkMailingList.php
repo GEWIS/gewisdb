@@ -62,7 +62,7 @@ class ListmonkMailingList
             ->from(ListmonkMailingListModel::class, 'l')
             ->where('l.lastSeen >= :lastSeen');
 
-        $qb->setParameter('lastSeen', $lastFetch !== null ? (clone $lastFetch)->sub(new DateInterval('PT1H5M')) : null);
+        $qb->setParameter('lastSeen', null !== $lastFetch ? (clone $lastFetch)->sub(new DateInterval('PT1H5M')) : null);
 
         return $qb->getQuery()->getResult();
     }
