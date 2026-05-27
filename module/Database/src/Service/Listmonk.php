@@ -513,6 +513,16 @@ class Listmonk
                     'target_list_ids' => [(int) $listId],
                 ],
             );
+
+            // If the subscriber no longer belongs to any lists, delete them from Listmonk entirely.
+            $subscriber = $this->performListmonkRequest(sprintf('subscribers/%s', $subscriberId));
+
+            if (isset($subscriber['data']['lists']) && [] === $subscriber['data']['lists']) {
+                $this->performListmonkRequest(
+                    uri: sprintf('subscribers/%s', $subscriberId),
+                    method: Request::METHOD_DELETE,
+                );
+            }
         }
 
         $this->mailingListMemberMapper->remove($mailingListMember);
