@@ -7,8 +7,7 @@ namespace Database\Controller;
 use Application\Model\Enums\AddressTypes;
 use Checker\Service\Checker as CheckerService;
 use Database\Model\Member as MemberModel;
-use Database\Service\Listmonk as ListmonkService;
-use Database\Service\Mailman as MailmanService;
+use Database\Service\MailingList as MailingListService;
 use Database\Service\Member as MemberService;
 use Database\Service\Stripe as StripeService;
 use DateTime;
@@ -35,8 +34,7 @@ class MemberController extends AbstractActionController
     public function __construct(
         private readonly Translator $translator,
         private readonly CheckerService $checkerService,
-        private readonly ListmonkService $listmonkService,
-        private readonly MailmanService $mailmanService,
+        private readonly MailingListService $mailingListService,
         private readonly MemberService $memberService,
         private readonly StripeService $stripeService,
         private readonly string $remoteAddress,
@@ -433,8 +431,8 @@ class MemberController extends AbstractActionController
             return $this->memberIsDeleted($member);
         }
 
-        // If a Mailman/listmonk sync is in progress, we cannot safely allow edits to mail list memberships.
-        if ($this->mailmanService->isSyncLocked() || $this->listmonkService->isSyncLocked()) {
+        // If a mailinglist sync is in progress, we cannot safely allow edits to mail list memberships.
+        if ($this->mailingListService->isSyncLocked()) {
             $viewModel = new ViewModel(['member' => $member]);
             $viewModel->setTemplate('database/member/mailinglist-sync-status.phtml');
 

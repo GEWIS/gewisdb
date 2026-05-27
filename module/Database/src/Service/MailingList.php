@@ -262,4 +262,13 @@ class MailingList
             ],
         ];
     }
+
+    /**
+     * Checks whether any of the mailing list syncs are locked
+     * @return bool sync locked
+     */
+    public function isSyncLocked(): bool
+    {
+        return $this->getListmonkService()->isSyncLocked() || $this->getMailmanService()->isSyncLocked();
+    }
 }
