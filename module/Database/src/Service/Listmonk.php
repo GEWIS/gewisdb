@@ -311,7 +311,7 @@ class Listmonk
     /**
      * @return array<array-key,array{
      *     name: string,
-     *     id: string,
+     *     id: int,
      * }>
      */
     private function getAllListsFromListmonk(): array
@@ -324,8 +324,8 @@ class Listmonk
         ) {
             return array_map(
                 static fn ($list) => [
-                    'id' => (string) $list['id'],
-                    'name' => $list['name'],
+                    'id' => (int) $list['id'],
+                    'name' => (string) $list['name'],
                 ],
                 $lists['data']['results'],
             );
@@ -356,7 +356,7 @@ class Listmonk
         }
     }
 
-    public function getMailingList(string $listmonkId): ?ListmonkMailingListModel
+    public function getMailingList(int $listmonkId): ?ListmonkMailingListModel
     {
         return $this->listmonkMailingListMapper->find($listmonkId);
     }
@@ -428,7 +428,7 @@ class Listmonk
                 'email' => $mailingListMember->getEmail(),
                 'name' => $member->getFullName(),
                 'preconfirm_subscriptions' => true,
-                'lists' => [(int) $listId],
+                'lists' => [$listId],
             ];
 
             $output->writeln(
@@ -470,7 +470,7 @@ class Listmonk
                 data: [
                     'action' => 'add',
                     'ids' => [(int) $subscriberId],
-                    'target_list_ids' => [(int) $listId],
+                    'target_list_ids' => [$listId],
                     'status' => 'confirmed', // By passes double confirm
                 ],
             );
@@ -519,7 +519,7 @@ class Listmonk
                 data: [
                     'action' => 'remove',
                     'ids' => [$subscriberId],
-                    'target_list_ids' => [(int) $listId],
+                    'target_list_ids' => [$listId],
                 ],
             );
 
@@ -654,7 +654,7 @@ class Listmonk
                             data: [
                                 'action' => 'remove',
                                 'ids' => [$subscriber['id']],
-                                'target_list_ids' => [(int) $listId],
+                                'target_list_ids' => [$listId],
                             ],
                         );
                     }

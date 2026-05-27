@@ -6,6 +6,7 @@ namespace Database\Command;
 
 use Database\Service\Listmonk as ListmonkService;
 use Database\Service\Mailman as MailmanService;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -25,6 +26,7 @@ class MailingListFetchListsCommand extends Command
         parent::__construct();
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this->addArgument(
@@ -35,6 +37,7 @@ class MailingListFetchListsCommand extends Command
         );
     }
 
+    #[Override]
     protected function execute(
         InputInterface $input,
         OutputInterface $output,

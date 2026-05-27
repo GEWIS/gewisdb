@@ -80,7 +80,7 @@ class ListmonkMailingList
     /**
      * Find a list by listmonk ID.
      */
-    public function find(string $listmonkId): ?ListmonkMailingListModel
+    public function find(int $listmonkId): ?ListmonkMailingListModel
     {
         return $this->getRepository()->find($listmonkId);
     }
