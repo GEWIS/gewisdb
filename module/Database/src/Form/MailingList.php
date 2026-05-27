@@ -205,7 +205,7 @@ class MailingList extends Form implements InputFilterProviderInterface
                             },
                             'messages' => [
                                 Callback::INVALID_VALUE => $this->translator->translate(
-                                    'Mailman and Listmonk mailing lists cannot both be set at the same time.',
+                                    'Mailman and Listmonk mailing lists cannot both be set at the same time',
                                 ),
                             ],
                         ],

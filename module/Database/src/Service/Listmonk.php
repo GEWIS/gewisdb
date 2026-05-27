@@ -30,6 +30,7 @@ use function json_encode;
 use function json_last_error_msg;
 use function json_validate;
 use function sprintf;
+use function str_replace;
 
 class Listmonk
 {
@@ -116,6 +117,13 @@ class Listmonk
         }
 
         return json_decode($body, true);
+    }
+
+    private function buildListmonkEmailQuery(string $email): string
+    {
+        // '' works because Listmonk’s query parameter uses an SQL-like expression language,
+        // and in SQL a single quote inside a single-quoted string is escaped by doubling it.
+        return sprintf("email='%s'", str_replace("'", "''", $email));
     }
 
     /**
@@ -404,7 +412,7 @@ class Listmonk
         $existingSubscribers = $this->performListmonkRequest(
             'subscribers',
             data: [
-                'query' => sprintf("email='%s'", $subscriberData['email']),
+                'query' => $this->buildListmonkEmailQuery($subscriberData['email']),
             ],
         );
 
@@ -497,7 +505,7 @@ class Listmonk
 
         // Find the subscriber by email
         $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
-            'query' => sprintf("email='%s'", $email),
+            'query' => $this->buildListmonkEmailQuery($email),
         ]);
 
         if (isset($subscribers['data']['results'][0]['id'])) {
@@ -570,7 +578,7 @@ class Listmonk
         $subscribers = $this->performListmonkRequest(
             'subscribers',
             data: [
-                'query' => sprintf("email='%s'", $mailingListMember->getEmail()),
+                'query' => $this->buildListmonkEmailQuery($mailingListMember->getEmail()),
                 'list_id' => $listId,
             ],
         );
@@ -611,6 +619,10 @@ class Listmonk
         $membersDB = $mailingList->getMailingListMemberships();
         $listId = $mailingList->getListmonkList()->getListmonkId();
         $listName = $mailingList->getListmonkList()->getName();
+        $memberEmails = array_flip(array_map(
+            static fn (MailingListMemberModel $member): string => $member->getEmail(),
+            $membersDB->toArray(),
+        ));
 
         // Get all subscribers for this list
         $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
@@ -620,15 +632,7 @@ class Listmonk
 
         if (isset($subscribers['data']['results'])) {
             foreach ($subscribers['data']['results'] as $subscriber) {
-                $found = false;
-                foreach ($membersDB as $member) {
-                    if ($member->getEmail() !== $subscriber['email']) {
-                        continue;
-                    }
-
-                    $found = true;
-                }
-
+                $found = isset($memberEmails[$subscriber['email']]);
                 $foundMember = $this->memberMapper->findByEmail($subscriber['email']);
 
                 if (!$found && null === $foundMember) {

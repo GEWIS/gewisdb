@@ -1083,7 +1083,7 @@ msgid "Mailman Mailing List"
 msgstr "Mailman-maillijst"
 
 msgid "Mailman and Listmonk mailing lists cannot both be set at the same time"
-msgstr "Mailman en Listmonk mail lijsten kunnen beide ingesteld zijn"
+msgstr "Mailman en Listmonk mail lijsten kunnen niet beide ingesteld zijn"
 
 msgid "Mailman lists not being fetched"
 msgstr "Mailman lijsten worden niet opgehaald"

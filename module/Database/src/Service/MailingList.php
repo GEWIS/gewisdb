@@ -237,7 +237,7 @@ class MailingList
             }
 
             if ($dryRun) {
-                return;
+                continue;
             }
 
             $mailingListMember->setLastSyncOn();
