@@ -17,14 +17,14 @@ use Doctrine\ORM\Mapping\OneToOne;
 class ListmonkMailingList
 {
     /**
-     * Listmonk-identifier (UUID).
+     * Listmonk-identifier
      */
     #[Id]
     #[Column(
         name: 'id',
-        type: 'string',
+        type: 'integer',
     )]
-    private string $listmonkId;
+    private int $listmonkId;
 
     /**
      * Name of this list in the listmonk side
@@ -60,7 +60,7 @@ class ListmonkMailingList
     /**
      * Get the listmonk ID
      */
-    public function getListmonkId(): string
+    public function getListmonkId(): int
     {
         return $this->listmonkId;
     }
@@ -69,7 +69,7 @@ class ListmonkMailingList
      * Set the listmonk ID
      * It is only sensible if this happens during a sync
      */
-    public function setListmonkId(string $listmonkId): void
+    public function setListmonkId(int $listmonkId): void
     {
         $this->listmonkId = $listmonkId;
     }
