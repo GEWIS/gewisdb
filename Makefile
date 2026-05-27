@@ -68,9 +68,8 @@ seed: replenish
 		@make preparemailman
 		@docker compose exec mailman-web bash -c '(python3 ./manage.py createsuperuser --no-input 2>/dev/null || true)'
 		@docker compose exec -u mailman mailman-core bash -c '(mailman create news@$$MAILMAN_DOMAIN; mailman create other@$$MAILMAN_DOMAIN; true) 2>/dev/null'
-		@docker compose exec -u www-data web ./web database:mailman:fetch
 		@make preparelistmonk
-		@docker compose exec -u www-data web ./web database:listmonk:fetch
+		@docker compose exec -u www-data web ./web database:mailinglist:fetch
 
 
 exec:

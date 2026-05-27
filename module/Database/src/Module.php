@@ -9,15 +9,13 @@ use Database\Command\DeleteExpiredProspectiveMembersCommand;
 use Database\Command\Factory\DeleteExpiredMembersCommandFactory;
 use Database\Command\Factory\DeleteExpiredProspectiveMembersCommandFactory;
 use Database\Command\Factory\GenerateAuthenticationKeysCommandFactory;
-use Database\Command\Factory\ListmonkFetchListsCommandFactory;
+use Database\Command\Factory\MailingListFetchListsCommandFactory;
 use Database\Command\Factory\MailingListMaintenanceCommandFactory;
 use Database\Command\Factory\MailingListSyncCommandFactory;
-use Database\Command\Factory\MailmanFetchListsCommandFactory;
 use Database\Command\GenerateAuthenticationKeysCommand;
-use Database\Command\ListmonkFetchListsCommand;
+use Database\Command\MailingListFetchListsCommand;
 use Database\Command\MailingListMaintenanceCommand;
 use Database\Command\MailingListSyncCommand;
-use Database\Command\MailmanFetchListsCommand;
 use Database\Form\Abolish as AbolishForm;
 use Database\Form\Address as AddressForm;
 use Database\Form\Annulment as AnnulmentForm;
@@ -176,8 +174,7 @@ class Module
             'factories' => [
                 DeleteExpiredMembersCommand::class => DeleteExpiredMembersCommandFactory::class,
                 DeleteExpiredProspectiveMembersCommand::class => DeleteExpiredProspectiveMembersCommandFactory::class,
-                MailmanFetchListsCommand::class => MailmanFetchListsCommandFactory::class,
-                ListmonkFetchListsCommand::class => ListmonkFetchListsCommandFactory::class,
+                MailingListFetchListsCommand::class => MailingListFetchListsCommandFactory::class,
                 MailingListMaintenanceCommand::class => MailingListMaintenanceCommandFactory::class,
                 MailingListSyncCommand::class => MailingListSyncCommandFactory::class,
                 GenerateAuthenticationKeysCommand::class => GenerateAuthenticationKeysCommandFactory::class,
