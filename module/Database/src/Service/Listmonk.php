@@ -24,9 +24,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_map;
-use function http_build_query;
 use function in_array;
-use function is_string;
 use function json_decode;
 use function json_encode;
 use function json_last_error_msg;
@@ -35,10 +33,6 @@ use function sprintf;
 
 class Listmonk
 {
-    private const string LM_STATUS_CONFIRMED = 'confirmed';
-    private const string LM_STATUS_UNSUBSCRIBED = 'unsubscribed';
-    private const string LM_STATUS_UCONFIRMED = 'unconfirmed';
-
     /**
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
@@ -70,8 +64,6 @@ class Listmonk
             $payload = Request::METHOD_GET === $method ? $data : json_encode($data);
         }
 
-        $payloadDebug = is_string($payload) ? $payload : json_encode($payload);
-
         $client->setAdapter(Curl::class)
             ->setAuth($this->listmonkConfig['username'], $this->listmonkConfig['password'])
             ->setMethod($method)
@@ -80,7 +72,6 @@ class Listmonk
             ])
             ->setUri($url);
 
-        // Data encoding is automatically set to `application/x-www-form-urlencoded` for "POST"-like requests.
         switch ($method) {
             case Request::METHOD_GET:
                 if (null === $data) {
@@ -95,9 +86,7 @@ class Listmonk
             case Request::METHOD_PUT:
                 if (null !== $data) {
                     $client->setRawBody(json_encode($data));
-                    $client->getRequest()->getHeaders()->addHeaders([
-                        'Content-Type' => 'application/json',
-                    ]);
+                    $client->setEncType('application/json');
                 }
 
                 break;
@@ -413,9 +402,10 @@ class Listmonk
         ];
 
         $existingSubscribers = $this->performListmonkRequest(
-            'subscribers?' . http_build_query([
+            'subscribers',
+            data: [
                 'query' => sprintf("email='%s'", $subscriberData['email']),
-            ]),
+            ],
         );
 
         $subscriberId = null;
@@ -568,10 +558,11 @@ class Listmonk
 
         // Check if subscriber is on the list by getting their details
         $subscribers = $this->performListmonkRequest(
-            'subscribers?' . http_build_query([
+            'subscribers',
+            data: [
                 'query' => sprintf("email='%s'", $mailingListMember->getEmail()),
                 'list_id' => $listId,
-            ]),
+            ],
         );
 
         if (isset($subscribers['data']['results'][0])) {
@@ -690,11 +681,11 @@ class Listmonk
     private function getListmonkListSubscriberEmails(int $listId): array
     {
         $subscribers = $this->performListmonkRequest(
-            'subscribers?' . http_build_query([
+            'subscribers',
+            data: [
                 'list_id' => $listId,
                 'per_page' => 'all',
-            ]),
-            Request::METHOD_GET,
+            ],
         );
 
         if (isset($subscribers['data']['results'])) {
