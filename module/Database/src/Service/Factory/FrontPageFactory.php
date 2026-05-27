@@ -26,15 +26,15 @@ class FrontPageFactory implements FactoryInterface
         ?array $options = null,
     ): FrontPageService {
         $apiService = $container->get(ApiService::class);
-        $mailmanService = $container->get(MailmanService::class);
         $listmonkService = $container->get(ListmonkService::class);
+        $mailmanService = $container->get(MailmanService::class);
         $mailingListService = $container->get(MailingListService::class);
         $memberService = $container->get(MemberService::class);
 
         return new FrontPageService(
             $apiService,
-            $mailmanService,
             $listmonkService,
+            $mailmanService,
             $mailingListService,
             $memberService,
         );

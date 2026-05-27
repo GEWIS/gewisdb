@@ -84,12 +84,12 @@ class MemberFactory implements FactoryInterface
         $checkerService = $container->get(CheckerService::class);
         /** @var FileStorageService $fileStorageService */
         $fileStorageService = $container->get(FileStorageService::class);
+        /** @var ListmonkService $listmonkService */
+        $listmonkService = $container->get(ListmonkService::class);
         /** @var MailingListService $mailingListService */
         $mailingListService = $container->get(MailingListService::class);
         /** @var MailmanService $mailmanService */
         $mailmanService = $container->get(MailmanService::class);
-        /** @var ListmonkService $listmonkService */
-        $listmonkService = $container->get(ListmonkService::class);
         /** @var RenewalService $renewalService */
         $renewalService = $container->get(RenewalService::class);
         /** @var UserService $userService */
