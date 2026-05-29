@@ -106,6 +106,22 @@ class MailingListMember
     }
 
     /**
+     * Mark all members of a mailing list as needing to be created.
+     */
+    public function markAllMembersForCreation(MailingListModel $mailingList): void
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->update(MailingListMemberModel::class, 'mlm')
+            ->set('mlm.toBeCreated', "true")
+            ->where('mlm.mailingList = :list')
+            ->andWhere('mlm.toBeDeleted != true')
+            ->setParameter('list', $mailingList);
+
+        $qb->getQuery()->execute();
+    }
+
+    /**
      * Get the mailing list members that belong to hidden or expired members
      * and that are not already scheduled for deletion
      *

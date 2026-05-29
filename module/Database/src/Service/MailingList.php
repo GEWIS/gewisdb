@@ -67,17 +67,28 @@ class MailingList
         $list->setNlDescription($data['nl_description']);
         $list->setOnForm(boolval($data['onForm']));
         $list->setDefaultSub(boolval($data['defaultSub']));
-        $list->setMailmanList(
-            $data['mailmanList']
-                ? $this->getMailmanService()->getMailingList($data['mailmanList'])
-                : null,
-        );
 
-        $list->setListmonkList(
-            $data['listmonkList']
-                ? $this->getListmonkService()->getMailingList($data['listmonkList'])
-                : null,
-        );
+        // If a new mailman is being set, mark all current members for creation
+        $newMailman = $data['mailmanList']
+            ? $this->getMailmanService()->getMailingList($data['mailmanList'])
+            : null;
+
+        if ($newMailman && (null === $list->getMailmanList() || $list->getMailmanList()->getMailmanId() !== $newMailman->getMailmanId())) {
+            $this->markAllMembersForCreation($list);
+        }
+
+        $list->setMailmanList($newMailman);
+
+        // If a new listmonk is being set, mark all current members for creation
+        $newListmonk = $data['listmonkList']
+            ? $this->getListmonkService()->getMailingList((int) $data['listmonkList'])
+            : null;
+
+        if ($newListmonk && (null === $list->getListmonkList() || $list->getListmonkList()->getListmonkId() !== $newListmonk->getListmonkId())) {
+            $this->markAllMembersForCreation($list);
+        }
+
+        $list->setListmonkList($newListmonk);
 
         $this->getListMapper()->persist($list);
 
@@ -105,6 +116,14 @@ class MailingList
         $this->getListMapper()->remove($list);
 
         return true;
+    }
+
+    /**
+     * Mark all members of a mailing list as needing to be created on the external service.
+     */
+    public function markAllMembersForCreation(MailingListModel $list): void
+    {
+        $this->getMailingListMemberMapper()->markAllMembersForCreation($list);
     }
 
     /**
