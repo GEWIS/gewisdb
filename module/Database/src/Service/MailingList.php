@@ -73,7 +73,10 @@ class MailingList
             ? $this->getMailmanService()->getMailingList($data['mailmanList'])
             : null;
 
-        if ($newMailman && (null === $list->getMailmanList() || $list->getMailmanList()->getMailmanId() !== $newMailman->getMailmanId())) {
+        if (
+            $newMailman && (null === $list->getMailmanList() ||
+                $list->getMailmanList()->getMailmanId() !== $newMailman->getMailmanId())
+        ) {
             $this->markAllMembersForCreation($list);
         }
 
@@ -84,7 +87,10 @@ class MailingList
             ? $this->getListmonkService()->getMailingList((int) $data['listmonkList'])
             : null;
 
-        if ($newListmonk && (null === $list->getListmonkList() || $list->getListmonkList()->getListmonkId() !== $newListmonk->getListmonkId())) {
+        if (
+            $newListmonk && (null === $list->getListmonkList() ||
+                $list->getListmonkList()->getListmonkId() !== $newListmonk->getListmonkId())
+        ) {
             $this->markAllMembersForCreation($list);
         }
 

@@ -113,7 +113,7 @@ class MailingListMember
         $qb = $this->em->createQueryBuilder();
 
         $qb->update(MailingListMemberModel::class, 'mlm')
-            ->set('mlm.toBeCreated', "true")
+            ->set('mlm.toBeCreated', 'true')
             ->where('mlm.mailingList = :list')
             ->andWhere('mlm.toBeDeleted != true')
             ->setParameter('list', $mailingList);
