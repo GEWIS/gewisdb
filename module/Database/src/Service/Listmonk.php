@@ -649,7 +649,7 @@ class Listmonk
                     if (!$dryRun) {
                         // Remove subscriber from the list
                         $this->performListmonkRequest(
-                            uri: sprintf('subscribers/lists/%s', $listId),
+                            uri: 'subscribers/lists',
                             method: Request::METHOD_PUT,
                             data: [
                                 'action' => 'remove',
