@@ -7,6 +7,7 @@ namespace Database\Form;
 use Database\Model\ListmonkMailingList as ListmonkMailingListModel;
 use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use Laminas\Filter\StringTrim;
+use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
@@ -192,9 +193,19 @@ class MailingList extends Form implements InputFilterProviderInterface
             ],
             'mailmanList' => [
                 'required' => false,
+                'filters' => [
+                    [
+                        'name' => ToNull::class,
+                    ],
+                ],
             ],
             'listmonkList' => [
                 'required' => false,
+                'filters' => [
+                    [
+                        'name' => ToNull::class,
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => Callback::class,
