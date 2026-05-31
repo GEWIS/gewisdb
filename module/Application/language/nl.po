@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-23 20:16+0200\n"
+"POT-Creation-Date: 2026-05-31 14:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -1029,6 +1029,9 @@ msgstr "Tussenvoegsel"
 msgid "Last Update to Membership"
 msgstr "Laatste aanpassing van het lidmaatschap"
 
+msgid "Last fetch of Listmonk lists"
+msgstr "Listmonk lijsten voor het laatst opgehaald"
+
 #, php-format
 msgid "Last fetch of available Listmonk lists was %s."
 msgstr "Beschikbare Listmonk lijsten voor het laatst om %s opgehaald."
@@ -1036,9 +1039,6 @@ msgstr "Beschikbare Listmonk lijsten voor het laatst om %s opgehaald."
 #, php-format
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Beschikbare Mailman lijsten voor het laatst om %s opgehaald."
-
-msgid "Last fetch of Listmonk lists"
-msgstr "Listmonk lijsten voor het laatst opgehaald"
 
 msgid "Leave note"
 msgstr "Voeg notitie toe"
@@ -1227,6 +1227,9 @@ msgstr "Geen gegevens ontvangen."
 
 msgid "No mailing list subscriptions."
 msgstr "Geen aanmeldingen voor mailinglijsten."
+
+msgid "Not studying"
+msgstr "Niet-studerend"
 
 msgid "Note"
 msgstr "Notitie"
@@ -1512,6 +1515,9 @@ msgid ""
 msgstr ""
 "Een deel van de ingevoerde informatie lijkt te missen of is onjuist. "
 "Controleer de data en verstuur het formulier opnieuw."
+
+msgid "Special cases (secretary use only)"
+msgstr "Uitzonderingen (uitsluitend te gebruiken door secretaris)"
 
 msgid "Stack trace"
 msgstr "Stack trace"

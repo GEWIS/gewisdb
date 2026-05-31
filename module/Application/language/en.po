@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-23 20:16+0200\n"
+"POT-Creation-Date: 2026-05-31 14:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -1021,6 +1021,9 @@ msgstr "Last Name Prepositional Particle"
 msgid "Last Update to Membership"
 msgstr "Last Update to Membership"
 
+msgid "Last fetch of Listmonk lists"
+msgstr "Last fetch of Listmonk lists"
+
 #, php-format
 msgid "Last fetch of available Listmonk lists was %s."
 msgstr "Last fetch of available Listmonk lists was %s."
@@ -1028,9 +1031,6 @@ msgstr "Last fetch of available Listmonk lists was %s."
 #, php-format
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Last fetch of available mailman lists was %s."
-
-msgid "Last fetch of Listmonk lists"
-msgstr "Last fetch of Listmonk lists"
 
 msgid "Leave note"
 msgstr "Leave note"
@@ -1219,6 +1219,9 @@ msgstr "No data returned."
 
 msgid "No mailing list subscriptions."
 msgstr "No mailing list subscriptions."
+
+msgid "Not studying"
+msgstr "Not studying"
 
 msgid "Note"
 msgstr "Note"
@@ -1505,6 +1508,9 @@ msgid ""
 msgstr ""
 "Some of the entered information appears to be missing or incorrect. Please "
 "check your data and submit again."
+
+msgid "Special cases (secretary use only)"
+msgstr "Special cases (secretary use only)"
 
 msgid "Stack trace"
 msgstr "Stack trace"
