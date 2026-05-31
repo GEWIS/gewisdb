@@ -28,14 +28,14 @@ class MailingListFactory implements FactoryInterface
     ): MailingListService {
         /** @var DeleteListForm $deleteListForm */
         $deleteListForm = $container->get(DeleteListForm::class);
-        /** @var ListmonkService $listmonkService */
-        $listmonkService = $container->get(ListmonkService::class);
         /** @var MailingListForm $mailingListForm */
         $mailingListForm = $container->get(MailingListForm::class);
         /** @var MailingListMapper $mailingListMapper */
         $mailingListMapper = $container->get(MailingListMapper::class);
         /** @var MailingListMemberMapper $mailingListMemberMapper */
         $mailingListMemberMapper = $container->get(MailingListMemberMapper::class);
+        /** @var ListmonkService $listmonkService */
+        $listmonkService = $container->get(ListmonkService::class);
         /** @var MailmanService $mailmanService */
         $mailmanService = $container->get(MailmanService::class);
 
@@ -44,8 +44,8 @@ class MailingListFactory implements FactoryInterface
             $mailingListForm,
             $mailingListMapper,
             $mailingListMemberMapper,
-            $mailmanService,
             $listmonkService,
+            $mailmanService,
         );
     }
 }

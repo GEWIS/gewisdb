@@ -187,6 +187,8 @@ class Mailman
         OutputInterface $output = new NullOutput(),
         bool $dryRun = false,
     ): void {
+        $output->writeln('Processing pending memberships for Mailman mailing lists:');
+
         $this->assertMailmanHealthy();
 
         $this->acquireSyncLock();

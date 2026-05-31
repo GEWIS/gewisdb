@@ -24,6 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MailingListSyncCommand extends AbstractParamAwareCommand
 {
     private const string PARAM_FORCE = 'force';
+    private const string ARGUMENT_BACKEND = 'backend';
 
     public function __construct(
         private readonly MailingListService $mailingListService,
@@ -37,7 +38,7 @@ class MailingListSyncCommand extends AbstractParamAwareCommand
     protected function configure(): void
     {
         $this->addArgument(
-            'backend',
+            self::ARGUMENT_BACKEND,
             InputArgument::OPTIONAL,
             'Target backend: all|local|mailman|listmonk',
             'all',
@@ -59,7 +60,7 @@ class MailingListSyncCommand extends AbstractParamAwareCommand
         InputInterface $input,
         OutputInterface $output,
     ): int {
-        $backend = (string) $input->getArgument('backend');
+        $backend = (string) $input->getArgument(self::ARGUMENT_BACKEND);
         $dryRun = !$input->getParam(self::PARAM_FORCE);
 
         if ($dryRun) {

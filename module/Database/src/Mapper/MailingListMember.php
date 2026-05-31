@@ -107,6 +107,7 @@ class MailingListMember
 
     /**
      * Mark all members of a mailing list as needing to be created.
+     * This does not perform changes in report which is correct.
      */
     public function markAllMembersForCreation(MailingListModel $mailingList): void
     {

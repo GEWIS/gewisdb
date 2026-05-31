@@ -188,6 +188,8 @@ class Listmonk
         OutputInterface $output = new NullOutput(),
         bool $dryRun = false,
     ): void {
+        $output->writeln('Processing pending memberships for Listmonk mailing lists:');
+
         $this->assertListmonkHealthy();
 
         $this->acquireSyncLock();

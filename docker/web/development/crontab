@@ -14,6 +14,6 @@
 0       0   1 7 * { . /code/config/bash.env && /usr/bin/php /code/web check:membership:type; } > /data/logs/cron-check-type.log 2>&1
 */30    *   * * * { . /code/config/bash.env && /usr/bin/php /code/web check:membership:renewal:graduate; } > /data/logs/cron-check-renewal.log 2>&1
 0       2   * * * { . /code/config/bash.env && /usr/bin/php /code/web database:prospective-members:delete-expired; } > /data/logs/cron-delete-prospective.log 2>&1
-50      *   * * * { . /code/config/bash.env && /usr/bin/php /code/web database:mailinglist:fetch; } > /data/logs/cron-mailinglist-fetch.log 2>&1
-5       *   * * * { . /code/config/bash.env && /usr/bin/php /code/web database:mailinglist:sync-membership -f -vv; } > /data/logs/cron-sync-membership.log 2>&1
+50      *   * * * { . /code/config/bash.env && /usr/bin/php /code/web database:mailinglist:fetch all; } > /data/logs/cron-mailinglist-fetch.log 2>&1
+5       *   * * * { . /code/config/bash.env && /usr/bin/php /code/web database:mailinglist:sync-membership -f -vv all; } > /data/logs/cron-sync-membership.log 2>&1
 40      2   * * * { . /code/config/bash.env && /usr/bin/php /code/web database:mailinglist:maintenance -f -vv; } > /data/logs/cron-mailinglist-maintenance.log 2>&1

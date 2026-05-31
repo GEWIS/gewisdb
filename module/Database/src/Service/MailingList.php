@@ -24,8 +24,8 @@ class MailingList
         private readonly MailingListForm $mailingListForm,
         private readonly MailingListMapper $mailingListMapper,
         private readonly MailingListMemberMapper $mailingListMemberMapper,
-        private readonly MailmanService $mailmanService,
         private readonly ListmonkService $listmonkService,
+        private readonly MailmanService $mailmanService,
     ) {
     }
 

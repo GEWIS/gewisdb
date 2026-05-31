@@ -19,6 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class MailingListFetchListsCommand extends Command
 {
+    private const string ARGUMENT_BACKEND = 'backend';
+
     public function __construct(
         private readonly ListmonkService $listmonkService,
         private readonly MailmanService $mailmanService,
@@ -30,7 +32,7 @@ class MailingListFetchListsCommand extends Command
     protected function configure(): void
     {
         $this->addArgument(
-            'backend',
+            self::ARGUMENT_BACKEND,
             InputArgument::OPTIONAL,
             'Target backend: all|mailman|listmonk',
             'all',
@@ -42,7 +44,7 @@ class MailingListFetchListsCommand extends Command
         InputInterface $input,
         OutputInterface $output,
     ): int {
-        $backend = (string) $input->getArgument('backend');
+        $backend = (string) $input->getArgument(self::ARGUMENT_BACKEND);
 
         switch ($backend) {
             case 'listmonk':

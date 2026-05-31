@@ -18,8 +18,8 @@ class FrontPage
     public function __construct(
         private readonly ApiService $apiService,
         private readonly ListmonkService $listmonkService,
-        private readonly MailmanService $mailmanService,
         private readonly MailingListService $mailingListService,
+        private readonly MailmanService $mailmanService,
         private readonly MemberService $memberService,
     ) {
     }
