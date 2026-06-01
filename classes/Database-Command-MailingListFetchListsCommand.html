@@ -286,7 +286,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    MailmanFetchListsCommand
+    MailingListFetchListsCommand
 
         <span class="phpdocumentor-element__extends">
         extends <abbr title="\Symfony\Component\Console\Command\Command">Command</abbr>
@@ -308,9 +308,9 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailmanFetchListsCommand.php"><a href="files/module-database-src-command-mailmanfetchlistscommand.html"><abbr title="module/Database/src/Command/MailmanFetchListsCommand.php">MailmanFetchListsCommand.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailingListFetchListsCommand.php"><a href="files/module-database-src-command-mailinglistfetchlistscommand.html"><abbr title="module/Database/src/Command/MailingListFetchListsCommand.php">MailingListFetchListsCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -322,7 +322,7 @@
     
             <section class="phpdocumentor-attributes">
             <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/Database-Command-MailmanFetchListsCommand.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+                Attributes <a href="classes/Database-Command-MailingListFetchListsCommand.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -330,17 +330,17 @@
         #[<abbr title="\Symfony\Component\Console\Attribute\AsCommand">AsCommand</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $name: &#039;database:mailman:fetch&#039;
+        $name: &#039;database:mailinglist:fetch&#039;
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
-        $description: &#039;Fetch mailing lists from mailman and store store references in GEWISDB.&#039;
+        $description: &#039;Fetch mailing lists from mailman and listmonk and store references in GEWISDB.&#039;
     </dd>
     </dl>
                     </section>
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Database-Command-MailmanFetchListsCommand.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Command-MailingListFetchListsCommand.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -350,16 +350,35 @@
 
 
 
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/Database-Command-MailingListFetchListsCommand.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a class="" href="classes/Database-Command-MailingListFetchListsCommand.html#constant_ARGUMENT_BACKEND">ARGUMENT_BACKEND</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;backend&#039;                            </span>
+</dt>
+
+    </dl>
 
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/Database-Command-MailmanFetchListsCommand.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Command-MailingListFetchListsCommand.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Command-MailmanFetchListsCommand.html#property_mailmanService">$mailmanService</a>
+    <a class="" href="classes/Database-Command-MailingListFetchListsCommand.html#property_listmonkService">$listmonkService</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Service-Listmonk.html"><abbr title="\Database\Service\Listmonk">Listmonk</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Command-MailingListFetchListsCommand.html#property_mailmanService">$mailmanService</a>
     <span>
                         &nbsp;: <a href="classes/Database-Service-Mailman.html"><abbr title="\Database\Service\Mailman">Mailman</abbr></a>            </span>
 </dt>
@@ -368,18 +387,24 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Database-Command-MailmanFetchListsCommand.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Command-MailingListFetchListsCommand.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Command-MailmanFetchListsCommand.html#method___construct">__construct()</a>
+    <a class="" href="classes/Database-Command-MailingListFetchListsCommand.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a class="" href="classes/Database-Command-MailmanFetchListsCommand.html#method_execute">execute()</a>
+    <a class="" href="classes/Database-Command-MailingListFetchListsCommand.html#method_configure">configure()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/Database-Command-MailingListFetchListsCommand.html#method_execute">execute()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
@@ -389,12 +414,49 @@
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/Database-Command-MailingListFetchListsCommand.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_ARGUMENT_BACKEND">
+        ARGUMENT_BACKEND
+        <a href="classes/Database-Command-MailingListFetchListsCommand.html#constant_ARGUMENT_BACKEND" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailingListFetchListsCommand.php"><a href="files/module-database-src-command-mailinglistfetchlistscommand.html"><abbr title="module/Database/src/Command/MailingListFetchListsCommand.php">MailingListFetchListsCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ARGUMENT_BACKEND</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;backend&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+            </section>
 
         
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Database-Command-MailmanFetchListsCommand.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Command-MailingListFetchListsCommand.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -404,17 +466,54 @@
             -private
                                                 -read-only                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_mailmanService">
-        $mailmanService
-        <a href="classes/Database-Command-MailmanFetchListsCommand.html#property_mailmanService" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_listmonkService">
+        $listmonkService
+        <a href="classes/Database-Command-MailingListFetchListsCommand.html#property_listmonkService" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailmanFetchListsCommand.php"><a href="files/module-database-src-command-mailmanfetchlistscommand.html"><abbr title="module/Database/src/Command/MailmanFetchListsCommand.php">MailmanFetchListsCommand.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailingListFetchListsCommand.php"><a href="files/module-database-src-command-mailinglistfetchlistscommand.html"><abbr title="module/Database/src/Command/MailingListFetchListsCommand.php">MailingListFetchListsCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Service-Listmonk.html"><abbr title="\Database\Service\Listmonk">Listmonk</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$listmonkService</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mailmanService">
+        $mailmanService
+        <a href="classes/Database-Command-MailingListFetchListsCommand.html#property_mailmanService" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailingListFetchListsCommand.php"><a href="files/module-database-src-command-mailinglistfetchlistscommand.html"><abbr title="module/Database/src/Command/MailingListFetchListsCommand.php">MailingListFetchListsCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -439,7 +538,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Command-MailmanFetchListsCommand.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Command-MailingListFetchListsCommand.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -450,20 +549,20 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Database-Command-MailmanFetchListsCommand.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Command-MailingListFetchListsCommand.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailmanFetchListsCommand.php"><a href="files/module-database-src-command-mailmanfetchlistscommand.html"><abbr title="module/Database/src/Command/MailmanFetchListsCommand.php">MailmanFetchListsCommand.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailingListFetchListsCommand.php"><a href="files/module-database-src-command-mailinglistfetchlistscommand.html"><abbr title="module/Database/src/Command/MailingListFetchListsCommand.php">MailingListFetchListsCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Service-Mailman.html"><abbr title="\Database\Service\Mailman">Mailman</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailmanService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Service-Listmonk.html"><abbr title="\Database\Service\Listmonk">Listmonk</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listmonkService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Service-Mailman.html"><abbr title="\Database\Service\Mailman">Mailman</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailmanService</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -471,6 +570,13 @@
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$listmonkService</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Service-Listmonk.html"><abbr title="\Database\Service\Listmonk">Listmonk</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$mailmanService</span>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Service-Mailman.html"><abbr title="\Database\Service\Mailman">Mailman</abbr></a></span>
@@ -492,15 +598,60 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_execute">
-        execute()
-        <a href="classes/Database-Command-MailmanFetchListsCommand.html#method_execute" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_configure">
+        configure()
+        <a href="classes/Database-Command-MailingListFetchListsCommand.html#method_configure" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailmanFetchListsCommand.php"><a href="files/module-database-src-command-mailmanfetchlistscommand.html"><abbr title="module/Database/src/Command/MailmanFetchListsCommand.php">MailmanFetchListsCommand.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailingListFetchListsCommand.php"><a href="files/module-database-src-command-mailinglistfetchlistscommand.html"><abbr title="module/Database/src/Command/MailingListFetchListsCommand.php">MailingListFetchListsCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">configure</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="method_configure_attributes">
+                Attributes <a href="classes/Database-Command-MailingListFetchListsCommand.html#method_configure_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Override">Override</abbr>]
+    </dt>
+    </dl>
+                    </section>
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_execute">
+        execute()
+        <a href="classes/Database-Command-MailingListFetchListsCommand.html#method_execute" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Command/MailingListFetchListsCommand.php"><a href="files/module-database-src-command-mailinglistfetchlistscommand.html"><abbr title="module/Database/src/Command/MailingListFetchListsCommand.php">MailingListFetchListsCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -536,7 +687,7 @@
         
             <section class="phpdocumentor-attributes">
             <h5 class="phpdocumentor-elements__header" id="method_execute_attributes">
-                Attributes <a href="classes/Database-Command-MailmanFetchListsCommand.html#method_execute_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+                Attributes <a href="classes/Database-Command-MailingListFetchListsCommand.html#method_execute_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -566,23 +717,32 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/Database-Command-MailmanFetchListsCommand.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Database-Command-MailmanFetchListsCommand.html#toc-methods">Methods</a></li>
+                                        <li><a href="classes/Database-Command-MailingListFetchListsCommand.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/Database-Command-MailingListFetchListsCommand.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Command-MailingListFetchListsCommand.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Database-Command-MailingListFetchListsCommand.html#constant_ARGUMENT_BACKEND">ARGUMENT_BACKEND</a></li>
+                                            </ul>
+                </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Database-Command-MailmanFetchListsCommand.html#property_mailmanService">$mailmanService</a></li>
+                                                    <li class=""><a href="classes/Database-Command-MailingListFetchListsCommand.html#property_listmonkService">$listmonkService</a></li>
+                                                    <li class=""><a href="classes/Database-Command-MailingListFetchListsCommand.html#property_mailmanService">$mailmanService</a></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Database-Command-MailmanFetchListsCommand.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Database-Command-MailmanFetchListsCommand.html#method_execute">execute()</a></li>
+                                            <li class=""><a href="classes/Database-Command-MailingListFetchListsCommand.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Database-Command-MailingListFetchListsCommand.html#method_configure">configure()</a></li>
+                                            <li class=""><a href="classes/Database-Command-MailingListFetchListsCommand.html#method_execute">execute()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -602,7 +762,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/Database-Command-MailmanFetchListsCommand.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Command-MailingListFetchListsCommand.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

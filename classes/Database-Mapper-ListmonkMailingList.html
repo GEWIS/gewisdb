@@ -286,7 +286,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    MailingListMember
+    ListmonkMailingList
 
     
             <div class="phpdocumentor-element__package">
@@ -305,13 +305,13 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Mailing list member mapper.</p>
+            <p class="phpdocumentor-summary">Listmonk Mailing List mapper.</p>
 
 
 
@@ -321,7 +321,7 @@
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Database-Mapper-MailingListMember.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Mapper-ListmonkMailingList.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -335,12 +335,12 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/Database-Mapper-MailingListMember.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Mapper-ListmonkMailingList.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#property_em">$em</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#property_em">$em</a>
     <span>
                         &nbsp;: <abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>            </span>
 </dt>
@@ -349,94 +349,64 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Database-Mapper-MailingListMember.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Mapper-ListmonkMailingList.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method___construct">__construct()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_countPendingCreation">countPendingCreation()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method_find">find()</a>
     <span>
-                                &nbsp;: int    </span>
+                                &nbsp;: <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>|null    </span>
 </dt>
-<dd>Get the pending number of creations
-Intentionally, does not do a findAll</dd>
+<dd>Find a list by listmonk ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_countPendingDeletion">countPendingDeletion()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method_findActive">findActive()</a>
     <span>
-                                &nbsp;: int    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;    </span>
 </dt>
-<dd>Get the pending number of deletions
-Intentionally, does not do a findAll</dd>
+<dd>Find active mailing lists (i.e. seen in the last fetch or the hour before)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_findAfterSync">findAfterSync()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method_findAll">findAll()</a>
     <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;    </span>
 </dt>
-<dd>Get the mailing list members that should exist after the next sync
-Value of toBeCreated does not matter, toBeDeleted should be excluded</dd>
+<dd>Find all.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_findAll">findAll()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method_getLastFetchTime">getLastFetchTime()</a>
     <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;    </span>
+                                &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null    </span>
 </dt>
+<dd>Get the time of last sync, or null if none</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_findAllExpiredOrHidden">findAllExpiredOrHidden()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;    </span>
-</dt>
-<dd>Get the mailing list members that belong to hidden or expired members
-and that are not already scheduled for deletion</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_findAllPendingLocalOnly">findAllPendingLocalOnly()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;    </span>
-</dt>
-<dd>Get memberships with pending sync flags for lists without external backends.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_findByListAndMember">findByListAndMember()</a>
-    <span>
-                                &nbsp;: <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>|null    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_getRepository">getRepository()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method_getRepository">getRepository()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\ORM\EntityRepository">EntityRepository</abbr>    </span>
 </dt>
 <dd>Get the repository for this mapper.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_markAllMembersForCreation">markAllMembersForCreation()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method_persist">persist()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Mark all members of a mailing list as needing to be created.</dd>
+<dd>Persist a listmonk list.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_persist">persist()</a>
+    <a class="" href="classes/Database-Mapper-ListmonkMailingList.html#method_remove">remove()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Persist a membership.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Mapper-MailingListMember.html#method_remove">remove()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Remove a membership.</dd>
+<dd>Remove a listmonk list.</dd>
 
     </dl>
 
@@ -448,7 +418,7 @@ and that are not already scheduled for deletion</dd>
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Database-Mapper-MailingListMember.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Mapper-ListmonkMailingList.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -460,13 +430,13 @@ and that are not already scheduled for deletion</dd>
 >
     <h4 class="phpdocumentor-element__name" id="property_em">
         $em
-        <a href="classes/Database-Mapper-MailingListMember.html#property_em" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#property_em" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">18</span>
 
@@ -493,7 +463,7 @@ and that are not already scheduled for deletion</dd>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Mapper-MailingListMember.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Mapper-ListmonkMailingList.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -504,11 +474,11 @@ and that are not already scheduled for deletion</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Database-Mapper-MailingListMember.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">18</span>
 
@@ -546,259 +516,23 @@ and that are not already scheduled for deletion</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_countPendingCreation">
-        countPendingCreation()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_countPendingCreation" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_find">
+        find()
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method_find" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the pending number of creations
-Intentionally, does not do a findAll</p>
+        <p class="phpdocumentor-summary">Find a list by listmonk ID.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">countPendingCreation</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_countPendingDeletion">
-        countPendingDeletion()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_countPendingDeletion" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">75</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the pending number of deletions
-Intentionally, does not do a findAll</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">countPendingDeletion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_findAfterSync">
-        findAfterSync()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_findAfterSync" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">94</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the mailing list members that should exist after the next sync
-Value of toBeCreated does not matter, toBeDeleted should be excluded</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">findAfterSync</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_findAll">
-        findAll()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_findAll" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">172</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">findAll</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_findAllExpiredOrHidden">
-        findAllExpiredOrHidden()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_findAllExpiredOrHidden" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">131</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the mailing list members that belong to hidden or expired members
-and that are not already scheduled for deletion</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">findAllExpiredOrHidden</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_findAllPendingLocalOnly">
-        findAllPendingLocalOnly()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_findAllPendingLocalOnly" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">152</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get memberships with pending sync flags for lists without external backends.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">findAllPendingLocalOnly</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_findByListAndMember">
-        findByListAndMember()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_findByListAndMember" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">40</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">findByListAndMember</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">find</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listmonkId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -807,15 +541,8 @@ and that are not already scheduled for deletion</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$list</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$member</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$listmonkId</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -828,7 +555,124 @@ and that are not already scheduled for deletion</p>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>|null</span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findActive">
+        findActive()
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method_findActive" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">55</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find active mailing lists (i.e. seen in the last fetch or the hour before)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findActive</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findAll">
+        findAll()
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method_findAll" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Find all.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findAll</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLastFetchTime">
+        getLastFetchTime()
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method_getLastFetchTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the time of last sync, or null if none</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getLastFetchTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr>|null</span>
             </section>
 
 </article>
@@ -840,13 +684,13 @@ and that are not already scheduled for deletion</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_getRepository">
         getRepository()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_getRepository" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method_getRepository" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">180</span>
+    <span class="phpdocumentor-element-found-in__line">91</span>
 
     </aside>
 
@@ -877,70 +721,23 @@ and that are not already scheduled for deletion</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_markAllMembersForCreation">
-        markAllMembersForCreation()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_markAllMembersForCreation" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">112</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Mark all members of a mailing list as needing to be created.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">markAllMembersForCreation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingList</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <section class="phpdocumentor-description"><p>This does not perform changes in report which is correct.</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$mailingList</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_persist">
         persist()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_persist" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method_persist" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Persist a membership.</p>
+        <p class="phpdocumentor-summary">Persist a listmonk list.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">persist</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">persist</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -950,7 +747,7 @@ and that are not already scheduled for deletion</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$list</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a></span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -971,21 +768,21 @@ and that are not already scheduled for deletion</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_remove">
         remove()
-        <a href="classes/Database-Mapper-MailingListMember.html#method_remove" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#method_remove" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/MailingListMember.php"><a href="files/module-database-src-mapper-mailinglistmember.html"><abbr title="module/Database/src/Mapper/MailingListMember.php">MailingListMember.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Mapper/ListmonkMailingList.php"><a href="files/module-database-src-mapper-listmonkmailinglist.html"><abbr title="module/Database/src/Mapper/ListmonkMailingList.php">ListmonkMailingList.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Remove a membership.</p>
+        <p class="phpdocumentor-summary">Remove a listmonk list.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">remove</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">remove</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$list</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -995,7 +792,7 @@ and that are not already scheduled for deletion</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$list</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a></span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1022,33 +819,29 @@ and that are not already scheduled for deletion</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/Database-Mapper-MailingListMember.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Database-Mapper-MailingListMember.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/Database-Mapper-ListmonkMailingList.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Mapper-ListmonkMailingList.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Database-Mapper-MailingListMember.html#property_em">$em</a></li>
+                                                    <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#property_em">$em</a></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_countPendingCreation">countPendingCreation()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_countPendingDeletion">countPendingDeletion()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_findAfterSync">findAfterSync()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_findAll">findAll()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_findAllExpiredOrHidden">findAllExpiredOrHidden()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_findAllPendingLocalOnly">findAllPendingLocalOnly()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_findByListAndMember">findByListAndMember()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_getRepository">getRepository()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_markAllMembersForCreation">markAllMembersForCreation()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_persist">persist()</a></li>
-                                            <li class=""><a href="classes/Database-Mapper-MailingListMember.html#method_remove">remove()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method_find">find()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method_findActive">findActive()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method_findAll">findAll()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method_getLastFetchTime">getLastFetchTime()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method_getRepository">getRepository()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method_persist">persist()</a></li>
+                                            <li class=""><a href="classes/Database-Mapper-ListmonkMailingList.html#method_remove">remove()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -1068,7 +861,7 @@ and that are not already scheduled for deletion</p>
     </section>
 </section>
         </div>
-        <a href="classes/Database-Mapper-MailingListMember.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Mapper-ListmonkMailingList.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

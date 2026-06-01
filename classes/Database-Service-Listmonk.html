@@ -286,7 +286,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Mailman
+    Listmonk
 
     
             <div class="phpdocumentor-element__package">
@@ -305,9 +305,9 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -320,7 +320,7 @@
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Database-Service-Mailman.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Service-Listmonk.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -330,125 +330,46 @@
 
 
 
-<h4 id="toc-constants">
-    Constants
-    <a href="classes/Database-Service-Mailman.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_MIME">MM_DELIVERYMODE_DIGESTS_MIME</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;mime_digests&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_PLAIN">MM_DELIVERYMODE_DIGESTS_PLAIN</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;plaintext_digests&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_REGULAR">MM_DELIVERYMODE_REGULAR</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;regular&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES">MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;by_bounces&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR">MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;by_moderator&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_USER">MM_DELIVERYSTATUS_DISABLED_BY_USER</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;by_user&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_ENABLED">MM_DELIVERYSTATUS_ENABLED</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;enabled&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_DELLIVERYMODE_DIGESTS_SUMMARY">MM_DELLIVERYMODE_DIGESTS_SUMMARY</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;summary_digests&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_ROLE_MEMBER">MM_ROLE_MEMBER</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;member&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_ROLE_MODERATOR">MM_ROLE_MODERATOR</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;moderator&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_ROLE_NONMEMBER">MM_ROLE_NONMEMBER</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;nonmember&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/Database-Service-Mailman.html#constant_MM_ROLE_OWNER">MM_ROLE_OWNER</a>
-    <span>
-        &nbsp;: string&nbsp;= &#039;owner&#039;                            </span>
-</dt>
-
-    </dl>
 
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/Database-Service-Mailman.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Service-Listmonk.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-Mailman.html#property_configService">$configService</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#property_configService">$configService</a>
     <span>
                         &nbsp;: <a href="classes/Application-Service-Config.html"><abbr title="\Application\Service\Config">Config</abbr></a>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-Mailman.html#property_mailingListMapper">$mailingListMapper</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Mapper-MailingList.html"><abbr title="\Database\Mapper\MailingList">MailingList</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-Mailman.html#property_mailingListMemberMapper">$mailingListMemberMapper</a>
-    <span>
-                        &nbsp;: <a href="classes/Database-Mapper-MailingListMember.html"><abbr title="\Database\Mapper\MailingListMember">MailingListMember</abbr></a>            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-Mailman.html#property_mailmanConfig">$mailmanConfig</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#property_listmonkConfig">$listmonkConfig</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-Mailman.html#property_mailmanMailingListMapper">$mailmanMailingListMapper</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#property_listmonkMailingListMapper">$listmonkMailingListMapper</a>
     <span>
-                        &nbsp;: <a href="classes/Database-Mapper-MailmanMailingList.html"><abbr title="\Database\Mapper\MailmanMailingList">MailmanMailingList</abbr></a>            </span>
+                        &nbsp;: <a href="classes/Database-Mapper-ListmonkMailingList.html"><abbr title="\Database\Mapper\ListmonkMailingList">ListmonkMailingList</abbr></a>            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Service-Mailman.html#property_memberMapper">$memberMapper</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#property_mailingListMapper">$mailingListMapper</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Mapper-MailingList.html"><abbr title="\Database\Mapper\MailingList">MailingList</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Service-Listmonk.html#property_mailingListMemberMapper">$mailingListMemberMapper</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Mapper-MailingListMember.html"><abbr title="\Database\Mapper\MailingListMember">MailingListMember</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Service-Listmonk.html#property_memberMapper">$memberMapper</a>
     <span>
                         &nbsp;: <a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>            </span>
 </dt>
@@ -457,153 +378,151 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Database-Service-Mailman.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Service-Listmonk.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method___construct">__construct()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_fetchMailingLists">fetchMailingLists()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_fetchMailingLists">fetchMailingLists()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Fetch mailing lists from mailman and import them to the mailmanlist model in GEWISDB</dd>
+<dd>Fetch mailing lists from listmonk and import them to the listmonklist model in GEWISDB</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_getFrontpageData">getFrontpageData()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_getFrontpageData">getFrontpageData()</a>
     <span>
-                                &nbsp;: <abbr title="array{mailmanLastFetch: ?\DateTime, mailmanLastFetchOverdue: bool, mailmanLastSync: ?\DateTime}">DateTime}</abbr>    </span>
+                                &nbsp;: <abbr title="array{listmonkLastFetch: ?\DateTime, listmonkLastFetchOverdue: bool, listmonkLastSync: ?\DateTime}">DateTime}</abbr>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_getLastFetchTime">getLastFetchTime()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_getLastFetchTime">getLastFetchTime()</a>
     <span>
                                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>|null    </span>
 </dt>
-<dd>Get the last succesfull mailman sync (&gt;= 1 list)</dd>
+<dd>Get the last succesfull listmonk sync (&gt;= 1 list)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_getMailingList">getMailingList()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_getMailingList">getMailingList()</a>
     <span>
-                                &nbsp;: <a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null    </span>
+                                &nbsp;: <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>|null    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_getMailingLists">getMailingLists()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_getMailingLists">getMailingLists()</a>
     <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>&gt;    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;    </span>
 </dt>
 <dd>Returns all recently seen mailing lists</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_isLastFetchOverdue">isLastFetchOverdue()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_isLastFetchOverdue">isLastFetchOverdue()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_isSyncLocked">isSyncLocked()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_isSyncLocked">isSyncLocked()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 <dd>Get state of sync lock.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Database-Service-Mailman.html#method_syncMembership">syncMembership()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_syncMembership">syncMembership()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>This functions syncs the mailing list membership of all mailing lists
-Even if they don&#039;t have an associated mailman mailing list, to keep the code throughout the application the same</dd>
+Even if they don&#039;t have an associated listmonk mailing list, to keep the code throughout the application the same</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_acquireSyncLock">acquireSyncLock()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_acquireSyncLock">acquireSyncLock()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Acquire sync lock.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_assertMailmanHealthy">assertMailmanHealthy()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_assertListmonkHealthy">assertListmonkHealthy()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_fullCheckMailmanList">fullCheckMailmanList()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_buildListmonkEmailQuery">buildListmonkEmailQuery()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/Database-Service-Listmonk.html#method_fullCheckListmonkList">fullCheckListmonkList()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Function to process &#039;new&#039; or unknown mailman registrations
-When member known, adds to DB. When member unknown, removes from mailman</dd>
+<dd>Function to process &#039;new&#039; or unknown listmonk registrations
+When member known, adds to DB. When member unknown, removes from listmonk</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_getAllListsFromMailman">getAllListsFromMailman()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_getAllListsFromListmonk">getAllListsFromListmonk()</a>
     <span>
-                                &nbsp;: array&lt;string|int, array{display_name: string, list_id: string}&gt;    </span>
+                                &nbsp;: array&lt;string|int, array{name: string, id: int}&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEmails">getMailmanListSubscriberEmails()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_getListmonkListSubscriberEmails">getListmonkListSubscriberEmails()</a>
     <span>
                                 &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
-<dd>Function to get all email addresses currently subscribed to a given mailman list</dd>
+<dd>Function to get all email addresses currently subscribed to a given listmonk list</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEntries">getMailmanListSubscriberEntries()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, array{email: string, list_id: string, member_id: string, role: string}&gt;    </span>
-</dt>
-<dd>Function to get all current subscribers to a list in mailman
-Particularly useful when comparing the entire list</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_isMailmanHealthy">isMailmanHealthy()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_isListmonkHealthy">isListmonkHealthy()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_performMailmanRequest">performMailmanRequest()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_performListmonkRequest">performListmonkRequest()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_releaseSyncLock">releaseSyncLock()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_releaseSyncLock">releaseSyncLock()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Release sync lock.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_subscribeMemberToMailingList">subscribeMemberToMailingList()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_subscribeMemberToMailingList">subscribeMemberToMailingList()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Subscribe a member to a mailing list.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_syncMembershipSingle">syncMembershipSingle()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_syncMembershipSingle">syncMembershipSingle()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>This function syncs the membership of a mailing list</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_unsubscribeMemberFromMailingList">unsubscribeMemberFromMailingList()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_unsubscribeMemberFromMailingList">unsubscribeMemberFromMailingList()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Service-Mailman.html#method_verifyMemberOnMailingList">verifyMemberOnMailingList()</a>
+    <a class="" href="classes/Database-Service-Listmonk.html#method_verifyMemberOnMailingList">verifyMemberOnMailingList()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -615,379 +534,12 @@ and if not, removes the mailinglistMemberModel</dd>
 
 
         
-    <section class="phpdocumentor-constants">
-        <h3 class="phpdocumentor-elements__header" id="constants">
-            Constants
-            <a href="classes/Database-Service-Mailman.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
-
-        </h3>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELIVERYMODE_DIGESTS_MIME">
-        MM_DELIVERYMODE_DIGESTS_MIME
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_MIME" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">42</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELIVERYMODE_DIGESTS_MIME</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;mime_digests&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELIVERYMODE_DIGESTS_PLAIN">
-        MM_DELIVERYMODE_DIGESTS_PLAIN
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_PLAIN" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">43</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELIVERYMODE_DIGESTS_PLAIN</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;plaintext_digests&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELIVERYMODE_REGULAR">
-        MM_DELIVERYMODE_REGULAR
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_REGULAR" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">41</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELIVERYMODE_REGULAR</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;regular&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES">
-        MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">48</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;by_bounces&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR">
-        MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">49</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;by_moderator&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELIVERYSTATUS_DISABLED_BY_USER">
-        MM_DELIVERYSTATUS_DISABLED_BY_USER
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_USER" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">47</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELIVERYSTATUS_DISABLED_BY_USER</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;by_user&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELIVERYSTATUS_ENABLED">
-        MM_DELIVERYSTATUS_ENABLED
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_ENABLED" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">46</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELIVERYSTATUS_ENABLED</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;enabled&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_DELLIVERYMODE_DIGESTS_SUMMARY">
-        MM_DELLIVERYMODE_DIGESTS_SUMMARY
-        <a href="classes/Database-Service-Mailman.html#constant_MM_DELLIVERYMODE_DIGESTS_SUMMARY" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">44</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_DELLIVERYMODE_DIGESTS_SUMMARY</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;summary_digests&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_ROLE_MEMBER">
-        MM_ROLE_MEMBER
-        <a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_MEMBER" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">37</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_ROLE_MEMBER</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;member&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_ROLE_MODERATOR">
-        MM_ROLE_MODERATOR
-        <a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_MODERATOR" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">38</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_ROLE_MODERATOR</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;moderator&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_ROLE_NONMEMBER">
-        MM_ROLE_NONMEMBER
-        <a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_NONMEMBER" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">36</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_ROLE_NONMEMBER</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;nonmember&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-                    <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_MM_ROLE_OWNER">
-        MM_ROLE_OWNER
-        <a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_OWNER" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">39</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">MM_ROLE_OWNER</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;owner&#039;</span>
-</code>
-
-
-    
-    
-    
-
-        
-    </article>
-            </section>
 
         
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Database-Service-Mailman.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Service-Listmonk.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -999,15 +551,15 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="property_configService">
         $configService
-        <a href="classes/Database-Service-Mailman.html#property_configService" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#property_configService" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
@@ -1034,17 +586,91 @@ and if not, removes the mailinglistMemberModel</dd>
             -private
                                                 -read-only                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_mailingListMapper">
-        $mailingListMapper
-        <a href="classes/Database-Service-Mailman.html#property_mailingListMapper" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_listmonkConfig">
+        $listmonkConfig
+        <a href="classes/Database-Service-Listmonk.html#property_listmonkConfig" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$listmonkConfig</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_listmonkMailingListMapper">
+        $listmonkMailingListMapper
+        <a href="classes/Database-Service-Listmonk.html#property_listmonkMailingListMapper" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-ListmonkMailingList.html"><abbr title="\Database\Mapper\ListmonkMailingList">ListmonkMailingList</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$listmonkMailingListMapper</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mailingListMapper">
+        $mailingListMapper
+        <a href="classes/Database-Service-Listmonk.html#property_mailingListMapper" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -1073,15 +699,15 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="property_mailingListMemberMapper">
         $mailingListMemberMapper
-        <a href="classes/Database-Service-Mailman.html#property_mailingListMemberMapper" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#property_mailingListMemberMapper" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -1108,91 +734,17 @@ and if not, removes the mailinglistMemberModel</dd>
             -private
                                                 -read-only                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_mailmanConfig">
-        $mailmanConfig
-        <a href="classes/Database-Service-Mailman.html#property_mailmanConfig" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">60</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$mailmanConfig</span>
-    </code>
-
-    
-    
-    
-
-        
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_mailmanMailingListMapper">
-        $mailmanMailingListMapper
-        <a href="classes/Database-Service-Mailman.html#property_mailmanMailingListMapper" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">56</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/Database-Mapper-MailmanMailingList.html"><abbr title="\Database\Mapper\MailmanMailingList">MailmanMailingList</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$mailmanMailingListMapper</span>
-    </code>
-
-    
-    
-    
-
-        
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only                    "
->
     <h4 class="phpdocumentor-element__name" id="property_memberMapper">
         $memberMapper
-        <a href="classes/Database-Service-Mailman.html#property_memberMapper" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#property_memberMapper" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -1217,7 +769,7 @@ and if not, removes the mailinglistMemberModel</dd>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Service-Mailman.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Service-Listmonk.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -1228,20 +780,20 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Database-Service-Mailman.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-MailingList.html"><abbr title="\Database\Mapper\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-MailmanMailingList.html"><abbr title="\Database\Mapper\MailmanMailingList">MailmanMailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailmanMailingListMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-MailingListMember.html"><abbr title="\Database\Mapper\MailingListMember">MailingListMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMemberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Application-Service-Config.html"><abbr title="\Application\Service\Config">Config</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$configService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailmanConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-MailingList.html"><abbr title="\Database\Mapper\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-ListmonkMailingList.html"><abbr title="\Database\Mapper\ListmonkMailingList">ListmonkMailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listmonkMailingListMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-MailingListMember.html"><abbr title="\Database\Mapper\MailingListMember">MailingListMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMemberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Mapper-Member.html"><abbr title="\Database\Mapper\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$memberMapper</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Application-Service-Config.html"><abbr title="\Application\Service\Config">Config</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$configService</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listmonkConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1257,8 +809,8 @@ and if not, removes the mailinglistMemberModel</dd>
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$mailmanMailingListMapper</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Mapper-MailmanMailingList.html"><abbr title="\Database\Mapper\MailmanMailingList">MailmanMailingList</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$listmonkMailingListMapper</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Mapper-ListmonkMailingList.html"><abbr title="\Database\Mapper\ListmonkMailingList">ListmonkMailingList</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1285,7 +837,7 @@ and if not, removes the mailinglistMemberModel</dd>
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$mailmanConfig</span>
+                <span class="phpdocumentor-argument-list__argument__name">$listmonkConfig</span>
                 : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
@@ -1296,7 +848,7 @@ and if not, removes the mailinglistMemberModel</dd>
     
     <h5 class="phpdocumentor-tag-list__heading" id="method___construct_tags">
         Tags
-        <a href="classes/Database-Service-Mailman.html#method___construct_tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method___construct_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -1322,17 +874,17 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_fetchMailingLists">
         fetchMailingLists()
-        <a href="classes/Database-Service-Mailman.html#method_fetchMailingLists" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_fetchMailingLists" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">342</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetch mailing lists from mailman and import them to the mailmanlist model in GEWISDB</p>
+        <p class="phpdocumentor-summary">Fetch mailing lists from listmonk and import them to the listmonklist model in GEWISDB</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1357,11 +909,11 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_getFrontpageData">
         getFrontpageData()
-        <a href="classes/Database-Service-Mailman.html#method_getFrontpageData" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_getFrontpageData" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">300</span>
 
@@ -1370,7 +922,7 @@ and if not, removes the mailinglistMemberModel</dd>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getFrontpageData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{mailmanLastFetch: ?\DateTime, mailmanLastFetchOverdue: bool, mailmanLastSync: ?\DateTime}">DateTime}</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">getFrontpageData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="array{listmonkLastFetch: ?\DateTime, listmonkLastFetchOverdue: bool, listmonkLastSync: ?\DateTime}">DateTime}</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1383,7 +935,7 @@ and if not, removes the mailinglistMemberModel</dd>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="array{mailmanLastFetch: ?\DateTime, mailmanLastFetchOverdue: bool, mailmanLastSync: ?\DateTime}">DateTime}</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="array{listmonkLastFetch: ?\DateTime, listmonkLastFetchOverdue: bool, listmonkLastSync: ?\DateTime}">DateTime}</abbr></span>
             </section>
 
 </article>
@@ -1395,17 +947,17 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_getLastFetchTime">
         getLastFetchTime()
-        <a href="classes/Database-Service-Mailman.html#method_getLastFetchTime" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_getLastFetchTime" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">383</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get the last succesfull mailman sync (&gt;= 1 list)</p>
+        <p class="phpdocumentor-summary">Get the last succesfull listmonk sync (&gt;= 1 list)</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1434,11 +986,11 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_getMailingList">
         getMailingList()
-        <a href="classes/Database-Service-Mailman.html#method_getMailingList" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_getMailingList" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">361</span>
 
@@ -1447,7 +999,7 @@ and if not, removes the mailinglistMemberModel</dd>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMailingList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailmanId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getMailingList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listmonkId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1456,8 +1008,8 @@ and if not, removes the mailinglistMemberModel</dd>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$mailmanId</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                <span class="phpdocumentor-argument-list__argument__name">$listmonkId</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1470,7 +1022,7 @@ and if not, removes the mailinglistMemberModel</dd>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>|null</span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>|null</span>
             </section>
 
 </article>
@@ -1482,11 +1034,11 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_getMailingLists">
         getMailingLists()
-        <a href="classes/Database-Service-Mailman.html#method_getMailingLists" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_getMailingLists" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">371</span>
 
@@ -1496,7 +1048,7 @@ and if not, removes the mailinglistMemberModel</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMailingLists</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$activeOnly</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getMailingLists</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$activeOnly</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1519,7 +1071,7 @@ and if not, removes the mailinglistMemberModel</dd>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-MailmanMailingList.html"><abbr title="\Database\Model\MailmanMailingList">MailmanMailingList</abbr></a>&gt;</span>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Database-Model-ListmonkMailingList.html"><abbr title="\Database\Model\ListmonkMailingList">ListmonkMailingList</abbr></a>&gt;</span>
             </section>
 
 </article>
@@ -1531,11 +1083,11 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_isLastFetchOverdue">
         isLastFetchOverdue()
-        <a href="classes/Database-Service-Mailman.html#method_isLastFetchOverdue" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_isLastFetchOverdue" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">388</span>
 
@@ -1569,13 +1121,13 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_isSyncLocked">
         isSyncLocked()
-        <a href="classes/Database-Service-Mailman.html#method_isSyncLocked" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_isSyncLocked" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">177</span>
+    <span class="phpdocumentor-element-found-in__line">178</span>
 
     </aside>
 
@@ -1608,18 +1160,18 @@ and if not, removes the mailinglistMemberModel</dd>
 >
     <h4 class="phpdocumentor-element__name" id="method_syncMembership">
         syncMembership()
-        <a href="classes/Database-Service-Mailman.html#method_syncMembership" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_syncMembership" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">This functions syncs the mailing list membership of all mailing lists
-Even if they don&#039;t have an associated mailman mailing list, to keep the code throughout the application the same</p>
+Even if they don&#039;t have an associated listmonk mailing list, to keep the code throughout the application the same</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1661,13 +1213,13 @@ Even if they don&#039;t have an associated mailman mailing list, to keep the cod
 >
     <h4 class="phpdocumentor-element__name" id="method_acquireSyncLock">
         acquireSyncLock()
-        <a href="classes/Database-Service-Mailman.html#method_acquireSyncLock" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_acquireSyncLock" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -1680,7 +1232,7 @@ Even if they don&#039;t have an associated mailman mailing list, to keep the cod
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>To ensure that the sync between GEWISDB and Mailman is as clean as possible, we need to acquire a global lock on
+        <section class="phpdocumentor-description"><p>To ensure that the sync between GEWISDB and Listmonk is as clean as possible, we need to acquire a global lock on
 the mail list administration. This will prevent (if properly implemented and used) concurrent syncs from running.</p>
 </section>
 
@@ -1714,13 +1266,13 @@ the mail list administration. This will prevent (if properly implemented and use
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_assertMailmanHealthy">
-        assertMailmanHealthy()
-        <a href="classes/Database-Service-Mailman.html#method_assertMailmanHealthy" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_assertListmonkHealthy">
+        assertListmonkHealthy()
+        <a href="classes/Database-Service-Listmonk.html#method_assertListmonkHealthy" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">287</span>
 
@@ -1729,7 +1281,7 @@ the mail list administration. This will prevent (if properly implemented and use
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">assertMailmanHealthy</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">assertListmonkHealthy</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1748,24 +1300,72 @@ the mail list administration. This will prevent (if properly implemented and use
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_fullCheckMailmanList">
-        fullCheckMailmanList()
-        <a href="classes/Database-Service-Mailman.html#method_fullCheckMailmanList" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_buildListmonkEmailQuery">
+        buildListmonkEmailQuery()
+        <a href="classes/Database-Service-Listmonk.html#method_buildListmonkEmailQuery" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">594</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Function to process &#039;new&#039; or unknown mailman registrations
-When member known, adds to DB. When member unknown, removes from mailman</p>
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">buildListmonkEmailQuery</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$email</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_fullCheckListmonkList">
+        fullCheckListmonkList()
+        <a href="classes/Database-Service-Listmonk.html#method_fullCheckListmonkList" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">616</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Function to process &#039;new&#039; or unknown listmonk registrations
+When member known, adds to DB. When member unknown, removes from listmonk</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">fullCheckMailmanList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingList</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dryRun</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">fullCheckListmonkList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingList</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dryRun</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1808,13 +1408,13 @@ When member known, adds to DB. When member unknown, removes from mailman</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getAllListsFromMailman">
-        getAllListsFromMailman()
-        <a href="classes/Database-Service-Mailman.html#method_getAllListsFromMailman" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getAllListsFromListmonk">
+        getAllListsFromListmonk()
+        <a href="classes/Database-Service-Listmonk.html#method_getAllListsFromListmonk" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">319</span>
 
@@ -1823,7 +1423,7 @@ When member known, adds to DB. When member unknown, removes from mailman</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">getAllListsFromMailman</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, array{display_name: string, list_id: string}&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getAllListsFromListmonk</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, array{name: string, id: int}&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1836,7 +1436,7 @@ When member known, adds to DB. When member unknown, removes from mailman</p>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, array{display_name: string, list_id: string}&gt;</span>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, array{name: string, id: int}&gt;</span>
             </section>
 
 </article>
@@ -1846,23 +1446,23 @@ When member known, adds to DB. When member unknown, removes from mailman</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMailmanListSubscriberEmails">
-        getMailmanListSubscriberEmails()
-        <a href="classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEmails" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getListmonkListSubscriberEmails">
+        getListmonkListSubscriberEmails()
+        <a href="classes/Database-Service-Listmonk.html#method_getListmonkListSubscriberEmails" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">694</span>
+    <span class="phpdocumentor-element-found-in__line">698</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Function to get all email addresses currently subscribed to a given mailman list</p>
+        <p class="phpdocumentor-summary">Function to get all email addresses currently subscribed to a given listmonk list</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">getMailmanListSubscriberEmails</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getListmonkListSubscriberEmails</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1872,7 +1472,7 @@ When member known, adds to DB. When member unknown, removes from mailman</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$listId</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1895,63 +1495,13 @@ When member known, adds to DB. When member unknown, removes from mailman</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMailmanListSubscriberEntries">
-        getMailmanListSubscriberEntries()
-        <a href="classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEntries" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_isListmonkHealthy">
+        isListmonkHealthy()
+        <a href="classes/Database-Service-Listmonk.html#method_isListmonkHealthy" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">672</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Function to get all current subscribers to a list in mailman
-Particularly useful when comparing the entire list</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">getMailmanListSubscriberEntries</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$listId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, array{email: string, list_id: string, member_id: string, role: string}&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$listId</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, array{email: string, list_id: string, member_id: string, role: string}&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_isMailmanHealthy">
-        isMailmanHealthy()
-        <a href="classes/Database-Service-Mailman.html#method_isMailmanHealthy" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">276</span>
 
@@ -1960,7 +1510,7 @@ Particularly useful when comparing the entire list</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">isMailmanHealthy</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">isListmonkHealthy</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1983,22 +1533,22 @@ Particularly useful when comparing the entire list</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_performMailmanRequest">
-        performMailmanRequest()
-        <a href="classes/Database-Service-Mailman.html#method_performMailmanRequest" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_performListmonkRequest">
+        performListmonkRequest()
+        <a href="classes/Database-Service-Listmonk.html#method_performListmonkRequest" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">performMailmanRequest</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span><span> = </span><span class="phpdocumentor-signature__argument__default-value"><abbr title="\Laminas\Http\Request::METHOD_GET">Request::METHOD_GET</abbr></span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">performListmonkRequest</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span><span> = </span><span class="phpdocumentor-signature__argument__default-value"><abbr title="\Laminas\Http\Request::METHOD_GET">Request::METHOD_GET</abbr></span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2030,9 +1580,9 @@ Particularly useful when comparing the entire list</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="method_performMailmanRequest_tags">
+    <h5 class="phpdocumentor-tag-list__heading" id="method_performListmonkRequest_tags">
         Tags
-        <a href="classes/Database-Service-Mailman.html#method_performMailmanRequest_tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_performListmonkRequest_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -2069,13 +1619,13 @@ Particularly useful when comparing the entire list</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_releaseSyncLock">
         releaseSyncLock()
-        <a href="classes/Database-Service-Mailman.html#method_releaseSyncLock" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_releaseSyncLock" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">169</span>
+    <span class="phpdocumentor-element-found-in__line">170</span>
 
     </aside>
 
@@ -2088,7 +1638,7 @@ Particularly useful when comparing the entire list</p>
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Releases the sync lock after the sync between GEWISDB and Mailman happened.</p>
+        <section class="phpdocumentor-description"><p>Releases the sync lock after the sync between GEWISDB and Listmonk happened.</p>
 </section>
 
     
@@ -2106,13 +1656,13 @@ Particularly useful when comparing the entire list</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_subscribeMemberToMailingList">
         subscribeMemberToMailingList()
-        <a href="classes/Database-Service-Mailman.html#method_subscribeMemberToMailingList" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_subscribeMemberToMailingList" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">404</span>
+    <span class="phpdocumentor-element-found-in__line">401</span>
 
     </aside>
 
@@ -2120,15 +1670,12 @@ Particularly useful when comparing the entire list</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">subscribeMemberToMailingList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMember</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dryRun</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sendWelcomeEmail</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">subscribeMemberToMailingList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingListMember.html"><abbr title="\Database\Model\MailingListMember">MailingListMember</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingListMember</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dryRun</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Unfortunately, this must be done one at the time as there is no mass-subscribe functionality in the API. See
-https://gitlab.com/mailman/mailman/-/issues/419 for the open issue.</p>
-</section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2152,13 +1699,6 @@ https://gitlab.com/mailman/mailman/-/issues/419 for the open issue.</p>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$sendWelcomeEmail</span>
-                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
             </dl>
 
     
@@ -2175,13 +1715,13 @@ https://gitlab.com/mailman/mailman/-/issues/419 for the open issue.</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_syncMembershipSingle">
         syncMembershipSingle()
-        <a href="classes/Database-Service-Mailman.html#method_syncMembershipSingle" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_syncMembershipSingle" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">215</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
@@ -2234,13 +1774,13 @@ https://gitlab.com/mailman/mailman/-/issues/419 for the open issue.</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_unsubscribeMemberFromMailingList">
         unsubscribeMemberFromMailingList()
-        <a href="classes/Database-Service-Mailman.html#method_unsubscribeMemberFromMailingList" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_unsubscribeMemberFromMailingList" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">461</span>
+    <span class="phpdocumentor-element-found-in__line">487</span>
 
     </aside>
 
@@ -2292,13 +1832,13 @@ https://gitlab.com/mailman/mailman/-/issues/419 for the open issue.</p>
 >
     <h4 class="phpdocumentor-element__name" id="method_verifyMemberOnMailingList">
         verifyMemberOnMailingList()
-        <a href="classes/Database-Service-Mailman.html#method_verifyMemberOnMailingList" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#method_verifyMemberOnMailingList" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Mailman.php"><a href="files/module-database-src-service-mailman.html"><abbr title="module/Database/src/Service/Mailman.php">Mailman.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Service/Listmonk.php"><a href="files/module-database-src-service-listmonk.html"><abbr title="module/Database/src/Service/Listmonk.php">Listmonk.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">518</span>
+    <span class="phpdocumentor-element-found-in__line">550</span>
 
     </aside>
 
@@ -2369,66 +1909,48 @@ and if not, removes the mailinglistMemberModel</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/Database-Service-Mailman.html#toc-constants">Constants</a></li>
-                                                            <li><a href="classes/Database-Service-Mailman.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Database-Service-Mailman.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/Database-Service-Listmonk.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Service-Listmonk.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
-                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
-                <li>
-                    <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_MIME">MM_DELIVERYMODE_DIGESTS_MIME</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_DIGESTS_PLAIN">MM_DELIVERYMODE_DIGESTS_PLAIN</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYMODE_REGULAR">MM_DELIVERYMODE_REGULAR</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES">MM_DELIVERYSTATUS_DISABLED_BY_BOUNCES</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR">MM_DELIVERYSTATUS_DISABLED_BY_MODERATOR</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_DISABLED_BY_USER">MM_DELIVERYSTATUS_DISABLED_BY_USER</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELIVERYSTATUS_ENABLED">MM_DELIVERYSTATUS_ENABLED</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_DELLIVERYMODE_DIGESTS_SUMMARY">MM_DELLIVERYMODE_DIGESTS_SUMMARY</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_MEMBER">MM_ROLE_MEMBER</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_MODERATOR">MM_ROLE_MODERATOR</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_NONMEMBER">MM_ROLE_NONMEMBER</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#constant_MM_ROLE_OWNER">MM_ROLE_OWNER</a></li>
-                                            </ul>
-                </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#property_configService">$configService</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#property_mailingListMapper">$mailingListMapper</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#property_mailingListMemberMapper">$mailingListMemberMapper</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#property_mailmanConfig">$mailmanConfig</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#property_mailmanMailingListMapper">$mailmanMailingListMapper</a></li>
-                                                    <li class=""><a href="classes/Database-Service-Mailman.html#property_memberMapper">$memberMapper</a></li>
+                                                    <li class=""><a href="classes/Database-Service-Listmonk.html#property_configService">$configService</a></li>
+                                                    <li class=""><a href="classes/Database-Service-Listmonk.html#property_listmonkConfig">$listmonkConfig</a></li>
+                                                    <li class=""><a href="classes/Database-Service-Listmonk.html#property_listmonkMailingListMapper">$listmonkMailingListMapper</a></li>
+                                                    <li class=""><a href="classes/Database-Service-Listmonk.html#property_mailingListMapper">$mailingListMapper</a></li>
+                                                    <li class=""><a href="classes/Database-Service-Listmonk.html#property_mailingListMemberMapper">$mailingListMemberMapper</a></li>
+                                                    <li class=""><a href="classes/Database-Service-Listmonk.html#property_memberMapper">$memberMapper</a></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_fetchMailingLists">fetchMailingLists()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_getFrontpageData">getFrontpageData()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_getLastFetchTime">getLastFetchTime()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_getMailingList">getMailingList()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_getMailingLists">getMailingLists()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_isLastFetchOverdue">isLastFetchOverdue()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_isSyncLocked">isSyncLocked()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_syncMembership">syncMembership()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_acquireSyncLock">acquireSyncLock()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_assertMailmanHealthy">assertMailmanHealthy()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_fullCheckMailmanList">fullCheckMailmanList()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_getAllListsFromMailman">getAllListsFromMailman()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEmails">getMailmanListSubscriberEmails()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_getMailmanListSubscriberEntries">getMailmanListSubscriberEntries()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_isMailmanHealthy">isMailmanHealthy()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_performMailmanRequest">performMailmanRequest()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_releaseSyncLock">releaseSyncLock()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_subscribeMemberToMailingList">subscribeMemberToMailingList()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_syncMembershipSingle">syncMembershipSingle()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_unsubscribeMemberFromMailingList">unsubscribeMemberFromMailingList()</a></li>
-                                            <li class=""><a href="classes/Database-Service-Mailman.html#method_verifyMemberOnMailingList">verifyMemberOnMailingList()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_fetchMailingLists">fetchMailingLists()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_getFrontpageData">getFrontpageData()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_getLastFetchTime">getLastFetchTime()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_getMailingList">getMailingList()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_getMailingLists">getMailingLists()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_isLastFetchOverdue">isLastFetchOverdue()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_isSyncLocked">isSyncLocked()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_syncMembership">syncMembership()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_acquireSyncLock">acquireSyncLock()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_assertListmonkHealthy">assertListmonkHealthy()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_buildListmonkEmailQuery">buildListmonkEmailQuery()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_fullCheckListmonkList">fullCheckListmonkList()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_getAllListsFromListmonk">getAllListsFromListmonk()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_getListmonkListSubscriberEmails">getListmonkListSubscriberEmails()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_isListmonkHealthy">isListmonkHealthy()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_performListmonkRequest">performListmonkRequest()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_releaseSyncLock">releaseSyncLock()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_subscribeMemberToMailingList">subscribeMemberToMailingList()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_syncMembershipSingle">syncMembershipSingle()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_unsubscribeMemberFromMailingList">unsubscribeMemberFromMailingList()</a></li>
+                                            <li class=""><a href="classes/Database-Service-Listmonk.html#method_verifyMemberOnMailingList">verifyMemberOnMailingList()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -2448,7 +1970,7 @@ and if not, removes the mailinglistMemberModel</p>
     </section>
 </section>
         </div>
-        <a href="classes/Database-Service-Mailman.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Service-Listmonk.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
