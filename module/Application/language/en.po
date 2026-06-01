@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-23 20:16+0200\n"
+"POT-Creation-Date: 2026-05-31 14:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -96,11 +96,13 @@ msgid "A 404 error occurred"
 msgstr "A 404 error occurred"
 
 msgid ""
-"A Mailman sync is currently in progress. It is now not possible to safely "
-"update the mailing list administration, please try again in a few minutes."
+"A Mailman/Listmonk sync is currently in progress. It is now not possible to "
+"safely update the mailing list administration, please try again in a few "
+"minutes."
 msgstr ""
-"A Mailman sync is currently in progress. It is now not possible to safely "
-"update the mailing list administration, please try again in a few minutes."
+"A Mailman/Listmonk sync is currently in progress. It is now not possible to "
+"safely update the mailing list administration, please try again in a few "
+"minutes."
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "A TU/e-username should look like sYYxxxx or YYYYxxxx."
@@ -1019,18 +1021,28 @@ msgstr "Last Name Prepositional Particle"
 msgid "Last Update to Membership"
 msgstr "Last Update to Membership"
 
+msgid "Last fetch of Listmonk lists"
+msgstr "Last fetch of Listmonk lists"
+
+#, php-format
+msgid "Last fetch of available Listmonk lists was %s."
+msgstr "Last fetch of available Listmonk lists was %s."
+
 #, php-format
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Last fetch of available mailman lists was %s."
-
-msgid "Last fetch of mailman lists"
-msgstr "Last fetch of mailman lists"
 
 msgid "Leave note"
 msgstr "Leave note"
 
 msgid "Lid"
 msgstr "Member"
+
+msgid "Listmonk Mailing List"
+msgstr "Listmonk Mailing List"
+
+msgid "Listmonk lists not being fetched"
+msgstr "Listmonk lists not being fetched"
 
 msgid "Lists"
 msgstr "Lists"
@@ -1056,14 +1068,17 @@ msgstr "Mailing Lists"
 msgid "Mailing list deleted."
 msgstr "Mailing list deleted."
 
+msgid "Mailing list sync"
+msgstr "Mailing list sync"
+
 msgid "Mailman Mailing List"
 msgstr "Mailman Mailing List"
 
+msgid "Mailman and Listmonk mailing lists cannot both be set at the same time"
+msgstr "Mailman and Listmonk mailing lists cannot both be set at the same time"
+
 msgid "Mailman lists not being fetched"
 msgstr "Mailman lists not being fetched"
-
-msgid "Mailman sync"
-msgstr "Mailman sync"
 
 #, php-format
 msgid "Make %s inactive?"
@@ -1184,8 +1199,8 @@ msgstr "Mutations"
 msgid "Name"
 msgstr "Name"
 
-msgid "Name (Mailman)"
-msgstr "Name (Mailman)"
+msgid "Name (Sync)"
+msgstr "Name (Sync)"
 
 msgid "No"
 msgstr "No"
@@ -1204,6 +1219,9 @@ msgstr "No data returned."
 
 msgid "No mailing list subscriptions."
 msgstr "No mailing list subscriptions."
+
+msgid "Not studying"
+msgstr "Not studying"
 
 msgid "Note"
 msgstr "Note"
@@ -1490,6 +1508,9 @@ msgid ""
 msgstr ""
 "Some of the entered information appears to be missing or incorrect. Please "
 "check your data and submit again."
+
+msgid "Special cases (secretary use only)"
+msgstr "Special cases (secretary use only)"
 
 msgid "Stack trace"
 msgstr "Stack trace"

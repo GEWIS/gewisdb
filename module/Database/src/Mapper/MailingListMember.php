@@ -106,6 +106,23 @@ class MailingListMember
     }
 
     /**
+     * Mark all members of a mailing list as needing to be created.
+     * This does not perform changes in report which is correct.
+     */
+    public function markAllMembersForCreation(MailingListModel $mailingList): void
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->update(MailingListMemberModel::class, 'mlm')
+            ->set('mlm.toBeCreated', 'true')
+            ->where('mlm.mailingList = :list')
+            ->andWhere('mlm.toBeDeleted != true')
+            ->setParameter('list', $mailingList);
+
+        $qb->getQuery()->execute();
+    }
+
+    /**
      * Get the mailing list members that belong to hidden or expired members
      * and that are not already scheduled for deletion
      *
@@ -120,6 +137,28 @@ class MailingListMember
             ->leftJoin('mlm.member', 'm')
             ->where('mlm.toBeDeleted != True')
             ->andWhere('m.expiration <= CURRENT_TIMESTAMP() OR m.hidden = True');
+
+        /** @var MailingListMemberModel[] $result */
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    /**
+     * Get memberships with pending sync flags for lists without external backends.
+     *
+     * @return MailingListMemberModel[]
+     */
+    public function findAllPendingLocalOnly(): array
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $qb->select('mlm')
+            ->from(MailingListMemberModel::class, 'mlm')
+            ->innerJoin('mlm.mailingList', 'ml')
+            ->where('ml.mailmanList IS NULL')
+            ->andWhere('ml.listmonkList IS NULL')
+            ->andWhere('mlm.toBeCreated = True OR mlm.toBeDeleted = True');
 
         /** @var MailingListMemberModel[] $result */
         $result = $qb->getQuery()->getResult();

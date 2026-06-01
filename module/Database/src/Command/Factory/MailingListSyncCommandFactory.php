@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Database\Service\Factory;
+namespace Database\Command\Factory;
 
-use Database\Service\Api as ApiService;
-use Database\Service\FrontPage as FrontPageService;
+use Database\Command\MailingListSyncCommand;
 use Database\Service\Listmonk as ListmonkService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Mailman as MailmanService;
-use Database\Service\Member as MemberService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Override;
 use Psr\Container\ContainerInterface;
 
-class FrontPageFactory implements FactoryInterface
+class MailingListSyncCommandFactory implements FactoryInterface
 {
     /**
      * @param string $requestedName
@@ -24,19 +22,14 @@ class FrontPageFactory implements FactoryInterface
         ContainerInterface $container,
         $requestedName,
         ?array $options = null,
-    ): FrontPageService {
-        $apiService = $container->get(ApiService::class);
-        $listmonkService = $container->get(ListmonkService::class);
+    ): MailingListSyncCommand {
+        /** @var MailingListService $mailingListService */
         $mailingListService = $container->get(MailingListService::class);
+        /** @var MailmanService $mailmanService */
         $mailmanService = $container->get(MailmanService::class);
-        $memberService = $container->get(MemberService::class);
+        /** @var ListmonkService $listmonkService */
+        $listmonkService = $container->get(ListmonkService::class);
 
-        return new FrontPageService(
-            $apiService,
-            $listmonkService,
-            $mailingListService,
-            $mailmanService,
-            $memberService,
-        );
+        return new MailingListSyncCommand($mailingListService, $mailmanService, $listmonkService);
     }
 }

@@ -41,7 +41,6 @@ use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
 use Database\Model\RenewalLink as RenewalLinkModel;
 use Database\Service\MailingList as MailingListService;
-use Database\Service\Mailman as MailmanService;
 use DateTime;
 use InvalidArgumentException;
 use Laminas\Mail\Header\MessageId;
@@ -91,7 +90,6 @@ class Member
         private readonly CheckerService $checkerService,
         private readonly FileStorageService $fileStorageService,
         private readonly MailingListService $mailingListService,
-        private readonly MailmanService $mailmanService,
         private readonly RenewalService $renewalService,
         private readonly UserService $userService,
         private readonly PhpRenderer $viewRenderer,
@@ -389,8 +387,8 @@ class Member
                 continue;
             }
 
-            // Ignore Mailman sync lock here as we _always_ need to persist this information. Will be cascade persisted
-            // through `$member`.
+            // Ignore Mailman/listmonk sync lock here as we _always_ need to persist this information.
+            // Will be cascade persisted through `$member`.
             $mailingListMember = new MailingListMemberModel();
             $mailingListMember->setMailingList($list);
             $mailingListMember->setMember($member);
@@ -400,8 +398,8 @@ class Member
 
         // subscribe to default mailing lists not on the form
         foreach ($this->mailingListMapper->findDefault() as $list) {
-            // Ignore Mailman sync lock here as we _always_ need to persist this information. Will be cascade persisted
-            // through `$member`.
+            // Ignore Mailman/listmonk sync lock here as we _always_ need to persist this information.
+            // Will be cascade persisted through `$member`.
             $mailingListMember = new MailingListMemberModel();
             $mailingListMember->setMailingList($list);
             $mailingListMember->setMember($member);
@@ -922,7 +920,7 @@ class Member
         MemberListsForm $form,
     ): ?MemberModel {
         // Check if we are performing a sync or not.
-        if ($this->mailmanService->isSyncLocked()) {
+        if ($this->mailingListService->isSyncLocked()) {
             return null;
         }
 

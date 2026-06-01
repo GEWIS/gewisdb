@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-23 20:16+0200\n"
+"POT-Creation-Date: 2026-05-31 14:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -96,12 +96,13 @@ msgid "A 404 error occurred"
 msgstr "Er is een 404-fout opgetreden"
 
 msgid ""
-"A Mailman sync is currently in progress. It is now not possible to safely "
-"update the mailing list administration, please try again in a few minutes."
+"A Mailman/Listmonk sync is currently in progress. It is now not possible to "
+"safely update the mailing list administration, please try again in a few "
+"minutes."
 msgstr ""
-"Een Mailman synchronisatie vindt op dit moment plaats; het is op dit moment "
-"niet mogelijk om wijzigingen uit te voeren. Probeer het over een paar "
-"minuten opnieuw."
+"Een Mailman/Listmonk synchronisatie vindt op dit moment plaats; het is op "
+"dit moment niet mogelijk om wijzigingen uit te voeren. Probeer het over een "
+"paar minuten opnieuw."
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
 msgstr "Een TU/e-gebruikersnaam ziet er uit als sYYxxxx of als YYYYxxxx."
@@ -1028,18 +1029,28 @@ msgstr "Tussenvoegsel"
 msgid "Last Update to Membership"
 msgstr "Laatste aanpassing van het lidmaatschap"
 
+msgid "Last fetch of Listmonk lists"
+msgstr "Listmonk lijsten voor het laatst opgehaald"
+
+#, php-format
+msgid "Last fetch of available Listmonk lists was %s."
+msgstr "Beschikbare Listmonk lijsten voor het laatst om %s opgehaald."
+
 #, php-format
 msgid "Last fetch of available mailman lists was %s."
 msgstr "Beschikbare Mailman lijsten voor het laatst om %s opgehaald."
-
-msgid "Last fetch of mailman lists"
-msgstr "Mailman lijsten voor het laatst opgehaald"
 
 msgid "Leave note"
 msgstr "Voeg notitie toe"
 
 msgid "Lid"
 msgstr "Lid"
+
+msgid "Listmonk Mailing List"
+msgstr "Listmonk-maillijst"
+
+msgid "Listmonk lists not being fetched"
+msgstr "Listmonk lijsten worden niet opgehaald"
 
 msgid "Lists"
 msgstr "Lijsten"
@@ -1065,14 +1076,17 @@ msgstr "Mailinglijsten"
 msgid "Mailing list deleted."
 msgstr "Mailinglijst verwijderd."
 
+msgid "Mailing list sync"
+msgstr "Mailing lijst sync"
+
 msgid "Mailman Mailing List"
 msgstr "Mailman-maillijst"
 
+msgid "Mailman and Listmonk mailing lists cannot both be set at the same time"
+msgstr "Mailman en Listmonk mail lijsten kunnen niet beide ingesteld zijn"
+
 msgid "Mailman lists not being fetched"
 msgstr "Mailman lijsten worden niet opgehaald"
-
-msgid "Mailman sync"
-msgstr "Mailman-synchronisatie"
 
 #, php-format
 msgid "Make %s inactive?"
@@ -1193,8 +1207,8 @@ msgstr "Mutaties"
 msgid "Name"
 msgstr "Naam"
 
-msgid "Name (Mailman)"
-msgstr "Naam (Mailman)"
+msgid "Name (Sync)"
+msgstr "Naam (Sync)"
 
 msgid "No"
 msgstr "Nee"
@@ -1213,6 +1227,9 @@ msgstr "Geen gegevens ontvangen."
 
 msgid "No mailing list subscriptions."
 msgstr "Geen aanmeldingen voor mailinglijsten."
+
+msgid "Not studying"
+msgstr "Niet-studerend"
 
 msgid "Note"
 msgstr "Notitie"
@@ -1498,6 +1515,9 @@ msgid ""
 msgstr ""
 "Een deel van de ingevoerde informatie lijkt te missen of is onjuist. "
 "Controleer de data en verstuur het formulier opnieuw."
+
+msgid "Special cases (secretary use only)"
+msgstr "Uitzonderingen (uitsluitend te gebruiken door secretaris)"
 
 msgid "Stack trace"
 msgstr "Stack trace"

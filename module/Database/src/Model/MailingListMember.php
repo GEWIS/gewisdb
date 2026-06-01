@@ -126,12 +126,6 @@ class MailingListMember
     public function setMailingList(MailingList $mailingList): void
     {
         $this->mailingList = $mailingList;
-
-        if ($mailingList->hasMailmanList()) {
-            return;
-        }
-
-        $this->setToBeCreated(false);
     }
 
     /**

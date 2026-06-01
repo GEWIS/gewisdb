@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Form;
 
+use Database\Model\ListmonkMailingList as ListmonkMailingListModel;
 use Database\Model\MailmanMailingList as MailmanMailingListModel;
 use Laminas\Filter\StringTrim;
+use Laminas\Filter\ToNull;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
@@ -14,6 +16,8 @@ use Laminas\Form\Element\Textarea;
 use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
+use Laminas\Validator\Callback;
+use Laminas\Validator\NotEmpty;
 use Laminas\Validator\StringLength;
 use Override;
 
@@ -77,6 +81,16 @@ class MailingList extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name' => 'listmonkList',
+            'type' => Select::class,
+            'options' => [
+                'label' => $this->translator->translate('Listmonk Mailing List'),
+                'empty_option' => $this->translator->translate('Choose a mailing list'),
+                'value_options' => [],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
@@ -101,6 +115,24 @@ class MailingList extends Form implements InputFilterProviderInterface
         }
 
         $this->get('mailmanList')->setValueOptions($options);
+    }
+
+    /**
+     * @param ListmonkMailingListModel[] $listmonkLists
+     */
+    public function setListmonkLists(array $listmonkLists): void
+    {
+        $options = [];
+
+        foreach ($listmonkLists as $listmonkList) {
+            $options[$listmonkList->getListmonkId()] = sprintf(
+                '%s (%s)',
+                $listmonkList->getName(),
+                $listmonkList->getListmonkId(),
+            );
+        }
+
+        $this->get('listmonkList')->setValueOptions($options);
     }
 
     /**
@@ -161,6 +193,35 @@ class MailingList extends Form implements InputFilterProviderInterface
             ],
             'mailmanList' => [
                 'required' => false,
+                'filters' => [
+                    [
+                        'name' => ToNull::class,
+                    ],
+                ],
+            ],
+            'listmonkList' => [
+                'required' => false,
+                'filters' => [
+                    [
+                        'name' => ToNull::class,
+                    ],
+                ],
+                'validators' => [
+                    [
+                        'name' => Callback::class,
+                        'options' => [
+                            'callback' => static function ($value, $context = null) {
+                                return !((new NotEmpty())->isValid($context['mailmanList'])
+                                    && (new NotEmpty())->isValid($context['listmonkList']));
+                            },
+                            'messages' => [
+                                Callback::INVALID_VALUE => $this->translator->translate(
+                                    'Mailman and Listmonk mailing lists cannot both be set at the same time',
+                                ),
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ];
     }

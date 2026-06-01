@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GEWISdb v4.4.0-32-gee1a7045\n"
+"Project-Id-Version: GEWISdb v4.5.2-59-g259c39b9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-23 20:16+0200\n"
+"POT-Creation-Date: 2026-05-31 14:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,8 +94,9 @@ msgid "A 404 error occurred"
 msgstr ""
 
 msgid ""
-"A Mailman sync is currently in progress. It is now not possible to safely "
-"update the mailing list administration, please try again in a few minutes."
+"A Mailman/Listmonk sync is currently in progress. It is now not possible to "
+"safely update the mailing list administration, please try again in a few "
+"minutes."
 msgstr ""
 
 msgid "A TU/e-username should look like sYYxxxx or YYYYxxxx."
@@ -942,17 +943,27 @@ msgstr ""
 msgid "Last Update to Membership"
 msgstr ""
 
-#, php-format
-msgid "Last fetch of available mailman lists was %s."
+msgid "Last fetch of Listmonk lists"
 msgstr ""
 
-msgid "Last fetch of mailman lists"
+#, php-format
+msgid "Last fetch of available Listmonk lists was %s."
+msgstr ""
+
+#, php-format
+msgid "Last fetch of available mailman lists was %s."
 msgstr ""
 
 msgid "Leave note"
 msgstr ""
 
 msgid "Lid"
+msgstr ""
+
+msgid "Listmonk Mailing List"
+msgstr ""
+
+msgid "Listmonk lists not being fetched"
 msgstr ""
 
 msgid "Lists"
@@ -979,13 +990,16 @@ msgstr ""
 msgid "Mailing list deleted."
 msgstr ""
 
+msgid "Mailing list sync"
+msgstr ""
+
 msgid "Mailman Mailing List"
 msgstr ""
 
-msgid "Mailman lists not being fetched"
+msgid "Mailman and Listmonk mailing lists cannot both be set at the same time"
 msgstr ""
 
-msgid "Mailman sync"
+msgid "Mailman lists not being fetched"
 msgstr ""
 
 #, php-format
@@ -1107,7 +1121,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-msgid "Name (Mailman)"
+msgid "Name (Sync)"
 msgstr ""
 
 msgid "No"
@@ -1126,6 +1140,9 @@ msgid "No data returned."
 msgstr ""
 
 msgid "No mailing list subscriptions."
+msgstr ""
+
+msgid "Not studying"
 msgstr ""
 
 msgid "Note"
@@ -1391,6 +1408,9 @@ msgstr ""
 msgid ""
 "Some of the entered information appears to be missing or incorrect. Please "
 "check your data and submit again."
+msgstr ""
+
+msgid "Special cases (secretary use only)"
 msgstr ""
 
 msgid "Stack trace"

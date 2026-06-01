@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Command\Factory;
 
-use Database\Command\MailmanSyncMembershipCommand;
+use Database\Command\MailingListFetchListsCommand;
+use Database\Service\Listmonk as ListmonkService;
 use Database\Service\Mailman as MailmanService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Override;
 use Psr\Container\ContainerInterface;
 
-class MailmanSyncMembershipCommandFactory implements FactoryInterface
+class MailingListFetchListsCommandFactory implements FactoryInterface
 {
     /**
      * @param string $requestedName
@@ -20,10 +21,12 @@ class MailmanSyncMembershipCommandFactory implements FactoryInterface
         ContainerInterface $container,
         $requestedName,
         ?array $options = null,
-    ): MailmanSyncMembershipCommand {
+    ): MailingListFetchListsCommand {
+        /** @var ListmonkService $listmonkService */
+        $listmonkService = $container->get(ListmonkService::class);
         /** @var MailmanService $mailmanService */
         $mailmanService = $container->get(MailmanService::class);
 
-        return new MailmanSyncMembershipCommand($mailmanService);
+        return new MailingListFetchListsCommand($listmonkService, $mailmanService);
     }
 }

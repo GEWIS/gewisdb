@@ -52,8 +52,7 @@ class SettingsController extends AbstractActionController
     {
         return new ViewModel([
             'lists' => $this->mailingListService->getAllLists(),
-            'mailmanLists' => $this->mailingListService->getMailmanService()->getMailingLists(),
-            'mailmanLastFetch' => $this->mailingListService->getMailmanService()->getLastFetchTime(),
+            'listmonkLastFetch' => $this->mailingListService->getListmonkService()->getLastFetchTime(),
         ]);
     }
 
@@ -61,12 +60,18 @@ class SettingsController extends AbstractActionController
     {
         $form = $this->mailingListService->getListForm();
 
-        // Each mailman list may be used for at most one db list, don't show previously used
-        $lists = array_filter(
+        // Each mailman/listmonk list may be used for at most one db list, don't show previously used
+        $mailmanLists = array_filter(
             $this->mailingListService->getMailmanService()->getMailingLists(),
             static fn ($list) => !$list->isManaged(),
         );
-        $form->setMailmanLists($lists);
+        $listmonkLists = array_filter(
+            $this->mailingListService->getListmonkService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged(),
+        );
+
+        $form->setMailmanLists($mailmanLists);
+        $form->setListmonkLists($listmonkLists);
 
         /** @var Request $request */
         $request = $this->getRequest();
@@ -100,13 +105,19 @@ class SettingsController extends AbstractActionController
 
         $form = $this->mailingListService->getListForm();
 
-        // Provide mailman lists to the creation form, ideally filter out previously used lists
+        // Provide mailman/listmonk lists to the creation form, ideally filter out previously used lists
         // except for if it used for this list (saving with the same value is allowed)
-        $lists = array_filter(
+        $mailmanLists = array_filter(
             $this->mailingListService->getMailmanService()->getMailingLists(),
             static fn ($list) => !$list->isManaged() || $list->getMailingList()->getName() === $listName,
         );
-        $form->setMailmanLists($lists);
+        $listmonkLists = array_filter(
+            $this->mailingListService->getListmonkService()->getMailingLists(),
+            static fn ($list) => !$list->isManaged() || $list->getMailingList()->getName() === $listName,
+        );
+
+        $form->setMailmanLists($mailmanLists);
+        $form->setListmonkLists($listmonkLists);
 
         /** @var Request $request */
         $request = $this->getRequest();

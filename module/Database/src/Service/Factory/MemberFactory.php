@@ -24,7 +24,6 @@ use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
 use Database\Service\MailingList as MailingListService;
-use Database\Service\Mailman as MailmanService;
 use Database\Service\Member as MemberService;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mvc\I18n\Translator as MvcTranslator;
@@ -85,8 +84,6 @@ class MemberFactory implements FactoryInterface
         $fileStorageService = $container->get(FileStorageService::class);
         /** @var MailingListService $mailingListService */
         $mailingListService = $container->get(MailingListService::class);
-        /** @var MailmanService $mailmanService */
-        $mailmanService = $container->get(MailmanService::class);
         /** @var RenewalService $renewalService */
         $renewalService = $container->get(RenewalService::class);
         /** @var UserService $userService */
@@ -119,7 +116,6 @@ class MemberFactory implements FactoryInterface
             $checkerService,
             $fileStorageService,
             $mailingListService,
-            $mailmanService,
             $renewalService,
             $userService,
             $viewRenderer,
