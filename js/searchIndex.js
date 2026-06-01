@@ -2151,16 +2151,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Command-CheckMembershipGraduateRenewalCommand.html#property_renewalService"
         },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTUeCommand",
-            "name": "CheckMembershipTUeCommand",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTUeCommand.html"
-        },                {
-            "fqsen": "\\Checker\\Command\\CheckMembershipTUeCommand\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "",
-            "url": "classes/Checker-Command-CheckMembershipTUeCommand.html#method_execute"
-        },                {
             "fqsen": "\\Checker\\Command\\CheckMembershipTypeCommand",
             "name": "CheckMembershipTypeCommand",
             "summary": "",
@@ -2310,11 +2300,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "Constructor",
             "url": "classes/Checker-Mapper-Member.html#method___construct"
-        },                {
-            "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetMembersToCheck\u0028\u0029",
-            "name": "getMembersToCheck",
-            "summary": "Get\u0020a\u0020list\u0020of\u0020members\u0020whose\u0020membership\u0020should\u0020be\u0020checked\u0020against\u0020the\u0020TU\/e\u0020student\u0020administration\u0020database.",
-            "url": "classes/Checker-Mapper-Member.html#method_getMembersToCheck"
         },                {
             "fqsen": "\\Checker\\Mapper\\Member\u003A\u003AgetEndingMembershipsWithNormalTypes\u0028\u0029",
             "name": "getEndingMembershipsWithNormalTypes",
@@ -2696,121 +2681,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Checker-Model-Error.html#property_subDecision"
         },                {
-            "fqsen": "\\Checker\\Model\\Exception\\LookupException",
-            "name": "LookupException",
-            "summary": "",
-            "url": "classes/Checker-Model-Exception-LookupException.html"
-        },                {
-            "fqsen": "\\Checker\\Model\\Exception\\LookupException\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Checker-Model-Exception-LookupException.html#method___construct"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData",
-            "name": "TueData",
-            "summary": "Object\u0020representing\u0020data\u0020from\u0020a\u0020TU\/e\u0020user",
-            "url": "classes/Checker-Model-TueData.html"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method___construct"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AsetUser\u0028\u0029",
-            "name": "setUser",
-            "summary": "Load\u0020response\u0020from\u0020TU\/e",
-            "url": "classes/Checker-Model-TueData.html#method_setUser"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AstudiesAtTue\u0028\u0029",
-            "name": "studiesAtTue",
-            "summary": "Check\u0020if\u0020current\u0020TU\/e\u0020student\u0020is\u0020studying\u0020at\u0020TU\/e",
-            "url": "classes/Checker-Model-TueData.html#method_studiesAtTue"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AstudiesAtDepartment\u0028\u0029",
-            "name": "studiesAtDepartment",
-            "summary": "Check\u0020if\u0020current\u0020TU\/e\u0020student\u0020is\u0020enrolled\u0020at\u0020department",
-            "url": "classes/Checker-Model-TueData.html#method_studiesAtDepartment"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AgetStatus\u0028\u0029",
-            "name": "getStatus",
-            "summary": "Get\u0020status\u0020of\u0020last\u0020lookup\nStatus\u0020of\u0020object\u003A\n\u002D1\u0020\u003D\u0020no\u0020data\u0020loaded,\n0\u0020\u003D\u0020success,\n1\u0020\u003D\u0020error,\n404\u0020\u003D\u0020user\u0020not\u0020found",
-            "url": "classes/Checker-Model-TueData.html#method_getStatus"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_isValid"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AgetUsername\u0028\u0029",
-            "name": "getUsername",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_getUsername"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AgetEmail\u0028\u0029",
-            "name": "getEmail",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_getEmail"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AgetFirstName\u0028\u0029",
-            "name": "getFirstName",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_getFirstName"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AgetInitials\u0028\u0029",
-            "name": "getInitials",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_getInitials"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AcomputedPrefixName\u0028\u0029",
-            "name": "computedPrefixName",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_computedPrefixName"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AcomputedLastName\u0028\u0029",
-            "name": "computedLastName",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_computedLastName"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AgetRegistrations\u0028\u0029",
-            "name": "getRegistrations",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_getRegistrations"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AgetChangedOn\u0028\u0029",
-            "name": "getChangedOn",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_getChangedOn"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AtoArray\u0028\u0029",
-            "name": "toArray",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#method_toArray"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003AcompareData\u0028\u0029",
-            "name": "compareData",
-            "summary": "Function\u0020to\u0020check\u0020how\u0020similar\u0020data\u0020is\u0020to\u0020a\u0020given\u0020user",
-            "url": "classes/Checker-Model-TueData.html#method_compareData"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003A\u0024client",
-            "name": "client",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#property_client"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003A\u0024status",
-            "name": "status",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#property_status"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003A\u0024data",
-            "name": "data",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#property_data"
-        },                {
-            "fqsen": "\\Checker\\Model\\TueData\u003A\u003A\u0024config",
-            "name": "config",
-            "summary": "",
-            "url": "classes/Checker-Model-TueData.html#property_config"
-        },                {
             "fqsen": "\\Checker\\Module",
             "name": "Module",
             "summary": "",
@@ -2885,16 +2755,6 @@ Search.appendIndex(
             "name": "checkKeyWithdrawalTime",
             "summary": "",
             "url": "classes/Checker-Service-Checker.html#method_checkKeyWithdrawalTime"
-        },                {
-            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AtueDataObject\u0028\u0029",
-            "name": "tueDataObject",
-            "summary": "",
-            "url": "classes/Checker-Service-Checker.html#method_tueDataObject"
-        },                {
-            "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckAtTUe\u0028\u0029",
-            "name": "checkAtTUe",
-            "summary": "Checks\u0020that\u0020\u0022ordinary\u0022\u0020members\u0020are\u0020still\u0020enrolled\u0020at\u0020the\u0020TU\/e.\u0020If\u0020not,\u0020their\u0020membership\u0020should\u0020expire\u0020at\u0020the\u0020end\nof\u0020the\u0020current\u0020association\u0020year.\u0020This\u0020does\u0020not\u0020actually\u0020update\u0020their\u0020membership\u0020type,\u0020as\u0020that\u0020is\u0020still\u0020valid\u0020for\nthe\u0020remainder\u0020of\u0020the\u0020current\u0020association\u0020year.",
-            "url": "classes/Checker-Service-Checker.html#method_checkAtTUe"
         },                {
             "fqsen": "\\Checker\\Service\\Checker\u003A\u003AcheckProperMembershipType\u0028\u0029",
             "name": "checkProperMembershipType",
@@ -3115,11 +2975,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Checker-Service-Member.html#method___construct"
-        },                {
-            "fqsen": "\\Checker\\Service\\Member\u003A\u003AgetMembersToCheck\u0028\u0029",
-            "name": "getMembersToCheck",
-            "summary": "Fetch\u0020some\u0020members\u0020whose\u0020membership\u0020status\u0020should\u0020be\u0020checked.",
-            "url": "classes/Checker-Service-Member.html#method_getMembersToCheck"
         },                {
             "fqsen": "\\Checker\\Service\\Member\u003A\u003AgetEndingMembershipsWithNormalTypes\u0028\u0029",
             "name": "getEndingMembershipsWithNormalTypes",
@@ -4266,16 +4121,6 @@ Search.appendIndex(
             "summary": "Remove\u0020address\u0020action.",
             "url": "classes/Database-Controller-MemberController.html#method_removeAddressAction"
         },                {
-            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AtueLookupAction\u0028\u0029",
-            "name": "tueLookupAction",
-            "summary": "Lookup\u0020TUe\u0020data\u0020action",
-            "url": "classes/Database-Controller-MemberController.html#method_tueLookupAction"
-        },                {
-            "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AtueRequestAction\u0028\u0029",
-            "name": "tueRequestAction",
-            "summary": "Lookup\u0020TUe\u0020data\u0020action\u0020\u0028JSON\u0020API\u0029",
-            "url": "classes/Database-Controller-MemberController.html#method_tueRequestAction"
-        },                {
             "fqsen": "\\Database\\Controller\\MemberController\u003A\u003AupdatesAction\u0028\u0029",
             "name": "updatesAction",
             "summary": "Show\u0020all\u0020pending\u0020member\u0020updates.",
@@ -5088,7 +4933,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Form\\MemberApprove",
             "name": "MemberApprove",
-            "summary": "",
+            "summary": "2026\u002D05\u003A\u0020Removed\u0020tueData\u0020from\u0020approve\u0020form.\u0020Class\u0020kept\u0020to\u0020allow\u0020for\u0020manual\u0020process\u0020implementation.",
             "url": "classes/Database-Form-MemberApprove.html"
         },                {
             "fqsen": "\\Database\\Form\\MemberApprove\u003A\u003A__construct\u0028\u0029",
@@ -7365,6 +7210,11 @@ Search.appendIndex(
             "name": "isEngDPhD",
             "summary": "",
             "url": "classes/Database-Model-Enums-Studies.html#method_isEngDPhD"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisMcsStudy\u0028\u0029",
+            "name": "isMcsStudy",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-Studies.html#method_isMcsStudy"
         },                {
             "fqsen": "\\Database\\Model\\Enums\\Studies\u003A\u003AisDataScience\u0028\u0029",
             "name": "isDataScience",
@@ -11130,11 +10980,6 @@ Search.appendIndex(
             "name": "getProspectiveMember",
             "summary": "Get\u0020prospective\u0020member\u0020info",
             "url": "classes/Database-Service-Member.html#method_getProspectiveMember"
-        },                {
-            "fqsen": "\\Database\\Service\\Member\u003A\u003AgetTueData\u0028\u0029",
-            "name": "getTueData",
-            "summary": "Get\u0020TU\/e\u0020data\u0020of\u0020a\u0020member",
-            "url": "classes/Database-Service-Member.html#method_getTueData"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AsetSupremum\u0028\u0029",
             "name": "setSupremum",
@@ -15755,11 +15600,6 @@ Search.appendIndex(
             "name": "Model",
             "summary": "",
             "url": "namespaces/checker-model.html"
-        },                {
-            "fqsen": "\\Checker\\Model\\Exception",
-            "name": "Exception",
-            "summary": "",
-            "url": "namespaces/checker-model-exception.html"
         },                {
             "fqsen": "\\Checker\\Service",
             "name": "Service",
