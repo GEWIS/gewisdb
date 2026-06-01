@@ -1,3 +1,10 @@
+## [v4.6.0](https://github.com/GEWIS/gewisdb/tree/v4.6.0) (2026-06-01)
+* Allow for founding organs with members that have >1 function on foundation
+* Introduces Listmonk mailing list sync functionality (to replace Mailman)
+* Allow changing study of Member
+* Remove TU/e integration for verifying study status
+* Development environment improvements: upgrade to Psalm 6, allow rootless docker
+
 ## [v4.5.2](https://github.com/GEWIS/gewisdb/tree/v4.5.2) (2026-05-12)
 
 * Add Digital Innovation Officer, deprecate Community Development Officer
