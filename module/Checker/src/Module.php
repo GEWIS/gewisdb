@@ -9,7 +9,6 @@ use Checker\Command\CheckDatabaseCommand;
 use Checker\Command\CheckDischargesCommand;
 use Checker\Command\CheckMembershipExpirationCommand;
 use Checker\Command\CheckMembershipGraduateRenewalCommand;
-use Checker\Command\CheckMembershipTUeCommand;
 use Checker\Command\CheckMembershipTypeCommand;
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
 use Checker\Command\Factory\CheckMembershipGraduateRenewalCommandFactory;
@@ -59,7 +58,6 @@ class Module
                 CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipExpirationCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipGraduateRenewalCommand::class => CheckMembershipGraduateRenewalCommandFactory::class,
-                CheckMembershipTUeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipTypeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
                 InstallationService::class => InstallationServiceFactory::class,

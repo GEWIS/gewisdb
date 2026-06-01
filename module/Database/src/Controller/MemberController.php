@@ -754,34 +754,6 @@ class MemberController extends AbstractActionController
     }
 
     /**
-     * Lookup TUe data action
-     *
-     * Gets the TUe data (optionally with a user ID provided)
-     */
-    public function tueLookupAction(): ViewModel
-    {
-        $username = $this->params()->fromQuery('u');
-
-        return new ViewModel(['username' => $username]);
-    }
-
-    /**
-     * Lookup TUe data action (JSON API)
-     *
-     * Returns the TUe data for a given user id
-     */
-    public function tueRequestAction(): JsonModel
-    {
-        $username = $this->params()->fromQuery('u');
-        $data = $this->checkerService->tueDataObject();
-        $data->setUser($username);
-
-        return new JsonModel(
-            $data->toArray(),
-        );
-    }
-
-    /**
      * Show all pending member updates.
      */
     public function updatesAction(): ViewModel

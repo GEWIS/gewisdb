@@ -5,11 +5,6 @@
       <code>$decision[$subDecisionType]</code>
     </PossiblyUndefinedArrayOffset>
   </file>
-  <file src="module/Checker/src/Model/TueData.php">
-    <PossiblyUndefinedArrayOffset occurrences="1">
-      <code>$this-&gt;data['registrations']</code>
-    </PossiblyUndefinedArrayOffset>
-  </file>
   <file src="module/Database/src/Form/OrganRegulation.php">
     <PossiblyInvalidArrayOffset occurrences="1">
       <code>$option['value']</code>

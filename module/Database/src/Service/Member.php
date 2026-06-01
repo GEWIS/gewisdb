@@ -7,8 +7,6 @@ namespace Database\Service;
 use Application\Model\Enums\AddressTypes;
 use Application\Model\Enums\MembershipTypes;
 use Application\Service\FileStorage as FileStorageService;
-use Checker\Model\Exception\LookupException;
-use Checker\Model\TueData;
 use Checker\Service\Checker as CheckerService;
 use Checker\Service\Renewal as RenewalService;
 use Database\Form\Address as AddressForm;
@@ -60,6 +58,7 @@ use function array_intersect;
 use function array_merge;
 use function bin2hex;
 use function count;
+use function date;
 use function in_array;
 use function mb_encode_mimeheader;
 use function random_bytes;
@@ -407,18 +406,6 @@ class Member
             $member->addList($mailingListMember);
         }
 
-        // If this was requested, update the data with the TU/e data
-        // Assume that this checkbox is only set if the data can be retrieved correctly
-        // so we don't catch any errors
-        if (isset($membershipData['updatedata'])) {
-            $tuedata = $this->getCheckerService()->tueDataObject();
-            $tuedata->setUser($member->getTueUsername());
-            $member->setInitials($tuedata->getInitials());
-            $member->setFirstName($tuedata->getFirstName());
-            $member->setMiddleName($tuedata->computedPrefixName());
-            $member->setLastName($tuedata->computedLastName());
-        }
-
         // Add authentication key to allow external updates.
         $member->setAuthenticationKey($this->generateAuthenticationKey());
 
@@ -457,8 +444,7 @@ class Member
      *     member: ?ProspectiveMemberModel,
      *     form: ?MemberApproveForm,
      *     canDelete: ?bool,
-     *     tueData: ?TueData,
-     *     tueStatus: ?array<array-key, string[]>,
+     *     approveMessages: ?array<array-key, string[]>,
      * }
      */
     public function getProspectiveMember(int $id): array
@@ -470,60 +456,38 @@ class Member
                 'member' => null,
                 'form' => null,
                 'canDelete' => null,
-                'tueData' => null,
-                'tueStatus' => null,
+                'approveMessages' => null,
             ];
         }
 
-        $tueData = $this->getCheckerService()->tueDataObject();
-        $tueStatus = [];
+        $approveMessages = [];
 
-        try {
-            $tueData->setUser($member->getTueUsername());
+        // During the remainder of 2026, show a warning.
+        if (2026 >= date('Y')) {
+            $approveMessages[] = [
+                'info',
+                // phpcs:ignore -- user-visible strings should not be split
+                '<b>Warning:</b> TU/e data is no longer automatically being checked as of 2026. Suggestions are based on member-inputted information.',
+            ];
+        }
 
-            if (!$tueData->isValid()) {
-                $tueStatus[] = [
-                    'info',
-                    'No data was returned.',
-                ];
-            } else {
-                $similar = $tueData->compareData(
-                    firstName: $member->getFirstName(),
-                    prefixName: $member->getMiddleName(),
-                    lastName: $member->getLastName(),
-                    initials: $member->getInitials(),
-                );
-
-                if ($similar > 3) {
-                    $tueStatus[] = [
-                        'danger',
-                        // phpcs:ignore -- user-visible strings should not be split
-                        '<b>Warning:</b> Data is not likely to be similar. Requires ' . $similar . ' edits. Please check if the TU/e data matches the data entered by the member before approving membership.',
-                    ];
-                } elseif ($similar > 0) {
-                    $tueStatus[] = [
-                        'info',
-                        '<b>Info:</b> ' . $similar . ' edits needed to correct name. Data likely correct.',
-                    ];
-                }
-
-                if ($tueData->studiesAtDepartment()) {
-                    $tueStatus[] = [
-                        'success',
-                        // phpcs:ignore -- user-visible strings should not be split
-                        '<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>.',
-                    ];
-                } else {
-                    $tueStatus[] = [
-                        'danger',
-                        '<b>Warning:</b> Member does not study at department.',
-                    ];
-                }
-            }
-        } catch (LookupException $e) {
-            $tueStatus[] = [
+        if ($member->getStudy()->isMcsStudy()) {
+            $approveMessages[] = [
+                'success',
+                // phpcs:ignore -- user-visible strings should not be split
+                '<b>Info:</b> Member studies at department. Recommended membership type: <strong>Gewoon lid</strong>.',
+            ];
+        } elseif ($member->getStudy()->isEngDPhD()) {
+            $approveMessages[] = [
+                'warning',
+                // phpcs:ignore -- user-visible strings should not be split
+                '<b>Warning:</b> Member is EngD/PhD candidate. Recommended membership type: <strong>Extern lid</strong>.',
+            ];
+        } else {
+            $approveMessages[] = [
                 'danger',
-                $e->getMessage(),
+                // phpcs:ignore -- user-visible strings should not be split
+                '<b>Warning:</b> Member does not study at department, manual check needed.',
             ];
         }
 
@@ -531,33 +495,8 @@ class Member
             'member' => $member,
             'form' => $member->canBeApproved() ? $this->memberApproveForm : null,
             'canDelete' => $member->canBeDeleted(),
-            'tueData' => $tueData,
-            'tueStatus' => $tueStatus,
+            'approveMessages' => $approveMessages,
         ];
-    }
-
-    /**
-     * Get TU/e data of a member
-     *
-     * @return TueData|null for member or null if no such data is available
-     */
-    public function getTueData(MemberModel $member): ?TueData
-    {
-        if (null !== ($tueUsername = $member->getTueUsername())) {
-            $tuedata = $this->getCheckerService()->tueDataObject();
-
-            try {
-                $tuedata->setUser($tueUsername);
-            } catch (LookupException) {
-                return null;
-            }
-
-            if ($tuedata->isValid()) {
-                return $tuedata;
-            }
-        }
-
-        return null;
     }
 
     /**
@@ -1130,7 +1069,6 @@ class Member
      * @return array{
      *     member: MemberModel,
      *     form: MemberEditForm,
-     *     tueData: ?TueData,
      * }
      */
     public function getMemberEditForm(MemberModel $member): array
@@ -1141,7 +1079,6 @@ class Member
         return [
             'member' => $member,
             'form' => $form,
-            'tueData' => $this->getTueData($member),
         ];
     }
 

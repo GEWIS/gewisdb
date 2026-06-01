@@ -467,24 +467,6 @@ return [
                             ],
                         ],
                     ],
-                    'tuelookup' => [
-                        'type' => Literal::class,
-                        'options' => [
-                            'route' => '/tuelookup',
-                            'defaults' => [
-                                'action' => 'tueLookup',
-                            ],
-                        ],
-                    ],
-                    'tuerequest' => [
-                        'type' => Literal::class,
-                        'options' => [
-                            'route' => '/tuerequest',
-                            'defaults' => [
-                                'action' => 'tueRequest',
-                            ],
-                        ],
-                    ],
                     'updates' => [
                         'type' => Literal::class,
                         'options' => [

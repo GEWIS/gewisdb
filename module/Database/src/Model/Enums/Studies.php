@@ -121,6 +121,11 @@ enum Studies: string implements FormSelectable
         ]);
     }
 
+    public function isMcsStudy(): bool
+    {
+        return !$this->isSpecial() && !$this->isEngDPhD();
+    }
+
     public function isDataScience(): bool
     {
         return in_array($this, [
