@@ -9,6 +9,7 @@ use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Mapper\Member as MemberMapper;
+use Database\Service\Audit as AuditService;
 use Database\Service\Mailman as MailmanService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Override;
@@ -35,6 +36,8 @@ class MailmanFactory implements FactoryInterface
         $memberMapper = $container->get(MemberMapper::class);
         /** @var ConfigService $configService */
         $configService = $container->get(ConfigService::class);
+        /** @var AuditService $auditService */
+        $auditService = $container->get(AuditService::class);
         /** @var array $mailmanConfig */
         $mailmanConfig = $container->get('config')['mailman_api'];
 
@@ -45,6 +48,7 @@ class MailmanFactory implements FactoryInterface
             $memberMapper,
             $configService,
             $mailmanConfig,
+            $auditService,
         );
     }
 }

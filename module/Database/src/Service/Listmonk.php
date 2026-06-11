@@ -10,9 +10,13 @@ use Database\Mapper\ListmonkMailingList as ListmonkMailingListMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\Member as MemberMapper;
+use Database\Model\AuditMailingListMembership;
+use Database\Model\Enums\MailingListMemberAction;
+use Database\Model\Enums\MailingListMemberOrigin;
 use Database\Model\ListmonkMailingList as ListmonkMailingListModel;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
+use Database\Service\Audit as AuditService;
 use DateInterval;
 use DateTime;
 use Laminas\Http\Client;
@@ -43,6 +47,7 @@ class Listmonk
         private readonly ListmonkMailingListMapper $listmonkMailingListMapper,
         private readonly MailingListMemberMapper $mailingListMemberMapper,
         private readonly MemberMapper $memberMapper,
+        private readonly AuditService $auditService,
         private readonly ConfigService $configService,
         private readonly array $listmonkConfig,
     ) {
@@ -506,6 +511,20 @@ class Listmonk
             return;
         }
 
+        $member = $mailingListMember->getMember();
+
+        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+            $this->auditService->persist(
+                AuditMailingListMembership::create(
+                    MailingListMemberAction::Remove,
+                    MailingListMemberOrigin::SyncListmonk,
+                    $member,
+                    $mailingListMember->getMailingList(),
+                    $mailingListMember->getEmail(),
+                ),
+            );
+        }
+
         // Find the subscriber by email
         $subscribers = $this->performListmonkRequest('subscribers', Request::METHOD_GET, [
             'query' => $this->buildListmonkEmailQuery($email),
@@ -606,6 +625,20 @@ class Listmonk
             return;
         }
 
+        $member = $mailingListMember->getMember();
+
+        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+            $this->auditService->persist(
+                AuditMailingListMembership::create(
+                    MailingListMemberAction::Remove,
+                    MailingListMemberOrigin::SyncListmonk,
+                    $member,
+                    $mailingListMember->getMailingList(),
+                    $mailingListMember->getEmail(),
+                ),
+            );
+        }
+
         $this->mailingListMemberMapper->remove($mailingListMember);
     }
 
@@ -671,12 +704,22 @@ class Listmonk
                     );
 
                     if (!$dryRun) {
-                        $mailingListMember = new MailingListMemberModel();
-                        $mailingListMember->setMailingList($mailingList);
-                        $mailingListMember->setMember($foundMember);
-                        $mailingListMember->setEmail($subscriber['email']);
-                        $mailingListMember->setToBeCreated(false);
-                        $this->mailingListMemberMapper->persist($mailingListMember);
+                        $this->auditService->persist(
+                            AuditMailingListMembership::create(
+                                MailingListMemberAction::Add,
+                                MailingListMemberOrigin::SyncListmonk,
+                                $foundMember,
+                                $mailingList,
+                                $subscriber['email'],
+                            ),
+                        );
+
+                        $newMailingListMember = new MailingListMemberModel();
+                        $newMailingListMember->setMailingList($mailingList);
+                        $newMailingListMember->setMember($foundMember);
+                        $newMailingListMember->setEmail($subscriber['email']);
+                        $newMailingListMember->setToBeCreated(false);
+                        $this->mailingListMemberMapper->persist($newMailingListMember);
                     }
                 }
             }

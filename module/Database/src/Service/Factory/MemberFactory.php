@@ -23,6 +23,7 @@ use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\Member as MemberMapper;
 use Database\Mapper\MemberUpdate as MemberUpdateMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
+use Database\Service\Audit as AuditService;
 use Database\Service\MailingList as MailingListService;
 use Database\Service\Member as MemberService;
 use Laminas\Mail\Transport\TransportInterface;
@@ -84,6 +85,8 @@ class MemberFactory implements FactoryInterface
         $fileStorageService = $container->get(FileStorageService::class);
         /** @var MailingListService $mailingListService */
         $mailingListService = $container->get(MailingListService::class);
+        /** @var AuditService $auditService */
+        $auditService = $container->get(AuditService::class);
         /** @var RenewalService $renewalService */
         $renewalService = $container->get(RenewalService::class);
         /** @var UserService $userService */
@@ -120,6 +123,7 @@ class MemberFactory implements FactoryInterface
             $userService,
             $viewRenderer,
             $mailTransport,
+            $auditService,
             $config,
         );
     }

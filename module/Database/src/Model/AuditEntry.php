@@ -34,6 +34,7 @@ use function strip_tags;
 )]
 #[DiscriminatorMap(
     value: [
+        'mailing_list_membership' => AuditMailingListMembership::class,
         'note' => AuditNote::class,
         'renewal' => AuditRenewal::class,
     ],
