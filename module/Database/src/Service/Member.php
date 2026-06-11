@@ -28,8 +28,11 @@ use Database\Mapper\MemberUpdate as MemberUpdateMapper;
 use Database\Mapper\ProspectiveMember as ProspectiveMemberMapper;
 use Database\Model\Address as AddressModel;
 use Database\Model\AuditEntry as AuditEntryModel;
+use Database\Model\AuditMailingListMembership;
 use Database\Model\AuditNote as AuditNoteModel;
 use Database\Model\AuditRenewal as AuditRenewalModel;
+use Database\Model\Enums\MailingListMemberAction;
+use Database\Model\Enums\MailingListMemberOrigin;
 use Database\Model\Enums\Studies;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
@@ -93,6 +96,7 @@ class Member
         private readonly UserService $userService,
         private readonly PhpRenderer $viewRenderer,
         private readonly TransportInterface $mailTransport,
+        private readonly Audit $auditService,
         private readonly array $config,
     ) {
     }
@@ -634,7 +638,7 @@ class Member
         $member->setSupremum('optout');
         $member->setHidden(true);
         $member->setDeleted(true);
-        $this->unsubscribeLists($member);
+        $this->unsubscribeLists($member, false);
 
         $this->getMemberMapper()->persist($member);
     }
@@ -889,6 +893,17 @@ class Member
 
             $membership = $this->mailingListMemberMapper->findByListAndMember($list, $member);
             $membership->setToBeDeleted(true);
+
+            $this->auditService->persist(
+                AuditMailingListMembership::create(
+                    MailingListMemberAction::Remove,
+                    MailingListMemberOrigin::Manual,
+                    $member,
+                    $list,
+                    $membership->getEmail(),
+                    $this->userService->getIdentity(),
+                ),
+            );
         }
 
         // Mailing lists to add
@@ -904,6 +919,17 @@ class Member
             $mailingListMember->setMember($member);
             // Force cascade by adding to member.
             $member->addList($mailingListMember);
+
+            $this->auditService->persist(
+                AuditMailingListMembership::create(
+                    MailingListMemberAction::Add,
+                    MailingListMemberOrigin::Manual,
+                    $member,
+                    $list,
+                    $mailingListMember->getEmail(),
+                    $this->userService->getIdentity(),
+                ),
+            );
         }
 
         // Simply cascade persist through member.
@@ -912,10 +938,30 @@ class Member
         return $member;
     }
 
-    public function unsubscribeLists(MemberModel $member): void
-    {
+    /**
+     * Unsubscribe a member from all mailing lists. This is used when removing/clearing a member.
+     * We never use recordAudit = true yet, but it is implemented to avoid forgetting it.
+     */
+    public function unsubscribeLists(
+        MemberModel $member,
+        bool $recordAudit = true,
+    ): void {
         foreach ($member->getMailingListMemberships() as $mailingListMembership) {
             $mailingListMembership->setToBeDeleted(true);
+
+            if ($recordAudit) {
+                $this->auditService->persist(
+                    AuditMailingListMembership::create(
+                        MailingListMemberAction::Remove,
+                        MailingListMemberOrigin::Manual,
+                        $member,
+                        $mailingListMembership->getMailingList(),
+                        $mailingListMembership->getEmail(),
+                        $this->userService->getIdentity(),
+                    ),
+                );
+            }
+
             $this->mailingListMemberMapper->persist($mailingListMembership);
         }
     }

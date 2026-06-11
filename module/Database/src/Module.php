@@ -109,7 +109,9 @@ use Database\Model\SubDecision\Foundation as FoundationModel;
 use Database\Model\SubDecision\Key\Granting as KeyGrantingModel;
 use Database\Model\SubDecision\Reappointment as ReappointmentModel;
 use Database\Service\Api as ApiService;
+use Database\Service\Audit as AuditService;
 use Database\Service\Factory\ApiFactory as ApiServiceFactory;
+use Database\Service\Factory\AuditFactory as AuditServiceFactory;
 use Database\Service\Factory\FrontPageFactory as FrontPageServiceFactory;
 use Database\Service\Factory\ListmonkFactory as ListmonkServiceFactory;
 use Database\Service\Factory\MailingListFactory as MailingListServiceFactory;
@@ -181,6 +183,7 @@ class Module
                 ApiService::class => ApiServiceFactory::class,
                 FrontPageService::class => FrontPageServiceFactory::class,
                 ListmonkService::class => ListmonkServiceFactory::class,
+                AuditService::class => AuditServiceFactory::class,
                 MailingListService::class => MailingListServiceFactory::class,
                 MailmanService::class => MailmanServiceFactory::class,
                 MeetingService::class => MeetingServiceFactory::class,
