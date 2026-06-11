@@ -14,6 +14,7 @@ use Database\Service\Member as MemberService;
 use DateTime;
 use DateTimeZone;
 use Monolog\Logger;
+use Stripe\ApiResource;
 use Stripe\Charge;
 use Stripe\Checkout\Session as CheckoutSession;
 use Stripe\Event;
@@ -24,7 +25,9 @@ use Stripe\StripeClient;
 use Stripe\Webhook;
 use UnexpectedValueException;
 
+use function get_debug_type;
 use function intval;
+use function sprintf;
 use function time;
 
 class Stripe
@@ -225,6 +228,17 @@ class Stripe
                     $charge = $charge->id;
                 }
 
+                if (null === $charge) {
+                    $this->logger->error(
+                        sprintf(
+                            'No charge found for payment intent %s. Not refunding.',
+                            $checkoutSession->getPaymentIntentId(),
+                        ),
+                    );
+
+                    return null;
+                }
+
                 // Create a refund for the specific Charge.
                 $this->getClient()->refunds->create(['charge' => $charge]);
             } catch (ApiErrorException $e) {
@@ -253,9 +267,15 @@ class Stripe
     public function hasRefund(ProspectiveMemberModel $prospectiveMember): ?bool
     {
         if (null !== ($checkoutSession = $this->checkoutSessionMapper->findLatest($prospectiveMember))) {
+            $paymentIntentId = $checkoutSession->getPaymentIntentId();
+            if (null === $paymentIntentId) {
+                // We have no PaymentIntent, so we cannot have a Refund.
+                return null;
+            }
+
             try {
                 return 0 !== $this->getClient()->refunds->all([
-                    'payment_intent' => $checkoutSession->getPaymentIntentId(),
+                    'payment_intent' => $paymentIntentId,
                     'limit' => 1,
                 ])->count();
             } catch (ApiErrorException $e) {
@@ -288,15 +308,14 @@ class Stripe
      */
     public function handleEvent(Event $event): void
     {
-        if ('charge.refund.updated' === $event->type) {
-            /** @var Refund $refund */
-            $refund = $event->data->object;
+        if (Event::CHARGE_REFUND_UPDATED === $event->type) {
+            $refund = $this->getObjectFromEvent($event, Refund::class);
             $status = $refund->status;
 
             if (
-                'failed' === $status
-                || 'requires_action' === $status
-                || 'canceled' === $status
+                Refund::STATUS_FAILED === $status
+                || Refund::STATUS_REQUIRES_ACTION === $status
+                || Refund::STATUS_CANCELED === $status
             ) {
                 // Send e-mail to secretary that there was an issue while processing the refund. They will have to ask
                 // the ApplicatieBeheerCommissie and/or treasurer to determine the cause/what needs to happen to get it
@@ -307,8 +326,7 @@ class Stripe
             return;
         }
 
-        /** @var CheckoutSession $session */
-        $session = $event->data->object;
+        $session = $this->getObjectFromEvent($event, CheckoutSession::class);
         $storedCheckoutSession = $this->checkoutSessionMapper->findById($session->id);
 
         if (null === $storedCheckoutSession) {
@@ -366,12 +384,15 @@ class Stripe
         $paymentLink = $this->paymentLinkMapper->findPaymentByProspectiveMember(intval($session->client_reference_id));
 
         switch ($event->type) {
-            case 'checkout.session.expired':
+            case Event::CHECKOUT_SESSION_EXPIRED:
                 // The prospective member did not complete the checkout within 24 hours. We mark the stored checkout
                 // session as expired.
                 $storedCheckoutSession->setState(CheckoutSessionStates::Expired);
 
-                if (null !== $session->after_expiration) {
+                if (
+                    null !== $session->after_expiration &&
+                    null !== $session->after_expiration->recovery
+                ) {
                     // We are handling the expiration of the very first Checkout Session of the prospective member. The
                     // Recovery URL is valid for 30 days.
                     $storedCheckoutSession->setExpiration(DateTime::createFromFormat(
@@ -398,7 +419,7 @@ class Stripe
                 }
 
                 break;
-            case 'checkout.session.completed':
+            case Event::CHECKOUT_SESSION_COMPLETED:
                 // The prospective member has completed the checkout but the payment may be delayed. If the payment is
                 // not delayed we directly mark the stored checkout session as 'PAID', otherwise it will be 'PENDING'.
                 if ('paid' === $session->payment_status) {
@@ -412,14 +433,14 @@ class Stripe
                 $paymentLink?->setUsed(true);
 
                 break;
-            case 'checkout.session.async_payment_succeeded':
+            case Event::CHECKOUT_SESSION_ASYNC_PAYMENT_SUCCEEDED:
                 // A delayed payment has succeeded. So we mark the stored checkout session as 'PAID'.
                 $storedCheckoutSession->setState(CheckoutSessionStates::Paid);
                 $storedCheckoutSession->setPaymentIntentId($session->payment_intent);
                 $paymentLink?->setUsed(true);
 
                 break;
-            case 'checkout.session.async_payment_failed':
+            case Event::CHECKOUT_SESSION_ASYNC_PAYMENT_FAILED:
                 // A delayed payment has failed.
                 $storedCheckoutSession->setState(CheckoutSessionStates::Failed);
                 $paymentLink?->setUsed(false);
@@ -447,8 +468,8 @@ class Stripe
     }
 
     /**
-     * Get the Stripe client. This should never be directly accessible, helper functions will handle required actions to
-     * prevent unwanted access.
+     * Get the Stripe client.
+     * This should never be directly accessible, helper functions will handle required actions.
      */
     private function getClient(): StripeClient
     {
@@ -456,5 +477,84 @@ class Stripe
             'api_key' => $this->config['secret_key'],
             'stripe_version' => $this->config['api_version'],
         ]);
+    }
+
+    /**
+     * Get the data.object of an event, only implemented for return types needed.
+     * Types from https://docs.stripe.com/api/events/types
+     *
+     * @template T of ApiResource
+     *
+     * @param class-string<T> $type
+     *
+     * @return T
+     */
+    private function getObjectFromEvent(
+        Event $event,
+        string $type,
+    ): ApiResource {
+        switch ($event->type) {
+            // charge.* -> Charge
+            case Event::CHARGE_CAPTURED:
+            case Event::CHARGE_EXPIRED:
+            case Event::CHARGE_FAILED:
+            case Event::CHARGE_PENDING:
+            case Event::CHARGE_REFUNDED:
+            case Event::CHARGE_SUCCEEDED:
+            case Event::CHARGE_UPDATED:
+                $returnType = Charge::class;
+                break;
+
+            // refund.* -> Refund
+            case Event::REFUND_CREATED:
+            case Event::REFUND_FAILED:
+            case Event::REFUND_UPDATED:
+            // charge.refund.* -> Refund
+            case Event::CHARGE_REFUND_UPDATED:
+                $returnType = Refund::class;
+                break;
+
+            // checkout.session.* -> CheckoutSession
+            case Event::CHECKOUT_SESSION_ASYNC_PAYMENT_FAILED:
+            case Event::CHECKOUT_SESSION_ASYNC_PAYMENT_SUCCEEDED:
+            case Event::CHECKOUT_SESSION_COMPLETED:
+            case Event::CHECKOUT_SESSION_EXPIRED:
+                $returnType = CheckoutSession::class;
+                break;
+
+            default:
+                throw new UnexpectedValueException(
+                    sprintf(
+                        'Unhandled event type, got %s',
+                        $event->type,
+                    ),
+                );
+        }
+
+        if ($type !== $returnType) {
+            throw new UnexpectedValueException(
+                sprintf(
+                    'Requested type %s does not match expected type %s for event type %s',
+                    $type,
+                    $returnType,
+                    $event->type,
+                ),
+            );
+        }
+
+        /** @psalm-suppress UndefinedMagicPropertyFetch */
+        $object = $event->data->object;
+
+        if ($object instanceof $type) {
+            return $object;
+        }
+
+        throw new UnexpectedValueException(
+            sprintf(
+                'Data object of event is not of expected type %s, got %s',
+                $type,
+                get_debug_type($object),
+            ),
+        );
     }
 }

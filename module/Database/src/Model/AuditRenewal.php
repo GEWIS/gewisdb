@@ -29,8 +29,7 @@ use Override;
 ])]
 class AuditRenewal extends AuditEntry
 {
-    /** @psalm-suppress InvalidClassConstantType */
-    private bool $IMMUTABLE = true;
+    protected const bool IMMUTABLE = true;
 
     /**
      * Expiration value before this renewal took place

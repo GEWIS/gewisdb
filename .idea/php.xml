@@ -115,7 +115,7 @@
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
       <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mail" />
+      <path value="$PROJECT_DIR$/vendor/plesk/laminas-mail" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-crypt" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-form" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-math" />
@@ -125,7 +125,7 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-inputfilter" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-paginator" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-developer-tools" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-mime" />
+      <path value="$PROJECT_DIR$/vendor/plesk/laminas-mime" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-hydrator" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-filter" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-router" />
@@ -204,7 +204,7 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />

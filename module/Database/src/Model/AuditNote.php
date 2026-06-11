@@ -28,8 +28,7 @@ use Override;
 ])]
 class AuditNote extends AuditEntry
 {
-    /** @psalm-suppress InvalidClassConstantType */
-    private bool $IMMUTABLE = false;
+    protected const bool IMMUTABLE = false;
 
     /**
      * The note itself

@@ -43,9 +43,11 @@ abstract class AuditEntry
     use TimestampableTrait;
 
     /**
-     * TODO PHP8.3: make this a typed constant so we can change the value later
+     * Whether this entry type can be removed/changed
+     * While this one can technically be private, all child classes need to have this 'protected'
+     * to allow isDeletable to work, so we make it protected here to enforce this
      */
-    private bool $IMMUTABLE = true;
+    protected const bool IMMUTABLE = true;
 
     /**
      * Entry ID.
@@ -170,7 +172,8 @@ abstract class AuditEntry
      */
     final public function isDeletable(): bool
     {
-        return $this->IMMUTABLE;
+        // phpcs:ignore SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants.DisallowedLateStaticBindingForConstant -- intentionally overridable
+        return !static::IMMUTABLE;
     }
 
     /**

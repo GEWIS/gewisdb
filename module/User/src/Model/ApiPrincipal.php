@@ -63,7 +63,7 @@ class ApiPrincipal
         nullable: true,
         enumType: ApiPermissions::class,
     )]
-    protected array $permissions;
+    protected ?array $permissions = null;
 
     /**
      * @psalm-ignore-nullable-return
@@ -115,7 +115,7 @@ class ApiPrincipal
      */
     public function getPermissions(): array
     {
-        return $this->permissions;
+        return $this->permissions ?? [];
     }
 
     /**
@@ -135,10 +135,10 @@ class ApiPrincipal
 
     public function can(ApiPermissions $permission): bool
     {
-        if (in_array(ApiPermissions::All, $this->permissions, true)) {
+        if (in_array(ApiPermissions::All, $this->getPermissions(), true)) {
             return true;
         }
 
-        return in_array($permission, $this->permissions, true);
+        return in_array($permission, $this->getPermissions(), true);
     }
 }
