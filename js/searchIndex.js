@@ -6536,10 +6536,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-AuditEntry.html#method_getStringArguments"
         },                {
-            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003A\u0024IMMUTABLE",
+            "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003AIMMUTABLE",
             "name": "IMMUTABLE",
-            "summary": "TODO\u0020PHP8.3\u003A\u0020make\u0020this\u0020a\u0020typed\u0020constant\u0020so\u0020we\u0020can\u0020change\u0020the\u0020value\u0020later",
-            "url": "classes/Database-Model-AuditEntry.html#property_IMMUTABLE"
+            "summary": "Whether\u0020this\u0020entry\u0020type\u0020can\u0020be\u0020removed\/changed\nWhile\u0020this\u0020one\u0020can\u0020technically\u0020be\u0020private,\u0020all\u0020child\u0020classes\u0020need\u0020to\u0020have\u0020this\u0020\u0027protected\u0027\nto\u0020allow\u0020isDeletable\u0020to\u0020work,\u0020so\u0020we\u0020make\u0020it\u0020protected\u0020here\u0020to\u0020enforce\u0020this",
+            "url": "classes/Database-Model-AuditEntry.html#constant_IMMUTABLE"
         },                {
             "fqsen": "\\Database\\Model\\AuditEntry\u003A\u003A\u0024id",
             "name": "id",
@@ -6581,10 +6581,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-AuditNote.html#method_getStringArguments"
         },                {
-            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003A\u0024IMMUTABLE",
+            "fqsen": "\\Database\\Model\\AuditNote\u003A\u003AIMMUTABLE",
             "name": "IMMUTABLE",
-            "summary": "TODO\u0020PHP8.3\u003A\u0020make\u0020this\u0020a\u0020typed\u0020constant\u0020so\u0020we\u0020can\u0020change\u0020the\u0020value\u0020later",
-            "url": "classes/Database-Model-AuditNote.html#property_IMMUTABLE"
+            "summary": "Whether\u0020this\u0020entry\u0020type\u0020can\u0020be\u0020removed\/changed\nWhile\u0020this\u0020one\u0020can\u0020technically\u0020be\u0020private,\u0020all\u0020child\u0020classes\u0020need\u0020to\u0020have\u0020this\u0020\u0027protected\u0027\nto\u0020allow\u0020isDeletable\u0020to\u0020work,\u0020so\u0020we\u0020make\u0020it\u0020protected\u0020here\u0020to\u0020enforce\u0020this",
+            "url": "classes/Database-Model-AuditNote.html#constant_IMMUTABLE"
         },                {
             "fqsen": "\\Database\\Model\\AuditNote\u003A\u003A\u0024note",
             "name": "note",
@@ -6641,10 +6641,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-AuditRenewal.html#method_getStringArguments"
         },                {
-            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003A\u0024IMMUTABLE",
+            "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003AIMMUTABLE",
             "name": "IMMUTABLE",
-            "summary": "TODO\u0020PHP8.3\u003A\u0020make\u0020this\u0020a\u0020typed\u0020constant\u0020so\u0020we\u0020can\u0020change\u0020the\u0020value\u0020later",
-            "url": "classes/Database-Model-AuditRenewal.html#property_IMMUTABLE"
+            "summary": "Whether\u0020this\u0020entry\u0020type\u0020can\u0020be\u0020removed\/changed\nWhile\u0020this\u0020one\u0020can\u0020technically\u0020be\u0020private,\u0020all\u0020child\u0020classes\u0020need\u0020to\u0020have\u0020this\u0020\u0027protected\u0027\nto\u0020allow\u0020isDeletable\u0020to\u0020work,\u0020so\u0020we\u0020make\u0020it\u0020protected\u0020here\u0020to\u0020enforce\u0020this",
+            "url": "classes/Database-Model-AuditRenewal.html#constant_IMMUTABLE"
         },                {
             "fqsen": "\\Database\\Model\\AuditRenewal\u003A\u003A\u0024oldExpiration",
             "name": "oldExpiration",
@@ -11493,8 +11493,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetClient\u0028\u0029",
             "name": "getClient",
-            "summary": "Get\u0020the\u0020Stripe\u0020client.\u0020This\u0020should\u0020never\u0020be\u0020directly\u0020accessible,\u0020helper\u0020functions\u0020will\u0020handle\u0020required\u0020actions\u0020to\nprevent\u0020unwanted\u0020access.",
+            "summary": "Get\u0020the\u0020Stripe\u0020client.",
             "url": "classes/Database-Service-Stripe.html#method_getClient"
+        },                {
+            "fqsen": "\\Database\\Service\\Stripe\u003A\u003AgetObjectFromEvent\u0028\u0029",
+            "name": "getObjectFromEvent",
+            "summary": "Get\u0020the\u0020data.object\u0020of\u0020an\u0020event,\u0020only\u0020implemented\u0020for\u0020return\u0020types\u0020needed.",
+            "url": "classes/Database-Service-Stripe.html#method_getObjectFromEvent"
         },                {
             "fqsen": "\\Database\\Service\\Stripe\u003A\u003A\u0024logger",
             "name": "logger",

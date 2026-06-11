@@ -379,6 +379,22 @@
 
 
 
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/Database-Model-AuditEntry.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -protected">
+    <a class="" href="classes/Database-Model-AuditEntry.html#constant_IMMUTABLE">IMMUTABLE</a>
+    <span>
+        &nbsp;: bool&nbsp;= true                            </span>
+</dt>
+<dd>Whether this entry type can be removed/changed
+While this one can technically be private, all child classes need to have this &#039;protected&#039;
+to allow isDeletable to work, so we make it protected here to enforce this</dd>
+
+    </dl>
 
 
 <h4 id="toc-properties">
@@ -414,13 +430,6 @@
                         &nbsp;: int|null            </span>
 </dt>
 <dd>Entry ID.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-AuditEntry.html#property_IMMUTABLE">$IMMUTABLE</a>
-    <span>
-                        &nbsp;: bool            </span>
-</dt>
-<dd>TODO PHP8.3: make this a typed constant so we can change the value later</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Database-Model-AuditEntry.html#property_member">$member</a>
@@ -573,6 +582,46 @@ Not implemented</dd>
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/Database-Model-AuditEntry.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -protected ">
+    <h4 class="phpdocumentor-element__name" id="constant_IMMUTABLE">
+        IMMUTABLE
+        <a href="classes/Database-Model-AuditEntry.html#constant_IMMUTABLE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">50</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether this entry type can be removed/changed
+While this one can technically be private, all child classes need to have this &#039;protected&#039;
+to allow isDeletable to work, so we make it protected here to enforce this</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">IMMUTABLE</span>
+    = <span class="phpdocumentor-signature__default-value">true</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+            </section>
 
         
     <section class="phpdocumentor-properties">
@@ -702,7 +751,7 @@ Not implemented</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -771,7 +820,7 @@ Not implemented</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -826,44 +875,6 @@ Not implemented</dd>
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_IMMUTABLE">
-        $IMMUTABLE
-        <a href="classes/Database-Model-AuditEntry.html#property_IMMUTABLE" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">48</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">TODO PHP8.3: make this a typed constant so we can change the value later</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$IMMUTABLE</span>
-     = <span class="phpdocumentor-signature__default-value">true</span></code>
-
-    
-    
-    
-
-        
-        
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_member">
         $member
         <a href="classes/Database-Model-AuditEntry.html#property_member" class="headerlink"><i class="fas fa-link"></i></a>
@@ -874,7 +885,7 @@ Not implemented</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -951,7 +962,7 @@ Not implemented</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
@@ -1025,7 +1036,7 @@ to always link at least one of the linkable objects. Currently only member is po
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
@@ -1063,7 +1074,7 @@ to always link at least one of the linkable objects. Currently only member is po
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">114</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 
     </aside>
 
@@ -1101,7 +1112,7 @@ to always link at least one of the linkable objects. Currently only member is po
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">152</span>
 
     </aside>
 
@@ -1180,7 +1191,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
@@ -1218,7 +1229,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
@@ -1256,7 +1267,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
     </aside>
 
@@ -1295,7 +1306,7 @@ supplied as an argument to sprintf</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
@@ -1427,7 +1438,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -1471,7 +1482,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
@@ -1515,7 +1526,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -1559,7 +1570,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">192</span>
 
     </aside>
 
@@ -1597,7 +1608,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">184</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 
     </aside>
 
@@ -1635,7 +1646,7 @@ Not implemented</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">179</span>
+    <span class="phpdocumentor-element-found-in__line">182</span>
 
     </aside>
 
@@ -1762,10 +1773,17 @@ Not implemented</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/Database-Model-AuditEntry.html#toc-constants">Constants</a></li>
                                                             <li><a href="classes/Database-Model-AuditEntry.html#toc-properties">Properties</a></li>
                                                             <li><a href="classes/Database-Model-AuditEntry.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Database-Model-AuditEntry.html#constant_IMMUTABLE">IMMUTABLE</a></li>
+                                            </ul>
+                </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
@@ -1774,7 +1792,6 @@ Not implemented</p>
                                                     <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt">$updatedAt</a></li>
                                                     <li class=""><a href="classes/Database-Model-AuditEntry.html#property_user">$user</a></li>
                                                     <li class=""><a href="classes/Database-Model-AuditEntry.html#property_id">$id</a></li>
-                                                    <li class=""><a href="classes/Database-Model-AuditEntry.html#property_IMMUTABLE">$IMMUTABLE</a></li>
                                                     <li class=""><a href="classes/Database-Model-AuditEntry.html#property_member">$member</a></li>
                                             </ul>
                 </li>
