@@ -79,7 +79,6 @@ class Member
         $reportMember->setExpiration($member->getExpiration());
         $reportMember->setBirth($member->getBirth());
         $reportMember->setChangedOn($member->getChangedOn());
-        $reportMember->setPaid($member->getPaid());
         $reportMember->setSupremum($member->getSupremum());
         $reportMember->setHidden($member->getHidden());
         $reportMember->setDeleted($member->getDeleted());

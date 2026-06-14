@@ -131,12 +131,6 @@ class Member
     private DateTime $expiration;
 
     /**
-     * How much the member has paid for membership. 0 by default.
-     */
-    #[Column(type: 'integer')]
-    private int $paid = 0;
-
-    /**
      * If the member receives a 'supremum'.
      */
     #[Column(
@@ -461,22 +455,6 @@ class Member
     public function setMembershipEndsOn(?DateTime $membershipEndsOn): void
     {
         $this->membershipEndsOn = $membershipEndsOn;
-    }
-
-    /**
-     * Get how much has been paid.
-     */
-    public function getPaid(): int
-    {
-        return $this->paid;
-    }
-
-    /**
-     * Set how much has been paid.
-     */
-    public function setPaid(int $paid): void
-    {
-        $this->paid = $paid;
     }
 
     /**
