@@ -48,11 +48,13 @@ migration-diff: replenish
 		@docker compose exec -u root web chown www-data:www-data /code/module/Database/migrations/
 		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_default
 		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \;
+		@docker compose exec -u www-data -T web find /code/module/Database/migrations -type f -user www-data -exec sed -i '/^[[:space:]]*\/\//d' {} \;
 		@docker cp "$(shell docker compose ps -q web)":/code/module/Database/migrations ./module/Database
 		@docker compose exec -u root web chown -R root:root /code/module/Database/migrations/
 		@docker compose exec -u root web chown www-data:www-data /code/module/Report/migrations/
 		@docker compose exec -u www-data -T web ./orm migrations:diff --object-manager doctrine.entitymanager.orm_report
 		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sed -i '/CREATE SCHEMA public/d' {} \;
+		@docker compose exec -u www-data -T web find /code/module/Report/migrations -type f -user www-data -exec sed -i '/^[[:space:]]*\/\//d' {} \;
 		@docker cp "$(shell docker compose ps -q web)":/code/module/Report/migrations ./module/Report
 		@docker compose exec -u root web chown -R root:root /code/module/Report/migrations/
 

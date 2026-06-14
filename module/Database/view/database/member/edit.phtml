@@ -126,19 +126,6 @@ $element->setAttribute('placeholder', $element->getLabel());
     </div>
 
 <?php
-$element = $form->get('paid');
-$element->setAttribute('class', 'form-control');
-$element->setAttribute('placeholder', $element->getLabel());
-?>
-    <div class="form-group">
-        <label for="<?= $element->getName() ?>" class="control-label col-sm-4"><?= $element->getLabel() ?></label>
-        <div class="col-sm-8">
-            <?= $this->formInput($element) ?>
-            <?= $this->formElementErrors($element) ?>
-        </div>
-    </div>
-
-<?php
 $element = $form->get('hidden');
 $element->setAttribute('class', 'checkbox form-control-checkbox');
 ?>

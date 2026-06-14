@@ -378,7 +378,8 @@ class Member
     }
 
     /**
-     * Get the member type.
+     * Get the current member type.
+     * It is possible that the member will have a different type in the future!
      */
     public function getType(): MembershipTypes
     {
@@ -443,6 +444,8 @@ class Member
 
     /**
      * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     * It is possible that for an ordinary member that will become external in the future, this date is the end
+     * date of their external membership, not of their current 'ordinary' membership.
      */
     public function getMembershipEndsOn(): ?DateTime
     {

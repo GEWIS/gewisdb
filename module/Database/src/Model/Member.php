@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
-use Application\Model\Enums\MembershipTypes;
 use Database\Model\Enums\Studies;
 use Database\Model\SubDecision\Installation;
 use DateTime;
@@ -70,15 +69,6 @@ class Member
     private string $firstName;
 
     /**
-     * Generation.
-     *
-     * This is the year that this member became a GEWIS member. This is not
-     * a academic year, but rather a calendar year.
-     */
-    #[Column(type: 'integer')]
-    private int $generation;
-
-    /**
      * TU/e username.
      */
     #[Column(
@@ -96,54 +86,22 @@ class Member
     private Studies $study = Studies::Unknown;
 
     /**
-     * Member type.
-     *
-     * This can be one of the following, as defined by the GEWIS statuten:
-     *
-     * - ordinary
-     * - external
-     * - graduate
-     * - honorary
-     *
-     * You can find the GEWIS statuten here: https://gewis.nl/association/regulations/articles-of-association.
-     *
-     * See artikel 7.
-     */
-    #[Column(
-        enumType: MembershipTypes::class,
-    )]
-    private MembershipTypes $type;
-
-    /**
-     * Last changed date of membership.
+     * Last changed date of member.
      */
     #[Column(type: 'date')]
     private DateTime $changedOn;
 
     /**
-     * Keeps track of whether a student is still studying (either at the Department of Mathematics and Computer Science,
-     * the TU/e in general, or another institution).
+     * Memberships of this member
+     *
+     * @var Collection<array-key, Membership>
      */
-    #[Column(type: 'boolean')]
-    private bool $isStudying;
-
-    /**
-     * Date when the real membership ("ordinary", "external" or "honorary") of the member will have ended, i.e., from
-     * this date onwards they are "graduate". If `null`, the expiration is rolling and will be silently renewed if the
-     * member still meets the requirements as set forth in the bylaws and internal regulations.
-     */
-    #[Column(
-        type: 'date',
-        nullable: true,
+    #[OneToMany(
+        targetEntity: Membership::class,
+        mappedBy: 'member',
+        cascade: ['persist', 'remove'],
     )]
-    private ?DateTime $membershipEndsOn = null;
-
-    /**
-     * The date on which the membership of the member is set to expire and will therefore have to be renewed, which
-     * happens either automatically or has to be done manually, as set forth in the bylaws and internal regulations.
-     */
-    #[Column(type: 'date')]
-    private DateTime $expiration;
+    private Collection $memberships;
 
     /**
      * Last date membership status was checked.
@@ -159,12 +117,6 @@ class Member
      */
     #[Column(type: 'date')]
     private DateTime $birth;
-
-    /**
-     * How much the member has paid for membership. 0 by default.
-     */
-    #[Column(type: 'integer')]
-    private int $paid = 0;
 
     /**
      * If the member receives a 'supremum'
@@ -273,6 +225,7 @@ class Member
         $this->addresses = new ArrayCollection();
         $this->installations = new ArrayCollection();
         $this->mailingListMemberships = new ArrayCollection();
+        $this->memberships = new ArrayCollection();
     }
 
     /**
@@ -445,19 +398,31 @@ class Member
     }
 
     /**
-     * Get the generation.
+     * Get the generation of the member.
      */
     public function getGeneration(): int
     {
-        return $this->generation;
-    }
+        $oldestMembership = null;
 
-    /**
-     * Set the generation.
-     */
-    public function setGeneration(int $generation): void
-    {
-        $this->generation = $generation;
+        foreach ($this->getMemberships() as $membership) {
+            if (null !== $oldestMembership && $membership->getStartDate() >= $oldestMembership->getStartDate()) {
+                continue;
+            }
+
+            $oldestMembership = $membership;
+        }
+
+        if (null === $oldestMembership) {
+            return 0;
+        }
+
+        $startDate = $oldestMembership->getStartDate();
+
+        if ($startDate->format('m') < 7) {
+            return (int) $startDate->format('Y') - 1;
+        }
+
+        return (int) $startDate->format('Y');
     }
 
     /**
@@ -493,35 +458,11 @@ class Member
     }
 
     /**
-     * Get the member type.
-     */
-    public function getType(): MembershipTypes
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set the member type.
-     */
-    public function setType(MembershipTypes $type): void
-    {
-        $this->type = $type;
-    }
-
-    /**
      * Get the expiration date.
      */
     public function getExpiration(): DateTime
     {
-        return $this->expiration;
-    }
-
-    /**
-     * Set the expiration date.
-     */
-    public function setExpiration(DateTime $expiration): void
-    {
-        $this->expiration = $expiration;
+        return $this->computeMembershipEndDate(formalMemberOnly: false) ?? new DateTime('0001-01-01 00:00:00');
     }
 
     /**
@@ -545,7 +486,7 @@ class Member
     }
 
     /**
-     * Get the date of the last membership change.
+     * Get the date of the last member change.
      */
     public function getChangedOn(): DateTime
     {
@@ -553,7 +494,7 @@ class Member
     }
 
     /**
-     * Set the date of the last membership change.
+     * Set the date of the last member change.
      */
     public function setChangedOn(DateTime $changedOn): void
     {
@@ -561,35 +502,110 @@ class Member
     }
 
     /**
-     * Get whether the member is still studying.
-     */
-    public function getIsStudying(): bool
-    {
-        return $this->isStudying;
-    }
-
-    /**
-     * Set whether the member is still studying.
-     */
-    public function setIsStudying(bool $isStudying): void
-    {
-        $this->isStudying = $isStudying;
-    }
-
-    /**
      * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
      */
-    public function getMembershipEndsOn(): ?DateTime
+    public function getMembershipEndsOn(): DateTime
     {
-        return $this->membershipEndsOn;
+        return $this->computeMembershipEndDate(formalMemberOnly: true) ?? new DateTime('0001-01-01 00:00:00');
     }
 
     /**
-     * Set the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     * Compute the date of end of membership, or null if none
      */
-    public function setMembershipEndsOn(?DateTime $membershipEndsOn): void
+    private function computeMembershipEndDate(bool $formalMemberOnly): ?DateTime
     {
-        $this->membershipEndsOn = $membershipEndsOn;
+        $expiration = null;
+
+        foreach ($this->getMemberships() as $membership) {
+            if (!$membership->getType()->isFormalMember() && $formalMemberOnly) {
+                continue;
+            }
+
+            if (null !== $expiration && $membership->getEndDate() <= $expiration) {
+                continue;
+            }
+
+            $expiration = $membership->getEndDate();
+        }
+
+        return $expiration;
+    }
+
+    /**
+     * Get the memberships of this member.
+     *
+     * @return Collection<array-key, Membership>
+     */
+    public function getMemberships(): Collection
+    {
+        return $this->memberships;
+    }
+
+    /**
+     * Add a membership to this member.
+     */
+    public function addMembership(Membership $membership): void
+    {
+        if ($membership->getMember() !== $this) {
+            throw new RuntimeException('Membership does not belong to this member.');
+        }
+
+        $this->memberships[] = $membership;
+    }
+
+    /**
+     * Delete all memberships of this member.
+     * This is only used in the case of clearing/deleting a member.
+     * In all other cases, the membership should be updated.
+     */
+    public function unsetMemberships(): void
+    {
+        foreach ($this->getMemberships() as $membership) {
+            $this->memberships->removeElement($membership);
+        }
+    }
+
+    /**
+     * Get the current membership of this member, or null if none.
+     */
+    public function getCurrentMembership(): ?Membership
+    {
+        foreach ($this->getMemberships() as $membership) {
+            if ($membership->isCurrent()) {
+                return $membership;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the current membership of this member, or the last if expired.
+     */
+    public function getCurrentOrLastMembership(): ?Membership
+    {
+        if (null !== $this->getCurrentMembership()) {
+            return $this->getCurrentMembership();
+        }
+
+        return $this->getLastMembership();
+    }
+
+    /**
+     * Get the last (potentially expired, potentially future) membership
+     */
+    public function getLastMembership(): ?Membership
+    {
+        $lastMembership = null;
+        foreach ($this->getMemberships() as $membership) {
+            if (null !== $lastMembership && $membership->getEndDate() <= $lastMembership->getEndDate()) {
+                continue;
+            }
+
+            $lastMembership = $membership;
+        }
+
+        return $lastMembership;
     }
 
     /**
@@ -606,22 +622,6 @@ class Member
     public function setLastCheckedOn(?DateTime $lastCheckedOn): void
     {
         $this->lastCheckedOn = $lastCheckedOn;
-    }
-
-    /**
-     * Get how much has been paid.
-     */
-    public function getPaid(): int
-    {
-        return $this->paid;
-    }
-
-    /**
-     * Set how much has been paid.
-     */
-    public function setPaid(int $paid): void
-    {
-        $this->paid = $paid;
     }
 
     /**

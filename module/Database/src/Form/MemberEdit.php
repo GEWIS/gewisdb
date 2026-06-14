@@ -18,7 +18,6 @@ use Laminas\Form\Form;
 use Laminas\InputFilter\InputFilterProviderInterface;
 use Laminas\Mvc\I18n\Translator;
 use Laminas\Validator\Callback;
-use Laminas\Validator\Digits;
 use Laminas\Validator\EmailAddress;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
@@ -99,14 +98,6 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                 'label' => $translator->translate('Study'),
                 'value_options' => Studies::getValueOptions($translator, false, true),
                 'empty_option' => $translator->translate('Select a study'),
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'paid',
-            'type' => Text::class,
-            'options' => [
-                'label' => $this->translator->translate('Paid (Amount)'),
             ],
         ]);
 
@@ -199,14 +190,6 @@ class MemberEdit extends Form implements InputFilterProviderInterface
                             'min' => 2,
                             'max' => 32,
                         ],
-                    ],
-                ],
-            ],
-            'paid' => [
-                'required' => true,
-                'validators' => [
-                    [
-                        'name' => Digits::class,
                     ],
                 ],
             ],

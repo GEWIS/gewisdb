@@ -37,6 +37,7 @@ use Database\Model\Enums\Studies;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\Member as MemberModel;
+use Database\Model\Membership as MembershipModel;
 use Database\Model\MemberUpdate as MemberUpdateModel;
 use Database\Model\PaymentLink;
 use Database\Model\ProspectiveMember as ProspectiveMemberModel;
@@ -59,6 +60,7 @@ use User\Service\UserService;
 use function array_diff;
 use function array_intersect;
 use function array_merge;
+use function assert;
 use function bin2hex;
 use function count;
 use function date;
@@ -340,47 +342,16 @@ class Member
         $date->setTime(0, 0);
         $member->setChangedOn($date);
 
-        // set generation (first year of the current association year), membership type and associated expiration of
-        // said membership (always at the end of the current association year).
-        $member->setType(MembershipTypes::from($membershipData['type']));
-        $expiration = clone $date;
-
-        if ($expiration->format('m') >= 7) {
-            $generationYear = (int) $expiration->format('Y');
-            $expirationYear = (int) $expiration->format('Y') + 1;
-        } else {
-            $generationYear = (int) $expiration->format('Y') - 1;
-            $expirationYear = (int) $expiration->format('Y');
-        }
-
-        switch ($member->getType()) {
-            case MembershipTypes::Ordinary:
-                $member->setIsStudying(true);
-                $member->setMembershipEndsOn(null);
-                break;
-            case MembershipTypes::External:
-                $member->setIsStudying(true);
-                $member->setMembershipEndsOn($expiration);
-                break;
-            case MembershipTypes::Graduate:
-                $member->setIsStudying(false);
-                // This is a weird situation, as such define the expiration of the membership to be super early. Actual
-                // value will have to be edited manually.
-                $membershipEndsOn = clone $expiration;
-                $membershipEndsOn->setDate(1, 1, 1);
-                $member->setMembershipEndsOn($membershipEndsOn);
-                break;
-            case MembershipTypes::Honorary:
-                $member->setIsStudying(false);
-                $member->setMembershipEndsOn(null);
-                // infinity (1000 is close enough, right?)
-                $expirationYear += 1000;
-                break;
-        }
-
-        $expiration->setDate($expirationYear, 7, 1);
-        $member->setExpiration($expiration);
-        $member->setGeneration($generationYear);
+        // creating the first membership for the member
+        // sensible defaults are set in the creation
+        $membershipType = MembershipTypes::from($membershipData['type']);
+        $membership = new MembershipModel(
+            member: $member,
+            type: $membershipType,
+            startDate: null,
+            endDate: null,
+        );
+        $member->addMembership($membership);
 
         // add address
         $member->addAddresses($prospectiveMember->getAddresses());
@@ -414,7 +385,7 @@ class Member
         $member->setAuthenticationKey($this->generateAuthenticationKey());
 
         // Set paid automatically.
-        $member->setPaid(20);
+        $membership->setPaid(20);
 
         // Remove prospectiveMember model
         $this->getMemberMapper()->persist($member);
@@ -625,19 +596,15 @@ class Member
         $date = new DateTime('0001-01-01 00:00:00');
 
         $member->setEmail(null);
-        $member->setGeneration(0);
         $member->setTueUsername(null);
         $member->setStudy(Studies::Unknown);
-        $member->setIsStudying(false);
         $member->setLastCheckedOn(null);
         $member->setChangedOn(new DateTime());
-        $member->setMembershipEndsOn($date);
-        $member->setExpiration($date);
         $member->setBirth($date);
-        $member->setPaid(0);
         $member->setSupremum('optout');
         $member->setHidden(true);
         $member->setDeleted(true);
+        $member->unsetMemberships();
         $this->unsubscribeLists($member, false);
 
         $this->getMemberMapper()->persist($member);
@@ -670,7 +637,7 @@ class Member
     }
 
     /**
-     * Edit membership.
+     * Edit membership by secretary.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
@@ -678,12 +645,12 @@ class Member
         MemberModel $member,
         array $data,
     ): ?MemberModel {
-        $form = $this->getMemberTypeForm();
+        $form = $this->getMemberTypeForm($member);
 
         // It is not possible to have another membership type after being an honorary member and there does not exist a
         // good transition to a different membership type (because of the dates/expiration etc.).
-        if (MembershipTypes::Honorary === $member->getType()) {
-            throw new RuntimeException('Er is geen pad waarop dit lid correct een ander lidmaatschapstype kan krijgen');
+        if (MembershipTypes::Honorary === $member->getCurrentOrLastMembership()->getType()) {
+            throw new RuntimeException('Unable to change membership type of honorary member.');
         }
 
         $form->setData($data);
@@ -703,49 +670,46 @@ class Member
         $renewalAudit = new AuditRenewalModel();
         $renewalAudit->setOldExpiration($member->getExpiration());
 
-        // update expiration and 'membership ends on' date (should become effective at the end of the previous
-        // association year).
-        $expiration = clone $date;
+        // We always deal with the last membership
+        $lastMembership = $member->getLastMembership();
 
-        if ($expiration->format('m') >= 7) {
-            $year = (int) $expiration->format('Y') + 1;
+        // We assume that there is a membership (always the case for non-cleared members)
+        assert($lastMembership instanceof MembershipModel);
+
+        // Start date
+        if (null === $data['changeDate']) {
+            $changeDate = new DateTime();
         } else {
-            $year = (int) $expiration->format('Y');
+            $changeDate = new DateTime($data['changeDate']);
         }
 
-        switch (MembershipTypes::from($data['type'])) {
-            case MembershipTypes::Ordinary:
-                $member->setIsStudying(true);
-                $member->setMembershipEndsOn(null);
-                $member->setType(MembershipTypes::Ordinary);
-                break;
-            case MembershipTypes::External:
-                $member->setIsStudying(true);
-                $membershipEndsOn = clone $expiration;
-                $membershipEndsOn->setDate($year, 7, 1);
-                $member->setMembershipEndsOn($membershipEndsOn);
-                $member->setType(MembershipTypes::External);
-                break;
-            case MembershipTypes::Graduate:
-                $member->setIsStudying(false);
-                $membershipEndsOn = clone $expiration;
-                $membershipEndsOn->setDate($year - 1, 7, 1);
-                $member->setMembershipEndsOn($membershipEndsOn);
-                $member->setType(MembershipTypes::Graduate);
-                break;
-            case MembershipTypes::Honorary:
-                $member->setIsStudying(false);
-                // infinity (1000 is close enough, right?)
-                $year += 1000;
-                $member->setMembershipEndsOn(null);
-                // Directly apply the honorary membership type.
-                $member->setType(MembershipTypes::Honorary);
-                break;
+        $newType = MembershipTypes::from($data['type']);
+
+        // We always change at the start of a day
+        $changeDate->setTime(0, 0);
+
+        // We will never alter anything before the start of the last membership
+        if ($changeDate < $lastMembership->getStartDate()) {
+            $changeDate = $lastMembership->getStartDate();
         }
 
-        // At the end of the current association year.
-        $expiration->setDate($year, 7, 1);
-        $member->setExpiration($expiration);
+        // or after the end date of the last membership
+        if ($changeDate > $lastMembership->getEndDate()) {
+            $changeDate = $lastMembership->getEndDate();
+        }
+
+        if ($changeDate->getTimestamp() === $lastMembership->getStartDate()->getTimestamp()) {
+            $lastMembership->setType($newType);
+        } else {
+            $lastMembership->setEndDate($changeDate);
+            $newMembership = new MembershipModel(
+                member: $member,
+                type: $newType,
+                startDate: $changeDate,
+                endDate: null,
+            );
+            $member->addMembership($newMembership);
+        }
 
         $renewalAudit->setNewExpiration($member->getExpiration());
         $renewalAudit->setUser($this->userService->getIdentity());
@@ -757,6 +721,8 @@ class Member
     }
 
     /**
+     * Extend the duration of the membership.
+     *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
      */
     public function expiration(
@@ -770,12 +736,13 @@ class Member
             return null;
         }
 
-        // Make new expiration from previous expiration, but always make sure it is the end of the association year.
-        $newExpiration = clone $member->getExpiration();
-        $year = (int) $newExpiration->format('Y') + 1;
-        $newExpiration->setDate($year, 7, 1);
-
-        $member->setExpiration($newExpiration);
+        $newMembership = new MembershipModel(
+            member: $member,
+            type: $member->getCurrentOrLastMembership()->getType(),
+            startDate: $member->getCurrentOrLastMembership()->getEndDate(),
+            endDate: null,
+        );
+        $member->addMembership($newMembership);
 
         $this->getMemberMapper()->persist($member);
 
@@ -1010,10 +977,14 @@ class Member
      */
     public function getFrontpageData(): array
     {
+        $totalInclExpired = $this->getMemberMapper()->countMembers(true, true, true);
+        $totalExclExpired = $this->getMemberMapper()->countMembers(true, true, false);
+        $nongraduatesExclExpired = $this->getMemberMapper()->countMembers(false, true, false);
+
         return [
-            'members' => $this->getMemberMapper()->countMembers(),
-            'graduates' => $this->getMemberMapper()->countGraduates(),
-            'expired' => $this->getMemberMapper()->countMembers(true, true),
+            'members' => $nongraduatesExclExpired,
+            'graduates' => $totalExclExpired - $nongraduatesExclExpired,
+            'expired' => $totalInclExpired - $totalExclExpired,
             'prospectives' => [
                 'total' => $this->getProspectiveMemberMapper()->getRepository()->count([]),
                 'paid' => count($this->getProspectiveMemberMapper()->search('', 'paid')),
@@ -1139,9 +1110,12 @@ class Member
     /**
      * Get the member type form.
      */
-    public function getMemberTypeForm(): MemberTypeForm
+    public function getMemberTypeForm(MemberModel $member): MemberTypeForm
     {
-        return $this->memberTypeForm;
+        $form = $this->memberTypeForm;
+        $form->setMembership($member->getLastMembership());
+
+        return $form;
     }
 
     /**
@@ -1277,21 +1251,34 @@ class Member
     }
 
     /**
-     * Renew a member, assumes that the expiry date has already been set
+     * Renew a member (with existing membership type).
+     * Currently only used for renewal links.
      */
     public function renewMember(
         MemberModel $member,
         RenewalLinkModel $renewalLink,
+        DateTime $newExpiration,
     ): MemberModel {
         $member->setChangedOn(new DateTime());
-        $this->getMemberMapper()->persist($member);
+
         $renewalLink->setUsed(true);
         $this->getActionLinkMapper()->persist($renewalLink);
         $this->renewalService->sendRenewalSuccessEmail($renewalLink);
 
         // Record a renewal audit entry
         $renewalAudit = AuditRenewalModel::fromRenewalLink($renewalLink);
+        $renewalAudit->setNewExpiration($newExpiration);
         $this->addAuditEntry($member, $renewalAudit);
+
+        $newMembership = new MembershipModel(
+            member: $member,
+            type: $member->getCurrentOrLastMembership()->getType(),
+            startDate: $member->getCurrentOrLastMembership()->getEndDate(),
+            endDate: $newExpiration,
+        );
+        $member->addMembership($newMembership);
+
+        $this->getMemberMapper()->persist($member);
 
         return $member;
     }

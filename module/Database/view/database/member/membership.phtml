@@ -3,18 +3,66 @@
 declare(strict_types=1);
 
 use Application\View\HelperTrait;
+use Database\Model\Member as MemberModel;
+use Database\Form\MemberType as MemberTypeForm;
+use Laminas\Translator\TranslatorInterface;
 use Laminas\View\Renderer\PhpRenderer;
 
-/** @var PhpRenderer|HelperTrait $this */
+/**
+ * @var PhpRenderer|HelperTrait $this
+ * @var MemberModel $member
+ * @var MemberTypeForm $form
+ * @var TranslatorInterface $translator
+ */
+$translator = $this->plugin('translate')->getTranslator();
 ?>
 <h1>
     <?=
-        sprintf(
-            $this->translate('Change Membership Type of %s'),
-            $this->escapeHtml($member->getFullName()),
-        )
+    sprintf(
+        $this->translate('Change Membership Type of %s'),
+        $this->escapeHtml($member->getFullName()),
+    )
     ?>
 </h1>
+<p>
+    <?=
+    sprintf(
+        $this->translate('Currently editing membership starting from <strong>%s</strong> to <strong>%s</strong> (type <strong>%s</strong>).'),
+        $form->getMembership()->getStartDate()->format('l j F Y'),
+        $form->getMembership()->getEndDate()->format('l j F Y'),
+        $form->getMembership()->getType()->getName($translator),
+    )
+    ?><br/>
+    <?= $this->translate('Please select the new membership type and change date for the member.') ?>
+    <?= $this->translate('The change will take effect on the selected date.') ?>
+</p>
+<p>
+    <?=
+    sprintf(
+        $this->translate('Enter changes chronologically. Example: after entering a change on %s, it is not possible to enter a change for %s.'),
+        (clone $form->getMembership()->getStartDate())->add(new DateInterval('P6D'))->format('j F Y'),
+        (clone $form->getMembership()->getStartDate())->add(new DateInterval('P3D'))->format('j F Y'),
+    )
+    ?>
+</p>
+<ul>
+    <li>
+    <?=
+    sprintf(
+        $this->translate('Selecting a change date != %s will split the membership periods on that date.'),
+        $form->getMembership()->getStartDate()->format('l j F Y'),
+    )
+    ?>
+    </li>
+    <li>
+    <?=
+    sprintf(
+        $this->translate('Setting the change date to %s will (also) renew the membership.'),
+        $form->getMembership()->getEndDate()->format('l j F Y'),
+    )
+    ?>
+    </li>
+</ul>
 <?php
 $form->prepare();
 
@@ -28,10 +76,8 @@ $form->setAttribute('class', 'form-horizontal');
 <?php
 $element = $form->get('type');
 $element->setAttribute('placeholder', $element->getLabel());
-$element->setValue($member->getType()->value);
-//$element->setLabelAttributes(array('class' => 'radio-inline'));
 ?>
-    <div class="form-group">
+    <div class="form-group<?= $this->bootstrapElementError($element) ?>">
         <label for="<?= $element->getName() ?>" class="control-label col-sm-2"><?= $element->getLabel() ?></label>
         <div class="col-sm-10">
             <?php foreach ($element->getValueOptions() as $option => $text): ?>
@@ -43,6 +89,21 @@ $element->setValue($member->getType()->value);
                 </div>
             <?php endforeach ?>
         <?= $this->formElementErrors($element) ?>
+        </div>
+    </div>
+<?php
+    $element = $form->get('changeDate');
+    $element->setAttribute('class', 'form-control');
+    $element->setAttribute('placeholder', $element->getLabel());
+    $element->setLabelAttributes(array(
+        'class' => 'control-label'
+    ));
+?>
+    <div class="form-group<?= $this->bootstrapElementError($element) ?>">
+        <label for="<?= $element->getName() ?>" class="control-label col-sm-2"><?= $element->getLabel() ?></label>
+        <div class="col-sm-10">
+            <?= $this->formInput($element) ?>
+            <?= $this->formElementErrors($element) ?>
         </div>
     </div>
 

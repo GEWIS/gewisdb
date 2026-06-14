@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Checker\Mapper;
 
 use Database\Model\Member as MemberModel;
+use Database\Model\Membership as MembershipModel;
+use Database\Model\RenewalLink as RenewalLinkModel;
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * Member mapper
@@ -31,9 +34,11 @@ class Member
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('m')
-            ->from('Database\Model\Member', 'm')
+            ->from(MemberModel::class, 'm')
+            ->leftJoin('m.memberships', 'mem')
             ->where('m.authenticationKey IS NOT NULL')
-            ->andWhere('m.expiration <= CURRENT_TIMESTAMP() OR m.hidden = True');
+            ->andWhere($qb->expr()->eq('mem.startDate', '(' . $this->lastMembershipQuery()->getDQL() . ')'))
+            ->andWhere('mem.endDate <= CURRENT_TIMESTAMP() OR m.hidden = True');
 
         return $qb->getQuery()->getResult();
     }
@@ -51,19 +56,21 @@ class Member
         ?int $limit = null,
     ): array {
         $qb = $this->em->createQueryBuilder();
-        $qb->select('m')
-            ->from('Database\Model\Member', 'm')
-            ->where('m.type = \'graduate\'')
+        $qb->select('m, mem')
+            ->from(MemberModel::class, 'm')
+            ->leftJoin('m.memberships', 'mem')
+            ->where('mem.type = \'graduate\'')
             ->andWhere('m.email IS NOT NULL')
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
-            ->andWhere('m.expiration <= :expiresBefore');
+            ->andWhere($qb->expr()->eq('mem.startDate', '(' . $this->lastMembershipQuery()->getDQL() . ')'))
+            ->andWhere('mem.endDate <= :expiresBefore');
 
         $qbal = $this->em->createQueryBuilder();
         $qbal->select('rl')
-            ->from('Database\Model\RenewalLink', 'rl')
-            ->andWhere('rl.member = m.lidnr')
-            ->andWhere('rl.currentExpiration = m.expiration');
+            ->from(RenewalLinkModel::class, 'rl')
+            ->andWhere('rl.member = m')
+            ->andWhere('rl.currentExpiration = mem.endDate');
 
         $qb->setParameter('expiresBefore', $expiresBefore ?? $this->getEndOfCurrentAssociationYear());
 
@@ -76,6 +83,21 @@ class Member
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * This helper query is used for multiple queries to get the LAST membership of a member.
+     * This is not necessarily the current membership.
+     * We use the startDate because it is guaranteed to be unique in combination with member.lidnr.
+     */
+    private function lastMembershipQuery(string $memberAlias = 'm'): QueryBuilder
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('MAX(lastMem.startDate)')
+            ->from(MembershipModel::class, 'lastMem')
+            ->where('lastMem.member = ' . $memberAlias);
+
+        return $qb;
     }
 
     private function getEndOfCurrentAssociationYear(): DateTime
