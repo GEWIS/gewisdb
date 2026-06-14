@@ -23,46 +23,6 @@ class Member
     }
 
     /**
-     * Get a list of members whose membership has an end date, but who are not yet "graduate".
-     *
-     * @return MemberModel[]
-     */
-    public function getEndingMembershipsWithNormalTypes(): array
-    {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('m')
-            ->from('Database\Model\Member', 'm')
-            ->where('m.type = \'ordinary\' OR m.type = \'external\'')
-            ->andWhere('m.membershipEndsOn IS NOT NULL')
-            ->andWhere('m.expiration <= :endOfCurrentAssociationYear');
-
-        $qb->setParameter('endOfCurrentAssociationYear', $this->getEndOfCurrentAssociationYear());
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Get a list of members whose membership is set to expire, but should automatically be renewed.
-     *
-     * @return MemberModel[]
-     */
-    public function getExpiringMembershipsWithNormalTypes(): array
-    {
-        $qb = $this->em->createQueryBuilder();
-
-        $qb->select('m')
-            ->from('Database\Model\Member', 'm')
-            ->where('m.type = \'ordinary\' OR m.type = \'external\'')
-            ->andWhere('m.membershipEndsOn IS NULL')
-            ->andWhere('m.expiration <= :endOfCurrentAssociationYear');
-
-        $qb->setParameter('endOfCurrentAssociationYear', $this->getEndOfCurrentAssociationYear());
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
      * Get a list of members who are hidden or whose membership has expired.
      *
      * @return MemberModel[]

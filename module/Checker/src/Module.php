@@ -7,9 +7,7 @@ namespace Checker;
 use Checker\Command\CheckAuthenticationKeysCommand;
 use Checker\Command\CheckDatabaseCommand;
 use Checker\Command\CheckDischargesCommand;
-use Checker\Command\CheckMembershipExpirationCommand;
 use Checker\Command\CheckMembershipGraduateRenewalCommand;
-use Checker\Command\CheckMembershipTypeCommand;
 use Checker\Command\Factory\AbstractCheckerCommandFactory;
 use Checker\Command\Factory\CheckMembershipGraduateRenewalCommandFactory;
 use Checker\Mapper\Factory\InstallationFactory as InstallationMapperFactory;
@@ -56,9 +54,7 @@ class Module
                 CheckAuthenticationKeysCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDatabaseCommand::class => AbstractCheckerCommandFactory::class,
                 CheckDischargesCommand::class => AbstractCheckerCommandFactory::class,
-                CheckMembershipExpirationCommand::class => AbstractCheckerCommandFactory::class,
                 CheckMembershipGraduateRenewalCommand::class => CheckMembershipGraduateRenewalCommandFactory::class,
-                CheckMembershipTypeCommand::class => AbstractCheckerCommandFactory::class,
                 CheckerService::class => CheckerServiceFactory::class,
                 InstallationService::class => InstallationServiceFactory::class,
                 KeyService::class => KeyServiceFactory::class,

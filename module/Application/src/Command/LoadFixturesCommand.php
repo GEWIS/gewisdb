@@ -76,6 +76,9 @@ class LoadFixturesCommand extends Command
             $reportConnection->executeStatement('SET session_replication_role = \'origin\'');
         } catch (Throwable $e) {
             $output->writeln('<comment>' . $e->getMessage() . '</comment>');
+            $output->write('<comment>' . $e->getTraceAsString() . '</comment>');
+
+            return Command::FAILURE;
         }
 
         $output->writeln('<info>Loaded fixtures!</info>');
