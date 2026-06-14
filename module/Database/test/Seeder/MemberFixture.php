@@ -15,7 +15,11 @@ use Database\Model\ProspectiveMember;
 use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
+use Override;
 
+/**
+ * phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
+ */
 class MemberFixture extends AbstractFixture
 {
     public const string REF_MEMBER_STUDENT = 'student';
@@ -23,6 +27,7 @@ class MemberFixture extends AbstractFixture
     public const string REF_MEMBER_GRADUATE = 'graduate';
     public const string REF_MEMBER_PROSPECTIVE = 'prospective';
 
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $expiryDate = new DateTime();

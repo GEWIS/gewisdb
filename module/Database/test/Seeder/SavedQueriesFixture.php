@@ -7,12 +7,14 @@ namespace DatabaseTest\Seeder;
 use Database\Model\SavedQuery;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
+use Override;
 
 class SavedQueriesFixture extends AbstractFixture
 {
     public const string REF_QUERY_UNDERAGE = 'query_underage';
     public const string REF_QUERY_MEMBERDETAILS = 'query_memberdetails';
 
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         // Query for underaged members

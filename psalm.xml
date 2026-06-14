@@ -21,6 +21,7 @@
         <directory name="module/User/src"/>
         <directory name="module/Application/test"/>
         <directory name="module/Checker/test"/>
+        <directory name="module/Database/test"/>
         <file name="public/index.php"/>
         <ignoreFiles>
             <directory name="vendor"/>
