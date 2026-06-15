@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Database\Model;
 
+use Application\Extensions\Types\StringableDateTime;
 use Application\Model\Enums\MembershipTypes;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\UniqueConstraint;
 use LogicException;
 
 /**
@@ -24,26 +23,12 @@ use LogicException;
     name: 'membership_member_idx',
     columns: ['member_lidnr'],
 )]
-#[UniqueConstraint(
-    name: 'membership_unique_idx',
-    columns: ['member_lidnr', 'startDate'],
-)]
 class Membership
 {
     /**
-     * The membership ID.
-     *
-     * This is not a natural ID, but a surrogate ID, because the natural ID (member + startDate) is not
-     * very convenient to use as an ID by lack of DateTime having a __toString()
-     */
-    #[Id]
-    #[Column(type: 'integer')]
-    #[GeneratedValue(strategy: 'AUTO')]
-    private int $id;
-
-    /**
      * The member this membership belongs to.
      */
+    #[Id]
     #[ManyToOne(
         targetEntity: Member::class,
         inversedBy: 'memberships',
@@ -59,8 +44,9 @@ class Membership
     /**
      * The start date of the membership.
      */
-    #[Column(type: 'date')]
-    private DateTime $startDate;
+    #[Id]
+    #[Column(type: 'stringable_datetime')]
+    private StringableDateTime $startDate;
 
     /**
      * The end date of the membership.
@@ -124,7 +110,7 @@ class Membership
         $endDate->setTime(0, 0);
         $this->member = $member;
         $this->type = $type;
-        $this->startDate = $startDate;
+        $this->startDate = StringableDateTime::fromDateTime($startDate);
         $this->endDate = $endDate;
     }
 
@@ -143,7 +129,7 @@ class Membership
      */
     public function getStartDate(): DateTime
     {
-        return $this->startDate;
+        return $this->startDate->toDateTime();
     }
 
     // startDate should be immutable, so no setter for it

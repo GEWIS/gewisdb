@@ -21,31 +21,30 @@ final class Version20260613120619 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // Add membership table
-        $this->addSql('CREATE SEQUENCE Membership_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE Membership (id INT NOT NULL, member_lidnr INT NOT NULL, startDate DATE NOT NULL, endDate DATE NOT NULL, paid INT NOT NULL, type VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE Membership (member_lidnr INT NOT NULL, startDate TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, endDate DATE NOT NULL, paid INT NOT NULL, type VARCHAR(255) NOT NULL, PRIMARY KEY(member_lidnr, startDate))');
         $this->addSql('CREATE INDEX membership_member_idx ON Membership (member_lidnr)');
-        $this->addSql('CREATE UNIQUE INDEX membership_unique_idx ON Membership (member_lidnr, startDate)');
+        $this->addSql('COMMENT ON COLUMN Membership.startDate IS \'(DC2Type:stringable_datetime)\'');
         $this->addSql('ALTER TABLE Membership ADD CONSTRAINT FK_C9A2D155B44475EE FOREIGN KEY (member_lidnr) REFERENCES Member (lidnr) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
 
         // Assume all members were ordinary member between their generation and membership end date
         $this->addSql(<<<'SQL'
-            INSERT INTO membership("id", "member_lidnr", "startdate", "enddate", "paid", "type")
-            SELECT nextval('Membership_id_seq'), "lidnr", make_date("generation", 7, 1), "membershipendson", "paid", 'ordinary'
+            INSERT INTO membership("member_lidnr", "startdate", "enddate", "paid", "type")
+            SELECT "lidnr", make_date("generation", 7, 1), "membershipendson", "paid", 'ordinary'
             FROM "member"
             WHERE "membershipendson" IS NOT NULL AND "deleted" = FALSE
         SQL);
         // Add graduate period as graduate membership if membership end date is set
         $this->addSql(<<<'SQL'
-            INSERT INTO membership("id", "member_lidnr", "startdate", "enddate", "paid", "type")
-            SELECT nextval('Membership_id_seq'), "lidnr", "membershipendson", "expiration", 0, 'graduate'
+            INSERT INTO membership("member_lidnr", "startdate", "enddate", "paid", "type")
+            SELECT "lidnr", "membershipendson", "expiration", 0, 'graduate'
             FROM "member"
             WHERE "membershipendson" IS NOT NULL AND "membershipendson" < "expiration" AND "deleted" = FALSE
         SQL);
 
         // For members that do not have a membership end date, assume they were the same type from their generation until their expiration date.
         $this->addSql(<<<'SQL'
-            INSERT INTO membership("id", "member_lidnr", "startdate", "enddate", "paid", "type")
-            SELECT nextval('Membership_id_seq'), "lidnr", make_date("generation", 7, 1), "expiration", "paid", "type"
+            INSERT INTO membership("member_lidnr", "startdate", "enddate", "paid", "type")
+            SELECT "lidnr", make_date("generation", 7, 1), "expiration", "paid", "type"
             FROM "member"
             WHERE "membershipendson" IS NULL AND "deleted" = FALSE
         SQL);
@@ -81,7 +80,6 @@ final class Version20260613120619 extends AbstractMigration
         $this->addSql('ALTER TABLE member ALTER COLUMN generation SET NOT NULL, ALTER COLUMN "type" SET NOT NULL, ALTER COLUMN isstudying SET NOT NULL, ALTER COLUMN expiration SET NOT NULL, ALTER COLUMN paid SET NOT NULL');
 
         // Drop membership table
-        $this->addSql('DROP SEQUENCE Membership_id_seq CASCADE');
         $this->addSql('ALTER TABLE Membership DROP CONSTRAINT FK_C9A2D155B44475EE');
         $this->addSql('DROP TABLE Membership');
     }

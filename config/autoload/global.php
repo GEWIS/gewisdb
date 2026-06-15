@@ -14,6 +14,7 @@
 
 declare(strict_types=1);
 
+use Application\Extensions\Doctrine\DBAL\Types\StringableDateTimeType;
 use Application\Extensions\Doctrine\Year;
 
 return [
@@ -22,6 +23,11 @@ return [
      */
     'doctrine' => [
         'configuration' => [
+            'orm_default' => [
+                'types' => [
+                    'stringable_datetime' => StringableDateTimeType::class,
+                ],
+            ],
             'orm_report' => [
                 'numeric_functions' => [
                     'YEAR' => Year::class,

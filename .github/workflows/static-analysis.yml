@@ -99,6 +99,18 @@ jobs:
                 with:
                     env-file: .env.dist
 
+            -   name: Clear cache
+                env:
+                    DOCTRINE_DEFAULT_HOST: 127.0.0.1
+                    DOCTRINE_REPORT_HOST: 127.0.0.1
+                    PGPASSWORD: gewisdb
+                run: |
+                    rm -rf data/cache/module-config-cache.application.config.cache.php
+                    ./orm orm:clear-cache:metadata --quiet
+                    EM_ALIAS=orm_report ./orm orm:clear-cache:metadata --quiet
+                    ./orm orm:generate-proxies --quiet
+                    EM_ALIAS=orm_report ./orm orm:generate-proxies --quiet
+
             -   name: Create databases
                 env:
                     DOCTRINE_DEFAULT_HOST: 127.0.0.1

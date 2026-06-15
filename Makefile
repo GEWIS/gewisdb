@@ -35,7 +35,6 @@ runprodtest: buildprod
 rundev: builddev
 		@docker compose up -d --build --remove-orphans
 		@make replenish
-		@docker compose exec -u www-data web rm -rf data/cache/module-config-cache.application.config.cache.php
 
 migrate: replenish
 		@docker compose exec -u www-data -it web ./orm migrations:migrate --object-manager doctrine.entitymanager.orm_default
