@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OrderBy;
 use Laminas\Mail\Address as MailAddress;
 use RuntimeException;
 
@@ -101,6 +102,7 @@ class Member
         mappedBy: 'member',
         cascade: ['persist', 'remove'],
     )]
+    #[OrderBy(['startDate' => 'ASC'])]
     private Collection $memberships;
 
     /**
@@ -404,15 +406,8 @@ class Member
     {
         $oldestMembership = null;
 
-        foreach ($this->getMemberships() as $membership) {
-            if (null !== $oldestMembership && $membership->getStartDate() >= $oldestMembership->getStartDate()) {
-                continue;
-            }
-
-            $oldestMembership = $membership;
-        }
-
-        if (null === $oldestMembership) {
+        $oldestMembership = $this->memberships->first();
+        if (false === $oldestMembership) {
             return 0;
         }
 
@@ -596,16 +591,9 @@ class Member
      */
     public function getLastMembership(): ?Membership
     {
-        $lastMembership = null;
-        foreach ($this->getMemberships() as $membership) {
-            if (null !== $lastMembership && $membership->getEndDate() <= $lastMembership->getEndDate()) {
-                continue;
-            }
+        $lastMembership = $this->memberships->last();
 
-            $lastMembership = $membership;
-        }
-
-        return $lastMembership;
+        return false === $lastMembership ? null : $lastMembership;
     }
 
     /**

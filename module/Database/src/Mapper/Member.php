@@ -431,8 +431,7 @@ class Member
 
         $sq->select('IDENTITY(' . $membershipAlias . '.member)')
             ->distinct()
-            ->from(MembershipModel::class, $membershipAlias)
-            ->where('1=1'); // dummy where to make appending easier
+            ->from(MembershipModel::class, $membershipAlias);
 
         if (!$includeGraduates) {
             $sq->andWhere($membershipAlias . '.type != :' . $parameterPrefix . 'graduate');

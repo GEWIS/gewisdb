@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Checker\Mapper;
 
+use Application\Model\Enums\MembershipTypes;
 use Database\Model\Member as MemberModel;
 use Database\Model\Membership as MembershipModel;
 use Database\Model\RenewalLink as RenewalLinkModel;
@@ -59,12 +60,13 @@ class Member
         $qb->select('m, mem')
             ->from(MemberModel::class, 'm')
             ->leftJoin('m.memberships', 'mem')
-            ->where('mem.type = \'graduate\'')
+            ->where('mem.type = :graduate')
             ->andWhere('m.email IS NOT NULL')
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
             ->andWhere($qb->expr()->eq('mem.startDate', '(' . $this->lastMembershipQuery()->getDQL() . ')'))
-            ->andWhere('mem.endDate <= :expiresBefore');
+            ->andWhere('mem.endDate <= :expiresBefore')
+            ->setParameter('graduate', MembershipTypes::Graduate);
 
         $qbal = $this->em->createQueryBuilder();
         $qbal->select('rl')
