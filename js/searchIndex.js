@@ -3511,6 +3511,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Migrations-Version20260527104946.html#method_down"
         },                {
+            "fqsen": "\\Database\\Migrations\\Version20260601191545",
+            "name": "Version20260601191545",
+            "summary": "phpcs\u003Adisable\u0020Generic.Files.LineLength.TooLong\nphpcs\u003Adisable\u0020SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall",
+            "url": "classes/Database-Migrations-Version20260601191545.html"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260601191545\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260601191545.html#method_getDescription"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260601191545\u003A\u003Aup\u0028\u0029",
+            "name": "up",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260601191545.html#method_up"
+        },                {
+            "fqsen": "\\Database\\Migrations\\Version20260601191545\u003A\u003Adown\u0028\u0029",
+            "name": "down",
+            "summary": "",
+            "url": "classes/Database-Migrations-Version20260601191545.html#method_down"
+        },                {
             "fqsen": "\\Database\\Command\\DeleteExpiredMembersCommand",
             "name": "DeleteExpiredMembersCommand",
             "summary": "",
@@ -6556,6 +6576,91 @@ Search.appendIndex(
             "summary": "If\u0020this\u0020entry\u0020is\u0020linked\u0020to\u0020a\u0020member,\u0020the\u0020member\u0020who\u0020this\u0020entry\u0020is\u0020linked\u0020to",
             "url": "classes/Database-Model-AuditEntry.html#property_member"
         },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership",
+            "name": "AuditMailingListMembership",
+            "summary": "Abstract\u0020audit\u0020log\u0020entry,\u0020can\u0020take\u0020different\u0020types",
+            "url": "classes/Database-Model-AuditMailingListMembership.html"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003Acreate\u0028\u0029",
+            "name": "create",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_create"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AgetAction\u0028\u0029",
+            "name": "getAction",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_getAction"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AsetAction\u0028\u0029",
+            "name": "setAction",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_setAction"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AgetMailingList\u0028\u0029",
+            "name": "getMailingList",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_getMailingList"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AsetMailingList\u0028\u0029",
+            "name": "setMailingList",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_setMailingList"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AgetEmail\u0028\u0029",
+            "name": "getEmail",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_getEmail"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AsetEmail\u0028\u0029",
+            "name": "setEmail",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_setEmail"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AgetOrigin\u0028\u0029",
+            "name": "getOrigin",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_getOrigin"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AsetOrigin\u0028\u0029",
+            "name": "setOrigin",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_setOrigin"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AgetStringBodyFormatted\u0028\u0029",
+            "name": "getStringBodyFormatted",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_getStringBodyFormatted"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003AgetStringArguments\u0028\u0029",
+            "name": "getStringArguments",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#method_getStringArguments"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003ABODY_FORMAT",
+            "name": "BODY_FORMAT",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#constant_BODY_FORMAT"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003A\u0024action",
+            "name": "action",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#property_action"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003A\u0024mailingList",
+            "name": "mailingList",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#property_mailingList"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003A\u0024email",
+            "name": "email",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#property_email"
+        },                {
+            "fqsen": "\\Database\\Model\\AuditMailingListMembership\u003A\u003A\u0024origin",
+            "name": "origin",
+            "summary": "",
+            "url": "classes/Database-Model-AuditMailingListMembership.html#property_origin"
+        },                {
             "fqsen": "\\Database\\Model\\AuditNote",
             "name": "AuditNote",
             "summary": "Class\u0020for\u0020registering\u0020manual\u0020notes",
@@ -7186,6 +7291,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Model-Enums-InstallationFunctions.html#enumcase_InactiveMember"
         },                {
+            "fqsen": "\\Database\\Model\\Enums\\MailingListMemberAction",
+            "name": "MailingListMemberAction",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-MailingListMemberAction.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\MailingListMemberAction\u003A\u003AAdd",
+            "name": "Add",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-MailingListMemberAction.html#enumcase_Add"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\MailingListMemberAction\u003A\u003ARemove",
+            "name": "Remove",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-MailingListMemberAction.html#enumcase_Remove"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\MailingListMemberOrigin",
+            "name": "MailingListMemberOrigin",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-MailingListMemberOrigin.html"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\MailingListMemberOrigin\u003A\u003AManual",
+            "name": "Manual",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-MailingListMemberOrigin.html#enumcase_Manual"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\MailingListMemberOrigin\u003A\u003ASyncMailman",
+            "name": "SyncMailman",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-MailingListMemberOrigin.html#enumcase_SyncMailman"
+        },                {
+            "fqsen": "\\Database\\Model\\Enums\\MailingListMemberOrigin\u003A\u003ASyncListmonk",
+            "name": "SyncListmonk",
+            "summary": "",
+            "url": "classes/Database-Model-Enums-MailingListMemberOrigin.html#enumcase_SyncListmonk"
+        },                {
             "fqsen": "\\Database\\Model\\Enums\\Studies",
             "name": "Studies",
             "summary": "Enum\u0020with\u0020studies",
@@ -7616,6 +7756,11 @@ Search.appendIndex(
             "summary": "Get\u0020subscribed\u0020members.",
             "url": "classes/Database-Model-MailingList.html#method_getMailingListMemberships"
         },                {
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003AgetAuditEntries\u0028\u0029",
+            "name": "getAuditEntries",
+            "summary": "Get\u0020the\u0020audit\u0020entries\u0020for\u0020this\u0020mailing\u0020list.",
+            "url": "classes/Database-Model-MailingList.html#method_getAuditEntries"
+        },                {
             "fqsen": "\\Database\\Model\\MailingList\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
             "summary": "",
@@ -7660,6 +7805,11 @@ Search.appendIndex(
             "name": "mailingListMemberships",
             "summary": "Mailing\u0020list\u0020members.",
             "url": "classes/Database-Model-MailingList.html#property_mailingListMemberships"
+        },                {
+            "fqsen": "\\Database\\Model\\MailingList\u003A\u003A\u0024auditEntries",
+            "name": "auditEntries",
+            "summary": "Audit\u0020entries\u0020for\u0020the\u0020mailing\u0020list.",
+            "url": "classes/Database-Model-MailingList.html#property_auditEntries"
         },                {
             "fqsen": "\\Database\\Model\\MailingListMember",
             "name": "MailingListMember",
@@ -10001,6 +10151,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Database-Service-Api.html#property_configService"
         },                {
+            "fqsen": "\\Database\\Service\\Audit",
+            "name": "Audit",
+            "summary": "",
+            "url": "classes/Database-Service-Audit.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Audit\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Database-Service-Audit.html#method___construct"
+        },                {
+            "fqsen": "\\Database\\Service\\Audit\u003A\u003Apersist\u0028\u0029",
+            "name": "persist",
+            "summary": "",
+            "url": "classes/Database-Service-Audit.html#method_persist"
+        },                {
+            "fqsen": "\\Database\\Service\\Audit\u003A\u003A\u0024auditMapper",
+            "name": "auditMapper",
+            "summary": "",
+            "url": "classes/Database-Service-Audit.html#property_auditMapper"
+        },                {
             "fqsen": "\\Database\\Service\\Factory\\ApiFactory",
             "name": "ApiFactory",
             "summary": "",
@@ -10010,6 +10180,16 @@ Search.appendIndex(
             "name": "__invoke",
             "summary": "",
             "url": "classes/Database-Service-Factory-ApiFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\AuditFactory",
+            "name": "AuditFactory",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-AuditFactory.html"
+        },                {
+            "fqsen": "\\Database\\Service\\Factory\\AuditFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Database-Service-Factory-AuditFactory.html#method___invoke"
         },                {
             "fqsen": "\\Database\\Service\\Factory\\FrontPageFactory",
             "name": "FrontPageFactory",
@@ -10270,6 +10450,11 @@ Search.appendIndex(
             "name": "memberMapper",
             "summary": "",
             "url": "classes/Database-Service-Listmonk.html#property_memberMapper"
+        },                {
+            "fqsen": "\\Database\\Service\\Listmonk\u003A\u003A\u0024auditService",
+            "name": "auditService",
+            "summary": "",
+            "url": "classes/Database-Service-Listmonk.html#property_auditService"
         },                {
             "fqsen": "\\Database\\Service\\Listmonk\u003A\u003A\u0024configService",
             "name": "configService",
@@ -10605,6 +10790,11 @@ Search.appendIndex(
             "name": "mailmanConfig",
             "summary": "",
             "url": "classes/Database-Service-Mailman.html#property_mailmanConfig"
+        },                {
+            "fqsen": "\\Database\\Service\\Mailman\u003A\u003A\u0024auditService",
+            "name": "auditService",
+            "summary": "",
+            "url": "classes/Database-Service-Mailman.html#property_auditService"
         },                {
             "fqsen": "\\Database\\Service\\Meeting",
             "name": "Meeting",
@@ -11068,7 +11258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AunsubscribeLists\u0028\u0029",
             "name": "unsubscribeLists",
-            "summary": "",
+            "summary": "Unsubscribe\u0020a\u0020member\u0020from\u0020all\u0020mailing\u0020lists.\u0020This\u0020is\u0020used\u0020when\u0020removing\/clearing\u0020a\u0020member.",
             "url": "classes/Database-Service-Member.html#method_unsubscribeLists"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003AaddAuditNote\u0028\u0029",
@@ -11340,6 +11530,11 @@ Search.appendIndex(
             "name": "mailTransport",
             "summary": "",
             "url": "classes/Database-Service-Member.html#property_mailTransport"
+        },                {
+            "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024auditService",
+            "name": "auditService",
+            "summary": "",
+            "url": "classes/Database-Service-Member.html#property_auditService"
         },                {
             "fqsen": "\\Database\\Service\\Member\u003A\u003A\u0024config",
             "name": "config",

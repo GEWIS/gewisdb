@@ -286,8 +286,11 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    AuditEntry
+    AuditMailingListMembership
 
+        <span class="phpdocumentor-element__extends">
+        extends <a href="classes/Database-Model-AuditEntry.html"><abbr title="\Database\Model\AuditEntry">AuditEntry</abbr></a>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -297,22 +300,17 @@
         </div>
     
     
-            <span class="phpdocumentor-element__extends">
-            uses
-                            <a href="classes/Database-Model-Trait-TimestampableTrait.html"><abbr title="\Database\Model\Trait\TimestampableTrait">TimestampableTrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
 
 
-    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Abstract</span><span>Yes</span></div>
-
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -325,26 +323,15 @@
     
             <section class="phpdocumentor-attributes">
             <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/Database-Model-AuditEntry.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+                Attributes <a href="classes/Database-Model-AuditMailingListMembership.html#attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
     <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\DiscriminatorColumn">DiscriminatorColumn</abbr>]
+        #[<abbr title="\Doctrine\ORM\Mapping\AssociationOverrides">AssociationOverrides</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $name: &#039;type&#039;
-    </dd>
-        <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;string&#039;
-    </dd>
-    </dl>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\DiscriminatorMap">DiscriminatorMap</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        $value: [&#039;mailing_list_membership&#039; =&gt; \Database\Model\AuditMailingListMembership::class, &#039;note&#039; =&gt; \Database\Model\AuditNote::class, &#039;renewal&#039; =&gt; \Database\Model\AuditRenewal::class]
+        [new \Doctrine\ORM\Mapping\AssociationOverride(name: &#039;member&#039;, joinColumns: new \Doctrine\ORM\Mapping\JoinColumn(name: &#039;member&#039;, referencedColumnName: &#039;lidnr&#039;, onDelete: &#039;cascade&#039;, nullable: false))]
     </dd>
     </dl>
                             <dl class="phpdocumentor-argument-list">
@@ -352,24 +339,11 @@
         #[<abbr title="\Doctrine\ORM\Mapping\Entity">Entity</abbr>]
     </dt>
     </dl>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\HasLifecycleCallbacks">HasLifecycleCallbacks</abbr>]
-    </dt>
-    </dl>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\InheritanceType">InheritanceType</abbr>]
-    </dt>
-        <dd class="phpdocumentor-argument-list__entry">
-        &#039;SINGLE_TABLE&#039;
-    </dd>
-    </dl>
                     </section>
     
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Database-Model-AuditEntry.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-AuditMailingListMembership.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -381,7 +355,7 @@
 
 <h4 id="toc-constants">
     Constants
-    <a href="classes/Database-Model-AuditEntry.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-AuditMailingListMembership.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -394,12 +368,18 @@
 While this one can technically be private, all child classes need to have this &#039;protected&#039;
 to allow isDeletable to work, so we make it protected here to enforce this</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#constant_BODY_FORMAT">BODY_FORMAT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;&lt;strong&gt;%s mailinglist subscription&lt;/strong&gt; f...                            </span>
+</dt>
+
     </dl>
 
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/Database-Model-AuditEntry.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-AuditMailingListMembership.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -425,24 +405,34 @@ to allow isDeletable to work, so we make it protected here to enforce this</dd>
 <dd>The user who created the entry</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-AuditEntry.html#property_id">$id</a>
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#property_action">$action</a>
     <span>
-                        &nbsp;: int|null            </span>
+                        &nbsp;: <a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a>            </span>
 </dt>
-<dd>Entry ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/Database-Model-AuditEntry.html#property_member">$member</a>
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#property_email">$email</a>
     <span>
-                        &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null            </span>
+                        &nbsp;: string            </span>
 </dt>
-<dd>If this entry is linked to a member, the member who this entry is linked to</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#property_mailingList">$mailingList</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#property_origin">$origin</a>
+    <span>
+                        &nbsp;: <a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a>            </span>
+</dt>
 
     </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Database-Model-AuditEntry.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Database-Model-AuditMailingListMembership.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -455,9 +445,27 @@ to allow isDeletable to work, so we make it protected here to enforce this</dd>
 to always link at least one of the linkable objects. Currently only member is possible</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_create">create()</a>
+    <span>
+                                &nbsp;: self    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_getAction">getAction()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_getCreatedAt">getCreatedAt()</a>
     <span>
                                 &nbsp;: <abbr title="\DateTimeInterface">DateTimeInterface</abbr>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_getEmail">getEmail()</a>
+    <span>
+                                &nbsp;: string    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -467,9 +475,21 @@ to always link at least one of the linkable objects. Currently only member is po
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_getMailingList">getMailingList()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-AuditEntry.html#method_getMember">getMember()</a>
     <span>
                                 &nbsp;: <a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_getOrigin">getOrigin()</a>
+    <span>
+                                &nbsp;: <a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -529,7 +549,25 @@ Not implemented</dd>
 <dd>Automatically update the `updatedAt` `DateTime` when doing an update to the entity.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_setAction">setAction()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_setEmail">setEmail()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-AuditEntry.html#method_setId">setId()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_setMailingList">setMailingList()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
@@ -541,29 +579,28 @@ Not implemented</dd>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_setOrigin">setOrigin()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Database-Model-AuditEntry.html#method_setUser">setUser()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a class="" href="classes/Database-Model-AuditEntry.html#method_getStringArguments">getStringArguments()</a>
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_getStringArguments">getStringArguments()</a>
     <span>
                                 &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a class="" href="classes/Database-Model-AuditEntry.html#method_getStringBodyFormatted">getStringBodyFormatted()</a>
+    <a class="" href="classes/Database-Model-AuditMailingListMembership.html#method_getStringBodyFormatted">getStringBodyFormatted()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a class="" href="classes/Database-Model-AuditEntry.html#method_getStringBodyPlain">getStringBodyPlain()</a>
-    <span>
-                                &nbsp;: string    </span>
-</dt>
-<dd>Get the string body, currently is constant for all types, but may change</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a class="" href="classes/Database-Model-Trait-TimestampableTrait.html#method_setCreatedAt">setCreatedAt()</a>
@@ -585,7 +622,7 @@ Not implemented</dd>
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/Database-Model-AuditEntry.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-AuditMailingListMembership.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article class="phpdocumentor-element -constant -protected ">
@@ -621,13 +658,43 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
 
         
     </article>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_BODY_FORMAT">
+        BODY_FORMAT
+        <a href="classes/Database-Model-AuditMailingListMembership.html#constant_BODY_FORMAT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">BODY_FORMAT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;&lt;strong&gt;%s mailinglist subscription&lt;/strong&gt; for &#039; . &#039;&lt;emph&gt;%s&lt;/emph&gt; on &lt;emph&gt;%s&lt;/emph&gt; (%s)&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
             </section>
 
         
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Database-Model-AuditEntry.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-AuditMailingListMembership.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -810,28 +877,27 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_id">
-        $id
-        <a href="classes/Database-Model-AuditEntry.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_action">
+        $action
+        <a href="classes/Database-Model-AuditMailingListMembership.html#property_action" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Entry ID.</p>
-
+    
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">int|null</span>
-    <span class="phpdocumentor-signature__name">$id</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$action</span>
+    </code>
 
     
     
@@ -839,8 +905,8 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
 
         
             <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_id_attributes">
-                Attributes <a href="classes/Database-Model-AuditEntry.html#property_id_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+            <h5 class="phpdocumentor-elements__header" id="property_action_attributes">
+                Attributes <a href="classes/Database-Model-AuditMailingListMembership.html#property_action_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -848,21 +914,11 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
         #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $type: &#039;integer&#039;
+        $type: &#039;string&#039;
     </dd>
-    </dl>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\GeneratedValue">GeneratedValue</abbr>]
-    </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $strategy: &#039;AUTO&#039;
+        $enumType: \Database\Model\Enums\MailingListMemberAction::class
     </dd>
-    </dl>
-                            <dl class="phpdocumentor-argument-list">
-    <dt class="phpdocumentor-argument-list__entry">
-        #[<abbr title="\Doctrine\ORM\Mapping\Id">Id</abbr>]
-    </dt>
     </dl>
                     </section>
         
@@ -875,28 +931,27 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
             -private
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_member">
-        $member
-        <a href="classes/Database-Model-AuditEntry.html#property_member" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_email">
+        $email
+        <a href="classes/Database-Model-AuditMailingListMembership.html#property_email" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">If this entry is linked to a member, the member who this entry is linked to</p>
-
+    
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null</span>
-    <span class="phpdocumentor-signature__name">$member</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
+            <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$email</span>
+    </code>
 
     
     
@@ -904,8 +959,59 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
 
         
             <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="property_member_attributes">
-                Attributes <a href="classes/Database-Model-AuditEntry.html#property_member_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+            <h5 class="phpdocumentor-elements__header" id="property_email_attributes">
+                Attributes <a href="classes/Database-Model-AuditMailingListMembership.html#property_email_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mailingList">
+        $mailingList
+        <a href="classes/Database-Model-AuditMailingListMembership.html#property_mailingList" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">38</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$mailingList</span>
+    </code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="property_mailingList_attributes">
+                Attributes <a href="classes/Database-Model-AuditMailingListMembership.html#property_mailingList_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -913,10 +1019,10 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
         #[<abbr title="\Doctrine\ORM\Mapping\JoinColumn">JoinColumn</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $name: &#039;member&#039;
+        $name: &#039;mailing_list&#039;
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
-        $referencedColumnName: &#039;lidnr&#039;
+        $referencedColumnName: &#039;name&#039;
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
         $onDelete: &#039;cascade&#039;
@@ -930,10 +1036,64 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
         #[<abbr title="\Doctrine\ORM\Mapping\ManyToOne">ManyToOne</abbr>]
     </dt>
         <dd class="phpdocumentor-argument-list__entry">
-        $targetEntity: \Database\Model\Member::class
+        $targetEntity: \Database\Model\MailingList::class
     </dd>
         <dd class="phpdocumentor-argument-list__entry">
         $inversedBy: &#039;auditEntries&#039;
+    </dd>
+    </dl>
+                    </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_origin">
+        $origin
+        <a href="classes/Database-Model-AuditMailingListMembership.html#property_origin" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$origin</span>
+    </code>
+
+    
+    
+    
+
+        
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="property_origin_attributes">
+                Attributes <a href="classes/Database-Model-AuditMailingListMembership.html#property_origin_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Doctrine\ORM\Mapping\Column">Column</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        $type: &#039;string&#039;
+    </dd>
+        <dd class="phpdocumentor-argument-list__entry">
+        $enumType: \Database\Model\Enums\MailingListMemberOrigin::class
     </dd>
     </dl>
                     </section>
@@ -945,7 +1105,7 @@ to allow isDeletable to work, so we make it protected here to enforce this</p>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Database-Model-AuditEntry.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Database-Model-AuditMailingListMembership.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -988,6 +1148,127 @@ to always link at least one of the linkable objects. Currently only member is po
         class="phpdocumentor-element
             -method
             -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_create">
+        create()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_create" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">create</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$origin</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$member</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingList</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$action</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$origin</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$member</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$mailingList</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$email</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$user</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/User-Model-User.html"><abbr title="\User\Model\User">User</abbr></a>|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">self</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getAction">
+        getAction()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_getAction" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getAction</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_getCreatedAt">
@@ -1019,6 +1300,44 @@ to always link at least one of the linkable objects. Currently only member is po
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\DateTimeInterface">DateTimeInterface</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getEmail">
+        getEmail()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_getEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">95</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getEmail</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
             </section>
 
 </article>
@@ -1066,6 +1385,44 @@ to always link at least one of the linkable objects. Currently only member is po
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getMailingList">
+        getMailingList()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_getMailingList" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">85</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getMailingList</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getMember">
         getMember()
         <a href="classes/Database-Model-AuditEntry.html#method_getMember" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1095,6 +1452,44 @@ to always link at least one of the linkable objects. Currently only member is po
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Member.html"><abbr title="\Database\Model\Member">Member</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getOrigin">
+        getOrigin()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_getOrigin" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">105</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getOrigin</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a></span>
             </section>
 
 </article>
@@ -1430,6 +1825,94 @@ Not implemented</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setAction">
+        setAction()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_setAction" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">80</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setAction</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$action</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberAction.html"><abbr title="\Database\Model\Enums\MailingListMemberAction">MailingListMemberAction</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setEmail">
+        setEmail()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_setEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">100</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$email</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setId">
         setId()
         <a href="classes/Database-Model-AuditEntry.html#method_setId" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1456,6 +1939,50 @@ Not implemented</p>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$id</span>
                 : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setMailingList">
+        setMailingList()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_setMailingList" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">90</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setMailingList</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailingList</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$mailingList</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-MailingList.html"><abbr title="\Database\Model\MailingList">MailingList</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1518,6 +2045,50 @@ Not implemented</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setOrigin">
+        setOrigin()
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_setOrigin" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">110</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setOrigin</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$origin</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$origin</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/Database-Model-Enums-MailingListMemberOrigin.html"><abbr title="\Database\Model\Enums\MailingListMemberOrigin">MailingListMemberOrigin</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setUser">
         setUser()
         <a href="classes/Database-Model-AuditEntry.html#method_setUser" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1560,24 +2131,24 @@ Not implemented</p>
         class="phpdocumentor-element
             -method
             -protected
-                        -abstract                                "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_getStringArguments">
         getStringArguments()
-        <a href="classes/Database-Model-AuditEntry.html#method_getStringArguments" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_getStringArguments" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">193</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getStringArguments</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getStringArguments</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1587,6 +2158,17 @@ Not implemented</p>
     
 
         
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="method_getStringArguments_attributes">
+                Attributes <a href="classes/Database-Model-AuditMailingListMembership.html#method_getStringArguments_attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Override">Override</abbr>]
+    </dt>
+    </dl>
+                    </section>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1598,24 +2180,24 @@ Not implemented</p>
         class="phpdocumentor-element
             -method
             -protected
-                        -abstract                                "
+                                                        "
 >
     <h4 class="phpdocumentor-element__name" id="method_getStringBodyFormatted">
         getStringBodyFormatted()
-        <a href="classes/Database-Model-AuditEntry.html#method_getStringBodyFormatted" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Database-Model-AuditMailingListMembership.html#method_getStringBodyFormatted" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditMailingListMembership.php"><a href="files/module-database-src-model-auditmailinglistmembership.html"><abbr title="module/Database/src/Model/AuditMailingListMembership.php">AuditMailingListMembership.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">188</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getStringBodyFormatted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getStringBodyFormatted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1625,45 +2207,17 @@ Not implemented</p>
     
 
         
-    
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
+            <section class="phpdocumentor-attributes">
+            <h5 class="phpdocumentor-elements__header" id="method_getStringBodyFormatted_attributes">
+                Attributes <a href="classes/Database-Model-AuditMailingListMembership.html#method_getStringBodyFormatted_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getStringBodyPlain">
-        getStringBodyPlain()
-        <a href="classes/Database-Model-AuditEntry.html#method_getStringBodyPlain" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="module/Database/src/Model/AuditEntry.php"><a href="files/module-database-src-model-auditentry.html"><abbr title="module/Database/src/Model/AuditEntry.php">AuditEntry.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">183</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Get the string body, currently is constant for all types, but may change</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">getStringBodyPlain</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-        
+            </h5>
+                            <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\Override">Override</abbr>]
+    </dt>
+    </dl>
+                    </section>
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1773,15 +2327,16 @@ Not implemented</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/Database-Model-AuditEntry.html#toc-constants">Constants</a></li>
-                                                            <li><a href="classes/Database-Model-AuditEntry.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Database-Model-AuditEntry.html#toc-methods">Methods</a></li>
+                                        <li><a href="classes/Database-Model-AuditMailingListMembership.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/Database-Model-AuditMailingListMembership.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Database-Model-AuditMailingListMembership.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/Database-Model-AuditEntry.html#constant_IMMUTABLE">IMMUTABLE</a></li>
+                                                    <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#constant_BODY_FORMAT">BODY_FORMAT</a></li>
                                             </ul>
                 </li>
             
@@ -1791,8 +2346,10 @@ Not implemented</p>
                                                     <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#property_createdAt">$createdAt</a></li>
                                                     <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#property_updatedAt">$updatedAt</a></li>
                                                     <li class=""><a href="classes/Database-Model-AuditEntry.html#property_user">$user</a></li>
-                                                    <li class=""><a href="classes/Database-Model-AuditEntry.html#property_id">$id</a></li>
-                                                    <li class=""><a href="classes/Database-Model-AuditEntry.html#property_member">$member</a></li>
+                                                    <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#property_action">$action</a></li>
+                                                    <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#property_email">$email</a></li>
+                                                    <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#property_mailingList">$mailingList</a></li>
+                                                    <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#property_origin">$origin</a></li>
                                             </ul>
                 </li>
             
@@ -1800,9 +2357,14 @@ Not implemented</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_assertValid">assertValid()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_create">create()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_getAction">getAction()</a></li>
                                             <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_getCreatedAt">getCreatedAt()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_getEmail">getEmail()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getId">getId()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_getMailingList">getMailingList()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getMember">getMember()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_getOrigin">getOrigin()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getStringPlain">getStringPlain()</a></li>
                                             <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_getUpdatedAt">getUpdatedAt()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getUser">getUser()</a></li>
@@ -1811,12 +2373,15 @@ Not implemented</p>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_isEditable">isEditable()</a></li>
                                             <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_prePersist">prePersist()</a></li>
                                             <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_preUpdate">preUpdate()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_setAction">setAction()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_setEmail">setEmail()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_setId">setId()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_setMailingList">setMailingList()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_setMember">setMember()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_setOrigin">setOrigin()</a></li>
                                             <li class=""><a href="classes/Database-Model-AuditEntry.html#method_setUser">setUser()</a></li>
-                                            <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getStringArguments">getStringArguments()</a></li>
-                                            <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getStringBodyFormatted">getStringBodyFormatted()</a></li>
-                                            <li class=""><a href="classes/Database-Model-AuditEntry.html#method_getStringBodyPlain">getStringBodyPlain()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_getStringArguments">getStringArguments()</a></li>
+                                            <li class=""><a href="classes/Database-Model-AuditMailingListMembership.html#method_getStringBodyFormatted">getStringBodyFormatted()</a></li>
                                             <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_setCreatedAt">setCreatedAt()</a></li>
                                             <li class=""><a href="classes/Database-Model-Trait-TimestampableTrait.html#method_setUpdatedAt">setUpdatedAt()</a></li>
                                     </ul>
@@ -1838,7 +2403,7 @@ Not implemented</p>
     </section>
 </section>
         </div>
-        <a href="classes/Database-Model-AuditEntry.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Database-Model-AuditMailingListMembership.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
