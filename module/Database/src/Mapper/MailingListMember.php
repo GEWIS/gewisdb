@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Mapper;
 
+use Database\Mapper\Member as MemberMapper;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\Member as MemberModel;
@@ -126,6 +127,9 @@ class MailingListMember
      * Get the mailing list members that belong to hidden or expired members
      * and that are not already scheduled for deletion
      *
+     * Note (for testing) that we also check for active renewal links, but that is done
+     * in the service layer.
+     *
      * @return MailingListMemberModel[]
      */
     public function findAllExpiredOrHidden(): array
@@ -135,8 +139,19 @@ class MailingListMember
         $qb->select('mlm')
             ->from(MailingListMemberModel::class, 'mlm')
             ->leftJoin('mlm.member', 'm')
-            ->where('mlm.toBeDeleted != True')
-            ->andWhere('m.expiration <= CURRENT_TIMESTAMP() OR m.hidden = True');
+            ->where( //X
+                $qb->expr()->notIn(
+                    'mlm.member',
+                    MemberMapper::getMembershipSubquery(
+                        $qb,
+                        includeGraduates: true,
+                        includeFutureMembers: false,
+                    )->getDQL(),
+                ),
+            )
+            ->orWhere('m.hidden = True') //Y
+            ->andWhere('mlm.toBeDeleted != True'); //Z
+        //this results in (X OR Y) AND Z, which is what we want
 
         /** @var MailingListMemberModel[] $result */
         $result = $qb->getQuery()->getResult();

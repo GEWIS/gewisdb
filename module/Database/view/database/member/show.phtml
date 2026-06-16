@@ -72,18 +72,20 @@ $translator = $this->plugin('translate')->getTranslator();
             <td><?= $member->getGeneration() ?></td>
         </tr>
         <tr>
-            <th><?= $this->translate('Paid (Amount)') ?></th>
-            <td><?= $member->getPaid() ?></td>
+            <th><?= $this->translate('Paid for current/last membership (Amount)') ?></th>
+            <td><?= $member->getCurrentOrLastMembership()?->getPaid() ?></td>
         </tr>
         <tr>
-            <th><?= $this->translate('Membership Type') ?></th>
+            <th><?= $this->translate('Membership Type (today)') ?></th>
             <td>
-                <?= $member->getType()->getName($translator) ?>
-                <a href="<?= $this->url('member/show/edit/membership', array(
-                    'id' => $member->getLidnr()
-                )) ?>" class="btn btn-primary btn-xs">
+                <?= $member->getCurrentMembership()?->getType()?->getName($translator) ?? $this->translate('None') ?>
+                <?php if (null !== $member->getLastMembership() && MembershipTypes::Honorary !== $member->getLastMembership()->getType()): ?>
+                <a href="<?= $this->url('member/show/edit/membership', [
+                    'id' => $member->getLidnr(),
+                ]) ?>" class="btn btn-primary btn-xs">
                     <?= $this->translate('Update / Renew') ?>
                 </a>
+                <?php endif; ?>
             </td>
         </tr>
         <tr>
@@ -101,7 +103,15 @@ $translator = $this->plugin('translate')->getTranslator();
                     (null !== $member->getMembershipEndsOn()) ? $member->getMembershipEndsOn()->format('l j F Y') : $this->translate('n/a'),
                     $member->getExpiration()->format('l j F Y')
                 )?>
-                <?php if (MembershipTypes::External === $member->getType() || MembershipTypes::Graduate === $member->getType()): ?>
+                <?php
+                // We check the last membership here, because it is possible that a new membership was added
+                // We don't extend if already valid for >1 year
+                $max = new DateTimeImmutable('now +1 year');
+                if (
+                    $member->getExpiration() < $max &&
+                    (MembershipTypes::External === $member->getLastMembership()?->getType() ||
+                        MembershipTypes::Graduate === $member->getLastMembership()?->getType())
+                ): ?>
                     <a href="<?= $this->url('member/show/edit/expiration', ['id' => $member->getLidnr()]) ?>" class="btn btn-primary btn-xs"><?= $this->translate('Extend') ?></a>
                 <?php endif; ?>
             </td>

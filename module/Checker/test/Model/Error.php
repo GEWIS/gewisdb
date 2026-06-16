@@ -11,6 +11,7 @@ use Checker\Model\Error as CheckerErrorModel;
 use Database\Model\Decision as DecisionModel;
 use Database\Model\Meeting as MeetingModel;
 use Database\Model\Member as MemberModel;
+use Database\Model\Membership as MembershipModel;
 use Database\Model\SubDecision as SubDecisionModel;
 use Database\Model\SubDecision\Foundation as FoundationModel;
 use DateTime;
@@ -60,12 +61,19 @@ abstract class Error extends TestCase
     {
         $member = new MemberModel();
         $member->setLidnr(1);
-        $member->setType(MembershipTypes::Ordinary);
         $member->setFirstName('Anton');
         $member->setMiddleName('');
         $member->setLastName('Antonius');
         $member->setEmail('anton.antonius@gewis.nl');
         $member->setBirth(new DateTime());
+
+        $membership = new MembershipModel(
+            member: $member,
+            type: MembershipTypes::Ordinary,
+            startDate: (new DateTime())->setDate(2020, 7, 1),
+            endDate: (new DateTime())->setDate(2021, 7, 1),
+        );
+        $member->addMembership($membership);
 
         return $member;
     }

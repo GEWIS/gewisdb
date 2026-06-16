@@ -131,12 +131,6 @@ class Member
     private DateTime $expiration;
 
     /**
-     * How much the member has paid for membership. 0 by default.
-     */
-    #[Column(type: 'integer')]
-    private int $paid = 0;
-
-    /**
      * If the member receives a 'supremum'.
      */
     #[Column(
@@ -384,7 +378,8 @@ class Member
     }
 
     /**
-     * Get the member type.
+     * Get the current member type.
+     * It is possible that the member will have a different type in the future!
      */
     public function getType(): MembershipTypes
     {
@@ -449,6 +444,8 @@ class Member
 
     /**
      * Get the date on which the membership of the member will have ended (i.e., they have become "graduate").
+     * It is possible that for an ordinary member that will become external in the future, this date is the end
+     * date of their external membership, not of their current 'ordinary' membership.
      */
     public function getMembershipEndsOn(): ?DateTime
     {
@@ -461,22 +458,6 @@ class Member
     public function setMembershipEndsOn(?DateTime $membershipEndsOn): void
     {
         $this->membershipEndsOn = $membershipEndsOn;
-    }
-
-    /**
-     * Get how much has been paid.
-     */
-    public function getPaid(): int
-    {
-        return $this->paid;
-    }
-
-    /**
-     * Set how much has been paid.
-     */
-    public function setPaid(int $paid): void
-    {
-        $this->paid = $paid;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Report\Service;
 
+use Application\Model\Enums\MembershipTypes;
 use Database\Mapper\Member as MemberMapper;
 use Database\Model\Address as DatabaseAddressModel;
 use Database\Model\MailingListMember as DatabaseMailingListMemberModel;
@@ -74,12 +75,11 @@ class Member
         $reportMember->setInitials($member->getInitials());
         $reportMember->setFirstName($member->getFirstName());
         $reportMember->setGeneration($member->getGeneration());
-        $reportMember->setType($member->getType());
+        $reportMember->setType($member->getCurrentOrLastMembership()?->getType() ?? MembershipTypes::Graduate);
         $reportMember->setMembershipEndsOn($member->getMembershipEndsOn());
         $reportMember->setExpiration($member->getExpiration());
         $reportMember->setBirth($member->getBirth());
         $reportMember->setChangedOn($member->getChangedOn());
-        $reportMember->setPaid($member->getPaid());
         $reportMember->setSupremum($member->getSupremum());
         $reportMember->setHidden($member->getHidden());
         $reportMember->setDeleted($member->getDeleted());

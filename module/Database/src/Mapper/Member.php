@@ -8,6 +8,7 @@ use Application\Model\Enums\AddressTypes;
 use Application\Model\Enums\MembershipTypes;
 use Database\Model\Address as AddressModel;
 use Database\Model\Member as MemberModel;
+use Database\Model\Membership as MembershipModel;
 use Database\Model\SubDecision\Annulment as AnnulmentModel;
 use Database\Model\SubDecision\Board\Installation as BoardInstallationModel;
 use Database\Model\SubDecision\Discharge as DischargeModel;
@@ -17,6 +18,8 @@ use Database\Model\SubDecision\Installation as InstallationModel;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use InvalidArgumentException;
 
 use function filter_var;
 use function is_numeric;
@@ -90,7 +93,20 @@ class Member
         }
 
         if ($filtered) {
-            $qb->andWhere('m.deleted = False AND m.hidden = False AND m.expiration > CURRENT_TIMESTAMP()');
+            $sq = self::getMembershipSubquery(
+                $qb,
+                includeGraduates: true,
+                includeFutureMembers: true,
+            );
+
+            $qb->andWhere(
+                $qb->expr()->in(
+                    'm',
+                    $sq->getDQL(),
+                ),
+            )
+            ->andWhere('m.deleted = False')
+            ->andWhere('m.hidden = False');
         }
 
         return $qb->getQuery()->getResult();
@@ -137,9 +153,20 @@ class Member
     {
         $qb = $this->em->createQueryBuilder();
 
+        $sq = self::getMembershipSubquery(
+            $qb,
+            includeGraduates: true,
+            includeFutureMembers: true,
+        );
+
         $qb->select('m')
             ->from(MemberModel::class, 'm')
-            ->where('m.expiration >= CURRENT_TIMESTAMP()')
+            ->andWhere(
+                $qb->expr()->in(
+                    'm',
+                    $sq->getDQL(),
+                ),
+            )
             ->andWhere('m.hidden = false')
             ->andWhere('m.deleted = false')
             ->setMaxResults(32)
@@ -240,9 +267,24 @@ class Member
     public function findExpired(DateTime $expiration): array
     {
         $qb = $this->getRepository()->createQueryBuilder('m');
-        $qb->where('m.expiration <= :expiration')
-            ->andWhere('m.deleted = False')
-            ->setParameter('expiration', $expiration);
+        $qb->where('m.deleted = False');
+
+        // Find all members who have a membership that was active at some point after a specific date
+        $nemqb = $this->em->createQueryBuilder();
+        $nemqb->select('IDENTITY(nem.member)')
+            ->distinct()
+            ->from(MembershipModel::class, 'nem')
+            ->where('nem.endDate > :expiration');
+
+        // Exclude those members from the result
+        $qb->andWhere(
+            $qb->expr()->notIn(
+                'm.lidnr',
+                $nemqb->getDQL(),
+            ),
+        );
+
+        $qb->setParameter('expiration', $expiration);
 
         return $qb->getQuery()->getResult();
     }
@@ -314,8 +356,21 @@ class Member
     public function getNonExpiredNonHiddenMembers(): array
     {
         $qb = $this->getRepository()->createQueryBuilder('m');
-        $qb->where('m.expiration > CURRENT_TIMESTAMP()')
-            ->andWhere('m.hidden = False');
+        $qb->where('m.hidden = False');
+
+        $sq = self::getMembershipSubquery(
+            $qb,
+            includeGraduates: true,
+            includeFutureMembers: false,
+            includeExpired: false,
+        );
+
+        $qb->andWhere(
+            $qb->expr()->in(
+                'm',
+                $sq->getDQL(),
+            ),
+        );
 
         return $qb->getQuery()->getResult();
     }
@@ -328,42 +383,79 @@ class Member
      */
     public function countMembers(
         bool $includeGraduates = false,
-        bool $isExpired = false,
+        bool $includeFutureMembers = false,
+        bool $includeExpired = false,
     ): int {
         $qb = $this->getRepository()->createQueryBuilder('m');
         $qb->select('COUNT(m.lidnr)')
             ->where('m.deleted = False');
 
-        if (!$includeGraduates) {
-            $qb->andWhere('m.type != :graduate')
-                ->setParameter('graduate', MembershipTypes::Graduate);
-        }
+        $sq = self::getMembershipSubquery(
+            $qb,
+            includeGraduates: $includeGraduates,
+            includeFutureMembers: $includeFutureMembers,
+            includeExpired: $includeExpired,
+        );
 
-        if ($isExpired) {
-            $qb->andWhere('m.expiration < CURRENT_TIMESTAMP()');
-        } else {
-            $qb->andWhere('m.expiration >= CURRENT_TIMESTAMP()');
-        }
+        $qb->andWhere(
+            $qb->expr()->in(
+                'm',
+                $sq->getDQL(),
+            ),
+        );
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countGraduates(bool $isExpired = false): int
-    {
-        $qb = $this->getRepository()->createQueryBuilder('m');
-        $qb->select('COUNT(m.lidnr)')
-            ->where('m.deleted = False')
-            ->andWhere('m.type = :graduate');
+    /**
+     * Returns a subquery containing IDENTIY(m) of all members that have a membership (with optional constraints).
+     *
+     * Builds a subquery, set parameters to the inputted QueryBuilder $qb, and returns the subquery.
+     *
+     * It is also possible to copy these parameters with getParameters() if there is more than 1 nesting going on.
+     * However, you should foreach in that case (because setParameters() replaces all parameters, not adds them).
+     * > foreach ($sq->getParameters() as $parameter) {
+     * >     $qb->setParameter($parameter->getName(), $parameter->getValue());
+     * > }
+     */
+    public static function getMembershipSubquery(
+        QueryBuilder $qb,
+        bool $includeGraduates = true,
+        bool $includeFutureMembers = false,
+        bool $includeExpired = false,
+        ?MembershipTypes $specificType = null,
+        string $membershipAlias = 'nemems',
+        string $parameterPrefix = 'nems',
+    ): QueryBuilder {
+        $sq = $qb->getEntityManager()->createQueryBuilder();
 
-        if ($isExpired) {
-            $qb->andWhere('m.expiration < CURRENT_TIMESTAMP()');
-        } else {
-            $qb->andWhere('m.expiration >= CURRENT_TIMESTAMP()');
+        $sq->select('IDENTITY(' . $membershipAlias . '.member)')
+            ->distinct()
+            ->from(MembershipModel::class, $membershipAlias);
+
+        if (!$includeGraduates) {
+            $sq->andWhere($membershipAlias . '.type != :' . $parameterPrefix . 'graduate');
+            $qb->setParameter($parameterPrefix . 'graduate', MembershipTypes::Graduate);
         }
 
-        $qb->setParameter('graduate', MembershipTypes::Graduate);
+        if (!$includeFutureMembers) {
+            $sq->andWhere($membershipAlias . '.startDate <= CURRENT_TIMESTAMP()');
+        }
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        if (!$includeExpired) {
+            $sq->andWhere($membershipAlias . '.endDate >= CURRENT_TIMESTAMP()');
+        }
+
+        if (MembershipTypes::Graduate === $specificType && !$includeGraduates) {
+            throw new InvalidArgumentException('Cannot specify graduate type if graduates are not included');
+        }
+
+        if (null !== $specificType) {
+            $sq->andWhere($membershipAlias . '.type = :' . $parameterPrefix . 'specificType');
+            $qb->setParameter($parameterPrefix . 'specificType', $specificType);
+        }
+
+        return $sq;
     }
 
     /**

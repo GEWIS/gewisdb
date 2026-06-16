@@ -14,12 +14,14 @@ use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Override;
 
 class MeetingFixture extends AbstractFixture implements DependentFixtureInterface
 {
     public const string REF_MEETING_BV1 = 'bv-1';
     public const string REF_SUBDEC_BOARDINSTALL = 'subdecision-boardinstall';
 
+    #[Override]
     public function load(ObjectManager $manager): void
     {
         $meeting = new Meeting();
@@ -53,8 +55,9 @@ class MeetingFixture extends AbstractFixture implements DependentFixtureInterfac
     /**
      * Returns dependent fixture classes
      *
-     * @return array<class>
+     * @return array<class-string>
      */
+    #[Override]
     public function getDependencies(): array
     {
         return [

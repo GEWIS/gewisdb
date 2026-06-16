@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Checker\Service;
 
 use Application\Model\Enums\MeetingTypes;
-use Application\Model\Enums\MembershipTypes;
 use Application\Model\Enums\OrganTypes;
 use Checker\Model\Error as ErrorModel;
 use Checker\Service\Installation as InstallationService;
@@ -20,7 +19,6 @@ use Laminas\Mail\Header\MessageId;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
 
-use function array_key_exists;
 use function array_merge;
 use function count;
 use function in_array;
@@ -382,101 +380,6 @@ class Checker
         }
 
         return $errors;
-    }
-
-    /**
-     * Makes sure that members whose membership has end date are actually converted to "graduate" when their membership
-     * has ended.
-     */
-    public function checkProperMembershipType(): void
-    {
-        $members = $this->memberService->getEndingMembershipsWithNormalTypes();
-        $lastMeeting = $this->meetingService->getLastMeeting();
-        $activeMembers = $this->installationService->getActiveMembers($lastMeeting);
-
-        echo '' . count($members) . ' members have an upcoming ending and expiring membership' . PHP_EOL;
-        $now = (new DateTime())->setTime(0, 0);
-        $exp = $this->getExpiration($now);
-
-        foreach ($members as $member) {
-            echo 'Determining new membership type for ' . $member->getLidnr() . ' (ends on ' .
-                $member->getMembershipEndsOn()->format('Y-m-d') . ' and expiring on ' .
-                $member->getExpiration()->format('Y-m-d') . ')' . PHP_EOL;
-
-            if ($member->getMembershipEndsOn() <= $now) {
-                echo 'Membership has ended and expired' . PHP_EOL;
-
-                if (array_key_exists($member->getLidnr(), $activeMembers)) {
-                    echo 'Currently an active member, so becoming EXTERNAL. Extending membership to ' .
-                        $exp->format('Y-m-d') . PHP_EOL;
-                    $member->setType(MembershipTypes::External);
-
-                    // External memberships should run till the end of the next association year (which is actually the
-                    // same date as the expiration).
-                    $member->setMembershipEndsOn($exp);
-                } else {
-                    echo 'Not an active member' . PHP_EOL;
-                    // We only have to change the membership type for external or graduates depending on whether the
-                    // member is still studying.
-                    if (
-                        $member->getIsStudying()
-                        && $member->getLastCheckedOn() >= (new DateTime())->sub(new DateInterval('P1Y'))
-                    ) {
-                        echo 'But is studying, so becoming EXTERNAL. Extending membership to ' .
-                            $exp->format('Y-m-d') . PHP_EOL;
-                        $member->setType(MembershipTypes::External);
-
-                        // External memberships should run till the end of the next association year (which is actually
-                        // the same date as the expiration).
-                        $member->setMembershipEndsOn($exp);
-                    } else {
-                        echo 'Nor studying, so becoming GRADUATE. Not extending membership' . PHP_EOL;
-                        $member->setType(MembershipTypes::Graduate);
-                        $member->setIsStudying(false);
-                    }
-                }
-
-                echo 'Extending expiration to ' . $exp->format('Y-m-d') . PHP_EOL;
-
-                $member->setChangedOn(new DateTime());
-                $member->setExpiration($exp);
-
-                $this->memberService->getMemberMapper()->persist($member);
-            } else {
-                echo 'Membership has not yet ended and expired, so changing nothing' . PHP_EOL;
-            }
-        }
-    }
-
-    /**
-     * Make sure that ordinary members have their membership expiration automatically extended if they are eligible.
-     */
-    public function checkNormalExpiration(): void
-    {
-        $members = $this->memberService->getExpiringMembershipsWithNormalTypes();
-
-        echo '' . count($members) . ' members have an upcoming expiring membership' . PHP_EOL;
-
-        // Determine the next expiration date (always the end of the next association year).
-        $now = (new DateTime())->setTime(0, 0);
-        $exp = $this->getExpiration($now);
-
-        foreach ($members as $member) {
-            echo 'Determining new expiration for ' . $member->getLidnr() . ' (expiring on ' .
-                $member->getExpiration()->format('Y-m-d') . ')' . PHP_EOL;
-
-            if ($member->getExpiration() <= $now) {
-                echo 'Expired, thus extending to ' . $exp->format('Y-m-d') . PHP_EOL;
-
-                $member->setChangedOn(new DateTime());
-                $member->setType(MembershipTypes::Ordinary);
-                $member->setExpiration($exp);
-
-                $this->memberService->getMemberMapper()->persist($member);
-            } else {
-                echo 'Not yet expired, so not extending' . PHP_EOL;
-            }
-        }
     }
 
     /**

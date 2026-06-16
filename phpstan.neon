@@ -22,5 +22,6 @@ parameters:
         - module/User/src
         - module/Application/test
         - module/Checker/test
+        - module/Database/test
         - public/index.php
     tmpDir: data/cache/phpstan

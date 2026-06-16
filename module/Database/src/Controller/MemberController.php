@@ -211,7 +211,8 @@ class MemberController extends AbstractActionController
                 /** @var MemberModel $updatedMember */
                 $updatedMember = $form->getData();
                 $renewalLink = $form->getRenewalLink();
-                $this->memberService->renewMember($updatedMember, $renewalLink);
+                $newExpiration = new DateTime($form->get('expiration')->getValue());
+                $this->memberService->renewMember($updatedMember, $renewalLink, $newExpiration);
 
                 return new ViewModel([
                     'updatedMember' => $updatedMember,
@@ -525,7 +526,7 @@ class MemberController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $this->memberService->getMemberTypeForm(),
+            'form' => $this->memberService->getMemberTypeForm($member),
             'member' => $member,
         ]);
     }
