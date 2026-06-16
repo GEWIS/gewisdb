@@ -9,6 +9,7 @@ use Database\Mapper\ListmonkMailingList as ListmonkMailingListMapper;
 use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\Member as MemberMapper;
+use Database\Service\Audit as AuditService;
 use Database\Service\Listmonk as ListmonkService;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Override;
@@ -35,6 +36,8 @@ class ListmonkFactory implements FactoryInterface
         $memberMapper = $container->get(MemberMapper::class);
         /** @var ConfigService $configService */
         $configService = $container->get(ConfigService::class);
+        /** @var AuditService $auditService */
+        $auditService = $container->get(AuditService::class);
         /** @var array $listmonkConfig */
         $listmonkConfig = $container->get('config')['listmonk_api'];
 
@@ -43,6 +46,7 @@ class ListmonkFactory implements FactoryInterface
             $listmonkMailingListMapper,
             $mailingListMemberMapper,
             $memberMapper,
+            $auditService,
             $configService,
             $listmonkConfig,
         );

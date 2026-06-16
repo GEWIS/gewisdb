@@ -89,9 +89,21 @@ class MailingList
     )]
     private Collection $mailingListMemberships;
 
+    /**
+     * Audit entries for the mailing list.
+     *
+     * @var Collection<array-key, AuditMailingListMembership>
+     */
+    #[OneToMany(
+        targetEntity: AuditMailingListMembership::class,
+        mappedBy: 'mailingList',
+    )]
+    private Collection $auditEntries;
+
     public function __construct()
     {
         $this->mailingListMemberships = new ArrayCollection();
+        $this->auditEntries = new ArrayCollection();
     }
 
     /**
@@ -230,6 +242,16 @@ class MailingList
     public function getMailingListMemberships(): Collection
     {
         return $this->mailingListMemberships;
+    }
+
+    /**
+     * Get the audit entries for this mailing list.
+     *
+     * @return Collection<array-key, AuditMailingListMembership>
+     */
+    public function getAuditEntries(): Collection
+    {
+        return $this->auditEntries;
     }
 
     /**

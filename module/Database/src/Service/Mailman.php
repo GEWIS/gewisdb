@@ -10,6 +10,9 @@ use Database\Mapper\MailingList as MailingListMapper;
 use Database\Mapper\MailingListMember as MailingListMemberMapper;
 use Database\Mapper\MailmanMailingList as MailmanMailingListMapper;
 use Database\Mapper\Member as MemberMapper;
+use Database\Model\AuditMailingListMembership;
+use Database\Model\Enums\MailingListMemberAction;
+use Database\Model\Enums\MailingListMemberOrigin;
 use Database\Model\MailingList as MailingListModel;
 use Database\Model\MailingListMember as MailingListMemberModel;
 use Database\Model\MailmanMailingList as MailmanMailingListModel;
@@ -58,6 +61,7 @@ class Mailman
         private readonly MemberMapper $memberMapper,
         private readonly ConfigService $configService,
         private readonly array $mailmanConfig,
+        private readonly Audit $auditService,
     ) {
     }
 
@@ -498,6 +502,20 @@ class Mailman
             return;
         }
 
+        $member = $mailingListMember->getMember();
+
+        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+            $this->auditService->persist(
+                AuditMailingListMembership::create(
+                    MailingListMemberAction::Remove,
+                    MailingListMemberOrigin::SyncMailman,
+                    $member,
+                    $mailingListMember->getMailingList(),
+                    $mailingListMember->getEmail(),
+                ),
+            );
+        }
+
         if (1 === $response['total_size']) {
             $memberId = $response['entries'][0]['member_id'];
 
@@ -584,6 +602,20 @@ class Mailman
             return;
         }
 
+        $member = $mailingListMember->getMember();
+
+        if (null !== $member && false === $mailingListMember->isToBeDeleted()) {
+            $this->auditService->persist(
+                AuditMailingListMembership::create(
+                    MailingListMemberAction::Remove,
+                    MailingListMemberOrigin::SyncMailman,
+                    $member,
+                    $mailingListMember->getMailingList(),
+                    $mailingListMember->getEmail(),
+                ),
+            );
+        }
+
         $this->mailingListMemberMapper->remove($mailingListMember);
     }
 
@@ -640,6 +672,16 @@ class Mailman
                 );
 
                 if (!$dryRun) {
+                    $this->auditService->persist(
+                        AuditMailingListMembership::create(
+                            MailingListMemberAction::Add,
+                            MailingListMemberOrigin::SyncMailman,
+                            $foundMember,
+                            $mailingList,
+                            $entry['email'],
+                        ),
+                    );
+
                     $mailingListMember = new MailingListMemberModel();
                     $mailingListMember->setMailingList($mailingList);
                     $mailingListMember->setMember($foundMember);
