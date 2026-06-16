@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 14:45+0200\n"
+"POT-Creation-Date: 2026-06-16 17:16+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -72,10 +72,6 @@ msgstr "%s toegevoegd aan %s"
 msgid "%s prospective member(s) have paid and are pending approval."
 msgstr ""
 "%s toekomstig lid heeft/leden hebben betaald en wachten op goedkeuring."
-
-#, php-format
-msgid "%s: %s (started in %s)"
-msgstr "%s: %s (begonnen in %s)"
 
 #, php-format
 msgid "(Annulled by decision %s %d.%d.%d)"
@@ -428,6 +424,9 @@ msgstr "Wijzig"
 msgid "Change Data"
 msgstr "Gegevens wijzigingen"
 
+msgid "Change Date"
+msgstr "Wijzigingsdatum"
+
 #, php-format
 msgid "Change Mailing List Subscriptions of %s"
 msgstr "Mailinglijst abonnementen van %s wijzigen"
@@ -571,6 +570,14 @@ msgstr "Huidige mailinglijsten"
 
 msgid "Current Members"
 msgstr "Huidige leden"
+
+#, php-format
+msgid ""
+"Currently editing membership starting from <strong>%s</strong> to "
+"<strong>%s</strong> (type <strong>%s</strong>)."
+msgstr ""
+"Nu aan het bewerken: lidmaatschap van <strong>%s</strong> tot <strong>%s</"
+"strong> (type <strong>%s</strong>)."
 
 msgid "Data Update Requests"
 msgstr "Verzoeken om persoonsgegevens bij te werken"
@@ -730,6 +737,15 @@ msgstr "EngD Software Technology"
 msgid "English Description"
 msgstr "Engelse beschrijving"
 
+#, php-format
+msgid ""
+"Enter changes chronologically. Example: after entering a change on %s, it is "
+"not possible to enter a change for %s."
+msgstr ""
+"Wijzigingen moeten in chronologische volgorde worden ingevoerd. Het is "
+"bijvoorbeeld niet mogelijk om een wijziging in te voeren voor %s nadat een "
+"andere wijziging in is gegaan per %s."
+
 msgid "Execute"
 msgstr "Uitvoeren"
 
@@ -758,8 +774,8 @@ msgstr "Lidmaatschap van %s verlengen"
 msgid "External"
 msgstr "Extern"
 
-msgid "External - Specially admitted by the board"
-msgstr "Extern - Speciaal toegelaten door het bestuur"
+msgid "External - Admitted by the board"
+msgstr "Extern - Toegelaten door het bestuur"
 
 msgid "Failed"
 msgstr "Mislukt"
@@ -842,8 +858,8 @@ msgstr "Afrekenen"
 msgid "Graduate"
 msgstr "Afgestudeerde"
 
-msgid "Graduate - Old member and specially admitted by the board"
-msgstr "Afgestudeerde - Oud lid en speciaal toegelaten door het bestuur"
+msgid "Graduate - Former member admitted by the board as graduate"
+msgstr "Afgestudeerde - Oud-lid en toegelaten door het bestuur"
 
 msgid "Graduate renewal"
 msgstr "Verlengen afgestudeerde"
@@ -879,8 +895,8 @@ msgstr "Thuisadres (ouders)"
 msgid "Honorary"
 msgstr "Erelid"
 
-msgid "Honorary - Specially appointed by the GMM"
-msgstr "Erelid - Speciaal benoemd door de ALV"
+msgid "Honorary - Appointed by the GMM"
+msgstr "Erelid - Benoemd door de ALV"
 
 msgid "House Number"
 msgstr "Huisnummer"
@@ -989,9 +1005,6 @@ msgstr "Installaties"
 
 msgid "KCC"
 msgstr "KCC"
-
-msgid "Key"
-msgstr "Sleutel"
 
 msgid "Key Code(s) to Withdraw"
 msgstr "Sleutelcode(s) om in te trekken"
@@ -1162,6 +1175,9 @@ msgstr "Lidmaatschap eindigt op (verloopt op)"
 msgid "Membership Type"
 msgstr "Lidmaatschapstype"
 
+msgid "Membership Type (today)"
+msgstr "Lidmaatschapstype (huidig)"
+
 msgid "Membership of Committees and Fraternities"
 msgstr "Lidmaatschap van commissies en disputen"
 
@@ -1222,11 +1238,11 @@ msgstr "Geen exceptie beschikbaar"
 msgid "No category"
 msgstr "Zonder categorie"
 
-msgid "No data returned."
-msgstr "Geen gegevens ontvangen."
-
 msgid "No mailing list subscriptions."
 msgstr "Geen aanmeldingen voor mailinglijsten."
+
+msgid "None"
+msgstr "Geen"
 
 msgid "Not studying"
 msgstr "Niet-studerend"
@@ -1294,8 +1310,8 @@ msgstr "PS: Wist je dat de faculteit W&amp;I een alumni-stichting heeft?"
 msgid "Paid"
 msgstr "Betaald"
 
-msgid "Paid (Amount)"
-msgstr "Betaald (bedrag)"
+msgid "Paid for current/last membership (Amount)"
+msgstr "Betaald voor huidige/laatste lidmaatschap (bedrag)"
 
 msgid ""
 "Payment of the one-time membership fee is handled by Stripe, please review "
@@ -1343,6 +1359,10 @@ msgstr ""
 
 msgid "Please select a function"
 msgstr "Selecteer een functie"
+
+msgid "Please select the new membership type and change date for the member."
+msgstr ""
+"Selecteer een nieuw lidmaatschapstype en een ingangsdatum voor dat type."
 
 msgid "Point"
 msgstr "Punt"
@@ -1491,9 +1511,6 @@ msgstr "Organen zoeken"
 msgid "Search Prospective Members"
 msgstr "Toekomstige leden zoeken"
 
-msgid "Search TU/e Students"
-msgstr "TU/e-studenten zoeken"
-
 msgid "Secretaris"
 msgstr "Secretaris"
 
@@ -1505,6 +1522,19 @@ msgstr "Selecteer een postregio"
 
 msgid "Select a study"
 msgstr "Selecteer een studie"
+
+#, php-format
+msgid ""
+"Selecting a change date != %s will split the membership periods on that date."
+msgstr ""
+"Als de wijzigingsdatum niet %s is, dan wordt het lidmaatschap op die dag "
+"gesplitst."
+
+#, php-format
+msgid "Setting the change date to %s will (also) renew the membership."
+msgstr ""
+"Als je de wijzigingsdatum instelt op %s, dan wordt het lidmaatschap "
+"automatisch verlengd."
 
 msgid "Settings"
 msgstr "Instellingen"
@@ -1587,16 +1617,6 @@ msgstr ""
 msgid "Synchronisation with other systems is paused until %s."
 msgstr "Synchronisatie met andere systemen is onderbroken tot %s."
 
-msgid "TU/e Data"
-msgstr "TU/e gegevens"
-
-msgid "TU/e Raw Data Lookup"
-msgstr "TU/e gegevens opzoeken"
-
-#, php-format
-msgid "TU/e data: %s"
-msgstr "TU/e data: %s"
-
 msgid "TU/e-username"
 msgstr "TU/e-gebruikersnaam"
 
@@ -1606,6 +1626,9 @@ msgstr "Tafelvoetbalcoordinator"
 #, php-format
 msgid "Thank you %s!"
 msgstr "Bedankt %s!"
+
+msgid "The change will take effect on the selected date."
+msgstr "De wijziging gaat in op de geselecteerde ingangsdatum."
 
 msgid ""
 "The database currently is in demo mode and uses environment credentials."
@@ -1776,9 +1799,6 @@ msgstr "API-gebruiker bijwerken"
 msgid "Update Address"
 msgstr "Adres bijwerken"
 
-msgid "Update with data from the TU/e"
-msgstr "Bijwerken met gegevens van de TU/e"
-
 msgid "Username"
 msgstr "Gebruikersnaam"
 
@@ -1787,9 +1807,6 @@ msgstr "Gebruikers"
 
 msgid "VV"
 msgstr "VV"
-
-msgid "Value"
-msgstr "Waarde"
 
 msgid "Version"
 msgstr "Versie"

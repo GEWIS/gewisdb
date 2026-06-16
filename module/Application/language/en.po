@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 14:45+0200\n"
+"POT-Creation-Date: 2026-06-16 17:16+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rink <rinkp@users.noreply.github.com>\n"
 "Language-Team: \n"
@@ -73,10 +73,6 @@ msgstr "%s has been added to %s"
 #, php-format
 msgid "%s prospective member(s) have paid and are pending approval."
 msgstr "%s prospective member(s) have paid and are pending approval."
-
-#, php-format
-msgid "%s: %s (started in %s)"
-msgstr "%s: %s (started in %s)"
 
 #, php-format
 msgid "(Annulled by decision %s %d.%d.%d)"
@@ -428,6 +424,9 @@ msgstr "Change"
 msgid "Change Data"
 msgstr "Change Data"
 
+msgid "Change Date"
+msgstr "Change Date"
+
 #, php-format
 msgid "Change Mailing List Subscriptions of %s"
 msgstr "Change Mailing List Subscriptions of %s"
@@ -569,6 +568,14 @@ msgstr "Current Mailing Lists"
 
 msgid "Current Members"
 msgstr "Current Members"
+
+#, php-format
+msgid ""
+"Currently editing membership starting from <strong>%s</strong> to "
+"<strong>%s</strong> (type <strong>%s</strong>)."
+msgstr ""
+"Currently editing membership starting from <strong>%s</strong> to "
+"<strong>%s</strong> (type <strong>%s</strong>)."
 
 msgid "Data Update Requests"
 msgstr "Data Update Requests"
@@ -726,6 +733,14 @@ msgstr "EngD Software Technology"
 msgid "English Description"
 msgstr "English Description"
 
+#, php-format
+msgid ""
+"Enter changes chronologically. Example: after entering a change on %s, it is "
+"not possible to enter a change for %s."
+msgstr ""
+"Enter changes chronologically. Example: after entering a change on %s, it is "
+"not possible to enter a change for %s."
+
 msgid "Execute"
 msgstr "Execute"
 
@@ -754,8 +769,8 @@ msgstr "Extend Membership of %s"
 msgid "External"
 msgstr "External"
 
-msgid "External - Specially admitted by the board"
-msgstr "External - Specially admitted by the board"
+msgid "External - Admitted by the board"
+msgstr "External - Admitted by the board"
 
 msgid "Failed"
 msgstr "Failed"
@@ -837,8 +852,8 @@ msgstr "Go to checkout"
 msgid "Graduate"
 msgstr "Graduate"
 
-msgid "Graduate - Old member and specially admitted by the board"
-msgstr "Graduate - Old member and specially admitted by the board"
+msgid "Graduate - Former member admitted by the board as graduate"
+msgstr "Graduate - Former member admitted by the board as graduate"
 
 msgid "Graduate renewal"
 msgstr "Graduate renewal"
@@ -874,8 +889,8 @@ msgstr "Home Address (Parents)"
 msgid "Honorary"
 msgstr "Honorary"
 
-msgid "Honorary - Specially appointed by the GMM"
-msgstr "Honorary - Specially appointed by the GMM"
+msgid "Honorary - Appointed by the GMM"
+msgstr "Honorary - Appointed by the GMM"
 
 msgid "House Number"
 msgstr "House Number"
@@ -982,9 +997,6 @@ msgstr "Installations"
 
 msgid "KCC"
 msgstr "Financial Audit Committee"
-
-msgid "Key"
-msgstr "Key"
 
 msgid "Key Code(s) to Withdraw"
 msgstr "Key Code(s) to Withdraw"
@@ -1154,6 +1166,9 @@ msgstr "Membership Ends On (Expires On)"
 msgid "Membership Type"
 msgstr "Membership Type"
 
+msgid "Membership Type (today)"
+msgstr "Membership Type (today)"
+
 msgid "Membership of Committees and Fraternities"
 msgstr "Membership of Committees and Fraternities"
 
@@ -1214,11 +1229,11 @@ msgstr "No Exception available"
 msgid "No category"
 msgstr "No category"
 
-msgid "No data returned."
-msgstr "No data returned."
-
 msgid "No mailing list subscriptions."
 msgstr "No mailing list subscriptions."
+
+msgid "None"
+msgstr "None"
 
 msgid "Not studying"
 msgstr "Not studying"
@@ -1287,8 +1302,8 @@ msgstr ""
 msgid "Paid"
 msgstr "Paid"
 
-msgid "Paid (Amount)"
-msgstr "Paid (Amount)"
+msgid "Paid for current/last membership (Amount)"
+msgstr "Paid for current/last membership (Amount)"
 
 msgid ""
 "Payment of the one-time membership fee is handled by Stripe, please review "
@@ -1336,6 +1351,9 @@ msgstr ""
 
 msgid "Please select a function"
 msgstr "Please select a function"
+
+msgid "Please select the new membership type and change date for the member."
+msgstr "Please select the new membership type and change date for the member."
 
 msgid "Point"
 msgstr "Point"
@@ -1484,9 +1502,6 @@ msgstr "Search Organs"
 msgid "Search Prospective Members"
 msgstr "Search Prospective Members"
 
-msgid "Search TU/e Students"
-msgstr "Search TU/e Students"
-
 msgid "Secretaris"
 msgstr "Secretary"
 
@@ -1498,6 +1513,16 @@ msgstr "Select Postal Region"
 
 msgid "Select a study"
 msgstr "Select a study"
+
+#, php-format
+msgid ""
+"Selecting a change date != %s will split the membership periods on that date."
+msgstr ""
+"Selecting a change date != %s will split the membership periods on that date."
+
+#, php-format
+msgid "Setting the change date to %s will (also) renew the membership."
+msgstr "Setting the change date to %s will (also) renew the membership."
 
 msgid "Settings"
 msgstr "Settings"
@@ -1579,16 +1604,6 @@ msgstr ""
 msgid "Synchronisation with other systems is paused until %s."
 msgstr "Synchronisation with other systems is paused until %s."
 
-msgid "TU/e Data"
-msgstr "TU/e Data"
-
-msgid "TU/e Raw Data Lookup"
-msgstr "TU/e Raw Data Lookup"
-
-#, php-format
-msgid "TU/e data: %s"
-msgstr "TU/e data: %s"
-
 msgid "TU/e-username"
 msgstr "TU/e username"
 
@@ -1598,6 +1613,9 @@ msgstr "Foosball Coordinator"
 #, php-format
 msgid "Thank you %s!"
 msgstr "Thank you %s!"
+
+msgid "The change will take effect on the selected date."
+msgstr "The change will take effect on the selected date."
 
 msgid ""
 "The database currently is in demo mode and uses environment credentials."
@@ -1762,9 +1780,6 @@ msgstr "Update API principal"
 msgid "Update Address"
 msgstr "Update Address"
 
-msgid "Update with data from the TU/e"
-msgstr "Update with data from the TU/e"
-
 msgid "Username"
 msgstr "Username"
 
@@ -1773,9 +1788,6 @@ msgstr "Users"
 
 msgid "VV"
 msgstr "CM"
-
-msgid "Value"
-msgstr "Value"
 
 msgid "Version"
 msgstr "Version"
